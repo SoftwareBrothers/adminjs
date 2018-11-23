@@ -1,0 +1,7 @@
+{
+  "env": {
+    "test": {
+      "plugins": [ "istanbul" ]
+    }
+  }
+}

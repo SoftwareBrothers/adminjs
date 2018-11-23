@@ -1,0 +1,10 @@
+extends ../layout/layout.pug
+
+block content
+  h3 #{database.name()}/#{model.name()}
+  h4 Items in database
+  table.table
+    thead
+      tr
+        for prop in properties
+          th= prop.name

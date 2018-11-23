@@ -1,0 +1,65 @@
+{
+  "name": "admin-bro",
+  "version": "1.0.0",
+  "description": "Admin panel for apps written in node.js",
+  "main": "index.js",
+  "scripts": {
+    "test": "./node_modules/mocha/bin/mocha admin/spec",
+    "start": "node index.js",
+    "start-dev": "./node_modules/nodemon/bin/nodemon.js index.js",
+    "lint": "./node_modules/eslint/bin/eslint.js './spec/**' './admin/**'",
+    "docs": "node_modules/.bin/jsdoc -c jsdoc.json --readme README.md",
+    "cover": "NODE_ENV=test ./node_modules/nyc/bin/nyc.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SoftwareBrothers/admin-bro.git"
+  },
+  "keywords": [
+    "hapi",
+    "express",
+    "mongoose",
+    "admin",
+    "admin-panel"
+  ],
+  "_moduleAliases": {
+    "@root": ".",
+    "@backend": "./admin/backend",
+    "@frontend": "./admin/frontend"
+  },
+  "author": "Wojciech Krysiak",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/SoftwareBrothers/admin-bro/issues"
+  },
+  "homepage": "https://github.com/SoftwareBrothers/admin-bro#readme",
+  "dependencies": {
+    "hapi": "^17.5.3",
+    "mongoose": "^5.2.9",
+    "node-sass": "^4.10.0",
+    "pack": "^2.1.0",
+    "pug": "^2.0.3",
+    "require.all": "^2.0.4"
+  },
+  "devDependencies": {
+    "@mocha/eslint-config-mocha": "0.0.0",
+    "babel-plugin-istanbul": "^4.1.6",
+    "chai": "^4.1.2",
+    "docdash": "^0.4.0",
+    "eslint": "^5.4.0",
+    "eslint-config-standard": "^11.0.0",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-mocha-only": "0.0.3",
+    "eslint-plugin-promise": "^4.0.0",
+    "eslint-plugin-standard": "^3.1.0",
+    "factory-girl": "^5.0.4",
+    "istanbul": "^0.4.5",
+    "jsdoc": "^3.5.5",
+    "mocha": "^5.2.0",
+    "module-alias": "^2.1.0",
+    "nodemon": "^1.18.3",
+    "nyc": "^12.0.2",
+    "sinon": "^6.1.5",
+    "sinon-chai": "^3.2.0"
+  }
+}
