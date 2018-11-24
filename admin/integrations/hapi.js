@@ -1,3 +1,12 @@
+/**
+ * Plugin definition for Hapi.js framework. To se how you can use it
+ * see {@link examples/hapijs/index.js}
+ *
+ * @see module:examples/hapijs~start
+ *
+ * @module Integrations/hapijs
+ */
+
 const Admin = require('../index')
 const Routes = require('../backend/routes')
 const Renderer = require('../backend/utils/renderer')

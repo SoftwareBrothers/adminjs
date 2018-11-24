@@ -1,6 +1,9 @@
 const DashboardController = require('./controllers/dashboard-controller')
 const InstancesController = require('./controllers/instances-controller')
 
+/**
+ * Contains list of all routes
+ */
 class Routes {
   constructor({ admin }) {
     this._admin = admin

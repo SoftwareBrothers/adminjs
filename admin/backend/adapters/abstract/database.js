@@ -1,7 +1,13 @@
 const NotImplementedError = require('../../utils/not-implemented-error')
 
 /**
- * Representation of an ORM/database AdminBro
+ * Representation of an ORM/database in AdminBro
+ *
+ * @mermaid
+ *   graph TD
+ *   A[AbstractDatabase] -->|has many| B(AbstractModel)
+ *   B --> |has many|C(AbstractInstance)
+ *   B --> |has many|D(AbstractPorperty)
  */
 class AbstractDatabase {
   /**

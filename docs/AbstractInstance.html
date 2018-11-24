@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Home</title>
+    <title>JSDoc: Class: AbstractInstance</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,44 +17,139 @@
 
 <div id="main">
 
-    <h1 class="page-title">Home</h1>
-
-    
-
-
-
-    
-
-
-    <h3> </h3>
-
-
-
-
-
-
-
-
-
+    <h1 class="page-title">Class: AbstractInstance</h1>
 
     
 
 
 
 
-    <section>
-        <article><h2>AdminBro</h2><p>Admin Bro is an Admin Framework for Node - your best Bro in app developement.</p>
-<p>Currently it supports only MongoDB (via mongoose).</p>
-<h2>How it is built</h2><p>It is totally separated from any particular nodejs framework. Because of that it can be easily integrated to almost every app.</p>
-<h2>Integration</h2><p>Example integration for Hapi.js framework can be found <a href="examples_hapijs_index.js.html">here</a>. This code uses Hapi.js <a href="admin_integrations_hapi.js.html">integration plugin</a></p>
-<h2>Data model</h2><p>Most important part of the system is its data model. AdminBro can be integrated with multiple ORMs, that is why it has internal abstraction for handling multiple data models.</p>
-<p>First of all <a href="Admin.html">base class</a> is used to convert all supported database connections (mongodb, sql-like, etc) to list of databases which interits from <a href="AbstractDatabase.html">AbstractDatabase</a>. It utilises <a href="global.html#DatabaseFactory">DatabaseFactory</a> to construct correct database type.</p>
-<p>Than each class which inherits <a href="AbstractDatabase.html">AbstractDatabase</a> can fetch all models present in the database. Each model inherits from <a href="AbstractModel.html">AbstractModel</a></p>
-<p>Each model has multiple properties with different types like String, Data, Number etc.</p>
-<p>Finally particular database record/document is mapped to <a href="AbstractInstance.html">AbstractInstance</a></p></article>
-    </section>
+<section>
+
+<header>
+    
+        <h2><span class="attribs"><span class="type-signature"></span></span>AbstractInstance<span class="signature">()</span><span class="type-signature"></span></h2>
+        
+            <div class="class-description"><p>Representation of a ORM Model Instance (document, record) in AdminBro</p></div>
+        
+    
+</header>
+
+<article>
+    <div class="container-overview">
+    
+        
+
+    
+    <h2>Constructor</h2>
+    
+
+    
+    <h4 class="name" id="AbstractInstance"><span class="type-signature"></span>new AbstractInstance<span class="signature">()</span><span class="type-signature"></span></h4>
+    
+
+    
 
 
+
+<div class="description">
+    <script type="text/javascript" src="https://unpkg.com/mermaid@7.1.0/dist/mermaid.min.js"></script>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="admin_backend_adapters_abstract_instance.js.html">admin/backend/adapters/abstract/instance.js</a>, <a href="admin_backend_adapters_abstract_instance.js.html#line6">line 6</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</article>
+
+</section>
 
 
 

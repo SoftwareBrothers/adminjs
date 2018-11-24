@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Home</title>
+    <title>JSDoc: Source: admin/backend/adapters/mongoose/database.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,44 +17,51 @@
 
 <div id="main">
 
-    <h1 class="page-title">Home</h1>
+    <h1 class="page-title">Source: admin/backend/adapters/mongoose/database.js</h1>
 
     
 
 
 
     
-
-
-    <h3> </h3>
-
-
-
-
-
-
-
-
-
-
-    
-
-
-
-
     <section>
-        <article><h2>AdminBro</h2><p>Admin Bro is an Admin Framework for Node - your best Bro in app developement.</p>
-<p>Currently it supports only MongoDB (via mongoose).</p>
-<h2>How it is built</h2><p>It is totally separated from any particular nodejs framework. Because of that it can be easily integrated to almost every app.</p>
-<h2>Integration</h2><p>Example integration for Hapi.js framework can be found <a href="examples_hapijs_index.js.html">here</a>. This code uses Hapi.js <a href="admin_integrations_hapi.js.html">integration plugin</a></p>
-<h2>Data model</h2><p>Most important part of the system is its data model. AdminBro can be integrated with multiple ORMs, that is why it has internal abstraction for handling multiple data models.</p>
-<p>First of all <a href="Admin.html">base class</a> is used to convert all supported database connections (mongodb, sql-like, etc) to list of databases which interits from <a href="AbstractDatabase.html">AbstractDatabase</a>. It utilises <a href="global.html#DatabaseFactory">DatabaseFactory</a> to construct correct database type.</p>
-<p>Than each class which inherits <a href="AbstractDatabase.html">AbstractDatabase</a> can fetch all models present in the database. Each model inherits from <a href="AbstractModel.html">AbstractModel</a></p>
-<p>Each model has multiple properties with different types like String, Data, Number etc.</p>
-<p>Finally particular database record/document is mapped to <a href="AbstractInstance.html">AbstractInstance</a></p></article>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * @namespace MongooseAdapter
+ */
+
+const AbstractDatabase = require('../abstract/database')
+const Model = require('./model')
+
+/**
+ * Adapter for mongoose database
+ * @memberof MongooseAdapter
+ * @extends {AbstractDatabase}
+ * @name MongooseAdapter.Database
+ */
+class Database extends AbstractDatabase {
+  constructor(connection) {
+    super(connection)
+    this.connection = connection
+  }
+
+  models() {
+    return Model.all(this.connection)
+  }
+
+  name() {
+    return this.connection.name
+  }
+
+  find(modelName) {
+    return Model.find(this.connection, modelName)
+  }
+}
+
+module.exports = Database
+</code></pre>
+        </article>
     </section>
-
-
 
 
 

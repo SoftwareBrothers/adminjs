@@ -1,10 +1,20 @@
+const NotImplementedError = require('../../utils/not-implemented-error')
+
+/**
+ * Representation of a ORM Model Instance (document, record) in AdminBro
+ */
 class AbstractInstance {
-  constructor(args) {
-    this.args = args
+  constructor(params, model) {
+    this.model = model
+    this.params = params
   }
 
-  save(params) {
+  param(paramName) {
+    throw new NotImplementedError()
+  }
 
+  id() {
+    throw new NotImplementedError()
   }
 }
 
