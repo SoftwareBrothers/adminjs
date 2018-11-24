@@ -7,7 +7,7 @@ module.exports = {
     const { databaseName, modelName } = params
     const viewData = adminBro.toViewData({ databaseName, modelName })
     viewData.perPage = 5
-    viewData.total = await viewData.model.count() 
+    viewData.total = await viewData.model.count()
     viewData.page = query.page || 1
     const instances = await viewData.model.find({}, {
       limit: viewData.perPage,
