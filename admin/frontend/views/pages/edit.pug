@@ -1,0 +1,11 @@
+extends ../layout/layout.pug
+include ../mixins/form-group.pug
+
+block content
+  h3 #{database.name()}/#{model.name()}
+  h4 Create #{model.name()}
+  form(method='POST' action=h.showInstanceUrl(database, model, instance))
+    for prop in properties.filter(p => p.isEditable())
+      - value = instance.param(prop.name())
+      +formGroup(prop, value)
+    button.btn.btn-primary(type='submit') Update

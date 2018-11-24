@@ -11,6 +11,5 @@ module.exports.start = async (connection) => {
   await admin.register(server, connection)
 
   await server.start()
-  console.log('started')
   return server
 }

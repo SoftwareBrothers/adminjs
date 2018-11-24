@@ -11,7 +11,7 @@ module.exports = {
       server.route({
         method: route.method,
         path: `/${adminBro.options.rootPath}${route.path}`,
-        handler: async request => route.handler(adminBro, request.params),
+        handler: async (request, h) => route.handler(adminBro, request, h),
       })
     }
   },

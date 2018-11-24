@@ -41,7 +41,7 @@ class Property extends AbstractProperty {
     return this.name() !== '__v'
   }
 
-  isKey() {
+  isId() {
     return this.name() === '_id'
   }
 

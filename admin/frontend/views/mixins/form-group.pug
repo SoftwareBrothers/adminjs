@@ -6,14 +6,14 @@ mixin formGroup(prop, value)
         input.form-control(type='text' id=prop.name() name=prop.name() value=value)
       when 'boolean'
         div.form-check
-          input.form-check-input(type="checkbox" value=value id=prop.name())
+          input.form-check-input(type="checkbox" checked=value id=prop.name() name=prop.name() value='true')
           label.form-check-label(for=prop.name())= prop.name()
       when 'number'
         label(for=prop.name)= prop.name()
         input.form-control(type='number' id=prop.name() name=prop.name() value=value)
       when 'date'
         label(for=prop.name)= prop.name()
-        input.form-control(type='datetime-local' id=prop.name() name=prop.name() value=value)
+        input.form-control(type='date' id=prop.name() name=prop.name() value=value)
       when 'float'
         label(for=prop.name)= prop.name()
         input.form-control(type='number' id=prop.name() name=prop.name() value=value)

@@ -132,4 +132,20 @@ describe('Model', function () {
       expect(this.ret).to.be.an.instanceof(Property)
     })
   })
+
+  describe.only('#create', function () {
+    beforeEach(async function () {
+      this.params = { email: 'john@doe.com', passwordHash: 'somesecretpasswordhash' }
+      this.model = new Model(User)
+      this.instance = await this.model.create(this.params)
+    })
+
+    it('creates new object', async function () {
+      expect(await this.model.count()).to.equal(this.count + 1)
+    })
+
+    it('returns instance of Instance', function () {
+      expect(this.instance).to.be.an.instanceof(Instance)
+    })
+  })
 })

@@ -35,6 +35,7 @@
   "homepage": "https://github.com/SoftwareBrothers/admin-bro#readme",
   "dependencies": {
     "hapi": "^17.5.3",
+    "jw-paginate": "^1.0.2",
     "mongoose": "^5.2.9",
     "node-sass": "^4.10.0",
     "pack": "^2.1.0",

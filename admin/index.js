@@ -1,3 +1,4 @@
+const paginate = require('jw-paginate')
 const DatabaseFactory = require('./backend/adapters/database-factory')
 
 class AdminBro {
@@ -21,11 +22,24 @@ class AdminBro {
     return this.databases[name]
   }
 
-  viewHelpers() {
+  urlBuilder(paths, query) {
     const { rootPath } = this.options
+    let url = `/${rootPath}/${paths.join('/')}`
+    if (query) {
+      const queryString = Object.keys(query).map(key => `${key}=${query[key]}`)
+      url = `${url}?${queryString}`
+    }
+    return url
+  }
+
+  viewHelpers() {
     return {
-      listUrl: (database, model) => `/${rootPath}/${database.name()}/${model.name()}`,
-      newInstanceUrl: (database, model) => `/${rootPath}/${database.name()}/${model.name()}/new`,
+      listUrl: (database, model, query) => this.urlBuilder([database.name(), model.name()], query),
+      newInstanceUrl: (database, model) => this.urlBuilder([database.name(), model.name(), 'new']),
+      showInstanceUrl: (database, model, instance) => this.urlBuilder([database.name(), model.name(), instance.id()]),
+      editInstanceUrl: (database, model, instance) => this.urlBuilder([database.name(), model.name(), instance.id(), 'edit']),
+
+      paginate,
     }
   }
 
@@ -42,9 +56,10 @@ class AdminBro {
    * Returns common data used in rendering all PUG templates.
    * @param  {String} [options.databaseName] name of selected database
    * @param  {String} [options.modelName]    name of selected model
+   * @param  {String} [options.instanceId]   id of selected instance
    * @return {ViewData}                      data which will be used in the views
    */
-  toViewData({ databaseName, modelName }) {
+  toViewData({ databaseName, modelName, instanceId } = {}) {
     const viewData = {
       databases: Object.values(this.databases),
       h: this.viewHelpers(),

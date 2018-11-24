@@ -46,6 +46,20 @@ class AbstractModel {
   find(where, { limit=20, offset=0 }) {
     throw new NotImplementedError()
   }
+
+  
+  findOne(id) {
+    throw new NotImplementedError()
+  }
+
+  /**
+   * Creates new instance
+   * @param  {Object} params
+   * @return {Object}                  created instance
+   */
+  create(params) {
+    throw new NotImplementedError()
+  }
 }
 
 module.exports = AbstractModel

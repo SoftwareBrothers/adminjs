@@ -1,0 +1,12 @@
+extends ../layout/layout.pug
+include ../mixins/form-group.pug
+
+block content
+  h3 #{database.name()}/#{model.name()}
+  h4
+    a.float-right.btn(href=h.listUrl(database, model)) Back to list
+    | details for #{model.name()}: #{instance.id()}
+  for prop in properties.filter(p => p.isVisible())
+    p
+      label #{prop.name()}: 
+      |  #{instance.param(prop.name())}

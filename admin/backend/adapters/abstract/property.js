@@ -35,6 +35,14 @@ class AbstractProperty {
   isEditable() {
     return true
   }
+
+  /**
+   * Returns true if given property is a uniq key in a table/collection
+   * @return {Boolean}
+   */
+  isId() {
+    return false
+  }
 }
 
 module.exports = AbstractProperty

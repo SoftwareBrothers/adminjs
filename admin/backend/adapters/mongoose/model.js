@@ -49,7 +49,23 @@ class Model extends AbstractModel {
 
   async find(query, { limit = 20, offset = 0 }) {
     const raw = await this.model.find({}).skip(offset).limit(limit)
-    return raw.map(m => new Instance(m))
+    return raw.map(m => new Instance(m, this))
+  }
+
+  async findOne(id) {
+    const raw = await this.model.findById(id)
+    return new Instance(raw, this)
+  }
+
+  async create(params) {
+    let instance = new this.model(params)
+    instance = await instance.save()
+    return new Instance(instance, this)
+  }
+
+  async update(id, params) {
+    const raw = await this.model.findOneAndUpdate({ _id: id }, params)
+    return new Instance(raw, this)
   }
 
   name() {
