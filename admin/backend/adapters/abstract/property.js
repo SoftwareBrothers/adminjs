@@ -1,3 +1,4 @@
+const NotImplementedError = require('../../utils/not-implemented-error')
 const TITLE_COLUMN_NAMES = ['title', 'name', 'subject']
 
 class AbstractProperty {
@@ -7,25 +8,32 @@ class AbstractProperty {
    * @return {[type]} [description]
    */
   name() {
-
+    throw new NotImplementedError()
   }
 
   /**
    * Return type of a property
    * @return {String} One of available property types:
-   *                      [id, string, object, float, number, boolean,
-   *                       text, date]
+   *                      [id, string, float, number, boolean, date]
    */
   type() {
-    
+    throw new NotImplementedError()
   }
 
   /**
-   * When properties are nested - parent property should have its children
-   * @return {AbstractProperty[]} [description]
+   * Indicates if given property should be visible
+   * @return {Boolean}
    */
-  childProperties() {
-    return null
+  isVisible() {
+    return true
+  }
+
+  /**
+   * Indicates if value of given property can be updated
+   * @return {Boolean}
+   */
+  isEditable() {
+    return true
   }
 }
 

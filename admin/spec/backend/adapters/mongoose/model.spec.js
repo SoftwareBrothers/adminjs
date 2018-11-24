@@ -125,7 +125,7 @@ describe('Model', function () {
     })
 
     it('returns selected property for an email', function () {
-      expect(this.ret.name).to.equal('email')
+      expect(this.ret.name()).to.equal('email')
     })
 
     it('returns instance of Property class', function () {

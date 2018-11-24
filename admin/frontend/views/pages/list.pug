@@ -2,7 +2,9 @@ extends ../layout/layout.pug
 
 block content
   h3 #{database.name()}/#{model.name()}
-  h4 Items in database
+  h4
+    a.float-right.btn(href=h.newInstanceUrl(database, model)) New #{model.name()}
+    | Items in database
   table.table
     thead
       tr

@@ -59,14 +59,14 @@ class Model extends AbstractModel {
   properties() {
     const properties = []
     for (const [name, path] of Object.entries(this.model.schema.paths)) {
-      const prop = new Property(name, path)
+      const prop = new Property(path)
       properties.push(prop)
     }
     return properties
   }
 
   property(name) {
-    return new Property(name, this.model.schema.paths[name])
+    return new Property(this.model.schema.paths[name])
   }
 }
 
