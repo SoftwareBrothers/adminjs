@@ -3,7 +3,7 @@
         "allowUnknownTags": false
     },
     "source": {
-        "include": ["./src", "./config"],
+        "include": ["./admin"],
         "includePattern": ".js$",
         "excludePattern": "(node_modules/|docs)"
     },

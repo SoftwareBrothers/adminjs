@@ -5,7 +5,7 @@ class AbstractProperty {
 
   /**
    * Name of the property
-   * @return {[type]} [description]
+   * @return {String} name of the property
    */
   name() {
     throw new NotImplementedError()

@@ -30,7 +30,7 @@ class AbstractModel {
 
   /**
    * Returns number of elements for given model
-   * @return {[type]} [description]
+   * @return {Number}
    */
   count() {
     throw new NotImplementedError()
