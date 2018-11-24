@@ -8,5 +8,6 @@ block content
   table.table
     thead
       tr
-        for prop in properties
-          th= prop.name
+        for prop in properties.filter(p => p.isVisible())
+          th= prop.name()
+        th Actions

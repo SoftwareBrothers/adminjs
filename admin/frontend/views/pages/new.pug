@@ -1,11 +1,10 @@
 extends ../layout/layout.pug
+include ../mixins/form-group.pug
 
 block content
   h3 #{database.name()}/#{model.name()}
   h4 Create #{model.name()}
   form(method='POST' action=h.listUrl(database, model))
-    for prop in properties
-      div.form-group
-        label(for=prop.name)= prop.name
-        input.form-control(type='text' id=prop.name name=prop.name)
+    for prop in properties.filter(p => p.isEditable())
+      +formGroup(prop, value)
     button.btn.btn-primary(type='submit') Create

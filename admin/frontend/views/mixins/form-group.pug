@@ -1,0 +1,19 @@
+mixin formGroup(prop, value)
+  div.form-group
+    case prop.type()
+      when 'string'
+        label(for=prop.name)= prop.name()
+        input.form-control(type='text' id=prop.name() name=prop.name() value=value)
+      when 'boolean'
+        div.form-check
+          input.form-check-input(type="checkbox" value=value id=prop.name())
+          label.form-check-label(for=prop.name())= prop.name()
+      when 'number'
+        label(for=prop.name)= prop.name()
+        input.form-control(type='number' id=prop.name() name=prop.name() value=value)
+      when 'date'
+        label(for=prop.name)= prop.name()
+        input.form-control(type='datetime-local' id=prop.name() name=prop.name() value=value)
+      when 'float'
+        label(for=prop.name)= prop.name()
+        input.form-control(type='number' id=prop.name() name=prop.name() value=value)
