@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: admin/backend/adapters/mongoose/database.js</title>
+    <title>JSDoc: Source: admin/backend/routes.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: admin/backend/adapters/mongoose/database.js</h1>
+    <h1 class="page-title">Source: admin/backend/routes.js</h1>
 
     
 
@@ -26,39 +26,67 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>/**
- * @namespace MongooseAdapter
- */
-
-const AbstractDatabase = require('../abstract/database')
-const Model = require('./model')
+            <pre class="prettyprint source linenums"><code>const DashboardController = require('./controllers/dashboard-controller')
+const InstancesController = require('./controllers/instances-controller')
 
 /**
- * Adapter for mongoose database
- * @memberof MongooseAdapter
- * @extends {AbstractDatabase}
- * @alias MongooseAdapter.Database
+ * Contains list of all routes
  */
-class Database extends AbstractDatabase {
-  constructor(connection) {
-    super(connection)
-    this.connection = connection
+class Routes {
+  constructor({ admin }) {
+    this._admin = admin
+    this.dashboardController = new DashboardController({ admin })
+    this.instancesController = new InstancesController({ admin })
   }
 
-  models() {
-    return Model.all(this.connection)
-  }
-
-  name() {
-    return this.connection.name
-  }
-
-  find(modelName) {
-    return Model.find(this.connection, modelName)
+  all() {
+    return [{
+      method: 'GET',
+      path: '',
+      view: 'pages/dashboard',
+      controller: this.dashboardController,
+      action: 'index',
+    }, {
+      method: 'GET',
+      path: '/{databaseName}/{modelName}',
+      view: 'pages/list',
+      controller: this.instancesController,
+      action: 'index',
+    }, {
+      method: 'GET',
+      path: '/{databaseName}/{modelName}/{instanceId}',
+      view: 'pages/show',
+      controller: this.instancesController,
+      action: 'show',
+    }, {
+      method: 'GET',
+      path: '/{databaseName}/{modelName}/new',
+      view: 'pages/new',
+      controller: this.instancesController,
+      action: 'new',
+    }, {
+      method: 'POST',
+      path: '/{databaseName}/{modelName}',
+      view: 'pages/new',
+      controller: this.instancesController,
+      action: 'create',
+    }, {
+      method: 'POST',
+      path: '/{databaseName}/{modelName}/{instanceId}',
+      view: 'pages/edit',
+      controller: this.instancesController,
+      action: 'update',
+    }, {
+      method: 'GET',
+      path: '/{databaseName}/{modelName}/{instanceId}/edit',
+      view: 'pages/edit',
+      controller: this.instancesController,
+      action: 'edit',
+    }]
   }
 }
 
-module.exports = Database
+module.exports = Routes
 </code></pre>
         </article>
     </section>
