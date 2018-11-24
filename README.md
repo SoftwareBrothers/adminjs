@@ -5,7 +5,7 @@ want to help - visit https://softwarebrothers.github.io/admin-bro/index.html and
 
 ## License
 
-asw-lambda-statc-page is Copyright © 2018 SoftwareBrothers.co. It is free software, and may be redistributed under the terms specified in the [LICENSE](LICENSE) file.
+AdminBro is Copyright © 2018 SoftwareBrothers.co. It is free software, and may be redistributed under the terms specified in the [LICENSE](LICENSE) file.
 
 ## About SoftwareBrothers.co
 
