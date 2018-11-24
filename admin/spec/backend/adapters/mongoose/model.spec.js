@@ -133,7 +133,7 @@ describe('Model', function () {
     })
   })
 
-  describe.only('#create', function () {
+  describe('#create', function () {
     beforeEach(async function () {
       this.params = { email: 'john@doe.com', passwordHash: 'somesecretpasswordhash' }
       this.model = new Model(User)
