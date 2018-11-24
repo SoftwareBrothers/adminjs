@@ -1,6 +1,9 @@
 const paginate = require('jw-paginate')
 const DatabaseFactory = require('./backend/adapters/database-factory')
 
+/**
+ * Main class for AdminBro extension
+ */
 class AdminBro {
   static normalizeDatabases(databases) {
     const dbArray = databases.reduce((mem, db) => mem.concat(DatabaseFactory(db)), [])

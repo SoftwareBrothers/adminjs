@@ -1,6 +1,6 @@
 {
     "tags": {
-        "allowUnknownTags": false
+        "allowUnknownTags": ["mermaid"]
     },
     "source": {
         "include": ["./admin"],
@@ -8,12 +8,13 @@
         "excludePattern": "(node_modules/|docs)"
     },
     "plugins": [
-        "plugins/markdown"
+        "plugins/markdown",
+        "jsdoc-mermaid"
     ],
     "opts": {
-        "template": "node_modules/docdash",
         "encoding": "utf8",
         "destination": "docs/",
+        "readme": "./docs/index.md",
         "recurse": true,
         "verbose": true,
         "tutorials": "./tutorials"

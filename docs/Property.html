@@ -2,33 +2,22 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Property - Documentation</title>
+    <title>JSDoc: Class: Property</title>
 
-    <script src="scripts/prettify/prettify.js"></script>
-    <script src="scripts/prettify/lang-css.js"></script>
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
     <!--[if lt IE 9]>
       <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
-    <link type="text/css" rel="stylesheet" href="styles/prettify.css">
-    <link type="text/css" rel="stylesheet" href="styles/jsdoc.css">
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
 </head>
+
 <body>
 
-<input type="checkbox" id="nav-trigger" class="nav-trigger" />
-<label for="nav-trigger" class="navicon-button x">
-  <div class="navicon"></div>
-</label>
-
-<label for="nav-trigger" class="overlay"></label>
-
-<nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="AbstractDatabase.html">AbstractDatabase</a><ul class='methods'><li data-type='method'><a href="AbstractDatabase.html#find">find</a></li><li data-type='method'><a href="AbstractDatabase.html#models">models</a></li><li data-type='method'><a href="AbstractDatabase.html#name">name</a></li></ul></li><li><a href="AbstractModel.html">AbstractModel</a><ul class='methods'><li data-type='method'><a href="AbstractModel.html#count">count</a></li><li data-type='method'><a href="AbstractModel.html#create">create</a></li><li data-type='method'><a href="AbstractModel.html#find">find</a></li><li data-type='method'><a href="AbstractModel.html#name">name</a></li><li data-type='method'><a href="AbstractModel.html#properties">properties</a></li><li data-type='method'><a href="AbstractModel.html#property">property</a></li></ul></li><li><a href="Database.html">Database</a></li><li><a href="Model.html">Model</a><ul class='methods'><li data-type='method'><a href="Model.html#.all">all</a></li><li data-type='method'><a href="Model.html#.find">find</a></li></ul></li><li><a href="Property.html">Property</a></li></ul><h3>Tutorials</h3><ul><li><a href="tutorial-example-tutorial.html">Example tutorial</a></li></ul>
-</nav>
-
 <div id="main">
-    
-    <h1 class="page-title">Property</h1>
-    
+
+    <h1 class="page-title">Class: Property</h1>
 
     
 
@@ -39,9 +28,7 @@
 
 <header>
     
-        <h2>
-        Property
-        </h2>
+        <h2><span class="attribs"><span class="type-signature"></span></span>Property<span class="signature">(path)</span><span class="type-signature"></span></h2>
         
     
 </header>
@@ -53,76 +40,22 @@
 
     
 
+    
     <h4 class="name" id="Property"><span class="type-signature"></span>new Property<span class="signature">(path)</span><span class="type-signature"></span></h4>
-
-    
-
-
-
-
-<dl class="details">
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="backend_adapters_mongoose_property.js.html">backend/adapters/mongoose/property.js</a>, <a href="backend_adapters_mongoose_property.js.html#line26">line 26</a>
-    </li></ul></dd>
     
 
     
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</dl>
-
-
 
 
 
 <div class="description">
-    <p>Crates an object from mongoose schema path</p>
+    <script type="text/javascript" src="https://unpkg.com/mermaid@7.1.0/dist/mermaid.min.js"></script><p>Crates an object from mongoose schema path</p>
 </div>
 
 
 
 
 
-
-
-
-
-    <h5>Example</h5>
-    
-    <pre class="prettyprint"><code>const schema = new mongoose.Schema({
-  email: String,
-})
-
-property = new Property(schema.paths.email))</code></pre>
 
 
 
@@ -413,6 +346,45 @@ property = new Property(schema.paths.email))</code></pre>
 
 
 
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="backend_adapters_mongoose_property.js.html">backend/adapters/mongoose/property.js</a>, <a href="backend_adapters_mongoose_property.js.html#line26">line 26</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
 
 
 
@@ -420,6 +392,23 @@ property = new Property(schema.paths.email))</code></pre>
 
 
 
+
+
+
+
+
+
+
+
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>const schema = new mongoose.Schema({
+  email: String,
+})
+
+property = new Property(schema.paths.email))</code></pre>
 
 
 
@@ -432,7 +421,9 @@ property = new Property(schema.paths.email))</code></pre>
 
     
 
-     
+    
+
+    
 
     
 
@@ -452,13 +443,17 @@ property = new Property(schema.paths.email))</code></pre>
 
 </div>
 
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="AbstractDatabase.html">AbstractDatabase</a></li><li><a href="AbstractModel.html">AbstractModel</a></li><li><a href="AdminBro.html">AdminBro</a></li><li><a href="Database.html">Database</a></li><li><a href="Model.html">Model</a></li><li><a href="Property.html">Property</a></li></ul><h3>Tutorials</h3><ul><li><a href="tutorial-example-tutorial.html">Example tutorial</a></li></ul>
+</nav>
+
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Sat Nov 24 2018 18:44:04 GMT+0000 (Coordinated Universal Time) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Sat Nov 24 2018 19:22:39 GMT+0000 (Coordinated Universal Time)
 </footer>
 
-<script>prettyPrint();</script>
-<script src="scripts/linenumber.js"></script>
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
 </body>
 </html>
