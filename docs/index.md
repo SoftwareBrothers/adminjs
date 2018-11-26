@@ -16,7 +16,23 @@ It is totally separated from any particular nodejs framework. Because of that it
 
 Example integration for Hapi.js framework can be found [here]{@link examples/hapijs/index.js}. This code uses Hapi.js [integration plugin]{@link admin/integrations/hapi.js}
 
+<div class="mermaid">
+  graph LR
+  A[<a href=./examples_hapijs_index.js.html>Hapi.js</a>] -->|<a href=./admin_integrations_hapi.js.html>Mapping Routes</a>| B{<a href=./Routes.html>Routes.js</a>}
+  B --> C(DashoardController)
+  B --> D(InstancesController)
+  E(Renderer)
+  C --> E
+  D --> E
+  F(PUG view)
+  E --> F
+</div>
+
 ## Data model
+
+Most important part of the system is its data model. AdminBro can be integrated with multiple ORMs, that is why it has internal abstraction for handling multiple data models.
+
+This is how it looks:
 
 <div class="mermaid">
   graph TD
@@ -24,8 +40,6 @@ Example integration for Hapi.js framework can be found [here]{@link examples/hap
   B --> |has many|C(<a href=./AbstractInstance.html>AbstractInstance</a>)
   B --> |has many|D(<a href=./AbstractProperty.html>AbstractProperty</a>)
 </div>
-
-Most important part of the system is its data model. AdminBro can be integrated with multiple ORMs, that is why it has internal abstraction for handling multiple data models.
 
 First of all [base class]{@link Admin} is used to convert all supported database connections (mongodb, sql-like, etc) to list of databases which interits from {@link AbstractDatabase}. It utilises {@link DatabaseFactory} to construct correct database type.
 

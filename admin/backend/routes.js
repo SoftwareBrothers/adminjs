@@ -3,6 +3,16 @@ const InstancesController = require('./controllers/instances-controller')
 
 /**
  * Contains list of all routes
+ *
+ * @example
+ * // route example
+ * {
+ *    method: 'GET',
+ *    path: '',
+ *    view: 'pages/dashboard',
+ *    controller: this.dashboardController,
+ *    action: 'index',
+ *  }
  */
 class Routes {
   constructor({ admin }) {
