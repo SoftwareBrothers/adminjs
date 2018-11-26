@@ -20,7 +20,7 @@ Example integration for Hapi.js framework can be found [here]{@link examples/hap
 
 <div class="mermaid">
   graph TD
-  A[AbstractDatabase] -->|has many| B(AbstractModel)
+  A[<a href=/abstractdatabase.html>AbstractDatabase</a>] -->|has many| B(AbstractModel)
   B --> |has many|C(AbstractInstance)
   B --> |has many|D(AbstractPorperty)
 </div>
