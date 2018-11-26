@@ -1,5 +1,9 @@
 ## AdminBro
 
+<script src="https://cdn.rawgit.com/knsv/mermaid/7.0.0/dist/mermaid.min.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/knsv/mermaid/7.0.0/dist/mermaid.css">
+<script>mermaid.initialize({startOnLoad:true});</script>
+
 Admin Bro is an Admin Framework for Node - your best Bro in app developement.
 
 Currently it supports only MongoDB (via mongoose).
@@ -13,6 +17,13 @@ It is totally separated from any particular nodejs framework. Because of that it
 Example integration for Hapi.js framework can be found [here]{@link examples/hapijs/index.js}. This code uses Hapi.js [integration plugin]{@link admin/integrations/hapi.js}
 
 ## Data model
+
+<div class="mermaid">
+  graph TD
+  A[AbstractDatabase] -->|has many| B(AbstractModel)
+  B --> |has many|C(AbstractInstance)
+  B --> |has many|D(AbstractPorperty)
+</div>
 
 Most important part of the system is its data model. AdminBro can be integrated with multiple ORMs, that is why it has internal abstraction for handling multiple data models.
 
