@@ -20,9 +20,9 @@ Example integration for Hapi.js framework can be found [here]{@link examples/hap
 
 <div class="mermaid">
   graph TD
-  A[<a href=/abstractdatabase.html>AbstractDatabase</a>] -->|has many| B(AbstractModel)
-  B --> |has many|C(AbstractInstance)
-  B --> |has many|D(AbstractPorperty)
+  A[<a href=./AbstractDatabase.html>AbstractDatabase</a>] -->|has many| B(<a href=./AbstractModel.html>AbstractModel</a>)
+  B --> |has many|C(<a href=./AbstractInstance.html>AbstractInstance</a>)
+  B --> |has many|D(<a href=./AbstractProperty.html>AbstractProperty</a>)
 </div>
 
 Most important part of the system is its data model. AdminBro can be integrated with multiple ORMs, that is why it has internal abstraction for handling multiple data models.
