@@ -12,9 +12,7 @@ Currently it supports only MongoDB (via mongoose).
 
 It is totally separated from any particular nodejs framework. Because of that it can be easily integrated to almost every app.
 
-## Integration
-
-Example integration for Hapi.js framework can be found [here]{@link examples/hapijs/index.js}. This code uses Hapi.js [integration plugin]{@link admin/integrations/hapi.js}
+This is the example flow for hapi.js
 
 <div class="mermaid">
   graph LR
@@ -27,6 +25,10 @@ Example integration for Hapi.js framework can be found [here]{@link examples/hap
   F(PUG view)
   E --> F
 </div>
+
+## Integration
+
+Example integration for Hapi.js framework can be found [here]{@link examples/hapijs/index.js}. This code uses Hapi.js [integration plugin]{@link admin/integrations/hapi.js}
 
 ## Data model
 
