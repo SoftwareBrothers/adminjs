@@ -149,15 +149,16 @@ describe('Model', function () {
     })
   })
 
-  describe.only('#delete', function () {
+  describe('#delete', function () {
     beforeEach(async function () {
+      this.startCount = await User.countDocuments()
       this.idOfItemToDelete = this.userInstances[0]._id
       this.model = new Model(User)
       await this.model.delete(this.idOfItemToDelete)
     })
 
     it('removes the item from the database', async function () {
-      expect(await User.countDocuments()).to.equal(this.count - 1)
+      expect(await User.countDocuments()).to.equal(this.startCount - 1)
     })
   })
 })
