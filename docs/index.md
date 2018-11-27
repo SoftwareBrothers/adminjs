@@ -1,14 +1,10 @@
 ## AdminBro
 
-<script src="https://cdn.rawgit.com/knsv/mermaid/7.0.0/dist/mermaid.min.js"></script>
-<link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/knsv/mermaid/7.0.0/dist/mermaid.css">
-<script>mermaid.initialize({startOnLoad:true});</script>
-
 Admin Bro is an Admin Framework for Node - your best Bro in app developement.
 
 Currently it supports only MongoDB (via mongoose).
 
-## How it is built
+## How it works
 
 It is totally separated from any particular nodejs framework. Because of that it can be easily integrated to almost every app.
 
@@ -26,9 +22,14 @@ This is the example flow for hapi.js
   E --> F
 </div>
 
-## Integration
+## Integration with nodejs Frameworks
 
-Example integration for Hapi.js framework can be found [here]{@link examples/hapijs/index.js}. This code uses Hapi.js [integration plugin]{@link admin/integrations/hapi.js}
+Example integration for Hapi.js framework can be found [here]{@link examples/hapijs/index.js}. This code uses Hapi.js [integration plugin]{@link admin/integrations/hapi.js}. If you want to write your own implementation you will have to:
+
+- write a plugin/middleware for a particular framework
+- map its routing system to AdminBro routes and controllers (see how Hapi does that: {@link admin/integrations/hapi.js})
+- checkout if given framework has ORM already supported. If not you will have to create data mapper for it (see below)
+- lastly - don't forget to add integration example in examples folder
 
 ## Data model
 
@@ -45,8 +46,21 @@ This is how it looks:
 
 First of all [base class]{@link Admin} is used to convert all supported database connections (mongodb, sql-like, etc) to list of databases which interits from {@link AbstractDatabase}. It utilises {@link DatabaseFactory} to construct correct database type.
 
-Than each class which inherits {@link AbstractDatabase} can fetch all models present in the database. Each model inherits from {@link AbstractModel}
+Then each class which inherits {@link AbstractDatabase} can fetch all models present in the database. Each model inherits from {@link AbstractModel}
 
 Each model has multiple [properties]{@link AbstractPorperty} with different types like String, Data, Number etc.
 
 Finally particular database record/document is mapped to {@link AbstractInstance}
+
+## Integration with ORMs
+
+To create new ORM integration you have to:
+
+- create your implementation of {@link AbstractDatabase}, {@link AbstractModel}, {@link AbstractInstance} and {@link AbstractProperty}
+- update {@link DatabaseFactory}
+- update examples
+- most probably you will also have to update docker-compose to handle new database
+
+<script src="https://cdn.rawgit.com/knsv/mermaid/7.0.0/dist/mermaid.min.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/knsv/mermaid/7.0.0/dist/mermaid.css">
+<script>mermaid.initialize({ startOnLoad: true });</script>
