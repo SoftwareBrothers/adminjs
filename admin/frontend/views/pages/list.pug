@@ -1,39 +1,42 @@
 extends ../layout/layout.pug
+include ../mixins/breadcrumb.pug
 
 block content
-  .container
-    .breadcrumb
-      h3 #{database.name()}/#{model.name()}
-      h4
-        a.float-right.btn(href=h.newInstanceUrl(database, model)) New #{model.name()}
-        | Items in database: 
-        b= total
-    .columns
-      .column.is-12
-        table.table.is-boxed.is-hoverable
-          thead
-            tr
-              for prop in properties.filter(p => p.isVisible())
-                th= prop.name()
-              th Actions
-          tbody
-            for instance in instances
+  section.table-list
+    .container
+      +breadcrumb([database.name(), model.name()])
+      .column.toolbar
+        h2=model.name()
+        .buttons
+          a.button(href=h.newInstanceUrl(database, model)) New #{model.name()}
+          a.button Export
+      .columns
+        .column-12
+        .column.is-12
+          table.table.is-boxed.is-hoverable
+            thead
               tr
                 for prop in properties.filter(p => p.isVisible())
-                  td= instance.param(prop.name())
-                td
-                  a(href=h.showInstanceUrl(database, model, instance)) Show
-                  a(href=h.editInstanceUrl(database, model, instance)) Edit
+                  th= prop.name()
+                th Actions
+            tbody
+              for instance in instances
+                tr
+                  for prop in properties.filter(p => p.isVisible())
+                    td= instance.param(prop.name())
+                  td
+                    a(href=h.showInstanceUrl(database, model, instance)) Show
+                    a(href=h.editInstanceUrl(database, model, instance)) Edit
 
-        - pages = h.paginate(total, page, perPage).pages
-        if pages.length > 1 
+          - pages = h.paginate(total, page, perPage).pages
+          if pages.length > 1 
 
-          nav(class="paginaton is-centered" role="navigation" aria-label="pagination")
-            a(class="pagination-previous") Previous
-            a(class="pagination-next") Next page
-            ul
-              for p in h.paginate(total, page, perPage).pages
-                li(class={ 'active' : p == page })
-                  a.pagination-link(
-                    href=h.listUrl(database, model, { page: p })
-                  )= p
+            nav(class="paginaton is-centered" role="navigation" aria-label="pagination")
+              a(class="pagination-previous") Previous
+              a(class="pagination-next") Next page
+              ul
+                for p in h.paginate(total, page, perPage).pages
+                  li(class={ 'active' : p == page })
+                    a.pagination-link(
+                      href=h.listUrl(database, model, { page: p })
+                    )= p
