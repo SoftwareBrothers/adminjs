@@ -20,6 +20,7 @@ block content
           td
             a(href=h.showInstanceUrl(database, model, instance)) Show
             a(href=h.editInstanceUrl(database, model, instance)) Edit
+            a(href=h.deleteInstanceUrl(database, model, instance)) Delete
 
   - pages = h.paginate(total, page, perPage).pages
   if pages.length > 1

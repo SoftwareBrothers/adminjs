@@ -32,6 +32,10 @@ class ViewHelpers {
   editInstanceUrl(database, model, instance) {
     return this.urlBuilder([database.name(), model.name(), instance.id(), 'edit'])
   }
+
+  deleteInstanceUrl(database, model, instance) {
+    return this.urlBuilder([database.name(), model.name(), instance.id(), 'delete'])
+  }
 }
 
 module.exports = ViewHelpers

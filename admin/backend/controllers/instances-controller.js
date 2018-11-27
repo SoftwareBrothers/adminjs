@@ -44,6 +44,17 @@ class InstancesController extends BaseController {
     ))
   }
 
+  async delete({ params, query, payload }, response) {
+    this.findDatabaseAndModel(params)
+    const { instanceId } = params
+
+    await this.view.model.delete(instanceId)
+    return response.redirect(this.view.h.listUrl(
+      this.view.database,
+      this.view.model,
+    ))
+  }
+
   findDatabaseAndModel({ databaseName, modelName }) {
     this.view.database = this._admin.database(databaseName)
     this.view.model = this.view.database.find(modelName)
