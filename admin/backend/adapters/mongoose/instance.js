@@ -37,16 +37,18 @@ class Instance extends AbstractInstance {
     return nestedParams.reduce((m, param) => m && m[param], this.params)
   }
 
-  set(params) {
-    // store value for id property before switching the params to new version
-    const idProperty = this.model.properties().find(p => p.isId())
-    const id = this.id()
-
-    this.params = params
-    console.log(this.params)
-
-    // bring back id property
-    this.params[idProperty.name()] = id
+  async update(params) {
+    try {
+      this.params = await this.model.update(this.id(), params)
+    } catch (e) {
+      if (e instanceof ValidationError) {
+        this.errors = e.errors
+        return this
+      }
+      throw e
+    }
+    this.errors = {}
+    return this
   }
 
   id() {

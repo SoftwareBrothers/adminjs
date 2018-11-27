@@ -76,18 +76,22 @@ class Model extends AbstractModel {
   }
 
   async update(id, params) {
-    let raw
-    const mongooseDocument = await this.model.findById(id)
     try {
-      mongooseDocument.set(params)
-      raw = await mongooseDocument.save()
+      const ret = await this.model.findOneAndUpdate({
+        _id: id,
+      }, {
+        $set: params,
+      }, {
+        runValidators: true,
+      })
+      console.log(ret)
+      return ret
     } catch (error) {
       if (error.name === 'ValidationError') {
         throw this.createValidationError(error)
       }
       throw error
     }
-    return raw.toObject()
   }
 
   async delete(id) {

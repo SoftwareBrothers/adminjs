@@ -42,8 +42,7 @@ class InstancesController extends BaseController {
     this.findDatabaseAndModel(params)
     const { instanceId } = params
     this.view.instance = await this.view.model.findOne(instanceId)
-    this.view.instance.set(payload)
-    this.view.instance.save()
+    await this.view.instance.update(payload)
 
     if (this.view.instance.isValid()) {
       return response.redirect(this.view.h.showInstanceUrl(
