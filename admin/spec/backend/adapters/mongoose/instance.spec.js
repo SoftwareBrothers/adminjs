@@ -1,6 +1,46 @@
 const Instance = require('@backend/adapters/mongoose/instance')
 
 describe('Instance', function () {
+  describe('.flattenParams', function () {
+    it('flattens the object', function () {
+      this.object = {
+        param1: 'param1 value',
+        param2: {
+          nested1: 'nested1 value',
+          nested2: {
+            nested3: 'aloha',
+          },
+        },
+      }
+      const ret = Instance.flattenParams(this.object)
+      expect(ret).to.have.all.keys({
+        param1: 'param1 value',
+        'param2.nested1': 'nested1 value',
+        'param2.nested2.nested3': 'nested1 value',
+      })
+    })
+  })
+
+  describe('.unflattenParams', function () {
+    it('unflattens the object', function () {
+      this.object = {
+        param1: 'param1 value',
+        'param2.nested1': 'nested1 value',
+        'param2.nested2.nested3': 'nested1 value',
+      }
+      const ret = Instance.unflattenParams(this.object)
+      expect(ret).to.have.all.keys({
+        param1: 'param1 value',
+        param2: {
+          nested1: 'nested1 value',
+          nested2: {
+            nested3: 'aloha',
+          },
+        },
+      })
+    })
+  })
+
   describe('#param', function () {
     context('instance with nested parameters', function () {
       beforeEach(function () {

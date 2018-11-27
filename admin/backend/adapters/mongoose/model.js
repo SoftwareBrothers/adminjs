@@ -1,6 +1,7 @@
 const AbstractModel = require('../abstract/model')
 const Instance = require('./instance')
 const Property = require('./property')
+const ValidationError = require('../../utils/validation-error')
 
 /**
  * Adapter for mongoose model
@@ -49,23 +50,44 @@ class Model extends AbstractModel {
 
   async find(query, { limit = 20, offset = 0 }) {
     const raw = await this.model.find({}).skip(offset).limit(limit)
-    return raw.map(m => new Instance(m, this))
+    return raw.map(m => new Instance(m.toObject(), this))
   }
 
   async findOne(id) {
     const raw = await this.model.findById(id)
-    return new Instance(raw, this)
+    return new Instance(raw.toObject(), this)
+  }
+
+  build(params) {
+    return new Instance(params, this)
   }
 
   async create(params) {
-    let instance = new this.model(params)
-    instance = await instance.save()
-    return new Instance(instance, this)
+    let mongooseDocument = new this.model(params)
+    try {
+      mongooseDocument = await mongooseDocument.save()
+    } catch (error) {
+      if (error.name === 'ValidationError') {
+        throw this.createValidationError(error)
+      }
+      throw error
+    }
+    return mongooseDocument.toObject()
   }
 
   async update(id, params) {
-    const raw = await this.model.findOneAndUpdate({ _id: id }, params)
-    return new Instance(raw, this)
+    let raw
+    const mongooseDocument = await this.model.findById(id)
+    try {
+      mongooseDocument.set(params)
+      raw = await mongooseDocument.save()
+    } catch (error) {
+      if (error.name === 'ValidationError') {
+        throw this.createValidationError(error)
+      }
+      throw error
+    }
+    return raw.toObject()
   }
 
   async delete(id) {
@@ -87,6 +109,18 @@ class Model extends AbstractModel {
 
   property(name) {
     return new Property(this.model.schema.paths[name])
+  }
+
+  createValidationError(originalError) {
+    const errors = Object.keys(originalError.errors).reduce((m, key) => {
+      const error = originalError.errors[key]
+      m[error.path] = {
+        message: error.message,
+        kind: error.kind,
+      }
+      return m
+    }, {})
+    return new ValidationError(`${this.name()} validation failed`, errors)
   }
 }
 

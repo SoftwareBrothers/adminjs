@@ -1,4 +1,4 @@
-mixin formGroup(prop, value)
+mixin formGroup(prop, value, error)
   div.form-group
     case prop.type()
       when 'string'
@@ -17,3 +17,5 @@ mixin formGroup(prop, value)
       when 'float'
         label(for=prop.name)= prop.name()
         input.form-control(type='number' id=prop.name() name=prop.name() value=value)
+    if error
+      .error-message(style="color: red;")= error.message

@@ -25,7 +25,8 @@
   "_moduleAliases": {
     "@root": ".",
     "@backend": "./admin/backend",
-    "@frontend": "./admin/frontend"
+    "@frontend": "./admin/frontend",
+    "@fixtures": "./admin/spec/backend/fixtures"
   },
   "author": "Wojciech Krysiak",
   "license": "MIT",
@@ -36,6 +37,7 @@
   "dependencies": {
     "hapi": "^17.5.3",
     "jw-paginate": "^1.0.2",
+    "lodash": "^4.17.11",
     "mongoose": "^5.2.9",
     "node-sass": "^4.10.0",
     "pack": "^2.1.0",

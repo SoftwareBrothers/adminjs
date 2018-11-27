@@ -23,9 +23,10 @@ module.exports = {
         method: route.method,
         path: `/${admin.options.rootPath}${route.path}`,
         handler: async (request, h) => {
-          const response = await route.controller[route.action](request, h)
+          const controller = new route.Controller({ admin })
+          const response = await controller[route.action](request, h)
           if (!response) {
-            return new Renderer(route.view, route.controller.view).render()
+            return new Renderer(route.view, controller.view).render()
           }
           return response
         },

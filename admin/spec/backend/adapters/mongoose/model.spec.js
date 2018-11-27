@@ -2,10 +2,12 @@ const mongoose = require('mongoose')
 const Model = require('@backend/adapters/mongoose/model')
 const Instance = require('@backend/adapters/mongoose/instance')
 const Property = require('@backend/adapters/mongoose/property')
+const originalValidationError = require('@fixtures/mongoose-validation-error')
+const ValidationError = require('@backend/utils/validation-error')
 
 const UserSchema = new mongoose.Schema({
-  email: String,
-  passwordHash: String,
+  email: { type: String, required: true },
+  passwordHash: { type: String, required: true },
 })
 
 const User = mongoose.model('User', UserSchema)
@@ -38,6 +40,21 @@ describe('Model', function () {
 
     it('return instances of Models class', function () {
       expect(this.models[0]).to.be.an.instanceof(Model)
+    })
+  })
+
+  describe('#CreateValidationError', function () {
+    beforeEach(function () {
+      const model = new Model(User)
+      this.error = model.createValidationError(originalValidationError)
+    })
+
+    it('has errors', function () {
+      expect(Object.keys(this.error.errors)).to.have.lengthOf(2)
+    })
+
+    it('has error for email', function () {
+      expect(this.error.errors.email.kind).to.equal('required')
     })
   })
 
@@ -134,18 +151,35 @@ describe('Model', function () {
   })
 
   describe('#create', function () {
-    beforeEach(async function () {
-      this.params = { email: 'john@doe.com', passwordHash: 'somesecretpasswordhash' }
-      this.model = new Model(User)
-      this.instance = await this.model.create(this.params)
+    context('correct record', function () {
+      beforeEach(async function () {
+        this.params = { email: 'john@doe.com', passwordHash: 'somesecretpasswordhash' }
+        this.model = new Model(User)
+        this.instance = await this.model.create(this.params)
+      })
+
+      it('creates new object', async function () {
+        expect(await this.model.count()).to.equal(this.count + 1)
+      })
+
+      it('returns Object', function () {
+        expect(this.instance).to.be.an.instanceof(Object)
+      })
     })
 
-    it('creates new object', async function () {
-      expect(await this.model.count()).to.equal(this.count + 1)
-    })
+    context('record with errors', function () {
+      beforeEach(async function () {
+        this.params = { email: '', passwordHash: '' }
+        this.model = new Model(User)
+      })
 
-    it('returns instance of Instance', function () {
-      expect(this.instance).to.be.an.instanceof(Instance)
+      it('throws validation error', async function () {
+        try {
+          await this.model.create(this.params)
+        } catch (error) {
+          expect(error).to.be.an.instanceOf(ValidationError)
+        }
+      })
     })
   })
 
