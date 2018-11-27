@@ -7,14 +7,13 @@ html
       link(rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.5.1/css/bulma.min.css")
 
   body
-    .container
-      .columns
-        .column.is-2
-          include navigation.pug
-          block footer
-        .column.is-10
-          block header
-          block content
+    .columns
+      .column.is-2
+        include navigation.pug
+        block footer
+      .column.is-10
+        block header
+        block content
 
     script(src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"

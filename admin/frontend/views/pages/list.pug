@@ -1,32 +1,39 @@
 extends ../layout/layout.pug
 
 block content
-  h3 #{database.name()}/#{model.name()}
-  h4
-    a.float-right.btn(href=h.newInstanceUrl(database, model)) New #{model.name()}
-    | Items in database: 
-    b= total
-  table.table
-    thead
-      tr
-        for prop in properties.filter(p => p.isVisible())
-          th= prop.name()
-        th Actions
-    tbody
-      for instance in instances
-        tr
-          for prop in properties.filter(p => p.isVisible())
-            td= instance.param(prop.name())
-          td
-            a(href=h.showInstanceUrl(database, model, instance)) Show
-            a(href=h.editInstanceUrl(database, model, instance)) Edit
+  .container
+    .breadcrumb
+      h3 #{database.name()}/#{model.name()}
+      h4
+        a.float-right.btn(href=h.newInstanceUrl(database, model)) New #{model.name()}
+        | Items in database: 
+        b= total
+    .columns
+      .column.is-12
+        table.table.is-boxed.is-hoverable
+          thead
+            tr
+              for prop in properties.filter(p => p.isVisible())
+                th= prop.name()
+              th Actions
+          tbody
+            for instance in instances
+              tr
+                for prop in properties.filter(p => p.isVisible())
+                  td= instance.param(prop.name())
+                td
+                  a(href=h.showInstanceUrl(database, model, instance)) Show
+                  a(href=h.editInstanceUrl(database, model, instance)) Edit
 
-  - pages = h.paginate(total, page, perPage).pages
-  if pages.length > 1
-    nav
-      ul.pagination
-        for p in h.paginate(total, page, perPage).pages
-          li.page-item(class={ 'active' : p == page })
-            a.page-link(
-              href=h.listUrl(database, model, { page: p })
-            )= p
+        - pages = h.paginate(total, page, perPage).pages
+        if pages.length > 1 
+
+          nav(class="paginaton is-centered" role="navigation" aria-label="pagination")
+            a(class="pagination-previous") Previous
+            a(class="pagination-next") Next page
+            ul
+              for p in h.paginate(total, page, perPage).pages
+                li(class={ 'active' : p == page })
+                  a.pagination-link(
+                    href=h.listUrl(database, model, { page: p })
+                  )= p
