@@ -19,7 +19,7 @@ describe('Model', function () {
   before(async function () {
     this.mongooseConnection = await mongoose.connect(process.env.MONGO_URL)
     this.count = 12
-    await factory.createMany('user', this.count)
+    this.userInstances = await factory.createMany('user', this.count)
   })
 
   after(async function () {
@@ -146,6 +146,18 @@ describe('Model', function () {
 
     it('returns instance of Instance', function () {
       expect(this.instance).to.be.an.instanceof(Instance)
+    })
+  })
+
+  describe.only('#delete', function () {
+    beforeEach(async function () {
+      this.idOfItemToDelete = this.userInstances[0]._id
+      this.model = new Model(User)
+      await this.model.delete(this.idOfItemToDelete)
+    })
+
+    it('removes the item from the database', async function () {
+      expect(await User.countDocuments()).to.equal(this.count - 1)
     })
   })
 })

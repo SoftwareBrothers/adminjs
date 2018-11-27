@@ -68,6 +68,10 @@ class Model extends AbstractModel {
     return new Instance(raw, this)
   }
 
+  async delete(id) {
+    return this.model.deleteOne({ _id: id })
+  }
+
   name() {
     return this.model.modelName
   }
