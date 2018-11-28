@@ -60,6 +60,14 @@ class AbstractModel {
   create(params) {
     throw new NotImplementedError()
   }
+
+  /**
+   * Delete given record by id
+   * @param  {String|Number} id id of the record
+   */
+  delete(id) {
+    throw new NotImplementedError()
+  }
 }
 
 module.exports = AbstractModel

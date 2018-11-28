@@ -5,15 +5,15 @@ html
     meta(name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no")
     block scripts
       link(rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.5.1/css/bulma.min.css")
-    style(type="text/css") 
+      link(rel="stylesheet", href="https://cdnjs.cloudflare.com/ajax/libs/font-mfizz/2.4.1/font-mfizz.min.css")
+    style(type="text/css")
       != adminStyles
-
   body
-    .columns
-      .column.is-2
-        include navigation.pug
-        block footer
-      .column.is-10
+    .columns.container-main
+      aside.sidebar-main
+        include components/sidebar
+      .column
+        include components/topbar
         block header
         block content
 

@@ -64,6 +64,12 @@ class Routes {
       view: 'pages/edit',
       controller: this.instancesController,
       action: 'edit',
+    }, {
+      method: 'GET',
+      path: '/{databaseName}/{modelName}/{instanceId}/delete',
+      view: 'pages/delete',
+      controller: this.instancesController,
+      action: 'delete',
     }]
   }
 }

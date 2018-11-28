@@ -1,0 +1,10 @@
+p.menu-label Navigation
+ul.menu-list
+  for database in databases
+    li
+      span.icon-mongodb
+      = database.name()
+      ul.menu-list
+        for model in database.models()
+          li.bd-category
+            a(href=h.listUrl(database, model))= model.name()

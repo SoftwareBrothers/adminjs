@@ -1,7 +1,0 @@
-for database in databases
-  h5= database.name()
-  ul
-    for model in database.models()
-      li
-        a(href=h.listUrl(database, model))= model.name()
-    
