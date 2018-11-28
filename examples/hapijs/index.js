@@ -9,6 +9,10 @@ const mongoose = require('mongoose')
 const adminBro = require('../../admin/integrations/hapi')
 require('./user-model')
 require('./article-model')
+require('./comment-model')
+require('./blog-post-model')
+require('./category-model')
+require('./page-model')
 
 /**
  * Initialization function
