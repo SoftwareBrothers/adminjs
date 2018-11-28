@@ -1,6 +1,6 @@
-extends ../layout/layout.pug
-include ../mixins/breadcrumb.pug
-include ../mixins/emptyTable.pug
+extends ../layout/layout
+include ../mixins/breadcrumb
+include ../mixins/emptyTable
 
 block content
   section.table-list
@@ -27,8 +27,8 @@ block content
             thead
               tr
                 for prop in properties.filter(p => p.isVisible())
-                  th= prop.name()
-                th Actions
+                  th= prop.name().toUpperCase()
+                th ACTIONS
             tbody
               for instance in instances
                 tr

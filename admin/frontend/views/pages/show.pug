@@ -1,12 +1,34 @@
-extends ../layout/layout.pug
-include ../mixins/form-group.pug
+extends ../layout/layout
+include ../mixins/form-group
+include ../mixins/breadcrumb
 
 block content
-  h3 #{database.name()}/#{model.name()}
-  h4
-    a.float-right.btn(href=h.listUrl(database, model)) Back to list
-    | details for #{model.name()}: #{instance.id()}
-  for prop in properties.filter(p => p.isVisible())
-    p
-      label #{prop.name()}: 
-      |  #{instance.param(prop.name())}
+  secton.show-details
+    +breadcrumb([database.name(), model.name(), instance.id()])
+    .column
+      .level
+        .title Details
+        .field.is-grouped
+          .control 
+            a.button(href=h.listUrl(database, model))
+              span.icon.is-small
+                i(class="fas fa-angle-left")
+              .btn-text Back
+          .control
+            a.button.is-primary(href=h.editInstanceUrl(database, model, instance))
+              span.icon.is-small
+                i(class="fas fa-pen")
+              .btn-text Edit
+          .control
+            a.button.is-light(href=h.deleteInstanceUrl(database, model, instance))
+              span.icon.is-small
+                i(class="fas fa-trash-alt")
+              .btn-text Remove
+    .column
+      .box
+        for prop in properties.filter(p => p.isVisible())
+          .property
+            .card-content
+              small.is-light #{prop.name().toUpperCase()}
+              p #{instance.param(prop.name())}
+  
