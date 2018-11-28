@@ -13,7 +13,7 @@ block content
           .control
             a.button.is-light Export
     .column
-      .box.content
+      .box
         table.table.is-hoverable.is-fullwidth
           thead
             tr
@@ -30,7 +30,8 @@ block content
                   a(href=h.editInstanceUrl(database, model, instance)) Edit
 
         - pages = h.paginate(total, page, perPage).pages
-          .box(style="width: max-content; margin: auto;").is-paddingless.has-text-centered
+        .level-item
+          .box.is-paddingless.is-inline-block
             a.button.is-white Previous
             for p in h.paginate(total, page, perPage).pages
               a.button.is-white(class={ 'active' : p == page }
