@@ -1,0 +1,6 @@
+mixin breadcrumb(elements)
+  nav.breadcrumb(aria-label="breadcrumbs")
+    ul
+      for element in elements
+        li(class={ 'is-active' : elements.indexOf(element) === elements.length - 1 })
+          a=element
