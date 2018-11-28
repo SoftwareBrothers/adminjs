@@ -1,5 +1,6 @@
 extends ../layout/layout.pug
 include ../mixins/breadcrumb.pug
+include ../mixins/emptyTable.pug
 
 block content
   section.table-list
@@ -7,34 +8,47 @@ block content
     .column
       .level
         .title=model.name()
-        .field.is-grouped
-          .control
-            a.button.is-primary(href=h.newInstanceUrl(database, model)) New #{model.name()}
-          .control
-            a.button.is-light Export
-    .column
-      .box
-        table.table.is-hoverable.is-fullwidth
-          thead
-            tr
-              for prop in properties.filter(p => p.isVisible())
-                th= prop.name()
-              th Actions
-          tbody
-            for instance in instances
+        if total
+          .field.is-grouped
+            .control
+              a.button.is-primary(href=h.newInstanceUrl(database, model))
+                span(class="icon is-small")
+                  i(class="fas fa-plus")
+                .btn-text Add new
+            .control
+              a.button.is-light 
+                span(class="icon is-small")
+                  i(class="fas fa-download")
+                .btn-text Export
+    if total
+      .column
+        .box
+          table.table.is-hoverable.is-fullwidth
+            thead
               tr
                 for prop in properties.filter(p => p.isVisible())
-                  td= instance.param(prop.name())
-                td
-                  a(href=h.showInstanceUrl(database, model, instance)) Show
-                  a(href=h.editInstanceUrl(database, model, instance)) Edit
+                  th= prop.name()
+                th Actions
+            tbody
+              for instance in instances
+                tr
+                  for prop in properties.filter(p => p.isVisible())
+                    td= instance.param(prop.name())
+                  td
+                    a(href=h.showInstanceUrl(database, model, instance)) Show
+                    a(href=h.editInstanceUrl(database, model, instance)) Edit
 
-        - pages = h.paginate(total, page, perPage).pages
-        .level-item
-          .box.is-paddingless.is-inline-block
-            a.button.is-white Previous
-            for p in h.paginate(total, page, perPage).pages
-              a.button.is-white(class={ 'active' : p == page }
-                href=h.listUrl(database, model, { page: p })
-              )= p
-            a.button.is-white Next page
+          - pages = h.paginate(total, page, perPage).pages
+          if pages.length > 1
+            .level-item
+              .box.pagination.is-inline-block
+                a.button.is-white
+                 i(class="fas fa-angle-left")
+                for p in h.paginate(total, page, perPage).pages
+                  a.button.is-white(class={ 'active' : p == page }
+                    href=h.listUrl(database, model, { page: p })
+                  )= p
+                a.button.is-white
+                  i(class="fas fa-angle-right")
+    else
+      +emptyTable(h.newInstanceUrl(database, model))
