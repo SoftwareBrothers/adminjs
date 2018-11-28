@@ -7,7 +7,7 @@ class Renderer {
     this.view = view
     this.data = data
 
-    this.styles_path = 'admin/frontend/styles/index.css.sass'
+    this.styles_path = 'admin/frontend/styles/index.sass'
     this.views_path = 'admin/frontend/views/'
   }
 
