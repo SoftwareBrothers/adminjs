@@ -11,6 +11,7 @@ class AbstractInstance {
   constructor(params, model) {
     this.model = model
     this.params = params
+    this.errors = {}
   }
 
   param(paramName) {
@@ -19,6 +20,14 @@ class AbstractInstance {
 
   id() {
     throw new NotImplementedError()
+  }
+
+  save() {
+    throw new NotImplementedError()
+  }
+
+  error(paramName) {
+
   }
 }
 

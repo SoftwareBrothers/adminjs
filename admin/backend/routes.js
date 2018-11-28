@@ -10,15 +10,13 @@ const InstancesController = require('./controllers/instances-controller')
  *    method: 'GET',
  *    path: '',
  *    view: 'pages/dashboard',
- *    controller: this.dashboardController,
+ Controller    controller: this.dashboardController,
  *    action: 'index',
  *  }
  */
 class Routes {
   constructor({ admin }) {
     this._admin = admin
-    this.dashboardController = new DashboardController({ admin })
-    this.instancesController = new InstancesController({ admin })
   }
 
   all() {
@@ -26,49 +24,49 @@ class Routes {
       method: 'GET',
       path: '',
       view: 'pages/dashboard',
-      controller: this.dashboardController,
+      Controller: DashboardController,
       action: 'index',
     }, {
       method: 'GET',
       path: '/{databaseName}/{modelName}',
       view: 'pages/list',
-      controller: this.instancesController,
+      Controller: InstancesController,
       action: 'index',
     }, {
       method: 'GET',
       path: '/{databaseName}/{modelName}/{instanceId}',
       view: 'pages/show',
-      controller: this.instancesController,
+      Controller: InstancesController,
       action: 'show',
     }, {
       method: 'GET',
       path: '/{databaseName}/{modelName}/new',
       view: 'pages/new',
-      controller: this.instancesController,
+      Controller: InstancesController,
       action: 'new',
     }, {
       method: 'POST',
       path: '/{databaseName}/{modelName}',
       view: 'pages/new',
-      controller: this.instancesController,
+      Controller: InstancesController,
       action: 'create',
     }, {
       method: 'POST',
       path: '/{databaseName}/{modelName}/{instanceId}',
       view: 'pages/edit',
-      controller: this.instancesController,
+      Controller: InstancesController,
       action: 'update',
     }, {
       method: 'GET',
       path: '/{databaseName}/{modelName}/{instanceId}/edit',
       view: 'pages/edit',
-      controller: this.instancesController,
+      Controller: InstancesController,
       action: 'edit',
     }, {
       method: 'GET',
       path: '/{databaseName}/{modelName}/{instanceId}/delete',
       view: 'pages/delete',
-      controller: this.instancesController,
+      Controller: InstancesController,
       action: 'delete',
     }]
   }

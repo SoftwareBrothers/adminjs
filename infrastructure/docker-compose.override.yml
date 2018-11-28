@@ -1,0 +1,4 @@
+version: "2.1"
+services:
+  app:
+    command: "npm run start-dev"

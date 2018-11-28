@@ -6,6 +6,7 @@ block content
   h4 Create #{model.name()}
   form(method='POST' action=h.showInstanceUrl(database, model, instance))
     for prop in properties.filter(p => p.isEditable())
+      - error = instance.error(prop.name())
       - value = instance.param(prop.name())
-      +formGroup(prop, value)
+      +formGroup(prop, value, error)
     button.btn.btn-primary(type='submit') Update
