@@ -17,6 +17,10 @@ class ViewHelpers {
     return url
   }
 
+  loginUrl() {
+    return this.urlBuilder(['login'])
+  }
+
   listUrl(database, model, query) {
     return this.urlBuilder([database.name(), model.name()], query)
   }

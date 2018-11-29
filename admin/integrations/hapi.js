@@ -33,4 +33,7 @@ module.exports = {
       })
     })
   },
+  renderLogin: async (params) => {
+    return Admin.renderLogin(params)
+  },
 }
