@@ -1,0 +1,59 @@
+.sidebar-main, .sidebar-content
+  width: $sidebar-width
+
+.sidebar-main
+  position: relative
+
+  .sidebar-content
+    height: 100vh
+    border-right: 1px solid $athens-gray
+    padding: 1.5rem 1.5rem 0.75rem
+    overflow-y: auto
+    position: fixed
+    display: flex
+    flex-direction: column
+    justify-content: space-between
+
+    .sidebar-brand
+      display: flex
+      align-items: center
+      margin-bottom: 1.5rem
+      img
+        margin-right: 1rem
+
+    .menu-item-main
+      background: $athens-gray
+      padding: 0.5rem 1rem
+      border-radius: 1rem
+      display: block
+
+    .menu-list li ul
+      border-left: none
+
+    .menu-list a
+      color: $spun-pearl
+      &:hover, &.is-active
+        color: $woodsmoke
+        background: none
+
+  .sidebar-created-by
+    font-size: 0.75rem
+    display: flex
+    align-items: center
+    justify-content: center
+    color: $spun-pearl
+    margin-top: 1rem
+    img
+      margin: 0 0.2rem
+    .fa-heart
+      margin: 0 0.2rem
+    .fa-heart path
+      fill: $alizarin-crimson
+    a
+      color: $alizarin-crimson
+      display: inline-block
+      margin-left: 0.2rem
+
+  .sidebar-footer
+    .menu-list a
+      padding-left: 0
