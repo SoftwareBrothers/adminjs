@@ -4,22 +4,26 @@ const ValidationError = require('../utils/validation-error.js')
 class InstancesController extends BaseController {
   async index({ params, query, payload }, response) {
     this.findDatabaseAndModel(params)
+    this.view.currentModel = params.modelName
     this.view.instances = await this.findInstances({ query })
   }
 
   async show({ params, query, payload }, response) {
     this.findDatabaseAndModel(params)
     const { instanceId } = params
+    this.view.currentModel = params.modelName
     this.view.instance = await this.view.model.findOne(instanceId)
   }
 
   async edit({ params, query, payload }, response) {
     this.findDatabaseAndModel(params)
     const { instanceId } = params
+    this.view.currentModel = params.modelName
     this.view.instance = await this.view.model.findOne(instanceId)
   }
 
   async new({ params, query, payload }, response) {
+    this.view.currentModel = params.modelName
     this.findDatabaseAndModel(params)
     this.view.instance = this.view.model.build()
   }
