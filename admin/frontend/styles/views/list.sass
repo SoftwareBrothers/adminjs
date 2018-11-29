@@ -1,4 +1,36 @@
 .table-list
+  .table-wrapper
+    @include border-box
+    background-color: $white
+    padding: rem(32px) rem(40px)
+
+  .table
+    margin-bottom: 0
+    font-size: rem(14px)
+
+    td, th
+      padding: rem(14px)
+      border-bottom: solid rem(1px) $athens-gray-dark
+      vertical-align: middle
+
+    th
+      border-bottom: none
+      small
+        font-weight: normal
+        color: $ghost
+    tr
+      &:hover
+        background-color: $athens-gray
+      td:not(:first-child)
+        color: $spun-pearl
+      td:first-child
+        font-weight: 500
+      td:last-child
+        color: $ghost
+    
+    td svg
+      width:rem(20px)
+
   .pagination
     margin-top: 1rem
     padding: 0.2rem

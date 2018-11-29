@@ -1,5 +1,12 @@
 .dropdown
   .dropdown-content
+    -webkit-box-shadow: none
+    -moz-box-shadow: none
+    box-shadow: none
+    border-radius: 0
+    // We have to override bulma styles
+    border: solid rem(1px) $athens-gray-dark !important
+    border: none
     padding: 1rem
     display: flex
     flex-direction: column
@@ -9,5 +16,11 @@
       text-align: start
       justify-content: flex-start
 
+      .btn-text
+        font-size: rem(14px)
+
     span 
       color: #CBCCD7
+    
+  .dots
+    cursor: pointer
