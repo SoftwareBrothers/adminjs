@@ -56,7 +56,7 @@ const registerAuthRoutes = async ({ server, adminBroOptions }) => {
           const admin = await AdminModel.findOne({ email: request.payload.email })
           const isValid = admin && await Bcrypt.compare(request.payload.password, admin.password)
           if (isValid) {
-            request.cookieAuth.set({ admin })
+            request.cookieAuth.set(admin)
             return h.redirect(adminBroOptions.rootPath)
           }
           errorMessage = 'Wrong email and/or password'

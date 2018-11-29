@@ -18,7 +18,11 @@ class ViewHelpers {
   }
 
   loginUrl() {
-    return this.urlBuilder(['login'])
+    return this._admin.options.loginPath
+  }
+
+  logoutUrl() {
+    return this._admin.options.logoutPath
   }
 
   listUrl(database, model, query) {
