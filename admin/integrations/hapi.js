@@ -16,7 +16,7 @@ module.exports = {
   version: '1.0.0',
   register: async (server, options) => {
     const admin = new Admin(options.databases, options)
-    const auth = options.auth || 'none'
+    const auth = options.auth || false
     const routes = new Routes({ admin }).all()
 
     routes.forEach((route) => {
