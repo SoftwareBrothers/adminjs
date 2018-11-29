@@ -1,5 +1,7 @@
+@import './../abstracts/variables'
+
 .sidebar-main, .sidebar-content
-  width: 300px
+  width: $sidebar-width
 
 .sidebar-main
   position: relative
@@ -7,7 +9,7 @@
   .sidebar-content
     height: 100vh
     border-right: 1px solid #EEEEEF //Temp
-    padding: 24px 24px 12px
+    padding: 1.5rem 1.5rem 0.75rem
     overflow-y: auto
     position: fixed
     display: flex
@@ -17,6 +19,6 @@
     .sidebar-brand
       display: flex
       align-items: center
-      margin-bottom: 24px
+      margin-bottom: 1.5rem
       img
-        margin-right: 15px
+        margin-right: 1rem
