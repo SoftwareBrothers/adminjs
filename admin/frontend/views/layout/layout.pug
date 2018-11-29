@@ -5,14 +5,15 @@ html
     meta(name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no")
     block scripts
       link(rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.5.1/css/bulma.min.css")
-      link(rel="stylesheet", href="https://cdnjs.cloudflare.com/ajax/libs/font-mfizz/2.4.1/font-mfizz.min.css")
+      link(rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-mfizz/2.4.1/font-mfizz.min.css")
+      link( rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto")
     style(type="text/css")
       != adminStyles
   body
     .columns.container-main
       aside.sidebar-main
         include components/sidebar
-      .column
+      .column.content-wrapper
         include components/topbar
         block header
         block content

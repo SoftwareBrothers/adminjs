@@ -1,21 +1,28 @@
 mixin formGroup(prop, value, error)
-  div.form-group
+  .field
     case prop.type()
       when 'string'
-        label(for=prop.name)= prop.name()
-        input.form-control(type='text' id=prop.name() name=prop.name() value=value)
+        label.label(for=prop.name)= prop.name()
+        .control
+          input.input(type='text' id=prop.name() name=prop.name() value=value)
       when 'boolean'
-        div.form-check
-          input.form-check-input(type="checkbox" checked=value id=prop.name() name=prop.name() value='true')
-          label.form-check-label(for=prop.name())= prop.name()
+        .control.control-checkbox
+          input.checkbox(type="checkbox" checked=value id=prop.name() name=prop.name() value='true')
+          label.checkbox(for=prop.name())= prop.name()
       when 'number'
-        label(for=prop.name)= prop.name()
-        input.form-control(type='number' id=prop.name() name=prop.name() value=value)
+        .control
+          label.label(for=prop.name)= prop.name()
+          .control
+            input.input(type='number' id=prop.name() name=prop.name() value=value)
       when 'date'
-        label(for=prop.name)= prop.name()
-        input.form-control(type='date' id=prop.name() name=prop.name() value=value)
+        label.label(for=prop.name)= prop.name()
+        .control.has-icons-left
+          span.icon.is-small.is-left
+            i.fas.fa-calendar
+          input.input(type='date' id=prop.name() name=prop.name() value=value)
       when 'float'
-        label(for=prop.name)= prop.name()
-        input.form-control(type='number' id=prop.name() name=prop.name() value=value)
+        label.label(for=prop.name)= prop.name()
+        .control
+          input.input(type='number' id=prop.name() name=prop.name() value=value)
     if error
-      .error-message(style="color: red;")= error.message
+      .help.is-danger= error.message

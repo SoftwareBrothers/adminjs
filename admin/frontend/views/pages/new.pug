@@ -1,12 +1,21 @@
 extends ../layout/layout.pug
 include ../mixins/form-group.pug
+include ../mixins/breadcrumb
 
 block content
-  h3 #{database.name()}/#{model.name()}
-  h4 Create #{model.name()}
-  form(method='POST' action=h.listUrl(database, model))
-    for prop in properties.filter(p => p.isEditable())
-      - error = instance.error(prop.name())
-      - value = instance.param(prop.name())
-      +formGroup(prop, value, error)
-    button.btn.btn-primary(type='submit') Create
+  +breadcrumb([database.name(), model.name()])
+  section.view-edit.column
+    form(method='POST' action=h.listUrl(database, model))
+      .level
+        h3.title Create #{model.name()}
+        .field.is-grouped
+          .control
+            button.button.is-primary(type='submit')
+              span(class="icon is-small")
+                i(class="fas fa-check")
+              .btn-text Save
+      .box
+        for prop in properties.filter(p => p.isEditable())
+          - error = instance.error(prop.name())
+          - value = instance.param(prop.name())
+          +formGroup(prop, value, error)
