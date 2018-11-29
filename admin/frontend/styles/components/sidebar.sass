@@ -1,17 +1,24 @@
-$sidebar-width: 19rem
+@import './../abstracts/variables'
+
+.sidebar-main, .sidebar-content
+  width: $sidebar-width
 
 .sidebar-main
-  padding: 1.5rem 1.5rem 0.75rem
-  flex-basis: $sidebar-width
-  width: $sidebar-width
-  height: 100%
-  display: flex
-  flex-direction: column
-  justify-content: space-between
-  border-right: 1px solid #EEEEEF //Temp
-  .sidebar-brand
+  position: relative
+  
+  .sidebar-content
+    height: 100vh
+    border-right: 1px solid #EEEEEF //Temp
+    padding: 1.5rem 1.5rem 0.75rem
+    overflow-y: auto
+    position: fixed
     display: flex
-    align-items: center
-    margin-bottom: 1.5rem
-    img
-      margin-right: 1rem
+    flex-direction: column
+    justify-content: space-between
+
+    .sidebar-brand
+      display: flex
+      align-items: center
+      margin-bottom: 1.5rem
+      img
+        margin-right: 1rem
