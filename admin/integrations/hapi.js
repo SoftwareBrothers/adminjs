@@ -26,7 +26,6 @@ module.exports = {
         options: { auth },
         handler: async (request, h) => {
           const controller = new route.Controller({ admin }, request.auth.credentials)
-          console.log(request.auth.credentials)
           const response = await controller[route.action](request, h)
           if (!response) {
             return new Renderer(route.view, controller.view).render()
