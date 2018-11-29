@@ -7,6 +7,8 @@
 const Hapi = require('hapi')
 const HapiAuthCookie = require('hapi-auth-cookie')
 const mongoose = require('mongoose')
+
+// We use Bcrypt to hash password
 const Bcrypt = require('bcrypt')
 const adminBro = require('../../admin/integrations/hapi')
 
@@ -18,10 +20,18 @@ require('./blog-post-model')
 require('./category-model')
 require('./page-model')
 
+/**
+ * Model which will store all admins
+ * @type {Mongoose.model}
+ */
 const AdminModel = require('./admin-model')
 
+/**
+ * Creates first admin test@example.com:password when there are no
+ * admins in the database
+ */
 const createAdminIfNone = async () => {
-  const existingAdmin = await AdminModel.findOne({ email: 'test@example.com' })
+  const existingAdmin = await AdminModel.countDocuments() > 0
   if (!existingAdmin) {
     const password = await Bcrypt.hash('password', 10)
     const admin = new AdminModel({ email: 'test@example.com', password })
@@ -29,17 +39,30 @@ const createAdminIfNone = async () => {
   }
 }
 
+/**
+ * Creates authentication logic for admin users
+ * @param  {Hapi} options.server            Hapi.js server instance
+ * @param  {Object} options.adminBroOptions Configiration options passed to admin bro
+ * @param  {String} options.adminBroOptions.logoutPath
+ * @param  {String} options.adminBroOptions.loginPath
+ */
 const registerAuthRoutes = async ({ server, adminBroOptions }) => {
   const { logoutPath, loginPath } = adminBroOptions
 
+  // example authentication is based on the cookie store
   await server.register(HapiAuthCookie)
 
   server.auth.strategy('session', 'cookie', {
+    // Make sure you change password used to secure content in cookies
     password: process.env.SESSION_PASSWORD || 'ksjdcirshaoscdoasoghjklw2nsyehsk',
     cookie: 'adminBro',
     redirectTo: loginPath,
     isSecure: false,
   })
+
+  // Warning - in the example we set default auth to session.
+  // It means that when you create another routes they will be using
+  // this type, unless you override this in route options.
   server.auth.default('session')
 
   server.route({
@@ -61,6 +84,12 @@ const registerAuthRoutes = async ({ server, adminBroOptions }) => {
           }
           errorMessage = 'Wrong email and/or password'
         }
+
+        // AdminBro exposes function which renders login form for us.
+        // It takes 2 arguments: 
+        // - options.action (with login path)
+        // - [errorMessage] optional error message - visible when user
+        //                  gives wrong credentials
         return adminBro.renderLogin({ action: loginPath, errorMessage })
       } catch (e) {
         console.log(e)
@@ -79,14 +108,16 @@ const registerAuthRoutes = async ({ server, adminBroOptions }) => {
 }
 
 /**
- * Initialization function
+ * Initialization function for the application with the adminBro setup
  */
 const start = async () => {
   let serverInfo
   try {
     const server = Hapi.server({ port: process.env.PORT })
 
+    // We use MongoDB database
     const connection = await mongoose.connect(process.env.MONGO_URL)
+
     const adminBroOptions = {
       databases: [connection],
       auth: 'session',
@@ -94,6 +125,8 @@ const start = async () => {
       logoutPath: '/admin/logout',
       loginPath: '/admin/login',
     }
+
+    // invoke previousely defined functions
     await createAdminIfNone()
     await registerAuthRoutes({ server, adminBroOptions })
 
