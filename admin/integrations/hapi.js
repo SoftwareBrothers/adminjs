@@ -16,12 +16,14 @@ module.exports = {
   version: '1.0.0',
   register: async (server, options) => {
     const admin = new Admin(options.databases, options)
+    const auth = options.auth || 'none'
     const routes = new Routes({ admin }).all()
 
     routes.forEach((route) => {
       server.route({
         method: route.method,
-        path: `/${admin.options.rootPath}${route.path}`,
+        path: `${admin.options.rootPath}${route.path}`,
+        options: { auth },
         handler: async (request, h) => {
           const controller = new route.Controller({ admin })
           const response = await controller[route.action](request, h)

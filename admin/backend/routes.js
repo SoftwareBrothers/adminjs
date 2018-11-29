@@ -1,6 +1,5 @@
 const DashboardController = require('./controllers/dashboard-controller')
 const InstancesController = require('./controllers/instances-controller')
-const LoginController = require('./controllers/login-controller')
 
 /**
  * Contains list of all routes

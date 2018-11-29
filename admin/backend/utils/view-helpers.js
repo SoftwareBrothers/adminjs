@@ -9,7 +9,7 @@ class ViewHelpers {
 
   urlBuilder(paths, query) {
     const { rootPath } = this._admin.options
-    let url = `/${rootPath}/${paths.join('/')}`
+    let url = `${rootPath}/${paths.join('/')}`
     if (query) {
       const queryString = Object.keys(query).map(key => `${key}=${query[key]}`)
       url = `${url}?${queryString}`
