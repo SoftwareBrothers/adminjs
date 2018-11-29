@@ -11,24 +11,24 @@ block content
         .field.is-grouped
           .control 
             a.button(href=h.listUrl(database, model))
-              span.icon.is-small
-                i(class="fas fa-angle-left")
+              span.icon
+                i.fas.fa-angle-left
               .btn-text Back
           .control
             a.button.is-primary(href=h.editInstanceUrl(database, model, instance))
-              span.icon.is-small
-                i(class="fas fa-pen")
+              span.icon
+                i.fas.fa-pen
               .btn-text Edit
           .control
             a.button.is-primary.is-outlined(href=h.deleteInstanceUrl(database, model, instance))
-              span.icon.is-small
-                i(class="fas fa-trash-alt")
+              span.icon
+                i.fas.fa-trash-alt
               .btn-text Remove
     .column
-      .details-wrapper
+      .border-box
         for prop in properties.filter(p => p.isVisible())
           .property
             .card-content
-              small.is-light #{prop.name().toUpperCase()}
-              p #{instance.param(prop.name())}
+              .text-small #{prop.name().toUpperCase()}
+              p(class={ 'feature' : properties.indexOf(prop) === 0 }) #{instance.param(prop.name())}
   

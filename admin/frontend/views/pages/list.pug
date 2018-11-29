@@ -12,23 +12,22 @@ block content
           .field.is-grouped
             .control
               a.button.is-primary(href=h.newInstanceUrl(database, model))
-                span(class="icon is-small")
-                  i(class="fas fa-plus fa-xs")
+                span.icon
+                  i.fas.fa-plus.fa-xs
                 .btn-text Add new
             .control
               a.button.is-primary.is-outlined
-                span(class="icon is-small")
-                  i(class="fas fa-download fa-xs")
+                span.icon
+                  i.fas.fa-download.fa-xs
                 .btn-text Export
     if total
       .column
-        .table-wrapper
+        .border-box
           table.table.is-fullwidth
             thead
               tr
                 for prop in properties.filter(p => p.isVisible())
-                  th
-                    small= prop.name().toUpperCase()
+                  th.text-small=prop.name().toUpperCase()
                 th
             tbody
               for instance in instances
@@ -38,22 +37,22 @@ block content
                   td
                     .dropdown.is-right.is-hoverable
                       .dropdown-trigger
-                        .dots(controls="dropdown-action")
-                           span(class="icon")
-                            i(class="fas fa-ellipsis-h")
-                      .dropdown-menu(id="dropdown-action" role="menu")
+                        .dots
+                           span.icon
+                            i.fas.fa-ellipsis-h
+                      .dropdown-menu
                         .dropdown-content
                           a.button.is-white(href=h.showInstanceUrl(database, model, instance))
                             span.icon.is-large
-                              i(class="fas fa-info")
+                              i.fas.fa-info
                             .btn-text Info
                           a.button.is-white(href=h.editInstanceUrl(database, model, instance))
                             span.icon
-                              i(class="fas fa-pen")
+                              i.fas.fa-pen
                             .btn-text Edit
                           a.button.is-white(href=h.deleteInstanceUrl(database, model, instance))
                             span.icon
-                              i(class="fas fa-trash")
+                              i.fas.fa-trash
                             .btn-text Remove
                       
           - pages = h.paginate(total, page, perPage).pages
@@ -61,12 +60,12 @@ block content
             .level-item.pagination-content
               .box.pagination.is-inline-block
                 a.button.is-white
-                 i(class="fas fa-angle-left fa-lg")
-                for p in h.paginate(total, page, perPage).pages
+                 i.fas.fa-angle-left.fa-lg
+                for p in pages
                   a.button.is-white(class={ 'active' : p == page }
                     href=h.listUrl(database, model, { page: p })
                   )= p
                 a.button.is-white
-                  i(class="fas fa-angle-right fa-lg")
+                  i.fas.fa-angle-right.fa-lg
     else
       +emptyTable(h.newInstanceUrl(database, model))
