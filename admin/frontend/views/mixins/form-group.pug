@@ -16,10 +16,10 @@ mixin formGroup(prop, value, error)
             input.input(type='number' id=prop.name() name=prop.name() value=value)
       when 'date'
         label.label(for=prop.name)= prop.name()
-        .control.has-icons-left
-          span.icon.is-small.is-left
-            i.fas.fa-calendar
+        .control.has-icons-right
           input.input(type='date' id=prop.name() name=prop.name() value=value)
+          span.icon.is-small.is-right
+            i.fas.fa-calendar
       when 'float'
         label.label(for=prop.name)= prop.name()
         .control
