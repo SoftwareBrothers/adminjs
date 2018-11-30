@@ -103,7 +103,7 @@ class Model extends AbstractModel {
   }
 
   id() {
-    return this.model.modelName
+    return this.model.modelName.toLowerCase()
   }
 
   properties() {

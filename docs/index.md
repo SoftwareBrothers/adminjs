@@ -14,7 +14,7 @@ This is the example flow for hapi.js
   graph LR
   A[<a href=./examples_hapijs_index.js.html>Hapi.js</a>] -->|<a href=./admin_integrations_hapi.js.html>Mapping Routes</a>| B{<a href=./Routes.html>Routes.js</a>}
   B --> C(DashoardController)
-  B --> D(InstancesController)
+  B --> D(ModelsController)
   E(Renderer)
   C --> E
   D --> E

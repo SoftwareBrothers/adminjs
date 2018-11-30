@@ -1,5 +1,5 @@
 const DashboardController = require('./controllers/dashboard-controller')
-const InstancesController = require('./controllers/instances-controller')
+const ModelsController = require('./controllers/models-controller')
 
 /**
  * Contains list of all routes
@@ -28,37 +28,37 @@ class Routes {
     }, {
       method: 'GET',
       path: '/models/{modelName}',
-      Controller: InstancesController,
+      Controller: ModelsController,
       action: 'index',
     }, {
       method: 'GET',
       path: '/models/{modelName}/{instanceId}',
-      Controller: InstancesController,
+      Controller: ModelsController,
       action: 'show',
     }, {
       method: 'GET',
       path: '/models/{modelName}/new',
-      Controller: InstancesController,
+      Controller: ModelsController,
       action: 'new',
     }, {
       method: 'POST',
       path: '/models/{modelName}',
-      Controller: InstancesController,
+      Controller: ModelsController,
       action: 'create',
     }, {
       method: 'POST',
       path: '/models/{modelName}/{instanceId}',
-      Controller: InstancesController,
+      Controller: ModelsController,
       action: 'update',
     }, {
       method: 'GET',
       path: '/models/{modelName}/{instanceId}/edit',
-      Controller: InstancesController,
+      Controller: ModelsController,
       action: 'edit',
     }, {
       method: 'GET',
       path: '/models/{modelName}/{instanceId}/delete',
-      Controller: InstancesController,
+      Controller: ModelsController,
       action: 'delete',
     }]
   }

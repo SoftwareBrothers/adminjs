@@ -1,6 +1,6 @@
 const BaseController = require('./base-controller.js')
 
-class InstancesController extends BaseController {
+class ModelsController extends BaseController {
   async index({ params, query, payload }, response) {
     this.findModel(params)
     this.view.instances = await this.findInstances({ query })
@@ -82,4 +82,4 @@ class InstancesController extends BaseController {
   }
 }
 
-module.exports = InstancesController
+module.exports = ModelsController

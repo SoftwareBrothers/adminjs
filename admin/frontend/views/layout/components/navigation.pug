@@ -7,4 +7,4 @@ ul.menu-list
     ul.menu-list
       for model in models
         li
-          a(href=h.listUrl(model) class={ 'is-active' : currentModel.id() === model.name() })= model.name()
+          a(href=h.listUrl(model) class={ 'is-active' : currentModel && currentModel.id() === model.name() })= model.name()
