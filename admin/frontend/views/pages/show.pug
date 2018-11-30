@@ -7,13 +7,12 @@ block content
     +breadcrumb([database.name(), model.name(), instance.id()])
     .column
       .level
-        .title Details
+        .title
+          a.button.is-text.is-back(href=h.listUrl(database, model))
+            span.icon.is-small
+              i.fas.fa-arrow-left
+          | Details
         .field.is-grouped
-          .control 
-            a.button(href=h.listUrl(database, model))
-              span.icon
-                i.fas.fa-angle-left
-              .btn-text Back
           .control
             a.button.is-primary(href=h.editInstanceUrl(database, model, instance))
               span.icon
@@ -31,4 +30,3 @@ block content
             .card-content
               .text-small #{prop.name().toUpperCase()}
               p(class={ 'feature' : properties.indexOf(prop) === 0 }) #{instance.param(prop.name())}
-  
