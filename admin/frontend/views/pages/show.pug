@@ -4,22 +4,22 @@ include ../mixins/breadcrumb
 
 block content
   secton.show-details
-    +breadcrumb([database.name(), model.name(), instance.id()])
+    +breadcrumb([currentModel.name(), instance.id()])
     .column
       .level
         .title
-          a.button.is-text.is-back(href=h.listUrl(database, model))
+          a.button.is-text.is-back(href=h.listUrl(currentModel))
             span.icon.is-small
               i.fas.fa-arrow-left
           | Details
         .field.is-grouped
           .control
-            a.button.is-primary(href=h.editInstanceUrl(database, model, instance))
+            a.button.is-primary(href=h.editInstanceUrl(currentModel, instance))
               span.icon
                 i.fas.fa-pen
               .btn-text Edit
           .control
-            a.button.is-primary.is-outlined(href=h.deleteInstanceUrl(database, model, instance))
+            a.button.is-primary.is-outlined(href=h.deleteInstanceUrl(currentModel, instance))
               span.icon
                 i.fas.fa-trash-alt
               .btn-text Remove

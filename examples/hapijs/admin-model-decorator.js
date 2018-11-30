@@ -1,14 +1,10 @@
-const BaseDecorator = require('../../backend/utils/base-decorator')
+const { BaseDecorator } = require('../../index')
 const AdminModel = require('../mongoose/admin-model')
 
-class AdminModelDecorator extends BaseDecorator {
+class AdminDecorator extends BaseDecorator {
   constructor() {
     super(AdminModel)
   }
-
-  static title(){
-
-  }
 }
 
-module.exports = AdminModelDecorator
+module.exports = AdminDecorator

@@ -17,7 +17,7 @@ class BaseController {
     this._admin = admin
     this.view = {}
     this.view.currentAdmin = currentAdmin
-    this.view.databases = admin.databases
+    this.view.models = admin.models
     this.view.h = new ViewHelpers({ admin })
   }
 

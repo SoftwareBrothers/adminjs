@@ -1,5 +1,17 @@
 const DatabasesParser = require('./backend/adapters/databases-parser')
+const ModelFactory = require('./backend/adapters/model-factory')
 const Renderer = require('./backend/utils/renderer')
+const BaseDecorator = require('./backend/utils/base-decorator')
+
+const defaults = {
+  rootPath: 'admin',
+  databases: [],
+  models: [],
+  authenticate: async () => {
+    console.warn('you have to give authenticate function to AdmiBro settings')
+    return false
+  },
+}
 
 /**
  * Main class for Admin extension.
@@ -10,25 +22,46 @@ const Renderer = require('./backend/utils/renderer')
  *
  * @example
  * const connection = await mongoose.connect(process.env.MONGO_URL)
- * const admin = new Admin([connection], options)
- *
- * admin.databases //list of all AbstractDatabases
+ * const admin = new Admin({databases: [connection]})
  */
 class Admin {
   /**
-   * @param  {Object[]} rawDatabases array of databases which can be handled by AdminBro
-   * @param  {Object} options      options
+   * @param  {Object}   options                         options
+   * @param  {Object[]} [options.databases=[]]          list of entire database connections
+   * @param  {String}   [options.rootPath='admin']      namespace for admin routes
+   * @param  {Object[]} [options.models]                list of all models
    */
-  constructor(rawDatabases, options = {}) {
+  constructor(options = {}) {
+    this.models = []
+
     this.options = {
-      rootPath: 'admin',
-      authenticate: async () => {
-        console.warn('you have to give authenticate function to AdmiBro settings')
-        return false
-      },
+      ...defaults,
       ...options,
     }
-    this.databases = DatabasesParser(rawDatabases)
+
+    this.findModels(options)
+  }
+
+
+  /**
+   * Find all models given by user:
+   *
+   * - from co
+   * @return {[type]} [description]
+   */
+  findModels({ databases, models }) {
+    if (databases && databases.length > 0) {
+      this.models = DatabasesParser(this.options.databases).reduce((m, database) => {
+        return m.concat(database.all())
+      }, [])
+    }
+    if (models && models.length > 0) {
+      this.models = this.models.concat(models.map((m => ModelFactory(m))))
+    }
+  }
+
+  findModel(modelId) {
+    return this.models.find(m => m.id() === modelId)
   }
 
   /**
@@ -46,3 +79,5 @@ class Admin {
 }
 
 module.exports = Admin
+
+module.exports.BaseDecorator = BaseDecorator

@@ -27,37 +27,37 @@ class Routes {
       action: 'index',
     }, {
       method: 'GET',
-      path: '/{databaseName}/{modelName}',
+      path: '/models/{modelName}',
       Controller: InstancesController,
       action: 'index',
     }, {
       method: 'GET',
-      path: '/{databaseName}/{modelName}/{instanceId}',
+      path: '/models/{modelName}/{instanceId}',
       Controller: InstancesController,
       action: 'show',
     }, {
       method: 'GET',
-      path: '/{databaseName}/{modelName}/new',
+      path: '/models/{modelName}/new',
       Controller: InstancesController,
       action: 'new',
     }, {
       method: 'POST',
-      path: '/{databaseName}/{modelName}',
+      path: '/models/{modelName}',
       Controller: InstancesController,
       action: 'create',
     }, {
       method: 'POST',
-      path: '/{databaseName}/{modelName}/{instanceId}',
+      path: '/models/{modelName}/{instanceId}',
       Controller: InstancesController,
       action: 'update',
     }, {
       method: 'GET',
-      path: '/{databaseName}/{modelName}/{instanceId}/edit',
+      path: '/models/{modelName}/{instanceId}/edit',
       Controller: InstancesController,
       action: 'edit',
     }, {
       method: 'GET',
-      path: '/{databaseName}/{modelName}/{instanceId}/delete',
+      path: '/models/{modelName}/{instanceId}/delete',
       Controller: InstancesController,
       action: 'delete',
     }]

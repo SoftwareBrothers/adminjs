@@ -7,14 +7,14 @@
  * @module Integrations/hapijs
  */
 
-const Admin = require('../index')
+const AdminBro = require('../index')
 const Routes = require('../backend/routes')
 
 module.exports = {
   name: 'AdminBro',
   version: '1.0.0',
   register: async (server, options) => {
-    const admin = new Admin(options.databases, options)
+    const admin = new AdminBro(options)
     const auth = options.auth || false
     const routes = new Routes({ admin }).all()
 
@@ -30,8 +30,10 @@ module.exports = {
         },
       })
     })
+
+    return admin
   },
   renderLogin: async (params) => {
-    return Admin.renderLogin(params)
+    return AdminBro.renderLogin(params)
   },
 }

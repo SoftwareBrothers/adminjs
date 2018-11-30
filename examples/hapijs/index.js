@@ -13,7 +13,7 @@ const Bcrypt = require('bcrypt')
 const adminBro = require('../../admin/integrations/hapi')
 
 require('../mongoose/user-model')
-require('../mongoose/article-model')
+const Article = require('../mongoose/article-model')
 require('../mongoose/comment-model')
 require('../mongoose/blog-post-model')
 require('../mongoose/category-model')
@@ -23,7 +23,7 @@ require('../mongoose/page-model')
  * Model which will store all admins
  * @type {Mongoose.model}
  */
-const AdminModel = require('./admin-model')
+const AdminModel = require('../mongoose/admin-model')
 
 /**
  * Creates first admin test@example.com:password when there are no
@@ -85,7 +85,7 @@ const registerAuthRoutes = async ({ server, adminBroOptions }) => {
         }
 
         // AdminBro exposes function which renders login form for us.
-        // It takes 2 arguments: 
+        // It takes 2 arguments:
         // - options.action (with login path)
         // - [errorMessage] optional error message - visible when user
         //                  gives wrong credentials
@@ -118,7 +118,8 @@ const start = async () => {
     const connection = await mongoose.connect(process.env.MONGO_URL)
 
     const adminBroOptions = {
-      databases: [connection],
+      databases: [],
+      models: [Article],
       auth: 'session',
       rootPath: '/admin',
       logoutPath: '/admin/logout',

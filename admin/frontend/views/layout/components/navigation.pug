@@ -1,11 +1,10 @@
 p.menu-label Navigation
 ul.menu-list
-  for database in databases
-    li
-      span.menu-item-main
-        i.icon-mongodb
-        = database.name()
-      ul.menu-list
-        for model in database.models()
-          li
-            a(href=h.listUrl(database, model) class={ 'is-active' : currentModel === model.name() })= model.name()
+  li
+    span.menu-item-main
+      i.icon-mongodb
+      | Namespace
+    ul.menu-list
+      for model in models
+        li
+          a(href=h.listUrl(model) class={ 'is-active' : currentModel.id() === model.name() })= model.name()

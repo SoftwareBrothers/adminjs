@@ -102,6 +102,10 @@ class Model extends AbstractModel {
     return this.model.modelName
   }
 
+  id() {
+    return this.model.modelName
+  }
+
   properties() {
     const properties = []
     for (const [name, path] of Object.entries(this.model.schema.paths)) {

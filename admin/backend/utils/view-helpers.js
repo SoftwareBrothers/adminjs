@@ -25,24 +25,24 @@ class ViewHelpers {
     return this._admin.options.logoutPath
   }
 
-  listUrl(database, model, query) {
-    return this.urlBuilder([database.name(), model.name()], query)
+  listUrl(model, query) {
+    return this.urlBuilder(['models', model.id()], query)
   }
 
-  newInstanceUrl(database, model) {
-    return this.urlBuilder([database.name(), model.name(), 'new'])
+  newInstanceUrl(model) {
+    return this.urlBuilder(['models', model.id(), 'new'])
   }
 
-  showInstanceUrl(database, model, instance) {
-    return this.urlBuilder([database.name(), model.name(), instance.id()])
+  showInstanceUrl(model, instance) {
+    return this.urlBuilder(['models', model.id(), instance.id()])
   }
 
-  editInstanceUrl(database, model, instance) {
-    return this.urlBuilder([database.name(), model.name(), instance.id(), 'edit'])
+  editInstanceUrl(model, instance) {
+    return this.urlBuilder(['models', model.id(), instance.id(), 'edit'])
   }
 
-  deleteInstanceUrl(database, model, instance) {
-    return this.urlBuilder([database.name(), model.name(), instance.id(), 'delete'])
+  deleteInstanceUrl(model, instance) {
+    return this.urlBuilder(['models', model.id(), instance.id(), 'delete'])
   }
 }
 
