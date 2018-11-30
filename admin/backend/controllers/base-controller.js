@@ -12,9 +12,10 @@ class BaseController {
    * @param  {Object} options
    * @param  {Admin} options.admin
    */
-  constructor({ admin }) {
+  constructor({ admin }, currentAdmin) {
     this._admin = admin
     this.view = {}
+    this.view.currentAdmin = currentAdmin
     this.view.databases = admin.databases
     this.view.h = new ViewHelpers({ admin })
   }

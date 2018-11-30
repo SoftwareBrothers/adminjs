@@ -1,0 +1,29 @@
+doctype html
+html
+  head
+    title AdminBro - #{title}
+    meta(charset="utf-8")
+    meta(name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no")
+    block scripts
+      link(rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.5.1/css/bulma.min.css")
+      link(rel="stylesheet", href="https://cdnjs.cloudflare.com/ajax/libs/font-mfizz/2.4.1/font-mfizz.min.css")
+    style(type="text/css")
+      //- != adminStyles
+  body
+    section.hero.is-fullheight
+      .hero-body
+        .container.has-text-centered
+          .column.is-4.is-offset-4
+            h3.title Login
+            p.subtitle Please login to proceed.
+            if errorMessage
+              .notification.is-danger= errorMessage
+            .box
+              form(action=action method="POST")
+                .field
+                  .control
+                    input.input.is-large(name='email' type='email', placeholder='Your Email', autofocus='')
+                .field
+                  .control
+                    input.input.is-large(name='password' type='password', placeholder='Your Password')
+                button.button.is-block.is-info.is-large.is-fullwidth Login

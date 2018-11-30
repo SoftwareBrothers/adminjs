@@ -8,6 +8,9 @@ nav.navbar
       //-   i.fas.fa-bell
       //- .navbar-item
       //-   i.fas.fa-cog
-      .navbar-item.navbar-user
-        | Wojtek
-        img(src="https://api.adorable.io/avatars/60/softwarebrothers.png")
+      if currentAdmin
+        .navbar-item.navbar-user
+          = currentAdmin.email
+          img(src="https://api.adorable.io/avatars/60/softwarebrothers.png")
+          a.button.is-white(href=h.logoutUrl())
+            .btn-text Logout
