@@ -7,12 +7,16 @@ block content
   section.view-edit
     form(method='POST' action=h.listUrl(database, model))
       .level
-        h3.title Create #{model.name()}
+        h3.title
+          a.button.is-text.is-back(href=h.listUrl(database, model))
+            span.icon.is-small
+              i.fas.fa-arrow-left
+          | Create #{model.name()}
         .field.is-grouped
           .control
             button.button.is-primary(type='submit')
               span(class="icon is-small")
-                i(class="fas fa-check")
+                i.fas.fa-check
               .btn-text Save
       .box
         for prop in properties.filter(p => p.isEditable())
