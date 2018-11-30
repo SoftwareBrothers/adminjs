@@ -1,14 +1,29 @@
 .table-list
-  .pagination
-    margin-top: 1rem
-    padding: 0.2rem
-
-  .empty-table 
-    .content-info
-      font-weight: 700
-      margin: 1rem 0
-    .create-text
-      margin: 1rem 0 2rem 0
-    .box 
-      padding-top: 5rem
-      padding-bottom: 5rem
+  & > .column
+    padding-left: 0
+    padding-right: 0
+  .table
+    table-layout: fixed
+    margin-bottom: 0
+    font-size: rem(14px)
+    td, th
+      padding: rem(14px)
+      border-bottom: solid rem(1px) $athens-gray-dark
+      vertical-align: middle
+    th
+      border-bottom: none
+      &.text-small
+        font-weight: normal
+        color: $ghost
+    tr
+      &:hover
+        background-color: $athens-gray
+      td:not(:first-child)
+        color: $spun-pearl
+      td:first-child
+        font-weight: 500
+      td:last-child
+        text-align: right
+        color: $ghost
+    td
+      word-break: break-all

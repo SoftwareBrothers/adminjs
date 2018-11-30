@@ -16,14 +16,18 @@ module.exports = {
   version: '1.0.0',
   register: async (server, options) => {
     const admin = new Admin(options.databases, options)
+    const auth = options.auth || false
     const routes = new Routes({ admin }).all()
 
     routes.forEach((route) => {
       server.route({
         method: route.method,
-        path: `/${admin.options.rootPath}${route.path}`,
+        path: `${admin.options.rootPath}${route.path}`,
+        options: { auth },
         handler: async (request, h) => {
-          const controller = new route.Controller({ admin })
+          const controller = new route.Controller({
+            admin,
+          }, request.auth && request.auth.credentials)
           const response = await controller[route.action](request, h)
           if (!response) {
             return new Renderer(route.view, controller.view).render()
@@ -32,5 +36,8 @@ module.exports = {
         },
       })
     })
+  },
+  renderLogin: async (params) => {
+    return Admin.renderLogin(params)
   },
 }

@@ -1,4 +1,5 @@
 const DatabasesParser = require('./backend/adapters/databases-parser')
+const Renderer = require('./backend/utils/renderer')
 
 /**
  * Main class for Admin extension.
@@ -21,6 +22,10 @@ class Admin {
   constructor(rawDatabases, options = {}) {
     this.options = {
       rootPath: 'admin',
+      authenticate: async () => {
+        console.warn('you have to give authenticate function to AdmiBro settings')
+        return false
+      },
       ...options,
     }
     this.databases = DatabasesParser(rawDatabases)
@@ -33,6 +38,10 @@ class Admin {
    */
   database(name) {
     return this.databases[name]
+  }
+
+  static async renderLogin({ action, errorMessage }) {
+    return new Renderer('pages/login', { action, errorMessage }).render()
   }
 }
 
