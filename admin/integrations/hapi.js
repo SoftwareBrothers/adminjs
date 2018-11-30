@@ -9,7 +9,6 @@
 
 const Admin = require('../index')
 const Routes = require('../backend/routes')
-const Renderer = require('../backend/utils/renderer')
 
 module.exports = {
   name: 'AdminBro',
@@ -25,14 +24,9 @@ module.exports = {
         path: `${admin.options.rootPath}${route.path}`,
         options: { auth },
         handler: async (request, h) => {
-          const controller = new route.Controller({
-            admin,
-          }, request.auth && request.auth.credentials)
-          const response = await controller[route.action](request, h)
-          if (!response) {
-            return new Renderer(route.view, controller.view).render()
-          }
-          return response
+          const loggedInUser = request.auth && request.auth.credentials
+          const controller = new route.Controller({ admin }, loggedInUser)
+          return controller[route.action](request, h)
         },
       })
     })

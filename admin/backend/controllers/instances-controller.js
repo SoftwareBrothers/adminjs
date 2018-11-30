@@ -1,11 +1,11 @@
 const BaseController = require('./base-controller.js')
-const ValidationError = require('../utils/validation-error.js')
 
 class InstancesController extends BaseController {
   async index({ params, query, payload }, response) {
     this.findDatabaseAndModel(params)
     this.view.currentModel = params.modelName
     this.view.instances = await this.findInstances({ query })
+    return this.render('pages/list', this.view)
   }
 
   async show({ params, query, payload }, response) {
@@ -13,6 +13,7 @@ class InstancesController extends BaseController {
     const { instanceId } = params
     this.view.currentModel = params.modelName
     this.view.instance = await this.view.model.findOne(instanceId)
+    return this.render('pages/show', this.view)
   }
 
   async edit({ params, query, payload }, response) {
@@ -20,12 +21,14 @@ class InstancesController extends BaseController {
     const { instanceId } = params
     this.view.currentModel = params.modelName
     this.view.instance = await this.view.model.findOne(instanceId)
+    return this.render('pages/edit', this.view)
   }
 
   async new({ params, query, payload }, response) {
     this.view.currentModel = params.modelName
     this.findDatabaseAndModel(params)
     this.view.instance = this.view.model.build()
+    return this.render('pages/new', this.view)
   }
 
   async create({ params, query, payload }, response) {
@@ -39,7 +42,7 @@ class InstancesController extends BaseController {
         this.view.instance,
       ))
     }
-    return null
+    return this.render('pages/new', this.view)
   }
 
   async update({ params, query, payload }, response) {
@@ -55,7 +58,7 @@ class InstancesController extends BaseController {
         this.view.instance,
       ))
     }
-    return null
+    return this.render('pages/edit', this.view)
   }
 
   async delete({ params, query, payload }, response) {
