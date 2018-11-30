@@ -4,7 +4,7 @@ include ../mixins/breadcrumb
 
 block content
   +breadcrumb([database.name(), model.name()])
-  section.view-edit.column
+  section.view-edit
     form(method='POST' action=h.listUrl(database, model))
       .level
         h3.title Create #{model.name()}
