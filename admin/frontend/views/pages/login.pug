@@ -10,15 +10,17 @@ html
     style(type="text/css")
       != adminStyles
   body
-    section.hero.is-fullheight
+    section.login-section.hero.is-fullheight
       .hero-body
         .container.has-text-centered
           .column.is-4.is-offset-4
-            h3.title Login
-            p.subtitle Please login to proceed.
-            if errorMessage
-              .notification.is-danger= errorMessage
-            .box
+            .border-box
+              .login-header
+                h3.title Login
+                p Please login to proceed.
+                if errorMessage
+                  .notification.is-danger= errorMessage
+              .spacer
               form(action=action method="POST")
                 .field
                   .control
@@ -26,4 +28,4 @@ html
                 .field
                   .control
                     input.input.is-large(name='password' type='password', placeholder='Your Password')
-                button.button.is-block.is-info.is-large.is-fullwidth Login
+                button.button.is-primary.is-fullwidth Login
