@@ -1,9 +1,32 @@
-.button:not(.is-primary):not(.is-white)
-  border-color: $cornflower-blue
-  color: $cornflower-blue
 .button
   border-radius: rem(2px)
   font-size: rem(12px)
+  &:not(.is-primary):not(.is-white):not(.is-text)
+    border-color: $cornflower-blue
+    color: $cornflower-blue
+  &:not(.is-white)
+    height: rem(32px)
+    line-height: rem(32px)
+    padding: 0 rem(10px)
+  &.is-text
+    background: transparent
+    border: none
+  &.is-back
+    @include circle(rem(32px))
+    font-size: rem(14px)
+    background-color: $athens-gray-darker
+    color: $spun-pearl
+    margin-right: rem(16px)
+    &:hover
+      background-color: $spun-pearl
+      color: $athens-gray-darker
+  &.is-logout
+    @include circle(rem(24px))
+    margin-left: rem(16px)
+    color: $spun-pearl
+    margin-right: rem(16px)
+    &:hover
+      color: $woodsmoke
 .button.is-primary
   background-color: $cornflower-blue
   &:hover
@@ -17,3 +40,7 @@
 .button.is-white.active
   background-color: $cornflower-blue
   color: $white
+
+.is-grouped .button
+  width: rem(90px)
+  text-align: center

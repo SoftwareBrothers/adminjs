@@ -7,20 +7,19 @@ block content
   section.view-edit
     form(method='POST' action=h.showInstanceUrl(database, model, instance))
       .level
-        h3.title Edit #{model.name()}
+        h3.title
+          a.button.is-text.is-back(href=h.listUrl(database, model))
+            span.icon.is-small
+              i.fas.fa-arrow-left
+          | Edit #{model.name()}
         .field.is-grouped
-          .control
-            a.button(href=h.listUrl(database, model))
-              span.icon.is-small
-                i(class="fas fa-angle-left")
-              .btn-text Back
           .control
             button.button.is-primary(type='submit')
               span(class="icon is-small")
                 i(class="fas fa-check")
               .btn-text Save
           .control
-            a.button(href=h.deleteInstanceUrl(database, model, instance))
+            a.button.is-primary.is-outlined(href=h.deleteInstanceUrl(database, model, instance))
               span.icon.is-small
                 i(class="fas fa-trash")
               .btn-text Remove

@@ -10,20 +10,24 @@ html
     style(type="text/css")
       != adminStyles
   body
-    section.hero.is-fullheight
+    section.login-section.hero.is-fullheight
       .hero-body
-        .container.has-text-centered
-          .column.is-4.is-offset-4
-            h3.title Login
-            p.subtitle Please login to proceed.
-            if errorMessage
-              .notification.is-danger= errorMessage
-            .box
+        .container
+          .column.is-8-tablet.is-offset-2-tablet.is-6-desktop.is-offset-3-desktop.is-4-widescreen.is-offset-4-widescreen
+            .border-box
+              .login-header.has-text-centered
+                h3.title Login
+                p Please login to proceed.
+                if errorMessage
+                  .notification.is-danger= errorMessage
+              .spacer
               form(action=action method="POST")
                 .field
+                  label.label Email
                   .control
-                    input.input.is-large(name='email' type='email', placeholder='Your Email', autofocus='')
+                    input.input(name='email' type='email', placeholder='Your Email', autofocus='')
                 .field
+                  label.label Password
                   .control
-                    input.input.is-large(name='password' type='password', placeholder='Your Password')
-                button.button.is-block.is-info.is-large.is-fullwidth Login
+                    input.input(name='password' type='password', placeholder='Your Password')
+                button.button.is-primary.is-fullwidth Login
