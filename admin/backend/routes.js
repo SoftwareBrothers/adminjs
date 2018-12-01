@@ -1,5 +1,5 @@
 const DashboardController = require('./controllers/dashboard-controller')
-const ModelsController = require('./controllers/models-controller')
+const ResourcesController = require('./controllers/resources-controller')
 
 /**
  * Contains list of all routes
@@ -27,38 +27,38 @@ class Routes {
       action: 'index',
     }, {
       method: 'GET',
-      path: '/models/{modelName}',
-      Controller: ModelsController,
+      path: '/resources/{resourceName}',
+      Controller: ResourcesController,
       action: 'index',
     }, {
       method: 'GET',
-      path: '/models/{modelName}/{instanceId}',
-      Controller: ModelsController,
+      path: '/resources/{resourceName}/{instanceId}',
+      Controller: ResourcesController,
       action: 'show',
     }, {
       method: 'GET',
-      path: '/models/{modelName}/new',
-      Controller: ModelsController,
+      path: '/resources/{resourceName}/new',
+      Controller: ResourcesController,
       action: 'new',
     }, {
       method: 'POST',
-      path: '/models/{modelName}',
-      Controller: ModelsController,
+      path: '/resources/{resourceName}',
+      Controller: ResourcesController,
       action: 'create',
     }, {
       method: 'POST',
-      path: '/models/{modelName}/{instanceId}',
-      Controller: ModelsController,
+      path: '/resources/{resourceName}/{instanceId}',
+      Controller: ResourcesController,
       action: 'update',
     }, {
       method: 'GET',
-      path: '/models/{modelName}/{instanceId}/edit',
-      Controller: ModelsController,
+      path: '/resources/{resourceName}/{instanceId}/edit',
+      Controller: ResourcesController,
       action: 'edit',
     }, {
       method: 'GET',
-      path: '/models/{modelName}/{instanceId}/delete',
-      Controller: ModelsController,
+      path: '/resources/{resourceName}/{instanceId}/delete',
+      Controller: ResourcesController,
       action: 'delete',
     }]
   }

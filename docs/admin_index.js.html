@@ -26,7 +26,26 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>const DatabasesParser = require('./backend/adapters/databases-parser')
+            <pre class="prettyprint source linenums"><code>const _ = require('lodash')
+
+const DatabasesParser = require('./backend/adapters/databases-parser')
+const ModelFactory = require('./backend/adapters/model-factory')
+const Renderer = require('./backend/utils/renderer')
+const BaseDecorator = require('./backend/utils/base-decorator')
+
+const defaults = {
+  rootPath: 'admin',
+  databases: [],
+  branding: {
+    logo: 'https://softwarebrothers.co/assets/images/software-brothers-logo-compact.svg',
+    companyName: 'Company Name',
+  },
+  models: [],
+  authenticate: async () => {
+    console.warn('you have to give authenticate function to AdmiBro settings')
+    return false
+  },
+}
 
 /**
  * Main class for Admin extension.
@@ -37,21 +56,47 @@
  *
  * @example
  * const connection = await mongoose.connect(process.env.MONGO_URL)
- * const admin = new Admin([connection], options)
- *
- * admin.databases //list of all AbstractDatabases
+ * const admin = new Admin({databases: [connection]})
  */
 class Admin {
   /**
-   * @param  {Object[]} rawDatabases array of databases which can be handled by AdminBro
-   * @param  {Object} options      options
+   * @param  {Object}   options                         options
+   * @param  {Object[]} [options.databases=[]]          list of entire database connections
+   * @param  {String}   [options.rootPath='admin']      namespace for admin routes
+   * @param  {Object[]} [options.models]                list of all models
    */
-  constructor(rawDatabases, options = {}) {
-    this.options = {
-      rootPath: 'admin',
-      ...options,
+  constructor(options = {}) {
+    this.models = []
+
+    this.options = _.merge(defaults, options)
+
+    this.findModels(options)
+  }
+
+
+  /**
+   * Find all models given by user
+   */
+  findModels({ databases, models }) {
+    if (databases &amp;&amp; databases.length > 0) {
+      const rawModels = DatabasesParser(this.options.databases).reduce((m, database) => {
+        return m.concat(database.all())
+      }, [])
+      this.models = rawModels.map(m => ModelFactory(m.model))
     }
-    this.databases = DatabasesParser(rawDatabases)
+    if (models &amp;&amp; models.length > 0) {
+      this.models = this.models.concat(models.map((m) => {
+        if (m.toString() === '[object Object]') {
+          const model = ModelFactory(m.model, m.decorator)
+          return model
+        }
+        return ModelFactory(m)
+      }))
+    }
+  }
+
+  findModel(modelId) {
+    return this.models.find(m => m.id() === modelId)
   }
 
   /**
@@ -62,9 +107,15 @@ class Admin {
   database(name) {
     return this.databases[name]
   }
+
+  static async renderLogin({ action, errorMessage }) {
+    return new Renderer('pages/login', { action, errorMessage }).render()
+  }
 }
 
 module.exports = Admin
+
+module.exports.BaseDecorator = BaseDecorator
 </code></pre>
         </article>
     </section>
@@ -75,13 +126,13 @@ module.exports = Admin
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-examples_hapijs.html">examples/hapijs</a></li><li><a href="module-Integrations_hapijs.html">Integrations/hapijs</a></li></ul><h3>Classes</h3><ul><li><a href="AbstractDatabase.html">AbstractDatabase</a></li><li><a href="AbstractInstance.html">AbstractInstance</a></li><li><a href="AbstractModel.html">AbstractModel</a></li><li><a href="AbstractProperty.html">AbstractProperty</a></li><li><a href="Admin.html">Admin</a></li><li><a href="Model.html">Model</a></li><li><a href="MongooseAdapter.Database.html">Database</a></li><li><a href="Property.html">Property</a></li><li><a href="Routes.html">Routes</a></li></ul><h3>Namespaces</h3><ul><li><a href="MongooseAdapter.html">MongooseAdapter</a></li></ul><h3>Tutorials</h3><ul><li><a href="tutorial-example-tutorial.html">Example tutorial</a></li></ul><h3>Global</h3><ul><li><a href="global.html#DatabaseFactory">DatabaseFactory</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-examples_hapijs.html">examples/hapijs</a></li><li><a href="module-Integrations_hapijs.html">Integrations/hapijs</a></li></ul><h3>Classes</h3><ul><li><a href="AbstractDatabase.html">AbstractDatabase</a></li><li><a href="AbstractInstance.html">AbstractInstance</a></li><li><a href="Admin.html">Admin</a></li><li><a href="BaseController.html">BaseController</a></li><li><a href="BaseDecorator.html">BaseDecorator</a></li><li><a href="BaseModel.html">BaseModel</a></li><li><a href="BaseProperty.html">BaseProperty</a></li><li><a href="Model.html">Model</a></li><li><a href="MongooseAdapter.Database.html">Database</a></li><li><a href="Property.html">Property</a></li><li><a href="Routes.html">Routes</a></li><li><a href="ValidationError.html">ValidationError</a></li></ul><h3>Namespaces</h3><ul><li><a href="Controllers.html">Controllers</a></li><li><a href="MongooseAdapter.html">MongooseAdapter</a></li></ul><h3>Tutorials</h3><ul><li><a href="tutorial-example-tutorial.html">Example tutorial</a></li></ul><h3>Global</h3><ul><li><a href="global.html#DatabaseFactory">DatabaseFactory</a></li><li><a href="global.html#ModelFactory">ModelFactory</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Tue Nov 27 2018 06:40:41 GMT+0000 (Coordinated Universal Time)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Sat Dec 01 2018 19:37:16 GMT+0000 (Coordinated Universal Time)
 </footer>
 
 <script> prettyPrint(); </script>

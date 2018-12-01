@@ -2,7 +2,7 @@ const NotImplementedError = require('../../utils/not-implemented-error')
 const TITLE_COLUMN_NAMES = ['title', 'name', 'subject']
 
 /**
- * Represents model properties
+ * Represents resource properties
  */
 class BaseProperty {
 

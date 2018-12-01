@@ -121,9 +121,9 @@ const start = async () => {
     const connection = await mongoose.connect(process.env.MONGO_URL)
 
     const adminBroOptions = {
-      databases: [],
-      models: [
-        { model: Article, decorator: ArticleDecorator },
+      databases: [connection],
+      resources: [
+        { resource: Article, decorator: ArticleDecorator },
       ],
       branding: {
         companyName: 'Amazing c.o.',

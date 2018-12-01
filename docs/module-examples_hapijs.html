@@ -132,6 +132,82 @@
     
 
     
+        <h3 class="subsection-title">Members</h3>
+
+        
+            
+<h4 class="name" id="~AdminModel"><span class="type-signature">(inner, constant) </span>AdminModel<span class="type-signature"> :Mongoose.model</span></h4>
+
+
+
+
+<div class="description">
+    <script type="text/javascript" src="https://unpkg.com/mermaid@7.1.0/dist/mermaid.min.js"></script><p>Model which will store all admins</p>
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">Mongoose.model</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="examples_hapijs_index.js.html">examples/hapijs/index.js</a>, <a href="examples_hapijs_index.js.html#line29">line 29</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+    
 
     
         <h3 class="subsection-title">Methods</h3>
@@ -142,7 +218,7 @@
     
 
     
-    <h4 class="name" id="~start"><span class="type-signature">(async, inner) </span>start<span class="signature">()</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="~createAdminIfNone"><span class="type-signature">(async, inner) </span>createAdminIfNone<span class="signature">()</span><span class="type-signature"></span></h4>
     
 
     
@@ -150,7 +226,8 @@
 
 
 <div class="description">
-    <script type="text/javascript" src="https://unpkg.com/mermaid@7.1.0/dist/mermaid.min.js"></script><p>Initialization function</p>
+    <script type="text/javascript" src="https://unpkg.com/mermaid@7.1.0/dist/mermaid.min.js"></script><p>Creates first admin <a href="mailto:test@example.com">test@example.com</a>:password when there are no
+admins in the database</p>
 </div>
 
 
@@ -194,7 +271,323 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="examples_hapijs_index.js.html">examples/hapijs/index.js</a>, <a href="examples_hapijs_index.js.html#line16">line 16</a>
+        <a href="examples_hapijs_index.js.html">examples/hapijs/index.js</a>, <a href="examples_hapijs_index.js.html#line35">line 35</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="~registerAuthRoutes"><span class="type-signature">(async, inner) </span>registerAuthRoutes<span class="signature">()</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <script type="text/javascript" src="https://unpkg.com/mermaid@7.1.0/dist/mermaid.min.js"></script><p>Creates authentication logic for admin users</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>options.server</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Hapi</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Hapi.js server instance</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>options.adminBroOptions</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Configiration options passed to admin bro</p>
+                <h6>Properties</h6>
+                
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>logoutPath</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>loginPath</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+            </td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="examples_hapijs_index.js.html">examples/hapijs/index.js</a>, <a href="examples_hapijs_index.js.html#line51">line 51</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="~start"><span class="type-signature">(async, inner) </span>start<span class="signature">()</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <script type="text/javascript" src="https://unpkg.com/mermaid@7.1.0/dist/mermaid.min.js"></script><p>Initialization function for the application with the adminBro setup</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="examples_hapijs_index.js.html">examples/hapijs/index.js</a>, <a href="examples_hapijs_index.js.html#line115">line 115</a>
     </li></ul></dd>
     
 
@@ -238,13 +631,13 @@
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-examples_hapijs.html">examples/hapijs</a></li><li><a href="module-Integrations_hapijs.html">Integrations/hapijs</a></li></ul><h3>Classes</h3><ul><li><a href="AbstractDatabase.html">AbstractDatabase</a></li><li><a href="AbstractInstance.html">AbstractInstance</a></li><li><a href="AbstractModel.html">AbstractModel</a></li><li><a href="AbstractProperty.html">AbstractProperty</a></li><li><a href="Admin.html">Admin</a></li><li><a href="Model.html">Model</a></li><li><a href="MongooseAdapter.Database.html">Database</a></li><li><a href="Property.html">Property</a></li><li><a href="Routes.html">Routes</a></li></ul><h3>Namespaces</h3><ul><li><a href="MongooseAdapter.html">MongooseAdapter</a></li></ul><h3>Tutorials</h3><ul><li><a href="tutorial-example-tutorial.html">Example tutorial</a></li></ul><h3>Global</h3><ul><li><a href="global.html#DatabaseFactory">DatabaseFactory</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-examples_hapijs.html">examples/hapijs</a></li><li><a href="module-Integrations_hapijs.html">Integrations/hapijs</a></li></ul><h3>Classes</h3><ul><li><a href="AbstractDatabase.html">AbstractDatabase</a></li><li><a href="AbstractInstance.html">AbstractInstance</a></li><li><a href="Admin.html">Admin</a></li><li><a href="BaseController.html">BaseController</a></li><li><a href="BaseDecorator.html">BaseDecorator</a></li><li><a href="BaseModel.html">BaseModel</a></li><li><a href="BaseProperty.html">BaseProperty</a></li><li><a href="Model.html">Model</a></li><li><a href="MongooseAdapter.Database.html">Database</a></li><li><a href="Property.html">Property</a></li><li><a href="Routes.html">Routes</a></li><li><a href="ValidationError.html">ValidationError</a></li></ul><h3>Namespaces</h3><ul><li><a href="Controllers.html">Controllers</a></li><li><a href="MongooseAdapter.html">MongooseAdapter</a></li></ul><h3>Tutorials</h3><ul><li><a href="tutorial-example-tutorial.html">Example tutorial</a></li></ul><h3>Global</h3><ul><li><a href="global.html#DatabaseFactory">DatabaseFactory</a></li><li><a href="global.html#ModelFactory">ModelFactory</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Tue Nov 27 2018 06:40:42 GMT+0000 (Coordinated Universal Time)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Sat Dec 01 2018 19:37:17 GMT+0000 (Coordinated Universal Time)
 </footer>
 
 <script> prettyPrint(); </script>

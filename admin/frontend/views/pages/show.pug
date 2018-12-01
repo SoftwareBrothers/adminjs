@@ -4,30 +4,30 @@ include ../mixins/breadcrumb
 
 block content
   secton.show-details
-    +breadcrumb([currentModel.decorate().getModelName(), instance.title()])
+    +breadcrumb([currentResource.decorate().getResourceName(), instance.title()])
     .column
       .level
         .title
-          a.button.is-text.is-back(href=h.listUrl(currentModel))
+          a.button.is-text.is-back(href=h.listUrl(currentResource))
             span.icon.is-small
               i.fas.fa-arrow-left
           | Details
         .field.is-grouped
           .control
-            a.button.is-primary(href=h.editInstanceUrl(currentModel, instance))
+            a.button.is-primary(href=h.editInstanceUrl(currentResource, instance))
               span.icon
                 i.fas.fa-pen
               .btn-text Edit
           .control
-            a.button.is-primary.is-outlined(href=h.deleteInstanceUrl(currentModel, instance))
+            a.button.is-primary.is-outlined(href=h.deleteInstanceUrl(currentResource, instance))
               span.icon
                 i.fas.fa-trash-alt
               .btn-text Remove
     .column
       .border-box
-        for prop in currentModel.decorate().getShowProperties()
+        for prop in currentResource.decorate().getShowProperties()
           .property
             .card-content
               .text-small #{h._.startCase(prop.name())}
               div(class={ 'feature' : properties.indexOf(prop) === 0 })
-                != currentModel.decorate().getValue({ instance, property: prop, where: 'show', helpers: h})
+                != currentResource.decorate().getValue({ instance, property: prop, where: 'show', helpers: h})

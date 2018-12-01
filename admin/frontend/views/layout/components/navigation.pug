@@ -1,11 +1,11 @@
 p.menu-label Navigation
 ul.menu-list
-  for modelList, key in models
+  for resourceList, key in resources
     li
       span.menu-item-main
         = h._.startCase(key)
       ul.menu-list
-        for model in modelList
+        for resource in resourceList
           li
-            a(href=h.listUrl(model) class={ 'is-active' : currentModel && currentModel.id() === model.id() })
-              = model.decorate().getModelName()
+            a(href=h.listUrl(resource) class={ 'is-active' : currentResource && currentResource.id() === resource.id() })
+              = resource.decorate().getResourceName()

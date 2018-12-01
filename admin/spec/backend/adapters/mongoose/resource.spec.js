@@ -1,24 +1,17 @@
 const mongoose = require('mongoose')
-const Model = require('@backend/adapters/mongoose/model')
-const Instance = require('@backend/adapters/mongoose/instance')
+const Resource = require('@backend/adapters/mongoose/resource')
+const Instance = require('@backend/adapters/base/instance')
 const Property = require('@backend/adapters/mongoose/property')
 const originalValidationError = require('@fixtures/mongoose-validation-error')
 const ValidationError = require('@backend/utils/validation-error')
 
-const UserSchema = new mongoose.Schema({
-  email: { type: String, required: true },
-  passwordHash: { type: String, required: true },
-})
-
-const User = mongoose.model('User', UserSchema)
-
-factory.define('user', User, {
-  email: factory.sequence('User.email', n => `john@doe${n}.com`),
-  passwordHash: 'somehashedpassword',
-})
-
-describe('Model', function () {
+describe('Resource', function () {
   before(async function () {
+    factory.define('user', User, {
+      email: factory.sequence('User.email', n => `john@doe${n}.com`),
+      passwordHash: 'somehashedpassword',
+    })
+
     this.mongooseConnection = await mongoose.connect(process.env.MONGO_URL)
     this.count = 12
     this.userInstances = await factory.createMany('user', this.count)
@@ -29,24 +22,10 @@ describe('Model', function () {
     mongoose.connection.close()
   })
 
-  describe('.all', function () {
-    beforeEach(function () {
-      this.models = Model.all(this.mongooseConnection)
-    })
-
-    it('return all models', function () {
-      expect(this.models).to.have.lengthOf(1)
-    })
-
-    it('return instances of Models class', function () {
-      expect(this.models[0]).to.be.an.instanceof(Model)
-    })
-  })
-
   describe('#CreateValidationError', function () {
     beforeEach(function () {
-      const model = new Model(User)
-      this.error = model.createValidationError(originalValidationError)
+      const resource = new Resource(User)
+      this.error = resource.createValidationError(originalValidationError)
     })
 
     it('has errors', function () {
@@ -60,27 +39,27 @@ describe('Model', function () {
 
   describe('#constructor', function () {
     it('stores original model', function () {
-      const model = new Model(User)
-      expect(model.model).to.equal(User)
+      const resource = new Resource(User)
+      expect(resource.resource).to.equal(User)
     })
   })
 
   describe('#count', function () {
     beforeEach(function () {
-      this.model = new Model(User)
+      this.resource = new Resource(User)
     })
 
     it('returns given count', async function () {
-      expect(await this.model.count()).to.equal(this.count)
+      expect(await this.resource.count()).to.equal(this.count)
     })
   })
 
   describe('#find', function () {
     beforeEach(async function () {
-      this.model = new Model(User)
+      this.resource = new Resource(User)
       this.limit = 5
       this.offset = 0
-      this.ret = await this.model.find({}, {
+      this.ret = await this.resource.find({}, {
         limit: this.limit,
         offset: this.offset,
       })
@@ -97,15 +76,15 @@ describe('Model', function () {
 
   describe('#name', function () {
     it('returns name of the model', function () {
-      this.model = new Model(User)
-      expect(this.model.name()).to.equal('User')
+      this.resource = new Resource(User)
+      expect(this.resource.name()).to.equal('User')
     })
   })
 
   describe('#properties', function () {
     beforeEach(function () {
-      this.model = new Model(User)
-      this.ret = this.model.properties()
+      this.resource = new Resource(User)
+      this.ret = this.resource.properties()
     })
 
     it('returns correct amount of properties', function () {
@@ -125,8 +104,8 @@ describe('Model', function () {
             anotherSubField: String,
           },
         }))
-        this.model = new Model(Nested)
-        this.ret = this.model.properties()
+        this.resource = new Resource(Nested)
+        this.ret = this.resource.properties()
       })
 
       it('returns all fields', function () {
@@ -137,8 +116,8 @@ describe('Model', function () {
 
   describe('#property', function () {
     beforeEach(function () {
-      this.model = new Model(User)
-      this.ret = this.model.property('email')
+      this.resource = new Resource(User)
+      this.ret = this.resource.property('email')
     })
 
     it('returns selected property for an email', function () {
@@ -154,12 +133,12 @@ describe('Model', function () {
     context('correct record', function () {
       beforeEach(async function () {
         this.params = { email: 'john@doe.com', passwordHash: 'somesecretpasswordhash' }
-        this.model = new Model(User)
-        this.instance = await this.model.create(this.params)
+        this.resource = new Resource(User)
+        this.instance = await this.resource.create(this.params)
       })
 
       it('creates new object', async function () {
-        expect(await this.model.count()).to.equal(this.count + 1)
+        expect(await this.resource.count()).to.equal(this.count + 1)
       })
 
       it('returns Object', function () {
@@ -170,12 +149,12 @@ describe('Model', function () {
     context('record with errors', function () {
       beforeEach(async function () {
         this.params = { email: '', passwordHash: '' }
-        this.model = new Model(User)
+        this.resource = new Resource(User)
       })
 
       it('throws validation error', async function () {
         try {
-          await this.model.create(this.params)
+          await this.resource.create(this.params)
         } catch (error) {
           expect(error).to.be.an.instanceOf(ValidationError)
         }
@@ -187,8 +166,8 @@ describe('Model', function () {
     beforeEach(async function () {
       this.startCount = await User.countDocuments()
       this.idOfItemToDelete = this.userInstances[0]._id
-      this.model = new Model(User)
-      await this.model.delete(this.idOfItemToDelete)
+      this.resource = new Resource(User)
+      await this.resource.delete(this.idOfItemToDelete)
     })
 
     it('removes the item from the database', async function () {

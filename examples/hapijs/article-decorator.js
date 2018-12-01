@@ -3,10 +3,10 @@ const { BaseDecorator } = require('../../admin/index')
 class ArticleDecorator extends BaseDecorator {
   constructor(params) {
     super(params)
-    this.modelName = 'Artykuły'
+    this.resourceName = 'Artykuły'
     this.listProperties = ['title', 'content', 'publishedAt']
     this.showProperties = ['title', 'publishedAt']
-    this.parentName = 'Main Models'
+    this.parentName = 'Blog'
   }
 
   getValue({ instance, property, where, helpers }) {
@@ -15,7 +15,7 @@ class ArticleDecorator extends BaseDecorator {
       return `
         <p>Here goes a paragraph</p>
         <p>and another one</p>
-        <a href="${helpers.showInstanceUrl(instance.model, instance)}">Link somewere</>
+        <a href="${helpers.showInstanceUrl(instance.resource, instance)}">Link somewere</>
       `
     default:
       return super.getValue({ instance, property, where, helpers })

@@ -205,7 +205,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="admin_backend_adapters_database-factory.js.html">admin/backend/adapters/database-factory.js</a>, <a href="admin_backend_adapters_database-factory.js.html#line9">line 9</a>
+        <a href="admin_backend_adapters_database-factory.js.html">admin/backend/adapters/database-factory.js</a>, <a href="admin_backend_adapters_database-factory.js.html#line10">line 10</a>
     </li></ul></dd>
     
 
@@ -257,6 +257,207 @@
 
 
         
+            
+
+    
+
+    
+    <h4 class="name" id="ModelFactory"><span class="type-signature"></span>ModelFactory<span class="signature">(model, decorator<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {AbstractModel}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <script type="text/javascript" src="https://unpkg.com/mermaid@7.1.0/dist/mermaid.min.js"></script><p>It changes raw model object to instance which inherits from AbstractModel</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>model</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last"><p>raw database model</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>decorator</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="BaseDecorator.html">BaseDecorator</a></span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last"><p>decorator used to decorate model</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="admin_backend_adapters_model-factory.js.html">admin/backend/adapters/model-factory.js</a>, <a href="admin_backend_adapters_model-factory.js.html#line13">line 13</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>instance of class which extends AbstractModel. Right
+                                     now only MongooseModel is supported</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">AbstractModel</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
     
 
     
@@ -272,13 +473,13 @@
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-examples_hapijs.html">examples/hapijs</a></li><li><a href="module-Integrations_hapijs.html">Integrations/hapijs</a></li></ul><h3>Classes</h3><ul><li><a href="AbstractDatabase.html">AbstractDatabase</a></li><li><a href="AbstractInstance.html">AbstractInstance</a></li><li><a href="AbstractModel.html">AbstractModel</a></li><li><a href="AbstractProperty.html">AbstractProperty</a></li><li><a href="Admin.html">Admin</a></li><li><a href="Model.html">Model</a></li><li><a href="MongooseAdapter.Database.html">Database</a></li><li><a href="Property.html">Property</a></li><li><a href="Routes.html">Routes</a></li></ul><h3>Namespaces</h3><ul><li><a href="MongooseAdapter.html">MongooseAdapter</a></li></ul><h3>Tutorials</h3><ul><li><a href="tutorial-example-tutorial.html">Example tutorial</a></li></ul><h3>Global</h3><ul><li><a href="global.html#DatabaseFactory">DatabaseFactory</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-examples_hapijs.html">examples/hapijs</a></li><li><a href="module-Integrations_hapijs.html">Integrations/hapijs</a></li></ul><h3>Classes</h3><ul><li><a href="AbstractDatabase.html">AbstractDatabase</a></li><li><a href="AbstractInstance.html">AbstractInstance</a></li><li><a href="Admin.html">Admin</a></li><li><a href="BaseController.html">BaseController</a></li><li><a href="BaseDecorator.html">BaseDecorator</a></li><li><a href="BaseModel.html">BaseModel</a></li><li><a href="BaseProperty.html">BaseProperty</a></li><li><a href="Model.html">Model</a></li><li><a href="MongooseAdapter.Database.html">Database</a></li><li><a href="Property.html">Property</a></li><li><a href="Routes.html">Routes</a></li><li><a href="ValidationError.html">ValidationError</a></li></ul><h3>Namespaces</h3><ul><li><a href="Controllers.html">Controllers</a></li><li><a href="MongooseAdapter.html">MongooseAdapter</a></li></ul><h3>Tutorials</h3><ul><li><a href="tutorial-example-tutorial.html">Example tutorial</a></li></ul><h3>Global</h3><ul><li><a href="global.html#DatabaseFactory">DatabaseFactory</a></li><li><a href="global.html#ModelFactory">ModelFactory</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Tue Nov 27 2018 06:40:41 GMT+0000 (Coordinated Universal Time)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Sat Dec 01 2018 19:37:16 GMT+0000 (Coordinated Universal Time)
 </footer>
 
 <script> prettyPrint(); </script>

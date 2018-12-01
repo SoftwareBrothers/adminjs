@@ -4,12 +4,12 @@ class ExampleDecorator extends BaseDecorator {
   constructor(params) {
     super(params)
 
-    // Name of the model
-    this.modelName = 'My collection'
+    // Name of the resource
+    this.resourceName = 'My collection'
     this.listProperties = ['title', 'content', 'publishedAt']
   }
 
-  modelName() {}
+  resourceName() {}
 }
 
 module.exports = ExampleDecorator

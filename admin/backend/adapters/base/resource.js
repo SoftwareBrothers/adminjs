@@ -1,11 +1,11 @@
 const NotImplementedError = require('../../utils/not-implemented-error')
 
 /**
- * Representation of a ORM Model in AdminBro
+ * Representation of a ORM Resource in AdminBro
  */
-class BaseModel {
+class BaseResource {
   /**
-   * Return name of the model
+   * Return name of the resource
    * @return {String}
    */
   name() {
@@ -29,7 +29,7 @@ class BaseModel {
   }
 
   /**
-   * Returns number of elements for given model
+   * Returns number of elements for given resource
    * @return {Number}
    */
   count() {
@@ -37,7 +37,7 @@ class BaseModel {
   }
 
   /**
-   * Returns actual records for given model
+   * Returns actual records for given resource
    * @param  {Object} where           query
    * @param  {Number} options.limit   how many records should be taken
    * @param  {Number} options.offset  offset
@@ -82,4 +82,4 @@ class BaseModel {
   }
 }
 
-module.exports = BaseModel
+module.exports = BaseResource

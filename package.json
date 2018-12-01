@@ -29,7 +29,10 @@
     "@fixtures": "./admin/spec/backend/fixtures"
   },
   "nodemonConfig": {
-    "ignore": ["admin/spec/*", "docs/*"]
+    "ignore": [
+      "admin/spec/*",
+      "docs/*"
+    ]
   },
   "author": "Wojciech Krysiak",
   "license": "MIT",

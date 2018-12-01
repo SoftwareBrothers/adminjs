@@ -3,27 +3,27 @@ const BaseProperty = require('../adapters/base/property')
 const DEFAULT_MAX_ITEMS_IN_LIST = 5
 
 /**
- * Base decorator class which decorates the Model.
+ * Base decorator class which decorates the Resource.
  * It can be easily overriden in settings
  */
 class BaseDecorator {
   /**
-   * @param  {AbstractModel} model  model which is decorated
+   * @param  {BaseResource} resource  resource which is decorated
    */
-  constructor(model) {
-    this._model = model
+  constructor(resource) {
+    this._resource = resource
   }
 
   /**
-   * Returns the name for the model.
-   * @return {String} model name
+   * Returns the name for the resource.
+   * @return {String} resource name
    */
-  getModelName() {
-    return this.invokeOrGet('modelName') || this._model.name()
+  getResourceName() {
+    return this.invokeOrGet('resourceName') || this._resource.name()
   }
 
   getParent() {
-    return this.invokeOrGet('parentName') || this._model.databaseName()
+    return this.invokeOrGet('parentName') || this._resource.databaseName()
   }
 
   /**
@@ -35,7 +35,7 @@ class BaseDecorator {
     if (overridenProperties) {
       return overridenProperties.map(p => this.nameToProperty(p))
     }
-    return this._model.properties().filter(p => p.isVisible()).slice(0, DEFAULT_MAX_ITEMS_IN_LIST)
+    return this._resource.properties().filter(p => p.isVisible()).slice(0, DEFAULT_MAX_ITEMS_IN_LIST)
   }
 
   getShowProperties() {
@@ -43,12 +43,12 @@ class BaseDecorator {
     if (overridenProperties) {
       return overridenProperties.map(p => this.nameToProperty(p))
     }
-    return this._model.properties().filter(p => p.isEditable())
+    return this._resource.properties().filter(p => p.isEditable())
   }
 
 
   nameToProperty(propertyName) {
-    const property = this._model.property(propertyName)
+    const property = this._resource.property(propertyName)
     if (!property) {
       return new BaseProperty({ path: propertyName })
     }

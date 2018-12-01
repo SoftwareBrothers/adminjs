@@ -3,15 +3,15 @@ include ../mixins/form-group.pug
 include ../mixins/breadcrumb
 
 block content
-  +breadcrumb([currentModel.name()])
+  +breadcrumb([currentResource.name()])
   section.view-edit
-    form(method='POST' action=h.listUrl(currentModel))
+    form(method='POST' action=h.listUrl(currentResource))
       .level
         h3.title
-          a.button.is-text.is-back(href=h.listUrl(currentModel))
+          a.button.is-text.is-back(href=h.listUrl(currentResource))
             span.icon.is-small
               i.fas.fa-arrow-left
-          | Create #{currentModel.name()}
+          | Create #{currentResource.name()}
         .field.is-grouped
           .control
             button.button.is-primary(type='submit')

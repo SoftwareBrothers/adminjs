@@ -3,16 +3,16 @@ include ../mixins/form-group
 include ../mixins/breadcrumb
 
 block content
-  +breadcrumb([currentModel.decorate().getModelName(),
+  +breadcrumb([currentResource.decorate().getResourceName(),
                  instance.title(), 'edit'])
   section.view-edit
-    form(method='POST' action=h.showInstanceUrl(currentModel, instance))
+    form(method='POST' action=h.showInstanceUrl(currentResource, instance))
       .level
         h3.title
-          a.button.is-text.is-back(href=h.listUrl(currentModel))
+          a.button.is-text.is-back(href=h.listUrl(currentResource))
             span.icon.is-small
               i.fas.fa-arrow-left
-          | Edit #{currentModel.name()}
+          | Edit #{currentResource.name()}
         .field.is-grouped
           .control
             button.button.is-primary(type='submit')
@@ -20,7 +20,7 @@ block content
                 i(class="fas fa-check")
               .btn-text Save
           .control
-            a.button.is-primary.is-outlined(href=h.deleteInstanceUrl(currentModel, instance))
+            a.button.is-primary.is-outlined(href=h.deleteInstanceUrl(currentResource, instance))
               span.icon.is-small
                 i(class="fas fa-trash")
               .btn-text Remove

@@ -33,33 +33,151 @@
  */
 
 const Hapi = require('hapi')
+const HapiAuthCookie = require('hapi-auth-cookie')
 const mongoose = require('mongoose')
+
+// We use Bcrypt to hash password
+const Bcrypt = require('bcrypt')
 const adminBro = require('../../admin/integrations/hapi')
-require('./user-model')
-require('./article-model')
+
+require('../mongoose/user-model')
+const Article = require('../mongoose/article-model')
+const Page = require('../mongoose/page-model')
+require('../mongoose/comment-model')
+require('../mongoose/blog-post-model')
+require('../mongoose/category-model')
+
+
+const ArticleDecorator = require('./article-decorator')
 
 /**
- * Initialization function
+ * Model which will store all admins
+ * @type {Mongoose.model}
+ */
+const AdminModel = require('../mongoose/admin-model')
+
+/**
+ * Creates first admin test@example.com:password when there are no
+ * admins in the database
+ */
+const createAdminIfNone = async () => {
+  const existingAdmin = await AdminModel.countDocuments() > 0
+  if (!existingAdmin) {
+    const password = await Bcrypt.hash('password', 10)
+    const admin = new AdminModel({ email: 'test@example.com', password })
+    await admin.save()
+  }
+}
+
+/**
+ * Creates authentication logic for admin users
+ * @param  {Hapi} options.server            Hapi.js server instance
+ * @param  {Object} options.adminBroOptions Configiration options passed to admin bro
+ * @param  {String} options.adminBroOptions.logoutPath
+ * @param  {String} options.adminBroOptions.loginPath
+ */
+const registerAuthRoutes = async ({ server, adminBroOptions }) => {
+  const { logoutPath, loginPath } = adminBroOptions
+
+  // example authentication is based on the cookie store
+  await server.register(HapiAuthCookie)
+
+  server.auth.strategy('session', 'cookie', {
+    // Make sure you change password used to secure content in cookies
+    password: process.env.SESSION_PASSWORD || 'ksjdcirshaoscdoasoghjklw2nsyehsk',
+    cookie: 'adminBro',
+    redirectTo: loginPath,
+    isSecure: false,
+  })
+
+  // Warning - in the example we set default auth to session.
+  // It means that when you create another routes they will be using
+  // this type, unless you override this in route options.
+  server.auth.default('session')
+
+  server.route({
+    method: ['POST', 'GET'],
+    path: loginPath,
+    options: {
+      auth: { mode: 'try' },
+      plugins: { 'hapi-auth-cookie': { redirectTo: false } },
+    },
+    handler: async (request, h) => {
+      try {
+        let errorMessage = null
+        if (request.method === 'post') {
+          const admin = await AdminModel.findOne({ email: request.payload.email })
+          const isValid = admin &amp;&amp; await Bcrypt.compare(request.payload.password, admin.password)
+          if (isValid) {
+            request.cookieAuth.set(admin)
+            return h.redirect(adminBroOptions.rootPath)
+          }
+          errorMessage = 'Wrong email and/or password'
+        }
+
+        // AdminBro exposes function which renders login form for us.
+        // It takes 2 arguments:
+        // - options.action (with login path)
+        // - [errorMessage] optional error message - visible when user
+        //                  gives wrong credentials
+        return adminBro.renderLogin({ action: loginPath, errorMessage })
+      } catch (e) {
+        console.log(e)
+      }
+    },
+  })
+
+  server.route({
+    method: 'GET',
+    path: logoutPath,
+    handler: async (request, h) => {
+      request.cookieAuth.clear()
+      return h.redirect(loginPath)
+    },
+  })
+}
+
+/**
+ * Initialization function for the application with the adminBro setup
  */
 const start = async () => {
   let serverInfo
   try {
-    const connection = await mongoose.connect(process.env.MONGO_URL)
-    const adminOptions = { databases: [connection] }
-
     const server = Hapi.server({ port: process.env.PORT })
+
+    // We use MongoDB database
+    const connection = await mongoose.connect(process.env.MONGO_URL)
+
+    const adminBroOptions = {
+      databases: [],
+      models: [
+        { model: Article, decorator: ArticleDecorator },
+      ],
+      branding: {
+        companyName: 'Amazing c.o.',
+      },
+      auth: 'session',
+      rootPath: '/admin',
+      logoutPath: '/admin/logout',
+      loginPath: '/admin/login',
+    }
+
+    // invoke previousely defined functions
+    await createAdminIfNone()
+    await registerAuthRoutes({ server, adminBroOptions })
 
     await server.register({
       plugin: adminBro,
-      options: adminOptions,
+      options: adminBroOptions,
     })
+
     await server.start()
-    serverInfo = await server.start(connection)
+    serverInfo = server.info
   } catch (err) {
     console.log(err)
     process.exit(1)
   }
-  console.log('Server running at:', serverInfo.info.uri)
+  console.log('Server running at:', serverInfo.uri)
 }
 
 start()
@@ -73,13 +191,13 @@ start()
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-examples_hapijs.html">examples/hapijs</a></li><li><a href="module-Integrations_hapijs.html">Integrations/hapijs</a></li></ul><h3>Classes</h3><ul><li><a href="AbstractDatabase.html">AbstractDatabase</a></li><li><a href="AbstractInstance.html">AbstractInstance</a></li><li><a href="AbstractModel.html">AbstractModel</a></li><li><a href="AbstractProperty.html">AbstractProperty</a></li><li><a href="Admin.html">Admin</a></li><li><a href="Model.html">Model</a></li><li><a href="MongooseAdapter.Database.html">Database</a></li><li><a href="Property.html">Property</a></li><li><a href="Routes.html">Routes</a></li></ul><h3>Namespaces</h3><ul><li><a href="MongooseAdapter.html">MongooseAdapter</a></li></ul><h3>Tutorials</h3><ul><li><a href="tutorial-example-tutorial.html">Example tutorial</a></li></ul><h3>Global</h3><ul><li><a href="global.html#DatabaseFactory">DatabaseFactory</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-examples_hapijs.html">examples/hapijs</a></li><li><a href="module-Integrations_hapijs.html">Integrations/hapijs</a></li></ul><h3>Classes</h3><ul><li><a href="AbstractDatabase.html">AbstractDatabase</a></li><li><a href="AbstractInstance.html">AbstractInstance</a></li><li><a href="Admin.html">Admin</a></li><li><a href="BaseController.html">BaseController</a></li><li><a href="BaseDecorator.html">BaseDecorator</a></li><li><a href="BaseModel.html">BaseModel</a></li><li><a href="BaseProperty.html">BaseProperty</a></li><li><a href="Model.html">Model</a></li><li><a href="MongooseAdapter.Database.html">Database</a></li><li><a href="Property.html">Property</a></li><li><a href="Routes.html">Routes</a></li><li><a href="ValidationError.html">ValidationError</a></li></ul><h3>Namespaces</h3><ul><li><a href="Controllers.html">Controllers</a></li><li><a href="MongooseAdapter.html">MongooseAdapter</a></li></ul><h3>Tutorials</h3><ul><li><a href="tutorial-example-tutorial.html">Example tutorial</a></li></ul><h3>Global</h3><ul><li><a href="global.html#DatabaseFactory">DatabaseFactory</a></li><li><a href="global.html#ModelFactory">ModelFactory</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Tue Nov 27 2018 06:40:41 GMT+0000 (Coordinated Universal Time)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Sat Dec 01 2018 19:37:16 GMT+0000 (Coordinated Universal Time)
 </footer>
 
 <script> prettyPrint(); </script>

@@ -2,13 +2,13 @@ const BaseDecorator = require('@backend/utils/base-decorator')
 const BaseProperty = require('@backend/adapters/base/property')
 
 
-describe.only('BaseDecorator', function () {
+describe('BaseDecorator', function () {
   beforeEach(function () {
     this.properties = [...Array(10)].map(p => new BaseProperty({ name: 1, type: 'string' }))
-    this.modelName = 'modelName'
-    this.mockedModel = {
+    this.resourceName = 'resourceName'
+    this.mockedResource = {
       properties: this.sinon.stub().returns(this.properties),
-      name: this.sinon.stub().returns(this.modelName),
+      name: this.sinon.stub().returns(this.resourceName),
       property: this.sinon.stub().returns(new BaseProperty({ name: 'prop', type: 'string' })),
     }
   })
@@ -22,7 +22,7 @@ describe.only('BaseDecorator', function () {
         }
         overwritenFunction() { return 'overwritenFunctionValue' }
       }
-      this.decorator = new Decorator(this.mockedModel)
+      this.decorator = new Decorator(this.mockedResource)
     })
 
     it('returns null when there is no override', function () {
@@ -38,16 +38,16 @@ describe.only('BaseDecorator', function () {
     })
   })
 
-  describe('#getModelName', function () {
-    it('returns model name when not ovverriden', function () {
-      const decorator = new BaseDecorator(this.mockedModel)
-      expect(decorator.getModelName()).to.equal(this.modelName)
+  describe('#getResourceName', function () {
+    it('returns resource name when not ovverriden', function () {
+      const decorator = new BaseDecorator(this.mockedResource)
+      expect(decorator.getResourceName()).to.equal(this.resourceName)
     })
   })
 
   describe('#getListProperties', function () {
-    it('returns first 5 visible properties from model when not overwriten', function () {
-      this.decorator = new BaseDecorator(this.mockedModel)
+    it('returns first 5 visible properties from resource when not overwriten', function () {
+      this.decorator = new BaseDecorator(this.mockedResource)
       expect(this.decorator.getListProperties()).to.have.lengthOf(5)
     })
 
@@ -59,19 +59,19 @@ describe.only('BaseDecorator', function () {
             this.listProperties = ['prop1', 'prop2', 'prop3']
           }
         }
-        this.decorator = new Decorator(this.mockedModel)
+        this.decorator = new Decorator(this.mockedResource)
       })
 
       it('returns given properties', function () {
         this.propertyName = 'someProperty'
-        this.mockedModel.property.returns({ name: this.propertyName })
+        this.mockedResource.property.returns({ name: this.propertyName })
         const properties = this.decorator.getListProperties()
         expect(properties).to.have.lengthOf(3)
         expect(properties[0].name).to.equal(this.propertyName)
       })
 
       it('creates new property when it overwriten doesnt exist', function () {
-        this.mockedModel.property.returns(null) // there are no property for given name
+        this.mockedResource.property.returns(null) // there are no property for given name
         const properties = this.decorator.getListProperties()
         expect(properties).to.have.lengthOf(3)
       })
@@ -79,9 +79,9 @@ describe.only('BaseDecorator', function () {
   })
 
   describe('#getValue', function () {
-    it('returns value from the model when there is no override', function () {
+    it('returns value from the resource when there is no override', function () {
       this.instance = { param: this.sinon.spy()}
-      this.decorator = new BaseDecorator(this.mockedModel)
+      this.decorator = new BaseDecorator(this.mockedResource)
       this.decorator.getValue({ instance: this.instance, property: new BaseProperty({ path: 'somename' }) })
       expect(this.instance.param).to.have.been.called
     })

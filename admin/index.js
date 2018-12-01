@@ -1,7 +1,7 @@
 const _ = require('lodash')
 
 const DatabasesParser = require('./backend/adapters/databases-parser')
-const ModelFactory = require('./backend/adapters/model-factory')
+const ResourceFactory = require('./backend/adapters/resource-factory')
 const Renderer = require('./backend/utils/renderer')
 const BaseDecorator = require('./backend/utils/base-decorator')
 
@@ -12,7 +12,7 @@ const defaults = {
     logo: 'https://softwarebrothers.co/assets/images/software-brothers-logo-compact.svg',
     companyName: 'Company Name',
   },
-  models: [],
+  resources: [],
   authenticate: async () => {
     console.warn('you have to give authenticate function to AdmiBro settings')
     return false
@@ -35,49 +35,45 @@ class Admin {
    * @param  {Object}   options                         options
    * @param  {Object[]} [options.databases=[]]          list of entire database connections
    * @param  {String}   [options.rootPath='admin']      namespace for admin routes
-   * @param  {Object[]} [options.models]                list of all models
+   * @param  {Object[]} [options.resources]                list of all resources
    */
   constructor(options = {}) {
-    this.models = []
+    this.resources = []
 
     this.options = _.merge(defaults, options)
 
-    this.findModels(options)
+    this.findResources(options)
   }
 
 
   /**
-   * Find all models given by user
+   * Find all resources given by user
    */
-  findModels({ databases, models }) {
-    if (databases && databases.length > 0) {
-      const rawModels = DatabasesParser(this.options.databases).reduce((m, database) => {
-        return m.concat(database.all())
-      }, [])
-      this.models = rawModels.map(m => ModelFactory(m.model))
-    }
-    if (models && models.length > 0) {
-      this.models = this.models.concat(models.map((m) => {
+  findResources({ databases, resources }) {
+    this.resources = []
+    if (resources && resources.length > 0) {
+      this.resources = this.resources.concat(resources.map((m) => {
         if (m.toString() === '[object Object]') {
-          const model = ModelFactory(m.model, m.decorator)
-          return model
+          const resource = ResourceFactory(m.resource, m.decorator)
+          return resource
         }
-        return ModelFactory(m)
+        return ResourceFactory(m)
       }))
     }
+    if (databases && databases.length > 0) {
+      const rawResources = DatabasesParser(this.options.databases).reduce((m, database) => {
+        return m.concat(database.resources())
+      }, [])
+      const resourcesToAdd = rawResources.map(m => ResourceFactory(m)).filter((m) => {
+        // ensure that resource is not there yet
+        return !this.resources.find(em => em.id() === m.id())
+      })
+      this.resources = this.resources.concat(resourcesToAdd)
+    }
   }
 
-  findModel(modelId) {
-    return this.models.find(m => m.id() === modelId)
-  }
-
-  /**
-   * Returns database object
-   * @param  {String} name      name of a database
-   * @return {AbstractDatabase}
-   */
-  database(name) {
-    return this.databases[name]
+  findResource(resourceId) {
+    return this.resources.find(m => m.id() === resourceId)
   }
 
   static async renderLogin({ action, errorMessage }) {

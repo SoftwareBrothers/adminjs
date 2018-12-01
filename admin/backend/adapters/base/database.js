@@ -5,34 +5,18 @@ const NotImplementedError = require('../../utils/not-implemented-error')
  *
  * @mermaid
  *   graph TD
- *   A[AbstractDatabase] -->|has many| B(AbstractModel)
+ *   A[BaseDatabase] -->|has many| B(BaseResource)
  *   B --> |has many|C(AbstractInstance)
  *   B --> |has many|D(AbstractPorperty)
  */
-class AbstractDatabase {
+class BaseDatabase {
   /**
-   * Return name of the database
-   * @return {String}
+   * returns array of all resources (collections/tables) in the database
+   * @return {BaseResource[]}
    */
-  name() {
-    throw new NotImplementedError()
-  }
-
-  /**
-   * returns array of all models (collections/tables) in the database
-   * @return {AbstractModel[]}
-   */
-  models() {
-    throw new NotImplementedError()
-  }
-
-  /**
-   * returns model for given name
-   * @return {AbstractModel}
-   */
-  find(modelName) {
+  resources() {
     throw new NotImplementedError()
   }
 }
 
-module.exports = AbstractDatabase
+module.exports = BaseDatabase

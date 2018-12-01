@@ -25,11 +25,11 @@ class Property extends BaseProperty {
    */
   constructor(path) {
     super({ path: path.path })
-    this.path = path
+    this.mongoosePath = path
   }
 
   name() {
-    return this.path.path
+    return this.mongoosePath.path
   }
 
   isEditable() {
@@ -46,7 +46,7 @@ class Property extends BaseProperty {
   }
 
   type() {
-    switch (this.path.instance) {
+    switch (this.mongoosePath.instance) {
     case 'String':
       return 'string'
     case 'Boolean':
@@ -60,7 +60,8 @@ class Property extends BaseProperty {
     case 'Decimal128':
       return 'float'
     default:
-      throw new Error(`Unhandled type: ${this.path.instance}`)
+      console.warn(`Unhandled type: ${this.mongoosePath.instance}`)
+      return 'string'
     }
   }
 }

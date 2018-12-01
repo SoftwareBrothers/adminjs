@@ -32,24 +32,24 @@ class ViewHelpers {
     return this._admin.options.rootPath
   }
 
-  listUrl(model, query) {
-    return this.urlBuilder(['models', model.id()], query)
+  listUrl(resource, query) {
+    return this.urlBuilder(['resources', resource.id()], query)
   }
 
-  newInstanceUrl(model) {
-    return this.urlBuilder(['models', model.id(), 'new'])
+  newInstanceUrl(resource) {
+    return this.urlBuilder(['resources', resource.id(), 'new'])
   }
 
-  showInstanceUrl(model, instance) {
-    return this.urlBuilder(['models', model.id(), instance.id()])
+  showInstanceUrl(resource, instance) {
+    return this.urlBuilder(['resources', resource.id(), instance.id()])
   }
 
-  editInstanceUrl(model, instance) {
-    return this.urlBuilder(['models', model.id(), instance.id(), 'edit'])
+  editInstanceUrl(resource, instance) {
+    return this.urlBuilder(['resources', resource.id(), instance.id(), 'edit'])
   }
 
-  deleteInstanceUrl(model, instance) {
-    return this.urlBuilder(['models', model.id(), instance.id(), 'delete'])
+  deleteInstanceUrl(resource, instance) {
+    return this.urlBuilder(['resources', resource.id(), instance.id(), 'delete'])
   }
 }
 

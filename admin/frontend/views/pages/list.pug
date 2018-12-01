@@ -4,14 +4,14 @@ include ../mixins/emptyTable
 
 block content
   section.table-list
-    +breadcrumb([currentModel.decorate().getModelName()])
+    +breadcrumb([currentResource.decorate().getResourceName()])
     .column
       .level
-        .title=currentModel.decorate().getModelName()
+        .title=currentResource.decorate().getResourceName()
         if total
           .field.is-grouped
             .control
-              a.button.is-primary(href=h.newInstanceUrl(currentModel))
+              a.button.is-primary(href=h.newInstanceUrl(currentResource))
                 span.icon
                   i.fas.fa-plus.fa-xs
                 .btn-text Add new
@@ -26,14 +26,14 @@ block content
           table.table.is-fullwidth
             thead
               tr
-                for prop in currentModel.decorate().getListProperties()
+                for prop in currentResource.decorate().getListProperties()
                   th.text-small= h._.startCase(prop.name())
                 th
             tbody
               for instance in instances
                 tr
-                  for prop in currentModel.decorate().getListProperties()
-                    td.is-vcentered!= currentModel.decorate().getValue({ instance, property: prop, where: 'list', helpers: h})
+                  for prop in currentResource.decorate().getListProperties()
+                    td.is-vcentered!= currentResource.decorate().getValue({ instance, property: prop, where: 'list', helpers: h})
                   td
                     .dropdown.is-right.is-hoverable
                       .dropdown-trigger
@@ -42,15 +42,15 @@ block content
                             i.fas.fa-ellipsis-h
                       .dropdown-menu
                         .dropdown-content
-                          a.button.is-white(href=h.showInstanceUrl(currentModel, instance))
+                          a.button.is-white(href=h.showInstanceUrl(currentResource, instance))
                             span.icon.is-large
                               i.fas.fa-info
                             .btn-text Info
-                          a.button.is-white(href=h.editInstanceUrl(currentModel, instance))
+                          a.button.is-white(href=h.editInstanceUrl(currentResource, instance))
                             span.icon
                               i.fas.fa-pen
                             .btn-text Edit
-                          a.button.is-white(href=h.deleteInstanceUrl(currentModel, instance))
+                          a.button.is-white(href=h.deleteInstanceUrl(currentResource, instance))
                             span.icon
                               i.fas.fa-trash
                             .btn-text Remove
@@ -63,9 +63,9 @@ block content
                  i.fas.fa-angle-left.fa-lg
                 for p in pages
                   a.button.is-white(class={ 'active' : p == page }
-                    href=h.listUrl(currentModel, { page: p })
+                    href=h.listUrl(currentResource, { page: p })
                   )= p
                 a.button.is-white
                   i.fas.fa-angle-right.fa-lg
     else
-      +emptyTable(h.newInstanceUrl(currentModel))
+      +emptyTable(h.newInstanceUrl(currentResource))

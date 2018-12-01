@@ -17,11 +17,11 @@ class BaseController {
     this._admin = admin
     this.view = {}
     this.view.currentAdmin = currentAdmin
-    this.view.models = admin.models.reduce((m, model) => {
-      if (m[model.decorate().getParent()]) {
-        m[model.decorate().getParent()].push(model)
+    this.view.resources = admin.resources.reduce((m, resource) => {
+      if (m[resource.decorate().getParent()]) {
+        m[resource.decorate().getParent()].push(resource)
       } else {
-        m[model.decorate().getParent()] = [model]
+        m[resource.decorate().getParent()] = [resource]
       }
       return m
     }, {})
