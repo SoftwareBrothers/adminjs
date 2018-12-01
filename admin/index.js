@@ -44,19 +44,23 @@ class Admin {
 
 
   /**
-   * Find all models given by user:
-   *
-   * - from co
-   * @return {[type]} [description]
+   * Find all models given by user
    */
   findModels({ databases, models }) {
     if (databases && databases.length > 0) {
-      this.models = DatabasesParser(this.options.databases).reduce((m, database) => {
+      const rawModels = DatabasesParser(this.options.databases).reduce((m, database) => {
         return m.concat(database.all())
       }, [])
+      this.models = rawModels.map(m => ModelFactory(m.model))
     }
     if (models && models.length > 0) {
-      this.models = this.models.concat(models.map((m => ModelFactory(m))))
+      this.models = this.models.concat(models.map((m) => {
+        if (m.toString() === '[object Object]') {
+          const model = ModelFactory(m.model, m.decorator)
+          return model
+        }
+        return ModelFactory(m)
+      }))
     }
   }
 

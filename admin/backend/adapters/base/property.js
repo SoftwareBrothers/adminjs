@@ -4,14 +4,26 @@ const TITLE_COLUMN_NAMES = ['title', 'name', 'subject']
 /**
  * Represents model properties
  */
-class AbstractProperty {
+class BaseProperty {
+
+  /**
+   * @param  {Object} options
+   * @param  {String} options.path property path: usually it its key but when
+   *                               property is for an object the path can be
+   *                               divided to parts by dots: i.e. 'address.street'
+   * @param  {String} options.type on if: id, string, float, number, boolean, date
+   */
+  constructor({ path, type }) {
+    this._path = path
+    this._type = type
+  }
 
   /**
    * Name of the property
    * @return {String} name of the property
    */
   name() {
-    throw new NotImplementedError()
+    return this._path
   }
 
   /**
@@ -20,7 +32,7 @@ class AbstractProperty {
    *                      [id, string, float, number, boolean, date]
    */
   type() {
-    throw new NotImplementedError()
+    return this._type || 'string'
   }
 
   /**
@@ -48,4 +60,4 @@ class AbstractProperty {
   }
 }
 
-module.exports = AbstractProperty
+module.exports = BaseProperty

@@ -68,6 +68,13 @@ class ModelsController extends BaseController {
 
   findModel({ modelName }) {
     this.view.currentModel = this._admin.findModel(modelName)
+
+    // Decorate the model here bacause if it is in pug view
+    // not all errors are triggered
+    // @todo Verify why not all errors are tiriggered from the view
+    const d = this.view.currentModel.decorate()
+    console.log('before throw')
+    console.log(d.getListProperties())
     this.view.properties = this.view.currentModel.properties()
   }
 

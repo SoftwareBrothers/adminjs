@@ -1,6 +1,6 @@
-const AbstractProperty = require('../abstract/property')
+const BaseProperty = require('../base/property')
 
-class Property extends AbstractProperty {
+class Property extends BaseProperty {
   /**
    * Crates an object from mongoose schema path
    *
@@ -24,7 +24,7 @@ class Property extends AbstractProperty {
    * property = new Property(schema.paths.email))
    */
   constructor(path) {
-    super()
+    super({ path: path.path })
     this.path = path
   }
 

@@ -28,6 +28,9 @@
     "@frontend": "./admin/frontend",
     "@fixtures": "./admin/spec/backend/fixtures"
   },
+  "nodemonConfig": {
+    "ignore": ["admin/spec/*", "docs/*"]
+  },
   "author": "Wojciech Krysiak",
   "license": "MIT",
   "bugs": {
@@ -35,15 +38,16 @@
   },
   "homepage": "https://github.com/SoftwareBrothers/admin-bro#readme",
   "dependencies": {
+    "bcrypt": "^3.0.2",
+    "boom": "^7.3.0",
     "hapi": "^17.5.3",
+    "hapi-auth-cookie": "^9.1.0",
     "jw-paginate": "^1.0.2",
     "lodash": "^4.17.11",
     "mongoose": "^5.2.9",
     "node-sass": "^4.10.0",
     "pack": "^2.1.0",
     "pug": "^2.0.3",
-    "hapi-auth-cookie": "^9.1.0",
-    "bcrypt": "^3.0.2",
     "require.all": "^2.0.4"
   },
   "devDependencies": {

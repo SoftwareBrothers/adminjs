@@ -14,10 +14,13 @@ const adminBro = require('../../admin/integrations/hapi')
 
 require('../mongoose/user-model')
 const Article = require('../mongoose/article-model')
+const Page = require('../mongoose/page-model')
 require('../mongoose/comment-model')
 require('../mongoose/blog-post-model')
 require('../mongoose/category-model')
-require('../mongoose/page-model')
+
+
+const ArticleDecorator = require('./article-decorator')
 
 /**
  * Model which will store all admins
@@ -119,7 +122,9 @@ const start = async () => {
 
     const adminBroOptions = {
       databases: [],
-      models: [Article],
+      models: [
+        { model: Article, decorator: ArticleDecorator },
+      ],
       auth: 'session',
       rootPath: '/admin',
       logoutPath: '/admin/logout',

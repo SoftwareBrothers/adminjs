@@ -4,10 +4,10 @@ include ../mixins/emptyTable
 
 block content
   section.table-list
-    +breadcrumb([currentModel.name()])
+    +breadcrumb([currentModel.decorate().getModelName()])
     .column
       .level
-        .title=currentModel.name()
+        .title=currentModel.decorate().getModelName()
         if total
           .field.is-grouped
             .control
@@ -26,14 +26,14 @@ block content
           table.table.is-fullwidth
             thead
               tr
-                for prop in properties.filter(p => p.isVisible())
+                for prop in currentModel.decorate().getListProperties()
                   th.text-small=prop.name().toUpperCase()
                 th
             tbody
               for instance in instances
                 tr
-                  for prop in properties.filter(p => p.isVisible())
-                    td.is-vcentered= instance.param(prop.name())
+                  for prop in currentModel.decorate().getListProperties()
+                    td.is-vcentered!= currentModel.decorate().getValue({ instance, property: prop, where: 'list', helpers: h})
                   td
                     .dropdown.is-right.is-hoverable
                       .dropdown-trigger

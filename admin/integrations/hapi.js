@@ -7,6 +7,7 @@
  * @module Integrations/hapijs
  */
 
+const Boom = require('boom')
 const AdminBro = require('../index')
 const Routes = require('../backend/routes')
 
@@ -24,9 +25,15 @@ module.exports = {
         path: `${admin.options.rootPath}${route.path}`,
         options: { auth },
         handler: async (request, h) => {
-          const loggedInUser = request.auth && request.auth.credentials
-          const controller = new route.Controller({ admin }, loggedInUser)
-          return controller[route.action](request, h)
+          try {
+            const loggedInUser = request.auth && request.auth.credentials
+            const controller = new route.Controller({ admin }, loggedInUser)
+            const ret = await controller[route.action](request, h)
+            return ret
+          } catch (e) {
+            console.log(e)
+            throw Boom.boomify(e)
+          }
         },
       })
     })

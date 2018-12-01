@@ -2,16 +2,16 @@
  * @namespace MongooseAdapter
  */
 
-const AbstractDatabase = require('../abstract/database')
+const BaseDatabase = require('../base/database')
 const Model = require('./model')
 
 /**
  * Adapter for mongoose database
  * @memberof MongooseAdapter
- * @extends {AbstractDatabase}
+ * @extends {BaseDatabase}
  * @alias MongooseAdapter.Database
  */
-class Database extends AbstractDatabase {
+class Database extends BaseDatabase {
   constructor(connection) {
     super(connection)
     this.connection = connection

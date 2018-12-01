@@ -1,8 +1,9 @@
-const AbstractInstance = require('../abstract/instance')
-const ValidationError = require('../../utils/validation-error')
 const _ = require('lodash')
 
-class Instance extends AbstractInstance {
+const BaseInstance = require('../base/instance')
+const ValidationError = require('../../utils/validation-error')
+
+class Instance extends BaseInstance {
   static flattenParams(paramObject, key) {
     return Object.keys(paramObject).reduce((m, nestedKey) => {
       const k = key ? `${key}.${nestedKey}` : nestedKey

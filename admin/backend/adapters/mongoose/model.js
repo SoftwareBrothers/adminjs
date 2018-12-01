@@ -1,4 +1,4 @@
-const AbstractModel = require('../abstract/model')
+const BaseModel = require('../base/model')
 const Instance = require('./instance')
 const Property = require('./property')
 const ValidationError = require('../../utils/validation-error')
@@ -6,7 +6,7 @@ const ValidationError = require('../../utils/validation-error')
 /**
  * Adapter for mongoose model
  */
-class Model extends AbstractModel {
+class Model extends BaseModel {
   /**
    * Return all available models for given connection
    * @param  {Object} mongooseConnection    mongoose connection object
@@ -116,7 +116,10 @@ class Model extends AbstractModel {
   }
 
   property(name) {
-    return new Property(this.model.schema.paths[name])
+    if (this.model.schema.paths[name]) {
+      return new Property(this.model.schema.paths[name])
+    }
+    return null
   }
 
   createValidationError(originalError) {

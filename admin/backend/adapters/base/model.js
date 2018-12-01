@@ -47,7 +47,6 @@ class AbstractModel {
     throw new NotImplementedError()
   }
 
-  
   findOne(id) {
     throw new NotImplementedError()
   }
@@ -67,6 +66,15 @@ class AbstractModel {
    */
   delete(id) {
     throw new NotImplementedError()
+  }
+
+  assignDecorator(Decorator) {
+    this._Decorator = Decorator
+  }
+
+  decorate() {
+    this._decorated = this._decorated || new this._Decorator(this)
+    return this._decorated
   }
 }
 
