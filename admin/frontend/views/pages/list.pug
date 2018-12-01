@@ -27,7 +27,7 @@ block content
             thead
               tr
                 for prop in currentModel.decorate().getListProperties()
-                  th.text-small=prop.name().toUpperCase()
+                  th.text-small= h._.startCase(prop.name())
                 th
             tbody
               for instance in instances

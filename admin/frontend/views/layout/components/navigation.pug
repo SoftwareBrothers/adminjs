@@ -3,7 +3,7 @@ ul.menu-list
   for modelList, key in models
     li
       span.menu-item-main
-        = key
+        = h._.startCase(key)
       ul.menu-list
         for model in modelList
           li

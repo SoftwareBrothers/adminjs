@@ -28,6 +28,6 @@ block content
         for prop in currentModel.decorate().getShowProperties()
           .property
             .card-content
-              .text-small #{prop.name().toUpperCase()}
+              .text-small #{h._.startCase(prop.name())}
               div(class={ 'feature' : properties.indexOf(prop) === 0 })
                 != currentModel.decorate().getValue({ instance, property: prop, where: 'show', helpers: h})

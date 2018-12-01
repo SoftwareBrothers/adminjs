@@ -1,10 +1,12 @@
 const paginate = require('jw-paginate')
+const lodash = require('lodash')
 
 class ViewHelpers {
   constructor({ admin }) {
     this._admin = admin
 
     this.paginate = paginate
+    this._ = lodash
     this.branding = this._admin.options.branding
   }
 
