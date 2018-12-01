@@ -17,7 +17,14 @@ class BaseController {
     this._admin = admin
     this.view = {}
     this.view.currentAdmin = currentAdmin
-    this.view.models = admin.models
+    this.view.models = admin.models.reduce((m, model) => {
+      if (m[model.decorate().getParent()]) {
+        m[model.decorate().getParent()].push(model)
+      } else {
+        m[model.decorate().getParent()] = [model]
+      }
+      return m
+    }, {})
     this.view.h = new ViewHelpers({ admin })
   }
 

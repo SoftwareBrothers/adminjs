@@ -5,6 +5,7 @@ class ViewHelpers {
     this._admin = admin
 
     this.paginate = paginate
+    this.branding = this._admin.options.branding
   }
 
   urlBuilder(paths, query) {

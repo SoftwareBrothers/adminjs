@@ -3,7 +3,8 @@ include ../mixins/form-group
 include ../mixins/breadcrumb
 
 block content
-  +breadcrumb([currentModel.name()])
+  +breadcrumb([currentModel.decorate().getModelName(),
+                 instance.title(), 'edit'])
   section.view-edit
     form(method='POST' action=h.showInstanceUrl(currentModel, instance))
       .level

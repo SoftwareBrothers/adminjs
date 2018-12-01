@@ -3,7 +3,7 @@ const NotImplementedError = require('../../utils/not-implemented-error')
 /**
  * Representation of a ORM Model in AdminBro
  */
-class AbstractModel {
+class BaseModel {
   /**
    * Return name of the model
    * @return {String}
@@ -68,6 +68,10 @@ class AbstractModel {
     throw new NotImplementedError()
   }
 
+  databaseName() {
+    throw new NotImplementedError()
+  }
+
   assignDecorator(Decorator) {
     this._Decorator = Decorator
   }
@@ -78,4 +82,4 @@ class AbstractModel {
   }
 }
 
-module.exports = AbstractModel
+module.exports = BaseModel

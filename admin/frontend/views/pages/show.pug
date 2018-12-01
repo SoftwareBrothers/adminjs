@@ -4,7 +4,7 @@ include ../mixins/breadcrumb
 
 block content
   secton.show-details
-    +breadcrumb([currentModel.decorate().getModelName(), instance.id()])
+    +breadcrumb([currentModel.decorate().getModelName(), instance.title()])
     .column
       .level
         .title

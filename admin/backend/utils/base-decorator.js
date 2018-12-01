@@ -22,6 +22,10 @@ class BaseDecorator {
     return this.invokeOrGet('modelName') || this._model.name()
   }
 
+  getParent() {
+    return this.invokeOrGet('parentName') || this._model.databaseName()
+  }
+
   /**
    * Returns list of all properties which will be visible on the list
    * @return {BaseProperty[]}

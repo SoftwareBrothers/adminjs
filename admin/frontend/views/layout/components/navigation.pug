@@ -1,11 +1,11 @@
 p.menu-label Navigation
 ul.menu-list
-  li
-    span.menu-item-main
-      i.icon-mongodb
-      | Namespace
-    ul.menu-list
-      for model in models
-        li
-          a(href=h.listUrl(model) class={ 'is-active' : currentModel && currentModel.id() === model.name() })
-            = model.decorate().getModelName()
+  for modelList, key in models
+    li
+      span.menu-item-main
+        = key
+      ul.menu-list
+        for model in modelList
+          li
+            a(href=h.listUrl(model) class={ 'is-active' : currentModel && currentModel.id() === model.name() })
+              = model.decorate().getModelName()

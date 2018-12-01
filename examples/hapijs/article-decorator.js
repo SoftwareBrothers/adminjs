@@ -6,6 +6,7 @@ class ArticleDecorator extends BaseDecorator {
     this.modelName = 'Artykuły'
     this.listProperties = ['title', 'content', 'publishedAt']
     this.showProperties = ['title', 'publishedAt']
+    this.parentName = 'Main Models'
   }
 
   getValue({ instance, property, where, helpers }) {

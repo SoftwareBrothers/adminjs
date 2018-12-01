@@ -125,6 +125,9 @@ const start = async () => {
       models: [
         { model: Article, decorator: ArticleDecorator },
       ],
+      branding: {
+        companyName: 'Amazing c.o.',
+      },
       auth: 'session',
       rootPath: '/admin',
       logoutPath: '/admin/logout',

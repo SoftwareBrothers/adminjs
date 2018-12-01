@@ -1,3 +1,5 @@
+const _ = require('lodash')
+
 const DatabasesParser = require('./backend/adapters/databases-parser')
 const ModelFactory = require('./backend/adapters/model-factory')
 const Renderer = require('./backend/utils/renderer')
@@ -6,6 +8,10 @@ const BaseDecorator = require('./backend/utils/base-decorator')
 const defaults = {
   rootPath: 'admin',
   databases: [],
+  branding: {
+    logo: 'https://softwarebrothers.co/assets/images/software-brothers-logo-compact.svg',
+    companyName: 'Company Name',
+  },
   models: [],
   authenticate: async () => {
     console.warn('you have to give authenticate function to AdmiBro settings')
@@ -34,10 +40,7 @@ class Admin {
   constructor(options = {}) {
     this.models = []
 
-    this.options = {
-      ...defaults,
-      ...options,
-    }
+    this.options = _.merge(defaults, options)
 
     this.findModels(options)
   }

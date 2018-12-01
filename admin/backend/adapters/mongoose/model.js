@@ -39,6 +39,10 @@ class Model extends BaseModel {
     return new Model(mongoModel)
   }
 
+  databaseName() {
+    return this.model.db.name
+  }
+
   constructor(mongoModel) {
     super(mongoModel)
     this.model = mongoModel
@@ -84,7 +88,6 @@ class Model extends BaseModel {
       }, {
         runValidators: true,
       })
-      console.log(ret)
       return ret
     } catch (error) {
       if (error.name === 'ValidationError') {

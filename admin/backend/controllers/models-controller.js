@@ -48,7 +48,6 @@ class ModelsController extends BaseController {
 
     if (this.view.instance.isValid()) {
       return response.redirect(this.view.h.showInstanceUrl(
-        this.view.database,
         this.view.currentModel,
         this.view.instance,
       ))
@@ -73,8 +72,6 @@ class ModelsController extends BaseController {
     // not all errors are triggered
     // @todo Verify why not all errors are tiriggered from the view
     const d = this.view.currentModel.decorate()
-    console.log('before throw')
-    console.log(d.getListProperties())
     this.view.properties = this.view.currentModel.properties()
   }
 

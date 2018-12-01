@@ -57,6 +57,16 @@ class Instance extends BaseInstance {
     return this.param(idProperty.name())
   }
 
+  title() {
+    const nameProperty = this.model.property('name')
+                      || this.model.property('title')
+                      || this.model.property('topic')
+    if (nameProperty) {
+      return this.param(nameProperty.name())
+    }
+    return this.id()
+  }
+
   async save() {
     try {
       if (this.id()) {
