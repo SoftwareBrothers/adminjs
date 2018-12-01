@@ -1,6 +1,6 @@
 .sidebar-content
   .sidebar-top
-    .sidebar-brand
+    a.sidebar-brand(href=h.dashboardUrl())
       img(src=h.branding.logo height="35px" width="35px")
       span= h.branding.companyName
     include navigation

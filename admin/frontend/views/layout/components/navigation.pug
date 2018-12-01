@@ -7,5 +7,5 @@ ul.menu-list
       ul.menu-list
         for model in modelList
           li
-            a(href=h.listUrl(model) class={ 'is-active' : currentModel && currentModel.id() === model.name() })
+            a(href=h.listUrl(model) class={ 'is-active' : currentModel && currentModel.id() === model.id() })
               = model.decorate().getModelName()

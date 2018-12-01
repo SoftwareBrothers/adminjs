@@ -26,6 +26,10 @@ class ViewHelpers {
     return this._admin.options.logoutPath
   }
 
+  dashboardUrl() {
+    return this._admin.options.rootPath
+  }
+
   listUrl(model, query) {
     return this.urlBuilder(['models', model.id()], query)
   }
