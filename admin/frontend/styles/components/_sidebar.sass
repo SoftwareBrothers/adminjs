@@ -1,4 +1,4 @@
-.sidebar-main, .sidebar-content
+.sidebar-main.sidebar-desktop, .sidebar-content
   width: $sidebar-width
 
 .sidebar-main
@@ -78,4 +78,16 @@
   .sidebar-top
     .menu-label
       margin-left: rem(16px)
+  
+@include media-breakpoint-down($media-min-tablet-width - 1px)
+  .sidebar-main.sidebar-mobile, .sidebar-content
+      width: rem(98px)
 
+  .sidebar-mobile
+    .menu-list, .sidebar-content .sidebar-top .sidebar-brand, .sidebar-footer, .sidebar-navigation
+      display: none
+    .hamburger
+      cursor: pointer
+      display: flex
+      justify-content: center
+      align-items: center
