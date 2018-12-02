@@ -4,8 +4,13 @@ const MongooseDatabase = require('./mongoose/database')
  * It changes raw database object to correct Database used by AdminBro.
  *
  * @param  {Object} database          database connection
- * @return {AbstractDatabase}         class which extends {@link AbstractDatabase}. Right
+ * @return {BaseDatabase}         class which extends {@link AbstractDatabase}. Right
  *                                          now only {@link MongooseDatabase} is supported
+ *
+ * @example
+ *
+ * const rawDatabase = await mongoose.connect(process.env.MONGO_URL)
+ * const databases = DatabaseFactory(rawDatabase) //{BaseDatabase[]}
  */
 const DatabaseFactory = (database) => {
   if (database.constructor.name === 'Mongoose') {

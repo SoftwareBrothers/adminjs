@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: admin/integrations/hapi.js</title>
+    <title>JSDoc: Source: admin/backend/adapters/base/resource.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: admin/integrations/hapi.js</h1>
+    <h1 class="page-title">Source: admin/backend/adapters/base/resource.js</h1>
 
     
 
@@ -26,52 +26,91 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>/**
- * Plugin definition for Hapi.js framework. To se how you can use it
- * see {@link examples/hapijs/index.js}
- *
- * @see module:examples/hapijs~start
- *
- * @module Integrations/hapijs
+            <pre class="prettyprint source linenums"><code>const NotImplementedError = require('../../utils/not-implemented-error')
+
+/**
+ * Representation of a ORM Resource in AdminBro
  */
+class BaseResource {
+  /**
+   * Return name of the resource
+   * @return {String}
+   */
+  name() {
+    throw new NotImplementedError()
+  }
 
-const Boom = require('boom')
-const AdminBro = require('../index')
-const Routes = require('../backend/routes')
+  /**
+   * returns array of properties
+   * @return {AbstractProperty[]}
+   */
+  properties() {
+    throw new NotImplementedError()
+  }
 
-module.exports = {
-  name: 'AdminBro',
-  version: '1.0.0',
-  register: async (server, options) => {
-    const admin = new AdminBro(options)
-    const auth = options.auth || false
-    const routes = new Routes({ admin }).all()
+  /**
+   * returns property object for given field
+   * @return {AbstractProperty}
+   */
+  property(name) {
+    throw new NotImplementedError()
+  }
 
-    routes.forEach((route) => {
-      server.route({
-        method: route.method,
-        path: `${admin.options.rootPath}${route.path}`,
-        options: { auth },
-        handler: async (request, h) => {
-          try {
-            const loggedInUser = request.auth &amp;&amp; request.auth.credentials
-            const controller = new route.Controller({ admin }, loggedInUser)
-            const ret = await controller[route.action](request, h)
-            return ret
-          } catch (e) {
-            console.log(e)
-            throw Boom.boomify(e)
-          }
-        },
-      })
-    })
+  /**
+   * Returns number of elements for given resource
+   * @return {Number}
+   */
+  count() {
+    throw new NotImplementedError()
+  }
 
-    return admin
-  },
-  renderLogin: async (params) => {
-    return AdminBro.renderLogin(params)
-  },
+  /**
+   * Returns actual records for given resource
+   * @param  {Object} where           query
+   * @param  {Number} options.limit   how many records should be taken
+   * @param  {Number} options.offset  offset
+   * @return {Object[]}               list of all records
+   */
+  find(where, { limit=20, offset=0 }) {
+    throw new NotImplementedError()
+  }
+
+  findOne(id) {
+    throw new NotImplementedError()
+  }
+
+  /**
+   * Creates new record
+   * @param  {Object} params
+   * @return {Object}                  created record
+   */
+  create(params) {
+    throw new NotImplementedError()
+  }
+
+  /**
+   * Delete given record by id
+   * @param  {String|Number} id id of the record
+   */
+  delete(id) {
+    throw new NotImplementedError()
+  }
+
+  databaseName() {
+    throw new NotImplementedError()
+  }
+
+  assignDecorator(Decorator) {
+    this._Decorator = Decorator
+  }
+
+  decorate() {
+    this._decorated = this._decorated || new this._Decorator(this)
+    return this._decorated
+  }
 }
+
+module.exports = BaseResource
 </code></pre>
         </article>
     </section>

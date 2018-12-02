@@ -28,9 +28,9 @@
 
 <header>
     
-        <h2><span class="attribs"><span class="type-signature"></span></span>BaseDecorator<span class="signature">(model)</span><span class="type-signature"></span></h2>
+        <h2><span class="attribs"><span class="type-signature"></span></span>BaseDecorator<span class="signature">(resource)</span><span class="type-signature"></span></h2>
         
-            <div class="class-description"><p>Base decorator class which decorates the Model.
+            <div class="class-description"><p>Base decorator class which decorates the Resource.
 It can be easily overriden in settings</p></div>
         
     
@@ -46,7 +46,7 @@ It can be easily overriden in settings</p></div>
     
 
     
-    <h4 class="name" id="BaseDecorator"><span class="type-signature"></span>new BaseDecorator<span class="signature">(model)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="BaseDecorator"><span class="type-signature"></span>new BaseDecorator<span class="signature">(resource)</span><span class="type-signature"></span></h4>
     
 
     
@@ -90,13 +90,13 @@ It can be easily overriden in settings</p></div>
 
         <tr>
             
-                <td class="name"><code>model</code></td>
+                <td class="name"><code>resource</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">AbstractModel</span>
+<span class="param-type"><a href="BaseResource.html">BaseResource</a></span>
 
 
             
@@ -106,7 +106,7 @@ It can be easily overriden in settings</p></div>
 
             
 
-            <td class="description last"><p>model which is decorated</p></td>
+            <td class="description last"><p>resource which is decorated</p></td>
         </tr>
 
     
@@ -305,7 +305,7 @@ It can be easily overriden in settings</p></div>
     
 
     
-    <h4 class="name" id="getModelName"><span class="type-signature"></span>getModelName<span class="signature">()</span><span class="type-signature"> &rarr; {String}</span></h4>
+    <h4 class="name" id="getResourceName"><span class="type-signature"></span>getResourceName<span class="signature">()</span><span class="type-signature"> &rarr; {String}</span></h4>
     
 
     
@@ -313,7 +313,7 @@ It can be easily overriden in settings</p></div>
 
 
 <div class="description">
-    <script type="text/javascript" src="https://unpkg.com/mermaid@7.1.0/dist/mermaid.min.js"></script><p>Returns the name for the model.</p>
+    <script type="text/javascript" src="https://unpkg.com/mermaid@7.1.0/dist/mermaid.min.js"></script><p>Returns the name for the resource.</p>
 </div>
 
 
@@ -384,7 +384,7 @@ It can be easily overriden in settings</p></div>
 
         
 <div class="param-desc">
-    <p>model name</p>
+    <p>resource name</p>
 </div>
 
 
@@ -499,13 +499,13 @@ It can be easily overriden in settings</p></div>
 
         <tr>
             
-                <td class="name"><code>instance</code></td>
+                <td class="name"><code>record</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">BaseInstance</span>
+<span class="param-type">BaseRecord</span>
 
 
             
@@ -698,13 +698,13 @@ It can be easily overriden in settings</p></div>
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-examples_hapijs.html">examples/hapijs</a></li><li><a href="module-Integrations_hapijs.html">Integrations/hapijs</a></li></ul><h3>Classes</h3><ul><li><a href="AbstractDatabase.html">AbstractDatabase</a></li><li><a href="AbstractInstance.html">AbstractInstance</a></li><li><a href="Admin.html">Admin</a></li><li><a href="BaseController.html">BaseController</a></li><li><a href="BaseDecorator.html">BaseDecorator</a></li><li><a href="BaseModel.html">BaseModel</a></li><li><a href="BaseProperty.html">BaseProperty</a></li><li><a href="Model.html">Model</a></li><li><a href="MongooseAdapter.Database.html">Database</a></li><li><a href="Property.html">Property</a></li><li><a href="Routes.html">Routes</a></li><li><a href="ValidationError.html">ValidationError</a></li></ul><h3>Namespaces</h3><ul><li><a href="Controllers.html">Controllers</a></li><li><a href="MongooseAdapter.html">MongooseAdapter</a></li></ul><h3>Tutorials</h3><ul><li><a href="tutorial-example-tutorial.html">Example tutorial</a></li></ul><h3>Global</h3><ul><li><a href="global.html#DatabaseFactory">DatabaseFactory</a></li><li><a href="global.html#ModelFactory">ModelFactory</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-examples_hapijs.html">examples/hapijs</a></li><li><a href="module-Integrations_hapijs.html">Integrations/hapijs</a></li></ul><h3>Classes</h3><ul><li><a href="Admin.html">Admin</a></li><li><a href="BaseController.html">BaseController</a></li><li><a href="BaseDatabase.html">BaseDatabase</a></li><li><a href="BaseDecorator.html">BaseDecorator</a></li><li><a href="BaseProperty.html">BaseProperty</a></li><li><a href="BaseResource.html">BaseResource</a></li><li><a href="MongooseAdapter.Database.html">Database</a></li><li><a href="Property.html">Property</a></li><li><a href="Resource.html">Resource</a></li><li><a href="Routes.html">Routes</a></li><li><a href="ValidationError.html">ValidationError</a></li></ul><h3>Namespaces</h3><ul><li><a href="Controllers.html">Controllers</a></li><li><a href="MongooseAdapter.html">MongooseAdapter</a></li></ul><h3>Tutorials</h3><ul><li><a href="tutorial-example-tutorial.html">Example tutorial</a></li></ul><h3>Global</h3><ul><li><a href="global.html#DatabaseFactory">DatabaseFactory</a></li><li><a href="global.html#ResourceFactory">ResourceFactory</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Sat Dec 01 2018 19:37:16 GMT+0000 (Coordinated Universal Time)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Sun Dec 02 2018 09:41:15 GMT+0000 (Coordinated Universal Time)
 </footer>
 
 <script> prettyPrint(); </script>
