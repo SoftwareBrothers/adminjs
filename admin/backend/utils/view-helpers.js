@@ -36,20 +36,20 @@ class ViewHelpers {
     return this.urlBuilder(['resources', resource.id()], query)
   }
 
-  newInstanceUrl(resource) {
+  newRecordUrl(resource) {
     return this.urlBuilder(['resources', resource.id(), 'new'])
   }
 
-  showInstanceUrl(resource, instance) {
-    return this.urlBuilder(['resources', resource.id(), instance.id()])
+  showRecordUrl(resource, record) {
+    return this.urlBuilder(['resources', resource.id(), record.id()])
   }
 
-  editInstanceUrl(resource, instance) {
-    return this.urlBuilder(['resources', resource.id(), instance.id(), 'edit'])
+  editRecordUrl(resource, record) {
+    return this.urlBuilder(['resources', resource.id(), record.id(), 'edit'])
   }
 
-  deleteInstanceUrl(resource, instance) {
-    return this.urlBuilder(['resources', resource.id(), instance.id(), 'delete'])
+  deleteRecordUrl(resource, record) {
+    return this.urlBuilder(['resources', resource.id(), record.id(), 'delete'])
   }
 }
 

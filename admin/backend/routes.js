@@ -32,7 +32,7 @@ class Routes {
       action: 'index',
     }, {
       method: 'GET',
-      path: '/resources/{resourceName}/{instanceId}',
+      path: '/resources/{resourceName}/{recordId}',
       Controller: ResourcesController,
       action: 'show',
     }, {
@@ -47,17 +47,17 @@ class Routes {
       action: 'create',
     }, {
       method: 'POST',
-      path: '/resources/{resourceName}/{instanceId}',
+      path: '/resources/{resourceName}/{recordId}',
       Controller: ResourcesController,
       action: 'update',
     }, {
       method: 'GET',
-      path: '/resources/{resourceName}/{instanceId}/edit',
+      path: '/resources/{resourceName}/{recordId}/edit',
       Controller: ResourcesController,
       action: 'edit',
     }, {
       method: 'GET',
-      path: '/resources/{resourceName}/{instanceId}/delete',
+      path: '/resources/{resourceName}/{recordId}/delete',
       Controller: ResourcesController,
       action: 'delete',
     }]

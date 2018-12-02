@@ -52,9 +52,9 @@ class BaseResource {
   }
 
   /**
-   * Creates new instance
+   * Creates new record
    * @param  {Object} params
-   * @return {Object}                  created instance
+   * @return {Object}                  created record
    */
   create(params) {
     throw new NotImplementedError()

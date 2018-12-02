@@ -3,7 +3,7 @@ const MongooseResource = require('./mongoose/resource')
 const BaseDecorator = require('../utils/base-decorator')
 
 /**
- * It changes raw resource object to instance which inherits from {@link BaseResource}
+ * It changes raw resource object to a particular Resource implementation
  *
  * @param  {Object} resource               raw database resource
  * @param  {BaseDecorator} [decorator]  decorator used to decorate resource
@@ -16,7 +16,6 @@ const ResourceFactory = (rawResource, decorator) => {
     mongooseResource.assignDecorator(decorator || BaseDecorator)
     return mongooseResource
   }
-  console.log(rawResource)
   throw new Error(`unsupported resource type ${rawResource.constructor ? rawResource.constructor.name : rawResource}`)
 }
 

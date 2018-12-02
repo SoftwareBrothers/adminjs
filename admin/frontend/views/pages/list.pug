@@ -11,7 +11,7 @@ block content
         if total
           .field.is-grouped
             .control
-              a.button.is-primary(href=h.newInstanceUrl(currentResource))
+              a.button.is-primary(href=h.newRecordUrl(currentResource))
                 span.icon
                   i.fas.fa-plus.fa-xs
                 .btn-text Add new
@@ -30,10 +30,10 @@ block content
                   th.text-small= h._.startCase(prop.name())
                 th
             tbody
-              for instance in instances
+              for record in records
                 tr
                   for prop in currentResource.decorate().getListProperties()
-                    td.is-vcentered!= currentResource.decorate().getValue({ instance, property: prop, where: 'list', helpers: h})
+                    td.is-vcentered!= currentResource.decorate().getValue({ record, property: prop, where: 'list', helpers: h})
                   td
                     .dropdown.is-right.is-hoverable
                       .dropdown-trigger
@@ -42,15 +42,15 @@ block content
                             i.fas.fa-ellipsis-h
                       .dropdown-menu
                         .dropdown-content
-                          a.button.is-white(href=h.showInstanceUrl(currentResource, instance))
+                          a.button.is-white(href=h.showRecordUrl(currentResource, record))
                             span.icon.is-large
                               i.fas.fa-info
                             .btn-text Info
-                          a.button.is-white(href=h.editInstanceUrl(currentResource, instance))
+                          a.button.is-white(href=h.editRecordUrl(currentResource, record))
                             span.icon
                               i.fas.fa-pen
                             .btn-text Edit
-                          a.button.is-white(href=h.deleteInstanceUrl(currentResource, instance))
+                          a.button.is-white(href=h.deleteRecordUrl(currentResource, record))
                             span.icon
                               i.fas.fa-trash
                             .btn-text Remove
@@ -68,4 +68,4 @@ block content
                 a.button.is-white
                   i.fas.fa-angle-right.fa-lg
     else
-      +emptyTable(h.newInstanceUrl(currentResource))
+      +emptyTable(h.newRecordUrl(currentResource))

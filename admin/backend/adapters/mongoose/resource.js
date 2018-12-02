@@ -1,5 +1,5 @@
 const BaseResource = require('../base/resource')
-const Instance = require('../base/instance')
+const Record = require('../base/record')
 const Property = require('./property')
 const ValidationError = require('../../utils/validation-error')
 
@@ -7,35 +7,35 @@ const ValidationError = require('../../utils/validation-error')
  * Adapter for mongoose resource
  */
 class Resource extends BaseResource {
-  databaseName() {
-    return this.resource.db.name
+  constructor(MongooseModel) {
+    super(MongooseModel)
+    this.MongooseModel = MongooseModel
   }
 
-  constructor(mongoModel) {
-    super(mongoModel)
-    this.resource = mongoModel
+  databaseName() {
+    return this.MongooseModel.db.name
   }
 
   async count() {
-    return this.resource.countDocuments()
+    return this.MongooseModel.countDocuments()
   }
 
   async find(query, { limit = 20, offset = 0 }) {
-    const raw = await this.resource.find({}).skip(offset).limit(limit)
-    return raw.map(m => new Instance(m.toObject(), this))
+    const raw = await this.MongooseModel.find({}).skip(offset).limit(limit)
+    return raw.map(m => new Record(m.toObject(), this))
   }
 
   async findOne(id) {
-    const raw = await this.resource.findById(id)
-    return new Instance(raw.toObject(), this)
+    const raw = await this.MongooseModel.findById(id)
+    return new Record(raw.toObject(), this)
   }
 
   build(params) {
-    return new Instance(params, this)
+    return new Record(params, this)
   }
 
   async create(params) {
-    let mongooseDocument = new this.resource(params)
+    let mongooseDocument = new this.MongooseModel(params)
     try {
       mongooseDocument = await mongooseDocument.save()
     } catch (error) {
@@ -49,7 +49,7 @@ class Resource extends BaseResource {
 
   async update(id, params) {
     try {
-      const ret = await this.resource.findOneAndUpdate({
+      const ret = await this.MongooseModel.findOneAndUpdate({
         _id: id,
       }, {
         $set: params,
@@ -66,20 +66,20 @@ class Resource extends BaseResource {
   }
 
   async delete(id) {
-    return this.resource.deleteOne({ _id: id })
+    return this.MongooseModel.deleteOne({ _id: id })
   }
 
   name() {
-    return this.resource.modelName
+    return this.MongooseModel.modelName
   }
 
   id() {
-    return this.resource.modelName.toLowerCase()
+    return this.MongooseModel.modelName.toLowerCase()
   }
 
   properties() {
     const properties = []
-    for (const [name, path] of Object.entries(this.resource.schema.paths)) {
+    for (const [name, path] of Object.entries(this.MongooseModel.schema.paths)) {
       const prop = new Property(path)
       properties.push(prop)
     }
@@ -87,8 +87,8 @@ class Resource extends BaseResource {
   }
 
   property(name) {
-    if (this.resource.schema.paths[name]) {
-      return new Property(this.resource.schema.paths[name])
+    if (this.MongooseModel.schema.paths[name]) {
+      return new Property(this.MongooseModel.schema.paths[name])
     }
     return null
   }

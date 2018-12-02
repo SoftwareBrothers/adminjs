@@ -4,7 +4,7 @@ include ../mixins/breadcrumb
 
 block content
   secton.show-details
-    +breadcrumb([currentResource.decorate().getResourceName(), instance.title()])
+    +breadcrumb([currentResource.decorate().getResourceName(), record.title()])
     .column
       .level
         .title
@@ -14,12 +14,12 @@ block content
           | Details
         .field.is-grouped
           .control
-            a.button.is-primary(href=h.editInstanceUrl(currentResource, instance))
+            a.button.is-primary(href=h.editRecordUrl(currentResource, record))
               span.icon
                 i.fas.fa-pen
               .btn-text Edit
           .control
-            a.button.is-primary.is-outlined(href=h.deleteInstanceUrl(currentResource, instance))
+            a.button.is-primary.is-outlined(href=h.deleteRecordUrl(currentResource, record))
               span.icon
                 i.fas.fa-trash-alt
               .btn-text Remove
@@ -30,4 +30,4 @@ block content
             .card-content
               .text-small #{h._.startCase(prop.name())}
               div(class={ 'feature' : properties.indexOf(prop) === 0 })
-                != currentResource.decorate().getValue({ instance, property: prop, where: 'show', helpers: h})
+                != currentResource.decorate().getValue({ record, property: prop, where: 'show', helpers: h})

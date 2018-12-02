@@ -1,6 +1,6 @@
 const ValidationError = require('../../utils/validation-error')
 
-class Instance {
+class Record {
   constructor(params, resource) {
     this.resource = resource
     this.params = params
@@ -71,4 +71,4 @@ class Instance {
   }
 }
 
-module.exports = Instance
+module.exports = Record

@@ -80,10 +80,10 @@ describe('BaseDecorator', function () {
 
   describe('#getValue', function () {
     it('returns value from the resource when there is no override', function () {
-      this.instance = { param: this.sinon.spy()}
+      this.record = { param: this.sinon.spy() }
       this.decorator = new BaseDecorator(this.mockedResource)
-      this.decorator.getValue({ instance: this.instance, property: new BaseProperty({ path: 'somename' }) })
-      expect(this.instance.param).to.have.been.called
+      this.decorator.getValue({ record: this.record, property: new BaseProperty({ path: 'somename' }) })
+      expect(this.record.param).to.have.been.called
     })
   })
 })

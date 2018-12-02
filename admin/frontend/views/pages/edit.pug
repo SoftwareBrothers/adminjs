@@ -4,9 +4,9 @@ include ../mixins/breadcrumb
 
 block content
   +breadcrumb([currentResource.decorate().getResourceName(),
-                 instance.title(), 'edit'])
+                 record.title(), 'edit'])
   section.view-edit
-    form(method='POST' action=h.showInstanceUrl(currentResource, instance))
+    form(method='POST' action=h.showRecordUrl(currentResource, record))
       .level
         h3.title
           a.button.is-text.is-back(href=h.listUrl(currentResource))
@@ -20,12 +20,12 @@ block content
                 i(class="fas fa-check")
               .btn-text Save
           .control
-            a.button.is-primary.is-outlined(href=h.deleteInstanceUrl(currentResource, instance))
+            a.button.is-primary.is-outlined(href=h.deleteRecordUrl(currentResource, record))
               span.icon.is-small
                 i(class="fas fa-trash")
               .btn-text Remove
       .box
         for prop in properties.filter(p => p.isEditable())
-          - error = instance.error(prop.name())
-          - value = instance.param(prop.name())
+          - error = record.error(prop.name())
+          - value = record.param(prop.name())
           +formGroup(prop, value, error)

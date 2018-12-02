@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 const Resource = require('@backend/adapters/mongoose/resource')
-const Instance = require('@backend/adapters/base/instance')
+const Record   = require('@backend/adapters/base/record')
 const Property = require('@backend/adapters/mongoose/property')
 const originalValidationError = require('@fixtures/mongoose-validation-error')
 const ValidationError = require('@backend/utils/validation-error')
@@ -14,7 +14,7 @@ describe('Resource', function () {
 
     this.mongooseConnection = await mongoose.connect(process.env.MONGO_URL)
     this.count = 12
-    this.userInstances = await factory.createMany('user', this.count)
+    this.userRecords = await factory.createMany('user', this.count)
   })
 
   after(async function () {
@@ -40,7 +40,7 @@ describe('Resource', function () {
   describe('#constructor', function () {
     it('stores original model', function () {
       const resource = new Resource(User)
-      expect(resource.resource).to.equal(User)
+      expect(resource.MongooseModel).to.equal(User)
     })
   })
 
@@ -69,8 +69,8 @@ describe('Resource', function () {
       expect(this.ret.length).to.equal(this.limit)
     })
 
-    it('returns elements of Instance', async function () {
-      expect(this.ret[0]).to.be.an.instanceof(Instance)
+    it('returns elements of Record', async function () {
+      expect(this.ret[0]).to.be.an.instanceof(Record)
     })
   })
 
@@ -134,7 +134,7 @@ describe('Resource', function () {
       beforeEach(async function () {
         this.params = { email: 'john@doe.com', passwordHash: 'somesecretpasswordhash' }
         this.resource = new Resource(User)
-        this.instance = await this.resource.create(this.params)
+        this.record = await this.resource.create(this.params)
       })
 
       it('creates new object', async function () {
@@ -142,7 +142,7 @@ describe('Resource', function () {
       })
 
       it('returns Object', function () {
-        expect(this.instance).to.be.an.instanceof(Object)
+        expect(this.record).to.be.an.instanceof(Object)
       })
     })
 
@@ -165,7 +165,7 @@ describe('Resource', function () {
   describe('#delete', function () {
     beforeEach(async function () {
       this.startCount = await User.countDocuments()
-      this.idOfItemToDelete = this.userInstances[0]._id
+      this.idOfItemToDelete = this.userRecords[0]._id
       this.resource = new Resource(User)
       await this.resource.delete(this.idOfItemToDelete)
     })

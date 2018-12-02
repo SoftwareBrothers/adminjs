@@ -65,14 +65,14 @@ class BaseDecorator {
   /**
    * returns value for given field
    * @param  {Object} options
-   * @param  {BaseInstance} options.instance
+   * @param  {BaseRecord}   options.record
    * @param  {BaseProperty} options.property
    * @param  {String}       options.where    one of: list | show
    * @param  {ViewHelpers}  options.helpers  view helpers
    * @return {String}                        Html string which will be rendered
    */
-  getValue({ instance, property, where, helpers }) {
-    return instance.param(property.name())
+  getValue({ record, property, where, helpers }) {
+    return record.param(property.name())
   }
 }
 

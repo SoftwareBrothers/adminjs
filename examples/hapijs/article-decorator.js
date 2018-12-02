@@ -9,16 +9,16 @@ class ArticleDecorator extends BaseDecorator {
     this.parentName = 'Blog'
   }
 
-  getValue({ instance, property, where, helpers }) {
+  getValue({ record, property, where, helpers }) {
     switch (property.name()) {
     case 'publishedAt':
       return `
         <p>Here goes a paragraph</p>
         <p>and another one</p>
-        <a href="${helpers.showInstanceUrl(instance.resource, instance)}">Link somewere</>
+        <a href="${helpers.showRecordUrl(record.resource, record)}">Link somewere</>
       `
     default:
-      return super.getValue({ instance, property, where, helpers })
+      return super.getValue({ record, property, where, helpers })
     }
   }
 }

@@ -3,38 +3,38 @@ const BaseController = require('./base-controller.js')
 class ResourcesController extends BaseController {
   async index({ params, query, payload }, response) {
     this.findResources(params)
-    this.view.instances = await this.findInstances({ query })
+    this.view.records = await this.findRecords({ query })
     return this.render('pages/list', this.view)
   }
 
   async show({ params, query, payload }, response) {
     this.findResources(params)
-    const { instanceId } = params
-    this.view.instance = await this.view.currentResource.findOne(instanceId)
+    const { recordId } = params
+    this.view.record = await this.view.currentResource.findOne(recordId)
     return this.render('pages/show', this.view)
   }
 
   async edit({ params, query, payload }, response) {
     this.findResources(params)
-    const { instanceId } = params
-    this.view.instance = await this.view.currentResource.findOne(instanceId)
+    const { recordId } = params
+    this.view.record = await this.view.currentResource.findOne(recordId)
     return this.render('pages/edit', this.view)
   }
 
   async new({ params, query, payload }, response) {
     this.findResources(params)
-    this.view.instance = this.view.currentResource.build()
+    this.view.record = this.view.currentResource.build()
     return this.render('pages/new', this.view)
   }
 
   async create({ params, query, payload }, response) {
     this.findResources(params)
-    this.view.instance = this.view.currentResource.build(payload)
-    this.view.instance = await this.view.instance.save()
-    if (this.view.instance.isValid()) {
-      return response.redirect(this.view.h.showInstanceUrl(
+    this.view.record = this.view.currentResource.build(payload)
+    this.view.record = await this.view.record.save()
+    if (this.view.record.isValid()) {
+      return response.redirect(this.view.h.showRecordUrl(
         this.view.currentResource,
-        this.view.instance,
+        this.view.record,
       ))
     }
     return this.render('pages/new', this.view)
@@ -42,14 +42,14 @@ class ResourcesController extends BaseController {
 
   async update({ params, query, payload }, response) {
     this.findResources(params)
-    const { instanceId } = params
-    this.view.instance = await this.view.currentResource.findOne(instanceId)
-    await this.view.instance.update(payload)
+    const { recordId } = params
+    this.view.record = await this.view.currentResource.findOne(recordId)
+    await this.view.record.update(payload)
 
-    if (this.view.instance.isValid()) {
-      return response.redirect(this.view.h.showInstanceUrl(
+    if (this.view.record.isValid()) {
+      return response.redirect(this.view.h.showRecordUrl(
         this.view.currentResource,
-        this.view.instance,
+        this.view.record,
       ))
     }
     return this.render('pages/edit', this.view)
@@ -57,9 +57,9 @@ class ResourcesController extends BaseController {
 
   async delete({ params, query, payload }, response) {
     this.findResources(params)
-    const { instanceId } = params
+    const { recordId } = params
 
-    await this.view.currentResource.delete(instanceId)
+    await this.view.currentResource.delete(recordId)
     return response.redirect(this.view.h.listUrl(
       this.view.currentResource,
     ))
@@ -70,7 +70,7 @@ class ResourcesController extends BaseController {
     this.view.properties = this.view.currentResource.properties()
   }
 
-  async findInstances({ query }) {
+  async findRecords({ query }) {
     this.view.perPage = 10
     this.view.total = await this.view.currentResource.count()
     this.view.page = query.page || 1

@@ -6,8 +6,8 @@ const NotImplementedError = require('../../utils/not-implemented-error')
  * @mermaid
  *   graph TD
  *   A[BaseDatabase] -->|has many| B(BaseResource)
- *   B --> |has many|C(AbstractInstance)
- *   B --> |has many|D(AbstractPorperty)
+ *   B --> |has many|C(BaseRecord)
+ *   B --> |has many|D(BasePorperty)
  */
 class BaseDatabase {
   /**
