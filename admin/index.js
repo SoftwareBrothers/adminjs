@@ -11,16 +11,14 @@ const Routes = require('./backend/routes')
  * @typedef {Object} Settings
  */
 const defaults = {
-  rootPath: 'admin',
+  rootPath: '/admin',
+  logoutPath: '/admin/logout',
+  loginPath: '/admin/login',
   databases: [],
   resources: [],
   branding: {
     logo: 'https://softwarebrothers.co/assets/images/software-brothers-logo-compact.svg',
     companyName: 'Company Name',
-  },
-  authenticate: async () => {
-    console.warn('you have to give authenticate function to AdmiBro settings')
-    return false
   },
 }
 
