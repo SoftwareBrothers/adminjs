@@ -39,7 +39,7 @@ describe('BaseDecorator', function () {
   })
 
   describe('#getResourceName', function () {
-    it('returns resource name when not ovverriden', function () {
+    it('returns resource name when not overriden', function () {
       const decorator = new BaseDecorator(this.mockedResource)
       expect(decorator.getResourceName()).to.equal(this.resourceName)
     })

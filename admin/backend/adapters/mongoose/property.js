@@ -1,5 +1,10 @@
 const BaseProperty = require('../base/property')
 
+const ID_PROPERTY = '_id'
+
+// __v indicates versionKey in mongoose
+const VERSION_KEY_PROPERTY = '__v'
+
 class Property extends BaseProperty {
   /**
    * Crates an object from mongoose schema path
@@ -33,17 +38,16 @@ class Property extends BaseProperty {
   }
 
   isEditable() {
-    return this.name() !== '__v' && this.name() !== '_id'
+    return this.name() !== VERSION_KEY_PROPERTY && this.name() !== ID_PROPERTY
   }
 
   isVisible() {
-    // __v indicates versionKey in mongoose
     // fields containing password are hidden by default
-    return this.name() !== '__v' && !this.name().match('password')
+    return this.name() !== VERSION_KEY_PROPERTY && !this.name().match('password')
   }
 
   isId() {
-    return this.name() === '_id'
+    return this.name() === ID_PROPERTY
   }
 
   type() {

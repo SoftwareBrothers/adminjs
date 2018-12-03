@@ -66,8 +66,8 @@ class Admin {
       }))
     }
     if (databases && databases.length > 0) {
-      const rawResources = DatabasesParser(this.options.databases).reduce((m, database) => {
-        return m.concat(database.resources())
+      const rawResources = DatabasesParser(this.options.databases).reduce((memo, database) => {
+        return memo.concat(database.resources())
       }, [])
       const resourcesToAdd = rawResources.map(m => ResourceFactory(m)).filter((m) => {
         // ensure that resource is not there yet

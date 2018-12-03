@@ -45,7 +45,6 @@ class ResourcesController extends BaseController {
     const { recordId } = params
     this.view.record = await this.view.currentResource.findOne(recordId)
     await this.view.record.update(payload)
-
     if (this.view.record.isValid()) {
       return response.redirect(this.view.h.showRecordUrl(
         this.view.currentResource,
@@ -58,7 +57,6 @@ class ResourcesController extends BaseController {
   async delete({ params, query, payload }, response) {
     this.findResources(params)
     const { recordId } = params
-
     await this.view.currentResource.delete(recordId)
     return response.redirect(this.view.h.listUrl(
       this.view.currentResource,

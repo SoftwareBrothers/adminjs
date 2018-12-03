@@ -1,5 +1,5 @@
 const NotImplementedError = require('../../utils/not-implemented-error')
-const TITLE_COLUMN_NAMES = ['title', 'name', 'subject']
+const TITLE_COLUMN_NAMES = ['title', 'name', 'subject', 'email']
 
 /**
  * Represents resource properties
@@ -33,6 +33,10 @@ class BaseProperty {
    */
   type() {
     return this._type || 'string'
+  }
+
+  isTitle() {
+    return TITLE_COLUMN_NAMES.includes(this._path.toLowerCase())
   }
 
   /**

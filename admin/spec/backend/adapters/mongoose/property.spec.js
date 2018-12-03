@@ -77,4 +77,18 @@ describe('Property', function () {
       expect(this.property.type()).to.equal('float')
     })
   })
+
+  describe('#isTitle', function () {
+    it('returns true for title-ish column', function () {
+      this.schema = new mongoose.Schema({ title: String })
+      this.property = new Property(this.schema.paths.title)
+      expect(this.property.isTitle()).to.equal(true)
+    })
+
+    it('returns false for any regular field', function () {
+      this.schema = new mongoose.Schema({ someRegularName: String })
+      this.property = new Property(this.schema.paths.someRegularName)
+      expect(this.property.isTitle()).to.equal(false)
+    })
+  })
 })

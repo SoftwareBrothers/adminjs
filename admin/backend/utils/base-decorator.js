@@ -33,33 +33,28 @@ class BaseDecorator {
   getListProperties() {
     const overridenProperties = this.invokeOrGet('listProperties')
     if (overridenProperties) {
-      return overridenProperties.map(p => this.nameToProperty(p))
+      return overridenProperties.map(property => this.nameToProperty(property))
     }
-    return this._resource.properties().filter(p => p.isVisible()).slice(0, DEFAULT_MAX_ITEMS_IN_LIST)
+    return this._resource.properties().filter((property) => {
+      return property.isVisible()
+    }).slice(0, DEFAULT_MAX_ITEMS_IN_LIST)
   }
 
   getShowProperties() {
     const overridenProperties = this.invokeOrGet('showProperties')
     if (overridenProperties) {
-      return overridenProperties.map(p => this.nameToProperty(p))
+      return overridenProperties.map(property => this.nameToProperty(property))
     }
-    return this._resource.properties().filter(p => p.isEditable())
+    return this._resource.properties().filter(property => property.isEditable())
   }
 
 
   nameToProperty(propertyName) {
-    const property = this._resource.property(propertyName)
-    if (!property) {
-      return new BaseProperty({ path: propertyName })
-    }
-    return property
+    return this._resource.property(propertyName) || new BaseProperty({ path: propertyName })
   }
 
   invokeOrGet(param) {
-    if (this[param] instanceof Function) {
-      return this[param]()
-    }
-    return this[param]
+    return (this[param] instanceof Function) ? this[param]() : this[param]
   }
 
   /**

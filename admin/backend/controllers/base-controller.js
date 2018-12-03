@@ -17,13 +17,13 @@ class BaseController {
     this._admin = admin
     this.view = {}
     this.view.currentAdmin = currentAdmin
-    this.view.resources = admin.resources.reduce((m, resource) => {
-      if (m[resource.decorate().getParent()]) {
-        m[resource.decorate().getParent()].push(resource)
+    this.view.resources = admin.resources.reduce((memo, resource) => {
+      if (memo[resource.decorate().getParent()]) {
+        memo[resource.decorate().getParent()].push(resource)
       } else {
-        m[resource.decorate().getParent()] = [resource]
+        memo[resource.decorate().getParent()] = [resource]
       }
-      return m
+      return memo
     }, {})
     this.view.h = new ViewHelpers({ admin })
   }

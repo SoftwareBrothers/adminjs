@@ -1,5 +1,7 @@
 const ValidationError = require('../../utils/validation-error')
 
+const TITLE_PROPERTIES = ['name', 'title', 'topic', 'email']
+
 class Record {
   constructor(params, resource) {
     this.resource = resource
@@ -12,7 +14,7 @@ class Record {
     // in this.params we have regular object. That is why we have to
     // change it to params[some][parameter][has]
     const nestedParams = name.split('.')
-    return nestedParams.reduce((m, param) => m && m[param], this.params)
+    return nestedParams.reduce((memo, param) => memo && memo[param], this.params)
   }
 
   async update(params) {
@@ -35,14 +37,8 @@ class Record {
   }
 
   title() {
-    const nameProperty = this.resource.property('name')
-                      || this.resource.property('title')
-                      || this.resource.property('topic')
-                      || this.resource.property('email')
-    if (nameProperty) {
-      return this.param(nameProperty.name())
-    }
-    return this.id()
+    const nameProperty = this.resource.properties().find(p => p.isTitle())
+    return nameProperty ? this.param(nameProperty.name()) : this.id()
   }
 
   async save() {

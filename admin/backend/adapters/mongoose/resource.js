@@ -3,6 +3,9 @@ const Record = require('../base/record')
 const Property = require('./property')
 const ValidationError = require('../../utils/validation-error')
 
+// Error thrown by mongoose in case of validation error
+const MONGOOSE_VALIDATION_ERROR = 'ValidationError'
+
 /**
  * Adapter for mongoose resource
  */
@@ -21,13 +24,13 @@ class Resource extends BaseResource {
   }
 
   async find(query, { limit = 20, offset = 0 }) {
-    const raw = await this.MongooseModel.find({}).skip(offset).limit(limit)
-    return raw.map(m => new Record(m.toObject(), this))
+    const mongooseObjects = await this.MongooseModel.find({}).skip(offset).limit(limit)
+    return mongooseObjects.map(mongooseObject => new Record(mongooseObject.toObject(), this))
   }
 
   async findOne(id) {
-    const raw = await this.MongooseModel.findById(id)
-    return new Record(raw.toObject(), this)
+    const mongooseObject = await this.MongooseModel.findById(id)
+    return new Record(mongooseObject.toObject(), this)
   }
 
   build(params) {
@@ -39,7 +42,7 @@ class Resource extends BaseResource {
     try {
       mongooseDocument = await mongooseDocument.save()
     } catch (error) {
-      if (error.name === 'ValidationError') {
+      if (error.name === MONGOOSE_VALIDATION_ERROR) {
         throw this.createValidationError(error)
       }
       throw error
@@ -49,16 +52,16 @@ class Resource extends BaseResource {
 
   async update(id, params) {
     try {
-      const ret = await this.MongooseModel.findOneAndUpdate({
+      const mongooseObject = await this.MongooseModel.findOneAndUpdate({
         _id: id,
       }, {
         $set: params,
       }, {
         runValidators: true,
       })
-      return ret
+      return mongooseObject
     } catch (error) {
-      if (error.name === 'ValidationError') {
+      if (error.name === MONGOOSE_VALIDATION_ERROR) {
         throw this.createValidationError(error)
       }
       throw error
@@ -94,13 +97,10 @@ class Resource extends BaseResource {
   }
 
   createValidationError(originalError) {
-    const errors = Object.keys(originalError.errors).reduce((m, key) => {
-      const error = originalError.errors[key]
-      m[error.path] = {
-        message: error.message,
-        kind: error.kind,
-      }
-      return m
+    const errors = Object.keys(originalError.errors).reduce((memo, key) => {
+      const { path, message, kind } = originalError.errors[key]
+      memo[path] = { message, kind }
+      return memo
     }, {})
     return new ValidationError(`${this.name()} validation failed`, errors)
   }
