@@ -8,14 +8,13 @@
  */
 
 const Boom = require('boom')
-const AdminBro = require('../admin.js')
+const AdminBro = require('../index.js')
 const Routes = require('../backend/routes')
 
 module.exports = {
   name: 'AdminBro',
   version: '1.0.0',
   register: async (server, options) => {
-    console.log(AdminBro)
     const admin = new AdminBro(options)
     const auth = options.auth || false
     const routes = new Routes({ admin }).all()

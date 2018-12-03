@@ -1,3 +1,3 @@
-const AdminBro = require('./admin/admin')
+const AdminBro = require('./admin/index')
 
 module.exports = AdminBro

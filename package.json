@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "./node_modules/mocha/bin/mocha admin/spec",
-    "start": "node index.js",
-    "start-dev": "./node_modules/nodemon/bin/nodemon.js index.js",
+    "start": "node example.js",
+    "start-dev": "./node_modules/nodemon/bin/nodemon.js example.js",
     "lint": "./node_modules/eslint/bin/eslint.js './spec/**' './admin/**'",
     "docs": "node_modules/.bin/jsdoc -c jsdoc.json",
     "cover": "NODE_ENV=test ./node_modules/nyc/bin/nyc.js"
