@@ -7,6 +7,7 @@
   .sidebar-content
     height: 100vh
     border-right: 1px solid $athens-gray-dark
+    background-color: $white
     padding: rem(15px) rem(24px)
     overflow-y: auto
     position: fixed
@@ -78,4 +79,15 @@
   .sidebar-top
     .menu-label
       margin-left: rem(16px)
-
+  
+@include media-breakpoint-down($media-min-tablet-width - 1px)
+  .sidebar-mobile
+    .sidebar-main, .sidebar-content
+      width: $sidebar-mobile-width
+    .menu-list, .sidebar-content .sidebar-top .sidebar-brand, .sidebar-footer, .sidebar-navigation
+      display: none
+    .hamburger
+      cursor: pointer
+      display: flex
+      justify-content: center
+      align-items: center
