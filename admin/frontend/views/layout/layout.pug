@@ -11,7 +11,7 @@ html
       != adminStyles
   body
     .columns.container-main
-      aside.sidebar-main
+      aside.sidebar
         include components/sidebar
       .column.content-wrapper
         include components/topbar
@@ -25,3 +25,8 @@ html
       integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
       crossorigin="anonymous")
     script(defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js")
+    script
+      | $(document).ready(() => {
+      |   $('.hamburger').click(() => $('.sidebar-desktop').removeClass('sidebar-mobile'));
+      |   $('.content-wrapper').click(() => $('.sidebar-desktop').addClass('sidebar-mobile'));
+      | });

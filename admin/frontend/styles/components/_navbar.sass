@@ -3,10 +3,34 @@
   margin-left: -$padding-layout
   margin-right: -$padding-layout
   height: $navbar-height
+  .navbar-end
+    margin-right: rem(40px)
   .navbar-user
-    margin-left: rem(16px)
     img
       border-radius: 50%
       margin-left: rem(16px)
-    .current-admin
+    .navbar-link::after
+      border-color: $cornflower-blue
+    .navbar-item, .navbar-link
       color: $woodsmoke
+    .navbar-link
+      line-height: rem(40px)
+      height: rem(40px)
+      padding: rem(12px) rem(16px)
+      border-radius: rem(20px)
+      align-self: center
+  .navbar-dropdown
+    border-radius: 0
+    box-shadow: 0 rem(6px) rem(13px) 0 rgba(69, 70, 85, 0.13)
+    padding: 0
+    border: none
+    top: 95%
+    svg
+      margin-right: rem(16px)
+      path
+        fill: $spun-pearl
+    .navbar-item
+      padding: rem(16px) rem(25px)
+      font-size: rem(14px)
+      color: $mako
+

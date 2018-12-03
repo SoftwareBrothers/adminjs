@@ -1,11 +1,12 @@
-p.menu-label Navigation
-ul.menu-list
-  for resourceList, key in resources
-    li
-      span.menu-item-main
-        = h._.startCase(key)
-      ul.menu-list
-        for resource in resourceList
-          li
-            a(href=h.listUrl(resource) class={ 'is-active' : currentResource && currentResource.id() === resource.id() })
-              = resource.decorate().getResourceName()
+.sidebar-navigation
+  p.menu-label Navigation
+  ul.menu-list
+    for resourceList, key in resources
+      li
+        span.menu-item-main
+          = h._.startCase(key)
+        ul.menu-list
+          for resource in resourceList
+            li
+              a(href=h.listUrl(resource) class={ 'is-active' : currentResource && currentResource.id() === resource.id() })
+                = resource.decorate().getResourceName()

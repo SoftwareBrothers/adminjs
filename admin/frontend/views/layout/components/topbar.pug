@@ -9,8 +9,11 @@ nav.navbar
       //- .navbar-item
       //-   i.fas.fa-cog
       if currentAdmin
-        .navbar-item.navbar-user
-          span.current-admin= currentAdmin.email
-          img(src="https://api.adorable.io/avatars/24/softwarebrothers.png")
-          a.button.is-text.is-logout(href=h.logoutUrl())
-            i.fas.fa-sign-out-alt
+        .navbar-item.has-dropdown.is-hoverable.navbar-user
+          a.navbar-link
+            = currentAdmin.email
+            img(src="https://api.adorable.io/avatars/24/softwarebrothers.png")
+          .navbar-dropdown
+            a.navbar-item(href=h.logoutUrl())
+              span.fas.fa-sign-out-alt
+              | Sign out
