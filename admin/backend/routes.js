@@ -1,5 +1,5 @@
 const DashboardController = require('./controllers/dashboard-controller')
-const InstancesController = require('./controllers/instances-controller')
+const ResourcesController = require('./controllers/resources-controller')
 
 /**
  * Contains list of all routes
@@ -23,50 +23,42 @@ class Routes {
     return [{
       method: 'GET',
       path: '',
-      view: 'pages/dashboard',
       Controller: DashboardController,
       action: 'index',
     }, {
       method: 'GET',
-      path: '/{databaseName}/{modelName}',
-      view: 'pages/list',
-      Controller: InstancesController,
+      path: '/resources/{resourceName}',
+      Controller: ResourcesController,
       action: 'index',
     }, {
       method: 'GET',
-      path: '/{databaseName}/{modelName}/{instanceId}',
-      view: 'pages/show',
-      Controller: InstancesController,
+      path: '/resources/{resourceName}/{recordId}',
+      Controller: ResourcesController,
       action: 'show',
     }, {
       method: 'GET',
-      path: '/{databaseName}/{modelName}/new',
-      view: 'pages/new',
-      Controller: InstancesController,
+      path: '/resources/{resourceName}/new',
+      Controller: ResourcesController,
       action: 'new',
     }, {
       method: 'POST',
-      path: '/{databaseName}/{modelName}',
-      view: 'pages/new',
-      Controller: InstancesController,
+      path: '/resources/{resourceName}',
+      Controller: ResourcesController,
       action: 'create',
     }, {
       method: 'POST',
-      path: '/{databaseName}/{modelName}/{instanceId}',
-      view: 'pages/edit',
-      Controller: InstancesController,
+      path: '/resources/{resourceName}/{recordId}',
+      Controller: ResourcesController,
       action: 'update',
     }, {
       method: 'GET',
-      path: '/{databaseName}/{modelName}/{instanceId}/edit',
-      view: 'pages/edit',
-      Controller: InstancesController,
+      path: '/resources/{resourceName}/{recordId}/edit',
+      Controller: ResourcesController,
       action: 'edit',
     }, {
       method: 'GET',
-      path: '/{databaseName}/{modelName}/{instanceId}/delete',
-      view: 'pages/delete',
-      Controller: InstancesController,
+      path: '/resources/{resourceName}/{recordId}/delete',
+      Controller: ResourcesController,
       action: 'delete',
     }]
   }

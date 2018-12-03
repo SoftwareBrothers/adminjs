@@ -7,15 +7,15 @@
  * @module Integrations/hapijs
  */
 
-const Admin = require('../index')
+const Boom = require('boom')
+const AdminBro = require('../index.js')
 const Routes = require('../backend/routes')
-const Renderer = require('../backend/utils/renderer')
 
 module.exports = {
   name: 'AdminBro',
   version: '1.0.0',
   register: async (server, options) => {
-    const admin = new Admin(options.databases, options)
+    const admin = new AdminBro(options)
     const auth = options.auth || false
     const routes = new Routes({ admin }).all()
 
@@ -25,19 +25,22 @@ module.exports = {
         path: `${admin.options.rootPath}${route.path}`,
         options: { auth },
         handler: async (request, h) => {
-          const controller = new route.Controller({
-            admin,
-          }, request.auth && request.auth.credentials)
-          const response = await controller[route.action](request, h)
-          if (!response) {
-            return new Renderer(route.view, controller.view).render()
+          try {
+            const loggedInUser = request.auth && request.auth.credentials
+            const controller = new route.Controller({ admin }, loggedInUser)
+            const ret = await controller[route.action](request, h)
+            return ret
+          } catch (e) {
+            console.log(e)
+            throw Boom.boomify(e)
           }
-          return response
         },
       })
     })
+
+    return admin
   },
   renderLogin: async (params) => {
-    return Admin.renderLogin(params)
+    return AdminBro.renderLogin(params)
   },
 }

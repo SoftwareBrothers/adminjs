@@ -12,19 +12,21 @@ const mongoose = require('mongoose')
 const Bcrypt = require('bcrypt')
 const adminBro = require('../../admin/integrations/hapi')
 
-// Example mongoose models used in the app
-require('./user-model')
-require('./article-model')
-require('./comment-model')
-require('./blog-post-model')
-require('./category-model')
-require('./page-model')
+require('../mongoose/user-model')
+const Article = require('../mongoose/article-model')
+const Page = require('../mongoose/page-model')
+require('../mongoose/comment-model')
+require('../mongoose/blog-post-model')
+require('../mongoose/category-model')
+
+
+const ArticleDecorator = require('./article-decorator')
 
 /**
  * Model which will store all admins
  * @type {Mongoose.model}
  */
-const AdminModel = require('./admin-model')
+const AdminModel = require('../mongoose/admin-model')
 
 /**
  * Creates first admin test@example.com:password when there are no
@@ -86,7 +88,7 @@ const registerAuthRoutes = async ({ server, adminBroOptions }) => {
         }
 
         // AdminBro exposes function which renders login form for us.
-        // It takes 2 arguments: 
+        // It takes 2 arguments:
         // - options.action (with login path)
         // - [errorMessage] optional error message - visible when user
         //                  gives wrong credentials
@@ -120,6 +122,12 @@ const start = async () => {
 
     const adminBroOptions = {
       databases: [connection],
+      resources: [
+        { resource: Article, decorator: ArticleDecorator },
+      ],
+      branding: {
+        companyName: 'Amazing c.o.',
+      },
       auth: 'session',
       rootPath: '/admin',
       logoutPath: '/admin/logout',
