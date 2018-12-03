@@ -4,7 +4,6 @@ const TITLE_COLUMN_NAMES = ['title', 'name', 'subject', 'email']
  * Represents resource properties
  */
 class BaseProperty {
-
   /**
    * @param  {Object} options
    * @param  {String} options.path property path: usually it its key but when
