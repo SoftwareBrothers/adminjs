@@ -1,6 +1,7 @@
 const mongoose = require('mongoose')
 const MongooseResource = require('./mongoose/resource')
 const BaseDecorator = require('../utils/base-decorator')
+const _ = require('lodash')
 
 /**
  * It changes raw resource object to a particular Resource implementation supported by AdminBro.
@@ -20,7 +21,7 @@ const BaseDecorator = require('../utils/base-decorator')
  * const resources = database.models().map(m => ResourceFactory(m, OptionalDecorator))
  */
 const ResourceFactory = (rawResource, decorator) => {
-  if (rawResource.prototype instanceof mongoose.Model) {
+  if (_.get(rawResource, 'base.constructor.name') === 'Mongoose') {
     const mongooseResource = new MongooseResource(rawResource)
     mongooseResource.assignDecorator(decorator || BaseDecorator)
     return mongooseResource

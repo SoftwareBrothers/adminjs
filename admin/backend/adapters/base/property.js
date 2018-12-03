@@ -40,7 +40,7 @@ class BaseProperty {
    * @return {Boolean}
    */
   isVisible() {
-    return true
+    return !this._path || !this._path.match('password')
   }
 
   /**

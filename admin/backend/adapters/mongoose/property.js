@@ -33,12 +33,13 @@ class Property extends BaseProperty {
   }
 
   isEditable() {
-    return this.isVisible() && this.name() !== '_id'
+    return this.name() !== '__v' && this.name() !== '_id'
   }
 
   isVisible() {
     // __v indicates versionKey in mongoose
-    return this.name() !== '__v'
+    // fields containing password are hidden by default
+    return this.name() !== '__v' && !this.name().match('password')
   }
 
   isId() {

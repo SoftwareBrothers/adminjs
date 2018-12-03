@@ -5,14 +5,19 @@ const ResourceFactory = require('./backend/adapters/resource-factory')
 const Renderer = require('./backend/utils/renderer')
 const BaseDecorator = require('./backend/utils/base-decorator')
 
+const Routes = require('./backend/routes')
+
+/**
+ * @typedef {Object} Settings
+ */
 const defaults = {
   rootPath: 'admin',
   databases: [],
+  resources: [],
   branding: {
     logo: 'https://softwarebrothers.co/assets/images/software-brothers-logo-compact.svg',
     companyName: 'Company Name',
   },
-  resources: [],
   authenticate: async () => {
     console.warn('you have to give authenticate function to AdmiBro settings')
     return false
@@ -81,6 +86,7 @@ class Admin {
   }
 }
 
-module.exports = Admin
+Admin.BaseDecorator = BaseDecorator
+Admin.Routes = Routes
 
-module.exports.BaseDecorator = BaseDecorator
+module.exports = Admin

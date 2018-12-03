@@ -38,6 +38,7 @@ class Record {
     const nameProperty = this.resource.property('name')
                       || this.resource.property('title')
                       || this.resource.property('topic')
+                      || this.resource.property('email')
     if (nameProperty) {
       return this.param(nameProperty.name())
     }
