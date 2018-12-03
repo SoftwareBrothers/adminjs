@@ -48,8 +48,8 @@ class Model extends AbstractModel {
     return this.model.countDocuments()
   }
 
-  async find(query, { limit = 20, offset = 0 }) {
-    const raw = await this.model.find({}).skip(offset).limit(limit)
+  async find(query, { limit = 20, offset = 0, sort}) {
+    const raw = await this.model.find({}).skip(offset).limit(limit).sort(sort)
     return raw.map(m => new Instance(m.toObject(), this))
   }
 

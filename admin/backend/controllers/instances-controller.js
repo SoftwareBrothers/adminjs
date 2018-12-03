@@ -79,9 +79,14 @@ class InstancesController extends BaseController {
     this.view.perPage = 10
     this.view.total = await this.view.model.count()
     this.view.page = query.page || 1
+    let sort = {}
+    if(query.sortBy && query.sortDirection) {
+      sort[query.sortBy] = query.sortDirection
+    }
     return this.view.model.find({}, {
       limit: this.view.perPage,
       offset: (this.view.page - 1) * this.view.perPage,
+      sort
     })
   }
 }
