@@ -44,6 +44,10 @@ class ViewHelpers {
   deleteInstanceUrl(database, model, instance) {
     return this.urlBuilder([database.name(), model.name(), instance.id(), 'delete'])
   }
+
+  isMainColumn(propertyName) {
+    return ['name', 'email', 'title', '_id'].includes(propertyName)
+  }
 }
 
 module.exports = ViewHelpers

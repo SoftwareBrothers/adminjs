@@ -33,7 +33,11 @@ block content
               for instance in instances
                 tr
                   for prop in properties.filter(p => p.isVisible())
-                    td.is-vcentered= instance.param(prop.name())
+                    td.is-vcentered(class={ 'property-main' : h.isMainColumn(prop.name()) })
+                      if h.isMainColumn(prop.name())
+                        a(href=h.showInstanceUrl(database, model, instance))= instance.param(prop.name())
+                      else
+                        = instance.param(prop.name())
                   td
                     .dropdown.is-right.is-hoverable
                       .dropdown-trigger
@@ -54,7 +58,7 @@ block content
                             span.icon
                               i.fas.fa-trash
                             .btn-text Remove
-                      
+
           - pages = h.paginate(total, page, perPage).pages
           if pages.length > 1
             .level-item.pagination-content
