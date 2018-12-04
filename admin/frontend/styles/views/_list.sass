@@ -29,3 +29,16 @@
       word-break: break-all
     thead tr:hover
       background: none
+
+  @include media-breakpoint-down($media-min-tablet-width - 1px)
+    .level .is-grouped
+      margin-top: rem(14px)
+    thead
+      display: none
+    .table td
+      padding: 0
+      &:not(.property-main)
+        display: none
+    .property-main a
+      padding: rem(14px)
+      display: block
