@@ -51,6 +51,10 @@ class ViewHelpers {
   deleteRecordUrl(resource, record) {
     return this.urlBuilder(['resources', resource.id(), record.id(), 'delete'])
   }
+
+  isMainColumn(propertyName) {
+    return ['name', 'email', 'title', '_id'].includes(propertyName)
+  }
 }
 
 module.exports = ViewHelpers
