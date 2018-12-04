@@ -28,7 +28,13 @@ block content
               tr
                 for prop in properties.filter(p => p.isVisible())
                   th
-                    a.text-small(href=h.listUrl(database, model, { sort: { sortBy: prop.name(), sortDirection: 'asc' }}))=prop.name().toUpperCase()
+                    - isSortedByCurrentPropName = sort.sortBy === prop.name()
+                    a(href=h.listUrl(database, model, { sort: { sortBy: prop.name(), sortDirection: sort.direction === 'asc' && isSortedByCurrentPropName ? 'desc' : 'asc' }}))
+                      .text-small(class={ 'active' : isSortedByCurrentPropName })=prop.name().toUpperCase()
+                      .asc(class={ 'hidden' : !isSortedByCurrentPropName || sort.direction === 'desc' })
+                        i.fas.fa-caret-up
+                      .desc(class={ 'hidden' : !isSortedByCurrentPropName || sort.direction === 'asc' })
+                        i.fas.fa-caret-down
                 th
             tbody
               for instance in instances

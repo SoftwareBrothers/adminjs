@@ -78,15 +78,16 @@ class InstancesController extends BaseController {
   async findInstances({ query }) {
     this.view.perPage = 10
     this.view.total = await this.view.model.count()
-    this.view.page = query.page || 1
-    let sort = {}
-    if(query.sortBy && query.sortDirection) {
-      sort[query.sortBy] = query.sortDirection
+    const { page, sortBy, sortDirection } = query
+    this.view.page = page || 1
+    this.view.sort = {
+      sortBy: sortBy || '_id',
+      direction: sortDirection || 'asc'
     }
     return this.view.model.find({}, {
       limit: this.view.perPage,
       offset: (this.view.page - 1) * this.view.perPage,
-      sort
+      sort: this.view.sort
     })
   }
 }

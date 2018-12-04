@@ -12,9 +12,19 @@
       vertical-align: middle
     th
       border-bottom: none
-      &.text-small
+      .text-small, a
         font-weight: normal
         color: $ghost
+      a         
+        display: flex
+        flex-direction: row
+        align-items: center
+        svg 
+          margin: 0 rem(5px)
+          path
+            color: $cornflower-blue
+      .text-small.active
+        color: $cornflower-blue
     tr
       &:hover
         background-color: $athens-gray
