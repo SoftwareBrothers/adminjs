@@ -14,7 +14,7 @@
     "opts": {
         "encoding": "utf8",
         "destination": "docs/",
-        "readme": "./docs/index.md",
+        "readme": "./docs.md",
         "recurse": true,
         "verbose": true,
         "tutorials": "./tutorials"

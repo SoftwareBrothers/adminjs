@@ -7,8 +7,10 @@ class Renderer {
     this.view = view
     this.data = data
 
-    this.styles_path = 'admin/frontend/styles/index.sass'
-    this.views_path = 'admin/frontend/views/'
+    const pathRoot = `${__dirname}/../..`
+
+    this.styles_path = `${pathRoot}/frontend/styles/index.sass`
+    this.views_path = `${pathRoot}/frontend/views/`
   }
 
   async styles() {

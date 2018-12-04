@@ -12,7 +12,7 @@ class ValidationError extends Error {
   constructor(message, errors) {
     super(message)
     this.errors = errors
-    this.message = message || 'Model cannot be stored because of validation errors'
+    this.message = message || 'Resource cannot be stored because of validation errors'
     this.name = 'ValidationError'
   }
 }

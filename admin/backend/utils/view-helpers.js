@@ -1,9 +1,12 @@
 const paginate = require('jw-paginate')
+const lodash = require('lodash')
 
 class ViewHelpers {
   constructor({ admin }) {
     this._admin = admin
     this.paginate = paginate
+    this._ = lodash
+    this.branding = this._admin.options.branding
   }
 
   getObjectKeyWithValue(obj, key) {
@@ -36,24 +39,32 @@ class ViewHelpers {
     return this._admin.options.logoutPath
   }
 
-  listUrl(database, model, query) {
-    return this.urlBuilder([database.name(), model.name()], query)
+  dashboardUrl() {
+    return this._admin.options.rootPath
   }
 
-  newInstanceUrl(database, model) {
-    return this.urlBuilder([database.name(), model.name(), 'new'])
+  listUrl(resource, query) {
+    return this.urlBuilder(['resources', resource.id()], query)
   }
 
-  showInstanceUrl(database, model, instance) {
-    return this.urlBuilder([database.name(), model.name(), instance.id()])
+  newRecordUrl(resource) {
+    return this.urlBuilder(['resources', resource.id(), 'new'])
   }
 
-  editInstanceUrl(database, model, instance) {
-    return this.urlBuilder([database.name(), model.name(), instance.id(), 'edit'])
+  showRecordUrl(resource, record) {
+    return this.urlBuilder(['resources', resource.id(), record.id()])
   }
 
-  deleteInstanceUrl(database, model, instance) {
-    return this.urlBuilder([database.name(), model.name(), instance.id(), 'delete'])
+  editRecordUrl(resource, record) {
+    return this.urlBuilder(['resources', resource.id(), record.id(), 'edit'])
+  }
+
+  deleteRecordUrl(resource, record) {
+    return this.urlBuilder(['resources', resource.id(), record.id(), 'delete'])
+  }
+
+  isMainColumn(propertyName) {
+    return ['name', 'email', 'title', '_id'].includes(propertyName)
   }
   
 }

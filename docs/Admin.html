@@ -28,7 +28,7 @@
 
 <header>
     
-        <h2><span class="attribs"><span class="type-signature"></span></span>Admin<span class="signature">(rawDatabases, options)</span><span class="type-signature"></span></h2>
+        <h2><span class="attribs"><span class="type-signature"></span></span>Admin<span class="signature">(options)</span><span class="type-signature"></span></h2>
         
             <div class="class-description"><p>Main class for Admin extension.</p>
 <p>Responsibilities are:</p>
@@ -50,7 +50,7 @@
     
 
     
-    <h4 class="name" id="Admin"><span class="type-signature"></span>new Admin<span class="signature">(rawDatabases, options)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="Admin"><span class="type-signature"></span>new Admin<span class="signature">(options)</span><span class="type-signature"></span></h4>
     
 
     
@@ -94,29 +94,6 @@
 
         <tr>
             
-                <td class="name"><code>rawDatabases</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Array.&lt;Object></span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>array of databases which can be handled by AdminBro</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
                 <td class="name"><code>options</code></td>
             
 
@@ -133,7 +110,152 @@
 
             
 
-            <td class="description last"><p>options</p></td>
+            <td class="description last"><p>options</p>
+                <h6>Properties</h6>
+                
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+        <th>Default</th>
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>databases</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array.&lt;Object></span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    []
+                
+                </td>
+            
+
+            <td class="description last"><p>list of entire database connections</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>rootPath</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    'admin'
+                
+                </td>
+            
+
+            <td class="description last"><p>namespace for admin routes</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>resources</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array.&lt;Object></span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last"><p>list of all resources</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+            </td>
         </tr>
 
     
@@ -174,7 +296,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="admin_index.js.html">admin/index.js</a>, <a href="admin_index.js.html#line16">line 16</a>
+        <a href="admin_index.js.html">admin/index.js</a>, <a href="admin_index.js.html#line33">line 33</a>
     </li></ul></dd>
     
 
@@ -204,9 +326,7 @@
     <h5>Example</h5>
     
     <pre class="prettyprint"><code>const connection = await mongoose.connect(process.env.MONGO_URL)
-const admin = new Admin([connection], options)
-
-admin.databases //list of all AbstractDatabases</code></pre>
+const admin = new Admin({databases: [connection]})</code></pre>
 
 
 
@@ -236,7 +356,7 @@ admin.databases //list of all AbstractDatabases</code></pre>
     
 
     
-    <h4 class="name" id="database"><span class="type-signature"></span>database<span class="signature">(name)</span><span class="type-signature"> &rarr; {<a href="AbstractDatabase.html">AbstractDatabase</a>}</span></h4>
+    <h4 class="name" id="findResources"><span class="type-signature"></span>findResources<span class="signature">()</span><span class="type-signature"></span></h4>
     
 
     
@@ -244,7 +364,7 @@ admin.databases //list of all AbstractDatabases</code></pre>
 
 
 <div class="description">
-    <script type="text/javascript" src="https://unpkg.com/mermaid@7.1.0/dist/mermaid.min.js"></script><p>Returns database object</p>
+    <script type="text/javascript" src="https://unpkg.com/mermaid@7.1.0/dist/mermaid.min.js"></script><p>Find all resources given by user</p>
 </div>
 
 
@@ -253,55 +373,6 @@ admin.databases //list of all AbstractDatabases</code></pre>
 
 
 
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>name</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">String</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>name of a database</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
 
 
 
@@ -337,7 +408,7 @@ admin.databases //list of all AbstractDatabases</code></pre>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="admin_index.js.html">admin/index.js</a>, <a href="admin_index.js.html#line34">line 34</a>
+        <a href="admin_index.js.html">admin/index.js</a>, <a href="admin_index.js.html#line52">line 52</a>
     </li></ul></dd>
     
 
@@ -360,24 +431,6 @@ admin.databases //list of all AbstractDatabases</code></pre>
 
 
 
-<h5>Returns:</h5>
-
-        
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type"><a href="AbstractDatabase.html">AbstractDatabase</a></span>
-
-
-    </dd>
-</dl>
-
-    
 
 
 
@@ -399,13 +452,13 @@ admin.databases //list of all AbstractDatabases</code></pre>
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-examples_hapijs.html">examples/hapijs</a></li><li><a href="module-Integrations_hapijs.html">Integrations/hapijs</a></li></ul><h3>Classes</h3><ul><li><a href="AbstractDatabase.html">AbstractDatabase</a></li><li><a href="AbstractInstance.html">AbstractInstance</a></li><li><a href="AbstractModel.html">AbstractModel</a></li><li><a href="AbstractProperty.html">AbstractProperty</a></li><li><a href="Admin.html">Admin</a></li><li><a href="Model.html">Model</a></li><li><a href="MongooseAdapter.Database.html">Database</a></li><li><a href="Property.html">Property</a></li><li><a href="Routes.html">Routes</a></li></ul><h3>Namespaces</h3><ul><li><a href="MongooseAdapter.html">MongooseAdapter</a></li></ul><h3>Tutorials</h3><ul><li><a href="tutorial-example-tutorial.html">Example tutorial</a></li></ul><h3>Global</h3><ul><li><a href="global.html#DatabaseFactory">DatabaseFactory</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-examples_hapijs.html">examples/hapijs</a></li><li><a href="module-Integrations_hapijs.html">Integrations/hapijs</a></li></ul><h3>Classes</h3><ul><li><a href="Admin.html">Admin</a></li><li><a href="BaseController.html">BaseController</a></li><li><a href="BaseDatabase.html">BaseDatabase</a></li><li><a href="BaseDecorator.html">BaseDecorator</a></li><li><a href="BaseProperty.html">BaseProperty</a></li><li><a href="BaseResource.html">BaseResource</a></li><li><a href="MongooseAdapter.Database.html">Database</a></li><li><a href="Property.html">Property</a></li><li><a href="Resource.html">Resource</a></li><li><a href="Routes.html">Routes</a></li><li><a href="ValidationError.html">ValidationError</a></li></ul><h3>Namespaces</h3><ul><li><a href="Controllers.html">Controllers</a></li><li><a href="MongooseAdapter.html">MongooseAdapter</a></li></ul><h3>Tutorials</h3><ul><li><a href="tutorial-example-tutorial.html">Example tutorial</a></li></ul><h3>Global</h3><ul><li><a href="global.html#DatabaseFactory">DatabaseFactory</a></li><li><a href="global.html#ResourceFactory">ResourceFactory</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Tue Nov 27 2018 06:40:42 GMT+0000 (Coordinated Universal Time)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Sun Dec 02 2018 09:41:15 GMT+0000 (Coordinated Universal Time)
 </footer>
 
 <script> prettyPrint(); </script>
