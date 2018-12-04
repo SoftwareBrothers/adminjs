@@ -17,13 +17,10 @@
         color: $ghost
       a         
         display: flex
-        flex-direction: row
         align-items: center
         svg 
           margin: 0 rem(5px)
-          path
-            color: $cornflower-blue
-      .text-small.active
+      .text-small.active, path
         color: $cornflower-blue
     tr
       &:hover
@@ -43,7 +40,7 @@
   @include media-breakpoint-down($media-min-tablet-width - 1px)
     .level .is-grouped
       margin-top: rem(14px)
-    thead
+    th:not(.main)
       display: none
     .table td
       padding: 0
