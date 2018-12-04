@@ -51,7 +51,7 @@
   graph LR
   A[&lt;a href=./examples_hapijs_index.js.html&gt;Hapi.js</a>] --&gt;|&lt;a href=./admin_integrations_hapi.js.html&gt;Mapping Routes</a>| B{&lt;a href=./Routes.html&gt;Routes.js</a>}
   B --&gt; C(DashoardController)
-  B --&gt; D(InstancesController)
+  B --&gt; D(ResourcesController)
   E(Renderer)
   C --&gt; E
   D --&gt; E
@@ -70,18 +70,18 @@
 <p>This is how it looks:</p>
 <div class="mermaid">
   graph TD
-  A[&lt;a href=./AbstractDatabase.html&gt;AbstractDatabase</a>] --&gt;|has many| B(&lt;a href=./AbstractModel.html&gt;AbstractModel</a>)
-  B --&gt; |has many|C(&lt;a href=./AbstractInstance.html&gt;AbstractInstance</a>)
-  B --&gt; |has many|D(&lt;a href=./AbstractProperty.html&gt;AbstractProperty</a>)
+  A[&lt;a href=./BaseDatabase.html&gt;BaseDatabase</a>] --&gt;|has many| B(&lt;a href=./BaseResource.html&gt;BaseResource</a>)
+  B --&gt; |has many|C(&lt;a href=./BaseRecord.html&gt;BaseRecord</a>)
+  B --&gt; |has many|D(&lt;a href=./BaseProperty.html&gt;BaseProperty</a>)
 </div>
 
-<p>First of all <a href="Admin.html">base class</a> is used to convert all supported database connections (mongodb, sql-like, etc) to list of databases which interits from <a href="AbstractDatabase.html">AbstractDatabase</a>. It utilises <a href="global.html#DatabaseFactory">DatabaseFactory</a> to construct correct database type.</p>
-<p>Then each class which inherits <a href="AbstractDatabase.html">AbstractDatabase</a> can fetch all models present in the database. Each model inherits from <a href="AbstractModel.html">AbstractModel</a></p>
+<p>First of all <a href="Admin.html">base class</a> is used to convert all supported database connections (mongodb, sql-like, etc) to list of databases which interits from <a href="BaseDatabase.html">BaseDatabase</a>. It utilises <a href="global.html#DatabaseFactory">DatabaseFactory</a> to construct correct database type.</p>
+<p>Then each class which inherits <a href="BaseDatabase.html">BaseDatabase</a> can fetch all resources present in the database. Each resource inherits from <a href="BaseResource.html">BaseResource</a></p>
 <p>Each model has multiple properties with different types like String, Data, Number etc.</p>
-<p>Finally particular database record/document is mapped to <a href="AbstractInstance.html">AbstractInstance</a></p>
+<p>Finally particular database record/document is mapped to BaseRecord</p>
 <h2>Integration with ORMs</h2><p>To create new ORM integration you have to:</p>
 <ul>
-<li>create your implementation of <a href="AbstractDatabase.html">AbstractDatabase</a>, <a href="AbstractModel.html">AbstractModel</a>, <a href="AbstractInstance.html">AbstractInstance</a> and <a href="AbstractProperty.html">AbstractProperty</a></li>
+<li>create your implementation of <a href="BaseDatabase.html">BaseDatabase</a>, <a href="BaseResource.html">BaseResource</a>, BaseRecord and AbstractProperty</li>
 <li>update <a href="global.html#DatabaseFactory">DatabaseFactory</a></li>
 <li>update examples</li>
 <li>most probably you will also have to update docker-compose to handle new database</li>
@@ -99,13 +99,13 @@
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-examples_hapijs.html">examples/hapijs</a></li><li><a href="module-Integrations_hapijs.html">Integrations/hapijs</a></li></ul><h3>Classes</h3><ul><li><a href="AbstractDatabase.html">AbstractDatabase</a></li><li><a href="AbstractInstance.html">AbstractInstance</a></li><li><a href="AbstractModel.html">AbstractModel</a></li><li><a href="AbstractProperty.html">AbstractProperty</a></li><li><a href="Admin.html">Admin</a></li><li><a href="Model.html">Model</a></li><li><a href="MongooseAdapter.Database.html">Database</a></li><li><a href="Property.html">Property</a></li><li><a href="Routes.html">Routes</a></li></ul><h3>Namespaces</h3><ul><li><a href="MongooseAdapter.html">MongooseAdapter</a></li></ul><h3>Tutorials</h3><ul><li><a href="tutorial-example-tutorial.html">Example tutorial</a></li></ul><h3>Global</h3><ul><li><a href="global.html#DatabaseFactory">DatabaseFactory</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-examples_hapijs.html">examples/hapijs</a></li><li><a href="module-Integrations_hapijs.html">Integrations/hapijs</a></li></ul><h3>Classes</h3><ul><li><a href="Admin.html">Admin</a></li><li><a href="BaseController.html">BaseController</a></li><li><a href="BaseDatabase.html">BaseDatabase</a></li><li><a href="BaseDecorator.html">BaseDecorator</a></li><li><a href="BaseProperty.html">BaseProperty</a></li><li><a href="BaseResource.html">BaseResource</a></li><li><a href="MongooseAdapter.Database.html">Database</a></li><li><a href="Property.html">Property</a></li><li><a href="Resource.html">Resource</a></li><li><a href="Routes.html">Routes</a></li><li><a href="ValidationError.html">ValidationError</a></li></ul><h3>Namespaces</h3><ul><li><a href="Controllers.html">Controllers</a></li><li><a href="MongooseAdapter.html">MongooseAdapter</a></li></ul><h3>Tutorials</h3><ul><li><a href="tutorial-example-tutorial.html">Example tutorial</a></li></ul><h3>Global</h3><ul><li><a href="global.html#DatabaseFactory">DatabaseFactory</a></li><li><a href="global.html#ResourceFactory">ResourceFactory</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Tue Nov 27 2018 06:40:41 GMT+0000 (Coordinated Universal Time)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Sun Dec 02 2018 09:41:15 GMT+0000 (Coordinated Universal Time)
 </footer>
 
 <script> prettyPrint(); </script>

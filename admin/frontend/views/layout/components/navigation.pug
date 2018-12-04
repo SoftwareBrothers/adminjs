@@ -1,12 +1,12 @@
 .sidebar-navigation
   p.menu-label Navigation
   ul.menu-list
-    for database in databases
+    for resourceList, key in resources
       li
         span.menu-item-main
-          i.icon-mongodb
-          = database.name()
+          = h._.startCase(key)
         ul.menu-list
-          for model in database.models()
+          for resource in resourceList
             li
-              a(href=h.listUrl(database, model) class={ 'is-active' : currentModel === model.name() })= model.name()
+              a(href=h.listUrl(resource) class={ 'is-active' : currentResource && currentResource.id() === resource.id() })
+                = resource.decorate().getResourceName()

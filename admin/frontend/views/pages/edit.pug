@@ -3,15 +3,16 @@ include ../mixins/form-group
 include ../mixins/breadcrumb
 
 block content
-  +breadcrumb([database.name(), model.name()])
+  +breadcrumb([currentResource.decorate().getResourceName(),
+                 record.title(), 'edit'])
   section.view-edit
-    form(method='POST' action=h.showInstanceUrl(database, model, instance))
+    form(method='POST' action=h.showRecordUrl(currentResource, record))
       .level
         h3.title
-          a.button.is-text.is-back(href=h.listUrl(database, model))
+          a.button.is-text.is-back(href=h.listUrl(currentResource))
             span.icon.is-small
               i.fas.fa-arrow-left
-          | Edit #{model.name()}
+          | Edit #{currentResource.name()}
         .field.is-grouped
           .control
             button.button.is-primary(type='submit')
@@ -19,12 +20,12 @@ block content
                 i(class="fas fa-check")
               .btn-text Save
           .control
-            a.button.is-primary.is-outlined(href=h.deleteInstanceUrl(database, model, instance))
+            a.button.is-primary.is-outlined(href=h.deleteRecordUrl(currentResource, record))
               span.icon.is-small
                 i(class="fas fa-trash")
               .btn-text Remove
       .box
         for prop in properties.filter(p => p.isEditable())
-          - error = instance.error(prop.name())
-          - value = instance.param(prop.name())
+          - error = record.error(prop.name())
+          - value = record.param(prop.name())
           +formGroup(prop, value, error)

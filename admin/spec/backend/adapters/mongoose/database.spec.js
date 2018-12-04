@@ -1,23 +1,23 @@
 const mongoose = require('mongoose')
 const MongooseDatabase = require('@backend/adapters/mongoose/database')
 
-describe('Model', function () {
+describe('Database', function () {
   before(async function () {
     this.collectionName = 'admin-server-test'
-    this.mongoose = await mongoose.connect(`mongodb://mongo/${this.collectionName}`)
+    this.mongooseConnection = await mongoose.connect(`mongodb://mongo/${this.collectionName}`)
   })
 
   after(async function () {
-    mongoose.connection.close()
+    this.mongooseConnection.connection.close()
   })
 
-  describe('#name', function () {
+  describe('#resources', function () {
     beforeEach(function () {
-      this.database = new MongooseDatabase(this.mongoose.connections[0])
+      this.resources = new MongooseDatabase(this.mongooseConnection).resources()
     })
 
-    it('returns correct name', function () {
-      expect(this.database.name()).to.equal(this.collectionName)
+    it('return all resources', function () {
+      expect(this.resources).to.have.lengthOf(1)
     })
   })
 })

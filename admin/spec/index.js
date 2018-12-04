@@ -10,14 +10,13 @@ const chaiChange = require('chai-change')
 chai.use(chaiChange)
 chai.use(sinonChai)
 
-global.sinon = sinon
 global.expect = chai.expect
 
-beforeEach(async () => {
-  this.sinon = global.sinon.createSandbox()
+beforeEach(function() {
+  this.sinon = sinon.createSandbox()
 })
 
-afterEach(async () => {
+afterEach(function() {
   this.sinon.restore()
 })
 

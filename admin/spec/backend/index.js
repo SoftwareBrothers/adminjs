@@ -6,3 +6,4 @@ global.factory = factory
 
 require('require.all')({ dir: './factories' })
 require('require.all')({ dir: './adapters' })
+require('require.all')({ dir: './utils' })

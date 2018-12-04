@@ -2,31 +2,32 @@
  * @namespace MongooseAdapter
  */
 
-const AbstractDatabase = require('../abstract/database')
-const Model = require('./model')
+const BaseDatabase = require('../base/database')
 
 /**
  * Adapter for mongoose database
  * @memberof MongooseAdapter
- * @extends {AbstractDatabase}
+ * @extends {BaseDatabase}
  * @alias MongooseAdapter.Database
  */
-class Database extends AbstractDatabase {
+class Database extends BaseDatabase {
   constructor(connection) {
     super(connection)
     this.connection = connection
   }
 
-  models() {
-    return Model.all(this.connection)
-  }
-
-  name() {
-    return this.connection.name
-  }
-
-  find(modelName) {
-    return Model.find(this.connection, modelName)
+  /**
+   * Return all available resources for given connection
+   * @return {Resource[]}                      list of all resources in given mongo database
+   *
+   * @example
+   * const mongoose = require('mongoose')
+   *
+   * const connection = await mongoose.connect(process.env.MONGO_URL)
+   * new Database(connection).resources()
+   */
+  resources() {
+    return this.connection.modelNames().map(name => this.connection.model(name))
   }
 }
 

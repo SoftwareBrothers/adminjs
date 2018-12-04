@@ -3,15 +3,15 @@ include ../mixins/form-group.pug
 include ../mixins/breadcrumb
 
 block content
-  +breadcrumb([database.name(), model.name()])
+  +breadcrumb([currentResource.decorate().getResourceName()])
   section.view-edit
-    form(method='POST' action=h.listUrl(database, model))
+    form(method='POST' action=h.listUrl(currentResource))
       .level
         h3.title
-          a.button.is-text.is-back(href=h.listUrl(database, model))
+          a.button.is-text.is-back(href=h.listUrl(currentResource))
             span.icon.is-small
               i.fas.fa-arrow-left
-          | Create #{model.name()}
+          | Create #{currentResource.decorate().getResourceName()}
         .field.is-grouped
           .control
             button.button.is-primary(type='submit')
@@ -20,6 +20,6 @@ block content
               .btn-text Save
       .box
         for prop in properties.filter(p => p.isEditable())
-          - error = instance.error(prop.name())
-          - value = instance.param(prop.name())
+          - error = record.error(prop.name())
+          - value = record.param(prop.name())
           +formGroup(prop, value, error)

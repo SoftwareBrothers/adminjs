@@ -1,3 +1,3 @@
-/* eslint no-console: 'off' */
+const AdminBro = require('./admin/index')
 
-require('./examples/hapijs')
+module.exports = AdminBro
