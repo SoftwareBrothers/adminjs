@@ -23,7 +23,19 @@ class BaseDecorator {
   }
 
   getParent() {
-    return this.invokeOrGet('parentName') || this._resource.databaseName()
+    const parent = this.invokeOrGet('parent')
+    if (parent instanceof Object) {
+      return parent.name
+    }
+    if (typeof(parent) === 'string' || parent instanceof String) {
+      return parent
+    }
+    return this._resource.databaseName()
+  }
+
+  getIcon(icon) {
+    const hasCustomIcon = this.invokeOrGet('parent') instanceof Object && this.invokeOrGet('parent').icon
+    return hasCustomIcon ? this.invokeOrGet('parent').icon : `icon-${icon}`
   }
 
   /**

@@ -4,6 +4,7 @@
     for resourceList, key in resources
       li
         span.menu-item-main
+          i(class=resourceList.icon)
           = h._.startCase(key)
         ul.menu-list
           for resource in resourceList

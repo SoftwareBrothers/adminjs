@@ -6,7 +6,10 @@ class ArticleDecorator extends BaseDecorator {
     this.resourceName = 'Artykuly'
     this.listProperties = ['title', 'content', 'publishedAt']
     this.showProperties = ['title', 'publishedAt']
-    this.parentName = 'Wiedza'
+    this.parent = {
+      name: 'Wiedza',
+      icon: 'icon-google'
+    }
   }
 
   getValue({ record, property, where, helpers }) {
