@@ -71,11 +71,12 @@ class ResourcesController extends BaseController {
   async findRecords({ query }) {
     this.view.perPage = 10
     this.view.total = await this.view.currentResource.count()
+    const firstProperty = this.view.currentResource.decorate().getListProperties()[0]
     const { page, sortBy, sortDirection } = query
     this.view.page = page || 1
-    const sortParams = sortBy && sortDirection
     this.view.sort = {
-      ...sortParams && { sortBy, direction: sortDirection }
+      sortBy: sortBy || firstProperty.name(),
+      direction: sortDirection | 'asc'
     }
     return this.view.currentResource.find({}, {
       limit: this.view.perPage,

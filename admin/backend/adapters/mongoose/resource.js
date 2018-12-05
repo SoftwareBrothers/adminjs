@@ -25,7 +25,7 @@ class Resource extends BaseResource {
 
   async find(query, { limit = 20, offset = 0, sort }) {
     const { direction, sortBy } = sort
-    const sortingParam = sort ? { [sortBy]: direction } : { $natural : 1 }
+    const sortingParam = { [sortBy]: direction }
     const mongooseObjects = await this.MongooseModel
       .find({})
       .skip(offset)
