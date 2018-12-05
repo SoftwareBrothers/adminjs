@@ -27,37 +27,37 @@ class Routes {
       action: 'index',
     }, {
       method: 'GET',
-      path: '/resources/{resourceName}',
+      path: '/resources/{resourceId}',
       Controller: ResourcesController,
       action: 'index',
     }, {
       method: 'GET',
-      path: '/resources/{resourceName}/{recordId}',
+      path: '/resources/{resourceId}/{recordId}',
       Controller: ResourcesController,
       action: 'show',
     }, {
       method: 'GET',
-      path: '/resources/{resourceName}/new',
+      path: '/resources/{resourceId}/new',
       Controller: ResourcesController,
       action: 'new',
     }, {
       method: 'POST',
-      path: '/resources/{resourceName}',
+      path: '/resources/{resourceId}',
       Controller: ResourcesController,
       action: 'create',
     }, {
       method: 'POST',
-      path: '/resources/{resourceName}/{recordId}',
+      path: '/resources/{resourceId}/{recordId}',
       Controller: ResourcesController,
       action: 'update',
     }, {
       method: 'GET',
-      path: '/resources/{resourceName}/{recordId}/edit',
+      path: '/resources/{resourceId}/{recordId}/edit',
       Controller: ResourcesController,
       action: 'edit',
     }, {
       method: 'GET',
-      path: '/resources/{resourceName}/{recordId}/delete',
+      path: '/resources/{resourceId}/{recordId}/delete',
       Controller: ResourcesController,
       action: 'delete',
     }]

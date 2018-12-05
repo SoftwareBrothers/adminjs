@@ -63,8 +63,8 @@ class ResourcesController extends BaseController {
     ))
   }
 
-  findResources({ resourceName }) {
-    this.view.currentResource = this._admin.findResource(resourceName)
+  findResources({ resourceId }) {
+    this.view.currentResource = this._admin.findResource(resourceId)
     this.view.properties = this.view.currentResource.properties()
   }
 

@@ -1,7 +1,5 @@
 const ValidationError = require('../../utils/validation-error')
 
-const TITLE_PROPERTIES = ['name', 'title', 'topic', 'email']
-
 class Record {
   constructor(params, resource) {
     this.resource = resource

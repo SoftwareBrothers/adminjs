@@ -32,11 +32,53 @@ const DatabasesParser = require('./backend/adapters/databases-parser')
 const ResourceFactory = require('./backend/adapters/resource-factory')
 const Renderer = require('./backend/utils/renderer')
 const BaseDecorator = require('./backend/utils/base-decorator')
+const BaseResource = require('./backend/adapters/base/resource')
+const BaseDatabase = require('./backend/adapters/base/database')
+const BaseRecord = require('./backend/adapters/base/record')
+const BaseProperty = require('./backend/adapters/base/property')
+const ValidationError = require('./backend/utils/validation-error')
 
 const Routes = require('./backend/routes')
 
 /**
- * @typedef {Object} Settings
+ * @typedef {Object} AdminBroOptions
+ *
+ * @description AdminBro takes list of options of the entire framework. All off them
+ * have default values, but you can tailor them to your needs easily
+ *
+ * @property {String} [rootPath='/admin']             under which path AdminBro will be available
+ * @property {String} [logoutPath='/admin/logout']    url to logout action
+ * @property {String} [loginPath='/admin/login']      url to login page
+ * @property {BaseDatabase[]} [databases=[]]         array of all databases
+ * @property {BaseResource[] | Object[]} [resources=[]] array of all resources. Resources can be
+ *                                                    give as in a regular way or nested within
+ *                                                    an object along with its decorator
+ * @property {BaseResource} [resources[].resource]    class which extends {@link BaseResource}
+ * @property {BaseDecorator} [resources[].decorator]  class which extends {@link BaseDecorator}
+ * @property {Object} [branding]                      branding settings
+ * @property {String} [branding.logo]                 logo shown in AdminBro in top left corner
+ * @property {String} [branding.companyName]          company name
+ * @property {Boolean} [branding.softwareBrothers]    if software brothers logos should be shown
+ *                                                    in the sidebar footer
+ *
+ * @example
+ * const AdminBro = require('admin-bro')
+ *
+ * const ArticleDecorator = require('./article-decorator')
+ * const ArticleModel = require('./article')
+ *
+ * const connection = await mongoose.connect(process.env.MONGO_URL)
+ *
+ * const adminBro = new AdminBro({
+ *   rootPath: '/xyz-admin',
+ *   logoutPath: '/xyz-admin/exit',
+ *   loginPath: '/xyz-admin/sign-in',
+ *   databases: [connection]
+ *   resources: [{ resource: ArticleModel, decorator: ArticleDecorator}]
+ *   branding: {
+ *     companyName: 'XYZ c.o.'
+ *   }
+ * })
  */
 const defaults = {
   rootPath: '/admin',
@@ -47,30 +89,33 @@ const defaults = {
   branding: {
     logo: 'https://softwarebrothers.co/assets/images/software-brothers-logo-compact.svg',
     companyName: 'Company Name',
+    softwareBrothers: true,
   },
 }
 
 /**
- * Main class for Admin extension.
+ * Main class for Admin extension. It takes {@link AdminBroOptions} as an
+ * parameter and creates admin instance.
  *
- * Responsibilities are:
- * - parse integration options given in various plugins/middlewares - like rootUrl
- * - convert raw database connections to AbstractDatabases
+ * Its main responsibility is to fetch all resources and/or databases given by
+ * user. Than its instance is a currier - injected in all other classes.
  *
- * @example
- * const connection = await mongoose.connect(process.env.MONGO_URL)
- * const admin = new Admin({databases: [connection]})
  */
 class Admin {
   /**
-   * @param  {Object}   options                         options
-   * @param  {Object[]} [options.databases=[]]          list of entire database connections
-   * @param  {String}   [options.rootPath='admin']      namespace for admin routes
-   * @param  {Object[]} [options.resources]                list of all resources
+   * @param  {AdminBroOptions}   options
    */
   constructor(options = {}) {
+    /**
+     * @type {BaseResource[]}
+     * @description List of all resources available for the AdminBro
+     */
     this.resources = []
 
+    /**
+     * @type {AdminBroOptions}
+     * @description Options gave by the user
+     */
     this.options = _.merge(defaults, options)
 
     this.findResources(options)
@@ -78,7 +123,14 @@ class Admin {
 
 
   /**
-   * Find all resources given by user
+   * Find all resources given by user. When, along with the resource
+   * its {@link BaseDecorator} is given - it also attaches it using
+   * BaseResource#assignDecorator
+   *
+   * @param {BaseDatabase[]} [databases=[]]    list of all databases
+   * @param {BaseResource[] | Object[]} [resources=[]]    list of all resources along
+   *                                                      with optional decorators. Take
+   *                                                      a look at {@link AdminBroOptions}
    */
   findResources({ databases, resources }) {
     this.resources = []
@@ -103,17 +155,75 @@ class Admin {
     }
   }
 
+  /**
+   * Returns resource base on its ID
+   * @param  {String} resourceId    id of a resource defined under {@link BaseResource#id}
+   * @return {BaseResource}         found resource
+   */
   findResource(resourceId) {
     return this.resources.find(m => m.id() === resourceId)
   }
 
+  /**
+   * Renders an entire login page with email and password fields
+   * using {@link Renderer}.
+   *
+   * @param  {Object} options
+   * @param  {String} options.action          login form action url - it could be
+   *                                          '/admin/login'
+   * @param  {String} [options.errorMessage]  optional error message. When given
+   *                                          renderer will print this message in
+   *                                          the form
+   * @return {String}                         HTML of the rendered page
+   */
   static async renderLogin({ action, errorMessage }) {
     return new Renderer('pages/login', { action, errorMessage }).render()
   }
 }
 
+/**
+ * Base class for all resource decorators
+ * @type {BaseDecorator}
+ */
 Admin.BaseDecorator = BaseDecorator
+
+
+/**
+ * List of all supported routes along with controllers
+ * @type {Routes}
+ */
 Admin.Routes = Routes
+
+/**
+ * BaseResource
+ * @type {BaseResource}
+ */
+Admin.BaseResource = BaseResource
+
+/**
+ * BaseDatabase
+ * @type {BaseDatabase}
+ */
+Admin.BaseDatabase = BaseDatabase
+
+/**
+ * BaseRecord
+ * @type {BaseRecord}
+ */
+Admin.BaseRecord = BaseRecord
+
+/**
+ * BaseProperty
+ * @type {BaseProperty}
+ */
+Admin.BaseProperty = BaseProperty
+
+/**
+ * ValidationError
+ * @type {ValidationError}
+ */
+Admin.ValidationError = ValidationError
+
 
 module.exports = Admin
 </code></pre>
@@ -132,7 +242,7 @@ module.exports = Admin
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Wed Dec 05 2018 08:55:22 GMT+0100 (CET)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Wed Dec 05 2018 22:41:40 GMT+0100 (CET)
 </footer>
 
 <script> prettyPrint(); </script>

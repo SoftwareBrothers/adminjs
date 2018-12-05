@@ -99,9 +99,9 @@ And
 
 So since now you know the basics it is time for more advanced topics:
 
-* AdminBro options
-* Resource customization
-* Writing your own resources
+* [AdminBro options](https://softwarebrothers.github.io/admin-bro/tutorial-admin-bro-options.html)
+* [Resource customization](https://softwarebrothers.github.io/admin-bro/tutorial-resource-decorators.html)
+* [Writing your own resources](https://softwarebrothers.github.io/admin-bro/tutorial-your-own-resource.html)
 
 ## License
 

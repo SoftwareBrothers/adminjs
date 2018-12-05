@@ -19,6 +19,30 @@ class Resource extends BaseResource {
     return this.MongooseModel.db.name
   }
 
+  name() {
+    return this.MongooseModel.modelName
+  }
+
+  id() {
+    return this.MongooseModel.modelName.toLowerCase()
+  }
+
+  properties() {
+    const properties = []
+    for (const [name, path] of Object.entries(this.MongooseModel.schema.paths)) {
+      const prop = new Property(path)
+      properties.push(prop)
+    }
+    return properties
+  }
+
+  property(name) {
+    if (this.MongooseModel.schema.paths[name]) {
+      return new Property(this.MongooseModel.schema.paths[name])
+    }
+    return null
+  }
+
   async count() {
     return this.MongooseModel.countDocuments()
   }
@@ -70,30 +94,6 @@ class Resource extends BaseResource {
 
   async delete(id) {
     return this.MongooseModel.deleteOne({ _id: id })
-  }
-
-  name() {
-    return this.MongooseModel.modelName
-  }
-
-  id() {
-    return this.MongooseModel.modelName.toLowerCase()
-  }
-
-  properties() {
-    const properties = []
-    for (const [name, path] of Object.entries(this.MongooseModel.schema.paths)) {
-      const prop = new Property(path)
-      properties.push(prop)
-    }
-    return properties
-  }
-
-  property(name) {
-    if (this.MongooseModel.schema.paths[name]) {
-      return new Property(this.MongooseModel.schema.paths[name])
-    }
-    return null
   }
 
   createValidationError(originalError) {

@@ -7,8 +7,9 @@
   //-     a Postcode changes
   //-   li
   //-     a Links
-  p.sidebar-created-by
-    | With
-    i.fas.fa-heart
-    | by
-    a(href="http://softwarebrothers.co" target="_blank") SoftwareBrothers
+  - if h.branding.softwareBrothers
+    p.sidebar-created-by
+      | With
+      i.fas.fa-heart
+      | by
+      a(href="http://softwarebrothers.co" target="_blank") SoftwareBrothers

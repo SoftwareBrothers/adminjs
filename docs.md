@@ -8,11 +8,34 @@ Currently it supports only MongoDB (via mongoose).
 
 It is totally separated from any particular nodejs framework. Because of that it can be easily integrated to almost every app.
 
-This is the example flow for hapi.js
+
+### Overal architecture
 
 <div class="mermaid">
   graph LR
-  A[<a href=./examples_hapijs_index.js.html>Hapi.js</a>] -->|<a href=./admin_integrations_hapi.js.html>Mapping Routes</a>| B{<a href=./Routes.html>Routes.js</a>}
+  subgraph AdminBro
+  B(AdminBro)
+  end
+  subgraph Resources
+  A[mongoose] --> B
+  C[rest API endpoints] --> B
+  D[sequelizejs] --> B
+  end
+  subgraph http framework
+  B --> E[Hapijs]
+  B --> F[Express.js]
+  B --> G[your custom framework]
+  end
+
+</div>
+
+### This is an example rendering flow for hapi.js
+
+<div class="mermaid">
+  graph LR
+  A[<a href=./examples_hapijs_index.js.html>Hapi.js</a>] -->|<a href=./admin_integrations_hapi.js.html>Mapping Routes</a>| B
+  subgraph AdminBro
+  B{<a href=./Routes.html>Routes.js</a>}
   B --> C(DashoardController)
   B --> D(ResourcesController)
   E(Renderer)
@@ -20,6 +43,7 @@ This is the example flow for hapi.js
   D --> E
   F(PUG view)
   E --> F
+  end
 </div>
 
 ## Integration with nodejs Frameworks
