@@ -27,9 +27,10 @@ block content
             thead
               tr
                 for prop in currentResource.decorate().getListProperties()
-                  th(class= { 'main' : h.isMainColumn(prop.name())})
+                  th(class= { 'main' : h.isMainColumn(prop.name()) })
                     - isSortedByCurrentPropName = sort.sortBy === prop.name()
-                    a(href=h.listUrl(currentResource, { sort: { sortBy: prop.name(), sortDirection: sort.direction === 'asc' && isSortedByCurrentPropName ? 'desc' : 'asc' }}))
+                    - direction = sort.direction === 'asc' && isSortedByCurrentPropName ? 'desc' : 'asc'
+                    a(href=h.listUrl(currentResource, { sort: { sortBy: prop.name(), sortDirection: direction }}))
                       .text-small(class={ 'active' : isSortedByCurrentPropName })=h._.startCase(prop.name())
                       .sorting-icons(class={ 'hidden' : !isSortedByCurrentPropName })
                         i.fas(class=`fa-caret-${sort.direction === 'asc' ? 'up' : 'down'}`)

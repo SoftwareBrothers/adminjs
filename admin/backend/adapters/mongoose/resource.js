@@ -24,11 +24,13 @@ class Resource extends BaseResource {
   }
 
   async find(query, { limit = 20, offset = 0, sort }) {
+    const { direction, sortBy } = sort
+    const sortingParam = sort ? { [sortBy]: direction } : { $natural : 1 }
     const mongooseObjects = await this.MongooseModel
       .find({})
       .skip(offset)
       .limit(limit)
-      .sort({[sort.sortBy]: sort.direction})
+      .sort(sortingParam)
     return mongooseObjects.map(mongooseObject => new Record(mongooseObject.toObject(), this))
   }
 

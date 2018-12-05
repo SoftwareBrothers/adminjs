@@ -73,9 +73,9 @@ class ResourcesController extends BaseController {
     this.view.total = await this.view.currentResource.count()
     const { page, sortBy, sortDirection } = query
     this.view.page = page || 1
+    const sortParams = sortBy && sortDirection
     this.view.sort = {
-      sortBy: sortBy || '_id',
-      direction: sortDirection || 'asc'
+      ...sortParams && { sortBy, direction: sortDirection }
     }
     return this.view.currentResource.find({}, {
       limit: this.view.perPage,
