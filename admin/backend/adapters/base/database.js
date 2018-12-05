@@ -1,7 +1,9 @@
+/* eslint class-methods-use-this: 0 */
+
 const NotImplementedError = require('../../utils/not-implemented-error')
 
 /**
- * Representation of an ORM/database in AdminBro
+ * Representation of an ORM database in AdminBro
  *
  * @mermaid
  *   graph TD
@@ -12,6 +14,7 @@ const NotImplementedError = require('../../utils/not-implemented-error')
 class BaseDatabase {
   /**
    * returns array of all resources (collections/tables) in the database
+   *
    * @return {BaseResource[]}
    */
   resources() {

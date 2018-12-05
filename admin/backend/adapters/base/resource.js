@@ -6,7 +6,13 @@ const NotImplementedError = require('../../utils/not-implemented-error')
  * Representation of a ORM Resource in AdminBro. Visally resource is a list item in the sidebar.
  * Each resource has many records and many properties.
  *
- * Analogy is REST resource
+ * Analogy is REST resource.
+ *
+ * @mermaid
+ *   graph TD
+ *   A[BaseDatabase] -->|has many| B(BaseResource)
+ *   B --> |has many|C(BaseRecord)
+ *   B --> |has many|D(BasePorperty)
  *
  */
 class BaseResource {

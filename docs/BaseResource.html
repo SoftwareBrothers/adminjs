@@ -32,7 +32,7 @@
         
             <div class="class-description"><p>Representation of a ORM Resource in AdminBro. Visally resource is a list item in the sidebar.
 Each resource has many records and many properties.</p>
-<p>Analogy is REST resource</p></div>
+<p>Analogy is REST resource.</p></div>
         
     
 </header>
@@ -55,7 +55,10 @@ Each resource has many records and many properties.</p>
 
 
 <div class="description">
-    <script type="text/javascript" src="https://unpkg.com/mermaid@7.1.0/dist/mermaid.min.js"></script>
+    <script type="text/javascript" src="https://unpkg.com/mermaid@7.1.0/dist/mermaid.min.js"></script><div class="mermaid">graph TD
+  A[BaseDatabase] -->|has many| B(BaseResource)
+  B --> |has many|C(BaseRecord)
+  B --> |has many|D(BasePorperty)</div>
 </div>
 
 
@@ -99,7 +102,7 @@ Each resource has many records and many properties.</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="admin_backend_adapters_base_resource.js.html">admin/backend/adapters/base/resource.js</a>, <a href="admin_backend_adapters_base_resource.js.html#line12">line 12</a>
+        <a href="admin_backend_adapters_base_resource.js.html">admin/backend/adapters/base/resource.js</a>, <a href="admin_backend_adapters_base_resource.js.html#line18">line 18</a>
     </li></ul></dd>
     
 
@@ -255,7 +258,7 @@ resource.decorate() method</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="admin_backend_adapters_base_resource.js.html">admin/backend/adapters/base/resource.js</a>, <a href="admin_backend_adapters_base_resource.js.html#line143">line 143</a>
+        <a href="admin_backend_adapters_base_resource.js.html">admin/backend/adapters/base/resource.js</a>, <a href="admin_backend_adapters_base_resource.js.html#line149">line 149</a>
     </li></ul></dd>
     
 
@@ -289,7 +292,7 @@ resource.decorate() method</p>
     
 
     
-    <h4 class="name" id="build"><span class="type-signature">(async) </span>build<span class="signature">(params)</span><span class="type-signature"> &rarr; {BaseRecord}</span></h4>
+    <h4 class="name" id="build"><span class="type-signature">(async) </span>build<span class="signature">(params)</span><span class="type-signature"> &rarr; {<a href="BaseRecord.html">BaseRecord</a>}</span></h4>
     
 
     
@@ -392,7 +395,7 @@ it has to be instantiated.</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="admin_backend_adapters_base_resource.js.html">admin/backend/adapters/base/resource.js</a>, <a href="admin_backend_adapters_base_resource.js.html#line103">line 103</a>
+        <a href="admin_backend_adapters_base_resource.js.html">admin/backend/adapters/base/resource.js</a>, <a href="admin_backend_adapters_base_resource.js.html#line109">line 109</a>
     </li></ul></dd>
     
 
@@ -426,7 +429,7 @@ it has to be instantiated.</p>
     </dt>
     <dd>
         
-<span class="param-type">BaseRecord</span>
+<span class="param-type"><a href="BaseRecord.html">BaseRecord</a></span>
 
 
     </dd>
@@ -496,7 +499,7 @@ it has to be instantiated.</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="admin_backend_adapters_base_resource.js.html">admin/backend/adapters/base/resource.js</a>, <a href="admin_backend_adapters_base_resource.js.html#line68">line 68</a>
+        <a href="admin_backend_adapters_base_resource.js.html">admin/backend/adapters/base/resource.js</a>, <a href="admin_backend_adapters_base_resource.js.html#line74">line 74</a>
     </li></ul></dd>
     
 
@@ -649,7 +652,7 @@ it has to be instantiated.</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="admin_backend_adapters_base_resource.js.html">admin/backend/adapters/base/resource.js</a>, <a href="admin_backend_adapters_base_resource.js.html#line114">line 114</a>
+        <a href="admin_backend_adapters_base_resource.js.html">admin/backend/adapters/base/resource.js</a>, <a href="admin_backend_adapters_base_resource.js.html#line120">line 120</a>
     </li></ul></dd>
     
 
@@ -706,7 +709,7 @@ it has to be instantiated.</p>
         
 <div class="param-desc">
     <p>created record converted to raw Object which
-                                  can be used to initiate new BaseRecord instance</p>
+                                  can be used to initiate new <a href="BaseRecord.html">BaseRecord</a> instance</p>
 </div>
 
 
@@ -789,7 +792,7 @@ a mongoose model it should be database name of the mongo database.</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="admin_backend_adapters_base_resource.js.html">admin/backend/adapters/base/resource.js</a>, <a href="admin_backend_adapters_base_resource.js.html#line20">line 20</a>
+        <a href="admin_backend_adapters_base_resource.js.html">admin/backend/adapters/base/resource.js</a>, <a href="admin_backend_adapters_base_resource.js.html#line26">line 26</a>
     </li></ul></dd>
     
 
@@ -897,7 +900,7 @@ a mongoose model it should be database name of the mongo database.</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="admin_backend_adapters_base_resource.js.html">admin/backend/adapters/base/resource.js</a>, <a href="admin_backend_adapters_base_resource.js.html#line151">line 151</a>
+        <a href="admin_backend_adapters_base_resource.js.html">admin/backend/adapters/base/resource.js</a>, <a href="admin_backend_adapters_base_resource.js.html#line157">line 157</a>
     </li></ul></dd>
     
 
@@ -1056,7 +1059,7 @@ a mongoose model it should be database name of the mongo database.</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="admin_backend_adapters_base_resource.js.html">admin/backend/adapters/base/resource.js</a>, <a href="admin_backend_adapters_base_resource.js.html#line134">line 134</a>
+        <a href="admin_backend_adapters_base_resource.js.html">admin/backend/adapters/base/resource.js</a>, <a href="admin_backend_adapters_base_resource.js.html#line140">line 140</a>
     </li></ul></dd>
     
 
@@ -1090,7 +1093,7 @@ a mongoose model it should be database name of the mongo database.</p>
     
 
     
-    <h4 class="name" id="find"><span class="type-signature">(async) </span>find<span class="signature">(query, options)</span><span class="type-signature"> &rarr; {Array.&lt;BaseRecord>}</span></h4>
+    <h4 class="name" id="find"><span class="type-signature">(async) </span>find<span class="signature">(query, options)</span><span class="type-signature"> &rarr; {Array.&lt;<a href="BaseRecord.html">BaseRecord</a>>}</span></h4>
     
 
     
@@ -1286,7 +1289,7 @@ a mongoose model it should be database name of the mongo database.</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="admin_backend_adapters_base_resource.js.html">admin/backend/adapters/base/resource.js</a>, <a href="admin_backend_adapters_base_resource.js.html#line81">line 81</a>
+        <a href="admin_backend_adapters_base_resource.js.html">admin/backend/adapters/base/resource.js</a>, <a href="admin_backend_adapters_base_resource.js.html#line87">line 87</a>
     </li></ul></dd>
     
 
@@ -1324,7 +1327,7 @@ a mongoose model it should be database name of the mongo database.</p>
     </dt>
     <dd>
         
-<span class="param-type">Array.&lt;BaseRecord></span>
+<span class="param-type">Array.&lt;<a href="BaseRecord.html">BaseRecord</a>></span>
 
 
     </dd>
@@ -1342,7 +1345,7 @@ a mongoose model it should be database name of the mongo database.</p>
     
 
     
-    <h4 class="name" id="findOne"><span class="type-signature">(async) </span>findOne<span class="signature">(id)</span><span class="type-signature"> &rarr; {BaseRecord}</span></h4>
+    <h4 class="name" id="findOne"><span class="type-signature">(async) </span>findOne<span class="signature">(id)</span><span class="type-signature"> &rarr; {<a href="BaseRecord.html">BaseRecord</a>}</span></h4>
     
 
     
@@ -1443,7 +1446,7 @@ a mongoose model it should be database name of the mongo database.</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="admin_backend_adapters_base_resource.js.html">admin/backend/adapters/base/resource.js</a>, <a href="admin_backend_adapters_base_resource.js.html#line90">line 90</a>
+        <a href="admin_backend_adapters_base_resource.js.html">admin/backend/adapters/base/resource.js</a>, <a href="admin_backend_adapters_base_resource.js.html#line96">line 96</a>
     </li></ul></dd>
     
 
@@ -1481,7 +1484,7 @@ a mongoose model it should be database name of the mongo database.</p>
     </dt>
     <dd>
         
-<span class="param-type">BaseRecord</span>
+<span class="param-type"><a href="BaseRecord.html">BaseRecord</a></span>
 
 
     </dd>
@@ -1552,7 +1555,7 @@ For instance in <a href="Routes.html">Routes</a> path for the <code>new</code> f
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="admin_backend_adapters_base_resource.js.html">admin/backend/adapters/base/resource.js</a>, <a href="admin_backend_adapters_base_resource.js.html#line41">line 41</a>
+        <a href="admin_backend_adapters_base_resource.js.html">admin/backend/adapters/base/resource.js</a>, <a href="admin_backend_adapters_base_resource.js.html#line47">line 47</a>
     </li></ul></dd>
     
 
@@ -1662,7 +1665,7 @@ It could be a table name in SQL database, or collection name in mongoDB.</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="admin_backend_adapters_base_resource.js.html">admin/backend/adapters/base/resource.js</a>, <a href="admin_backend_adapters_base_resource.js.html#line31">line 31</a>
+        <a href="admin_backend_adapters_base_resource.js.html">admin/backend/adapters/base/resource.js</a>, <a href="admin_backend_adapters_base_resource.js.html#line37">line 37</a>
     </li></ul></dd>
     
 
@@ -1766,7 +1769,7 @@ It could be a table name in SQL database, or collection name in mongoDB.</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="admin_backend_adapters_base_resource.js.html">admin/backend/adapters/base/resource.js</a>, <a href="admin_backend_adapters_base_resource.js.html#line49">line 49</a>
+        <a href="admin_backend_adapters_base_resource.js.html">admin/backend/adapters/base/resource.js</a>, <a href="admin_backend_adapters_base_resource.js.html#line55">line 55</a>
     </li></ul></dd>
     
 
@@ -1921,7 +1924,7 @@ It could be a table name in SQL database, or collection name in mongoDB.</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="admin_backend_adapters_base_resource.js.html">admin/backend/adapters/base/resource.js</a>, <a href="admin_backend_adapters_base_resource.js.html#line60">line 60</a>
+        <a href="admin_backend_adapters_base_resource.js.html">admin/backend/adapters/base/resource.js</a>, <a href="admin_backend_adapters_base_resource.js.html#line66">line 66</a>
     </li></ul></dd>
     
 
@@ -2097,7 +2100,7 @@ It could be a table name in SQL database, or collection name in mongoDB.</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="admin_backend_adapters_base_resource.js.html">admin/backend/adapters/base/resource.js</a>, <a href="admin_backend_adapters_base_resource.js.html#line126">line 126</a>
+        <a href="admin_backend_adapters_base_resource.js.html">admin/backend/adapters/base/resource.js</a>, <a href="admin_backend_adapters_base_resource.js.html#line132">line 132</a>
     </li></ul></dd>
     
 
@@ -2154,7 +2157,7 @@ It could be a table name in SQL database, or collection name in mongoDB.</p>
         
 <div class="param-desc">
     <p>created record converted to raw Object which
-                                  can be used to initiate new BaseRecord instance</p>
+                                  can be used to initiate new <a href="BaseRecord.html">BaseRecord</a> instance</p>
 </div>
 
 
@@ -2193,13 +2196,13 @@ It could be a table name in SQL database, or collection name in mongoDB.</p>
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-examples_hapijs.html">examples/hapijs</a></li><li><a href="module-Integrations_hapijs.html">Integrations/hapijs</a></li></ul><h3>Classes</h3><ul><li><a href="Admin.html">Admin</a></li><li><a href="BaseController.html">BaseController</a></li><li><a href="BaseDatabase.html">BaseDatabase</a></li><li><a href="BaseDecorator.html">BaseDecorator</a></li><li><a href="BaseProperty.html">BaseProperty</a></li><li><a href="BaseResource.html">BaseResource</a></li><li><a href="MongooseAdapter.Database.html">Database</a></li><li><a href="Property.html">Property</a></li><li><a href="Resource.html">Resource</a></li><li><a href="Routes.html">Routes</a></li><li><a href="ValidationError.html">ValidationError</a></li></ul><h3>Namespaces</h3><ul><li><a href="Controllers.html">Controllers</a></li><li><a href="MongooseAdapter.html">MongooseAdapter</a></li></ul><h3>Tutorials</h3><ul><li><a href="tutorial-admin-bro-options.html">Options</a></li><li><a href="tutorial-resource-decorators.html">Resource customization</a></li><li><a href="tutorial-your-own-resource.html">Writing your own resources</a></li></ul><h3>Global</h3><ul><li><a href="global.html#DatabaseFactory">DatabaseFactory</a></li><li><a href="global.html#ResourceFactory">ResourceFactory</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-examples_hapijs.html">examples/hapijs</a></li><li><a href="module-Integrations_hapijs.html">Integrations/hapijs</a></li></ul><h3>Classes</h3><ul><li><a href="Admin.html">Admin</a></li><li><a href="BaseController.html">BaseController</a></li><li><a href="BaseDatabase.html">BaseDatabase</a></li><li><a href="BaseDecorator.html">BaseDecorator</a></li><li><a href="BaseProperty.html">BaseProperty</a></li><li><a href="BaseRecord.html">BaseRecord</a></li><li><a href="BaseResource.html">BaseResource</a></li><li><a href="MongooseAdapter.Database.html">Database</a></li><li><a href="Property.html">Property</a></li><li><a href="Resource.html">Resource</a></li><li><a href="Routes.html">Routes</a></li><li><a href="ValidationError.html">ValidationError</a></li></ul><h3>Namespaces</h3><ul><li><a href="Controllers.html">Controllers</a></li><li><a href="MongooseAdapter.html">MongooseAdapter</a></li></ul><h3>Tutorials</h3><ul><li><a href="tutorial-admin-bro-options.html">Options</a></li><li><a href="tutorial-resource-decorators.html">Resource customization</a></li><li><a href="tutorial-your-own-resource.html">Writing your own resources</a></li></ul><h3>Global</h3><ul><li><a href="global.html#DatabaseFactory">DatabaseFactory</a></li><li><a href="global.html#ResourceFactory">ResourceFactory</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Wed Dec 05 2018 22:41:40 GMT+0100 (CET)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Wed Dec 05 2018 23:04:51 GMT+0100 (CET)
 </footer>
 
 <script> prettyPrint(); </script>

@@ -1,7 +1,15 @@
+/* eslint class-methods-use-this: 0 */
+
 const TITLE_COLUMN_NAMES = ['title', 'name', 'subject', 'email']
 
 /**
- * Represents resource properties
+ * Represents Resource Property
+ *
+ * @mermaid
+ *   graph TD
+ *   A[BaseDatabase] -->|has many| B(BaseResource)
+ *   B --> |has many|C(BaseRecord)
+ *   B --> |has many|D(BasePorperty)
  */
 class BaseProperty {
   /**
@@ -33,6 +41,10 @@ class BaseProperty {
     return this._type || 'string'
   }
 
+  /**
+   * Return true if given property should be treated as a Record Title.
+   * @return {Boolean}
+   */
   isTitle() {
     return TITLE_COLUMN_NAMES.includes(this._path.toLowerCase())
   }
