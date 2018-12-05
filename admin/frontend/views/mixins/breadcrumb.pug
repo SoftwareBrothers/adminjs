@@ -3,4 +3,4 @@ mixin breadcrumb(elements)
     ul
       for element in elements
         li(class={ 'is-active' : elements.indexOf(element) === elements.length - 1 })
-          a=element
+          a(href=h.listUrl(currentResource))=element
