@@ -1,6 +1,6 @@
 const BaseProperty = require('../adapters/base/property')
-
 const DEFAULT_MAX_ITEMS_IN_LIST = 5
+const DEFAULT_RECORD_ACTIONS = ['show', 'edit', 'remove']
 
 /**
  * Base decorator class which decorates the Resource.
@@ -48,6 +48,45 @@ class BaseDecorator {
     return this._resource.properties().filter(property => property.isEditable())
   }
 
+  checkIfActionIsAvailable(action) {
+    const recordAvailableActions = this.invokeOrGet('recordActions')
+    if (recordAvailableActions) {
+      return recordAvailableActions.includes(action)
+    } 
+    // if record doesn't have available actions, it automatically uses default ones
+    return DEFAULT_RECORD_ACTIONS.includes(action)
+  }
+
+  getConfiguratedActions(helpers, record, actions) {
+    const configuratedActions = []
+    actions.forEach(action => {
+      const configuratedAction = this.getConfiguratedAction(helpers, record, action)
+      configuratedAction && configuratedActions.push(configuratedAction)
+    })
+    return configuratedActions
+  }
+
+  getConfiguratedAction(helpers, record, action) {
+    const resource = this._resource
+    const recordActions = {
+      show: {
+        path: helpers.showRecordUrl(resource, record),
+        icon: 'info',
+        label: 'Info' 
+      },
+      edit: {
+        path: helpers.editRecordUrl(resource, record),
+        icon: 'pen',
+        label: 'Edit' 
+      },
+      remove: {
+        path: helpers.deleteRecordUrl(resource, record),
+        icon: 'trash',
+        label: 'Remove' 
+      }
+    }
+    return this.checkIfActionIsAvailable(action) ? recordActions[action] : ''
+  }
 
   nameToProperty(propertyName) {
     return this._resource.property(propertyName) || new BaseProperty({ path: propertyName })

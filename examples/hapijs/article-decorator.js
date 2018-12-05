@@ -4,9 +4,10 @@ class ArticleDecorator extends BaseDecorator {
   constructor(params) {
     super(params)
     this.resourceName = 'Artykuly'
-    this.listProperties = ['title', 'content', 'publishedAt']
-    this.showProperties = ['title', 'publishedAt']
-    this.parentName = 'Wiedza'
+    this.listProperties = ['title', 'content', 'publishedAt', 'dupa']
+    this.showProperties = ['publishedAt']
+    this.parentName = 'Wiedza',
+    this.recordActions = ['show', 'edit', 'remove']
   }
 
   getValue({ record, property, where, helpers }) {
