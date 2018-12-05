@@ -76,7 +76,7 @@ class ResourcesController extends BaseController {
     this.view.page = page || 1
     this.view.sort = {
       sortBy: sortBy || firstProperty.name(),
-      direction: sortDirection | 'asc'
+      direction: sortDirection || 'asc'
     }
     return this.view.currentResource.find({}, {
       limit: this.view.perPage,
