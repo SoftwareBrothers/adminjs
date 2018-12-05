@@ -3,10 +3,10 @@ const { BaseDecorator } = require('../../admin/index')
 class ArticleDecorator extends BaseDecorator {
   constructor(params) {
     super(params)
-    this.resourceName = 'Artykuly'
+    this.resourceName = 'Article'
     this.listProperties = ['title', 'content', 'publishedAt']
     this.showProperties = ['title', 'publishedAt']
-    this.parentName = 'Wiedza'
+    this.parentName = 'Knowledge'
   }
 
   getValue({ record, property, where, helpers }) {

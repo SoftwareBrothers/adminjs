@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: admin/backend/adapters/resource-factory.js</title>
+    <title>JSDoc: Tutorial: Resource customization</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,53 +17,21 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: admin/backend/adapters/resource-factory.js</h1>
+    <h1 class="page-title">Tutorial: Resource customization</h1>
 
-    
-
-
-
-    
     <section>
-        <article>
-            <pre class="prettyprint source linenums"><code>const mongoose = require('mongoose')
-const MongooseResource = require('./mongoose/resource')
-const BaseDecorator = require('../utils/base-decorator')
-const _ = require('lodash')
 
-/**
- * It changes raw resource object to a particular Resource implementation supported by AdminBro.
- *
- * When Decorator class is given it allso attached it to the Resource.
- * Otherwise it attaches {@link BaseDecorator}
- *
- * @param  {Object} resource            raw database resource - one of `mongoose.Model`
- * @param  {BaseDecorator} [decorator]  decorator used to decorate resource
- * @return {BaseResource}               instance of class which extends {@link BaseResource}. Right
- *                                      now only {@link MongooseResource} is supported
- *
- * @example
- * const OptionalDecorator = require('./optionalResourceDecorator')
- *
- * const database = await mongoose.connect(process.env.MONGO_URL)
- * const resources = database.models().map(m => ResourceFactory(m, OptionalDecorator))
- */
-const ResourceFactory = (rawResource, decorator) => {
-  if (_.get(rawResource, 'base.constructor.name') === 'Mongoose') {
-    const mongooseResource = new MongooseResource(rawResource)
-    mongooseResource.assignDecorator(decorator || BaseDecorator)
-    return mongooseResource
-  }
-  throw new Error(`unsupported resource type ${rawResource.constructor ? rawResource.constructor.name : rawResource}`)
-}
+<header>
+    
 
-module.exports = ResourceFactory
-</code></pre>
-        </article>
-    </section>
+    <h2>Resource customization</h2>
+</header>
 
+<article>
+    <p>Tutorials are files rendered by jsdoc documentation separate from the inline comments. To create new tutorial simply add new file under <code>./tutorials</code> and update <code>./tutorials/tutorials.json</code>.</p>
+</article>
 
-
+</section>
 
 </div>
 
