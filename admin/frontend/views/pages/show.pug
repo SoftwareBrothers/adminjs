@@ -13,10 +13,10 @@ block content
               i.fas.fa-arrow-left
           | Details
         .field.is-grouped
-          - namesOfActions = ['edit', 'remove']
-          - actions = currentResource.decorate().getRecordActions(h, record, namesOfActions)
-          if actions
-            for action in actions
+          - actions = currentResource.decorate().getRecordActions(h, record)
+          for key in ['edit', 'remove']
+            - action = actions[key]
+            if action
               .control
                 a.button.is-primary(href=action.path)
                   span.icon

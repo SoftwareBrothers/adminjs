@@ -78,18 +78,11 @@ class BaseDecorator {
     return DEFAULT_RECORD_ACTIONS.includes(action)
   }
 
-  getRecordActions(helpers, record, actions) {
+  getRecordActions(helpers, record) {
     const defaultActions = this.getDefaultActions(helpers, record)
-    const givenActions = actions || null
     const recordActions = Object.keys(defaultActions)
-      .filter(key => {
-        if(givenActions && !givenActions.includes(key)) {
-          return;
-        }
-        return this.checkIfActionIsAvailable(key)
-      })
-      .reduce(((obj, key) => { 
-        return { ...obj, [key]: defaultActions[key] }}), {})
+      .filter(key => this.checkIfActionIsAvailable(key))
+      .reduce((obj, key) => Object.assign(obj, {[key]: defaultActions[key]}), {})
     return recordActions
   }
 

@@ -59,7 +59,6 @@ block content
                               span.icon
                                 i(class=`fas fa-${action.icon}`)
                               .btn-text=action.label
-                          - actions = ['show', 'edit', 'remove' ]
                     
           - pages = h.paginate(total, page, perPage).pages
           if pages.length > 1
