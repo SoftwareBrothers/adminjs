@@ -12,9 +12,16 @@
       vertical-align: middle
     th
       border-bottom: none
-      &.text-small
+      .text-small, a
         font-weight: normal
         color: $ghost
+      a         
+        display: flex
+        align-items: center
+        svg 
+          margin: 0 rem(5px)
+      .text-small.active, path
+        color: $cornflower-blue
     tr
       &:hover
         background-color: $athens-gray
@@ -33,7 +40,7 @@
   @include media-breakpoint-down($media-min-tablet-width - 1px)
     .level .is-grouped
       margin-top: rem(14px)
-    thead
+    th:not(.main)
       display: none
     .table td
       padding: 0

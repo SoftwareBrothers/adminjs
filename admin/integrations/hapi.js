@@ -8,6 +8,7 @@
  */
 
 const Boom = require('boom')
+const inert = require('inert')
 const AdminBro = require('../index.js')
 const Routes = require('../backend/routes')
 
@@ -17,9 +18,11 @@ module.exports = {
   register: async (server, options) => {
     const admin = new AdminBro(options)
     const auth = options.auth || false
-    const routes = new Routes({ admin }).all()
+    const routes = new Routes({ admin })
+    const pages = routes.all()
+    const assets = routes.assets()
 
-    routes.forEach((route) => {
+    pages.forEach((route) => {
       server.route({
         method: route.method,
         path: `${admin.options.rootPath}${route.path}`,
@@ -35,6 +38,19 @@ module.exports = {
             throw Boom.boomify(e)
           }
         },
+      })
+    })
+
+    await server.register(inert);
+    assets.forEach(asset => {
+      server.route({
+        method: 'GET',
+        path: `${admin.options.rootPath}${asset.path}`,
+        handler: {
+          file: function (request) {
+            return asset.src;
+          }
+        }
       })
     })
 
