@@ -4,18 +4,29 @@ const lodash = require('lodash')
 class ViewHelpers {
   constructor({ admin }) {
     this._admin = admin
-
     this.paginate = paginate
     this._ = lodash
     this.branding = this._admin.options.branding
+  }
+
+  getObjectKeyWithValue(obj, key) {
+    return typeof obj[key] === 'object' 
+      ? this.getQueryPath(obj[key]) : `${key}=${obj[key]}`
+  }
+
+  getQueryPath(query) {
+    const queryPath = [];
+    Object.keys(query).forEach(key => {
+      queryPath.push(this.getObjectKeyWithValue(query, key))
+    })
+    return queryPath.join('&')
   }
 
   urlBuilder(paths, query) {
     const { rootPath } = this._admin.options
     let url = `${rootPath}/${paths.join('/')}`
     if (query) {
-      const queryString = Object.keys(query).map(key => `${key}=${query[key]}`)
-      url = `${url}?${queryString}`
+      url = `${url}?${this.getQueryPath(query)}`
     }
     return url
   }
@@ -55,6 +66,7 @@ class ViewHelpers {
   isMainColumn(propertyName) {
     return ['name', 'email', 'title', '_id'].includes(propertyName)
   }
+  
 }
 
 module.exports = ViewHelpers
