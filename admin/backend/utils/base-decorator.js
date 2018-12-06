@@ -48,6 +48,10 @@ class BaseDecorator {
     return this._resource.properties().filter(property => property.isEditable())
   }
 
+  getCustomActions() {
+    return;
+  }
+
   getDefaultActions(helpers, record) {
     const resource = this._resource
     return {
@@ -80,9 +84,11 @@ class BaseDecorator {
 
   getRecordActions(helpers, record) {
     const defaultActions = this.getDefaultActions(helpers, record)
-    const recordActions = Object.keys(defaultActions)
+    const customActions = this.getCustomActions('get', this._resource, helpers, record)
+    let recordActions = { ...defaultActions, ...customActions }
+    recordActions = Object.keys(recordActions)
       .filter(key => this.checkIfActionIsAvailable(key))
-      .reduce((obj, key) => Object.assign(obj, {[key]: defaultActions[key]}), {})
+      .reduce((obj, key) => Object.assign(obj, {[key]: recordActions[key]}), {})
     return recordActions
   }
 

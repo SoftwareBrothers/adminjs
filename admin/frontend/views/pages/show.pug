@@ -4,6 +4,8 @@ include ../mixins/breadcrumb
 
 block content
   secton.show-details
+    if(customInfo)
+      !=customInfo
     +breadcrumb([currentResource.decorate().getResourceName(), record.title()])
     .column
       .level

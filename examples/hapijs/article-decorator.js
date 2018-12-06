@@ -7,23 +7,27 @@ class ArticleDecorator extends BaseDecorator {
     this.listProperties = ['title', 'content', 'publishedAt', 'dupa']
     this.showProperties = ['publishedAt']
     this.parentName = 'Wiedza',
-    this.recordActions = ['show', 'edit', 'remove',
-    //  {
-    //     id: 'publish',
-    //     icon: 'icon',
-    //     label: 'Publikuj',
-    //     method: ['POST', 'GET'],
-    //     action: (request, response, context) => {
-    //       // jaki kod
+    this.recordActions = ['show', 'edit', 'remove', 'publish']
+  }
 
-    //       if(request.method.POST){
-    //         return '<p>Page which is shown on the www<p>'
-    //       } else {
-    //         response.redirect(context.h.showRecordUrl(context.currentResource, context.record))
-    //       }
-    //     }
-    //   }
-    ]
+  getCustomActions(method, resource, helpers, record) {
+    console.log('helpers', helpers)
+    return {
+      publish: {
+        id: 'publish',
+        icon: 'share',
+        label: 'Publikuj',
+        path: helpers.showRecordUrl(resource, record),
+        action: (request, response, context) => {
+          if(method === 'POST') {
+            return '<p>Page which is shown on the www<p>'
+          } else {
+            return 'get'
+            // response.redirect(context.h.showRecordUrl(context.currentResource, context.record))
+          }
+        }
+      }
+    }
   }
 
   publish(request) {

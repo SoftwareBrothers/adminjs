@@ -55,15 +55,17 @@ class ResourcesController extends BaseController {
 
   async custom({ params, method, query, payload }, response) {
     this.findResources(params)
-    const { recordId } = params
-    console.log('MEETOOODD', method)
-    this.view.currentResource.decorate().publish(request)
+    const { recordId, actionName } = params
+    // const action = this.view.currentResource.decorate().getCustomActions(method)[actionName]
+    console.log('SHOWWWW', this.view)
+    this.view.record = await this.view.currentResource.findOne(recordId)
+    this.view.customInfo = '<div class="border-box" style="margin: 20px"> <p> Your Article is Published <p></div>'
+    return this.render('pages/show', this.view)
   }
 
   async delete({ params, query, payload }, response) {
     this.findResources(params)
     const { recordId } = params
-    await this.view.currentResource.delete(recordId)
     return response.redirect(this.view.h.listUrl(
       this.view.currentResource,
     ))
