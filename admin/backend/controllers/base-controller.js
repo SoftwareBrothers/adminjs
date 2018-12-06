@@ -1,6 +1,5 @@
 const ViewHelpers = require('../utils/view-helpers')
 const Renderer = require('../utils/renderer')
-const MongoResource = require('../adapters/mongoose/resource')
 
 /**
  * base class for all controllers in the application
@@ -19,13 +18,14 @@ class BaseController {
     this.view = {}
     this.view.currentAdmin = currentAdmin
     this.view.resources = admin.resources.reduce((memo, resource) => {
-      if (memo[resource.decorate().getParent()]) {
-        memo[resource.decorate().getParent()].push(resource)
+      const parent = resource.decorate().getParent()
+      const parentName = parent.name
+      if (memo[parentName]) {
+        memo[parentName].push(resource)
       } else {
-        memo[resource.decorate().getParent()] = [resource]
+        memo[parentName] = [resource]
       }
-      const iconType = resource instanceof MongoResource ? 'mongodb' : 'database'
-      memo[resource.decorate().getParent()].icon = resource.decorate().getIcon(iconType)
+      memo[parentName].icon = parent.icon
       return memo
     }, {})
     this.view.h = new ViewHelpers({ admin })
