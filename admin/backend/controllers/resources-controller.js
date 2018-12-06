@@ -43,7 +43,6 @@ class ResourcesController extends BaseController {
   async update({ params, query, payload }, response) {
     this.findResources(params)
     const { recordId } = params
-    this.view.record = await this.view.currentResource.findOne(recordId)
     await this.view.record.update(payload)
     if (this.view.record.isValid()) {
       return response.redirect(this.view.h.showRecordUrl(
@@ -52,6 +51,13 @@ class ResourcesController extends BaseController {
       ))
     }
     return this.render('pages/edit', this.view)
+  }
+
+  async custom({ params, method, query, payload }, response) {
+    this.findResources(params)
+    const { recordId } = params
+    console.log('MEETOOODD', method)
+    this.view.currentResource.decorate().publish(request)
   }
 
   async delete({ params, query, payload }, response) {
