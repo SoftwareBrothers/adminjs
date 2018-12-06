@@ -6,9 +6,8 @@ html
     block scripts
       link(rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.5.1/css/bulma.min.css")
       link(rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-mfizz/2.4.1/font-mfizz.min.css")
-      link( rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,700")
-    style(type="text/css")
-      != adminStyles
+      link(rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,700")
+      link(rel="stylesheet" href="./admin/frontend/assets/style.min.css")
   body
     .columns.container-main
       aside.sidebar
@@ -25,8 +24,4 @@ html
       integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
       crossorigin="anonymous")
     script(defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js")
-    script
-      | $(document).ready(() => {
-      |   $('.hamburger').click(() => $('.sidebar-desktop').removeClass('sidebar-mobile'));
-      |   $('.content-wrapper').click(() => $('.sidebar-desktop').addClass('sidebar-mobile'));
-      | });
+    script(src="./admin/frontend/assets/app.min.js")

@@ -3,3 +3,5 @@ node_modules
 coverage
 .DS_store
 docker-compose.ovverride.yml
+admin/frontend/assets/styles/
+admin/frontend/assets/scripts/
