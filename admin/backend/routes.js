@@ -17,6 +17,34 @@ const ResourcesController = require('./controllers/resources-controller')
 class Routes {
   constructor({ admin }) {
     this._admin = admin
+    this.assetsRoot = `${__dirname}/../frontend/assets/`
+  }
+
+  assets(){
+    return [{
+      path:  '/frontend/assets/app.min.js',
+      src: [this.assetsRoot, 'scripts/app.min.js'].join('/')
+    },
+    {
+      path:  '/frontend/assets/style.min.css',
+      src: [this.assetsRoot, 'styles/style.min.css'].join('/')
+    },
+    {
+      path:  '/frontend/assets/icomoon.eot',
+      src: [this.assetsRoot, 'fonts/icomoon.eot'].join('/')
+    },
+    {
+      path:  '/frontend/assets/icomoon.svg',
+      src: [this.assetsRoot, 'fonts/icomoon.svg'].join('/')
+    },
+    {
+      path:  '/frontend/assets/icomoon.ttf',
+      src: [this.assetsRoot, 'fonts/icomoon.ttf'].join('/')
+    },
+    {
+      path:  '/frontend/assets/icomoon.woff',
+      src: [this.assetsRoot, 'fonts/icomoon.woff'].join('/')
+    }]
   }
 
   all() {
