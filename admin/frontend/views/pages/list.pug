@@ -37,12 +37,12 @@ block content
                 th
             tbody
               for record in records
+                - actions = currentResource.decorate().getRecordActions(h, record)
                 tr
                   for prop in currentResource.decorate().getListProperties()
                     td.is-vcentered(class={ 'property-main' : h.isMainColumn(prop.name()) })
-                      - configuratedActionShow = currentResource.decorate().getConfiguratedAction(h, record, 'show')
-                      if configuratedActionShow && h.isMainColumn(prop.name())
-                        a(href=configuratedActionShow.path)
+                      if actions['show'] && h.isMainColumn(prop.name())
+                        a(href=actions['show'].path)
                           != currentResource.decorate().getValue({ record, property: prop, where: 'list', helpers: h})
                       else
                         != currentResource.decorate().getValue({ record, property: prop, where: 'list', helpers: h})
@@ -54,14 +54,13 @@ block content
                             i.fas.fa-ellipsis-h
                       .dropdown-menu
                         .dropdown-content
-                          - actions = ['show', 'edit', 'remove' ]
-                          - configuratedActions = currentResource.decorate().getConfiguratedActions(h, record, actions)
-                          for action in configuratedActions
+                          for action in actions
                             a.button.is-white(href=action.path)
                               span.icon
                                 i(class=`fas fa-${action.icon}`)
                               .btn-text=action.label
-
+                          - actions = ['show', 'edit', 'remove' ]
+                    
           - pages = h.paginate(total, page, perPage).pages
           if pages.length > 1
             .level-item.pagination-content

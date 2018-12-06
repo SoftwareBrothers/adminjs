@@ -48,27 +48,9 @@ class BaseDecorator {
     return this._resource.properties().filter(property => property.isEditable())
   }
 
-  checkIfActionIsAvailable(action) {
-    const recordAvailableActions = this.invokeOrGet('recordActions')
-    if (recordAvailableActions) {
-      return recordAvailableActions.includes(action)
-    } 
-    // if record doesn't have available actions, it automatically uses default ones
-    return DEFAULT_RECORD_ACTIONS.includes(action)
-  }
-
-  getConfiguratedActions(helpers, record, actions) {
-    const configuratedActions = []
-    actions.forEach(action => {
-      const configuratedAction = this.getConfiguratedAction(helpers, record, action)
-      configuratedAction && configuratedActions.push(configuratedAction)
-    })
-    return configuratedActions
-  }
-
-  getConfiguratedAction(helpers, record, action) {
+  getDefaultActions(helpers, record) {
     const resource = this._resource
-    const recordActions = {
+    return {
       show: {
         path: helpers.showRecordUrl(resource, record),
         icon: 'info',
@@ -85,7 +67,30 @@ class BaseDecorator {
         label: 'Remove' 
       }
     }
-    return this.checkIfActionIsAvailable(action) ? recordActions[action] : ''
+  }
+
+  checkIfActionIsAvailable(action) {
+    const recordAvailableActions = this.invokeOrGet('recordActions')
+    if (recordAvailableActions) {
+      return recordAvailableActions.includes(action)
+    } 
+    // if record doesn't have available actions, it automatically uses default ones
+    return DEFAULT_RECORD_ACTIONS.includes(action)
+  }
+
+  getRecordActions(helpers, record, actions) {
+    const defaultActions = this.getDefaultActions(helpers, record)
+    const givenActions = actions || null
+    const recordActions = Object.keys(defaultActions)
+      .filter(key => {
+        if(givenActions && !givenActions.includes(key)) {
+          return;
+        }
+        return this.checkIfActionIsAvailable(key)
+      })
+      .reduce(((obj, key) => { 
+        return { ...obj, [key]: defaultActions[key] }}), {})
+    return recordActions
   }
 
   nameToProperty(propertyName) {

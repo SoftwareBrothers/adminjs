@@ -3,32 +3,30 @@ include ../mixins/form-group
 include ../mixins/breadcrumb
 
 block content
-  - canBeShown = currentResource.decorate().checkIfActionIsAvailable('show')
-  if canBeShown
-    secton.show-details
-      +breadcrumb([currentResource.decorate().getResourceName(), record.title()])
-      .column
-        .level
-          .title
-            a.button.is-text.is-back(href=h.listUrl(currentResource))
-              span.icon.is-small
-                i.fas.fa-arrow-left
-            | Details
-          .field.is-grouped
-            - actions = ['edit', 'remove']
-            - configuratedActions = currentResource.decorate().getConfiguratedActions(h, record, actions)
-            if configuratedActions
-              for action in configuratedActions
-                .control
-                  a.button.is-primary(href=action.path)
-                    span.icon
-                      i(class=`fas fa-${action.icon}`)
-                    .btn-text=action.label
-      .column
-        .border-box
-          for prop in currentResource.decorate().getShowProperties()
-            .property
-              .card-content
-                .text-small #{h._.startCase(prop.name())}
-                div(class={ 'feature' : properties.indexOf(prop) === 0 })
-                  != currentResource.decorate().getValue({ record, property: prop, where: 'show', helpers: h})
+  secton.show-details
+    +breadcrumb([currentResource.decorate().getResourceName(), record.title()])
+    .column
+      .level
+        .title
+          a.button.is-text.is-back(href=h.listUrl(currentResource))
+            span.icon.is-small
+              i.fas.fa-arrow-left
+          | Details
+        .field.is-grouped
+          - namesOfActions = ['edit', 'remove']
+          - actions = currentResource.decorate().getRecordActions(h, record, namesOfActions)
+          if actions
+            for action in actions
+              .control
+                a.button.is-primary(href=action.path)
+                  span.icon
+                    i(class=`fas fa-${action.icon}`)
+                  .btn-text=action.label
+    .column
+      .border-box
+        for prop in currentResource.decorate().getShowProperties()
+          .property
+            .card-content
+              .text-small #{h._.startCase(prop.name())}
+              div(class={ 'feature' : properties.indexOf(prop) === 0 })
+                != currentResource.decorate().getValue({ record, property: prop, where: 'show', helpers: h})
