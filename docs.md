@@ -68,7 +68,7 @@ This is how it looks:
   B --> |has many|D(<a href=./BaseProperty.html>BaseProperty</a>)
 </div>
 
-First of all [base class]{@link Admin} is used to convert all supported database connections (mongodb, sql-like, etc) to list of databases which interits from {@link BaseDatabase}. It utilises {@link DatabaseFactory} to construct correct database type.
+First of all [base class]{@link AdminBro} is used to convert all supported database connections (mongodb, sql-like, etc) to list of databases which interits from {@link BaseDatabase}. It utilises {@link DatabaseFactory} to construct correct database type.
 
 Then each class which inherits {@link BaseDatabase} can fetch all resources present in the database. Each resource inherits from {@link BaseResource}
 

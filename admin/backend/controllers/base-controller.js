@@ -11,7 +11,9 @@ const Renderer = require('../utils/renderer')
 class BaseController {
   /**
    * @param  {Object} options
-   * @param  {Admin} options.admin
+   * @param  {AdminBro} options.admin
+   * @param  {Object} currentAdmin          logged in admin
+   * @param  {Object} currentAdmin.email
    */
   constructor({ admin }, currentAdmin) {
     this._admin = admin
@@ -31,7 +33,7 @@ class BaseController {
   /**
    * Renders given view with the data provided
    * @param  {String} view  path to the pug view (i.e. pages/list)
-   * @param  {Object} data  which will be send to the view
+   * @param  {Object} data  which will be send to the view as an data context
    * @return {String}       rendered html
    */
   render(view, data) {

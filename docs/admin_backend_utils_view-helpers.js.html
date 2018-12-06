@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: admin/backend/controllers/base-controller.js</title>
+    <title>JSDoc: Source: admin/backend/utils/view-helpers.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: admin/backend/controllers/base-controller.js</h1>
+    <h1 class="page-title">Source: admin/backend/utils/view-helpers.js</h1>
 
     
 
@@ -26,50 +26,73 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>const ViewHelpers = require('../utils/view-helpers')
-const Renderer = require('../utils/renderer')
+            <pre class="prettyprint source linenums"><code>const paginate = require('jw-paginate')
+const lodash = require('lodash')
 
 /**
- * base class for all controllers in the application
- * It initializes this.view with databases and it load helpers
- * Also it stores this._admin (instance of {@link Admin}) locally
+ * Collection of helper methods available in the views
  *
- * @namespace Controllers
+ * @example
+ * a.button.is-primary(href=h.newRecordUrl(currentResource))
+ *   span.icon
  */
-class BaseController {
-  /**
-   * @param  {Object} options
-   * @param  {AdminBro} options.admin
-   * @param  {Object} currentAdmin          logged in admin
-   * @param  {Object} currentAdmin.email
-   */
-  constructor({ admin }, currentAdmin) {
+class ViewHelpers {
+  constructor({ admin }) {
     this._admin = admin
-    this.view = {}
-    this.view.currentAdmin = currentAdmin
-    this.view.resources = admin.resources.reduce((memo, resource) => {
-      if (memo[resource.decorate().getParent()]) {
-        memo[resource.decorate().getParent()].push(resource)
-      } else {
-        memo[resource.decorate().getParent()] = [resource]
-      }
-      return memo
-    }, {})
-    this.view.h = new ViewHelpers({ admin })
+
+    this.paginate = paginate
+    this._ = lodash
+    this.branding = this._admin.options.branding
   }
 
-  /**
-   * Renders given view with the data provided
-   * @param  {String} view  path to the pug view (i.e. pages/list)
-   * @param  {Object} data  which will be send to the view as an data context
-   * @return {String}       rendered html
-   */
-  render(view, data) {
-    return new Renderer(view, data).render()
+  urlBuilder(paths, query) {
+    const { rootPath } = this._admin.options
+    let url = `${rootPath}/${paths.join('/')}`
+    if (query) {
+      const queryString = Object.keys(query).map(key => `${key}=${query[key]}`)
+      url = `${url}?${queryString}`
+    }
+    return url
+  }
+
+  loginUrl() {
+    return this._admin.options.loginPath
+  }
+
+  logoutUrl() {
+    return this._admin.options.logoutPath
+  }
+
+  dashboardUrl() {
+    return this._admin.options.rootPath
+  }
+
+  listUrl(resource, query) {
+    return this.urlBuilder(['resources', resource.id()], query)
+  }
+
+  newRecordUrl(resource) {
+    return this.urlBuilder(['resources', resource.id(), 'new'])
+  }
+
+  showRecordUrl(resource, record) {
+    return this.urlBuilder(['resources', resource.id(), record.id()])
+  }
+
+  editRecordUrl(resource, record) {
+    return this.urlBuilder(['resources', resource.id(), record.id(), 'edit'])
+  }
+
+  deleteRecordUrl(resource, record) {
+    return this.urlBuilder(['resources', resource.id(), record.id(), 'delete'])
+  }
+
+  isMainColumn(propertyName) {
+    return ['name', 'email', 'title', '_id'].includes(propertyName)
   }
 }
 
-module.exports = BaseController
+module.exports = ViewHelpers
 </code></pre>
         </article>
     </section>

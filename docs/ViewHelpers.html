@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: admin/backend/controllers/base-controller.js</title>
+    <title>JSDoc: Class: ViewHelpers</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,62 +17,145 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: admin/backend/controllers/base-controller.js</h1>
+    <h1 class="page-title">Class: ViewHelpers</h1>
 
     
 
 
 
+
+<section>
+
+<header>
     
-    <section>
-        <article>
-            <pre class="prettyprint source linenums"><code>const ViewHelpers = require('../utils/view-helpers')
-const Renderer = require('../utils/renderer')
+        <h2><span class="attribs"><span class="type-signature"></span></span>ViewHelpers<span class="signature">()</span><span class="type-signature"></span></h2>
+        
+            <div class="class-description"><p>Collection of helper methods available in the views</p></div>
+        
+    
+</header>
 
-/**
- * base class for all controllers in the application
- * It initializes this.view with databases and it load helpers
- * Also it stores this._admin (instance of {@link Admin}) locally
- *
- * @namespace Controllers
- */
-class BaseController {
-  /**
-   * @param  {Object} options
-   * @param  {AdminBro} options.admin
-   * @param  {Object} currentAdmin          logged in admin
-   * @param  {Object} currentAdmin.email
-   */
-  constructor({ admin }, currentAdmin) {
-    this._admin = admin
-    this.view = {}
-    this.view.currentAdmin = currentAdmin
-    this.view.resources = admin.resources.reduce((memo, resource) => {
-      if (memo[resource.decorate().getParent()]) {
-        memo[resource.decorate().getParent()].push(resource)
-      } else {
-        memo[resource.decorate().getParent()] = [resource]
-      }
-      return memo
-    }, {})
-    this.view.h = new ViewHelpers({ admin })
-  }
+<article>
+    <div class="container-overview">
+    
+        
 
-  /**
-   * Renders given view with the data provided
-   * @param  {String} view  path to the pug view (i.e. pages/list)
-   * @param  {Object} data  which will be send to the view as an data context
-   * @return {String}       rendered html
-   */
-  render(view, data) {
-    return new Renderer(view, data).render()
-  }
-}
+    
+    <h2>Constructor</h2>
+    
 
-module.exports = BaseController
-</code></pre>
-        </article>
-    </section>
+    
+    <h4 class="name" id="ViewHelpers"><span class="type-signature"></span>new ViewHelpers<span class="signature">()</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <script type="text/javascript" src="https://unpkg.com/mermaid@7.1.0/dist/mermaid.min.js"></script>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="admin_backend_utils_view-helpers.js.html">admin/backend/utils/view-helpers.js</a>, <a href="admin_backend_utils_view-helpers.js.html#line11">line 11</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>a.button.is-primary(href=h.newRecordUrl(currentResource))
+  span.icon</code></pre>
+
+
+
+    
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</article>
+
+</section>
 
 
 

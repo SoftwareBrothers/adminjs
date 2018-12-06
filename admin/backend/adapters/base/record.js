@@ -76,9 +76,9 @@ class BaseRecord {
    * it creates new one.
    *
    * Practically it invokes
-   * {@link BaseResource.create} or {@link BaseResource.update} methods.
-   * 
-   * When validation error occures it stores that to {@link BaseResource.errors}
+   * {@link BaseResource#create} or {@link BaseResource#update} methods.
+   *
+   * When validation error occures it stores that to {@link BaseResource#errors}
    *
    * @return {BaseRecord}        given record (this)
    */

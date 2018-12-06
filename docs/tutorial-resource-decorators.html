@@ -28,7 +28,63 @@
 </header>
 
 <article>
-    <p>Tutorials are files rendered by jsdoc documentation separate from the inline comments. To create new tutorial simply add new file under <code>./tutorials</code> and update <code>./tutorials/tutorials.json</code>.</p>
+    <p>AdminBro works quite well with default scaffolding, but what if you want to modify how resources looks like?
+You can use resource decorators</p>
+<h3>Resource decorators</h3><p>Decorators are passed to the AdminBro along with other configuration options.</p>
+<pre class="prettyprint source lang-javascript"><code>const adminBroOptions = {
+  resources: [
+    { resource: Article, decorator: YourDecorator },
+  ],
+  branding: {
+    companyName: 'Amazing c.o.',
+  },
+  ...
+}</code></pre><p>When not passed - AdminBro will use <a href="BaseDecorator.html">BaseDecorator</a></p>
+<h3>Writing your own decorator</h3><p>To modify how particular resource behaves you have to create decorator class for it:</p>
+<pre class="prettyprint source lang-javascript"><code>const { BaseDecorator } = require('admin-bro')
+
+class ArticleDecorator extends BaseDecorator {
+  constructor(params) {
+    super(params)
+
+    // You can define changes as an class parameters:
+    this.resourceName = 'Article'
+    this.listProperties = ['title', 'content', 'publishedAt']
+    this.showProperties = ['title', 'publishedAt']
+    this.parentName = 'Knowledge'
+  }
+
+  // Or as a method:
+  parentName() {
+    return 'Knowledge'
+  }
+}</code></pre><h3>Overriding particular fields</h3><p>You can change:</p>
+<ul>
+<li>define totally new value</li>
+<li>how value for existing field is rendered</li>
+</ul>
+<p>In order to do this you have to override <a href="BaseDecorator.html#getValue">BaseDecorator#getValue</a> method</p>
+<pre class="prettyprint source lang-javascript"><code>const { BaseDecorator } = require('admin-bro')
+
+class ArticleDecorator extends BaseDecorator {
+  constructor(params) {
+    super(params)
+    this.listProperties = ['newField']
+  }
+
+  getValue({ record, property, where, helpers }) {
+    switch (property.name()) {
+    case 'newField':
+      return `
+        &lt;p>Here goes a paragraph&lt;/p>
+        &lt;p>and another one&lt;/p>
+        &lt;a href=&quot;${helpers.showRecordUrl(record.resource, record)}&quot;>Link somewere&lt;/>
+      `
+    default:
+      return super.getValue({ record, property, where, helpers })
+    }
+  }
+}</code></pre>
 </article>
 
 </section>
@@ -36,13 +92,13 @@
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-examples_hapijs.html">examples/hapijs</a></li><li><a href="module-Integrations_hapijs.html">Integrations/hapijs</a></li></ul><h3>Classes</h3><ul><li><a href="Admin.html">Admin</a></li><li><a href="BaseController.html">BaseController</a></li><li><a href="BaseDatabase.html">BaseDatabase</a></li><li><a href="BaseDecorator.html">BaseDecorator</a></li><li><a href="BaseProperty.html">BaseProperty</a></li><li><a href="BaseRecord.html">BaseRecord</a></li><li><a href="BaseResource.html">BaseResource</a></li><li><a href="MongooseAdapter.Database.html">Database</a></li><li><a href="Property.html">Property</a></li><li><a href="Resource.html">Resource</a></li><li><a href="Routes.html">Routes</a></li><li><a href="ValidationError.html">ValidationError</a></li></ul><h3>Namespaces</h3><ul><li><a href="Controllers.html">Controllers</a></li><li><a href="MongooseAdapter.html">MongooseAdapter</a></li></ul><h3>Tutorials</h3><ul><li><a href="tutorial-admin-bro-options.html">Options</a></li><li><a href="tutorial-resource-decorators.html">Resource customization</a></li><li><a href="tutorial-your-own-resource.html">Writing your own resources</a></li></ul><h3>Global</h3><ul><li><a href="global.html#DatabaseFactory">DatabaseFactory</a></li><li><a href="global.html#ResourceFactory">ResourceFactory</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-examples_hapijs.html">examples/hapijs</a></li><li><a href="module-Integrations_hapijs.html">Integrations/hapijs</a></li></ul><h3>Classes</h3><ul><li><a href="AdminBro.html">AdminBro</a></li><li><a href="BaseController.html">BaseController</a></li><li><a href="BaseDatabase.html">BaseDatabase</a></li><li><a href="BaseDecorator.html">BaseDecorator</a></li><li><a href="BaseProperty.html">BaseProperty</a></li><li><a href="BaseRecord.html">BaseRecord</a></li><li><a href="BaseResource.html">BaseResource</a></li><li><a href="MongooseAdapter.Database.html">Database</a></li><li><a href="Property.html">Property</a></li><li><a href="Resource.html">Resource</a></li><li><a href="Routes.html">Routes</a></li><li><a href="ValidationError.html">ValidationError</a></li><li><a href="ViewHelpers.html">ViewHelpers</a></li></ul><h3>Namespaces</h3><ul><li><a href="Controllers.html">Controllers</a></li><li><a href="MongooseAdapter.html">MongooseAdapter</a></li></ul><h3>Tutorials</h3><ul><li><a href="tutorial-resource-decorators.html">Resource customization</a></li></ul><h3>Global</h3><ul><li><a href="global.html#DatabaseFactory">DatabaseFactory</a></li><li><a href="global.html#ResourceFactory">ResourceFactory</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Wed Dec 05 2018 23:06:38 GMT+0100 (CET)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Thu Dec 06 2018 13:19:57 GMT+0100 (CET)
 </footer>
 
 <script> prettyPrint(); </script>

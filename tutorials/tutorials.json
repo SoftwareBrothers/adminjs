@@ -1,11 +1,5 @@
 {
-  "admin-bro-options": {
-    "title": "Options"
-  },
   "resource-decorators": {
     "title": "Resource customization"
-  },
-  "your-own-resource": {
-    "title": "Writing your own resources"
   }
 }

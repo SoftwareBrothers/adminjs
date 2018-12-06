@@ -73,7 +73,7 @@ const defaults = {
  * user. Than its instance is a currier - injected in all other classes.
  *
  */
-class Admin {
+class AdminBro {
   /**
    * @param  {AdminBroOptions}   options
    */
@@ -157,44 +157,44 @@ class Admin {
  * Base class for all resource decorators
  * @type {BaseDecorator}
  */
-Admin.BaseDecorator = BaseDecorator
+AdminBro.BaseDecorator = BaseDecorator
 
 
 /**
  * List of all supported routes along with controllers
  * @type {Routes}
  */
-Admin.Routes = Routes
+AdminBro.Routes = Routes
 
 /**
  * BaseResource
  * @type {BaseResource}
  */
-Admin.BaseResource = BaseResource
+AdminBro.BaseResource = BaseResource
 
 /**
  * BaseDatabase
  * @type {BaseDatabase}
  */
-Admin.BaseDatabase = BaseDatabase
+AdminBro.BaseDatabase = BaseDatabase
 
 /**
  * BaseRecord
  * @type {BaseRecord}
  */
-Admin.BaseRecord = BaseRecord
+AdminBro.BaseRecord = BaseRecord
 
 /**
  * BaseProperty
  * @type {BaseProperty}
  */
-Admin.BaseProperty = BaseProperty
+AdminBro.BaseProperty = BaseProperty
 
 /**
  * ValidationError
  * @type {ValidationError}
  */
-Admin.ValidationError = ValidationError
+AdminBro.ValidationError = ValidationError
 
 
-module.exports = Admin
+module.exports = AdminBro
