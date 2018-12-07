@@ -22,28 +22,15 @@ class BaseDecorator {
     return this.invokeOrGet('resourceName') || this._resource.name()
   }
 
+    /**
+   * Returns the name and icon  of parent database
+   * @return {String} resource name
+   */
   getParent() {
-    const parent = this.invokeOrGet('parent')
-    return {
-      name: this.getDatabaseName(parent),
-      icon: this.getIcon(parent)
-    }
-  }
-
-  getDatabaseName(parent) {
-    if (parent instanceof Object) {
-      return parent.name
-    }
-    if (typeof(parent) === 'string' || parent instanceof String) {
-      return parent
-    }
-    return this._resource.databaseName()
-  }
-
-  getIcon(parent) {
-    const hasCustomIcon = parent instanceof Object && parent.icon
-    const iconType = this._resource.databaseType() === 'mongoose' ? 'mongodb' : 'database'
-    return hasCustomIcon ? parent.icon : `icon-${iconType}`
+    const parent = this.invokeOrGet('parent') || this._resource.databaseName()
+    const name = parent.name || parent
+    const icon = parent.icon ? parent.icon : `icon-${this._resource.databaseType() || 'database'}`
+    return { name, icon }
   }
 
   /**

@@ -7,10 +7,10 @@ describe('BaseDecorator', function () {
     this.properties = [...Array(10)].map(p => new BaseProperty({ name: 1, type: 'string' }))
     this.resourceName = 'resourceName'
     this.databaseName = 'databaseName'
-    this.databaseType = 'mongoose'
+    this.databaseType = 'mongodb'
     this.modkedParent = {
-      name: 'databaseName',
-      icon: 'icon-mongodb'
+      name: this.databaseName,
+      icon: `icon-${this.databaseType}`
     }
     this.mockedResource = {
       properties: this.sinon.stub().returns(this.properties),

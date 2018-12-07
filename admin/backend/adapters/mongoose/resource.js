@@ -112,7 +112,7 @@ class Resource extends BaseResource {
   }
 
   databaseType() {
-    return 'mongoose'
+    return 'mongodb'
   }
 }
 

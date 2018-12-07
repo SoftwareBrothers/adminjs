@@ -81,6 +81,10 @@ class BaseResource {
     return this._decorated
   }
 
+  /**
+   * ``````Check database type``````
+   * @return  {String} Return database type
+   */
   databaseType() {
     throw new NotImplementedError()
   }
