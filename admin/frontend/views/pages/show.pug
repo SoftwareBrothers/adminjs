@@ -4,16 +4,15 @@ include ../mixins/breadcrumb
 
 block content
   secton.show-details
-    if(customInfo)
-      !=customInfo
-    +breadcrumb([currentResource.decorate().getResourceName(), record.title()])
+    - actionName = customAction && customAction.name
+    +breadcrumb([currentResource.decorate().getResourceName(), record.title(), ...([actionName] || [])])
     .column
       .level
         .title
           a.button.is-text.is-back(href=h.listUrl(currentResource))
             span.icon.is-small
               i.fas.fa-arrow-left
-          | Details
+          | #{actionName || 'Details'}
         .field.is-grouped
           - actions = currentResource.decorate().getRecordActions(h, record)
           for key in ['edit', 'remove']
@@ -26,9 +25,12 @@ block content
                   .btn-text=action.label
     .column
       .border-box
-        for prop in currentResource.decorate().getShowProperties()
-          .property
-            .card-content
-              .text-small #{h._.startCase(prop.name())}
-              div(class={ 'feature' : properties.indexOf(prop) === 0 })
-                != currentResource.decorate().getValue({ record, property: prop, where: 'show', helpers: h})
+        if customAction
+          != customAction.content
+        else
+          for prop in currentResource.decorate().getShowProperties()
+            .property
+              .card-content
+                .text-small #{h._.startCase(prop.name())}
+                div(class={ 'feature' : properties.indexOf(prop) === 0 })
+                  != currentResource.decorate().getValue({ record, property: prop, where: 'show', helpers: h})
