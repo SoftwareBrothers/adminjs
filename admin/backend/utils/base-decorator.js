@@ -48,6 +48,9 @@ class BaseDecorator {
     return this._resource.properties().filter(property => property.isEditable())
   }
 
+ /**
+  * Returns object(map) with default actions as keys and their values
+  */
   getDefaultActions(helpers, record) {
     const resource = this._resource
     return {
@@ -69,27 +72,31 @@ class BaseDecorator {
     }
   }
 
-  getAllAvailableActions(helpers, recordActions, record) {
-    // returns object with declared record actions default(strings) and customs(objects)
+  /**
+  * Returns object(map) with record actions declared in his decorator
+  */
+  getAllAvailableActions(helpers, defaultActions, recordActions, record) {
     return recordActions.reduce((obj, key) => {
       if(typeof key === 'object') {
         return {...obj, ...{
-            // for custom action adds the path prop
-            [key.id]: { ...key, path: helpers.customRecordActionUrl(this._resource, record, key.id)}
+            [key.id]: {...key, path: helpers.customRecordActionUrl(this._resource, record, key.id)}
           }
         }
       }
-      return {...obj, ...{[key]: this.getDefaultActions(helpers, record)[key]}}
+      return {...obj, ...(Object.keys(defaultActions).includes(key) && {[key]: defaultActions[key]})}
     }, {})
   }
 
+  /**
+  * Returns object(map) with record actions declared in his decorator.
+  * If record doesn't have declared actions, it automatically returns default ones
+  */
   getRecordActions(helpers, record) {
     const defaultActions = this.getDefaultActions(helpers, record)
     const recordActions = this.invokeOrGet('recordActions')
     if(recordActions) {
-      return this.getAllAvailableActions(helpers, recordActions, record)
+      return this.getAllAvailableActions(helpers, defaultActions, recordActions, record)
     }
-    // if record doesn't have declared actions, it automatically uses default ones
     return defaultActions
   }
 

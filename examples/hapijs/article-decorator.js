@@ -11,11 +11,11 @@ class ArticleDecorator extends BaseDecorator {
       {
         id: 'publish',
         icon: 'share',
-        label: 'Publikuj',
+        label: 'Publish',
         action: (request, response, view) => {
           const { method } = request
           if(method === 'POST') {
-            return 'Some content you want to place here' 
+            return 'Some content or form which you want to place here' 
           } else {
             return 'PUBLISH ACTION WORKS'
           }
