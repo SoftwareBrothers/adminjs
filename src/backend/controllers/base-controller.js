@@ -20,11 +20,14 @@ class BaseController {
     this.view = {}
     this.view.currentAdmin = currentAdmin
     this.view.resources = admin.resources.reduce((memo, resource) => {
-      if (memo[resource.decorate().getParent()]) {
-        memo[resource.decorate().getParent()].push(resource)
+      const parent = resource.decorate().getParent()
+      const parentName = parent.name
+      if (memo[parentName]) {
+        memo[parentName].push(resource)
       } else {
-        memo[resource.decorate().getParent()] = [resource]
+        memo[parentName] = [resource]
       }
+      memo[parentName].icon = parent.icon
       return memo
     }, {})
     this.view.h = new ViewHelpers({ admin })

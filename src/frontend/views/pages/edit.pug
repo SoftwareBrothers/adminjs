@@ -19,11 +19,13 @@ block content
               span(class="icon is-small")
                 i(class="fas fa-check")
               .btn-text Save
-          .control
-            a.button.is-primary.is-outlined(href=h.deleteRecordUrl(currentResource, record))
-              span.icon.is-small
-                i(class="fas fa-trash")
-              .btn-text Remove
+          - actionRemove = currentResource.decorate().getRecordActions(h, record)['remove']
+          if actionRemove
+            .control
+              a.button.is-primary.is-outlined(href=actionRemove.path)
+                span.icon.is-small
+                  i(class=`fas fa-${actionRemove.icon}`)
+                .btn-text=actionRemove.label
       .box
         for prop in properties.filter(p => p.isEditable())
           - error = record.error(prop.name())

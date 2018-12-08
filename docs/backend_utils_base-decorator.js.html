@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: admin/backend/utils/base-decorator.js</title>
+    <title>JSDoc: Source: backend/utils/base-decorator.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: admin/backend/utils/base-decorator.js</h1>
+    <h1 class="page-title">Source: backend/utils/base-decorator.js</h1>
 
     
 
@@ -26,7 +26,7 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>const BaseProperty = require('../adapters/base/property')
+            <pre class="prettyprint source linenums"><code>const BaseProperty = require('../adapters/base-property')
 
 const DEFAULT_MAX_ITEMS_IN_LIST = 5
 
@@ -107,11 +107,15 @@ class BaseDecorator {
   }
 
   /**
-   * Returns resource parent. Database name by default
-   * @return {String}
+   * Returns resource parent along with the icon. By default it is a
+   * database type with its icon
+   * @return {Object}
    */
   getParent() {
-    return this.invokeOrGet('parentName') || this._resource.databaseName()
+    const parent = this.invokeOrGet('parent') || this._resource.databaseName()
+    const name = parent.name || parent
+    const icon = parent.icon ? parent.icon : `icon-${this._resource.databaseType() || 'database'}`
+    return { name, icon }
   }
 
   /**
@@ -140,6 +144,57 @@ class BaseDecorator {
     return this._resource.properties().filter(property => property.isEditable())
   }
 
+  /**
+   * Returns object(map) with default actions as keys and their values
+   */
+  getDefaultActions(helpers, record) {
+    const resource = this._resource
+    return {
+      show: {
+        path: helpers.showRecordUrl(resource, record),
+        icon: 'info',
+        label: 'Info',
+      },
+      edit: {
+        path: helpers.editRecordUrl(resource, record),
+        icon: 'pen',
+        label: 'Edit',
+      },
+      remove: {
+        path: helpers.deleteRecordUrl(resource, record),
+        icon: 'trash',
+        label: 'Remove',
+      },
+    }
+  }
+
+  /**
+   * Returns object(map) with record actions declared in his decorator
+   */
+  getAllAvailableActions(helpers, defaultActions, recordActions, record) {
+    return recordActions.reduce((obj, key) => {
+      if (typeof key === 'object') {
+        return { ...obj, ...{
+            [key.id]: {...key, path: helpers.customRecordActionUrl(this._resource, record, key.id) },
+          },
+        }
+      }
+      return { ...obj, ...(Object.keys(defaultActions).includes(key) &amp;&amp; { [key]: defaultActions[key] }) }
+    }, {})
+  }
+
+  /**
+  * Returns object(map) with record actions declared in his decorator.
+  * If record doesn't have declared actions, it automatically returns default ones
+  */
+  getRecordActions(helpers, record) {
+    const defaultActions = this.getDefaultActions(helpers, record)
+    const recordActions = this.invokeOrGet('recordActions')
+    if(recordActions) {
+      return this.getAllAvailableActions(helpers, defaultActions, recordActions, record)
+    }
+    return defaultActions
+  }
 
   /**
    * Change name to the Property object
@@ -186,13 +241,13 @@ module.exports = BaseDecorator
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-examples_hapijs.html">examples/hapijs</a></li><li><a href="module-Integrations_hapijs.html">Integrations/hapijs</a></li></ul><h3>Classes</h3><ul><li><a href="AdminBro.html">AdminBro</a></li><li><a href="BaseController.html">BaseController</a></li><li><a href="BaseDatabase.html">BaseDatabase</a></li><li><a href="BaseDecorator.html">BaseDecorator</a></li><li><a href="BaseProperty.html">BaseProperty</a></li><li><a href="BaseRecord.html">BaseRecord</a></li><li><a href="BaseResource.html">BaseResource</a></li><li><a href="MongooseAdapter.Database.html">Database</a></li><li><a href="Property.html">Property</a></li><li><a href="Resource.html">Resource</a></li><li><a href="Routes.html">Routes</a></li><li><a href="ValidationError.html">ValidationError</a></li><li><a href="ViewHelpers.html">ViewHelpers</a></li></ul><h3>Namespaces</h3><ul><li><a href="Controllers.html">Controllers</a></li><li><a href="MongooseAdapter.html">MongooseAdapter</a></li></ul><h3>Tutorials</h3><ul><li><a href="tutorial-resource-decorators.html">Resource customization</a></li></ul><h3>Global</h3><ul><li><a href="global.html#DatabaseFactory">DatabaseFactory</a></li><li><a href="global.html#ResourceFactory">ResourceFactory</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="AdminBro.html">AdminBro</a></li><li><a href="BaseController.html">BaseController</a></li><li><a href="BaseDatabase.html">BaseDatabase</a></li><li><a href="BaseDecorator.html">BaseDecorator</a></li><li><a href="BaseProperty.html">BaseProperty</a></li><li><a href="BaseRecord.html">BaseRecord</a></li><li><a href="BaseResource.html">BaseResource</a></li><li><a href="ValidationError.html">ValidationError</a></li><li><a href="ViewHelpers.html">ViewHelpers</a></li></ul><h3>Namespaces</h3><ul><li><a href="Controllers.html">Controllers</a></li></ul><h3>Tutorials</h3><ul><li><a href="tutorial-resource-decorators.html">Resource customization</a></li></ul><h3>Global</h3><ul><li><a href="global.html#Router">Router</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Thu Dec 06 2018 13:45:19 GMT+0100 (CET)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Sat Dec 08 2018 19:06:36 GMT+0100 (CET)
 </footer>
 
 <script> prettyPrint(); </script>

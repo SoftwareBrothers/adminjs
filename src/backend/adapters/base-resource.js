@@ -36,6 +36,16 @@ class BaseResource {
     throw new NotImplementedError()
   }
 
+  
+  /**
+   * Returns type of the database. It is used to compute sidebar icon for
+   * given resource
+   * @return {String}
+   */
+  databaseType() {
+    throw new NotImplementedError()
+  }
+
   /**
    * Return name of the resource.
    * It could be a table name in SQL database, or collection name in mongoDB.

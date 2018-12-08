@@ -54,6 +54,22 @@ class ResourcesController extends BaseController {
     return this.render('pages/edit', this.view)
   }
 
+  async custom(request, response) {
+    const { view } = this
+    this.findResources(request.params)
+    const { recordId, actionId } = request.params
+    view.record = await view.currentResource.findOne(recordId)
+    const { h, record } = view
+    view.customAction = {
+      name: actionId,
+      content: await view.currentResource
+        .decorate()
+        .getRecordActions(h, record)[actionId]
+        .action(request, response, view),
+    }
+    return this.render('pages/show', view)
+  }
+
   async delete({ params, query, payload }, response) {
     this.findResources(params)
     const { recordId } = params

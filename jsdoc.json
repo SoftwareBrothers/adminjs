@@ -3,7 +3,7 @@
         "allowUnknownTags": ["mermaid"]
     },
     "source": {
-        "include": ["./admin", "./examples"],
+        "include": ["./src"],
         "includePattern": ".js$",
         "excludePattern": "(node_modules/|docs)"
     },

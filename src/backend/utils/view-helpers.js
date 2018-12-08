@@ -136,9 +136,20 @@ class ViewHelpers {
   }
 
   /**
+   * Returns URL for the custom action user defined in the resource decorator
+   * @param {BaseResource}  resource
+   * @param {BaseRecord}    record
+   * @param {String}        actionId      id of the action
+   * @return {String}
+   */
+  customRecordActionUrl(resource, record, actionId) {
+    return this.urlBuilder(['resources', resource.id(), record.id(), actionId])
+  }
+
+  /**
    * Returns absolute path to given asset
    * @param  {String} asset
-   * @return {String}      
+   * @return {String}
    */
   assetPath(asset) {
     return this.urlBuilder(['frontend', 'assets', asset])
@@ -147,7 +158,6 @@ class ViewHelpers {
   isMainColumn(propertyName) {
     return ['name', 'email', 'title', '_id'].includes(propertyName)
   }
-  
 }
 
 module.exports = ViewHelpers

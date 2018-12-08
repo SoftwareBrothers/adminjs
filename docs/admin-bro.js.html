@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: admin/index.js</title>
+    <title>JSDoc: Source: admin-bro.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: admin/index.js</h1>
+    <h1 class="page-title">Source: admin-bro.js</h1>
 
     
 
@@ -28,17 +28,18 @@
         <article>
             <pre class="prettyprint source linenums"><code>const _ = require('lodash')
 
-const DatabasesParser = require('./backend/adapters/databases-parser')
-const ResourceFactory = require('./backend/adapters/resource-factory')
 const Renderer = require('./backend/utils/renderer')
 const BaseDecorator = require('./backend/utils/base-decorator')
-const BaseResource = require('./backend/adapters/base/resource')
-const BaseDatabase = require('./backend/adapters/base/database')
-const BaseRecord = require('./backend/adapters/base/record')
-const BaseProperty = require('./backend/adapters/base/property')
+const BaseResource = require('./backend/adapters/base-resource')
+const BaseDatabase = require('./backend/adapters/base-database')
+const BaseRecord = require('./backend/adapters/base-record')
+const BaseProperty = require('./backend/adapters/base-property')
 const ValidationError = require('./backend/utils/validation-error')
+const ResourcesFactory = require('./backend/utils/resources-factory')
 
-const Routes = require('./backend/routes')
+const Router = require('./backend/router')
+
+const pkg = require('../package.json')
 
 /**
  * @typedef {Object} AdminBroOptions
@@ -118,50 +119,27 @@ class AdminBro {
      */
     this.options = _.merge(defaults, options)
 
-    this.findResources(options)
+    const { databases, resources } = this.options
+    const resourcesFactory = new ResourcesFactory(AdminBro.registeredAdapters)
+    this.resources = resourcesFactory.buildResources({ databases, resources })
   }
 
-
   /**
-   * Find all resources given by user. When, along with the resource
-   * its {@link BaseDecorator} is given - it also attaches it using
-   * BaseResource#assignDecorator
+   * Registers various database adapters written for admin-bro
    *
-   * @param {BaseDatabase[]} [databases=[]]    list of all databases
-   * @param {BaseResource[] | Object[]} [resources=[]]    list of all resources along
-   *                                                      with optional decorators. Take
-   *                                                      a look at {@link AdminBroOptions}
+   * @param  {Object}       options
+   * @param  {BaseDatabase} options.Database subclass of BaseDatabase
+   * @param  {BaseResource} options.Resource subclass of BaseResource
    */
-  findResources({ databases, resources }) {
-    this.resources = []
-    if (resources &amp;&amp; resources.length > 0) {
-      this.resources = this.resources.concat(resources.map((m) => {
-        if (m.toString() === '[object Object]') {
-          const resource = ResourceFactory(m.resource, m.decorator)
-          return resource
-        }
-        return ResourceFactory(m)
-      }))
+  static registerAdapter({ Database, Resource }) {
+    if (!Database || !Resource) {
+      throw new Error('Adapter has to have both Database and Resource')
     }
-    if (databases &amp;&amp; databases.length > 0) {
-      const rawResources = DatabasesParser(this.options.databases).reduce((memo, database) => {
-        return memo.concat(database.resources())
-      }, [])
-      const resourcesToAdd = rawResources.map(m => ResourceFactory(m)).filter((m) => {
-        // ensure that resource is not there yet
-        return !this.resources.find(em => em.id() === m.id())
-      })
-      this.resources = this.resources.concat(resourcesToAdd)
+    if (Database.prototype instanceof BaseDatabase &amp;&amp; Resource.prototype instanceof BaseResource) {
+      AdminBro.registeredAdapters.push({ Database, Resource })
+    } else {
+      throw new Error('Adapter elements has to be subclassess of AdminBro.BaseResource nad AdminBro.BaseDatabase')
     }
-  }
-
-  /**
-   * Returns resource base on its ID
-   * @param  {String} resourceId    id of a resource defined under {@link BaseResource#id}
-   * @return {BaseResource}         found resource
-   */
-  findResource(resourceId) {
-    return this.resources.find(m => m.id() === resourceId)
   }
 
   /**
@@ -179,6 +157,15 @@ class AdminBro {
   static async renderLogin({ action, errorMessage }) {
     return new Renderer('pages/login', { action, errorMessage }).render()
   }
+
+  /**
+   * Returns resource base on its ID
+   * @param  {String} resourceId    id of a resource defined under {@link BaseResource#id}
+   * @return {BaseResource}         found resource
+   */
+  findResource(resourceId) {
+    return this.resources.find(m => m.id() === resourceId)
+  }
 }
 
 /**
@@ -190,9 +177,9 @@ AdminBro.BaseDecorator = BaseDecorator
 
 /**
  * List of all supported routes along with controllers
- * @type {Routes}
+ * @type {Router}
  */
-AdminBro.Routes = Routes
+AdminBro.Router = Router
 
 /**
  * BaseResource
@@ -224,6 +211,10 @@ AdminBro.BaseProperty = BaseProperty
  */
 AdminBro.ValidationError = ValidationError
 
+AdminBro.registeredAdapters = []
+
+AdminBro.VERSION = pkg.version
+
 
 module.exports = AdminBro
 </code></pre>
@@ -236,13 +227,13 @@ module.exports = AdminBro
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-examples_hapijs.html">examples/hapijs</a></li><li><a href="module-Integrations_hapijs.html">Integrations/hapijs</a></li></ul><h3>Classes</h3><ul><li><a href="AdminBro.html">AdminBro</a></li><li><a href="BaseController.html">BaseController</a></li><li><a href="BaseDatabase.html">BaseDatabase</a></li><li><a href="BaseDecorator.html">BaseDecorator</a></li><li><a href="BaseProperty.html">BaseProperty</a></li><li><a href="BaseRecord.html">BaseRecord</a></li><li><a href="BaseResource.html">BaseResource</a></li><li><a href="MongooseAdapter.Database.html">Database</a></li><li><a href="Property.html">Property</a></li><li><a href="Resource.html">Resource</a></li><li><a href="Routes.html">Routes</a></li><li><a href="ValidationError.html">ValidationError</a></li><li><a href="ViewHelpers.html">ViewHelpers</a></li></ul><h3>Namespaces</h3><ul><li><a href="Controllers.html">Controllers</a></li><li><a href="MongooseAdapter.html">MongooseAdapter</a></li></ul><h3>Tutorials</h3><ul><li><a href="tutorial-resource-decorators.html">Resource customization</a></li></ul><h3>Global</h3><ul><li><a href="global.html#DatabaseFactory">DatabaseFactory</a></li><li><a href="global.html#ResourceFactory">ResourceFactory</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="AdminBro.html">AdminBro</a></li><li><a href="BaseController.html">BaseController</a></li><li><a href="BaseDatabase.html">BaseDatabase</a></li><li><a href="BaseDecorator.html">BaseDecorator</a></li><li><a href="BaseProperty.html">BaseProperty</a></li><li><a href="BaseRecord.html">BaseRecord</a></li><li><a href="BaseResource.html">BaseResource</a></li><li><a href="ValidationError.html">ValidationError</a></li><li><a href="ViewHelpers.html">ViewHelpers</a></li></ul><h3>Namespaces</h3><ul><li><a href="Controllers.html">Controllers</a></li></ul><h3>Tutorials</h3><ul><li><a href="tutorial-resource-decorators.html">Resource customization</a></li></ul><h3>Global</h3><ul><li><a href="global.html#Router">Router</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Thu Dec 06 2018 13:45:19 GMT+0100 (CET)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Sat Dec 08 2018 19:06:36 GMT+0100 (CET)
 </footer>
 
 <script> prettyPrint(); </script>

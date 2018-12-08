@@ -94,82 +94,19 @@
     
 
     
-
-    
-        <h3 class="subsection-title">Methods</h3>
+        <h3 class="subsection-title">Members</h3>
 
         
             
+<h4 class="name" id="Router"><span class="type-signature">(constant) </span>Router<span class="type-signature"></span></h4>
 
-    
-
-    
-    <h4 class="name" id="DatabaseFactory"><span class="type-signature"></span>DatabaseFactory<span class="signature">(database)</span><span class="type-signature"> &rarr; {<a href="BaseDatabase.html">BaseDatabase</a>}</span></h4>
-    
-
-    
 
 
 
 <div class="description">
-    <script type="text/javascript" src="https://unpkg.com/mermaid@7.1.0/dist/mermaid.min.js"></script><p>It changes raw database object to correct Database used by AdminBro.</p>
+    <script type="text/javascript" src="https://unpkg.com/mermaid@7.1.0/dist/mermaid.min.js"></script><p>Contains list of all routes</p>
 </div>
 
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>database</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Object</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>database connection</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
 
 
 
@@ -205,7 +142,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="admin_backend_adapters_database-factory.js.html">admin/backend/adapters/database-factory.js</a>, <a href="admin_backend_adapters_database-factory.js.html#line15">line 15</a>
+        <a href="backend_router.js.html">backend/router.js</a>, <a href="backend_router.js.html#line19">line 19</a>
     </li></ul></dd>
     
 
@@ -220,260 +157,22 @@
 
 
 
-
-
-
-
-
-
-
-
-<h5>Returns:</h5>
-
-        
-<div class="param-desc">
-    <p>class which extends AbstractDatabase. Right
-                                         now only MongooseDatabase is supported</p>
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type"><a href="BaseDatabase.html">BaseDatabase</a></span>
-
-
-    </dd>
-</dl>
-
-    
-
-
-
-
     <h5>Example</h5>
     
-    <pre class="prettyprint"><code>const rawDatabase = await mongoose.connect(process.env.MONGO_URL)
-const databases = DatabaseFactory(rawDatabase) //{BaseDatabase[]}</code></pre>
+    <pre class="prettyprint"><code>// route example
+{
+   method: 'GET',
+   path: '',
+   view: 'pages/dashboard',
+ Controller    controller: this.dashboardController,
+   action: 'index',
+ }</code></pre>
 
 
 
         
-            
-
     
 
-    
-    <h4 class="name" id="ResourceFactory"><span class="type-signature"></span>ResourceFactory<span class="signature">(resource, decorator<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {<a href="BaseResource.html">BaseResource</a>}</span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    <script type="text/javascript" src="https://unpkg.com/mermaid@7.1.0/dist/mermaid.min.js"></script><p>It changes raw resource object to a particular Resource implementation supported by AdminBro.</p>
-<p>When Decorator class is given it allso attached it to the Resource.
-Otherwise it attaches <a href="BaseDecorator.html">BaseDecorator</a></p>
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-        <th>Attributes</th>
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>resource</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Object</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-
-                
-
-                
-                </td>
-            
-
-            
-
-            <td class="description last"><p>raw database resource - one of <code>mongoose.Model</code></p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>decorator</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type"><a href="BaseDecorator.html">BaseDecorator</a></span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-
-                
-                </td>
-            
-
-            
-
-            <td class="description last"><p>decorator used to decorate resource</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="admin_backend_adapters_resource-factory.js.html">admin/backend/adapters/resource-factory.js</a>, <a href="admin_backend_adapters_resource-factory.js.html#line23">line 23</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Returns:</h5>
-
-        
-<div class="param-desc">
-    <p>instance of class which extends <a href="BaseResource.html">BaseResource</a>. Right
-                                     now only MongooseResource is supported</p>
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type"><a href="BaseResource.html">BaseResource</a></span>
-
-
-    </dd>
-</dl>
-
-    
-
-
-
-
-    <h5>Example</h5>
-    
-    <pre class="prettyprint"><code>const OptionalDecorator = require('./optionalResourceDecorator')
-
-const database = await mongoose.connect(process.env.MONGO_URL)
-const resources = database.models().map(m => ResourceFactory(m, OptionalDecorator))</code></pre>
-
-
-
-        
     
 
     
@@ -985,7 +684,7 @@ have default values, but you can tailor them to your needs easily</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="admin_index.js.html">admin/index.js</a>, <a href="admin_index.js.html#line15">line 15</a>
+        <a href="admin-bro.js.html">admin-bro.js</a>, <a href="admin-bro.js.html#line16">line 16</a>
     </li></ul></dd>
     
 
@@ -1036,13 +735,13 @@ const adminBro = new AdminBro({
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-examples_hapijs.html">examples/hapijs</a></li><li><a href="module-Integrations_hapijs.html">Integrations/hapijs</a></li></ul><h3>Classes</h3><ul><li><a href="AdminBro.html">AdminBro</a></li><li><a href="BaseController.html">BaseController</a></li><li><a href="BaseDatabase.html">BaseDatabase</a></li><li><a href="BaseDecorator.html">BaseDecorator</a></li><li><a href="BaseProperty.html">BaseProperty</a></li><li><a href="BaseRecord.html">BaseRecord</a></li><li><a href="BaseResource.html">BaseResource</a></li><li><a href="MongooseAdapter.Database.html">Database</a></li><li><a href="Property.html">Property</a></li><li><a href="Resource.html">Resource</a></li><li><a href="Routes.html">Routes</a></li><li><a href="ValidationError.html">ValidationError</a></li><li><a href="ViewHelpers.html">ViewHelpers</a></li></ul><h3>Namespaces</h3><ul><li><a href="Controllers.html">Controllers</a></li><li><a href="MongooseAdapter.html">MongooseAdapter</a></li></ul><h3>Tutorials</h3><ul><li><a href="tutorial-resource-decorators.html">Resource customization</a></li></ul><h3>Global</h3><ul><li><a href="global.html#DatabaseFactory">DatabaseFactory</a></li><li><a href="global.html#ResourceFactory">ResourceFactory</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="AdminBro.html">AdminBro</a></li><li><a href="BaseController.html">BaseController</a></li><li><a href="BaseDatabase.html">BaseDatabase</a></li><li><a href="BaseDecorator.html">BaseDecorator</a></li><li><a href="BaseProperty.html">BaseProperty</a></li><li><a href="BaseRecord.html">BaseRecord</a></li><li><a href="BaseResource.html">BaseResource</a></li><li><a href="ValidationError.html">ValidationError</a></li><li><a href="ViewHelpers.html">ViewHelpers</a></li></ul><h3>Namespaces</h3><ul><li><a href="Controllers.html">Controllers</a></li></ul><h3>Tutorials</h3><ul><li><a href="tutorial-resource-decorators.html">Resource customization</a></li></ul><h3>Global</h3><ul><li><a href="global.html#Router">Router</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Thu Dec 06 2018 13:45:19 GMT+0100 (CET)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Sat Dec 08 2018 19:06:36 GMT+0100 (CET)
 </footer>
 
 <script> prettyPrint(); </script>
