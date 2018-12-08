@@ -27,7 +27,7 @@ describe('ResourcesFactory', function () {
           resources() { return new Array(5) }
         }
         class Resource extends BaseResource {}
-        this.resourcesFactory = new ResourcesFactory([{ Database, Resource }])
+        this.resourcesFactory = new ResourcesFactory({}, [{ Database, Resource }])
       })
 
       it('takes resources from databases', function () {
@@ -48,13 +48,13 @@ describe('ResourcesFactory', function () {
     context('there are no adapters', function () {
       it('throws an error when resource is not subclass from BaseResource', function () {
         expect(() => {
-          new ResourcesFactory()._convertResources(['one'])
+          new ResourcesFactory({})._convertResources(['one'])
         }).to.throw().property('name', 'NoResourceAdapterError')
       })
 
       it('returns given resource when it is subclass from BaseResource', function () {
         class MyResource extends BaseResource {}
-        expect(new ResourcesFactory()._convertResources([new MyResource()])).to.have.lengthOf(1)
+        expect(new ResourcesFactory({})._convertResources([new MyResource()])).to.have.lengthOf(1)
       })
     })
 
@@ -64,7 +64,7 @@ describe('ResourcesFactory', function () {
         class Resource extends BaseResource {
           static isAdapterFor(resource) { return resource === 'supported' }
         }
-        this.resourcesFactory = new ResourcesFactory([{ Database, Resource }])
+        this.resourcesFactory = new ResourcesFactory({}, [{ Database, Resource }])
         this.Resource = Resource
       })
 
@@ -97,7 +97,7 @@ describe('ResourcesFactory', function () {
 
   describe('_decorateResources', function () {
     beforeEach(function () {
-      this.resourcesFactory = new ResourcesFactory([])
+      this.resourcesFactory = new ResourcesFactory({ options: {} }, [])
     })
 
     it('assigns BaseDecorator when no other was given', function () {

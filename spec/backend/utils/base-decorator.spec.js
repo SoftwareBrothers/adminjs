@@ -6,6 +6,8 @@ const helperStub = require('../helpers/helper-stub')
 describe('BaseDecorator', function () {
   beforeEach(function () {
     this.stubbedResource = resourceStub(this.sinon)
+    this.stubbedAdmin = { options: {} }
+    this.args = { resource: this.stubbedResource, admin: this.stubbedAdmin }
   })
 
   describe('#invokeOrGet', function () {
@@ -17,7 +19,7 @@ describe('BaseDecorator', function () {
         }
         overwritenFunction() { return 'overwritenFunctionValue' }
       }
-      this.decorator = new Decorator(this.stubbedResource)
+      this.decorator = new Decorator(this.args)
     })
 
     it('returns null when there is no override', function () {
@@ -35,21 +37,21 @@ describe('BaseDecorator', function () {
 
   describe('#getResourceName', function () {
     it('returns resource name when not overriden', function () {
-      const decorator = new BaseDecorator(this.stubbedResource)
+      const decorator = new BaseDecorator(this.args)
       expect(decorator.getResourceName()).to.equal(resourceStub.expectedResult.resourceName)
     })
   })
 
   describe('#getParent', function () {
     it('return parent when it is not overriden', function () {
-      const decorator = new BaseDecorator(this.stubbedResource)
+      const decorator = new BaseDecorator(this.args)
       expect(decorator.getParent()).to.contain(resourceStub.expectedResult.parent)
     })
   })
 
   describe('#getListProperties', function () {
     it('returns first 5 visible properties from resource when not overwriten', function () {
-      this.decorator = new BaseDecorator(this.stubbedResource)
+      this.decorator = new BaseDecorator(this.args)
       expect(this.decorator.getListProperties()).to.have.lengthOf(5)
     })
 
@@ -61,7 +63,7 @@ describe('BaseDecorator', function () {
             this.listProperties = ['prop1', 'prop2', 'prop3']
           }
         }
-        this.decorator = new Decorator(this.stubbedResource)
+        this.decorator = new Decorator(this.args)
       })
 
       it('returns properties given in configuration', function () {
@@ -83,7 +85,7 @@ describe('BaseDecorator', function () {
   describe('#getValue', function () {
     it('returns value from the resource when there is no override', function () {
       this.record = { param: this.sinon.spy() }
-      this.decorator = new BaseDecorator(this.stubbedResource)
+      this.decorator = new BaseDecorator(this.args)
       this.decorator.getValue({ record: this.record, property: new BaseProperty({ path: 'somename' }) })
       expect(this.record.param).to.have.been.called
     })
@@ -96,7 +98,7 @@ describe('BaseDecorator', function () {
 
     context('user didnt override default actions', function () {
       beforeEach(function () {
-        this.decorator = new BaseDecorator(this.stubbedResource)
+        this.decorator = new BaseDecorator(this.args)
       })
 
       it('returns default methods as an object', function () {
@@ -113,7 +115,7 @@ describe('BaseDecorator', function () {
             this.recordActions = ['show', 'remove']
           }
         }
-        this.decorator = new Decorator(this.stubbedResource)
+        this.decorator = new Decorator(this.args)
         this.ret = this.decorator.getRecordActions(this.stubbedHelper)
       })
 
@@ -142,7 +144,7 @@ describe('BaseDecorator', function () {
             this.recordActions = ['show', 'remove', 'edit', customAction]
           }
         }
-        this.decorator = new Decorator(this.stubbedResource)
+        this.decorator = new Decorator(this.args)
         this.ret = this.decorator.getRecordActions(this.stubbedHelper)
       })
 
