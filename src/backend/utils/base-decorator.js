@@ -200,7 +200,6 @@ class BaseDecorator {
    * @param  {BaseRecord}   options.record
    * @param  {BaseProperty} options.property
    * @param  {String}       options.where    one of: list | show
-   * @param  {ViewHelpers}  options.helpers  view helpers
    * @return {String}                        Html string which will be rendered
    */
   getValue({ record, property, where }) {
