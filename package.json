@@ -1,6 +1,6 @@
 {
   "name": "admin-bro",
-  "version": "1.0.0",
+  "version": "0.1.1",
   "description": "Admin panel for apps written in node.js",
   "main": "index.js",
   "scripts": {
@@ -49,7 +49,6 @@
     "jw-paginate": "^1.0.2",
     "lodash": "^4.17.11",
     "mongoose": "^5.2.9",
-    "node-sass": "^4.10.0",
     "pack": "^2.1.0",
     "pug": "^2.0.3",
     "require.all": "^2.0.4"

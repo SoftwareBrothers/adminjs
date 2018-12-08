@@ -8,8 +8,22 @@ class ArticleDecorator extends BaseDecorator {
     this.showProperties = ['title', 'publishedAt']
     this.parent = {
       name: 'Wiedza',
-      icon: 'icon-google'
+      icon: 'icon-google',
     }
+    this.recordActions = ['show', 'edit', 'remove',
+      {
+        id: 'publish',
+        icon: 'share',
+        label: 'Publish',
+        action: (request, response, view) => {
+          const { method } = request
+          if (method === 'GET') {
+            return 'Some content or form which you want to place here'
+          }
+          return 'PUBLISH ACTION WORKS'
+        },
+      },
+    ]
   }
 
   getValue({ record, property, where, helpers }) {
