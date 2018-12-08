@@ -30,8 +30,9 @@
     
         <h2><span class="attribs"><span class="type-signature"></span></span>BaseDecorator<span class="signature">(resource)</span><span class="type-signature"></span></h2>
         
-            <div class="class-description"><p>Base decorator class which decorates the Resource.
-It can be easily overriden in settings</p></div>
+            <div class="class-description"><p>Base decorator class which decorates the Resource.</p>
+<p>Decorators are passed along with resources during the AdminBro setup. By default
+each resource has BaseDecorator, but it can be overriden.</p></div>
         
     
 </header>
@@ -147,7 +148,7 @@ It can be easily overriden in settings</p></div>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="admin_backend_utils_base-decorator.js.html">admin/backend/utils/base-decorator.js</a>, <a href="admin_backend_utils_base-decorator.js.html#line9">line 9</a>
+        <a href="backend_utils_base-decorator.js.html">backend/utils/base-decorator.js</a>, <a href="backend_utils_base-decorator.js.html#line39">line 39</a>
     </li></ul></dd>
     
 
@@ -174,6 +175,34 @@ It can be easily overriden in settings</p></div>
 
 
 
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>const { BaseDecorator } = require('../../admin/index')
+
+class ArticleDecorator extends BaseDecorator {
+  constructor(params) {
+    super(params)
+    this.resourceName = 'Article'
+    this.listProperties = ['title', 'content', 'publishedAt']
+    this.showProperties = ['title', 'publishedAt']
+    this.parentName = 'Knowledge'
+  }
+
+  getValue({ record, property, where, helpers }) {
+    switch (property.name()) {
+    case 'publishedAt':
+      return `
+        &lt;p>Here goes a paragraph&lt;/p>
+        &lt;p>and another one&lt;/p>
+        &lt;a href="${helpers.showRecordUrl(record.resource, record)}">Link somewere&lt;/>
+      `
+    default:
+      return super.getValue({ record, property, where, helpers })
+    }
+  }
+}</code></pre>
+
+
 
     
     </div>
@@ -190,6 +219,323 @@ It can be easily overriden in settings</p></div>
 
     
 
+    
+        <h3 class="subsection-title">Members</h3>
+
+        
+            
+<h4 class="name" id="listProperties"><span class="type-signature"></span>listProperties<span class="type-signature"> :Array.&lt;String>|function|null</span></h4>
+
+
+
+
+<div class="description">
+    <script type="text/javascript" src="https://unpkg.com/mermaid@7.1.0/dist/mermaid.min.js"></script><p>List of properties which should be visible in the list view</p>
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">Array.&lt;String></span>
+|
+
+<span class="param-type">function</span>
+|
+
+<span class="param-type">null</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="backend_utils_base-decorator.js.html">backend/utils/base-decorator.js</a>, <a href="backend_utils_base-decorator.js.html#line64">line 64</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="parentName"><span class="type-signature"></span>parentName<span class="type-signature"> :String|function|null</span></h4>
+
+
+
+
+<div class="description">
+    <script type="text/javascript" src="https://unpkg.com/mermaid@7.1.0/dist/mermaid.min.js"></script><p>Name of the parent of given resource. It will be used in the sidebar as a 'above'
+element</p>
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">String</span>
+|
+
+<span class="param-type">function</span>
+|
+
+<span class="param-type">null</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="backend_utils_base-decorator.js.html">backend/utils/base-decorator.js</a>, <a href="backend_utils_base-decorator.js.html#line58">line 58</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="resourceName"><span class="type-signature"></span>resourceName<span class="type-signature"> :String|function|null</span></h4>
+
+
+
+
+<div class="description">
+    <script type="text/javascript" src="https://unpkg.com/mermaid@7.1.0/dist/mermaid.min.js"></script><p>Resource name, when not given decorator will use raw name of the resource</p>
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">String</span>
+|
+
+<span class="param-type">function</span>
+|
+
+<span class="param-type">null</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="backend_utils_base-decorator.js.html">backend/utils/base-decorator.js</a>, <a href="backend_utils_base-decorator.js.html#line50">line 50</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="showProperties"><span class="type-signature"></span>showProperties<span class="type-signature"> :Array.&lt;String>|function|null</span></h4>
+
+
+
+
+<div class="description">
+    <script type="text/javascript" src="https://unpkg.com/mermaid@7.1.0/dist/mermaid.min.js"></script><p>List of properties which should be visible in the show view</p>
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">Array.&lt;String></span>
+|
+
+<span class="param-type">function</span>
+|
+
+<span class="param-type">null</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="backend_utils_base-decorator.js.html">backend/utils/base-decorator.js</a>, <a href="backend_utils_base-decorator.js.html#line70">line 70</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
     
 
     
@@ -253,7 +599,7 @@ It can be easily overriden in settings</p></div>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="admin_backend_utils_base-decorator.js.html">admin/backend/utils/base-decorator.js</a>, <a href="admin_backend_utils_base-decorator.js.html#line85">line 85</a>
+        <a href="backend_utils_base-decorator.js.html">backend/utils/base-decorator.js</a>, <a href="backend_utils_base-decorator.js.html#line146">line 146</a>
     </li></ul></dd>
     
 
@@ -339,7 +685,7 @@ It can be easily overriden in settings</p></div>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="admin_backend_utils_base-decorator.js.html">admin/backend/utils/base-decorator.js</a>, <a href="admin_backend_utils_base-decorator.js.html#line61">line 61</a>
+        <a href="backend_utils_base-decorator.js.html">backend/utils/base-decorator.js</a>, <a href="backend_utils_base-decorator.js.html#line122">line 122</a>
     </li></ul></dd>
     
 
@@ -425,7 +771,7 @@ It can be easily overriden in settings</p></div>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="admin_backend_utils_base-decorator.js.html">admin/backend/utils/base-decorator.js</a>, <a href="admin_backend_utils_base-decorator.js.html#line40">line 40</a>
+        <a href="backend_utils_base-decorator.js.html">backend/utils/base-decorator.js</a>, <a href="backend_utils_base-decorator.js.html#line97">line 97</a>
     </li></ul></dd>
     
 
@@ -477,7 +823,7 @@ It can be easily overriden in settings</p></div>
     
 
     
-    <h4 class="name" id="getParent"><span class="type-signature"></span>getParent<span class="signature">()</span><span class="type-signature"> &rarr; {String}</span></h4>
+    <h4 class="name" id="getParent"><span class="type-signature"></span>getParent<span class="signature">()</span><span class="type-signature"> &rarr; {Object}</span></h4>
     
 
     
@@ -485,7 +831,8 @@ It can be easily overriden in settings</p></div>
 
 
 <div class="description">
-    <script type="text/javascript" src="https://unpkg.com/mermaid@7.1.0/dist/mermaid.min.js"></script><p>Returns the name and icon  of parent database</p>
+    <script type="text/javascript" src="https://unpkg.com/mermaid@7.1.0/dist/mermaid.min.js"></script><p>Returns resource parent along with the icon. By default it is a
+database type with its icon</p>
 </div>
 
 
@@ -529,7 +876,7 @@ It can be easily overriden in settings</p></div>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="admin_backend_utils_base-decorator.js.html">admin/backend/utils/base-decorator.js</a>, <a href="admin_backend_utils_base-decorator.js.html#line29">line 29</a>
+        <a href="backend_utils_base-decorator.js.html">backend/utils/base-decorator.js</a>, <a href="backend_utils_base-decorator.js.html#line86">line 86</a>
     </li></ul></dd>
     
 
@@ -555,10 +902,6 @@ It can be easily overriden in settings</p></div>
 <h5>Returns:</h5>
 
         
-<div class="param-desc">
-    <p>resource name</p>
-</div>
-
 
 
 <dl>
@@ -567,7 +910,7 @@ It can be easily overriden in settings</p></div>
     </dt>
     <dd>
         
-<span class="param-type">String</span>
+<span class="param-type">Object</span>
 
 
     </dd>
@@ -638,7 +981,7 @@ If record doesn't have declared actions, it automatically returns default ones</
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="admin_backend_utils_base-decorator.js.html">admin/backend/utils/base-decorator.js</a>, <a href="admin_backend_utils_base-decorator.js.html#line101">line 101</a>
+        <a href="backend_utils_base-decorator.js.html">backend/utils/base-decorator.js</a>, <a href="backend_utils_base-decorator.js.html#line162">line 162</a>
     </li></ul></dd>
     
 
@@ -724,7 +1067,7 @@ If record doesn't have declared actions, it automatically returns default ones</
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="admin_backend_utils_base-decorator.js.html">admin/backend/utils/base-decorator.js</a>, <a href="admin_backend_utils_base-decorator.js.html#line21">line 21</a>
+        <a href="backend_utils_base-decorator.js.html">backend/utils/base-decorator.js</a>, <a href="backend_utils_base-decorator.js.html#line77">line 77</a>
     </li></ul></dd>
     
 
@@ -780,6 +1123,110 @@ If record doesn't have declared actions, it automatically returns default ones</
     
 
     
+    <h4 class="name" id="getShowProperties"><span class="type-signature"></span>getShowProperties<span class="signature">()</span><span class="type-signature"> &rarr; {Array.&lt;<a href="BaseProperty.html">BaseProperty</a>>}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <script type="text/javascript" src="https://unpkg.com/mermaid@7.1.0/dist/mermaid.min.js"></script><p>Returns list of all properties which will be visible on the show view</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="backend_utils_base-decorator.js.html">backend/utils/base-decorator.js</a>, <a href="backend_utils_base-decorator.js.html#line111">line 111</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Array.&lt;<a href="BaseProperty.html">BaseProperty</a>></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
     <h4 class="name" id="getValue"><span class="type-signature"></span>getValue<span class="signature">(options)</span><span class="type-signature"> &rarr; {String}</span></h4>
     
 
@@ -788,7 +1235,7 @@ If record doesn't have declared actions, it automatically returns default ones</
 
 
 <div class="description">
-    <script type="text/javascript" src="https://unpkg.com/mermaid@7.1.0/dist/mermaid.min.js"></script><p>returns value for given field</p>
+    <script type="text/javascript" src="https://unpkg.com/mermaid@7.1.0/dist/mermaid.min.js"></script><p>Returns value for given field.</p>
 </div>
 
 
@@ -872,7 +1319,7 @@ If record doesn't have declared actions, it automatically returns default ones</
             <td class="type">
             
                 
-<span class="param-type">BaseRecord</span>
+<span class="param-type"><a href="BaseRecord.html">BaseRecord</a></span>
 
 
             
@@ -941,7 +1388,7 @@ If record doesn't have declared actions, it automatically returns default ones</
             <td class="type">
             
                 
-<span class="param-type">ViewHelpers</span>
+<span class="param-type"><a href="ViewHelpers.html">ViewHelpers</a></span>
 
 
             
@@ -999,7 +1446,7 @@ If record doesn't have declared actions, it automatically returns default ones</
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="admin_backend_utils_base-decorator.js.html">admin/backend/utils/base-decorator.js</a>, <a href="admin_backend_utils_base-decorator.js.html#line127">line 127</a>
+        <a href="backend_utils_base-decorator.js.html">backend/utils/base-decorator.js</a>, <a href="backend_utils_base-decorator.js.html#line200">line 200</a>
     </li></ul></dd>
     
 
@@ -1050,6 +1497,317 @@ If record doesn't have declared actions, it automatically returns default ones</
 
 
         
+            
+
+    
+
+    
+    <h4 class="name" id="invokeOrGet"><span class="type-signature"></span>invokeOrGet<span class="signature">(param)</span><span class="type-signature"> &rarr; {any}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <script type="text/javascript" src="https://unpkg.com/mermaid@7.1.0/dist/mermaid.min.js"></script><p>For given parameter it tries to find class member, and when it is a function - it invokes
+it, otherwise return parameter value</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>param</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="backend_utils_base-decorator.js.html">backend/utils/base-decorator.js</a>, <a href="backend_utils_base-decorator.js.html#line186">line 186</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">any</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="nameToProperty"><span class="type-signature"></span>nameToProperty<span class="signature">(propertyName)</span><span class="type-signature"> &rarr; {<a href="BaseProperty.html">BaseProperty</a>}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <script type="text/javascript" src="https://unpkg.com/mermaid@7.1.0/dist/mermaid.min.js"></script><p>Change name to the Property object</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>propertyName</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>[description]</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="backend_utils_base-decorator.js.html">backend/utils/base-decorator.js</a>, <a href="backend_utils_base-decorator.js.html#line176">line 176</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>[description]</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type"><a href="BaseProperty.html">BaseProperty</a></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
     
 
     
@@ -1065,13 +1823,13 @@ If record doesn't have declared actions, it automatically returns default ones</
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-examples_hapijs.html">examples/hapijs</a></li><li><a href="module-Integrations_hapijs.html">Integrations/hapijs</a></li></ul><h3>Classes</h3><ul><li><a href="Admin.html">Admin</a></li><li><a href="BaseController.html">BaseController</a></li><li><a href="BaseDatabase.html">BaseDatabase</a></li><li><a href="BaseDecorator.html">BaseDecorator</a></li><li><a href="BaseProperty.html">BaseProperty</a></li><li><a href="BaseResource.html">BaseResource</a></li><li><a href="MongooseAdapter.Database.html">Database</a></li><li><a href="Property.html">Property</a></li><li><a href="Resource.html">Resource</a></li><li><a href="Routes.html">Routes</a></li><li><a href="ValidationError.html">ValidationError</a></li></ul><h3>Namespaces</h3><ul><li><a href="Controllers.html">Controllers</a></li><li><a href="MongooseAdapter.html">MongooseAdapter</a></li></ul><h3>Tutorials</h3><ul><li><a href="tutorial-example-tutorial.html">Example tutorial</a></li></ul><h3>Global</h3><ul><li><a href="global.html#DatabaseFactory">DatabaseFactory</a></li><li><a href="global.html#ResourceFactory">ResourceFactory</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="AdminBro.html">AdminBro</a></li><li><a href="BaseController.html">BaseController</a></li><li><a href="BaseDatabase.html">BaseDatabase</a></li><li><a href="BaseDecorator.html">BaseDecorator</a></li><li><a href="BaseProperty.html">BaseProperty</a></li><li><a href="BaseRecord.html">BaseRecord</a></li><li><a href="BaseResource.html">BaseResource</a></li><li><a href="ValidationError.html">ValidationError</a></li><li><a href="ViewHelpers.html">ViewHelpers</a></li></ul><h3>Namespaces</h3><ul><li><a href="Controllers.html">Controllers</a></li></ul><h3>Tutorials</h3><ul><li><a href="tutorial-resource-decorators.html">Resource customization</a></li></ul><h3>Global</h3><ul><li><a href="global.html#Router">Router</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Sat Dec 08 2018 18:45:04 GMT+0100 (CET)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Sat Dec 08 2018 19:06:36 GMT+0100 (CET)
 </footer>
 
 <script> prettyPrint(); </script>

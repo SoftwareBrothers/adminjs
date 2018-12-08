@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: backend/utils/view-helpers.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: backend/utils/view-helpers.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>const paginate = require('jw-paginate')
+const lodash = require('lodash')
+
+/**
+ * Collection of helper methods available in the views
+ *
+ * @example
+ * a.button.is-primary(href=h.newRecordUrl(currentResource))
+ *   span.icon
+ */
+class ViewHelpers {
+  constructor({ admin }) {
+    this._admin = admin
+    /**
+     * Lodash
+     * @type {Lodash}
+     * @see https://lodash.com/
+     */
+    this._ = lodash
+
+    /**
+     * Paginate
+     * @type {jw-paginate}
+     * @see https://github.com/cornflourblue/jw-paginate
+     */
+    this.paginate = paginate
+
+    /**
+     * Branding options passed by the user.
+     * `branding` subset of {@link AdminBroOptions}
+     * @type {Object}
+     */
+    this.branding = this._admin.options.branding
+  }
+
+  getObjectKeyWithValue(obj, key) {
+    return typeof obj[key] === 'object'
+      ? this.getQueryPath(obj[key]) : `${key}=${obj[key]}`
+  }
+
+  getQueryPath(query) {
+    const queryPath = []
+    Object.keys(query).forEach((key) => {
+      queryPath.push(this.getObjectKeyWithValue(query, key))
+    })
+    return queryPath.join('&amp;')
+  }
+
+  /**
+   * To each related path adds rootPath passed by the user. And it
+   * adds query strig
+   * @param  {String[]} paths   list of parts of the url.
+   * @param  {Object}   query object used to build query string
+   * @return {String}       path
+   */
+  urlBuilder(paths, query) {
+    const { rootPath } = this._admin.options
+    let url = `${rootPath}/${paths.join('/')}`
+    if (query) {
+      url = `${url}?${this.getQueryPath(query)}`
+    }
+    return url
+  }
+
+  /**
+   * Returns login URL
+   * @return {String}
+   */
+  loginUrl() {
+    return this._admin.options.loginPath
+  }
+
+  /**
+   * Returns logout URL
+   * @return {String}
+   */
+  logoutUrl() {
+    return this._admin.options.logoutPath
+  }
+
+  /**
+   * Returns URL for the dashboard
+   * @return {String}
+   */
+  dashboardUrl() {
+    return this._admin.options.rootPath
+  }
+
+  /**
+   * Returns URL for the list view for given resource
+   * @param {BaseResource} resource
+   * @param {Object} [query]
+   * @return {String}
+   */
+  listUrl(resource, query) {
+    return this.urlBuilder(['resources', resource.id()], query)
+  }
+
+  /**
+   * Returns URL for the `new` view for given resource
+   * @param {BaseResource} resource
+   * @return {String}
+   */
+  newRecordUrl(resource) {
+    return this.urlBuilder(['resources', resource.id(), 'new'])
+  }
+
+  /**
+   * Returns URL for the list view for record in given resource
+   * @param {BaseResource} resource
+   * @param {BaseRecord} record
+   * @return {String}
+   */
+  showRecordUrl(resource, record) {
+    return this.urlBuilder(['resources', resource.id(), record.id()])
+  }
+
+  /**
+   * Returns URL for the edit view for record in given resource
+   * @param {BaseResource} resource
+   * @param {BaseRecord} record
+   * @return {String}
+   */
+  editRecordUrl(resource, record) {
+    return this.urlBuilder(['resources', resource.id(), record.id(), 'edit'])
+  }
+
+  /**
+   * Returns URL for the delete action for record in given resource
+   * @param {BaseResource} resource
+   * @param {BaseRecord} record
+   * @return {String}
+   */
+  deleteRecordUrl(resource, record) {
+    return this.urlBuilder(['resources', resource.id(), record.id(), 'delete'])
+  }
+
+  /**
+   * Returns URL for the custom action user defined in the resource decorator
+   * @param {BaseResource}  resource
+   * @param {BaseRecord}    record
+   * @param {String}        actionId      id of the action
+   * @return {String}
+   */
+  customRecordActionUrl(resource, record, actionId) {
+    return this.urlBuilder(['resources', resource.id(), record.id(), actionId])
+  }
+
+  /**
+   * Returns absolute path to given asset
+   * @param  {String} asset
+   * @return {String}
+   */
+  assetPath(asset) {
+    return this.urlBuilder(['frontend', 'assets', asset])
+  }
+
+  isMainColumn(propertyName) {
+    return ['name', 'email', 'title', '_id'].includes(propertyName)
+  }
+}
+
+module.exports = ViewHelpers
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="AdminBro.html">AdminBro</a></li><li><a href="BaseController.html">BaseController</a></li><li><a href="BaseDatabase.html">BaseDatabase</a></li><li><a href="BaseDecorator.html">BaseDecorator</a></li><li><a href="BaseProperty.html">BaseProperty</a></li><li><a href="BaseRecord.html">BaseRecord</a></li><li><a href="BaseResource.html">BaseResource</a></li><li><a href="ValidationError.html">ValidationError</a></li><li><a href="ViewHelpers.html">ViewHelpers</a></li></ul><h3>Namespaces</h3><ul><li><a href="Controllers.html">Controllers</a></li></ul><h3>Tutorials</h3><ul><li><a href="tutorial-resource-decorators.html">Resource customization</a></li></ul><h3>Global</h3><ul><li><a href="global.html#Router">Router</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Sat Dec 08 2018 19:06:36 GMT+0100 (CET)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

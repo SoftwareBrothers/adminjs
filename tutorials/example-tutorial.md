@@ -1,1 +1,0 @@
-Tutorials are files rendered by jsdoc documentation separate from the inline comments. To create new tutorial simply add new file under `./tutorials` and update `./tutorials/tutorials.json`.

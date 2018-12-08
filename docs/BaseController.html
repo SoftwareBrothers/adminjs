@@ -28,7 +28,7 @@
 
 <header>
     
-        <h2><span class="attribs"><span class="type-signature"></span></span>BaseController<span class="signature">(options)</span><span class="type-signature"></span></h2>
+        <h2><span class="attribs"><span class="type-signature"></span></span>BaseController<span class="signature">(options, currentAdmin)</span><span class="type-signature"></span></h2>
         
     
 </header>
@@ -41,7 +41,7 @@
     
 
     
-    <h4 class="name" id="BaseController"><span class="type-signature"></span>new BaseController<span class="signature">(options)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="BaseController"><span class="type-signature"></span>new BaseController<span class="signature">(options, currentAdmin)</span><span class="type-signature"></span></h4>
     
 
     
@@ -133,7 +133,79 @@
             <td class="type">
             
                 
-<span class="param-type"><a href="Admin.html">Admin</a></span>
+<span class="param-type"><a href="AdminBro.html">AdminBro</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+            </td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>currentAdmin</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>logged in admin</p>
+                <h6>Properties</h6>
+                
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>email</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
 
 
             
@@ -191,7 +263,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="admin_backend_controllers_base-controller.js.html">admin/backend/controllers/base-controller.js</a>, <a href="admin_backend_controllers_base-controller.js.html#line16">line 16</a>
+        <a href="backend_controllers_base-controller.js.html">backend/controllers/base-controller.js</a>, <a href="backend_controllers_base-controller.js.html#line18">line 18</a>
     </li></ul></dd>
     
 
@@ -328,7 +400,7 @@
 
             
 
-            <td class="description last"><p>which will be send to the view</p></td>
+            <td class="description last"><p>which will be send to the view as an data context</p></td>
         </tr>
 
     
@@ -369,7 +441,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="admin_backend_controllers_base-controller.js.html">admin/backend/controllers/base-controller.js</a>, <a href="admin_backend_controllers_base-controller.js.html#line40">line 40</a>
+        <a href="backend_controllers_base-controller.js.html">backend/controllers/base-controller.js</a>, <a href="backend_controllers_base-controller.js.html#line42">line 42</a>
     </li></ul></dd>
     
 
@@ -435,13 +507,13 @@
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-examples_hapijs.html">examples/hapijs</a></li><li><a href="module-Integrations_hapijs.html">Integrations/hapijs</a></li></ul><h3>Classes</h3><ul><li><a href="Admin.html">Admin</a></li><li><a href="BaseController.html">BaseController</a></li><li><a href="BaseDatabase.html">BaseDatabase</a></li><li><a href="BaseDecorator.html">BaseDecorator</a></li><li><a href="BaseProperty.html">BaseProperty</a></li><li><a href="BaseResource.html">BaseResource</a></li><li><a href="MongooseAdapter.Database.html">Database</a></li><li><a href="Property.html">Property</a></li><li><a href="Resource.html">Resource</a></li><li><a href="Routes.html">Routes</a></li><li><a href="ValidationError.html">ValidationError</a></li></ul><h3>Namespaces</h3><ul><li><a href="Controllers.html">Controllers</a></li><li><a href="MongooseAdapter.html">MongooseAdapter</a></li></ul><h3>Tutorials</h3><ul><li><a href="tutorial-example-tutorial.html">Example tutorial</a></li></ul><h3>Global</h3><ul><li><a href="global.html#DatabaseFactory">DatabaseFactory</a></li><li><a href="global.html#ResourceFactory">ResourceFactory</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="AdminBro.html">AdminBro</a></li><li><a href="BaseController.html">BaseController</a></li><li><a href="BaseDatabase.html">BaseDatabase</a></li><li><a href="BaseDecorator.html">BaseDecorator</a></li><li><a href="BaseProperty.html">BaseProperty</a></li><li><a href="BaseRecord.html">BaseRecord</a></li><li><a href="BaseResource.html">BaseResource</a></li><li><a href="ValidationError.html">ValidationError</a></li><li><a href="ViewHelpers.html">ViewHelpers</a></li></ul><h3>Namespaces</h3><ul><li><a href="Controllers.html">Controllers</a></li></ul><h3>Tutorials</h3><ul><li><a href="tutorial-resource-decorators.html">Resource customization</a></li></ul><h3>Global</h3><ul><li><a href="global.html#Router">Router</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Sat Dec 08 2018 18:45:04 GMT+0100 (CET)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Sat Dec 08 2018 19:06:36 GMT+0100 (CET)
 </footer>
 
 <script> prettyPrint(); </script>

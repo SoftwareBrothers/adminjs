@@ -1,15 +1,13 @@
 {
   "name": "admin-bro",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Admin panel for apps written in node.js",
   "main": "index.js",
   "scripts": {
-    "test": "./node_modules/mocha/bin/mocha admin/spec",
-    "start": "node example.js",
-    "start-dev": "./node_modules/nodemon/bin/nodemon.js example.js",
-    "lint": "./node_modules/eslint/bin/eslint.js './spec/**' './admin/**'",
+    "test": "./node_modules/mocha/bin/mocha spec",
+    "lint": "./node_modules/eslint/bin/eslint.js './spec/**' './src/**'",
     "docs": "node_modules/.bin/jsdoc -c jsdoc.json",
-    "cover": "NODE_ENV=test ./node_modules/nyc/bin/nyc.js"
+    "cover": "NODE_ENV=test ./node_modules/nyc/bin/nyc.js --reporter=html -x=spec -x=docs -x=coverage  --all=true npm test"
   },
   "repository": {
     "type": "git",
@@ -24,15 +22,8 @@
   ],
   "_moduleAliases": {
     "@root": ".",
-    "@backend": "./admin/backend",
-    "@frontend": "./admin/frontend",
-    "@fixtures": "./admin/spec/backend/fixtures"
-  },
-  "nodemonConfig": {
-    "ignore": [
-      "admin/spec/*",
-      "docs/*"
-    ]
+    "@backend": "./src/backend",
+    "@frontend": "./src/frontend"
   },
   "author": "Wojciech Krysiak",
   "license": "MIT",
@@ -41,15 +32,8 @@
   },
   "homepage": "https://github.com/SoftwareBrothers/admin-bro#readme",
   "dependencies": {
-    "bcrypt": "^3.0.2",
-    "boom": "^7.3.0",
-    "hapi": "^17.5.3",
-    "hapi-auth-cookie": "^9.1.0",
-    "inert": "^5.1.2",
     "jw-paginate": "^1.0.2",
     "lodash": "^4.17.11",
-    "mongoose": "^5.2.9",
-    "pack": "^2.1.0",
     "pug": "^2.0.3",
     "require.all": "^2.0.4"
   },
@@ -80,7 +64,6 @@
     "jsdoc-mermaid": "^1.0.0",
     "mocha": "^5.2.0",
     "module-alias": "^2.1.0",
-    "nodemon": "^1.18.3",
     "nyc": "^12.0.2",
     "sinon": "^6.1.5",
     "sinon-chai": "^3.2.0"

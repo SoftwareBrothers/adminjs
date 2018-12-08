@@ -46,10 +46,29 @@
         <article><h2>AdminBro</h2><p>Admin Bro is an Admin Framework for Node - your best Bro in app developement.</p>
 <p>Currently it supports only MongoDB (via mongoose).</p>
 <h2>How it works</h2><p>It is totally separated from any particular nodejs framework. Because of that it can be easily integrated to almost every app.</p>
-<p>This is the example flow for hapi.js</p>
-<div class="mermaid">
+<h3>Overal architecture</h3><div class="mermaid">
   graph LR
-  A[&lt;a href=./examples_hapijs_index.js.html&gt;Hapi.js</a>] --&gt;|&lt;a href=./admin_integrations_hapi.js.html&gt;Mapping Routes</a>| B{&lt;a href=./Routes.html&gt;Routes.js</a>}
+  subgraph AdminBro
+  B(AdminBro)
+  end
+  subgraph Resources
+  A[mongoose] --&gt; B
+  C[rest API endpoints] --&gt; B
+  D[sequelizejs] --&gt; B
+  end
+  subgraph http framework
+  B --&gt; E[Hapijs]
+  B --&gt; F[Express.js]
+  B --&gt; G[your custom framework]
+  end
+
+</div>
+
+<h3>This is an example rendering flow for hapi.js</h3><div class="mermaid">
+  graph LR
+  A[&lt;a href=./examples_hapijs_index.js.html&gt;Hapi.js</a>] --&gt;|&lt;a href=./admin_integrations_hapi.js.html&gt;Mapping Routes</a>| B
+  subgraph AdminBro
+  B{&lt;a href=./Router.html&gt;Router.js</a>}
   B --&gt; C(DashoardController)
   B --&gt; D(ResourcesController)
   E(Renderer)
@@ -57,12 +76,13 @@
   D --&gt; E
   F(PUG view)
   E --&gt; F
+  end
 </div>
 
-<h2>Integration with nodejs Frameworks</h2><p>Example integration for Hapi.js framework can be found <a href="examples_hapijs_index.js.html">here</a>. This code uses Hapi.js <a href="admin_integrations_hapi.js.html">integration plugin</a>. If you want to write your own implementation you will have to:</p>
+<h2>Integration with nodejs Frameworks</h2><p>Example integration for Hapi.js framework can be found here. This code uses Hapi.js integration plugin. If you want to write your own implementation you will have to:</p>
 <ul>
 <li>write a plugin/middleware for a particular framework</li>
-<li>map its routing system to AdminBro routes and controllers (see how Hapi does that: <a href="admin_integrations_hapi.js.html">admin/integrations/hapi.js</a>)</li>
+<li>map its routing system to AdminBro routes and controllers (see how Hapi does that: admin/integrations/hapi.js)</li>
 <li>checkout if given framework has ORM already supported. If not you will have to create data mapper for it (see below)</li>
 <li>lastly - don't forget to add integration example in examples folder</li>
 </ul>
@@ -75,14 +95,14 @@
   B --&gt; |has many|D(&lt;a href=./BaseProperty.html&gt;BaseProperty</a>)
 </div>
 
-<p>First of all <a href="Admin.html">base class</a> is used to convert all supported database connections (mongodb, sql-like, etc) to list of databases which interits from <a href="BaseDatabase.html">BaseDatabase</a>. It utilises <a href="global.html#DatabaseFactory">DatabaseFactory</a> to construct correct database type.</p>
+<p>First of all <a href="AdminBro.html">base class</a> is used to convert all supported database connections (mongodb, sql-like, etc) to list of databases which interits from <a href="BaseDatabase.html">BaseDatabase</a>. It utilises DatabaseFactory to construct correct database type.</p>
 <p>Then each class which inherits <a href="BaseDatabase.html">BaseDatabase</a> can fetch all resources present in the database. Each resource inherits from <a href="BaseResource.html">BaseResource</a></p>
 <p>Each model has multiple properties with different types like String, Data, Number etc.</p>
-<p>Finally particular database record/document is mapped to BaseRecord</p>
+<p>Finally particular database record/document is mapped to <a href="BaseRecord.html">BaseRecord</a></p>
 <h2>Integration with ORMs</h2><p>To create new ORM integration you have to:</p>
 <ul>
-<li>create your implementation of <a href="BaseDatabase.html">BaseDatabase</a>, <a href="BaseResource.html">BaseResource</a>, BaseRecord and AbstractProperty</li>
-<li>update <a href="global.html#DatabaseFactory">DatabaseFactory</a></li>
+<li>create your implementation of <a href="BaseDatabase.html">BaseDatabase</a>, <a href="BaseResource.html">BaseResource</a>, <a href="BaseRecord.html">BaseRecord</a> and AbstractProperty</li>
+<li>update DatabaseFactory</li>
 <li>update examples</li>
 <li>most probably you will also have to update docker-compose to handle new database</li>
 </ul>
@@ -99,13 +119,13 @@
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-examples_hapijs.html">examples/hapijs</a></li><li><a href="module-Integrations_hapijs.html">Integrations/hapijs</a></li></ul><h3>Classes</h3><ul><li><a href="Admin.html">Admin</a></li><li><a href="BaseController.html">BaseController</a></li><li><a href="BaseDatabase.html">BaseDatabase</a></li><li><a href="BaseDecorator.html">BaseDecorator</a></li><li><a href="BaseProperty.html">BaseProperty</a></li><li><a href="BaseResource.html">BaseResource</a></li><li><a href="MongooseAdapter.Database.html">Database</a></li><li><a href="Property.html">Property</a></li><li><a href="Resource.html">Resource</a></li><li><a href="Routes.html">Routes</a></li><li><a href="ValidationError.html">ValidationError</a></li></ul><h3>Namespaces</h3><ul><li><a href="Controllers.html">Controllers</a></li><li><a href="MongooseAdapter.html">MongooseAdapter</a></li></ul><h3>Tutorials</h3><ul><li><a href="tutorial-example-tutorial.html">Example tutorial</a></li></ul><h3>Global</h3><ul><li><a href="global.html#DatabaseFactory">DatabaseFactory</a></li><li><a href="global.html#ResourceFactory">ResourceFactory</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="AdminBro.html">AdminBro</a></li><li><a href="BaseController.html">BaseController</a></li><li><a href="BaseDatabase.html">BaseDatabase</a></li><li><a href="BaseDecorator.html">BaseDecorator</a></li><li><a href="BaseProperty.html">BaseProperty</a></li><li><a href="BaseRecord.html">BaseRecord</a></li><li><a href="BaseResource.html">BaseResource</a></li><li><a href="ValidationError.html">ValidationError</a></li><li><a href="ViewHelpers.html">ViewHelpers</a></li></ul><h3>Namespaces</h3><ul><li><a href="Controllers.html">Controllers</a></li></ul><h3>Tutorials</h3><ul><li><a href="tutorial-resource-decorators.html">Resource customization</a></li></ul><h3>Global</h3><ul><li><a href="global.html#Router">Router</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Sat Dec 08 2018 18:45:04 GMT+0100 (CET)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Sat Dec 08 2018 19:06:36 GMT+0100 (CET)
 </footer>
 
 <script> prettyPrint(); </script>

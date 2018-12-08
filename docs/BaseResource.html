@@ -30,7 +30,9 @@
     
         <h2><span class="attribs"><span class="type-signature"></span></span>BaseResource<span class="signature">()</span><span class="type-signature"></span></h2>
         
-            <div class="class-description"><p>Representation of a ORM Resource in AdminBro</p></div>
+            <div class="class-description"><p>Representation of a ORM Resource in AdminBro. Visally resource is a list item in the sidebar.
+Each resource has many records and many properties.</p>
+<p>Analogy is REST resource.</p></div>
         
     
 </header>
@@ -53,7 +55,10 @@
 
 
 <div class="description">
-    <script type="text/javascript" src="https://unpkg.com/mermaid@7.1.0/dist/mermaid.min.js"></script>
+    <script type="text/javascript" src="https://unpkg.com/mermaid@7.1.0/dist/mermaid.min.js"></script><div class="mermaid">graph TD
+  A[BaseDatabase] -->|has many| B(BaseResource)
+  B --> |has many|C(BaseRecord)
+  B --> |has many|D(BasePorperty)</div>
 </div>
 
 
@@ -97,7 +102,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="admin_backend_adapters_base_resource.js.html">admin/backend/adapters/base/resource.js</a>, <a href="admin_backend_adapters_base_resource.js.html#line6">line 6</a>
+        <a href="backend_adapters_base-resource.js.html">backend/adapters/base-resource.js</a>, <a href="backend_adapters_base-resource.js.html#line18">line 18</a>
     </li></ul></dd>
     
 
@@ -151,7 +156,455 @@
     
 
     
-    <h4 class="name" id="count"><span class="type-signature"></span>count<span class="signature">()</span><span class="type-signature"> &rarr; {Number}</span></h4>
+    <h4 class="name" id=".isAdapterFor"><span class="type-signature">(static) </span>isAdapterFor<span class="signature">(rawResource)</span><span class="type-signature"> &rarr; {Boolean}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <script type="text/javascript" src="https://unpkg.com/mermaid@7.1.0/dist/mermaid.min.js"></script><p>Checks if given adapter supports resource provided by the user</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>rawResource</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">any</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>resource provided in AdminBroOptions#resources array</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="backend_adapters_base-resource.js.html">backend/adapters/base-resource.js</a>, <a href="backend_adapters_base-resource.js.html#line25">line 25</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>if given adapter supports this resource - returns true</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Boolean</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="assignDecorator"><span class="type-signature"></span>assignDecorator<span class="signature">(Decorator)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <script type="text/javascript" src="https://unpkg.com/mermaid@7.1.0/dist/mermaid.min.js"></script><p>Assigns given decorator to the Resource. Than it will be available under
+resource.decorate() method</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>Decorator</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="BaseDecorator.html">BaseDecorator</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="backend_adapters_base-resource.js.html">backend/adapters/base-resource.js</a>, <a href="backend_adapters_base-resource.js.html#line168">line 168</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="build"><span class="type-signature">(async) </span>build<span class="signature">(params)</span><span class="type-signature"> &rarr; {<a href="BaseRecord.html">BaseRecord</a>}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <script type="text/javascript" src="https://unpkg.com/mermaid@7.1.0/dist/mermaid.min.js"></script><p>Builds new Record of given Resource.</p>
+<p>Each Record is an representation of the resource item. Before it can be saved,
+it has to be instantiated.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>params</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="backend_adapters_base-resource.js.html">backend/adapters/base-resource.js</a>, <a href="backend_adapters_base-resource.js.html#line128">line 128</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type"><a href="BaseRecord.html">BaseRecord</a></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="count"><span class="type-signature">(async) </span>count<span class="signature">()</span><span class="type-signature"> &rarr; {Number}</span></h4>
     
 
     
@@ -203,7 +656,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="admin_backend_adapters_base_resource.js.html">admin/backend/adapters/base/resource.js</a>, <a href="admin_backend_adapters_base_resource.js.html#line35">line 35</a>
+        <a href="backend_adapters_base-resource.js.html">backend/adapters/base-resource.js</a>, <a href="backend_adapters_base-resource.js.html#line93">line 93</a>
     </li></ul></dd>
     
 
@@ -255,7 +708,7 @@
     
 
     
-    <h4 class="name" id="create"><span class="type-signature"></span>create<span class="signature">(params)</span><span class="type-signature"> &rarr; {Object}</span></h4>
+    <h4 class="name" id="create"><span class="type-signature">(async) </span>create<span class="signature">(params)</span><span class="type-signature"> &rarr; {Object}</span></h4>
     
 
     
@@ -356,7 +809,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="admin_backend_adapters_base_resource.js.html">admin/backend/adapters/base/resource.js</a>, <a href="admin_backend_adapters_base_resource.js.html#line59">line 59</a>
+        <a href="backend_adapters_base-resource.js.html">backend/adapters/base-resource.js</a>, <a href="backend_adapters_base-resource.js.html#line139">line 139</a>
     </li></ul></dd>
     
 
@@ -377,13 +830,43 @@
 
 
 
+<h5>Throws:</h5>
+
+        
+
+<dl>
+    <dt>
+        <div class="param-desc">
+        <p>If there are validation errors it should be thrown</p>
+        </div>
+    </dt>
+    <dd></dd>
+    <dt>
+        <dl>
+            <dt>
+                Type
+            </dt>
+            <dd>
+                
+<span class="param-type"><a href="ValidationError.html">ValidationError</a></span>
+
+
+            </dd>
+        </dl>
+    </dt>
+    <dd></dd>
+</dl>
+
+
+    
 
 
 <h5>Returns:</h5>
 
         
 <div class="param-desc">
-    <p>created record</p>
+    <p>created record converted to raw Object which
+                                  can be used to initiate new <a href="BaseRecord.html">BaseRecord</a> instance</p>
 </div>
 
 
@@ -412,7 +895,7 @@
     
 
     
-    <h4 class="name" id="databaseType"><span class="type-signature"></span>databaseType<span class="signature">()</span><span class="type-signature"> &rarr; {String}</span></h4>
+    <h4 class="name" id="databaseName"><span class="type-signature"></span>databaseName<span class="signature">()</span><span class="type-signature"> &rarr; {String}</span></h4>
     
 
     
@@ -420,7 +903,9 @@
 
 
 <div class="description">
-    <script type="text/javascript" src="https://unpkg.com/mermaid@7.1.0/dist/mermaid.min.js"></script><p><code>Check database type</code></p>
+    <script type="text/javascript" src="https://unpkg.com/mermaid@7.1.0/dist/mermaid.min.js"></script><p>The name of the database to which resource belongs. When resource is
+a mongoose model it should be database name of the mongo database.</p>
+<p>Visuall, by default, all resources are nested in sidebar under their database names.</p>
 </div>
 
 
@@ -464,7 +949,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="admin_backend_adapters_base_resource.js.html">admin/backend/adapters/base/resource.js</a>, <a href="admin_backend_adapters_base_resource.js.html#line88">line 88</a>
+        <a href="backend_adapters_base-resource.js.html">backend/adapters/base-resource.js</a>, <a href="backend_adapters_base-resource.js.html#line35">line 35</a>
     </li></ul></dd>
     
 
@@ -491,7 +976,7 @@
 
         
 <div class="param-desc">
-    <p>Return database type</p>
+    <p>database name</p>
 </div>
 
 
@@ -520,7 +1005,219 @@
     
 
     
-    <h4 class="name" id="delete"><span class="type-signature"></span>delete<span class="signature">(id)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="databaseType"><span class="type-signature"></span>databaseType<span class="signature">()</span><span class="type-signature"> &rarr; {String}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <script type="text/javascript" src="https://unpkg.com/mermaid@7.1.0/dist/mermaid.min.js"></script><p>Returns type of the database. It is used to compute sidebar icon for
+given resource</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="backend_adapters_base-resource.js.html">backend/adapters/base-resource.js</a>, <a href="backend_adapters_base-resource.js.html#line45">line 45</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">String</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="decorate"><span class="type-signature"></span>decorate<span class="signature">()</span><span class="type-signature"> &rarr; {<a href="BaseDecorator.html">BaseDecorator</a>|null}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <script type="text/javascript" src="https://unpkg.com/mermaid@7.1.0/dist/mermaid.min.js"></script><p>Gets decorator object for given resource</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="backend_adapters_base-resource.js.html">backend/adapters/base-resource.js</a>, <a href="backend_adapters_base-resource.js.html#line176">line 176</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type"><a href="BaseDecorator.html">BaseDecorator</a></span>
+|
+
+<span class="param-type">null</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="delete"><span class="type-signature">(async) </span>delete<span class="signature">(id)</span><span class="type-signature"></span></h4>
     
 
     
@@ -583,7 +1280,7 @@
 
             
 
-            <td class="description last"><p>id of the record</p></td>
+            <td class="description last"><p>id of the Record</p></td>
         </tr>
 
     
@@ -624,7 +1321,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="admin_backend_adapters_base_resource.js.html">admin/backend/adapters/base/resource.js</a>, <a href="admin_backend_adapters_base_resource.js.html#line67">line 67</a>
+        <a href="backend_adapters_base-resource.js.html">backend/adapters/base-resource.js</a>, <a href="backend_adapters_base-resource.js.html#line159">line 159</a>
     </li></ul></dd>
     
 
@@ -658,7 +1355,7 @@
     
 
     
-    <h4 class="name" id="find"><span class="type-signature"></span>find<span class="signature">(where)</span><span class="type-signature"> &rarr; {Array.&lt;Object>}</span></h4>
+    <h4 class="name" id="find"><span class="type-signature">(async) </span>find<span class="signature">(query, options)</span><span class="type-signature"> &rarr; {Array.&lt;<a href="BaseRecord.html">BaseRecord</a>>}</span></h4>
     
 
     
@@ -702,7 +1399,7 @@
 
         <tr>
             
-                <td class="name"><code>where</code></td>
+                <td class="name"><code>query</code></td>
             
 
             <td class="type">
@@ -725,7 +1422,49 @@
 
         <tr>
             
-                <td class="name"><code>options.limit</code></td>
+                <td class="name"><code>options</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">
+                <h6>Properties</h6>
+                
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>limit</code></td>
             
 
             <td class="type">
@@ -748,7 +1487,7 @@
 
         <tr>
             
-                <td class="name"><code>options.offset</code></td>
+                <td class="name"><code>offset</code></td>
             
 
             <td class="type">
@@ -765,6 +1504,13 @@
             
 
             <td class="description last"><p>offset</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+            </td>
         </tr>
 
     
@@ -805,7 +1551,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="admin_backend_adapters_base_resource.js.html">admin/backend/adapters/base/resource.js</a>, <a href="admin_backend_adapters_base_resource.js.html#line46">line 46</a>
+        <a href="backend_adapters_base-resource.js.html">backend/adapters/base-resource.js</a>, <a href="backend_adapters_base-resource.js.html#line106">line 106</a>
     </li></ul></dd>
     
 
@@ -832,7 +1578,7 @@
 
         
 <div class="param-desc">
-    <p>list of all records</p>
+    <p>list of records</p>
 </div>
 
 
@@ -843,7 +1589,7 @@
     </dt>
     <dd>
         
-<span class="param-type">Array.&lt;Object></span>
+<span class="param-type">Array.&lt;<a href="BaseRecord.html">BaseRecord</a>></span>
 
 
     </dd>
@@ -861,7 +1607,7 @@
     
 
     
-    <h4 class="name" id="name"><span class="type-signature"></span>name<span class="signature">()</span><span class="type-signature"> &rarr; {String}</span></h4>
+    <h4 class="name" id="findOne"><span class="type-signature">(async) </span>findOne<span class="signature">(id)</span><span class="type-signature"> &rarr; {<a href="BaseRecord.html">BaseRecord</a>}</span></h4>
     
 
     
@@ -869,7 +1615,165 @@
 
 
 <div class="description">
-    <script type="text/javascript" src="https://unpkg.com/mermaid@7.1.0/dist/mermaid.min.js"></script><p>Return name of the resource</p>
+    <script type="text/javascript" src="https://unpkg.com/mermaid@7.1.0/dist/mermaid.min.js"></script><p>Finds one Record in the Resource by its id</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>id</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>uniq id of the Resource Record</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="backend_adapters_base-resource.js.html">backend/adapters/base-resource.js</a>, <a href="backend_adapters_base-resource.js.html#line115">line 115</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>record</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type"><a href="BaseRecord.html">BaseRecord</a></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="id"><span class="type-signature"></span>id<span class="signature">()</span><span class="type-signature"> &rarr; {String}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <script type="text/javascript" src="https://unpkg.com/mermaid@7.1.0/dist/mermaid.min.js"></script><p>Each resource has to have uniq id which will be put to an URL of AdminBro routes.
+For instance in <a href="global.html#Router">Router</a> path for the <code>new</code> form is <code>/resources/{resourceId}/new</code></p>
 </div>
 
 
@@ -913,7 +1817,117 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="admin_backend_adapters_base_resource.js.html">admin/backend/adapters/base/resource.js</a>, <a href="admin_backend_adapters_base_resource.js.html#line11">line 11</a>
+        <a href="backend_adapters_base-resource.js.html">backend/adapters/base-resource.js</a>, <a href="backend_adapters_base-resource.js.html#line66">line 66</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>uniq resource id</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">String</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="name"><span class="type-signature"></span>name<span class="signature">()</span><span class="type-signature"> &rarr; {String}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <script type="text/javascript" src="https://unpkg.com/mermaid@7.1.0/dist/mermaid.min.js"></script><p>Return name of the resource.
+It could be a table name in SQL database, or collection name in mongoDB.</p>
+<p>Visually it will be shown as the name of the resource in the UI.</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="backend_adapters_base-resource.js.html">backend/adapters/base-resource.js</a>, <a href="backend_adapters_base-resource.js.html#line56">line 56</a>
     </li></ul></dd>
     
 
@@ -965,7 +1979,7 @@
     
 
     
-    <h4 class="name" id="properties"><span class="type-signature"></span>properties<span class="signature">()</span><span class="type-signature"> &rarr; {Array.&lt;AbstractProperty>}</span></h4>
+    <h4 class="name" id="properties"><span class="type-signature"></span>properties<span class="signature">()</span><span class="type-signature"> &rarr; {Array.&lt;<a href="BaseProperty.html">BaseProperty</a>>}</span></h4>
     
 
     
@@ -973,7 +1987,7 @@
 
 
 <div class="description">
-    <script type="text/javascript" src="https://unpkg.com/mermaid@7.1.0/dist/mermaid.min.js"></script><p>returns array of properties</p>
+    <script type="text/javascript" src="https://unpkg.com/mermaid@7.1.0/dist/mermaid.min.js"></script><p>returns array of all properties which belongs to resource</p>
 </div>
 
 
@@ -1017,7 +2031,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="admin_backend_adapters_base_resource.js.html">admin/backend/adapters/base/resource.js</a>, <a href="admin_backend_adapters_base_resource.js.html#line19">line 19</a>
+        <a href="backend_adapters_base-resource.js.html">backend/adapters/base-resource.js</a>, <a href="backend_adapters_base-resource.js.html#line74">line 74</a>
     </li></ul></dd>
     
 
@@ -1051,7 +2065,7 @@
     </dt>
     <dd>
         
-<span class="param-type">Array.&lt;AbstractProperty></span>
+<span class="param-type">Array.&lt;<a href="BaseProperty.html">BaseProperty</a>></span>
 
 
     </dd>
@@ -1069,7 +2083,7 @@
     
 
     
-    <h4 class="name" id="property"><span class="type-signature"></span>property<span class="signature">()</span><span class="type-signature"> &rarr; {AbstractProperty}</span></h4>
+    <h4 class="name" id="property"><span class="type-signature"></span>property<span class="signature">(path)</span><span class="type-signature"> &rarr; {<a href="BaseProperty.html">BaseProperty</a>}</span></h4>
     
 
     
@@ -1088,6 +2102,57 @@
 
 
 
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>path</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>path/name of the property. Take a look at
+                               <a href="BaseProperty.html">BaseProperty</a> to learn more about
+                               property paths.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
 
 
 
@@ -1121,7 +2186,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="admin_backend_adapters_base_resource.js.html">admin/backend/adapters/base/resource.js</a>, <a href="admin_backend_adapters_base_resource.js.html#line27">line 27</a>
+        <a href="backend_adapters_base-resource.js.html">backend/adapters/base-resource.js</a>, <a href="backend_adapters_base-resource.js.html#line85">line 85</a>
     </li></ul></dd>
     
 
@@ -1155,7 +2220,217 @@
     </dt>
     <dd>
         
-<span class="param-type">AbstractProperty</span>
+<span class="param-type"><a href="BaseProperty.html">BaseProperty</a></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="update"><span class="type-signature">(async) </span>update<span class="signature">(id, params)</span><span class="type-signature"> &rarr; {Object}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <script type="text/javascript" src="https://unpkg.com/mermaid@7.1.0/dist/mermaid.min.js"></script><p>Updates an object</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>id</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>uniq id of the Resource Record</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>params</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="backend_adapters_base-resource.js.html">backend/adapters/base-resource.js</a>, <a href="backend_adapters_base-resource.js.html#line151">line 151</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+<h5>Throws:</h5>
+
+        
+
+<dl>
+    <dt>
+        <div class="param-desc">
+        <p>If there are validation errors it should be thrown</p>
+        </div>
+    </dt>
+    <dd></dd>
+    <dt>
+        <dl>
+            <dt>
+                Type
+            </dt>
+            <dd>
+                
+<span class="param-type"><a href="ValidationError.html">ValidationError</a></span>
+
+
+            </dd>
+        </dl>
+    </dt>
+    <dd></dd>
+</dl>
+
+
+    
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>created record converted to raw Object which
+                                  can be used to initiate new <a href="BaseRecord.html">BaseRecord</a> instance</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Object</span>
 
 
     </dd>
@@ -1183,13 +2458,13 @@
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-examples_hapijs.html">examples/hapijs</a></li><li><a href="module-Integrations_hapijs.html">Integrations/hapijs</a></li></ul><h3>Classes</h3><ul><li><a href="Admin.html">Admin</a></li><li><a href="BaseController.html">BaseController</a></li><li><a href="BaseDatabase.html">BaseDatabase</a></li><li><a href="BaseDecorator.html">BaseDecorator</a></li><li><a href="BaseProperty.html">BaseProperty</a></li><li><a href="BaseResource.html">BaseResource</a></li><li><a href="MongooseAdapter.Database.html">Database</a></li><li><a href="Property.html">Property</a></li><li><a href="Resource.html">Resource</a></li><li><a href="Routes.html">Routes</a></li><li><a href="ValidationError.html">ValidationError</a></li></ul><h3>Namespaces</h3><ul><li><a href="Controllers.html">Controllers</a></li><li><a href="MongooseAdapter.html">MongooseAdapter</a></li></ul><h3>Tutorials</h3><ul><li><a href="tutorial-example-tutorial.html">Example tutorial</a></li></ul><h3>Global</h3><ul><li><a href="global.html#DatabaseFactory">DatabaseFactory</a></li><li><a href="global.html#ResourceFactory">ResourceFactory</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="AdminBro.html">AdminBro</a></li><li><a href="BaseController.html">BaseController</a></li><li><a href="BaseDatabase.html">BaseDatabase</a></li><li><a href="BaseDecorator.html">BaseDecorator</a></li><li><a href="BaseProperty.html">BaseProperty</a></li><li><a href="BaseRecord.html">BaseRecord</a></li><li><a href="BaseResource.html">BaseResource</a></li><li><a href="ValidationError.html">ValidationError</a></li><li><a href="ViewHelpers.html">ViewHelpers</a></li></ul><h3>Namespaces</h3><ul><li><a href="Controllers.html">Controllers</a></li></ul><h3>Tutorials</h3><ul><li><a href="tutorial-resource-decorators.html">Resource customization</a></li></ul><h3>Global</h3><ul><li><a href="global.html#Router">Router</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Sat Dec 08 2018 18:45:05 GMT+0100 (CET)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Sat Dec 08 2018 19:06:36 GMT+0100 (CET)
 </footer>
 
 <script> prettyPrint(); </script>
