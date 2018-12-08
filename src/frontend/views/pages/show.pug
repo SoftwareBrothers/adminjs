@@ -5,7 +5,7 @@ include ../mixins/breadcrumb
 block content
   secton.show-details
     - actionName = customAction && customAction.name
-    +breadcrumb([currentResource.decorate().getResourceName(), record.title(), ...([actionName] || [])])
+    +breadcrumb(currentResource, record, actionName)
     .column
       .level
         .title

@@ -4,7 +4,7 @@ include ../mixins/emptyTable
 
 block content
   section.table-list
-    +breadcrumb([currentResource.decorate().getResourceName()])
+    +breadcrumb(currentResource)
     .column
       .level
         .title=currentResource.decorate().getResourceName()

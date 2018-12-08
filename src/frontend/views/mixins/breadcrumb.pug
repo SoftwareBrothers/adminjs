@@ -1,6 +1,12 @@
-mixin breadcrumb(elements)
+mixin breadcrumb(resource, record, actionName)
   nav.breadcrumb(aria-label="breadcrumbs")
     ul
-      for element in elements
-        li(class={ 'is-active' : elements.indexOf(element) === elements.length - 1 })
-          a(href=h.listUrl(currentResource))=element
+      if resource
+        li(class={ 'is-active' : !record })
+          a(href=h.listUrl(resource))=resource.decorate().getResourceName()
+      if record
+        li(class={ 'is-active' : !actionName })
+          a(href=h.showRecordUrl(resource, record))=record.title()
+      if actionName
+        li.is-active
+          a= actionName
