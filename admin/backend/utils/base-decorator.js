@@ -22,8 +22,15 @@ class BaseDecorator {
     return this.invokeOrGet('resourceName') || this._resource.name()
   }
 
+    /**
+   * Returns the name and icon  of parent database
+   * @return {String} resource name
+   */
   getParent() {
-    return this.invokeOrGet('parentName') || this._resource.databaseName()
+    const parent = this.invokeOrGet('parent') || this._resource.databaseName()
+    const name = parent.name || parent
+    const icon = parent.icon ? parent.icon : `icon-${this._resource.databaseType() || 'database'}`
+    return { name, icon }
   }
 
   /**

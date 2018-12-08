@@ -80,6 +80,14 @@ class BaseResource {
     this._decorated = this._decorated || new this._Decorator(this)
     return this._decorated
   }
+
+  /**
+   * ``````Check database type``````
+   * @return  {String} Return database type
+   */
+  databaseType() {
+    throw new NotImplementedError()
+  }
 }
 
 module.exports = BaseResource

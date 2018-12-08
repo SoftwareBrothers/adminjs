@@ -5,8 +5,11 @@ class ArticleDecorator extends BaseDecorator {
     super(params)
     this.resourceName = 'Artykuly'
     this.listProperties = ['title', 'content', 'publishedAt']
-    this.showProperties = ['publishedAt']
-    this.parentName = 'Wiedza',
+    this.showProperties = ['title', 'publishedAt']
+    this.parent = {
+      name: 'Wiedza',
+      icon: 'icon-google',
+    }
     this.recordActions = ['show', 'edit', 'remove',
       {
         id: 'publish',
@@ -14,13 +17,12 @@ class ArticleDecorator extends BaseDecorator {
         label: 'Publish',
         action: (request, response, view) => {
           const { method } = request
-          if(method === 'POST') {
-            return 'Some content or form which you want to place here' 
-          } else {
-            return 'PUBLISH ACTION WORKS'
+          if (method === 'GET') {
+            return 'Some content or form which you want to place here'
           }
-        }
-      }
+          return 'PUBLISH ACTION WORKS'
+        },
+      },
     ]
   }
 

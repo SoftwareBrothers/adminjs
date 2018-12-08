@@ -5,10 +5,19 @@ describe('BaseDecorator', function () {
   beforeEach(function () {
     this.properties = [...Array(10)].map(p => new BaseProperty({ name: 1, type: 'string' }))
     this.resourceName = 'resourceName'
+    this.databaseName = 'databaseName'
+    this.databaseType = 'mongodb'
+    this.modkedParent = {
+      name: this.databaseName,
+      icon: `icon-${this.databaseType}`
+    }
     this.mockedResource = {
       properties: this.sinon.stub().returns(this.properties),
       name: this.sinon.stub().returns(this.resourceName),
       property: this.sinon.stub().returns(new BaseProperty({ name: 'prop', type: 'string' })),
+      databaseName: this.sinon.stub().returns(this.databaseName),
+      databaseType: this.sinon.stub().returns(this.databaseType),
+      parent: this.sinon.stub().returns(this.modkedParent),
     }
   })
 
@@ -41,6 +50,13 @@ describe('BaseDecorator', function () {
     it('returns resource name when not overriden', function () {
       const decorator = new BaseDecorator(this.mockedResource)
       expect(decorator.getResourceName()).to.equal(this.resourceName)
+    })
+  })
+
+  describe('#getParent', function() {
+    it('return parent databaseName', function () {
+      const decorator = new BaseDecorator(this.mockedResource)
+      expect(decorator.getParent()).to.contain(this.modkedParent)
     })
   })
 

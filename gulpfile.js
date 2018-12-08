@@ -8,7 +8,7 @@ const nodemon = require('gulp-nodemon');
 const concat = require('gulp-concat');
 const path = require('path');
 
-gulp.task('sass', function() {
+gulp.task('sass', () => {
   return gulp.src('admin/frontend/styles/**/*.sass')
     .pipe(sass({
       outputStyle: 'compressed'
@@ -35,7 +35,7 @@ gulp.task('nodemon', () => {
   })
 });
 
-gulp.task('watch', function (){
+gulp.task('watch', () => {
   gulp.watch('admin/frontend/styles/**/*.sass', ['sass']);
   gulp.watch('admin/frontend/scripts/**/*.js', ['js']);
 })

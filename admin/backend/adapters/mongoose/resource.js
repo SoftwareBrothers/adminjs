@@ -110,6 +110,10 @@ class Resource extends BaseResource {
     }, {})
     return new ValidationError(`${this.name()} validation failed`, errors)
   }
+
+  databaseType() {
+    return 'mongodb'
+  }
 }
 
 module.exports = Resource
