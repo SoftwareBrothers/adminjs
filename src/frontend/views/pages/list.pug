@@ -44,9 +44,9 @@ block content
                     td.is-vcentered(class={ 'property-main' : prop.isTitle() })
                       if actions['show'] && prop.isTitle()
                         a(href=actions['show'].path)
-                          != currentResource.decorate().getValue({ record, property: prop, where: 'list', helpers: h})
+                          != currentResource.decorate().getValue({ record, property: prop, where: 'list'})
                       else
-                        != currentResource.decorate().getValue({ record, property: prop, where: 'list', helpers: h})
+                        != currentResource.decorate().getValue({ record, property: prop, where: 'list'})
                   td
                     .dropdown.is-right.is-hoverable
                       .dropdown-trigger

@@ -29,8 +29,9 @@ class IncorrectDecorator extends Error {
 }
 
 class ResourcesFactory {
-  constructor(adapters = []) {
+  constructor(admin, adapters = []) {
     this.adapters = adapters
+    this.admin = admin
   }
 
   buildResources({ databases, resources }) {
@@ -113,7 +114,7 @@ class ResourcesFactory {
         throw new IncorrectDecorator(decorator)
       }
       resource = resource || resourceObject
-      resource.assignDecorator(decorator || BaseDecorator)
+      resource.assignDecorator(decorator || BaseDecorator, this.admin)
       return resource
     })
   }

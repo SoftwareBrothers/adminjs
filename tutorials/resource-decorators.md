@@ -62,16 +62,16 @@ class ArticleDecorator extends BaseDecorator {
     this.listProperties = ['newField']
   }
 
-  getValue({ record, property, where, helpers }) {
+  getValue({ record, property, where }) {
     switch (property.name()) {
     case 'newField':
       return `
         <p>Here goes a paragraph</p>
         <p>and another one</p>
-        <a href="${helpers.showRecordUrl(record.resource, record)}">Link somewere</>
+        <a href="${this.helpers.showRecordUrl(record.resource, record)}">Link somewere</>
       `
     default:
-      return super.getValue({ record, property, where, helpers })
+      return super.getValue({ record, property, where })
     }
   }
 }

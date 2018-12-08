@@ -33,4 +33,4 @@ block content
               .card-content
                 .text-small #{h._.startCase(prop.name())}
                 div(class={ 'feature' : properties.indexOf(prop) === 0 })
-                  != currentResource.decorate().getValue({ record, property: prop, where: 'show', helpers: h})
+                  != currentResource.decorate().getValue({ record, property: prop, where: 'show' })
