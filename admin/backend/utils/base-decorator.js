@@ -1,6 +1,6 @@
 const BaseProperty = require('../adapters/base/property')
-
 const DEFAULT_MAX_ITEMS_IN_LIST = 5
+const DEFAULT_RECORD_ACTIONS = ['show', 'edit', 'remove']
 
 /**
  * Base decorator class which decorates the Resource.
@@ -48,6 +48,57 @@ class BaseDecorator {
     return this._resource.properties().filter(property => property.isEditable())
   }
 
+ /**
+  * Returns object(map) with default actions as keys and their values
+  */
+  getDefaultActions(helpers, record) {
+    const resource = this._resource
+    return {
+      show: {
+        path: helpers.showRecordUrl(resource, record),
+        icon: 'info',
+        label: 'Info' 
+      },
+      edit: {
+        path: helpers.editRecordUrl(resource, record),
+        icon: 'pen',
+        label: 'Edit' 
+      },
+      remove: {
+        path: helpers.deleteRecordUrl(resource, record),
+        icon: 'trash',
+        label: 'Remove' 
+      }
+    }
+  }
+
+  /**
+  * Returns object(map) with record actions declared in his decorator
+  */
+  getAllAvailableActions(helpers, defaultActions, recordActions, record) {
+    return recordActions.reduce((obj, key) => {
+      if(typeof key === 'object') {
+        return {...obj, ...{
+            [key.id]: {...key, path: helpers.customRecordActionUrl(this._resource, record, key.id)}
+          }
+        }
+      }
+      return {...obj, ...(Object.keys(defaultActions).includes(key) && {[key]: defaultActions[key]})}
+    }, {})
+  }
+
+  /**
+  * Returns object(map) with record actions declared in his decorator.
+  * If record doesn't have declared actions, it automatically returns default ones
+  */
+  getRecordActions(helpers, record) {
+    const defaultActions = this.getDefaultActions(helpers, record)
+    const recordActions = this.invokeOrGet('recordActions')
+    if(recordActions) {
+      return this.getAllAvailableActions(helpers, defaultActions, recordActions, record)
+    }
+    return defaultActions
+  }
 
   nameToProperty(propertyName) {
     return this._resource.property(propertyName) || new BaseProperty({ path: propertyName })
