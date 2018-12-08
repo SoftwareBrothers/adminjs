@@ -35,7 +35,7 @@ It is totally separated from any particular nodejs framework. Because of that it
   graph LR
   A[<a href=./examples_hapijs_index.js.html>Hapi.js</a>] -->|<a href=./admin_integrations_hapi.js.html>Mapping Routes</a>| B
   subgraph AdminBro
-  B{<a href=./Routes.html>Routes.js</a>}
+  B{<a href=./Router.html>Router.js</a>}
   B --> C(DashoardController)
   B --> D(ResourcesController)
   E(Renderer)

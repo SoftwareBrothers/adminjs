@@ -1,4 +1,0 @@
-version: "2.1"
-services:
-  app:
-    command: "./node_modules/.bin/gulp"
