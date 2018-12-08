@@ -28,7 +28,7 @@ block content
             thead
               tr
                 for prop in currentResource.decorate().getListProperties()
-                  th(class= { 'main' : h.isMainColumn(prop.name()) })
+                  th(class= { 'main' : prop.isTitle() })
                     - isSortedByCurrentPropName = sort.sortBy === prop.name()
                     - direction = sort.direction === 'asc' && isSortedByCurrentPropName ? 'desc' : 'asc'
                     a(href=h.listUrl(currentResource, { sort: { sortBy: prop.name(), sortDirection: direction }}))
@@ -41,8 +41,8 @@ block content
                 - actions = currentResource.decorate().getRecordActions(h, record)
                 tr
                   for prop in currentResource.decorate().getListProperties()
-                    td.is-vcentered(class={ 'property-main' : h.isMainColumn(prop.name()) })
-                      if actions['show'] && h.isMainColumn(prop.name())
+                    td.is-vcentered(class={ 'property-main' : prop.isTitle() })
+                      if actions['show'] && prop.isTitle()
                         a(href=actions['show'].path)
                           != currentResource.decorate().getValue({ record, property: prop, where: 'list', helpers: h})
                       else
