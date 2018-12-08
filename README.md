@@ -20,11 +20,19 @@ Let's jump right to the example:
 
 ```javascript
 // index.js
+const AdminBro = require('admin-bro')
+
+// We will use mongoose ORM - so let's require its adapter
+const AdminBroMongoose = require('admin-bro-mongoose')
+
 // We require hapijs plugin which renders adminBro using this framework
 const AdminBroPlugin = require('admin-bro-hapijs')
 
+// Other dependencies
 const mongoose = require('mongoose')
 const Hapi = require('hapi')
+
+AdminBro.registerAdapter(AdminBroMongoose)
 
 // Let's define a collection:
 mongoose.model('Admin', new mongoose.Schema({
@@ -69,7 +77,7 @@ start()
 To run it you will have to install dependencies:
 
 ```bash
-npm install --save admin-bro-hapijs mongoose hapi
+npm install --save admin-bro admin-bro-mongoose admin-bro-hapijs mongoose hapi
 ```
 
 and then:
@@ -86,14 +94,15 @@ and this is what you get afer visiting http://localhost:8080/admin
 
 So
 * We used hapijs as a framework for rendering AdminBro routes (admin-bro-hapijs plugin)
+* We wrapped mongoose ORM with admin-bro-mongoose adapter
 * We defined one mongoDb collection using mongoose ORM
 * We passed mongoose instance to the AdminBro via options.
 
 And
 * AdminBro took the mongoose connection
-* Extracted all resources form it (`Admin` collection)
+* Extracted all resources form it (`Admin` collection) using admin-bro-mongoose adapter
 * Generated List, Show, Edit and New views along with 3 actions: update, create and delete for those resources.
-* and finally he used hapijs to render routes under `'/admin'` `rootPath`
+* and finally he used hapijs to render routes under `'/admin'` path
 
 ## What next
 
