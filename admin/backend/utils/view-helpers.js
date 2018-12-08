@@ -55,6 +55,10 @@ class ViewHelpers {
     return this.urlBuilder(['resources', resource.id(), record.id()])
   }
 
+  customRecordActionUrl(resource, record, actionId) {
+    return `${this.urlBuilder(['resources', resource.id(), record.id()])}/${actionId}`
+  }
+
   editRecordUrl(resource, record) {
     return this.urlBuilder(['resources', resource.id(), record.id(), 'edit'])
   }

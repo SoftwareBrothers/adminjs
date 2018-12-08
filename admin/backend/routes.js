@@ -88,6 +88,16 @@ class Routes {
       path: '/resources/{resourceName}/{recordId}/delete',
       Controller: ResourcesController,
       action: 'delete',
+    }, {
+      method: 'POST',
+      path: '/resources/{resourceName}/{recordId}/{actionName}',
+      Controller: ResourcesController,
+      action: 'custom',
+    }, {
+      method: 'GET',
+      path: '/resources/{resourceName}/{recordId}/{actionName}',
+      Controller: ResourcesController,
+      action: 'custom',
     }]
   }
 }

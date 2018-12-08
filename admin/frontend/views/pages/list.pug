@@ -38,11 +38,12 @@ block content
                 th
             tbody
               for record in records
+                - actions = currentResource.decorate().getRecordActions(h, record)
                 tr
                   for prop in currentResource.decorate().getListProperties()
                     td.is-vcentered(class={ 'property-main' : h.isMainColumn(prop.name()) })
-                      if h.isMainColumn(prop.name())
-                        a(href=h.showRecordUrl(currentResource, record))
+                      if actions['show'] && h.isMainColumn(prop.name())
+                        a(href=actions['show'].path)
                           != currentResource.decorate().getValue({ record, property: prop, where: 'list', helpers: h})
                       else
                         != currentResource.decorate().getValue({ record, property: prop, where: 'list', helpers: h})
@@ -54,19 +55,12 @@ block content
                             i.fas.fa-ellipsis-h
                       .dropdown-menu
                         .dropdown-content
-                          a.button.is-white(href=h.showRecordUrl(currentResource, record))
-                            span.icon.is-large
-                              i.fas.fa-info
-                            .btn-text Info
-                          a.button.is-white(href=h.editRecordUrl(currentResource, record))
-                            span.icon
-                              i.fas.fa-pen
-                            .btn-text Edit
-                          a.button.is-white(href=h.deleteRecordUrl(currentResource, record))
-                            span.icon
-                              i.fas.fa-trash
-                            .btn-text Remove
-
+                          for action in actions
+                            a.button.is-white(href=action.path)
+                              span.icon
+                                i(class=`fas fa-${action.icon}`)
+                              .btn-text=action.label
+                    
           - pages = h.paginate(total, page, perPage).pages
           if pages.length > 1
             .level-item.pagination-content
