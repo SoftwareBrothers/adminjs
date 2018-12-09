@@ -125,21 +125,21 @@ class BaseDecorator {
   /**
    * Returns object(map) with default actions as keys and their values
    */
-  getDefaultActions(helpers, record) {
+  getDefaultActions(record) {
     const resource = this._resource
     return {
       show: {
-        path: helpers.showRecordUrl(resource, record),
+        path: this.helpers.showRecordUrl(resource, record),
         icon: 'info',
         label: 'Info',
       },
       edit: {
-        path: helpers.editRecordUrl(resource, record),
+        path: this.helpers.editRecordUrl(resource, record),
         icon: 'pen',
         label: 'Edit',
       },
       remove: {
-        path: helpers.deleteRecordUrl(resource, record),
+        path: this.helpers.deleteRecordUrl(resource, record),
         icon: 'trash',
         label: 'Remove',
       },
@@ -166,9 +166,9 @@ class BaseDecorator {
   * If record doesn't have declared actions, it automatically returns default ones
   */
   getRecordActions(helpers, record) {
-    const defaultActions = this.getDefaultActions(helpers, record)
+    const defaultActions = this.getDefaultActions(record)
     const recordActions = this.invokeOrGet('recordActions')
-    if(recordActions) {
+    if (recordActions) {
       return this.getAllAvailableActions(helpers, defaultActions, recordActions, record)
     }
     return defaultActions
