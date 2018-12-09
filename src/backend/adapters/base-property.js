@@ -18,10 +18,12 @@ class BaseProperty {
    *                               property is for an object the path can be
    *                               divided to parts by dots: i.e. 'address.street'
    * @param  {String} options.type on if: id, string, float, number, boolean, date
+   * @param  {String} options.isId true when field should be treated as an ID
    */
-  constructor({ path, type }) {
+  constructor({ path, type, isId }) {
     this._path = path
     this._type = type
+    this._isId = isId
   }
 
   /**
@@ -70,7 +72,7 @@ class BaseProperty {
    * @return {Boolean}
    */
   isId() {
-    return false
+    return this._isId
   }
 }
 

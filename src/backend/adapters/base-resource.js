@@ -101,9 +101,10 @@ class BaseResource {
    * @param  {Object} options
    * @param  {Number} options.limit   how many records should be taken
    * @param  {Number} options.offset  offset
+   * @param  {Number} options.sort    sort
    * @return {BaseRecord[]}           list of records
    */
-  async find(query, { limit=20, offset=0 }) {
+  async find(query, { limit=20, offset=0, sort={} }) {
     throw new NotImplementedError()
   }
 
