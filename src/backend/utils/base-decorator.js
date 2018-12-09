@@ -149,11 +149,11 @@ class BaseDecorator {
   /**
    * Returns object(map) with record actions declared in his decorator
    */
-  getAllAvailableActions(helpers, defaultActions, recordActions, record) {
+  getAllAvailableActions(defaultActions, recordActions, record) {
     return recordActions.reduce((obj, key) => {
       if (typeof key === 'object') {
         return { ...obj, ...{
-            [key.id]: {...key, path: helpers.customRecordActionUrl(this._resource, record, key.id) },
+            [key.id]: {...key, path: this.helpers.customRecordActionUrl(this._resource, record, key.id) },
           },
         }
       }
@@ -165,11 +165,11 @@ class BaseDecorator {
   * Returns object(map) with record actions declared in his decorator.
   * If record doesn't have declared actions, it automatically returns default ones
   */
-  getRecordActions(helpers, record) {
+  getRecordActions(record) {
     const defaultActions = this.getDefaultActions(record)
     const recordActions = this.invokeOrGet('recordActions')
     if (recordActions) {
-      return this.getAllAvailableActions(helpers, defaultActions, recordActions, record)
+      return this.getAllAvailableActions(defaultActions, recordActions, record)
     }
     return defaultActions
   }

@@ -18,7 +18,7 @@ block content
               span(class="icon is-small")
                 i(class="fas fa-check")
               .btn-text Save
-          - actionRemove = currentResource.decorate().getRecordActions(h, record)['remove']
+          - actionRemove = currentResource.decorate().getRecordActions(record)['remove']
           if actionRemove
             .control
               a.button.is-primary.is-outlined(href=actionRemove.path)

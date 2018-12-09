@@ -1,6 +1,7 @@
 const BaseProperty = require('@backend/adapters/base-property')
 
 const expectedResult = {
+  id: 'someID',
   properties: [...Array(10)].map(() => new BaseProperty({ name: 1, type: 'string' })),
   resourceName: 'resourceName',
   databaseName: 'databaseName',
@@ -13,6 +14,7 @@ const expectedResult = {
 
 module.exports = sinon => (
   {
+    id: sinon.stub().returns(expectedResult.id),
     properties: sinon.stub().returns(expectedResult.properties),
     name: sinon.stub().returns(expectedResult.resourceName),
     property: sinon.stub().returns(new BaseProperty({ name: 'prop', type: 'string' })),

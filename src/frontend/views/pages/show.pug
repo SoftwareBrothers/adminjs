@@ -14,7 +14,7 @@ block content
               i.fas.fa-arrow-left
           | #{actionName || 'Details'}
         .field.is-grouped
-          - actions = currentResource.decorate().getRecordActions(h, record)
+          - actions = currentResource.decorate().getRecordActions(record)
           for key in ['edit', 'remove']
             - action = actions[key]
             if action

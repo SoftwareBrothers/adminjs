@@ -99,10 +99,11 @@ describe('BaseDecorator', function () {
     context('user didnt override default actions', function () {
       beforeEach(function () {
         this.decorator = new BaseDecorator(this.args)
+        this.decorator.helpers = this.stubbedHelper
       })
 
       it('returns default methods as an object', function () {
-        const ret = this.decorator.getRecordActions(this.stubbedHelper)
+        const ret = this.decorator.getRecordActions()
         expect(ret).to.have.keys('edit', 'show', 'remove')
       })
     })
@@ -116,7 +117,8 @@ describe('BaseDecorator', function () {
           }
         }
         this.decorator = new Decorator(this.args)
-        this.ret = this.decorator.getRecordActions(this.stubbedHelper)
+        this.decorator.helpers = this.stubbedHelper
+        this.ret = this.decorator.getRecordActions()
       })
 
       it('returns all fields for declared actions', function () {
@@ -145,7 +147,8 @@ describe('BaseDecorator', function () {
           }
         }
         this.decorator = new Decorator(this.args)
-        this.ret = this.decorator.getRecordActions(this.stubbedHelper)
+        this.decorator.helpers = this.stubbedHelper
+        this.ret = this.decorator.getRecordActions()
       })
 
       it('returns object containing new action', function () {
