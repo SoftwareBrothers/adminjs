@@ -58,7 +58,7 @@ block content
                           for action in actions
                             a.button.is-white(href=action.path)
                               span.icon
-                                i(class=`fas fa-${action.icon}`)
+                                i(class=action.icon)
                               .btn-text=action.label
                     
           - pages = h.paginate(total, page, perPage).pages
