@@ -5,7 +5,7 @@ include ../mixins/breadcrumb
 block content
   secton.show-details
     - actionName = customAction && customAction.name
-    +breadcrumb([currentResource.decorate().getResourceName(), record.title(), ...([actionName] || [])])
+    +breadcrumb(currentResource, record, actionName)
     .column
       .level
         .title
@@ -14,7 +14,7 @@ block content
               i.fas.fa-arrow-left
           | #{actionName || 'Details'}
         .field.is-grouped
-          - actions = currentResource.decorate().getRecordActions(h, record)
+          - actions = currentResource.decorate().getRecordActions(record)
           for key in ['edit', 'remove']
             - action = actions[key]
             if action
@@ -33,4 +33,4 @@ block content
               .card-content
                 .text-small #{h._.startCase(prop.name())}
                 div(class={ 'feature' : properties.indexOf(prop) === 0 })
-                  != currentResource.decorate().getValue({ record, property: prop, where: 'show', helpers: h})
+                  != currentResource.decorate().getValue({ record, property: prop, where: 'show' })

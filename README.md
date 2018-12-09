@@ -108,8 +108,8 @@ And
 
 So since now you know the basics it is time for more advanced topics:
 
-* [List of all AdminBro options](https://softwarebrothers.github.io/admin-bro/docs/global.html#AdminBroOptions)
-* [Resource customization](https://softwarebrothers.github.io/admin-bro/docs/tutorial-resource-decorators.html)
+* [List of all AdminBro options](https://softwarebrothers.github.io/admin-bro/global.html#AdminBroOptions)
+* [Resource customization](https://softwarebrothers.github.io/admin-bro/tutorial-resource-decorators.html)
 
 ## License
 

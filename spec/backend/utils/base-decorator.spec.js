@@ -1,24 +1,13 @@
 const BaseDecorator = require('@backend/utils/base-decorator')
 const BaseProperty = require('@backend/adapters/base-property')
+const resourceStub = require('../helpers/resource-stub')
+const helperStub = require('../helpers/helper-stub')
 
 describe('BaseDecorator', function () {
   beforeEach(function () {
-    this.properties = [...Array(10)].map(p => new BaseProperty({ name: 1, type: 'string' }))
-    this.resourceName = 'resourceName'
-    this.databaseName = 'databaseName'
-    this.databaseType = 'mongodb'
-    this.mockedParent = {
-      name: this.databaseName,
-      icon: `icon-${this.databaseType}`,
-    }
-    this.mockedResource = {
-      properties: this.sinon.stub().returns(this.properties),
-      name: this.sinon.stub().returns(this.resourceName),
-      property: this.sinon.stub().returns(new BaseProperty({ name: 'prop', type: 'string' })),
-      databaseName: this.sinon.stub().returns(this.databaseName),
-      databaseType: this.sinon.stub().returns(this.databaseType),
-      parent: this.sinon.stub().returns(this.mockedParent),
-    }
+    this.stubbedResource = resourceStub(this.sinon)
+    this.stubbedAdmin = { options: {} }
+    this.args = { resource: this.stubbedResource, admin: this.stubbedAdmin }
   })
 
   describe('#invokeOrGet', function () {
@@ -30,7 +19,7 @@ describe('BaseDecorator', function () {
         }
         overwritenFunction() { return 'overwritenFunctionValue' }
       }
-      this.decorator = new Decorator(this.mockedResource)
+      this.decorator = new Decorator(this.args)
     })
 
     it('returns null when there is no override', function () {
@@ -48,21 +37,21 @@ describe('BaseDecorator', function () {
 
   describe('#getResourceName', function () {
     it('returns resource name when not overriden', function () {
-      const decorator = new BaseDecorator(this.mockedResource)
-      expect(decorator.getResourceName()).to.equal(this.resourceName)
+      const decorator = new BaseDecorator(this.args)
+      expect(decorator.getResourceName()).to.equal(resourceStub.expectedResult.resourceName)
     })
   })
 
-  describe('#getParent', function() {
-    it('return parent databaseName', function () {
-      const decorator = new BaseDecorator(this.mockedResource)
-      expect(decorator.getParent()).to.contain(this.mockedParent)
+  describe('#getParent', function () {
+    it('return parent when it is not overriden', function () {
+      const decorator = new BaseDecorator(this.args)
+      expect(decorator.getParent()).to.contain(resourceStub.expectedResult.parent)
     })
   })
 
   describe('#getListProperties', function () {
     it('returns first 5 visible properties from resource when not overwriten', function () {
-      this.decorator = new BaseDecorator(this.mockedResource)
+      this.decorator = new BaseDecorator(this.args)
       expect(this.decorator.getListProperties()).to.have.lengthOf(5)
     })
 
@@ -74,19 +63,19 @@ describe('BaseDecorator', function () {
             this.listProperties = ['prop1', 'prop2', 'prop3']
           }
         }
-        this.decorator = new Decorator(this.mockedResource)
+        this.decorator = new Decorator(this.args)
       })
 
-      it('returns given properties', function () {
+      it('returns properties given in configuration', function () {
         this.propertyName = 'someProperty'
-        this.mockedResource.property.returns({ name: this.propertyName })
+        this.stubbedResource.property.returns({ name: this.propertyName })
         const properties = this.decorator.getListProperties()
         expect(properties).to.have.lengthOf(3)
         expect(properties[0].name).to.equal(this.propertyName)
       })
 
-      it('creates new property when it overwriten doesnt exist', function () {
-        this.mockedResource.property.returns(null) // there are no property for given name
+      it('creates new property when it doesnt exist', function () {
+        this.stubbedResource.property.returns(null) // there are no property for given name
         const properties = this.decorator.getListProperties()
         expect(properties).to.have.lengthOf(3)
       })
@@ -96,95 +85,78 @@ describe('BaseDecorator', function () {
   describe('#getValue', function () {
     it('returns value from the resource when there is no override', function () {
       this.record = { param: this.sinon.spy() }
-      this.decorator = new BaseDecorator(this.mockedResource)
+      this.decorator = new BaseDecorator(this.args)
       this.decorator.getValue({ record: this.record, property: new BaseProperty({ path: 'somename' }) })
       expect(this.record.param).to.have.been.called
     })
   })
 
-  describe('#getRecordActions', function() {
-    beforeEach(function() {
-      this.mockedHelper = {
-        showRecordUrl: this.sinon.stub().returns('url'),
-        editRecordUrl: this.sinon.stub().returns('url'),
-        deleteRecordUrl: this.sinon.stub().returns('url'),
-        customRecordActionUrl: this.sinon.stub().returns('url'),
-      }
+  describe('#getRecordActions', function () {
+    beforeEach(function () {
+      this.stubbedHelper = helperStub(this.sinon)
     })
 
-    context('user didnt override default actions', function() {
-      beforeEach(function() {
-        this.decorator = new BaseDecorator(this.mockedResource)
+    context('user didnt override default actions', function () {
+      beforeEach(function () {
+        this.decorator = new BaseDecorator(this.args)
+        this.decorator.helpers = this.stubbedHelper
       })
 
-      it('returns default methods as an object', function() {
-        const ret = this.decorator.getRecordActions(this.mockedHelper)
+      it('returns default methods as an object', function () {
+        const ret = this.decorator.getRecordActions()
         expect(ret).to.have.keys('edit', 'show', 'remove')
       })
     })
 
-    context('user hidden edit action', function() {
-      beforeEach(function() {
+    context('user hid edit action', function () {
+      beforeEach(function () {
         class Decorator extends BaseDecorator {
           constructor(params) {
             super(params)
             this.recordActions = ['show', 'remove']
           }
         }
-        this.decorator = new Decorator(this.mockedResource)
-        this.ret = this.decorator.getRecordActions(this.mockedHelper)
+        this.decorator = new Decorator(this.args)
+        this.decorator.helpers = this.stubbedHelper
+        this.ret = this.decorator.getRecordActions()
       })
 
-      it('returns object containing declared actions', function() {
-        expect(this.ret).to.have.keys('show', 'remove')
-      })
-
-      it('returns all fields for declared actions', function() {
+      it('returns all fields for declared actions', function () {
+        const showPath = helperStub.expectedResult.showRecordUrl
+        const removePath = helperStub.expectedResult.deleteRecordUrl
         expect(this.ret).to.deep.include({
-          show: {
-            path: 'url',
-            icon: 'info',
-            label: 'Info' 
-          },
-          remove: {
-            path: 'url',
-            icon: 'trash',
-            label: 'Remove' 
-          }
+          show: { path: showPath, icon: 'info', label: 'Info' },
+          remove: { path: removePath, icon: 'trash', label: 'Remove' },
         })
       })
     })
-    
-    context('user created new action', function() {
-      beforeEach(function() {
+
+    context('user created new action', function () {
+      beforeEach(function () {
+        const customAction = {
+          id: 'publish',
+          icon: 'share',
+          label: 'Publish',
+          action: () => {},
+        }
+        this.customAction = customAction
         class Decorator extends BaseDecorator {
           constructor(params) {
             super(params)
-            this.recordActions = ['show', 'remove', 'edit', {
-              id: 'publish',
-              icon: 'share',
-              label: 'Publish',
-              action: (request, response, view) => {
-                const { method } = request
-                if(method === 'POST') {
-                  return 'Some content or form which you want to place here' 
-                } else {
-                  return 'PUBLISH ACTION WORKS'
-                }
-              }
-            }]
+            this.recordActions = ['show', 'remove', 'edit', customAction]
           }
         }
-        this.decorator = new Decorator(this.mockedResource)
-        this.ret = this.decorator.getRecordActions(this.mockedHelper)
+        this.decorator = new Decorator(this.args)
+        this.decorator.helpers = this.stubbedHelper
+        this.ret = this.decorator.getRecordActions()
       })
 
-      it('returns object containing new action', function() {
+      it('returns object containing new action', function () {
         expect(this.ret).to.have.keys('show', 'remove', 'edit', 'publish')
       })
 
-      it('returns custom action object with path', function() {
-        expect(this.ret.publish).to.have.property('path')
+      it('returns custom action object', function () {
+        expect(this.ret.publish).to.deep.include(this.customAction)
       })
     })
   })

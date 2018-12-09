@@ -163,10 +163,12 @@ class BaseResource {
   /**
    * Assigns given decorator to the Resource. Than it will be available under
    * resource.decorate() method
-   * @param  {BaseDecorator} Decorator
+   * @param  {BaseDecorator}  Decorator
+   * @param  {AdminBro}       admin         current instance of AdminBro
    */
-  assignDecorator(Decorator) {
+  assignDecorator(Decorator, admin) {
     this._Decorator = Decorator
+    this._decorated = new Decorator({ resource: this, admin: admin })
   }
 
   /**
@@ -174,7 +176,6 @@ class BaseResource {
    * @return {BaseDecorator | null}
    */
   decorate() {
-    this._decorated = this._decorated || new this._Decorator(this)
     return this._decorated
   }
 }

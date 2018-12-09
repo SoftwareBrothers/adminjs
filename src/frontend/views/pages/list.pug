@@ -4,7 +4,7 @@ include ../mixins/emptyTable
 
 block content
   section.table-list
-    +breadcrumb([currentResource.decorate().getResourceName()])
+    +breadcrumb(currentResource)
     .column
       .level
         .title=currentResource.decorate().getResourceName()
@@ -28,7 +28,7 @@ block content
             thead
               tr
                 for prop in currentResource.decorate().getListProperties()
-                  th(class= { 'main' : h.isMainColumn(prop.name()) })
+                  th(class= { 'main' : prop.isTitle() })
                     - isSortedByCurrentPropName = sort.sortBy === prop.name()
                     - direction = sort.direction === 'asc' && isSortedByCurrentPropName ? 'desc' : 'asc'
                     a(href=h.listUrl(currentResource, { sort: { sortBy: prop.name(), sortDirection: direction }}))
@@ -38,15 +38,15 @@ block content
                 th
             tbody
               for record in records
-                - actions = currentResource.decorate().getRecordActions(h, record)
+                - actions = currentResource.decorate().getRecordActions(record)
                 tr
                   for prop in currentResource.decorate().getListProperties()
-                    td.is-vcentered(class={ 'property-main' : h.isMainColumn(prop.name()) })
-                      if actions['show'] && h.isMainColumn(prop.name())
+                    td.is-vcentered(class={ 'property-main' : prop.isTitle() })
+                      if actions['show'] && prop.isTitle()
                         a(href=actions['show'].path)
-                          != currentResource.decorate().getValue({ record, property: prop, where: 'list', helpers: h})
+                          != currentResource.decorate().getValue({ record, property: prop, where: 'list'})
                       else
-                        != currentResource.decorate().getValue({ record, property: prop, where: 'list', helpers: h})
+                        != currentResource.decorate().getValue({ record, property: prop, where: 'list'})
                   td
                     .dropdown.is-right.is-hoverable
                       .dropdown-trigger
@@ -58,7 +58,7 @@ block content
                           for action in actions
                             a.button.is-white(href=action.path)
                               span.icon
-                                i(class=`fas fa-${action.icon}`)
+                                i(class=action.icon)
                               .btn-text=action.label
                     
           - pages = h.paginate(total, page, perPage).pages

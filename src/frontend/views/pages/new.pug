@@ -3,7 +3,7 @@ include ../mixins/form-group.pug
 include ../mixins/breadcrumb
 
 block content
-  +breadcrumb([currentResource.decorate().getResourceName()])
+  +breadcrumb(currentResource)
   section.view-edit
     form(method='POST' action=h.listUrl(currentResource))
       .level

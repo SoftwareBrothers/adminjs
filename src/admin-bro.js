@@ -92,7 +92,7 @@ class AdminBro {
     this.options = _.merge(defaults, options)
 
     const { databases, resources } = this.options
-    const resourcesFactory = new ResourcesFactory(AdminBro.registeredAdapters)
+    const resourcesFactory = new ResourcesFactory(this, AdminBro.registeredAdapters)
     this.resources = resourcesFactory.buildResources({ databases, resources })
   }
 

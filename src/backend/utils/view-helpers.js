@@ -154,10 +154,6 @@ class ViewHelpers {
   assetPath(asset) {
     return this.urlBuilder(['frontend', 'assets', asset])
   }
-
-  isMainColumn(propertyName) {
-    return ['name', 'email', 'title', '_id'].includes(propertyName)
-  }
 }
 
 module.exports = ViewHelpers

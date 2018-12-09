@@ -1,4 +1,5 @@
 const BaseProperty = require('../adapters/base-property')
+const ViewHelpers = require('./view-helpers')
 
 const DEFAULT_MAX_ITEMS_IN_LIST = 5
 
@@ -21,16 +22,16 @@ const DEFAULT_MAX_ITEMS_IN_LIST = 5
  *     this.parentName = 'Knowledge'
  *   }
  *
- *   getValue({ record, property, where, helpers }) {
+ *   getValue({ record, property, where}) {
  *     switch (property.name()) {
  *     case 'publishedAt':
  *       return `
  *         <p>Here goes a paragraph</p>
  *         <p>and another one</p>
- *         <a href="${helpers.showRecordUrl(record.resource, record)}">Link somewere</>
+ *         <a href="${this.helpers.showRecordUrl(record.resource, record)}">Link somewere</>
  *       `
  *     default:
- *       return super.getValue({ record, property, where, helpers })
+ *       return super.getValue({ record, property, where })
  *     }
  *   }
  * }
@@ -38,10 +39,15 @@ const DEFAULT_MAX_ITEMS_IN_LIST = 5
  */
 class BaseDecorator {
   /**
-   * @param  {BaseResource} resource  resource which is decorated
+   * @param  {Object}       options
+   * @param  {BaseResource} options.resource  resource which is decorated
+   * @param  {AdminBro}     options.admin  current instance of AdminBro
    */
-  constructor(resource) {
+  constructor({ resource, admin }) {
     this._resource = resource
+    this._admin = admin
+
+    this.helpers = new ViewHelpers({ admin })
 
     /**
      * Resource name, when not given decorator will use raw name of the resource
@@ -119,22 +125,22 @@ class BaseDecorator {
   /**
    * Returns object(map) with default actions as keys and their values
    */
-  getDefaultActions(helpers, record) {
+  getDefaultActions(record) {
     const resource = this._resource
     return {
       show: {
-        path: helpers.showRecordUrl(resource, record),
-        icon: 'info',
+        path: this.helpers.showRecordUrl(resource, record),
+        icon: 'fas fa-info',
         label: 'Info',
       },
       edit: {
-        path: helpers.editRecordUrl(resource, record),
-        icon: 'pen',
+        path: this.helpers.editRecordUrl(resource, record),
+        icon: 'fas fa-pen',
         label: 'Edit',
       },
       remove: {
-        path: helpers.deleteRecordUrl(resource, record),
-        icon: 'trash',
+        path: this.helpers.deleteRecordUrl(resource, record),
+        icon: 'fas fa-trash',
         label: 'Remove',
       },
     }
@@ -143,11 +149,11 @@ class BaseDecorator {
   /**
    * Returns object(map) with record actions declared in his decorator
    */
-  getAllAvailableActions(helpers, defaultActions, recordActions, record) {
+  getAllAvailableActions(defaultActions, recordActions, record) {
     return recordActions.reduce((obj, key) => {
       if (typeof key === 'object') {
         return { ...obj, ...{
-            [key.id]: {...key, path: helpers.customRecordActionUrl(this._resource, record, key.id) },
+            [key.id]: {...key, path: this.helpers.customRecordActionUrl(this._resource, record, key.id) },
           },
         }
       }
@@ -159,11 +165,11 @@ class BaseDecorator {
   * Returns object(map) with record actions declared in his decorator.
   * If record doesn't have declared actions, it automatically returns default ones
   */
-  getRecordActions(helpers, record) {
-    const defaultActions = this.getDefaultActions(helpers, record)
+  getRecordActions(record) {
+    const defaultActions = this.getDefaultActions(record)
     const recordActions = this.invokeOrGet('recordActions')
-    if(recordActions) {
-      return this.getAllAvailableActions(helpers, defaultActions, recordActions, record)
+    if (recordActions) {
+      return this.getAllAvailableActions(defaultActions, recordActions, record)
     }
     return defaultActions
   }
@@ -194,10 +200,9 @@ class BaseDecorator {
    * @param  {BaseRecord}   options.record
    * @param  {BaseProperty} options.property
    * @param  {String}       options.where    one of: list | show
-   * @param  {ViewHelpers}  options.helpers  view helpers
    * @return {String}                        Html string which will be rendered
    */
-  getValue({ record, property, where, helpers }) {
+  getValue({ record, property, where }) {
     return record.param(property.name())
   }
 }

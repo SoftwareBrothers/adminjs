@@ -3,8 +3,7 @@ include ../mixins/form-group
 include ../mixins/breadcrumb
 
 block content
-  +breadcrumb([currentResource.decorate().getResourceName(),
-                 record.title(), 'edit'])
+  +breadcrumb(currentResource, record, 'edit')
   section.view-edit
     form(method='POST' action=h.showRecordUrl(currentResource, record))
       .level
@@ -12,14 +11,14 @@ block content
           a.button.is-text.is-back(href=h.listUrl(currentResource))
             span.icon.is-small
               i.fas.fa-arrow-left
-          | Edit #{currentResource.name()}
+          | Edit
         .field.is-grouped
           .control
             button.button.is-primary(type='submit')
               span(class="icon is-small")
                 i(class="fas fa-check")
               .btn-text Save
-          - actionRemove = currentResource.decorate().getRecordActions(h, record)['remove']
+          - actionRemove = currentResource.decorate().getRecordActions(record)['remove']
           if actionRemove
             .control
               a.button.is-primary.is-outlined(href=actionRemove.path)

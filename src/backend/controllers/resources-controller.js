@@ -59,12 +59,12 @@ class ResourcesController extends BaseController {
     this.findResources(request.params)
     const { recordId, actionId } = request.params
     view.record = await view.currentResource.findOne(recordId)
-    const { h, record } = view
+    const { record } = view
     view.customAction = {
       name: actionId,
       content: await view.currentResource
         .decorate()
-        .getRecordActions(h, record)[actionId]
+        .getRecordActions(record)[actionId]
         .action(request, response, view),
     }
     return this.render('pages/show', view)
