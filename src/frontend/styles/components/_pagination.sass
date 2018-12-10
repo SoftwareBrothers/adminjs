@@ -9,3 +9,13 @@
     a
       height: rem(32px)
       width: rem(32px)
+
+      &.disabled 
+        opacity: 0.5
+        pointer-events: none
+
+    @include media-breakpoint-down($media-min-tablet-width - 1px)
+      a.pages 
+        display: none
+      a.current-page 
+        display: flex

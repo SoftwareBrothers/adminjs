@@ -88,7 +88,7 @@ class ResourcesController extends BaseController {
     this.view.perPage = 10
     const firstProperty = this.view.currentResource.decorate().getListProperties()[0]
     const { page, sortBy, sortDirection } = query
-    this.view.page = page || 1
+    this.view.page = Number(page) || 1
     this.view.sort = {
       sortBy: sortBy || firstProperty.name(),
       direction: sortDirection || 'asc',
