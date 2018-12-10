@@ -2,6 +2,13 @@
 
 Admin Framework for nodejs apps.
 
+Check out example app here:
+
+login: `test@example.com`
+password: `password`
+
+https://admin-bro-example-app.herokuapp.com/admin
+
 # How it works
 
 AdminBro is divided into modules. On the one side we have database connectors - we call them Resources. On the other hand - rendering http frameworks.
