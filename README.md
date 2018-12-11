@@ -2,11 +2,18 @@
 
 Admin Framework for nodejs apps.
 
+Check out example app here:
+
+login: `test@example.com`
+password: `password`
+
+https://admin-bro-example-app.herokuapp.com/admin
+
 # How it works
 
 AdminBro is divided into modules. On the one side we have database connectors - we call them Resources. On the other hand - rendering http frameworks.
 
-Using this architecture allow us to add AdminBro to almost every app and present almost any type of resource.
+Using this architecture allows us to add AdminBro to almost every app and present almost any type of resource.
 
 ## The diagram
 
@@ -74,7 +81,7 @@ const start = async () => {
 start()
 ```
 
-To run it you will have to install dependencies:
+In order to run it you will have to install all the following dependencies:
 
 ```bash
 npm install --save admin-bro admin-bro-mongoose admin-bro-hapijs mongoose hapi
@@ -90,11 +97,11 @@ and this is what you get afer visiting http://localhost:8080/admin
 
 <img src="./screenshots/simpleapp.png">
 
-### What just happend?
+### What's just happened?
 
 So
-* We used hapijs as a framework for rendering AdminBro routes (admin-bro-hapijs plugin)
-* We wrapped mongoose ORM with admin-bro-mongoose adapter
+* We used [hapijs](https://hapijs.com/) as a framework for rendering AdminBro routes (admin-bro-hapijs plugin)
+* We wrapped [mongoose](https://mongoosejs.com/) ORM with `admin-bro-mongoose` adapter
 * We defined one mongoDb collection using mongoose ORM
 * We passed mongoose instance to the AdminBro via options.
 
@@ -102,11 +109,11 @@ And
 * AdminBro took the mongoose connection
 * Extracted all resources form it (`Admin` collection) using admin-bro-mongoose adapter
 * Generated List, Show, Edit and New views along with 3 actions: update, create and delete for those resources.
-* and finally he used hapijs to render routes under `'/admin'` path
+* and finally the AdminBro uses hapijs to render routes under `'/admin'` path
 
 ## What next
 
-So since now you know the basics it is time for more advanced topics:
+So since now you know the basics, it is time for more advanced topics:
 
 * [List of all AdminBro options](https://softwarebrothers.github.io/admin-bro/global.html#AdminBroOptions)
 * [Resource customization](https://softwarebrothers.github.io/admin-bro/tutorial-resource-decorators.html)
