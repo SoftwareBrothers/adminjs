@@ -10,13 +10,13 @@ block content
         h3.title
           a.button.is-text.is-back(href=h.listUrl(currentResource))
             span.icon.is-small
-              i.fas.fa-arrow-left
+              i.icomoon-pagination-left
           | Create #{currentResource.decorate().getResourceName()}
         .field.is-grouped
           .control
             button.button.is-primary(type='submit')
               span(class="icon is-small")
-                i.fas.fa-check
+                i.icomoon-save
               .btn-text Save
       .box
         for prop in properties.filter(p => p.isEditable())

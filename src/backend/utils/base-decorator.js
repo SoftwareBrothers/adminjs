@@ -130,17 +130,17 @@ class BaseDecorator {
     return {
       show: {
         path: this.helpers.showRecordUrl(resource, record),
-        icon: 'fas fa-info',
+        icon: 'icomoon-info',
         label: 'Info',
       },
       edit: {
         path: this.helpers.editRecordUrl(resource, record),
-        icon: 'fas fa-pen',
+        icon: 'icomoon-edit',
         label: 'Edit',
       },
       remove: {
         path: this.helpers.deleteRecordUrl(resource, record),
-        icon: 'fas fa-trash',
+        icon: 'icomoon-remove-2',
         label: 'Remove',
       },
     }
