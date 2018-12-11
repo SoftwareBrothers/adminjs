@@ -205,7 +205,7 @@ class BaseDecorator {
    */
   getValue({ record, property, where }) {
     if (property.type() === 'date') {
-      return moment(record.param(property.name())).format("D MMM YYYY")
+      return moment(record.param(property.name())).format("YYYY-MM-DD")
     }
     return record.param(property.name())
   }
