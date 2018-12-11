@@ -15,15 +15,16 @@
       .text-small, a
         font-weight: normal
         color: $ghost
-      a         
+      a
         display: flex
         align-items: center
-        &:not(.is-sortable) 
+        &:not(.is-sortable)
           pointer-events: none
           .sorting-icons
             display: none
-        svg 
+        i
           margin: 0 rem(5px)
+          color: $cornflower-blue
       .text-small.active, path
         color: $cornflower-blue
     tr
