@@ -19,11 +19,13 @@ class BaseProperty {
    *                               divided to parts by dots: i.e. 'address.street'
    * @param  {String} options.type on if: id, string, float, number, boolean, date
    * @param  {String} options.isId true when field should be treated as an ID
+   * @param  {String} options.isSortable by default: true
    */
-  constructor({ path, type, isId }) {
+  constructor({ path, type, isId, isSortable = true}) {
     this._path = path
     this._type = type
     this._isId = isId
+    this._isSortable = isSortable
   }
 
   /**
@@ -73,6 +75,14 @@ class BaseProperty {
    */
   isId() {
     return this._isId
+  }
+
+  /**
+   * Indicates if given property can be sorted
+   * @return {Boolean}
+   */
+  isSortable() {
+    return this._isSortable
   }
 }
 

@@ -3,7 +3,7 @@ const Renderer = require('../utils/renderer')
 
 /**
  * base class for all controllers in the application
- * It initializes this.view with databases and it load helpers
+ * It initializes this.data with databases and it load helpers
  * Also it stores this._admin (instance of {@link Admin}) locally
  *
  * @namespace Controllers
@@ -17,9 +17,9 @@ class BaseController {
    */
   constructor({ admin }, currentAdmin) {
     this._admin = admin
-    this.view = {}
-    this.view.currentAdmin = currentAdmin
-    this.view.resources = admin.resources.reduce((memo, resource) => {
+    this.data = {}
+    this.data.currentAdmin = currentAdmin
+    this.data.resources = admin.resources.reduce((memo, resource) => {
       const parent = resource.decorate().getParent()
       const parentName = parent.name
       if (memo[parentName]) {
@@ -30,7 +30,7 @@ class BaseController {
       memo[parentName].icon = parent.icon
       return memo
     }, {})
-    this.view.h = new ViewHelpers({ admin })
+    this.data.h = new ViewHelpers({ admin })
   }
 
   /**
