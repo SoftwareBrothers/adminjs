@@ -5,6 +5,7 @@ include ../mixins/confirmDialog
 
 block content
   section.table-list
+    +confirm-dialog('Remove record', 'Are you sure you want remove this item', 'Remove')
     +breadcrumb(currentResource)
     .column
       .level
@@ -58,7 +59,7 @@ block content
                         .dropdown-content
                           for action in actions
                             -remove = action === actions['remove']
-                            a.button.is-white(class={ 'dialog-trigger': remove } data-path=remove && action.path href=!remove && action.path)
+                            a.button.is-white(data-confirm-dialog=remove && action.path href=!remove && action.path)
                               span.icon
                                 i(class=action.icon)
                               .btn-text=action.label
@@ -80,5 +81,4 @@ block content
                   i.fas.fa-angle-right.fa-lg
     else
       +emptyTable(h.newRecordUrl(currentResource))
-    +confirm-dialog('Remove record', 'Are you sure you want remove this item', 'Remove')
   

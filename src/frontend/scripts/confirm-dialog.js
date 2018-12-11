@@ -1,9 +1,11 @@
 $(document).ready(() => {
-  $('a.dialog-trigger').click(event => showDialog(event))
+  const $confirmDialog = $('.confirm-dialog')
+  $('[data-confirm-dialog]').click(event => showDialog(event))
+  $('.confirm-cancel').click(() => $confirmDialog.removeClass('active'))
 
   const showDialog = event => {
-    const path = $(event.currentTarget).data('path')
-    $('.confirm-dialog').addClass('active')
+    const path = $(event.currentTarget).data('confirm-dialog')
+    $confirmDialog.addClass('active')
     $('.confirm-accept').attr('href', path);
   }
 })
