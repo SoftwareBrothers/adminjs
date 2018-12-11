@@ -176,11 +176,12 @@ class BaseDecorator {
 
   /**
    * Change name to the Property object
+   * Custom Properties are not sortable
    * @param  {String} propertyName [description]
    * @return {BaseProperty}              [description]
    */
   nameToProperty(propertyName) {
-    return this._resource.property(propertyName) || new BaseProperty({ path: propertyName })
+    return this._resource.property(propertyName) || new BaseProperty({ path: propertyName, isSortable: false })
   }
 
   /**
