@@ -18,6 +18,10 @@
       a         
         display: flex
         align-items: center
+        &:not(.is-sortable) 
+          pointer-events: none
+          .sorting-icons
+            display: none
         svg 
           margin: 0 rem(5px)
       .text-small.active, path
