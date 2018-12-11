@@ -31,7 +31,7 @@ block content
                   th(class= { 'main' : prop.isTitle() })
                     - isSortedByCurrentPropName = sort.sortBy === prop.name()
                     - direction = sort.direction === 'asc' && isSortedByCurrentPropName ? 'desc' : 'asc'
-                    a(href=h.listUrl(currentResource, { sort: { sortBy: prop.name(), sortDirection: direction }}))
+                    a(href=h.listUrl(currentResource, { page, sort: { sortBy: prop.name(), direction }}))
                       .text-small(class={ 'active' : isSortedByCurrentPropName })=h._.startCase(prop.name())
                       .sorting-icons(class={ 'hidden' : !isSortedByCurrentPropName })
                         i.fas(class=`fa-caret-${sort.direction === 'asc' ? 'up' : 'down'}`)
@@ -60,18 +60,21 @@ block content
                               span.icon
                                 i(class=action.icon)
                               .btn-text=action.label
-                    
+                              
           - pages = h.paginate(total, page, perPage).pages
           if pages.length > 1
             .level-item.pagination-content
               .pagination
-                a.button.is-white
+                - isLastPage = pages.indexOf(page) === pages.length - 1
+                - isFirstPage = pages.indexOf(page) === 0
+                a.button.is-white(class={ 'disabled' : isFirstPage } href=h.listUrl(currentResource, { page: page - 1, sort}))
                  i.fas.fa-angle-left.fa-lg
                 for p in pages
-                  a.button.is-white(class={ 'active' : p == page }
-                    href=h.listUrl(currentResource, { page: p })
+                  a.pages.button.is-white(class={ 'active' : p === page }
+                    href=h.listUrl(currentResource, { page: p, sort})
                   )= p
-                a.button.is-white
+                a.current-page.hidden.button.is-white= page
+                a.button.is-white(class={ 'disabled' : isLastPage } href=h.listUrl(currentResource, { page: page + 1, sort }))
                   i.fas.fa-angle-right.fa-lg
     else
       +emptyTable(h.newRecordUrl(currentResource))
