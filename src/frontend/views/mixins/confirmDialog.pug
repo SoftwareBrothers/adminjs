@@ -1,0 +1,10 @@
+mixin confirm-dialog(title, content, btnTitle)
+  .confirm-dialog
+    .border-box.has-text-centered
+      .confirm-title= title
+      .content= content
+      .confirm-buttons
+        a.confirm-accept.button.is-primary(href='')
+          .btn-text= btnTitle
+        a.confirm-cancel.button.is-primary.is-transparent(href='')
+          .btn-text Cancel

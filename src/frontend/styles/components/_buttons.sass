@@ -27,20 +27,27 @@
     margin-right: rem(16px)
     &:hover
       color: $woodsmoke
+
 .button.is-primary
   background-color: $cornflower-blue
   &:hover
     background-color: $waikawa-gray
-.button.is-primary.is-outlined
+.button.is-primary.is-transparent
+  background-color: transparent
   border-color: $cornflower-blue
   color: $cornflower-blue
   &:hover
     background-color: $waikawa-gray
     border-color: $waikawa-gray
+    color: $white
 .button.is-white.active
   background-color: $cornflower-blue
   color: $white
 
-.is-grouped .button
-  width: rem(90px)
-  text-align: center
+.is-grouped
+  .button
+    width: rem(90px)
+    text-align: center
+  @include media-breakpoint-down($media-min-tablet-width - 1px)
+    margin-top: rem(14px)
+  

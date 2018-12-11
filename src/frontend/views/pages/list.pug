@@ -1,6 +1,7 @@
 extends ../layout/layout
 include ../mixins/breadcrumb
 include ../mixins/emptyTable
+include ../mixins/confirmDialog
 
 block content
   section.table-list
@@ -17,7 +18,7 @@ block content
                 .btn-text Add new
             //-  TODO - uncomment when custom actions will be ready
             //- .control
-            //-   a.button.is-primary.is-outlined
+            //-   a.button.is-primary.is-transparent
             //-     span.icon
             //-       i.fas.fa-download.fa-xs
             //-     .btn-text Export
@@ -56,7 +57,8 @@ block content
                       .dropdown-menu
                         .dropdown-content
                           for action in actions
-                            a.button.is-white(href=action.path)
+                            -remove = action === actions['remove']
+                            a.button.is-white(class={ 'dialog-trigger': remove } data-path=remove && action.path href=!remove && action.path)
                               span.icon
                                 i(class=action.icon)
                               .btn-text=action.label
@@ -78,3 +80,5 @@ block content
                   i.fas.fa-angle-right.fa-lg
     else
       +emptyTable(h.newRecordUrl(currentResource))
+    +confirm-dialog('Remove record', 'Are you sure you want remove this item', 'Remove')
+  

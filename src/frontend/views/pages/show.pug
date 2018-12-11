@@ -1,6 +1,7 @@
 extends ../layout/layout
 include ../mixins/form-group
 include ../mixins/breadcrumb
+include ../mixins/confirmDialog
 
 block content
   secton.show-details
@@ -17,9 +18,10 @@ block content
           - actions = currentResource.decorate().getRecordActions(record)
           for key in ['edit', 'remove']
             - action = actions[key]
+            - remove = key === 'remove'
             if action
               .control
-                a.button.is-primary(href=action.path)
+                a.button.is-primary(class={ 'dialog-trigger': remove } data-path=remove && action.path href=!remove && action.path)
                   span.icon
                     i(class=`fas fa-${action.icon}`)
                   .btn-text=action.label
@@ -34,3 +36,4 @@ block content
                 .text-small #{h._.startCase(prop.name())}
                 div(class={ 'feature' : properties.indexOf(prop) === 0 })
                   != currentResource.decorate().getValue({ record, property: prop, where: 'show' })
+    +confirm-dialog('Remove record', 'Are you sure you want remove this item', 'Remove')
