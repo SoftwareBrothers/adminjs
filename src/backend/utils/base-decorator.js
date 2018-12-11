@@ -1,5 +1,6 @@
 const BaseProperty = require('../adapters/base-property')
 const ViewHelpers = require('./view-helpers')
+const moment = require('moment')
 
 const DEFAULT_MAX_ITEMS_IN_LIST = 5
 
@@ -204,6 +205,9 @@ class BaseDecorator {
    * @return {String}                        Html string which will be rendered
    */
   getValue({ record, property, where }) {
+    if (property.type() === 'date') {
+      return moment(record.param(property.name())).format("YYYY-MM-DD")
+    }
     return record.param(property.name())
   }
 }
