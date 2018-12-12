@@ -1,6 +1,8 @@
 extends ../layout/layout.pug
 
 block content
+  if dashboardContent
+    != dashboardContent
   section.is-fullheight.hero.dashboard
     .hero-body
       .column.is-6.is-offset-3.has-text-centered
