@@ -17,9 +17,9 @@ mixin formGroup(prop, value, error)
       when 'date'
         label.label(for=prop.name)= prop.name()
         .control.has-icons-right
-          input.input(type='date' id=prop.name() name=prop.name() value=value)
+          input.input.pickadate(type='text' id=prop.name() name=prop.name() value=h.moment(value).format('YYYY-MM-DD'))
           span.icon.is-small.is-right
-            i.fas.fa-calendar
+            i.icomoon-calendar
       when 'float'
         label.label(for=prop.name)= prop.name()
         .control

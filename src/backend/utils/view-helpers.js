@@ -1,5 +1,6 @@
 const paginate = require('jw-paginate')
 const lodash = require('lodash')
+const moment = require('moment')
 
 /**
  * Collection of helper methods available in the views
@@ -17,6 +18,13 @@ class ViewHelpers {
      * @see https://lodash.com/
      */
     this._ = lodash
+
+    /**
+     * Moment
+     * @type {Moment}
+     * @see https://momentjs.com/
+     */
+    this.moment = moment
 
     /**
      * Paginate
