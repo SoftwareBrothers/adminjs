@@ -1,6 +1,6 @@
+const moment = require('moment')
 const BaseProperty = require('../adapters/base-property')
 const ViewHelpers = require('./view-helpers')
-const moment = require('moment')
 
 const DEFAULT_MAX_ITEMS_IN_LIST = 5
 
@@ -106,9 +106,8 @@ class BaseDecorator {
     if (overridenProperties) {
       return overridenProperties.map(property => this.nameToProperty(property))
     }
-    return this._resource.properties().filter((property) => {
-      return property.isVisible()
-    }).slice(0, DEFAULT_MAX_ITEMS_IN_LIST)
+    return this._resource.properties()
+      .filter(property => property.isVisible()).slice(0, DEFAULT_MAX_ITEMS_IN_LIST)
   }
 
   /**
@@ -153,12 +152,20 @@ class BaseDecorator {
   getAllAvailableActions(defaultActions, recordActions, record) {
     return recordActions.reduce((obj, key) => {
       if (typeof key === 'object') {
-        return { ...obj, ...{
-            [key.id]: {...key, path: this.helpers.customRecordActionUrl(this._resource, record, key.id) },
+        return {
+          ...obj,
+          ...{
+            [key.id]: {
+              ...key,
+              path: this.helpers.customRecordActionUrl(this._resource, record, key.id),
+            },
           },
         }
       }
-      return { ...obj, ...(Object.keys(defaultActions).includes(key) && { [key]: defaultActions[key] }) }
+      return {
+        ...obj,
+        ...(Object.keys(defaultActions).includes(key) && { [key]: defaultActions[key] }),
+      }
     }, {})
   }
 
@@ -206,7 +213,7 @@ class BaseDecorator {
    */
   getValue({ record, property, where }) {
     if (property.type() === 'date') {
-      return moment(record.param(property.name())).format("YYYY-MM-DD")
+      return moment(record.param(property.name())).format('YYYY-MM-DD')
     }
     return record.param(property.name())
   }

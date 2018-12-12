@@ -1,8 +1,10 @@
 extends ../layout/layout
 include ../mixins/form-group
 include ../mixins/breadcrumb
+include ../mixins/confirmDialog
 
 block content
+  +confirm-dialog('Remove record', 'Are you sure you want remove this item', 'Remove')
   +breadcrumb(currentResource, record, 'edit')
   section.view-edit
     form(method='POST' action=h.showRecordUrl(currentResource, record))
@@ -21,7 +23,7 @@ block content
           - actionRemove = currentResource.decorate().getRecordActions(record)['remove']
           if actionRemove
             .control
-              a.button.is-primary.is-outlined(href=actionRemove.path)
+              a.button.is-primary.is-transparent(data-confirm-dialog=actionRemove.path)
                 span.icon.is-small
                   i(class=`${actionRemove.icon}`)
                 .btn-text=actionRemove.label
