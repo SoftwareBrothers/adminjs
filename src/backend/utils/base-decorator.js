@@ -106,7 +106,8 @@ class BaseDecorator {
     if (overridenProperties) {
       return overridenProperties.map(property => this.nameToProperty(property))
     }
-    return this._resource.properties().filter(property => property.isVisible()).slice(0, DEFAULT_MAX_ITEMS_IN_LIST)
+    return this._resource.properties()
+      .filter(property => property.isVisible()).slice(0, DEFAULT_MAX_ITEMS_IN_LIST)
   }
 
   /**
