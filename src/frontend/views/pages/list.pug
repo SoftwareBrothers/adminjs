@@ -1,9 +1,11 @@
 extends ../layout/layout
 include ../mixins/breadcrumb
 include ../mixins/emptyTable
+include ../mixins/confirmDialog
 
 block content
   section.table-list
+    +confirm-dialog('Remove record', 'Are you sure you want remove this item', 'Remove')
     +breadcrumb(currentResource)
     .column
       .level
@@ -13,11 +15,11 @@ block content
             .control
               a.button.is-primary(href=h.newRecordUrl(currentResource))
                 span.icon
-                  i.fas.fa-plus.fa-xs
+                  i.icomoon-add
                 .btn-text Add new
             //-  TODO - uncomment when custom actions will be ready
             //- .control
-            //-   a.button.is-primary.is-outlined
+            //-   a.button.is-primary.is-transparent
             //-     span.icon
             //-       i.fas.fa-download.fa-xs
             //-     .btn-text Export
@@ -31,10 +33,11 @@ block content
                   th(class= { 'main' : prop.isTitle() })
                     - isSortedByCurrentPropName = sort.sortBy === prop.name()
                     - direction = sort.direction === 'asc' && isSortedByCurrentPropName ? 'desc' : 'asc'
-                    a(href=h.listUrl(currentResource, { page, sort: { sortBy: prop.name(), direction }}))
+                    - sortable = prop.isSortable()
+                    a(class={ 'is-sortable' : sortable } href=sortable && h.listUrl(currentResource, { page, sort: { sortBy: prop.name(), direction }})) 
                       .text-small(class={ 'active' : isSortedByCurrentPropName })=h._.startCase(prop.name())
-                      .sorting-icons(class={ 'hidden' : !isSortedByCurrentPropName })
-                        i.fas(class=`fa-caret-${sort.direction === 'asc' ? 'up' : 'down'}`)
+                      .text-small.sorting-icons(class={ 'hidden' : !isSortedByCurrentPropName })
+                        i(class=`icomoon-dropdown-${sort.direction === 'asc' ? 'open' : 'close'}`)
                 th
             tbody
               for record in records
@@ -52,15 +55,16 @@ block content
                       .dropdown-trigger
                         .dots
                            span.icon
-                            i.fas.fa-ellipsis-h
+                            i.icomoon-options
                       .dropdown-menu
                         .dropdown-content
                           for action in actions
-                            a.button.is-white(href=action.path)
+                            -remove = action === actions['remove']
+                            a.button.is-white(data-confirm-dialog=remove && action.path href=!remove && action.path)
                               span.icon
                                 i(class=action.icon)
                               .btn-text=action.label
-                              
+
           - pages = h.paginate(total, page, perPage).pages
           if pages.length > 1
             .level-item.pagination-content
@@ -68,13 +72,14 @@ block content
                 - isLastPage = pages.indexOf(page) === pages.length - 1
                 - isFirstPage = pages.indexOf(page) === 0
                 a.button.is-white(class={ 'disabled' : isFirstPage } href=h.listUrl(currentResource, { page: page - 1, sort}))
-                 i.fas.fa-angle-left.fa-lg
+                 i.icomoon-pagination-left
                 for p in pages
                   a.pages.button.is-white(class={ 'active' : p === page }
                     href=h.listUrl(currentResource, { page: p, sort})
                   )= p
                 a.current-page.hidden.button.is-white= page
                 a.button.is-white(class={ 'disabled' : isLastPage } href=h.listUrl(currentResource, { page: page + 1, sort }))
-                  i.fas.fa-angle-right.fa-lg
+                  i.icomoon-pagination-right
     else
       +emptyTable(h.newRecordUrl(currentResource))
+  

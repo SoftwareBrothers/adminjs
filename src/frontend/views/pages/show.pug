@@ -1,9 +1,11 @@
 extends ../layout/layout
 include ../mixins/form-group
 include ../mixins/breadcrumb
+include ../mixins/confirmDialog
 
 block content
   secton.show-details
+    +confirm-dialog('Remove record', 'Are you sure you want remove this item', 'Remove')
     - actionName = customAction && customAction.name
     +breadcrumb(currentResource, record, actionName)
     .column
@@ -11,17 +13,18 @@ block content
         .title
           a.button.is-text.is-back(href=h.listUrl(currentResource))
             span.icon.is-small
-              i.fas.fa-arrow-left
+              i.icomoon-pagination-left
           | #{actionName || 'Details'}
         .field.is-grouped
           - actions = currentResource.decorate().getRecordActions(record)
           for key in ['edit', 'remove']
             - action = actions[key]
+            - remove = key === 'remove'
             if action
               .control
-                a.button.is-primary(href=action.path)
+                a.button.is-primary(data-confirm-dialog=remove && action.path href=!remove && action.path)
                   span.icon
-                    i(class=`fas fa-${action.icon}`)
+                    i(class=`${action.icon}`)
                   .btn-text=action.label
     .column
       .border-box

@@ -1,3 +1,4 @@
+const moment = require('moment')
 const BaseProperty = require('../adapters/base-property')
 const ViewHelpers = require('./view-helpers')
 
@@ -105,9 +106,8 @@ class BaseDecorator {
     if (overridenProperties) {
       return overridenProperties.map(property => this.nameToProperty(property))
     }
-    return this._resource.properties().filter((property) => {
-      return property.isVisible()
-    }).slice(0, DEFAULT_MAX_ITEMS_IN_LIST)
+    return this._resource.properties()
+      .filter(property => property.isVisible()).slice(0, DEFAULT_MAX_ITEMS_IN_LIST)
   }
 
   /**
@@ -130,17 +130,17 @@ class BaseDecorator {
     return {
       show: {
         path: this.helpers.showRecordUrl(resource, record),
-        icon: 'fas fa-info',
+        icon: 'icomoon-info',
         label: 'Info',
       },
       edit: {
         path: this.helpers.editRecordUrl(resource, record),
-        icon: 'fas fa-pen',
+        icon: 'icomoon-edit',
         label: 'Edit',
       },
       remove: {
         path: this.helpers.deleteRecordUrl(resource, record),
-        icon: 'fas fa-trash',
+        icon: 'icomoon-remove-2',
         label: 'Remove',
       },
     }
@@ -152,12 +152,20 @@ class BaseDecorator {
   getAllAvailableActions(defaultActions, recordActions, record) {
     return recordActions.reduce((obj, key) => {
       if (typeof key === 'object') {
-        return { ...obj, ...{
-            [key.id]: {...key, path: this.helpers.customRecordActionUrl(this._resource, record, key.id) },
+        return {
+          ...obj,
+          ...{
+            [key.id]: {
+              ...key,
+              path: this.helpers.customRecordActionUrl(this._resource, record, key.id),
+            },
           },
         }
       }
-      return { ...obj, ...(Object.keys(defaultActions).includes(key) && { [key]: defaultActions[key] }) }
+      return {
+        ...obj,
+        ...(Object.keys(defaultActions).includes(key) && { [key]: defaultActions[key] }),
+      }
     }, {})
   }
 
@@ -176,11 +184,12 @@ class BaseDecorator {
 
   /**
    * Change name to the Property object
+   * Custom Properties are not sortable
    * @param  {String} propertyName [description]
    * @return {BaseProperty}              [description]
    */
   nameToProperty(propertyName) {
-    return this._resource.property(propertyName) || new BaseProperty({ path: propertyName })
+    return this._resource.property(propertyName) || new BaseProperty({ path: propertyName, isSortable: false })
   }
 
   /**
@@ -203,6 +212,9 @@ class BaseDecorator {
    * @return {String}                        Html string which will be rendered
    */
   getValue({ record, property, where }) {
+    if (property.type() === 'date') {
+      return moment(record.param(property.name())).format('YYYY-MM-DD')
+    }
     return record.param(property.name())
   }
 }

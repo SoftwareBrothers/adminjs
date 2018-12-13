@@ -1,8 +1,10 @@
 extends ../layout/layout
 include ../mixins/form-group
 include ../mixins/breadcrumb
+include ../mixins/confirmDialog
 
 block content
+  +confirm-dialog('Remove record', 'Are you sure you want remove this item', 'Remove')
   +breadcrumb(currentResource, record, 'edit')
   section.view-edit
     form(method='POST' action=h.showRecordUrl(currentResource, record))
@@ -10,20 +12,20 @@ block content
         h3.title
           a.button.is-text.is-back(href=h.listUrl(currentResource))
             span.icon.is-small
-              i.fas.fa-arrow-left
+              i.icomoon-pagination-left
           | Edit
         .field.is-grouped
           .control
             button.button.is-primary(type='submit')
               span(class="icon is-small")
-                i(class="fas fa-check")
+                i(class="icomoon-save")
               .btn-text Save
           - actionRemove = currentResource.decorate().getRecordActions(record)['remove']
           if actionRemove
             .control
-              a.button.is-primary.is-outlined(href=actionRemove.path)
+              a.button.is-primary.is-transparent(data-confirm-dialog=actionRemove.path)
                 span.icon.is-small
-                  i(class=`fas fa-${actionRemove.icon}`)
+                  i(class=`${actionRemove.icon}`)
                 .btn-text=actionRemove.label
       .box
         for prop in properties.filter(p => p.isEditable())
