@@ -19,7 +19,7 @@ class BaseDatabase {
    * @return {Boolean}          if given adapter supports this database - returns true
    */
   static isAdapterFor(database) {
-    throw new NotImplementedError()
+    throw new NotImplementedError('BaseDatabase.isAdapterFor')
   }
 
   /**
@@ -28,7 +28,7 @@ class BaseDatabase {
    * @return {BaseResource[]}
    */
   resources() {
-    throw new NotImplementedError()
+    throw new NotImplementedError('BaseDatabase#resources')
   }
 }
 

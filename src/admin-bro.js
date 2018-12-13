@@ -187,5 +187,4 @@ AdminBro.registeredAdapters = []
 
 AdminBro.VERSION = pkg.version
 
-
 module.exports = AdminBro

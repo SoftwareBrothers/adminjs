@@ -24,6 +24,9 @@ class BaseProperty {
     this._path = path
     this._type = type
     this._isId = isId
+    if (!this._path) {
+      throw new Error('you have to give path parameter when creating BaseProperty')
+    }
   }
 
   /**

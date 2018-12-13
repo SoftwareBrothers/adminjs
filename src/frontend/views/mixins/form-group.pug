@@ -20,6 +20,12 @@ mixin formGroup(prop, value, error)
           input.input(type='date' id=prop.name() name=prop.name() value=value)
           span.icon.is-small.is-right
             i.fas.fa-calendar
+      when 'datetime'
+        label.label(for=prop.name)= prop.name()
+        .control.has-icons-right
+          input.input(type='datetime-local' id=prop.name() name=prop.name() value=value)
+          span.icon.is-small.is-right
+            i.fas.fa-calendar
       when 'float'
         label.label(for=prop.name)= prop.name()
         .control
