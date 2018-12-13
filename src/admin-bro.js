@@ -6,7 +6,7 @@ const BaseResource = require('./backend/adapters/base-resource')
 const BaseDatabase = require('./backend/adapters/base-database')
 const BaseRecord = require('./backend/adapters/base-record')
 const BaseProperty = require('./backend/adapters/base-property')
-const BasePage = require('./backend/adapters/base-page')
+const PageBuilder = require('./backend/page-builder/page-builder')
 const ValidationError = require('./backend/utils/validation-error')
 const ResourcesFactory = require('./backend/utils/resources-factory')
 
@@ -96,7 +96,7 @@ class AdminBro {
     const { databases, resources } = this.options
     const resourcesFactory = new ResourcesFactory(this, AdminBro.registeredAdapters)
     this.resources = resourcesFactory.buildResources({ databases, resources })
-    this.dashboardPage = options.dashboard || 'DefaultDashboard'
+    this.DashboardPage = options.dashboard || 'DefaultDashboard'
   }
 
   /**
@@ -180,7 +180,7 @@ AdminBro.BaseRecord = BaseRecord
  */
 AdminBro.BaseProperty = BaseProperty
 
-AdminBro.BasePage = BasePage
+AdminBro.PageBuilder = PageBuilder
 
 /**
  * ValidationError
