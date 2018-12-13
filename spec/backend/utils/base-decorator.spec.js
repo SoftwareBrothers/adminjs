@@ -17,7 +17,8 @@ describe('BaseDecorator', function () {
           super(params)
           this.overwritenProperty = 'overwritenPropertyValue'
         }
-        overwritenFunction() { return 'overwritenFunctionValue' }
+
+        overwritenFunction() { return 'overwritenFunctionValue' } // eslint-disable-line class-methods-use-this
       }
       this.decorator = new Decorator(this.args)
     })

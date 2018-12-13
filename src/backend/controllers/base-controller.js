@@ -25,9 +25,9 @@ class BaseController {
       if (memo[parentName]) {
         memo[parentName].push(resource)
       } else {
-        memo[parentName] = [resource]
+        memo[parentName] = [resource] // eslint-disable-line no-param-reassign
       }
-      memo[parentName].icon = parent.icon
+      memo[parentName].icon = parent.icon // eslint-disable-line no-param-reassign
       return memo
     }, {})
     this.data.h = new ViewHelpers({ admin })
@@ -40,7 +40,8 @@ class BaseController {
    * @return {String}       rendered html
    */
   render(view, data) {
-    return new Renderer(view, data).render()
+    const renderData = data || this.data
+    return new Renderer(view, renderData).render()
   }
 }
 

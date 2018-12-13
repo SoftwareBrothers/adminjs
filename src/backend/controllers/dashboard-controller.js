@@ -1,7 +1,9 @@
+/* eslint no-unused-vars: 0 */
+
 const BaseController = require('./base-controller.js')
 
 class DashboardController extends BaseController {
-  index({params, query, payload}, response) {
+  index({ params, query, payload }, response) {
     return this.render('pages/dashboard', this.data)
   }
 }

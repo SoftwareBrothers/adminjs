@@ -1,4 +1,4 @@
-/* eslint class-methods-use-this: 0 */
+/* eslint class-methods-use-this: 0 no-unused-vars: 0 */
 
 const NotImplementedError = require('../utils/not-implemented-error')
 

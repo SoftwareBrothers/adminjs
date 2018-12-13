@@ -51,7 +51,7 @@ class BaseRecord {
   /**
    * Updates given Record in the datastore. Practically it invokes
    * {@link BaseResource.update} method.
-   * 
+   *
    * When validation error occures it stores that to {@link BaseResource.errors}
    *
    * @param  {Object} params all field with values which has to be updated

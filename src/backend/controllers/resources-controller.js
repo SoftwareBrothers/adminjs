@@ -1,3 +1,5 @@
+/* eslint no-unused-vars: 0 */
+
 const BaseController = require('./base-controller.js')
 
 class ResourcesController extends BaseController {

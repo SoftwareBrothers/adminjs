@@ -1,4 +1,4 @@
-/* eslint class-methods-use-this: 0 */
+/* eslint class-methods-use-this: 0 no-unused-vars: 0 */
 
 const NotImplementedError = require('../utils/not-implemented-error')
 const BaseRecord = require('./base-record')
@@ -26,6 +26,7 @@ class BaseResource {
   static isAdapterFor(rawResource) {
     throw new NotImplementedError('BaseResource.isAdapterFor')
   }
+
   /**
    * The name of the database to which resource belongs. When resource is
    * a mongoose model it should be database name of the mongo database.
@@ -37,7 +38,6 @@ class BaseResource {
     throw new NotImplementedError('BaseResource#databaseName')
   }
 
-  
   /**
    * Returns type of the database. It is used to compute sidebar icon for
    * given resource. Default: 'database'
@@ -98,14 +98,16 @@ class BaseResource {
   /**
    * Returns actual records for given resource
    *
-   * @param  {Object} query           query
+   * @param  {Object} query                     query [not supported right now]
    * @param  {Object} options
-   * @param  {Number} options.limit   how many records should be taken
-   * @param  {Number} options.offset  offset
-   * @param  {Number} options.sort    sort
-   * @return {BaseRecord[]}           list of records
+   * @param  {Number} options.limit             how many records should be taken
+   * @param  {Number} options.offset            offset
+   * @param  {Number} options.sort              sort
+   * @param  {Number} options.sort.sortBy       sortable field
+   * @param  {Number} options.sort.direction    either asc or desc
+   * @return {BaseRecord[]}                     list of records
    */
-  async find(query, { limit=20, offset=0, sort={} }) {
+  async find(query, { limit = 20, offset = 0, sort = {} }) {
     throw new NotImplementedError('BaseResource#find')
   }
 
@@ -170,7 +172,7 @@ class BaseResource {
    */
   assignDecorator(Decorator, admin) {
     this._Decorator = Decorator
-    this._decorated = new Decorator({ resource: this, admin: admin })
+    this._decorated = new Decorator({ resource: this, admin })
   }
 
   /**
