@@ -9,6 +9,8 @@ block content
             .overview-title= customDashboard.title
             .overview-subtitle= customDashboard.subtitle
       != customDashboard.content
+      script.
+        const custom = !{JSON.stringify(customDashboard)}
     else
       section.is-fullheight.hero
         .hero-body

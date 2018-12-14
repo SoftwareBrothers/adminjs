@@ -23,6 +23,36 @@
          color: $white 
    .dashboard-content
       transform: translateY(-60px)
+      .table .text-small
+         color: $spun-pearl
+      .item-spacer
+         height: rem(1px)
+         background-color: $athens-gray
+         margin: rem(24px) 0
+      .info-list
+         .info-subtitle
+            color: $spun-pearl
+            margin-bottom: rem(38px)
+         .item
+            display: flex
+            .item-img
+               max-width: 50%
+               margin-right: rem(12px)
+            .item-title
+               color: $mako
+            .item-content
+               color: $storm-gray
+            // .item-status
+            //    text-align: center
+            //    padding: 0 rem(12px)
+            //    display: inline-block
+            //    height: rem(25px)
+            //    border-radius: rem(2px)
+            //    background-color: $spun-pearl
+            //    color: $white
+      .title
+         fontsize: rem(25px)
+         color: $mako
       .border-box
          padding: rem(25px)
       .dashboard-block
@@ -39,3 +69,7 @@
             flex-wrap: wrap
             .value 
                font-size: 34px
+      canvas
+         // we have to override chart.js dimensions
+         width: 100% !important
+         height: auto !important

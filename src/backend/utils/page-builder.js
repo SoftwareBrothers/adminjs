@@ -1,3 +1,5 @@
+/* eslint-disable object-curly-newline */
+/* eslint-disable indent */
 /**
  * PageBuilder class contains methods which allows you to create HTML content as JavaScript string
  *
@@ -82,7 +84,7 @@ class PageBuilder {
   convertedPageContent() {
     if (this.pageContent.length > 0) {
       const pageContentAsString = this.pageContent.join('')
-      return `<div class="columns is-multiline dashboard-content">${pageContentAsString}</div>`
+      return `<div class="columns is-multiline dashboard-content"> ${pageContentAsString}</div>`
     }
     return null
   }
@@ -110,8 +112,118 @@ class PageBuilder {
     this.addBlock(options, { color: '#f0616f' })
   }
 
+  addChart(options) {
+    const chart = '<div class="column is-12-tablet column is-6-desktop">-<canvas class="chart" id="myChart"></canvas></div>'
+    this.pageContent.push(chart)
+  }
+
+  addInfoList(options) {
+    // eslint-disable-next-line object-curly-newline
+    const { items, columns, offset, title, subtitle } = options
+    const itemsContent = []
+    items.forEach((item) => {
+      itemsContent.push(this.addInfoListItem(item))
+    })
+    const infoList = `
+      <div class="column is-12-tablet is-${columns}-desktop is-offset-${offset || 0}"> 
+        <div class="info-list border-box">
+          <div class="h2">
+            ${title}
+          </div>
+          <div class="info-subtitle">
+            ${subtitle}
+          </div>
+          <div class="items">
+            ${itemsContent.join('<div class="item-spacer"> </div>')}
+          </div>
+        </div>
+      </div>`
+
+    this.pageContent.push(infoList)
+  }
+
+  // eslint-disable-next-line class-methods-use-this
+  addInfoListItem(item) {
+    const { title, subtitle, content, status, imgSrc } = item
+    const imgHtml = `
+      <div class="item-img">
+        <img src=${imgSrc}>
+        </img>
+      </div>
+      `
+    const statusHtml = `
+      <div class="item-status">
+        ${status}
+      </div>`
+    const htmlItem = `
+      <div class="item"> 
+        ${imgSrc ? imgHtml : ''} 
+        <div class="item-text">
+          <div class="item-title">
+            ${title}
+          </div>
+          <div class="item-content">
+            ${subtitle}
+          </div>
+            ${content || ''}
+          ${status ? statusHtml : ''}
+        </div>
+      </div>
+      `
+    return htmlItem
+  }
+
+  addInfoTable(options) {
+    const { title, columns, items, offset, headers } = options
+    const headersHtml = headers.map(header => `<th class="text-small"> ${header} </th>`)
+    const tableRow = items.map(item => `
+      <tr> 
+        ${
+          headers.map(header => `<td> ${item[header]} </td>`).join('')
+        }
+      </tr>`)
+    const infoTable = `
+    <div class="column is-12-tablet is-${columns}-desktop is-offset-${offset || 0}"> 
+      <div class="border-box">
+        <div class="column h2">
+          ${title}
+        </div>
+        <table class="table is-fullwidth">
+          <thead>
+            <tr>
+              ${headersHtml.join('')}
+          </thead>
+          <tbody>
+            ${tableRow.join('')}
+          </tbody>
+        </table>
+      </div>
+    </div>
+    `
+    this.pageContent.push(infoTable)
+  }
+
+  addTextBox(options) {
+    const { title, content, columns, offset } = options
+    const textHtml = `
+      <div class="column is-12-tablet is-${columns}-desktop is-offset-${offset || 0}"> 
+        <div class="border-box">
+          <div class="h2">
+            ${title}
+          </div>
+          <div class="content">
+            ${content}
+          </div>
+        </div>
+      <div class="column is-12-tablet is-${columns}-desktop is-offset-${offset || 0}"> 
+      `
+    this.pageContent.push(textHtml)
+  }
+
   /**
    * Adds html element to pageContent
+   * Developer can declare size @param options.size and offset of each column individually
+   * title, icon, and of block @param options.size
    * @param {Object} options parts of a block element
    * @param {String} color block color
    */
