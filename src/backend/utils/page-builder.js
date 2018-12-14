@@ -72,12 +72,11 @@ class PageBuilder {
    * Can be overwritten in custom pages
    * @return {String}
    */
-
   build() {
     return this.convertedPageContent()
   }
 
-  /** Returns string from joined and wrapped  html elements array
+  /** Returns string from joined and wrapped array of html elements
    * @return {String}
    */
   convertedPageContent() {
@@ -88,6 +87,13 @@ class PageBuilder {
     return null
   }
 
+  /** Allows develepors to pick blocks in special colors
+   * Same for:
+   * @method addDangerBlock
+   * @method addSuccesBlock
+   * @method addWarningBlock
+   * @param  {Object} options
+   */
   addInfoBlock(options) {
     this.addBlock(options, { color: '#718af4' })
   }

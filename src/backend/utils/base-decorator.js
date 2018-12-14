@@ -17,11 +17,11 @@ const DEFAULT_MAX_ITEMS_IN_LIST = 5
  * class ArticleDecorator extends BaseDecorator {
  *   constructor(params) {
  *     super(params)
- *     this.resourceName = 'Artykuly'
+ *     this.resourceName = 'Articles'
  *     this.listProperties = ['title', 'content', 'publishedAt']
  *     this.showProperties = ['title', 'publishedAt']
  *     this.parent = {
- *       name: 'Wiedza',
+ *       name: 'Knowledge',
  *       icon: 'icon-bomb',
  *     }
  *     const publishAction = {
