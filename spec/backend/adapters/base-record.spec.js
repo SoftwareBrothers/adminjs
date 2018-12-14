@@ -16,10 +16,4 @@ describe('Record', function () {
       })
     })
   })
-
-  describe('#title', function () {
-    it('returns one of title-ish field when present', function () {
-      
-    })
-  })
 })

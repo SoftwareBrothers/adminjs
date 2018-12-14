@@ -1,4 +1,4 @@
-/* eslint class-methods-use-this: 0 */
+/* eslint class-methods-use-this: 0 object-curly-newline: 0 */
 
 const TITLE_COLUMN_NAMES = ['title', 'name', 'subject', 'email']
 
@@ -21,10 +21,13 @@ class BaseProperty {
    * @param  {String} options.isId true when field should be treated as an ID
    * @param  {String} options.isSortable by default: true
    */
-  constructor({ path, type, isId, isSortable = true}) {
+  constructor({ path, type, isId, isSortable = true }) {
     this._path = path
     this._type = type
     this._isId = isId
+    if (!this._path) {
+      throw new Error('you have to give path parameter when creating BaseProperty')
+    }
     this._isSortable = isSortable
   }
 

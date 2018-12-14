@@ -1,4 +1,4 @@
-/* eslint class-methods-use-this: 0 */
+/* eslint class-methods-use-this: 0 no-unused-vars: 0 */
 
 const NotImplementedError = require('../utils/not-implemented-error')
 
@@ -19,7 +19,7 @@ class BaseDatabase {
    * @return {Boolean}          if given adapter supports this database - returns true
    */
   static isAdapterFor(database) {
-    throw new NotImplementedError()
+    throw new NotImplementedError('BaseDatabase.isAdapterFor')
   }
 
   /**
@@ -28,7 +28,7 @@ class BaseDatabase {
    * @return {BaseResource[]}
    */
   resources() {
-    throw new NotImplementedError()
+    throw new NotImplementedError('BaseDatabase#resources')
   }
 }
 
