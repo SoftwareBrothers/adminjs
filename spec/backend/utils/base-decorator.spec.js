@@ -17,6 +17,7 @@ describe('BaseDecorator', function () {
           super(params)
           this.overwritenProperty = 'overwritenPropertyValue'
         }
+
         overwritenFunction() { return 'overwritenFunctionValue' }
       }
       this.decorator = new Decorator(this.args)
@@ -125,8 +126,8 @@ describe('BaseDecorator', function () {
         const showPath = helperStub.expectedResult.showRecordUrl
         const removePath = helperStub.expectedResult.deleteRecordUrl
         expect(this.ret).to.deep.include({
-          show: { path: showPath, icon: 'info', label: 'Info' },
-          remove: { path: removePath, icon: 'trash', label: 'Remove' },
+          show: { path: showPath, icon: 'icomoon-info', label: 'Info' },
+          remove: { path: removePath, icon: 'icomoon-remove-2', label: 'Remove' },
         })
       })
     })

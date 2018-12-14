@@ -17,10 +17,26 @@ const DEFAULT_MAX_ITEMS_IN_LIST = 5
  * class ArticleDecorator extends BaseDecorator {
  *   constructor(params) {
  *     super(params)
- *     this.resourceName = 'Article'
+ *     this.resourceName = 'Artykuly'
  *     this.listProperties = ['title', 'content', 'publishedAt']
  *     this.showProperties = ['title', 'publishedAt']
- *     this.parentName = 'Knowledge'
+ *     this.parent = {
+ *       name: 'Wiedza',
+ *       icon: 'icon-bomb',
+ *     }
+ *     const publishAction = {
+ *       id: 'publish',
+ *       icon: 'fas fa-share',
+ *       label: 'Publish',
+ *       action: (request, response, data) => {
+ *         const { method } = request
+ *         if (method === 'GET') {
+ *           return 'Some content or form which you want to place here'
+ *         }
+ *         return 'PUBLISH ACTION WORKS'
+ *       },
+ *     }
+ *     this.recordActions = ['show', 'edit', 'remove', publishAction]
  *   }
  *
  *   getValue({ record, property, where}) {
@@ -189,7 +205,8 @@ class BaseDecorator {
    * @return {BaseProperty}              [description]
    */
   nameToProperty(propertyName) {
-    return this._resource.property(propertyName) || new BaseProperty({ path: propertyName, isSortable: false })
+    return this._resource.property(propertyName)
+      || new BaseProperty({ path: propertyName, isSortable: false })
   }
 
   /**
