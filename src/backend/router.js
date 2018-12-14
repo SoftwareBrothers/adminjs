@@ -48,14 +48,14 @@ const Router = {
     action: 'index',
   }, {
     method: 'GET',
-    path: '/resources/{resourceId}/{recordId}',
-    Controller: ResourcesController,
-    action: 'show',
-  }, {
-    method: 'GET',
     path: '/resources/{resourceId}/new',
     Controller: ResourcesController,
     action: 'new',
+  }, {
+    method: 'GET',
+    path: '/resources/{resourceId}/{recordId}',
+    Controller: ResourcesController,
+    action: 'show',
   }, {
     method: 'POST',
     path: '/resources/{resourceId}',
