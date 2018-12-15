@@ -27,15 +27,15 @@ describe('PageBuilder', function () {
     })
 
     it('returns string of a HTML elements', function () {
-      this.pageBuilder.addBlock(options, this.type.succes)
+      this.pageBuilder.addBlock(options, this.types.succes)
       expect(this.pageBuilder.convertedPageContent()).to.be.a('string')
     })
   })
 
-  describe('#addBlock', function () {
-    it('adds html element to the pageContent', function () {
-      this.pageBuilder.addBlock(options, this.types.warning)
-      expect(this.pageBuilder.pageContent).to.have.lengthOf(1)
-    })
-  })
+  // describe('#addBlock', function () {
+  //   it('adds html element to the pageContent', function () {
+  //     this.pageBuilder.addBlock(options, this.types.warning)
+  //     expect(this.pageBuilder.pageContent).to.have.lengthOf(1)
+  //   })
+  // })
 })
