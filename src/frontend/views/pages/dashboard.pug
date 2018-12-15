@@ -10,7 +10,7 @@ block content
             .overview-subtitle= customDashboard.subtitle
       != customDashboard.content
       script.
-        const custom = !{JSON.stringify(customDashboard)}
+        const chartsModel = !{JSON.stringify(customDashboard.charts)}
     else
       section.is-fullheight.hero
         .hero-body

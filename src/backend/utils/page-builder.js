@@ -1,3 +1,6 @@
+/* eslint-disable class-methods-use-this */
+const NotImplementedError = require('../utils/not-implemented-error')
+
 /* eslint-disable object-curly-newline */
 /* eslint-disable indent */
 /**
@@ -66,7 +69,16 @@ class PageBuilder {
      * List of HTML elements as JavaScript string
      * @type {String[] | Function | null}
      */
-    this.pageContent = []
+    this._pageContent = []
+    this.title = null
+    this.subtitle = null
+    this.charts = {}
+    this.types = {
+      warning: '#ff9f89',
+      danger: '#f0616f',
+      succes: '#21c197',
+      info: '#718af4',
+    }
   }
 
   /**
@@ -74,56 +86,45 @@ class PageBuilder {
    * Can be overwritten in custom pages
    * @return {String}
    */
+  async render() {
+    await this.build()
+    return {
+      title: this.title,
+      subtitle: this.subtitle,
+      content: this.convertedPageContent(),
+      charts: this.charts,
+    }
+  }
+
   build() {
-    return this.convertedPageContent()
+    throw new NotImplementedError()
   }
 
   /** Returns string from joined and wrapped array of html elements
    * @return {String}
    */
   convertedPageContent() {
-    if (this.pageContent.length > 0) {
-      const pageContentAsString = this.pageContent.join('')
-      return `<div class="columns is-multiline dashboard-content"> ${pageContentAsString}</div>`
+    if (this._pageContent.length > 0) {
+      const pageContentAsString = this._pageContent.join('')
+      return `<div class="columns is-multiline dashboard-content"> ${pageContentAsString} </div>`
     }
     return null
   }
 
-  /** Allows develepors to pick blocks in special colors
-   * Same for:
-   * @method addDangerBlock
-   * @method addSuccesBlock
-   * @method addWarningBlock
-   * @param  {Object} options
-   */
-  addInfoBlock(options) {
-    this.addBlock(options, { color: '#718af4' })
-  }
-
-  addSuccesBlock(options) {
-    this.addBlock(options, { color: '#21c197' })
-  }
-
-  addWarningBlock(options) {
-    this.addBlock(options, { color: '#ff9f89' })
-  }
-
-  addDangerBlock(options) {
-    this.addBlock(options, { color: '#f0616f' })
-  }
-
   addChart(options) {
-    const chart = '<div class="column is-12-tablet column is-6-desktop">-<canvas class="chart" id="myChart"></canvas></div>'
-    this.pageContent.push(chart)
+    const { columns, offset, config } = options
+    const chart = `
+      <div class="column is-12-tablet is-${columns}-desktop is-offset-${offset || 0}"> 
+        <canvas class="chart" data-chart=${config.name}> 
+        </canvas>
+      </div>`
+    this._pageContent.push(chart)
+    this.charts[config.name] = config
   }
 
   addInfoList(options) {
-    // eslint-disable-next-line object-curly-newline
     const { items, columns, offset, title, subtitle } = options
-    const itemsContent = []
-    items.forEach((item) => {
-      itemsContent.push(this.addInfoListItem(item))
-    })
+    const itemsContent = items.map(item => this.getInfoListItem(item))
     const infoList = `
       <div class="column is-12-tablet is-${columns}-desktop is-offset-${offset || 0}"> 
         <div class="info-list border-box">
@@ -138,69 +139,79 @@ class PageBuilder {
           </div>
         </div>
       </div>`
+    this._pageContent.push(infoList)
+  }
 
-    this.pageContent.push(infoList)
+  getStatusHtml(status) {
+    const statusHtml = `
+      <div class="status ${status}">
+        ${status.toUpperCase()}
+      </div>`
+    return statusHtml
   }
 
   // eslint-disable-next-line class-methods-use-this
-  addInfoListItem(item) {
-    const { title, subtitle, content, status, imgSrc } = item
+  getInfoListItem(item) {
+    const { title, subtitle, content, status, date, imgSrc } = item
     const imgHtml = `
       <div class="item-img">
         <img src=${imgSrc}>
         </img>
       </div>
-      `
-    const statusHtml = `
-      <div class="item-status">
-        ${status}
-      </div>`
+    `
     const htmlItem = `
       <div class="item"> 
         ${imgSrc ? imgHtml : ''} 
         <div class="item-text">
           <div class="item-title">
-            ${title}
+            ${title || ''}
           </div>
           <div class="item-content">
-            ${subtitle}
+            ${subtitle || ''}
           </div>
             ${content || ''}
-          ${status ? statusHtml : ''}
+          <div class="item-bottom">
+            <div class="date">
+              ${date || ''}
+            </div>
+            ${status ? this.getStatusHtml(status) : ''}
+          </div>
         </div>
       </div>
-      `
+    `
     return htmlItem
   }
 
   addInfoTable(options) {
     const { title, columns, items, offset, headers } = options
     const headersHtml = headers.map(header => `<th class="text-small"> ${header} </th>`)
-    const tableRow = items.map(item => `
+    const tableRows = items.map(item => `
       <tr> 
         ${
-          headers.map(header => `<td> ${item[header]} </td>`).join('')
+          headers.map(header => `<td> ${header === 'status' && item[header]
+              ? this.getStatusHtml(item[header]) : item[header]} 
+            </td>`).join('')
         }
       </tr>`)
     const infoTable = `
-    <div class="column is-12-tablet is-${columns}-desktop is-offset-${offset || 0}"> 
-      <div class="border-box">
-        <div class="column h2">
-          ${title}
+      <div class="column is-12-tablet is-${columns}-desktop is-offset-${offset || 0}"> 
+        <div class="border-box">
+          <div class="column h2">
+            ${title}
+          </div>
+          <table class="table is-fullwidth">
+            <thead>
+              <tr>
+                ${headersHtml.join('')}
+            </thead>
+            <tbody>
+              ${tableRows.join('')}
+            </tbody>
+          </table>
         </div>
-        <table class="table is-fullwidth">
-          <thead>
-            <tr>
-              ${headersHtml.join('')}
-          </thead>
-          <tbody>
-            ${tableRow.join('')}
-          </tbody>
-        </table>
       </div>
-    </div>
     `
-    this.pageContent.push(infoTable)
+    this._pageContent.push(infoTable)
   }
 
   addTextBox(options) {
@@ -215,9 +226,9 @@ class PageBuilder {
             ${content}
           </div>
         </div>
-      <div class="column is-12-tablet is-${columns}-desktop is-offset-${offset || 0}"> 
+      </div> 
       `
-    this.pageContent.push(textHtml)
+    this._pageContent.push(textHtml)
   }
 
   /**
@@ -227,7 +238,7 @@ class PageBuilder {
    * @param {Object} options parts of a block element
    * @param {String} color block color
    */
-  addBlock(options, { color }) {
+  addBlock(options, color) {
     // eslint-disable-next-line object-curly-newline
     const { columns, offset, title, icon, value } = options
     const block = ` 
@@ -244,8 +255,9 @@ class PageBuilder {
             </i>
           </div>
         </div>
-      </div>`
-    this.pageContent.push(block)
+      </div>
+    `
+    this._pageContent.push(block)
   }
 }
 

@@ -5,7 +5,13 @@ describe('PageBuilder', function () {
     this.stubbedAdmin = { options: {} }
     this.args = { admin: this.stubbedAdmin }
     this.pageContent = []
-    this.PageBuilder = new PageBuilder(this.args)
+    this.types = {
+      warning: '#ff9f89',
+      danger: '#f0616f',
+      succes: '#21c197',
+      info: '#718af4',
+    }
+    this.pageBuilder = new PageBuilder(this.args)
   })
 
   const options = {
@@ -17,19 +23,19 @@ describe('PageBuilder', function () {
 
   describe('#convertedPageContent', function () {
     it('returns null when this.pageContent is not declared', function () {
-      expect(this.PageBuilder.convertedPageContent()).to.equal(null)
+      expect(this.pageBuilder.convertedPageContent()).to.equal(null)
     })
 
     it('returns string of a HTML elements', function () {
-      this.PageBuilder.addInfoBlock(options)
-      expect(this.PageBuilder.convertedPageContent()).to.be.a('string')
+      this.pageBuilder.addBlock(options, this.type.succes)
+      expect(this.pageBuilder.convertedPageContent()).to.be.a('string')
     })
   })
 
   describe('#addBlock', function () {
     it('adds html element to the pageContent', function () {
-      this.PageBuilder.addBlock(options, { color: '#ffffff' })
-      expect(this.PageBuilder.pageContent).to.have.lengthOf(1)
+      this.pageBuilder.addBlock(options, this.types.warning)
+      expect(this.pageBuilder.pageContent).to.have.lengthOf(1)
     })
   })
 })

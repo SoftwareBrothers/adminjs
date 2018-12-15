@@ -34,7 +34,14 @@
             color: $spun-pearl
             margin-bottom: rem(38px)
          .item
+            word-break: break-all
             display: flex
+            .item-bottom
+               display: flex
+               margin-top: rem(25px)
+               .date
+                  color: $spun-pearl
+                  margin-right: rem(24px)
             .item-img
                max-width: 50%
                margin-right: rem(12px)
@@ -42,14 +49,24 @@
                color: $mako
             .item-content
                color: $storm-gray
-            // .item-status
-            //    text-align: center
-            //    padding: 0 rem(12px)
-            //    display: inline-block
-            //    height: rem(25px)
-            //    border-radius: rem(2px)
-            //    background-color: $spun-pearl
-            //    color: $white
+      .status
+         text-align: center
+         padding: 0 rem(12px)
+         height: rem(25px)
+         border-radius: rem(2px)
+         background-color: $spun-pearl
+         color: $white
+         font-size: rem(11px)
+         font-weight: 500
+         width: max-content
+         display: flex
+         align-items: center
+         &.approved
+            background-color: $silver-tree
+         &.rejected
+            background-color: $sunglo
+         .status-content
+            display: inline-block
       .title
          fontsize: rem(25px)
          color: $mako

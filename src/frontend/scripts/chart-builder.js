@@ -1,27 +1,13 @@
-/* eslint-disable no-undef */
 $(document).ready(() => {
-  const ctx = document.getElementById('myChart').getContext('2d')
-  const data = {
-    labels: ['One', 'Two', 'Tree', 'Four', 'Five', 'Six', 'Seven'],
-    datasets: [
-      {
-        label: custom.title,
-        fill: true,
-        backgroundColor: 'orange',
-        borderColor: 'tomato',
-        data: [1, 2, 3, 4, 5, 6, 7],
-      },
-    ],
-  }
-  const myFirstChart = new Chart(ctx, {
-    type: 'line',
-    data,
-    options: {
-      title: {
-        fontSize: 20,
-        display: true,
-        text: 'My First Chart !',
-      },
-    },
+  const $charts = $('[data-chart]')
+  $charts.each((index, chart) => {
+    const chartName = $(chart).data('chart')
+    const currentChart = chartsModel[chartName]
+    const ctx = chart.getContext('2d')
+    const chart = new Chart(ctx, {
+      type: currentChart.type,
+      data: currentChart.data,
+      options: currentChart.options
+    })
   })
 })
