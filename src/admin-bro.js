@@ -107,7 +107,8 @@ class AdminBro {
     if (!Database || !Resource) {
       throw new Error('Adapter has to have both Database and Resource')
     }
-    if (Database.prototype instanceof BaseDatabase && Resource.prototype instanceof BaseResource) {
+    // checking if both Database and Resource have at least isAdapterFor method
+    if (Database.isAdapterFor && Resource.isAdapterFor) {
       AdminBro.registeredAdapters.push({ Database, Resource })
     } else {
       throw new Error('Adapter elements has to be subclassess of AdminBro.BaseResource nad AdminBro.BaseDatabase')
