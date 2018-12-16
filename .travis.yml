@@ -3,3 +3,11 @@ node_js:
 - '8'
 script:
 - npm test
+deploy:
+  provider: npm
+  email: wojciech.g.krysiak@gmail.com
+  api_key:
+    secure: h/nyPEwROf8cHogcU00UPWxYv0BHaW5JyCzj1ADrkZRJxA11m/8h4aqSjQwFV3ATVIH7k4pEmXnXC631jENdjGZdSPIFUHpPBvvZ6gs2ds0FBXL5/VQ+OvdhvpzOeHudVhZaV2b7XdyG/7W4+R2gwqbCL9FI/+hyAsSgmeOJ1JSZug8KpI8LFZVzchitulCSboWsasTunrtacy2vFZ51mKT9wC2uFjOcInMysMjz9PwYSczZt/MRgu2VTdtW6GLbecQEuMs6ObgceiXN8L0vz8YBqpEE36OVJGrKSCseGj9k0QTOu4xH2CwzghCZ0MKwmTuUeC8gIWJz6jmlDlq3nUnni2UIi6FyfpyOMDP6Okxgcst64Euw80dVwUxSZoQBB48b/XryCWRFSt1lW6ecq2w76+hZZC85vsY2ZFCAYieDw3EM4QhrSSBLB3cMEeWAyjDIor66SVWgaszMbgCoFM9s+hCR0g3SvBQvZ5xC6Jl4+/0cTUDwj3de7Nn4YQfJtM4EIrEdfmsCqKGPEbvTMLmsOUa65+1+ZSraowRAmPZmq/ID0BtQtQvYt1gpZTYBZW4A1B6S59ccuw8MvyxQwnwp0CkIJwn7omnTKTbnwVNsOQV5EVUP7RaXMO0NxZYJmf1cE1kC/FvKRnNSFQ0NXS//1ifKxYbtFZcswF+OCr0=
+  on:
+    tags: true
+    repo: SoftwareBrothers/admin-bro
