@@ -2,7 +2,7 @@ language: node_js
 node_js:
 - '8'
 script:
-- npm test
+- yarn test
 deploy:
   provider: npm
   email: wojciech.g.krysiak@gmail.com
