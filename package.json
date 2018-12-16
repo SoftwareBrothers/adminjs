@@ -36,7 +36,8 @@
     "lodash": "^4.17.11",
     "moment": "^2.22.2",
     "pug": "^2.0.3",
-    "require.all": "^2.0.4"
+    "require.all": "^2.0.4",
+    "xss": "^1.0.3"
   },
   "devDependencies": {
     "@babel/core": "^7.2.0",
