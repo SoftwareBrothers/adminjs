@@ -1,9 +1,23 @@
-mixin infoList()
-  .column.empty-table
-    .border-box.has-text-centered
-      .content-info There are no content available
-      .create-text Create your first content to be able to retrieve data from your API
-      a.button.is-primary
-        span.icon
-          i.icomoon-add
-        .btn-text Add new
+.column(class=`is-${columns}-desktop is-offset-${offset}`).is-12-tablet
+  .info-list.border-box
+    .h2=title
+    .info-subtitle=subtitle
+    .items
+      for item, index in items
+        - const { imgSrc, title, subtitle, date, status } = item
+        .item
+          if imgSrc
+            .item-img
+              img(src=imgSrc)
+          .item-text
+            .item-title=title
+            !=subtitle
+            .item-bottom
+              .date=date
+              if status
+                .status(class=status)
+                  =status.toUpperCase()
+        - const isLastItem = index === items.length - 1 
+        .spacer(class={'item-spacer':items.length > 1 && !isLastItem })
+
+

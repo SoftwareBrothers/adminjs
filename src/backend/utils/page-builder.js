@@ -1,62 +1,12 @@
+/* eslint-disable object-curly-newline */
+/* eslint-disable indent */
 /* eslint-disable class-methods-use-this */
+
 const NotImplementedError = require('../utils/not-implemented-error')
 const Renderer = require('../../backend/utils/renderer')
 
-/* eslint-disable object-curly-newline */
-/* eslint-disable indent */
 /**
  * PageBuilder class contains methods which allows you to create HTML content as JavaScript string
- *
- * @example
- *
- * const { PageBuilder } = require('admin-bro')
- * const ArticleModel = require('./../mongoose/article-model')
- * const UserModel = require('./../mongoose/user-model')
- *
- * class DashboardPage extends PageBuilder {
- *   constructor(props) {
- *     super(props)
- *     this.title = 'Collections overview',
- *     this.subtitle = 'stats'
- *   }
- *
- *   async build() {
- *     const articlesCount = await ArticleModel.countDocuments()
- *     const publishedArticlesCount = await ArticleModel.find({ published: true }).countDocuments()
- *     const unpublishedArticlesCount = articlesCount - publishedArticlesCount
- *     const usersCount = await UserModel.countDocuments()
- *     this.addInfoBlock({
- *       title: 'The number of all articles',
- *       value: articlesCount,
- *       icon: 'fas fa-arrow-alt-circle-up fa-2x',
- *       columns: 3,
- *     })
- *     this.addSuccesBlock({
- *       title: 'Published articles',
- *       value: publishedArticlesCount,
- *       icon: 'fas fa-star fa-2x',
- *       columns: 3
- *     })
- *     this.addWarningBlock({
- *       title: 'Unpublished articles',
- *       value: unpublishedArticlesCount,
- *       icon: 'fas fa-arrow-alt-circle-down fa-2x',
- *       columns: 3
- *     })
- *     this.addInfoBlock({
- *       title: 'The number of users',
- *       value: usersCount,
- *       icon: 'fas fa-star fa-2x',
- *       columns: 3
- *     })
- *     return {
- *       title: this.title,
- *       subtitle: this.subtitle,
- *       content: this.convertedPageContent()
- *     }
- *   }
- * }
- *
  */
 class PageBuilder {
   /**
@@ -71,10 +21,10 @@ class PageBuilder {
      * @type {String[] | Function | null}
      */
     this._pageContent = []
+    this._pageHeader = null
     this.title = null
-    this.subtitle = null
     this.charts = {}
-    this.types = {
+    this.colorTypes = {
       warning: '#ff9f89',
       danger: '#f0616f',
       succes: '#21c197',
@@ -91,9 +41,9 @@ class PageBuilder {
     await this.build()
     return {
       title: this.title,
-      subtitle: this.subtitle,
+      header: this._pageHeader,
       content: this.convertedPageContent(),
-      charts: this.charts,
+      charts: this.charts
     }
   }
 
@@ -101,165 +51,75 @@ class PageBuilder {
     throw new NotImplementedError()
   }
 
-  /** Returns string from joined and wrapped array of html elements
+  /** Returns string of html content elements
    * @return {String}
    */
   convertedPageContent() {
     if (this._pageContent.length > 0) {
-      const pageContentAsString = this._pageContent.join('')
-      return `<div class="columns is-multiline dashboard-content"> ${pageContentAsString} </div>`
+      return this._pageContent.join('')
     }
     return null
   }
 
-  addChart(options) {
-    const { columns, offset, config } = options
-    const chart = `
-      <div class="column is-12-tablet is-${columns}-desktop is-offset-${offset || 0}"> 
-        <canvas class="chart" data-chart=${config.name}> 
-        </canvas>
-      </div>`
-    this._pageContent.push(chart)
-    this.charts[config.name] = config
+  /** Adjusts default dashboard content as a pageHeader
+   * 
+   */
+  async addDefaultDashboard() {
+    this._pageHeader =  await new Renderer('pages/defaultDashboard').render()
   }
 
-  async addInfoList({ items = [], columns = 12, offset = 0, title = 'title', subtitle = 'subtitle' }) {
-    const partialContent = await new Renderer('partials/infoList', { items, columns, offset, title, subtitle }).render()
-    console.log('PARTIALSS', partialContent)
-    // const itemsContent = items.map(item => this.getInfoListItem(item))
-    // const infoList = `
-    //   <div class="column is-12-tablet is-${columns}-desktop is-offset-${offset || 0}">
-    //     <div class="info-list border-box">
-    //       <div class="h2">
-    //         ${title}
-    //       </div>
-    //       <div class="info-subtitle">
-    //         ${subtitle}
-    //       </div>
-    //       <div class="items">
-    //         ${itemsContent.join('<div class="item-spacer"> </div>')}
-    //       </div>
-    //     </div>
-    //   </div>`
+  /** Adjusts overview content as a pageHeader
+   * 
+   */
+  async addOverview(title = '', subtitle = '') {
+    this._pageHeader = await  new Renderer('partials/overview', { title, subtitle }).render()
+  }
+
+  /** Adds canvas chart to the page content
+   * 
+   */
+  async addChart(options) {
+    const { columns = 12, offset, config } = options
+    this.charts[config.name] = config
+    await this.addPartialContent('partials/chart', { columns, offset, config })
+  }
+
+  /** Adds info list element to the page content
+   * 
+   */
+  async addInfoList({ items = [], columns = 12, offset = 0, title = '', subtitle = '' }) {
+    await this.addPartialContent('partials/infoList', { items, columns, offset, title, subtitle})
+  }
+
+  /** Adds info table element to the page content
+   * 
+   */
+  async addInfoTable({ title = '', columns = 12, items = [], offset = 0, headers = [] }) {
+    await this.addPartialContent('partials/infoTable', { title, columns, items, offset, headers })
+  }
+
+  /** Adds text box element to the page content
+   * 
+   */
+  async addTextBox({ title = '', content = '', columns = 12, offset = 0 }) {
+    await this.addPartialContent('partials/textBox', { title, content, columns, offset })
+  }
+
+  /** Adds compiled html elements to the page content
+   *  Developer can declare specific pug view @param view which will be returned as HTML
+   *  @param data is passed to the declared view 
+   */ 
+  async addPartialContent(view, data) {
+    const partialContent = await new Renderer(view, data).render()
     this._pageContent.push(partialContent)
   }
 
-  getStatusHtml(status) {
-    const statusHtml = `
-      <div class="status ${status}">
-        ${status.toUpperCase()}
-      </div>`
-    return statusHtml
-  }
-
-  // eslint-disable-next-line class-methods-use-this
-  getInfoListItem(item) {
-    const { title, subtitle, content, status, date, imgSrc } = item
-    const imgHtml = `
-      <div class="item-img">
-        <img src=${imgSrc}>
-        </img>
-      </div>
-    `
-    const htmlItem = `
-      <div class="item"> 
-        ${imgSrc ? imgHtml : ''} 
-        <div class="item-text">
-          <div class="item-title">
-            ${title || ''}
-          </div>
-          <div class="item-content">
-            ${subtitle || ''}
-          </div>
-            ${content || ''}
-          <div class="item-bottom">
-            <div class="date">
-              ${date || ''}
-            </div>
-            ${status ? this.getStatusHtml(status) : ''}
-          </div>
-        </div>
-      </div>
-    `
-    return htmlItem
-  }
-
-  addInfoTable(options) {
-    const { title, columns, items, offset, headers } = options
-    const headersHtml = headers.map(header => `<th class="text-small"> ${header} </th>`)
-    const tableRows = items.map(item => `
-      <tr> 
-        ${
-          headers.map(header => `<td> ${header === 'status' && item[header]
-              ? this.getStatusHtml(item[header]) : item[header]} 
-            </td>`).join('')
-        }
-      </tr>`)
-    const infoTable = `
-      <div class="column is-12-tablet is-${columns}-desktop is-offset-${offset || 0}"> 
-        <div class="border-box">
-          <div class="column h2">
-            ${title}
-          </div>
-          <table class="table is-fullwidth">
-            <thead>
-              <tr>
-                ${headersHtml.join('')}
-            </thead>
-            <tbody>
-              ${tableRows.join('')}
-            </tbody>
-          </table>
-        </div>
-      </div>
-    `
-    this._pageContent.push(infoTable)
-  }
-
-  addTextBox(options) {
-    const { title, content, columns, offset } = options
-    const textHtml = `
-      <div class="column is-12-tablet is-${columns}-desktop is-offset-${offset || 0}"> 
-        <div class="border-box">
-          <div class="h2">
-            ${title}
-          </div>
-          <div class="content">
-            ${content}
-          </div>
-        </div>
-      </div> 
-      `
-    this._pageContent.push(textHtml)
-  }
-
   /**
-   * Adds html element to pageContent
-   * Developer can declare size @param options.size and offset of each column individually
-   * title, icon, and of block @param options.size
-   * @param {Object} options parts of a block element
-   * @param {String} color block color
+   * Adds block element to the page content
+   * Developer can declare specific color of block's content @param {String} color
    */
-  addBlock(options, color) {
-    // eslint-disable-next-line object-curly-newline
-    const { columns, offset, title, icon, value } = options
-    const block = ` 
-      <div class="column is-12-tablet is-${columns}-desktop is-offset-${offset || 0}"> 
-        <div class="dashboard-block border-box">
-          <div class="block-title">
-            ${title}
-          </div>
-          <div class="block-content" style="color:${color}">
-            <div class="value">
-              ${value}
-            </div>
-            <i class="${icon}">
-            </i>
-          </div>
-        </div>
-      </div>
-    `
-    this._pageContent.push(block)
+  async addBlock({ columns = 12, offset = 0, title = '', icon = '', value = ''}, color = this.colorTypes.info) {
+    await this.addPartialContent('partials/block', { columns, offset, title, icon, value, color })
   }
 }
 

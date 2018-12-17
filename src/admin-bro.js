@@ -9,6 +9,7 @@ const BaseProperty = require('./backend/adapters/base-property')
 const PageBuilder = require('./backend/utils/page-builder')
 const ValidationError = require('./backend/utils/validation-error')
 const ResourcesFactory = require('./backend/utils/resources-factory')
+const DefaultDashboard = require('./backend/defaults/default-dashboard')
 
 const Router = require('./backend/router')
 
@@ -65,7 +66,7 @@ const defaults = {
     companyName: 'Company Name',
     softwareBrothers: true,
   },
-  dashboard: null,
+  dashboard: DefaultDashboard,
 }
 
 /**
@@ -96,7 +97,7 @@ class AdminBro {
     const { databases, resources } = this.options
     const resourcesFactory = new ResourcesFactory(this, AdminBro.registeredAdapters)
     this.resources = resourcesFactory.buildResources({ databases, resources })
-    this.dashboardPage = options.dashboard
+    this.dashboardPage = options.dashboard || defaults.dashboard 
   }
 
   /**
