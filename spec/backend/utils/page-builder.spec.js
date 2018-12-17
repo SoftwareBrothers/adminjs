@@ -1,10 +1,11 @@
 const PageBuilder = require('@backend/utils/page-builder')
+const NotImplementedError = require('@backend/utils/not-implemented-error')
 
 describe('PageBuilder', function () {
   beforeEach(function () {
     this.stubbedAdmin = { options: {} }
     this.args = { admin: this.stubbedAdmin }
-    this.pageContent = []
+    this._pageContent = []
     this.types = {
       warning: '#ff9f89',
       danger: '#f0616f',
@@ -32,10 +33,18 @@ describe('PageBuilder', function () {
     })
   })
 
-  // describe('#addBlock', function () {
-  //   it('adds html element to the pageContent', function () {
-  //     this.pageBuilder.addBlock(options, this.types.warning)
-  //     expect(this.pageBuilder.pageContent).to.have.lengthOf(1)
-  //   })
-  // })
+  describe('#addBlock', function () {
+    it('adds html element to the pageContent', function () {
+      this.pageBuilder.addBlock(options, this.types.warning)
+      expect(this.pageBuilder._pageContent).to.have.lengthOf(1)
+    })
+  })
+
+  describe('#build', function () {
+    it('throws an error when method is not overriden', function () {
+      console.log('aaaa', new NotImplementedError())
+      expect(this.pageBuilder.build()).to.throw().property('message', 'You have to implement this')
+    })
+  })
 })
+// .to.throw().property('name', 'IncorrectDecorator')

@@ -96,7 +96,7 @@ class AdminBro {
     const { databases, resources } = this.options
     const resourcesFactory = new ResourcesFactory(this, AdminBro.registeredAdapters)
     this.resources = resourcesFactory.buildResources({ databases, resources })
-    this.DashboardPage = options.dashboard || defaults.dashboard
+    this.dashboardPage = options.dashboard
   }
 
   /**

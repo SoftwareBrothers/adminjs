@@ -1,5 +1,6 @@
 /* eslint-disable class-methods-use-this */
 const NotImplementedError = require('../utils/not-implemented-error')
+const Renderer = require('../../backend/utils/renderer')
 
 /* eslint-disable object-curly-newline */
 /* eslint-disable indent */
@@ -122,24 +123,25 @@ class PageBuilder {
     this.charts[config.name] = config
   }
 
-  addInfoList(options) {
-    const { items, columns, offset, title, subtitle } = options
-    const itemsContent = items.map(item => this.getInfoListItem(item))
-    const infoList = `
-      <div class="column is-12-tablet is-${columns}-desktop is-offset-${offset || 0}"> 
-        <div class="info-list border-box">
-          <div class="h2">
-            ${title}
-          </div>
-          <div class="info-subtitle">
-            ${subtitle}
-          </div>
-          <div class="items">
-            ${itemsContent.join('<div class="item-spacer"> </div>')}
-          </div>
-        </div>
-      </div>`
-    this._pageContent.push(infoList)
+  async addInfoList({ items = [], columns = 12, offset = 0, title = 'title', subtitle = 'subtitle' }) {
+    const partialContent = await new Renderer('partials/infoList', { items, columns, offset, title, subtitle }).render()
+    console.log('PARTIALSS', partialContent)
+    // const itemsContent = items.map(item => this.getInfoListItem(item))
+    // const infoList = `
+    //   <div class="column is-12-tablet is-${columns}-desktop is-offset-${offset || 0}">
+    //     <div class="info-list border-box">
+    //       <div class="h2">
+    //         ${title}
+    //       </div>
+    //       <div class="info-subtitle">
+    //         ${subtitle}
+    //       </div>
+    //       <div class="items">
+    //         ${itemsContent.join('<div class="item-spacer"> </div>')}
+    //       </div>
+    //     </div>
+    //   </div>`
+    this._pageContent.push(partialContent)
   }
 
   getStatusHtml(status) {
