@@ -27,23 +27,47 @@ describe('PageBuilder', function () {
       expect(this.pageBuilder.convertedPageContent()).to.equal(null)
     })
 
-    it('returns string of a HTML elements', function () {
-      this.pageBuilder.addBlock(options, this.colorTypes.succes)
+    it('returns string of a HTML elements', async function () {
+      await this.pageBuilder.addBlock(options, this.colorTypes.succes)
       expect(this.pageBuilder.convertedPageContent()).to.be.a('string')
     })
   })
 
   describe('#addBlock', function () {
-    it('adds html element to the pageContent', function () {
-      this.pageBuilder.addBlock(options, this.colorTypes.warning)
+    it('adds html element to the pageContent', async function () {
+      await this.pageBuilder.addBlock(options, this.colorTypes.warning)
       expect(this.pageBuilder._pageContent).to.have.lengthOf(1)
     })
   })
 
-  describe('#build', function () {
-    it('throws an error when method is not overriden', function () {
-      expect(this.pageBuilder.build()).to.throw().property('message', 'You have to implement this')
+  describe('#render', function () {
+    beforeEach(function () {
+      class PageExample extends PageBuilder {
+        constructor(params) {
+          super(params)
+          this.title = 'example page'
+        }
+        
+        build() {
+          this.addBlock({
+            title: 'The number of all articles',
+            value: 5,
+            icon: 'fas fa-arrow-alt-circle-up fa-2x',
+            columns: 3,
+          }, this.colorTypes.info)
+        }
+      }
+
+      this.pageExample = new PageExample(this.args)
+    })
+
+    it('throws an error when build method is not overriden', function () {
+      expect(() => { 
+        this.pageBuilder.render().to.throw('You have to overwrite this method')
+      })
+    })
+    it('returns object with page settings', async function () {
+      expect(await this.pageExample.render()).to.have.keys('title', 'header', 'content', 'charts')
     })
   })
 })
-// .to.throw().property('name', 'IncorrectDecorator')
