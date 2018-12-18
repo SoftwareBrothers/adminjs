@@ -97,7 +97,7 @@ class AdminBro {
     const { databases, resources } = this.options
     const resourcesFactory = new ResourcesFactory(this, AdminBro.registeredAdapters)
     this.resources = resourcesFactory.buildResources({ databases, resources })
-    this.dashboardPage = options.dashboard || defaults.dashboard 
+    this.DashboardPage = options.dashboard || defaults.dashboard
   }
 
   /**
@@ -181,6 +181,10 @@ AdminBro.BaseRecord = BaseRecord
  */
 AdminBro.BaseProperty = BaseProperty
 
+/**
+ * PageBuilder
+ * @type {PageBuilder}
+ */
 AdminBro.PageBuilder = PageBuilder
 
 /**

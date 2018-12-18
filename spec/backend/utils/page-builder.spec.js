@@ -22,17 +22,6 @@ describe('PageBuilder', function () {
     columns: 3,
   }
 
-  describe('#convertedPageContent', function () {
-    it('returns null when this.pageContent is not declared', function () {
-      expect(this.pageBuilder.convertedPageContent()).to.equal(null)
-    })
-
-    it('returns string of a HTML elements', async function () {
-      await this.pageBuilder.addBlock(options, this.colorTypes.succes)
-      expect(this.pageBuilder.convertedPageContent()).to.be.a('string')
-    })
-  })
-
   describe('#addBlock', function () {
     it('adds html element to the pageContent', async function () {
       await this.pageBuilder.addBlock(options, this.colorTypes.warning)
@@ -63,7 +52,7 @@ describe('PageBuilder', function () {
 
     it('throws an error when build method is not overriden', function () {
       expect(() => { 
-        this.pageBuilder.render().to.throw('You have to overwrite this method')
+        this.pageBuilder.render().to.throw('You have to implement this')
       })
     })
     it('returns object with page settings', async function () {

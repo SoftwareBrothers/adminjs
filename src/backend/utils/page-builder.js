@@ -1,8 +1,7 @@
 /* eslint-disable object-curly-newline */
-/* eslint-disable indent */
 /* eslint-disable class-methods-use-this */
 const Renderer = require('../../backend/utils/renderer')
-
+const NotImplementedError = require('../utils/not-implemented-error')
 /**
  * PageBuilder class contains methods which allows you to create page content
  * 
@@ -22,12 +21,13 @@ const Renderer = require('../../backend/utils/renderer')
  *   }
  * 
  *   async build() {
+ *     const maxItems = 10
  *     const articlesCount = await ArticleModel.countDocuments()
- *     const publishedArticlesCount = await ArticleModel.find({ published: true }).countDocuments()
+ *     const publishedArticlesCount = await ArticleModel.find({ published: true }).limit(maxItems).countDocuments()
  *     const unpublishedArticlesCount = articlesCount - publishedArticlesCount
  *     const usersCount = await UserModel.countDocuments()
- *     const comments = await CommentModel.find()
- *     const clients = await ClientsModel.find()
+ *     const comments = await CommentModel.find({}).limit(maxItems)
+ *     const clients = await ClientsModel.find({}).limit(maxItems)
  *     let mappedComments = null
  *     if(comments.length) {
  *       mappedComments = comments.map(comment => { 
@@ -40,7 +40,7 @@ const Renderer = require('../../backend/utils/renderer')
  *         }
  *       })
  *     }
- *     await this.addOverview('Collections overview', 'stats')
+ *     await this.setOverview('Collections overview', 'stats')
  *     await this.addBlock({
  *       title: 'The number of all articles',
  *       value: articlesCount,
@@ -124,20 +124,39 @@ const Renderer = require('../../backend/utils/renderer')
 
 class PageBuilder {
   /**
-   *
    * @param  {AdminBro}     options.admin  current instance of AdminBro
-   * @param  {String[]}     _pageContent   array of html elements as String
-   * @param  {String}       _pageHeader    html element as String
-   * @param  {String}       title          page title
-   * @param  {Object}       charts         mapped object contains chart's settings
-   * @param  {Object}       colorTypes     specific colors for html blocks
    */
   constructor({ admin }) {
     this._admin = admin
+
+    /**
+     * @type {String[]}     
+     * @description _pageContent   array of html elements as String
+     */
     this._pageContent = []
+
+    /**
+     * @type {String}       
+     * @description _pageHeader    html element as String
+     */
     this._pageHeader = ''
+
+    /**
+     * @type {String}              
+     * @description page title
+     */
     this.title = ''
+
+    /**
+     * @type {Object}               
+     * @description mapped object contains chart's settings
+     */
     this.charts = {}
+
+    /**
+     * @type {Object}   
+     * @description specific colors for html blocks
+     */
     this.colorTypes = {
       warning: '#ff9f89',
       danger: '#f0616f',
@@ -155,7 +174,7 @@ class PageBuilder {
     return {
       title: this.title,
       header: this._pageHeader,
-      content: this.convertedPageContent(),
+      content: this._pageContent.length > 0 ? this._pageContent.join('') : '',
       charts: this.charts
     }
   }
@@ -164,35 +183,29 @@ class PageBuilder {
    * This method is responsible for building the page, should be overriden.
    */
   build() {
-    throw new Error('You have to overwrite this method')
+    throw new NotImplementedError()
   }
 
-  /** Returns string of html content elements
-   * @return {String}
+  /** 
+   * Adjusts default dashboard content as a pageHeader
    */
-  convertedPageContent() {
-    if (this._pageContent.length > 0) {
-      return this._pageContent.join('')
-    }
-    return null
-  }
-
-  /** Adjusts default dashboard content as a pageHeader
-   * 
-   */
-  async addDefaultDashboard() {
+  async setDefaultDashboard() {
     this._pageHeader =  await new Renderer('pages/defaultDashboard').render()
   }
 
-  /** Adjusts overview content as a pageHeader
-   * 
+  /** 
+   * Adjusts overview content as a pageHeader
    */
-  async addOverview(title = '', subtitle = '') {
+  async setOverview(title = '', subtitle = '') {
     this._pageHeader = await  new Renderer('partials/overview', { title, subtitle }).render()
   }
 
-  /** Adds canvas chart to the page content
+  /** 
+   * Adds canvas chart to the page content
    * 
+   * Config for chart should includes: name, type, data and options
+   * name is used in the data attribute of canvas element, the rest of the properties based on chart.js documentation
+   * check out {@link http://www.chartjs.org} 
    */
   async addChart(options) {
     const { columns = 12, offset = 0, config = {} } = options
@@ -200,28 +213,29 @@ class PageBuilder {
     await this.addPartialContent('partials/chart', { columns, offset, config })
   }
 
-  /** Adds info list element to the page content
-   * 
+  /** 
+   * Adds info list element to the page content
    */
   async addInfoList({ items = [], columns = 12, offset = 0, title = '', subtitle = '' }) {
     await this.addPartialContent('partials/infoList', { items, columns, offset, title, subtitle})
   }
 
-  /** Adds info table element to the page content
-   * 
+  /** 
+   * Adds info table element to the page content
    */
   async addInfoTable({ title = '', columns = 12, items = [], offset = 0, headers = [] }) {
     await this.addPartialContent('partials/infoTable', { title, columns, items, offset, headers })
   }
 
-  /** Adds text box element to the page content
-   * 
+  /** 
+   * Adds text box element to the page content
    */
   async addTextBox({ title = '', content = '', columns = 12, offset = 0 }) {
     await this.addPartialContent('partials/textBox', { title, content, columns, offset })
   }
 
-  /** Adds compiled html elements to the page content
+  /**
+   *  Adds compiled html elements to the page content
    *  Developer can declare specific pug view @param view which will be returned as HTML
    *  @param data is passed to the declared view 
    */ 
