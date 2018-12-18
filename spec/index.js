@@ -12,11 +12,11 @@ chai.use(sinonChai)
 
 global.expect = chai.expect
 
-beforeEach(function() {
+beforeEach(function () {
   this.sinon = sinon.createSandbox()
 })
 
-afterEach(function() {
+afterEach(function () {
   this.sinon.restore()
 })
 

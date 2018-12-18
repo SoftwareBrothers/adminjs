@@ -24,7 +24,7 @@ describe('ResourcesFactory', function () {
         class Database extends BaseDatabase {
           static isAdapterFor(database) { return database === 'supported' }
 
-          resources() { return new Array(5) }
+          resources() { return new Array(5) } // eslint-disable-line class-methods-use-this
         }
         class Resource extends BaseResource {}
         this.resourcesFactory = new ResourcesFactory({}, [{ Database, Resource }])
@@ -116,7 +116,10 @@ describe('ResourcesFactory', function () {
     it('throws error when decorator given by user doesn not subclass from BaseDecorator', function () {
       class MyDecorator extends Object {}
       expect(() => {
-        this.resourcesFactory._decorateResources([{ resource: new BaseResource(), decorator: MyDecorator }])
+        this.resourcesFactory._decorateResources([{
+          resource: new BaseResource(),
+          decorator: MyDecorator,
+        }])
       }).to.throw().property('name', 'IncorrectDecorator')
     })
   })

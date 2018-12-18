@@ -1,3 +1,5 @@
+/* eslint no-unused-vars: 0 */
+
 const BaseController = require('./base-controller.js')
 
 class ResourcesController extends BaseController {
@@ -23,13 +25,13 @@ class ResourcesController extends BaseController {
 
   async new({ params, query, payload }, response) {
     this.findResources(params)
-    this.data.record = this.data.currentResource.build()
+    this.data.record = await this.data.currentResource.build()
     return this.render('pages/new', this.data)
   }
 
   async create({ params, query, payload }, response) {
     this.findResources(params)
-    this.data.record = this.data.currentResource.build(payload)
+    this.data.record = await this.data.currentResource.build(payload)
     this.data.record = await this.data.record.save()
     if (this.data.record.isValid()) {
       return response.redirect(this.data.h.showRecordUrl(

@@ -1,6 +1,7 @@
-/* eslint class-methods-use-this: 0 */
+/* eslint class-methods-use-this: 0 no-unused-vars: 0 */
 
 const NotImplementedError = require('../utils/not-implemented-error')
+const BaseRecord = require('./base-record')
 
 /**
  * Representation of a ORM Resource in AdminBro. Visally resource is a list item in the sidebar.
@@ -23,8 +24,9 @@ class BaseResource {
    * @return {Boolean}          if given adapter supports this resource - returns true
    */
   static isAdapterFor(rawResource) {
-    throw new NotImplementedError()
+    throw new NotImplementedError('BaseResource.isAdapterFor')
   }
+
   /**
    * The name of the database to which resource belongs. When resource is
    * a mongoose model it should be database name of the mongo database.
@@ -33,17 +35,16 @@ class BaseResource {
    * @return {String}         database name
    */
   databaseName() {
-    throw new NotImplementedError()
+    throw new NotImplementedError('BaseResource#databaseName')
   }
 
-  
   /**
    * Returns type of the database. It is used to compute sidebar icon for
-   * given resource
+   * given resource. Default: 'database'
    * @return {String}
    */
   databaseType() {
-    throw new NotImplementedError()
+    return 'database'
   }
 
   /**
@@ -54,7 +55,7 @@ class BaseResource {
    * @return {String}
    */
   name() {
-    throw new NotImplementedError()
+    throw new NotImplementedError('BaseResource#name')
   }
 
 
@@ -64,7 +65,7 @@ class BaseResource {
    * @return {String} uniq resource id
    */
   id() {
-    throw new NotImplementedError()
+    throw new NotImplementedError('BaseResource#id')
   }
 
   /**
@@ -72,7 +73,7 @@ class BaseResource {
    * @return {BaseProperty[]}
    */
   properties() {
-    throw new NotImplementedError()
+    throw new NotImplementedError('BaseResource#properties')
   }
 
   /**
@@ -83,7 +84,7 @@ class BaseResource {
    * @return {BaseProperty}
    */
   property(path) {
-    throw new NotImplementedError()
+    throw new NotImplementedError('BaseResource#property')
   }
 
   /**
@@ -91,21 +92,23 @@ class BaseResource {
    * @return {Number}
    */
   async count() {
-    throw new NotImplementedError()
+    throw new NotImplementedError('BaseResource#count')
   }
 
   /**
    * Returns actual records for given resource
    *
-   * @param  {Object} query           query
+   * @param  {Object} query                     query [not supported right now]
    * @param  {Object} options
-   * @param  {Number} options.limit   how many records should be taken
-   * @param  {Number} options.offset  offset
-   * @param  {Number} options.sort    sort
-   * @return {BaseRecord[]}           list of records
+   * @param  {Number} options.limit             how many records should be taken
+   * @param  {Number} options.offset            offset
+   * @param  {Number} options.sort              sort
+   * @param  {Number} options.sort.sortBy       sortable field
+   * @param  {Number} options.sort.direction    either asc or desc
+   * @return {BaseRecord[]}                     list of records
    */
-  async find(query, { limit=20, offset=0, sort={} }) {
-    throw new NotImplementedError()
+  async find(query, { limit = 20, offset = 0, sort = {} }) {
+    throw new NotImplementedError('BaseResource#find')
   }
 
   /**
@@ -114,7 +117,7 @@ class BaseResource {
    * @return {BaseRecord}   record
    */
   async findOne(id) {
-    throw new NotImplementedError()
+    throw new NotImplementedError('BaseResource#findOne')
   }
 
   /**
@@ -127,7 +130,7 @@ class BaseResource {
    * @return {BaseRecord}
    */
   async build(params) {
-    throw new NotImplementedError()
+    return new BaseRecord(params, this)
   }
 
   /**
@@ -138,7 +141,7 @@ class BaseResource {
    * @throws {ValidationError} If there are validation errors it should be thrown
    */
   async create(params) {
-    throw new NotImplementedError()
+    throw new NotImplementedError('BaseResource#create')
   }
 
   /**
@@ -150,7 +153,7 @@ class BaseResource {
    * @throws {ValidationError} If there are validation errors it should be thrown
    */
   async update(id, params) {
-    throw new NotImplementedError()
+    throw new NotImplementedError('BaseResource#update')
   }
 
   /**
@@ -158,7 +161,7 @@ class BaseResource {
    * @param  {String|Number} id id of the Record
    */
   async delete(id) {
-    throw new NotImplementedError()
+    throw new NotImplementedError('BaseResource#delete')
   }
 
   /**
@@ -169,7 +172,7 @@ class BaseResource {
    */
   assignDecorator(Decorator, admin) {
     this._Decorator = Decorator
-    this._decorated = new Decorator({ resource: this, admin: admin })
+    this._decorated = new Decorator({ resource: this, admin })
   }
 
   /**

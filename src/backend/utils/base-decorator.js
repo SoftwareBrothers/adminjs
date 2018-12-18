@@ -1,4 +1,5 @@
 const moment = require('moment')
+const xss = require('xss')
 const BaseProperty = require('../adapters/base-property')
 const ViewHelpers = require('./view-helpers')
 
@@ -232,7 +233,7 @@ class BaseDecorator {
     if (property.type() === 'date') {
       return moment(record.param(property.name())).format('YYYY-MM-DD')
     }
-    return record.param(property.name())
+    return xss(record.param(property.name()))
   }
 }
 
