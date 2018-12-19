@@ -1,2 +1,5 @@
 .column(class=`is-${columns}-desktop is-offset-${offset}`).is-12-tablet
-  canvas(class="chart" data-chart=config.name)
+  .chart-wrapper.border-box
+    .h2=title
+    .info-subtitle=subtitle
+    canvas(class="chart" data-chart=title)
