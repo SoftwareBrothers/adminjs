@@ -1,7 +1,5 @@
 /* eslint no-unused-vars: 0 */
-
 const BaseController = require('./base-controller.js')
-const unflatten = require('flat').unflatten
 
 class ResourcesController extends BaseController {
   async index({ params, query, payload }, response) {
@@ -32,7 +30,7 @@ class ResourcesController extends BaseController {
 
   async create({ params, query, payload }, response) {
     this.findResources(params)
-    this.data.record = await this.data.currentResource.build(unflatten(payload))
+    this.data.record = await this.data.currentResource.build(payload)
     this.data.record = await this.data.record.save()
     if (this.data.record.isValid()) {
       return response.redirect(this.data.h.showRecordUrl(
@@ -59,11 +57,10 @@ class ResourcesController extends BaseController {
     return this.render('pages/edit', this.data)
   }
 
-  storePayloadData(data) {
-    const unflattenData = unflatten(data)
-    Object.keys(unflattenData).forEach(key => {
+  storePayloadData(payloadData) {
+    Object.keys(payloadData).forEach(key => {
       if(this.data.record.params[key]) {
-        this.data.record.params[key] = unflattenData[key]
+        this.data.record.params[key] = payloadData[key]
       }
     })
   }

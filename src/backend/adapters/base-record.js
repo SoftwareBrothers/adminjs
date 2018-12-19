@@ -1,3 +1,4 @@
+const flatten = require('flat')
 const ValidationError = require('../utils/validation-error')
 
 /**
@@ -25,7 +26,7 @@ class BaseRecord {
      * Actual record data stored as an object
      * @type {Object}
      */
-    this.params = params
+    this.params = flatten(params)
 
     /**
      * Object containing all validation errors: this.errors[path] = 'errorMessage'
