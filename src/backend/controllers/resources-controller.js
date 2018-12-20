@@ -1,6 +1,6 @@
 /* eslint no-unused-vars: 0 */
-
 const BaseController = require('./base-controller.js')
+const flatten = require('flat')
 
 class ResourcesController extends BaseController {
   async index({ params, query, payload }, response) {
@@ -39,6 +39,7 @@ class ResourcesController extends BaseController {
         this.data.record,
       ))
     }
+    this.storePayloadData(payload)
     return this.render('pages/new', this.data)
   }
 
@@ -53,7 +54,16 @@ class ResourcesController extends BaseController {
         this.data.record,
       ))
     }
+    this.storePayloadData(payload)
     return this.render('pages/edit', this.data)
+  }
+
+  storePayloadData(payloadData) {
+    Object.keys(payloadData).forEach(key => {
+      if(this.data.record.params[key]) {
+        this.data.record.params[key] = payloadData[key]
+      }
+    })
   }
 
   async custom(request, response) {
