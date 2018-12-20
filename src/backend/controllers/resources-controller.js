@@ -1,6 +1,6 @@
 /* eslint no-unused-vars: 0 */
-const BaseController = require('./base-controller.js')
 const flatten = require('flat')
+const BaseController = require('./base-controller.js')
 
 class ResourcesController extends BaseController {
   async index({ params, query, payload }, response) {
@@ -59,8 +59,8 @@ class ResourcesController extends BaseController {
   }
 
   storePayloadData(payloadData) {
-    Object.keys(payloadData).forEach(key => {
-      if(this.data.record.params[key]) {
+    Object.keys(payloadData).forEach((key) => {
+      if (this.data.record.params[key]) {
         this.data.record.params[key] = payloadData[key]
       }
     })
