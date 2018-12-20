@@ -39,6 +39,13 @@ class ViewHelpers {
      * @type {Object}
      */
     this.branding = this._admin.options.branding
+
+    /**
+     * Custom assets options passed by the user.
+     * `customAssets` subset of {@link AdminBroOptions}
+     * @type {Object}
+     */
+    this.customAssets = this._admin.options.customAssets
   }
 
   getObjectKeyWithValue(obj, key) {
