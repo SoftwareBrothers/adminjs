@@ -1,4 +1,5 @@
 const flatten = require('flat')
+const _ = require('lodash')
 const ValidationError = require('../utils/validation-error')
 
 /**
@@ -62,6 +63,7 @@ class BaseRecord {
     } catch (e) {
       if (e instanceof ValidationError) {
         this.errors = e.errors
+        this.storePayloadData(params)
         return this
       }
       throw e
@@ -91,6 +93,7 @@ class BaseRecord {
     } catch (e) {
       if (e instanceof ValidationError) {
         this.errors = e.errors
+        this.storePayloadData()
         return this
       }
       throw e
@@ -128,6 +131,13 @@ class BaseRecord {
    */
   isValid() {
     return Object.keys(this.errors).length === 0
+  }
+
+  /**
+   * Stores incoming payloadData in record params
+   */
+  storePayloadData(payloadData) {
+    this.params = _.merge(this.params, payloadData)
   }
 
   /**

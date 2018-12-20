@@ -1,5 +1,4 @@
 /* eslint no-unused-vars: 0 */
-const flatten = require('flat')
 const BaseController = require('./base-controller.js')
 
 class ResourcesController extends BaseController {
@@ -39,7 +38,6 @@ class ResourcesController extends BaseController {
         this.data.record,
       ))
     }
-    this.storePayloadData(payload)
     return this.render('pages/new', this.data)
   }
 
@@ -54,16 +52,7 @@ class ResourcesController extends BaseController {
         this.data.record,
       ))
     }
-    this.storePayloadData(payload)
     return this.render('pages/edit', this.data)
-  }
-
-  storePayloadData(payloadData) {
-    Object.keys(payloadData).forEach((key) => {
-      if (this.data.record.params[key]) {
-        this.data.record.params[key] = payloadData[key]
-      }
-    })
   }
 
   async custom(request, response) {
