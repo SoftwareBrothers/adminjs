@@ -1,127 +1,10 @@
-/* eslint-disable object-curly-newline */
-/* eslint-disable class-methods-use-this */
+/* eslint object-curly-newline: 0 */
 const Renderer = require('../../backend/utils/renderer')
 const NotImplementedError = require('../utils/not-implemented-error')
+
 /**
  * PageBuilder class contains methods which allows you to create page content
- * 
- * @example
- * 
- * const { PageBuilder } = require('admin-bro')
- * const ArticleModel = require('./../mongoose/article-model')
- * const UserModel = require('./../mongoose/user-model')
- * const ClientsModel = require('./../mongoose/clients-model')
- * const CommentModel = require('./../mongoose/comment-model')
- * const moment = require('moment')
- * 
- * class DashboardPage extends PageBuilder {
- *   constructor(props) {
- *     super(props)
- *     this.title = 'My dashboard'
- *   }
- * 
- *   async build() {
- *     const maxItems = 10
- *     const articlesCount = await ArticleModel.countDocuments()
- *     const publishedArticlesCount = await ArticleModel.find({ published: true }).limit(maxItems).countDocuments()
- *     const unpublishedArticlesCount = articlesCount - publishedArticlesCount
- *     const usersCount = await UserModel.countDocuments()
- *     const comments = await CommentModel.find({}).limit(maxItems)
- *     const clients = await ClientsModel.find({}).limit(maxItems)
- *     let mappedComments = null
- *     if(comments.length) {
- *       mappedComments = comments.map(comment => { 
- *         return {
- *           title: comment.createdBy,
- *           subtitle: comment.content,
- *           status: comment.status,
- *           imgSrc: comment.imgPath,
- *           date: moment(comment.createdAt).format('YYYY-MM-DD')
- *         }
- *       })
- *     }
- *     await this.setOverview('Collections overview', 'stats')
- *     await this.addBlock({
- *       title: 'The number of all articles',
- *       value: articlesCount,
- *       icon: 'fas fa-arrow-alt-circle-up fa-2x',
- *       columns: 3,
- *     }, this.colorTypes.info)
- *     await this.addBlock({
- *       title: 'Published articles',
- *       value: publishedArticlesCount,
- *       icon: 'fas fa-star fa-2x',
- *       columns: 3
- *     }, this.colorTypes.succes)
- *     await this.addBlock({
- *       title: 'Unpublished articles',
- *       value: unpublishedArticlesCount,
- *       icon: 'fas fa-arrow-alt-circle-down fa-2x',
- *       columns: 3
- *     }, this.colorTypes.warning)
- *     await this.addBlock({
- *       title: 'The number of users',
- *       value: usersCount,
- *       icon: 'fas fa-star fa-2x',
- *       columns: 3
- *     }, this.colorTypes.info)
- *     mappedComments && await this.addInfoTable({
- *       title: 'Table Information',
- *       headers: Object.keys(mappedComments[0]),
- *       items: mappedComments,
- *       columns: 12
- *     })
- *     await this.addTextBox({
- *       title: 'Lorem ipsum text title',
- *       content: `
- *         <div> lorem ipsum contentum textum boxum</div>
- *         <div> lorem ipsum contentum textum boxum</div>
- *         <div> lorem ipsum contentum textum boxum</div>
- *         <div> lorem ipsum contentum textum boxum</div>
- *       `,
- *       columns: 6
- *     })
- *     mappedComments && await this.addInfoList({
- *       title: 'Recent comments',
- *       subtitle: 'Latest comments from user all around the world',
- *       columns: 6,
- *       items: mappedComments
- *     })
- *     await this.addTextBox({
- *       title: 'Simple textbox',
- *       content: '<div> lorem ipsum contentum textum boxum</div>',
- *       columns: 6
- *     })
- *     await this.addChart({
- *       columns: 6,
- *       config: {
- *         name: 'example',
- *         type: 'line',
- *         data: {
- *           labels: clients.map(client => client.month),
- *           datasets: [
- *             {
- *               label: 'label example',
- *               fill: true,
- *               backgroundColor: 'orange',
- *               borderColor: 'tomato',
- *               data: clients.map(client => client.amount),
- *             },
- *           ],
- *         },
- *         options: {
- *           title: {
- *             fontSize: 20,
- *             display: true,
- *             text: 'Title'
- *           },
- *         },
- *       }
- *     })
- *   }    
- * }
  */
-
 class PageBuilder {
   /**
    * @param  {AdminBro}     options.admin  current instance of AdminBro
@@ -130,39 +13,28 @@ class PageBuilder {
     this._admin = admin
 
     /**
-     * @type {String[]}     
+     * @type {String[]}
      * @description _pageContent   array of html elements as String
      */
     this._pageContent = []
 
     /**
-     * @type {String}       
-     * @description _pageHeader    html element as String
+     * @type {String}
+     * @description page title - what will be on the header
      */
-    this._pageHeader = ''
+    this.title = null
 
     /**
-     * @type {String}              
-     * @description page title
+     * @type {String}
+     * @description page subtitle
      */
-    this.title = ''
+    this.subtitle = null
 
     /**
-     * @type {Object}               
+     * @type {Object}
      * @description mapped object contains chart's settings
      */
     this.charts = {}
-
-    /**
-     * @type {Object}   
-     * @description specific colors for html blocks
-     */
-    this.colorTypes = {
-      warning: '#ff9f89',
-      danger: '#f0616f',
-      succes: '#21c197',
-      info: '#718af4',
-    }
   }
 
   /**
@@ -173,84 +45,185 @@ class PageBuilder {
     await this.build()
     return {
       title: this.title,
-      header: this._pageHeader,
-      content: this._pageContent.length > 0 ? this._pageContent.join('') : '',
-      charts: this.charts
+      subtitle: this.subtitle,
+      content: this._pageContent.join(''),
+      charts: this.charts,
     }
   }
 
   /**
-   * This method is responsible for building the page, should be overriden.
+   * This method is responsible for building the page, should be overriden
    */
   build() {
-    throw new NotImplementedError()
+    throw new NotImplementedError(this.constructor.name)
   }
 
-  /** 
-   * Adjusts default dashboard content as a pageHeader
+  /**
+   * Adds default welcome block widget to the page
    */
-  async setDefaultDashboard() {
-    this._pageHeader =  await new Renderer('pages/defaultDashboard').render()
+  addWelcomeBlock() {
+    this.addPartialContent('partials/welcomeBlock', {})
   }
 
-  /** 
-   * Adjusts overview content as a pageHeader
+  /**
+   * Adds canvas chart to the page content based on chart.js library
+   *
+   * @link http://www.chartjs.org
+   *
+   * @param {Object} options
+   * @param {String} options.title
+   * @param {String} options.subtitle
+   * @param {Number} options.columns=12     number of columns on which widget should visible
+   * @param {Number} options.offset=0       column offset
+   * @param {Object} options.config         chart.js config
+   *
+   * @example
+   * async build(){
+   *   this.addChart({
+   *     columns: 6,
+   *     title: 'Articles',
+   *     subtitle: 'Summary for all articles',
+   *     config: {
+   *       type: 'bar',
+   *       data: {
+   *         datasets: [
+   *           {
+   *             label: 'Published',
+   *             fill: true,
+   *             backgroundColor: PageBuilder.COLOR.INFO,
+   *             data: [this.articlesCount.published]
+   *           }, {
+   *             label: 'Not Published',
+   *             fill: true,
+   *             backgroundColor: PageBuilder.COLOR.WARNING,
+   *             data: [this.articlesCount.unpublished]
+   *           },
+   *         ],
+   *       },
+   *     }
+   *   })
+   * }
    */
-  async setOverview(title = '', subtitle = '') {
-    this._pageHeader = await  new Renderer('partials/overview', { title, subtitle }).render()
+  addChart({ title, subtitle, columns = 12, offset = 0, config = {} }) {
+    this.charts[title] = config
+    this.addPartialContent('partials/chart', { columns, offset, title, subtitle, config })
   }
 
-  /** 
-   * Adds canvas chart to the page content
-   * 
-   * Config for chart should includes: name, type, data and options
-   * name is used in the data attribute of canvas element, the rest of the properties based on chart.js documentation
-   * check out {@link http://www.chartjs.org} 
+  /**
+   * Adds info list widget to the page content
+   *
+   * @param {Object}    options
+   * @param {Object[]}  options.items
+   * @param {Object[]}  options.items[].title
+   * @param {Object[]}  options.items[].subtitle
+   * @param {Object[]}  options.items[].status
+   * @param {Object[]}  options.items[].imgSrc
+   * @param {Object[]}  options.items[].date
+   * @param {Number}    options.columns=12     number of columns on which widget should visible
+   * @param {Number}    options.offset=0       column offset
+   * @param {String}    options.title
+   * @param {String}    options.subtitle
+   *
+   * @example
+   * async build(){
+   *   this.addInfoList({
+   *     title: 'Recent comments',
+   *     subtitle: 'Latest comments from user all around the world',
+   *     columns: 4,
+   *     items: (await CommentModel.find({}).limit(3).sort({createdAt: 'desc'})).map(comment => ({
+   *       title: comment.content,
+   *       subtitle: comment.createdBy,
+   *       date: moment(comment.createdAt).format('YYYY-MM-DD HH:MM'),
+   *       status: comment.flagged && 'flagged',
+   *       imgSrc: 'http://www.question2answer.org/qa/?qa=image&qa_blobid=18247718293145324634&qa_size=40',
+   *     }))
+   *   })
+   * }
    */
-  async addChart(options) {
-    const { columns = 12, offset = 0, config = {} } = options
-    this.charts[config.name] = config
-    await this.addPartialContent('partials/chart', { columns, offset, config })
+  addInfoList({ items = [], columns = 12, offset = 0, title = '', subtitle = '' }) {
+    this.addPartialContent('partials/infoList', { items, columns, offset, title, subtitle })
   }
 
-  /** 
-   * Adds info list element to the page content
+  /**
+   * Adds info table widget to the page content
+   *
+   * @param {Object}     options
+   * @param {String}     options.title
+   * @param {Number}     options.columns=12 number of columns on which widget should visible
+   * @param {Number}     options.offset=0   column offset
+   * @param {String[]}   options.headers    table headers
+   * @param {String[][]} options.items      table items
+   *
+   * @example
+   * async build(){
+   *   this.addInfoTable({
+   *     title: 'Articles',
+   *     headers: ['Title', 'Author', 'Published', 'Creation date'],
+   *     items: (await ArticleModel.find({}).sort({createdAt: 'desc'}).limit(5)).map(article => ([
+   *       article.title,
+   *       article.author,
+   *       article.published ? 'YES' : 'NO',
+   *       moment(article.createdAt).format('YYYY-MM-DD HH:MM'),
+   *     ])),
+   *     columns: 8,
+   *   })
+   * }
    */
-  async addInfoList({ items = [], columns = 12, offset = 0, title = '', subtitle = '' }) {
-    await this.addPartialContent('partials/infoList', { items, columns, offset, title, subtitle})
+  addInfoTable({ title = '', columns = 12, items = [], offset = 0, headers = [] }) {
+    this.addPartialContent('partials/infoTable', { title, columns, items, offset, headers })
   }
 
-  /** 
-   * Adds info table element to the page content
+  /**
+   * Adds simple text box widget to the page content
+   *
+   * @param {Object} options
+   * @param {String} options.title
+   * @param {String} options.content
+   * @param {Number} options.columns=12     number of columns on which widget should visible
+   * @param {Number} options.offset=0       column offset
    */
-  async addInfoTable({ title = '', columns = 12, items = [], offset = 0, headers = [] }) {
-    await this.addPartialContent('partials/infoTable', { title, columns, items, offset, headers })
-  }
-
-  /** 
-   * Adds text box element to the page content
-   */
-  async addTextBox({ title = '', content = '', columns = 12, offset = 0 }) {
-    await this.addPartialContent('partials/textBox', { title, content, columns, offset })
+  addTextBox({ title = '', content = '', columns = 12, offset = 0 }) {
+    this.addPartialContent('partials/textBox', { title, content, columns, offset })
   }
 
   /**
    *  Adds compiled html elements to the page content
    *  Developer can declare specific pug view @param view which will be returned as HTML
-   *  @param data is passed to the declared view 
-   */ 
-  async addPartialContent(view, data) {
-    const partialContent = await new Renderer(view, data).render()
+   *
+   *  @param {String} view      pug template url relative to frontend/views
+   *                            without the .pug extension
+   *  @param {Object} data      data passed to the pug renderer
+   */
+  addPartialContent(view, data) {
+    const partialContent = new Renderer(view, data).render()
     this._pageContent.push(partialContent)
   }
 
   /**
-   * Adds block element to the page content
-   * Developer can declare specific color of block's content @param {String} color
+   * Adds text block element to the page content
+   *
+   * @param {Object} options
+   * @param {Number} options.columns=12     number of columns on which widget should visible
+   * @param {Number} options.offset=0       column offset
+   * @param {String} options.title
+   * @param {String} options.icon           class for an icon
+   * @param {String} options.value          string plased in the core of the widget
+   * @param {String} color=PageBuilder.COLOR.INFO   color hex for the font.
    */
-  async addBlock({ columns = 12, offset = 0, title = '', icon = '', value = ''}, color = this.colorTypes.info) {
-    await this.addPartialContent('partials/block', { columns, offset, title, icon, value, color })
+  addBlock({ columns = 12, offset = 0, title = '', icon = '', value = '' }, color = PageBuilder.COLOR.INFO) {
+    this.addPartialContent('partials/block', { columns, offset, title, icon, value, color })
   }
+}
+
+/**
+ * @type {Object}
+ * @description specific colors for html blocks
+ */
+PageBuilder.COLOR = {
+  WARNING: '#ff9f89',
+  DANGER: '#f0616f',
+  SUCCESS: '#21c197',
+  INFO: '#718af4',
 }
 
 module.exports = PageBuilder

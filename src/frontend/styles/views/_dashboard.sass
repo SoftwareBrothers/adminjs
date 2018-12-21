@@ -2,11 +2,10 @@
    min-height: calc(100vh - #{$navbar-height})
    .overview
       background-color: #192035
-      height: rem(425px)
       margin-left: -$padding-layout
       margin-right: -$padding-layout
       margin-bottom: 0
-      padding: 0 $padding-layout
+      padding: 0 $padding-layout $padding-layout*5
       .overview-title
          margin-top: rem(87px)
          font-size: rem(53px)
@@ -14,9 +13,9 @@
          @include media-breakpoint-down($media-min-tablet-width - 1px)
             font-size: rem(40px)
       .overview-subtitle
-         color: $white 
+         color: $white
    .dashboard-content
-      transform: translateY(-60px)
+      padding-top: $padding-layout
       .table .text-small
          color: $spun-pearl
       .item-spacer
@@ -84,6 +83,9 @@
          // we have to override chart.js dimensions
          width: 100% !important
          height: auto !important
+   .header+.dashboard-content
+      padding-top: 0
+      margin-top: -$padding-layout*2
    .default-dashboard
       .welcome-img
          margin-bottom: rem(40px)
