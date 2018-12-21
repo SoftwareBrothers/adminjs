@@ -35,4 +35,4 @@ mixin formGroup(prop, value, error)
         .control
           textarea(id='textEditor' name=prop.name()) #{value}
     if error
-      .help.is-danger= error.messages
+      .help.is-danger= error.message
