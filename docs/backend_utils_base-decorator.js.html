@@ -26,7 +26,10 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>const BaseProperty = require('../adapters/base-property')
+            <pre class="prettyprint source linenums"><code>const moment = require('moment')
+const xss = require('xss')
+const BaseProperty = require('../adapters/base-property')
+const ViewHelpers = require('./view-helpers')
 
 const DEFAULT_MAX_ITEMS_IN_LIST = 5
 
@@ -43,22 +46,38 @@ const DEFAULT_MAX_ITEMS_IN_LIST = 5
  * class ArticleDecorator extends BaseDecorator {
  *   constructor(params) {
  *     super(params)
- *     this.resourceName = 'Article'
+ *     this.resourceName = 'Articles'
  *     this.listProperties = ['title', 'content', 'publishedAt']
  *     this.showProperties = ['title', 'publishedAt']
- *     this.parentName = 'Knowledge'
+ *     this.parent = {
+ *       name: 'Knowledge',
+ *       icon: 'icon-bomb',
+ *     }
+ *     const publishAction = {
+ *       id: 'publish',
+ *       icon: 'fas fa-share',
+ *       label: 'Publish',
+ *       action: (request, response, data) => {
+ *         const { method } = request
+ *         if (method === 'GET') {
+ *           return 'Some content or form which you want to place here'
+ *         }
+ *         return 'PUBLISH ACTION WORKS'
+ *       },
+ *     }
+ *     this.recordActions = ['show', 'edit', 'remove', publishAction]
  *   }
  *
- *   getValue({ record, property, where, helpers }) {
+ *   getValue({ record, property, where}) {
  *     switch (property.name()) {
  *     case 'publishedAt':
  *       return `
  *         &lt;p>Here goes a paragraph&lt;/p>
  *         &lt;p>and another one&lt;/p>
- *         &lt;a href="${helpers.showRecordUrl(record.resource, record)}">Link somewere&lt;/>
+ *         &lt;a href="${this.helpers.showRecordUrl(record.resource, record)}">Link somewere&lt;/>
  *       `
  *     default:
- *       return super.getValue({ record, property, where, helpers })
+ *       return super.getValue({ record, property, where })
  *     }
  *   }
  * }
@@ -66,10 +85,15 @@ const DEFAULT_MAX_ITEMS_IN_LIST = 5
  */
 class BaseDecorator {
   /**
-   * @param  {BaseResource} resource  resource which is decorated
+   * @param  {Object}       options
+   * @param  {BaseResource} options.resource  resource which is decorated
+   * @param  {AdminBro}     options.admin  current instance of AdminBro
    */
-  constructor(resource) {
+  constructor({ resource, admin }) {
     this._resource = resource
+    this._admin = admin
+
+    this.helpers = new ViewHelpers({ admin })
 
     /**
      * Resource name, when not given decorator will use raw name of the resource
@@ -127,9 +151,8 @@ class BaseDecorator {
     if (overridenProperties) {
       return overridenProperties.map(property => this.nameToProperty(property))
     }
-    return this._resource.properties().filter((property) => {
-      return property.isVisible()
-    }).slice(0, DEFAULT_MAX_ITEMS_IN_LIST)
+    return this._resource.properties()
+      .filter(property => property.isVisible()).slice(0, DEFAULT_MAX_ITEMS_IN_LIST)
   }
 
   /**
@@ -147,22 +170,22 @@ class BaseDecorator {
   /**
    * Returns object(map) with default actions as keys and their values
    */
-  getDefaultActions(helpers, record) {
+  getDefaultActions(record) {
     const resource = this._resource
     return {
       show: {
-        path: helpers.showRecordUrl(resource, record),
-        icon: 'info',
+        path: this.helpers.showRecordUrl(resource, record),
+        icon: 'icomoon-info',
         label: 'Info',
       },
       edit: {
-        path: helpers.editRecordUrl(resource, record),
-        icon: 'pen',
+        path: this.helpers.editRecordUrl(resource, record),
+        icon: 'icomoon-edit',
         label: 'Edit',
       },
       remove: {
-        path: helpers.deleteRecordUrl(resource, record),
-        icon: 'trash',
+        path: this.helpers.deleteRecordUrl(resource, record),
+        icon: 'icomoon-remove-2',
         label: 'Remove',
       },
     }
@@ -171,15 +194,23 @@ class BaseDecorator {
   /**
    * Returns object(map) with record actions declared in his decorator
    */
-  getAllAvailableActions(helpers, defaultActions, recordActions, record) {
+  getAllAvailableActions(defaultActions, recordActions, record) {
     return recordActions.reduce((obj, key) => {
       if (typeof key === 'object') {
-        return { ...obj, ...{
-            [key.id]: {...key, path: helpers.customRecordActionUrl(this._resource, record, key.id) },
+        return {
+          ...obj,
+          ...{
+            [key.id]: {
+              ...key,
+              path: this.helpers.customRecordActionUrl(this._resource, record, key.id),
+            },
           },
         }
       }
-      return { ...obj, ...(Object.keys(defaultActions).includes(key) &amp;&amp; { [key]: defaultActions[key] }) }
+      return {
+        ...obj,
+        ...(Object.keys(defaultActions).includes(key) &amp;&amp; { [key]: defaultActions[key] }),
+      }
     }, {})
   }
 
@@ -187,22 +218,24 @@ class BaseDecorator {
   * Returns object(map) with record actions declared in his decorator.
   * If record doesn't have declared actions, it automatically returns default ones
   */
-  getRecordActions(helpers, record) {
-    const defaultActions = this.getDefaultActions(helpers, record)
+  getRecordActions(record) {
+    const defaultActions = this.getDefaultActions(record)
     const recordActions = this.invokeOrGet('recordActions')
-    if(recordActions) {
-      return this.getAllAvailableActions(helpers, defaultActions, recordActions, record)
+    if (recordActions) {
+      return this.getAllAvailableActions(defaultActions, recordActions, record)
     }
     return defaultActions
   }
 
   /**
    * Change name to the Property object
+   * Custom Properties are not sortable
    * @param  {String} propertyName [description]
    * @return {BaseProperty}              [description]
    */
   nameToProperty(propertyName) {
-    return this._resource.property(propertyName) || new BaseProperty({ path: propertyName })
+    return this._resource.property(propertyName)
+      || new BaseProperty({ path: propertyName, isSortable: false })
   }
 
   /**
@@ -222,11 +255,13 @@ class BaseDecorator {
    * @param  {BaseRecord}   options.record
    * @param  {BaseProperty} options.property
    * @param  {String}       options.where    one of: list | show
-   * @param  {ViewHelpers}  options.helpers  view helpers
    * @return {String}                        Html string which will be rendered
    */
-  getValue({ record, property, where, helpers }) {
-    return record.param(property.name())
+  getValue({ record, property, where }) {
+    if (property.type() === 'date') {
+      return moment(record.param(property.name())).format('YYYY-MM-DD')
+    }
+    return xss(record.param(property.name()))
   }
 }
 
@@ -241,13 +276,13 @@ module.exports = BaseDecorator
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="AdminBro.html">AdminBro</a></li><li><a href="BaseController.html">BaseController</a></li><li><a href="BaseDatabase.html">BaseDatabase</a></li><li><a href="BaseDecorator.html">BaseDecorator</a></li><li><a href="BaseProperty.html">BaseProperty</a></li><li><a href="BaseRecord.html">BaseRecord</a></li><li><a href="BaseResource.html">BaseResource</a></li><li><a href="ValidationError.html">ValidationError</a></li><li><a href="ViewHelpers.html">ViewHelpers</a></li></ul><h3>Namespaces</h3><ul><li><a href="Controllers.html">Controllers</a></li></ul><h3>Tutorials</h3><ul><li><a href="tutorial-resource-decorators.html">Resource customization</a></li></ul><h3>Global</h3><ul><li><a href="global.html#Router">Router</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="AdminBro.html">AdminBro</a></li><li><a href="BaseController.html">BaseController</a></li><li><a href="BaseDatabase.html">BaseDatabase</a></li><li><a href="BaseDecorator.html">BaseDecorator</a></li><li><a href="BaseProperty.html">BaseProperty</a></li><li><a href="BaseRecord.html">BaseRecord</a></li><li><a href="BaseResource.html">BaseResource</a></li><li><a href="PageBuilder.html">PageBuilder</a></li><li><a href="ValidationError.html">ValidationError</a></li><li><a href="ViewHelpers.html">ViewHelpers</a></li></ul><h3>Namespaces</h3><ul><li><a href="Controllers.html">Controllers</a></li></ul><h3>Tutorials</h3><ul><li><a href="tutorial-resource-decorators.html">Resource customization</a></li></ul><h3>Global</h3><ul><li><a href="global.html#Router">Router</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Sat Dec 08 2018 19:06:36 GMT+0100 (CET)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Fri Dec 21 2018 20:08:07 GMT+0100 (Central European Standard Time)
 </footer>
 
 <script> prettyPrint(); </script>

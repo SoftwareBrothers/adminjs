@@ -28,7 +28,7 @@
 
 <header>
     
-        <h2><span class="attribs"><span class="type-signature"></span></span>BaseDecorator<span class="signature">(resource)</span><span class="type-signature"></span></h2>
+        <h2><span class="attribs"><span class="type-signature"></span></span>BaseDecorator<span class="signature">(options)</span><span class="type-signature"></span></h2>
         
             <div class="class-description"><p>Base decorator class which decorates the Resource.</p>
 <p>Decorators are passed along with resources during the AdminBro setup. By default
@@ -47,7 +47,7 @@ each resource has BaseDecorator, but it can be overriden.</p></div>
     
 
     
-    <h4 class="name" id="BaseDecorator"><span class="type-signature"></span>new BaseDecorator<span class="signature">(resource)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="BaseDecorator"><span class="type-signature"></span>new BaseDecorator<span class="signature">(options)</span><span class="type-signature"></span></h4>
     
 
     
@@ -91,6 +91,48 @@ each resource has BaseDecorator, but it can be overriden.</p></div>
 
         <tr>
             
+                <td class="name"><code>options</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">
+                <h6>Properties</h6>
+                
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
                 <td class="name"><code>resource</code></td>
             
 
@@ -108,6 +150,36 @@ each resource has BaseDecorator, but it can be overriden.</p></div>
             
 
             <td class="description last"><p>resource which is decorated</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>admin</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="AdminBro.html">AdminBro</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>current instance of AdminBro</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+            </td>
         </tr>
 
     
@@ -148,7 +220,7 @@ each resource has BaseDecorator, but it can be overriden.</p></div>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="backend_utils_base-decorator.js.html">backend/utils/base-decorator.js</a>, <a href="backend_utils_base-decorator.js.html#line39">line 39</a>
+        <a href="backend_utils_base-decorator.js.html">backend/utils/base-decorator.js</a>, <a href="backend_utils_base-decorator.js.html#line58">line 58</a>
     </li></ul></dd>
     
 
@@ -182,22 +254,38 @@ each resource has BaseDecorator, but it can be overriden.</p></div>
 class ArticleDecorator extends BaseDecorator {
   constructor(params) {
     super(params)
-    this.resourceName = 'Article'
+    this.resourceName = 'Articles'
     this.listProperties = ['title', 'content', 'publishedAt']
     this.showProperties = ['title', 'publishedAt']
-    this.parentName = 'Knowledge'
+    this.parent = {
+      name: 'Knowledge',
+      icon: 'icon-bomb',
+    }
+    const publishAction = {
+      id: 'publish',
+      icon: 'fas fa-share',
+      label: 'Publish',
+      action: (request, response, data) => {
+        const { method } = request
+        if (method === 'GET') {
+          return 'Some content or form which you want to place here'
+        }
+        return 'PUBLISH ACTION WORKS'
+      },
+    }
+    this.recordActions = ['show', 'edit', 'remove', publishAction]
   }
 
-  getValue({ record, property, where, helpers }) {
+  getValue({ record, property, where}) {
     switch (property.name()) {
     case 'publishedAt':
       return `
         &lt;p>Here goes a paragraph&lt;/p>
         &lt;p>and another one&lt;/p>
-        &lt;a href="${helpers.showRecordUrl(record.resource, record)}">Link somewere&lt;/>
+        &lt;a href="${this.helpers.showRecordUrl(record.resource, record)}">Link somewere&lt;/>
       `
     default:
-      return super.getValue({ record, property, where, helpers })
+      return super.getValue({ record, property, where })
     }
   }
 }</code></pre>
@@ -284,7 +372,7 @@ class ArticleDecorator extends BaseDecorator {
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="backend_utils_base-decorator.js.html">backend/utils/base-decorator.js</a>, <a href="backend_utils_base-decorator.js.html#line64">line 64</a>
+        <a href="backend_utils_base-decorator.js.html">backend/utils/base-decorator.js</a>, <a href="backend_utils_base-decorator.js.html#line88">line 88</a>
     </li></ul></dd>
     
 
@@ -363,7 +451,7 @@ element</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="backend_utils_base-decorator.js.html">backend/utils/base-decorator.js</a>, <a href="backend_utils_base-decorator.js.html#line58">line 58</a>
+        <a href="backend_utils_base-decorator.js.html">backend/utils/base-decorator.js</a>, <a href="backend_utils_base-decorator.js.html#line82">line 82</a>
     </li></ul></dd>
     
 
@@ -441,7 +529,7 @@ element</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="backend_utils_base-decorator.js.html">backend/utils/base-decorator.js</a>, <a href="backend_utils_base-decorator.js.html#line50">line 50</a>
+        <a href="backend_utils_base-decorator.js.html">backend/utils/base-decorator.js</a>, <a href="backend_utils_base-decorator.js.html#line74">line 74</a>
     </li></ul></dd>
     
 
@@ -519,7 +607,7 @@ element</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="backend_utils_base-decorator.js.html">backend/utils/base-decorator.js</a>, <a href="backend_utils_base-decorator.js.html#line70">line 70</a>
+        <a href="backend_utils_base-decorator.js.html">backend/utils/base-decorator.js</a>, <a href="backend_utils_base-decorator.js.html#line94">line 94</a>
     </li></ul></dd>
     
 
@@ -599,7 +687,7 @@ element</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="backend_utils_base-decorator.js.html">backend/utils/base-decorator.js</a>, <a href="backend_utils_base-decorator.js.html#line146">line 146</a>
+        <a href="backend_utils_base-decorator.js.html">backend/utils/base-decorator.js</a>, <a href="backend_utils_base-decorator.js.html#line169">line 169</a>
     </li></ul></dd>
     
 
@@ -685,7 +773,7 @@ element</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="backend_utils_base-decorator.js.html">backend/utils/base-decorator.js</a>, <a href="backend_utils_base-decorator.js.html#line122">line 122</a>
+        <a href="backend_utils_base-decorator.js.html">backend/utils/base-decorator.js</a>, <a href="backend_utils_base-decorator.js.html#line145">line 145</a>
     </li></ul></dd>
     
 
@@ -771,7 +859,7 @@ element</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="backend_utils_base-decorator.js.html">backend/utils/base-decorator.js</a>, <a href="backend_utils_base-decorator.js.html#line97">line 97</a>
+        <a href="backend_utils_base-decorator.js.html">backend/utils/base-decorator.js</a>, <a href="backend_utils_base-decorator.js.html#line121">line 121</a>
     </li></ul></dd>
     
 
@@ -876,7 +964,7 @@ database type with its icon</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="backend_utils_base-decorator.js.html">backend/utils/base-decorator.js</a>, <a href="backend_utils_base-decorator.js.html#line86">line 86</a>
+        <a href="backend_utils_base-decorator.js.html">backend/utils/base-decorator.js</a>, <a href="backend_utils_base-decorator.js.html#line110">line 110</a>
     </li></ul></dd>
     
 
@@ -981,7 +1069,7 @@ If record doesn't have declared actions, it automatically returns default ones</
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="backend_utils_base-decorator.js.html">backend/utils/base-decorator.js</a>, <a href="backend_utils_base-decorator.js.html#line162">line 162</a>
+        <a href="backend_utils_base-decorator.js.html">backend/utils/base-decorator.js</a>, <a href="backend_utils_base-decorator.js.html#line193">line 193</a>
     </li></ul></dd>
     
 
@@ -1067,7 +1155,7 @@ If record doesn't have declared actions, it automatically returns default ones</
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="backend_utils_base-decorator.js.html">backend/utils/base-decorator.js</a>, <a href="backend_utils_base-decorator.js.html#line77">line 77</a>
+        <a href="backend_utils_base-decorator.js.html">backend/utils/base-decorator.js</a>, <a href="backend_utils_base-decorator.js.html#line101">line 101</a>
     </li></ul></dd>
     
 
@@ -1175,7 +1263,7 @@ If record doesn't have declared actions, it automatically returns default ones</
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="backend_utils_base-decorator.js.html">backend/utils/base-decorator.js</a>, <a href="backend_utils_base-decorator.js.html#line111">line 111</a>
+        <a href="backend_utils_base-decorator.js.html">backend/utils/base-decorator.js</a>, <a href="backend_utils_base-decorator.js.html#line134">line 134</a>
     </li></ul></dd>
     
 
@@ -1379,29 +1467,6 @@ If record doesn't have declared actions, it automatically returns default ones</
         </tr>
 
     
-
-        <tr>
-            
-                <td class="name"><code>helpers</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type"><a href="ViewHelpers.html">ViewHelpers</a></span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>view helpers</p></td>
-        </tr>
-
-    
     </tbody>
 </table>
 
@@ -1446,7 +1511,7 @@ If record doesn't have declared actions, it automatically returns default ones</
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="backend_utils_base-decorator.js.html">backend/utils/base-decorator.js</a>, <a href="backend_utils_base-decorator.js.html#line200">line 200</a>
+        <a href="backend_utils_base-decorator.js.html">backend/utils/base-decorator.js</a>, <a href="backend_utils_base-decorator.js.html#line232">line 232</a>
     </li></ul></dd>
     
 
@@ -1604,7 +1669,7 @@ it, otherwise return parameter value</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="backend_utils_base-decorator.js.html">backend/utils/base-decorator.js</a>, <a href="backend_utils_base-decorator.js.html#line186">line 186</a>
+        <a href="backend_utils_base-decorator.js.html">backend/utils/base-decorator.js</a>, <a href="backend_utils_base-decorator.js.html#line219">line 219</a>
     </li></ul></dd>
     
 
@@ -1664,7 +1729,8 @@ it, otherwise return parameter value</p>
 
 
 <div class="description">
-    <script type="text/javascript" src="https://unpkg.com/mermaid@7.1.0/dist/mermaid.min.js"></script><p>Change name to the Property object</p>
+    <script type="text/javascript" src="https://unpkg.com/mermaid@7.1.0/dist/mermaid.min.js"></script><p>Change name to the Property object
+Custom Properties are not sortable</p>
 </div>
 
 
@@ -1757,7 +1823,7 @@ it, otherwise return parameter value</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="backend_utils_base-decorator.js.html">backend/utils/base-decorator.js</a>, <a href="backend_utils_base-decorator.js.html#line176">line 176</a>
+        <a href="backend_utils_base-decorator.js.html">backend/utils/base-decorator.js</a>, <a href="backend_utils_base-decorator.js.html#line208">line 208</a>
     </li></ul></dd>
     
 
@@ -1823,13 +1889,13 @@ it, otherwise return parameter value</p>
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="AdminBro.html">AdminBro</a></li><li><a href="BaseController.html">BaseController</a></li><li><a href="BaseDatabase.html">BaseDatabase</a></li><li><a href="BaseDecorator.html">BaseDecorator</a></li><li><a href="BaseProperty.html">BaseProperty</a></li><li><a href="BaseRecord.html">BaseRecord</a></li><li><a href="BaseResource.html">BaseResource</a></li><li><a href="ValidationError.html">ValidationError</a></li><li><a href="ViewHelpers.html">ViewHelpers</a></li></ul><h3>Namespaces</h3><ul><li><a href="Controllers.html">Controllers</a></li></ul><h3>Tutorials</h3><ul><li><a href="tutorial-resource-decorators.html">Resource customization</a></li></ul><h3>Global</h3><ul><li><a href="global.html#Router">Router</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="AdminBro.html">AdminBro</a></li><li><a href="BaseController.html">BaseController</a></li><li><a href="BaseDatabase.html">BaseDatabase</a></li><li><a href="BaseDecorator.html">BaseDecorator</a></li><li><a href="BaseProperty.html">BaseProperty</a></li><li><a href="BaseRecord.html">BaseRecord</a></li><li><a href="BaseResource.html">BaseResource</a></li><li><a href="PageBuilder.html">PageBuilder</a></li><li><a href="ValidationError.html">ValidationError</a></li><li><a href="ViewHelpers.html">ViewHelpers</a></li></ul><h3>Namespaces</h3><ul><li><a href="Controllers.html">Controllers</a></li></ul><h3>Tutorials</h3><ul><li><a href="tutorial-resource-decorators.html">Resource customization</a></li></ul><h3>Global</h3><ul><li><a href="global.html#Router">Router</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Sat Dec 08 2018 19:06:36 GMT+0100 (CET)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Fri Dec 21 2018 20:08:07 GMT+0100 (Central European Standard Time)
 </footer>
 
 <script> prettyPrint(); </script>
