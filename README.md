@@ -1,6 +1,9 @@
 # Admin Bro
 
-Admin Framework for nodejs apps.
+Admin Framework for Node.js apps. Inspired by:
+* [django admin](https://docs.djangoproject.com),
+* [rails admin](https://github.com/sferik/rails_admin) and 
+* [active admin](https://activeadmin.info/).
 
 Check out example app here:
 
@@ -9,19 +12,32 @@ password: `password`
 
 https://admin-bro-example-app.herokuapp.com/admin
 
+# What kind of problems it solves
+
+So you have a working service built in Node.js. It uses (for example) [Hapi.js](https://hapijs.com/) for rendering a couple of REST routes and [mongoose](https://mongoosejs.com/) as the _connector_ to the database.
+
+Everything works fine, but now you would like to:
+* see all the data in the app,
+* perform custom _business_ actions on objects in the database,
+* bootstrap the tables with the _initial_ data,
+* build custom report pages,
+* allow other team members (not necessary programmers) to see what is going on in the application.
+
+And all these cases can be solved by AdminBro. By adding couple of lines of code you have a running admin interface.
+
 # How it works
 
-AdminBro is divided into modules. On the one side we have database connectors - we call them Resources. On the other hand - rendering http frameworks.
+* AdminBor uses models which you already have in your ORM, so you don't have to redefine them.
+* AdminBro also be plugged into Node.js framework you already use for rendering it's views.
 
-Using this architecture allows us to add AdminBro to almost every app and present almost any type of resource.
+List of available ORMs and frameworks
 
-## The diagram
+* [admin-bro-hapijs](https://github.com/SoftwareBrothers/admin-bro-hapijs) - plugin for [Hapi.js](https://hapijs.com/) framework
+* [admin-bro-mongoose](https://github.com/SoftwareBrothers/admin-bro-mngoose) - adapter for [mongoose ODM](https://mongoosejs.com/)
+* [admin-bro-sequelizejs](https://github.com/SoftwareBrothers/admin-bro-sequelizejs) - adapter for [sequelize ORM](http://docs.sequelizejs.com/)
+* _admin-bro-expressjs - plugin for Expressjs framework (Work in Progress)_
 
-<p align="center">
-  <img src="./screenshots/admin-high-level.svg" height=350>
-</p>
-
-## An example admin app
+## An example admin application
 
 Let's jump right to the example:
 
@@ -87,13 +103,13 @@ In order to run it you will have to install all the following dependencies:
 npm install --save admin-bro admin-bro-mongoose admin-bro-hapijs mongoose hapi
 ```
 
-and then:
+and then (assuming that you have mongoDB running on port 27017):
 
 ```bash
 MONGO_URL=mongodb://localhost:27017/hapi-admin node index.js
 ```
 
-and this is what you get afer visiting http://localhost:8080/admin
+and this is what you get after visiting http://localhost:8080/admin
 
 <img src="./screenshots/simpleapp.png">
 
@@ -111,12 +127,17 @@ And
 * Generated List, Show, Edit and New views along with 3 actions: update, create and delete for those resources.
 * and finally the AdminBro uses hapijs to render routes under `'/admin'` path
 
+### Full featured example
+
+Code of advanced example app using AdminBro (which you can see on https://admin-bro-example-app.herokuapp.com/admin) can be found here: https://github.com/SoftwareBrothers/admin-bro-example-app
+
 ## What next
 
-So since now you know the basics, it is time for more advanced topics:
+So since now you know the basics, it is the time for more advanced topics:
 
 * [List of all AdminBro options](https://softwarebrothers.github.io/admin-bro/global.html#AdminBroOptions)
 * [Resource customization](https://softwarebrothers.github.io/admin-bro/tutorial-resource-decorators.html)
+* [Custom dashboard](https://softwarebrothers.github.io/admin-bro/tutorial-custom-dashboard.html)
 
 ## License
 
