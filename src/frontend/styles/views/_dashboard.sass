@@ -15,7 +15,7 @@
       .overview-subtitle
          color: $white
    .dashboard-content
-      transform: translateY($padding-layout)
+      padding-top: $padding-layout
       .table .text-small
          color: $spun-pearl
       .item-spacer
@@ -84,7 +84,8 @@
          width: 100% !important
          height: auto !important
    .header+.dashboard-content
-      transform: translateY(-$padding-layout*2)
+      padding-top: 0
+      margin-top: -$padding-layout*2
    .default-dashboard
       .welcome-img
          margin-bottom: rem(40px)

@@ -1,5 +1,4 @@
 const PageBuilder = require('@backend/utils/page-builder')
-const NotImplementedError = require('@backend/utils/not-implemented-error')
 
 describe('PageBuilder', function () {
   beforeEach(function () {
@@ -36,7 +35,7 @@ describe('PageBuilder', function () {
           super(params)
           this.title = 'example page'
         }
-        
+
         build() {
           this.addBlock({
             title: 'The number of all articles',
@@ -51,7 +50,7 @@ describe('PageBuilder', function () {
     })
 
     it('throws an error when build method is not overriden', function () {
-      expect(() => { 
+      expect(() => {
         this.pageBuilder.render().to.throw('You have to implement this')
       })
     })
