@@ -11,7 +11,6 @@ class PageBuilder {
    */
   constructor({ admin }) {
     this._admin = admin
-    this.className = 'PageBuilder'
 
     /**
      * @type {String[]}
