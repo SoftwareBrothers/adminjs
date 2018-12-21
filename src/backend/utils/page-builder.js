@@ -114,11 +114,11 @@ class PageBuilder {
    *
    * @param {Object}    options
    * @param {Object[]}  options.items
-   * @param {Object[]}  options.items[].title
-   * @param {Object[]}  options.items[].subtitle
-   * @param {Object[]}  options.items[].status
-   * @param {Object[]}  options.items[].imgSrc
-   * @param {Object[]}  options.items[].date
+   * @param {String}    options.items[].title
+   * @param {String}    options.items[].subtitle
+   * @param {String}    options.items[].status
+   * @param {String}    options.items[].imgSrc
+   * @param {String}    options.items[].date
    * @param {Number}    options.columns=12     number of columns on which widget should visible
    * @param {Number}    options.offset=0       column offset
    * @param {String}    options.title
