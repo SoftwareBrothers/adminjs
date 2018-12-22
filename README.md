@@ -1,11 +1,13 @@
 # Admin Bro
 
-Admin Framework for Node.js apps. Inspired by:
+An automatic admin interface which can be plugged into your application. You, as a developer, provide database models (like posts, comments, stores, products or whatever else your application uses), and AdminBro generates UI which allows you (or other trusted users) to manage content.
+
+Inspired by:
 * [django admin](https://docs.djangoproject.com),
 * [rails admin](https://github.com/sferik/rails_admin) and 
 * [active admin](https://activeadmin.info/).
 
-Check out example app here:
+Check out the example application with mongo and postgres models here:
 
 login: `test@example.com`
 password: `password`
