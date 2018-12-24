@@ -2,12 +2,9 @@
 
 An automatic admin interface which can be plugged into your application. You, as a developer, provide database models (like posts, comments, stores, products or whatever else your application uses), and AdminBro generates UI which allows you (or other trusted users) to manage content.
 
-Inspired by:
-* [django admin](https://docs.djangoproject.com),
-* [rails admin](https://github.com/sferik/rails_admin) and 
-* [active admin](https://activeadmin.info/).
+Inspired by: [django admin](https://docs.djangoproject.com), [rails admin](https://github.com/sferik/rails_admin) and [active admin](https://activeadmin.info/).
 
-Check out the example application with mongo and postgres models here:
+Check out the example application with mongodb and postgres models here:
 
 login: `test@example.com`
 password: `password`
@@ -30,7 +27,7 @@ And all these cases can be solved by AdminBro. By adding couple of lines of code
 # How it works
 
 * AdminBor uses models which you already have in your ORM, so you don't have to redefine them.
-* AdminBro also be plugged into Node.js framework you already use for rendering it's views.
+* AdminBro also can be plugged into Node.js framework you already use for rendering it's views.
 
 List of available ORMs and frameworks
 
@@ -39,9 +36,42 @@ List of available ORMs and frameworks
 * [admin-bro-sequelizejs](https://github.com/SoftwareBrothers/admin-bro-sequelizejs) - adapter for [sequelize ORM](http://docs.sequelizejs.com/)
 * _admin-bro-expressjs - plugin for Expressjs framework (Work in Progress)_
 
+# Features
+
+* CRUD any data in any resource
+* Custom actions
+* Form validation based on schema in your resources
+* Full featured dashboard with widgets
+* Custom resource decorators
+
+# Installation
+
+1. add admin-bro to your package.json: `yarn add admin-bro` and include it in your project: `const AdminBro = require('admin-bro')`
+2. depending on your ORM add corresponding adapter:
+  * for mongoose: `yarn add admin-bro-mongoose`
+  * for sequelize: `yarn add admin-bro-sequelizejs`
+3. register the adapter: `AdminBro.registerAdapter(require('admin-bro-mongoose'))`
+4. connect with your database and pass it to AdminBro via options:
+```
+const connection = await mongoose.connect(process.env.MONGO_URL)
+const adminBroOptions = {
+  databases: [connection],
+}
+```
+4. depending on your nodejs framework install required plugin:
+  * for hapijs: `yarn add admin-bro-hapijs`
+  * for expressjs (work in progress): `yarn add admin-bro-expressjs`
+6. use choosen plugin to render AdminBro:
+```
+const AdminBroPlugin = require('admin-bro-hapijs')
+const server = Hapi.server({ port: process.env.PORT || 8080 })
+await server.register({ plugin: AdminBroPlugin, options: adminBroOptions })
+await server.start()
+```
+
 ## An example admin application
 
-Let's jump right to the example:
+Here is an one file example of how to connect AdminBro with mongoose and render it via Hapi.js:
 
 ```javascript
 // index.js
@@ -102,7 +132,7 @@ start()
 In order to run it you will have to install all the following dependencies:
 
 ```bash
-npm install --save admin-bro admin-bro-mongoose admin-bro-hapijs mongoose hapi
+yarn install --save admin-bro admin-bro-mongoose admin-bro-hapijs mongoose hapi
 ```
 
 and then (assuming that you have mongoDB running on port 27017):
@@ -114,20 +144,6 @@ MONGO_URL=mongodb://localhost:27017/hapi-admin node index.js
 and this is what you get after visiting http://localhost:8080/admin
 
 <img src="./screenshots/simpleapp.png">
-
-### What's just happened?
-
-So
-* We used [hapijs](https://hapijs.com/) as a framework for rendering AdminBro routes (admin-bro-hapijs plugin)
-* We wrapped [mongoose](https://mongoosejs.com/) ORM with `admin-bro-mongoose` adapter
-* We defined one mongoDb collection using mongoose ORM
-* We passed mongoose instance to the AdminBro via options.
-
-And
-* AdminBro took the mongoose connection
-* Extracted all resources form it (`Admin` collection) using admin-bro-mongoose adapter
-* Generated List, Show, Edit and New views along with 3 actions: update, create and delete for those resources.
-* and finally the AdminBro uses hapijs to render routes under `'/admin'` path
 
 ### Full featured example
 
