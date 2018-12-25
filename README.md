@@ -34,7 +34,7 @@ List of available ORMs and frameworks
 * [admin-bro-hapijs](https://github.com/SoftwareBrothers/admin-bro-hapijs) - plugin for [Hapi.js](https://hapijs.com/) framework
 * [admin-bro-mongoose](https://github.com/SoftwareBrothers/admin-bro-mngoose) - adapter for [mongoose ODM](https://mongoosejs.com/)
 * [admin-bro-sequelizejs](https://github.com/SoftwareBrothers/admin-bro-sequelizejs) - adapter for [sequelize ORM](http://docs.sequelizejs.com/)
-* _admin-bro-expressjs - plugin for Expressjs framework (Work in Progress)_
+* [admin-bro-expressjs](https://github.com/SoftwareBrothers/admin-bro-expressjs) - plugin for Expressjs framework
 
 # Features
 
@@ -60,7 +60,7 @@ const adminBroOptions = {
 ```
 4. depending on your nodejs framework install required plugin:
   * for hapijs: `yarn add admin-bro-hapijs`
-  * for expressjs (work in progress): `yarn add admin-bro-expressjs`
+  * for expressjs: `yarn add admin-bro-expressjs`
 6. use choosen plugin to render AdminBro:
 ```
 const AdminBroPlugin = require('admin-bro-hapijs')
