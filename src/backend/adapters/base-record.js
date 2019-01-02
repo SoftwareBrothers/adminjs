@@ -27,7 +27,7 @@ class BaseRecord {
      * Actual record data stored as a flatten object
      * @type {Object}
      */
-    this.params = params && flatten(params)
+    this.params = params ? flatten(params) : {}
 
     /**
      * Object containing all validation errors: this.errors[path] = 'errorMessage'
@@ -63,7 +63,7 @@ class BaseRecord {
     } catch (e) {
       if (e instanceof ValidationError) {
         this.errors = e.errors
-        this.storePayloadData(params)
+        this.storeParams(params)
         return this
       }
       throw e
@@ -93,7 +93,6 @@ class BaseRecord {
     } catch (e) {
       if (e instanceof ValidationError) {
         this.errors = e.errors
-        this.storePayloadData()
         return this
       }
       throw e
@@ -136,7 +135,7 @@ class BaseRecord {
   /**
    * Stores incoming payloadData in record params
    */
-  storePayloadData(payloadData) {
+  storeParams(payloadData) {
     this.params = _.merge(this.params, payloadData)
   }
 

@@ -25,9 +25,9 @@ describe('Record', function () {
       }
     })
 
-    it('returns undefined params if they are not passed to the constructor', function () {
+    it('returns empty object if params are not passed to the constructor', function () {
       const record = new Record()
-      expect(record.params).to.be.undefined
+      expect(record.params).to.deep.equal({})
     })
 
     it('stores flatten object params', function () {
@@ -36,7 +36,7 @@ describe('Record', function () {
       expect(record.params).to.deep.equal(expectedResult)
     })
   })
-  describe('#storePayloadData', function () {
+  describe('#storeParams', function () {
     beforeEach(function () {
       this.params = {
         auth: {
@@ -49,10 +49,10 @@ describe('Record', function () {
       }
     })
 
-    it.only('stores given data property in a record params', function () {
+    it('stores given data property in a record params', function () {
       const record = new Record(this.params)
       const expectedResult = { 'auth.login': 'new login', name: 'Tom' }
-      record.storePayloadData(this.payload)
+      record.storeParams(this.payload)
       expect(record.params).to.deep.equal(expectedResult)
     })
   })
