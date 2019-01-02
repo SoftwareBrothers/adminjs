@@ -1,0 +1,47 @@
+.search-bar 
+  padding-bottom: rem(24px)
+  border-bottom: none
+  .columns
+    flex-wrap: wrap
+    justify-content: flex-end
+    .field
+      padding: 0 rem(16px)
+      display: flex
+      align-items: center
+      label
+        margin-bottom: 0
+        margin-right: rem(16px)
+        font-weight: normal
+        text-transform: none
+        color: #757689
+  .control
+    position: relative
+
+    input::placeholder
+      font-size: rem(12px)
+      font-weight: normal
+      font-style: normal
+      font-stretch: normal
+      color: $spun-pearl
+    .search-icon
+      position: absolute
+      right: 0
+      top: rem(12px)
+      color: $spun-pearl
+      margin-right: rem(18px)
+      z-index: 1
+  .col-dropdown
+    display: flex
+    justify-content: flex-end
+    .dropdown
+    cursor: pointer
+    .sliders 
+      display: flex
+      align-items: center
+      border: 1px solid $athens-gray-dark
+      border-radius: rem(2px)
+      color: $spun-pearl
+      padding: rem(8px)
+      height: rem(38px)
+      svg
+        color: $cornflower-blue

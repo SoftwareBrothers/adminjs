@@ -2,6 +2,7 @@ extends ../layout/layout
 include ../mixins/breadcrumb
 include ../mixins/emptyTable
 include ../mixins/confirmDialog
+include ../mixins/search-bar
 
 block content
   section.table-list
@@ -25,6 +26,7 @@ block content
             //-     .btn-text Export
     if total
       .column
+        +searchBar
         .border-box
           table.table.is-fullwidth
             thead
