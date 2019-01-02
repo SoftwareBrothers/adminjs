@@ -33,6 +33,6 @@ mixin formGroup(prop, value, error)
       when 'textEditor'
         label.label(for=prop.name)= prop.name()
         .control
-          textarea(id='textEditor' name=prop.name()) #{value}
+          textarea(class='textEditor' name=prop.name()) #{value}
     if error
       .help.is-danger= error.message
