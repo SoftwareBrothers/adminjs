@@ -1,3 +1,4 @@
+
 .column(class=`is-${columns}-desktop is-offset-${offset}`).is-12-tablet
   .info-table.border-box
     .column.h2=title
@@ -10,10 +11,5 @@
       tbody
         for item in items
           tr
-            for header in headers
-              td
-                if (header === 'status' && item[header])
-                  .status(class=header)
-                    =item[header].toUpperCase()
-                else 
-                  =item[header]
+            for field in item
+              td= field
