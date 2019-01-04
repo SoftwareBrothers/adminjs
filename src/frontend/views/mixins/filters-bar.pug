@@ -1,0 +1,17 @@
+include ../mixins/filters-group
+
+mixin filtersBar(props, sort)
+  .filters-bar.hidden
+    .filters-close
+      .arrow-right
+        i.fas.fa-arrow-right
+      span Filter
+    form(method="GET" action=h.listUrl(currentResource))#filters-form
+      for prop in props
+        +filtersGroup(prop)
+      input(type='hidden' name='sortBy' value=sort.sortBy)
+      input(type='hidden' name='direction' value=sort.direction)
+      button.apply-changes(type='submit') Apply Changes
+      a.clear-button(href=h.listUrl(currentResource))
+        .clear Clear filters
+      

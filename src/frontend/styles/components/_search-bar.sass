@@ -4,19 +4,44 @@
   .columns
     flex-wrap: wrap
     justify-content: flex-end
-    .field
-      padding: 0 rem(16px)
-      display: flex
-      align-items: center
-      label
-        margin-bottom: 0
-        margin-right: rem(16px)
-        font-weight: normal
-        text-transform: none
-        color: #757689
+  .filters-open 
+    cursor: pointer
+    display: flex
+    align-items: center
+    border: 1px solid $athens-gray-dark
+    border-radius: rem(2px)
+    color: $spun-pearl
+    padding: rem(8px)
+    height: rem(38px)
+    span 
+      margin-left: rem(8px)
+      color: $cornflower-blue
+    svg
+      color: $cornflower-blue
+.filters-bar
+  display: flex
+  align-items: flex-start
+  flex-direction: column
+  padding: rem(140px) rem(32px)
+  margin-right: -$padding-layout
+  margin-left: $padding-layout
+  min-height: 100vh
+  background-color: $rhino
+  .filters-close
+    cursor: pointer
+    display: flex
+    margin-bottom: rem(20px)
+    align-items: center
+    .arrow-right
+      color: $spun-pearl
+      border-radius: rem(2px)
+      padding: rem(8px)
+      border: solid 1px $blue-bayoux
+    span
+      color: $white
+      margin-left: rem(16px)
   .control
     position: relative
-
     input::placeholder
       font-size: rem(12px)
       font-weight: normal
@@ -26,22 +51,51 @@
     .search-icon
       position: absolute
       right: 0
-      top: rem(12px)
+      top: rem(8px)
       color: $spun-pearl
-      margin-right: rem(18px)
+      margin-right: rem(10px)
       z-index: 1
-  .col-dropdown
+  label, .picker-name
+    color: #a9aabd
+    font-weight: normal
+  input.filter
+    margin-bottom: rem(20px)
+    width: rem(250px)
+    background: transparent
+    border-color: $blue-bayoux
+    border-radius: 2px 
+    height: rem(32px)
+    color: #7e8299
+  .date-range
     display: flex
-    justify-content: flex-end
-    .dropdown
-    cursor: pointer
-    .sliders 
-      display: flex
-      align-items: center
-      border: 1px solid $athens-gray-dark
-      border-radius: rem(2px)
-      color: $spun-pearl
-      padding: rem(8px)
-      height: rem(38px)
-      svg
-        color: $cornflower-blue
+    margin-top: rem(5px)
+    justify-content: space-between
+  .date-range 
+    label
+      font-size: rem(12px)  
+    input.filter
+      width: rem(120px)
+  .icon
+    width: rem(32px)
+    height: rem(32px)
+    border-radius: rem(2px)
+    border-left: rem(1px) solid $blue-bayoux
+    background-color: rgba(32, 39, 62, 0.25)
+    color: #7f8296
+.apply-changes 
+  cursor: pointer
+  width: rem(250px)
+  height: rem(32px)
+  border-radius: rem(2px)
+  background-color: #718af4
+  border-color: #718af4
+  color: $white
+  margin-top: rem(20px)
+
+.clear-button
+  font-size: rem(12px)
+  margin: rem(20px) auto
+  display: flex
+  justify-content: center
+  // border-bottom: dotted 1px #718af4
+

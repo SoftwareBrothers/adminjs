@@ -1,5 +1,5 @@
 /* eslint no-unused-vars: 0 */
-
+const { unflatten } = require('flat')
 const BaseController = require('./base-controller.js')
 
 class ResourcesController extends BaseController {
@@ -89,13 +89,16 @@ class ResourcesController extends BaseController {
   async findRecords({ query }) {
     this.data.perPage = 10
     const firstProperty = this.data.currentResource.decorate().getListProperties()[0]
-    const { page, sortBy, direction } = query
+    const {
+      page, sortBy, direction, filters,
+    } = unflatten(query)
     this.data.page = Number(page) || 1
     this.data.sort = {
       sortBy: sortBy || firstProperty.name(),
       direction: direction || 'asc',
     }
-    const records = await this.data.currentResource.find({}, {
+    this.data.filters = filters || {}
+    const records = await this.data.currentResource.find(filters, {
       limit: this.data.perPage,
       offset: (this.data.page - 1) * this.data.perPage,
       sort: this.data.sort,
