@@ -1,3 +1,5 @@
+const flatten = require('flat')
+const _ = require('lodash')
 const ValidationError = require('../utils/validation-error')
 
 /**
@@ -22,10 +24,10 @@ class BaseRecord {
     this.resource = resource
 
     /**
-     * Actual record data stored as an object
+     * Actual record data stored as a flatten object
      * @type {Object}
      */
-    this.params = params
+    this.params = params ? flatten(params) : {}
 
     /**
      * Object containing all validation errors: this.errors[path] = 'errorMessage'
@@ -40,13 +42,11 @@ class BaseRecord {
    *                            if email is nested within the authentication object in the datastore
    * @return {any}              value for given field
    */
+
   param(path) {
-    // path could have nested parameters separated by dot (.) like 'some.parameter.has' but
-    // in this.params we have regular object. That is why we have to
-    // change it to params[some][parameter][has]
-    const nestedParams = path.split('.')
-    return nestedParams.reduce((memo, param) => memo && memo[param], this.params)
+    return this.params && this.params[path]
   }
+
 
   /**
    * Updates given Record in the datastore. Practically it invokes
@@ -63,6 +63,7 @@ class BaseRecord {
     } catch (e) {
       if (e instanceof ValidationError) {
         this.errors = e.errors
+        this.storeParams(params)
         return this
       }
       throw e
@@ -129,6 +130,13 @@ class BaseRecord {
    */
   isValid() {
     return Object.keys(this.errors).length === 0
+  }
+
+  /**
+   * Stores incoming payloadData in record params
+   */
+  storeParams(payloadData) {
+    this.params = _.merge(this.params, payloadData)
   }
 
   /**
