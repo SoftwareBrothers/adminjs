@@ -39,7 +39,7 @@ block content
                       - isSortedByCurrentPropName = sort.sortBy === prop.name()
                       - direction = sort.direction === 'asc' && isSortedByCurrentPropName ? 'desc' : 'asc'
                       - sortable = prop.isSortable()
-                      a(class={ 'is-sortable' : sortable } href=sortable && h.listUrl(currentResource, { page, sort: { sortBy: prop.name(), direction }})) 
+                      a(class={ 'is-sortable' : sortable } href=sortable && h.listUrl(currentResource, { filters, page, sort: { sortBy: prop.name(), direction }})) 
                         .text-small(class={ 'active' : isSortedByCurrentPropName })=h._.startCase(prop.name())
                         .text-small.sorting-icons(class={ 'hidden' : !isSortedByCurrentPropName })
                           i(class=`icomoon-dropdown-${sort.direction === 'asc' ? 'open' : 'close'}`)

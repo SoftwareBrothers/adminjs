@@ -1,25 +1,26 @@
 mixin filtersGroup(prop)
-    case prop.type()
-      when 'string'
+  case prop.type()
+    when 'string'
+      .filter
+        label.label= `${prop.name()} contain:`
+        .control
+          .search-icon.fas.fa-search
+          input.input.filter(name=`filters.${prop.name()}` value=filters[prop.name()])
+    when 'date'
+      .picker-name=prop.name()
+      .date-range
         .filter
-          label.label= `${prop.name()} contain:`
-          .control
-            .search-icon.fas.fa-search
-            input.input.filter(name=`filters.${prop.name()}`)
-      when 'date'
-        .picker-name=prop.name()
-        .date-range
-          .filter
-            label.label='from'
-              .control.has-icons-right
-                input.input.filter.pickadate(name=`filters.${prop.name()}.from`)
-                span.icon.is-small.is-right
-                  i.icomoon-calendar
-          .filter
-            label.label='to'
-              .control.has-icons-right
-                input.input.filter.pickadate(name=`filters.${prop.name()}.to`)
-                span.icon.is-small.is-right
-                  i.icomoon-calendar
-    if error
-      .help.is-danger= error.message
+          label.label='from'
+            .control.has-icons-right
+              input.input.filter.pickadate(name=`filters.${prop.name()}.from` value=filters[prop.name()] || h.moment(value).format('YYYY-MM-DD'))
+              span.icon.is-small.is-right
+                i.icomoon-calendar
+        .filter
+          label.label='to'
+            .control.has-icons-right
+              input.input.filter.pickadate(name=`filters.${prop.name()}.to` value= filters[prop.name()] || h.moment(value).format('YYYY-MM-DD'))
+              span.icon.is-small.is-right
+                i.icomoon-calendar
+  if error
+    .help.is-danger= error.message
+    

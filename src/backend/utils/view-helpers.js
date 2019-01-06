@@ -42,14 +42,17 @@ class ViewHelpers {
   }
 
   getObjectKeyWithValue(obj, key) {
-    return typeof obj[key] === 'object'
-      ? this.getQueryPath(obj[key]) : `${key}=${obj[key]}`
+    const value = obj[key]
+    return typeof value === 'object'
+      ? this.getQueryPath(value) : `${key}=${value}`
   }
 
   getQueryPath(query) {
     const queryPath = []
     Object.keys(query).forEach((key) => {
-      queryPath.push(this.getObjectKeyWithValue(query, key))
+      if (query[key]) {
+        queryPath.push(this.getObjectKeyWithValue(query, key))
+      }
     })
     return queryPath.join('&')
   }
