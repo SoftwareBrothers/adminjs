@@ -1,3 +1,4 @@
+/* eslint-disable func-names */
 require('module-alias/register')
 
 process.env.NODE_ENV = 'test'

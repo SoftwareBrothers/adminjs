@@ -1,3 +1,4 @@
+/* eslint-disable class-methods-use-this */
 const moment = require('moment')
 const xss = require('xss')
 const BaseProperty = require('../adapters/base-property')
@@ -229,6 +230,8 @@ class BaseDecorator {
    * @param  {String}       options.where    one of: list | show
    * @return {String}                        Html string which will be rendered
    */
+
+  // eslint-disable-next-line no-unused-vars
   getValue({ record, property, where }) {
     if (property.type() === 'date') {
       return moment(record.param(property.name())).format('YYYY-MM-DD')

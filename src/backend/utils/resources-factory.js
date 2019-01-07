@@ -107,7 +107,8 @@ class ResourcesFactory {
    */
   _decorateResources(resources) {
     return resources.map((resourceObject) => {
-      let { resource, decorator } = resourceObject
+      let { resource } = resourceObject
+      const { decorator } = resourceObject
       if (decorator
           && !(decorator.prototype instanceof BaseDecorator)
           && decorator !== BaseDecorator) {
