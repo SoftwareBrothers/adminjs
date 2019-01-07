@@ -64,7 +64,7 @@
     input.filter, label
       width: rem(120px)
       @include media-breakpoint-down($media-min-tablet-width - 1px)
-        width: rem(140px)
+        width: 100%
   .icon
     width: rem(32px)
     height: rem(32px)
@@ -90,13 +90,15 @@
 @include media-breakpoint-down($media-min-tablet-width - 1px)
   .filters-bar
     width: calc(100% - #{$sidebar-mobile-width})
+    padding: rem(100px) rem(20px) rem(40px)
     .filters-close
       display: flex
-      justify-content: center
-    button, input.filter, label
-      width: rem(140px)
+    input.filter, .filter, label, .apply-changes, .date-range
+      width: 100%
     .date-range
       flex-direction: column
+    .picker-name
+      align-self: flex-start
     form
       display: flex
       flex-direction: column
