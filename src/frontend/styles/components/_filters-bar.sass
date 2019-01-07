@@ -1,37 +1,24 @@
-.search-bar 
-  padding-bottom: rem(24px)
-  border-bottom: none
-  .columns
-    flex-wrap: wrap
-    justify-content: flex-end
-  .filters-open 
-    cursor: pointer
-    display: flex
-    align-items: center
-    border: 1px solid $athens-gray-dark
-    border-radius: rem(2px)
-    color: $spun-pearl
-    padding: rem(8px)
-    height: rem(38px)
-    span 
-      margin-left: rem(8px)
-      color: $cornflower-blue
-    svg
-      color: $cornflower-blue
-.filters-bar
+.filters-open 
   display: flex
-  align-items: flex-start
-  flex-direction: column
-  padding: rem(140px) rem(32px)
-  margin-right: -$padding-layout
-  margin-left: $padding-layout
-  min-height: 100vh
+  align-items: center
+.filters-bar
+  position: fixed
+  height: 100vh
+  right: 0
+  top: 0
+  overflow-y: auto
+  padding: rem(140px) rem(32px) rem(40px)
   background-color: $rhino
   .filters-close
     cursor: pointer
     display: flex
-    margin-bottom: rem(20px)
+    margin-bottom: rem(40px)
     align-items: center
+    &:hover
+      .arrow-right
+        border-color: $cornflower-blue
+      svg, span
+        color: $cornflower-blue
     .arrow-right
       color: $spun-pearl
       border-radius: rem(2px)
@@ -45,8 +32,6 @@
     input::placeholder
       font-size: rem(12px)
       font-weight: normal
-      font-style: normal
-      font-stretch: normal
       color: $spun-pearl
     .search-icon
       position: absolute
@@ -66,6 +51,9 @@
     border-radius: 2px 
     height: rem(32px)
     color: #7e8299
+  label
+    width: rem(250px)
+    word-break: break-all
   .date-range
     display: flex
     margin-top: rem(5px)
@@ -73,8 +61,10 @@
   .date-range 
     label
       font-size: rem(12px)  
-    input.filter
+    input.filter, label
       width: rem(120px)
+      @include media-breakpoint-down($media-min-tablet-width - 1px)
+        width: rem(140px)
   .icon
     width: rem(32px)
     height: rem(32px)
@@ -99,3 +89,14 @@
   justify-content: center
   // border-bottom: dotted 1px #718af4
 
+@include media-breakpoint-down($media-min-tablet-width - 1px)
+  .filters-bar
+    width: calc(100% - #{$sidebar-mobile-width})
+    button, input.filter, label
+      width: rem(140px)
+    .date-range
+      flex-direction: column
+    form
+      display: flex
+      flex-direction: column
+      align-items: center

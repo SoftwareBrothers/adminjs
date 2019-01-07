@@ -5,22 +5,20 @@ mixin filtersGroup(prop)
         label.label= `${prop.name()} contain:`
         .control
           .search-icon.fas.fa-search
-          input.input.filter(name=`filters.${prop.name()}` value=filters[prop.name()])
+          input.input.filter(name=`filters.${prop.name()}` value=filters[`filters.${prop.name()}`])
     when 'date'
       .picker-name=prop.name()
       .date-range
         .filter
           label.label='from'
             .control.has-icons-right
-              input.input.filter.pickadate(name=`filters.${prop.name()}.from` value=filters[prop.name()] || h.moment(value).format('YYYY-MM-DD'))
+              input.input.filter.pickadate(name=`filters.${prop.name()}.from` value=filters[`filters.${prop.name()}.from`] || value &&  h.moment(value).format('YYYY-MM-DD'))
               span.icon.is-small.is-right
                 i.icomoon-calendar
         .filter
           label.label='to'
             .control.has-icons-right
-              input.input.filter.pickadate(name=`filters.${prop.name()}.to` value= filters[prop.name()] || h.moment(value).format('YYYY-MM-DD'))
+              input.input.filter.pickadate(name=`filters.${prop.name()}.to` value=filters[`filters.${prop.name()}.to`] || value && h.moment(value).format('YYYY-MM-DD'))
               span.icon.is-small.is-right
                 i.icomoon-calendar
-  if error
-    .help.is-danger= error.message
     

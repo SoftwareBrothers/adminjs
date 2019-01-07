@@ -5,13 +5,13 @@ include ../mixins/confirmDialog
 include ../mixins/filters-bar
 
 block content
-  .list
-    section.table-list
-      +confirm-dialog('Remove record', 'Are you sure you want remove this item', 'Remove')
-      +breadcrumb(currentResource)
-      .column
-        .level
-          .title=currentResource.decorate().getResourceName()
+  section.table-list
+    +confirm-dialog('Remove record', 'Are you sure you want remove this item', 'Remove')
+    +breadcrumb(currentResource)
+    .column
+      .level
+        .title=currentResource.decorate().getResourceName()
+        .toolbar
           if total
             .field.is-grouped
               .control
@@ -25,67 +25,69 @@ block content
               //-     span.icon
               //-       i.fas.fa-download.fa-xs
               //-     .btn-text Export
-        .filters-open
-          i.fas.fa-sliders-h
-          span Filter
-      if total
-        .column
-          .border-box
-            table.table.is-fullwidth
-              thead
+              .control  
+                .button.is-primary.is-transparent.filters-open
+                  span.icon
+                    i.fas.fa-sliders-h
+                  .btn-text Filter
+    if total
+      .column
+        .border-box
+          table.table.is-fullwidth
+            thead
+              tr
+                for prop in currentResource.decorate().getListProperties()
+                  th(class= { 'main' : prop.isTitle() })
+                    - isSortedByCurrentPropName = sort.sortBy === prop.name()
+                    - direction = sort.direction === 'asc' && isSortedByCurrentPropName ? 'desc' : 'asc'
+                    - sortable = prop.isSortable()
+                    a(class={ 'is-sortable' : sortable } href=sortable && h.listUrl(currentResource, { filters, page, sort: { sortBy: prop.name(), direction }})) 
+                      .text-small(class={ 'active' : isSortedByCurrentPropName })=h._.startCase(prop.name())
+                      .text-small.sorting-icons(class={ 'hidden' : !isSortedByCurrentPropName })
+                        i(class=`icomoon-dropdown-${sort.direction === 'asc' ? 'open' : 'close'}`)
+                th
+            tbody
+              for record in records
+                - actions = currentResource.decorate().getRecordActions(record)
                 tr
                   for prop in currentResource.decorate().getListProperties()
-                    th(class= { 'main' : prop.isTitle() })
-                      - isSortedByCurrentPropName = sort.sortBy === prop.name()
-                      - direction = sort.direction === 'asc' && isSortedByCurrentPropName ? 'desc' : 'asc'
-                      - sortable = prop.isSortable()
-                      a(class={ 'is-sortable' : sortable } href=sortable && h.listUrl(currentResource, { filters, page, sort: { sortBy: prop.name(), direction }})) 
-                        .text-small(class={ 'active' : isSortedByCurrentPropName })=h._.startCase(prop.name())
-                        .text-small.sorting-icons(class={ 'hidden' : !isSortedByCurrentPropName })
-                          i(class=`icomoon-dropdown-${sort.direction === 'asc' ? 'open' : 'close'}`)
-                  th
-              tbody
-                for record in records
-                  - actions = currentResource.decorate().getRecordActions(record)
-                  tr
-                    for prop in currentResource.decorate().getListProperties()
-                      td.is-vcentered(class={ 'property-main' : prop.isTitle() })
-                        if actions['show'] && prop.isTitle()
-                          a(href=actions['show'].path)
-                            != currentResource.decorate().getValue({ record, property: prop, where: 'list'})
-                        else
+                    td.is-vcentered(class={ 'property-main' : prop.isTitle() })
+                      if actions['show'] && prop.isTitle()
+                        a(href=actions['show'].path)
                           != currentResource.decorate().getValue({ record, property: prop, where: 'list'})
-                    td
-                      .dropdown.is-right.is-hoverable
-                        .dropdown-trigger
-                          .dots
-                            span.icon
-                              i.icomoon-options
-                        .dropdown-menu
-                          .dropdown-content
-                            for action in actions
-                              -remove = action === actions['remove']
-                              a.button.is-white(data-confirm-dialog=remove && action.path href=!remove && action.path)
-                                span.icon
-                                  i(class=action.icon)
-                                .btn-text=action.label
+                      else
+                        != currentResource.decorate().getValue({ record, property: prop, where: 'list'})
+                  td
+                    .dropdown.is-right.is-hoverable
+                      .dropdown-trigger
+                        .dots
+                          span.icon
+                            i.icomoon-options
+                      .dropdown-menu
+                        .dropdown-content
+                          for action in actions
+                            -remove = action === actions['remove']
+                            a.button.is-white(data-confirm-dialog=remove && action.path href=!remove && action.path)
+                              span.icon
+                                i(class=action.icon)
+                              .btn-text=action.label
 
-            - pages = h.paginate(total, page, perPage).pages
-            if pages.length > 1
-              .level-item.pagination-content
-                .pagination
-                  - isLastPage = pages.indexOf(page) === pages.length - 1
-                  - isFirstPage = pages.indexOf(page) === 0
-                  a.button.is-white(class={ 'disabled' : isFirstPage } href=h.listUrl(currentResource, { page: page - 1, sort}))
+          - pages = h.paginate(total, page, perPage).pages
+          if pages.length > 1
+            .level-item.pagination-content
+              .pagination
+                - isLastPage = pages.indexOf(page) === pages.length - 1
+                - isFirstPage = pages.indexOf(page) === 0
+                a.button.is-white(class={ 'disabled' : isFirstPage } href=h.listUrl(currentResource, { filters, page: page - 1, sort}))
                   i.icomoon-pagination-left
-                  for p in pages
-                    a.pages.button.is-white(class={ 'active' : p === page }
-                      href=h.listUrl(currentResource, { page: p, sort})
-                    )= p
-                  a.current-page.hidden.button.is-white= page
-                  a.button.is-white(class={ 'disabled' : isLastPage } href=h.listUrl(currentResource, { page: page + 1, sort }))
-                    i.icomoon-pagination-right
-      else
-        +emptyTable(h.newRecordUrl(currentResource))
+                for p in pages
+                  a.pages.button.is-white(class={ 'active' : p === page }
+                    href=h.listUrl(currentResource, { filters, page: p, sort})
+                  )= p
+                a.current-page.hidden.button.is-white= page
+                a.button.is-white(class={ 'disabled' : isLastPage } href=h.listUrl(currentResource, { filters, page: page + 1, sort }))
+                  i.icomoon-pagination-right
+    else
+      +emptyTable(h.newRecordUrl(currentResource))
     - const props = currentResource.decorate().getListProperties()
     +filtersBar(props, sort, currentResource)

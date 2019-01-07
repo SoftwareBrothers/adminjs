@@ -97,13 +97,20 @@ class ResourcesController extends BaseController {
       sortBy: sortBy || firstProperty.name(),
       direction: direction || 'asc',
     }
-    this.data.filters = filters || {}
+    const flattenFilters = Object.keys(query)
+      .filter(key => key.includes('filters'))
+      .reduce((obj, key) => ({
+        ...obj,
+        [key]: query[key],
+      }), {})
+
+    this.data.filters = flattenFilters || {}
     const records = await this.data.currentResource.find(filters, {
       limit: this.data.perPage,
       offset: (this.data.page - 1) * this.data.perPage,
       sort: this.data.sort,
     })
-    this.data.total = await this.data.currentResource.count()
+    this.data.total = await this.data.currentResource.count(filters)
     return records
   }
 }
