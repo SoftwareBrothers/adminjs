@@ -41,7 +41,7 @@
       margin-right: rem(10px)
       z-index: 1
   label, .picker-name
-    color: #a9aabd
+    color: $spun-pearl
     font-weight: normal
   input.filter
     margin-bottom: rem(20px)
@@ -50,7 +50,7 @@
     border-color: $blue-bayoux
     border-radius: 2px 
     height: rem(32px)
-    color: #7e8299
+    color: $waterloo
   label
     width: rem(250px)
     word-break: break-all
@@ -71,27 +71,28 @@
     border-radius: rem(2px)
     border-left: rem(1px) solid $blue-bayoux
     background-color: rgba(32, 39, 62, 0.25)
-    color: #7f8296
-.apply-changes 
-  cursor: pointer
-  width: rem(250px)
-  height: rem(32px)
-  border-radius: rem(2px)
-  background-color: #718af4
-  border-color: #718af4
-  color: $white
-  margin-top: rem(20px)
-
-.clear-button
-  font-size: rem(12px)
-  margin: rem(20px) auto
-  display: flex
-  justify-content: center
-  // border-bottom: dotted 1px #718af4
-
+    i
+      color: $waterloo
+  .apply-changes 
+    cursor: pointer
+    width: rem(250px)
+    height: rem(32px)
+    border-radius: rem(2px)
+    background-color: $cornflower-blue
+    border-color: $cornflower-blue
+    color: $white
+    margin-top: rem(20px)
+  .clear-button
+    font-size: rem(12px)
+    margin: rem(20px) auto
+    display: flex
+    justify-content: center
 @include media-breakpoint-down($media-min-tablet-width - 1px)
   .filters-bar
     width: calc(100% - #{$sidebar-mobile-width})
+    .filters-close
+      display: flex
+      justify-content: center
     button, input.filter, label
       width: rem(140px)
     .date-range

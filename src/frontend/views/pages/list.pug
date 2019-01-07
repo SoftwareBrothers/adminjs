@@ -89,5 +89,4 @@ block content
                   i.icomoon-pagination-right
     else
       +emptyTable(h.newRecordUrl(currentResource))
-    - const props = currentResource.decorate().getListProperties()
-    +filtersBar(props, sort, currentResource)
+    +filtersBar

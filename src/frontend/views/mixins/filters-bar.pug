@@ -1,7 +1,9 @@
 include ../mixins/filters-group
 
-mixin filtersBar(props, sort)
-  .filters-bar(class= { 'hidden' : !Object.keys(filters).length })
+mixin filtersBar
+  - const noFilters = !Object.keys(filters).length 
+  - const props = currentResource.decorate().getListProperties()
+  .filters-bar(class= { 'hidden' : noFilters })
     .filters-close
       .arrow-right
         i.fas.fa-arrow-right
