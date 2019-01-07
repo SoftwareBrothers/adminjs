@@ -14,7 +14,9 @@
          @include media-breakpoint-down($media-min-tablet-width - 1px)
             font-size: rem(40px)
       .overview-subtitle
-         color: $white 
+         color: $white
+   .hero.is-fullheight
+      min-height: calc(100vh - #{$navbar-height})
    .dashboard-content
       transform: translateY(-60px)
       .table .text-small
@@ -78,7 +80,7 @@
             justify-content: space-between
             align-items: center
             flex-wrap: wrap
-            .value 
+            .value
                font-size: 34px
       canvas
          // we have to override chart.js dimensions

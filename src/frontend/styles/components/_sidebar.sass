@@ -14,6 +14,8 @@
     display: flex
     flex-direction: column
     justify-content: space-between
+    .sidebar-wrapper
+      display: flex
     .sidebar-brand
       display: flex
       align-items: center
@@ -46,11 +48,18 @@
       padding-right: rem(17px)
       line-height: rem(38px)
       border-radius: rem(19px)
-      display: block
+      display: flex
+      align-items: baseline
       color: $woodsmoke
+      position: relative
       i
         margin-right: rem(17px)
         color: $spun-pearl
+      .dropdown-toggle
+        position: absolute
+        right: 0
+        bottom: rem(12px)
+        cursor: pointer
 
   .sidebar-footer
     .menu-label
@@ -82,13 +91,18 @@
       margin-left: rem(16px)
 
 @include media-breakpoint-down($media-min-tablet-width - 1px)
-  .sidebar-mobile
-    .sidebar-main, .sidebar-content
-      width: $sidebar-mobile-width
-    .menu-list, .sidebar-content .sidebar-top .sidebar-brand, .sidebar-footer, .sidebar-navigation
-      display: none
+  .sidebar
+    position: absolute
+    left: -$sidebar-width
+    z-index: 1
+    transition: all 0.5s
+    opacity: 0
+
+    &.sidebar-show
+      left: 0
+      opacity: 1
+
     .hamburger
+      display: block
       cursor: pointer
-      display: flex
-      justify-content: center
-      align-items: center
+      margin: rem(3px) rem(21px) 0 rem(6px)

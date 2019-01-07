@@ -34,3 +34,10 @@
       font-size: rem(14px)
       color: $mako
 
+  @include media-breakpoint-down($media-min-tablet-width - 1px)
+    .hamburger
+      cursor: pointer
+      display: flex
+      align-items: center
+      height: 100%
+      margin-left: rem(30px)
