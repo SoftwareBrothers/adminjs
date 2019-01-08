@@ -83,7 +83,7 @@ class BaseResource {
    *                                property paths.
    * @return {BaseProperty}
    */
-  property(filters) {
+  property(path) {
     throw new NotImplementedError('BaseResource#property')
   }
 
@@ -98,18 +98,27 @@ class BaseResource {
 
   /**
    * Returns actual records for given resource
+   * @param  {Object} filters                        what data should be included
+   * @param  {Object | String} [filters.fieldName]   when filter for given field should be treaten
+   *                                                 as a String it contains query as a String
+   * @param  {String} [filters.fieldName.from]       for date filters it contains optional
+   *                                                 from and to parameters which are String
+   * @param  {String} [filters.fieldName.to]
    *
-   * @param  {Object} filters                   what data should be included
-   *                                            currently can be passed 2 types of filters:
-   *                                            string and date,
-   *                                            date fields have additional from and to properties
+   * @example
+   * // filters example
+   * {
+   *    name: 'Tom',
+   *    createdAt: { from: '2019-01-01', to: '2019-01-18' }
+   * }
+   *
    * @param  {Object} options
-   * @param  {Number} options.limit             how many records should be taken
-   * @param  {Number} options.offset            offset
-   * @param  {Number} options.sort              sort
-   * @param  {Number} options.sort.sortBy       sortable field
-   * @param  {Number} options.sort.direction    either asc or desc
-   * @return {BaseRecord[]}                     list of records
+   * @param  {Number} options.limit                  how many records should be taken
+   * @param  {Number} options.offset                 offset
+   * @param  {Number} options.sort                   sort
+   * @param  {Number} options.sort.sortBy            sortable field
+   * @param  {Number} options.sort.direction         either asc or desc
+   * @return {BaseRecord[]}                          list of records
    */
   async find(filters, { limit = 20, offset = 0, sort = {} }) {
     throw new NotImplementedError('BaseResource#find')
