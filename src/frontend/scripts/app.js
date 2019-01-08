@@ -12,8 +12,12 @@ $(document).ready(() => {
   }
 
   const $dropdownToggle = $('.dropdown-toggle')
-  const toggleMenu = ($element) => {
-    $element.parent().siblings('.dropdown-list').slideToggle()
+  const toggleMenu = ($element, hide) => {
+    if (hide) {
+      $element.parent().siblings('.dropdown-list').hide()
+    } else {
+      $element.parent().siblings('.dropdown-list').slideToggle()
+    }
     $element.toggleClass('icomoon-dropdown-open').toggleClass('icomoon-dropdown-close')
   }
   if ($dropdownToggle) {
@@ -27,8 +31,9 @@ $(document).ready(() => {
     $dropdownToggle.each((index, element) => {
       const $element = $(element)
       if (localStorage.getItem($element.data('menu')) === 'close') {
-        toggleMenu($element)
+        toggleMenu($element, true)
       }
     })
+    $('.sidebar-navigation').show()
   }
 })
