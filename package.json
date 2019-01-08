@@ -33,6 +33,7 @@
   "homepage": "https://github.com/SoftwareBrothers/admin-bro#readme",
   "dependencies": {
     "chart.js": "^2.7.3",
+    "flat": "^4.1.0",
     "jw-paginate": "^1.0.2",
     "lodash": "^4.17.11",
     "moment": "^2.23.0",

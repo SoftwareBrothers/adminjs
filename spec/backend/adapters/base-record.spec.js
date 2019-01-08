@@ -16,4 +16,34 @@ describe('Record', function () {
       })
     })
   })
+  describe('#constructor', function () {
+    it('returns empty object if params are not passed to the constructor', function () {
+      const record = new Record()
+      expect(record.params).to.deep.equal({})
+    })
+
+    it('stores flatten object params', function () {
+      expect(new Record({ auth: { login: 'login' } }).params).to.deep.equal({ 'auth.login': 'login' })
+    })
+  })
+  describe('#storeParams', function () {
+    beforeEach(function () {
+      this.params = {
+        auth: {
+          login: 'login',
+        },
+        name: 'Tom',
+      }
+      this.payload = {
+        'auth.login': 'new login',
+      }
+    })
+
+    it('stores given data property in a record params', function () {
+      const record = new Record(this.params)
+      const expectedResult = { 'auth.login': 'new login', name: 'Tom' }
+      record.storeParams(this.payload)
+      expect(record.params).to.deep.equal(expectedResult)
+    })
+  })
 })
