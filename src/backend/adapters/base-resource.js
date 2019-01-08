@@ -83,22 +83,26 @@ class BaseResource {
    *                                property paths.
    * @return {BaseProperty}
    */
-  property(path) {
+  property(filters) {
     throw new NotImplementedError('BaseResource#property')
   }
 
   /**
-   * Returns number of elements for given resource
+   * Returns number of elements for given resource by including filters
+   * @param  {Object} filters what data should be included
    * @return {Number}
    */
-  async count() {
+  async count(filters) {
     throw new NotImplementedError('BaseResource#count')
   }
 
   /**
    * Returns actual records for given resource
    *
-   * @param  {Object} query                     query [not supported right now]
+   * @param  {Object} filters                   what data should be included
+   *                                            currently can be passed 2 types of filters:
+   *                                            string and date,
+   *                                            date fields have additional from and to properties
    * @param  {Object} options
    * @param  {Number} options.limit             how many records should be taken
    * @param  {Number} options.offset            offset
@@ -107,7 +111,7 @@ class BaseResource {
    * @param  {Number} options.sort.direction    either asc or desc
    * @return {BaseRecord[]}                     list of records
    */
-  async find(query, { limit = 20, offset = 0, sort = {} }) {
+  async find(filters, { limit = 20, offset = 0, sort = {} }) {
     throw new NotImplementedError('BaseResource#find')
   }
 

@@ -1,6 +1,6 @@
 /* eslint-disable object-curly-newline */
 /* eslint no-unused-vars: 0 */
-const { unflatten } = require('flat')
+const { unflatten, flatten } = require('flat')
 const BaseController = require('./base-controller.js')
 
 class ResourcesController extends BaseController {
@@ -87,16 +87,6 @@ class ResourcesController extends BaseController {
     this.data.properties = this.data.currentResource.properties()
   }
 
-  // eslint-disable-next-line class-methods-use-this
-  flattenedFiltersProperties(query) {
-    return Object.keys(query)
-      .filter(key => key.includes('filters'))
-      .reduce((obj, key) => ({
-        ...obj,
-        [key]: query[key],
-      }), {})
-  }
-
   async findRecords({ query }) {
     this.data.perPage = 10
     const firstProperty = this.data.currentResource.decorate().getListProperties()[0]
@@ -106,7 +96,7 @@ class ResourcesController extends BaseController {
       sortBy: sortBy || firstProperty.name(),
       direction: direction || 'asc',
     }
-    this.data.filters = this.flattenedFiltersProperties(query) || {}
+    this.data.filters = filters ? flatten({ filters }) : {}
     const records = await this.data.currentResource.find(filters, {
       limit: this.data.perPage,
       offset: (this.data.page - 1) * this.data.perPage,
