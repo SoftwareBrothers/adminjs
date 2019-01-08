@@ -1,16 +1,5 @@
 const CONSTANTS = require('../../constants')
 
-class NotImplementedError extends Error {
-  constructor(fnName) {
-    const message = `
-    You have to implement the method: ${fnName}
-    Check out the documentation at: ${buildUrl(fnName)}
-    `
-    super(message)
-    this.message = message
-  }
-}
-
 const buildUrl = (fnName) => {
   if (fnName) {
     let obj
@@ -24,6 +13,17 @@ const buildUrl = (fnName) => {
     return `${CONSTANTS.DOCS}/${obj}.html#${fn}`
   }
   return CONSTANTS.DOCS
+}
+
+class NotImplementedError extends Error {
+  constructor(fnName) {
+    const message = `
+    You have to implement the method: ${fnName}
+    Check out the documentation at: ${buildUrl(fnName)}
+    `
+    super(message)
+    this.message = message
+  }
 }
 
 module.exports = NotImplementedError

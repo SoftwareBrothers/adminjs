@@ -7,4 +7,3 @@ class DefaultDashboard extends PageBuilder {
 }
 
 module.exports = DefaultDashboard
-

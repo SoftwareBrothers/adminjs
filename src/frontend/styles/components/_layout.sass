@@ -4,7 +4,7 @@
     width: calc(100% - #{$sidebar-width})
     background-color: $athens-gray
     min-height: 100vh
-    padding: 0 $padding-layout
+    padding: $navbar-height $padding-layout 0
 
   @include media-breakpoint-down($media-min-tablet-width - 1px)
     position: relative
@@ -14,7 +14,7 @@
     .sidebar
       position: absolute
       z-index: 1
-      
+
 .border-box
   border: solid rem(1px) $athens-gray-dark
   background-color: $white
