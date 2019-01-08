@@ -10,6 +10,9 @@ html
       link(rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pickadate.js/3.5.6/themes/default.css")
       link(rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pickadate.js/3.5.6/themes/default.date.css")
       link(rel="stylesheet" href=h.assetPath("style.min.css"))
+      if h.customAssets && h.customAssets.styles
+        for style in h.customAssets.styles
+          link(rel="stylesheet" href=style)
   body
     .columns.container-main
       aside.sidebar
@@ -30,3 +33,6 @@ html
     script(defer src="https://cdnjs.cloudflare.com/ajax/libs/pickadate.js/3.5.6/picker.date.js")
     script(defer src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js")
     script(src=h.assetPath("app.min.js"))
+    if h.customAssets && h.customAssets.scripts
+      for script in h.customAssets.scripts
+        script(defer src=script)

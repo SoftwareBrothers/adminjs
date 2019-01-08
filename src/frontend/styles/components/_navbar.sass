@@ -3,6 +3,10 @@
   margin-left: -$padding-layout
   margin-right: -$padding-layout
   height: $navbar-height
+  width: calc(100% - #{$sidebar-width})
+  position: fixed
+  top: 0
+  z-index: 1
   .navbar-end
     margin-right: rem(40px)
   .navbar-user
@@ -10,7 +14,7 @@
       border-radius: 50%
       margin-left: rem(16px)
     .navbar-link::after
-      display: none
+      content: none
     .navbar-item, .navbar-link
       color: $woodsmoke
     .navbar-link

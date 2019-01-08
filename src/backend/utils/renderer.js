@@ -8,7 +8,7 @@ class Renderer {
     this.views_path = `${pathRoot}/frontend/views/`
   }
 
-  async render() {
+  render() {
     const viewFunction = pug.compileFile(`${this.views_path}${this.view}.pug`)
     return viewFunction(this.data)
   }

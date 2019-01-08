@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 $(document).ready(() => {
   const $sidebar = $('.sidebar')
   $('.hamburger').click(() => $sidebar.toggleClass('sidebar-show'))

@@ -2,8 +2,15 @@ extends ../layout/layout
 
 block content
   .dashboard
-    .header
-      != dashboard.header
+    if dashboard.title || dashboard.subtitle
+      .header
+        .overview
+          .columns
+            .column
+              if dashboard.title
+                .overview-title=dashboard.title
+              if dashboard.subtitle
+                .overview-subtitle=dashboard.subtitle
     .columns.is-multiline.dashboard-content
       != dashboard.content
     if dashboard.charts
