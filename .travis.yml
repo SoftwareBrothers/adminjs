@@ -2,6 +2,7 @@ language: node_js
 node_js:
 - '8'
 script:
+- yarn run lint
 - yarn test
 deploy:
   provider: npm
@@ -11,3 +12,6 @@ deploy:
   on:
     tags: true
     repo: SoftwareBrothers/admin-bro
+notifications:
+  slack:
+    secure: ZrGsqnznXqlEHpB+1kSsxqKdtgNXZ5DMLTD3ThIH3H7XPyBCSshBtENJjZxlPpZBWsPBWTrZBGRHGgrsnaB06tFc44KeF4HqxPH0aH6P3oakYVOQD2HiaqSoDghClUngePREAKFKNAVi3AO50nu+TVYKUQoae1tdKY6ZV2OCJ86IbgXB775fn+kW+t0ODGUMtukpFfwTTZTDG5y1AxMojLrnEaoMgmIwwanPKpBiL0gXdRvEG5by31PHz4bA/0vUtR6W45OF7CUn6mO2Q96ZjQ1TKo6dYRymL8ySiOiVZaGbcVZzpjsaTHdq8ZdIqwzPnLPRax1MPQbxul6p1Xu8asHR51/eTZkaBNlAIB++n7YjLxiQuhjNnOFBjc/a1n3FK8h6KxOQikd0He8N+Q+Ksa1wBPNRVsN25VdpGkkAknMIC8YYTOgSkU6KUgeGwC1aVW9/Y/K+Bju2wZNAsF/JR0B7GiAEUWo3Bgx3OvAAuDC2LyWqsTVYMY8rFNZRhdXS/3NSlgxNhm6qphEk4FLFFb6aWbvkAKULwNFax7pe89BMuMEPcEac0ZS+InY3XOfC9ZT1VzqhW4SRih3qvqx9Dbe8tpJdFvmeOYXO78O6dQKGz/+/CVZUk5qKwv0965HmQMuBHYMFveSpbzcxE6ZqXKGUX239ua+GfQE+6FT7K/E=

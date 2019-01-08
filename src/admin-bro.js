@@ -31,6 +31,7 @@ const pkg = require('../package.json')
  * @property {BaseResource} [resources[].resource]    class which extends {@link BaseResource}
  * @property {BaseDecorator} [resources[].decorator]  class which extends {@link BaseDecorator}
  * @property {Object} [branding]                      branding settings
+ * @property {PageBuilder} [dashboard]                your custom dashboard page
  * @property {String} [branding.logo]                 logo shown in AdminBro in top left corner
  * @property {String} [branding.companyName]          company name
  * @property {Boolean} [branding.softwareBrothers]    if software brothers logos should be shown
