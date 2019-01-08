@@ -27,7 +27,7 @@ $(document).ready(() => {
       toggleMenu($target)
       const status = $target.hasClass('icomoon-dropdown-open') ? 'open' : 'close'
       localStorage.setItem($target.data('menu'), status)
-    });
+    })
 
     $dropdownToggle.each((index, element) => {
       const $element = $(element)
