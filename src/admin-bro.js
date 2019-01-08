@@ -36,6 +36,9 @@ const pkg = require('../package.json')
  * @property {String} [branding.companyName]          company name
  * @property {Boolean} [branding.softwareBrothers]    if software brothers logos should be shown
  *                                                    in the sidebar footer
+ * @property {Object} [assets]                        assets object
+ * @property {String[]}  [assets.styles]              array with a paths to styles
+ * @property {String[]}  [assets.scripts]             array with a paths to scripts
  *
  * @example
  * const AdminBro = require('admin-bro')
@@ -53,6 +56,10 @@ const pkg = require('../package.json')
  *   resources: [{ resource: ArticleModel, decorator: ArticleDecorator}]
  *   branding: {
  *     companyName: 'XYZ c.o.'
+ *   },
+ *   assets: {
+ *     styles: ['/style.css'],
+ *     scripts: ['/scripts.js']
  *   }
  * })
  */
@@ -68,6 +75,10 @@ const defaults = {
     softwareBrothers: true,
   },
   dashboard: DefaultDashboard,
+  assets: {
+    styles: ['/style.css'],
+    scripts: ['/scripts.js'],
+  },
 }
 
 /**
