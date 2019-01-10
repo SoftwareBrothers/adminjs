@@ -1,19 +1,20 @@
 include ../mixins/filters-group
 
 mixin filtersBar
-  - const noFilters = !Object.keys(filters).length 
+  - const areFiltersAvailable = Object.keys(filters).length 
   - const props = currentResource.decorate().getListProperties()
-  .filters-bar(class= { 'hidden' : noFilters })
-    .filters-close
-      .arrow-right
-        i.fas.fa-arrow-right
-      span Filter
-    form(method="GET" action=h.listUrl(currentResource))#filters-form
-      for prop in props.filter(p => p.isEditable())
-        +filtersGroup(prop)
-      input(type='hidden' name='sortBy' value=sort.sortBy)
-      input(type='hidden' name='direction' value=sort.direction)
-      button.button.is-primary.apply-changes(type='submit') Apply Changes
-      a.clear-button(href=h.listUrl(currentResource))
-        .clear Clear filters
+  .filters-bar-wrapper
+    .filters-bar(class= { 'filters-show' : areFiltersAvailable })
+      .filters-close
+        .arrow-right
+          i.fas.fa-arrow-right
+        span Filter
+      form(method="GET" action=h.listUrl(currentResource))#filters-form
+        for prop in props.filter(p => p.isEditable())
+          +filtersGroup(prop)
+        input(type='hidden' name='sortBy' value=sort.sortBy)
+        input(type='hidden' name='direction' value=sort.direction)
+        button.button.is-primary.apply-changes(type='submit') Apply Changes
+        a.clear-button(href=h.listUrl(currentResource))
+          .clear Clear filters
       

@@ -3,20 +3,34 @@
 $(document).ready(() => {
   const $form = $('#filters-form')
   const $filtersBar = $('.filters-bar')
-  const $filtersOpen = $('.filters-open')
-  const $filtersClose = $('.filters-close')
 
   const disableEmptyFormInputs = () => {
     const inputsArray = $form.find(':input').toArray()
     $(inputsArray.filter(input => !input.value)).attr('disabled', true)
   }
 
-  $filtersOpen.click(() => {
-    $filtersBar.removeClass('hidden')
-  })
-  $filtersClose.click(() => {
-    $filtersBar.addClass('hidden')
-  })
+  const filtersBarVisibilityManager = (event) => {
+    const target = $(event.target)
+    const filtersOpenElement = target.hasClass('filters-open')
+    const filtersCloseElementOrHisChild = target.hasClass('filters-close')
+      || target.parents('.filters-close').length
+    const filtersBarElementOrHisChild = target.parents('.filters-bar').length
+      || target.hasClass('filters-bar')
+
+    if (filtersOpenElement) {
+      $filtersBar.addClass('filters-show')
+      return
+    }
+    if (filtersCloseElementOrHisChild) {
+      $filtersBar.removeClass('filters-show')
+      return
+    }
+    if (!filtersBarElementOrHisChild) {
+      $filtersBar.removeClass('filters-show')
+    }
+  }
+
+  $('.content-wrapper').click(filtersBarVisibilityManager)
 
   $form.submit(disableEmptyFormInputs)
 })

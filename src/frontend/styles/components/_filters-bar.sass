@@ -1,17 +1,29 @@
 .filters-open 
   display: flex
   align-items: center
+  .btn-text, .icon
+    pointer-events: none
+.filters-bar-wrapper
+  position: relative
+  z-index: 100
 .filters-bar
+  opacity: 0
+  right: -$sidebar-width
   position: fixed
   height: 100vh
-  right: 0
   top: 0
   overflow-y: auto
-  padding: rem(160px) rem(32px) rem(40px)
+  padding: rem(160px) 0 rem(40px)
   background-color: $rhino
+  transition: all 0.5s
+  &.filters-show
+    padding-left: rem(32px)
+    padding-right: rem(32px)
+    opacity: 1
+    right: 0
   .filters-close
     cursor: pointer
-    display: flex
+    display: inline-flex
     margin-bottom: rem(40px)
     align-items: center
     &:hover
@@ -89,10 +101,10 @@
     justify-content: center
 @include media-breakpoint-down($media-min-tablet-width - 1px)
   .filters-bar
-    width: calc(100% - #{$sidebar-mobile-width})
+    width: $sidebar-width
     padding: rem(100px) rem(20px) rem(40px)
     .filters-close
-      display: flex
+      display: inline-flex
     input.filter, .filter, label, .apply-changes, .date-range
       width: 100%
     .date-range

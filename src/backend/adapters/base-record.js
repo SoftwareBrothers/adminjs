@@ -59,11 +59,11 @@ class BaseRecord {
    */
   async update(params) {
     try {
+      this.storeParams(params)
       this.params = await this.resource.update(this.id(), params)
     } catch (e) {
       if (e instanceof ValidationError) {
         this.errors = e.errors
-        this.storeParams(params)
         return this
       }
       throw e

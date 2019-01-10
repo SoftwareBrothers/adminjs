@@ -2,6 +2,7 @@
   margin: 0
   .content-wrapper
     width: calc(100% - #{$sidebar-width})
+    min-height: calc(100vh - #{$navbar-height})
     background-color: $athens-gray
     min-height: 100vh
     padding:  0 $padding-layout
@@ -9,11 +10,7 @@
   @include media-breakpoint-down($media-min-tablet-width - 1px)
     position: relative
     .content-wrapper
-      width: calc(100% - #{$sidebar-mobile-width})
-      margin-left: $sidebar-mobile-width
-    .sidebar
-      position: absolute
-      z-index: 1
+      width: 100%
 
 .border-box
   border: solid rem(1px) $athens-gray-dark
