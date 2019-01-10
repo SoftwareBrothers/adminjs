@@ -8,24 +8,18 @@ $(document).ready(() => {
     const inputsArray = $form.find(':input').toArray()
     $(inputsArray.filter(input => !input.value)).attr('disabled', true)
   }
+  const checkIfElementOrHisChild = (target, className) => target.parents(`.${className}`).length
+    || target.hasClass(className)
 
   const filtersBarVisibilityManager = (event) => {
     const target = $(event.target)
     const filtersOpenElement = target.hasClass('filters-open')
-    const filtersCloseElementOrHisChild = target.hasClass('filters-close')
-      || target.parents('.filters-close').length
-    const filtersBarElementOrHisChild = target.parents('.filters-bar').length
-      || target.hasClass('filters-bar')
+    const filtersCloseElementOrHisChild = checkIfElementOrHisChild(target, 'filters-close')
+    const filtersBarElementOrHisChild = checkIfElementOrHisChild(target, 'filters-bar')
 
     if (filtersOpenElement) {
       $filtersBar.addClass('filters-show')
-      return
-    }
-    if (filtersCloseElementOrHisChild) {
-      $filtersBar.removeClass('filters-show')
-      return
-    }
-    if (!filtersBarElementOrHisChild) {
+    } else if (filtersCloseElementOrHisChild || !filtersBarElementOrHisChild) {
       $filtersBar.removeClass('filters-show')
     }
   }
