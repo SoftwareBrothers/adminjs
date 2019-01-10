@@ -6,7 +6,8 @@
         span.menu-item-main
           i(class=resourceList.icon)
           = h._.startCase(key)
-        ul.menu-list
+          i.dropdown-toggle.icomoon-dropdown-open(data-menu=h._.kebabCase(h._.trim(key)))
+        ul.menu-list.dropdown-list
           for resource in resourceList
             li
               a(href=h.listUrl(resource) class={ 'is-active' : currentResource && currentResource.id() === resource.id() })

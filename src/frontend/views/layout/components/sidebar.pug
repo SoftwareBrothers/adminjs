@@ -1,11 +1,11 @@
-.sidebar-desktop.sidebar-mobile
-  .sidebar-main
-    .sidebar-content
-      .sidebar-top
+.sidebar-main
+  .sidebar-content
+    .sidebar-top
+      .sidebar-wrapper
+        .hamburger.hidden
+          i.fas.fa-bars.fa-2x
         a.sidebar-brand(href=h.dashboardUrl())
           img(src=h.branding.logo height="35px" width="35px")
           span= h.branding.companyName
-        .hamburger.hidden
-          i.fas.fa-bars.fa-2x
-        include navigation
-      include footer
+      include navigation
+    include footer
