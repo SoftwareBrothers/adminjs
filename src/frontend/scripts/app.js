@@ -1,8 +1,17 @@
 /* eslint-disable no-undef */
 $(document).ready(() => {
   const $sidebar = $('.sidebar')
-  $('.hamburger').click(() => $sidebar.toggleClass('sidebar-show'))
-  $('.content-wrapper section').click(() => $sidebar.removeClass('sidebar-show'))
+
+  const sidebarVisibilityManager = (event) => {
+    const target = $(event.target)
+    const hamburgerElementOrHisChild = target.hasClass('hamburger')
+      || target.parents('.hamburger').length
+    if (hamburgerElementOrHisChild) {
+      $sidebar.toggleClass('sidebar-show')
+    } else {
+      $sidebar.removeClass('sidebar-show')
+    }
+  }
 
   const $pickadate = $('.pickadate')
   if ($pickadate) {
@@ -37,4 +46,7 @@ $(document).ready(() => {
     })
     $('.sidebar-navigation').show()
   }
+
+  $('.content-wrapper').click(sidebarVisibilityManager)
+  $('.sidebar .hamburger').click(sidebarVisibilityManager)
 })

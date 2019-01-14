@@ -2,6 +2,7 @@ extends ../layout/layout
 include ../mixins/breadcrumb
 include ../mixins/emptyTable
 include ../mixins/confirmDialog
+include ../mixins/filters-bar
 
 block content
   section.table-list
@@ -10,19 +11,25 @@ block content
     .column
       .level
         .title=currentResource.decorate().getResourceName()
-        if total
-          .field.is-grouped
-            .control
-              a.button.is-primary(href=h.newRecordUrl(currentResource))
-                span.icon
-                  i.icomoon-add
-                .btn-text Add new
-            //-  TODO - uncomment when custom actions will be ready
-            //- .control
-            //-   a.button.is-primary.is-transparent
-            //-     span.icon
-            //-       i.fas.fa-download.fa-xs
-            //-     .btn-text Export
+        .toolbar
+          if total
+            .field.is-grouped
+              .control
+                a.button.is-primary(href=h.newRecordUrl(currentResource))
+                  span.icon
+                    i.icomoon-add
+                  .btn-text Add new
+              //-  TODO - uncomment when custom actions will be ready
+              //- .control
+              //-   a.button.is-primary.is-transparent
+              //-     span.icon
+              //-       i.fas.fa-download.fa-xs
+              //-     .btn-text Export
+              .control  
+                .button.is-primary.is-transparent.filters-open
+                  span.icon
+                    i.fas.fa-sliders-h
+                  .btn-text Filter
     if total
       .column
         .border-box
@@ -34,7 +41,7 @@ block content
                     - isSortedByCurrentPropName = sort.sortBy === prop.name()
                     - direction = sort.direction === 'asc' && isSortedByCurrentPropName ? 'desc' : 'asc'
                     - sortable = prop.isSortable()
-                    a(class={ 'is-sortable' : sortable } href=sortable && h.listUrl(currentResource, { page, sort: { sortBy: prop.name(), direction }})) 
+                    a(class={ 'is-sortable' : sortable } href=sortable && h.listUrl(currentResource, { filters, page, sort: { sortBy: prop.name(), direction }})) 
                       .text-small(class={ 'active' : isSortedByCurrentPropName })=h._.startCase(prop.name())
                       .text-small.sorting-icons(class={ 'hidden' : !isSortedByCurrentPropName })
                         i(class=`icomoon-dropdown-${sort.direction === 'asc' ? 'open' : 'close'}`)
@@ -54,7 +61,7 @@ block content
                     .dropdown.is-right.is-hoverable
                       .dropdown-trigger
                         .dots
-                           span.icon
+                          span.icon
                             i.icomoon-options
                       .dropdown-menu
                         .dropdown-content
@@ -71,15 +78,15 @@ block content
               .pagination
                 - isLastPage = pages.indexOf(page) === pages.length - 1
                 - isFirstPage = pages.indexOf(page) === 0
-                a.button.is-white(class={ 'disabled' : isFirstPage } href=h.listUrl(currentResource, { page: page - 1, sort}))
-                 i.icomoon-pagination-left
+                a.button.is-white(class={ 'disabled' : isFirstPage } href=h.listUrl(currentResource, { filters, page: page - 1, sort}))
+                  i.icomoon-pagination-left
                 for p in pages
                   a.pages.button.is-white(class={ 'active' : p === page }
-                    href=h.listUrl(currentResource, { page: p, sort})
+                    href=h.listUrl(currentResource, { filters, page: p, sort})
                   )= p
                 a.current-page.hidden.button.is-white= page
-                a.button.is-white(class={ 'disabled' : isLastPage } href=h.listUrl(currentResource, { page: page + 1, sort }))
+                a.button.is-white(class={ 'disabled' : isLastPage } href=h.listUrl(currentResource, { filters, page: page + 1, sort }))
                   i.icomoon-pagination-right
     else
       +emptyTable(h.newRecordUrl(currentResource))
-  
+    +filtersBar

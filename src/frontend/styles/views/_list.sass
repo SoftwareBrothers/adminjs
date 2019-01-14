@@ -1,7 +1,10 @@
 .table-list
+  position: relative
   & > .column
     padding-left: 0
     padding-right: 0
+  .toolbar
+    display: flex
   .table
     table-layout: fixed
     margin-bottom: 0
@@ -65,3 +68,5 @@
     .property-main a
       padding: rem(14px)
       display: block
+    .toolbar
+      flex-direction: column

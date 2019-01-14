@@ -48,15 +48,27 @@ class ViewHelpers {
     this.customAssets = this._admin.options.assets
   }
 
-  getObjectKeyWithValue(obj, key) {
-    return typeof obj[key] === 'object'
-      ? this.getQueryPath(obj[key]) : `${key}=${obj[key]}`
+  /**
+   * Returns query param path
+   * @param  {Object} query object with query params
+   * @param  {String} key query param name
+   */
+  getQueryParamPath(query, key) {
+    const value = query[key]
+    return typeof value === 'object'
+      ? this.getQueryPath(value) : `${key}=${value}`
   }
 
+  /**
+   * Returns path including all query params
+   * @param  {Object} query object used to build query string
+   */
   getQueryPath(query) {
     const queryPath = []
     Object.keys(query).forEach((key) => {
-      queryPath.push(this.getObjectKeyWithValue(query, key))
+      if (query[key]) {
+        queryPath.push(this.getQueryParamPath(query, key))
+      }
     })
     return queryPath.join('&')
   }
