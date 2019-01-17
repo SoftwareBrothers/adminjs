@@ -28,7 +28,7 @@ block content
                   i(class=`${actionRemove.icon}`)
                 .btn-text=actionRemove.label
       .box
-        for prop in properties.filter(p => p.isEditable())
+        for prop in currentResource.decorate().getEditProperties()
           - error = record.error(prop.name())
           - value = record.param(prop.name())
           +formGroup(prop, value, error)

@@ -7,33 +7,27 @@ describe('BaseDecorator', function () {
   beforeEach(function () {
     this.stubbedResource = resourceStub(this.sinon)
     this.stubbedAdmin = { options: {} }
-    this.args = { resource: this.stubbedResource, admin: this.stubbedAdmin }
-  })
-
-  describe('#invokeOrGet', function () {
-    beforeEach(function () {
-      class Decorator extends BaseDecorator {
-        constructor(params) {
-          super(params)
-          this.overwritenProperty = 'overwritenPropertyValue'
-        }
-
-        overwritenFunction() { return 'overwritenFunctionValue' } // eslint-disable-line class-methods-use-this
-      }
-      this.decorator = new Decorator(this.args)
-    })
-
-    it('returns null when there is no override', function () {
-      expect(this.decorator.invokeOrGet('someUnknowProperty')).to.equal(undefined)
-    })
-
-    it('executes property when its a function', function () {
-      expect(this.decorator.invokeOrGet('overwritenProperty')).to.equal('overwritenPropertyValue')
-    })
-
-    it('returns property when it is not a function', function () {
-      expect(this.decorator.invokeOrGet('overwritenFunction')).to.equal('overwritenFunctionValue')
-    })
+    this.options = {
+      name: 'Article',
+      parent: {
+        name: 'Knowledge',
+        icon: 'icon-bomb',
+      },
+      listProperties: ['prop1', 'prop2', 'prop3'],
+      actions: {
+        edit: {
+          enable: false,
+        },
+      },
+    }
+    this.args = {
+      resource: this.stubbedResource,
+      admin: this.stubbedAdmin,
+    }
+    this.customArgs = {
+      ...this.args,
+      options: this.options,
+    }
   })
 
   describe('#getResourceName', function () {
@@ -41,12 +35,20 @@ describe('BaseDecorator', function () {
       const decorator = new BaseDecorator(this.args)
       expect(decorator.getResourceName()).to.equal(resourceStub.expectedResult.resourceName)
     })
+    it('returns overwriten resource name', function () {
+      const decorator = new BaseDecorator(this.customArgs)
+      expect(decorator.getResourceName()).to.equal('Article')
+    })
   })
 
   describe('#getParent', function () {
     it('return parent when it is not overriden', function () {
       const decorator = new BaseDecorator(this.args)
       expect(decorator.getParent()).to.contain(resourceStub.expectedResult.parent)
+    })
+    it('return overwritten parent', function () {
+      const decorator = new BaseDecorator(this.customArgs)
+      expect(decorator.getParent()).to.deep.equal({ name: 'Knowledge', icon: 'icon-bomb' })
     })
   })
 
@@ -58,13 +60,7 @@ describe('BaseDecorator', function () {
 
     context('listProperties is overwriten', function () {
       beforeEach(function () {
-        class Decorator extends BaseDecorator {
-          constructor(params) {
-            super(params)
-            this.listProperties = ['prop1', 'prop2', 'prop3']
-          }
-        }
-        this.decorator = new Decorator(this.args)
+        this.decorator = new BaseDecorator(this.customArgs)
       })
 
       it('returns properties given in configuration', function () {
@@ -104,6 +100,7 @@ describe('BaseDecorator', function () {
       })
 
       it('returns default methods as an object', function () {
+        this.record = { param: this.sinon.spy() }
         const ret = this.decorator.getRecordActions()
         expect(ret).to.have.keys('edit', 'show', 'remove')
       })
@@ -111,43 +108,36 @@ describe('BaseDecorator', function () {
 
     context('user hid edit action', function () {
       beforeEach(function () {
-        class Decorator extends BaseDecorator {
-          constructor(params) {
-            super(params)
-            this.recordActions = ['show', 'remove']
-          }
-        }
-        this.decorator = new Decorator(this.args)
+        this.decorator = new BaseDecorator(this.customArgs)
         this.decorator.helpers = this.stubbedHelper
         this.ret = this.decorator.getRecordActions()
       })
-
       it('returns all fields for declared actions', function () {
         const showPath = helperStub.expectedResult.showRecordUrl
         const removePath = helperStub.expectedResult.deleteRecordUrl
         expect(this.ret).to.deep.include({
-          show: { path: showPath, icon: 'icomoon-info', label: 'Info' },
-          remove: { path: removePath, icon: 'icomoon-remove-2', label: 'Remove' },
+          show: {
+            path: showPath, icon: 'icomoon-info', label: 'Info', enable: true, isDefaultAction: true,
+          },
+          remove: {
+            path: removePath, icon: 'icomoon-remove-2', label: 'Remove', enable: true, isDefaultAction: true,
+          },
         })
       })
     })
 
     context('user created new action', function () {
       beforeEach(function () {
-        const customAction = {
+        this.customAction = {
           id: 'publish',
           icon: 'share',
           label: 'Publish',
           action: () => {},
         }
-        this.customAction = customAction
-        class Decorator extends BaseDecorator {
-          constructor(params) {
-            super(params)
-            this.recordActions = ['show', 'remove', 'edit', customAction]
-          }
+        const options = {
+          actions: [this.customAction],
         }
-        this.decorator = new Decorator(this.args)
+        this.decorator = new BaseDecorator({ ...this.args, options })
         this.decorator.helpers = this.stubbedHelper
         this.ret = this.decorator.getRecordActions()
       })

@@ -68,7 +68,7 @@ class ResourcesController extends BaseController {
       content: await data.currentResource
         .decorate()
         .getRecordActions(record)[actionId]
-        .action(request, response, data),
+        .handler(request, response, data),
     }
     return this.render('pages/show', data)
   }

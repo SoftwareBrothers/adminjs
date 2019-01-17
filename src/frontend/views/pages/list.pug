@@ -48,7 +48,7 @@ block content
                 th
             tbody
               for record in records
-                - actions = currentResource.decorate().getRecordActions(record)
+                - actions = currentResource.decorate().getRecordActions(record, 'list')
                 tr
                   for prop in currentResource.decorate().getListProperties()
                     td.is-vcentered(class={ 'property-main' : prop.isTitle() })

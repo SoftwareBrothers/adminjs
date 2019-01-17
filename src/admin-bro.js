@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 const _ = require('lodash')
 
 const Renderer = require('./backend/utils/renderer')
@@ -24,12 +25,23 @@ const pkg = require('../package.json')
  * @property {String} [rootPath='/admin']             under which path AdminBro will be available
  * @property {String} [logoutPath='/admin/logout']    url to logout action
  * @property {String} [loginPath='/admin/login']      url to login page
- * @property {BaseDatabase[]} [databases=[]]         array of all databases
+ * @property {BaseDatabase[]} [databases=[]]          array of all databases
  * @property {BaseResource[] | Object[]} [resources=[]] array of all resources. Resources can be
  *                                                    give as in a regular way or nested within
- *                                                    an object along with its decorator
+ *                                                    an object along with its options
  * @property {BaseResource} [resources[].resource]    class which extends {@link BaseResource}
- * @property {BaseDecorator} [resources[].decorator]  class which extends {@link BaseDecorator}
+ * @property {Object} [resources[].options]           your custom resource settings
+ * @property {String} [resources[].options.name]      resource name
+ *                                                    when not given decorator will use raw name of the resource
+ * @property {Object} [resources[].options.parent]    resource parent along with the icon
+ *                                                    By default it is a database type with its icon
+ * @property {String} [resources[].options.parent.name] parent name
+ * @property {String} [resources[].options.parent.icon] parent icon path
+ * @property {Array} [resources[].options.listProperties] list of all properties which will be visible on the list page
+ * @property {Array} [resources[].options.editProperties] list of all properties which will be visible on the edit page
+ * @property {Array} [resources[].options.showProperties] list of all properties which will be visible on the show page
+ * @property {Object} [resources[].options.actions]   object with actions. User can overwrite default actions
+ *                                                    or create a new action
  * @property {Object} [branding]                      branding settings
  * @property {PageBuilder} [dashboard]                your custom dashboard page
  * @property {String} [branding.logo]                 logo shown in AdminBro in top left corner
@@ -43,7 +55,6 @@ const pkg = require('../package.json')
  * @example
  * const AdminBro = require('admin-bro')
  *
- * const ArticleDecorator = require('./article-decorator')
  * const ArticleModel = require('./article')
  *
  * const connection = await mongoose.connect(process.env.MONGO_URL)
@@ -53,7 +64,40 @@ const pkg = require('../package.json')
  *   logoutPath: '/xyz-admin/exit',
  *   loginPath: '/xyz-admin/sign-in',
  *   databases: [connection]
- *   resources: [{ resource: ArticleModel, decorator: ArticleDecorator}]
+ *   resources: [
+ *     {
+ *       resource: ArticleModel,
+ *       options: {
+ *         name: 'Artykuł',
+ *         listProperties: ['title', 'content', 'publishedAt'],
+ *         showProperties: ['title', 'publishedAt'],
+ *         editProperties: ['title', 'publishedAt'],
+ *          parent: {
+ *            name: 'Knowledge',
+ *            icon: 'icon-bomb',
+ *         },
+ *         properties: {
+ *         }
+ *         actions: {
+ *           edit: {
+ *             enable: false,
+ *           },
+ *           publish: {
+ *             id: 'publish',
+ *             icon: 'fas fa-share',
+ *             label: 'Publish',
+ *             enable: ['list', 'show'],
+ *             handler: (request, response, view) => {
+ *               const { method } = request
+ *               if (method === 'GET') {
+ *                 return 'Some content or form which you want to place here'
+ *               }
+ *               return 'PUBLISH ACTION WORKS'
+ *             },
+ *           },
+ *         }
+ *       }
+ *     }]
  *   branding: {
  *     companyName: 'XYZ c.o.'
  *   },
@@ -158,7 +202,7 @@ class AdminBro {
 }
 
 /**
- * Base class for all resource decorators
+ * BaseDecorator
  * @type {BaseDecorator}
  */
 AdminBro.BaseDecorator = BaseDecorator

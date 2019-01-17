@@ -1,5 +1,4 @@
 const BaseResource = require('../adapters/base-resource')
-const BaseDecorator = require('../utils/base-decorator')
 
 class NoDatabaseAdapterError extends Error {
   constructor(database) {
@@ -19,15 +18,6 @@ class NoResourceAdapterError extends Error {
   }
 }
 
-class IncorrectDecorator extends Error {
-  constructor(decorator) {
-    const message = 'Decorator used to decorate resource has to be a subclass from AdminBro.BaseDecorator'
-    super(message)
-    this.decorator = decorator
-    this.name = 'IncorrectDecorator'
-  }
-}
-
 class ResourcesFactory {
   constructor(admin, adapters = []) {
     this.adapters = adapters
@@ -36,7 +26,6 @@ class ResourcesFactory {
 
   buildResources({ databases, resources }) {
     const optionsResources = this._convertResources(resources)
-
     // fetch only those resources from database which werent previousely given as a resource
     const databaseResources = this._convertDatabases(databases).filter(dr => (
       !optionsResources.find(optionResource => optionResource.resource.id() === dr.id())
@@ -74,8 +63,8 @@ class ResourcesFactory {
    *                                                    keys
    *
    * @example
-   * AdminBro._convertResources([rawAdminModel, {resource: rawUserMode, decorator: UserDecorator}])
-   * // => returns: [AdminModel, {resource: UserModel, decorator: UserDecorator}]
+   * AdminBro._convertResources([rawAdminModel, {resource: rawUserModel, options: UserOptions}])
+   * // => returns: [AdminModel, {resource: UserModel, options: UserDecorator}]
    * // where AdminModel and UserModel were converted by appropriate database adapters.
    */
   _convertResources(resources) {
@@ -90,7 +79,7 @@ class ResourcesFactory {
       }
       return {
         resource: resourceAdapter ? new resourceAdapter.Resource(resourceObject) : resourceObject,
-        decorator: rawResource.decorator,
+        options: rawResource.options,
       }
     })
   }
@@ -108,14 +97,9 @@ class ResourcesFactory {
   _decorateResources(resources) {
     return resources.map((resourceObject) => {
       let { resource } = resourceObject
-      const { decorator } = resourceObject
-      if (decorator
-          && !(decorator.prototype instanceof BaseDecorator)
-          && decorator !== BaseDecorator) {
-        throw new IncorrectDecorator(decorator)
-      }
+      const { options } = resourceObject
       resource = resource || resourceObject
-      resource.assignDecorator(decorator || BaseDecorator, this.admin)
+      resource.assignDecorator(options, this.admin)
       return resource
     })
   }

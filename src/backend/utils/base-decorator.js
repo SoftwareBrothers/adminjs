@@ -1,98 +1,29 @@
+/* eslint-disable no-param-reassign */
 /* eslint-disable class-methods-use-this */
 const moment = require('moment')
 const xss = require('xss')
+const _ = require('lodash')
 const BaseProperty = require('../adapters/base-property')
 const ViewHelpers = require('./view-helpers')
 
 const DEFAULT_MAX_ITEMS_IN_LIST = 5
 
 /**
- * Base decorator class which decorates the Resource.
- *
- * Decorators are passed along with resources during the AdminBro setup. By default
- * each resource has BaseDecorator, but it can be overriden.
- *
- * @example
- *
- * const { BaseDecorator } = require('../../admin/index')
- *
- * class ArticleDecorator extends BaseDecorator {
- *   constructor(params) {
- *     super(params)
- *     this.resourceName = 'Articles'
- *     this.listProperties = ['title', 'content', 'publishedAt']
- *     this.showProperties = ['title', 'publishedAt']
- *     this.parent = {
- *       name: 'Knowledge',
- *       icon: 'icon-bomb',
- *     }
- *     const publishAction = {
- *       id: 'publish',
- *       icon: 'fas fa-share',
- *       label: 'Publish',
- *       action: (request, response, data) => {
- *         const { method } = request
- *         if (method === 'GET') {
- *           return 'Some content or form which you want to place here'
- *         }
- *         return 'PUBLISH ACTION WORKS'
- *       },
- *     }
- *     this.recordActions = ['show', 'edit', 'remove', publishAction]
- *   }
- *
- *   getValue({ record, property, where}) {
- *     switch (property.name()) {
- *     case 'publishedAt':
- *       return `
- *         <p>Here goes a paragraph</p>
- *         <p>and another one</p>
- *         <a href="${this.helpers.showRecordUrl(record.resource, record)}">Link somewere</>
- *       `
- *     default:
- *       return super.getValue({ record, property, where })
- *     }
- *   }
- * }
- *
+ * Base decorator class which decorates the Resource
+ * Each resource has BaseDecorator
  */
 class BaseDecorator {
   /**
-   * @param  {Object}       options
-   * @param  {BaseResource} options.resource  resource which is decorated
-   * @param  {AdminBro}     options.admin  current instance of AdminBro
+   * @param  {Object}       options custom resource settings
+   * @param  {BaseResource} resource  resource which is decorated
+   * @param  {AdminBro}     admin  current instance of AdminBro
    */
-  constructor({ resource, admin }) {
+  constructor({ resource, admin, options = {} }) {
     this._resource = resource
     this._admin = admin
+    this._options = options
 
     this.helpers = new ViewHelpers({ admin })
-
-    /**
-     * Resource name, when not given decorator will use raw name of the resource
-     * @type {String | Function | null}
-     */
-    this.resourceName = null
-
-    /**
-     * Name of the parent of given resource. It will be used in the sidebar as a 'above'
-     * element
-     *
-     * @type {String | Function | null}
-     */
-    this.parentName = null
-
-    /**
-     * List of properties which should be visible in the list view
-     * @type {String[] | Function | null}
-     */
-    this.listProperties = null
-
-    /**
-     * List of properties which should be visible in the show view
-     * @type {String[] | Function | null}
-     */
-    this.showProperties = null
   }
 
   /**
@@ -100,7 +31,7 @@ class BaseDecorator {
    * @return {String} resource name
    */
   getResourceName() {
-    return this.invokeOrGet('resourceName') || this._resource.name()
+    return this._options.name || this._resource.name()
   }
 
   /**
@@ -109,7 +40,7 @@ class BaseDecorator {
    * @return {Object}
    */
   getParent() {
-    const parent = this.invokeOrGet('parent') || this._resource.databaseName()
+    const parent = this._options.parent || this._resource.databaseName()
     const name = parent.name || parent
     const icon = parent.icon ? parent.icon : `icon-${this._resource.databaseType() || 'database'}`
     return { name, icon }
@@ -120,7 +51,7 @@ class BaseDecorator {
    * @return {BaseProperty[]}
    */
   getListProperties() {
-    const overridenProperties = this.invokeOrGet('listProperties')
+    const overridenProperties = this._options.listProperties
     if (overridenProperties) {
       return overridenProperties.map(property => this.nameToProperty(property))
     }
@@ -133,7 +64,19 @@ class BaseDecorator {
    * @return {BaseProperty[]}
    */
   getShowProperties() {
-    const overridenProperties = this.invokeOrGet('showProperties')
+    const overridenProperties = this._options.showProperties
+    if (overridenProperties) {
+      return overridenProperties.map(property => this.nameToProperty(property))
+    }
+    return this._resource.properties().filter(property => property.isEditable())
+  }
+
+  /**
+   * Returns list of all properties which will be visible on the edit view
+   * @return {BaseProperty[]}
+   */
+  getEditProperties() {
+    const overridenProperties = this._options.editProperties
     if (overridenProperties) {
       return overridenProperties.map(property => this.nameToProperty(property))
     }
@@ -150,54 +93,79 @@ class BaseDecorator {
         path: this.helpers.showRecordUrl(resource, record),
         icon: 'icomoon-info',
         label: 'Info',
+        enable: true,
+        isDefaultAction: true,
       },
       edit: {
         path: this.helpers.editRecordUrl(resource, record),
         icon: 'icomoon-edit',
         label: 'Edit',
+        enable: true,
+        isDefaultAction: true,
       },
       remove: {
         path: this.helpers.deleteRecordUrl(resource, record),
         icon: 'icomoon-remove-2',
         label: 'Remove',
+        enable: true,
+        isDefaultAction: true,
       },
     }
   }
 
   /**
-   * Returns object(map) with record actions declared in his decorator
+   * Returns custom action object with all needed props
    */
-  getAllAvailableActions(defaultActions, recordActions, record) {
-    return recordActions.reduce((obj, key) => {
-      if (typeof key === 'object') {
-        return {
-          ...obj,
-          ...{
-            [key.id]: {
-              ...key,
-              path: this.helpers.customRecordActionUrl(this._resource, record, key.id),
-            },
-          },
-        }
+  configuratedAction(record, action) {
+    return {
+      ...action,
+      path: this.helpers.customRecordActionUrl(this._resource, record, action.id),
+    }
+  }
+
+  /**
+   * Returns all configurated actions
+   */
+  configuratedActions(actions, record) {
+    return Object.keys(actions).reduce((obj, key) => {
+      const action = actions[key]
+      const isCustomAction = !action.isDefaultAction
+      if (isCustomAction) {
+        obj[action.id] = this.configuratedAction(record, action)
+      } else {
+        obj[key] = action
       }
-      return {
-        ...obj,
-        ...(Object.keys(defaultActions).includes(key) && { [key]: defaultActions[key] }),
-      }
+      return obj
     }, {})
   }
 
   /**
-  * Returns object(map) with record actions declared in his decorator.
+   * Returns only visible actions of the given view
+   */
+  getVisibleActions(actions, view) {
+    return Object.keys(actions).reduce((obj, key) => {
+      const { enable } = actions[key]
+      const isVisible = Array.isArray(enable) ? enable.includes(view) : enable
+      if (isVisible) {
+        obj[key] = actions[key]
+      }
+      return obj
+    }, {})
+  }
+
+  /**
+  * Returns object(map) with record actions declared in resource options.
   * If record doesn't have declared actions, it automatically returns default ones
   */
-  getRecordActions(record) {
+  getRecordActions(record, view) {
     const defaultActions = this.getDefaultActions(record)
-    const recordActions = this.invokeOrGet('recordActions')
+    const recordActions = this._options.actions
     if (recordActions) {
-      return this.getAllAvailableActions(defaultActions, recordActions, record)
+      const mergedActions = _.merge(defaultActions, recordActions)
+      const configuratedActions = this.configuratedActions(mergedActions, record)
+      return view ? this.getVisibleActions(configuratedActions, view) : configuratedActions
     }
-    return defaultActions
+    return view ? this.getVisibleActions(defaultActions, view) : defaultActions
   }
 
   /**
@@ -209,16 +177,6 @@ class BaseDecorator {
   nameToProperty(propertyName) {
     return this._resource.property(propertyName)
       || new BaseProperty({ path: propertyName, isSortable: false })
-  }
-
-  /**
-   * For given parameter it tries to find class member, and when it is a function - it invokes
-   * it, otherwise return parameter value
-   * @param  {String} param
-   * @return {any}
-   */
-  invokeOrGet(param) {
-    return (this[param] instanceof Function) ? this[param]() : this[param]
   }
 
   /**

@@ -2,6 +2,7 @@
 
 const NotImplementedError = require('../utils/not-implemented-error')
 const BaseRecord = require('./base-record')
+const BaseDecorator = require('../utils/base-decorator')
 
 /**
  * Representation of a ORM Resource in AdminBro. Visally resource is a list item in the sidebar.
@@ -178,14 +179,13 @@ class BaseResource {
   }
 
   /**
-   * Assigns given decorator to the Resource. Than it will be available under
+   * Assigns decorator to the Resource. Than it will be available under
    * resource.decorate() method
-   * @param  {BaseDecorator}  Decorator
+   * @param  {Object}         options       custom resource options defined by User
    * @param  {AdminBro}       admin         current instance of AdminBro
    */
-  assignDecorator(Decorator, admin) {
-    this._Decorator = Decorator
-    this._decorated = new Decorator({ resource: this, admin })
+  assignDecorator(options, admin) {
+    this._decorated = new BaseDecorator({ resource: this, admin, options })
   }
 
   /**
