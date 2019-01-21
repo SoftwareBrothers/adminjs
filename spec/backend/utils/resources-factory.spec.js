@@ -1,8 +1,6 @@
 const ResourcesFactory = require('@backend/utils/resources-factory')
 const BaseDatabase = require('@backend/adapters/base-database')
 const BaseResource = require('@backend/adapters/base-resource')
-const BaseDecorator = require('@backend/utils/base-decorator')
-
 
 describe('ResourcesFactory', function () {
   describe('._convertDatabases', function () {
@@ -74,11 +72,12 @@ describe('ResourcesFactory', function () {
         }).to.throw().property('name', 'NoResourceAdapterError')
       })
 
-      it('throws an error when resource is not handled by the adapter and its provided with a decorator', function () {
+      it('throws an error when resource is not handled by the adapter and its provided with options', function () {
         expect(() => {
-          this.resourcesFactory._convertResources([{ resource: 'not supported', decorator: 'sth' }])
+          this.resourcesFactory._convertResources([{ resource: 'not supported', options: 'sth' }])
         }).to.throw().property('name', 'NoResourceAdapterError')
       })
+
 
       it('converts given resource to Resource class provided in the adapter', function () {
         const resources = this.resourcesFactory._convertResources(['supported'])
@@ -86,41 +85,12 @@ describe('ResourcesFactory', function () {
         expect(resources[0].resource).to.be.an.instanceOf(this.Resource)
       })
 
-      it('converts to Resource class when resource when it is provided with a decorator', function () {
-        const resources = this.resourcesFactory._convertResources([{ resource: 'supported', decorator: 'sth' }])
+      it('converts to Resource class when resource is provided with its options', function () {
+        const resources = this.resourcesFactory._convertResources([{ resource: 'supported', options: 'sth' }])
         expect(resources).to.have.lengthOf(1)
         expect(resources[0].resource).to.be.an.instanceOf(this.Resource)
-        expect(resources[0].decorator).to.equal('sth')
+        expect(resources[0].options).to.equal('sth')
       })
-    })
-  })
-
-  describe('_decorateResources', function () {
-    beforeEach(function () {
-      this.resourcesFactory = new ResourcesFactory({ options: {} }, [])
-    })
-
-    it('assigns BaseDecorator when no other was given', function () {
-      const resources = this.resourcesFactory._decorateResources([{ resource: new BaseResource() }])
-      expect(resources[0]._Decorator).to.equal(BaseDecorator)
-    })
-
-    it('assigns OtherDecorator when it was given', function () {
-      class MyDecorator extends BaseDecorator {}
-      const resources = this.resourcesFactory._decorateResources([{
-        resource: new BaseResource(), decorator: MyDecorator,
-      }])
-      expect(resources[0]._Decorator).to.equal(MyDecorator)
-    })
-
-    it('throws error when decorator given by user doesn not subclass from BaseDecorator', function () {
-      class MyDecorator extends Object {}
-      expect(() => {
-        this.resourcesFactory._decorateResources([{
-          resource: new BaseResource(),
-          decorator: MyDecorator,
-        }])
-      }).to.throw().property('name', 'IncorrectDecorator')
     })
   })
 })

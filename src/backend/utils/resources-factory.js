@@ -57,9 +57,9 @@ class ResourcesFactory {
    * @param  {any[]}           resources                array of all resources given by the user
    *                                                    in {@link AdminBroOptions}
    * @param  {any}             resources[].resource     optionally user can give resource along
-   *                                                    with decorator
-   * @param  {BaseDecorator}   resources[].decorator    decorator given along with the resource
-   * @return {Object[]}                                 list of Objects with resource and decorator
+   *                                                    with options
+   * @property {Object}        resources[].options      your custom resource settings
+   * @return {Object[]}                                 list of Objects with resource and options
    *                                                    keys
    *
    * @example
