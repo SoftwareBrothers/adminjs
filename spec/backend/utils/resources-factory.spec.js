@@ -78,7 +78,6 @@ describe('ResourcesFactory', function () {
         }).to.throw().property('name', 'NoResourceAdapterError')
       })
 
-
       it('converts given resource to Resource class provided in the adapter', function () {
         const resources = this.resourcesFactory._convertResources(['supported'])
         expect(resources).to.have.lengthOf(1)

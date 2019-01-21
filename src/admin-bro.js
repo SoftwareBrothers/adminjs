@@ -41,7 +41,7 @@ const pkg = require('../package.json')
  * @property {Array} [resources[].options.editProperties] list of all properties which will be visible on the edit page
  * @property {Array} [resources[].options.showProperties] list of all properties which will be visible on the show page
  * @property {Object} [resources[].options.actions]   object with actions. User can overwrite default actions
- *                                                    or create a new action
+ *                                                    (show, edit, remove) or create a new action
  * @property {Object} [branding]                      branding settings
  * @property {PageBuilder} [dashboard]                your custom dashboard page
  * @property {String} [branding.logo]                 logo shown in AdminBro in top left corner

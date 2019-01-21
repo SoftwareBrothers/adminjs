@@ -46,7 +46,7 @@ describe('BaseDecorator', function () {
       const decorator = new BaseDecorator(this.args)
       expect(decorator.getParent()).to.contain(resourceStub.expectedResult.parent)
     })
-    it('return overwritten parent', function () {
+    it('return overwriten parent', function () {
       const decorator = new BaseDecorator(this.customArgs)
       expect(decorator.getParent()).to.deep.equal({ name: 'Knowledge', icon: 'icon-bomb' })
     })
@@ -100,7 +100,6 @@ describe('BaseDecorator', function () {
       })
 
       it('returns default methods as an object', function () {
-        this.record = { param: this.sinon.spy() }
         const ret = this.decorator.getRecordActions()
         expect(ret).to.have.keys('edit', 'show', 'remove')
       })
@@ -128,14 +127,16 @@ describe('BaseDecorator', function () {
 
     context('user created new action', function () {
       beforeEach(function () {
-        this.customAction = {
+        this.publishAction = {
           id: 'publish',
           icon: 'share',
           label: 'Publish',
           action: () => {},
         }
         const options = {
-          actions: [this.customAction],
+          actions: {
+            publish: this.publishAction,
+          },
         }
         this.decorator = new BaseDecorator({ ...this.args, options })
         this.decorator.helpers = this.stubbedHelper
@@ -147,7 +148,7 @@ describe('BaseDecorator', function () {
       })
 
       it('returns custom action object', function () {
-        expect(this.ret.publish).to.deep.include(this.customAction)
+        expect(this.ret.publish).to.deep.include(this.publishAction)
       })
     })
   })

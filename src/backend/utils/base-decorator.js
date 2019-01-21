@@ -14,9 +14,9 @@ const DEFAULT_MAX_ITEMS_IN_LIST = 5
  */
 class BaseDecorator {
   /**
-   * @param  {Object}       options custom resource settings
+   * @param  {Object}       options   custom resource settings
    * @param  {BaseResource} resource  resource which is decorated
-   * @param  {AdminBro}     admin  current instance of AdminBro
+   * @param  {AdminBro}     admin     current instance of AdminBro
    */
   constructor({ resource, admin, options = {} }) {
     this._resource = resource

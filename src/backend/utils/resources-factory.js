@@ -64,7 +64,7 @@ class ResourcesFactory {
    *
    * @example
    * AdminBro._convertResources([rawAdminModel, {resource: rawUserModel, options: UserOptions}])
-   * // => returns: [AdminModel, {resource: UserModel, options: UserDecorator}]
+   * // => returns: [AdminModel, {resource: UserModel, options: UserOptions}]
    * // where AdminModel and UserModel were converted by appropriate database adapters.
    */
   _convertResources(resources) {

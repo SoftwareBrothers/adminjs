@@ -179,7 +179,7 @@ class BaseResource {
   }
 
   /**
-   * Assigns decorator to the Resource. Than it will be available under
+   * Assigns {@link BaseDecorator} to the Resource. Than it will be available under
    * resource.decorate() method
    * @param  {Object}         options       custom resource options defined by User
    * @param  {AdminBro}       admin         current instance of AdminBro
