@@ -5,15 +5,14 @@ const Renderer = require('../utils/renderer')
  * base class for all controllers in the application
  * It initializes this.data with databases and it load helpers
  * Also it stores this._admin (instance of {@link Admin}) locally
- *
- * @namespace Controllers
+ * @private
  */
 class BaseController {
   /**
    * @param  {Object} options
    * @param  {AdminBro} options.admin
    * @param  {Object} currentAdmin          logged in admin
-   * @param  {Object} currentAdmin.email
+   * @param  {string} currentAdmin.email
    */
   constructor({ admin }, currentAdmin) {
     this._admin = admin

@@ -3,7 +3,62 @@ const Renderer = require('../../backend/utils/renderer')
 const NotImplementedError = require('../utils/not-implemented-error')
 
 /**
- * PageBuilder class contains methods which allows you to create page content
+ * Base class for all Pages in the AdminBro.
+ *
+ * To create your own Page you have to extend this class and override
+ * {@link PageBuilder#build build()} abstract method.
+ *
+ * Example DashboardPage which change __title__ and __subtitle__ of the header block and adds one
+ * simple widget by using {@link PageBuilder#addBlock addBlock} method.
+ * ```
+ * const { PageBuilder } = require('admin-bro')
+ *
+ * class DashboardPage extends PageBuilder {
+ *   constructor(props) {
+ *     super(props)
+ *     this.title = 'Custom dashboard'
+ *     this.subtitle = 'This is just an example what can be done using AdminBro'
+ *   }
+ *
+ *   async build() {
+ *     this.addBlock({
+ *       title: 'Published Articles',
+ *       value: this.articlesCount.published,
+ *       icon: 'fas fa-newspaper fa-2x',
+ *       columns: 3,
+ *     })
+ *   }
+ * }
+ *
+ * module.exports = DashboardPage
+ * ```
+ *
+ * ### Available Widgets
+ *
+ * There you can use all available widgets:
+ * - {@link PageBuilder#addBlock addBlock}
+ * - {@link PageBuilder#addChart addChart}
+ * - {@link PageBuilder#addInfoList addInfoList}
+ * - {@link PageBuilder#addInfoTable addInfoTable}
+ * - {@link PageBuilder#addTextBox addTextBox}
+ * - {@link PageBuilder#addWelcomeBlock addWelcomeBlock}
+ *
+ * ### Adding to the settings
+ *
+ * You can pass class you created to AdminBro via {@link AdminBroOptions}:
+ * ```
+ * const DashboardPage = require('./dashboard-page')
+ *
+ * const adminBroOptions = {
+ *   ...
+ *   databases: [...],
+ *   resources: [...],
+ *   dashboard: DashboardPage,
+ *   rootPath: '/admin'
+ *   ...
+ * }
+ * ```
+ * @hideconstructor
  */
 class PageBuilder {
   /**
@@ -13,8 +68,9 @@ class PageBuilder {
     this._admin = admin
 
     /**
-     * @type {String[]}
+     * @type {Array<String>}
      * @description _pageContent   array of html elements as String
+     * @private
      */
     this._pageContent = []
 
@@ -33,13 +89,15 @@ class PageBuilder {
     /**
      * @type {Object}
      * @description mapped object contains chart's settings
+     * @private
      */
     this.charts = {}
   }
 
   /**
    * Returns object with page settings
-   * @return {Object}
+   * @return {Promise<Object>}
+   * @private
    */
   async render() {
     await this.build()
@@ -53,6 +111,9 @@ class PageBuilder {
 
   /**
    * This method is responsible for building the page, should be overriden
+   *
+   * @abstract
+   * @throws { NotImplementedError } When the method is not implemented by it's subclass
    */
   build() {
     throw new NotImplementedError(this.constructor.name)
@@ -68,13 +129,17 @@ class PageBuilder {
   /**
    * Adds canvas chart to the page content based on chart.js library
    *
+   * ##### Example Widget:
+   *
+   * <img src="images/add-chart.png" alt="addChart" width="600"/>
+   *
    * @see http://www.chartjs.org
    *
    * @param {Object} options
    * @param {String} options.title
    * @param {String} options.subtitle
-   * @param {Number} options.columns=12     number of columns on which widget should visible
-   * @param {Number} options.offset=0       column offset
+   * @param {Number} [options.columns=12]   number of columns on which widget should visible
+   * @param {Number} [options.offset=0]     column offset
    * @param {Object} options.config         chart.js config
    *
    * @example
@@ -112,6 +177,10 @@ class PageBuilder {
   /**
    * Adds info list widget to the page content
    *
+   * ##### Example Widget:
+   *
+   * <img src="images/add-info-list.png" alt="addInfoList" width="400"/>
+   *
    * @param {Object}    options
    * @param {Object[]}  options.items
    * @param {String}    options.items[].title
@@ -147,6 +216,10 @@ class PageBuilder {
   /**
    * Adds info table widget to the page content
    *
+   * ##### Example Widget:
+   *
+   * <img src="images/add-info-table.png" alt="addInfoTable" width="800"/>
+   *
    * @param {Object}     options
    * @param {String}     options.title
    * @param {Number}     options.columns=12 number of columns on which widget should visible
@@ -176,6 +249,10 @@ class PageBuilder {
   /**
    * Adds simple text box widget to the page content
    *
+   * ##### Example Widget:
+   *
+   * <img src="images/add-text-box.png" alt="addTextBox" width="600"/>
+   *
    * @param {Object} options
    * @param {String} options.title
    * @param {String} options.content
@@ -187,12 +264,13 @@ class PageBuilder {
   }
 
   /**
-   *  Adds compiled html elements to the page content
-   *  Developer can declare specific pug view @param view which will be returned as HTML
+   * Adds compiled html elements to the page content
+   * Developer can declare specific pug view @param view which will be returned as HTML
    *
-   *  @param {String} view      pug template url relative to frontend/views
+   * @param {String} view      pug template url relative to frontend/views
    *                            without the .pug extension
-   *  @param {Object} data      data passed to the pug renderer
+   * @param {Object} data      data passed to the pug renderer
+   * @private
    */
   addPartialContent(view, data) {
     const partialContent = new Renderer(view, data).render()
@@ -200,7 +278,11 @@ class PageBuilder {
   }
 
   /**
-   * Adds text block element to the page content
+   * Adds The Simplest block widget to the page content
+   *
+   * ##### Example Widget:
+   *
+   * <img src="images/add-block.png" alt="addBlock" width="300"/>
    *
    * @param {Object} options
    * @param {Number} options.columns=12     number of columns on which widget should visible
@@ -216,8 +298,15 @@ class PageBuilder {
 }
 
 /**
+ * Definition of commonly used colors for widgets.
+ * It contains following keys:
+ * - WARNING
+ * - DANGER
+ * - SUCCESS
+ * - INFO
  * @type {Object}
- * @description specific colors for html blocks
+ * @example
+ * addBlock({}, PageBuilder.COLOR.INFO)
  */
 PageBuilder.COLOR = {
   WARNING: '#ff9f89',

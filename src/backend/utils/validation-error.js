@@ -1,5 +1,6 @@
 /**
  * Error which is thrown when there are validation errors with records
+ * @category Errors
  */
 class ValidationError extends Error {
   /**
