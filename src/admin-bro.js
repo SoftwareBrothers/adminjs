@@ -16,11 +16,7 @@ const Router = require('./backend/router')
 const pkg = require('../package.json')
 
 /**
- * @typedef {Object} AdminBroOptions
- *
- * @description AdminBro takes list of options of the entire framework. All off them
- * have default values, but you can tailor them to your needs easily
- *
+ * @typedef {Object} AdminBro~AdminBroOptions
  * @property {String} [rootPath='/admin']             under which path AdminBro will be available
  * @property {String} [logoutPath='/admin/logout']    url to logout action
  * @property {String} [loginPath='/admin/login']      url to login page
@@ -30,8 +26,8 @@ const pkg = require('../package.json')
  *                                                    an object along with its decorator
  * @property {BaseResource} [resources[].resource]    class which extends {@link BaseResource}
  * @property {BaseDecorator} [resources[].decorator]  class which extends {@link BaseDecorator}
- * @property {Object} [branding]                      branding settings
  * @property {PageBuilder} [dashboard]                your custom dashboard page
+ * @property {Object} [branding]                      branding settings
  * @property {String} [branding.logo]                 logo shown in AdminBro in top left corner
  * @property {String} [branding.companyName]          company name
  * @property {Boolean} [branding.softwareBrothers]    if software brothers logos should be shown
@@ -39,6 +35,9 @@ const pkg = require('../package.json')
  * @property {Object} [assets]                        assets object
  * @property {String[]}  [assets.styles]              array with a paths to styles
  * @property {String[]}  [assets.scripts]             array with a paths to scripts
+ *
+ * @description AdminBro takes list of options of the entire framework. All off them
+ * have default values, but you can tailor them to your needs easily
  *
  * @example
  * const AdminBro = require('admin-bro')
@@ -82,16 +81,15 @@ const defaults = {
 }
 
 /**
- * Main class for Admin extension. It takes {@link AdminBroOptions} as an
+ * Main class for Admin extension. It takes {@link AdminBro~AdminBroOptions} as an
  * parameter and creates admin instance.
  *
  * Its main responsibility is to fetch all resources and/or databases given by
  * user. Than its instance is a currier - injected in all other classes.
- *
  */
 class AdminBro {
   /**
-   * @param  {AdminBroOptions}   options
+   * @param  {AdminBro~AdminBroOptions}   options
    */
   constructor(options = {}) {
     /**
@@ -101,7 +99,7 @@ class AdminBro {
     this.resources = []
 
     /**
-     * @type {AdminBroOptions}
+     * @type {AdminBro~AdminBroOptions}
      * @description Options gave by the user
      */
     this.options = _.merge(defaults, options)
@@ -116,8 +114,8 @@ class AdminBro {
    * Registers various database adapters written for admin-bro
    *
    * @param  {Object}       options
-   * @param  {BaseDatabase} options.Database subclass of BaseDatabase
-   * @param  {BaseResource} options.Resource subclass of BaseResource
+   * @param  {typeof BaseDatabase} options.Database subclass of BaseDatabase
+   * @param  {typeof BaseResource} options.Resource subclass of BaseResource
    */
   static registerAdapter({ Database, Resource }) {
     if (!Database || !Resource) {
@@ -141,7 +139,7 @@ class AdminBro {
    * @param  {String} [options.errorMessage]  optional error message. When given
    *                                          renderer will print this message in
    *                                          the form
-   * @return {String}                         HTML of the rendered page
+   * @return {Promise<string>}                HTML of the rendered page
    */
   static async renderLogin({ action, errorMessage }) {
     return new Renderer('pages/login', { action, errorMessage }).render()
@@ -159,10 +157,9 @@ class AdminBro {
 
 /**
  * Base class for all resource decorators
- * @type {BaseDecorator}
+ * @type {typeof BaseDecorator}
  */
 AdminBro.BaseDecorator = BaseDecorator
-
 
 /**
  * List of all supported routes along with controllers
@@ -172,37 +169,37 @@ AdminBro.Router = Router
 
 /**
  * BaseResource
- * @type {BaseResource}
+ * @type {typeof BaseResource}
  */
 AdminBro.BaseResource = BaseResource
 
 /**
  * BaseDatabase
- * @type {BaseDatabase}
+ * @type {typeof BaseDatabase}
  */
 AdminBro.BaseDatabase = BaseDatabase
 
 /**
  * BaseRecord
- * @type {BaseRecord}
+ * @type {typeof BaseRecord}
  */
 AdminBro.BaseRecord = BaseRecord
 
 /**
  * BaseProperty
- * @type {BaseProperty}
+ * @type {typeof BaseProperty}
  */
 AdminBro.BaseProperty = BaseProperty
 
 /**
  * PageBuilder
- * @type {PageBuilder}
+ * @type {typeof PageBuilder}
  */
 AdminBro.PageBuilder = PageBuilder
 
 /**
  * ValidationError
- * @type {ValidationError}
+ * @type {typeof ValidationError}
  */
 AdminBro.ValidationError = ValidationError
 

@@ -6,7 +6,6 @@
   "scripts": {
     "test": "./node_modules/mocha/bin/mocha spec",
     "lint": "./node_modules/eslint/bin/eslint.js './spec/**/*.js' './src/**/*.js' --ignore-pattern='*.min.js'",
-    "docs": "node_modules/.bin/jsdoc -c jsdoc.json",
     "cover": "NODE_ENV=test ./node_modules/nyc/bin/nyc.js --reporter=html -x=spec -x=docs -x=coverage  --all=true npm test"
   },
   "repository": {
@@ -60,8 +59,6 @@
     "gulp-sass": "^4.0.2",
     "gulp-uglify": "^3.0.1",
     "istanbul": "^0.4.5",
-    "jsdoc": "^3.5.5",
-    "jsdoc-mermaid": "^1.0.0",
     "mocha": "^5.2.0",
     "module-alias": "^2.1.0",
     "nyc": "^12.0.2",

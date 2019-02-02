@@ -4,9 +4,10 @@ const TITLE_COLUMN_NAMES = ['title', 'name', 'subject', 'email']
 
 /**
  * Represents Resource Property
+ * @category Adapter
  *
  * @mermaid
- *   graph TD
+ *   graph LR
  *   A[BaseDatabase] -->|has many| B(BaseResource)
  *   B --> |has many|C(BaseRecord)
  *   B --> |has many|D(BasePorperty)

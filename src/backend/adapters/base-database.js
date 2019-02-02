@@ -4,9 +4,10 @@ const NotImplementedError = require('../utils/not-implemented-error')
 
 /**
  * Representation of an ORM database in AdminBro
+ * @category Adapter
  *
  * @mermaid
- *   graph TD
+ *   graph LR
  *   A[BaseDatabase] -->|has many| B(BaseResource)
  *   B --> |has many|C(BaseRecord)
  *   B --> |has many|D(BasePorperty)
