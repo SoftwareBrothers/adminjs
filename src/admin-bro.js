@@ -89,7 +89,7 @@ const defaults = {
  */
 class AdminBro {
   /**
-   * @param  {AdminBroOptions}   options
+   * @param  {AdminBro~AdminBroOptions}   options
    */
   constructor(options = {}) {
     /**
@@ -99,7 +99,7 @@ class AdminBro {
     this.resources = []
 
     /**
-     * @type {AdminBroOptions}
+     * @type {AdminBro~AdminBroOptions}
      * @description Options gave by the user
      */
     this.options = _.merge(defaults, options)
@@ -114,8 +114,8 @@ class AdminBro {
    * Registers various database adapters written for admin-bro
    *
    * @param  {Object}       options
-   * @param  {BaseDatabase} options.Database subclass of BaseDatabase
-   * @param  {BaseResource} options.Resource subclass of BaseResource
+   * @param  {typeof BaseDatabase} options.Database subclass of BaseDatabase
+   * @param  {typeof BaseResource} options.Resource subclass of BaseResource
    */
   static registerAdapter({ Database, Resource }) {
     if (!Database || !Resource) {
@@ -175,31 +175,31 @@ AdminBro.BaseResource = BaseResource
 
 /**
  * BaseDatabase
- * @type {BaseDatabase}
+ * @type {typeof BaseDatabase}
  */
 AdminBro.BaseDatabase = BaseDatabase
 
 /**
  * BaseRecord
- * @type {BaseRecord}
+ * @type {typeof BaseRecord}
  */
 AdminBro.BaseRecord = BaseRecord
 
 /**
  * BaseProperty
- * @type {BaseProperty}
+ * @type {typeof BaseProperty}
  */
 AdminBro.BaseProperty = BaseProperty
 
 /**
  * PageBuilder
- * @type {PageBuilder}
+ * @type {typeof PageBuilder}
  */
 AdminBro.PageBuilder = PageBuilder
 
 /**
  * ValidationError
- * @type {ValidationError}
+ * @type {typeof ValidationError}
  */
 AdminBro.ValidationError = ValidationError
 
