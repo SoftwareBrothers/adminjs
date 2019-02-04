@@ -13,7 +13,7 @@ describe('ResourcesFactory', function () {
         }).to.throw().property('name', 'NoDatabaseAdapterError')
       })
 
-      it('returns empty array when none databases were given', function () {
+      it('returns empty array when no databases were given', function () {
         expect(new ResourcesFactory()._convertDatabases([])).to.have.lengthOf(0)
       })
     })
@@ -26,7 +26,7 @@ describe('ResourcesFactory', function () {
 
           resources() { return new Array(5) } // eslint-disable-line class-methods-use-this
         }
-        class Resource extends BaseResource {}
+        class Resource extends BaseResource { }
         this.resourcesFactory = new ResourcesFactory({}, [{ Database, Resource }])
       })
 
@@ -46,21 +46,21 @@ describe('ResourcesFactory', function () {
 
   describe('._convertResources', function () {
     context('there are no adapters', function () {
-      it('throws an error when resource is not subclass from BaseResource', function () {
+      it('throws an error when resource is not subclass of BaseResource', function () {
         expect(() => {
           new ResourcesFactory({})._convertResources(['one'])
         }).to.throw().property('name', 'NoResourceAdapterError')
       })
 
-      it('returns given resource when it is subclass from BaseResource', function () {
-        class MyResource extends BaseResource {}
+      it('returns given resource when it is subclass of BaseResource', function () {
+        class MyResource extends BaseResource { }
         expect(new ResourcesFactory({})._convertResources([new MyResource()])).to.have.lengthOf(1)
       })
     })
 
     context('there is one adapter', function () {
       beforeEach(function () {
-        class Database extends BaseDatabase {}
+        class Database extends BaseDatabase { }
         class Resource extends BaseResource {
           static isAdapterFor(resource) { return resource === 'supported' }
         }
@@ -86,7 +86,7 @@ describe('ResourcesFactory', function () {
         expect(resources[0].resource).to.be.an.instanceOf(this.Resource)
       })
 
-      it('converts to Resource class when resource when it is provided with a decorator', function () {
+      it('converts to Resource class when resource is provided with a decorator', function () {
         const resources = this.resourcesFactory._convertResources([{ resource: 'supported', decorator: 'sth' }])
         expect(resources).to.have.lengthOf(1)
         expect(resources[0].resource).to.be.an.instanceOf(this.Resource)
@@ -106,15 +106,15 @@ describe('ResourcesFactory', function () {
     })
 
     it('assigns OtherDecorator when it was given', function () {
-      class MyDecorator extends BaseDecorator {}
+      class MyDecorator extends BaseDecorator { }
       const resources = this.resourcesFactory._decorateResources([{
         resource: new BaseResource(), decorator: MyDecorator,
       }])
       expect(resources[0]._Decorator).to.equal(MyDecorator)
     })
 
-    it('throws error when decorator given by user doesn not subclass from BaseDecorator', function () {
-      class MyDecorator extends Object {}
+    it('throws error when decorator given by user is not subclass of BaseDecorator', function () {
+      class MyDecorator extends Object { }
       expect(() => {
         this.resourcesFactory._decorateResources([{
           resource: new BaseResource(),
