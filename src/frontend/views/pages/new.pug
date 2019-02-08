@@ -1,5 +1,4 @@
 extends ../layout/layout.pug
-include ../mixins/form-group.pug
 include ../mixins/breadcrumb
 
 block content
@@ -19,7 +18,5 @@ block content
                 i.icomoon-save
               .btn-text Save
       .box
-        for prop in properties.filter(p => p.isEditable())
-          - error = record.error(prop.name())
-          - value = record.param(prop.name())
-          +formGroup(prop, value, error)
+        for prop in currentResource.decorate().getEditProperties()
+          .field!= prop.renderEdit(record)

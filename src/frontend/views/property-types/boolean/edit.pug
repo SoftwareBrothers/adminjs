@@ -1,0 +1,7 @@
+.control.control-checkbox
+  - hiddenId = property.name() + '-hidden'
+  input(type="hidden" id=hiddenId name=property.name() value=value ? 1 : 0)
+  input.checkbox(type="checkbox" onclick="this.previousSibling.value=1-this.previousSibling.value" id=property.name() checked=value)
+  label.checkbox(for=property.name())= property.name()
+if error
+  .help.is-danger= error.message

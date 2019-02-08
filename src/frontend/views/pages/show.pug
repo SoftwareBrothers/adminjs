@@ -1,5 +1,4 @@
 extends ../layout/layout
-include ../mixins/form-group
 include ../mixins/breadcrumb
 include ../mixins/confirmDialog
 
@@ -32,8 +31,4 @@ block content
           != customAction.content
         else
           for prop in currentResource.decorate().getShowProperties()
-            .property
-              .card-content
-                .text-small #{h._.startCase(prop.name())}
-                div(class={ 'feature' : properties.indexOf(prop) === 0 })
-                  != currentResource.decorate().getValue({ record, property: prop, where: 'show' })
+            .property!= prop.renderShow(record)

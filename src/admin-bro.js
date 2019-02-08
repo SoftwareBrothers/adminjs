@@ -1,7 +1,6 @@
 const _ = require('lodash')
 
 const Renderer = require('./backend/utils/renderer')
-const BaseDecorator = require('./backend/utils/base-decorator')
 const BaseResource = require('./backend/adapters/base-resource')
 const BaseDatabase = require('./backend/adapters/base-database')
 const BaseRecord = require('./backend/adapters/base-record')
@@ -10,6 +9,7 @@ const PageBuilder = require('./backend/utils/page-builder')
 const ValidationError = require('./backend/utils/validation-error')
 const ResourcesFactory = require('./backend/utils/resources-factory')
 const DefaultDashboard = require('./backend/defaults/default-dashboard')
+const PROPERTY_TYPES = require('./backend/property-types')
 
 const Router = require('./backend/router')
 
@@ -25,7 +25,7 @@ const pkg = require('../package.json')
  *                                                    give as in a regular way or nested within
  *                                                    an object along with its decorator
  * @property {BaseResource} [resources[].resource]    class which extends {@link BaseResource}
- * @property {BaseDecorator} [resources[].decorator]  class which extends {@link BaseDecorator}
+ * @property {ResourceOptions} [resources[].options]  options for given resource
  * @property {PageBuilder} [dashboard]                your custom dashboard page
  * @property {Object} [branding]                      branding settings
  * @property {String} [branding.logo]                 logo shown in AdminBro in top left corner
@@ -142,7 +142,7 @@ class AdminBro {
    * @return {Promise<string>}                HTML of the rendered page
    */
   static async renderLogin({ action, errorMessage }) {
-    return new Renderer('pages/login', { action, errorMessage }).render()
+    return new Renderer().render('pages/login', { action, errorMessage })
   }
 
   /**
@@ -154,12 +154,6 @@ class AdminBro {
     return this.resources.find(m => m.id() === resourceId)
   }
 }
-
-/**
- * Base class for all resource decorators
- * @type {typeof BaseDecorator}
- */
-AdminBro.BaseDecorator = BaseDecorator
 
 /**
  * List of all supported routes along with controllers
@@ -204,6 +198,12 @@ AdminBro.PageBuilder = PageBuilder
 AdminBro.ValidationError = ValidationError
 
 AdminBro.registeredAdapters = []
+
+/**
+ * List of all property types supported by the AdminBro
+ * @type {Object<string, PropertyType>}
+ */
+AdminBro.PROPERTY_TYPES = PROPERTY_TYPES
 
 AdminBro.VERSION = pkg.version
 

@@ -1,5 +1,3 @@
-include ../mixins/filters-group
-
 mixin filtersBar
   - const areFiltersAvailable = Object.keys(filters).length 
   - const props = currentResource.decorate().getListProperties()
@@ -10,8 +8,8 @@ mixin filtersBar
           i.fas.fa-arrow-right
         span Filter
       form(method="GET" action=h.listUrl(currentResource))#filters-form
-        for prop in props.filter(p => p.isEditable())
-          +filtersGroup(prop)
+        for prop in currentResource.decorate().getFilterProperties()
+          != prop.renderFilter(filters)
         input(type='hidden' name='sortBy' value=sort.sortBy)
         input(type='hidden' name='direction' value=sort.direction)
         button.button.is-primary.apply-changes(type='submit') Apply Changes

@@ -273,7 +273,7 @@ class PageBuilder {
    * @private
    */
   addPartialContent(view, data) {
-    const partialContent = new Renderer(view, data).render()
+    const partialContent = new Renderer().render(view, data)
     this._pageContent.push(partialContent)
   }
 

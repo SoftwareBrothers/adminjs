@@ -40,7 +40,7 @@ class BaseController {
    */
   render(view, data) {
     const renderData = data || this.data
-    return new Renderer(view, renderData).render()
+    return new Renderer().render(view, renderData)
   }
 }
 

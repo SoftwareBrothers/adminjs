@@ -1,0 +1,7 @@
+label.label(for=property.name())= h._.startCase(property.name())
+  .control.has-icons-right
+    input.input.pickadate(type='text' id=property.name() name=property.name() value=value)
+    span.icon.is-small.is-right
+      i.icomoon-calendar
+if error
+  .help.is-danger= error.message

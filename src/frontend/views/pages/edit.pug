@@ -1,5 +1,4 @@
 extends ../layout/layout
-include ../mixins/form-group
 include ../mixins/breadcrumb
 include ../mixins/confirmDialog
 
@@ -28,7 +27,5 @@ block content
                   i(class=`${actionRemove.icon}`)
                 .btn-text=actionRemove.label
       .box
-        for prop in properties.filter(p => p.isEditable())
-          - error = record.error(prop.name())
-          - value = record.param(prop.name())
-          +formGroup(prop, value, error)
+        for prop in currentResource.decorate().getEditProperties()
+          .field!= prop.renderEdit(record)

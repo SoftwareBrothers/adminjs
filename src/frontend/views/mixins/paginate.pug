@@ -1,0 +1,16 @@
+mixin paginate(currentResource, total, page, perPage, filters, h)
+  - pages = h.paginate(total, page, perPage).pages
+  if pages.length > 1
+    - isLastPage = pages.indexOf(page) === pages.length - 1
+    - isFirstPage = pages.indexOf(page) === 0
+    .level-item.pagination-content
+      .pagination
+        a.button.is-white(class={ 'disabled' : isFirstPage } href=h.listUrl(currentResource, { filters, page: page - 1, sort}))
+          i.icomoon-pagination-left
+        for p in pages
+          a.pages.button.is-white(class={ 'active' : p === page }
+            href=h.listUrl(currentResource, { filters, page: p, sort})
+          )= p
+        a.current-page.hidden.button.is-white= page
+        a.button.is-white(class={ 'disabled' : isLastPage } href=h.listUrl(currentResource, { filters, page: page + 1, sort }))
+          i.icomoon-pagination-right

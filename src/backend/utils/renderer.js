@@ -1,16 +1,14 @@
 const pug = require('pug')
 
 class Renderer {
-  constructor(view, data) {
-    this.view = view
-    this.data = data
+  constructor() {
     const pathRoot = `${__dirname}/../..`
     this.views_path = `${pathRoot}/frontend/views/`
   }
 
-  render() {
-    const viewFunction = pug.compileFile(`${this.views_path}${this.view}.pug`)
-    return viewFunction(this.data)
+  render(view, data) {
+    const viewFunction = pug.compileFile(`${this.views_path}${view}.pug`)
+    return viewFunction(data)
   }
 }
 

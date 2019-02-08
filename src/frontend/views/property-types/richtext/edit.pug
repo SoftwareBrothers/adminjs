@@ -1,0 +1,39 @@
+label.label(for=property.name())= h._.startCase(property.name())
+- hiddenId = property.name() + '-hidden'
+.control.is-invisible
+  input(type='hidden' name=property.name() value=value id=hiddenId)
+.quill-editor(id=property.name() style='height: 400px')
+  != value
+if error
+  .help.is-danger= error.message
+
+script.
+  $(document).ready(() => {
+    var toolbarOptions = [
+      [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+      ['bold', 'italic', 'underline', 'strike'],        // toggled buttons
+      ['blockquote', 'code-block'],
+      [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+      [{ 'script': 'sub'}, { 'script': 'super' }],      // superscript/subscript
+      [{ 'indent': '-1'}, { 'indent': '+1' }],          // outdent/indent
+      [{ 'direction': 'rtl' }],                         // text direction
+
+      [{ 'size': ['small', false, 'large', 'huge'] }],  // custom dropdown
+
+      [{ 'color': [] }, { 'background': [] }],          // dropdown with defaults from theme
+      [{ 'font': [] }],
+      [{ 'align': [] }],
+
+      ['clean']                                         // remove formatting button
+    ];
+    var quill = new Quill('##{property.name()}', {
+      modules: {
+        toolbar: toolbarOptions
+      },
+      theme: 'snow'
+    })
+
+    $('##{property.name()}').parents('form').submit(() => {
+      $('##{hiddenId}').val($('##{property.name()} > div').html())
+    })
+  })
