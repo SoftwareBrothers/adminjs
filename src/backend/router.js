@@ -5,7 +5,6 @@ const ASSETS_ROOT = `${__dirname}/../frontend/assets/`
 
 /**
  * Contains list of all routes grouped to `assets` and `routes`.
- * @private
  *
  * ```
  * {
@@ -24,6 +23,8 @@ const ASSETS_ROOT = `${__dirname}/../frontend/assets/`
  * ```
  *
  * It is used by supported frameworks to render AdminBro pages.
+ *
+ * @private
  */
 const Router = {
   assets: [{
