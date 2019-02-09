@@ -4,7 +4,8 @@ const renderer = new Renderer()
 
 /**
  * @type {PropertyType}
- * @name PropertyType~defaultType
+ * @module defaultType
+ * @category PropertyTypes
  */
 module.exports = {
   head: null,

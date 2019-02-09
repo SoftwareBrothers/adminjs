@@ -16,7 +16,7 @@ const Router = require('./backend/router')
 const pkg = require('../package.json')
 
 /**
- * @typedef {Object} AdminBro~AdminBroOptions
+ * @typedef {Object} AdminBroOptions
  * @property {String} [rootPath='/admin']             under which path AdminBro will be available
  * @property {String} [logoutPath='/admin/logout']    url to logout action
  * @property {String} [loginPath='/admin/login']      url to login page
@@ -81,7 +81,7 @@ const defaults = {
 }
 
 /**
- * Main class for Admin extension. It takes {@link AdminBro~AdminBroOptions} as an
+ * Main class for Admin extension. It takes {@link AdminBroOptions} as an
  * parameter and creates admin instance.
  *
  * Its main responsibility is to fetch all resources and/or databases given by
@@ -89,7 +89,7 @@ const defaults = {
  */
 class AdminBro {
   /**
-   * @param  {AdminBro~AdminBroOptions}   options
+   * @param  {AdminBroOptions}   options
    */
   constructor(options = {}) {
     /**
@@ -99,7 +99,7 @@ class AdminBro {
     this.resources = []
 
     /**
-     * @type {AdminBro~AdminBroOptions}
+     * @type {AdminBroOptions}
      * @description Options gave by the user
      */
     this.options = _.merge(defaults, options)

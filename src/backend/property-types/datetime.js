@@ -1,13 +1,15 @@
 const Renderer = require('../utils/renderer')
+const date = require('./date')
 
 const renderer = new Renderer()
 
 /**
  * @type {PropertyType}
- * @name PropertyType~defaultType
+ * @module datetime
+ * @category PropertyTypes
  */
 module.exports = {
-  head: null,
+  head: date.head,
 
   list: (property, record, h) => {
     let value = record.param(property.name())

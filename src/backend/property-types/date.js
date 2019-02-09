@@ -4,10 +4,16 @@ const renderer = new Renderer()
 
 /**
  * @type {PropertyType}
- * @name PropertyType~defaultType
+ * @module date
+ * @category PropertyTypes
  */
 module.exports = {
-  head: null,
+  head: {
+    styles: ['https://cdnjs.cloudflare.com/ajax/libs/pickadate.js/3.5.6/themes/default.css',
+      'https://cdnjs.cloudflare.com/ajax/libs/pickadate.js/3.5.6/themes/default.date.css'],
+    scripts: ['https://cdnjs.cloudflare.com/ajax/libs/pickadate.js/3.5.6/picker.js',
+      'https://cdnjs.cloudflare.com/ajax/libs/pickadate.js/3.5.6/picker.date.js'],
+  },
 
   list: (property, record, h) => {
     let value = record.param(property.name())

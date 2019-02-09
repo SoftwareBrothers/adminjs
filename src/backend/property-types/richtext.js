@@ -6,7 +6,8 @@ const renderer = new Renderer()
 
 /**
  * @type {PropertyType}
- * @name PropertyType~defaultType
+ * @module richtext
+ * @category PropertyTypes
  */
 module.exports = {
   list: (property, record, h) => {

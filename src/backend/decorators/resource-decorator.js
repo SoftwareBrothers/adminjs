@@ -3,24 +3,29 @@ const BaseProperty = require('../adapters/base-property')
 const ViewHelpers = require('../utils/view-helpers')
 const PropertyDecorator = require('./property-decorator')
 
+/**
+ * Default maximum number of items which should be present in a list.
+ *
+ * @type {Number}
+ * @private
+ */
 const DEFAULT_MAX_ITEMS_IN_LIST = 8
 
 /**
  * @typedef {Object} ResourceOptions
  * @property {String} name      name of a resource
- * @property {Array}  listProperties    list of all properties which should be visible on a list
- * @property {Array}  showProperties    list of all properties which should be visible
- *                                      on an object view
- * @property {Array}  editProperties    list of all properties which should be visible
- *                                      on edit screen
+ * @property {Array<String>}  listProperties    list of all properties which should be visible
+ *                                              on a list
+ * @property {Array<String>}  showProperties    list of all properties which should be visible
+ *                                              on an object view
+ * @property {Array<String>}  editProperties    list of all properties which should be visible
+ *                                              on edit screen
+ * @property {Array<String>}  filterProperties  list of all properties which should be visible
+ *                                              in the filter
  * @property {Object | String} parent   parent category in the sidebar
  * @property {String} parent.name       name of the parent category
  * @property {String} parent.icon       icon class of a parent category (i.e. 'icon-bomb')
- * @property {Number} position          position of the field in a list,
- *                                      title field (isTitle) gets position -1 by default other
- *                                      fields gets position = 100.
- * @property {Object} properties
- * @property {PropertyOptions} properties.prop   path to a property
+ * @property {properties<String, PropertyOptions>} properties list of properties with their options
  * @property {Object} actions
  * @property {Object} actions.action
  * @property {String} actions.action.icon
@@ -31,6 +36,8 @@ const DEFAULT_MAX_ITEMS_IN_LIST = 8
 
 /**
  * Base decorator class which decorates the Resource.
+ *
+ * @category Decorators
  */
 class ResourceDecorator {
   /**
@@ -64,6 +71,7 @@ class ResourceDecorator {
    * user passess new property in the options - it will be created as well.
    *
    * @returns {Object<String,PropertyDecorator>}
+   * @private
    */
   decorateProperties() {
     const resourceProperties = this._resource.properties()
@@ -102,7 +110,7 @@ class ResourceDecorator {
   /**
    * Returns resource parent along with the icon. By default it is a
    * database type with its icon
-   * @return {Object}
+   * @return {Object<String,String>} returns { name, icon }
    */
   getParent() {
     const parent = this.options.parent || this._resource.databaseName()
@@ -116,6 +124,9 @@ class ResourceDecorator {
    * @return {Array<PropertyDecorator>}
    */
   getListProperties() {
+    if (this.options.listProperties && this.options.listProperties.length) {
+      return this.options.listProperties.map(key => this.properties[key])
+    }
     return Object.keys(this.properties)
       .filter(key => this.properties[key].isVisible('list'))
       .sort((key1, key2) => this.properties[key1].position() > this.properties[key2].position())
@@ -128,6 +139,9 @@ class ResourceDecorator {
    * @return {Array<PropertyDecorator>}
    */
   getShowProperties() {
+    if (this.options.showProperties && this.options.showProperties.length) {
+      return this.options.showProperties.map(key => this.properties[key])
+    }
     return Object.keys(this.properties)
       .filter(key => this.properties[key].isVisible('show'))
       .map(key => this.properties[key])
@@ -138,6 +152,9 @@ class ResourceDecorator {
    * @return {Array<PropertyDecorator>}
    */
   getEditProperties() {
+    if (this.options.editProperties && this.options.editProperties.length) {
+      return this.options.editProperties.map(key => this.properties[key])
+    }
     return Object.keys(this.properties)
       .filter(key => this.properties[key].isVisible('edit'))
       .map(key => this.properties[key])
@@ -148,22 +165,29 @@ class ResourceDecorator {
    * @return {Array<PropertyDecorator>}
    */
   getFilterProperties() {
+    if (this.options.filterProperties && this.options.filterProperties.length) {
+      return this.options.filterProperties.map(key => this.properties[key])
+    }
     return Object.keys(this.properties)
-      .filter(key => this.properties[key].isVisible('edit'))
+      .filter(key => this.properties[key].isVisible('filter'))
       .map(key => this.properties[key])
   }
 
+  /**
+   * Returns list of all custom scripts which are should be included in the
+   * head of the page. It gathers them from all properties which has defined custom
+   * head - see: {@link PropertyType}
+   *
+   * @see PropertyType
+   */
   customHeadScripts() {
     return Object.keys(this.properties)
       .map(key => this.properties[key])
       .filter(property => property.headScripts())
-      .reduce((memo, property) => {
-
-        return {
-          scripts: [...memo.scripts, ...property.headScripts().scripts],
-          styles: [...memo.styles, ...property.headScripts().styles],
-        }
-      }, { scripts: [], styles: [] })
+      .reduce((memo, property) => ({
+        scripts: [...memo.scripts, ...property.headScripts().scripts],
+        styles: [...memo.styles, ...property.headScripts().styles],
+      }), { scripts: [], styles: [] })
   }
 
   property(propertyName) {

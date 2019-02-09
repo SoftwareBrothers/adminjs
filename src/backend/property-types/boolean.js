@@ -8,7 +8,8 @@ const mapValue = (value) => {
 
 /**
  * @type {PropertyType}
- * @name PropertyType~defaultType
+ * @module boolean
+ * @category PropertyTypes
  */
 module.exports = {
   head: null,

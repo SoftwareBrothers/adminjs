@@ -5,6 +5,7 @@ const ASSETS_ROOT = `${__dirname}/../frontend/assets/`
 
 /**
  * Contains list of all routes grouped to `assets` and `routes`.
+ * @private
  *
  * ```
  * {
