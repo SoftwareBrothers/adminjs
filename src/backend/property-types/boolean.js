@@ -2,9 +2,9 @@ const Renderer = require('../utils/renderer')
 
 const renderer = new Renderer()
 
-const mapValue = (value) => {
-  return value ? 'Yes' : 'No'
-}
+const mapValue = value => (
+  value ? 'Yes' : 'No'
+)
 
 /**
  * @type {PropertyType}
