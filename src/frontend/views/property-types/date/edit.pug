@@ -5,3 +5,12 @@ label.label(for=property.name())= h._.startCase(property.name())
       i.icomoon-calendar
 if error
   .help.is-danger= error.message
+
+
+script.
+  $(document).ready(() => {
+    $('##{property.name()}').pickadate({
+      format: 'yyyy-mm-dd',
+      firstDay: 1,
+    })
+  })

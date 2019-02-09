@@ -1,5 +1,6 @@
+- filterId = property.name() + '-filter'
 .picker-name= h._.startCase(property.name())
-  .date-range
+  .date-range(id=filterId)
     .filter
       label.label='from'
         .control.has-icons-right
@@ -12,3 +13,11 @@
           input.input.filter.pickadate(name=`${filterKey}.to` value=filters[`${filterKey}.to`])
           span.icon.is-small.is-right
             i.icomoon-calendar
+
+script.
+  $(document).ready(() => {
+    $('##{filterId} .pickadate').pickadate({
+      format: 'yyyy-mm-dd',
+      firstDay: 1,
+    })
+  })
