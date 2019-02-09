@@ -26,12 +26,6 @@ const DEFAULT_MAX_ITEMS_IN_LIST = 8
  * @property {String} parent.name       name of the parent category
  * @property {String} parent.icon       icon class of a parent category (i.e. 'icon-bomb')
  * @property {properties<String, PropertyOptions>} properties list of properties with their options
- * @property {Object} actions
- * @property {Object} actions.action
- * @property {String} actions.action.icon
- * @property {String} actions.action.label
- * @property {Array | Boolean} actions.action.enable
- * @property {Function} actions.action.handler
  */
 
 /**
