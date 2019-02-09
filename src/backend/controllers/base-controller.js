@@ -1,5 +1,6 @@
 const ViewHelpers = require('../utils/view-helpers')
 const Renderer = require('../utils/renderer')
+const sidebarBuilder = require('../utils/sidebar-builder')
 
 /**
  * base class for all controllers in the application
@@ -18,17 +19,7 @@ class BaseController {
     this._admin = admin
     this.data = {}
     this.data.currentAdmin = currentAdmin
-    this.data.resources = admin.resources.reduce((memo, resource) => {
-      const parent = resource.decorate().getParent()
-      const parentName = parent.name
-      if (memo[parentName]) {
-        memo[parentName].push(resource)
-      } else {
-        memo[parentName] = [resource] // eslint-disable-line no-param-reassign
-      }
-      memo[parentName].icon = parent.icon // eslint-disable-line no-param-reassign
-      return memo
-    }, {})
+    this.data.resources = sidebarBuilder(admin.resources)
     this.data.h = new ViewHelpers({ admin })
   }
 
