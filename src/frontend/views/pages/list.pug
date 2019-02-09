@@ -9,15 +9,15 @@ include ../mixins/paginate
 block content
   section.table-list
     +confirm-dialog('Remove record', 'Are you sure you want remove this item', 'Remove')
-    +breadcrumb(currentResource)
+    +breadcrumb(resource)
     .column
       .level
-        .title=currentResource.decorate().getResourceName()
+        .title=resource.decorate().getResourceName()
         .toolbar
           if total
             .field.is-grouped
               .control
-                a.button.is-primary(href=h.newRecordUrl(currentResource))
+                a.button.is-primary(href=h.newRecordUrl(resource))
                   span.icon
                     i.icomoon-add
                   .btn-text Add new
@@ -32,14 +32,14 @@ block content
           table.table.is-fullwidth
             thead
               tr
-                for prop in currentResource.decorate().getListProperties()
-                  +sort-header(currentResource, prop, sort, filters, page, h)
+                for prop in resource.decorate().getListProperties()
+                  +sort-header(resource, prop, sort, filters, page, h)
                 th
             tbody
               for record in records
-                - actions = currentResource.decorate().getRecordActions(record)
+                - actions = resource.decorate().getRecordActions(record)
                 tr
-                  for prop in currentResource.decorate().getListProperties()
+                  for prop in resource.decorate().getListProperties()
                     td.is-vcentered(class={ 'property-main' : prop.isTitle() })
                       != prop.renderList(record)
                   td
@@ -57,7 +57,7 @@ block content
                                 i(class=action.icon)
                               .btn-text=action.label
 
-          +paginate(currentResource, total, page, perPage, filters, h)
+          +paginate(resource, total, page, perPage, filters, h)
     else
-      +emptyTable(h.newRecordUrl(currentResource))
+      +emptyTable(h.newRecordUrl(resource))
     +filtersBar

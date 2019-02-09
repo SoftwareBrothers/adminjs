@@ -6,7 +6,7 @@ const moment = require('moment')
  * Collection of helper methods available in the views
  *
  * @example
- * a.button.is-primary(href=h.newRecordUrl(currentResource))
+ * a.button.is-primary(href=h.newRecordUrl(resource))
  *   span.icon
  */
 class ViewHelpers {

@@ -6,16 +6,16 @@ block content
   secton.show-details
     +confirm-dialog('Remove record', 'Are you sure you want remove this item', 'Remove')
     - actionName = customAction && customAction.name
-    +breadcrumb(currentResource, record, actionName)
+    +breadcrumb(resource, record, actionName)
     .column
       .level
         .title
-          a.button.is-text.is-back(href=h.listUrl(currentResource))
+          a.button.is-text.is-back(href=h.listUrl(resource))
             span.icon.is-small
               i.icomoon-pagination-left
           | #{actionName || 'Details'}
         .field.is-grouped
-          - actions = currentResource.decorate().getRecordActions(record)
+          - actions = resource.decorate().getRecordActions(record)
           for key in ['edit', 'remove']
             - action = actions[key]
             - remove = key === 'remove'
@@ -30,5 +30,5 @@ block content
         if customAction
           != customAction.content
         else
-          for prop in currentResource.decorate().getShowProperties()
-            .property!= prop.renderShow(record)
+          for prop in resource.decorate().getShowProperties()
+            != prop.renderShow(record)

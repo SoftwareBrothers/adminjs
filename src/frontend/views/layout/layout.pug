@@ -22,10 +22,10 @@ html
       if h.customAssets && h.customAssets.scripts
         for script in h.customAssets.scripts
           script(defer src=script)
-      if currentResource
-        for script in currentResource.decorate().customHeadScripts().scripts
+      if resource
+        for script in resource.decorate().customHeadScripts().scripts
           script(defer src=script)
-        for style in currentResource.decorate().customHeadScripts().styles
+        for style in resource.decorate().customHeadScripts().styles
           link(rel="stylesheet" href=style)
   body
     .columns.container-main
