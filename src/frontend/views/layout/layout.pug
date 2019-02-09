@@ -7,11 +7,25 @@ html
       link(rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.5.1/css/bulma.min.css")
       link(rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-mfizz/2.4.1/font-mfizz.min.css")
       link(rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,700")
-      link(rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pickadate.js/3.5.6/themes/default.css")
-      link(rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pickadate.js/3.5.6/themes/default.date.css")
       link(rel="stylesheet" href=h.assetPath("style.min.css"))
       if h.customAssets && h.customAssets.styles
         for style in h.customAssets.styles
+          link(rel="stylesheet" href=style)
+      script(src="https://code.jquery.com/jquery-3.3.1.min.js"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous")
+      script(src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+        integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous")
+      script(defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js")
+      script(defer src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js")
+      if h.customAssets && h.customAssets.scripts
+        for script in h.customAssets.scripts
+          script(defer src=script)
+      if resource
+        for script in resource.decorate().customHeadScripts().scripts
+          script(defer src=script)
+        for style in resource.decorate().customHeadScripts().styles
           link(rel="stylesheet" href=style)
   body
     .columns.container-main
@@ -21,18 +35,4 @@ html
         include components/topbar
         block header
         block content
-
-    script(src="https://code.jquery.com/jquery-3.3.1.min.js"
-      integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-      crossorigin="anonymous")
-    script(src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
-      integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
-      crossorigin="anonymous")
-    script(defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js")
-    script(defer src="https://cdnjs.cloudflare.com/ajax/libs/pickadate.js/3.5.6/picker.js")
-    script(defer src="https://cdnjs.cloudflare.com/ajax/libs/pickadate.js/3.5.6/picker.date.js")
-    script(defer src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js")
     script(src=h.assetPath("app.min.js"))
-    if h.customAssets && h.customAssets.scripts
-      for script in h.customAssets.scripts
-        script(defer src=script)

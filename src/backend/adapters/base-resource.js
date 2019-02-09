@@ -3,7 +3,7 @@
 const NotImplementedError = require('../utils/not-implemented-error')
 const BaseRecord = require('./base-record')
 const BaseProperty = require('./base-property')
-const BaseDecorator = require('../utils/base-decorator')
+const ResourceDecorator = require('../decorators/resource-decorator')
 const AdminBro = require('../../admin-bro')
 
 /**
@@ -210,10 +210,10 @@ class BaseResource {
    *
    * @param  {BaseDecorator}  Decorator
    * @param  {AdminBro}       admin         current instance of AdminBro
+   * @param  {AdminBro~ResourceOptions} [options]
    */
-  assignDecorator(Decorator, admin) {
-    this._Decorator = Decorator
-    this._decorated = new Decorator({ resource: this, admin })
+  assignDecorator(admin, options = {}) {
+    this._decorated = new ResourceDecorator({ resource: this, admin, options })
   }
 
   /**

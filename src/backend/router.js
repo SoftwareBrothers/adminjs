@@ -23,6 +23,8 @@ const ASSETS_ROOT = `${__dirname}/../frontend/assets/`
  * ```
  *
  * It is used by supported frameworks to render AdminBro pages.
+ *
+ * @private
  */
 const Router = {
   assets: [{

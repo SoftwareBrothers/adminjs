@@ -1,5 +1,4 @@
 const BaseResource = require('../adapters/base-resource')
-const BaseDecorator = require('../utils/base-decorator')
 
 class NoDatabaseAdapterError extends Error {
   constructor(database) {
@@ -19,15 +18,6 @@ class NoResourceAdapterError extends Error {
   }
 }
 
-class IncorrectDecorator extends Error {
-  constructor(decorator) {
-    const message = 'Decorator used to decorate resource has to be a subclass from AdminBro.BaseDecorator'
-    super(message)
-    this.decorator = decorator
-    this.name = 'IncorrectDecorator'
-  }
-}
-
 class ResourcesFactory {
   constructor(admin, adapters = []) {
     this.adapters = adapters
@@ -42,7 +32,7 @@ class ResourcesFactory {
       !optionsResources.find(optionResource => optionResource.resource.id() === dr.id())
     ))
 
-    return this._decorateResources(databaseResources.concat(optionsResources))
+    return this._decorateResources([...databaseResources, ...optionsResources])
   }
 
   /**
@@ -68,14 +58,14 @@ class ResourcesFactory {
    * @param  {any[]}           resources                array of all resources given by the user
    *                                                    in {@link AdminBroOptions}
    * @param  {any}             resources[].resource     optionally user can give resource along
-   *                                                    with decorator
-   * @param  {BaseDecorator}   resources[].decorator    decorator given along with the resource
-   * @return {Object[]}                                 list of Objects with resource and decorator
+   *                                                    with options
+   * @param  {Object}          resources[].options      options given along with the resource
+   * @return {Object[]}                                 list of Objects with resource and options
    *                                                    keys
    *
    * @example
-   * AdminBro._convertResources([rawAdminModel, {resource: rawUserMode, decorator: UserDecorator}])
-   * // => returns: [AdminModel, {resource: UserModel, decorator: UserDecorator}]
+   * AdminBro._convertResources([rawAdminModel, {resource: rawUserMode, options: {}}])
+   * // => returns: [AdminModel, {resource: UserModel, options: {}}]
    * // where AdminModel and UserModel were converted by appropriate database adapters.
    */
   _convertResources(resources) {
@@ -90,32 +80,26 @@ class ResourcesFactory {
       }
       return {
         resource: resourceAdapter ? new resourceAdapter.Resource(resourceObject) : resourceObject,
-        decorator: rawResource.decorator,
+        options: rawResource.options,
       }
     })
   }
 
   /**
-   * Changes assigns decorator to each resource
-   * @param  {Object[]}      resources               array of all mapped resources given by the
-   *                                                 user in {@link AdminBroOptions} along with
-   *                                                 decorators
-   * @param  {BaseResource}  resources[].resource    optionally user can give resource along
-   *                                                 with decorator
-   * @param  {BaseDecorator} [resources[].decorator] decorator given along with the resource
-   * @return {BaseResource[]}                        list of resources with decorator assigned
+   * Assigns decorator to each resource and initializes it with `options` and current `admin`
+   * instance
+   * @param  {Array<Object | BaseResource>} resources    array of all mapped resources given by the
+   *                                                     user in {@link AdminBroOptions} along with
+   *                                                     options
+   * @param  {BaseResource}  resources[].resource        optionally user can give resource along
+   *                                                     with options
+   * @param  {Object} [resources[].options]              options for given resource
+   * @return {BaseResource[]}                            list of resources with decorator assigned
    */
   _decorateResources(resources) {
     return resources.map((resourceObject) => {
-      let { resource } = resourceObject
-      const { decorator } = resourceObject
-      if (decorator
-          && !(decorator.prototype instanceof BaseDecorator)
-          && decorator !== BaseDecorator) {
-        throw new IncorrectDecorator(decorator)
-      }
-      resource = resource || resourceObject
-      resource.assignDecorator(decorator || BaseDecorator, this.admin)
+      const resource = resourceObject.resource || resourceObject
+      resource.assignDecorator(this.admin, resourceObject.options)
       return resource
     })
   }

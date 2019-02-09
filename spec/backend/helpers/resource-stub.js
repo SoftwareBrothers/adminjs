@@ -2,7 +2,9 @@ const BaseProperty = require('@backend/adapters/base-property')
 
 const expectedResult = {
   id: 'someID',
-  properties: [...Array(10)].map(() => new BaseProperty({ path: '1', type: 'string' })),
+  properties: [...Array(10)].map((a, i) => new BaseProperty({
+    path: `property.${i}`, type: 'string',
+  })),
   resourceName: 'resourceName',
   databaseName: 'databaseName',
   databaseType: 'mongodb',

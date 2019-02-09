@@ -1,0 +1,7 @@
+.filter
+  label.label 
+    = h._.startCase(property.name())
+    |  contains:
+  .control
+    .search-icon.fas.fa-search
+    input.input.filter(name=filterKey value=filters[filterKey])

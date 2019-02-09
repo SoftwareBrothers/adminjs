@@ -1,0 +1,5 @@
+label.label(for=property.name())= h._.startCase(property.name())
+.control
+  input.input(type='text' id=property.name() name=property.name() value=value)
+if error
+  .help.is-danger= error.message

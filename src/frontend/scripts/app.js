@@ -13,14 +13,6 @@ $(document).ready(() => {
     }
   }
 
-  const $pickadate = $('.pickadate')
-  if ($pickadate) {
-    $pickadate.pickadate({
-      format: 'yyyy-mm-dd',
-      firstDay: 1,
-    })
-  }
-
   const $dropdownToggle = $('.dropdown-toggle')
   const toggleMenu = ($element, hide) => {
     if (hide) {

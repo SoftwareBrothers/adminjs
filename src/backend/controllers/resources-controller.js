@@ -13,30 +13,30 @@ class ResourcesController extends BaseController {
   async show({ params, query, payload }, response) {
     this.findResources(params)
     const { recordId } = params
-    this.data.record = await this.data.currentResource.findOne(recordId)
+    this.data.record = await this.data.resource.findOne(recordId)
     return this.render('pages/show', this.data)
   }
 
   async edit({ params, query, payload }, response) {
     this.findResources(params)
     const { recordId } = params
-    this.data.record = await this.data.currentResource.findOne(recordId)
+    this.data.record = await this.data.resource.findOne(recordId)
     return this.render('pages/edit', this.data)
   }
 
   async new({ params, query, payload }, response) {
     this.findResources(params)
-    this.data.record = await this.data.currentResource.build()
+    this.data.record = await this.data.resource.build()
     return this.render('pages/new', this.data)
   }
 
   async create({ params, query, payload }, response) {
     this.findResources(params)
-    this.data.record = await this.data.currentResource.build(payload)
+    this.data.record = await this.data.resource.build(payload)
     this.data.record = await this.data.record.save()
     if (this.data.record.isValid()) {
       return response.redirect(this.data.h.showRecordUrl(
-        this.data.currentResource,
+        this.data.resource,
         this.data.record,
       ))
     }
@@ -46,11 +46,11 @@ class ResourcesController extends BaseController {
   async update({ params, query, payload }, response) {
     this.findResources(params)
     const { recordId } = params
-    this.data.record = await this.data.currentResource.findOne(recordId)
+    this.data.record = await this.data.resource.findOne(recordId)
     await this.data.record.update(payload)
     if (this.data.record.isValid()) {
       return response.redirect(this.data.h.showRecordUrl(
-        this.data.currentResource,
+        this.data.resource,
         this.data.record,
       ))
     }
@@ -61,11 +61,11 @@ class ResourcesController extends BaseController {
     const { data } = this
     this.findResources(request.params)
     const { recordId, actionId } = request.params
-    data.record = await data.currentResource.findOne(recordId)
+    data.record = await data.resource.findOne(recordId)
     const { record } = data
     data.customAction = {
       name: actionId,
-      content: await data.currentResource
+      content: await data.resource
         .decorate()
         .getRecordActions(record)[actionId]
         .action(request, response, data),
@@ -76,20 +76,20 @@ class ResourcesController extends BaseController {
   async delete({ params, query, payload }, response) {
     this.findResources(params)
     const { recordId } = params
-    await this.data.currentResource.delete(recordId)
+    await this.data.resource.delete(recordId)
     return response.redirect(this.data.h.listUrl(
-      this.data.currentResource,
+      this.data.resource,
     ))
   }
 
   findResources({ resourceId }) {
-    this.data.currentResource = this._admin.findResource(resourceId)
-    this.data.properties = this.data.currentResource.properties()
+    this.data.resource = this._admin.findResource(resourceId)
+    this.data.properties = this.data.resource.properties()
   }
 
   async findRecords({ query }) {
     this.data.perPage = 10
-    const firstProperty = this.data.currentResource.decorate().getListProperties()[0]
+    const firstProperty = this.data.resource.decorate().getListProperties()[0]
     const { page, sortBy, direction, filters } = unflatten(query)
     this.data.page = Number(page) || 1
     this.data.sort = {
@@ -97,12 +97,12 @@ class ResourcesController extends BaseController {
       direction: direction || 'asc',
     }
     this.data.filters = filters ? flatten({ filters }) : {}
-    const records = await this.data.currentResource.find(filters, {
+    const records = await this.data.resource.find(filters, {
       limit: this.data.perPage,
       offset: (this.data.page - 1) * this.data.perPage,
       sort: this.data.sort,
     })
-    this.data.total = await this.data.currentResource.count(filters)
+    this.data.total = await this.data.resource.count(filters)
     return records
   }
 }

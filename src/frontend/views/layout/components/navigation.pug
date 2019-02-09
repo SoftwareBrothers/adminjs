@@ -10,5 +10,5 @@
         ul.menu-list.dropdown-list
           for resource in resourceList
             li
-              a(href=h.listUrl(resource) class={ 'is-active' : currentResource && currentResource.id() === resource.id() })
+              a(href=h.listUrl(resource) class={ 'is-active' : resource && resource.id() === resource.id() })
                 = resource.decorate().getResourceName()

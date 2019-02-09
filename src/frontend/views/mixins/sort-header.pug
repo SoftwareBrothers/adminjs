@@ -1,0 +1,9 @@
+mixin sort-header(resource, prop, sort, filters, page, h)
+  - isSortedByCurrentPropName = sort.sortBy === prop.name()
+  - direction = sort.direction === 'asc' && isSortedByCurrentPropName ? 'desc' : 'asc'
+  - sortable = prop.isSortable()
+  th(class= { 'main' : prop.isTitle() })
+    a(class={ 'is-sortable' : sortable } href=sortable && h.listUrl(resource, { filters, page, sort: { sortBy: prop.name(), direction }})) 
+      .text-small(class={ 'active' : isSortedByCurrentPropName })=h._.startCase(prop.name())
+      .text-small.sorting-icons(class={ 'hidden' : !isSortedByCurrentPropName })
+        i(class=`icomoon-dropdown-${sort.direction === 'asc' ? 'open' : 'close'}`)
