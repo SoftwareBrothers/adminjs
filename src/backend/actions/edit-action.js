@@ -22,5 +22,6 @@ module.exports = {
       }
       return renderer.render('actions/edit', data)
     }
+    return ''
   },
 }

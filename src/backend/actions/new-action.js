@@ -25,5 +25,6 @@ module.exports = {
       }
       return renderer.render('actions/new', { ...data, record })
     }
+    return ''
   },
 }

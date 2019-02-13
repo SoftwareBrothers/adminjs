@@ -1,5 +1,5 @@
-const ViewHelpers = require('../utils/view-helpers')
 const _ = require('lodash')
+const ViewHelpers = require('../utils/view-helpers')
 
 /**
  * @typedef  {Object}  PropertyOptions
