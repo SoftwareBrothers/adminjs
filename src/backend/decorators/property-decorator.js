@@ -1,3 +1,4 @@
+const _ = require('lodash')
 const ViewHelpers = require('../utils/view-helpers')
 
 /**
@@ -9,6 +10,7 @@ const ViewHelpers = require('../utils/view-helpers')
  * @property {Boolean} [isVisible.filter]
  * @property {PropertyType} render
  * @property {String} type
+ * @property {String} label
  * @property {Boolean} isId
  * @property {Boolean} isTitle
  * @property {Number} position          position of the field in a list,
@@ -75,7 +77,17 @@ class PropertyDecorator {
    * @returns {String}
    */
   name() {
-    return this._property.name()
+    if (typeof this.options.name === 'undefined') {
+      return this._property.name()
+    }
+    return this.options.name
+  }
+
+  label() {
+    if (typeof this.options.label === 'undefined') {
+      return _.startCase(this._property.name())
+    }
+    return this.options.label
   }
 
   /**

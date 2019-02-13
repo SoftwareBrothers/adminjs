@@ -49,7 +49,7 @@ describe('PageBuilder', function () {
       })
     })
     it('returns object with page settings', async function () {
-      expect(await this.pageExample.render()).to.have.keys('title', 'content', 'charts', 'subtitle')
+      expect(await this.pageExample.render()).to.have.keys('title', 'content', 'subtitle')
     })
   })
 })

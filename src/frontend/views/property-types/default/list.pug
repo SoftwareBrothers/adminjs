@@ -1,4 +1,5 @@
-if property.isTitle()
-  a(href=h.showRecordUrl(record.resource, record))= value
+- action = record.resource.decorate().recordActions(record).find(a => a.name === 'show')
+if property.isTitle() && action
+  a(href=h.recordActionUrl(record.resource, action, record))= value
 else
   = value

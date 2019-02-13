@@ -35,6 +35,13 @@
   thead tr:hover
     background: none
 
+  td.actions, th.actions
+    .buttons
+      white-space: nowrap
+    .control
+      display: inline-block
+      margin-left: 5px      
+
 @include media-breakpoint-down($media-min-tablet-width - 1px)
   .level .is-grouped
     margin-top: rem(14px)

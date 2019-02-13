@@ -5,6 +5,8 @@ const NotImplementedError = require('../utils/not-implemented-error')
 /**
  * Base class for all Pages in the AdminBro.
  *
+ * ### Extending the __PageBuilder__ class
+ *
  * To create your own Page you have to extend this class and override
  * {@link PageBuilder#build build()} abstract method.
  *
@@ -33,6 +35,22 @@ const NotImplementedError = require('../utils/not-implemented-error')
  * module.exports = DashboardPage
  * ```
  *
+ * ### Initialize __PageBuilder__ and render html via __toHTML()__
+ *
+ * The other option of using PageBuilder is to simply initialize it and
+ * then use {@link PageBuilder#toHTML}
+ *
+ * ```
+ * const page = new AdminBro.PageBuilder({ admin })
+ * page.addBlock({
+ *   title: 'Published Articles',
+ *   value: this.articlesCount.published,
+ *   icon: 'fas fa-newspaper fa-2x',
+ *   columns: 3,
+ * })
+ * page.toHTML()
+ * ```
+ *
  * ### Available Widgets
  *
  * There you can use all available widgets:
@@ -58,7 +76,6 @@ const NotImplementedError = require('../utils/not-implemented-error')
  *   ...
  * }
  * ```
- * @hideconstructor
  */
 class PageBuilder {
   /**
@@ -85,28 +102,30 @@ class PageBuilder {
      * @description page subtitle
      */
     this.subtitle = null
-
-    /**
-     * @type {Object}
-     * @description mapped object contains chart's settings
-     * @private
-     */
-    this.charts = {}
   }
 
   /**
    * Returns object with page settings
    * @return {Promise<Object>}
-   * @private
    */
   async render() {
     await this.build()
     return {
       title: this.title,
       subtitle: this.subtitle,
-      content: this._pageContent.join(''),
-      charts: this.charts,
+      content: this.toHTML(),
     }
+  }
+
+  /**
+   * Renders all widgets to HTML
+   */
+  toHTML() {
+    return [
+      '<div class="columns is-multiline page-builder-content">',
+      this._pageContent.join(''),
+      '</div>',
+    ].join('\n')
   }
 
   /**
@@ -170,7 +189,6 @@ class PageBuilder {
    * }
    */
   addChart({ title, subtitle, columns = 12, offset = 0, config = {} }) {
-    this.charts[title] = config
     this.addPartialContent('partials/chart', { columns, offset, title, subtitle, config })
   }
 
@@ -261,6 +279,18 @@ class PageBuilder {
    */
   addTextBox({ title = '', content = '', columns = 12, offset = 0 }) {
     this.addPartialContent('partials/textBox', { title, content, columns, offset })
+  }
+
+  /**
+   * Adds raw content to the page (withouth any borders and backgrounds)
+   *
+   * @param {Object} options
+   * @param {String} options.content
+   * @param {Number} options.columns=12     number of columns on which widget should visible
+   * @param {Number} options.offset=0       column offset
+   */
+  addColumn({ content = '', columns = 12, offset = 0 }) {
+    this.addPartialContent('partials/column', { content, columns, offset })
   }
 
   /**

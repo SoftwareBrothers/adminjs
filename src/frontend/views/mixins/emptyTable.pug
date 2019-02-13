@@ -1,9 +1,11 @@
-mixin emptyTable(addNewHref)
+mixin emptyTable(resource)
+  - action = resource.decorate().resourceActions().find(a => a.name === 'new')
   .column.empty-table
     .border-box.has-text-centered
       .content-info There is no content available
-      .create-text Create your first item to be able to retrieve data from your API
-      a.button.is-primary(href=addNewHref)
-        span.icon
-          i.icomoon-add
-        .btn-text Add new
+      if action
+        .create-text Create your first item to be able to retrieve data from your API
+        a.button.is-primary(href=h.resourceActionUrl(resource, action))
+          span.icon
+            i.icomoon-add
+          .btn-text Add new

@@ -1,5 +1,5 @@
 - filterId = property.name() + '-filter'
-.picker-name= h._.startCase(property.name())
+.picker-name= property.label()
   .date-range(id=filterId)
     .filter
       label.label='from'

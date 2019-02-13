@@ -10,76 +10,45 @@ class ResourcesController extends BaseController {
     return this.render('pages/list', this.data)
   }
 
-  async show({ params, query, payload }, response) {
-    this.findResources(params)
-    const { recordId } = params
-    this.data.record = await this.data.resource.findOne(recordId)
-    return this.render('pages/show', this.data)
-  }
-
-  async edit({ params, query, payload }, response) {
-    this.findResources(params)
-    const { recordId } = params
-    this.data.record = await this.data.resource.findOne(recordId)
-    return this.render('pages/edit', this.data)
-  }
-
-  async new({ params, query, payload }, response) {
-    this.findResources(params)
-    this.data.record = await this.data.resource.build()
-    return this.render('pages/new', this.data)
-  }
-
-  async create({ params, query, payload }, response) {
-    this.findResources(params)
-    this.data.record = await this.data.resource.build(payload)
-    this.data.record = await this.data.record.save()
-    if (this.data.record.isValid()) {
-      return response.redirect(this.data.h.showRecordUrl(
-        this.data.resource,
-        this.data.record,
-      ))
-    }
-    return this.render('pages/new', this.data)
-  }
-
-  async update({ params, query, payload }, response) {
-    this.findResources(params)
-    const { recordId } = params
-    this.data.record = await this.data.resource.findOne(recordId)
-    await this.data.record.update(payload)
-    if (this.data.record.isValid()) {
-      return response.redirect(this.data.h.showRecordUrl(
-        this.data.resource,
-        this.data.record,
-      ))
-    }
-    return this.render('pages/edit', this.data)
-  }
-
-  async custom(request, response) {
-    const { data } = this
+  async resourceAction(request, response) {
     this.findResources(request.params)
-    const { recordId, actionId } = request.params
-    data.record = await data.resource.findOne(recordId)
-    const { record } = data
-    data.customAction = {
-      name: actionId,
-      content: await data.resource
-        .decorate()
-        .getRecordActions(record)[actionId]
-        .action(request, response, data),
+    this.data.action = this.data.resource.decorate().resourceActions()
+      .find(a => a.name === request.params.action)
+    const actionOutput = await this.data.action.handler(request, response, {
+      _admin: this.data._admin,
+      h: this.data.h,
+      resource: this.data.resource,
+      action: this.data.action,
+    })
+
+    // When action returns string - just render it
+    if (typeof actionOutput === 'string') {
+      return this.render('pages/resource-action', { ...this.data, actionOutput })
     }
-    return this.render('pages/show', data)
+    // Otherwise we assume that there is an redirect and we return it
+    return actionOutput
   }
 
-  async delete({ params, query, payload }, response) {
-    this.findResources(params)
-    const { recordId } = params
-    await this.data.resource.delete(recordId)
-    return response.redirect(this.data.h.listUrl(
-      this.data.resource,
-    ))
+  async recordAction(request, response) {
+    this.findResources(request.params)
+    this.data.record = await this.data.resource.findOne(request.params.recordId)
+    this.data.action = this.data.resource.decorate().recordActions(this.data.record)
+      .find(a => a.name === request.params.action)
+
+    const actionOutput = await this.data.action.handler(request, response, {
+      _admin: this.data._admin,
+      h: this.data.h,
+      resource: this.data.resource,
+      action: this.data.action,
+      record: this.data.record,
+    })
+
+    // When action returns string - just render it
+    if (typeof actionOutput === 'string') {
+      return this.render('pages/record-action', { ...this.data, actionOutput })
+    }
+    // Otherwise we assume that there is an redirect and we return it
+    return actionOutput
   }
 
   findResources({ resourceId }) {

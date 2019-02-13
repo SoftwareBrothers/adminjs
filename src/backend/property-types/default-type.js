@@ -24,8 +24,8 @@ module.exports = {
   },
 
   edit: (property, record, h) => {
-    const value = record.param(property.name())
-    const error = record.error(property.name())
+    const value = record.param && record.param(property.name())
+    const error = record.error && record.error(property.name())
     return renderer.render('property-types/default/edit', {
       value, property, h, error,
     })

@@ -1,0 +1,11 @@
+.column
+  .border-box
+    form(method='POST' action=h.recordActionUrl(resource, action, record))
+      for prop in resource.decorate().getEditProperties()
+        .field!= prop.renderEdit(record)
+      .field.is-grouped
+        .control
+          button.button.is-primary(type='submit')
+            span(class="icon is-small")
+              i.icomoon-save
+            .btn-text Save

@@ -1,4 +1,4 @@
-/* eslint-disable class-methods-use-this */
+const _ = require('lodash')
 const BaseProperty = require('../adapters/base-property')
 const ViewHelpers = require('../utils/view-helpers')
 const PropertyDecorator = require('./property-decorator')
@@ -25,7 +25,8 @@ const DEFAULT_MAX_ITEMS_IN_LIST = 8
  * @property {Object | String} parent   parent category in the sidebar
  * @property {String} parent.name       name of the parent category
  * @property {String} parent.icon       icon class of a parent category (i.e. 'icon-bomb')
- * @property {properties<String, PropertyOptions>} properties list of properties with their options
+ * @property {Object<String, PropertyOptions>} properties list of properties with their options
+ * @property {Object<String, Action>} actions   list of actions
  */
 
 /**
@@ -58,6 +59,39 @@ class ResourceDecorator {
      * @type {Array<PropertyDecorator>}
      */
     this.properties = this.decorateProperties()
+
+    /**
+     * Actions for a resource
+     * @type {Object<String, Action>}
+     */
+    this.actions = this.decorateActions()
+  }
+
+  /**
+   * Used to create an {@link ResourceDecorator#action} property based on both
+   * {@link AdminBro.ACTIONS default actions} and actions specified by the user
+   * via {@link AdminBroOptions}
+   *
+   * @returns {Object<String, Action>}
+   */
+  decorateActions() {
+    const { ACTIONS } = this._admin.constructor
+
+    // in the end we merge actions defined by the user with the default actions.
+    // since _.merge is a deep merge it also overrides defaults with the parameters
+    // specified by the user.
+    const actions = _.merge({}, ACTIONS, this.options.actions || {})
+
+    // setting default values for actions
+    Object.keys(actions).forEach((key) => {
+      actions[key].name = actions[key].name || key
+      actions[key].label = actions[key].label || key
+      if (typeof actions[key].isVisible === 'undefined') {
+        actions[key].isVisible = true
+      }
+    })
+
+    return actions
   }
 
   /**
@@ -189,75 +223,48 @@ class ResourceDecorator {
   }
 
   /**
-   * Returns object(map) with default actions as keys and their values
+   * List of all actions which should be invoked for entire resource and not
+   * for a particular record
+   *
+   * @return  {Array<Action>}     Actions assigned to resources
    */
-  getDefaultActions(record) {
-    const resource = this._resource
-    return {
-      show: {
-        path: this.helpers.showRecordUrl(resource, record),
-        icon: 'icomoon-info',
-        label: 'Info',
-      },
-      edit: {
-        path: this.helpers.editRecordUrl(resource, record),
-        icon: 'icomoon-edit',
-        label: 'Edit',
-      },
-      remove: {
-        path: this.helpers.deleteRecordUrl(resource, record),
-        icon: 'icomoon-remove-2',
-        label: 'Remove',
-      },
-    }
-  }
-
-  /**
-   * Returns object(map) with record actions declared in his decorator
-   */
-  getAllAvailableActions(defaultActions, recordActions, record) {
-    return recordActions.reduce((obj, key) => {
-      if (typeof key === 'object') {
-        return {
-          ...obj,
-          ...{
-            [key.id]: {
-              ...key,
-              path: this.helpers.customRecordActionUrl(this._resource, record, key.id),
-            },
-          },
+  resourceActions() {
+    return Object.keys(this.actions)
+      .map(key => this.actions[key])
+      .filter((action) => {
+        let isVisible
+        if (typeof action.isVisible === 'function') {
+          isVisible = action.isVisible(this._resource)
+        } else {
+          ({ isVisible } = action)
         }
-      }
-      return {
-        ...obj,
-        ...(Object.keys(defaultActions).includes(key) && { [key]: defaultActions[key] }),
-      }
-    }, {})
+        return action.actionType.includes('resource') && isVisible
+      })
   }
 
   /**
-  * Returns object(map) with record actions declared in his decorator.
-  * If record doesn't have declared actions, it automatically returns default ones
-  */
-  getRecordActions(record) {
-    const defaultActions = this.getDefaultActions(record)
-    const recordActions = this.invokeOrGet('recordActions')
-    if (recordActions) {
-      return this.getAllAvailableActions(defaultActions, recordActions, record)
-    }
-    return defaultActions
-  }
-
-  /**
-   * For given parameter it tries to find class member, and when it is a function - it invokes
-   * it, otherwise return parameter value
-   * @param  {String} param
-   * @return {any}
+   * List of all actions which should be invoked for given record and not
+   * for an entire resource
+   *
+   * @param {BaseResource} resource
+   * @param {BaseRecord} record
+   * @return  {Array<Action>}     Actions assigned to each record
    */
-  invokeOrGet(param) {
-    return (this[param] instanceof Function) ? this[param]() : this[param]
+  recordActions(record) {
+    return Object.keys(this.actions)
+      .map(key => this.actions[key])
+      .filter((action) => {
+        let isVisible
+        if (typeof action.isVisible === 'function') {
+          isVisible = action.isVisible(this._resource, record)
+        } else {
+          ({ isVisible } = action)
+        }
+        return action.actionType.includes('record') && isVisible
+      })
   }
 }
 
 ResourceDecorator.DEFAULT_MAX_ITEMS_IN_LIST = DEFAULT_MAX_ITEMS_IN_LIST
+
 module.exports = ResourceDecorator

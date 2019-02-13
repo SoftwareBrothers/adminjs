@@ -1,18 +1,14 @@
 const _ = require('lodash')
 
 const expectedResult = {
-  showRecordUrl: '#showUrl',
-  editRecordUrl: '#editUrl',
-  deleteRecordUrl: '#deleteUrl',
-  customRecordActionUrl: 'customUrl',
+  recordActionUrl: '#recordActionUrl',
+  resourceActionUrl: '#resourceActionUrl',
 }
 
 module.exports = sinon => (
   {
-    showRecordUrl: sinon.stub().returns(expectedResult.showRecordUrl),
-    editRecordUrl: sinon.stub().returns(expectedResult.editRecordUrl),
-    deleteRecordUrl: sinon.stub().returns(expectedResult.deleteRecordUrl),
-    customRecordActionUrl: sinon.stub().returns(expectedResult.customRecordActionUrl),
+    recordActionUrl: sinon.stub().returns(expectedResult.recordActionUrl),
+    resourceActionUrl: sinon.stub().returns(expectedResult.resourceActionUrl),
     _,
   }
 )

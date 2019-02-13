@@ -1,63 +1,52 @@
 extends ../layout/layout
 include ../mixins/breadcrumb
 include ../mixins/emptyTable
-include ../mixins/confirmDialog
 include ../mixins/filters-bar
+include ../mixins/action-control
 include ../mixins/sort-header
 include ../mixins/paginate
 
 block content
   section.table-list
-    +confirm-dialog('Remove record', 'Are you sure you want remove this item', 'Remove')
     +breadcrumb(resource)
-    .column
-      .level
-        .title=resource.decorate().getResourceName()
-        .toolbar
-          if total
-            .field.is-grouped
-              .control
-                a.button.is-primary(href=h.newRecordUrl(resource))
-                  span.icon
-                    i.icomoon-add
-                  .btn-text Add new
-              .control  
-                .button.is-primary.is-transparent.filters-open
-                  span.icon
-                    i.fas.fa-sliders-h
-                  .btn-text Filter
+    .level
+      .title=resource.decorate().getResourceName()
+      .toolbar
+        if total
+          .field.is-grouped
+            for action in resource.decorate().resourceActions()
+              +action-control(action, h.resourceActionUrl(resource, action))
+            .control  
+              .button.is-primary.is-transparent.filters-open
+                span.icon
+                  i.fas.fa-sliders-h
+                .btn-text Filter
     if total
-      .column
-        .border-box
-          table.table.is-fullwidth
-            thead
+      .border-box
+        table.table.is-fullwidth
+          thead
+            tr
+              for prop in resource.decorate().getListProperties()
+                +sort-header(resource, prop, sort, filters, page, h)
+              th
+          tbody
+            for record in records
               tr
                 for prop in resource.decorate().getListProperties()
-                  +sort-header(resource, prop, sort, filters, page, h)
-                th
-            tbody
-              for record in records
-                - actions = resource.decorate().getRecordActions(record)
-                tr
-                  for prop in resource.decorate().getListProperties()
-                    td.is-vcentered(class={ 'property-main' : prop.isTitle() })
-                      != prop.renderList(record)
-                  td
-                    .dropdown.is-right.is-hoverable
-                      .dropdown-trigger
-                        .dots
-                          span.icon
-                            i.icomoon-options
-                      .dropdown-menu
-                        .dropdown-content
-                          for action in actions
-                            -remove = action === actions['remove']
-                            a.button.is-white(data-confirm-dialog=remove && action.path href=!remove && action.path)
-                              span.icon
-                                i(class=action.icon)
-                              .btn-text=action.label
+                  td.is-vcentered(class={ 'property-main' : prop.isTitle() })
+                    != prop.renderList(record)
+                td
+                  .dropdown.is-right.is-hoverable
+                    .dropdown-trigger
+                      .dots
+                        span.icon
+                          i.icomoon-options
+                    .dropdown-menu
+                      .dropdown-content
+                        for action in resource.decorate().recordActions(record)
+                          +action-control(action, h.recordActionUrl(resource, action, record), 'is-white')
 
-          +paginate(resource, total, page, perPage, filters, h)
+        +paginate(resource, total, page, perPage, filters, h)
     else
-      +emptyTable(h.newRecordUrl(resource))
+      +emptyTable(resource)
     +filtersBar

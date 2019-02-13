@@ -10,6 +10,7 @@ const ValidationError = require('./backend/utils/validation-error')
 const ResourcesFactory = require('./backend/utils/resources-factory')
 const DefaultDashboard = require('./backend/defaults/default-dashboard')
 const PROPERTY_TYPES = require('./backend/property-types')
+const ACTIONS = require('./backend/actions')
 
 const Router = require('./backend/router')
 
@@ -204,6 +205,12 @@ AdminBro.registeredAdapters = []
  * @type {Object<string, PropertyType>}
  */
 AdminBro.PROPERTY_TYPES = PROPERTY_TYPES
+
+/**
+ * List of all Actions defined by default in AdminBro
+ * @type Object<string, Action>}
+ */
+AdminBro.ACTIONS = ACTIONS
 
 AdminBro.VERSION = pkg.version
 

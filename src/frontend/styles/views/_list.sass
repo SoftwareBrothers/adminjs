@@ -44,17 +44,10 @@
       word-break: break-all
     thead tr:hover
       background: none
-
-  .dropdown-menu
-    transition: all 0.5s
-    display: block
-    opacity: 0
-    overflow: hidden
-    height: 0
-
-  .dropdown:hover .dropdown-menu
-    opacity: 1
-    height: auto
+    .dots
+      padding: 3px 10px
+    .dropdown:hover .dots
+        background: #fff
 
   @include media-breakpoint-down($media-min-tablet-width - 1px)
     .level .is-grouped

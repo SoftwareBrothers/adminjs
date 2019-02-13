@@ -1,12 +1,13 @@
 mixin breadcrumb(resource, record, actionName)
+  - showAction = resource.decorate().recordActions(record).find(a => a.name === 'show')
   nav.breadcrumb(aria-label="breadcrumbs")
     ul
       if resource
         li(class={ 'is-active' : !record })
           a(href=h.listUrl(resource))=resource.decorate().getResourceName()
-      if record
+      if record && showAction
         li(class={ 'is-active' : !actionName })
-          a(href=h.showRecordUrl(resource, record))=record.title()
+          a(href=h.recordActionUrl(resource, showAction, record))=record.title()
       if actionName
         li.is-active
           a= actionName

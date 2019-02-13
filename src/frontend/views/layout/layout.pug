@@ -1,3 +1,5 @@
+include ../mixins/confirmDialog
+
 html
   head
     title AdminBro - #{h.branding.companyName}
@@ -32,6 +34,7 @@ html
       aside.sidebar
         include components/sidebar
       .column.content-wrapper
+        +confirm-dialog('Confirm', 'Are you sure?', 'Confirm')
         include components/topbar
         block header
         block content
