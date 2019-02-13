@@ -2,9 +2,9 @@ mixin emptyTable(resource)
   - action = resource.decorate().resourceActions().find(a => a.name === 'new')
   .column.empty-table
     .border-box.has-text-centered
-      .content-info There are no content available
+      .content-info There is no content available
       if action
-        .create-text Create your first content to be able to retrieve data from your API
+        .create-text Create your first item to be able to retrieve data from your API
         a.button.is-primary(href=h.resourceActionUrl(resource, action))
           span.icon
             i.icomoon-add
