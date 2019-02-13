@@ -4,10 +4,6 @@ const moment = require('moment')
 
 /**
  * Collection of helper methods available in the views
- *
- * @example
- * a.button.is-primary(href=h.newRecordUrl(resource))
- *   span.icon
  */
 class ViewHelpers {
   constructor({ admin }) {
@@ -123,54 +119,12 @@ class ViewHelpers {
     return this.urlBuilder(['resources', resource.id()], query)
   }
 
-  /**
-   * Returns URL for the `new` view for given resource
-   * @param {BaseResource} resource
-   * @return {String}
-   */
-  newRecordUrl(resource) {
-    return this.urlBuilder(['resources', resource.id(), 'new'])
+  resourceActionUrl(resource, action) {
+    return this.urlBuilder(['resources', resource.id(), action.name])
   }
 
-  /**
-   * Returns URL for the list view for record in given resource
-   * @param {BaseResource} resource
-   * @param {BaseRecord} record
-   * @return {String}
-   */
-  showRecordUrl(resource, record) {
-    return this.urlBuilder(['resources', resource.id(), record.id()])
-  }
-
-  /**
-   * Returns URL for the edit view for record in given resource
-   * @param {BaseResource} resource
-   * @param {BaseRecord} record
-   * @return {String}
-   */
-  editRecordUrl(resource, record) {
-    return this.urlBuilder(['resources', resource.id(), record.id(), 'edit'])
-  }
-
-  /**
-   * Returns URL for the delete action for record in given resource
-   * @param {BaseResource} resource
-   * @param {BaseRecord} record
-   * @return {String}
-   */
-  deleteRecordUrl(resource, record) {
-    return this.urlBuilder(['resources', resource.id(), record.id(), 'delete'])
-  }
-
-  /**
-   * Returns URL for the custom action user defined in the resource decorator
-   * @param {BaseResource}  resource
-   * @param {BaseRecord}    record
-   * @param {String}        actionId      id of the action
-   * @return {String}
-   */
-  customRecordActionUrl(resource, record, actionId) {
-    return this.urlBuilder(['resources', resource.id(), record.id(), actionId])
+  recordActionUrl(resource, action, record) {
+    return this.urlBuilder(['resources', resource.id(), 'record', record.id(), action.name])
   }
 
   /**

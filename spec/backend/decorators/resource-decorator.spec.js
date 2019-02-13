@@ -105,4 +105,45 @@ describe('ResourceDecorator', function () {
       expect(headScripts.styles).to.deep.equal(styles)
     })
   })
+
+  describe('#resourceActions', function () {
+    context('no action were specified in custom settings', function () {
+      beforeEach(function () {
+        const options = {}
+        this.decorator = new ResourceDecorator({ ...this.args, options })
+      })
+
+      it('returns one default resource action', function () {
+        expect(this.decorator.resourceActions()).to.have.lengthOf(1)
+        const action = this.decorator.resourceActions()[0]
+        expect(action).to.have.property('name', 'new')
+      })
+    })
+  })
+
+  describe('#recordAction', function () {
+    it('returns default actions', function () {
+      const options = {}
+      const actions = new ResourceDecorator({ ...this.args, options }).recordActions()
+      expect(actions).to.have.lengthOf(3)
+    })
+
+    it('shows custom actions specified by the user', function () {
+      const options = { actions: { customAction: { actionType: ['record'] } } }
+      const actions = new ResourceDecorator({ ...this.args, options }).recordActions()
+      expect(actions).to.have.lengthOf(4)
+    })
+
+    it('hides the given action if user set isVisible to false', function () {
+      const options = { actions: { show: { isVisible: false } } }
+      const actions = new ResourceDecorator({ ...this.args, options }).recordActions()
+      expect(actions).to.have.lengthOf(2)
+    })
+
+    it('hides the given action if user set isVisible to function returning false', function () {
+      const options = { actions: { show: { isVisible: () => false } } }
+      const actions = new ResourceDecorator({ ...this.args, options }).recordActions()
+      expect(actions).to.have.lengthOf(2)
+    })
+  })
 })

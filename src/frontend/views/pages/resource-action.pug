@@ -1,0 +1,13 @@
+extends ../layout/layout.pug
+include ../mixins/breadcrumb
+
+block content
+  +breadcrumb(resource)
+  section.view-edit
+    .level
+      h3.title
+        a.button.is-text.is-back(href=h.listUrl(resource))
+          span.icon.is-small
+            i.icomoon-pagination-left
+        = action.label
+    !=actionOutput

@@ -2,12 +2,17 @@
 /* eslint-disable no-undef */
 $(document).ready(() => {
   const $confirmDialog = $('.confirm-dialog')
-  $('[data-confirm-dialog]').click(event => showDialog(event))
-  $('.confirm-cancel').click(() => $confirmDialog.removeClass('active'))
+  $confirmDialog.find('.confirm-cancel').click(() => $confirmDialog.removeClass('active'))
 
-  const showDialog = (event) => {
-    const path = $(event.currentTarget).data('confirm-dialog')
+  const $guardedActions = $('[data-guard]')
+  $guardedActions.click(function guardClicked(event) {
+    event.preventDefault()
+    const $action = $(this)
+    const { guard } = $action.data()
     $confirmDialog.addClass('active')
-    $('.confirm-accept').attr('href', path)
-  }
+    $confirmDialog.find('.confirm-title').text(guard.title)
+    $confirmDialog.find('.content').text(guard.content)
+    $confirmDialog.find('.confirm-accept').attr('href', $action.attr('href')).text(guard.button)
+    return false
+  })
 })

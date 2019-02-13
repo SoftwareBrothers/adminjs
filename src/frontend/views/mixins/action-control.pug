@@ -1,0 +1,7 @@
+mixin action-control(action, href, cs)
+  - cs = cs || 'is-primary'
+  .control
+    a.button(href=href class=cs data-guard=action.guard)
+      span.icon
+        i(class=action.icon)
+      .btn-text=action.label

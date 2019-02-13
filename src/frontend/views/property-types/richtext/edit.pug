@@ -1,4 +1,4 @@
-label.label(for=property.name())= h._.startCase(property.name())
+label.label(for=property.name())= property.label()
 - hiddenId = property.name() + '-hidden'
 .control.is-invisible
   input(type='hidden' name=property.name() value=value id=hiddenId)

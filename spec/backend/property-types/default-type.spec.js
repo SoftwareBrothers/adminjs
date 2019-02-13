@@ -11,7 +11,9 @@ describe('PropertyTypes.defaultType', function () {
     this.path = 'name'
     this.value = '<span>value</span>'
     this.escaped = '&lt;span&gt;value&lt;/span&gt;'
-    this.record = new BaseRecord({ [this.path]: this.value })
+    this.record = new BaseRecord({ [this.path]: this.value }, {
+      decorate: () => ({ recordActions: () => [{ name: 'show' }] }),
+    })
     this.args = {
       property: new BaseProperty({ path: this.path, type: 'unknown' }),
       admin: new AdminBro(),
@@ -27,7 +29,7 @@ describe('PropertyTypes.defaultType', function () {
     it('returns link when field is a title field', function () {
       const decoratedProperty = new PropertyDecorator({ ...this.args, options: { isTitle: true } })
       expect(defaultType.list(decoratedProperty, this.record, this.h)).to.equal(
-        `<a href="${helperStub.expectedResult.showRecordUrl}">${this.escaped}</a>`,
+        `<a href="${helperStub.expectedResult.recordActionUrl}">${this.escaped}</a>`,
       )
     })
   })

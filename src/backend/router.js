@@ -58,44 +58,24 @@ const Router = {
     action: 'index',
   }, {
     method: 'GET',
-    path: '/resources/{resourceId}/new',
+    path: '/resources/{resourceId}/{action}',
     Controller: ResourcesController,
-    action: 'new',
+    action: 'resourceAction',
   }, {
     method: 'GET',
-    path: '/resources/{resourceId}/{recordId}',
+    path: '/resources/{resourceId}/record/{recordId}/{action}',
     Controller: ResourcesController,
-    action: 'show',
+    action: 'recordAction',
   }, {
     method: 'POST',
-    path: '/resources/{resourceId}',
+    path: '/resources/{resourceId}/{action}',
     Controller: ResourcesController,
-    action: 'create',
+    action: 'resourceAction',
   }, {
     method: 'POST',
-    path: '/resources/{resourceId}/{recordId}',
+    path: '/resources/{resourceId}/record/{recordId}/{action}',
     Controller: ResourcesController,
-    action: 'update',
-  }, {
-    method: 'GET',
-    path: '/resources/{resourceId}/{recordId}/edit',
-    Controller: ResourcesController,
-    action: 'edit',
-  }, {
-    method: 'GET',
-    path: '/resources/{resourceId}/{recordId}/delete',
-    Controller: ResourcesController,
-    action: 'delete',
-  }, {
-    method: 'POST',
-    path: '/resources/{resourceId}/{recordId}/{actionId}',
-    Controller: ResourcesController,
-    action: 'custom',
-  }, {
-    method: 'GET',
-    path: '/resources/{resourceId}/{recordId}/{actionId}',
-    Controller: ResourcesController,
-    action: 'custom',
+    action: 'recordAction',
   }],
 }
 

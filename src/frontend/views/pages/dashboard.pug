@@ -11,8 +11,5 @@ block content
                 .overview-title=dashboard.title
               if dashboard.subtitle
                 .overview-subtitle=dashboard.subtitle
-    .columns.is-multiline.dashboard-content
+    .dashboard-content
       != dashboard.content
-    if dashboard.charts
-      script.
-        const chartsModel = !{JSON.stringify(dashboard.charts)}
