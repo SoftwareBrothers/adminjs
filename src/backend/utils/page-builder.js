@@ -7,10 +7,10 @@ const NotImplementedError = require('../utils/not-implemented-error')
  *
  * ### Extending the __PageBuilder__ class
  *
- * To create your own Page you have to extend this class and override
+ * To create your own Page, you have to extend this class and override
  * {@link PageBuilder#build build()} abstract method.
  *
- * Example DashboardPage which change __title__ and __subtitle__ of the header block and adds one
+ * Below is an example DashboardPage, which change __title__ and __subtitle__ of the header block and adds one
  * simple widget by using {@link PageBuilder#addBlock addBlock} method.
  * ```
  * const { PageBuilder } = require('admin-bro')
@@ -19,7 +19,7 @@ const NotImplementedError = require('../utils/not-implemented-error')
  *   constructor(props) {
  *     super(props)
  *     this.title = 'Custom dashboard'
- *     this.subtitle = 'This is just an example what can be done using AdminBro'
+ *     this.subtitle = 'This is just an example of what can be done using AdminBro'
  *   }
  *
  *   async build() {
@@ -35,7 +35,7 @@ const NotImplementedError = require('../utils/not-implemented-error')
  * module.exports = DashboardPage
  * ```
  *
- * ### Initialize __PageBuilder__ and render html via __toHTML()__
+ * ### Initialize __PageBuilder__ and render HTML via __toHTML()__
  *
  * The other option of using PageBuilder is to simply initialize it and
  * then use {@link PageBuilder#toHTML}
@@ -51,9 +51,9 @@ const NotImplementedError = require('../utils/not-implemented-error')
  * page.toHTML()
  * ```
  *
- * ### Available Widgets
+ * ### Available widgets
  *
- * There you can use all available widgets:
+ * Below you can find a list of all available at this moment widgets:
  * - {@link PageBuilder#addBlock addBlock}
  * - {@link PageBuilder#addChart addChart}
  * - {@link PageBuilder#addInfoList addInfoList}
@@ -63,7 +63,7 @@ const NotImplementedError = require('../utils/not-implemented-error')
  *
  * ### Adding to the settings
  *
- * You can pass class you created to AdminBro via {@link AdminBroOptions}:
+ * You can pass any created class to AdminBro via {@link AdminBroOptions}:
  * ```
  * const DashboardPage = require('./dashboard-page')
  *
@@ -86,14 +86,14 @@ class PageBuilder {
 
     /**
      * @type {Array<String>}
-     * @description _pageContent   array of html elements as String
+     * @description _pageContent   array of HTML elements as String
      * @private
      */
     this._pageContent = []
 
     /**
      * @type {String}
-     * @description page title - what will be on the header
+     * @description page title - what will be in the header
      */
     this.title = null
 
@@ -105,7 +105,7 @@ class PageBuilder {
   }
 
   /**
-   * Returns object with page settings
+   * Returns an object with page settings
    * @return {Promise<Object>}
    */
   async render() {
@@ -148,7 +148,7 @@ class PageBuilder {
   /**
    * Adds canvas chart to the page content based on chart.js library
    *
-   * ##### Example Widget:
+   * ##### Example widget:
    *
    * <img src="images/add-chart.png" alt="addChart" width="600"/>
    *
@@ -157,7 +157,7 @@ class PageBuilder {
    * @param {Object} options
    * @param {String} options.title
    * @param {String} options.subtitle
-   * @param {Number} [options.columns=12]   number of columns on which widget should visible
+   * @param {Number} [options.columns=12]   number of columns on which a widget should visible
    * @param {Number} [options.offset=0]     column offset
    * @param {Object} options.config         chart.js config
    *
@@ -195,7 +195,7 @@ class PageBuilder {
   /**
    * Adds info list widget to the page content
    *
-   * ##### Example Widget:
+   * ##### Example widget:
    *
    * <img src="images/add-info-list.png" alt="addInfoList" width="400"/>
    *
@@ -206,7 +206,7 @@ class PageBuilder {
    * @param {String}    options.items[].status
    * @param {String}    options.items[].imgSrc
    * @param {String}    options.items[].date
-   * @param {Number}    options.columns=12     number of columns on which widget should visible
+   * @param {Number}    options.columns=12     number of columns on which a widget should visible
    * @param {Number}    options.offset=0       column offset
    * @param {String}    options.title
    * @param {String}    options.subtitle
@@ -215,14 +215,14 @@ class PageBuilder {
    * async build(){
    *   this.addInfoList({
    *     title: 'Recent comments',
-   *     subtitle: 'Latest comments from user all around the world',
+   *     subtitle: 'Latest comments from users all around the world',
    *     columns: 4,
    *     items: (await CommentModel.find({}).limit(3).sort({createdAt: 'desc'})).map(comment => ({
    *       title: comment.content,
    *       subtitle: comment.createdBy,
    *       date: moment(comment.createdAt).format('YYYY-MM-DD HH:MM'),
    *       status: comment.flagged && 'flagged',
-   *       imgSrc: 'http://www.question2answer.org/qa/?qa=image&qa_blobid=18247718293145324634&qa_size=40',
+   *       imgSrc: 'http://www.question2answer.org/qa/?qa=image&qa_ blobid=18247718293145324634&qa_size=40',
    *     }))
    *   })
    * }
@@ -234,13 +234,13 @@ class PageBuilder {
   /**
    * Adds info table widget to the page content
    *
-   * ##### Example Widget:
+   * ##### Example widget:
    *
    * <img src="images/add-info-table.png" alt="addInfoTable" width="800"/>
    *
    * @param {Object}     options
    * @param {String}     options.title
-   * @param {Number}     options.columns=12 number of columns on which widget should visible
+   * @param {Number}     options.columns=12 number of columns on which a widget should visible
    * @param {Number}     options.offset=0   column offset
    * @param {String[]}   options.headers    table headers
    * @param {String[][]} options.items      table items
@@ -267,14 +267,14 @@ class PageBuilder {
   /**
    * Adds simple text box widget to the page content
    *
-   * ##### Example Widget:
+   * ##### Example widget:
    *
    * <img src="images/add-text-box.png" alt="addTextBox" width="600"/>
    *
    * @param {Object} options
    * @param {String} options.title
    * @param {String} options.content
-   * @param {Number} options.columns=12     number of columns on which widget should visible
+   * @param {Number} options.columns=12     number of columns on which a widget should visible
    * @param {Number} options.offset=0       column offset
    */
   addTextBox({ title = '', content = '', columns = 12, offset = 0 }) {
@@ -286,7 +286,7 @@ class PageBuilder {
    *
    * @param {Object} options
    * @param {String} options.content
-   * @param {Number} options.columns=12     number of columns on which widget should visible
+   * @param {Number} options.columns=12     number of columns on which a widget should visible
    * @param {Number} options.offset=0       column offset
    */
   addColumn({ content = '', columns = 12, offset = 0 }) {
@@ -294,8 +294,8 @@ class PageBuilder {
   }
 
   /**
-   * Adds compiled html elements to the page content
-   * Developer can declare specific pug view @param view which will be returned as HTML
+   * Adds compiled HMTL elements to the page content
+   * Developer can declare specific pug view @param view, which will be returned as HTML
    *
    * @param {String} view      pug template url relative to frontend/views
    *                            without the .pug extension
@@ -308,19 +308,19 @@ class PageBuilder {
   }
 
   /**
-   * Adds The Simplest block widget to the page content
+   * Adds the simplest block widget to the page content
    *
-   * ##### Example Widget:
+   * ##### Example widget:
    *
    * <img src="images/add-block.png" alt="addBlock" width="300"/>
    *
    * @param {Object} options
-   * @param {Number} options.columns=12     number of columns on which widget should visible
+   * @param {Number} options.columns=12     number of columns on which a widget should visible
    * @param {Number} options.offset=0       column offset
    * @param {String} options.title
    * @param {String} options.icon           class for an icon
-   * @param {String} options.value          string plased in the core of the widget
-   * @param {String} color=PageBuilder.COLOR.INFO   color hex for the font.
+   * @param {String} options.value          string placed in the core of the widget
+   * @param {String} color=PageBuilder.COLOR.INFO   HTX color of the font.
    */
   addBlock({ columns = 12, offset = 0, title = '', icon = '', value = '' }, color = PageBuilder.COLOR.INFO) {
     this.addPartialContent('partials/block', { columns, offset, title, icon, value, color })
@@ -329,7 +329,7 @@ class PageBuilder {
 
 /**
  * Definition of commonly used colors for widgets.
- * It contains following keys:
+ * Contains following keys:
  * - WARNING
  * - DANGER
  * - SUCCESS
