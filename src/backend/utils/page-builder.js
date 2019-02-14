@@ -10,8 +10,8 @@ const NotImplementedError = require('../utils/not-implemented-error')
  * To create your own Page, you have to extend this class and override
  * {@link PageBuilder#build build()} abstract method.
  *
- * Below is an example DashboardPage, which change __title__ and __subtitle__ of the header block and adds one
- * simple widget by using {@link PageBuilder#addBlock addBlock} method.
+ * Below is an example DashboardPage, which change __title__ and __subtitle__ of the header
+ * block and adds one simple widget by using {@link PageBuilder#addBlock addBlock} method.
  * ```
  * const { PageBuilder } = require('admin-bro')
  *
