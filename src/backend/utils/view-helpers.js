@@ -70,9 +70,8 @@ class ViewHelpers {
   }
 
   /**
-   * To each related path adds rootPath passed by the user. And it
-   * adds query strig
-   * @param  {String[]} paths   list of parts of the url.
+   * To each related path adds rootPath passed by the user, as well as a query string
+   * @param  {String[]} paths   list of parts of the url
    * @param  {Object}   query object used to build query string
    * @return {String}       path
    */
@@ -110,7 +109,7 @@ class ViewHelpers {
   }
 
   /**
-   * Returns URL for the list view for given resource
+   * Returns URL for the list view for a given resource
    * @param {BaseResource} resource
    * @param {Object} [query]
    * @return {String}
@@ -128,7 +127,7 @@ class ViewHelpers {
   }
 
   /**
-   * Returns absolute path to given asset
+   * Returns absolute path to a given asset
    * @param  {String} asset
    * @return {String}
    */

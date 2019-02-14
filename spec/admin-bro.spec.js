@@ -32,7 +32,7 @@ describe('AdminBro', function () {
     it('throws an error when adapter has elements not being subclassed from base adapter', function () {
       expect(() => {
         AdminBro.registerAdapter({ Resource: {}, Database: {} })
-      }).to.throw('Adapter elements has to be subclassess of AdminBro.BaseResource nad AdminBro.BaseDatabase')
+      }).to.throw('Adapter elements has to be subclassess of AdminBro.BaseResource and AdminBro.BaseDatabase')
     })
   })
 })

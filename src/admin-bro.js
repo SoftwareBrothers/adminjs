@@ -19,26 +19,26 @@ const pkg = require('../package.json')
 /**
  * @typedef {Object} AdminBroOptions
  * @property {String} [rootPath='/admin']             under which path AdminBro will be available
- * @property {String} [logoutPath='/admin/logout']    url to logout action
- * @property {String} [loginPath='/admin/login']      url to login page
+ * @property {String} [logoutPath='/admin/logout']    url to a logout action
+ * @property {String} [loginPath='/admin/login']      url to a login page
  * @property {BaseDatabase[]} [databases=[]]         array of all databases
  * @property {BaseResource[] | Object[]} [resources=[]] array of all resources. Resources can be
- *                                                    give as in a regular way or nested within
+ *                                                    given in a regular way or nested within
  *                                                    an object along with its decorator
- * @property {BaseResource} [resources[].resource]    class which extends {@link BaseResource}
+ * @property {BaseResource} [resources[].resource]    class, which extends {@link BaseResource}
  * @property {ResourceOptions} [resources[].options]  options for given resource
  * @property {PageBuilder} [dashboard]                your custom dashboard page
  * @property {Object} [branding]                      branding settings
- * @property {String} [branding.logo]                 logo shown in AdminBro in top left corner
+ * @property {String} [branding.logo]                 logo shown in AdminBro in the top left corner
  * @property {String} [branding.companyName]          company name
- * @property {Boolean} [branding.softwareBrothers]    if software brothers logos should be shown
+ * @property {Boolean} [branding.softwareBrothers]    if Software Brothers logos should be shown
  *                                                    in the sidebar footer
  * @property {Object} [assets]                        assets object
  * @property {String[]}  [assets.styles]              array with a paths to styles
  * @property {String[]}  [assets.scripts]             array with a paths to scripts
  *
- * @description AdminBro takes list of options of the entire framework. All off them
- * have default values, but you can tailor them to your needs easily
+ * @description AdminBro takes a list of options of the entire framework. All off them
+ * have default values, but you can easily tailor them to your needs
  *
  * @example
  * const AdminBro = require('admin-bro')
@@ -82,11 +82,11 @@ const defaults = {
 }
 
 /**
- * Main class for Admin extension. It takes {@link AdminBroOptions} as an
- * parameter and creates admin instance.
+ * Main class for AdminBro extension. It takes {@link AdminBroOptions} as a
+ * parameter and creates an admin instance.
  *
- * Its main responsibility is to fetch all resources and/or databases given by
- * user. Than its instance is a currier - injected in all other classes.
+ * Its main responsibility is to fetch all the resources and/or databases given by a
+ * user. Its instance is a currier - injected in all other classes.
  */
 class AdminBro {
   /**
@@ -101,7 +101,7 @@ class AdminBro {
 
     /**
      * @type {AdminBroOptions}
-     * @description Options gave by the user
+     * @description Options given by a user
      */
     this.options = _.merge(defaults, options)
 
@@ -112,7 +112,7 @@ class AdminBro {
   }
 
   /**
-   * Registers various database adapters written for admin-bro
+   * Registers various database adapters written for AdminBro
    *
    * @param  {Object}       options
    * @param  {typeof BaseDatabase} options.Database subclass of BaseDatabase
@@ -126,7 +126,7 @@ class AdminBro {
     if (Database.isAdapterFor && Resource.isAdapterFor) {
       AdminBro.registeredAdapters.push({ Database, Resource })
     } else {
-      throw new Error('Adapter elements has to be subclassess of AdminBro.BaseResource nad AdminBro.BaseDatabase')
+      throw new Error('Adapter elements has to be subclassess of AdminBro.BaseResource and AdminBro.BaseDatabase')
     }
   }
 
@@ -137,7 +137,7 @@ class AdminBro {
    * @param  {Object} options
    * @param  {String} options.action          login form action url - it could be
    *                                          '/admin/login'
-   * @param  {String} [options.errorMessage]  optional error message. When given
+   * @param  {String} [options.errorMessage]  optional error message. When set,
    *                                          renderer will print this message in
    *                                          the form
    * @return {Promise<string>}                HTML of the rendered page
@@ -148,7 +148,7 @@ class AdminBro {
 
   /**
    * Returns resource base on its ID
-   * @param  {String} resourceId    id of a resource defined under {@link BaseResource#id}
+   * @param  {String} resourceId    ID of a resource defined under {@link BaseResource#id}
    * @return {BaseResource}         found resource
    */
   findResource(resourceId) {
@@ -201,7 +201,7 @@ AdminBro.ValidationError = ValidationError
 AdminBro.registeredAdapters = []
 
 /**
- * List of all property types supported by the AdminBro
+ * List of all property types supported by AdminBro
  * @type {Object<string, PropertyType>}
  */
 AdminBro.PROPERTY_TYPES = PROPERTY_TYPES
