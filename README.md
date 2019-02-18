@@ -39,7 +39,7 @@ And all these cases can be solved by AdminBro. By adding couple of lines of code
 
 ## License
 
-AdminBro is Copyright © 2018 SoftwareBrothers.co. It is free software, and may be redistributed under the terms specified in the [LICENSE](LICENSE) file.
+AdminBro is Copyright © 2018 SoftwareBrothers.co. It is free software, and may be redistributed under the terms specified in the [LICENSE](LICENSE.md) file.
 
 ## About SoftwareBrothers.co
 
