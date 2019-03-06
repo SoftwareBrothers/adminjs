@@ -17,6 +17,8 @@
 script.
   $(document).ready(() => {
     $('##{filterId} .pickadate').flatpickr({
-      format: 'Y-m-d',
+      format: 'Y-m-d H:i',
+      enableTime: true,
+      time_24hr: true,
     })
   })

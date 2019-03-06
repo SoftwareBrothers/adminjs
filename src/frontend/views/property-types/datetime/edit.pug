@@ -10,6 +10,8 @@ if error
 script.
   $(document).ready(() => {
     $('##{property.name()}').flatpickr({
-      format: 'Y-m-d',
+      format: 'Y-m-d H:i',
+      enableTime: true,
+      time_24hr: true,
     })
   })
