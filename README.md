@@ -37,6 +37,12 @@ And all these cases can be solved by AdminBro. By adding couple of lines of code
 * Full featured dashboard with widgets
 * Custom resource decorators
 
+## Contribute
+
+If you would like work on an admin-bro and develop new features - take a look at our dev repository: https://github.com/SoftwareBrothers/admin-bro-dev
+
+You can find there instructions on how to run admin-bro for development.
+
 ## License
 
 AdminBro is Copyright © 2018 SoftwareBrothers.co. It is free software, and may be redistributed under the terms specified in the [LICENSE](LICENSE) file.
