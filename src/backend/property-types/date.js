@@ -9,10 +9,8 @@ const renderer = new Renderer()
  */
 module.exports = {
   head: {
-    styles: ['https://cdnjs.cloudflare.com/ajax/libs/pickadate.js/3.5.6/themes/default.css',
-      'https://cdnjs.cloudflare.com/ajax/libs/pickadate.js/3.5.6/themes/default.date.css'],
-    scripts: ['https://cdnjs.cloudflare.com/ajax/libs/pickadate.js/3.5.6/picker.js',
-      'https://cdnjs.cloudflare.com/ajax/libs/pickadate.js/3.5.6/picker.date.js'],
+    styles: ['https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css'],
+    scripts: ['https://cdn.jsdelivr.net/npm/flatpickr'],
   },
 
   list: (property, record, h) => {
