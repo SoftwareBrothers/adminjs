@@ -34,6 +34,13 @@ class BaseRecord {
      * @type {Object}
      */
     this.errors = {}
+
+    /**
+     * Object containing all populated relations.
+     *
+     * @type {Object<BaseRecord>}
+     */
+    this.populated = {}
   }
 
   /**
@@ -46,7 +53,6 @@ class BaseRecord {
   param(path) {
     return this.params && this.params[path]
   }
-
 
   /**
    * Updates given Record in the datastore. Practically it invokes
@@ -146,6 +152,16 @@ class BaseRecord {
    */
   error(path) {
     return this.errors[path]
+  }
+
+  /**
+   * Populate record relations
+   *
+   * @param   {String}  propertyName  name of the property which should be populated
+   * @param   {BaseRecord}  record    record to which property relates
+   */
+  populate(propertyName, record) {
+    this.populated[propertyName] = record
   }
 }
 

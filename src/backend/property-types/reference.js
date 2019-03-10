@@ -1,0 +1,50 @@
+const Renderer = require('../utils/renderer')
+
+const renderer = new Renderer()
+
+const findReference = (property, record) => {
+  const referenceRecord = record.populated[property.name()]
+  const referenceResource = property.reference()
+  const value = referenceRecord
+    ? referenceResource.decorate().titleOf(referenceRecord) : record.param(property.name())
+  return { value, referenceRecord }
+}
+
+/**
+ * @type {PropertyType}
+ * @module defaultType
+ * @category PropertyTypes
+ */
+module.exports = {
+  list: (property, record, h) => {
+    const { value, referenceRecord } = findReference(property, record)
+    return renderer.render('property-types/reference/list', {
+      h, value, record: referenceRecord, property,
+    })
+  },
+  show: (property, record, h) => {
+    const { value, referenceRecord } = findReference(property, record)
+    return renderer.render('property-types/reference/show', {
+      value, property, h, record: referenceRecord,
+    })
+  },
+
+  edit: (property, record, h) => {
+    const value = record.param && record.param(property.name())
+    const error = record.error && record.error(property.name())
+    const referenceRecord = record.populated[property.name()]
+    return renderer.render('property-types/reference/edit', {
+      value, property, h, error, record: referenceRecord, resource: property.reference(),
+    })
+  },
+
+  filter: (property, filters, h) => {
+    // In the first release filtering by reference is turned off
+    return ''
+  },
+
+  head: {
+    scripts: ['https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/js/standalone/selectize.min.js'],
+    styles: ['https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/css/selectize.min.css'],
+  },
+}

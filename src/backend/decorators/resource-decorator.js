@@ -263,6 +263,31 @@ class ResourceDecorator {
         return action.actionType.includes('record') && isVisible
       })
   }
+
+  /**
+   * Returns PropertyDecorator of a property which should be treaten as a title property.
+   *
+   * @return  {PropertyDecorator} PropertyDecorator of title property
+   */
+  titleProperty() {
+    const properties = Object.values(this.properties)
+    const titleProperty = properties.find(p => p.isTitle())
+    return titleProperty || properties[0]
+  }
+
+  /**
+   * Returns title for given record.
+   *
+   * For example: If given record has `name` property and this property has `isTitle` flag set in
+   * options or by the Adapter - value for this property will be shown
+   *
+   * @param   {BaseRecord}  record
+   *
+   * @return  {String}      title of given record
+   */
+  titleOf(record) {
+    return record.param(this.titleProperty().name())
+  }
 }
 
 ResourceDecorator.DEFAULT_MAX_ITEMS_IN_LIST = DEFAULT_MAX_ITEMS_IN_LIST

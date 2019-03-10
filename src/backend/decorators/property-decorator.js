@@ -72,6 +72,15 @@ class PropertyDecorator {
   }
 
   /**
+   * When given property is a reference to another Resource - it returns this Resource
+   *
+   * @return  {BaseResource} reference resource
+   */
+  reference() {
+    return this._property.reference() && this._admin.findResource(this._property.reference())
+  }
+
+  /**
    * Name of the property
    *
    * @returns {String}

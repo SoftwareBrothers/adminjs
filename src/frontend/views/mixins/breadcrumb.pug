@@ -7,7 +7,7 @@ mixin breadcrumb(resource, record, actionName)
           a(href=h.listUrl(resource))=resource.decorate().getResourceName()
       if record && showAction
         li(class={ 'is-active' : !actionName })
-          a(href=h.recordActionUrl(resource, showAction, record))=record.title()
+          a(href=h.recordActionUrl(resource, showAction, record))= resource.decorate().titleOf(record)
       if actionName
         li.is-active
           a= actionName

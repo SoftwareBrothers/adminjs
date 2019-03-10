@@ -2,7 +2,11 @@
 /* eslint no-unused-vars: 0 */
 const { unflatten, flatten } = require('flat')
 const BaseController = require('./base-controller.js')
+const populator = require('../utils/populator')
 
+/**
+ * Controller responsoble for handling routes: /admin_root/resources
+ */
 class ResourcesController extends BaseController {
   async index({ params, query, payload }, response) {
     this.findResources(params)
@@ -31,7 +35,10 @@ class ResourcesController extends BaseController {
 
   async recordAction(request, response) {
     this.findResources(request.params)
-    this.data.record = await this.data.resource.findOne(request.params.recordId)
+    const record = await this.data.resource.findOne(request.params.recordId)
+    const [populated] = await populator([record])
+    this.data.record = populated
+
     this.data.action = this.data.resource.decorate().recordActions(this.data.record)
       .find(a => a.name === request.params.action)
 
@@ -57,9 +64,12 @@ class ResourcesController extends BaseController {
   }
 
   async findRecords({ query }) {
-    this.data.perPage = 10
-    const firstProperty = this.data.resource.decorate().getListProperties()[0]
     const { page, sortBy, direction, filters } = unflatten(query)
+
+    const listProperties = this.data.resource.decorate().getListProperties()
+    const firstProperty = listProperties[0]
+
+    this.data.perPage = 10
     this.data.page = Number(page) || 1
     this.data.sort = {
       sortBy: sortBy || firstProperty.name(),
@@ -71,8 +81,11 @@ class ResourcesController extends BaseController {
       offset: (this.data.page - 1) * this.data.perPage,
       sort: this.data.sort,
     })
+
+    const populatedRecords = await populator(records, listProperties)
+
     this.data.total = await this.data.resource.count(filters)
-    return records
+    return populatedRecords
   }
 }
 

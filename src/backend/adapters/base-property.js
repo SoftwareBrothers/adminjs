@@ -82,6 +82,17 @@ class BaseProperty {
   }
 
   /**
+   * If property is a reference to a record of different resource
+   * it should contain id of this resource.
+   *
+   * When property is responsible for the field: 'user_id' in SQL database
+   * reference should be the name of the Resource which it refers to: `Users`
+   */
+  reference() {
+    return null
+  }
+
+  /**
    * Indicates if given property can be sorted
    * @return {Boolean}
    */

@@ -126,6 +126,10 @@ class ViewHelpers {
     return this.urlBuilder(['resources', resource.id(), 'record', record.id(), action.name])
   }
 
+  apiSearch(resource) {
+    return this.urlBuilder(['api', 'resources', resource.id(), 'search'])
+  }
+
   /**
    * Returns absolute path to a given asset
    * @param  {String} asset

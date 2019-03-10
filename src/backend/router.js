@@ -1,5 +1,6 @@
 const DashboardController = require('./controllers/dashboard-controller')
 const ResourcesController = require('./controllers/resources-controller')
+const ApiController = require('./controllers/api-controller')
 
 const ASSETS_ROOT = `${__dirname}/../frontend/assets/`
 
@@ -76,6 +77,11 @@ const Router = {
     path: '/resources/{resourceId}/record/{recordId}/{action}',
     Controller: ResourcesController,
     action: 'recordAction',
+  }, {
+    method: 'GET',
+    path: '/api/resources/{resourceId}/search/{query}',
+    Controller: ApiController,
+    action: 'search',
   }],
 }
 
