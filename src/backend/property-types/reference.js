@@ -38,10 +38,8 @@ module.exports = {
     })
   },
 
-  filter: (property, filters, h) => {
-    // In the first release filtering by reference is turned off
-    return ''
-  },
+  // In the first release filtering by reference is turned off
+  filter: () => '',
 
   head: {
     scripts: ['https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/js/standalone/selectize.min.js'],
