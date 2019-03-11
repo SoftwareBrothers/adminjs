@@ -4,6 +4,12 @@
 
 Inspired by: [django admin](https://docs.djangoproject.com), [rails admin](https://github.com/sferik/rails_admin) and [active admin](https://activeadmin.info/).
 
+## How it looks
+
+<img src='./docs/anim.gif'>
+
+## Example application
+
 Check out the example application with mongodb and postgres models here:
 
 - login: `test@example.com`
