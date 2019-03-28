@@ -215,7 +215,7 @@ AdminBro.PROPERTY_TYPES = PROPERTY_TYPES
 
 /**
  * List of all Actions defined by default in AdminBro
- * @type Object<string, Action>}
+ * @type {Object<string, Action>}
  */
 AdminBro.ACTIONS = ACTIONS
 

@@ -3,6 +3,7 @@ const Filter = require('../utils/filter')
 
 /**
  * Controller responsible for the namespace: /admin_root/api/...
+ * @private
  */
 class ApiController {
   constructor({ admin }, currentAdmin) {

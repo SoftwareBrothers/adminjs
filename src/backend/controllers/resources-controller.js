@@ -7,6 +7,7 @@ const Filter = require('../utils/filter')
 
 /**
  * Controller responsoble for handling routes: /admin_root/resources
+ * @private
  */
 class ResourcesController extends BaseController {
   async index({ params, query, payload }, response) {
