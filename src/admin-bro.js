@@ -6,6 +6,7 @@ const BaseDatabase = require('./backend/adapters/base-database')
 const BaseRecord = require('./backend/adapters/base-record')
 const BaseProperty = require('./backend/adapters/base-property')
 const PageBuilder = require('./backend/utils/page-builder')
+const Filter = require('./backend/utils/filter')
 const ValidationError = require('./backend/utils/validation-error')
 const ResourcesFactory = require('./backend/utils/resources-factory')
 const DefaultDashboard = require('./backend/defaults/default-dashboard')
@@ -191,6 +192,12 @@ AdminBro.BaseProperty = BaseProperty
  * @type {typeof PageBuilder}
  */
 AdminBro.PageBuilder = PageBuilder
+
+/**
+ * Filter
+ * @type {typeof Filter}
+ */
+AdminBro.Filter = Filter
 
 /**
  * ValidationError

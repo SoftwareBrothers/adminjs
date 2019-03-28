@@ -3,6 +3,7 @@
 const { unflatten, flatten } = require('flat')
 const BaseController = require('./base-controller.js')
 const populator = require('../utils/populator')
+const Filter = require('../utils/filter')
 
 /**
  * Controller responsoble for handling routes: /admin_root/resources
@@ -75,8 +76,8 @@ class ResourcesController extends BaseController {
       sortBy: sortBy || firstProperty.name(),
       direction: direction || 'asc',
     }
-    this.data.filters = filters ? flatten({ filters }) : {}
-    const records = await this.data.resource.find(filters, {
+    this.data.filter = await new Filter(filters, this.data.resource).populate()
+    const records = await this.data.resource.find(this.data.filter, {
       limit: this.data.perPage,
       offset: (this.data.page - 1) * this.data.perPage,
       sort: this.data.sort,
@@ -84,7 +85,7 @@ class ResourcesController extends BaseController {
 
     const populatedRecords = await populator(records, listProperties)
 
-    this.data.total = await this.data.resource.count(filters)
+    this.data.total = await this.data.resource.count(this.data.filter)
     return populatedRecords
   }
 }

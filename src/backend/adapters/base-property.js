@@ -40,6 +40,10 @@ class BaseProperty {
     return this._path
   }
 
+  path() {
+    return this.name()
+  }
+
   /**
    * Return type of a property
    * @return {String} One of available property types:

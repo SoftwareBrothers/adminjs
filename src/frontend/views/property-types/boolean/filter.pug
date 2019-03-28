@@ -1,9 +1,14 @@
-//- .filter
-//-   label.label 
-//-     = h._.startCase(property.name())
-//-     |  contains:
-//-   .select
-//-     select.input.filter(name=filterKey)
-//-       option(value='') All
-//-       option(value='true') Yes
-//-       option(value='false') No
+.filter
+  label.label 
+    = h._.startCase(property.name())
+    |  contains:
+  .control
+    select(name=filterKey)
+      option(value='') -- All --
+      option(value='true' selected = value === 'true' ? 'selected' : false) Yes
+      option(value='false' selected = value === 'false' ? 'selected' : false) No
+
+script.
+  $(document).ready(() => {
+    $('[name="#{filterKey}"]').selectize({ create: false, allowEmptyOption: true })
+  })

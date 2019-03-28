@@ -1,4 +1,5 @@
 /* eslint no-unused-vars: 0 */
+const Filter = require('../utils/filter')
 
 /**
  * Controller responsible for the namespace: /admin_root/api/...
@@ -25,11 +26,20 @@ class ApiController {
    * @return  {ApiController~SearchResponse}    found records
    */
   async search(request, response) {
-    const queryString = request.params.query
+    const queryString = request.params && request.params.query
     const resource = this._admin.findResource(request.params.resourceId)
     const titlePropertyName = resource.decorate().titleProperty().name()
-    const filters = { [titlePropertyName]: queryString }
-    const resources = await resource.find(filters, { limit: 50 })
+
+    const filters = queryString ? { [titlePropertyName]: queryString } : {}
+    const filter = new Filter(filters, resource)
+
+    const resources = await resource.find(filter, {
+      limit: 50,
+      sort: {
+        sortBy: titlePropertyName,
+        direction: 'asc',
+      },
+    })
 
     return {
       records: resources.map(res => ({

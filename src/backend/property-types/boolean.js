@@ -35,10 +35,11 @@ module.exports = {
     })
   },
 
-  filter: (property, filters, h) => {
+  filter: (property, filterProperty, h) => {
     const filterKey = `filters.${property.name()}`
+    const value = filterProperty && filterProperty.value
     return renderer.render('property-types/boolean/filter', {
-      property, filterKey, h, filters,
+      property, filterKey, h, value,
     })
   },
 }

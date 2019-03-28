@@ -1,0 +1,13 @@
+.nyc_output
+.DS_store
+.vscode
+.idea
+.travis.yml
+
+coverage
+
+docker-compose.ovverride.yml
+
+node_modules
+
+docs

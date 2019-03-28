@@ -174,7 +174,7 @@ class PropertyDecorator {
     if (typeof this.options.isVisible === 'boolean') {
       return this.options.isVisible
     }
-    if (element === 'edit' || element === 'filter') {
+    if (element === 'edit') {
       return this._property.isEditable()
     }
     return this._property.isVisible()

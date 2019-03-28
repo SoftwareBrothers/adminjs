@@ -1,4 +1,5 @@
 const Renderer = require('../utils/renderer')
+const Filter = require('../utils/filter')
 const date = require('./date')
 
 const renderer = new Renderer()
@@ -35,10 +36,11 @@ module.exports = {
     })
   },
 
-  filter: (property, filters, h) => {
-    const filterKey = `filters.${property.name()}`
+  filter: (property, filterProperty, h) => {
+    const filterKey = Filter.toFilterKey(property)
+    const value = (filterProperty && filterProperty.value) || {}
     return renderer.render('property-types/datetime/filter', {
-      property, filterKey, h, filters,
+      property, filterKey, h, value,
     })
   },
 }

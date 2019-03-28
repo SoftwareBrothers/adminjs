@@ -1,4 +1,5 @@
 const Renderer = require('../utils/renderer')
+const Filter = require('../utils/filter')
 
 const renderer = new Renderer()
 
@@ -39,7 +40,15 @@ module.exports = {
   },
 
   // In the first release filtering by reference is turned off
-  filter: () => '',
+  filter: (property, filterProperty, h) => {
+    const filterKey = Filter.toFilterKey(property)
+    const value = (filterProperty && filterProperty.value) || {}
+    const resource = property.reference()
+    const record = filterProperty.populated
+    return renderer.render('property-types/reference/filter', {
+      property, filterKey, h, value, resource, record,
+    })
+  },
 
   head: {
     scripts: ['https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/js/standalone/selectize.min.js'],

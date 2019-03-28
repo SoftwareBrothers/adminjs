@@ -99,6 +99,27 @@
     margin: rem(20px) auto
     display: flex
     justify-content: center
+  .selectize-control.single
+    margin-bottom: rem(20px)
+    .selectize-input
+      border-color: $blue-bayoux
+      border-radius: 2px
+      background: transparent
+      color: $waterloo
+      &.dropdown-active
+        background-color: transparent
+        color: #fff
+        &:before
+          background-color: transparent
+    .selectize-dropdown
+      background-color: $rhino
+      border-color: $blue-bayoux
+      color: $waterloo
+      .active
+        background-color: $cornflower-blue
+        color: $white
+
+
 @include media-breakpoint-down($media-min-tablet-width - 1px)
   .filters-bar
     width: $sidebar-width

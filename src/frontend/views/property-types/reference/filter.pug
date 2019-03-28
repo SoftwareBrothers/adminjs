@@ -1,16 +1,18 @@
-label.label(for=property.name())= property.label()
-.control
-  select(type='text' id=property.name() name=property.name())
-    if record
-      option(value=record.id() selected=true)= resource.decorate().titleOf(record)
-if error
-  .help.is-danger= error.message
+.filter
+  label.label 
+    = property.label()
+    |  is:
+  .control
+    select(type='text' name=filterKey)
+      option(value='') -- All --
+      if record
+        option(value=record.id() selected=true)= resource.decorate().titleOf(record)
 
 script.
   $(document).ready(() => {
-    const selected = !{record && JSON.stringify({ id: record.id(), title: resource.decorate().titleOf(record) })}
-    $('##{property.name()}').selectize({
+    $('[name="#{filterKey}"]').selectize({
       valueField: 'id',
+      allowEmptyOption: true,
       preload: true,
       labelField: 'title',
       searchField: 'title',

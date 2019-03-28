@@ -181,9 +181,9 @@ class BaseResource {
    * it has to be instantiated.
    *
    * @param  {Object} params
-   * @return {Promise<BaseRecord>}
+   * @return {BaseRecord}
    */
-  async build(params) {
+  build(params) {
     return new BaseRecord(params, this)
   }
 

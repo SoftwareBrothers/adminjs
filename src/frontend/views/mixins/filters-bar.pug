@@ -1,15 +1,13 @@
 mixin filtersBar
-  - const areFiltersAvailable = Object.keys(filters).length 
-  - const props = resource.decorate().getListProperties()
   .filters-bar-wrapper
-    .filters-bar(class= { 'filters-show' : areFiltersAvailable })
+    .filters-bar(class= { 'filters-show' : filter.isVisible() })
       .filters-close
         .arrow-right
           i.fas.fa-arrow-right
         span Filter
       form(method="GET" action=h.listUrl(resource))#filters-form
         for prop in resource.decorate().getFilterProperties()
-          != prop.renderFilter(filters)
+          != prop.renderFilter(filter.get(prop.name()))
         input(type='hidden' name='sortBy' value=sort.sortBy)
         input(type='hidden' name='direction' value=sort.direction)
         button.button.is-primary.apply-changes(type='submit') Apply Changes
