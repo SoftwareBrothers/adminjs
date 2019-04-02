@@ -163,6 +163,14 @@ class BaseRecord {
   populate(propertyName, record) {
     this.populated[propertyName] = record
   }
+
+  toJSON(){
+    return {
+      params: this.params,
+      populated: this.populated,
+      id: this.id(),
+    }
+  }
 }
 
 module.exports = BaseRecord

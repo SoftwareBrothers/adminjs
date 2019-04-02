@@ -1,7 +1,7 @@
 const _ = require('lodash')
 const BaseProperty = require('../adapters/base-property')
-const ViewHelpers = require('../utils/view-helpers')
 const PropertyDecorator = require('./property-decorator')
+const ViewHelpers = require('../utils/view-helpers')
 
 /**
  * Default maximum number of items which should be present in a list.
@@ -44,7 +44,7 @@ class ResourceDecorator {
   constructor({ resource, admin, options = {} }) {
     this._resource = resource
     this._admin = admin
-    this.helpers = new ViewHelpers({ admin })
+    this.h = new ViewHelpers({ options: admin.options })
 
     /**
      * Options passed along with a given resource
@@ -287,6 +287,31 @@ class ResourceDecorator {
    */
   titleOf(record) {
     return record.param(this.titleProperty().name())
+  }
+
+  static serializeAction(action) {
+    return {
+      name: action.name,
+      isVisible: action.isVisible,
+      actionType: action.actionType,
+      icon: action.icon,
+      label: action.label,
+    }
+  }
+
+  toJSON() {
+    return {
+      id: this._resource.id(),
+      name: this.getResourceName(),
+      parent: this.getParent(),
+      href: this.h.listUrl(this._resource.id()),
+      resourceActions: this.resourceActions().map((ra) => ResourceDecorator.serializeAction(ra)),
+      recordActions: this.recordActions().map((ra) => ResourceDecorator.serializeAction(ra)),
+      listProperties: this.getListProperties().map(property => property.toJSON()),
+      editProperties: this.getEditProperties().map(property => property.toJSON()),
+      showProperties: this.getShowProperties().map(property => property.toJSON()),
+      filterProperties: this.getFilterProperties().map(property => property.toJSON()),
+    }
   }
 }
 

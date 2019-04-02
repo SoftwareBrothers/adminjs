@@ -1,4 +1,6 @@
 /* eslint no-unused-vars: 0 */
+const { unflatten, flatten } = require('flat')
+const populator = require('../utils/populator')
 const Filter = require('../utils/filter')
 
 /**
@@ -9,6 +11,41 @@ class ApiController {
   constructor({ admin }, currentAdmin) {
     this._admin = admin
     this.currentAdmin = currentAdmin
+  }
+
+  async index({ params, query, payload }, response) {
+    const { resourceId } = params
+    const { sortBy, direction, filters } = unflatten(query)
+    let { page } = unflatten(query)
+    const resource = this._admin.findResource(resourceId)
+
+    const listProperties = resource.decorate().getListProperties()
+    const firstProperty = listProperties[0]
+
+    const perPage = 20
+    page = Number(page) || 1
+    const sort = {
+      sortBy: sortBy || firstProperty.name(),
+      direction: direction || 'asc',
+    }
+    const filter = await new Filter(filters, resource).populate()
+    const records = await resource.find(filter, {
+      limit: perPage,
+      offset: (page - 1) * perPage,
+      sort: sort,
+    })
+
+    const populatedRecords = await populator(records, listProperties)
+
+    const total = await resource.count(filter)
+    return {
+      meta: {
+        total,
+        perPage,
+        page,
+      },
+      records: populatedRecords.map(r => r.toJSON())
+    }
   }
 
   /**

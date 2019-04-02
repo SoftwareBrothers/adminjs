@@ -1,6 +1,5 @@
 const ViewHelpers = require('../utils/view-helpers')
 const Renderer = require('../utils/renderer')
-const sidebarBuilder = require('../utils/sidebar-builder')
 
 /**
  * base class for all controllers in the application
@@ -18,20 +17,7 @@ class BaseController {
   constructor({ admin }, currentAdmin) {
     this._admin = admin
     this.data = {}
-    this.data.currentAdmin = currentAdmin
-    this.data.resources = sidebarBuilder(admin.resources)
-    this.data.h = new ViewHelpers({ admin })
-  }
-
-  /**
-   * Renders given view with the data provided
-   * @param  {String} view  path to the pug view (i.e. pages/list)
-   * @param  {Object} data  which will be send to the view as an data context
-   * @return {String}       rendered html
-   */
-  render(view, data) {
-    const renderData = data || this.data
-    return new Renderer().render(view, renderData)
+    this.currentAdmin = currentAdmin
   }
 }
 

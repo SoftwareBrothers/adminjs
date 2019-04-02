@@ -46,6 +46,9 @@ const Router = {
   }, {
     path: '/frontend/assets/icomoon.woff',
     src: [ASSETS_ROOT, 'fonts/icomoon.woff'].join('/'),
+  }, {
+    path: '/frontend/assets/app.bundle2.js',
+    src: [ASSETS_ROOT, 'scripts/app.bundle2.js'].join('/'),
   }],
   routes: [{
     method: 'GET',
@@ -54,34 +57,44 @@ const Router = {
     action: 'index',
   }, {
     method: 'GET',
-    path: '/resources/{resourceId}',
-    Controller: ResourcesController,
-    action: 'index',
+    path: '/frontend/assets/app.bundle.js',
+    Controller: DashboardController,
+    action: 'bundle',
   }, {
     method: 'GET',
-    path: '/resources/{resourceId}/{action}',
-    Controller: ResourcesController,
+    path: '/resources/{resourceId}',
+    Controller: DashboardController,
+    action: 'resource',
+  }, {
+    method: 'GET',
+    path: '/resources/{resourceId}/actions/{action}',
+    Controller: DashboardController,
     action: 'resourceAction',
   }, {
     method: 'GET',
     path: '/resources/{resourceId}/record/{recordId}/{action}',
-    Controller: ResourcesController,
+    Controller: DashboardController,
     action: 'recordAction',
   }, {
     method: 'POST',
     path: '/resources/{resourceId}/{action}',
-    Controller: ResourcesController,
+    Controller: DashboardController,
     action: 'resourceAction',
   }, {
     method: 'POST',
     path: '/resources/{resourceId}/record/{recordId}/{action}',
-    Controller: ResourcesController,
+    Controller: DashboardController,
     action: 'recordAction',
   }, {
     method: 'GET',
     path: '/api/resources/{resourceId}/search/{query}',
     Controller: ApiController,
     action: 'search',
+  }, {
+    method: 'GET',
+    path: '/api/resources/{resourceId}',
+    Controller: ApiController,
+    action: 'index',
   }, {
     method: 'GET',
     path: '/api/resources/{resourceId}/search/',

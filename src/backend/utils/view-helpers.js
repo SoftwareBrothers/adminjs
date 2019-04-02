@@ -1,47 +1,53 @@
-const paginate = require('jw-paginate')
-const lodash = require('lodash')
-const moment = require('moment')
-
 /**
  * Collection of helper methods available in the views
  */
 class ViewHelpers {
-  constructor({ admin }) {
-    this._admin = admin
-    /**
-     * Lodash
-     * @type {Lodash}
-     * @see https://lodash.com/
-     */
-    this._ = lodash
-
-    /**
-     * Moment
-     * @type {Moment}
-     * @see https://momentjs.com/
-     */
-    this.moment = moment
-
-    /**
-     * Paginate
-     * @type {jw-paginate}
-     * @see https://github.com/cornflourblue/jw-paginate
-     */
-    this.paginate = paginate
+  constructor({ options }) {
+    this.options = options
 
     /**
      * Branding options passed by the user.
      * `branding` subset of {@link AdminBroOptions}
      * @type {Object}
      */
-    this.branding = this._admin.options.branding
+    this.branding = this.options.branding
 
     /**
      * Custom assets options passed by the user.
      * `assets` subset of {@link AdminBroOptions}
      * @type {Object}
      */
-    this.customAssets = this._admin.options.assets
+    this.customAssets = this.options.assets
+  }
+
+  /**
+   * @todo handle Scripts and Styles in resources:
+   *
+   * ```
+   * for script in resource.decorate().customHeadScripts().scripts
+   *   script(defer src=script)
+   * for style in resource.decorate().customHeadScripts().styles
+   *   link(rel="stylesheet" href=style)
+   * ```
+   */
+
+  headScripts() {
+    return [
+      'https://use.fontawesome.com/releases/v5.3.1/js/all.js',
+      'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js',
+      ...((this.customAssets && this.customAssets.styles) || []),
+      this.assetPath('app.bundle.js'),
+    ].map(s => `<script src="${s}"></script>`)
+  }
+
+  headStyles() {
+    return [
+      'https://cdnjs.cloudflare.com/ajax/libs/bulma/0.5.1/css/bulma.min.css',
+      'https://cdnjs.cloudflare.com/ajax/libs/font-mfizz/2.4.1/font-mfizz.min.css',
+      'https://fonts.googleapis.com/css?family=Roboto:400,700',
+      ...((this.customAssets && this.customAssets.scripts) || []),
+      this.assetPath('style.min.css'),
+    ].map(l => `<link rel="stylesheet" type="text/css" href="${l}">`)
   }
 
   /**
@@ -76,7 +82,7 @@ class ViewHelpers {
    * @return {String}       path
    */
   urlBuilder(paths, query) {
-    const { rootPath } = this._admin.options
+    const { rootPath } = this.options
     let url = `${rootPath}/${paths.join('/')}`
     if (query) {
       url = `${url}?${this.getQueryPath(query)}`
@@ -89,7 +95,7 @@ class ViewHelpers {
    * @return {String}
    */
   loginUrl() {
-    return this._admin.options.loginPath
+    return this.options.loginPath
   }
 
   /**
@@ -97,7 +103,7 @@ class ViewHelpers {
    * @return {String}
    */
   logoutUrl() {
-    return this._admin.options.logoutPath
+    return this.options.logoutPath
   }
 
   /**
@@ -105,7 +111,7 @@ class ViewHelpers {
    * @return {String}
    */
   dashboardUrl() {
-    return this._admin.options.rootPath
+    return this.options.rootPath
   }
 
   /**
@@ -114,16 +120,16 @@ class ViewHelpers {
    * @param {Object} [query]
    * @return {String}
    */
-  listUrl(resource, query) {
-    return this.urlBuilder(['resources', resource.id()], query)
+  listUrl(resourceId, query) {
+    return this.urlBuilder(['resources', resourceId], query)
   }
 
-  resourceActionUrl(resource, action) {
-    return this.urlBuilder(['resources', resource.id(), action.name])
+  resourceActionUrl(resourceId, actionName) {
+    return this.urlBuilder(['resources', resourceId, 'actions', actionName])
   }
 
-  recordActionUrl(resource, action, record) {
-    return this.urlBuilder(['resources', resource.id(), 'record', record.id(), action.name])
+  recordActionUrl(resourceId, actionName, recordId) {
+    return this.urlBuilder(['resources', resourceId, 'record', recordId, actionName])
   }
 
   apiSearch(resource) {

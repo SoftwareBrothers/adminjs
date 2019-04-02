@@ -254,6 +254,19 @@ class PropertyDecorator {
     }
     return this.options.isTitle
   }
+
+  toJSON() {
+    return {
+      isTitle: this.isTitle(),
+      isId: this.isId(),
+      position: this.position(),
+      isSortable: this.isSortable(),
+      name: this.name(),
+      label: this.label(),
+      type: this.type(),
+      isVisible: this.isVisible(),
+    }
+  }
 }
 
 module.exports = PropertyDecorator
