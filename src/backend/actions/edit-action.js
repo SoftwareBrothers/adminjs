@@ -1,6 +1,4 @@
-const Renderer = require('../utils/renderer')
-
-const renderer = new Renderer()
+const populator = require('../utils/populator')
 
 module.exports = {
   name: 'edit',
@@ -9,18 +7,22 @@ module.exports = {
   icon: 'icomoon-edit',
   label: 'Edit',
   handler: async (request, response, data) => {
+    const record = await data.resource.findOne(request.params.recordId)
     if (request.method === 'get') {
-      return renderer.render('actions/edit', data)
+      const [populated] = await populator([record])
+      return { record: populated.toJSON() }
     }
     if (request.method === 'post') {
-      await data.record.update(request.payload)
-      if (data.record.isValid()) {
-        const showAction = data.resource.decorate().actions.show
-        return response.redirect(data.h.recordActionUrl(
-          data.resource, showAction, data.record,
-        ))
+      await record.update(request.payload.record)
+      if (record.isValid()) {
+        return {
+          redirectUrl: data.h.recordActionUrl(
+            data.resource.id(), record.id(), 'show',
+          ),
+          record: record.toJSON(),
+        }
       }
-      return renderer.render('actions/edit', data)
+      return { record: record.toJSON() }
     }
     return ''
   },

@@ -1,4 +1,5 @@
 import React from 'react'
+import { timeout } from 'q';
 
 const toolbarOptions = [
   [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
@@ -24,6 +25,9 @@ export default class Edit extends React.Component {
   }
 
   setupWysiwig() {
+    const { property, record } = this.props
+    const value = (record.params && record.params[property.name]) || ''
+    this.refs.wysiwig.innerHTML = value
     const quill = new Quill(this.refs.wysiwig, {
       modules: {
         toolbar: toolbarOptions
@@ -50,15 +54,12 @@ export default class Edit extends React.Component {
 
   render() {
     const { property, resource, record } = this.props
-    const value = (record.params && record.params[property.name]) || ''
     const error = record.errors && record.errors[property.name]
     return (
       <div className="field">
         <label htmlFor={property.name} className="label">{property.label}</label>
         <div className="control has-icons-right">
-          <div className="quill-editor" ref="wysiwig" style={{height: "400px"}}>
-            {value}
-          </div>
+          <div className="quill-editor" ref="wysiwig" style={{height: "400px"}}></div>
         </div>
         {error && (
           <div className="help is-danger">{error.message}</div>

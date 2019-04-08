@@ -2,8 +2,11 @@
  * Collection of helper methods available in the views
  */
 class ViewHelpers {
-  constructor({ options }) {
-    this.options = options
+  constructor({ options } = {} ) {
+    const opts = options || (window && window.REDUX_STATE.paths)
+
+    // when ViewHelpers are used on the frontend, paths are taken from global Redux State
+    this.options = opts
 
     /**
      * Branding options passed by the user.
@@ -128,8 +131,8 @@ class ViewHelpers {
     return this.urlBuilder(['resources', resourceId, 'actions', actionName])
   }
 
-  recordActionUrl(resourceId, actionName, recordId) {
-    return this.urlBuilder(['resources', resourceId, 'record', recordId, actionName])
+  recordActionUrl(resourceId, recordId, actionName) {
+    return this.urlBuilder(['resources', resourceId, 'records', recordId, actionName])
   }
 
   apiSearch(resource) {

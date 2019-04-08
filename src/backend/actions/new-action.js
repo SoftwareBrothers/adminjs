@@ -11,7 +11,7 @@ module.exports = {
       if (record.isValid()) {
         return {
           redirectUrl: data.h.recordActionUrl(
-            data.resource.id(), 'show', record.id(),
+            data.resource.id(), record.id(), 'show',
           ),
           record: record.toJSON(),
         }

@@ -47,7 +47,7 @@ class Resource extends React.PureComponent {
   }
 
   renderActionBtn(action) {
-    const h = new ViewHelpers({ options: this.props.paths })
+    const h = new ViewHelpers()
     const actionWithHref = {
       href: h.resourceActionUrl(this.resource.id, action.name),
       ...action,

@@ -25,4 +25,12 @@ export default class ApiClient {
       data: payload,
     })
   }
+
+  async recordAction({ resourceId, recordId, actionName, payload, method }) {
+    return this.client.request({
+      url: `/api/resources/${resourceId}/records/${recordId}/${actionName}`,
+      method: method || payload ? 'POST' : 'GET',
+      data: payload,
+    })
+  }
 }

@@ -305,6 +305,7 @@ class ResourceDecorator {
       name: this.getResourceName(),
       parent: this.getParent(),
       href: this.h.listUrl(this._resource.id()),
+      titleProperty: this.titleProperty().toJSON(),
       resourceActions: this.resourceActions().map((ra) => ResourceDecorator.serializeAction(ra)),
       recordActions: this.recordActions().map((ra) => ResourceDecorator.serializeAction(ra)),
       listProperties: this.getListProperties().map(property => property.toJSON()),

@@ -11,7 +11,7 @@ export default class Edit extends React.Component {
     let options = {
       format: 'Y-m-d',
     }
-    if (this.props.property.type === 'datetime') {
+    if (property.type === 'datetime') {
       options = {
         format: 'Y-m-d H:i',
         enableTime: true,

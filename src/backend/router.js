@@ -72,7 +72,7 @@ const Router = {
     action: 'resourceAction',
   }, {
     method: 'GET',
-    path: '/resources/{resourceId}/record/{recordId}/{action}',
+    path: '/resources/{resourceId}/records/{recordId}/{action}',
     Controller: DashboardController,
     action: 'recordAction',
   }, {
@@ -82,7 +82,7 @@ const Router = {
     action: 'resourceAction',
   }, {
     method: 'GET',
-    path: '/api/resources/{resourceId}/record/{recordId}/{action}',
+    path: '/api/resources/{resourceId}/records/{recordId}/{action}',
     Controller: ApiController,
     action: 'recordAction',
   }, {
@@ -92,7 +92,7 @@ const Router = {
     action: 'resourceAction',
   }, {
     method: 'POST',
-    path: '/api/resources/{resourceId}/record/{recordId}/{action}',
+    path: '/api/resources/{resourceId}/records/{recordId}/{action}',
     Controller: ApiController,
     action: 'recordAction',
   }, {

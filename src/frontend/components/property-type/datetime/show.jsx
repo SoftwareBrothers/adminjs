@@ -1,10 +1,11 @@
 import React from 'react'
+import mapValue from './map-value'
 
 export default class Show extends React.PureComponent {
   render() {
     const { property, record } = this.props
+    const value = mapValue(record.params[property.name], property.type)
 
-    const value = record.params[property.name]
     const { label } = property
 
     return (

@@ -1,7 +1,6 @@
 import React from 'react'
 import PropertyType from '../property-type'
 import ApiClient from '../../utils/api-client'
-import { Redirect } from 'react-router'
 import { withRouter } from 'react-router-dom'
 
 class New extends React.Component {
@@ -50,27 +49,26 @@ class New extends React.Component {
     const properties = this.props.resource.editProperties
     const record = { params: this.state.params, errors: this.state.errors }
     return (
-      <div className="column">
-        <div className="border-box">
-          <form onSubmit={this.handleSubmit.bind(this)}>
-            {properties.map(property => (
-              <PropertyType
-                key={property.name}
-                where="edit"
-                property={property}
-                resource={resource}
-                onChange={this.handleChange.bind(this)}
-                record={record} />
-            ))}
-            <div className="field is-grouped"></div>
-              <div className="control">
-                <button className="button is-primary" type='submit'>
-                  <span className="icon is-small"><i className="icomoon-save"></i></span>
-                  <div className="btn-text">Save</div>
-                </button>
-              </div>
-          </form>
-        </div>
+      <div className="border-box">
+        <form onSubmit={this.handleSubmit.bind(this)}>
+          {properties.map(property => (
+            <PropertyType
+              key={property.name}
+              where="edit"
+              property={property}
+              resource={resource}
+              onChange={this.handleChange.bind(this)}
+              record={record} />
+          ))}
+          <div className="field is-grouped">
+            <div className="control">
+              <button className="button is-primary" type='submit'>
+                <span className="icon is-small"><i className="icomoon-save"></i></span>
+                <div className="btn-text">Save</div>
+              </button>
+            </div>
+          </div>
+        </form>
       </div>
     )
   }

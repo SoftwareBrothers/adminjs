@@ -2,12 +2,13 @@ import React from 'react'
 
 import ViewHelpers from '../../../backend/utils/view-helpers'
 import ActionBtn from './action-btn'
+import PropertyType from '../property-type'
 
 export default class RecordInList extends React.PureComponent {
   renderActionBtn(action, record) {
-    const h = new ViewHelpers({ options: this.props.paths })
+    const h = new ViewHelpers()
     const actionWithHref = {
-      href: h.recordActionUrl(this.props.resource.id, action.name, record.id),
+      href: h.recordActionUrl(this.props.resource.id, record.id, action.name),
       ...action,
     }
     return (
@@ -22,7 +23,14 @@ export default class RecordInList extends React.PureComponent {
     return (
       <tr>
         {resource.listProperties.map(property => (
-          <td key={property.name}>{record.params[property.name]}</td>
+          <td key={property.name}>
+            <PropertyType
+              key={property.name}
+              where="list"
+              property={property}
+              resource={resource}
+              record={record} />
+          </td>
         ))}
         <td key={'options'}>
           <div className="dropdown is-right is-hoverable">

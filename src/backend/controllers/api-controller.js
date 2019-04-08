@@ -99,6 +99,18 @@ class ApiController {
       resource, resourceAction, h,
     })
   }
+
+  async recordAction(request, response) {
+    const { resourceId, action, recordId } = request.params
+    const h = new ViewHelpers(this._admin)
+    const resource = this._admin.findResource(resourceId)
+    const resourceAction = resource.decorate().recordActions()
+      .find(a => a.name === action)
+
+    return resourceAction.handler(request, response, {
+      resource, resourceAction, h,
+    })
+  }
 }
 
 module.exports = ApiController

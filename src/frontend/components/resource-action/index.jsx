@@ -11,7 +11,7 @@ class ResourceAction extends React.Component {
     const { resourceId, actionName } = this.props.match.params
     const resource = this.props.resources.find(r => r.id === resourceId)
     const action = resource.resourceActions.find(r => r.name === actionName)
-    const h = new ViewHelpers({ options: this.props.paths })
+    const h = new ViewHelpers()
     const Action = actions[action.name]
     return (
       <div className="view-edit">

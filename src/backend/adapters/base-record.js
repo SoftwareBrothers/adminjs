@@ -170,6 +170,7 @@ class BaseRecord {
       populated: this.populated,
       errors: this.errors,
       id: this.id(),
+      title: this.resource.decorate().titleOf(this)
     }
   }
 }
