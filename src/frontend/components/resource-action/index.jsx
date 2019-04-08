@@ -24,7 +24,7 @@ class ResourceAction extends React.Component {
             {action.label}
           </h3>
         </div>
-        <Action action={action} resource={resource} />
+        <Action action={action} resource={resource} paths={this.props.paths} />
       </div>
     )
   }

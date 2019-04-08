@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom'
 
 export default class ActionBtn extends React.PureComponent {
   render() {
-    console.log(this.props)
     return (
       <div className="control">
         <Link to={this.props.action.href} className={"button " + this.props.className}>

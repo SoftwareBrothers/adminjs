@@ -22,6 +22,10 @@ class DashboardController extends BaseController {
     return layoutTemplate(this._admin, this.currentAdmin, this.h.resourceActionUrl(params.resourceId, params.actionName))
   }
 
+  async recordAction({ params, query, payload }, response) {
+    return layoutTemplate(this._admin, this.currentAdmin, this.h.recordActionUrl(params.resourceId, params.actionName, params.recordId))
+  }
+
   async bundle({ params, query, payload }, response) {
     return bundler()
   }

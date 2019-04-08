@@ -265,6 +265,7 @@ class PropertyDecorator {
       label: this.label(),
       type: this.type(),
       isVisible: this.isVisible(),
+      reference: this._property.reference(),
     }
   }
 }

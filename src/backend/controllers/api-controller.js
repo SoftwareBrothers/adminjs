@@ -2,6 +2,7 @@
 const { unflatten, flatten } = require('flat')
 const populator = require('../utils/populator')
 const Filter = require('../utils/filter')
+const ViewHelpers = require('../utils/view-helpers')
 
 /**
  * Controller responsible for the namespace: /admin_root/api/...
@@ -85,6 +86,18 @@ class ApiController {
         id: res.id(),
       })),
     }
+  }
+
+  async resourceAction(request, response) {
+    const { resourceId, action } = request.params
+    const h = new ViewHelpers(this._admin)
+    const resource = this._admin.findResource(resourceId)
+    const resourceAction = resource.decorate().resourceActions()
+      .find(a => a.name === action)
+
+    return resourceAction.handler(request, response, {
+      resource, resourceAction, h,
+    })
   }
 }
 

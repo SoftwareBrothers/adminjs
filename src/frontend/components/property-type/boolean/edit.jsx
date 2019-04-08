@@ -1,8 +1,8 @@
 import React from 'react'
 
-export default class Edit extends React.Component {
+export default class Edit extends React.PureComponent {
   handleChange(event) {
-    this.props.onChange(this.props.property.name, event.target.value)
+    this.props.onChange(this.props.property.name, event.target.checked)
   }
 
   render() {
@@ -13,12 +13,12 @@ export default class Edit extends React.Component {
       <div className="field">
         <label htmlFor={property.name} className="label">{property.label}</label>
         <div className="control">
-          <input type="text"
-                 className="input"
+          <input type="checkbox"
+                 className="checkbox"
                  id={property.name}
                  name={property.name}
                  onChange={this.handleChange.bind(this)}
-                 value={value}/>
+                 checked={value}/>
         </div>
         {error && (
           <div className="help is-danger">{error.message}</div>

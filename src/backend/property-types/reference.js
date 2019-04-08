@@ -51,7 +51,7 @@ module.exports = {
   },
 
   head: {
-    scripts: ['https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/js/standalone/selectize.min.js'],
-    styles: ['https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/css/selectize.min.css'],
+    scripts: [],
+    styles: [],
   },
 }

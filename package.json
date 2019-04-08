@@ -46,15 +46,18 @@
     "parcel-bundler": "^1.12.3",
     "pug": "^2.0.3",
     "react": "^16.8.6",
+    "react-autocomplete": "^1.8.1",
     "react-dom": "^16.8.6",
     "react-redux": "^6.0.1",
     "react-router-dom": "^5.0.0",
+    "react-select": "^2.4.2",
     "redux": "^4.0.1",
     "require.all": "^2.0.4",
     "rollup": "^1.7.4",
     "rollup-plugin-babel": "^4.3.2",
     "rollup-plugin-commonjs": "^9.2.2",
     "rollup-plugin-node-resolve": "^4.0.1",
+    "rollup-plugin-replace": "^2.1.1",
     "xss": "^1.0.3"
   },
   "devDependencies": {

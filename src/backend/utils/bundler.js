@@ -2,6 +2,7 @@ const rollup = require('rollup')
 const babel = require('rollup-plugin-babel')
 const commonjs = require('rollup-plugin-commonjs')
 const resolve = require('rollup-plugin-node-resolve')
+const replace = require('rollup-plugin-replace')
 const plugin = require('@babel/plugin-transform-runtime')
 
 async function build() {
@@ -11,12 +12,15 @@ async function build() {
       resolve({
         extensions: [ '.mjs', '.js', '.jsx', '.json' ],
       }),
+      replace({
+        'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development'),
+      }),
       commonjs(),
       babel({
         presets: ['@babel/preset-react', '@babel/preset-env'],
         plugins: [plugin],
         runtimeHelpers: true,
-        exclude: 'node_modules/**',
+        include: __dirname + '/../../frontend/**',
       })
     ],
     external: [
@@ -39,7 +43,9 @@ async function build() {
       'react': 'React',
       'redux': 'Redux',
       'react-dom': 'ReactDOM',
+      'prop-types': 'PropTypes',
       'react-redux': 'ReactRedux',
+      'react-router': 'ReactRouter',
       'react-router-dom': 'ReactRouterDOM',
       'axios': 'axios',
     }

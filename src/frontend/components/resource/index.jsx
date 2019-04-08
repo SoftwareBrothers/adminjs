@@ -10,8 +10,7 @@ import ApiClient from '../../utils/api-client'
 class Resource extends React.PureComponent {
   constructor(props) {
     super(props)
-    const baseUrl = [window.location.origin, this.props.paths.rootPath].join('')
-    this.api = new ApiClient(baseUrl)
+    this.api = new ApiClient()
     this.resource = this.props.resources.find(r => r.id === this.props.match.params.resourceId)
 
     this.state = {

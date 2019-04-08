@@ -76,14 +76,24 @@ const Router = {
     Controller: DashboardController,
     action: 'recordAction',
   }, {
+    method: 'GET',
+    path: '/api/resources/{resourceId}/actions/{action}',
+    Controller: ApiController,
+    action: 'resourceAction',
+  }, {
+    method: 'GET',
+    path: '/api/resources/{resourceId}/record/{recordId}/{action}',
+    Controller: ApiController,
+    action: 'recordAction',
+  }, {
     method: 'POST',
-    path: '/resources/{resourceId}/{action}',
-    Controller: DashboardController,
+    path: '/api/resources/{resourceId}/actions/{action}',
+    Controller: ApiController,
     action: 'resourceAction',
   }, {
     method: 'POST',
-    path: '/resources/{resourceId}/record/{recordId}/{action}',
-    Controller: DashboardController,
+    path: '/api/resources/{resourceId}/record/{recordId}/{action}',
+    Controller: ApiController,
     action: 'recordAction',
   }, {
     method: 'GET',

@@ -43,6 +43,7 @@ async function build() {
       'react': 'React',
       'redux': 'Redux',
       'react-dom': 'ReactDOM',
+      'prop-types': 'PropTypes',
       'react-redux': 'ReactRedux',
       'react-router-dom': 'ReactRouterDOM',
       'axios': 'axios',

@@ -168,6 +168,7 @@ class BaseRecord {
     return {
       params: this.params,
       populated: this.populated,
+      errors: this.errors,
       id: this.id(),
     }
   }
