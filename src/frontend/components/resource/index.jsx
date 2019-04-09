@@ -5,6 +5,7 @@ import ViewHelpers from '../../../backend/utils/view-helpers'
 import Breadcrumbs from '../breadcrumbs'
 import ActionBtn from './action-btn'
 import RecordsTable from './records-table'
+import Paginate from './paginate'
 import ApiClient from '../../utils/api-client'
 
 class Resource extends React.PureComponent {
@@ -20,8 +21,9 @@ class Resource extends React.PureComponent {
       page: 1,
       perPage: 20,
       total: 0,
-      sortBy: query.get('sortBy') || this.resource.listProperties[0].name,
-      direction: query.get('direction') || 'asc',
+      sortBy: this.resource.listProperties[0].name,
+      direction: 'asc',
+      page: 1,
     }
   }
 
@@ -33,6 +35,7 @@ class Resource extends React.PureComponent {
       query: {
         sortBy: query.get('sortBy') || this.state.sortBy,
         direction: query.get('direction') || this.state.direction,
+        page: query.get('page') || 1,
       }
     }).then((response) => {
       console.log(response)
@@ -44,6 +47,7 @@ class Resource extends React.PureComponent {
         total: response.data.meta.total,
         sortBy: query.get('sortBy'),
         direction: query.get('direction'),
+        page: query.get('page'),
       })
     })
   }
@@ -98,6 +102,11 @@ class Resource extends React.PureComponent {
             records={this.state.records}
             paths={this.props.paths}
             />
+          <Paginate
+            page={this.state.page}
+            perPage={this.state.perPage}
+            total={this.state.total}
+          />
         </div>
       </section>
     )
