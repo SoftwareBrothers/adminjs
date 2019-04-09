@@ -12,6 +12,7 @@ class Resource extends React.PureComponent {
     super(props)
     this.api = new ApiClient()
     this.resource = this.props.resources.find(r => r.id === this.props.match.params.resourceId)
+    const query = new URLSearchParams(this.props.location.search)
 
     this.state = {
       loading: true,
@@ -19,12 +20,21 @@ class Resource extends React.PureComponent {
       page: 1,
       perPage: 20,
       total: 0,
+      sortBy: query.get('sortBy') || this.resource.listProperties[0].name,
+      direction: query.get('direction') || 'asc',
     }
   }
 
   _fetchData(resourceId) {
     this.resource = this.props.resources.find(r => r.id === resourceId)
-    this.api.getRecords(this.resource.id).then((response) => {
+    const query = new URLSearchParams(this.props.location.search)
+    this.api.getRecords({
+      resourceId: this.resource.id,
+      query: {
+        sortBy: query.get('sortBy') || this.state.sortBy,
+        direction: query.get('direction') || this.state.direction,
+      }
+    }).then((response) => {
       console.log(response)
       this.setState({
         loading: false,
@@ -32,6 +42,8 @@ class Resource extends React.PureComponent {
         page: response.data.meta.page,
         perPage: response.data.meta.perPage,
         total: response.data.meta.total,
+        sortBy: query.get('sortBy'),
+        direction: query.get('direction'),
       })
     })
   }
@@ -41,7 +53,8 @@ class Resource extends React.PureComponent {
   }
 
   componentDidUpdate(prevProps) {
-    if (this.props.match.params.resourceId !== prevProps.match.params.resourceId) {
+    if (this.props.match.params.resourceId !== prevProps.match.params.resourceId ||
+       this.props.location.search !== prevProps.location.search) {
       this._fetchData(this.props.match.params.resourceId)
     }
   }
@@ -79,6 +92,8 @@ class Resource extends React.PureComponent {
         </div>
         <div className="border-box">
           <RecordsTable
+            sortBy={this.state.sortBy}
+            direction={this.state.direction}
             resource={this.resource}
             records={this.state.records}
             paths={this.props.paths}

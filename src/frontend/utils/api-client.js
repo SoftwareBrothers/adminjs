@@ -8,8 +8,10 @@ export default class ApiClient {
     })
   }
 
-  async getRecords(resourceId, query) {
-    return this.client.get(`/api/resources/${resourceId}`)
+  async getRecords({ resourceId, query }) {
+    return this.client.get(`/api/resources/${resourceId}`, {
+      params: query,
+    })
   }
 
   async searchRecords(resourceId, query) {
