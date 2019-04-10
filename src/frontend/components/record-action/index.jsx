@@ -11,6 +11,7 @@ class RecordAction extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
+      isClient: false,
       recordTitle: ''
     }
   }
@@ -26,13 +27,21 @@ class RecordAction extends React.Component {
         recordId={recordId} />
     )
   }
+
+  componentDidMount() {
+    this.setState({ isClient: true })
+  }
   
   render() {
     const { resourceId, actionName, recordId } = this.props.match.params
     const resource = this.props.resources.find(r => r.id === resourceId)
     const action = resource.recordActions.find(r => r.name === actionName)
     const h = new ViewHelpers()
-    const Action = actions[action.name]
+    let Action = actions[action.name]
+    if (this.state.isClient && action.component) {
+      Action = AdminBro.Components[action.component]
+    }
+    Action = Action || ((props) => (<div></div>))
     
     return (
       <div className="view-edit">

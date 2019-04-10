@@ -7,12 +7,28 @@ import ViewHelpers from '../../../backend/utils/view-helpers'
 import actions from '../actions'
 
 class ResourceAction extends React.Component {
+  constructor(props){
+    super(props)
+    this.state = {
+      isClient: false,
+    }
+  }
+
+  componentDidMount(){
+    this.setState({ isClient: true })
+  }
+
   render() {
     const { resourceId, actionName } = this.props.match.params
     const resource = this.props.resources.find(r => r.id === resourceId)
     const action = resource.resourceActions.find(r => r.name === actionName)
     const h = new ViewHelpers()
-    const Action = actions[action.name]
+    let Action = actions[action.name]
+    if (this.state.isClient && action.component) {
+      Action = AdminBro.Components[action.component]
+    }
+    Action = Action || ((props) => (<div></div>))
+
     return (
       <div className="view-edit">
         <Breadcrumbs resource={resource} actionName={actionName}/>
