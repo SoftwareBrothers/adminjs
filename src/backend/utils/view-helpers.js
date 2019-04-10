@@ -37,9 +37,7 @@ class ViewHelpers {
   headScripts() {
     return [
       'https://use.fontawesome.com/releases/v5.3.1/js/all.js',
-      'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js',
       ...((this.customAssets && this.customAssets.styles) || []),
-      this.assetPath('app.bundle.js'),
     ].map(s => `<script src="${s}"></script>`)
   }
 

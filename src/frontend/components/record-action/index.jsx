@@ -17,13 +17,13 @@ class RecordAction extends React.Component {
 
   renderActionBtn(action) {
     const { resourceId, recordId } = this.props.match.params
-    const h = new ViewHelpers()
-    const actionWithHref = {
-      href: h.recordActionUrl(resourceId, recordId, action.name),
-      ...action,
-    }
     return (
-      <ActionBtn action={actionWithHref} key={action.name} className="is-primary" />
+      <ActionBtn
+        action={action}
+        key={action.name}
+        className="is-primary"
+        resourceId={resourceId}
+        recordId={recordId} />
     )
   }
   

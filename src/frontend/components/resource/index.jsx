@@ -59,6 +59,10 @@ class Resource extends React.PureComponent {
     this._fetchData(this.props.match.params.resourceId)
   }
 
+  handleActionPerformed() {
+    this._fetchData(this.props.match.params.resourceId)
+  }
+
   componentDidUpdate(prevProps) {
     if (this.props.match.params.resourceId !== prevProps.match.params.resourceId ||
        this.props.location.search !== prevProps.location.search) {
@@ -67,13 +71,13 @@ class Resource extends React.PureComponent {
   }
 
   renderActionBtn(action) {
-    const h = new ViewHelpers()
-    const actionWithHref = {
-      href: h.resourceActionUrl(this.resource.id, action.name),
-      ...action,
-    }
     return (
-      <ActionBtn action={actionWithHref} key={action.name} className="is-primary" />
+      <ActionBtn 
+        action={action}
+        key={action.name}
+        actionPerformed={this.handleActionPerformed.bind(this)}
+        className="is-primary"
+        resourceId={this.resource.id} />
     )
   }
 
@@ -111,6 +115,7 @@ class Resource extends React.PureComponent {
             resource={this.resource}
             records={this.state.records}
             paths={this.props.paths}
+            actionPerformed={this.handleActionPerformed.bind(this)}
             />
           <Paginate
             page={this.state.page}

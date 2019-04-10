@@ -4,10 +4,19 @@ const commonjs = require('rollup-plugin-commonjs')
 const resolve = require('rollup-plugin-node-resolve')
 const replace = require('rollup-plugin-replace')
 const plugin = require('@babel/plugin-transform-runtime')
+const fs = require('fs')
+const util = require('util')
 
-async function build() {
+const entryPath = '.entry.js'
+
+async function build(admin) {
+  const { Components } = admin.constructor
+  const entryFile = Object.keys(Components).map(c => {
+    return `import ${c} from '${Components[c]}'\nAdminBro.Components.${c} = ${c}\n`
+  }).join('')
+  await util.promisify(fs.writeFile)(entryPath, entryFile)
   const inputOptions = {
-    input: __dirname + '/../../frontend/app.jsx',
+    input: entryPath,
     plugins: [
       resolve({
         extensions: [ '.mjs', '.js', '.jsx', '.json' ],
@@ -21,7 +30,6 @@ async function build() {
         presets: ['@babel/preset-react', '@babel/preset-env'],
         plugins: [plugin],
         runtimeHelpers: true,
-        include: __dirname + '/../../frontend/**',
       })
     ],
     external: [
@@ -33,7 +41,6 @@ async function build() {
       'react-router-dom',
       'prop-types',
       'admin-bro',
-      'chart',
       'axios',
     ],
   }
@@ -42,7 +49,6 @@ async function build() {
 
   const bundled = await bundle.generate({
     format: 'iife',
-    name: 'AdminBro',
     globals: {
       'react': 'React',
       'redux': 'Redux',
@@ -53,7 +59,6 @@ async function build() {
       'react-router-dom': 'ReactRouterDOM',
       'axios': 'axios',
       'admin-bro': 'AdminBro',
-      'chart': 'Chart',
     }
   })
   return bundled.output[0].code

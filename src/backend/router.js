@@ -46,15 +46,17 @@ const Router = {
   }, {
     path: '/frontend/assets/icomoon.woff',
     src: [ASSETS_ROOT, 'fonts/icomoon.woff'].join('/'),
-  }, {
-    path: '/frontend/assets/app.bundle2.js',
-    src: [ASSETS_ROOT, 'scripts/app.bundle2.js'].join('/'),
   }],
   routes: [{
     method: 'GET',
     path: '',
     Controller: DashboardController,
     action: 'index',
+  }, {
+    method: 'GET',
+    path: '/frontend/assets/components.bundle.js',
+    Controller: DashboardController,
+    action: 'bundleComponents',
   }, {
     method: 'GET',
     path: '/frontend/assets/app.bundle.js',
@@ -110,6 +112,11 @@ const Router = {
     path: '/api/resources/{resourceId}/search/',
     Controller: ApiController,
     action: 'search',
+  }, {
+    method: 'GET',
+    path: '/api/dashboard',
+    Controller: ApiController,
+    action: 'dashboard',
   }],
 }
 

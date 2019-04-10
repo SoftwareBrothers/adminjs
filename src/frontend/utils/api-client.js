@@ -35,4 +35,10 @@ export default class ApiClient {
       data: payload,
     })
   }
+
+  async getDashboard({ params }) {
+    return this.client.get(`/api/dashboard`, {
+      params,
+    })
+  }
 }

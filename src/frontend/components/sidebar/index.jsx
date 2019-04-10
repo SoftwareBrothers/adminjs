@@ -28,7 +28,7 @@ class Sidebar extends React.Component {
         <div className="sidebar-main">
           <div className="sidebar-content">
             <div className="sidebar-top">
-              <SidebarHeader branding={this.props.branding}/>
+              <SidebarHeader branding={this.props.branding} paths={this.props.paths}/>
               <div className="sidebar-navigation" style={{display: 'block'}}>
                 <p className="menu-label">Navigation</p>
                 <ul className="menu-list">
@@ -49,6 +49,7 @@ class Sidebar extends React.Component {
 const mapStateToProps = (state) => ({
   resources: state.resources,
   branding: state.branding,
+  paths: state.paths,
 })
 
 export default connect(mapStateToProps)(Sidebar)

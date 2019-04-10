@@ -52,6 +52,7 @@ export default class RecordsTable extends React.Component {
                           resource={resource}
                           paths={paths}
                           key={record.id}
+                          actionPerformed={this.props.actionPerformed}
                           />
           ))}
         </tbody>

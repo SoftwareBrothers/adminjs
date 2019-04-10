@@ -296,6 +296,8 @@ class ResourceDecorator {
       actionType: action.actionType,
       icon: action.icon,
       label: action.label,
+      guard: action.guard,
+      component: action.component,
     }
   }
 

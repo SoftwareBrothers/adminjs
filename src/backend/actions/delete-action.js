@@ -4,13 +4,12 @@ module.exports = {
   actionType: 'record',
   icon: 'icomoon-remove-2',
   label: 'Remove',
-  guard: {
-    title: 'Confirm',
-    content: 'Do you really want to remove this item?',
-    button: 'Remove',
-  },
+  guard: 'Do you really want to remove this item?',
+  component: false,
   handler: async (request, response, data) => {
-    await data.resource.delete(data.record.id())
-    return response.redirect(data.h.listUrl(data.resource))
+    await data.resource.delete(request.params.recordId)
+    return {
+      redirectUrl: data.h.listUrl(data.resource.id())
+    }
   },
 }

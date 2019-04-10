@@ -2,6 +2,7 @@ const BaseController = require('./base-controller.js')
 
 const layoutTemplate = require('../../frontend/views/layout-template')
 const bundler = require('../utils/bundler')
+const componentsBundler = require('../utils/components-bundler')
 const ViewHelpers = require('../utils/view-helpers')
 
 class DashboardController extends BaseController {
@@ -28,6 +29,10 @@ class DashboardController extends BaseController {
 
   async bundle({ params, query, payload }, response) {
     return bundler()
+  }
+
+  async bundleComponents({ params, query, payload }, response) {
+    return componentsBundler(this._admin)
   }
 }
 

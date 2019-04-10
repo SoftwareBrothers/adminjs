@@ -13,11 +13,25 @@ const types = {
   richtext,
 }
 
-export default class PropertyType extends React.PureComponent {
+export default class PropertyType extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      isClient: false
+    }
+  }
+
+  componentDidMount() {
+    this.setState({ isClient: true })
+  }
+
   render() {
     const { property, resource, record, filter, where, paths} = this.props
     
-    const PropertyRenderer = types[property.type] && types[property.type][where] || defaultType[where]
+    let PropertyRenderer = types[property.type] && types[property.type][where] || defaultType[where]
+    if (property.components && property.components[where] && this.state.isClient) {
+      PropertyRenderer = AdminBro.Components[property.components[where]]
+    }
 
     return (
       <PropertyRenderer

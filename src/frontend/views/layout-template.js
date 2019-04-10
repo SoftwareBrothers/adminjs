@@ -1,3 +1,5 @@
+global.AdminBro = {Components: {}}
+
 import React from 'react'
 import { renderToString } from 'react-dom/server'
 import { StaticRouter } from 'react-router-dom'
@@ -6,9 +8,10 @@ import App from '../../frontend/components/app'
 import ViewHelpers from '../../backend/utils/view-helpers'
 import createStore, {
   initializeResources,
-  intializeBranding,
-  intializePaths,
-  intializeSession,
+  initializeBranding,
+  initializeDashboard,
+  initializePaths,
+  initializeSession,
 } from '../store'
 import { Provider } from 'react-redux'
 
@@ -37,11 +40,12 @@ const html = (admin, currentAdmin, location = '/') => {
   store.dispatch(initializeResources(
     admin.resources.map(r => r.decorate().toJSON())
   ))
-  store.dispatch(intializeBranding(h.branding))
-  const { loginPath, logoutPath, rootPath } = admin.options
+  store.dispatch(initializeBranding(h.branding))
+  const { loginPath, logoutPath, rootPath, dashboard } = admin.options
 
-  store.dispatch(intializePaths({ loginPath, logoutPath, rootPath }))
-  store.dispatch(intializeSession(currentAdmin))
+  store.dispatch(initializePaths({ loginPath, logoutPath, rootPath }))
+  store.dispatch(initializeSession(currentAdmin))
+  store.dispatch(initializeDashboard(dashboard))
   const reduxState = store.getState()
 
   const scripts = h.headScripts()
@@ -62,7 +66,10 @@ const html = (admin, currentAdmin, location = '/') => {
     <!DOCTYPE html>
     <html>
     <head>
-      <script>window.REDUX_STATE = ${JSON.stringify(reduxState)}</script>
+      <script>
+        window.REDUX_STATE = ${JSON.stringify(reduxState)};
+        window.AdminBro = { Components: {} };
+        </script>
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
       <title>AdminBro - ${h.branding.companyName}</title>
@@ -70,16 +77,23 @@ const html = (admin, currentAdmin, location = '/') => {
       ${resourceHead.styles.map(l => `<link rel="stylesheet" type="text/css" href="${l}">`).join('\n')}
       <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
       <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+      <script crossorigin="anonymous" src="https://unpkg.com/@material-ui/core/umd/material-ui.production.min.js"></script>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/react-redux/6.0.1/react-redux.min.js"></script>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/react-router/5.0.0/react-router.min.js"></script>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/react-router-dom/5.0.0/react-router-dom.min.js"></script>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/redux/4.0.1/redux.min.js"></script>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/prop-types/15.7.2/prop-types.js"></script>
+      <script src="${h.assetPath('app.bundle.js')}"></script>
+      <script src="${h.assetPath('components.bundle.js')}"></script>
       ${styles.join('\n')}
     </head>
     <body>
       <div id="app">${appComponent}</div>
+      <script>
+        var app = document.getElementById( 'app' );
+        ReactDOM.hydrate( AdminBro.Application, app );
+      </script>
       ${scripts.join('\n')}
     </body>
     </html>

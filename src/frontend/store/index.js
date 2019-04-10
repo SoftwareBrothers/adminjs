@@ -5,17 +5,22 @@ export const initializeResources = (data) => ({
   data,
 })
 
-export const intializeBranding = (data) => ({
+export const initializeDashboard = (data) => ({
+  type: 'DASHBOARD_INITIALIZE',
+  data,
+})
+
+export const initializeBranding = (data) => ({
   type: 'BRANDING_INITIALIZE',
   data,
 })
 
-export const intializePaths = (data) => ({
+export const initializePaths = (data) => ({
   type: 'PATHS_INITIALIZE',
   data,
 })
 
-export const intializeSession = (data = {}) => ({
+export const initializeSession = (data = {}) => ({
   type: 'SESSION_INITIALIZE',
   data,
 })
@@ -44,6 +49,14 @@ const pathsReducer = (state = {}, action) => {
   }
 }
 
+const dashboardReducer = (state = {}, action) => {
+  switch(action.type) {
+    case 'DASHBOARD_INITIALIZE':
+      return action.data
+    default: return state
+  }
+}
+
 const sessionReducer = (state = {}, action) => {
   switch(action.type) {
     case 'SESSION_INITIALIZE':
@@ -57,6 +70,7 @@ const reducer = combineReducers({
   branding: brandingReducer,
   paths: pathsReducer,
   session: sessionReducer,
+  dashboard: dashboardReducer,
 })
 
 export default ( initialState = {} ) => {

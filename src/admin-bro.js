@@ -1,4 +1,5 @@
 const _ = require('lodash')
+const path = require('path')
 
 const Renderer = require('./backend/utils/renderer')
 const BaseResource = require('./backend/adapters/base-resource')
@@ -9,7 +10,6 @@ const PageBuilder = require('./backend/utils/page-builder')
 const Filter = require('./backend/utils/filter')
 const ValidationError = require('./backend/utils/validation-error')
 const ResourcesFactory = require('./backend/utils/resources-factory')
-const DefaultDashboard = require('./backend/defaults/default-dashboard')
 const PROPERTY_TYPES = require('./backend/property-types')
 const ACTIONS = require('./backend/actions')
 
@@ -75,7 +75,7 @@ const defaults = {
     companyName: 'Company Name',
     softwareBrothers: true,
   },
-  dashboard: DefaultDashboard,
+  dashboard: {},
   assets: {
     styles: ['/style.css'],
     scripts: ['/scripts.js'],
@@ -109,7 +109,6 @@ class AdminBro {
     const { databases, resources } = this.options
     const resourcesFactory = new ResourcesFactory(this, AdminBro.registeredAdapters)
     this.resources = resourcesFactory.buildResources({ databases, resources })
-    this.DashboardPage = options.dashboard || defaults.dashboard
   }
 
   /**
@@ -155,7 +154,24 @@ class AdminBro {
   findResource(resourceId) {
     return this.resources.find(m => m.id() === resourceId)
   }
+
+  static require(name, src) {
+    let filePath = ''
+    if (src[0] === '/') {
+      filePath = src
+    } else {
+      const stack=((new Error).stack).split("\n")
+      const m = stack[2].match(/\((.*):[0-9]+:[0-9]+\)/)
+      filePath = path.join(path.dirname(m[1]), src)
+    }
+
+    AdminBro.Components[name] = filePath
+    
+    return name
+  }
 }
+
+AdminBro.Components = {}
 
 /**
  * List of all supported routes along with controllers

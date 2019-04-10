@@ -113,6 +113,17 @@ class ApiController {
       resource, resourceAction, h,
     })
   }
+
+  async dashboard(request, response) {
+    const h = new ViewHelpers(this._admin)
+    const handler = this._admin.options.dashboard && this._admin.options.dashboard.handler
+    if (handler) {
+      return handler(request, response, { h })
+    }
+    return {
+      message: 'You can override this method by setting up dashboard.handler fuction in AdminBro options'
+    }
+  }
 }
 
 module.exports = ApiController

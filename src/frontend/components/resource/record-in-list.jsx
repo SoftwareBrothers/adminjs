@@ -6,13 +6,14 @@ import PropertyType from '../property-type'
 
 export default class RecordInList extends React.PureComponent {
   renderActionBtn(action, record) {
-    const h = new ViewHelpers()
-    const actionWithHref = {
-      href: h.recordActionUrl(this.props.resource.id, record.id, action.name),
-      ...action,
-    }
     return (
-      <ActionBtn action={actionWithHref} key={action.name} className="is-white" />
+      <ActionBtn
+        action={action}
+        key={action.name}
+        resourceId= {this.props.resource.id}
+        recordId= {record.id}
+        actionPerformed={this.props.actionPerformed}
+        className="is-white" />
     )
   }
 
