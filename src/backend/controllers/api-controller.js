@@ -44,6 +44,8 @@ class ApiController {
         total,
         perPage,
         page,
+        direction: sort.direction,
+        sortBy: sort.sortBy,
       },
       records: populatedRecords.map(r => r.toJSON())
     }

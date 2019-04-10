@@ -15,7 +15,7 @@ const types = {
 
 export default class PropertyType extends React.PureComponent {
   render() {
-    const { property, resource, record, where, paths} = this.props
+    const { property, resource, record, filter, where, paths} = this.props
     
     const PropertyRenderer = types[property.type] && types[property.type][where] || defaultType[where]
 
@@ -25,6 +25,7 @@ export default class PropertyType extends React.PureComponent {
         resource={resource}
         paths={paths}
         record={record}
+        filter={filter}
         onChange={this.props.onChange}
       />
     )

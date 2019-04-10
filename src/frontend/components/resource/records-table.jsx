@@ -38,7 +38,6 @@ export default class RecordsTable extends React.Component {
     const resource = this.props.resource
     const paths = this.props.paths
     const records = this.props.records
-    console.log(records)
     return (
       <table className="table is-fullwidth">
         <thead>
