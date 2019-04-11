@@ -1,10 +1,12 @@
 const layoutTemplate = require('../../frontend/layout-template')
 const appBundler = require('../bundler/app-bundler')
 const componentsBundler = require('../bundler/components-bundler')
+const ViewHelpers = require('../utils/view-helpers')
 
 class AppController {
   constructor({ admin }, currentAdmin) {
     this._admin = admin
+    this.h = new ViewHelpers(admin)
     this.currentAdmin = currentAdmin
   }
 
