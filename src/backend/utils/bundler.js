@@ -18,7 +18,7 @@ async function build() {
       }),
       commonjs(),
       babel({
-        presets: ['@babel/preset-react', '@babel/preset-env'],
+        presets: [require.resolve('@babel/preset-react'), require.resolve('@babel/preset-env')],
         plugins: [plugin],
         runtimeHelpers: true,
         include: __dirname + '/../../frontend/**',

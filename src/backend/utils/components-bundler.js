@@ -27,9 +27,7 @@ async function build(admin) {
       }),
       commonjs(),
       babel({
-        presets: ['@babel/preset-react', '@babel/preset-env'],
-        plugins: [plugin],
-        runtimeHelpers: true,
+        presets: [require.resolve('@babel/preset-react'), require.resolve('@babel/preset-env')]
       })
     ],
     external: [

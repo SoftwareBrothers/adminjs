@@ -1,6 +1,6 @@
 require('@babel/polyfill')
 require('@babel/register')({
-  presets: ['@babel/preset-react', '@babel/preset-env'],
+  presets: [require.resolve('@babel/preset-react'), require.resolve('@babel/preset-env')],
   extensions: ['.jsx', '.js'],
   only: [/src\/frontend/],
 })
