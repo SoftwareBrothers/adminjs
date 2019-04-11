@@ -1,5 +1,4 @@
-const DashboardController = require('./controllers/dashboard-controller')
-const ResourcesController = require('./controllers/resources-controller')
+const AppController = require('./controllers/app-controller')
 const ApiController = require('./controllers/api-controller')
 
 const ASSETS_ROOT = `${__dirname}/../frontend/assets/`
@@ -50,32 +49,32 @@ const Router = {
   routes: [{
     method: 'GET',
     path: '',
-    Controller: DashboardController,
+    Controller: AppController,
     action: 'index',
   }, {
     method: 'GET',
     path: '/frontend/assets/components.bundle.js',
-    Controller: DashboardController,
+    Controller: AppController,
     action: 'bundleComponents',
   }, {
     method: 'GET',
     path: '/frontend/assets/app.bundle.js',
-    Controller: DashboardController,
+    Controller: AppController,
     action: 'bundle',
   }, {
     method: 'GET',
     path: '/resources/{resourceId}',
-    Controller: DashboardController,
+    Controller: AppController,
     action: 'resource',
   }, {
     method: 'GET',
     path: '/resources/{resourceId}/actions/{action}',
-    Controller: DashboardController,
+    Controller: AppController,
     action: 'resourceAction',
   }, {
     method: 'GET',
     path: '/resources/{resourceId}/records/{recordId}/{action}',
-    Controller: DashboardController,
+    Controller: AppController,
     action: 'recordAction',
   }, {
     method: 'GET',

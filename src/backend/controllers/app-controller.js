@@ -1,14 +1,11 @@
-const BaseController = require('./base-controller.js')
-
 const layoutTemplate = require('../../frontend/layout-template')
-const bundler = require('../utils/bundler')
-const componentsBundler = require('../utils/components-bundler')
-const ViewHelpers = require('../utils/view-helpers')
+const appBundler = require('../bundler/app-bundler')
+const componentsBundler = require('../bundler/components-bundler')
 
-class DashboardController extends BaseController {
-  constructor(...params) {
-    super(...params)
-    this.h = new ViewHelpers(this._admin)
+class AppController {
+  constructor({ admin }, currentAdmin) {
+    this._admin = admin
+    this.currentAdmin = currentAdmin
   }
 
   async index({ params, query, payload }, response) {
@@ -28,7 +25,7 @@ class DashboardController extends BaseController {
   }
 
   async bundle({ params, query, payload }, response) {
-    return bundler()
+    return appBundler()
   }
 
   async bundleComponents({ params, query, payload }, response) {
@@ -36,4 +33,4 @@ class DashboardController extends BaseController {
   }
 }
 
-module.exports = DashboardController
+module.exports = AppController

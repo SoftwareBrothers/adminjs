@@ -41,8 +41,8 @@ class Dashboard extends React.Component {
     let Component
     if (this.props.dashboard &&
         this.props.dashboard.component &&
-        AdminBro.Components[this.props.dashboard.component] &&
-        this.state.isClient
+        this.state.isClient &&
+        AdminBro.Components[this.props.dashboard.component]
         ) {
       Component = AdminBro.Components[this.props.dashboard.component]
     } else if (!this.props.dashboard.title && !this.props.dashboard.subtitle) {
