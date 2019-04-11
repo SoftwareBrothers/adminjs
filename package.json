@@ -41,6 +41,7 @@
     "flat": "^4.1.0",
     "jw-paginate": "^1.0.2",
     "lodash": "^4.17.11",
+    "pug": "^2.0.3",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-redux": "^6.0.1",

@@ -10,7 +10,10 @@ export default class Filter extends React.PureComponent {
   async loadOptions(inputValue) {
     this.api = new ApiClient()
     const { property } = this.props
-    const records = await this.api.searchRecords(property.reference, inputValue)
+    const records = await this.api.searchRecords({
+      resourceId: property.reference,
+      query: inputValue,
+    })
     return records.map(r => ({ value: r.id, label: r.title }))
   }
 

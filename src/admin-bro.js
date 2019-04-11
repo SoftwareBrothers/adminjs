@@ -6,11 +6,9 @@ const BaseResource = require('./backend/adapters/base-resource')
 const BaseDatabase = require('./backend/adapters/base-database')
 const BaseRecord = require('./backend/adapters/base-record')
 const BaseProperty = require('./backend/adapters/base-property')
-const PageBuilder = require('./backend/utils/page-builder')
 const Filter = require('./backend/utils/filter')
 const ValidationError = require('./backend/utils/validation-error')
 const ResourcesFactory = require('./backend/utils/resources-factory')
-const PROPERTY_TYPES = require('./backend/property-types')
 const ACTIONS = require('./backend/actions')
 
 const Router = require('./backend/router')
@@ -204,12 +202,6 @@ AdminBro.BaseRecord = BaseRecord
 AdminBro.BaseProperty = BaseProperty
 
 /**
- * PageBuilder
- * @type {typeof PageBuilder}
- */
-AdminBro.PageBuilder = PageBuilder
-
-/**
  * Filter
  * @type {typeof Filter}
  */
@@ -222,12 +214,6 @@ AdminBro.Filter = Filter
 AdminBro.ValidationError = ValidationError
 
 AdminBro.registeredAdapters = []
-
-/**
- * List of all property types supported by AdminBro
- * @type {Object<string, PropertyType>}
- */
-AdminBro.PROPERTY_TYPES = PROPERTY_TYPES
 
 /**
  * List of all Actions defined by default in AdminBro

@@ -112,57 +112,6 @@ class PropertyDecorator {
   }
 
   /**
-   * Returns {@link PropertyType} for a given property. It property type
-   * is defined returns it, otherwise it returns default PropertyType
-   *
-   * @returns {PropertyType}
-   * @private
-   */
-  propertyType() {
-    const { PROPERTY_TYPES } = this._admin.constructor
-    const type = PROPERTY_TYPES[this.type()] ? this.type() : 'defaultType'
-    return PROPERTY_TYPES[type]
-  }
-
-  /**
-   * Renders field either in view, edit, list pages or in filter. When user passed render function
-   * in options it is passed to it, otherwise use one function from available
-   * {@link PropertyType PropertyTypes}
-   *
-   * @param {String} where            one of 'view', 'edit', 'list', 'filter'
-   * @param {BaseRecord | Object} recordOrFilters
-   * @returns {String}                html string which should be rendered in a "where"
-   * @private
-   *
-   * @example
-   * render('filter', filters)
-   * render('show', record)
-   */
-  render(where, recordOrFilters) {
-    const helpers = new ViewHelpers({ admin: this._admin })
-    if (this.options.render && this.options.render[where]) {
-      return this.options.render[where](this, recordOrFilters, helpers)
-    }
-    return this.propertyType()[where](this, recordOrFilters, helpers)
-  }
-
-  /**
-   * Returns scripts which should be included in the head for given property type.
-   *
-   * @see PropertyType
-   * @returns {Array<String>}
-   */
-  headScripts() {
-    let head
-    if (this.options.render && this.options.render.head) {
-      ({ head } = this.options.render)
-    } else {
-      ({ head } = this.propertyType())
-    }
-    return head
-  }
-
-  /**
    * Indicates if given property should be visible
    *
    * @param {String} element      it could be either "list", "edit" or "show"

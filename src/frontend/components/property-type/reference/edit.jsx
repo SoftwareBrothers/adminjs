@@ -14,7 +14,10 @@ export default class Edit extends React.Component {
 
   async loadOptions(inputValue) {
     const { property } = this.props
-    const records = await this.api.searchRecords(property.reference, inputValue)
+    const records = await this.api.searchRecords({
+      resourceId: property.reference,
+      query: inputValue,
+    })
     return records.map(r => ({ value: r.id, label: r.title }))
   }
 

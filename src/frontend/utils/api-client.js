@@ -14,7 +14,7 @@ export default class ApiClient {
     })
   }
 
-  async searchRecords(resourceId, query) {
+  async searchRecords({ resourceId, query }) {
     const q = encodeURIComponent(query)
     const response = await this.client.get(`/api/resources/${resourceId}/search/${q}`)
     return response.data.records

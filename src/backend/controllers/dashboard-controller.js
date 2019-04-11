@@ -1,6 +1,6 @@
 const BaseController = require('./base-controller.js')
 
-const layoutTemplate = require('../../frontend/views/layout-template')
+const layoutTemplate = require('../../frontend/layout-template')
 const bundler = require('../utils/bundler')
 const componentsBundler = require('../utils/components-bundler')
 const ViewHelpers = require('../utils/view-helpers')

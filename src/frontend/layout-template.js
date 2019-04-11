@@ -1,56 +1,25 @@
-global.AdminBro = {Components: {}}
-
 import React from 'react'
 import { renderToString } from 'react-dom/server'
 import { StaticRouter } from 'react-router-dom'
 
-import App from '../../frontend/components/app'
-import ViewHelpers from '../../backend/utils/view-helpers'
-import createStore, {
-  initializeResources,
-  initializeBranding,
-  initializeDashboard,
-  initializePaths,
-  initializeSession,
-} from '../store'
-import { Provider } from 'react-redux'
+import App from '../frontend/components/app'
+import ViewHelpers from '../backend/utils/view-helpers'
+import initializeStore from './store'
 
-const resourcesCustomHead = (resources) => {
-  const scripts = {}
-  const styles = {}
-  resources.forEach(resource => {
-    const customHead = resource.decorate().customHeadScripts() || {}
-    customHead.scripts = customHead.scripts || []
-    customHead.styles = customHead.styles || []
-    customHead.scripts.forEach(s => scripts[s] = 1)
-    customHead.styles.forEach(s => styles[s] = 1)
-  })
-  return {
-    scripts: Object.keys(scripts),
-    styles: Object.keys(styles),
-  }
-}
+import { Provider } from 'react-redux'
 
 const html = (admin, currentAdmin, location = '/') => {
   const context = {}
   const h = new ViewHelpers({ options: admin.options })
   const locationInAdmin = h.urlBuilder([location])
 
-  const store = createStore()
-  store.dispatch(initializeResources(
-    admin.resources.map(r => r.decorate().toJSON())
-  ))
-  store.dispatch(initializeBranding(h.branding))
-  const { loginPath, logoutPath, rootPath, dashboard } = admin.options
-
-  store.dispatch(initializePaths({ loginPath, logoutPath, rootPath }))
-  store.dispatch(initializeSession(currentAdmin))
-  store.dispatch(initializeDashboard(dashboard))
+  const store = initializeStore(admin, currentAdmin)
   const reduxState = store.getState()
 
-  const scripts = h.headScripts()
-  const styles = h.headStyles()
-  const resourceHead = resourcesCustomHead(admin.resources)
+  const scripts = ((admin.options.assets && admin.options.assets.scripts) || [])
+    .map(s => `<script src="${s}"></script>`)
+  const styles = ((admin.options.assets && admin.options.assets.styles) || [])
+    .map(l => `<link rel="stylesheet" type="text/css" href="${l}">`)
 
   const jsx = (
     <Provider store={ store }>
@@ -72,9 +41,19 @@ const html = (admin, currentAdmin, location = '/') => {
         </script>
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-      <title>AdminBro - ${h.branding.companyName}</title>
-      ${resourceHead.scripts.map(s => `<script src="${s}"></script>`).join('\n')}
-      ${resourceHead.styles.map(l => `<link rel="stylesheet" type="text/css" href="${l}">`).join('\n')}
+      <title>AdminBro - ${admin.options.branding.companyName}</title>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.5.7/flatpickr.min.js"></script>
+      <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.5.7/flatpickr.min.css">
+
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.5.1/css/bulma.min.css" type="text/css">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-mfizz/2.4.1/font-mfizz.min.css" type="text/css">
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,700" type="text/css">
+      
+      <link rel="stylesheet" href="${h.assetPath('style.min.css')}" type="text/css">
+
+      <link rel="stylesheet" type="text/css" href="https://cdn.quilljs.com/1.3.6/quill.snow.css">
+      <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+      <script src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
       <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
       <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
       <script crossorigin="anonymous" src="https://unpkg.com/@material-ui/core/umd/material-ui.production.min.js"></script>
