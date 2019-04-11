@@ -12,15 +12,11 @@ class ViewHelpers {
   /**
    * To each related path adds rootPath passed by the user, as well as a query string
    * @param  {String[]} paths   list of parts of the url
-   * @param  {Object}   query object used to build query string
    * @return {String}       path
    */
-  urlBuilder(paths, query) {
+  urlBuilder(paths) {
     const { rootPath } = this.options
     let url = `${rootPath}/${paths.join('/')}`
-    if (query) {
-      url = `${url}?${this.getQueryPath(query)}`
-    }
     return url
   }
 
@@ -54,15 +50,15 @@ class ViewHelpers {
    * @param {Object} [query]
    * @return {String}
    */
-  listUrl(resourceId, query) {
-    return this.urlBuilder(['resources', resourceId], query)
+  listUrl({ resourceId }) {
+    return this.urlBuilder(['resources', resourceId])
   }
 
-  resourceActionUrl(resourceId, actionName) {
+  resourceActionUrl({ resourceId, actionName }) {
     return this.urlBuilder(['resources', resourceId, 'actions', actionName])
   }
 
-  recordActionUrl(resourceId, recordId, actionName) {
+  recordActionUrl({ resourceId, recordId, actionName }) {
     return this.urlBuilder(['resources', resourceId, 'records', recordId, actionName])
   }
 

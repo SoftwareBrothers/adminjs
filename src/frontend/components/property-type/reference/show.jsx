@@ -11,7 +11,9 @@ export default class Show extends React.PureComponent {
     const value = (populated && populated.title) || refId
     
     if (resource.recordActions.find(a => a.name === 'show') && populated){
-      const href = h.recordActionUrl(property.reference, refId, 'show')
+      const href = h.recordActionUrl({
+        resourceId: property.reference, recordId: refId, actionName: 'show',
+      })
       return (
         <Link to={href}>{value}</Link>
       )

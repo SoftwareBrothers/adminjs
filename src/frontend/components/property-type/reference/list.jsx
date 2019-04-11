@@ -11,7 +11,9 @@ export default class List extends React.PureComponent {
 
     if (resource.recordActions.find(a => a.name === 'show') && populated){
       const h = new ViewHelpers()
-      const href = h.recordActionUrl(property.reference, refId, 'show')
+      const href = h.recordActionUrl({
+        resourceId: property.reference, recordId: refId, actionName: 'show',
+      })
       return (
         <Link to={href}>{value}</Link>
       )

@@ -16,9 +16,9 @@ module.exports = {
       await record.update(request.payload.record)
       if (record.isValid()) {
         return {
-          redirectUrl: data.h.recordActionUrl(
-            data.resource.id(), record.id(), 'show',
-          ),
+          redirectUrl: data.h.recordActionUrl({
+            resourceId: data.resource.id(), recordId: record.id(), actionName: 'show'
+          }),
           record: record.toJSON(),
         }
       }

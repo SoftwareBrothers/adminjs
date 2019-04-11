@@ -34,7 +34,7 @@ class ResourceAction extends React.Component {
         <Breadcrumbs resource={resource} actionName={actionName}/>
         <div className="level">
           <h3 className="title">
-            <Link to={h.listUrl(resource.id)} className="button is-text is-back">
+            <Link to={h.listUrl({ resourceId: resource.id })} className="button is-text is-back">
               <span className="icon is-small"><i className="icomoon-pagination-left"></i></span>
             </Link>
             {action.label}

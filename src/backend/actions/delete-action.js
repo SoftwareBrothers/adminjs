@@ -9,7 +9,7 @@ module.exports = {
   handler: async (request, response, data) => {
     await data.resource.delete(request.params.recordId)
     return {
-      redirectUrl: data.h.listUrl(data.resource.id())
+      redirectUrl: data.h.listUrl({ resourceId: data.resource.id() })
     }
   },
 }

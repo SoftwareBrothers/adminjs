@@ -17,11 +17,13 @@ class AppController {
   }
 
   async resourceAction({ params, query, payload }, response) {
-    return layoutTemplate(this._admin, this.currentAdmin, this.h.resourceActionUrl(params.resourceId, params.actionName))
+    const { resourceId, actionName } = params
+    return layoutTemplate(this._admin, this.currentAdmin, this.h.resourceActionUrl({ resourceId, actionName }))
   }
 
   async recordAction({ params, query, payload }, response) {
-    return layoutTemplate(this._admin, this.currentAdmin, this.h.recordActionUrl(params.resourceId, params.actionName, params.recordId))
+    const { resourceId, actionName, recordId } = params
+    return layoutTemplate(this._admin, this.currentAdmin, this.h.recordActionUrl({ resourceId, actionName, recordId }))
   }
 
   async bundle({ params, query, payload }, response) {

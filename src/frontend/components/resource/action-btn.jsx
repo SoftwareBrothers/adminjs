@@ -29,9 +29,11 @@ class ActionBtn extends React.PureComponent {
 
   render() {
     const h = new ViewHelpers()
+    const { resourceId, recordId } = this.props
+    const actionName = this.props.action.name
     const href = this.props.recordId ?
-      h.recordActionUrl(this.props.resourceId, this.props.recordId, this.props.action.name) :
-      h.resourceActionUrl(this.props.resourceId, this.props.action.name)
+      h.recordActionUrl({ resourceId, recordId, actionName }) :
+      h.resourceActionUrl({ resourceId, actionName })
     return (
       <div className="control">
         <Link
