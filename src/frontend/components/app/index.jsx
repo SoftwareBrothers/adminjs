@@ -1,14 +1,22 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { Switch, Route } from 'react-router-dom'
-import PropTypes from 'prop-types'
+import styled from 'styled-components'
 
 import ViewHelpers from '../../../backend/utils/view-helpers'
 import { Sidebar, Topbar } from '../layout'
+import { pathsType } from '../../types'
 
 import {
   Resource, Dashboard, ResourceAction, RecordAction,
 } from '../routes'
+
+const ApplicationWrapper = styled.div.attrs({
+  className: 'columns',
+})`
+  font-size: 14px;
+  font-family: 'Roboto', sans-serif;
+`
 
 const App = (props) => {
   const { paths } = props
@@ -23,9 +31,9 @@ const App = (props) => {
   const listUrl = h.listUrl({ resourceId })
 
   return (
-    <div className="columns container-main">
+    <ApplicationWrapper>
       <Sidebar />
-      <div className="column content-wrapper">
+      <div className="column">
         <Topbar />
         <Switch>
           <Route path={h.dashboardUrl()} exact component={Dashboard} />
@@ -34,16 +42,12 @@ const App = (props) => {
           <Route path={recordActionUrl} exact component={RecordAction} />
         </Switch>
       </div>
-    </div>
+    </ApplicationWrapper>
   )
 }
 
 App.propTypes = {
-  paths: PropTypes.shape({
-    loginPath: PropTypes.string.isRequired,
-    rootPath: PropTypes.string.isRequired,
-    logoutPath: PropTypes.string.isRequired,
-  }).isRequired,
+  paths: pathsType.isRequired,
 }
 
 const mapStateToProps = state => ({

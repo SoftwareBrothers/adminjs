@@ -185,9 +185,9 @@ class PropertyDecorator {
    */
   isId() {
     if (typeof this.options.isId === 'undefined') {
-      return this._property.isId()
+      return !!this._property.isId()
     }
-    return this.options.isId
+    return !!this.options.isId
   }
 
   /**

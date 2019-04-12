@@ -1,52 +1,63 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import SidebarHeader from './sidebar-header'
+import styled from 'styled-components'
+
+import { sizes, colors, fonts } from '../../../styles/variables'
+import { pathsType, brandingType, resourceType } from '../../../types'
+
+import SidebarBranding from './sidebar-branding'
 import SidebarParent from './sidebar-parent'
 import SidebarFooter from './sidebar-footer'
+import groupResources from './group-resources'
+import Hamburger from './hamburger'
 
-const groupResources = (resources) => {
-  const map = resources.reduce((memo, resource) => {
-    if (memo[resource.parent.name]) {
-      memo[resource.parent.name].push(resource)
-    } else {
-      memo[resource.parent.name] = [resource]
-    }
-    memo[resource.parent.name].icon = resource.parent.icon
-    return memo
-  }, {})
-  return Object.keys(map).map(parentName => ({
-    name: parentName,
-    icon: map[parentName].icon,
-    resources: map[parentName],
-  }))
+const SidebarWrapper = styled.aside`
+  padding: ${sizes.paddingLayout};
+  width: ${sizes.sidebarWidth};
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100vh;
+  overflow-y: auto;
+`
+
+const SidebarLabel = styled.h2`
+  margin-top: ${sizes.padding};
+  margin-left: ${sizes.padding};
+  margin-bottom: ${sizes.padding};
+  color: ${colors.lightText};
+  font-size: ${fonts.min};
+  text-transform: uppercase;
+  letter-spacing: .1em;
+`
+
+const Sidebar = (props) => {
+  const { branding, paths, resources } = props
+  return (
+    <SidebarWrapper>
+      {/* <Hamburger /> */}
+      <section>
+        <SidebarBranding branding={branding} paths={paths} />
+        <SidebarLabel>Navigation</SidebarLabel>
+        <ul>
+          {groupResources(resources).map(parent => (
+            <SidebarParent parent={parent} key={parent.name} />
+          ))}
+        </ul>
+      </section>
+      {branding.softwareBrothers && <SidebarFooter />}
+    </SidebarWrapper>
+  )
 }
 
-class Sidebar extends React.Component {
-  render() {
-    return (
-      <aside className="sidebar">
-        <div className="sidebar-main">
-          <div className="sidebar-content">
-            <div className="sidebar-top">
-              <SidebarHeader branding={this.props.branding} paths={this.props.paths}/>
-              <div className="sidebar-navigation" style={{display: 'block'}}>
-                <p className="menu-label">Navigation</p>
-                <ul className="menu-list">
-                  {groupResources(this.props.resources).map(parent => (
-                    <SidebarParent parent={parent} key={parent.name}/>
-                  ))}
-                </ul>
-              </div>
-            </div>
-            {this.props.branding.softwareBrothers && <SidebarFooter />}
-          </div>
-        </div>
-      </aside>
-    )
-  }
+Sidebar.propTypes = {
+  paths: pathsType.isRequired,
+  branding: brandingType.isRequired,
+  resources: PropTypes.arrayOf(resourceType).isRequired,
 }
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   resources: state.resources,
   branding: state.branding,
   paths: state.paths,

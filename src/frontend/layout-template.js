@@ -1,12 +1,11 @@
 import React from 'react'
 import { renderToString } from 'react-dom/server'
 import { StaticRouter } from 'react-router-dom'
+import { Provider } from 'react-redux'
 
-import App from '../frontend/components/app'
+import App from './components/app'
 import ViewHelpers from '../backend/utils/view-helpers'
 import initializeStore from './store'
-
-import { Provider } from 'react-redux'
 
 const html = (admin, currentAdmin, location = '/') => {
   const context = {}
@@ -22,8 +21,8 @@ const html = (admin, currentAdmin, location = '/') => {
     .map(l => `<link rel="stylesheet" type="text/css" href="${l}">`)
 
   const jsx = (
-    <Provider store={ store }>
-      <StaticRouter context={ context } location={ locationInAdmin }>
+    <Provider store={store}>
+      <StaticRouter context={context} location={locationInAdmin}>
         <App />
       </StaticRouter>
     </Provider>
@@ -49,7 +48,7 @@ const html = (admin, currentAdmin, location = '/') => {
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-mfizz/2.4.1/font-mfizz.min.css" type="text/css">
       <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,700" type="text/css">
       
-      <link rel="stylesheet" href="${h.assetPath('style.min.css')}" type="text/css">
+      <link rel="stylesheet" href="${false && h.assetPath('style.min.css')}" type="text/css">
 
       <link rel="stylesheet" type="text/css" href="https://cdn.quilljs.com/1.3.6/quill.snow.css">
       <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
@@ -63,6 +62,7 @@ const html = (admin, currentAdmin, location = '/') => {
       <script src="https://cdnjs.cloudflare.com/ajax/libs/redux/4.0.1/redux.min.js"></script>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/prop-types/15.7.2/prop-types.js"></script>
+      <script src="https://unpkg.com/styled-components/dist/styled-components.min.js"></script>
       <script src="${h.assetPath('app.bundle.js')}"></script>
       <script src="${h.assetPath('components.bundle.js')}"></script>
       ${styles.join('\n')}

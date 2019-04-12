@@ -1,17 +1,20 @@
-const bundler = require('./bundler')
 const fs = require('fs')
 const path = require('path')
 const util = require('util')
+const bundler = require('./bundler')
 
 const tmpPath = '.adminbro'
 const entryPath = path.join(tmpPath, '.entry.js')
 
 async function build(admin) {
   const { Components } = admin.constructor
-  const entryFile = Object.keys(Components).map(c => {
-    return [`import ${c} from '${Components[c]}'`,
-            `AdminBro.Components.${c} = ${c}`].join('\n')
-  }).join('\n\n')
+  const entryFile = Object.keys(Components).map(c => (
+    [
+      `import ${c} from '${Components[c]}'`,
+      `AdminBro.Components.${c} = ${c}`
+    ].join('\n')
+  )).join('\n\n')
+
   try {
     await util.promisify(fs.mkdir)(tmpPath, { recursive: true })
   } catch (error) {

@@ -1,17 +1,35 @@
 import React from 'react'
+import styled from 'styled-components'
 
-export default class SidebarFooter extends React.PureComponent {
-  render() {
-    return (
-      <div className="sidebar-footer">
-        <p className="sidebar-created-by">
-          With<i className="fas fa-heart"></i>
-          by
-          <a href="http://softwarebrothers.co" target="_blank">
-            SoftwareBrothers
-          </a>
-        </p>
-      </div>
-    )
+import { colors, fonts, sizes } from '../../../styles/variables'
+
+const StyledFooter = styled.p`
+  font-size: ${fonts.min};
+  text-align: center;
+  color: ${colors.lightText};
+
+  & > svg, & > a {
+    color: ${colors.love};
+    margin: 0 ${sizes.paddingMin};
   }
+`
+
+
+const SidebarFooter = (props) => {
+  return (
+    <StyledFooter>
+      With
+      <i className="fas fa-heart" />
+      by
+      <a
+        href="http://softwarebrothers.co" 
+        target="_blank" 
+        rel="noopener noreferrer"
+      >
+        SoftwareBrothers
+      </a>
+    </StyledFooter>
+  )
 }
+
+export default SidebarFooter
