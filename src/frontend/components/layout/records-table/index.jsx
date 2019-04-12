@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import RecordInList from './record-in-list'
+import RecordInList from '../record-in-list'
 
 export default class RecordsTable extends React.Component {
   renderPropertyHeader(property) {

@@ -1,7 +1,7 @@
 import React from 'react'
 import { withRouter } from 'react-router-dom'
 
-import PropertyType from '../property-type'
+import PropertyType from '../../property-type'
 
 class Filter extends React.Component {
   constructor(props) {

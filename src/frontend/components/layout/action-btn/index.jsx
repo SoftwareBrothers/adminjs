@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link, withRouter } from 'react-router-dom'
-import ApiClient from '../../utils/api-client'
-import ViewHelpers from '../../../backend/utils/view-helpers'
+import ApiClient from '../../../utils/api-client'
+import ViewHelpers from '../../../../backend/utils/view-helpers'
 
 class ActionBtn extends React.PureComponent {
   handleClick(event) {

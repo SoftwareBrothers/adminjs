@@ -1,6 +1,6 @@
 import React from 'react'
 import PropertyType from '../property-type'
-import Loader from '../loader'
+import { Loader } from '../layout'
 import ApiClient from '../../utils/api-client'
 
 export default class Show extends React.Component {

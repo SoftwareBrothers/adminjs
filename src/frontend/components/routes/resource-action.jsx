@@ -1,8 +1,9 @@
 import React from 'react'
-import { connect } from "react-redux"
-
-import Breadcrumbs from '../breadcrumbs'
+import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
+
+import { Breadcrumbs } from '../layout'
+
 import ViewHelpers from '../../../backend/utils/view-helpers'
 import actions from '../actions'
 

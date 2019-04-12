@@ -164,7 +164,7 @@ class AdminBro {
     }
 
     AdminBro.Components[name] = filePath
-    
+
     return name
   }
 }

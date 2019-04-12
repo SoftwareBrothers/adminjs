@@ -1,6 +1,6 @@
 import React from 'react'
 import { withRouter } from 'react-router-dom'
-import Loader from '../loader'
+import { Loader } from '../layout'
 import ApiClient from '../../utils/api-client'
 
 class Delete extends React.PureComponent {

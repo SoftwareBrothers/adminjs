@@ -1,6 +1,5 @@
 import React from 'react'
 
-import ViewHelpers from '../../../backend/utils/view-helpers'
 import JWPaginate from 'jw-paginate'
 import { withRouter, Link } from 'react-router-dom'
 

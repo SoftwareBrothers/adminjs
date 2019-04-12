@@ -16,30 +16,28 @@ module.exports = {
     'axios',
   ],
   globals: {
-    'react': 'React',
-    'redux': 'Redux',
+    react: 'React',
+    redux: 'Redux',
+    axios: 'axios',
     'react-dom': 'ReactDOM',
     'prop-types': 'PropTypes',
     'react-redux': 'ReactRedux',
     'react-router': 'ReactRouter',
     'react-router-dom': 'ReactRouterDOM',
-    'axios': 'axios',
-    'admin-bro': 'AdminBro'
+    'admin-bro': 'AdminBro',
   },
-  plugins: (babelConfig = {}) => {
-    return [
-      resolve({
-        extensions: [ '.mjs', '.js', '.jsx', '.json' ],
-      }),
-      replace({
-        'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development'),
-        'process.env.IS_BROWSER': 'true',
-      }),
-      commonjs(),
-      babel({
-        presets: [require.resolve('@babel/preset-react'), require.resolve('@babel/preset-env')],
-        ...babelConfig,
-      })
-    ]
-  }
+  plugins: (babelConfig = {}) => [
+    resolve({
+      extensions: ['.mjs', '.js', '.jsx', '.json'],
+    }),
+    replace({
+      'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development'),
+      'process.env.IS_BROWSER': 'true',
+    }),
+    commonjs(),
+    babel({
+      presets: [require.resolve('@babel/preset-react'), require.resolve('@babel/preset-env')],
+      ...babelConfig,
+    }),
+  ],
 }

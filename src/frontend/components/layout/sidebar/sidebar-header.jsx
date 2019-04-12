@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-import ViewHelpers from '../../../backend/utils/view-helpers'
+import ViewHelpers from '../../../../backend/utils/view-helpers'
 
 export default class SidebarHeader extends React.PureComponent {
   render() {

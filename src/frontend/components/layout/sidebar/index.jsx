@@ -1,5 +1,5 @@
 import React from 'react'
-import { connect } from "react-redux"
+import { connect } from 'react-redux'
 import SidebarHeader from './sidebar-header'
 import SidebarParent from './sidebar-parent'
 import SidebarFooter from './sidebar-footer'

@@ -1,8 +1,7 @@
 import React from 'react'
 
-import ViewHelpers from '../../../backend/utils/view-helpers'
-import ActionBtn from './action-btn'
-import PropertyType from '../property-type'
+import ActionBtn from '../action-btn'
+import PropertyType from '../../property-type'
 
 export default class RecordInList extends React.PureComponent {
   renderActionBtn(action, record) {

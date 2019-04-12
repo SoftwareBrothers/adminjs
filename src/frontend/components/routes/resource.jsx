@@ -1,12 +1,9 @@
 import React from 'react'
 import { connect } from "react-redux"
 
-import ViewHelpers from '../../../backend/utils/view-helpers'
-import Breadcrumbs from '../breadcrumbs'
-import ActionBtn from './action-btn'
-import RecordsTable from './records-table'
-import Paginate from './paginate'
-import Filter from '../filter'
+import {
+  Breadcrumbs, ActionBtn, RecordsTable, Paginate, Filter,
+} from '../layout'
 import ApiClient from '../../utils/api-client'
 
 class Resource extends React.PureComponent {

@@ -2,8 +2,7 @@ import React from 'react'
 import { connect } from "react-redux"
 import { Link } from 'react-router-dom'
 import ViewHelpers from '../../../backend/utils/view-helpers'
-import Breadcrumbs from '../breadcrumbs'
-import ActionBtn from '../resource/action-btn'
+import { Breadcrumbs, ActionBtn } from '../layout'
 
 import actions from '../actions'
 

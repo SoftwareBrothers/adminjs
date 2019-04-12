@@ -1,8 +1,9 @@
 import React from 'react'
-import PropertyType from '../property-type'
-import Loader from '../loader'
-import ApiClient from '../../utils/api-client'
 import { withRouter } from 'react-router-dom'
+
+import PropertyType from '../property-type'
+import { Loader } from '../layout'
+import ApiClient from '../../utils/api-client'
 
 class Edit extends React.Component {
   constructor(props) {
