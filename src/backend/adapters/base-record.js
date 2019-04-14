@@ -164,7 +164,7 @@ class BaseRecord {
     this.populated[propertyName] = record
   }
 
-  toJSON(){
+  toJSON() {
     return {
       params: this.params,
       populated: this.populated,

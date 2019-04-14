@@ -1,21 +1,41 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { Switch, Route } from 'react-router-dom'
-import styled from 'styled-components'
+import styled, { createGlobalStyle } from 'styled-components'
 
 import ViewHelpers from '../../../backend/utils/view-helpers'
 import { Sidebar, Topbar } from '../layout'
 import { pathsType } from '../../types'
+import { colors, sizes } from '../../styles/variables'
 
 import {
   Resource, Dashboard, ResourceAction, RecordAction,
 } from '../routes'
 
-const ApplicationWrapper = styled.div.attrs({
-  className: 'columns',
-})`
+const GlobalStyle = createGlobalStyle`
+  html, body, #app {
+      width: 100%;
+      height: 100%;
+  }
+
+  a {
+    color: ${colors.primary};
+  }
+`
+
+const ApplicationWrapper = styled.section`
   font-size: 14px;
   font-family: 'Roboto', sans-serif;
+  display: flex;
+  flex-direction: row;
+  height: 100%;
+`
+
+const Core = styled.section`
+  height: 100%;
+  overflow-y: auto;
+  width: 100%;
+  background: ${colors.bck};
 `
 
 const App = (props) => {
@@ -31,18 +51,21 @@ const App = (props) => {
   const listUrl = h.listUrl({ resourceId })
 
   return (
-    <ApplicationWrapper>
-      <Sidebar />
-      <div className="column">
-        <Topbar />
-        <Switch>
-          <Route path={h.dashboardUrl()} exact component={Dashboard} />
-          <Route path={listUrl} exact component={Resource} />
-          <Route path={resourceActionUrl} exact component={ResourceAction} />
-          <Route path={recordActionUrl} exact component={RecordAction} />
-        </Switch>
-      </div>
-    </ApplicationWrapper>
+    <React.Fragment>
+      <GlobalStyle />
+      <ApplicationWrapper>
+        <Sidebar />
+        <Core>
+          <Topbar />
+          <Switch>
+            <Route path={h.dashboardUrl()} exact component={Dashboard} />
+            <Route path={listUrl} exact component={Resource} />
+            <Route path={resourceActionUrl} exact component={ResourceAction} />
+            <Route path={recordActionUrl} exact component={RecordAction} />
+          </Switch>
+        </Core>
+      </ApplicationWrapper>
+    </React.Fragment>
   )
 }
 

@@ -1,4 +1,5 @@
 import React from 'react'
+import PropertyInShow from '../../layout/property-in-show'
 
 export default class Show extends React.PureComponent {
   componentDidMount() {
@@ -6,18 +7,14 @@ export default class Show extends React.PureComponent {
     const value = record.params[property.name]
     this.refs.content.innerHTML = value
   }
-  
+
   render() {
     const { property } = this.props
-    const { label } = property
 
     return (
-      <div className="property">
-        <div className="card-content">
-          <div className="text-small">{label}</div>
-          <div className="rich-text-value content" ref="content"></div>
-        </div>
-      </div>
+      <PropertyInShow property={property}>
+        <div className="rich-text-value content" ref="content" />
+      </PropertyInShow>
     )
   }
 }

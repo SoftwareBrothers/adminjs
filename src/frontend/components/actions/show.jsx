@@ -1,6 +1,6 @@
 import React from 'react'
 import PropertyType from '../property-type'
-import { Loader } from '../layout'
+import { Loader, BorderBox } from '../layout'
 import ApiClient from '../../utils/api-client'
 
 export default class Show extends React.Component {
@@ -8,13 +8,13 @@ export default class Show extends React.Component {
     super(props)
     this.state = {
       isLoading: true,
-      record: { params: {}, populated: {} }
+      record: { params: {}, populated: {} },
     }
-    this.api = new ApiClient()
   }
 
   componentDidMount() {
-    this.api.recordAction({
+    const api = new ApiClient()
+    api.recordAction({
       resourceId: this.props.resource.id,
       actionName: this.props.action.name,
       recordId: this.props.recordId,
@@ -28,26 +28,27 @@ export default class Show extends React.Component {
 
   render() {
     const { resource } = this.props
+    const { record, isLoading } = this.state
     const properties = resource.showProperties
-    const record = this.state.record
 
-    if (this.state.isLoading) {
+    if (isLoading) {
       return (
         <Loader />
       )
     }
 
     return (
-      <div className="border-box">
+      <BorderBox>
         {properties.map(property => (
           <PropertyType
             key={property.name}
             where="show"
             property={property}
             resource={resource}
-            record={record} />
+            record={record}
+          />
         ))}
-      </div>
+      </BorderBox>
     )
   }
 }

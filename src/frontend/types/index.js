@@ -6,6 +6,10 @@ export const pathsType = PropTypes.shape({
   logoutPath: PropTypes.string.isRequired,
 })
 
+export const sessionType = PropTypes.shape({
+  email: PropTypes.string.isRequired,
+})
+
 export const brandingType = PropTypes.shape({
   logo: PropTypes.string.isRequired,
   companyName: PropTypes.string.isRequired,
@@ -57,4 +61,20 @@ export const resourceParentWithResourcesType = PropTypes.shape({
   name: PropTypes.string.isRequired,
   icon: PropTypes.string.isRequired,
   resources: PropTypes.arrayOf(resourceType).isRequired,
+})
+
+export const recordType = PropTypes.shape({
+  params: PropTypes.object.isRequired,
+  populated: PropTypes.object,
+  errors: PropTypes.object,
+  id: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
+})
+
+export const locationType = PropTypes.shape({
+  pathname: PropTypes.string.isRequired,
+})
+
+export const historyType = PropTypes.shape({
+  push: PropTypes.func.isRequired,
 })

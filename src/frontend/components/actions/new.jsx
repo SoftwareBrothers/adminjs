@@ -2,6 +2,7 @@ import React from 'react'
 import PropertyType from '../property-type'
 import ApiClient from '../../utils/api-client'
 import { withRouter } from 'react-router-dom'
+import { BorderBox, StyledBtn } from '../layout'
 
 class New extends React.Component {
   constructor(props) {
@@ -49,7 +50,7 @@ class New extends React.Component {
     const properties = this.props.resource.editProperties
     const record = { params: this.state.params, errors: this.state.errors }
     return (
-      <div className="border-box">
+      <BorderBox>
         <form onSubmit={this.handleSubmit.bind(this)}>
           {properties.map(property => (
             <PropertyType
@@ -60,16 +61,12 @@ class New extends React.Component {
               onChange={this.handleChange.bind(this)}
               record={record} />
           ))}
-          <div className="field is-grouped">
-            <div className="control">
-              <button className="button is-primary" type='submit'>
-                <span className="icon is-small"><i className="icomoon-save"></i></span>
-                <div className="btn-text">Save</div>
-              </button>
-            </div>
-          </div>
+          <StyledBtn as="button" type="submit" className="is-primary">
+            <i className="icomoon-save" />
+            <span className="btn-text">Save</span>
+          </StyledBtn>
         </form>
-      </div>
+      </BorderBox>
     )
   }
 }

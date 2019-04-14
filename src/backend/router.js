@@ -28,11 +28,8 @@ const ASSETS_ROOT = `${__dirname}/../frontend/assets/`
  */
 const Router = {
   assets: [{
-    path: '/frontend/assets/app.min.js',
-    src: [ASSETS_ROOT, 'scripts/app.min.js'].join('/'),
-  }, {
-    path: '/frontend/assets/style.min.css',
-    src: [ASSETS_ROOT, 'styles/style.min.css'].join('/'),
+    path: '/frontend/assets/icomoon.css',
+    src: [ASSETS_ROOT, 'styles/icomoon.css'].join('/'),
   }, {
     path: '/frontend/assets/icomoon.eot',
     src: [ASSETS_ROOT, 'fonts/icomoon.eot'].join('/'),

@@ -47,8 +47,7 @@ const html = (admin, currentAdmin, location = '/') => {
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.5.1/css/bulma.min.css" type="text/css">
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-mfizz/2.4.1/font-mfizz.min.css" type="text/css">
       <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,700" type="text/css">
-      
-      <link rel="stylesheet" href="${false && h.assetPath('style.min.css')}" type="text/css">
+      <link rel="stylesheet" type="text/css" href="${h.assetPath('icomoon.css')}">
 
       <link rel="stylesheet" type="text/css" href="https://cdn.quilljs.com/1.3.6/quill.snow.css">
       <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>

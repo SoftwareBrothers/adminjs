@@ -17,7 +17,7 @@ async function build({ name, input, babelConfig = {}, file }) {
     })
     watcher.on('event', (event) => {
       console.log(event.code)
-      if (event.code === 'ERROR') {
+      if (event.code === 'ERROR' || event.code === 'FATAL') {
         console.log(event)
       }
     })

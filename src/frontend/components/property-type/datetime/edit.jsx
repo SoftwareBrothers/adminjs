@@ -1,4 +1,5 @@
 import React from 'react'
+import PropertyInEdit from '../../layout/property-in-edit'
 
 export default class Edit extends React.Component {
   handleChange(value) {
@@ -46,25 +47,23 @@ export default class Edit extends React.Component {
   }
 
   render() {
-    const { property, resource, record } = this.props
-    const value = (record.params && record.params[property.name]) || ''
+    const { property, record } = this.props
     const error = record.errors && record.errors[property.name]
     return (
-      <div className="field">
-        <label htmlFor={property.name} className="label">{property.label}</label>
+      <PropertyInEdit property={property} error={error}>
         <div className="control has-icons-right">
-          <input type="text"
-                 className="input pickadate"
-                 id={property.name}
-                 ref="datepicker"
-                 name={property.name}/>
-          <span className="icon is-small is-right"><i className="icomoon-calendar"></i></span>
-            
+          <input
+            type="text"
+            className="input pickadate"
+            id={property.name}
+            ref="datepicker"
+            name={property.name}
+          />
+          <span className="icon is-small is-right">
+            <i className="icomoon-calendar" />
+          </span>
         </div>
-        {error && (
-          <div className="help is-danger">{error.message}</div>
-        )}
-      </div>
+      </PropertyInEdit>
     )
   }
 }

@@ -1,4 +1,5 @@
 import React from 'react'
+import PropertyInEdit from '../../layout/property-in-edit'
 
 export default class Edit extends React.PureComponent {
   handleChange(event) {
@@ -10,20 +11,16 @@ export default class Edit extends React.PureComponent {
     const value = (record.params && record.params[property.name]) || ''
     const error = record.errors && record.errors[property.name]
     return (
-      <div className="field">
-        <label htmlFor={property.name} className="label">{property.label}</label>
-        <div className="control">
-          <input type="checkbox"
-                 className="checkbox"
-                 id={property.name}
-                 name={property.name}
-                 onChange={this.handleChange.bind(this)}
-                 checked={value}/>
-        </div>
-        {error && (
-          <div className="help is-danger">{error.message}</div>
-        )}
-      </div>
+      <PropertyInEdit property={property} error={error}>
+        <input
+          type="checkbox"
+          className="checkbox"
+          id={property.name}
+          name={property.name}
+          onChange={this.handleChange.bind(this)}
+          checked={value}
+        />
+      </PropertyInEdit>
     )
   }
 }

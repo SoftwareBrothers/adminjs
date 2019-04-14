@@ -3,7 +3,7 @@ var AdminBro = (function (AdminBro$1, React, reactRedux, reactRouterDom, styled,
 
   AdminBro$1 = AdminBro$1 && AdminBro$1.hasOwnProperty('default') ? AdminBro$1['default'] : AdminBro$1;
   var React__default = 'default' in React ? React['default'] : React;
-  styled = styled && styled.hasOwnProperty('default') ? styled['default'] : styled;
+  var styled__default = 'default' in styled ? styled['default'] : styled;
   PropTypes$1 = PropTypes$1 && PropTypes$1.hasOwnProperty('default') ? PropTypes$1['default'] : PropTypes$1;
   axios = axios && axios.hasOwnProperty('default') ? axios['default'] : axios;
   var reactDom__default = 'default' in reactDom ? reactDom['default'] : reactDom;
@@ -141,29 +141,33 @@ var AdminBro = (function (AdminBro$1, React, reactRedux, reactRouterDom, styled,
     defaultText: '#111114',
     lightText: '#a9aabc',
     lightBck: '#F8F8FA',
+    superLightBack: '#F1F1F5',
+    border: '#eeeeef',
+    bck: '#f7f7Fa',
     love: '#e6282b',
     primary: '#718af4',
-    'alizarin-crimson': '#e6282b',
-    'athens-gray-2': '#F8F8FA',
-    'athens-gray-dark': '#eeeeef',
-    'athens-gray-darker': '#F1F1F5',
-    'athens-gray': '#f7f7Fa',
-    'blue-bayoux': '#4e5779',
-    'cornflower-blue': '#718af4',
-    'froly': '#f0616f',
-    'ghost': '#cbccd7',
-    'mako': '#454655',
-    'red': '#e6282zb;',
-    'rhino': '#303b62',
-    'silver-tree': '#5abe99',
-    'spun-pearl': '#a9aabc',
-    'storm-gray': '#757687',
-    'sunglo': '#e06a72',
-    'waikawa-gray': '#545B8C',
-    'waterloo': '#7f8296',
-    'white': '#ffffff',
-    'wild-sand': '#f7f7f7',
-    'woodsmoke': '#111114'
+    primaryHover: '#545B8C' // 'alizarin-crimson': '#e6282b',
+    // 'athens-gray-2': '#F8F8FA',
+    // 'athens-gray-dark': '#eeeeef',
+    // 'athens-gray-darker': '#F1F1F5',
+    // 'athens-gray': '#f7f7Fa',
+    // 'blue-bayoux': '#4e5779',
+    // 'cornflower-blue': '#718af4',
+    // 'froly': '#f0616f',
+    // 'ghost': '#cbccd7',
+    // 'mako': '#454655',
+    // 'red': '#e6282zb;',
+    // 'rhino': '#303b62',
+    // 'silver-tree': '#5abe99',
+    // 'spun-pearl': '#a9aabc',
+    // 'storm-gray': '#757687',
+    // 'sunglo': '#e06a72',
+    // 'waikawa-gray': '#545B8C',
+    // 'waterloo': '#7f8296',
+    // 'white': '#ffffff',
+    // 'wild-sand': '#f7f7f7',
+    // 'woodsmoke': '#111114',
+
   };
   var sizes = {
     navbarHeight: '64px',
@@ -175,13 +179,18 @@ var AdminBro = (function (AdminBro$1, React, reactRedux, reactRouterDom, styled,
   };
   var fonts = {
     base: '14px',
-    min: '11px'
+    medium: '12px',
+    min: '11px',
+    header: '32px'
   };
 
   var pathsType = PropTypes$1.shape({
     loginPath: PropTypes$1.string.isRequired,
     rootPath: PropTypes$1.string.isRequired,
     logoutPath: PropTypes$1.string.isRequired
+  });
+  var sessionType = PropTypes$1.shape({
+    email: PropTypes$1.string.isRequired
   });
   var brandingType = PropTypes$1.shape({
     logo: PropTypes$1.string.isRequired,
@@ -227,6 +236,19 @@ var AdminBro = (function (AdminBro$1, React, reactRedux, reactRouterDom, styled,
     icon: PropTypes$1.string.isRequired,
     resources: PropTypes$1.arrayOf(resourceType).isRequired
   });
+  var recordType = PropTypes$1.shape({
+    params: PropTypes$1.object.isRequired,
+    populated: PropTypes$1.object,
+    errors: PropTypes$1.object,
+    id: PropTypes$1.string.isRequired,
+    title: PropTypes$1.string.isRequired
+  });
+  var locationType = PropTypes$1.shape({
+    pathname: PropTypes$1.string.isRequired
+  });
+  var historyType = PropTypes$1.shape({
+    push: PropTypes$1.func.isRequired
+  });
 
   function _templateObject3() {
     var data = taggedTemplateLiteral(["\n  margin-right: ", ";\n"]);
@@ -257,9 +279,9 @@ var AdminBro = (function (AdminBro$1, React, reactRedux, reactRouterDom, styled,
 
     return data;
   }
-  var BrandingBox = styled.div(_templateObject(), sizes.paddingLayout);
-  var LogoLink = styled(reactRouterDom.Link)(_templateObject2(), colors.defaultText);
-  var LogoImage = styled.img(_templateObject3(), sizes.padding);
+  var BrandingBox = styled__default.div(_templateObject(), sizes.paddingLayout);
+  var LogoLink = styled__default(reactRouterDom.Link)(_templateObject2(), colors.defaultText);
+  var LogoImage = styled__default.img(_templateObject3(), sizes.padding);
 
   var SidebarBranding = function SidebarBranding(props) {
     var paths = props.paths,
@@ -410,7 +432,7 @@ var AdminBro = (function (AdminBro$1, React, reactRedux, reactRouterDom, styled,
 
     return data;
   }
-  var ResourceLink = styled(reactRouterDom.NavLink)(_templateObject$1(), colors.defaultText, sizes.paddingMin, colors.primary, colors.primary);
+  var ResourceLink = styled__default(reactRouterDom.NavLink)(_templateObject$1(), colors.defaultText, sizes.paddingMin, colors.primary, colors.primary);
 
   var SidebarResource =
   /*#__PURE__*/
@@ -462,8 +484,8 @@ var AdminBro = (function (AdminBro$1, React, reactRedux, reactRouterDom, styled,
 
     return data;
   }
-  var Title = styled.span(_templateObject$2(), colors.lightBck, sizes.padding, sizes.padding, sizes.paddingLayout, colors.defaultText, sizes.paddingMin, colors.lightText, sizes.padding);
-  var ResourcesList = styled.ul(_templateObject2$1(), sizes.padding);
+  var Title = styled__default.span(_templateObject$2(), colors.lightBck, sizes.padding, sizes.padding, sizes.paddingLayout, colors.defaultText, sizes.paddingMin, colors.lightText, sizes.padding);
+  var ResourcesList = styled__default.ul(_templateObject2$1(), sizes.padding);
 
   var SidebarParent =
   /*#__PURE__*/
@@ -510,7 +532,7 @@ var AdminBro = (function (AdminBro$1, React, reactRedux, reactRouterDom, styled,
 
     return data;
   }
-  var StyledFooter = styled.p(_templateObject$3(), fonts.min, colors.lightText, colors.love, sizes.paddingMin);
+  var StyledFooter = styled__default.p(_templateObject$3(), fonts.min, colors.lightText, colors.love, sizes.paddingMin);
 
   var SidebarFooter = function SidebarFooter(props) {
     return React__default.createElement(StyledFooter, null, "With", React__default.createElement("i", {
@@ -552,7 +574,7 @@ var AdminBro = (function (AdminBro$1, React, reactRedux, reactRouterDom, styled,
 
     return data;
   }
-  var Hamburger = styled.i.attrs({
+  var Hamburger = styled__default.i.attrs({
     className: 'fas fa-bars fa-2x'
   })(_templateObject$4(), sizes.paddingMin);
 
@@ -567,7 +589,7 @@ var AdminBro = (function (AdminBro$1, React, reactRedux, reactRouterDom, styled,
   }
 
   function _templateObject$5() {
-    var data = taggedTemplateLiteral(["\n  padding: ", ";\n  width: ", ";\n  display: flex;\n  flex-direction: column;\n  justify-content: space-between;\n  height: 100vh;\n  overflow-y: auto;\n"]);
+    var data = taggedTemplateLiteral(["\n  padding: ", ";\n  width: ", ";\n  display: flex;\n  flex-shrink: 0;\n  flex-direction: column;\n  justify-content: space-between;\n  height: 100%;\n  overflow-y: auto;\n  border-right: 1px solid ", ";\n"]);
 
     _templateObject$5 = function _templateObject() {
       return data;
@@ -575,8 +597,8 @@ var AdminBro = (function (AdminBro$1, React, reactRedux, reactRouterDom, styled,
 
     return data;
   }
-  var SidebarWrapper = styled.aside(_templateObject$5(), sizes.paddingLayout, sizes.sidebarWidth);
-  var SidebarLabel = styled.h2(_templateObject2$2(), sizes.padding, sizes.padding, sizes.padding, colors.lightText, fonts.min);
+  var SidebarWrapper = styled__default.aside(_templateObject$5(), sizes.paddingLayout, sizes.sidebarWidth, colors.border);
+  var SidebarLabel = styled__default.h2(_templateObject2$2(), sizes.padding, sizes.padding, sizes.padding, colors.lightText, fonts.min);
 
   var Sidebar = function Sidebar(props) {
     var branding = props.branding,
@@ -609,57 +631,90 @@ var AdminBro = (function (AdminBro$1, React, reactRedux, reactRouterDom, styled,
 
   var Sidebar$1 = reactRedux.connect(mapStateToProps)(Sidebar);
 
-  var Topbar =
-  /*#__PURE__*/
-  function (_React$Component) {
-    inherits(Topbar, _React$Component);
+  function _templateObject3$1() {
+    var data = taggedTemplateLiteral(["\n  &&& {\n    padding: ", " ", ";\n    color: ", ";\n    &:hover{\n      color: ", ";\n    }\n    i, svg {\n      margin-right: ", ";\n    }\n  }\n"]);
 
-    function Topbar() {
-      classCallCheck(this, Topbar);
+    _templateObject3$1 = function _templateObject3() {
+      return data;
+    };
 
-      return possibleConstructorReturn(this, getPrototypeOf(Topbar).apply(this, arguments));
-    }
+    return data;
+  }
 
-    createClass(Topbar, [{
-      key: "render",
-      value: function render() {
-        var _this = this;
+  function _templateObject2$3() {
+    var data = taggedTemplateLiteral(["\n  border-radius: 0px;\n  border: none;\n  padding: 0;\n  top: 95%;\n"]);
 
-        var LoggedIn = function LoggedIn(session) {
-          return React__default.createElement("div", {
-            className: "navbar-item has-dropdown is-hoverable navbar-user"
-          }, React__default.createElement("a", {
-            className: "navbar-link"
-          }, session.email, React__default.createElement("img", {
-            src: "https://api.adorable.io/avatars/24/softwarebrothers.png"
-          })), React__default.createElement("div", {
-            className: "navbar-dropdown"
-          }, React__default.createElement("a", {
-            className: "navbar-item",
-            href: _this.props.paths.logoutPath
-          }, React__default.createElement("span", {
-            className: "fas fa-sign-out-alt"
-          }), "Sign out")));
-        };
+    _templateObject2$3 = function _templateObject2() {
+      return data;
+    };
 
-        return React__default.createElement("nav", {
-          className: "navbar"
-        }, React__default.createElement("div", {
-          className: "hamburger hidden"
-        }, React__default.createElement("i", {
-          className: "hamburger-icon fas fa-bars fa-2x"
-        })), React__default.createElement("div", {
-          className: "navbar-menu"
-        }, React__default.createElement("div", {
-          className: "navbar-start"
-        }), React__default.createElement("div", {
-          className: "navbar-end"
-        }, this.props.session && this.props.session.email && LoggedIn(this.props.session))));
-      }
-    }]);
+    return data;
+  }
 
-    return Topbar;
-  }(React__default.Component);
+  function _templateObject$6() {
+    var data = taggedTemplateLiteral(["\n  padding-right: ", ";\n  border-radius: 50px;\n  margin: 10px 0;\n\n  img {\n    border-radius: 50%;\n    margin-left: ", ";\n\n    &:after {\n      display: none;\n    }\n  }\n"]);
+
+    _templateObject$6 = function _templateObject() {
+      return data;
+    };
+
+    return data;
+  }
+  var UserBox = styled__default.div.attrs({
+    className: 'navbar-link'
+  })(_templateObject$6(), sizes.padding, sizes.padding);
+  var Dropdown = styled__default.div.attrs({
+    className: 'navbar-dropdown'
+  })(_templateObject2$3());
+  var DropdownLink = styled__default.a.attrs({
+    className: 'navbar-item'
+  })(_templateObject3$1(), sizes.padding, sizes.paddingLayout, colors.defaultText, colors.primary, sizes.padding);
+
+  var LoggedIn = function LoggedIn(props) {
+    var session = props.session,
+        paths = props.paths;
+    return React__default.createElement("div", {
+      className: "navbar-item has-dropdown is-hoverable navbar-user"
+    }, React__default.createElement(UserBox, null, session.email, React__default.createElement("img", {
+      src: "https://api.adorable.io/avatars/24/softwarebrothers.png",
+      alt: "user"
+    })), React__default.createElement(Dropdown, null, React__default.createElement(DropdownLink, {
+      href: paths.logoutPath
+    }, React__default.createElement("i", {
+      className: "fas fa-sign-out-alt"
+    }), "Sign out")));
+  };
+
+  LoggedIn.propTypes = {
+    session: sessionType.isRequired,
+    paths: pathsType.isRequired
+  };
+
+  function _templateObject$7() {
+    var data = taggedTemplateLiteral(["\n  height: ", ";\n  border-bottom: 1px solid ", ";\n  padding: 0 ", ";\n"]);
+
+    _templateObject$7 = function _templateObject() {
+      return data;
+    };
+
+    return data;
+  }
+  var Navbar = styled__default.nav.attrs({
+    className: 'navbar'
+  })(_templateObject$7(), sizes.navbarHeight, colors.border, sizes.paddingLayout);
+
+  var Topbar = function Topbar(props) {
+    var session = props.session,
+        paths = props.paths;
+    return React__default.createElement(Navbar, null, React__default.createElement("div", {
+      className: "navbar-menu"
+    }, React__default.createElement("div", {
+      className: "navbar-end"
+    }, session && React__default.createElement(LoggedIn, {
+      session: session,
+      paths: paths
+    }))));
+  };
 
   var mapStateToProps$1 = function mapStateToProps(state) {
     return {
@@ -668,7 +723,38 @@ var AdminBro = (function (AdminBro$1, React, reactRedux, reactRouterDom, styled,
     };
   };
 
+  Topbar.propTypes = {
+    paths: pathsType.isRequired,
+    session: sessionType
+  };
+  Topbar.defaultProps = {
+    session: null
+  };
   var Topbar$1 = reactRedux.connect(mapStateToProps$1)(Topbar);
+
+  function _templateObject2$4() {
+    var data = taggedTemplateLiteral(["\n  &&& {\n    color: ", ";\n    &:hover {\n      color: ", ";\n    }\n  }\n"]);
+
+    _templateObject2$4 = function _templateObject2() {
+      return data;
+    };
+
+    return data;
+  }
+
+  function _templateObject$8() {
+    var data = taggedTemplateLiteral(["\n  margin: -", " 0 ", " -10px;\n  font-size: ", ";\n"]);
+
+    _templateObject$8 = function _templateObject() {
+      return data;
+    };
+
+    return data;
+  }
+  var BreadcrumbsContainer = styled__default.nav.attrs({
+    className: 'breadcrumb'
+  })(_templateObject$8(), sizes.padding, sizes.padding, fonts.base);
+  var BreadcrumbLink = styled__default(reactRouterDom.Link)(_templateObject2$4(), colors.lightText, colors.primary);
 
   var Breadcrumbs =
   /*#__PURE__*/
@@ -687,7 +773,7 @@ var AdminBro = (function (AdminBro$1, React, reactRedux, reactRouterDom, styled,
         var _this$props = this.props,
             resource = _this$props.resource,
             record = _this$props.record;
-        return React__default.createElement("li", null, React__default.createElement(reactRouterDom.Link, {
+        return React__default.createElement("li", null, React__default.createElement(BreadcrumbLink, {
           to: resource.href,
           className: record && 'is-active'
         }, resource.name));
@@ -696,22 +782,49 @@ var AdminBro = (function (AdminBro$1, React, reactRedux, reactRouterDom, styled,
       key: "renderAction",
       value: function renderAction() {
         var actionName = this.props.actionName;
-        return actionName && React__default.createElement("li", {
-          className: "is-active"
-        }, React__default.createElement("a", null, actionName));
+
+        if (actionName) {
+          return React__default.createElement("li", {
+            className: "is-active"
+          }, React__default.createElement(BreadcrumbLink, {
+            href: "#"
+          }, actionName));
+        }
+
+        return null;
       }
     }, {
       key: "render",
       value: function render() {
-        return React__default.createElement("nav", {
-          className: "breadcrumb",
-          "aria-label": "breadcrumbs"
-        }, React__default.createElement("ul", null, this.renderResource(), this.renderAction()));
+        return React__default.createElement(BreadcrumbsContainer, null, React__default.createElement("ul", null, this.renderResource(), this.renderAction()));
       }
     }]);
 
     return Breadcrumbs;
   }(React__default.PureComponent);
+
+  Breadcrumbs.propTypes = {
+    resource: resourceType.isRequired,
+    record: recordType,
+    actionName: PropTypes$1.string
+  };
+  Breadcrumbs.defaultProps = {
+    record: null,
+    actionName: null
+  };
+
+  function _templateObject$9() {
+    var data = taggedTemplateLiteral(["\n  font-size: ", ";\n  border-radius: 0;\n  border-color: ", ";\n  background: #fff;\n  height: 32px;\n  padding: ", " ", ";\n  color: ", ";\n  &:hover {\n    border-color: ", ";\n  }\n  &.is-primary {\n    background-color: ", ";\n    color: #ffffff;\n    &:hover {\n      background-color: ", ";\n    }\n  }\n\n  &.in-dropdown {\n    color: ", ";\n    font-size: ", ";\n    width: 100%;\n    text-align: start;\n    justify-content: flex-start;\n    height: 40px;\n    padding-left: 40px;\n  }\n"]);
+
+    _templateObject$9 = function _templateObject() {
+      return data;
+    };
+
+    return data;
+  }
+  var StyledBtn = styled__default(reactRouterDom.Link).attrs({
+    className: 'button'
+  })(_templateObject$9(), fonts.medium, colors.primary, sizes.paddingMin, sizes.padding, colors.primary, colors.primaryHover, colors.primary, colors.primaryHover, colors.defaultText, fonts.base);
 
   var runtime_1 = createCommonjsModule(function (module) {
   /**
@@ -1670,27 +1783,34 @@ var AdminBro = (function (AdminBro$1, React, reactRedux, reactRouterDom, styled,
     createClass(ActionBtn, [{
       key: "handleClick",
       value: function handleClick(event) {
-        var _this = this;
+        var _this$props = this.props,
+            action = _this$props.action,
+            resourceId = _this$props.resourceId,
+            recordId = _this$props.recordId,
+            location = _this$props.location,
+            history = _this$props.history,
+            actionPerformed = _this$props.actionPerformed;
 
-        if (this.props.action.guard && !confirm(this.props.action.guard)) {
+        if (action.guard && !confirm(action.guard)) {
           event.preventDefault();
           return;
         }
 
-        if (typeof this.props.action.component !== 'undefined' && this.props.action.component === false) {
+        if (typeof action.component !== 'undefined' && action.component === false) {
           event.preventDefault();
           var api = new ApiClient();
-          api.recordAction({
-            resourceId: this.props.resourceId,
-            actionName: this.props.action.name,
-            recordId: this.props.recordId
+          var apiAction = recordId ? api.recordAction : api.resourceAction;
+          apiAction({
+            resourceId: resourceId,
+            actionName: action.name,
+            recordId: recordId
           }).then(function (response) {
-            if (_this.props.location.pathname !== response.data.redirectUrl) {
-              _this.props.history.push(response.data.redirectUrl);
+            if (location.pathname !== response.data.redirectUrl) {
+              history.push(response.data.redirectUrl);
             }
 
-            if (_this.props.actionPerformed) {
-              _this.props.actionPerformed();
+            if (actionPerformed) {
+              actionPerformed(action.name);
             }
           });
         }
@@ -1699,11 +1819,13 @@ var AdminBro = (function (AdminBro$1, React, reactRedux, reactRouterDom, styled,
       key: "render",
       value: function render() {
         var h = new viewHelpers();
-        var _this$props = this.props,
-            resourceId = _this$props.resourceId,
-            recordId = _this$props.recordId;
-        var actionName = this.props.action.name;
-        var href = this.props.recordId ? h.recordActionUrl({
+        var _this$props2 = this.props,
+            resourceId = _this$props2.resourceId,
+            recordId = _this$props2.recordId,
+            action = _this$props2.action,
+            className = _this$props2.className;
+        var actionName = action.name;
+        var href = recordId ? h.recordActionUrl({
           resourceId: resourceId,
           recordId: recordId,
           actionName: actionName
@@ -1711,26 +1833,50 @@ var AdminBro = (function (AdminBro$1, React, reactRedux, reactRouterDom, styled,
           resourceId: resourceId,
           actionName: actionName
         });
-        return React__default.createElement("div", {
-          className: "control"
-        }, React__default.createElement(reactRouterDom.Link, {
+        return React__default.createElement(StyledBtn, {
           to: href,
-          className: "button " + this.props.className,
+          className: "button ".concat(className),
           onClick: this.handleClick.bind(this)
         }, React__default.createElement("span", {
           className: "icon"
         }, React__default.createElement("i", {
-          className: this.props.action.icon
+          className: action.icon
         })), React__default.createElement("div", {
           className: "btn-text"
-        }, this.props.action.label)));
+        }, action.label));
       }
     }]);
 
     return ActionBtn;
   }(React__default.PureComponent);
 
+  ActionBtn.propTypes = {
+    action: actionType.isRequired,
+    className: PropTypes$1.string.isRequired,
+    resourceId: PropTypes$1.string.isRequired,
+    recordId: PropTypes$1.string,
+    location: locationType.isRequired,
+    history: historyType.isRequired,
+    actionPerformed: PropTypes$1.func
+  };
+  ActionBtn.defaultProps = {
+    recordId: null,
+    actionPerformed: null
+  };
   var ActionBtn$1 = reactRouterDom.withRouter(ActionBtn);
+
+  function _templateObject$a() {
+    var data = taggedTemplateLiteral(["\n  background: #ffffff;\n  padding: ", ";\n  border: 1px solid ", ";\n"]);
+
+    _templateObject$a = function _templateObject() {
+      return data;
+    };
+
+    return data;
+  }
+  var BorderBox = styled__default.section.attrs({
+    className: 'border-box'
+  })(_templateObject$a(), sizes.paddingLayout, colors.border);
 
   var Loader =
   /*#__PURE__*/
@@ -1753,6 +1899,38 @@ var AdminBro = (function (AdminBro$1, React, reactRedux, reactRouterDom, styled,
     return Loader;
   }(React__default.PureComponent);
 
+  function _templateObject2$5() {
+    var data = taggedTemplateLiteral(["\n  display: block;\n  text-transform: uppercase;\n  font-size: ", ";\n  color: ", ";\n  font-weight: normal;\n  margin: 0 0 ", " 0;\n  letter-spacing: 0.1em;\n"]);
+
+    _templateObject2$5 = function _templateObject2() {
+      return data;
+    };
+
+    return data;
+  }
+
+  function _templateObject$b() {
+    var data = taggedTemplateLiteral(["\n  margin-bottom: ", ";\n"]);
+
+    _templateObject$b = function _templateObject() {
+      return data;
+    };
+
+    return data;
+  }
+  var Property = styled__default.div(_templateObject$b(), sizes.paddingLayout);
+  var Label = styled__default.label(_templateObject2$5(), fonts.min, colors.lightText, sizes.paddingMin);
+
+  var PropertyInShow = function PropertyInShow(props) {
+    var property = props.property,
+        children = props.children;
+    return React__default.createElement(Property, null, React__default.createElement(Label, null, property.label), children);
+  };
+
+  PropertyInShow.propTypes = {
+    property: propertyType.isRequired
+  };
+
   var Show =
   /*#__PURE__*/
   function (_React$PureComponent) {
@@ -1771,19 +1949,53 @@ var AdminBro = (function (AdminBro$1, React, reactRedux, reactRouterDom, styled,
             property = _this$props.property,
             record = _this$props.record;
         var value = record.params[property.name];
-        var label = property.label;
-        return React__default.createElement("div", {
-          className: "property"
-        }, React__default.createElement("div", {
-          className: "card-content"
-        }, React__default.createElement("div", {
-          className: "text-small"
-        }, label), React__default.createElement("div", null, value)));
+        return React__default.createElement(PropertyInShow, {
+          property: property
+        }, value);
       }
     }]);
 
     return Show;
   }(React__default.PureComponent);
+
+  function _templateObject2$6() {
+    var data = taggedTemplateLiteral(["\n  display: block;\n  text-transform: uppercase;\n  font-size: ", ";\n  color: ", ";\n  font-weight: normal;\n  margin: 0 0 ", " 0;\n  letter-spacing: 0.1em;\n"]);
+
+    _templateObject2$6 = function _templateObject2() {
+      return data;
+    };
+
+    return data;
+  }
+
+  function _templateObject$c() {
+    var data = taggedTemplateLiteral(["\n  margin-bottom: ", ";\n\n  & input {\n    border-radius: 0;\n    border-color: ", ";\n    box-shadow: none;\n\n    &:focus {\n      border-color: ", ";\n    }\n  }\n"]);
+
+    _templateObject$c = function _templateObject() {
+      return data;
+    };
+
+    return data;
+  }
+  var Property$1 = styled__default.div(_templateObject$c(), sizes.paddingLayout, colors.border, colors.primary);
+  var Label$1 = styled__default.label.attrs({
+    className: 'label'
+  })(_templateObject2$6(), fonts.min, colors.lightText, sizes.paddingMin);
+
+  var PropertyInEdit = function PropertyInEdit(props) {
+    var children = props.children,
+        property = props.property,
+        error = props.error;
+    return React__default.createElement(Property$1, null, React__default.createElement(Label$1, {
+      htmlFor: property.name
+    }, property.label), React__default.createElement("div", {
+      className: "control"
+    }, children), error && React__default.createElement("div", {
+      className: "help is-danger"
+    }, error.message));
+  };
+
+  PropertyInEdit.propTypes = {};
 
   var Edit =
   /*#__PURE__*/
@@ -1810,13 +2022,9 @@ var AdminBro = (function (AdminBro$1, React, reactRedux, reactRouterDom, styled,
             record = _this$props.record;
         var value = record.params && record.params[property.name] || '';
         var error = record.errors && record.errors[property.name];
-        return React__default.createElement("div", {
-          className: "field"
-        }, React__default.createElement("label", {
-          htmlFor: property.name,
-          className: "label"
-        }, property.label), React__default.createElement("div", {
-          className: "control"
+        return React__default.createElement(PropertyInEdit, {
+          property: property,
+          error: error
         }, React__default.createElement("input", {
           type: "text",
           className: "input",
@@ -1824,9 +2032,7 @@ var AdminBro = (function (AdminBro$1, React, reactRedux, reactRouterDom, styled,
           name: property.name,
           onChange: this.handleChange.bind(this),
           value: value
-        })), error && React__default.createElement("div", {
-          className: "help is-danger"
-        }, error.message));
+        }));
       }
     }]);
 
@@ -1953,13 +2159,9 @@ var AdminBro = (function (AdminBro$1, React, reactRedux, reactRouterDom, styled,
             record = _this$props.record;
         var value = record.params && record.params[property.name] || '';
         var error = record.errors && record.errors[property.name];
-        return React__default.createElement("div", {
-          className: "field"
-        }, React__default.createElement("label", {
-          htmlFor: property.name,
-          className: "label"
-        }, property.label), React__default.createElement("div", {
-          className: "control"
+        return React__default.createElement(PropertyInEdit, {
+          property: property,
+          error: error
         }, React__default.createElement("input", {
           type: "checkbox",
           className: "checkbox",
@@ -1967,9 +2169,7 @@ var AdminBro = (function (AdminBro$1, React, reactRedux, reactRouterDom, styled,
           name: property.name,
           onChange: this.handleChange.bind(this),
           checked: value
-        })), error && React__default.createElement("div", {
-          className: "help is-danger"
-        }, error.message));
+        }));
       }
     }]);
 
@@ -1998,14 +2198,9 @@ var AdminBro = (function (AdminBro$1, React, reactRedux, reactRouterDom, styled,
             property = _this$props.property,
             record = _this$props.record;
         var value = mapValue(record.params[property.name]);
-        var label = property.label;
-        return React__default.createElement("div", {
-          className: "property"
-        }, React__default.createElement("div", {
-          className: "card-content"
-        }, React__default.createElement("div", {
-          className: "text-small"
-        }, label), React__default.createElement("div", null, value)));
+        return React__default.createElement(PropertyInShow, {
+          property: property
+        }, value);
       }
     }]);
 
@@ -10931,16 +11126,12 @@ var AdminBro = (function (AdminBro$1, React, reactRedux, reactRouterDom, styled,
       value: function render() {
         var _this$props3 = this.props,
             property = _this$props3.property,
-            resource = _this$props3.resource,
             record = _this$props3.record;
-        var value = record.params && record.params[property.name] || '';
         var error = record.errors && record.errors[property.name];
-        return React__default.createElement("div", {
-          className: "field"
-        }, React__default.createElement("label", {
-          htmlFor: property.name,
-          className: "label"
-        }, property.label), React__default.createElement("div", {
+        return React__default.createElement(PropertyInEdit, {
+          property: property,
+          error: error
+        }, React__default.createElement("div", {
           className: "control has-icons-right"
         }, React__default.createElement("input", {
           type: "text",
@@ -10952,9 +11143,7 @@ var AdminBro = (function (AdminBro$1, React, reactRedux, reactRouterDom, styled,
           className: "icon is-small is-right"
         }, React__default.createElement("i", {
           className: "icomoon-calendar"
-        }))), error && React__default.createElement("div", {
-          className: "help is-danger"
-        }, error.message));
+        }))));
       }
     }]);
 
@@ -10988,14 +11177,9 @@ var AdminBro = (function (AdminBro$1, React, reactRedux, reactRouterDom, styled,
             property = _this$props.property,
             record = _this$props.record;
         var value = mapValue$1(record.params[property.name], property.type);
-        var label = property.label;
-        return React__default.createElement("div", {
-          className: "property"
-        }, React__default.createElement("div", {
-          className: "card-content"
-        }, React__default.createElement("div", {
-          className: "text-small"
-        }, label), React__default.createElement("div", null, value)));
+        return React__default.createElement(PropertyInShow, {
+          property: property
+        }, value);
       }
     }]);
 
@@ -11297,17 +11481,12 @@ var AdminBro = (function (AdminBro$1, React, reactRedux, reactRouterDom, styled,
       key: "render",
       value: function render() {
         var property = this.props.property;
-        var label = property.label;
-        return React__default.createElement("div", {
-          className: "property"
+        return React__default.createElement(PropertyInShow, {
+          property: property
         }, React__default.createElement("div", {
-          className: "card-content"
-        }, React__default.createElement("div", {
-          className: "text-small"
-        }, label), React__default.createElement("div", {
           className: "rich-text-value content",
           ref: "content"
-        })));
+        }));
       }
     }]);
 
@@ -17262,6 +17441,21 @@ var AdminBro = (function (AdminBro$1, React, reactRedux, reactRouterDom, styled,
   var Async_1 = Async$1.makeAsyncSelect;
   var Async_2 = Async$1.defaultProps;
 
+  var selectStyles = {
+    control: function control(provided, state) {
+      return objectSpread({}, provided, {
+        border: state.isFocused ? "1px solid ".concat(colors.primary) : "1px solid ".concat(colors.border),
+        borderRadius: '0px'
+      });
+    },
+    menu: function menu(provided, state) {
+      return objectSpread({}, provided, {
+        borderRadius: '0px',
+        borderColor: colors.border
+      });
+    }
+  };
+
   var Edit$4 =
   /*#__PURE__*/
   function (_React$Component) {
@@ -17330,23 +17524,17 @@ var AdminBro = (function (AdminBro$1, React, reactRedux, reactRouterDom, styled,
             property = _this$props.property,
             resource = _this$props.resource,
             record = _this$props.record;
-        var value = record.params && record.params[property.name] || '';
         var error = record.errors && record.errors[property.name];
-        return React__default.createElement("div", {
-          className: "field"
-        }, React__default.createElement("label", {
-          htmlFor: property.name,
-          className: "label"
-        }, property.label), React__default.createElement("div", {
-          className: "control"
+        return React__default.createElement(PropertyInEdit, {
+          property: property,
+          error: error
         }, React__default.createElement(Select$1, {
           cacheOptions: true,
+          styles: selectStyles,
           defaultOptions: true,
           loadOptions: this.loadOptions.bind(this),
           onChange: this.handleChange.bind(this)
-        })), error && React__default.createElement("div", {
-          className: "help is-danger"
-        }, error.message));
+        }));
       }
     }]);
 
@@ -17395,14 +17583,9 @@ var AdminBro = (function (AdminBro$1, React, reactRedux, reactRouterDom, styled,
       key: "render",
       value: function render() {
         var property = this.props.property;
-        var label = property.label;
-        return React__default.createElement("div", {
-          className: "property"
-        }, React__default.createElement("div", {
-          className: "card-content"
-        }, React__default.createElement("div", {
-          className: "text-small"
-        }, label), React__default.createElement("div", null, this.valueElement())));
+        return React__default.createElement(PropertyInShow, {
+          property: property
+        }, this.valueElement());
       }
     }]);
 
@@ -17609,6 +17792,54 @@ var AdminBro = (function (AdminBro$1, React, reactRedux, reactRouterDom, styled,
     return PropertyType;
   }(React__default.Component);
 
+  function _templateObject3$2() {
+    var data = taggedTemplateLiteral(["\n  & > .dropdown-content {\n    border: 0px none;\n    border-radius: 0px;\n    box-shadow: 0 6px 13px 0 rgba(69,70,85,0.13);\n  }\n"]);
+
+    _templateObject3$2 = function _templateObject3() {
+      return data;
+    };
+
+    return data;
+  }
+
+  function _templateObject2$7() {
+    var data = taggedTemplateLiteral(["\n  padding: 0px ", ";\n  font-size: 20px;\n  line-height: 20px;\n  &:hover {\n    background: #fff;\n  }\n"]);
+
+    _templateObject2$7 = function _templateObject2() {
+      return data;
+    };
+
+    return data;
+  }
+
+  function _templateObject$d() {
+    var data = taggedTemplateLiteral(["\n  &&& {\n    color: ", ";\n    padding: ", ";\n    border-color: ", ";\n\n    & a:not(.in-dropdown) {\n      color: ", ";\n    }\n\n    &.main {\n      font-weight: bold;\n    }\n  }\n"]);
+
+    _templateObject$d = function _templateObject() {
+      return data;
+    };
+
+    return data;
+  }
+  var Td = styled__default.td(_templateObject$d(), colors.defaultText, sizes.padding, colors.border, colors.primary);
+  var DropdownTrigger = styled__default.div.attrs({
+    className: 'dropdown-trigger'
+  })(_templateObject2$7(), sizes.padding);
+  var DropdownMenu = styled__default.div.attrs({
+    className: 'dropdown-menu'
+  })(_templateObject3$2());
+
+  var ActionsDropdown = function ActionsDropdown(props) {
+    var children = props.children;
+    return React__default.createElement("div", {
+      className: "dropdown is-right is-hoverable"
+    }, React__default.createElement(DropdownTrigger, null, React__default.createElement("i", {
+      className: "icomoon-options"
+    })), React__default.createElement(DropdownMenu, null, React__default.createElement("div", {
+      className: "dropdown-content"
+    }, children)));
+  };
+
   var RecordInList =
   /*#__PURE__*/
   function (_React$PureComponent) {
@@ -17621,28 +17852,17 @@ var AdminBro = (function (AdminBro$1, React, reactRedux, reactRouterDom, styled,
     }
 
     createClass(RecordInList, [{
-      key: "renderActionBtn",
-      value: function renderActionBtn(action, record) {
-        return React__default.createElement(ActionBtn$1, {
-          action: action,
-          key: action.name,
-          resourceId: this.props.resource.id,
-          recordId: record.id,
-          actionPerformed: this.props.actionPerformed,
-          className: "is-white"
-        });
-      }
-    }, {
       key: "render",
       value: function render() {
-        var _this = this;
-
-        var resource = this.props.resource;
-        var record = this.props.record;
+        var _this$props = this.props,
+            resource = _this$props.resource,
+            record = _this$props.record,
+            actionPerformed = _this$props.actionPerformed;
         var recordActions = resource.recordActions;
         return React__default.createElement("tr", null, resource.listProperties.map(function (property) {
-          return React__default.createElement("td", {
-            key: property.name
+          return React__default.createElement(Td, {
+            key: property.name,
+            className: resource.titleProperty.name === property.name ? 'main' : null
           }, React__default.createElement(PropertyType, {
             key: property.name,
             where: "list",
@@ -17650,103 +17870,184 @@ var AdminBro = (function (AdminBro$1, React, reactRedux, reactRouterDom, styled,
             resource: resource,
             record: record
           }));
-        }), React__default.createElement("td", {
-          key: 'options'
-        }, React__default.createElement("div", {
-          className: "dropdown is-right is-hoverable"
-        }, React__default.createElement("div", {
-          className: "dropdown-trigger"
-        }, React__default.createElement("div", {
-          className: "dots"
-        }, React__default.createElement("span", {
-          className: "icon"
-        }, React__default.createElement("i", {
-          className: "icomoon-options"
-        })))), React__default.createElement("div", {
-          className: "dropdown-menu"
-        }, React__default.createElement("div", {
-          className: "dropdown-content"
-        }, recordActions.map(function (action) {
-          return _this.renderActionBtn(action, record);
-        }))))));
+        }), React__default.createElement(Td, {
+          key: "options"
+        }, React__default.createElement(ActionsDropdown, null, recordActions.map(function (action) {
+          return React__default.createElement(ActionBtn$1, {
+            action: action,
+            key: action.name,
+            resourceId: resource.id,
+            recordId: record.id,
+            actionPerformed: actionPerformed,
+            className: "is-white in-dropdown"
+          });
+        }))));
       }
     }]);
 
     return RecordInList;
   }(React__default.PureComponent);
 
-  var RecordsTable =
-  /*#__PURE__*/
-  function (_React$Component) {
-    inherits(RecordsTable, _React$Component);
+  function _templateObject2$8() {
+    var data = taggedTemplateLiteral(["\n  color: ", ";\n\n  &.active {\n    color: ", ";\n  }\n\n  & > i {\n    margin-left: ", "\n  }\n"]);
 
-    function RecordsTable() {
-      classCallCheck(this, RecordsTable);
+    _templateObject2$8 = function _templateObject2() {
+      return data;
+    };
 
-      return possibleConstructorReturn(this, getPrototypeOf(RecordsTable).apply(this, arguments));
+    return data;
+  }
+
+  function _templateObject$e() {
+    var data = taggedTemplateLiteral(["\n  &&& {\n    font-size: ", ";\n    text-transform: uppercase;\n    color: ", ";\n    font-weight: normal;\n    padding: ", ";\n    letter-spacing: 0.1em;\n    border: none;\n  }\n"]);
+
+    _templateObject$e = function _templateObject() {
+      return data;
+    };
+
+    return data;
+  }
+  var Th = styled__default.th(_templateObject$e(), fonts.min, colors.lightText, sizes.padding);
+  var StyledLink = styled__default(reactRouterDom.NavLink).attrs({
+    className: 'is-sortable text-small'
+  })(_templateObject2$8(), colors.lightText, colors.primary, sizes.padding);
+
+  var isSortedBy = function isSortedBy(_ref) {
+    var location = _ref.location,
+        property = _ref.property,
+        resource = _ref.resource;
+    var query = new URLSearchParams(location.search);
+    var sortBy = query.get('sortBy');
+    return sortBy && sortBy === property.name || !sortBy && property.name === resource.titleProperty.name;
+  };
+
+  var SortIndicator = function SortIndicator(_ref2) {
+    var sortedBy = _ref2.sortedBy,
+        location = _ref2.location;
+    var query = new URLSearchParams(location.search);
+
+    if (sortedBy) {
+      var direction = query.get('direction') || 'asc';
+      var sortedByClass = "icomoon-dropdown-".concat(direction === 'asc' ? 'open' : 'close');
+      return React__default.createElement("i", {
+        className: sortedByClass
+      });
     }
 
-    createClass(RecordsTable, [{
-      key: "renderPropertyHeader",
-      value: function renderPropertyHeader(property) {
-        var isMain = property.name === this.props.resource.titleProperty.name;
-        var isSortedBy = property.name === this.props.sortBy;
-        var direction = 'asc';
+    return null;
+  };
 
-        if (isSortedBy && this.props.direction === 'asc') {
-          direction = 'desc';
-        }
+  var SortLink =
+  /*#__PURE__*/
+  function (_React$PureComponent) {
+    inherits(SortLink, _React$PureComponent);
 
-        var search = new URLSearchParams("sortBy=".concat(property.name, "&direction=").concat(direction));
-        var sortedByClass = "icomoon-dropdown-".concat(this.props.direction === 'asc' ? 'open' : 'close');
-        var indicator = React__default.createElement("span", {
-          className: "sorting-icons"
-        }, React__default.createElement("i", {
-          className: sortedByClass
-        }));
-        var link = React__default.createElement(reactRouterDom.Link, {
-          to: {
-            search: search.toString()
-          },
-          className: "is-sortable text-small"
-        }, property.label, isSortedBy && indicator);
-        return React__default.createElement("th", {
-          key: property.name,
-          className: isMain ? 'main' : ''
-        }, React__default.createElement("div", {
-          className: "text-small"
-        }, property.isSortable ? link : property.label));
+    function SortLink() {
+      classCallCheck(this, SortLink);
+
+      return possibleConstructorReturn(this, getPrototypeOf(SortLink).apply(this, arguments));
+    }
+
+    createClass(SortLink, [{
+      key: "isActive",
+      value: function isActive() {
+        return isSortedBy(this.props);
       }
     }, {
       key: "render",
       value: function render() {
-        var _this = this;
-
-        var resource = this.props.resource;
-        var paths = this.props.paths;
-        var records = this.props.records;
-        return React__default.createElement("table", {
-          className: "table is-fullwidth"
-        }, React__default.createElement("thead", null, React__default.createElement("tr", {
-          key: "header"
-        }, resource.listProperties.map(function (property) {
-          return _this.renderPropertyHeader(property);
-        }), React__default.createElement("th", {
-          kay: "actions"
-        }))), React__default.createElement("tbody", null, records.map(function (record) {
-          return React__default.createElement(RecordInList, {
-            record: record,
-            resource: resource,
-            paths: paths,
-            key: record.id,
-            actionPerformed: _this.props.actionPerformed
-          });
-        })));
+        var _this$props = this.props,
+            property = _this$props.property,
+            resource = _this$props.resource,
+            location = _this$props.location;
+        var query = new URLSearchParams(location.search);
+        var opositeDirection = query.get('direction') === 'asc' ? 'desc' : 'asc';
+        var sortedBy = isSortedBy({
+          property: property,
+          resource: resource,
+          location: location
+        });
+        var direction = sortedBy ? opositeDirection : 'asc';
+        query.set('direction', direction);
+        query.set('sortBy', property.name);
+        return React__default.createElement(StyledLink, {
+          to: {
+            search: query.toString()
+          },
+          isActive: this.isActive.bind(this)
+        }, property.label, SortIndicator({
+          sortedBy: sortedBy,
+          location: location
+        }));
       }
     }]);
 
-    return RecordsTable;
-  }(React__default.Component);
+    return SortLink;
+  }(React__default.PureComponent);
+
+  var PropertyHeader = function PropertyHeader(props) {
+    var property = props.property,
+        resource = props.resource;
+    var isMain = property.name === resource.titleProperty.name;
+    return React__default.createElement(Th, {
+      className: isMain ? 'main' : null
+    }, property.isSortable ? React__default.createElement(SortLink, props) : property.label);
+  };
+
+  SortLink.propTypes = {
+    property: propertyType.isRequired,
+    resource: resourceType.isRequired,
+    location: locationType.isRequired
+  };
+  SortIndicator.propTypes = {
+    location: locationType.isRequired,
+    sortedBy: PropTypes$1.bool.isRequired
+  };
+  PropertyHeader.propTypes = {
+    property: propertyType.isRequired,
+    resource: resourceType.isRequired
+  };
+  var PropertyHeader$1 = reactRouterDom.withRouter(PropertyHeader);
+
+  function _templateObject$f() {
+    var data = taggedTemplateLiteral(["\n  & > thead > tr > th {\n    border: none;\n\n    &.actions {\n      width: 80px;\n    }\n  }\n\n"]);
+
+    _templateObject$f = function _templateObject() {
+      return data;
+    };
+
+    return data;
+  }
+  var Table = styled__default.table.attrs({
+    className: 'table is-fullwidth'
+  })(_templateObject$f());
+
+  var RecordsTable = function RecordsTable(props) {
+    var resource = props.resource,
+        paths = props.paths,
+        records = props.records,
+        actionPerformed = props.actionPerformed;
+    return React__default.createElement(Table, null, React__default.createElement("thead", null, React__default.createElement("tr", {
+      key: "header"
+    }, resource.listProperties.map(function (property) {
+      return React__default.createElement(PropertyHeader$1, {
+        resource: resource,
+        property: property,
+        key: property.name
+      });
+    }), React__default.createElement("th", {
+      key: "actions",
+      className: "actions"
+    }))), React__default.createElement("tbody", null, records.map(function (record) {
+      return React__default.createElement(RecordInList, {
+        record: record,
+        resource: resource,
+        paths: paths,
+        key: record.id,
+        actionPerformed: actionPerformed
+      });
+    })));
+  };
 
   function paginate(totalItems, currentPage, pageSize, maxPages) {
       if (currentPage === void 0) { currentPage = 1; }
@@ -18033,7 +18334,118 @@ var AdminBro = (function (AdminBro$1, React, reactRedux, reactRouterDom, styled,
     return Filter;
   }(React__default.Component);
 
-  var Filter$5 = reactRouterDom.withRouter(Filter$4);
+  reactRouterDom.withRouter(Filter$4);
+
+  function _templateObject4() {
+    var data = taggedTemplateLiteral(["\n  ", " {\n    margin-left: ", ";\n  }\n"]);
+
+    _templateObject4 = function _templateObject4() {
+      return data;
+    };
+
+    return data;
+  }
+
+  function _templateObject3$3() {
+    var data = taggedTemplateLiteral(["\n  font-size: ", ";\n  font-weight: normal;\n"]);
+
+    _templateObject3$3 = function _templateObject3() {
+      return data;
+    };
+
+    return data;
+  }
+
+  function _templateObject2$9() {
+    var data = taggedTemplateLiteral(["\n  border-radius: 50%;\n  width: ", ";\n  height: ", ";\n  color: ", ";\n  font-size: ", ";\n  padding: ", ";\n  background-color: ", ";\n  text-align: center;\n  margin-right: ", ";\n  &:hover{\n    background-color: ", ";\n    color: #fff;\n  }\n"]);
+
+    _templateObject2$9 = function _templateObject2() {
+      return data;
+    };
+
+    return data;
+  }
+
+  function _templateObject$g() {
+    var data = taggedTemplateLiteral(["\n  &&& {\n    margin-bottom: ", ";\n  }\n"]);
+
+    _templateObject$g = function _templateObject() {
+      return data;
+    };
+
+    return data;
+  }
+  var HeaderWrapper = styled__default.section.attrs({
+    className: 'level'
+  })(_templateObject$g(), sizes.padding);
+  var BackBtn = styled__default(reactRouterDom.Link)(_templateObject2$9(), sizes.paddingLayout, sizes.paddingLayout, colors.lightText, fonts.base, sizes.paddingMin, colors.superLightBack, sizes.padding, colors.lightText);
+  var HeaderTitle = styled__default.h1.attrs({
+    className: 'level-left'
+  })(_templateObject3$3(), fonts.header);
+  var HeaderButtons = styled__default.div.attrs({
+    className: 'level-right'
+  })(_templateObject4(), StyledBtn, sizes.padding);
+
+  var ActionHeader = function ActionHeader(props) {
+    var h = new viewHelpers();
+    var resource = props.resource,
+        toggleFilter = props.toggleFilter,
+        actionPerformed = props.actionPerformed,
+        recordId = props.recordId,
+        action = props.action;
+    var resourceId = resource.id;
+    var actions = recordId ? resource.recordActions.filter(function (ra) {
+      return ra.name !== action.name;
+    }) : resource.resourceActions;
+    var title = recordId ? action.name : resource.name;
+    return React__default.createElement(HeaderWrapper, null, React__default.createElement(HeaderTitle, null, !toggleFilter && React__default.createElement(BackBtn, {
+      to: h.listUrl({
+        resourceId: resourceId
+      })
+    }, React__default.createElement("i", {
+      className: "icomoon-pagination-left"
+    })), title), React__default.createElement(HeaderButtons, null, actions.map(function (headerAction) {
+      return React__default.createElement(ActionBtn$1, {
+        action: headerAction,
+        key: headerAction.name,
+        actionPerformed: actionPerformed,
+        className: "is-primary",
+        resourceId: resource.id,
+        recordId: recordId
+      });
+    }), toggleFilter && React__default.createElement(StyledBtn, null, React__default.createElement("span", {
+      className: "icon"
+    }, React__default.createElement("i", {
+      className: "fas fa-sliders-h"
+    })), React__default.createElement("span", {
+      className: "btn-text"
+    }, "Filter"))));
+  };
+
+  ActionHeader.propTypes = {
+    resource: resourceType.isRequired,
+    toggleFilter: PropTypes$1.func,
+    actionPerformed: PropTypes$1.func,
+    recordId: PropTypes$1.string,
+    action: actionType
+  };
+  ActionHeader.defaultProps = {
+    toggleFilter: null,
+    actionPerformed: null,
+    recordId: null,
+    action: null
+  };
+
+  function _templateObject$h() {
+    var data = taggedTemplateLiteral(["\n  padding: ", ";\n"]);
+
+    _templateObject$h = function _templateObject() {
+      return data;
+    };
+
+    return data;
+  }
+  var ActionWrapper = styled__default.section(_templateObject$h(), sizes.paddingLayout);
 
   var Dashboard =
   /*#__PURE__*/
@@ -18250,9 +18662,7 @@ var AdminBro = (function (AdminBro$1, React, reactRedux, reactRouterDom, styled,
           params: this.state.params,
           errors: this.state.errors
         };
-        return React__default.createElement("div", {
-          className: "border-box"
-        }, React__default.createElement("form", {
+        return React__default.createElement(BorderBox, null, React__default.createElement("form", {
           onSubmit: this.handleSubmit.bind(this)
         }, properties.map(function (property) {
           return React__default.createElement(PropertyType, {
@@ -18263,20 +18673,15 @@ var AdminBro = (function (AdminBro$1, React, reactRedux, reactRouterDom, styled,
             onChange: _this3.handleChange.bind(_this3),
             record: record
           });
-        }), React__default.createElement("div", {
-          className: "field is-grouped"
-        }, React__default.createElement("div", {
-          className: "control"
-        }, React__default.createElement("button", {
-          className: "button is-primary",
-          type: "submit"
-        }, React__default.createElement("span", {
-          className: "icon is-small"
+        }), React__default.createElement(StyledBtn, {
+          as: "button",
+          type: "submit",
+          className: "is-primary"
         }, React__default.createElement("i", {
           className: "icomoon-save"
-        })), React__default.createElement("div", {
+        }), React__default.createElement("span", {
           className: "btn-text"
-        }, "Save"))))));
+        }, "Save"))));
       }
     }]);
 
@@ -18371,9 +18776,7 @@ var AdminBro = (function (AdminBro$1, React, reactRedux, reactRouterDom, styled,
           return React__default.createElement(Loader, null);
         }
 
-        return React__default.createElement("div", {
-          className: "border-box"
-        }, React__default.createElement("form", {
+        return React__default.createElement(BorderBox, null, React__default.createElement("form", {
           onSubmit: this.handleSubmit.bind(this)
         }, properties.map(function (property) {
           return React__default.createElement(PropertyType, {
@@ -18384,20 +18787,15 @@ var AdminBro = (function (AdminBro$1, React, reactRedux, reactRouterDom, styled,
             resource: resource,
             record: record
           });
-        }), React__default.createElement("div", {
-          className: "field is-grouped"
-        }, React__default.createElement("div", {
-          className: "control"
-        }, React__default.createElement("button", {
-          className: "button is-primary",
-          type: "submit"
-        }, React__default.createElement("span", {
-          className: "icon is-small"
+        }), React__default.createElement(StyledBtn, {
+          as: "button",
+          type: "submit",
+          className: "is-primary"
         }, React__default.createElement("i", {
           className: "icomoon-save"
-        })), React__default.createElement("div", {
+        }), React__default.createElement("span", {
           className: "btn-text"
-        }, "Save"))))));
+        }, "Save"))));
       }
     }]);
 
@@ -18424,7 +18822,6 @@ var AdminBro = (function (AdminBro$1, React, reactRedux, reactRouterDom, styled,
           populated: {}
         }
       };
-      _this.api = new ApiClient();
       return _this;
     }
 
@@ -18433,7 +18830,8 @@ var AdminBro = (function (AdminBro$1, React, reactRedux, reactRouterDom, styled,
       value: function componentDidMount() {
         var _this2 = this;
 
-        this.api.recordAction({
+        var api = new ApiClient();
+        api.recordAction({
           resourceId: this.props.resource.id,
           actionName: this.props.action.name,
           recordId: this.props.recordId
@@ -18448,16 +18846,16 @@ var AdminBro = (function (AdminBro$1, React, reactRedux, reactRouterDom, styled,
       key: "render",
       value: function render() {
         var resource = this.props.resource;
+        var _this$state = this.state,
+            record = _this$state.record,
+            isLoading = _this$state.isLoading;
         var properties = resource.showProperties;
-        var record = this.state.record;
 
-        if (this.state.isLoading) {
+        if (isLoading) {
           return React__default.createElement(Loader, null);
         }
 
-        return React__default.createElement("div", {
-          className: "border-box"
-        }, properties.map(function (property) {
+        return React__default.createElement(BorderBox, null, properties.map(function (property) {
           return React__default.createElement(PropertyType, {
             key: property.name,
             where: "show",
@@ -18521,6 +18919,23 @@ var AdminBro = (function (AdminBro$1, React, reactRedux, reactRouterDom, styled,
   function (_React$Component) {
     inherits(RecordAction, _React$Component);
 
+    createClass(RecordAction, null, [{
+      key: "actionComponent",
+      value: function actionComponent(_ref) {
+        var action = _ref.action,
+            isClient = _ref.isClient;
+        var Action = actions[action.name];
+
+        if (isClient && action.component) {
+          Action = AdminBro.Components[action.component];
+        }
+
+        return Action || function () {
+          return React__default.createElement("div", null);
+        };
+      }
+    }]);
+
     function RecordAction(props) {
       var _this;
 
@@ -18535,20 +18950,6 @@ var AdminBro = (function (AdminBro$1, React, reactRedux, reactRouterDom, styled,
     }
 
     createClass(RecordAction, [{
-      key: "renderActionBtn",
-      value: function renderActionBtn(action) {
-        var _this$props$match$par = this.props.match.params,
-            resourceId = _this$props$match$par.resourceId,
-            recordId = _this$props$match$par.recordId;
-        return React__default.createElement(ActionBtn$1, {
-          action: action,
-          key: action.name,
-          className: "is-primary",
-          resourceId: resourceId,
-          recordId: recordId
-        });
-      }
-    }, {
       key: "componentDidMount",
       value: function componentDidMount() {
         this.setState({
@@ -18558,55 +18959,34 @@ var AdminBro = (function (AdminBro$1, React, reactRedux, reactRouterDom, styled,
     }, {
       key: "render",
       value: function render() {
-        var _this2 = this;
-
-        var _this$props$match$par2 = this.props.match.params,
-            resourceId = _this$props$match$par2.resourceId,
-            actionName = _this$props$match$par2.actionName,
-            recordId = _this$props$match$par2.recordId;
-        var resource = this.props.resources.find(function (r) {
+        var h = new viewHelpers();
+        var _this$props = this.props,
+            match = _this$props.match,
+            resources = _this$props.resources;
+        var _match$params = match.params,
+            resourceId = _match$params.resourceId,
+            actionName = _match$params.actionName,
+            recordId = _match$params.recordId;
+        var isClient = this.state.isClient;
+        var resource = resources.find(function (r) {
           return r.id === resourceId;
         });
         var action = resource.recordActions.find(function (r) {
           return r.name === actionName;
         });
-        var h = new viewHelpers();
-        var Action = actions[action.name];
-
-        if (this.state.isClient && action.component) {
-          Action = AdminBro.Components[action.component];
-        }
-
-        Action = Action || function (props) {
-          return React__default.createElement("div", null);
-        };
-
-        return React__default.createElement("div", {
-          className: "view-edit"
-        }, React__default.createElement(Breadcrumbs, {
+        var Action = RecordAction.actionComponent({
+          action: action,
+          isClient: isClient
+        });
+        return React__default.createElement(ActionWrapper, null, React__default.createElement(Breadcrumbs, {
           resource: resource,
           actionName: actionName,
           recordTitle: this.state.recordTitle
-        }), React__default.createElement("div", {
-          className: "level"
-        }, React__default.createElement("h3", {
-          className: "title"
-        }, React__default.createElement(reactRouterDom.Link, {
-          to: h.listUrl({
-            resourceId: resource.id
-          }),
-          className: "button is-text is-back"
-        }, React__default.createElement("span", {
-          className: "icon is-small"
-        }, React__default.createElement("i", {
-          className: "icomoon-pagination-left"
-        }))), action.label), React__default.createElement("div", {
-          className: "field is-grouped"
-        }, resource.recordActions.filter(function (a) {
-          return a.name !== actionName;
-        }).map(function (action) {
-          return _this2.renderActionBtn(action);
-        }))), React__default.createElement(Action, {
+        }), React__default.createElement(ActionHeader, {
+          resource: resource,
+          recordId: recordId,
+          action: action
+        }), React__default.createElement(Action, {
           action: action,
           resource: resource,
           recordId: recordId
@@ -18672,25 +19052,13 @@ var AdminBro = (function (AdminBro$1, React, reactRedux, reactRouterDom, styled,
           return React__default.createElement("div", null);
         };
 
-        return React__default.createElement("div", {
-          className: "view-edit"
-        }, React__default.createElement(Breadcrumbs, {
+        return React__default.createElement(ActionWrapper, null, React__default.createElement(Breadcrumbs, {
           resource: resource,
           actionName: actionName
-        }), React__default.createElement("div", {
-          className: "level"
-        }, React__default.createElement("h3", {
-          className: "title"
-        }, React__default.createElement(reactRouterDom.Link, {
-          to: h.listUrl({
-            resourceId: resource.id
-          }),
-          className: "button is-text is-back"
-        }, React__default.createElement("span", {
-          className: "icon is-small"
-        }, React__default.createElement("i", {
-          className: "icomoon-pagination-left"
-        }))), action.label)), React__default.createElement(Action, {
+        }), React__default.createElement(ActionHeader, {
+          resource: resource,
+          action: action
+        }), React__default.createElement(Action, {
           action: action,
           resource: resource,
           paths: this.props.paths
@@ -18710,10 +19078,42 @@ var AdminBro = (function (AdminBro$1, React, reactRedux, reactRouterDom, styled,
 
   var ResourceAction$1 = reactRedux.connect(mapStateToProps$4)(ResourceAction);
 
+  var queryHasFilter = (function (queryString) {
+    var query = new URLSearchParams(queryString);
+    var _iteratorNormalCompletion = true;
+    var _didIteratorError = false;
+    var _iteratorError = undefined;
+
+    try {
+      for (var _iterator = query.keys()[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+        var key = _step.value;
+
+        if (key.match('filters.')) {
+          return true;
+        }
+      }
+    } catch (err) {
+      _didIteratorError = true;
+      _iteratorError = err;
+    } finally {
+      try {
+        if (!_iteratorNormalCompletion && _iterator.return != null) {
+          _iterator.return();
+        }
+      } finally {
+        if (_didIteratorError) {
+          throw _iteratorError;
+        }
+      }
+    }
+
+    return false;
+  });
+
   var Resource =
   /*#__PURE__*/
-  function (_React$PureComponent) {
-    inherits(Resource, _React$PureComponent);
+  function (_React$Component) {
+    inherits(Resource, _React$Component);
 
     function Resource(props) {
       var _this;
@@ -18721,77 +19121,53 @@ var AdminBro = (function (AdminBro$1, React, reactRedux, reactRouterDom, styled,
       classCallCheck(this, Resource);
 
       _this = possibleConstructorReturn(this, getPrototypeOf(Resource).call(this, props));
-      _this.api = new ApiClient();
-      _this.resource = _this.props.resources.find(function (r) {
-        return r.id === _this.props.match.params.resourceId;
-      });
+      _this.resource = _this.currentResource();
       _this.state = {
         loading: true,
-        filterVisible: _this.queryHasFilter(),
+        filterVisible: queryHasFilter(_this.props.location.search),
         records: [],
         page: 1,
         perPage: 20,
-        total: 0,
-        sortBy: _this.resource.listProperties[0].name,
-        direction: 'asc'
+        total: 0
       };
       return _this;
     }
 
     createClass(Resource, [{
-      key: "queryHasFilter",
-      value: function queryHasFilter() {
-        var query = new URLSearchParams(this.props.location.search);
-        var _iteratorNormalCompletion = true;
-        var _didIteratorError = false;
-        var _iteratorError = undefined;
-
-        try {
-          for (var _iterator = query.keys()[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-            var key = _step.value;
-
-            if (key.match('filters.')) {
-              return true;
-            }
-          }
-        } catch (err) {
-          _didIteratorError = true;
-          _iteratorError = err;
-        } finally {
-          try {
-            if (!_iteratorNormalCompletion && _iterator.return != null) {
-              _iterator.return();
-            }
-          } finally {
-            if (_didIteratorError) {
-              throw _iteratorError;
-            }
-          }
+      key: "componentDidUpdate",
+      value: function componentDidUpdate(prevProps) {
+        if (this.props.match.params.resourceId !== prevProps.match.params.resourceId || this.props.location.search !== prevProps.location.search) {
+          this._fetchData(this.props.match.params.resourceId);
         }
+      }
+    }, {
+      key: "currentResource",
+      value: function currentResource(resourceId) {
+        var _this2 = this;
 
-        return false;
+        var resources = this.props.resources;
+        return resources.find(function (r) {
+          return r.id === (resourceId || _this2.props.match.params.resourceId);
+        });
       }
     }, {
       key: "_fetchData",
       value: function _fetchData(resourceId) {
-        var _this2 = this;
+        var _this3 = this;
 
-        this.resource = this.props.resources.find(function (r) {
-          return r.id === resourceId;
-        });
+        var api = new ApiClient();
+        this.resource = this.currentResource(resourceId);
         var query = new URLSearchParams(this.props.location.search);
-        this.api.getRecords({
+        api.getRecords({
           resourceId: this.resource.id,
           query: query
         }).then(function (response) {
-          _this2.setState({
+          _this3.setState({
             loading: false,
             records: response.data.records,
             page: response.data.meta.page,
             perPage: response.data.meta.perPage,
-            total: response.data.meta.total,
-            sortBy: response.data.meta.sortBy,
-            direction: response.data.meta.direction
+            total: response.data.meta.total
           });
         });
       }
@@ -18806,24 +19182,6 @@ var AdminBro = (function (AdminBro$1, React, reactRedux, reactRouterDom, styled,
         this._fetchData(this.props.match.params.resourceId);
       }
     }, {
-      key: "componentDidUpdate",
-      value: function componentDidUpdate(prevProps) {
-        if (this.props.match.params.resourceId !== prevProps.match.params.resourceId || this.props.location.search !== prevProps.location.search) {
-          this._fetchData(this.props.match.params.resourceId);
-        }
-      }
-    }, {
-      key: "renderActionBtn",
-      value: function renderActionBtn(action) {
-        return React__default.createElement(ActionBtn$1, {
-          action: action,
-          key: action.name,
-          actionPerformed: this.handleActionPerformed.bind(this),
-          className: "is-primary",
-          resourceId: this.resource.id
-        });
-      }
-    }, {
       key: "toggleFilter",
       value: function toggleFilter(event) {
         this.setState({
@@ -18834,38 +19192,14 @@ var AdminBro = (function (AdminBro$1, React, reactRedux, reactRouterDom, styled,
     }, {
       key: "render",
       value: function render() {
-        var _this3 = this;
-
-        return React__default.createElement("section", {
-          className: "table-list"
-        }, React__default.createElement(Breadcrumbs, {
-          resource: this.resource
-        }), React__default.createElement("div", {
-          className: "level"
-        }, React__default.createElement("div", {
-          className: "title"
-        }, this.resource.name), React__default.createElement("div", {
-          className: "toolbar"
-        }, React__default.createElement("div", {
-          className: "field is-grouped"
-        }, this.resource.resourceActions.map(function (action) {
-          return _this3.renderActionBtn(action);
-        }), React__default.createElement("div", {
-          className: "control"
-        }, React__default.createElement("a", {
-          className: "button is-primary is-transparent filters-open",
-          onClick: this.toggleFilter.bind(this)
-        }, React__default.createElement("span", {
-          className: "icon"
-        }, React__default.createElement("i", {
-          className: "fas fa-sliders-h"
-        })), React__default.createElement("span", {
-          className: "btn-text"
-        }, "Filter")))))), React__default.createElement("div", {
-          className: "border-box"
-        }, React__default.createElement(RecordsTable, {
-          sortBy: this.state.sortBy,
-          direction: this.state.direction,
+        var resource = this.currentResource();
+        return React__default.createElement(ActionWrapper, null, React__default.createElement(Breadcrumbs, {
+          resource: resource
+        }), React__default.createElement(ActionHeader, {
+          resource: resource,
+          toggleFilter: this.toggleFilter.bind(this),
+          actionPerformed: this.handleActionPerformed.bind(this)
+        }), React__default.createElement(BorderBox, null, React__default.createElement(RecordsTable, {
           resource: this.resource,
           records: this.state.records,
           paths: this.props.paths,
@@ -18874,17 +19208,12 @@ var AdminBro = (function (AdminBro$1, React, reactRedux, reactRouterDom, styled,
           page: this.state.page,
           perPage: this.state.perPage,
           total: this.state.total
-        })), React__default.createElement(Filter$5, {
-          resource: this.resource,
-          search: this.state.search,
-          isVisible: this.state.filterVisible,
-          toggleFilter: this.toggleFilter.bind(this)
-        }));
+        })));
       }
     }]);
 
     return Resource;
-  }(React__default.PureComponent);
+  }(React__default.Component);
 
   var mapStateToProps$5 = function mapStateToProps(state) {
     return {
@@ -18893,20 +19222,47 @@ var AdminBro = (function (AdminBro$1, React, reactRedux, reactRouterDom, styled,
     };
   };
 
-  var Resource$1 = reactRedux.connect(mapStateToProps$5)(Resource);
+  var Resource$1 = reactRedux.connect(mapStateToProps$5)(Resource); // <div className="border-box">
+  // </div>
+  // <Filter
+  //   resource={this.resource}
+  //   search={this.state.search}
+  //   isVisible={this.state.filterVisible}
+  //   toggleFilter={this.toggleFilter.bind(this)}
+  // />
 
-  function _templateObject$6() {
-    var data = taggedTemplateLiteral(["\n  font-size: 14px;\n  font-family: 'Roboto', sans-serif;\n"]);
+  function _templateObject3$4() {
+    var data = taggedTemplateLiteral(["\n  height: 100%;\n  overflow-y: auto;\n  width: 100%;\n  background: ", ";\n"]);
 
-    _templateObject$6 = function _templateObject() {
+    _templateObject3$4 = function _templateObject3() {
       return data;
     };
 
     return data;
   }
-  var ApplicationWrapper = styled.div.attrs({
-    className: 'columns'
-  })(_templateObject$6());
+
+  function _templateObject2$a() {
+    var data = taggedTemplateLiteral(["\n  font-size: 14px;\n  font-family: 'Roboto', sans-serif;\n  display: flex;\n  flex-direction: row;\n  height: 100%;\n"]);
+
+    _templateObject2$a = function _templateObject2() {
+      return data;
+    };
+
+    return data;
+  }
+
+  function _templateObject$i() {
+    var data = taggedTemplateLiteral(["\n  html, body, #app {\n      width: 100%;\n      height: 100%;\n  }\n\n  a {\n    color: ", ";\n  }\n"]);
+
+    _templateObject$i = function _templateObject() {
+      return data;
+    };
+
+    return data;
+  }
+  var GlobalStyle = styled.createGlobalStyle(_templateObject$i(), colors.primary);
+  var ApplicationWrapper = styled__default.section(_templateObject2$a());
+  var Core = styled__default.section(_templateObject3$4(), colors.bck);
 
   var App = function App(props) {
     var paths = props.paths;
@@ -18928,9 +19284,7 @@ var AdminBro = (function (AdminBro$1, React, reactRedux, reactRouterDom, styled,
     var listUrl = h.listUrl({
       resourceId: resourceId
     });
-    return React__default.createElement(ApplicationWrapper, null, React__default.createElement(Sidebar$1, null), React__default.createElement("div", {
-      className: "column"
-    }, React__default.createElement(Topbar$1, null), React__default.createElement(reactRouterDom.Switch, null, React__default.createElement(reactRouterDom.Route, {
+    return React__default.createElement(React__default.Fragment, null, React__default.createElement(GlobalStyle, null), React__default.createElement(ApplicationWrapper, null, React__default.createElement(Sidebar$1, null), React__default.createElement(Core, null, React__default.createElement(Topbar$1, null), React__default.createElement(reactRouterDom.Switch, null, React__default.createElement(reactRouterDom.Route, {
       path: h.dashboardUrl(),
       exact: true,
       component: Dashboard$2
@@ -18946,7 +19300,7 @@ var AdminBro = (function (AdminBro$1, React, reactRedux, reactRouterDom, styled,
       path: recordActionUrl,
       exact: true,
       component: RecordAction$1
-    }))));
+    })))));
   };
 
   App.propTypes = {

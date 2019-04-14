@@ -1,6 +1,24 @@
 import React from 'react'
 import Select from 'react-select/lib/Async'
 import ApiClient from '../../../utils/api-client'
+import PropertyInEdit from '../../layout/property-in-edit'
+
+import { colors } from '../../../styles/variables'
+
+const selectStyles = {
+  control: (provided, state) => ({
+    ...provided,
+    border: state.isFocused
+      ? `1px solid ${colors.primary}`
+      : `1px solid ${colors.border}`,
+    borderRadius: '0px',
+  }),
+  menu: (provided, state) => ({
+    ...provided,
+    borderRadius: '0px',
+    borderColor: colors.border,
+  }),
+}
 
 export default class Edit extends React.Component {
   constructor(props) {
@@ -23,24 +41,18 @@ export default class Edit extends React.Component {
 
   render() {
     const { property, resource, record } = this.props
-    const value = (record.params && record.params[property.name]) || ''
     const error = record.errors && record.errors[property.name]
 
     return (
-      <div className="field">
-        <label htmlFor={property.name} className="label">{property.label}</label>
-        <div className="control">
+      <PropertyInEdit property={property} error={error}>
         <Select
           cacheOptions
+          styles={selectStyles}
           defaultOptions
           loadOptions={this.loadOptions.bind(this)}
           onChange={this.handleChange.bind(this)}
-          />
-        </div>
-        {error && (
-          <div className="help is-danger">{error.message}</div>
-        )}
-      </div>
+        />
+      </PropertyInEdit>
     )
   }
 }

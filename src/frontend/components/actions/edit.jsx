@@ -2,7 +2,7 @@ import React from 'react'
 import { withRouter } from 'react-router-dom'
 
 import PropertyType from '../property-type'
-import { Loader } from '../layout'
+import { Loader, BorderBox, StyledBtn } from '../layout'
 import ApiClient from '../../utils/api-client'
 
 class Edit extends React.Component {
@@ -78,7 +78,7 @@ class Edit extends React.Component {
     }
 
     return (
-      <div className="border-box">
+      <BorderBox>
         <form onSubmit={this.handleSubmit.bind(this)}>
           {properties.map(property => (
             <PropertyType
@@ -89,16 +89,12 @@ class Edit extends React.Component {
               resource={resource}
               record={record} />
           ))}
-          <div className="field is-grouped">
-            <div className="control">
-              <button className="button is-primary" type='submit'>
-                <span className="icon is-small"><i className="icomoon-save"></i></span>
-                <div className="btn-text">Save</div>
-              </button>
-            </div>
-          </div>
+          <StyledBtn as="button" type="submit" className="is-primary">
+            <i className="icomoon-save" />
+            <span className="btn-text">Save</span>
+          </StyledBtn>
         </form>
-      </div>
+      </BorderBox>
     )
   }
 }

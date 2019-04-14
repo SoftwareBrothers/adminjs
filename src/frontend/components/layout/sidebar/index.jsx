@@ -16,10 +16,12 @@ const SidebarWrapper = styled.aside`
   padding: ${sizes.paddingLayout};
   width: ${sizes.sidebarWidth};
   display: flex;
+  flex-shrink: 0;
   flex-direction: column;
   justify-content: space-between;
-  height: 100vh;
+  height: 100%;
   overflow-y: auto;
+  border-right: 1px solid ${colors.border};
 `
 
 const SidebarLabel = styled.h2`

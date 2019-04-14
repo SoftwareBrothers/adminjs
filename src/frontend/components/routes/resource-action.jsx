@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 
-import { Breadcrumbs } from '../layout'
+import { Breadcrumbs, ActionBtn, ActionHeader, ActionWrapper } from '../layout'
 
 import ViewHelpers from '../../../backend/utils/view-helpers'
 import actions from '../actions'
@@ -31,18 +31,14 @@ class ResourceAction extends React.Component {
     Action = Action || ((props) => (<div></div>))
 
     return (
-      <div className="view-edit">
+      <ActionWrapper>
         <Breadcrumbs resource={resource} actionName={actionName}/>
-        <div className="level">
-          <h3 className="title">
-            <Link to={h.listUrl({ resourceId: resource.id })} className="button is-text is-back">
-              <span className="icon is-small"><i className="icomoon-pagination-left"></i></span>
-            </Link>
-            {action.label}
-          </h3>
-        </div>
+        <ActionHeader
+          resource={resource}
+          action={action}
+        />
         <Action action={action} resource={resource} paths={this.props.paths} />
-      </div>
+      </ActionWrapper>
     )
   }
 }
