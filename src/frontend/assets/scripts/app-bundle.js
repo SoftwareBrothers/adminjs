@@ -143,7 +143,9 @@ var AdminBro = (function (AdminBro$1, React, reactRedux, reactRouterDom, styled,
     lightBck: '#F8F8FA',
     superLightBack: '#F1F1F5',
     border: '#eeeeef',
+    borderOnDark: '#4E5779',
     bck: '#f7f7Fa',
+    darkBck: '#303b62',
     love: '#e6282b',
     primary: '#718af4',
     primaryHover: '#545B8C' // 'alizarin-crimson': '#e6282b',
@@ -691,7 +693,7 @@ var AdminBro = (function (AdminBro$1, React, reactRedux, reactRouterDom, styled,
   };
 
   function _templateObject$7() {
-    var data = taggedTemplateLiteral(["\n  height: ", ";\n  border-bottom: 1px solid ", ";\n  padding: 0 ", ";\n"]);
+    var data = taggedTemplateLiteral(["\n  height: ", ";\n  border-bottom: 1px solid ", ";\n  padding: 0 ", ";\n  flex-shrink: 0;\n"]);
 
     _templateObject$7 = function _templateObject() {
       return data;
@@ -814,7 +816,7 @@ var AdminBro = (function (AdminBro$1, React, reactRedux, reactRouterDom, styled,
   };
 
   function _templateObject$9() {
-    var data = taggedTemplateLiteral(["\n  font-size: ", ";\n  border-radius: 0;\n  border-color: ", ";\n  background: #fff;\n  height: 32px;\n  padding: ", " ", ";\n  color: ", ";\n  &:hover {\n    border-color: ", ";\n  }\n  &.is-primary {\n    background-color: ", ";\n    color: #ffffff;\n    &:hover {\n      background-color: ", ";\n    }\n  }\n\n  &.in-dropdown {\n    color: ", ";\n    font-size: ", ";\n    width: 100%;\n    text-align: start;\n    justify-content: flex-start;\n    height: 40px;\n    padding-left: 40px;\n  }\n"]);
+    var data = taggedTemplateLiteral(["\n  font-size: ", ";\n  border-radius: 0;\n  border-color: ", ";\n  background: #fff;\n  height: 32px;\n  padding: ", " ", ";\n  color: ", ";\n  &:hover {\n    border-color: ", ";\n  }\n  &.is-primary {\n    background-color: ", ";\n    color: #ffffff;\n    &:hover {\n      background-color: ", ";\n    }\n  }\n\n  &.is-text {\n    background-color: transparent;\n    color: ", ";\n    border: transparent;\n  }\n\n  &.in-dropdown {\n    color: ", ";\n    font-size: ", ";\n    width: 100%;\n    text-align: start;\n    justify-content: flex-start;\n    height: 40px;\n    padding-left: 40px;\n  }\n"]);
 
     _templateObject$9 = function _templateObject() {
       return data;
@@ -824,7 +826,7 @@ var AdminBro = (function (AdminBro$1, React, reactRedux, reactRouterDom, styled,
   }
   var StyledBtn = styled__default(reactRouterDom.Link).attrs({
     className: 'button'
-  })(_templateObject$9(), fonts.medium, colors.primary, sizes.paddingMin, sizes.padding, colors.primary, colors.primaryHover, colors.primary, colors.primaryHover, colors.defaultText, fonts.base);
+  })(_templateObject$9(), fonts.medium, colors.primary, sizes.paddingMin, sizes.padding, colors.primary, colors.primaryHover, colors.primary, colors.primaryHover, colors.primary, colors.defaultText, fonts.base);
 
   var runtime_1 = createCommonjsModule(function (module) {
   /**
@@ -1969,7 +1971,7 @@ var AdminBro = (function (AdminBro$1, React, reactRedux, reactRouterDom, styled,
   }
 
   function _templateObject$c() {
-    var data = taggedTemplateLiteral(["\n  margin-bottom: ", ";\n\n  & input {\n    border-radius: 0;\n    border-color: ", ";\n    box-shadow: none;\n\n    &:focus {\n      border-color: ", ";\n    }\n  }\n"]);
+    var data = taggedTemplateLiteral(["\n  margin-bottom: ", ";\n\n  & input {\n    border-radius: 0;\n    border-color: ", ";\n    box-shadow: none;\n    &:focus {\n      border-color: ", ";\n    }\n  }\n"]);
 
     _templateObject$c = function _templateObject() {
       return data;
@@ -2039,6 +2041,38 @@ var AdminBro = (function (AdminBro$1, React, reactRedux, reactRouterDom, styled,
     return Edit;
   }(React__default.Component);
 
+  function _templateObject2$7() {
+    var data = taggedTemplateLiteral(["\n  display: block;\n  text-transform: uppercase;\n  font-size: ", ";\n  color: ", ";\n  font-weight: normal;\n  margin: ", " 0;\n  letter-spacing: 0.1em;\n"]);
+
+    _templateObject2$7 = function _templateObject2() {
+      return data;
+    };
+
+    return data;
+  }
+
+  function _templateObject$d() {
+    var data = taggedTemplateLiteral(["\n  margin: ", " 0;\n\n  & input {\n    border-radius: 0;\n    border-color: ", ";\n    box-shadow: none;\n    background: transparent;\n    color: ", ";\n\n    &:focus {\n      border-color: ", ";\n    }\n  }\n  & .icon {\n    opacity: 0.25;\n  }\n"]);
+
+    _templateObject$d = function _templateObject() {
+      return data;
+    };
+
+    return data;
+  }
+  var Property$2 = styled__default.div(_templateObject$d(), sizes.paddingLayout, colors.borderOnDark, colors.lightText, colors.primary);
+  var Label$2 = styled__default.label(_templateObject2$7(), fonts.min, colors.lightText, sizes.paddingMin);
+
+  var PropertyInFilter = function PropertyInFilter(props) {
+    var property = props.property,
+        children = props.children;
+    return React__default.createElement(Property$2, null, React__default.createElement(Label$2, null, property.label), children);
+  };
+
+  PropertyInFilter.propTypes = {
+    property: propertyType.isRequired
+  };
+
   var Filter =
   /*#__PURE__*/
   function (_React$PureComponent) {
@@ -2063,16 +2097,15 @@ var AdminBro = (function (AdminBro$1, React, reactRedux, reactRouterDom, styled,
             filter = _this$props.filter;
         var filterKey = "filter-".concat(property.name);
         var value = filter[property.name] || '';
-        return React__default.createElement("div", {
-          className: "filter"
-        }, React__default.createElement("label", {
-          htmlFor: filterKey,
-          className: "label"
-        }, property.label, " contains:"), React__default.createElement("div", {
-          className: "control"
+        return React__default.createElement(PropertyInFilter, {
+          property: property
+        }, React__default.createElement("div", {
+          className: "control has-icons-left"
+        }, React__default.createElement("span", {
+          className: "icon is-small is-right"
         }, React__default.createElement("i", {
-          className: "search-icon fas fa-search"
-        }), React__default.createElement("input", {
+          className: "fas fa-search"
+        })), React__default.createElement("input", {
           type: "text",
           className: "input filter",
           name: filterKey,
@@ -10997,6 +11030,50 @@ var AdminBro = (function (AdminBro$1, React, reactRedux, reactRouterDom, styled,
 
   var index$1$1 = manageState(Select);
 
+  var selectStyles = {
+    control: function control(provided, state) {
+      return objectSpread({}, provided, {
+        border: state.isFocused ? "1px solid ".concat(colors.primary) : "1px solid ".concat(colors.border),
+        borderRadius: '0px',
+        background: 'transparent'
+      });
+    },
+    menu: function menu(provided, state) {
+      return objectSpread({}, provided, {
+        borderRadius: '0px',
+        borderColor: colors.border
+      });
+    }
+  };
+  var filterStyles = {
+    control: function control(provided, state) {
+      return objectSpread({}, provided, {
+        border: state.isFocused ? "1px solid ".concat(colors.primary) : "1px solid ".concat(colors.borderOnDark),
+        borderRadius: '0px',
+        background: 'transparent',
+        color: colors.lightText
+      });
+    },
+    singleValue: function singleValue() {
+      return {
+        color: colors.lightText
+      };
+    },
+    option: function option(provided, state) {
+      return objectSpread({}, provided, {
+        color: state.isSelected ? '#ffffff' : colors.lightText,
+        background: state.isFocused ? 'rgba(32,39,62,0.25)' : 'transparent'
+      });
+    },
+    menu: function menu(provided, state) {
+      return objectSpread({}, provided, {
+        borderRadius: '0px',
+        borderColor: colors.border,
+        background: colors.darkBck
+      });
+    }
+  };
+
   var Filter$1 =
   /*#__PURE__*/
   function (_React$PureComponent) {
@@ -11011,7 +11088,8 @@ var AdminBro = (function (AdminBro$1, React, reactRedux, reactRouterDom, styled,
     createClass(Filter, [{
       key: "handleChange",
       value: function handleChange(selected) {
-        this.props.onChange(this.props.property.name, selected.value);
+        var value = selected ? selected.value : '';
+        this.props.onChange(this.props.property.name, value);
       }
     }, {
       key: "render",
@@ -11022,26 +11100,20 @@ var AdminBro = (function (AdminBro$1, React, reactRedux, reactRouterDom, styled,
         var filterKey = "filter-".concat(property.name);
         var value = filter[property.name];
         var options = [{
-          value: '',
-          label: "-- All --"
-        }, {
           value: true,
           label: mapValue(true)
         }, {
           value: false,
           label: mapValue(false)
         }];
-        return React__default.createElement("div", {
-          className: "filter"
-        }, React__default.createElement("label", {
-          htmlFor: filterKey,
-          className: "label"
-        }, property.label, " contains:"), React__default.createElement("div", {
-          className: "control"
+        return React__default.createElement(PropertyInFilter, {
+          property: property
         }, React__default.createElement(index$1$1, {
+          isClearable: true,
           options: options,
+          styles: filterStyles,
           onChange: this.handleChange.bind(this)
-        })));
+        }));
       }
     }]);
 
@@ -11300,11 +11372,7 @@ var AdminBro = (function (AdminBro$1, React, reactRedux, reactRouterDom, styled,
         var key = where.toLowerCase();
         var property = this.props.property;
         var filterKey = "filter-".concat(property.name);
-        return React__default.createElement("div", {
-          className: "filter"
-        }, React__default.createElement("label", {
-          className: "label"
-        }, where, ":"), React__default.createElement("div", {
+        return React__default.createElement("div", null, React__default.createElement(Label$2, null, "- ", where, ":"), React__default.createElement("div", {
           className: "control has-icons-right"
         }, React__default.createElement("input", {
           type: "text",
@@ -11323,9 +11391,9 @@ var AdminBro = (function (AdminBro$1, React, reactRedux, reactRouterDom, styled,
         var _this$props2 = this.props,
             property = _this$props2.property,
             filter = _this$props2.filter;
-        return React__default.createElement("div", {
-          className: "picker-name"
-        }, property.label, React__default.createElement("div", {
+        return React__default.createElement(PropertyInFilter, {
+          property: property
+        }, React__default.createElement("div", {
           className: "date-range"
         }, this.renderFilter('From'), this.renderFilter('To')));
       }
@@ -17441,21 +17509,6 @@ var AdminBro = (function (AdminBro$1, React, reactRedux, reactRouterDom, styled,
   var Async_1 = Async$1.makeAsyncSelect;
   var Async_2 = Async$1.defaultProps;
 
-  var selectStyles = {
-    control: function control(provided, state) {
-      return objectSpread({}, provided, {
-        border: state.isFocused ? "1px solid ".concat(colors.primary) : "1px solid ".concat(colors.border),
-        borderRadius: '0px'
-      });
-    },
-    menu: function menu(provided, state) {
-      return objectSpread({}, provided, {
-        borderRadius: '0px',
-        borderColor: colors.border
-      });
-    }
-  };
-
   var Edit$4 =
   /*#__PURE__*/
   function (_React$Component) {
@@ -17703,20 +17756,16 @@ var AdminBro = (function (AdminBro$1, React, reactRedux, reactRouterDom, styled,
         var value = {
           value: filter[property.name] || ''
         };
-        return React__default.createElement("div", {
-          className: "filter"
-        }, React__default.createElement("label", {
-          htmlFor: filterKey,
-          className: "label"
-        }, property.label, " contains:"), React__default.createElement("div", {
-          className: "control"
+        return React__default.createElement(PropertyInFilter, {
+          property: property
         }, React__default.createElement(Select$1, {
           isClearable: true,
           cacheOptions: true,
+          styles: filterStyles,
           loadOptions: this.loadOptions.bind(this),
           onChange: this.handleChange.bind(this),
           defaultOptions: true
-        })));
+        }));
       }
     }]);
 
@@ -17802,29 +17851,29 @@ var AdminBro = (function (AdminBro$1, React, reactRedux, reactRouterDom, styled,
     return data;
   }
 
-  function _templateObject2$7() {
+  function _templateObject2$8() {
     var data = taggedTemplateLiteral(["\n  padding: 0px ", ";\n  font-size: 20px;\n  line-height: 20px;\n  &:hover {\n    background: #fff;\n  }\n"]);
 
-    _templateObject2$7 = function _templateObject2() {
+    _templateObject2$8 = function _templateObject2() {
       return data;
     };
 
     return data;
   }
 
-  function _templateObject$d() {
+  function _templateObject$e() {
     var data = taggedTemplateLiteral(["\n  &&& {\n    color: ", ";\n    padding: ", ";\n    border-color: ", ";\n\n    & a:not(.in-dropdown) {\n      color: ", ";\n    }\n\n    &.main {\n      font-weight: bold;\n    }\n  }\n"]);
 
-    _templateObject$d = function _templateObject() {
+    _templateObject$e = function _templateObject() {
       return data;
     };
 
     return data;
   }
-  var Td = styled__default.td(_templateObject$d(), colors.defaultText, sizes.padding, colors.border, colors.primary);
+  var Td = styled__default.td(_templateObject$e(), colors.defaultText, sizes.padding, colors.border, colors.primary);
   var DropdownTrigger = styled__default.div.attrs({
     className: 'dropdown-trigger'
-  })(_templateObject2$7(), sizes.padding);
+  })(_templateObject2$8(), sizes.padding);
   var DropdownMenu = styled__default.div.attrs({
     className: 'dropdown-menu'
   })(_templateObject3$2());
@@ -17888,29 +17937,29 @@ var AdminBro = (function (AdminBro$1, React, reactRedux, reactRouterDom, styled,
     return RecordInList;
   }(React__default.PureComponent);
 
-  function _templateObject2$8() {
+  function _templateObject2$9() {
     var data = taggedTemplateLiteral(["\n  color: ", ";\n\n  &.active {\n    color: ", ";\n  }\n\n  & > i {\n    margin-left: ", "\n  }\n"]);
 
-    _templateObject2$8 = function _templateObject2() {
+    _templateObject2$9 = function _templateObject2() {
       return data;
     };
 
     return data;
   }
 
-  function _templateObject$e() {
+  function _templateObject$f() {
     var data = taggedTemplateLiteral(["\n  &&& {\n    font-size: ", ";\n    text-transform: uppercase;\n    color: ", ";\n    font-weight: normal;\n    padding: ", ";\n    letter-spacing: 0.1em;\n    border: none;\n  }\n"]);
 
-    _templateObject$e = function _templateObject() {
+    _templateObject$f = function _templateObject() {
       return data;
     };
 
     return data;
   }
-  var Th = styled__default.th(_templateObject$e(), fonts.min, colors.lightText, sizes.padding);
+  var Th = styled__default.th(_templateObject$f(), fonts.min, colors.lightText, sizes.padding);
   var StyledLink = styled__default(reactRouterDom.NavLink).attrs({
     className: 'is-sortable text-small'
-  })(_templateObject2$8(), colors.lightText, colors.primary, sizes.padding);
+  })(_templateObject2$9(), colors.lightText, colors.primary, sizes.padding);
 
   var isSortedBy = function isSortedBy(_ref) {
     var location = _ref.location,
@@ -18009,10 +18058,10 @@ var AdminBro = (function (AdminBro$1, React, reactRedux, reactRouterDom, styled,
   };
   var PropertyHeader$1 = reactRouterDom.withRouter(PropertyHeader);
 
-  function _templateObject$f() {
+  function _templateObject$g() {
     var data = taggedTemplateLiteral(["\n  & > thead > tr > th {\n    border: none;\n\n    &.actions {\n      width: 80px;\n    }\n  }\n\n"]);
 
-    _templateObject$f = function _templateObject() {
+    _templateObject$g = function _templateObject() {
       return data;
     };
 
@@ -18020,7 +18069,7 @@ var AdminBro = (function (AdminBro$1, React, reactRedux, reactRouterDom, styled,
   }
   var Table = styled__default.table.attrs({
     className: 'table is-fullwidth'
-  })(_templateObject$f());
+  })(_templateObject$g());
 
   var RecordsTable = function RecordsTable(props) {
     var resource = props.resource,
@@ -18174,6 +18223,39 @@ var AdminBro = (function (AdminBro$1, React, reactRedux, reactRouterDom, styled,
 
   var Paginate$1 = reactRouterDom.withRouter(Paginate);
 
+  function _templateObject3$3() {
+    var data = taggedTemplateLiteral(["\n  padding: ", ";\n  width: ", ";\n  overflow: hidden;\n\n  & ", " {\n    margin: ", " 0;\n    width: 100%;\n  }\n"]);
+
+    _templateObject3$3 = function _templateObject3() {
+      return data;
+    };
+
+    return data;
+  }
+
+  function _templateObject2$a() {
+    var data = taggedTemplateLiteral(["\n  color: #fff;\n  & > span {\n    opacity: 0.25;\n    color: ", ";\n    border: 1px solid ", ";\n    border-radius: 3px;\n    padding: 8px 10px;\n    margin-right: ", ";\n  }\n  &:hover {\n    color: ", ";\n    & span{\n      color: ", ";\n      border-color: ", ";\n      opacity: 1;\n    }\n  }\n"]);
+
+    _templateObject2$a = function _templateObject2() {
+      return data;
+    };
+
+    return data;
+  }
+
+  function _templateObject$h() {
+    var data = taggedTemplateLiteral(["\n  background: ", ";\n  flex-shrink: 0;\n  width: ", ";\n  color: #fff;\n  padding-top: 60px;\n  transition: width 0.5s;\n  overflow-x: hidden;\n  &.filter-hidden {\n    width: 0;\n    transition: width 0.5s;\n  }\n"]);
+
+    _templateObject$h = function _templateObject() {
+      return data;
+    };
+
+    return data;
+  }
+  var FilterWrapper = styled__default.section(_templateObject$h(), colors.darkBck, sizes.sidebarWidth);
+  var FilterLink = styled__default.a(_templateObject2$a(), colors.lightText, colors.lightText, sizes.padding, colors.primary, colors.primary, colors.primary);
+  var FilterContent = styled__default.section(_templateObject3$3(), sizes.paddingLayout, sizes.sidebarWidth, StyledBtn, sizes.paddingMin);
+
   var Filter$4 =
   /*#__PURE__*/
   function (_React$Component) {
@@ -18295,20 +18377,18 @@ var AdminBro = (function (AdminBro$1, React, reactRedux, reactRouterDom, styled,
       value: function render() {
         var _this3 = this;
 
-        var resource = this.props.resource;
+        var _this$props = this.props,
+            resource = _this$props.resource,
+            isVisible = _this$props.isVisible,
+            toggleFilter = _this$props.toggleFilter;
         var properties = resource.editProperties;
-        return React__default.createElement("div", {
-          className: "filters-bar-wrapper"
-        }, React__default.createElement("div", {
-          className: "filters-bar".concat(this.props.isVisible ? ' filters-show' : '')
-        }, React__default.createElement("a", {
-          className: "filters-close",
-          onClick: this.props.toggleFilter
-        }, React__default.createElement("span", {
-          className: "arrow-right"
-        }, React__default.createElement("i", {
+        return React__default.createElement(FilterWrapper, {
+          className: isVisible ? null : 'filter-hidden'
+        }, React__default.createElement(FilterContent, null, React__default.createElement(FilterLink, {
+          onClick: toggleFilter
+        }, React__default.createElement("span", null, React__default.createElement("i", {
           className: "fas fa-arrow-right"
-        })), React__default.createElement("span", null, "Filter")), React__default.createElement("form", {
+        })), "Filter"), React__default.createElement("form", {
           onSubmit: this.handleSubmit.bind(this)
         }, properties.map(function (property) {
           return React__default.createElement(PropertyType, {
@@ -18319,22 +18399,21 @@ var AdminBro = (function (AdminBro$1, React, reactRedux, reactRouterDom, styled,
             filter: _this3.state.filter,
             resource: resource
           });
-        }), React__default.createElement("button", {
-          className: "button is-primary apply-changes"
-        }, "Apply Changes"), React__default.createElement("a", {
-          href: "#",
-          className: "clear-button",
+        }), React__default.createElement(StyledBtn, {
+          as: "button",
+          className: "is-primary"
+        }, "Apply Changes"), React__default.createElement(StyledBtn, {
+          as: "a",
+          className: "is-text",
           onClick: this.resetFilter.bind(this)
-        }, React__default.createElement("span", {
-          className: "clear"
-        }, "Clear filters")))));
+        }, "Clear filters"))));
       }
     }]);
 
     return Filter;
   }(React__default.Component);
 
-  reactRouterDom.withRouter(Filter$4);
+  var Filter$5 = reactRouterDom.withRouter(Filter$4);
 
   function _templateObject4() {
     var data = taggedTemplateLiteral(["\n  ", " {\n    margin-left: ", ";\n  }\n"]);
@@ -18346,30 +18425,30 @@ var AdminBro = (function (AdminBro$1, React, reactRedux, reactRouterDom, styled,
     return data;
   }
 
-  function _templateObject3$3() {
+  function _templateObject3$4() {
     var data = taggedTemplateLiteral(["\n  font-size: ", ";\n  font-weight: normal;\n"]);
 
-    _templateObject3$3 = function _templateObject3() {
+    _templateObject3$4 = function _templateObject3() {
       return data;
     };
 
     return data;
   }
 
-  function _templateObject2$9() {
+  function _templateObject2$b() {
     var data = taggedTemplateLiteral(["\n  border-radius: 50%;\n  width: ", ";\n  height: ", ";\n  color: ", ";\n  font-size: ", ";\n  padding: ", ";\n  background-color: ", ";\n  text-align: center;\n  margin-right: ", ";\n  &:hover{\n    background-color: ", ";\n    color: #fff;\n  }\n"]);
 
-    _templateObject2$9 = function _templateObject2() {
+    _templateObject2$b = function _templateObject2() {
       return data;
     };
 
     return data;
   }
 
-  function _templateObject$g() {
+  function _templateObject$i() {
     var data = taggedTemplateLiteral(["\n  &&& {\n    margin-bottom: ", ";\n  }\n"]);
 
-    _templateObject$g = function _templateObject() {
+    _templateObject$i = function _templateObject() {
       return data;
     };
 
@@ -18377,11 +18456,11 @@ var AdminBro = (function (AdminBro$1, React, reactRedux, reactRouterDom, styled,
   }
   var HeaderWrapper = styled__default.section.attrs({
     className: 'level'
-  })(_templateObject$g(), sizes.padding);
-  var BackBtn = styled__default(reactRouterDom.Link)(_templateObject2$9(), sizes.paddingLayout, sizes.paddingLayout, colors.lightText, fonts.base, sizes.paddingMin, colors.superLightBack, sizes.padding, colors.lightText);
+  })(_templateObject$i(), sizes.padding);
+  var BackBtn = styled__default(reactRouterDom.Link)(_templateObject2$b(), sizes.paddingLayout, sizes.paddingLayout, colors.lightText, fonts.base, sizes.paddingMin, colors.superLightBack, sizes.padding, colors.lightText);
   var HeaderTitle = styled__default.h1.attrs({
     className: 'level-left'
-  })(_templateObject3$3(), fonts.header);
+  })(_templateObject3$4(), fonts.header);
   var HeaderButtons = styled__default.div.attrs({
     className: 'level-right'
   })(_templateObject4(), StyledBtn, sizes.padding);
@@ -18413,7 +18492,10 @@ var AdminBro = (function (AdminBro$1, React, reactRedux, reactRouterDom, styled,
         resourceId: resource.id,
         recordId: recordId
       });
-    }), toggleFilter && React__default.createElement(StyledBtn, null, React__default.createElement("span", {
+    }), toggleFilter && React__default.createElement(StyledBtn, {
+      onClick: toggleFilter,
+      as: "button"
+    }, React__default.createElement("span", {
       className: "icon"
     }, React__default.createElement("i", {
       className: "fas fa-sliders-h"
@@ -18436,16 +18518,16 @@ var AdminBro = (function (AdminBro$1, React, reactRedux, reactRouterDom, styled,
     action: null
   };
 
-  function _templateObject$h() {
-    var data = taggedTemplateLiteral(["\n  padding: ", ";\n"]);
+  function _templateObject$j() {
+    var data = taggedTemplateLiteral(["\n  padding: ", ";\n  flex-grow: 1;\n"]);
 
-    _templateObject$h = function _templateObject() {
+    _templateObject$j = function _templateObject() {
       return data;
     };
 
     return data;
   }
-  var ActionWrapper = styled__default.section(_templateObject$h(), sizes.paddingLayout);
+  var ActionWrapper = styled__default.section(_templateObject$j(), sizes.paddingLayout);
 
   var Dashboard =
   /*#__PURE__*/
@@ -19110,6 +19192,19 @@ var AdminBro = (function (AdminBro$1, React, reactRedux, reactRouterDom, styled,
     return false;
   });
 
+  function _templateObject$k() {
+    var data = taggedTemplateLiteral(["\n  align-items: stretch;\n  flex-grow: 1;\n"]);
+
+    _templateObject$k = function _templateObject() {
+      return data;
+    };
+
+    return data;
+  }
+  var Wrapper = styled__default.section.attrs({
+    className: 'level'
+  })(_templateObject$k());
+
   var Resource =
   /*#__PURE__*/
   function (_React$Component) {
@@ -19193,7 +19288,7 @@ var AdminBro = (function (AdminBro$1, React, reactRedux, reactRouterDom, styled,
       key: "render",
       value: function render() {
         var resource = this.currentResource();
-        return React__default.createElement(ActionWrapper, null, React__default.createElement(Breadcrumbs, {
+        return React__default.createElement(Wrapper, null, React__default.createElement(ActionWrapper, null, React__default.createElement(Breadcrumbs, {
           resource: resource
         }), React__default.createElement(ActionHeader, {
           resource: resource,
@@ -19208,7 +19303,12 @@ var AdminBro = (function (AdminBro$1, React, reactRedux, reactRouterDom, styled,
           page: this.state.page,
           perPage: this.state.perPage,
           total: this.state.total
-        })));
+        }))), React__default.createElement(Filter$5, {
+          resource: this.resource,
+          search: this.state.search,
+          isVisible: this.state.filterVisible,
+          toggleFilter: this.toggleFilter.bind(this)
+        }));
       }
     }]);
 
@@ -19222,47 +19322,40 @@ var AdminBro = (function (AdminBro$1, React, reactRedux, reactRouterDom, styled,
     };
   };
 
-  var Resource$1 = reactRedux.connect(mapStateToProps$5)(Resource); // <div className="border-box">
-  // </div>
-  // <Filter
-  //   resource={this.resource}
-  //   search={this.state.search}
-  //   isVisible={this.state.filterVisible}
-  //   toggleFilter={this.toggleFilter.bind(this)}
-  // />
+  var Resource$1 = reactRedux.connect(mapStateToProps$5)(Resource);
 
-  function _templateObject3$4() {
-    var data = taggedTemplateLiteral(["\n  height: 100%;\n  overflow-y: auto;\n  width: 100%;\n  background: ", ";\n"]);
+  function _templateObject3$5() {
+    var data = taggedTemplateLiteral(["\n  height: 100%;\n  overflow-y: auto;\n  width: 100%;\n  background: ", ";\n  display: flex;\n  flex-direction: column;\n"]);
 
-    _templateObject3$4 = function _templateObject3() {
+    _templateObject3$5 = function _templateObject3() {
       return data;
     };
 
     return data;
   }
 
-  function _templateObject2$a() {
+  function _templateObject2$c() {
     var data = taggedTemplateLiteral(["\n  font-size: 14px;\n  font-family: 'Roboto', sans-serif;\n  display: flex;\n  flex-direction: row;\n  height: 100%;\n"]);
 
-    _templateObject2$a = function _templateObject2() {
+    _templateObject2$c = function _templateObject2() {
       return data;
     };
 
     return data;
   }
 
-  function _templateObject$i() {
+  function _templateObject$l() {
     var data = taggedTemplateLiteral(["\n  html, body, #app {\n      width: 100%;\n      height: 100%;\n  }\n\n  a {\n    color: ", ";\n  }\n"]);
 
-    _templateObject$i = function _templateObject() {
+    _templateObject$l = function _templateObject() {
       return data;
     };
 
     return data;
   }
-  var GlobalStyle = styled.createGlobalStyle(_templateObject$i(), colors.primary);
-  var ApplicationWrapper = styled__default.section(_templateObject2$a());
-  var Core = styled__default.section(_templateObject3$4(), colors.bck);
+  var GlobalStyle = styled.createGlobalStyle(_templateObject$l(), colors.primary);
+  var ApplicationWrapper = styled__default.section(_templateObject2$c());
+  var Core = styled__default.section(_templateObject3$5(), colors.bck);
 
   var App = function App(props) {
     var paths = props.paths;

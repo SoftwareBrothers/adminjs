@@ -1,4 +1,5 @@
 import React from 'react'
+import PropertyInFilter from '../../layout/property-in-filter'
 
 export default class Filter extends React.PureComponent {
   handleChange(event) {
@@ -10,10 +11,11 @@ export default class Filter extends React.PureComponent {
     const filterKey = `filter-${property.name}`
     const value = filter[property.name] || ''
     return (
-      <div className="filter">
-        <label htmlFor={filterKey} className="label">{property.label} contains:</label>
-        <div className="control">
-          <i className="search-icon fas fa-search"></i>
+      <PropertyInFilter property={property}>
+        <div className="control has-icons-left">
+          <span className="icon is-small is-right">
+            <i className="fas fa-search" />
+          </span>
           <input
             type="text"
             className="input filter"
@@ -21,7 +23,7 @@ export default class Filter extends React.PureComponent {
             onChange={this.handleChange.bind(this)}
             value={value} />
         </div>
-      </div>
+      </PropertyInFilter>
     )
   }
 }

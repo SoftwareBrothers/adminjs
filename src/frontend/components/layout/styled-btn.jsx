@@ -24,6 +24,12 @@ const StyledBtn = styled(Link).attrs({
     }
   }
 
+  &.is-text {
+    background-color: transparent;
+    color: ${colors.primary};
+    border: transparent;
+  }
+
   &.in-dropdown {
     color: ${colors.defaultText};
     font-size: ${fonts.base};

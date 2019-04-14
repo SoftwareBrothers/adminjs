@@ -3,22 +3,7 @@ import Select from 'react-select/lib/Async'
 import ApiClient from '../../../utils/api-client'
 import PropertyInEdit from '../../layout/property-in-edit'
 
-import { colors } from '../../../styles/variables'
-
-const selectStyles = {
-  control: (provided, state) => ({
-    ...provided,
-    border: state.isFocused
-      ? `1px solid ${colors.primary}`
-      : `1px solid ${colors.border}`,
-    borderRadius: '0px',
-  }),
-  menu: (provided, state) => ({
-    ...provided,
-    borderRadius: '0px',
-    borderColor: colors.border,
-  }),
-}
+import selectStyles from '../../../styles/select-styles'
 
 export default class Edit extends React.Component {
   constructor(props) {

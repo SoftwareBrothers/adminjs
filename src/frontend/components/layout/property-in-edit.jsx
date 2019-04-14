@@ -11,7 +11,6 @@ const Property = styled.div`
     border-radius: 0;
     border-color: ${colors.border};
     box-shadow: none;
-
     &:focus {
       border-color: ${colors.primary};
     }

@@ -5,7 +5,9 @@ export const colors = {
   lightBck: '#F8F8FA',
   superLightBack: '#F1F1F5',
   border: '#eeeeef',
+  borderOnDark: '#4E5779',
   bck: '#f7f7Fa',
+  darkBck: '#303b62',
 
   love: '#e6282b',
   primary: '#718af4',

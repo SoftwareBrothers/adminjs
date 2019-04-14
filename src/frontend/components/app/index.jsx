@@ -36,6 +36,8 @@ const Core = styled.section`
   overflow-y: auto;
   width: 100%;
   background: ${colors.bck};
+  display: flex;
+  flex-direction: column;
 `
 
 const App = (props) => {

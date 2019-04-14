@@ -1,11 +1,14 @@
 import React from 'react'
-
 import Select from 'react-select'
+
 import mapValue from './map-value'
+import PropertyInFilter from '../../layout/property-in-filter'
+import { filterStyles } from '../../../styles/select-styles'
 
 export default class Filter extends React.PureComponent {
   handleChange(selected) {
-    this.props.onChange(this.props.property.name, selected.value)
+    const value = selected ? selected.value : ''
+    this.props.onChange(this.props.property.name, value)
   }
 
   render() {
@@ -13,20 +16,18 @@ export default class Filter extends React.PureComponent {
     const filterKey = `filter-${property.name}`
     const value = filter[property.name]
     const options = [
-      {value: '', label: "-- All --"},
-      {value: true, label: mapValue(true)},
-      {value: false, label: mapValue(false)},
+      { value: true, label: mapValue(true) },
+      { value: false, label: mapValue(false) },
     ]
     return (
-      <div className="filter">
-        <label htmlFor={filterKey} className="label">{property.label} contains:</label>
-        <div className="control">
-          <Select
-            options={options}
-            onChange={this.handleChange.bind(this)}
-            />
-        </div>
-      </div>
+      <PropertyInFilter property={property}>
+        <Select
+          isClearable
+          options={options}
+          styles={filterStyles}
+          onChange={this.handleChange.bind(this)}
+        />
+      </PropertyInFilter>
     )
   }
 }

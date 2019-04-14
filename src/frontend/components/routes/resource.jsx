@@ -1,5 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import styled from 'styled-components'
 
 import {
   Breadcrumbs, RecordsTable, Paginate, Filter, ActionHeader, BorderBox, ActionWrapper,
@@ -8,6 +9,13 @@ import {
 import { sizes } from '../../styles/variables'
 import ApiClient from '../../utils/api-client'
 import queryHasFilter from './query-has-filter'
+
+const Wrapper = styled.section.attrs({
+  className: 'level',
+})`
+  align-items: stretch;
+  flex-grow: 1;
+`
 
 class Resource extends React.Component {
   constructor(props) {
@@ -72,27 +80,35 @@ class Resource extends React.Component {
   render() {
     const resource = this.currentResource()
     return (
-      <ActionWrapper>
-        <Breadcrumbs resource={resource} />
-        <ActionHeader
-          resource={resource}
-          toggleFilter={this.toggleFilter.bind(this)}
-          actionPerformed={this.handleActionPerformed.bind(this)}
-        />
-        <BorderBox>
-          <RecordsTable
-            resource={this.resource}
-            records={this.state.records}
-            paths={this.props.paths}
+      <Wrapper>
+        <ActionWrapper>
+          <Breadcrumbs resource={resource} />
+          <ActionHeader
+            resource={resource}
+            toggleFilter={this.toggleFilter.bind(this)}
             actionPerformed={this.handleActionPerformed.bind(this)}
           />
-          <Paginate
-            page={this.state.page}
-            perPage={this.state.perPage}
-            total={this.state.total}
-          />
-        </BorderBox>
-      </ActionWrapper>
+          <BorderBox>
+            <RecordsTable
+              resource={this.resource}
+              records={this.state.records}
+              paths={this.props.paths}
+              actionPerformed={this.handleActionPerformed.bind(this)}
+            />
+            <Paginate
+              page={this.state.page}
+              perPage={this.state.perPage}
+              total={this.state.total}
+            />
+          </BorderBox>
+        </ActionWrapper>
+        <Filter
+          resource={this.resource}
+          search={this.state.search}
+          isVisible={this.state.filterVisible}
+          toggleFilter={this.toggleFilter.bind(this)}
+        />
+      </Wrapper>
     )
   }
 }
@@ -103,16 +119,3 @@ const mapStateToProps = (state) => ({
 })
 
 export default connect(mapStateToProps)(Resource)
-
-
-
-        
-        // <div className="border-box">
-        
-        // </div>
-        // <Filter
-        //   resource={this.resource}
-        //   search={this.state.search}
-        //   isVisible={this.state.filterVisible}
-        //   toggleFilter={this.toggleFilter.bind(this)}
-        // />

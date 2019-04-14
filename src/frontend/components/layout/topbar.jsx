@@ -12,6 +12,7 @@ const Navbar = styled.nav.attrs({
   height: ${sizes.navbarHeight};
   border-bottom: 1px solid ${colors.border};
   padding: 0 ${sizes.paddingLayout};
+  flex-shrink: 0;
 `
 
 const Topbar = (props) => {

@@ -1,7 +1,55 @@
 import React from 'react'
-import { withRouter } from 'react-router-dom'
+import { withRouter, Link } from 'react-router-dom'
+import styled from 'styled-components'
 
+import { sizes, colors } from '../../styles/variables'
+import StyledBtn from './styled-btn'
 import PropertyType from '../property-type'
+
+const FilterWrapper = styled.section`
+  background: ${colors.darkBck};
+  flex-shrink: 0;
+  width: ${sizes.sidebarWidth};
+  color: #fff;
+  padding-top: 60px;
+  transition: width 0.5s;
+  overflow-x: hidden;
+  &.filter-hidden {
+    width: 0;
+    transition: width 0.5s;
+  }
+`
+
+const FilterLink = styled.a`
+  color: #fff;
+  & > span {
+    opacity: 0.25;
+    color: ${colors.lightText};
+    border: 1px solid ${colors.lightText};
+    border-radius: 3px;
+    padding: 8px 10px;
+    margin-right: ${sizes.padding};
+  }
+  &:hover {
+    color: ${colors.primary};
+    & span{
+      color: ${colors.primary};
+      border-color: ${colors.primary};
+      opacity: 1;
+    }
+  }
+`
+
+const FilterContent = styled.section`
+  padding: ${sizes.paddingLayout};
+  width: ${sizes.sidebarWidth};
+  overflow: hidden;
+
+  & ${StyledBtn} {
+    margin: ${sizes.paddingMin} 0;
+    width: 100%;
+  }
+`
 
 class Filter extends React.Component {
   constructor(props) {
@@ -61,15 +109,15 @@ class Filter extends React.Component {
   }
 
   render() {
-    const { resource } = this.props
+    const { resource, isVisible, toggleFilter } = this.props
     const properties = resource.editProperties
     return (
-      <div className="filters-bar-wrapper">
-        <div className={`filters-bar${this.props.isVisible ? ' filters-show' : ''}`}>
-          <a className="filters-close" onClick={this.props.toggleFilter}>
-            <span className="arrow-right"><i className="fas fa-arrow-right"></i></span>
-            <span>Filter</span>
-          </a>
+      <FilterWrapper className={isVisible ? null : 'filter-hidden'}>
+        <FilterContent>
+          <FilterLink onClick={toggleFilter}>
+            <span><i className="fas fa-arrow-right" /></span>
+            Filter
+          </FilterLink>
           <form onSubmit={this.handleSubmit.bind(this)}>
             {properties.map(property => (
               <PropertyType
@@ -80,13 +128,19 @@ class Filter extends React.Component {
                 filter={this.state.filter}
                 resource={resource} />
             ))}
-            <button className="button is-primary apply-changes">Apply Changes</button>
-            <a href="#" className="clear-button" onClick={this.resetFilter.bind(this)}>
-              <span className="clear">Clear filters</span>
-            </a>
+            <StyledBtn as="button" className="is-primary">
+              Apply Changes
+            </StyledBtn>
+            <StyledBtn
+              as="a"
+              className="is-text"
+              onClick={this.resetFilter.bind(this)}
+            >
+              Clear filters
+            </StyledBtn>
           </form>
-        </div>
-      </div>
+        </FilterContent>
+      </FilterWrapper>
     )
   }
 }

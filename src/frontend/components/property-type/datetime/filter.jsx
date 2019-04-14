@@ -1,4 +1,8 @@
 import React from 'react'
+import PropertyInFilter, {
+  Label,
+  Property
+} from '../../layout/property-in-filter'
 
 export default class Filter extends React.Component {
   handleChange(key, value) {
@@ -56,17 +60,17 @@ export default class Filter extends React.Component {
     const { property } = this.props
     const filterKey = `filter-${property.name}`
     return (
-      <div className="filter">
-        <label className="label">{where}:</label>
+      <div>
+        <Label>- {where}:</Label>
         <div className="control has-icons-right">
           <input
             type="text"
             ref={key}
             className="input filter"
             name={`${filterKey}.${key}`}
-             />
+          />
           <span className="icon is-small is-right">
-            <i className="icomoon-calendar"></i>
+            <i className="icomoon-calendar" />
           </span>
         </div>
       </div>
@@ -76,12 +80,12 @@ export default class Filter extends React.Component {
   render() {
     const { property, filter } = this.props
     return (
-      <div className="picker-name">{property.label}
+      <PropertyInFilter property={property}>
         <div className="date-range">
           {this.renderFilter('From')}
           {this.renderFilter('To')}
         </div>
-      </div>
+      </PropertyInFilter>
     )
   }
 }
