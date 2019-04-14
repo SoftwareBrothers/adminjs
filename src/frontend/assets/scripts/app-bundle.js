@@ -18157,6 +18157,19 @@ var AdminBro = (function (AdminBro$1, React, reactRedux, reactRouterDom, styled,
   }
   var jwPaginate = paginate;
 
+  function _templateObject$h() {
+    var data = taggedTemplateLiteral(["\n  & > .pagination {\n    border: 1px solid ", ";\n    padding: 4px;\n  }\n"]);
+
+    _templateObject$h = function _templateObject() {
+      return data;
+    };
+
+    return data;
+  }
+  var PaginationWrapper = styled__default.div.attrs({
+    className: 'level-item pagination-content'
+  })(_templateObject$h(), colors.border);
+
   var Paginate =
   /*#__PURE__*/
   function (_React$PureComponent) {
@@ -18171,7 +18184,8 @@ var AdminBro = (function (AdminBro$1, React, reactRedux, reactRouterDom, styled,
     createClass(Paginate, [{
       key: "linkToPage",
       value: function linkToPage(page) {
-        var search = new URLSearchParams(this.props.location.search);
+        var location = this.props.location;
+        var search = new URLSearchParams(location.search);
         search.set('page', page);
         return search.toString();
       }
@@ -18180,36 +18194,41 @@ var AdminBro = (function (AdminBro$1, React, reactRedux, reactRouterDom, styled,
       value: function render() {
         var _this = this;
 
-        var paginate = jwPaginate(this.props.total, parseInt(this.props.page || 1), parseInt(this.props.perPage));
-        var isFirstPage = paginate.currentPage == paginate.startPage;
-        var isLastPage = paginate.currentPage == paginate.endPage;
+        var _this$props = this.props,
+            total = _this$props.total,
+            page = _this$props.page,
+            perPage = _this$props.perPage;
+        var currentPage = parseInt(page || 1, 10);
+        var paginate = jwPaginate(total, currentPage, parseInt(perPage, 10));
+        var isFirstPage = currentPage === paginate.startPage;
+        var isLastPage = currentPage === paginate.endPage;
+        var prevPage = isFirstPage ? currentPage : currentPage - 1;
+        var nextPage = isLastPage ? currentPage : currentPage + 1;
 
         if (paginate.totalPages === 1) {
           return null;
         }
 
-        return React__default.createElement("div", {
-          className: "level-item pagination-content"
-        }, React__default.createElement("div", {
+        return React__default.createElement(PaginationWrapper, null, React__default.createElement("div", {
           className: "pagination"
-        }, React__default.createElement(reactRouterDom.Link, {
+        }, React__default.createElement(StyledBtn, {
           to: {
-            search: this.linkToPage(parseInt(paginate.currentPage) - 1)
+            search: this.linkToPage(prevPage)
           },
           className: "button is-white".concat(isFirstPage ? ' disabled' : '')
         }, React__default.createElement("i", {
           className: "icomoon-pagination-left"
-        })), paginate.pages.map(function (page) {
-          return React__default.createElement(reactRouterDom.Link, {
-            key: page,
+        })), paginate.pages.map(function (p) {
+          return React__default.createElement(StyledBtn, {
+            key: p,
             to: {
-              search: _this.linkToPage(page)
+              search: _this.linkToPage(p)
             },
-            className: "pages button is-white".concat(page == paginate.currentPage ? ' active' : '')
-          }, page);
-        }), React__default.createElement(reactRouterDom.Link, {
+            className: "pages button is-white".concat(p === currentPage ? ' is-primary' : '')
+          }, p);
+        }), React__default.createElement(StyledBtn, {
           to: {
-            search: this.linkToPage(parseInt(paginate.currentPage) + 1)
+            search: this.linkToPage(nextPage)
           },
           className: "button is-white".concat(isLastPage ? ' disabled' : '')
         }, React__default.createElement("i", {
@@ -18243,16 +18262,16 @@ var AdminBro = (function (AdminBro$1, React, reactRedux, reactRouterDom, styled,
     return data;
   }
 
-  function _templateObject$h() {
+  function _templateObject$i() {
     var data = taggedTemplateLiteral(["\n  background: ", ";\n  flex-shrink: 0;\n  width: ", ";\n  color: #fff;\n  padding-top: 60px;\n  transition: width 0.5s;\n  overflow-x: hidden;\n  &.filter-hidden {\n    width: 0;\n    transition: width 0.5s;\n  }\n"]);
 
-    _templateObject$h = function _templateObject() {
+    _templateObject$i = function _templateObject() {
       return data;
     };
 
     return data;
   }
-  var FilterWrapper = styled__default.section(_templateObject$h(), colors.darkBck, sizes.sidebarWidth);
+  var FilterWrapper = styled__default.section(_templateObject$i(), colors.darkBck, sizes.sidebarWidth);
   var FilterLink = styled__default.a(_templateObject2$a(), colors.lightText, colors.lightText, sizes.padding, colors.primary, colors.primary, colors.primary);
   var FilterContent = styled__default.section(_templateObject3$3(), sizes.paddingLayout, sizes.sidebarWidth, StyledBtn, sizes.paddingMin);
 
@@ -18445,10 +18464,10 @@ var AdminBro = (function (AdminBro$1, React, reactRedux, reactRouterDom, styled,
     return data;
   }
 
-  function _templateObject$i() {
+  function _templateObject$j() {
     var data = taggedTemplateLiteral(["\n  &&& {\n    margin-bottom: ", ";\n  }\n"]);
 
-    _templateObject$i = function _templateObject() {
+    _templateObject$j = function _templateObject() {
       return data;
     };
 
@@ -18456,7 +18475,7 @@ var AdminBro = (function (AdminBro$1, React, reactRedux, reactRouterDom, styled,
   }
   var HeaderWrapper = styled__default.section.attrs({
     className: 'level'
-  })(_templateObject$i(), sizes.padding);
+  })(_templateObject$j(), sizes.padding);
   var BackBtn = styled__default(reactRouterDom.Link)(_templateObject2$b(), sizes.paddingLayout, sizes.paddingLayout, colors.lightText, fonts.base, sizes.paddingMin, colors.superLightBack, sizes.padding, colors.lightText);
   var HeaderTitle = styled__default.h1.attrs({
     className: 'level-left'
@@ -18475,7 +18494,9 @@ var AdminBro = (function (AdminBro$1, React, reactRedux, reactRouterDom, styled,
     var resourceId = resource.id;
     var actions = recordId ? resource.recordActions.filter(function (ra) {
       return ra.name !== action.name;
-    }) : resource.resourceActions;
+    }) : resource.resourceActions.filter(function (ra) {
+      return ra.name !== (action && action.name);
+    });
     var title = recordId ? action.name : resource.name;
     return React__default.createElement(HeaderWrapper, null, React__default.createElement(HeaderTitle, null, !toggleFilter && React__default.createElement(BackBtn, {
       to: h.listUrl({
@@ -18518,16 +18539,16 @@ var AdminBro = (function (AdminBro$1, React, reactRedux, reactRouterDom, styled,
     action: null
   };
 
-  function _templateObject$j() {
+  function _templateObject$k() {
     var data = taggedTemplateLiteral(["\n  padding: ", ";\n  flex-grow: 1;\n"]);
 
-    _templateObject$j = function _templateObject() {
+    _templateObject$k = function _templateObject() {
       return data;
     };
 
     return data;
   }
-  var ActionWrapper = styled__default.section(_templateObject$j(), sizes.paddingLayout);
+  var ActionWrapper = styled__default.section(_templateObject$k(), sizes.paddingLayout);
 
   var Dashboard =
   /*#__PURE__*/
@@ -19192,10 +19213,10 @@ var AdminBro = (function (AdminBro$1, React, reactRedux, reactRouterDom, styled,
     return false;
   });
 
-  function _templateObject$k() {
+  function _templateObject$l() {
     var data = taggedTemplateLiteral(["\n  align-items: stretch;\n  flex-grow: 1;\n"]);
 
-    _templateObject$k = function _templateObject() {
+    _templateObject$l = function _templateObject() {
       return data;
     };
 
@@ -19203,7 +19224,7 @@ var AdminBro = (function (AdminBro$1, React, reactRedux, reactRouterDom, styled,
   }
   var Wrapper = styled__default.section.attrs({
     className: 'level'
-  })(_templateObject$k());
+  })(_templateObject$l());
 
   var Resource =
   /*#__PURE__*/
@@ -19344,16 +19365,16 @@ var AdminBro = (function (AdminBro$1, React, reactRedux, reactRouterDom, styled,
     return data;
   }
 
-  function _templateObject$l() {
+  function _templateObject$m() {
     var data = taggedTemplateLiteral(["\n  html, body, #app {\n      width: 100%;\n      height: 100%;\n  }\n\n  a {\n    color: ", ";\n  }\n"]);
 
-    _templateObject$l = function _templateObject() {
+    _templateObject$m = function _templateObject() {
       return data;
     };
 
     return data;
   }
-  var GlobalStyle = styled.createGlobalStyle(_templateObject$l(), colors.primary);
+  var GlobalStyle = styled.createGlobalStyle(_templateObject$m(), colors.primary);
   var ApplicationWrapper = styled__default.section(_templateObject2$c());
   var Core = styled__default.section(_templateObject3$5(), colors.bck);
 
