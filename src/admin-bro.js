@@ -1,7 +1,7 @@
 const _ = require('lodash')
 const path = require('path')
 
-const Renderer = require('./backend/utils/renderer')
+const loginTemplate = require('./frontend/login-template')
 const BaseResource = require('./backend/adapters/base-resource')
 const BaseDatabase = require('./backend/adapters/base-database')
 const BaseRecord = require('./backend/adapters/base-record')
@@ -141,7 +141,7 @@ class AdminBro {
    * @return {Promise<string>}                HTML of the rendered page
    */
   static async renderLogin({ action, errorMessage }) {
-    return new Renderer().render('pages/login', { action, errorMessage })
+    return loginTemplate({ action, errorMessage })
   }
 
   /**

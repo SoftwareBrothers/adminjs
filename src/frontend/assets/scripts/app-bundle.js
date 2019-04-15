@@ -19642,6 +19642,7 @@ var AdminBro = (function (AdminBro$1, React, reactRedux, reactRouterDom, styled,
 
   var widgets = {
     ValueBlock: ValueBlock,
+    DefaultDashboard: Dashboard,
     DashboardHeader: DashboardHeader
   };
 
