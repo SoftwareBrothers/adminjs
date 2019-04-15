@@ -31,36 +31,34 @@ const Svg = () => (
   </svg>
 )
 
-const Dashboard = (props) => {
-  return (
-    <DashboardWrapper>
-      <InfoBox>
-        <Svg />
-        <h1>Welcome on board!</h1>
-        <p>
+const Dashboard = props => (
+  <DashboardWrapper>
+    <InfoBox>
+      <Svg />
+      <h1>Welcome on board!</h1>
+      <p>
           Thank you for choosing our platform, now you are one of us!
           Bear in mind that this is a Beta version and we are still working on it.
-        </p>
-        <p>
+      </p>
+      <p>
           Now check out the documentation page on github and modify your AdminBro.
-        </p>
-        <div>
-          <StyledButton
-            as="a"
-            className="button is-primary"
-            href="https://github.com/SoftwareBrothers/admin-bro"
-          >
-            <span className="icon">
-              <i className="fab fa-github" />
-            </span>
-            <span className="btn-text">
+      </p>
+      <div>
+        <StyledButton
+          as="a"
+          className="button is-primary"
+          href="https://github.com/SoftwareBrothers/admin-bro"
+        >
+          <span className="icon">
+            <i className="fab fa-github" />
+          </span>
+          <span className="btn-text">
               Checkout the documentation
-            </span>
-          </StyledButton>
-        </div>
-      </InfoBox>
-    </DashboardWrapper>
-  )
-}
+          </span>
+        </StyledButton>
+      </div>
+    </InfoBox>
+  </DashboardWrapper>
+)
 
 export default Dashboard

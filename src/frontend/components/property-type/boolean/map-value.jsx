@@ -1,3 +1,1 @@
-export default (value) => {
-  return value ? 'Yes' : 'No'
-}
+export default value => (value ? 'Yes' : 'No')

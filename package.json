@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "./node_modules/mocha/bin/mocha spec",
-    "lint": "./node_modules/eslint/bin/eslint.js './spec/**/*.js' './src/**/*.js' --ignore-pattern='*.min.js'",
+    "lint": "./node_modules/eslint/bin/eslint.js './spec/**/*.js' './src/**/*.js' './src/**/*.jsx' --ignore-pattern='*bundle.js'",
     "cover": "NODE_ENV=test ./node_modules/nyc/bin/nyc.js --reporter=lcov -x=spec -x=docs -x=coverage --all=true npm test"
   },
   "repository": {

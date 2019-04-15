@@ -1,6 +1,8 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+
 import ViewHelpers from '../../../../backend/utils/view-helpers'
+import { propertyType, recordType, resourceType } from '../../../types'
 
 export default class List extends React.PureComponent {
   render() {
@@ -23,4 +25,10 @@ export default class List extends React.PureComponent {
       <span>{value}</span>
     )
   }
+}
+
+List.propTypes = {
+  property: propertyType.isRequired,
+  record: recordType.isRequired,
+  resource: resourceType.isRequired,
 }

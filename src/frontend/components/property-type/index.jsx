@@ -17,7 +17,7 @@ export default class PropertyType extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      isClient: false
+      isClient: false,
     }
   }
 
@@ -26,8 +26,8 @@ export default class PropertyType extends React.Component {
   }
 
   render() {
-    const { property, resource, record, filter, where, paths} = this.props
-    
+    const { property, resource, record, filter, where, paths } = this.props
+
     let PropertyRenderer = types[property.type] && types[property.type][where] || defaultType[where]
     if (property.components && property.components[where] && this.state.isClient) {
       PropertyRenderer = AdminBro.Components[property.components[where]]

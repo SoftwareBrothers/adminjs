@@ -1,6 +1,8 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+
 import ViewHelpers from '../../../../backend/utils/view-helpers'
+import { propertyType, recordType, resourceType } from '../../../types'
 
 export default class List extends React.PureComponent {
   render() {
@@ -9,7 +11,7 @@ export default class List extends React.PureComponent {
     const populated = record.populated[property.name]
     const value = (populated && populated.title) || refId
 
-    if (resource.recordActions.find(a => a.name === 'show') && populated){
+    if (resource.recordActions.find(a => a.name === 'show') && populated) {
       const h = new ViewHelpers()
       const href = h.recordActionUrl({
         resourceId: property.reference, recordId: refId, actionName: 'show',
@@ -22,4 +24,10 @@ export default class List extends React.PureComponent {
       <span>{value}</span>
     )
   }
+}
+
+List.propTypes = {
+  property: propertyType.isRequired,
+  record: recordType.isRequired,
+  resource: resourceType.isRequired,
 }

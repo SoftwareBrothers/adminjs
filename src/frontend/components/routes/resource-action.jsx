@@ -7,14 +7,14 @@ import ViewHelpers from '../../../backend/utils/view-helpers'
 import actions from '../actions'
 
 class ResourceAction extends React.Component {
-  constructor(props){
+  constructor(props) {
     super(props)
     this.state = {
       isClient: false,
     }
   }
 
-  componentDidMount(){
+  componentDidMount() {
     this.setState({ isClient: true })
   }
 
@@ -27,11 +27,11 @@ class ResourceAction extends React.Component {
     if (this.state.isClient && action.component) {
       Action = AdminBro.Components[action.component]
     }
-    Action = Action || ((props) => (<div></div>))
+    Action = Action || (props => (<div />))
 
     return (
       <ActionWrapper>
-        <Breadcrumbs resource={resource} actionName={actionName}/>
+        <Breadcrumbs resource={resource} actionName={actionName} />
         <ActionHeader
           resource={resource}
           action={action}
@@ -42,7 +42,7 @@ class ResourceAction extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   paths: state.paths,
   resources: state.resources,
 })

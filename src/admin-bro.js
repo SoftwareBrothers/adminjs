@@ -158,7 +158,7 @@ class AdminBro {
     if (src[0] === '/') {
       filePath = src
     } else {
-      const stack=((new Error).stack).split("\n")
+      const stack = ((new Error()).stack).split('\n')
       const m = stack[2].match(/\((.*):[0-9]+:[0-9]+\)/)
       filePath = path.join(path.dirname(m[1]), src)
     }

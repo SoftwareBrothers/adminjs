@@ -20,7 +20,7 @@ class ActionButton extends React.PureComponent {
       const api = new ApiClient()
       const apiAction = recordId ? api.recordAction : api.resourceAction
 
-      apiAction({
+      apiAction.bind(api)({
         resourceId, actionName: action.name, recordId,
       }).then((response) => {
         if (location.pathname !== response.data.redirectUrl) {
@@ -46,7 +46,8 @@ class ActionButton extends React.PureComponent {
       <StyledButton
         to={href}
         className={`button ${className}`}
-        onClick={this.handleClick.bind(this)}>
+        onClick={this.handleClick.bind(this)}
+      >
         <span className="icon">
           <i className={action.icon} />
         </span>

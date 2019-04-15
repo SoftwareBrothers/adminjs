@@ -33,7 +33,7 @@ class ApiController {
     const records = await resource.find(filter, {
       limit: perPage,
       offset: (page - 1) * perPage,
-      sort: sort,
+      sort,
     })
 
     const populatedRecords = await populator(records, listProperties)
@@ -47,7 +47,7 @@ class ApiController {
         direction: sort.direction,
         sortBy: sort.sortBy,
       },
-      records: populatedRecords.map(r => r.toJSON())
+      records: populatedRecords.map(r => r.toJSON()),
     }
   }
 
@@ -121,7 +121,7 @@ class ApiController {
       return handler(request, response, { h })
     }
     return {
-      message: 'You can override this method by setting up dashboard.handler fuction in AdminBro options'
+      message: 'You can override this method by setting up dashboard.handler fuction in AdminBro options',
     }
   }
 }

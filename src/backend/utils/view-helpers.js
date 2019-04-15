@@ -2,7 +2,7 @@
  * Collection of helper methods available in the views
  */
 class ViewHelpers {
-  constructor({ options } = {} ) {
+  constructor({ options } = {}) {
     const opts = options || (window && window.REDUX_STATE.paths)
 
     // when ViewHelpers are used on the frontend, paths are taken from global Redux State
@@ -16,8 +16,7 @@ class ViewHelpers {
    */
   urlBuilder(paths) {
     const { rootPath } = this.options
-    let url = `${rootPath}/${paths.join('/')}`
-    return url
+    return `${rootPath}/${paths.join('/')}`
   }
 
   /**

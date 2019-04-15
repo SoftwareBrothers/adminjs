@@ -1,9 +1,11 @@
-const bundler = require('./bundler')
 const runtime = require('@babel/plugin-transform-runtime')
 const fs = require('fs')
 const util = require('util')
+const path = require('path')
 
-const OUTPUT_FILE = __dirname + '/../../frontend/assets/scripts/app-bundle.js'
+const bundler = require('./bundler')
+
+const OUTPUT_FILE = path.join(__dirname, '/../../frontend/assets/scripts/app-bundle.js')
 
 async function build() {
   const exists = await util.promisify(fs.exists)(OUTPUT_FILE)
@@ -12,11 +14,11 @@ async function build() {
   }
   return bundler({
     name: 'AdminBro',
-    input: __dirname + '/../../frontend/bundle-entry.jsx',
+    input: path.join(__dirname, '/../../frontend/bundle-entry.jsx'),
     babelConfig: {
       plugins: [runtime],
       runtimeHelpers: true,
-      include: __dirname + '/../../frontend/**',
+      include: path.join(__dirname, '/../../frontend/**'),
     },
   })
 }

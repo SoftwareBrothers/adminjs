@@ -1,7 +1,6 @@
-var AdminBro = (function (AdminBro$1, React, reactRedux, reactRouterDom, styled, PropTypes$1, axios, reactDom, redux) {
+var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1, axios, reactDom, redux) {
   'use strict';
 
-  AdminBro$1 = AdminBro$1 && AdminBro$1.hasOwnProperty('default') ? AdminBro$1['default'] : AdminBro$1;
   var React__default = 'default' in React ? React['default'] : React;
   var styled__default = 'default' in styled ? styled['default'] : styled;
   PropTypes$1 = PropTypes$1 && PropTypes$1.hasOwnProperty('default') ? PropTypes$1['default'] : PropTypes$1;
@@ -181,7 +180,7 @@ var AdminBro = (function (AdminBro$1, React, reactRedux, reactRouterDom, styled,
    * Collection of helper methods available in the views
    */
   class ViewHelpers {
-    constructor({ options } = {} ) {
+    constructor({ options } = {}) {
       const opts = options || (window && window.REDUX_STATE.paths);
 
       // when ViewHelpers are used on the frontend, paths are taken from global Redux State
@@ -195,8 +194,7 @@ var AdminBro = (function (AdminBro$1, React, reactRedux, reactRouterDom, styled,
      */
     urlBuilder(paths) {
       const { rootPath } = this.options;
-      let url = `${rootPath}/${paths.join('/')}`;
-      return url
+      return `${rootPath}/${paths.join('/')}`
     }
 
     /**
@@ -356,14 +354,21 @@ var AdminBro = (function (AdminBro$1, React, reactRedux, reactRouterDom, styled,
     params: PropTypes$1.object.isRequired,
     populated: PropTypes$1.object,
     errors: PropTypes$1.object,
-    id: PropTypes$1.string.isRequired,
-    title: PropTypes$1.string.isRequired
+    id: PropTypes$1.string,
+    title: PropTypes$1.string
   });
   var locationType = PropTypes$1.shape({
     pathname: PropTypes$1.string.isRequired
   });
   var historyType = PropTypes$1.shape({
     push: PropTypes$1.func.isRequired
+  });
+  var matchType = PropTypes$1.shape({
+    params: PropTypes$1.shape({
+      resourceId: PropTypes$1.string,
+      recordId: PropTypes$1.string,
+      actionName: PropTypes$1.string
+    })
   });
 
   function _templateObject3() {
@@ -817,7 +822,7 @@ var AdminBro = (function (AdminBro$1, React, reactRedux, reactRouterDom, styled,
   };
 
   function _templateObject$9() {
-    var data = taggedTemplateLiteral(["\n  &&& {\n    font-size: ", ";\n    border-radius: 0;\n    border-color: ", ";\n    background: #fff;\n    height: 32px;\n    padding: ", " ", ";\n    color: ", ";\n    &:hover {\n      border-color: ", ";\n    }\n    &.is-primary {\n      background-color: ", ";\n      color: #ffffff;\n      &:hover {\n        background-color: ", ";\n      }\n    }\n\n    &.is-text {\n      background-color: transparent;\n      color: ", ";\n      border: transparent;\n    }\n\n    &.in-dropdown {\n      color: ", ";\n      font-size: ", ";\n      width: 100%;\n      text-align: start;\n      justify-content: flex-start;\n      height: 40px;\n      padding-left: 40px;\n    }\n  }\n"]);
+    var data = taggedTemplateLiteral(["\n  font-size: ", ";\n  border-radius: 0;\n  border-color: ", ";\n  background: #fff;\n  height: 32px;\n  padding: ", " ", ";\n  color: ", ";\n  &:hover {\n    border-color: ", ";\n  }\n  &.is-primary {\n    background-color: ", ";\n    color: #ffffff;\n    &:hover {\n      background-color: ", ";\n    }\n  }\n\n  &.is-text {\n    background-color: transparent;\n    color: ", ";\n    border: transparent;\n  }\n\n  &.in-dropdown {\n    color: ", ";\n    font-size: ", ";\n    width: 100%;\n    text-align: start;\n    justify-content: flex-start;\n    height: 40px;\n    padding-left: 40px;\n  }\n"]);
 
     _templateObject$9 = function _templateObject() {
       return data;
@@ -1749,7 +1754,7 @@ var AdminBro = (function (AdminBro$1, React, reactRedux, reactRouterDom, styled,
               switch (_context5.prev = _context5.next) {
                 case 0:
                   params = _ref5.params;
-                  return _context5.abrupt("return", this.client.get("/api/dashboard", {
+                  return _context5.abrupt("return", this.client.get('/api/dashboard', {
                     params: params
                   }));
 
@@ -1803,7 +1808,7 @@ var AdminBro = (function (AdminBro$1, React, reactRedux, reactRouterDom, styled,
           event.preventDefault();
           var api = new ApiClient();
           var apiAction = recordId ? api.recordAction : api.resourceAction;
-          apiAction({
+          apiAction.bind(api)({
             resourceId: resourceId,
             actionName: action.name,
             recordId: recordId
@@ -2014,15 +2019,17 @@ var AdminBro = (function (AdminBro$1, React, reactRedux, reactRouterDom, styled,
     createClass(Edit, [{
       key: "handleChange",
       value: function handleChange(event) {
-        this.props.onChange(this.props.property.name, event.target.value);
+        var _this$props = this.props,
+            onChange = _this$props.onChange,
+            property = _this$props.property;
+        onChange(property.name, event.target.value);
       }
     }, {
       key: "render",
       value: function render() {
-        var _this$props = this.props,
-            property = _this$props.property,
-            resource = _this$props.resource,
-            record = _this$props.record;
+        var _this$props2 = this.props,
+            property = _this$props2.property,
+            record = _this$props2.record;
         var value = record.params && record.params[property.name] || '';
         var error = record.errors && record.errors[property.name];
         return React__default.createElement(PropertyInEdit, {
@@ -2041,6 +2048,11 @@ var AdminBro = (function (AdminBro$1, React, reactRedux, reactRouterDom, styled,
 
     return Edit;
   }(React__default.Component);
+  Edit.propTypes = {
+    property: propertyType.isRequired,
+    record: recordType.isRequired,
+    onChange: PropTypes$1.func.isRequired
+  };
 
   function _templateObject2$7() {
     var data = taggedTemplateLiteral(["\n  display: block;\n  text-transform: uppercase;\n  font-size: ", ";\n  color: ", ";\n  font-weight: normal;\n  margin: ", " 0;\n  letter-spacing: 0.1em;\n"]);
@@ -2160,6 +2172,11 @@ var AdminBro = (function (AdminBro$1, React, reactRedux, reactRouterDom, styled,
 
     return List;
   }(React__default.PureComponent);
+  List.propTypes = {
+    property: propertyType.isRequired,
+    record: recordType.isRequired,
+    resource: resourceType.isRequired
+  };
 
   var defaultType = {
     show: Show,
@@ -2182,15 +2199,18 @@ var AdminBro = (function (AdminBro$1, React, reactRedux, reactRouterDom, styled,
     createClass(Edit, [{
       key: "handleChange",
       value: function handleChange(event) {
-        this.props.onChange(this.props.property.name, event.target.checked);
+        var _this$props = this.props,
+            property = _this$props.property,
+            onChange = _this$props.onChange;
+        var checked = event.target.checked;
+        onChange(property.name, checked);
       }
     }, {
       key: "render",
       value: function render() {
-        var _this$props = this.props,
-            property = _this$props.property,
-            resource = _this$props.resource,
-            record = _this$props.record;
+        var _this$props2 = this.props,
+            property = _this$props2.property,
+            record = _this$props2.record;
         var value = record.params && record.params[property.name] || '';
         var error = record.errors && record.errors[property.name];
         return React__default.createElement(PropertyInEdit, {
@@ -2209,6 +2229,11 @@ var AdminBro = (function (AdminBro$1, React, reactRedux, reactRouterDom, styled,
 
     return Edit;
   }(React__default.PureComponent);
+  Edit$1.propTypes = {
+    property: propertyType.isRequired,
+    onChange: PropTypes$1.func.isRequired,
+    record: recordType.isRequired
+  };
 
   var mapValue = (function (value) {
     return value ? 'Yes' : 'No';
@@ -2240,6 +2265,10 @@ var AdminBro = (function (AdminBro$1, React, reactRedux, reactRouterDom, styled,
 
     return Show;
   }(React__default.PureComponent);
+  Show$1.propTypes = {
+    property: propertyType.isRequired,
+    record: recordType.isRequired
+  };
 
   var List$1 =
   /*#__PURE__*/
@@ -2282,6 +2311,11 @@ var AdminBro = (function (AdminBro$1, React, reactRedux, reactRouterDom, styled,
 
     return List;
   }(React__default.PureComponent);
+  List$1.propTypes = {
+    property: propertyType.isRequired,
+    record: recordType.isRequired,
+    resource: resourceType.isRequired
+  };
 
   var shallowEqual = function shallowEqual(newValue, oldValue) {
     return newValue === oldValue;
@@ -3660,7 +3694,7 @@ var AdminBro = (function (AdminBro$1, React, reactRedux, reactRouterDom, styled,
 
   }).call(commonjsGlobal);
 
-
+  //# sourceMappingURL=performance-now.js.map
   });
 
   var root = typeof window === 'undefined' ? commonjsGlobal : window
@@ -11039,7 +11073,7 @@ var AdminBro = (function (AdminBro$1, React, reactRedux, reactRouterDom, styled,
         background: 'transparent'
       });
     },
-    menu: function menu(provided, state) {
+    menu: function menu(provided) {
       return objectSpread({}, provided, {
         borderRadius: '0px',
         borderColor: colors.border
@@ -11066,7 +11100,7 @@ var AdminBro = (function (AdminBro$1, React, reactRedux, reactRouterDom, styled,
         background: state.isFocused ? 'rgba(32,39,62,0.25)' : 'transparent'
       });
     },
-    menu: function menu(provided, state) {
+    menu: function menu(provided) {
       return objectSpread({}, provided, {
         borderRadius: '0px',
         borderColor: colors.border,
@@ -11089,17 +11123,16 @@ var AdminBro = (function (AdminBro$1, React, reactRedux, reactRouterDom, styled,
     createClass(Filter, [{
       key: "handleChange",
       value: function handleChange(selected) {
+        var _this$props = this.props,
+            onChange = _this$props.onChange,
+            property = _this$props.property;
         var value = selected ? selected.value : '';
-        this.props.onChange(this.props.property.name, value);
+        onChange(property.name, value);
       }
     }, {
       key: "render",
       value: function render() {
-        var _this$props = this.props,
-            property = _this$props.property,
-            filter = _this$props.filter;
-        var filterKey = "filter-".concat(property.name);
-        var value = filter[property.name];
+        var property = this.props.property;
         var options = [{
           value: true,
           label: mapValue(true)
@@ -11120,6 +11153,10 @@ var AdminBro = (function (AdminBro$1, React, reactRedux, reactRouterDom, styled,
 
     return Filter;
   }(React__default.PureComponent);
+  Filter$1.propTypes = {
+    onChange: PropTypes$1.func.isRequired,
+    property: propertyType.isRequired
+  };
 
   var boolean = {
     edit: Edit$1,
@@ -11133,25 +11170,45 @@ var AdminBro = (function (AdminBro$1, React, reactRedux, reactRouterDom, styled,
   function (_React$Component) {
     inherits(Edit, _React$Component);
 
-    function Edit() {
+    function Edit(props) {
+      var _this;
+
       classCallCheck(this, Edit);
 
-      return possibleConstructorReturn(this, getPrototypeOf(Edit).apply(this, arguments));
+      _this = possibleConstructorReturn(this, getPrototypeOf(Edit).call(this, props));
+      _this.datepickerRef = React__default.createRef();
+      return _this;
     }
 
     createClass(Edit, [{
-      key: "handleChange",
-      value: function handleChange(value) {
-        this.props.onChange(this.props.property.name, value);
+      key: "componentDidMount",
+      value: function componentDidMount() {
+        this.setupDatePicker();
+      }
+    }, {
+      key: "shouldComponentUpdate",
+      value: function shouldComponentUpdate(nextProps) {
+        var _this$props = this.props,
+            record = _this$props.record,
+            property = _this$props.property;
+        var nextRecord = nextProps.record;
+        var value = record.params && record.params[property.name] || '';
+        var nextValue = nextRecord.params && nextRecord.params[property.name] || '';
+        return nextValue !== value;
+      }
+    }, {
+      key: "componentDidUpdate",
+      value: function componentDidUpdate() {
+        this.setupDatePicker();
       }
     }, {
       key: "setupDatePicker",
       value: function setupDatePicker() {
-        var _this = this;
+        var _this2 = this;
 
-        var _this$props = this.props,
-            record = _this$props.record,
-            property = _this$props.property;
+        var _this$props2 = this.props,
+            record = _this$props2.record,
+            property = _this$props2.property;
         var defaultDate = record.params && record.params[property.name] || '';
         var options = {
           format: 'Y-m-d'
@@ -11165,41 +11222,28 @@ var AdminBro = (function (AdminBro$1, React, reactRedux, reactRouterDom, styled,
           };
         }
 
-        var inst = flatpickr(this.refs.datepicker, objectSpread({
+        var inst = flatpickr(this.datepickerRef.current, objectSpread({
           format: 'Y-m-d H:i',
           defaultDate: defaultDate
         }, options));
         inst.config.onChange.push(function (dates, text) {
-          _this.handleChange(text);
+          _this2.handleChange(text);
         });
       }
     }, {
-      key: "componentDidMount",
-      value: function componentDidMount() {
-        this.setupDatePicker();
-      }
-    }, {
-      key: "shouldComponentUpdate",
-      value: function shouldComponentUpdate(nextProps, nextState) {
-        var _this$props2 = this.props,
-            record = _this$props2.record,
-            property = _this$props2.property;
-        var nextRecord = nextProps.record;
-        var value = record.params && record.params[property.name] || '';
-        var nextValue = nextRecord.params && nextRecord.params[property.name] || '';
-        return nextValue !== value;
-      }
-    }, {
-      key: "componentDidUpdate",
-      value: function componentDidUpdate() {
-        this.setupDatePicker();
+      key: "handleChange",
+      value: function handleChange(value) {
+        var _this$props3 = this.props,
+            onChange = _this$props3.onChange,
+            property = _this$props3.property;
+        onChange(property.name, value);
       }
     }, {
       key: "render",
       value: function render() {
-        var _this$props3 = this.props,
-            property = _this$props3.property,
-            record = _this$props3.record;
+        var _this$props4 = this.props,
+            property = _this$props4.property,
+            record = _this$props4.record;
         var error = record.errors && record.errors[property.name];
         return React__default.createElement(PropertyInEdit, {
           property: property,
@@ -11210,7 +11254,7 @@ var AdminBro = (function (AdminBro$1, React, reactRedux, reactRouterDom, styled,
           type: "text",
           className: "input pickadate",
           id: property.name,
-          ref: "datepicker",
+          ref: this.datepickerRef,
           name: property.name
         }), React__default.createElement("span", {
           className: "icon is-small is-right"
@@ -11222,8 +11266,13 @@ var AdminBro = (function (AdminBro$1, React, reactRedux, reactRouterDom, styled,
 
     return Edit;
   }(React__default.Component);
+  Edit$2.propTypes = {
+    property: propertyType.isRequired,
+    record: recordType.isRequired,
+    onChange: PropTypes$1.func.isRequired
+  };
 
-  var mapValue$1 = (function (value, type) {
+  var mapValue$1 = (function (value) {
     if (!value) {
       return '';
     }
@@ -11258,6 +11307,10 @@ var AdminBro = (function (AdminBro$1, React, reactRedux, reactRouterDom, styled,
 
     return Show;
   }(React__default.PureComponent);
+  Show$2.propTypes = {
+    property: propertyType.isRequired,
+    record: recordType.isRequired
+  };
 
   var List$2 =
   /*#__PURE__*/
@@ -11300,28 +11353,62 @@ var AdminBro = (function (AdminBro$1, React, reactRedux, reactRouterDom, styled,
 
     return List;
   }(React__default.PureComponent);
+  List$2.propTypes = {
+    property: propertyType.isRequired,
+    record: recordType.isRequired,
+    resource: resourceType.isRequired
+  };
 
   var Filter$2 =
   /*#__PURE__*/
   function (_React$Component) {
     inherits(Filter, _React$Component);
 
-    function Filter() {
+    function Filter(props) {
+      var _this;
+
       classCallCheck(this, Filter);
 
-      return possibleConstructorReturn(this, getPrototypeOf(Filter).apply(this, arguments));
+      _this = possibleConstructorReturn(this, getPrototypeOf(Filter).call(this, props));
+      _this.pickerRef = {
+        from: React__default.createRef(),
+        to: React__default.createRef()
+      };
+      return _this;
     }
 
     createClass(Filter, [{
-      key: "handleChange",
-      value: function handleChange(key, value) {
-        var date = value !== '' ? new Date(value).toISOString() : '';
-        this.props.onChange("".concat(this.props.property.name, ".").concat(key), date);
+      key: "componentDidMount",
+      value: function componentDidMount() {
+        this.setupDatePicker('from');
+        this.setupDatePicker('to');
+      }
+    }, {
+      key: "shouldComponentUpdate",
+      value: function shouldComponentUpdate(nextProps) {
+        var property = this.props.property;
+        var fromKey = "".concat(property.name, ".from");
+        var toKey = "".concat(property.name, ".to");
+        var nextFilter = nextProps.filter || {};
+
+        if (nextFilter[fromKey]) {
+          this.pickerRef.from.current._flatpickr.jumpToDate(nextFilter[fromKey]);
+        } else {
+          this.pickerRef.from.current._flatpickr.input.value = '';
+        }
+
+        if (nextFilter[toKey]) {
+          this.pickerRef.to.current._flatpickr.jumpToDate(nextFilter[toKey]);
+        } else {
+          this.pickerRef.to.current._flatpickr.input.value = '';
+        }
+
+        return false;
       }
     }, {
       key: "setupDatePicker",
       value: function setupDatePicker(key) {
-        var _this = this;
+        var _this2 = this;
 
         var _this$props = this.props,
             property = _this$props.property,
@@ -11340,32 +11427,22 @@ var AdminBro = (function (AdminBro$1, React, reactRedux, reactRouterDom, styled,
           };
         }
 
-        var inst = flatpickr(this.refs[key], objectSpread({
+        var inst = flatpickr(this.pickerRef[key].current, objectSpread({
           format: 'Y-m-d H:i',
           defaultDate: defaultDate
         }, options));
         inst.config.onChange.push(function (dates, text) {
-          _this.handleChange(key, text);
+          _this2.handleChange(key, text);
         });
       }
     }, {
-      key: "componentDidMount",
-      value: function componentDidMount() {
-        this.setupDatePicker('from');
-        this.setupDatePicker('to');
-      }
-    }, {
-      key: "shouldComponentUpdate",
-      value: function shouldComponentUpdate(nextProps, nextState) {
-        var property = this.props.property;
-        var fromKey = "".concat(property.name, ".from");
-        var toKey = "".concat(property.name, ".to");
-        var nextFilter = nextProps.filter || {};
-        var from = this.refs.from._flatpickr;
-        var to = this.refs.to._flatpickr;
-        nextFilter[fromKey] ? from.jumpToDate(nextFilter[fromKey]) : from.input.value = '';
-        nextFilter[toKey] ? to.jumpToDate(nextFilter[toKey]) : to.input.value = '';
-        return false;
+      key: "handleChange",
+      value: function handleChange(key, value) {
+        var _this$props2 = this.props,
+            onChange = _this$props2.onChange,
+            property = _this$props2.property;
+        var date = value !== '' ? new Date(value).toISOString() : '';
+        onChange("".concat(property.name, ".").concat(key), date);
       }
     }, {
       key: "renderFilter",
@@ -11373,11 +11450,11 @@ var AdminBro = (function (AdminBro$1, React, reactRedux, reactRouterDom, styled,
         var key = where.toLowerCase();
         var property = this.props.property;
         var filterKey = "filter-".concat(property.name);
-        return React__default.createElement("div", null, React__default.createElement(Label$2, null, "- ", where, ":"), React__default.createElement("div", {
+        return React__default.createElement("div", null, React__default.createElement(Label$2, null, "-", where, ":"), React__default.createElement("div", {
           className: "control has-icons-right"
         }, React__default.createElement("input", {
           type: "text",
-          ref: key,
+          ref: this.pickerRef[key],
           className: "input filter",
           name: "".concat(filterKey, ".").concat(key)
         }), React__default.createElement("span", {
@@ -11389,9 +11466,7 @@ var AdminBro = (function (AdminBro$1, React, reactRedux, reactRouterDom, styled,
     }, {
       key: "render",
       value: function render() {
-        var _this$props2 = this.props,
-            property = _this$props2.property,
-            filter = _this$props2.filter;
+        var property = this.props.property;
         return React__default.createElement(PropertyInFilter, {
           property: property
         }, React__default.createElement("div", {
@@ -11402,6 +11477,14 @@ var AdminBro = (function (AdminBro$1, React, reactRedux, reactRouterDom, styled,
 
     return Filter;
   }(React__default.Component);
+  Filter$2.propTypes = {
+    property: propertyType.isRequired,
+    onChange: PropTypes$1.func.isRequired,
+    filter: PropTypes$1.shape({
+      from: PropTypes$1.instanceOf(Date),
+      to: PropTypes$1.instanceOf(Date)
+    }).isRequired
+  };
 
   var datetime = {
     edit: Edit$2,
@@ -11411,84 +11494,62 @@ var AdminBro = (function (AdminBro$1, React, reactRedux, reactRouterDom, styled,
   };
 
   var toolbarOptions = [[{
-    'header': [1, 2, 3, 4, 5, 6, false]
+    header: [1, 2, 3, 4, 5, 6, false]
   }], ['bold', 'italic', 'underline', 'strike'], // toggled buttons
   ['blockquote', 'code-block'], [{
-    'list': 'ordered'
+    list: 'ordered'
   }, {
-    'list': 'bullet'
+    list: 'bullet'
   }], [{
-    'script': 'sub'
+    script: 'sub'
   }, {
-    'script': 'super'
+    script: 'super'
   }], // superscript/subscript
   [{
-    'indent': '-1'
+    indent: '-1'
   }, {
-    'indent': '+1'
+    indent: '+1'
   }], // outdent/indent
   [{
-    'direction': 'rtl'
+    direction: 'rtl'
   }], // text direction
   [{
-    'size': ['small', false, 'large', 'huge']
+    size: ['small', false, 'large', 'huge']
   }], // custom dropdown
   [{
-    'color': []
+    color: []
   }, {
-    'background': []
+    background: []
   }], // dropdown with defaults from theme
   [{
-    'font': []
+    font: []
   }], [{
-    'align': []
-  }], ['clean'] // remove formatting button
-  ];
+    align: []
+  }], ['clean']];
 
   var Edit$3 =
   /*#__PURE__*/
   function (_React$Component) {
     inherits(Edit, _React$Component);
 
-    function Edit() {
+    function Edit(props) {
+      var _this;
+
       classCallCheck(this, Edit);
 
-      return possibleConstructorReturn(this, getPrototypeOf(Edit).apply(this, arguments));
+      _this = possibleConstructorReturn(this, getPrototypeOf(Edit).call(this, props));
+      _this.wysiwigRef = React__default.createRef();
+      return _this;
     }
 
     createClass(Edit, [{
-      key: "handleChange",
-      value: function handleChange(value) {
-        this.props.onChange(this.props.property.name, value);
-      }
-    }, {
-      key: "setupWysiwig",
-      value: function setupWysiwig() {
-        var _this = this;
-
-        var _this$props = this.props,
-            property = _this$props.property,
-            record = _this$props.record;
-        var value = record.params && record.params[property.name] || '';
-        this.refs.wysiwig.innerHTML = value;
-        var quill = new Quill(this.refs.wysiwig, {
-          modules: {
-            toolbar: toolbarOptions
-          },
-          theme: 'snow'
-        });
-        quill.on('text-change', function () {
-          _this.handleChange(_this.refs.wysiwig.children[0].innerHTML);
-        });
-      }
-    }, {
       key: "componentDidMount",
       value: function componentDidMount() {
         this.setupWysiwig();
       }
     }, {
       key: "shouldComponentUpdate",
-      value: function shouldComponentUpdate(nextProps, nextState) {
+      value: function shouldComponentUpdate() {
         return false;
       }
     }, {
@@ -11497,12 +11558,39 @@ var AdminBro = (function (AdminBro$1, React, reactRedux, reactRouterDom, styled,
         this.setupWysiwig();
       }
     }, {
+      key: "setupWysiwig",
+      value: function setupWysiwig() {
+        var _this2 = this;
+
+        var _this$props = this.props,
+            property = _this$props.property,
+            record = _this$props.record;
+        var value = record.params && record.params[property.name] || '';
+        this.wysiwigRef.current.innerHTML = value;
+        var quill = new Quill(this.wysiwigRef.current, {
+          modules: {
+            toolbar: toolbarOptions
+          },
+          theme: 'snow'
+        });
+        quill.on('text-change', function () {
+          _this2.handleChange(_this2.wysiwigRef.current.children[0].innerHTML);
+        });
+      }
+    }, {
+      key: "handleChange",
+      value: function handleChange(value) {
+        var _this$props2 = this.props,
+            onChange = _this$props2.onChange,
+            property = _this$props2.property;
+        onChange(property.name, value);
+      }
+    }, {
       key: "render",
       value: function render() {
-        var _this$props2 = this.props,
-            property = _this$props2.property,
-            resource = _this$props2.resource,
-            record = _this$props2.record;
+        var _this$props3 = this.props,
+            property = _this$props3.property,
+            record = _this$props3.record;
         var error = record.errors && record.errors[property.name];
         return React__default.createElement("div", {
           className: "field"
@@ -11513,9 +11601,9 @@ var AdminBro = (function (AdminBro$1, React, reactRedux, reactRouterDom, styled,
           className: "control has-icons-right"
         }, React__default.createElement("div", {
           className: "quill-editor",
-          ref: "wysiwig",
+          ref: this.wysiwigRef,
           style: {
-            height: "400px"
+            height: '400px'
           }
         })), error && React__default.createElement("div", {
           className: "help is-danger"
@@ -11525,16 +11613,25 @@ var AdminBro = (function (AdminBro$1, React, reactRedux, reactRouterDom, styled,
 
     return Edit;
   }(React__default.Component);
+  Edit$3.propTypes = {
+    property: propertyType.isRequired,
+    record: recordType.isRequired,
+    onChange: PropTypes$1.func.isRequired
+  };
 
   var Show$3 =
   /*#__PURE__*/
   function (_React$PureComponent) {
     inherits(Show, _React$PureComponent);
 
-    function Show() {
+    function Show(props) {
+      var _this;
+
       classCallCheck(this, Show);
 
-      return possibleConstructorReturn(this, getPrototypeOf(Show).apply(this, arguments));
+      _this = possibleConstructorReturn(this, getPrototypeOf(Show).call(this, props));
+      _this.contentRef = React__default.createRef();
+      return _this;
     }
 
     createClass(Show, [{
@@ -11544,7 +11641,7 @@ var AdminBro = (function (AdminBro$1, React, reactRedux, reactRouterDom, styled,
             property = _this$props.property,
             record = _this$props.record;
         var value = record.params[property.name];
-        this.refs.content.innerHTML = value;
+        this.contentRef.current.innerHTML = value;
       }
     }, {
       key: "render",
@@ -11554,13 +11651,17 @@ var AdminBro = (function (AdminBro$1, React, reactRedux, reactRouterDom, styled,
           property: property
         }, React__default.createElement("div", {
           className: "rich-text-value content",
-          ref: "content"
+          ref: this.contentRef
         }));
       }
     }]);
 
     return Show;
   }(React__default.PureComponent);
+  Show$3.propTypes = {
+    property: propertyType.isRequired,
+    record: recordType.isRequired
+  };
 
   var List$3 =
   /*#__PURE__*/
@@ -11604,6 +11705,11 @@ var AdminBro = (function (AdminBro$1, React, reactRedux, reactRouterDom, styled,
 
     return List;
   }(React__default.PureComponent);
+  List$3.propTypes = {
+    property: propertyType.isRequired,
+    record: recordType.isRequired,
+    resource: resourceType.isRequired
+  };
 
   var richtext = {
     edit: Edit$3,
@@ -17515,20 +17621,19 @@ var AdminBro = (function (AdminBro$1, React, reactRedux, reactRouterDom, styled,
   function (_React$Component) {
     inherits(Edit, _React$Component);
 
-    function Edit(props) {
-      var _this;
-
+    function Edit() {
       classCallCheck(this, Edit);
 
-      _this = possibleConstructorReturn(this, getPrototypeOf(Edit).call(this, props));
-      _this.api = new ApiClient();
-      return _this;
+      return possibleConstructorReturn(this, getPrototypeOf(Edit).apply(this, arguments));
     }
 
     createClass(Edit, [{
       key: "handleChange",
       value: function handleChange(selected) {
-        this.props.onChange(this.props.property.name, selected.value);
+        var _this$props = this.props,
+            onChange = _this$props.onChange,
+            property = _this$props.property;
+        onChange(property.name, selected.value);
       }
     }, {
       key: "loadOptions",
@@ -17536,19 +17641,20 @@ var AdminBro = (function (AdminBro$1, React, reactRedux, reactRouterDom, styled,
         var _loadOptions = asyncToGenerator(
         /*#__PURE__*/
         regenerator.mark(function _callee(inputValue) {
-          var property, records;
+          var property, api, records;
           return regenerator.wrap(function _callee$(_context) {
             while (1) {
               switch (_context.prev = _context.next) {
                 case 0:
                   property = this.props.property;
-                  _context.next = 3;
-                  return this.api.searchRecords({
+                  api = new ApiClient();
+                  _context.next = 4;
+                  return api.searchRecords({
                     resourceId: property.reference,
                     query: inputValue
                   });
 
-                case 3:
+                case 4:
                   records = _context.sent;
                   return _context.abrupt("return", records.map(function (r) {
                     return {
@@ -17557,7 +17663,7 @@ var AdminBro = (function (AdminBro$1, React, reactRedux, reactRouterDom, styled,
                     };
                   }));
 
-                case 5:
+                case 6:
                 case "end":
                   return _context.stop();
               }
@@ -17574,10 +17680,9 @@ var AdminBro = (function (AdminBro$1, React, reactRedux, reactRouterDom, styled,
     }, {
       key: "render",
       value: function render() {
-        var _this$props = this.props,
-            property = _this$props.property,
-            resource = _this$props.resource,
-            record = _this$props.record;
+        var _this$props2 = this.props,
+            property = _this$props2.property,
+            record = _this$props2.record;
         var error = record.errors && record.errors[property.name];
         return React__default.createElement(PropertyInEdit, {
           property: property,
@@ -17594,6 +17699,11 @@ var AdminBro = (function (AdminBro$1, React, reactRedux, reactRouterDom, styled,
 
     return Edit;
   }(React__default.Component);
+  Edit$4.propTypes = {
+    property: propertyType.isRequired,
+    record: recordType.isRequired,
+    onChange: PropTypes$1.func.isRequired
+  };
 
   var Show$4 =
   /*#__PURE__*/
@@ -17645,6 +17755,11 @@ var AdminBro = (function (AdminBro$1, React, reactRedux, reactRouterDom, styled,
 
     return Show;
   }(React__default.PureComponent);
+  Show$4.propTypes = {
+    property: propertyType.isRequired,
+    record: recordType.isRequired,
+    resource: resourceType.isRequired
+  };
 
   var List$4 =
   /*#__PURE__*/
@@ -17688,6 +17803,11 @@ var AdminBro = (function (AdminBro$1, React, reactRedux, reactRouterDom, styled,
 
     return List;
   }(React__default.PureComponent);
+  List$4.propTypes = {
+    property: propertyType.isRequired,
+    record: recordType.isRequired,
+    resource: resourceType.isRequired
+  };
 
   var Filter$3 =
   /*#__PURE__*/
@@ -17703,7 +17823,10 @@ var AdminBro = (function (AdminBro$1, React, reactRedux, reactRouterDom, styled,
     createClass(Filter, [{
       key: "handleChange",
       value: function handleChange(selected) {
-        this.props.onChange(this.props.property.name, selected ? selected.value : '');
+        var _this$props = this.props,
+            onChange = _this$props.onChange,
+            property = _this$props.property;
+        onChange(property.name, selected ? selected.value : '');
       }
     }, {
       key: "loadOptions",
@@ -17750,13 +17873,7 @@ var AdminBro = (function (AdminBro$1, React, reactRedux, reactRouterDom, styled,
     }, {
       key: "render",
       value: function render() {
-        var _this$props = this.props,
-            property = _this$props.property,
-            filter = _this$props.filter;
-        var filterKey = "filter-".concat(property.name);
-        var value = {
-          value: filter[property.name] || ''
-        };
+        var property = this.props.property;
         return React__default.createElement(PropertyInFilter, {
           property: property
         }, React__default.createElement(Select$1, {
@@ -17772,6 +17889,10 @@ var AdminBro = (function (AdminBro$1, React, reactRedux, reactRouterDom, styled,
 
     return Filter;
   }(React__default.PureComponent);
+  Filter$3.propTypes = {
+    property: propertyType.isRequired,
+    onChange: PropTypes$1.func.isRequired
+  };
 
   var reference = {
     edit: Edit$4,
@@ -18077,6 +18198,20 @@ var AdminBro = (function (AdminBro$1, React, reactRedux, reactRouterDom, styled,
         paths = props.paths,
         records = props.records,
         actionPerformed = props.actionPerformed;
+    var h = new viewHelpers();
+    var newAction = h.resourceActionUrl({
+      resourceId: resource.id,
+      actionName: 'new'
+    });
+
+    if (!records.length) {
+      return React__default.createElement("div", {
+        className: "content has-text-centered"
+      }, React__default.createElement("h3", null, "No records"), React__default.createElement("p", null, "There are no records in this resource. Create", ' ', React__default.createElement(reactRouterDom.Link, {
+        to: newAction
+      }, "first record")));
+    }
+
     return React__default.createElement(Table, null, React__default.createElement("thead", null, React__default.createElement("tr", {
       key: "header"
     }, resource.listProperties.map(function (property) {
@@ -18206,7 +18341,7 @@ var AdminBro = (function (AdminBro$1, React, reactRedux, reactRouterDom, styled,
         var prevPage = isFirstPage ? currentPage : currentPage - 1;
         var nextPage = isLastPage ? currentPage : currentPage + 1;
 
-        if (paginate.totalPages === 1) {
+        if (paginate.totalPages === 1 || total === 0) {
           return null;
         }
 
@@ -18243,6 +18378,52 @@ var AdminBro = (function (AdminBro$1, React, reactRedux, reactRouterDom, styled,
 
   var Paginate$1 = reactRouterDom.withRouter(Paginate);
 
+  function _arrayWithHoles(arr) {
+    if (Array.isArray(arr)) return arr;
+  }
+
+  var arrayWithHoles = _arrayWithHoles;
+
+  function _iterableToArrayLimit(arr, i) {
+    var _arr = [];
+    var _n = true;
+    var _d = false;
+    var _e = undefined;
+
+    try {
+      for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) {
+        _arr.push(_s.value);
+
+        if (i && _arr.length === i) break;
+      }
+    } catch (err) {
+      _d = true;
+      _e = err;
+    } finally {
+      try {
+        if (!_n && _i["return"] != null) _i["return"]();
+      } finally {
+        if (_d) throw _e;
+      }
+    }
+
+    return _arr;
+  }
+
+  var iterableToArrayLimit = _iterableToArrayLimit;
+
+  function _nonIterableRest() {
+    throw new TypeError("Invalid attempt to destructure non-iterable instance");
+  }
+
+  var nonIterableRest = _nonIterableRest;
+
+  function _slicedToArray(arr, i) {
+    return arrayWithHoles(arr) || iterableToArrayLimit(arr, i) || nonIterableRest();
+  }
+
+  var slicedToArray = _slicedToArray;
+
   function _templateObject3$3() {
     var data = taggedTemplateLiteral(["\n  padding: ", ";\n  width: ", ";\n  overflow: hidden;\n\n  & ", " {\n    margin: ", " 0;\n    width: 100%;\n  }\n"]);
 
@@ -18264,7 +18445,7 @@ var AdminBro = (function (AdminBro$1, React, reactRedux, reactRouterDom, styled,
   }
 
   function _templateObject$i() {
-    var data = taggedTemplateLiteral(["\n  background: ", ";\n  flex-shrink: 0;\n  width: ", ";\n  color: #fff;\n  padding-top: 60px;\n  transition: width 0.5s;\n  overflow-x: hidden;\n  &.filter-hidden {\n    width: 0;\n    transition: width 0.5s;\n  }\n"]);
+    var data = taggedTemplateLiteral(["\n  background: ", ";\n  flex-shrink: 0;\n  width: ", ";\n  color: #fff;\n  padding-top: 60px;\n  transition: width 0.5s;\n  position: absolute;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  overflow-x: hidden;\n  overflow-y: scroll;\n  &.filter-hidden {\n    width: 0;\n    transition: width 0.5s;\n  }\n"]);
 
     _templateObject$i = function _templateObject() {
       return data;
@@ -18296,8 +18477,9 @@ var AdminBro = (function (AdminBro$1, React, reactRedux, reactRouterDom, styled,
     createClass(Filter, [{
       key: "parseQuery",
       value: function parseQuery() {
+        var location = this.props.location;
         var filter = {};
-        var query = new URLSearchParams(this.props.location.search);
+        var query = new URLSearchParams(location.search);
         var _iteratorNormalCompletion = true;
         var _didIteratorError = false;
         var _iteratorError = undefined;
@@ -18306,8 +18488,12 @@ var AdminBro = (function (AdminBro$1, React, reactRedux, reactRouterDom, styled,
           for (var _iterator = query.entries()[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
             var entry = _step.value;
 
-            if (entry[0].match('filters.')) {
-              filter[entry[0].replace('filters.', '')] = entry[1];
+            var _entry = slicedToArray(entry, 2),
+                key = _entry[0],
+                value = _entry[1];
+
+            if (key.match('filters.')) {
+              filter[key.replace('filters.', '')] = value;
             }
           }
         } catch (err) {
@@ -18330,23 +18516,24 @@ var AdminBro = (function (AdminBro$1, React, reactRedux, reactRouterDom, styled,
     }, {
       key: "handleSubmit",
       value: function handleSubmit(event) {
-        var _this2 = this;
-
         event.preventDefault();
+        var filter = this.state.filter;
+        var history = this.props.history;
         var search = new URLSearchParams(window.location.search);
-        Object.keys(this.state.filter).forEach(function (key) {
-          if (_this2.state.filter[key] !== '') {
-            search.set("filters.".concat(key), _this2.state.filter[key]);
+        Object.keys(filter).forEach(function (key) {
+          if (filter[key] !== '') {
+            search.set("filters.".concat(key), filter[key]);
           } else {
             search.delete("filters.".concat(key));
           }
         });
-        this.props.history.push(this.props.history.location.pathname + '?' + search.toString());
+        history.push("".concat(history.location.pathname, "?").concat(search.toString()));
         return false;
       }
     }, {
       key: "resetFilter",
       value: function resetFilter(event) {
+        var history = this.props.history;
         event.preventDefault();
         var filteredSearch = new URLSearchParams();
         var search = new URLSearchParams(window.location.search);
@@ -18377,8 +18564,8 @@ var AdminBro = (function (AdminBro$1, React, reactRedux, reactRouterDom, styled,
           }
         }
 
-        var query = filteredSearch.toString() === '' ? '?' + filteredSearch.toString() : '';
-        this.props.history.push(this.props.history.location.pathname + query);
+        var query = filteredSearch.toString() === '' ? "?".concat(filteredSearch.toString()) : '';
+        history.push(history.location.pathname + query);
         this.setState({
           filter: {}
         });
@@ -18386,21 +18573,22 @@ var AdminBro = (function (AdminBro$1, React, reactRedux, reactRouterDom, styled,
     }, {
       key: "handleChange",
       value: function handleChange(propertyName, value) {
-        var filter = objectSpread({}, this.state.filter, defineProperty({}, propertyName, value));
-
-        this.setState({
-          filter: filter
+        this.setState(function (state) {
+          return {
+            filter: objectSpread({}, state.filter, defineProperty({}, propertyName, value))
+          };
         });
       }
     }, {
       key: "render",
       value: function render() {
-        var _this3 = this;
+        var _this2 = this;
 
         var _this$props = this.props,
             resource = _this$props.resource,
             isVisible = _this$props.isVisible,
             toggleFilter = _this$props.toggleFilter;
+        var filter = this.state.filter;
         var properties = resource.editProperties;
         return React__default.createElement(FilterWrapper, {
           className: isVisible ? null : 'filter-hidden'
@@ -18414,9 +18602,9 @@ var AdminBro = (function (AdminBro$1, React, reactRedux, reactRouterDom, styled,
           return React__default.createElement(PropertyType, {
             key: property.name,
             where: "filter",
-            onChange: _this3.handleChange.bind(_this3),
+            onChange: _this2.handleChange.bind(_this2),
             property: property,
-            filter: _this3.state.filter,
+            filter: filter,
             resource: resource
           });
         }), React__default.createElement(StyledButton, {
@@ -18433,6 +18621,13 @@ var AdminBro = (function (AdminBro$1, React, reactRedux, reactRouterDom, styled,
     return Filter;
   }(React__default.Component);
 
+  Filter$4.propTypes = {
+    location: locationType.isRequired,
+    history: historyType.isRequired,
+    resource: resourceType.isRequired,
+    isVisible: PropTypes$1.bool.isRequired,
+    toggleFilter: PropTypes$1.func.isRequired
+  };
   var Filter$5 = reactRouterDom.withRouter(Filter$4);
 
   function _templateObject4() {
@@ -18745,10 +18940,11 @@ var AdminBro = (function (AdminBro$1, React, reactRedux, reactRouterDom, styled,
       classCallCheck(this, New);
 
       _this = possibleConstructorReturn(this, getPrototypeOf(New).call(this, props));
+      var record = props.record;
       _this.api = new ApiClient();
       _this.state = {
-        params: props.record && props.record.params || {},
-        errors: props.record && props.record.errors || {}
+        params: record && record.params || {},
+        errors: record && record.errors || {}
       };
       return _this;
     }
@@ -18756,28 +18952,34 @@ var AdminBro = (function (AdminBro$1, React, reactRedux, reactRouterDom, styled,
     createClass(New, [{
       key: "handleChange",
       value: function handleChange(propertyName, value) {
-        this.setState(objectSpread({}, this.state, {
-          params: objectSpread({}, this.state.params, defineProperty({}, propertyName, value))
-        }));
+        this.setState(function (state) {
+          return {
+            params: objectSpread({}, state.params, defineProperty({}, propertyName, value))
+          };
+        });
       }
     }, {
       key: "handleSubmit",
       value: function handleSubmit(event) {
         var _this2 = this;
 
+        var _this$props = this.props,
+            resource = _this$props.resource,
+            history = _this$props.history;
+        var params = this.state.params;
         this.api.resourceAction({
-          resourceId: this.props.resource.id,
+          resourceId: resource.id,
           actionName: 'new',
           payload: {
-            record: this.state.params
+            record: params
           }
         }).then(function (response) {
           if (response.data.redirectUrl) {
-            _this2.props.history.push(response.data.redirectUrl);
+            history.push(response.data.redirectUrl);
           } else {
-            _this2.setState(objectSpread({}, _this2.state, {
+            _this2.setState({
               errors: response.data.record.errors
-            }));
+            });
           }
         });
         event.preventDefault();
@@ -18789,10 +18991,13 @@ var AdminBro = (function (AdminBro$1, React, reactRedux, reactRouterDom, styled,
         var _this3 = this;
 
         var resource = this.props.resource;
-        var properties = this.props.resource.editProperties;
+        var _this$state = this.state,
+            params = _this$state.params,
+            errors = _this$state.errors;
+        var properties = resource.editProperties;
         var record = {
-          params: this.state.params,
-          errors: this.state.errors
+          params: params,
+          errors: errors
         };
         return React__default.createElement(BorderBox, null, React__default.createElement("form", {
           onSubmit: this.handleSubmit.bind(this)
@@ -18820,6 +19025,14 @@ var AdminBro = (function (AdminBro$1, React, reactRedux, reactRouterDom, styled,
     return New;
   }(React__default.Component);
 
+  New.propTypes = {
+    resource: resourceType.isRequired,
+    history: historyType.isRequired,
+    record: recordType
+  };
+  New.defaultProps = {
+    record: null
+  };
   var NewAction = reactRouterDom.withRouter(New);
 
   var Edit$5 =
@@ -18845,55 +19058,68 @@ var AdminBro = (function (AdminBro$1, React, reactRedux, reactRouterDom, styled,
     }
 
     createClass(Edit, [{
-      key: "handleChange",
-      value: function handleChange(propertyName, value) {
-        this.setState(objectSpread({}, this.state, {
-          record: objectSpread({}, this.state.record, {
-            params: objectSpread({}, this.state.record.params, defineProperty({}, propertyName, value))
-          })
-        }));
-      }
-    }, {
-      key: "handleSubmit",
-      value: function handleSubmit(event) {
-        var _this2 = this;
-
-        this.api.recordAction({
-          resourceId: this.props.resource.id,
-          actionName: 'edit',
-          recordId: this.props.recordId,
-          payload: {
-            record: this.state.record.params
-          }
-        }).then(function (response) {
-          if (response.data.redirectUrl) {
-            _this2.props.history.push(response.data.redirectUrl);
-          } else {
-            _this2.setState(objectSpread({}, _this2.state, {
-              record: objectSpread({}, _this2.state.record, {
-                errors: response.data.record.errors
-              })
-            }));
-          }
-        });
-        event.preventDefault();
-        return false;
-      }
-    }, {
       key: "componentDidMount",
       value: function componentDidMount() {
-        var _this3 = this;
+        var _this2 = this;
 
+        var _this$props = this.props,
+            resource = _this$props.resource,
+            action = _this$props.action,
+            recordId = _this$props.recordId;
         this.api.recordAction({
-          resourceId: this.props.resource.id,
-          actionName: this.props.action.name,
-          recordId: this.props.recordId
+          resourceId: resource.id,
+          actionName: action.name,
+          recordId: recordId
         }).then(function (response) {
-          _this3.setState({
+          _this2.setState({
             isLoading: false,
             record: response.data.record
           });
         });
+      }
+    }, {
+      key: "handleChange",
+      value: function handleChange(propertyName, value) {
+        this.setState(function (state) {
+          return {
+            record: objectSpread({}, state.record, {
+              params: objectSpread({}, state.record.params, defineProperty({}, propertyName, value))
+            })
+          };
+        });
+      }
+    }, {
+      key: "handleSubmit",
+      value: function handleSubmit(event) {
+        var _this3 = this;
+
+        var _this$props2 = this.props,
+            resource = _this$props2.resource,
+            recordId = _this$props2.recordId,
+            history = _this$props2.history;
+        var record = this.state.record;
+        this.api.recordAction({
+          resourceId: resource.id,
+          actionName: 'edit',
+          recordId: recordId,
+          payload: {
+            record: record.params
+          }
+        }).then(function (response) {
+          if (response.data.redirectUrl) {
+            history.push(response.data.redirectUrl);
+          } else {
+            _this3.setState(function (state) {
+              return {
+                record: objectSpread({}, state.record, {
+                  errors: response.data.record.errors
+                })
+              };
+            });
+          }
+        });
+        event.preventDefault();
+        return false;
       }
     }, {
       key: "render",
@@ -18902,9 +19128,11 @@ var AdminBro = (function (AdminBro$1, React, reactRedux, reactRouterDom, styled,
 
         var resource = this.props.resource;
         var properties = resource.editProperties;
-        var record = this.state.record;
+        var _this$state = this.state,
+            record = _this$state.record,
+            isLoading = _this$state.isLoading;
 
-        if (this.state.isLoading) {
+        if (isLoading) {
           return React__default.createElement(Loader, null);
         }
 
@@ -18934,6 +19162,12 @@ var AdminBro = (function (AdminBro$1, React, reactRedux, reactRouterDom, styled,
     return Edit;
   }(React__default.Component);
 
+  Edit$5.propTypes = {
+    resource: resourceType.isRequired,
+    action: actionType.isRequired,
+    history: historyType.isRequired,
+    recordId: PropTypes$1.string.isRequired
+  };
   var EditAction = reactRouterDom.withRouter(Edit$5);
 
   var Show$5 =
@@ -18962,11 +19196,15 @@ var AdminBro = (function (AdminBro$1, React, reactRedux, reactRouterDom, styled,
       value: function componentDidMount() {
         var _this2 = this;
 
+        var _this$props = this.props,
+            resource = _this$props.resource,
+            action = _this$props.action,
+            recordId = _this$props.recordId;
         var api = new ApiClient();
         api.recordAction({
-          resourceId: this.props.resource.id,
-          actionName: this.props.action.name,
-          recordId: this.props.recordId
+          resourceId: resource.id,
+          actionName: action.name,
+          recordId: recordId
         }).then(function (response) {
           _this2.setState({
             isLoading: false,
@@ -19002,6 +19240,12 @@ var AdminBro = (function (AdminBro$1, React, reactRedux, reactRouterDom, styled,
     return Show;
   }(React__default.Component);
 
+  Show$5.propTypes = {
+    resource: resourceType.isRequired,
+    action: actionType.isRequired,
+    recordId: PropTypes$1.string.isRequired
+  };
+
   var Delete =
   /*#__PURE__*/
   function (_React$PureComponent) {
@@ -19016,15 +19260,18 @@ var AdminBro = (function (AdminBro$1, React, reactRedux, reactRouterDom, styled,
     createClass(Delete, [{
       key: "componentDidMount",
       value: function componentDidMount() {
-        var _this = this;
-
+        var _this$props = this.props,
+            resource = _this$props.resource,
+            action = _this$props.action,
+            recordId = _this$props.recordId,
+            history = _this$props.history;
         var api = new ApiClient();
         api.recordAction({
-          resourceId: this.props.resource.id,
-          actionName: this.props.action.name,
-          recordId: this.props.recordId
+          resourceId: resource.id,
+          actionName: action.name,
+          recordId: recordId
         }).then(function (response) {
-          _this.props.history.push(response.data.redirectUrl);
+          history.push(response.data.redirectUrl);
         });
       }
     }, {
@@ -19037,6 +19284,12 @@ var AdminBro = (function (AdminBro$1, React, reactRedux, reactRouterDom, styled,
     return Delete;
   }(React__default.PureComponent);
 
+  Delete.propTypes = {
+    resource: resourceType.isRequired,
+    action: actionType.isRequired,
+    history: historyType.isRequired,
+    recordId: PropTypes$1.string.isRequired
+  };
   var DeleteAction = reactRouterDom.withRouter(Delete);
 
   var actions = {
@@ -19266,10 +19519,10 @@ var AdminBro = (function (AdminBro$1, React, reactRedux, reactRouterDom, styled,
       classCallCheck(this, Resource);
 
       _this = possibleConstructorReturn(this, getPrototypeOf(Resource).call(this, props));
+      var location = props.location;
       _this.resource = _this.currentResource();
       _this.state = {
-        loading: true,
-        filterVisible: queryHasFilter(_this.props.location.search),
+        filterVisible: queryHasFilter(location.search),
         records: [],
         page: 1,
         perPage: 20,
@@ -19279,36 +19532,47 @@ var AdminBro = (function (AdminBro$1, React, reactRedux, reactRouterDom, styled,
     }
 
     createClass(Resource, [{
+      key: "componentDidMount",
+      value: function componentDidMount() {
+        var match = this.props.match;
+
+        this._fetchData(match.params.resourceId);
+      }
+    }, {
       key: "componentDidUpdate",
       value: function componentDidUpdate(prevProps) {
-        if (this.props.match.params.resourceId !== prevProps.match.params.resourceId || this.props.location.search !== prevProps.location.search) {
-          this._fetchData(this.props.match.params.resourceId);
+        var _this$props = this.props,
+            match = _this$props.match,
+            location = _this$props.location;
+
+        if (match.params.resourceId !== prevProps.match.params.resourceId || location.search !== prevProps.location.search) {
+          this._fetchData(match.params.resourceId);
         }
       }
     }, {
       key: "currentResource",
       value: function currentResource(resourceId) {
-        var _this2 = this;
-
-        var resources = this.props.resources;
+        var _this$props2 = this.props,
+            resources = _this$props2.resources,
+            match = _this$props2.match;
         return resources.find(function (r) {
-          return r.id === (resourceId || _this2.props.match.params.resourceId);
+          return r.id === (resourceId || match.params.resourceId);
         });
       }
     }, {
       key: "_fetchData",
       value: function _fetchData(resourceId) {
-        var _this3 = this;
+        var _this2 = this;
 
+        var location = this.props.location;
         var api = new ApiClient();
         this.resource = this.currentResource(resourceId);
-        var query = new URLSearchParams(this.props.location.search);
+        var query = new URLSearchParams(location.search);
         api.getRecords({
           resourceId: this.resource.id,
           query: query
         }).then(function (response) {
-          _this3.setState({
-            loading: false,
+          _this2.setState({
             records: response.data.records,
             page: response.data.meta.page,
             perPage: response.data.meta.perPage,
@@ -19317,20 +19581,19 @@ var AdminBro = (function (AdminBro$1, React, reactRedux, reactRouterDom, styled,
         });
       }
     }, {
-      key: "componentDidMount",
-      value: function componentDidMount() {
-        this._fetchData(this.props.match.params.resourceId);
-      }
-    }, {
       key: "handleActionPerformed",
       value: function handleActionPerformed() {
-        this._fetchData(this.props.match.params.resourceId);
+        var match = this.props.match;
+
+        this._fetchData(match.params.resourceId);
       }
     }, {
       key: "toggleFilter",
       value: function toggleFilter(event) {
-        this.setState({
-          filterVisible: !this.state.filterVisible
+        this.setState(function (state) {
+          return {
+            filterVisible: !state.filterVisible
+          };
         });
         event.preventDefault();
       }
@@ -19338,6 +19601,14 @@ var AdminBro = (function (AdminBro$1, React, reactRedux, reactRouterDom, styled,
       key: "render",
       value: function render() {
         var resource = this.currentResource();
+        var paths = this.props.paths;
+        var _this$state = this.state,
+            records = _this$state.records,
+            page = _this$state.page,
+            perPage = _this$state.perPage,
+            total = _this$state.total,
+            search = _this$state.search,
+            filterVisible = _this$state.filterVisible;
         return React__default.createElement(Wrapper, null, React__default.createElement(ActionWrapper, null, React__default.createElement(Breadcrumbs, {
           resource: resource
         }), React__default.createElement(ActionHeader, {
@@ -19346,17 +19617,17 @@ var AdminBro = (function (AdminBro$1, React, reactRedux, reactRouterDom, styled,
           actionPerformed: this.handleActionPerformed.bind(this)
         }), React__default.createElement(BorderBox, null, React__default.createElement(RecordsTable, {
           resource: this.resource,
-          records: this.state.records,
-          paths: this.props.paths,
+          records: records,
+          paths: paths,
           actionPerformed: this.handleActionPerformed.bind(this)
         }), React__default.createElement(Paginate$1, {
-          page: this.state.page,
-          perPage: this.state.perPage,
-          total: this.state.total
+          page: page,
+          perPage: perPage,
+          total: total
         }))), React__default.createElement(Filter$5, {
           resource: this.resource,
-          search: this.state.search,
-          isVisible: this.state.filterVisible,
+          search: search,
+          isVisible: filterVisible,
           toggleFilter: this.toggleFilter.bind(this)
         }));
       }
@@ -19372,6 +19643,12 @@ var AdminBro = (function (AdminBro$1, React, reactRedux, reactRouterDom, styled,
     };
   };
 
+  Resource.propTypes = {
+    resources: PropTypes$1.arrayOf(resourceType).isRequired,
+    location: locationType.isRequired,
+    match: matchType.isRequired,
+    paths: pathsType.isRequired
+  };
   var Resource$1 = reactRedux.connect(mapStateToProps$5)(Resource);
 
   function _templateObject3$5() {
@@ -19646,7 +19923,7 @@ var AdminBro = (function (AdminBro$1, React, reactRedux, reactRouterDom, styled,
     DashboardHeader: DashboardHeader
   };
 
-  var Components = objectSpread({}, AdminBro$1.Components, widgets, components$1);
+  var Components = objectSpread({}, AdminBro.Components, widgets, components$1);
 
   var store = createStore(window.REDUX_STATE);
   var Application = React__default.createElement(reactRedux.Provider, {
@@ -19661,4 +19938,4 @@ var AdminBro = (function (AdminBro$1, React, reactRedux, reactRouterDom, styled,
 
   return bundleEntry;
 
-}(AdminBro, React, ReactRedux, ReactRouterDOM, styled, PropTypes, axios, ReactDOM, Redux));
+}(React, ReactRedux, ReactRouterDOM, styled, PropTypes, axios, ReactDOM, Redux));

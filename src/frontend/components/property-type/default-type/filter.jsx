@@ -21,7 +21,8 @@ export default class Filter extends React.PureComponent {
             className="input filter"
             name={filterKey}
             onChange={this.handleChange.bind(this)}
-            value={value} />
+            value={value}
+          />
         </div>
       </PropertyInFilter>
     )

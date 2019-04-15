@@ -1,8 +1,10 @@
 import React from 'react'
 import styled from 'styled-components'
+import { Link } from 'react-router-dom'
 
 import RecordInList from './record-in-list'
 import PropertyHeader from './property-header'
+import ViewHelpers from '../../../backend/utils/view-helpers'
 
 const Table = styled.table.attrs({
   className: 'table is-fullwidth',
@@ -19,6 +21,21 @@ const Table = styled.table.attrs({
 
 const RecordsTable = (props) => {
   const { resource, paths, records, actionPerformed } = props
+  const h = new ViewHelpers()
+  const newAction = h.resourceActionUrl({ resourceId: resource.id, actionName: 'new' })
+  if (!records.length) {
+    return (
+      <div className="content has-text-centered">
+        <h3>No records</h3>
+        <p>
+          There are no records in this resource.
+          Create
+          {' '}
+          <Link to={newAction}>first record</Link>
+        </p>
+      </div>
+    )
+  }
   return (
     <Table>
       <thead>

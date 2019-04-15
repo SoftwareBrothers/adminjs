@@ -1,9 +1,30 @@
 import React from 'react'
+import PropTypes from 'prop-types'
+
 import PropertyInEdit from '../../layout/property-in-edit'
+import { propertyType, recordType } from '../../../types'
 
 export default class Edit extends React.Component {
-  handleChange(value) {
-    this.props.onChange(this.props.property.name, value)
+  constructor(props) {
+    super(props)
+    this.datepickerRef = React.createRef()
+  }
+
+  componentDidMount() {
+    this.setupDatePicker()
+  }
+
+  shouldComponentUpdate(nextProps) {
+    const { record, property } = this.props
+    const nextRecord = nextProps.record
+    const value = (record.params && record.params[property.name]) || ''
+    const nextValue = (nextRecord.params && nextRecord.params[property.name]) || ''
+
+    return nextValue !== value
+  }
+
+  componentDidUpdate() {
+    this.setupDatePicker()
   }
 
   setupDatePicker() {
@@ -19,31 +40,19 @@ export default class Edit extends React.Component {
         time_24hr: true,
       }
     }
-    const inst = flatpickr(this.refs.datepicker, {
+    const inst = flatpickr(this.datepickerRef.current, {
       format: 'Y-m-d H:i',
       defaultDate,
-      ...options
+      ...options,
     })
     inst.config.onChange.push((dates, text) => {
       this.handleChange(text)
     })
   }
 
-  componentDidMount() {
-    this.setupDatePicker()
-  }
-
-  shouldComponentUpdate(nextProps, nextState) {
-    const { record, property } = this.props
-    const nextRecord = nextProps.record
-    const value = (record.params && record.params[property.name]) || ''
-    const nextValue = (nextRecord.params && nextRecord.params[property.name]) || ''
-    
-    return nextValue !== value
-  }
-
-  componentDidUpdate() {
-    this.setupDatePicker()
+  handleChange(value) {
+    const { onChange, property } = this.props
+    onChange(property.name, value)
   }
 
   render() {
@@ -56,7 +65,7 @@ export default class Edit extends React.Component {
             type="text"
             className="input pickadate"
             id={property.name}
-            ref="datepicker"
+            ref={this.datepickerRef}
             name={property.name}
           />
           <span className="icon is-small is-right">
@@ -66,4 +75,10 @@ export default class Edit extends React.Component {
       </PropertyInEdit>
     )
   }
+}
+
+Edit.propTypes = {
+  property: propertyType.isRequired,
+  record: recordType.isRequired,
+  onChange: PropTypes.func.isRequired,
 }

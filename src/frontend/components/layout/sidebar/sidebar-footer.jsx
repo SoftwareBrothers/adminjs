@@ -15,21 +15,19 @@ const StyledFooter = styled.p`
 `
 
 
-const SidebarFooter = (props) => {
-  return (
-    <StyledFooter>
+const SidebarFooter = props => (
+  <StyledFooter>
       With
-      <i className="fas fa-heart" />
+    <i className="fas fa-heart" />
       by
-      <a
-        href="http://softwarebrothers.co" 
-        target="_blank" 
-        rel="noopener noreferrer"
-      >
+    <a
+      href="http://softwarebrothers.co"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
         SoftwareBrothers
-      </a>
-    </StyledFooter>
-  )
-}
+    </a>
+  </StyledFooter>
+)
 
 export default SidebarFooter

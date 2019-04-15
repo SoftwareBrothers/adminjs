@@ -1,9 +1,12 @@
 import React from 'react'
+import PropTypes from 'prop-types'
+
 import PropertyType from '../property-type'
 import { Loader, BorderBox } from '../layout'
 import ApiClient from '../../utils/api-client'
+import { resourceType, actionType } from '../../types'
 
-export default class Show extends React.Component {
+class Show extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -13,11 +16,12 @@ export default class Show extends React.Component {
   }
 
   componentDidMount() {
+    const { resource, action, recordId } = this.props
     const api = new ApiClient()
     api.recordAction({
-      resourceId: this.props.resource.id,
-      actionName: this.props.action.name,
-      recordId: this.props.recordId,
+      resourceId: resource.id,
+      actionName: action.name,
+      recordId,
     }).then((response) => {
       this.setState({
         isLoading: false,
@@ -52,3 +56,11 @@ export default class Show extends React.Component {
     )
   }
 }
+
+Show.propTypes = {
+  resource: resourceType.isRequired,
+  action: actionType.isRequired,
+  recordId: PropTypes.string.isRequired,
+}
+
+export default Show

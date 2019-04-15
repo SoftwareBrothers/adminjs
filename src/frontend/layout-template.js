@@ -21,6 +21,7 @@ const html = (admin, currentAdmin, location = '/') => {
     .map(l => `<link rel="stylesheet" type="text/css" href="${l}">`)
 
   const jsx = (
+    // eslint-disable-next-line react/jsx-filename-extension
     <Provider store={store}>
       <StaticRouter context={context} location={locationInAdmin}>
         <App />

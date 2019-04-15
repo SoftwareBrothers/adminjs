@@ -9,7 +9,7 @@ const selectStyles = {
     borderRadius: '0px',
     background: 'transparent',
   }),
-  menu: (provided, state) => ({
+  menu: provided => ({
     ...provided,
     borderRadius: '0px',
     borderColor: colors.border,
@@ -34,7 +34,7 @@ const filterStyles = {
     color: state.isSelected ? '#ffffff' : colors.lightText,
     background: state.isFocused ? 'rgba(32,39,62,0.25)' : 'transparent',
   }),
-  menu: (provided, state) => ({
+  menu: provided => ({
     ...provided,
     borderRadius: '0px',
     borderColor: colors.border,

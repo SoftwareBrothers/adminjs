@@ -71,7 +71,8 @@ export default class RecordInList extends React.PureComponent {
               where="list"
               property={property}
               resource={resource}
-              record={record} />
+              record={record}
+            />
           </Td>
         ))}
         <Td key="options">

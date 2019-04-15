@@ -11,7 +11,7 @@ async function build(admin) {
   const entryFile = Object.keys(Components).map(c => (
     [
       `import ${c} from '${Components[c]}'`,
-      `AdminBro.Components.${c} = ${c}`
+      `AdminBro.Components.${c} = ${c}`,
     ].join('\n')
   )).join('\n\n')
 

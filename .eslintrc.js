@@ -31,6 +31,7 @@ module.exports = {
         'guard-for-in': 'off',
         'no-restricted-syntax': 'off',
         'no-await-in-loop': 'off',
+        'object-curly-newline': 'off',
     },
     overrides: [
         {
@@ -46,6 +47,8 @@ module.exports = {
         'expect': true,
         'factory': true,
         'sandbox': true,
-        'server': true
+        'server': true,
+        'window': true,
+        'AdminBro': true,
     }
 }

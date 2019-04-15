@@ -1,13 +1,16 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import Select from 'react-select/lib/Async'
 import ApiClient from '../../../utils/api-client'
 
 import PropertyInFilter from '../../layout/property-in-filter'
 import { filterStyles } from '../../../styles/select-styles'
+import { propertyType } from '../../../types'
 
 export default class Filter extends React.PureComponent {
   handleChange(selected) {
-    this.props.onChange(this.props.property.name, selected ? selected.value : '')
+    const { onChange, property } = this.props
+    onChange(property.name, selected ? selected.value : '')
   }
 
   async loadOptions(inputValue) {
@@ -21,9 +24,7 @@ export default class Filter extends React.PureComponent {
   }
 
   render() {
-    const { property, filter } = this.props
-    const filterKey = `filter-${property.name}`
-    const value = {value: filter[property.name] || ''}
+    const { property } = this.props
     return (
       <PropertyInFilter property={property}>
         <Select
@@ -32,9 +33,14 @@ export default class Filter extends React.PureComponent {
           styles={filterStyles}
           loadOptions={this.loadOptions.bind(this)}
           onChange={this.handleChange.bind(this)}
-          defaultOptions={true}
+          defaultOptions
         />
       </PropertyInFilter>
     )
   }
+}
+
+Filter.propTypes = {
+  property: propertyType.isRequired,
+  onChange: PropTypes.func.isRequired,
 }

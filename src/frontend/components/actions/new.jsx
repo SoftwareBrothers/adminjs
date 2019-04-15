@@ -1,42 +1,46 @@
 import React from 'react'
+import { withRouter } from 'react-router-dom'
+
 import PropertyType from '../property-type'
 import ApiClient from '../../utils/api-client'
-import { withRouter } from 'react-router-dom'
 import { BorderBox, StyledButton } from '../layout'
+import { resourceType, historyType, recordType } from '../../types'
+
 
 class New extends React.Component {
   constructor(props) {
     super(props)
+    const { record } = props
     this.api = new ApiClient()
     this.state = {
-      params: (props.record && props.record.params) || {},
-      errors: (props.record && props.record.errors) || {},
+      params: (record && record.params) || {},
+      errors: (record && record.errors) || {},
     }
   }
 
   handleChange(propertyName, value) {
-    this.setState({
-      ...this.state,
+    this.setState(state => ({
       params: {
-        ...this.state.params,
+        ...state.params,
         [propertyName]: value,
-      }
-    })
+      },
+    }))
   }
 
-  handleSubmit(event){
+  handleSubmit(event) {
+    const { resource, history } = this.props
+    const { params } = this.state
     this.api.resourceAction({
-      resourceId: this.props.resource.id,
+      resourceId: resource.id,
       actionName: 'new',
       payload: {
-        record: this.state.params,
+        record: params,
       },
     }).then((response) => {
       if (response.data.redirectUrl) {
-        this.props.history.push(response.data.redirectUrl)
+        history.push(response.data.redirectUrl)
       } else {
         this.setState({
-          ...this.state,
           errors: response.data.record.errors,
         })
       }
@@ -46,9 +50,10 @@ class New extends React.Component {
   }
 
   render() {
-    const resource = this.props.resource
-    const properties = this.props.resource.editProperties
-    const record = { params: this.state.params, errors: this.state.errors }
+    const { resource } = this.props
+    const { params, errors } = this.state
+    const properties = resource.editProperties
+    const record = { params, errors }
     return (
       <BorderBox>
         <form onSubmit={this.handleSubmit.bind(this)}>
@@ -59,7 +64,8 @@ class New extends React.Component {
               property={property}
               resource={resource}
               onChange={this.handleChange.bind(this)}
-              record={record} />
+              record={record}
+            />
           ))}
           <StyledButton as="button" type="submit" className="is-primary">
             <i className="icomoon-save" />
@@ -69,6 +75,16 @@ class New extends React.Component {
       </BorderBox>
     )
   }
+}
+
+New.propTypes = {
+  resource: resourceType.isRequired,
+  history: historyType.isRequired,
+  record: recordType,
+}
+
+New.defaultProps = {
+  record: null,
 }
 
 export default withRouter(New)

@@ -34,7 +34,7 @@ class Paginate extends React.PureComponent {
     const prevPage = isFirstPage ? currentPage : currentPage - 1
     const nextPage = isLastPage ? currentPage : currentPage + 1
 
-    if (paginate.totalPages === 1) {
+    if (paginate.totalPages === 1 || total === 0) {
       return null
     }
     return (

@@ -1,8 +1,10 @@
 import React from 'react'
 import { withRouter } from 'react-router-dom'
+import PropTypes from 'prop-types'
 
 import PropertyType from '../property-type'
 import { Loader, BorderBox, StyledButton } from '../layout'
+import { resourceType, actionType, historyType } from '../../types'
 import ApiClient from '../../utils/api-client'
 
 class Edit extends React.Component {
@@ -10,54 +12,17 @@ class Edit extends React.Component {
     super(props)
     this.state = {
       isLoading: true,
-      record: { params: {}, populated: {} }
+      record: { params: {}, populated: {} },
     }
     this.api = new ApiClient()
   }
 
-  handleChange(propertyName, value) {
-    this.setState({
-      ...this.state,
-      record: {
-        ...this.state.record,
-        params: {
-          ...this.state.record.params,
-          [propertyName]: value,
-        }
-      }
-    })
-  }
-
-  handleSubmit(event){
-    this.api.recordAction({
-      resourceId: this.props.resource.id,
-      actionName: 'edit',
-      recordId: this.props.recordId,
-      payload: {
-        record: this.state.record.params,
-      },
-    }).then((response) => {
-      if (response.data.redirectUrl) {
-        this.props.history.push(response.data.redirectUrl)
-      } else {
-        this.setState({
-          ...this.state,
-          record: {
-            ...this.state.record,
-            errors: response.data.record.errors,
-          }
-        })
-      }
-    })
-    event.preventDefault()
-    return false
-  }
-
   componentDidMount() {
+    const { resource, action, recordId } = this.props
     this.api.recordAction({
-      resourceId: this.props.resource.id,
-      actionName: this.props.action.name,
-      recordId: this.props.recordId,
+      resourceId: resource.id,
+      actionName: action.name,
+      recordId,
     }).then((response) => {
       this.setState({
         isLoading: false,
@@ -66,12 +31,50 @@ class Edit extends React.Component {
     })
   }
 
+  handleChange(propertyName, value) {
+    this.setState(state => ({
+      record: {
+        ...state.record,
+        params: {
+          ...state.record.params,
+          [propertyName]: value,
+        },
+      },
+    }))
+  }
+
+  handleSubmit(event) {
+    const { resource, recordId, history } = this.props
+    const { record } = this.state
+    this.api.recordAction({
+      resourceId: resource.id,
+      actionName: 'edit',
+      recordId,
+      payload: {
+        record: record.params,
+      },
+    }).then((response) => {
+      if (response.data.redirectUrl) {
+        history.push(response.data.redirectUrl)
+      } else {
+        this.setState(state => ({
+          record: {
+            ...state.record,
+            errors: response.data.record.errors,
+          },
+        }))
+      }
+    })
+    event.preventDefault()
+    return false
+  }
+
   render() {
     const { resource } = this.props
     const properties = resource.editProperties
-    const record = this.state.record
+    const { record, isLoading } = this.state
 
-    if (this.state.isLoading) {
+    if (isLoading) {
       return (
         <Loader />
       )
@@ -87,7 +90,8 @@ class Edit extends React.Component {
               onChange={this.handleChange.bind(this)}
               property={property}
               resource={resource}
-              record={record} />
+              record={record}
+            />
           ))}
           <StyledButton as="button" type="submit" className="is-primary">
             <i className="icomoon-save" />
@@ -97,6 +101,13 @@ class Edit extends React.Component {
       </BorderBox>
     )
   }
+}
+
+Edit.propTypes = {
+  resource: resourceType.isRequired,
+  action: actionType.isRequired,
+  history: historyType.isRequired,
+  recordId: PropTypes.string.isRequired,
 }
 
 export default withRouter(Edit)

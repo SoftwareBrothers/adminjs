@@ -1,23 +1,23 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import Select from 'react-select/lib/Async'
+
 import ApiClient from '../../../utils/api-client'
 import PropertyInEdit from '../../layout/property-in-edit'
-
 import selectStyles from '../../../styles/select-styles'
+import { propertyType, recordType } from '../../../types'
 
 export default class Edit extends React.Component {
-  constructor(props) {
-    super(props)
-    this.api = new ApiClient()
-  }
-
   handleChange(selected) {
-    this.props.onChange(this.props.property.name, selected.value)
+    const { onChange, property } = this.props
+    onChange(property.name, selected.value)
   }
 
   async loadOptions(inputValue) {
     const { property } = this.props
-    const records = await this.api.searchRecords({
+    const api = new ApiClient()
+
+    const records = await api.searchRecords({
       resourceId: property.reference,
       query: inputValue,
     })
@@ -25,7 +25,7 @@ export default class Edit extends React.Component {
   }
 
   render() {
-    const { property, resource, record } = this.props
+    const { property, record } = this.props
     const error = record.errors && record.errors[property.name]
 
     return (
@@ -40,4 +40,10 @@ export default class Edit extends React.Component {
       </PropertyInEdit>
     )
   }
+}
+
+Edit.propTypes = {
+  property: propertyType.isRequired,
+  record: recordType.isRequired,
+  onChange: PropTypes.func.isRequired,
 }

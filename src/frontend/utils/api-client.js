@@ -37,7 +37,7 @@ export default class ApiClient {
   }
 
   async getDashboard({ params }) {
-    return this.client.get(`/api/dashboard`, {
+    return this.client.get('/api/dashboard', {
       params,
     })
   }

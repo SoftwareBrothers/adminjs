@@ -1,7 +1,9 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+
 import ViewHelpers from '../../../../backend/utils/view-helpers'
 import PropertyInShow from '../../layout/property-in-show'
+import { propertyType, recordType, resourceType } from '../../../types'
 
 export default class Show extends React.PureComponent {
   valueElement() {
@@ -10,8 +12,8 @@ export default class Show extends React.PureComponent {
     const refId = record.params[property.name]
     const populated = record.populated[property.name]
     const value = (populated && populated.title) || refId
-    
-    if (resource.recordActions.find(a => a.name === 'show') && populated){
+
+    if (resource.recordActions.find(a => a.name === 'show') && populated) {
       const href = h.recordActionUrl({
         resourceId: property.reference, recordId: refId, actionName: 'show',
       })
@@ -33,4 +35,10 @@ export default class Show extends React.PureComponent {
       </PropertyInShow>
     )
   }
+}
+
+Show.propTypes = {
+  property: propertyType.isRequired,
+  record: recordType.isRequired,
+  resource: resourceType.isRequired,
 }

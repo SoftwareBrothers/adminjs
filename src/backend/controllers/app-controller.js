@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 const layoutTemplate = require('../../frontend/layout-template')
 const appBundler = require('../bundler/app-bundler')
 const componentsBundler = require('../bundler/components-bundler')
@@ -20,14 +21,17 @@ class AppController {
 
   async resourceAction({ params, query, payload }, response) {
     const { resourceId, actionName } = params
-    return layoutTemplate(this._admin, this.currentAdmin, this.h.resourceActionUrl({ resourceId, actionName }))
+    const href = this.h.resourceActionUrl({ resourceId, actionName })
+    return layoutTemplate(this._admin, this.currentAdmin, href)
   }
 
   async recordAction({ params, query, payload }, response) {
     const { resourceId, actionName, recordId } = params
-    return layoutTemplate(this._admin, this.currentAdmin, this.h.recordActionUrl({ resourceId, actionName, recordId }))
+    const href = this.h.recordActionUrl({ resourceId, actionName, recordId })
+    return layoutTemplate(this._admin, this.currentAdmin, href)
   }
 
+  // eslint-disable-next-line class-methods-use-this
   async bundle({ params, query, payload }, response) {
     return appBundler()
   }

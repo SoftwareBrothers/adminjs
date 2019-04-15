@@ -9,7 +9,7 @@ import createStore, {
 const initializeStore = (admin, currentAdmin) => {
   const store = createStore()
   store.dispatch(initializeResources(
-    admin.resources.map(r => r.decorate().toJSON())
+    admin.resources.map(r => r.decorate().toJSON()),
   ))
   store.dispatch(initializeBranding(admin.options.branding))
   const {

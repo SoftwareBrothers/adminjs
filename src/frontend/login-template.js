@@ -4,6 +4,7 @@ import { ServerStyleSheet } from 'styled-components'
 import LoginComponent from './components/login'
 
 const html = ({ action, errorMessage }) => {
+  // eslint-disable-next-line react/jsx-filename-extension
   const loginComponent = renderToString(<LoginComponent action={action} message={errorMessage} />)
 
   const sheet = new ServerStyleSheet()

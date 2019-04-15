@@ -47,7 +47,7 @@ const PropertyInEdit = (props) => {
 }
 
 PropertyInEdit.propTypes = {
-  
+
 }
 
 export default PropertyInEdit

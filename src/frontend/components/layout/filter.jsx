@@ -1,10 +1,12 @@
 import React from 'react'
-import { withRouter, Link } from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
+import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
 import { sizes, colors } from '../../styles/variables'
 import StyledButton from './styled-button'
 import PropertyType from '../property-type'
+import { locationType, historyType, resourceType } from '../../types'
 
 const FilterWrapper = styled.section`
   background: ${colors.darkBck};
@@ -13,7 +15,12 @@ const FilterWrapper = styled.section`
   color: #fff;
   padding-top: 60px;
   transition: width 0.5s;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
   overflow-x: hidden;
+  overflow-y: scroll;
   &.filter-hidden {
     width: 0;
     transition: width 0.5s;
@@ -60,11 +67,13 @@ class Filter extends React.Component {
   }
 
   parseQuery() {
+    const { location } = this.props
     const filter = {}
-    const query = new URLSearchParams(this.props.location.search)
-    for (var entry of query.entries()) {
-      if (entry[0].match('filters.')){
-        filter[entry[0].replace('filters.', '')] = entry[1]
+    const query = new URLSearchParams(location.search)
+    for (const entry of query.entries()) {
+      const [key, value] = entry
+      if (key.match('filters.')) {
+        filter[key.replace('filters.', '')] = value
       }
     }
     return filter
@@ -72,44 +81,47 @@ class Filter extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault()
+    const { filter } = this.state
+    const { history } = this.props
     const search = new URLSearchParams(window.location.search)
-    Object.keys(this.state.filter).forEach(key => {
-      if (this.state.filter[key] !== '') {
-        search.set(`filters.${key}`, this.state.filter[key])
+    Object.keys(filter).forEach((key) => {
+      if (filter[key] !== '') {
+        search.set(`filters.${key}`, filter[key])
       } else {
         search.delete(`filters.${key}`)
       }
     })
-    this.props.history.push(this.props.history.location.pathname + '?' + search.toString())
+    history.push(`${history.location.pathname}?${search.toString()}`)
     return false
   }
 
   resetFilter(event) {
+    const { history } = this.props
     event.preventDefault()
     const filteredSearch = new URLSearchParams()
     const search = new URLSearchParams(window.location.search)
-    for (let key of search.keys()) {
-      if (!key.match('filters.')){
+    for (const key of search.keys()) {
+      if (!key.match('filters.')) {
         filteredSearch.set(key, search.get(key))
       }
     }
-    const query = filteredSearch.toString() === '' ? '?' + filteredSearch.toString() : ''
-    this.props.history.push(this.props.history.location.pathname + query)
-    this.setState({filter: {}})
+    const query = filteredSearch.toString() === '' ? `?${filteredSearch.toString()}` : ''
+    history.push(history.location.pathname + query)
+    this.setState({ filter: {} })
   }
 
   handleChange(propertyName, value) {
-    const filter = {
-      ...this.state.filter,
-      [propertyName]: value,
-    }
-    this.setState({
-      filter
-    })
+    this.setState(state => ({
+      filter: {
+        ...state.filter,
+        [propertyName]: value,
+      },
+    }))
   }
 
   render() {
     const { resource, isVisible, toggleFilter } = this.props
+    const { filter } = this.state
     const properties = resource.editProperties
     return (
       <FilterWrapper className={isVisible ? null : 'filter-hidden'}>
@@ -125,8 +137,9 @@ class Filter extends React.Component {
                 where="filter"
                 onChange={this.handleChange.bind(this)}
                 property={property}
-                filter={this.state.filter}
-                resource={resource} />
+                filter={filter}
+                resource={resource}
+              />
             ))}
             <StyledButton as="button" className="is-primary">
               Apply Changes
@@ -143,6 +156,14 @@ class Filter extends React.Component {
       </FilterWrapper>
     )
   }
+}
+
+Filter.propTypes = {
+  location: locationType.isRequired,
+  history: historyType.isRequired,
+  resource: resourceType.isRequired,
+  isVisible: PropTypes.bool.isRequired,
+  toggleFilter: PropTypes.func.isRequired,
 }
 
 export default withRouter(Filter)

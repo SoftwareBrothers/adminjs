@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import styled from 'styled-components'
 
@@ -6,9 +7,9 @@ import {
   Breadcrumbs, RecordsTable, Paginate, Filter, ActionHeader, BorderBox, ActionWrapper,
 } from '../layout'
 
-import { sizes } from '../../styles/variables'
 import ApiClient from '../../utils/api-client'
 import queryHasFilter from './query-has-filter'
+import { locationType, resourceType, matchType, pathsType } from '../../types'
 
 const Wrapper = styled.section.attrs({
   className: 'level',
@@ -20,11 +21,11 @@ const Wrapper = styled.section.attrs({
 class Resource extends React.Component {
   constructor(props) {
     super(props)
+    const { location } = props
     this.resource = this.currentResource()
 
     this.state = {
-      loading: true,
-      filterVisible: queryHasFilter(this.props.location.search),
+      filterVisible: queryHasFilter(location.search),
       records: [],
       page: 1,
       perPage: 20,
@@ -32,30 +33,37 @@ class Resource extends React.Component {
     }
   }
 
+  componentDidMount() {
+    const { match } = this.props
+    this._fetchData(match.params.resourceId)
+  }
+
   componentDidUpdate(prevProps) {
-    if (this.props.match.params.resourceId !== prevProps.match.params.resourceId ||
-       this.props.location.search !== prevProps.location.search) {
-      this._fetchData(this.props.match.params.resourceId)
+    const { match, location } = this.props
+
+    if (match.params.resourceId !== prevProps.match.params.resourceId
+       || location.search !== prevProps.location.search) {
+      this._fetchData(match.params.resourceId)
     }
   }
 
   currentResource(resourceId) {
-    const { resources } = this.props
+    const { resources, match } = this.props
     return resources.find(r => (
-      r.id === (resourceId || this.props.match.params.resourceId)
+      r.id === (resourceId || match.params.resourceId)
     ))
   }
 
   _fetchData(resourceId) {
+    const { location } = this.props
     const api = new ApiClient()
     this.resource = this.currentResource(resourceId)
-    const query = new URLSearchParams(this.props.location.search)
+    const query = new URLSearchParams(location.search)
     api.getRecords({
       resourceId: this.resource.id,
       query,
     }).then((response) => {
       this.setState({
-        loading: false,
         records: response.data.records,
         page: response.data.meta.page,
         perPage: response.data.meta.perPage,
@@ -64,21 +72,20 @@ class Resource extends React.Component {
     })
   }
 
-  componentDidMount() {
-    this._fetchData(this.props.match.params.resourceId)
-  }
-
   handleActionPerformed() {
-    this._fetchData(this.props.match.params.resourceId)
+    const { match } = this.props
+    this._fetchData(match.params.resourceId)
   }
 
   toggleFilter(event) {
-    this.setState({ filterVisible: !this.state.filterVisible })
+    this.setState(state => ({ filterVisible: !state.filterVisible }))
     event.preventDefault()
   }
 
   render() {
     const resource = this.currentResource()
+    const { paths } = this.props
+    const { records, page, perPage, total, search, filterVisible } = this.state
     return (
       <Wrapper>
         <ActionWrapper>
@@ -91,21 +98,21 @@ class Resource extends React.Component {
           <BorderBox>
             <RecordsTable
               resource={this.resource}
-              records={this.state.records}
-              paths={this.props.paths}
+              records={records}
+              paths={paths}
               actionPerformed={this.handleActionPerformed.bind(this)}
             />
             <Paginate
-              page={this.state.page}
-              perPage={this.state.perPage}
-              total={this.state.total}
+              page={page}
+              perPage={perPage}
+              total={total}
             />
           </BorderBox>
         </ActionWrapper>
         <Filter
           resource={this.resource}
-          search={this.state.search}
-          isVisible={this.state.filterVisible}
+          search={search}
+          isVisible={filterVisible}
           toggleFilter={this.toggleFilter.bind(this)}
         />
       </Wrapper>
@@ -113,9 +120,16 @@ class Resource extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   paths: state.paths,
   resources: state.resources,
 })
+
+Resource.propTypes = {
+  resources: PropTypes.arrayOf(resourceType).isRequired,
+  location: locationType.isRequired,
+  match: matchType.isRequired,
+  paths: pathsType.isRequired,
+}
 
 export default connect(mapStateToProps)(Resource)

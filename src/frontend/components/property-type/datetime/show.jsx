@@ -1,6 +1,8 @@
 import React from 'react'
+
 import mapValue from './map-value'
 import PropertyInShow from '../../layout/property-in-show'
+import { propertyType, recordType } from '../../../types'
 
 export default class Show extends React.PureComponent {
   render() {
@@ -13,4 +15,9 @@ export default class Show extends React.PureComponent {
       </PropertyInShow>
     )
   }
+}
+
+Show.propTypes = {
+  property: propertyType.isRequired,
+  record: recordType.isRequired,
 }
