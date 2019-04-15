@@ -1,7 +1,9 @@
-import Block from './block'
-import TextBlock from './text-block'
+import ValueBlock from './value-block'
+import DashboardHeader from './dashboard-header'
+import DefaultDashboard from './default-dashboard'
 
 export default {
-  Block,
-  TextBlock,
+  ValueBlock,
+  DefaultDashboard,
+  DashboardHeader,
 }

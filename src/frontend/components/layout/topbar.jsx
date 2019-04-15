@@ -5,6 +5,7 @@ import styled from 'styled-components'
 import { pathsType, sessionType } from '../../types'
 import { sizes, colors } from '../../styles/variables'
 import LoggedIn from './logged-in'
+import Hamburger from './sidebar/hamburger'
 
 const Navbar = styled.nav.attrs({
   className: 'navbar',
@@ -16,9 +17,12 @@ const Navbar = styled.nav.attrs({
 `
 
 const Topbar = (props) => {
-  const { session, paths } = props
+  const { session, paths, toggleSidebar } = props
   return (
     <Navbar>
+      {/* <a onClick={toggleSidebar}>
+        <Hamburger />
+      </a> */}
       <div className="navbar-menu">
         <div className="navbar-end">
           {session && <LoggedIn session={session} paths={paths} />}

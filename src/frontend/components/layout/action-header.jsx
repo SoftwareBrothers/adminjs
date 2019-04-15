@@ -3,8 +3,8 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 
-import ActionBtn from './action-btn'
-import StyledBtn from './styled-btn'
+import ActionButton from './action-button'
+import StyledButton from './styled-button'
 
 import ViewHelpers from '../../../backend/utils/view-helpers'
 
@@ -45,7 +45,7 @@ const HeaderTitle = styled.h1.attrs({
 const HeaderButtons = styled.div.attrs({
   className: 'level-right',
 })`
-  ${StyledBtn} {
+  ${StyledButton} {
     margin-left: ${sizes.padding};
   }
 `
@@ -71,7 +71,7 @@ const ActionHeader = (props) => {
       </HeaderTitle>
       <HeaderButtons>
         {actions.map(headerAction => (
-          <ActionBtn
+          <ActionButton
             action={headerAction}
             key={headerAction.name}
             actionPerformed={actionPerformed}
@@ -81,12 +81,12 @@ const ActionHeader = (props) => {
           />
         ))}
         {toggleFilter && (
-          <StyledBtn onClick={toggleFilter} as="button">
+          <StyledButton onClick={toggleFilter} as="button">
             <span className="icon">
               <i className="fas fa-sliders-h" />
             </span>
             <span className="btn-text">Filter</span>
-          </StyledBtn>
+          </StyledButton>
         )}
       </HeaderButtons>
     </HeaderWrapper>

@@ -3,11 +3,11 @@ import PropTypes from 'prop-types'
 import { withRouter } from 'react-router-dom'
 
 import { actionType, locationType, historyType } from '../../types'
-import StyledBtn from './styled-btn'
+import StyledButton from './styled-button'
 import ApiClient from '../../utils/api-client'
 import ViewHelpers from '../../../backend/utils/view-helpers'
 
-class ActionBtn extends React.PureComponent {
+class ActionButton extends React.PureComponent {
   handleClick(event) {
     const { action, resourceId, recordId, location, history, actionPerformed } = this.props
 
@@ -43,7 +43,7 @@ class ActionBtn extends React.PureComponent {
       ? h.recordActionUrl({ resourceId, recordId, actionName })
       : h.resourceActionUrl({ resourceId, actionName })
     return (
-      <StyledBtn
+      <StyledButton
         to={href}
         className={`button ${className}`}
         onClick={this.handleClick.bind(this)}>
@@ -53,12 +53,12 @@ class ActionBtn extends React.PureComponent {
         <div className="btn-text">
           {action.label}
         </div>
-      </StyledBtn>
+      </StyledButton>
     )
   }
 }
 
-ActionBtn.propTypes = {
+ActionButton.propTypes = {
   action: actionType.isRequired,
   className: PropTypes.string.isRequired,
   resourceId: PropTypes.string.isRequired,
@@ -68,9 +68,9 @@ ActionBtn.propTypes = {
   actionPerformed: PropTypes.func,
 }
 
-ActionBtn.defaultProps = {
+ActionButton.defaultProps = {
   recordId: null,
   actionPerformed: null,
 }
 
-export default withRouter(ActionBtn)
+export default withRouter(ActionButton)

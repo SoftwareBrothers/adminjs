@@ -14,6 +14,8 @@ module.exports = {
     'styled-components',
     'prop-types',
     'admin-bro',
+    'admin-bro/components',
+    'admin-bro/style',
     'axios',
     'bloomer',
   ],
@@ -29,6 +31,8 @@ module.exports = {
     'react-router': 'ReactRouter',
     'react-router-dom': 'ReactRouterDOM',
     'admin-bro': 'AdminBro',
+    'admin-bro/components': 'AdminBro.Components',
+    'admin-bro/style': 'AdminBro.style',
   },
   plugins: (babelConfig = {}) => [
     resolve({

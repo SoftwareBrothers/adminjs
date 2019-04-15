@@ -1,8 +1,8 @@
 import Sidebar from './sidebar'
 import Topbar from './topbar'
 import Breadcrumbs from './breadcrumbs'
-import StyledBtn from './styled-btn'
-import ActionBtn from './action-btn'
+import StyledButton from './styled-button'
+import ActionButton from './action-button'
 import BorderBox from './border-box'
 import Loader from './loader'
 import RecordsTable from './records-table'
@@ -12,20 +12,24 @@ import ActionHeader from './action-header'
 import ActionWrapper from './action-wrapper'
 import PropertyInShow from './property-in-show'
 import PropertyInEdit from './property-in-edit'
+import Columns from './columns'
+import Column from './column'
 
 export {
   Sidebar,
   Topbar,
   Breadcrumbs,
-  ActionBtn,
+  ActionButton,
   Loader,
   RecordsTable,
   Paginate,
   Filter,
   ActionHeader,
   ActionWrapper,
-  StyledBtn,
+  StyledButton,
   BorderBox,
   PropertyInShow,
   PropertyInEdit,
+  Columns,
+  Column,
 }

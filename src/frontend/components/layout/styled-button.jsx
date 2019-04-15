@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 
 import { sizes, colors, fonts } from '../../styles/variables'
 
-const StyledBtn = styled(Link).attrs({
+const StyledButton = styled(Link).attrs({
   className: 'button',
 })`
   font-size: ${fonts.medium};
@@ -41,4 +41,4 @@ const StyledBtn = styled(Link).attrs({
   }
 `
 
-export default StyledBtn
+export default StyledButton

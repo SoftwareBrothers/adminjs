@@ -46,6 +46,123 @@ var AdminBro = (function (AdminBro$1, React, reactRedux, reactRouterDom, styled,
 
   var objectSpread = _objectSpread;
 
+  function _classCallCheck(instance, Constructor) {
+    if (!(instance instanceof Constructor)) {
+      throw new TypeError("Cannot call a class as a function");
+    }
+  }
+
+  var classCallCheck = _classCallCheck;
+
+  function _defineProperties(target, props) {
+    for (var i = 0; i < props.length; i++) {
+      var descriptor = props[i];
+      descriptor.enumerable = descriptor.enumerable || false;
+      descriptor.configurable = true;
+      if ("value" in descriptor) descriptor.writable = true;
+      Object.defineProperty(target, descriptor.key, descriptor);
+    }
+  }
+
+  function _createClass(Constructor, protoProps, staticProps) {
+    if (protoProps) _defineProperties(Constructor.prototype, protoProps);
+    if (staticProps) _defineProperties(Constructor, staticProps);
+    return Constructor;
+  }
+
+  var createClass = _createClass;
+
+  var commonjsGlobal = typeof window !== 'undefined' ? window : typeof global !== 'undefined' ? global : typeof self !== 'undefined' ? self : {};
+
+  function unwrapExports (x) {
+  	return x && x.__esModule && Object.prototype.hasOwnProperty.call(x, 'default') ? x.default : x;
+  }
+
+  function createCommonjsModule(fn, module) {
+  	return module = { exports: {} }, fn(module, module.exports), module.exports;
+  }
+
+  var _typeof_1 = createCommonjsModule(function (module) {
+  function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof2 = function _typeof2(obj) { return typeof obj; }; } else { _typeof2 = function _typeof2(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof2(obj); }
+
+  function _typeof(obj) {
+    if (typeof Symbol === "function" && _typeof2(Symbol.iterator) === "symbol") {
+      module.exports = _typeof = function _typeof(obj) {
+        return _typeof2(obj);
+      };
+    } else {
+      module.exports = _typeof = function _typeof(obj) {
+        return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : _typeof2(obj);
+      };
+    }
+
+    return _typeof(obj);
+  }
+
+  module.exports = _typeof;
+  });
+
+  function _assertThisInitialized(self) {
+    if (self === void 0) {
+      throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+    }
+
+    return self;
+  }
+
+  var assertThisInitialized = _assertThisInitialized;
+
+  function _possibleConstructorReturn(self, call) {
+    if (call && (_typeof_1(call) === "object" || typeof call === "function")) {
+      return call;
+    }
+
+    return assertThisInitialized(self);
+  }
+
+  var possibleConstructorReturn = _possibleConstructorReturn;
+
+  var getPrototypeOf = createCommonjsModule(function (module) {
+  function _getPrototypeOf(o) {
+    module.exports = _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) {
+      return o.__proto__ || Object.getPrototypeOf(o);
+    };
+    return _getPrototypeOf(o);
+  }
+
+  module.exports = _getPrototypeOf;
+  });
+
+  var setPrototypeOf = createCommonjsModule(function (module) {
+  function _setPrototypeOf(o, p) {
+    module.exports = _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) {
+      o.__proto__ = p;
+      return o;
+    };
+
+    return _setPrototypeOf(o, p);
+  }
+
+  module.exports = _setPrototypeOf;
+  });
+
+  function _inherits(subClass, superClass) {
+    if (typeof superClass !== "function" && superClass !== null) {
+      throw new TypeError("Super expression must either be null or a function");
+    }
+
+    subClass.prototype = Object.create(superClass && superClass.prototype, {
+      constructor: {
+        value: subClass,
+        writable: true,
+        configurable: true
+      }
+    });
+    if (superClass) setPrototypeOf(subClass, superClass);
+  }
+
+  var inherits = _inherits;
+
   function _taggedTemplateLiteral(strings, raw) {
     if (!raw) {
       raw = strings.slice(0);
@@ -146,30 +263,13 @@ var AdminBro = (function (AdminBro$1, React, reactRedux, reactRouterDom, styled,
     borderOnDark: '#4E5779',
     bck: '#f7f7Fa',
     darkBck: '#303b62',
+    superDarkBck: '#192035',
     love: '#e6282b',
     primary: '#718af4',
-    primaryHover: '#545B8C' // 'alizarin-crimson': '#e6282b',
-    // 'athens-gray-2': '#F8F8FA',
-    // 'athens-gray-dark': '#eeeeef',
-    // 'athens-gray-darker': '#F1F1F5',
-    // 'athens-gray': '#f7f7Fa',
-    // 'blue-bayoux': '#4e5779',
-    // 'cornflower-blue': '#718af4',
-    // 'froly': '#f0616f',
-    // 'ghost': '#cbccd7',
-    // 'mako': '#454655',
-    // 'red': '#e6282zb;',
-    // 'rhino': '#303b62',
-    // 'silver-tree': '#5abe99',
-    // 'spun-pearl': '#a9aabc',
-    // 'storm-gray': '#757687',
-    // 'sunglo': '#e06a72',
-    // 'waikawa-gray': '#545B8C',
-    // 'waterloo': '#7f8296',
-    // 'white': '#ffffff',
-    // 'wild-sand': '#f7f7f7',
-    // 'woodsmoke': '#111114',
-
+    primaryHover: '#545B8C',
+    success: '#21C197',
+    error: '#F0616F',
+    warning: '#FF9F89'
   };
   var sizes = {
     navbarHeight: '64px',
@@ -185,6 +285,20 @@ var AdminBro = (function (AdminBro$1, React, reactRedux, reactRouterDom, styled,
     min: '11px',
     header: '32px'
   };
+  var breakpoints = {
+    minMobileWidth: '320px',
+    minTabletWidth: '769px',
+    minDesktopWidth: '1024px',
+    minWidescreenWidth: '1216px',
+    minFullhdWidth: '1408px'
+  };
+
+  var style = /*#__PURE__*/Object.freeze({
+    colors: colors,
+    sizes: sizes,
+    fonts: fonts,
+    breakpoints: breakpoints
+  });
 
   var pathsType = PropTypes$1.shape({
     loginPath: PropTypes$1.string.isRequired,
@@ -307,123 +421,6 @@ var AdminBro = (function (AdminBro$1, React, reactRedux, reactRouterDom, styled,
     paths: pathsType.isRequired,
     branding: brandingType.isRequired
   };
-
-  function _classCallCheck(instance, Constructor) {
-    if (!(instance instanceof Constructor)) {
-      throw new TypeError("Cannot call a class as a function");
-    }
-  }
-
-  var classCallCheck = _classCallCheck;
-
-  function _defineProperties(target, props) {
-    for (var i = 0; i < props.length; i++) {
-      var descriptor = props[i];
-      descriptor.enumerable = descriptor.enumerable || false;
-      descriptor.configurable = true;
-      if ("value" in descriptor) descriptor.writable = true;
-      Object.defineProperty(target, descriptor.key, descriptor);
-    }
-  }
-
-  function _createClass(Constructor, protoProps, staticProps) {
-    if (protoProps) _defineProperties(Constructor.prototype, protoProps);
-    if (staticProps) _defineProperties(Constructor, staticProps);
-    return Constructor;
-  }
-
-  var createClass = _createClass;
-
-  var commonjsGlobal = typeof window !== 'undefined' ? window : typeof global !== 'undefined' ? global : typeof self !== 'undefined' ? self : {};
-
-  function unwrapExports (x) {
-  	return x && x.__esModule && Object.prototype.hasOwnProperty.call(x, 'default') ? x.default : x;
-  }
-
-  function createCommonjsModule(fn, module) {
-  	return module = { exports: {} }, fn(module, module.exports), module.exports;
-  }
-
-  var _typeof_1 = createCommonjsModule(function (module) {
-  function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof2 = function _typeof2(obj) { return typeof obj; }; } else { _typeof2 = function _typeof2(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof2(obj); }
-
-  function _typeof(obj) {
-    if (typeof Symbol === "function" && _typeof2(Symbol.iterator) === "symbol") {
-      module.exports = _typeof = function _typeof(obj) {
-        return _typeof2(obj);
-      };
-    } else {
-      module.exports = _typeof = function _typeof(obj) {
-        return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : _typeof2(obj);
-      };
-    }
-
-    return _typeof(obj);
-  }
-
-  module.exports = _typeof;
-  });
-
-  function _assertThisInitialized(self) {
-    if (self === void 0) {
-      throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
-    }
-
-    return self;
-  }
-
-  var assertThisInitialized = _assertThisInitialized;
-
-  function _possibleConstructorReturn(self, call) {
-    if (call && (_typeof_1(call) === "object" || typeof call === "function")) {
-      return call;
-    }
-
-    return assertThisInitialized(self);
-  }
-
-  var possibleConstructorReturn = _possibleConstructorReturn;
-
-  var getPrototypeOf = createCommonjsModule(function (module) {
-  function _getPrototypeOf(o) {
-    module.exports = _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) {
-      return o.__proto__ || Object.getPrototypeOf(o);
-    };
-    return _getPrototypeOf(o);
-  }
-
-  module.exports = _getPrototypeOf;
-  });
-
-  var setPrototypeOf = createCommonjsModule(function (module) {
-  function _setPrototypeOf(o, p) {
-    module.exports = _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) {
-      o.__proto__ = p;
-      return o;
-    };
-
-    return _setPrototypeOf(o, p);
-  }
-
-  module.exports = _setPrototypeOf;
-  });
-
-  function _inherits(subClass, superClass) {
-    if (typeof superClass !== "function" && superClass !== null) {
-      throw new TypeError("Super expression must either be null or a function");
-    }
-
-    subClass.prototype = Object.create(superClass && superClass.prototype, {
-      constructor: {
-        value: subClass,
-        writable: true,
-        configurable: true
-      }
-    });
-    if (superClass) setPrototypeOf(subClass, superClass);
-  }
-
-  var inherits = _inherits;
 
   function _templateObject$1() {
     var data = taggedTemplateLiteral(["\n  color: ", ";\n  padding: ", ";\n  display: block;\n\n  &:hover {\n    color: ", ";\n  }\n\n  &.active {\n    color: ", ";\n  }\n"]);
@@ -567,19 +564,6 @@ var AdminBro = (function (AdminBro$1, React, reactRedux, reactRouterDom, styled,
     });
   });
 
-  function _templateObject$4() {
-    var data = taggedTemplateLiteral(["\n  cursor: pointer;\n  display: block;\n  float: left;\n  margin: ", ";\n"]);
-
-    _templateObject$4 = function _templateObject() {
-      return data;
-    };
-
-    return data;
-  }
-  var Hamburger = styled__default.i.attrs({
-    className: 'fas fa-bars fa-2x'
-  })(_templateObject$4(), sizes.paddingMin);
-
   function _templateObject2$2() {
     var data = taggedTemplateLiteral(["\n  margin-top: ", ";\n  margin-left: ", ";\n  margin-bottom: ", ";\n  color: ", ";\n  font-size: ", ";\n  text-transform: uppercase;\n  letter-spacing: .1em;\n"]);
 
@@ -590,23 +574,26 @@ var AdminBro = (function (AdminBro$1, React, reactRedux, reactRouterDom, styled,
     return data;
   }
 
-  function _templateObject$5() {
-    var data = taggedTemplateLiteral(["\n  padding: ", ";\n  width: ", ";\n  display: flex;\n  flex-shrink: 0;\n  flex-direction: column;\n  justify-content: space-between;\n  height: 100%;\n  overflow-y: auto;\n  border-right: 1px solid ", ";\n"]);
+  function _templateObject$4() {
+    var data = taggedTemplateLiteral(["\n  display: flex;\n  flex-shrink: 0;\n  flex-direction: column;\n  justify-content: space-between;\n  height: 100%;\n  overflow-y: auto;\n  border-right: 1px solid ", ";\n  transition: width 0.5s;\n\n  & > section {\n    padding: ", ";\n    width: ", ";\n  }\n\n  &.hidden {\n    width: 0px;\n    transition: width 0.5s;\n    overflow: hidden;\n    & > section {\n      opacity: 0;\n    }\n  }\n"]);
 
-    _templateObject$5 = function _templateObject() {
+    _templateObject$4 = function _templateObject() {
       return data;
     };
 
     return data;
   }
-  var SidebarWrapper = styled__default.aside(_templateObject$5(), sizes.paddingLayout, sizes.sidebarWidth, colors.border);
+  var SidebarWrapper = styled__default.aside(_templateObject$4(), colors.border, sizes.paddingLayout, sizes.sidebarWidth);
   var SidebarLabel = styled__default.h2(_templateObject2$2(), sizes.padding, sizes.padding, sizes.padding, colors.lightText, fonts.min);
 
   var Sidebar = function Sidebar(props) {
     var branding = props.branding,
         paths = props.paths,
-        resources = props.resources;
-    return React__default.createElement(SidebarWrapper, null, React__default.createElement("section", null, React__default.createElement(SidebarBranding, {
+        resources = props.resources,
+        sidebarActive = props.sidebarActive;
+    return React__default.createElement(SidebarWrapper, {
+      className: sidebarActive ? 'active' : 'hidden'
+    }, React__default.createElement("section", null, React__default.createElement(SidebarBranding, {
       branding: branding,
       paths: paths
     }), React__default.createElement(SidebarLabel, null, "Navigation"), React__default.createElement("ul", null, groupResources(resources).map(function (parent) {
@@ -653,10 +640,10 @@ var AdminBro = (function (AdminBro$1, React, reactRedux, reactRouterDom, styled,
     return data;
   }
 
-  function _templateObject$6() {
+  function _templateObject$5() {
     var data = taggedTemplateLiteral(["\n  padding-right: ", ";\n  border-radius: 50px;\n  margin: 10px 0;\n\n  img {\n    border-radius: 50%;\n    margin-left: ", ";\n\n    &:after {\n      display: none;\n    }\n  }\n"]);
 
-    _templateObject$6 = function _templateObject() {
+    _templateObject$5 = function _templateObject() {
       return data;
     };
 
@@ -664,7 +651,7 @@ var AdminBro = (function (AdminBro$1, React, reactRedux, reactRouterDom, styled,
   }
   var UserBox = styled__default.div.attrs({
     className: 'navbar-link'
-  })(_templateObject$6(), sizes.padding, sizes.padding);
+  })(_templateObject$5(), sizes.padding, sizes.padding);
   var Dropdown = styled__default.div.attrs({
     className: 'navbar-dropdown'
   })(_templateObject2$3());
@@ -692,6 +679,19 @@ var AdminBro = (function (AdminBro$1, React, reactRedux, reactRouterDom, styled,
     paths: pathsType.isRequired
   };
 
+  function _templateObject$6() {
+    var data = taggedTemplateLiteral(["\n  cursor: pointer;\n  display: block;\n  float: left;\n  margin: ", ";\n"]);
+
+    _templateObject$6 = function _templateObject() {
+      return data;
+    };
+
+    return data;
+  }
+  var Hamburger = styled__default.i.attrs({
+    className: 'fas fa-bars fa-2x'
+  })(_templateObject$6(), sizes.paddingMin);
+
   function _templateObject$7() {
     var data = taggedTemplateLiteral(["\n  height: ", ";\n  border-bottom: 1px solid ", ";\n  padding: 0 ", ";\n  flex-shrink: 0;\n"]);
 
@@ -707,7 +707,8 @@ var AdminBro = (function (AdminBro$1, React, reactRedux, reactRouterDom, styled,
 
   var Topbar = function Topbar(props) {
     var session = props.session,
-        paths = props.paths;
+        paths = props.paths,
+        toggleSidebar = props.toggleSidebar;
     return React__default.createElement(Navbar, null, React__default.createElement("div", {
       className: "navbar-menu"
     }, React__default.createElement("div", {
@@ -824,7 +825,7 @@ var AdminBro = (function (AdminBro$1, React, reactRedux, reactRouterDom, styled,
 
     return data;
   }
-  var StyledBtn = styled__default(reactRouterDom.Link).attrs({
+  var StyledButton = styled__default(reactRouterDom.Link).attrs({
     className: 'button'
   })(_templateObject$9(), fonts.medium, colors.primary, sizes.paddingMin, sizes.padding, colors.primary, colors.primaryHover, colors.primary, colors.primaryHover, colors.primary, colors.defaultText, fonts.base);
 
@@ -1771,18 +1772,18 @@ var AdminBro = (function (AdminBro$1, React, reactRedux, reactRouterDom, styled,
     return ApiClient;
   }();
 
-  var ActionBtn =
+  var ActionButton =
   /*#__PURE__*/
   function (_React$PureComponent) {
-    inherits(ActionBtn, _React$PureComponent);
+    inherits(ActionButton, _React$PureComponent);
 
-    function ActionBtn() {
-      classCallCheck(this, ActionBtn);
+    function ActionButton() {
+      classCallCheck(this, ActionButton);
 
-      return possibleConstructorReturn(this, getPrototypeOf(ActionBtn).apply(this, arguments));
+      return possibleConstructorReturn(this, getPrototypeOf(ActionButton).apply(this, arguments));
     }
 
-    createClass(ActionBtn, [{
+    createClass(ActionButton, [{
       key: "handleClick",
       value: function handleClick(event) {
         var _this$props = this.props,
@@ -1835,7 +1836,7 @@ var AdminBro = (function (AdminBro$1, React, reactRedux, reactRouterDom, styled,
           resourceId: resourceId,
           actionName: actionName
         });
-        return React__default.createElement(StyledBtn, {
+        return React__default.createElement(StyledButton, {
           to: href,
           className: "button ".concat(className),
           onClick: this.handleClick.bind(this)
@@ -1849,10 +1850,10 @@ var AdminBro = (function (AdminBro$1, React, reactRedux, reactRouterDom, styled,
       }
     }]);
 
-    return ActionBtn;
+    return ActionButton;
   }(React__default.PureComponent);
 
-  ActionBtn.propTypes = {
+  ActionButton.propTypes = {
     action: actionType.isRequired,
     className: PropTypes$1.string.isRequired,
     resourceId: PropTypes$1.string.isRequired,
@@ -1861,11 +1862,11 @@ var AdminBro = (function (AdminBro$1, React, reactRedux, reactRouterDom, styled,
     history: historyType.isRequired,
     actionPerformed: PropTypes$1.func
   };
-  ActionBtn.defaultProps = {
+  ActionButton.defaultProps = {
     recordId: null,
     actionPerformed: null
   };
-  var ActionBtn$1 = reactRouterDom.withRouter(ActionBtn);
+  var ActionButton$1 = reactRouterDom.withRouter(ActionButton);
 
   function _templateObject$a() {
     var data = taggedTemplateLiteral(["\n  background: #ffffff;\n  padding: ", ";\n  border: 1px solid ", ";\n"]);
@@ -17922,7 +17923,7 @@ var AdminBro = (function (AdminBro$1, React, reactRedux, reactRouterDom, styled,
         }), React__default.createElement(Td, {
           key: "options"
         }, React__default.createElement(ActionsDropdown, null, recordActions.map(function (action) {
-          return React__default.createElement(ActionBtn$1, {
+          return React__default.createElement(ActionButton$1, {
             action: action,
             key: action.name,
             resourceId: resource.id,
@@ -18211,7 +18212,7 @@ var AdminBro = (function (AdminBro$1, React, reactRedux, reactRouterDom, styled,
 
         return React__default.createElement(PaginationWrapper, null, React__default.createElement("div", {
           className: "pagination"
-        }, React__default.createElement(StyledBtn, {
+        }, React__default.createElement(StyledButton, {
           to: {
             search: this.linkToPage(prevPage)
           },
@@ -18219,14 +18220,14 @@ var AdminBro = (function (AdminBro$1, React, reactRedux, reactRouterDom, styled,
         }, React__default.createElement("i", {
           className: "icomoon-pagination-left"
         })), paginate.pages.map(function (p) {
-          return React__default.createElement(StyledBtn, {
+          return React__default.createElement(StyledButton, {
             key: p,
             to: {
               search: _this.linkToPage(p)
             },
             className: "pages button is-white".concat(p === currentPage ? ' is-primary' : '')
           }, p);
-        }), React__default.createElement(StyledBtn, {
+        }), React__default.createElement(StyledButton, {
           to: {
             search: this.linkToPage(nextPage)
           },
@@ -18273,7 +18274,7 @@ var AdminBro = (function (AdminBro$1, React, reactRedux, reactRouterDom, styled,
   }
   var FilterWrapper = styled__default.section(_templateObject$i(), colors.darkBck, sizes.sidebarWidth);
   var FilterLink = styled__default.a(_templateObject2$a(), colors.lightText, colors.lightText, sizes.padding, colors.primary, colors.primary, colors.primary);
-  var FilterContent = styled__default.section(_templateObject3$3(), sizes.paddingLayout, sizes.sidebarWidth, StyledBtn, sizes.paddingMin);
+  var FilterContent = styled__default.section(_templateObject3$3(), sizes.paddingLayout, sizes.sidebarWidth, StyledButton, sizes.paddingMin);
 
   var Filter$4 =
   /*#__PURE__*/
@@ -18418,10 +18419,10 @@ var AdminBro = (function (AdminBro$1, React, reactRedux, reactRouterDom, styled,
             filter: _this3.state.filter,
             resource: resource
           });
-        }), React__default.createElement(StyledBtn, {
+        }), React__default.createElement(StyledButton, {
           as: "button",
           className: "is-primary"
-        }, "Apply Changes"), React__default.createElement(StyledBtn, {
+        }, "Apply Changes"), React__default.createElement(StyledButton, {
           as: "a",
           className: "is-text",
           onClick: this.resetFilter.bind(this)
@@ -18482,7 +18483,7 @@ var AdminBro = (function (AdminBro$1, React, reactRedux, reactRouterDom, styled,
   })(_templateObject3$4(), fonts.header);
   var HeaderButtons = styled__default.div.attrs({
     className: 'level-right'
-  })(_templateObject4(), StyledBtn, sizes.padding);
+  })(_templateObject4(), StyledButton, sizes.padding);
 
   var ActionHeader = function ActionHeader(props) {
     var h = new viewHelpers();
@@ -18505,7 +18506,7 @@ var AdminBro = (function (AdminBro$1, React, reactRedux, reactRouterDom, styled,
     }, React__default.createElement("i", {
       className: "icomoon-pagination-left"
     })), title), React__default.createElement(HeaderButtons, null, actions.map(function (headerAction) {
-      return React__default.createElement(ActionBtn$1, {
+      return React__default.createElement(ActionButton$1, {
         action: headerAction,
         key: headerAction.name,
         actionPerformed: actionPerformed,
@@ -18513,7 +18514,7 @@ var AdminBro = (function (AdminBro$1, React, reactRedux, reactRouterDom, styled,
         resourceId: resource.id,
         recordId: recordId
       });
-    }), toggleFilter && React__default.createElement(StyledBtn, {
+    }), toggleFilter && React__default.createElement(StyledButton, {
       onClick: toggleFilter,
       as: "button"
     }, React__default.createElement("span", {
@@ -18550,77 +18551,136 @@ var AdminBro = (function (AdminBro$1, React, reactRedux, reactRouterDom, styled,
   }
   var ActionWrapper = styled__default.section(_templateObject$k(), sizes.paddingLayout);
 
-  var Dashboard =
-  /*#__PURE__*/
-  function (_React$PureComponent) {
-    inherits(Dashboard, _React$PureComponent);
+  function _templateObject$l() {
+    var data = taggedTemplateLiteral(["\n\n"]);
 
-    function Dashboard() {
-      classCallCheck(this, Dashboard);
+    _templateObject$l = function _templateObject() {
+      return data;
+    };
 
-      return possibleConstructorReturn(this, getPrototypeOf(Dashboard).apply(this, arguments));
-    }
+    return data;
+  }
+  var Columns = styled__default.section.attrs({
+    className: 'columns is-multiline'
+  })(_templateObject$l());
 
-    createClass(Dashboard, [{
-      key: "render",
-      value: function render() {
-        return React__default.createElement("div", {
-          className: "columns"
-        }, React__default.createElement("div", {
-          className: "column is-6 is-offset-3"
-        }, React__default.createElement("div", {
-          className: "default-dashboard has-text-centered"
-        }, React__default.createElement("svg", {
-          className: "welcome-img",
-          xmlns: "http://www.w3.org/2000/svg",
-          width: "163",
-          height: "184",
-          viewBox: "0 0 163 184"
-        }, React__default.createElement("g", {
-          fill: "none",
-          fillRule: "nonzero",
-          stroke: "#C9D1F6",
-          strokeWidth: "2"
-        }, React__default.createElement("path", {
-          strokeLinecap: "round",
-          d: "M81.5 164.676v13.396a4 4 0 0 1-6 3.464l-69.107-39.9a10 10 0 0 1-5-8.66V52.024a10 10 0 0 1 5-8.66L76.5 2.886a10 10 0 0 1 10 0l70.107 40.476a10 10 0 0 1 5 8.66v80.953a10 10 0 0 1-5 8.66l-61.566 35.546"
-        }), React__default.createElement("path", {
-          fill: "#FFF",
-          strokeLinejoin: "round",
-          d: "M101.994 61.522l1.835-3.67a2 2 0 0 1 3.578 0l1.834 3.67a19 19 0 0 1 2.006 8.497v74.076a1 1 0 0 1-1 1h-9.259a1 1 0 0 1-1-1V70.02a19 19 0 0 1 2.006-8.497zM53.759 61.522l1.834-3.67a2 2 0 0 1 3.578 0l1.835 3.67a19 19 0 0 1 2.006 8.497v74.076a1 1 0 0 1-1 1h-9.26a1 1 0 0 1-1-1V70.02a19 19 0 0 1 2.007-8.497z"
-        }), React__default.createElement("path", {
-          fill: "#F0F1F9",
-          strokeLinejoin: "round",
-          d: "M74.557 29.824l3.65-5.295a4 4 0 0 1 6.587 0l3.649 5.295a39.325 39.325 0 0 1 6.943 22.313v63.686H67.614V52.137c0-7.97 2.421-15.75 6.943-22.313z"
-        }), React__default.createElement("path", {
-          fill: "#F0F1F9",
-          d: "M88.575 139.355h24.008a1 1 0 0 0 .982-1.187l-.792-4.157a21.68 21.68 0 0 0-5.562-10.855l-3.298-3.48A44.737 44.737 0 0 1 93 99.83L89.64 86.492l-1.065 52.863zM74.425 139.355H50.417a1 1 0 0 1-.982-1.187l.792-4.157a21.68 21.68 0 0 1 5.562-10.855l3.298-3.48A44.737 44.737 0 0 0 70 99.83l3.361-13.338 1.065 52.863z"
-        }), React__default.createElement("path", {
-          fill: "#FFF",
-          strokeLinejoin: "round",
-          d: "M74.947 68.616l2.122-4.059a5 5 0 0 1 8.862 0l2.122 4.059a24 24 0 0 1 2.73 11.118v65.142H72.217V79.734a24 24 0 0 1 2.73-11.118z"
-        }), React__default.createElement("path", {
-          fill: "#FFF",
-          d: "M75.446 132.96a7.072 7.072 0 0 0-7.073 7.072v7.073h26.254v-7.073a7.072 7.072 0 0 0-7.073-7.072H75.446z"
-        }), React__default.createElement("path", {
-          fill: "#F0F1F9",
-          strokeLinecap: "round",
-          d: "M81.5 123.484v27.72"
-        }))), React__default.createElement("h1", null, "Welcome on board!"), React__default.createElement("p", null, "Thank you for choosing our platform, now you are one of us! Bear in mind that this is a Beta version and we are still working on it."), React__default.createElement("p", null, "Now check out the documentation page on github and modify your AdminBro."), React__default.createElement("div", null, React__default.createElement("a", {
-          className: "button is-primary",
-          href: "https://github.com/SoftwareBrothers/admin-bro"
-        }, React__default.createElement("span", {
-          className: "icon"
-        }, React__default.createElement("i", {
-          className: "fab fa-github"
-        })), React__default.createElement("span", {
-          className: "btn-text"
-        }, "Checkout the documentation"))))));
-      }
-    }]);
+  function _templateObject$m() {
+    var data = taggedTemplateLiteral(["\n\n"]);
 
-    return Dashboard;
-  }(React__default.PureComponent);
+    _templateObject$m = function _templateObject() {
+      return data;
+    };
+
+    return data;
+  }
+  var Column = styled__default.section.attrs(function (_ref) {
+    var _ref$width = _ref.width,
+        width = _ref$width === void 0 ? 4 : _ref$width,
+        _ref$offset = _ref.offset,
+        offset = _ref$offset === void 0 ? 0 : _ref$offset;
+    return {
+      className: "column is-".concat(width, "-desktop is-offset-").concat(offset)
+    };
+  })(_templateObject$m());
+
+
+
+  var components$1 = /*#__PURE__*/Object.freeze({
+    Sidebar: Sidebar$1,
+    Topbar: Topbar$1,
+    Breadcrumbs: Breadcrumbs,
+    ActionButton: ActionButton$1,
+    Loader: Loader,
+    RecordsTable: RecordsTable,
+    Paginate: Paginate$1,
+    Filter: Filter$5,
+    ActionHeader: ActionHeader,
+    ActionWrapper: ActionWrapper,
+    StyledButton: StyledButton,
+    BorderBox: BorderBox,
+    PropertyInShow: PropertyInShow,
+    PropertyInEdit: PropertyInEdit,
+    Columns: Columns,
+    Column: Column
+  });
+
+  function _templateObject2$c() {
+    var data = taggedTemplateLiteral(["\n  text-align: center;\n  width: 540px;\n"]);
+
+    _templateObject2$c = function _templateObject2() {
+      return data;
+    };
+
+    return data;
+  }
+
+  function _templateObject$n() {
+    var data = taggedTemplateLiteral(["\n  display: flex;\n  flex-grow: 1;\n  align-items: center;\n  justify-content: center;\n"]);
+
+    _templateObject$n = function _templateObject() {
+      return data;
+    };
+
+    return data;
+  }
+  var DashboardWrapper = styled__default.section(_templateObject$n());
+  var InfoBox = styled__default.section.attrs({
+    className: 'content'
+  })(_templateObject2$c());
+
+  var Svg$1 = function Svg() {
+    return React__default.createElement("svg", {
+      className: "welcome-img",
+      xmlns: "http://www.w3.org/2000/svg",
+      width: "163",
+      height: "184",
+      viewBox: "0 0 163 184"
+    }, React__default.createElement("g", {
+      fill: "none",
+      fillRule: "nonzero",
+      stroke: "#C9D1F6",
+      strokeWidth: "2"
+    }, React__default.createElement("path", {
+      strokeLinecap: "round",
+      d: "M81.5 164.676v13.396a4 4 0 0 1-6 3.464l-69.107-39.9a10 10 0 0 1-5-8.66V52.024a10 10 0 0 1 5-8.66L76.5 2.886a10 10 0 0 1 10 0l70.107 40.476a10 10 0 0 1 5 8.66v80.953a10 10 0 0 1-5 8.66l-61.566 35.546"
+    }), React__default.createElement("path", {
+      fill: "#FFF",
+      strokeLinejoin: "round",
+      d: "M101.994 61.522l1.835-3.67a2 2 0 0 1 3.578 0l1.834 3.67a19 19 0 0 1 2.006 8.497v74.076a1 1 0 0 1-1 1h-9.259a1 1 0 0 1-1-1V70.02a19 19 0 0 1 2.006-8.497zM53.759 61.522l1.834-3.67a2 2 0 0 1 3.578 0l1.835 3.67a19 19 0 0 1 2.006 8.497v74.076a1 1 0 0 1-1 1h-9.26a1 1 0 0 1-1-1V70.02a19 19 0 0 1 2.007-8.497z"
+    }), React__default.createElement("path", {
+      fill: "#F0F1F9",
+      strokeLinejoin: "round",
+      d: "M74.557 29.824l3.65-5.295a4 4 0 0 1 6.587 0l3.649 5.295a39.325 39.325 0 0 1 6.943 22.313v63.686H67.614V52.137c0-7.97 2.421-15.75 6.943-22.313z"
+    }), React__default.createElement("path", {
+      fill: "#F0F1F9",
+      d: "M88.575 139.355h24.008a1 1 0 0 0 .982-1.187l-.792-4.157a21.68 21.68 0 0 0-5.562-10.855l-3.298-3.48A44.737 44.737 0 0 1 93 99.83L89.64 86.492l-1.065 52.863zM74.425 139.355H50.417a1 1 0 0 1-.982-1.187l.792-4.157a21.68 21.68 0 0 1 5.562-10.855l3.298-3.48A44.737 44.737 0 0 0 70 99.83l3.361-13.338 1.065 52.863z"
+    }), React__default.createElement("path", {
+      fill: "#FFF",
+      strokeLinejoin: "round",
+      d: "M74.947 68.616l2.122-4.059a5 5 0 0 1 8.862 0l2.122 4.059a24 24 0 0 1 2.73 11.118v65.142H72.217V79.734a24 24 0 0 1 2.73-11.118z"
+    }), React__default.createElement("path", {
+      fill: "#FFF",
+      d: "M75.446 132.96a7.072 7.072 0 0 0-7.073 7.072v7.073h26.254v-7.073a7.072 7.072 0 0 0-7.073-7.072H75.446z"
+    }), React__default.createElement("path", {
+      fill: "#F0F1F9",
+      strokeLinecap: "round",
+      d: "M81.5 123.484v27.72"
+    })));
+  };
+
+  var Dashboard = function Dashboard(props) {
+    return React__default.createElement(DashboardWrapper, null, React__default.createElement(InfoBox, null, React__default.createElement(Svg$1, null), React__default.createElement("h1", null, "Welcome on board!"), React__default.createElement("p", null, "Thank you for choosing our platform, now you are one of us! Bear in mind that this is a Beta version and we are still working on it."), React__default.createElement("p", null, "Now check out the documentation page on github and modify your AdminBro."), React__default.createElement("div", null, React__default.createElement(StyledButton, {
+      as: "a",
+      className: "button is-primary",
+      href: "https://github.com/SoftwareBrothers/admin-bro"
+    }, React__default.createElement("span", {
+      className: "icon"
+    }, React__default.createElement("i", {
+      className: "fab fa-github"
+    })), React__default.createElement("span", {
+      className: "btn-text"
+    }, "Checkout the documentation")))));
+  };
 
   var Dashboard$1 =
   /*#__PURE__*/
@@ -18640,28 +18700,6 @@ var AdminBro = (function (AdminBro$1, React, reactRedux, reactRouterDom, styled,
     }
 
     createClass(Dashboard$1, [{
-      key: "renderHeader",
-      value: function renderHeader() {
-        var title = this.props.dashboard.title && React__default.createElement("div", {
-          className: "overview-title"
-        }, this.props.dashboard.title);
-        var subtitle = this.props.dashboard.subtitle && React__default.createElement("div", {
-          className: "overview-subtitle"
-        }, this.props.dashboard.subtitle);
-
-        if (this.props.dashboard.title || this.props.dashboard.subtitle) {
-          return React__default.createElement("div", {
-            className: "header"
-          }, React__default.createElement("div", {
-            className: "overview"
-          }, React__default.createElement("div", {
-            className: "columns"
-          }, React__default.createElement("div", {
-            className: "column"
-          }, title, subtitle))));
-        }
-      }
-    }, {
       key: "componentDidMount",
       value: function componentDidMount() {
         this.setState({
@@ -18671,25 +18709,17 @@ var AdminBro = (function (AdminBro$1, React, reactRedux, reactRouterDom, styled,
     }, {
       key: "render",
       value: function render() {
+        var dashboard = this.props.dashboard;
+        var isClient = this.state.isClient;
         var Component;
 
-        if (this.props.dashboard && this.props.dashboard.component && this.state.isClient && AdminBro.Components[this.props.dashboard.component]) {
-          Component = AdminBro.Components[this.props.dashboard.component];
-        } else if (!this.props.dashboard.title && !this.props.dashboard.subtitle) {
-          Component = Dashboard;
+        if (dashboard && dashboard.component && isClient && AdminBro.Components[dashboard.component]) {
+          Component = AdminBro.Components[dashboard.component];
         } else {
-          Component = function Component(props) {
-            return React__default.createElement("div", {
-              className: "columns"
-            });
-          };
+          Component = Dashboard;
         }
 
-        return React__default.createElement("div", {
-          className: "dashboard"
-        }, this.renderHeader(), React__default.createElement("div", {
-          className: "dashboard-content page-builder-content"
-        }, React__default.createElement(Component, null)));
+        return React__default.createElement(Component, null);
       }
     }]);
 
@@ -18698,7 +18728,6 @@ var AdminBro = (function (AdminBro$1, React, reactRedux, reactRouterDom, styled,
 
   var mapStateToProps$2 = function mapStateToProps(state) {
     return {
-      paths: state.paths,
       dashboard: state.dashboard
     };
   };
@@ -18776,7 +18805,7 @@ var AdminBro = (function (AdminBro$1, React, reactRedux, reactRouterDom, styled,
             onChange: _this3.handleChange.bind(_this3),
             record: record
           });
-        }), React__default.createElement(StyledBtn, {
+        }), React__default.createElement(StyledButton, {
           as: "button",
           type: "submit",
           className: "is-primary"
@@ -18890,7 +18919,7 @@ var AdminBro = (function (AdminBro$1, React, reactRedux, reactRouterDom, styled,
             resource: resource,
             record: record
           });
-        }), React__default.createElement(StyledBtn, {
+        }), React__default.createElement(StyledButton, {
           as: "button",
           type: "submit",
           className: "is-primary"
@@ -19213,10 +19242,10 @@ var AdminBro = (function (AdminBro$1, React, reactRedux, reactRouterDom, styled,
     return false;
   });
 
-  function _templateObject$l() {
+  function _templateObject$o() {
     var data = taggedTemplateLiteral(["\n  align-items: stretch;\n  flex-grow: 1;\n"]);
 
-    _templateObject$l = function _templateObject() {
+    _templateObject$o = function _templateObject() {
       return data;
     };
 
@@ -19224,7 +19253,7 @@ var AdminBro = (function (AdminBro$1, React, reactRedux, reactRouterDom, styled,
   }
   var Wrapper = styled__default.section.attrs({
     className: 'level'
-  })(_templateObject$l());
+  })(_templateObject$o());
 
   var Resource =
   /*#__PURE__*/
@@ -19355,67 +19384,104 @@ var AdminBro = (function (AdminBro$1, React, reactRedux, reactRouterDom, styled,
     return data;
   }
 
-  function _templateObject2$c() {
+  function _templateObject2$d() {
     var data = taggedTemplateLiteral(["\n  font-size: 14px;\n  font-family: 'Roboto', sans-serif;\n  display: flex;\n  flex-direction: row;\n  height: 100%;\n"]);
 
-    _templateObject2$c = function _templateObject2() {
+    _templateObject2$d = function _templateObject2() {
       return data;
     };
 
     return data;
   }
 
-  function _templateObject$m() {
+  function _templateObject$p() {
     var data = taggedTemplateLiteral(["\n  html, body, #app {\n      width: 100%;\n      height: 100%;\n  }\n\n  a {\n    color: ", ";\n  }\n"]);
 
-    _templateObject$m = function _templateObject() {
+    _templateObject$p = function _templateObject() {
       return data;
     };
 
     return data;
   }
-  var GlobalStyle = styled.createGlobalStyle(_templateObject$m(), colors.primary);
-  var ApplicationWrapper = styled__default.section(_templateObject2$c());
+  var GlobalStyle = styled.createGlobalStyle(_templateObject$p(), colors.primary);
+  var ApplicationWrapper = styled__default.section(_templateObject2$d());
   var Core = styled__default.section(_templateObject3$5(), colors.bck);
 
-  var App = function App(props) {
-    var paths = props.paths;
-    var h = new viewHelpers({
-      options: paths
-    });
-    var resourceId = ':resourceId';
-    var actionName = ':actionName';
-    var recordId = ':recordId';
-    var recordActionUrl = h.recordActionUrl({
-      resourceId: resourceId,
-      recordId: recordId,
-      actionName: actionName
-    });
-    var resourceActionUrl = h.resourceActionUrl({
-      resourceId: resourceId,
-      actionName: actionName
-    });
-    var listUrl = h.listUrl({
-      resourceId: resourceId
-    });
-    return React__default.createElement(React__default.Fragment, null, React__default.createElement(GlobalStyle, null), React__default.createElement(ApplicationWrapper, null, React__default.createElement(Sidebar$1, null), React__default.createElement(Core, null, React__default.createElement(Topbar$1, null), React__default.createElement(reactRouterDom.Switch, null, React__default.createElement(reactRouterDom.Route, {
-      path: h.dashboardUrl(),
-      exact: true,
-      component: Dashboard$2
-    }), React__default.createElement(reactRouterDom.Route, {
-      path: listUrl,
-      exact: true,
-      component: Resource$1
-    }), React__default.createElement(reactRouterDom.Route, {
-      path: resourceActionUrl,
-      exact: true,
-      component: ResourceAction$1
-    }), React__default.createElement(reactRouterDom.Route, {
-      path: recordActionUrl,
-      exact: true,
-      component: RecordAction$1
-    })))));
-  };
+  var App =
+  /*#__PURE__*/
+  function (_React$Component) {
+    inherits(App, _React$Component);
+
+    function App(props) {
+      var _this;
+
+      classCallCheck(this, App);
+
+      _this = possibleConstructorReturn(this, getPrototypeOf(App).call(this, props));
+      _this.state = {
+        sidebarActive: true
+      };
+      return _this;
+    }
+
+    createClass(App, [{
+      key: "toggleSidebar",
+      value: function toggleSidebar() {
+        this.setState(function (state) {
+          return {
+            sidebarActive: !state.sidebarActive
+          };
+        });
+      }
+    }, {
+      key: "render",
+      value: function render() {
+        var paths = this.props.paths;
+        var sidebarActive = this.state.sidebarActive;
+        var h = new viewHelpers({
+          options: paths
+        });
+        var resourceId = ':resourceId';
+        var actionName = ':actionName';
+        var recordId = ':recordId';
+        var recordActionUrl = h.recordActionUrl({
+          resourceId: resourceId,
+          recordId: recordId,
+          actionName: actionName
+        });
+        var resourceActionUrl = h.resourceActionUrl({
+          resourceId: resourceId,
+          actionName: actionName
+        });
+        var listUrl = h.listUrl({
+          resourceId: resourceId
+        });
+        return React__default.createElement(React__default.Fragment, null, React__default.createElement(GlobalStyle, null), React__default.createElement(ApplicationWrapper, null, React__default.createElement(Sidebar$1, {
+          sidebarActive: sidebarActive
+        }), React__default.createElement(Core, null, React__default.createElement(Topbar$1, {
+          toggleSidebar: this.toggleSidebar.bind(this)
+        }), React__default.createElement(reactRouterDom.Switch, null, React__default.createElement(reactRouterDom.Route, {
+          path: h.dashboardUrl(),
+          exact: true,
+          component: Dashboard$2
+        }), React__default.createElement(reactRouterDom.Route, {
+          path: listUrl,
+          exact: true,
+          component: Resource$1
+        }), React__default.createElement(reactRouterDom.Route, {
+          path: resourceActionUrl,
+          exact: true,
+          component: ResourceAction$1
+        }), React__default.createElement(reactRouterDom.Route, {
+          path: recordActionUrl,
+          exact: true,
+          component: RecordAction$1
+        })))));
+      }
+    }]);
+
+    return App;
+  }(React__default.Component);
 
   App.propTypes = {
     paths: pathsType.isRequired
@@ -19506,82 +19572,80 @@ var AdminBro = (function (AdminBro$1, React, reactRedux, reactRouterDom, styled,
     return redux.createStore(reducer, initialState);
   });
 
-  var Block =
+  function _templateObject$q() {
+    var data = taggedTemplateLiteral(["\n  color: ", ";\n  margin-top: 8px;\n\n  & .value {\n    font-size: 34px;\n  }\n\n  & .icon {\n    font-size: 34px;\n  }\n"]);
+
+    _templateObject$q = function _templateObject() {
+      return data;
+    };
+
+    return data;
+  }
+  var Level = styled__default.div.attrs({
+    className: 'level'
+  })(_templateObject$q(), function (props) {
+    return props.color;
+  });
+
+  var ValueBlock =
   /*#__PURE__*/
   function (_React$PureComponent) {
-    inherits(Block, _React$PureComponent);
+    inherits(ValueBlock, _React$PureComponent);
 
-    function Block() {
-      classCallCheck(this, Block);
+    function ValueBlock() {
+      classCallCheck(this, ValueBlock);
 
-      return possibleConstructorReturn(this, getPrototypeOf(Block).apply(this, arguments));
+      return possibleConstructorReturn(this, getPrototypeOf(ValueBlock).apply(this, arguments));
     }
 
-    createClass(Block, [{
+    createClass(ValueBlock, [{
       key: "render",
       value: function render() {
-        var columns = this.props.columns || 3;
-        var offset = this.props.offset || 0;
-        var title = this.props.title || '';
-        var icon = this.props.icon || '';
-        var value = this.props.value || '';
-        return React__default.createElement("div", {
-          className: "column is-12-tablet is-".concat(columns, "-desktop is-offset-").concat(offset)
-        }, React__default.createElement("div", {
-          className: "dashboard-block border-box"
-        }, React__default.createElement("div", {
-          className: "block-title"
-        }, title), React__default.createElement("div", {
-          className: "block-content"
+        var _this$props = this.props,
+            icon = _this$props.icon,
+            value = _this$props.value,
+            children = _this$props.children,
+            _this$props$color = _this$props.color,
+            color = _this$props$color === void 0 ? colors.primary : _this$props$color;
+        return React__default.createElement(BorderBox, null, children, React__default.createElement(Level, {
+          color: color
         }, React__default.createElement("div", {
           className: "value"
-        }, value), React__default.createElement("i", {
+        }, value), React__default.createElement("div", {
+          className: "icon"
+        }, React__default.createElement("i", {
           className: icon
         }))));
       }
     }]);
 
-    return Block;
+    return ValueBlock;
   }(React__default.PureComponent);
 
-  var TextBlock =
-  /*#__PURE__*/
-  function (_React$PureComponent) {
-    inherits(TextBlock, _React$PureComponent);
+  function _templateObject$r() {
+    var data = taggedTemplateLiteral(["\n  && {\n    padding: ", ";\n    background: ", ";\n    color: #fff;\n    margin-bottom: 0;\n    & > * {\n      color: #fff;\n    }\n\n    & > h1 {\n      font-size: 53px;\n      margin-bottom: 2px;\n    }\n  }\n"]);
 
-    function TextBlock() {
-      classCallCheck(this, TextBlock);
+    _templateObject$r = function _templateObject() {
+      return data;
+    };
 
-      return possibleConstructorReturn(this, getPrototypeOf(TextBlock).apply(this, arguments));
-    }
+    return data;
+  }
+  var Wrapper$1 = styled__default.section.attrs({
+    className: 'content'
+  })(_templateObject$r(), sizes.paddingLayout, colors.superDarkBck);
 
-    createClass(TextBlock, [{
-      key: "render",
-      value: function render() {
-        var columns = this.props.columns || 3;
-        var offset = this.props.offset || 0;
-        var title = this.props.title ? React__default.createElement("div", {
-          className: "h2"
-        }, this.props.title) : '';
-        var icon = this.props.icon || '';
-        var value = this.props.value || '';
-        return React__default.createElement("div", {
-          className: "column is-12-tablet is-".concat(columns, "-desktop is-offset-").concat(offset)
-        }, React__default.createElement("div", {
-          className: "dashboard-block border-box"
-        }, title, this.props.children));
-      }
-    }]);
-
-    return TextBlock;
-  }(React__default.PureComponent);
-
-  var widgets = {
-    Block: Block,
-    TextBlock: TextBlock
+  var DashboardHeader = function DashboardHeader(props) {
+    var children = props.children;
+    return React__default.createElement(Wrapper$1, null, children);
   };
 
-  var Components = objectSpread({}, AdminBro$1.Components, widgets);
+  var widgets = {
+    ValueBlock: ValueBlock,
+    DashboardHeader: DashboardHeader
+  };
+
+  var Components = objectSpread({}, AdminBro$1.Components, widgets, components$1);
 
   var store = createStore(window.REDUX_STATE);
   var Application = React__default.createElement(reactRedux.Provider, {
@@ -19590,7 +19654,8 @@ var AdminBro = (function (AdminBro$1, React, reactRedux, reactRouterDom, styled,
   var bundleEntry = {
     Application: Application,
     Components: Components,
-    ApiClient: ApiClient
+    ApiClient: ApiClient,
+    style: style
   };
 
   return bundleEntry;

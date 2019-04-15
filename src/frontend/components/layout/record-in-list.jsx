@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 
-import ActionBtn from './action-btn'
+import ActionButton from './action-button'
 import PropertyType from '../property-type'
 import { colors, sizes } from '../../styles/variables'
 
@@ -77,7 +77,7 @@ export default class RecordInList extends React.PureComponent {
         <Td key="options">
           <ActionsDropdown>
             {recordActions.map(action => (
-              <ActionBtn
+              <ActionButton
                 action={action}
                 key={action.name}
                 resourceId={resource.id}

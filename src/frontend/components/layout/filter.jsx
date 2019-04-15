@@ -3,7 +3,7 @@ import { withRouter, Link } from 'react-router-dom'
 import styled from 'styled-components'
 
 import { sizes, colors } from '../../styles/variables'
-import StyledBtn from './styled-btn'
+import StyledButton from './styled-button'
 import PropertyType from '../property-type'
 
 const FilterWrapper = styled.section`
@@ -45,7 +45,7 @@ const FilterContent = styled.section`
   width: ${sizes.sidebarWidth};
   overflow: hidden;
 
-  & ${StyledBtn} {
+  & ${StyledButton} {
     margin: ${sizes.paddingMin} 0;
     width: 100%;
   }
@@ -128,16 +128,16 @@ class Filter extends React.Component {
                 filter={this.state.filter}
                 resource={resource} />
             ))}
-            <StyledBtn as="button" className="is-primary">
+            <StyledButton as="button" className="is-primary">
               Apply Changes
-            </StyledBtn>
-            <StyledBtn
+            </StyledButton>
+            <StyledButton
               as="a"
               className="is-text"
               onClick={this.resetFilter.bind(this)}
             >
               Clear filters
-            </StyledBtn>
+            </StyledButton>
           </form>
         </FilterContent>
       </FilterWrapper>

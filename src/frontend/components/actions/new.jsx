@@ -2,7 +2,7 @@ import React from 'react'
 import PropertyType from '../property-type'
 import ApiClient from '../../utils/api-client'
 import { withRouter } from 'react-router-dom'
-import { BorderBox, StyledBtn } from '../layout'
+import { BorderBox, StyledButton } from '../layout'
 
 class New extends React.Component {
   constructor(props) {
@@ -61,10 +61,10 @@ class New extends React.Component {
               onChange={this.handleChange.bind(this)}
               record={record} />
           ))}
-          <StyledBtn as="button" type="submit" className="is-primary">
+          <StyledButton as="button" type="submit" className="is-primary">
             <i className="icomoon-save" />
             <span className="btn-text">Save</span>
-          </StyledBtn>
+          </StyledButton>
         </form>
       </BorderBox>
     )

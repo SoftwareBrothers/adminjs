@@ -2,7 +2,7 @@ import React from 'react'
 import { withRouter } from 'react-router-dom'
 
 import PropertyType from '../property-type'
-import { Loader, BorderBox, StyledBtn } from '../layout'
+import { Loader, BorderBox, StyledButton } from '../layout'
 import ApiClient from '../../utils/api-client'
 
 class Edit extends React.Component {
@@ -89,10 +89,10 @@ class Edit extends React.Component {
               resource={resource}
               record={record} />
           ))}
-          <StyledBtn as="button" type="submit" className="is-primary">
+          <StyledButton as="button" type="submit" className="is-primary">
             <i className="icomoon-save" />
             <span className="btn-text">Save</span>
-          </StyledBtn>
+          </StyledButton>
         </form>
       </BorderBox>
     )

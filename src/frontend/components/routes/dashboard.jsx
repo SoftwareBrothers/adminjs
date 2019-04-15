@@ -1,6 +1,6 @@
 import React from 'react'
-import { connect } from "react-redux"
-import DefaultDashboard from '../widgets/dashboard'
+import { connect } from 'react-redux'
+import DefaultDashboard from '../widgets/default-dashboard'
 
 class Dashboard extends React.Component {
   constructor(props) {
@@ -10,60 +10,29 @@ class Dashboard extends React.Component {
     }
   }
 
-  renderHeader() {
-    const title = this.props.dashboard.title && (
-      <div className="overview-title">{this.props.dashboard.title}</div>
-    )
-    const subtitle = this.props.dashboard.subtitle && (
-      <div className="overview-subtitle">{this.props.dashboard.subtitle}</div>
-    )
-    if (this.props.dashboard.title || this.props.dashboard.subtitle) {
-      return (
-        <div className="header">
-          <div className="overview">
-            <div className="columns">
-              <div className="column">
-                {title}
-                {subtitle}
-              </div>
-            </div>
-          </div>
-        </div>
-      )
-    }
-  }
-
-  componentDidMount(){
-    this.setState({isClient: true})
+  componentDidMount() {
+    this.setState({ isClient: true })
   }
 
   render() {
+    const { dashboard } = this.props
+    const { isClient } = this.state
     let Component
-    if (this.props.dashboard &&
-        this.props.dashboard.component &&
-        this.state.isClient &&
-        AdminBro.Components[this.props.dashboard.component]
-        ) {
-      Component = AdminBro.Components[this.props.dashboard.component]
-    } else if (!this.props.dashboard.title && !this.props.dashboard.subtitle) {
-      Component = DefaultDashboard
+    if (dashboard && dashboard.component && isClient
+        && AdminBro.Components[dashboard.component]
+    ) {
+      Component = AdminBro.Components[dashboard.component]
     } else {
-      Component = (props) => (<div className='columns'></div>)
+      Component = DefaultDashboard
     }
-    
+
     return (
-      <div className="dashboard">
-        {this.renderHeader()}
-        <div className="dashboard-content page-builder-content">
-          <Component />
-        </div>
-      </div>
+      <Component />
     )
   }
 }
 
-const mapStateToProps = (state) => ({
-  paths: state.paths,
+const mapStateToProps = state => ({
   dashboard: state.dashboard,
 })
 

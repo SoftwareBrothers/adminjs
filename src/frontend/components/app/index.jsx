@@ -11,6 +11,7 @@ import { colors, sizes } from '../../styles/variables'
 import {
   Resource, Dashboard, ResourceAction, RecordAction,
 } from '../routes'
+import Hamburger from '../layout/sidebar/hamburger';
 
 const GlobalStyle = createGlobalStyle`
   html, body, #app {
@@ -40,35 +41,51 @@ const Core = styled.section`
   flex-direction: column;
 `
 
-const App = (props) => {
-  const { paths } = props
-  const h = new ViewHelpers({ options: paths })
+class App extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      sidebarActive: true,
+    }
+  }
 
-  const resourceId = ':resourceId'
-  const actionName = ':actionName'
-  const recordId = ':recordId'
+  toggleSidebar() {
+    this.setState(state => ({
+      sidebarActive: !state.sidebarActive,
+    }))
+  }
 
-  const recordActionUrl = h.recordActionUrl({ resourceId, recordId, actionName })
-  const resourceActionUrl = h.resourceActionUrl({ resourceId, actionName })
-  const listUrl = h.listUrl({ resourceId })
+  render() {
+    const { paths } = this.props
+    const { sidebarActive } = this.state
+    const h = new ViewHelpers({ options: paths })
 
-  return (
-    <React.Fragment>
-      <GlobalStyle />
-      <ApplicationWrapper>
-        <Sidebar />
-        <Core>
-          <Topbar />
-          <Switch>
-            <Route path={h.dashboardUrl()} exact component={Dashboard} />
-            <Route path={listUrl} exact component={Resource} />
-            <Route path={resourceActionUrl} exact component={ResourceAction} />
-            <Route path={recordActionUrl} exact component={RecordAction} />
-          </Switch>
-        </Core>
-      </ApplicationWrapper>
-    </React.Fragment>
-  )
+    const resourceId = ':resourceId'
+    const actionName = ':actionName'
+    const recordId = ':recordId'
+
+    const recordActionUrl = h.recordActionUrl({ resourceId, recordId, actionName })
+    const resourceActionUrl = h.resourceActionUrl({ resourceId, actionName })
+    const listUrl = h.listUrl({ resourceId })
+
+    return (
+      <React.Fragment>
+        <GlobalStyle />
+        <ApplicationWrapper>
+          <Sidebar sidebarActive={sidebarActive} />
+          <Core>
+            <Topbar toggleSidebar={this.toggleSidebar.bind(this)} />
+            <Switch>
+              <Route path={h.dashboardUrl()} exact component={Dashboard} />
+              <Route path={listUrl} exact component={Resource} />
+              <Route path={resourceActionUrl} exact component={ResourceAction} />
+              <Route path={recordActionUrl} exact component={RecordAction} />
+            </Switch>
+          </Core>
+        </ApplicationWrapper>
+      </React.Fragment>
+    )
+  }
 }
 
 App.propTypes = {
