@@ -817,7 +817,7 @@ var AdminBro = (function (AdminBro$1, React, reactRedux, reactRouterDom, styled,
   };
 
   function _templateObject$9() {
-    var data = taggedTemplateLiteral(["\n  font-size: ", ";\n  border-radius: 0;\n  border-color: ", ";\n  background: #fff;\n  height: 32px;\n  padding: ", " ", ";\n  color: ", ";\n  &:hover {\n    border-color: ", ";\n  }\n  &.is-primary {\n    background-color: ", ";\n    color: #ffffff;\n    &:hover {\n      background-color: ", ";\n    }\n  }\n\n  &.is-text {\n    background-color: transparent;\n    color: ", ";\n    border: transparent;\n  }\n\n  &.in-dropdown {\n    color: ", ";\n    font-size: ", ";\n    width: 100%;\n    text-align: start;\n    justify-content: flex-start;\n    height: 40px;\n    padding-left: 40px;\n  }\n"]);
+    var data = taggedTemplateLiteral(["\n  &&& {\n    font-size: ", ";\n    border-radius: 0;\n    border-color: ", ";\n    background: #fff;\n    height: 32px;\n    padding: ", " ", ";\n    color: ", ";\n    &:hover {\n      border-color: ", ";\n    }\n    &.is-primary {\n      background-color: ", ";\n      color: #ffffff;\n      &:hover {\n        background-color: ", ";\n      }\n    }\n\n    &.is-text {\n      background-color: transparent;\n      color: ", ";\n      border: transparent;\n    }\n\n    &.in-dropdown {\n      color: ", ";\n      font-size: ", ";\n      width: 100%;\n      text-align: start;\n      justify-content: flex-start;\n      height: 40px;\n      padding-left: 40px;\n    }\n  }\n"]);
 
     _templateObject$9 = function _templateObject() {
       return data;
@@ -1962,7 +1962,7 @@ var AdminBro = (function (AdminBro$1, React, reactRedux, reactRouterDom, styled,
   }(React__default.PureComponent);
 
   function _templateObject2$6() {
-    var data = taggedTemplateLiteral(["\n  display: block;\n  text-transform: uppercase;\n  font-size: ", ";\n  color: ", ";\n  font-weight: normal;\n  margin: 0 0 ", " 0;\n  letter-spacing: 0.1em;\n"]);
+    var data = taggedTemplateLiteral(["\n  &&& {\n    display: block;\n    text-transform: uppercase;\n    font-size: ", ";\n    color: ", ";\n    font-weight: normal;\n    margin: 0 0 ", " 0;\n    letter-spacing: 0.1em;\n  }\n"]);
 
     _templateObject2$6 = function _templateObject2() {
       return data;
@@ -3660,7 +3660,7 @@ var AdminBro = (function (AdminBro$1, React, reactRedux, reactRouterDom, styled,
 
   }).call(commonjsGlobal);
 
-  //# sourceMappingURL=performance-now.js.map
+
   });
 
   var root = typeof window === 'undefined' ? commonjsGlobal : window
