@@ -31,6 +31,11 @@ const PropertyInShow = (props) => {
 
 PropertyInShow.propTypes = {
   property: propertyType.isRequired,
+  children: PropTypes.oneOfType([PropTypes.element, PropTypes.string]),
+}
+
+PropertyInShow.defaultProps = {
+  children: null,
 }
 
 export default PropertyInShow

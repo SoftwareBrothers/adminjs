@@ -15,7 +15,7 @@ const StyledFooter = styled.p`
 `
 
 
-const SidebarFooter = props => (
+const SidebarFooter = () => (
   <StyledFooter>
       With
     <i className="fas fa-heart" />

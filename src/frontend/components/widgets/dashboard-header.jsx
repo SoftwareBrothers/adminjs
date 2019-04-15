@@ -1,5 +1,7 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import styled from 'styled-components'
+
 import { sizes, colors } from '../../styles/variables'
 
 const Wrapper = styled.section.attrs({
@@ -28,6 +30,14 @@ const DashboardHeader = (props) => {
       {children}
     </Wrapper>
   )
+}
+
+DashboardHeader.propTypes = {
+  children: PropTypes.element,
+}
+
+DashboardHeader.defaultProps = {
+  children: null,
 }
 
 export default DashboardHeader

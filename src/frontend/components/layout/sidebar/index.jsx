@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import styled from 'styled-components'
 
-import { sizes, colors, fonts, breakpoints } from '../../../styles/variables'
+import { sizes, colors, fonts } from '../../../styles/variables'
 import { pathsType, brandingType, resourceType } from '../../../types'
 
 import SidebarBranding from './sidebar-branding'
@@ -22,7 +22,7 @@ const SidebarWrapper = styled.aside`
   transition: width 0.5s;
 
   & > section {
-    padding: ${sizes.paddingLayout};
+    padding: ${sizes.padding} ${sizes.paddingLayout} ${sizes.paddingLayout};
     width: ${sizes.sidebarWidth};
   }
 
@@ -68,6 +68,7 @@ Sidebar.propTypes = {
   paths: pathsType.isRequired,
   branding: brandingType.isRequired,
   resources: PropTypes.arrayOf(resourceType).isRequired,
+  sidebarActive: PropTypes.bool.isRequired,
 }
 
 const mapStateToProps = state => ({

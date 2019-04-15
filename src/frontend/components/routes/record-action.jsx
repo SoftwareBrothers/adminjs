@@ -1,7 +1,9 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import ViewHelpers from '../../../backend/utils/view-helpers'
+
 import { Breadcrumbs, ActionHeader, ActionWrapper } from '../layout'
+import { resourceType, matchType } from '../../types'
 
 import actions from '../actions'
 
@@ -27,11 +29,9 @@ class RecordAction extends React.Component {
   }
 
   render() {
-    const h = new ViewHelpers()
-
     const { match, resources } = this.props
     const { resourceId, actionName, recordId } = match.params
-    const { isClient } = this.state
+    const { isClient, recordTitle } = this.state
 
     const resource = resources.find(r => r.id === resourceId)
     const action = resource.recordActions.find(r => r.name === actionName)
@@ -40,7 +40,7 @@ class RecordAction extends React.Component {
 
     return (
       <ActionWrapper>
-        <Breadcrumbs resource={resource} actionName={actionName} recordTitle={this.state.recordTitle} />
+        <Breadcrumbs resource={resource} actionName={actionName} recordTitle={recordTitle} />
         <ActionHeader
           resource={resource}
           recordId={recordId}
@@ -56,5 +56,10 @@ class RecordAction extends React.Component {
 const mapStateToProps = state => ({
   resources: state.resources,
 })
+
+RecordAction.propTypes = {
+  resources: PropTypes.arrayOf(resourceType).isRequired,
+  match: matchType.isRequired,
+}
 
 export default connect(mapStateToProps)(RecordAction)

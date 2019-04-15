@@ -1,8 +1,9 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
 import BorderBox from '../layout/border-box'
-import { fonts, colors } from '../../styles/variables'
+import { colors } from '../../styles/variables'
 
 const Level = styled.div.attrs({
   className: 'level',
@@ -21,7 +22,7 @@ const Level = styled.div.attrs({
 
 export default class ValueBlock extends React.PureComponent {
   render() {
-    const { icon, value, children, color = colors.primary } = this.props
+    const { icon, value, children, color } = this.props
 
     return (
       <BorderBox>
@@ -37,4 +38,18 @@ export default class ValueBlock extends React.PureComponent {
       </BorderBox>
     )
   }
+}
+
+ValueBlock.propTypes = {
+  icon: PropTypes.string,
+  value: PropTypes.string,
+  children: PropTypes.element,
+  color: PropTypes.string,
+}
+
+ValueBlock.defaultProps = {
+  color: colors.primary,
+  children: null,
+  value: null,
+  icon: null,
 }

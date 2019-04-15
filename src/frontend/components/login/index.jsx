@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import styled, { createGlobalStyle } from 'styled-components'
 
 import { BorderBox, StyledButton, PropertyInEdit } from '../layout'
@@ -71,6 +72,15 @@ const Login = (props) => {
       </FlexWrapper>
     </React.Fragment>
   )
+}
+
+Login.propTypes = {
+  message: PropTypes.string,
+  action: PropTypes.string.isRequired,
+}
+
+Login.defaultProps = {
+  message: null,
 }
 
 export default Login

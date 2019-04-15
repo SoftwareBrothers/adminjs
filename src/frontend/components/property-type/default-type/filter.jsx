@@ -1,9 +1,13 @@
 import React from 'react'
+import PropTypes from 'prop-types'
+
 import PropertyInFilter from '../../layout/property-in-filter'
+import { propertyType } from '../../../types'
 
 export default class Filter extends React.PureComponent {
   handleChange(event) {
-    this.props.onChange(this.props.property.name, event.target.value)
+    const { onChange, property } = this.props
+    onChange(property.name, event.target.value)
   }
 
   render() {
@@ -27,4 +31,15 @@ export default class Filter extends React.PureComponent {
       </PropertyInFilter>
     )
   }
+}
+
+Filter.propTypes = {
+  property: propertyType.isRequired,
+  onChange: PropTypes.func.isRequired,
+  // eslint-disable-next-line react/forbid-prop-types
+  filter: PropTypes.object,
+}
+
+Filter.defaultProps = {
+  filter: {},
 }

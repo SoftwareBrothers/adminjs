@@ -1,9 +1,11 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
 import ActionButton from './action-button'
 import PropertyType from '../property-type'
 import { colors, sizes } from '../../styles/variables'
+import { resourceType, recordType } from '../../types'
 
 const Td = styled.td`
   &&& {
@@ -92,4 +94,18 @@ export default class RecordInList extends React.PureComponent {
       </tr>
     )
   }
+}
+
+RecordInList.propTypes = {
+  resource: resourceType.isRequired,
+  record: recordType.isRequired,
+  actionPerformed: PropTypes.func.isRequired,
+}
+
+ActionsDropdown.propTypes = {
+  children: PropTypes.node,
+}
+
+ActionsDropdown.defaultProps = {
+  children: null,
 }

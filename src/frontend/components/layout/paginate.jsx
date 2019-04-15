@@ -1,10 +1,12 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import JWPaginate from 'jw-paginate'
 import styled from 'styled-components'
-import { withRouter, Link } from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
 
 import StyledButton from './styled-button'
 import { colors } from '../../styles/variables'
+import { locationType } from '../../types'
 
 const PaginationWrapper = styled.div.attrs({
   className: 'level-item pagination-content',
@@ -67,5 +69,11 @@ class Paginate extends React.PureComponent {
   }
 }
 
+Paginate.propTypes = {
+  page: PropTypes.number.isRequired,
+  perPage: PropTypes.number.isRequired,
+  total: PropTypes.number.isRequired,
+  location: locationType.isRequired,
+}
 
 export default withRouter(Paginate)

@@ -1,9 +1,14 @@
 import React from 'react'
+import PropTypes from 'prop-types'
+
 import defaultType from './default-type'
 import boolean from './boolean'
 import datetime from './datetime'
 import richtext from './richtext'
 import reference from './reference'
+
+import { propertyType, resourceType, recordType } from '../../types'
+
 
 const types = {
   boolean,
@@ -26,10 +31,12 @@ export default class PropertyType extends React.Component {
   }
 
   render() {
-    const { property, resource, record, filter, where, paths } = this.props
+    const { property, resource, record, filter, where, onChange } = this.props
+    const { isClient } = this.state
 
-    let PropertyRenderer = types[property.type] && types[property.type][where] || defaultType[where]
-    if (property.components && property.components[where] && this.state.isClient) {
+    let PropertyRenderer = (types[property.type] && types[property.type][where])
+                          || defaultType[where]
+    if (property.components && property.components[where] && isClient) {
       PropertyRenderer = AdminBro.Components[property.components[where]]
     }
 
@@ -37,11 +44,26 @@ export default class PropertyType extends React.Component {
       <PropertyRenderer
         property={property}
         resource={resource}
-        paths={paths}
         record={record}
         filter={filter}
-        onChange={this.props.onChange}
+        onChange={onChange}
       />
     )
   }
+}
+
+PropertyType.propTypes = {
+  property: propertyType.isRequired,
+  resource: resourceType.isRequired,
+  record: recordType,
+  // eslint-disable-next-line react/forbid-prop-types
+  filter: PropTypes.object,
+  where: PropTypes.oneOf(['edit', 'filter', 'show', 'list']).isRequired,
+  onChange: PropTypes.func,
+}
+
+PropertyType.defaultProps = {
+  filter: {},
+  record: null,
+  onChange: null,
 }

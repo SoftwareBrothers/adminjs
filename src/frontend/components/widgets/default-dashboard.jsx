@@ -31,7 +31,7 @@ const Svg = () => (
   </svg>
 )
 
-const Dashboard = props => (
+const Dashboard = () => (
   <DashboardWrapper>
     <InfoBox>
       <Svg />

@@ -1,9 +1,7 @@
 import React from 'react'
 
-export default class Loader extends React.PureComponent {
-  render() {
-    return (
-      <div>Loading...</div>
-    )
-  }
-}
+const Loader = () => (
+  <div>Loading...</div>
+)
+
+export default Loader

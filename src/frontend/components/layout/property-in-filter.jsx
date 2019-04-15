@@ -46,6 +46,11 @@ const PropertyInFilter = (props) => {
 
 PropertyInFilter.propTypes = {
   property: propertyType.isRequired,
+  children: PropTypes.element,
+}
+
+PropertyInFilter.defaultProps = {
+  children: null,
 }
 
 export { Label, Property }

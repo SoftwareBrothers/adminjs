@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import DefaultDashboard from '../widgets/default-dashboard'
 
@@ -35,5 +36,11 @@ class Dashboard extends React.Component {
 const mapStateToProps = state => ({
   dashboard: state.dashboard,
 })
+
+Dashboard.propTypes = {
+  dashboard: PropTypes.shape({
+    component: PropTypes.string,
+  }).isRequired,
+}
 
 export default connect(mapStateToProps)(Dashboard)

@@ -1,9 +1,10 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
 import { Breadcrumbs, ActionHeader, ActionWrapper } from '../layout'
+import { resourceType, matchType, pathsType } from '../../types'
 
-import ViewHelpers from '../../../backend/utils/view-helpers'
 import actions from '../actions'
 
 class ResourceAction extends React.Component {
@@ -19,15 +20,18 @@ class ResourceAction extends React.Component {
   }
 
   render() {
-    const { resourceId, actionName } = this.props.match.params
-    const resource = this.props.resources.find(r => r.id === resourceId)
+    const { resources, match, paths } = this.props
+    const { resourceId, actionName } = match.params
+    const { isClient } = this.state
+
+    const resource = resources.find(r => r.id === resourceId)
     const action = resource.resourceActions.find(r => r.name === actionName)
-    const h = new ViewHelpers()
+
     let Action = actions[action.name]
-    if (this.state.isClient && action.component) {
+    if (isClient && action.component) {
       Action = AdminBro.Components[action.component]
     }
-    Action = Action || (props => (<div />))
+    Action = Action || (() => (<div />))
 
     return (
       <ActionWrapper>
@@ -36,7 +40,7 @@ class ResourceAction extends React.Component {
           resource={resource}
           action={action}
         />
-        <Action action={action} resource={resource} paths={this.props.paths} />
+        <Action action={action} resource={resource} paths={paths} />
       </ActionWrapper>
     )
   }
@@ -46,5 +50,11 @@ const mapStateToProps = state => ({
   paths: state.paths,
   resources: state.resources,
 })
+
+ResourceAction.propTypes = {
+  resources: PropTypes.arrayOf(resourceType).isRequired,
+  match: matchType.isRequired,
+  paths: pathsType.isRequired,
+}
 
 export default connect(mapStateToProps)(ResourceAction)

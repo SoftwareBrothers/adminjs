@@ -6,12 +6,12 @@ import styled, { createGlobalStyle } from 'styled-components'
 import ViewHelpers from '../../../backend/utils/view-helpers'
 import { Sidebar, Topbar } from '../layout'
 import { pathsType } from '../../types'
-import { colors, sizes } from '../../styles/variables'
+import { colors } from '../../styles/variables'
 
 import {
   Resource, Dashboard, ResourceAction, RecordAction,
 } from '../routes'
-import Hamburger from '../layout/sidebar/hamburger'
+// import Hamburger from '../layout/sidebar/hamburger'
 
 const GlobalStyle = createGlobalStyle`
   html, body, #app {

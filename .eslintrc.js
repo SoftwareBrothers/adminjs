@@ -32,6 +32,7 @@ module.exports = {
         'no-restricted-syntax': 'off',
         'no-await-in-loop': 'off',
         'object-curly-newline': 'off',
+        'react/jsx-no-bind': 'off'
     },
     overrides: [
         {
@@ -50,5 +51,7 @@ module.exports = {
         'server': true,
         'window': true,
         'AdminBro': true,
+        'flatpickr': true,
+        'Quill': true,
     }
 }

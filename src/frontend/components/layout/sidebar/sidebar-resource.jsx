@@ -21,7 +21,7 @@ const ResourceLink = styled(NavLink)`
 
 class SidebarResource extends React.PureComponent {
   render() {
-    const { resource, match } = this.props
+    const { resource } = this.props
     return (
       <li>
         <ResourceLink to={resource.href}>

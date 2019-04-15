@@ -392,7 +392,7 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
   }
 
   function _templateObject() {
-    var data = taggedTemplateLiteral(["\n  margin-bottom: ", ";\n"]);
+    var data = taggedTemplateLiteral(["\n  margin-bottom: 40px;\n"]);
 
     _templateObject = function _templateObject() {
       return data;
@@ -400,7 +400,7 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
 
     return data;
   }
-  var BrandingBox = styled__default.div(_templateObject(), sizes.paddingLayout);
+  var BrandingBox = styled__default.div(_templateObject());
   var LogoLink = styled__default(reactRouterDom.Link)(_templateObject2(), colors.defaultText);
   var LogoImage = styled__default.img(_templateObject3(), sizes.padding);
 
@@ -452,9 +452,7 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
     createClass(SidebarResource, [{
       key: "render",
       value: function render() {
-        var _this$props = this.props,
-            resource = _this$props.resource,
-            match = _this$props.match;
+        var resource = this.props.resource;
         return React__default.createElement("li", null, React__default.createElement(ResourceLink, {
           to: resource.href
         }, resource.name));
@@ -538,7 +536,7 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
   }
   var StyledFooter = styled__default.p(_templateObject$3(), fonts.min, colors.lightText, colors.love, sizes.paddingMin);
 
-  var SidebarFooter = function SidebarFooter(props) {
+  var SidebarFooter = function SidebarFooter() {
     return React__default.createElement(StyledFooter, null, "With", React__default.createElement("i", {
       className: "fas fa-heart"
     }), "by", React__default.createElement("a", {
@@ -580,7 +578,7 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
   }
 
   function _templateObject$4() {
-    var data = taggedTemplateLiteral(["\n  display: flex;\n  flex-shrink: 0;\n  flex-direction: column;\n  justify-content: space-between;\n  height: 100%;\n  overflow-y: auto;\n  border-right: 1px solid ", ";\n  transition: width 0.5s;\n\n  & > section {\n    padding: ", ";\n    width: ", ";\n  }\n\n  &.hidden {\n    width: 0px;\n    transition: width 0.5s;\n    overflow: hidden;\n    & > section {\n      opacity: 0;\n    }\n  }\n"]);
+    var data = taggedTemplateLiteral(["\n  display: flex;\n  flex-shrink: 0;\n  flex-direction: column;\n  justify-content: space-between;\n  height: 100%;\n  overflow-y: auto;\n  border-right: 1px solid ", ";\n  transition: width 0.5s;\n\n  & > section {\n    padding: ", " ", " ", ";\n    width: ", ";\n  }\n\n  &.hidden {\n    width: 0px;\n    transition: width 0.5s;\n    overflow: hidden;\n    & > section {\n      opacity: 0;\n    }\n  }\n"]);
 
     _templateObject$4 = function _templateObject() {
       return data;
@@ -588,7 +586,7 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
 
     return data;
   }
-  var SidebarWrapper = styled__default.aside(_templateObject$4(), colors.border, sizes.paddingLayout, sizes.sidebarWidth);
+  var SidebarWrapper = styled__default.aside(_templateObject$4(), colors.border, sizes.padding, sizes.paddingLayout, sizes.paddingLayout, sizes.sidebarWidth);
   var SidebarLabel = styled__default.h2(_templateObject2$2(), sizes.padding, sizes.padding, sizes.padding, colors.lightText, fonts.min);
 
   var Sidebar = function Sidebar(props) {
@@ -612,7 +610,8 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
   Sidebar.propTypes = {
     paths: pathsType.isRequired,
     branding: brandingType.isRequired,
-    resources: PropTypes$1.arrayOf(resourceType).isRequired
+    resources: PropTypes$1.arrayOf(resourceType).isRequired,
+    sidebarActive: PropTypes$1.bool.isRequired
   };
 
   var mapStateToProps = function mapStateToProps(state) {
@@ -685,7 +684,7 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
   };
 
   function _templateObject$6() {
-    var data = taggedTemplateLiteral(["\n  cursor: pointer;\n  display: block;\n  float: left;\n  margin: ", ";\n"]);
+    var data = taggedTemplateLiteral(["\n  height: ", ";\n  border-bottom: 1px solid ", ";\n  padding: 0 ", ";\n  flex-shrink: 0;\n"]);
 
     _templateObject$6 = function _templateObject() {
       return data;
@@ -693,27 +692,14 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
 
     return data;
   }
-  var Hamburger = styled__default.i.attrs({
-    className: 'fas fa-bars fa-2x'
-  })(_templateObject$6(), sizes.paddingMin);
 
-  function _templateObject$7() {
-    var data = taggedTemplateLiteral(["\n  height: ", ";\n  border-bottom: 1px solid ", ";\n  padding: 0 ", ";\n  flex-shrink: 0;\n"]);
-
-    _templateObject$7 = function _templateObject() {
-      return data;
-    };
-
-    return data;
-  }
   var Navbar = styled__default.nav.attrs({
     className: 'navbar'
-  })(_templateObject$7(), sizes.navbarHeight, colors.border, sizes.paddingLayout);
+  })(_templateObject$6(), sizes.navbarHeight, colors.border, sizes.paddingLayout);
 
   var Topbar = function Topbar(props) {
     var session = props.session,
-        paths = props.paths,
-        toggleSidebar = props.toggleSidebar;
+        paths = props.paths;
     return React__default.createElement(Navbar, null, React__default.createElement("div", {
       className: "navbar-menu"
     }, React__default.createElement("div", {
@@ -750,10 +736,10 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
     return data;
   }
 
-  function _templateObject$8() {
+  function _templateObject$7() {
     var data = taggedTemplateLiteral(["\n  margin: -", " 0 ", " -10px;\n  font-size: ", ";\n"]);
 
-    _templateObject$8 = function _templateObject() {
+    _templateObject$7 = function _templateObject() {
       return data;
     };
 
@@ -761,7 +747,7 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
   }
   var BreadcrumbsContainer = styled__default.nav.attrs({
     className: 'breadcrumb'
-  })(_templateObject$8(), sizes.padding, sizes.padding, fonts.base);
+  })(_templateObject$7(), sizes.padding, sizes.padding, fonts.base);
   var BreadcrumbLink = styled__default(reactRouterDom.Link)(_templateObject2$4(), colors.lightText, colors.primary);
 
   var Breadcrumbs =
@@ -821,10 +807,10 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
     actionName: null
   };
 
-  function _templateObject$9() {
+  function _templateObject$8() {
     var data = taggedTemplateLiteral(["\n  font-size: ", ";\n  border-radius: 0;\n  border-color: ", ";\n  background: #fff;\n  height: 32px;\n  padding: ", " ", ";\n  color: ", ";\n  &:hover {\n    border-color: ", ";\n  }\n  &.is-primary {\n    background-color: ", ";\n    color: #ffffff;\n    &:hover {\n      background-color: ", ";\n    }\n  }\n\n  &.is-text {\n    background-color: transparent;\n    color: ", ";\n    border: transparent;\n  }\n\n  &.in-dropdown {\n    color: ", ";\n    font-size: ", ";\n    width: 100%;\n    text-align: start;\n    justify-content: flex-start;\n    height: 40px;\n    padding-left: 40px;\n  }\n"]);
 
-    _templateObject$9 = function _templateObject() {
+    _templateObject$8 = function _templateObject() {
       return data;
     };
 
@@ -832,7 +818,7 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
   }
   var StyledButton = styled__default(reactRouterDom.Link).attrs({
     className: 'button'
-  })(_templateObject$9(), fonts.medium, colors.primary, sizes.paddingMin, sizes.padding, colors.primary, colors.primaryHover, colors.primary, colors.primaryHover, colors.primary, colors.defaultText, fonts.base);
+  })(_templateObject$8(), fonts.medium, colors.primary, sizes.paddingMin, sizes.padding, colors.primary, colors.primaryHover, colors.primary, colors.primaryHover, colors.primary, colors.defaultText, fonts.base);
 
   var runtime_1 = createCommonjsModule(function (module) {
   /**
@@ -1873,10 +1859,10 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
   };
   var ActionButton$1 = reactRouterDom.withRouter(ActionButton);
 
-  function _templateObject$a() {
+  function _templateObject$9() {
     var data = taggedTemplateLiteral(["\n  background: #ffffff;\n  padding: ", ";\n  border: 1px solid ", ";\n"]);
 
-    _templateObject$a = function _templateObject() {
+    _templateObject$9 = function _templateObject() {
       return data;
     };
 
@@ -1884,28 +1870,11 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
   }
   var BorderBox = styled__default.section.attrs({
     className: 'border-box'
-  })(_templateObject$a(), sizes.paddingLayout, colors.border);
+  })(_templateObject$9(), sizes.paddingLayout, colors.border);
 
-  var Loader =
-  /*#__PURE__*/
-  function (_React$PureComponent) {
-    inherits(Loader, _React$PureComponent);
-
-    function Loader() {
-      classCallCheck(this, Loader);
-
-      return possibleConstructorReturn(this, getPrototypeOf(Loader).apply(this, arguments));
-    }
-
-    createClass(Loader, [{
-      key: "render",
-      value: function render() {
-        return React__default.createElement("div", null, "Loading...");
-      }
-    }]);
-
-    return Loader;
-  }(React__default.PureComponent);
+  var Loader = function Loader() {
+    return React__default.createElement("div", null, "Loading...");
+  };
 
   function _templateObject2$5() {
     var data = taggedTemplateLiteral(["\n  display: block;\n  text-transform: uppercase;\n  font-size: ", ";\n  color: ", ";\n  font-weight: normal;\n  margin: 0 0 ", " 0;\n  letter-spacing: 0.1em;\n"]);
@@ -1917,16 +1886,16 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
     return data;
   }
 
-  function _templateObject$b() {
+  function _templateObject$a() {
     var data = taggedTemplateLiteral(["\n  margin-bottom: ", ";\n"]);
 
-    _templateObject$b = function _templateObject() {
+    _templateObject$a = function _templateObject() {
       return data;
     };
 
     return data;
   }
-  var Property = styled__default.div(_templateObject$b(), sizes.paddingLayout);
+  var Property = styled__default.div(_templateObject$a(), sizes.paddingLayout);
   var Label = styled__default.label(_templateObject2$5(), fonts.min, colors.lightText, sizes.paddingMin);
 
   var PropertyInShow = function PropertyInShow(props) {
@@ -1936,7 +1905,11 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
   };
 
   PropertyInShow.propTypes = {
-    property: propertyType.isRequired
+    property: propertyType.isRequired,
+    children: PropTypes$1.oneOfType([PropTypes$1.element, PropTypes$1.string])
+  };
+  PropertyInShow.defaultProps = {
+    children: null
   };
 
   var Show =
@@ -1965,6 +1938,10 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
 
     return Show;
   }(React__default.PureComponent);
+  Show.propTypes = {
+    property: propertyType.isRequired,
+    record: recordType.isRequired
+  };
 
   function _templateObject2$6() {
     var data = taggedTemplateLiteral(["\n  &&& {\n    display: block;\n    text-transform: uppercase;\n    font-size: ", ";\n    color: ", ";\n    font-weight: normal;\n    margin: 0 0 ", " 0;\n    letter-spacing: 0.1em;\n  }\n"]);
@@ -1976,16 +1953,16 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
     return data;
   }
 
-  function _templateObject$c() {
+  function _templateObject$b() {
     var data = taggedTemplateLiteral(["\n  margin-bottom: ", ";\n\n  & input {\n    border-radius: 0;\n    border-color: ", ";\n    box-shadow: none;\n    &:focus {\n      border-color: ", ";\n    }\n  }\n"]);
 
-    _templateObject$c = function _templateObject() {
+    _templateObject$b = function _templateObject() {
       return data;
     };
 
     return data;
   }
-  var Property$1 = styled__default.div(_templateObject$c(), sizes.paddingLayout, colors.border, colors.primary);
+  var Property$1 = styled__default.div(_templateObject$b(), sizes.paddingLayout, colors.border, colors.primary);
   var Label$1 = styled__default.label.attrs({
     className: 'label'
   })(_templateObject2$6(), fonts.min, colors.lightText, sizes.paddingMin);
@@ -2003,7 +1980,15 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
     }, error.message));
   };
 
-  PropertyInEdit.propTypes = {};
+  PropertyInEdit.propTypes = {
+    children: PropTypes$1.element,
+    property: propertyType.isRequired,
+    error: PropTypes$1.string
+  };
+  PropertyInEdit.defaultProps = {
+    error: null,
+    children: null
+  };
 
   var Edit =
   /*#__PURE__*/
@@ -2064,16 +2049,16 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
     return data;
   }
 
-  function _templateObject$d() {
+  function _templateObject$c() {
     var data = taggedTemplateLiteral(["\n  margin: ", " 0;\n\n  & input {\n    border-radius: 0;\n    border-color: ", ";\n    box-shadow: none;\n    background: transparent;\n    color: ", ";\n\n    &:focus {\n      border-color: ", ";\n    }\n  }\n  & .icon {\n    opacity: 0.25;\n  }\n"]);
 
-    _templateObject$d = function _templateObject() {
+    _templateObject$c = function _templateObject() {
       return data;
     };
 
     return data;
   }
-  var Property$2 = styled__default.div(_templateObject$d(), sizes.paddingLayout, colors.borderOnDark, colors.lightText, colors.primary);
+  var Property$2 = styled__default.div(_templateObject$c(), sizes.paddingLayout, colors.borderOnDark, colors.lightText, colors.primary);
   var Label$2 = styled__default.label(_templateObject2$7(), fonts.min, colors.lightText, sizes.paddingMin);
 
   var PropertyInFilter = function PropertyInFilter(props) {
@@ -2083,7 +2068,11 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
   };
 
   PropertyInFilter.propTypes = {
-    property: propertyType.isRequired
+    property: propertyType.isRequired,
+    children: PropTypes$1.element
+  };
+  PropertyInFilter.defaultProps = {
+    children: null
   };
 
   var Filter =
@@ -2100,14 +2089,17 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
     createClass(Filter, [{
       key: "handleChange",
       value: function handleChange(event) {
-        this.props.onChange(this.props.property.name, event.target.value);
+        var _this$props = this.props,
+            onChange = _this$props.onChange,
+            property = _this$props.property;
+        onChange(property.name, event.target.value);
       }
     }, {
       key: "render",
       value: function render() {
-        var _this$props = this.props,
-            property = _this$props.property,
-            filter = _this$props.filter;
+        var _this$props2 = this.props,
+            property = _this$props2.property,
+            filter = _this$props2.filter;
         var filterKey = "filter-".concat(property.name);
         var value = filter[property.name] || '';
         return React__default.createElement(PropertyInFilter, {
@@ -2130,6 +2122,15 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
 
     return Filter;
   }(React__default.PureComponent);
+  Filter.propTypes = {
+    property: propertyType.isRequired,
+    onChange: PropTypes$1.func.isRequired,
+    // eslint-disable-next-line react/forbid-prop-types
+    filter: PropTypes$1.object
+  };
+  Filter.defaultProps = {
+    filter: {}
+  };
 
   var List =
   /*#__PURE__*/
@@ -3694,7 +3695,7 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
 
   }).call(commonjsGlobal);
 
-  //# sourceMappingURL=performance-now.js.map
+
   });
 
   var root = typeof window === 'undefined' ? commonjsGlobal : window
@@ -17942,26 +17943,40 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
             record = _this$props.record,
             filter = _this$props.filter,
             where = _this$props.where,
-            paths = _this$props.paths;
+            onChange = _this$props.onChange;
+        var isClient = this.state.isClient;
         var PropertyRenderer = types[property.type] && types[property.type][where] || defaultType[where];
 
-        if (property.components && property.components[where] && this.state.isClient) {
+        if (property.components && property.components[where] && isClient) {
           PropertyRenderer = AdminBro.Components[property.components[where]];
         }
 
         return React__default.createElement(PropertyRenderer, {
           property: property,
           resource: resource,
-          paths: paths,
           record: record,
           filter: filter,
-          onChange: this.props.onChange
+          onChange: onChange
         });
       }
     }]);
 
     return PropertyType;
   }(React__default.Component);
+  PropertyType.propTypes = {
+    property: propertyType.isRequired,
+    resource: resourceType.isRequired,
+    record: recordType,
+    // eslint-disable-next-line react/forbid-prop-types
+    filter: PropTypes$1.object,
+    where: PropTypes$1.oneOf(['edit', 'filter', 'show', 'list']).isRequired,
+    onChange: PropTypes$1.func
+  };
+  PropertyType.defaultProps = {
+    filter: {},
+    record: null,
+    onChange: null
+  };
 
   function _templateObject3$2() {
     var data = taggedTemplateLiteral(["\n  & > .dropdown-content {\n    border: 0px none;\n    border-radius: 0px;\n    box-shadow: 0 6px 13px 0 rgba(69,70,85,0.13);\n  }\n"]);
@@ -17983,16 +17998,16 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
     return data;
   }
 
-  function _templateObject$e() {
+  function _templateObject$d() {
     var data = taggedTemplateLiteral(["\n  &&& {\n    color: ", ";\n    padding: ", ";\n    border-color: ", ";\n\n    & a:not(.in-dropdown) {\n      color: ", ";\n    }\n\n    &.main {\n      font-weight: bold;\n    }\n  }\n"]);
 
-    _templateObject$e = function _templateObject() {
+    _templateObject$d = function _templateObject() {
       return data;
     };
 
     return data;
   }
-  var Td = styled__default.td(_templateObject$e(), colors.defaultText, sizes.padding, colors.border, colors.primary);
+  var Td = styled__default.td(_templateObject$d(), colors.defaultText, sizes.padding, colors.border, colors.primary);
   var DropdownTrigger = styled__default.div.attrs({
     className: 'dropdown-trigger'
   })(_templateObject2$8(), sizes.padding);
@@ -18058,6 +18073,17 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
 
     return RecordInList;
   }(React__default.PureComponent);
+  RecordInList.propTypes = {
+    resource: resourceType.isRequired,
+    record: recordType.isRequired,
+    actionPerformed: PropTypes$1.func.isRequired
+  };
+  ActionsDropdown.propTypes = {
+    children: PropTypes$1.node
+  };
+  ActionsDropdown.defaultProps = {
+    children: null
+  };
 
   function _templateObject2$9() {
     var data = taggedTemplateLiteral(["\n  color: ", ";\n\n  &.active {\n    color: ", ";\n  }\n\n  & > i {\n    margin-left: ", "\n  }\n"]);
@@ -18069,16 +18095,16 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
     return data;
   }
 
-  function _templateObject$f() {
+  function _templateObject$e() {
     var data = taggedTemplateLiteral(["\n  &&& {\n    font-size: ", ";\n    text-transform: uppercase;\n    color: ", ";\n    font-weight: normal;\n    padding: ", ";\n    letter-spacing: 0.1em;\n    border: none;\n  }\n"]);
 
-    _templateObject$f = function _templateObject() {
+    _templateObject$e = function _templateObject() {
       return data;
     };
 
     return data;
   }
-  var Th = styled__default.th(_templateObject$f(), fonts.min, colors.lightText, sizes.padding);
+  var Th = styled__default.th(_templateObject$e(), fonts.min, colors.lightText, sizes.padding);
   var StyledLink = styled__default(reactRouterDom.NavLink).attrs({
     className: 'is-sortable text-small'
   })(_templateObject2$9(), colors.lightText, colors.primary, sizes.padding);
@@ -18180,10 +18206,10 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
   };
   var PropertyHeader$1 = reactRouterDom.withRouter(PropertyHeader);
 
-  function _templateObject$g() {
+  function _templateObject$f() {
     var data = taggedTemplateLiteral(["\n  & > thead > tr > th {\n    border: none;\n\n    &.actions {\n      width: 80px;\n    }\n  }\n\n"]);
 
-    _templateObject$g = function _templateObject() {
+    _templateObject$f = function _templateObject() {
       return data;
     };
 
@@ -18191,7 +18217,7 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
   }
   var Table = styled__default.table.attrs({
     className: 'table is-fullwidth'
-  })(_templateObject$g());
+  })(_templateObject$f());
 
   var RecordsTable = function RecordsTable(props) {
     var resource = props.resource,
@@ -18232,6 +18258,13 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
         actionPerformed: actionPerformed
       });
     })));
+  };
+
+  RecordsTable.propTypes = {
+    resource: resourceType.isRequired,
+    paths: pathsType.isRequired,
+    records: PropTypes$1.arrayOf(recordType).isRequired,
+    actionPerformed: PropTypes$1.func.isRequired
   };
 
   function paginate(totalItems, currentPage, pageSize, maxPages) {
@@ -18293,10 +18326,10 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
   }
   var jwPaginate = paginate;
 
-  function _templateObject$h() {
+  function _templateObject$g() {
     var data = taggedTemplateLiteral(["\n  & > .pagination {\n    border: 1px solid ", ";\n    padding: 4px;\n  }\n"]);
 
-    _templateObject$h = function _templateObject() {
+    _templateObject$g = function _templateObject() {
       return data;
     };
 
@@ -18304,7 +18337,7 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
   }
   var PaginationWrapper = styled__default.div.attrs({
     className: 'level-item pagination-content'
-  })(_templateObject$h(), colors.border);
+  })(_templateObject$g(), colors.border);
 
   var Paginate =
   /*#__PURE__*/
@@ -18376,6 +18409,12 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
     return Paginate;
   }(React__default.PureComponent);
 
+  Paginate.propTypes = {
+    page: PropTypes$1.number.isRequired,
+    perPage: PropTypes$1.number.isRequired,
+    total: PropTypes$1.number.isRequired,
+    location: locationType.isRequired
+  };
   var Paginate$1 = reactRouterDom.withRouter(Paginate);
 
   function _arrayWithHoles(arr) {
@@ -18444,16 +18483,16 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
     return data;
   }
 
-  function _templateObject$i() {
+  function _templateObject$h() {
     var data = taggedTemplateLiteral(["\n  background: ", ";\n  flex-shrink: 0;\n  width: ", ";\n  color: #fff;\n  padding-top: 60px;\n  transition: width 0.5s;\n  position: absolute;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  overflow-x: hidden;\n  overflow-y: scroll;\n  &.filter-hidden {\n    width: 0;\n    transition: width 0.5s;\n  }\n"]);
 
-    _templateObject$i = function _templateObject() {
+    _templateObject$h = function _templateObject() {
       return data;
     };
 
     return data;
   }
-  var FilterWrapper = styled__default.section(_templateObject$i(), colors.darkBck, sizes.sidebarWidth);
+  var FilterWrapper = styled__default.section(_templateObject$h(), colors.darkBck, sizes.sidebarWidth);
   var FilterLink = styled__default.a(_templateObject2$a(), colors.lightText, colors.lightText, sizes.padding, colors.primary, colors.primary, colors.primary);
   var FilterContent = styled__default.section(_templateObject3$3(), sizes.paddingLayout, sizes.sidebarWidth, StyledButton, sizes.paddingMin);
 
@@ -18660,10 +18699,10 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
     return data;
   }
 
-  function _templateObject$j() {
+  function _templateObject$i() {
     var data = taggedTemplateLiteral(["\n  &&& {\n    margin-bottom: ", ";\n  }\n"]);
 
-    _templateObject$j = function _templateObject() {
+    _templateObject$i = function _templateObject() {
       return data;
     };
 
@@ -18671,7 +18710,7 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
   }
   var HeaderWrapper = styled__default.section.attrs({
     className: 'level'
-  })(_templateObject$j(), sizes.padding);
+  })(_templateObject$i(), sizes.padding);
   var BackBtn = styled__default(reactRouterDom.Link)(_templateObject2$b(), sizes.paddingLayout, sizes.paddingLayout, colors.lightText, fonts.base, sizes.paddingMin, colors.superLightBack, sizes.padding, colors.lightText);
   var HeaderTitle = styled__default.h1.attrs({
     className: 'level-left'
@@ -18735,8 +18774,19 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
     action: null
   };
 
-  function _templateObject$k() {
+  function _templateObject$j() {
     var data = taggedTemplateLiteral(["\n  padding: ", ";\n  flex-grow: 1;\n"]);
+
+    _templateObject$j = function _templateObject() {
+      return data;
+    };
+
+    return data;
+  }
+  var ActionWrapper = styled__default.section(_templateObject$j(), sizes.paddingLayout);
+
+  function _templateObject$k() {
+    var data = taggedTemplateLiteral(["\n\n"]);
 
     _templateObject$k = function _templateObject() {
       return data;
@@ -18744,25 +18794,14 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
 
     return data;
   }
-  var ActionWrapper = styled__default.section(_templateObject$k(), sizes.paddingLayout);
+  var Columns = styled__default.section.attrs({
+    className: 'columns is-multiline'
+  })(_templateObject$k());
 
   function _templateObject$l() {
     var data = taggedTemplateLiteral(["\n\n"]);
 
     _templateObject$l = function _templateObject() {
-      return data;
-    };
-
-    return data;
-  }
-  var Columns = styled__default.section.attrs({
-    className: 'columns is-multiline'
-  })(_templateObject$l());
-
-  function _templateObject$m() {
-    var data = taggedTemplateLiteral(["\n\n"]);
-
-    _templateObject$m = function _templateObject() {
       return data;
     };
 
@@ -18776,7 +18815,7 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
     return {
       className: "column is-".concat(width, "-desktop is-offset-").concat(offset)
     };
-  })(_templateObject$m());
+  })(_templateObject$l());
 
 
 
@@ -18809,16 +18848,16 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
     return data;
   }
 
-  function _templateObject$n() {
+  function _templateObject$m() {
     var data = taggedTemplateLiteral(["\n  display: flex;\n  flex-grow: 1;\n  align-items: center;\n  justify-content: center;\n"]);
 
-    _templateObject$n = function _templateObject() {
+    _templateObject$m = function _templateObject() {
       return data;
     };
 
     return data;
   }
-  var DashboardWrapper = styled__default.section(_templateObject$n());
+  var DashboardWrapper = styled__default.section(_templateObject$m());
   var InfoBox = styled__default.section.attrs({
     className: 'content'
   })(_templateObject2$c());
@@ -18863,7 +18902,7 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
     })));
   };
 
-  var Dashboard = function Dashboard(props) {
+  var Dashboard = function Dashboard() {
     return React__default.createElement(DashboardWrapper, null, React__default.createElement(InfoBox, null, React__default.createElement(Svg$1, null), React__default.createElement("h1", null, "Welcome on board!"), React__default.createElement("p", null, "Thank you for choosing our platform, now you are one of us! Bear in mind that this is a Beta version and we are still working on it."), React__default.createElement("p", null, "Now check out the documentation page on github and modify your AdminBro."), React__default.createElement("div", null, React__default.createElement(StyledButton, {
       as: "a",
       className: "button is-primary",
@@ -18927,6 +18966,11 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
     };
   };
 
+  Dashboard$1.propTypes = {
+    dashboard: PropTypes$1.shape({
+      component: PropTypes$1.string
+    }).isRequired
+  };
   var Dashboard$2 = reactRedux.connect(mapStateToProps$2)(Dashboard$1);
 
   var New =
@@ -19344,7 +19388,6 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
     }, {
       key: "render",
       value: function render() {
-        var h = new viewHelpers();
         var _this$props = this.props,
             match = _this$props.match,
             resources = _this$props.resources;
@@ -19352,7 +19395,9 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
             resourceId = _match$params.resourceId,
             actionName = _match$params.actionName,
             recordId = _match$params.recordId;
-        var isClient = this.state.isClient;
+        var _this$state = this.state,
+            isClient = _this$state.isClient,
+            recordTitle = _this$state.recordTitle;
         var resource = resources.find(function (r) {
           return r.id === resourceId;
         });
@@ -19366,7 +19411,7 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
         return React__default.createElement(ActionWrapper, null, React__default.createElement(Breadcrumbs, {
           resource: resource,
           actionName: actionName,
-          recordTitle: this.state.recordTitle
+          recordTitle: recordTitle
         }), React__default.createElement(ActionHeader, {
           resource: resource,
           recordId: recordId,
@@ -19388,6 +19433,10 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
     };
   };
 
+  RecordAction.propTypes = {
+    resources: PropTypes$1.arrayOf(resourceType).isRequired,
+    match: matchType.isRequired
+  };
   var RecordAction$1 = reactRedux.connect(mapStateToProps$3)(RecordAction);
 
   var ResourceAction =
@@ -19417,23 +19466,27 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
     }, {
       key: "render",
       value: function render() {
-        var _this$props$match$par = this.props.match.params,
-            resourceId = _this$props$match$par.resourceId,
-            actionName = _this$props$match$par.actionName;
-        var resource = this.props.resources.find(function (r) {
+        var _this$props = this.props,
+            resources = _this$props.resources,
+            match = _this$props.match,
+            paths = _this$props.paths;
+        var _match$params = match.params,
+            resourceId = _match$params.resourceId,
+            actionName = _match$params.actionName;
+        var isClient = this.state.isClient;
+        var resource = resources.find(function (r) {
           return r.id === resourceId;
         });
         var action = resource.resourceActions.find(function (r) {
           return r.name === actionName;
         });
-        var h = new viewHelpers();
         var Action = actions[action.name];
 
-        if (this.state.isClient && action.component) {
+        if (isClient && action.component) {
           Action = AdminBro.Components[action.component];
         }
 
-        Action = Action || function (props) {
+        Action = Action || function () {
           return React__default.createElement("div", null);
         };
 
@@ -19446,7 +19499,7 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
         }), React__default.createElement(Action, {
           action: action,
           resource: resource,
-          paths: this.props.paths
+          paths: paths
         }));
       }
     }]);
@@ -19461,6 +19514,11 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
     };
   };
 
+  ResourceAction.propTypes = {
+    resources: PropTypes$1.arrayOf(resourceType).isRequired,
+    match: matchType.isRequired,
+    paths: pathsType.isRequired
+  };
   var ResourceAction$1 = reactRedux.connect(mapStateToProps$4)(ResourceAction);
 
   var queryHasFilter = (function (queryString) {
@@ -19495,10 +19553,10 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
     return false;
   });
 
-  function _templateObject$o() {
+  function _templateObject$n() {
     var data = taggedTemplateLiteral(["\n  align-items: stretch;\n  flex-grow: 1;\n"]);
 
-    _templateObject$o = function _templateObject() {
+    _templateObject$n = function _templateObject() {
       return data;
     };
 
@@ -19506,7 +19564,7 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
   }
   var Wrapper = styled__default.section.attrs({
     className: 'level'
-  })(_templateObject$o());
+  })(_templateObject$n());
 
   var Resource =
   /*#__PURE__*/
@@ -19671,16 +19729,17 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
     return data;
   }
 
-  function _templateObject$p() {
+  function _templateObject$o() {
     var data = taggedTemplateLiteral(["\n  html, body, #app {\n      width: 100%;\n      height: 100%;\n  }\n\n  a {\n    color: ", ";\n  }\n"]);
 
-    _templateObject$p = function _templateObject() {
+    _templateObject$o = function _templateObject() {
       return data;
     };
 
     return data;
   }
-  var GlobalStyle = styled.createGlobalStyle(_templateObject$p(), colors.primary);
+
+  var GlobalStyle = styled.createGlobalStyle(_templateObject$o(), colors.primary);
   var ApplicationWrapper = styled__default.section(_templateObject2$d());
   var Core = styled__default.section(_templateObject3$5(), colors.bck);
 
@@ -19849,10 +19908,10 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
     return redux.createStore(reducer, initialState);
   });
 
-  function _templateObject$q() {
+  function _templateObject$p() {
     var data = taggedTemplateLiteral(["\n  color: ", ";\n  margin-top: 8px;\n\n  & .value {\n    font-size: 34px;\n  }\n\n  & .icon {\n    font-size: 34px;\n  }\n"]);
 
-    _templateObject$q = function _templateObject() {
+    _templateObject$p = function _templateObject() {
       return data;
     };
 
@@ -19860,7 +19919,7 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
   }
   var Level = styled__default.div.attrs({
     className: 'level'
-  })(_templateObject$q(), function (props) {
+  })(_templateObject$p(), function (props) {
     return props.color;
   });
 
@@ -19882,8 +19941,7 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
             icon = _this$props.icon,
             value = _this$props.value,
             children = _this$props.children,
-            _this$props$color = _this$props.color,
-            color = _this$props$color === void 0 ? colors.primary : _this$props$color;
+            color = _this$props.color;
         return React__default.createElement(BorderBox, null, children, React__default.createElement(Level, {
           color: color
         }, React__default.createElement("div", {
@@ -19898,11 +19956,23 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
 
     return ValueBlock;
   }(React__default.PureComponent);
+  ValueBlock.propTypes = {
+    icon: PropTypes$1.string,
+    value: PropTypes$1.string,
+    children: PropTypes$1.element,
+    color: PropTypes$1.string
+  };
+  ValueBlock.defaultProps = {
+    color: colors.primary,
+    children: null,
+    value: null,
+    icon: null
+  };
 
-  function _templateObject$r() {
+  function _templateObject$q() {
     var data = taggedTemplateLiteral(["\n  && {\n    padding: ", ";\n    background: ", ";\n    color: #fff;\n    margin-bottom: 0;\n    & > * {\n      color: #fff;\n    }\n\n    & > h1 {\n      font-size: 53px;\n      margin-bottom: 2px;\n    }\n  }\n"]);
 
-    _templateObject$r = function _templateObject() {
+    _templateObject$q = function _templateObject() {
       return data;
     };
 
@@ -19910,11 +19980,18 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
   }
   var Wrapper$1 = styled__default.section.attrs({
     className: 'content'
-  })(_templateObject$r(), sizes.paddingLayout, colors.superDarkBck);
+  })(_templateObject$q(), sizes.paddingLayout, colors.superDarkBck);
 
   var DashboardHeader = function DashboardHeader(props) {
     var children = props.children;
     return React__default.createElement(Wrapper$1, null, children);
+  };
+
+  DashboardHeader.propTypes = {
+    children: PropTypes$1.element
+  };
+  DashboardHeader.defaultProps = {
+    children: null
   };
 
   var widgets = {

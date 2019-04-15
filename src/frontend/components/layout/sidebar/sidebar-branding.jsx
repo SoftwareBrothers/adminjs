@@ -6,7 +6,7 @@ import ViewHelpers from '../../../../backend/utils/view-helpers'
 import { colors, sizes } from '../../../styles/variables'
 
 const BrandingBox = styled.div`
-  margin-bottom: ${sizes.paddingLayout};
+  margin-bottom: 40px;
 `
 
 const LogoLink = styled(Link)`
