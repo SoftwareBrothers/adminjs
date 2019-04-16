@@ -1,4 +1,4 @@
-const BaseProperty = require('@backend/adapters/base-property')
+const BaseProperty = require('../../../src/backend/adapters/base-property')
 
 const expectedResult = {
   id: 'someID',

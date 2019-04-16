@@ -6,7 +6,7 @@ import styled from 'styled-components'
 import { sizes, colors } from '../../styles/variables'
 import StyledButton from './styled-button'
 import PropertyType from '../property-type'
-import { locationType, historyType, resourceType } from '../../types'
+import { locationType, historyType, resourceType, matchType } from '../../types'
 
 const FilterWrapper = styled.section`
   background: ${colors.darkBck};
@@ -63,6 +63,13 @@ class Filter extends React.Component {
     super(props)
     this.state = {
       filter: this.parseQuery(),
+    }
+  }
+
+  componentWillReceiveProps(nextProps) {
+    const { match } = this.props
+    if (nextProps.match.params.resourceId !== match.params.resourceId) {
+      this.setState({ filter: {} })
     }
   }
 
@@ -164,6 +171,7 @@ Filter.propTypes = {
   resource: resourceType.isRequired,
   isVisible: PropTypes.bool.isRequired,
   toggleFilter: PropTypes.func.isRequired,
+  match: matchType.isRequired,
 }
 
 export default withRouter(Filter)

@@ -142,42 +142,6 @@ class PropertyDecorator {
   }
 
   /**
-   * Renders element of given property as a list element
-   * @param {BaseRecord} record
-   * @return {String} HTML of an element
-   */
-  renderList(record) {
-    return this.render('list', record)
-  }
-
-  /**
-   * Renders element of given property in a show view
-   * @param {BaseRecord} record
-   * @return {String} HTML of an element
-   */
-  renderShow(record) {
-    return this.render('show', record)
-  }
-
-  /**
-   * Renders element of given property in a edit view
-   * @param {BaseRecord} record
-   * @return {String} HTML of an element
-   */
-  renderEdit(record) {
-    return this.render('edit', record)
-  }
-
-  /**
-   * Renders element of given property in a filter box
-   * @param {Options} [filters={}] already selected filters
-   * @return {String} HTML of an element
-   */
-  renderFilter(filters = {}) {
-    return this.render('filter', filters)
-  }
-
-  /**
    * If property should be treated as an ID field
    *
    * @return {Boolean}

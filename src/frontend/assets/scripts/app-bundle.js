@@ -18514,6 +18514,17 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
     }
 
     createClass(Filter, [{
+      key: "componentWillReceiveProps",
+      value: function componentWillReceiveProps(nextProps) {
+        var match = this.props.match;
+
+        if (nextProps.match.params.resourceId !== match.params.resourceId) {
+          this.setState({
+            filter: {}
+          });
+        }
+      }
+    }, {
       key: "parseQuery",
       value: function parseQuery() {
         var location = this.props.location;
@@ -18665,7 +18676,8 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
     history: historyType.isRequired,
     resource: resourceType.isRequired,
     isVisible: PropTypes$1.bool.isRequired,
-    toggleFilter: PropTypes$1.func.isRequired
+    toggleFilter: PropTypes$1.func.isRequired,
+    match: matchType.isRequired
   };
   var Filter$5 = reactRouterDom.withRouter(Filter$4);
 
