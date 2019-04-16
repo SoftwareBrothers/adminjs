@@ -42,8 +42,12 @@ export default class ValueBlock extends React.PureComponent {
 
 ValueBlock.propTypes = {
   icon: PropTypes.string,
-  value: PropTypes.string,
-  children: PropTypes.element,
+  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  children: PropTypes.oneOfType([
+    PropTypes.element,
+    PropTypes.arrayOf(PropTypes.element),
+    PropTypes.string,
+  ]),
   color: PropTypes.string,
 }
 

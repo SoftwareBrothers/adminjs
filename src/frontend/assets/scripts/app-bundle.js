@@ -1733,13 +1733,17 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
       value: function () {
         var _getDashboard = asyncToGenerator(
         /*#__PURE__*/
-        regenerator.mark(function _callee5(_ref5) {
-          var params;
+        regenerator.mark(function _callee5() {
+          var _ref5,
+              _ref5$params,
+              params,
+              _args5 = arguments;
+
           return regenerator.wrap(function _callee5$(_context5) {
             while (1) {
               switch (_context5.prev = _context5.next) {
                 case 0:
-                  params = _ref5.params;
+                  _ref5 = _args5.length > 0 && _args5[0] !== undefined ? _args5[0] : {}, _ref5$params = _ref5.params, params = _ref5$params === void 0 ? {} : _ref5$params;
                   return _context5.abrupt("return", this.client.get('/api/dashboard', {
                     params: params
                   }));
@@ -1752,7 +1756,7 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
           }, _callee5, this);
         }));
 
-        function getDashboard(_x5) {
+        function getDashboard() {
           return _getDashboard.apply(this, arguments);
         }
 
@@ -3695,7 +3699,7 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
 
   }).call(commonjsGlobal);
 
-
+  //# sourceMappingURL=performance-now.js.map
   });
 
   var root = typeof window === 'undefined' ? commonjsGlobal : window
@@ -19970,8 +19974,8 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
   }(React__default.PureComponent);
   ValueBlock.propTypes = {
     icon: PropTypes$1.string,
-    value: PropTypes$1.string,
-    children: PropTypes$1.element,
+    value: PropTypes$1.oneOfType([PropTypes$1.string, PropTypes$1.number]),
+    children: PropTypes$1.oneOfType([PropTypes$1.element, PropTypes$1.arrayOf(PropTypes$1.element), PropTypes$1.string]),
     color: PropTypes$1.string
   };
   ValueBlock.defaultProps = {
@@ -20000,7 +20004,7 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
   };
 
   DashboardHeader.propTypes = {
-    children: PropTypes$1.element
+    children: PropTypes$1.oneOfType([PropTypes$1.element, PropTypes$1.arrayOf(PropTypes$1.element)])
   };
   DashboardHeader.defaultProps = {
     children: null

@@ -33,7 +33,7 @@ const DashboardHeader = (props) => {
 }
 
 DashboardHeader.propTypes = {
-  children: PropTypes.element,
+  children: PropTypes.oneOfType([PropTypes.element, PropTypes.arrayOf(PropTypes.element)]),
 }
 
 DashboardHeader.defaultProps = {
