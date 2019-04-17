@@ -1,8 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
-import PropTypes from 'prop-types'
 
-import { propertyType } from '../../types'
+import { propertyType, childrenType } from '../../types'
 import { fonts, colors, sizes } from '../../styles/variables'
 
 const Property = styled.div`
@@ -31,7 +30,7 @@ const PropertyInShow = (props) => {
 
 PropertyInShow.propTypes = {
   property: propertyType.isRequired,
-  children: PropTypes.oneOfType([PropTypes.element, PropTypes.string]),
+  children: childrenType,
 }
 
 PropertyInShow.defaultProps = {

@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import PropTypes from 'prop-types'
 
 import { fonts, colors, sizes } from '../../styles/variables'
-import { propertyType } from '../../types'
+import { propertyType, childrenType } from '../../types'
 
 const Property = styled.div`
   margin-bottom: ${sizes.paddingLayout};
@@ -48,9 +48,11 @@ const PropertyInEdit = (props) => {
 }
 
 PropertyInEdit.propTypes = {
-  children: PropTypes.element,
+  children: childrenType,
   property: propertyType.isRequired,
-  error: PropTypes.string,
+  error: PropTypes.shape({
+    message: PropTypes.string,
+  }),
 }
 
 PropertyInEdit.defaultProps = {

@@ -354,8 +354,8 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
     params: PropTypes$1.object.isRequired,
     populated: PropTypes$1.object,
     errors: PropTypes$1.object,
-    id: PropTypes$1.string,
-    title: PropTypes$1.string
+    id: PropTypes$1.oneOfType([PropTypes$1.string, PropTypes$1.number]),
+    title: PropTypes$1.oneOfType([PropTypes$1.string, PropTypes$1.number])
   });
   var locationType = PropTypes$1.shape({
     pathname: PropTypes$1.string.isRequired
@@ -366,10 +366,11 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
   var matchType = PropTypes$1.shape({
     params: PropTypes$1.shape({
       resourceId: PropTypes$1.string,
-      recordId: PropTypes$1.string,
+      recordId: PropTypes$1.oneOfType([PropTypes$1.string, PropTypes$1.number]),
       actionName: PropTypes$1.string
     })
   });
+  var childrenType = PropTypes$1.oneOfType([PropTypes$1.element, PropTypes$1.arrayOf(PropTypes$1.element), PropTypes$1.string, PropTypes$1.number]);
 
   function _templateObject3() {
     var data = taggedTemplateLiteral(["\n  margin-right: ", ";\n"]);
@@ -1910,7 +1911,7 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
 
   PropertyInShow.propTypes = {
     property: propertyType.isRequired,
-    children: PropTypes$1.oneOfType([PropTypes$1.element, PropTypes$1.string])
+    children: childrenType
   };
   PropertyInShow.defaultProps = {
     children: null
@@ -1985,9 +1986,11 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
   };
 
   PropertyInEdit.propTypes = {
-    children: PropTypes$1.element,
+    children: childrenType,
     property: propertyType.isRequired,
-    error: PropTypes$1.string
+    error: PropTypes$1.shape({
+      message: PropTypes$1.string
+    })
   };
   PropertyInEdit.defaultProps = {
     error: null,
@@ -2073,7 +2076,7 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
 
   PropertyInFilter.propTypes = {
     property: propertyType.isRequired,
-    children: PropTypes$1.element
+    children: childrenType
   };
   PropertyInFilter.defaultProps = {
     children: null
@@ -18083,7 +18086,7 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
     actionPerformed: PropTypes$1.func.isRequired
   };
   ActionsDropdown.propTypes = {
-    children: PropTypes$1.node
+    children: childrenType
   };
   ActionsDropdown.defaultProps = {
     children: null
@@ -19975,7 +19978,7 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
   ValueBlock.propTypes = {
     icon: PropTypes$1.string,
     value: PropTypes$1.oneOfType([PropTypes$1.string, PropTypes$1.number]),
-    children: PropTypes$1.oneOfType([PropTypes$1.element, PropTypes$1.arrayOf(PropTypes$1.element), PropTypes$1.string]),
+    children: childrenType,
     color: PropTypes$1.string
   };
   ValueBlock.defaultProps = {
@@ -20004,7 +20007,7 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
   };
 
   DashboardHeader.propTypes = {
-    children: PropTypes$1.oneOfType([PropTypes$1.element, PropTypes$1.arrayOf(PropTypes$1.element)])
+    children: childrenType
   };
   DashboardHeader.defaultProps = {
     children: null

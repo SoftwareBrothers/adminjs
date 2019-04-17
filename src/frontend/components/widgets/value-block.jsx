@@ -4,6 +4,7 @@ import styled from 'styled-components'
 
 import BorderBox from '../layout/border-box'
 import { colors } from '../../styles/variables'
+import { childrenType } from '../../types'
 
 const Level = styled.div.attrs({
   className: 'level',
@@ -43,11 +44,7 @@ export default class ValueBlock extends React.PureComponent {
 ValueBlock.propTypes = {
   icon: PropTypes.string,
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  children: PropTypes.oneOfType([
-    PropTypes.element,
-    PropTypes.arrayOf(PropTypes.element),
-    PropTypes.string,
-  ]),
+  children: childrenType,
   color: PropTypes.string,
 }
 

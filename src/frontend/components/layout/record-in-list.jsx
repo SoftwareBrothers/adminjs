@@ -5,7 +5,7 @@ import styled from 'styled-components'
 import ActionButton from './action-button'
 import PropertyType from '../property-type'
 import { colors, sizes } from '../../styles/variables'
-import { resourceType, recordType } from '../../types'
+import { resourceType, recordType, childrenType } from '../../types'
 
 const Td = styled.td`
   &&& {
@@ -103,7 +103,7 @@ RecordInList.propTypes = {
 }
 
 ActionsDropdown.propTypes = {
-  children: PropTypes.node,
+  children: childrenType,
 }
 
 ActionsDropdown.defaultProps = {

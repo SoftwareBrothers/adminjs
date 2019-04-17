@@ -1,8 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
-import PropTypes from 'prop-types'
 
-import { propertyType } from '../../types'
+import { propertyType, childrenType } from '../../types'
 import { fonts, colors, sizes } from '../../styles/variables'
 
 const Property = styled.div`
@@ -46,7 +45,7 @@ const PropertyInFilter = (props) => {
 
 PropertyInFilter.propTypes = {
   property: propertyType.isRequired,
-  children: PropTypes.element,
+  children: childrenType,
 }
 
 PropertyInFilter.defaultProps = {

@@ -67,8 +67,8 @@ export const recordType = PropTypes.shape({
   params: PropTypes.object.isRequired,
   populated: PropTypes.object,
   errors: PropTypes.object,
-  id: PropTypes.string,
-  title: PropTypes.string,
+  id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  title: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 })
 
 export const locationType = PropTypes.shape({
@@ -82,7 +82,14 @@ export const historyType = PropTypes.shape({
 export const matchType = PropTypes.shape({
   params: PropTypes.shape({
     resourceId: PropTypes.string,
-    recordId: PropTypes.string,
+    recordId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     actionName: PropTypes.string,
   }),
 })
+
+export const childrenType = PropTypes.oneOfType([
+  PropTypes.element,
+  PropTypes.arrayOf(PropTypes.element),
+  PropTypes.string,
+  PropTypes.number,
+])
