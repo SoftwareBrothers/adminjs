@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import { propertyType, recordType } from '../../../types'
+import { simplifiedPropertyType, recordType } from '../../../types'
 import PropertyInEdit from '../../layout/property-in-edit'
 
 export default class Edit extends React.PureComponent {
@@ -31,7 +31,7 @@ export default class Edit extends React.PureComponent {
 }
 
 Edit.propTypes = {
-  property: propertyType.isRequired,
+  property: simplifiedPropertyType.isRequired,
   onChange: PropTypes.func.isRequired,
   record: recordType.isRequired,
 }

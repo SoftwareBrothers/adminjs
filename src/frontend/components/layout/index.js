@@ -14,6 +14,7 @@ import PropertyInShow from './property-in-show'
 import PropertyInEdit from './property-in-edit'
 import Columns from './columns'
 import Column from './column'
+import Label from './label'
 
 export {
   Sidebar,
@@ -32,4 +33,5 @@ export {
   PropertyInEdit,
   Columns,
   Column,
+  Label,
 }

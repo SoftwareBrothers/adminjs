@@ -5,7 +5,7 @@ import Select from 'react-select/lib/Async'
 import ApiClient from '../../../utils/api-client'
 import PropertyInEdit from '../../layout/property-in-edit'
 import selectStyles from '../../../styles/select-styles'
-import { propertyType, recordType } from '../../../types'
+import { simplifiedPropertyType, recordType } from '../../../types'
 
 export default class Edit extends React.Component {
   handleChange(selected) {
@@ -43,7 +43,7 @@ export default class Edit extends React.Component {
 }
 
 Edit.propTypes = {
-  property: propertyType.isRequired,
+  property: simplifiedPropertyType.isRequired,
   record: recordType.isRequired,
   onChange: PropTypes.func.isRequired,
 }

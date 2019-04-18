@@ -9,7 +9,6 @@ import reference from './reference'
 
 import { propertyType, resourceType, recordType } from '../../types'
 
-
 const types = {
   boolean,
   datetime,
@@ -67,3 +66,16 @@ PropertyType.defaultProps = {
   record: null,
   onChange: null,
 }
+
+const camelizePropertyType = type => ({
+  Edit: type.edit,
+  Show: type.show,
+  List: type.list,
+  Filter: type.filter,
+})
+
+PropertyType.DefaultType = camelizePropertyType(defaultType)
+PropertyType.Boolean = camelizePropertyType(boolean)
+PropertyType.DateTime = camelizePropertyType(datetime)
+PropertyType.RichText = camelizePropertyType(richtext)
+PropertyType.Reference = camelizePropertyType(reference)

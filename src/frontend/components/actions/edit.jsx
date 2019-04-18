@@ -31,16 +31,22 @@ class Edit extends React.Component {
     })
   }
 
-  handleChange(propertyName, value) {
-    this.setState(state => ({
-      record: {
-        ...state.record,
-        params: {
-          ...state.record.params,
-          [propertyName]: value,
+  handleChange(propertyOrRecord, value) {
+    if (typeof value === 'undefined' && propertyOrRecord.params) {
+      this.setState({
+        record: propertyOrRecord,
+      })
+    } else {
+      this.setState(state => ({
+        record: {
+          ...state.record,
+          params: {
+            ...state.record.params,
+            [propertyOrRecord]: value,
+          },
         },
-      },
-    }))
+      }))
+    }
   }
 
   handleSubmit(event) {

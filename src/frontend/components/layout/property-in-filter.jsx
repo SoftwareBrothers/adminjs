@@ -2,7 +2,8 @@ import React from 'react'
 import styled from 'styled-components'
 
 import { propertyType, childrenType } from '../../types'
-import { fonts, colors, sizes } from '../../styles/variables'
+import { colors, sizes } from '../../styles/variables'
+import Label from './label'
 
 const Property = styled.div`
   margin: ${sizes.paddingLayout} 0;
@@ -21,16 +22,6 @@ const Property = styled.div`
   & .icon {
     opacity: 0.25;
   }
-`
-
-const Label = styled.label`
-  display: block;
-  text-transform: uppercase;
-  font-size: ${fonts.min};
-  color: ${colors.lightText};
-  font-weight: normal;
-  margin: ${sizes.paddingMin} 0;
-  letter-spacing: 0.1em;
 `
 
 const PropertyInFilter = (props) => {

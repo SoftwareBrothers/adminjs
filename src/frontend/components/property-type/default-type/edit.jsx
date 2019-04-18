@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 import PropertyInEdit from '../../layout/property-in-edit'
-import { propertyType, recordType } from '../../../types'
+import { simplifiedPropertyType, recordType } from '../../../types'
 
 export default class Edit extends React.Component {
   handleChange(event) {
@@ -30,7 +30,7 @@ export default class Edit extends React.Component {
 }
 
 Edit.propTypes = {
-  property: propertyType.isRequired,
+  property: simplifiedPropertyType.isRequired,
   record: recordType.isRequired,
   onChange: PropTypes.func.isRequired,
 }

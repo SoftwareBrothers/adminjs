@@ -10,7 +10,7 @@ const initializeStore = (admin, currentAdmin) => {
   const store = createStore()
 
   store.dispatch(initializeResources(
-    admin.resources.map(r => {
+    admin.resources.map((r) => {
       try {
         return r.decorate().toJSON()
       } catch (e) {

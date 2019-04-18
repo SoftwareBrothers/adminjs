@@ -17,14 +17,27 @@ export const brandingType = PropTypes.shape({
 })
 
 export const propertyType = PropTypes.shape({
-  isId: PropTypes.bool.isRequired,
+  isId: PropTypes.bool.default,
   isSortable: PropTypes.bool.isRequired,
   isTitle: PropTypes.bool.isRequired,
   isVisible: PropTypes.bool.isRequired,
-  label: PropTypes.string.isRequired,
-  name: PropTypes.string.isRequired,
+  label: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+  name: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
   position: PropTypes.number.isRequired,
   type: PropTypes.string.isRequired,
+  reference: PropTypes.oneOfType([PropTypes.string]),
+})
+
+export const simplifiedPropertyType = PropTypes.shape({
+  isId: PropTypes.bool,
+  isSortable: PropTypes.bool,
+  isTitle: PropTypes.bool,
+  isVisible: PropTypes.bool,
+  label: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+  name: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+  position: PropTypes.number,
+  type: PropTypes.string,
+  reference: PropTypes.oneOfType([PropTypes.string]),
 })
 
 export const actionType = PropTypes.shape({

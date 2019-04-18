@@ -3,9 +3,9 @@ import { Link } from 'react-router-dom'
 
 import { sizes, colors, fonts } from '../../styles/variables'
 
-const StyledButton = styled(Link).attrs({
-  className: 'button',
-})`
+const StyledButton = styled(Link).attrs(({ primary }) => ({
+  className: `button${primary ? ' is-primary' : ''}`,
+}))`
   font-size: ${fonts.medium};
   border-radius: 0;
   border-color: ${colors.primary};

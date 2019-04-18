@@ -2,7 +2,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import { propertyType, recordType } from '../../../types'
+import { simplifiedPropertyType, recordType } from '../../../types'
 
 const toolbarOptions = [
   [{ header: [1, 2, 3, 4, 5, 6, false] }],
@@ -84,7 +84,7 @@ export default class Edit extends React.Component {
 }
 
 Edit.propTypes = {
-  property: propertyType.isRequired,
+  property: simplifiedPropertyType.isRequired,
   record: recordType.isRequired,
   onChange: PropTypes.func.isRequired,
 }

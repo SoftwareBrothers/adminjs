@@ -15,6 +15,8 @@ module.exports = {
     'prop-types',
     'admin-bro',
     'admin-bro/components',
+    'admin-bro/property-types',
+    'admin-bro/types',
     'admin-bro/style',
     'axios',
     'bloomer',
@@ -32,9 +34,11 @@ module.exports = {
     'react-router-dom': 'ReactRouterDOM',
     'admin-bro': 'AdminBro',
     'admin-bro/components': 'AdminBro.Components',
+    'admin-bro/property-types': 'AdminBro.PropertyTypes',
+    'admin-bro/types': 'AdminBro.types',
     'admin-bro/style': 'AdminBro.style',
   },
-  plugins: (babelConfig = {}) => [
+  plugins: (babelConfig = {}, commonJSConfig = {}) => [
     resolve({
       extensions: ['.mjs', '.js', '.jsx', '.json'],
     }),
@@ -42,7 +46,7 @@ module.exports = {
       'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development'),
       'process.env.IS_BROWSER': 'true',
     }),
-    commonjs(),
+    commonjs(commonJSConfig),
     babel({
       presets: [require.resolve('@babel/preset-react'), require.resolve('@babel/preset-env')],
       ...babelConfig,

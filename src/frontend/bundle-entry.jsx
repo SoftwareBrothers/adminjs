@@ -3,11 +3,13 @@ import { Provider } from 'react-redux'
 import { BrowserRouter } from 'react-router-dom'
 
 import App from './components/app/index'
+import PropertyTypes from './components/property-type'
 import createStore from './store/store'
 import widgets from './components/widgets'
 import * as components from './components/layout'
 import ApiClient from './utils/api-client'
 import * as style from './styles/variables'
+import * as types from './types'
 
 const Components = { ...AdminBro.Components, ...widgets, ...components }
 
@@ -21,4 +23,4 @@ const Application = (
   </Provider>
 )
 
-export default { Application, Components, ApiClient, style }
+export default { Application, Components, ApiClient, style, PropertyTypes, types }

@@ -2,8 +2,10 @@ import React from 'react'
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
 
-import { fonts, colors, sizes } from '../../styles/variables'
-import { propertyType, childrenType } from '../../types'
+import { colors, sizes } from '../../styles/variables'
+import { simplifiedPropertyType, childrenType } from '../../types'
+
+import Label from './label'
 
 const Property = styled.div`
   margin-bottom: ${sizes.paddingLayout};
@@ -15,20 +17,6 @@ const Property = styled.div`
     &:focus {
       border-color: ${colors.primary};
     }
-  }
-`
-
-const Label = styled.label.attrs({
-  className: 'label',
-})`
-  &&& {
-    display: block;
-    text-transform: uppercase;
-    font-size: ${fonts.min};
-    color: ${colors.lightText};
-    font-weight: normal;
-    margin: 0 0 ${sizes.paddingMin} 0;
-    letter-spacing: 0.1em;
   }
 `
 
@@ -49,7 +37,7 @@ const PropertyInEdit = (props) => {
 
 PropertyInEdit.propTypes = {
   children: childrenType,
-  property: propertyType.isRequired,
+  property: simplifiedPropertyType.isRequired,
   error: PropTypes.shape({
     message: PropTypes.string,
   }),
