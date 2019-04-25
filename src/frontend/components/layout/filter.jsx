@@ -129,7 +129,7 @@ class Filter extends React.Component {
   render() {
     const { resource, isVisible, toggleFilter } = this.props
     const { filter } = this.state
-    const properties = resource.editProperties
+    const properties = resource.filterProperties
     return (
       <FilterWrapper className={isVisible ? null : 'filter-hidden'}>
         <FilterContent>

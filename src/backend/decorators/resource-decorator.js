@@ -2,6 +2,7 @@ const _ = require('lodash')
 const BaseProperty = require('../adapters/base-property')
 const PropertyDecorator = require('./property-decorator')
 const ViewHelpers = require('../utils/view-helpers')
+const ConfigurationError = require('../utils/configuration-error')
 
 /**
  * Default maximum number of items which should be present in a list.
@@ -42,6 +43,7 @@ class ResourceDecorator {
    * @param  {ResourceOptions} [options]
    */
   constructor({ resource, admin, options = {} }) {
+    this.getPropertyByKey = this.getPropertyByKey.bind(this)
     this._resource = resource
     this._admin = admin
     this.h = new ViewHelpers({ options: admin.options })
@@ -147,13 +149,28 @@ class ResourceDecorator {
     return { name, icon }
   }
 
+  getPropertyByKey(propertyKey) {
+    const property = this.properties[propertyKey]
+    if (!property) {
+      throw new ConfigurationError(
+        `there is no property by the name of ${propertyKey} in resource ${this.getResourceName()}`,
+        'tutorial-04-customizing-resources.html',
+      )
+    }
+    return property
+  }
+
+  property(key) {
+    return this.properties[key]
+  }
+
   /**
    * Returns list of all properties which will be visible on the list
    * @return {Array<PropertyDecorator>}
    */
   getListProperties() {
     if (this.options.listProperties && this.options.listProperties.length) {
-      return this.options.listProperties.map(key => this.properties[key])
+      return this.options.listProperties.map(this.getPropertyByKey)
     }
     return Object.keys(this.properties)
       .filter(key => this.properties[key].isVisible('list'))
@@ -168,7 +185,7 @@ class ResourceDecorator {
    */
   getShowProperties() {
     if (this.options.showProperties && this.options.showProperties.length) {
-      return this.options.showProperties.map(key => this.properties[key])
+      return this.options.showProperties.map(this.getPropertyByKey)
     }
     return Object.keys(this.properties)
       .filter(key => this.properties[key].isVisible('show'))
@@ -181,7 +198,7 @@ class ResourceDecorator {
    */
   getEditProperties() {
     if (this.options.editProperties && this.options.editProperties.length) {
-      return this.options.editProperties.map(key => this.properties[key])
+      return this.options.editProperties.map(this.getPropertyByKey)
     }
     return Object.keys(this.properties)
       .filter(key => this.properties[key].isVisible('edit'))
@@ -194,7 +211,7 @@ class ResourceDecorator {
    */
   getFilterProperties() {
     if (this.options.filterProperties && this.options.filterProperties.length) {
-      return this.options.filterProperties.map(key => this.properties[key])
+      return this.options.filterProperties.map(this.getPropertyByKey)
     }
     return Object.keys(this.properties)
       .filter(key => this.properties[key].isVisible('filter'))
@@ -216,10 +233,6 @@ class ResourceDecorator {
         scripts: [...memo.scripts, ...property.headScripts().scripts],
         styles: [...memo.styles, ...property.headScripts().styles],
       }), { scripts: [], styles: [] })
-  }
-
-  property(propertyName) {
-    return this.properties[propertyName]
   }
 
   /**

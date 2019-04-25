@@ -18676,7 +18676,7 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
             isVisible = _this$props.isVisible,
             toggleFilter = _this$props.toggleFilter;
         var filter = this.state.filter;
-        var properties = resource.editProperties;
+        var properties = resource.filterProperties;
         return React__default.createElement(FilterWrapper, {
           className: isVisible ? null : 'filter-hidden'
         }, React__default.createElement(FilterContent, null, React__default.createElement(FilterLink, {
