@@ -28,10 +28,17 @@ export default class Edit extends React.Component {
     const { property, record } = this.props
     const error = record.errors && record.errors[property.name]
 
+    const reference = record.populated && record.populated[property.name]
+    const selectedOption = reference && {
+      value: reference.id,
+      label: reference.title,
+    }
+
     return (
       <PropertyInEdit property={property} error={error}>
         <Select
           cacheOptions
+          value={selectedOption}
           styles={selectStyles}
           defaultOptions
           loadOptions={this.loadOptions.bind(this)}

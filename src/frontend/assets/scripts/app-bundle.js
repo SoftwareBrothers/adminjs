@@ -315,7 +315,6 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
     isId: PropTypes$1.bool.default,
     isSortable: PropTypes$1.bool.isRequired,
     isTitle: PropTypes$1.bool.isRequired,
-    isVisible: PropTypes$1.bool.isRequired,
     label: PropTypes$1.oneOfType([PropTypes$1.string, PropTypes$1.number]).isRequired,
     name: PropTypes$1.oneOfType([PropTypes$1.string, PropTypes$1.number]).isRequired,
     position: PropTypes$1.number.isRequired,
@@ -382,7 +381,7 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
       actionName: PropTypes$1.string
     })
   });
-  var childrenType = PropTypes$1.oneOfType([PropTypes$1.element, PropTypes$1.arrayOf(PropTypes$1.element), PropTypes$1.string, PropTypes$1.number]);
+  var childrenType = PropTypes$1.oneOfType([PropTypes$1.element, PropTypes$1.arrayOf(PropTypes$1.oneOfType([PropTypes$1.element, PropTypes$1.arrayOf(PropTypes$1.element), PropTypes$1.string, PropTypes$1.number])), PropTypes$1.string, PropTypes$1.number]);
 
   var types = /*#__PURE__*/Object.freeze({
     pathsType: pathsType,
@@ -17702,11 +17701,17 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
             property = _this$props2.property,
             record = _this$props2.record;
         var error = record.errors && record.errors[property.name];
+        var reference = record.populated && record.populated[property.name];
+        var selectedOption = reference && {
+          value: reference.id,
+          label: reference.title
+        };
         return React__default.createElement(PropertyInEdit, {
           property: property,
           error: error
         }, React__default.createElement(Select$1, {
           cacheOptions: true,
+          value: selectedOption,
           styles: selectStyles,
           defaultOptions: true,
           loadOptions: this.loadOptions.bind(this),

@@ -20,7 +20,6 @@ export const propertyType = PropTypes.shape({
   isId: PropTypes.bool.default,
   isSortable: PropTypes.bool.isRequired,
   isTitle: PropTypes.bool.isRequired,
-  isVisible: PropTypes.bool.isRequired,
   label: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
   name: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
   position: PropTypes.number.isRequired,
@@ -102,7 +101,12 @@ export const matchType = PropTypes.shape({
 
 export const childrenType = PropTypes.oneOfType([
   PropTypes.element,
-  PropTypes.arrayOf(PropTypes.element),
+  PropTypes.arrayOf(PropTypes.oneOfType([
+    PropTypes.element,
+    PropTypes.arrayOf(PropTypes.element),
+    PropTypes.string,
+    PropTypes.number,
+  ])),
   PropTypes.string,
   PropTypes.number,
 ])

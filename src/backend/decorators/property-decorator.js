@@ -176,7 +176,6 @@ class PropertyDecorator {
       name: this.name(),
       label: this.label(),
       type: this.type(),
-      isVisible: this.isVisible(),
       reference: this._property.reference(),
       components: this.options.components,
     }
