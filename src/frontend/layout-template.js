@@ -38,7 +38,7 @@ const html = (admin, currentAdmin, location = '/') => {
       <script>
         window.REDUX_STATE = ${JSON.stringify(reduxState)};
         window.AdminBro = { Components: {} };
-        </script>
+      </script>
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
       <title>AdminBro - ${admin.options.branding.companyName}</title>

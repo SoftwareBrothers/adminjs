@@ -3711,7 +3711,7 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
 
   }).call(commonjsGlobal);
 
-
+  //# sourceMappingURL=performance-now.js.map
   });
 
   var root = typeof window === 'undefined' ? commonjsGlobal : window
@@ -20056,6 +20056,10 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
     DashboardHeader: DashboardHeader
   };
 
+  var env = {
+    NODE_ENV: "development"
+  };
+
   var Components = objectSpread({}, AdminBro.Components, widgets, components$1);
 
   var store = createStore(window.REDUX_STATE);
@@ -20068,7 +20072,8 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
     ApiClient: ApiClient,
     style: style,
     PropertyTypes: PropertyType,
-    types: types
+    types: types,
+    env: env
   };
 
   return bundleEntry;

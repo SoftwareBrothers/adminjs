@@ -11,6 +11,10 @@ import ApiClient from './utils/api-client'
 import * as style from './styles/variables'
 import * as types from './types'
 
+const env = {
+  NODE_ENV: process.env.NODE_ENV || 'development',
+}
+
 const Components = { ...AdminBro.Components, ...widgets, ...components }
 
 const store = createStore(window.REDUX_STATE)
@@ -23,4 +27,4 @@ const Application = (
   </Provider>
 )
 
-export default { Application, Components, ApiClient, style, PropertyTypes, types }
+export default { Application, Components, ApiClient, style, PropertyTypes, types, env }

@@ -57,8 +57,8 @@ const pkg = require('../package.json')
  *     companyName: 'XYZ c.o.'
  *   },
  *   assets: {
- *     styles: ['/style.css'],
- *     scripts: ['/scripts.js']
+ *     styles: [],
+ *     scripts: []
  *   }
  * })
  */
@@ -75,8 +75,8 @@ const defaults = {
   },
   dashboard: {},
   assets: {
-    styles: ['/style.css'],
-    scripts: ['/scripts.js'],
+    styles: [],
+    scripts: [],
   },
 }
 

@@ -45,6 +45,7 @@ module.exports = {
     replace({
       'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development'),
       'process.env.IS_BROWSER': 'true',
+      'process.env.': 'AdminBro.env.',
     }),
     commonjs(commonJSConfig),
     babel({

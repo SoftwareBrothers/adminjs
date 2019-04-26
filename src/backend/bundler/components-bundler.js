@@ -8,7 +8,10 @@ const entryPath = path.join(tmpPath, '.entry.js')
 
 async function build(admin) {
   const { Components } = admin.constructor
-  const entryFile = Object.keys(Components).map(c => (
+  const envs = Object.keys(admin.options.env || {}).map(env => (
+    `AdminBro.env.${env} = ${JSON.stringify(admin.options.env[env])}\n`
+  )).join('')
+  const entryFile = envs + Object.keys(Components).map(c => (
     [
       `import ${c} from '${Components[c]}'`,
       `AdminBro.Components.${c} = ${c}`,
