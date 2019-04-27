@@ -189,6 +189,7 @@ class ResourceDecorator {
     }
     return Object.keys(this.properties)
       .filter(key => this.properties[key].isVisible('show'))
+      .sort((key1, key2) => this.properties[key1].position() > this.properties[key2].position())
       .map(key => this.properties[key])
   }
 
@@ -202,6 +203,7 @@ class ResourceDecorator {
     }
     return Object.keys(this.properties)
       .filter(key => this.properties[key].isVisible('edit'))
+      .sort((key1, key2) => this.properties[key1].position() > this.properties[key2].position())
       .map(key => this.properties[key])
   }
 
@@ -215,6 +217,7 @@ class ResourceDecorator {
     }
     return Object.keys(this.properties)
       .filter(key => this.properties[key].isVisible('filter'))
+      .sort((key1, key2) => this.properties[key1].position() > this.properties[key2].position())
       .map(key => this.properties[key])
   }
 
