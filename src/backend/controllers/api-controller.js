@@ -83,10 +83,7 @@ class ApiController {
     })
 
     return {
-      records: resources.map(res => ({
-        title: res.param(titlePropertyName),
-        id: res.id(),
-      })),
+      records: resources.map(res => res.toJSON()),
     }
   }
 
