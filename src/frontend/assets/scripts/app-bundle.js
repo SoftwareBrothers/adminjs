@@ -2049,7 +2049,7 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
         var _this$props2 = this.props,
             property = _this$props2.property,
             record = _this$props2.record;
-        var value = record.params && record.params[property.name] || '';
+        var value = record.params && typeof record.params[property.name] !== 'undefined' ? record.params[property.name] : '';
         var error = record.errors && record.errors[property.name];
         return React__default.createElement(PropertyInEdit, {
           property: property,
@@ -11218,12 +11218,16 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
         var nextRecord = nextProps.record;
         var value = record.params && record.params[property.name] || '';
         var nextValue = nextRecord.params && nextRecord.params[property.name] || '';
-        return nextValue !== value;
-      }
-    }, {
-      key: "componentDidUpdate",
-      value: function componentDidUpdate() {
-        this.setupDatePicker();
+
+        if (nextValue !== value) {
+          if (nextValue) {
+            this.datepickerRef.current._flatpickr.jumpToDate(nextValue);
+          } else {
+            this.datepickerRef.current._flatpickr.input.value = '';
+          }
+        }
+
+        return false;
       }
     }, {
       key: "setupDatePicker",
@@ -11233,7 +11237,7 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
         var _this$props2 = this.props,
             record = _this$props2.record,
             property = _this$props2.property;
-        var defaultDate = record.params && record.params[property.name] || '';
+        var defaultDate = record.params && record.params[property.name] || null;
         var options = {
           format: 'Y-m-d'
         };
@@ -11247,7 +11251,6 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
         }
 
         var inst = flatpickr(this.datepickerRef.current, objectSpread({
-          format: 'Y-m-d H:i',
           defaultDate: defaultDate
         }, options));
         inst.config.onChange.push(function (dates, text) {
@@ -11260,7 +11263,7 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
         var _this$props3 = this.props,
             onChange = _this$props3.onChange,
             property = _this$props3.property;
-        onChange(property.name, value);
+        onChange(property.name, new Date(value));
       }
     }, {
       key: "render",
@@ -11456,7 +11459,7 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
           defaultDate: defaultDate
         }, options));
         inst.config.onChange.push(function (dates, text) {
-          _this2.handleChange(key, text);
+          _this2.handleChange(key, new Date(text));
         });
       }
     }, {
@@ -17657,7 +17660,7 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
         var _this$props = this.props,
             onChange = _this$props.onChange,
             property = _this$props.property;
-        onChange(property.name, selected.value);
+        onChange(property.name, selected.value, selected.record);
       }
     }, {
       key: "loadOptions",
@@ -17680,10 +17683,11 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
 
                 case 4:
                   records = _context.sent;
-                  return _context.abrupt("return", records.map(function (r) {
+                  return _context.abrupt("return", records.map(function (record) {
                     return {
-                      value: r.id,
-                      label: r.title
+                      value: record.id,
+                      label: record.title,
+                      record: record
                     };
                   }));
 
@@ -18788,7 +18792,7 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
     }) : resource.resourceActions.filter(function (ra) {
       return ra.name !== (action && action.name);
     });
-    var title = recordId ? action.name : resource.name;
+    var title = recordId ? action.label : resource.name;
     return React__default.createElement(HeaderWrapper, null, React__default.createElement(HeaderTitle, null, !toggleFilter && React__default.createElement(BackBtn, {
       to: h.listUrl({
         resourceId: resourceId
@@ -19052,12 +19056,21 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
 
     createClass(New, [{
       key: "handleChange",
-      value: function handleChange(propertyName, value) {
-        this.setState(function (state) {
-          return {
-            params: objectSpread({}, state.params, defineProperty({}, propertyName, value))
-          };
-        });
+      value: function handleChange(propertyOrRecord, value) {
+        if (typeof value === 'undefined' && propertyOrRecord.params) {
+          this.setState(function (state) {
+            return {
+              params: objectSpread({}, state.params, propertyOrRecord.params),
+              errors: objectSpread({}, state.errors, propertyOrRecord.errors)
+            };
+          });
+        } else {
+          this.setState(function (state) {
+            return {
+              params: objectSpread({}, state.params, defineProperty({}, propertyOrRecord, value))
+            };
+          });
+        }
       }
     }, {
       key: "handleSubmit",

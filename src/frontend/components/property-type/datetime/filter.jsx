@@ -60,7 +60,7 @@ export default class Filter extends React.Component {
       ...options,
     })
     inst.config.onChange.push((dates, text) => {
-      this.handleChange(key, text)
+      this.handleChange(key, new Date(text))
     })
   }
 

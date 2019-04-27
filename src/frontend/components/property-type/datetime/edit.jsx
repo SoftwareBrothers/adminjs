@@ -20,16 +20,20 @@ export default class Edit extends React.Component {
     const value = (record.params && record.params[property.name]) || ''
     const nextValue = (nextRecord.params && nextRecord.params[property.name]) || ''
 
-    return nextValue !== value
-  }
+    if (nextValue !== value) {
+      if (nextValue) {
+        this.datepickerRef.current._flatpickr.jumpToDate(nextValue)
+      } else {
+        this.datepickerRef.current._flatpickr.input.value = ''
+      }
+    }
 
-  componentDidUpdate() {
-    this.setupDatePicker()
+    return false
   }
 
   setupDatePicker() {
     const { record, property } = this.props
-    const defaultDate = (record.params && record.params[property.name]) || ''
+    const defaultDate = (record.params && record.params[property.name]) || null
     let options = {
       format: 'Y-m-d',
     }
@@ -41,7 +45,6 @@ export default class Edit extends React.Component {
       }
     }
     const inst = flatpickr(this.datepickerRef.current, {
-      format: 'Y-m-d H:i',
       defaultDate,
       ...options,
     })
@@ -52,7 +55,7 @@ export default class Edit extends React.Component {
 
   handleChange(value) {
     const { onChange, property } = this.props
-    onChange(property.name, value)
+    onChange(property.name, new Date(value))
   }
 
   render() {

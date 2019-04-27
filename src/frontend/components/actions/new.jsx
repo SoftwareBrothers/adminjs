@@ -18,13 +18,26 @@ class New extends React.Component {
     }
   }
 
-  handleChange(propertyName, value) {
-    this.setState(state => ({
-      params: {
-        ...state.params,
-        [propertyName]: value,
-      },
-    }))
+  handleChange(propertyOrRecord, value) {
+    if (typeof value === 'undefined' && propertyOrRecord.params) {
+      this.setState(state => ({
+        params: {
+          ...state.params,
+          ...propertyOrRecord.params,
+        },
+        errors: {
+          ...state.errors,
+          ...propertyOrRecord.errors,
+        },
+      }))
+    } else {
+      this.setState(state => ({
+        params: {
+          ...state.params,
+          [propertyOrRecord]: value,
+        },
+      }))
+    }
   }
 
   handleSubmit(event) {

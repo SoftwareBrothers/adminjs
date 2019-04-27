@@ -10,7 +10,7 @@ import { simplifiedPropertyType, recordType } from '../../../types'
 export default class Edit extends React.Component {
   handleChange(selected) {
     const { onChange, property } = this.props
-    onChange(property.name, selected.value)
+    onChange(property.name, selected.value, selected.record)
   }
 
   async loadOptions(inputValue) {
@@ -21,7 +21,7 @@ export default class Edit extends React.Component {
       resourceId: property.reference,
       query: inputValue,
     })
-    return records.map(r => ({ value: r.id, label: r.title }))
+    return records.map(record => ({ value: record.id, label: record.title, record }))
   }
 
   render() {

@@ -12,7 +12,9 @@ export default class Edit extends React.Component {
 
   render() {
     const { property, record } = this.props
-    const value = (record.params && record.params[property.name]) || ''
+    const value = (record.params && typeof record.params[property.name] !== 'undefined')
+      ? record.params[property.name]
+      : ''
     const error = record.errors && record.errors[property.name]
     return (
       <PropertyInEdit property={property} error={error}>
