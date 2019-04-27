@@ -35,11 +35,13 @@ class Breadcrumbs extends React.PureComponent {
   }
 
   renderAction() {
-    const { actionName } = this.props
+    const { actionName, resource } = this.props
+    const action = resource.resourceActions.find(a => a.name === actionName) ||
+      resource.recordActions.find(a => a.name === actionName)
     if (actionName) {
       return (
         <li className="is-active">
-          <BreadcrumbLink href="#">{actionName}</BreadcrumbLink>
+          <BreadcrumbLink href="#">{action.label}</BreadcrumbLink>
         </li>
       )
     }

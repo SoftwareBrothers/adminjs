@@ -804,14 +804,21 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
     }, {
       key: "renderAction",
       value: function renderAction() {
-        var actionName = this.props.actionName;
+        var _this$props2 = this.props,
+            actionName = _this$props2.actionName,
+            resource = _this$props2.resource;
+        var action = resource.resourceActions.find(function (a) {
+          return a.name === actionName;
+        }) || resource.recordActions.find(function (a) {
+          return a.name === actionName;
+        });
 
         if (actionName) {
           return React__default.createElement("li", {
             className: "is-active"
           }, React__default.createElement(BreadcrumbLink, {
             href: "#"
-          }, actionName));
+          }, action.label));
         }
 
         return null;
