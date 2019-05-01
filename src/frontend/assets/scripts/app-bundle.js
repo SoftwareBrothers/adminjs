@@ -18805,8 +18805,18 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
   };
   var Filter$5 = reactRouterDom.withRouter(Filter$4);
 
-  function _templateObject4() {
+  function _templateObject5() {
     var data = taggedTemplateLiteral(["\n  ", " {\n    margin-left: ", ";\n  }\n"]);
+
+    _templateObject5 = function _templateObject5() {
+      return data;
+    };
+
+    return data;
+  }
+
+  function _templateObject4() {
+    var data = taggedTemplateLiteral(["\n  font-size: ", ";\n  font-weight: normal;\n"]);
 
     _templateObject4 = function _templateObject4() {
       return data;
@@ -18816,7 +18826,7 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
   }
 
   function _templateObject3$4() {
-    var data = taggedTemplateLiteral(["\n  font-size: ", ";\n  font-weight: normal;\n"]);
+    var data = taggedTemplateLiteral(["\n  border-radius: 50%;\n  width: ", ";\n  height: ", ";\n  color: ", ";\n  font-size: ", ";\n  padding: ", ";\n  background-color: ", ";\n  text-align: center;\n  margin-right: ", ";\n  &:hover{\n    background-color: ", ";\n    color: #fff;\n  }\n"]);
 
     _templateObject3$4 = function _templateObject3() {
       return data;
@@ -18826,7 +18836,7 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
   }
 
   function _templateObject2$8() {
-    var data = taggedTemplateLiteral(["\n  border-radius: 50%;\n  width: ", ";\n  height: ", ";\n  color: ", ";\n  font-size: ", ";\n  padding: ", ";\n  background-color: ", ";\n  text-align: center;\n  margin-right: ", ";\n  &:hover{\n    background-color: ", ";\n    color: #fff;\n  }\n"]);
+    var data = taggedTemplateLiteral(["\n  background: ", ";\n  color: #fff;\n  margin-left: ", ";\n"]);
 
     _templateObject2$8 = function _templateObject2() {
       return data;
@@ -18847,13 +18857,16 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
   var HeaderWrapper = styled__default.section.attrs({
     className: 'level'
   })(_templateObject$j(), sizes.padding);
-  var BackBtn = styled__default(reactRouterDom.Link)(_templateObject2$8(), sizes.paddingLayout, sizes.paddingLayout, colors.lightText, fonts.base, sizes.paddingMin, colors.superLightBack, sizes.padding, colors.lightText);
+  var Tag = styled__default.span.attrs({
+    className: 'tag'
+  })(_templateObject2$8(), colors.primary, sizes.padding);
+  var BackBtn = styled__default(reactRouterDom.Link)(_templateObject3$4(), sizes.paddingLayout, sizes.paddingLayout, colors.lightText, fonts.base, sizes.paddingMin, colors.superLightBack, sizes.padding, colors.lightText);
   var HeaderTitle = styled__default.h1.attrs({
     className: 'level-left'
-  })(_templateObject3$4(), fonts.header);
+  })(_templateObject4(), fonts.header);
   var HeaderButtons = styled__default.div.attrs({
     className: 'level-right'
-  })(_templateObject4(), StyledButton, sizes.padding);
+  })(_templateObject5(), StyledButton, sizes.padding);
 
   var ActionHeader = function ActionHeader(props) {
     var h = new viewHelpers();
@@ -18861,7 +18874,8 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
         toggleFilter = props.toggleFilter,
         actionPerformed = props.actionPerformed,
         recordId = props.recordId,
-        action = props.action;
+        action = props.action,
+        tag = props.tag;
     var resourceId = resource.id;
     var actions = recordId ? resource.recordActions.filter(function (ra) {
       return ra.name !== action.name;
@@ -18875,7 +18889,7 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
       })
     }, React__default.createElement("i", {
       className: "icomoon-pagination-left"
-    })), title), React__default.createElement(HeaderButtons, null, actions.map(function (headerAction) {
+    })), title, tag && React__default.createElement(Tag, null, tag)), React__default.createElement(HeaderButtons, null, actions.map(function (headerAction) {
       return React__default.createElement(ActionButton$1, {
         action: headerAction,
         key: headerAction.name,
@@ -18901,13 +18915,15 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
     toggleFilter: PropTypes$1.func,
     actionPerformed: PropTypes$1.func,
     recordId: PropTypes$1.string,
-    action: actionType
+    action: actionType,
+    tag: PropTypes$1.oneOfType([PropTypes$1.string, PropTypes$1.number])
   };
   ActionHeader.defaultProps = {
     toggleFilter: null,
     actionPerformed: null,
     recordId: null,
-    action: null
+    action: null,
+    tag: null
   };
 
   function _templateObject$k() {
@@ -19730,6 +19746,8 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
 
       _this = possibleConstructorReturn(this, getPrototypeOf(Resource).call(this, props));
       var location = props.location;
+      _this.toggleFilter = _this.toggleFilter.bind(assertThisInitialized(assertThisInitialized(_this)));
+      _this.handleActionPerformed = _this.handleActionPerformed.bind(assertThisInitialized(assertThisInitialized(_this)));
       _this.resource = _this.currentResource();
       _this.state = {
         filterVisible: queryHasFilter(location.search),
@@ -19823,13 +19841,14 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
           resource: resource
         }), React__default.createElement(ActionHeader, {
           resource: resource,
-          toggleFilter: this.toggleFilter.bind(this),
-          actionPerformed: this.handleActionPerformed.bind(this)
+          tag: total,
+          toggleFilter: this.toggleFilter,
+          actionPerformed: this.handleActionPerformed
         }), React__default.createElement(BorderBox, null, React__default.createElement(RecordsTable, {
           resource: this.resource,
           records: records,
           paths: paths,
-          actionPerformed: this.handleActionPerformed.bind(this)
+          actionPerformed: this.handleActionPerformed
         }), React__default.createElement(Paginate$1, {
           page: page,
           perPage: perPage,
@@ -19838,7 +19857,7 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
           resource: this.resource,
           search: search,
           isVisible: filterVisible,
-          toggleFilter: this.toggleFilter.bind(this)
+          toggleFilter: this.toggleFilter
         }));
       }
     }]);

@@ -19,6 +19,14 @@ const HeaderWrapper = styled.section.attrs({
   }
 `
 
+const Tag = styled.span.attrs({
+  className: 'tag',
+})`
+  background: ${colors.primary};
+  color: #fff;
+  margin-left: ${sizes.padding};
+`
+
 const BackBtn = styled(Link)`
   border-radius: 50%;
   width: ${sizes.paddingLayout};
@@ -52,7 +60,9 @@ const HeaderButtons = styled.div.attrs({
 
 const ActionHeader = (props) => {
   const h = new ViewHelpers()
-  const { resource, toggleFilter, actionPerformed, recordId, action } = props
+  const {
+    resource, toggleFilter, actionPerformed, recordId, action, tag,
+  } = props
   const resourceId = resource.id
   const actions = recordId
     ? resource.recordActions.filter(ra => ra.name !== action.name)
@@ -68,6 +78,7 @@ const ActionHeader = (props) => {
           </BackBtn>
         )}
         {title}
+        {tag && (<Tag>{tag}</Tag>)}
       </HeaderTitle>
       <HeaderButtons>
         {actions.map(headerAction => (
@@ -99,6 +110,7 @@ ActionHeader.propTypes = {
   actionPerformed: PropTypes.func,
   recordId: PropTypes.string,
   action: actionType,
+  tag: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 }
 
 ActionHeader.defaultProps = {
@@ -106,6 +118,7 @@ ActionHeader.defaultProps = {
   actionPerformed: null,
   recordId: null,
   action: null,
+  tag: null,
 }
 
 export default ActionHeader

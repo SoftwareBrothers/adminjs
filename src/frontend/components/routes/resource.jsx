@@ -22,6 +22,8 @@ class Resource extends React.Component {
   constructor(props) {
     super(props)
     const { location } = props
+    this.toggleFilter = this.toggleFilter.bind(this)
+    this.handleActionPerformed = this.handleActionPerformed.bind(this)
     this.resource = this.currentResource()
 
     this.state = {
@@ -92,15 +94,16 @@ class Resource extends React.Component {
           <Breadcrumbs resource={resource} />
           <ActionHeader
             resource={resource}
-            toggleFilter={this.toggleFilter.bind(this)}
-            actionPerformed={this.handleActionPerformed.bind(this)}
+            tag={total}
+            toggleFilter={this.toggleFilter}
+            actionPerformed={this.handleActionPerformed}
           />
           <BorderBox>
             <RecordsTable
               resource={this.resource}
               records={records}
               paths={paths}
-              actionPerformed={this.handleActionPerformed.bind(this)}
+              actionPerformed={this.handleActionPerformed}
             />
             <Paginate
               page={page}
@@ -113,7 +116,7 @@ class Resource extends React.Component {
           resource={this.resource}
           search={search}
           isVisible={filterVisible}
-          toggleFilter={this.toggleFilter.bind(this)}
+          toggleFilter={this.toggleFilter}
         />
       </Wrapper>
     )
