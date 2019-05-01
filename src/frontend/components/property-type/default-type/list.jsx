@@ -20,8 +20,10 @@ export default class List extends React.PureComponent {
       )
     }
 
+    const className = property.availableValues ? 'tag' : ''
+
     return (
-      <span>{value}</span>
+      <span className={className}>{value}</span>
     )
   }
 }

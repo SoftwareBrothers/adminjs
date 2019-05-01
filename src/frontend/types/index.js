@@ -24,6 +24,10 @@ export const propertyType = PropTypes.shape({
   name: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
   position: PropTypes.number.isRequired,
   type: PropTypes.string.isRequired,
+  availableValues: PropTypes.arrayOf(PropTypes.shape({
+    title: PropTypes.string,
+    value: PropTypes.string,
+  })),
   reference: PropTypes.oneOfType([PropTypes.string]),
 })
 
@@ -36,6 +40,10 @@ export const simplifiedPropertyType = PropTypes.shape({
   name: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
   position: PropTypes.number,
   type: PropTypes.string,
+  availableValues: PropTypes.arrayOf(PropTypes.shape({
+    title: PropTypes.string,
+    value: PropTypes.string,
+  })),
   reference: PropTypes.oneOfType([PropTypes.string]),
 })
 

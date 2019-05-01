@@ -97,6 +97,17 @@ class BaseProperty {
   }
 
   /**
+   * Returns all available values which field can accept. It is used in case of
+   * enums
+   *
+   * @return  {Array<String> | null}  array of all available values or null when field
+   *                                  is not an enum.
+   */
+  availableValues() {
+    return null
+  }
+
+  /**
    * Indicates if given property can be sorted
    * @return {Boolean}
    */

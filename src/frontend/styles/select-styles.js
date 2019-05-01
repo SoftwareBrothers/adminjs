@@ -39,6 +39,7 @@ const filterStyles = {
     borderRadius: '0px',
     borderColor: colors.border,
     background: colors.darkBck,
+    zIndex: 5,
   }),
 }
 

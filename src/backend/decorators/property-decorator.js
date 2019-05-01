@@ -110,6 +110,17 @@ class PropertyDecorator {
     return this.options.type
   }
 
+  availableValues() {
+    if (typeof this.options.availableValues === 'undefined') {
+      const values = this._property.availableValues()
+      if (values) {
+        return values.map(val => ({ value: val, label: val }))
+      }
+      return null
+    }
+    return this.options.availableValues
+  }
+
   /**
    * Indicates if given property should be visible
    *
@@ -173,6 +184,7 @@ class PropertyDecorator {
       isId: this.isId(),
       position: this.position(),
       isSortable: this.isSortable(),
+      availableValues: this.availableValues(),
       name: this.name(),
       label: this.label(),
       type: this.type(),

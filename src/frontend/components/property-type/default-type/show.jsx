@@ -9,9 +9,11 @@ export default class Show extends React.PureComponent {
 
     const value = record.params[property.name]
 
+    const className = property.availableValues ? 'tag' : ''
+
     return (
       <PropertyInShow property={property}>
-        {value}
+        <span className={className}>{value}</span>
       </PropertyInShow>
     )
   }

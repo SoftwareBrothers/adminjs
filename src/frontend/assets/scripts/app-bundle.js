@@ -319,6 +319,10 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
     name: PropTypes$1.oneOfType([PropTypes$1.string, PropTypes$1.number]).isRequired,
     position: PropTypes$1.number.isRequired,
     type: PropTypes$1.string.isRequired,
+    availableValues: PropTypes$1.arrayOf(PropTypes$1.shape({
+      title: PropTypes$1.string,
+      value: PropTypes$1.string
+    })),
     reference: PropTypes$1.oneOfType([PropTypes$1.string])
   });
   var simplifiedPropertyType = PropTypes$1.shape({
@@ -330,6 +334,10 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
     name: PropTypes$1.oneOfType([PropTypes$1.string, PropTypes$1.number]).isRequired,
     position: PropTypes$1.number,
     type: PropTypes$1.string,
+    availableValues: PropTypes$1.arrayOf(PropTypes$1.shape({
+      title: PropTypes$1.string,
+      value: PropTypes$1.string
+    })),
     reference: PropTypes$1.oneOfType([PropTypes$1.string])
   });
   var actionType = PropTypes$1.shape({
@@ -1975,9 +1983,12 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
             property = _this$props.property,
             record = _this$props.record;
         var value = record.params[property.name];
+        var className = property.availableValues ? 'tag' : '';
         return React__default.createElement(PropertyInShow, {
           property: property
-        }, value);
+        }, React__default.createElement("span", {
+          className: className
+        }, value));
       }
     }]);
 
@@ -1986,359 +1997,6 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
   Show.propTypes = {
     property: propertyType.isRequired,
     record: recordType.isRequired
-  };
-
-  function _templateObject$c() {
-    var data = taggedTemplateLiteral(["\n  margin-bottom: ", ";\n\n  & input {\n    border-radius: 0;\n    border-color: ", ";\n    box-shadow: none;\n    &:focus {\n      border-color: ", ";\n    }\n  }\n"]);
-
-    _templateObject$c = function _templateObject() {
-      return data;
-    };
-
-    return data;
-  }
-  var Property$1 = styled__default.div(_templateObject$c(), sizes.paddingLayout, colors.border, colors.primary);
-
-  var PropertyInEdit = function PropertyInEdit(props) {
-    var children = props.children,
-        property = props.property,
-        error = props.error;
-    return React__default.createElement(Property$1, null, React__default.createElement(Label, {
-      htmlFor: property.name
-    }, property.label), React__default.createElement("div", {
-      className: "control"
-    }, children), error && React__default.createElement("div", {
-      className: "help is-danger"
-    }, error.message));
-  };
-
-  PropertyInEdit.propTypes = {
-    children: childrenType,
-    property: simplifiedPropertyType.isRequired,
-    error: PropTypes$1.shape({
-      message: PropTypes$1.string
-    })
-  };
-  PropertyInEdit.defaultProps = {
-    error: null,
-    children: null
-  };
-
-  var Edit =
-  /*#__PURE__*/
-  function (_React$Component) {
-    inherits(Edit, _React$Component);
-
-    function Edit() {
-      classCallCheck(this, Edit);
-
-      return possibleConstructorReturn(this, getPrototypeOf(Edit).apply(this, arguments));
-    }
-
-    createClass(Edit, [{
-      key: "handleChange",
-      value: function handleChange(event) {
-        var _this$props = this.props,
-            onChange = _this$props.onChange,
-            property = _this$props.property;
-        onChange(property.name, event.target.value);
-      }
-    }, {
-      key: "render",
-      value: function render() {
-        var _this$props2 = this.props,
-            property = _this$props2.property,
-            record = _this$props2.record;
-        var value = record.params && typeof record.params[property.name] !== 'undefined' ? record.params[property.name] : '';
-        var error = record.errors && record.errors[property.name];
-        return React__default.createElement(PropertyInEdit, {
-          property: property,
-          error: error
-        }, React__default.createElement("input", {
-          type: "text",
-          className: "input",
-          id: property.name,
-          name: property.name,
-          onChange: this.handleChange.bind(this),
-          value: value
-        }));
-      }
-    }]);
-
-    return Edit;
-  }(React__default.Component);
-  Edit.propTypes = {
-    property: simplifiedPropertyType.isRequired,
-    record: recordType.isRequired,
-    onChange: PropTypes$1.func.isRequired
-  };
-
-  function _templateObject$d() {
-    var data = taggedTemplateLiteral(["\n  margin: ", " 0;\n\n  & input {\n    border-radius: 0;\n    border-color: ", ";\n    box-shadow: none;\n    background: transparent;\n    color: ", ";\n\n    &:focus {\n      border-color: ", ";\n    }\n  }\n  & .icon {\n    opacity: 0.25;\n  }\n"]);
-
-    _templateObject$d = function _templateObject() {
-      return data;
-    };
-
-    return data;
-  }
-  var Property$2 = styled__default.div(_templateObject$d(), sizes.paddingLayout, colors.borderOnDark, colors.lightText, colors.primary);
-
-  var PropertyInFilter = function PropertyInFilter(props) {
-    var property = props.property,
-        children = props.children;
-    return React__default.createElement(Property$2, null, React__default.createElement(Label, null, property.label), children);
-  };
-
-  PropertyInFilter.propTypes = {
-    property: propertyType.isRequired,
-    children: childrenType
-  };
-  PropertyInFilter.defaultProps = {
-    children: null
-  };
-
-  var Filter =
-  /*#__PURE__*/
-  function (_React$PureComponent) {
-    inherits(Filter, _React$PureComponent);
-
-    function Filter() {
-      classCallCheck(this, Filter);
-
-      return possibleConstructorReturn(this, getPrototypeOf(Filter).apply(this, arguments));
-    }
-
-    createClass(Filter, [{
-      key: "handleChange",
-      value: function handleChange(event) {
-        var _this$props = this.props,
-            onChange = _this$props.onChange,
-            property = _this$props.property;
-        onChange(property.name, event.target.value);
-      }
-    }, {
-      key: "render",
-      value: function render() {
-        var _this$props2 = this.props,
-            property = _this$props2.property,
-            filter = _this$props2.filter;
-        var filterKey = "filter-".concat(property.name);
-        var value = filter[property.name] || '';
-        return React__default.createElement(PropertyInFilter, {
-          property: property
-        }, React__default.createElement("div", {
-          className: "control has-icons-left"
-        }, React__default.createElement("span", {
-          className: "icon is-small is-right"
-        }, React__default.createElement("i", {
-          className: "fas fa-search"
-        })), React__default.createElement("input", {
-          type: "text",
-          className: "input filter",
-          name: filterKey,
-          onChange: this.handleChange.bind(this),
-          value: value
-        })));
-      }
-    }]);
-
-    return Filter;
-  }(React__default.PureComponent);
-  Filter.propTypes = {
-    property: propertyType.isRequired,
-    onChange: PropTypes$1.func.isRequired,
-    // eslint-disable-next-line react/forbid-prop-types
-    filter: PropTypes$1.object
-  };
-  Filter.defaultProps = {
-    filter: {}
-  };
-
-  var List =
-  /*#__PURE__*/
-  function (_React$PureComponent) {
-    inherits(List, _React$PureComponent);
-
-    function List() {
-      classCallCheck(this, List);
-
-      return possibleConstructorReturn(this, getPrototypeOf(List).apply(this, arguments));
-    }
-
-    createClass(List, [{
-      key: "render",
-      value: function render() {
-        var _this$props = this.props,
-            property = _this$props.property,
-            record = _this$props.record,
-            resource = _this$props.resource;
-        var showAction = resource.recordActions.find(function (a) {
-          return a.name === 'show';
-        });
-        var value = record.params[property.name];
-
-        if (resource.titleProperty.name === property.name && showAction) {
-          var h = new viewHelpers();
-          var href = h.recordActionUrl({
-            resourceId: resource.id,
-            recordId: record.id,
-            actionName: 'show'
-          });
-          return React__default.createElement(reactRouterDom.Link, {
-            to: href
-          }, value);
-        }
-
-        return React__default.createElement("span", null, value);
-      }
-    }]);
-
-    return List;
-  }(React__default.PureComponent);
-  List.propTypes = {
-    property: propertyType.isRequired,
-    record: recordType.isRequired,
-    resource: resourceType.isRequired
-  };
-
-  var defaultType = {
-    show: Show,
-    edit: Edit,
-    filter: Filter,
-    list: List
-  };
-
-  var Edit$1 =
-  /*#__PURE__*/
-  function (_React$PureComponent) {
-    inherits(Edit, _React$PureComponent);
-
-    function Edit() {
-      classCallCheck(this, Edit);
-
-      return possibleConstructorReturn(this, getPrototypeOf(Edit).apply(this, arguments));
-    }
-
-    createClass(Edit, [{
-      key: "handleChange",
-      value: function handleChange(event) {
-        var _this$props = this.props,
-            property = _this$props.property,
-            onChange = _this$props.onChange;
-        var checked = event.target.checked;
-        onChange(property.name, checked);
-      }
-    }, {
-      key: "render",
-      value: function render() {
-        var _this$props2 = this.props,
-            property = _this$props2.property,
-            record = _this$props2.record;
-        var value = record.params && record.params[property.name] || '';
-        var error = record.errors && record.errors[property.name];
-        return React__default.createElement(PropertyInEdit, {
-          property: property,
-          error: error
-        }, React__default.createElement("input", {
-          type: "checkbox",
-          className: "checkbox",
-          id: property.name,
-          name: property.name,
-          onChange: this.handleChange.bind(this),
-          checked: value
-        }));
-      }
-    }]);
-
-    return Edit;
-  }(React__default.PureComponent);
-  Edit$1.propTypes = {
-    property: simplifiedPropertyType.isRequired,
-    onChange: PropTypes$1.func.isRequired,
-    record: recordType.isRequired
-  };
-
-  var mapValue = (function (value) {
-    return value ? 'Yes' : 'No';
-  });
-
-  var Show$1 =
-  /*#__PURE__*/
-  function (_React$PureComponent) {
-    inherits(Show, _React$PureComponent);
-
-    function Show() {
-      classCallCheck(this, Show);
-
-      return possibleConstructorReturn(this, getPrototypeOf(Show).apply(this, arguments));
-    }
-
-    createClass(Show, [{
-      key: "render",
-      value: function render() {
-        var _this$props = this.props,
-            property = _this$props.property,
-            record = _this$props.record;
-        var value = mapValue(record.params[property.name]);
-        return React__default.createElement(PropertyInShow, {
-          property: property
-        }, value);
-      }
-    }]);
-
-    return Show;
-  }(React__default.PureComponent);
-  Show$1.propTypes = {
-    property: propertyType.isRequired,
-    record: recordType.isRequired
-  };
-
-  var List$1 =
-  /*#__PURE__*/
-  function (_React$PureComponent) {
-    inherits(List, _React$PureComponent);
-
-    function List() {
-      classCallCheck(this, List);
-
-      return possibleConstructorReturn(this, getPrototypeOf(List).apply(this, arguments));
-    }
-
-    createClass(List, [{
-      key: "render",
-      value: function render() {
-        var _this$props = this.props,
-            property = _this$props.property,
-            record = _this$props.record,
-            resource = _this$props.resource;
-        var showAction = resource.recordActions.find(function (a) {
-          return a.name === 'show';
-        });
-        var value = mapValue(record.params[property.name]);
-
-        if (resource.titleProperty.name === property.name && showAction) {
-          var h = new viewHelpers();
-          var href = h.recordActionUrl({
-            resourceId: resource.id,
-            recordId: record.id,
-            actionName: 'show'
-          });
-          return React__default.createElement(reactRouterDom.Link, {
-            to: href
-          }, value);
-        }
-
-        return React__default.createElement("span", null, value);
-      }
-    }]);
-
-    return List;
-  }(React__default.PureComponent);
-  List$1.propTypes = {
-    property: propertyType.isRequired,
-    record: recordType.isRequired,
-    resource: resourceType.isRequired
   };
 
   var shallowEqual = function shallowEqual(newValue, oldValue) {
@@ -11089,6 +10747,147 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
 
   var index$1$1 = manageState(Select);
 
+  function _templateObject$c() {
+    var data = taggedTemplateLiteral(["\n  margin-bottom: ", ";\n\n  & input {\n    border-radius: 0;\n    border-color: ", ";\n    box-shadow: none;\n    &:focus {\n      border-color: ", ";\n    }\n  }\n"]);
+
+    _templateObject$c = function _templateObject() {
+      return data;
+    };
+
+    return data;
+  }
+  var Property$1 = styled__default.div(_templateObject$c(), sizes.paddingLayout, colors.border, colors.primary);
+
+  var PropertyInEdit = function PropertyInEdit(props) {
+    var children = props.children,
+        property = props.property,
+        error = props.error;
+    return React__default.createElement(Property$1, null, React__default.createElement(Label, {
+      htmlFor: property.name
+    }, property.label), React__default.createElement("div", {
+      className: "control"
+    }, children), error && React__default.createElement("div", {
+      className: "help is-danger"
+    }, error.message));
+  };
+
+  PropertyInEdit.propTypes = {
+    children: childrenType,
+    property: simplifiedPropertyType.isRequired,
+    error: PropTypes$1.shape({
+      message: PropTypes$1.string
+    })
+  };
+  PropertyInEdit.defaultProps = {
+    error: null,
+    children: null
+  };
+
+  var Edit =
+  /*#__PURE__*/
+  function (_React$Component) {
+    inherits(Edit, _React$Component);
+
+    function Edit(props) {
+      var _this;
+
+      classCallCheck(this, Edit);
+
+      _this = possibleConstructorReturn(this, getPrototypeOf(Edit).call(this, props));
+      _this.handleInputChange = _this.handleInputChange.bind(assertThisInitialized(assertThisInitialized(_this)));
+      _this.handleSelectChange = _this.handleSelectChange.bind(assertThisInitialized(assertThisInitialized(_this)));
+      return _this;
+    }
+
+    createClass(Edit, [{
+      key: "handleInputChange",
+      value: function handleInputChange(event) {
+        var _this$props = this.props,
+            onChange = _this$props.onChange,
+            property = _this$props.property;
+        onChange(property.name, event.target.value);
+      }
+    }, {
+      key: "handleSelectChange",
+      value: function handleSelectChange(selected) {
+        var _this$props2 = this.props,
+            onChange = _this$props2.onChange,
+            property = _this$props2.property;
+        var value = selected ? selected.value : '';
+        onChange(property.name, value);
+      }
+    }, {
+      key: "renderInput",
+      value: function renderInput() {
+        var _this$props3 = this.props,
+            property = _this$props3.property,
+            record = _this$props3.record;
+        var value = record.params && typeof record.params[property.name] !== 'undefined' ? record.params[property.name] : '';
+
+        if (property.availableValues) {
+          return React__default.createElement(index$1$1, {
+            isClearable: true,
+            options: property.availableValues,
+            onChange: this.handleSelectChange
+          });
+        }
+
+        return React__default.createElement("input", {
+          type: "text",
+          className: "input",
+          id: property.name,
+          name: property.name,
+          onChange: this.handleInputChange,
+          value: value
+        });
+      }
+    }, {
+      key: "render",
+      value: function render() {
+        var _this$props4 = this.props,
+            property = _this$props4.property,
+            record = _this$props4.record;
+        var error = record.errors && record.errors[property.name];
+        return React__default.createElement(PropertyInEdit, {
+          property: property,
+          error: error
+        }, this.renderInput());
+      }
+    }]);
+
+    return Edit;
+  }(React__default.Component);
+  Edit.propTypes = {
+    property: simplifiedPropertyType.isRequired,
+    record: recordType.isRequired,
+    onChange: PropTypes$1.func.isRequired
+  };
+
+  function _templateObject$d() {
+    var data = taggedTemplateLiteral(["\n  margin: ", " 0;\n\n  & input {\n    border-radius: 0;\n    border-color: ", ";\n    box-shadow: none;\n    background: transparent;\n    color: ", ";\n\n    &:focus {\n      border-color: ", ";\n    }\n  }\n  & .icon {\n    opacity: 0.25;\n  }\n"]);
+
+    _templateObject$d = function _templateObject() {
+      return data;
+    };
+
+    return data;
+  }
+  var Property$2 = styled__default.div(_templateObject$d(), sizes.paddingLayout, colors.borderOnDark, colors.lightText, colors.primary);
+
+  var PropertyInFilter = function PropertyInFilter(props) {
+    var property = props.property,
+        children = props.children;
+    return React__default.createElement(Property$2, null, React__default.createElement(Label, null, property.label), children);
+  };
+
+  PropertyInFilter.propTypes = {
+    property: propertyType.isRequired,
+    children: childrenType
+  };
+  PropertyInFilter.defaultProps = {
+    children: null
+  };
+
   var selectStyles = {
     control: function control(provided, state) {
       return objectSpread({}, provided, {
@@ -11128,9 +10927,286 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
       return objectSpread({}, provided, {
         borderRadius: '0px',
         borderColor: colors.border,
-        background: colors.darkBck
+        background: colors.darkBck,
+        zIndex: 5
       });
     }
+  };
+
+  var Filter =
+  /*#__PURE__*/
+  function (_React$PureComponent) {
+    inherits(Filter, _React$PureComponent);
+
+    function Filter(props) {
+      var _this;
+
+      classCallCheck(this, Filter);
+
+      _this = possibleConstructorReturn(this, getPrototypeOf(Filter).call(this, props));
+      _this.handleInputChange = _this.handleInputChange.bind(assertThisInitialized(assertThisInitialized(_this)));
+      _this.handleSelectChange = _this.handleSelectChange.bind(assertThisInitialized(assertThisInitialized(_this)));
+      return _this;
+    }
+
+    createClass(Filter, [{
+      key: "handleInputChange",
+      value: function handleInputChange(event) {
+        var _this$props = this.props,
+            onChange = _this$props.onChange,
+            property = _this$props.property;
+        onChange(property.name, event.target.value);
+      }
+    }, {
+      key: "handleSelectChange",
+      value: function handleSelectChange(selected) {
+        var _this$props2 = this.props,
+            onChange = _this$props2.onChange,
+            property = _this$props2.property;
+        var value = selected ? selected.value : '';
+        onChange(property.name, value);
+      }
+    }, {
+      key: "renderInput",
+      value: function renderInput() {
+        var _this$props3 = this.props,
+            property = _this$props3.property,
+            filter = _this$props3.filter;
+        var filterKey = "filter-".concat(property.name);
+        var value = filter[property.name] || '';
+
+        if (property.availableValues) {
+          return React__default.createElement(index$1$1, {
+            isClearable: true,
+            options: property.availableValues,
+            styles: filterStyles,
+            onChange: this.handleSelectChange
+          });
+        }
+
+        return React__default.createElement(React__default.Fragment, null, React__default.createElement("span", {
+          className: "icon is-small is-right"
+        }, React__default.createElement("i", {
+          className: "fas fa-search"
+        })), React__default.createElement("input", {
+          type: "text",
+          className: "input filter",
+          name: filterKey,
+          onChange: this.handleInputChange,
+          value: value
+        }));
+      }
+    }, {
+      key: "render",
+      value: function render() {
+        var property = this.props.property;
+        return React__default.createElement(PropertyInFilter, {
+          property: property
+        }, React__default.createElement("div", {
+          className: "control has-icons-left"
+        }, this.renderInput()));
+      }
+    }]);
+
+    return Filter;
+  }(React__default.PureComponent);
+  Filter.propTypes = {
+    property: propertyType.isRequired,
+    onChange: PropTypes$1.func.isRequired,
+    // eslint-disable-next-line react/forbid-prop-types
+    filter: PropTypes$1.object
+  };
+  Filter.defaultProps = {
+    filter: {}
+  };
+
+  var List =
+  /*#__PURE__*/
+  function (_React$PureComponent) {
+    inherits(List, _React$PureComponent);
+
+    function List() {
+      classCallCheck(this, List);
+
+      return possibleConstructorReturn(this, getPrototypeOf(List).apply(this, arguments));
+    }
+
+    createClass(List, [{
+      key: "render",
+      value: function render() {
+        var _this$props = this.props,
+            property = _this$props.property,
+            record = _this$props.record,
+            resource = _this$props.resource;
+        var showAction = resource.recordActions.find(function (a) {
+          return a.name === 'show';
+        });
+        var value = record.params[property.name];
+
+        if (resource.titleProperty.name === property.name && showAction) {
+          var h = new viewHelpers();
+          var href = h.recordActionUrl({
+            resourceId: resource.id,
+            recordId: record.id,
+            actionName: 'show'
+          });
+          return React__default.createElement(reactRouterDom.Link, {
+            to: href
+          }, value);
+        }
+
+        var className = property.availableValues ? 'tag' : '';
+        return React__default.createElement("span", {
+          className: className
+        }, value);
+      }
+    }]);
+
+    return List;
+  }(React__default.PureComponent);
+  List.propTypes = {
+    property: propertyType.isRequired,
+    record: recordType.isRequired,
+    resource: resourceType.isRequired
+  };
+
+  var defaultType = {
+    show: Show,
+    edit: Edit,
+    filter: Filter,
+    list: List
+  };
+
+  var Edit$1 =
+  /*#__PURE__*/
+  function (_React$PureComponent) {
+    inherits(Edit, _React$PureComponent);
+
+    function Edit() {
+      classCallCheck(this, Edit);
+
+      return possibleConstructorReturn(this, getPrototypeOf(Edit).apply(this, arguments));
+    }
+
+    createClass(Edit, [{
+      key: "handleChange",
+      value: function handleChange(event) {
+        var _this$props = this.props,
+            property = _this$props.property,
+            onChange = _this$props.onChange;
+        var checked = event.target.checked;
+        onChange(property.name, checked);
+      }
+    }, {
+      key: "render",
+      value: function render() {
+        var _this$props2 = this.props,
+            property = _this$props2.property,
+            record = _this$props2.record;
+        var value = record.params && record.params[property.name] || '';
+        var error = record.errors && record.errors[property.name];
+        return React__default.createElement(PropertyInEdit, {
+          property: property,
+          error: error
+        }, React__default.createElement("input", {
+          type: "checkbox",
+          className: "checkbox",
+          id: property.name,
+          name: property.name,
+          onChange: this.handleChange.bind(this),
+          checked: value
+        }));
+      }
+    }]);
+
+    return Edit;
+  }(React__default.PureComponent);
+  Edit$1.propTypes = {
+    property: simplifiedPropertyType.isRequired,
+    onChange: PropTypes$1.func.isRequired,
+    record: recordType.isRequired
+  };
+
+  var mapValue = (function (value) {
+    return value ? 'Yes' : 'No';
+  });
+
+  var Show$1 =
+  /*#__PURE__*/
+  function (_React$PureComponent) {
+    inherits(Show, _React$PureComponent);
+
+    function Show() {
+      classCallCheck(this, Show);
+
+      return possibleConstructorReturn(this, getPrototypeOf(Show).apply(this, arguments));
+    }
+
+    createClass(Show, [{
+      key: "render",
+      value: function render() {
+        var _this$props = this.props,
+            property = _this$props.property,
+            record = _this$props.record;
+        var value = mapValue(record.params[property.name]);
+        return React__default.createElement(PropertyInShow, {
+          property: property
+        }, value);
+      }
+    }]);
+
+    return Show;
+  }(React__default.PureComponent);
+  Show$1.propTypes = {
+    property: propertyType.isRequired,
+    record: recordType.isRequired
+  };
+
+  var List$1 =
+  /*#__PURE__*/
+  function (_React$PureComponent) {
+    inherits(List, _React$PureComponent);
+
+    function List() {
+      classCallCheck(this, List);
+
+      return possibleConstructorReturn(this, getPrototypeOf(List).apply(this, arguments));
+    }
+
+    createClass(List, [{
+      key: "render",
+      value: function render() {
+        var _this$props = this.props,
+            property = _this$props.property,
+            record = _this$props.record,
+            resource = _this$props.resource;
+        var showAction = resource.recordActions.find(function (a) {
+          return a.name === 'show';
+        });
+        var value = mapValue(record.params[property.name]);
+
+        if (resource.titleProperty.name === property.name && showAction) {
+          var h = new viewHelpers();
+          var href = h.recordActionUrl({
+            resourceId: resource.id,
+            recordId: record.id,
+            actionName: 'show'
+          });
+          return React__default.createElement(reactRouterDom.Link, {
+            to: href
+          }, value);
+        }
+
+        return React__default.createElement("span", null, value);
+      }
+    }]);
+
+    return List;
+  }(React__default.PureComponent);
+  List$1.propTypes = {
+    property: propertyType.isRequired,
+    record: recordType.isRequired,
+    resource: resourceType.isRequired
   };
 
   var Filter$1 =
