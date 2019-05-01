@@ -10,10 +10,14 @@ import { actionType, locationType, historyType } from '../../types'
 import StyledButton from './styled-button'
 import ApiClient from '../../utils/api-client'
 import ViewHelpers from '../../../backend/utils/view-helpers'
+import withNotice from '../../store/with-notice'
 
 class ActionButton extends React.PureComponent {
   handleClick(event) {
-    const { action, resourceId, recordId, location, history, actionPerformed } = this.props
+    const {
+      action, resourceId, recordId, location,
+      history, actionPerformed, addNotice,
+    } = this.props
 
     if (action.guard && !confirm(action.guard)) {
       event.preventDefault()
@@ -27,6 +31,9 @@ class ActionButton extends React.PureComponent {
       apiAction.bind(api)({
         resourceId, actionName: action.name, recordId,
       }).then((response) => {
+        addNotice({
+          message: 'Record has been successfully removed',
+        })
         if (location.pathname !== response.data.redirectUrl) {
           history.push(response.data.redirectUrl)
         }
@@ -71,6 +78,7 @@ ActionButton.propTypes = {
   location: locationType.isRequired,
   history: historyType.isRequired,
   actionPerformed: PropTypes.func,
+  addNotice: PropTypes.func,
 }
 
 ActionButton.defaultProps = {
@@ -78,4 +86,4 @@ ActionButton.defaultProps = {
   actionPerformed: null,
 }
 
-export default withRouter(ActionButton)
+export default withNotice(withRouter(ActionButton))

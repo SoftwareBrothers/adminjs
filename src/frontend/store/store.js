@@ -25,6 +25,20 @@ export const initializeSession = (data = {}) => ({
   data,
 })
 
+export const addNotice = (data = {}) => ({
+  type: 'ADD_NOTICE',
+  data: {
+    message: data.message,
+    id: data.id || Math.random().toString(36).substr(2, 9),
+    type: data.type || 'success',
+  },
+})
+
+export const dropNotice = noticeId => ({
+  type: 'DROP_NOTICE',
+  data: { noticeId },
+})
+
 const resourcesReducer = (state = [], action) => {
   switch (action.type) {
   case 'RESOURCES_INITIALIZE':
@@ -65,12 +79,27 @@ const sessionReducer = (state = {}, action) => {
   }
 }
 
+const noticesReducer = (state = [], action) => {
+  switch (action.type) {
+  case 'ADD_NOTICE': {
+    const notices = [...state]
+    notices.push(action.data)
+    return notices
+  }
+  case 'DROP_NOTICE': {
+    return state.filter(notice => notice.id !== action.data.noticeId)
+  }
+  default: return state
+  }
+}
+
 const reducer = combineReducers({
   resources: resourcesReducer,
   branding: brandingReducer,
   paths: pathsReducer,
   session: sessionReducer,
   dashboard: dashboardReducer,
+  notices: noticesReducer,
 })
 
 export default (initialState = {}) => createStore(reducer, initialState)

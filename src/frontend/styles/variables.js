@@ -14,7 +14,9 @@ export const colors = {
   primary: '#718af4',
   primaryHover: '#545B8C',
   success: '#21C197',
+  lightSuccess: 'rgba(62,198,194,0.15)',
   error: '#F0616F',
+  lightError: 'rgba(240,97,111,0.15)',
   warning: '#FF9F89',
 }
 

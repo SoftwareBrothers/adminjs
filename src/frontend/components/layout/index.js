@@ -15,6 +15,7 @@ import PropertyInEdit from './property-in-edit'
 import Columns from './columns'
 import Column from './column'
 import Label from './label'
+import Notice from './notice'
 
 export {
   Sidebar,
@@ -34,4 +35,5 @@ export {
   Columns,
   Column,
   Label,
+  Notice,
 }

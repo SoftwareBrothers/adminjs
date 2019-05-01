@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
-import { Breadcrumbs, ActionHeader, ActionWrapper } from '../layout'
+import { Breadcrumbs, ActionHeader, ActionWrapper, Notice } from '../layout'
 import { resourceType, matchType, pathsType } from '../../types'
 
 import actions from '../actions'
@@ -36,6 +36,7 @@ class ResourceAction extends React.Component {
     return (
       <ActionWrapper>
         <Breadcrumbs resource={resource} actionName={actionName} />
+        <Notice />
         <ActionHeader
           resource={resource}
           action={action}

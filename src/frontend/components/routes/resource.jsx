@@ -4,7 +4,8 @@ import { connect } from 'react-redux'
 import styled from 'styled-components'
 
 import {
-  Breadcrumbs, RecordsTable, Paginate, Filter, ActionHeader, BorderBox, ActionWrapper,
+  Breadcrumbs, RecordsTable, Paginate, Filter, ActionHeader,
+  BorderBox, ActionWrapper, Notice,
 } from '../layout'
 
 import ApiClient from '../../utils/api-client'
@@ -92,6 +93,7 @@ class Resource extends React.Component {
       <Wrapper>
         <ActionWrapper>
           <Breadcrumbs resource={resource} />
+          <Notice />
           <ActionHeader
             resource={resource}
             tag={total}

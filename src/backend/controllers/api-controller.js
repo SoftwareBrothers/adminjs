@@ -23,7 +23,7 @@ class ApiController {
     const listProperties = resource.decorate().getListProperties()
     const firstProperty = listProperties[0]
 
-    const perPage = 20
+    const perPage = 10
     page = Number(page) || 1
     const sort = {
       sortBy: sortBy || firstProperty.name(),

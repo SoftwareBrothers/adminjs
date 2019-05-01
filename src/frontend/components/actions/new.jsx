@@ -1,11 +1,12 @@
 import React from 'react'
 import { withRouter } from 'react-router-dom'
+import PropTypes from 'prop-types'
 
 import PropertyType from '../property-type'
 import ApiClient from '../../utils/api-client'
 import { BorderBox, StyledButton } from '../layout'
 import { resourceType, historyType, recordType } from '../../types'
-
+import withNotice from '../../store/with-notice'
 
 class New extends React.Component {
   constructor(props) {
@@ -41,7 +42,8 @@ class New extends React.Component {
   }
 
   handleSubmit(event) {
-    const { resource, history } = this.props
+    event.preventDefault()
+    const { resource, history, addNotice } = this.props
     const { params } = this.state
     this.api.resourceAction({
       resourceId: resource.id,
@@ -51,14 +53,20 @@ class New extends React.Component {
       },
     }).then((response) => {
       if (response.data.redirectUrl) {
+        addNotice({
+          message: 'Record has been successfully created!',
+        })
         history.push(response.data.redirectUrl)
       } else {
+        addNotice({
+          type: 'error',
+          message: 'There were errors in the record object. Check them out',
+        })
         this.setState({
           errors: response.data.record.errors,
         })
       }
     })
-    event.preventDefault()
     return false
   }
 
@@ -94,10 +102,11 @@ New.propTypes = {
   resource: resourceType.isRequired,
   history: historyType.isRequired,
   record: recordType,
+  addNotice: PropTypes.func.isRequired,
 }
 
 New.defaultProps = {
   record: null,
 }
 
-export default withRouter(New)
+export default withNotice(withRouter(New))

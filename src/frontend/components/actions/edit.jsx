@@ -6,6 +6,7 @@ import PropertyType from '../property-type'
 import { Loader, BorderBox, StyledButton } from '../layout'
 import { resourceType, actionType, historyType } from '../../types'
 import ApiClient from '../../utils/api-client'
+import withNotice from '../../store/with-notice'
 
 class Edit extends React.Component {
   constructor(props) {
@@ -50,7 +51,7 @@ class Edit extends React.Component {
   }
 
   handleSubmit(event) {
-    const { resource, recordId, history } = this.props
+    const { resource, recordId, history, addNotice } = this.props
     const { record } = this.state
     this.api.recordAction({
       resourceId: resource.id,
@@ -62,7 +63,14 @@ class Edit extends React.Component {
     }).then((response) => {
       if (response.data.redirectUrl) {
         history.push(response.data.redirectUrl)
+        addNotice({
+          message: 'Record has been successfully updated!',
+        })
       } else {
+        addNotice({
+          type: 'error',
+          message: 'There were errors in the record object. Check them out',
+        })
         this.setState(state => ({
           record: {
             ...state.record,
@@ -114,6 +122,7 @@ Edit.propTypes = {
   action: actionType.isRequired,
   history: historyType.isRequired,
   recordId: PropTypes.string.isRequired,
+  addNotice: PropTypes.func.isRequired,
 }
 
-export default withRouter(Edit)
+export default withNotice(withRouter(Edit))

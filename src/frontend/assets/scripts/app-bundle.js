@@ -1,4 +1,4 @@
-var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1, axios, reactDom, redux) {
+var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1, axios, redux, reactDom) {
   'use strict';
 
   var React__default = 'default' in React ? React['default'] : React;
@@ -266,7 +266,9 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
     primary: '#718af4',
     primaryHover: '#545B8C',
     success: '#21C197',
+    lightSuccess: 'rgba(62,198,194,0.15)',
     error: '#F0616F',
+    lightError: 'rgba(240,97,111,0.15)',
     warning: '#FF9F89'
   };
   var sizes = {
@@ -1814,6 +1816,169 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
     return ApiClient;
   }();
 
+  function _arrayWithoutHoles(arr) {
+    if (Array.isArray(arr)) {
+      for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) {
+        arr2[i] = arr[i];
+      }
+
+      return arr2;
+    }
+  }
+
+  var arrayWithoutHoles = _arrayWithoutHoles;
+
+  function _iterableToArray(iter) {
+    if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter);
+  }
+
+  var iterableToArray = _iterableToArray;
+
+  function _nonIterableSpread() {
+    throw new TypeError("Invalid attempt to spread non-iterable instance");
+  }
+
+  var nonIterableSpread = _nonIterableSpread;
+
+  function _toConsumableArray(arr) {
+    return arrayWithoutHoles(arr) || iterableToArray(arr) || nonIterableSpread();
+  }
+
+  var toConsumableArray = _toConsumableArray;
+
+  var addNotice = function addNotice() {
+    var data = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+    return {
+      type: 'ADD_NOTICE',
+      data: {
+        message: data.message,
+        id: data.id || Math.random().toString(36).substr(2, 9),
+        type: data.type || 'success'
+      }
+    };
+  };
+  var dropNotice = function dropNotice(noticeId) {
+    return {
+      type: 'DROP_NOTICE',
+      data: {
+        noticeId: noticeId
+      }
+    };
+  };
+
+  var resourcesReducer = function resourcesReducer() {
+    var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+    var action = arguments.length > 1 ? arguments[1] : undefined;
+
+    switch (action.type) {
+      case 'RESOURCES_INITIALIZE':
+        return action.data;
+
+      default:
+        return state;
+    }
+  };
+
+  var brandingReducer = function brandingReducer() {
+    var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+    var action = arguments.length > 1 ? arguments[1] : undefined;
+
+    switch (action.type) {
+      case 'BRANDING_INITIALIZE':
+        return action.data;
+
+      default:
+        return state;
+    }
+  };
+
+  var pathsReducer = function pathsReducer() {
+    var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+    var action = arguments.length > 1 ? arguments[1] : undefined;
+
+    switch (action.type) {
+      case 'PATHS_INITIALIZE':
+        return action.data;
+
+      default:
+        return state;
+    }
+  };
+
+  var dashboardReducer = function dashboardReducer() {
+    var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+    var action = arguments.length > 1 ? arguments[1] : undefined;
+
+    switch (action.type) {
+      case 'DASHBOARD_INITIALIZE':
+        return action.data;
+
+      default:
+        return state;
+    }
+  };
+
+  var sessionReducer = function sessionReducer() {
+    var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+    var action = arguments.length > 1 ? arguments[1] : undefined;
+
+    switch (action.type) {
+      case 'SESSION_INITIALIZE':
+        return action.data;
+
+      default:
+        return state;
+    }
+  };
+
+  var noticesReducer = function noticesReducer() {
+    var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+    var action = arguments.length > 1 ? arguments[1] : undefined;
+
+    switch (action.type) {
+      case 'ADD_NOTICE':
+        {
+          var notices = toConsumableArray(state);
+
+          notices.push(action.data);
+          return notices;
+        }
+
+      case 'DROP_NOTICE':
+        {
+          return state.filter(function (notice) {
+            return notice.id !== action.data.noticeId;
+          });
+        }
+
+      default:
+        return state;
+    }
+  };
+
+  var reducer = redux.combineReducers({
+    resources: resourcesReducer,
+    branding: brandingReducer,
+    paths: pathsReducer,
+    session: sessionReducer,
+    dashboard: dashboardReducer,
+    notices: noticesReducer
+  });
+  var createStore = (function () {
+    var initialState = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+    return redux.createStore(reducer, initialState);
+  });
+
+  var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+    return {
+      addNotice: function addNotice$1(notice) {
+        return dispatch(addNotice(notice));
+      }
+    };
+  };
+
+  var withNotice = reactRedux.connect(null, mapDispatchToProps);
+
   var ActionButton =
   /*#__PURE__*/
   function (_React$PureComponent) {
@@ -1834,7 +1999,8 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
             recordId = _this$props.recordId,
             location = _this$props.location,
             history = _this$props.history,
-            actionPerformed = _this$props.actionPerformed;
+            actionPerformed = _this$props.actionPerformed,
+            addNotice = _this$props.addNotice;
 
         if (action.guard && !confirm(action.guard)) {
           event.preventDefault();
@@ -1850,6 +2016,10 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
             actionName: action.name,
             recordId: recordId
           }).then(function (response) {
+            addNotice({
+              message: 'Record has been successfully removed'
+            });
+
             if (location.pathname !== response.data.redirectUrl) {
               history.push(response.data.redirectUrl);
             }
@@ -1902,13 +2072,14 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
     recordId: PropTypes$1.string,
     location: locationType.isRequired,
     history: historyType.isRequired,
-    actionPerformed: PropTypes$1.func
+    actionPerformed: PropTypes$1.func,
+    addNotice: PropTypes$1.func
   };
   ActionButton.defaultProps = {
     recordId: null,
     actionPerformed: null
   };
-  var ActionButton$1 = reactRouterDom.withRouter(ActionButton);
+  var ActionButton$1 = withNotice(reactRouterDom.withRouter(ActionButton));
 
   function _templateObject$9() {
     var data = taggedTemplateLiteral(["\n  background: #ffffff;\n  padding: ", ";\n  border: 1px solid ", ";\n"]);
@@ -5665,11 +5836,11 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
     return _assertThisInitialized$1(self);
   }
 
-  function _toConsumableArray(arr) {
-    return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread();
+  function _toConsumableArray$1(arr) {
+    return _arrayWithoutHoles$1(arr) || _iterableToArray$1(arr) || _nonIterableSpread$1();
   }
 
-  function _arrayWithoutHoles(arr) {
+  function _arrayWithoutHoles$1(arr) {
     if (Array.isArray(arr)) {
       for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) arr2[i] = arr[i];
 
@@ -5677,11 +5848,11 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
     }
   }
 
-  function _iterableToArray(iter) {
+  function _iterableToArray$1(iter) {
     if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter);
   }
 
-  function _nonIterableSpread() {
+  function _nonIterableSpread$1() {
     throw new TypeError("Invalid attempt to spread non-iterable instance");
   }
 
@@ -8412,7 +8583,7 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
             });
           } else {
             if (!_this.isOptionDisabled(newValue, selectValue)) {
-              _this.setValue([].concat(_toConsumableArray(selectValue), [newValue]), 'select-option', newValue);
+              _this.setValue([].concat(_toConsumableArray$1(selectValue), [newValue]), 'select-option', newValue);
 
               _this.announceAriaLiveSelection({
                 event: 'select-option',
@@ -10424,7 +10595,7 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
               };
 
               if (isMulti) {
-                onChange([].concat(_toConsumableArray(cleanValue(value)), [newOptionData]), newActionMeta);
+                onChange([].concat(_toConsumableArray$1(cleanValue(value)), [newOptionData]), newActionMeta);
               } else {
                 onChange(newOptionData, newActionMeta);
               }
@@ -10465,7 +10636,7 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
 
           this.setState({
             newOption: newOption,
-            options: (allowCreateWhileLoading || !isLoading) && newOption ? createOptionPosition === 'first' ? [newOption].concat(_toConsumableArray(options)) : [].concat(_toConsumableArray(options), [newOption]) : options
+            options: (allowCreateWhileLoading || !isLoading) && newOption ? createOptionPosition === 'first' ? [newOption].concat(_toConsumableArray$1(options)) : [].concat(_toConsumableArray$1(options), [newOption]) : options
           });
         }
       }, {
@@ -18969,6 +19140,115 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
     };
   })(_templateObject$m());
 
+  function _templateObject$n() {
+    var data = taggedTemplateLiteral(["\n  &.success {\n    background-color: ", ";\n    border: 1px solid ", ";\n\n    & .progressBar {\n      background-color: ", ";\n    }\n  }\n\n  &.error {\n    background-color: ", ";\n    border: 1px solid ", ";\n    & .delete:before, & .delete:after {\n      background-color: ", ";\n    }\n    & .progressBar {\n      background-color: ", ";\n    }\n  }\n\n  & .delete {\n    background: transparent;\n    right: ", ";\n    top: ", ";\n\n    &:before, &:after {\n      background-color: ", ";\n    }\n\n    &:after {\n      height: 80%;\n      width: 1px;\n    }\n    &:before {\n      width: 80%;\n      height: 1px;\n    }\n  }\n\n  & .progressBar {\n    position: absolute;\n    bottom: 0;\n    left: 0;\n    height: 4px;\n    background: #fff;\n    transition: width 1s linear;\n  }\n"]);
+
+    _templateObject$n = function _templateObject() {
+      return data;
+    };
+
+    return data;
+  }
+  var TIME_TO_DISAPPEAR = 10;
+  var NoticeWrapper = styled__default.div.attrs({
+    className: 'notification'
+  })(_templateObject$n(), colors.lightSuccess, colors.success, colors.success, colors.lightError, colors.error, colors.error, colors.error, sizes.padding, sizes.padding, colors.success);
+
+  var NoticeElement =
+  /*#__PURE__*/
+  function (_React$Component) {
+    inherits(NoticeElement, _React$Component);
+
+    function NoticeElement(props) {
+      var _this;
+
+      classCallCheck(this, NoticeElement);
+
+      _this = possibleConstructorReturn(this, getPrototypeOf(NoticeElement).call(this, props));
+      _this.state = {
+        progress: 0
+      };
+      return _this;
+    }
+
+    createClass(NoticeElement, [{
+      key: "componentDidMount",
+      value: function componentDidMount() {
+        var _this2 = this;
+
+        var onDrop = this.props.onDrop;
+        this.timer = setInterval(function () {
+          _this2.setState(function (state) {
+            return {
+              progress: state.progress + 100 / TIME_TO_DISAPPEAR
+            };
+          });
+        }, 1000);
+        setTimeout(function () {
+          clearInterval(_this2.timer);
+          onDrop();
+        }, 1000 * (TIME_TO_DISAPPEAR + 1));
+      }
+    }, {
+      key: "componentWillUnmount",
+      value: function componentWillUnmount() {
+        clearInterval(this.timer);
+      }
+    }, {
+      key: "render",
+      value: function render() {
+        var _this$props = this.props,
+            notice = _this$props.notice,
+            onDrop = _this$props.onDrop;
+        var progress = this.state.progress;
+        return React__default.createElement(NoticeWrapper, {
+          className: notice.type
+        }, React__default.createElement("button", {
+          className: "delete",
+          onClick: onDrop,
+          type: "button"
+        }), notice.message, React__default.createElement("div", {
+          className: "progressBar",
+          style: {
+            width: "".concat(progress, "%")
+          }
+        }));
+      }
+    }]);
+
+    return NoticeElement;
+  }(React__default.Component);
+
+  var NoticeBox = function NoticeBox(props) {
+    var drop = props.drop,
+        notices = props.notices;
+    return React__default.createElement(React__default.Fragment, null, notices && notices.map(function (notice) {
+      return React__default.createElement(NoticeElement, {
+        key: notice.id,
+        notice: notice,
+        onDrop: function onDrop() {
+          return drop(notice.id);
+        }
+      });
+    }));
+  };
+
+  var mapStateToProps$2 = function mapStateToProps(state) {
+    return {
+      notices: state.notices
+    };
+  };
+
+  var mapDispatchToProps$1 = function mapDispatchToProps(dispatch) {
+    return {
+      drop: function drop(noticeId) {
+        return dispatch(dropNotice(noticeId));
+      }
+    };
+  };
+
+  var Notice = reactRedux.connect(mapStateToProps$2, mapDispatchToProps$1)(NoticeBox);
+
 
 
   var components$1 = /*#__PURE__*/Object.freeze({
@@ -18988,7 +19268,8 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
     PropertyInEdit: PropertyInEdit,
     Columns: Columns,
     Column: Column,
-    Label: Label
+    Label: Label,
+    Notice: Notice
   });
 
   function _templateObject2$9() {
@@ -19001,16 +19282,16 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
     return data;
   }
 
-  function _templateObject$n() {
+  function _templateObject$o() {
     var data = taggedTemplateLiteral(["\n  display: flex;\n  flex-grow: 1;\n  align-items: center;\n  justify-content: center;\n"]);
 
-    _templateObject$n = function _templateObject() {
+    _templateObject$o = function _templateObject() {
       return data;
     };
 
     return data;
   }
-  var DashboardWrapper = styled__default.section(_templateObject$n());
+  var DashboardWrapper = styled__default.section(_templateObject$o());
   var InfoBox = styled__default.section.attrs({
     className: 'content'
   })(_templateObject2$9());
@@ -19113,7 +19394,7 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
     return Dashboard$1;
   }(React__default.Component);
 
-  var mapStateToProps$2 = function mapStateToProps(state) {
+  var mapStateToProps$3 = function mapStateToProps(state) {
     return {
       dashboard: state.dashboard
     };
@@ -19124,7 +19405,7 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
       component: PropTypes$1.string
     }).isRequired
   };
-  var Dashboard$2 = reactRedux.connect(mapStateToProps$2)(Dashboard$1);
+  var Dashboard$2 = reactRedux.connect(mapStateToProps$3)(Dashboard$1);
 
   var New =
   /*#__PURE__*/
@@ -19169,9 +19450,11 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
       value: function handleSubmit(event) {
         var _this2 = this;
 
+        event.preventDefault();
         var _this$props = this.props,
             resource = _this$props.resource,
-            history = _this$props.history;
+            history = _this$props.history,
+            addNotice = _this$props.addNotice;
         var params = this.state.params;
         this.api.resourceAction({
           resourceId: resource.id,
@@ -19181,14 +19464,21 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
           }
         }).then(function (response) {
           if (response.data.redirectUrl) {
+            addNotice({
+              message: 'Record has been successfully created!'
+            });
             history.push(response.data.redirectUrl);
           } else {
+            addNotice({
+              type: 'error',
+              message: 'There were errors in the record object. Check them out'
+            });
+
             _this2.setState({
               errors: response.data.record.errors
             });
           }
         });
-        event.preventDefault();
         return false;
       }
     }, {
@@ -19234,12 +19524,13 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
   New.propTypes = {
     resource: resourceType.isRequired,
     history: historyType.isRequired,
-    record: recordType
+    record: recordType,
+    addNotice: PropTypes$1.func.isRequired
   };
   New.defaultProps = {
     record: null
   };
-  var NewAction = reactRouterDom.withRouter(New);
+  var NewAction = withNotice(reactRouterDom.withRouter(New));
 
   var Edit$5 =
   /*#__PURE__*/
@@ -19308,7 +19599,8 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
         var _this$props2 = this.props,
             resource = _this$props2.resource,
             recordId = _this$props2.recordId,
-            history = _this$props2.history;
+            history = _this$props2.history,
+            addNotice = _this$props2.addNotice;
         var record = this.state.record;
         this.api.recordAction({
           resourceId: resource.id,
@@ -19320,7 +19612,15 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
         }).then(function (response) {
           if (response.data.redirectUrl) {
             history.push(response.data.redirectUrl);
+            addNotice({
+              message: 'Record has been successfully updated!'
+            });
           } else {
+            addNotice({
+              type: 'error',
+              message: 'There were errors in the record object. Check them out'
+            });
+
             _this3.setState(function (state) {
               return {
                 record: objectSpread({}, state.record, {
@@ -19378,9 +19678,10 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
     resource: resourceType.isRequired,
     action: actionType.isRequired,
     history: historyType.isRequired,
-    recordId: PropTypes$1.string.isRequired
+    recordId: PropTypes$1.string.isRequired,
+    addNotice: PropTypes$1.func.isRequired
   };
-  var EditAction = reactRouterDom.withRouter(Edit$5);
+  var EditAction = withNotice(reactRouterDom.withRouter(Edit$5));
 
   var Show$5 =
   /*#__PURE__*/
@@ -19580,7 +19881,7 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
           resource: resource,
           actionName: actionName,
           recordTitle: recordTitle
-        }), React__default.createElement(ActionHeader, {
+        }), React__default.createElement(Notice, null), React__default.createElement(ActionHeader, {
           resource: resource,
           recordId: recordId,
           action: action
@@ -19595,7 +19896,7 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
     return RecordAction;
   }(React__default.Component);
 
-  var mapStateToProps$3 = function mapStateToProps(state) {
+  var mapStateToProps$4 = function mapStateToProps(state) {
     return {
       resources: state.resources
     };
@@ -19605,7 +19906,7 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
     resources: PropTypes$1.arrayOf(resourceType).isRequired,
     match: matchType.isRequired
   };
-  var RecordAction$1 = reactRedux.connect(mapStateToProps$3)(RecordAction);
+  var RecordAction$1 = reactRedux.connect(mapStateToProps$4)(RecordAction);
 
   var ResourceAction =
   /*#__PURE__*/
@@ -19661,7 +19962,7 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
         return React__default.createElement(ActionWrapper, null, React__default.createElement(Breadcrumbs, {
           resource: resource,
           actionName: actionName
-        }), React__default.createElement(ActionHeader, {
+        }), React__default.createElement(Notice, null), React__default.createElement(ActionHeader, {
           resource: resource,
           action: action
         }), React__default.createElement(Action, {
@@ -19675,7 +19976,7 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
     return ResourceAction;
   }(React__default.Component);
 
-  var mapStateToProps$4 = function mapStateToProps(state) {
+  var mapStateToProps$5 = function mapStateToProps(state) {
     return {
       paths: state.paths,
       resources: state.resources
@@ -19687,7 +19988,7 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
     match: matchType.isRequired,
     paths: pathsType.isRequired
   };
-  var ResourceAction$1 = reactRedux.connect(mapStateToProps$4)(ResourceAction);
+  var ResourceAction$1 = reactRedux.connect(mapStateToProps$5)(ResourceAction);
 
   var queryHasFilter = (function (queryString) {
     var query = new URLSearchParams(queryString);
@@ -19721,10 +20022,10 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
     return false;
   });
 
-  function _templateObject$o() {
+  function _templateObject$p() {
     var data = taggedTemplateLiteral(["\n  align-items: stretch;\n  flex-grow: 1;\n"]);
 
-    _templateObject$o = function _templateObject() {
+    _templateObject$p = function _templateObject() {
       return data;
     };
 
@@ -19732,7 +20033,7 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
   }
   var Wrapper = styled__default.section.attrs({
     className: 'level'
-  })(_templateObject$o());
+  })(_templateObject$p());
 
   var Resource =
   /*#__PURE__*/
@@ -19839,7 +20140,7 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
             filterVisible = _this$state.filterVisible;
         return React__default.createElement(Wrapper, null, React__default.createElement(ActionWrapper, null, React__default.createElement(Breadcrumbs, {
           resource: resource
-        }), React__default.createElement(ActionHeader, {
+        }), React__default.createElement(Notice, null), React__default.createElement(ActionHeader, {
           resource: resource,
           tag: total,
           toggleFilter: this.toggleFilter,
@@ -19865,7 +20166,7 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
     return Resource;
   }(React__default.Component);
 
-  var mapStateToProps$5 = function mapStateToProps(state) {
+  var mapStateToProps$6 = function mapStateToProps(state) {
     return {
       paths: state.paths,
       resources: state.resources
@@ -19878,7 +20179,7 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
     match: matchType.isRequired,
     paths: pathsType.isRequired
   };
-  var Resource$1 = reactRedux.connect(mapStateToProps$5)(Resource);
+  var Resource$1 = reactRedux.connect(mapStateToProps$6)(Resource);
 
   function _templateObject3$5() {
     var data = taggedTemplateLiteral(["\n  height: 100%;\n  overflow-y: auto;\n  width: 100%;\n  background: ", ";\n  display: flex;\n  flex-direction: column;\n"]);
@@ -19900,17 +20201,17 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
     return data;
   }
 
-  function _templateObject$p() {
+  function _templateObject$q() {
     var data = taggedTemplateLiteral(["\n  html, body, #app {\n      width: 100%;\n      height: 100%;\n  }\n\n  a {\n    color: ", ";\n  }\n"]);
 
-    _templateObject$p = function _templateObject() {
+    _templateObject$q = function _templateObject() {
       return data;
     };
 
     return data;
   }
 
-  var GlobalStyle = styled.createGlobalStyle(_templateObject$p(), colors.primary);
+  var GlobalStyle = styled.createGlobalStyle(_templateObject$q(), colors.primary);
   var ApplicationWrapper = styled__default.section(_templateObject2$a());
   var Core = styled__default.section(_templateObject3$5(), colors.bck);
 
@@ -19994,95 +20295,18 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
     paths: pathsType.isRequired
   };
 
-  var mapStateToProps$6 = function mapStateToProps(state) {
+  var mapStateToProps$7 = function mapStateToProps(state) {
     return {
       paths: state.paths
     };
   };
 
-  var App$1 = reactRedux.connect(mapStateToProps$6)(App);
+  var App$1 = reactRedux.connect(mapStateToProps$7)(App);
 
-  var resourcesReducer = function resourcesReducer() {
-    var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
-    var action = arguments.length > 1 ? arguments[1] : undefined;
-
-    switch (action.type) {
-      case 'RESOURCES_INITIALIZE':
-        return action.data;
-
-      default:
-        return state;
-    }
-  };
-
-  var brandingReducer = function brandingReducer() {
-    var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-    var action = arguments.length > 1 ? arguments[1] : undefined;
-
-    switch (action.type) {
-      case 'BRANDING_INITIALIZE':
-        return action.data;
-
-      default:
-        return state;
-    }
-  };
-
-  var pathsReducer = function pathsReducer() {
-    var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-    var action = arguments.length > 1 ? arguments[1] : undefined;
-
-    switch (action.type) {
-      case 'PATHS_INITIALIZE':
-        return action.data;
-
-      default:
-        return state;
-    }
-  };
-
-  var dashboardReducer = function dashboardReducer() {
-    var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-    var action = arguments.length > 1 ? arguments[1] : undefined;
-
-    switch (action.type) {
-      case 'DASHBOARD_INITIALIZE':
-        return action.data;
-
-      default:
-        return state;
-    }
-  };
-
-  var sessionReducer = function sessionReducer() {
-    var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-    var action = arguments.length > 1 ? arguments[1] : undefined;
-
-    switch (action.type) {
-      case 'SESSION_INITIALIZE':
-        return action.data;
-
-      default:
-        return state;
-    }
-  };
-
-  var reducer = redux.combineReducers({
-    resources: resourcesReducer,
-    branding: brandingReducer,
-    paths: pathsReducer,
-    session: sessionReducer,
-    dashboard: dashboardReducer
-  });
-  var createStore = (function () {
-    var initialState = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-    return redux.createStore(reducer, initialState);
-  });
-
-  function _templateObject$q() {
+  function _templateObject$r() {
     var data = taggedTemplateLiteral(["\n  color: ", ";\n  margin-top: 8px;\n\n  & .value {\n    font-size: 34px;\n  }\n\n  & .icon {\n    font-size: 34px;\n  }\n"]);
 
-    _templateObject$q = function _templateObject() {
+    _templateObject$r = function _templateObject() {
       return data;
     };
 
@@ -20090,7 +20314,7 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
   }
   var Level = styled__default.div.attrs({
     className: 'level'
-  })(_templateObject$q(), function (props) {
+  })(_templateObject$r(), function (props) {
     return props.color;
   });
 
@@ -20140,10 +20364,10 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
     icon: null
   };
 
-  function _templateObject$r() {
+  function _templateObject$s() {
     var data = taggedTemplateLiteral(["\n  && {\n    padding: ", ";\n    background: ", ";\n    color: #fff;\n    margin-bottom: 0;\n    & > * {\n      color: #fff;\n    }\n\n    & > h1 {\n      font-size: 53px;\n      margin-bottom: 2px;\n    }\n  }\n"]);
 
-    _templateObject$r = function _templateObject() {
+    _templateObject$s = function _templateObject() {
       return data;
     };
 
@@ -20151,7 +20375,7 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
   }
   var Wrapper$1 = styled__default.section.attrs({
     className: 'content'
-  })(_templateObject$r(), sizes.paddingLayout, colors.superDarkBck);
+  })(_templateObject$s(), sizes.paddingLayout, colors.superDarkBck);
 
   var DashboardHeader = function DashboardHeader(props) {
     var children = props.children;
@@ -20193,4 +20417,4 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
 
   return bundleEntry;
 
-}(React, ReactRedux, ReactRouterDOM, styled, PropTypes, axios, ReactDOM, Redux));
+}(React, ReactRedux, ReactRouterDOM, styled, PropTypes, axios, Redux, ReactDOM));
