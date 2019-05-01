@@ -1853,7 +1853,19 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
       data: {
         message: data.message,
         id: data.id || Math.random().toString(36).substr(2, 9),
-        type: data.type || 'success'
+        type: data.type || 'success',
+        progress: 0
+      }
+    };
+  };
+  var setNoticeProgress = function setNoticeProgress(_ref) {
+    var noticeId = _ref.noticeId,
+        progress = _ref.progress;
+    return {
+      type: 'SET_NOTICE_PROGRESS',
+      data: {
+        noticeId: noticeId,
+        progress: progress
       }
     };
   };
@@ -1948,6 +1960,16 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
         {
           return state.filter(function (notice) {
             return notice.id !== action.data.noticeId;
+          });
+        }
+
+      case 'SET_NOTICE_PROGRESS':
+        {
+          console.log(state);
+          return state.map(function (notice) {
+            return objectSpread({}, notice, {
+              progress: notice.id === action.data.noticeId ? action.data.progress : notice.progress
+            });
           });
         }
 
@@ -19165,8 +19187,9 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
       classCallCheck(this, NoticeElement);
 
       _this = possibleConstructorReturn(this, getPrototypeOf(NoticeElement).call(this, props));
+      var notice = props.notice;
       _this.state = {
-        progress: 0
+        progress: notice.progress || 0
       };
       return _this;
     }
@@ -19176,11 +19199,19 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
       value: function componentDidMount() {
         var _this2 = this;
 
-        var onDrop = this.props.onDrop;
+        var _this$props = this.props,
+            onDrop = _this$props.onDrop,
+            notice = _this$props.notice,
+            notifyProgress = _this$props.notifyProgress;
         this.timer = setInterval(function () {
           _this2.setState(function (state) {
+            var progress = state.progress + 100 / TIME_TO_DISAPPEAR;
+            notifyProgress({
+              noticeId: notice.id,
+              progress: progress
+            });
             return {
-              progress: state.progress + 100 / TIME_TO_DISAPPEAR
+              progress: progress
             };
           });
         }, 1000);
@@ -19197,9 +19228,9 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
     }, {
       key: "render",
       value: function render() {
-        var _this$props = this.props,
-            notice = _this$props.notice,
-            onDrop = _this$props.onDrop;
+        var _this$props2 = this.props,
+            notice = _this$props2.notice,
+            onDrop = _this$props2.onDrop;
         var progress = this.state.progress;
         return React__default.createElement(NoticeWrapper, {
           className: notice.type
@@ -19221,14 +19252,16 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
 
   var NoticeBox = function NoticeBox(props) {
     var drop = props.drop,
-        notices = props.notices;
+        notices = props.notices,
+        notifyProgress = props.notifyProgress;
     return React__default.createElement(React__default.Fragment, null, notices && notices.map(function (notice) {
       return React__default.createElement(NoticeElement, {
         key: notice.id,
         notice: notice,
         onDrop: function onDrop() {
           return drop(notice.id);
-        }
+        },
+        notifyProgress: notifyProgress
       });
     }));
   };
@@ -19243,6 +19276,14 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
     return {
       drop: function drop(noticeId) {
         return dispatch(dropNotice(noticeId));
+      },
+      notifyProgress: function notifyProgress(_ref) {
+        var noticeId = _ref.noticeId,
+            progress = _ref.progress;
+        return dispatch(setNoticeProgress({
+          noticeId: noticeId,
+          progress: progress
+        }));
       }
     };
   };

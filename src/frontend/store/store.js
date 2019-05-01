@@ -31,7 +31,13 @@ export const addNotice = (data = {}) => ({
     message: data.message,
     id: data.id || Math.random().toString(36).substr(2, 9),
     type: data.type || 'success',
+    progress: 0,
   },
+})
+
+export const setNoticeProgress = ({ noticeId, progress }) => ({
+  type: 'SET_NOTICE_PROGRESS',
+  data: { noticeId, progress },
 })
 
 export const dropNotice = noticeId => ({
@@ -88,6 +94,13 @@ const noticesReducer = (state = [], action) => {
   }
   case 'DROP_NOTICE': {
     return state.filter(notice => notice.id !== action.data.noticeId)
+  }
+  case 'SET_NOTICE_PROGRESS': {
+    console.log(state)
+    return state.map(notice => ({
+      ...notice,
+      progress: notice.id === action.data.noticeId ? action.data.progress : notice.progress,
+    }))
   }
   default: return state
   }

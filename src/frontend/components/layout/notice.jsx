@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import { connect } from 'react-redux'
 
 import { colors, sizes } from '../../styles/variables'
-import { dropNotice } from '../../store/store'
+import { dropNotice, setNoticeProgress } from '../../store/store'
 
 const TIME_TO_DISAPPEAR = 10
 
@@ -62,18 +62,21 @@ const NoticeWrapper = styled.div.attrs({
 class NoticeElement extends React.Component {
   constructor(props) {
     super(props)
+    const { notice } = props
     this.state = {
-      progress: 0,
+      progress: notice.progress || 0,
     }
   }
 
   componentDidMount() {
-    const { onDrop } = this.props
+    const { onDrop, notice, notifyProgress } = this.props
 
     this.timer = setInterval(() => {
-      this.setState(state => ({
-        progress: state.progress + 100 / TIME_TO_DISAPPEAR,
-      }))
+      this.setState((state) => {
+        const progress = state.progress + 100 / TIME_TO_DISAPPEAR
+        notifyProgress({ noticeId: notice.id, progress })
+        return { progress }
+      })
     }, 1000)
 
     setTimeout(() => {
@@ -100,7 +103,7 @@ class NoticeElement extends React.Component {
 }
 
 const NoticeBox = (props) => {
-  const { drop, notices } = props
+  const { drop, notices, notifyProgress } = props
   return (
     <React.Fragment>
       {notices && notices.map(notice => (
@@ -108,6 +111,7 @@ const NoticeBox = (props) => {
           key={notice.id}
           notice={notice}
           onDrop={() => drop(notice.id)}
+          notifyProgress={notifyProgress}
         />
       ))}
     </React.Fragment>
@@ -120,6 +124,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   drop: noticeId => dispatch(dropNotice(noticeId)),
+  notifyProgress: ({ noticeId, progress }) => dispatch(setNoticeProgress({ noticeId, progress })),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(NoticeBox)
