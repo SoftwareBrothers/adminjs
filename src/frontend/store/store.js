@@ -96,7 +96,6 @@ const noticesReducer = (state = [], action) => {
     return state.filter(notice => notice.id !== action.data.noticeId)
   }
   case 'SET_NOTICE_PROGRESS': {
-    console.log(state)
     return state.map(notice => ({
       ...notice,
       progress: notice.id === action.data.noticeId ? action.data.progress : notice.progress,

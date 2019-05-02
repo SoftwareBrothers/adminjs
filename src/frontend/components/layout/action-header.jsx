@@ -78,7 +78,7 @@ const ActionHeader = (props) => {
           </BackBtn>
         )}
         {title}
-        {tag && (<Tag>{tag}</Tag>)}
+        {tag ? (<Tag>{tag}</Tag>) : ''}
       </HeaderTitle>
       <HeaderButtons>
         {actions.map(headerAction => (

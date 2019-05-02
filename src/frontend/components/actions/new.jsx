@@ -14,28 +14,27 @@ class New extends React.Component {
     const { record } = props
     this.api = new ApiClient()
     this.state = {
-      params: (record && record.params) || {},
-      errors: (record && record.errors) || {},
+      record: {
+        params: (record && record.params) || {},
+        errors: (record && record.errors) || {},
+        populated: (record && record.populated) || {},
+      }
     }
   }
 
   handleChange(propertyOrRecord, value) {
     if (typeof value === 'undefined' && propertyOrRecord.params) {
-      this.setState(state => ({
-        params: {
-          ...state.params,
-          ...propertyOrRecord.params,
-        },
-        errors: {
-          ...state.errors,
-          ...propertyOrRecord.errors,
-        },
-      }))
+      this.setState({
+        record: propertyOrRecord,
+      })
     } else {
       this.setState(state => ({
-        params: {
-          ...state.params,
-          [propertyOrRecord]: value,
+        record: {
+          ...state.record,
+          params: {
+            ...state.record.params,
+            [propertyOrRecord]: value,
+          },
         },
       }))
     }
@@ -44,7 +43,8 @@ class New extends React.Component {
   handleSubmit(event) {
     event.preventDefault()
     const { resource, history, addNotice } = this.props
-    const { params } = this.state
+    const { record } = this.state
+    const { params } = record
     this.api.resourceAction({
       resourceId: resource.id,
       actionName: 'new',
@@ -62,9 +62,12 @@ class New extends React.Component {
           type: 'error',
           message: 'There were errors in the record object. Check them out',
         })
-        this.setState({
-          errors: response.data.record.errors,
-        })
+        this.setState(state => ({
+          record: {
+            ...state.record,
+            errors: response.data.record.errors,
+          },
+        }))
       }
     })
     return false
@@ -72,9 +75,8 @@ class New extends React.Component {
 
   render() {
     const { resource } = this.props
-    const { params, errors } = this.state
     const properties = resource.editProperties
-    const record = { params, errors }
+    const { record } = this.state
     return (
       <BorderBox>
         <form onSubmit={this.handleSubmit.bind(this)}>

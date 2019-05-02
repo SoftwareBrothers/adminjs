@@ -1965,7 +1965,6 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
 
       case 'SET_NOTICE_PROGRESS':
         {
-          console.log(state);
           return state.map(function (notice) {
             return objectSpread({}, notice, {
               progress: notice.id === action.data.noticeId ? action.data.progress : notice.progress
@@ -11496,7 +11495,9 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
           }
         }
 
-        return false;
+        var prevError = record.errors && record.errors[property.name];
+        var newError = nextRecord.errors && nextRecord.errors[property.name];
+        return prevError !== newError;
       }
     }, {
       key: "setupDatePicker",
@@ -19082,7 +19083,7 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
       })
     }, React__default.createElement("i", {
       className: "icomoon-pagination-left"
-    })), title, tag && React__default.createElement(Tag, null, tag)), React__default.createElement(HeaderButtons, null, actions.map(function (headerAction) {
+    })), title, tag ? React__default.createElement(Tag, null, tag) : ''), React__default.createElement(HeaderButtons, null, actions.map(function (headerAction) {
       return React__default.createElement(ActionButton$1, {
         action: headerAction,
         key: headerAction.name,
@@ -19462,8 +19463,11 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
       var record = props.record;
       _this.api = new ApiClient();
       _this.state = {
-        params: record && record.params || {},
-        errors: record && record.errors || {}
+        record: {
+          params: record && record.params || {},
+          errors: record && record.errors || {},
+          populated: record && record.populated || {}
+        }
       };
       return _this;
     }
@@ -19472,16 +19476,15 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
       key: "handleChange",
       value: function handleChange(propertyOrRecord, value) {
         if (typeof value === 'undefined' && propertyOrRecord.params) {
-          this.setState(function (state) {
-            return {
-              params: objectSpread({}, state.params, propertyOrRecord.params),
-              errors: objectSpread({}, state.errors, propertyOrRecord.errors)
-            };
+          this.setState({
+            record: propertyOrRecord
           });
         } else {
           this.setState(function (state) {
             return {
-              params: objectSpread({}, state.params, defineProperty({}, propertyOrRecord, value))
+              record: objectSpread({}, state.record, {
+                params: objectSpread({}, state.record.params, defineProperty({}, propertyOrRecord, value))
+              })
             };
           });
         }
@@ -19496,7 +19499,8 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
             resource = _this$props.resource,
             history = _this$props.history,
             addNotice = _this$props.addNotice;
-        var params = this.state.params;
+        var record = this.state.record;
+        var params = record.params;
         this.api.resourceAction({
           resourceId: resource.id,
           actionName: 'new',
@@ -19515,8 +19519,12 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
               message: 'There were errors in the record object. Check them out'
             });
 
-            _this2.setState({
-              errors: response.data.record.errors
+            _this2.setState(function (state) {
+              return {
+                record: objectSpread({}, state.record, {
+                  errors: response.data.record.errors
+                })
+              };
             });
           }
         });
@@ -19528,14 +19536,8 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
         var _this3 = this;
 
         var resource = this.props.resource;
-        var _this$state = this.state,
-            params = _this$state.params,
-            errors = _this$state.errors;
         var properties = resource.editProperties;
-        var record = {
-          params: params,
-          errors: errors
-        };
+        var record = this.state.record;
         return React__default.createElement(BorderBox, null, React__default.createElement("form", {
           onSubmit: this.handleSubmit.bind(this)
         }, properties.map(function (property) {

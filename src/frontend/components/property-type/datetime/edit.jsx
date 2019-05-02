@@ -28,7 +28,10 @@ export default class Edit extends React.Component {
       }
     }
 
-    return false
+    const prevError = record.errors && record.errors[property.name]
+    const newError = nextRecord.errors && nextRecord.errors[property.name]
+
+    return prevError !== newError
   }
 
   setupDatePicker() {
