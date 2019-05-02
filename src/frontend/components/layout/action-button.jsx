@@ -78,7 +78,7 @@ ActionButton.propTypes = {
   location: locationType.isRequired,
   history: historyType.isRequired,
   actionPerformed: PropTypes.func,
-  addNotice: PropTypes.func,
+  addNotice: PropTypes.func.isRequired,
 }
 
 ActionButton.defaultProps = {

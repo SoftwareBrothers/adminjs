@@ -392,6 +392,11 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
     })
   });
   var childrenType = PropTypes$1.oneOfType([PropTypes$1.element, PropTypes$1.arrayOf(PropTypes$1.oneOfType([PropTypes$1.element, PropTypes$1.arrayOf(PropTypes$1.element), PropTypes$1.string, PropTypes$1.number])), PropTypes$1.string, PropTypes$1.number]);
+  var noticeType = PropTypes$1.shape({
+    message: PropTypes$1.string,
+    progress: PropTypes$1.number,
+    type: PropTypes$1.oneOf(['success', 'error'])
+  });
 
   var types = /*#__PURE__*/Object.freeze({
     pathsType: pathsType,
@@ -407,7 +412,8 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
     locationType: locationType,
     historyType: historyType,
     matchType: matchType,
-    childrenType: childrenType
+    childrenType: childrenType,
+    noticeType: noticeType
   });
 
   function _templateObject3() {
@@ -2094,7 +2100,7 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
     location: locationType.isRequired,
     history: historyType.isRequired,
     actionPerformed: PropTypes$1.func,
-    addNotice: PropTypes$1.func
+    addNotice: PropTypes$1.func.isRequired
   };
   ActionButton.defaultProps = {
     recordId: null,
@@ -3568,7 +3574,7 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
 
   }).call(commonjsGlobal);
 
-  //# sourceMappingURL=performance-now.js.map
+
   });
 
   var root = typeof window === 'undefined' ? commonjsGlobal : window
@@ -19201,7 +19207,7 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
         var _this2 = this;
 
         var _this$props = this.props,
-            onDrop = _this$props.onDrop,
+            drop = _this$props.drop,
             notice = _this$props.notice,
             notifyProgress = _this$props.notifyProgress;
         this.timer = setInterval(function () {
@@ -19218,7 +19224,7 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
         }, 1000);
         setTimeout(function () {
           clearInterval(_this2.timer);
-          onDrop();
+          drop();
         }, 1000 * (TIME_TO_DISAPPEAR + 1));
       }
     }, {
@@ -19231,13 +19237,13 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
       value: function render() {
         var _this$props2 = this.props,
             notice = _this$props2.notice,
-            onDrop = _this$props2.onDrop;
+            drop = _this$props2.drop;
         var progress = this.state.progress;
         return React__default.createElement(NoticeWrapper, {
           className: notice.type
         }, React__default.createElement("button", {
           className: "delete",
-          onClick: onDrop,
+          onClick: drop,
           type: "button"
         }), notice.message, React__default.createElement("div", {
           className: "progressBar",
@@ -19251,20 +19257,32 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
     return NoticeElement;
   }(React__default.Component);
 
+  NoticeElement.propTypes = {
+    notice: noticeType.isRequired,
+    drop: PropTypes$1.func.isRequired,
+    notifyProgress: PropTypes$1.func.isRequired
+  };
+
   var NoticeBox = function NoticeBox(props) {
-    var drop = props.drop,
+    var _drop = props.drop,
         notices = props.notices,
         notifyProgress = props.notifyProgress;
     return React__default.createElement(React__default.Fragment, null, notices && notices.map(function (notice) {
       return React__default.createElement(NoticeElement, {
         key: notice.id,
         notice: notice,
-        onDrop: function onDrop() {
-          return drop(notice.id);
+        drop: function drop() {
+          return _drop(notice.id);
         },
         notifyProgress: notifyProgress
       });
     }));
+  };
+
+  NoticeBox.propTypes = {
+    notices: PropTypes$1.arrayOf(noticeType).isRequired,
+    drop: PropTypes$1.func.isRequired,
+    notifyProgress: PropTypes$1.func.isRequired
   };
 
   var mapStateToProps$2 = function mapStateToProps(state) {

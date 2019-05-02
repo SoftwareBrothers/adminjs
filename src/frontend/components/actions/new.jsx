@@ -18,7 +18,7 @@ class New extends React.Component {
         params: (record && record.params) || {},
         errors: (record && record.errors) || {},
         populated: (record && record.populated) || {},
-      }
+      },
     }
   }
 

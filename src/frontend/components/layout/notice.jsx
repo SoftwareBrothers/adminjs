@@ -1,9 +1,11 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { connect } from 'react-redux'
 
 import { colors, sizes } from '../../styles/variables'
 import { dropNotice, setNoticeProgress } from '../../store/store'
+import { noticeType } from '../../types'
 
 const TIME_TO_DISAPPEAR = 10
 
@@ -69,7 +71,7 @@ class NoticeElement extends React.Component {
   }
 
   componentDidMount() {
-    const { onDrop, notice, notifyProgress } = this.props
+    const { drop, notice, notifyProgress } = this.props
 
     this.timer = setInterval(() => {
       this.setState((state) => {
@@ -81,7 +83,7 @@ class NoticeElement extends React.Component {
 
     setTimeout(() => {
       clearInterval(this.timer)
-      onDrop()
+      drop()
     }, 1000 * (TIME_TO_DISAPPEAR + 1))
   }
 
@@ -90,16 +92,22 @@ class NoticeElement extends React.Component {
   }
 
   render() {
-    const { notice, onDrop } = this.props
+    const { notice, drop } = this.props
     const { progress } = this.state
     return (
       <NoticeWrapper className={notice.type}>
-        <button className="delete" onClick={onDrop} type="button" />
+        <button className="delete" onClick={drop} type="button" />
         { notice.message }
         <div className="progressBar" style={{ width: `${progress}%` }} />
       </NoticeWrapper>
     )
   }
+}
+
+NoticeElement.propTypes = {
+  notice: noticeType.isRequired,
+  drop: PropTypes.func.isRequired,
+  notifyProgress: PropTypes.func.isRequired,
 }
 
 const NoticeBox = (props) => {
@@ -110,12 +118,18 @@ const NoticeBox = (props) => {
         <NoticeElement
           key={notice.id}
           notice={notice}
-          onDrop={() => drop(notice.id)}
+          drop={() => drop(notice.id)}
           notifyProgress={notifyProgress}
         />
       ))}
     </React.Fragment>
   )
+}
+
+NoticeBox.propTypes = {
+  notices: PropTypes.arrayOf(noticeType).isRequired,
+  drop: PropTypes.func.isRequired,
+  notifyProgress: PropTypes.func.isRequired,
 }
 
 const mapStateToProps = state => ({

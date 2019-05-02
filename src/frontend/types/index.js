@@ -118,3 +118,9 @@ export const childrenType = PropTypes.oneOfType([
   PropTypes.string,
   PropTypes.number,
 ])
+
+export const noticeType = PropTypes.shape({
+  message: PropTypes.string,
+  progress: PropTypes.number,
+  type: PropTypes.oneOf(['success', 'error']),
+})
