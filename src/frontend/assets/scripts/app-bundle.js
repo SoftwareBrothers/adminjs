@@ -19119,56 +19119,46 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
 	  componentId: "sc-5s7xyz-1"
 	})(["height:100%;overflow-y:auto;width:100%;background:", ";display:flex;flex-direction:column;"], colors.bck);
 
-	class App extends React__default.Component {
-	  constructor(props) {
-	    super(props);
-	    this.state = {
-	      sidebarActive: true
-	    };
-	  }
-
-	  render() {
-	    const {
-	      paths
-	    } = this.props;
-	    const h = new viewHelpers({
-	      options: paths
-	    });
-	    const resourceId = ':resourceId';
-	    const actionName = ':actionName';
-	    const recordId = ':recordId';
-	    const recordActionUrl = h.recordActionUrl({
-	      resourceId,
-	      recordId,
-	      actionName
-	    });
-	    const resourceActionUrl = h.resourceActionUrl({
-	      resourceId,
-	      actionName
-	    });
-	    const listUrl = h.listUrl({
-	      resourceId
-	    });
-	    return React__default.createElement(React__default.Fragment, null, React__default.createElement(GlobalStyle, null), React__default.createElement(ApplicationWrapper, null, React__default.createElement(Sidebar$1, null), React__default.createElement(Core, null, React__default.createElement(Topbar$1, null), React__default.createElement(reactRouterDom.Switch, null, React__default.createElement(reactRouterDom.Route, {
-	      path: h.dashboardUrl(),
-	      exact: true,
-	      component: Dashboard$2
-	    }), React__default.createElement(reactRouterDom.Route, {
-	      path: listUrl,
-	      exact: true,
-	      component: Resource$1
-	    }), React__default.createElement(reactRouterDom.Route, {
-	      path: resourceActionUrl,
-	      exact: true,
-	      component: ResourceAction$1
-	    }), React__default.createElement(reactRouterDom.Route, {
-	      path: recordActionUrl,
-	      exact: true,
-	      component: RecordAction$1
-	    })))));
-	  }
-
-	}
+	const App = props => {
+	  const {
+	    paths
+	  } = props;
+	  const h = new viewHelpers({
+	    options: paths
+	  });
+	  const resourceId = ':resourceId';
+	  const actionName = ':actionName';
+	  const recordId = ':recordId';
+	  const recordActionUrl = h.recordActionUrl({
+	    resourceId,
+	    recordId,
+	    actionName
+	  });
+	  const resourceActionUrl = h.resourceActionUrl({
+	    resourceId,
+	    actionName
+	  });
+	  const listUrl = h.listUrl({
+	    resourceId
+	  });
+	  return React__default.createElement(React__default.Fragment, null, React__default.createElement(GlobalStyle, null), React__default.createElement(ApplicationWrapper, null, React__default.createElement(Sidebar$1, null), React__default.createElement(Core, null, React__default.createElement(Topbar$1, null), React__default.createElement(reactRouterDom.Switch, null, React__default.createElement(reactRouterDom.Route, {
+	    path: h.dashboardUrl(),
+	    exact: true,
+	    component: Dashboard$2
+	  }), React__default.createElement(reactRouterDom.Route, {
+	    path: listUrl,
+	    exact: true,
+	    component: Resource$1
+	  }), React__default.createElement(reactRouterDom.Route, {
+	    path: resourceActionUrl,
+	    exact: true,
+	    component: ResourceAction$1
+	  }), React__default.createElement(reactRouterDom.Route, {
+	    path: recordActionUrl,
+	    exact: true,
+	    component: RecordAction$1
+	  })))));
+	};
 
 	App.propTypes = {
 	  paths: pathsType.isRequired
@@ -19298,7 +19288,8 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
 	const store = createStore(window.REDUX_STATE);
 	const Application = React__default.createElement(reactRedux.Provider, {
 	  store: store
-	}, React__default.createElement(reactRouterDom.BrowserRouter, null, React__default.createElement(App$1, null)));
+	}, React__default.createElement(reactRouterDom.BrowserRouter, null, React__default.createElement(App$1, null))); // eslint-disable-next-line no-undef
+
 	window.regeneratorRuntime = regenerator;
 	var bundleEntry = {
 	  Application,

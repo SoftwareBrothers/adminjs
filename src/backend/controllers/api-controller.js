@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 /* eslint no-unused-vars: 0 */
 const { unflatten, flatten } = require('flat')
 const populator = require('../utils/populator')
@@ -19,7 +20,7 @@ const ViewHelpers = require('../utils/view-helpers')
  * | `.../api/resources/{resourceId}/actions/{action}` | {@link ApiController#resourceAction} | Perform cusomised resource action |
  * | `.../api/resources/{resourceId}/records/{recordId}/{action}` | {@link ApiController#recordAction} | Perform cusomised record action |
  * | `.../api/dashboard` | {@link ApiController#dashboard} | Perform cusomised dashboard action |
- * 
+ *
  * @hideconstructor
  */
 class ApiController {

@@ -24,5 +24,15 @@ const Application = (
   </Provider>
 )
 
+// eslint-disable-next-line no-undef
 window.regeneratorRuntime = regeneratorRuntime
-export default { Application, Components, UserComponents: {}, ApiClient, style, PropertyTypes, types, env }
+export default {
+  Application,
+  Components,
+  UserComponents: {},
+  ApiClient,
+  style,
+  PropertyTypes,
+  types,
+  env,
+}

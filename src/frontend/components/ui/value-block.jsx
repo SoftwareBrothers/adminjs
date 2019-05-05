@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
-import WrapperBox from '../ui/wrapper-box'
+import WrapperBox from './wrapper-box'
 import { colors } from '../../styles/variables'
 import { childrenType } from '../../types'
 

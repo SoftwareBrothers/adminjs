@@ -42,44 +42,35 @@ const Core = styled.section`
   flex-direction: column;
 `
 
-class App extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      sidebarActive: true,
-    }
-  }
+const App = (props) => {
+  const { paths } = props
+  const h = new ViewHelpers({ options: paths })
 
-  render() {
-    const { paths } = this.props
-    const h = new ViewHelpers({ options: paths })
+  const resourceId = ':resourceId'
+  const actionName = ':actionName'
+  const recordId = ':recordId'
 
-    const resourceId = ':resourceId'
-    const actionName = ':actionName'
-    const recordId = ':recordId'
+  const recordActionUrl = h.recordActionUrl({ resourceId, recordId, actionName })
+  const resourceActionUrl = h.resourceActionUrl({ resourceId, actionName })
+  const listUrl = h.listUrl({ resourceId })
 
-    const recordActionUrl = h.recordActionUrl({ resourceId, recordId, actionName })
-    const resourceActionUrl = h.resourceActionUrl({ resourceId, actionName })
-    const listUrl = h.listUrl({ resourceId })
-
-    return (
-      <React.Fragment>
-        <GlobalStyle />
-        <ApplicationWrapper>
-          <Sidebar />
-          <Core>
-            <Topbar />
-            <Switch>
-              <Route path={h.dashboardUrl()} exact component={Dashboard} />
-              <Route path={listUrl} exact component={Resource} />
-              <Route path={resourceActionUrl} exact component={ResourceAction} />
-              <Route path={recordActionUrl} exact component={RecordAction} />
-            </Switch>
-          </Core>
-        </ApplicationWrapper>
-      </React.Fragment>
-    )
-  }
+  return (
+    <React.Fragment>
+      <GlobalStyle />
+      <ApplicationWrapper>
+        <Sidebar />
+        <Core>
+          <Topbar />
+          <Switch>
+            <Route path={h.dashboardUrl()} exact component={Dashboard} />
+            <Route path={listUrl} exact component={Resource} />
+            <Route path={resourceActionUrl} exact component={ResourceAction} />
+            <Route path={recordActionUrl} exact component={RecordAction} />
+          </Switch>
+        </Core>
+      </ApplicationWrapper>
+    </React.Fragment>
+  )
 }
 
 App.propTypes = {
