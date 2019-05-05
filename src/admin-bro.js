@@ -1,5 +1,6 @@
 const _ = require('lodash')
 const path = require('path')
+const fs = require('fs')
 
 const loginTemplate = require('./frontend/login-template')
 const BaseResource = require('./backend/adapters/base-resource')
@@ -8,6 +9,7 @@ const BaseRecord = require('./backend/adapters/base-record')
 const BaseProperty = require('./backend/adapters/base-property')
 const Filter = require('./backend/utils/filter')
 const ValidationError = require('./backend/utils/validation-error')
+const ConfigurationError = require('./backend/utils/configuration-error')
 const ResourcesFactory = require('./backend/utils/resources-factory')
 const ACTIONS = require('./backend/actions')
 
@@ -20,13 +22,20 @@ const pkg = require('../package.json')
  * @property {String} [rootPath='/admin']             under which path AdminBro will be available
  * @property {String} [logoutPath='/admin/logout']    url to a logout action
  * @property {String} [loginPath='/admin/login']      url to a login page
- * @property {BaseDatabase[]} [databases=[]]         array of all databases
- * @property {BaseResource[] | Object[]} [resources=[]] array of all resources. Resources can be
- *                                                    given in a regular way or nested within
- *                                                    an object along with its decorator
+ * @property {BaseDatabase[]} [databases=[]]          array of all databases
+ * @property {Object[]} [resources=[]]                array of all database resources.
+ *                                                    Resources can be given directly or
+ *                                                    nested within an object along with its
+ *                                                    options
  * @property {BaseResource} [resources[].resource]    class, which extends {@link BaseResource}
  * @property {ResourceOptions} [resources[].options]  options for given resource
- * @property {PageBuilder} [dashboard]                your custom dashboard page
+ * @property {Object} [dashboard]                     your custom dashboard page
+ * @property {ActionHandler} [dashboard.handler]      action handler which will override default
+ *                                                    dashboard handler - you can perform actions
+ *                                                    on the backend there and pass results to
+ *                                                    component
+ * @property {Component} [dashboard.component]        Component which will be rendered on the
+ *                                                    dashboard
  * @property {Object} [branding]                      branding settings
  * @property {String} [branding.logo]                 logo shown in AdminBro in the top left corner
  * @property {String} [branding.companyName]          company name
@@ -35,6 +44,7 @@ const pkg = require('../package.json')
  * @property {Object} [assets]                        assets object
  * @property {String[]}  [assets.styles]              array with a paths to styles
  * @property {String[]}  [assets.scripts]             array with a paths to scripts
+ * @property {Object<String,String>} [env]            environmental variables passed to the frontend
  *
  * @description AdminBro takes a list of options of the entire framework. All off them
  * have default values, but you can easily tailor them to your needs
@@ -52,14 +62,10 @@ const pkg = require('../package.json')
  *   logoutPath: '/xyz-admin/exit',
  *   loginPath: '/xyz-admin/sign-in',
  *   databases: [connection]
- *   resources: [{ resource: ArticleModel, decorator: ArticleDecorator}]
+ *   resources: [{ resource: ArticleModel, options: {...}}]
  *   branding: {
  *     companyName: 'XYZ c.o.'
  *   },
- *   assets: {
- *     styles: [],
- *     scripts: []
- *   }
  * })
  */
 const defaults = {
@@ -102,7 +108,7 @@ class AdminBro {
      * @type {AdminBroOptions}
      * @description Options given by a user
      */
-    this.options = _.merge(defaults, options)
+    this.options = _.merge({}, defaults, options)
 
     const { databases, resources } = this.options
     const resourcesFactory = new ResourcesFactory(this, AdminBro.registeredAdapters)
@@ -153,8 +159,25 @@ class AdminBro {
     return this.resources.find(m => m.id() === resourceId)
   }
 
-  static require(name, src) {
+  /**
+   * Requires given jsx file, that it can be bundled to the frontend.
+   * It will be available under AdminBro.UserComponents[componentId].
+   *
+   * @param   {String}  src  path to a file containing react component.
+   *
+   * @return  {String}       componentId - uniq id of a component
+   *
+   * @example
+   * const adminBroOptions = {
+   *   dashboard: {
+   *     component: AdminBro.require('./path/to/component'),
+   *   }
+   * }
+   */
+  static require(src) {
+    const extensions = ['.jsx', '.js']
     let filePath = ''
+    const componentId = _.uniqueId('Component')
     if (src[0] === '/') {
       filePath = src
     } else {
@@ -163,13 +186,25 @@ class AdminBro {
       filePath = path.join(path.dirname(m[1]), src)
     }
 
-    AdminBro.Components[name] = filePath
+    const { root, dir, name } = path.parse(filePath)
+    if (!extensions.find((ext) => {
+      const fileName = path.format({ root, dir, name, ext })
+      return fs.existsSync(fileName)
+    })) {
+      throw new ConfigurationError(`Given file ${src}, doesn't exist.`, 'AdminBro.html')
+    }
 
-    return name
+    AdminBro.UserComponents[componentId] = path.format({ root, dir, name })
+
+    return componentId
   }
 }
 
-AdminBro.Components = {}
+/**
+ * List of paths to all custom components defined by users.
+ * @type {Object<String, String>}
+ */
+AdminBro.UserComponents = {}
 
 /**
  * List of all supported routes along with controllers
