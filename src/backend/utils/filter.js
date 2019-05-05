@@ -8,6 +8,7 @@
 
 /**
  * Filter object wrapping up selected filters.
+ * @private
  */
 class Filter {
   /**

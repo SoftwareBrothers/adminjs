@@ -1,4 +1,21 @@
-const populator = require('../utils/populator')
+/**
+ * @implements Action
+ * @category Actions
+ * @module EditAction
+ * @description
+ * Shows form for updating existing new record
+ *
+ * Uses {@link EditAction} component to render form
+ */
+
+/**
+ * @typedef {Object} ApiResponse
+ * @property {BaseRecord~JSON} record     populated record, along with errors
+ *                                        (if any).
+ * @property {BaseRecord~JSON} [redirectUrl] in case of success it fills this filed
+ *                                          to indicate that there should be
+ *                                          redirect after the action.
+ */
 
 module.exports = {
   name: 'edit',
@@ -6,11 +23,18 @@ module.exports = {
   actionType: 'record',
   icon: 'icomoon-edit',
   label: 'Edit',
+  /**
+   * Responsible for updating existing record.
+   *
+   * To invoke this action use {@link ApiClient#recordAction}
+   *
+   * @return  {module:EditAction~ApiResponse}  populated record
+   * @implements Action.handler
+   */
   handler: async (request, response, data) => {
-    const record = await data.resource.findOne(request.params.recordId)
+    const { record } = data
     if (request.method === 'get') {
-      const [populated] = await populator([record])
-      return { record: populated.toJSON() }
+      return { record: record.toJSON() }
     }
     if (request.method === 'post') {
       await record.update(request.payload.record)

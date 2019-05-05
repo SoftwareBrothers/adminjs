@@ -4,7 +4,7 @@ import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 
 import ActionButton from './action-button'
-import StyledButton from './styled-button'
+import StyledButton from '../ui/styled-button'
 
 import ViewHelpers from '../../../backend/utils/view-helpers'
 
@@ -22,32 +22,38 @@ const HeaderWrapper = styled.section.attrs({
 const Tag = styled.span.attrs({
   className: 'tag',
 })`
-  background: ${colors.primary};
-  color: #fff;
-  margin-left: ${sizes.padding};
+  &&& {
+    background: ${colors.primary};
+    color: #fff;
+    margin-left: ${sizes.padding};
+  }
 `
 
 const BackBtn = styled(Link)`
-  border-radius: 50%;
-  width: ${sizes.paddingLayout};
-  height: ${sizes.paddingLayout};
-  color: ${colors.lightText};
-  font-size: ${fonts.base};
-  padding: ${sizes.paddingMin};
-  background-color: ${colors.superLightBack};
-  text-align: center;
-  margin-right: ${sizes.padding};
-  &:hover{
-    background-color: ${colors.lightText};
-    color: #fff;
+  &&& {
+    border-radius: 50%;
+    width: ${sizes.paddingLayout};
+    height: ${sizes.paddingLayout};
+    color: ${colors.lightText};
+    font-size: ${fonts.base};
+    padding: ${sizes.paddingMin};
+    background-color: ${colors.superLightBack};
+    text-align: center;
+    margin-right: ${sizes.padding};
+    &:hover{
+      background-color: ${colors.lightText};
+      color: #fff;
+    }
   }
 `
 
 const HeaderTitle = styled.h1.attrs({
   className: 'level-left',
 })`
-  font-size: ${fonts.header};
-  font-weight: normal;
+  &&& {
+    font-size: ${fonts.header};
+    font-weight: normal;
+  }
 `
 
 const HeaderButtons = styled.div.attrs({
@@ -58,6 +64,29 @@ const HeaderButtons = styled.div.attrs({
   }
 `
 
+/**
+ * Header of an action
+ *
+ * @private
+ * @component
+ * var recordAction = {
+ *     actionType: 'record',
+ *     icon: 'fas fa-edit',
+ *     isVisible: true,
+ *     label: 'Action',
+ *     name: 'action'
+ * };
+ *
+ * props = {
+ *   resource: {
+ *     editProperties: [],
+ *     id: "ResourceId",
+ *     name: "Resource Name",
+ *     resourceActions: [recordAction],
+ *     recordActions: [recordAction],
+ *   }
+ * }
+ */
 const ActionHeader = (props) => {
   const h = new ViewHelpers()
   const {

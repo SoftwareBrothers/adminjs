@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import Select from 'react-select'
 
-import PropertyInFilter from '../../layout/property-in-filter'
+import PropertyInFilter from '../../ui/property-in-filter'
 import { filterStyles } from '../../../styles/select-styles'
 import { propertyType } from '../../../types'
 

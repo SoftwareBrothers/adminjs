@@ -4,7 +4,8 @@ import { Switch, Route } from 'react-router-dom'
 import styled, { createGlobalStyle } from 'styled-components'
 
 import ViewHelpers from '../../../backend/utils/view-helpers'
-import { Sidebar, Topbar } from '../layout'
+import Sidebar from './sidebar'
+import Topbar from './topbar'
 import { pathsType } from '../../types'
 import { colors } from '../../styles/variables'
 
@@ -49,15 +50,8 @@ class App extends React.Component {
     }
   }
 
-  toggleSidebar() {
-    this.setState(state => ({
-      sidebarActive: !state.sidebarActive,
-    }))
-  }
-
   render() {
     const { paths } = this.props
-    const { sidebarActive } = this.state
     const h = new ViewHelpers({ options: paths })
 
     const resourceId = ':resourceId'
@@ -72,9 +66,9 @@ class App extends React.Component {
       <React.Fragment>
         <GlobalStyle />
         <ApplicationWrapper>
-          <Sidebar sidebarActive={sidebarActive} />
+          <Sidebar />
           <Core>
-            <Topbar toggleSidebar={this.toggleSidebar.bind(this)} />
+            <Topbar />
             <Switch>
               <Route path={h.dashboardUrl()} exact component={Dashboard} />
               <Route path={listUrl} exact component={Resource} />

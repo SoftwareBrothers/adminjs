@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 
-import StyledButton from '../layout/styled-button'
+import StyledButton from '../ui/styled-button'
 
 const DashboardWrapper = styled.section`
   display: flex;

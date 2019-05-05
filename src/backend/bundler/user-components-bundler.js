@@ -5,18 +5,10 @@ const bundler = require('./bundler')
 
 const tmpPath = '.adminbro'
 const entryPath = path.join(tmpPath, '.entry.js')
+const generateEntry = require('./generate-user-component-entry')
 
 async function build(admin) {
-  const { Components } = admin.constructor
-  const envs = Object.keys(admin.options.env || {}).map(env => (
-    `AdminBro.env.${env} = ${JSON.stringify(admin.options.env[env])}\n`
-  )).join('')
-  const entryFile = envs + Object.keys(Components).map(c => (
-    [
-      `import ${c} from '${Components[c]}'`,
-      `AdminBro.Components.${c} = ${c}`,
-    ].join('\n')
-  )).join('\n\n')
+  const entryFile = generateEntry(admin)
 
   try {
     await util.promisify(fs.mkdir)(tmpPath, { recursive: true })

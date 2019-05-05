@@ -305,6 +305,25 @@ class ResourceDecorator {
     return record.param(this.titleProperty().name())
   }
 
+  /**
+   * @typedef {Object} Action~JSON
+   * @description JSON representation of an {@link Action}
+   * @property {String} name
+   * @property {String | Array<String>} actionType one of 'record' 'resource or
+   *                                               an array containing both
+   * @property {String} icon
+   * @property {String} label
+   * @property {String} guard
+   * @property {String} component
+   */
+
+  /**
+   * Serializes given {@link Action} to JSON format.
+   *
+   * @param   {Action}  action
+   *
+   * @return  {Action~JSON}
+   */
   static serializeAction(action) {
     return {
       name: action.name,
@@ -317,6 +336,29 @@ class ResourceDecorator {
     }
   }
 
+  /**
+   * @typedef {Object} BaseResource~JSON
+   * @property {String} id        uniq ID of a resource
+   * @property {String} name      resource name used in the UI
+   * @property {String} parent.name       name of the parent category
+   * @property {String} parent.icon       icon class of a parent category (i.e. 'icon-bomb')
+   * @property {String} titleProperty     name of a property which should be treated as a
+   *                                      _title_ property.
+   * @property {Array<Action~JSON>} recordActions   list of all record actions available for
+   *                                                given resource
+   * @property {Array<Action~JSON>} resourceActions list of all resource actions available
+   *                                                for given resource
+   * @property {Array<Property~JSON>} listProperties
+   * @property {Array<Property~JSON>} editProperties
+   * @property {Array<Property~JSON>} showProperties
+   * @property {Array<Property~JSON>} filterProperties
+   */
+
+  /**
+   * Returns JSON representation of a resource
+   *
+   * @return  {BaseResource~JSON}
+   */
   toJSON() {
     return {
       id: this._resource.id(),

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import Select from 'react-select/lib/Async'
 
 import ApiClient from '../../../utils/api-client'
-import PropertyInEdit from '../../layout/property-in-edit'
+import PropertyInEdit from '../../ui/property-in-edit'
 import selectStyles from '../../../styles/select-styles'
 import { simplifiedPropertyType, recordType } from '../../../types'
 

@@ -2,7 +2,9 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import styled, { createGlobalStyle } from 'styled-components'
 
-import { BorderBox, StyledButton, PropertyInEdit } from '../layout'
+import WrapperBox from '../ui/wrapper-box'
+import StyledButton from '../ui/styled-button'
+import PropertyInEdit from '../ui/property-in-edit'
 import { colors, fonts, sizes } from '../../styles/variables'
 
 const GlobalStyle = createGlobalStyle`
@@ -50,7 +52,7 @@ const Login = (props) => {
       <GlobalStyle />
       <FlexWrapper>
         <LoginBox>
-          <BorderBox>
+          <WrapperBox border>
             <div className="content">
               <h1>Welcome!</h1>
               <p>Please login to proceed to the admin panel</p>
@@ -67,7 +69,7 @@ const Login = (props) => {
                 Login
               </StyledButton>
             </form>
-          </BorderBox>
+          </WrapperBox>
         </LoginBox>
       </FlexWrapper>
     </React.Fragment>

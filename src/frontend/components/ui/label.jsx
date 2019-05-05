@@ -2,6 +2,13 @@ import styled from 'styled-components'
 
 import { fonts, colors, sizes } from '../../styles/variables'
 
+/**
+ * @class
+ * @component
+ * props = {
+ *   children: 'some content inside a label'
+ * }
+ */
 const Label = styled.label.attrs({
   className: 'label',
 })`

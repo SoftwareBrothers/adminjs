@@ -1,14 +1,26 @@
-const populator = require('../utils/populator')
-
+/**
+ * @implements Action
+ * @category Actions
+ * @module ShowAction
+ * @description
+ * Retruns selected Record
+ * Uses {@link ShowAction} component to render form
+ */
 module.exports = {
   name: 'show',
   isVisible: true,
   actionType: 'record',
   icon: 'icomoon-info',
   label: 'Info',
-  handler: async (request, response, data) => {
-    const record = await data.resource.findOne(request.params.recordId)
-    const [populated] = await populator([record])
-    return { record: populated.toJSON() }
-  },
+  /**
+   * Responsible for returning data for given record.
+   *
+   * To invoke this action use {@link ApiClient#recordAction}
+   *
+   * @return  {BaseRecord~JSON}  populated record
+   * @implements Action.handler
+   */
+  handler: async (request, response, data) => ({
+    record: data.record.toJSON(),
+  }),
 }

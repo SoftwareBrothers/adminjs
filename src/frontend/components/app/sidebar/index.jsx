@@ -47,9 +47,9 @@ const SidebarLabel = styled.h2`
 `
 
 const Sidebar = (props) => {
-  const { branding, paths, resources, sidebarActive } = props
+  const { branding, paths, resources } = props
   return (
-    <SidebarWrapper className={sidebarActive ? 'active' : 'hidden'}>
+    <SidebarWrapper className="active">
       <section>
         <SidebarBranding branding={branding} paths={paths} />
         <SidebarLabel>Navigation</SidebarLabel>
@@ -68,7 +68,6 @@ Sidebar.propTypes = {
   paths: pathsType.isRequired,
   branding: brandingType.isRequired,
   resources: PropTypes.arrayOf(resourceType).isRequired,
-  sidebarActive: PropTypes.bool.isRequired,
 }
 
 const mapStateToProps = state => ({

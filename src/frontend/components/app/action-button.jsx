@@ -7,11 +7,27 @@ import PropTypes from 'prop-types'
 import { withRouter } from 'react-router-dom'
 
 import { actionType, locationType, historyType } from '../../types'
-import StyledButton from './styled-button'
+import StyledButton from '../ui/styled-button'
 import ApiClient from '../../utils/api-client'
 import ViewHelpers from '../../../backend/utils/view-helpers'
 import withNotice from '../../store/with-notice'
 
+/**
+ * Renders Button for an action
+ *
+ * @component
+ * props = {
+ *   className: 'is-primary',
+ *   action: {
+ *     actionType: 'record',
+ *     icon: 'fas fa-edit',
+ *     isVisible: true,
+ *     label: 'Action',
+ *     name: 'actionId'
+ *   },
+ *   resourceId: 'ResourceId',
+ * };
+ */
 class ActionButton extends React.PureComponent {
   handleClick(event) {
     const {

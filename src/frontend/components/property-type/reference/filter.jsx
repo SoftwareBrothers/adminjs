@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import Select from 'react-select/lib/Async'
 import ApiClient from '../../../utils/api-client'
 
-import PropertyInFilter from '../../layout/property-in-filter'
+import PropertyInFilter from '../../ui/property-in-filter'
 import { filterStyles } from '../../../styles/select-styles'
 import { propertyType } from '../../../types'
 

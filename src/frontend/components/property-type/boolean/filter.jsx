@@ -3,7 +3,7 @@ import Select from 'react-select'
 import PropTypes from 'prop-types'
 
 import mapValue from './map-value'
-import PropertyInFilter from '../../layout/property-in-filter'
+import PropertyInFilter from '../../ui/property-in-filter'
 import { filterStyles } from '../../../styles/select-styles'
 import { propertyType } from '../../../types'
 

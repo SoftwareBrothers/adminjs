@@ -1,6 +1,7 @@
+
 import React from 'react'
 
-import PropertyInShow from '../../layout/property-in-show'
+import PropertyInShow from '../../ui/property-in-show'
 import { propertyType, recordType } from '../../../types'
 
 export default class Show extends React.PureComponent {

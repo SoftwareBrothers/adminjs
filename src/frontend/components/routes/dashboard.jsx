@@ -1,7 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import DefaultDashboard from '../widgets/default-dashboard'
+
+import DefaultDashboard from '../app/default-dashboard'
 
 class Dashboard extends React.Component {
   constructor(props) {
@@ -20,9 +21,9 @@ class Dashboard extends React.Component {
     const { isClient } = this.state
     let Component
     if (dashboard && dashboard.component && isClient
-        && AdminBro.Components[dashboard.component]
+        && AdminBro.UserComponents[dashboard.component]
     ) {
-      Component = AdminBro.Components[dashboard.component]
+      Component = AdminBro.UserComponents[dashboard.component]
     } else {
       Component = DefaultDashboard
     }

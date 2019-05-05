@@ -2,7 +2,10 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
-import { Breadcrumbs, ActionHeader, ActionWrapper, Notice } from '../layout'
+import Breadcrumbs from '../app/breadcrumbs' 
+import ActionHeader from '../app/action-header' 
+import WrapperBox from '../ui/wrapper-box' 
+import Notice from '../app/notice' 
 import { resourceType, matchType } from '../../types'
 
 import actions from '../actions'
@@ -11,7 +14,7 @@ class RecordAction extends React.Component {
   static actionComponent({ action, isClient }) {
     let Action = actions[action.name]
     if (isClient && action.component) {
-      Action = AdminBro.Components[action.component]
+      Action = AdminBro.UserComponents[action.component]
     }
     return Action || (() => (<div />))
   }
@@ -39,7 +42,7 @@ class RecordAction extends React.Component {
     const Action = RecordAction.actionComponent({ action, isClient })
 
     return (
-      <ActionWrapper>
+      <WrapperBox>
         <Breadcrumbs resource={resource} actionName={actionName} recordTitle={recordTitle} />
         <Notice />
         <ActionHeader
@@ -48,7 +51,7 @@ class RecordAction extends React.Component {
           action={action}
         />
         <Action action={action} resource={resource} recordId={recordId} />
-      </ActionWrapper>
+      </WrapperBox>
     )
   }
 }

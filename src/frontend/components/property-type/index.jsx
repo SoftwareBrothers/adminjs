@@ -36,7 +36,7 @@ export default class PropertyType extends React.Component {
     let PropertyRenderer = (types[property.type] && types[property.type][where])
                           || defaultType[where]
     if (property.components && property.components[where] && isClient) {
-      PropertyRenderer = AdminBro.Components[property.components[where]]
+      PropertyRenderer = AdminBro.UserComponents[property.components[where]]
     }
 
     return (

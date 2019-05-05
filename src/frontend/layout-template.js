@@ -3,10 +3,20 @@ import { renderToString } from 'react-dom/server'
 import { StaticRouter } from 'react-router-dom'
 import { Provider } from 'react-redux'
 
-import App from './components/app'
+import App from './components/app/application'
 import ViewHelpers from '../backend/utils/view-helpers'
 import initializeStore from './store'
 
+/**
+ * Renders (SSR) html for given location
+ *
+ * @param {AdminBro} admin
+ * @param {Object} [currentAdmin]
+ * @param {String} currentAdmin.email
+ * @param {String} location='/'
+ *
+ * @private
+ */
 const html = (admin, currentAdmin, location = '/') => {
   const context = {}
   const h = new ViewHelpers({ options: admin.options })
@@ -62,7 +72,7 @@ const html = (admin, currentAdmin, location = '/') => {
       <script src="https://cdnjs.cloudflare.com/ajax/libs/redux/4.0.1/redux.min.js"></script>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/prop-types/15.7.2/prop-types.js"></script>
-      <script src="https://unpkg.com/styled-components/dist/styled-components.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/styled-components/4.2.0/styled-components.min.js"></script>
       <script src="${h.assetPath('app.bundle.js')}"></script>
       <script src="${h.assetPath('components.bundle.js')}"></script>
       ${styles.join('\n')}

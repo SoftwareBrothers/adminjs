@@ -2,6 +2,8 @@ const babel = require('rollup-plugin-babel')
 const commonjs = require('rollup-plugin-commonjs')
 const resolve = require('rollup-plugin-node-resolve')
 const replace = require('rollup-plugin-replace')
+const { terser } = require('rollup-plugin-terser')
+
 
 module.exports = {
   external: [
@@ -49,8 +51,10 @@ module.exports = {
     }),
     commonjs(commonJSConfig),
     babel({
+      babelrc: false,
       presets: [require.resolve('@babel/preset-react'), require.resolve('@babel/preset-env')],
       ...babelConfig,
     }),
+    // terser(),
   ],
 }

@@ -19,7 +19,23 @@ const Property = styled.div`
     }
   }
 `
-
+/**
+ * @classdesc
+ * Wrapps input with label and optional error
+ *
+ * @hideconstructor
+ * @component
+ * props = {
+ *   property: {
+ *     label: 'User Name',
+ *     name: 'username',
+ *   },
+ *   children: 'wrapped component',
+ *   error: {
+ *     message: 'some error message',
+ *   }
+ * }
+ */
 const PropertyInEdit = (props) => {
   const { children, property, error } = props
   return (
@@ -36,8 +52,17 @@ const PropertyInEdit = (props) => {
 }
 
 PropertyInEdit.propTypes = {
+  /**
+   * Wrapped input element
+   */
   children: childrenType,
+  /**
+   * Property object based on {@link BaseProperty~JSON}
+   */
   property: simplifiedPropertyType.isRequired,
+  /**
+   * Optional error message
+   */
   error: PropTypes.shape({
     message: PropTypes.string,
   }),

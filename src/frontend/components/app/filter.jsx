@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
 import { sizes, colors } from '../../styles/variables'
-import StyledButton from './styled-button'
+import StyledButton from '../ui/styled-button'
 import PropertyType from '../property-type'
 import { locationType, historyType, resourceType, matchType } from '../../types'
 

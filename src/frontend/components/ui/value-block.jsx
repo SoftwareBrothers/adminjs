@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
-import BorderBox from '../layout/border-box'
+import WrapperBox from '../ui/wrapper-box'
 import { colors } from '../../styles/variables'
 import { childrenType } from '../../types'
 
@@ -26,7 +26,7 @@ export default class ValueBlock extends React.PureComponent {
     const { icon, value, children, color } = this.props
 
     return (
-      <BorderBox>
+      <WrapperBox border>
         {children}
         <Level color={color}>
           <div className="value">
@@ -36,7 +36,7 @@ export default class ValueBlock extends React.PureComponent {
             <i className={icon} />
           </div>
         </Level>
-      </BorderBox>
+      </WrapperBox>
     )
   }
 }

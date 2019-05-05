@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import PropertyInEdit from '../../layout/property-in-edit'
+import PropertyInEdit from '../../ui/property-in-edit'
 import { simplifiedPropertyType, recordType } from '../../../types'
 
 export default class Edit extends React.Component {

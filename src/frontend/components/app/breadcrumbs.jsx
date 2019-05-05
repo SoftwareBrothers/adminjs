@@ -9,8 +9,10 @@ import { sizes, fonts, colors } from '../../styles/variables'
 const BreadcrumbsContainer = styled.nav.attrs({
   className: 'breadcrumb',
 })`
-  margin: -${sizes.padding} 0 ${sizes.padding} -10px;
-  font-size: ${fonts.base};
+  &&& {
+    margin: -${sizes.padding} 0 ${sizes.padding} -10px;
+    font-size: ${fonts.base};
+  }
 `
 
 const BreadcrumbLink = styled(Link)`
@@ -22,6 +24,31 @@ const BreadcrumbLink = styled(Link)`
   }
 `
 
+/**
+ * @private
+ * @component
+ * var recordAction = {
+ *   actionType: 'record',
+ *   icon: 'fas fa-edit',
+ *   isVisible: true,
+ *   label: 'Action',
+ *   name: 'action'
+ * };
+ * props = {
+ *   resource: {
+ *     href: '/admin/xxxx',
+ *     name: 'resource name',
+ *     recordActions: [recordAction],
+ *     resourceActions: [],
+ *   },
+ *   record: {
+ *     id: 'some-record',
+ *     name: 'some-name',
+ *     params: {},
+ *   },
+ *   actionName: recordAction.name,
+ * }
+ */
 class Breadcrumbs extends React.PureComponent {
   renderResource() {
     const { resource, record } = this.props

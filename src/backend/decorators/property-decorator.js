@@ -7,7 +7,12 @@ const _ = require('lodash')
  * @property {Boolean} [isVisible.list]
  * @property {Boolean} [isVisible.edit]
  * @property {Boolean} [isVisible.filter]
- * @property {PropertyType} render
+ * @property {Object} [components]
+ * @property {Component} [components.show]
+ * @property {Component} [components.view]
+ * @property {Component} [components.list]
+ * @property {Component} [components.edit]
+ * @property {Component} [components.filter]
  * @property {String} type
  * @property {String} label
  * @property {Boolean} isId
@@ -15,28 +20,6 @@ const _ = require('lodash')
  * @property {Number} position          position of the field in a list,
  *                                      title field (isTitle) gets position -1 by default other
  *                                      fields gets position = 100.
- */
-/**
- * @typedef {Object} PropertyType
- * @property {RenderFunction} list   function which will render the list
- * @property {RenderFunction} show
- * @property {RenderFunction} edit
- * @property {RenderFilterFunction}  [filter]
- * @property {Object} [head]      files which should be loaded into the head of the page
- * @property {Array<String>} [head.scripts=[]]       scripts
- * @property {Array<String>} [head.styles=[]]        styles
-*/
-/**
- * @typedef {Function} RenderFunction
- * @property {PropertyDecorator} property
- * @property {BaseRecord} record
- * @property {ViewHelpers} h
-*/
-/**
- * @typedef {Function} RenderFilterFunction
- * @property {PropertyDecorator} property
- * @property {Object} filter
- * @property {ViewHelpers} h
  */
 
 /**
@@ -178,6 +161,29 @@ class PropertyDecorator {
     return this.options.isTitle
   }
 
+  /**
+   * @typedef {Object} BaseProperty~JSON
+   * @property {Boolean} isTitle
+   * @property {Boolean} isId
+   * @property {Number}  position
+   * @property {Boolean} isSortable
+   * @property {Array | null} availableValues
+   * @property {String} name
+   * @property {String} label
+   * @property {String} type
+   * @property {String} reference
+   * @property {Object} [components]
+   * @property {Component} [components.show]
+   * @property {Component} [components.edit]
+   * @property {Component} [components.filter]
+   * @property {Component} [components.list]
+   */
+
+  /**
+   * Returns JSON representation of a property
+   *
+   * @return {BaseProperty~JSON}
+   */
   toJSON() {
     return {
       isTitle: this.isTitle(),

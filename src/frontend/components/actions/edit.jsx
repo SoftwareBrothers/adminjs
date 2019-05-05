@@ -3,11 +3,19 @@ import { withRouter } from 'react-router-dom'
 import PropTypes from 'prop-types'
 
 import PropertyType from '../property-type'
-import { Loader, BorderBox, StyledButton } from '../layout'
+import WrapperBox from '../ui/wrapper-box'
+import StyledButton from '../ui/styled-button'
+import Loader from '../ui/loader'
 import { resourceType, actionType, historyType } from '../../types'
 import ApiClient from '../../utils/api-client'
 import withNotice from '../../store/with-notice'
 
+/**
+ * @name EditAction
+ * @category Actions
+ * @description Shows form for updating a given record.
+ * @component
+ */
 class Edit extends React.Component {
   constructor(props) {
     super(props)
@@ -95,7 +103,7 @@ class Edit extends React.Component {
     }
 
     return (
-      <BorderBox>
+      <WrapperBox border>
         <form onSubmit={this.handleSubmit.bind(this)}>
           {properties.map(property => (
             <PropertyType
@@ -112,16 +120,31 @@ class Edit extends React.Component {
             <span className="btn-text">Save</span>
           </StyledButton>
         </form>
-      </BorderBox>
+      </WrapperBox>
     )
   }
 }
 
 Edit.propTypes = {
+  /**
+   * Object of type: {@link BaseResource~JSON}
+   */
   resource: resourceType.isRequired,
+  /**
+   * Object of type: {@link Action~JSON}
+   */
   action: actionType.isRequired,
+  /**
+   * history object used by ReactRouter
+   */
   history: historyType.isRequired,
+  /**
+   * Id of a given record
+   */
   recordId: PropTypes.string.isRequired,
+  /**
+   * Function which adds a new `notice` information.
+   */
   addNotice: PropTypes.func.isRequired,
 }
 

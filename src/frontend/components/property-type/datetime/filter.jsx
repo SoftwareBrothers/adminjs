@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import PropertyInFilter, { Label } from '../../layout/property-in-filter'
+import PropertyInFilter, { Label } from '../../ui/property-in-filter'
 import { propertyType } from '../../../types'
 
 export default class Filter extends React.Component {

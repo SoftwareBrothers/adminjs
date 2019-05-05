@@ -3,7 +3,11 @@
  */
 class ViewHelpers {
   constructor({ options } = {}) {
-    const opts = options || (window && window.REDUX_STATE.paths)
+    let opts = options || (window && window.REDUX_STATE && window.REDUX_STATE.paths)
+
+    opts = opts || {
+      rootPath: '/admin',
+    }
 
     // when ViewHelpers are used on the frontend, paths are taken from global Redux State
     this.options = opts

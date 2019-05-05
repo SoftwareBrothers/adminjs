@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 const layoutTemplate = require('../../frontend/layout-template')
 const appBundler = require('../bundler/app-bundler')
-const componentsBundler = require('../bundler/components-bundler')
+const componentsBundler = require('../bundler/user-components-bundler')
 const ViewHelpers = require('../utils/view-helpers')
 
 class AppController {

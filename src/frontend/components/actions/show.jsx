@@ -2,10 +2,17 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 import PropertyType from '../property-type'
-import { Loader, BorderBox } from '../layout'
+import Loader from '../ui/loader'
+import WrapperBox from '../ui/wrapper-box'
 import ApiClient from '../../utils/api-client'
 import { resourceType, actionType } from '../../types'
 
+/**
+ * @name ShowAction
+ * @category Actions
+ * @description Shows a given record.
+ * @component
+ */
 class Show extends React.Component {
   constructor(props) {
     super(props)
@@ -42,7 +49,7 @@ class Show extends React.Component {
     }
 
     return (
-      <BorderBox>
+      <WrapperBox border>
         {properties.map(property => (
           <PropertyType
             key={property.name}
@@ -52,14 +59,23 @@ class Show extends React.Component {
             record={record}
           />
         ))}
-      </BorderBox>
+      </WrapperBox>
     )
   }
 }
 
 Show.propTypes = {
+  /**
+   * Object of type: {@link BaseResource~JSON}
+   */
   resource: resourceType.isRequired,
+  /**
+   * Object of type: {@link Action~JSON}
+   */
   action: actionType.isRequired,
+  /**
+   * Id of a given record
+   */
   recordId: PropTypes.string.isRequired,
 }
 

@@ -21,6 +21,7 @@ class ConfigurationError extends Error {
     `
     super(msg)
     this.message = msg
+    this.name = 'ConfigurationError'
   }
 }
 

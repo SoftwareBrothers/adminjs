@@ -10,6 +10,19 @@ const Property = styled.div`
   margin-bottom: ${sizes.paddingLayout};
 `
 
+/**
+ * @classdesc
+ * Wrapps input with label in Show
+ *
+ * @hideconstructor
+ * @component
+ * props = {
+ *   property: {
+ *     label: 'User Name',
+ *   },
+ *   children: 'wrapped component',
+ * }
+ */
 const PropertyInShow = (props) => {
   const { property, children } = props
   return (

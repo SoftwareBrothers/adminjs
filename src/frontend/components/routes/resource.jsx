@@ -3,13 +3,16 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import styled from 'styled-components'
 
-import {
-  Breadcrumbs, RecordsTable, Paginate, Filter, ActionHeader,
-  BorderBox, ActionWrapper, Notice,
-} from '../layout'
+import Breadcrumbs from '../app/breadcrumbs'
+import RecordsTable from '../app/records-table'
+import Paginate from '../ui/paginate'
+import Filter from '../app/filter'
+import ActionHeader from '../app/action-header'
+import WrapperBox from '../ui/wrapper-box'
+import Notice from '../app/notice'
 
 import ApiClient from '../../utils/api-client'
-import queryHasFilter from './query-has-filter'
+import queryHasFilter from '../../utils/query-has-filter'
 import { locationType, resourceType, matchType, pathsType } from '../../types'
 
 const Wrapper = styled.section.attrs({
@@ -91,7 +94,7 @@ class Resource extends React.Component {
     const { records, page, perPage, total, search, filterVisible } = this.state
     return (
       <Wrapper>
-        <ActionWrapper>
+        <WrapperBox>
           <Breadcrumbs resource={resource} />
           <Notice />
           <ActionHeader
@@ -100,7 +103,7 @@ class Resource extends React.Component {
             toggleFilter={this.toggleFilter}
             actionPerformed={this.handleActionPerformed}
           />
-          <BorderBox>
+          <WrapperBox border>
             <RecordsTable
               resource={this.resource}
               records={records}
@@ -112,8 +115,8 @@ class Resource extends React.Component {
               perPage={perPage}
               total={total}
             />
-          </BorderBox>
-        </ActionWrapper>
+          </WrapperBox>
+        </WrapperBox>
         <Filter
           resource={this.resource}
           search={search}

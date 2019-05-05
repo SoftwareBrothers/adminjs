@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 import { simplifiedPropertyType, recordType } from '../../../types'
-import PropertyInEdit from '../../layout/property-in-edit'
+import PropertyInEdit from '../../ui/property-in-edit'
 
 export default class Edit extends React.PureComponent {
   handleChange(event) {

@@ -1,4 +1,5 @@
 const runtime = require('@babel/plugin-transform-runtime')
+const styled = require('babel-plugin-styled-components')
 const fs = require('fs')
 const util = require('util')
 const path = require('path')
@@ -16,7 +17,7 @@ async function build() {
     name: 'AdminBro',
     input: path.join(__dirname, '/../../frontend/bundle-entry.jsx'),
     babelConfig: {
-      plugins: [runtime],
+      plugins: [runtime, styled],
       runtimeHelpers: true,
       include: path.join(__dirname, '/../../frontend/**'),
     },

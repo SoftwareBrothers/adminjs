@@ -2,7 +2,10 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
-import { Breadcrumbs, ActionHeader, ActionWrapper, Notice } from '../layout'
+import Breadcrumbs from '../app/breadcrumbs'
+import ActionHeader from '../app/action-header'
+import WrapperBox from '../ui/wrapper-box'
+import Notice from '../app/notice'
 import { resourceType, matchType, pathsType } from '../../types'
 
 import actions from '../actions'
@@ -29,12 +32,12 @@ class ResourceAction extends React.Component {
 
     let Action = actions[action.name]
     if (isClient && action.component) {
-      Action = AdminBro.Components[action.component]
+      Action = AdminBro.UserComponents[action.component]
     }
     Action = Action || (() => (<div />))
 
     return (
-      <ActionWrapper>
+      <WrapperBox>
         <Breadcrumbs resource={resource} actionName={actionName} />
         <Notice />
         <ActionHeader
@@ -42,7 +45,7 @@ class ResourceAction extends React.Component {
           action={action}
         />
         <Action action={action} resource={resource} paths={paths} />
-      </ActionWrapper>
+      </WrapperBox>
     )
   }
 }

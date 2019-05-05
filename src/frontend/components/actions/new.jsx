@@ -4,10 +4,17 @@ import PropTypes from 'prop-types'
 
 import PropertyType from '../property-type'
 import ApiClient from '../../utils/api-client'
-import { BorderBox, StyledButton } from '../layout'
+import WrapperBox from '../ui/wrapper-box'
+import StyledButton from '../ui/styled-button'
 import { resourceType, historyType, recordType } from '../../types'
 import withNotice from '../../store/with-notice'
 
+/**
+ * @name NewAction
+ * @category Actions
+ * @description Shows form for creating a given record.
+ * @component
+ */
 class New extends React.Component {
   constructor(props) {
     super(props)
@@ -78,7 +85,7 @@ class New extends React.Component {
     const properties = resource.editProperties
     const { record } = this.state
     return (
-      <BorderBox>
+      <WrapperBox border>
         <form onSubmit={this.handleSubmit.bind(this)}>
           {properties.map(property => (
             <PropertyType
@@ -95,15 +102,27 @@ class New extends React.Component {
             <span className="btn-text">Save</span>
           </StyledButton>
         </form>
-      </BorderBox>
+      </WrapperBox>
     )
   }
 }
 
 New.propTypes = {
+  /**
+   * Object of type: {@link BaseResource~JSON}
+   */
   resource: resourceType.isRequired,
+  /**
+   * history object used by ReactRouter
+   */
   history: historyType.isRequired,
+  /**
+   * Object of type: {@link BaseRecord~JSON}
+   */
   record: recordType,
+  /**
+   * Function which adds a new `notice` information.
+   */
   addNotice: PropTypes.func.isRequired,
 }
 
