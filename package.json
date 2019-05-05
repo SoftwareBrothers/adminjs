@@ -19,11 +19,9 @@
     "admin",
     "admin-panel"
   ],
-  "_moduleAliases": {
-    "@root": ".",
-    "@backend": "./src/backend",
-    "@frontend": "./src/frontend"
-  },
+  "browserslist": [
+    "last 3 Chrome versions"
+  ],
   "author": "Wojciech Krysiak",
   "license": "MIT",
   "bugs": {
@@ -38,13 +36,14 @@
     "@babel/preset-react": "^7.0.0",
     "@babel/register": "^7.4.0",
     "axios": "^0.18.0",
+    "babel-plugin-styled-components": "^1.10.0",
     "classnames": "^2.2.6",
     "flat": "^4.1.0",
     "jw-paginate": "^1.0.2",
     "lodash": "^4.17.11",
     "prop-types": "^15.7.2",
-    "react": "^16.8.6",
-    "react-dom": "^16.8.6",
+    "react": ">= 16.3.0",
+    "react-dom": ">= 16.3.0",
     "react-redux": "^6.0.1",
     "react-router-dom": "^5.0.0",
     "react-select": "^2.4.2",
@@ -54,6 +53,7 @@
     "rollup-plugin-commonjs": "^9.2.2",
     "rollup-plugin-node-resolve": "^4.0.1",
     "rollup-plugin-replace": "^2.1.1",
+    "rollup-plugin-terser": "^4.0.4",
     "styled-components": "^4.2.0",
     "xss": "^1.0.3"
   },
