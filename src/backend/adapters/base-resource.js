@@ -27,7 +27,7 @@ const AdminBro = require('../../admin-bro')
  * - {@link BaseResource#create create()}
  * - {@link BaseResource#update update()}
  * - {@link BaseResource#delete delete()}
- * @category Adapter
+ * @category Base
  * @abstract
  * @hideconstructor
  */

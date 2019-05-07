@@ -5,52 +5,90 @@ import { connect } from 'react-redux'
 import Breadcrumbs from '../app/breadcrumbs'
 import ActionHeader from '../app/action-header'
 import WrapperBox from '../ui/wrapper-box'
+import Loader from '../ui/loader'
 import Notice from '../app/notice'
-import { resourceType, matchType } from '../../types'
-
-import actions from '../actions'
+import { resourceType, matchType, pathsType } from '../../types'
+import BaseAction from '../app/base-action'
+import ApiClient from '../../utils/api-client'
 
 class RecordAction extends React.Component {
-  static actionComponent({ action, isClient }) {
-    let Action = actions[action.name]
-    if (isClient && action.component) {
-      Action = AdminBro.UserComponents[action.component]
-    }
-    return Action || (() => (<div />))
-  }
-
   constructor(props) {
     super(props)
     this.state = {
-      isClient: false,
-      recordTitle: '',
+      record: null,
+      isLoading: true,
     }
   }
 
   componentDidMount() {
-    this.setState({ isClient: true })
+    this.fetchRecord()
+  }
+
+  shouldComponentUpdate(newProps) {
+    const { match } = this.props
+    const { actionName, recordId, resourceId } = match.params
+    if (newProps.match.params.actionName !== actionName
+      || newProps.match.params.recordId !== recordId
+      || newProps.match.params.resourceId !== resourceId
+    ) {
+      this.fetchRecord(newProps.match.params.actionName)
+      return false
+    }
+    return true
+  }
+
+  getResourceAndAction(name = null) {
+    const { match, resources } = this.props
+    const { resourceId, actionName } = match.params
+
+    const nameToCheck = name || actionName
+
+    const resource = resources.find(r => r.id === resourceId)
+    const action = resource.recordActions.find(r => r.name === nameToCheck)
+    return { resource, action }
+  }
+
+  fetchRecord(actionName) {
+    const { match } = this.props
+    const { recordId } = match.params
+    const { resource, action } = this.getResourceAndAction(actionName)
+    const api = new ApiClient()
+    this.setState({
+      isLoading: true,
+      record: null,
+    })
+    api.recordAction({
+      resourceId: resource.id,
+      actionName: action.name,
+      recordId,
+    }).then((response) => {
+      this.setState({
+        isLoading: false,
+        record: response.data.record,
+      })
+    })
   }
 
   render() {
-    const { match, resources } = this.props
-    const { resourceId, actionName, recordId } = match.params
-    const { isClient, recordTitle } = this.state
+    const { match, paths } = this.props
+    const { actionName, recordId } = match.params
+    const { record, isLoading } = this.state
 
-    const resource = resources.find(r => r.id === resourceId)
-    const action = resource.recordActions.find(r => r.name === actionName)
-
-    const Action = RecordAction.actionComponent({ action, isClient })
+    const { resource, action } = this.getResourceAndAction()
 
     return (
       <WrapperBox>
-        <Breadcrumbs resource={resource} actionName={actionName} recordTitle={recordTitle} />
+        <Breadcrumbs resource={resource} actionName={actionName} />
         <Notice />
         <ActionHeader
           resource={resource}
           recordId={recordId}
           action={action}
         />
-        <Action action={action} resource={resource} recordId={recordId} />
+        {isLoading
+          ? <Loader />
+          : <BaseAction action={action} resource={resource} record={record} paths={paths} />
+        }
       </WrapperBox>
     )
   }
@@ -58,12 +96,14 @@ class RecordAction extends React.Component {
 
 
 const mapStateToProps = state => ({
+  paths: state.paths,
   resources: state.resources,
 })
 
 RecordAction.propTypes = {
   resources: PropTypes.arrayOf(resourceType).isRequired,
   match: matchType.isRequired,
+  paths: pathsType.isRequired,
 }
 
 export default connect(mapStateToProps)(RecordAction)

@@ -25,16 +25,38 @@ const Property = styled.div`
  *
  * @hideconstructor
  * @component
- * props = {
- *   property: {
- *     label: 'User Name',
- *     name: 'username',
- *   },
- *   children: 'wrapped component',
- *   error: {
- *     message: 'some error message',
- *   }
+ * @example <caption>Standard property</caption>
+ * const property = {
+ *   label: 'My amazing property',
+ *   name: 'myAmazingProperty',
  * }
+ * const error = { message: 'and there is an error' }
+ * return (
+ *   <WrapperBox>
+ *     <PropertyInEdit property={property} error={error}>
+ *       <input className="input" />
+ *     </PropertyInEdit>
+ *   </WrapperBox>
+ * )
+ *
+ * @example <caption>With an icon</caption>
+ * const property = {
+ *   label: 'My amazing property',
+ *   name: 'myAmazingProperty',
+ * }
+ * // It is based on the bulma classes
+ * return (
+ *   <WrapperBox>
+ *     <PropertyInEdit property={property}>
+ *       <div className="control has-icons-right">
+ *         <input className="input" />
+ *         <span className="icon is-small is-right">
+ *           <i className="fa fa-bomb" />
+ *         </span>
+ *       </div>
+ *     </PropertyInEdit>
+ *   </WrapperBox>
+ * )
  */
 const PropertyInEdit = (props) => {
   const { children, property, error } = props
@@ -59,7 +81,16 @@ PropertyInEdit.propTypes = {
   /**
    * Property object based on {@link BaseProperty~JSON}
    */
-  property: simplifiedPropertyType.isRequired,
+  property: PropTypes.shape({
+    /**
+     * Property label
+     */
+    label: PropTypes.string.isRequired,
+    /**
+     * Unique property name - its patch.
+     */
+    name: PropTypes.string.isRequired,
+  }).isRequired,
   /**
    * Optional error message
    */

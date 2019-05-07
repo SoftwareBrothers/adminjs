@@ -20,7 +20,27 @@ const Level = styled.div.attrs({
     font-size: 34px;
   }
 `
-
+/**
+ * @name ValueBlock
+ * @classdesc
+ * Simple Widget, which can be used in the dashboard
+ * @hideconstructor
+ * @component
+ * @example
+ * return (
+ *   <WrapperBox><Columns>
+ *     <Column><ValueBlock  icon="fa fa-bomb" value="5">
+ *       Utils
+ *     </ValueBlock></Column>
+ *     <Column><ValueBlock  icon="fa fa-star" value="12">
+ *       Are
+ *     </ValueBlock></Column>
+ *     <Column><ValueBlock  icon="fa fa-cog" value="5" color="red">
+ *       Awesome
+ *     </ValueBlock></Column>
+ *   </Columns></WrapperBox>
+ * )
+ */
 export default class ValueBlock extends React.PureComponent {
   render() {
     const { icon, value, children, color } = this.props
@@ -42,9 +62,21 @@ export default class ValueBlock extends React.PureComponent {
 }
 
 ValueBlock.propTypes = {
+  /**
+   * Icon class: i.e "fa fa-bomb"
+   */
   icon: PropTypes.string,
+  /**
+   * Value string which
+   */
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  /**
+   * Content inside a block
+   */
   children: childrenType,
+  /**
+   * Optional color
+   */
   color: PropTypes.string,
 }
 

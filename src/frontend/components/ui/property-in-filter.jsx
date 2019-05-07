@@ -1,7 +1,8 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
-import { propertyType, childrenType } from '../../types'
+import { childrenType } from '../../types'
 import { colors, sizes } from '../../styles/variables'
 import Label from './label'
 
@@ -30,12 +31,18 @@ const Property = styled.div`
  *
  * @hideconstructor
  * @component
- * props = {
- *   property: {
- *     label: 'User Name',
- *   },
- *   children: 'wrapped component',
+ * @example
+ * const property = {
+ *   label: 'My amazing property',
+ *   name: 'myAmazingProperty',
  * }
+ * return (
+ *   <WrapperBox style={{ background: '#303b62' }}>
+ *     <PropertyInFilter property={property}>
+ *       <input className="input" />
+ *     </PropertyInFilter>
+ *   </WrapperBox>
+ * )
  */
 const PropertyInFilter = (props) => {
   const { property, children } = props
@@ -48,8 +55,23 @@ const PropertyInFilter = (props) => {
 }
 
 PropertyInFilter.propTypes = {
-  property: propertyType.isRequired,
+  /**
+   * Wrapped input element
+   */
   children: childrenType,
+  /**
+   * Property object based on {@link BaseProperty~JSON}
+   */
+  property: PropTypes.shape({
+    /**
+     * Property label
+     */
+    label: PropTypes.string.isRequired,
+    /**
+     * Unique property name - its patch.
+     */
+    name: PropTypes.string.isRequired,
+  }).isRequired,
 }
 
 PropertyInFilter.defaultProps = {

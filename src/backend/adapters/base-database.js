@@ -4,7 +4,7 @@ const NotImplementedError = require('../utils/not-implemented-error')
 
 /**
  * Representation of an ORM database in AdminBro
- * @category Adapter
+ * @category Base
  *
  * @mermaid
  *   graph LR

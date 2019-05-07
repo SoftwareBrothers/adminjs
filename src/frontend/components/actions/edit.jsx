@@ -5,8 +5,7 @@ import PropTypes from 'prop-types'
 import PropertyType from '../property-type'
 import WrapperBox from '../ui/wrapper-box'
 import StyledButton from '../ui/styled-button'
-import Loader from '../ui/loader'
-import { resourceType, actionType, historyType } from '../../types'
+import { resourceType, recordType, historyType } from '../../types'
 import ApiClient from '../../utils/api-client'
 import withNotice from '../../store/with-notice'
 
@@ -14,30 +13,17 @@ import withNotice from '../../store/with-notice'
  * @name EditAction
  * @category Actions
  * @description Shows form for updating a given record.
+ * @private
  * @component
  */
 class Edit extends React.Component {
   constructor(props) {
     super(props)
+    const { record } = props
     this.state = {
-      isLoading: true,
-      record: { params: {}, populated: {} },
+      record,
     }
     this.api = new ApiClient()
-  }
-
-  componentDidMount() {
-    const { resource, action, recordId } = this.props
-    this.api.recordAction({
-      resourceId: resource.id,
-      actionName: action.name,
-      recordId,
-    }).then((response) => {
-      this.setState({
-        isLoading: false,
-        record: response.data.record,
-      })
-    })
   }
 
   handleChange(propertyOrRecord, value) {
@@ -59,12 +45,12 @@ class Edit extends React.Component {
   }
 
   handleSubmit(event) {
-    const { resource, recordId, history, addNotice } = this.props
+    const { resource, history, addNotice } = this.props
     const { record } = this.state
     this.api.recordAction({
       resourceId: resource.id,
       actionName: 'edit',
-      recordId,
+      recordId: record.id,
       payload: {
         record: record.params,
       },
@@ -94,13 +80,7 @@ class Edit extends React.Component {
   render() {
     const { resource } = this.props
     const properties = resource.editProperties
-    const { record, isLoading } = this.state
-
-    if (isLoading) {
-      return (
-        <Loader />
-      )
-    }
+    const { record } = this.state
 
     return (
       <WrapperBox border>
@@ -133,15 +113,11 @@ Edit.propTypes = {
   /**
    * Object of type: {@link Action~JSON}
    */
-  action: actionType.isRequired,
+  record: recordType.isRequired,
   /**
    * history object used by ReactRouter
    */
   history: historyType.isRequired,
-  /**
-   * Id of a given record
-   */
-  recordId: PropTypes.string.isRequired,
   /**
    * Function which adds a new `notice` information.
    */

@@ -348,10 +348,10 @@ class ResourceDecorator {
    *                                                given resource
    * @property {Array<Action~JSON>} resourceActions list of all resource actions available
    *                                                for given resource
-   * @property {Array<Property~JSON>} listProperties
-   * @property {Array<Property~JSON>} editProperties
-   * @property {Array<Property~JSON>} showProperties
-   * @property {Array<Property~JSON>} filterProperties
+   * @property {Array<BaseProperty~JSON>} listProperties
+   * @property {Array<BaseProperty~JSON>} editProperties
+   * @property {Array<BaseProperty~JSON>} showProperties
+   * @property {Array<BaseProperty~JSON>} filterProperties
    */
 
   /**

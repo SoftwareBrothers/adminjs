@@ -14,6 +14,7 @@ import withNotice from '../../store/with-notice'
  * @category Actions
  * @description Shows form for creating a given record.
  * @component
+ * @private
  */
 class New extends React.Component {
   constructor(props) {

@@ -1,15 +1,10 @@
+import React from 'react'
 import styled from 'styled-components'
 
+import { childrenType } from '../../types'
 import { fonts, colors, sizes } from '../../styles/variables'
 
-/**
- * @class
- * @component
- * props = {
- *   children: 'some content inside a label'
- * }
- */
-const Label = styled.label.attrs({
+const StyledLabel = styled.label.attrs({
   className: 'label',
 })`
   &&& {
@@ -22,4 +17,30 @@ const Label = styled.label.attrs({
     letter-spacing: 0.1em;
   }
 `
+
+/**
+ * @class
+ * @classdesc
+ * Represents labels inside the application.
+ *
+ * @hideconstructor
+ * @component
+ * @example
+ * return (
+ * <WrapperBox border>
+ *   <Label>Some Label:</Label>
+ *   <p>Text below the label</p>
+ * </WrapperBox>
+ * )
+ */
+const Label = props => (<StyledLabel {...props} />)
+
+Label.propTypes = {
+  children: childrenType,
+}
+
+Label.defaultProps = {
+  children: null,
+}
+
 export default Label

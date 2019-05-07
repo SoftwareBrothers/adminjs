@@ -14,19 +14,9 @@ import withNotice from '../../store/with-notice'
 
 /**
  * Renders Button for an action
- *
+ * 
+ * @private
  * @component
- * props = {
- *   className: 'is-primary',
- *   action: {
- *     actionType: 'record',
- *     icon: 'fas fa-edit',
- *     isVisible: true,
- *     label: 'Action',
- *     name: 'actionId'
- *   },
- *   resourceId: 'ResourceId',
- * };
  */
 class ActionButton extends React.PureComponent {
   handleClick(event) {

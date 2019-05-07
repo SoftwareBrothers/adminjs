@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
 import { propertyType, childrenType } from '../../types'
@@ -16,12 +17,18 @@ const Property = styled.div`
  *
  * @hideconstructor
  * @component
- * props = {
- *   property: {
- *     label: 'User Name',
- *   },
- *   children: 'wrapped component',
- * }
+ * @example
+ * const property = {
+  *   label: 'My amazing property',
+  *   name: 'myAmazingProperty',
+  * }
+  * return (
+  *   <WrapperBox border>
+  *     <PropertyInShow property={property}>
+  *       And here goes a property value.
+  *     </PropertyInShow>
+  *   </WrapperBox>
+  * )
  */
 const PropertyInShow = (props) => {
   const { property, children } = props
@@ -34,8 +41,23 @@ const PropertyInShow = (props) => {
 }
 
 PropertyInShow.propTypes = {
-  property: propertyType.isRequired,
+  /**
+   * Wrapped property value
+   */
   children: childrenType,
+  /**
+   * Property object based on {@link BaseProperty~JSON}
+   */
+  property: PropTypes.shape({
+    /**
+     * Property label
+     */
+    label: PropTypes.string.isRequired,
+    /**
+     * Unique property name - its patch.
+     */
+    name: PropTypes.string.isRequired,
+  }).isRequired,
 }
 
 PropertyInShow.defaultProps = {

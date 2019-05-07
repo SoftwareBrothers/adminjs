@@ -6,48 +6,27 @@ import Breadcrumbs from '../app/breadcrumbs'
 import ActionHeader from '../app/action-header'
 import WrapperBox from '../ui/wrapper-box'
 import Notice from '../app/notice'
+import BaseAction from '../app/base-action'
 import { resourceType, matchType, pathsType } from '../../types'
 
-import actions from '../actions'
+const ResourceAction = (props) => {
+  const { resources, match, paths } = props
+  const { resourceId, actionName } = match.params
 
-class ResourceAction extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      isClient: false,
-    }
-  }
+  const resource = resources.find(r => r.id === resourceId)
+  const action = resource.resourceActions.find(r => r.name === actionName)
 
-  componentDidMount() {
-    this.setState({ isClient: true })
-  }
-
-  render() {
-    const { resources, match, paths } = this.props
-    const { resourceId, actionName } = match.params
-    const { isClient } = this.state
-
-    const resource = resources.find(r => r.id === resourceId)
-    const action = resource.resourceActions.find(r => r.name === actionName)
-
-    let Action = actions[action.name]
-    if (isClient && action.component) {
-      Action = AdminBro.UserComponents[action.component]
-    }
-    Action = Action || (() => (<div />))
-
-    return (
-      <WrapperBox>
-        <Breadcrumbs resource={resource} actionName={actionName} />
-        <Notice />
-        <ActionHeader
-          resource={resource}
-          action={action}
-        />
-        <Action action={action} resource={resource} paths={paths} />
-      </WrapperBox>
-    )
-  }
+  return (
+    <WrapperBox>
+      <Breadcrumbs resource={resource} actionName={actionName} />
+      <Notice />
+      <ActionHeader
+        resource={resource}
+        action={action}
+      />
+      <BaseAction action={action} resource={resource} paths={paths} />
+    </WrapperBox>
+  )
 }
 
 const mapStateToProps = state => ({

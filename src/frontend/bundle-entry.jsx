@@ -5,6 +5,7 @@ import { BrowserRouter } from 'react-router-dom'
 import App from './components/app/application'
 import PropertyTypes from './components/property-type'
 import createStore from './store/store'
+import ViewHelpers from '../backend/utils/view-helpers'
 import * as Components from './components/ui'
 import ApiClient from './utils/api-client'
 import * as style from './styles/variables'
@@ -28,6 +29,7 @@ const Application = (
 window.regeneratorRuntime = regeneratorRuntime
 export default {
   Application,
+  ViewHelpers,
   Components,
   UserComponents: {},
   ApiClient,

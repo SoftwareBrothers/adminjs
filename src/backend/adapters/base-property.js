@@ -4,7 +4,7 @@ const TITLE_COLUMN_NAMES = ['title', 'name', 'subject', 'email']
 
 /**
  * Represents Resource Property
- * @category Adapter
+ * @category Base
  *
  * @mermaid
  *   graph LR

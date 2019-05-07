@@ -4,7 +4,7 @@ const ValidationError = require('../utils/validation-error')
 
 /**
  * Representation of an particular ORM Record in given Resource in AdminBro
- * @category Adapter
+ * @category Base
  * @mermaid
  *   graph LR
  *   A[BaseDatabase] -->|has many| B(BaseResource)

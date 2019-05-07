@@ -16,7 +16,18 @@ const PaginationWrapper = styled.div.attrs({
     padding: 4px;
   }
 `
-
+/**
+ * @classdesc
+ * Component which renders pagination
+ * @hideconstructor
+ *
+ * @component
+ * @example
+ * const location = { search: ''}
+ * return (
+ *   <Paginate total={100} page={4} perPage={10} location={location} />
+ * )
+ */
 class Paginate extends React.PureComponent {
   linkToPage(page) {
     const { location } = this.props
@@ -70,9 +81,21 @@ class Paginate extends React.PureComponent {
 }
 
 Paginate.propTypes = {
+  /**
+   * Current page
+   */
   page: PropTypes.number.isRequired,
+  /**
+   * Items per page
+   */
   perPage: PropTypes.number.isRequired,
+  /**
+   * Total number of items
+   */
   total: PropTypes.number.isRequired,
+  /**
+   * Location passed from the react-router
+   */
   location: locationType.isRequired,
 }
 
