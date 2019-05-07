@@ -59,7 +59,7 @@ const HeaderTitle = styled.h1.attrs({
 const HeaderButtons = styled.div.attrs({
   className: 'level-right',
 })`
-  ${StyledButton} {
+  &&& a {
     margin-left: ${sizes.padding};
   }
 `
@@ -77,15 +77,6 @@ const HeaderButtons = styled.div.attrs({
  *     name: 'action'
  * };
  *
- * props = {
- *   resource: {
- *     editProperties: [],
- *     id: "ResourceId",
- *     name: "Resource Name",
- *     resourceActions: [recordAction],
- *     recordActions: [recordAction],
- *   }
- * }
  */
 const ActionHeader = (props) => {
   const h = new ViewHelpers()
