@@ -39,6 +39,9 @@ describe('AdminBro', function () {
   })
 
   describe('.require', function () {
+    afterEach(function () {
+      AdminBro.UserComponents = {}
+    })
     context('file exists', function () {
       beforeEach(function () {
         this.result = AdminBro.require('./fixtures/example-component')
