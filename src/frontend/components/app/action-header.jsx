@@ -112,7 +112,7 @@ const ActionHeader = (props) => {
           />
         ))}
         {toggleFilter && (
-          <StyledButton onClick={toggleFilter} as="button">
+          <StyledButton onClick={toggleFilter} as="a">
             <span className="icon">
               <i className="fas fa-sliders-h" />
             </span>
