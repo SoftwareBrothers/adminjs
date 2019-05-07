@@ -1,3 +1,4 @@
+const path = require('path')
 const AdminBro = require('../../../src/admin-bro')
 const generateUserComponentEntry = require('../../../src/backend/bundler/generate-user-component-entry')
 
@@ -23,11 +24,12 @@ describe('generateUserComponentEntry', function () {
   it('adds components to the entry file', function () {
     const adminBro = new AdminBro()
     const componentId = AdminBro.require('../../fixtures/example-component')
+    const filePath = path.normalize(path.join(__dirname, '../../fixtures/example-component'))
 
     const entryFile = generateUserComponentEntry(adminBro)
 
     expect(entryFile).to.have.string([
-      `import ${componentId} from '/usr/src/app/admin-bro/spec/fixtures/example-component'`,
+      `import ${componentId} from '${filePath}'`,
       `AdminBro.UserComponents.${componentId} = ${componentId}`,
     ].join('\n'))
 
