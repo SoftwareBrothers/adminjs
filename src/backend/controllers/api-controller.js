@@ -128,6 +128,28 @@ class ApiController {
   }
 
   /**
+   * Returns given record,
+   *
+   * @param   {Object}  request
+   * @param   {Object}  request.params
+   * @param   {String}  request.params.resourceId
+   * @param   {String}  request.params.recordId
+   * @param   {Object}  response
+   *
+   * @returns {BaseRecord~JSON}
+   */
+  async get(request, response) {
+    const { resourceId, recordId } = request.params
+    const resource = this._admin.findResource(resourceId)
+    const record = await resource.findOne(recordId)
+    const [populated] = await populator([record])
+
+    return {
+      record: populated.toJSON(),
+    }
+  }
+
+  /**
    * Performs a customized {@link Action resource action}.
    * To call it use {@link ApiClient#resourceAction} method.
    *

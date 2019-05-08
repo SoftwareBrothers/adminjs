@@ -40,6 +40,20 @@ class ApiClient {
   }
 
   /**
+   * Get record from a given resource
+   *
+   * @param   {String}  resourceId  Id of a {@link BaseResource~JSON}
+   * @param   {String}  recordId  Id of a {@link BaseRecord~JSON}
+   *
+   * @return  {Promise<ApiController~BaseRecord~JSON>}  response [axios](https://github.com/axios/axios)
+   *                                                response with all the data
+   */
+  async getRecord({ resourceId, recordId }) {
+    const response = await this.client.get(`/api/resources/${resourceId}/${recordId}`)
+    return response.data.record
+  }
+
+  /**
    * Search by query string for records in a given resource.
    *
    * @param   {String}  resourceId  Id of a {@link BaseResource~JSON}
