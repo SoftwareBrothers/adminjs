@@ -73,6 +73,7 @@ const html = (admin, currentAdmin, location = '/') => {
       <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/prop-types/15.7.2/prop-types.js"></script>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/styled-components/4.2.0/styled-components.min.js"></script>
+      <script src="https://unpkg.com/recharts/umd/Recharts.min.js"></script>
       <script src="${h.assetPath('app.bundle.js')}"></script>
       <script src="${h.assetPath('components.bundle.js')}"></script>
       ${styles.join('\n')}
