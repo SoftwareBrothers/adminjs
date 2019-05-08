@@ -4,61 +4,21 @@ import styled from 'styled-components'
 
 import ActionButton from './action-button'
 import PropertyType from '../property-type'
+import Dropdown from '../ui/dropdown'
 import { colors, sizes } from '../../styles/variables'
 import { resourceType, recordType, childrenType } from '../../types'
 
 const Td = styled.td`
   &&& {
     color: ${colors.defaultText};
-    padding: ${sizes.padding};
-    border-color: ${colors.border};
-
     & a:not(.in-dropdown) {
       color: ${colors.primary};
     }
-
     &.main {
       font-weight: bold;
     }
   }
 `
-
-const DropdownTrigger = styled.div.attrs({
-  className: 'dropdown-trigger',
-})`
-  padding: 0px ${sizes.padding};
-  font-size: 20px;
-  line-height: 20px;
-  &:hover {
-    background: #fff;
-  }
-`
-
-const DropdownMenu = styled.div.attrs({
-  className: 'dropdown-menu',
-})`
-  & > .dropdown-content {
-    border: 0px none;
-    border-radius: 0px;
-    box-shadow: 0 6px 13px 0 rgba(69,70,85,0.13);
-  }
-`
-
-const ActionsDropdown = (props) => {
-  const { children } = props
-  return (
-    <div className="dropdown is-right is-hoverable">
-      <DropdownTrigger>
-        <i className="icomoon-options" />
-      </DropdownTrigger>
-      <DropdownMenu>
-        <div className="dropdown-content">
-          {children}
-        </div>
-      </DropdownMenu>
-    </div>
-  )
-}
 
 export default class RecordInList extends React.PureComponent {
   render() {
@@ -78,7 +38,7 @@ export default class RecordInList extends React.PureComponent {
           </Td>
         ))}
         <Td key="options">
-          <ActionsDropdown>
+          <Dropdown className="is-right is-hoverable">
             {recordActions.map(action => (
               <ActionButton
                 action={action}
@@ -89,7 +49,7 @@ export default class RecordInList extends React.PureComponent {
                 className="is-white in-dropdown"
               />
             ))}
-          </ActionsDropdown>
+          </Dropdown>
         </Td>
       </tr>
     )
@@ -102,10 +62,3 @@ RecordInList.propTypes = {
   actionPerformed: PropTypes.func.isRequired,
 }
 
-ActionsDropdown.propTypes = {
-  children: childrenType,
-}
-
-ActionsDropdown.defaultProps = {
-  children: null,
-}

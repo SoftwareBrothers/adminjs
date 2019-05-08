@@ -1,10 +1,26 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
+import { Link } from 'react-router-dom'
 
 import WrapperBox from './wrapper-box'
 import { colors } from '../../styles/variables'
 import { childrenType } from '../../types'
+import Label from './label'
+
+const OverlayLink = styled(Link)`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  transition: border-width 0.2s;
+  &:hover {
+    transition: border-width 0.2s;
+    border-bottom: 5px solid ${colors.primary};
+  }
+`
 
 const Level = styled.div.attrs({
   className: 'level',
@@ -20,6 +36,7 @@ const Level = styled.div.attrs({
     font-size: 34px;
   }
 `
+
 /**
  * @name ValueBlock
  * @classdesc
@@ -32,7 +49,7 @@ const Level = styled.div.attrs({
  *     <Column><ValueBlock  icon="fa fa-bomb" value="5">
  *       Utils
  *     </ValueBlock></Column>
- *     <Column><ValueBlock  icon="fa fa-star" value="12">
+ *     <Column><ValueBlock  icon="fa fa-star" value="12" href="/api/resourceName">
  *       Are
  *     </ValueBlock></Column>
  *     <Column><ValueBlock  icon="fa fa-cog" value="5" color="red">
@@ -43,11 +60,12 @@ const Level = styled.div.attrs({
  */
 export default class ValueBlock extends React.PureComponent {
   render() {
-    const { icon, value, children, color } = this.props
+    const { icon, value, children, color, href, label } = this.props
 
     return (
-      <WrapperBox border>
-        {children}
+      <WrapperBox border style={{ position: 'relative' }}>
+        {href ? <OverlayLink to={href} /> : ''}
+        { label ? <Label>{label}</Label> : '' }
         <Level color={color}>
           <div className="value">
             {value}
@@ -56,6 +74,7 @@ export default class ValueBlock extends React.PureComponent {
             <i className={icon} />
           </div>
         </Level>
+        {children}
       </WrapperBox>
     )
   }

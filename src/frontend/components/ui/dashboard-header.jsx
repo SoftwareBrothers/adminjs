@@ -8,7 +8,7 @@ const Wrapper = styled.section.attrs({
   className: 'content',
 })`
   && {
-    padding: ${sizes.paddingLayout};
+    padding: 90px ${sizes.paddingLayout};
     background: ${colors.superDarkBck};
     color: #fff;
     margin-bottom: 0;
@@ -16,9 +16,14 @@ const Wrapper = styled.section.attrs({
       color: #fff;
     }
 
-    & > h1 {
+    p {
+      color: #fff;
+    }
+
+    h1 {
+      color: #fff;
       font-size: 53px;
-      margin-bottom: 2px;
+      margin-bottom: 4px;
     }
   }
 `

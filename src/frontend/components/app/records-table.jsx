@@ -8,18 +8,7 @@ import PropertyHeader from './property-header'
 import ViewHelpers from '../../../backend/utils/view-helpers'
 import { resourceType, pathsType, recordType } from '../../types'
 
-const Table = styled.table.attrs({
-  className: 'table is-fullwidth',
-})`
-  & > thead > tr > th {
-    border: none;
-
-    &.actions {
-      width: 80px;
-    }
-  }
-
-`
+import Table from '../ui/table'
 
 const RecordsTable = (props) => {
   const { resource, paths, records, actionPerformed } = props
@@ -45,7 +34,7 @@ const RecordsTable = (props) => {
           {resource.listProperties.map(property => (
             <PropertyHeader resource={resource} property={property} key={property.name} />
           ))}
-          <th key="actions" className="actions" />
+          <th key="actions" style={{ width: 80 }} />
         </tr>
       </thead>
       <tbody>

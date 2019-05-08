@@ -9,6 +9,12 @@ const StyledWrapperBox = styled.section`
   flex-grow: 1;
   border: ${props => (props.border ? `1px solid ${colors.border}` : 'none')};
   background: ${props => (props.border ? '#ffffff' : 'transparent')};
+
+  & > h1 {
+    font-size: 22px;
+    margin-top: ${sizes.padding};
+    margin-bottom: ${sizes.padding};
+  }
 `
 
 /**
@@ -20,7 +26,8 @@ const StyledWrapperBox = styled.section`
  * @example
  * return (
  *   <WrapperBox border>
- *     Some inside content
+ *     <h1>Header</h1>
+ *     <p>Some inside content</p>
  *   </WrapperBox>
  * )
  */
