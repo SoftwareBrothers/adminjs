@@ -1,5 +1,4 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 
 import { resourceType, actionType, recordType } from '../../types'
 import WrapperBox from '../ui/wrapper-box'

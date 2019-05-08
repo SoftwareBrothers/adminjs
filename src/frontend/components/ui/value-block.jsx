@@ -97,11 +97,21 @@ ValueBlock.propTypes = {
    * Optional color
    */
   color: PropTypes.string,
+  /**
+   * Link url if the block should be clickable
+   */
+  href: PropTypes.string,
+  /**
+   * Label of the block
+   */
+  label: PropTypes.string,
 }
 
 ValueBlock.defaultProps = {
   color: colors.primary,
   children: null,
   value: null,
+  label: null,
+  href: null,
   icon: null,
 }

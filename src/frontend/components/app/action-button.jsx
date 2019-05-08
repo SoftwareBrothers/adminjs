@@ -14,7 +14,7 @@ import withNotice from '../../store/with-notice'
 
 /**
  * Renders Button for an action
- * 
+ *
  * @private
  * @component
  */

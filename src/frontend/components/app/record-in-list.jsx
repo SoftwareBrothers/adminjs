@@ -5,8 +5,8 @@ import styled from 'styled-components'
 import ActionButton from './action-button'
 import PropertyType from '../property-type'
 import Dropdown from '../ui/dropdown'
-import { colors, sizes } from '../../styles/variables'
-import { resourceType, recordType, childrenType } from '../../types'
+import { colors } from '../../styles/variables'
+import { resourceType, recordType } from '../../types'
 
 const Td = styled.td`
   &&& {
@@ -61,4 +61,3 @@ RecordInList.propTypes = {
   record: recordType.isRequired,
   actionPerformed: PropTypes.func.isRequired,
 }
-

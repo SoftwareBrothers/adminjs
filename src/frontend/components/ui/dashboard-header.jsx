@@ -40,7 +40,7 @@ const Wrapper = styled.section.attrs({
  *    <p>Subtitle</p>
  *  </DashboardHeader>
  * )
- * 
+ *
  * @example <caption>Header with overlay blocks</caption>
  * return (
  *   <div>

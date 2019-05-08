@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
-import { propertyType, childrenType } from '../../types'
+import { childrenType } from '../../types'
 import { sizes } from '../../styles/variables'
 
 import Label from './label'

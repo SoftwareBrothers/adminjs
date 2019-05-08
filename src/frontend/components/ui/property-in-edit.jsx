@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import PropTypes from 'prop-types'
 
 import { colors, sizes } from '../../styles/variables'
-import { simplifiedPropertyType, childrenType } from '../../types'
+import { childrenType } from '../../types'
 
 import Label from './label'
 

@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
 import { sizes } from '../../styles/variables'
@@ -61,10 +62,12 @@ const Dropdown = (props) => {
 
 Dropdown.propTypes = {
   children: childrenType,
+  className: PropTypes.string,
 }
 
 Dropdown.defaultProps = {
   children: null,
+  className: null,
 }
 
 export default Dropdown

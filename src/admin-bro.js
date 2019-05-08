@@ -30,7 +30,7 @@ const pkg = require('../package.json')
  * @property {BaseResource} [resources[].resource]    class, which extends {@link BaseResource}
  * @property {ResourceOptions} [resources[].options]  options for given resource
  * @property {Object} [dashboard]                     your custom dashboard page
- * @property {BaseAction.handler} [dashboard.handler]      action handler which will override default
+ * @property {BaseAction.handler} [dashboard.handler] action handler which will override default
  *                                                    dashboard handler - you can perform actions
  *                                                    on the backend there and pass results to
  *                                                    component

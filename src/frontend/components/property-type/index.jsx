@@ -20,11 +20,13 @@ const types = {
 
 /**
  * @classdesc
- * Component which renders properties in all the places in the AdminBro UI. By all the places I mean:
- * - `list`: on the List,
- * - `edit`: on default actions where user can modify the record like: {@link EditAction}, and {@link NewAction},
- * - `show`: on the default {@link ShowAction} where user can see the details of a record,
- * - `filter`: and finally on the sidebar filter,
+ * Component which renders properties in all the places in the AdminBro UI. By all the
+ * places I mean:
+ * - **list**: on the List,
+ * - **edit**: on default actions where user can modify the record like: {@link EditAction},
+ * and {@link NewAction},
+ * - **show**: on the default {@link ShowAction} where user can see the details of a record,
+ * - **filter**: and finally on the sidebar filter,
  *
  * Based on the type of given property and where the property is rendered **BasePropertyComponent**
  * picks Component to use. That is how **date** fields are rendered as **datepickers**
@@ -52,8 +54,8 @@ const types = {
  * }
  * ```
  *
- * In the example above we are altering how **name** property will look like on the {@link ShowAction}.
- * When we will define **my-react-component.jsx** like this:
+ * In the example above we are altering how **name** property will look
+ * like on the {@link ShowAction}. When we will define **my-react-component.jsx** like this:
  *
  * ```
  * import React from 'react'
