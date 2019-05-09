@@ -1,6 +1,6 @@
-const ResourceDecorator = require('@backend/decorators/resource-decorator')
-const PropertyDecorator = require('@backend/decorators/property-decorator')
-const AdminBro = require('@root/src/admin-bro')
+const ResourceDecorator = require('../../../src/backend/decorators/resource-decorator')
+const PropertyDecorator = require('../../../src/backend/decorators/property-decorator')
+const AdminBro = require('../../../src/admin-bro')
 const resourceStub = require('../helpers/resource-stub')
 
 describe('ResourceDecorator', function () {
@@ -92,17 +92,6 @@ describe('ResourceDecorator', function () {
       expect(
         this.decorator.getListProperties(),
       ).to.have.lengthOf(ResourceDecorator.DEFAULT_MAX_ITEMS_IN_LIST)
-    })
-  })
-
-  describe('#customHeadScripts', function () {
-    it('returns list of all custom headers when they were defined as a string', function () {
-      const scripts = ['http://sth.com']
-      const styles = ['http://sth.css']
-      const options = { properties: { newProp: { render: { head: { scripts, styles } } } } }
-      const headScripts = new ResourceDecorator({ ...this.args, options }).customHeadScripts()
-      expect(headScripts.scripts).to.deep.equal(scripts)
-      expect(headScripts.styles).to.deep.equal(styles)
     })
   })
 

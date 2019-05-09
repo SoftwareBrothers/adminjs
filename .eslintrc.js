@@ -4,7 +4,7 @@ module.exports = {
         'node': true,
         'mocha': true
     },
-    'extends': 'airbnb-base',
+    'extends': 'airbnb',
     'parserOptions': {
         'ecmaVersion': 2018,
         'sourceType': 'module'
@@ -31,6 +31,7 @@ module.exports = {
         'guard-for-in': 'off',
         'no-restricted-syntax': 'off',
         'no-await-in-loop': 'off',
+        'object-curly-newline': 'off'
     },
     overrides: [
         {
@@ -46,6 +47,10 @@ module.exports = {
         'expect': true,
         'factory': true,
         'sandbox': true,
-        'server': true
+        'server': true,
+        'window': true,
+        'AdminBro': true,
+        'flatpickr': true,
+        'Quill': true,
     }
 }

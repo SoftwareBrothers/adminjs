@@ -1,5 +1,4 @@
 const _ = require('lodash')
-const ViewHelpers = require('../utils/view-helpers')
 
 /**
  * @typedef  {Object}  PropertyOptions
@@ -8,7 +7,12 @@ const ViewHelpers = require('../utils/view-helpers')
  * @property {Boolean} [isVisible.list]
  * @property {Boolean} [isVisible.edit]
  * @property {Boolean} [isVisible.filter]
- * @property {PropertyType} render
+ * @property {Object} [components]
+ * @property {Component} [components.show]
+ * @property {Component} [components.view]
+ * @property {Component} [components.list]
+ * @property {Component} [components.edit]
+ * @property {Component} [components.filter]
  * @property {String} type
  * @property {String} label
  * @property {Boolean} isId
@@ -16,28 +20,6 @@ const ViewHelpers = require('../utils/view-helpers')
  * @property {Number} position          position of the field in a list,
  *                                      title field (isTitle) gets position -1 by default other
  *                                      fields gets position = 100.
- */
-/**
- * @typedef {Object} PropertyType
- * @property {RenderFunction} list   function which will render the list
- * @property {RenderFunction} show
- * @property {RenderFunction} edit
- * @property {RenderFilterFunction}  [filter]
- * @property {Object} [head]      files which should be loaded into the head of the page
- * @property {Array<String>} [head.scripts=[]]       scripts
- * @property {Array<String>} [head.styles=[]]        styles
-*/
-/**
- * @typedef {Function} RenderFunction
- * @property {PropertyDecorator} property
- * @property {BaseRecord} record
- * @property {ViewHelpers} h
-*/
-/**
- * @typedef {Function} RenderFilterFunction
- * @property {PropertyDecorator} property
- * @property {Object} filter
- * @property {ViewHelpers} h
  */
 
 /**
@@ -111,55 +93,15 @@ class PropertyDecorator {
     return this.options.type
   }
 
-  /**
-   * Returns {@link PropertyType} for a given property. It property type
-   * is defined returns it, otherwise it returns default PropertyType
-   *
-   * @returns {PropertyType}
-   * @private
-   */
-  propertyType() {
-    const { PROPERTY_TYPES } = this._admin.constructor
-    const type = PROPERTY_TYPES[this.type()] ? this.type() : 'defaultType'
-    return PROPERTY_TYPES[type]
-  }
-
-  /**
-   * Renders field either in view, edit, list pages or in filter. When user passed render function
-   * in options it is passed to it, otherwise use one function from available
-   * {@link PropertyType PropertyTypes}
-   *
-   * @param {String} where            one of 'view', 'edit', 'list', 'filter'
-   * @param {BaseRecord | Object} recordOrFilters
-   * @returns {String}                html string which should be rendered in a "where"
-   * @private
-   *
-   * @example
-   * render('filter', filters)
-   * render('show', record)
-   */
-  render(where, recordOrFilters) {
-    const helpers = new ViewHelpers({ admin: this._admin })
-    if (this.options.render && this.options.render[where]) {
-      return this.options.render[where](this, recordOrFilters, helpers)
+  availableValues() {
+    if (typeof this.options.availableValues === 'undefined') {
+      const values = this._property.availableValues()
+      if (values) {
+        return values.map(val => ({ value: val, label: val }))
+      }
+      return null
     }
-    return this.propertyType()[where](this, recordOrFilters, helpers)
-  }
-
-  /**
-   * Returns scripts which should be included in the head for given property type.
-   *
-   * @see PropertyType
-   * @returns {Array<String>}
-   */
-  headScripts() {
-    let head
-    if (this.options.render && this.options.render.head) {
-      ({ head } = this.options.render)
-    } else {
-      ({ head } = this.propertyType())
-    }
-    return head
+    return this.options.availableValues
   }
 
   /**
@@ -194,51 +136,15 @@ class PropertyDecorator {
   }
 
   /**
-   * Renders element of given property as a list element
-   * @param {BaseRecord} record
-   * @return {String} HTML of an element
-   */
-  renderList(record) {
-    return this.render('list', record)
-  }
-
-  /**
-   * Renders element of given property in a show view
-   * @param {BaseRecord} record
-   * @return {String} HTML of an element
-   */
-  renderShow(record) {
-    return this.render('show', record)
-  }
-
-  /**
-   * Renders element of given property in a edit view
-   * @param {BaseRecord} record
-   * @return {String} HTML of an element
-   */
-  renderEdit(record) {
-    return this.render('edit', record)
-  }
-
-  /**
-   * Renders element of given property in a filter box
-   * @param {Options} [filters={}] already selected filters
-   * @return {String} HTML of an element
-   */
-  renderFilter(filters = {}) {
-    return this.render('filter', filters)
-  }
-
-  /**
    * If property should be treated as an ID field
    *
    * @return {Boolean}
    */
   isId() {
     if (typeof this.options.isId === 'undefined') {
-      return this._property.isId()
+      return !!this._property.isId()
     }
-    return this.options.isId
+    return !!this.options.isId
   }
 
   /**
@@ -253,6 +159,44 @@ class PropertyDecorator {
       return this._property.isTitle()
     }
     return this.options.isTitle
+  }
+
+  /**
+   * @typedef {Object} BaseProperty~JSON
+   * @property {Boolean} isTitle
+   * @property {Boolean} isId
+   * @property {Number}  position
+   * @property {Boolean} isSortable
+   * @property {Array | null} availableValues
+   * @property {String} name
+   * @property {String} label
+   * @property {String} type
+   * @property {String} reference
+   * @property {Object} [components]
+   * @property {Component} [components.show]
+   * @property {Component} [components.edit]
+   * @property {Component} [components.filter]
+   * @property {Component} [components.list]
+   */
+
+  /**
+   * Returns JSON representation of a property
+   *
+   * @return {BaseProperty~JSON}
+   */
+  toJSON() {
+    return {
+      isTitle: this.isTitle(),
+      isId: this.isId(),
+      position: this.position(),
+      isSortable: this.isSortable(),
+      availableValues: this.availableValues(),
+      name: this.name(),
+      label: this.label(),
+      type: this.type(),
+      reference: this._property.reference(),
+      components: this.options.components,
+    }
   }
 }
 

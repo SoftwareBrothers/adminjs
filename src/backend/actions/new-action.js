@@ -1,6 +1,20 @@
-const Renderer = require('../utils/renderer')
+/**
+ * @implements Action
+ * @category Actions
+ * @module NewAction
+ * @description
+ * Shows form for creating a new record
+ * Uses {@link NewAction} component to render form
+ */
 
-const renderer = new Renderer()
+/**
+ * @typedef {Object} ApiResponse
+ * @property {BaseRecord~JSON} record     populated record, along with errors
+ *                                        (if any).
+ * @property {BaseRecord~JSON} [redirectUrl] in case of success it fills this filed
+ *                                          to indicate that there should be
+ *                                          redirect after the action.
+ */
 
 module.exports = {
   name: 'new',
@@ -8,23 +22,28 @@ module.exports = {
   actionType: 'resource',
   icon: 'icomoon-add',
   label: 'Add new',
+  /**
+   * Responsible for creating new record.
+   *
+   * To invoke this action use {@link ApiClient#resourceAction}
+   *
+   * @return  {module:NewAction~ApiResponse}  populated record
+   * @implements Action.handler
+   */
   handler: async (request, response, data) => {
-    if (request.method === 'get') {
-      const record = data.resource.build()
-      return renderer.render('actions/new', { ...data, record })
-    }
-
     if (request.method === 'post') {
-      let record = await data.resource.build(request.payload)
+      let record = await data.resource.build(request.payload.record)
       record = await record.save()
       if (record.isValid()) {
-        const showAction = data.resource.decorate().actions.show
-        return response.redirect(data.h.recordActionUrl(
-          data.resource, showAction, record,
-        ))
+        return {
+          redirectUrl: data.h.recordActionUrl({
+            resourceId: data.resource.id(), recordId: record.id(), actionName: 'show',
+          }),
+          record: record.toJSON(),
+        }
       }
-      return renderer.render('actions/new', { ...data, record })
+      return { record: record.toJSON() }
     }
-    return ''
+    return {}
   },
 }

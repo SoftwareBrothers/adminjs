@@ -2,6 +2,7 @@
 .DS_store
 .vscode
 .idea
+.cache
 
 coverage
 

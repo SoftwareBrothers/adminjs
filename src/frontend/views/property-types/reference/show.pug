@@ -1,9 +1,0 @@
-- action = record && record.resource.decorate().recordActions(record).find(a => a.name === 'show')
-.property
-  .card-content
-    .text-small= property.label()
-    div
-      if action
-        a(href=h.recordActionUrl(record.resource, action, record))= value
-      else
-        = value

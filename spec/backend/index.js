@@ -4,7 +4,9 @@ const { factory } = require('factory-girl')
 
 global.factory = factory
 
-require('require.all')({ dir: './adapters' })
-require('require.all')({ dir: './utils' })
-require('require.all')({ dir: './decorators' })
-require('require.all')({ dir: './property-types' })
+require('./adapters/base-record.spec')
+require('./bundler/generate-user-component-entry.spec')
+require('./decorators/property-decorator.spec')
+require('./decorators/resource-decorator.spec')
+require('./utils/populator.spec')
+require('./utils/resources-factory.spec')

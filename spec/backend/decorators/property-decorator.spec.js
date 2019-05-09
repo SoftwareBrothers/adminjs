@@ -1,6 +1,6 @@
-const PropertyDecorator = require('@backend/decorators/property-decorator')
-const BaseProperty = require('@backend/adapters/base-property')
-const AdminBro = require('@root/src/admin-bro')
+const PropertyDecorator = require('../../../src/backend/decorators/property-decorator')
+const BaseProperty = require('../../../src/backend/adapters/base-property')
+const AdminBro = require('../../../src/admin-bro')
 
 describe('PropertyDecorator', function () {
   beforeEach(function () {
@@ -32,41 +32,6 @@ describe('PropertyDecorator', function () {
       expect(decorator.isVisible('list')).to.equal(false)
       expect(decorator.isVisible('edit')).to.equal(false)
       expect(decorator.isVisible('show')).to.equal(false)
-    })
-  })
-
-  describe('#propertyType', function () {
-    it('returns as default PropertyType for non standard type', function () {
-      const propertyDecorator = new PropertyDecorator({ ...this.args, options: { type: 'non-standard-type' } })
-      expect(propertyDecorator.propertyType()).to.equal(AdminBro.PROPERTY_TYPES.defaultType)
-    })
-
-    it('returns string type when string is defined', function () {
-      const propertyDecorator = new PropertyDecorator({ ...this.args, options: { type: 'string' } })
-      expect(propertyDecorator.propertyType()).to.equal(AdminBro.PROPERTY_TYPES.string)
-    })
-  })
-
-  describe('#render', function () {
-    beforeEach(function () {
-      this.spyCustom = this.sinon.spy()
-      this.spyString = this.sinon.spy(AdminBro.PROPERTY_TYPES.string, 'show')
-      this.propertyDecorator = new PropertyDecorator({
-        ...this.args,
-        options: {
-          type: 'string',
-          render: { list: this.spyCustom },
-        },
-      })
-    })
-    it('passes the execution to custom function when it was given', function () {
-      this.propertyDecorator.render('list', 'record')
-      expect(this.spyCustom).to.have.been.called
-    })
-
-    it('passes the execution to function from given property', function () {
-      this.propertyDecorator.render('show', { param: this.sinon.spy() })
-      expect(this.spyString).to.have.been.called
     })
   })
 

@@ -6,6 +6,7 @@
  *
  * @param {Array<BaseRecord>} records
  * @param {Array<BaseProperty>} [properties] when given it will only populate those properties
+ * @private
  */
 const populator = async (records, properties) => {
   if (!records || !records.length) {

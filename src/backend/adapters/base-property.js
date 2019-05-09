@@ -4,7 +4,7 @@ const TITLE_COLUMN_NAMES = ['title', 'name', 'subject', 'email']
 
 /**
  * Represents Resource Property
- * @category Adapter
+ * @category Base
  *
  * @mermaid
  *   graph LR
@@ -93,6 +93,17 @@ class BaseProperty {
    * reference should be the name of the Resource which it refers to: `Users`
    */
   reference() {
+    return null
+  }
+
+  /**
+   * Returns all available values which field can accept. It is used in case of
+   * enums
+   *
+   * @return  {Array<String> | null}  array of all available values or null when field
+   *                                  is not an enum.
+   */
+  availableValues() {
     return null
   }
 

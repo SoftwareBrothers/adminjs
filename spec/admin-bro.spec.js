@@ -1,3 +1,5 @@
+const path = require('path')
+
 const AdminBro = require('../src/admin-bro')
 
 describe('AdminBro', function () {
@@ -33,6 +35,38 @@ describe('AdminBro', function () {
       expect(() => {
         AdminBro.registerAdapter({ Resource: {}, Database: {} })
       }).to.throw('Adapter elements has to be subclassess of AdminBro.BaseResource and AdminBro.BaseDatabase')
+    })
+  })
+
+  describe('.require', function () {
+    afterEach(function () {
+      AdminBro.UserComponents = {}
+    })
+    context('file exists', function () {
+      beforeEach(function () {
+        this.result = AdminBro.require('./fixtures/example-component')
+      })
+
+      it('adds given file to a UserComponents object', function () {
+        expect(Object.keys(AdminBro.UserComponents)).to.have.lengthOf(1)
+      })
+
+      it('returns uniq id', function () {
+        expect(AdminBro.UserComponents[this.result]).not.to.be.undefined
+        expect(this.result).to.be.a('string')
+      })
+
+      it('converts relative path to absolute path', function () {
+        expect(
+          AdminBro.UserComponents[this.result],
+        ).to.equal(path.join(__dirname, 'fixtures/example-component'))
+      })
+    })
+
+    it('throws an error when component doesn\t exist', function () {
+      expect(() => {
+        AdminBro.require('./fixtures/example-components')
+      }).to.throw().property('name', 'ConfigurationError')
     })
   })
 })

@@ -1,5 +1,4 @@
-const DashboardController = require('./controllers/dashboard-controller')
-const ResourcesController = require('./controllers/resources-controller')
+const AppController = require('./controllers/app-controller')
 const ApiController = require('./controllers/api-controller')
 
 const ASSETS_ROOT = `${__dirname}/../frontend/assets/`
@@ -29,11 +28,8 @@ const ASSETS_ROOT = `${__dirname}/../frontend/assets/`
  */
 const Router = {
   assets: [{
-    path: '/frontend/assets/app.min.js',
-    src: [ASSETS_ROOT, 'scripts/app.min.js'].join('/'),
-  }, {
-    path: '/frontend/assets/style.min.css',
-    src: [ASSETS_ROOT, 'styles/style.min.css'].join('/'),
+    path: '/frontend/assets/icomoon.css',
+    src: [ASSETS_ROOT, 'styles/icomoon.css'].join('/'),
   }, {
     path: '/frontend/assets/icomoon.eot',
     src: [ASSETS_ROOT, 'fonts/icomoon.eot'].join('/'),
@@ -50,32 +46,57 @@ const Router = {
   routes: [{
     method: 'GET',
     path: '',
-    Controller: DashboardController,
+    Controller: AppController,
     action: 'index',
+  }, {
+    method: 'GET',
+    path: '/frontend/assets/components.bundle.js',
+    Controller: AppController,
+    action: 'bundleComponents',
+  }, {
+    method: 'GET',
+    path: '/frontend/assets/app.bundle.js',
+    Controller: AppController,
+    action: 'bundle',
   }, {
     method: 'GET',
     path: '/resources/{resourceId}',
-    Controller: ResourcesController,
-    action: 'index',
+    Controller: AppController,
+    action: 'resource',
   }, {
     method: 'GET',
-    path: '/resources/{resourceId}/{action}',
-    Controller: ResourcesController,
+    path: '/resources/{resourceId}/actions/{action}',
+    Controller: AppController,
     action: 'resourceAction',
   }, {
     method: 'GET',
-    path: '/resources/{resourceId}/record/{recordId}/{action}',
-    Controller: ResourcesController,
+    path: '/resources/{resourceId}/records/{recordId}/{action}',
+    Controller: AppController,
+    action: 'recordAction',
+  }, {
+    method: 'GET',
+    path: '/api/resources/{resourceId}/{recordId}',
+    Controller: ApiController,
+    action: 'get',
+  }, {
+    method: 'GET',
+    path: '/api/resources/{resourceId}/actions/{action}',
+    Controller: ApiController,
+    action: 'resourceAction',
+  }, {
+    method: 'GET',
+    path: '/api/resources/{resourceId}/records/{recordId}/{action}',
+    Controller: ApiController,
     action: 'recordAction',
   }, {
     method: 'POST',
-    path: '/resources/{resourceId}/{action}',
-    Controller: ResourcesController,
+    path: '/api/resources/{resourceId}/actions/{action}',
+    Controller: ApiController,
     action: 'resourceAction',
   }, {
     method: 'POST',
-    path: '/resources/{resourceId}/record/{recordId}/{action}',
-    Controller: ResourcesController,
+    path: '/api/resources/{resourceId}/records/{recordId}/{action}',
+    Controller: ApiController,
     action: 'recordAction',
   }, {
     method: 'GET',
@@ -84,9 +105,19 @@ const Router = {
     action: 'search',
   }, {
     method: 'GET',
+    path: '/api/resources/{resourceId}',
+    Controller: ApiController,
+    action: 'index',
+  }, {
+    method: 'GET',
     path: '/api/resources/{resourceId}/search/',
     Controller: ApiController,
     action: 'search',
+  }, {
+    method: 'GET',
+    path: '/api/dashboard',
+    Controller: ApiController,
+    action: 'dashboard',
   }],
 }
 
