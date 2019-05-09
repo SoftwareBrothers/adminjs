@@ -53,6 +53,11 @@ const SortIndicator = ({ sortedBy, location }) => {
 }
 
 class SortLink extends React.PureComponent {
+  constructor(props) {
+    super(props)
+    this.isActive = this.isActive.bind(this)
+  }
+
   isActive() {
     return isSortedBy(this.props)
   }
@@ -68,7 +73,7 @@ class SortLink extends React.PureComponent {
     return (
       <StyledLink
         to={{ search: query.toString() }}
-        isActive={this.isActive.bind(this)}
+        isActive={this.isActive}
       >
         {property.label}
         {SortIndicator({ sortedBy, location })}

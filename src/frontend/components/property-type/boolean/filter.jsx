@@ -8,6 +8,11 @@ import { filterStyles } from '../../../styles/select-styles'
 import { propertyType } from '../../../types'
 
 export default class Filter extends React.PureComponent {
+  constructor(props) {
+    super(props)
+    this.handleChange = this.handleChange.bind(this)
+  }
+
   handleChange(selected) {
     const { onChange, property } = this.props
     const value = selected ? selected.value : ''
@@ -26,7 +31,7 @@ export default class Filter extends React.PureComponent {
           isClearable
           options={options}
           styles={filterStyles}
-          onChange={this.handleChange.bind(this)}
+          onChange={this.handleChange}
         />
       </PropertyInFilter>
     )

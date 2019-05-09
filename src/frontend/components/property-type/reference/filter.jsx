@@ -8,6 +8,12 @@ import { filterStyles } from '../../../styles/select-styles'
 import { propertyType } from '../../../types'
 
 export default class Filter extends React.PureComponent {
+  constructor(props) {
+    super(props)
+    this.loadOptions = this.loadOptions.bind(this)
+    this.handleChange = this.handleChange.bind(this)
+  }
+
   handleChange(selected) {
     const { onChange, property } = this.props
     onChange(property.name, selected ? selected.value : '')
@@ -31,8 +37,8 @@ export default class Filter extends React.PureComponent {
           isClearable
           cacheOptions
           styles={filterStyles}
-          loadOptions={this.loadOptions.bind(this)}
-          onChange={this.handleChange.bind(this)}
+          loadOptions={this.loadOptions}
+          onChange={this.handleChange}
           defaultOptions
         />
       </PropertyInFilter>

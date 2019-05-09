@@ -8,6 +8,12 @@ import selectStyles from '../../../styles/select-styles'
 import { simplifiedPropertyType, recordType } from '../../../types'
 
 export default class Edit extends React.Component {
+  constructor(props) {
+    super(props)
+    this.loadOptions = this.loadOptions.bind(this)
+    this.handleChange = this.handleChange.bind(this)
+  }
+
   handleChange(selected) {
     const { onChange, property } = this.props
     onChange(property.name, selected.value, selected.record)
@@ -41,8 +47,8 @@ export default class Edit extends React.Component {
           value={selectedOption}
           styles={selectStyles}
           defaultOptions
-          loadOptions={this.loadOptions.bind(this)}
-          onChange={this.handleChange.bind(this)}
+          loadOptions={this.loadOptions}
+          onChange={this.handleChange}
         />
       </PropertyInEdit>
     )

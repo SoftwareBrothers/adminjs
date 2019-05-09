@@ -21,6 +21,7 @@ class New extends React.Component {
     super(props)
     const { record } = props
     this.api = new ApiClient()
+    this.handleChange = this.handleChange.bind(this)
     this.state = {
       record: {
         params: (record && record.params) || {},
@@ -94,7 +95,7 @@ class New extends React.Component {
               where="edit"
               property={property}
               resource={resource}
-              onChange={this.handleChange.bind(this)}
+              onChange={this.handleChange}
               record={record}
             />
           ))}

@@ -61,6 +61,8 @@ const FilterContent = styled.section`
 class Filter extends React.Component {
   constructor(props) {
     super(props)
+    this.handleSubmit = this.handleSubmit.bind(this)
+    this.handleChange = this.handleChange.bind(this)
     this.state = {
       filter: this.parseQuery(),
     }
@@ -142,7 +144,7 @@ class Filter extends React.Component {
               <PropertyType
                 key={property.name}
                 where="filter"
-                onChange={this.handleChange.bind(this)}
+                onChange={this.handleChange}
                 property={property}
                 filter={filter}
                 resource={resource}
@@ -154,7 +156,7 @@ class Filter extends React.Component {
             <StyledButton
               as="a"
               className="is-text"
-              onClick={this.resetFilter.bind(this)}
+              onClick={this.resetFilter}
             >
               Clear filters
             </StyledButton>

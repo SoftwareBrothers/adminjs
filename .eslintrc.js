@@ -31,8 +31,7 @@ module.exports = {
         'guard-for-in': 'off',
         'no-restricted-syntax': 'off',
         'no-await-in-loop': 'off',
-        'object-curly-newline': 'off',
-        'react/jsx-no-bind': 'off'
+        'object-curly-newline': 'off'
     },
     overrides: [
         {

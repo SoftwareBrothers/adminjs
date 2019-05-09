@@ -20,6 +20,7 @@ class Edit extends React.Component {
   constructor(props) {
     super(props)
     const { record } = props
+    this.handleChange = this.handleChange.bind(this)
     this.state = {
       record,
     }
@@ -89,7 +90,7 @@ class Edit extends React.Component {
             <PropertyType
               key={property.name}
               where="edit"
-              onChange={this.handleChange.bind(this)}
+              onChange={this.handleChange}
               property={property}
               resource={resource}
               record={record}

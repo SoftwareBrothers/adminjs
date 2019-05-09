@@ -19,6 +19,11 @@ import withNotice from '../../store/with-notice'
  * @component
  */
 class ActionButton extends React.PureComponent {
+  constructor(props) {
+    super(props)
+    this.handleClick = this.handleClick.bind(this)
+  }
+
   handleClick(event) {
     const {
       action, resourceId, recordId, location,
@@ -63,7 +68,7 @@ class ActionButton extends React.PureComponent {
       <StyledButton
         to={href}
         className={`button ${className}`}
-        onClick={this.handleClick.bind(this)}
+        onClick={this.handleClick}
       >
         <span className="icon">
           <i className={action.icon} />
