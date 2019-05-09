@@ -22,6 +22,13 @@ const Btn = styled(Link).attrs(({ primary }) => ({
     &:hover {
       border-color: ${colors.primaryHover};
     }
+
+    &.is-white {
+      background-color: #fff;
+      border-color: transparent;
+      color: ${colors.defaultText};
+    }
+
     &.is-primary {
       background-color: ${colors.primary};
       color: #ffffff;
