@@ -129,7 +129,7 @@ const types = {
  *   title: 'John',
  *   params: {
  *     name: 'John',
- *     genre: 'male',
+ *     gender: 'male',
  *   }
  * }
  *

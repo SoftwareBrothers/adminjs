@@ -29,9 +29,11 @@ export default class Edit extends React.Component {
       ? record.params[property.name]
       : ''
     if (property.availableValues) {
+      const selected = property.availableValues.find(av => av.value === value)
       return (
         <Select
           isClearable
+          value={selected}
           options={property.availableValues}
           onChange={this.handleSelectChange}
         />

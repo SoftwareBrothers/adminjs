@@ -51,12 +51,7 @@ const pkg = require('../package.json')
  *
  * @example
  * const AdminBro = require('admin-bro')
- *
- * const ArticleDecorator = require('./article-decorator')
- * const ArticleModel = require('./article')
- *
- * const connection = await mongoose.connect(process.env.MONGO_URL)
- *
+ * //...
  * const adminBro = new AdminBro({
  *   rootPath: '/xyz-admin',
  *   logoutPath: '/xyz-admin/exit',
@@ -67,6 +62,7 @@ const pkg = require('../package.json')
  *     companyName: 'XYZ c.o.'
  *   },
  * })
+ * //...
  */
 const defaults = {
   rootPath: '/admin',

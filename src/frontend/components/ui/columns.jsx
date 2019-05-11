@@ -32,6 +32,7 @@ const StyledColumns = styled.section.attrs({
  * @see Column
  * @component
  * @example
+ * return (
  *   <Columns>
  *      <Column width={8}>
  *        Some content on the left
@@ -40,6 +41,7 @@ const StyledColumns = styled.section.attrs({
  *        Some content on the right
  *      </Column>
  *   </Columns>
+ * )
  */
 const Columns = props => <StyledColumns {...props} />
 
