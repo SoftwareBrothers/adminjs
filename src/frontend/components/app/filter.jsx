@@ -52,7 +52,7 @@ const FilterContent = styled.section`
   width: ${sizes.sidebarWidth};
   overflow: hidden;
 
-  & ${StyledButton} {
+  & a, & button {
     margin: ${sizes.paddingMin} 0;
     width: 100%;
   }
@@ -63,6 +63,7 @@ class Filter extends React.Component {
     super(props)
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleChange = this.handleChange.bind(this)
+    this.resetFilter = this.resetFilter.bind(this)
     this.state = {
       filter: this.parseQuery(),
     }

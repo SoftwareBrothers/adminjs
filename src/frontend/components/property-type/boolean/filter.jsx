@@ -20,14 +20,17 @@ export default class Filter extends React.PureComponent {
   }
 
   render() {
-    const { property } = this.props
+    const { property, filter } = this.props
+    const value = typeof filter[property.name] === 'undefined' ? '' : filter[property.name]
     const options = [
       { value: true, label: mapValue(true) },
       { value: false, label: mapValue(false) },
     ]
+    const selected = options.find(o => o.value === value)
     return (
       <PropertyInFilter property={property}>
         <Select
+          value={typeof selected === 'undefined' ? '' : selected}
           isClearable
           options={options}
           styles={filterStyles}
@@ -41,4 +44,10 @@ export default class Filter extends React.PureComponent {
 Filter.propTypes = {
   onChange: PropTypes.func.isRequired,
   property: propertyType.isRequired,
+  // eslint-disable-next-line react/forbid-prop-types
+  filter: PropTypes.object,
+}
+
+Filter.defaultProps = {
+  filter: {},
 }

@@ -26,14 +26,18 @@ export default class Filter extends React.PureComponent {
       resourceId: property.reference,
       query: inputValue,
     })
-    return records.map(r => ({ value: r.id, label: r.title }))
+    this.options = records.map(r => ({ value: r.id, label: r.title }))
+    return this.options
   }
 
   render() {
-    const { property } = this.props
+    const { property, filter } = this.props
+    const value = typeof filter[property.name] === 'undefined' ? '' : filter[property.name]
+    const selected = (this.options || []).find(o => o.value === value)
     return (
       <PropertyInFilter property={property}>
         <Select
+          value={typeof selected === 'undefined' ? '' : selected}
           isClearable
           cacheOptions
           styles={filterStyles}
@@ -49,4 +53,10 @@ export default class Filter extends React.PureComponent {
 Filter.propTypes = {
   property: propertyType.isRequired,
   onChange: PropTypes.func.isRequired,
+  // eslint-disable-next-line react/forbid-prop-types
+  filter: PropTypes.object,
+}
+
+Filter.defaultProps = {
+  filter: {},
 }

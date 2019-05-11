@@ -29,8 +29,10 @@ export default class Filter extends React.PureComponent {
     const filterKey = `filter-${property.name}`
     const value = filter[property.name] || ''
     if (property.availableValues) {
+      const selected = property.availableValues.find(av => av.value === value)
       return (
         <Select
+          value={typeof selected === 'undefined' ? '' : selected}
           isClearable
           options={property.availableValues}
           styles={filterStyles}
