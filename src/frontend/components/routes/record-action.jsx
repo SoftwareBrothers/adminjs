@@ -50,19 +50,20 @@ class RecordAction extends React.Component {
 
   fetchRecord() {
     const { match } = this.props
-    const { recordId, resourceId } = match.params
+    const { recordId, resourceId, actionName } = match.params
     const api = new ApiClient()
     this.setState({
       isLoading: true,
       record: null,
     })
-    api.getRecord({
+    api.recordAction({
       resourceId,
       recordId,
-    }).then((record) => {
+      actionName,
+    }).then((response) => {
       this.setState({
         isLoading: false,
-        record,
+        record: response.data.record,
       })
     })
   }
