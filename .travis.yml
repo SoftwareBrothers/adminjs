@@ -1,9 +1,12 @@
 language: node_js
 node_js:
 - '8'
+install:
+- npm install -g codecov
 script:
 - yarn run lint
 - yarn cover
+- codecov
 deploy:
   provider: npm
   email: wojciech.g.krysiak@gmail.com
