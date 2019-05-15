@@ -5,8 +5,7 @@ install:
 - npm install -g codecov
 script:
 - yarn run lint
-- yarn cover
-- codecov
+- yarn codecov
 deploy:
   provider: npm
   email: wojciech.g.krysiak@gmail.com
