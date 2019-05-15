@@ -4,6 +4,7 @@ node_js:
 install:
 - npm install -g codecov
 script:
+- yarn
 - yarn run lint
 - yarn codecov
 deploy:
