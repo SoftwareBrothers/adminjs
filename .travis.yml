@@ -3,7 +3,7 @@ node_js:
 - '8'
 script:
 - yarn run lint
-- yarn test
+- yarn cover
 deploy:
   provider: npm
   email: wojciech.g.krysiak@gmail.com
