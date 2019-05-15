@@ -1,6 +1,6 @@
-const PropertyDecorator = require('../../../src/backend/decorators/property-decorator')
-const BaseProperty = require('../../../src/backend/adapters/base-property')
-const AdminBro = require('../../../src/admin-bro')
+const PropertyDecorator = require('./property-decorator')
+const BaseProperty = require('../adapters/base-property')
+const AdminBro = require('../../admin-bro')
 
 describe('PropertyDecorator', function () {
   beforeEach(function () {

@@ -1,6 +1,6 @@
 const path = require('path')
 
-const AdminBro = require('../src/admin-bro')
+const AdminBro = require('./admin-bro')
 
 describe('AdminBro', function () {
   beforeEach(function () {
@@ -44,7 +44,7 @@ describe('AdminBro', function () {
     })
     context('file exists', function () {
       beforeEach(function () {
-        this.result = AdminBro.require('./fixtures/example-component')
+        this.result = AdminBro.require('../spec/fixtures/example-component')
       })
 
       it('adds given file to a UserComponents object', function () {
@@ -59,7 +59,7 @@ describe('AdminBro', function () {
       it('converts relative path to absolute path', function () {
         expect(
           AdminBro.UserComponents[this.result],
-        ).to.equal(path.join(__dirname, 'fixtures/example-component'))
+        ).to.equal(path.join(__dirname, '../spec/fixtures/example-component'))
       })
     })
 

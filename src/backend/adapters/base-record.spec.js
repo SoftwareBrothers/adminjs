@@ -1,4 +1,4 @@
-const Record = require('../../../src/backend/adapters/base-record')
+const Record = require('./base-record')
 
 describe('Record', function () {
   describe('#param', function () {

@@ -1,8 +1,8 @@
-const ResourceDecorator = require('../../../src/backend/decorators/resource-decorator')
-const PropertyDecorator = require('../../../src/backend/decorators/property-decorator')
-const ConfigurationError = require('../../../src/backend/utils/configuration-error')
-const AdminBro = require('../../../src/admin-bro')
-const resourceStub = require('../helpers/resource-stub')
+const ResourceDecorator = require('./resource-decorator')
+const PropertyDecorator = require('./property-decorator')
+const ConfigurationError = require('../utils/configuration-error')
+const AdminBro = require('../../admin-bro')
+const resourceStub = require('../../../spec/backend/helpers/resource-stub')
 
 describe('ResourceDecorator', function () {
   beforeEach(function () {

@@ -24,8 +24,5 @@ afterEach(function () {
   this.sinon.restore()
 })
 
-require('require.all')({
-  dir: '../src/',
-  match: /spec\.js$/i,
-  recursive: true,
-})
+require('./admin-bro.spec')
+require('./backend')
