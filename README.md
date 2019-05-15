@@ -1,6 +1,7 @@
 # Admin Bro
 
 [![codecov](https://codecov.io/gh/SoftwareBrothers/admin-bro/branch/master/graph/badge.svg)](https://codecov.io/gh/SoftwareBrothers/admin-bro)
+[![Build Status](https://travis-ci.com/SoftwareBrothers/admin-bro.svg?branch=master)](https://travis-ci.com/SoftwareBrothers/admin-bro)
 
 [AdminBro](https://softwarebrothers.github.io/admin-bro-dev/) is An automatic admin interface which can be plugged into your application. You, as a developer, provide database models (like posts, comments, stores, products or whatever else your application uses), and AdminBro generates UI which allows you (or other trusted users) to manage content.
 
