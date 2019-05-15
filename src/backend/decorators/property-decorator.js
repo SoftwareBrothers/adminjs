@@ -53,6 +53,16 @@ class PropertyDecorator {
     return this._property.isSortable()
   }
 
+  overrideFromOptions(optionName, defaultValue = null) {
+    if (typeof this.options[optionName] === 'undefined') {
+      if (defaultValue) {
+        return defaultValue()
+      }
+      return this._property[optionName]()
+    }
+    return this.options[optionName]
+  }
+
   /**
    * When given property is a reference to another Resource - it returns this Resource
    *
@@ -68,17 +78,13 @@ class PropertyDecorator {
    * @returns {String}
    */
   name() {
-    if (typeof this.options.name === 'undefined') {
-      return this._property.name()
-    }
-    return this.options.name
+    return this.overrideFromOptions('name')
   }
 
   label() {
-    if (typeof this.options.label === 'undefined') {
-      return _.startCase(this._property.name())
-    }
-    return this.options.label
+    return this.overrideFromOptions('name', () => (
+      _.startCase(this._property.name())
+    ))
   }
 
   /**
@@ -87,21 +93,17 @@ class PropertyDecorator {
    * @returns {String}
    */
   type() {
-    if (typeof this.options.type === 'undefined') {
-      return this._property.type()
-    }
-    return this.options.type
+    return this.overrideFromOptions('type')
   }
 
   availableValues() {
-    if (typeof this.options.availableValues === 'undefined') {
+    return this.overrideFromOptions('availableValues', () => {
       const values = this._property.availableValues()
       if (values) {
         return values.map(val => ({ value: val, label: val }))
       }
       return null
-    }
-    return this.options.availableValues
+    })
   }
 
   /**
@@ -128,11 +130,9 @@ class PropertyDecorator {
    * @return {Number}
    */
   position() {
-    if (typeof this.options.position === 'number') {
-      return this.options.position
-    }
-    // when field is a title its position should be -1 -> first on the list.
-    return this.isTitle() ? -1 : 100
+    return this.overrideFromOptions('position', () => (
+      this.isTitle() ? -1 : 100
+    ))
   }
 
   /**
@@ -141,10 +141,7 @@ class PropertyDecorator {
    * @return {Boolean}
    */
   isId() {
-    if (typeof this.options.isId === 'undefined') {
-      return !!this._property.isId()
-    }
-    return !!this.options.isId
+    return this.overrideFromOptions('isId')
   }
 
   /**
@@ -155,10 +152,7 @@ class PropertyDecorator {
    * @return {Boolean}
    */
   isTitle() {
-    if (typeof this.options.isTitle === 'undefined') {
-      return this._property.isTitle()
-    }
-    return this.options.isTitle
+    return this.overrideFromOptions('isTitle')
   }
 
   /**
