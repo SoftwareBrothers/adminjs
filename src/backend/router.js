@@ -53,11 +53,13 @@ const Router = {
     path: '/frontend/assets/components.bundle.js',
     Controller: AppController,
     action: 'bundleComponents',
+    contentType: 'text/javascript;charset=utf-8',
   }, {
     method: 'GET',
     path: '/frontend/assets/app.bundle.js',
     Controller: AppController,
     action: 'bundle',
+    contentType: 'text/javascript;charset=utf-8',
   }, {
     method: 'GET',
     path: '/resources/{resourceId}',

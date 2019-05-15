@@ -77,7 +77,7 @@ const dashboardReducer = (state = {}, action) => {
   }
 }
 
-const sessionReducer = (state = {}, action) => {
+const sessionReducer = (state = null, action) => {
   switch (action.type) {
   case 'SESSION_INITIALIZE':
     return action.data
