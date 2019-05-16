@@ -3410,6 +3410,10 @@ require-uncached@^1.0.3:
     caller-path "^0.1.0"
     resolve-from "^1.0.0"
 
+require.all@^2.0.4:
+  version "2.0.4"
+  resolved "https://registry.yarnpkg.com/require.all/-/require.all-2.0.4.tgz#a42ce8c78fb1bcd46be9362aa54d4881ba11dfa9"
+
 resolve-from@^1.0.0:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/resolve-from/-/resolve-from-1.0.1.tgz#26cbfe935d1aeeeabb29bc3fe5aeb01e93d44226"

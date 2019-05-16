@@ -1,7 +1,8 @@
-const ResourceDecorator = require('../../../src/backend/decorators/resource-decorator')
-const PropertyDecorator = require('../../../src/backend/decorators/property-decorator')
-const AdminBro = require('../../../src/admin-bro')
-const resourceStub = require('../helpers/resource-stub')
+const ResourceDecorator = require('./resource-decorator')
+const PropertyDecorator = require('./property-decorator')
+const ConfigurationError = require('../utils/configuration-error')
+const AdminBro = require('../../admin-bro')
+const resourceStub = require('../../../spec/backend/helpers/resource-stub')
 
 describe('ResourceDecorator', function () {
   beforeEach(function () {
@@ -85,13 +86,37 @@ describe('ResourceDecorator', function () {
     })
   })
 
-  describe('#getListProperties', function () {
-    it('returns first DEFAULT_MAX_ITEMS_IN_LIST items', function () {
-      this.sinon.stub(PropertyDecorator.prototype, 'isVisible').returns(true)
-      this.decorator = new ResourceDecorator(this.args)
-      expect(
-        this.decorator.getListProperties(),
-      ).to.have.lengthOf(ResourceDecorator.DEFAULT_MAX_ITEMS_IN_LIST)
+  describe('#getProperties', function () {
+    context('all properties are visible', function () {
+      beforeEach(function () {
+        this.sinon.stub(PropertyDecorator.prototype, 'isVisible').returns(true)
+      })
+
+      it('returns first n items when limit is given', function () {
+        const max = 3
+        this.decorator = new ResourceDecorator(this.args)
+        expect(
+          this.decorator.getProperties({ where: 'list', max }),
+        ).to.have.lengthOf(max)
+      })
+
+      it('returns all properties when limit is not given', function () {
+        this.decorator = new ResourceDecorator(this.args)
+        expect(
+          this.decorator.getProperties({ where: 'list' }),
+        ).to.have.lengthOf(resourceStub.expectedResult.properties.length)
+      })
+
+      it('returns only showProperties from options if they were given', function () {
+        const path = resourceStub.expectedResult.properties[0].path()
+        this.decorator = new ResourceDecorator({
+          ...this.args,
+          options: { showProperties: [path] },
+        })
+        expect(
+          this.decorator.getProperties({ where: 'show' }),
+        ).to.have.lengthOf(1)
+      })
     })
   })
 
@@ -107,6 +132,25 @@ describe('ResourceDecorator', function () {
         const action = this.decorator.resourceActions()[0]
         expect(action).to.have.property('name', 'new')
       })
+    })
+  })
+
+  describe('#getPropertyByKey', function () {
+    beforeEach(function () {
+      this.decorator = new ResourceDecorator({ ...this.args })
+    })
+
+    it('returns property by giving its key', function () {
+      this.propertyPath = resourceStub.expectedResult.properties[0].path()
+      expect(
+        this.decorator.getPropertyByKey(this.propertyPath),
+      ).to.be.an.instanceof(PropertyDecorator)
+    })
+
+    it('throws error when ther is no property by given key', function () {
+      expect(() => {
+        this.decorator.getPropertyByKey('some-unknown-name')
+      }).to.throw(ConfigurationError)
     })
   })
 
@@ -133,6 +177,25 @@ describe('ResourceDecorator', function () {
       const options = { actions: { show: { isVisible: () => false } } }
       const actions = new ResourceDecorator({ ...this.args, options }).recordActions()
       expect(actions).to.have.lengthOf(2)
+    })
+  })
+
+  describe('#toJSON', function () {
+    it('returns JSON representation of a resource', function () {
+      const json = new ResourceDecorator(this.args).toJSON()
+      expect(json).to.have.keys(
+        'id',
+        'name',
+        'parent',
+        'href',
+        'titleProperty',
+        'resourceActions',
+        'recordActions',
+        'listProperties',
+        'editProperties',
+        'showProperties',
+        'filterProperties',
+      )
     })
   })
 })

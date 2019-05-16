@@ -149,93 +149,49 @@ class ResourceDecorator {
     return { name, icon }
   }
 
-  getPropertyByKey(propertyKey) {
-    const property = this.properties[propertyKey]
+  /**
+   * Returns propertyDecordator by giving property path
+   *
+   * @param   {String}  propertyPath  property path
+   *
+   * @return  {PropertyDecorator}
+   * @throws  {ConfigurationError} when there is no property for given key
+   */
+  getPropertyByKey(propertyPath) {
+    const property = this.properties[propertyPath]
     if (!property) {
       throw new ConfigurationError(
-        `there is no property by the name of ${propertyKey} in resource ${this.getResourceName()}`,
+        `there is no property by the name of ${propertyPath} in resource ${this.getResourceName()}`,
         'tutorial-04-customizing-resources.html',
       )
     }
     return property
   }
 
-  property(key) {
-    return this.properties[key]
-  }
-
   /**
-   * Returns list of all properties which will be visible on the list
-   * @return {Array<PropertyDecorator>}
-   */
-  getListProperties() {
-    if (this.options.listProperties && this.options.listProperties.length) {
-      return this.options.listProperties.map(this.getPropertyByKey)
-    }
-    return Object.keys(this.properties)
-      .filter(key => this.properties[key].isVisible('list'))
-      .sort((key1, key2) => this.properties[key1].position() > this.properties[key2].position())
-      .map(key => this.properties[key])
-      .slice(0, DEFAULT_MAX_ITEMS_IN_LIST)
-  }
-
-  /**
-   * Returns list of all properties which will be visible on the show view
-   * @return {Array<PropertyDecorator>}
-   */
-  getShowProperties() {
-    if (this.options.showProperties && this.options.showProperties.length) {
-      return this.options.showProperties.map(this.getPropertyByKey)
-    }
-    return Object.keys(this.properties)
-      .filter(key => this.properties[key].isVisible('show'))
-      .sort((key1, key2) => this.properties[key1].position() > this.properties[key2].position())
-      .map(key => this.properties[key])
-  }
-
-  /**
-   * Returns list of all properties which will be visible on the edit page
-   * @return {Array<PropertyDecorator>}
-   */
-  getEditProperties() {
-    if (this.options.editProperties && this.options.editProperties.length) {
-      return this.options.editProperties.map(this.getPropertyByKey)
-    }
-    return Object.keys(this.properties)
-      .filter(key => this.properties[key].isVisible('edit'))
-      .sort((key1, key2) => this.properties[key1].position() > this.properties[key2].position())
-      .map(key => this.properties[key])
-  }
-
-  /**
-   * Returns list of all properties which will be filterable
-   * @return {Array<PropertyDecorator>}
-   */
-  getFilterProperties() {
-    if (this.options.filterProperties && this.options.filterProperties.length) {
-      return this.options.filterProperties.map(this.getPropertyByKey)
-    }
-    return Object.keys(this.properties)
-      .filter(key => this.properties[key].isVisible('filter'))
-      .sort((key1, key2) => this.properties[key1].position() > this.properties[key2].position())
-      .map(key => this.properties[key])
-  }
-
-  /**
-   * Returns list of all custom scripts which are should be included in the
-   * head of the page. It gathers them from all properties which has defined custom
-   * head - see: {@link PropertyType}
+   * Returns list of all properties which will be visible in given place (where)
    *
-   * @see PropertyType
+   * @param   {Object}  options
+   * @param   {String}  options.where   one of: 'list', 'show', 'edit', 'filter'
+   * @param   {String}  [options.max]   maximum number of properites retunred where there are
+   *                                    no overrides in the options
+   *
+   * @return {Array<PropertyDecorator>}
    */
-  customHeadScripts() {
-    return Object.keys(this.properties)
+  getProperties({ where, max = null }) {
+    const whereProperties = `${where}Properties` // like listProperties, viewProperties etc
+    if (this.options[whereProperties] && this.options[whereProperties].length) {
+      return this.options[whereProperties].map(this.getPropertyByKey)
+    }
+    const properties = Object.keys(this.properties)
+      .filter(key => this.properties[key].isVisible(where))
+      .sort((key1, key2) => this.properties[key1].position() > this.properties[key2].position())
       .map(key => this.properties[key])
-      .filter(property => property.headScripts())
-      .reduce((memo, property) => ({
-        scripts: [...memo.scripts, ...property.headScripts().scripts],
-        styles: [...memo.styles, ...property.headScripts().styles],
-      }), { scripts: [], styles: [] })
+
+    if (max) {
+      return properties.slice(0, max)
+    }
+    return properties
   }
 
   /**
@@ -368,10 +324,12 @@ class ResourceDecorator {
       titleProperty: this.titleProperty().toJSON(),
       resourceActions: this.resourceActions().map(ra => ResourceDecorator.serializeAction(ra)),
       recordActions: this.recordActions().map(ra => ResourceDecorator.serializeAction(ra)),
-      listProperties: this.getListProperties().map(property => property.toJSON()),
-      editProperties: this.getEditProperties().map(property => property.toJSON()),
-      showProperties: this.getShowProperties().map(property => property.toJSON()),
-      filterProperties: this.getFilterProperties().map(property => property.toJSON()),
+      listProperties: this.getProperties({ where: 'list', max: DEFAULT_MAX_ITEMS_IN_LIST }).map(
+        property => property.toJSON(),
+      ),
+      editProperties: this.getProperties({ where: 'edit' }).map(property => property.toJSON()),
+      showProperties: this.getProperties({ where: 'show' }).map(property => property.toJSON()),
+      filterProperties: this.getProperties({ where: 'filter' }).map(property => property.toJSON()),
     }
   }
 }

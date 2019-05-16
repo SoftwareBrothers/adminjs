@@ -24,7 +24,7 @@ const Topbar = (props) => {
       </a> */}
       <div className="navbar-menu">
         <div className="navbar-end">
-          {session && <LoggedIn session={session} paths={paths} />}
+          {session && session.email ? <LoggedIn session={session} paths={paths} /> : ''}
         </div>
       </div>
     </Navbar>

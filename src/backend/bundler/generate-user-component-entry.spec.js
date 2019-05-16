@@ -1,6 +1,8 @@
 const path = require('path')
-const AdminBro = require('../../../src/admin-bro')
-const generateUserComponentEntry = require('../../../src/backend/bundler/generate-user-component-entry')
+const AdminBro = require('../../admin-bro')
+const generateUserComponentEntry = require('./generate-user-component-entry')
+
+const exampleComponent = '../../../spec/fixtures/example-component'
 
 describe('generateUserComponentEntry', function () {
   it('defines AdminBro.UserComponents', function () {
@@ -23,8 +25,8 @@ describe('generateUserComponentEntry', function () {
 
   it('adds components to the entry file', function () {
     const adminBro = new AdminBro()
-    const componentId = AdminBro.require('../../fixtures/example-component')
-    const filePath = path.normalize(path.join(__dirname, '../../fixtures/example-component'))
+    const componentId = AdminBro.require(exampleComponent)
+    const filePath = path.normalize(path.join(__dirname, exampleComponent))
 
     const entryFile = generateUserComponentEntry(adminBro)
 

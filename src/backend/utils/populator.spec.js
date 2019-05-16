@@ -1,8 +1,8 @@
-const BaseRecord = require('../../../src/backend/adapters/base-record')
-const BaseResource = require('../../../src/backend/adapters/base-resource')
-const PropertyDecorator = require('../../../src/backend/decorators/property-decorator')
+const BaseRecord = require('../adapters/base-record')
+const BaseResource = require('../adapters/base-resource')
+const PropertyDecorator = require('../decorators/property-decorator')
 
-const populator = require('../../../src/backend/utils/populator')
+const populator = require('./populator')
 
 describe('populator', function () {
   context('empty array given as params', function () {
