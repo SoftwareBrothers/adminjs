@@ -12,7 +12,6 @@ import { colors } from '../../styles/variables'
 import {
   Resource, Dashboard, ResourceAction, RecordAction,
 } from '../routes'
-// import Hamburger from '../layout/sidebar/hamburger'
 
 const GlobalStyle = createGlobalStyle`
   html, body, #app {

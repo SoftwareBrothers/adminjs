@@ -194,6 +194,10 @@ class ResourceDecorator {
     return properties
   }
 
+  getListProperties() {
+    return this.getProperties({ where: 'list', max: DEFAULT_MAX_ITEMS_IN_LIST })
+  }
+
   /**
    * List of all actions which should be invoked for entire resource and not
    * for a particular record

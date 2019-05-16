@@ -1,13 +1,30 @@
+import React from 'react'
 import styled from 'styled-components'
-import { sizes } from '../../../styles/variables'
 
-const Hamburger = styled.i.attrs({
-  className: 'fas fa-bars fa-2x',
-})`
+import { sizes, colors } from '../../../styles/variables'
+
+const StyledHamburger = styled.a`
   cursor: pointer;
   display: block;
   float: left;
-  margin: ${sizes.paddingMin};
+  width: 48px;
+  height: 32px;
+  padding: 10px ${sizes.padding};
+  position: relative;
+  z-index: 10;
+
+  & > div {
+    width: 100%;
+    height: 2px;
+    background-color: ${colors.defaultText};
+    margin-bottom: 3px;
+  }
 `
 
-export default Hamburger
+export default props => (
+  <StyledHamburger {...props}>
+    <div />
+    <div />
+    <div />
+  </StyledHamburger>
+)

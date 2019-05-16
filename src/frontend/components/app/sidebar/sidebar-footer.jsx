@@ -8,26 +8,44 @@ const StyledFooter = styled.p`
   text-align: center;
   color: ${colors.lightText};
 
-  & > svg, & > a {
+  & svg, & a {
     color: ${colors.love};
     margin: 0 ${sizes.paddingMin};
   }
 `
 
 
-const SidebarFooter = () => (
-  <StyledFooter>
-      With
-    <i className="fas fa-heart" />
-      by
-    <a
-      href="http://softwarebrothers.co"
-      target="_blank"
-      rel="noopener noreferrer"
-    >
-        SoftwareBrothers
-    </a>
-  </StyledFooter>
-)
+const SidebarFooter = (props) => {
+  const { hidden } = props
+  if (hidden) {
+    return (
+      <StyledFooter>
+        <a
+          href="http://softwarebrothers.co"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <i className="fas fa-heart fa-2x" />
+        </a>
+      </StyledFooter>
+    )
+  }
+  return (
+    <StyledFooter>
+      <span>
+        With
+        <i className="fas fa-heart" />
+        by
+        <a
+          href="http://softwarebrothers.co"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          SoftwareBrothers
+        </a>
+      </span>
+    </StyledFooter>
+  )
+}
 
 export default SidebarFooter
