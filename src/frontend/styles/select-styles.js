@@ -1,4 +1,4 @@
-import { colors } from '../../styles/variables'
+import { colors } from './variables'
 
 const selectStyles = {
   control: (provided, state) => ({
