@@ -7,7 +7,7 @@ import { ThemeProvider } from 'styled-components'
 import App from './components/app/application'
 import ViewHelpers from '../backend/utils/view-helpers'
 import initializeStore from './store'
-import * as theme from './styles/variables'
+import combineStyles from './styles/combine-styles'
 
 /**
  * Renders (SSR) html for given location
@@ -31,6 +31,8 @@ const html = (admin, currentAdmin, location = '/') => {
     .map(s => `<script src="${s}"></script>`)
   const styles = ((admin.options.assets && admin.options.assets.styles) || [])
     .map(l => `<link rel="stylesheet" type="text/css" href="${l}">`)
+
+  const theme = combineStyles((admin.options.branding && admin.options.branding.theme) || {})
 
   const jsx = (
     // eslint-disable-next-line react/jsx-filename-extension
