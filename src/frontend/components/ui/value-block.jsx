@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 
+import { colors } from '../../styles/variables'
 import WrapperBox from './wrapper-box'
 import { childrenType } from '../../types'
 import Label from './label'

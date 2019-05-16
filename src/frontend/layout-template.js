@@ -7,7 +7,7 @@ import { ThemeProvider } from 'styled-components'
 import App from './components/app/application'
 import ViewHelpers from '../backend/utils/view-helpers'
 import initializeStore from './store'
-import * as theme from './styles/variables';
+import * as theme from './styles/variables'
 
 /**
  * Renders (SSR) html for given location
