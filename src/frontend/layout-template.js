@@ -2,10 +2,12 @@ import React from 'react'
 import { renderToString } from 'react-dom/server'
 import { StaticRouter } from 'react-router-dom'
 import { Provider } from 'react-redux'
+import { ThemeProvider } from 'styled-components'
 
 import App from './components/app/application'
 import ViewHelpers from '../backend/utils/view-helpers'
 import initializeStore from './store'
+import * as theme from './styles/variables';
 
 /**
  * Renders (SSR) html for given location
@@ -33,9 +35,11 @@ const html = (admin, currentAdmin, location = '/') => {
   const jsx = (
     // eslint-disable-next-line react/jsx-filename-extension
     <Provider store={store}>
-      <StaticRouter context={context} location={locationInAdmin}>
-        <App />
-      </StaticRouter>
+      <ThemeProvider theme={theme}>
+        <StaticRouter context={context} location={locationInAdmin}>
+          <App />
+        </StaticRouter>
+      </ThemeProvider>
     </Provider>
   )
 

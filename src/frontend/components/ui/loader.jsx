@@ -2,8 +2,6 @@ import React from 'react'
 import styled from 'styled-components'
 import WrapperBox from './wrapper-box'
 
-import { colors } from '../../styles/variables'
-
 const Spinner = styled.div.attrs({
   className: 'lds-facebook',
 })`
@@ -18,7 +16,7 @@ const Spinner = styled.div.attrs({
     position: absolute;
     left: 6px;
     width: 13px;
-    background: ${colors.primary};
+    background: ${({ theme }) => theme.colors.primary};
     animation: lds-facebook 1.2s cubic-bezier(0, 0.5, 0.5, 1) infinite;
   }
   & div:nth-child(1) {

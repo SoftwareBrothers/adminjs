@@ -3,49 +3,47 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 
-import { sizes, colors, fonts } from '../../styles/variables'
-
 const Btn = styled(Link).attrs(({ primary }) => ({
   className: `button${primary ? ' is-primary' : ''}`,
 }))`
   &&& {
-    font-size: ${fonts.medium};
+    font-size: ${({ theme }) => theme.fonts.medium};
     border-radius: 0;
-    border-color: ${colors.primary};
+    border-color: ${({ theme }) => theme.colors.primary};
     background: #fff;
     height: 32px;
-    padding: ${sizes.paddingMin} ${sizes.padding};
-    color: ${colors.primary};
+    padding: ${({ theme }) => theme.sizes.paddingMin} ${({ theme }) => theme.sizes.padding};
+    color: ${({ theme }) => theme.colors.primary};
     & i, & svg {
       margin-right: 5px;
     }
     &:hover {
-      border-color: ${colors.primaryHover};
+      border-color: ${({ theme }) => theme.colors.primaryHover};
     }
 
     &.is-white {
       background-color: #fff;
       border-color: transparent;
-      color: ${colors.defaultText};
+      color: ${({ theme }) => theme.colors.defaultText};
     }
 
     &.is-primary {
-      background-color: ${colors.primary};
+      background-color: ${({ theme }) => theme.colors.primary};
       color: #ffffff;
       &:hover {
-        background-color: ${colors.primaryHover};
+        background-color: ${({ theme }) => theme.colors.primaryHover};
       }
     }
 
     &.is-text {
       background-color: transparent;
-      color: ${colors.primary};
+      color: ${({ theme }) => theme.colors.primary};
       border: transparent;
     }
 
     &.in-dropdown {
-      color: ${colors.defaultText};
-      font-size: ${fonts.base};
+      color: ${({ theme }) => theme.colors.defaultText};
+      font-size: ${({ theme }) => theme.fonts.base};
       width: 100%;
       text-align: start;
       justify-content: flex-start;
@@ -54,7 +52,7 @@ const Btn = styled(Link).attrs(({ primary }) => ({
       border: none;
 
       &:hover {
-        border: 4px ${colors.primary};
+        border: 4px ${({ theme }) => theme.colors.primary};
         padding-left: 36px;
         border-style: none solid;
       }

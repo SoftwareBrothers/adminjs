@@ -3,12 +3,11 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
 import { childrenType } from '../../types'
-import { sizes } from '../../styles/variables'
 
 import Label from './label'
 
 const Property = styled.div`
-  margin-bottom: ${sizes.paddingLayout};
+  margin-bottom: ${({ theme }) => theme.sizes.paddingLayout};
 `
 
 /**

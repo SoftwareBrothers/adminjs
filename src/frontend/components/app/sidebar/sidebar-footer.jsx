@@ -1,19 +1,16 @@
 import React from 'react'
 import styled from 'styled-components'
 
-import { colors, fonts, sizes } from '../../../styles/variables'
-
 const StyledFooter = styled.p`
-  font-size: ${fonts.min};
+  font-size: ${({ theme }) => theme.fonts.min};
   text-align: center;
-  color: ${colors.lightText};
+  color: ${({ theme }) => theme.colors.lightText};
 
   & > svg, & > a {
-    color: ${colors.love};
-    margin: 0 ${sizes.paddingMin};
+    color: ${({ theme }) => theme.colors.love};
+    margin: 0 ${({ theme }) => theme.sizes.paddingMin};
   }
 `
-
 
 const SidebarFooter = () => (
   <StyledFooter>

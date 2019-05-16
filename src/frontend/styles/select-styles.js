@@ -1,11 +1,9 @@
-import { colors } from './variables'
-
 const selectStyles = {
   control: (provided, state) => ({
     ...provided,
     border: state.isFocused
-      ? `1px solid ${colors.primary}`
-      : `1px solid ${colors.border}`,
+      ? `1px solid ${({ theme }) => theme.colors.primary}`
+      : `1px solid ${({ theme }) => theme.colors.border}`,
     borderRadius: '0px',
     background: 'transparent',
   }),
@@ -20,8 +18,8 @@ const filterStyles = {
   control: (provided, state) => ({
     ...provided,
     border: state.isFocused
-      ? `1px solid ${colors.primary}`
-      : `1px solid ${colors.borderOnDark}`,
+      ? `1px solid ${({ theme }) => theme.colors.primary}`
+      : `1px solid ${({ theme }) => theme.colors.borderOnDark}`,
     borderRadius: '0px',
     background: 'transparent',
     color: colors.lightText,

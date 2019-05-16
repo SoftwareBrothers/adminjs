@@ -5,18 +5,17 @@ import styled, { createGlobalStyle } from 'styled-components'
 import WrapperBox from '../ui/wrapper-box'
 import StyledButton from '../ui/styled-button'
 import PropertyInEdit from '../ui/property-in-edit'
-import { colors, fonts, sizes } from '../../styles/variables'
 
 const GlobalStyle = createGlobalStyle`
   html, body, #app {
     width: 100%;
     height: 100%;
-    background: ${colors.bck};
-    font-size: ${fonts.base};
+    background: ${({ theme }) => theme.colors.bck};
+    font-size: ${({ theme }) => theme.fonts.base};
   }
 
   a {
-    color: ${colors.primary};
+    color: ${({ theme }) => theme.colors.primary};
   }
 `
 
@@ -36,14 +35,14 @@ const Login = (props) => {
   const LoginBox = styled.section`
     width: 414px;
     & ${StyledButton} {
-      margin: ${sizes.paddingLayout} 0;
+      margin: ${({ theme }) => theme.sizes.paddingLayout} 0;
     }
 
     & .content {
       text-align: center;
-      border-bottom: 1px solid ${colors.border};
-      margin: 0 -${sizes.paddingLayout} ${sizes.paddingLayout};
-      padding-bottom: ${sizes.paddingLayout};
+      border-bottom: 1px solid ${({ theme }) => theme.colors.border};
+      margin: 0 -${({ theme }) => theme.sizes.paddingLayout} ${({ theme }) => theme.sizes.paddingLayout};
+      padding-bottom: ${({ theme }) => theme.sizes.paddingLayout};
     }
   `
 

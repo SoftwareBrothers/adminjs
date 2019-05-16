@@ -1,8 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
 
-import { colors, sizes } from '../../styles/variables'
-
 const StyledTable = styled.table.attrs({
   className: 'table is-fullwidth',
 })`
@@ -11,9 +9,9 @@ const StyledTable = styled.table.attrs({
   }
 
   td {
-    color: ${colors.defaultText};
-    padding: ${sizes.padding};
-    border-color: ${colors.border};
+    color: ${({ theme }) => theme.colors.defaultText};
+    padding: ${({ theme }) => theme.sizes.padding};
+    border-color: ${({ theme }) => theme.colors.border};
   }
 `
 

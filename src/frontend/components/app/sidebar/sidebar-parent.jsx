@@ -1,30 +1,29 @@
 import React from 'react'
 import styled from 'styled-components'
 
-import { colors, sizes } from '../../../styles/variables'
 import { resourceParentWithResourcesType } from '../../../types'
 import SidebarResource from './sidebar-resource'
 
 const Title = styled.span`
-  background: ${colors.lightBck};
-  padding-left: ${sizes.padding};
-  padding-right: ${sizes.padding};
+  background: ${({ theme }) => theme.colors.lightBck};
+  padding-left: ${({ theme }) => theme.sizes.padding};
+  padding-right: ${({ theme }) => theme.sizes.padding};
   line-height: 40px;
-  border-radius: ${sizes.paddingLayout};
+  border-radius: ${({ theme }) => theme.sizes.paddingLayout};
   display: flex;
   align-items: baseline;
-  color: ${colors.defaultText};
+  color: ${({ theme }) => theme.colors.defaultText};
   position: relative;
 
   & > i, & > svg {
-    margin-right: ${sizes.paddingMin};
-    color: ${colors.lightText};
-    margin-right: ${sizes.padding};
+    margin-right: ${({ theme }) => theme.sizes.paddingMin};
+    color: ${({ theme }) => theme.colors.lightText};
+    margin-right: ${({ theme }) => theme.sizes.padding};
   }
 `
 
 const ResourcesList = styled.ul`
-  margin: ${sizes.padding} 0;
+  margin: ${({ theme }) => theme.sizes.padding} 0;
   padding-left: 40px;
 `
 

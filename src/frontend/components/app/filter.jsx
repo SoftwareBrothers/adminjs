@@ -3,15 +3,14 @@ import { withRouter } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
-import { sizes, colors } from '../../styles/variables'
 import StyledButton from '../ui/styled-button'
 import PropertyType from '../property-type'
 import { locationType, historyType, resourceType, matchType } from '../../types'
 
 const FilterWrapper = styled.section`
-  background: ${colors.darkBck};
+  background: ${({ theme }) => theme.colors.darkBck};
   flex-shrink: 0;
-  width: ${sizes.sidebarWidth};
+  width: ${({ theme }) => theme.sizes.sidebarWidth};
   color: #fff;
   padding-top: 60px;
   transition: width 0.5s;
@@ -31,29 +30,29 @@ const FilterLink = styled.a`
   color: #fff;
   & > span {
     opacity: 0.25;
-    color: ${colors.lightText};
-    border: 1px solid ${colors.lightText};
+    color: ${({ theme }) => theme.colors.lightText};
+    border: 1px solid ${({ theme }) => theme.colors.lightText};
     border-radius: 3px;
     padding: 8px 10px;
-    margin-right: ${sizes.padding};
+    margin-right: ${({ theme }) => theme.sizes.padding};
   }
   &:hover {
-    color: ${colors.primary};
+    color: ${({ theme }) => theme.colors.primary};
     & span{
-      color: ${colors.primary};
-      border-color: ${colors.primary};
+      color: ${({ theme }) => theme.colors.primary};
+      border-color: ${({ theme }) => theme.colors.primary};
       opacity: 1;
     }
   }
 `
 
 const FilterContent = styled.section`
-  padding: ${sizes.paddingLayout};
-  width: ${sizes.sidebarWidth};
+  padding: ${({ theme }) => theme.sizes.paddingLayout};
+  width: ${({ theme }) => theme.sizes.sidebarWidth};
   overflow: hidden;
 
   & a, & button {
-    margin: ${sizes.paddingMin} 0;
+    margin: ${({ theme }) => theme.sizes.paddingMin} 0;
     width: 100%;
   }
 `

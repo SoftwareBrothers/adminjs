@@ -1,5 +1,4 @@
 import styled from 'styled-components'
-import { sizes } from '../../../styles/variables'
 
 const Hamburger = styled.i.attrs({
   className: 'fas fa-bars fa-2x',
@@ -7,7 +6,7 @@ const Hamburger = styled.i.attrs({
   cursor: pointer;
   display: block;
   float: left;
-  margin: ${sizes.paddingMin};
+  margin: ${({ theme }) => theme.sizes.paddingMin};
 `
 
 export default Hamburger

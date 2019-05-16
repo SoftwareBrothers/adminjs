@@ -3,7 +3,6 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import styled from 'styled-components'
 
-import { sizes, colors, fonts } from '../../../styles/variables'
 import { pathsType, brandingType, resourceType } from '../../../types'
 
 import SidebarBranding from './sidebar-branding'
@@ -18,12 +17,12 @@ const SidebarWrapper = styled.aside`
   justify-content: space-between;
   height: 100%;
   overflow-y: auto;
-  border-right: 1px solid ${colors.border};
+  border-right: 1px solid ${({ theme }) => theme.colors.border};
   transition: width 0.5s;
 
   & > section {
-    padding: ${sizes.padding} ${sizes.paddingLayout} ${sizes.paddingLayout};
-    width: ${sizes.sidebarWidth};
+    padding: ${({ theme }) => theme.sizes.padding} ${({ theme }) => theme.sizes.paddingLayout} ${({ theme }) => theme.sizes.paddingLayout};
+    width: ${({ theme }) => theme.sizes.sidebarWidth};
   }
 
   &.hidden {
@@ -37,11 +36,11 @@ const SidebarWrapper = styled.aside`
 `
 
 const SidebarLabel = styled.h2`
-  margin-top: ${sizes.padding};
-  margin-left: ${sizes.padding};
-  margin-bottom: ${sizes.padding};
-  color: ${colors.lightText};
-  font-size: ${fonts.min};
+  margin-top: ${({ theme }) => theme.sizes.padding};
+  margin-left: ${({ theme }) => theme.sizes.padding};
+  margin-bottom: ${({ theme }) => theme.sizes.padding};
+  color: ${({ theme }) => theme.colors.lightText};
+  font-size: ${({ theme }) => theme.fonts.min};
   text-transform: uppercase;
   letter-spacing: .1em;
 `

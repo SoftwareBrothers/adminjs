@@ -2,18 +2,17 @@ import React from 'react'
 import styled from 'styled-components'
 
 import { pathsType, sessionType } from '../../types'
-import { sizes, colors } from '../../styles/variables'
 
 const UserBox = styled.div.attrs({
   className: 'navbar-link',
 })`
-  padding-right: ${sizes.padding};
+  padding-right: ${({ theme }) => theme.sizes.padding};
   border-radius: 50px;
   margin: 10px 0;
 
   img {
     border-radius: 50%;
-    margin-left: ${sizes.padding};
+    margin-left: ${({ theme }) => theme.sizes.padding};
 
     &:after {
       display: none;
@@ -34,13 +33,13 @@ const DropdownLink = styled.a.attrs({
   className: 'navbar-item',
 })`
   &&& {
-    padding: ${sizes.padding} ${sizes.paddingLayout};
-    color: ${colors.defaultText};
+    padding: ${({ theme }) => theme.sizes.padding} ${({ theme }) => theme.sizes.paddingLayout};
+    color: ${({ theme }) => theme.colors.defaultText};
     &:hover{
-      color: ${colors.primary};
+      color: ${({ theme }) => theme.colors.primary};
     }
     i, svg {
-      margin-right: ${sizes.padding};
+      margin-right: ${({ theme }) => theme.sizes.padding};
     }
   }
 `
