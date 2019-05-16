@@ -6,7 +6,7 @@
   "scripts": {
     "test": "mocha ./spec/index.js",
     "lint": "eslint './spec/**/*.js' './src/**/*.js' './src/**/*.jsx' --ignore-pattern='*bundle.js'",
-    "cover": "NODE_ENV=test nyc --reporter=text-summary --reporter=lcov --all=true npm test",
+    "cover": "NODE_ENV=test nyc --reporter=text --reporter=text-summary --reporter=lcov --all=true npm test",
     "codecov": "NODE_ENV=test nyc --reporter=text-lcov npm test | codecov --pipe"
   },
   "nyc": {
