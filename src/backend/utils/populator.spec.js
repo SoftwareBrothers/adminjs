@@ -2,7 +2,7 @@ const BaseRecord = require('../adapters/base-record')
 const BaseResource = require('../adapters/base-resource')
 const PropertyDecorator = require('../decorators/property-decorator')
 
-const populator = require('./populator')
+const { populator } = require('./populator')
 
 describe('populator', function () {
   context('empty array given as params', function () {
