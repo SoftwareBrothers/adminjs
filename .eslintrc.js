@@ -39,7 +39,8 @@ module.exports = {
           rules: {
             'no-unused-expressions': 'off',
             'func-names': 'off',
-            'prefer-arrow-callback': 'off'
+            'prefer-arrow-callback': 'off',
+            "react/jsx-filename-extension": 'off'
           }
         }
     ],
