@@ -1,7 +1,7 @@
 /* eslint-disable max-len */
 /* eslint no-unused-vars: 0 */
 const { unflatten, flatten } = require('flat')
-const populator = require('../utils/populator')
+const { populator } = require('../utils/populator')
 const Filter = require('../utils/filter')
 const ViewHelpers = require('../utils/view-helpers')
 
@@ -53,9 +53,10 @@ class ApiController {
    * @return  {ApiController~ResourceResponse}
    */
   async index({ params, query, payload }, response) {
-    const { resourceId } = params
-    const { sortBy, direction, filters } = unflatten(query)
-    let { page } = unflatten(query)
+    const { resourceId } = params || {}
+    const { sortBy, direction, filters } = unflatten(query || {})
+    let { page } = unflatten(query || {})
+
     const resource = this._admin.findResource(resourceId)
 
     const listProperties = resource.decorate().getListProperties()
@@ -73,7 +74,6 @@ class ApiController {
       offset: (page - 1) * perPage,
       sort,
     })
-
     const populatedRecords = await populator(records, listProperties)
 
     const total = await resource.count(filter)
@@ -139,7 +139,7 @@ class ApiController {
    * @returns {BaseRecord~JSON}
    */
   async get(request, response) {
-    const { resourceId, recordId } = request.params
+    const { resourceId, recordId } = request.params || {}
     const resource = this._admin.findResource(resourceId)
     const record = await resource.findOne(recordId)
     const [populated] = await populator([record])
@@ -161,14 +161,14 @@ class ApiController {
    * @return  {Object}  action response
    */
   async resourceAction(request, response) {
-    const { resourceId, action } = request.params
+    const { resourceId, action: actionName } = request.params
     const h = new ViewHelpers(this._admin)
     const resource = this._admin.findResource(resourceId)
-    const resourceAction = resource.decorate().resourceActions()
-      .find(a => a.name === action)
+    const action = resource.decorate().resourceActions()
+      .find(a => a.name === actionName)
 
-    return resourceAction.handler(request, response, {
-      resource, resourceAction, h,
+    return action.handler(request, response, {
+      resource, action, h,
     })
   }
 
@@ -184,16 +184,16 @@ class ApiController {
    * @return  {Object}  action response
    */
   async recordAction(request, response) {
-    const { resourceId, action, recordId } = request.params
+    const { resourceId, action: actionName, recordId } = request.params
     const h = new ViewHelpers(this._admin)
     const resource = this._admin.findResource(resourceId)
     const record = await resource.findOne(recordId)
-    const resourceAction = resource.decorate().recordActions()
-      .find(a => a.name === action)
+    const action = resource.decorate().recordActions()
+      .find(a => a.name === actionName)
     const [populated] = await populator([record])
 
-    return resourceAction.handler(request, response, {
-      resource, resourceAction, h, record: populated,
+    return action.handler(request, response, {
+      resource, action, h, record: populated,
     })
   }
 

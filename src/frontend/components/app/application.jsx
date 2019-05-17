@@ -11,7 +11,6 @@ import { pathsType } from '../../types'
 import {
   Resource, Dashboard, ResourceAction, RecordAction,
 } from '../routes'
-// import Hamburger from '../layout/sidebar/hamburger'
 
 const GlobalStyle = createGlobalStyle`
   html, body, #app {

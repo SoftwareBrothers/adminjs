@@ -1,13 +1,27 @@
 {
   "name": "admin-bro",
-  "version": "0.8.3",
+  "version": "0.8.5",
   "description": "Admin panel for apps written in node.js",
   "main": "index.js",
   "scripts": {
     "test": "mocha ./spec/index.js",
     "lint": "eslint './spec/**/*.js' './src/**/*.js' './src/**/*.jsx' --ignore-pattern='*bundle.js'",
-    "cover": "NODE_ENV=test nyc --reporter=lcov -x=spec -x=docs -x=coverage -x=**/*.spec.js --all=true npm test",
-    "codecov": "NODE_ENV=test nyc --reporter=text-lcov -x=spec -x=docs -x=coverage --all=true npm test | codecov --pipe"
+    "cover": "NODE_ENV=test nyc --reporter=text --reporter=text-summary --reporter=lcov --all=true npm test",
+    "codecov": "NODE_ENV=test nyc --reporter=text-lcov npm test | codecov --pipe"
+  },
+  "nyc": {
+    "exclude": [
+      "spec",
+      "docs",
+      "coverage",
+      "src/frontend/assets/scripts",
+      "**/*.spec.js"
+    ],
+    "all": true,
+    "extension": [
+      ".js",
+      ".jsx"
+    ]
   },
   "repository": {
     "type": "git",
@@ -67,8 +81,11 @@
     "eslint-plugin-react": "^7.12.4",
     "factory-girl": "^5.0.4",
     "istanbul": "^0.4.5",
+    "jsdom": "^15.1.0",
+    "jsdom-global": "^3.0.2",
     "mocha": "^5.2.0",
     "nyc": "^12.0.2",
+    "react-testing-library": "^7.0.0",
     "require.all": "^2.0.4",
     "sinon": "^6.1.5",
     "sinon-chai": "^3.2.0"

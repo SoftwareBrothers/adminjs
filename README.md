@@ -60,7 +60,6 @@ AdminBro is Copyright © 2018 SoftwareBrothers.co. It is free software, and may 
 
 <img src="https://softwarebrothers.co/assets/images/software-brothers-logo-full.svg" width=240>
 
-
 We’re an open, friendly team that helps clients from all over the world to transform their businesses and create astonishing products.
 
 * We are available to [hire](https://softwarebrothers.co/contact).
