@@ -11,7 +11,7 @@ const BrandingBox = styled.div`
 const LogoLink = styled(Link)`
   display: flex;
   align-items: center;
-  color: ${({ theme }) => theme.colors.defaultText}
+  color: ${({ theme }) => theme.colors.defaultText};
   font-weight: bold;
 `
 

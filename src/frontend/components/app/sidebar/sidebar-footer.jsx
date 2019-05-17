@@ -13,7 +13,6 @@ const StyledFooter = styled.p`
   }
 `
 
-
 const SidebarFooter = (props) => {
   const { hidden } = props
   if (hidden) {
