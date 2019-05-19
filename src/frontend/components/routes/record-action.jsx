@@ -21,7 +21,8 @@ class RecordAction extends React.Component {
   }
 
   componentDidMount() {
-    this.fetchRecord()
+    const { match } = this.props
+    this.fetchRecord(match.params)
   }
 
   shouldComponentUpdate(newProps) {
@@ -31,7 +32,7 @@ class RecordAction extends React.Component {
       || newProps.match.params.recordId !== recordId
       || newProps.match.params.resourceId !== resourceId
     ) {
-      this.fetchRecord(newProps.match.params.actionName)
+      this.fetchRecord(newProps.match.params)
       return false
     }
     return true
@@ -48,9 +49,7 @@ class RecordAction extends React.Component {
     return { resource, action }
   }
 
-  fetchRecord(newActionName) {
-    const { match } = this.props
-    const { recordId, resourceId, actionName } = match.params
+  fetchRecord({ actionName, recordId, resourceId }) {
     const api = new ApiClient()
     this.setState({
       isLoading: true,
@@ -59,7 +58,7 @@ class RecordAction extends React.Component {
     api.recordAction({
       resourceId,
       recordId,
-      actionName: newActionName || actionName,
+      actionName,
     }).then((response) => {
       this.setState({
         isLoading: false,

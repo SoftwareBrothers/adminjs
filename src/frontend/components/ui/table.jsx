@@ -10,6 +10,10 @@ const StyledTable = styled.table.attrs({
     border: none;
   }
 
+  & tr.is-selected {
+    background: ${colors.primary};
+  }
+
   td {
     color: ${colors.defaultText};
     padding: ${sizes.padding};
