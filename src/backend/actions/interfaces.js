@@ -76,9 +76,9 @@
 /**
  * @name actionType
  * @description
- * Type of an action - could be either one of 'resource', 'record'
+ * Type of an action - could be either _resource_ or _record_
  * or both (passed as an array)
- * @type {String || Array}
+ * @type {String | Array}
  * @memberof BaseAction
  */
 
