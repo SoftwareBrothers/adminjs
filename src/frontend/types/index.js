@@ -56,6 +56,7 @@ export const actionType = PropTypes.shape({
   isVisible: PropTypes.bool.isRequired,
   label: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
+  showFilter: PropTypes.bool,
 })
 
 export const resourceParentType = PropTypes.shape({

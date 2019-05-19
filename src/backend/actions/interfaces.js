@@ -67,6 +67,22 @@
  */
 
 /**
+ * @name showFilter
+ * @description if filter should be visible on the sidebar. Only for _resource_ actions
+ * @type {Boolean}
+ * @memberof BaseAction
+ */
+
+/**
+ * @name actionType
+ * @description
+ * Type of an action - could be either one of 'resource', 'record'
+ * or both (passed as an array)
+ * @type {String || Array}
+ * @memberof BaseAction
+ */
+
+/**
  * @name icon
  * @description icon class of an action
  * @type {String}

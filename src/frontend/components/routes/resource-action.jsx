@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
@@ -7,6 +7,7 @@ import ActionHeader from '../app/action-header'
 import WrapperBox from '../ui/wrapper-box'
 import Notice from '../app/notice'
 import BaseAction from '../app/base-action'
+import Filter from '../app/filter'
 import { resourceType, matchType, pathsType } from '../../types'
 
 const ResourceAction = (props) => {
@@ -16,16 +17,28 @@ const ResourceAction = (props) => {
   const resource = resources.find(r => r.id === resourceId)
   const action = resource.resourceActions.find(r => r.name === actionName)
 
+  const [filterVisible, setFilerVisible] = useState(false)
+
   return (
-    <WrapperBox>
-      <Breadcrumbs resource={resource} actionName={actionName} />
-      <Notice />
-      <ActionHeader
-        resource={resource}
-        action={action}
-      />
-      <BaseAction action={action} resource={resource} paths={paths} />
-    </WrapperBox>
+    <div>
+      <WrapperBox>
+        <Breadcrumbs resource={resource} actionName={actionName} />
+        <Notice />
+        <ActionHeader
+          resource={resource}
+          action={action}
+          toggleFilter={action.showFilter ? () => setFilerVisible(!filterVisible) : undefined}
+        />
+        <BaseAction action={action} resource={resource} paths={paths} />
+      </WrapperBox>
+      {action.showFilter ? (
+        <Filter
+          resource={resource}
+          isVisible={filterVisible}
+          toggleFilter={() => setFilerVisible(!filterVisible)}
+        />
+      ) : ''}
+    </div>
   )
 }
 
