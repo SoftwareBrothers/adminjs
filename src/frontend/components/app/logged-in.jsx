@@ -33,7 +33,7 @@ const DropdownLink = styled.a.attrs({
   className: 'navbar-item',
 })`
   &&& {
-    padding: ${({ theme }) => theme.sizes.padding} ${({ theme }) => theme.sizes.paddingLayout};
+    padding: ${({ theme }) => `${theme.sizes.padding} ${theme.sizes.paddingLayout}`};
     color: ${({ theme }) => theme.colors.defaultText};
     &:hover{
       color: ${({ theme }) => theme.colors.primary};

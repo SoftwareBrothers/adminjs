@@ -41,7 +41,7 @@ const Login = (props) => {
     & .content {
       text-align: center;
       border-bottom: 1px solid ${({ theme }) => theme.colors.border};
-      margin: 0 -${({ theme }) => theme.sizes.paddingLayout} ${({ theme }) => theme.sizes.paddingLayout};
+      margin: ${({ theme }) => `0 -${theme.sizes.paddingLayout} ${theme.sizes.paddingLayout}`};
       padding-bottom: ${({ theme }) => theme.sizes.paddingLayout};
     }
   `

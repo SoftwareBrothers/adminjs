@@ -9,7 +9,7 @@ const BreadcrumbsContainer = styled.nav.attrs({
   className: 'breadcrumb',
 })`
   &&& {
-    margin: -${({ theme }) => theme.sizes.padding} 0 ${({ theme }) => theme.sizes.padding} -10px;
+    margin: ${({ theme }) => `-${theme.sizes.padding} 0 ${theme.sizes.padding} -10px`};
     font-size: ${({ theme }) => theme.fonts.base};
   }
 `
