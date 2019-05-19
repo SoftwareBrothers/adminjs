@@ -19,6 +19,7 @@ const SidebarWrapper = styled.aside`
   justify-content: space-between;
   height: 100%;
   overflow-y: auto;
+  overflow-x: hidden;
   border-right: 1px solid ${colors.border};
   width: ${sizes.sidebarWidth};
   transition: width 0.5s;
