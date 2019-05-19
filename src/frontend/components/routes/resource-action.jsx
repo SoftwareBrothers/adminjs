@@ -8,16 +8,17 @@ import WrapperBox from '../ui/wrapper-box'
 import Notice from '../app/notice'
 import BaseAction from '../app/base-action'
 import Filter from '../app/filter'
-import { resourceType, matchType, pathsType } from '../../types'
+import { resourceType, matchType, pathsType, locationType } from '../../types'
+import queryHasFilter from '../../utils/query-has-filter'
 
 const ResourceAction = (props) => {
-  const { resources, match, paths } = props
+  const { resources, match, paths, location } = props
   const { resourceId, actionName } = match.params
 
   const resource = resources.find(r => r.id === resourceId)
   const action = resource.resourceActions.find(r => r.name === actionName)
 
-  const [filterVisible, setFilerVisible] = useState(false)
+  const [filterVisible, setFilerVisible] = useState(queryHasFilter(location.search))
 
   return (
     <div>
@@ -51,6 +52,7 @@ ResourceAction.propTypes = {
   resources: PropTypes.arrayOf(resourceType).isRequired,
   match: matchType.isRequired,
   paths: pathsType.isRequired,
+  location: locationType.isRequired,
 }
 
 export default connect(mapStateToProps)(ResourceAction)
