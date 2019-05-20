@@ -2,7 +2,7 @@
 require('./setup')
 
 require('require.all')({
-  dir: '../build/',
+  dir: '../lib/',
   match: /spec\.js$/i,
   recursive: true,
 })
