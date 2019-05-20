@@ -3,7 +3,7 @@
 .vscode
 .idea
 .cache
-build
+lib
 
 coverage
 

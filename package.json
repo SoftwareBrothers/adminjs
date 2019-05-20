@@ -5,9 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "mocha ./spec/index.js",
-    "test:build": "mocha ./spec/build.js",
-    "clean": "rm -rf build && mkdir build",
-    "build": "babel src --out-dir build --copy-files",
+    "test:build": "mocha ./spec/lib.js",
+    "clean": "rm -rf lib && mkdir lib",
+    "build": "babel src --out-dir lib --copy-files",
     "lint": "eslint './spec/**/*.js' './src/**/*.js' './src/**/*.jsx' --ignore-pattern='*bundle.js'",
     "cover": "NODE_ENV=test nyc --reporter=text --reporter=text-summary --reporter=lcov --all=true npm test",
     "codecov": "NODE_ENV=test nyc --reporter=text-lcov npm test | codecov --pipe"
