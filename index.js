@@ -10,7 +10,7 @@ if (process.env.NODE_BABEL) {
   })
   AdminBro = require('./src/admin-bro')
 } else {
-  AdminBro = require('./build/admin-bro')
+  AdminBro = require('./lib/admin-bro')
 }
 
 module.exports = AdminBro
