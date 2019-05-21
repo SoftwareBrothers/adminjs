@@ -206,13 +206,24 @@ class ResourceDecorator {
    */
   resourceActions() {
     return Object.keys(this.actions)
-      .map(key => this.actions[key])
+      .map(key => ({
+        // name: key,
+        ...this.actions[key],
+      }))
       .filter((action) => {
         let isVisible
         if (typeof action.isVisible === 'function') {
           isVisible = action.isVisible(this._resource)
+        } else if (typeof action.isVisible === 'undefined') {
+          isVisible = true
         } else {
           ({ isVisible } = action)
+        }
+        if (!action.actionType) {
+          throw new ConfigurationError(
+            `action: "${action.name}" does not have an "actionType" property`,
+            'BaseAction',
+          )
         }
         return action.actionType.includes('resource') && isVisible
       })
@@ -292,6 +303,7 @@ class ResourceDecorator {
       icon: action.icon,
       label: action.label,
       guard: action.guard,
+      showFilter: action.showFilter,
       component: action.component,
     }
   }

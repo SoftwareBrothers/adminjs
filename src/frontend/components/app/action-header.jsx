@@ -86,7 +86,7 @@ const ActionHeader = (props) => {
   const actions = recordId
     ? resource.recordActions.filter(ra => ra.name !== action.name)
     : resource.resourceActions.filter(ra => ra.name !== (action && action.name))
-  const title = recordId ? action.label : resource.name
+  const title = action ? action.label : resource.name
 
   return (
     <HeaderWrapper>

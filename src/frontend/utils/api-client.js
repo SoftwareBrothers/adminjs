@@ -74,15 +74,17 @@ class ApiClient {
    * @param   {String} options.resourceId  id of a {@link BaseResource}
    * @param   {String} options.actionName  name of an {@link Action}
    * @param   {Object} [options.payload]   optional action payload
+   * @param   {Object} [options.params]    optional query params
    * @param   {String} [options.method]    if there is a Payload it sends
    *                                       POST request, otherwise GET.
    * @return  {Promise<Object>}            response from an {@link Action}
    */
-  async resourceAction({ resourceId, actionName, payload, method }) {
+  async resourceAction({ resourceId, actionName, payload, method, params }) {
     return this.client.request({
       url: `/api/resources/${resourceId}/actions/${actionName}`,
       method: method || payload ? 'POST' : 'GET',
       data: payload,
+      params,
     })
   }
 
@@ -94,15 +96,17 @@ class ApiClient {
    * @param   {String} options.recordId    id of a {@link BaseRecord}
    * @param   {String} options.actionName  name of an {@link Action}
    * @param   {Object} [options.payload]   optional action payload
+   * @param   {Object} [options.params]    optional query params
    * @param   {String} [options.method]    if there is a Payload it sends
    *                                       POST request, otherwise GET.
    * @return  {Promise<Object>}            response from an {@link Action}
    */
-  async recordAction({ resourceId, recordId, actionName, payload, method }) {
+  async recordAction({ resourceId, recordId, actionName, payload, method, params }) {
     return this.client.request({
       url: `/api/resources/${resourceId}/records/${recordId}/${actionName}`,
       method: method || payload ? 'POST' : 'GET',
       data: payload,
+      params,
     })
   }
 
