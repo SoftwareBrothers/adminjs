@@ -26,7 +26,7 @@ const FilterWrapper = styled.section`
     transition: width 0.5s;
   }
 
-  @media (min-width: ${breakpoints.minDesktopWidth}) {
+  @media (min-width: ${breakpoints.minTabletWidth}) {
     position: relative;
   }
 `
