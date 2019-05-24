@@ -24,6 +24,11 @@ const Td = styled.td`
       overflow: hidden;
       text-overflow: ellipsis;
       color: ${colors.primary};
+      margin-top: 1px;
+    }
+
+    &.default {
+      white-space: nowrap;
     }
   }
 `
@@ -35,7 +40,7 @@ export default class RecordInList extends React.PureComponent {
     return (
       <tr>
         {resource.listProperties.map(property => (
-          <Td key={property.name} className={resource.titleProperty.name === property.name ? 'main' : null}>
+          <Td key={property.name} className={resource.titleProperty.name === property.name ? 'main' : 'default'}>
             <PropertyType
               key={property.name}
               where="list"

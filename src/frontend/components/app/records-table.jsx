@@ -20,10 +20,9 @@ const TableScroller = styled.div`
   margin-left: ${sizes.mainColumn};
   overflow-x: scroll;
   overflow-y: visible;
-  padding-bottom: 20px;
   width: calc(100% - ${sizes.mainColumn});
 
-  & table {
+  table {
     margin-bottom: 0;
   }
 `

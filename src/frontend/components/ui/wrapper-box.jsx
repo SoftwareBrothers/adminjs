@@ -9,6 +9,7 @@ const StyledWrapperBox = styled.section`
   flex-grow: 1;
   border: ${props => (props.border ? `1px solid ${colors.border}` : 'none')};
   background: ${props => (props.border ? '#ffffff' : 'transparent')};
+  width: 100%;
 
   & > h1 {
     font-size: 22px;
