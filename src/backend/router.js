@@ -42,6 +42,18 @@ const Router = {
   }, {
     path: '/frontend/assets/icomoon.woff',
     src: [ASSETS_ROOT, 'fonts/icomoon.woff'].join('/'),
+  }, {
+    path: '/frontend/assets/login-bg.png',
+    src: [ASSETS_ROOT, 'images/login-bg.png'].join('/'),
+  }, {
+    path: '/frontend/assets/login-left.jpg',
+    src: [ASSETS_ROOT, 'images/login-left.jpg'].join('/'),
+  }, {
+    path: '/frontend/assets/logo.svg',
+    src: [ASSETS_ROOT, 'images/logo.svg'].join('/'),
+  }, {
+    path: '/frontend/assets/logo-mini.svg',
+    src: [ASSETS_ROOT, 'images/logo-mini.svg'].join('/'),
   }],
   routes: [{
     method: 'GET',

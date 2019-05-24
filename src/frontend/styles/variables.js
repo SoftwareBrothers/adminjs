@@ -9,6 +9,10 @@ export const colors = {
   bck: '#f7f7Fa',
   darkBck: '#303b62',
   superDarkBck: '#192035',
+  loginBck: '#20273e',
+  white: '#ffffff',
+  gray: '#454655',
+  loginInfo: 'rgba(113, 138, 244, 0.15)',
 
   love: '#e6282b',
   primary: '#718af4',
