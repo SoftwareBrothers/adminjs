@@ -20,6 +20,12 @@ const Wrapper = styled.section.attrs({
 })`
   align-items: stretch;
   flex-grow: 1;
+  flex-direction: column;
+`
+
+const NoticeWrapper = styled.div`
+  width: 100%;
+  position: relative;
 `
 
 class Resource extends React.Component {
@@ -94,9 +100,11 @@ class Resource extends React.Component {
     const { records, page, perPage, total, search, filterVisible } = this.state
     return (
       <Wrapper>
+        <NoticeWrapper>
+          <Notice />
+        </NoticeWrapper>
         <WrapperBox>
           <Breadcrumbs resource={resource} />
-          <Notice />
           <ActionHeader
             resource={resource}
             tag={total}

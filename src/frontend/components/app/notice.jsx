@@ -7,14 +7,26 @@ import { colors, sizes } from '../../styles/variables'
 import { dropNotice, setNoticeProgress } from '../../store/store'
 import { noticeType } from '../../types'
 
-const TIME_TO_DISAPPEAR = 10
+const TIME_TO_DISAPPEAR = 30
 
 const NoticeWrapper = styled.div.attrs({
   className: 'notification',
 })`
+  max-width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  border-radius: 0;
+  padding: 13px ${sizes.paddingLayout};
+
+  &:not(:last-child) {
+    margin-bottom: 0;
+  }
+
   &.success {
-    background-color: ${colors.lightSuccess};
-    border: 1px solid ${colors.success};
+    background-color: ${colors.lightSuccessNoOpacity};
+    border-bottom: 1px solid ${colors.successBorder};
 
     & .progressBar {
       background-color: ${colors.success};
@@ -22,8 +34,8 @@ const NoticeWrapper = styled.div.attrs({
   }
 
   &.error {
-    background-color: ${colors.lightError};
-    border: 1px solid ${colors.error};
+    background-color: ${colors.lightErrorNoOpacity};
+    border-bottom: 1px solid ${colors.error};
     & .delete:before, & .delete:after {
       background-color: ${colors.error};
     }
@@ -34,7 +46,7 @@ const NoticeWrapper = styled.div.attrs({
 
   & .delete {
     background: transparent;
-    right: ${sizes.padding};
+    right: ${sizes.paddingLayout};
     top: ${sizes.padding};
 
     &:before, &:after {
@@ -98,7 +110,6 @@ class NoticeElement extends React.Component {
       <NoticeWrapper className={notice.type}>
         <button className="delete" onClick={drop} type="button" />
         { notice.message }
-        <div className="progressBar" style={{ width: `${progress}%` }} />
       </NoticeWrapper>
     )
   }

@@ -20,32 +20,32 @@ const GlobalStyle = createGlobalStyle`
   }
 `
 
+const FlexWrapper = styled.section`
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+`
+
+const LoginBox = styled.section`
+  width: 414px;
+  & ${StyledButton} {
+    margin: ${sizes.paddingLayout} 0;
+  }
+
+  & .content {
+    text-align: center;
+    border-bottom: 1px solid ${colors.border};
+    margin: 0 -${sizes.paddingLayout} ${sizes.paddingLayout};
+    padding-bottom: ${sizes.paddingLayout};
+  }
+`
+
 const Login = (props) => {
   const { action, message } = props
   const email = { name: 'email', label: 'Your email' }
   const password = { name: 'password', label: 'Password' }
-
-  const FlexWrapper = styled.section`
-    display: flex;
-    height: 100%;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-  `
-
-  const LoginBox = styled.section`
-    width: 414px;
-    & ${StyledButton} {
-      margin: ${sizes.paddingLayout} 0;
-    }
-
-    & .content {
-      text-align: center;
-      border-bottom: 1px solid ${colors.border};
-      margin: 0 -${sizes.paddingLayout} ${sizes.paddingLayout};
-      padding-bottom: ${sizes.paddingLayout};
-    }
-  `
 
   return (
     <React.Fragment>
