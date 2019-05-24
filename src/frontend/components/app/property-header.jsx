@@ -15,6 +15,14 @@ const Th = styled.th`
     padding: ${sizes.padding};
     letter-spacing: 0.1em;
     border: none;
+
+    &.main {
+      width: ${sizes.mainColumn};
+      left: 0;
+      position: absolute;
+      top: auto;
+      white-space: nowrap;
+    }
   }
 `
 

@@ -6,6 +6,10 @@ import { colors, sizes } from '../../styles/variables'
 const StyledTable = styled.table.attrs({
   className: 'table is-fullwidth',
 })`
+  border: none;
+  border-collapse: separate;
+  border-spacing: 0;
+
   & > thead > tr > th {
     border: none;
   }

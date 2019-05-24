@@ -3,7 +3,7 @@ import { withRouter } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
-import { sizes, colors } from '../../styles/variables'
+import { sizes, colors, breakpoints } from '../../styles/variables'
 import StyledButton from '../ui/styled-button'
 import PropertyType from '../property-type'
 import { locationType, historyType, resourceType, matchType } from '../../types'
@@ -24,6 +24,10 @@ const FilterWrapper = styled.section`
   &.filter-hidden {
     width: 0;
     transition: width 0.5s;
+  }
+
+  @media (min-width: ${breakpoints.minDesktopWidth}) {
+    position: relative;
   }
 `
 

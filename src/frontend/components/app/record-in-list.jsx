@@ -5,7 +5,7 @@ import styled from 'styled-components'
 import ActionButton from './action-button'
 import PropertyType from '../property-type'
 import Dropdown from '../ui/dropdown'
-import { colors } from '../../styles/variables'
+import { colors, sizes } from '../../styles/variables'
 import { resourceType, recordType } from '../../types'
 
 const Td = styled.td`
@@ -16,6 +16,14 @@ const Td = styled.td`
     }
     &.main {
       font-weight: bold;
+      width: ${sizes.mainColumn};
+      left: 0;
+      position: absolute;
+      top: auto;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      color: ${colors.primary};
     }
   }
 `

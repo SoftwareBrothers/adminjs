@@ -27,6 +27,7 @@ export const sizes = {
   paddingLayout: '30px',
   padding: '15px',
   paddingMin: '5px',
+  mainColumn: '200px'
 }
 
 export const fonts = {
