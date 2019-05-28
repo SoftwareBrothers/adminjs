@@ -2,14 +2,22 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
-import { sizes, colors } from '../../styles/variables'
+import { sizes, colors, breakpoints } from '../../styles/variables'
 
 const StyledWrapperBox = styled.section`
   padding: ${sizes.paddingLayout};
   flex-grow: 1;
   border: ${props => (props.border ? `1px solid ${colors.border}` : 'none')};
   background: ${props => (props.border ? '#ffffff' : 'transparent')};
-  width: 100%;
+
+  @media screen and (max-width: ${breakpoints.minFullhdWidth}) {
+    transition: width 0.5s;
+    width: 100%;
+    &.filter-visible {
+      transition: width 0.5s;
+      width: calc(100% - ${sizes.sidebarWidth});
+    }
+  }
 
   & > h1 {
     font-size: 22px;
@@ -39,10 +47,15 @@ WrapperBox.propTypes = {
    * If wrapper should have a border.
    */
   border: PropTypes.bool,
+    /**
+   * If wrapper has filters
+   */
+  filterVisible: PropTypes.bool,
 }
 
 WrapperBox.defaultProps = {
   border: false,
+  filterVisible: false,
 }
 
 export default WrapperBox
