@@ -36,6 +36,9 @@ const pkg = require('../package.json')
  *                                                    component
  * @property {Component} [dashboard.component]        Component which will be rendered on the
  *                                                    dashboard
+ * @property {Object} [versions]                      sets the versions visibility
+ * @property {Boolean} [versions.admin]               if set to true, shows current AdminBro version
+ * @property {String} [versions.app]                  if set, shows this version in the UI
  * @property {Object} [branding]                      branding settings
  * @property {String} [branding.logo]                 logo shown in AdminBro in the top left corner
  * @property {String} [branding.companyName]          company name

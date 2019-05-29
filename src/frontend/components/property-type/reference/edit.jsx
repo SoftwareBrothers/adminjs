@@ -16,6 +16,7 @@ export default class Edit extends React.Component {
 
   handleChange(selected) {
     const { onChange, property } = this.props
+    this.selected = selected.record
     onChange(property.name, selected.value, selected.record)
   }
 
@@ -35,9 +36,16 @@ export default class Edit extends React.Component {
     const error = record.errors && record.errors[property.name]
 
     const reference = record.populated && record.populated[property.name]
-    const selectedOption = reference && {
+    let selectedOption = reference && {
       value: reference.id,
       label: reference.title,
+    }
+
+    if (this.selected) {
+      selectedOption = {
+        value: this.selected.id,
+        label: this.selected.title,
+      }
     }
 
     return (
