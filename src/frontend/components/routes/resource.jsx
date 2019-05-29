@@ -94,7 +94,7 @@ class Resource extends React.Component {
     const { records, page, perPage, total, search, filterVisible } = this.state
     return (
       <Wrapper>
-        <WrapperBox filterVisible className={filterVisible ? 'filter-visible' : null}>
+        <WrapperBox filterVisible className={filterVisible ? 'filter-visible' : 'resource-wrapper'}>
           <Breadcrumbs resource={resource} />
           <Notice />
           <ActionHeader

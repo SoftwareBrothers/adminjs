@@ -9,14 +9,14 @@ const StyledWrapperBox = styled.section`
   flex-grow: 1;
   border: ${props => (props.border ? `1px solid ${colors.border}` : 'none')};
   background: ${props => (props.border ? '#ffffff' : 'transparent')};
-
-  @media screen and (max-width: ${breakpoints.minFullhdWidth}) {
+  transition: width 0.5s;
+  width: 100%;
+  &.filter-visible {
     transition: width 0.5s;
-    width: 100%;
-    &.filter-visible {
-      transition: width 0.5s;
-      width: calc(100% - ${sizes.sidebarWidth});
-    }
+    width: calc(100% - ${sizes.sidebarWidth});
+  }
+  &.resource-wrapper {
+    max-width: 100%;
   }
 
   & > h1 {
