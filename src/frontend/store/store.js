@@ -20,6 +20,11 @@ export const initializePaths = data => ({
   data,
 })
 
+export const initializeVersions = data => ({
+  type: 'VERSIONS_INITIALIZE',
+  data,
+})
+
 export const initializeSession = (data = {}) => ({
   type: 'SESSION_INITIALIZE',
   data,
@@ -85,6 +90,17 @@ const sessionReducer = (state = null, action) => {
   }
 }
 
+const versionsReducer = (state = {}, action) => {
+  switch (action.type) {
+  case 'VERSIONS_INITIALIZE':
+    return {
+      admin: action.data.admin,
+      app: action.data.app,
+    }
+  default: return state
+  }
+}
+
 const noticesReducer = (state = [], action) => {
   switch (action.type) {
   case 'ADD_NOTICE': {
@@ -112,6 +128,7 @@ const reducer = combineReducers({
   session: sessionReducer,
   dashboard: dashboardReducer,
   notices: noticesReducer,
+  versions: versionsReducer,
 })
 
 export default (initialState = {}) => createStore(reducer, initialState)
