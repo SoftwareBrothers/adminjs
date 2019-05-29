@@ -91,6 +91,7 @@ const mapStateToProps = state => ({
   resources: state.resources,
   branding: state.branding,
   paths: state.paths,
+  versionsType: state.versionsType,
 })
 
 export default connect(mapStateToProps)(Sidebar)

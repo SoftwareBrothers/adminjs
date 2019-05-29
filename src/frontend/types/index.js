@@ -31,6 +31,11 @@ export const propertyType = PropTypes.shape({
   reference: PropTypes.oneOfType([PropTypes.string]),
 })
 
+export const versionsType = PropTypes.shape({
+  admin: PropTypes.string,
+  app: PropTypes.string,
+})
+
 export const simplifiedPropertyType = PropTypes.shape({
   isId: PropTypes.bool,
   isSortable: PropTypes.bool,
