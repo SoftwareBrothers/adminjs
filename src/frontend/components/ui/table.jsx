@@ -9,7 +9,7 @@ const StyledTable = styled.table.attrs({
   }
 
   & tr.is-selected {
-    background: ${colors.primary};
+    background: ${({ theme }) => theme.colors.primary};
   }
 
   td {
