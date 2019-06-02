@@ -1,6 +1,6 @@
 let AdminBro
 
-if (process.env.NODE_BABEL) {
+if (process.env.ADMIN_BRO_DEV_ENV) {
   require('@babel/polyfill')
   require('@babel/register')({
     presets: [require.resolve('@babel/preset-react'), require.resolve('@babel/preset-env')],
