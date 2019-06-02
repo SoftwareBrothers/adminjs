@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
+import styled from 'styled-components'
 
 import Breadcrumbs from '../app/breadcrumbs'
 import ActionHeader from '../app/action-header'
@@ -10,6 +11,11 @@ import BaseAction from '../app/base-action'
 import Filter from '../app/filter'
 import { resourceType, matchType, pathsType, locationType } from '../../types'
 import queryHasFilter from '../../utils/query-has-filter'
+
+const NoticeWrapper = styled.div`
+  width: 100%;
+  position: relative;
+`
 
 const ResourceAction = (props) => {
   const { resources, match, paths, location } = props
@@ -22,9 +28,11 @@ const ResourceAction = (props) => {
 
   return (
     <div>
+      <NoticeWrapper>
+        <Notice />
+      </NoticeWrapper>
       <WrapperBox>
         <Breadcrumbs resource={resource} actionName={actionName} />
-        <Notice />
         <ActionHeader
           resource={resource}
           action={action}

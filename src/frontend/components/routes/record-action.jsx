@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
+import styled from 'styled-components'
 
 import Breadcrumbs from '../app/breadcrumbs'
 import ActionHeader from '../app/action-header'
@@ -10,6 +11,16 @@ import Notice from '../app/notice'
 import { resourceType, matchType, pathsType } from '../../types'
 import BaseAction from '../app/base-action'
 import ApiClient from '../../utils/api-client'
+
+const ContainerRecord = styled.div`
+  display: flex;
+  flex-direction: column;
+`
+
+const NoticeWrapper = styled.div`
+  width: 100%;
+  position: relative;
+`
 
 class RecordAction extends React.Component {
   constructor(props) {
@@ -75,19 +86,23 @@ class RecordAction extends React.Component {
     const { resource, action } = this.getResourceAndAction()
 
     return (
-      <WrapperBox>
-        <Breadcrumbs resource={resource} actionName={actionName} />
-        <Notice />
-        <ActionHeader
-          resource={resource}
-          recordId={recordId}
-          action={action}
-        />
-        {isLoading
-          ? <Loader />
-          : <BaseAction action={action} resource={resource} record={record} paths={paths} />
-        }
-      </WrapperBox>
+      <ContainerRecord>
+        <NoticeWrapper>
+          <Notice />
+        </NoticeWrapper>
+        <WrapperBox>
+          <Breadcrumbs resource={resource} actionName={actionName} />
+          <ActionHeader
+            resource={resource}
+            recordId={recordId}
+            action={action}
+          />
+          {isLoading
+            ? <Loader />
+            : <BaseAction action={action} resource={resource} record={record} paths={paths} />
+          }
+        </WrapperBox>
+      </ContainerRecord>
     )
   }
 }

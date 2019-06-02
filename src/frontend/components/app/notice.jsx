@@ -11,6 +11,18 @@ const TIME_TO_DISAPPEAR = 10
 const NoticeWrapper = styled.div.attrs({
   className: 'notification',
 })`
+  max-width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  border-radius: 0;
+  padding: 13px ${({ theme }) => theme.sizes.paddingLayout};
+
+  &:not(:last-child) {
+    margin-bottom: 0;
+  }
+
   &.success {
     background-color: ${({ theme }) => theme.colors.lightSuccess};
     border: 1px solid ${({ theme }) => theme.colors.success};
@@ -33,7 +45,7 @@ const NoticeWrapper = styled.div.attrs({
 
   & .delete {
     background: transparent;
-    right: ${({ theme }) => theme.sizes.padding};
+    right: ${({ theme }) => theme.sizes.paddingLayout};
     top: ${({ theme }) => theme.sizes.padding};
 
     &:before, &:after {

@@ -53,6 +53,7 @@ const html = (admin, currentAdmin, location = '/') => {
     <head>
       <script>
         window.REDUX_STATE = ${JSON.stringify(reduxState)};
+        window.THEME = ${JSON.stringify(theme)};
         window.AdminBro = { Components: {} };
       </script>
       <meta charset="utf-8">

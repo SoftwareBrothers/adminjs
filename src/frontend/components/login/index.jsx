@@ -19,12 +19,7 @@ const GlobalStyle = createGlobalStyle`
   }
 `
 
-const Login = (props) => {
-  const { action, message } = props
-  const email = { name: 'email', label: 'Your email' }
-  const password = { name: 'password', label: 'Password' }
-
-  const FlexWrapper = styled.section`
+const FlexWrapper = styled.section`
     display: flex;
     height: 100%;
     flex-direction: column;
@@ -32,19 +27,24 @@ const Login = (props) => {
     justify-content: center;
   `
 
-  const LoginBox = styled.section`
-    width: 414px;
-    & ${StyledButton} {
-      margin: ${({ theme }) => theme.sizes.paddingLayout} 0;
-    }
+const LoginBox = styled.section`
+  width: 414px;
+  & ${StyledButton} {
+    margin: ${({ theme }) => theme.sizes.paddingLayout} 0;
+  }
 
-    & .content {
-      text-align: center;
-      border-bottom: 1px solid ${({ theme }) => theme.colors.border};
-      margin: ${({ theme }) => `0 -${theme.sizes.paddingLayout} ${theme.sizes.paddingLayout}`};
-      padding-bottom: ${({ theme }) => theme.sizes.paddingLayout};
-    }
-  `
+  & .content {
+    text-align: center;
+    border-bottom: 1px solid ${({ theme }) => theme.colors.border};
+    margin: ${({ theme }) => `0 -${theme.sizes.paddingLayout} ${theme.sizes.paddingLayout}`};
+    padding-bottom: ${({ theme }) => theme.sizes.paddingLayout};
+  }
+`
+
+const Login = (props) => {
+  const { action, message } = props
+  const email = { name: 'email', label: 'Your email' }
+  const password = { name: 'password', label: 'Password' }
 
   return (
     <React.Fragment>
