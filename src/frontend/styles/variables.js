@@ -15,11 +15,9 @@ export const colors = {
   primaryHover: '#545B8C',
   success: '#21C197',
   successBorder: '#8CDAD9',
-  lightSuccess: 'rgba(62,198,194,0.15)',
-  lightSuccessNoOpacity: '#DBF0F1',
+  lightSuccess: '#DBF0F1',
   error: '#F0616F',
-  lightError: 'rgba(240,97,111,0.15)',
-  lightErrorNoOpacity: '#F6E1E6',
+  lightError: '#F6E1E6',
   warning: '#FF9F89',
 }
 
