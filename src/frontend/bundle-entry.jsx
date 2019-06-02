@@ -1,6 +1,7 @@
 import React from 'react'
 import { Provider } from 'react-redux'
 import { BrowserRouter } from 'react-router-dom'
+import { ThemeProvider } from 'styled-components'
 
 import App from './components/app/application'
 import PropertyTypes from './components/property-type'
@@ -16,12 +17,16 @@ const env = {
 }
 
 const store = createStore(window.REDUX_STATE)
+const theme = window.THEME
+
 
 const Application = (
   <Provider store={store}>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
+    <ThemeProvider theme={theme}>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </ThemeProvider>
   </Provider>
 )
 

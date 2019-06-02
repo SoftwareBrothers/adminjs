@@ -6,7 +6,7 @@ import { connect } from 'react-redux'
 import { dropNotice, setNoticeProgress } from '../../store/store'
 import { noticeType } from '../../types'
 
-const TIME_TO_DISAPPEAR = 30
+const TIME_TO_DISAPPEAR = 10
 
 const NoticeWrapper = styled.div.attrs({
   className: 'notification',
@@ -109,6 +109,7 @@ class NoticeElement extends React.Component {
       <NoticeWrapper className={notice.type}>
         <button className="delete" onClick={drop} type="button" />
         { notice.message }
+        <div className="progressBar" style={{ width: `${progress}%` }} />
       </NoticeWrapper>
     )
   }
