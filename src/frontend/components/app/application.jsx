@@ -7,7 +7,6 @@ import ViewHelpers from '../../../backend/utils/view-helpers'
 import Sidebar from './sidebar'
 import Topbar from './topbar'
 import { pathsType } from '../../types'
-import { colors } from '../../styles/variables'
 
 import {
   Resource, Dashboard, ResourceAction, RecordAction,
@@ -20,7 +19,7 @@ const GlobalStyle = createGlobalStyle`
   }
 
   a {
-    color: ${colors.primary};
+    color: ${({ theme }) => theme.colors.primary};
   }
 `
 
@@ -36,7 +35,7 @@ const Core = styled.section`
   height: 100%;
   overflow-y: auto;
   width: 100%;
-  background: ${colors.bck};
+  background: ${({ theme }) => theme.colors.bck};
   display: flex;
   flex-direction: column;
 `

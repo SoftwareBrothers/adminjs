@@ -3,7 +3,6 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { connect } from 'react-redux'
 
-import { colors, sizes } from '../../styles/variables'
 import { dropNotice, setNoticeProgress } from '../../store/store'
 import { noticeType } from '../../types'
 
@@ -18,39 +17,39 @@ const NoticeWrapper = styled.div.attrs({
   left: 0;
   right: 0;
   border-radius: 0;
-  padding: 13px ${sizes.paddingLayout};
+  padding: 13px ${({ theme }) => theme.sizes.paddingLayout};
 
   &:not(:last-child) {
     margin-bottom: 0;
   }
 
   &.success {
-    background-color: ${colors.lightSuccessNoOpacity};
-    border-bottom: 1px solid ${colors.successBorder};
+    background-color: ${({ theme }) => theme.colors.lightSuccess};
+    border: 1px solid ${({ theme }) => theme.colors.success};
 
     & .progressBar {
-      background-color: ${colors.success};
+      background-color: ${({ theme }) => theme.colors.success};
     }
   }
 
   &.error {
-    background-color: ${colors.lightErrorNoOpacity};
-    border-bottom: 1px solid ${colors.error};
+    background-color: ${({ theme }) => theme.colors.lightError};
+    border: 1px solid ${({ theme }) => theme.colors.error};
     & .delete:before, & .delete:after {
-      background-color: ${colors.error};
+      background-color: ${({ theme }) => theme.colors.error};
     }
     & .progressBar {
-      background-color: ${colors.error};
+      background-color: ${({ theme }) => theme.colors.error};
     }
   }
 
   & .delete {
     background: transparent;
-    right: ${sizes.paddingLayout};
-    top: ${sizes.padding};
+    right: ${({ theme }) => theme.sizes.paddingLayout};
+    top: ${({ theme }) => theme.sizes.padding};
 
     &:before, &:after {
-      background-color: ${colors.success};
+      background-color: ${({ theme }) => theme.colors.success};
     }
 
     &:after {

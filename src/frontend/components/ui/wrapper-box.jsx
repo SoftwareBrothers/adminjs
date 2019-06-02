@@ -2,18 +2,16 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
-import { sizes, colors } from '../../styles/variables'
-
 const StyledWrapperBox = styled.section`
-  padding: ${sizes.paddingLayout};
+  padding: ${({ theme }) => theme.sizes.paddingLayout};
   flex-grow: 1;
-  border: ${props => (props.border ? `1px solid ${colors.border}` : 'none')};
+  border: ${props => (props.border ? `1px solid ${({ theme }) => theme.colors.border}` : 'none')};
   background: ${props => (props.border ? '#ffffff' : 'transparent')};
 
   & > h1 {
     font-size: 22px;
-    margin-top: ${sizes.padding};
-    margin-bottom: ${sizes.padding};
+    margin-top: ${({ theme }) => theme.sizes.padding};
+    margin-bottom: ${({ theme }) => theme.sizes.padding};
   }
 `
 

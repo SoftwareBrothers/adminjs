@@ -4,22 +4,21 @@ import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 
 import { resourceType, recordType } from '../../types'
-import { sizes, fonts, colors } from '../../styles/variables'
 
 const BreadcrumbsContainer = styled.nav.attrs({
   className: 'breadcrumb',
 })`
   &&& {
-    margin: -${sizes.padding} 0 ${sizes.padding} -10px;
-    font-size: ${fonts.base};
+    margin: ${({ theme }) => `-${theme.sizes.padding} 0 ${theme.sizes.padding} -10px`};
+    font-size: ${({ theme }) => theme.fonts.base};
   }
 `
 
 const BreadcrumbLink = styled(Link)`
   &&& {
-    color: ${colors.lightText};
+    color: ${({ theme }) => theme.colors.lightText};
     &:hover {
-      color: ${colors.primary};
+      color: ${({ theme }) => theme.colors.primary};
     }
   }
 `

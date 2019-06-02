@@ -3,6 +3,7 @@
 .vscode
 .idea
 .cache
+lib
 
 coverage
 

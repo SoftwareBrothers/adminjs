@@ -3,16 +3,15 @@ import { connect } from 'react-redux'
 import styled from 'styled-components'
 
 import { pathsType, sessionType, versionsType } from '../../types'
-import { sizes, colors } from '../../styles/variables'
 import LoggedIn from './logged-in'
 import Version from './version'
 
 const Navbar = styled.nav.attrs({
   className: 'navbar',
 })`
-  height: ${sizes.navbarHeight};
-  border-bottom: 1px solid ${colors.border};
-  padding: 0 ${sizes.paddingLayout};
+  height: ${({ theme }) => theme.sizes.navbarHeight};
+  border-bottom: 1px solid ${({ theme }) => theme.colors.border};
+  padding: 0 ${({ theme }) => theme.sizes.paddingLayout};
   flex-shrink: 0;
 `
 

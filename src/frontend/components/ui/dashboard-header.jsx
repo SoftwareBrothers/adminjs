@@ -1,15 +1,14 @@
 import React from 'react'
 import styled from 'styled-components'
 
-import { sizes, colors } from '../../styles/variables'
 import { childrenType } from '../../types'
 
 const Wrapper = styled.section.attrs({
   className: 'content',
 })`
   && {
-    padding: 90px ${sizes.paddingLayout};
-    background: ${colors.superDarkBck};
+    padding: 90px ${({ theme }) => theme.sizes.paddingLayout};
+    background: ${({ theme }) => theme.colors.superDarkBck};
     color: #fff;
     margin-bottom: 0;
     & > * {

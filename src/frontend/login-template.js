@@ -1,11 +1,17 @@
 import React from 'react'
 import { renderToString } from 'react-dom/server'
-import { ServerStyleSheet } from 'styled-components'
+import { ServerStyleSheet, ThemeProvider } from 'styled-components'
 import LoginComponent from './components/login'
 
+import * as theme from './styles/variables'
+
 const html = ({ action, errorMessage }) => {
-  // eslint-disable-next-line react/jsx-filename-extension
-  const loginComponent = renderToString(<LoginComponent action={action} message={errorMessage} />)
+  const loginComponent = renderToString(
+    // eslint-disable-next-line react/jsx-filename-extension
+    <ThemeProvider theme={theme}>
+      <LoginComponent action={action} message={errorMessage} />
+    </ThemeProvider>,
+  )
 
   const sheet = new ServerStyleSheet()
   sheet.collectStyles(LoginComponent)

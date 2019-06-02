@@ -2,20 +2,19 @@ import React from 'react'
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
 
-import { colors, sizes } from '../../styles/variables'
 import { childrenType } from '../../types'
 
 import Label from './label'
 
 const Property = styled.div`
-  margin-bottom: ${sizes.paddingLayout};
+  margin-bottom: ${({ theme }) => theme.sizes.paddingLayout};
 
   & input {
     border-radius: 0;
-    border-color: ${colors.border};
+    border-color: ${({ theme }) => theme.colors.border};
     box-shadow: none;
     &:focus {
-      border-color: ${colors.primary};
+      border-color: ${({ theme }) => theme.colors.primary};
     }
   }
 `
