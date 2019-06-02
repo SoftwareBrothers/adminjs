@@ -2,13 +2,12 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
-import { sizes } from '../../styles/variables'
 import { childrenType } from '../../types'
 
 const DropdownTrigger = styled.div.attrs({
   className: 'dropdown-trigger',
 })`
-  padding: 0px ${sizes.padding};
+  padding: 0px ${({ theme }) => theme.sizes.padding};
   font-size: 20px;
   line-height: 20px;
   &:hover {

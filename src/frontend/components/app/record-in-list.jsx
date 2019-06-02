@@ -5,14 +5,13 @@ import styled from 'styled-components'
 import ActionButton from './action-button'
 import PropertyType from '../property-type'
 import Dropdown from '../ui/dropdown'
-import { colors } from '../../styles/variables'
 import { resourceType, recordType } from '../../types'
 
 const Td = styled.td`
   &&& {
-    color: ${colors.defaultText};
+    color: ${({ theme }) => theme.colors.defaultText};
     & a:not(.in-dropdown) {
-      color: ${colors.primary};
+      color: ${({ theme }) => theme.colors.primary};
     }
     &.main {
       font-weight: bold;

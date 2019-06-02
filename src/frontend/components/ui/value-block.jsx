@@ -3,8 +3,8 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 
-import WrapperBox from './wrapper-box'
 import { colors } from '../../styles/variables'
+import WrapperBox from './wrapper-box'
 import { childrenType } from '../../types'
 import Label from './label'
 
@@ -18,7 +18,7 @@ const OverlayLink = styled(Link)`
   transition: border-width 0.2s;
   &:hover {
     transition: border-width 0.2s;
-    border-bottom: 5px solid ${colors.primary};
+    border-bottom: 5px solid ${({ theme }) => theme.colors.primary};
   }
 `
 

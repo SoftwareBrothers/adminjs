@@ -3,21 +3,20 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
 import { childrenType } from '../../types'
-import { colors, sizes } from '../../styles/variables'
 import Label from './label'
 
 const Property = styled.div`
-  margin: ${sizes.paddingLayout} 0;
+  margin: ${({ theme }) => theme.sizes.paddingLayout} 0;
 
   & input {
     border-radius: 0;
-    border-color: ${colors.borderOnDark};
+    border-color: ${({ theme }) => theme.colors.borderOnDark};
     box-shadow: none;
     background: transparent;
-    color: ${colors.lightText};
+    color: ${({ theme }) => theme.colors.lightText};
 
     &:focus {
-      border-color: ${colors.primary};
+      border-color: ${({ theme }) => theme.colors.primary};
     }
   }
   & .icon {

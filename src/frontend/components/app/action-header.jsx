@@ -8,14 +8,13 @@ import StyledButton from '../ui/styled-button'
 
 import ViewHelpers from '../../../backend/utils/view-helpers'
 
-import { sizes, fonts, colors } from '../../styles/variables'
 import { resourceType, actionType } from '../../types'
 
 const HeaderWrapper = styled.section.attrs({
   className: 'level',
 })`
   &&& {
-    margin-bottom: ${sizes.padding};
+    margin-bottom: ${({ theme }) => theme.sizes.padding};
   }
 `
 
@@ -23,25 +22,25 @@ const Tag = styled.span.attrs({
   className: 'tag',
 })`
   &&& {
-    background: ${colors.primary};
+    background: ${({ theme }) => theme.colors.primary};
     color: #fff;
-    margin-left: ${sizes.padding};
+    margin-left: ${({ theme }) => theme.sizes.padding};
   }
 `
 
 const BackBtn = styled(Link)`
   &&& {
     border-radius: 50%;
-    width: ${sizes.paddingLayout};
-    height: ${sizes.paddingLayout};
-    color: ${colors.lightText};
-    font-size: ${fonts.base};
-    padding: ${sizes.paddingMin};
-    background-color: ${colors.superLightBack};
+    width: ${({ theme }) => theme.sizes.paddingLayout};
+    height: ${({ theme }) => theme.sizes.paddingLayout};
+    color: ${({ theme }) => theme.colors.lightText};
+    font-size: ${({ theme }) => theme.fonts.base};
+    padding: ${({ theme }) => theme.sizes.paddingMin};
+    background-color: ${({ theme }) => theme.colors.superLightBack};
     text-align: center;
-    margin-right: ${sizes.padding};
+    margin-right: ${({ theme }) => theme.sizes.padding};
     &:hover{
-      background-color: ${colors.lightText};
+      background-color: ${({ theme }) => theme.colors.lightText};
       color: #fff;
     }
   }
@@ -51,7 +50,7 @@ const HeaderTitle = styled.h1.attrs({
   className: 'level-left',
 })`
   &&& {
-    font-size: ${fonts.header};
+    font-size: ${({ theme }) => theme.fonts.header};
     font-weight: normal;
   }
 `
@@ -60,7 +59,7 @@ const HeaderButtons = styled.div.attrs({
   className: 'level-right',
 })`
   &&& a {
-    margin-left: ${sizes.padding};
+    margin-left: ${({ theme }) => theme.sizes.padding};
   }
 `
 

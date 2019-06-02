@@ -4,15 +4,14 @@ import styled from 'styled-components'
 import { NavLink, withRouter } from 'react-router-dom'
 
 import { propertyType, resourceType, locationType } from '../../types'
-import { sizes, fonts, colors } from '../../styles/variables'
 
 const Th = styled.th`
   &&& {
-    font-size: ${fonts.min};
+    font-size: ${({ theme }) => theme.fonts.min};
     text-transform: uppercase;
-    color: ${colors.lightText};
+    color: ${({ theme }) => theme.colors.lightText};
     font-weight: normal;
-    padding: ${sizes.padding};
+    padding: ${({ theme }) => theme.sizes.padding};
     letter-spacing: 0.1em;
     border: none;
   }
@@ -21,14 +20,14 @@ const Th = styled.th`
 const StyledLink = styled(NavLink).attrs({
   className: 'is-sortable text-small',
 })`
-  color: ${colors.lightText};
+  color: ${({ theme }) => theme.colors.lightText};
 
   &.active {
-    color: ${colors.primary};
+    color: ${({ theme }) => theme.colors.primary};
   }
 
   & > i {
-    margin-left: ${sizes.padding}
+    margin-left: ${({ theme }) => theme.sizes.padding}
   }
 `
 

@@ -5,14 +5,13 @@ import styled from 'styled-components'
 import { withRouter } from 'react-router-dom'
 
 import StyledButton from './styled-button'
-import { colors } from '../../styles/variables'
 import { locationType } from '../../types'
 
 const PaginationWrapper = styled.div.attrs({
   className: 'level-item pagination-content',
 })`
   & > .pagination {
-    border: 1px solid ${colors.border};
+    border: 1px solid ${({ theme }) => theme.colors.border};
     padding: 4px;
   }
 `

@@ -3,19 +3,18 @@ import { NavLink, withRouter } from 'react-router-dom'
 import styled from 'styled-components'
 
 import { resourceType } from '../../../types'
-import { colors, sizes } from '../../../styles/variables'
 
 const ResourceLink = styled(NavLink)`
-  color: ${colors.defaultText};
-  padding: ${sizes.paddingMin};
+  color: ${({ theme }) => theme.colors.defaultText};
+  padding: ${({ theme }) => theme.sizes.paddingMin};
   display: block;
 
   &:hover {
-    color: ${colors.primary};
+    color: ${({ theme }) => theme.colors.primary};
   }
 
   &.active {
-    color: ${colors.primary};
+    color: ${({ theme }) => theme.colors.primary};
   }
 `
 

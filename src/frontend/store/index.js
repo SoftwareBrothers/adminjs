@@ -4,6 +4,7 @@ import createStore, {
   initializeDashboard,
   initializePaths,
   initializeSession,
+  initializeVersions,
 } from './store'
 
 const initializeStore = (admin, currentAdmin) => {
@@ -27,6 +28,10 @@ const initializeStore = (admin, currentAdmin) => {
   store.dispatch(initializePaths({ loginPath, logoutPath, rootPath }))
   store.dispatch(initializeSession(currentAdmin))
   store.dispatch(initializeDashboard(dashboard))
+  store.dispatch(initializeVersions({
+    app: admin.options.version && admin.options.version.app,
+    admin: admin.options.version && admin.options.version.admin ? admin.constructor.VERSION : null,
+  }))
   return store
 }
 
