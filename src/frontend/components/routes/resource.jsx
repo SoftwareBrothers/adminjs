@@ -10,6 +10,7 @@ import Filter from '../app/filter'
 import ActionHeader from '../app/action-header'
 import WrapperBox from '../ui/wrapper-box'
 import Notice from '../app/notice'
+import Loader from '../ui/loader'
 
 import ApiClient from '../../utils/api-client'
 import queryHasFilter from '../../utils/query-has-filter'
@@ -42,6 +43,7 @@ class Resource extends React.Component {
       page: 1,
       perPage: 20,
       total: 0,
+      loading: true,
     }
   }
 
@@ -69,6 +71,7 @@ class Resource extends React.Component {
   _fetchData(resourceId) {
     const { location } = this.props
     const api = new ApiClient()
+    this.setState({ loading: true })
     this.resource = this.currentResource(resourceId)
     const query = new URLSearchParams(location.search)
     api.getRecords({
@@ -80,6 +83,7 @@ class Resource extends React.Component {
         page: response.data.meta.page,
         perPage: response.data.meta.perPage,
         total: response.data.meta.total,
+        loading: false,
       })
     })
   }
@@ -97,7 +101,7 @@ class Resource extends React.Component {
   render() {
     const resource = this.currentResource()
     const { paths } = this.props
-    const { records, page, perPage, total, search, filterVisible } = this.state
+    const { records, page, perPage, total, search, filterVisible, loading } = this.state
     return (
       <Wrapper>
         <NoticeWrapper>
@@ -112,12 +116,16 @@ class Resource extends React.Component {
             actionPerformed={this.handleActionPerformed}
           />
           <WrapperBox border>
-            <RecordsTable
-              resource={this.resource}
-              records={records}
-              paths={paths}
-              actionPerformed={this.handleActionPerformed}
-            />
+            { loading ? (
+              <Loader />
+            ) : (
+              <RecordsTable
+                resource={this.resource}
+                records={records}
+                paths={paths}
+                actionPerformed={this.handleActionPerformed}
+              />
+            )}
             <Paginate
               page={page}
               perPage={perPage}
