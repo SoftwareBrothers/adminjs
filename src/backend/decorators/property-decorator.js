@@ -82,7 +82,7 @@ class PropertyDecorator {
   }
 
   label() {
-    return this.overrideFromOptions('name', () => (
+    return this.overrideFromOptions('label', () => (
       _.startCase(this._property.name())
     ))
   }

@@ -129,6 +129,13 @@ class ResourceDecorator {
     return properties
   }
 
+  async recordsDecorator(populatedRecords) {
+    if (this.options.recordsDecorator) {
+      return this.options.recordsDecorator(populatedRecords)
+    }
+    return populatedRecords
+  }
+
   /**
    * Returns the name for the resource.
    * @return {String} resource name

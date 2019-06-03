@@ -80,7 +80,8 @@ class ApiController {
       offset: (page - 1) * perPage,
       sort,
     })
-    const populatedRecords = await populator(records, listProperties)
+    let populatedRecords = await populator(records, listProperties)
+    populatedRecords = await resource.decorate().recordsDecorator(populatedRecords.map(r => r.toJSON()))
 
     const total = await resource.count(filter)
     return {
@@ -91,7 +92,7 @@ class ApiController {
         direction: sort.direction,
         sortBy: sort.sortBy,
       },
-      records: populatedRecords.map(r => r.toJSON()),
+      records: populatedRecords,
     }
   }
 
