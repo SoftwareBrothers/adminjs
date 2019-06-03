@@ -1,6 +1,7 @@
 import React from 'react'
 import { render } from 'react-testing-library'
 import PropertyInEdit from './property-in-edit'
+import TestContextProvider from '../spec/test-context-provider'
 
 require('jsdom-global')()
 
@@ -15,7 +16,9 @@ describe('PropertyInEdit', function () {
 
   it('renders label', async function () {
     const { findByText } = render(
-      <PropertyInEdit property={this.property} />,
+      <TestContextProvider>
+        <PropertyInEdit property={this.property} />
+      </TestContextProvider>,
     )
     const label = await findByText(this.property.label)
     expect(label).not.to.be.null
@@ -24,7 +27,9 @@ describe('PropertyInEdit', function () {
   it('renders error when it was given', async function () {
     const error = { message: 'some message' }
     const { findByText } = render(
-      <PropertyInEdit property={this.property} error={error} />,
+      <TestContextProvider>
+        <PropertyInEdit property={this.property} error={error} />
+      </TestContextProvider>,
     )
     const errorObject = await findByText(error.message)
     expect(errorObject).not.to.be.null

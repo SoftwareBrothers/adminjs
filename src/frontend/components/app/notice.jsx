@@ -17,6 +17,8 @@ const NoticeWrapper = styled.div.attrs({
   left: 0;
   right: 0;
   border-radius: 0;
+  border-style: none none solid none;
+  border-width: 1px;
   padding: 13px ${({ theme }) => theme.sizes.paddingLayout};
 
   &:not(:last-child) {
@@ -25,7 +27,7 @@ const NoticeWrapper = styled.div.attrs({
 
   &.success {
     background-color: ${({ theme }) => theme.colors.lightSuccess};
-    border: 1px solid ${({ theme }) => theme.colors.success};
+    border-color: ${({ theme }) => theme.colors.success};
 
     & .progressBar {
       background-color: ${({ theme }) => theme.colors.success};
@@ -34,7 +36,7 @@ const NoticeWrapper = styled.div.attrs({
 
   &.error {
     background-color: ${({ theme }) => theme.colors.lightError};
-    border: 1px solid ${({ theme }) => theme.colors.error};
+    border-color: ${({ theme }) => theme.colors.error};
     & .delete:before, & .delete:after {
       background-color: ${({ theme }) => theme.colors.error};
     }
@@ -123,17 +125,19 @@ NoticeElement.propTypes = {
 
 const NoticeBox = (props) => {
   const { drop, notices, notifyProgress } = props
+  const notice = notices.length ? notices[notices.length - 1] : null
+  if (notice) {
+    return (
+      <NoticeElement
+        key={notice.id}
+        notice={notice}
+        drop={() => drop(notice.id)}
+        notifyProgress={notifyProgress}
+      />
+    )
+  }
   return (
-    <React.Fragment>
-      {notices && notices.map(notice => (
-        <NoticeElement
-          key={notice.id}
-          notice={notice}
-          drop={() => drop(notice.id)}
-          notifyProgress={notifyProgress}
-        />
-      ))}
-    </React.Fragment>
+    <div />
   )
 }
 
