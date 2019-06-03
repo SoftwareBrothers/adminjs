@@ -104,8 +104,7 @@ const versionsReducer = (state = {}, action) => {
 const noticesReducer = (state = [], action) => {
   switch (action.type) {
   case 'ADD_NOTICE': {
-    const notices = [...state]
-    notices.push(action.data)
+    const notices = [action.data]
     return notices
   }
   case 'DROP_NOTICE': {
