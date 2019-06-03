@@ -21,6 +21,7 @@ describe('ApiController', function () {
         properties: { [property.name()]: property },
         resourceActions: () => [this.action],
         recordActions: () => [this.action],
+        recordsDecorator: records => records,
       }),
       find: this.sinon.stub().returns([]),
       count: this.sinon.stub().returns(this.total),
