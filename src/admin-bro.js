@@ -11,6 +11,7 @@ const Filter = require('./backend/utils/filter')
 const ValidationError = require('./backend/utils/validation-error')
 const ConfigurationError = require('./backend/utils/configuration-error')
 const ResourcesFactory = require('./backend/utils/resources-factory')
+const userComponentsBunlder = require('./backend/bundler/user-components-bundler')
 const ACTIONS = require('./backend/actions')
 
 const Router = require('./backend/router')
@@ -130,6 +131,17 @@ class AdminBro {
       AdminBro.registeredAdapters.push({ Database, Resource })
     } else {
       throw new Error('Adapter elements has to be subclassess of AdminBro.BaseResource and AdminBro.BaseDatabase')
+    }
+  }
+
+  /**
+   * Initializes AdminBro instance in production. This function should be called by
+   * all external plugins.
+   */
+  async initialize() {
+    if (process.env.NODE_ENV === 'production') {
+      console.log('AdminBro: bundling user components...')
+      await userComponentsBunlder(this, { write: true })
     }
   }
 

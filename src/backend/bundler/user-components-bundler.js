@@ -5,9 +5,10 @@ const bundler = require('./bundler')
 
 const tmpPath = '.adminbro'
 const entryPath = path.join(tmpPath, '.entry.js')
+const outPath = path.join(tmpPath, 'bundle.js')
 const generateEntry = require('./generate-user-component-entry')
 
-async function build(admin) {
+async function build(admin, { write = false } = {}) {
   const entryFile = generateEntry(admin)
 
   try {
@@ -20,7 +21,10 @@ async function build(admin) {
   return bundler({
     name: 'AdminBroCustom',
     input: entryPath,
+    file: write ? outPath : null,
   })
 }
+
+build.outPath = outPath
 
 module.exports = build

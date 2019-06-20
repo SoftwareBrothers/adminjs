@@ -1,7 +1,10 @@
+const path = require('path')
+
 const AppController = require('./controllers/app-controller')
 const ApiController = require('./controllers/api-controller')
 
 const ASSETS_ROOT = `${__dirname}/../frontend/assets/`
+const COMPONENT_BUNDLE_PATH = require('./bundler/user-components-bundler').outPath
 
 /**
  * Contains list of all routes grouped to `assets` and `routes`.
@@ -10,7 +13,7 @@ const ASSETS_ROOT = `${__dirname}/../frontend/assets/`
  * {
  *   assets: [{
  *     path: '/frontend/assets/app.min.js',
- *     src: [ASSETS_ROOT, 'scripts/app.min.js'].join('/'),
+ *     src: path.join(ASSETS_ROOT, 'scripts/app.min.js'),
  *   }, ...],
  *   routes: [{
  *     method: 'GET',
@@ -29,37 +32,28 @@ const ASSETS_ROOT = `${__dirname}/../frontend/assets/`
 const Router = {
   assets: [{
     path: '/frontend/assets/icomoon.css',
-    src: [ASSETS_ROOT, 'styles/icomoon.css'].join('/'),
+    src: path.join(ASSETS_ROOT, 'styles/icomoon.css'),
   }, {
     path: '/frontend/assets/icomoon.eot',
-    src: [ASSETS_ROOT, 'fonts/icomoon.eot'].join('/'),
+    src: path.join(ASSETS_ROOT, 'fonts/icomoon.eot'),
   }, {
     path: '/frontend/assets/icomoon.svg',
-    src: [ASSETS_ROOT, 'fonts/icomoon.svg'].join('/'),
+    src: path.join(ASSETS_ROOT, 'fonts/icomoon.svg'),
   }, {
     path: '/frontend/assets/icomoon.ttf',
-    src: [ASSETS_ROOT, 'fonts/icomoon.ttf'].join('/'),
+    src: path.join(ASSETS_ROOT, 'fonts/icomoon.ttf'),
   }, {
     path: '/frontend/assets/icomoon.woff',
-    src: [ASSETS_ROOT, 'fonts/icomoon.woff'].join('/'),
+    src: path.join(ASSETS_ROOT, 'fonts/icomoon.woff'),
+  }, {
+    path: '/frontend/assets/app.bundle.js',
+    src: path.join(ASSETS_ROOT, 'scripts/app-bundle.js'),
   }],
   routes: [{
     method: 'GET',
     path: '',
     Controller: AppController,
     action: 'index',
-  }, {
-    method: 'GET',
-    path: '/frontend/assets/components.bundle.js',
-    Controller: AppController,
-    action: 'bundleComponents',
-    contentType: 'text/javascript;charset=utf-8',
-  }, {
-    method: 'GET',
-    path: '/frontend/assets/app.bundle.js',
-    Controller: AppController,
-    action: 'bundle',
-    contentType: 'text/javascript;charset=utf-8',
   }, {
     method: 'GET',
     path: '/resources/{resourceId}',
@@ -121,6 +115,21 @@ const Router = {
     Controller: ApiController,
     action: 'dashboard',
   }],
+}
+
+if (process.env.NODE_ENV === 'production') {
+  Router.assets.push({
+    path: '/frontend/assets/components.bundle.js',
+    src: COMPONENT_BUNDLE_PATH,
+  })
+} else {
+  Router.routes.push({
+    method: 'GET',
+    path: '/frontend/assets/components.bundle.js',
+    Controller: AppController,
+    action: 'bundleComponents',
+    contentType: 'text/javascript;charset=utf-8',
+  })
 }
 
 module.exports = Router

@@ -1,19 +1,25 @@
 const rollup = require('rollup')
 const { external, globals, plugins } = require('./config')
 
-async function build({ name, input, babelConfig = {}, file }) {
+async function build({ name, input, babelConfig = {}, file, watch }) {
   const inputOptions = {
     input,
     plugins: plugins(babelConfig),
     external,
   }
 
+  const outputOptions = {
+    format: 'iife', name, globals,
+  }
+
   if (file) {
+    outputOptions.file = file
+  }
+
+  if (watch) {
     const watcher = rollup.watch({
       ...inputOptions,
-      output: {
-        format: 'iife', name, globals, file,
-      },
+      output: outputOptions,
     })
     watcher.on('event', (event) => {
       console.log(event.code)
@@ -23,11 +29,13 @@ async function build({ name, input, babelConfig = {}, file }) {
     })
     return watcher
   }
+
   const bundle = await rollup.rollup(inputOptions)
 
-  const bundled = await bundle.generate({
-    format: 'iife', name, globals,
-  })
+  if (file) {
+    return bundle.write(outputOptions)
+  }
+  const bundled = await bundle.generate(outputOptions)
   return bundled.output[0].code
 }
 
