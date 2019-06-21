@@ -26,6 +26,9 @@ const filterStyles = {
     background: 'transparent',
     color: colors.lightText,
   }),
+  input: () => ({
+    color: '#fff',
+  }),
   singleValue: () => ({
     color: colors.lightText,
   }),

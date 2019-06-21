@@ -43,6 +43,10 @@ const pkg = require('../package.json')
  * @property {Object} [branding]                      branding settings
  * @property {String} [branding.logo]                 logo shown in AdminBro in the top left corner
  * @property {String} [branding.companyName]          company name
+ * @property {Object} [branding.theme]                override custom css properties as colors
+ *                                                    and paddings. See
+ *                        <a href='/admin-bro_src_frontend_styles_variables.js.html'>This file</a>
+ *                                                    example: `colors: {primary: 'red'}`
  * @property {Boolean} [branding.softwareBrothers]    if Software Brothers logos should be shown
  *                                                    in the sidebar footer
  * @property {Object} [assets]                        assets object
@@ -75,8 +79,7 @@ const defaults = {
   databases: [],
   resources: [],
   branding: {
-    logo: 'https://softwarebrothers.co/assets/images/software-brothers-logo-compact.svg',
-    companyName: 'Company Name',
+    companyName: 'Company',
     softwareBrothers: true,
   },
   dashboard: {},
@@ -109,6 +112,8 @@ class AdminBro {
      * @description Options given by a user
      */
     this.options = _.merge({}, defaults, options)
+
+    this.options.branding.logo = this.options.branding.logo || `${this.options.rootPath}/frontend/assets/logo-mini.svg`
 
     const { databases, resources } = this.options
     const resourcesFactory = new ResourcesFactory(this, AdminBro.registeredAdapters)

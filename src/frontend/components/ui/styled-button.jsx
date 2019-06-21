@@ -11,7 +11,7 @@ const Btn = styled(Link).attrs(({ primary }) => ({
     border-radius: 0;
     border-color: ${({ theme }) => theme.colors.primary};
     background: #fff;
-    height: 32px;
+    height: 34px;
     padding:  ${({ theme }) => `${theme.sizes.paddingMin} ${theme.sizes.padding}`};
     color: ${({ theme }) => theme.colors.primary};
     & i, & svg {

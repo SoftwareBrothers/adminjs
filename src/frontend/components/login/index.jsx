@@ -10,7 +10,7 @@ const GlobalStyle = createGlobalStyle`
   html, body, #app {
     width: 100%;
     height: 100%;
-    background: ${({ theme }) => theme.colors.bck};
+    background: ${({ theme }) => theme.colors.superDarkBck};
     font-size: ${({ theme }) => theme.fonts.base};
   }
 
@@ -53,18 +53,18 @@ const Login = (props) => {
         <LoginBox>
           <WrapperBox border>
             <div className="content">
-              <h1>Welcome!</h1>
+              <h1 style={{ marginTop: 25, marginBottom: 25 }}>Welcome!</h1>
               <p>Please login to proceed to the admin panel</p>
             </div>
             {message && <div className="notification is-danger">{message}</div>}
-            <form action={action} method="POST">
+            <form action={action} method="POST" style={{ marginBottom: 30 }}>
               <PropertyInEdit property={email} className="field">
-                <input type="text" name="email" placeholder="Your Email Address" className="input" />
+                <input type="text" name="email" id="email" placeholder="Your Email Address" className="input" />
               </PropertyInEdit>
               <PropertyInEdit property={password} className="field">
-                <input type="password" name="password" placeholder="Password" className="input" />
+                <input type="password" name="password" id="password" placeholder="Password" className="input" />
               </PropertyInEdit>
-              <StyledButton as="button" type="submit" className="is-primary is-fullwidth">
+              <StyledButton as="button" type="submit" className="is-primary is-fullwidth" style={{ marginTop: 40 }}>
                 Login
               </StyledButton>
             </form>

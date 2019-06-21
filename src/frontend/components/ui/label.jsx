@@ -12,7 +12,7 @@ const StyledLabel = styled.label.attrs({
     font-size: ${({ theme }) => theme.fonts.min};
     color: ${({ theme }) => theme.colors.lightText};
     font-weight: normal;
-    margin: 0 0 ${({ theme }) => theme.sizes.paddingMin} 0;
+    margin: 0 0 8px 0;
     letter-spacing: 0.1em;
   }
 `

@@ -17,6 +17,10 @@ const Property = styled.div`
       border-color: ${({ theme }) => theme.colors.primary};
     }
   }
+
+  & .control > input[type=text]{
+    height: 40px;
+  }
 `
 /**
  * @classdesc

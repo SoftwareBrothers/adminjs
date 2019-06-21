@@ -1,3 +1,7 @@
+/**
+ * @file Default AdminBro theme
+ */
+
 // sorted alphabetically
 export const colors = {
   defaultText: '#111114',

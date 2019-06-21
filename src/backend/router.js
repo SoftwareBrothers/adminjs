@@ -48,6 +48,12 @@ const Router = {
   }, {
     path: '/frontend/assets/app.bundle.js',
     src: path.join(ASSETS_ROOT, 'scripts/app-bundle.js'),
+  }, {
+    path: '/frontend/assets/logo.svg',
+    src: [ASSETS_ROOT, 'images/logo.svg'].join('/'),
+  }, {
+    path: '/frontend/assets/logo-mini.svg',
+    src: [ASSETS_ROOT, 'images/logo-mini.svg'].join('/'),
   }],
   routes: [{
     method: 'GET',

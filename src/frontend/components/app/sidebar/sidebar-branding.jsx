@@ -13,10 +13,14 @@ const LogoLink = styled(Link)`
   align-items: center;
   color: ${({ theme }) => theme.colors.defaultText};
   font-weight: bold;
+  span {
+    font-size: 20px;
+  }
 `
 
 const LogoImage = styled.img`
   margin-right: ${({ theme }) => theme.sizes.padding};
+  height: 35px;
 `
 
 const SidebarBranding = (props) => {
