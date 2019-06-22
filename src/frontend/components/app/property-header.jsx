@@ -64,7 +64,9 @@ class SortLink extends React.PureComponent {
   render() {
     const { property, resource, location } = this.props
     const query = new URLSearchParams(location.search)
-    const opositeDirection = query.get('direction') === 'asc' ? 'desc' : 'asc'
+    const opositeDirection = (query.get('direction') === 'asc' || !query.get('direction'))
+      ? 'desc'
+      : 'asc'
     const sortedBy = isSortedBy({ property, resource, location })
     const direction = sortedBy ? opositeDirection : 'asc'
     query.set('direction', direction)
