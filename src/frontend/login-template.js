@@ -5,6 +5,8 @@ import LoginComponent from './components/login'
 
 import * as theme from './styles/variables'
 
+const onProd = process.env.NODE_ENV === 'production'
+
 const html = ({ action, errorMessage }) => {
   const loginComponent = renderToString(
     // eslint-disable-next-line react/jsx-filename-extension
@@ -31,8 +33,8 @@ const html = ({ action, errorMessage }) => {
       <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,700" type="text/css">
 
       <script src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
-      <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
-      <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+      <script crossorigin src="https://unpkg.com/react@16/umd/react.${onProd ? 'production.min' : 'development'}.js"></script>
+      <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.${onProd ? 'production.min' : 'development'}.js"></script>
     </head>
     <body>
       <div id="app">${loginComponent}</div>

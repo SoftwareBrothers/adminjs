@@ -100,6 +100,7 @@ class Filter extends React.Component {
         search.delete(`filters.${key}`)
       }
     })
+    search.set('page', 1)
     history.push(`${history.location.pathname}?${search.toString()}`)
     return false
   }

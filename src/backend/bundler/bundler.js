@@ -1,10 +1,10 @@
 const rollup = require('rollup')
 const { external, globals, plugins } = require('./config')
 
-async function build({ name, input, babelConfig = {}, file, watch }) {
+async function build({ name, input, babelConfig = {}, file, watch, minify }) {
   const inputOptions = {
     input,
-    plugins: plugins(babelConfig),
+    plugins: plugins({ babelConfig, minify }),
     external,
   }
 
