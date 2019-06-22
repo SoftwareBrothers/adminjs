@@ -6,6 +6,7 @@ import boolean from './boolean'
 import datetime from './datetime'
 import richtext from './richtext'
 import reference from './reference'
+import ErrorBoundary from '../app/error-boundary'
 
 import { propertyType, resourceType, recordType } from '../../types'
 
@@ -174,13 +175,15 @@ export default class BasePropertyComponent extends React.Component {
     }
 
     return (
-      <PropertyRenderer
-        property={property}
-        resource={resource}
-        record={record}
-        filter={filter}
-        onChange={onChange}
-      />
+      <ErrorBoundary>
+        <PropertyRenderer
+          property={property}
+          resource={resource}
+          record={record}
+          filter={filter}
+          onChange={onChange}
+        />
+      </ErrorBoundary>
     )
   }
 }

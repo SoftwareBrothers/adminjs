@@ -1,9 +1,12 @@
+/* eslint-disable jsx-a11y/anchor-has-content */
 import React from 'react'
 
 import { resourceType, actionType, recordType } from '../../types'
 import WrapperBox from '../ui/wrapper-box'
+import ErrorBoundary from './error-boundary'
 
 import actions from '../actions'
+import { DOCS } from '../../../constants'
 
 /**
  * @classdesc
@@ -70,6 +73,7 @@ class BaseActionComponent extends React.Component {
     const { resource, action, record } = this.props
 
     const { isClient } = this.state
+    const documentationLink = [DOCS, 'BaseAction.html'].join('/')
 
     let Action = actions[action.name]
     if (isClient && action.component) {
@@ -77,16 +81,23 @@ class BaseActionComponent extends React.Component {
     }
     if (Action) {
       return (
-        <Action
-          action={action}
-          resource={resource}
-          record={record}
-        />
+        <ErrorBoundary>
+          <Action
+            action={action}
+            resource={resource}
+            record={record}
+          />
+        </ErrorBoundary>
       )
     }
     return Action || (
-      <WrapperBox>
-        You have to implement action component for your Action.
+      <WrapperBox border>
+        <div className="notification">
+          You have to implement action component for your Action.
+          See:
+          {' '}
+          <a href={documentationLink}>the documentation</a>
+        </div>
       </WrapperBox>
     )
   }

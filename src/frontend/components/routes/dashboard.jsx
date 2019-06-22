@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
 import DefaultDashboard from '../app/default-dashboard'
+import ErrorBoundary from '../app/error-boundary'
 
 class Dashboard extends React.Component {
   constructor(props) {
@@ -29,7 +30,9 @@ class Dashboard extends React.Component {
     }
 
     return (
-      <Component />
+      <ErrorBoundary>
+        <Component />
+      </ErrorBoundary>
     )
   }
 }

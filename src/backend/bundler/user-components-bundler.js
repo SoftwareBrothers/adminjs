@@ -22,6 +22,7 @@ async function build(admin, { write = false } = {}) {
     name: 'AdminBroCustom',
     input: entryPath,
     file: write ? outPath : null,
+    minify: process.env.NODE_ENV === 'production',
   })
 }
 

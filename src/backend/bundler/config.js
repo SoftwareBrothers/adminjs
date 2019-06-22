@@ -5,7 +5,7 @@ const replace = require('rollup-plugin-replace')
 const { terser } = require('rollup-plugin-terser')
 
 
-module.exports = {
+const config = {
   external: [
     'react',
     'react-dom',
@@ -40,21 +40,28 @@ module.exports = {
     'admin-bro/types': 'AdminBro.types',
     'admin-bro/style': 'AdminBro.style',
   },
-  plugins: (babelConfig = {}, commonJSConfig = {}) => [
-    resolve({
-      extensions: ['.mjs', '.js', '.jsx', '.json'],
-    }),
-    replace({
-      'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development'),
-      'process.env.IS_BROWSER': 'true',
-      'process.env.': 'AdminBro.env.',
-    }),
-    commonjs(commonJSConfig),
-    babel({
-      babelrc: false,
-      presets: [require.resolve('@babel/preset-react'), require.resolve('@babel/preset-env')],
-      ...babelConfig,
-    }),
-    terser(),
-  ],
+  plugins: ({ babelConfig = {}, commonJSConfig = {}, minify = false } = {}) => {
+    const pluginStack = [
+      resolve({
+        extensions: ['.mjs', '.js', '.jsx', '.json'],
+      }),
+      replace({
+        'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development'),
+        'process.env.IS_BROWSER': 'true',
+        'process.env.': 'AdminBro.env.',
+      }),
+      commonjs(commonJSConfig),
+      babel({
+        babelrc: false,
+        presets: [require.resolve('@babel/preset-react'), require.resolve('@babel/preset-env')],
+        ...babelConfig,
+      }),
+    ]
+    if (minify) {
+      config.plugins.push(terser())
+    }
+    return pluginStack
+  },
 }
+
+module.exports = config
