@@ -58,7 +58,7 @@ const config = {
       }),
     ]
     if (minify) {
-      config.plugins.push(terser())
+      pluginStack.push(terser())
     }
     return pluginStack
   },
