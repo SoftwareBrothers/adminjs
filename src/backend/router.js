@@ -67,6 +67,11 @@ const Router = {
     action: 'resource',
   }, {
     method: 'GET',
+    path: '/api/resources/{resourceId}/search/{query}',
+    Controller: ApiController,
+    action: 'search',
+  }, {
+    method: 'GET',
     path: '/resources/{resourceId}/actions/{action}',
     Controller: AppController,
     action: 'resourceAction',
@@ -100,11 +105,6 @@ const Router = {
     path: '/api/resources/{resourceId}/records/{recordId}/{action}',
     Controller: ApiController,
     action: 'recordAction',
-  }, {
-    method: 'GET',
-    path: '/api/resources/{resourceId}/search/{query}',
-    Controller: ApiController,
-    action: 'search',
   }, {
     method: 'GET',
     path: '/api/resources/{resourceId}',
