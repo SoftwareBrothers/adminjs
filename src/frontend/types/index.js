@@ -7,7 +7,7 @@ export const pathsType = PropTypes.shape({
 })
 
 export const sessionType = PropTypes.shape({
-  email: PropTypes.string.isRequired,
+  email: PropTypes.string,
 })
 
 export const brandingType = PropTypes.shape({

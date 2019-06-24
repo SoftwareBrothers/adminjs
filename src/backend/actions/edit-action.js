@@ -3,7 +3,7 @@
  * @category Actions
  * @module EditAction
  * @description
- * Shows form for updating existing new record
+ * Shows form for updating existing record
  *
  * Uses {@link EditAction} component to render form
  */
