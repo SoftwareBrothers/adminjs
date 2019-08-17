@@ -24,6 +24,10 @@ const DEFAULT_MAX_ITEMS_IN_LIST = 8
  * @property {Array<String>}  filterProperties  list of all properties which should be visible
  *                                              in the filter
  * @property {Object | String} parent   parent category in the sidebar
+ * @property {Object} [sort]            default sort parameters
+ * @property {Object} [sort.direction='asc']  either `asc` or `desc`.
+ * @property {Object} [sort.sortBy]     name of the field on which by default items should be
+ *                                      sorted in a list. Default to first property.
  * @property {String} parent.name       name of the parent category
  * @property {String} parent.icon       icon class of a parent category (i.e. 'icon-bomb')
  * @property {Object<String, PropertyOptions>} properties list of properties with their options

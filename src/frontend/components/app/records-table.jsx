@@ -10,7 +10,7 @@ import { resourceType, pathsType, recordType } from '../../types'
 import Table from '../ui/table'
 
 const RecordsTable = (props) => {
-  const { resource, paths, records, actionPerformed } = props
+  const { resource, paths, records, actionPerformed, sortBy, direction } = props
   const h = new ViewHelpers()
   const newAction = h.resourceActionUrl({ resourceId: resource.id, actionName: 'new' })
   if (!records.length) {
@@ -31,7 +31,13 @@ const RecordsTable = (props) => {
       <thead>
         <tr key="header">
           {resource.listProperties.map(property => (
-            <PropertyHeader resource={resource} property={property} key={property.name} />
+            <PropertyHeader
+              resource={resource}
+              property={property}
+              key={property.name}
+              sortBy={sortBy}
+              direction={direction}
+            />
           ))}
           <th key="actions" style={{ width: 80 }} />
         </tr>
@@ -56,6 +62,8 @@ RecordsTable.propTypes = {
   paths: pathsType.isRequired,
   records: PropTypes.arrayOf(recordType).isRequired,
   actionPerformed: PropTypes.func.isRequired,
+  sortBy: PropTypes.string.isRequired,
+  direction: PropTypes.string.isRequired,
 }
 
 export default RecordsTable
