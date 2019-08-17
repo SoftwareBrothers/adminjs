@@ -44,6 +44,8 @@ class Resource extends React.Component {
       perPage: 20,
       total: 0,
       loading: true,
+      direction: 'asc',
+      sortBy: this.resource.listProperties[0].name,
     }
   }
 
@@ -83,6 +85,8 @@ class Resource extends React.Component {
         page: response.data.meta.page,
         perPage: response.data.meta.perPage,
         total: response.data.meta.total,
+        direction: response.data.meta.direction,
+        sortBy: response.data.meta.sortBy,
         loading: false,
       })
     })
@@ -101,7 +105,10 @@ class Resource extends React.Component {
   render() {
     const resource = this.currentResource()
     const { paths } = this.props
-    const { records, page, perPage, total, search, filterVisible, loading } = this.state
+    const {
+      records, page, perPage, total, search, filterVisible,
+      loading, direction, sortBy,
+    } = this.state
     return (
       <Wrapper>
         <NoticeWrapper>
@@ -124,6 +131,8 @@ class Resource extends React.Component {
                 records={records}
                 paths={paths}
                 actionPerformed={this.handleActionPerformed}
+                direction={direction}
+                sortBy={sortBy}
               />
             )}
             <Paginate

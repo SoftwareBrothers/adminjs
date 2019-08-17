@@ -4,6 +4,7 @@ const { unflatten, flatten } = require('flat')
 const { populator } = require('../utils/populator')
 const Filter = require('../utils/filter')
 const ViewHelpers = require('../utils/view-helpers')
+const sortSetter = require('../services/sort-setter')
 
 const PER_PAGE_LIMIT = 500
 
@@ -60,9 +61,7 @@ class ApiController {
     let { page, perPage } = unflatten(query || {})
 
     const resource = this._admin.findResource(resourceId)
-
     const listProperties = resource.decorate().getListProperties()
-    const firstProperty = listProperties[0]
 
     if (perPage) {
       perPage = +perPage > PER_PAGE_LIMIT ? PER_PAGE_LIMIT : +perPage
@@ -70,10 +69,7 @@ class ApiController {
       perPage = 10 // default
     }
     page = Number(page) || 1
-    const sort = {
-      sortBy: sortBy || firstProperty.name(),
-      direction: direction || 'asc',
-    }
+    const sort = sortSetter({ sortBy, direction }, listProperties[0].name(), resource.decorate().options)
     const filter = await new Filter(filters, resource).populate()
     const records = await resource.find(filter, {
       limit: perPage,

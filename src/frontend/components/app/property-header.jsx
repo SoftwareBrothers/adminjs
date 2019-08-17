@@ -31,26 +31,6 @@ const StyledLink = styled(NavLink).attrs({
   }
 `
 
-const isSortedBy = ({ location, property, resource }) => {
-  const query = new URLSearchParams(location.search)
-  const sortBy = query.get('sortBy')
-  return (sortBy && sortBy === property.name)
-      || (!sortBy && property.name === resource.titleProperty.name)
-}
-
-const SortIndicator = ({ sortedBy, location }) => {
-  const query = new URLSearchParams(location.search)
-
-  if (sortedBy) {
-    const direction = query.get('direction') || 'asc'
-    const sortedByClass = `icomoon-dropdown-${direction === 'asc' ? 'open' : 'close'}`
-    return (
-      <i className={sortedByClass} />
-    )
-  }
-  return null
-}
-
 class SortLink extends React.PureComponent {
   constructor(props) {
     super(props)
@@ -58,18 +38,17 @@ class SortLink extends React.PureComponent {
   }
 
   isActive() {
-    return isSortedBy(this.props)
+    const { sortBy, property } = this.props
+    return sortBy === property.name
   }
 
   render() {
-    const { property, resource, location } = this.props
+    const { property, location, direction } = this.props
     const query = new URLSearchParams(location.search)
-    const opositeDirection = (query.get('direction') === 'asc' || !query.get('direction'))
-      ? 'desc'
-      : 'asc'
-    const sortedBy = isSortedBy({ property, resource, location })
-    const direction = sortedBy ? opositeDirection : 'asc'
-    query.set('direction', direction)
+    const opositeDirection = (this.isActive() && direction === 'asc') ? 'desc' : 'asc'
+    const sortedByClass = `icomoon-dropdown-${direction === 'asc' ? 'open' : 'close'}`
+
+    query.set('direction', opositeDirection)
     query.set('sortBy', property.name)
     return (
       <StyledLink
@@ -77,7 +56,9 @@ class SortLink extends React.PureComponent {
         isActive={this.isActive}
       >
         {property.label}
-        {SortIndicator({ sortedBy, location })}
+        {this.isActive() ? (
+          <i className={sortedByClass} />
+        ) : ''}
       </StyledLink>
     )
   }
@@ -97,17 +78,22 @@ const PropertyHeader = (props) => {
 
 SortLink.propTypes = {
   property: propertyType.isRequired,
-  resource: resourceType.isRequired,
   location: locationType.isRequired,
+  direction: PropTypes.string.isRequired,
+  sortBy: PropTypes.string.isRequired,
 }
 
-SortIndicator.propTypes = {
-  location: locationType.isRequired,
-  sortedBy: PropTypes.bool.isRequired,
-}
 PropertyHeader.propTypes = {
   property: propertyType.isRequired,
   resource: resourceType.isRequired,
+  /**
+   * currently selected direction. Either 'asc' or 'desc'.
+   */
+  direction: PropTypes.string.isRequired,
+  /**
+   * currently selected field by which list is sorted.
+   */
+  sortBy: PropTypes.string.isRequired,
 }
 
 export default withRouter(PropertyHeader)
