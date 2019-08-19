@@ -22,9 +22,10 @@
  * 1. Resource action, which is performed for an entire resource.
  * 2. Record action, invoked for an record in a resource
  *
- * ...and there are 4 actions predefined in AdminBro
+ * ...and there are 5 actions predefined in AdminBro
  *
  * 1. {@link module:NewAction new} (resource action) - create new records in a resource
+ * 1. {@link module:ListAction list} (resource action) - list all records within a resource
  * 2. {@link module:EditAction edit} (record action) - update records in a resource
  * 3. {@link module:ShowAction show} (record action) - show details of given record
  * 3. {@link module:DeleteAction delete} (record action) - delete given record
@@ -33,6 +34,15 @@
  * {@link ResourceOptions}
  *
  * @category Base
+ */
+
+/**
+ * @typedef {Object} BaseAction~Context
+ * @property {AdminBro}     _admin         current AdminBro instance
+ * @property {BaseResource} resource       recource on which action was performed
+ * @property {ViewHelpers}  h              view helpers
+ * @property {Action}       action         object representing particular action
+ * @property {Object}       currentAdmin   logged in admin
  */
 
 /**
@@ -45,19 +55,35 @@
 /**
  * @name isVisible
  * @description
- * indicates if action should be visible for given resource and record.
+ * indicates if action should be visible for given invocation context.
  * It also can be a simple boolean value.
+ * `True` by default.
  * @method
  * @memberof BaseAction
- * @param {BaseResource} resource
- * @param {BaseRecord}   record
+ * @param {BaseAction~Context}       data      data passed as the context of the action
  * @example
  * {
  *   ...,
- *   isVisible: (resource, record) => record.param('email') !== '',
+ *   isVisible: (data) => data.currentAdmin.role == 'manager',
  *   ...
  * }
  */
+
+/**
+ * @name isAccessible
+ * @description
+ * indicates if action should can be invoked for given invocation context.
+ * Similar to `isVisible` - it also can be a simple boolean value.
+ * @method
+ * @memberof BaseAction
+ * @param {BaseAction~Context}       data      data passed as the context of the action
+ * @example
+ * {
+  *   ...,
+  *   isAccessible: (data) => data.currentAdmin.role !== 'manager',
+  *   ...
+  * }
+  */
 
 /**
  * @name label
@@ -123,10 +149,6 @@
  * @param {Object}       request.query       query string parameters
  * @param {String}       request.method      either 'post' or 'get'
  * @param {Object}       response            Response object passed by the backend framework
- * @param {Object}       data                data passed as the context of the action
- * @param {AdminBro}     data._admin         current AdminBro instance
- * @param {BaseResource} data.resource       recource on which action was performed
- * @param {BaseRecord}   [data.record]       record - only in case of action with 'record`
- * @param {ViewHelpers}  data.h              view helpers
- * @param {Action}       data.action         object representing particular action
+ * @param {BaseAction~Context}       data                data passed as the context of the action
+ * @param {Object}       data.record         optionally record - for ['record'] action type
  */

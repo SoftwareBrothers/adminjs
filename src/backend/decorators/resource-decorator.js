@@ -95,6 +95,12 @@ class ResourceDecorator {
       if (typeof actions[key].isVisible === 'undefined') {
         actions[key].isVisible = true
       }
+      if (!actions[key].actionType) {
+        throw new ConfigurationError(
+          `action: "${actions[key].name}" does not have an "actionType" property`,
+          'BaseAction',
+        )
+      }
     })
 
     return actions
@@ -119,7 +125,7 @@ class ResourceDecorator {
       return { ...memo, [property.name()]: decorator }
     }, {})
 
-    // decorate all properties user gave in options but the don't exist in the resource
+    // decorate all properties user gave in options but they don't exist in the resource
     Object.keys(this.options.properties).forEach((key) => {
       if (!properties[key]) {
         const property = new BaseProperty({ path: key, isSortable: false })
@@ -209,35 +215,47 @@ class ResourceDecorator {
     return this.getProperties({ where: 'list', max: DEFAULT_MAX_ITEMS_IN_LIST })
   }
 
+  isAction(what, action, currentAdmin) {
+    if (!['isAccessible', 'isVisible'].includes(what)) {
+      throw new Error(`'what' has to be either "isAccessible" or "isVisible". You gave ${what}`)
+    }
+    let isAction
+    if (typeof action[what] === 'function') {
+      isAction = action[what]({
+        resource: this._resource,
+        action,
+        h: this.h,
+        currentAdmin,
+      })
+    } else if (typeof action[what] === 'undefined') {
+      isAction = true
+    } else {
+      isAction = action[what]
+    }
+    return isAction
+  }
+
+  isActionVisible(action, currentAdmin) {
+    return this.isAction('isVisible', action, currentAdmin)
+  }
+
+  isActionAccessible(action, currentAdmin) {
+    return this.isAction('isAccessible', action, currentAdmin)
+  }
+
   /**
    * List of all actions which should be invoked for entire resource and not
    * for a particular record
    *
    * @return  {Array<Action>}     Actions assigned to resources
    */
-  resourceActions() {
-    return Object.keys(this.actions)
-      .map(key => ({
-        // name: key,
-        ...this.actions[key],
-      }))
-      .filter((action) => {
-        let isVisible
-        if (typeof action.isVisible === 'function') {
-          isVisible = action.isVisible(this._resource)
-        } else if (typeof action.isVisible === 'undefined') {
-          isVisible = true
-        } else {
-          ({ isVisible } = action)
-        }
-        if (!action.actionType) {
-          throw new ConfigurationError(
-            `action: "${action.name}" does not have an "actionType" property`,
-            'BaseAction',
-          )
-        }
-        return action.actionType.includes('resource') && isVisible
-      })
+  resourceActions(currentAdmin) {
+    return Object.values(this.actions)
+      .filter(action => (
+        action.actionType.includes('resource')
+        && this.isActionVisible(action, currentAdmin)
+        && this.isActionAccessible(action, currentAdmin)
+      ))
   }
 
   /**
@@ -248,18 +266,13 @@ class ResourceDecorator {
    * @param {BaseRecord} record
    * @return  {Array<Action>}     Actions assigned to each record
    */
-  recordActions(record) {
-    return Object.keys(this.actions)
-      .map(key => this.actions[key])
-      .filter((action) => {
-        let isVisible
-        if (typeof action.isVisible === 'function') {
-          isVisible = action.isVisible(this._resource, record)
-        } else {
-          ({ isVisible } = action)
-        }
-        return action.actionType.includes('record') && isVisible
-      })
+  recordActions(currentAdmin) {
+    return Object.values(this.actions)
+      .filter(action => (
+        action.actionType.includes('record')
+        && this.isActionVisible(action, currentAdmin)
+        && this.isActionAccessible(action, currentAdmin)
+      ))
   }
 
   /**
@@ -309,7 +322,6 @@ class ResourceDecorator {
   static serializeAction(action) {
     return {
       name: action.name,
-      isVisible: action.isVisible,
       actionType: action.actionType,
       icon: action.icon,
       label: action.label,
@@ -340,17 +352,22 @@ class ResourceDecorator {
   /**
    * Returns JSON representation of a resource
    *
+   * @param {Object} currentAdmin
    * @return  {BaseResource~JSON}
    */
-  toJSON() {
+  toJSON(currentAdmin) {
     return {
       id: this._resource.id(),
       name: this.getResourceName(),
       parent: this.getParent(),
-      href: this.h.listUrl({ resourceId: this._resource.id() }),
+      href: this.h.resourceActionUrl({ resourceId: this._resource.id(), actionName: 'list' }),
       titleProperty: this.titleProperty().toJSON(),
-      resourceActions: this.resourceActions().map(ra => ResourceDecorator.serializeAction(ra)),
-      recordActions: this.recordActions().map(ra => ResourceDecorator.serializeAction(ra)),
+      resourceActions: this.resourceActions(
+        currentAdmin,
+      ).map(ra => ResourceDecorator.serializeAction(ra)),
+      recordActions: this.recordActions(
+        currentAdmin,
+      ).map(ra => ResourceDecorator.serializeAction(ra)),
       listProperties: this.getProperties({ where: 'list', max: DEFAULT_MAX_ITEMS_IN_LIST }).map(
         property => property.toJSON(),
       ),

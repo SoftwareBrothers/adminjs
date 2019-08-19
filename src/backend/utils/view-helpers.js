@@ -39,22 +39,20 @@ class ViewHelpers {
     return this.options.logoutPath
   }
 
+  listUrl({ resourceId }) {
+    console.warn(`
+      Deprecation: this function will be removed in the next versions.
+      Please use resourceActionUrl({ resourceId, actionName: 'list'})
+      instead`)
+    return this.resourceActionUrl({ resourceId, actionName: 'list' })
+  }
+
   /**
    * Returns URL for the dashboard
    * @return {String}
    */
   dashboardUrl() {
     return this.options.rootPath
-  }
-
-  /**
-   * Returns URL for the list view for a given resource
-   * @param {BaseResource} resource
-   * @param {Object} [query]
-   * @return {String}
-   */
-  listUrl({ resourceId }) {
-    return this.urlBuilder(['resources', resourceId])
   }
 
   resourceActionUrl({ resourceId, actionName }) {

@@ -33,7 +33,7 @@ module.exports = {
   handler: async (request, response, data) => {
     await data.resource.delete(request.params.recordId)
     return {
-      redirectUrl: data.h.listUrl({ resourceId: data.resource.id() }),
+      redirectUrl: data.h.resourceActionUrl({ resourceId: data.resource.id(), actionName: 'list' }),
     }
   },
 }

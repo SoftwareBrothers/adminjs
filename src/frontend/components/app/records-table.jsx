@@ -5,12 +5,12 @@ import { Link } from 'react-router-dom'
 import RecordInList from './record-in-list'
 import PropertyHeader from './property-header'
 import ViewHelpers from '../../../backend/utils/view-helpers'
-import { resourceType, pathsType, recordType } from '../../types'
+import { resourceType, recordType } from '../../types'
 
 import Table from '../ui/table'
 
 const RecordsTable = (props) => {
-  const { resource, paths, records, actionPerformed, sortBy, direction } = props
+  const { resource, records, actionPerformed, sortBy, direction } = props
   const h = new ViewHelpers()
   const newAction = h.resourceActionUrl({ resourceId: resource.id, actionName: 'new' })
   if (!records.length) {
@@ -47,7 +47,6 @@ const RecordsTable = (props) => {
           <RecordInList
             record={record}
             resource={resource}
-            paths={paths}
             key={record.id}
             actionPerformed={actionPerformed}
           />
@@ -59,7 +58,6 @@ const RecordsTable = (props) => {
 
 RecordsTable.propTypes = {
   resource: resourceType.isRequired,
-  paths: pathsType.isRequired,
   records: PropTypes.arrayOf(recordType).isRequired,
   actionPerformed: PropTypes.func.isRequired,
   sortBy: PropTypes.string.isRequired,
