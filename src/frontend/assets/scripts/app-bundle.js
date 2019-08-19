@@ -1116,7 +1116,8 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
 
 	/* eslint-disable no-param-reassign */
 	var groupResources = (resources => {
-	  const map = resources.reduce((memo, resource) => {
+	  const visibleResources = resources.filter(res => res.resourceActions.find(a => a.name === 'list'));
+	  const map = visibleResources.reduce((memo, resource) => {
 	    if (memo[resource.parent.name]) {
 	      memo[resource.parent.name].push(resource);
 	    } else {
@@ -1710,24 +1711,6 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
 	    return this.client.get(`/api/resources/${resourceId}`, {
 	      params: query
 	    });
-	  }
-	  /**
-	   * Get record from a given resource
-	   *
-	   * @param   {String}  resourceId  Id of a {@link BaseResource~JSON}
-	   * @param   {String}  recordId  Id of a {@link BaseRecord~JSON}
-	   *
-	   * @return  {Promise<ApiController~BaseRecord~JSON>}  response [axios](https://github.com/axios/axios)
-	   *                                                response with all the data
-	   */
-
-
-	  async getRecord({
-	    resourceId,
-	    recordId
-	  }) {
-	    const response = await this.client.get(`/api/resources/${resourceId}/${recordId}`);
-	    return response.data.record;
 	  }
 	  /**
 	   * Search by query string for records in a given resource.
@@ -19198,6 +19181,27 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
 	};
 	var PropertyHeader$1 = reactRouterDom.withRouter(PropertyHeader);
 
+	const NoRecords = props => {
+	  const {
+	    resource
+	  } = props;
+	  const canCreate = resource.resourceActions.find(a => a.name === 'new');
+	  const h = new viewHelpers();
+	  const newAction = h.resourceActionUrl({
+	    resourceId: resource.id,
+	    actionName: 'new'
+	  });
+	  return React__default.createElement("div", {
+	    className: "content has-text-centered"
+	  }, React__default.createElement("h3", null, "No records"), React__default.createElement("p", null, "There are no records in this resource.", canCreate ? React__default.createElement(React__default.Fragment, null, "Create", ' ', React__default.createElement(reactRouterDom.Link, {
+	    to: newAction
+	  }, "first record")) : ''));
+	};
+
+	NoRecords.propTypes = {
+	  resource: resourceType.isRequired
+	};
+
 	const StyledTable = styled__default.table.attrs({
 	  className: 'table is-fullwidth'
 	}).withConfig({
@@ -19253,18 +19257,11 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
 	    sortBy,
 	    direction
 	  } = props;
-	  const h = new viewHelpers();
-	  const newAction = h.resourceActionUrl({
-	    resourceId: resource.id,
-	    actionName: 'new'
-	  });
 
 	  if (!records.length) {
-	    return React__default.createElement("div", {
-	      className: "content has-text-centered"
-	    }, React__default.createElement("h3", null, "No records"), React__default.createElement("p", null, "There are no records in this resource. Create", ' ', React__default.createElement(reactRouterDom.Link, {
-	      to: newAction
-	    }, "first record")));
+	    return React__default.createElement(NoRecords, {
+	      resource: resource
+	    });
 	  }
 
 	  return React__default.createElement(Table, null, React__default.createElement("thead", null, React__default.createElement("tr", {

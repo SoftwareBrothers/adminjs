@@ -9,7 +9,7 @@ import Topbar from './topbar'
 import { pathsType } from '../../types'
 
 import {
-  Resource, Dashboard, ResourceAction, RecordAction,
+  Dashboard, ResourceAction, RecordAction,
 } from '../routes'
 
 const GlobalStyle = createGlobalStyle`
