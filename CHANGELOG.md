@@ -6,6 +6,25 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 Started from version 0.9.5
 
+## [1.0.0.beta1] - 2019-08-20
+
+### Added
+
+* added action hooks [#123]
+* access controll with BaseAction.isAccessible [#118]
+* added new `list` action to the configuration
+* created new `ActionDecorator` object
+
+### Deprecated
+
+* ResourceDecorator.recordsDecorator() in favour of new BaseAction.after hook
+* ViewHelpers#listUrl in favour of ViewHelpers#resourceAction url
+
+### Fixed
+
+* create new record button is hidden when user cannot have an access to it [#122]
+
+
 ## [0.9.6] - 2019-08-17
 
 ### Added
