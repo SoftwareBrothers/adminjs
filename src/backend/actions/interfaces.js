@@ -155,6 +155,7 @@
  * @description
  * handler function which will be invoked by {@link ApiController#resourceAction}
  * or {@link ApiController#recordAction}
+ * @async
  * @method
  * @memberof BaseAction
  *
@@ -171,6 +172,7 @@
  * Before action hook. When it is given - it is performed before the {@link BaseAction.handler}
  * method.
  * @method
+ * @async
  * @memberof BaseAction
  * @param {BaseAction~Request}  request        Request object passed by the backend framework
  * @return {BaseAction~Request}                modified request
@@ -179,11 +181,12 @@
 /**
  * @name after
  * @description
+ * @async
  * After action hook. When it is given - it is performed on the returned,
  * by handler the {@link BaseAction.handler}, object,
  *
  * @method
  * @memberof BaseAction
- * @param {Object}  data        data returned by the {@link BaseAction#handler} function
+ * @param {Object}  data        data returned by the {@link BaseAction.handler} function
  * @return {Object}                modified data
  */
