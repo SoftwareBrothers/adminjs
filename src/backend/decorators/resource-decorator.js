@@ -137,6 +137,9 @@ class ResourceDecorator {
   }
 
   async recordsDecorator(populatedRecords) {
+    console.warn(`
+      Deprecation: this function will be removed in the next versions.
+      Please use BaseAction.after hook instead`)
     if (this.options.recordsDecorator) {
       return this.options.recordsDecorator(populatedRecords)
     }
