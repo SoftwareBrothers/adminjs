@@ -1980,7 +1980,7 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
 	        recordId
 	      }).then(response => {
 	        addNotice({
-	          message: 'Record has been successfully removed'
+	          message: `action ${action.name} has been successfully performed`
 	        });
 
 	        if (location.pathname !== response.data.redirectUrl) {

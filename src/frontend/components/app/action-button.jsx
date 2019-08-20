@@ -43,7 +43,7 @@ class ActionButton extends React.PureComponent {
         resourceId, actionName: action.name, recordId,
       }).then((response) => {
         addNotice({
-          message: 'Record has been successfully removed',
+          message: `action ${action.name} has been successfully performed`,
         })
         if (location.pathname !== response.data.redirectUrl) {
           history.push(response.data.redirectUrl)
