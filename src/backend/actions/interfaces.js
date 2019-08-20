@@ -41,7 +41,7 @@
  * @property {AdminBro}     _admin         current AdminBro instance
  * @property {BaseResource} resource       recource on which action was performed
  * @property {ViewHelpers}  h              view helpers
- * @property {Action}       action         object representing particular action
+ * @property {ActionDecorator} action      object representing particular action
  * @property {Object}       currentAdmin   logged in admin
  */
 

@@ -2126,7 +2126,8 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
 
 	  actions = actions.filter(ra => ![action.name, 'list'].includes(ra.name));
 	  const title = action ? action.label : resource.name;
-	  return React__default.createElement(HeaderWrapper, null, React__default.createElement(HeaderTitle, null, !toggleFilter && React__default.createElement(BackBtn, {
+	  const isList = action && action.name === 'list';
+	  return React__default.createElement(HeaderWrapper, null, React__default.createElement(HeaderTitle, null, !isList && React__default.createElement(BackBtn, {
 	    to: h.resourceActionUrl({
 	      resourceId,
 	      actionName: 'list'
@@ -19069,7 +19070,7 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
 	      record: record
 	    }))), React__default.createElement(Td, {
 	      key: "options"
-	    }, React__default.createElement(Dropdown$1, {
+	    }, recordActions.length ? React__default.createElement(Dropdown$1, {
 	      className: "is-right is-hoverable"
 	    }, recordActions.map(action => React__default.createElement(ActionButton$1, {
 	      action: action,
@@ -19078,7 +19079,7 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
 	      recordId: record.id,
 	      actionPerformed: actionPerformed,
 	      className: "is-white in-dropdown"
-	    })))));
+	    }))) : ''));
 	  }
 
 	}

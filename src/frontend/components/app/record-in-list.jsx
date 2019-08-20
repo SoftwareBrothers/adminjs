@@ -37,18 +37,20 @@ export default class RecordInList extends React.PureComponent {
           </Td>
         ))}
         <Td key="options">
-          <Dropdown className="is-right is-hoverable">
-            {recordActions.map(action => (
-              <ActionButton
-                action={action}
-                key={action.name}
-                resourceId={resource.id}
-                recordId={record.id}
-                actionPerformed={actionPerformed}
-                className="is-white in-dropdown"
-              />
-            ))}
-          </Dropdown>
+          {recordActions.length ? (
+            <Dropdown className="is-right is-hoverable">
+              {recordActions.map(action => (
+                <ActionButton
+                  action={action}
+                  key={action.name}
+                  resourceId={resource.id}
+                  recordId={record.id}
+                  actionPerformed={actionPerformed}
+                  className="is-white in-dropdown"
+                />
+              ))}
+            </Dropdown>
+          ) : ''}
         </Td>
       </tr>
     )

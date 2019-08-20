@@ -73,7 +73,7 @@ class ApiController {
     const queryString = request.params && request.params.query
     const resource = this._admin.findResource(request.params.resourceId)
     const decorated = resource.decorate()
-    if (!decorated.isActionAccessible(decorated.actions.list, this.currentAdmin)) {
+    if (!decorated.actions.list.isAccessible(this.currentAdmin)) {
       throw new ForbiddenError('list', resource.id)
     }
     const titlePropertyName = decorated.titleProperty().name()
@@ -107,8 +107,7 @@ class ApiController {
    */
   async resourceAction(request, response) {
     const actionContext = await this.getActionContext(request)
-    const decorated = actionContext.resource.decorate()
-    if (!decorated.isActionAccessible(actionContext.action, this.currentAdmin)) {
+    if (!actionContext.action.isAccessible(this.currentAdmin)) {
       throw new ForbiddenError(actionContext.action.name, actionContext.resource.id)
     }
     return actionContext.action.handler(request, response, actionContext)
@@ -128,8 +127,7 @@ class ApiController {
   async recordAction(request, response) {
     const { recordId } = request.params
     const actionContext = await this.getActionContext(request)
-    const decorated = actionContext.resource.decorate()
-    if (!decorated.isActionAccessible(actionContext.action, this.currentAdmin)) {
+    if (!actionContext.action.isAccessible(this.currentAdmin)) {
       throw new ForbiddenError(actionContext.action.name, actionContext.resource.id)
     }
     let record = await actionContext.resource.findOne(recordId);

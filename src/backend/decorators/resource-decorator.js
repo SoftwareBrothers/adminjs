@@ -1,6 +1,7 @@
 const _ = require('lodash')
 const BaseProperty = require('../adapters/base-property')
 const PropertyDecorator = require('./property-decorator')
+const ActionDecorator = require('./action-decorator')
 const ViewHelpers = require('../utils/view-helpers')
 const ConfigurationError = require('../utils/configuration-error')
 
@@ -31,7 +32,7 @@ const DEFAULT_MAX_ITEMS_IN_LIST = 8
  * @property {String} parent.name       name of the parent category
  * @property {String} parent.icon       icon class of a parent category (i.e. 'icon-bomb')
  * @property {Object<String, PropertyOptions>} properties list of properties with their options
- * @property {Object<String, Action>} actions   list of actions
+ * @property {Object<String, ActionDecorator>} actions   list of actions
  */
 
 /**
@@ -68,7 +69,7 @@ class ResourceDecorator {
 
     /**
      * Actions for a resource
-     * @type {Object<String, Action>}
+     * @type {Object<String, ActionDecorator>}
      */
     this.actions = this.decorateActions()
   }
@@ -78,7 +79,7 @@ class ResourceDecorator {
    * {@link AdminBro.ACTIONS default actions} and actions specified by the user
    * via {@link AdminBroOptions}
    *
-   * @returns {Object<String, Action>}
+   * @returns {Object<String, ActionDecorator>}
    */
   decorateActions() {
     const { ACTIONS } = this._admin.constructor
@@ -92,15 +93,11 @@ class ResourceDecorator {
     Object.keys(actions).forEach((key) => {
       actions[key].name = actions[key].name || key
       actions[key].label = actions[key].label || key
-      if (typeof actions[key].isVisible === 'undefined') {
-        actions[key].isVisible = true
-      }
-      if (!actions[key].actionType) {
-        throw new ConfigurationError(
-          `action: "${actions[key].name}" does not have an "actionType" property`,
-          'BaseAction',
-        )
-      }
+      actions[key] = new ActionDecorator({
+        action: actions[key],
+        admin: this._admin,
+        resource: this._resource,
+      })
     })
 
     return actions
@@ -215,34 +212,6 @@ class ResourceDecorator {
     return this.getProperties({ where: 'list', max: DEFAULT_MAX_ITEMS_IN_LIST })
   }
 
-  isAction(what, action, currentAdmin) {
-    if (!['isAccessible', 'isVisible'].includes(what)) {
-      throw new Error(`'what' has to be either "isAccessible" or "isVisible". You gave ${what}`)
-    }
-    let isAction
-    if (typeof action[what] === 'function') {
-      isAction = action[what]({
-        resource: this._resource,
-        action,
-        h: this.h,
-        currentAdmin,
-      })
-    } else if (typeof action[what] === 'undefined') {
-      isAction = true
-    } else {
-      isAction = action[what]
-    }
-    return isAction
-  }
-
-  isActionVisible(action, currentAdmin) {
-    return this.isAction('isVisible', action, currentAdmin)
-  }
-
-  isActionAccessible(action, currentAdmin) {
-    return this.isAction('isAccessible', action, currentAdmin)
-  }
-
   /**
    * List of all actions which should be invoked for entire resource and not
    * for a particular record
@@ -252,9 +221,9 @@ class ResourceDecorator {
   resourceActions(currentAdmin) {
     return Object.values(this.actions)
       .filter(action => (
-        action.actionType.includes('resource')
-        && this.isActionVisible(action, currentAdmin)
-        && this.isActionAccessible(action, currentAdmin)
+        action.isResourceType()
+        && action.isVisible(currentAdmin)
+        && action.isAccessible(currentAdmin)
       ))
   }
 
@@ -269,9 +238,9 @@ class ResourceDecorator {
   recordActions(currentAdmin) {
     return Object.values(this.actions)
       .filter(action => (
-        action.actionType.includes('record')
-        && this.isActionVisible(action, currentAdmin)
-        && this.isActionAccessible(action, currentAdmin)
+        action.isRecordType()
+        && action.isVisible(currentAdmin)
+        && action.isAccessible(currentAdmin)
       ))
   }
 
@@ -298,37 +267,6 @@ class ResourceDecorator {
    */
   titleOf(record) {
     return record.param(this.titleProperty().name())
-  }
-
-  /**
-   * @typedef {Object} Action~JSON
-   * @description JSON representation of an {@link Action}
-   * @property {String} name
-   * @property {String | Array<String>} actionType one of 'record' 'resource or
-   *                                               an array containing both
-   * @property {String} icon
-   * @property {String} label
-   * @property {String} guard
-   * @property {String} component
-   */
-
-  /**
-   * Serializes given {@link Action} to JSON format.
-   *
-   * @param   {Action}  action
-   *
-   * @return  {Action~JSON}
-   */
-  static serializeAction(action) {
-    return {
-      name: action.name,
-      actionType: action.actionType,
-      icon: action.icon,
-      label: action.label,
-      guard: action.guard,
-      showFilter: action.showFilter,
-      component: action.component,
-    }
   }
 
   /**
@@ -362,12 +300,8 @@ class ResourceDecorator {
       parent: this.getParent(),
       href: this.h.resourceActionUrl({ resourceId: this._resource.id(), actionName: 'list' }),
       titleProperty: this.titleProperty().toJSON(),
-      resourceActions: this.resourceActions(
-        currentAdmin,
-      ).map(ra => ResourceDecorator.serializeAction(ra)),
-      recordActions: this.recordActions(
-        currentAdmin,
-      ).map(ra => ResourceDecorator.serializeAction(ra)),
+      resourceActions: this.resourceActions(currentAdmin).map(ra => ra.toJSON()),
+      recordActions: this.recordActions(currentAdmin).map(ra => ra.toJSON()),
       listProperties: this.getProperties({ where: 'list', max: DEFAULT_MAX_ITEMS_IN_LIST }).map(
         property => property.toJSON(),
       ),

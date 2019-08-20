@@ -12,19 +12,26 @@ describe('ApiController', function () {
     this.action = {
       name: 'actionName',
       handler: this.sinon.stub(),
+      isAccessible: this.sinon.stub().returns(true),
     }
     this.isActionAccessibleStub = this.sinon.stub()
     const property = { name: () => this.fieldName, reference: () => false }
     this.resourceStub = {
       decorate: this.sinon.stub().returns({
-        actions: { list: {}, [this.action.name]: {} },
+        actions: {
+          list: this.action,
+          edit: this.action,
+          show: this.action,
+          delete: this.action,
+          new: this.action,
+          [this.action.name]: {},
+        },
         getListProperties: this.sinon.stub().returns([property]),
         titleProperty: () => ({ name: () => this.fieldName }),
         properties: { [property.name()]: property },
         resourceActions: () => [this.action],
         recordActions: () => [this.action],
         recordsDecorator: records => records,
-        isActionAccessible: this.isActionAccessibleStub.returns(true),
       }),
       find: this.sinon.stub().returns([]),
       count: this.sinon.stub().returns(this.total),
@@ -48,7 +55,7 @@ describe('ApiController', function () {
     })
 
     it('throws an error when user doesn\'t have rights to access the list action', function (done) {
-      this.isActionAccessibleStub.returns(false)
+      this.action.isAccessible.returns(false)
       this.apiController.search({ params: {} }, {}).catch((error) => {
         expect(error.name).to.equal('ForbiddenError')
         done()
@@ -79,7 +86,7 @@ describe('ApiController', function () {
         },
       }, {})
 
-      expect(this.isActionAccessibleStub).to.have.been.calledWith(this.action, this.currentAdmin)
+      expect(this.action.isAccessible).to.have.been.calledWith(this.currentAdmin)
     })
   })
 
@@ -110,7 +117,7 @@ describe('ApiController', function () {
         },
       }, {})
 
-      expect(this.isActionAccessibleStub).to.have.been.calledWith(this.action, this.currentAdmin)
+      expect(this.action.isAccessible).to.have.been.calledWith(this.currentAdmin)
     })
   })
 })

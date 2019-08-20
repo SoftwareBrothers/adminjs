@@ -89,11 +89,12 @@ const ActionHeader = (props) => {
   actions = actions.filter(ra => ![action.name, 'list'].includes(ra.name))
 
   const title = action ? action.label : resource.name
+  const isList = action && action.name === 'list'
 
   return (
     <HeaderWrapper>
       <HeaderTitle>
-        {!toggleFilter && (
+        {!isList && (
           <BackBtn to={h.resourceActionUrl({ resourceId, actionName: 'list' })}>
             <i className="icomoon-pagination-left" />
           </BackBtn>
