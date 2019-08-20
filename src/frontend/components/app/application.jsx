@@ -9,7 +9,7 @@ import Topbar from './topbar'
 import { pathsType } from '../../types'
 
 import {
-  Resource, Dashboard, ResourceAction, RecordAction,
+  Dashboard, ResourceAction, RecordAction,
 } from '../routes'
 
 const GlobalStyle = createGlobalStyle`
@@ -50,7 +50,6 @@ const App = (props) => {
 
   const recordActionUrl = h.recordActionUrl({ resourceId, recordId, actionName })
   const resourceActionUrl = h.resourceActionUrl({ resourceId, actionName })
-  const listUrl = h.listUrl({ resourceId })
 
   return (
     <React.Fragment>
@@ -61,7 +60,6 @@ const App = (props) => {
           <Topbar />
           <Switch>
             <Route path={h.dashboardUrl()} exact component={Dashboard} />
-            <Route path={listUrl} exact component={Resource} />
             <Route path={resourceActionUrl} exact component={ResourceAction} />
             <Route path={recordActionUrl} exact component={RecordAction} />
           </Switch>

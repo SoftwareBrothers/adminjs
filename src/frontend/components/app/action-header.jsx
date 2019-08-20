@@ -83,16 +83,19 @@ const ActionHeader = (props) => {
     resource, toggleFilter, actionPerformed, recordId, action, tag,
   } = props
   const resourceId = resource.id
-  const actions = recordId
-    ? resource.recordActions.filter(ra => ra.name !== action.name)
-    : resource.resourceActions.filter(ra => ra.name !== (action && action.name))
+  let actions = recordId ? resource.recordActions : resource.resourceActions
+
+  // list action is not accessible via the ActionHeader buttons
+  actions = actions.filter(ra => ![action.name, 'list'].includes(ra.name))
+
   const title = action ? action.label : resource.name
+  const isList = action && action.name === 'list'
 
   return (
     <HeaderWrapper>
       <HeaderTitle>
-        {!toggleFilter && (
-          <BackBtn to={h.listUrl({ resourceId })}>
+        {!isList && (
+          <BackBtn to={h.resourceActionUrl({ resourceId, actionName: 'list' })}>
             <i className="icomoon-pagination-left" />
           </BackBtn>
         )}

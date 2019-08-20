@@ -9,7 +9,7 @@
 
 /**
  * @typedef {Object} ApiResponse
- * @property {BaseRecord~JSON} redirectUrl in case of success it fills this filed
+ * @property {String} redirectUrl in case of success it fills this filed
  *                                          to indicate that there should be
  *                                          redirect after the action.
  */
@@ -33,7 +33,7 @@ module.exports = {
   handler: async (request, response, data) => {
     await data.resource.delete(request.params.recordId)
     return {
-      redirectUrl: data.h.listUrl({ resourceId: data.resource.id() }),
+      redirectUrl: data.h.resourceActionUrl({ resourceId: data.resource.id(), actionName: 'list' }),
     }
   },
 }

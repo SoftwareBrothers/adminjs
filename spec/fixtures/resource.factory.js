@@ -1,4 +1,5 @@
 require('./property.factory')
+require('./action.factory')
 const { factory } = require('factory-girl')
 
 factory.define('resource', Object, {
@@ -9,8 +10,15 @@ factory.define('resource', Object, {
     name: 'parent',
     icon: 'parent-icon',
   },
-  recordActions: [],
-  resourceActions: [],
+  recordActions: [
+    factory.build('recordAction', { name: 'edit' }),
+    factory.build('recordAction', { name: 'show' }),
+    factory.build('recordAction', { name: 'delete' }),
+  ],
+  resourceActions: [
+    factory.build('resourceAction', { name: 'list' }),
+    factory.build('resourceAction', { name: 'new' }),
+  ],
 }, {
   afterBuild: async (model) => {
     const properties = await factory.buildMany('property', 5)

@@ -1,6 +1,9 @@
 /* eslint-disable no-param-reassign */
 export default (resources) => {
-  const map = resources.reduce((memo, resource) => {
+  const visibleResources = resources.filter(res => (
+    res.resourceActions.find(a => a.name === 'list')
+  ))
+  const map = visibleResources.reduce((memo, resource) => {
     if (memo[resource.parent.name]) {
       memo[resource.parent.name].push(resource)
     } else {

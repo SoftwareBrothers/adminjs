@@ -6,6 +6,11 @@ const resourceStub = require('../../../spec/backend/helpers/resource-stub')
 
 describe('ResourceDecorator', function () {
   beforeEach(function () {
+    this.currentAdmin = {
+      email: 'some@email.com',
+      name: 'somename',
+      otherValue: 'someother-value',
+    }
     this.stubbedResource = resourceStub(this.sinon)
     this.stubbedAdmin = this.sinon.createStubInstance(AdminBro)
     this.stubbedAdmin.options = {}
@@ -127,9 +132,10 @@ describe('ResourceDecorator', function () {
         this.decorator = new ResourceDecorator({ ...this.args, options })
       })
 
-      it('returns one default resource action', function () {
-        expect(this.decorator.resourceActions()).to.have.lengthOf(1)
-        const action = this.decorator.resourceActions()[0]
+      it('returns 2 default resource actions', function () {
+        const actions = this.decorator.resourceActions(this.currentAdmin)
+        expect(actions).to.have.lengthOf(2)
+        const [action] = actions
         expect(action).to.have.property('name', 'new')
       })
     })
@@ -157,32 +163,49 @@ describe('ResourceDecorator', function () {
   describe('#recordAction', function () {
     it('returns default actions', function () {
       const options = {}
-      const actions = new ResourceDecorator({ ...this.args, options }).recordActions()
+      const actions = new ResourceDecorator({
+        ...this.args, options,
+      }).recordActions(this.currentAdmin)
       expect(actions).to.have.lengthOf(3)
     })
 
     it('shows custom actions specified by the user', function () {
       const options = { actions: { customAction: { actionType: ['record'] } } }
-      const actions = new ResourceDecorator({ ...this.args, options }).recordActions()
+      const actions = new ResourceDecorator({
+        ...this.args,
+        options,
+      }).recordActions(this.currentAdmin)
       expect(actions).to.have.lengthOf(4)
     })
 
     it('hides the given action if user set isVisible to false', function () {
       const options = { actions: { show: { isVisible: false } } }
-      const actions = new ResourceDecorator({ ...this.args, options }).recordActions()
+      const actions = new ResourceDecorator({
+        ...this.args,
+        options,
+      }).recordActions(this.currentAdmin)
       expect(actions).to.have.lengthOf(2)
     })
 
-    it('hides the given action if user set isVisible to function returning false', function () {
-      const options = { actions: { show: { isVisible: () => false } } }
-      const actions = new ResourceDecorator({ ...this.args, options }).recordActions()
+    it('passess properties to isVisible when it is a function', function () {
+      const options = { actions: { show: { isVisible: (data) => {
+        // it passess current admin to the isVisible function
+        expect(data.currentAdmin).to.deep.equal(this.currentAdmin)
+        expect(data.resource.id).to.equal(this.stubbedResource.id)
+        expect(data.action.name).to.equal('show')
+        return false
+      } } } }
+      const actions = new ResourceDecorator({
+        ...this.args,
+        options,
+      }).recordActions(this.currentAdmin)
       expect(actions).to.have.lengthOf(2)
     })
   })
 
   describe('#toJSON', function () {
     it('returns JSON representation of a resource', function () {
-      const json = new ResourceDecorator(this.args).toJSON()
+      const json = new ResourceDecorator(this.args).toJSON(this.currentAdmin)
       expect(json).to.have.keys(
         'id',
         'name',
@@ -196,6 +219,16 @@ describe('ResourceDecorator', function () {
         'showProperties',
         'filterProperties',
       )
+    })
+
+    it('passess current admin to the resource and record actions', function () {
+      const resourceActionsSpy = this.sinon.spy(ResourceDecorator.prototype, 'resourceActions')
+      const recordActionsSpy = this.sinon.spy(ResourceDecorator.prototype, 'recordActions')
+
+      new ResourceDecorator(this.args).toJSON(this.currentAdmin)
+
+      expect(resourceActionsSpy).to.have.been.calledWith(this.currentAdmin)
+      expect(recordActionsSpy).to.have.been.calledWith(this.currentAdmin)
     })
   })
 })

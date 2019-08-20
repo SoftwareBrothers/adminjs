@@ -13,7 +13,7 @@ const initializeStore = (admin, currentAdmin) => {
   store.dispatch(initializeResources(
     admin.resources.map((r) => {
       try {
-        return r.decorate().toJSON()
+        return r.decorate().toJSON(currentAdmin)
       } catch (e) {
         console.log('error', r._decorated)
         throw e

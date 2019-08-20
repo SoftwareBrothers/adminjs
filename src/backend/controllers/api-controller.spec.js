@@ -12,10 +12,20 @@ describe('ApiController', function () {
     this.action = {
       name: 'actionName',
       handler: this.sinon.stub(),
+      isAccessible: this.sinon.stub().returns(true),
     }
+    this.isActionAccessibleStub = this.sinon.stub()
     const property = { name: () => this.fieldName, reference: () => false }
     this.resourceStub = {
       decorate: this.sinon.stub().returns({
+        actions: {
+          list: this.action,
+          edit: this.action,
+          show: this.action,
+          delete: this.action,
+          new: this.action,
+          [this.action.name]: {},
+        },
         getListProperties: this.sinon.stub().returns([property]),
         titleProperty: () => ({ name: () => this.fieldName }),
         properties: { [property.name()]: property },
@@ -32,29 +42,10 @@ describe('ApiController', function () {
       findResource: this.sinon.stub().returns(this.resourceStub),
       options: { rootPath: '/admin' },
     }
-    this.apiController = new ApiController({ admin: this.adminStub })
+    this.currentAdmin = { email: 'john@doe.com', name: 'John' }
+    this.apiController = new ApiController({ admin: this.adminStub }, this.currentAdmin)
 
     this.sinon.stub(Filter.prototype, 'populate').returns([this.recordStub])
-  })
-
-  describe('#index', function () {
-    beforeEach(async function () {
-      this.response = await this.apiController.index({}, {})
-    })
-
-    it('returns default meta data when no were given', function () {
-      expect(this.response.meta).to.deep.equal({
-        total: this.total,
-        perPage: 10,
-        page: 1,
-        direction: 'asc',
-        sortBy: this.fieldName,
-      })
-    })
-
-    it('returns an empty array of records', function () {
-      expect(this.response.records).to.have.lengthOf(0)
-    })
   })
 
   describe('#search', function () {
@@ -62,12 +53,13 @@ describe('ApiController', function () {
       const response = await this.apiController.search({ params: {} }, {})
       expect(response.records).to.have.lengthOf(0)
     })
-  })
 
-  describe('#get', function () {
-    it('returns record', async function () {
-      const response = await this.apiController.get({}, {})
-      expect(response.record).to.deep.equal(this.recordJSON)
+    it('throws an error when user doesn\'t have rights to access the list action', function (done) {
+      this.action.isAccessible.returns(false)
+      this.apiController.search({ params: {} }, {}).catch((error) => {
+        expect(error.name).to.equal('ForbiddenError')
+        done()
+      })
     })
   })
 
@@ -86,6 +78,16 @@ describe('ApiController', function () {
         this.sinon.match.has('action', this.action),
       )
     })
+
+    it('calls isActionAccessible on the resource decorator', async function () {
+      await this.apiController.resourceAction({
+        params: {
+          action: this.action.name,
+        },
+      }, {})
+
+      expect(this.action.isAccessible).to.have.been.calledWith(this.currentAdmin)
+    })
   })
 
   describe('#recordAction', function () {
@@ -93,6 +95,7 @@ describe('ApiController', function () {
       await this.apiController.recordAction({
         params: {
           action: this.action.name,
+          recordId: 'id',
         },
       }, {})
       expect(
@@ -104,6 +107,17 @@ describe('ApiController', function () {
           this.sinon.match.has('record', this.recordStub),
         ),
       )
+    })
+
+    it('calls isActionAccessible on the resource decorator', async function () {
+      await this.apiController.recordAction({
+        params: {
+          action: this.action.name,
+          recordId: 'id',
+        },
+      }, {})
+
+      expect(this.action.isAccessible).to.have.been.calledWith(this.currentAdmin)
     })
   })
 })
