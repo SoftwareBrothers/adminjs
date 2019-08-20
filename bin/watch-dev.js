@@ -7,7 +7,7 @@ async function build() {
     name: 'AdminBro',
     input: `${__dirname}/../src/frontend/bundle-entry.jsx`,
     file: `${__dirname}/../src/frontend/assets/scripts/app-bundle.js`,
-    minify: false,
+    minify: true,
     watch: true,
     babelConfig: {
       plugins: [runtime, styled],
