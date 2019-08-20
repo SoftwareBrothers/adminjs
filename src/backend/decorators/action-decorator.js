@@ -15,6 +15,8 @@ const ViewHelpers = require('../utils/view-helpers')
 
 /**
  * Decorates an action
+ *
+ * @category Decorators
  */
 class ActionDecorator {
   /**

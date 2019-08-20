@@ -9,7 +9,7 @@
 
 /**
  * @typedef {Object} ApiResponse
- * @property {BaseRecord~JSON} redirectUrl in case of success it fills this filed
+ * @property {String} redirectUrl in case of success it fills this filed
  *                                          to indicate that there should be
  *                                          redirect after the action.
  */

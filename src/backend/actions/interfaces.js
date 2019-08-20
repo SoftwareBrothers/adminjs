@@ -46,6 +46,16 @@
  */
 
 /**
+ * @typedef {Object} BaseAction~Request
+ * @property {Object}       request             Request object passed by the backend framework
+ * @property {Object}       request.params      passed via the URL like _resourceId_,
+ *                                    _recordId_, or _action_ name
+ * @property {Object}       request.payload     post data send in request
+ * @property {Object}       request.query       query string parameters
+ * @property {String}       request.method      either 'post' or 'get'
+ */
+
+/**
  * @name name
  * @description action uniq name
  * @type {String}
@@ -64,7 +74,7 @@
  * @example
  * {
  *   ...,
- *   isVisible: (data) => data.currentAdmin.role == 'manager',
+ *   isVisible: (data) => data.currentAdmin.role === 'manager',
  *   ...
  * }
  */
@@ -72,8 +82,8 @@
 /**
  * @name isAccessible
  * @description
- * indicates if action should can be invoked for given invocation context.
- * Similar to `isVisible` - it also can be a simple boolean value.
+ * indicates if action can be invoked for given invocation context.
+ * Similar to {@link BaseAction.isVisible} - it also can be a simple boolean value.
  * @method
  * @memberof BaseAction
  * @param {BaseAction~Context}       data      data passed as the context of the action
@@ -87,7 +97,7 @@
 
 /**
  * @name label
- * @description name of the actio which will appear in the UI
+ * @description name of the action which will appear in the UI
  * @type {String}
  * @memberof BaseAction
  */
@@ -127,10 +137,16 @@
  * @description
  * Component which will be used to render the action.
  * Action components accepts following prop types:
+ *
  * 1. resource: {@link BaseResource~JSON}
  * 2. action: {@link Action~JSON}
- * 3. recordId: String
- * @type {Component}
+ * 3. _(optional)_ recordId: String _(for recordAction)_
+ *
+ * When component is set to `false` then action doesn't have it's own view.
+ * Instead after clicking button it is immediatelly performed. Example of
+ * an action without a view is {@link module:DeleteAction}.
+ *
+ * @type {Component | Boolean}
  * @memberof BaseAction
  */
 
@@ -142,13 +158,32 @@
  * @method
  * @memberof BaseAction
  *
- * @param {Object}       request             Request object passed by the backend framework
- * @param {Object}       request.params      passed via the URL like _resourceId_,
- *                                    _recordId_, or _action_ name
- * @param {Object}       request.payload     post data send in request
- * @param {Object}       request.query       query string parameters
- * @param {String}       request.method      either 'post' or 'get'
- * @param {Object}       response            Response object passed by the backend framework
- * @param {BaseAction~Context}       data                data passed as the context of the action
- * @param {Object}       data.record         optionally record - for ['record'] action type
+ * @param {BaseAction~Request}  request        Request object passed by the backend framework
+ * @param {Object}              response       Response object passed by the backend framework
+ * @param {BaseAction~Context}  data           data passed as the context of the action
+ * @param {Object}              data.record    optionally record - for ['record'] action type
+ * @return {Object}             custom object returned by the action
+ */
+
+/**
+ * @name before
+ * @description
+ * Before action hook. When it is given - it is performed before the {@link BaseAction.handler}
+ * method.
+ * @method
+ * @memberof BaseAction
+ * @param {BaseAction~Request}  request        Request object passed by the backend framework
+ * @return {BaseAction~Request}                modified request
+ */
+
+/**
+ * @name after
+ * @description
+ * After action hook. When it is given - it is performed on the returned,
+ * by handler the {@link BaseAction.handler}, object,
+ *
+ * @method
+ * @memberof BaseAction
+ * @param {Object}  data        data returned by the {@link BaseAction#handler} function
+ * @return {Object}                modified data
  */
