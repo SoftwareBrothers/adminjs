@@ -6,6 +6,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 Started from version 0.9.5
 
+## [1.0.2] - 2019-08-21
+
+### Fixed
+
+* fix error for nested fields in filter [#115]
+
+### Changed
+
+* change deprecation message to better show which function is deprecated
+
 ## [1.0.1] - 2019-08-21
 
 ### Fixed
