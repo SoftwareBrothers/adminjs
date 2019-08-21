@@ -19,7 +19,6 @@ const env = {
 const store = createStore(window.REDUX_STATE)
 const theme = window.THEME
 
-
 const Application = (
   <Provider store={store}>
     <ThemeProvider theme={theme}>
