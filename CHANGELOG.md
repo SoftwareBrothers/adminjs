@@ -6,6 +6,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 Started from version 0.9.5
 
+## [1.0.1] - 2019-08-21
+
+### Fixed
+
+* fix error for not existing route [#127]
+
 ## [1.0.0] - 2019-08-20
 
 ### Added
