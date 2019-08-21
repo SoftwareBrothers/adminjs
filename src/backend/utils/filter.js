@@ -1,3 +1,5 @@
+const { unflatten, flatten } = require('flat')
+
 /**
  * @typedef {Object} Filter~Property
  * @property {String} key
@@ -12,47 +14,27 @@
  */
 class Filter {
   /**
-   * Generates filter key for a given property. It performs 2 operations:
+   * Changes raw nested filters to form Object<path, value>.
    *
-   * - adds prefix `filter.` to a property name
-   * - replaces all dots to double dashes
-   *
-   * Why we replace dots: this is bacause when we will have nested
-   * field like `place.date` we would like it to be present in filters in a following
-   * fashion:
-   * ```
-   * filters: {
-   *   'place.date': {
-   *     from: someDate,
-   *     to: someOtherDate,
-   *   },
+   * @example
+   * const filters = {
+   *  nested: {field: 'ala'},
+   *  'dataField~~from': '2019-08-14'
    * }
-   * ```
-   * if we don't replace dots they will be unflatten and we will have filters:
-   * `{place: {date: {from...}}}`.
    *
-   * So the idea is to replace dots to double dashes, and then (after unflattening) - change these
-   * double dashes again to dots.
+   * const normalized = Filter.normalizeFilters(filters)
+   * // {
+   * //   'nested.filter': 'ala',
+   * //   'dataField': {from: '2019-08-14'}
+   * // }
    *
-   * @param   {BaseProperty}  property
    *
-   * @return  {String}
+   * @param   {[type]}  filters  [filters description]
+   *
+   * @return  {[type]}           [return description]
    */
-  static toFilterKey(property) {
-    const escaped = property.name().replace(/\./g, '--')
-    return `filters.${escaped}`
-  }
-
-  /**
-   * Replaces escaped filter key to path
-   *
-   * @param   {String}  filterKey  escaped filter key
-   *
-   * @return  {String}
-   * @see Filter.toFilterKey
-   */
-  static filterKeyToPath(filterKey) {
-    return filterKey.replace(/--/g, '.')
+  static normalizeKeys(filters) {
+    return unflatten(flatten(filters), { delimiter: Filter.PARAM_SEPARATOR })
   }
 
   /**
@@ -64,17 +46,15 @@ class Filter {
     /**
      * @type {Object<String, Filter~Property>}
      */
-    this.filters = Object.keys(filters).reduce((memo, key) => {
-      const path = Filter.filterKeyToPath(key)
-      return {
-        [path]: {
-          path,
-          property: this.resource.property(path),
-          value: filters[key],
-        },
-        ...memo,
-      }
-    }, {})
+    const normalized = Filter.normalizeKeys(filters)
+    this.filters = Object.keys(normalized).reduce((memo, path) => ({
+      [path]: {
+        path,
+        property: this.resource.property(path),
+        value: normalized[path],
+      },
+      ...memo,
+    }), {})
   }
 
   /**
@@ -110,5 +90,7 @@ class Filter {
     return !!Object.keys(this.filters).length
   }
 }
+
+Filter.PARAM_SEPARATOR = '~~'
 
 module.exports = Filter

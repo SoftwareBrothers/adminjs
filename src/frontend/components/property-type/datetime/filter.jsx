@@ -3,6 +3,9 @@ import PropTypes from 'prop-types'
 
 import PropertyInFilter, { Label } from '../../ui/property-in-filter'
 import { propertyType } from '../../../types'
+import BackendFilter from '../../../../backend/utils/filter'
+
+const { PARAM_SEPARATOR } = BackendFilter
 
 export default class Filter extends React.Component {
   constructor(props) {
@@ -20,8 +23,8 @@ export default class Filter extends React.Component {
 
   shouldComponentUpdate(nextProps) {
     const { property } = this.props
-    const fromKey = `${property.name}.from`
-    const toKey = `${property.name}.to`
+    const fromKey = `${property.name}${PARAM_SEPARATOR}from`
+    const toKey = `${property.name}${PARAM_SEPARATOR}to`
     const nextFilter = nextProps.filter || {}
 
     if (nextFilter[fromKey]) {
@@ -67,7 +70,7 @@ export default class Filter extends React.Component {
   handleChange(key, value) {
     const { onChange, property } = this.props
     const date = value !== '' ? new Date(value).toISOString() : ''
-    onChange(`${property.name}.${key}`, date)
+    onChange(`${property.name}${PARAM_SEPARATOR}${key}`, date)
   }
 
   renderFilter(where) {
@@ -86,7 +89,7 @@ export default class Filter extends React.Component {
             type="text"
             ref={this.pickerRef[key]}
             className="input filter"
-            name={`${filterKey}.${key}`}
+            name={`${filterKey}${PARAM_SEPARATOR}${key}`}
           />
           <span className="icon is-small is-right">
             <i className="icomoon-calendar" />

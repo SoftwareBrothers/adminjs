@@ -40,7 +40,7 @@ module.exports = {
    */
   handler: async (request, response, data) => {
     const { query } = request
-    const { sortBy, direction, filters } = unflatten(query || {})
+    const { sortBy, direction, filters = {} } = unflatten(query || {})
     const { resource } = data
     let { page, perPage } = unflatten(query || {})
 
@@ -57,6 +57,7 @@ module.exports = {
       listProperties[0].name(),
       resource.decorate().options,
     )
+
     const filter = await new Filter(filters, resource).populate()
 
     const records = await resource.find(filter, {

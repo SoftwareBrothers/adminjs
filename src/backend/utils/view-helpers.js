@@ -41,8 +41,8 @@ class ViewHelpers {
 
   listUrl({ resourceId }) {
     console.warn(`
-      Deprecation: this function will be removed in the next versions.
-      Please use resourceActionUrl({ resourceId, actionName: 'list'})
+      Deprecation: this "ViewHelpers#listUrl" will be removed in the next versions.
+      Please use "resourceActionUrl({ resourceId, actionName: 'list'})"
       instead`)
     return this.resourceActionUrl({ resourceId, actionName: 'list' })
   }
