@@ -207,7 +207,7 @@ class AdminBro {
       const fileName = path.format({ root, dir, name, ext })
       return fs.existsSync(fileName)
     })) {
-      throw new ConfigurationError(`Given file ${src}, doesn't exist.`, 'AdminBro.html')
+      throw new ConfigurationError(`Given file "${src}", doesn't exist.`, 'AdminBro.html')
     }
 
     AdminBro.UserComponents[componentId] = path.format({ root, dir, name })
