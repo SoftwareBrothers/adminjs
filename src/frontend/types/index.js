@@ -16,7 +16,7 @@ export const brandingType = PropTypes.shape({
   softwareBrothers: PropTypes.bool.isRequired,
 })
 
-export const propertyType = PropTypes.shape({
+const propertyTypeShape = {
   isId: PropTypes.bool.default,
   isSortable: PropTypes.bool.isRequired,
   isTitle: PropTypes.bool.isRequired,
@@ -29,7 +29,13 @@ export const propertyType = PropTypes.shape({
     value: PropTypes.string,
   })),
   reference: PropTypes.oneOfType([PropTypes.string]),
-})
+  isArray: PropTypes.boolean,
+}
+
+export const propertyType = PropTypes.shape(propertyTypeShape)
+
+propertyTypeShape.subProperties = PropTypes.arrayOf(propertyType)
+
 
 export const versionsType = PropTypes.shape({
   admin: PropTypes.string,

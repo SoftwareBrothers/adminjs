@@ -32,10 +32,12 @@ class PropertyDecorator {
    * @param {BaseProperty} property
    * @param  {AdminBro}     admin  current instance of AdminBro
    * @param {PropertyOptions} options
+   * @param {ResourceDecorator} resource
    */
-  constructor({ property, admin, options = {} }) {
+  constructor({ property, admin, options = {}, resource }) {
     this._property = property
     this._admin = admin
+    this._resource = resource
 
     /**
      * Options passed along with a given resource
@@ -166,6 +168,8 @@ class PropertyDecorator {
    * @property {String} label
    * @property {String} type
    * @property {String} reference
+   * @property {Boolean} isArray=false
+   * @property {Array<BaseProperty~JSON>} subProperties=[]
    * @property {Object} [components]
    * @property {Component} [components.show]
    * @property {Component} [components.edit]
@@ -190,6 +194,17 @@ class PropertyDecorator {
       type: this.type(),
       reference: this._property.reference(),
       components: this.options.components,
+      subProperties: this._property.subProperties().map((subProperty) => {
+        const optionKey = `${this._property.name()}.${subProperty.name()}`
+        const decorated = new PropertyDecorator({
+          property: subProperty,
+          admin: this._admin,
+          options: (this._resource.options.properties)[optionKey],
+          resource: this._resource,
+        })
+        return decorated.toJSON()
+      }),
+      isArray: this._property.isArray(),
     }
   }
 }

@@ -116,6 +116,8 @@ describe('PropertyDecorator', function () {
         'type',
         'reference',
         'components',
+        'subProperties',
+        'isArray',
       )
     })
   })
