@@ -6,6 +6,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 Started from version 0.9.5
 
+## [1.1.0] - 2019-08-25
+
+### Added
+
+* support for Arrays in mongoose adapter [#90]
+* support for Embeded objects in mongoose adapter [#110]
+
+### Changed
+
+* BaseResource.param could return nested object
+
 ## [1.0.2] - 2019-08-21
 
 ### Fixed

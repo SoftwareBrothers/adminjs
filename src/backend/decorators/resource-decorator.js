@@ -118,18 +118,20 @@ class ResourceDecorator {
         property,
         admin: this._admin,
         options: this.options.properties[property.name()],
+        resource: this,
       })
       return { ...memo, [property.name()]: decorator }
     }, {})
 
     // decorate all properties user gave in options but they don't exist in the resource
     Object.keys(this.options.properties).forEach((key) => {
-      if (!properties[key]) {
+      if (!properties[key] && !key.match(/\./)) {
         const property = new BaseProperty({ path: key, isSortable: false })
         properties[key] = new PropertyDecorator({
           property,
           admin: this._admin,
           options: this.options.properties[key],
+          resource: this,
         })
       }
     })

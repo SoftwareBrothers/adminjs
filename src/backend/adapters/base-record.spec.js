@@ -11,8 +11,20 @@ describe('Record', function () {
         this.record = new Record(this.params)
       })
 
-      it('returns nested field', function () {
+      it('returns deepest field when all up-level keys are given', function () {
         expect(this.record.param('nested1level.nested2level.nested3level')).to.equal('value')
+      })
+
+      it('returns object when all up-level keys are given except one', function () {
+        expect(this.record.param('nested1level.nested2level')).to.deep.equal({
+          nested3level: this.value,
+        })
+      })
+
+      it('returns object when only first level key is given', function () {
+        expect(this.record.param('nested1level')).to.deep.equal({
+          nested2level: { nested3level: this.value },
+        })
       })
     })
   })

@@ -1,4 +1,4 @@
-const flatten = require('flat')
+const { flatten, unflatten } = require('flat')
 const _ = require('lodash')
 const ValidationError = require('../utils/validation-error')
 
@@ -44,14 +44,36 @@ class BaseRecord {
   }
 
   /**
-   * Returns value for given field
+   * Returns value for given field.
    * @param  {String} path      path (name) for given field: i.e. 'email' or 'authentication.email'
    *                            if email is nested within the authentication object in the datastore
    * @return {any}              value for given field
    */
-
   param(path) {
-    return this.params && this.params[path]
+    if (this.params && this.params[path]) {
+      return this.params[path]
+    }
+    const subParams = this.namespaceParams(path)
+    if (subParams) {
+      const unflattenSubParams = unflatten(subParams)
+      return path.split('.').reduce((m, v) => m[v], unflattenSubParams)
+    }
+    return undefined
+  }
+
+  /**
+   * Returns object containing all params keys starting with prefix
+   * @param   {String}  prefix
+   *
+   * @return  {Object}
+   */
+  namespaceParams(prefix) {
+    const regex = new RegExp(`^${prefix}`)
+    const keys = Object.keys(this.params).filter(key => key.match(regex))
+    if (keys.length) {
+      return keys.reduce((memo, key) => ({ ...memo, [key]: this.params[key] }), {})
+    }
+    return undefined
   }
 
   /**

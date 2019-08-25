@@ -1,23 +1,12 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-
-import defaultType from './default-type'
-import boolean from './boolean'
-import datetime from './datetime'
-import richtext from './richtext'
-import reference from './reference'
 import ErrorBoundary from '../app/error-boundary'
 
 import { propertyType, resourceType, recordType } from '../../types'
+import propertyComponent from './property-component'
 
-const types = {
-  boolean,
-  datetime,
-  reference,
-  date: datetime,
-  richtext,
-}
-
+import ArrayType from './array'
+import MixedType from './mixed'
 
 /**
  * @classdesc
@@ -166,17 +155,31 @@ export default class BasePropertyComponent extends React.Component {
   render() {
     const { property, resource, record, filter, where, onChange } = this.props
     const { isClient } = this.state
+    const Component = propertyComponent(property, where, isClient)
+    const Array = ArrayType[where]
+    const Mixed = MixedType[where]
 
-    let PropertyRenderer = (types[property.type] && types[property.type][where])
-                          || defaultType[where]
+    if (property.isArray) {
+      return (
+        <Array
+          {...this.props}
+          ItemComponent={BasePropertyComponent}
+        />
+      )
+    }
 
-    if (property.components && property.components[where] && isClient) {
-      PropertyRenderer = AdminBro.UserComponents[property.components[where]]
+    if (property.type === 'mixed' && property.subProperties && property.subProperties.length) {
+      return (
+        <Mixed
+          {...this.props}
+          ItemComponent={BasePropertyComponent}
+        />
+      )
     }
 
     return (
       <ErrorBoundary>
-        <PropertyRenderer
+        <Component
           property={property}
           resource={resource}
           record={record}
@@ -219,16 +222,3 @@ BasePropertyComponent.defaultProps = {
   record: null,
   onChange: null,
 }
-
-const camelizePropertyType = type => ({
-  Edit: type.edit,
-  Show: type.show,
-  List: type.list,
-  Filter: type.filter,
-})
-
-BasePropertyComponent.DefaultType = camelizePropertyType(defaultType)
-BasePropertyComponent.Boolean = camelizePropertyType(boolean)
-BasePropertyComponent.DateTime = camelizePropertyType(datetime)
-BasePropertyComponent.RichText = camelizePropertyType(richtext)
-BasePropertyComponent.Reference = camelizePropertyType(reference)

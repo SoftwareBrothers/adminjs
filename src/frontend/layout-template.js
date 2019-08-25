@@ -25,15 +25,12 @@ const html = (admin, currentAdmin, location = '/') => {
   const context = {}
   const h = new ViewHelpers({ options: admin.options })
   const locationInAdmin = h.urlBuilder([location])
-
   const store = initializeStore(admin, currentAdmin)
   const reduxState = store.getState()
-
   const scripts = ((admin.options.assets && admin.options.assets.scripts) || [])
     .map(s => `<script src="${s}"></script>`)
   const styles = ((admin.options.assets && admin.options.assets.styles) || [])
     .map(l => `<link rel="stylesheet" type="text/css" href="${l}">`)
-
   const theme = combineStyles((admin.options.branding && admin.options.branding.theme) || {})
 
   const jsx = (

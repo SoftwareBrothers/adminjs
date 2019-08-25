@@ -47,7 +47,8 @@ class BaseProperty {
   /**
    * Return type of a property
    * @return {String} One of available property types:
-   *                      [id, string, float, number, boolean, date]
+   *                      [id, string, float, number, boolean,
+   *                       date, mixed]
    */
   type() {
     return this._type || 'string'
@@ -105,6 +106,24 @@ class BaseProperty {
    */
   availableValues() {
     return null
+  }
+
+  /**
+   * Returns true when given property is an array
+   *
+   * @return  {Boolean}
+   */
+  isArray() {
+    return false
+  }
+
+  /**
+   * In case of `mixed` type returns all nested properties.
+   *
+   * @return  {Array<BaseProperty>} sub properties
+   */
+  subProperties() {
+    return []
   }
 
   /**
