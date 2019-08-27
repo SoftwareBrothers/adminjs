@@ -3,10 +3,23 @@ import PropTypes from 'prop-types'
 import ErrorBoundary from '../app/error-boundary'
 
 import { propertyType, resourceType, recordType } from '../../types'
-import propertyComponent from './property-component'
 
 import ArrayType from './array'
 import MixedType from './mixed'
+
+import defaultType from './default-type'
+import boolean from './boolean'
+import datetime from './datetime'
+import richtext from './richtext'
+import reference from './reference'
+
+const types = {
+  boolean,
+  datetime,
+  reference,
+  date: datetime,
+  richtext,
+}
 
 /**
  * @classdesc
@@ -155,7 +168,25 @@ export default class BasePropertyComponent extends React.Component {
   render() {
     const { property, resource, record, filter, where, onChange } = this.props
     const { isClient } = this.state
-    const Component = propertyComponent(property, where, isClient)
+
+    let Component = (types[property.type] && types[property.type][where])
+    || defaultType[where]
+
+    if (property.components && property.components[where] && isClient) {
+      Component = AdminBro.UserComponents[property.components[where]]
+      return (
+        <ErrorBoundary>
+          <Component
+            property={property}
+            resource={resource}
+            record={record}
+            filter={filter}
+            onChange={onChange}
+          />
+        </ErrorBoundary>
+      )
+    }
+
     const Array = ArrayType[where]
     const Mixed = MixedType[where]
 
