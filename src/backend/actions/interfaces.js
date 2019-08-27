@@ -180,8 +180,8 @@
 
 /**
  * @name after
- * @description
  * @async
+ * @description
  * After action hook. When it is given - it is performed on the returned,
  * by handler the {@link BaseAction.handler}, object,
  *

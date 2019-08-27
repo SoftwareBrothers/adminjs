@@ -29,10 +29,11 @@ class Filter {
    * // }
    *
    *
-   * @param   {[type]}  filters  [filters description]
+   * @param   {Object}  filters
    *
-   * @return  {[type]}           [return description]
+   * @return  {Object}
    */
+
   static normalizeKeys(filters) {
     return unflatten(flatten(filters), { delimiter: Filter.PARAM_SEPARATOR })
   }
