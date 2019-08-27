@@ -6,6 +6,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 Started from version 0.9.5
 
+## [1.1.2] - 2019-08-27
+
+### Added
+
+* `alert` message when user is logged out
+
+### Removed
+
+* obsolete `getRecord` action from `ApiClient`
+
 ## [1.1.1] - 2019-08-27
 
 ### Fixed
