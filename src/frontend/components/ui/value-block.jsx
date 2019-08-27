@@ -3,7 +3,6 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 
-import { colors } from '../../styles/variables'
 import WrapperBox from './wrapper-box'
 import { childrenType } from '../../types'
 import Label from './label'
@@ -25,7 +24,7 @@ const OverlayLink = styled(Link)`
 const Level = styled.div.attrs({
   className: 'level',
 })`
-  color: ${props => props.color};
+  color: ${props => props.color || props.theme.colors.primary};
   margin-top: 8px;
 
   & .value {
@@ -108,7 +107,7 @@ ValueBlock.propTypes = {
 }
 
 ValueBlock.defaultProps = {
-  color: colors.primary,
+  color: null,
   children: null,
   value: null,
   label: null,
