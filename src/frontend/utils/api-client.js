@@ -68,7 +68,6 @@ class ApiClient {
       method: method || payload ? 'POST' : 'GET',
       data: payload,
       params,
-      maxRedirects: 0,
     })
     checkLogin(response)
     return response
