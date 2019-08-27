@@ -9,6 +9,7 @@ describe('ApiController', function () {
     this.recordStub = {
       toJSON: () => this.recordJSON,
     }
+    this.resourceName = 'Users'
     this.action = {
       name: 'actionName',
       handler: this.sinon.stub(),
@@ -32,6 +33,7 @@ describe('ApiController', function () {
         resourceActions: () => [this.action],
         recordActions: () => [this.action],
         recordsDecorator: records => records,
+        id: this.resourceName,
       }),
       find: this.sinon.stub().returns([]),
       count: this.sinon.stub().returns(this.total),
@@ -57,6 +59,7 @@ describe('ApiController', function () {
     it('throws an error when user doesn\'t have rights to access the list action', function (done) {
       this.action.isAccessible.returns(false)
       this.apiController.search({ params: {} }, {}).catch((error) => {
+        expect(error.message).to.include('list')
         expect(error.name).to.equal('ForbiddenError')
         done()
       })
