@@ -1,5 +1,16 @@
 import axios from 'axios'
 
+const checkLogin = (response) => {
+  const loginUrl = [window.location.origin, window.REDUX_STATE.paths.loginPath].join('')
+  if (response.request.responseURL
+      && response.request.responseURL.match(loginUrl)
+  ) {
+    // eslint-disable-next-line no-undef
+    alert('Your session expired. You will be redirected to login screen')
+    window.location = loginUrl
+  }
+}
+
 /**
  * Client which access the admin API.
  * Use it to fetch data from auto generated AdminBro API.
@@ -18,24 +29,9 @@ import axios from 'axios'
  */
 class ApiClient {
   constructor() {
-    const baseURL = [window.location.origin, window.REDUX_STATE.paths.rootPath].join('')
+    this.baseURL = [window.location.origin, window.REDUX_STATE.paths.rootPath].join('')
     this.client = axios.create({
-      baseURL,
-    })
-  }
-
-  /**
-   * Get records from a given resource
-   *
-   * @param   {String}  resourceId  Id of a {@link BaseResource~JSON}
-   * @param   {ApiClient~RecordsQuery}  query       query object
-   *
-   * @return  {Promise<ApiController~ResourceResponse>}  response [axios](https://github.com/axios/axios)
-   *                                                response with all the data
-   */
-  async getRecords({ resourceId, query }) {
-    return this.client.get(`/api/resources/${resourceId}`, {
-      params: query,
+      baseURL: this.baseURL,
     })
   }
 
@@ -50,6 +46,7 @@ class ApiClient {
   async searchRecords({ resourceId, query }) {
     const q = encodeURIComponent(query)
     const response = await this.client.get(`/api/resources/${resourceId}/search/${q}`)
+    checkLogin(response)
     return response.data.records
   }
 
@@ -66,12 +63,15 @@ class ApiClient {
    * @return  {Promise<Object>}            response from an {@link Action}
    */
   async resourceAction({ resourceId, actionName, payload, method, params }) {
-    return this.client.request({
+    const response = await this.client.request({
       url: `/api/resources/${resourceId}/actions/${actionName}`,
       method: method || payload ? 'POST' : 'GET',
       data: payload,
       params,
+      maxRedirects: 0,
     })
+    checkLogin(response)
+    return response
   }
 
   /**
@@ -88,18 +88,22 @@ class ApiClient {
    * @return  {Promise<Object>}            response from an {@link Action}
    */
   async recordAction({ resourceId, recordId, actionName, payload, method, params }) {
-    return this.client.request({
+    const response = await this.client.request({
       url: `/api/resources/${resourceId}/records/${recordId}/${actionName}`,
       method: method || payload ? 'POST' : 'GET',
       data: payload,
       params,
     })
+    checkLogin(response)
+    return response
   }
 
   async getDashboard({ params = {} } = {}) {
-    return this.client.get('/api/dashboard', {
+    const response = await this.client.get('/api/dashboard', {
       params,
     })
+    checkLogin(response)
+    return response
   }
 }
 

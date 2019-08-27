@@ -102,11 +102,6 @@ const Router = {
     action: 'recordAction',
   }, {
     method: 'GET',
-    path: '/api/resources/{resourceId}',
-    Controller: ApiController,
-    action: 'index',
-  }, {
-    method: 'GET',
     path: '/api/resources/{resourceId}/search/',
     Controller: ApiController,
     action: 'search',
