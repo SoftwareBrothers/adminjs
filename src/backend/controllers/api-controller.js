@@ -74,7 +74,7 @@ class ApiController {
     const resource = this._admin.findResource(request.params.resourceId)
     const decorated = resource.decorate()
     if (!decorated.actions.list.isAccessible(this.currentAdmin)) {
-      throw new ForbiddenError('list', resource.id)
+      throw new ForbiddenError({ actionName: 'list', resourceId: resource.id })
     }
     const titlePropertyName = decorated.titleProperty().name()
 
@@ -108,7 +108,10 @@ class ApiController {
   async resourceAction(request, response) {
     const actionContext = await this.getActionContext(request)
     if (!actionContext.action.isAccessible(this.currentAdmin)) {
-      throw new ForbiddenError(actionContext.action.name, actionContext.resource.id)
+      throw new ForbiddenError({
+        actionName: actionContext.action.name,
+        resourceId: actionContext.resource.id,
+      })
     }
     return actionContext.action.handler(request, response, actionContext)
   }
@@ -128,7 +131,10 @@ class ApiController {
     const { recordId } = request.params
     const actionContext = await this.getActionContext(request)
     if (!actionContext.action.isAccessible(this.currentAdmin)) {
-      throw new ForbiddenError(actionContext.action.name, actionContext.resource.id)
+      throw new ForbiddenError({
+        actionName: actionContext.action.name,
+        resourceId: actionContext.resource.id,
+      })
     }
     let record = await actionContext.resource.findOne(recordId);
     [record] = await populator([record])

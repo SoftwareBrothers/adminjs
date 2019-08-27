@@ -6,6 +6,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 Started from version 0.9.5
 
+## [1.1.1] - 2019-08-27
+
+### Fixed
+
+* Added default color to ValueBlock [#133]
+* fix ForbiddenError message
+* Not present links to not accesible routes
+
+### Changed
+
+* Custom components now are rendered always first (no matter if the field is an array or mixed type)
+
 ## [1.1.0] - 2019-08-25
 
 ### Added

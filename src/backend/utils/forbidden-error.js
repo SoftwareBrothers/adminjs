@@ -13,7 +13,7 @@ class ForbiddenError extends Error {
   constructor({ actionName, resourceId }) {
     const msg = `
     You cannot perform an action: "${actionName}" on a 
-    resource: ${resourceId}
+    resource: "${resourceId}"
     `
     super(msg)
     this.message = msg
