@@ -253,3 +253,17 @@ BasePropertyComponent.defaultProps = {
   record: null,
   onChange: null,
 }
+
+
+const camelizePropertyType = type => ({
+  Edit: type.edit,
+  Show: type.show,
+  List: type.list,
+  Filter: type.filter,
+})
+
+BasePropertyComponent.DefaultType = camelizePropertyType(defaultType)
+BasePropertyComponent.Boolean = camelizePropertyType(boolean)
+BasePropertyComponent.DateTime = camelizePropertyType(datetime)
+BasePropertyComponent.RichText = camelizePropertyType(richtext)
+BasePropertyComponent.Reference = camelizePropertyType(reference)
