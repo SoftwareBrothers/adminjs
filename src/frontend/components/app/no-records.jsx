@@ -16,11 +16,10 @@ const NoRecords = (props) => {
       <p>
         There are no records in this resource.
         {canCreate ? (
-          <>
-            Create
-            {' '}
+          <React.Fragment>
+            {'Create '}
             <Link to={newAction}>first record</Link>
-          </>
+          </React.Fragment>
         ) : ''}
       </p>
     </div>

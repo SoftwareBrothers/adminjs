@@ -10,7 +10,7 @@ export default class List extends React.PureComponent {
   renderItems() {
     const { property, ItemComponent } = this.props
     return (
-      <>
+      <React.Fragment>
         {property.subProperties.map(subProperty => (
           <div>
             <Label style={{ display: 'inline' }}>{`${subProperty.label}: `}</Label>
@@ -21,7 +21,7 @@ export default class List extends React.PureComponent {
             />
           </div>
         ))}
-      </>
+      </React.Fragment>
     )
   }
 
