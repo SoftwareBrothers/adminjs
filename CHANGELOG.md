@@ -6,6 +6,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 Started from version 0.9.5
 
+## [1.1.4] - 2019-08-30
+
+### Fixed
+
+* fixed errors seen when generating documentation (change <> to </React.Fragment>)
+
+### Changed
+
+* new welcome screen
+
 ## [1.1.3] - 2019-08-28
 
 ### Fixed
