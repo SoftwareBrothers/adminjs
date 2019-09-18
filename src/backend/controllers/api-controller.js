@@ -15,7 +15,6 @@ const ForbiddenError = require('../utils/forbidden-error')
  *
  * | Endpoint                 | Method                | Description |
  * |--------------------------|-----------------------|-------------|
- * | `.../api/resources/{resourceId}` | {@link ApiController#index} | List of records |
  * | `.../api/resources/{resourceId}/search/{query}` | {@link ApiController#search} | Search record by query string |
  * | `.../api/resources/{resourceId}/actions/{action}` | {@link ApiController#resourceAction} | Perform cusomised resource action |
  * | `.../api/resources/{resourceId}/records/{recordId}/{action}` | {@link ApiController#recordAction} | Perform cusomised record action |

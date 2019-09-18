@@ -33,10 +33,10 @@ const DropdownMenu = styled.div.attrs({
  * @hideconstructor
  * @example
  * return (
- * <WrapperBox border>
+ * <WrapperBox border style={{height: 200, marginLeft: 200}}>
  *   <Dropdown className="is-right is-hoverable">
- *     <StyledButton>Button 1</StyledButton>
- *     <StyledButton>Button 2</StyledButton>
+ *     <StyledButton className="is-white in-dropdown">Button 1</StyledButton>
+ *     <StyledButton className="is-white in-dropdown">Button 2</StyledButton>
  *   </Dropdown>
  * </WrapperBox>
  * )

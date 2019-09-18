@@ -5,7 +5,7 @@ import styled from 'styled-components'
 const StyledWrapperBox = styled.section`
   padding: ${({ theme }) => theme.sizes.paddingLayout};
   flex-grow: 1;
-  border: ${props => (props.border ? `1px solid ${({ theme }) => theme.colors.border}` : 'none')};
+  border: ${props => (props.border ? `1px solid ${props.theme.colors.border}` : 'none')};
   background: ${props => (props.border ? '#ffffff' : 'transparent')};
 
   & > h1 {

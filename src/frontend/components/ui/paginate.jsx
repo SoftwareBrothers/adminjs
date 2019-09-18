@@ -24,7 +24,9 @@ const PaginationWrapper = styled.div.attrs({
  * @example
  * const location = { search: ''}
  * return (
- *   <Paginate total={100} page={4} perPage={10} location={location} />
+ *   <WrapperBox>
+ *     <Paginate total={100} page={4} perPage={10} location={location} />
+ *   </WrapperBox>
  * )
  */
 class Paginate extends React.PureComponent {

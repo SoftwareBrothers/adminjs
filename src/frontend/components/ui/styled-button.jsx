@@ -67,13 +67,25 @@ const Btn = styled(Link).attrs(({ primary }) => ({
  * @component
  * @hideconstructor
  *
- * @example
+ * @example <caption>Regular button</caption>
  * return (
- *   <Columns>
- *     <Column><StyledButton>Regular button</StyledButton></Column>
- *     <Column><StyledButton primary>Primary</StyledButton></Column>
- *     <Column><StyledButton><i class="fa fa-bomb" />With icon</StyledButton></Column>
- *   </Columns>
+ *   <WrapperBox border>
+ *     <StyledButton>I am button</StyledButton>
+ *   </WrapperBox>
+ * )
+ * 
+ * @example <caption>Primary button</caption>
+ * return (
+ *   <WrapperBox border>
+ *     <StyledButton primary>I am primary button</StyledButton>
+ *   </WrapperBox>
+ * )
+ * 
+ * @example <caption>With icon</caption>
+ * return (
+ *   <WrapperBox border>
+ *     <StyledButton><i class="fa fa-bomb" />I am button with icon</StyledButton>
+ *   </WrapperBox>
  * )
  */
 const StyledButton = props => (<Btn {...props} />)
