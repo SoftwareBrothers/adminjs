@@ -28,7 +28,10 @@ describe('generateUserComponentEntry', function () {
     const adminBro = new AdminBro()
     const componentId = AdminBro.require(exampleComponent)
     const rootEntryPath = path.resolve(entryPath)
-    const filePath = path.relative(rootEntryPath, path.normalize(path.join(__dirname, exampleComponent)))
+    const filePath = path.relative(
+      rootEntryPath,
+      path.normalize(path.join(__dirname, exampleComponent)),
+    )
 
     const entryFile = generateUserComponentEntry(adminBro, entryPath)
 
