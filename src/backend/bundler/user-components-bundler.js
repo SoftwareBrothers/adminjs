@@ -9,7 +9,7 @@ const outPath = path.join(tmpPath, 'bundle.js')
 const generateEntry = require('./generate-user-component-entry')
 
 async function build(admin, { write = false } = {}) {
-  const entryFile = generateEntry(admin)
+  const entryFile = generateEntry(admin, tmpPath)
 
   try {
     await util.promisify(fs.mkdir)(tmpPath, { recursive: true })

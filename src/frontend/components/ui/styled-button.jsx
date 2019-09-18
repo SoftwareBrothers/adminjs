@@ -73,14 +73,14 @@ const Btn = styled(Link).attrs(({ primary }) => ({
  *     <StyledButton>I am button</StyledButton>
  *   </WrapperBox>
  * )
- * 
+ *
  * @example <caption>Primary button</caption>
  * return (
  *   <WrapperBox border>
  *     <StyledButton primary>I am primary button</StyledButton>
  *   </WrapperBox>
  * )
- * 
+ *
  * @example <caption>With icon</caption>
  * return (
  *   <WrapperBox border>
