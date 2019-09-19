@@ -52,6 +52,10 @@ const pkg = require('../package.json')
  * @property {Object} [assets]                        assets object
  * @property {String[]}  [assets.styles]              array with a paths to styles
  * @property {String[]}  [assets.scripts]             array with a paths to scripts
+ * @property {String[]}  [assets.globalsFromCDN=true] indicates if globals like React, ReactDOM etc.
+ *                                                    should be taken from CDNs. If set to false,
+ *                                                    local bundle file will be used (makes sense
+ *                                                    with slower internet connection)
  * @property {Object<String,String>} [env]            environmental variables passed to the frontend
  *
  * @description AdminBro takes a list of options of the entire framework. All off them
@@ -86,6 +90,7 @@ const defaults = {
   assets: {
     styles: [],
     scripts: [],
+    globalsFromCDN: true,
   },
 }
 

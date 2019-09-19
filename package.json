@@ -10,7 +10,9 @@
     "build": "babel src --out-dir lib --copy-files",
     "lint": "eslint './spec/**/*.js' './src/**/*.js' './src/**/*.jsx' --ignore-pattern='*bundle.js'",
     "cover": "NODE_ENV=test nyc --reporter=text --reporter=text-summary --reporter=lcov --all=true npm test",
-    "codecov": "NODE_ENV=test nyc --reporter=text-lcov npm test | codecov --pipe"
+    "codecov": "NODE_ENV=test nyc --reporter=text-lcov npm test | codecov --pipe",
+    "bundle": "node bin/watch-dev.js",
+    "bundle:globals": "node bin/bundle-globals.js"
   },
   "nyc": {
     "exclude": [
@@ -66,7 +68,7 @@
     "react-router-dom": "^5.0.0",
     "react-select": "^2.4.2",
     "redux": "^4.0.1",
-    "rollup": "^1.7.4",
+    "rollup": "^1.21.4",
     "rollup-plugin-babel": "^4.3.2",
     "rollup-plugin-commonjs": "^9.2.2",
     "rollup-plugin-node-resolve": "^4.0.1",
@@ -89,8 +91,13 @@
     "jsdom-global": "^3.0.2",
     "mocha": "^5.2.0",
     "nyc": "^12.0.2",
+    "react-router": "^5.0.1",
     "react-testing-library": "^7.0.0",
+    "recharts": "^1.7.1",
     "require.all": "^2.0.4",
+    "rollup-plugin-json": "^4.0.0",
+    "rollup-plugin-node-builtins": "^2.1.2",
+    "rollup-plugin-node-globals": "^1.4.0",
     "sinon": "^6.1.5",
     "sinon-chai": "^3.2.0"
   }

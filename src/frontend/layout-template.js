@@ -8,8 +8,7 @@ import App from './components/app/application'
 import ViewHelpers from '../backend/utils/view-helpers'
 import initializeStore from './store'
 import combineStyles from './styles/combine-styles'
-
-const onProd = process.env.NODE_ENV === 'production'
+import globalDependencies from './utils/global-dependencies'
 
 /**
  * Renders (SSR) html for given location
@@ -69,17 +68,7 @@ const html = (admin, currentAdmin, location = '/') => {
       <link rel="stylesheet" type="text/css" href="https://cdn.quilljs.com/1.3.6/quill.snow.css">
       <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
       <script src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
-      <script crossorigin src="https://unpkg.com/react@16/umd/react.${onProd ? 'production.min' : 'development'}.js"></script>
-      <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.${onProd ? 'production.min' : 'development'}.js"></script>
-      <script crossorigin="anonymous" src="https://unpkg.com/@material-ui/core/umd/material-ui.production.min.js"></script>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/react-redux/6.0.1/react-redux.min.js"></script>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/react-router/5.0.0/react-router.min.js"></script>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/react-router-dom/5.0.0/react-router-dom.min.js"></script>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/redux/4.0.1/redux.min.js"></script>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/prop-types/15.7.2/prop-types.js"></script>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/styled-components/4.2.0/styled-components.min.js"></script>
-      <script src="https://unpkg.com/recharts/umd/Recharts.min.js"></script>
+      ${globalDependencies({ fromCDN: admin.options.assets.globalsFromCDN, viewHelpers: h })}
       <script src="${h.assetPath('app.bundle.js')}"></script>
       <script src="${h.assetPath('components.bundle.js')}"></script>
       ${styles.join('\n')}

@@ -1,3 +1,10 @@
+/**
+ * @private
+ * @fileoverview
+ * This script runs process, which bundles all frontend files to `app.bundle.js`.
+ * It reruns whenever user changes something.
+ */
+
 const runtime = require('@babel/plugin-transform-runtime')
 const styled = require('babel-plugin-styled-components')
 const bundler = require('../src/backend/bundler/bundler')
