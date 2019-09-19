@@ -2,7 +2,7 @@ const _ = require('lodash')
 
 /**
  * @typedef  {Object}  PropertyOptions
- * @property {Boolean | Object } isVisible
+ * @property {Boolean | Object } [isVisible]
  * @property {Boolean} [isVisible.show]
  * @property {Boolean} [isVisible.list]
  * @property {Boolean} [isVisible.edit]
@@ -13,11 +13,11 @@ const _ = require('lodash')
  * @property {Component} [components.list]
  * @property {Component} [components.edit]
  * @property {Component} [components.filter]
- * @property {String} type
- * @property {String} label
- * @property {Boolean} isId
- * @property {Boolean} isTitle
- * @property {Number} position          position of the field in a list,
+ * @property {String} [type]
+ * @property {String} [label]
+ * @property {Boolean} [isId]
+ * @property {Boolean} [isTitle]
+ * @property {Number} [position]          position of the field in a list,
  *                                      title field (isTitle) gets position -1 by default other
  *                                      fields gets position = 100.
  */
@@ -28,11 +28,15 @@ const _ = require('lodash')
  * @category Decorators
  */
 class PropertyDecorator {
+  /** @typedef {import('./resource-decorator')} ResourceDecorator */
+  /** @typedef {import('../../admin-bro')} AdminBro */
+
   /**
-   * @param {BaseProperty} property
-   * @param  {AdminBro}     admin  current instance of AdminBro
-   * @param {PropertyOptions} options
-   * @param {ResourceDecorator} resource
+   * @param {Object} opts
+   * @param {BaseProperty}        opts.property
+   * @param  {AdminBro}           opts.admin  current instance of AdminBro
+   * @param {PropertyOptions}     opts.options
+   * @param {ResourceDecorator}   opts.resource
    */
   constructor({ property, admin, options = {}, resource }) {
     this._property = property
