@@ -6,6 +6,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 Started from version 0.9.5
 
+## [1.2.0] - not released yet
+
+### Fixed
+
+* fixed loading components on windows [#140]
+
+### Changed
+
+* remove AdminBro from page title [#121]
+
+### Added
+
+* add option to define if globals should be fetched from CDM or from local bundle [#121]
+
 ## [1.1.4] - 2019-08-30
 
 ### Fixed
