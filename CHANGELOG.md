@@ -11,6 +11,7 @@ Started from version 0.9.5
 ### Fixed
 
 * fixed loading components on windows [#140]
+* fixed issue with nested arrays [#135]
 
 ### Changed
 
