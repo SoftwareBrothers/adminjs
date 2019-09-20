@@ -7,7 +7,6 @@ import NoRecords from './no-records'
 import { resourceType, recordType } from '../../types'
 
 import Table from '../ui/table'
-import PlaceholderInList from '../ui/placeholder-in-list'
 
 const RecordsTable = (props) => {
   const { resource, records, actionPerformed, sortBy, direction, isLoading } = props
@@ -23,18 +22,15 @@ const RecordsTable = (props) => {
         sortBy={sortBy}
       />
       <tbody>
-        {isLoading
-          ? [...Array(records.length || 1)].map(() => (
-            <PlaceholderInList columns={resource.listProperties.length + 1} />
-          ))
-          : records.map(record => (
-            <RecordInList
-              record={record}
-              resource={resource}
-              key={record.id}
-              actionPerformed={actionPerformed}
-            />
-          ))}
+        {records.map(record => (
+          <RecordInList
+            record={record}
+            resource={resource}
+            key={record.id}
+            actionPerformed={actionPerformed}
+            isLoading={isLoading}
+          />
+        ))}
       </tbody>
     </Table>
   )
