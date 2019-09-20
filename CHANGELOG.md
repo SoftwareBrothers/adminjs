@@ -16,10 +16,12 @@ Started from version 0.9.5
 ### Changed
 
 * remove AdminBro from page title [#121]
+* change loader in list from a spinner to placeholder
 
 ### Added
 
 * add option to define if globals should be fetched from CDM or from local bundle [#121]
+* add `Placeholder` and `PlaceholderInList` components
 
 ## [1.1.4] - 2019-08-30
 
