@@ -12,9 +12,8 @@ describe('PropertyHeader', function () {
   const location = { search: '' }
 
   beforeEach(async function () {
-    this.resource = await factory.build('resource')
     this.property = await factory.build('property', { isSortable: true })
-    this.resource.listProperties.push(this.property)
+    this.titleProperty = this.property
   })
 
   context('render not selected but searchable field', function () {
@@ -26,7 +25,7 @@ describe('PropertyHeader', function () {
         <TestContextProvider>
           <PropertyHeader
             property={this.property}
-            resource={this.resource}
+            titleProperty={this.titleProperty}
             location={location}
             sortBy={this.sortBy}
             direction={this.direction}
@@ -63,7 +62,7 @@ describe('PropertyHeader', function () {
         <TestContextProvider>
           <PropertyHeader
             property={this.property}
-            resource={this.resource}
+            titleProperty={this.titleProperty}
             location={location}
             sortBy={this.sortBy}
             direction={this.direction}

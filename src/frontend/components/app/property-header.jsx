@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { NavLink, withRouter } from 'react-router-dom'
 
-import { propertyType, resourceType, locationType } from '../../types'
+import { propertyType, locationType } from '../../types'
 
 const Th = styled.th`
   &&& {
@@ -50,24 +50,20 @@ class SortLink extends React.PureComponent {
 
     query.set('direction', opositeDirection)
     query.set('sortBy', property.name)
+
     return (
-      <StyledLink
-        to={{ search: query.toString() }}
-        isActive={this.isActive}
-      >
+      <StyledLink to={{ search: query.toString() }} isActive={this.isActive}>
         {property.label}
-        {this.isActive() ? (
-          <i className={sortedByClass} />
-        ) : ''}
+        {this.isActive() ? (<i className={sortedByClass} />) : ''}
       </StyledLink>
     )
   }
 }
 
 const PropertyHeader = (props) => {
-  const { property, resource } = props
+  const { property, titleProperty } = props
 
-  const isMain = property.name === resource.titleProperty.name
+  const isMain = property.name === titleProperty.name
 
   return (
     <Th className={isMain ? 'main' : null}>
@@ -85,7 +81,10 @@ SortLink.propTypes = {
 
 PropertyHeader.propTypes = {
   property: propertyType.isRequired,
-  resource: resourceType.isRequired,
+  /**
+   * Property which should be treated as main property.
+   */
+  titleProperty: propertyType.isRequired,
   /**
    * currently selected direction. Either 'asc' or 'desc'.
    */

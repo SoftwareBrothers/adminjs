@@ -7,7 +7,6 @@ import { resourceType, locationType } from '../../types'
 import withNotice from '../../store/with-notice'
 import RecordsTable from '../app/records-table'
 import Paginate from '../ui/paginate'
-import Loader from '../ui/loader'
 
 /**
  * @name NewAction
@@ -79,17 +78,14 @@ class List extends React.Component {
     } = this.state
     return (
       <WrapperBox border>
-        { loading ? (
-          <Loader />
-        ) : (
-          <RecordsTable
-            resource={resource}
-            records={records}
-            actionPerformed={this.handleActionPerformed}
-            direction={direction}
-            sortBy={sortBy}
-          />
-        )}
+        <RecordsTable
+          resource={resource}
+          records={records}
+          actionPerformed={this.handleActionPerformed}
+          direction={direction}
+          sortBy={sortBy}
+          isLoading={loading}
+        />
         <Paginate
           page={page}
           perPage={perPage}
