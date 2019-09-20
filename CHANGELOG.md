@@ -21,7 +21,7 @@ Started from version 0.9.5
 ### Added
 
 * add option to define if globals should be fetched from CDM or from local bundle [#121]
-* add `Placeholder` and `PlaceholderInList` components
+* add `Placeholder` component
 
 ## [1.1.4] - 2019-08-30
 
