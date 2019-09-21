@@ -35,7 +35,7 @@ window.regeneratorRuntime = regeneratorRuntime
 export default {
   Application,
   ViewHelpers,
-  Components: {...Components, ...AppComponents},
+  Components: { ...Components, ...AppComponents },
   UserComponents: {},
   ApiClient,
   style,

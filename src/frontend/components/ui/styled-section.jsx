@@ -7,9 +7,9 @@ const Section = styled.section`
 
 /**
  * Marks group of fields as a section
- * 
+ *
  * @component
- * 
+ *
  * @example
  * const property = {
  *   label: 'My amazing property',
@@ -30,4 +30,3 @@ const Section = styled.section`
  */
 const StyledSection = props => (<Section {...props} />)
 export default StyledSection
-

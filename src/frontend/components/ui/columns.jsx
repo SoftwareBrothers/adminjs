@@ -28,7 +28,7 @@ const StyledColumns = styled.section.attrs({
  *
  * @see https://bulma.io/documentation/
  * @see Column
- * 
+ *
  * @component
  * @example
  * return (
