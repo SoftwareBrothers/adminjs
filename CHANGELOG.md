@@ -22,6 +22,7 @@ Started from version 0.9.5
 
 * add option to define if globals should be fetched from CDM or from local bundle [#121]
 * add `Placeholder` component
+* export all Application components, that users can also use them
 
 ## [1.1.4] - 2019-08-30
 

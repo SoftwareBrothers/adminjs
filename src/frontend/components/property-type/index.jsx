@@ -22,7 +22,6 @@ const types = {
 }
 
 /**
- * @classdesc
  * Component which renders properties in all the places in the AdminBro UI. By all the
  * places I mean:
  * - **list**: on the List,
@@ -90,20 +89,14 @@ const types = {
  * @component
  * @name BasePropertyComponent
  * @category Base
- * @hideconstructor
  * @example
- *
- * const enumProperty = {
+ * const booleanProperty = {
  *   isTitle: false,
- *   name: 'genre',
+ *   name: 'awesome',
  *   isId: false,
  *   position: -1,
- *   label: 'Genre',
- *   type: 'string',
- *   availableValues: [
- *     {value: 'male', label: 'male'},
- *     {value: 'female', label: 'male'}
- *   ],
+ *   label: 'I am awesome',
+ *   type: 'boolean',
  * }
  *
  * const stringProperty = {
@@ -112,7 +105,7 @@ const types = {
  *   isId: false,
  *   position: -1,
  *   label: 'Name of a user',
- *   type: 'string'
+ *   type: 'string',
  * }
  * // Resource is taken from the database
  * const resource = {
@@ -121,10 +114,10 @@ const types = {
  *   titleProperty: 'name',
  *   recordActions: [],
  *   resourceActions: [],
- *   listProperties: [enumProperty, stringProperty],
- *   editProperties: [enumProperty, stringProperty],
- *   showProperties: [enumProperty, stringProperty],
- *   filterProperties: [enumProperty, stringProperty],
+ *   listProperties: [booleanProperty, stringProperty],
+ *   editProperties: [booleanProperty, stringProperty],
+ *   showProperties: [booleanProperty, stringProperty],
+ *   filterProperties: [booleanProperty, stringProperty],
  * }
  *
  * const record = {
@@ -139,7 +132,7 @@ const types = {
  * return (
  *   <WrapperBox border>
  *     <BasePropertyComponent
- *       property={enumProperty}
+ *       property={booleanProperty}
  *       resource={resource}
  *       where="edit"
  *       record={record}

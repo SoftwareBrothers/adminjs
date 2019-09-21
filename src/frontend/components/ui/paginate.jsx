@@ -16,9 +16,7 @@ const PaginationWrapper = styled.div.attrs({
   }
 `
 /**
- * @classdesc
  * Component which renders pagination
- * @hideconstructor
  *
  * @component
  * @example

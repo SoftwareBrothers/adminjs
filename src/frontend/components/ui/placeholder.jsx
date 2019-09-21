@@ -28,7 +28,6 @@ const StyledPlaceholder = styled.div`
 /**
  * Renders placeholder
  * @component
- * @hideconstructor
  *
  * @example <caption>Image placeholder</caption>
  * return (

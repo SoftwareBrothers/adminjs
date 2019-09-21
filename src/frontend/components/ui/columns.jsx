@@ -8,7 +8,6 @@ const StyledColumns = styled.section.attrs({
 `
 
 /**
- * @classdesc
  * Columns wrapper for the grid in AdminBro. It uses [bulma](https://bulma.io/documentation/) grid.
  *
  * Example usage with {@link Column}
@@ -27,9 +26,9 @@ const StyledColumns = styled.section.attrs({
  *  )
  * ```
  *
- * @hideconstructor
  * @see https://bulma.io/documentation/
  * @see Column
+ * 
  * @component
  * @example
  * return (

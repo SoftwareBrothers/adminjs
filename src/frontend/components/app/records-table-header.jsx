@@ -7,7 +7,6 @@ import { propertyType } from '../../types'
 /**
  * Prints `thead` section for table with records.
  *
- * @hideconstructor
  * @component
  * @example <caption>List with 2 properties</caption>
  * const properties = [{

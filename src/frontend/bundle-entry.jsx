@@ -8,6 +8,7 @@ import PropertyTypes from './components/property-type'
 import createStore from './store/store'
 import ViewHelpers from '../backend/utils/view-helpers'
 import * as Components from './components/ui'
+import * as AppComponents from './components/app'
 import ApiClient from './utils/api-client'
 import * as style from './styles/variables'
 import * as types from './types'
@@ -34,7 +35,7 @@ window.regeneratorRuntime = regeneratorRuntime
 export default {
   Application,
   ViewHelpers,
-  Components,
+  Components: {...Components, ...AppComponents},
   UserComponents: {},
   ApiClient,
   style,

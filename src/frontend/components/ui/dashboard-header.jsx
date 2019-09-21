@@ -27,10 +27,8 @@ const Wrapper = styled.section.attrs({
   }
 `
 /**
- * @classdesc
  * Component which can be used as the outstanding header of the dashboard page.
  *
- * @hideconstructor
  * @component
  * @example <caption>Empty Header with simple text</caption>
  * return (

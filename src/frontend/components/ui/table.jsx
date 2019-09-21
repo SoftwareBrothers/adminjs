@@ -20,9 +20,8 @@ const StyledTable = styled.table.attrs({
 `
 
 /**
- * @classdesc
  * Simple compnent for styling tables
- * @hideconstructor
+ *
  * @component
  * @example
  * return (

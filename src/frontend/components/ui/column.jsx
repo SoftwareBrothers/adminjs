@@ -9,7 +9,6 @@ const StyledColumn = styled.section.attrs(({ width = 4, offset = 0 }) => ({
 `
 
 /**
- * @classdesc
  * Colum representation in AdminBro grid. It uses [bulma](https://bulma.io/documentation/) grid.
  *
  * Example usage with {@link Column}
@@ -28,7 +27,6 @@ const StyledColumn = styled.section.attrs(({ width = 4, offset = 0 }) => ({
  *  )
  * ```
  *
- * @hideconstructor
  * @see https://bulma.io/documentation/
  * @see {@link Columns}
  * @component

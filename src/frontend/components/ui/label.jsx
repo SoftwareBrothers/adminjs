@@ -19,10 +19,8 @@ const StyledLabel = styled.label.attrs({
 
 /**
  * @class
- * @classdesc
  * Represents labels inside the application.
  *
- * @hideconstructor
  * @component
  * @example
  * return (

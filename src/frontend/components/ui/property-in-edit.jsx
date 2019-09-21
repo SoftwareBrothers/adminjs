@@ -23,10 +23,8 @@ const Property = styled.div`
   }
 `
 /**
- * @classdesc
  * Wrapps input with label and optional error
  *
- * @hideconstructor
  * @component
  * @example <caption>Standard property</caption>
  * const property = {

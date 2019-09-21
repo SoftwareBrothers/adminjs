@@ -37,10 +37,9 @@ const Level = styled.div.attrs({
 `
 
 /**
- * @name ValueBlock
- * @classdesc
  * Simple Widget, which can be used in the dashboard
- * @hideconstructor
+ *
+ * @name ValueBlock
  * @component
  * @example
  * return (

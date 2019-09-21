@@ -61,12 +61,9 @@ const Btn = styled(Link).attrs(({ primary }) => ({
 `
 
 /**
- * @classdesc
  * Base button component
  *
  * @component
- * @hideconstructor
- *
  * @example <caption>Regular button</caption>
  * return (
  *   <WrapperBox border>

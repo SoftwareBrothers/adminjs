@@ -45,11 +45,9 @@ const Spinner = styled.div.attrs({
 `
 
 /**
- * @classdesc
  * Simple loader
- * @hideconstructor
- * @component
  *
+ * @component
  * @example
  * return (
  *   <WrapperBox border><Loader/></WrapperBox>

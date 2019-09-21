@@ -26,11 +26,9 @@ const DropdownMenu = styled.div.attrs({
 `
 
 /**
- * @classdesc
  * Representation of a dropdown with buttons.
-
+ *
  * @component
- * @hideconstructor
  * @example
  * return (
  * <WrapperBox border style={{height: 200, marginLeft: 200}}>

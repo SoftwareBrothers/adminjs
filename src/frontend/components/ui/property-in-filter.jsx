@@ -25,10 +25,8 @@ const Property = styled.div`
 `
 
 /**
- * @classdesc
  * Wrapps input with label in Filter
  *
- * @hideconstructor
  * @component
  * @example
  * const property = {

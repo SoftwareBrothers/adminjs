@@ -16,11 +16,9 @@ const StyledWrapperBox = styled.section`
 `
 
 /**
- * @classdesc
  * Basic layout element which controls padding.
  *
  * @component
- * @hideconstructor
  * @example
  * return (
  *   <WrapperBox border>

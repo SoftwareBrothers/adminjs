@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/anchor-has-content */
 import React from 'react'
 
 import { resourceType, actionType, recordType } from '../../types'
@@ -9,7 +8,6 @@ import actions from '../actions'
 import { DOCS } from '../../../constants'
 
 /**
- * @classdesc
  * Component which renders all the default and custom actions for both the Resource and the Record.
  *
  * It passes all props down to the actual Action component.
@@ -54,7 +52,7 @@ import { DOCS } from '../../../constants'
  * ```
  *
  * @component
- * @hideconstructor
+ * @name BaseActionComponent
  * @category Base
  */
 class BaseActionComponent extends React.Component {

@@ -9,7 +9,7 @@ import WrapperBox from '../ui/wrapper-box'
 import Loader from '../ui/loader'
 import Notice from '../app/notice'
 import { resourceType, matchType, pathsType } from '../../types'
-import BaseAction from '../app/base-action'
+import BaseAction from '../app/base-action-component'
 import ApiClient from '../../utils/api-client'
 
 const ContainerRecord = styled.div`
