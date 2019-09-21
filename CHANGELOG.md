@@ -6,7 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 Started from version 0.9.5
 
-## [1.2.0] - not released yet
+## [1.2.0] - 2019-09-21
 
 ### Fixed
 
@@ -17,6 +17,7 @@ Started from version 0.9.5
 
 * remove AdminBro from page title [#121]
 * change loader in list from a spinner to placeholder
+* update documentation with new Components and adapters
 
 ### Added
 
