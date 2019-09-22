@@ -21,6 +21,8 @@ const { unflatten } = flat
  *
  * @param {BaseProperty~JSON} property
  * @param {BaseRecord~JSON} record
+ *
+ * @private
  */
 const convertParamsToArrayItems = (property, record) => {
   const tempName = 'arrayField'
