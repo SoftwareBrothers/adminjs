@@ -47,7 +47,7 @@ const types = {
  *       properties: {
  *         name: {
  *           components: {
- *             show: AdminBro.require('./my-react-component'),
+ *             show: AdminBro.bundle('./my-react-component'),
  *           },
  *         },
  *       },

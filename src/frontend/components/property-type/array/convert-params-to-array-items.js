@@ -1,6 +1,4 @@
-import flat from 'flat'
-
-const { unflatten } = flat
+import { unflatten } from 'flat'
 
 /**
  * Converts flatten params to array items when given property is an array.

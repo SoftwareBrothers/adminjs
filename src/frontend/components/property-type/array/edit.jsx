@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import flat from 'flat'
+import { unflatten, flatten } from 'flat'
 
 import PropertyInEdit from '../../ui/property-in-edit'
 import StyledButton from '../../ui/styled-button'
@@ -9,8 +9,6 @@ import Columns from '../../ui/columns'
 import { simplifiedPropertyType, recordType } from '../../../types'
 import convertParamsToArrayItems from './convert-params-to-array-items'
 import StyledSection from '../../ui/styled-section'
-
-const { unflatten, flatten } = flat
 
 export default class Edit extends React.Component {
   constructor(props) {

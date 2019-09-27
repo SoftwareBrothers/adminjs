@@ -13,7 +13,7 @@
  *   icon: 'fas fa-eye',
  *   isVisible: true,
  *   handler: async () => {...},
- *   component: AdminBro.require('./my-action-component'),
+ *   component: AdminBro.bundle('./my-action-component'),
  * }
  * ```
  *

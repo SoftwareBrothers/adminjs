@@ -25,7 +25,7 @@ import { DOCS } from '../../../constants'
  *             icon: 'fas fa-eye',
  *             inVisible: (resource, record) => record.param('email') !== '',
  *             actionType: 'record',
- *             component: AdminBro.require('./my-new-action'),
+ *             component: AdminBro.bundle('./my-new-action'),
  *             handler: (request, response, data) => {
  *               return {
  *                  ...

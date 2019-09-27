@@ -44,7 +44,7 @@ describe('AdminBro', function () {
     })
     context('file exists', function () {
       beforeEach(function () {
-        this.result = AdminBro.require('../spec/fixtures/example-component')
+        this.result = AdminBro.bundle('../spec/fixtures/example-component')
       })
 
       it('adds given file to a UserComponents object', function () {
@@ -65,7 +65,7 @@ describe('AdminBro', function () {
 
     it('throws an error when component doesn\t exist', function () {
       expect(() => {
-        AdminBro.require('./fixtures/example-components')
+        AdminBro.bundle('./fixtures/example-components')
       }).to.throw().property('name', 'ConfigurationError')
     })
   })

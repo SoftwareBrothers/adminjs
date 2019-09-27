@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 
 import PropertyInFilter, { Label } from '../../ui/property-in-filter'
 import { propertyType } from '../../../types'
-import BackendFilter from '../../../../backend/utils/filter'
+import * as BackendFilter from '../../../../backend/utils/filter'
 
 const { PARAM_SEPARATOR } = BackendFilter
 

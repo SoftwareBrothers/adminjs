@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+      "outDir": "./built",
+      "allowJs": true,
+      "target": "esnext",
+      "esModuleInterop": true,
+      "jsx": "react"
+  },
+  "include": [
+      "./src/**/*",
+      "./spec/**/*"
+  ],
+  "exclude": [
+      "./src/frontend/assets/**/*"
+  ]
+}

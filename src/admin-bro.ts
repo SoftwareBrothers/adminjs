@@ -1,3 +1,5 @@
+import AdminBroOptions from './admin-bro-options.interface'
+
 const _ = require('lodash')
 const path = require('path')
 const fs = require('fs')
@@ -16,66 +18,15 @@ const ACTIONS = require('./backend/actions')
 
 const Router = require('./backend/router')
 
-const pkg = require('../package.json')
+const pkg = require('../../package.json')
 
 /**
- * @typedef {Object} AdminBroOptions
- * @property {String} [rootPath='/admin']             under which path AdminBro will be available
- * @property {String} [logoutPath='/admin/logout']    url to a logout action
- * @property {String} [loginPath='/admin/login']      url to a login page
- * @property {BaseDatabase[]} [databases=[]]          array of all databases
- * @property {Object[]} [resources=[]]                array of all database resources.
- *                                                    Resources can be given directly or
- *                                                    nested within an object along with its
- *                                                    options
- * @property {BaseResource} [resources[].resource]    class, which extends {@link BaseResource}
- * @property {ResourceOptions} [resources[].options]  options for given resource
- * @property {Object} [dashboard]                     your custom dashboard page
- * @property {BaseAction.handler} [dashboard.handler] action handler which will override default
- *                                                    dashboard handler - you can perform actions
- *                                                    on the backend there and pass results to
- *                                                    component
- * @property {Component} [dashboard.component]        Component which will be rendered on the
- *                                                    dashboard
- * @property {Object} [version]                      sets the versions visibility
- * @property {Boolean} [version.admin]               if set to true, shows current AdminBro version
- * @property {String} [version.app]                  if set, shows this version in the UI
- * @property {Object} [branding]                      branding settings
- * @property {String} [branding.logo]                 logo shown in AdminBro in the top left corner
- * @property {String} [branding.companyName]          company name
- * @property {Object} [branding.theme]                override custom css properties as colors
- *                                                    and paddings. See
- *                        <a href='/admin-bro_src_frontend_styles_variables.js.html'>This file</a>
- *                                                    example: `colors: {primary: 'red'}`
- * @property {Boolean} [branding.softwareBrothers]    if Software Brothers logos should be shown
- *                                                    in the sidebar footer
- * @property {Object} [assets]                        assets object
- * @property {String[]}  [assets.styles]              array with a paths to styles
- * @property {String[]}  [assets.scripts]             array with a paths to scripts
- * @property {String[]}  [assets.globalsFromCDN=true] indicates if globals like React, ReactDOM etc.
- *                                                    should be taken from CDNs. If set to false,
- *                                                    local bundle file will be used (makes sense
- *                                                    with slower internet connection)
- * @property {Object<String,String>} [env]            environmental variables passed to the frontend
- *
- * @description AdminBro takes a list of options of the entire framework. All off them
- * have default values, but you can easily tailor them to your needs
- *
- * @example
- * const AdminBro = require('admin-bro')
- * //...
- * const adminBro = new AdminBro({
- *   rootPath: '/xyz-admin',
- *   logoutPath: '/xyz-admin/exit',
- *   loginPath: '/xyz-admin/sign-in',
- *   databases: [connection]
- *   resources: [{ resource: ArticleModel, options: {...}}]
- *   branding: {
- *     companyName: 'XYZ c.o.'
- *   },
- * })
- * //...
+ * @typedef {Object} CurrentAdmin
+ * @property {String} email         email address
+ * @description
+ * Currently logged in admin user.
  */
+
 const defaults = {
   rootPath: '/admin',
   logoutPath: '/admin/logout',
@@ -102,10 +53,23 @@ const defaults = {
  * user. Its instance is a currier - injected in all other classes.
  */
 class AdminBro {
+  public resources: Array<BaseResource>
+  public options: AdminBroOptions
+  public static registeredAdapters: Array<{ Database: BaseDatabase, Resource: BaseResource }>
+  public static Router: Router
+  public static BaseDatabase: BaseDatabase
+  public static BaseRecord: BaseRecord
+  public static BaseProperty: BaseProperty
+  public static Filter: Filter
+  public static ValidationError: ValidationError
+  public static ACTIONS: Map<String, Action>
+  public static VERSION: string
+  public static UserComponents: Map<String, String> | {}
+
   /**
-   * @param  {AdminBroOptions}   options
+   * @param   {AdminBroOptions}  options  options passed to adminBro
    */
-  constructor(options = {}) {
+  constructor(options: AdminBroOptions = {}) {
     /**
      * @type {BaseResource[]}
      * @description List of all resources available for the AdminBro
@@ -191,11 +155,11 @@ class AdminBro {
    * @example
    * const adminBroOptions = {
    *   dashboard: {
-   *     component: AdminBro.require('./path/to/component'),
+   *     component: AdminBro.bundle('./path/to/component'),
    *   }
    * }
    */
-  static require(src) {
+  public static bundle(src: string) {
     const extensions = ['.jsx', '.js']
     let filePath = ''
     const componentId = _.uniqueId('Component')
@@ -221,54 +185,7 @@ class AdminBro {
   }
 }
 
-/**
- * List of paths to all custom components defined by users.
- * @type {Object<String, String>}
- */
 AdminBro.UserComponents = {}
-
-/**
- * List of all supported routes along with controllers
- * @type {Router}
- */
-AdminBro.Router = Router
-
-/**
- * BaseResource
- * @type {typeof BaseResource}
- */
-AdminBro.BaseResource = BaseResource
-
-/**
- * BaseDatabase
- * @type {typeof BaseDatabase}
- */
-AdminBro.BaseDatabase = BaseDatabase
-
-/**
- * BaseRecord
- * @type {typeof BaseRecord}
- */
-AdminBro.BaseRecord = BaseRecord
-
-/**
- * BaseProperty
- * @type {typeof BaseProperty}
- */
-AdminBro.BaseProperty = BaseProperty
-
-/**
- * Filter
- * @type {typeof Filter}
- */
-AdminBro.Filter = Filter
-
-/**
- * ValidationError
- * @type {typeof ValidationError}
- */
-AdminBro.ValidationError = ValidationError
-
 AdminBro.registeredAdapters = []
 
 /**
@@ -279,4 +196,52 @@ AdminBro.ACTIONS = ACTIONS
 
 AdminBro.VERSION = pkg.version
 
-module.exports = AdminBro
+export let registerAdapter = AdminBro.registerAdapter
+export let bundle = AdminBro.bundle
+
+export {
+  AdminBro,
+  /**
+   * BaseProperty
+   * @memberof AdminBro
+   * @type {typeof BaseProperty}
+   */
+  BaseProperty,
+  
+  /**
+   * BaseResource
+   * @type {typeof BaseResource}
+   */
+  BaseResource,
+
+  /**
+   * List of all supported routes along with controllers
+   * @type {Router}
+   */
+  Router,
+
+  /**
+   * BaseDatabase
+   * @type {typeof BaseDatabase}
+   */
+  BaseDatabase,
+
+  /**
+   * BaseRecord
+   * @type {typeof BaseRecord}
+   */
+  BaseRecord,
+
+  /**
+   * Filter
+   * @type {typeof Filter}
+   */
+  Filter,
+
+  /**
+   * ValidationError
+   * @type {typeof ValidationError}
+   */
+  ValidationError,
+}
+

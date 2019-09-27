@@ -23,6 +23,11 @@ const ForbiddenError = require('../utils/forbidden-error')
  * @hideconstructor
  */
 class ApiController {
+  /**
+   * @param {Object} options
+   * @param {AdminBroOptions} options.admin
+   * @param {CurrentAdmin} [currentAdmin]
+   */
   constructor({ admin }, currentAdmin) {
     this._admin = admin
     this.currentAdmin = currentAdmin
@@ -52,13 +57,6 @@ class ApiController {
   }
 
   /**
-   * @typedef {Object} ApiController~SearchResponse
-   * @property {Array} records
-   * @property {String} records[].title
-   * @property {String} records[].id
-   */
-
-  /**
    * Search records by query string.
    *
    * Handler function reponsible for a `.../api/resources/{resourceId}/search/{query}` route
@@ -66,7 +64,7 @@ class ApiController {
    * @param   {Object}  request
    * @param   {Object}  response
    *
-   * @return  {ApiController~SearchResponse}    found records
+   * @return  {SearchResponse}    found records
    */
   async search(request, response) {
     const queryString = request.params && request.params.query
@@ -164,3 +162,16 @@ class ApiController {
 }
 
 module.exports = ApiController
+
+/**
+ * @typedef {Object} SearchResponse
+ * @memberof ApiController
+ * @property {Array} records
+ * @property {String} records[].title
+ * @property {String} records[].id
+ */
+
+/**
+ * @type {SearchResponse}
+ */
+module.exports.SearchResponse

@@ -28,9 +28,6 @@ const _ = require('lodash')
  * @category Decorators
  */
 class PropertyDecorator {
-  /** @typedef {import('./resource-decorator')} ResourceDecorator */
-  /** @typedef {import('../../admin-bro')} AdminBro */
-
   /**
    * @param {Object} opts
    * @param {BaseProperty}        opts.property

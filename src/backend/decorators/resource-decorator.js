@@ -32,7 +32,7 @@ const DEFAULT_MAX_ITEMS_IN_LIST = 8
  * @property {String} parent.name       name of the parent category
  * @property {String} parent.icon       icon class of a parent category (i.e. 'icon-bomb')
  * @property {Object<String, PropertyOptions>} properties list of properties with their options
- * @property {Object<String, ActionDecorator>} actions   list of actions
+ * @property {Object<String, BaseAction>} actions   list of actions
  */
 
 /**
@@ -221,6 +221,7 @@ class ResourceDecorator {
    * List of all actions which should be invoked for entire resource and not
    * for a particular record
    *
+   * @param {CurrentAdmin} currentAdmin   currently logged in admin user
    * @return  {Array<Action>}     Actions assigned to resources
    */
   resourceActions(currentAdmin) {
@@ -236,16 +237,16 @@ class ResourceDecorator {
    * List of all actions which should be invoked for given record and not
    * for an entire resource
    *
-   * @param {BaseResource} resource
-   * @param {BaseRecord} record
+   * @param {BaseRecord} record           record for which action should be invoked
+   * @param {CurrentAdmin} currentAdmin   currently logged in admin user
    * @return  {Array<Action>}     Actions assigned to each record
    */
-  recordActions(currentAdmin) {
+  recordActions(record, currentAdmin) {
     return Object.values(this.actions)
       .filter(action => (
         action.isRecordType()
-        && action.isVisible(currentAdmin)
-        && action.isAccessible(currentAdmin)
+        && action.isVisible(currentAdmin, record)
+        && action.isAccessible(currentAdmin, record)
       ))
   }
 
@@ -295,7 +296,7 @@ class ResourceDecorator {
   /**
    * Returns JSON representation of a resource
    *
-   * @param {Object} currentAdmin
+   * @param {CurrentAdmin} currentAdmin
    * @return  {BaseResource~JSON}
    */
   toJSON(currentAdmin) {
@@ -305,6 +306,7 @@ class ResourceDecorator {
       parent: this.getParent(),
       href: this.h.resourceActionUrl({ resourceId: this._resource.id(), actionName: 'list' }),
       titleProperty: this.titleProperty().toJSON(),
+      actions: this.resourceActions(currentAdmin).map(ra => ra.toJSON()),
       resourceActions: this.resourceActions(currentAdmin).map(ra => ra.toJSON()),
       recordActions: this.recordActions(currentAdmin).map(ra => ra.toJSON()),
       listProperties: this.getProperties({ where: 'list', max: DEFAULT_MAX_ITEMS_IN_LIST }).map(

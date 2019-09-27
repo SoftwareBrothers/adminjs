@@ -38,10 +38,11 @@ class ApiClient {
   /**
    * Search by query string for records in a given resource.
    *
-   * @param   {String}  resourceId  Id of a {@link BaseResource~JSON}
-   * @param   {String}  query       query string
+   * @param   {Object}  options
+   * @param   {String}  options.resourceId  Id of a {@link BaseResource~JSON}
+   * @param   {String}  options.query       query string
    *
-   * @return  {Promise<ApiController~SearchResponse>}
+   * @return  {Promise<SearchResponse>}
    */
   async searchRecords({ resourceId, query }) {
     const q = encodeURIComponent(query)
@@ -107,14 +108,3 @@ class ApiClient {
 }
 
 export default ApiClient
-
-/**
- * @typedef {Object} ApiClient~RecordsQuery
- * @property {Number} [page=1]
- * @property {Number} [perPage=10]
- * @property {Object} [filter]      filter which narrow down the search criteria
- *                                  in the for of a {key: value}, or {key: {from, to}}
- *                                  for dates.
- * @property {String} [direction]   sorting direction. Either `asc` or `desc`
- * @property {String} [sortBy]      property base on which results should be sorted
- */

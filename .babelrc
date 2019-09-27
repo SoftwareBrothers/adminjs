@@ -1,5 +1,11 @@
 {
-  "presets": ["@babel/preset-react", "@babel/preset-env"],
+  "presets": ["@babel/preset-react", ["@babel/preset-env", {
+    "modules": "commonjs"
+  }], "@babel/preset-typescript"],
   "plugins": ["babel-plugin-styled-components"],
-  "only": ["src\/frontend/"]
+  "only": ["src/"],
+  "ignore": [
+    "src/frontend/assets/scripts/global-bundle.js",
+    "src/frontend/assets/scripts/app-bundle.js"
+  ]
 }
