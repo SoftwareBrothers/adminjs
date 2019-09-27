@@ -1,7 +1,7 @@
 const ResourceDecorator = require('./resource-decorator')
 const PropertyDecorator = require('./property-decorator')
 const ConfigurationError = require('../utils/configuration-error')
-const AdminBro = require('../../admin-bro')
+const { AdminBro } = require('../../admin-bro')
 const resourceStub = require('../../../spec/backend/helpers/resource-stub')
 
 describe('ResourceDecorator', function () {

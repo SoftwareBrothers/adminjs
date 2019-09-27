@@ -1,5 +1,5 @@
 const layoutTemplate = require('./layout-template')
-const AdminBro = require('../admin-bro')
+const { AdminBro } = require('../admin-bro')
 
 describe('layoutTemplate', function () {
   context('AdminBro with default options and not logged in user', function () {

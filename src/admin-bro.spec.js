@@ -1,6 +1,6 @@
 const path = require('path')
 
-const AdminBro = require('./admin-bro')
+const { AdminBro, BaseDatabase, BaseResource, registerAdapter } = require('./admin-bro')
 
 describe('AdminBro', function () {
   beforeEach(function () {
@@ -15,25 +15,25 @@ describe('AdminBro', function () {
 
   describe('.registerAdapter', function () {
     beforeEach(function () {
-      class Database extends AdminBro.BaseDatabase {}
-      class Resource extends AdminBro.BaseResource {}
+      class Database extends BaseDatabase {}
+      class Resource extends BaseResource {}
       this.DatabaseAdapter = { Database, Resource }
     })
 
     it('adds given adapter to list off all available adapters', function () {
-      AdminBro.registerAdapter(this.DatabaseAdapter)
+      registerAdapter(this.DatabaseAdapter)
       expect(AdminBro.registeredAdapters).to.have.lengthOf(1)
     })
 
     it('throws an error when adapter is not full', function () {
       expect(() => {
-        AdminBro.registerAdapter({ Resource: AdminBro.BaseResource })
+        registerAdapter({ Resource: AdminBro.BaseResource })
       }).to.throw('Adapter has to have both Database and Resource')
     })
 
     it('throws an error when adapter has elements not being subclassed from base adapter', function () {
       expect(() => {
-        AdminBro.registerAdapter({ Resource: {}, Database: {} })
+        registerAdapter({ Resource: {}, Database: {} })
       }).to.throw('Adapter elements has to be subclassess of AdminBro.BaseResource and AdminBro.BaseDatabase')
     })
   })
