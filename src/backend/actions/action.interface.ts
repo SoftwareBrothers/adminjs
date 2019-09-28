@@ -140,7 +140,7 @@
  *
  * 1. resource: {@link BaseResource~JSON}
  * 2. action: {@link Action~JSON}
- * 3. _(optional)_ recordId: String _(for recordAction)_
+ * 3. _(optional)_ recordId: string _(for recordAction)_
  *
  * When component is set to `false` then action doesn't have it's own view.
  * Instead after clicking button it is immediatelly performed. Example of
@@ -204,16 +204,16 @@ export interface ActionContext {
   _admin: AdminBro,
   resource: BaseResource,
   h: ViewHelpers,
-  action: ActionDecorator,
+  action: Action,
   currentAdmin?: CurrentAdmin,
 }
 
 export interface ActionRequest {
   request: {
     params?: {
-      resourceId?: String,
-      recordId?: String,
-      actionName?: String,
+      resourceId?: string,
+      recordId?: string,
+      actionName?: string,
     },
     payload?: any,
     query?: any,
@@ -227,15 +227,15 @@ export type Before = (request: ActionRequest) => ActionRequest
 export type After = (response: any) => any
 
 export default interface Action {
-  name: String,
+  name: string,
   isVisible?: Boolean | Is,
   isAccessible?: Boolean | Is,
-  label?: String,
+  label?: string,
   showFilter?: Boolean,
   actionType?: 'resource' | 'record' | Array<'resource' | 'record'>,
-  icon?: String,
-  guard?: String,
-  component?: Map<String, String>,
+  icon?: string,
+  guard?: string,
+  component?: Map<string, string>,
   handler?: Handler,
   before?: Before,
   after?: After,

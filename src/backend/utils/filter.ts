@@ -13,7 +13,7 @@ import BaseProperty from '../adapters/base-property'
 export const PARAM_SEPARATOR = '~~'
 
 export type FilterElement = {
-  path: String,
+  path: string,
   property: BaseProperty
   value: any,
 }

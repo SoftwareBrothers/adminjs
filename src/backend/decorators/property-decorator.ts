@@ -1,26 +1,8 @@
 import * as _ from 'lodash'
-
-/**
- * @typedef  {Object}  PropertyOptions
- * @property {Boolean | Object } [isVisible]
- * @property {Boolean} [isVisible.show]
- * @property {Boolean} [isVisible.list]
- * @property {Boolean} [isVisible.edit]
- * @property {Boolean} [isVisible.filter]
- * @property {Object} [components]
- * @property {Component} [components.show]
- * @property {Component} [components.view]
- * @property {Component} [components.list]
- * @property {Component} [components.edit]
- * @property {Component} [components.filter]
- * @property {String} [type]
- * @property {String} [label]
- * @property {Boolean} [isId]
- * @property {Boolean} [isTitle]
- * @property {Number} [position]          position of the field in a list,
- *                                      title field (isTitle) gets position -1 by default other
- *                                      fields gets position = 100.
- */
+import { BaseProperty, AdminBro } from '../../admin-bro'
+import { PropertyOptions } from './property-options.interface'
+import BaseResource from '../adapters/base-resource'
+import ResourceDecorator from './resource-decorator'
 
 /**
  * Decorates property
@@ -28,6 +10,10 @@ import * as _ from 'lodash'
  * @category Decorators
  */
 class PropertyDecorator {
+  private _property: BaseProperty
+  private _admin: AdminBro
+  private _resource: ResourceDecorator
+  public options: PropertyOptions
   /**
    * @param {Object} opts
    * @param {BaseProperty}        opts.property
@@ -35,7 +21,12 @@ class PropertyDecorator {
    * @param {PropertyOptions}     opts.options
    * @param {ResourceDecorator}   opts.resource
    */
-  constructor({ property, admin, options = {}, resource }) {
+  constructor({ property, admin, options = {}, resource }: {
+    property: BaseProperty,
+    admin: AdminBro,
+    options: PropertyOptions,
+    resource: ResourceDecorator
+  }) {
     this._property = property
     this._admin = admin
     this._resource = resource
@@ -132,7 +123,7 @@ class PropertyDecorator {
    *
    * @return {Number}
    */
-  position() {
+  position(): number {
     return this.overrideFromOptions('position', () => (
       this.isTitle() ? -1 : 100
     ))

@@ -13,8 +13,8 @@ const TITLE_COLUMN_NAMES = ['title', 'name', 'subject', 'email']
  *   B --> |has many|D(BasePorperty)
  */
 class BaseProperty {
-  private _path: String
-  private _type: String
+  private _path: string
+  private _type: string
   private _isId: Boolean
   private _isSortable: Boolean
   /**
@@ -26,7 +26,12 @@ class BaseProperty {
    * @param  {String} options.isId true when field should be treated as an ID
    * @param  {String} options.isSortable by default: true
    */
-  constructor({ path, type, isId, isSortable = true }) {
+  constructor({ path, type = 'string', isId = false, isSortable = true }: {
+    path: string,
+    type?: string,
+    isId?: Boolean,
+    isSortable?: Boolean,
+  }) {
     this._path = path
     this._type = type
     this._isId = isId
@@ -40,11 +45,11 @@ class BaseProperty {
    * Name of the property
    * @return {String} name of the property
    */
-  name() {
+  name(): string {
     return this._path
   }
 
-  path() {
+  path(): string {
     return this.name()
   }
 
@@ -54,7 +59,7 @@ class BaseProperty {
    *                      [id, string, float, number, boolean,
    *                       date, mixed]
    */
-  type() {
+  type(): string {
     return this._type || 'string'
   }
 
@@ -62,7 +67,7 @@ class BaseProperty {
    * Return true if given property should be treated as a Record Title.
    * @return {Boolean}
    */
-  isTitle() {
+  isTitle(): Boolean {
     return TITLE_COLUMN_NAMES.includes(this._path.toLowerCase())
   }
 
@@ -70,7 +75,7 @@ class BaseProperty {
    * Indicates if given property should be visible
    * @return {Boolean}
    */
-  isVisible() {
+  isVisible(): Boolean {
     return !this._path || !this._path.match('password')
   }
 
@@ -78,7 +83,7 @@ class BaseProperty {
    * Indicates if value of given property can be updated
    * @return {Boolean}
    */
-  isEditable() {
+  isEditable(): Boolean {
     return true
   }
 
@@ -86,7 +91,7 @@ class BaseProperty {
    * Returns true if given property is a uniq key in a table/collection
    * @return {Boolean}
    */
-  isId() {
+  isId(): Boolean {
     return this._isId
   }
 
@@ -97,7 +102,7 @@ class BaseProperty {
    * When property is responsible for the field: 'user_id' in SQL database
    * reference should be the name of the Resource which it refers to: `Users`
    */
-  reference() {
+  reference(): string | null {
     return null
   }
 
@@ -108,7 +113,7 @@ class BaseProperty {
    * @return  {Array<String> | null}  array of all available values or null when field
    *                                  is not an enum.
    */
-  availableValues() {
+  availableValues(): Array<String> | null {
     return null
   }
 
@@ -117,7 +122,7 @@ class BaseProperty {
    *
    * @return  {Boolean}
    */
-  isArray() {
+  isArray(): Boolean {
     return false
   }
 
@@ -126,7 +131,7 @@ class BaseProperty {
    *
    * @return  {Array<BaseProperty>} sub properties
    */
-  subProperties() {
+  subProperties(): Array<BaseProperty> {
     return []
   }
 
@@ -134,7 +139,7 @@ class BaseProperty {
    * Indicates if given property can be sorted
    * @return {Boolean}
    */
-  isSortable() {
+  isSortable(): Boolean {
     return this._isSortable
   }
 }

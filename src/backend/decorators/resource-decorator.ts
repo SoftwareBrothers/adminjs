@@ -1,11 +1,15 @@
 import * as _ from 'lodash'
 import BaseProperty from '../adapters/base-property'
-import PropertyDecorator, { PropertyOptions } from './property-decorator'
+import PropertyDecorator from './property-decorator'
 import ActionDecorator from './action-decorator'
 import ViewHelpers from '../utils/view-helpers'
 import ConfigurationError from '../utils/configuration-error'
 import BaseResource from '../adapters/base-resource'
-import { AdminBro } from '../../admin-bro'
+import { AdminBro, ACTIONS } from '../../admin-bro'
+import { ResourceOptions } from './resource-options.interface'
+import { PropertyOptions } from './property-options.interface'
+import BaseRecord from '../adapters/base-record'
+import CurrentAdmin from '../../current-admin.interface'
 
 /**
  * Default maximum number of items which should be present in a list.
@@ -14,29 +18,6 @@ import { AdminBro } from '../../admin-bro'
  * @private
  */
 export const DEFAULT_MAX_ITEMS_IN_LIST = 8
-
-/**
- * @typedef {Object} ResourceOptions
- * @property {String} name      name of a resource
- * @property {Array<String>}  listProperties    list of all properties which should be visible
- *                                              on a list
- * @property {Array<String>}  showProperties    list of all properties which should be visible
- *                                              on an object view
- * @property {Array<String>}  editProperties    list of all properties which should be visible
- *                                              on edit screen
- * @property {Array<String>}  filterProperties  list of all properties which should be visible
- *                                              in the filter
- * @property {Object | String} parent   parent category in the sidebar
- * @property {Object} [sort]            default sort parameters
- * @property {String} [sort.direction='asc']  either `asc` or `desc`.
- * @property {String} [sort.sortBy]     name of the field on which by default items should be
- *                                      sorted in a list. Default to first property.
- * @property {String} parent.name       name of the parent category
- * @property {String} parent.icon       icon class of a parent category (i.e. 'icon-bomb')
- * @property {Object<String, PropertyOptions>} properties list of properties with their options
- * @property {Object<String, BaseAction>} actions   list of actions
- */
-
 /**
  * Base decorator class which decorates the Resource.
  *
@@ -45,17 +26,21 @@ export const DEFAULT_MAX_ITEMS_IN_LIST = 8
 export default class ResourceDecorator {
   private _resource: BaseResource
   private _admin: AdminBro
-  private options: ResourceOptions
   private h: ViewHelpers
-  private properties: Map<String, PropertyDecorator> | {}
-  private actions: Map<String, ActionDecorator> | {}
+  private properties: {[key: string]: PropertyDecorator}
+  private actions: {[key: string]: ActionDecorator}
+  public options: ResourceOptions
   /**
    * @param  {Object}       options
    * @param  {BaseResource} options.resource  resource which is decorated
    * @param  {AdminBro}     options.admin  current instance of AdminBro
-   * @param  {ResourceOptions} [options]
+   * @param  {ResourceOptions} [options.options]
    */
-  constructor({ resource, admin, options = {} }) {
+  constructor({ resource, admin, options = {} }: {
+    resource: BaseResource,
+    admin: AdminBro,
+    options: ResourceOptions,
+  }) {
     this.getPropertyByKey = this.getPropertyByKey.bind(this)
     this._resource = resource
     this._admin = admin
@@ -90,7 +75,6 @@ export default class ResourceDecorator {
    * @returns {Object<String, ActionDecorator>}
    */
   decorateActions() {
-    const { ACTIONS } = this._admin.constructor
 
     // in the end we merge actions defined by the user with the default actions.
     // since _.merge is a deep merge it also overrides defaults with the parameters
@@ -146,16 +130,6 @@ export default class ResourceDecorator {
     return properties
   }
 
-  async recordsDecorator(populatedRecords) {
-    if (this.options.recordsDecorator) {
-      console.warn(`
-        Deprecation: function "ResourceDecorator#recordsDecorator" will be 
-        removed in the next versions. Please use "BaseAction.after()" hook instead`)
-      return this.options.recordsDecorator(populatedRecords)
-    }
-    return populatedRecords
-  }
-
   /**
    * Returns the name for the resource.
    * @return {String} resource name
@@ -169,9 +143,9 @@ export default class ResourceDecorator {
    * database type with its icon
    * @return {Object<String,String>} returns { name, icon }
    */
-  getParent() {
-    const parent = this.options.parent || this._resource.databaseName()
-    const name = parent.name || parent
+  getParent(): {name: string, icon: string} {
+    const parent = <{name: string, icon: string}> (this.options.parent || this._resource.databaseName())
+    const name = <string> (parent.name || parent)
     const icon = parent.icon ? parent.icon : `icon-${this._resource.databaseType() || 'database'}`
     return { name, icon }
   }
@@ -210,9 +184,12 @@ export default class ResourceDecorator {
     if (this.options[whereProperties] && this.options[whereProperties].length) {
       return this.options[whereProperties].map(this.getPropertyByKey)
     }
+
+    const keys = Object.keys(this.properties)
+
     const properties = Object.keys(this.properties)
       .filter(key => this.properties[key].isVisible(where))
-      .sort((key1, key2) => this.properties[key1].position() > this.properties[key2].position())
+      .sort((key1, key2) => this.properties[key1].position() > this.properties[key2].position() ? 1 : -1)
       .map(key => this.properties[key])
 
     if (max) {
@@ -232,7 +209,7 @@ export default class ResourceDecorator {
    * @param {CurrentAdmin} currentAdmin   currently logged in admin user
    * @return  {Array<Action>}     Actions assigned to resources
    */
-  resourceActions(currentAdmin) {
+  resourceActions(currentAdmin: CurrentAdmin) {
     return Object.values(this.actions)
       .filter(action => (
         action.isResourceType()
@@ -249,7 +226,7 @@ export default class ResourceDecorator {
    * @param {BaseRecord} record           record for which action should be invoked
    * @return  {Array<Action>}     Actions assigned to each record
    */
-  recordActions(currentAdmin, record) {
+  recordActions(currentAdmin: CurrentAdmin, record: BaseRecord) {
     return Object.values(this.actions)
       .filter(action => (
         action.isRecordType()
@@ -307,16 +284,15 @@ export default class ResourceDecorator {
    * @param {CurrentAdmin} currentAdmin
    * @return  {BaseResource~JSON}
    */
-  toJSON(currentAdmin) {
+  toJSON(currentAdmin?: CurrentAdmin) {
     return {
       id: this._resource.id(),
       name: this.getResourceName(),
       parent: this.getParent(),
       href: this.h.resourceActionUrl({ resourceId: this._resource.id(), actionName: 'list' }),
       titleProperty: this.titleProperty().toJSON(),
-      // actions: this.resourceActions(currentAdmin).map(ra => ra.toJSON()),
       resourceActions: this.resourceActions(currentAdmin).map(ra => ra.toJSON()),
-      recordActions: this.recordActions(currentAdmin).map(ra => ra.toJSON()),
+      // recordActions: this.recordActions(currentAdmin).map(ra => ra.toJSON()),
       listProperties: this.getProperties({ where: 'list', max: DEFAULT_MAX_ITEMS_IN_LIST }).map(
         property => property.toJSON(),
       ),

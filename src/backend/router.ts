@@ -7,8 +7,8 @@ const ASSETS_ROOT = `${__dirname}/../frontend/assets/`
 import { outPath as COMPONENT_BUNDLE_PATH} from './bundler/user-components-bundler'
 
 export interface RouterType {
-  assets: Array<{path: String, src: String}>,
-  routes: Array<{method: String, path: String, Controller: any, action: String, contentType?: String}>
+  assets: Array<{path: string, src: string}>,
+  routes: Array<{method: string, path: string, Controller: any, action: string, contentType?: string}>
 }
 
 /**

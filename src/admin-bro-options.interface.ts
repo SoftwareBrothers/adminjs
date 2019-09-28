@@ -1,11 +1,8 @@
-import { BaseDatabase } from "./admin-bro";
-import BaseResource from "./backend/adapters/base-resource";
-import { ResourceOptions } from "./backend/decorators/resource-decorator";
+import { BaseDatabase } from './admin-bro';
+import BaseResource from './backend/adapters/base-resource';
 import { Handler } from './backend/actions/action.interface'
-
-// import BaseDatabase from './backend/adapters/base-database'
-// import BaseResource from './backend/adapters/base-resource' 2
-// Ala ma kota
+import { ResourceOptions } from "./backend/decorators/resource-options.interface";
+import { colors, sizes, fonts, breakpoints } from './frontend/styles/variables'
 
 /**
  * @typedef {Object} AdminBroOptions
@@ -77,7 +74,7 @@ export default interface AdminBroOptions {
   }>,
   dashboard?: {
     handler?: Handler,
-    component?: Map<String, String>,
+    component?: Map<string, string>,
   },
   version?: {
     admin?: boolean,
@@ -86,7 +83,12 @@ export default interface AdminBroOptions {
   branding?: {
     logo?: string,
     companyName?: string,
-    theme?: CSSTheme,
+    theme?: {
+      colors?: typeof colors, 
+      sizes?: typeof sizes,
+      fonts?: typeof fonts,
+      breakpoints?: typeof breakpoints,
+    },
     softwareBrothers?: boolean,
   },
   assets?: {
@@ -94,5 +96,5 @@ export default interface AdminBroOptions {
     scripts?: Array<String>,
     globalsFromCDN: boolean,
   },
-  env?: Map<String, String>,
+  env?: Map<string, string>,
 }

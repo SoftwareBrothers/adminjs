@@ -1,8 +1,8 @@
 import ConfigurationError from '../utils/configuration-error'
 import ViewHelpers from '../utils/view-helpers'
-import AdminBroOptions from '../../admin-bro-options.interface'
-import { BaseResource } from '../../admin-bro'
-import Action from '../actions/action.interface'
+import { BaseResource, BaseRecord, AdminBro } from '../../admin-bro'
+import Action, { Is } from '../actions/action.interface'
+import CurrentAdmin from '../../current-admin.interface'
 
 /**
  * @typedef {Object} BaseAction~JSON
@@ -23,7 +23,7 @@ import Action from '../actions/action.interface'
  */
 export default class ActionDecorator {
   private name: string
-  private _admin: AdminBroOptions
+  private _admin: AdminBro
   private _resource: BaseResource
   private h: ViewHelpers
   private action: Action
@@ -85,17 +85,18 @@ export default class ActionDecorator {
     return this.action.actionType.includes('resource')
   }
 
-  is(what, currentAdmin, record) {
+  is(what: 'isAccessible' | 'isVisible', currentAdmin?: CurrentAdmin, record?: BaseRecord) {
     if (!['isAccessible', 'isVisible'].includes(what)) {
       throw new Error(`'what' has to be either "isAccessible" or "isVisible". You gave ${what}`)
     }
     let isAction
     if (typeof this.action[what] === 'function') {
-      isAction = this.action[what]({
+      isAction = (<Is> this.action[what])({
         resource: this._resource,
         action: this.action,
         h: this.h,
         currentAdmin,
+        _admin: this._admin,
       })
     } else if (typeof this.action[what] === 'undefined') {
       isAction = true
@@ -112,7 +113,7 @@ export default class ActionDecorator {
    *
    * @return  {Boolean}
    */
-  isVisible(currentAdmin, record) {
+  isVisible(currentAdmin?: CurrentAdmin, record?: BaseRecord) {
     return this.is('isVisible', currentAdmin, record)
   }
 
@@ -123,7 +124,7 @@ export default class ActionDecorator {
    * @param {CurrentAdmin} currentAdmin   currently logged in admin user
    * @return  {Boolean}
    */
-  isAccessible(currentAdmin, record) {
+  isAccessible(currentAdmin?: CurrentAdmin, record?: BaseRecord) {
     return this.is('isAccessible', currentAdmin, record)
   }
 

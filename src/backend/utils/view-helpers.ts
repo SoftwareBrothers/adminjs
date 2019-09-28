@@ -1,12 +1,14 @@
 import AdminBroOptions from "../../admin-bro-options.interface"
 
+const globalAny:any = global;
+
 /**
  * Collection of helper methods available in the views
  */
 export default class ViewHelpers {
   private options
   constructor({ options }: { options?: AdminBroOptions } = {}) {
-    let opts = options || (window && window.REDUX_STATE && window.REDUX_STATE.paths)
+    let opts = options || (globalAny && globalAny.REDUX_STATE && globalAny.REDUX_STATE.paths)
 
     opts = opts || {
       rootPath: '/admin',

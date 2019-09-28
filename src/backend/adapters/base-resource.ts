@@ -41,6 +41,15 @@ class BaseResource {
   static isAdapterFor(rawResource): Boolean {
     throw new NotImplementedError('BaseResource.isAdapterFor')
   }
+  
+  /**
+   * Creates given resource based on the raw resource object
+   *
+   * @param   {Object}  resource
+   */
+  constructor(resource: any) {
+    throw new NotImplementedError('BaseResource#constructor')
+  }
 
   /**
    * The name of the database to which resource belongs. When resource is
@@ -50,7 +59,7 @@ class BaseResource {
    * @return {String}         database name
    * @abstract
    */
-  databaseName(): String {
+  databaseName(): string {
     throw new NotImplementedError('BaseResource#databaseName')
   }
 
@@ -59,7 +68,7 @@ class BaseResource {
    * given resource. Default: 'database'
    * @return {String}
    */
-  databaseType(): String {
+  databaseType(): string {
     return 'database'
   }
 
@@ -71,7 +80,7 @@ class BaseResource {
    * @return {String}
    * @abstract
    */
-  name(): String {
+  name(): string {
     throw new NotImplementedError('BaseResource#name')
   }
 
@@ -82,7 +91,7 @@ class BaseResource {
    * @return {String} uniq resource id
    * @abstract
    */
-  id(): String {
+  id(): string {
     throw new NotImplementedError('BaseResource#id')
   }
 
@@ -145,7 +154,7 @@ class BaseResource {
     limit?: Number,
     offset?: Number,
     sort?: {
-      sortBy?: String,
+      sortBy?: string,
       direction?: 'asc' | 'desc'
     }
   }): Promise<Array<BaseRecord>> {
@@ -176,7 +185,7 @@ class BaseResource {
    * @return {Promise<BaseRecord>}   record
    * @abstract
    */
-  async findOne(id: String): Promise<BaseRecord | null> {
+  async findOne(id: string): Promise<BaseRecord | null> {
     throw new NotImplementedError('BaseResource#findOne')
   }
 
@@ -214,7 +223,7 @@ class BaseResource {
    * @throws {ValidationError} If there are validation errors it should be thrown
    * @abstract
    */
-  async update<T>(id: String, params: T): Promise<T> {
+  async update<T>(id: string, params: T): Promise<T> {
     throw new NotImplementedError('BaseResource#update')
   }
 

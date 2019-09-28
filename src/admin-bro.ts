@@ -39,7 +39,7 @@ const defaults: AdminBroOptions = {
   },
 }
 
-export type Adapter = { Database: BaseDatabase, Resource: BaseResource }
+export type Adapter = { Database: typeof BaseDatabase, Resource: typeof BaseResource }
 
 /**
  * Main class for AdminBro extension. It takes {@link AdminBroOptions} as a
@@ -65,7 +65,7 @@ class AdminBro {
   public static ValidationError: ValidationError
   public static ACTIONS: Map<String, Action>
   public static VERSION: string
-  public static UserComponents: Map<String, String> | {}
+  public static UserComponents: Map<string, string> | {}
 
   /**
    * @param   {AdminBroOptions}  options  options passed to adminBro
@@ -189,16 +189,9 @@ class AdminBro {
 AdminBro.UserComponents = {}
 AdminBro.registeredAdapters = []
 
-/**
- * List of all Actions defined by default in AdminBro
- * @type {Object<string, Action>}
- */
-AdminBro.ACTIONS = ACTIONS
-
-AdminBro.VERSION = pkg.version
-
 export let registerAdapter = AdminBro.registerAdapter
 export let bundle = AdminBro.bundle
+export let VERSION = pkg.version
 
 export {
   AdminBro,
@@ -209,5 +202,6 @@ export {
   BaseRecord,
   Filter,
   ValidationError,
+  ACTIONS,
 }
 

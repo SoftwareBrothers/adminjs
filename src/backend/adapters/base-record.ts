@@ -15,9 +15,9 @@ import ValidationError from '../utils/validation-error'
  */
 class BaseRecord {
   private resource: BaseResource
-  private params: Map<String, String> | {}
-  private errors: Map<String, String> | {}
-  private populated: Map<String, any> | {}
+  private params: {[key: string]: string} | {}
+  private errors: {[key: string]: string} | {}
+  private populated: {[key: string]: string} | {}
   /**
    * @param  {Object}       params         all resource data. I.e. field values
    * @param  {BaseResource} resource       resource to which given record belongs
