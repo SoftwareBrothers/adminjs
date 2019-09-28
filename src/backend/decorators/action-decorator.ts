@@ -85,7 +85,7 @@ export default class ActionDecorator {
     return this.action.actionType.includes('resource')
   }
 
-  is(what: 'isAccessible' | 'isVisible', currentAdmin?: CurrentAdmin, record?: BaseRecord) {
+  is(what: 'isAccessible' | 'isVisible', currentAdmin?: CurrentAdmin) {
     if (!['isAccessible', 'isVisible'].includes(what)) {
       throw new Error(`'what' has to be either "isAccessible" or "isVisible". You gave ${what}`)
     }
@@ -108,24 +108,22 @@ export default class ActionDecorator {
 
   /**
    * Is action visible in the UI
-   * @param {BaseRecord} record           record for which action should be invoked
    * @param {CurrentAdmin} currentAdmin   currently logged in admin user
    *
    * @return  {Boolean}
    */
-  isVisible(currentAdmin?: CurrentAdmin, record?: BaseRecord) {
-    return this.is('isVisible', currentAdmin, record)
+  isVisible(currentAdmin?: CurrentAdmin) {
+    return this.is('isVisible', currentAdmin)
   }
 
   /**
    * Is action accessible
    *
-   * @param {BaseRecord} record           record for which action should be invoked
    * @param {CurrentAdmin} currentAdmin   currently logged in admin user
    * @return  {Boolean}
    */
-  isAccessible(currentAdmin?: CurrentAdmin, record?: BaseRecord) {
-    return this.is('isAccessible', currentAdmin, record)
+  isAccessible(currentAdmin?: CurrentAdmin) {
+    return this.is('isAccessible', currentAdmin)
   }
 
   /**

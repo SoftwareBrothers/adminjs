@@ -47,9 +47,7 @@ class BaseResource {
    *
    * @param   {Object}  resource
    */
-  constructor(resource: any) {
-    throw new NotImplementedError('BaseResource#constructor')
-  }
+  constructor(resource: any) {}
 
   /**
    * The name of the database to which resource belongs. When resource is

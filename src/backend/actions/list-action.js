@@ -1,7 +1,7 @@
-const { unflatten } = require('flat')
-const sortSetter = require('../services/sort-setter')
-const Filter = require('../utils/filter')
-const { populator } = require('../utils/populator')
+import { unflatten } from 'flat'
+import sortSetter from '../services/sort-setter'
+import Filter from '../utils/filter'
+import { populator } from '../utils/populator'
 
 const PER_PAGE_LIMIT = 500
 
@@ -65,10 +65,7 @@ module.exports = {
       offset: (page - 1) * perPage,
       sort,
     })
-    let populatedRecords = await populator(records, listProperties)
-    populatedRecords = await resource.decorate().recordsDecorator(
-      populatedRecords.map(r => r.toJSON()),
-    )
+    const populatedRecords = await populator(records, listProperties)
 
     const total = await resource.count(filter)
     return {

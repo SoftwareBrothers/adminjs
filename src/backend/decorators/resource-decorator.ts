@@ -223,15 +223,14 @@ export default class ResourceDecorator {
    * for an entire resource
    *
    * @param {CurrentAdmin} currentAdmin   currently logged in admin user
-   * @param {BaseRecord} record           record for which action should be invoked
    * @return  {Array<Action>}     Actions assigned to each record
    */
-  recordActions(currentAdmin: CurrentAdmin, record: BaseRecord) {
+  recordActions(currentAdmin: CurrentAdmin) {
     return Object.values(this.actions)
       .filter(action => (
         action.isRecordType()
-        && action.isVisible(currentAdmin, record)
-        && action.isAccessible(currentAdmin, record)
+        && action.isVisible(currentAdmin)
+        && action.isAccessible(currentAdmin)
       ))
   }
 
@@ -292,7 +291,7 @@ export default class ResourceDecorator {
       href: this.h.resourceActionUrl({ resourceId: this._resource.id(), actionName: 'list' }),
       titleProperty: this.titleProperty().toJSON(),
       resourceActions: this.resourceActions(currentAdmin).map(ra => ra.toJSON()),
-      // recordActions: this.recordActions(currentAdmin).map(ra => ra.toJSON()),
+      recordActions: this.recordActions(currentAdmin).map(ra => ra.toJSON()),
       listProperties: this.getProperties({ where: 'list', max: DEFAULT_MAX_ITEMS_IN_LIST }).map(
         property => property.toJSON(),
       ),

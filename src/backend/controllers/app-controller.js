@@ -1,7 +1,8 @@
 /* eslint-disable no-unused-vars */
+import ViewHelpers from '../utils/view-helpers'
+import componentsBundler from '../bundler/user-components-bundler'
+
 const layoutTemplate = require('../../frontend/layout-template')
-const componentsBundler = require('../bundler/user-components-bundler')
-const ViewHelpers = require('../utils/view-helpers')
 
 class AppController {
   constructor({ admin }, currentAdmin) {

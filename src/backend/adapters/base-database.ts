@@ -13,9 +13,7 @@ const NotImplementedError = require('../utils/not-implemented-error')
  *   B --> |has many|D(BasePorperty)
  */
 class BaseDatabase {
-  constructor(database: any) {
-    throw new NotImplementedError('BaseDatabase.constructor')
-  }
+  constructor(database: any) {}
   /**
    * Checks if given adapter supports database provided by user
    *
