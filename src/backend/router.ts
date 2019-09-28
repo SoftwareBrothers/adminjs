@@ -1,10 +1,15 @@
-const path = require('path')
+import * as path from 'path'
 
 const AppController = require('./controllers/app-controller')
 const ApiController = require('./controllers/api-controller')
 
 const ASSETS_ROOT = `${__dirname}/../frontend/assets/`
-const COMPONENT_BUNDLE_PATH = require('./bundler/user-components-bundler').outPath
+import { outPath as COMPONENT_BUNDLE_PATH} from './bundler/user-components-bundler'
+
+export interface RouterType {
+  assets: Array<{path: String, src: String}>,
+  routes: Array<{method: String, path: String, Controller: any, action: String, contentType?: String}>
+}
 
 /**
  * Contains list of all routes grouped to `assets` and `routes`.
@@ -29,7 +34,7 @@ const COMPONENT_BUNDLE_PATH = require('./bundler/user-components-bundler').outPa
  *
  * @private
  */
-const Router = {
+const Router: RouterType = {
   assets: [{
     path: '/frontend/assets/icomoon.css',
     src: path.join(ASSETS_ROOT, 'styles/icomoon.css'),
@@ -131,4 +136,4 @@ if (process.env.NODE_ENV === 'production') {
   })
 }
 
-module.exports = Router
+export default Router

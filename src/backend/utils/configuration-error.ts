@@ -25,4 +25,4 @@ class ConfigurationError extends Error {
   }
 }
 
-module.exports = ConfigurationError
+export default ConfigurationError

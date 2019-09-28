@@ -1,4 +1,6 @@
-const { unflatten, flatten } = require('flat')
+import { unflatten, flatten }  from 'flat'
+import { BaseResource } from '../../admin-bro'
+import BaseProperty from '../adapters/base-property'
 
 /**
  * @typedef {Object} Filter~Property
@@ -8,11 +10,21 @@ const { unflatten, flatten } = require('flat')
  * @property {Object} populated
  */
 
+export const PARAM_SEPARATOR = '~~'
+
+export type FilterElement = {
+  path: String,
+  property: BaseProperty
+  value: any,
+}
+
 /**
  * Filter object wrapping up selected filters.
  * @private
  */
-class Filter {
+export default class Filter {
+  public filters: Map<String, FilterElement> | {}
+  private resource: BaseResource
   /**
    * Changes raw nested filters to form Object<path, value>.
    *
@@ -34,8 +46,8 @@ class Filter {
    * @return  {Object}
    */
 
-  static normalizeKeys(filters) {
-    return unflatten(flatten(filters), { delimiter: Filter.PARAM_SEPARATOR })
+  static normalizeKeys(filters): Map<String, any> {
+    return unflatten(flatten(filters), { delimiter: PARAM_SEPARATOR })
   }
 
   /**
@@ -91,7 +103,3 @@ class Filter {
     return !!Object.keys(this.filters).length
   }
 }
-
-Filter.PARAM_SEPARATOR = '~~'
-
-module.exports = Filter

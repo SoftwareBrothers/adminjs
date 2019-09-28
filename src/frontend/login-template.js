@@ -43,4 +43,4 @@ const html = ({ action, errorMessage }) => {
   `
 }
 
-module.exports = html
+export default html

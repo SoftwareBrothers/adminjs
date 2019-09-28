@@ -20,7 +20,7 @@ const buildUrl = (fnName) => {
  *
  * @category Errors
  */
-class NotImplementedError extends Error {
+export default class NotImplementedError extends Error {
   /**
    * @param   {string}  fnName  name of the function, base on which error will
    * print on the output link to the method documentation.
@@ -34,5 +34,3 @@ class NotImplementedError extends Error {
     this.message = message
   }
 }
-
-module.exports = NotImplementedError

@@ -4,7 +4,8 @@
       "allowJs": true,
       "target": "esnext",
       "esModuleInterop": true,
-      "jsx": "react"
+      "jsx": "react",
+      "noEmit": true
   },
   "include": [
       "./src/**/*",

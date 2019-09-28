@@ -1,4 +1,4 @@
-const _ = require('lodash')
+import * as _ from 'lodash'
 
 /**
  * @typedef  {Object}  PropertyOptions
@@ -210,4 +210,4 @@ class PropertyDecorator {
   }
 }
 
-module.exports = PropertyDecorator
+export default PropertyDecorator

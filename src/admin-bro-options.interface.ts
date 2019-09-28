@@ -1,3 +1,8 @@
+import { BaseDatabase } from "./admin-bro";
+import BaseResource from "./backend/adapters/base-resource";
+import { ResourceOptions } from "./backend/decorators/resource-decorator";
+import { Handler } from './backend/actions/action.interface'
+
 // import BaseDatabase from './backend/adapters/base-database'
 // import BaseResource from './backend/adapters/base-resource' 2
 // Ala ma kota
@@ -61,22 +66,18 @@
  * //...
  */
 
-const a = 1
-
-interface ResourceEntry {
-  resource: BaseResource,
-  options: ResourceOptions
-}
-
 export default interface AdminBroOptions {
-  rootPath?: string
-  logoutPath?: string
-  loginPath?: string
-  databases?: Array<BaseDatabase>
-  resources?: Array<BaseResource> | Array<ResourceEntry>
+  rootPath?: string,
+  logoutPath?: string,
+  loginPath?: string,
+  databases?: Array<BaseDatabase>,
+  resources?: Array<BaseResource> | Array<{
+    resource: BaseResource,
+    options: ResourceOptions,
+  }>,
   dashboard?: {
-    handler?: ActionHandler,
-    component?: React.Component,
+    handler?: Handler,
+    component?: Map<String, String>,
   },
   version?: {
     admin?: boolean,
@@ -93,5 +94,5 @@ export default interface AdminBroOptions {
     scripts?: Array<String>,
     globalsFromCDN: boolean,
   },
-  env?: Map<String, String>
+  env?: Map<String, String>,
 }

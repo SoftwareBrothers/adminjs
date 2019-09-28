@@ -1,8 +1,11 @@
+import AdminBroOptions from "../../admin-bro-options.interface"
+
 /**
  * Collection of helper methods available in the views
  */
-class ViewHelpers {
-  constructor({ options } = {}) {
+export default class ViewHelpers {
+  private options
+  constructor({ options }: { options?: AdminBroOptions } = {}) {
     let opts = options || (window && window.REDUX_STATE && window.REDUX_STATE.paths)
 
     opts = opts || {
@@ -72,5 +75,3 @@ class ViewHelpers {
     return this.urlBuilder(['frontend', 'assets', asset])
   }
 }
-
-module.exports = ViewHelpers

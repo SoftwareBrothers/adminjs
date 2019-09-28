@@ -1,6 +1,8 @@
-const { flatten, unflatten } = require('flat')
-const _ = require('lodash')
-const ValidationError = require('../utils/validation-error')
+import BaseResource from "./base-resource"
+
+import { flatten, unflatten } from 'flat'
+import _ from 'lodash'
+import ValidationError from '../utils/validation-error'
 
 /**
  * Representation of an particular ORM Record in given Resource in AdminBro
@@ -12,6 +14,10 @@ const ValidationError = require('../utils/validation-error')
  *   B --> |has many|D(BasePorperty)
  */
 class BaseRecord {
+  private resource: BaseResource
+  private params: Map<String, String> | {}
+  private errors: Map<String, String> | {}
+  private populated: Map<String, any> | {}
   /**
    * @param  {Object}       params         all resource data. I.e. field values
    * @param  {BaseResource} resource       resource to which given record belongs
@@ -221,4 +227,4 @@ class BaseRecord {
   }
 }
 
-module.exports = BaseRecord
+export default BaseRecord

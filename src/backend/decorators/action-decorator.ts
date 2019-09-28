@@ -1,7 +1,8 @@
-const ConfigurationError = require('../utils/configuration-error')
-const ViewHelpers = require('../utils/view-helpers')
-
+import ConfigurationError from '../utils/configuration-error'
+import ViewHelpers from '../utils/view-helpers'
 import AdminBroOptions from '../../admin-bro-options.interface'
+import { BaseResource } from '../../admin-bro'
+import Action from '../actions/action.interface'
 
 /**
  * @typedef {Object} BaseAction~JSON
@@ -20,9 +21,12 @@ import AdminBroOptions from '../../admin-bro-options.interface'
  *
  * @category Decorators
  */
-class ActionDecorator {
+export default class ActionDecorator {
   private name: string
   private _admin: AdminBroOptions
+  private _resource: BaseResource
+  private h: ViewHelpers
+  private action: Action
   /**
    * @param {Object}        params
    * @param {BaseAction}    params.action
@@ -140,5 +144,3 @@ class ActionDecorator {
     }
   }
 }
-
-module.exports = ActionDecorator

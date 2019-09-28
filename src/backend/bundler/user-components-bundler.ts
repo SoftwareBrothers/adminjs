@@ -26,6 +26,7 @@ async function build(admin, { write = false } = {}) {
   })
 }
 
-build.outPath = outPath
-
-module.exports = build
+export {
+  build as default,
+  outPath
+}

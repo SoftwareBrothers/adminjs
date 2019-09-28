@@ -73,27 +73,27 @@
  * @param {BaseAction~Context}       data      data passed as the context of the action
  * @example
  * {
- *   ...,
- *   isVisible: (data) => data.currentAdmin.role === 'manager',
- *   ...
- * }
- */
-
-/**
- * @name isAccessible
- * @description
- * indicates if action can be invoked for given invocation context.
- * Similar to {@link BaseAction.isVisible} - it also can be a simple boolean value.
- * @method
- * @memberof BaseAction
- * @param {BaseAction~Context}       data      data passed as the context of the action
- * @example
- * {
   *   ...,
-  *   isAccessible: (data) => data.currentAdmin.role !== 'manager',
+  *   isVisible: (data) => data.currentAdmin.role === 'manager',
   *   ...
   * }
   */
+ 
+ /**
+  * @name isAccessible
+  * @description
+  * indicates if action can be invoked for given invocation context.
+  * Similar to {@link BaseAction.isVisible} - it also can be a simple boolean value.
+  * @method
+  * @memberof BaseAction
+  * @param {BaseAction~Context}       data      data passed as the context of the action
+  * @example
+  * {
+   *   ...,
+   *   isAccessible: (data) => data.currentAdmin.role !== 'manager',
+   *   ...
+   * }
+   */
 
 /**
  * @name label
@@ -150,6 +150,7 @@
  * @memberof BaseAction
  */
 
+
 /**
  * @name handler
  * @description
@@ -190,3 +191,52 @@
  * @param {Object}  data        data returned by the {@link BaseAction.handler} function
  * @return {Object}                modified data
  */
+
+
+ 
+
+import { AdminBro, BaseResource } from '../../admin-bro'
+import ActionDecorator from '../decorators/action-decorator'
+import CurrentAdmin from '../../current-admin.interface'
+import ViewHelpers from '../utils/view-helpers'
+
+export interface ActionContext {
+  _admin: AdminBro,
+  resource: BaseResource,
+  h: ViewHelpers,
+  action: ActionDecorator,
+  currentAdmin?: CurrentAdmin,
+}
+
+export interface ActionRequest {
+  request: {
+    params?: {
+      resourceId?: String,
+      recordId?: String,
+      actionName?: String,
+    },
+    payload?: any,
+    query?: any,
+    method: 'post' | 'get'
+  }
+}
+
+export type Is = (context: ActionContext) => Boolean
+export type Handler = (request: ActionRequest, response: any, context: ActionContext) => any
+export type Before = (request: ActionRequest) => ActionRequest
+export type After = (response: any) => any
+
+export default interface Action {
+  name: String,
+  isVisible?: Boolean | Is,
+  isAccessible?: Boolean | Is,
+  label?: String,
+  showFilter?: Boolean,
+  actionType?: 'resource' | 'record' | Array<'resource' | 'record'>,
+  icon?: String,
+  guard?: String,
+  component?: Map<String, String>,
+  handler?: Handler,
+  before?: Before,
+  after?: After,
+}

@@ -1,33 +1,27 @@
 import AdminBroOptions from './admin-bro-options.interface'
+import BaseResource from './backend/adapters/base-resource'
+import BaseDatabase from './backend/adapters/base-database'
+import BaseRecord from './backend/adapters/base-record'
+import BaseProperty from './backend/adapters/base-property'
+import Filter from './backend/utils/filter'
+import ValidationError from './backend/utils/validation-error'
+import ConfigurationError from './backend/utils/configuration-error'
+import ResourcesFactory from './backend/utils/resources-factory'
+import userComponentsBunlder from './backend/bundler/user-components-bundler'
+import Router, { RouterType } from './backend/router'
+import Action from './backend/actions/action.interface'
 
-const _ = require('lodash')
-const path = require('path')
-const fs = require('fs')
+import * as _ from 'lodash'
+import * as path from 'path'
+import * as fs from 'fs'
 
-const loginTemplate = require('./frontend/login-template')
-const BaseResource = require('./backend/adapters/base-resource')
-const BaseDatabase = require('./backend/adapters/base-database')
-const BaseRecord = require('./backend/adapters/base-record')
-const BaseProperty = require('./backend/adapters/base-property')
-const Filter = require('./backend/utils/filter')
-const ValidationError = require('./backend/utils/validation-error')
-const ConfigurationError = require('./backend/utils/configuration-error')
-const ResourcesFactory = require('./backend/utils/resources-factory')
-const userComponentsBunlder = require('./backend/bundler/user-components-bundler')
+import loginTemplate from './frontend/login-template'
+
 const ACTIONS = require('./backend/actions')
-
-const Router = require('./backend/router')
 
 const pkg = require('../../package.json')
 
-/**
- * @typedef {Object} CurrentAdmin
- * @property {String} email         email address
- * @description
- * Currently logged in admin user.
- */
-
-const defaults = {
+const defaults: AdminBroOptions = {
   rootPath: '/admin',
   logoutPath: '/admin/logout',
   loginPath: '/admin/login',
@@ -45,18 +39,25 @@ const defaults = {
   },
 }
 
+export type Adapter = { Database: BaseDatabase, Resource: BaseResource }
+
 /**
  * Main class for AdminBro extension. It takes {@link AdminBroOptions} as a
  * parameter and creates an admin instance.
  *
  * Its main responsibility is to fetch all the resources and/or databases given by a
  * user. Its instance is a currier - injected in all other classes.
+ * 
+ * @example
+ * const { AdminBro } = require('admin-bro')
+ * const admin = new AdminBro(AdminBroOptions)
+ * 
  */
 class AdminBro {
   public resources: Array<BaseResource>
   public options: AdminBroOptions
-  public static registeredAdapters: Array<{ Database: BaseDatabase, Resource: BaseResource }>
-  public static Router: Router
+  public static registeredAdapters: Array<Adapter>
+  public static Router: RouterType
   public static BaseDatabase: BaseDatabase
   public static BaseRecord: BaseRecord
   public static BaseProperty: BaseProperty
@@ -201,47 +202,12 @@ export let bundle = AdminBro.bundle
 
 export {
   AdminBro,
-  /**
-   * BaseProperty
-   * @memberof AdminBro
-   * @type {typeof BaseProperty}
-   */
   BaseProperty,
-  
-  /**
-   * BaseResource
-   * @type {typeof BaseResource}
-   */
   BaseResource,
-
-  /**
-   * List of all supported routes along with controllers
-   * @type {Router}
-   */
   Router,
-
-  /**
-   * BaseDatabase
-   * @type {typeof BaseDatabase}
-   */
   BaseDatabase,
-
-  /**
-   * BaseRecord
-   * @type {typeof BaseRecord}
-   */
   BaseRecord,
-
-  /**
-   * Filter
-   * @type {typeof Filter}
-   */
   Filter,
-
-  /**
-   * ValidationError
-   * @type {typeof ValidationError}
-   */
   ValidationError,
 }
 

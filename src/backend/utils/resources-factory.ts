@@ -1,7 +1,11 @@
-const BaseResource = require('../adapters/base-resource')
+import BaseResource from "../adapters/base-resource"
+import BaseDatabase from "../adapters/base-database"
+import { Adapter, AdminBro } from "../../admin-bro"
 
 class NoDatabaseAdapterError extends Error {
-  constructor(database) {
+  private database: string
+
+  constructor(database: string) {
     const message = 'There are no adapters supporting one of the database you provided'
     super(message)
     this.database = database
@@ -10,7 +14,9 @@ class NoDatabaseAdapterError extends Error {
 }
 
 class NoResourceAdapterError extends Error {
-  constructor(resource) {
+  private resource: BaseResource
+
+  constructor(resource: BaseResource) {
     const message = 'There are no adapters supporting one of the resource you provided'
     super(message)
     this.resource = resource
@@ -18,8 +24,11 @@ class NoResourceAdapterError extends Error {
   }
 }
 
-class ResourcesFactory {
-  constructor(admin, adapters = []) {
+export default class ResourcesFactory {
+  private adapters: Array<Adapter>
+  private admin: AdminBro
+
+  constructor(admin, adapters: Array<Adapter> = []) {
     this.adapters = adapters
     this.admin = admin
   }
@@ -40,7 +49,7 @@ class ResourcesFactory {
    * @param  {any[]} databases    list of all databases given by the user in {@link AdminBroOptions}
    * @return {BaseResource[]}     list of all resources from given databases
   */
-  _convertDatabases(databases) {
+  _convertDatabases(databases: Array<any>) {
     return databases.reduce((memoArray, db) => {
       const databaseAdapter = this.adapters.find(adapter => (
         adapter.Database.isAdapterFor(db)
@@ -104,5 +113,3 @@ class ResourcesFactory {
     })
   }
 }
-
-module.exports = ResourcesFactory

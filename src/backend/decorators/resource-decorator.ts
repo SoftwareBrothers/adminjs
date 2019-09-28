@@ -1,9 +1,11 @@
-const _ = require('lodash')
-const BaseProperty = require('../adapters/base-property')
-const PropertyDecorator = require('./property-decorator')
-const ActionDecorator = require('./action-decorator')
-const ViewHelpers = require('../utils/view-helpers')
-const ConfigurationError = require('../utils/configuration-error')
+import * as _ from 'lodash'
+import BaseProperty from '../adapters/base-property'
+import PropertyDecorator, { PropertyOptions } from './property-decorator'
+import ActionDecorator from './action-decorator'
+import ViewHelpers from '../utils/view-helpers'
+import ConfigurationError from '../utils/configuration-error'
+import BaseResource from '../adapters/base-resource'
+import { AdminBro } from '../../admin-bro'
 
 /**
  * Default maximum number of items which should be present in a list.
@@ -11,7 +13,7 @@ const ConfigurationError = require('../utils/configuration-error')
  * @type {Number}
  * @private
  */
-const DEFAULT_MAX_ITEMS_IN_LIST = 8
+export const DEFAULT_MAX_ITEMS_IN_LIST = 8
 
 /**
  * @typedef {Object} ResourceOptions
@@ -40,7 +42,13 @@ const DEFAULT_MAX_ITEMS_IN_LIST = 8
  *
  * @category Decorators
  */
-class ResourceDecorator {
+export default class ResourceDecorator {
+  private _resource: BaseResource
+  private _admin: AdminBro
+  private options: ResourceOptions
+  private h: ViewHelpers
+  private properties: Map<String, PropertyDecorator> | {}
+  private actions: Map<String, ActionDecorator> | {}
   /**
    * @param  {Object}       options
    * @param  {BaseResource} options.resource  resource which is decorated
@@ -318,7 +326,3 @@ class ResourceDecorator {
     }
   }
 }
-
-ResourceDecorator.DEFAULT_MAX_ITEMS_IN_LIST = DEFAULT_MAX_ITEMS_IN_LIST
-
-module.exports = ResourceDecorator

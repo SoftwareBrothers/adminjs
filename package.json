@@ -83,6 +83,8 @@
     "@babel/cli": "^7.4.4",
     "@babel/plugin-transform-typescript": "^7.6.0",
     "@babel/preset-typescript": "^7.6.0",
+    "@types/flat": "^0.0.28",
+    "@types/lodash": "^4.14.141",
     "chai": "^4.1.2",
     "eslint": "^5.10.0",
     "eslint-config-airbnb": "^17.1.0",

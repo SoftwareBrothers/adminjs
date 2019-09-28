@@ -3,6 +3,7 @@
  * @category Errors
  */
 class ValidationError extends Error {
+  public errors
   /**
    * @param  {String} message   custom message
    * @param  {Object} errors    error messages
@@ -18,4 +19,4 @@ class ValidationError extends Error {
   }
 }
 
-module.exports = ValidationError
+export default ValidationError

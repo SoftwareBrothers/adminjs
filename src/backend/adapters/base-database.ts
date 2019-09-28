@@ -33,4 +33,4 @@ class BaseDatabase {
   }
 }
 
-module.exports = BaseDatabase
+export default BaseDatabase

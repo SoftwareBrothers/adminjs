@@ -13,6 +13,10 @@ const TITLE_COLUMN_NAMES = ['title', 'name', 'subject', 'email']
  *   B --> |has many|D(BasePorperty)
  */
 class BaseProperty {
+  private _path: String
+  private _type: String
+  private _isId: Boolean
+  private _isSortable: Boolean
   /**
    * @param  {Object} options
    * @param  {String} options.path property path: usually it its key but when
@@ -135,4 +139,4 @@ class BaseProperty {
   }
 }
 
-module.exports = BaseProperty
+export default BaseProperty
