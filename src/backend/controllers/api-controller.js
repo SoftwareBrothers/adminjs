@@ -1,6 +1,6 @@
 /* eslint-disable max-len */
 /* eslint no-unused-vars: 0 */
-import { populator } from '../utils/populator'
+import populator from '../utils/populator'
 import Filter from '../utils/filter'
 import ViewHelpers from '../utils/view-helpers'
 import ForbiddenError from '../utils/forbidden-error'
@@ -170,4 +170,3 @@ module.exports = ApiController
  * @property {String} records[].title
  * @property {String} records[].id
  */
-

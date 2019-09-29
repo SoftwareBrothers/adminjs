@@ -3,7 +3,7 @@
     "modules": "commonjs"
   }], "@babel/preset-typescript"],
   "plugins": ["babel-plugin-styled-components"],
-  "only": ["src/"],
+  "only": ["src/", "spec/"],
   "ignore": [
     "src/frontend/assets/scripts/global-bundle.js",
     "src/frontend/assets/scripts/app-bundle.js"

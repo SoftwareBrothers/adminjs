@@ -1,4 +1,4 @@
-const ConfigurationError = require('../utils/configuration-error')
+import ConfigurationError from '../utils/configuration-error'
 
 const DEFAULT_DIRECTION = 'asc'
 

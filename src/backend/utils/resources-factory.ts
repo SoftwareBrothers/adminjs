@@ -1,5 +1,4 @@
 import BaseResource from "../adapters/base-resource"
-import BaseDatabase from "../adapters/base-database"
 import { Adapter, AdminBro } from "../../admin-bro"
 
 class NoDatabaseAdapterError extends Error {

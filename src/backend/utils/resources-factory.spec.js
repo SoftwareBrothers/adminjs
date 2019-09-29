@@ -1,6 +1,6 @@
-const ResourcesFactory = require('./resources-factory')
-const BaseDatabase = require('../adapters/base-database')
-const BaseResource = require('../adapters/base-resource')
+import ResourcesFactory from './resources-factory'
+import BaseDatabase from '../adapters/base-database'
+import BaseResource from '../adapters/base-resource'
 
 describe('ResourcesFactory', function () {
   describe('._convertDatabases', function () {

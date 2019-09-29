@@ -1,7 +1,7 @@
 import { unflatten } from 'flat'
 import sortSetter from '../services/sort-setter'
 import Filter from '../utils/filter'
-import { populator } from '../utils/populator'
+import populator from '../utils/populator'
 
 const PER_PAGE_LIMIT = 500
 

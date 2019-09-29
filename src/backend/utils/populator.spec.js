@@ -1,8 +1,8 @@
-const BaseRecord = require('../adapters/base-record')
-const BaseResource = require('../adapters/base-resource')
-const PropertyDecorator = require('../decorators/property-decorator')
+import BaseRecord from '../adapters/base-record'
+import BaseResource from '../adapters/base-resource'
+import PropertyDecorator from '../decorators/property-decorator'
 
-const { populator } = require('./populator')
+import populator from './populator'
 
 describe('populator', function () {
   context('empty array given as params', function () {

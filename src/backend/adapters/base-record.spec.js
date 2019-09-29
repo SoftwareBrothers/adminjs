@@ -1,4 +1,4 @@
-const Record = require('./base-record')
+import Record from './base-record'
 
 describe('Record', function () {
   describe('#param', function () {
