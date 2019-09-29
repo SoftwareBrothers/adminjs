@@ -99,7 +99,14 @@ class RecordAction extends React.Component {
           />
           {isLoading
             ? <Loader />
-            : <BaseActionComponent action={action} resource={resource} record={record} paths={paths} />
+            : (
+              <BaseActionComponent
+                action={action}
+                resource={resource}
+                record={record}
+                paths={paths}
+              />
+            )
           }
         </WrapperBox>
       </ContainerRecord>
