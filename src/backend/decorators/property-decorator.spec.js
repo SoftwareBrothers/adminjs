@@ -1,6 +1,6 @@
 import PropertyDecorator from './property-decorator'
 import BaseProperty from '../adapters/base-property'
-import { AdminBro } from '../../admin-bro'
+import AdminBro from '../../admin-bro'
 
 describe('PropertyDecorator', function () {
   beforeEach(function () {

@@ -192,10 +192,11 @@
  * @return {Object}                modified data
  */
 
-import { AdminBro, BaseResource } from '../../admin-bro'
+import AdminBro from '../../admin-bro'
 import CurrentAdmin from '../../current-admin.interface'
 import ViewHelpers from '../utils/view-helpers'
 import BaseRecord from '../adapters/base-record'
+import BaseResource from '../adapters/base-resource'
 
 export interface ActionContext {
   _admin: AdminBro;

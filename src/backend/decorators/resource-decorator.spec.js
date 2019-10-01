@@ -1,7 +1,7 @@
 import ResourceDecorator from './resource-decorator'
 import PropertyDecorator from './property-decorator'
 import ConfigurationError from '../utils/configuration-error'
-import { AdminBro } from '../../admin-bro'
+import AdminBro from '../../admin-bro'
 import resourceStub, { expectedResult } from '../../../spec/backend/helpers/resource-stub'
 
 describe('ResourceDecorator', function () {

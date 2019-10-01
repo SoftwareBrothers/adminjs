@@ -11,9 +11,27 @@ if (process.env.ADMIN_BRO_DEV_ENV) {
     plugins: [require.resolve('babel-plugin-styled-components')],
     extensions: ['.jsx', '.js', '.ts'],
   })
-  AdminBro = require('./src/admin-bro')
+  AdminBro = require('./src/admin-bro').default
+  AdminBro.BaseProperty = require('./src/backend/adapters/base-property').default
+  AdminBro.BaseResource = require('./src/backend/adapters/base-resource').default
+  AdminBro.BaseDatabase = require('./src/backend/adapters/base-database').default
+  AdminBro.BaseRecord = require('./src/backend/adapters/base-record').default
+  AdminBro.Router = require('./src/backend/router').default
+  AdminBro.Filter = require('./src/backend/utils/filter').default
+  AdminBro.ValidationError = require('./src/backend/utils/validation-error').default
+  AdminBro.ACTIONS = require('./src/backend/actions/index')
 } else {
-  AdminBro = require('./lib/admin-bro')
+  AdminBro = require('./lib/admin-bro').default
+  AdminBro.BaseProperty = require('./lib/backend/adapters/base-property').default
+  AdminBro.BaseResource = require('./lib/backend/adapters/base-resource').default
+  AdminBro.BaseDatabase = require('./lib/backend/adapters/base-database').default
+  AdminBro.BaseRecord = require('./lib/backend/adapters/base-record').default
+  AdminBro.Router = require('./lib/backend/router').default
+  AdminBro.Filter = require('./lib/backend/utils/filter').default
+  AdminBro.ValidationError = require('./lib/backend/utils/validation-error').default
+  AdminBro.ACTIONS = require('./lib/backend/actions/index')
 }
+
+AdminBro.require = AdminBro.bundle
 
 module.exports = AdminBro

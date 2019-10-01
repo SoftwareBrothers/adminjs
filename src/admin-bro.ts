@@ -39,6 +39,10 @@ const defaults: AdminBroOptions = {
   },
 }
 
+type ActionsMap = {[key: string]: Action }
+
+type UserComponentsMap = {[key: string]: string}
+
 export type Adapter = { Database: typeof BaseDatabase; Resource: typeof BaseResource }
 
 /**
@@ -62,21 +66,23 @@ class AdminBro {
 
   public static Router: RouterType
 
-  public static BaseDatabase: BaseDatabase
+  public static BaseDatabase: typeof BaseDatabase
 
-  public static BaseRecord: BaseRecord
+  public static BaseRecord: typeof BaseRecord
+  
+  public static BaseResource: typeof BaseResource
 
-  public static BaseProperty: BaseProperty
+  public static BaseProperty: typeof BaseProperty
 
-  public static Filter: Filter
+  public static Filter: typeof Filter
 
-  public static ValidationError: ValidationError
+  public static ValidationError: typeof ValidationError
 
-  public static ACTIONS: Map<string, Action>
+  public static ACTIONS: ActionsMap
 
   public static VERSION: string
 
-  public static UserComponents: Map<string, string> | {}
+  public static UserComponents: UserComponentsMap
 
   /**
    * @param   {AdminBroOptions}  options  options passed to adminBro
@@ -207,14 +213,4 @@ export const { registerAdapter } = AdminBro
 export const { bundle } = AdminBro
 export const VERSION = pkg.version
 
-export {
-  AdminBro,
-  BaseProperty,
-  BaseResource,
-  Router,
-  BaseDatabase,
-  BaseRecord,
-  Filter,
-  ValidationError,
-  ACTIONS,
-}
+export default AdminBro

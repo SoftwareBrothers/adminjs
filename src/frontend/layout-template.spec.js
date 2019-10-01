@@ -1,5 +1,5 @@
 import layoutTemplate from './layout-template'
-import { AdminBro } from '../admin-bro'
+import AdminBro from '../admin-bro'
 
 describe('layoutTemplate', function () {
   context('AdminBro with default options and not logged in user', function () {

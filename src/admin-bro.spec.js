@@ -1,6 +1,9 @@
 import path from 'path'
 
-import { AdminBro, BaseDatabase, BaseResource, registerAdapter } from './admin-bro'
+import AdminBro from './admin-bro'
+
+import BaseDatabase from './backend/adapters/base-database'
+import BaseResource from './backend/adapters/base-resource'
 
 describe('AdminBro', function () {
   beforeEach(function () {
@@ -13,7 +16,7 @@ describe('AdminBro', function () {
     })
   })
 
-  describe('.registerAdapter', function () {
+  describe('.AdminBro.registerAdapter', function () {
     beforeEach(function () {
       class Database extends BaseDatabase {}
       class Resource extends BaseResource {}
@@ -21,19 +24,19 @@ describe('AdminBro', function () {
     })
 
     it('adds given adapter to list off all available adapters', function () {
-      registerAdapter(this.DatabaseAdapter)
+      AdminBro.registerAdapter(this.DatabaseAdapter)
       expect(AdminBro.registeredAdapters).to.have.lengthOf(1)
     })
 
     it('throws an error when adapter is not full', function () {
       expect(() => {
-        registerAdapter({ Resource: AdminBro.BaseResource })
+        AdminBro.registerAdapter({ Resource: AdminBro.BaseResource })
       }).to.throw('Adapter has to have both Database and Resource')
     })
 
     it('throws an error when adapter has elements not being subclassed from base adapter', function () {
       expect(() => {
-        registerAdapter({ Resource: {}, Database: {} })
+        AdminBro.registerAdapter({ Resource: {}, Database: {} })
       }).to.throw('Adapter elements has to be subclassess of AdminBro.BaseResource and AdminBro.BaseDatabase')
     })
   })
