@@ -8,6 +8,7 @@ script:
 - yarn run lint
 - yarn codecov
 - yarn build
+- yarn types
 deploy:
   skip_cleanup: true
   provider: npm

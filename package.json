@@ -6,6 +6,7 @@
   "types": "index.d.ts",
   "scripts": {
     "test": "mocha ./spec/index.js",
+    "types": "tsc",
     "clean": "rm -rf lib && mkdir lib",
     "build": "babel src --out-dir lib --copy-files --extensions '.ts,.js,.jsx'",
     "lint": "eslint './spec/**/*.js' './src/**/*.js' './src/**/*.jsx' './src/**/*.ts' --ignore-pattern='*bundle.js'",
