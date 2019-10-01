@@ -12,14 +12,13 @@ import ValidationError from './backend/utils/validation-error'
 import ConfigurationError from './backend/utils/configuration-error'
 import ResourcesFactory from './backend/utils/resources-factory'
 import userComponentsBunlder from './backend/bundler/user-components-bundler'
-import Router, { RouterType } from './backend/router'
+import { RouterType } from './backend/router'
 import Action from './backend/actions/action.interface'
 
 import loginTemplate from './frontend/login-template'
 
-import * as ACTIONS from './backend/actions'
-
 const pkg = JSON.parse(fs.readFileSync(path.join(__dirname, '../package.json'), 'utf-8'))
+export const VERSION = pkg.version
 
 const defaults: AdminBroOptions = {
   rootPath: '/admin',
@@ -208,9 +207,9 @@ class AdminBro {
 
 AdminBro.UserComponents = {}
 AdminBro.registeredAdapters = []
+AdminBro.VERSION = VERSION
 
 export const { registerAdapter } = AdminBro
 export const { bundle } = AdminBro
-export const VERSION = pkg.version
 
 export default AdminBro

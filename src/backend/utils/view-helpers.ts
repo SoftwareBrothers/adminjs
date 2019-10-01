@@ -1,6 +1,14 @@
 import AdminBroOptions from '../../admin-bro-options.interface'
 
-const globalAny: any = global
+let globalAny: any = {}
+
+try {
+  globalAny = window
+} catch (error) {
+  if (error.message !== 'window is not defined') {
+    throw error
+  }
+}
 
 /**
  * Collection of helper methods available in the views

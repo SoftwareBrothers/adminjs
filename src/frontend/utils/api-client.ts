@@ -1,7 +1,15 @@
 import axios, { AxiosResponse, AxiosInstance } from 'axios'
 import SearchResponse from '../../backend/controllers/search-response.interface'
 
-const globalAny: any = global
+let globalAny: any = {}
+
+try {
+  globalAny = window
+} catch (error) {
+  if (error.message !== 'window is not defined') {
+    throw error
+  }
+}
 
 const checkLogin = (response: AxiosResponse): void => {
   const loginUrl = [window.location.origin, globalAny.REDUX_STATE.paths.loginPath].join('')
