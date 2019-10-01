@@ -109,6 +109,7 @@
     "rollup-plugin-node-builtins": "^2.1.2",
     "rollup-plugin-node-globals": "^1.4.0",
     "sinon": "^6.1.5",
-    "sinon-chai": "^3.2.0"
+    "sinon-chai": "^3.2.0",
+    "typescript": "^3.6.3"
   }
 }
