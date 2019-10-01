@@ -1,4 +1,4 @@
-import { unflatten } from 'flat'
+import * as flat from 'flat'
 import Action from './action.interface'
 import sortSetter from '../services/sort-setter'
 import Filter from '../utils/filter'
@@ -41,9 +41,9 @@ const ListAction: Action = {
    */
   handler: async (request, response, data) => {
     const { query } = request
-    const { sortBy, direction, filters = {} } = unflatten(query || {})
+    const { sortBy, direction, filters = {} } = flat.unflatten(query || {})
     const { resource } = data
-    let { page, perPage } = unflatten(query || {})
+    let { page, perPage } = flat.unflatten(query || {})
 
     const listProperties = resource.decorate().getListProperties()
 

@@ -20,7 +20,11 @@ async function build() {
     babelConfig: {
       plugins: [runtime, styled],
       runtimeHelpers: true,
-      include: `${__dirname}/../src/frontend/**`,
+      include: [
+        `${__dirname}/../src/frontend/**`,
+        `${__dirname}/../src/backend/utils/view-helpers.ts`,
+        `${__dirname}/../src/backend/utils/filter.ts`,
+      ],
     },
   })
 }

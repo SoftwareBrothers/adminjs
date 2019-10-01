@@ -1,7 +1,5 @@
 {
-  "presets": ["@babel/preset-react", ["@babel/preset-env", {
-    "modules": "commonjs"
-  }], "@babel/preset-typescript"],
+  "presets": ["@babel/preset-react", "@babel/preset-env", "@babel/preset-typescript"],
   "plugins": ["babel-plugin-styled-components"],
   "only": ["src/", "spec/"],
   "ignore": [

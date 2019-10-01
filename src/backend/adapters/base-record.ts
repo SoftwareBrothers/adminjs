@@ -1,4 +1,4 @@
-import { flatten, unflatten } from 'flat'
+import * as flat from 'flat'
 import _ from 'lodash'
 import BaseResource from './base-resource'
 import ValidationError from '../utils/validation-error'
@@ -37,7 +37,7 @@ class BaseRecord {
      * Actual record data stored as a flatten object
      * @type {Object}
      */
-    this.params = params ? flatten(params) : {}
+    this.params = params ? flat.flatten(params) : {}
 
     /**
      * Object containing all validation errors: this.errors[path] = 'errorMessage'
@@ -65,7 +65,7 @@ class BaseRecord {
     }
     const subParams = this.namespaceParams(path)
     if (subParams) {
-      const unflattenSubParams = unflatten(subParams)
+      const unflattenSubParams = flat.unflatten(subParams)
       return path.split('.').reduce((m, v) => m[v], unflattenSubParams)
     }
     return undefined

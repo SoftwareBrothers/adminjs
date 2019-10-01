@@ -1,5 +1,5 @@
 import path from 'path'
-import { AdminBro } from '../../admin-bro'
+import AdminBro from '../../admin-bro'
 import generateUserComponentEntry from './generate-user-component-entry'
 
 const exampleComponent = '../../../spec/fixtures/example-component'

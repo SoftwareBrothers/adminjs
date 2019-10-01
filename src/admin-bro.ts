@@ -69,7 +69,7 @@ class AdminBro {
   public static BaseDatabase: typeof BaseDatabase
 
   public static BaseRecord: typeof BaseRecord
-  
+
   public static BaseResource: typeof BaseResource
 
   public static BaseProperty: typeof BaseProperty

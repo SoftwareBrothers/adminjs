@@ -5,7 +5,6 @@
   "main": "index.js",
   "scripts": {
     "test": "mocha ./spec/index.js",
-    "test:build": "mocha ./spec/lib.js",
     "clean": "rm -rf lib && mkdir lib",
     "build": "babel src --out-dir lib --copy-files --extensions '.ts,.js,.jsx'",
     "lint": "eslint './spec/**/*.js' './src/**/*.js' './src/**/*.jsx' './src/**/*.ts' --ignore-pattern='*bundle.js'",

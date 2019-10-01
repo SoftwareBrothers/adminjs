@@ -4,7 +4,7 @@ import { resourceType, actionType, recordType } from '../../types'
 import WrapperBox from '../ui/wrapper-box'
 import ErrorBoundary from './error-boundary'
 
-import actions from '../actions'
+import * as actions from '../actions'
 import { DOCS } from '../../../constants'
 
 /**

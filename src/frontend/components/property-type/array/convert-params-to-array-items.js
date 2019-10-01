@@ -1,4 +1,4 @@
-import { unflatten } from 'flat'
+import * as flat from 'flat'
 
 /**
  * Converts flatten params to array items when given property is an array.
@@ -67,7 +67,7 @@ const convertParamsToArrayItems = (property, record) => {
    *   }],
    * }['arrayField']
    */
-  return unflatten(obj)[tempName] || []
+  return flat.unflatten(obj)[tempName] || []
 }
 
 export default convertParamsToArrayItems

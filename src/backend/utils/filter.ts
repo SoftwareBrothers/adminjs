@@ -1,4 +1,4 @@
-import { unflatten, flatten } from 'flat'
+import * as flat from 'flat'
 import { BaseResource } from '../../admin-bro'
 import BaseProperty from '../adapters/base-property'
 
@@ -52,7 +52,7 @@ export default class Filter {
    */
 
   static normalizeKeys(filters): Map<string, any> {
-    return unflatten(flatten(filters), { delimiter: PARAM_SEPARATOR })
+    return flat.unflatten(flat.flatten(filters), { delimiter: PARAM_SEPARATOR })
   }
 
   /**

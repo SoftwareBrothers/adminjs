@@ -1,9 +1,10 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
-import babel from 'rollup-plugin-babel'
-import commonjs from 'rollup-plugin-commonjs'
-import resolve from 'rollup-plugin-node-resolve'
-import replace from 'rollup-plugin-replace'
-import { terser } from 'rollup-plugin-terser'
+const babel = require('rollup-plugin-babel')
+const commonjs = require('rollup-plugin-commonjs')
+const resolve = require('rollup-plugin-node-resolve')
+const replace = require('rollup-plugin-replace')
+const { terser } = require('rollup-plugin-terser')
 
 const external = [
   'react',
@@ -41,20 +42,32 @@ const globals = {
   'admin-bro/style': 'AdminBro.style',
 }
 
+const extensions = ['.mjs', '.js', '.jsx', '.json', '.ts', '.tsx']
+
 const plugins = ({ babelConfig = {}, commonJSConfig = {}, minify = false } = {}) => {
   const pluginStack = [
     resolve({
-      extensions: ['.mjs', '.js', '.jsx', '.json'],
+      extensions,
     }),
     replace({
       'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development'),
       'process.env.IS_BROWSER': 'true',
       'process.env.': 'AdminBro.env.',
     }),
-    commonjs(commonJSConfig),
+    commonjs({
+      namedExports: {
+        'node_modules/flat/index.js': ['flatten', 'unflatten'],
+      },
+      ...commonJSConfig,
+    }),
     babel({
+      extensions,
       babelrc: false,
-      presets: [require.resolve('@babel/preset-react'), require.resolve('@babel/preset-env')],
+      presets: [
+        require.resolve('@babel/preset-react'),
+        require.resolve('@babel/preset-env'),
+        require.resolve('@babel/preset-typescript'),
+      ],
       ...babelConfig,
     }),
   ]
@@ -64,7 +77,7 @@ const plugins = ({ babelConfig = {}, commonJSConfig = {}, minify = false } = {})
   return pluginStack
 }
 
-export {
+module.exports = {
   external,
   globals,
   plugins,
