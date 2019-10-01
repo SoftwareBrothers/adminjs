@@ -1,4 +1,5 @@
 import { unflatten } from 'flat'
+import Action from './action.interface'
 import sortSetter from '../services/sort-setter'
 import Filter from '../utils/filter'
 import populator from '../utils/populator'
@@ -24,7 +25,7 @@ const PER_PAGE_LIMIT = 500
  * @description
  * Retruns selected Records in a list
  */
-module.exports = {
+const ListAction: Action = {
   name: 'list',
   isVisible: true,
   actionType: 'resource',
@@ -80,3 +81,5 @@ module.exports = {
     }
   },
 }
+
+export default ListAction

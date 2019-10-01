@@ -1,10 +1,13 @@
+import Action from './action.interface'
+
 /**
  * @implements Action
  * @category Actions
- * @module NewAction
+ * @module EditAction
  * @description
- * Shows form for creating a new record
- * Uses {@link NewAction} component to render form
+ * Shows form for updating existing record
+ *
+ * Uses {@link EditAction} component to render form
  */
 
 /**
@@ -16,24 +19,27 @@
  *                                          redirect after the action.
  */
 
-module.exports = {
-  name: 'new',
+const EditAction: Action = {
+  name: 'edit',
   isVisible: true,
-  actionType: 'resource',
-  icon: 'icomoon-add',
-  label: 'Add new',
+  actionType: 'record',
+  icon: 'icomoon-edit',
+  label: 'Edit',
   /**
-   * Responsible for creating new record.
+   * Responsible for updating existing record.
    *
-   * To invoke this action use {@link ApiClient#resourceAction}
+   * To invoke this action use {@link ApiClient#recordAction}
    *
-   * @return  {module:NewAction~ApiResponse}  populated record
+   * @return  {module:EditAction~ApiResponse}  populated record
    * @implements Action.handler
    */
   handler: async (request, response, data) => {
+    const { record } = data
+    if (request.method === 'get') {
+      return { record: record.toJSON() }
+    }
     if (request.method === 'post') {
-      let record = await data.resource.build(request.payload.record)
-      record = await record.save()
+      await record.update(request.payload.record)
       if (record.isValid()) {
         return {
           redirectUrl: data.h.recordActionUrl({
@@ -44,6 +50,8 @@ module.exports = {
       }
       return { record: record.toJSON() }
     }
-    return {}
+    return ''
   },
 }
+
+export default EditAction

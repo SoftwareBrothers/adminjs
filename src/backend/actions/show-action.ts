@@ -1,3 +1,5 @@
+import Action from './action.interface'
+
 /**
  * @implements Action
  * @category Actions
@@ -6,7 +8,7 @@
  * Retruns selected Record
  * Uses {@link ShowAction} component to render form
  */
-module.exports = {
+const ShowAction: Action = {
   name: 'show',
   isVisible: true,
   actionType: 'record',
@@ -24,3 +26,5 @@ module.exports = {
     record: data.record.toJSON(),
   }),
 }
+
+export default ShowAction

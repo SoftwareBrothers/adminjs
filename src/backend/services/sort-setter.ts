@@ -1,4 +1,5 @@
 import ConfigurationError from '../utils/configuration-error'
+import { ResourceOptions } from '../decorators/resource-options.interface'
 
 const DEFAULT_DIRECTION = 'asc'
 
@@ -7,6 +8,11 @@ const DEFAULT_DIRECTION = 'asc'
  * @property {String} sortBy        name of the property base for the sort
  * @property {String} direction     either `asc` or `desc`
  */
+
+type Sort = {
+  direction?: 'asc' | 'desc';
+  sortBy?: string;
+}
 
 /**
  * Sets sort parameters for a list.
@@ -20,18 +26,23 @@ const DEFAULT_DIRECTION = 'asc'
  * @param {ResourceOptions} resourceOptions={}  options passed along with given resource
  * @return {SortParams}
  */
-const sortSetter = ({ direction, sortBy } = {}, firstPropertyName, resourceOptions = {}) => {
-  const options = resourceOptions.sort || {}
+const sortSetter = (
+  { direction, sortBy }: Sort = {},
+  firstPropertyName: string,
+  resourceOptions: ResourceOptions = {},
+): Sort => {
+  const options = resourceOptions.sort || {} as Sort
   if (resourceOptions
       && resourceOptions.sort
       && resourceOptions.sort.direction
       && !['asc', 'desc'].includes(resourceOptions.sort.direction)) {
     throw new ConfigurationError(`
     Sort direction should be either "asc" or "desc",
-    "${resourceOptions.direction} was given"`, 'global.html#ResourceOptions')
+    "${resourceOptions.sort.direction} was given"`, 'global.html#ResourceOptions')
   }
+  const computedDirection = direction || options.direction || DEFAULT_DIRECTION
   const params = {
-    direction: direction || options.direction || DEFAULT_DIRECTION,
+    direction: computedDirection === 'asc' ? 'asc' : 'desc' as 'asc' | 'desc',
     sortBy: sortBy || options.sortBy || firstPropertyName,
   }
 
@@ -40,4 +51,6 @@ const sortSetter = ({ direction, sortBy } = {}, firstPropertyName, resourceOptio
 
 sortSetter.DEFAULT_DIRECTION = DEFAULT_DIRECTION
 
-module.exports = sortSetter
+export { DEFAULT_DIRECTION }
+
+export default sortSetter

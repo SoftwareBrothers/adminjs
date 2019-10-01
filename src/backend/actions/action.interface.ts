@@ -192,14 +192,15 @@
  * @return {Object}                modified data
  */
 
-
 import { AdminBro, BaseResource } from '../../admin-bro'
 import CurrentAdmin from '../../current-admin.interface'
 import ViewHelpers from '../utils/view-helpers'
+import BaseRecord from '../adapters/base-record'
 
 export interface ActionContext {
   _admin: AdminBro;
   resource: BaseResource;
+  record?: BaseRecord;
   h: ViewHelpers;
   action: Action;
   currentAdmin?: CurrentAdmin;
@@ -217,7 +218,11 @@ export interface ActionRequest {
 }
 
 export type Is = (context: ActionContext) => boolean
-export type Handler = ({ request: ActionRequest }, response: any, context: ActionContext) => any
+export type Handler = (
+  request: ActionRequest,
+  response: any,
+  context: ActionContext
+) => Promise<any>
 export type Before = ({ request: ActionRequest }) => ActionRequest
 export type After = (response: any) => any
 
@@ -230,7 +235,7 @@ export default interface Action {
   actionType?: 'resource' | 'record' | Array<'resource' | 'record'>;
   icon?: string;
   guard?: string;
-  component?: string;
+  component?: string | false;
   handler?: Handler;
   before?: Before;
   after?: After;

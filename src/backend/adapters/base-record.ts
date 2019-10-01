@@ -3,7 +3,6 @@ import _ from 'lodash'
 import BaseResource from './base-resource'
 import ValidationError from '../utils/validation-error'
 import RecordJSON from '../decorators/record-json.interface'
-import CurrentAdmin from '../../current-admin.interface'
 
 /**
  * Representation of an particular ORM Record in given Resource in AdminBro
@@ -200,17 +199,15 @@ class BaseRecord {
   /**
    * Returns JSON representation of an record
    *
-   * @param {CurrentAdmin} currentAdmin   currently logged in admin user
    * @return  {BaseRecord~JSON}
    */
-  toJSON(currentAdmin: CurrentAdmin): RecordJSON {
+  toJSON(): RecordJSON {
     return {
       params: this.params,
       populated: this.populated,
       errors: this.errors,
       id: this.id(),
       title: this.resource.decorate().titleOf(this),
-      actions: this.resource.decorate().recordActions(currentAdmin).map(ra => ra.toJSON()),
     }
   }
 }

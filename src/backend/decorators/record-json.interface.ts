@@ -1,5 +1,3 @@
-import ActionJSON from './action-json.interface'
-
 /**
    * @typedef {Object} BaseRecord~JSON
    * @property {Object} params    all flatten params {@link https://github.com/hughsk/flat}
@@ -25,5 +23,4 @@ export default interface RecordJSON {
   };} | {};
   id: string;
   title: string;
-  actions: Array<ActionJSON>;
 }

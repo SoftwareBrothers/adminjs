@@ -1,3 +1,5 @@
+import Action from './action.interface'
+
 /**
  * @implements Action
  * @category Actions
@@ -14,7 +16,7 @@
  *                                          redirect after the action.
  */
 
-module.exports = {
+const DeleteAction: Action = {
   name: 'delete',
   isVisible: true,
   actionType: 'record',
@@ -37,3 +39,5 @@ module.exports = {
     }
   },
 }
+
+export default DeleteAction
