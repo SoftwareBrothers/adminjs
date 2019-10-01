@@ -1,7 +1,7 @@
 import sinon from 'sinon'
 
 import BaseProperty from '../../../src/backend/adapters/base-property'
-import { BaseResource } from '../../../src/admin-bro'
+import BaseResource from '../../../src/backend/adapters/base-resource'
 
 export const expectedResult = {
   id: 'someID',

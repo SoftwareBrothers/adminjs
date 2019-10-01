@@ -85,19 +85,19 @@ export default class ResourceDecorator {
     // since _.merge is a deep merge it also overrides defaults with the parameters
     // specified by the user.
     const actions = _.merge({}, ACTIONS, this.options.actions || {})
-
+    const returnActions = {}
     // setting default values for actions
     Object.keys(actions).forEach((key) => {
       actions[key].name = actions[key].name || key
       actions[key].label = actions[key].label || key
-      actions[key] = new ActionDecorator({
+      returnActions[key] = new ActionDecorator({
         action: actions[key],
         admin: this._admin,
         resource: this._resource,
       })
     })
 
-    return actions
+    return returnActions
   }
 
   /**

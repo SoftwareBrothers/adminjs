@@ -17,5 +17,5 @@ export default interface ActionJSON {
   label: string;
   guard?: string;
   showFilter: boolean;
-  component?: string;
+  component?: string | false | null;
 }

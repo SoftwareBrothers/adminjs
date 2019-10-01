@@ -1,6 +1,7 @@
 import ConfigurationError from '../utils/configuration-error'
 import ViewHelpers from '../utils/view-helpers'
-import { BaseResource, AdminBro } from '../../admin-bro'
+import AdminBro from '../../admin-bro'
+import BaseResource from '../adapters/base-resource'
 import Action, { Is } from '../actions/action.interface'
 import CurrentAdmin from '../../current-admin.interface'
 import ActionJSON from './action-json.interface'
@@ -49,7 +50,7 @@ export default class ActionDecorator {
   /**
    * Original handler wrapped with the hook `before` and `after` methods.
    */
-  async handler(request, response, data): any {
+  async handler(request, response, data): Promise<any> {
     let modifiedRequest = request
     if (this.action.before) {
       modifiedRequest = await this.action.before(request)

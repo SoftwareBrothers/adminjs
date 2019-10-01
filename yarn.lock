@@ -933,16 +933,9 @@
     "@types/prop-types" "*"
     "@types/react" "*"
 
-"@types/react@*":
+"@types/react@*", "@types/react@^16.9.4":
   version "16.9.4"
   resolved "https://registry.yarnpkg.com/@types/react/-/react-16.9.4.tgz#de8cf5e5e2838659fb78fa93181078469eeb19fc"
-  dependencies:
-    "@types/prop-types" "*"
-    csstype "^2.2.0"
-
-"@types/react@^16.9.3":
-  version "16.9.3"
-  resolved "https://registry.yarnpkg.com/@types/react/-/react-16.9.3.tgz#6d13251e441a3e67fb60d719d1fc8785b984a2ec"
   dependencies:
     "@types/prop-types" "*"
     csstype "^2.2.0"

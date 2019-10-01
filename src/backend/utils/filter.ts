@@ -1,6 +1,6 @@
 import * as flat from 'flat'
-import { BaseResource } from '../../admin-bro'
 import BaseProperty from '../adapters/base-property'
+import BaseResource from '../adapters/base-resource'
 
 /**
  * @typedef {Object} Filter~Property

@@ -1,7 +1,8 @@
 import * as _ from 'lodash'
-import { BaseProperty, AdminBro } from '../../admin-bro'
+import AdminBro from '../../admin-bro'
 import { PropertyOptions } from './property-options.interface'
 import BaseResource from '../adapters/base-resource'
+import BaseProperty from '../adapters/base-property'
 import ResourceDecorator from './resource-decorator'
 import PropertyJSON from './property-json.interface'
 

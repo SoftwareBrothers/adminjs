@@ -1,5 +1,5 @@
 import BaseResource from '../adapters/base-resource'
-import { Adapter, AdminBro } from '../../admin-bro'
+import AdminBro, { Adapter } from '../../admin-bro'
 
 class NoDatabaseAdapterError extends Error {
   private database: string

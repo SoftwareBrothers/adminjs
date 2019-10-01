@@ -1,14 +1,16 @@
 import axios, { AxiosResponse, AxiosInstance } from 'axios'
 import SearchResponse from '../../backend/controllers/search-response.interface'
 
+const globalAny: any = global
+
 const checkLogin = (response: AxiosResponse): void => {
-  const loginUrl = [window.location.origin, window.REDUX_STATE.paths.loginPath].join('')
+  const loginUrl = [window.location.origin, globalAny.REDUX_STATE.paths.loginPath].join('')
   if (response.request.responseURL
       && response.request.responseURL.match(loginUrl)
   ) {
     // eslint-disable-next-line no-undef
     alert('Your session expired. You will be redirected to login screen')
-    window.location = loginUrl
+    window.location.assign(loginUrl)
   }
 }
 
@@ -34,7 +36,7 @@ class ApiClient {
   private client: AxiosInstance
 
   constructor() {
-    this.baseURL = [window.location.origin, window.REDUX_STATE.paths.rootPath].join('')
+    this.baseURL = [window.location.origin, globalAny.REDUX_STATE.paths.rootPath].join('')
     this.client = axios.create({
       baseURL: this.baseURL,
     })
