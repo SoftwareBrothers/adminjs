@@ -1,3 +1,7 @@
+import * as _ from 'lodash'
+import * as path from 'path'
+import * as fs from 'fs'
+
 import AdminBroOptions from './admin-bro-options.interface'
 import BaseResource from './backend/adapters/base-resource'
 import BaseDatabase from './backend/adapters/base-database'
@@ -11,15 +15,11 @@ import userComponentsBunlder from './backend/bundler/user-components-bundler'
 import Router, { RouterType } from './backend/router'
 import Action from './backend/actions/action.interface'
 
-import * as _ from 'lodash'
-import * as path from 'path'
-import * as fs from 'fs'
-
 import loginTemplate from './frontend/login-template'
 
-const ACTIONS = require('./backend/actions')
+import * as ACTIONS from './backend/actions'
 
-const pkg = require('../../package.json')
+const pkg = JSON.parse(fs.readFileSync(path.join(__dirname, '../package.json'), 'utf-8'))
 
 const defaults: AdminBroOptions = {
   rootPath: '/admin',
@@ -39,7 +39,7 @@ const defaults: AdminBroOptions = {
   },
 }
 
-export type Adapter = { Database: typeof BaseDatabase, Resource: typeof BaseResource }
+export type Adapter = { Database: typeof BaseDatabase; Resource: typeof BaseResource }
 
 /**
  * Main class for AdminBro extension. It takes {@link AdminBroOptions} as a
@@ -47,24 +47,35 @@ export type Adapter = { Database: typeof BaseDatabase, Resource: typeof BaseReso
  *
  * Its main responsibility is to fetch all the resources and/or databases given by a
  * user. Its instance is a currier - injected in all other classes.
- * 
+ *
  * @example
  * const { AdminBro } = require('admin-bro')
  * const admin = new AdminBro(AdminBroOptions)
- * 
+ *
  */
 class AdminBro {
   public resources: Array<BaseResource>
+
   public options: AdminBroOptions
+
   public static registeredAdapters: Array<Adapter>
+
   public static Router: RouterType
+
   public static BaseDatabase: BaseDatabase
+
   public static BaseRecord: BaseRecord
+
   public static BaseProperty: BaseProperty
+
   public static Filter: Filter
+
   public static ValidationError: ValidationError
-  public static ACTIONS: Map<String, Action>
+
+  public static ACTIONS: Map<string, Action>
+
   public static VERSION: string
+
   public static UserComponents: Map<string, string> | {}
 
   /**
@@ -97,7 +108,10 @@ class AdminBro {
    * @param  {typeof BaseDatabase} options.Database subclass of BaseDatabase
    * @param  {typeof BaseResource} options.Resource subclass of BaseResource
    */
-  static registerAdapter({ Database, Resource }) {
+  static registerAdapter({ Database, Resource }: {
+    Database: typeof BaseDatabase;
+    Resource: typeof BaseResource;
+  }): void {
     if (!Database || !Resource) {
       throw new Error('Adapter has to have both Database and Resource')
     }
@@ -113,7 +127,7 @@ class AdminBro {
    * Initializes AdminBro instance in production. This function should be called by
    * all external plugins.
    */
-  async initialize() {
+  async initialize(): Promise<void> {
     if (process.env.NODE_ENV === 'production') {
       console.log('AdminBro: bundling user components...')
       await userComponentsBunlder(this, { write: true })
@@ -132,7 +146,7 @@ class AdminBro {
    *                                          the form
    * @return {Promise<string>}                HTML of the rendered page
    */
-  static async renderLogin({ action, errorMessage }) {
+  static async renderLogin({ action, errorMessage }): Promise<string> {
     return loginTemplate({ action, errorMessage })
   }
 
@@ -141,7 +155,7 @@ class AdminBro {
    * @param  {String} resourceId    ID of a resource defined under {@link BaseResource#id}
    * @return {BaseResource}         found resource
    */
-  findResource(resourceId) {
+  findResource(resourceId): BaseResource {
     return this.resources.find(m => m.id() === resourceId)
   }
 
@@ -160,7 +174,7 @@ class AdminBro {
    *   }
    * }
    */
-  public static bundle(src: string) {
+  public static bundle(src: string): string {
     const extensions = ['.jsx', '.js']
     let filePath = ''
     const componentId = _.uniqueId('Component')
@@ -189,9 +203,9 @@ class AdminBro {
 AdminBro.UserComponents = {}
 AdminBro.registeredAdapters = []
 
-export let registerAdapter = AdminBro.registerAdapter
-export let bundle = AdminBro.bundle
-export let VERSION = pkg.version
+export const { registerAdapter } = AdminBro
+export const { bundle } = AdminBro
+export const VERSION = pkg.version
 
 export {
   AdminBro,
@@ -204,4 +218,3 @@ export {
   ValidationError,
   ACTIONS,
 }
-

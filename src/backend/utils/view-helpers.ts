@@ -1,12 +1,13 @@
-import AdminBroOptions from "../../admin-bro-options.interface"
+import AdminBroOptions from '../../admin-bro-options.interface'
 
-const globalAny:any = global;
+const globalAny: any = global
 
 /**
  * Collection of helper methods available in the views
  */
 export default class ViewHelpers {
-  private options
+  public options
+
   constructor({ options }: { options?: AdminBroOptions } = {}) {
     let opts = options || (globalAny && globalAny.REDUX_STATE && globalAny.REDUX_STATE.paths)
 
@@ -23,7 +24,7 @@ export default class ViewHelpers {
    * @param  {String[]} paths   list of parts of the url
    * @return {String}       path
    */
-  urlBuilder(paths) {
+  urlBuilder(paths): string {
     const { rootPath } = this.options
     return `${rootPath}/${paths.join('/')}`
   }
@@ -32,7 +33,7 @@ export default class ViewHelpers {
    * Returns login URL
    * @return {String}
    */
-  loginUrl() {
+  loginUrl(): string {
     return this.options.loginPath
   }
 
@@ -40,11 +41,11 @@ export default class ViewHelpers {
    * Returns logout URL
    * @return {String}
    */
-  logoutUrl() {
+  logoutUrl(): string {
     return this.options.logoutPath
   }
 
-  listUrl({ resourceId }) {
+  listUrl({ resourceId }): string {
     console.warn(`
       Deprecation: this "ViewHelpers#listUrl" will be removed in the next versions.
       Please use "resourceActionUrl({ resourceId, actionName: 'list'})"
@@ -56,15 +57,15 @@ export default class ViewHelpers {
    * Returns URL for the dashboard
    * @return {String}
    */
-  dashboardUrl() {
+  dashboardUrl(): string {
     return this.options.rootPath
   }
 
-  resourceActionUrl({ resourceId, actionName }) {
+  resourceActionUrl({ resourceId, actionName }): string {
     return this.urlBuilder(['resources', resourceId, 'actions', actionName])
   }
 
-  recordActionUrl({ resourceId, recordId, actionName }) {
+  recordActionUrl({ resourceId, recordId, actionName }): string {
     return this.urlBuilder(['resources', resourceId, 'records', recordId, actionName])
   }
 
@@ -73,7 +74,7 @@ export default class ViewHelpers {
    * @param  {String} asset
    * @return {String}
    */
-  assetPath(asset) {
+  assetPath(asset): string {
     return this.urlBuilder(['frontend', 'assets', asset])
   }
 }

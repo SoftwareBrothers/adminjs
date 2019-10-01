@@ -53,6 +53,7 @@ export default class Filter extends React.Component {
       options = {
         format: 'Y-m-d H:i',
         enableTime: true,
+        // eslint-disable-next-line @typescript-eslint/camelcase
         time_24hr: true,
       }
     }

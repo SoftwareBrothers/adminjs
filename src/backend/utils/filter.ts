@@ -1,4 +1,4 @@
-import { unflatten, flatten }  from 'flat'
+import { unflatten, flatten } from 'flat'
 import { BaseResource } from '../../admin-bro'
 import BaseProperty from '../adapters/base-property'
 
@@ -13,9 +13,13 @@ import BaseProperty from '../adapters/base-property'
 export const PARAM_SEPARATOR = '~~'
 
 export type FilterElement = {
-  path: string,
-  property: BaseProperty
-  value: any,
+  path: string;
+  property: BaseProperty;
+  value: any;
+}
+
+interface ReduceCallback<T> {
+  (memo: T, element: FilterElement): T;
 }
 
 /**
@@ -23,7 +27,8 @@ export type FilterElement = {
  * @private
  */
 export default class Filter {
-  public filters: Map<String, FilterElement> | {}
+  public filters: {[key: string]: FilterElement} | {}
+
   private resource: BaseResource
   /**
    * Changes raw nested filters to form Object<path, value>.
@@ -46,7 +51,7 @@ export default class Filter {
    * @return  {Object}
    */
 
-  static normalizeKeys(filters): Map<String, any> {
+  static normalizeKeys(filters): Map<string, any> {
     return unflatten(flatten(filters), { delimiter: PARAM_SEPARATOR })
   }
 
@@ -76,14 +81,14 @@ export default class Filter {
    * @param {String} key      property key
    * @returns {Filter.Property | undefined}
    */
-  get(key) {
+  get(key: string): FilterElement | null {
     return this.filters[key]
   }
 
   /**
    * Populates all filtered properties which referes to other resources
    */
-  async populate() {
+  async populate(): Promise<Filter> {
     const keys = Object.keys(this.filters)
     for (let index = 0; index < keys.length; index += 1) {
       const key = keys[index]
@@ -95,11 +100,11 @@ export default class Filter {
     return this
   }
 
-  reduce(callback, initial = {}) {
-    return Object.values(this.filters).reduce(callback, initial)
+  reduce<T>(callback: ReduceCallback<T>, initial: T): T {
+    return Object.values(this.filters).reduce(callback, initial || {} as T)
   }
 
-  isVisible() {
+  isVisible(): boolean {
     return !!Object.keys(this.filters).length
   }
 }

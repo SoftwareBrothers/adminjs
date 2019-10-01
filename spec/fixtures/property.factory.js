@@ -1,4 +1,4 @@
-const { factory } = require('factory-girl')
+import { factory } from 'factory-girl'
 
 factory.define('property', Object, {
   isId: false,

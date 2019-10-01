@@ -1,7 +1,10 @@
+/* eslint-disable @typescript-eslint/no-empty-function */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint class-methods-use-this: 0 no-unused-vars: 0 */
-import BaseProperty from "./base-property"
-import BaseRecord from "./base-record"
-import ResourceDecorator from "../decorators/resource-decorator"
+/* eslint no-useless-constructor: 0 */
+import BaseProperty from './base-property'
+import BaseRecord from './base-record'
+import ResourceDecorator from '../decorators/resource-decorator'
 import NotImplementedError from '../utils/not-implemented-error'
 
 /**
@@ -30,7 +33,8 @@ import NotImplementedError from '../utils/not-implemented-error'
  * @hideconstructor
  */
 class BaseResource {
-  private _decorated: ResourceDecorator
+  public _decorated: ResourceDecorator
+
   /**
    * Checks if given adapter supports resource provided by the user
    *
@@ -38,10 +42,10 @@ class BaseResource {
    * @return {Boolean}          if given adapter supports this resource - returns true
    * @abstract
    */
-  static isAdapterFor(rawResource): Boolean {
+  static isAdapterFor(rawResource): boolean {
     throw new NotImplementedError('BaseResource.isAdapterFor')
   }
-  
+
   /**
    * Creates given resource based on the raw resource object
    *
@@ -110,7 +114,7 @@ class BaseResource {
    * @return {BaseProperty}
    * @abstract
    */
-  property(path): BaseProperty | null {
+  property(path: string): BaseProperty | null {
     throw new NotImplementedError('BaseResource#property')
   }
 
@@ -120,7 +124,7 @@ class BaseResource {
    * @return {Promise<Number>}
    * @abstract
    */
-  async count(filters: any): Promise<Number> {
+  async count(filters: any): Promise<number> {
     throw new NotImplementedError('BaseResource#count')
   }
 
@@ -149,12 +153,12 @@ class BaseResource {
    * }
    */
   async find(filters: any, options: {
-    limit?: Number,
-    offset?: Number,
+    limit?: number;
+    offset?: number;
     sort?: {
-      sortBy?: string,
-      direction?: 'asc' | 'desc'
-    }
+      sortBy?: string;
+      direction?: 'asc' | 'desc';
+    };
   }): Promise<Array<BaseRecord>> {
     throw new NotImplementedError('BaseResource#find')
   }
@@ -208,7 +212,7 @@ class BaseResource {
    * @throws {ValidationError} If there are validation errors it should be thrown
    * @abstract
    */
-  async create<T>(params: any) : Promise<T> {
+  async create<T>(params: any): Promise<T> {
     throw new NotImplementedError('BaseResource#create')
   }
 
@@ -243,7 +247,7 @@ class BaseResource {
    * @param  {AdminBro}       admin         current instance of AdminBro
    * @param  {AdminBro~ResourceOptions} [options]
    */
-  assignDecorator(admin, options = {}) {
+  assignDecorator(admin, options = {}): void {
     this._decorated = new ResourceDecorator({ resource: this, admin, options })
   }
 
@@ -251,7 +255,7 @@ class BaseResource {
    * Gets decorator object for given resource
    * @return {BaseDecorator | null}
    */
-  decorate() {
+  decorate(): ResourceDecorator {
     return this._decorated
   }
 }

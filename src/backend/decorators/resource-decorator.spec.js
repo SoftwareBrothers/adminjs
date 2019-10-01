@@ -2,7 +2,7 @@ import ResourceDecorator from './resource-decorator'
 import PropertyDecorator from './property-decorator'
 import ConfigurationError from '../utils/configuration-error'
 import { AdminBro } from '../../admin-bro'
-import resourceStub from '../../../spec/backend/helpers/resource-stub'
+import resourceStub, { expectedResult } from '../../../spec/backend/helpers/resource-stub'
 
 describe('ResourceDecorator', function () {
   beforeEach(function () {
@@ -21,7 +21,7 @@ describe('ResourceDecorator', function () {
     it('returns resource when name is not specified in options', function () {
       expect(
         new ResourceDecorator({ ...this.args, options: {} }).getResourceName(),
-      ).to.equal(resourceStub.expectedResult.resourceName)
+      ).to.equal(expectedResult.resourceName)
     })
 
     it('returns resource when name is specified in options', function () {
@@ -37,8 +37,8 @@ describe('ResourceDecorator', function () {
       expect(
         new ResourceDecorator({ ...this.args, options: {} }).getParent(),
       ).to.deep.equal({
-        name: resourceStub.expectedResult.databaseName,
-        icon: `icon-${resourceStub.expectedResult.databaseType}`,
+        name: expectedResult.databaseName,
+        icon: `icon-${expectedResult.databaseType}`,
       })
     })
     it('returns custom name with icon when options were specified', function () {
@@ -54,7 +54,7 @@ describe('ResourceDecorator', function () {
   describe('#decorateProperties', function () {
     beforeEach(function () {
       this.PropertyDecoratorSpy = this.sinon.spy(PropertyDecorator)
-      this.defaultProperties = resourceStub.expectedResult.properties
+      this.defaultProperties = expectedResult.properties
       this.originalPropertyName = this.defaultProperties[1].name()
       this.defaultPropertyName = this.defaultProperties[0].name()
       this.defaultPropertyOptions = { enable: false, isSortable: false }
@@ -109,11 +109,11 @@ describe('ResourceDecorator', function () {
         this.decorator = new ResourceDecorator(this.args)
         expect(
           this.decorator.getProperties({ where: 'list' }),
-        ).to.have.lengthOf(resourceStub.expectedResult.properties.length)
+        ).to.have.lengthOf(expectedResult.properties.length)
       })
 
       it('returns only showProperties from options if they were given', function () {
-        const path = resourceStub.expectedResult.properties[0].path()
+        const path = expectedResult.properties[0].path()
         this.decorator = new ResourceDecorator({
           ...this.args,
           options: { showProperties: [path] },
@@ -147,7 +147,7 @@ describe('ResourceDecorator', function () {
     })
 
     it('returns property by giving its key', function () {
-      this.propertyPath = resourceStub.expectedResult.properties[0].path()
+      this.propertyPath = expectedResult.properties[0].path()
       expect(
         this.decorator.getPropertyByKey(this.propertyPath),
       ).to.be.an.instanceof(PropertyDecorator)

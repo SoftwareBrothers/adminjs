@@ -1,13 +1,13 @@
-const deleteAction = require('./delete-action')
-const showAction = require('./show-action')
-const editAction = require('./edit-action')
-const newAction = require('./new-action')
-const listAction = require('./list-action')
+import deleteAction from './delete-action'
+import showAction from './show-action'
+import editAction from './edit-action'
+import newAction from './new-action'
+import listAction from './list-action'
 
-module.exports = {
-  show: showAction,
-  edit: editAction,
-  delete: deleteAction,
-  new: newAction,
-  list: listAction,
+export {
+  showAction as show,
+  editAction as edit,
+  deleteAction as delete,
+  newAction as new,
+  listAction as list,
 }

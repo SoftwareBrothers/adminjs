@@ -3,8 +3,6 @@ import { render } from 'react-testing-library'
 import TestContextProvider from '../spec/test-context-provider'
 import Paginate from './paginate'
 
-require('jsdom-global')()
-
 describe('Paginate', function () {
   this.timeout(5000)
 

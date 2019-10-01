@@ -3,9 +3,9 @@ import EditAction from './edit'
 import ShowAction from './show'
 import ListAction from './list'
 
-export default {
-  new: NewAction,
-  edit: EditAction,
-  show: ShowAction,
-  list: ListAction,
+export {
+  NewAction as new,
+  EditAction as edit,
+  ShowAction as show,
+  ListAction as list,
 }

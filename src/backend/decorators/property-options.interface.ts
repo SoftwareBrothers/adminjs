@@ -20,21 +20,21 @@
  */
 
 export interface PropertyOptions {
-  isVisible?: Boolean | {
-    show?: Boolean,
-    list?: Boolean,
-    edit?: Boolean,
-    filter?: Boolean,
-  },
+  isVisible?: boolean | {
+    show?: boolean;
+    list?: boolean;
+    edit?: boolean;
+    filter?: boolean;
+  };
   components?: {
-    show?: Map<string, string>,
-    list?: Map<string, string>,
-    edit?: Map<string, string>,
-    filter?: Map<string, string>,
-  },
-  type?: string,
-  label?: string,
-  isId?: Boolean,
-  isTitle?: Boolean,
-  position?: Number,
+    show?: string;
+    list?: string;
+    edit?: string;
+    filter?: string;
+  };
+  type?: string;
+  label?: string;
+  isId?: boolean;
+  isTitle?: boolean;
+  position?: number;
 }

@@ -1,4 +1,4 @@
-const CONSTANTS = require('../../constants')
+import { DOCS } from '../../constants'
 
 const buildUrl = (fnName) => {
   if (fnName) {
@@ -10,9 +10,9 @@ const buildUrl = (fnName) => {
     } else {
       [obj, fn] = fnName.split('#')
     }
-    return `${CONSTANTS.DOCS}/${obj}.html#${fn}`
+    return `${DOCS}/${obj}.html#${fn}`
   }
-  return CONSTANTS.DOCS
+  return DOCS
 }
 
 /**

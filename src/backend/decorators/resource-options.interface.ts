@@ -1,5 +1,5 @@
-import Action from "../actions/action.interface";
-import { PropertyOptions } from "./property-options.interface";
+import Action from '../actions/action.interface'
+import { PropertyOptions } from './property-options.interface'
 
 /**
  * @typedef {Object} ResourceOptions
@@ -24,19 +24,19 @@ import { PropertyOptions } from "./property-options.interface";
  */
 
 export interface ResourceOptions {
-  name?: string,
-  listProperties?: Array<String>,
-  showProperties?: Array<String>,
-  editProperties?: Array<String>,
-  filterProperties?: Array<String>,
+  name?: string;
+  listProperties?: Array<string>;
+  showProperties?: Array<string>;
+  editProperties?: Array<string>;
+  filterProperties?: Array<string>;
   parent?: {
-    name?: string,
-    icon?: string,
-  } | string,
+    name?: string;
+    icon?: string;
+  } | string;
   sort?: {
-    direction: 'asc' | 'desc',
-    sortBy: string,
-  }
-  properties?: Map<String, PropertyOptions> | {},
-  actions?: Map<String, Action>
+    direction: 'asc' | 'desc';
+    sortBy: string;
+  };
+  properties?: Map<string, PropertyOptions> | {};
+  actions?: Map<string, Action>;
 }

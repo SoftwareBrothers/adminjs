@@ -5,7 +5,6 @@ import TestContextProvider from '../spec/test-context-provider'
 import RecordsTableHeader from './records-table-header'
 
 require('../../../../spec/fixtures/resource.factory')
-require('jsdom-global')()
 
 describe('RecordsTableHeader', function () {
   beforeEach(async function () {

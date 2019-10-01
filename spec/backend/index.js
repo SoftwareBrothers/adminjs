@@ -1,6 +1,6 @@
-process.env.MONGO_URL = 'mongodb://mongo/admin-server-test'
+import { factory } from 'factory-girl'
 
-const { factory } = require('factory-girl')
+process.env.MONGO_URL = 'mongodb://mongo/admin-server-test'
 
 global.factory = factory
 

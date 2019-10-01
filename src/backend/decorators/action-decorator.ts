@@ -1,20 +1,9 @@
 import ConfigurationError from '../utils/configuration-error'
 import ViewHelpers from '../utils/view-helpers'
-import { BaseResource, BaseRecord, AdminBro } from '../../admin-bro'
+import { BaseResource, AdminBro } from '../../admin-bro'
 import Action, { Is } from '../actions/action.interface'
 import CurrentAdmin from '../../current-admin.interface'
-
-/**
- * @typedef {Object} BaseAction~JSON
- * @description JSON representation of an {@link Action}
- * @property {String} name
- * @property {String | Array<String>} actionType one of 'record' 'resource or
- *                                               an array containing both
- * @property {String} icon
- * @property {String} label
- * @property {String} guard
- * @property {String} component
- */
+import ActionJSON from './action-json.interface'
 
 /**
  * Decorates an action
@@ -23,10 +12,15 @@ import CurrentAdmin from '../../current-admin.interface'
  */
 export default class ActionDecorator {
   private name: string
+
   private _admin: AdminBro
+
   private _resource: BaseResource
+
   private h: ViewHelpers
+
   private action: Action
+
   /**
    * @param {Object}        params
    * @param {BaseAction}    params.action
@@ -55,7 +49,7 @@ export default class ActionDecorator {
   /**
    * Original handler wrapped with the hook `before` and `after` methods.
    */
-  async handler(request, response, data) {
+  async handler(request, response, data): any {
     let modifiedRequest = request
     if (this.action.before) {
       modifiedRequest = await this.action.before(request)
@@ -72,7 +66,7 @@ export default class ActionDecorator {
    *
    * @return  {Boolean}
    */
-  isRecordType() {
+  isRecordType(): boolean {
     return this.action.actionType.includes('record')
   }
 
@@ -81,17 +75,17 @@ export default class ActionDecorator {
    *
    * @return  {Boolean}
    */
-  isResourceType() {
+  isResourceType(): boolean {
     return this.action.actionType.includes('resource')
   }
 
-  is(what: 'isAccessible' | 'isVisible', currentAdmin?: CurrentAdmin) {
+  is(what: 'isAccessible' | 'isVisible', currentAdmin?: CurrentAdmin): boolean {
     if (!['isAccessible', 'isVisible'].includes(what)) {
       throw new Error(`'what' has to be either "isAccessible" or "isVisible". You gave ${what}`)
     }
     let isAction
     if (typeof this.action[what] === 'function') {
-      isAction = (<Is> this.action[what])({
+      isAction = (this.action[what] as Is)({
         resource: this._resource,
         action: this.action,
         h: this.h,
@@ -112,7 +106,7 @@ export default class ActionDecorator {
    *
    * @return  {Boolean}
    */
-  isVisible(currentAdmin?: CurrentAdmin) {
+  isVisible(currentAdmin?: CurrentAdmin): boolean {
     return this.is('isVisible', currentAdmin)
   }
 
@@ -122,7 +116,7 @@ export default class ActionDecorator {
    * @param {CurrentAdmin} currentAdmin   currently logged in admin user
    * @return  {Boolean}
    */
-  isAccessible(currentAdmin?: CurrentAdmin) {
+  isAccessible(currentAdmin?: CurrentAdmin): boolean {
     return this.is('isAccessible', currentAdmin)
   }
 
@@ -131,7 +125,7 @@ export default class ActionDecorator {
    *
    * @return  {Action~JSON}  serialized action
    */
-  toJSON() {
+  toJSON(): ActionJSON {
     return {
       name: this.action.name,
       actionType: this.action.actionType,

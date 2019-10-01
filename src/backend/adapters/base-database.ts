@@ -1,6 +1,10 @@
+/* eslint-disable no-useless-constructor */
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/no-empty-function */
 /* eslint class-methods-use-this: 0 no-unused-vars: 0 */
 
-const NotImplementedError = require('../utils/not-implemented-error')
+import BaseResource from './base-resource'
+import NotImplementedError from '../utils/not-implemented-error'
 
 /**
  * Representation of an ORM database in AdminBro
@@ -14,13 +18,14 @@ const NotImplementedError = require('../utils/not-implemented-error')
  */
 class BaseDatabase {
   constructor(database: any) {}
+
   /**
    * Checks if given adapter supports database provided by user
    *
    * @param  {any}  database    database provided in AdminBroOptions#databases array
    * @return {Boolean}          if given adapter supports this database - returns true
    */
-  static isAdapterFor(database: any) {
+  static isAdapterFor(database: any): boolean {
     throw new NotImplementedError('BaseDatabase.isAdapterFor')
   }
 
@@ -29,7 +34,7 @@ class BaseDatabase {
    *
    * @return {BaseResource[]}
    */
-  resources() {
+  resources(): Array<BaseResource> {
     throw new NotImplementedError('BaseDatabase#resources')
   }
 }

@@ -1,15 +1,21 @@
 module.exports = {
+    'parser': '@typescript-eslint/parser',
+    'plugins': ['@typescript-eslint'],
     'env': {
         'es6': true,
         'node': true,
         'mocha': true
     },
-    'extends': 'airbnb',
+    'extends': [
+        'airbnb',
+        'plugin:@typescript-eslint/recommended'
+    ],
     'parserOptions': {
         'ecmaVersion': 2018,
         'sourceType': 'module'
     },
     'rules': {
+        '@typescript-eslint/no-explicit-any': 'off',
         'indent': [
             'error',
             2
@@ -42,7 +48,13 @@ module.exports = {
             'prefer-arrow-callback': 'off',
             "react/jsx-filename-extension": 'off'
           }
-        }
+        },
+        {
+            files: ['*.jsx'],
+            rules: {
+              "@typescript-eslint/explicit-function-return-type": 'off'
+            }
+        },
     ],
     globals: {
         'expect': true,

@@ -3,6 +3,7 @@ import { BaseProperty, AdminBro } from '../../admin-bro'
 import { PropertyOptions } from './property-options.interface'
 import BaseResource from '../adapters/base-resource'
 import ResourceDecorator from './resource-decorator'
+import PropertyJSON from './property-json.interface'
 
 /**
  * Decorates property
@@ -11,9 +12,13 @@ import ResourceDecorator from './resource-decorator'
  */
 class PropertyDecorator {
   private _property: BaseProperty
+
   private _admin: AdminBro
+
   private _resource: ResourceDecorator
+
   public options: PropertyOptions
+
   /**
    * @param {Object} opts
    * @param {BaseProperty}        opts.property
@@ -22,10 +27,10 @@ class PropertyDecorator {
    * @param {ResourceDecorator}   opts.resource
    */
   constructor({ property, admin, options = {}, resource }: {
-    property: BaseProperty,
-    admin: AdminBro,
-    options: PropertyOptions,
-    resource: ResourceDecorator
+    property: BaseProperty;
+    admin: AdminBro;
+    options: PropertyOptions;
+    resource: ResourceDecorator;
   }) {
     this._property = property
     this._admin = admin
@@ -43,11 +48,11 @@ class PropertyDecorator {
    *
    * @returns {Boolean}
    */
-  isSortable() {
+  isSortable(): boolean {
     return this._property.isSortable()
   }
 
-  overrideFromOptions(optionName, defaultValue = null) {
+  overrideFromOptions(optionName, defaultValue = null): any {
     if (typeof this.options[optionName] === 'undefined') {
       if (defaultValue) {
         return defaultValue()
@@ -62,7 +67,7 @@ class PropertyDecorator {
    *
    * @return  {BaseResource} reference resource
    */
-  reference() {
+  reference(): BaseResource | null {
     return this._property.reference() && this._admin.findResource(this._property.reference())
   }
 
@@ -71,11 +76,11 @@ class PropertyDecorator {
    *
    * @returns {String}
    */
-  name() {
+  name(): string {
     return this.overrideFromOptions('name')
   }
 
-  label() {
+  label(): string {
     return this.overrideFromOptions('label', () => (
       _.startCase(this._property.name())
     ))
@@ -86,11 +91,11 @@ class PropertyDecorator {
    *
    * @returns {String}
    */
-  type() {
+  type(): string {
     return this.overrideFromOptions('type')
   }
 
-  availableValues() {
+  availableValues(): null | Array<{value: string; label: string}> {
     return this.overrideFromOptions('availableValues', () => {
       const values = this._property.availableValues()
       if (values) {
@@ -105,7 +110,7 @@ class PropertyDecorator {
    *
    * @param {String} element      it could be either "list", "edit" or "show"
    */
-  isVisible(element) {
+  isVisible(element): boolean {
     if (typeof this.options.isVisible === 'object') {
       return this.options.isVisible[element]
     }
@@ -134,7 +139,7 @@ class PropertyDecorator {
    *
    * @return {Boolean}
    */
-  isId() {
+  isId(): boolean {
     return this.overrideFromOptions('isId')
   }
 
@@ -145,36 +150,16 @@ class PropertyDecorator {
    *
    * @return {Boolean}
    */
-  isTitle() {
+  isTitle(): boolean {
     return this.overrideFromOptions('isTitle')
   }
-
-  /**
-   * @typedef {Object} BaseProperty~JSON
-   * @property {Boolean} isTitle
-   * @property {Boolean} isId
-   * @property {Number}  position
-   * @property {Boolean} isSortable
-   * @property {Array | null} availableValues
-   * @property {String} name
-   * @property {String} label
-   * @property {String} type
-   * @property {String} reference
-   * @property {Boolean} isArray=false
-   * @property {Array<BaseProperty~JSON>} subProperties=[]
-   * @property {Object} [components]
-   * @property {Component} [components.show]
-   * @property {Component} [components.edit]
-   * @property {Component} [components.filter]
-   * @property {Component} [components.list]
-   */
 
   /**
    * Returns JSON representation of a property
    *
    * @return {BaseProperty~JSON}
    */
-  toJSON() {
+  toJSON(): PropertyJSON {
     return {
       isTitle: this.isTitle(),
       isId: this.isId(),

@@ -1,3 +1,5 @@
+import ViewHelpers from '../../backend/utils/view-helpers'
+
 const onProd = process.env.NODE_ENV === 'production'
 
 /**
@@ -12,7 +14,10 @@ const onProd = process.env.NODE_ENV === 'production'
  * @return {string}                   list of scripts which has to be injected to to the
  *                                    head of the app
  */
-module.exports = ({ fromCDN, viewHelpers }) => (fromCDN
+module.exports = ({ fromCDN, viewHelpers }: {
+  fromCDN: boolean;
+  viewHelpers: ViewHelpers;
+}): string => (fromCDN
   ? `
     <script crossorigin src="https://unpkg.com/react@16/umd/react.${onProd ? 'production.min' : 'development'}.js"></script>
     <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.${onProd ? 'production.min' : 'development'}.js"></script>

@@ -14,9 +14,13 @@ const TITLE_COLUMN_NAMES = ['title', 'name', 'subject', 'email']
  */
 class BaseProperty {
   private _path: string
+
   private _type: string
-  private _isId: Boolean
-  private _isSortable: Boolean
+
+  private _isId: boolean
+
+  private _isSortable: boolean
+
   /**
    * @param  {Object} options
    * @param  {String} options.path property path: usually it its key but when
@@ -27,10 +31,10 @@ class BaseProperty {
    * @param  {String} options.isSortable by default: true
    */
   constructor({ path, type = 'string', isId = false, isSortable = true }: {
-    path: string,
-    type?: string,
-    isId?: Boolean,
-    isSortable?: Boolean,
+    path: string;
+    type?: string;
+    isId?: boolean;
+    isSortable?: boolean;
   }) {
     this._path = path
     this._type = type
@@ -67,7 +71,7 @@ class BaseProperty {
    * Return true if given property should be treated as a Record Title.
    * @return {Boolean}
    */
-  isTitle(): Boolean {
+  isTitle(): boolean {
     return TITLE_COLUMN_NAMES.includes(this._path.toLowerCase())
   }
 
@@ -75,7 +79,7 @@ class BaseProperty {
    * Indicates if given property should be visible
    * @return {Boolean}
    */
-  isVisible(): Boolean {
+  isVisible(): boolean {
     return !this._path || !this._path.match('password')
   }
 
@@ -83,7 +87,7 @@ class BaseProperty {
    * Indicates if value of given property can be updated
    * @return {Boolean}
    */
-  isEditable(): Boolean {
+  isEditable(): boolean {
     return true
   }
 
@@ -91,8 +95,8 @@ class BaseProperty {
    * Returns true if given property is a uniq key in a table/collection
    * @return {Boolean}
    */
-  isId(): Boolean {
-    return this._isId
+  isId(): boolean {
+    return !!this._isId
   }
 
   /**
@@ -113,7 +117,7 @@ class BaseProperty {
    * @return  {Array<String> | null}  array of all available values or null when field
    *                                  is not an enum.
    */
-  availableValues(): Array<String> | null {
+  availableValues(): Array<string> | null {
     return null
   }
 
@@ -122,7 +126,7 @@ class BaseProperty {
    *
    * @return  {Boolean}
    */
-  isArray(): Boolean {
+  isArray(): boolean {
     return false
   }
 
@@ -139,7 +143,7 @@ class BaseProperty {
    * Indicates if given property can be sorted
    * @return {Boolean}
    */
-  isSortable(): Boolean {
+  isSortable(): boolean {
     return this._isSortable
   }
 }

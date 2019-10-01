@@ -78,8 +78,8 @@
   *   ...
   * }
   */
- 
- /**
+
+/**
   * @name isAccessible
   * @description
   * indicates if action can be invoked for given invocation context.
@@ -193,50 +193,45 @@
  */
 
 
- 
-
 import { AdminBro, BaseResource } from '../../admin-bro'
-import ActionDecorator from '../decorators/action-decorator'
 import CurrentAdmin from '../../current-admin.interface'
 import ViewHelpers from '../utils/view-helpers'
 
 export interface ActionContext {
-  _admin: AdminBro,
-  resource: BaseResource,
-  h: ViewHelpers,
-  action: Action,
-  currentAdmin?: CurrentAdmin,
+  _admin: AdminBro;
+  resource: BaseResource;
+  h: ViewHelpers;
+  action: Action;
+  currentAdmin?: CurrentAdmin;
 }
 
 export interface ActionRequest {
-  request: {
-    params?: {
-      resourceId?: string,
-      recordId?: string,
-      actionName?: string,
-    },
-    payload?: any,
-    query?: any,
-    method: 'post' | 'get'
-  }
+  params?: {
+    resourceId?: string;
+    recordId?: string;
+    actionName?: string;
+  };
+  payload?: {[key: string]: any};
+  query?: {[key: string]: any};
+  method: 'post' | 'get';
 }
 
-export type Is = (context: ActionContext) => Boolean
-export type Handler = (request: ActionRequest, response: any, context: ActionContext) => any
-export type Before = (request: ActionRequest) => ActionRequest
+export type Is = (context: ActionContext) => boolean
+export type Handler = ({ request: ActionRequest }, response: any, context: ActionContext) => any
+export type Before = ({ request: ActionRequest }) => ActionRequest
 export type After = (response: any) => any
 
 export default interface Action {
-  name: string,
-  isVisible?: Boolean | Is,
-  isAccessible?: Boolean | Is,
-  label?: string,
-  showFilter?: Boolean,
-  actionType?: 'resource' | 'record' | Array<'resource' | 'record'>,
-  icon?: string,
-  guard?: string,
-  component?: Map<string, string>,
-  handler?: Handler,
-  before?: Before,
-  after?: After,
+  name: string;
+  isVisible?: boolean | Is;
+  isAccessible?: boolean | Is;
+  label?: string;
+  showFilter?: boolean;
+  actionType?: 'resource' | 'record' | Array<'resource' | 'record'>;
+  icon?: string;
+  guard?: string;
+  component?: string;
+  handler?: Handler;
+  before?: Before;
+  after?: After;
 }

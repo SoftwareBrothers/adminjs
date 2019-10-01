@@ -1,14 +1,20 @@
 import * as path from 'path'
+import { outPath as COMPONENT_BUNDLE_PATH } from './bundler/user-components-bundler'
 
-const AppController = require('./controllers/app-controller')
-const ApiController = require('./controllers/api-controller')
+import AppController from './controllers/app-controller'
+import ApiController from './controllers/api-controller'
 
 const ASSETS_ROOT = `${__dirname}/../frontend/assets/`
-import { outPath as COMPONENT_BUNDLE_PATH} from './bundler/user-components-bundler'
 
 export interface RouterType {
-  assets: Array<{path: string, src: string}>,
-  routes: Array<{method: string, path: string, Controller: any, action: string, contentType?: string}>
+  assets: Array<{path: string; src: string}>;
+  routes: Array<{
+    method: string;
+    path: string;
+    Controller: any;
+    action: string;
+    contentType?: string;
+  }>;
 }
 
 /**

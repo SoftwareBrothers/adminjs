@@ -5,11 +5,11 @@ import ActionDecorator from './action-decorator'
 import ViewHelpers from '../utils/view-helpers'
 import ConfigurationError from '../utils/configuration-error'
 import BaseResource from '../adapters/base-resource'
-import { AdminBro, ACTIONS } from '../../admin-bro'
+import { AdminBro } from '../../admin-bro'
+import * as ACTIONS from '../actions/index'
 import { ResourceOptions } from './resource-options.interface'
-import { PropertyOptions } from './property-options.interface'
-import BaseRecord from '../adapters/base-record'
 import CurrentAdmin from '../../current-admin.interface'
+import ResourceJSON from './resource-json.interface'
 
 /**
  * Default maximum number of items which should be present in a list.
@@ -25,11 +25,17 @@ export const DEFAULT_MAX_ITEMS_IN_LIST = 8
  */
 export default class ResourceDecorator {
   private _resource: BaseResource
+
   private _admin: AdminBro
+
   private h: ViewHelpers
+
   private properties: {[key: string]: PropertyDecorator}
+
   private actions: {[key: string]: ActionDecorator}
+
   public options: ResourceOptions
+
   /**
    * @param  {Object}       options
    * @param  {BaseResource} options.resource  resource which is decorated
@@ -37,9 +43,9 @@ export default class ResourceDecorator {
    * @param  {ResourceOptions} [options.options]
    */
   constructor({ resource, admin, options = {} }: {
-    resource: BaseResource,
-    admin: AdminBro,
-    options: ResourceOptions,
+    resource: BaseResource;
+    admin: AdminBro;
+    options: ResourceOptions;
   }) {
     this.getPropertyByKey = this.getPropertyByKey.bind(this)
     this._resource = resource
@@ -74,8 +80,7 @@ export default class ResourceDecorator {
    *
    * @returns {Object<String, ActionDecorator>}
    */
-  decorateActions() {
-
+  decorateActions(): {[key: string]: ActionDecorator} {
     // in the end we merge actions defined by the user with the default actions.
     // since _.merge is a deep merge it also overrides defaults with the parameters
     // specified by the user.
@@ -102,7 +107,7 @@ export default class ResourceDecorator {
    * @returns {Object<String,PropertyDecorator>}
    * @private
    */
-  decorateProperties() {
+  decorateProperties(): {[key: string]: PropertyDecorator} {
     const resourceProperties = this._resource.properties()
     // decorate all exising properties
     const properties = resourceProperties.reduce((memo, property) => {
@@ -134,7 +139,7 @@ export default class ResourceDecorator {
    * Returns the name for the resource.
    * @return {String} resource name
    */
-  getResourceName() {
+  getResourceName(): string {
     return this.options.name || this._resource.name()
   }
 
@@ -143,9 +148,11 @@ export default class ResourceDecorator {
    * database type with its icon
    * @return {Object<String,String>} returns { name, icon }
    */
-  getParent(): {name: string, icon: string} {
-    const parent = <{name: string, icon: string}> (this.options.parent || this._resource.databaseName())
-    const name = <string> (parent.name || parent)
+  getParent(): {name: string; icon: string} {
+    const parent = (
+      this.options.parent || this._resource.databaseName()
+    ) as {name: string; icon: string}
+    const name = (parent.name || parent) as string
     const icon = parent.icon ? parent.icon : `icon-${this._resource.databaseType() || 'database'}`
     return { name, icon }
   }
@@ -158,7 +165,7 @@ export default class ResourceDecorator {
    * @return  {PropertyDecorator}
    * @throws  {ConfigurationError} when there is no property for given key
    */
-  getPropertyByKey(propertyPath) {
+  getPropertyByKey(propertyPath): PropertyDecorator {
     const property = this.properties[propertyPath]
     if (!property) {
       throw new ConfigurationError(
@@ -179,17 +186,18 @@ export default class ResourceDecorator {
    *
    * @return {Array<PropertyDecorator>}
    */
-  getProperties({ where, max = null }) {
+  getProperties({ where, max = null }): Array<PropertyDecorator> {
     const whereProperties = `${where}Properties` // like listProperties, viewProperties etc
     if (this.options[whereProperties] && this.options[whereProperties].length) {
       return this.options[whereProperties].map(this.getPropertyByKey)
     }
 
-    const keys = Object.keys(this.properties)
-
     const properties = Object.keys(this.properties)
       .filter(key => this.properties[key].isVisible(where))
-      .sort((key1, key2) => this.properties[key1].position() > this.properties[key2].position() ? 1 : -1)
+      .sort((key1, key2) => (
+        this.properties[key1].position()
+
+        > this.properties[key2].position() ? 1 : -1))
       .map(key => this.properties[key])
 
     if (max) {
@@ -198,7 +206,7 @@ export default class ResourceDecorator {
     return properties
   }
 
-  getListProperties() {
+  getListProperties(): Array<PropertyDecorator> {
     return this.getProperties({ where: 'list', max: DEFAULT_MAX_ITEMS_IN_LIST })
   }
 
@@ -207,9 +215,9 @@ export default class ResourceDecorator {
    * for a particular record
    *
    * @param {CurrentAdmin} currentAdmin   currently logged in admin user
-   * @return  {Array<Action>}     Actions assigned to resources
+   * @return  {Array<ActionDecorator>}     Actions assigned to resources
    */
-  resourceActions(currentAdmin: CurrentAdmin) {
+  resourceActions(currentAdmin: CurrentAdmin): Array<ActionDecorator> {
     return Object.values(this.actions)
       .filter(action => (
         action.isResourceType()
@@ -223,9 +231,9 @@ export default class ResourceDecorator {
    * for an entire resource
    *
    * @param {CurrentAdmin} currentAdmin   currently logged in admin user
-   * @return  {Array<Action>}     Actions assigned to each record
+   * @return  {Array<ActionDecorator>}     Actions assigned to each record
    */
-  recordActions(currentAdmin: CurrentAdmin) {
+  recordActions(currentAdmin: CurrentAdmin): Array<ActionDecorator> {
     return Object.values(this.actions)
       .filter(action => (
         action.isRecordType()
@@ -239,7 +247,7 @@ export default class ResourceDecorator {
    *
    * @return  {PropertyDecorator} PropertyDecorator of title property
    */
-  titleProperty() {
+  titleProperty(): PropertyDecorator {
     const properties = Object.values(this.properties)
     const titleProperty = properties.find(p => p.isTitle())
     return titleProperty || properties[0]
@@ -255,27 +263,9 @@ export default class ResourceDecorator {
    *
    * @return  {String}      title of given record
    */
-  titleOf(record) {
+  titleOf(record): string {
     return record.param(this.titleProperty().name())
   }
-
-  /**
-   * @typedef {Object} BaseResource~JSON
-   * @property {String} id        uniq ID of a resource
-   * @property {String} name      resource name used in the UI
-   * @property {String} parent.name       name of the parent category
-   * @property {String} parent.icon       icon class of a parent category (i.e. 'icon-bomb')
-   * @property {String} titleProperty     name of a property which should be treated as a
-   *                                      _title_ property.
-   * @property {Array<Action~JSON>} recordActions   list of all record actions available for
-   *                                                given resource
-   * @property {Array<Action~JSON>} resourceActions list of all resource actions available
-   *                                                for given resource
-   * @property {Array<BaseProperty~JSON>} listProperties
-   * @property {Array<BaseProperty~JSON>} editProperties
-   * @property {Array<BaseProperty~JSON>} showProperties
-   * @property {Array<BaseProperty~JSON>} filterProperties
-   */
 
   /**
    * Returns JSON representation of a resource
@@ -283,7 +273,7 @@ export default class ResourceDecorator {
    * @param {CurrentAdmin} currentAdmin
    * @return  {BaseResource~JSON}
    */
-  toJSON(currentAdmin?: CurrentAdmin) {
+  toJSON(currentAdmin?: CurrentAdmin): ResourceJSON {
     return {
       id: this._resource.id(),
       name: this.getResourceName(),

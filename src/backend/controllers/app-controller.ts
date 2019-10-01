@@ -1,39 +1,45 @@
 /* eslint-disable no-unused-vars */
 import ViewHelpers from '../utils/view-helpers'
 import componentsBundler from '../bundler/user-components-bundler'
+import layoutTemplate from '../../frontend/layout-template'
+import { ActionRequest } from '../actions/action.interface'
+import { AdminBro } from '../../admin-bro'
+import CurrentAdmin from '../../current-admin.interface'
 
-const layoutTemplate = require('../../frontend/layout-template')
+export default class AppController {
+  private _admin: AdminBro
 
-class AppController {
+  private h: ViewHelpers
+
+  private currentAdmin: CurrentAdmin
+
   constructor({ admin }, currentAdmin) {
     this._admin = admin
     this.h = new ViewHelpers(admin)
     this.currentAdmin = currentAdmin
   }
 
-  async index({ params, query, payload }, response) {
+  async index(): Promise<string> {
     return layoutTemplate(this._admin, this.currentAdmin, '')
   }
 
-  async resource({ params, query, payload }, response) {
+  async resource(): Promise<string> {
     return layoutTemplate(this._admin, this.currentAdmin, '/')
   }
 
-  async resourceAction({ params, query, payload }, response) {
+  async resourceAction({ params }: ActionRequest): Promise<string> {
     const { resourceId, actionName } = params
     const href = this.h.resourceActionUrl({ resourceId, actionName })
     return layoutTemplate(this._admin, this.currentAdmin, href)
   }
 
-  async recordAction({ params, query, payload }, response) {
+  async recordAction({ params }: ActionRequest): Promise<string> {
     const { resourceId, actionName, recordId } = params
     const href = this.h.recordActionUrl({ resourceId, actionName, recordId })
     return layoutTemplate(this._admin, this.currentAdmin, href)
   }
 
-  async bundleComponents({ params, query, payload }, response) {
+  async bundleComponents(): Promise<string> {
     return componentsBundler(this._admin)
   }
 }
-
-module.exports = AppController

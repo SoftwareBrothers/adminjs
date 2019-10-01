@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/explicit-function-return-type */
 import React from 'react'
 import { renderToString } from 'react-dom/server'
 import { ServerStyleSheet, ThemeProvider } from 'styled-components'

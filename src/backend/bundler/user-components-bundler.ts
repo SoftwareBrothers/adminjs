@@ -1,14 +1,14 @@
-const fs = require('fs')
-const path = require('path')
-const util = require('util')
-const bundler = require('./bundler')
+import * as fs from 'fs'
+import * as path from 'path'
+import * as util from 'util'
+import bundler from './bundler'
+import generateEntry from './generate-user-component-entry'
 
 const tmpPath = '.adminbro'
 const entryPath = path.join(tmpPath, '.entry.js')
 const outPath = path.join(tmpPath, 'bundle.js')
-const generateEntry = require('./generate-user-component-entry')
 
-async function build(admin, { write = false } = {}) {
+async function build(admin, { write = false } = {}): Promise<string> {
   const entryFile = generateEntry(admin, tmpPath)
 
   try {
@@ -28,5 +28,5 @@ async function build(admin, { write = false } = {}) {
 
 export {
   build as default,
-  outPath
+  outPath,
 }

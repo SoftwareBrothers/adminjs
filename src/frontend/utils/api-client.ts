@@ -1,6 +1,7 @@
-import axios from 'axios'
+import axios, { AxiosResponse, AxiosInstance } from 'axios'
+import SearchResponse from '../../backend/controllers/search-response.interface'
 
-const checkLogin = (response) => {
+const checkLogin = (response: AxiosResponse): void => {
   const loginUrl = [window.location.origin, window.REDUX_STATE.paths.loginPath].join('')
   if (response.request.responseURL
       && response.request.responseURL.match(loginUrl)
@@ -28,6 +29,10 @@ const checkLogin = (response) => {
  * @see https://github.com/axios/axios
  */
 class ApiClient {
+  private baseURL: string
+
+  private client: AxiosInstance
+
   constructor() {
     this.baseURL = [window.location.origin, window.REDUX_STATE.paths.rootPath].join('')
     this.client = axios.create({
@@ -44,7 +49,7 @@ class ApiClient {
    *
    * @return  {Promise<SearchResponse>}
    */
-  async searchRecords({ resourceId, query }) {
+  async searchRecords({ resourceId, query }): Promise<SearchResponse> {
     const q = encodeURIComponent(query)
     const response = await this.client.get(`/api/resources/${resourceId}/search/${q}`)
     checkLogin(response)
@@ -63,7 +68,13 @@ class ApiClient {
    *                                       POST request, otherwise GET.
    * @return  {Promise<Object>}            response from an {@link Action}
    */
-  async resourceAction({ resourceId, actionName, payload, method, params }) {
+  async resourceAction({ resourceId, actionName, payload, method, params }: {
+    resourceId: string;
+    actionName: string;
+    payload?: {[key: string]: any};
+    method: 'POST' | 'GET';
+    params?: {[key: string]: any};
+  }): Promise<any> {
     const response = await this.client.request({
       url: `/api/resources/${resourceId}/actions/${actionName}`,
       method: method || payload ? 'POST' : 'GET',
@@ -87,7 +98,14 @@ class ApiClient {
    *                                       POST request, otherwise GET.
    * @return  {Promise<Object>}            response from an {@link Action}
    */
-  async recordAction({ resourceId, recordId, actionName, payload, method, params }) {
+  async recordAction({ resourceId, recordId, actionName, payload, method, params }: {
+    recordId: string;
+    resourceId: string;
+    actionName: string;
+    payload?: {[key: string]: any};
+    method: 'POST' | 'GET';
+    params?: {[key: string]: any};
+  }): Promise<any> {
     const response = await this.client.request({
       url: `/api/resources/${resourceId}/records/${recordId}/${actionName}`,
       method: method || payload ? 'POST' : 'GET',
@@ -98,7 +116,7 @@ class ApiClient {
     return response
   }
 
-  async getDashboard({ params = {} } = {}) {
+  async getDashboard({ params = {} }: { params?: any } = {}): Promise<any> {
     const response = await this.client.get('/api/dashboard', {
       params,
     })

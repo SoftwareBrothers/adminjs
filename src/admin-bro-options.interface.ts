@@ -1,7 +1,7 @@
-import { BaseDatabase } from './admin-bro';
-import BaseResource from './backend/adapters/base-resource';
+import { BaseDatabase } from './admin-bro'
+import BaseResource from './backend/adapters/base-resource'
 import { Handler } from './backend/actions/action.interface'
-import { ResourceOptions } from "./backend/decorators/resource-options.interface";
+import { ResourceOptions } from './backend/decorators/resource-options.interface'
 import { colors, sizes, fonts, breakpoints } from './frontend/styles/variables'
 
 /**
@@ -64,37 +64,37 @@ import { colors, sizes, fonts, breakpoints } from './frontend/styles/variables'
  */
 
 export default interface AdminBroOptions {
-  rootPath?: string,
-  logoutPath?: string,
-  loginPath?: string,
-  databases?: Array<BaseDatabase>,
+  rootPath?: string;
+  logoutPath?: string;
+  loginPath?: string;
+  databases?: Array<BaseDatabase>;
   resources?: Array<BaseResource> | Array<{
-    resource: BaseResource,
-    options: ResourceOptions,
-  }>,
+    resource: BaseResource;
+    options: ResourceOptions;
+  }>;
   dashboard?: {
-    handler?: Handler,
-    component?: Map<string, string>,
-  },
+    handler?: Handler;
+    component?: Map<string, string>;
+  };
   version?: {
-    admin?: boolean,
-    app?: boolean,
-  },
+    admin?: boolean;
+    app?: boolean;
+  };
   branding?: {
-    logo?: string,
-    companyName?: string,
+    logo?: string;
+    companyName?: string;
     theme?: {
-      colors?: typeof colors, 
-      sizes?: typeof sizes,
-      fonts?: typeof fonts,
-      breakpoints?: typeof breakpoints,
-    },
-    softwareBrothers?: boolean,
-  },
+      colors?: typeof colors;
+      sizes?: typeof sizes;
+      fonts?: typeof fonts;
+      breakpoints?: typeof breakpoints;
+    };
+    softwareBrothers?: boolean;
+  };
   assets?: {
-    styles?: Array<String>,
-    scripts?: Array<String>,
-    globalsFromCDN: boolean,
-  },
-  env?: Map<string, string>,
+    styles?: Array<string>;
+    scripts?: Array<string>;
+    globalsFromCDN: boolean;
+  };
+  env?: Map<string, string>;
 }

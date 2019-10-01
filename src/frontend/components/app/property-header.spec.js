@@ -5,7 +5,6 @@ import TestContextProvider from '../spec/test-context-provider'
 import PropertyHeader from './property-header'
 
 require('../../../../spec/fixtures/resource.factory')
-require('jsdom-global')()
 
 describe('PropertyHeader', function () {
   this.timeout(5000)

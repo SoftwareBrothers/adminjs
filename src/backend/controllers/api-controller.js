@@ -22,7 +22,7 @@ import ForbiddenError from '../utils/forbidden-error'
  *
  * @hideconstructor
  */
-class ApiController {
+export default class ApiController {
   /**
    * @param {Object} options
    * @param {AdminBroOptions} options.admin
@@ -160,13 +160,3 @@ class ApiController {
     }
   }
 }
-
-module.exports = ApiController
-
-/**
- * @typedef {Object} SearchResponse
- * @memberof ApiController
- * @property {Array} records
- * @property {String} records[].title
- * @property {String} records[].id
- */

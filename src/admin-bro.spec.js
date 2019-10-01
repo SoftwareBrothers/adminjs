@@ -1,6 +1,6 @@
-const path = require('path')
+import path from 'path'
 
-const { AdminBro, BaseDatabase, BaseResource, registerAdapter } = require('./admin-bro')
+import { AdminBro, BaseDatabase, BaseResource, registerAdapter } from './admin-bro'
 
 describe('AdminBro', function () {
   beforeEach(function () {

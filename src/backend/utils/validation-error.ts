@@ -4,6 +4,7 @@
  */
 class ValidationError extends Error {
   public errors
+
   /**
    * @param  {String} message   custom message
    * @param  {Object} errors    error messages

@@ -1,5 +1,5 @@
-import BaseResource from "../adapters/base-resource"
-import { Adapter, AdminBro } from "../../admin-bro"
+import BaseResource from '../adapters/base-resource'
+import { Adapter, AdminBro } from '../../admin-bro'
 
 class NoDatabaseAdapterError extends Error {
   private database: string
@@ -25,6 +25,7 @@ class NoResourceAdapterError extends Error {
 
 export default class ResourcesFactory {
   private adapters: Array<Adapter>
+
   private admin: AdminBro
 
   constructor(admin, adapters: Array<Adapter> = []) {
@@ -32,7 +33,7 @@ export default class ResourcesFactory {
     this.admin = admin
   }
 
-  buildResources({ databases, resources }) {
+  buildResources({ databases, resources }): Array<BaseResource> {
     const optionsResources = this._convertResources(resources)
 
     // fetch only those resources from database which werent previousely given as a resource
@@ -48,7 +49,7 @@ export default class ResourcesFactory {
    * @param  {any[]} databases    list of all databases given by the user in {@link AdminBroOptions}
    * @return {BaseResource[]}     list of all resources from given databases
   */
-  _convertDatabases(databases: Array<any>) {
+  _convertDatabases(databases: Array<any>): Array<BaseResource> {
     return databases.reduce((memoArray, db) => {
       const databaseAdapter = this.adapters.find(adapter => (
         adapter.Database.isAdapterFor(db)
@@ -76,7 +77,7 @@ export default class ResourcesFactory {
    * // => returns: [AdminModel, {resource: UserModel, options: {}}]
    * // where AdminModel and UserModel were converted by appropriate database adapters.
    */
-  _convertResources(resources) {
+  _convertResources(resources): Array<any> {
     return resources.map((rawResource) => {
       // resource can be given either by a value or within an object within resource key
       const resourceObject = rawResource.resource || rawResource
@@ -104,7 +105,7 @@ export default class ResourcesFactory {
    * @param  {Object} [resources[].options]              options for given resource
    * @return {BaseResource[]}                            list of resources with decorator assigned
    */
-  _decorateResources(resources) {
+  _decorateResources(resources): Array<BaseResource> {
     return resources.map((resourceObject) => {
       const resource = resourceObject.resource || resourceObject
       resource.assignDecorator(this.admin, resourceObject.options)

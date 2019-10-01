@@ -1,6 +1,6 @@
-const CONSTANTS = require('../../constants')
+import * as CONSTANTS from '../../constants'
 
-const buildUrl = page => (
+const buildUrl = (page: string): string => (
   `${CONSTANTS.DOCS}/${page}`
 )
 

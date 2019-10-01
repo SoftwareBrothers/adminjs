@@ -1,3 +1,3 @@
 export default interface CurrentAdmin {
-  email: string,
+  email: string;
 }

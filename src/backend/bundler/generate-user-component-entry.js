@@ -1,4 +1,4 @@
-const path = require('path')
+import * as path from 'path'
 
 /**
  * Generates entry file for all UsersComponents.
@@ -33,4 +33,4 @@ const generateUserComponentEntry = (admin, entryPath) => {
   return setupPart + envPart + componentsPart
 }
 
-module.exports = generateUserComponentEntry
+export default generateUserComponentEntry
