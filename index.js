@@ -34,4 +34,7 @@ if (process.env.ADMIN_BRO_DEV_ENV) {
 
 AdminBro.require = AdminBro.bundle
 
+// This is a fix for js import statements.
+AdminBro.default = AdminBro
+
 module.exports = AdminBro
