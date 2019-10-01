@@ -1,4 +1,4 @@
-const sortSetter = require('./sort-setter')
+import sortSetter from './sort-setter'
 
 describe('sortSetter', function () {
   const defautlFieldName = 'someFieldName'

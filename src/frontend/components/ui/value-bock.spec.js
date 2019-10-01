@@ -3,8 +3,6 @@ import { render } from 'react-testing-library'
 import ValueBlock from './value-block'
 import TestContextProvider from '../spec/test-context-provider'
 
-require('jsdom-global')()
-
 describe('ValueBlock', function () {
   this.timeout(5000)
 

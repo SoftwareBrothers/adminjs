@@ -1,7 +1,11 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
+/* eslint-disable @typescript-eslint/explicit-function-return-type */
 const rollup = require('rollup')
 const { external, globals, plugins } = require('./config')
 
-async function build({ name, input, babelConfig = {}, commonJSConfig = {}, file, watch, minify }) {
+async function build({
+  name, input, babelConfig = {}, commonJSConfig = {}, file, watch = false, minify,
+}) {
   const inputOptions = {
     input,
     plugins: plugins({ babelConfig, minify, commonJSConfig }),

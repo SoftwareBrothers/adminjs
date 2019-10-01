@@ -1,6 +1,9 @@
-const path = require('path')
+import path from 'path'
 
-const AdminBro = require('./admin-bro')
+import AdminBro from './admin-bro'
+
+import BaseDatabase from './backend/adapters/base-database'
+import BaseResource from './backend/adapters/base-resource'
 
 describe('AdminBro', function () {
   beforeEach(function () {
@@ -13,10 +16,10 @@ describe('AdminBro', function () {
     })
   })
 
-  describe('.registerAdapter', function () {
+  describe('.AdminBro.registerAdapter', function () {
     beforeEach(function () {
-      class Database extends AdminBro.BaseDatabase {}
-      class Resource extends AdminBro.BaseResource {}
+      class Database extends BaseDatabase {}
+      class Resource extends BaseResource {}
       this.DatabaseAdapter = { Database, Resource }
     })
 
@@ -44,7 +47,7 @@ describe('AdminBro', function () {
     })
     context('file exists', function () {
       beforeEach(function () {
-        this.result = AdminBro.require('../spec/fixtures/example-component')
+        this.result = AdminBro.bundle('../spec/fixtures/example-component')
       })
 
       it('adds given file to a UserComponents object', function () {
@@ -65,7 +68,7 @@ describe('AdminBro', function () {
 
     it('throws an error when component doesn\t exist', function () {
       expect(() => {
-        AdminBro.require('./fixtures/example-components')
+        AdminBro.bundle('./fixtures/example-components')
       }).to.throw().property('name', 'ConfigurationError')
     })
   })

@@ -1,9 +1,15 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
+
 /* eslint-disable func-names */
 require('@babel/polyfill')
 require('@babel/register')({
-  presets: [require.resolve('@babel/preset-react'), require.resolve('@babel/preset-env')],
-  extensions: ['.jsx', '.js'],
-  only: [/src\/frontend/],
+  presets: [
+    require.resolve('@babel/preset-react'),
+    require.resolve('@babel/preset-env'),
+    require.resolve('@babel/preset-typescript'),
+  ],
+  extensions: ['.jsx', '.js', '.ts'],
+  only: ['src/', 'spec/'],
 })
 
 require('./setup')

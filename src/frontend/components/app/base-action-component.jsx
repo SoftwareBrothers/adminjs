@@ -4,7 +4,7 @@ import { resourceType, actionType, recordType } from '../../types'
 import WrapperBox from '../ui/wrapper-box'
 import ErrorBoundary from './error-boundary'
 
-import actions from '../actions'
+import * as actions from '../actions'
 import { DOCS } from '../../../constants'
 
 /**
@@ -25,7 +25,7 @@ import { DOCS } from '../../../constants'
  *             icon: 'fas fa-eye',
  *             inVisible: (resource, record) => record.param('email') !== '',
  *             actionType: 'record',
- *             component: AdminBro.require('./my-new-action'),
+ *             component: AdminBro.bundle('./my-new-action'),
  *             handler: (request, response, data) => {
  *               return {
  *                  ...

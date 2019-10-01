@@ -5,7 +5,6 @@ import TestContextProvider from '../spec/test-context-provider'
 import NoRecords from './no-records'
 
 require('../../../../spec/fixtures/resource.factory')
-require('jsdom-global')()
 
 const renderComponent = resource => render(
   <TestContextProvider>

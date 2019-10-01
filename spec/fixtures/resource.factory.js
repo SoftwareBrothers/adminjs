@@ -1,6 +1,7 @@
-require('./property.factory')
-require('./action.factory')
-const { factory } = require('factory-girl')
+import { factory } from 'factory-girl'
+
+import './property.factory'
+import './action.factory'
 
 factory.define('resource', Object, {
   href: 'somehref.com',

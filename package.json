@@ -3,12 +3,13 @@
   "version": "1.2.0",
   "description": "Admin panel for apps written in node.js",
   "main": "index.js",
+  "types": "index.d.ts",
   "scripts": {
     "test": "mocha ./spec/index.js",
-    "test:build": "mocha ./spec/lib.js",
+    "types": "tsc",
     "clean": "rm -rf lib && mkdir lib",
-    "build": "babel src --out-dir lib --copy-files",
-    "lint": "eslint './spec/**/*.js' './src/**/*.js' './src/**/*.jsx' --ignore-pattern='*bundle.js'",
+    "build": "babel src --out-dir lib --copy-files --extensions '.ts,.js,.jsx'",
+    "lint": "eslint './spec/**/*.js' './src/**/*.js' './src/**/*.jsx' './src/**/*.ts' --ignore-pattern='*bundle.js'",
     "cover": "NODE_ENV=test nyc --reporter=text --reporter=text-summary --reporter=lcov --all=true npm test",
     "codecov": "NODE_ENV=test nyc --reporter=text-lcov npm test | codecov --pipe",
     "bundle": "node bin/watch-dev.js",
@@ -50,7 +51,9 @@
   "homepage": "https://github.com/SoftwareBrothers/admin-bro#readme",
   "dependencies": {
     "@babel/core": "^7.2.0",
+    "@babel/parser": "^7.6.2",
     "@babel/plugin-transform-runtime": "^7.4.0",
+    "@babel/preset-typescript": "^7.6.0",
     "@babel/polyfill": "^7.4.0",
     "@babel/preset-env": "^7.2.0",
     "@babel/preset-react": "^7.0.0",
@@ -79,6 +82,14 @@
   },
   "devDependencies": {
     "@babel/cli": "^7.4.4",
+    "@types/flat": "^0.0.28",
+    "@types/lodash": "^4.14.141",
+    "@types/react": "^16.9.4",
+    "@types/sinon": "^7.0.13",
+    "@types/sinon-chai": "^3.2.3",
+    "@types/styled-components": "^4.1.19",
+    "@typescript-eslint/eslint-plugin": "^2.3.1",
+    "@typescript-eslint/parser": "^2.3.1",
     "chai": "^4.1.2",
     "eslint": "^5.10.0",
     "eslint-config-airbnb": "^17.1.0",
@@ -99,6 +110,7 @@
     "rollup-plugin-node-builtins": "^2.1.2",
     "rollup-plugin-node-globals": "^1.4.0",
     "sinon": "^6.1.5",
-    "sinon-chai": "^3.2.0"
+    "sinon-chai": "^3.2.0",
+    "typescript": "^3.6.3"
   }
 }

@@ -1,9 +1,11 @@
-process.env.NODE_ENV = 'test'
+import { URLSearchParams } from 'url'
 
-const { URLSearchParams } = require('url')
-const chai = require('chai')
-const sinonChai = require('sinon-chai')
-const sinon = require('sinon')
+import chai from 'chai'
+import sinonChai from 'sinon-chai'
+import sinon from 'sinon'
+import jsdom from 'jsdom-global'
+
+process.env.NODE_ENV = 'test'
 
 chai.use(sinonChai)
 
@@ -12,8 +14,10 @@ global.URLSearchParams = URLSearchParams
 
 beforeEach(function () {
   this.sinon = sinon.createSandbox()
+  this.jsdom = jsdom()
 })
 
 afterEach(function () {
   this.sinon.restore()
+  this.jsdom()
 })

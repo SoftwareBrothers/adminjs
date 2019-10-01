@@ -24,4 +24,4 @@ const populator = async (records, properties) => {
   return records
 }
 
-module.exports.populator = populator
+export default populator

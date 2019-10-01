@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import flat from 'flat'
+import * as flat from 'flat'
 
 import PropertyInEdit from '../../ui/property-in-edit'
 import StyledButton from '../../ui/styled-button'
@@ -9,8 +9,6 @@ import Columns from '../../ui/columns'
 import { simplifiedPropertyType, recordType } from '../../../types'
 import convertParamsToArrayItems from './convert-params-to-array-items'
 import StyledSection from '../../ui/styled-section'
-
-const { unflatten, flatten } = flat
 
 export default class Edit extends React.Component {
   constructor(props) {
@@ -35,8 +33,8 @@ export default class Edit extends React.Component {
     newItems.splice(i, 1)
 
     const newRecord = { ...record }
-    newRecord.params = flatten({
-      ...unflatten(newRecord.params),
+    newRecord.params = flat.flatten({
+      ...flat.unflatten(newRecord.params),
       [property.name]: newItems,
     })
     this.setState(state => ({ ...state, items: newItems }))

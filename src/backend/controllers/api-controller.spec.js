@@ -1,5 +1,5 @@
-const ApiController = require('./api-controller')
-const Filter = require('../utils/filter')
+import ApiController from './api-controller'
+import Filter from '../utils/filter'
 
 describe('ApiController', function () {
   beforeEach(function () {

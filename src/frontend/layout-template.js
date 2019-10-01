@@ -84,4 +84,4 @@ const html = (admin, currentAdmin, location = '/') => {
     </html>
   `
 }
-module.exports = html
+export default html

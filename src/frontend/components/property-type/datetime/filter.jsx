@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 
 import PropertyInFilter, { Label } from '../../ui/property-in-filter'
 import { propertyType } from '../../../types'
-import BackendFilter from '../../../../backend/utils/filter'
+import * as BackendFilter from '../../../../backend/utils/filter'
 
 const { PARAM_SEPARATOR } = BackendFilter
 
@@ -53,6 +53,7 @@ export default class Filter extends React.Component {
       options = {
         format: 'Y-m-d H:i',
         enableTime: true,
+        // eslint-disable-next-line @typescript-eslint/camelcase
         time_24hr: true,
       }
     }

@@ -1,4 +1,4 @@
-const ActionDecorator = require('./action-decorator')
+import ActionDecorator from './action-decorator'
 
 describe('ActionDecorator', function () {
   describe('#handler', function () {

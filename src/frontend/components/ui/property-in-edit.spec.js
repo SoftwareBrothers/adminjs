@@ -3,8 +3,6 @@ import { render } from 'react-testing-library'
 import PropertyInEdit from './property-in-edit'
 import TestContextProvider from '../spec/test-context-provider'
 
-require('jsdom-global')()
-
 describe('PropertyInEdit', function () {
   this.timeout(5000)
   beforeEach(function () {

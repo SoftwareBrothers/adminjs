@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/explicit-function-return-type */
 import { createStore, combineReducers } from 'redux'
 
 export const initializeResources = data => ({
