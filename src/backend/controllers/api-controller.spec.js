@@ -18,6 +18,7 @@ describe('ApiController', function () {
     this.isActionAccessibleStub = this.sinon.stub()
     const property = { name: () => this.fieldName, reference: () => false }
     this.resourceStub = {
+      id: this.sinon.stub().returns('someid'),
       decorate: this.sinon.stub().returns({
         actions: {
           list: this.action,
