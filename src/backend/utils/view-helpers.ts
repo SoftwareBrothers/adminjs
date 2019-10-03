@@ -13,7 +13,7 @@ try {
 /**
  * Collection of helper methods available in the views
  */
-export default class ViewHelpers {
+class ViewHelpers {
   public options
 
   constructor({ options }: { options?: AdminBroOptions } = {}) {
@@ -86,3 +86,5 @@ export default class ViewHelpers {
     return this.urlBuilder(['frontend', 'assets', asset])
   }
 }
+
+export default ViewHelpers

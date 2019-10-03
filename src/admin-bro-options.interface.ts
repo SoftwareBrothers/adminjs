@@ -1,6 +1,6 @@
 import BaseResource from './backend/adapters/base-resource'
 import BaseDatabase from './backend/adapters/base-database'
-import { Handler } from './backend/actions/action.interface'
+import { ActionHandler } from './backend/actions/action.interface'
 import { ResourceOptions } from './backend/decorators/resource-options.interface'
 import { colors, sizes, fonts, breakpoints } from './frontend/styles/variables'
 
@@ -73,7 +73,7 @@ export default interface AdminBroOptions {
     options: ResourceOptions;
   }>;
   dashboard?: {
-    handler?: Handler;
+    handler?: ActionHandler;
     component?: Map<string, string>;
   };
   version?: {

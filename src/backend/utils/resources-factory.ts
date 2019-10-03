@@ -23,7 +23,7 @@ class NoResourceAdapterError extends Error {
   }
 }
 
-export default class ResourcesFactory {
+class ResourcesFactory {
   private adapters: Array<Adapter>
 
   private admin: AdminBro
@@ -113,3 +113,5 @@ export default class ResourcesFactory {
     })
   }
 }
+
+export default ResourcesFactory

@@ -1,4 +1,5 @@
 import Action from './action.interface'
+import RecordJSON from '../decorators/record-json.interface'
 
 /**
  * @implements Action
@@ -8,16 +9,6 @@ import Action from './action.interface'
  * Shows form for creating a new record
  * Uses {@link NewAction} component to render form
  */
-
-/**
- * @typedef {Object} ApiResponse
- * @property {BaseRecord~JSON} record     populated record, along with errors
- *                                        (if any).
- * @property {BaseRecord~JSON} [redirectUrl] in case of success it fills this filed
- *                                          to indicate that there should be
- *                                          redirect after the action.
- */
-
 const NewAction: Action = {
   name: 'new',
   isVisible: true,
@@ -29,10 +20,11 @@ const NewAction: Action = {
    *
    * To invoke this action use {@link ApiClient#resourceAction}
    *
-   * @return  {module:NewAction~ApiResponse}  populated record
    * @implements Action.handler
+   * @memberof module:NewAction
+   * @return {Promise<NewActionResponse>} populated records
    */
-  handler: async (request, response, data) => {
+  handler: async (request, response, data): Promise<NewActionResponse> => {
     if (request.method === 'post') {
       let record = await data.resource.build(request.payload.record)
       record = await record.save()
@@ -51,3 +43,19 @@ const NewAction: Action = {
 }
 
 export default NewAction
+
+/**
+ * Response returned by NewAction
+ * @memberof module:NewAction
+ * @alias NewActionResponse
+ */
+type NewActionResponse = {
+  /**
+   * Record which was created or with errors.
+   */
+  record: RecordJSON;
+  /**
+   * If rectrd has been created it contains redirect path
+   */
+  redirectUrl?: string;
+}

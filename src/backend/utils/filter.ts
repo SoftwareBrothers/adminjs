@@ -26,7 +26,7 @@ interface ReduceCallback<T> {
  * Filter object wrapping up selected filters.
  * @private
  */
-export default class Filter {
+class Filter {
   public filters: {[key: string]: FilterElement} | {}
 
   private resource: BaseResource
@@ -108,3 +108,5 @@ export default class Filter {
     return !!Object.keys(this.filters).length
   }
 }
+
+export default Filter

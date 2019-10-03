@@ -1,4 +1,5 @@
 import Action from './action.interface'
+import RecordJSON from '../decorators/record-json.interface'
 
 /**
  * @implements Action
@@ -9,16 +10,6 @@ import Action from './action.interface'
  *
  * Uses {@link EditAction} component to render form
  */
-
-/**
- * @typedef {Object} ApiResponse
- * @property {BaseRecord~JSON} record     populated record, along with errors
- *                                        (if any).
- * @property {BaseRecord~JSON} [redirectUrl] in case of success it fills this filed
- *                                          to indicate that there should be
- *                                          redirect after the action.
- */
-
 const EditAction: Action = {
   name: 'edit',
   isVisible: true,
@@ -30,28 +21,43 @@ const EditAction: Action = {
    *
    * To invoke this action use {@link ApiClient#recordAction}
    *
-   * @return  {module:EditAction~ApiResponse}  populated record
+   * @return  {EditActionResponse}  populated record
    * @implements Action.handler
+   * @memberof module:EditAction
    */
-  handler: async (request, response, data) => {
+  handler: async (request, response, data): Promise<EditActionResponse> => {
     const { record } = data
     if (request.method === 'get') {
       return { record: record.toJSON() }
     }
-    if (request.method === 'post') {
-      await record.update(request.payload.record)
-      if (record.isValid()) {
-        return {
-          redirectUrl: data.h.recordActionUrl({
-            resourceId: data.resource.id(), recordId: record.id(), actionName: 'show',
-          }),
-          record: record.toJSON(),
-        }
+    await record.update(request.payload.record)
+    if (record.isValid()) {
+      return {
+        redirectUrl: data.h.recordActionUrl({
+          resourceId: data.resource.id(), recordId: record.id(), actionName: 'show',
+        }),
+        record: record.toJSON(),
       }
-      return { record: record.toJSON() }
     }
-    return ''
+    return { record: record.toJSON() }
   },
 }
 
 export default EditAction
+
+/**
+ * Type of response returned by {@link module:DeleteAction}
+ * @memberof module:EditAction
+ */
+type EditActionResponse = {
+  /**
+   * in case of success it fills this filed
+   * to indicate that there should be
+   * redirect after the action.
+   */
+  redirectUrl?: string;
+  /**
+   * Updated record
+   */
+  record: RecordJSON;
+}

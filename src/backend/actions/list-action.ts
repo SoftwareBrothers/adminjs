@@ -3,20 +3,9 @@ import Action from './action.interface'
 import sortSetter from '../services/sort-setter'
 import Filter from '../utils/filter'
 import populator from '../utils/populator'
+import RecordJSON from '../decorators/record-json.interface'
 
 const PER_PAGE_LIMIT = 500
-
-/**
- * @typedef {Object} ApiController~ResourceResponse
- * @property {Array<BaseRecord~JSON>} records
- * @property {Object}                 meta
- * @property {Number}                 meta.page
- * @property {Number}                 meta.perPage
- * @property {String}                 meta.direction
- * @property {String}                 meta.sortBy
- * @property {Number}                 meta.total
- *
- */
 
 /**
  * @implements Action
@@ -37,9 +26,10 @@ const ListAction: Action = {
    * To invoke this action use {@link ApiClient#recordAction}
    *
    * @implements Action.handler
-   * @return {ApiController~ResourceResponse} records with metadata
+   * @memberof module:ListAction
+   * @return {Promise<ListActionResponse>} records with metadata
    */
-  handler: async (request, response, data) => {
+  handler: async (request, response, data): Promise<ListActionResponse> => {
     const { query } = request
     const { sortBy, direction, filters = {} } = flat.unflatten(query || {})
     const { resource } = data
@@ -83,3 +73,25 @@ const ListAction: Action = {
 }
 
 export default ListAction
+
+/**
+ * Response returned by List action
+ * @memberof module:ListAction
+ * @alias ListAction
+ */
+type ListActionResponse = {
+  /**
+   * Paginated collection of records
+   */
+  records: Array<RecordJSON>;
+  /**
+   * Pagination metadate
+   */
+  meta: {
+    page: number;
+    perPage: number;
+    direction: 'asc' | 'desc';
+    sortBy: string;
+    total: number;
+  };
+}

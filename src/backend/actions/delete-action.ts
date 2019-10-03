@@ -8,14 +8,6 @@ import Action from './action.interface'
  * Removes given record from the database. Since it doesn't have a
  * component - it redirects right away after clicking its {@link ActionButton}
  */
-
-/**
- * @typedef {Object} ApiResponse
- * @property {String} redirectUrl in case of success it fills this filed
- *                                          to indicate that there should be
- *                                          redirect after the action.
- */
-
 const DeleteAction: Action = {
   name: 'delete',
   isVisible: true,
@@ -29,15 +21,28 @@ const DeleteAction: Action = {
    *
    * To invoke this action use {@link ApiClient#recordAction}
    *
-   * @return  {module:DeleteAction~ApiResponse} redirect
-   * @implements Action.handler
+   * @return  {Promise<DeleteActionResponse>}
+   * @implements ActionHandler
+   * @memberof module:DeleteAction
    */
-  handler: async (request, response, data) => {
+  handler: async (request, response, data): Promise<DeleteActionResponse> => {
     await data.resource.delete(request.params.recordId)
     return {
       redirectUrl: data.h.resourceActionUrl({ resourceId: data.resource.id(), actionName: 'list' }),
     }
   },
+}
+
+/**
+ * Response of a delete action handler
+ * @memberof module:DeleteAction
+ * @alias DeleteActionResponse
+ */
+type DeleteActionResponse = {
+  /**
+   * URL on which user should be redirected after the action
+   */
+  redirectUrl: string;
 }
 
 export default DeleteAction

@@ -2,7 +2,7 @@ import ConfigurationError from '../utils/configuration-error'
 import ViewHelpers from '../utils/view-helpers'
 import AdminBro from '../../admin-bro'
 import BaseResource from '../adapters/base-resource'
-import Action, { Is } from '../actions/action.interface'
+import Action, { IsFunction } from '../actions/action.interface'
 import CurrentAdmin from '../../current-admin.interface'
 import ActionJSON from './action-json.interface'
 
@@ -11,8 +11,8 @@ import ActionJSON from './action-json.interface'
  *
  * @category Decorators
  */
-export default class ActionDecorator {
-  private name: string
+class ActionDecorator {
+  public name: string
 
   private _admin: AdminBro
 
@@ -86,7 +86,7 @@ export default class ActionDecorator {
     }
     let isAction
     if (typeof this.action[what] === 'function') {
-      isAction = (this.action[what] as Is)({
+      isAction = (this.action[what] as IsFunction)({
         resource: this._resource,
         action: this.action,
         h: this.h,
@@ -138,3 +138,5 @@ export default class ActionDecorator {
     }
   }
 }
+
+export default ActionDecorator

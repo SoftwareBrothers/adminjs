@@ -18,12 +18,15 @@ import ResourceJSON from './resource-json.interface'
  * @private
  */
 export const DEFAULT_MAX_ITEMS_IN_LIST = 8
+
 /**
  * Base decorator class which decorates the Resource.
  *
  * @category Decorators
  */
-export default class ResourceDecorator {
+class ResourceDecorator {
+  public actions: {[key: string]: ActionDecorator}
+
   private _resource: BaseResource
 
   private _admin: AdminBro
@@ -31,8 +34,6 @@ export default class ResourceDecorator {
   private h: ViewHelpers
 
   private properties: {[key: string]: PropertyDecorator}
-
-  private actions: {[key: string]: ActionDecorator}
 
   public options: ResourceOptions
 
@@ -291,3 +292,5 @@ export default class ResourceDecorator {
     }
   }
 }
+
+export default ResourceDecorator
