@@ -3,12 +3,6 @@ import { ResourceOptions } from '../decorators/resource-options.interface'
 
 const DEFAULT_DIRECTION = 'asc'
 
-/**
- * @typedef {Object} SortParams
- * @property {String} sortBy        name of the property base for the sort
- * @property {String} direction     either `asc` or `desc`
- */
-
 type Sort = {
   direction?: 'asc' | 'desc';
   sortBy?: string;
@@ -19,12 +13,12 @@ type Sort = {
  *
  * @private
  *
- * @param {Object}  query
- * @param {String}  [query.direction]   either `asc` or `desc`
- * @param {String}  [query.sortBy]      sort by field passed in query
- * @param {String}  firstPropertyName   property name which will be taken as a default
+ * @param {object}  query
+ * @param {string}  [query.direction]   either `asc` or `desc`
+ * @param {string}  [query.sortBy]      sort by field passed in query
+ * @param {string}  firstPropertyName   property name which will be taken as a default
  * @param {ResourceOptions} resourceOptions={}  options passed along with given resource
- * @return {SortParams}
+ * @return {Sort}
  */
 const sortSetter = (
   { direction, sortBy }: Sort = {},

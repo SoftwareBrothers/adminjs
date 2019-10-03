@@ -2,14 +2,6 @@ import * as flat from 'flat'
 import BaseProperty from '../adapters/base-property'
 import BaseResource from '../adapters/base-resource'
 
-/**
- * @typedef {Object} Filter~Property
- * @property {String} key
- * @property {BaseProperty} property
- * @property {Object | String} value
- * @property {Object} populated
- */
-
 export const PARAM_SEPARATOR = '~~'
 
 export type FilterElement = {
@@ -61,9 +53,6 @@ class Filter {
    */
   constructor(filters = {}, resource) {
     this.resource = resource
-    /**
-     * @type {Object<String, Filter~Property>}
-     */
     const normalized = Filter.normalizeKeys(filters)
     this.filters = Object.keys(normalized).reduce((memo, path) => ({
       [path]: {

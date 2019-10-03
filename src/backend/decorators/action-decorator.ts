@@ -88,7 +88,7 @@ class ActionDecorator {
     if (typeof this.action[what] === 'function') {
       isAction = (this.action[what] as IsFunction)({
         resource: this._resource,
-        action: this.action,
+        action: this,
         h: this.h,
         currentAdmin,
         _admin: this._admin,

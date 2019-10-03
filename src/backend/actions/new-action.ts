@@ -38,7 +38,8 @@ const NewAction: Action = {
       }
       return { record: record.toJSON() }
     }
-    return {}
+    // TODO: add wrong implementation error
+    throw new Error('new action can be invoked only via `post` http method')
   },
 }
 

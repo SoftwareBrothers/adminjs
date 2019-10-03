@@ -5,47 +5,9 @@ import { ResourceOptions } from './backend/decorators/resource-options.interface
 import { colors, sizes, fonts, breakpoints } from './frontend/styles/variables'
 
 /**
- * @typedef {Object} AdminBroOptions
- * @property {String} [rootPath='/admin']             under which path AdminBro will be available
- * @property {String} [logoutPath='/admin/logout']    url to a logout action
- * @property {String} [loginPath='/admin/login']      url to a login page
- * @property {BaseDatabase[]} [databases=[]]          array of all databases
- * @property {Object[]} [resources=[]]                array of all database resources.
- *                                                    Resources can be given directly or
- *                                                    nested within an object along with its
- *                                                    options
- * @property {BaseResource} [resources[].resource]    class, which extends {@link BaseResource}
- * @property {ResourceOptions} [resources[].options]  options for given resource
- * @property {Object} [dashboard]                     your custom dashboard page
- * @property {BaseAction.handler} [dashboard.handler] action handler which will override default
- *                                                    dashboard handler - you can perform actions
- *                                                    on the backend there and pass results to
- *                                                    component
- * @property {Component} [dashboard.component]        Component which will be rendered on the
- *                                                    dashboard
- * @property {Object} [version]                      sets the versions visibility
- * @property {Boolean} [version.admin]               if set to true, shows current AdminBro version
- * @property {String} [version.app]                  if set, shows this version in the UI
- * @property {Object} [branding]                      branding settings
- * @property {String} [branding.logo]                 logo shown in AdminBro in the top left corner
- * @property {String} [branding.companyName]          company name
- * @property {Object} [branding.theme]                override custom css properties as colors
- *                                                    and paddings. See
- *                        <a href='/admin-bro_src_frontend_styles_variables.js.html'>This file</a>
- *                                                    example: `colors: {primary: 'red'}`
- * @property {Boolean} [branding.softwareBrothers]    if Software Brothers logos should be shown
- *                                                    in the sidebar footer
- * @property {Object} [assets]                        assets object
- * @property {String[]}  [assets.styles]              array with a paths to styles
- * @property {String[]}  [assets.scripts]             array with a paths to scripts
- * @property {String[]}  [assets.globalsFromCDN=true] indicates if globals like React, ReactDOM etc.
- *                                                    should be taken from CDNs. If set to false,
- *                                                    local bundle file will be used (makes sense
- *                                                    with slower internet connection)
- * @property {Object<String,String>} [env]            environmental variables passed to the frontend
+ * AdminBroOptions
  *
- * @description AdminBro takes a list of options of the entire framework. All off them
- * have default values, but you can easily tailor them to your needs
+ * This is the heart of entire AdminBro - all options resides here.
  *
  * @example
  * const AdminBro = require('admin-bro')
@@ -54,47 +16,132 @@ import { colors, sizes, fonts, breakpoints } from './frontend/styles/variables'
  *   rootPath: '/xyz-admin',
  *   logoutPath: '/xyz-admin/exit',
  *   loginPath: '/xyz-admin/sign-in',
- *   databases: [connection]
- *   resources: [{ resource: ArticleModel, options: {...}}]
+ *   databases: [mongooseConnection],
+ *   resources: [{ resource: ArticleModel, options: {...}}],
  *   branding: {
- *     companyName: 'XYZ c.o.'
+ *     companyName: 'XYZ c.o.',
  *   },
  * })
- * //...
  */
-
 export default interface AdminBroOptions {
+  /**
+   * path, under which, AdminBro will be available. Default to `/admin`
+   *
+   */
   rootPath?: string;
+  /**
+   * url to a logout action, default to `/admin/logout`
+   */
   logoutPath?: string;
+  /**
+   * url to a login page, default to `/admin/login`
+   */
   loginPath?: string;
+  /**
+   * Array of all Databases which are suported by AdminBro via adapters
+   */
   databases?: Array<BaseDatabase>;
-  resources?: Array<BaseResource> | Array<{
+
+  /**
+   * Array of all Resources which are supported by AdminBro via adapters.
+   * You can pass either resource or resource with an options and thus modify it.
+   *
+   * @see ResourceOptions
+   */
+  resources?: Array<BaseResource | {
     resource: BaseResource;
     options: ResourceOptions;
   }>;
+  /**
+   * Option to modify the dashboard
+   */
   dashboard?: {
+    /**
+     * Handler function which is triggered in the api when user launches the dashboard.
+     */
     handler?: ActionHandler;
-    component?: Map<string, string>;
+    /**
+     * Bundled component name which should be rendered when user opens the dashboard
+     */
+    component?: string;
   };
+  /**
+   * Flag which indicates if version number should be visible on the UI
+   */
   version?: {
+    /**
+     * if set to true - current admin version will be visible
+     */
     admin?: boolean;
-    app?: boolean;
+    /**
+     * Here you can pass any arbitrary version text which will be seen in the US.
+     * You can pass here your current API version.
+     */
+    app?: string;
   };
+  /**
+   * Options which are related to the branding.
+   */
   branding?: {
+    /**
+     * URL to a logo.
+     */
     logo?: string;
+    /**
+     * Name of your company, which will replace "AdminBro".
+     */
     companyName?: string;
+    /**
+     * CSS theme
+     */
     theme?: {
       colors?: typeof colors;
       sizes?: typeof sizes;
       fonts?: typeof fonts;
       breakpoints?: typeof breakpoints;
     };
+    /**
+     * Flag indicates if `SoftwareBrothers` tiny hart icon should be visible on the bottom sidebar.
+     */
     softwareBrothers?: boolean;
   };
+  /**
+   * Custom assets you want to pass to AdminBro
+   */
   assets?: {
+    /**
+     * List to urls of custom stylesheets. You can pass your font - icons here (as an example)
+     */
     styles?: Array<string>;
+    /**
+     * List of urls to custom scripts. If you use some particular js
+     * library - you can pass its url here.
+     */
     scripts?: Array<string>;
+    /**
+     * Flag indicates if all default styles and scripts should be fetched from CDN or from local
+     * bundle. Default to CDN. You may change this if your internet connection is slow and you are
+     * developing AdminBro on local machine.
+     */
     globalsFromCDN: boolean;
   };
-  env?: Map<string, string>;
+  /**
+   * Environmental variables passed to the frontend.
+   *
+   * So let say you want to pass some _GOOGLE_MAP_API_TOKEN_ to the frontend.
+   * You can do this by adding it here:
+   *
+   * ```javascript
+   * new AdminBro({env: {
+   *   GOOGLE_MAP_API_TOKEN: 'my-token',
+   * }})
+   * ```
+   *
+   * and this token will be available on the frontend by using:
+   *
+   * ```javascript
+   * AdminBro.envs.GOOGLE_MAP_API_TOKEN
+   * ```
+   */
+  env?: Record<string, string>;
 }

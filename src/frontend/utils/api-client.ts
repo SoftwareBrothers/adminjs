@@ -1,5 +1,5 @@
 import axios, { AxiosResponse, AxiosInstance } from 'axios'
-import SearchResponse from '../../backend/controllers/search-response.interface'
+import { SearchResponse } from '../../backend/controllers/api-controller'
 
 let globalAny: any = {}
 
