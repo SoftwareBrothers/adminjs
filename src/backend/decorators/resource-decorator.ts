@@ -227,8 +227,8 @@ class ResourceDecorator {
     return Object.values(this.actions)
       .filter(action => (
         action.isResourceType()
-        && action.isVisible(currentAdmin)
-        && action.isAccessible(currentAdmin)
+        && action.isVisible(currentAdmin, null)
+        && action.isAccessible(currentAdmin, null)
       ))
   }
 

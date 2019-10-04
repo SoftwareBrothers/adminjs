@@ -77,7 +77,7 @@ class ApiController {
     const queryString = request.params && request.params.query
     const resource = this._admin.findResource(request.params.resourceId)
     const decorated = resource.decorate()
-    if (!decorated.actions.list.isAccessible(this.currentAdmin)) {
+    if (!decorated.actions.list.isAccessible(this.currentAdmin, null)) {
       throw new ForbiddenError({ actionName: 'list', resourceId: resource.id() })
     }
     const titlePropertyName = decorated.titleProperty().name()
@@ -111,7 +111,7 @@ class ApiController {
    */
   async resourceAction(request: ActionRequest, response: any): Promise<any> {
     const actionContext = await this.getActionContext(request)
-    if (!actionContext.action.isAccessible(this.currentAdmin)) {
+    if (!actionContext.action.isAccessible(this.currentAdmin, null)) {
       throw new ForbiddenError({
         actionName: actionContext.action.name,
         resourceId: actionContext.resource.id(),
@@ -134,14 +134,16 @@ class ApiController {
   async recordAction(request: ActionRequest, response: any): Promise<any> {
     const { recordId } = request.params
     const actionContext = await this.getActionContext(request)
-    if (!actionContext.action.isAccessible(this.currentAdmin)) {
+
+    let record = await actionContext.resource.findOne(recordId);
+    [record] = await populator([record])
+
+    if (!actionContext.action.isAccessible(this.currentAdmin, record)) {
       throw new ForbiddenError({
         actionName: actionContext.action.name,
         resourceId: actionContext.resource.id(),
       })
     }
-    let record = await actionContext.resource.findOne(recordId);
-    [record] = await populator([record])
     return actionContext.action.handler(request, response, { ...actionContext, record })
   }
 

@@ -110,7 +110,7 @@ class ActionDecorator {
    *
    * @return  {Boolean}
    */
-  isVisible(currentAdmin?: CurrentAdmin, record?: BaseRecord): boolean {
+  isVisible(currentAdmin: CurrentAdmin, record: BaseRecord): boolean {
     return this.is('isVisible', currentAdmin, record)
   }
 
@@ -121,7 +121,7 @@ class ActionDecorator {
    * @param {BaseRecord} [record]
    * @return  {Boolean}
    */
-  isAccessible(currentAdmin?: CurrentAdmin, record?: BaseRecord): boolean {
+  isAccessible(currentAdmin: CurrentAdmin, record: BaseRecord): boolean {
     return this.is('isAccessible', currentAdmin, record)
   }
 
