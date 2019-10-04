@@ -103,15 +103,15 @@ class BaseActionComponent extends React.Component {
 
 BaseActionComponent.propTypes = {
   /**
-   * Object of type: {@link BaseResource~JSON}
+   * Object of type: {@link ResourceJSON}
    */
   resource: resourceType.isRequired,
   /**
-   * Object of type: {@link Action~JSON}
+   * Object of type: {@link ActionJSON}
    */
   action: actionType.isRequired,
   /**
-   * Object of type: {@link BaseRecord~JSON}
+   * Object of type: {@link RecordJSON}
    */
   record: recordType,
 }

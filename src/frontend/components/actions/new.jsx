@@ -111,7 +111,7 @@ class New extends React.Component {
 
 New.propTypes = {
   /**
-   * Object of type: {@link BaseResource~JSON}
+   * Object of type: {@link ResourceJSON}
    */
   resource: resourceType.isRequired,
   /**
@@ -119,7 +119,7 @@ New.propTypes = {
    */
   history: historyType.isRequired,
   /**
-   * Object of type: {@link BaseRecord~JSON}
+   * Object of type: {@link RecordJSON}
    */
   record: recordType,
   /**

@@ -17,8 +17,8 @@ import * as flat from 'flat'
  * this function for property: `Item.0.imageVariants` should return array with 2 items. Where for
  * property `Item` array with one element
  *
- * @param {BaseProperty~JSON} property
- * @param {BaseRecord~JSON} record
+ * @param {PropertyJSON} property
+ * @param {RecordJSON} record
  *
  * @private
  */

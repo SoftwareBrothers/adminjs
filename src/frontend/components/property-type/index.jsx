@@ -217,15 +217,15 @@ export default class BasePropertyComponent extends React.Component {
 
 BasePropertyComponent.propTypes = {
   /**
-   * Object of type: {@link BaseProperty~JSON}
+   * Object of type: {@link PropertyJSON}
    */
   property: propertyType.isRequired,
   /**
-   * Object of type: {@link BaseResource~JSON}
+   * Object of type: {@link ResourceJSON}
    */
   resource: resourceType.isRequired,
   /**
-   * Object of type: {@link BaseRecord~JSON}
+   * Object of type: {@link RecordJSON}
    */
   record: recordType,
   /**
@@ -235,7 +235,7 @@ BasePropertyComponent.propTypes = {
   where: PropTypes.oneOf(['edit', 'filter', 'show', 'list']).isRequired,
   /**
    * Function which indicates change of the property value. It takes either
-   * one argument which is entire {@link BaseRecord~JSON} or 2 arguments - one
+   * one argument which is entire {@link RecordJSON} or 2 arguments - one
    * property.name and the second one: value. Used by the _edit_ and _filter_ components
    */
   onChange: PropTypes.func,

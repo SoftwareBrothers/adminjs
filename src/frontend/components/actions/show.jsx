@@ -32,7 +32,7 @@ const Show = (props) => {
 
 Show.propTypes = {
   /**
-   * Object of type: {@link BaseResource~JSON}
+   * Object of type: {@link ResourceJSON}
    */
   resource: resourceType.isRequired,
   /**

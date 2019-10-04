@@ -124,7 +124,7 @@ class ActionDecorator {
   /**
    * Serializes action to JSON format
    *
-   * @return  {Action~JSON}  serialized action
+   * @return  {ActionJSON}  serialized action
    */
   toJSON(): ActionJSON {
     return {

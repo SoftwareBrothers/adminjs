@@ -98,7 +98,7 @@ class List extends React.Component {
 
 List.propTypes = {
   /**
-   * Object of type: {@link BaseResource~JSON}
+   * Object of type: {@link ResourceJSON}
    */
   resource: resourceType.isRequired,
   location: locationType.isRequired,

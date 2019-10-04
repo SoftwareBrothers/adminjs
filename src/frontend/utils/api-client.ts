@@ -54,7 +54,7 @@ class ApiClient {
    * Search by query string for records in a given resource.
    *
    * @param   {Object}  options
-   * @param   {String}  options.resourceId  Id of a {@link BaseResource~JSON}
+   * @param   {String}  options.resourceId  Id of a {@link ResourceJSON}
    * @param   {String}  options.query       query string
    *
    * @return  {Promise<SearchResponse>}

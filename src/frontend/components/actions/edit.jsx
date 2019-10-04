@@ -108,11 +108,11 @@ class Edit extends React.Component {
 
 Edit.propTypes = {
   /**
-   * Object of type: {@link BaseResource~JSON}
+   * Object of type: {@link ResourceJSON}
    */
   resource: resourceType.isRequired,
   /**
-   * Object of type: {@link Action~JSON}
+   * Object of type: {@link ActionJSON}
    */
   record: recordType.isRequired,
   /**

@@ -80,7 +80,7 @@ PropertyInEdit.propTypes = {
    */
   children: childrenType,
   /**
-   * Property object based on {@link BaseProperty~JSON}
+   * Property object based on {@link PropertyJSON}
    */
   property: PropTypes.shape({
     /**

@@ -57,11 +57,11 @@ const RecordsTableHeader = (props) => {
 
 RecordsTableHeader.propTypes = {
   /**
-   * {@link BaseProperty~JSON}
+   * {@link PropertyJSON}
    */
   titleProperty: propertyType.isRequired,
   /**
-   * Array of {@link BaseProperty~JSON}
+   * Array of {@link PropertyJSON}
    */
   properties: PropTypes.arrayOf(propertyType).isRequired,
   /**
