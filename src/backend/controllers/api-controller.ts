@@ -48,17 +48,10 @@ class ApiController {
    * @return  {Promise<ActionContext>} action context
    */
   async getActionContext(request: ActionRequest): Promise<ActionContext> {
-    const { resourceId, action: actionName, recordId } = request.params
+    const { resourceId, action: actionName } = request.params
     const h = new ViewHelpers(this._admin)
     const resource = this._admin.findResource(resourceId)
-    let action
-    if (recordId) {
-      const record = await resource.findOne(recordId)
-      action = resource.decorate().recordActions(record, this.currentAdmin).find(a => a.name === actionName)
-    } else {
-      action = resource.decorate().resourceActions(this.currentAdmin).find(a => a.name === actionName)
-    }
-
+    const action = resource.decorate().actions[actionName]
     return {
       resource, action, h, currentAdmin: this.currentAdmin, _admin: this._admin,
     }

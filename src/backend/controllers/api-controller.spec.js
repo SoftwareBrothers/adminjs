@@ -26,7 +26,7 @@ describe('ApiController', function () {
           show: this.action,
           delete: this.action,
           new: this.action,
-          [this.action.name]: {},
+          [this.action.name]: this.action,
         },
         getListProperties: this.sinon.stub().returns([property]),
         titleProperty: () => ({ name: () => this.fieldName }),
