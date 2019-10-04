@@ -11,6 +11,7 @@ describe('ResourceDecorator', function () {
       name: 'somename',
       otherValue: 'someother-value',
     }
+    this.stubedRecord = this.sinon.stub()
     this.stubbedResource = resourceStub(this.sinon)
     this.stubbedAdmin = this.sinon.createStubInstance(AdminBro)
     this.stubbedAdmin.options = {}
@@ -165,7 +166,7 @@ describe('ResourceDecorator', function () {
       const options = {}
       const actions = new ResourceDecorator({
         ...this.args, options,
-      }).recordActions(this.currentAdmin)
+      }).recordActions(this.stubedRecord, this.currentAdmin)
       expect(actions).to.have.lengthOf(3)
     })
 
@@ -174,7 +175,7 @@ describe('ResourceDecorator', function () {
       const actions = new ResourceDecorator({
         ...this.args,
         options,
-      }).recordActions(this.currentAdmin)
+      }).recordActions(this.stubedRecord, this.currentAdmin)
       expect(actions).to.have.lengthOf(4)
     })
 
@@ -183,7 +184,7 @@ describe('ResourceDecorator', function () {
       const actions = new ResourceDecorator({
         ...this.args,
         options,
-      }).recordActions(this.currentAdmin)
+      }).recordActions(this.stubedRecord, this.currentAdmin)
       expect(actions).to.have.lengthOf(2)
     })
 
@@ -193,12 +194,13 @@ describe('ResourceDecorator', function () {
         expect(data.currentAdmin).to.deep.equal(this.currentAdmin)
         expect(data.resource.id).to.equal(this.stubbedResource.id)
         expect(data.action.name).to.equal('show')
+        expect(data.record).to.equal('someRecord')
         return false
       } } } }
       const actions = new ResourceDecorator({
         ...this.args,
         options,
-      }).recordActions(this.currentAdmin)
+      }).recordActions('someRecord', this.currentAdmin)
       expect(actions).to.have.lengthOf(2)
     })
   })
@@ -213,7 +215,6 @@ describe('ResourceDecorator', function () {
         'href',
         'titleProperty',
         'resourceActions',
-        'recordActions',
         'listProperties',
         'editProperties',
         'showProperties',
@@ -221,14 +222,12 @@ describe('ResourceDecorator', function () {
       )
     })
 
-    it('passess current admin to the resource and record actions', function () {
+    it('passess current admin to the resourceActions', function () {
       const resourceActionsSpy = this.sinon.spy(ResourceDecorator.prototype, 'resourceActions')
-      const recordActionsSpy = this.sinon.spy(ResourceDecorator.prototype, 'recordActions')
 
       new ResourceDecorator(this.args).toJSON(this.currentAdmin)
 
       expect(resourceActionsSpy).to.have.been.calledWith(this.currentAdmin)
-      expect(recordActionsSpy).to.have.been.calledWith(this.currentAdmin)
     })
   })
 })

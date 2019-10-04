@@ -8,7 +8,7 @@ require('@babel/register')({
     require.resolve('@babel/preset-env'),
     require.resolve('@babel/preset-typescript'),
   ],
-  extensions: ['.jsx', '.js', '.ts'],
+  extensions: ['.jsx', '.js', '.ts', '.tsx'],
   only: ['src/', 'spec/'],
 })
 
