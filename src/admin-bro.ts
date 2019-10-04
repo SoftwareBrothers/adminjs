@@ -63,118 +63,24 @@ class AdminBro {
 
   public static registeredAdapters: Array<Adapter>
 
-  /**
-   * Contains set of routes availables within the application.
-   * It is used by external plugins.
-   *
-   * @example
-   * const { Router } = require('admin-bro')
-   * Router.routes.forEach(route => {
-   *   // map your framework routes to admin-bro routes
-   *   // see how `admin-bro-expressjs` plugin does it.
-   * })
-   *
-   * @memberof AdminBro
-   * @static
-   * @name AdminBro.Router
-   * @type RouterType
-   */
   public static Router: RouterType
 
-  /**
-   * abstract class for all databases. External adapters have to implement that.
-   * @memberof AdminBro
-   * @static
-   * @abstract
-   * @name AdminBro.BaseDatabase
-   * @type {typeof BaseDatabase}
-   */
   public static BaseDatabase: typeof BaseDatabase
 
-  /**
-   * abstract class for all records. External adapters have to implement that or at least
-   * their BaseResource implementation should return records of this type.
-   * @memberof AdminBro
-   * @static
-   * @abstract
-   * @name AdminBro.BaseRecord
-   * @type {typeof BaseRecord}
-   */
   public static BaseRecord: typeof BaseRecord
 
-  /**
-   * abstract class for all resources. External adapters have to implement that.
-   * @memberof AdminBro
-   * @static
-   * @abstract
-   * @name AdminBro.BaseResource
-   * @type {typeof BaseResource}
-   */
   public static BaseResource: typeof BaseResource
 
-  /**
-   * abstract class for all properties. External adapters have to implement that or at least
-   * their BaseResource implementation should return records of this type.
-   * @memberof AdminBro
-   * @static
-   * @abstract
-   * @name AdminBro.BaseProperty
-   * @type {typeof BaseProperty}
-   */
   public static BaseProperty: typeof BaseProperty
 
-  /**
-   * Filter object passed to find method of BaseResource. External adapters have to use it
-   * @memberof AdminBro
-   * @static
-   * @abstract
-   * @name AdminBro.Filter
-   * @type {typeof Filter}
-   */
   public static Filter: typeof Filter
 
-  /**
-   * Validation error which is thrown when record fails validation. External adapters have
-   * to use it.
-   * @memberof AdminBro
-   * @static
-   * @name AdminBro.ValidationError
-   * @type {typeof ValidationError}
-   */
   public static ValidationError: typeof ValidationError
 
-  /**
-   * List of all default actions. If you want to change behaviour for all actions lika list,
-   * edit, show and delete you can do this here.
-   *
-   * @example <caption>Modifying accessibility rules for all show actions</caption>
-   * const { ACTIONS } = require('admin-bro')
-   * ACTIONS.show.isAccessible = () => {...}
-   *
-   *
-   * @memberof AdminBro
-   * @static
-   * @name AdminBro.ACTIONS
-   * @type {ActionsMap}
-   */
   public static ACTIONS: ActionsMap
 
-  /**
-   * AdminBro version
-   * @memberof AdminBro
-   * @static
-   * @name AdminBro.VERSION
-   * @type {string}
-   */
   public static VERSION: string
 
-  /**
-   * List of all bundled components
-   * @memberof AdminBro
-   * @static
-   * @name AdminBro.UserComponents
-   * @type {UserComponentsMap}
-   */
   public static UserComponents: UserComponentsMap
 
   /**
@@ -320,3 +226,110 @@ export const { registerAdapter } = AdminBro
 export const { bundle } = AdminBro
 
 export default AdminBro
+
+
+/**
+   * @description
+   * Contains set of routes availables within the application.
+   * It is used by external plugins.
+   *
+   * @example
+   * const { Router } = require('admin-bro')
+   * Router.routes.forEach(route => {
+   *   // map your framework routes to admin-bro routes
+   *   // see how `admin-bro-expressjs` plugin does it.
+   * })
+   *
+   * @memberof AdminBro
+   * @static
+   * @name Router
+   * @alias AdminBro.Router
+   * @type RouterType
+   */
+
+/**
+   * abstract class for all databases. External adapters have to implement that.
+   * @memberof AdminBro
+   * @static
+   * @abstract
+   * @name AdminBro.BaseDatabase
+   * @type {typeof BaseDatabase}
+   */
+
+/**
+   * abstract class for all records. External adapters have to implement that or at least
+   * their BaseResource implementation should return records of this type.
+   * @memberof AdminBro
+   * @static
+   * @abstract
+   * @name AdminBro.BaseRecord
+   * @type {typeof BaseRecord}
+   */
+
+/**
+   * abstract class for all resources. External adapters have to implement that.
+   * @memberof AdminBro
+   * @static
+   * @abstract
+   * @name AdminBro.BaseResource
+   * @type {typeof BaseResource}
+   */
+
+/**
+   * abstract class for all properties. External adapters have to implement that or at least
+   * their BaseResource implementation should return records of this type.
+   * @memberof AdminBro
+   * @static
+   * @abstract
+   * @name AdminBro.BaseProperty
+   * @type {typeof BaseProperty}
+   */
+
+/**
+   * Filter object passed to find method of BaseResource. External adapters have to use it
+   * @memberof AdminBro
+   * @static
+   * @abstract
+   * @name AdminBro.Filter
+   * @type {typeof Filter}
+   */
+
+/**
+   * Validation error which is thrown when record fails validation. External adapters have
+   * to use it.
+   * @memberof AdminBro
+   * @static
+   * @name AdminBro.ValidationError
+   * @type {typeof ValidationError}
+   */
+
+/**
+   * List of all default actions. If you want to change behaviour for all actions lika list,
+   * edit, show and delete you can do this here.
+   *
+   * @example <caption>Modifying accessibility rules for all show actions</caption>
+   * const { ACTIONS } = require('admin-bro')
+   * ACTIONS.show.isAccessible = () => {...}
+   *
+   *
+   * @memberof AdminBro
+   * @static
+   * @name AdminBro.ACTIONS
+   * @type {ActionsMap}
+   */
+
+/**
+   * AdminBro version
+   * @memberof AdminBro
+   * @static
+   * @name AdminBro.VERSION
+   * @type {string}
+   */
+
+/**
+   * List of all bundled components
+   * @memberof AdminBro
+   * @static
+   * @name AdminBro.UserComponents
+   * @type {UserComponentsMap}
+   */
