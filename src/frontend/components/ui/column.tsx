@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
 
-const StyledColumn = styled.section.attrs(({ width = 4, offset = 0 }) => ({
+const StyledColumn = styled.section.attrs<Props>(({ width = 4, offset = 0 }) => ({
   className: `column is-${width}-desktop is-offset-${offset}`,
 }))`
 
@@ -44,22 +44,20 @@ const StyledColumn = styled.section.attrs(({ width = 4, offset = 0 }) => ({
  *   </Columns>
  * )
  */
-const Column = props => <StyledColumn {...props} />
+const Column: React.FC<Props> = props => <StyledColumn {...props} />
 
-Column.propTypes = {
+/**
+ * @memberof Column
+ */
+type Props = {
   /**
-   * Width of the column in 12 column grid
+   * Width of the column in 12 column grid, default to 4
    */
-  width: PropTypes.number,
+  width: number;
   /**
-   * column offset
+   * column offset, default to 0
    */
-  offset: PropTypes.number,
-}
-
-Column.defaultProps = {
-  width: 4,
-  offset: 0,
+  offset: number;
 }
 
 export default Column

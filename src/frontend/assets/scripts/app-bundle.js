@@ -1325,7 +1325,7 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
 	  className: 'label'
 	}).withConfig({
 	  displayName: "label__StyledLabel",
-	  componentId: "sc-1f1o2k1-0"
+	  componentId: "odgp9z-0"
 	})(["&&&{display:block;text-transform:uppercase;font-size:", ";color:", ";font-weight:normal;margin:0 0 8px 0;letter-spacing:0.1em;}"], ({
 	  theme
 	}) => theme.fonts.min, ({
@@ -1346,15 +1346,6 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
 	 */
 
 	const Label = props => React__default.createElement(StyledLabel, props);
-
-	Label.propTypes = {
-	  children: childrenType,
-	  style: PropTypes$1.objectOf(PropTypes$1.oneOfType([PropTypes$1.string, PropTypes$1.number]))
-	};
-	Label.defaultProps = {
-	  children: null,
-	  style: null
-	};
 
 	const VersionWrapper = styled__default.div.withConfig({
 	  displayName: "version__VersionWrapper",
@@ -1440,7 +1431,7 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
 	  className: `column is-${width}-desktop is-offset-${offset}`
 	})).withConfig({
 	  displayName: "column__StyledColumn",
-	  componentId: "ulchx1-0"
+	  componentId: "d07l2a-0"
 	})([""]);
 	/**
 	 * Colum representation in AdminBro grid. It uses [bulma](https://bulma.io/documentation/) grid.
@@ -1481,27 +1472,11 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
 
 	const Column = props => React__default.createElement(StyledColumn, props);
 
-	Column.propTypes = {
-	  /**
-	   * Width of the column in 12 column grid
-	   */
-	  width: PropTypes$1.number,
-
-	  /**
-	   * column offset
-	   */
-	  offset: PropTypes$1.number
-	};
-	Column.defaultProps = {
-	  width: 4,
-	  offset: 0
-	};
-
 	const StyledColumns = styled__default.section.attrs({
 	  className: 'columns is-multiline'
 	}).withConfig({
 	  displayName: "columns__StyledColumns",
-	  componentId: "sc-97bm1x-0"
+	  componentId: "sc-1g5enwk-0"
 	})([""]);
 	/**
 	 * Columns wrapper for the grid in AdminBro. It uses [bulma](https://bulma.io/documentation/) grid.
@@ -1545,7 +1520,7 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
 	  className: 'content'
 	}).withConfig({
 	  displayName: "dashboard-header__Wrapper",
-	  componentId: "pokiey-0"
+	  componentId: "sc-1rc8e45-0"
 	})(["&&{padding:90px ", ";background:", ";color:#fff;margin-bottom:0;& > *{color:#fff;}p{color:#fff;}h1{color:#fff;font-size:53px;margin-bottom:4px;}}"], ({
 	  theme
 	}) => theme.sizes.paddingLayout, ({
@@ -1593,16 +1568,6 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
 	  return React__default.createElement(Wrapper, null, children);
 	};
 
-	DashboardHeader.propTypes = {
-	  /**
-	   * Most probably you will use `H1` and `P` tags here
-	   */
-	  children: childrenType
-	};
-	DashboardHeader.defaultProps = {
-	  children: null
-	};
-
 	var _extends_1 = createCommonjsModule(function (module) {
 	function _extends() {
 	  module.exports = _extends = Object.assign || function (target) {
@@ -1629,7 +1594,7 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
 	  className: 'dropdown-trigger'
 	}).withConfig({
 	  displayName: "dropdown__DropdownTrigger",
-	  componentId: "sc-1b36k39-0"
+	  componentId: "sc-17060js-0"
 	})(["padding:0px ", ";font-size:20px;line-height:20px;&:hover{background:#fff;}"], ({
 	  theme
 	}) => theme.sizes.padding);
@@ -1637,7 +1602,7 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
 	  className: 'dropdown-menu'
 	}).withConfig({
 	  displayName: "dropdown__DropdownMenu",
-	  componentId: "sc-1b36k39-1"
+	  componentId: "sc-17060js-1"
 	})(["& > .dropdown-content{border:0px none;border-radius:0px;box-shadow:0 6px 13px 0 rgba(69,70,85,0.13);}"]);
 	/**
 	 * Representation of a dropdown with buttons.
@@ -1671,18 +1636,9 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
 	  }, children)));
 	};
 
-	Dropdown$1.propTypes = {
-	  children: childrenType,
-	  className: PropTypes$1.string
-	};
-	Dropdown$1.defaultProps = {
-	  children: null,
-	  className: null
-	};
-
 	const StyledWrapperBox = styled__default.section.withConfig({
 	  displayName: "wrapper-box__StyledWrapperBox",
-	  componentId: "liehve-0"
+	  componentId: "sc-9mf060-0"
 	})(["padding:", ";flex-grow:1;border:", ";background:", ";& > h1{font-size:22px;margin-top:", ";margin-bottom:", ";}"], ({
 	  theme
 	}) => theme.sizes.paddingLayout, props => props.border ? `1px solid ${props.theme.colors.border}` : 'none', props => props.border ? '#ffffff' : 'transparent', ({
@@ -1705,21 +1661,11 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
 
 	const WrapperBox = props => React__default.createElement(StyledWrapperBox, props);
 
-	WrapperBox.propTypes = {
-	  /**
-	   * If wrapper should have a border.
-	   */
-	  border: PropTypes$1.bool
-	};
-	WrapperBox.defaultProps = {
-	  border: false
-	};
-
 	const Spinner = styled__default.div.attrs({
 	  className: 'lds-facebook'
 	}).withConfig({
 	  displayName: "loader__Spinner",
-	  componentId: "yqzce0-0"
+	  componentId: "sc-103tj8g-0"
 	})(["&{display:inline-block;position:relative;width:64px;height:64px;}& div{display:inline-block;position:absolute;left:6px;width:13px;background:", ";animation:lds-facebook 1.2s cubic-bezier(0,0.5,0.5,1) infinite;}& div:nth-child(1){left:6px;animation-delay:-0.24s;}& div:nth-child(2){left:26px;animation-delay:-0.12s;}& div:nth-child(3){left:45px;animation-delay:0;}@keyframes lds-facebook{0%{top:6px;height:51px;}50%,100%{top:19px;height:26px;}}"], ({
 	  theme
 	}) => theme.colors.primary);
@@ -1798,13 +1744,39 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
 	}
 	var jwPaginate = paginate;
 
-	const Btn = styled__default(reactRouterDom.Link).attrs(({
+	/**
+	 * Base button component
+	 *
+	 * @component
+	 * @example <caption>Regular button</caption>
+	 * return (
+	  *   <WrapperBox border>
+	  *     <StyledButton>I am button</StyledButton>
+	  *   </WrapperBox>
+	  * )
+	  *
+	  * @example <caption>Primary button</caption>
+	  * return (
+	  *   <WrapperBox border>
+	  *     <StyledButton primary>I am primary button</StyledButton>
+	  *   </WrapperBox>
+	  * )
+	  *
+	  * @example <caption>With icon</caption>
+	  * return (
+	  *   <WrapperBox border>
+	  *     <StyledButton><i class="fa fa-bomb" />I am button with icon</StyledButton>
+	  *   </WrapperBox>
+	  * )
+	  */
+
+	const StyledButton = styled__default(reactRouterDom.Link).attrs(({
 	  primary
 	}) => ({
 	  className: `button${primary ? ' is-primary' : ''}`
 	})).withConfig({
-	  displayName: "styled-button__Btn",
-	  componentId: "vse0ck-0"
+	  displayName: "styled-button__StyledButton",
+	  componentId: "sc-27o4jb-0"
 	})(["&&&{font-size:", ";border-radius:0;border-color:", ";background:#fff;height:34px;padding:", ";color:", ";& i,& svg{margin-right:5px;}&:hover{border-color:", ";}&.is-white{background-color:#fff;border-color:transparent;color:", ";}&.is-primary{background-color:", ";color:#ffffff;&:hover{background-color:", ";}}&.is-text{background-color:transparent;color:", ";border:transparent;}&.in-dropdown{color:", ";font-size:", ";width:100%;text-align:start;justify-content:flex-start;height:40px;padding-left:40px;border:none;&:hover{border:4px ", ";padding-left:36px;border-style:none solid;}}}"], ({
 	  theme
 	}) => theme.fonts.medium, ({
@@ -1830,54 +1802,12 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
 	}) => theme.fonts.base, ({
 	  theme
 	}) => theme.colors.primary);
-	/**
-	 * Base button component
-	 *
-	 * @component
-	 * @example <caption>Regular button</caption>
-	 * return (
-	 *   <WrapperBox border>
-	 *     <StyledButton>I am button</StyledButton>
-	 *   </WrapperBox>
-	 * )
-	 *
-	 * @example <caption>Primary button</caption>
-	 * return (
-	 *   <WrapperBox border>
-	 *     <StyledButton primary>I am primary button</StyledButton>
-	 *   </WrapperBox>
-	 * )
-	 *
-	 * @example <caption>With icon</caption>
-	 * return (
-	 *   <WrapperBox border>
-	 *     <StyledButton><i class="fa fa-bomb" />I am button with icon</StyledButton>
-	 *   </WrapperBox>
-	 * )
-	 */
-
-	const StyledButton = props => React__default.createElement(Btn, props);
-
-	StyledButton.propTypes = {
-	  /**
-	   * If button should be presented as a primary action
-	   */
-	  primary: PropTypes$1.bool,
-	  children: childrenType.isRequired,
-	  onClick: PropTypes$1.func,
-	  as: PropTypes$1.string
-	};
-	StyledButton.defaultProps = {
-	  primary: undefined,
-	  onClick: () => {},
-	  as: null
-	};
 
 	const PaginationWrapper = styled__default.div.attrs({
 	  className: 'level-item pagination-content'
 	}).withConfig({
 	  displayName: "paginate__PaginationWrapper",
-	  componentId: "sc-1l5c7er-0"
+	  componentId: "sc-9u8hbi-0"
 	})(["& > .pagination{border:1px solid ", ";padding:4px;}"], ({
 	  theme
 	}) => theme.colors.border);
@@ -1910,7 +1840,7 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
 	      page,
 	      perPage
 	    } = this.props;
-	    const currentPage = parseInt(page || 1, 10);
+	    const currentPage = parseInt(page || '1', 10);
 	    const paginate = jwPaginate(total, currentPage, parseInt(perPage, 10));
 	    const isFirstPage = currentPage === paginate.startPage;
 	    const isLastPage = currentPage === paginate.endPage;
@@ -1947,33 +1877,16 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
 	  }
 
 	}
+	/**
+	 * @memberof Paginate
+	 */
 
-	Paginate.propTypes = {
-	  /**
-	   * Current page
-	   */
-	  page: PropTypes$1.number.isRequired,
 
-	  /**
-	   * Items per page
-	   */
-	  perPage: PropTypes$1.number.isRequired,
-
-	  /**
-	   * Total number of items
-	   */
-	  total: PropTypes$1.number.isRequired,
-
-	  /**
-	   * Location passed from the react-router
-	   */
-	  location: locationType.isRequired
-	};
 	var Paginate$1 = reactRouterDom.withRouter(Paginate);
 
 	const StyledPlaceholder = styled__default.div.withConfig({
 	  displayName: "placeholder__StyledPlaceholder",
-	  componentId: "sc-1mxcvz-0"
+	  componentId: "sc-1cbjegf-0"
 	})(["@keyframes placeHolderShimmer{0%{background-position:-468px 0}100%{background-position:468px 0}}animation-duration:1s;animation-fill-mode:forwards;animation-iteration-count:infinite;animation-name:placeHolderShimmer;animation-timing-function:linear;background:#f6f7f8;background:linear-gradient(to right,#eeeeee 8%,#dddddd 18%,#eeeeee 33%);background-size:1000px 104px;height:338px;position:relative;overflow:hidden;"]);
 	/**
 	 * Renders placeholder
@@ -1999,7 +1912,7 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
 
 	const Property = styled__default.div.withConfig({
 	  displayName: "property-in-edit__Property",
-	  componentId: "sc-1355usy-0"
+	  componentId: "sc-1yqxq8u-0"
 	})(["margin-bottom:", ";& input{border-radius:0;border-color:", ";box-shadow:none;&:focus{border-color:", ";}}& .control > input[type=text]{height:40px;}"], ({
 	  theme
 	}) => theme.sizes.paddingLayout, ({
@@ -2059,35 +1972,11 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
 	    className: "help is-danger"
 	  }, error.message));
 	};
+	/**
+	 * @memberof PropertyInEdit
+	 */
 
-	PropertyInEdit.propTypes = {
-	  /**
-	   * Wrapped input element
-	   */
-	  children: childrenType,
 
-	  /**
-	   * Property object based on {@link PropertyJSON}
-	   */
-	  property: PropTypes$1.shape({
-	    /**
-	     * Property label
-	     */
-	    label: PropTypes$1.string.isRequired,
-
-	    /**
-	     * Unique property name - its patch.
-	     */
-	    name: PropTypes$1.string.isRequired
-	  }).isRequired,
-
-	  /**
-	   * Optional error message
-	   */
-	  error: PropTypes$1.shape({
-	    message: PropTypes$1.string
-	  })
-	};
 	PropertyInEdit.defaultProps = {
 	  error: null,
 	  children: null
@@ -2565,33 +2454,12 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
 	  theme
 	}) => theme.colors.primary);
 	/**
-	 * Props
+	 * @memberof Breadcrumbs
 	 */
 
 	/**
-	 * @private
 	 * @component
-	 * var recordAction = {
-	 *   actionType: 'record',
-	 *   icon: 'fas fa-edit',
-	 *   isVisible: true,
-	 *   label: 'Action',
-	 *   name: 'action'
-	 * };
-	 * props = {
-	 *   resource: {
-	 *     href: '/admin/xxxx',
-	 *     name: 'resource name',
-	 *     resourceActions: [],
-	 *   },
-	 *   record: {
-	 *     id: 'some-record',
-	 *     name: 'some-name',
-	 *     recordActions: [recordAction],
-	 *     params: {},
-	 *   },
-	 *   actionName: recordAction.name,
-	 * }
+	 * @private
 	 */
 	class Breadcrumbs extends React__default.PureComponent {
 	  renderResource() {
@@ -5099,7 +4967,7 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
 
 	}).call(commonjsGlobal);
 
-	//# sourceMappingURL=performance-now.js.map
+
 	});
 
 	var root = typeof window === 'undefined' ? commonjsGlobal : window

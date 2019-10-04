@@ -42,6 +42,6 @@ const StyledColumns = styled.section.attrs({
  *   </Columns>
  * )
  */
-const Columns = props => <StyledColumns {...props} />
+const Columns: React.FC = props => <StyledColumns {...props} />
 
 export default Columns

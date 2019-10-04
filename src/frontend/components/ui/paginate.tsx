@@ -1,17 +1,15 @@
-import React from 'react'
-import PropTypes from 'prop-types'
+import React, { ReactNode } from 'react'
 import JWPaginate from 'jw-paginate'
 import styled from 'styled-components'
 import { withRouter } from 'react-router-dom'
 
 import StyledButton from './styled-button'
-import { locationType } from '../../types'
 
 const PaginationWrapper = styled.div.attrs({
   className: 'level-item pagination-content',
 })`
   & > .pagination {
-    border: 1px solid ${({ theme }) => theme.colors.border};
+    border: 1px solid ${({ theme }): string => theme.colors.border};
     padding: 4px;
   }
 `
@@ -27,17 +25,17 @@ const PaginationWrapper = styled.div.attrs({
  *   </WrapperBox>
  * )
  */
-class Paginate extends React.PureComponent {
-  linkToPage(page) {
+class Paginate extends React.PureComponent<Props> {
+  linkToPage(page): ReactNode {
     const { location } = this.props
     const search = new URLSearchParams(location.search)
     search.set('page', page)
     return search.toString()
   }
 
-  render() {
+  render(): ReactNode {
     const { total, page, perPage } = this.props
-    const currentPage = parseInt(page || 1, 10)
+    const currentPage = parseInt(page || '1', 10)
     const paginate = JWPaginate(total, currentPage, parseInt(perPage, 10))
 
     const isFirstPage = currentPage === paginate.startPage
@@ -79,23 +77,26 @@ class Paginate extends React.PureComponent {
   }
 }
 
-Paginate.propTypes = {
+/**
+ * @memberof Paginate
+ */
+type Props = {
   /**
    * Current page
    */
-  page: PropTypes.number.isRequired,
+  page: string;
   /**
    * Items per page
    */
-  perPage: PropTypes.number.isRequired,
+  perPage: string;
   /**
    * Total number of items
    */
-  total: PropTypes.number.isRequired,
+  total: number;
   /**
    * Location passed from the react-router
    */
-  location: locationType.isRequired,
+  location: Location;
 }
 
 export default withRouter(Paginate)

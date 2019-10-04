@@ -1,8 +1,5 @@
-import React from 'react'
-import PropTypes from 'prop-types'
+import React, { ReactNode } from 'react'
 import styled from 'styled-components'
-
-import { childrenType } from '../../types'
 
 const StyledLabel = styled.label.attrs({
   className: 'label',
@@ -10,8 +7,8 @@ const StyledLabel = styled.label.attrs({
   &&& {
     display: block;
     text-transform: uppercase;
-    font-size: ${({ theme }) => theme.fonts.min};
-    color: ${({ theme }) => theme.colors.lightText};
+    font-size: ${({ theme }): string => theme.fonts.min};
+    color: ${({ theme }): string => theme.colors.lightText};
     font-weight: normal;
     margin: 0 0 8px 0;
     letter-spacing: 0.1em;
@@ -31,19 +28,15 @@ const StyledLabel = styled.label.attrs({
  * </WrapperBox>
  * )
  */
-const Label = props => (<StyledLabel {...props} />)
+const Label: React.FC<Props> = props => (<StyledLabel {...props} />)
 
-Label.propTypes = {
-  children: childrenType,
-  style: PropTypes.objectOf(PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.number,
-  ])),
-}
-
-Label.defaultProps = {
-  children: null,
-  style: null,
+/**
+ * @memberof Label
+ */
+type Props = {
+  children: ReactNode;
+  style?: React.CSSProperties;
+  htmlFor?: string;
 }
 
 export default Label

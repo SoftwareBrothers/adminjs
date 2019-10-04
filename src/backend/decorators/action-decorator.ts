@@ -58,7 +58,7 @@ class ActionDecorator {
     }
     let ret = await this.action.handler(modifiedRequest, response, data)
     if (this.action.after) {
-      ret = await this.action.after(ret)
+      ret = await this.action.after(ret, modifiedRequest)
     }
     return ret
   }

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { ReactNode } from 'react'
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
 
@@ -7,14 +7,14 @@ import { childrenType } from '../../types'
 import Label from './label'
 
 const Property = styled.div`
-  margin-bottom: ${({ theme }) => theme.sizes.paddingLayout};
+  margin-bottom: ${({ theme }): string => theme.sizes.paddingLayout};
 
   & input {
     border-radius: 0;
-    border-color: ${({ theme }) => theme.colors.border};
+    border-color: ${({ theme }): string => theme.colors.border};
     box-shadow: none;
     &:focus {
-      border-color: ${({ theme }) => theme.colors.primary};
+      border-color: ${({ theme }): string => theme.colors.primary};
     }
   }
 
@@ -59,7 +59,7 @@ const Property = styled.div`
  *   </WrapperBox>
  * )
  */
-const PropertyInEdit = (props) => {
+const PropertyInEdit: React.FC<Props> = (props) => {
   const { children, property, error } = props
   return (
     <Property>
@@ -74,30 +74,33 @@ const PropertyInEdit = (props) => {
   )
 }
 
-PropertyInEdit.propTypes = {
+/**
+ * @memberof PropertyInEdit
+ */
+type Props = {
   /**
    * Wrapped input element
    */
-  children: childrenType,
+  children: ReactNode;
   /**
    * Property object based on {@link PropertyJSON}
    */
-  property: PropTypes.shape({
+  property: {
     /**
      * Property label
      */
-    label: PropTypes.string.isRequired,
+    label: string;
     /**
      * Unique property name - its patch.
      */
-    name: PropTypes.string.isRequired,
-  }).isRequired,
+    name: string;
+  };
   /**
    * Optional error message
    */
-  error: PropTypes.shape({
-    message: PropTypes.string,
-  }),
+  error: {
+    message: string;
+  };
 }
 
 PropertyInEdit.defaultProps = {

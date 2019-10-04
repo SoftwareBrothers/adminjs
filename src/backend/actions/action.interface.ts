@@ -116,10 +116,16 @@ export type Before = (
  * @memberof Action
  * @alias After
  */
-export type After = (response: any) => any
-
-
-// TODO add originalRequest to After
+export type After = (
+  /**
+   * Reponse returned by the default ActionHandler
+   */
+  response: any,
+  /**
+   * Original request which has been sent to ActionHandler
+   */
+  request: ActionRequest,
+) => any
 
 /**
  * Inteface representing an Action in AdminBro.

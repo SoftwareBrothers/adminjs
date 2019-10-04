@@ -1,13 +1,10 @@
-import React from 'react'
-import PropTypes from 'prop-types'
+import React, { ReactNode } from 'react'
 import styled from 'styled-components'
-
-import { childrenType } from '../../types'
 
 const DropdownTrigger = styled.div.attrs({
   className: 'dropdown-trigger',
 })`
-  padding: 0px ${({ theme }) => theme.sizes.padding};
+  padding: 0px ${({ theme }): string => theme.sizes.padding};
   font-size: 20px;
   line-height: 20px;
   &:hover {
@@ -39,7 +36,7 @@ const DropdownMenu = styled.div.attrs({
  * </WrapperBox>
  * )
  */
-const Dropdown = (props) => {
+const Dropdown: React.FC<Props> = (props) => {
   const { children } = props
   let { className = '' } = props
   className += ' dropdown'
@@ -57,14 +54,12 @@ const Dropdown = (props) => {
   )
 }
 
-Dropdown.propTypes = {
-  children: childrenType,
-  className: PropTypes.string,
-}
-
-Dropdown.defaultProps = {
-  children: null,
-  className: null,
+/**
+ * @memberof Dropdown
+ */
+type Props = {
+  children: ReactNode;
+  className?: string;
 }
 
 export default Dropdown

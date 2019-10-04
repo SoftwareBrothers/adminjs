@@ -24,9 +24,9 @@ const BreadcrumbLink = styled(Link)`
 `
 
 /**
- * Props
+ * @memberof Breadcrumbs
  */
-interface Props {
+type Props = {
   /**
    * Resource
    */
@@ -42,29 +42,8 @@ interface Props {
 }
 
 /**
- * @private
  * @component
- * var recordAction = {
- *   actionType: 'record',
- *   icon: 'fas fa-edit',
- *   isVisible: true,
- *   label: 'Action',
- *   name: 'action'
- * };
- * props = {
- *   resource: {
- *     href: '/admin/xxxx',
- *     name: 'resource name',
- *     resourceActions: [],
- *   },
- *   record: {
- *     id: 'some-record',
- *     name: 'some-name',
- *     recordActions: [recordAction],
- *     params: {},
- *   },
- *   actionName: recordAction.name,
- * }
+ * @private
  */
 class Breadcrumbs extends React.PureComponent<Props> {
   renderResource(): React.ReactChild {

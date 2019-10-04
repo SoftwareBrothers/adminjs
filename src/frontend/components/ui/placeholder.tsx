@@ -44,6 +44,13 @@ const StyledPlaceholder = styled.div`
  *   </WrapperBox>
  * )
  */
-const Placeholder = props => (<StyledPlaceholder {...props} />)
+const Placeholder: React.FC<Props> = props => (<StyledPlaceholder {...props} />)
+
+/**
+ * @memberof Placeholder
+ */
+type Props = {
+  style?: React.CSSProperties;
+}
 
 export default Placeholder

@@ -16,7 +16,7 @@ const Spinner = styled.div.attrs({
     position: absolute;
     left: 6px;
     width: 13px;
-    background: ${({ theme }) => theme.colors.primary};
+    background: ${({ theme }): string => theme.colors.primary};
     animation: lds-facebook 1.2s cubic-bezier(0, 0.5, 0.5, 1) infinite;
   }
   & div:nth-child(1) {
@@ -53,7 +53,7 @@ const Spinner = styled.div.attrs({
  *   <WrapperBox border><Loader/></WrapperBox>
  * )
  */
-const Loader = () => (
+const Loader: React.FC = () => (
   <WrapperBox style={{ textAlign: 'center' }}>
     <Spinner>
       <div />

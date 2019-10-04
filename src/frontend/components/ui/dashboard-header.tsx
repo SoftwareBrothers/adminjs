@@ -1,14 +1,12 @@
-import React from 'react'
+import React, { ReactNode } from 'react'
 import styled from 'styled-components'
-
-import { childrenType } from '../../types'
 
 const Wrapper = styled.section.attrs({
   className: 'content',
 })`
   && {
-    padding: 90px ${({ theme }) => theme.sizes.paddingLayout};
-    background: ${({ theme }) => theme.colors.superDarkBck};
+    padding: 90px ${({ theme }): string => theme.sizes.paddingLayout};
+    background: ${({ theme }): string => theme.colors.superDarkBck};
     color: #fff;
     margin-bottom: 0;
     & > * {
@@ -60,7 +58,7 @@ const Wrapper = styled.section.attrs({
  *   </div>
  * )
  */
-const DashboardHeader = (props) => {
+const DashboardHeader: React.FC<Props> = (props) => {
   const { children } = props
   return (
     <Wrapper>
@@ -69,15 +67,14 @@ const DashboardHeader = (props) => {
   )
 }
 
-DashboardHeader.propTypes = {
+/**
+ * @memberof DashboardHeader
+ */
+type Props = {
   /**
    * Most probably you will use `H1` and `P` tags here
-   */
-  children: childrenType,
-}
-
-DashboardHeader.defaultProps = {
-  children: null,
+  */
+  children: ReactNode;
 }
 
 export default DashboardHeader
