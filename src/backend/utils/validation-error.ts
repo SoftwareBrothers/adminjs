@@ -13,7 +13,8 @@ class ValidationError extends Error {
   /**
    * @param  {String} message   custom message
    * @param  {Object} errors    error messages
-   * @param  {String} errors.{...}    error for particular field where ... is a {@link BaseProperty#path}
+   * @param  {String} errors.{...}    error for particular field where ... is a
+   *                                  {@link BaseProperty#path}
    * @param  {String} errors.{...}.message   human readible message
    * @param  {String} errors.{...}.kind      string type (i.e. required)
    */
