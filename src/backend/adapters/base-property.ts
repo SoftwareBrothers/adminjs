@@ -3,36 +3,54 @@
 const TITLE_COLUMN_NAMES = ['title', 'name', 'subject', 'email']
 
 /**
+ * @typedef {string} PropertyType
+ * @memberof BaseProperty
+ * @alias PropertyType
+ * @property {string} string      default property type
+ * @property {string} float       type of floating point numbers
+ * @property {string} number      regular number
+ * @property {string} boolean     boolean value
+ * @property {string} date        date
+ * @property {string} mixed       type representing an object
+ * @property {string} id          type for an unique identifier of a record
+ */
+
+export enum PropertyType {
+  string = 'string',
+  float = 'float',
+  number = 'number',
+  boolean = 'boolean',
+  date = 'date',
+  mixed = 'mixed',
+  id = 'id',
+}
+
+/**
  * Represents Resource Property
  * @category Base
- *
- * @mermaid
- *   graph LR
- *   A[BaseDatabase] -->|has many| B(BaseResource)
- *   B --> |has many|C(BaseRecord)
- *   B --> |has many|D(BasePorperty)
  */
 class BaseProperty {
   private _path: string
 
-  private _type: string
+  private _type: PropertyType
 
   private _isId: boolean
 
   private _isSortable: boolean
 
   /**
-   * @param  {Object} options
-   * @param  {String} options.path property path: usually it its key but when
-   *                               property is for an object the path can be
-   *                               divided to parts by dots: i.e. 'address.street'
-   * @param  {String} options.type on if: id, string, float, number, boolean, date
-   * @param  {String} options.isId true when field should be treated as an ID
-   * @param  {String} options.isSortable by default: true
+   * @param  {object} options
+   * @param  {string} options.path                     property path: usually it its key but when
+   *                                                   property is for an object the path can be
+   *                                                   divided to parts by dots: i.e.
+   *                                                   'address.street'
+   * @param  {string}  [options.type='string']         one if: string, float, number, boolean, date
+   * @param  {boolean} [options.isId=false]            true when field should be treated as an ID
+   * @param  {boolean} [options.isSortable=true]       if property should be sortable
    */
-  constructor({ path, type = 'string', isId = false, isSortable = true }: {
+  constructor({ path, type = PropertyType.string, isId = false, isSortable = true }: {
     path: string;
-    type?: string;
+    type?: PropertyType;
     isId?: boolean;
     isSortable?: boolean;
   }) {
@@ -47,7 +65,7 @@ class BaseProperty {
 
   /**
    * Name of the property
-   * @return {String} name of the property
+   * @return {string} name of the property
    */
   name(): string {
     return this._path
@@ -59,17 +77,16 @@ class BaseProperty {
 
   /**
    * Return type of a property
-   * @return {String} One of available property types:
-   *                      [id, string, float, number, boolean,
-   *                       date, mixed]
+   * @return {PropertyType}
    */
-  type(): string {
-    return this._type || 'string'
+  type(): PropertyType {
+    return this._type || PropertyType.string
   }
 
   /**
    * Return true if given property should be treated as a Record Title.
-   * @return {Boolean}
+   *
+   * @return {boolean}
    */
   isTitle(): boolean {
     return TITLE_COLUMN_NAMES.includes(this._path.toLowerCase())
@@ -77,6 +94,7 @@ class BaseProperty {
 
   /**
    * Indicates if given property should be visible
+   *
    * @return {Boolean}
    */
   isVisible(): boolean {
@@ -85,7 +103,8 @@ class BaseProperty {
 
   /**
    * Indicates if value of given property can be updated
-   * @return {Boolean}
+   *
+   * @return {boolean}
    */
   isEditable(): boolean {
     return true
@@ -93,7 +112,8 @@ class BaseProperty {
 
   /**
    * Returns true if given property is a uniq key in a table/collection
-   * @return {Boolean}
+   *
+   * @return {boolean}
    */
   isId(): boolean {
     return !!this._isId
@@ -101,7 +121,7 @@ class BaseProperty {
 
   /**
    * If property is a reference to a record of different resource
-   * it should contain id of this resource.
+   * it should contain {@link BaseResource.id} of this resource.
    *
    * When property is responsible for the field: 'user_id' in SQL database
    * reference should be the name of the Resource which it refers to: `Users`
@@ -124,7 +144,7 @@ class BaseProperty {
   /**
    * Returns true when given property is an array
    *
-   * @return  {Boolean}
+   * @return  {boolean}
    */
   isArray(): boolean {
     return false
@@ -141,7 +161,8 @@ class BaseProperty {
 
   /**
    * Indicates if given property can be sorted
-   * @return {Boolean}
+   *
+   * @return {boolean}
    */
   isSortable(): boolean {
     return this._isSortable

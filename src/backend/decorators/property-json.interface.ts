@@ -1,3 +1,10 @@
+export enum PropertyPlace {
+  show = 'show',
+  list = 'list',
+  edit = 'edit',
+  filter = 'filter',
+}
+
 /**
  * JSON representation of a Property.
  */

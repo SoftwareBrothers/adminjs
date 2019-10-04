@@ -1,5 +1,5 @@
 import Action from '../actions/action.interface'
-import { PropertyOptions } from './property-options.interface'
+import PropertyOptions from './property-options.interface'
 
 /**
  * Options for given resource

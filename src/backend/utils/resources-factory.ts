@@ -46,8 +46,9 @@ class ResourcesFactory {
 
   /**
    * Changes database give by the user in configuration to list of supported resources
-   * @param  {any[]} databases    list of all databases given by the user in {@link AdminBroOptions}
-   * @return {BaseResource[]}     list of all resources from given databases
+   * @param  {Array<any>} databases    list of all databases given by the user in
+   *                                   {@link AdminBroOptions}
+   * @return {Array<BaseResource>}     list of all resources from given databases
   */
   _convertDatabases(databases: Array<any>): Array<BaseResource> {
     return databases.reduce((memoArray, db) => {
@@ -77,7 +78,7 @@ class ResourcesFactory {
    * // => returns: [AdminModel, {resource: UserModel, options: {}}]
    * // where AdminModel and UserModel were converted by appropriate database adapters.
    */
-  _convertResources(resources): Array<any> {
+  _convertResources(resources: Array<any | { resource: any; options: any }>): Array<any> {
     return resources.map((rawResource) => {
       // resource can be given either by a value or within an object within resource key
       const resourceObject = rawResource.resource || rawResource

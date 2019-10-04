@@ -119,6 +119,8 @@ export type Before = (
 export type After = (response: any) => any
 
 
+// TODO add originalRequest to After
+
 /**
  * Inteface representing an Action in AdminBro.
  *
@@ -194,8 +196,8 @@ export default interface Action {
    * Component which will be used to render the action.
    * Action components accepts following prop types:
    *
-   * 1. resource: {@link BaseResource~JSON}
-   * 2. action: {@link Action~JSON}
+   * 1. resource: {@link ResourceJSON}
+   * 2. action: {@link ActionJSON}
    * 3. _(optional)_ recordId: string _(for recordAction)_
    *
    * When component is set to `false` then action doesn't have it's own view.

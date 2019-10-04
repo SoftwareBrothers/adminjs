@@ -25,3 +25,5 @@ export default interface RecordJSON {
    */
   title: string;
 }
+
+// TODO: describe flatten params

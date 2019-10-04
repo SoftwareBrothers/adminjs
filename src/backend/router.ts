@@ -6,8 +6,16 @@ import ApiController from './controllers/api-controller'
 
 const ASSETS_ROOT = `${__dirname}/../frontend/assets/`
 
-export interface RouterType {
-  assets: Array<{path: string; src: string}>;
+/**
+ * Type representing the AdminBro.Router
+ * @memberof AdminBro
+ * @alias RouterType
+ */
+export type RouterType = {
+  assets: Array<{
+    path: string;
+    src: string;
+  }>;
   routes: Array<{
     method: string;
     path: string;

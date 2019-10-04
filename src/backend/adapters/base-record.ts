@@ -5,16 +5,12 @@ import ValidationError from '../utils/validation-error'
 import RecordJSON from '../decorators/record-json.interface'
 
 /**
- * Representation of an particular ORM Record in given Resource in AdminBro
+ * Representation of an particular ORM/ODM Record in given Resource in AdminBro
+ *
  * @category Base
- * @mermaid
- *   graph LR
- *   A[BaseDatabase] -->|has many| B(BaseResource)
- *   B --> |has many|C(BaseRecord)
- *   B --> |has many|D(BasePorperty)
  */
 class BaseRecord {
-  private resource: BaseResource
+  public resource: BaseResource
 
   private params: {[key: string]: string} | {}
 
@@ -199,7 +195,7 @@ class BaseRecord {
   /**
    * Returns JSON representation of an record
    *
-   * @return  {BaseRecord~JSON}
+   * @return  {RecordJSON}
    */
   toJSON(): RecordJSON {
     return {

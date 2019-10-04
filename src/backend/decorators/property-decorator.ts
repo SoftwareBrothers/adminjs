@@ -1,8 +1,8 @@
 import * as _ from 'lodash'
 import AdminBro from '../../admin-bro'
-import { PropertyOptions } from './property-options.interface'
+import PropertyOptions, { AvailablePropertyOptions } from './property-options.interface'
 import BaseResource from '../adapters/base-resource'
-import BaseProperty from '../adapters/base-property'
+import BaseProperty, { PropertyType } from '../adapters/base-property'
 import ResourceDecorator from './resource-decorator'
 import PropertyJSON from './property-json.interface'
 
@@ -12,7 +12,7 @@ import PropertyJSON from './property-json.interface'
  * @category Decorators
  */
 class PropertyDecorator {
-  private _property: BaseProperty
+  public property: BaseProperty
 
   private _admin: AdminBro
 
@@ -33,7 +33,7 @@ class PropertyDecorator {
     options: PropertyOptions;
     resource: ResourceDecorator;
   }) {
-    this._property = property
+    this.property = property
     this._admin = admin
     this._resource = resource
 
@@ -47,18 +47,18 @@ class PropertyDecorator {
   /**
    * True if given property can be sortable
    *
-   * @returns {Boolean}
+   * @returns {boolean}
    */
   isSortable(): boolean {
-    return this._property.isSortable()
+    return this.property.isSortable()
   }
 
-  overrideFromOptions(optionName, defaultValue = null): any {
+  overrideFromOptions(optionName: AvailablePropertyOptions, defaultValue = null): any {
     if (typeof this.options[optionName] === 'undefined') {
       if (defaultValue) {
         return defaultValue()
       }
-      return this._property[optionName]()
+      return this.property[optionName]()
     }
     return this.options[optionName]
   }
@@ -69,36 +69,47 @@ class PropertyDecorator {
    * @return  {BaseResource} reference resource
    */
   reference(): BaseResource | null {
-    return this._property.reference() && this._admin.findResource(this._property.reference())
+    return this.property.reference() && this._admin.findResource(this.property.reference())
   }
 
   /**
    * Name of the property
    *
-   * @returns {String}
+   * @returns {string}
    */
   name(): string {
-    return this.overrideFromOptions('name')
+    return this.overrideFromOptions(AvailablePropertyOptions.name)
   }
 
+  /**
+   * Label of a property
+   *
+   * @return  {string}
+   */
   label(): string {
-    return this.overrideFromOptions('label', () => (
-      _.startCase(this._property.name())
+    return this.overrideFromOptions(AvailablePropertyOptions.label, () => (
+      _.startCase(this.property.name())
     ))
   }
 
   /**
-   * Resource type
+   * Property type
    *
-   * @returns {String}
+   * @returns {PropertyType}
    */
-  type(): string {
-    return this.overrideFromOptions('type')
+  type(): PropertyType {
+    return this.overrideFromOptions(AvailablePropertyOptions.type)
   }
 
+  /**
+   * If given property has limited number of available values
+   * it returns them.
+   *
+   * @returns {Array<{value: string, label: string}>}
+   */
   availableValues(): null | Array<{value: string; label: string}> {
-    return this.overrideFromOptions('availableValues', () => {
-      const values = this._property.availableValues()
+    return this.overrideFromOptions(AvailablePropertyOptions.availableValues, () => {
+      const values = this.property.availableValues()
       if (values) {
         return values.map(val => ({ value: val, label: val }))
       }
@@ -109,7 +120,7 @@ class PropertyDecorator {
   /**
    * Indicates if given property should be visible
    *
-   * @param {String} element      it could be either "list", "edit" or "show"
+   * @param {boolean} element      it could be either "list", "edit" or "show"
    */
   isVisible(element): boolean {
     if (typeof this.options.isVisible === 'object') {
@@ -119,18 +130,18 @@ class PropertyDecorator {
       return this.options.isVisible
     }
     if (element === 'edit') {
-      return this._property.isEditable()
+      return this.property.isEditable()
     }
-    return this._property.isVisible()
+    return this.property.isVisible()
   }
 
   /**
    * Position of the field
    *
-   * @return {Number}
+   * @return {number}
    */
   position(): number {
-    return this.overrideFromOptions('position', () => (
+    return this.overrideFromOptions(AvailablePropertyOptions.position, () => (
       this.isTitle() ? -1 : 100
     ))
   }
@@ -138,10 +149,10 @@ class PropertyDecorator {
   /**
    * If property should be treated as an ID field
    *
-   * @return {Boolean}
+   * @return {boolean}
    */
   isId(): boolean {
-    return this.overrideFromOptions('isId')
+    return this.overrideFromOptions(AvailablePropertyOptions.isId)
   }
 
   /**
@@ -149,16 +160,16 @@ class PropertyDecorator {
    * Title field is used as a link to the resource page
    * in the list view and in the breadcrumbs
    *
-   * @return {Boolean}
+   * @return {boolean}
    */
   isTitle(): boolean {
-    return this.overrideFromOptions('isTitle')
+    return this.overrideFromOptions(AvailablePropertyOptions.isTitle)
   }
 
   /**
    * Returns JSON representation of a property
    *
-   * @return {BaseProperty~JSON}
+   * @return {PropertyJSON}
    */
   toJSON(): PropertyJSON {
     return {
@@ -170,10 +181,10 @@ class PropertyDecorator {
       name: this.name(),
       label: this.label(),
       type: this.type(),
-      reference: this._property.reference(),
+      reference: this.property.reference(),
       components: this.options.components,
-      subProperties: this._property.subProperties().map((subProperty) => {
-        const optionKey = `${this._property.name()}.${subProperty.name()}`
+      subProperties: this.property.subProperties().map((subProperty) => {
+        const optionKey = `${this.property.name()}.${subProperty.name()}`
         const decorated = new PropertyDecorator({
           property: subProperty,
           admin: this._admin,
@@ -182,7 +193,7 @@ class PropertyDecorator {
         })
         return decorated.toJSON()
       }),
-      isArray: this._property.isArray(),
+      isArray: this.property.isArray(),
     }
   }
 }

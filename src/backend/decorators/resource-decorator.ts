@@ -10,6 +10,8 @@ import * as ACTIONS from '../actions/index'
 import { ResourceOptions } from './resource-options.interface'
 import CurrentAdmin from '../../current-admin.interface'
 import ResourceJSON from './resource-json.interface'
+import { PropertyPlace } from './property-json.interface'
+import BaseRecord from '../adapters/base-record'
 
 /**
  * Default maximum number of items which should be present in a list.
@@ -17,7 +19,7 @@ import ResourceJSON from './resource-json.interface'
  * @type {Number}
  * @private
  */
-export const DEFAULT_MAX_ITEMS_IN_LIST = 8
+export const DEFAULT_MAX_COLUMNS_IN_LIST = 8
 
 /**
  * Base decorator class which decorates the Resource.
@@ -25,6 +27,10 @@ export const DEFAULT_MAX_ITEMS_IN_LIST = 8
  * @category Decorators
  */
 class ResourceDecorator {
+  public properties: {[key: string]: PropertyDecorator}
+
+  public options: ResourceOptions
+
   public actions: {[key: string]: ActionDecorator}
 
   private _resource: BaseResource
@@ -33,12 +39,8 @@ class ResourceDecorator {
 
   private h: ViewHelpers
 
-  private properties: {[key: string]: PropertyDecorator}
-
-  public options: ResourceOptions
-
   /**
-   * @param  {Object}       options
+   * @param  {object}       options
    * @param  {BaseResource} options.resource  resource which is decorated
    * @param  {AdminBro}     options.admin  current instance of AdminBro
    * @param  {ResourceOptions} [options.options]
@@ -75,11 +77,11 @@ class ResourceDecorator {
   }
 
   /**
-   * Used to create an {@link ResourceDecorator#action} property based on both
+   * Used to create an {@link ActionDecorator} based on both
    * {@link AdminBro.ACTIONS default actions} and actions specified by the user
    * via {@link AdminBroOptions}
    *
-   * @returns {Object<String, ActionDecorator>}
+   * @returns {Record<string, ActionDecorator>}
    */
   decorateActions(): {[key: string]: ActionDecorator} {
     // in the end we merge actions defined by the user with the default actions.
@@ -105,7 +107,7 @@ class ResourceDecorator {
    * Initializes PropertyDecorator for all properties within a resource. When
    * user passess new property in the options - it will be created as well.
    *
-   * @returns {Object<String,PropertyDecorator>}
+   * @returns {Object<string,PropertyDecorator>}
    * @private
    */
   decorateProperties(): {[key: string]: PropertyDecorator} {
@@ -138,7 +140,7 @@ class ResourceDecorator {
 
   /**
    * Returns the name for the resource.
-   * @return {String} resource name
+   * @return {string} resource name
    */
   getResourceName(): string {
     return this.options.name || this._resource.name()
@@ -147,7 +149,7 @@ class ResourceDecorator {
   /**
    * Returns resource parent along with the icon. By default it is a
    * database type with its icon
-   * @return {Object<String,String>} returns { name, icon }
+   * @return {Record<string,string>} returns { name, icon }
    */
   getParent(): {name: string; icon: string} {
     const parent = (
@@ -166,11 +168,11 @@ class ResourceDecorator {
    * @return  {PropertyDecorator}
    * @throws  {ConfigurationError} when there is no property for given key
    */
-  getPropertyByKey(propertyPath): PropertyDecorator {
+  getPropertyByKey(propertyPath: string): PropertyDecorator {
     const property = this.properties[propertyPath]
     if (!property) {
       throw new ConfigurationError(
-        `there is no property by the name of ${propertyPath} in resource ${this.getResourceName()}`,
+        `there is no property by the name of '${propertyPath}' in resource ${this.getResourceName()}`,
         'tutorial-04-customizing-resources.html',
       )
     }
@@ -187,7 +189,10 @@ class ResourceDecorator {
    *
    * @return {Array<PropertyDecorator>}
    */
-  getProperties({ where, max = null }): Array<PropertyDecorator> {
+  getProperties({ where, max = 0 }: {
+    where: PropertyPlace;
+    max?: number;
+  }): Array<PropertyDecorator> {
     const whereProperties = `${where}Properties` // like listProperties, viewProperties etc
     if (this.options[whereProperties] && this.options[whereProperties].length) {
       return this.options[whereProperties].map(this.getPropertyByKey)
@@ -208,7 +213,7 @@ class ResourceDecorator {
   }
 
   getListProperties(): Array<PropertyDecorator> {
-    return this.getProperties({ where: 'list', max: DEFAULT_MAX_ITEMS_IN_LIST })
+    return this.getProperties({ where: PropertyPlace.list, max: DEFAULT_MAX_COLUMNS_IN_LIST })
   }
 
   /**
@@ -264,7 +269,7 @@ class ResourceDecorator {
    *
    * @return  {String}      title of given record
    */
-  titleOf(record): string {
+  titleOf(record: BaseRecord): string {
     return record.param(this.titleProperty().name())
   }
 
@@ -272,7 +277,7 @@ class ResourceDecorator {
    * Returns JSON representation of a resource
    *
    * @param {CurrentAdmin} currentAdmin
-   * @return  {BaseResource~JSON}
+   * @return  {ResourceJSON}
    */
   toJSON(currentAdmin?: CurrentAdmin): ResourceJSON {
     return {
@@ -283,12 +288,18 @@ class ResourceDecorator {
       titleProperty: this.titleProperty().toJSON(),
       resourceActions: this.resourceActions(currentAdmin).map(ra => ra.toJSON()),
       recordActions: this.recordActions(currentAdmin).map(ra => ra.toJSON()),
-      listProperties: this.getProperties({ where: 'list', max: DEFAULT_MAX_ITEMS_IN_LIST }).map(
-        property => property.toJSON(),
-      ),
-      editProperties: this.getProperties({ where: 'edit' }).map(property => property.toJSON()),
-      showProperties: this.getProperties({ where: 'show' }).map(property => property.toJSON()),
-      filterProperties: this.getProperties({ where: 'filter' }).map(property => property.toJSON()),
+      listProperties: this.getProperties({
+        where: PropertyPlace.list, max: DEFAULT_MAX_COLUMNS_IN_LIST,
+      }).map(property => property.toJSON()),
+      editProperties: this.getProperties({
+        where: PropertyPlace.edit,
+      }).map(property => property.toJSON()),
+      showProperties: this.getProperties({
+        where: PropertyPlace.show,
+      }).map(property => property.toJSON()),
+      filterProperties: this.getProperties({
+        where: PropertyPlace.filter,
+      }).map(property => property.toJSON()),
     }
   }
 }

@@ -6,9 +6,9 @@
  */
 class ForbiddenError extends Error {
   /**
-   * @param   {Object} context
-   * @param   {String} context.actionName
-   * @param   {String} context.resourceId
+   * @param   {object} context
+   * @param   {string} context.actionName
+   * @param   {string} context.resourceId
    */
   constructor({ actionName, resourceId }) {
     const msg = `
@@ -21,4 +21,4 @@ class ForbiddenError extends Error {
   }
 }
 
-module.exports = ForbiddenError
+export default ForbiddenError

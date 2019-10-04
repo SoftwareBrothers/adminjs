@@ -1,9 +1,21 @@
-// TODO narrow down the property types to list we support
+import { PropertyType } from '../adapters/base-property'
+
+export enum AvailablePropertyOptions {
+  name = 'name',
+  isVisible = 'isVisible',
+  components = 'components',
+  type = 'type',
+  label = 'label',
+  isId = 'isId',
+  isTitle = 'isTitle',
+  position = 'position',
+  availableValues = 'availableValues',
+}
 
 /**
  * Options passed to a given property
  */
-export interface PropertyOptions {
+export default interface PropertyOptions {
   /**
    * if given property shoyld be visible. It can be either boolean for all possible views, or
    * you can verify which view in particular should be hidden/shown.
@@ -26,7 +38,7 @@ export interface PropertyOptions {
   /**
    * Property type
    */
-  type?: string;
+  type?: PropertyType;
   /**
    * Human readable label of a property
    */
@@ -46,4 +58,15 @@ export interface PropertyOptions {
    * fields gets position = 100.
    */
   position?: number;
+
+  /**
+   * Name of the property
+   */
+  name?: string;
+
+  /**
+   * If options should be limited to finite set. After setting this
+   * in the UI you will see select box instead of the input
+   */
+  availableValues?: Array<{ value: string; label: string }>;
 }

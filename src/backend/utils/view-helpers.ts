@@ -14,7 +14,7 @@ try {
  * Collection of helper methods available in the views
  */
 class ViewHelpers {
-  public options
+  public options: AdminBroOptions
 
   constructor({ options }: { options?: AdminBroOptions } = {}) {
     let opts = options || (globalAny.REDUX_STATE && globalAny.REDUX_STATE.paths)
@@ -29,17 +29,17 @@ class ViewHelpers {
 
   /**
    * To each related path adds rootPath passed by the user, as well as a query string
-   * @param  {String[]} paths   list of parts of the url
-   * @return {String}       path
+   * @param  {Array<string>} paths   list of parts of the url
+   * @return {string}       path
    */
-  urlBuilder(paths): string {
+  urlBuilder(paths: Array<string>): string {
     const { rootPath } = this.options
     return `${rootPath}/${paths.join('/')}`
   }
 
   /**
    * Returns login URL
-   * @return {String}
+   * @return {string}
    */
   loginUrl(): string {
     return this.options.loginPath
@@ -47,7 +47,7 @@ class ViewHelpers {
 
   /**
    * Returns logout URL
-   * @return {String}
+   * @return {string}
    */
   logoutUrl(): string {
     return this.options.logoutPath
@@ -63,26 +63,54 @@ class ViewHelpers {
 
   /**
    * Returns URL for the dashboard
-   * @return {String}
+   * @return {string}
    */
   dashboardUrl(): string {
     return this.options.rootPath
   }
 
-  resourceActionUrl({ resourceId, actionName }): string {
+  /**
+   * Returns resourceAction url
+   *
+   * @param   {object}  options
+   * @param   {string}  options.resourceId
+   * @param   {string}  options.actionName
+   *
+   * @return  {string}
+   */
+  resourceActionUrl({ resourceId, actionName }: {
+    resourceId: string;
+    actionName: string;
+  }): string {
     return this.urlBuilder(['resources', resourceId, 'actions', actionName])
   }
 
-  recordActionUrl({ resourceId, recordId, actionName }): string {
+  /**
+   * Returns recordAction url
+   *
+   * @param   {object}  options
+   * @param   {string}  options.resourceId
+   * @param   {string}  options.recordId
+   * @param   {string}  options.actionName
+   *
+   * @return  {string}
+   */
+  recordActionUrl({ resourceId, recordId, actionName }: {
+    resourceId: string;
+    actionName: string;
+    recordId: string;
+  }): string {
     return this.urlBuilder(['resources', resourceId, 'records', recordId, actionName])
   }
 
   /**
-   * Returns absolute path to a given asset
-   * @param  {String} asset
-   * @return {String}
+   * Returns absolute path to a given asset.
+   * @private
+   *
+   * @param  {string} asset
+   * @return {string}
    */
-  assetPath(asset): string {
+  assetPath(asset: string): string {
     return this.urlBuilder(['frontend', 'assets', asset])
   }
 }

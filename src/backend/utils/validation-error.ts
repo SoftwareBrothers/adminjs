@@ -1,3 +1,8 @@
+type ErrorMessage = {
+  message: string;
+  kind: string;
+}
+
 /**
  * Error which is thrown when there are validation errors with records
  * @category Errors
@@ -8,11 +13,11 @@ class ValidationError extends Error {
   /**
    * @param  {String} message   custom message
    * @param  {Object} errors    error messages
-   * @param  {String} errors.attributePath    error for particular field
-   * @param  {String} errors.attributePath.message   human readible message
-   * @param  {String} errors.attributePath.kind      string type (i.e. required)
+   * @param  {String} errors.{...}    error for particular field where ... is a {@link BaseProperty#path}
+   * @param  {String} errors.{...}.message   human readible message
+   * @param  {String} errors.{...}.kind      string type (i.e. required)
    */
-  constructor(message, errors) {
+  constructor(message: string, errors: {[key: string]: ErrorMessage}) {
     super(message)
     this.errors = errors
     this.message = message || 'Resource cannot be stored because of validation errors'

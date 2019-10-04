@@ -1,6 +1,6 @@
 import { DOCS } from '../../constants'
 
-const buildUrl = (fnName) => {
+const buildUrl = (fnName: string): string => {
   if (fnName) {
     let obj
     let fn
@@ -25,7 +25,7 @@ export default class NotImplementedError extends Error {
    * @param   {string}  fnName  name of the function, base on which error will
    * print on the output link to the method documentation.
    */
-  constructor(fnName) {
+  constructor(fnName: string) {
     const message = `
     You have to implement the method: ${fnName}
     Check out the documentation at: ${buildUrl(fnName)}
