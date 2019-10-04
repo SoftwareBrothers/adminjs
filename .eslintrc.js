@@ -15,6 +15,7 @@ module.exports = {
         'sourceType': 'module'
     },
     'rules': {
+        "react/jsx-filename-extension": 'off',
         '@typescript-eslint/no-explicit-any': 'off',
         'indent': [
             'error',
@@ -46,7 +47,6 @@ module.exports = {
             'no-unused-expressions': 'off',
             'func-names': 'off',
             'prefer-arrow-callback': 'off',
-            "react/jsx-filename-extension": 'off'
           }
         },
         {
@@ -55,6 +55,12 @@ module.exports = {
               "@typescript-eslint/explicit-function-return-type": 'off'
             }
         },
+        {
+            files: ['*.tsx'],
+            rules: {
+              "react/prop-types": 'off'
+            }
+        }
     ],
     globals: {
         'expect': true,

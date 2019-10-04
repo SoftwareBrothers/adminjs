@@ -1,18 +1,18 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
 import ActionButton from './action-button'
 import PropertyType from '../property-type'
 import Dropdown from '../ui/dropdown'
 import Placeholder from '../ui/placeholder'
-import { resourceType, recordType } from '../../types'
+import ResourceJSON from '../../../backend/decorators/resource-json.interface'
+import RecordJSON from '../../../backend/decorators/record-json.interface'
 
 const Td = styled.td`
   &&& {
-    color: ${({ theme }) => theme.colors.defaultText};
+    color: ${({ theme }): string => theme.colors.defaultText};
     & a:not(.in-dropdown) {
-      color: ${({ theme }) => theme.colors.primary};
+      color: ${({ theme }): string => theme.colors.primary};
     }
     &.main {
       font-weight: bold;
@@ -20,10 +20,17 @@ const Td = styled.td`
   }
 `
 
-export default class RecordInList extends React.PureComponent {
-  render() {
+interface Props {
+  resource: ResourceJSON;
+  record: RecordJSON;
+  actionPerformed: () => any;
+  isLoading: boolean;
+}
+
+export default class RecordInList extends React.PureComponent<Props> {
+  render(): React.ReactChild {
     const { resource, record, actionPerformed, isLoading } = this.props
-    const { recordActions } = resource
+    const { recordActions } = record
     return (
       <tr>
         {resource.listProperties.map(property => (
@@ -60,11 +67,4 @@ export default class RecordInList extends React.PureComponent {
       </tr>
     )
   }
-}
-
-RecordInList.propTypes = {
-  resource: resourceType.isRequired,
-  record: recordType.isRequired,
-  actionPerformed: PropTypes.func.isRequired,
-  isLoading: PropTypes.bool.isRequired,
 }

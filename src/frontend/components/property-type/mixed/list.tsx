@@ -1,13 +1,23 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 
 import ViewHelpers from '../../../../backend/utils/view-helpers'
-import { propertyType, recordType, resourceType } from '../../../types'
 import Label from '../../ui/label'
+import PropertyJSON from '../../../../backend/decorators/property-json.interface'
+import RecordJSON from '../../../../backend/decorators/record-json.interface'
+import ResourceJSON from '../../../../backend/decorators/resource-json.interface'
 
-export default class List extends React.PureComponent {
-  renderItems() {
+interface Props {
+  property: PropertyJSON;
+  ItemComponent: typeof React.Component;
+  record: RecordJSON;
+  resource: ResourceJSON;
+}
+
+// TODO define ItemComponent interface
+
+export default class List extends React.PureComponent<Props> {
+  renderItems(): React.ReactChild {
     const { property, ItemComponent } = this.props
     return (
       <React.Fragment>
@@ -25,9 +35,9 @@ export default class List extends React.PureComponent {
     )
   }
 
-  render() {
+  render(): React.ReactChild {
     const { property, record, resource } = this.props
-    const showAction = resource.recordActions.find(a => a.name === 'show')
+    const showAction = record.recordActions.find(a => a.name === 'show')
 
     if (resource.titleProperty.name === property.name && showAction) {
       const h = new ViewHelpers()
@@ -40,11 +50,4 @@ export default class List extends React.PureComponent {
     }
     return this.renderItems()
   }
-}
-
-List.propTypes = {
-  property: propertyType.isRequired,
-  record: recordType.isRequired,
-  resource: resourceType.isRequired,
-  ItemComponent: PropTypes.elementType.isRequired,
 }

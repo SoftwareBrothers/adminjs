@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
 import { childrenType } from '../../types'
@@ -34,10 +35,15 @@ const Label = props => (<StyledLabel {...props} />)
 
 Label.propTypes = {
   children: childrenType,
+  style: PropTypes.objectOf(PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number,
+  ])),
 }
 
 Label.defaultProps = {
   children: null,
+  style: null,
 }
 
 export default Label

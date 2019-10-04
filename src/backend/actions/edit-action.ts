@@ -28,7 +28,7 @@ const EditAction: Action = {
   handler: async (request, response, data): Promise<EditActionResponse> => {
     const { record } = data
     if (request.method === 'get') {
-      return { record: record.toJSON() }
+      return { record: record.toJSON(data.currentAdmin) }
     }
     await record.update(request.payload.record)
     if (record.isValid()) {
@@ -36,10 +36,10 @@ const EditAction: Action = {
         redirectUrl: data.h.recordActionUrl({
           resourceId: data.resource.id(), recordId: record.id(), actionName: 'show',
         }),
-        record: record.toJSON(),
+        record: record.toJSON(data.currentAdmin),
       }
     }
-    return { record: record.toJSON() }
+    return { record: record.toJSON(data.currentAdmin) }
   },
 }
 

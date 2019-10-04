@@ -36,10 +36,6 @@ export default interface ResourceJSON {
    */
   titleProperty: PropertyJSON;
   /**
-   * All actions which are available for records of given resource
-   */
-  recordActions: Array<ActionJSON>;
-  /**
    * All actions available for entire resource
    */
   resourceActions: Array<ActionJSON>;

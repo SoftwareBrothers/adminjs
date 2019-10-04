@@ -53,7 +53,8 @@ class ApiController {
     const resource = this._admin.findResource(resourceId)
     let action
     if (recordId) {
-      action = resource.decorate().recordActions(this.currentAdmin).find(a => a.name === actionName)
+      const record = await resource.findOne(recordId)
+      action = resource.decorate().recordActions(record, this.currentAdmin).find(a => a.name === actionName)
     } else {
       action = resource.decorate().resourceActions(this.currentAdmin).find(a => a.name === actionName)
     }
@@ -93,7 +94,7 @@ class ApiController {
     })
 
     return {
-      records: records.map(record => record.toJSON()),
+      records: records.map(record => record.toJSON(this.currentAdmin)),
     }
   }
 

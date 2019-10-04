@@ -1,5 +1,4 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import styled from 'styled-components'
 
@@ -11,6 +10,10 @@ import Notice from '../app/notice'
 import { resourceType, matchType, pathsType } from '../../types'
 import BaseActionComponent from '../app/base-action-component'
 import ApiClient from '../../utils/api-client'
+import { RouteComponentProps } from 'react-router'
+import { RecordActionParams } from '../../../backend/utils/view-helpers'
+import ResourceJSON from '../../../backend/decorators/resource-json.interface'
+import RecordJSON from '../../../backend/decorators/record-json.interface'
 
 const ContainerRecord = styled.div`
   display: flex;
@@ -22,7 +25,16 @@ const NoticeWrapper = styled.div`
   position: relative;
 `
 
-class RecordAction extends React.Component {
+interface State {
+  record: RecordJSON;
+  isLoading: boolean;
+}
+
+interface Props extends RouteComponentProps<RecordActionParams> {
+  resources: Array<ResourceJSON>;
+}
+
+class RecordAction extends React.Component<Props, State> {
   constructor(props) {
     super(props)
     this.state = {
@@ -36,7 +48,7 @@ class RecordAction extends React.Component {
     this.fetchRecord(match.params)
   }
 
-  shouldComponentUpdate(newProps) {
+  shouldComponentUpdate(newProps: Props) {
     const { match } = this.props
     const { actionName, recordId, resourceId } = match.params
     if (newProps.match.params.actionName !== actionName
@@ -52,11 +64,12 @@ class RecordAction extends React.Component {
   getResourceAndAction(name = null) {
     const { match, resources } = this.props
     const { resourceId, actionName } = match.params
+    const { record } = this.state
 
     const nameToCheck = name || actionName
 
     const resource = resources.find(r => r.id === resourceId)
-    const action = resource.recordActions.find(r => r.name === nameToCheck)
+    const action = record && record.recordActions.find(r => r.name === nameToCheck)
     return { resource, action }
   }
 
@@ -79,7 +92,7 @@ class RecordAction extends React.Component {
   }
 
   render() {
-    const { match, paths } = this.props
+    const { match } = this.props
     const { actionName, recordId } = match.params
     const { record, isLoading } = this.state
 
@@ -91,11 +104,16 @@ class RecordAction extends React.Component {
           <Notice />
         </NoticeWrapper>
         <WrapperBox>
-          <Breadcrumbs resource={resource} actionName={actionName} />
+          <Breadcrumbs
+            resource={resource}
+            actionName={actionName}
+            record={record}
+          />
           <ActionHeader
             resource={resource}
             recordId={recordId}
             action={action}
+            record={record}
           />
           {isLoading
             ? <Loader />
@@ -104,7 +122,6 @@ class RecordAction extends React.Component {
                 action={action}
                 resource={resource}
                 record={record}
-                paths={paths}
               />
             )
           }
@@ -116,14 +133,8 @@ class RecordAction extends React.Component {
 
 
 const mapStateToProps = state => ({
-  paths: state.paths,
   resources: state.resources,
 })
 
-RecordAction.propTypes = {
-  resources: PropTypes.arrayOf(resourceType).isRequired,
-  match: matchType.isRequired,
-  paths: pathsType.isRequired,
-}
 
 export default connect(mapStateToProps)(RecordAction)

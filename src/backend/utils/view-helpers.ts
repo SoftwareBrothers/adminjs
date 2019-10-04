@@ -11,6 +11,23 @@ try {
 }
 
 /**
+ * Params for a record action
+ */
+export interface RecordActionParams {
+  resourceId: string;
+  actionName: string;
+  recordId: string;
+}
+
+/**
+ * Params for a resource action
+ */
+export interface ResourceActionParams {
+  resourceId: string;
+  actionName: string;
+}
+
+/**
  * Collection of helper methods available in the views
  */
 class ViewHelpers {
@@ -78,10 +95,7 @@ class ViewHelpers {
    *
    * @return  {string}
    */
-  resourceActionUrl({ resourceId, actionName }: {
-    resourceId: string;
-    actionName: string;
-  }): string {
+  resourceActionUrl({ resourceId, actionName }: ResourceActionParams): string {
     return this.urlBuilder(['resources', resourceId, 'actions', actionName])
   }
 
@@ -95,11 +109,7 @@ class ViewHelpers {
    *
    * @return  {string}
    */
-  recordActionUrl({ resourceId, recordId, actionName }: {
-    resourceId: string;
-    actionName: string;
-    recordId: string;
-  }): string {
+  recordActionUrl({ resourceId, recordId, actionName }: RecordActionParams): string {
     return this.urlBuilder(['resources', resourceId, 'records', recordId, actionName])
   }
 

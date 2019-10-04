@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
+import { childrenType } from '../../types'
 
 const Btn = styled(Link).attrs(({ primary }) => ({
   className: `button${primary ? ' is-primary' : ''}`,
@@ -92,10 +93,15 @@ StyledButton.propTypes = {
    * If button should be presented as a primary action
    */
   primary: PropTypes.bool,
+  children: childrenType.isRequired,
+  onClick: PropTypes.func,
+  as: PropTypes.string,
 }
 
 StyledButton.defaultProps = {
   primary: undefined,
+  onClick: () => {},
+  as: null,
 }
 
 export default StyledButton

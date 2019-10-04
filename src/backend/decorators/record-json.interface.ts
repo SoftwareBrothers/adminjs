@@ -1,3 +1,6 @@
+import ActionDecorator from './action-decorator'
+import ActionJSON from './action-json.interface'
+
 type ErrorMessage = { message: string }
 
 /**
@@ -24,6 +27,10 @@ export default interface RecordJSON {
    * Title of an record
    */
   title: string;
+  /**
+   * Actions which can be performed on this record
+   */
+  recordActions: Array<ActionJSON>;
 }
 
 // TODO: describe flatten params

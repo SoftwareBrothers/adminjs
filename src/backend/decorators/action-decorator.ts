@@ -5,6 +5,7 @@ import BaseResource from '../adapters/base-resource'
 import Action, { IsFunction } from '../actions/action.interface'
 import CurrentAdmin from '../../current-admin.interface'
 import ActionJSON from './action-json.interface'
+import BaseRecord from '../adapters/base-record'
 
 /**
  * Decorates an action
@@ -80,7 +81,7 @@ class ActionDecorator {
     return this.action.actionType.includes('resource')
   }
 
-  is(what: 'isAccessible' | 'isVisible', currentAdmin?: CurrentAdmin): boolean {
+  is(what: 'isAccessible' | 'isVisible', currentAdmin?: CurrentAdmin, record?: BaseRecord): boolean {
     if (!['isAccessible', 'isVisible'].includes(what)) {
       throw new Error(`'what' has to be either "isAccessible" or "isVisible". You gave ${what}`)
     }
@@ -88,6 +89,7 @@ class ActionDecorator {
     if (typeof this.action[what] === 'function') {
       isAction = (this.action[what] as IsFunction)({
         resource: this._resource,
+        record,
         action: this,
         h: this.h,
         currentAdmin,
@@ -103,22 +105,24 @@ class ActionDecorator {
 
   /**
    * Is action visible in the UI
-   * @param {CurrentAdmin} currentAdmin   currently logged in admin user
+   * @param {CurrentAdmin} [currentAdmin]   currently logged in admin user
+   * @param {BaseRecord} [record]
    *
    * @return  {Boolean}
    */
-  isVisible(currentAdmin?: CurrentAdmin): boolean {
-    return this.is('isVisible', currentAdmin)
+  isVisible(currentAdmin?: CurrentAdmin, record?: BaseRecord): boolean {
+    return this.is('isVisible', currentAdmin, record)
   }
 
   /**
    * Is action accessible
    *
-   * @param {CurrentAdmin} currentAdmin   currently logged in admin user
+   * @param {CurrentAdmin} [currentAdmin]   currently logged in admin user
+   * @param {BaseRecord} [record]
    * @return  {Boolean}
    */
-  isAccessible(currentAdmin?: CurrentAdmin): boolean {
-    return this.is('isAccessible', currentAdmin)
+  isAccessible(currentAdmin?: CurrentAdmin, record?: BaseRecord): boolean {
+    return this.is('isAccessible', currentAdmin, record)
   }
 
   /**

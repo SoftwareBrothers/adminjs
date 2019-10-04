@@ -113,7 +113,7 @@ class ApiClient {
     resourceId: string;
     actionName: string;
     payload?: {[key: string]: any};
-    method: 'POST' | 'GET';
+    method?: 'POST' | 'GET';
     params?: {[key: string]: any};
   }): Promise<any> {
     const response = await this.client.request({

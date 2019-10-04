@@ -33,10 +33,10 @@ const NewAction: Action = {
           redirectUrl: data.h.recordActionUrl({
             resourceId: data.resource.id(), recordId: record.id(), actionName: 'show',
           }),
-          record: record.toJSON(),
+          record: record.toJSON(data.currentAdmin),
         }
       }
-      return { record: record.toJSON() }
+      return { record: record.toJSON(data.currentAdmin) }
     }
     // TODO: add wrong implementation error
     throw new Error('new action can be invoked only via `post` http method')

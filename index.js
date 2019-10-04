@@ -9,7 +9,7 @@ if (process.env.ADMIN_BRO_DEV_ENV) {
       require.resolve('@babel/preset-typescript'),
     ],
     plugins: [require.resolve('babel-plugin-styled-components')],
-    extensions: ['.jsx', '.js', '.ts'],
+    extensions: ['.jsx', '.js', '.ts', '.tsx'],
   })
   AdminBro = require('./src/admin-bro').default
   AdminBro.BaseProperty = require('./src/backend/adapters/base-property').default

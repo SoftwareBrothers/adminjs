@@ -1,5 +1,4 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 
@@ -8,13 +7,15 @@ import StyledButton from '../ui/styled-button'
 
 import ViewHelpers from '../../../backend/utils/view-helpers'
 
-import { resourceType, actionType } from '../../types'
+import ResourceJSON from '../../../backend/decorators/resource-json.interface'
+import ActionJSON from '../../../backend/decorators/action-json.interface'
+import RecordJSON from '../../../backend/decorators/record-json.interface'
 
 const HeaderWrapper = styled.section.attrs({
   className: 'level',
 })`
   &&& {
-    margin-bottom: ${({ theme }) => theme.sizes.padding};
+    margin-bottom: ${({ theme }): string => theme.sizes.padding};
   }
 `
 
@@ -22,25 +23,25 @@ const Tag = styled.span.attrs({
   className: 'tag',
 })`
   &&& {
-    background: ${({ theme }) => theme.colors.primary};
+    background: ${({ theme }): string => theme.colors.primary};
     color: #fff;
-    margin-left: ${({ theme }) => theme.sizes.padding};
+    margin-left: ${({ theme }): string => theme.sizes.padding};
   }
 `
 
 const BackBtn = styled(Link)`
   &&& {
     border-radius: 50%;
-    width: ${({ theme }) => theme.sizes.paddingLayout};
-    height: ${({ theme }) => theme.sizes.paddingLayout};
-    color: ${({ theme }) => theme.colors.lightText};
-    font-size: ${({ theme }) => theme.fonts.base};
-    padding: ${({ theme }) => theme.sizes.paddingMin};
-    background-color: ${({ theme }) => theme.colors.superLightBack};
+    width: ${({ theme }): string => theme.sizes.paddingLayout};
+    height: ${({ theme }): string => theme.sizes.paddingLayout};
+    color: ${({ theme }): string => theme.colors.lightText};
+    font-size: ${({ theme }): string => theme.fonts.base};
+    padding: ${({ theme }): string => theme.sizes.paddingMin};
+    background-color: ${({ theme }): string => theme.colors.superLightBack};
     text-align: center;
-    margin-right: ${({ theme }) => theme.sizes.padding};
+    margin-right: ${({ theme }): string => theme.sizes.padding};
     &:hover{
-      background-color: ${({ theme }) => theme.colors.lightText};
+      background-color: ${({ theme }): string => theme.colors.lightText};
       color: #fff;
     }
   }
@@ -50,7 +51,7 @@ const HeaderTitle = styled.h1.attrs({
   className: 'level-left',
 })`
   &&& {
-    font-size: ${({ theme }) => theme.fonts.header};
+    font-size: ${({ theme }): string => theme.fonts.header};
     font-weight: normal;
   }
 `
@@ -59,34 +60,40 @@ const HeaderButtons = styled.div.attrs({
   className: 'level-right',
 })`
   &&& a {
-    margin-left: ${({ theme }) => theme.sizes.padding};
+    margin-left: ${({ theme }): string => theme.sizes.padding};
   }
 `
+
+/**
+ * @memberof ActionHeader
+ * @private
+ */
+interface Props {
+  resource: ResourceJSON;
+  record: RecordJSON | null;
+  toggleFilter?: () => any;
+  actionPerformed?: () => any;
+  recordId: string;
+  action?: ActionJSON;
+  tag?: string;
+}
 
 /**
  * Header of an action
  *
  * @private
  * @component
- * var recordAction = {
- *     actionType: 'record',
- *     icon: 'fas fa-edit',
- *     isVisible: true,
- *     label: 'Action',
- *     name: 'action'
- * };
- *
  */
-const ActionHeader = (props) => {
+const ActionHeader: React.FC<Props> = (props) => {
   const h = new ViewHelpers()
   const {
-    resource, toggleFilter, actionPerformed, recordId, action, tag,
+    resource, toggleFilter, actionPerformed, record, action, tag, recordId,
   } = props
   const resourceId = resource.id
-  let actions = recordId ? resource.recordActions : resource.resourceActions
+  let actions = record ? record.recordActions : resource.resourceActions
 
   // list action is not accessible via the ActionHeader buttons
-  actions = actions.filter(ra => ![action.name, 'list'].includes(ra.name))
+  actions = actions && actions.filter(ra => ![action && action.name, 'list'].includes(ra.name))
 
   const title = action ? action.label : resource.name
   const isList = action && action.name === 'list'
@@ -124,23 +131,6 @@ const ActionHeader = (props) => {
       </HeaderButtons>
     </HeaderWrapper>
   )
-}
-
-ActionHeader.propTypes = {
-  resource: resourceType.isRequired,
-  toggleFilter: PropTypes.func,
-  actionPerformed: PropTypes.func,
-  recordId: PropTypes.string,
-  action: actionType,
-  tag: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-}
-
-ActionHeader.defaultProps = {
-  toggleFilter: null,
-  actionPerformed: null,
-  recordId: null,
-  action: null,
-  tag: null,
 }
 
 export default ActionHeader

@@ -25,7 +25,7 @@ const ShowAction: Action = {
    * @implements ActionHandler
    */
   handler: async (request, response, data): Promise<ShowActionResponse> => ({
-    record: data.record.toJSON(),
+    record: data.record.toJSON(data.currentAdmin),
   }),
 }
 

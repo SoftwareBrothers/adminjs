@@ -112,7 +112,6 @@ const types = {
  *   id: 'User',
  *   name: 'User Model',
  *   titleProperty: 'name',
- *   recordActions: [],
  *   resourceActions: [],
  *   listProperties: [booleanProperty, stringProperty],
  *   editProperties: [booleanProperty, stringProperty],
@@ -126,7 +125,8 @@ const types = {
  *   params: {
  *     name: 'John',
  *     gender: 'male',
- *   }
+ *   },
+ *   recordActions: [],
  * }
  *
  * return (

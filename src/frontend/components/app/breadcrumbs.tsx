@@ -1,27 +1,45 @@
-import React from 'react'
-import PropTypes from 'prop-types'
+import React, { ReactChild } from 'react'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 
-import { resourceType, recordType } from '../../types'
+import ResourceJSON from '../../../backend/decorators/resource-json.interface'
+import RecordJSON from '../../../backend/decorators/record-json.interface'
 
 const BreadcrumbsContainer = styled.nav.attrs({
   className: 'breadcrumb',
 })`
   &&& {
-    margin: ${({ theme }) => `-${theme.sizes.padding} 0 ${theme.sizes.padding} -10px`};
-    font-size: ${({ theme }) => theme.fonts.base};
+    margin: ${({ theme }): string => `-${theme.sizes.padding} 0 ${theme.sizes.padding} -10px`};
+    font-size: ${({ theme }): string => theme.fonts.base};
   }
 `
 
 const BreadcrumbLink = styled(Link)`
   &&& {
-    color: ${({ theme }) => theme.colors.lightText};
+    color: ${({ theme }): string => theme.colors.lightText};
     &:hover {
-      color: ${({ theme }) => theme.colors.primary};
+      color: ${({ theme }): string => theme.colors.primary};
     }
   }
 `
+
+/**
+ * Props
+ */
+interface Props {
+  /**
+   * Resource
+   */
+  resource: ResourceJSON;
+  /**
+   * record
+   */
+  record: RecordJSON | null;
+  /**
+   * Name of an action
+   */
+  actionName: string;
+}
 
 /**
  * @private
@@ -37,19 +55,19 @@ const BreadcrumbLink = styled(Link)`
  *   resource: {
  *     href: '/admin/xxxx',
  *     name: 'resource name',
- *     recordActions: [recordAction],
  *     resourceActions: [],
  *   },
  *   record: {
  *     id: 'some-record',
  *     name: 'some-name',
+ *     recordActions: [recordAction],
  *     params: {},
  *   },
  *   actionName: recordAction.name,
  * }
  */
-class Breadcrumbs extends React.PureComponent {
-  renderResource() {
+class Breadcrumbs extends React.PureComponent<Props> {
+  renderResource(): React.ReactChild {
     const { resource, record } = this.props
     return (
       <li>
@@ -60,11 +78,11 @@ class Breadcrumbs extends React.PureComponent {
     )
   }
 
-  renderAction() {
-    const { actionName, resource } = this.props
+  renderAction(): ReactChild {
+    const { actionName, resource, record } = this.props
     const action = resource.resourceActions.find(a => a.name === actionName)
-      || resource.recordActions.find(a => a.name === actionName)
-    if (actionName) {
+      || (record && record.recordActions.find(a => a.name === actionName))
+    if (action) {
       return (
         <li className="is-active">
           <BreadcrumbLink href="#">{action.label}</BreadcrumbLink>
@@ -74,7 +92,7 @@ class Breadcrumbs extends React.PureComponent {
     return null
   }
 
-  render() {
+  render(): ReactChild {
     return (
       <BreadcrumbsContainer>
         <ul>
@@ -84,17 +102,6 @@ class Breadcrumbs extends React.PureComponent {
       </BreadcrumbsContainer>
     )
   }
-}
-
-Breadcrumbs.propTypes = {
-  resource: resourceType.isRequired,
-  record: recordType,
-  actionName: PropTypes.string,
-}
-
-Breadcrumbs.defaultProps = {
-  record: null,
-  actionName: null,
 }
 
 export default Breadcrumbs

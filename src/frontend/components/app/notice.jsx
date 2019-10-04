@@ -6,7 +6,7 @@ import { connect } from 'react-redux'
 import { dropNotice, setNoticeProgress } from '../../store/store'
 import { noticeType } from '../../types'
 
-const TIME_TO_DISAPPEAR = 10
+const TIME_TO_DISAPPEAR = 3
 
 const NoticeWrapper = styled.div.attrs({
   className: 'notification',

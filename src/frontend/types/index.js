@@ -17,7 +17,7 @@ export const brandingType = PropTypes.shape({
 })
 
 const propertyTypeShape = {
-  isId: PropTypes.bool.default,
+  isId: PropTypes.bool.isRequired,
   isSortable: PropTypes.bool.isRequired,
   isTitle: PropTypes.bool.isRequired,
   label: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
@@ -82,7 +82,6 @@ export const resourceType = PropTypes.shape({
   listProperties: PropTypes.arrayOf(propertyType).isRequired,
   name: PropTypes.string.isRequired,
   parent: resourceParentType.isRequired,
-  recordActions: PropTypes.arrayOf(actionType).isRequired,
   resourceActions: PropTypes.arrayOf(actionType).isRequired,
   showProperties: PropTypes.arrayOf(propertyType).isRequired,
   titleProperty: propertyType.isRequired,
@@ -100,6 +99,7 @@ export const recordType = PropTypes.shape({
   errors: PropTypes.object,
   id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   title: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  recordActions: PropTypes.arrayOf(actionType).isRequired,
 })
 
 export const locationType = PropTypes.shape({

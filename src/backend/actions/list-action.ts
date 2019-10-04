@@ -67,7 +67,7 @@ const ListAction: Action = {
         direction: sort.direction,
         sortBy: sort.sortBy,
       },
-      records: populatedRecords.map(r => r.toJSON()),
+      records: populatedRecords.map(r => r.toJSON(data.currentAdmin)),
     }
   },
 }
