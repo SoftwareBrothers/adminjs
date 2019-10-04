@@ -205,7 +205,9 @@ class BaseRecord {
       errors: this.errors,
       id: this.id(),
       title: this.resource.decorate().titleOf(this),
-      recordActions: this.resource.decorate().recordActions(this, currentAdmin).map(ra => ra.toJSON()),
+      recordActions: this.resource.decorate().recordActions(
+        this, currentAdmin,
+      ).map(ra => ra.toJSON()),
     }
   }
 }
