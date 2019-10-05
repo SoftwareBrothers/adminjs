@@ -178,7 +178,7 @@ class AdminBro {
   }
 
   /**
-   * Requires given jsx file, that it can be bundled to the frontend.
+   * Requires given .jsx/.tsx file, that it can be bundled to the frontend.
    * It will be available under AdminBro.UserComponents[componentId].
    *
    * @param   {String}  src  path to a file containing react component.

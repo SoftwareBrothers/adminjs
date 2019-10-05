@@ -3,7 +3,7 @@ import _ from 'lodash'
 import BaseResource from './base-resource'
 import ValidationError from '../utils/validation-error'
 import RecordJSON from '../decorators/record-json.interface'
-import CurrentAdmin from '../../current-admin.interface'
+import { CurrentAdmin } from '../../current-admin.interface'
 
 /**
  * Representation of an particular ORM/ODM Record in given Resource in AdminBro

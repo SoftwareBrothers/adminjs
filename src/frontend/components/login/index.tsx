@@ -1,5 +1,4 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import styled, { createGlobalStyle } from 'styled-components'
 
 import WrapperBox from '../ui/wrapper-box'
@@ -10,12 +9,12 @@ const GlobalStyle = createGlobalStyle`
   html, body, #app {
     width: 100%;
     height: 100%;
-    background: ${({ theme }) => theme.colors.superDarkBck};
-    font-size: ${({ theme }) => theme.fonts.base};
+    background: ${({ theme }): string => theme.colors.superDarkBck};
+    font-size: ${({ theme }): string => theme.fonts.base};
   }
 
   a {
-    color: ${({ theme }) => theme.colors.primary};
+    color: ${({ theme }): string => theme.colors.primary};
   }
 `
 
@@ -30,18 +29,23 @@ const FlexWrapper = styled.section`
 const LoginBox = styled.section`
   width: 414px;
   & ${StyledButton} {
-    margin: ${({ theme }) => theme.sizes.paddingLayout} 0;
+    margin: ${({ theme }): string => theme.sizes.paddingLayout} 0;
   }
 
   & .content {
     text-align: center;
-    border-bottom: 1px solid ${({ theme }) => theme.colors.border};
-    margin: ${({ theme }) => `0 -${theme.sizes.paddingLayout} ${theme.sizes.paddingLayout}`};
-    padding-bottom: ${({ theme }) => theme.sizes.paddingLayout};
+    border-bottom: 1px solid ${({ theme }): string => theme.colors.border};
+    margin: ${({ theme }): string => `0 -${theme.sizes.paddingLayout} ${theme.sizes.paddingLayout}`};
+    padding-bottom: ${({ theme }): string => theme.sizes.paddingLayout};
   }
 `
 
-const Login = (props) => {
+type Props = {
+  message: string;
+  action: string;
+}
+
+const Login: React.FC<Props> = (props) => {
   const { action, message } = props
   const email = { name: 'email', label: 'Your email' }
   const password = { name: 'password', label: 'Password' }
@@ -58,10 +62,10 @@ const Login = (props) => {
             </div>
             {message && <div className="notification is-danger">{message}</div>}
             <form action={action} method="POST" style={{ marginBottom: 30 }}>
-              <PropertyInEdit property={email} className="field">
+              <PropertyInEdit property={email}>
                 <input type="text" name="email" id="email" placeholder="Your Email Address" className="input" />
               </PropertyInEdit>
-              <PropertyInEdit property={password} className="field">
+              <PropertyInEdit property={password}>
                 <input type="password" name="password" id="password" placeholder="Password" className="input" />
               </PropertyInEdit>
               <StyledButton as="button" type="submit" className="is-primary is-fullwidth" style={{ marginTop: 40 }}>
@@ -73,15 +77,6 @@ const Login = (props) => {
       </FlexWrapper>
     </React.Fragment>
   )
-}
-
-Login.propTypes = {
-  message: PropTypes.string,
-  action: PropTypes.string.isRequired,
-}
-
-Login.defaultProps = {
-  message: null,
 }
 
 export default Login

@@ -4,7 +4,7 @@ import componentsBundler from '../bundler/user-components-bundler'
 import layoutTemplate from '../../frontend/layout-template'
 import { ActionRequest } from '../actions/action.interface'
 import AdminBro from '../../admin-bro'
-import CurrentAdmin from '../../current-admin.interface'
+import { CurrentAdmin } from '../../current-admin.interface'
 
 export default class AppController {
   private _admin: AdminBro

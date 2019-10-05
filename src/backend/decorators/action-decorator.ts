@@ -3,7 +3,7 @@ import ViewHelpers from '../utils/view-helpers'
 import AdminBro from '../../admin-bro'
 import BaseResource from '../adapters/base-resource'
 import Action, { IsFunction } from '../actions/action.interface'
-import CurrentAdmin from '../../current-admin.interface'
+import { CurrentAdmin } from '../../current-admin.interface'
 import ActionJSON from './action-json.interface'
 import BaseRecord from '../adapters/base-record'
 
@@ -25,7 +25,7 @@ class ActionDecorator {
 
   /**
    * @param {Object}        params
-   * @param {BaseAction}    params.action
+   * @param {Action}    params.action
    * @param {BaseResource}  params.resource
    * @param {AdminBro}      params.admin  current instance of AdminBro
    */
@@ -33,7 +33,7 @@ class ActionDecorator {
     if (!action.actionType) {
       throw new ConfigurationError(
         `action: "${action.name}" does not have an "actionType" property`,
-        'BaseAction',
+        'Action',
       )
     }
     this.name = action.name
@@ -43,7 +43,7 @@ class ActionDecorator {
 
     /**
      * Original action object
-     * @type {BaseAction}
+     * @type {Action}
      */
     this.action = action
   }

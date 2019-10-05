@@ -1,4 +1,6 @@
 import * as flat from 'flat'
+import PropertyJSON from '../../../../backend/decorators/property-json.interface'
+import RecordJSON from '../../../../backend/decorators/record-json.interface'
 
 /**
  * Converts flatten params to array items when given property is an array.
@@ -22,7 +24,7 @@ import * as flat from 'flat'
  *
  * @private
  */
-const convertParamsToArrayItems = (property, record) => {
+const convertParamsToArrayItems = (property: PropertyJSON, record: RecordJSON): Array<string> => {
   const tempName = 'arrayField'
   const regex = new RegExp(`^${property.name}`)
   /**

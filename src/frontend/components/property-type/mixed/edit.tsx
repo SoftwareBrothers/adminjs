@@ -1,11 +1,14 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 
 import PropertyInEdit from '../../ui/property-in-edit'
-import { simplifiedPropertyType, recordType } from '../../../types'
 import StyledSection from '../../ui/styled-section'
+import { BasePropertyProps } from '../base-property-props'
 
-const Edit = (props) => {
+type Props = {
+  ItemComponent: typeof React.Component;
+}
+
+const Edit: React.FC<Props & BasePropertyProps> = (props) => {
   const { property, record, ItemComponent } = props
   const error = record.errors && record.errors[property.name]
   return (
@@ -21,13 +24,6 @@ const Edit = (props) => {
       </StyledSection>
     </PropertyInEdit>
   )
-}
-
-
-Edit.propTypes = {
-  property: simplifiedPropertyType.isRequired,
-  record: recordType.isRequired,
-  ItemComponent: PropTypes.elementType.isRequired,
 }
 
 export default Edit

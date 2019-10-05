@@ -12,8 +12,10 @@ try {
 
 /**
  * Params for a record action
+ * @alias RecordActionParams
+ * @memberof ViewHelpers
  */
-export interface RecordActionParams {
+export type RecordActionParams = {
   resourceId: string;
   actionName: string;
   recordId: string;
@@ -21,8 +23,10 @@ export interface RecordActionParams {
 
 /**
  * Params for a resource action
+ * @alias ResourceActionParams
+ * @memberof ViewHelpers
  */
-export interface ResourceActionParams {
+export type ResourceActionParams = {
   resourceId: string;
   actionName: string;
 }
@@ -46,6 +50,7 @@ class ViewHelpers {
 
   /**
    * To each related path adds rootPath passed by the user, as well as a query string
+   * @private
    * @param  {Array<string>} paths   list of parts of the url
    * @return {string}       path
    */
@@ -89,7 +94,7 @@ class ViewHelpers {
   /**
    * Returns resourceAction url
    *
-   * @param   {object}  options
+   * @param   {ResourceActionParams}  options
    * @param   {string}  options.resourceId
    * @param   {string}  options.actionName
    *
@@ -102,7 +107,7 @@ class ViewHelpers {
   /**
    * Returns recordAction url
    *
-   * @param   {object}  options
+   * @param   {RecordActionParams}  options
    * @param   {string}  options.resourceId
    * @param   {string}  options.recordId
    * @param   {string}  options.actionName

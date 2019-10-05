@@ -3,20 +3,15 @@ import { Link } from 'react-router-dom'
 
 import ViewHelpers from '../../../../backend/utils/view-helpers'
 import Label from '../../ui/label'
-import PropertyJSON from '../../../../backend/decorators/property-json.interface'
-import RecordJSON from '../../../../backend/decorators/record-json.interface'
-import ResourceJSON from '../../../../backend/decorators/resource-json.interface'
+import { BasePropertyProps } from '../base-property-props'
 
 interface Props {
-  property: PropertyJSON;
   ItemComponent: typeof React.Component;
-  record: RecordJSON;
-  resource: ResourceJSON;
 }
 
 // TODO define ItemComponent interface
 
-export default class List extends React.PureComponent<Props> {
+export default class List extends React.PureComponent<Props & BasePropertyProps> {
   renderItems(): React.ReactChild {
     const { property, ItemComponent } = this.props
     return (

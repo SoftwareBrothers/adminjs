@@ -53,11 +53,11 @@ type Props = {
   /**
    * Width of the column in 12 column grid, default to 4
    */
-  width: number;
+  width?: number;
   /**
    * column offset, default to 0
    */
-  offset: number;
+  offset?: number;
 }
 
 export default Column

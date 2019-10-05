@@ -98,7 +98,7 @@ type Props = {
   /**
    * Optional error message
    */
-  error: {
+  error?: {
     message: string;
   };
 }

@@ -14,7 +14,7 @@ const PaginationWrapper = styled.div.attrs({
   }
 `
 /**
- * Component which renders pagination
+ * Pagination component
  *
  * @component
  * @example

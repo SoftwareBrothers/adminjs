@@ -4,7 +4,7 @@
  * @alias CurrentAdmin
  * @memberof AdminBro
  */
-export default interface CurrentAdmin {
+export type CurrentAdmin = {
   /**
    * Admin has one required field which is an email
    */
@@ -13,4 +13,9 @@ export default interface CurrentAdmin {
    * Also you can put as many other fields to it as you like.
    */
   [key: string]: any;
+
+  /**
+   * Id of your admin user
+   */
+  id?: string;
 }

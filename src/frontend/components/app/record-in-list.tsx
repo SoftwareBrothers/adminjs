@@ -7,6 +7,7 @@ import Dropdown from '../ui/dropdown'
 import Placeholder from '../ui/placeholder'
 import ResourceJSON from '../../../backend/decorators/resource-json.interface'
 import RecordJSON from '../../../backend/decorators/record-json.interface'
+import { PropertyPlace } from '../../../backend/decorators/property-json.interface'
 
 const Td = styled.td`
   &&& {
@@ -40,7 +41,7 @@ export default class RecordInList extends React.PureComponent<Props> {
             ) : (
               <PropertyType
                 key={property.name}
-                where="list"
+                where={PropertyPlace.list}
                 property={property}
                 resource={resource}
                 record={record}

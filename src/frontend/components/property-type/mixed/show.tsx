@@ -1,11 +1,14 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 
 import PropertyInShow from '../../ui/property-in-show'
-import { simplifiedPropertyType } from '../../../types'
 import StyledSection from '../../ui/styled-section'
+import { BasePropertyProps } from '../base-property-props'
 
-const Show = (props) => {
+interface Props {
+  ItemComponent: typeof React.Component;
+}
+
+const Show: React.FC<Props & BasePropertyProps> = (props) => {
   const { property, ItemComponent } = props
   return (
     <PropertyInShow property={property}>
@@ -20,12 +23,6 @@ const Show = (props) => {
       </StyledSection>
     </PropertyInShow>
   )
-}
-
-
-Show.propTypes = {
-  property: simplifiedPropertyType.isRequired,
-  ItemComponent: PropTypes.elementType.isRequired,
 }
 
 export default Show

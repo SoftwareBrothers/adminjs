@@ -4,7 +4,7 @@ import populator from '../utils/populator'
 import Filter from '../utils/filter'
 import ViewHelpers from '../utils/view-helpers'
 import ForbiddenError from '../utils/forbidden-error'
-import CurrentAdmin from '../../current-admin.interface'
+import { CurrentAdmin } from '../../current-admin.interface'
 import AdminBro from '../../admin-bro'
 import { ActionContext, ActionRequest } from '../actions/action.interface'
 

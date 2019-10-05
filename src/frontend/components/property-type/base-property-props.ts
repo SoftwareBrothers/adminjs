@@ -1,0 +1,49 @@
+import PropertyJSON, { PropertyPlace } from '../../../backend/decorators/property-json.interface'
+import ResourceJSON from '../../../backend/decorators/resource-json.interface'
+import RecordJSON from '../../../backend/decorators/record-json.interface'
+
+/**
+ * Props which are passed to all your custom property components
+ *
+ * @memberof BasePropertyComponent
+ * @alias BasePropertyProps
+ */
+export type BasePropertyProps = {
+  /**
+   * Property JSON representation
+   */
+  property: PropertyJSON;
+  /**
+   * Resource JSON representation
+   */
+  resource: ResourceJSON;
+  /**
+   * Record JSON representation
+   */
+  record: RecordJSON;
+  /**
+   * Filter object taken from the query params. It is used on the _filter_ components
+   */
+  filter?: any;
+  /**
+   * Where given property schould be rendered
+   */
+  where: PropertyPlace;
+  /**
+   * Function which indicates change of the property value.
+   */
+  onChange?: OnPropertyChange;
+}
+
+/**
+ * On change callback - It takes either
+ * one argument which is entire {@link RecordJSON} or 2 arguments - one
+ * property.name and the second one: value. Used by the _edit_ and _filter_ components
+ *
+ * @memberof BasePropertyComponent
+ * @alias OnPropertyChange
+ */
+export type OnPropertyChange = (
+  propertyOrRecord: RecordJSON | string,
+  value?: any,
+) => void

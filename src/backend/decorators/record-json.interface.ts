@@ -20,15 +20,15 @@ export default interface RecordJSON {
    */
   errors: Record<string, ErrorMessage> | {};
   /**
-   * Uniq Id of a record
+   * Uniq Id of a record. Not present if the record is new (in NewAction)
    */
   id: string;
   /**
-   * Title of an record
+   * Title of an record. Not present if the record is new (in NewAction)
    */
   title: string;
   /**
-   * Actions which can be performed on this record
+   * Actions which can be performed on this record.
    */
   recordActions: Array<ActionJSON>;
 }

@@ -1,16 +1,27 @@
-import React from 'react'
-import PropTypes from 'prop-types'
+import React, { ReactNode } from 'react'
 import * as flat from 'flat'
 
 import PropertyInEdit from '../../ui/property-in-edit'
 import StyledButton from '../../ui/styled-button'
 import Column from '../../ui/column'
 import Columns from '../../ui/columns'
-import { simplifiedPropertyType, recordType } from '../../../types'
 import convertParamsToArrayItems from './convert-params-to-array-items'
 import StyledSection from '../../ui/styled-section'
+import PropertyJSON from '../../../../backend/decorators/property-json.interface'
+import RecordJSON from '../../../../backend/decorators/record-json.interface'
 
-export default class Edit extends React.Component {
+type State = {
+  items: Array<string>;
+}
+
+type Props = {
+  property: PropertyJSON;
+  record: RecordJSON;
+  onChange: (record: RecordJSON) => any;
+  ItemComponent: typeof React.Component;
+}
+
+export default class Edit extends React.Component<Props, State> {
   constructor(props) {
     super(props)
     const { property, record } = this.props
@@ -19,14 +30,14 @@ export default class Edit extends React.Component {
     this.state = { items }
   }
 
-  addNew() {
+  addNew(): void {
     this.setState(state => ({
       ...state,
       items: [...state.items, ''],
     }))
   }
 
-  removeItem(i) {
+  removeItem(i): void {
     const { property, record, onChange } = this.props
     const { items } = this.state
     const newItems = [...items]
@@ -41,7 +52,7 @@ export default class Edit extends React.Component {
     onChange(newRecord)
   }
 
-  renderItem(item, i) {
+  renderItem(item, i): ReactNode {
     const { ItemComponent, property } = this.props
     return (
       <Columns key={i}>
@@ -57,7 +68,7 @@ export default class Edit extends React.Component {
           />
         </Column>
         <Column width={2}>
-          <StyledButton style={{ marginTop: 25 }} onClick={() => this.removeItem(i)}>
+          <StyledButton style={{ marginTop: 25 }} onClick={(): void => this.removeItem(i)}>
             Remove
           </StyledButton>
         </Column>
@@ -65,13 +76,13 @@ export default class Edit extends React.Component {
     )
   }
 
-  renderInput() {
+  renderInput(): ReactNode {
     const { items } = this.state
     return (
       <StyledSection style={{ marginTop: 20 }}>
         {items.map((item, i) => this.renderItem(item, i))}
         <p>
-          <StyledButton onClick={() => this.addNew()}>
+          <StyledButton onClick={(): void => this.addNew()}>
             Add new item
           </StyledButton>
         </p>
@@ -79,7 +90,7 @@ export default class Edit extends React.Component {
     )
   }
 
-  render() {
+  render(): ReactNode {
     const { property, record } = this.props
     const error = record.errors && record.errors[property.name]
     return (
@@ -88,11 +99,4 @@ export default class Edit extends React.Component {
       </PropertyInEdit>
     )
   }
-}
-
-Edit.propTypes = {
-  property: simplifiedPropertyType.isRequired,
-  record: recordType.isRequired,
-  onChange: PropTypes.func.isRequired,
-  ItemComponent: PropTypes.elementType.isRequired,
 }

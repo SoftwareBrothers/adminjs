@@ -850,8 +850,8 @@
     type-detect "4.0.8"
 
 "@sinonjs/formatio@^3.0.0", "@sinonjs/formatio@^3.2.1":
-  version "3.2.1"
-  resolved "https://registry.yarnpkg.com/@sinonjs/formatio/-/formatio-3.2.1.tgz#52310f2f9bcbc67bdac18c94ad4901b95fde267e"
+  version "3.2.2"
+  resolved "https://registry.yarnpkg.com/@sinonjs/formatio/-/formatio-3.2.2.tgz#771c60dfa75ea7f2d68e3b94c7e888a78781372c"
   dependencies:
     "@sinonjs/commons" "^1"
     "@sinonjs/samsam" "^3.1.0"
@@ -924,7 +924,7 @@
   version "4.14.141"
   resolved "https://registry.yarnpkg.com/@types/lodash/-/lodash-4.14.141.tgz#d81f4d0c562abe28713406b571ffb27692a82ae6"
 
-"@types/node@*", "@types/node@^12.7.10":
+"@types/node@*":
   version "12.7.11"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-12.7.11.tgz#be879b52031cfb5d295b047f5462d8ef1a716446"
 
@@ -2093,8 +2093,8 @@ ecc-jsbn@~0.1.1:
     safer-buffer "^2.1.0"
 
 electron-to-chromium@^1.3.247:
-  version "1.3.274"
-  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.3.274.tgz#0fb4624c63eeaabe5aa079da5c2a966f5c916de3"
+  version "1.3.275"
+  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.3.275.tgz#19a38436e34216f51820fa2f4326d5ce141fa36f"
 
 elliptic@^6.0.0:
   version "6.5.1"
@@ -4973,11 +4973,11 @@ rollup-pluginutils@^2.3.1, rollup-pluginutils@^2.5.0, rollup-pluginutils@^2.6.0,
     estree-walker "^0.6.1"
 
 rollup@^1.21.4:
-  version "1.23.0"
-  resolved "https://registry.yarnpkg.com/rollup/-/rollup-1.23.0.tgz#e2b2686fc77dfc7891f5adb95c8d865e0f1eb5f4"
+  version "1.23.1"
+  resolved "https://registry.yarnpkg.com/rollup/-/rollup-1.23.1.tgz#0315a0f5d0dfb056e6363e1dff05b89ac2da6b8e"
   dependencies:
     "@types/estree" "*"
-    "@types/node" "^12.7.10"
+    "@types/node" "*"
     acorn "^7.1.0"
 
 run-async@^2.2.0:

@@ -1,8 +1,5 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import ErrorBoundary from '../app/error-boundary'
-
-import { propertyType, resourceType, recordType } from '../../types'
 
 import ArrayType from './array'
 import MixedType from './mixed'
@@ -12,6 +9,17 @@ import boolean from './boolean'
 import datetime from './datetime'
 import richtext from './richtext'
 import reference from './reference'
+import { BasePropertyProps } from './base-property-props'
+
+let globalAny: any = {}
+
+try {
+  globalAny = window
+} catch (error) {
+  if (error.message !== 'window is not defined') {
+    throw error
+  }
+}
 
 const types = {
   boolean,
@@ -19,6 +27,10 @@ const types = {
   reference,
   date: datetime,
   richtext,
+}
+
+type State = {
+  isClient: boolean;
 }
 
 /**
@@ -146,7 +158,13 @@ const types = {
  *   </WrapperBox>
  * )
  */
-export default class BasePropertyComponent extends React.Component {
+export default class BasePropertyComponent extends React.Component<BasePropertyProps, State> {
+  static DefaultType
+  static Boolean
+  static DateTime
+  static RichText
+  static Reference
+
   constructor(props) {
     super(props)
     this.state = {
@@ -166,7 +184,7 @@ export default class BasePropertyComponent extends React.Component {
     || defaultType[where]
 
     if (property.components && property.components[where] && isClient) {
-      Component = AdminBro.UserComponents[property.components[where]]
+      Component = globalAny.AdminBro.UserComponents[property.components[where]]
       return (
         <ErrorBoundary>
           <Component
@@ -184,6 +202,7 @@ export default class BasePropertyComponent extends React.Component {
     const Mixed = MixedType[where]
 
     if (property.isArray) {
+      if (!Array) {return}
       return (
         <Array
           {...this.props}
@@ -193,6 +212,7 @@ export default class BasePropertyComponent extends React.Component {
     }
 
     if (property.type === 'mixed' && property.subProperties && property.subProperties.length) {
+      if (!Mixed) {return}
       return (
         <Mixed
           {...this.props}
@@ -213,38 +233,6 @@ export default class BasePropertyComponent extends React.Component {
       </ErrorBoundary>
     )
   }
-}
-
-BasePropertyComponent.propTypes = {
-  /**
-   * Object of type: {@link PropertyJSON}
-   */
-  property: propertyType.isRequired,
-  /**
-   * Object of type: {@link ResourceJSON}
-   */
-  resource: resourceType.isRequired,
-  /**
-   * Object of type: {@link RecordJSON}
-   */
-  record: recordType,
-  /**
-   * Filter object taken from the query params. It is used on the _filter_ components
-   */
-  filter: PropTypes.object, // eslint-disable-line react/forbid-prop-types
-  where: PropTypes.oneOf(['edit', 'filter', 'show', 'list']).isRequired,
-  /**
-   * Function which indicates change of the property value. It takes either
-   * one argument which is entire {@link RecordJSON} or 2 arguments - one
-   * property.name and the second one: value. Used by the _edit_ and _filter_ components
-   */
-  onChange: PropTypes.func,
-}
-
-BasePropertyComponent.defaultProps = {
-  filter: {},
-  record: null,
-  onChange: null,
 }
 
 

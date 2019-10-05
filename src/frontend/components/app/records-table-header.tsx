@@ -1,8 +1,30 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 
 import PropertyHeader from './property-header'
-import { propertyType } from '../../types'
+import PropertyJSON from '../../../backend/decorators/property-json.interface'
+
+/**
+ * @memberof RecordsTableHeader
+ * @alias RecordsTableHeader
+ */
+type Props = {
+  /**
+   * Property which should be treaten as a Title Property
+   */
+  titleProperty: PropertyJSON;
+  /**
+   * All properties which should be presented
+   */
+  properties: Array<PropertyJSON>;
+  /**
+   * Name of the property which should be marked as currently sorted by
+   */
+  sortBy: string;
+  /**
+   * Sort direction
+   */
+  direction: string;
+}
 
 /**
  * Prints `thead` section for table with records.
@@ -35,7 +57,7 @@ import { propertyType } from '../../types'
  * </WrapperBox>
  * )
  */
-const RecordsTableHeader = (props) => {
+const RecordsTableHeader: React.FC<Props> = (props) => {
   const { titleProperty, properties, sortBy, direction } = props
   return (
     <thead>
@@ -53,25 +75,6 @@ const RecordsTableHeader = (props) => {
       </tr>
     </thead>
   )
-}
-
-RecordsTableHeader.propTypes = {
-  /**
-   * {@link PropertyJSON}
-   */
-  titleProperty: propertyType.isRequired,
-  /**
-   * Array of {@link PropertyJSON}
-   */
-  properties: PropTypes.arrayOf(propertyType).isRequired,
-  /**
-   * Name of the property which should be marked as currently sorted by
-   */
-  sortBy: PropTypes.string.isRequired,
-  /**
-   * Sort direction
-   */
-  direction: PropTypes.oneOf(['asc', 'desc']).isRequired,
 }
 
 export default RecordsTableHeader

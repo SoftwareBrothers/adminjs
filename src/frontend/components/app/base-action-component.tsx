@@ -1,11 +1,27 @@
 import React from 'react'
 
-import { resourceType, actionType, recordType } from '../../types'
 import WrapperBox from '../ui/wrapper-box'
 import ErrorBoundary from './error-boundary'
 
 import * as actions from '../actions'
 import { DOCS } from '../../../constants'
+import { ActionProps } from '../actions/action.props'
+
+let globalAny: any = {}
+
+try {
+  globalAny = window
+} catch (error) {
+  if (error.message !== 'window is not defined') {
+    throw error
+  }
+}
+
+// TODO: Remove the above hack to something more type safe
+
+type State = {
+  isClient: boolean;
+}
 
 /**
  * Component which renders all the default and custom actions for both the Resource and the Record.
@@ -55,7 +71,7 @@ import { DOCS } from '../../../constants'
  * @name BaseActionComponent
  * @category Base
  */
-class BaseActionComponent extends React.Component {
+class BaseActionComponent extends React.Component<ActionProps, State> {
   constructor(props) {
     super(props)
     this.state = {
@@ -75,7 +91,7 @@ class BaseActionComponent extends React.Component {
 
     let Action = actions[action.name]
     if (isClient && action.component) {
-      Action = AdminBro.UserComponents[action.component]
+      Action = globalAny.AdminBro.UserComponents[action.component]
     }
     if (Action) {
       return (
@@ -99,25 +115,6 @@ class BaseActionComponent extends React.Component {
       </WrapperBox>
     )
   }
-}
-
-BaseActionComponent.propTypes = {
-  /**
-   * Object of type: {@link ResourceJSON}
-   */
-  resource: resourceType.isRequired,
-  /**
-   * Object of type: {@link ActionJSON}
-   */
-  action: actionType.isRequired,
-  /**
-   * Object of type: {@link RecordJSON}
-   */
-  record: recordType,
-}
-
-BaseActionComponent.defaultProps = {
-  record: null,
 }
 
 export default BaseActionComponent

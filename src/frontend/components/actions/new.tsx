@@ -1,24 +1,19 @@
-import React from 'react'
+import React, { ReactNode } from 'react'
 import { withRouter } from 'react-router-dom'
-import PropTypes from 'prop-types'
 
+import { RouteComponentProps } from 'react-router'
 import PropertyType from '../property-type'
 import ApiClient from '../../utils/api-client'
 import WrapperBox from '../ui/wrapper-box'
 import StyledButton from '../ui/styled-button'
-import { resourceType, historyType, recordType } from '../../types'
 import withNotice, { AddNoticeProps } from '../../store/with-notice'
 import { ActionProps } from './action.props'
-import { RouteComponentProps } from 'react-router'
-import RecordJSON from '../../../backend/decorators/record-json.interface'
 import { NoticeType } from '../../store/store'
+import { PropertyPlace } from '../../../backend/decorators/property-json.interface'
+import RecordJSON from '../../../backend/decorators/record-json.interface'
 
 type State = {
-  record: {
-    params: {[key: string]: any}
-    errors: {[key: string]: any}
-    populated: {[key: string]: any}
-  }
+  record: RecordJSON;
 }
 
 /**
@@ -38,6 +33,7 @@ class New extends React.Component<ActionProps & AddNoticeProps & RouteComponentP
     this.handleChange = this.handleChange.bind(this)
     this.state = {
       record: {
+        ...record,
         params: (record && record.params) || {},
         errors: (record && record.errors) || {},
         populated: (record && record.populated) || {},
@@ -45,10 +41,10 @@ class New extends React.Component<ActionProps & AddNoticeProps & RouteComponentP
     }
   }
 
-  handleChange(propertyOrRecord, value) {
-    if (typeof value === 'undefined' && propertyOrRecord.params) {
+  handleChange(propertyOrRecord: string | RecordJSON, value?: string): void {
+    if (typeof value === 'undefined' && (propertyOrRecord as RecordJSON).params) {
       this.setState({
-        record: propertyOrRecord,
+        record: propertyOrRecord as RecordJSON,
       })
     } else {
       this.setState(state => ({
@@ -56,14 +52,14 @@ class New extends React.Component<ActionProps & AddNoticeProps & RouteComponentP
           ...state.record,
           params: {
             ...state.record.params,
-            [propertyOrRecord]: value,
+            [propertyOrRecord as string]: value,
           },
         },
       }))
     }
   }
 
-  handleSubmit(event) {
+  handleSubmit(event): boolean {
     event.preventDefault()
     const { resource, history, addNotice } = this.props
     const { record } = this.state
@@ -96,7 +92,7 @@ class New extends React.Component<ActionProps & AddNoticeProps & RouteComponentP
     return false
   }
 
-  render() {
+  render(): ReactNode {
     const { resource } = this.props
     const properties = resource.editProperties
     const { record } = this.state
@@ -106,7 +102,7 @@ class New extends React.Component<ActionProps & AddNoticeProps & RouteComponentP
           {properties.map(property => (
             <PropertyType
               key={property.name}
-              where="edit"
+              where={PropertyPlace.edit}
               property={property}
               resource={resource}
               onChange={this.handleChange}

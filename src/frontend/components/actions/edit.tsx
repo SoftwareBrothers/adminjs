@@ -1,6 +1,7 @@
-import React from 'react'
+import React, { ReactNode } from 'react'
 import { withRouter } from 'react-router-dom'
 
+import { RouteComponentProps } from 'react-router'
 import PropertyType from '../property-type'
 import WrapperBox from '../ui/wrapper-box'
 import StyledButton from '../ui/styled-button'
@@ -8,8 +9,8 @@ import ApiClient from '../../utils/api-client'
 import withNotice, { AddNoticeProps } from '../../store/with-notice'
 import RecordJSON from '../../../backend/decorators/record-json.interface'
 import { NoticeType } from '../../store/store'
-import { RouteComponentProps } from 'react-router'
 import { ActionProps } from './action.props'
+import { PropertyPlace } from '../../../backend/decorators/property-json.interface'
 
 /**
  * @name EditAction
@@ -31,10 +32,10 @@ class Edit extends React.Component<ActionProps & RouteComponentProps & AddNotice
     this.api = new ApiClient()
   }
 
-  handleChange(propertyOrRecord, value) {
-    if (typeof value === 'undefined' && propertyOrRecord.params) {
+  handleChange(propertyOrRecord: RecordJSON | string, value?: any): void {
+    if (typeof value === 'undefined' && (propertyOrRecord as RecordJSON).params) {
       this.setState({
-        record: propertyOrRecord,
+        record: propertyOrRecord as RecordJSON,
       })
     } else {
       this.setState(state => ({
@@ -42,14 +43,14 @@ class Edit extends React.Component<ActionProps & RouteComponentProps & AddNotice
           ...state.record,
           params: {
             ...state.record.params,
-            [propertyOrRecord]: value,
+            [propertyOrRecord as string]: value,
           },
         },
       }))
     }
   }
 
-  handleSubmit(event) {
+  handleSubmit(event): boolean {
     const { resource, history, addNotice } = this.props
     const { record } = this.state
     this.api.recordAction({
@@ -82,7 +83,7 @@ class Edit extends React.Component<ActionProps & RouteComponentProps & AddNotice
     return false
   }
 
-  render() {
+  render(): ReactNode {
     const { resource } = this.props
     const properties = resource.editProperties
     const { record } = this.state
@@ -93,7 +94,7 @@ class Edit extends React.Component<ActionProps & RouteComponentProps & AddNotice
           {properties.map(property => (
             <PropertyType
               key={property.name}
-              where="edit"
+              where={PropertyPlace.edit}
               onChange={this.handleChange}
               property={property}
               resource={resource}
@@ -114,7 +115,7 @@ class Edit extends React.Component<ActionProps & RouteComponentProps & AddNotice
  * @memberof Edit
  */
 type State = {
-  record: RecordJSON,
+  record: RecordJSON;
 }
 
 export default withNotice<ActionProps>(withRouter(Edit))

@@ -2,6 +2,37 @@ import React, { ReactNode } from 'react'
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 
+type OnClickHandler = () => any;
+
+/**
+ * Button component which extends Link from react-router-dom
+ * 
+ * @memberof StyledButton
+ * @see https://github.com/ReactTraining/react-router/blob/master/packages/react-router-dom/docs/api/Link.md
+ */
+type Props = {
+  /**
+   * If button should be presented as a primary action
+   */
+  primary: boolean;
+  /**
+   * Body of the button
+   */
+  children: ReactNode;
+  /**
+   * clic callback
+   */
+  onClick: OnClickHandler;
+  /**
+   * As which element it should be rentered. For example: as: 'a' or as: 'button'
+   */
+  as: string;
+  /**
+   * Href
+   */
+  to: string;
+}
+
 /**
  * Base button component
  *
@@ -83,19 +114,5 @@ const StyledButton = styled(Link).attrs<Props>(({ primary }) => ({
     }
   }
 `
-
-/**
- * @memberof StyledButton
- */
-type Props = {
-  /**
-   * If button should be presented as a primary action
-   */
-  primary: boolean;
-  children: ReactNode;
-  onClick: () => any;
-  as: string;
-  to: string;
-}
 
 export default StyledButton
