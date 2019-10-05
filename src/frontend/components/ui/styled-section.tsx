@@ -1,11 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
 
-const Section = styled.section`
-  border-left: ${({ theme }) => theme.sizes.paddingMin} solid ${({ theme }) => theme.colors.lightBck};
-  padding-left: ${({ theme }) => theme.sizes.padding};
-`
-
 /**
  * Marks group of fields as a section
  *
@@ -29,5 +24,9 @@ const Section = styled.section`
  * </StyledSection>
  * )
  */
-const StyledSection = props => (<Section {...props} />)
+const StyledSection = styled.section`
+  border-left: ${({ theme }): string => theme.sizes.paddingMin} solid ${({ theme }): string => theme.colors.lightBck};
+  padding-left: ${({ theme }): string => theme.sizes.padding};
+`
+
 export default StyledSection

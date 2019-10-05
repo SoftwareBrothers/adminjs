@@ -1,13 +1,10 @@
-import React from 'react'
-import PropTypes from 'prop-types'
+import React, { ReactNode } from 'react'
 import styled from 'styled-components'
-
-import { childrenType } from '../../types'
 
 import Label from './label'
 
 const Property = styled.div`
-  margin-bottom: ${({ theme }) => theme.sizes.paddingLayout};
+  margin-bottom: ${({ theme }): string => theme.sizes.paddingLayout};
 `
 
 /**
@@ -27,7 +24,7 @@ const Property = styled.div`
   *   </WrapperBox>
   * )
  */
-const PropertyInShow = (props) => {
+const PropertyInShow: React.FC<Props> = (props) => {
   const { property, children } = props
   return (
     <Property>
@@ -37,24 +34,27 @@ const PropertyInShow = (props) => {
   )
 }
 
-PropertyInShow.propTypes = {
+/**
+ * @memberof PropertyInShow
+ */
+type Props = {
   /**
-   * Wrapped property value
+   * Wrapped input element
    */
-  children: childrenType,
+  children: ReactNode;
   /**
-   * Property object based on {@link PropertyJSON}
+   * Subset of property object based on {@link PropertyJSON} containing just label and name
    */
-  property: PropTypes.shape({
+  property: {
     /**
      * Property label
      */
-    label: PropTypes.string.isRequired,
+    label: string;
     /**
      * Unique property name - its patch.
      */
-    name: PropTypes.string.isRequired,
-  }).isRequired,
+    name: string;
+  };
 }
 
 PropertyInShow.defaultProps = {

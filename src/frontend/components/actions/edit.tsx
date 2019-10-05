@@ -1,34 +1,34 @@
 import React from 'react'
 import { withRouter } from 'react-router-dom'
-import PropTypes from 'prop-types'
 
 import PropertyType from '../property-type'
-import ApiClient from '../../utils/api-client'
 import WrapperBox from '../ui/wrapper-box'
 import StyledButton from '../ui/styled-button'
-import { resourceType, historyType, recordType } from '../../types'
-import withNotice from '../../store/with-notice'
+import ApiClient from '../../utils/api-client'
+import withNotice, { AddNoticeProps } from '../../store/with-notice'
+import RecordJSON from '../../../backend/decorators/record-json.interface'
+import { NoticeType } from '../../store/store'
+import { RouteComponentProps } from 'react-router'
+import { ActionProps } from './action.props'
 
 /**
- * @name NewAction
+ * @name EditAction
  * @category Actions
- * @description Shows form for creating a given record.
- * @component
+ * @description Shows form for updating a given record.
  * @private
+ * @component
  */
-class New extends React.Component {
+class Edit extends React.Component<ActionProps & RouteComponentProps & AddNoticeProps, State> {
+  private api: ApiClient
+
   constructor(props) {
     super(props)
     const { record } = props
-    this.api = new ApiClient()
     this.handleChange = this.handleChange.bind(this)
     this.state = {
-      record: {
-        params: (record && record.params) || {},
-        errors: (record && record.errors) || {},
-        populated: (record && record.populated) || {},
-      },
+      record,
     }
+    this.api = new ApiClient()
   }
 
   handleChange(propertyOrRecord, value) {
@@ -50,25 +50,24 @@ class New extends React.Component {
   }
 
   handleSubmit(event) {
-    event.preventDefault()
     const { resource, history, addNotice } = this.props
     const { record } = this.state
-    const { params } = record
-    this.api.resourceAction({
+    this.api.recordAction({
       resourceId: resource.id,
-      actionName: 'new',
+      actionName: 'edit',
+      recordId: record.id,
       payload: {
-        record: params,
+        record: record.params,
       },
     }).then((response) => {
       if (response.data.redirectUrl) {
-        addNotice({
-          message: 'Record has been successfully created!',
-        })
         history.push(response.data.redirectUrl)
+        addNotice({
+          message: 'Record has been successfully updated!',
+        })
       } else {
         addNotice({
-          type: 'error',
+          type: NoticeType.error,
           message: 'There were errors in the record object. Check them out',
         })
         this.setState(state => ({
@@ -79,6 +78,7 @@ class New extends React.Component {
         }))
       }
     })
+    event.preventDefault()
     return false
   }
 
@@ -86,6 +86,7 @@ class New extends React.Component {
     const { resource } = this.props
     const properties = resource.editProperties
     const { record } = this.state
+
     return (
       <WrapperBox border>
         <form onSubmit={this.handleSubmit.bind(this)}>
@@ -93,9 +94,9 @@ class New extends React.Component {
             <PropertyType
               key={property.name}
               where="edit"
+              onChange={this.handleChange}
               property={property}
               resource={resource}
-              onChange={this.handleChange}
               record={record}
             />
           ))}
@@ -109,27 +110,11 @@ class New extends React.Component {
   }
 }
 
-New.propTypes = {
-  /**
-   * Object of type: {@link ResourceJSON}
-   */
-  resource: resourceType.isRequired,
-  /**
-   * history object used by ReactRouter
-   */
-  history: historyType.isRequired,
-  /**
-   * Object of type: {@link RecordJSON}
-   */
-  record: recordType,
-  /**
-   * Function which adds a new `notice` information.
-   */
-  addNotice: PropTypes.func.isRequired,
+/**
+ * @memberof Edit
+ */
+type State = {
+  record: RecordJSON,
 }
 
-New.defaultProps = {
-  record: null,
-}
-
-export default withNotice(withRouter(New))
+export default withNotice<ActionProps>(withRouter(Edit))

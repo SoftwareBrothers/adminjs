@@ -4,9 +4,24 @@ import { withRouter } from 'react-router-dom'
 import ApiClient from '../../utils/api-client'
 import WrapperBox from '../ui/wrapper-box'
 import { resourceType, locationType } from '../../types'
-import withNotice from '../../store/with-notice'
+import withNotice, { AddNoticeProps } from '../../store/with-notice'
 import RecordsTable from '../app/records-table'
 import Paginate from '../ui/paginate'
+import { RouteComponentProps } from 'react-router'
+import { ActionProps } from './action.props'
+import RecordJSON from '../../../backend/decorators/record-json.interface'
+
+type State = {
+  records: Array<RecordJSON>;
+  page: number;
+  perPage: number;
+  total: number;
+  loading: boolean;
+  direction: string;
+  sortBy: string;
+}
+
+// TODO: add direction enum
 
 /**
  * @name NewAction
@@ -15,7 +30,9 @@ import Paginate from '../ui/paginate'
  * @component
  * @private
  */
-class List extends React.Component {
+class List extends React.Component<ActionProps & RouteComponentProps & AddNoticeProps, State> {
+  private api: ApiClient
+
   constructor(props) {
     super(props)
     this.api = new ApiClient()
@@ -94,14 +111,6 @@ class List extends React.Component {
       </WrapperBox>
     )
   }
-}
-
-List.propTypes = {
-  /**
-   * Object of type: {@link ResourceJSON}
-   */
-  resource: resourceType.isRequired,
-  location: locationType.isRequired,
 }
 
 export default withNotice(withRouter(List))

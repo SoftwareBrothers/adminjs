@@ -3,8 +3,13 @@ import { Link } from 'react-router-dom'
 
 import ViewHelpers from '../../../backend/utils/view-helpers'
 import { resourceType } from '../../types'
+import ResourceJSON from '../../../backend/decorators/resource-json.interface'
 
-const NoRecords = (props) => {
+type Props = {
+  resource: ResourceJSON;
+}
+
+const NoRecords: React.FC<Props> = (props) => {
   const { resource } = props
   const canCreate = resource.resourceActions.find(a => a.name === 'new')
   const h = new ViewHelpers()
@@ -17,17 +22,13 @@ const NoRecords = (props) => {
         There are no records in this resource.
         {canCreate ? (
           <React.Fragment>
-            {'Create '}
+            <span>Create </span>
             <Link to={newAction}>first record</Link>
           </React.Fragment>
         ) : ''}
       </p>
     </div>
   )
-}
-
-NoRecords.propTypes = {
-  resource: resourceType.isRequired,
 }
 
 export default NoRecords

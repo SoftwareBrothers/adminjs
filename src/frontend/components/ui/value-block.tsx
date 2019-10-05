@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { ReactNode } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
@@ -17,14 +17,14 @@ const OverlayLink = styled(Link)`
   transition: border-width 0.2s;
   &:hover {
     transition: border-width 0.2s;
-    border-bottom: 5px solid ${({ theme }) => theme.colors.primary};
+    border-bottom: 5px solid ${({ theme }): string => theme.colors.primary};
   }
 `
 
 const Level = styled.div.attrs({
   className: 'level',
 })`
-  color: ${props => props.color || props.theme.colors.primary};
+  color: ${(props): string => props.color || props.theme.colors.primary};
   margin-top: 8px;
 
   & .value {
@@ -56,60 +56,54 @@ const Level = styled.div.attrs({
  *   </Columns></WrapperBox>
  * )
  */
-export default class ValueBlock extends React.PureComponent {
-  render() {
-    const { icon, value, children, color, href, label } = this.props
+const ValueBlock: React.FC<Props> = (props) => {
+  const { icon, value, children, color, href, label } = props
 
-    return (
-      <WrapperBox border style={{ position: 'relative' }}>
-        {href ? <OverlayLink to={href} /> : ''}
-        { label ? <Label>{label}</Label> : '' }
-        <Level color={color}>
-          <div className="value">
-            {value}
-          </div>
-          <div className="icon">
-            <i className={icon} />
-          </div>
-        </Level>
-        {children}
-      </WrapperBox>
-    )
-  }
+  return (
+    <WrapperBox border style={{ position: 'relative' }}>
+      {href ? <OverlayLink to={href} /> : ''}
+      { label ? <Label>{label}</Label> : '' }
+      <Level color={color}>
+        <div className="value">
+          {value}
+        </div>
+        <div className="icon">
+          <i className={icon} />
+        </div>
+      </Level>
+      {children}
+    </WrapperBox>
+  )
 }
 
-ValueBlock.propTypes = {
+/**
+ * @memberof ValueBlock
+ */
+type Props = {
   /**
    * Icon class: i.e "fa fa-bomb"
    */
-  icon: PropTypes.string,
+  icon?: string;
   /**
    * Value string which
    */
-  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  value?: string | number;
   /**
    * Content inside a block
    */
-  children: childrenType,
+  children?: ReactNode;
   /**
    * Optional color
    */
-  color: PropTypes.string,
+  color?: string;
   /**
    * Link url if the block should be clickable
    */
-  href: PropTypes.string,
+  href?: string;
   /**
    * Label of the block
    */
-  label: PropTypes.string,
+  label?: string;
 }
 
-ValueBlock.defaultProps = {
-  color: null,
-  children: null,
-  value: null,
-  label: null,
-  href: null,
-  icon: null,
-}
+export default ValueBlock

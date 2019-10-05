@@ -2,15 +2,15 @@
 /* eslint-disable no-alert */
 /* eslint-disable no-restricted-globals */
 
-import React from 'react'
-import PropTypes from 'prop-types'
+import React, { ReactNode } from 'react'
 import { withRouter } from 'react-router-dom'
 
-import { actionType, locationType, historyType } from '../../types'
+import { RouteComponentProps } from 'react-router'
 import StyledButton from '../ui/styled-button'
 import ApiClient from '../../utils/api-client'
 import ViewHelpers from '../../../backend/utils/view-helpers'
-import withNotice from '../../store/with-notice'
+import withNotice, { AddNoticeProps } from '../../store/with-notice'
+import ActionJSON from '../../../backend/decorators/action-json.interface'
 
 /**
  * Renders Button for an action
@@ -18,13 +18,13 @@ import withNotice from '../../store/with-notice'
  * @private
  * @component
  */
-class ActionButton extends React.PureComponent {
+class ActionButton extends React.PureComponent<RouteComponentProps & Props & AddNoticeProps> {
   constructor(props) {
     super(props)
     this.handleClick = this.handleClick.bind(this)
   }
 
-  handleClick(event) {
+  handleClick(event): void {
     const {
       action, resourceId, recordId, location,
       history, actionPerformed, addNotice,
@@ -55,7 +55,7 @@ class ActionButton extends React.PureComponent {
     }
   }
 
-  render() {
+  render(): ReactNode {
     const h = new ViewHelpers()
     const {
       resourceId, recordId, action, className,
@@ -81,20 +81,12 @@ class ActionButton extends React.PureComponent {
   }
 }
 
-ActionButton.propTypes = {
-  action: actionType.isRequired,
-  className: PropTypes.string.isRequired,
-  resourceId: PropTypes.string.isRequired,
-  recordId: PropTypes.string,
-  location: locationType.isRequired,
-  history: historyType.isRequired,
-  actionPerformed: PropTypes.func,
-  addNotice: PropTypes.func.isRequired,
+type Props = {
+  action: ActionJSON;
+  className?: string;
+  resourceId: string;
+  recordId?: string;
+  actionPerformed: (actionName: string) => any;
 }
 
-ActionButton.defaultProps = {
-  recordId: null,
-  actionPerformed: null,
-}
-
-export default withNotice(withRouter(ActionButton))
+export default withNotice<Props>(withRouter(ActionButton))

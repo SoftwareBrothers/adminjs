@@ -2,7 +2,7 @@ import React from 'react'
 
 import PropertyType from '../property-type'
 import WrapperBox from '../ui/wrapper-box'
-import { resourceType, recordType } from '../../types'
+import { ActionProps } from './action.props'
 
 /**
  * @name ShowAction
@@ -11,7 +11,7 @@ import { resourceType, recordType } from '../../types'
  * @component
  * @private
  */
-const Show = (props) => {
+const Show: React.FC<ActionProps> = (props) => {
   const { resource, record } = props
   const properties = resource.showProperties
 
@@ -28,17 +28,6 @@ const Show = (props) => {
       ))}
     </WrapperBox>
   )
-}
-
-Show.propTypes = {
-  /**
-   * Object of type: {@link ResourceJSON}
-   */
-  resource: resourceType.isRequired,
-  /**
-   * Id of a given record
-   */
-  record: recordType.isRequired,
 }
 
 export default Show

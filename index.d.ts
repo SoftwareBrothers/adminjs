@@ -6,6 +6,7 @@ import BaseRecord from './src/backend/adapters/base-record'
 import Router from './src/backend/router'
 import Filter from './src/backend/utils/filter'
 import ValidationError from './src/backend/utils/validation-error'
+import ApiClient from './src/frontend/utils/api-client'
 import * as ACTIONS from './src/backend/actions/index'
 
 export {
@@ -18,4 +19,5 @@ export {
   Filter,
   ValidationError,
   ACTIONS,
+  ApiClient,
 }

@@ -1,24 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
 
-const StyledTable = styled.table.attrs({
-  className: 'table is-fullwidth',
-})`
-  & > thead > tr > th {
-    border: none;
-  }
-
-  & tr.is-selected {
-    background: ${({ theme }) => theme.colors.primary};
-  }
-
-  td {
-    color: ${({ theme }) => theme.colors.defaultText};
-    padding: ${({ theme }) => theme.sizes.padding};
-    border-color: ${({ theme }) => theme.colors.border};
-  }
-`
-
 /**
  * Simple compnent for styling tables
  *
@@ -48,6 +30,22 @@ const StyledTable = styled.table.attrs({
  * </WrapperBox>
  * )
  */
-const Table = props => (<StyledTable {...props} />)
+const Table = styled.table.attrs({
+  className: 'table is-fullwidth',
+})`
+  & > thead > tr > th {
+    border: none;
+  }
+
+  & tr.is-selected {
+    background: ${({ theme }): string => theme.colors.primary};
+  }
+
+  td {
+    color: ${({ theme }): string => theme.colors.defaultText};
+    padding: ${({ theme }): string => theme.sizes.padding};
+    border-color: ${({ theme }): string => theme.colors.border};
+  }
+`
 
 export default Table

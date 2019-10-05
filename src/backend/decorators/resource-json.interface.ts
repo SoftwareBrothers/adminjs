@@ -7,7 +7,7 @@ import ActionJSON from './action-json.interface'
  */
 export default interface ResourceJSON {
   /**
-   * Uniq Id of a resource
+   * Unique Id of a resource
    */
   id: string;
   /**

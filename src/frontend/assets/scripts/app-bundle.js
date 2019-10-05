@@ -4967,7 +4967,7 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
 
 	}).call(commonjsGlobal);
 
-
+	//# sourceMappingURL=performance-now.js.map
 	});
 
 	var root = typeof window === 'undefined' ? commonjsGlobal : window

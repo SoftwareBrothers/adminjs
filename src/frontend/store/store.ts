@@ -31,7 +31,16 @@ export const initializeSession = (data = {}) => ({
   data,
 })
 
-export const addNotice = (data = {}) => ({
+export enum NoticeType {
+  success = 'success',
+  error = 'error',
+}
+
+export const addNotice = (data: {
+  message: string;
+  id?: string;
+  type?: NoticeType;
+} = { message: '' }) => ({
   type: 'ADD_NOTICE',
   data: {
     message: data.message,
@@ -41,12 +50,15 @@ export const addNotice = (data = {}) => ({
   },
 })
 
-export const setNoticeProgress = ({ noticeId, progress }) => ({
+export const setNoticeProgress = ({ noticeId, progress }: {
+  noticeId: string;
+  progress: number;
+}) => ({
   type: 'SET_NOTICE_PROGRESS',
   data: { noticeId, progress },
 })
 
-export const dropNotice = noticeId => ({
+export const dropNotice = (noticeId: string) => ({
   type: 'DROP_NOTICE',
   data: { noticeId },
 })

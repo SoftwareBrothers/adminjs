@@ -1,22 +1,20 @@
-import React from 'react'
-import PropTypes from 'prop-types'
+import React, { ReactNode } from 'react'
 import styled from 'styled-components'
 
-import { childrenType } from '../../types'
 import Label from './label'
 
 const Property = styled.div`
-  margin: ${({ theme }) => theme.sizes.paddingLayout} 0;
+  margin: ${({ theme }): string => theme.sizes.paddingLayout} 0;
 
   & input {
     border-radius: 0;
-    border-color: ${({ theme }) => theme.colors.borderOnDark};
+    border-color: ${({ theme }): string => theme.colors.borderOnDark};
     box-shadow: none;
     background: transparent;
-    color: ${({ theme }) => theme.colors.lightText};
+    color: ${({ theme }): string => theme.colors.lightText};
 
     &:focus {
-      border-color: ${({ theme }) => theme.colors.primary};
+      border-color: ${({ theme }): string => theme.colors.primary};
     }
   }
   & .icon {
@@ -41,7 +39,7 @@ const Property = styled.div`
  *   </WrapperBox>
  * )
  */
-const PropertyInFilter = (props) => {
+const PropertyInFilter: React.FC<Props> = (props) => {
   const { property, children } = props
   return (
     <Property>
@@ -51,28 +49,27 @@ const PropertyInFilter = (props) => {
   )
 }
 
-PropertyInFilter.propTypes = {
+/**
+ * @memberof PropertyInFilter
+ */
+type Props = {
   /**
    * Wrapped input element
    */
-  children: childrenType,
+  children: ReactNode;
   /**
-   * Property object based on {@link PropertyJSON}
+   * Subset of property object based on {@link PropertyJSON} containing just label and name
    */
-  property: PropTypes.shape({
+  property: {
     /**
      * Property label
      */
-    label: PropTypes.string.isRequired,
+    label: string;
     /**
      * Unique property name - its patch.
      */
-    name: PropTypes.string.isRequired,
-  }).isRequired,
-}
-
-PropertyInFilter.defaultProps = {
-  children: null,
+    name: string;
+  };
 }
 
 export { Label, Property }
