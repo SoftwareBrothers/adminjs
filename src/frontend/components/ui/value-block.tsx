@@ -1,10 +1,8 @@
 import React, { ReactNode } from 'react'
-import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 
 import WrapperBox from './wrapper-box'
-import { childrenType } from '../../types'
 import Label from './label'
 
 const OverlayLink = styled(Link)`

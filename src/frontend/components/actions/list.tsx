@@ -1,13 +1,12 @@
 import React from 'react'
 import { withRouter } from 'react-router-dom'
 
+import { RouteComponentProps } from 'react-router'
 import ApiClient from '../../utils/api-client'
 import WrapperBox from '../ui/wrapper-box'
-import { resourceType, locationType } from '../../types'
 import withNotice, { AddNoticeProps } from '../../store/with-notice'
 import RecordsTable from '../app/records-table'
 import Paginate from '../ui/paginate'
-import { RouteComponentProps } from 'react-router'
 import { ActionProps } from './action.props'
 import RecordJSON from '../../../backend/decorators/record-json.interface'
 

@@ -24,6 +24,7 @@ async function build() {
         `${__dirname}/../src/frontend/**`,
         `${__dirname}/../src/backend/utils/view-helpers.ts`,
         `${__dirname}/../src/backend/utils/filter.ts`,
+        `${__dirname}/../src/backend/decorators/**`,
       ],
     },
   })

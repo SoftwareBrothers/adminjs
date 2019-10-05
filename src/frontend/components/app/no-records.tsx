@@ -2,7 +2,6 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 
 import ViewHelpers from '../../../backend/utils/view-helpers'
-import { resourceType } from '../../types'
 import ResourceJSON from '../../../backend/decorators/resource-json.interface'
 
 type Props = {

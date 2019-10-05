@@ -152,7 +152,7 @@ class PropertyDecorator {
    * @return {boolean}
    */
   isId(): boolean {
-    return this.overrideFromOptions(AvailablePropertyOptions.isId)
+    return !!this.overrideFromOptions(AvailablePropertyOptions.isId)
   }
 
   /**
@@ -163,7 +163,7 @@ class PropertyDecorator {
    * @return {boolean}
    */
   isTitle(): boolean {
-    return this.overrideFromOptions(AvailablePropertyOptions.isTitle)
+    return !!this.overrideFromOptions(AvailablePropertyOptions.isTitle)
   }
 
   /**

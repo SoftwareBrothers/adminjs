@@ -758,6 +758,8 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
 	}
 	/**
 	 * Params for a record action
+	 * @alias RecordActionParams
+	 * @memberof ViewHelpers
 	 */
 
 
@@ -777,6 +779,7 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
 	  }
 	  /**
 	   * To each related path adds rootPath passed by the user, as well as a query string
+	   * @private
 	   * @param  {Array<string>} paths   list of parts of the url
 	   * @return {string}       path
 	   */
@@ -831,7 +834,7 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
 	  /**
 	   * Returns resourceAction url
 	   *
-	   * @param   {object}  options
+	   * @param   {ResourceActionParams}  options
 	   * @param   {string}  options.resourceId
 	   * @param   {string}  options.actionName
 	   *
@@ -848,7 +851,7 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
 	  /**
 	   * Returns recordAction url
 	   *
-	   * @param   {object}  options
+	   * @param   {RecordActionParams}  options
 	   * @param   {string}  options.resourceId
 	   * @param   {string}  options.recordId
 	   * @param   {string}  options.actionName
@@ -985,6 +988,7 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
 	});
 
 	var types = /*#__PURE__*/Object.freeze({
+		__proto__: null,
 		pathsType: pathsType,
 		sessionType: sessionType,
 		brandingType: brandingType,
@@ -1769,7 +1773,6 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
 	  *   </WrapperBox>
 	  * )
 	  */
-
 	const StyledButton = styled__default(reactRouterDom.Link).attrs(({
 	  primary
 	}) => ({
@@ -1812,7 +1815,7 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
 	  theme
 	}) => theme.colors.border);
 	/**
-	 * Component which renders pagination
+	 * Pagination component
 	 *
 	 * @component
 	 * @example
@@ -1984,7 +1987,7 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
 
 	const Property$1 = styled__default.div.withConfig({
 	  displayName: "property-in-filter__Property",
-	  componentId: "sc-14pn5s1-0"
+	  componentId: "n7ppvc-0"
 	})(["margin:", " 0;& input{border-radius:0;border-color:", ";box-shadow:none;background:transparent;color:", ";&:focus{border-color:", ";}}& .icon{opacity:0.25;}"], ({
 	  theme
 	}) => theme.sizes.paddingLayout, ({
@@ -2020,34 +2023,9 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
 	  return React__default.createElement(Property$1, null, React__default.createElement(Label, null, property.label), children);
 	};
 
-	PropertyInFilter.propTypes = {
-	  /**
-	   * Wrapped input element
-	   */
-	  children: childrenType,
-
-	  /**
-	   * Property object based on {@link PropertyJSON}
-	   */
-	  property: PropTypes$1.shape({
-	    /**
-	     * Property label
-	     */
-	    label: PropTypes$1.string.isRequired,
-
-	    /**
-	     * Unique property name - its patch.
-	     */
-	    name: PropTypes$1.string.isRequired
-	  }).isRequired
-	};
-	PropertyInFilter.defaultProps = {
-	  children: null
-	};
-
 	const Property$2 = styled__default.div.withConfig({
 	  displayName: "property-in-show__Property",
-	  componentId: "sc-1qcpppe-0"
+	  componentId: "sc-4zsv3b-0"
 	})(["margin-bottom:", ";"], ({
 	  theme
 	}) => theme.sizes.paddingLayout);
@@ -2076,42 +2054,15 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
 	  } = props;
 	  return React__default.createElement(Property$2, null, React__default.createElement(Label, null, property.label), children);
 	};
+	/**
+	 * @memberof PropertyInShow
+	 */
 
-	PropertyInShow.propTypes = {
-	  /**
-	   * Wrapped property value
-	   */
-	  children: childrenType,
 
-	  /**
-	   * Property object based on {@link PropertyJSON}
-	   */
-	  property: PropTypes$1.shape({
-	    /**
-	     * Property label
-	     */
-	    label: PropTypes$1.string.isRequired,
-
-	    /**
-	     * Unique property name - its patch.
-	     */
-	    name: PropTypes$1.string.isRequired
-	  }).isRequired
-	};
 	PropertyInShow.defaultProps = {
 	  children: null
 	};
 
-	const Section = styled__default.section.withConfig({
-	  displayName: "styled-section__Section",
-	  componentId: "w4teil-0"
-	})(["border-left:", " solid ", ";padding-left:", ";"], ({
-	  theme
-	}) => theme.sizes.paddingMin, ({
-	  theme
-	}) => theme.colors.lightBck, ({
-	  theme
-	}) => theme.sizes.padding);
 	/**
 	 * Marks group of fields as a section
 	 *
@@ -2136,22 +2087,17 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
 	 * )
 	 */
 
-	const StyledSection = props => React__default.createElement(Section, props);
+	const StyledSection = styled__default.section.withConfig({
+	  displayName: "styled-section__StyledSection",
+	  componentId: "sc-16m82m4-0"
+	})(["border-left:", " solid ", ";padding-left:", ";"], ({
+	  theme
+	}) => theme.sizes.paddingMin, ({
+	  theme
+	}) => theme.colors.lightBck, ({
+	  theme
+	}) => theme.sizes.padding);
 
-	const StyledTable = styled__default.table.attrs({
-	  className: 'table is-fullwidth'
-	}).withConfig({
-	  displayName: "table__StyledTable",
-	  componentId: "sc-19n8ktm-0"
-	})(["& > thead > tr > th{border:none;}& tr.is-selected{background:", ";}td{color:", ";padding:", ";border-color:", ";}"], ({
-	  theme
-	}) => theme.colors.primary, ({
-	  theme
-	}) => theme.colors.defaultText, ({
-	  theme
-	}) => theme.sizes.padding, ({
-	  theme
-	}) => theme.colors.border);
 	/**
 	 * Simple compnent for styling tables
 	 *
@@ -2182,11 +2128,24 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
 	 * )
 	 */
 
-	const Table = props => React__default.createElement(StyledTable, props);
+	const Table = styled__default.table.attrs({
+	  className: 'table is-fullwidth'
+	}).withConfig({
+	  displayName: "table__Table",
+	  componentId: "sc-8urxmk-0"
+	})(["& > thead > tr > th{border:none;}& tr.is-selected{background:", ";}td{color:", ";padding:", ";border-color:", ";}"], ({
+	  theme
+	}) => theme.colors.primary, ({
+	  theme
+	}) => theme.colors.defaultText, ({
+	  theme
+	}) => theme.sizes.padding, ({
+	  theme
+	}) => theme.colors.border);
 
 	const OverlayLink = styled__default(reactRouterDom.Link).withConfig({
 	  displayName: "value-block__OverlayLink",
-	  componentId: "v4br11-0"
+	  componentId: "sc-19g8v9l-0"
 	})(["position:absolute;top:0;left:0;width:100%;height:100%;display:block;transition:border-width 0.2s;&:hover{transition:border-width 0.2s;border-bottom:5px solid ", ";}"], ({
 	  theme
 	}) => theme.colors.primary);
@@ -2194,7 +2153,7 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
 	  className: 'level'
 	}).withConfig({
 	  displayName: "value-block__Level",
-	  componentId: "v4br11-1"
+	  componentId: "sc-19g8v9l-1"
 	})(["color:", ";margin-top:8px;& .value{font-size:34px;}& .icon{font-size:34px;}"], props => props.color || props.theme.colors.primary);
 	/**
 	 * Simple Widget, which can be used in the dashboard
@@ -2217,78 +2176,37 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
 	 * )
 	 */
 
-	class ValueBlock extends React__default.PureComponent {
-	  render() {
-	    const {
-	      icon,
-	      value,
-	      children,
-	      color,
-	      href,
-	      label
-	    } = this.props;
-	    return React__default.createElement(WrapperBox, {
-	      border: true,
-	      style: {
-	        position: 'relative'
-	      }
-	    }, href ? React__default.createElement(OverlayLink, {
-	      to: href
-	    }) : '', label ? React__default.createElement(Label, null, label) : '', React__default.createElement(Level, {
-	      color: color
-	    }, React__default.createElement("div", {
-	      className: "value"
-	    }, value), React__default.createElement("div", {
-	      className: "icon"
-	    }, React__default.createElement("i", {
-	      className: icon
-	    }))), children);
-	  }
-
-	}
-	ValueBlock.propTypes = {
-	  /**
-	   * Icon class: i.e "fa fa-bomb"
-	   */
-	  icon: PropTypes$1.string,
-
-	  /**
-	   * Value string which
-	   */
-	  value: PropTypes$1.oneOfType([PropTypes$1.string, PropTypes$1.number]),
-
-	  /**
-	   * Content inside a block
-	   */
-	  children: childrenType,
-
-	  /**
-	   * Optional color
-	   */
-	  color: PropTypes$1.string,
-
-	  /**
-	   * Link url if the block should be clickable
-	   */
-	  href: PropTypes$1.string,
-
-	  /**
-	   * Label of the block
-	   */
-	  label: PropTypes$1.string
-	};
-	ValueBlock.defaultProps = {
-	  color: null,
-	  children: null,
-	  value: null,
-	  label: null,
-	  href: null,
-	  icon: null
+	const ValueBlock = props => {
+	  const {
+	    icon,
+	    value,
+	    children,
+	    color,
+	    href,
+	    label
+	  } = props;
+	  return React__default.createElement(WrapperBox, {
+	    border: true,
+	    style: {
+	      position: 'relative'
+	    }
+	  }, href ? React__default.createElement(OverlayLink, {
+	    to: href
+	  }) : '', label ? React__default.createElement(Label, null, label) : '', React__default.createElement(Level, {
+	    color: color
+	  }, React__default.createElement("div", {
+	    className: "value"
+	  }, value), React__default.createElement("div", {
+	    className: "icon"
+	  }, React__default.createElement("i", {
+	    className: icon
+	  }))), children);
 	};
 
 
 
 	var Components = /*#__PURE__*/Object.freeze({
+		__proto__: null,
 		Column: Column,
 		Columns: Columns,
 		DashboardHeader: DashboardHeader,
@@ -2638,7 +2556,16 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
 	}
 
 	/* eslint-disable @typescript-eslint/explicit-function-return-type */
-	const addNotice = (data = {}) => ({
+	let NoticeType;
+
+	(function (NoticeType) {
+	  NoticeType["success"] = "success";
+	  NoticeType["error"] = "error";
+	})(NoticeType || (NoticeType = {}));
+
+	const addNotice = (data = {
+	  message: ''
+	}) => ({
 	  type: 'ADD_NOTICE',
 	  data: {
 	    message: data.message,
@@ -2767,16 +2694,18 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
 	  addNotice: notice => dispatch(addNotice(notice))
 	});
 
-	var withNotice = reactRedux.connect(null, mapDispatchToProps);
+	function withNotice(Component) {
+	  return reactRedux.connect(null, mapDispatchToProps)(Component);
+	}
 
 	/* eslint-disable no-undef */
+
 	/**
 	 * Renders Button for an action
 	 *
 	 * @private
 	 * @component
 	 */
-
 	class ActionButton extends React__default.PureComponent {
 	  constructor(props) {
 	    super(props);
@@ -2855,20 +2784,6 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
 
 	}
 
-	ActionButton.propTypes = {
-	  action: actionType.isRequired,
-	  className: PropTypes$1.string.isRequired,
-	  resourceId: PropTypes$1.string.isRequired,
-	  recordId: PropTypes$1.string,
-	  location: locationType.isRequired,
-	  history: historyType.isRequired,
-	  actionPerformed: PropTypes$1.func,
-	  addNotice: PropTypes$1.func.isRequired
-	};
-	ActionButton.defaultProps = {
-	  recordId: null,
-	  actionPerformed: null
-	};
 	var ActionButton$1 = withNotice(reactRouterDom.withRouter(ActionButton));
 
 	const HeaderWrapper = styled__default.section.attrs({
@@ -3266,7 +3181,6 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
 	 *
 	 * @private
 	 */
-
 	const convertParamsToArrayItems = (property, record) => {
 	  const tempName = 'arrayField';
 	  const regex = new RegExp(`^${property.name}`);
@@ -3407,12 +3321,6 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
 	  }
 
 	}
-	Edit.propTypes = {
-	  property: simplifiedPropertyType.isRequired,
-	  record: recordType.isRequired,
-	  onChange: PropTypes$1.func.isRequired,
-	  ItemComponent: PropTypes$1.elementType.isRequired
-	};
 
 	class List extends React__default.PureComponent {
 	  render() {
@@ -3463,18 +3371,12 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
 	  }
 
 	}
-	Show.propTypes = {
-	  property: propertyType.isRequired,
-	  record: recordType.isRequired,
-	  ItemComponent: PropTypes$1.elementType.isRequired
-	};
 
 	// import Show from './show'
 	var ArrayType = {
 	  show: Show,
 	  edit: Edit,
-	  list: List,
-	  filter: () => ''
+	  list: List
 	};
 
 	const Edit$1 = props => {
@@ -3495,12 +3397,6 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
 	  })))));
 	};
 
-	Edit$1.propTypes = {
-	  property: simplifiedPropertyType.isRequired,
-	  record: recordType.isRequired,
-	  ItemComponent: PropTypes$1.elementType.isRequired
-	};
-
 	const Show$1 = props => {
 	  const {
 	    property,
@@ -3514,11 +3410,6 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
 	      name: `${property.name}.${subProperty.name}`
 	    }
 	  })))));
-	};
-
-	Show$1.propTypes = {
-	  property: simplifiedPropertyType.isRequired,
-	  ItemComponent: PropTypes$1.elementType.isRequired
 	};
 
 	// TODO define ItemComponent interface
@@ -3569,8 +3460,7 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
 	var MixedType = {
 	  show: Show$1,
 	  edit: Edit$1,
-	  list: List$1,
-	  filter: () => ''
+	  list: List$1
 	};
 
 	class Show$2 extends React__default.PureComponent {
@@ -3589,10 +3479,6 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
 	  }
 
 	}
-	Show$2.propTypes = {
-	  property: propertyType.isRequired,
-	  record: recordType.isRequired
-	};
 
 	function areInputsEqual(newInputs, lastInputs) {
 	    if (newInputs.length !== lastInputs.length) {
@@ -4919,6 +4805,7 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
 	    caches = _createEmotion.caches;
 
 	var index_esm = /*#__PURE__*/Object.freeze({
+		__proto__: null,
 		flush: flush,
 		hydrate: hydrate,
 		cx: cx,
@@ -5149,8 +5036,8 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
 				this.updateInputWidth();
 			}
 		}, {
-			key: 'componentWillReceiveProps',
-			value: function componentWillReceiveProps(nextProps) {
+			key: 'UNSAFE_componentWillReceiveProps',
+			value: function UNSAFE_componentWillReceiveProps(nextProps) {
 				var id = nextProps.id;
 
 				if (id !== this.props.id) {
@@ -5529,6 +5416,7 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
 	}
 
 	var reactLifecyclesCompat_es = /*#__PURE__*/Object.freeze({
+		__proto__: null,
 		polyfill: polyfill$1
 	});
 
@@ -12436,11 +12324,6 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
 	  }
 
 	}
-	Edit$2.propTypes = {
-	  property: simplifiedPropertyType.isRequired,
-	  record: recordType.isRequired,
-	  onChange: PropTypes$1.func.isRequired
-	};
 
 	/**
 	 * @file Default AdminBro theme
@@ -12490,6 +12373,7 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
 	};
 
 	var style = /*#__PURE__*/Object.freeze({
+		__proto__: null,
 		colors: colors$1,
 		sizes: sizes,
 		fonts: fonts,
@@ -12601,15 +12485,6 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
 	  }
 
 	}
-	Filter.propTypes = {
-	  property: propertyType.isRequired,
-	  onChange: PropTypes$1.func.isRequired,
-	  // eslint-disable-next-line react/forbid-prop-types
-	  filter: PropTypes$1.object
-	};
-	Filter.defaultProps = {
-	  filter: {}
-	};
 
 	class List$2 extends React__default.PureComponent {
 	  render() {
@@ -13037,6 +12912,7 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
 	}
 
 	var BackendFilter = /*#__PURE__*/Object.freeze({
+		__proto__: null,
 		PARAM_SEPARATOR: PARAM_SEPARATOR,
 		'default': Filter$2
 	});
@@ -19463,6 +19339,16 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
 	  filter: Filter$4
 	};
 
+	let globalAny$2 = {};
+
+	try {
+	  globalAny$2 = window;
+	} catch (error) {
+	  if (error.message !== 'window is not defined') {
+	    throw error;
+	  }
+	}
+
 	const types$1 = {
 	  boolean,
 	  datetime,
@@ -19470,6 +19356,7 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
 	  date: datetime,
 	  richtext
 	};
+
 	/**
 	 * Component which renders properties in all the places in the AdminBro UI. By all the
 	 * places I mean:
@@ -19595,7 +19482,6 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
 	 *   </WrapperBox>
 	 * )
 	 */
-
 	class BasePropertyComponent extends React__default.Component {
 	  constructor(props) {
 	    super(props);
@@ -19625,7 +19511,7 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
 	    let Component = types$1[property.type] && types$1[property.type][where] || defaultType[where];
 
 	    if (property.components && property.components[where] && isClient) {
-	      Component = AdminBro.UserComponents[property.components[where]];
+	      Component = globalAny$2.AdminBro.UserComponents[property.components[where]];
 	      return React__default.createElement(ErrorBoundary, null, React__default.createElement(Component, {
 	        property: property,
 	        resource: resource,
@@ -19639,12 +19525,20 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
 	    const Mixed = MixedType[where];
 
 	    if (property.isArray) {
+	      if (!Array) {
+	        return React__default.createElement("div", null);
+	      }
+
 	      return React__default.createElement(Array, _extends_1({}, this.props, {
 	        ItemComponent: BasePropertyComponent
 	      }));
 	    }
 
 	    if (property.type === 'mixed' && property.subProperties && property.subProperties.length) {
+	      if (!Mixed) {
+	        return React__default.createElement("div", null);
+	      }
+
 	      return React__default.createElement(Mixed, _extends_1({}, this.props, {
 	        ItemComponent: BasePropertyComponent
 	      }));
@@ -19660,41 +19554,6 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
 	  }
 
 	}
-	BasePropertyComponent.propTypes = {
-	  /**
-	   * Object of type: {@link PropertyJSON}
-	   */
-	  property: propertyType.isRequired,
-
-	  /**
-	   * Object of type: {@link ResourceJSON}
-	   */
-	  resource: resourceType.isRequired,
-
-	  /**
-	   * Object of type: {@link RecordJSON}
-	   */
-	  record: recordType,
-
-	  /**
-	   * Filter object taken from the query params. It is used on the _filter_ components
-	   */
-	  filter: PropTypes$1.object,
-	  // eslint-disable-line react/forbid-prop-types
-	  where: PropTypes$1.oneOf(['edit', 'filter', 'show', 'list']).isRequired,
-
-	  /**
-	   * Function which indicates change of the property value. It takes either
-	   * one argument which is entire {@link RecordJSON} or 2 arguments - one
-	   * property.name and the second one: value. Used by the _edit_ and _filter_ components
-	   */
-	  onChange: PropTypes$1.func
-	};
-	BasePropertyComponent.defaultProps = {
-	  filter: {},
-	  record: null,
-	  onChange: null
-	};
 
 	const camelizePropertyType = type => ({
 	  Edit: type.edit,
@@ -19709,6 +19568,18 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
 	BasePropertyComponent.RichText = camelizePropertyType(richtext);
 	BasePropertyComponent.Reference = camelizePropertyType(reference);
 
+	let PropertyPlace;
+	/**
+	 * JSON representation of a Property.
+	 */
+
+	(function (PropertyPlace) {
+	  PropertyPlace["show"] = "show";
+	  PropertyPlace["list"] = "list";
+	  PropertyPlace["edit"] = "edit";
+	  PropertyPlace["filter"] = "filter";
+	})(PropertyPlace || (PropertyPlace = {}));
+
 	/**
 	 * @name NewAction
 	 * @category Actions
@@ -19716,7 +19587,6 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
 	 * @component
 	 * @private
 	 */
-
 	class New extends React__default.Component {
 	  constructor(props) {
 	    super(props);
@@ -19726,7 +19596,7 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
 	    this.api = new ApiClient();
 	    this.handleChange = this.handleChange.bind(this);
 	    this.state = {
-	      record: {
+	      record: { ...record,
 	        params: record && record.params || {},
 	        errors: record && record.errors || {},
 	        populated: record && record.populated || {}
@@ -19777,7 +19647,7 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
 	        history.push(response.data.redirectUrl);
 	      } else {
 	        addNotice({
-	          type: 'error',
+	          type: NoticeType.error,
 	          message: 'There were errors in the record object. Check them out'
 	        });
 	        this.setState(state => ({
@@ -19804,7 +19674,7 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
 	      onSubmit: this.handleSubmit.bind(this)
 	    }, properties.map(property => React__default.createElement(BasePropertyComponent, {
 	      key: property.name,
-	      where: "edit",
+	      where: PropertyPlace.edit,
 	      property: property,
 	      resource: resource,
 	      onChange: this.handleChange,
@@ -19822,30 +19692,6 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
 
 	}
 
-	New.propTypes = {
-	  /**
-	   * Object of type: {@link ResourceJSON}
-	   */
-	  resource: resourceType.isRequired,
-
-	  /**
-	   * history object used by ReactRouter
-	   */
-	  history: historyType.isRequired,
-
-	  /**
-	   * Object of type: {@link RecordJSON}
-	   */
-	  record: recordType,
-
-	  /**
-	   * Function which adds a new `notice` information.
-	   */
-	  addNotice: PropTypes$1.func.isRequired
-	};
-	New.defaultProps = {
-	  record: null
-	};
 	var _new = withNotice(reactRouterDom.withRouter(New));
 
 	/**
@@ -19909,7 +19755,7 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
 	        });
 	      } else {
 	        addNotice({
-	          type: 'error',
+	          type: NoticeType.error,
 	          message: 'There were errors in the record object. Check them out'
 	        });
 	        this.setState(state => ({
@@ -19937,7 +19783,7 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
 	      onSubmit: this.handleSubmit.bind(this)
 	    }, properties.map(property => React__default.createElement(BasePropertyComponent, {
 	      key: property.name,
-	      where: "edit",
+	      where: PropertyPlace.edit,
 	      onChange: this.handleChange,
 	      property: property,
 	      resource: resource,
@@ -19954,28 +19800,11 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
 	  }
 
 	}
+	/**
+	 * @memberof Edit
+	 */
 
-	Edit$7.propTypes = {
-	  /**
-	   * Object of type: {@link ResourceJSON}
-	   */
-	  resource: resourceType.isRequired,
 
-	  /**
-	   * Object of type: {@link ActionJSON}
-	   */
-	  record: recordType.isRequired,
-
-	  /**
-	   * history object used by ReactRouter
-	   */
-	  history: historyType.isRequired,
-
-	  /**
-	   * Function which adds a new `notice` information.
-	   */
-	  addNotice: PropTypes$1.func.isRequired
-	};
 	var edit = withNotice(reactRouterDom.withRouter(Edit$7));
 
 	/**
@@ -19996,23 +19825,11 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
 	    border: true
 	  }, properties.map(property => React__default.createElement(BasePropertyComponent, {
 	    key: property.name,
-	    where: "show",
+	    where: PropertyPlace.show,
 	    property: property,
 	    resource: resource,
 	    record: record
 	  })));
-	};
-
-	Show$7.propTypes = {
-	  /**
-	   * Object of type: {@link ResourceJSON}
-	   */
-	  resource: resourceType.isRequired,
-
-	  /**
-	   * Id of a given record
-	   */
-	  record: recordType.isRequired
 	};
 
 	const Td = styled__default.td.withConfig({
@@ -20043,7 +19860,7 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
 	      }
 	    }) : React__default.createElement(BasePropertyComponent, {
 	      key: property.name,
-	      where: "list",
+	      where: PropertyPlace.list,
 	      property: property,
 	      resource: resource,
 	      record: record
@@ -20191,7 +20008,6 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
 	 * </WrapperBox>
 	 * )
 	 */
-
 	const RecordsTableHeader = props => {
 	  const {
 	    titleProperty,
@@ -20215,28 +20031,6 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
 	  })));
 	};
 
-	RecordsTableHeader.propTypes = {
-	  /**
-	   * {@link PropertyJSON}
-	   */
-	  titleProperty: propertyType.isRequired,
-
-	  /**
-	   * Array of {@link PropertyJSON}
-	   */
-	  properties: PropTypes$1.arrayOf(propertyType).isRequired,
-
-	  /**
-	   * Name of the property which should be marked as currently sorted by
-	   */
-	  sortBy: PropTypes$1.string.isRequired,
-
-	  /**
-	   * Sort direction
-	   */
-	  direction: PropTypes$1.oneOf(['asc', 'desc']).isRequired
-	};
-
 	const NoRecords = props => {
 	  const {
 	    resource
@@ -20249,13 +20043,9 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
 	  });
 	  return React__default.createElement("div", {
 	    className: "content has-text-centered"
-	  }, React__default.createElement("h3", null, "No records"), React__default.createElement("p", null, "There are no records in this resource.", canCreate ? React__default.createElement(React__default.Fragment, null, 'Create ', React__default.createElement(reactRouterDom.Link, {
+	  }, React__default.createElement("h3", null, "No records"), React__default.createElement("p", null, "There are no records in this resource.", canCreate ? React__default.createElement(React__default.Fragment, null, React__default.createElement("span", null, "Create "), React__default.createElement(reactRouterDom.Link, {
 	    to: newAction
 	  }, "first record")) : ''));
-	};
-
-	NoRecords.propTypes = {
-	  resource: resourceType.isRequired
 	};
 
 	const RecordsTable = props => {
@@ -20292,10 +20082,15 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
 	  resource: resourceType.isRequired,
 	  records: PropTypes$1.arrayOf(recordType).isRequired,
 	  actionPerformed: PropTypes$1.func.isRequired,
-	  sortBy: PropTypes$1.string.isRequired,
+	  sortBy: PropTypes$1.string,
 	  direction: PropTypes$1.string.isRequired,
 	  isLoading: PropTypes$1.bool.isRequired
 	};
+	RecordsTable.defaultProps = {
+	  sortBy: null
+	};
+
+	// TODO: add direction enum
 
 	/**
 	 * @name NewAction
@@ -20304,7 +20099,6 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
 	 * @component
 	 * @private
 	 */
-
 	class List$7 extends React__default.Component {
 	  constructor(props) {
 	    super(props);
@@ -20398,18 +20192,12 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
 
 	}
 
-	List$7.propTypes = {
-	  /**
-	   * Object of type: {@link ResourceJSON}
-	   */
-	  resource: resourceType.isRequired,
-	  location: locationType.isRequired
-	};
 	var list = withNotice(reactRouterDom.withRouter(List$7));
 
 
 
 	var actions = /*#__PURE__*/Object.freeze({
+		__proto__: null,
 		'new': _new,
 		edit: edit,
 		show: Show$7,
@@ -20418,6 +20206,17 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
 
 	// eslint-disable-next-line import/prefer-default-export
 	const DOCS = 'https://softwarebrothers.github.io/admin-bro-dev';
+
+	let globalAny$3 = {};
+
+	try {
+	  globalAny$3 = window;
+	} catch (error) {
+	  if (error.message !== 'window is not defined') {
+	    throw error;
+	  }
+	} // TODO: Remove the above hack to something more type safe
+
 
 	/**
 	 * Component which renders all the default and custom actions for both the Resource and the Record.
@@ -20467,7 +20266,6 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
 	 * @name BaseActionComponent
 	 * @category Base
 	 */
-
 	class BaseActionComponent extends React__default.Component {
 	  constructor(props) {
 	    super(props);
@@ -20495,7 +20293,7 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
 	    let Action = actions[action.name];
 
 	    if (isClient && action.component) {
-	      Action = AdminBro.UserComponents[action.component];
+	      Action = globalAny$3.AdminBro.UserComponents[action.component];
 	    }
 
 	    if (Action) {
@@ -20516,26 +20314,6 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
 	  }
 
 	}
-
-	BaseActionComponent.propTypes = {
-	  /**
-	   * Object of type: {@link ResourceJSON}
-	   */
-	  resource: resourceType.isRequired,
-
-	  /**
-	   * Object of type: {@link ActionJSON}
-	   */
-	  action: actionType.isRequired,
-
-	  /**
-	   * Object of type: {@link RecordJSON}
-	   */
-	  record: recordType
-	};
-	BaseActionComponent.defaultProps = {
-	  record: null
-	};
 
 	const ContainerRecord = styled__default.div.withConfig({
 	  displayName: "record-action__ContainerRecord",
@@ -20968,6 +20746,7 @@ var AdminBro = (function (React, reactRedux, reactRouterDom, styled, PropTypes$1
 
 
 	var AppComponents = /*#__PURE__*/Object.freeze({
+		__proto__: null,
 		ActionButton: ActionButton$1,
 		ActionHeader: ActionHeader,
 		BaseActionComponent: BaseActionComponent,

@@ -40,9 +40,13 @@ RecordsTable.propTypes = {
   resource: resourceType.isRequired,
   records: PropTypes.arrayOf(recordType).isRequired,
   actionPerformed: PropTypes.func.isRequired,
-  sortBy: PropTypes.string.isRequired,
+  sortBy: PropTypes.string,
   direction: PropTypes.string.isRequired,
   isLoading: PropTypes.bool.isRequired,
+}
+
+RecordsTable.defaultProps = {
+  sortBy: null,
 }
 
 export default RecordsTable

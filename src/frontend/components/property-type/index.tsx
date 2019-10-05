@@ -159,12 +159,6 @@ type State = {
  * )
  */
 export default class BasePropertyComponent extends React.Component<BasePropertyProps, State> {
-  static DefaultType
-  static Boolean
-  static DateTime
-  static RichText
-  static Reference
-
   constructor(props) {
     super(props)
     this.state = {
@@ -175,6 +169,16 @@ export default class BasePropertyComponent extends React.Component<BasePropertyP
   componentDidMount() {
     this.setState({ isClient: true })
   }
+
+  static DefaultType
+
+  static Boolean
+
+  static DateTime
+
+  static RichText
+
+  static Reference
 
   render() {
     const { property, resource, record, filter, where, onChange } = this.props
@@ -202,7 +206,7 @@ export default class BasePropertyComponent extends React.Component<BasePropertyP
     const Mixed = MixedType[where]
 
     if (property.isArray) {
-      if (!Array) {return}
+      if (!Array) { return (<div />) }
       return (
         <Array
           {...this.props}
@@ -212,7 +216,7 @@ export default class BasePropertyComponent extends React.Component<BasePropertyP
     }
 
     if (property.type === 'mixed' && property.subProperties && property.subProperties.length) {
-      if (!Mixed) {return}
+      if (!Mixed) { return (<div />) }
       return (
         <Mixed
           {...this.props}

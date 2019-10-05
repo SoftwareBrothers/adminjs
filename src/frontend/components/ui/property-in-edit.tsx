@@ -1,8 +1,5 @@
 import React, { ReactNode } from 'react'
 import styled from 'styled-components'
-import PropTypes from 'prop-types'
-
-import { childrenType } from '../../types'
 
 import Label from './label'
 

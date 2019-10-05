@@ -1,6 +1,5 @@
 import React from 'react'
 import styled from 'styled-components'
-import PropTypes from 'prop-types'
 
 const StyledColumn = styled.section.attrs<Props>(({ width = 4, offset = 0 }) => ({
   className: `column is-${width}-desktop is-offset-${offset}`,

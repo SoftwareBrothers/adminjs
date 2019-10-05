@@ -1,11 +1,11 @@
 
-import React from 'react'
+import React, { ReactNode } from 'react'
 
 import PropertyInShow from '../../ui/property-in-show'
-import { propertyType, recordType } from '../../../types'
+import { BasePropertyProps } from '../base-property-props'
 
-export default class Show extends React.PureComponent {
-  render() {
+export default class Show extends React.PureComponent<BasePropertyProps> {
+  render(): ReactNode {
     const { property, record } = this.props
 
     const value = record.params[property.name]
@@ -18,9 +18,4 @@ export default class Show extends React.PureComponent {
       </PropertyInShow>
     )
   }
-}
-
-Show.propTypes = {
-  property: propertyType.isRequired,
-  record: recordType.isRequired,
 }

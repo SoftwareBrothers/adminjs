@@ -1,29 +1,28 @@
-import React from 'react'
-import PropTypes from 'prop-types'
+import React, { ReactNode } from 'react'
 import Select from 'react-select'
 
 import PropertyInEdit from '../../ui/property-in-edit'
-import { simplifiedPropertyType, recordType } from '../../../types'
+import { BasePropertyProps } from '../base-property-props'
 
-export default class Edit extends React.Component {
+export default class Edit extends React.Component<BasePropertyProps> {
   constructor(props) {
     super(props)
     this.handleInputChange = this.handleInputChange.bind(this)
     this.handleSelectChange = this.handleSelectChange.bind(this)
   }
 
-  handleInputChange(event) {
+  handleInputChange(event): void {
     const { onChange, property } = this.props
     onChange(property.name, event.target.value)
   }
 
-  handleSelectChange(selected) {
+  handleSelectChange(selected): void {
     const { onChange, property } = this.props
     const value = selected ? selected.value : ''
     onChange(property.name, value)
   }
 
-  renderInput() {
+  renderInput(): ReactNode {
     const { property, record } = this.props
     const value = (record.params && typeof record.params[property.name] !== 'undefined')
       ? record.params[property.name]
@@ -51,7 +50,7 @@ export default class Edit extends React.Component {
     )
   }
 
-  render() {
+  render(): ReactNode {
     const { property, record } = this.props
     const error = record.errors && record.errors[property.name]
     return (
@@ -60,10 +59,4 @@ export default class Edit extends React.Component {
       </PropertyInEdit>
     )
   }
-}
-
-Edit.propTypes = {
-  property: simplifiedPropertyType.isRequired,
-  record: recordType.isRequired,
-  onChange: PropTypes.func.isRequired,
 }

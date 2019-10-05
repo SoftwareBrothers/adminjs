@@ -1,4 +1,3 @@
-import ActionDecorator from './action-decorator'
 import ActionJSON from './action-json.interface'
 
 type ErrorMessage = { message: string }

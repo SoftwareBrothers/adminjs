@@ -1,30 +1,29 @@
-import React from 'react'
-import PropTypes from 'prop-types'
+import React, { ReactNode } from 'react'
 import Select from 'react-select'
 
 import PropertyInFilter from '../../ui/property-in-filter'
 import { filterStyles } from '../../../styles/select-styles'
-import { propertyType } from '../../../types'
+import { BasePropertyProps } from '../base-property-props'
 
-export default class Filter extends React.PureComponent {
+export default class Filter extends React.PureComponent<BasePropertyProps> {
   constructor(props) {
     super(props)
     this.handleInputChange = this.handleInputChange.bind(this)
     this.handleSelectChange = this.handleSelectChange.bind(this)
   }
 
-  handleInputChange(event) {
+  handleInputChange(event): void {
     const { onChange, property } = this.props
     onChange(property.name, event.target.value)
   }
 
-  handleSelectChange(selected) {
+  handleSelectChange(selected): void {
     const { onChange, property } = this.props
     const value = selected ? selected.value : ''
     onChange(property.name, value)
   }
 
-  renderInput() {
+  renderInput(): ReactNode {
     const { property, filter } = this.props
     const filterKey = `filter-${property.name}`
     const value = filter[property.name] || ''
@@ -56,7 +55,7 @@ export default class Filter extends React.PureComponent {
     )
   }
 
-  render() {
+  render(): ReactNode {
     const { property } = this.props
     return (
       <PropertyInFilter property={property}>
@@ -66,15 +65,4 @@ export default class Filter extends React.PureComponent {
       </PropertyInFilter>
     )
   }
-}
-
-Filter.propTypes = {
-  property: propertyType.isRequired,
-  onChange: PropTypes.func.isRequired,
-  // eslint-disable-next-line react/forbid-prop-types
-  filter: PropTypes.object,
-}
-
-Filter.defaultProps = {
-  filter: {},
 }

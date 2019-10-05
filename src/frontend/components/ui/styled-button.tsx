@@ -6,7 +6,7 @@ type OnClickHandler = () => any;
 
 /**
  * Button component which extends Link from react-router-dom
- * 
+ *
  * @memberof StyledButton
  * @see https://github.com/ReactTraining/react-router/blob/master/packages/react-router-dom/docs/api/Link.md
  */
