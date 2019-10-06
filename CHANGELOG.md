@@ -22,6 +22,7 @@ Started from version 0.9.5
 
 * `AdminBro.require` renamed to `AdminBro.bundler`
 * components are now required via import { [ComponentName] } from 'admin-bro'
+* bump up React version to 16.8.0
 
 ## [1.2.0] - 2019-09-21
 
