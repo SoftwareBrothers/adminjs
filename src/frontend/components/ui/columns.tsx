@@ -12,7 +12,7 @@ const StyledColumns = styled.section.attrs({
  *
  * Example usage with {@link Column}
  * ```JavaScript
- * import { Column, Columns } from 'admin-bro/components'
+ * import { Column, Columns } from 'admin-bro'
  * //...
  * return (
  *   <columns>

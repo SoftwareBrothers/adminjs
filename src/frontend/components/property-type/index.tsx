@@ -73,7 +73,7 @@ type State = {
  *
  * ```
  * import React from 'react'
- * import PropertyInShow from 'admin-bro/components'
+ * import PropertyInShow from 'admin-bro'
  *
  * const MyReactComponent = props => {
  *   const { record, property } = props

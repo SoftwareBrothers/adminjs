@@ -16,6 +16,7 @@ const external = [
   'styled-components',
   'prop-types',
   'admin-bro',
+  // TODO remove next line in version 2.0, see comment in src/frontend/bundle-entry.jsx
   'admin-bro/components',
   'admin-bro/property-types',
   'admin-bro/types',

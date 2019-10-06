@@ -56,7 +56,7 @@ type State = {
  *
  * ```
  * // ./my-new-action.jsx
- * import WrapperBox from 'admin-bro/components'
+ * import WrapperBox from 'admin-bro'
  *
  * const MyNewAction = (props) => {
  *   const { resource, action, record } = props

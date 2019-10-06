@@ -12,7 +12,7 @@ const StyledColumn = styled.section.attrs<Props>(({ width = 4, offset = 0 }) => 
  *
  * Example usage with {@link Column}
  * ```JavaScript
- * import { Column, Columns } from 'admin-bro/components'
+ * import { Column, Columns } from 'admin-bro'
  * //...
  * return (
  *   <columns>

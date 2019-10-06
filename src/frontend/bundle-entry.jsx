@@ -11,7 +11,6 @@ import * as Components from './components/ui'
 import * as AppComponents from './components/app'
 import ApiClient from './utils/api-client'
 import * as style from './styles/variables'
-import * as types from './types'
 
 const env = {
   NODE_ENV: process.env.NODE_ENV || 'development',
@@ -35,11 +34,13 @@ window.regeneratorRuntime = regeneratorRuntime
 export default {
   Application,
   ViewHelpers,
-  Components: { ...Components, ...AppComponents },
   UserComponents: {},
   ApiClient,
   style,
   PropertyTypes,
-  types,
   env,
+  ...Components,
+  ...AppComponents,
+  // TODO: following is a backward compatible - remove this in version 2.0
+  Components: { ...Components, ...AppComponents },
 }
