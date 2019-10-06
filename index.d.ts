@@ -9,6 +9,9 @@ import ValidationError from './src/backend/utils/validation-error'
 import ApiClient from './src/frontend/utils/api-client'
 import * as ACTIONS from './src/backend/actions/index'
 
+export * from './src/frontend/components/ui'
+export * from './src/frontend/components/app'
+
 export {
   AdminBro as default,
   BaseProperty,
