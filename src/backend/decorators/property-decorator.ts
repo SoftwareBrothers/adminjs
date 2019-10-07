@@ -135,6 +135,8 @@ class PropertyDecorator {
     return this.property.isVisible()
   }
 
+  // TODO: add option to pass function to isVisible
+
   /**
    * Position of the field
    *

@@ -1,14 +1,10 @@
 import React, { ReactNode } from 'react'
-import styled from 'styled-components'
-import { Link } from 'react-router-dom'
+import styled, { css } from 'styled-components'
 
 type OnClickHandler = () => any;
 
 /**
- * Button component which extends Link from react-router-dom
- *
  * @memberof StyledButton
- * @see https://github.com/ReactTraining/react-router/blob/master/packages/react-router-dom/docs/api/Link.md
  */
 type Props = {
   /**
@@ -22,46 +18,19 @@ type Props = {
   /**
    * clic callback
    */
-  onClick: OnClickHandler;
+  onClick?: OnClickHandler;
   /**
    * As which element it should be rentered. For example: as: 'a' or as: 'button'
    */
-  as: string;
+  as?: string;
   /**
    * Href
    */
   to: string;
 }
 
-/**
- * Base button component
- *
- * @component
- * @example <caption>Regular button</caption>
- * return (
-  *   <WrapperBox border>
-  *     <StyledButton>I am button</StyledButton>
-  *   </WrapperBox>
-  * )
-  *
-  * @example <caption>Primary button</caption>
-  * return (
-  *   <WrapperBox border>
-  *     <StyledButton primary>I am primary button</StyledButton>
-  *   </WrapperBox>
-  * )
-  *
-  * @example <caption>With icon</caption>
-  * return (
-  *   <WrapperBox border>
-  *     <StyledButton><i class="fa fa-bomb" />I am button with icon</StyledButton>
-  *   </WrapperBox>
-  * )
-  */
-const StyledButton = styled(Link).attrs<Props>(({ primary }) => ({
-  className: `button${primary ? ' is-primary' : ''}`,
-}))`
-  &&& {
+const styles = css`
+&&& {
     font-size: ${({ theme }): string => theme.fonts.medium};
     border-radius: 0;
     border-color: ${({ theme }): string => theme.colors.primary};
@@ -115,4 +84,38 @@ const StyledButton = styled(Link).attrs<Props>(({ primary }) => ({
   }
 `
 
-export default StyledButton
+/**
+ * Base button component
+ *
+ * @component
+ * @example <caption>Regular button</caption>
+ * return (
+  *   <WrapperBox border>
+  *     <StyledButton>I am button</StyledButton>
+  *   </WrapperBox>
+  * )
+  *
+  * @example <caption>Primary button</caption>
+  * return (
+  *   <WrapperBox border>
+  *     <StyledButton primary>I am primary button</StyledButton>
+  *   </WrapperBox>
+  * )
+  *
+  * @example <caption>With icon</caption>
+  * return (
+  *   <WrapperBox border>
+  *     <StyledButton><i class="fa fa-bomb" />I am button with icon</StyledButton>
+  *   </WrapperBox>
+  * )
+  */
+const StyledButton = styled('button').attrs<Props>(({ primary }) => ({
+  className: `button${primary ? ' is-primary' : ''}`,
+}))`
+  ${styles}
+`
+
+export {
+  StyledButton as default,
+  styles,
+}

@@ -68,7 +68,7 @@ const Login: React.FC<Props> = (props) => {
               <PropertyInEdit property={password}>
                 <input type="password" name="password" id="password" placeholder="Password" className="input" />
               </PropertyInEdit>
-              <StyledButton as="button" type="submit" className="is-primary is-fullwidth" style={{ marginTop: 40 }}>
+              <StyledButton type="submit" className="is-primary is-fullwidth" style={{ marginTop: 40 }}>
                 Login
               </StyledButton>
             </form>

@@ -151,7 +151,7 @@ class Filter extends React.Component {
                 resource={resource}
               />
             ))}
-            <StyledButton as="button" className="is-primary">
+            <StyledButton className="is-primary">
               Apply Changes
             </StyledButton>
             <StyledButton

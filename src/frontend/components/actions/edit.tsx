@@ -101,7 +101,7 @@ class Edit extends React.Component<ActionProps & RouteComponentProps & AddNotice
               record={record}
             />
           ))}
-          <StyledButton as="button" type="submit" className="is-primary">
+          <StyledButton type="submit" className="is-primary">
             <i className="icomoon-save" />
             <span className="btn-text">Save</span>
           </StyledButton>

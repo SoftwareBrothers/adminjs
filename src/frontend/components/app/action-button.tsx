@@ -6,7 +6,7 @@ import React, { ReactNode } from 'react'
 import { withRouter } from 'react-router-dom'
 
 import { RouteComponentProps } from 'react-router'
-import StyledButton from '../ui/styled-button'
+import StyledLink from '../ui/styled-link'
 import ApiClient from '../../utils/api-client'
 import ViewHelpers from '../../../backend/utils/view-helpers'
 import withNotice, { AddNoticeProps } from '../../store/with-notice'
@@ -65,7 +65,7 @@ class ActionButton extends React.PureComponent<RouteComponentProps & Props & Add
       ? h.recordActionUrl({ resourceId, recordId, actionName })
       : h.resourceActionUrl({ resourceId, actionName })
     return (
-      <StyledButton
+      <StyledLink
         to={href}
         className={`button ${className}`}
         onClick={this.handleClick}
@@ -76,7 +76,7 @@ class ActionButton extends React.PureComponent<RouteComponentProps & Props & Add
         <div className="btn-text">
           {action.label}
         </div>
-      </StyledButton>
+      </StyledLink>
     )
   }
 }

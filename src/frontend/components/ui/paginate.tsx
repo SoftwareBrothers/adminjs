@@ -3,7 +3,7 @@ import JWPaginate from 'jw-paginate'
 import styled from 'styled-components'
 import { withRouter } from 'react-router-dom'
 
-import StyledButton from './styled-button'
+import StyledLink from './styled-link'
 
 const PaginationWrapper = styled.div.attrs({
   className: 'level-item pagination-content',
@@ -50,27 +50,27 @@ class Paginate extends React.PureComponent<Props> {
     return (
       <PaginationWrapper>
         <div className="pagination">
-          <StyledButton
+          <StyledLink
             to={{ search: this.linkToPage(prevPage) }}
             className={`button is-white${isFirstPage ? ' disabled' : ''}`}
           >
             <i className="icomoon-pagination-left" />
-          </StyledButton>
+          </StyledLink>
           {paginate.pages.map(p => (
-            <StyledButton
+            <StyledLink
               key={p}
               to={{ search: this.linkToPage(p) }}
               className={`pages button is-white${p === currentPage ? ' is-primary' : ''}`}
             >
               {p}
-            </StyledButton>
+            </StyledLink>
           ))}
-          <StyledButton
+          <StyledLink
             to={{ search: this.linkToPage(nextPage) }}
             className={`button is-white${isLastPage ? ' disabled' : ''}`}
           >
             <i className="icomoon-pagination-right" />
-          </StyledButton>
+          </StyledLink>
         </div>
       </PaginationWrapper>
     )
