@@ -6,6 +6,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 Started from version 0.9.5
 
+## [1.3.1] - 2019-10-06
+
+### Added
+
+* added new component: Styled Link
+
+### Changed
+
+* added ActionContext to both before nad after action hooks
+
 ## [1.3.0] - 2019-10-06
 
 ### Added
@@ -23,6 +33,7 @@ Started from version 0.9.5
 * `AdminBro.require` renamed to `AdminBro.bundler`
 * components are now required via import { [ComponentName] } from 'admin-bro'
 * bump up React version to 16.8.0
+* `BaseRecord.toJSON` now takes `currentAdmin` as an argument
 
 ## [1.2.0] - 2019-09-21
 
