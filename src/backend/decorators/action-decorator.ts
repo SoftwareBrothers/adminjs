@@ -53,12 +53,12 @@ class ActionDecorator {
    */
   async handler(request, response, data): Promise<any> {
     let modifiedRequest = request
-    if (this.action.before) {
-      modifiedRequest = await this.action.before(request)
+    if (typeof this.action.before === 'function') {
+      modifiedRequest = await this.action.before(request, data)
     }
     let ret = await this.action.handler(modifiedRequest, response, data)
-    if (this.action.after) {
-      ret = await this.action.after(ret, modifiedRequest)
+    if (typeof this.action.after === 'function') {
+      ret = await this.action.after(ret, modifiedRequest, data)
     }
     return ret
   }

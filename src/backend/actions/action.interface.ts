@@ -107,7 +107,11 @@ export type Before = (
   /**
    * Request object
    */
-  request: ActionRequest
+  request: ActionRequest,
+    /**
+   * Invocation context
+   */
+  context: ActionContext,
 ) => ActionRequest
 
 /**
@@ -125,6 +129,10 @@ export type After = (
    * Original request which has been sent to ActionHandler
    */
   request: ActionRequest,
+  /**
+   * Invocation context
+   */
+  context: ActionContext,
 ) => any
 
 /**
@@ -174,7 +182,8 @@ export default interface Action {
   isVisible?: boolean | IsFunction;
   /**
    * indicates if action can be invoked for given invocation context.
-   * Similar to '{@link Action.isVisible} - it also can be a simple boolean value.
+   * You can pass a boolean or function of type {@link IsFunction}, which
+   * takes {@link ActionContext} as an argument.
    */
   isAccessible?: boolean | IsFunction;
   /**
