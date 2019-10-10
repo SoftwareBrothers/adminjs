@@ -4,15 +4,30 @@ import ViewHelpers from '../utils/view-helpers'
 import BaseRecord from '../adapters/base-record'
 import BaseResource from '../adapters/base-resource'
 import ActionDecorator from '../decorators/action-decorator'
+import RecordJSON from '../decorators/record-json.interface'
 
 /**
- * Execution context for an action. It is passed to the {@link Handler}
+ * Execution context for an action. It is passed to the {@link Handler},
+ * {@link Before} and {@link After} functions.
+ *
+ * ```
+ * // Handler of a 'record' action
+ * handler: async (request, response, context) {
+ *   const user = context.record
+ *   const Cars = context._admin.findResource('Car')
+ *   const userCar = Car.findOne(context.record.param('carId'))
+ *   return {
+ *     record: user.toJSON(context.currentAdmin),
+ *   }
+ * }
+ * ```
+ *
  * @memberof Action
  * @alias ActionContext
  */
 export type ActionContext = {
   /**
-   * current instance of AdminBro
+   * current instance of AdminBro. You may use it to fetch other Resources by their names:
    */
   _admin: AdminBro;
   /**
@@ -85,8 +100,26 @@ export type ActionRequest = {
 export type IsFunction = (context: ActionContext) => boolean
 
 /**
- * handler function which will be invoked by {@link ApiController#resourceAction}
- * or {@link ApiController#recordAction}
+ * Required response of a Record action
+ * @memberof Action
+ * @alias RecordActionResponse
+ */
+export type RecordActionResponse = {
+  /**
+   * Record object.
+   */
+  record: RecordJSON;
+  /**
+   * redirect path
+   */
+  redirectUrl?: string;
+  /**
+   * Any other custom parameter
+   */
+  [key: string]: any;
+}
+
+/**
  * @alias ActionHandler
  * @async
  * @memberof Action
@@ -95,7 +128,7 @@ export type ActionHandler = (
   request: ActionRequest,
   response: any,
   context: ActionContext
-) => Promise<any>
+) => Promise<RecordActionResponse | any>
 
 /**
  * Before action hook. When it is given - it is performed before the {@link ActionHandler}
@@ -115,8 +148,53 @@ export type Before = (
 ) => ActionRequest
 
 /**
- * After action hook. When it is given - it is performed on the returned,
- * by {@link ActionHandler}, object.
+ * Type of an after hook action.
+ *
+ * You can use it to (just an idea)
+ * - create log of changes done in the app
+ * - prefetch additional data after original {@link Handler} is being performed
+ *
+ * __Creating a changelog__
+ *
+ * ```javascript
+ * // example mongoose model
+ * const ChangeLog = mongoose.model('ChangeLog', mongoose.Schema({
+ *   // what action
+ *   action: { type: String },
+ *   // who
+ *   userId: { type: mongoose.Types.ObjectId, ref: 'User' },
+ *   // on which resource
+ *   resource: { type: String },
+ *   // was record involved (resource and recordId creates to polimorfic relation)
+ *   recordId: { type: mongoose.Types.ObjectId },
+ * }, { timestamps: true }))
+ *
+ * // actual after function
+ * const createLog = async (originalResponse, request, context) => {
+ *   // checking if object doesn't have any errors or is a delete action
+ *   if ((request.method === 'post'
+ *        && originalResponse.record
+ *        && !Object.keys(originalResponse.record.errors).length)
+ *        || context.action.name === 'delete') {
+ *     await ChangeLog.create({
+ *       action: context.action.name,
+ *       // assuming in the session we store _id of the current admin
+ *       userId: context.currentAdmin && context.currentAdmin._id,
+ *       resource: context.resource.id(),
+ *       recordId: context.record && context.record.id(),
+ *     })
+ *   }
+ *   return originalResponse
+ * }
+ *
+ * // and attaching this function to actions for all resources
+ * const { ACTIONS } = require('admin-bro')
+ *
+ * ACTIONS.edit.after = createLog
+ * ACTIONS.delete.after = createLog
+ * ACTIONS.new.after = createLog
+ * ```
+ *
  * @memberof Action
  * @alias After
  */
@@ -136,7 +214,9 @@ export type After = (
 ) => any
 
 /**
+ * @classdesc
  * Inteface representing an Action in AdminBro.
+ * Look at {@tutorial 05-actions} to see where you can use this interface.
  *
  * #### Example Action
  *
@@ -166,6 +246,33 @@ export type After = (
  *
  * Users can also create their own actions or override those already exising by using
  * {@link ResourceOptions}
+ *
+ * ```javascript
+ * const AdminBroOptions = {
+ *   resources: [{
+ *     resource: User,
+ *     options: {
+ *       actions: {
+ *         // example of overriding existing 'new' action for
+ *         // User resource.
+ *         new: {
+ *           label: 'Create new record'
+ *         },
+ *         // Example of creating a new 'myNewAction' which will be
+ *         // a resource action available for User model
+ *         myNewAction: {
+ *           actionType: 'resource',
+ *           handler: async (request, response, context) => {...}
+ *         }
+ *       }
+ *     }
+ *   }]
+ * }
+ *
+ * const { ACTIONS } = require('admin-bro')
+ * // example of adding after filter for 'show' aciton for all resources
+ * ACTIONS.show.after = async () => {...}
+ * ```
  */
 export default interface Action {
   /**
@@ -196,7 +303,9 @@ export default interface Action {
   showFilter?: boolean;
   /**
    * Type of an action - could be either _resource_ or _record_
-   * or both (passed as an array)
+   * or both (passed as an array):
+   *
+   * <img src="./images/actions.png">
    */
   actionType?: 'resource' | 'record' | Array<'resource' | 'record'>;
   /**
@@ -222,7 +331,9 @@ export default interface Action {
   component?: string | false;
   /**
    * handler function which will be invoked by {@link ApiController#resourceAction}
-   * or {@link ApiController#recordAction}
+   * or {@link ApiController#recordAction} when user visits clicks action link.
+   *
+   * If you are defining this action for a record it hast to return {@link RecordActionResponse}.
    */
   handler?: ActionHandler;
   /**
@@ -232,7 +343,7 @@ export default interface Action {
   before?: Before;
   /**
    * After action hook. When it is given - it is performed on the returned,
-   * by handler the {@link Action.handler}, object,
+   * by handler the {@link Action.handler}, object.
    */
   after?: After;
 }

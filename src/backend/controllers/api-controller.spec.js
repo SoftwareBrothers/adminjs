@@ -8,11 +8,13 @@ describe('ApiController', function () {
     this.recordJSON = { title: 'recordTitle' }
     this.recordStub = {
       toJSON: () => this.recordJSON,
+      params: {},
+      recordActions: [],
     }
     this.resourceName = 'Users'
     this.action = {
       name: 'actionName',
-      handler: this.sinon.stub(),
+      handler: this.sinon.stub().returns({ record: this.recordStub }),
       isAccessible: this.sinon.stub().returns(true),
     }
     this.isActionAccessibleStub = this.sinon.stub()
@@ -122,6 +124,22 @@ describe('ApiController', function () {
       }, {})
 
       expect(this.action.isAccessible).to.have.been.calledWith(this.currentAdmin)
+    })
+
+    it('throws an error when action do not return record', function (done) {
+      this.action.handler = async () => ({
+        somedata: 'without an record',
+      })
+
+      this.apiController.recordAction({
+        params: {
+          action: this.action.name,
+          recordId: 'id',
+        },
+      }, {}).catch((error) => {
+        expect(error).property('name', 'ConfigurationError')
+        done()
+      })
     })
   })
 })

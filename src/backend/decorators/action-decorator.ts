@@ -2,7 +2,7 @@ import ConfigurationError from '../utils/configuration-error'
 import ViewHelpers from '../utils/view-helpers'
 import AdminBro from '../../admin-bro'
 import BaseResource from '../adapters/base-resource'
-import Action, { IsFunction } from '../actions/action.interface'
+import Action, { IsFunction, ActionContext, ActionRequest } from '../actions/action.interface'
 import { CurrentAdmin } from '../../current-admin.interface'
 import ActionJSON from './action-json.interface'
 import BaseRecord from '../adapters/base-record'
@@ -50,8 +50,18 @@ class ActionDecorator {
 
   /**
    * Original handler wrapped with the hook `before` and `after` methods.
+   *
+   * @param {ActionRequest} request
+   * @param {any} response
+   * @param {ActionContext} data
+   *
+   * @return {Promise<any>}
    */
-  async handler(request, response, data): Promise<any> {
+  async handler(
+    request: ActionRequest,
+    response: any,
+    data: ActionContext,
+  ): Promise<any> {
     let modifiedRequest = request
     if (typeof this.action.before === 'function') {
       modifiedRequest = await this.action.before(request, data)
