@@ -19,5 +19,5 @@ export type ActionProps = {
   /**
    * Object of type: {@link ActionJSON}
    */
-  record: RecordJSON;
+  record?: RecordJSON;
 }

@@ -1,5 +1,5 @@
 import axios, { AxiosResponse, AxiosInstance } from 'axios'
-import { SearchResponse } from '../../backend/controllers/api-controller'
+import { SearchRecord } from '../../backend/controllers/api-controller'
 
 let globalAny: any = {}
 
@@ -57,9 +57,9 @@ class ApiClient {
    * @param   {String}  options.resourceId  Id of a {@link ResourceJSON}
    * @param   {String}  options.query       query string
    *
-   * @return  {Promise<SearchResponse>}
+   * @return  {Promise<Array<SearchRecord>>}
    */
-  async searchRecords({ resourceId, query }): Promise<SearchResponse> {
+  async searchRecords({ resourceId, query }): Promise<Array<SearchRecord>> {
     const q = encodeURIComponent(query)
     const response = await this.client.get(`/api/resources/${resourceId}/search/${q}`)
     checkLogin(response)

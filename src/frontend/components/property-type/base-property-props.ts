@@ -1,6 +1,7 @@
 import PropertyJSON, { PropertyPlace } from '../../../backend/decorators/property-json.interface'
 import ResourceJSON from '../../../backend/decorators/resource-json.interface'
 import RecordJSON from '../../../backend/decorators/record-json.interface'
+import { SearchRecord } from '../../../backend/controllers/api-controller'
 
 /**
  * Props which are passed to all your custom property components
@@ -18,9 +19,9 @@ export type BasePropertyProps = {
    */
   resource: ResourceJSON;
   /**
-   * Record JSON representation
+   * Record JSON representation. Null for filter
    */
-  record: RecordJSON;
+  record?: RecordJSON;
   /**
    * Filter object taken from the query params. It is used on the _filter_ components
    */
@@ -46,4 +47,5 @@ export type BasePropertyProps = {
 export type OnPropertyChange = (
   propertyOrRecord: RecordJSON | string,
   value?: any,
+  record?: SearchRecord,
 ) => void

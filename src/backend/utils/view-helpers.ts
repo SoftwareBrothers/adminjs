@@ -1,4 +1,5 @@
 import AdminBroOptions from '../../admin-bro-options.interface'
+import { Paths } from '../../frontend/store/store'
 
 let globalAny: any = {}
 
@@ -38,7 +39,7 @@ class ViewHelpers {
   public options: AdminBroOptions
 
   constructor({ options }: { options?: AdminBroOptions } = {}) {
-    let opts = options || (globalAny.REDUX_STATE && globalAny.REDUX_STATE.paths)
+    let opts: Paths = options || (globalAny.REDUX_STATE && globalAny.REDUX_STATE.paths)
 
     opts = opts || {
       rootPath: '/admin',

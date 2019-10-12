@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { ReactNode } from 'react'
 import { connect } from 'react-redux'
 import styled from 'styled-components'
 
@@ -13,6 +13,8 @@ import ApiClient from '../../utils/api-client'
 import { RecordActionParams } from '../../../backend/utils/view-helpers'
 import ResourceJSON from '../../../backend/decorators/resource-json.interface'
 import RecordJSON from '../../../backend/decorators/record-json.interface'
+import ActionJSON from '../../../backend/decorators/action-json.interface'
+import { ReduxState } from '../../store/store'
 
 const ContainerRecord = styled.div`
   display: flex;
@@ -29,9 +31,11 @@ interface State {
   isLoading: boolean;
 }
 
-interface Props extends RouteComponentProps<RecordActionParams> {
+type PropsFromState = {
   resources: Array<ResourceJSON>;
 }
+
+type Props = RouteComponentProps<RecordActionParams> & PropsFromState
 
 class RecordAction extends React.Component<Props, State> {
   constructor(props) {
@@ -42,12 +46,12 @@ class RecordAction extends React.Component<Props, State> {
     }
   }
 
-  componentDidMount() {
+  componentDidMount(): void {
     const { match } = this.props
     this.fetchRecord(match.params)
   }
 
-  shouldComponentUpdate(newProps: Props) {
+  shouldComponentUpdate(newProps: Props): boolean {
     const { match } = this.props
     const { actionName, recordId, resourceId } = match.params
     if (newProps.match.params.actionName !== actionName
@@ -60,7 +64,7 @@ class RecordAction extends React.Component<Props, State> {
     return true
   }
 
-  getResourceAndAction(name = null) {
+  getResourceAndAction(name = null): { resource: ResourceJSON; action: ActionJSON} {
     const { match, resources } = this.props
     const { resourceId, actionName } = match.params
     const { record } = this.state
@@ -72,7 +76,7 @@ class RecordAction extends React.Component<Props, State> {
     return { resource, action }
   }
 
-  fetchRecord({ actionName, recordId, resourceId }) {
+  fetchRecord({ actionName, recordId, resourceId }: RecordActionParams): void {
     const api = new ApiClient()
     this.setState({
       isLoading: true,
@@ -90,7 +94,7 @@ class RecordAction extends React.Component<Props, State> {
     })
   }
 
-  render() {
+  render(): ReactNode {
     const { match } = this.props
     const { actionName, recordId } = match.params
     const { record, isLoading } = this.state
@@ -131,9 +135,9 @@ class RecordAction extends React.Component<Props, State> {
 }
 
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state: ReduxState): PropsFromState => ({
   resources: state.resources,
 })
 
 
-export default connect(mapStateToProps)(RecordAction)
+export default connect<PropsFromState>(mapStateToProps)(RecordAction)

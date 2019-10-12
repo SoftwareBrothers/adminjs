@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { ReactNode } from 'react'
 import { withRouter } from 'react-router-dom'
 
 import { RouteComponentProps } from 'react-router'
@@ -16,7 +16,7 @@ type State = {
   perPage: number;
   total: number;
   loading: boolean;
-  direction: string;
+  direction: 'asc' | 'desc';
   sortBy: string;
 }
 
@@ -47,11 +47,11 @@ class List extends React.Component<ActionProps & RouteComponentProps & AddNotice
     }
   }
 
-  componentDidMount() {
+  componentDidMount(): void {
     this._fetchData()
   }
 
-  componentDidUpdate(prevProps) {
+  componentDidUpdate(prevProps): void {
     const { resource, location } = this.props
 
     if (resource.id !== prevProps.resource.id
@@ -60,7 +60,7 @@ class List extends React.Component<ActionProps & RouteComponentProps & AddNotice
     }
   }
 
-  _fetchData() {
+  _fetchData(): void {
     const { location, resource } = this.props
     const api = new ApiClient()
     this.setState({ loading: true })
@@ -82,11 +82,11 @@ class List extends React.Component<ActionProps & RouteComponentProps & AddNotice
     })
   }
 
-  handleActionPerformed() {
+  handleActionPerformed(): void {
     this._fetchData()
   }
 
-  render() {
+  render(): ReactNode {
     const { resource } = this.props
     const {
       records, page, perPage, total,

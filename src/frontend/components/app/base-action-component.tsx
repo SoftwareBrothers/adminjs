@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { ReactNode } from 'react'
 
 import WrapperBox from '../ui/wrapper-box'
 import ErrorBoundary from './error-boundary'
@@ -7,14 +7,8 @@ import * as actions from '../actions'
 import { DOCS } from '../../../constants'
 import { ActionProps } from '../actions/action.props'
 
-let globalAny: any = {}
-
-try {
-  globalAny = window
-} catch (error) {
-  if (error.message !== 'window is not defined') {
-    throw error
-  }
+declare const AdminBro: {
+  UserComponents: Array<string>;
 }
 
 // TODO: Remove the above hack to something more type safe
@@ -79,11 +73,11 @@ class BaseActionComponent extends React.Component<ActionProps, State> {
     }
   }
 
-  componentDidMount() {
+  componentDidMount(): void {
     this.setState({ isClient: true })
   }
 
-  render() {
+  render(): ReactNode {
     const { resource, action, record } = this.props
 
     const { isClient } = this.state
@@ -91,7 +85,7 @@ class BaseActionComponent extends React.Component<ActionProps, State> {
 
     let Action = actions[action.name]
     if (isClient && action.component) {
-      Action = globalAny.AdminBro.UserComponents[action.component]
+      Action = AdminBro.UserComponents[action.component]
     }
     if (Action) {
       return (

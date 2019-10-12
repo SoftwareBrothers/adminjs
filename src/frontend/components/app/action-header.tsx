@@ -70,10 +70,10 @@ const HeaderButtons = styled.div.attrs({
  */
 interface Props {
   resource: ResourceJSON;
-  record: RecordJSON | null;
+  record?: RecordJSON;
   toggleFilter?: () => any;
   actionPerformed?: () => any;
-  recordId: string;
+  recordId?: string;
   action?: ActionJSON;
   tag?: string;
 }

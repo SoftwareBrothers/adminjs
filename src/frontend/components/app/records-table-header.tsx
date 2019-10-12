@@ -23,7 +23,7 @@ type Props = {
   /**
    * Sort direction
    */
-  direction: string;
+  direction: 'asc' | 'desc';
 }
 
 /**

@@ -34,7 +34,7 @@ type Props = {
   /**
    * record
    */
-  record: RecordJSON | null;
+  record?: RecordJSON | null;
   /**
    * Name of an action
    */

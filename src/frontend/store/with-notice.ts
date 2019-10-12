@@ -1,13 +1,13 @@
 import { connect } from 'react-redux'
 import { ComponentType } from 'react'
-import { addNotice } from './store'
+import { addNotice, NoticeMessage } from './store'
 
 export type AddNoticeProps = {
-  addNotice: typeof addNotice;
+  addNotice: (notice: NoticeMessage) => void;
 }
 
 const mapDispatchToProps = (dispatch): AddNoticeProps => ({
-  addNotice: notice => dispatch(addNotice(notice)),
+  addNotice: (notice: NoticeMessage): void => dispatch(addNotice(notice)),
 })
 
 export default function withNotice<Props>(Component: ComponentType) {

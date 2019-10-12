@@ -190,14 +190,21 @@ export type SearchResponse = {
   /**
    * List of records
    */
-  records: Array<{
-    /**
-     * record title - value of its titleProperty
-     */
-    title: string;
-    /**
-     * Record Id
-     */
-    id: string;
-  }>;
+  records: Array<SearchRecord>;
+}
+
+/**
+ * Response of a Search action in the API
+ * @memberof ApiController
+ * @alias SearchRecord
+ */
+export type SearchRecord = {
+  /**
+   * record title - value of its titleProperty
+   */
+  title: string;
+  /**
+   * Record Id
+   */
+  id: string;
 }

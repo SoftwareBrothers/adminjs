@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { ReactNode } from 'react'
 import ErrorBoundary from '../app/error-boundary'
 
 import ArrayType from './array'
@@ -166,7 +166,7 @@ export default class BasePropertyComponent extends React.Component<BasePropertyP
     }
   }
 
-  componentDidMount() {
+  componentDidMount(): void {
     this.setState({ isClient: true })
   }
 
@@ -180,7 +180,7 @@ export default class BasePropertyComponent extends React.Component<BasePropertyP
 
   static Reference
 
-  render() {
+  render(): ReactNode {
     const { property, resource, record, filter, where, onChange } = this.props
     const { isClient } = this.state
 
@@ -240,12 +240,14 @@ export default class BasePropertyComponent extends React.Component<BasePropertyP
 }
 
 
-const camelizePropertyType = type => ({
-  Edit: type.edit,
-  Show: type.show,
-  List: type.list,
-  Filter: type.filter,
-})
+function camelizePropertyType<T>(type: {[key: string]: T}): {[key: string]: T} {
+  return {
+    Edit: type.edit,
+    Show: type.show,
+    List: type.list,
+    Filter: type.filter,
+  }
+}
 
 BasePropertyComponent.DefaultType = camelizePropertyType(defaultType)
 BasePropertyComponent.Boolean = camelizePropertyType(boolean)

@@ -7,7 +7,7 @@
       "jsx": "react",
       "noEmit": true,
       "moduleResolution": "node",
-      "types": ["react"]
+      "types": ["react", "mocha"]
   },
   "include": [
       "./src/**/*",

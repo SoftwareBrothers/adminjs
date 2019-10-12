@@ -1,5 +1,8 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 import { createStore, combineReducers } from 'redux'
+import ResourceJSON from '../../backend/decorators/resource-json.interface'
+import { BrandingOptions, VersionProps } from '../../admin-bro-options.interface'
+import { CurrentAdmin } from '../../current-admin.interface'
 
 export const initializeResources = data => ({
   type: 'RESOURCES_INITIALIZE',
@@ -36,11 +39,19 @@ export enum NoticeType {
   error = 'error',
 }
 
-export const addNotice = (data: {
+export type NoticeMessage = {
   message: string;
   id?: string;
   type?: NoticeType;
-} = { message: '' }) => ({
+}
+
+export type Paths = {
+  rootPath?: string;
+  logoutPath?: string;
+  loginPath?: string;
+}
+
+export const addNotice = (data: NoticeMessage = { message: '' }) => ({
   type: 'ADD_NOTICE',
   data: {
     message: data.message,
@@ -79,7 +90,7 @@ const brandingReducer = (state = {}, action) => {
   }
 }
 
-const pathsReducer = (state = {}, action) => {
+const pathsReducer = (state = {}, action): Paths => {
   switch (action.type) {
   case 'PATHS_INITIALIZE':
     return action.data
@@ -133,7 +144,19 @@ const noticesReducer = (state = [], action) => {
   }
 }
 
-const reducer = combineReducers({
+export type ReduxState = {
+  resources: Array<ResourceJSON>;
+  branding: BrandingOptions;
+  paths: Paths;
+  session: CurrentAdmin;
+  dashboard: {
+    component?: string;
+  };
+  notices: Array<NoticeMessage>;
+  versions: VersionProps;
+}
+
+const reducer = combineReducers<ReduxState>({
   resources: resourcesReducer,
   branding: brandingReducer,
   paths: pathsReducer,

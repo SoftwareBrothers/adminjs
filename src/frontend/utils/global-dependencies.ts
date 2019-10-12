@@ -14,7 +14,7 @@ const onProd = process.env.NODE_ENV === 'production'
  * @return {string}                   list of scripts which has to be injected to to the
  *                                    head of the app
  */
-module.exports = ({ fromCDN, viewHelpers }: {
+const globalDependencies = ({ fromCDN, viewHelpers }: {
   fromCDN: boolean;
   viewHelpers: ViewHelpers;
 }): string => (fromCDN
@@ -31,3 +31,5 @@ module.exports = ({ fromCDN, viewHelpers }: {
     <script src="https://cdnjs.cloudflare.com/ajax/libs/styled-components/4.2.0/styled-components.min.js"></script>
     <script src="https://unpkg.com/recharts/umd/Recharts.min.js"></script>
   ` : `<script src="${viewHelpers.assetPath('global.bundle.js')}"></script>`)
+
+export default globalDependencies

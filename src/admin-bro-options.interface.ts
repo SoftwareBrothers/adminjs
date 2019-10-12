@@ -68,43 +68,11 @@ export default interface AdminBroOptions {
   /**
    * Flag which indicates if version number should be visible on the UI
    */
-  version?: {
-    /**
-     * if set to true - current admin version will be visible
-     */
-    admin?: boolean;
-    /**
-     * Here you can pass any arbitrary version text which will be seen in the US.
-     * You can pass here your current API version.
-     */
-    app?: string;
-  };
+  version?: VersionProps;
   /**
    * Options which are related to the branding.
    */
-  branding?: {
-    /**
-     * URL to a logo.
-     */
-    logo?: string;
-    /**
-     * Name of your company, which will replace "AdminBro".
-     */
-    companyName?: string;
-    /**
-     * CSS theme
-     */
-    theme?: {
-      colors?: typeof colors;
-      sizes?: typeof sizes;
-      fonts?: typeof fonts;
-      breakpoints?: typeof breakpoints;
-    };
-    /**
-     * Flag indicates if `SoftwareBrothers` tiny hart icon should be visible on the bottom sidebar.
-     */
-    softwareBrothers?: boolean;
-  };
+  branding?: BrandingOptions;
   /**
    * Custom assets you want to pass to AdminBro
    */
@@ -144,4 +112,51 @@ export default interface AdminBroOptions {
    * ```
    */
   env?: Record<string, string>;
+}
+
+/**
+ * Version Props
+ * @alias VersionProps
+ * @memberof AdminBroOptions
+ */
+export type VersionProps = {
+  /**
+   * if set to true - current admin version will be visible
+   */
+  admin?: boolean;
+  /**
+   * Here you can pass any arbitrary version text which will be seen in the US.
+   * You can pass here your current API version.
+   */
+  app?: string;
+}
+
+
+/**
+ * Branding Options
+ * @alias BrandingOptions
+ * @memberof AdminBroOptions
+ */
+export type BrandingOptions = {
+  /**
+   * URL to a logo.
+   */
+  logo?: string;
+  /**
+   * Name of your company, which will replace "AdminBro".
+   */
+  companyName?: string;
+  /**
+   * CSS theme
+   */
+  theme?: {
+    colors?: typeof colors;
+    sizes?: typeof sizes;
+    fonts?: typeof fonts;
+    breakpoints?: typeof breakpoints;
+  };
+  /**
+   * Flag indicates if `SoftwareBrothers` tiny hart icon should be visible on the bottom sidebar.
+   */
+  softwareBrothers?: boolean;
 }
