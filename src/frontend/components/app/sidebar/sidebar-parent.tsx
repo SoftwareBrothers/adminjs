@@ -1,7 +1,6 @@
 import React, { ReactNode } from 'react'
 import styled from 'styled-components'
 
-import { resourceParentWithResourcesType } from '../../../types'
 import SidebarResource from './sidebar-resource'
 import ResourceJSON from '../../../../backend/decorators/resource-json.interface'
 

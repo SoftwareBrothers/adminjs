@@ -1,5 +1,6 @@
 import React, { ReactNode } from 'react'
 import Select from 'react-select/lib/Async'
+import { withTheme, DefaultTheme } from 'styled-components'
 
 import ApiClient from '../../../utils/api-client'
 import PropertyInEdit from '../../ui/property-in-edit'
@@ -8,7 +9,7 @@ import { BasePropertyProps } from '../base-property-props'
 import RecordJSON from '../../../../backend/decorators/record-json.interface'
 import { SearchRecord } from '../../../../backend/controllers/api-controller'
 
-export default class Edit extends React.Component<BasePropertyProps> {
+class Edit extends React.Component<BasePropertyProps & {theme: DefaultTheme}> {
   private selected: RecordJSON
 
   constructor(props) {
@@ -39,7 +40,7 @@ export default class Edit extends React.Component<BasePropertyProps> {
   }
 
   render(): ReactNode {
-    const { property, record } = this.props
+    const { property, record, theme } = this.props
     const error = record.errors && record.errors[property.name]
 
     const reference = record.populated && record.populated[property.name]
@@ -47,6 +48,7 @@ export default class Edit extends React.Component<BasePropertyProps> {
       value: reference.id,
       label: reference.title,
     }
+    const styles = selectStyles(theme)
 
     if (this.selected) {
       selectedOption = {
@@ -60,7 +62,7 @@ export default class Edit extends React.Component<BasePropertyProps> {
         <Select
           cacheOptions
           value={selectedOption}
-          styles={selectStyles}
+          styles={styles}
           defaultOptions
           loadOptions={this.loadOptions}
           onChange={this.handleChange}
@@ -69,3 +71,5 @@ export default class Edit extends React.Component<BasePropertyProps> {
     )
   }
 }
+
+export default withTheme(Edit)

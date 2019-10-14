@@ -1,7 +1,10 @@
 /* eslint-disable jsx-a11y/label-has-for */
 import React, { ReactNode } from 'react'
+import { findDOMNode } from 'react-dom'
 
+import styled from 'styled-components'
 import { BasePropertyProps } from '../base-property-props'
+import { Label } from '../../ui'
 
 const toolbarOptions = [
   [{ header: [1, 2, 3, 4, 5, 6, false] }],
@@ -21,8 +24,27 @@ const toolbarOptions = [
   ['clean'], // remove formatting button
 ]
 
+const Wrapper = styled.div.attrs({
+  className: 'control has-icons-right',
+})`
+  .ql-toolbar {
+    border-color: ${({ theme }): string => theme.colors.border};
+
+    .ql-picker {
+      color: ${({ theme }): string => theme.colors.lightText};
+    }
+  }
+
+  .ql-container {
+    border-color: ${({ theme }): string => theme.colors.border};
+    background: ${({ theme }): string => theme.colors.inputBck};
+  }
+`
+
 export default class Edit extends React.Component<BasePropertyProps> {
   private wysiwigRef: React.RefObject<any>
+
+  private quill
 
   constructor(props) {
     super(props)
@@ -33,8 +55,16 @@ export default class Edit extends React.Component<BasePropertyProps> {
     this.setupWysiwig()
   }
 
-  shouldComponentUpdate(): boolean {
-    return false
+  shouldComponentUpdate(nextProps): boolean {
+    const { record, property } = this.props
+    if (!nextProps) { return false }
+    const oldError = record.errors
+                     && record.errors[property.name]
+                     && record.errors[property.name].message
+    const newError = nextProps.record.errors
+                     && nextProps.record.errors[property.name]
+                     && nextProps.record.errors[property.name].message
+    return oldError !== newError
   }
 
   componentDidUpdate(): void {
@@ -45,14 +75,22 @@ export default class Edit extends React.Component<BasePropertyProps> {
     const { property, record } = this.props
     const value = (record.params && record.params[property.name]) || ''
     this.wysiwigRef.current.innerHTML = value
-    const quill = new Quill(this.wysiwigRef.current, {
+    if (this.quill) {
+      delete this.quill
+      // eslint-disable-next-line react/no-find-dom-node
+      const toolbars = findDOMNode(this).getElementsByClassName('ql-toolbar')
+      for (let index = 0; index < toolbars.length; index += 1) {
+        toolbars[index].remove()
+      }
+    }
+    this.quill = new Quill(this.wysiwigRef.current, {
       modules: {
         toolbar: toolbarOptions,
       },
       theme: 'snow',
     })
 
-    quill.on('text-change', () => {
+    this.quill.on('text-change', () => {
       this.handleChange(this.wysiwigRef.current.children[0].innerHTML)
     })
   }
@@ -67,15 +105,10 @@ export default class Edit extends React.Component<BasePropertyProps> {
     const error = record.errors && record.errors[property.name]
     return (
       <div className="field">
-        <label
-          htmlFor={property.name}
-          className="label"
-        >
-          {property.label}
-        </label>
-        <div className="control has-icons-right">
+        <Label htmlFor={property.name}>{property.label}</Label>
+        <Wrapper>
           <div className="quill-editor" ref={this.wysiwigRef} style={{ height: '400px' }} />
-        </div>
+        </Wrapper>
         {error && (
           <div className="help is-danger">{error.message}</div>
         )}

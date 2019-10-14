@@ -18,6 +18,7 @@ const SidebarWrapper = styled.aside`
   height: 100%;
   overflow-y: auto;
   overflow-x: hidden;
+  background: ${({ theme }): string => theme.colors.bck};
   border-right: 1px solid ${({ theme }): string => theme.colors.border};
   width: ${({ theme }): string => theme.sizes.sidebarWidth};
   transition: width 0.5s;

@@ -12,6 +12,7 @@ const FilterWrapper = styled.section`
   background: ${({ theme }): string => theme.colors.darkBck};
   flex-shrink: 0;
   width: ${({ theme }): string => theme.sizes.sidebarWidth};
+  border-left: 1px solid ${({ theme }): string => theme.colors.borderOnDark};
   color: #fff;
   padding-top: 60px;
   transition: width 0.5s;

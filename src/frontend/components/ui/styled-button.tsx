@@ -34,7 +34,7 @@ const styles = css`
     font-size: ${({ theme }): string => theme.fonts.medium};
     border-radius: 0;
     border-color: ${({ theme }): string => theme.colors.primary};
-    background: #fff;
+    background: ${({ theme }): string => theme.colors.bck};
     height: 34px;
     padding:  ${({ theme }): string => `${theme.sizes.paddingMin} ${theme.sizes.padding}`};
     color: ${({ theme }): string => theme.colors.primary};
@@ -46,7 +46,7 @@ const styles = css`
     }
 
     &.is-white {
-      background-color: #fff;
+      background-color: ${({ theme }): string => theme.colors.bck};
       border-color: transparent;
       color: ${({ theme }): string => theme.colors.defaultText};
     }

@@ -1,12 +1,13 @@
 import React, { ReactNode } from 'react'
 import Select from 'react-select/lib/Async'
+import { ThemeProps, DefaultTheme, withTheme } from 'styled-components'
 import ApiClient from '../../../utils/api-client'
 
 import PropertyInFilter from '../../ui/property-in-filter'
 import { filterStyles } from '../../../styles/select-styles'
 import { BasePropertyProps } from '../base-property-props'
 
-export default class Filter extends React.PureComponent<BasePropertyProps> {
+class Filter extends React.PureComponent<BasePropertyProps & ThemeProps<DefaultTheme>> {
   private api: ApiClient
 
   private options: Array<{value: string; label: string}>
@@ -34,7 +35,7 @@ export default class Filter extends React.PureComponent<BasePropertyProps> {
   }
 
   render(): ReactNode {
-    const { property, filter } = this.props
+    const { property, filter, theme } = this.props
     const value = typeof filter[property.name] === 'undefined' ? '' : filter[property.name]
     const selected = (this.options || []).find(o => o.value === value)
     return (
@@ -43,7 +44,7 @@ export default class Filter extends React.PureComponent<BasePropertyProps> {
           value={typeof selected === 'undefined' ? '' : selected}
           isClearable
           cacheOptions
-          styles={filterStyles}
+          styles={filterStyles(theme)}
           loadOptions={this.loadOptions}
           onChange={this.handleChange}
           defaultOptions
@@ -52,3 +53,5 @@ export default class Filter extends React.PureComponent<BasePropertyProps> {
     )
   }
 }
+
+export default withTheme(Filter)

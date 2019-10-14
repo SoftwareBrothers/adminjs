@@ -2,6 +2,7 @@ import React, { ReactNode } from 'react'
 import Select from 'react-select'
 
 import PropertyInEdit from '../../ui/property-in-edit'
+import StyledInput from '../../ui/styled-input'
 import { BasePropertyProps } from '../base-property-props'
 
 export default class Edit extends React.Component<BasePropertyProps> {
@@ -39,7 +40,7 @@ export default class Edit extends React.Component<BasePropertyProps> {
       )
     }
     return (
-      <input
+      <StyledInput
         type="text"
         className="input"
         id={property.name}

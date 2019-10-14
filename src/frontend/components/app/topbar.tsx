@@ -16,6 +16,7 @@ const Navbar = styled.nav.attrs({
   border-bottom: 1px solid ${({ theme }): string => theme.colors.border};
   padding: 0 ${({ theme }): string => theme.sizes.paddingLayout};
   flex-shrink: 0;
+  background: ${({ theme }): string => theme.colors.bck};
 `
 
 type PropsFromState = {

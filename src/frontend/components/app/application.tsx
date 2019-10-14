@@ -14,10 +14,19 @@ const GlobalStyle = createGlobalStyle`
   html, body, #app {
       width: 100%;
       height: 100%;
+      background: ${({ theme }): string => theme.colors.bck};
+      color: ${({ theme }): string => theme.colors.defaultText};
+  }
+
+  .content h1, .content h2, .content h3, .content h4, .content h5, .content h6 {
+    color: ${({ theme }): string => theme.colors.defaultText};
   }
 
   a {
     color: ${({ theme }): string => theme.colors.primary};
+    &:hover {
+      color: ${({ theme }): string => theme.colors.primaryHover};
+    }
   }
 `
 
@@ -33,7 +42,7 @@ const Core = styled.section`
   height: 100%;
   overflow-y: auto;
   width: 100%;
-  background: ${({ theme }): string => theme.colors.bck};
+  background: ${({ theme }): string => theme.colors.innerBck};
   display: flex;
   flex-direction: column;
 `

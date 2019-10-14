@@ -6,15 +6,18 @@ import 'styled-components'
 
 // sorted alphabetically
 export const colors = {
+  bck: '#fff',
   defaultText: '#111114',
   lightText: '#a9aabc',
   lightBck: '#F8F8FA',
   superLightBack: '#F1F1F5',
   border: '#eeeeef',
   borderOnDark: '#4E5779',
-  bck: '#f7f7Fa',
+  innerBck: '#f7f7Fa',
   darkBck: '#303b62',
   superDarkBck: '#192035',
+  inputBck: '#fff',
+  filterDefaultText: '#fff',
 
   love: '#e6282b',
   primary: '#718af4',

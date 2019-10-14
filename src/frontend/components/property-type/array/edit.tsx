@@ -2,7 +2,7 @@ import React, { ReactNode } from 'react'
 import * as flat from 'flat'
 
 import PropertyInEdit from '../../ui/property-in-edit'
-import StyledButton from '../../ui/styled-button'
+import StyledLink from '../../ui/styled-link'
 import Column from '../../ui/column'
 import Columns from '../../ui/columns'
 import convertParamsToArrayItems from './convert-params-to-array-items'
@@ -68,9 +68,9 @@ export default class Edit extends React.Component<Props, State> {
           />
         </Column>
         <Column width={2}>
-          <StyledButton style={{ marginTop: 25 }} onClick={(): void => this.removeItem(i)}>
+          <StyledLink style={{ marginTop: 25 }} onClick={(): void => this.removeItem(i)}>
             Remove
-          </StyledButton>
+          </StyledLink>
         </Column>
       </Columns>
     )
@@ -82,9 +82,9 @@ export default class Edit extends React.Component<Props, State> {
       <StyledSection style={{ marginTop: 20 }}>
         {items.map((item, i) => this.renderItem(item, i))}
         <p>
-          <StyledButton onClick={(): void => this.addNew()}>
+          <StyledLink onClick={(): void => this.addNew()}>
             Add new item
-          </StyledButton>
+          </StyledLink>
         </p>
       </StyledSection>
     )

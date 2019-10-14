@@ -3,9 +3,10 @@ import styled from 'styled-components'
 
 const StyledWrapperBox = styled.section<Props>`
   padding: ${({ theme }): string => theme.sizes.paddingLayout};
+  color: ${({ theme }): string => theme.colors.defaultText};
   flex-grow: 1;
   border: ${(props): string => (props.border ? `1px solid ${props.theme.colors.border}` : 'none')};
-  background: ${(props): string => (props.border ? '#ffffff' : 'transparent')};
+  background: ${(props): string => (props.border ? props.theme.colors.bck : 'transparent')};
 
   & > h1 {
     font-size: 22px;

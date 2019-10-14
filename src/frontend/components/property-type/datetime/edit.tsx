@@ -2,6 +2,7 @@ import React, { ReactNode } from 'react'
 
 import PropertyInEdit from '../../ui/property-in-edit'
 import { BasePropertyProps } from '../base-property-props'
+import StyledInput from '../../ui/styled-input'
 
 export default class Edit extends React.Component<BasePropertyProps> {
   private datepickerRef: React.RefObject<any>
@@ -72,7 +73,7 @@ export default class Edit extends React.Component<BasePropertyProps> {
     return (
       <PropertyInEdit property={property} error={error}>
         <div className="control has-icons-right">
-          <input
+          <StyledInput
             type="text"
             className="input pickadate"
             id={property.name}

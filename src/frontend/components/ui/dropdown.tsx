@@ -8,7 +8,7 @@ const DropdownTrigger = styled.div.attrs({
   font-size: 20px;
   line-height: 20px;
   &:hover {
-    background: #fff;
+    background: ${({ theme }): string => theme.colors.bck};
   }
 `
 
@@ -19,6 +19,7 @@ const DropdownMenu = styled.div.attrs({
     border: 0px none;
     border-radius: 0px;
     box-shadow: 0 6px 13px 0 rgba(69,70,85,0.13);
+    background: ${({ theme }): string => theme.colors.bck};
   }
 `
 

@@ -5,7 +5,7 @@ import styled from 'styled-components'
 import ResourceJSON from '../../../../backend/decorators/resource-json.interface'
 
 const ResourceLink = styled(NavLink)`
-  color: ${({ theme }): string => theme.colors.defaultText};
+  color: ${({ theme }): string => theme.colors.lightText};
   padding: ${({ theme }): string => theme.sizes.paddingMin};
   display: block;
 

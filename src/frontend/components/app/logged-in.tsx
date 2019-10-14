@@ -9,6 +9,7 @@ const UserBox = styled.div.attrs({
   padding-right: ${({ theme }): string => theme.sizes.padding};
   border-radius: 50px;
   margin: 10px 0;
+  color: ${({ theme }): string => theme.colors.lightText};
 
   img {
     border-radius: 50%;
@@ -29,15 +30,37 @@ const Dropdown = styled.div.attrs({
   top: 95%;
 `
 
+const LoggedInBox = styled.div.attrs({
+  className: 'navbar-item has-dropdown is-hoverable navbar-user',
+})`
+  
+  &&&:hover ${UserBox} {
+    background-color: ${({ theme }): string => theme.colors.superLightBack};
+    color: ${({ theme }): string => theme.colors.lightText};
+  }
+  &&&:hover ${Dropdown} {
+    background-color: ${({ theme }): string => theme.colors.superLightBack};
+    color: ${({ theme }): string => theme.colors.lightText};
+  }
+`
+
 const DropdownLink = styled.a.attrs({
   className: 'navbar-item',
 })`
   &&& {
     padding: ${({ theme }): string => `${theme.sizes.padding} ${theme.sizes.paddingLayout}`};
     color: ${({ theme }): string => theme.colors.defaultText};
-    &:hover{
-      color: ${({ theme }): string => theme.colors.primary};
+    padding-left: 40px;
+    border: none;
+
+    &:hover {
+      border: 4px ${({ theme }): string => theme.colors.primary};
+      padding-left: 36px;
+      border-style: none solid;
+      color: ${({ theme }): string => theme.colors.defaultText};
+      background-color: transparent;
     }
+    
     i, svg {
       margin-right: ${({ theme }): string => theme.sizes.padding};
     }
@@ -54,7 +77,7 @@ type Props = {
 const LoggedIn: React.FC<Props> = (props) => {
   const { session, paths } = props
   return (
-    <div className="navbar-item has-dropdown is-hoverable navbar-user">
+    <LoggedInBox>
       <UserBox>
         {session.email}
         <img src="https://api.adorable.io/avatars/24/softwarebrothers.png" alt="user" />
@@ -65,7 +88,7 @@ const LoggedIn: React.FC<Props> = (props) => {
           Sign out
         </DropdownLink>
       </Dropdown>
-    </div>
+    </LoggedInBox>
   )
 }
 

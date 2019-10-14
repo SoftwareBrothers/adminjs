@@ -1,11 +1,12 @@
 import React, { ReactNode } from 'react'
 import Select from 'react-select'
 
+import { withTheme, ThemeProps, DefaultTheme } from 'styled-components'
 import PropertyInFilter from '../../ui/property-in-filter'
 import { filterStyles } from '../../../styles/select-styles'
 import { BasePropertyProps } from '../base-property-props'
 
-export default class Filter extends React.PureComponent<BasePropertyProps> {
+class Filter extends React.PureComponent<BasePropertyProps & ThemeProps<DefaultTheme>> {
   constructor(props) {
     super(props)
     this.handleInputChange = this.handleInputChange.bind(this)
@@ -24,7 +25,7 @@ export default class Filter extends React.PureComponent<BasePropertyProps> {
   }
 
   renderInput(): ReactNode {
-    const { property, filter } = this.props
+    const { property, filter, theme } = this.props
     const filterKey = `filter-${property.name}`
     const value = filter[property.name] || ''
     if (property.availableValues) {
@@ -34,7 +35,7 @@ export default class Filter extends React.PureComponent<BasePropertyProps> {
           value={typeof selected === 'undefined' ? '' : selected}
           isClearable
           options={property.availableValues}
-          styles={filterStyles}
+          styles={filterStyles(theme)}
           onChange={this.handleSelectChange}
         />
       )
@@ -66,3 +67,4 @@ export default class Filter extends React.PureComponent<BasePropertyProps> {
     )
   }
 }
+export default withTheme(Filter)

@@ -32,12 +32,18 @@ import styled from 'styled-components'
 const Table = styled.table.attrs({
   className: 'table is-fullwidth',
 })`
+  background: transparent;
+
   & > thead > tr > th {
     border: none;
   }
 
   & tr.is-selected {
     background: ${({ theme }): string => theme.colors.primary};
+  }
+
+  & tr:hover {
+    background: ${({ theme }): string => theme.colors.superLightBack};
   }
 
   td {
