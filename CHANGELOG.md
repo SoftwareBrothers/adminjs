@@ -6,6 +6,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 Started from version 0.9.5
 
+## [1.3.2] - 2019-10-14
+
+### Added
+
+* all colors are added to the css theme - improve theme support
+
+### Changed
+
+* migrate all remaining components to typescript
+
 ## [1.3.1] - 2019-10-06
 
 ### Added

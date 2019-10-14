@@ -134,6 +134,21 @@ export type VersionProps = {
 
 /**
  * Branding Options
+ *
+ * You can use them to change how AdminBro looks. For instance to change name and
+ * colors (dark theme) run:
+ *
+ * ```javascript
+ * const theme = require('admin-bro-theme-dark')
+ *
+ * new AdminBro({
+ *   branding: {
+ *     companyName: 'John Doe Family Business',
+ *     theme,
+ *   }
+ * })
+ * ```
+ *
  * @alias BrandingOptions
  * @memberof AdminBroOptions
  */
@@ -147,7 +162,7 @@ export type BrandingOptions = {
    */
   companyName?: string;
   /**
-   * CSS theme
+   * CSS theme.
    */
   theme?: {
     colors?: typeof colors;
