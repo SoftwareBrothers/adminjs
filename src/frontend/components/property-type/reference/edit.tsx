@@ -10,10 +10,11 @@ import RecordJSON from '../../../../backend/decorators/record-json.interface'
 import { SearchRecord } from '../../../../backend/controllers/api-controller'
 
 class Edit extends React.Component<PropertyProps & {theme: DefaultTheme}> {
-  private selected: RecordJSON
+  private selected: RecordJSON | null
 
   constructor(props) {
     super(props)
+    this.selected = null
     this.loadOptions = this.loadOptions.bind(this)
     this.handleChange = this.handleChange.bind(this)
   }

@@ -14,6 +14,8 @@ class Filter extends React.PureComponent<FilterPropertyProps & ThemeProps<Defaul
 
   constructor(props) {
     super(props)
+    this.api = new ApiClient()
+    this.options = []
     this.loadOptions = this.loadOptions.bind(this)
     this.handleChange = this.handleChange.bind(this)
   }
@@ -24,7 +26,6 @@ class Filter extends React.PureComponent<FilterPropertyProps & ThemeProps<Defaul
   }
 
   async loadOptions(inputValue): Promise<Array<{value: string; label: string }>> {
-    this.api = new ApiClient()
     const { property } = this.props
     const records = await this.api.searchRecords({
       resourceId: property.reference,

@@ -87,11 +87,12 @@ type NoticeElementState = {
 }
 
 class NoticeElement extends React.Component<NoticeElementProps, NoticeElementState> {
-  private timer: NodeJS.Timeout
+  private timer: NodeJS.Timeout | null
 
   constructor(props) {
     super(props)
     const { notice } = props
+    this.timer = null
     this.state = {
       progress: notice.progress || 0,
     }
@@ -109,13 +110,17 @@ class NoticeElement extends React.Component<NoticeElementProps, NoticeElementSta
     }, 1000)
 
     setTimeout(() => {
-      clearInterval(this.timer)
+      if (this.timer) {
+        clearInterval(this.timer)
+      }
       drop()
     }, 1000 * (TIME_TO_DISAPPEAR + 1))
   }
 
   componentWillUnmount(): void {
-    clearInterval(this.timer)
+    if (this.timer) {
+      clearInterval(this.timer)
+    }
   }
 
   render(): ReactNode {

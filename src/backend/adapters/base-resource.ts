@@ -33,7 +33,7 @@ import NotImplementedError from '../utils/not-implemented-error'
  * @hideconstructor
  */
 class BaseResource {
-  public _decorated: ResourceDecorator
+  public _decorated: ResourceDecorator | null
 
   /**
    * Checks if given adapter supports resource provided by the user
@@ -51,7 +51,9 @@ class BaseResource {
    *
    * @param   {Object}  resource
    */
-  constructor(resource: any) {}
+  constructor(resource: any) {
+    this._decorated = null
+  }
 
   /**
    * The name of the database to which resource belongs. When resource is
@@ -256,6 +258,9 @@ class BaseResource {
    * @return {BaseDecorator | null}
    */
   decorate(): ResourceDecorator {
+    if (!this._decorated) {
+      throw new Error('resource don\'t have assinged decorator yet')
+    }
     return this._decorated
   }
 }
