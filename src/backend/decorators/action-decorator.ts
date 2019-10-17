@@ -147,7 +147,7 @@ class ActionDecorator {
       icon: this.action.icon,
       label: this.action.label || this.action.name,
       guard: this.action.guard,
-      showFilter: false,
+      showFilter: !!this.action.showFilter,
       component: this.action.component,
     }
   }
