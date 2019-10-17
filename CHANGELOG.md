@@ -6,6 +6,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 Started from version 0.9.5
 
+## [1.3.2] - 2019-10-17
+
+### Added
+
+* improve TypeScript setup by adding strict flags
+* add 404 errors
+
+### Fixed
+
+* fix error with removing records
+
 ## [1.3.2] - 2019-10-14
 
 ### Added
