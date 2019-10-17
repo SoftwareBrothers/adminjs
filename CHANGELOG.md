@@ -6,6 +6,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 Started from version 0.9.5
 
+## [1.3.4] - 2019-10-17
+
+### Fixed
+
+* 404 error has been seen when page loads - fixed.
+
 ## [1.3.3] - 2019-10-17
 
 ### Added
