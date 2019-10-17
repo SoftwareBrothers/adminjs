@@ -37,7 +37,12 @@ class ActionButton extends React.PureComponent<RouteComponentProps & Props & Add
     if (typeof action.component !== 'undefined' && action.component === false) {
       event.preventDefault()
       const api = new ApiClient()
-      const apiAction = recordId ? api.recordAction : api.resourceAction
+      let apiAction
+      if (recordId) {
+        apiAction = api.recordAction
+      } else {
+        apiAction = api.resourceAction
+      }
 
       apiAction.bind(api)({
         resourceId, actionName: action.name, recordId,

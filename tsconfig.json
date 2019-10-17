@@ -9,6 +9,8 @@
       "strictNullChecks": true,
       "strictPropertyInitialization": true,
       "strictFunctionTypes": true,
+      "strictBindCallApply": true,
+      "noImplicitThis": true,
       "moduleResolution": "node",
       "types": ["react", "mocha"]
   },
