@@ -39,7 +39,7 @@ type PropsFromState = {
 type Props = RouteComponentProps<RecordActionParams> & PropsFromState
 
 class RecordAction extends React.Component<Props, State> {
-  constructor(props) {
+  constructor(props: Props) {
     super(props)
     this.state = {
       record: null,

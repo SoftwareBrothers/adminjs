@@ -2,7 +2,7 @@
 /* eslint-disable no-alert */
 /* eslint-disable no-restricted-globals */
 
-import React, { ReactNode } from 'react'
+import React, { ReactNode, ComponentClass } from 'react'
 import { withRouter } from 'react-router-dom'
 
 import { RouteComponentProps } from 'react-router'
@@ -94,4 +94,5 @@ type Props = {
   actionPerformed?: (actionName: string) => any;
 }
 
-export default withNotice<Props>(withRouter(ActionButton))
+// TODO - remove this hack
+export default withRouter(withNotice(ActionButton)) as unknown as ComponentClass<Props>

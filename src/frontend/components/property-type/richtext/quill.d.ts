@@ -1,1 +1,3 @@
-declare function Quill(ref: any, options: any): void
+declare class Quill {
+  constructor(ref: any, options: any);
+}

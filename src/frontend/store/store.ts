@@ -5,27 +5,45 @@ import { BrandingOptions, VersionProps } from '../../admin-bro-options.interface
 import { CurrentAdmin } from '../../current-admin.interface'
 import { DEFAULT_PATHS } from '../../constants'
 
-export const initializeResources = data => ({
+export const initializeResources = (data: Array<ResourceJSON>): {
+  type: string; data: Array<ResourceJSON>;
+} => ({
   type: 'RESOURCES_INITIALIZE',
   data,
 })
 
-export const initializeDashboard = data => ({
+export type DashboardInState = {
+  component?: string;
+}
+
+export const initializeDashboard = (data: DashboardInState): {
+  type: string;
+  data: DashboardInState;
+} => ({
   type: 'DASHBOARD_INITIALIZE',
   data,
 })
 
-export const initializeBranding = data => ({
+export const initializeBranding = (data: BrandingOptions): {
+  type: string;
+  data: BrandingOptions;
+} => ({
   type: 'BRANDING_INITIALIZE',
   data,
 })
 
-export const initializePaths = data => ({
+export const initializePaths = (data: Paths): {
+  type: string;
+  data: Paths;
+} => ({
   type: 'PATHS_INITIALIZE',
   data,
 })
 
-export const initializeVersions = data => ({
+export const initializeVersions = (data: VersionProps): {
+  type: string;
+  data: VersionProps;
+} => ({
   type: 'VERSIONS_INITIALIZE',
   data,
 })
@@ -58,12 +76,15 @@ export type Paths = {
   loginPath: string;
 }
 
-export const addNotice = (data: NoticeMessage = { message: '' }) => ({
+export const addNotice = (data: NoticeMessage = { message: '' }): {
+  type: string;
+  data: NoticeMessageInState;
+} => ({
   type: 'ADD_NOTICE',
   data: {
     message: data.message,
     id: Math.random().toString(36).substr(2, 9),
-    type: data.type || 'success',
+    type: data.type || NoticeType.success,
     progress: 0,
   },
 })
@@ -95,7 +116,10 @@ const resourcesReducer = (
   }
 }
 
-const brandingReducer = (state = {}, action) => {
+const brandingReducer = (state = {}, action: {
+  type: string;
+  data: BrandingOptions;
+}) => {
   switch (action.type) {
   case 'BRANDING_INITIALIZE':
     return action.data
@@ -114,7 +138,10 @@ const pathsReducer = (
   }
 }
 
-const dashboardReducer = (state = {}, action) => {
+const dashboardReducer = (state = {}, action: {
+  type: string;
+  data: DashboardInState;
+}): DashboardInState => {
   switch (action.type) {
   case 'DASHBOARD_INITIALIZE':
     return action.data
@@ -136,7 +163,10 @@ const sessionReducer = (
   }
 }
 
-const versionsReducer = (state = {}, action) => {
+const versionsReducer = (state = {}, action: {
+  type: string;
+  data: VersionProps;
+}) => {
   switch (action.type) {
   case 'VERSIONS_INITIALIZE':
     return {
@@ -147,19 +177,26 @@ const versionsReducer = (state = {}, action) => {
   }
 }
 
-const noticesReducer = (state: Array<NoticeMessageInState> = [], action) => {
+type NoticeArgs = { noticeId: string; progress: number }
+
+const noticesReducer = (state: Array<NoticeMessageInState> = [], action: {
+  type: string;
+  data: NoticeMessageInState | NoticeArgs;
+}): Array<NoticeMessageInState> => {
   switch (action.type) {
   case 'ADD_NOTICE': {
-    const notices = [action.data]
+    const notices = [action.data as NoticeMessageInState]
     return notices
   }
   case 'DROP_NOTICE': {
-    return state.filter(notice => notice.id !== action.data.noticeId)
+    return state.filter(notice => notice.id !== (action.data as NoticeArgs).noticeId)
   }
   case 'SET_NOTICE_PROGRESS': {
     return state.map(notice => ({
       ...notice,
-      progress: notice.id === action.data.noticeId ? action.data.progress : notice.progress,
+      progress: notice.id === (action.data as NoticeArgs).noticeId
+        ? action.data.progress
+        : notice.progress,
     }))
   }
   default: return state
@@ -171,9 +208,7 @@ export type ReduxState = {
   branding: BrandingOptions;
   paths: Paths;
   session: CurrentAdmin | null;
-  dashboard: {
-    component?: string;
-  };
+  dashboard: DashboardInState;
   notices: Array<NoticeMessageInState>;
   versions: VersionProps;
 }

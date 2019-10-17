@@ -12,8 +12,8 @@ import RecordJSON from '../../../backend/decorators/record-json.interface'
 
 type State = {
   records: Array<RecordJSON>;
-  page: number;
-  perPage: number;
+  page: string;
+  perPage: string;
   total: number;
   loading: boolean;
   direction: 'asc' | 'desc';
@@ -38,8 +38,8 @@ class List extends React.Component<ActionProps & RouteComponentProps & AddNotice
     this.handleActionPerformed = this.handleActionPerformed.bind(this)
     this.state = {
       records: [],
-      page: 1,
-      perPage: 20,
+      page: '1',
+      perPage: '20',
       total: 0,
       loading: true,
       direction: 'asc',

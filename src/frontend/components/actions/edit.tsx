@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react'
+import React, { ReactNode, ComponentClass } from 'react'
 import { withRouter } from 'react-router-dom'
 
 import { RouteComponentProps } from 'react-router'
@@ -118,4 +118,5 @@ type State = {
   record: RecordJSON;
 }
 
-export default withNotice<ActionProps>(withRouter(Edit))
+// TODO: remove this hack
+export default withNotice(withRouter(Edit)) as unknown as ComponentClass<ActionProps>

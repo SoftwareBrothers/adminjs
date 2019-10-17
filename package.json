@@ -58,6 +58,8 @@
     "@babel/preset-react": "^7.0.0",
     "@babel/preset-typescript": "^7.6.0",
     "@babel/register": "^7.4.0",
+    "@types/react-dom": "^16.9.2",
+    "@types/react-router-dom": "^5.1.0",
     "axios": "^0.18.0",
     "babel-plugin-styled-components": "^1.10.0",
     "classnames": "^2.2.6",

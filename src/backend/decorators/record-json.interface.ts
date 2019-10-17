@@ -13,11 +13,11 @@ export default interface RecordJSON {
   /**
    * If the record has properties which are references - here there will be populated records
    */
-  populated: Record<string, RecordJSON> | {};
+  populated: Record<string, RecordJSON>;
   /**
    * List of all validation errors
    */
-  errors: Record<string, ErrorMessage> | {};
+  errors: Record<string, ErrorMessage>;
   /**
    * Uniq Id of a record. Not present if the record is new (in NewAction)
    */

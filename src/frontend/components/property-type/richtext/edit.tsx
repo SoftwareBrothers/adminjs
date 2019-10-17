@@ -44,9 +44,9 @@ const Wrapper = styled.div.attrs({
 export default class Edit extends React.Component<PropertyProps> {
   private wysiwigRef: React.RefObject<any>
 
-  private quill
+  private quill: any
 
-  constructor(props) {
+  constructor(props: PropertyProps) {
     super(props)
     this.wysiwigRef = React.createRef()
   }
@@ -55,7 +55,7 @@ export default class Edit extends React.Component<PropertyProps> {
     this.setupWysiwig()
   }
 
-  shouldComponentUpdate(nextProps): boolean {
+  shouldComponentUpdate(nextProps: PropertyProps): boolean {
     const { record, property } = this.props
     if (!nextProps) { return false }
     const oldError = record.errors
@@ -78,7 +78,8 @@ export default class Edit extends React.Component<PropertyProps> {
     if (this.quill) {
       delete this.quill
       // eslint-disable-next-line react/no-find-dom-node
-      const toolbars = findDOMNode(this).getElementsByClassName('ql-toolbar')
+      const thisNode = findDOMNode(this) as Element
+      const toolbars = thisNode.getElementsByClassName('ql-toolbar')
       for (let index = 0; index < toolbars.length; index += 1) {
         toolbars[index].remove()
       }
@@ -95,7 +96,7 @@ export default class Edit extends React.Component<PropertyProps> {
     })
   }
 
-  handleChange(value): void {
+  handleChange(value: any): void {
     const { onChange, property } = this.props
     onChange(property.name, value)
   }

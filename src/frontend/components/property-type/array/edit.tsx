@@ -2,13 +2,13 @@ import React, { ReactNode } from 'react'
 import * as flat from 'flat'
 
 import PropertyInEdit from '../../ui/property-in-edit'
-import StyledLink from '../../ui/styled-link'
 import Column from '../../ui/column'
 import Columns from '../../ui/columns'
 import convertParamsToArrayItems from './convert-params-to-array-items'
 import StyledSection from '../../ui/styled-section'
 import PropertyJSON from '../../../../backend/decorators/property-json.interface'
 import RecordJSON from '../../../../backend/decorators/record-json.interface'
+import { StyledButton } from '../../ui'
 
 type State = {
   items: Array<string>;
@@ -68,9 +68,9 @@ export default class Edit extends React.Component<Props, State> {
           />
         </Column>
         <Column width={2}>
-          <StyledLink style={{ marginTop: 25 }} onClick={(): void => this.removeItem(i)}>
+          <StyledButton style={{ marginTop: 25 }} onClick={(): void => this.removeItem(i)}>
             Remove
-          </StyledLink>
+          </StyledButton>
         </Column>
       </Columns>
     )
@@ -82,9 +82,9 @@ export default class Edit extends React.Component<Props, State> {
       <StyledSection style={{ marginTop: 20 }}>
         {items.map((item, i) => this.renderItem(item, i))}
         <p>
-          <StyledLink onClick={(): void => this.addNew()}>
+          <StyledButton onClick={(): void => this.addNew()}>
             Add new item
-          </StyledLink>
+          </StyledButton>
         </p>
       </StyledSection>
     )

@@ -50,7 +50,7 @@ class Breadcrumbs extends React.PureComponent<Props> {
     const { resource, record } = this.props
     return (
       <li>
-        <BreadcrumbLink to={resource.href} className={record && 'is-active'}>
+        <BreadcrumbLink to={resource.href} className={record ? 'is-active' : ''}>
           {resource.name}
         </BreadcrumbLink>
       </li>
@@ -64,7 +64,7 @@ class Breadcrumbs extends React.PureComponent<Props> {
     if (action) {
       return (
         <li className="is-active">
-          <BreadcrumbLink href="#">{action.label}</BreadcrumbLink>
+          <BreadcrumbLink to="#">{action.label}</BreadcrumbLink>
         </li>
       )
     }

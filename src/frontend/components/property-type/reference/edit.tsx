@@ -5,21 +5,25 @@ import { withTheme, DefaultTheme } from 'styled-components'
 import ApiClient from '../../../utils/api-client'
 import PropertyInEdit from '../../ui/property-in-edit'
 import selectStyles from '../../../styles/select-styles'
-import { PropertyProps } from '../base-property-props'
+import { PropertyProps, SelectRecord } from '../base-property-props'
 import RecordJSON from '../../../../backend/decorators/record-json.interface'
-import { SearchRecord } from '../../../../backend/controllers/api-controller'
 
-class Edit extends React.Component<PropertyProps & {theme: DefaultTheme}> {
+type CombinedProps = PropertyProps & {theme: DefaultTheme}
+type SelectRecordEnchanced = SelectRecord & {
+  record: RecordJSON;
+}
+
+class Edit extends React.Component<CombinedProps> {
   private selected: RecordJSON | null
 
-  constructor(props) {
+  constructor(props: CombinedProps) {
     super(props)
     this.selected = null
     this.loadOptions = this.loadOptions.bind(this)
     this.handleChange = this.handleChange.bind(this)
   }
 
-  handleChange(selected): void {
+  handleChange(selected: SelectRecordEnchanced): void {
     const { onChange, property } = this.props
     if (selected) {
       this.selected = selected.record
@@ -29,19 +33,19 @@ class Edit extends React.Component<PropertyProps & {theme: DefaultTheme}> {
     }
   }
 
-  async loadOptions(inputValue): Promise<Array<{
-    value: string;
-    label: string;
-    record: SearchRecord;
-    }>> {
+  async loadOptions(inputValue: string): Promise<Array<SelectRecordEnchanced>> {
     const { property } = this.props
     const api = new ApiClient()
 
     const records = await api.searchRecords({
-      resourceId: property.reference,
+      resourceId: property.reference as string,
       query: inputValue,
     })
-    return records.map(record => ({ value: record.id, label: record.title, record }))
+    return records.map((record: RecordJSON) => ({
+      value: record.id,
+      label: record.title,
+      record,
+    }))
   }
 
   render(): ReactNode {

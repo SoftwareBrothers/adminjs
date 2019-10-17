@@ -1,5 +1,6 @@
 import Action from './action.interface'
 import NotFoundError from '../utils/not-found-error'
+import RecordJSON from '../decorators/record-json.interface'
 
 /**
  * @implements Action
@@ -27,13 +28,14 @@ const DeleteAction: Action = {
    * @memberof module:DeleteAction
    */
   handler: async (request, response, data): Promise<DeleteActionResponse> => {
-    if (!request.params.recordId) {
+    if (!request.params.recordId || !data.record) {
       throw new NotFoundError([
         'You have to pass "recordId" to Delete Action',
       ].join('\n'), 'Action#handler')
     }
     await data.resource.delete(request.params.recordId)
     return {
+      record: data.record.toJSON(data.currentAdmin),
       redirectUrl: data.h.resourceActionUrl({ resourceId: data.resource.id(), actionName: 'list' }),
     }
   },
@@ -49,6 +51,7 @@ type DeleteActionResponse = {
    * URL on which user should be redirected after the action
    */
   redirectUrl: string;
+  record: RecordJSON;
 }
 
 export default DeleteAction

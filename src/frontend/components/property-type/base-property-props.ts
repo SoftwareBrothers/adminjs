@@ -1,7 +1,11 @@
 import PropertyJSON, { PropertyPlace } from '../../../backend/decorators/property-json.interface'
 import ResourceJSON from '../../../backend/decorators/resource-json.interface'
 import RecordJSON from '../../../backend/decorators/record-json.interface'
-import { SearchRecord } from '../../../backend/controllers/api-controller'
+
+export type SelectRecord = {
+  value: string;
+  label: string;
+}
 
 /**
  * Props which are passed to all your custom property components
@@ -85,5 +89,5 @@ export type PropertyProps = BasePropertyProps & {
 export type OnPropertyChange = (
   propertyOrRecord: RecordJSON | string,
   value?: any,
-  record?: SearchRecord,
+  record?: RecordJSON,
 ) => void

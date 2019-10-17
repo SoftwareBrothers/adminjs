@@ -68,7 +68,7 @@ export default interface AdminBroOptions {
   /**
    * Flag which indicates if version number should be visible on the UI
    */
-  version?: VersionProps;
+  version?: VersionSettings;
   /**
    * Options which are related to the branding.
    */
@@ -119,7 +119,7 @@ export default interface AdminBroOptions {
  * @alias VersionProps
  * @memberof AdminBroOptions
  */
-export type VersionProps = {
+export type VersionSettings = {
   /**
    * if set to true - current admin version will be visible
    */
@@ -128,6 +128,11 @@ export type VersionProps = {
    * Here you can pass any arbitrary version text which will be seen in the US.
    * You can pass here your current API version.
    */
+  app?: string;
+}
+
+export type VersionProps = {
+  admin?: string;
   app?: string;
 }
 

@@ -36,7 +36,7 @@ const initializeStore = (admin: AdminBro, currentAdmin: CurrentAdmin): Store<Red
   store.dispatch(initializeDashboard(dashboard))
   store.dispatch(initializeVersions({
     app: admin.options.version && admin.options.version.app,
-    admin: admin.options.version && admin.options.version.admin ? adminVersion : null,
+    admin: admin.options.version && admin.options.version.admin ? adminVersion : undefined,
   }))
   return store
 }

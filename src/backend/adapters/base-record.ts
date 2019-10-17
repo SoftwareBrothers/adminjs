@@ -5,6 +5,11 @@ import ValidationError from '../utils/validation-error'
 import RecordJSON from '../decorators/record-json.interface'
 import { CurrentAdmin } from '../../current-admin.interface'
 
+export type RecordError = {
+  type: string;
+  message: string;
+}
+
 /**
  * Representation of an particular ORM/ODM Record in given Resource in AdminBro
  *
@@ -13,11 +18,11 @@ import { CurrentAdmin } from '../../current-admin.interface'
 class BaseRecord {
   public resource: BaseResource
 
-  private params: {[key: string]: string} | {}
+  private params: {[key: string]: any}
 
-  private errors: {[key: string]: string} | {}
+  private errors: {[key: string]: RecordError}
 
-  private populated: {[key: string]: string} | {}
+  private populated: {[key: string]: BaseRecord}
 
   /**
    * @param  {Object}       params         all resource data. I.e. field values
@@ -182,7 +187,7 @@ class BaseRecord {
    * @param  {String} path path (name) of property which we want to check if is valid
    * @return {String | null}      validation message of null
    */
-  error(path: string): string | null {
+  error(path: string): RecordError | null {
     return this.errors[path]
   }
 
@@ -202,9 +207,13 @@ class BaseRecord {
    * @return  {RecordJSON}
    */
   toJSON(currentAdmin?: CurrentAdmin): RecordJSON {
+    const populated = Object.keys(this.populated).reduce((m, key) => ({
+      ...m,
+      [key]: this.populated[key].toJSON(currentAdmin),
+    }), {})
     return {
       params: this.params,
-      populated: this.populated,
+      populated,
       errors: this.errors,
       id: this.id(),
       title: this.resource.decorate().titleOf(this),

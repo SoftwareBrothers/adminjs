@@ -62,7 +62,7 @@ const ResourceAction: React.FC<PropsFromState & RouteComponentProps<MatchParams>
         <Filter
           resource={resource}
           isVisible={filterVisible}
-          toggleFilter={(): void => setFilerVisible(!filterVisible)}
+          toggleFilter={(): void => { setFilerVisible(!filterVisible) }}
         />
       ) : ''}
     </div>

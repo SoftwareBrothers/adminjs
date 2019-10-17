@@ -3,6 +3,7 @@ import JWPaginate from 'jw-paginate'
 import styled from 'styled-components'
 import { withRouter } from 'react-router-dom'
 
+import { RouteComponentProps } from 'react-router'
 import StyledLink from './styled-link'
 
 const PaginationWrapper = styled.div.attrs({
@@ -25,11 +26,11 @@ const PaginationWrapper = styled.div.attrs({
  *   </WrapperBox>
  * )
  */
-class Paginate extends React.PureComponent<Props> {
-  linkToPage(page): ReactNode {
+class Paginate extends React.PureComponent<RouteComponentProps & Props> {
+  linkToPage(page: number): string {
     const { location } = this.props
     const search = new URLSearchParams(location.search)
-    search.set('page', page)
+    search.set('page', page.toString())
     return search.toString()
   }
 
@@ -93,10 +94,6 @@ type Props = {
    * Total number of items
    */
   total: number;
-  /**
-   * Location passed from the react-router
-   */
-  location: Location;
 }
 
 export default withRouter(Paginate)

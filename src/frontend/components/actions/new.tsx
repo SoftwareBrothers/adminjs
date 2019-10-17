@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react'
+import React, { ReactNode, ComponentClass } from 'react'
 import { withRouter } from 'react-router-dom'
 
 import { RouteComponentProps } from 'react-router'
@@ -119,4 +119,5 @@ class New extends React.Component<ActionProps & AddNoticeProps & RouteComponentP
   }
 }
 
-export default withNotice<ActionProps>(withRouter(New))
+// TODO remove this hack
+export default withNotice(withRouter(New)) as unknown as ComponentClass<ActionProps>

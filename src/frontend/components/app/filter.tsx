@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react'
+import React, { ReactNode, MouseEvent, SyntheticEvent } from 'react'
 import { withRouter } from 'react-router-dom'
 import styled from 'styled-components'
 
@@ -7,6 +7,7 @@ import StyledButton from '../ui/styled-button'
 import PropertyType from '../property-type'
 import ResourceJSON from '../../../backend/decorators/resource-json.interface'
 import { PropertyPlace } from '../../../backend/decorators/property-json.interface'
+import RecordJSON from '../../../backend/decorators/record-json.interface'
 
 const FilterWrapper = styled.section`
   background: ${({ theme }): string => theme.colors.darkBck};
@@ -61,7 +62,7 @@ const FilterContent = styled.section`
 
 type Props = {
   resource: ResourceJSON;
-  toggleFilter: () => boolean;
+  toggleFilter: () => void;
   isVisible: boolean;
 }
 
@@ -73,8 +74,10 @@ type MatchProps = {
   resourceId: string;
 }
 
-class Filter extends React.Component<Props & RouteComponentProps<MatchProps>, State> {
-  constructor(props) {
+type CombinedProps = Props & RouteComponentProps<MatchProps>
+
+class Filter extends React.Component<CombinedProps, State> {
+  constructor(props: CombinedProps) {
     super(props)
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleChange = this.handleChange.bind(this)
@@ -84,7 +87,7 @@ class Filter extends React.Component<Props & RouteComponentProps<MatchProps>, St
     }
   }
 
-  componentWillReceiveProps(nextProps): void {
+  componentWillReceiveProps(nextProps: CombinedProps): void {
     const { match } = this.props
     if (nextProps.match.params.resourceId !== match.params.resourceId) {
       this.setState({ filter: {} })
@@ -93,7 +96,7 @@ class Filter extends React.Component<Props & RouteComponentProps<MatchProps>, St
 
   parseQuery(): any {
     const { location } = this.props
-    const filter = {}
+    const filter: Record<string, string> = {}
     const query = new URLSearchParams(location.search)
     for (const entry of query.entries()) {
       const [key, value] = entry
@@ -104,7 +107,7 @@ class Filter extends React.Component<Props & RouteComponentProps<MatchProps>, St
     return filter
   }
 
-  handleSubmit(event): false {
+  handleSubmit(event: SyntheticEvent): false {
     event.preventDefault()
     const { filter } = this.state
     const { history } = this.props
@@ -121,7 +124,7 @@ class Filter extends React.Component<Props & RouteComponentProps<MatchProps>, St
     return false
   }
 
-  resetFilter(event): void {
+  resetFilter(event: MouseEvent): void {
     const { history } = this.props
     event.preventDefault()
     const filteredSearch = new URLSearchParams()
@@ -136,11 +139,14 @@ class Filter extends React.Component<Props & RouteComponentProps<MatchProps>, St
     this.setState({ filter: {} })
   }
 
-  handleChange(propertyName, value): void {
+  handleChange(propertyName: string | RecordJSON, value: any): void {
+    if ((propertyName as RecordJSON).params) {
+      throw new Error('you can not pass RecordJSON to filters')
+    }
     this.setState(state => ({
       filter: {
         ...state.filter,
-        [propertyName]: value,
+        [propertyName as string]: value,
       },
     }))
   }

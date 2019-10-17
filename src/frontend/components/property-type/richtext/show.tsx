@@ -5,7 +5,7 @@ import { PropertyProps } from '../base-property-props'
 export default class Show extends React.PureComponent<PropertyProps> {
   private contentRef: React.RefObject<any>
 
-  constructor(props) {
+  constructor(props: PropertyProps) {
     super(props)
     this.contentRef = React.createRef()
   }

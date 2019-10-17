@@ -5,14 +5,16 @@ import ApiClient from '../../../utils/api-client'
 
 import PropertyInFilter from '../../ui/property-in-filter'
 import { filterStyles } from '../../../styles/select-styles'
-import { FilterPropertyProps } from '../base-property-props'
+import { FilterPropertyProps, SelectRecord } from '../base-property-props'
 
-class Filter extends React.PureComponent<FilterPropertyProps & ThemeProps<DefaultTheme>> {
+type CombinedProps = FilterPropertyProps & ThemeProps<DefaultTheme>
+
+class Filter extends React.PureComponent<CombinedProps> {
   private api: ApiClient
 
-  private options: Array<{value: string; label: string}>
+  private options: Array<SelectRecord>
 
-  constructor(props) {
+  constructor(props: CombinedProps) {
     super(props)
     this.api = new ApiClient()
     this.options = []
@@ -20,15 +22,15 @@ class Filter extends React.PureComponent<FilterPropertyProps & ThemeProps<Defaul
     this.handleChange = this.handleChange.bind(this)
   }
 
-  handleChange(selected): void {
+  handleChange(selected: SelectRecord): void {
     const { onChange, property } = this.props
     onChange(property.name, selected ? selected.value : '')
   }
 
-  async loadOptions(inputValue): Promise<Array<{value: string; label: string }>> {
+  async loadOptions(inputValue: string): Promise<Array<{value: string; label: string }>> {
     const { property } = this.props
     const records = await this.api.searchRecords({
-      resourceId: property.reference,
+      resourceId: property.reference as string,
       query: inputValue,
     })
     this.options = records.map(r => ({ value: r.id, label: r.title }))

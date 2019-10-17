@@ -1,4 +1,5 @@
 import React, { ReactNode } from 'react'
+import { ReactComponentLike } from 'prop-types'
 import ErrorBoundary from '../app/error-boundary'
 
 import ArrayType from './array'
@@ -159,7 +160,7 @@ type State = {
  * )
  */
 export default class BasePropertyComponent extends React.Component<BasePropertyProps, State> {
-  constructor(props) {
+  constructor(props: BasePropertyProps) {
     super(props)
     this.state = {
       isClient: false,
@@ -184,7 +185,7 @@ export default class BasePropertyComponent extends React.Component<BasePropertyP
     const { property, resource, record, filter, where, onChange } = this.props
     const { isClient } = this.state
 
-    let Component = (types[property.type] && types[property.type][where])
+    let Component: ReactComponentLike = (types[property.type] && types[property.type][where])
     || defaultType[where]
 
     if (property.components && property.components[where] && isClient) {

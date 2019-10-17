@@ -2,6 +2,7 @@ import React, { ReactNode } from 'react'
 import { NavLink, withRouter } from 'react-router-dom'
 import styled from 'styled-components'
 
+import { RouteComponentProps } from 'react-router'
 import ResourceJSON from '../../../../backend/decorators/resource-json.interface'
 
 const ResourceLink = styled(NavLink)`
@@ -22,7 +23,7 @@ type Props = {
   resource: ResourceJSON;
 }
 
-class SidebarResource extends React.PureComponent<Props> {
+class SidebarResource extends React.PureComponent<Props & RouteComponentProps> {
   render(): ReactNode {
     const { resource } = this.props
     return (

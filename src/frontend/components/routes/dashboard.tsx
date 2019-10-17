@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react'
+import React, { ReactNode, FunctionComponent } from 'react'
 import { connect } from 'react-redux'
 
 import DefaultDashboard from '../app/default-dashboard'
@@ -6,7 +6,7 @@ import ErrorBoundary from '../app/error-boundary'
 import { ReduxState } from '../../store/store'
 
 declare const AdminBro: {
-  UserComponents: Array<string>;
+  UserComponents: Record<string, FunctionComponent>;
 }
 
 type State = {
@@ -20,7 +20,7 @@ type PropsFromState = {
 }
 
 class Dashboard extends React.Component<PropsFromState, State> {
-  constructor(props) {
+  constructor(props: PropsFromState) {
     super(props)
     this.state = {
       isClient: false,
@@ -38,7 +38,7 @@ class Dashboard extends React.Component<PropsFromState, State> {
     if (dashboard && dashboard.component && isClient
         && AdminBro.UserComponents[dashboard.component]
     ) {
-      Component = AdminBro.UserComponents[dashboard.component]
+      Component = AdminBro.UserComponents[dashboard.component] as FunctionComponent
     } else {
       Component = DefaultDashboard
     }

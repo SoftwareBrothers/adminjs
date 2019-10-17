@@ -11,6 +11,7 @@
       "strictFunctionTypes": true,
       "strictBindCallApply": true,
       "noImplicitThis": true,
+    //   "noImplicitAny": true,
       "moduleResolution": "node",
       "types": ["react", "mocha"]
   },
