@@ -14,7 +14,7 @@ export default interface ActionJSON {
   /**
    * Action icon
    */
-  icon: string;
+  icon?: string;
   /**
    * Action label - visible on the frontend
    */

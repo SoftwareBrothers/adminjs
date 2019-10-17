@@ -1,6 +1,6 @@
 import BaseResource from './backend/adapters/base-resource'
 import BaseDatabase from './backend/adapters/base-database'
-import { ActionHandler } from './backend/actions/action.interface'
+import { PageContext } from './backend/actions/action.interface'
 import { ResourceOptions } from './backend/decorators/resource-options.interface'
 import { colors, sizes, fonts, breakpoints } from './frontend/styles/variables'
 
@@ -59,7 +59,7 @@ export default interface AdminBroOptions {
     /**
      * Handler function which is triggered in the api when user launches the dashboard.
      */
-    handler?: ActionHandler;
+    handler?: DashboardHandler;
     /**
      * Bundled component name which should be rendered when user opens the dashboard
      */
@@ -174,4 +174,38 @@ export type BrandingOptions = {
    * Flag indicates if `SoftwareBrothers` tiny hart icon should be visible on the bottom sidebar.
    */
   softwareBrothers?: boolean;
+}
+
+export type DashboardHandler = (
+  request: any,
+  response: any,
+  context: PageContext,
+) => Promise<any>
+
+/**
+ * Interface of AdminBroOptions filled with default values
+ * @private
+ */
+export interface AdminBroOptionsWithDefault extends AdminBroOptions {
+  rootPath: string;
+  logoutPath: string;
+  loginPath: string;
+  databases?: Array<BaseDatabase>;
+  resources?: Array<BaseResource | {
+    resource: BaseResource;
+    options: ResourceOptions;
+  }>;
+  dashboard: {
+    handler?: DashboardHandler;
+    component?: string;
+  };
+  branding: BrandingOptions & {
+    softwareBrothers: boolean;
+    companyName: string;
+  };
+  assets: {
+    styles: Array<string>;
+    scripts: Array<string>;
+    globalsFromCDN: boolean;
+  };
 }

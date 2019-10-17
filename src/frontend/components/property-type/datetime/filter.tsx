@@ -2,11 +2,11 @@ import React, { ReactNode } from 'react'
 
 import PropertyInFilter, { Label } from '../../ui/property-in-filter'
 import * as BackendFilter from '../../../../backend/utils/filter'
-import { BasePropertyProps } from '../base-property-props'
+import { FilterPropertyProps } from '../base-property-props'
 
 const { PARAM_SEPARATOR } = BackendFilter
 
-export default class Filter extends React.Component<BasePropertyProps> {
+export default class Filter extends React.Component<FilterPropertyProps> {
   private pickerRef: {
     from: React.RefObject<any>;
     to: React.RefObject<any>;

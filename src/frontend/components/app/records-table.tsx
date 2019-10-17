@@ -11,7 +11,7 @@ import RecordJSON from '../../../backend/decorators/record-json.interface'
 type Props = {
   resource: ResourceJSON;
   records: Array<RecordJSON>;
-  actionPerformed?: () => any;
+  actionPerformed?: (actionName: string) => any;
   sortBy?: string;
   direction?: 'asc' | 'desc';
   isLoading: boolean;

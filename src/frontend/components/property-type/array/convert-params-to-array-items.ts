@@ -69,7 +69,8 @@ const convertParamsToArrayItems = (property: PropertyJSON, record: RecordJSON): 
    *   }],
    * }['arrayField']
    */
-  return flat.unflatten(obj)[tempName] || []
+  const unflatten = flat.unflatten(obj) as Array<string>
+  return unflatten[tempName] || []
 }
 
 export default convertParamsToArrayItems

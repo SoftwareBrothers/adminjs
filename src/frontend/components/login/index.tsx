@@ -41,7 +41,7 @@ const LoginBox = styled.section`
 `
 
 type Props = {
-  message: string;
+  message?: string;
   action: string;
 }
 

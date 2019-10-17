@@ -30,7 +30,7 @@ class PropertyDecorator {
   constructor({ property, admin, options = {}, resource }: {
     property: BaseProperty;
     admin: AdminBro;
-    options: PropertyOptions;
+    options?: PropertyOptions;
     resource: ResourceDecorator;
   }) {
     this.property = property
@@ -53,14 +53,17 @@ class PropertyDecorator {
     return this.property.isSortable()
   }
 
-  overrideFromOptions(optionName: AvailablePropertyOptions, defaultValue = null): any {
+  overrideFromOptions<T>(
+    optionName: AvailablePropertyOptions,
+    defaultValue?: () => T,
+  ): T {
     if (typeof this.options[optionName] === 'undefined') {
       if (defaultValue) {
         return defaultValue()
       }
       return this.property[optionName]()
     }
-    return this.options[optionName]
+    return this.options[optionName] as T
   }
 
   /**
@@ -69,7 +72,12 @@ class PropertyDecorator {
    * @return  {BaseResource} reference resource
    */
   reference(): BaseResource | null {
-    return this.property.reference() && this._admin.findResource(this.property.reference())
+    const referenceResourceId = this.property.reference()
+    if (referenceResourceId) {
+      const resource = this._admin.findResource(referenceResourceId)
+      return resource
+    }
+    return null
   }
 
   /**
@@ -190,7 +198,9 @@ class PropertyDecorator {
         const decorated = new PropertyDecorator({
           property: subProperty,
           admin: this._admin,
-          options: (this._resource.options.properties)[optionKey],
+          options: this._resource.options
+                   && this._resource.options.properties
+                   && this._resource.options.properties[optionKey],
           resource: this._resource,
         })
         return decorated.toJSON()

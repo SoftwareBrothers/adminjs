@@ -1,5 +1,6 @@
 import Action from './action.interface'
 import RecordJSON from '../decorators/record-json.interface'
+import NotFoundError from '../utils/not-found-error'
 
 /**
  * @implements Action
@@ -27,10 +28,15 @@ const EditAction: Action = {
    */
   handler: async (request, response, data): Promise<EditActionResponse> => {
     const { record } = data
+    if (!record) {
+      throw new NotFoundError([
+        `Record of given id ("${request.params.recordId}") could not be found`,
+      ].join('\n'), 'Action#handler')
+    }
     if (request.method === 'get') {
       return { record: record.toJSON(data.currentAdmin) }
     }
-    await record.update(request.payload.record)
+    await record.update(request.payload && request.payload.record)
     if (record.isValid()) {
       return {
         redirectUrl: data.h.recordActionUrl({

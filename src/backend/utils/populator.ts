@@ -25,6 +25,12 @@ const populator = async (
 
   await Promise.all(references.map(async (propertyDecorator) => {
     const referenceResource = propertyDecorator.reference()
+    if (!referenceResource) {
+      throw new Error([
+        `There is no reference resource named: "${propertyDecorator.property.reference}"`,
+        `for property: "${propertyDecorator.name}"`,
+      ].join('\n'))
+    }
     await referenceResource.populate(records, propertyDecorator.property)
   }))
   return records

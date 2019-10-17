@@ -23,18 +23,56 @@ export type BasePropertyProps = {
    */
   record?: RecordJSON;
   /**
-   * Filter object taken from the query params. It is used on the _filter_ components
-   */
-  filter?: any;
-  /**
    * Where given property schould be rendered
    */
   where: PropertyPlace;
   /**
-   * Function which indicates change of the property value.
-   */
+   * callback function which should indicate change of the field value.
+  */
   onChange?: OnPropertyChange;
+  /**
+   * Filter object taken from the query params. It is used on the _filter_ components.
+   */
+  filter?: any;
 }
+
+/**
+ * Props which are passed to all your custom property components in filter
+ *
+ * @memberof BasePropertyComponent
+ * @alias BasePropertyFilterProps
+ * @extends BasePropertyProps
+ */
+export type FilterPropertyProps = BasePropertyProps & {
+  /**
+   * Filter object taken from the query params. It is used on the _filter_ components
+   */
+  filter: any;
+  /**
+   * callback function which should indicate change of the filter value.
+  */
+  onChange: OnPropertyChange;
+  record: undefined;
+}
+
+/**
+ * Props which are passed to all your custom property components in filter
+ *
+ * @memberof BasePropertyComponent
+ * @alias BasePropertyEditProps
+ * @extends BasePropertyProps
+ */
+export type PropertyProps = BasePropertyProps & {
+  /**
+   * callback function which should indicate change of the field value.
+  */
+  onChange: OnPropertyChange;
+  /**
+   * Record JSON representation. Null for filter
+   */
+  record: RecordJSON;
+}
+
 
 /**
  * On change callback - It takes either

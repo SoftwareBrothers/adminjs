@@ -5,9 +5,9 @@ import { withTheme, DefaultTheme, ThemeProps } from 'styled-components'
 import mapValue from './map-value'
 import PropertyInFilter from '../../ui/property-in-filter'
 import { filterStyles } from '../../../styles/select-styles'
-import { BasePropertyProps } from '../base-property-props'
+import { FilterPropertyProps } from '../base-property-props'
 
-class Filter extends React.PureComponent<BasePropertyProps & ThemeProps<DefaultTheme>> {
+class Filter extends React.PureComponent<FilterPropertyProps & ThemeProps<DefaultTheme>> {
   constructor(props) {
     super(props)
     this.handleChange = this.handleChange.bind(this)

@@ -1,4 +1,4 @@
-import React, { ReactChild } from 'react'
+import React, { ReactNode } from 'react'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 
@@ -46,7 +46,7 @@ type Props = {
  * @private
  */
 class Breadcrumbs extends React.PureComponent<Props> {
-  renderResource(): React.ReactChild {
+  renderResource(): React.ReactNode {
     const { resource, record } = this.props
     return (
       <li>
@@ -57,7 +57,7 @@ class Breadcrumbs extends React.PureComponent<Props> {
     )
   }
 
-  renderAction(): ReactChild {
+  renderAction(): ReactNode {
     const { actionName, resource, record } = this.props
     const action = resource.resourceActions.find(a => a.name === actionName)
       || (record && record.recordActions.find(a => a.name === actionName))
@@ -71,7 +71,7 @@ class Breadcrumbs extends React.PureComponent<Props> {
     return null
   }
 
-  render(): ReactChild {
+  render(): ReactNode {
     return (
       <BreadcrumbsContainer>
         <ul>

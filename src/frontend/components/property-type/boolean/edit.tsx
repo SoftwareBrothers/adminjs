@@ -1,9 +1,9 @@
 import React, { ReactNode } from 'react'
 
 import PropertyInEdit from '../../ui/property-in-edit'
-import { BasePropertyProps } from '../base-property-props'
+import { PropertyProps } from '../base-property-props'
 
-export default class Edit extends React.PureComponent<BasePropertyProps> {
+export default class Edit extends React.PureComponent<PropertyProps> {
   handleChange(event): void {
     const { property, onChange } = this.props
     const { checked } = event.target

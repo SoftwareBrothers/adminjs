@@ -4,9 +4,9 @@ import Select from 'react-select'
 import { withTheme, ThemeProps, DefaultTheme } from 'styled-components'
 import PropertyInFilter from '../../ui/property-in-filter'
 import { filterStyles } from '../../../styles/select-styles'
-import { BasePropertyProps } from '../base-property-props'
+import { FilterPropertyProps } from '../base-property-props'
 
-class Filter extends React.PureComponent<BasePropertyProps & ThemeProps<DefaultTheme>> {
+class Filter extends React.PureComponent<FilterPropertyProps & ThemeProps<DefaultTheme>> {
   constructor(props) {
     super(props)
     this.handleInputChange = this.handleInputChange.bind(this)

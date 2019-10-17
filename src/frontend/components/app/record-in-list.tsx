@@ -24,7 +24,7 @@ const Td = styled.td`
 interface Props {
   resource: ResourceJSON;
   record: RecordJSON;
-  actionPerformed: () => any;
+  actionPerformed?: (actionName: string) => any;
   isLoading: boolean;
 }
 
@@ -35,7 +35,7 @@ export default class RecordInList extends React.PureComponent<Props> {
     return (
       <tr>
         {resource.listProperties.map(property => (
-          <Td key={property.name} className={resource.titleProperty.name === property.name ? 'main' : null}>
+          <Td key={property.name} className={resource.titleProperty.name === property.name ? 'main' : undefined}>
             {isLoading ? (
               <Placeholder style={{ height: 14 }} />
             ) : (

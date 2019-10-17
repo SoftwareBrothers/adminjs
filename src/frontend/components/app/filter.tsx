@@ -128,7 +128,7 @@ class Filter extends React.Component<Props & RouteComponentProps<MatchProps>, St
     const search = new URLSearchParams(window.location.search)
     for (const key of search.keys()) {
       if (!key.match('filters.')) {
-        filteredSearch.set(key, search.get(key))
+        filteredSearch.set(key, search.get(key) as string)
       }
     }
     const query = filteredSearch.toString() === '' ? `?${filteredSearch.toString()}` : ''
@@ -150,7 +150,7 @@ class Filter extends React.Component<Props & RouteComponentProps<MatchProps>, St
     const { filter } = this.state
     const properties = resource.filterProperties
     return (
-      <FilterWrapper className={isVisible ? null : 'filter-hidden'}>
+      <FilterWrapper className={isVisible ? undefined : 'filter-hidden'}>
         <FilterContent>
           <FilterLink onClick={toggleFilter}>
             <span><i className="fas fa-arrow-right" /></span>

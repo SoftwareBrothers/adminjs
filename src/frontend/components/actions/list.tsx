@@ -17,7 +17,7 @@ type State = {
   total: number;
   loading: boolean;
   direction: 'asc' | 'desc';
-  sortBy: string;
+  sortBy?: string;
 }
 
 // TODO: add direction enum
@@ -43,7 +43,7 @@ class List extends React.Component<ActionProps & RouteComponentProps & AddNotice
       total: 0,
       loading: true,
       direction: 'asc',
-      sortBy: null,
+      sortBy: undefined,
     }
   }
 

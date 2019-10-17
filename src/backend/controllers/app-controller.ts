@@ -35,6 +35,9 @@ export default class AppController {
 
   async recordAction({ params }: ActionRequest): Promise<string> {
     const { resourceId, actionName, recordId } = params
+    if (!recordId) {
+      throw new Error('you have to give "recordId" in the request parameters')
+    }
     const href = this.h.recordActionUrl({ resourceId, actionName, recordId })
     return layoutTemplate(this._admin, this.currentAdmin, href)
   }

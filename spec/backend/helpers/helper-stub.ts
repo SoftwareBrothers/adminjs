@@ -7,6 +7,7 @@ const expectedResult = {
   resourceActionUrl: '#resourceActionUrl',
   loginUrl: 'loginUrl',
   logoutUrl: 'logoutUrl',
+  rootUrl: 'admin',
   assetPath: 'assetPath',
   listUrl: 'listUrl',
   dashboardUrl: 'dashboardUrl',
@@ -14,7 +15,11 @@ const expectedResult = {
 
 export default (): ViewHelpers => (
   {
-    options: {},
+    options: {
+      loginPath: expectedResult.loginUrl,
+      logoutPath: expectedResult.logoutUrl,
+      rootPath: expectedResult.rootUrl,
+    },
     recordActionUrl: sinon.stub().returns(expectedResult.recordActionUrl),
     resourceActionUrl: sinon.stub().returns(expectedResult.resourceActionUrl),
     urlBuilder: sinon.stub(),

@@ -2,7 +2,7 @@ import * as _ from 'lodash'
 import * as path from 'path'
 import * as fs from 'fs'
 
-import AdminBroOptions from './admin-bro-options.interface'
+import AdminBroOptions, { AdminBroOptionsWithDefault } from './admin-bro-options.interface'
 import BaseResource from './backend/adapters/base-resource'
 import BaseDatabase from './backend/adapters/base-database'
 import BaseRecord from './backend/adapters/base-record'
@@ -14,16 +14,17 @@ import ResourcesFactory from './backend/utils/resources-factory'
 import userComponentsBunlder from './backend/bundler/user-components-bundler'
 import { RouterType } from './backend/router'
 import Action from './backend/actions/action.interface'
+import { DEFAULT_PATHS } from './constants'
 
 import loginTemplate from './frontend/login-template'
 
 const pkg = JSON.parse(fs.readFileSync(path.join(__dirname, '../package.json'), 'utf-8'))
 export const VERSION = pkg.version
 
-const defaults: AdminBroOptions = {
-  rootPath: '/admin',
-  logoutPath: '/admin/logout',
-  loginPath: '/admin/login',
+const defaults: AdminBroOptionsWithDefault = {
+  rootPath: DEFAULT_PATHS.rootPath,
+  logoutPath: DEFAULT_PATHS.logoutPath,
+  loginPath: DEFAULT_PATHS.loginPath,
   databases: [],
   resources: [],
   branding: {
@@ -59,7 +60,7 @@ export type Adapter = { Database: typeof BaseDatabase; Resource: typeof BaseReso
 class AdminBro {
   public resources: Array<BaseResource>
 
-  public options: AdminBroOptions
+  public options: AdminBroOptionsWithDefault
 
   public static registeredAdapters: Array<Adapter>
 
@@ -100,8 +101,9 @@ class AdminBro {
      */
     this.options = _.merge({}, defaults, options)
 
-    this.options.branding.logo = this.options.branding.logo || `${this.options.rootPath}/frontend/assets/logo-mini.svg`
-
+    const defaultLogo = `${this.options.rootPath}/frontend/assets/logo-mini.svg`
+    this.options.branding = this.options.branding || {}
+    this.options.branding.logo = this.options.branding.logo || defaultLogo
     const { databases, resources } = this.options
     const resourcesFactory = new ResourcesFactory(this, AdminBro.registeredAdapters)
     this.resources = resourcesFactory.buildResources({ databases, resources })
@@ -172,9 +174,18 @@ class AdminBro {
    *
    * @param  {String} resourceId    ID of a resource defined under {@link BaseResource#id}
    * @return {BaseResource}         found resource
+   * @throws {Error}                when resource with given id cannot be found
    */
   findResource(resourceId): BaseResource {
-    return this.resources.find(m => m.id() === resourceId)
+    const resource = this.resources.find(m => m.id() === resourceId)
+    if (!resource) {
+      throw new Error([
+        `There are no resources with given id: "${resourceId}"`,
+        'This is the list of all registered resources you can use:',
+        this.resources.map(r => r.id()).join(', '),
+      ].join('\n'))
+    }
+    return resource
   }
 
   /**
@@ -193,14 +204,17 @@ class AdminBro {
    * }
    */
   public static bundle(src: string): string {
-    const extensions = ['.jsx', '.js']
+    const extensions = ['.jsx', '.js', '.ts', '.tsx']
     let filePath = ''
     const componentId = _.uniqueId('Component')
     if (src[0] === '/') {
       filePath = src
     } else {
-      const stack = ((new Error()).stack).split('\n')
+      const stack = ((new Error()).stack || '').split('\n')
       const m = stack[2].match(/\((.*):[0-9]+:[0-9]+\)/)
+      if (!m) {
+        throw new Error('STACK does not have a file url. Chcek out if the node version >= 8')
+      }
       filePath = path.join(path.dirname(m[1]), src)
     }
 

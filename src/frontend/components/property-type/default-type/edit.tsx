@@ -3,9 +3,9 @@ import Select from 'react-select'
 
 import PropertyInEdit from '../../ui/property-in-edit'
 import StyledInput from '../../ui/styled-input'
-import { BasePropertyProps } from '../base-property-props'
+import { PropertyProps } from '../base-property-props'
 
-export default class Edit extends React.Component<BasePropertyProps> {
+export default class Edit extends React.Component<PropertyProps> {
   constructor(props) {
     super(props)
     this.handleInputChange = this.handleInputChange.bind(this)

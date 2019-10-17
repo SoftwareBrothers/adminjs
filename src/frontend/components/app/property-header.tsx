@@ -25,11 +25,11 @@ type Props = {
   /**
    * currently selected direction. Either 'asc' or 'desc'.
    */
-  direction: 'asc' | 'desc';
+  direction?: 'asc' | 'desc';
   /**
    * currently selected field by which list is sorted.
    */
-  sortBy: string;
+  sortBy?: string;
 }
 
 const PropertyHeader: React.FC<Props> = (props) => {
@@ -38,7 +38,7 @@ const PropertyHeader: React.FC<Props> = (props) => {
   const isMain = property.name === titleProperty.name
 
   return (
-    <Th className={isMain ? 'main' : null}>
+    <Th className={isMain ? 'main' : undefined}>
       {property.isSortable ? <SortLink {...props} /> : property.label}
     </Th>
   )

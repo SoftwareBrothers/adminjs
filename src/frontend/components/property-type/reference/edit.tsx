@@ -5,11 +5,11 @@ import { withTheme, DefaultTheme } from 'styled-components'
 import ApiClient from '../../../utils/api-client'
 import PropertyInEdit from '../../ui/property-in-edit'
 import selectStyles from '../../../styles/select-styles'
-import { BasePropertyProps } from '../base-property-props'
+import { PropertyProps } from '../base-property-props'
 import RecordJSON from '../../../../backend/decorators/record-json.interface'
 import { SearchRecord } from '../../../../backend/controllers/api-controller'
 
-class Edit extends React.Component<BasePropertyProps & {theme: DefaultTheme}> {
+class Edit extends React.Component<PropertyProps & {theme: DefaultTheme}> {
   private selected: RecordJSON
 
   constructor(props) {
@@ -20,8 +20,12 @@ class Edit extends React.Component<BasePropertyProps & {theme: DefaultTheme}> {
 
   handleChange(selected): void {
     const { onChange, property } = this.props
-    this.selected = selected.record
-    onChange(property.name, selected.value, selected.record)
+    if (selected) {
+      this.selected = selected.record
+      onChange(property.name, selected.value, selected.record)
+    } else {
+      onChange(property.name, '')
+    }
   }
 
   async loadOptions(inputValue): Promise<Array<{

@@ -26,7 +26,7 @@ const NewAction: Action = {
    */
   handler: async (request, response, data): Promise<NewActionResponse> => {
     if (request.method === 'post') {
-      let record = await data.resource.build(request.payload.record)
+      let record = await data.resource.build(request.payload ? request.payload.record : {})
       record = await record.save()
       if (record.isValid()) {
         return {

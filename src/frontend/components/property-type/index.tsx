@@ -188,7 +188,11 @@ export default class BasePropertyComponent extends React.Component<BasePropertyP
     || defaultType[where]
 
     if (property.components && property.components[where] && isClient) {
-      Component = globalAny.AdminBro.UserComponents[property.components[where]]
+      const component = property.components[where]
+      if (!component) {
+        throw new Error(`there is no "${property.name}.components.${where}"`)
+      }
+      Component = globalAny.AdminBro.UserComponents[component]
       return (
         <ErrorBoundary>
           <Component

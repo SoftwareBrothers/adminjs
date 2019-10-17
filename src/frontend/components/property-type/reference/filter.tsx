@@ -5,9 +5,9 @@ import ApiClient from '../../../utils/api-client'
 
 import PropertyInFilter from '../../ui/property-in-filter'
 import { filterStyles } from '../../../styles/select-styles'
-import { BasePropertyProps } from '../base-property-props'
+import { FilterPropertyProps } from '../base-property-props'
 
-class Filter extends React.PureComponent<BasePropertyProps & ThemeProps<DefaultTheme>> {
+class Filter extends React.PureComponent<FilterPropertyProps & ThemeProps<DefaultTheme>> {
   private api: ApiClient
 
   private options: Array<{value: string; label: string}>

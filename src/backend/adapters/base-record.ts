@@ -62,7 +62,7 @@ class BaseRecord {
     }
     const subParams = this.namespaceParams(path)
     if (subParams) {
-      const unflattenSubParams = flat.unflatten(subParams)
+      const unflattenSubParams = flat.unflatten(subParams) as Record<string, any>
       return path.split('.').reduce((m, v) => m[v], unflattenSubParams)
     }
     return undefined
@@ -74,13 +74,13 @@ class BaseRecord {
    *
    * @return  {Object}
    */
-  namespaceParams(prefix: string): object {
+  namespaceParams(prefix: string): Record<string, any> {
     const regex = new RegExp(`^${prefix}`)
     const keys = Object.keys(this.params).filter(key => key.match(regex))
     if (keys.length) {
       return keys.reduce((memo, key) => ({ ...memo, [key]: this.params[key] }), {})
     }
-    return undefined
+    return {}
   }
 
   /**
@@ -143,6 +143,9 @@ class BaseRecord {
    */
   id(): string {
     const idProperty = this.resource.properties().find(p => p.isId())
+    if (!idProperty) {
+      throw new Error(`Resource: "${this.resource.id()}" does not have an id property`)
+    }
     return this.param(idProperty.name())
   }
 
@@ -198,7 +201,7 @@ class BaseRecord {
    * @param {CurrentAdmin} currentAdmin
    * @return  {RecordJSON}
    */
-  toJSON(currentAdmin: CurrentAdmin): RecordJSON {
+  toJSON(currentAdmin?: CurrentAdmin): RecordJSON {
     return {
       params: this.params,
       populated: this.populated,

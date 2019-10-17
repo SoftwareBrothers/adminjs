@@ -86,7 +86,7 @@ type Props = {
   className?: string;
   resourceId: string;
   recordId?: string;
-  actionPerformed: (actionName: string) => any;
+  actionPerformed?: (actionName: string) => any;
 }
 
 export default withNotice<Props>(withRouter(ActionButton))

@@ -100,9 +100,4 @@ type Props = {
   };
 }
 
-PropertyInEdit.defaultProps = {
-  error: null,
-  children: null,
-}
-
 export default PropertyInEdit

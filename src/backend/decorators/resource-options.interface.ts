@@ -43,7 +43,7 @@ export interface ResourceOptions {
   /**
    * List of properties along with their options
    */
-  properties?: Record<string, PropertyOptions> | {};
+  properties?: Record<string, PropertyOptions>;
   /**
    * List of all actions along with their options
    */

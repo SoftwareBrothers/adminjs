@@ -5,11 +5,11 @@ const buildUrl = (page: string): string => (
 )
 
 /**
- * Error which is thrown when user messed up something in the configuration
+ * Error which is thrown when given record/resource/action hasn't been found.
  *
  * @category Errors
  */
-class ConfigurationError extends Error {
+class NotFoundError extends Error {
   /**
    * @param   {string}  fnName  name of the function, base on which error will
    * print on the output link to the method documentation.
@@ -26,4 +26,4 @@ class ConfigurationError extends Error {
   }
 }
 
-export default ConfigurationError
+export default NotFoundError

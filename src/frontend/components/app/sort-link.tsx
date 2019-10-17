@@ -21,8 +21,8 @@ const StyledLink = styled(NavLink).attrs({
 
 type Props = {
   property: PropertyJSON;
-  direction: 'asc' | 'desc';
-  sortBy: string;
+  direction?: 'asc' | 'desc';
+  sortBy?: string;
 }
 
 class SortLink extends React.PureComponent<Props & RouteComponentProps> {

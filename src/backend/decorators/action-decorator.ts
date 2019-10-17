@@ -120,7 +120,7 @@ class ActionDecorator {
    *
    * @return  {Boolean}
    */
-  isVisible(currentAdmin: CurrentAdmin, record: BaseRecord): boolean {
+  isVisible(currentAdmin?: CurrentAdmin, record?: BaseRecord): boolean {
     return this.is('isVisible', currentAdmin, record)
   }
 
@@ -131,7 +131,7 @@ class ActionDecorator {
    * @param {BaseRecord} [record]
    * @return  {Boolean}
    */
-  isAccessible(currentAdmin: CurrentAdmin, record: BaseRecord): boolean {
+  isAccessible(currentAdmin?: CurrentAdmin, record?: BaseRecord): boolean {
     return this.is('isAccessible', currentAdmin, record)
   }
 
@@ -145,9 +145,9 @@ class ActionDecorator {
       name: this.action.name,
       actionType: this.action.actionType,
       icon: this.action.icon,
-      label: this.action.label,
+      label: this.action.label || this.action.name,
       guard: this.action.guard,
-      showFilter: this.action.showFilter,
+      showFilter: false,
       component: this.action.component,
     }
   }

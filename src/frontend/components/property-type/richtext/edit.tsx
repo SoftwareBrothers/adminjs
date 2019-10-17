@@ -3,7 +3,7 @@ import React, { ReactNode } from 'react'
 import { findDOMNode } from 'react-dom'
 
 import styled from 'styled-components'
-import { BasePropertyProps } from '../base-property-props'
+import { PropertyProps } from '../base-property-props'
 import { Label } from '../../ui'
 
 const toolbarOptions = [
@@ -41,7 +41,7 @@ const Wrapper = styled.div.attrs({
   }
 `
 
-export default class Edit extends React.Component<BasePropertyProps> {
+export default class Edit extends React.Component<PropertyProps> {
   private wysiwigRef: React.RefObject<any>
 
   private quill

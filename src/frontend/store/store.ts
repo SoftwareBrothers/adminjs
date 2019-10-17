@@ -3,6 +3,7 @@ import { createStore, combineReducers } from 'redux'
 import ResourceJSON from '../../backend/decorators/resource-json.interface'
 import { BrandingOptions, VersionProps } from '../../admin-bro-options.interface'
 import { CurrentAdmin } from '../../current-admin.interface'
+import { DEFAULT_PATHS } from '../../constants'
 
 export const initializeResources = data => ({
   type: 'RESOURCES_INITIALIZE',
@@ -41,21 +42,27 @@ export enum NoticeType {
 
 export type NoticeMessage = {
   message: string;
-  id?: string;
   type?: NoticeType;
 }
 
+export type NoticeMessageInState = NoticeMessage & {
+  message: string;
+  id: string;
+  type: NoticeType;
+  progress: number;
+}
+
 export type Paths = {
-  rootPath?: string;
-  logoutPath?: string;
-  loginPath?: string;
+  rootPath: string;
+  logoutPath: string;
+  loginPath: string;
 }
 
 export const addNotice = (data: NoticeMessage = { message: '' }) => ({
   type: 'ADD_NOTICE',
   data: {
     message: data.message,
-    id: data.id || Math.random().toString(36).substr(2, 9),
+    id: Math.random().toString(36).substr(2, 9),
     type: data.type || 'success',
     progress: 0,
   },
@@ -90,7 +97,10 @@ const brandingReducer = (state = {}, action) => {
   }
 }
 
-const pathsReducer = (state = {}, action): Paths => {
+const pathsReducer = (
+  state: Paths = DEFAULT_PATHS,
+  action: {type: string; data: Paths},
+): Paths => {
   switch (action.type) {
   case 'PATHS_INITIALIZE':
     return action.data
@@ -125,7 +135,7 @@ const versionsReducer = (state = {}, action) => {
   }
 }
 
-const noticesReducer = (state = [], action) => {
+const noticesReducer = (state: Array<NoticeMessageInState> = [], action) => {
   switch (action.type) {
   case 'ADD_NOTICE': {
     const notices = [action.data]
@@ -148,11 +158,11 @@ export type ReduxState = {
   resources: Array<ResourceJSON>;
   branding: BrandingOptions;
   paths: Paths;
-  session: CurrentAdmin;
+  session: CurrentAdmin | null;
   dashboard: {
     component?: string;
   };
-  notices: Array<NoticeMessage>;
+  notices: Array<NoticeMessageInState>;
   versions: VersionProps;
 }
 

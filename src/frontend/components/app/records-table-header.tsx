@@ -19,11 +19,11 @@ type Props = {
   /**
    * Name of the property which should be marked as currently sorted by
    */
-  sortBy: string;
+  sortBy?: string;
   /**
    * Sort direction
    */
-  direction: 'asc' | 'desc';
+  direction?: 'asc' | 'desc';
 }
 
 /**

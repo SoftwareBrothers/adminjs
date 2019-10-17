@@ -17,7 +17,8 @@ export default class List extends React.PureComponent<Props> {
   render(): ReactChild {
     const { property, record, resource } = this.props
     const showAction = record.recordActions.find(a => a.name === 'show')
-    const values = flat.unflatten(record.params)[property.name] || []
+    const unflatten = flat.unflatten(record.params) as Record<string, any>
+    const values = unflatten[property.name] || []
 
     if (resource.titleProperty.name === property.name && showAction) {
       const h = new ViewHelpers()

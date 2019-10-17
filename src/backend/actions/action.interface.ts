@@ -21,7 +21,7 @@ export type ActionContext = {
   /**
    * Resource on which action has been invoked. Null for dashboard handler.
    */
-  resource?: BaseResource;
+  resource: BaseResource;
   /**
    * Record on which action has been invoked (only for {@link actionType} === 'record')
    */
@@ -33,11 +33,27 @@ export type ActionContext = {
   /**
    * Object of currently invoked function. Not present for dashboard action
    */
-  action?: ActionDecorator;
+  action: ActionDecorator;
   /**
    * Currently logged in admin
    */
   currentAdmin?: CurrentAdmin;
+}
+
+
+export type PageContext = {
+  /**
+   * current instance of AdminBro. You may use it to fetch other Resources by their names:
+   */
+  _admin: AdminBro;
+    /**
+   * Currently logged in admin
+   */
+  currentAdmin?: CurrentAdmin;
+    /**
+   * view helpers
+   */
+  h: ViewHelpers;
 }
 
 /**
@@ -372,7 +388,7 @@ export default interface Action {
    * ```
    *
    */
-  handler?: ActionHandler;
+  handler: ActionHandler;
   /**
    * Before action hook. When it is given - it is performed before the {@link Action.handler}
    * method.

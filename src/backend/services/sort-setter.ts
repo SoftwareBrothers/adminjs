@@ -4,8 +4,8 @@ import { ResourceOptions } from '../decorators/resource-options.interface'
 const DEFAULT_DIRECTION = 'asc'
 
 type Sort = {
-  direction?: 'asc' | 'desc';
-  sortBy?: string;
+  direction: 'asc' | 'desc';
+  sortBy: string;
 }
 
 /**
@@ -21,7 +21,7 @@ type Sort = {
  * @return {Sort}
  */
 const sortSetter = (
-  { direction, sortBy }: Sort = {},
+  { direction, sortBy }: {direction?: 'asc' | 'desc'; sortBy?: string} = {},
   firstPropertyName: string,
   resourceOptions: ResourceOptions = {},
 ): Sort => {

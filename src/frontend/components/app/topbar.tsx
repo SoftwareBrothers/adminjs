@@ -21,7 +21,7 @@ const Navbar = styled.nav.attrs({
 
 type PropsFromState = {
   versions: VersionProps;
-  session: CurrentAdmin;
+  session: CurrentAdmin | null;
   paths: {
     logoutPath: string;
   };

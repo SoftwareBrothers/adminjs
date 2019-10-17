@@ -15,6 +15,7 @@ import ResourceJSON from '../../../backend/decorators/resource-json.interface'
 import RecordJSON from '../../../backend/decorators/record-json.interface'
 import ActionJSON from '../../../backend/decorators/action-json.interface'
 import { ReduxState } from '../../store/store'
+import { NoResourceError, NoActionError, NoRecordError } from '../ui/error404'
 
 const ContainerRecord = styled.div`
   display: flex;
@@ -27,7 +28,7 @@ const NoticeWrapper = styled.div`
 `
 
 interface State {
-  record: RecordJSON;
+  record: RecordJSON | null;
   isLoading: boolean;
 }
 
@@ -64,7 +65,10 @@ class RecordAction extends React.Component<Props, State> {
     return true
   }
 
-  getResourceAndAction(name = null): { resource: ResourceJSON; action: ActionJSON} {
+  getResourceAndAction(name = null): {
+    resource: ResourceJSON | null;
+    action: ActionJSON | null;
+  } {
     const { match, resources } = this.props
     const { resourceId, actionName } = match.params
     const { record } = this.state
@@ -73,7 +77,10 @@ class RecordAction extends React.Component<Props, State> {
 
     const resource = resources.find(r => r.id === resourceId)
     const action = record && record.recordActions.find(r => r.name === nameToCheck)
-    return { resource, action }
+    return {
+      resource: resource || null,
+      action: action || null,
+    }
   }
 
   fetchRecord({ actionName, recordId, resourceId }: RecordActionParams): void {
@@ -96,10 +103,21 @@ class RecordAction extends React.Component<Props, State> {
 
   render(): ReactNode {
     const { match } = this.props
-    const { actionName, recordId } = match.params
+    const { actionName, recordId, resourceId } = match.params
     const { record, isLoading } = this.state
 
     const { resource, action } = this.getResourceAndAction()
+
+    if (!resource) {
+      return (<NoResourceError resourceId={resourceId} />)
+    }
+    if (!action) {
+      return (<NoActionError resourceId={resourceId} actionName={actionName} />)
+    }
+
+    if (!record) {
+      return (<NoRecordError resourceId={resourceId} recordId={recordId} />)
+    }
 
     return (
       <ContainerRecord>

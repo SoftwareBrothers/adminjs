@@ -1,10 +1,10 @@
 import React, { ReactNode } from 'react'
 
 import PropertyInEdit from '../../ui/property-in-edit'
-import { BasePropertyProps } from '../base-property-props'
+import { PropertyProps } from '../base-property-props'
 import StyledInput from '../../ui/styled-input'
 
-export default class Edit extends React.Component<BasePropertyProps> {
+export default class Edit extends React.Component<PropertyProps> {
   private datepickerRef: React.RefObject<any>
 
   constructor(props) {

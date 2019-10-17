@@ -36,7 +36,7 @@ export type ResourceActionParams = {
  * Collection of helper methods available in the views
  */
 class ViewHelpers {
-  public options: AdminBroOptions
+  public options: Paths
 
   constructor({ options }: { options?: AdminBroOptions } = {}) {
     let opts: Paths = options || (globalAny.REDUX_STATE && globalAny.REDUX_STATE.paths)

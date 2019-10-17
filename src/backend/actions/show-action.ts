@@ -1,5 +1,6 @@
 import Action from './action.interface'
 import RecordJSON from '../decorators/record-json.interface'
+import NotFoundError from '../utils/not-found-error'
 
 /**
  * @implements Action
@@ -24,9 +25,16 @@ const ShowAction: Action = {
    * @return  {Promise<ShowActionResponse>}  populated record
    * @implements ActionHandler
    */
-  handler: async (request, response, data): Promise<ShowActionResponse> => ({
-    record: data.record.toJSON(data.currentAdmin),
-  }),
+  handler: async (request, response, data): Promise<ShowActionResponse> => {
+    if (!data.record) {
+      throw new NotFoundError([
+        `Record of given id ("${request.params.recordId}") could not be found`,
+      ].join('\n'), 'Action#handler')
+    }
+    return {
+      record: data.record.toJSON(data.currentAdmin),
+    }
+  },
 }
 
 export default ShowAction

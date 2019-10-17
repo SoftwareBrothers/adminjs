@@ -12,6 +12,7 @@ import Filter from '../app/filter'
 import queryHasFilter from '../../utils/query-has-filter'
 import ResourceJSON from '../../../backend/decorators/resource-json.interface'
 import { Paths, ReduxState } from '../../store/store'
+import { NoResourceError, NoActionError } from '../ui/error404'
 
 const NoticeWrapper = styled.div`
   width: 100%;
@@ -33,7 +34,13 @@ const ResourceAction: React.FC<PropsFromState & RouteComponentProps<MatchParams>
   const { resourceId, actionName } = match.params
 
   const resource = resources.find(r => r.id === resourceId)
+  if (!resource) {
+    return (<NoResourceError resourceId={resourceId} />)
+  }
   const action = resource.resourceActions.find(r => r.name === actionName)
+  if (!action) {
+    return (<NoActionError resourceId={resourceId} actionName={actionName} />)
+  }
 
   const [filterVisible, setFilerVisible] = useState(queryHasFilter(location.search))
 

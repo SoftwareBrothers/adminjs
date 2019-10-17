@@ -117,24 +117,26 @@ class ResourceDecorator {
       const decorator = new PropertyDecorator({
         property,
         admin: this._admin,
-        options: this.options.properties[property.name()],
+        options: this.options.properties && this.options.properties[property.name()],
         resource: this,
       })
       return { ...memo, [property.name()]: decorator }
     }, {})
 
+    if (this.options.properties) {
     // decorate all properties user gave in options but they don't exist in the resource
-    Object.keys(this.options.properties).forEach((key) => {
-      if (!properties[key] && !key.match(/\./)) {
-        const property = new BaseProperty({ path: key, isSortable: false })
-        properties[key] = new PropertyDecorator({
-          property,
-          admin: this._admin,
-          options: this.options.properties[key],
-          resource: this,
-        })
-      }
-    })
+      Object.keys(this.options.properties).forEach((key) => {
+        if (!properties[key] && !key.match(/\./)) {
+          const property = new BaseProperty({ path: key, isSortable: false })
+          properties[key] = new PropertyDecorator({
+            property,
+            admin: this._admin,
+            options: this.options.properties && this.options.properties[key],
+            resource: this,
+          })
+        }
+      })
+    }
     return properties
   }
 
@@ -223,12 +225,12 @@ class ResourceDecorator {
    * @param {CurrentAdmin} currentAdmin   currently logged in admin user
    * @return  {Array<ActionDecorator>}     Actions assigned to resources
    */
-  resourceActions(currentAdmin: CurrentAdmin): Array<ActionDecorator> {
+  resourceActions(currentAdmin?: CurrentAdmin): Array<ActionDecorator> {
     return Object.values(this.actions)
       .filter(action => (
         action.isResourceType()
-        && action.isVisible(currentAdmin, null)
-        && action.isAccessible(currentAdmin, null)
+        && action.isVisible(currentAdmin)
+        && action.isAccessible(currentAdmin)
       ))
   }
 
@@ -236,10 +238,10 @@ class ResourceDecorator {
    * List of all actions which should be invoked for given record and not
    * for an entire resource
    *
-   * @param {CurrentAdmin} currentAdmin   currently logged in admin user
+   * @param {CurrentAdmin} [currentAdmin]   currently logged in admin user
    * @return  {Array<ActionDecorator>}     Actions assigned to each record
    */
-  recordActions(record: BaseRecord, currentAdmin: CurrentAdmin): Array<ActionDecorator> {
+  recordActions(record: BaseRecord, currentAdmin?: CurrentAdmin): Array<ActionDecorator> {
     return Object.values(this.actions)
       .filter(action => (
         action.isRecordType()

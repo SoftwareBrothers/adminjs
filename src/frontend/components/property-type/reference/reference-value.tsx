@@ -18,6 +18,10 @@ const ReferenceValue: React.FC<Props> = (props) => {
   const populated = record.populated[property.name]
   const value = (populated && populated.title) || refId
 
+  if (!property.reference) {
+    throw new Error(`property: "${property.name}" does not have a reference`)
+  }
+
   if (populated && populated.recordActions.find(a => a.name === 'show')) {
     const href = h.recordActionUrl({
       resourceId: property.reference, recordId: refId, actionName: 'show',

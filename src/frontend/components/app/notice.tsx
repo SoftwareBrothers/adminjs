@@ -2,7 +2,7 @@ import React, { ReactNode } from 'react'
 import styled from 'styled-components'
 import { connect } from 'react-redux'
 
-import { dropNotice, setNoticeProgress, NoticeMessage, ReduxState } from '../../store/store'
+import { dropNotice, setNoticeProgress, NoticeMessageInState, ReduxState } from '../../store/store'
 
 const TIME_TO_DISAPPEAR = 3
 
@@ -77,7 +77,7 @@ type NotifyProgress = (options: {
 }) => void
 
 type NoticeElementProps = {
-  notice: NoticeMessage;
+  notice: NoticeMessageInState;
   drop: () => any;
   notifyProgress: NotifyProgress;
 }
@@ -132,7 +132,7 @@ class NoticeElement extends React.Component<NoticeElementProps, NoticeElementSta
 }
 
 type NoticeBoxPropsFromState = {
-  notices: Array<NoticeMessage>;
+  notices: Array<NoticeMessageInState>;
 }
 
 type NoticeBoxDispatchFromState = {

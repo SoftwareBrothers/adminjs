@@ -1,4 +1,5 @@
 import Action from './action.interface'
+import NotFoundError from '../utils/not-found-error'
 
 /**
  * @implements Action
@@ -26,6 +27,11 @@ const DeleteAction: Action = {
    * @memberof module:DeleteAction
    */
   handler: async (request, response, data): Promise<DeleteActionResponse> => {
+    if (!request.params.recordId) {
+      throw new NotFoundError([
+        'You have to pass "recordId" to Delete Action',
+      ].join('\n'), 'Action#handler')
+    }
     await data.resource.delete(request.params.recordId)
     return {
       redirectUrl: data.h.resourceActionUrl({ resourceId: data.resource.id(), actionName: 'list' }),
