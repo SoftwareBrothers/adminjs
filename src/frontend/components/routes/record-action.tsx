@@ -28,7 +28,7 @@ const NoticeWrapper = styled.div`
 `
 
 interface State {
-  record: RecordJSON | null;
+  record: RecordJSON | undefined;
   isLoading: boolean;
 }
 
@@ -42,7 +42,7 @@ class RecordAction extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props)
     this.state = {
-      record: null,
+      record: undefined,
       isLoading: true,
     }
   }
@@ -66,8 +66,8 @@ class RecordAction extends React.Component<Props, State> {
   }
 
   getResourceAndAction(name = null): {
-    resource: ResourceJSON | null;
-    action: ActionJSON | null;
+    resource: ResourceJSON | undefined;
+    action: ActionJSON | undefined;
   } {
     const { match, resources } = this.props
     const { resourceId, actionName } = match.params
@@ -78,8 +78,8 @@ class RecordAction extends React.Component<Props, State> {
     const resource = resources.find(r => r.id === resourceId)
     const action = record && record.recordActions.find(r => r.name === nameToCheck)
     return {
-      resource: resource || null,
-      action: action || null,
+      resource: resource || undefined,
+      action: action || undefined,
     }
   }
 
@@ -87,7 +87,7 @@ class RecordAction extends React.Component<Props, State> {
     const api = new ApiClient()
     this.setState({
       isLoading: true,
-      record: null,
+      record: undefined,
     })
     api.recordAction({
       resourceId,
@@ -111,11 +111,11 @@ class RecordAction extends React.Component<Props, State> {
     if (!resource) {
       return (<NoResourceError resourceId={resourceId} />)
     }
-    if (!action) {
+    if (!action && !isLoading) {
       return (<NoActionError resourceId={resourceId} actionName={actionName} />)
     }
 
-    if (!record) {
+    if (!record && !isLoading) {
       return (<NoRecordError resourceId={resourceId} recordId={recordId} />)
     }
 
@@ -140,7 +140,7 @@ class RecordAction extends React.Component<Props, State> {
             ? <Loader />
             : (
               <BaseActionComponent
-                action={action}
+                action={action as ActionJSON}
                 resource={resource}
                 record={record}
               />
