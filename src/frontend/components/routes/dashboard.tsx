@@ -55,4 +55,4 @@ const mapStateToProps = (state: ReduxState): PropsFromState => ({
   dashboard: state.dashboard,
 })
 
-export default connect<PropsFromState>(mapStateToProps)(Dashboard)
+export default connect(mapStateToProps)(Dashboard)

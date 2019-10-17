@@ -158,4 +158,4 @@ const mapStateToProps = (state: ReduxState): PropsFromState => ({
 })
 
 
-export default connect<PropsFromState>(mapStateToProps)(RecordAction)
+export default connect(mapStateToProps)(RecordAction)

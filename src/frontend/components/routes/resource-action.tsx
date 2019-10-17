@@ -74,4 +74,4 @@ const mapStateToProps = (state: ReduxState): PropsFromState => ({
   resources: state.resources,
 })
 
-export default connect<PropsFromState>(mapStateToProps)(ResourceAction)
+export default connect(mapStateToProps)(ResourceAction)

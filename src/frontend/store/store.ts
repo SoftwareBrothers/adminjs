@@ -81,7 +81,13 @@ export const dropNotice = (noticeId: string) => ({
   data: { noticeId },
 })
 
-const resourcesReducer = (state = [], action) => {
+const resourcesReducer = (
+  state: Array<ResourceJSON> = [],
+  action: {
+    type: string;
+    data: Array<ResourceJSON>;
+  },
+) => {
   switch (action.type) {
   case 'RESOURCES_INITIALIZE':
     return action.data
@@ -116,7 +122,13 @@ const dashboardReducer = (state = {}, action) => {
   }
 }
 
-const sessionReducer = (state = null, action) => {
+const sessionReducer = (
+  state: CurrentAdmin | null = null,
+  action: {
+    type: string;
+    data: CurrentAdmin;
+  },
+) => {
   switch (action.type) {
   case 'SESSION_INITIALIZE':
     return action.data

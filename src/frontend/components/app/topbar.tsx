@@ -51,4 +51,4 @@ const mapStateToProps = (state: ReduxState): PropsFromState => ({
   versions: state.versions,
 })
 
-export default connect<PropsFromState>(mapStateToProps)(Topbar)
+export default connect(mapStateToProps)(Topbar)

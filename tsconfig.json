@@ -8,6 +8,7 @@
       "noEmit": true,
       "strictNullChecks": true,
       "strictPropertyInitialization": true,
+      "strictFunctionTypes": true,
       "moduleResolution": "node",
       "types": ["react", "mocha"]
   },

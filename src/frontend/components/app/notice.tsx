@@ -175,6 +175,6 @@ const mapDispatchToProps = (dispatch): NoticeBoxDispatchFromState => ({
   }): void => dispatch(setNoticeProgress({ noticeId, progress })),
 })
 
-export default connect<NoticeBoxPropsFromState, NoticeBoxDispatchFromState>(
+export default connect(
   mapStateToProps, mapDispatchToProps,
 )(NoticeBox)
