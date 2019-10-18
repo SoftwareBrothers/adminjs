@@ -94,10 +94,18 @@ class RecordAction extends React.Component<Props, State> {
       recordId,
       actionName,
     }).then((response) => {
+      const { history, location } = this.props
+
+      if (response.data.redirectUrl && location.pathname !== response.data.redirectUrl) {
+        return history.push(response.data.redirectUrl)
+      }
+
       this.setState({
         isLoading: false,
         record: response.data.record,
       })
+
+      return null
     })
   }
 
