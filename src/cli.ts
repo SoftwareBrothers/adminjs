@@ -1,4 +1,7 @@
 #!/usr/bin/env node
+/* eslint-disable @typescript-eslint/no-var-requires */
+/* eslint-disable import/no-dynamic-require */
+/* eslint-disable global-require */
 
 import fs from 'fs'
 import path from 'path'
