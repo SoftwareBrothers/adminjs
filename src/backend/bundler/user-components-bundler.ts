@@ -22,7 +22,6 @@ async function build(admin, { write = false, watch = false } = {}): Promise<stri
   if (!write) {
     try {
       const existingBundle = await util.promisify(fs.readFile)(outPath, 'utf-8')
-      console.log(existingBundle)
       return existingBundle
     } catch (error) {
       if (error.code !== 'ENOENT') { throw error }
