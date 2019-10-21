@@ -6,6 +6,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 Started from version 0.9.5
 
+## 1.4.0 - unreleased
+
+### added
+
+* `admin` cli with `bundle` command [beta]
+* bring back tags showing total number of records in list action
+
 ## [1.3.5] - 2019-10-17
 
 ### Fixed
