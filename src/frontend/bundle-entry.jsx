@@ -11,6 +11,7 @@ import * as Components from './components/ui'
 import * as AppComponents from './components/app'
 import ApiClient from './utils/api-client'
 import * as style from './styles/variables'
+import * as types from './types'
 
 const env = {
   NODE_ENV: process.env.NODE_ENV || 'development',
@@ -41,6 +42,7 @@ export default {
   env,
   ...Components,
   ...AppComponents,
+  types,
   // TODO: following is a backward compatible - remove this in version 2.0
   Components: { ...Components, ...AppComponents },
 }
