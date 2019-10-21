@@ -15,6 +15,9 @@
     "bundle": "node bin/watch-dev.js",
     "bundle:globals": "node bin/bundle-globals.js"
   },
+  "bin": {
+    "admin": "./cli.js"
+  },
   "nyc": {
     "exclude": [
       "spec",
@@ -58,11 +61,8 @@
     "@babel/preset-react": "^7.0.0",
     "@babel/preset-typescript": "^7.6.0",
     "@babel/register": "^7.4.0",
-    "@types/react-dom": "^16.9.2",
-    "@types/react-router-dom": "^5.1.0",
     "axios": "^0.18.0",
     "babel-plugin-styled-components": "^1.10.0",
-    "classnames": "^2.2.6",
     "flat": "^4.1.0",
     "jw-paginate": "^1.0.2",
     "lodash": "^4.17.11",
@@ -81,7 +81,8 @@
     "rollup-plugin-replace": "^2.1.1",
     "rollup-plugin-terser": "^4.0.4",
     "styled-components": "^4.2.0",
-    "xss": "^1.0.3"
+    "commander": "^3.0.2",
+    "ora": "^4.0.2"
   },
   "devDependencies": {
     "@babel/cli": "^7.4.4",
@@ -94,9 +95,12 @@
     "@types/sinon": "^7.0.13",
     "@types/sinon-chai": "^3.2.3",
     "@types/styled-components": "^4.1.19",
+    "@types/react-dom": "^16.9.2",
+    "@types/react-router-dom": "^5.1.0",
     "@typescript-eslint/eslint-plugin": "^2.3.1",
     "@typescript-eslint/parser": "^2.3.1",
     "chai": "^4.1.2",
+    "core-js": "2.5.7",
     "eslint": "^5.10.0",
     "eslint-config-airbnb": "^17.1.0",
     "eslint-plugin-import": "^2.14.0",

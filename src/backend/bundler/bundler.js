@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 const rollup = require('rollup')
+const ora = require('ora')
 const { external, globals, plugins } = require('./config')
 
 async function build({
@@ -21,14 +22,23 @@ async function build({
   }
 
   if (watch) {
+    const bundle = await rollup.rollup(inputOptions)
+    const spinner = ora('Bundling files')
     const watcher = rollup.watch({
       ...inputOptions,
       output: outputOptions,
     })
     watcher.on('event', (event) => {
-      console.log(event.code)
+      if (event.code === 'START') {
+        spinner.start('Bundling files...')
+      }
       if (event.code === 'ERROR' || event.code === 'FATAL') {
+        spinner.fail('Bundle fail:')
         console.log(event)
+      }
+
+      if (event.code === 'END') {
+        spinner.succeed(`Finish bundling: ${bundle.watchFiles.length} files`)
       }
     })
     return watcher
