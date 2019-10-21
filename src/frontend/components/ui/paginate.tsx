@@ -36,8 +36,8 @@ class Paginate extends React.PureComponent<RouteComponentProps & Props> {
 
   render(): ReactNode {
     const { total, page, perPage } = this.props
-    const currentPage = parseInt(page || '1', 10)
-    const paginate = JWPaginate(total, currentPage, parseInt(perPage, 10))
+    const currentPage = page || 1
+    const paginate = JWPaginate(total, currentPage, perPage)
 
     const isFirstPage = currentPage === paginate.startPage
     const isLastPage = currentPage === paginate.endPage
@@ -85,11 +85,11 @@ type Props = {
   /**
    * Current page
    */
-  page: string;
+  page: number;
   /**
    * Items per page
    */
-  perPage: string;
+  perPage: number;
   /**
    * Total number of items
    */

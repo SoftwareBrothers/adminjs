@@ -9,11 +9,12 @@ import RecordsTable from '../app/records-table'
 import Paginate from '../ui/paginate'
 import { ActionProps } from './action.props'
 import RecordJSON from '../../../backend/decorators/record-json.interface'
+import { ListActionResponse } from '../../../backend/actions/list-action'
 
 type State = {
   records: Array<RecordJSON>;
-  page: string;
-  perPage: string;
+  page: number;
+  perPage: number;
   total: number;
   loading: boolean;
   direction: 'asc' | 'desc';
@@ -38,8 +39,8 @@ class List extends React.Component<ActionProps & RouteComponentProps & AddNotice
     this.handleActionPerformed = this.handleActionPerformed.bind(this)
     this.state = {
       records: [],
-      page: '1',
-      perPage: '20',
+      page: 1,
+      perPage: 20,
       total: 0,
       loading: true,
       direction: 'asc',
@@ -60,8 +61,15 @@ class List extends React.Component<ActionProps & RouteComponentProps & AddNotice
     }
   }
 
+  componentWillUnmount(): void {
+    const { setTag } = this.props
+    if (setTag) {
+      setTag('')
+    }
+  }
+
   _fetchData(): void {
-    const { location, resource } = this.props
+    const { location, resource, setTag } = this.props
     const api = new ApiClient()
     this.setState({ loading: true })
     const query = new URLSearchParams(location.search)
@@ -69,7 +77,7 @@ class List extends React.Component<ActionProps & RouteComponentProps & AddNotice
       actionName: 'list',
       resourceId: resource.id,
       params: query,
-    }).then((response) => {
+    }).then((response: {data: ListActionResponse}) => {
       this.setState({
         records: response.data.records,
         page: response.data.meta.page,
@@ -79,6 +87,13 @@ class List extends React.Component<ActionProps & RouteComponentProps & AddNotice
         sortBy: response.data.meta.sortBy,
         loading: false,
       })
+      if (setTag) {
+        if (typeof response.data.meta.total === 'undefined') {
+          setTag('')
+        } else {
+          setTag(response.data.meta.total.toString())
+        }
+      }
     })
   }
 

@@ -79,7 +79,7 @@ export default ListAction
  * @memberof module:ListAction
  * @alias ListAction
  */
-type ListActionResponse = {
+export type ListActionResponse = {
   /**
    * Paginated collection of records
    */

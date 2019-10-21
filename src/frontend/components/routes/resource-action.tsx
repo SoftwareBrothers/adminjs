@@ -43,6 +43,7 @@ const ResourceAction: React.FC<PropsFromState & RouteComponentProps<MatchParams>
   }
 
   const [filterVisible, setFilerVisible] = useState(queryHasFilter(location.search))
+  const [tag, setTag] = useState('')
 
   return (
     <div>
@@ -54,9 +55,10 @@ const ResourceAction: React.FC<PropsFromState & RouteComponentProps<MatchParams>
         <ActionHeader
           resource={resource}
           action={action}
+          tag={tag}
           toggleFilter={action.showFilter ? (): void => setFilerVisible(!filterVisible) : undefined}
         />
-        <BaseAction action={action} resource={resource} />
+        <BaseAction action={action} resource={resource} setTag={setTag} />
       </WrapperBox>
       {action.showFilter ? (
         <Filter
