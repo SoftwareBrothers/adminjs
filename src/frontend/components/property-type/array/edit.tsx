@@ -73,7 +73,10 @@ export default class Edit extends React.Component<Props, State> {
           />
         </Column>
         <Column width={2}>
-          <StyledButton style={{ marginTop: 25 }} onClick={(event): false => this.removeItem(i, event)}>
+          <StyledButton
+            style={{ marginTop: 25 }}
+            onClick={(event): false => this.removeItem(i, event)}
+          >
             Remove
           </StyledButton>
         </Column>

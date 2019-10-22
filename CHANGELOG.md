@@ -8,10 +8,14 @@ Started from version 0.9.5
 
 ## 1.4.0 - unreleased
 
-### added
+### Added
 
 * `admin` cli with `bundle` command [beta]
 * bring back tags showing total number of records in list action
+
+### Fixed
+
+* fix error when submit of entire record has been triggered by arra add/remove buttons
 
 ## [1.3.5] - 2019-10-17
 
