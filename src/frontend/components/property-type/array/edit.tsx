@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react'
+import React, { ReactNode, MouseEvent } from 'react'
 import * as flat from 'flat'
 
 import PropertyInEdit from '../../ui/property-in-edit'
@@ -28,16 +28,19 @@ export default class Edit extends React.Component<Props, State> {
     const items = convertParamsToArrayItems(property, record)
 
     this.state = { items }
+    this.addNew = this.addNew.bind(this)
   }
 
-  addNew(): void {
+  addNew(event: MouseEvent): false {
     this.setState(state => ({
       ...state,
       items: [...state.items, ''],
     }))
+    event.preventDefault()
+    return false
   }
 
-  removeItem(i): void {
+  removeItem(i, event: MouseEvent): false {
     const { property, record, onChange } = this.props
     const { items } = this.state
     const newItems = [...items]
@@ -50,6 +53,8 @@ export default class Edit extends React.Component<Props, State> {
     })
     this.setState(state => ({ ...state, items: newItems }))
     onChange(newRecord)
+    event.preventDefault()
+    return false
   }
 
   renderItem(item, i): ReactNode {
@@ -68,7 +73,7 @@ export default class Edit extends React.Component<Props, State> {
           />
         </Column>
         <Column width={2}>
-          <StyledButton style={{ marginTop: 25 }} onClick={(): void => this.removeItem(i)}>
+          <StyledButton style={{ marginTop: 25 }} onClick={(event): false => this.removeItem(i, event)}>
             Remove
           </StyledButton>
         </Column>
@@ -82,7 +87,7 @@ export default class Edit extends React.Component<Props, State> {
       <StyledSection style={{ marginTop: 20 }}>
         {items.map((item, i) => this.renderItem(item, i))}
         <p>
-          <StyledButton onClick={(): void => this.addNew()}>
+          <StyledButton onClick={this.addNew}>
             Add new item
           </StyledButton>
         </p>
