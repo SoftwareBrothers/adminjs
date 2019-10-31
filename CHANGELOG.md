@@ -17,6 +17,7 @@ Started since version 0.9.5
 ### Fixed
 
 * fix error when submit of entire record has been triggered by arra add/remove buttons
+* overlay error with select in filter - #189
 
 ### Changed
 
