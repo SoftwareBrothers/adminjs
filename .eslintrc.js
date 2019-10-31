@@ -47,7 +47,8 @@ module.exports = {
             'no-unused-expressions': 'off',
             'func-names': 'off',
             'prefer-arrow-callback': 'off',
-          }
+            'import/no-extraneous-dependencies': 'off',
+          },
         },
         {
             files: ['*.jsx'],
