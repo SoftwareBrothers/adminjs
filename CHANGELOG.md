@@ -18,6 +18,10 @@ Started since version 0.9.5
 
 * fix error when submit of entire record has been triggered by arra add/remove buttons
 
+### Changed
+
+* Id fields are now second in list by default (after title) - #189
+
 ## [1.3.5] - 2019-10-17
 
 ### Fixed

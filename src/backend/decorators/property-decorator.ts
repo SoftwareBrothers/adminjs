@@ -151,9 +151,11 @@ class PropertyDecorator {
    * @return {number}
    */
   position(): number {
-    return this.overrideFromOptions(AvailablePropertyOptions.position, () => (
-      this.isTitle() ? -1 : 100
-    ))
+    return this.overrideFromOptions(AvailablePropertyOptions.position, () => {
+      if (this.isTitle()) { return -1 }
+      if (this.isId()) { return 0 }
+      return 100
+    })
   }
 
   /**

@@ -23,6 +23,7 @@ const FilterWrapper = styled.section`
   bottom: 0;
   overflow-x: hidden;
   overflow-y: scroll;
+  display: flex;
   &.filter-hidden {
     width: 0;
     transition: width 0.5s;
@@ -52,6 +53,7 @@ const FilterLink = styled.a`
 const FilterContent = styled.section`
   padding: ${({ theme }): string => theme.sizes.paddingLayout};
   width: ${({ theme }): string => theme.sizes.sidebarWidth};
+  min-width: ${({ theme }): string => theme.sizes.sidebarWidth};
   overflow: hidden;
 
   & a, & button {

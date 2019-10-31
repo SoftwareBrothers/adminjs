@@ -16,6 +16,7 @@ require('./setup')
 
 require('require.all')({
   dir: '../src/',
-  match: /spec\.js$/i,
+  match: /spec\.(js|ts)$/i,
+  require: /\.(js|ts)$/,
   recursive: true,
 })

@@ -1,10 +1,11 @@
+import { expect } from 'chai'
 import PropertyDecorator from './property-decorator'
-import BaseProperty from '../adapters/base-property'
+import BaseProperty, { PropertyType } from '../adapters/base-property'
 import AdminBro from '../../admin-bro'
 
-describe('PropertyDecorator', function () {
+describe.only('PropertyDecorator', function () {
   beforeEach(function () {
-    this.property = new BaseProperty({ path: 'name', type: 'string' })
+    this.property = new BaseProperty({ path: 'name', type: PropertyType.string })
     this.stubbedAdmin = this.sinon.createStubInstance(AdminBro)
     this.stubbedAdmin.options = {}
     this.args = { property: this.property, admin: this.stubbedAdmin }
@@ -100,6 +101,12 @@ describe('PropertyDecorator', function () {
     it('returns 100 for all other fields', function () {
       this.sinon.stub(BaseProperty.prototype, 'isTitle').returns(false)
       expect(new PropertyDecorator(this.args).position()).to.equal(100)
+    })
+
+    it('returns 0 for an id field', function () {
+      this.sinon.stub(BaseProperty.prototype, 'isTitle').returns(false)
+      this.sinon.stub(BaseProperty.prototype, 'isId').returns(true)
+      expect(new PropertyDecorator(this.args).position()).to.equal(0)
     })
   })
 
