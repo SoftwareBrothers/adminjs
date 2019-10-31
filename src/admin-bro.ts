@@ -1,5 +1,5 @@
 import * as _ from 'lodash'
-import * as path from 'path'
+import { posix as path } from 'path'
 import * as fs from 'fs'
 
 import AdminBroOptions, { AdminBroOptionsWithDefault } from './admin-bro-options.interface'
