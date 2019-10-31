@@ -3,7 +3,7 @@ import PropertyDecorator from './property-decorator'
 import BaseProperty, { PropertyType } from '../adapters/base-property'
 import AdminBro from '../../admin-bro'
 
-describe.only('PropertyDecorator', function () {
+describe('PropertyDecorator', function () {
   beforeEach(function () {
     this.property = new BaseProperty({ path: 'name', type: PropertyType.string })
     this.stubbedAdmin = this.sinon.createStubInstance(AdminBro)
