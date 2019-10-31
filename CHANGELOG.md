@@ -12,6 +12,7 @@ Started from version 0.9.5
 
 * `admin` cli with `bundle` command [beta]
 * bring back tags showing total number of records in list action
+* now bundle urls are written always in posix format - which fixes #136
 
 ### Fixed
 
