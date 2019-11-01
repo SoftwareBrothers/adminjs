@@ -199,35 +199,35 @@ class BaseResource {
    * Each Record is an representation of the resource item. Before it can be saved,
    * it has to be instantiated.
    *
-   * @param  {Object} params
+   * @param  {Record<string, any>} params
    * @return {BaseRecord}
    */
-  build(params: any): BaseRecord {
+  build(params: Record<string, any>): BaseRecord {
     return new BaseRecord(params, this)
   }
 
   /**
    * Creates new record
-   * @param  {Object} params
+   * @param  {Record<string, any>} params
    * @return {Promise<Object>}         created record converted to raw Object which
    *                                   can be used to initiate new {@link BaseRecord} instance
    * @throws {ValidationError} If there are validation errors it should be thrown
    * @abstract
    */
-  async create<T>(params: any): Promise<T> {
+  async create(params: Record<string, any>): Promise<BaseRecord> {
     throw new NotImplementedError('BaseResource#create')
   }
 
   /**
    * Updates an object
    * @param  {String} id      uniq id of the Resource Record
-   * @param  {Object} params
+   * @param  {Record<string, any>} params
    * @return {Promise<Object>}         created record converted to raw Object which
    *                                   can be used to initiate new {@link BaseRecord} instance
    * @throws {ValidationError} If there are validation errors it should be thrown
    * @abstract
    */
-  async update<T>(id: string, params: T): Promise<T> {
+  async update(id: string, params: Record<string, any>): Promise<BaseRecord> {
     throw new NotImplementedError('BaseResource#update')
   }
 
