@@ -22,6 +22,7 @@ Started since version 0.9.5
 ### Changed
 
 * Id fields are now second in list by default (after title) - #189
+* Improve typescript types export
 
 ## [1.3.5] - 2019-10-17
 
