@@ -1,4 +1,5 @@
-import { posix as path } from 'path'
+import * as path from 'path'
+import slash from 'slash'
 
 /**
  * Generates entry file for all UsersComponents.
@@ -24,12 +25,13 @@ const generateUserComponentEntry = (admin, entryPath: string): string => {
   const envPart = Object.keys(env).map(envKey => (
     `AdminBro.env.${envKey} = ${JSON.stringify(env[envKey])}\n`
   )).join('')
-  const componentsPart = Object.keys(UserComponents).map(componentId => (
-    [
-      `import ${componentId} from '${path.relative(absoluteEntryPath, UserComponents[componentId])}'`,
+  const componentsPart = Object.keys(UserComponents).map((componentId) => {
+    const componentUrl = path.relative(absoluteEntryPath, UserComponents[componentId])
+    return [
+      `import ${componentId} from '${slash(componentUrl)}'`,
       `AdminBro.UserComponents.${componentId} = ${componentId}`,
     ].join('\n')
-  )).join('\n')
+  }).join('\n')
   return setupPart + envPart + componentsPart
 }
 
