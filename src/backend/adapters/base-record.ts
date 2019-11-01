@@ -162,7 +162,7 @@ class BaseRecord {
    *
    * @return {String} title of the record
    */
-  title(): boolean {
+  title(): string {
     const nameProperty = this.resource.properties().find(p => p.isTitle())
     return nameProperty ? this.param(nameProperty.name()) : this.id()
   }
