@@ -2,14 +2,14 @@ import React, { ReactNode } from 'react'
 import { ReactComponentLike } from 'prop-types'
 import ErrorBoundary from '../app/error-boundary'
 
-import ArrayType from './array'
-import MixedType from './mixed'
+import * as ArrayType from './array'
+import * as MixedType from './mixed'
 
-import defaultType from './default-type'
-import boolean from './boolean'
-import datetime from './datetime'
-import richtext from './richtext'
-import reference from './reference'
+import * as defaultType from './default-type'
+import * as boolean from './boolean'
+import * as datetime from './datetime'
+import * as richtext from './richtext'
+import * as reference from './reference'
 import { BasePropertyProps } from './base-property-props'
 
 let globalAny: any = {}

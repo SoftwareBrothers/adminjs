@@ -1,11 +1,12 @@
 {
   "compilerOptions": {
       "outDir": "./built",
-      "allowJs": true,
       "target": "esnext",
       "esModuleInterop": true,
       "jsx": "react",
-      "noEmit": true,
+      "declaration": true,
+      "declarationDir": "./types",
+      "emitDeclarationOnly": true,
       "strictNullChecks": true,
       "strictPropertyInitialization": true,
       "strictFunctionTypes": true,

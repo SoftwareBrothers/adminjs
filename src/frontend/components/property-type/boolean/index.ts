@@ -3,9 +3,9 @@ import Show from './show'
 import List from './list'
 import Filter from './filter'
 
-export default {
-  edit: Edit,
-  show: Show,
-  list: List,
-  filter: Filter,
+export {
+  Edit as edit,
+  Show as show,
+  List as list,
+  Filter as filter,
 }

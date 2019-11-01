@@ -9,7 +9,9 @@ import { colors, sizes, fonts, breakpoints } from './frontend/styles/variables'
  *
  * This is the heart of entire AdminBro - all options resides here.
  *
- * @example
+ * ### Usage with regular javascript
+ *
+ * ```javascript
  * const AdminBro = require('admin-bro')
  * //...
  * const adminBro = new AdminBro({
@@ -22,6 +24,26 @@ import { colors, sizes, fonts, breakpoints } from './frontend/styles/variables'
  *     companyName: 'XYZ c.o.',
  *   },
  * })
+ * ```
+ *
+ * ### TypeScript
+ *
+ * ```
+ * import { AdminBroOptions } from 'admin-bro
+ *
+ * const options: AdminBroOptions = {
+ *   rootPath: '/xyz-admin',
+ *   logoutPath: '/xyz-admin/exit',
+ *   loginPath: '/xyz-admin/sign-in',
+ *   databases: [mongooseConnection],
+ *   resources: [{ resource: ArticleModel, options: {...}}],
+ *   branding: {
+ *     companyName: 'XYZ c.o.',
+ *   },
+ * }
+ *
+ * const adminBro = new AdminBro(options)
+ * ```
  */
 export default interface AdminBroOptions {
   /**

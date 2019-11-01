@@ -1,5 +1,11 @@
 /**
- * Currently logged in admin
+ * Currently logged in admin.
+ *
+ * ### Usage with TypeScript
+ *
+ * ```typescript
+ * import { CurrentAdmin } from 'admin-bro'
+ * ```
  *
  * @alias CurrentAdmin
  * @memberof AdminBro

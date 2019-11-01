@@ -3,6 +3,12 @@ import PropertyOptions from './property-options.interface'
 
 /**
  * Options for given resource
+ *
+ * ### Usage with TypeScript
+ *
+ * ```typescript
+ * import { ResourceOptions } from 'admin-bro'
+ * ```
  */
 export interface ResourceOptions {
   /**

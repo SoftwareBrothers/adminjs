@@ -43,7 +43,9 @@ describe('PropertyDecorator', function () {
       it('passess the execution to the overrideFromOptions', function () {
         const stub = this.sinon.stub(PropertyDecorator.prototype, 'overrideFromOptions')
         new PropertyDecorator(this.args)[field]()
-        expect(stub).to.have.been.calledWith(field)
+        // for some reason chai dont know that calledWith is a property
+        const assertion = expect(stub).to.have.been as any
+        assertion.calledWith(field)
       })
     })
   })
