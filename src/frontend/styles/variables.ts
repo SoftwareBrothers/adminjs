@@ -53,12 +53,3 @@ export const breakpoints = {
   minWidescreenWidth: '1216px',
   minFullhdWidth: '1408px',
 }
-
-declare module 'styled-components' {
-  export interface DefaultTheme {
-    colors: typeof colors;
-    sizes: typeof sizes;
-    fonts: typeof fonts;
-    breakpoints: typeof breakpoints;
-  }
-}
