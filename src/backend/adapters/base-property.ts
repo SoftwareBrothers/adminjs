@@ -11,8 +11,9 @@ const TITLE_COLUMN_NAMES = ['title', 'name', 'subject', 'email']
  * @property {string} number      regular number
  * @property {string} boolean     boolean value
  * @property {string} date        date
+ * @property {string} datetime    date with time
  * @property {string} mixed       type representing an object
- * @property {string} id          type for an unique identifier of a record
+ * @property {string} reference   many to one reference
  */
 
 export enum PropertyType {
@@ -21,8 +22,9 @@ export enum PropertyType {
   number = 'number',
   boolean = 'boolean',
   date = 'date',
+  datetime = 'datetime',
   mixed = 'mixed',
-  id = 'id',
+  reference = 'reference',
 }
 
 /**
