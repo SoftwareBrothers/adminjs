@@ -1,11 +1,11 @@
 import { expect } from 'chai'
 import PropertyDecorator from './property-decorator'
-import BaseProperty, { PropertyType } from '../adapters/base-property'
+import BaseProperty from '../adapters/base-property'
 import AdminBro from '../../admin-bro'
 
 describe('PropertyDecorator', function () {
   beforeEach(function () {
-    this.property = new BaseProperty({ path: 'name', type: PropertyType.string })
+    this.property = new BaseProperty({ path: 'name', type: 'string' })
     this.stubbedAdmin = this.sinon.createStubInstance(AdminBro)
     this.stubbedAdmin.options = {}
     this.args = { property: this.property, admin: this.stubbedAdmin }

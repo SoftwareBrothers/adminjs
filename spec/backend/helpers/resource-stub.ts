@@ -1,13 +1,13 @@
 import sinon from 'sinon'
 
-import BaseProperty, { PropertyType } from '../../../src/backend/adapters/base-property'
+import BaseProperty from '../../../src/backend/adapters/base-property'
 import BaseResource from '../../../src/backend/adapters/base-resource'
 import ResourceDecorator from '../../../src/backend/decorators/resource-decorator'
 
 export const expectedResult = {
   id: 'someID',
   properties: [...Array(10)].map((a, i) => new BaseProperty({
-    path: `property.${i}`, type: PropertyType.string,
+    path: `property.${i}`, type: 'string',
   })),
   resourceName: 'resourceName',
   databaseName: 'databaseName',
@@ -23,7 +23,7 @@ export default (): BaseResource => ({
   id: sinon.stub().returns(expectedResult.id),
   properties: sinon.stub().returns(expectedResult.properties),
   name: sinon.stub().returns(expectedResult.resourceName),
-  property: sinon.stub().returns(new BaseProperty({ path: 'prop', type: PropertyType.string })),
+  property: sinon.stub().returns(new BaseProperty({ path: 'prop', type: 'string' })),
   databaseName: sinon.stub().returns(expectedResult.databaseName),
   databaseType: sinon.stub().returns(expectedResult.databaseType),
   count: sinon.stub(),

@@ -16,16 +16,7 @@ const TITLE_COLUMN_NAMES = ['title', 'name', 'subject', 'email']
  * @property {string} reference   many to one reference
  */
 
-export enum PropertyType {
-  string = 'string',
-  float = 'float',
-  number = 'number',
-  boolean = 'boolean',
-  date = 'date',
-  datetime = 'datetime',
-  mixed = 'mixed',
-  reference = 'reference',
-}
+export type PropertyType = 'string' | 'float' | 'number' | 'boolean' | 'date' | 'datetime' | 'mixed' | 'reference';
 
 /**
  * Represents Resource Property
@@ -50,7 +41,7 @@ class BaseProperty {
    * @param  {boolean} [options.isId=false]            true when field should be treated as an ID
    * @param  {boolean} [options.isSortable=true]       if property should be sortable
    */
-  constructor({ path, type = PropertyType.string, isId = false, isSortable = true }: {
+  constructor({ path, type = 'string', isId = false, isSortable = true }: {
     path: string;
     type?: PropertyType;
     isId?: boolean;
@@ -82,7 +73,7 @@ class BaseProperty {
    * @return {PropertyType}
    */
   type(): PropertyType {
-    return this._type || PropertyType.string
+    return this._type || 'string'
   }
 
   /**
