@@ -13,7 +13,7 @@ class ValidationError extends Error {
    * @param  {String} errors.{...}    error for particular field where ... is a
    *                                  {@link BaseProperty#path}
    * @param  {String} errors.{...}.message   human readible message
-   * @param  {String} errors.{...}.kind      string type (i.e. required)
+   * @param  {String} errors.{...}.type      string type (i.e. required)
    */
   constructor(message: string, errors: {[key: string]: RecordError}) {
     super(message)
