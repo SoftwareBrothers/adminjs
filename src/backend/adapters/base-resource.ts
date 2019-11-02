@@ -3,7 +3,7 @@
 /* eslint class-methods-use-this: 0 no-unused-vars: 0 */
 /* eslint no-useless-constructor: 0 */
 import BaseProperty from './base-property'
-import BaseRecord from './base-record'
+import BaseRecord, { ParamsType } from './base-record'
 import Filter from '../utils/filter'
 import ResourceDecorator from '../decorators/resource-decorator'
 import NotImplementedError from '../utils/not-implemented-error'
@@ -210,7 +210,7 @@ class BaseResource {
    * @throws {ValidationError} If there are validation errors it should be thrown
    * @abstract
    */
-  async create(params: Record<string, any>): Promise<BaseRecord> {
+  async create(params: Record<string, any>): Promise<ParamsType> {
     throw new NotImplementedError('BaseResource#create')
   }
 
@@ -223,7 +223,7 @@ class BaseResource {
    * @throws {ValidationError} If there are validation errors it should be thrown
    * @abstract
    */
-  async update(id: string, params: Record<string, any>): Promise<BaseRecord> {
+  async update(id: string, params: Record<string, any>): Promise<ParamsType> {
     throw new NotImplementedError('BaseResource#update')
   }
 

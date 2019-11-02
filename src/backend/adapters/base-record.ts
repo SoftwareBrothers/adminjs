@@ -10,6 +10,8 @@ export type RecordError = {
   message: string;
 }
 
+export type ParamsType = Record<string, any>
+
 /**
  * Representation of an particular ORM/ODM Record in given Resource in AdminBro
  *
@@ -18,7 +20,7 @@ export type RecordError = {
 class BaseRecord {
   public resource: BaseResource
 
-  private params: {[key: string]: any}
+  private params: ParamsType
 
   private errors: {[key: string]: RecordError}
 

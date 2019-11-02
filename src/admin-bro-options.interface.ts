@@ -62,7 +62,7 @@ export default interface AdminBroOptions {
   /**
    * Array of all Databases which are suported by AdminBro via adapters
    */
-  databases?: Array<BaseDatabase>;
+  databases?: Array<any>;
 
   /**
    * Array of all Resources which are supported by AdminBro via adapters.
@@ -70,8 +70,8 @@ export default interface AdminBroOptions {
    *
    * @see ResourceOptions
    */
-  resources?: Array<BaseResource | {
-    resource: BaseResource;
+  resources?: Array<any | {
+    resource: any;
     options: ResourceOptions;
   }>;
   /**
