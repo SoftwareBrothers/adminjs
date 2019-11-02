@@ -9,6 +9,7 @@ export { default as ValidationError } from './types/src/backend/utils/validation
 export { default as ApiClient } from './types/src/frontend/utils/api-client'
 
 export { CurrentAdmin } from './types/src/current-admin.interface'
+export { PropertyType } from './types/src/backend/adapters/base-property'
 export { ResourceOptions } from './types/src/backend/decorators/resource-options.interface'
 export { default as AdminBroOptions } from './types/src/admin-bro-options.interface'
 export { default as PropertyOptions } from './types/src/backend/decorators/property-options.interface'

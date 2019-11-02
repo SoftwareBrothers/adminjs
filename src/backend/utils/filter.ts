@@ -7,7 +7,10 @@ export const PARAM_SEPARATOR = '~~'
 export type FilterElement = {
   path: string;
   property: BaseProperty;
-  value: any;
+  value: string | {
+    from: string;
+    to: string;
+  };
 }
 
 interface ReduceCallback<T> {

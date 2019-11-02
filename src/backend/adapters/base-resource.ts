@@ -4,6 +4,7 @@
 /* eslint no-useless-constructor: 0 */
 import BaseProperty from './base-property'
 import BaseRecord from './base-record'
+import Filter from '../utils/filter'
 import ResourceDecorator from '../decorators/resource-decorator'
 import NotImplementedError from '../utils/not-implemented-error'
 
@@ -122,29 +123,24 @@ class BaseResource {
 
   /**
    * Returns number of elements for given resource by including filters
-   * @param  {Object} filters what data should be included
+   * @param  {Filter} filter        represents what data should be included
    * @return {Promise<Number>}
    * @abstract
    */
-  async count(filters: any): Promise<number> {
+  async count(filter: Filter): Promise<number> {
     throw new NotImplementedError('BaseResource#count')
   }
 
   /**
    * Returns actual records for given resource
    *
-   * @param  {Object} filters                        what data should be included
-   * @param  {Object|String} [filters.fieldName]   when filter for given field should be treaten
-   *                                                 as a String it contains query as a String
-   * @param  {String} [filters.fieldName.from]       for date filters it contains optional
-   *                                                 from and to parameters which are String
-   * @param  {String} [filters.fieldName.to]
+   * @param  {Filter} filters                        what data should be included
    * @param  {Object} options
-   * @param  {Number} options.limit                  how many records should be taken
-   * @param  {Number} options.offset                 offset
-   * @param  {Object} options.sort                   sort
-   * @param  {Number} options.sort.sortBy            sortable field
-   * @param  {Number} options.sort.direction         either asc or desc
+   * @param  {Number} [options.limit]                  how many records should be taken
+   * @param  {Number} [options.offset]                 offset
+   * @param  {Object} [options.sort]                   sort
+   * @param  {Number} [options.sort.sortBy]            sortable field
+   * @param  {Number} [options.sort.direction]         either asc or desc
    * @return {Promise<BaseRecord[]>}                          list of records
    * @abstract
    * @example
@@ -154,7 +150,7 @@ class BaseResource {
    *    createdAt: { from: '2019-01-01', to: '2019-01-18' }
    * }
    */
-  async find(filters: any, options: {
+  async find(filter: Filter, options: {
     limit?: number;
     offset?: number;
     sort?: {
