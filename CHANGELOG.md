@@ -6,13 +6,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 Started since version 0.9.5
 
-## 1.4.0 - unreleased
+## 1.4.0 - 2019-11-04
 
 ### Added
 
 * `admin` cli with `bundle` command [beta]
 * bring back tags showing total number of records in list action
 * now bundle urls are written always in posix format - which fixes #136
+* Export more types from "admin-bro"
 
 ### Fixed
 
@@ -22,7 +23,7 @@ Started since version 0.9.5
 ### Changed
 
 * Id fields are now second in list by default (after title) - #189
-* Improve typescript types export
+* Improve typescript types export (fix errors when importing admin-bro)
 
 ## [1.3.5] - 2019-10-17
 
