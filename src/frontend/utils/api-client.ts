@@ -1,5 +1,4 @@
 import axios, { AxiosResponse, AxiosInstance } from 'axios'
-import { SearchRecord } from '../../backend/controllers/api-controller'
 import RecordJSON from '../../backend/decorators/record-json.interface'
 
 let globalAny: any = {}

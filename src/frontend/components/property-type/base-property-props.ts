@@ -60,7 +60,7 @@ export type FilterPropertyProps = BasePropertyProps & {
 }
 
 /**
- * Props which are passed to all your custom property components in filter
+ * Props which are passed to all your custom property components in show
  *
  * @memberof BasePropertyComponent
  * @alias BasePropertyEditProps

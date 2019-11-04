@@ -25,6 +25,10 @@ export { default as ResourceJSON } from './types/src/backend/decorators/resource
 export { default as ActionJSON } from './types/src/backend/decorators/resource-json.interface'
 export { default as PropertyJSON } from './types/src/backend/decorators/property-json.interface'
 
+export { BasePropertyProps, FilterPropertyProps, PropertyProps } from './types/src/frontend/components/property-type/base-property-props'
+export { ActionProps } from './types/src/frontend/components/actions/action.props'
+
+
 export * from './types/src/frontend/components/ui'
 export * from './types/src/frontend/components/app'
 
