@@ -6,6 +6,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 Started since version 0.9.5
 
+## NOT RELEASED
+
+### Changed
+
+* by default assets are not fetched from CDN [#193]
+
 ## 1.4.0 - 2019-11-04
 
 ### Added
