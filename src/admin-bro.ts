@@ -35,7 +35,7 @@ const defaults: AdminBroOptionsWithDefault = {
   assets: {
     styles: [],
     scripts: [],
-    globalsFromCDN: true,
+    globalsFromCDN: false,
   },
 }
 
