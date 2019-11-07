@@ -6,34 +6,33 @@ describe('layoutTemplate', function () {
     beforeEach(function () {
       this.adminBro = new AdminBro({})
     })
+
     it('renders default company name', function () {
       expect(
         layoutTemplate(this.adminBro, null, '/'),
       ).to.contain(this.adminBro.options.branding.companyName)
     })
+
+    it('links to global bundle', function () {
+      expect(layoutTemplate(this.adminBro, null, '/')).to.contain('global.bundle.js')
+    })
   })
 
-  describe('from where externals like React should be fetched', function () {
-    context('user didn\'t override defaults', function () {
-      it('takes React and other libraries from CDN', function () {
-        const template = layoutTemplate(new AdminBro({}), null, '/')
-        expect(template).not.to.contain('global.bundle.js')
-        expect(template).to.contain('https://unpkg.com/react@16/umd/react.development.js')
-        expect(template).to.contain('https://unpkg.com/react-dom@16/umd/react-dom.development.js')
-      })
-    })
-
-    context('user defines that externals should be bundled from local file', function () {
+  describe('user defines that externals should be taken from CDN', function () {
+    context('user overrode defaults', function () {
       beforeEach(function () {
         this.adminBro = new AdminBro({
           assets: {
-            globalsFromCDN: false,
+            globalsFromCDN: true,
           },
         })
       })
 
-      it('links to global bundle', function () {
-        expect(layoutTemplate(this.adminBro, null, '/')).to.contain('global.bundle.js')
+      it('takes React and other libraries from CDN', function () {
+        const template = layoutTemplate(this.adminBro, null, '/')
+        expect(template).not.to.contain('global.bundle.js')
+        expect(template).to.contain('https://unpkg.com/react@16/umd/react.development.js')
+        expect(template).to.contain('https://unpkg.com/react-dom@16/umd/react-dom.development.js')
       })
     })
   })
