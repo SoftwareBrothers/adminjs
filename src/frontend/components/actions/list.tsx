@@ -10,6 +10,7 @@ import Paginate from '../ui/paginate'
 import { ActionProps } from './action.props'
 import RecordJSON from '../../../backend/decorators/record-json.interface'
 import { ListActionResponse } from '../../../backend/actions/list-action'
+import { NoticeType } from '../../store/store'
 
 type State = {
   records: Array<RecordJSON>;
@@ -69,7 +70,7 @@ class List extends React.Component<ActionProps & RouteComponentProps & AddNotice
   }
 
   _fetchData(): void {
-    const { location, resource, setTag } = this.props
+    const { location, resource, setTag, addNotice } = this.props
     const api = new ApiClient()
     this.setState({ loading: true })
     const query = new URLSearchParams(location.search)
@@ -94,6 +95,11 @@ class List extends React.Component<ActionProps & RouteComponentProps & AddNotice
           setTag(response.data.meta.total.toString())
         }
       }
+    }).catch(() => {
+      addNotice({
+        message: 'There was an error fething records, Check out console to see more information.',
+        type: NoticeType.error,
+      })
     })
   }
 

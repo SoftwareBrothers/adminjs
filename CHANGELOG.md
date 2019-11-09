@@ -8,9 +8,17 @@ Started since version 0.9.5
 
 ## NOT RELEASED
 
+### Fixed
+
+* fixed overflow select problem in the filter [#189]
+
 ### Changed
 
 * by default assets are not fetched from CDN [#193]
+
+### Added
+
+* better API errors support [#190]
 
 ## 1.4.0 - 2019-11-04
 

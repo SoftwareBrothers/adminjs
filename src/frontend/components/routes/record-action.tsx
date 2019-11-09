@@ -14,8 +14,9 @@ import { RecordActionParams } from '../../../backend/utils/view-helpers'
 import ResourceJSON from '../../../backend/decorators/resource-json.interface'
 import RecordJSON from '../../../backend/decorators/record-json.interface'
 import ActionJSON from '../../../backend/decorators/action-json.interface'
-import { ReduxState } from '../../store/store'
+import { ReduxState, NoticeType } from '../../store/store'
 import { NoResourceError, NoActionError, NoRecordError } from '../ui/error404'
+import withNotice, { AddNoticeProps } from '../../store/with-notice'
 
 const ContainerRecord = styled.div`
   display: flex;
@@ -38,8 +39,8 @@ type PropsFromState = {
 
 type Props = RouteComponentProps<RecordActionParams> & PropsFromState
 
-class RecordAction extends React.Component<Props, State> {
-  constructor(props: Props) {
+class RecordAction extends React.Component<Props & AddNoticeProps, State> {
+  constructor(props: Props & AddNoticeProps) {
     super(props)
     this.state = {
       record: undefined,
@@ -84,6 +85,7 @@ class RecordAction extends React.Component<Props, State> {
   }
 
   fetchRecord({ actionName, recordId, resourceId }: RecordActionParams): void {
+    const { addNotice } = this.props
     const api = new ApiClient()
     this.setState({
       isLoading: true,
@@ -97,6 +99,11 @@ class RecordAction extends React.Component<Props, State> {
       this.setState({
         isLoading: false,
         record: response.data.record,
+      })
+    }).catch(() => {
+      addNotice({
+        message: 'There was an error fething the record, Check out console to see more information.',
+        type: NoticeType.error,
       })
     })
   }
@@ -158,4 +165,4 @@ const mapStateToProps = (state: ReduxState): PropsFromState => ({
 })
 
 
-export default connect(mapStateToProps)(RecordAction)
+export default withNotice(connect(mapStateToProps)(RecordAction))

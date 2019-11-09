@@ -78,6 +78,11 @@ class Edit extends React.Component<ActionProps & RouteComponentProps & AddNotice
           },
         }))
       }
+    }).catch(() => {
+      addNotice({
+        message: 'There was an error updating record, Check out console to see more information.',
+        type: NoticeType.error,
+      })
     })
     event.preventDefault()
     return false

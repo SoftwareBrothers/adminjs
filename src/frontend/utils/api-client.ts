@@ -11,8 +11,9 @@ try {
   }
 }
 
-const checkLogin = (response: AxiosResponse): void => {
+const checkResponse = (response: AxiosResponse): void => {
   const loginUrl = [window.location.origin, globalAny.REDUX_STATE.paths.loginPath].join('')
+  // if response has redirect to loginUrl
   if (response.request.responseURL
       && response.request.responseURL.match(loginUrl)
   ) {
@@ -48,6 +49,13 @@ class ApiClient {
     this.client = axios.create({
       baseURL: this.baseURL,
     })
+    // this.client.interceptors.response.use(
+    //   response => response,
+    //   (error) => {
+    //     console.log(error)
+    //     return Promise.reject(error)
+    //   },
+    // )
   }
 
   /**
@@ -65,7 +73,7 @@ class ApiClient {
   }): Promise<Array<RecordJSON>> {
     const q = encodeURIComponent(query)
     const response = await this.client.get(`/api/resources/${resourceId}/search/${q}`)
-    checkLogin(response)
+    checkResponse(response)
     return response.data.records
   }
 
@@ -94,7 +102,7 @@ class ApiClient {
       data: payload,
       params,
     })
-    checkLogin(response)
+    checkResponse(response)
     return response
   }
 
@@ -125,7 +133,7 @@ class ApiClient {
       data: payload,
       params,
     })
-    checkLogin(response)
+    checkResponse(response)
     return response
   }
 
@@ -133,7 +141,7 @@ class ApiClient {
     const response = await this.client.get('/api/dashboard', {
       params,
     })
-    checkLogin(response)
+    checkResponse(response)
     return response
   }
 }

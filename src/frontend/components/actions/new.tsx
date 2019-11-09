@@ -88,6 +88,11 @@ class New extends React.Component<ActionProps & AddNoticeProps & RouteComponentP
           },
         }))
       }
+    }).catch(() => {
+      addNotice({
+        message: 'There was an error creating record, Check out console to see more information.',
+        type: NoticeType.error,
+      })
     })
     return false
   }
