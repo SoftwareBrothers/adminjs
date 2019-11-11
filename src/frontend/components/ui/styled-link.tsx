@@ -6,7 +6,7 @@ import { styles } from './styled-button'
 type OnClickHandler = () => any;
 
 /**
- * @memberof StyledButton
+ * @memberof StyledLink
  */
 type Props = {
   /**
