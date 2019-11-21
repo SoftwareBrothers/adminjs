@@ -7,7 +7,7 @@ import SidebarParent from './sidebar-parent'
 import SidebarFooter from './sidebar-footer'
 import groupResources from './group-resources'
 import Hamburger from './hamburger'
-import { BrandingOptions } from '../../../../admin-bro-options.interface'
+import { BrandingOptions, VersionSettings } from '../../../../admin-bro-options.interface'
 import ResourceJSON from '../../../../backend/decorators/resource-json.interface'
 
 const SidebarWrapper = styled.aside`
@@ -85,7 +85,11 @@ const Sidebar: React.FC<Props> = (props) => {
   )
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state): {
+  resources: Array<ResourceJSON>;
+  branding: BrandingOptions;
+  versionsType: VersionSettings;
+} => ({
   resources: state.resources,
   branding: state.branding,
   versionsType: state.versionsType,
