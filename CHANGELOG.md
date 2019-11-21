@@ -8,6 +8,12 @@ Started since version 0.9.5
 
 ## NOT RELEASED
 
+## 1.4.2 - 2019-11-21
+
+### Fixed
+
+* fixed issue with editing nested arrays: [#203]
+
 ## 1.4.1 - 2019-11-11
 
 ### Fixed
