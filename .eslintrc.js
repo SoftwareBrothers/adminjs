@@ -42,7 +42,15 @@ module.exports = {
     },
     overrides: [
         {
-          files: ['*-test.js', '*.spec.js', '*-test.ts', '*.spec.ts'],
+          files: [
+              '*-test.js',
+              '*.spec.js',
+              '*-test.ts',
+              '*.spec.ts',
+              '*.spec.tsx',
+              '*.factory.ts',
+              '*.factory.js'
+          ],
           rules: {
             'no-unused-expressions': 'off',
             'func-names': 'off',
