@@ -10,10 +10,6 @@ import PropertyJSON from '../../../../backend/decorators/property-json.interface
 import RecordJSON from '../../../../backend/decorators/record-json.interface'
 import { StyledButton } from '../../ui'
 
-type State = {
-  items: Array<string>;
-}
-
 type Props = {
   property: PropertyJSON;
   record: RecordJSON;
@@ -21,28 +17,28 @@ type Props = {
   ItemComponent: typeof React.Component;
 }
 
-export default class Edit extends React.Component<Props, State> {
+export default class Edit extends React.Component<Props> {
   constructor(props) {
     super(props)
-    const { property, record } = this.props
-    const items = convertParamsToArrayItems(property, record)
-
-    this.state = { items }
     this.addNew = this.addNew.bind(this)
   }
 
   addNew(event: MouseEvent): false {
-    this.setState(state => ({
-      ...state,
-      items: [...state.items, ''],
-    }))
+    const { property, record, onChange } = this.props
+    const items = convertParamsToArrayItems(property, record)
+    const newRecord = { ...record }
+    newRecord.params = flat.flatten({
+      ...flat.unflatten(newRecord.params),
+      [property.name]: [...items, property.subProperties.length ? {} : ''],
+    })
+    onChange(newRecord)
     event.preventDefault()
     return false
   }
 
   removeItem(i, event: MouseEvent): false {
     const { property, record, onChange } = this.props
-    const { items } = this.state
+    const items = convertParamsToArrayItems(property, record)
     const newItems = [...items]
     newItems.splice(i, 1)
 
@@ -51,7 +47,6 @@ export default class Edit extends React.Component<Props, State> {
       ...flat.unflatten(newRecord.params),
       [property.name]: newItems,
     })
-    this.setState(state => ({ ...state, items: newItems }))
     onChange(newRecord)
     event.preventDefault()
     return false
@@ -85,7 +80,8 @@ export default class Edit extends React.Component<Props, State> {
   }
 
   renderInput(): ReactNode {
-    const { items } = this.state
+    const { property, record } = this.props
+    const items = convertParamsToArrayItems(property, record)
     return (
       <StyledSection style={{ marginTop: 20 }}>
         {items.map((item, i) => this.renderItem(item, i))}
