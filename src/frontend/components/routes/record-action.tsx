@@ -103,7 +103,7 @@ class RecordAction extends React.Component<Props & AddNoticeProps, State> {
     }).catch(() => {
       addNotice({
         message: 'There was an error fething the record, Check out console to see more information.',
-        type: NoticeType.error,
+        type: 'error',
       })
     })
   }

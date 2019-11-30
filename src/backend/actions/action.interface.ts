@@ -138,7 +138,9 @@ export type ActionHandler = (
  * Before action hook. When it is given - it is performed before the {@link ActionHandler}
  * method.
  * @alias Before
+ * @returns {Promise<ActionRequest>}
  * @memberof Action
+ * @async
  */
 export type Before = (
   /**
@@ -149,13 +151,14 @@ export type Before = (
    * Invocation context
    */
   context: ActionContext,
-) => ActionRequest
+) => Promise<ActionRequest>
 
 /**
  * Type of an after hook action.
  *
  * @memberof Action
  * @alias After
+ * @async
  */
 export type After = (
   /**
@@ -170,7 +173,7 @@ export type After = (
    * Invocation context
    */
   context: ActionContext,
-) => any
+) => Promise<any>
 
 /**
  * @classdesc

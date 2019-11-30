@@ -188,6 +188,7 @@ class PropertyDecorator {
       isTitle: this.isTitle(),
       isId: this.isId(),
       position: this.position(),
+      custom: typeof this.options.custom === 'undefined' ? {} : this.options.custom,
       isSortable: this.isSortable(),
       availableValues: this.availableValues(),
       name: this.name(),

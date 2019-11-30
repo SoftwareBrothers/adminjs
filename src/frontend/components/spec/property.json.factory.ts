@@ -3,6 +3,7 @@ import PropertyJSON from '../../../backend/decorators/property-json.interface'
 
 
 factory.define('PropertyJSON', Object, {
+  custom: {},
   isTitle: false,
   isId: false,
   isSortable: true,

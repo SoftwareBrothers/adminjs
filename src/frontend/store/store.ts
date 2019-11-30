@@ -53,10 +53,7 @@ export const initializeSession = (data = {}) => ({
   data,
 })
 
-export enum NoticeType {
-  success = 'success',
-  error = 'error',
-}
+export type NoticeType = 'success' | 'error'
 
 export type NoticeMessage = {
   message: string;
@@ -84,7 +81,7 @@ export const addNotice = (data: NoticeMessage = { message: '' }): {
   data: {
     message: data.message,
     id: Math.random().toString(36).substr(2, 9),
-    type: data.type || NoticeType.success,
+    type: data.type || 'success',
     progress: 0,
   },
 })

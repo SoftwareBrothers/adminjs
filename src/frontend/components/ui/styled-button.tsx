@@ -27,6 +27,8 @@ type Props = {
    * Href
    */
   to: string;
+
+  type?: string;
 }
 
 const styles = css`

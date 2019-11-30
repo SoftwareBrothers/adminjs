@@ -85,22 +85,25 @@ class ApiClient {
    * @param   {String} options.actionName  name of an {@link Action}
    * @param   {Object} [options.payload]   optional action payload
    * @param   {Object} [options.params]    optional query params
+   * @param   {Object} [options.headers]   optional request headers
    * @param   {String} [options.method]    if there is a Payload it sends
    *                                       POST request, otherwise GET.
    * @return  {Promise<Object>}            response from an {@link Action}
    */
-  async resourceAction({ resourceId, actionName, payload, method, params }: {
+  async resourceAction({ resourceId, actionName, payload, method, params, headers }: {
     resourceId: string;
     actionName: string;
     payload?: {[key: string]: any};
     method?: 'POST' | 'GET';
     params?: {[key: string]: any};
+    headers?: {[key: string]: any};
   }): Promise<any> {
     const response = await this.client.request({
       url: `/api/resources/${resourceId}/actions/${actionName}`,
       method: method || payload ? 'POST' : 'GET',
       data: payload,
       params,
+      headers,
     })
     checkResponse(response)
     return response
@@ -115,23 +118,26 @@ class ApiClient {
    * @param   {String} options.actionName  name of an {@link Action}
    * @param   {Object} [options.payload]   optional action payload
    * @param   {Object} [options.params]    optional query params
+   * @param   {Object} [options.headers]   optional request headers
    * @param   {String} [options.method]    if there is a Payload it sends
    *                                       POST request, otherwise GET.
    * @return  {Promise<Object>}            response from an {@link Action}
    */
-  async recordAction({ resourceId, recordId, actionName, payload, method, params }: {
+  async recordAction({ resourceId, recordId, actionName, payload, method, params, headers }: {
     recordId: string;
     resourceId: string;
     actionName: string;
     payload?: {[key: string]: any};
     method?: 'POST' | 'GET';
     params?: {[key: string]: any};
+    headers?: {[key: string]: any};
   }): Promise<any> {
     const response = await this.client.request({
       url: `/api/resources/${resourceId}/records/${recordId}/${actionName}`,
       method: method || payload ? 'POST' : 'GET',
       data: payload,
       params,
+      headers,
     })
     checkResponse(response)
     return response

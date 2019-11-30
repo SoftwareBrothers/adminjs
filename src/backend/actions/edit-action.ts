@@ -36,7 +36,7 @@ const EditAction: Action = {
     if (request.method === 'get') {
       return { record: record.toJSON(data.currentAdmin) }
     }
-    await record.update(request.payload && request.payload.record)
+    await record.update(request.payload)
     if (record.isValid()) {
       return {
         redirectUrl: data.h.recordActionUrl({

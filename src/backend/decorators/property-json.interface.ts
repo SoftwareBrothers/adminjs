@@ -1,3 +1,5 @@
+import PropertyOptions from './property-options.interface'
+
 export enum PropertyPlace {
   show = 'show',
   list = 'list',
@@ -62,5 +64,12 @@ export default interface PropertyJSON {
     edit?: string;
     filter?: string;
     list?: string;
+  };
+
+  /**
+   * Custom parameters passed from the {@link PropertyOptions.custom}
+   */
+  custom: {
+    [key: string]: boolean | string | number | Date;
   };
 }

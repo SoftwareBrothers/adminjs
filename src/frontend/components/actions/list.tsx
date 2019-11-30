@@ -98,7 +98,7 @@ class List extends React.Component<ActionProps & RouteComponentProps & AddNotice
     }).catch(() => {
       addNotice({
         message: 'There was an error fething records, Check out console to see more information.',
-        type: NoticeType.error,
+        type: 'error',
       })
     })
   }

@@ -3,6 +3,8 @@ import AdminBro from './types/src/admin-bro'
 import * as ACTIONS from './types/src/backend/actions/index'
 import { ReduxState } from './types/src/frontend/store/store'
 
+import { colors, sizes, fonts, breakpoints } from './types/src/frontend/styles/variables'
+
 export { default as Router } from './types/src/backend/router'
 export { default as Filter } from './types/src/backend/utils/filter'
 export { default as ValidationError } from './types/src/backend/utils/validation-error'
@@ -28,9 +30,16 @@ export { default as PropertyJSON } from './types/src/backend/decorators/property
 export { BasePropertyProps, FilterPropertyProps, PropertyProps } from './types/src/frontend/components/property-type/base-property-props'
 export { ActionProps } from './types/src/frontend/components/actions/action.props'
 
+export type DefaultTheme = {
+  colors: typeof colors;
+  sizes: typeof sizes;
+  fonts: typeof fonts;
+  breakpoints: typeof breakpoints;
+}
 
 export * from './types/src/frontend/components/ui'
 export * from './types/src/frontend/components/app'
+export * from './types/src/constants'
 
 export {
   AdminBro as default,

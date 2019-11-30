@@ -1,4 +1,4 @@
-import React, { ReactNode, ComponentClass } from 'react'
+import React, { ReactNode } from 'react'
 import { withRouter } from 'react-router-dom'
 
 import { RouteComponentProps } from 'react-router'
@@ -8,7 +8,6 @@ import StyledButton from '../ui/styled-button'
 import ApiClient from '../../utils/api-client'
 import withNotice, { AddNoticeProps } from '../../store/with-notice'
 import RecordJSON from '../../../backend/decorators/record-json.interface'
-import { NoticeType } from '../../store/store'
 import { ActionProps } from './action.props'
 import { PropertyPlace } from '../../../backend/decorators/property-json.interface'
 
@@ -28,6 +27,7 @@ class Edit extends React.Component<ActionProps & RouteComponentProps & AddNotice
     this.handleChange = this.handleChange.bind(this)
     this.state = {
       record,
+      loading: false,
     }
     this.api = new ApiClient()
   }
@@ -52,14 +52,21 @@ class Edit extends React.Component<ActionProps & RouteComponentProps & AddNotice
 
   handleSubmit(event): boolean {
     const { resource, history, addNotice } = this.props
-    const { record } = this.state
+    const { record, loading } = this.state
+
+    const formData = new FormData()
+    Object.entries(record.params).forEach(([key, value]) => {
+      formData.set(key, value)
+    })
+
+    this.setState({ loading: true })
+
     this.api.recordAction({
       resourceId: resource.id,
       actionName: 'edit',
       recordId: record.id,
-      payload: {
-        record: record.params,
-      },
+      payload: formData,
+      headers: { 'Content-Type': 'multipart/form-data' },
     }).then((response) => {
       if (response.data.redirectUrl) {
         history.push(response.data.redirectUrl)
@@ -68,7 +75,7 @@ class Edit extends React.Component<ActionProps & RouteComponentProps & AddNotice
         })
       } else {
         addNotice({
-          type: NoticeType.error,
+          type: 'error',
           message: 'There were errors in the record object. Check them out',
         })
         this.setState(state => ({
@@ -76,12 +83,14 @@ class Edit extends React.Component<ActionProps & RouteComponentProps & AddNotice
             ...state.record,
             errors: response.data.record.errors,
           },
+          loading: false,
         }))
       }
     }).catch(() => {
+      this.setState({ loading: false })
       addNotice({
         message: 'There was an error updating record, Check out console to see more information.',
-        type: NoticeType.error,
+        type: 'error',
       })
     })
     event.preventDefault()
@@ -91,7 +100,7 @@ class Edit extends React.Component<ActionProps & RouteComponentProps & AddNotice
   render(): ReactNode {
     const { resource } = this.props
     const properties = resource.editProperties
-    const { record } = this.state
+    const { record, loading } = this.state
 
     return (
       <WrapperBox border>
@@ -106,7 +115,10 @@ class Edit extends React.Component<ActionProps & RouteComponentProps & AddNotice
               record={record}
             />
           ))}
-          <StyledButton type="submit" className="is-primary">
+          <StyledButton
+            type="submit"
+            className={`is-primary${loading ? ' is-loading' : ''}`}
+          >
             <i className="icomoon-save" />
             <span className="btn-text">Save</span>
           </StyledButton>
@@ -121,7 +133,7 @@ class Edit extends React.Component<ActionProps & RouteComponentProps & AddNotice
  */
 type State = {
   record: RecordJSON;
+  loading: boolean;
 }
 
-// TODO: remove this hack
-export default withNotice(withRouter(Edit)) as unknown as ComponentClass<ActionProps>
+export default withNotice(withRouter(Edit))

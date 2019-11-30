@@ -69,4 +69,11 @@ export default interface PropertyOptions {
    * in the UI you will see select box instead of the input
    */
   availableValues?: Array<{ value: string; label: string }>;
+
+  /**
+   * Custom properties passed to the frontend in {@link PropertyJSON}
+   */
+  custom?: {
+    [key: string]: boolean | string | number | Date;
+  };
 }

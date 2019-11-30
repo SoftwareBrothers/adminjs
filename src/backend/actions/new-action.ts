@@ -24,19 +24,22 @@ const NewAction: Action = {
    * @memberof module:NewAction
    * @return {Promise<NewActionResponse>} populated records
    */
-  handler: async (request, response, data): Promise<NewActionResponse> => {
+  handler: async (request, response, context): Promise<NewActionResponse> => {
     if (request.method === 'post') {
-      let record = await data.resource.build(request.payload ? request.payload.record : {})
+      let record = await context.resource.build(request.payload ? request.payload : {})
       record = await record.save()
+
+      context.record = record
+
       if (record.isValid()) {
         return {
-          redirectUrl: data.h.recordActionUrl({
-            resourceId: data.resource.id(), recordId: record.id(), actionName: 'show',
+          redirectUrl: context.h.recordActionUrl({
+            resourceId: context.resource.id(), recordId: record.id(), actionName: 'show',
           }),
-          record: record.toJSON(data.currentAdmin),
+          record: record.toJSON(context.currentAdmin),
         }
       }
-      return { record: record.toJSON(data.currentAdmin) }
+      return { record: record.toJSON(context.currentAdmin) }
     }
     // TODO: add wrong implementation error
     throw new Error('new action can be invoked only via `post` http method')

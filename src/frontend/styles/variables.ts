@@ -12,6 +12,7 @@ export const colors = {
   lightBck: '#F8F8FA',
   superLightBack: '#F1F1F5',
   border: '#eeeeef',
+  borderHover: '#b5b5b5',
   borderOnDark: '#4E5779',
   innerBck: '#f7f7Fa',
   darkBck: '#303b62',

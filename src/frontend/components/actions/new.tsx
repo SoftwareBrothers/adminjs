@@ -8,12 +8,12 @@ import WrapperBox from '../ui/wrapper-box'
 import StyledButton from '../ui/styled-button'
 import withNotice, { AddNoticeProps } from '../../store/with-notice'
 import { ActionProps } from './action.props'
-import { NoticeType } from '../../store/store'
 import { PropertyPlace } from '../../../backend/decorators/property-json.interface'
 import RecordJSON from '../../../backend/decorators/record-json.interface'
 
 type State = {
   record: RecordJSON;
+  loading: boolean;
 }
 
 /**
@@ -38,6 +38,7 @@ class New extends React.Component<ActionProps & AddNoticeProps & RouteComponentP
         errors: (record && record.errors) || {},
         populated: (record && record.populated) || {},
       },
+      loading: false,
     }
   }
 
@@ -62,14 +63,20 @@ class New extends React.Component<ActionProps & AddNoticeProps & RouteComponentP
   handleSubmit(event): boolean {
     event.preventDefault()
     const { resource, history, addNotice } = this.props
-    const { record } = this.state
+    const { record, loading } = this.state
     const { params } = record
+
+    const formData = new FormData()
+    Object.entries(params).forEach(([key, value]) => {
+      formData.set(key, value)
+    })
+
+    this.setState({ loading: true })
     this.api.resourceAction({
       resourceId: resource.id,
       actionName: 'new',
-      payload: {
-        record: params,
-      },
+      payload: formData,
+      headers: { 'Content-Type': 'multipart/form-data' },
     }).then((response) => {
       if (response.data.redirectUrl) {
         addNotice({
@@ -78,7 +85,7 @@ class New extends React.Component<ActionProps & AddNoticeProps & RouteComponentP
         history.push(response.data.redirectUrl)
       } else {
         addNotice({
-          type: NoticeType.error,
+          type: 'error',
           message: 'There were errors in the record object. Check them out',
         })
         this.setState(state => ({
@@ -86,12 +93,14 @@ class New extends React.Component<ActionProps & AddNoticeProps & RouteComponentP
             ...state.record,
             errors: response.data.record.errors,
           },
+          loading: false,
         }))
       }
     }).catch(() => {
+      this.setState({ loading: false })
       addNotice({
         message: 'There was an error creating record, Check out console to see more information.',
-        type: NoticeType.error,
+        type: 'error',
       })
     })
     return false
@@ -100,7 +109,7 @@ class New extends React.Component<ActionProps & AddNoticeProps & RouteComponentP
   render(): ReactNode {
     const { resource } = this.props
     const properties = resource.editProperties
-    const { record } = this.state
+    const { record, loading } = this.state
     return (
       <WrapperBox border>
         <form onSubmit={this.handleSubmit.bind(this)}>
@@ -114,7 +123,10 @@ class New extends React.Component<ActionProps & AddNoticeProps & RouteComponentP
               record={record}
             />
           ))}
-          <StyledButton type="submit" className="is-primary">
+          <StyledButton
+            type="submit"
+            className={`is-primary${loading ? ' is-loading' : ''}`}
+          >
             <i className="icomoon-save" />
             <span className="btn-text">Save</span>
           </StyledButton>
@@ -124,5 +136,4 @@ class New extends React.Component<ActionProps & AddNoticeProps & RouteComponentP
   }
 }
 
-// TODO remove this hack
-export default withNotice(withRouter(New)) as unknown as ComponentClass<ActionProps>
+export default withNotice(withRouter(New))as unknown as ComponentClass<ActionProps>

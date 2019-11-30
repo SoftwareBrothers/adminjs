@@ -3,16 +3,16 @@ import * as path from 'path'
 import * as util from 'util'
 import bundler from './bundler'
 import generateEntry from './generate-user-component-entry'
+import { ADMIN_BRO_TMP_DIR } from '../../constants'
 
-const tmpPath = '.adminbro'
-const entryPath = path.join(tmpPath, '.entry.js')
-const outPath = path.join(tmpPath, 'bundle.js')
+const entryPath = path.join(ADMIN_BRO_TMP_DIR, '.entry.js')
+const outPath = path.join(ADMIN_BRO_TMP_DIR, 'bundle.js')
 
 async function build(admin, { write = false, watch = false } = {}): Promise<string> {
-  const entryFile = generateEntry(admin, tmpPath)
+  const entryFile = generateEntry(admin, ADMIN_BRO_TMP_DIR)
 
   try {
-    await util.promisify(fs.mkdir)(tmpPath, { recursive: true })
+    await util.promisify(fs.mkdir)(ADMIN_BRO_TMP_DIR, { recursive: true })
   } catch (error) {
     if (error.code !== 'EEXIST') { throw error }
   }
