@@ -3,7 +3,6 @@ import styled from 'styled-components'
 
 import Label from '../ui/label'
 import withNotice, { AddNoticeProps } from '../../store/with-notice'
-import { FileObject } from '../../../modules/file-uploader/map-fields-helpers'
 
 const UploadInput = styled.input`
   font-size: 100px;
@@ -106,7 +105,24 @@ type Props = {
   /**
    * Data fetched from [FileList](https://developer.mozilla.org/en-US/docs/Web/API/FileList) element.
    */
-  fileObject?: FileObject;
+  fileObject?: {
+    /**
+     * File size in bytes
+     */
+    size: number;
+    /**
+     * Original file name
+     */
+    name: string;
+    /**
+     * Mime Type
+     */
+    type: string;
+    /**
+     * Actual file buffer.
+     */
+    file: Buffer;
+  };
   /**
    * Callback performed when the file is dropped/picked
    */
