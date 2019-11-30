@@ -53,5 +53,5 @@ export interface ResourceOptions {
   /**
    * List of all actions along with their options
    */
-  actions?: Record<string, Action>;
+  actions?: Record<string, Partial<Action>>;
 }

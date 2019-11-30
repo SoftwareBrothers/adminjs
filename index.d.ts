@@ -17,6 +17,12 @@ export { default as AdminBroOptions } from './types/src/admin-bro-options.interf
 export { default as PropertyOptions } from './types/src/backend/decorators/property-options.interface'
 export { default as Action } from './types/src/backend/actions/action.interface'
 
+export { DeleteActionResponse } from './types/src/backend/actions/delete-action'
+export { NewActionResponse } from './types/src/backend/actions/new-action'
+export { EditActionResponse } from './types/src/backend/actions/edit-action'
+export { ListActionResponse } from './types/src/backend/actions/list-action'
+export { ShowActionResponse } from './types/src/backend/actions/show-action'
+
 export { default as BaseProperty } from './types/src/backend/adapters/base-property'
 export { default as BaseResource } from './types/src/backend/adapters/base-resource'
 export { default as BaseDatabase } from './types/src/backend/adapters/base-database'

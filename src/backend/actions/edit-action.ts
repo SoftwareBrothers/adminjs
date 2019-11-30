@@ -52,10 +52,10 @@ const EditAction: Action = {
 export default EditAction
 
 /**
- * Type of response returned by {@link module:DeleteAction}
+ * Type of response returned by {@link module:EditAction}
  * @memberof module:EditAction
  */
-type EditActionResponse = {
+export type EditActionResponse = {
   /**
    * in case of success it fills this filed
    * to indicate that there should be

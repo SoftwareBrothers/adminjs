@@ -8,6 +8,7 @@ import BaseResource from '../adapters/base-resource'
 import AdminBro from '../../admin-bro'
 import * as ACTIONS from '../actions/index'
 import { ResourceOptions } from './resource-options.interface'
+import Action from '../actions/action.interface'
 import { CurrentAdmin } from '../../current-admin.interface'
 import ResourceJSON from './resource-json.interface'
 import { PropertyPlace } from './property-json.interface'
@@ -90,11 +91,22 @@ class ResourceDecorator {
     const actions = _.merge({}, ACTIONS, this.options.actions || {})
     const returnActions = {}
     // setting default values for actions
-    Object.keys(actions).forEach((key) => {
-      actions[key].name = actions[key].name || key
-      actions[key].label = actions[key].label || key
+    Object.keys(actions).forEach((key: string) => {
+      const action: Action = {
+        name: actions[key].name || key,
+        label: actions[key].label || key,
+        actionType: actions[key].actionType || ['resource'],
+        handler: actions[key].handler || (async (): Promise<void> => {
+          console.log('You have to define handler function')
+        }),
+        ...actions[key],
+      }
+      // action.name = action.name ? action.name : key
+      // action.label = action.label || key
+
+      // actions[key].handler = actions[key].handler
       returnActions[key] = new ActionDecorator({
-        action: actions[key],
+        action,
         admin: this._admin,
         resource: this._resource,
       })

@@ -46,7 +46,7 @@ const DeleteAction: Action = {
  * @memberof module:DeleteAction
  * @alias DeleteActionResponse
  */
-type DeleteActionResponse = {
+export type DeleteActionResponse = {
   /**
    * URL on which user should be redirected after the action
    */

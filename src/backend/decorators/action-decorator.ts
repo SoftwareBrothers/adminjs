@@ -25,11 +25,15 @@ class ActionDecorator {
 
   /**
    * @param {Object}        params
-   * @param {Action}    params.action
+   * @param {Action}        params.action
    * @param {BaseResource}  params.resource
    * @param {AdminBro}      params.admin  current instance of AdminBro
    */
-  constructor({ action, admin, resource }) {
+  constructor({ action, admin, resource }: {
+    action: Action;
+    admin: AdminBro;
+    resource: BaseResource;
+  }) {
     if (!action.actionType) {
       throw new ConfigurationError(
         `action: "${action.name}" does not have an "actionType" property`,

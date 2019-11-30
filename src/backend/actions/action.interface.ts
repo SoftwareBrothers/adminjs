@@ -331,6 +331,8 @@ export default interface Action {
    * or both (passed as an array):
    *
    * <img src="./images/actions.png">
+   *
+   * When you define new action - it is required.
    */
   actionType: 'resource' | 'record' | Array<'resource' | 'record'>;
   /**
@@ -390,6 +392,7 @@ export default interface Action {
    * }
    * ```
    *
+   * Required for new actions.
    */
   handler: ActionHandler;
   /**

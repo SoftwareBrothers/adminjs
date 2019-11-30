@@ -44,7 +44,7 @@ export default ShowAction
  * @memberof module:ShowAction
  * @alias ShowActionResponse
  */
-type ShowActionResponse = {
+export type ShowActionResponse = {
   /**
    * Record object
    */

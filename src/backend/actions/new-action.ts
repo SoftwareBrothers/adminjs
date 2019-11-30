@@ -54,7 +54,7 @@ export default NewAction
  * @memberof module:NewAction
  * @alias NewActionResponse
  */
-type NewActionResponse = {
+export type NewActionResponse = {
   /**
    * Record which was created or with errors.
    */
