@@ -14,6 +14,11 @@ Started since version 0.9.5
 * change new and update actions to receive FormData
 * add header option to ApiClient
 
+### Updated
+
+* export Types of Action Responses
+* Improve Action interface that all fields are optional when passing via ResourceOptions
+
 ## 1.4.2 - 2019-11-21
 
 ### Fixed
