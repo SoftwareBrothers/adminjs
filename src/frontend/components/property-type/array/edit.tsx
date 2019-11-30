@@ -28,7 +28,7 @@ export default class Edit extends React.Component<Props> {
     const items = convertParamsToArrayItems(property, record)
     const newRecord = { ...record }
     newRecord.params = flat.flatten({
-      ...flat.unflatten(newRecord.params),
+      ...(flat.unflatten(newRecord.params) as object), // oterwise yarn types is not working
       [property.name]: [...items, property.subProperties.length ? {} : ''],
     })
     onChange(newRecord)
@@ -44,7 +44,7 @@ export default class Edit extends React.Component<Props> {
 
     const newRecord = { ...record }
     newRecord.params = flat.flatten({
-      ...flat.unflatten(newRecord.params),
+      ...(flat.unflatten(newRecord.params) as object), // oterwise yarn types is not working
       [property.name]: newItems,
     })
     onChange(newRecord)
