@@ -10,7 +10,6 @@ import Paginate from '../ui/paginate'
 import { ActionProps } from './action.props'
 import RecordJSON from '../../../backend/decorators/record-json.interface'
 import { ListActionResponse } from '../../../backend/actions/list-action'
-import { NoticeType } from '../../store/store'
 
 type State = {
   records: Array<RecordJSON>;

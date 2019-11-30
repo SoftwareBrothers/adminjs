@@ -14,7 +14,7 @@ import { RecordActionParams } from '../../../backend/utils/view-helpers'
 import ResourceJSON from '../../../backend/decorators/resource-json.interface'
 import RecordJSON from '../../../backend/decorators/record-json.interface'
 import ActionJSON from '../../../backend/decorators/action-json.interface'
-import { ReduxState, NoticeType } from '../../store/store'
+import { ReduxState } from '../../store/store'
 import { NoResourceError, NoActionError, NoRecordError } from '../ui/error404'
 import withNotice, { AddNoticeProps } from '../../store/with-notice'
 

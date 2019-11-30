@@ -29,6 +29,7 @@ const NewAction: Action = {
       let record = await context.resource.build(request.payload ? request.payload : {})
       record = await record.save()
 
+      // eslint-disable-next-line no-param-reassign
       context.record = record
 
       if (record.isValid()) {

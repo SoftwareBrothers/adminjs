@@ -63,7 +63,7 @@ class New extends React.Component<ActionProps & AddNoticeProps & RouteComponentP
   handleSubmit(event): boolean {
     event.preventDefault()
     const { resource, history, addNotice } = this.props
-    const { record, loading } = this.state
+    const { record } = this.state
     const { params } = record
 
     const formData = new FormData()

@@ -80,5 +80,6 @@ module.exports = {
         'AdminBro': true,
         'flatpickr': true,
         'Quill': true,
+        'FormData': true,
     }
 }

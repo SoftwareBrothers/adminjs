@@ -6,7 +6,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 Started since version 0.9.5
 
-## NOT RELEASED
+## 1.5.0 - NOT RELEASED
+
+### Added
+
+* add drop-area component
+* change new and update actions to receive FormData
+* add header option to ApiClient
 
 ## 1.4.2 - 2019-11-21
 

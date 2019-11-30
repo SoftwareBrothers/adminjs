@@ -52,7 +52,7 @@ class Edit extends React.Component<ActionProps & RouteComponentProps & AddNotice
 
   handleSubmit(event): boolean {
     const { resource, history, addNotice } = this.props
-    const { record, loading } = this.state
+    const { record } = this.state
 
     const formData = new FormData()
     Object.entries(record.params).forEach(([key, value]) => {

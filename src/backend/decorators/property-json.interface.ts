@@ -1,5 +1,3 @@
-import PropertyOptions from './property-options.interface'
-
 export enum PropertyPlace {
   show = 'show',
   list = 'list',
