@@ -55,3 +55,6 @@ export interface ResourceOptions {
    */
   actions?: Record<string, Partial<Action>>;
 }
+
+// TODO split actions to different rows for new, update, delete and rest,
+// where Partial will be only for rest

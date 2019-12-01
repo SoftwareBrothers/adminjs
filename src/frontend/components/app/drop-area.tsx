@@ -134,7 +134,7 @@ type Props = {
   /**
    * Validate options
    */
-  validate: {
+  validate?: {
     /**
      * Maximum size of the uploaded file in bytes. If not defined - all files are allowed.
      */
@@ -209,7 +209,7 @@ type Props = {
  * )
  */
 const DropArea: React.FC<Props & AddNoticeProps> = (props) => {
-  const { fileObject, onUpload, propertyName, validate, addNotice } = props
+  const { fileObject, onUpload, propertyName, validate = {}, addNotice } = props
 
   const [isDragging, setIsDragging] = useState(false)
 
@@ -217,10 +217,10 @@ const DropArea: React.FC<Props & AddNoticeProps> = (props) => {
   const onDragLeave = (): void => setIsDragging(false)
   const onDragOver = (): void => setIsDragging(true)
 
-  const onDrop = (event: React.DragEvent): void => {
+  const onDrop = (event: React.DragEvent | React.SyntheticEvent): void => {
     event.preventDefault()
     setIsDragging(false)
-    const { files } = event.dataTransfer
+    const { files } = ((event as React.DragEvent).dataTransfer || event.target)
     for (let i = 0; i < files.length; i += 1) {
       const file = files.item(i)
       if (!file) { return }
@@ -252,7 +252,7 @@ const DropArea: React.FC<Props & AddNoticeProps> = (props) => {
       <DropMessage className={isDragging ? 'active' : 'unactive'} onDragEnter={onDragEnter}>
         <h1>Dop Here</h1>
       </DropMessage>
-      <UploadInput type="file" id={propertyName} onChange={(event): void => onUpload(event.target.files)} />
+      <UploadInput type="file" id={propertyName} onChange={(event): void => onDrop(event)} />
       {fileObject ? (
         <div>
           <Label>File name</Label>
