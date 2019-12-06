@@ -53,13 +53,16 @@ export default class Edit extends React.Component<PropertyProps> {
         time_24hr: true,
       }
     }
-    const inst = flatpickr(this.datepickerRef.current, {
-      defaultDate,
-      ...options,
-    })
-    inst.config.onChange.push((dates, text) => {
-      this.handleChange(text)
-    })
+
+    if (!property.isDisabled) {
+      const inst = flatpickr(this.datepickerRef.current, {
+        defaultDate,
+        ...options,
+      })
+      inst.config.onChange.push((dates, text) => {
+        this.handleChange(text)
+      })
+    }
   }
 
   handleChange(value): void {
@@ -79,6 +82,7 @@ export default class Edit extends React.Component<PropertyProps> {
             id={property.name}
             ref={this.datepickerRef}
             name={property.name}
+            disabled={property.isDisabled}
           />
           <span className="icon is-small is-right">
             <i className="icomoon-calendar" />

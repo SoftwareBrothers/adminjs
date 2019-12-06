@@ -75,6 +75,7 @@ class Edit extends React.Component<CombinedProps> {
           defaultOptions
           loadOptions={this.loadOptions}
           onChange={this.handleChange}
+          isDisabled={property.isDisabled}
         />
       </PropertyInEdit>
     )

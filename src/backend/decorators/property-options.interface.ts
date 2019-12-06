@@ -76,4 +76,9 @@ export default interface PropertyOptions {
   custom?: {
     [key: string]: boolean | string | number | Date;
   };
+
+  /**
+   * Whether given property should be editable or not.
+   */
+  isDisabled?: boolean;
 }

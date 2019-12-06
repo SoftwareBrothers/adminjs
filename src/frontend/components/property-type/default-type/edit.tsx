@@ -36,6 +36,7 @@ export default class Edit extends React.Component<PropertyProps> {
           value={selected}
           options={property.availableValues}
           onChange={this.handleSelectChange}
+          isDisabled={property.isDisabled}
         />
       )
     }
@@ -47,6 +48,7 @@ export default class Edit extends React.Component<PropertyProps> {
         name={property.name}
         onChange={this.handleInputChange}
         value={value}
+        disabled={property.isDisabled}
       />
     )
   }

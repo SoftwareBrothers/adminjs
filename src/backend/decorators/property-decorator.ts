@@ -192,6 +192,7 @@ class PropertyDecorator {
       isSortable: this.isSortable(),
       availableValues: this.availableValues(),
       name: this.name(),
+      isDisabled: !!this.options.isDisabled,
       label: this.label(),
       type: this.type(),
       reference: this.property.reference(),

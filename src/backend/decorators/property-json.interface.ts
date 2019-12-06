@@ -70,4 +70,9 @@ export default interface PropertyJSON {
   custom: {
     [key: string]: boolean | string | number | Date;
   };
+
+  /**
+   * Whether the field should be disabled in edition
+   */
+  isDisabled: boolean;
 }

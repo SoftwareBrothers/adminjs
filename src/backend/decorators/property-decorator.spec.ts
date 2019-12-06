@@ -125,6 +125,7 @@ describe('PropertyDecorator', function () {
         'type',
         'reference',
         'components',
+        'isDisabled',
         'subProperties',
         'isArray',
         'custom',
