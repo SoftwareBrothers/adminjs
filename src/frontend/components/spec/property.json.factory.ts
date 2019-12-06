@@ -13,6 +13,7 @@ factory.define('PropertyJSON', Object, {
   position: factory.sequence('JSONproperty.position', n => n),
   type: 'string',
   reference: null,
+  isDisabled: false,
   isArray: false,
   subProperties: [],
   components: undefined,
