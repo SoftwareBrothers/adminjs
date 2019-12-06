@@ -13,6 +13,7 @@ Started since version 0.9.5
 * add drop-area component
 * change new and update actions to receive FormData
 * add header option to ApiClient
+* add isDisabled option to PropertyOptions
 
 ### Updated
 
