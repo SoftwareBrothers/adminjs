@@ -8,9 +8,9 @@ import 'styled-components'
 export const colors = {
   bck: '#fff',
   defaultText: '#111114',
-  lightText: '#a9aabc',
+  lightText: '#70728F',
   lightBck: '#F8F8FA',
-  superLightBack: '#F1F1F5',
+  superLightBack: '#FCFCFC',
   border: '#eeeeef',
   borderHover: '#b5b5b5',
   borderOnDark: '#4E5779',
@@ -21,7 +21,7 @@ export const colors = {
   filterDefaultText: '#fff',
 
   love: '#e6282b',
-  primary: '#718af4',
+  primary: '#4A69F2',
   primaryHover: '#545B8C',
   success: '#21C197',
   successBorder: '#8CDAD9',
