@@ -53,8 +53,12 @@ export interface ResourceOptions {
   /**
    * List of all actions along with their options
    */
-  actions?: Record<string, Partial<Action>>;
+  actions?: {
+    show?: Partial<Action>;
+    edit?: Partial<Action>;
+    delete?: Partial<Action>;
+    new?: Partial<Action>;
+  } & {
+    [key: string]: Action;
+  };
 }
-
-// TODO split actions to different rows for new, update, delete and rest,
-// where Partial will be only for rest

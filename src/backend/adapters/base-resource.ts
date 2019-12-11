@@ -7,6 +7,8 @@ import BaseRecord, { ParamsType } from './base-record'
 import Filter from '../utils/filter'
 import ResourceDecorator from '../decorators/resource-decorator'
 import NotImplementedError from '../utils/not-implemented-error'
+import { ResourceOptions } from '../decorators/resource-options.interface'
+import AdminBro from '../../admin-bro'
 
 /**
  * Representation of a ORM Resource in AdminBro. Visually resource is a list item in the sidebar.
@@ -243,9 +245,9 @@ class BaseResource {
    *
    * @param  {BaseDecorator}  Decorator
    * @param  {AdminBro}       admin         current instance of AdminBro
-   * @param  {AdminBro~ResourceOptions} [options]
+   * @param  {ResourceOptions} [options]
    */
-  assignDecorator(admin, options = {}): void {
+  assignDecorator(admin: AdminBro, options: ResourceOptions = {}): void {
     this._decorated = new ResourceDecorator({ resource: this, admin, options })
   }
 

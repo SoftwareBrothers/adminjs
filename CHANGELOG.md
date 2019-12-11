@@ -15,10 +15,12 @@ Started since version 0.9.5
 * add header option to ApiClient
 * add isDisabled option to PropertyOptions
 
-### Updated
+### Changed
 
 * export Types of Action Responses
 * Improve Action interface that all fields are optional when passing via ResourceOptions
+* Adjust default theme colours to comply with WCAG 2.0 contrast guidelines
+* upgrade typescript to 3.7.3
 
 ## 1.4.2 - 2019-11-21
 
