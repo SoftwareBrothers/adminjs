@@ -1,11 +1,15 @@
 import React, { ReactNode } from 'react'
 import Select from 'react-select'
+import { withTheme, DefaultTheme } from 'styled-components'
 
 import PropertyInEdit from '../../ui/property-in-edit'
 import StyledInput from '../../ui/styled-input'
 import { PropertyProps } from '../base-property-props'
+import selectStyles from '../../../styles/select-styles'
 
-export default class Edit extends React.Component<PropertyProps> {
+type CombinedProps = PropertyProps & {theme: DefaultTheme}
+
+class Edit extends React.Component<CombinedProps> {
   constructor(props) {
     super(props)
     this.handleInputChange = this.handleInputChange.bind(this)
@@ -24,15 +28,17 @@ export default class Edit extends React.Component<PropertyProps> {
   }
 
   renderInput(): ReactNode {
-    const { property, record } = this.props
+    const { property, record, theme } = this.props
     const value = (record.params && typeof record.params[property.name] !== 'undefined')
       ? record.params[property.name]
       : ''
     if (property.availableValues) {
+      const styles = selectStyles(theme)
       const selected = property.availableValues.find(av => av.value === value)
       return (
         <Select
           isClearable
+          styles={styles}
           value={selected}
           options={property.availableValues}
           onChange={this.handleSelectChange}
@@ -63,3 +69,5 @@ export default class Edit extends React.Component<PropertyProps> {
     )
   }
 }
+
+export default withTheme(Edit)

@@ -38,7 +38,8 @@ module.exports = {
         'guard-for-in': 'off',
         'no-restricted-syntax': 'off',
         'no-await-in-loop': 'off',
-        'object-curly-newline': 'off'
+        'object-curly-newline': 'off',
+        'import/extensions': 'never'
     },
     overrides: [
         {

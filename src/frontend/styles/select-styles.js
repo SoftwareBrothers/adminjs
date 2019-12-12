@@ -23,11 +23,19 @@ const selectStyles = theme => ({
   singleValue: () => ({
     color: theme.colors.defaultText,
   }),
-  option: (provided, state) => ({
-    ...provided,
-    color: state.isSelected ? theme.colors.defaultText : theme.colors.lightText,
-    background: state.isFocused ? theme.colors.primary : 'transparent',
-  }),
+  option: (provided, state) => {
+    let color = state.isSelected ? theme.colors.defaultText : theme.colors.lightText
+    if (state.isFocused) {
+      color = theme.colors.inputBck
+    }
+    return {
+      ...provided,
+      color,
+      background: state.isFocused
+        ? theme.colors.primary
+        : 'transparent',
+    }
+  },
 })
 
 const filterStyles = theme => ({

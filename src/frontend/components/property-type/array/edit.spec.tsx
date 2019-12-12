@@ -26,7 +26,7 @@ describe('Edit', () => {
       <Edit
         property={prop}
         record={rec}
-        ItemComponent={ItemComponent}
+        ItemComponent={ItemComponent as unknown as typeof React.Component}
         onChange={onChange}
       />
     </TestContextProvider>,
