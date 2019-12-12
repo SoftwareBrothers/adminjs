@@ -6,11 +6,13 @@ import React, { ReactNode, ComponentClass } from 'react'
 import { withRouter } from 'react-router-dom'
 
 import { RouteComponentProps } from 'react-router'
+import { AxiosResponse } from 'axios'
 import StyledLink from '../ui/styled-link'
 import ApiClient from '../../utils/api-client'
 import ViewHelpers from '../../../backend/utils/view-helpers'
 import withNotice, { AddNoticeProps } from '../../store/with-notice'
 import ActionJSON from '../../../backend/decorators/action-json.interface'
+import { ActionResponse } from '../../../backend/actions/action.interface'
 
 /**
  * Renders Button for an action
@@ -37,21 +39,24 @@ class ActionButton extends React.PureComponent<RouteComponentProps & Props & Add
     if (typeof action.component !== 'undefined' && action.component === false) {
       event.preventDefault()
       const api = new ApiClient()
-      let apiAction
+      let promise: Promise<AxiosResponse<ActionResponse>>
       if (recordId) {
-        apiAction = api.recordAction
+        promise = api.recordAction({
+          resourceId, actionName: action.name, recordId,
+        })
       } else {
-        apiAction = api.resourceAction
+        promise = api.resourceAction({
+          resourceId, actionName: action.name,
+        })
       }
 
-      apiAction.bind(api)({
-        resourceId, actionName: action.name, recordId,
-      }).then((response) => {
-        addNotice({
-          message: `action ${action.name} has been successfully performed`,
-        })
-        if (location.pathname !== response.data.redirectUrl) {
-          history.push(response.data.redirectUrl)
+      promise.then((response) => {
+        const { data } = response
+        if (data.notice) {
+          addNotice(data.notice)
+        }
+        if (data.redirectUrl && location.pathname !== data.redirectUrl) {
+          history.push(data.redirectUrl)
         }
         if (actionPerformed) {
           actionPerformed(action.name)

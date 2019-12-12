@@ -1,14 +1,9 @@
 import * as flat from 'flat'
 import _ from 'lodash'
 import BaseResource from './base-resource'
-import ValidationError from '../utils/validation-error'
+import ValidationError, { RecordError, PropertyErrors } from '../utils/validation-error'
 import RecordJSON from '../decorators/record-json.interface'
 import { CurrentAdmin } from '../../current-admin.interface'
-
-export type RecordError = {
-  type: string;
-  message: string;
-}
 
 export type ParamsType = Record<string, any>
 
@@ -22,7 +17,7 @@ class BaseRecord {
 
   private params: ParamsType
 
-  private errors: {[key: string]: RecordError}
+  private errors: PropertyErrors
 
   private populated: {[key: string]: BaseRecord}
 
@@ -105,7 +100,7 @@ class BaseRecord {
       this.params = await this.resource.update(this.id(), params)
     } catch (e) {
       if (e instanceof ValidationError) {
-        this.errors = e.errors
+        this.errors = e.propertyErrors
         return this
       }
       throw e
@@ -134,7 +129,7 @@ class BaseRecord {
       }
     } catch (e) {
       if (e instanceof ValidationError) {
-        this.errors = e.errors
+        this.errors = e.propertyErrors
         return this
       }
       throw e
@@ -221,7 +216,7 @@ class BaseRecord {
       title: this.resource.decorate().titleOf(this),
       recordActions: this.resource.decorate().recordActions(
         this, currentAdmin,
-      ).map(ra => ra.toJSON()),
+      ).map(recordAction => recordAction.toJSON()),
     }
   }
 }

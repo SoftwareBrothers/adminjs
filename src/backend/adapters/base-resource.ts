@@ -183,6 +183,7 @@ class BaseResource {
 
   /**
    * Finds one Record in the Resource by its id
+   *
    * @param  {String} id      uniq id of the Resource Record
    * @return {Promise<BaseRecord>}   record
    * @abstract
@@ -206,10 +207,11 @@ class BaseResource {
 
   /**
    * Creates new record
-   * @param  {Record<string, any>} params
+   *
+   * @param  {Record<string, any>}     params
    * @return {Promise<Object>}         created record converted to raw Object which
    *                                   can be used to initiate new {@link BaseRecord} instance
-   * @throws {ValidationError} If there are validation errors it should be thrown
+   * @throws {ValidationError}         If there are validation errors it should be thrown
    * @abstract
    */
   async create(params: Record<string, any>): Promise<ParamsType> {
@@ -218,11 +220,12 @@ class BaseResource {
 
   /**
    * Updates an object
-   * @param  {String} id      uniq id of the Resource Record
-   * @param  {Record<string, any>} params
+   *
+   * @param  {String} id               uniq id of the Resource Record
+   * @param  {Record<string, any>}     params
    * @return {Promise<Object>}         created record converted to raw Object which
    *                                   can be used to initiate new {@link BaseRecord} instance
-   * @throws {ValidationError} If there are validation errors it should be thrown
+   * @throws {ValidationError}         If there are validation errors it should be thrown
    * @abstract
    */
   async update(id: string, params: Record<string, any>): Promise<ParamsType> {
@@ -232,7 +235,8 @@ class BaseResource {
   /**
    * Delete given record by id
    *
-   * @param  {String|Number} id id of the Record
+   * @param  {String|Number}           id id of the Record
+   * @throws {ValidationError}         If there are validation errors it should be thrown
    * @abstract
    */
   async delete(id: string): Promise<void> {

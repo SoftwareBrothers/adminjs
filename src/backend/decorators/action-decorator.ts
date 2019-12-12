@@ -2,7 +2,7 @@ import ConfigurationError from '../utils/configuration-error'
 import ViewHelpers from '../utils/view-helpers'
 import AdminBro from '../../admin-bro'
 import BaseResource from '../adapters/base-resource'
-import Action, { IsFunction, ActionContext, ActionRequest } from '../actions/action.interface'
+import Action, { IsFunction, ActionContext, ActionRequest, ActionResponse } from '../actions/action.interface'
 import { CurrentAdmin } from '../../current-admin.interface'
 import ActionJSON from './action-json.interface'
 import BaseRecord from '../adapters/base-record'
@@ -21,7 +21,7 @@ class ActionDecorator {
 
   private h: ViewHelpers
 
-  private action: Action
+  private action: Action<ActionResponse>
 
   /**
    * @param {Object}        params
@@ -30,7 +30,7 @@ class ActionDecorator {
    * @param {AdminBro}      params.admin  current instance of AdminBro
    */
   constructor({ action, admin, resource }: {
-    action: Action;
+    action: Action<ActionResponse>;
     admin: AdminBro;
     resource: BaseResource;
   }) {

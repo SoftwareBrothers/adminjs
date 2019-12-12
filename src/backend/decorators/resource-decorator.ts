@@ -8,7 +8,7 @@ import BaseResource from '../adapters/base-resource'
 import AdminBro from '../../admin-bro'
 import * as ACTIONS from '../actions/index'
 import { ResourceOptions } from './resource-options.interface'
-import Action from '../actions/action.interface'
+import Action, { ActionResponse } from '../actions/action.interface'
 import { CurrentAdmin } from '../../current-admin.interface'
 import ResourceJSON from './resource-json.interface'
 import { PropertyPlace } from './property-json.interface'
@@ -92,7 +92,7 @@ class ResourceDecorator {
     const returnActions = {}
     // setting default values for actions
     Object.keys(actions).forEach((key: string) => {
-      const action: Action = {
+      const action: Action<ActionResponse> = {
         name: actions[key].name || key,
         label: actions[key].label || key,
         actionType: actions[key].actionType || ['resource'],

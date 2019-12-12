@@ -1,5 +1,6 @@
-import Action from '../actions/action.interface'
+import Action, { ActionResponse, RecordActionResponse } from '../actions/action.interface'
 import PropertyOptions from './property-options.interface'
+import { ListActionResponse } from '../actions/list-action'
 
 /**
  * Options for given resource
@@ -54,11 +55,12 @@ export interface ResourceOptions {
    * List of all actions along with their options
    */
   actions?: {
-    show?: Partial<Action>;
-    edit?: Partial<Action>;
-    delete?: Partial<Action>;
-    new?: Partial<Action>;
-  } & {
-    [key: string]: Action;
+    show?: Partial<Action<RecordActionResponse>>;
+    edit?: Partial<Action<RecordActionResponse>>;
+    delete?: Partial<Action<RecordActionResponse>>;
+    new?: Partial<Action<RecordActionResponse>>;
+    list?: Partial<Action<ListActionResponse>>;
+  } | {
+    [key: string]: Partial<Action<ActionResponse>>;
   };
 }

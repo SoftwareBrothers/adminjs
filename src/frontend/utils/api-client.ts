@@ -1,5 +1,6 @@
 import axios, { AxiosResponse, AxiosInstance } from 'axios'
 import RecordJSON from '../../backend/decorators/record-json.interface'
+import { RecordActionResponse, ActionResponse } from '../../backend/actions/action.interface'
 
 let globalAny: any = {}
 
@@ -97,7 +98,7 @@ class ApiClient {
     method?: 'POST' | 'GET';
     params?: {[key: string]: any};
     headers?: {[key: string]: any};
-  }): Promise<any> {
+  }): Promise<AxiosResponse<ActionResponse>> {
     const response = await this.client.request({
       url: `/api/resources/${resourceId}/actions/${actionName}`,
       method: method || payload ? 'POST' : 'GET',
@@ -121,7 +122,7 @@ class ApiClient {
    * @param   {Object} [options.headers]   optional request headers
    * @param   {String} [options.method]    if there is a Payload it sends
    *                                       POST request, otherwise GET.
-   * @return  {Promise<Object>}            response from an {@link Action}
+   * @return  {Promise<RecordActionResponse>}            response from an {@link Action}
    */
   async recordAction({ resourceId, recordId, actionName, payload, method, params, headers }: {
     recordId: string;
@@ -131,7 +132,7 @@ class ApiClient {
     method?: 'POST' | 'GET';
     params?: {[key: string]: any};
     headers?: {[key: string]: any};
-  }): Promise<any> {
+  }): Promise<AxiosResponse<RecordActionResponse>> {
     const response = await this.client.request({
       url: `/api/resources/${resourceId}/records/${recordId}/${actionName}`,
       method: method || payload ? 'POST' : 'GET',

@@ -1,6 +1,6 @@
-import Action from './action.interface'
+import Action, { RecordActionResponse } from './action.interface'
 import NotFoundError from '../utils/not-found-error'
-import RecordJSON from '../decorators/record-json.interface'
+import ValidationError from '../utils/validation-error'
 
 /**
  * @implements Action
@@ -10,7 +10,7 @@ import RecordJSON from '../decorators/record-json.interface'
  * Removes given record from the database. Since it doesn't have a
  * component - it redirects right away after clicking its {@link ActionButton}
  */
-const DeleteAction: Action = {
+const DeleteAction: Action<RecordActionResponse> = {
   name: 'delete',
   isVisible: true,
   actionType: 'record',
@@ -23,35 +23,39 @@ const DeleteAction: Action = {
    *
    * To invoke this action use {@link ApiClient#recordAction}
    *
-   * @return  {Promise<DeleteActionResponse>}
+   * @return  {Promise<RecordActionResponse>}
    * @implements ActionHandler
    * @memberof module:DeleteAction
    */
-  handler: async (request, response, data): Promise<DeleteActionResponse> => {
+  handler: async (request, response, data) => {
     if (!request.params.recordId || !data.record) {
       throw new NotFoundError([
         'You have to pass "recordId" to Delete Action',
       ].join('\n'), 'Action#handler')
     }
-    await data.resource.delete(request.params.recordId)
+    try {
+      await data.resource.delete(request.params.recordId)
+    } catch (error) {
+      if (error instanceof ValidationError && error.baseError) {
+        return {
+          record: data.record.toJSON(data.currentAdmin),
+          notice: {
+            message: error.baseError.message,
+            type: 'error',
+          },
+        }
+      }
+      throw error
+    }
     return {
       record: data.record.toJSON(data.currentAdmin),
       redirectUrl: data.h.resourceActionUrl({ resourceId: data.resource.id(), actionName: 'list' }),
+      notice: {
+        message: 'Successfully removed given record',
+        type: 'success',
+      },
     }
   },
-}
-
-/**
- * Response of a delete action handler
- * @memberof module:DeleteAction
- * @alias DeleteActionResponse
- */
-export type DeleteActionResponse = {
-  /**
-   * URL on which user should be redirected after the action
-   */
-  redirectUrl: string;
-  record: RecordJSON;
 }
 
 export default DeleteAction

@@ -15,13 +15,18 @@ export { PropertyType } from './types/src/backend/adapters/base-property'
 export { ResourceOptions } from './types/src/backend/decorators/resource-options.interface'
 export { default as AdminBroOptions } from './types/src/admin-bro-options.interface'
 export { default as PropertyOptions } from './types/src/backend/decorators/property-options.interface'
-export { default as Action } from './types/src/backend/actions/action.interface'
+export {
+  default as Action,
+  ActionContext,
+  ActionResponse,
+  ActionRequest,
+  ActionHandler,
+  After,
+  Before,
+  RecordActionResponse,
+} from './types/src/backend/actions/action.interface'
 
-export { DeleteActionResponse } from './types/src/backend/actions/delete-action'
-export { NewActionResponse } from './types/src/backend/actions/new-action'
-export { EditActionResponse } from './types/src/backend/actions/edit-action'
 export { ListActionResponse } from './types/src/backend/actions/list-action'
-export { ShowActionResponse } from './types/src/backend/actions/show-action'
 
 export { default as BaseProperty } from './types/src/backend/adapters/base-property'
 export { default as BaseResource } from './types/src/backend/adapters/base-resource'

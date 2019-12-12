@@ -14,7 +14,7 @@ const PER_PAGE_LIMIT = 500
  * @description
  * Retruns selected Records in a list
  */
-const ListAction: Action = {
+const ListAction: Action<ListActionResponse> = {
   name: 'list',
   isVisible: true,
   actionType: 'resource',
@@ -29,7 +29,7 @@ const ListAction: Action = {
    * @memberof module:ListAction
    * @return {Promise<ListActionResponse>} records with metadata
    */
-  handler: async (request, response, data): Promise<ListActionResponse> => {
+  handler: async (request, response, data) => {
     const { query } = request
     const { sortBy, direction, filters = {} } = flat.unflatten(query || {})
     const { resource } = data

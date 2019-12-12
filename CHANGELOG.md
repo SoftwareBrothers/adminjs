@@ -21,6 +21,8 @@ Started since version 0.9.5
 * Improve Action interface that all fields are optional when passing via ResourceOptions
 * Adjust default theme colours to comply with WCAG 2.0 contrast guidelines
 * upgrade typescript to 3.7.3
+* add option to pass any notice message in Action Response
+* extend ValidationError to hold "base error" which if for entire record - not only for a particular property
 
 ## 1.4.2 - 2019-11-21
 

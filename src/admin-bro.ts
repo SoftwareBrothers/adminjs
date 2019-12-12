@@ -13,10 +13,11 @@ import ConfigurationError from './backend/utils/configuration-error'
 import ResourcesFactory from './backend/utils/resources-factory'
 import userComponentsBunlder from './backend/bundler/user-components-bundler'
 import { RouterType } from './backend/router'
-import Action from './backend/actions/action.interface'
+import Action, { RecordActionResponse, ActionResponse } from './backend/actions/action.interface'
 import { DEFAULT_PATHS } from './constants'
 
 import loginTemplate from './frontend/login-template'
+import { ListActionResponse } from './backend/actions/list-action'
 
 const pkg = JSON.parse(fs.readFileSync(path.join(__dirname, '../package.json'), 'utf-8'))
 export const VERSION = pkg.version
@@ -39,7 +40,13 @@ const defaults: AdminBroOptionsWithDefault = {
   },
 }
 
-type ActionsMap = {[key: string]: Action }
+type ActionsMap = {
+  show: Action<RecordActionResponse>;
+  edit: Action<RecordActionResponse>;
+  delete: Action<RecordActionResponse>;
+  new: Action<RecordActionResponse>;
+  list: Action<ListActionResponse>;
+}
 
 type UserComponentsMap = {[key: string]: string}
 
@@ -119,7 +126,6 @@ class AdminBro {
    * ACTIONS.show.isAccessible = () => {...}
    */
   public static ACTIONS: ActionsMap
-
 
   /**
    * AdminBro version

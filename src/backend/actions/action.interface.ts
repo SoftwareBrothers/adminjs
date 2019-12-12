@@ -96,6 +96,29 @@ export type ActionRequest = {
 }
 
 /**
+ * Base response for all actions
+ * @memberof Action
+ * @alias ActionResponse
+ */
+export type ActionResponse = {
+  /**
+   * Notice message which should be presented to the end user after showing the action
+   */
+  notice?: {
+    type: 'error' | 'success';
+    message: string;
+  };
+  /**
+   * redirect path
+   */
+  redirectUrl?: string;
+  /**
+   * Any other custom parameter
+   */
+  [key: string]: any;
+}
+
+/**
  * @description
  * Defines the type of {@link isAccessible} and {@link isVisible} functions
  * @alias IsFunction
@@ -108,19 +131,11 @@ export type IsFunction = (context: ActionContext) => boolean
  * @memberof Action
  * @alias RecordActionResponse
  */
-export type RecordActionResponse = {
+export type RecordActionResponse = ActionResponse & {
   /**
    * Record object.
    */
   record: RecordJSON;
-  /**
-   * redirect path
-   */
-  redirectUrl?: string;
-  /**
-   * Any other custom parameter
-   */
-  [key: string]: any;
 }
 
 /**
@@ -128,11 +143,11 @@ export type RecordActionResponse = {
  * @async
  * @memberof Action
  */
-export type ActionHandler = (
+export type ActionHandler<T> = (
   request: ActionRequest,
   response: any,
   context: ActionContext
-) => Promise<RecordActionResponse | any>
+) => Promise<T>
 
 /**
  * Before action hook. When it is given - it is performed before the {@link ActionHandler}
@@ -160,11 +175,11 @@ export type Before = (
  * @alias After
  * @async
  */
-export type After = (
+export type After<T> = (
   /**
    * Reponse returned by the default ActionHandler
    */
-  response: any,
+  response: T,
   /**
    * Original request which has been sent to ActionHandler
    */
@@ -173,7 +188,7 @@ export type After = (
    * Invocation context
    */
   context: ActionContext,
-) => Promise<any>
+) => Promise<T>
 
 /**
  * @classdesc
@@ -236,7 +251,7 @@ export type After = (
  * ACTIONS.show.after = async () => {...}
  * ```
  */
-export default interface Action {
+export default interface Action <T extends ActionResponse> {
   /**
    * Name of an action which is its uniq key.
    * If use one of _list_, _edit_, _new_, _show_ or _delete_ you override existing actions.
@@ -394,7 +409,7 @@ export default interface Action {
    *
    * Required for new actions.
    */
-  handler: ActionHandler;
+  handler: ActionHandler<T>;
   /**
    * Before action hook. When it is given - it is performed before the {@link Action.handler}
    * method.
@@ -469,5 +484,5 @@ export default interface Action {
    * ```
    *
    */
-  after?: After;
+  after?: After<T>;
 }

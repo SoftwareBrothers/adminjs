@@ -77,14 +77,15 @@ class List extends React.Component<ActionProps & RouteComponentProps & AddNotice
       actionName: 'list',
       resourceId: resource.id,
       params: query,
-    }).then((response: {data: ListActionResponse}) => {
+    }).then((response) => {
+      const listActionReponse = response.data as ListActionResponse
       this.setState({
-        records: response.data.records,
-        page: response.data.meta.page,
-        perPage: response.data.meta.perPage,
-        total: response.data.meta.total,
-        direction: response.data.meta.direction,
-        sortBy: response.data.meta.sortBy,
+        records: listActionReponse.records,
+        page: listActionReponse.meta.page,
+        perPage: listActionReponse.meta.perPage,
+        total: listActionReponse.meta.total,
+        direction: listActionReponse.meta.direction,
+        sortBy: listActionReponse.meta.sortBy,
         loading: false,
       })
       if (setTag) {

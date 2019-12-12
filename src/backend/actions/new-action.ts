@@ -1,5 +1,4 @@
-import Action from './action.interface'
-import RecordJSON from '../decorators/record-json.interface'
+import Action, { RecordActionResponse } from './action.interface'
 
 /**
  * @implements Action
@@ -9,7 +8,7 @@ import RecordJSON from '../decorators/record-json.interface'
  * Shows form for creating a new record
  * Uses {@link NewAction} component to render form
  */
-const NewAction: Action = {
+const NewAction: Action<RecordActionResponse> = {
   name: 'new',
   isVisible: true,
   actionType: 'resource',
@@ -22,9 +21,9 @@ const NewAction: Action = {
    *
    * @implements Action.handler
    * @memberof module:NewAction
-   * @return {Promise<NewActionResponse>} populated records
+   * @return {Promise<RecordActionResponse>} populated records
    */
-  handler: async (request, response, context): Promise<NewActionResponse> => {
+  handler: async (request, response, context) => {
     if (request.method === 'post') {
       let record = await context.resource.build(request.payload ? request.payload : {})
       record = await record.save()
@@ -37,10 +36,20 @@ const NewAction: Action = {
           redirectUrl: context.h.recordActionUrl({
             resourceId: context.resource.id(), recordId: record.id(), actionName: 'show',
           }),
+          notice: {
+            message: 'Successfully created a new record',
+            type: 'success',
+          },
           record: record.toJSON(context.currentAdmin),
         }
       }
-      return { record: record.toJSON(context.currentAdmin) }
+      return {
+        record: record.toJSON(context.currentAdmin),
+        notice: {
+          message: 'There are validation errors - check them out below.',
+          type: 'error',
+        },
+      }
     }
     // TODO: add wrong implementation error
     throw new Error('new action can be invoked only via `post` http method')
@@ -48,19 +57,3 @@ const NewAction: Action = {
 }
 
 export default NewAction
-
-/**
- * Response returned by NewAction
- * @memberof module:NewAction
- * @alias NewActionResponse
- */
-export type NewActionResponse = {
-  /**
-   * Record which was created or with errors.
-   */
-  record: RecordJSON;
-  /**
-   * If rectrd has been created it contains redirect path
-   */
-  redirectUrl?: string;
-}

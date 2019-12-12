@@ -68,16 +68,12 @@ class Edit extends React.Component<ActionProps & RouteComponentProps & AddNotice
       payload: formData,
       headers: { 'Content-Type': 'multipart/form-data' },
     }).then((response) => {
+      if (response.data.notice) {
+        addNotice(response.data.notice)
+      }
       if (response.data.redirectUrl) {
         history.push(response.data.redirectUrl)
-        addNotice({
-          message: 'Record has been successfully updated!',
-        })
       } else {
-        addNotice({
-          type: 'error',
-          message: 'There were errors in the record object. Check them out',
-        })
         this.setState(state => ({
           record: {
             ...state.record,

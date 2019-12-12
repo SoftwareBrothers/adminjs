@@ -1,5 +1,4 @@
-import Action from './action.interface'
-import RecordJSON from '../decorators/record-json.interface'
+import Action, { RecordActionResponse } from './action.interface'
 import NotFoundError from '../utils/not-found-error'
 
 /**
@@ -10,7 +9,7 @@ import NotFoundError from '../utils/not-found-error'
  * Retruns selected Record
  * Uses {@link ShowAction} component to render form
  */
-const ShowAction: Action = {
+const ShowAction: Action<RecordActionResponse> = {
   name: 'show',
   isVisible: true,
   actionType: 'record',
@@ -22,10 +21,10 @@ const ShowAction: Action = {
    * To invoke this action use {@link ApiClient#recordAction}
    * @memberof module:ShowAction
    *
-   * @return  {Promise<ShowActionResponse>}  populated record
+   * @return  {Promise<RecordActionResponse>}  populated record
    * @implements ActionHandler
    */
-  handler: async (request, response, data): Promise<ShowActionResponse> => {
+  handler: async (request, response, data) => {
     if (!data.record) {
       throw new NotFoundError([
         `Record of given id ("${request.params.recordId}") could not be found`,
@@ -38,15 +37,3 @@ const ShowAction: Action = {
 }
 
 export default ShowAction
-
-/**
- * Response of a ShowAction
- * @memberof module:ShowAction
- * @alias ShowActionResponse
- */
-export type ShowActionResponse = {
-  /**
-   * Record object
-   */
-  record: RecordJSON;
-}
