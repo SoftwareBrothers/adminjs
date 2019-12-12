@@ -250,7 +250,7 @@ const DropArea: React.FC<Props & AddNoticeProps> = (props) => {
       onDrop={onDrop}
     >
       <DropMessage className={isDragging ? 'active' : 'unactive'} onDragEnter={onDragEnter}>
-        <h1>Dop Here</h1>
+        <h1>Drop Here</h1>
       </DropMessage>
       <UploadInput type="file" id={propertyName} onChange={(event): void => onDrop(event)} />
       {fileObject ? (
