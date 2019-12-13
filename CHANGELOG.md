@@ -14,6 +14,7 @@ Started since version 0.9.5
 * change new and update actions to receive FormData
 * add header option to ApiClient
 * add isDisabled option to PropertyOptions
+* add favicon to the branding options
 
 ### Changed
 
