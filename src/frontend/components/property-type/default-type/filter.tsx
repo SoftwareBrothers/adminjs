@@ -5,6 +5,7 @@ import { withTheme, ThemeProps, DefaultTheme } from 'styled-components'
 import PropertyInFilter from '../../ui/property-in-filter'
 import { filterStyles } from '../../../styles/select-styles'
 import { FilterPropertyProps } from '../base-property-props'
+import StyledInput from '../../ui/styled-input'
 
 class Filter extends React.PureComponent<FilterPropertyProps & ThemeProps<DefaultTheme>> {
   constructor(props) {
@@ -45,7 +46,7 @@ class Filter extends React.PureComponent<FilterPropertyProps & ThemeProps<Defaul
         <span className="icon is-small is-right">
           <i className="fas fa-search" />
         </span>
-        <input
+        <StyledInput
           type="text"
           className="input filter"
           name={filterKey}

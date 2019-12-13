@@ -19,6 +19,7 @@ export const colors = {
   superDarkBck: '#192035',
   inputBck: '#fff',
   filterDefaultText: '#fff',
+  filterLightText: '#b5b5b5',
 
   love: '#e6282b',
   primary: '#4A69F2',

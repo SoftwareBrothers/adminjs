@@ -8,13 +8,15 @@ import PropertyType from '../property-type'
 import ResourceJSON from '../../../backend/decorators/resource-json.interface'
 import { PropertyPlace } from '../../../backend/decorators/property-json.interface'
 import RecordJSON from '../../../backend/decorators/record-json.interface'
+import Label from '../ui/label'
+import StyledInput from '../ui/styled-input'
 
 const FilterWrapper = styled.section`
   background: ${({ theme }): string => theme.colors.darkBck};
   flex-shrink: 0;
   width: ${({ theme }): string => theme.sizes.sidebarWidth};
   border-left: 1px solid ${({ theme }): string => theme.colors.borderOnDark};
-  color: #fff;
+  color: ${({ theme }): string => theme.colors.filterDefaultText};
   padding-top: 60px;
   transition: width 0.5s;
   position: absolute;
@@ -27,12 +29,16 @@ const FilterWrapper = styled.section`
     width: 0;
     transition: width 0.5s;
   }
+
+  &&& ${Label}, &&& ${StyledInput} {
+    color: ${({ theme }): string => theme.colors.filterDefaultText};
+  }
 `
 
 const FilterLink = styled.a`
-  color: #fff;
+  color: ${({ theme }): string => theme.colors.filterDefaultText};
   & > span {
-    opacity: 0.25;
+    opacity: 0.5;
     color: ${({ theme }): string => theme.colors.lightText};
     border: 1px solid ${({ theme }): string => theme.colors.lightText};
     border-radius: 3px;

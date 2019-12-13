@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
+import { DefaultTheme } from 'styled-components'
 
-const selectStyles = theme => ({
+const selectStyles = (theme: DefaultTheme) => ({
   control: (provided, state) => ({
     ...provided,
     border: state.isFocused
@@ -46,17 +47,17 @@ const filterStyles = theme => ({
       : `1px solid ${theme.colors.borderOnDark}`,
     borderRadius: '0px',
     background: 'transparent',
-    color: theme.colors.lightText,
+    color: theme.colors.filterDefaultText,
   }),
   input: () => ({
-    color: '#fff',
+    color: theme.colors.filterDefaultText,
   }),
   singleValue: () => ({
-    color: theme.colors.lightText,
+    color: theme.colors.filterDefaultText,
   }),
   option: (provided, state) => ({
     ...provided,
-    color: state.isSelected ? theme.colors.filterDefaultText : theme.colors.lightText,
+    color: state.isSelected ? theme.colors.filterDefaultText : theme.colors.filterLightText,
     background: state.isFocused ? 'rgba(32,39,62,0.25)' : 'transparent',
   }),
   menu: provided => ({

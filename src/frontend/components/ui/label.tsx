@@ -1,20 +1,6 @@
 import React, { ReactNode } from 'react'
 import styled from 'styled-components'
 
-const StyledLabel = styled.label.attrs({
-  className: 'label',
-})`
-  &&& {
-    display: block;
-    text-transform: uppercase;
-    font-size: ${({ theme }): string => theme.fonts.min};
-    color: ${({ theme }): string => theme.colors.lightText};
-    font-weight: normal;
-    margin: 0 0 8px 0;
-    letter-spacing: 0.1em;
-  }
-`
-
 /**
  * @class
  * Represents labels inside the application.
@@ -28,7 +14,19 @@ const StyledLabel = styled.label.attrs({
  * </WrapperBox>
  * )
  */
-const Label: React.FC<Props> = props => (<StyledLabel {...props} />)
+const Label = styled.label.attrs({
+  className: 'label',
+})`
+  &&& {
+    display: block;
+    text-transform: uppercase;
+    font-size: ${({ theme }): string => theme.fonts.min};
+    color: ${({ theme }): string => theme.colors.lightText};
+    font-weight: normal;
+    margin: 0 0 8px 0;
+    letter-spacing: 0.1em;
+  }
+`
 
 /**
  * @memberof Label
