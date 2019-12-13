@@ -11,17 +11,17 @@ import createStore, {
 import AdminBro from '../../admin-bro'
 import { CurrentAdmin } from '../../current-admin.interface'
 
-const initializeStore = (admin: AdminBro, currentAdmin: CurrentAdmin): Store<ReduxState> => {
+const initializeStore = (admin: AdminBro, currentAdmin?: CurrentAdmin): Store<ReduxState> => {
   const store: Store<ReduxState> = createStore()
   const AdminClass: typeof AdminBro = admin.constructor as typeof AdminBro
   const adminVersion = AdminClass.VERSION
 
   store.dispatch(initializeResources(
-    admin.resources.map((r) => {
+    admin.resources.map((resource) => {
       try {
-        return r.decorate().toJSON(currentAdmin)
+        return resource.decorate().toJSON(currentAdmin)
       } catch (e) {
-        console.log('error', r._decorated)
+        console.log('error', resource._decorated)
         throw e
       }
     }),

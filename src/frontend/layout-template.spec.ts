@@ -1,5 +1,7 @@
+import { expect } from 'chai'
 import layoutTemplate from './layout-template'
 import AdminBro from '../admin-bro'
+import AdminBroOptions from '../admin-bro-options.interface'
 
 describe('layoutTemplate', function () {
   context('AdminBro with default options and not logged in user', function () {
@@ -9,12 +11,35 @@ describe('layoutTemplate', function () {
 
     it('renders default company name', function () {
       expect(
-        layoutTemplate(this.adminBro, null, '/'),
+        layoutTemplate(this.adminBro, undefined, '/'),
       ).to.contain(this.adminBro.options.branding.companyName)
     })
 
     it('links to global bundle', function () {
-      expect(layoutTemplate(this.adminBro, null, '/')).to.contain('global.bundle.js')
+      expect(layoutTemplate(this.adminBro, undefined, '/')).to.contain('global.bundle.js')
+    })
+  })
+
+  describe('AdmionBro with branding options given', function () {
+    beforeEach(function () {
+      this.branding = {
+        softwareBrothers: false,
+        companyName: 'Other name',
+        favicon: '/someimage.png',
+      } as AdminBroOptions['branding']
+
+      this.adminBro = new AdminBro({ branding: this.branding })
+      this.renderedContent = layoutTemplate(this.adminBro, undefined, '/')
+    })
+
+    it('renders company name', function () {
+      expect(this.renderedContent).to.contain(this.branding.companyName)
+    })
+
+    it('renders favicon', function () {
+      expect(this.renderedContent).to.contain(
+        `<link rel="shortcut icon" type="image/png" href="${this.branding.favicon}" />`,
+      )
     })
   })
 
@@ -29,7 +54,7 @@ describe('layoutTemplate', function () {
       })
 
       it('takes React and other libraries from CDN', function () {
-        const template = layoutTemplate(this.adminBro, null, '/')
+        const template = layoutTemplate(this.adminBro, undefined, '/')
         expect(template).not.to.contain('global.bundle.js')
         expect(template).to.contain('https://unpkg.com/react@16/umd/react.development.js')
         expect(template).to.contain('https://unpkg.com/react-dom@16/umd/react-dom.development.js')
@@ -50,11 +75,11 @@ describe('layoutTemplate', function () {
     })
 
     it('adds styles to the head section', function () {
-      expect(layoutTemplate(this.adminBro, null, '/')).to.contain(this.styleUrl)
+      expect(layoutTemplate(this.adminBro, undefined, '/')).to.contain(this.styleUrl)
     })
 
     it('adds scripts to the body', function () {
-      expect(layoutTemplate(this.adminBro, null, '/')).to.contain(this.scriptUrl)
+      expect(layoutTemplate(this.adminBro, undefined, '/')).to.contain(this.scriptUrl)
     })
   })
 })

@@ -16,12 +16,11 @@ export type CurrentAdmin = {
    */
   email: string;
   /**
-   * Also you can put as many other fields to it as you like.
-   */
-  [key: string]: any;
-
-  /**
    * Id of your admin user
    */
   id?: string;
+  /**
+   * Also you can put as many other fields to it as you like.
+   */
+  [key: string]: any;
 }

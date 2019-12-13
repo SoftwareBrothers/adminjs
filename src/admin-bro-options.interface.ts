@@ -113,7 +113,7 @@ export default interface AdminBroOptions {
      * bundle. Default to CDN. You may change this if your internet connection is slow and you are
      * developing AdminBro on local machine.
      */
-    globalsFromCDN: boolean;
+    globalsFromCDN?: boolean;
   };
   /**
    * Environmental variables passed to the frontend.
@@ -201,6 +201,11 @@ export type BrandingOptions = {
    * Flag indicates if `SoftwareBrothers` tiny hart icon should be visible on the bottom sidebar.
    */
   softwareBrothers?: boolean;
+
+  /**
+   * URL to a favicon
+   */
+  favicon?: string;
 }
 
 export type DashboardHandler = (

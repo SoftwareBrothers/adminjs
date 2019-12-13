@@ -22,7 +22,7 @@ import { CurrentAdmin } from '../current-admin.interface'
  *
  * @private
  */
-const html = (admin: AdminBro, currentAdmin: CurrentAdmin, location = '/'): string => {
+const html = (admin: AdminBro, currentAdmin?: CurrentAdmin, location = '/'): string => {
   const context = {}
   const h = new ViewHelpers({ options: admin.options })
   const locationInAdmin = h.urlBuilder([location])
@@ -47,6 +47,13 @@ const html = (admin: AdminBro, currentAdmin: CurrentAdmin, location = '/'): stri
 
   const appComponent = renderToString(jsx)
 
+  let faviconTag = ''
+  if (admin.options.branding.favicon) {
+    const { favicon } = admin.options.branding
+    const type = favicon.match(/.*\.png$/) ? 'image/png' : 'image/x-icon'
+    faviconTag = `<link rel="shortcut icon" type="${type}" href="${favicon}" />`
+  }
+
   return `
     <!DOCTYPE html>
     <html>
@@ -59,6 +66,7 @@ const html = (admin: AdminBro, currentAdmin: CurrentAdmin, location = '/'): stri
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
       <title>${admin.options.branding.companyName}</title>
+      ${faviconTag}
       <script src="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.5.7/flatpickr.min.js"></script>
       <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.5.7/flatpickr.min.css">
 
