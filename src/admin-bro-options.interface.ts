@@ -181,9 +181,9 @@ export type VersionProps = {
  */
 export type BrandingOptions = {
   /**
-   * URL to a logo.
+   * URL to a logo, or `false` if you want to hide the default one.
    */
-  logo?: string;
+  logo?: string | false;
   /**
    * Name of your company, which will replace "AdminBro".
    */
