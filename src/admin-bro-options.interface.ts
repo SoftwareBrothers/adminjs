@@ -3,7 +3,7 @@ import BaseDatabase from './backend/adapters/base-database'
 import { PageContext } from './backend/actions/action.interface'
 import { ResourceOptions } from './backend/decorators/resource-options.interface'
 import { colors, sizes, fonts, breakpoints } from './frontend/styles/variables'
-import { PartialRecordWithValues } from './frontend/utils/utilityTypes'
+import { NonNullishPartialRecord } from './utils/non-nullish-partial-record.type'
 
 /**
  * AdminBroOptions
@@ -193,10 +193,10 @@ export type BrandingOptions = {
    * CSS theme.
    */
   theme?: {
-    colors?: PartialRecordWithValues<typeof colors>;
-    sizes?: PartialRecordWithValues<typeof sizes>;
-    fonts?: PartialRecordWithValues<typeof fonts>;
-    breakpoints?: PartialRecordWithValues<typeof breakpoints>;
+    colors?: NonNullishPartialRecord<typeof colors>;
+    sizes?: NonNullishPartialRecord<typeof sizes>;
+    fonts?: NonNullishPartialRecord<typeof fonts>;
+    breakpoints?: NonNullishPartialRecord<typeof breakpoints>;
   };
   /**
    * Flag indicates if `SoftwareBrothers` tiny hart icon should be visible on the bottom sidebar.

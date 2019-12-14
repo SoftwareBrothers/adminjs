@@ -13,7 +13,7 @@ import ConfigurationError from './backend/utils/configuration-error'
 import ResourcesFactory from './backend/utils/resources-factory'
 import userComponentsBunlder from './backend/bundler/user-components-bundler'
 import { RouterType } from './backend/router'
-import Action, { RecordActionResponse, ActionResponse } from './backend/actions/action.interface'
+import Action, { RecordActionResponse } from './backend/actions/action.interface'
 import { DEFAULT_PATHS } from './constants'
 
 import loginTemplate from './frontend/login-template'
