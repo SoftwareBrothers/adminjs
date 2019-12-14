@@ -9,4 +9,5 @@
  * { x: 1, y: undefined } // error
  */
 
-export type PartialRecordWithValues<K, V = string> = { [key in keyof K]?: V } & { [key: string]: V };
+export type PartialRecordWithValues<K, V = string> =
+  { [key in keyof K]?: V } & { [key: string]: V };

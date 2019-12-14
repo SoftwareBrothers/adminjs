@@ -232,7 +232,7 @@ export interface AdminBroOptionsWithDefault extends AdminBroOptions {
     handler?: DashboardHandler;
     component?: string;
   };
-  branding: BrandingOptions & Required<Pick<BrandingOptions, "softwareBrothers" | "companyName">>;
+  branding: BrandingOptions & Required<Pick<BrandingOptions, 'softwareBrothers' | 'companyName'>>;
   assets: {
     styles: Array<string>;
     scripts: Array<string>;
