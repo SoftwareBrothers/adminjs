@@ -1,5 +1,5 @@
 import React, { ReactNode, MouseEvent } from 'react'
-import * as flat from 'flat'
+import { flatten, unflatten } from 'flat'
 
 import PropertyInEdit from '../../ui/property-in-edit'
 import Column from '../../ui/column'
@@ -9,6 +9,11 @@ import StyledSection from '../../ui/styled-section'
 import PropertyJSON from '../../../../backend/decorators/property-json.interface'
 import RecordJSON from '../../../../backend/decorators/record-json.interface'
 import { StyledButton } from '../../ui'
+import updateParamsArray from './update-params-array'
+
+const normalizeParams = (params: RecordJSON['params']): RecordJSON['params'] => (
+  flatten<string, any>(unflatten(params, { overwrite: true }))
+)
 
 type Props = {
   property: PropertyJSON;
@@ -27,13 +32,14 @@ export default class Edit extends React.Component<Props> {
     const { property, record, onChange } = this.props
     const items = convertParamsToArrayItems(property, record)
     const newRecord = { ...record }
-    newRecord.params = flat.flatten({
-      ...(flat.unflatten(newRecord.params) as object), // oterwise yarn types is not working
+    newRecord.params = normalizeParams({
+      ...newRecord.params, // oterwise yarn types is not working
       [property.name]: [
         ...items,
         property.subProperties.length ? {} : '',
       ],
     })
+    console.log(newRecord.params)
     onChange(newRecord)
     event.preventDefault()
     return false
@@ -44,12 +50,12 @@ export default class Edit extends React.Component<Props> {
     const items = convertParamsToArrayItems(property, record)
     const newItems = [...items]
     newItems.splice(i, 1)
-
     const newRecord = { ...record }
-    newRecord.params = flat.flatten({
-      ...(flat.unflatten(newRecord.params) as object), // oterwise yarn types is not working
-      [property.name]: newItems,
-    })
+
+    newRecord.params = updateParamsArray(
+      newRecord.params, property.name, newItems,
+    )
+
     onChange(newRecord)
     event.preventDefault()
     return false
