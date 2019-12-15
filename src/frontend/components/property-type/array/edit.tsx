@@ -39,7 +39,6 @@ export default class Edit extends React.Component<Props> {
         property.subProperties.length ? {} : '',
       ],
     })
-    console.log(newRecord.params)
     onChange(newRecord)
     event.preventDefault()
     return false
