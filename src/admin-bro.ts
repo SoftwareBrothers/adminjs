@@ -13,7 +13,7 @@ import ConfigurationError from './backend/utils/configuration-error'
 import ResourcesFactory from './backend/utils/resources-factory'
 import userComponentsBunlder from './backend/bundler/user-components-bundler'
 import { RouterType } from './backend/router'
-import Action, { RecordActionResponse, ActionResponse } from './backend/actions/action.interface'
+import Action, { RecordActionResponse } from './backend/actions/action.interface'
 import { DEFAULT_PATHS } from './constants'
 
 import loginTemplate from './frontend/login-template'
@@ -156,7 +156,10 @@ class AdminBro {
 
     const defaultLogo = `${this.options.rootPath}/frontend/assets/logo-mini.svg`
     this.options.branding = this.options.branding || {}
-    this.options.branding.logo = this.options.branding.logo || defaultLogo
+    this.options.branding.logo = this.options.branding.logo !== undefined
+      ? this.options.branding.logo
+      : defaultLogo
+
     const { databases, resources } = this.options
     const resourcesFactory = new ResourcesFactory(this, AdminBro.registeredAdapters)
     this.resources = resourcesFactory.buildResources({ databases, resources })
