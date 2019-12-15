@@ -34,7 +34,7 @@ describe('Edit', () => {
 
   context('Property with a string array', () => {
     beforeEach(async () => {
-      property = await factory.build('PropertyJSON', {
+      property = await factory.build<PropertyJSON>('PropertyJSON', {
         name: propertyName,
         isArray: true,
       })
@@ -42,7 +42,7 @@ describe('Edit', () => {
 
     context('no items inside', () => {
       beforeEach(async () => {
-        record = await factory.build('RecordJSON', {
+        record = await factory.build<RecordJSON>('RecordJSON', {
           params: {},
         })
       })
@@ -71,7 +71,7 @@ describe('Edit', () => {
     context('2 items inside', () => {
       const values = ['element1', 'element2']
       beforeEach(async () => {
-        record = await factory.build('RecordJSON', { params: {
+        record = await factory.build<RecordJSON>('RecordJSON', { params: {
           [`${property.name}.0`]: values[0],
           [`${property.name}.1`]: values[1],
         } })

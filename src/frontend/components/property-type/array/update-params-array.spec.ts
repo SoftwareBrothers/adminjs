@@ -2,7 +2,7 @@ import { expect } from 'chai'
 
 import updateParamsArray from './update-params-array'
 
-describe.only('updateParamsArray', () => {
+describe('updateParamsArray', () => {
   context('nested array', function () {
     beforeEach(function () {
       this.params = {

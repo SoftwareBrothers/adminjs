@@ -2,7 +2,6 @@ import React, { ReactNode } from 'react'
 import { withRouter } from 'react-router-dom'
 
 import { RouteComponentProps } from 'react-router'
-import { flatten, unflatten } from 'flat'
 import PropertyType from '../property-type'
 import WrapperBox from '../ui/wrapper-box'
 import StyledButton from '../ui/styled-button'

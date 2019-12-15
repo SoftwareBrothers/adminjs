@@ -1,4 +1,3 @@
-import * as _ from 'lodash'
 import sinon from 'sinon'
 import ViewHelpers from '../../../src/backend/utils/view-helpers'
 

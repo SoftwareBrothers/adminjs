@@ -9,4 +9,9 @@ declare module 'factory-girl' {
     name: string,
     attrs?: Partial<T>
   ): Promise<T>;
+
+  function sequence<T>(
+    name: string,
+    generator: (i: number) => T,
+  )
 }
