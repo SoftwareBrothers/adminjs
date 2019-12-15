@@ -10,6 +10,7 @@ import withNotice, { AddNoticeProps } from '../../store/with-notice'
 import { ActionProps } from './action.props'
 import { PropertyPlace } from '../../../backend/decorators/property-json.interface'
 import RecordJSON from '../../../backend/decorators/record-json.interface'
+import recordToFormData from './record-to-form-data'
 
 type State = {
   record: RecordJSON;
@@ -64,12 +65,8 @@ class New extends React.Component<ActionProps & AddNoticeProps & RouteComponentP
     event.preventDefault()
     const { resource, history, addNotice } = this.props
     const { record } = this.state
-    const { params } = record
 
-    const formData = new FormData()
-    Object.entries(params).forEach(([key, value]) => {
-      formData.set(key, value)
-    })
+    const formData = recordToFormData(record)
 
     this.setState({ loading: true })
     this.api.resourceAction({

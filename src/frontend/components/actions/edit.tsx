@@ -2,6 +2,7 @@ import React, { ReactNode } from 'react'
 import { withRouter } from 'react-router-dom'
 
 import { RouteComponentProps } from 'react-router'
+import { flatten, unflatten } from 'flat'
 import PropertyType from '../property-type'
 import WrapperBox from '../ui/wrapper-box'
 import StyledButton from '../ui/styled-button'
@@ -10,6 +11,7 @@ import withNotice, { AddNoticeProps } from '../../store/with-notice'
 import RecordJSON from '../../../backend/decorators/record-json.interface'
 import { ActionProps } from './action.props'
 import { PropertyPlace } from '../../../backend/decorators/property-json.interface'
+import recordToFormData from './record-to-form-data'
 
 /**
  * @name EditAction
@@ -54,10 +56,7 @@ class Edit extends React.Component<ActionProps & RouteComponentProps & AddNotice
     const { resource, history, addNotice } = this.props
     const { record } = this.state
 
-    const formData = new FormData()
-    Object.entries(record.params).forEach(([key, value]) => {
-      formData.set(key, value)
-    })
+    const formData = recordToFormData(record)
 
     this.setState({ loading: true })
 
