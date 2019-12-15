@@ -10,6 +10,7 @@ Started since version 0.9.5
 
 ### Added
 
+* add option to hide logo [PR: #226]
 * add drop-area component
 * change new and update actions to receive FormData
 * add header option to ApiClient
@@ -24,6 +25,10 @@ Started since version 0.9.5
 * upgrade typescript to 3.7.3
 * add option to pass any notice message in Action Response
 * extend ValidationError to hold "base error" which if for entire record - not only for a particular property
+
+### Fixed
+
+* showing validation errors for nested mongoose fields [#200, #199]
 
 ## 1.4.2 - 2019-11-21
 
