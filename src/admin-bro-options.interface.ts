@@ -3,6 +3,7 @@ import BaseDatabase from './backend/adapters/base-database'
 import { PageContext } from './backend/actions/action.interface'
 import { ResourceOptions } from './backend/decorators/resource-options.interface'
 import { colors, sizes, fonts, breakpoints } from './frontend/styles/variables'
+import { NonNullishPartialRecord } from './utils/non-nullish-partial-record.type'
 
 /**
  * AdminBroOptions
@@ -181,9 +182,9 @@ export type VersionProps = {
  */
 export type BrandingOptions = {
   /**
-   * URL to a logo.
+   * URL to a logo, or `false` if you want to hide the default one.
    */
-  logo?: string;
+  logo?: string | false;
   /**
    * Name of your company, which will replace "AdminBro".
    */
@@ -192,10 +193,10 @@ export type BrandingOptions = {
    * CSS theme.
    */
   theme?: {
-    colors?: typeof colors;
-    sizes?: typeof sizes;
-    fonts?: typeof fonts;
-    breakpoints?: typeof breakpoints;
+    colors?: NonNullishPartialRecord<typeof colors>;
+    sizes?: NonNullishPartialRecord<typeof sizes>;
+    fonts?: NonNullishPartialRecord<typeof fonts>;
+    breakpoints?: NonNullishPartialRecord<typeof breakpoints>;
   };
   /**
    * Flag indicates if `SoftwareBrothers` tiny hart icon should be visible on the bottom sidebar.
@@ -231,10 +232,7 @@ export interface AdminBroOptionsWithDefault extends AdminBroOptions {
     handler?: DashboardHandler;
     component?: string;
   };
-  branding: BrandingOptions & {
-    softwareBrothers: boolean;
-    companyName: string;
-  };
+  branding: BrandingOptions & Required<Pick<BrandingOptions, 'softwareBrothers' | 'companyName'>>;
   assets: {
     styles: Array<string>;
     scripts: Array<string>;
