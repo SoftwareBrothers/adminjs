@@ -66,7 +66,7 @@ const Login: React.FC<Props> = (props) => {
                 <input type="text" name="email" id="email" placeholder="Your Email Address" className="input" />
               </PropertyInEdit>
               <PropertyInEdit property={password}>
-                <input type="password" name="password" id="password" placeholder="Password" className="input" />
+                <input type="password" name="password" id="password" placeholder="Password" className="input" autoComplete="new-password"/>
               </PropertyInEdit>
               <StyledButton type="submit" className="is-primary is-fullwidth" style={{ marginTop: 40 }}>
                 Login
