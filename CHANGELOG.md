@@ -16,6 +16,7 @@ Started since version 0.9.5
 * add header option to ApiClient
 * add isDisabled option to PropertyOptions
 * add favicon to the branding options
+* added source maps when NODE_ENV is not production
 
 ### Changed
 
