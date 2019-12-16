@@ -67,7 +67,7 @@ export default class Edit extends React.Component<PropertyProps> {
 
   handleChange(value): void {
     const { onChange, property } = this.props
-    onChange(property.name, new Date(value))
+    onChange(property.name, value)
   }
 
   render(): ReactNode {
