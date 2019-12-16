@@ -3,6 +3,7 @@ import { outPath as COMPONENT_BUNDLE_PATH } from './bundler/user-components-bund
 
 import AppController from './controllers/app-controller'
 import ApiController from './controllers/api-controller'
+import env from './bundler/bundler-env'
 
 const ASSETS_ROOT = `${__dirname}/../frontend/assets/`
 
@@ -66,10 +67,10 @@ const Router: RouterType = {
     src: path.join(ASSETS_ROOT, 'fonts/icomoon.woff'),
   }, {
     path: '/frontend/assets/app.bundle.js',
-    src: path.join(ASSETS_ROOT, 'scripts/app-bundle.js'),
+    src: path.join(ASSETS_ROOT, `scripts/app-bundle.${env}.js`),
   }, {
     path: '/frontend/assets/global.bundle.js',
-    src: path.join(ASSETS_ROOT, 'scripts/global-bundle.js'),
+    src: path.join(ASSETS_ROOT, `scripts/global-bundle.${env}.js`),
   }, {
     path: '/frontend/assets/logo.svg',
     src: [ASSETS_ROOT, 'images/logo.svg'].join('/'),

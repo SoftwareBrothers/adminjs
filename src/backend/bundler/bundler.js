@@ -21,6 +21,10 @@ async function build({
     outputOptions.file = file
   }
 
+  if (!minify) {
+    outputOptions.sourcemap = 'inline'
+  }
+
   if (watch) {
     const bundle = await rollup.rollup(inputOptions)
     const spinner = ora('Bundling files')
@@ -50,7 +54,7 @@ async function build({
     return bundle.write(outputOptions)
   }
   const bundled = await bundle.generate(outputOptions)
-  return bundled.output[0].code
+  return bundled.output[0]
 }
 
 module.exports = build

@@ -8,6 +8,8 @@ script:
 - yarn run lint
 - yarn codecov
 - yarn build
+- NODE_ENV=production ONCE=true yarn bundle
+- NODE_ENV=dev ONCE=true yarn bundle
 - yarn types
 deploy:
   skip_cleanup: true

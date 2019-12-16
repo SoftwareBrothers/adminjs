@@ -4,6 +4,7 @@ import * as util from 'util'
 import bundler from './bundler'
 import generateEntry from './generate-user-component-entry'
 import { ADMIN_BRO_TMP_DIR } from '../../constants'
+import env from './bundler-env'
 
 const entryPath = path.join(ADMIN_BRO_TMP_DIR, '.entry.js')
 const outPath = path.join(ADMIN_BRO_TMP_DIR, 'bundle.js')
@@ -30,13 +31,21 @@ async function build(admin, { write = false, watch = false } = {}): Promise<stri
 
   await util.promisify(fs.writeFile)(entryPath, entryFile)
 
-  return bundler({
+  const output = await bundler({
     name: 'AdminBroCustom',
     input: entryPath,
     watch,
     file: write ? outPath : null,
-    minify: process.env.NODE_ENV === 'production',
+    minify: env === 'production',
   })
+
+  let jsOutput = output.code
+  if (output.map) {
+    jsOutput += `
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,${Buffer.from(JSON.stringify(output.map)).toString('base64')}
+    `
+  }
+  return jsOutput
 }
 
 export {

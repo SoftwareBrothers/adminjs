@@ -8,15 +8,17 @@
 const runtime = require('@babel/plugin-transform-runtime')
 const styled = require('babel-plugin-styled-components')
 const bundler = require('../src/backend/bundler/bundler')
+const env = require('../src/backend/bundler/bundler-env')
+
+const once = !!process.env.ONCE
 
 async function build() {
   bundler({
     name: 'AdminBro',
     input: `${__dirname}/../src/frontend/bundle-entry.jsx`,
-    file: `${__dirname}/../src/frontend/assets/scripts/app-bundle.js`,
-    minify: !process.env.SKIP_MINIFY,
-    // minify: false,
-    watch: true,
+    file: `${__dirname}/../src/frontend/assets/scripts/app-bundle.${env}.js`,
+    minify: env === 'production',
+    watch: !once,
     babelConfig: {
       plugins: [runtime, styled],
       runtimeHelpers: true,

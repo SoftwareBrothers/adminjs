@@ -17,6 +17,7 @@ const { terser } = require('rollup-plugin-terser')
 
 const React = require('react')
 const ReactDOM = require('react-dom')
+const env = require('../src/backend/bundler/bundler-env')
 
 const run = async () => {
   const inputOptions = {
@@ -27,7 +28,7 @@ const run = async () => {
         jsnext: true,
       }),
       replace({
-        'process.env.NODE_ENV': JSON.stringify('production'),
+        'process.env.NODE_ENV': JSON.stringify(env),
         'process.env.IS_BROWSER': 'true',
         'process.stderr.fd': 'false',
       }),
@@ -43,7 +44,7 @@ const run = async () => {
       }),
       globals(),
       builtins(),
-      terser(),
+      ...(env === 'production' ? [terser()] : []),
     ],
   }
   const bundle = await rollup.rollup(inputOptions)
@@ -63,7 +64,7 @@ const run = async () => {
       'react-router': 'ReactRouter',
       'react-router-dom': 'ReactRouterDOM',
     },
-    file: `${__dirname}/../src/frontend/assets/scripts/global-bundle.js`,
+    file: `${__dirname}/../src/frontend/assets/scripts/global-bundle.${env}.js`,
   })
 }
 
