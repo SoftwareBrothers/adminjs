@@ -26,6 +26,7 @@
       "src/**/*.spec.tsx",
       "src/**/*.spec.jsx",
       "src/**/*.factory.ts",
+      "src/backend/bundler/user-components-bundler.ts",
       "docs",
       "coverage",
       "types",
@@ -40,8 +41,7 @@
       ".jsx",
       ".tsx",
       ".ts"
-    ],
-    "source-map": false
+    ]
   },
   "repository": {
     "type": "git",
