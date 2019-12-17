@@ -2,7 +2,7 @@ import factory from 'factory-girl'
 import { expect } from 'chai'
 
 import recordToFormData from './record-to-form-data'
-import '../spec/record.json.factory'
+import '../spec/record-json.factory'
 import RecordJSON from '../../../backend/decorators/record-json.interface'
 
 describe('recordToFormData', () => {
