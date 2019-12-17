@@ -1,6 +1,6 @@
 {
   "name": "admin-bro",
-  "version": "1.5.0-beta.10",
+  "version": "1.5.0-beta.11",
   "description": "Admin panel for apps written in node.js",
   "main": "index.js",
   "types": "index.d.ts",
@@ -21,6 +21,11 @@
   "nyc": {
     "exclude": [
       "spec",
+      "src/**/*.spec.ts",
+      "src/**/*.spec.js",
+      "src/**/*.spec.tsx",
+      "src/**/*.spec.jsx",
+      "src/**/*.factory.ts",
       "docs",
       "coverage",
       "types",
