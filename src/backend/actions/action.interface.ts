@@ -40,7 +40,6 @@ export type ActionContext = {
   currentAdmin?: CurrentAdmin;
 }
 
-
 export type PageContext = {
   /**
    * current instance of AdminBro. You may use it to fetch other Resources by their names:
@@ -139,9 +138,12 @@ export type RecordActionResponse = ActionResponse & {
 }
 
 /**
+ * Type of a handler function. It has to return response compatible with {@link ActionResponse}
+ *
  * @alias ActionHandler
  * @async
  * @memberof Action
+ * @returns {Promise<T>}
  */
 export type ActionHandler<T> = (
   request: ActionRequest,
@@ -393,7 +395,8 @@ export default interface Action <T extends ActionResponse> {
    * handler function which will be invoked by {@link ApiController#resourceAction}
    * or {@link ApiController#recordAction} when user visits clicks action link.
    *
-   * If you are defining this action for a record it has to return {@link RecordActionResponse}.
+   * If you are defining this action for a record it has to return {@link ActionResponse} with
+   * record property defined.
    *
    * ```javascript
    * // Handler of a 'record' action

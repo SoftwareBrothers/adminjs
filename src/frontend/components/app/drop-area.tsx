@@ -95,36 +95,43 @@ const inKb = (size: string | number): string => {
  * @param {FileList | null} files
  * @returns {void}
  * @memberof DropArea
+ * @alias OnUpload
  */
 type OnUpload = (files: FileList | null) => void
+
+/**
+ * @memberof DropArea
+ * @alias FileObject
+ */
+type FileObject = {
+  /**
+   * File size in bytes
+   */
+  size: number;
+  /**
+   * Original file name
+   */
+  name: string;
+  /**
+   * Mime Type
+   */
+  type?: string;
+  /**
+   * Actual file buffer.
+   */
+  file?: Buffer;
+};
 
 /**
  * @memberof DropArea
  */
 type Props = {
   /**
-   * Data fetched from [FileList](https://developer.mozilla.org/en-US/docs/Web/API/FileList) element.
+   * When given UI will show that file of this name and this size has been set.
    */
-  fileObject?: {
-    /**
-     * File size in bytes
-     */
-    size: number;
-    /**
-     * Original file name
-     */
-    name: string;
-    /**
-     * Mime Type
-     */
-    type: string;
-    /**
-     * Actual file buffer.
-     */
-    file: Buffer;
-  };
+  fileObject?: FileObject;
   /**
-   * Callback performed when the file is dropped/picked
+   * Callback performed when the file is dropped/selected
    */
   onUpload: OnUpload;
   /**

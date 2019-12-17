@@ -159,6 +159,12 @@ export type VersionProps = {
   app?: string;
 }
 
+export type CSSTheme = {
+  colors?: NonNullishPartialRecord<typeof colors>;
+  sizes?: NonNullishPartialRecord<typeof sizes>;
+  fonts?: NonNullishPartialRecord<typeof fonts>;
+  breakpoints?: NonNullishPartialRecord<typeof breakpoints>;
+};
 
 /**
  * Branding Options
@@ -192,12 +198,7 @@ export type BrandingOptions = {
   /**
    * CSS theme.
    */
-  theme?: {
-    colors?: NonNullishPartialRecord<typeof colors>;
-    sizes?: NonNullishPartialRecord<typeof sizes>;
-    fonts?: NonNullishPartialRecord<typeof fonts>;
-    breakpoints?: NonNullishPartialRecord<typeof breakpoints>;
-  };
+  theme?: CSSTheme;
   /**
    * Flag indicates if `SoftwareBrothers` tiny hart icon should be visible on the bottom sidebar.
    */
@@ -215,10 +216,6 @@ export type DashboardHandler = (
   context: PageContext,
 ) => Promise<any>
 
-/**
- * Interface of AdminBroOptions filled with default values
- * @private
- */
 export interface AdminBroOptionsWithDefault extends AdminBroOptions {
   rootPath: string;
   logoutPath: string;
