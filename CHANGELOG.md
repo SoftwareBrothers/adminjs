@@ -6,6 +6,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 Started since version 0.9.5
 
+## 1.5.1 - 2019-12-21
+
+### fixed
+
+* error when decorating nested properties [#220]
+
 ## 1.5.0 - 2019-12-17
 
 ### Added
