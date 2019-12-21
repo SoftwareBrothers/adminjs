@@ -439,7 +439,7 @@ export default interface Action <T extends ActionResponse> {
   before?: Before;
   /**
    * After action hook. When it is given - it is performed on the returned,
-   * by handler the {@link Action.handler}, object.
+   * by {@link Action.handler handler} function object.
    *
    * You can use it to (just an idea)
    * - create log of changes done in the app

@@ -1,14 +1,15 @@
 module.exports = {
     'parser': '@typescript-eslint/parser',
-    'plugins': ['@typescript-eslint'],
+    'plugins': ['@typescript-eslint', 'mocha'],
     'env': {
         'es6': true,
         'node': true,
-        'mocha': true
+        'mocha': true,
     },
     'extends': [
         'airbnb',
-        'plugin:@typescript-eslint/recommended'
+        'plugin:@typescript-eslint/recommended',
+        'plugin:mocha/recommended'
     ],
     'parserOptions': {
         'ecmaVersion': 2018,
@@ -21,18 +22,9 @@ module.exports = {
             'error',
             2
         ],
-        'linebreak-style': [
-            'error',
-            'unix'
-        ],
-        'quotes': [
-            'error',
-            'single'
-        ],
-        'semi': [
-            'error',
-            'never'
-        ],
+        'linebreak-style': ['error', 'unix'],
+        'quotes': ['error', 'single'],
+        'semi': ['error', 'never'],
         'import/no-unresolved': 'off',
         'no-underscore-dangle': 'off',
         'guard-for-in': 'off',

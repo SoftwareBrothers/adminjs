@@ -143,8 +143,6 @@ class PropertyDecorator {
     return this.property.isVisible()
   }
 
-  // TODO: add option to pass function to isVisible
-
   /**
    * Position of the field
    *
@@ -197,19 +195,42 @@ class PropertyDecorator {
       type: this.type(),
       reference: this.property.reference(),
       components: this.options.components,
-      subProperties: this.property.subProperties().map((subProperty) => {
-        const optionKey = `${this.property.name()}.${subProperty.name()}`
-        const decorated = new PropertyDecorator({
-          property: subProperty,
-          admin: this._admin,
-          options: this._resource.options
-                   && this._resource.options.properties
-                   && this._resource.options.properties[optionKey],
-          resource: this._resource,
-        })
-        return decorated.toJSON()
-      }),
+      subProperties: this.subProperties().map(subProperty => subProperty.toJSON()),
       isArray: this.property.isArray(),
+    }
+  }
+
+  /**
+   * Decorates subproperties
+   *
+   * @return  {Array<PropertyDecorator>}  decorated subproperties
+   */
+  subProperties(): Array<PropertyDecorator> {
+    return this.property.subProperties().map((subProperty) => {
+      const decorated = new PropertyDecorator({
+        property: subProperty,
+        admin: this._admin,
+        options: this.getOptionsForSubProperty(subProperty),
+        resource: this._resource,
+      })
+      return decorated
+    })
+  }
+
+  /**
+   * Returns PropertyOptions passed by the user for a subProperty. Furthermore
+   * it changes property name to the nested property key.
+   *
+   * @param   {BaseProperty}     subProperty
+   * @return  {PropertyOptions}
+   * @private
+   */
+  private getOptionsForSubProperty(subProperty: BaseProperty): PropertyOptions {
+    const optionKey = `${this.name()}.${subProperty.name()}`
+    const propertyOptions = (this._resource.options || {}).properties || {}
+    return {
+      ...propertyOptions[optionKey],
+      name: optionKey,
     }
   }
 }
