@@ -5,15 +5,15 @@ import recordToFormData from './record-to-form-data'
 import '../spec/record-json.factory'
 import RecordJSON from '../../../backend/decorators/record-json.interface'
 
-describe('recordToFormData', () => {
-  it('converts objects to empty string', async () => {
+describe('recordToFormData', function () {
+  it('converts objects to empty string', async function () {
     const record = await factory.build<RecordJSON>('RecordJSON', { params: {
       someEmptyObject: {},
     } })
     expect(recordToFormData(record).get('someEmptyObject')).to.equal('')
   })
 
-  it('removes duplicated root keys for nested arrays', async () => {
+  it('removes duplicated root keys for nested arrays', async function () {
     const params = {
       'Item.0': '',
       'Item.0.imageVariants.0.imageURL': 'some-value',

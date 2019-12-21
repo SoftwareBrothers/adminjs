@@ -15,10 +15,11 @@ import ItemComponent from '../default-type/edit'
 
 const AddNewItemText = 'Add new item'
 
-describe('Edit', () => {
+describe('Edit', function () {
   const propertyName = 'arrayField'
   let property: PropertyJSON
   let record: RecordJSON
+  // eslint-disable-next-line mocha/no-setup-in-describe
   const onChange = sinon.spy()
 
   const renderTestSubject = (prop: PropertyJSON, rec: RecordJSON): RenderResult => render(
@@ -32,16 +33,16 @@ describe('Edit', () => {
     </TestContextProvider>,
   )
 
-  context('Property with a string array', () => {
-    beforeEach(async () => {
+  context('Property with a string array', function () {
+    beforeEach(async function () {
       property = await factory.build<PropertyJSON>('PropertyJSON', {
         name: propertyName,
         isArray: true,
       })
     })
 
-    context('no items inside', () => {
-      beforeEach(async () => {
+    context('no items inside', function () {
+      beforeEach(async function () {
         record = await factory.build<RecordJSON>('RecordJSON', {
           params: {},
         })
@@ -68,16 +69,15 @@ describe('Edit', () => {
       })
     })
 
-    context('2 items inside', () => {
+    context('2 items inside', function () {
       const values = ['element1', 'element2']
-      beforeEach(async () => {
+
+      it('2 <input> tags already filed with values', async function () {
         record = await factory.build<RecordJSON>('RecordJSON', { params: {
           [`${property.name}.0`]: values[0],
           [`${property.name}.1`]: values[1],
         } })
-      })
 
-      it('2 <input> tags already filed with values', async function () {
         const { findByDisplayValue } = renderTestSubject(property, record)
 
         expect(findByDisplayValue(values[0])).not.to.be.null

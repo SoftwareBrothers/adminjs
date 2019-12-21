@@ -92,7 +92,6 @@ const inKb = (size: string | number): string => {
 }
 
 /**
- * @param {FileList | null} files
  * @returns {void}
  * @memberof DropArea
  * @alias OnUpload

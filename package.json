@@ -1,6 +1,6 @@
 {
   "name": "admin-bro",
-  "version": "1.5.0",
+  "version": "1.5.1",
   "description": "Admin panel for apps written in node.js",
   "main": "index.js",
   "types": "index.d.ts",
@@ -118,6 +118,7 @@
     "eslint-config-airbnb": "^17.1.0",
     "eslint-plugin-import": "^2.14.0",
     "eslint-plugin-jsx-a11y": "^6.2.1",
+    "eslint-plugin-mocha": "^6.2.2",
     "eslint-plugin-react": "^7.12.4",
     "factory-girl": "^5.0.4",
     "istanbul": "^0.4.5",
