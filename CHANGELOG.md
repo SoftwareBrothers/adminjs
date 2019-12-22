@@ -6,6 +6,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 Started since version 0.9.5
 
+## 1.6.0 - unreleased
+
+### Added
+
+* added ErrorMessageBox component
+* added custom actions in the sidebar
+
+### Changed
+
+* change interface of ApiClient methods: change from `payload` to `data` and reuse axios types
+
+### Fixed
+
+* fixed Placeholder typo (was Placehoder)
+
 ## 1.5.1 and 1.5.2 - 2019-12-21
 
 ### fixed

@@ -42,15 +42,27 @@ class Page extends React.Component<Props, State> {
 
     const currentPage = pages.find(page => page.name === pageName)
 
-    if (!currentPage || !isClient) {
+    if (!currentPage) {
       return (
-        <ErrorMessageBox title="No component specified">
-          <p>You have to specify component</p>
+        <ErrorMessageBox title="There is no page of given name">
+          <p>
+            Page:
+            <b>{` "${pageName}" `}</b>
+            does not exist.
+          </p>
         </ErrorMessageBox>
       )
     }
 
     const Component = AdminBro.UserComponents[currentPage.component]
+
+    if (!Component || !isClient) {
+      return (
+        <ErrorMessageBox title="No component specified">
+          <p>You have to specify component which will render this Page</p>
+        </ErrorMessageBox>
+      )
+    }
 
     return (
       <ErrorBoundary>
