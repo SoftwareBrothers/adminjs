@@ -8,7 +8,12 @@ import { colors, sizes, fonts, breakpoints } from './types/src/frontend/styles/v
 export { default as Router } from './types/src/backend/router'
 export { default as Filter } from './types/src/backend/utils/filter'
 export { default as ValidationError } from './types/src/backend/utils/validation-error'
-export { default as ApiClient } from './types/src/frontend/utils/api-client'
+export {
+  default as ApiClient,
+  RecordActionAPIParams,
+  ResourceActionAPIParams,
+  GetPageAPIParams,
+} from './types/src/frontend/utils/api-client'
 
 export { CurrentAdmin } from './types/src/current-admin.interface'
 export { PropertyType } from './types/src/backend/adapters/base-property'
