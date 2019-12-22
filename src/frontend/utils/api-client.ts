@@ -132,6 +132,7 @@ class ApiClient {
       url: `/api/resources/${resourceId}/actions/${actionName}`,
       method: data ? 'POST' : 'GET',
       ...axiosParams,
+      data,
     })
     checkResponse(response)
     return response
@@ -149,6 +150,7 @@ class ApiClient {
       url: `/api/resources/${resourceId}/records/${recordId}/${actionName}`,
       method: data ? 'POST' : 'GET',
       ...axiosParams,
+      data,
     })
     checkResponse(response)
     return response
