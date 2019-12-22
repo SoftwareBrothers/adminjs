@@ -21,7 +21,7 @@ const SidebarPages: React.FC<Props> = (props) => {
   const { pages } = props
   const h = new ViewHelpers()
 
-  if (!pages) {
+  if (!pages || !pages.length) {
     return (<></>)
   }
 
