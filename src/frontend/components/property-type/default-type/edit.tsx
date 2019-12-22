@@ -48,8 +48,10 @@ class Edit extends React.Component<CombinedProps> {
     }
     return (
       <StyledInput
-        type="text"
+        as="textarea"
+        // type="text"
         className="input"
+        rows={(value.match(/\n/g) || []).length + 1}
         id={property.name}
         name={property.name}
         onChange={this.handleInputChange}
