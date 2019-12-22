@@ -10,6 +10,7 @@ const expectedResult = {
   assetPath: 'assetPath',
   listUrl: 'listUrl',
   dashboardUrl: 'dashboardUrl',
+  pageUrl: 'pageUrl',
 }
 
 export default (): ViewHelpers => (
@@ -27,6 +28,7 @@ export default (): ViewHelpers => (
     assetPath: sinon.stub().returns(expectedResult.assetPath),
     listUrl: sinon.stub().returns(expectedResult.listUrl),
     dashboardUrl: sinon.stub().returns(expectedResult.dashboardUrl),
+    pageUrl: sinon.stub().returns(expectedResult.pageUrl),
   }
 )
 

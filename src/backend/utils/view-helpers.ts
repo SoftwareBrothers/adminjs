@@ -93,6 +93,16 @@ class ViewHelpers {
   }
 
   /**
+   * Returns URL for given page name
+   * @param {string} pageName       page name which is a unique key specified in
+   *                                {@link AdminBroOptions}
+   * @return {string}
+   */
+  pageUrl(pageName: string): string {
+    return this.urlBuilder(['pages', pageName])
+  }
+
+  /**
    * Returns resourceAction url
    *
    * @param   {ResourceActionParams}  options

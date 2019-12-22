@@ -66,6 +66,10 @@ export default interface AdminBroOptions {
   databases?: Array<any>;
 
   /**
+   * List of custom pages which will be visible below all resources
+   */
+  pages?: Record<string, AdminPage>;
+  /**
    * Array of all Resources which are supported by AdminBro via adapters.
    * You can pass either resource or resource with an options and thus modify it.
    *
@@ -82,7 +86,7 @@ export default interface AdminBroOptions {
     /**
      * Handler function which is triggered in the api when user launches the dashboard.
      */
-    handler?: DashboardHandler;
+    handler?: PageHandler;
     /**
      * Bundled component name which should be rendered when user opens the dashboard
      */
@@ -210,7 +214,25 @@ export type BrandingOptions = {
   favicon?: string;
 }
 
-export type DashboardHandler = (
+/**
+ * Object describing regular page in AdminBro
+ *
+ * @alias AdminPage
+ * @memberof AdminBroOptions
+ */
+export type AdminPage = {
+  handler?: PageHandler;
+  component: string;
+  label?: string;
+}
+
+/**
+ * Function which is invoked when user enters given AdminPage
+ *
+ * @alias AdminHandler
+ * @memberof AdminBroOptions
+ */
+export type PageHandler = (
   request: any,
   response: any,
   context: PageContext,
@@ -226,7 +248,7 @@ export interface AdminBroOptionsWithDefault extends AdminBroOptions {
     options: ResourceOptions;
   }>;
   dashboard: {
-    handler?: DashboardHandler;
+    handler?: PageHandler;
     component?: string;
   };
   branding: BrandingOptions & Required<Pick<BrandingOptions, 'softwareBrothers' | 'companyName'>>;
@@ -235,4 +257,5 @@ export interface AdminBroOptionsWithDefault extends AdminBroOptions {
     scripts: Array<string>;
     globalsFromCDN: boolean;
   };
+  pages: Record<string, AdminPage>;
 }

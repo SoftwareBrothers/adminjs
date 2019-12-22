@@ -38,6 +38,7 @@ const defaults: AdminBroOptionsWithDefault = {
     scripts: [],
     globalsFromCDN: false,
   },
+  pages: {},
 }
 
 type ActionsMap = {

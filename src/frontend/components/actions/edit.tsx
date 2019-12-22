@@ -63,7 +63,7 @@ class Edit extends React.Component<ActionProps & RouteComponentProps & AddNotice
       resourceId: resource.id,
       actionName: 'edit',
       recordId: record.id,
-      payload: formData,
+      data: formData,
       headers: { 'Content-Type': 'multipart/form-data' },
     }).then((response) => {
       if (response.data.notice) {

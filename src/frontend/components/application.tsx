@@ -2,13 +2,13 @@ import React from 'react'
 import { Switch, Route } from 'react-router-dom'
 import styled, { createGlobalStyle } from 'styled-components'
 
-import ViewHelpers from '../../../backend/utils/view-helpers'
-import Sidebar from './sidebar'
-import Topbar from './topbar'
+import ViewHelpers from '../../backend/utils/view-helpers'
+import Sidebar from './app/sidebar'
+import Topbar from './app/topbar'
 
 import {
-  Dashboard, ResourceAction, RecordAction,
-} from '../routes'
+  Dashboard, ResourceAction, RecordAction, Page,
+} from './routes'
 
 const GlobalStyle = createGlobalStyle`
   html, body, #app {
@@ -53,9 +53,11 @@ const App: React.FC = () => {
   const resourceId = ':resourceId'
   const actionName = ':actionName'
   const recordId = ':recordId'
+  const pageName = ':pageName'
 
   const recordActionUrl = h.recordActionUrl({ resourceId, recordId, actionName })
   const resourceActionUrl = h.resourceActionUrl({ resourceId, actionName })
+  const pageUrl = h.pageUrl(pageName)
 
   return (
     <React.Fragment>
@@ -68,6 +70,7 @@ const App: React.FC = () => {
             <Route path={h.dashboardUrl()} exact component={Dashboard} />
             <Route path={resourceActionUrl} exact component={ResourceAction} />
             <Route path={recordActionUrl} exact component={RecordAction} />
+            <Route path={pageUrl} exact component={Page} />
           </Switch>
         </Core>
       </ApplicationWrapper>

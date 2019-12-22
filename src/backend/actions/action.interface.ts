@@ -40,6 +40,12 @@ export type ActionContext = {
   currentAdmin?: CurrentAdmin;
 }
 
+/**
+ * Context object passed to a PageHandler
+ *
+ * @alias PageContext
+ * @memberof AdminBroOptions
+ */
 export type PageContext = {
   /**
    * current instance of AdminBro. You may use it to fetch other Resources by their names:

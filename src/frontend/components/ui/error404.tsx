@@ -5,6 +5,43 @@ type Props = {
   children: ReactNode;
 }
 
+/**
+ * @memberof ErrorMessageBox
+ * @alias ErrorMessageBoxProps
+ */
+export type ErrorMessageBoxProps = {
+  title: string;
+  children: ReactNode;
+}
+
+/**
+ * @class
+ * Prints error message
+ *
+ * @component
+ * @example
+ * return (
+ * <ErrorMessageBox title={'Some error'}>
+ *   <p>Text below the title</p>
+ * </ErrorMessageBox>
+ * )
+ */
+const ErrorMessageBox: React.FC<ErrorMessageBoxProps> = (props) => {
+  const { children, title } = props
+  return (
+    <WrapperBox>
+      <WrapperBox border>
+        <div className="content has-text-centered">
+          <h3>{title}</h3>
+          <div>
+            {children}
+          </div>
+        </div>
+      </WrapperBox>
+    </WrapperBox>
+  )
+}
+
 const Error404: React.FC<Props> = (props) => {
   const { children } = props
   return (
@@ -64,4 +101,5 @@ export {
   NoResourceError,
   NoActionError,
   NoRecordError,
+  ErrorMessageBox,
 }

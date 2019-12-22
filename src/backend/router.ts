@@ -133,6 +133,23 @@ const Router: RouterType = {
     path: '/api/dashboard',
     Controller: ApiController,
     action: 'dashboard',
+  },
+  // Pages
+  {
+    method: 'GET',
+    path: '/pages/{pageName}',
+    Controller: AppController,
+    action: 'page',
+  }, {
+    method: 'GET',
+    path: '/api/pages/{pageName}',
+    Controller: ApiController,
+    action: 'page',
+  }, {
+    method: 'POST',
+    path: '/api/pages/{pageName}',
+    Controller: ApiController,
+    action: 'page',
   }],
 }
 

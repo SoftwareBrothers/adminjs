@@ -42,6 +42,15 @@ export default class AppController {
     return layoutTemplate(this._admin, this.currentAdmin, href)
   }
 
+  async page({ params }: ActionRequest): Promise<string> {
+    const { pageName } = params
+    if (!pageName) {
+      throw new Error('you have to give "pageName" in the request parameters')
+    }
+    const href = this.h.pageUrl(pageName)
+    return layoutTemplate(this._admin, this.currentAdmin, href)
+  }
+
   async bundleComponents(): Promise<string> {
     return componentsBundler(this._admin)
   }

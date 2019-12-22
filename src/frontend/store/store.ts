@@ -1,9 +1,16 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 import { createStore, combineReducers } from 'redux'
 import ResourceJSON from '../../backend/decorators/resource-json.interface'
-import { BrandingOptions, VersionProps } from '../../admin-bro-options.interface'
+import { BrandingOptions, VersionProps, AdminPage } from '../../admin-bro-options.interface'
 import { CurrentAdmin } from '../../current-admin.interface'
 import { DEFAULT_PATHS } from '../../constants'
+
+export const initializePages = (data: Array<AdminPage>): {
+  type: string; data: Array<AdminPage>;
+} => ({
+  type: 'PAGES_INITIALIZE',
+  data,
+})
 
 export const initializeResources = (data: Array<ResourceJSON>): {
   type: string; data: Array<ResourceJSON>;
@@ -113,6 +120,26 @@ const resourcesReducer = (
   }
 }
 
+export type PageJSON = {
+  name: string;
+  label: string;
+  component: AdminPage['component'];
+}
+
+const pagesReducer = (
+  state: Array<PageJSON> = [],
+  action: {
+    type: string;
+    data: Array<PageJSON>;
+  },
+) => {
+  switch (action.type) {
+  case 'PAGES_INITIALIZE':
+    return action.data
+  default: return state
+  }
+}
+
 const brandingReducer = (state = {}, action: {
   type: string;
   data: BrandingOptions;
@@ -208,6 +235,7 @@ export type ReduxState = {
   dashboard: DashboardInState;
   notices: Array<NoticeMessageInState>;
   versions: VersionProps;
+  pages: Array<PageJSON>;
 }
 
 const reducer = combineReducers<ReduxState>({
@@ -218,6 +246,7 @@ const reducer = combineReducers<ReduxState>({
   dashboard: dashboardReducer,
   notices: noticesReducer,
   versions: versionsReducer,
+  pages: pagesReducer,
 })
 
 export default (initialState = {}) => createStore(reducer, initialState)

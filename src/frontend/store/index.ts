@@ -4,12 +4,14 @@ import createStore, {
   initializeBranding,
   initializeDashboard,
   initializePaths,
+  initializePages,
   initializeSession,
   initializeVersions,
   ReduxState,
 } from './store'
 import AdminBro from '../../admin-bro'
 import { CurrentAdmin } from '../../current-admin.interface'
+import pagesToStore from './pages-to-store'
 
 const initializeStore = (admin: AdminBro, currentAdmin?: CurrentAdmin): Store<ReduxState> => {
   const store: Store<ReduxState> = createStore()
@@ -28,9 +30,12 @@ const initializeStore = (admin: AdminBro, currentAdmin?: CurrentAdmin): Store<Re
   ))
   store.dispatch(initializeBranding(admin.options.branding))
   const {
-    loginPath, logoutPath, rootPath, dashboard,
+    loginPath, logoutPath, rootPath, dashboard, pages,
   } = admin.options
 
+  const pagesArray = pagesToStore(pages)
+
+  store.dispatch(initializePages(pagesArray))
   store.dispatch(initializePaths({ loginPath, logoutPath, rootPath }))
   store.dispatch(initializeSession(currentAdmin))
   store.dispatch(initializeDashboard(dashboard))

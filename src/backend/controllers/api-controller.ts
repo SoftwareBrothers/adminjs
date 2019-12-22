@@ -168,11 +168,11 @@ class ApiController {
 
   /**
    * Gets optional data needed by the dashboard.
-   * To call it use {@link ApiClient#dashboard} method.
+   * To call it use {@link ApiClient#getDashboard} method.
    *
    * Handler function reponsible for a `.../api/dashboard`
    *
-   * @param   {any}  request
+   * @param   {ActionRequest}  request
    * @param   {any}  response
    *
    * @return  {Promise<any>}  action response
@@ -189,6 +189,38 @@ class ApiController {
     }
     return {
       message: 'You can override this method by setting up dashboard.handler fuction in AdminBro options',
+    }
+  }
+
+  /**
+   * Gets optional data needed by the page.
+   * To call it use {@link ApiClient#getPage} method.
+   *
+   * Handler function reponsible for a `.../api/pages/{pageName}`
+   *
+   * @param   {ActionRequest}  request
+   * @param   {any}  response
+   *
+   * @return  {Promise<any>}  action response
+   */
+  async page(request: any, response: any): Promise<any> {
+    const h = new ViewHelpers(this._admin)
+    const { pages } = this._admin.options
+    const { pageName } = request.params
+    const { handler } = (pages[pageName] || {})
+
+    if (handler) {
+      return handler(request, response, {
+        h,
+        currentAdmin: this.currentAdmin,
+        _admin: this._admin,
+      })
+    }
+    return {
+      message: [
+        'You can override this method by setting up pages[pageName].handler',
+        'fuction in AdminBro options',
+      ].join('\n'),
     }
   }
 }

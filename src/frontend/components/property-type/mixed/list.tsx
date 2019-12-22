@@ -17,7 +17,7 @@ export default class List extends React.PureComponent<Props & PropertyProps> {
     return (
       <React.Fragment>
         {property.subProperties.map(subProperty => (
-          <div>
+          <div key={subProperty.name}>
             <Label style={{ display: 'inline' }}>{`${subProperty.label}: `}</Label>
             <ItemComponent
               {...this.props}

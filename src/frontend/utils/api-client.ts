@@ -1,4 +1,4 @@
-import axios, { AxiosResponse, AxiosInstance } from 'axios'
+import axios, { AxiosResponse, AxiosInstance, AxiosRequestConfig } from 'axios'
 import RecordJSON from '../../backend/decorators/record-json.interface'
 import { RecordActionResponse, ActionResponse } from '../../backend/actions/action.interface'
 
@@ -22,6 +22,55 @@ const checkResponse = (response: AxiosResponse): void => {
     alert('Your session expired. You will be redirected to login screen')
     window.location.assign(loginUrl)
   }
+}
+
+/**
+ * @alias ResourceActionAPIParams
+ * @memberof ApiClient
+ * @extends AxiosRequestConfig
+ */
+export type ResourceActionAPIParams = AxiosRequestConfig & {
+  /**
+   * Id of a resource taken from {@link ResourceJSON}
+   */
+  resourceId: string;
+  /**
+   * Action name taken from  {@link ActionJSON}
+   */
+  actionName: string;
+}
+
+/**
+ * @alias RecordActionAPIParams
+ * @memberof ApiClient
+ * @extends AxiosRequestConfig
+ */
+export type RecordActionAPIParams = AxiosRequestConfig & {
+  /**
+   * Id of a record taken from {@link RecordJSON}
+   */
+  recordId: string;
+  /**
+   * Id of a resource taken from {@link ResourceJSON}
+   */
+  resourceId: string;
+  /**
+   * Action name taken from  {@link ActionJSON}
+   */
+  actionName: string;
+}
+
+
+/**
+ * @alias GetPageAPIParams
+ * @memberof ApiClient
+ * @extends AxiosRequestConfig
+ */
+export type GetPageAPIParams = AxiosRequestConfig & {
+  /**
+   * Unique page name
+   */
+  pageName: string;
 }
 
 /**
@@ -50,13 +99,6 @@ class ApiClient {
     this.client = axios.create({
       baseURL: this.baseURL,
     })
-    // this.client.interceptors.response.use(
-    //   response => response,
-    //   (error) => {
-    //     console.log(error)
-    //     return Promise.reject(error)
-    //   },
-    // )
   }
 
   /**
@@ -81,30 +123,15 @@ class ApiClient {
   /**
    * Invokes given resource {@link Action} on the backend.
    *
-   * @param   {Object} options
-   * @param   {String} options.resourceId  id of a {@link BaseResource}
-   * @param   {String} options.actionName  name of an {@link Action}
-   * @param   {Object} [options.payload]   optional action payload
-   * @param   {Object} [options.params]    optional query params
-   * @param   {Object} [options.headers]   optional request headers
-   * @param   {String} [options.method]    if there is a Payload it sends
-   *                                       POST request, otherwise GET.
+   * @param   {ResourceActionAPIParams} options
    * @return  {Promise<Object>}            response from an {@link Action}
    */
-  async resourceAction({ resourceId, actionName, payload, method, params, headers }: {
-    resourceId: string;
-    actionName: string;
-    payload?: {[key: string]: any};
-    method?: 'POST' | 'GET';
-    params?: {[key: string]: any};
-    headers?: {[key: string]: any};
-  }): Promise<AxiosResponse<ActionResponse>> {
+  async resourceAction(options: ResourceActionAPIParams): Promise<AxiosResponse<ActionResponse>> {
+    const { resourceId, actionName, data, ...axiosParams } = options
     const response = await this.client.request({
       url: `/api/resources/${resourceId}/actions/${actionName}`,
-      method: method || payload ? 'POST' : 'GET',
-      data: payload,
-      params,
-      headers,
+      method: data ? 'POST' : 'GET',
+      ...axiosParams,
     })
     checkResponse(response)
     return response
@@ -113,40 +140,43 @@ class ApiClient {
   /**
    * Invokes given record {@link Action} on the backend.
    *
-   * @param   {Object} options
-   * @param   {String} options.resourceId  id of a {@link BaseResource}
-   * @param   {String} options.recordId    id of a {@link BaseRecord}
-   * @param   {String} options.actionName  name of an {@link Action}
-   * @param   {Object} [options.payload]   optional action payload
-   * @param   {Object} [options.params]    optional query params
-   * @param   {Object} [options.headers]   optional request headers
-   * @param   {String} [options.method]    if there is a Payload it sends
-   *                                       POST request, otherwise GET.
+   * @param   {RecordActionAPIParams} options
    * @return  {Promise<RecordActionResponse>}            response from an {@link Action}
    */
-  async recordAction({ resourceId, recordId, actionName, payload, method, params, headers }: {
-    recordId: string;
-    resourceId: string;
-    actionName: string;
-    payload?: {[key: string]: any};
-    method?: 'POST' | 'GET';
-    params?: {[key: string]: any};
-    headers?: {[key: string]: any};
-  }): Promise<AxiosResponse<RecordActionResponse>> {
+  async recordAction(options: RecordActionAPIParams): Promise<AxiosResponse<RecordActionResponse>> {
+    const { resourceId, recordId, actionName, data, ...axiosParams } = options
     const response = await this.client.request({
       url: `/api/resources/${resourceId}/records/${recordId}/${actionName}`,
-      method: method || payload ? 'POST' : 'GET',
-      data: payload,
-      params,
-      headers,
+      method: data ? 'POST' : 'GET',
+      ...axiosParams,
     })
     checkResponse(response)
     return response
   }
 
-  async getDashboard({ params = {} }: { params?: any } = {}): Promise<any> {
-    const response = await this.client.get('/api/dashboard', {
-      params,
+  /**
+   * Invokes dashboard handler.
+   *
+   * @param   {AxiosRequestConfig}                options
+   * @return  {Promise<any>}                      response from the dashboard handler
+   */
+  async getDashboard(options: AxiosRequestConfig = {}): Promise<any> {
+    const response = await this.client.get('/api/dashboard', options)
+    checkResponse(response)
+    return response
+  }
+
+  /**
+   * Invokes dashboard handler.
+   *
+   * @param   {GetPageAPIParams}                options
+   * @return  {Promise<any>}                    response from the dashboard handler
+   */
+  async getPage(options: GetPageAPIParams): Promise<any> {
+    const { pageName, ...axiosParams } = options
+    const response = await this.client.request({
+      url: `/api/pages/${pageName}`,
+      ...axiosParams,
     })
     checkResponse(response)
     return response

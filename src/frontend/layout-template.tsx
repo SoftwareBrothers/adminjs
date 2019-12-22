@@ -4,7 +4,7 @@ import { StaticRouter } from 'react-router-dom'
 import { Provider } from 'react-redux'
 import { ThemeProvider } from 'styled-components'
 
-import App from './components/app/application'
+import App from './components/application'
 import ViewHelpers from '../backend/utils/view-helpers'
 import initializeStore from './store'
 import combineStyles from './styles/combine-styles'

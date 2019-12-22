@@ -4,10 +4,6 @@ import styled from 'styled-components'
 import ViewHelpers from '../../../../backend/utils/view-helpers'
 import { BrandingOptions } from '../../../../admin-bro-options.interface'
 
-const BrandingBox = styled.div`
-  margin-bottom: 40px;
-`
-
 const LogoLink = styled(Link)`
   display: flex;
   align-items: center;
@@ -32,19 +28,17 @@ const SidebarBranding: React.FC<Props> = (props) => {
   const { logo, companyName } = branding
   const h = new ViewHelpers()
   return (
-    <BrandingBox>
-      <LogoLink to={h.dashboardUrl()}>
-        {logo && (
-          <LogoImage
-            src={logo}
-            alt={companyName}
-            height="35px"
-            width="35px"
-          />
-        )}
-        <span>{companyName}</span>
-      </LogoLink>
-    </BrandingBox>
+    <LogoLink to={h.dashboardUrl()}>
+      {logo && (
+        <LogoImage
+          src={logo}
+          alt={companyName}
+          height="35px"
+          width="35px"
+        />
+      )}
+      <span>{companyName}</span>
+    </LogoLink>
   )
 }
 

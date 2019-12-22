@@ -72,7 +72,7 @@ class New extends React.Component<ActionProps & AddNoticeProps & RouteComponentP
     this.api.resourceAction({
       resourceId: resource.id,
       actionName: 'new',
-      payload: formData,
+      data: formData,
       headers: { 'Content-Type': 'multipart/form-data' },
     }).then((response) => {
       if (response.data.notice) {

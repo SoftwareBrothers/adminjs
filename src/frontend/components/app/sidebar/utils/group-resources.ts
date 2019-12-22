@@ -1,4 +1,4 @@
-import ResourceJSON from '../../../../backend/decorators/resource-json.interface'
+import ResourceJSON from '../../../../../backend/decorators/resource-json.interface'
 
 /* eslint-disable no-param-reassign */
 export default (resources: Array<ResourceJSON>): Array<{
