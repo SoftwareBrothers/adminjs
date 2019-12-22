@@ -1,5 +1,5 @@
 import React, { ReactNode } from 'react'
-import { WrapperBox } from '.'
+import WrapperBox from './wrapper-box'
 
 type Props = {
   children: ReactNode;
