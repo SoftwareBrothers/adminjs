@@ -14,9 +14,13 @@ const TITLE_COLUMN_NAMES = ['title', 'name', 'subject', 'email']
  * @property {string} datetime    date with time
  * @property {string} mixed       type representing an object
  * @property {string} reference   many to one reference
+ * @property {string} textarea    resizable textarea input
  */
 
-export type PropertyType = 'string' | 'float' | 'number' | 'boolean' | 'date' | 'datetime' | 'mixed' | 'reference' | 'richtext';
+export type PropertyType =
+  'string' | 'float' | 'number' | 'boolean' |
+  'date' | 'datetime' | 'mixed' | 'reference' |
+  'richtext' | 'textarea';
 
 /**
  * Represents Resource Property

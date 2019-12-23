@@ -10,13 +10,15 @@ export default class Show extends React.PureComponent<PropertyProps> {
 
     const value = record.params[property.name] || ''
 
-    const className = property.availableValues ? 'tag' : ''
-
     return (
       <PropertyInShow property={property}>
-        {value ? (
-          <span className={className}>{value}</span>
-        ) : ''}
+        {value.split(/(?:\r\n|\r|\n)/g).map((line, i) => (
+          // eslint-disable-next-line react/no-array-index-key
+          <React.Fragment key={i}>
+            {line}
+            <br />
+          </React.Fragment>
+        ))}
       </PropertyInShow>
     )
   }

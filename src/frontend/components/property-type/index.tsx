@@ -10,6 +10,7 @@ import * as boolean from './boolean'
 import * as datetime from './datetime'
 import * as richtext from './richtext'
 import * as reference from './reference'
+import * as textarea from './textarea'
 import { BasePropertyProps } from './base-property-props'
 
 let globalAny: any = {}
@@ -23,6 +24,7 @@ try {
 }
 
 const types = {
+  textarea,
   boolean,
   datetime,
   reference,
@@ -181,6 +183,8 @@ export default class BasePropertyComponent extends React.Component<BasePropertyP
 
   static Reference
 
+  static TextArea
+
   render(): ReactNode {
     const { property, resource, record, filter, where, onChange } = this.props
     const { isClient } = this.state
@@ -259,3 +263,4 @@ BasePropertyComponent.Boolean = camelizePropertyType(boolean)
 BasePropertyComponent.DateTime = camelizePropertyType(datetime)
 BasePropertyComponent.RichText = camelizePropertyType(richtext)
 BasePropertyComponent.Reference = camelizePropertyType(reference)
+BasePropertyComponent.TextArea = camelizePropertyType(textarea)
