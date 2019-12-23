@@ -16,11 +16,18 @@ const TITLE_COLUMN_NAMES = ['title', 'name', 'subject', 'email']
  * @property {string} reference   many to one reference
  * @property {string} textarea    resizable textarea input
  */
-
 export type PropertyType =
   'string' | 'float' | 'number' | 'boolean' |
   'date' | 'datetime' | 'mixed' | 'reference' |
   'richtext' | 'textarea';
+
+type BasePropertyAttrs = {
+  path: string;
+  type?: PropertyType;
+  isId?: boolean;
+  isSortable?: boolean;
+  position?: number;
+}
 
 /**
  * Represents Resource Property
@@ -35,6 +42,8 @@ class BaseProperty {
 
   private _isSortable: boolean
 
+  private _position: number
+
   /**
    * @param  {object} options
    * @param  {string} options.path                     property path: usually it its key but when
@@ -45,12 +54,13 @@ class BaseProperty {
    * @param  {boolean} [options.isId=false]            true when field should be treated as an ID
    * @param  {boolean} [options.isSortable=true]       if property should be sortable
    */
-  constructor({ path, type = 'string', isId = false, isSortable = true }: {
-    path: string;
-    type?: PropertyType;
-    isId?: boolean;
-    isSortable?: boolean;
-  }) {
+  constructor({
+    path,
+    type = 'string',
+    isId = false,
+    isSortable = true,
+    position = 1,
+  }: BasePropertyAttrs) {
     this._path = path
     this._type = type
     this._isId = isId
@@ -58,6 +68,7 @@ class BaseProperty {
       throw new Error('you have to give path parameter when creating BaseProperty')
     }
     this._isSortable = isSortable
+    this._position = position
   }
 
   /**
@@ -70,6 +81,10 @@ class BaseProperty {
 
   path(): string {
     return this.name()
+  }
+
+  position(): number {
+    return this._position === undefined ? 1 : this._position
   }
 
   /**

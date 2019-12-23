@@ -8,12 +8,19 @@ import * as theme from './styles/variables'
 
 const onProd = process.env.NODE_ENV === 'production'
 
-const html = ({ action, errorMessage }: {
+type LoginTemplateAttributes = {
+  /**
+   * action which should be called when user clicks submit button
+   */
   action: string;
+  /**
+   * Error message to present in the form
+   */
   errorMessage?: string;
-}): string => {
+}
+
+const html = ({ action, errorMessage }: LoginTemplateAttributes): string => {
   const loginComponent = renderToString(
-    // eslint-disable-next-line react/jsx-filename-extension
     <ThemeProvider theme={theme}>
       <LoginComponent action={action} message={errorMessage} />
     </ThemeProvider>,

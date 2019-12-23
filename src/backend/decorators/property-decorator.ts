@@ -152,7 +152,7 @@ class PropertyDecorator {
     return this.overrideFromOptions(AvailablePropertyOptions.position, () => {
       if (this.isTitle()) { return -1 }
       if (this.isId()) { return 0 }
-      return 100
+      return 100 + this.property.position()
     })
   }
 
