@@ -12,6 +12,7 @@ Started since version 0.9.5
 
 * added ErrorMessageBox component
 * added custom actions in the sidebar
+* add textarea property type
 
 ### Changed
 
