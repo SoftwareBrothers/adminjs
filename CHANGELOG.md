@@ -21,6 +21,7 @@ Started since version 0.9.5
 ### Fixed
 
 * fixed Placeholder typo (was Placehoder)
+* fixed wrong property order [#223]
 
 ## 1.5.1 and 1.5.2 - 2019-12-21
 
