@@ -1,10 +1,10 @@
 import React from 'react'
 import { render } from 'react-testing-library'
 import { factory } from 'factory-girl'
-import TestContextProvider from '../spec/test-context-provider'
+import TestContextProvider from '../../spec/test-context-provider'
 import NoRecords from './no-records'
 
-require('../../../../spec/fixtures/resource.factory')
+require('../../../../../spec/fixtures/resource.factory')
 
 const renderComponent = resource => render(
   <TestContextProvider>
