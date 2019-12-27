@@ -357,7 +357,7 @@ export default interface Action <T extends ActionResponse> {
    *
    * When you define new action - it is required.
    */
-  actionType: 'resource' | 'record' | Array<'resource' | 'record'>;
+  actionType: 'resource' | 'record' | 'bulk';
   /**
    * icon class of an action
    *
