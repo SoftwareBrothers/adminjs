@@ -5,7 +5,7 @@ import { RouteComponentProps } from 'react-router'
 import ApiClient from '../../utils/api-client'
 import WrapperBox from '../ui/wrapper-box'
 import withNotice, { AddNoticeProps } from '../../store/with-notice'
-import RecordsTable from '../app/records-table'
+import RecordsTable from '../app/records-table/records-table'
 import Paginate from '../ui/paginate'
 import { ActionProps } from './action.props'
 import RecordJSON from '../../../backend/decorators/record-json.interface'
@@ -19,6 +19,7 @@ type State = {
   loading: boolean;
   direction: 'asc' | 'desc';
   sortBy?: string;
+  selectedRecords: Array<RecordJSON>;
 }
 
 // TODO: add direction enum
@@ -31,12 +32,11 @@ type State = {
  * @private
  */
 class List extends React.Component<ActionProps & RouteComponentProps & AddNoticeProps, State> {
-  private api: ApiClient
-
   constructor(props) {
     super(props)
-    this.api = new ApiClient()
     this.handleActionPerformed = this.handleActionPerformed.bind(this)
+    this.handleSelect = this.handleSelect.bind(this)
+    this.handleSelectAll = this.handleSelectAll.bind(this)
     this.state = {
       records: [],
       page: 1,
@@ -45,6 +45,7 @@ class List extends React.Component<ActionProps & RouteComponentProps & AddNotice
       loading: true,
       direction: 'asc',
       sortBy: undefined,
+      selectedRecords: [],
     }
   }
 
@@ -107,11 +108,39 @@ class List extends React.Component<ActionProps & RouteComponentProps & AddNotice
     this._fetchData()
   }
 
+  handleSelect(record: RecordJSON): void {
+    const { selectedRecords } = this.state
+    const selectedIndex = selectedRecords.findIndex(selected => selected.id === record.id)
+    if (selectedIndex < 0) {
+      this.setState({ selectedRecords: [...selectedRecords, record] })
+    } else {
+      const newSelectedRecords = [...selectedRecords]
+      newSelectedRecords.splice(selectedIndex, 1)
+      this.setState({ selectedRecords: newSelectedRecords })
+    }
+  }
+
+  handleSelectAll(): void {
+    const { records, selectedRecords } = this.state
+
+    const missing = records.filter(record => (
+      !selectedRecords.find(selected => selected.id === record.id)
+    ))
+    if (missing.length) {
+      this.setState({ selectedRecords: [...selectedRecords, ...missing] })
+    } else {
+      const newSelectedRecords = selectedRecords.filter(selected => (
+        !records.find(record => record.id === selected.id)
+      ))
+      this.setState({ selectedRecords: newSelectedRecords })
+    }
+  }
+
   render(): ReactNode {
     const { resource } = this.props
     const {
       records, page, perPage, total,
-      loading, direction, sortBy,
+      loading, direction, sortBy, selectedRecords,
     } = this.state
     return (
       <WrapperBox border>
@@ -119,6 +148,9 @@ class List extends React.Component<ActionProps & RouteComponentProps & AddNotice
           resource={resource}
           records={records}
           actionPerformed={this.handleActionPerformed}
+          onSelect={this.handleSelect}
+          onSelectAll={this.handleSelectAll}
+          selectedRecords={selectedRecords}
           direction={direction}
           sortBy={sortBy}
           isLoading={loading}

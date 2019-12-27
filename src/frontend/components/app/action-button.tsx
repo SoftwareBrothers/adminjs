@@ -14,6 +14,15 @@ import withNotice, { AddNoticeProps } from '../../store/with-notice'
 import ActionJSON from '../../../backend/decorators/action-json.interface'
 import { ActionResponse } from '../../../backend/actions/action.interface'
 
+type Props = {
+  action: ActionJSON;
+  className?: string;
+  resourceId: string;
+  recordId?: string;
+  recordIds?: Array<string>;
+  actionPerformed?: (actionName: string) => any;
+}
+
 /**
  * Renders Button for an action
  *
@@ -24,6 +33,28 @@ class ActionButton extends React.PureComponent<RouteComponentProps & Props & Add
   constructor(props) {
     super(props)
     this.handleClick = this.handleClick.bind(this)
+  }
+
+  href(): string {
+    const {
+      action, resourceId, recordId, recordIds,
+    } = this.props
+    const h = new ViewHelpers()
+    const { name: actionName, actionType } = action
+
+    switch (actionType) {
+    case 'record':
+      if (!recordId) {
+        throw new Error('You have to speficy "recordId" for record action')
+      }
+      return h.recordActionUrl({ resourceId, recordId, actionName })
+    case 'resource':
+      return h.resourceActionUrl({ resourceId, actionName })
+    case 'bulk':
+      return h.bulkActionUrl({ resourceId, recordIds, actionName })
+    default:
+      throw new Error('"actionType" should be either record, resource or bulk')
+    }
   }
 
   handleClick(event): void {
@@ -66,17 +97,12 @@ class ActionButton extends React.PureComponent<RouteComponentProps & Props & Add
   }
 
   render(): ReactNode {
-    const h = new ViewHelpers()
     const {
-      resourceId, recordId, action, className,
+      action, className,
     } = this.props
-    const actionName = action.name
-    const href = recordId
-      ? h.recordActionUrl({ resourceId, recordId, actionName })
-      : h.resourceActionUrl({ resourceId, actionName })
     return (
       <StyledLink
-        to={href}
+        to={this.href()}
         className={`button ${className}`}
         onClick={this.handleClick}
       >
@@ -89,14 +115,6 @@ class ActionButton extends React.PureComponent<RouteComponentProps & Props & Add
       </StyledLink>
     )
   }
-}
-
-type Props = {
-  action: ActionJSON;
-  className?: string;
-  resourceId: string;
-  recordId?: string;
-  actionPerformed?: (actionName: string) => any;
 }
 
 // TODO - remove this hack

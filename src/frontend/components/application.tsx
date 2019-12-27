@@ -3,7 +3,7 @@ import { Switch, Route } from 'react-router-dom'
 import styled, { createGlobalStyle } from 'styled-components'
 
 import ViewHelpers from '../../backend/utils/view-helpers'
-import Sidebar from './app/sidebar'
+import Sidebar from './app/sidebar/sidebar'
 import Topbar from './app/topbar'
 
 import {

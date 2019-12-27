@@ -107,9 +107,9 @@ describe('PropertyDecorator', function () {
       expect(new PropertyDecorator(args).position()).to.equal(-1)
     })
 
-    it('returns 100 for all other fields', function () {
+    it('returns 101 for seccond field', function () {
       sinon.stub(BaseProperty.prototype, 'isTitle').returns(false)
-      expect(new PropertyDecorator(args).position()).to.equal(100)
+      expect(new PropertyDecorator(args).position()).to.equal(101)
     })
 
     it('returns 0 for an id field', function () {

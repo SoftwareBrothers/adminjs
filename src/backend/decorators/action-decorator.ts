@@ -95,6 +95,15 @@ class ActionDecorator {
     return this.action.actionType.includes('resource')
   }
 
+  /**
+   * Returns true when action can be performed on selected records
+   *
+   * @return  {Boolean}
+   */
+  isBulkType(): boolean {
+    return this.action.actionType.includes('bulk')
+  }
+
   is(what: 'isAccessible' | 'isVisible', currentAdmin?: CurrentAdmin, record?: BaseRecord): boolean {
     if (!['isAccessible', 'isVisible'].includes(what)) {
       throw new Error(`'what' has to be either "isAccessible" or "isVisible". You gave ${what}`)

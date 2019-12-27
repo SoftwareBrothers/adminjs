@@ -215,6 +215,7 @@ describe('ResourceDecorator', function () {
         'href',
         'titleProperty',
         'resourceActions',
+        'bulkActions',
         'listProperties',
         'editProperties',
         'showProperties',

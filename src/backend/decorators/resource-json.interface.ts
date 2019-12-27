@@ -40,6 +40,10 @@ export default interface ResourceJSON {
    */
   resourceActions: Array<ActionJSON>;
   /**
+   * All actions available for a set of selected records
+   */
+  bulkActions: Array<ActionJSON>;
+  /**
    * Properties which should be visible on the list
    */
   listProperties: Array<PropertyJSON>;
