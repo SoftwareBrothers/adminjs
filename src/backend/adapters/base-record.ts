@@ -217,6 +217,9 @@ class BaseRecord {
       recordActions: this.resource.decorate().recordActions(
         this, currentAdmin,
       ).map(recordAction => recordAction.toJSON()),
+      bulkActions: this.resource.decorate().bulkActions(
+        this, currentAdmin,
+      ).map(recordAction => recordAction.toJSON()),
     }
   }
 }

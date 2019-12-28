@@ -2,7 +2,7 @@ import factory from 'factory-girl'
 import PropertyJSON from '../../../backend/decorators/property-json.interface'
 
 
-factory.define('PropertyJSON', Object, {
+factory.define<PropertyJSON>('PropertyJSON', Object, {
   custom: {},
   isTitle: false,
   isId: false,
@@ -17,4 +17,4 @@ factory.define('PropertyJSON', Object, {
   isArray: false,
   subProperties: [],
   components: undefined,
-} as PropertyJSON)
+})

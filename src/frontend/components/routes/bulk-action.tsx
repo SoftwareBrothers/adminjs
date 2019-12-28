@@ -17,6 +17,8 @@ import shouldActionReFetchData from './utils/should-action-re-fetch-data'
 import { BulkActionParams } from '../../../backend/utils/view-helpers'
 import ApiClient from '../../utils/api-client'
 import withNotice, { AddNoticeProps } from '../../store/with-notice'
+import getBulkActionsFromRecords from '../app/records-table/utils/get-bulk-actions-from-records'
+import ActionJSON from '../../../backend/decorators/action-json.interface'
 
 type PropsFromState = {
   resources: Array<ResourceJSON>;
@@ -96,10 +98,6 @@ class BulkAction extends React.Component<Props, State> {
     if (!resource) {
       return (<NoResourceError resourceId={resourceId} />)
     }
-    const action = resource.bulkActions.find(r => r.name === actionName)
-    if (!action) {
-      return (<NoActionError resourceId={resourceId} actionName={actionName} />)
-    }
 
     if (!records && !isLoading) {
       return (
@@ -107,6 +105,12 @@ class BulkAction extends React.Component<Props, State> {
           <p>You have not selected any records</p>
         </ErrorMessageBox>
       )
+    }
+
+    const action = getBulkActionsFromRecords(records || []).find(r => r.name === actionName)
+
+    if (!action && !isLoading) {
+      return (<NoActionError resourceId={resourceId} actionName={actionName} />)
     }
 
     return (
@@ -125,7 +129,7 @@ class BulkAction extends React.Component<Props, State> {
             ? <Loader />
             : (
               <BaseAction
-                action={action}
+                action={action as ActionJSON}
                 resource={resource}
                 records={records}
                 setTag={this.setTag}

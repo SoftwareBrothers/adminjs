@@ -253,12 +253,12 @@ class ResourceDecorator {
    * @param {CurrentAdmin} currentAdmin   currently logged in admin user
    * @return  {Array<ActionDecorator>}     Actions assigned to resources
    */
-  bulkActions(currentAdmin?: CurrentAdmin): Array<ActionDecorator> {
+  bulkActions(record: BaseRecord, currentAdmin?: CurrentAdmin): Array<ActionDecorator> {
     return Object.values(this.actions)
       .filter(action => (
         action.isBulkType()
-        && action.isVisible(currentAdmin)
-        && action.isAccessible(currentAdmin)
+        && action.isVisible(currentAdmin, record)
+        && action.isAccessible(currentAdmin, record)
       ))
   }
 
@@ -317,7 +317,6 @@ class ResourceDecorator {
       href: this.h.resourceActionUrl({ resourceId: this._resource.id(), actionName: 'list' }),
       titleProperty: this.titleProperty().toJSON(),
       resourceActions: this.resourceActions(currentAdmin).map(ra => ra.toJSON()),
-      bulkActions: this.bulkActions(currentAdmin).map(ra => ra.toJSON()),
       listProperties: this.getProperties({
         where: PropertyPlace.list, max: DEFAULT_MAX_COLUMNS_IN_LIST,
       }).map(property => property.toJSON()),

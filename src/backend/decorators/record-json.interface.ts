@@ -30,6 +30,10 @@ export default interface RecordJSON {
    * Actions which can be performed on this record.
    */
   recordActions: Array<ActionJSON>;
+  /**
+   * Actions which can be performed on this record in a bulk.
+   */
+  bulkActions: Array<ActionJSON>;
 }
 
 // TODO: describe flatten params

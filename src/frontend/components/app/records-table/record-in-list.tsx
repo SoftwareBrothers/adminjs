@@ -47,11 +47,13 @@ export default class RecordInList extends React.PureComponent<Props> {
     return (
       <tr>
         <Td className={isSelected ? 'selected' : 'not-selected'}>
-          <input
-            type="checkbox"
-            onChange={(): void => onSelect(record)}
-            checked={isSelected}
-          />
+          {record.bulkActions.length ? (
+            <input
+              type="checkbox"
+              onChange={(): void => onSelect(record)}
+              checked={isSelected}
+            />
+          ) : null}
         </Td>
         {resource.listProperties.map(property => (
           <Td key={property.name} className={resource.titleProperty.name === property.name ? 'main' : undefined}>

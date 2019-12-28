@@ -57,11 +57,59 @@ class ActionButton extends React.PureComponent<RouteComponentProps & Props & Add
     }
   }
 
-  handleClick(event): void {
+  callApi(): void {
     const {
       action, resourceId, recordId, location,
-      history, actionPerformed, addNotice,
+      history, actionPerformed, addNotice, recordIds,
     } = this.props
+
+    const api = new ApiClient()
+    let promise: Promise<AxiosResponse<ActionResponse>>
+
+    switch (action.actionType) {
+    case 'record':
+      if (!recordId) {
+        throw new Error('You have to speficy "recordId" for record action')
+      }
+      promise = api.recordAction({
+        resourceId, actionName: action.name, recordId,
+      })
+      break
+    case 'resource':
+      promise = api.resourceAction({
+        resourceId, actionName: action.name,
+      })
+      break
+    case 'bulk':
+      if (!recordIds) {
+        throw new Error('You have to speficy "recordIds" for bulk action')
+      }
+      promise = api.bulkAction({
+        resourceId, actionName: action.name, recordIds,
+      })
+      break
+    default:
+      throw new Error('"actionType" should be either record, resource or bulk')
+    }
+
+    promise.then((response) => {
+      const { data } = response
+      if (data.notice) {
+        addNotice(data.notice)
+      }
+      if (data.redirectUrl && location.pathname !== data.redirectUrl) {
+        history.push(data.redirectUrl)
+      }
+      if (actionPerformed) {
+        actionPerformed(action.name)
+      }
+    }).catch((error) => {
+      throw error
+    })
+  }
+
+  handleClick(event): void {
+    const { action } = this.props
 
     if (action.guard && !confirm(action.guard)) {
       event.preventDefault()
@@ -69,30 +117,7 @@ class ActionButton extends React.PureComponent<RouteComponentProps & Props & Add
     }
     if (typeof action.component !== 'undefined' && action.component === false) {
       event.preventDefault()
-      const api = new ApiClient()
-      let promise: Promise<AxiosResponse<ActionResponse>>
-      if (recordId) {
-        promise = api.recordAction({
-          resourceId, actionName: action.name, recordId,
-        })
-      } else {
-        promise = api.resourceAction({
-          resourceId, actionName: action.name,
-        })
-      }
-
-      promise.then((response) => {
-        const { data } = response
-        if (data.notice) {
-          addNotice(data.notice)
-        }
-        if (data.redirectUrl && location.pathname !== data.redirectUrl) {
-          history.push(data.redirectUrl)
-        }
-        if (actionPerformed) {
-          actionPerformed(action.name)
-        }
-      })
+      this.callApi()
     }
   }
 
@@ -103,15 +128,15 @@ class ActionButton extends React.PureComponent<RouteComponentProps & Props & Add
     return (
       <StyledLink
         to={this.href()}
-        className={`button ${className}`}
+        className={className || ''}
         onClick={this.handleClick}
       >
         <span className="icon">
           <i className={action.icon} />
         </span>
-        <div className="btn-text">
+        <span className="btn-text">
           {action.label}
-        </div>
+        </span>
       </StyledLink>
     )
   }

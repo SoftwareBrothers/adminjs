@@ -22,6 +22,8 @@ type State = {
   selectedRecords: Array<RecordJSON>;
 }
 
+type Props = ActionProps & RouteComponentProps & AddNoticeProps
+
 // TODO: add direction enum
 
 /**
@@ -31,7 +33,7 @@ type State = {
  * @component
  * @private
  */
-class List extends React.Component<ActionProps & RouteComponentProps & AddNoticeProps, State> {
+class List extends React.Component<Props, State> {
   constructor(props) {
     super(props)
     this.handleActionPerformed = this.handleActionPerformed.bind(this)
@@ -50,16 +52,18 @@ class List extends React.Component<ActionProps & RouteComponentProps & AddNotice
   }
 
   componentDidMount(): void {
-    this._fetchData()
+    this._fetchData(this.props)
   }
 
-  componentDidUpdate(prevProps): void {
+  shouldComponentUpdate(newProps): boolean {
     const { resource, location } = this.props
 
-    if (resource.id !== prevProps.resource.id
-       || location.search !== prevProps.location.search) {
-      this._fetchData()
+    if (resource.id !== newProps.resource.id
+       || location.search !== newProps.location.search) {
+      this._fetchData(newProps)
+      return false
     }
+    return true
   }
 
   componentWillUnmount(): void {
@@ -69,8 +73,11 @@ class List extends React.Component<ActionProps & RouteComponentProps & AddNotice
     }
   }
 
-  _fetchData(): void {
-    const { location, resource, setTag, addNotice } = this.props
+  _fetchData(props: Props): void {
+    const { location, resource, setTag, addNotice } = props
+    const { resource: oldResource } = this.props
+    const { selectedRecords } = this.state
+
     const api = new ApiClient()
     this.setState({ loading: true })
     const query = new URLSearchParams(location.search)
@@ -87,6 +94,7 @@ class List extends React.Component<ActionProps & RouteComponentProps & AddNotice
         total: listActionReponse.meta.total,
         direction: listActionReponse.meta.direction,
         sortBy: listActionReponse.meta.sortBy,
+        selectedRecords: oldResource.id === resource.id ? selectedRecords : [],
         loading: false,
       })
       if (setTag) {
@@ -105,7 +113,7 @@ class List extends React.Component<ActionProps & RouteComponentProps & AddNotice
   }
 
   handleActionPerformed(): void {
-    this._fetchData()
+    this._fetchData(this.props)
   }
 
   handleSelect(record: RecordJSON): void {
