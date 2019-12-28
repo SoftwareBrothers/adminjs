@@ -144,7 +144,7 @@ class ApiController {
 
     if (!record) {
       throw new NotFoundError([
-        `record with given id: ${recordId} cannot be found in resource "${resourceId}"`,
+        `record with given id: "${recordId}" cannot be found in resource "${resourceId}"`,
       ].join('\n'), 'Action#handler')
     }
     [record] = await populator([record])
@@ -162,7 +162,59 @@ class ApiController {
     }
     throw new ConfigurationError(
       'handler of a recordAction should return a RecordJSON object',
-      'Action.handler',
+      'Action#handler',
+    )
+  }
+
+  /**
+   * Performs a customized {@link Action record action}.
+   * To call it use {@link ApiClient#recordAction} method.
+   *
+   * Handler function reponsible for a `.../api/resources/{resourceId}/records/{recordId}/{action}`
+   *
+   * @param   {ActionRequest}  request
+   * @param   {any}  response
+   *
+   * @return  {RecordActionResponse}  action response
+   * @throws  ConfigurationError      When given record action doesn't return {@link RecordJSON}
+   * @throws  ForbiddenError          When user cannot perform given action: {@linkAction.isAccessible}
+                                      returns false
+   */
+  async bulkAction(request: ActionRequest, response: any): Promise<RecordActionResponse> {
+    const { resourceId } = request.params
+    const { recordIds } = request.query || {}
+    const actionContext = await this.getActionContext(request)
+
+    if (!recordIds) {
+      throw new NotFoundError([
+        'You have to pass "recordIds" to the bulkAction via search params: ?recordIds=...',
+      ].join('\n'), 'Action#handler')
+    }
+
+    let records = await actionContext.resource.findMany(recordIds.split(','))
+
+    if (!records || !records.length) {
+      throw new NotFoundError([
+        `record with given id: "${recordIds}" cannot be found in resource "${resourceId}"`,
+      ].join('\n'), 'Action#handler')
+    }
+    records = await populator(records)
+    records.forEach((record) => {
+      if (!actionContext.action.isAccessible(this.currentAdmin, record)) {
+        throw new ForbiddenError({
+          actionName: actionContext.action.name,
+          resourceId: actionContext.resource.id(),
+        })
+      }
+    })
+    const jsonWithRecord = await actionContext.action.handler(request, response, { ...actionContext, records })
+
+    if (jsonWithRecord && jsonWithRecord.records) {
+      return jsonWithRecord
+    }
+    throw new ConfigurationError(
+      'handler of a bulkAction should return an Array of RecordJSON object',
+      'Action#handler',
     )
   }
 

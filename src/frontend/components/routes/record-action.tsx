@@ -17,15 +17,12 @@ import ActionJSON from '../../../backend/decorators/action-json.interface'
 import { ReduxState } from '../../store/store'
 import { NoResourceError, NoActionError, NoRecordError } from '../ui/error404'
 import withNotice, { AddNoticeProps } from '../../store/with-notice'
+import NoticeWrapper from './styled/notice-wrapper.styled'
+import shouldActionRefetchData from './utils/should-action-re-fetch-data'
 
 const ContainerRecord = styled.div`
   display: flex;
   flex-direction: column;
-`
-
-const NoticeWrapper = styled.div`
-  width: 100%;
-  position: relative;
 `
 
 interface State {
@@ -55,11 +52,7 @@ class RecordAction extends React.Component<Props & AddNoticeProps, State> {
 
   shouldComponentUpdate(newProps: Props): boolean {
     const { match } = this.props
-    const { actionName, recordId, resourceId } = match.params
-    if (newProps.match.params.actionName !== actionName
-      || newProps.match.params.recordId !== recordId
-      || newProps.match.params.resourceId !== resourceId
-    ) {
+    if (shouldActionRefetchData(match.params, newProps.match.params)) {
       this.fetchRecord(newProps.match.params)
       return false
     }
@@ -100,11 +93,12 @@ class RecordAction extends React.Component<Props & AddNoticeProps, State> {
         isLoading: false,
         record: response.data.record,
       })
-    }).catch(() => {
+    }).catch((error) => {
       addNotice({
         message: 'There was an error fething the record, Check out console to see more information.',
         type: 'error',
       })
+      throw error
     })
   }
 

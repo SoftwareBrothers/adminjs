@@ -27,6 +27,10 @@ export type ActionContext = {
    */
   record?: BaseRecord;
   /**
+   * Records on which action has been invoked (only for {@link actionType} === 'bulk')
+   */
+  records?: Array<BaseRecord>;
+  /**
    * view helpers
    */
   h: ViewHelpers;
@@ -76,9 +80,13 @@ export type ActionRequest = {
      */
     resourceId: string;
     /**
-     * Id of current record
+     * Id of current record (in case of record action)
      */
     recordId?: string;
+    /**
+     * Id of selected records (in case of bulk action) divided by commas
+     */
+    recordIds?: string;
     /**
      * Name of an action
      */
@@ -141,6 +149,18 @@ export type RecordActionResponse = ActionResponse & {
    * Record object.
    */
   record: RecordJSON;
+}
+
+/**
+ * Required response of a Record action
+ * @memberof Action
+ * @alias RecordActionResponse
+ */
+export type BulkActionResponse = ActionResponse & {
+  /**
+   * Record object.
+   */
+  records: Array<RecordJSON>;
 }
 
 /**
@@ -420,7 +440,7 @@ export default interface Action <T extends ActionResponse> {
    */
   handler: ActionHandler<T>;
   /**
-   * Before action hook. When it is given - it is performed before the {@link Action.handler}
+   * Before action hook. When it is given - it is performed before the {@link Action#handler}
    * method.
    *
    * Hashing password before creating it:
@@ -445,7 +465,7 @@ export default interface Action <T extends ActionResponse> {
   before?: Before;
   /**
    * After action hook. When it is given - it is performed on the returned,
-   * by {@link Action.handler handler} function object.
+   * by {@link Action#handler handler} function object.
    *
    * You can use it to (just an idea)
    * - create log of changes done in the app

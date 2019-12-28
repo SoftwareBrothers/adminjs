@@ -193,6 +193,17 @@ class BaseResource {
   }
 
   /**
+   * Finds many records based on the resource ids
+   *
+   * @param   {Array<string>}              list of ids to find
+   *
+   * @return  {Promise<Array<BaseRecord>>} records
+   */
+  async findMany(ids: Array<string>): Promise<Array<BaseRecord>> {
+    throw new NotImplementedError('BaseResource#findMany')
+  }
+
+  /**
    * Builds new Record of given Resource.
    *
    * Each Record is an representation of the resource item. Before it can be saved,

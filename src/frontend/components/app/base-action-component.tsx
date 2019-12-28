@@ -78,7 +78,7 @@ class BaseActionComponent extends React.Component<ActionProps, State> {
   }
 
   render(): ReactNode {
-    const { resource, action, record, setTag } = this.props
+    const { resource, action, record, records, setTag } = this.props
 
     const { isClient } = this.state
     const documentationLink = [DOCS, 'BaseAction.html'].join('/')
@@ -94,6 +94,7 @@ class BaseActionComponent extends React.Component<ActionProps, State> {
             action={action}
             resource={resource}
             record={record}
+            records={records}
             setTag={setTag}
           />
         </ErrorBoundary>

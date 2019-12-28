@@ -33,6 +33,12 @@ export default class AppController {
     return layoutTemplate(this._admin, this.currentAdmin, href)
   }
 
+  async bulkAction({ params }: ActionRequest): Promise<string> {
+    const { resourceId, actionName } = params
+    const href = this.h.bulkActionUrl({ resourceId, actionName })
+    return layoutTemplate(this._admin, this.currentAdmin, href)
+  }
+
   async recordAction({ params }: ActionRequest): Promise<string> {
     const { resourceId, actionName, recordId } = params
     if (!recordId) {

@@ -18,9 +18,14 @@ export type ActionProps = {
    */
   resource: ResourceJSON;
   /**
-   * Object of type: {@link ActionJSON}
+   * Selected record. Passed for actions with "record" actionType
    */
   record?: RecordJSON;
+
+  /**
+   * Selected records. Passed for actions with "bulk" actionType
+   */
+  records?: Array<RecordJSON>;
 
   /**
    * Sets tag in a header of an action.

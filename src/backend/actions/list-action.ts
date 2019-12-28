@@ -25,7 +25,7 @@ const ListAction: Action<ListActionResponse> = {
    *
    * To invoke this action use {@link ApiClient#recordAction}
    *
-   * @implements Action.handler
+   * @implements Action#handler
    * @memberof module:ListAction
    * @return {Promise<ListActionResponse>} records with metadata
    */

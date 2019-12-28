@@ -1,6 +1,5 @@
 import Action, { ActionResponse } from './action.interface'
-import NotFoundError from '../utils/not-found-error'
-import ValidationError from '../utils/validation-error'
+import ViewHelpers from '../utils/view-helpers'
 
 /**
  * @implements Action
@@ -10,7 +9,7 @@ import ValidationError from '../utils/validation-error'
  * Removes given records from the database.
  */
 const DeleteAction: Action<ActionResponse> = {
-  name: 'bulk-delete',
+  name: 'bulkDelete',
   isVisible: true,
   actionType: 'bulk',
   icon: 'icomoon-remove-2',
@@ -25,10 +24,29 @@ const DeleteAction: Action<ActionResponse> = {
    * @memberof module:BulkDeleteAction
    */
   handler: async (request, response, data) => {
-    if (request.method === 'get') {
-      return { }
+    const { records, resource, h } = data
+
+    if (!records || !records.length) {
+      throw new Error('no records were selected.')
     }
-    return { }
+    if (request.method === 'get') {
+      const recordsInJSON = records.map(record => record.toJSON(data.currentAdmin))
+      return {
+        records: recordsInJSON,
+      }
+    }
+    if (request.method === 'post') {
+      await Promise.all(records.map(record => resource.delete(record.id())))
+      return {
+        records: records.map(record => record.toJSON(data.currentAdmin)),
+        notice: {
+          message: `Successfully deleted ${records.length} records.`,
+          type: 'success',
+        },
+        redirectUrl: h.resourceActionUrl({ resourceId: resource.id(), actionName: 'list' }),
+      }
+    }
+    throw new Error('method shoud be either "post" or "get"')
   },
 }
 
