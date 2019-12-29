@@ -23,9 +23,10 @@ Started since version 0.9.5
 
 ### Fixed
 
-* fixed Placeholder typo (was Placehoder)
-* fixed wrong property order [#223]
-* fixed PropertyOptions for nested properties (#244)
+* Placeholder typo (was Placehoder)
+* wrong property order [#223]
+* PropertyOptions for nested properties (#244)
+* Not showing 0 in list and show views (#247)
 
 ## 1.5.1 and 1.5.2 - 2019-12-21
 
