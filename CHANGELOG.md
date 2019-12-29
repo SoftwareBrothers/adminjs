@@ -14,10 +14,12 @@ Started since version 0.9.5
 * added ErrorMessageBox component
 * added custom pages in the sidebar
 * add textarea property type
+* export withNotice component
 
 ### Changed
 
 * change interface of ApiClient methods: change from `payload` to `data` and reuse axios types
+* divide props for custom components to BasePropertyProps, EditPropertyProps, ShowPropertyProps and FilterPropertyProps
 
 ### Fixed
 
