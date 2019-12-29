@@ -15,7 +15,7 @@ describe('populator', function () {
   context('one record with one reference given', function () {
     beforeEach(function () {
       this.referenceResource = new BaseResource()
-      this.property = new PropertyDecorator({})
+      this.property = new PropertyDecorator({ property: { name: () => 'name' } })
       this.property.reference = this.sinon.stub().returns(this.referenceResource)
       this.referenceResource.populate = this.sinon.stub()
       this.record = new BaseRecord()

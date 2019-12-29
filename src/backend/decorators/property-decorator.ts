@@ -14,6 +14,17 @@ import PropertyJSON from './property-json.interface'
 class PropertyDecorator {
   public property: BaseProperty
 
+  /**
+   * Property path including all parents.
+   * For root property (this without a parent) it will be its name.
+   * But when property has children their paths will include parent path:
+   * `parentName.subPropertyname`.
+   *
+   * This path serves as a key in {@link PropertyOptions} to identify which
+   * property has to be updated
+   */
+  private path: string
+
   private _admin: AdminBro
 
   private _resource: ResourceDecorator
@@ -27,15 +38,17 @@ class PropertyDecorator {
    * @param {PropertyOptions}     opts.options
    * @param {ResourceDecorator}   opts.resource
    */
-  constructor({ property, admin, options = {}, resource }: {
+  constructor({ property, admin, options = {}, resource, path }: {
     property: BaseProperty;
     admin: AdminBro;
     options?: PropertyOptions;
     resource: ResourceDecorator;
+    path?: string;
   }) {
     this.property = property
     this._admin = admin
     this._resource = resource
+    this.path = path || (options && options.name) || property.name()
 
     /**
      * Options passed along with a given resource
@@ -207,11 +220,13 @@ class PropertyDecorator {
    */
   subProperties(): Array<PropertyDecorator> {
     return this.property.subProperties().map((subProperty) => {
+      const path = `${this.path}.${subProperty.name()}`
       const decorated = new PropertyDecorator({
         property: subProperty,
         admin: this._admin,
-        options: this.getOptionsForSubProperty(subProperty),
+        options: this.getOptionsForSubProperty(path),
         resource: this._resource,
+        path,
       })
       return decorated
     })
@@ -225,12 +240,10 @@ class PropertyDecorator {
    * @return  {PropertyOptions}
    * @private
    */
-  private getOptionsForSubProperty(subProperty: BaseProperty): PropertyOptions {
-    const optionKey = `${this.name()}.${subProperty.name()}`
+  private getOptionsForSubProperty(path: string): PropertyOptions {
     const propertyOptions = (this._resource.options || {}).properties || {}
     return {
-      ...propertyOptions[optionKey],
-      name: optionKey,
+      ...propertyOptions[path],
     }
   }
 }

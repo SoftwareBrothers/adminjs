@@ -123,6 +123,7 @@ describe('PropertyDecorator', function () {
     let propertyDecorator: PropertyDecorator
     const propertyName = 'super'
     const subPropertyName = 'neted'
+    const subPropertyLabel = 'nestedLabel'
 
     beforeEach(function () {
       property = new BaseProperty({ path: propertyName, type: 'string' })
@@ -133,9 +134,9 @@ describe('PropertyDecorator', function () {
       propertyDecorator = new PropertyDecorator({
         ...args,
         property,
-        resource: { options: {
-          'super.nested': { label: 'nestedLabel' },
-        } } as unknown as ResourceDecorator,
+        resource: { options: { properties: {
+          [`${propertyName}.${subPropertyName}`]: { label: subPropertyLabel },
+        } } } as unknown as ResourceDecorator,
       })
     })
 
@@ -144,10 +145,11 @@ describe('PropertyDecorator', function () {
       expect(propertyDecorator.subProperties()[0]).to.be.instanceOf(PropertyDecorator)
     })
 
-    it('changes the first field name to be nested', function () {
+    it('changes label of the nested property to what was given in PropertyOptions', function () {
       const subProperty = propertyDecorator.subProperties()[0]
+      console.log(subProperty)
 
-      expect(subProperty.name()).to.eq(`${propertyName}.${subPropertyName}`)
+      expect(subProperty.label()).to.eq(subPropertyLabel)
     })
   })
 

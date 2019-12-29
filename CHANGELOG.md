@@ -10,8 +10,9 @@ Started since version 0.9.5
 
 ### Added
 
+* introduction of a bulkActions
 * added ErrorMessageBox component
-* added custom actions in the sidebar
+* added custom pages in the sidebar
 * add textarea property type
 
 ### Changed
@@ -22,6 +23,7 @@ Started since version 0.9.5
 
 * fixed Placeholder typo (was Placehoder)
 * fixed wrong property order [#223]
+* fixed PropertyOptions for nested properties (#244)
 
 ## 1.5.1 and 1.5.2 - 2019-12-21
 
