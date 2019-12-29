@@ -133,6 +133,7 @@ class List extends React.Component<Props, State> {
 
     const missing = records.filter(record => (
       !selectedRecords.find(selected => selected.id === record.id)
+      && record.bulkActions.length
     ))
     if (missing.length) {
       this.setState({ selectedRecords: [...selectedRecords, ...missing] })

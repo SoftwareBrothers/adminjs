@@ -12,6 +12,7 @@ import * as AppComponents from './components/app'
 import ApiClient from './utils/api-client'
 import * as style from './styles/variables'
 import * as types from './types'
+import withNotice from './store/with-notice'
 
 const env = {
   NODE_ENV: process.env.NODE_ENV || 'development',
@@ -33,6 +34,7 @@ const Application = (
 // eslint-disable-next-line no-undef
 window.regeneratorRuntime = regeneratorRuntime
 export default {
+  withNotice,
   Application,
   ViewHelpers,
   UserComponents: {},

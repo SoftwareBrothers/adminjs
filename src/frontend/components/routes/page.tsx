@@ -5,6 +5,8 @@ import { RouteComponentProps } from 'react-router'
 import ErrorBoundary from '../app/error-boundary'
 import { ReduxState } from '../../store/store'
 import { ErrorMessageBox } from '../ui'
+import Notice from '../app/notice'
+import NoticeWrapper from './styled/notice-wrapper.styled.jsx'
 
 declare const AdminBro: {
   UserComponents: Record<string, FunctionComponent>;
@@ -65,9 +67,14 @@ class Page extends React.Component<Props, State> {
     }
 
     return (
-      <ErrorBoundary>
-        <Component />
-      </ErrorBoundary>
+      <>
+        <NoticeWrapper>
+          <Notice />
+        </NoticeWrapper>
+        <ErrorBoundary>
+          <Component />
+        </ErrorBoundary>
+      </>
     )
   }
 }

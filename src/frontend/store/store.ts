@@ -4,6 +4,7 @@ import ResourceJSON from '../../backend/decorators/resource-json.interface'
 import { BrandingOptions, VersionProps, AdminPage } from '../../admin-bro-options.interface'
 import { CurrentAdmin } from '../../current-admin.interface'
 import { DEFAULT_PATHS } from '../../constants'
+import { NoticeMessage } from './with-notice'
 
 export const initializePages = (data: Array<AdminPage>): {
   type: string; data: Array<AdminPage>;
@@ -60,17 +61,10 @@ export const initializeSession = (data = {}) => ({
   data,
 })
 
-export type NoticeType = 'success' | 'error'
-
-export type NoticeMessage = {
-  message: string;
-  type?: NoticeType;
-}
-
 export type NoticeMessageInState = NoticeMessage & {
   message: string;
   id: string;
-  type: NoticeType;
+  type: NoticeMessage['type'];
   progress: number;
 }
 

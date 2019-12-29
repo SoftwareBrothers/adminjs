@@ -41,6 +41,12 @@ export {
 
 export { ListActionResponse } from './types/src/backend/actions/list-action'
 
+export {
+  default as withNotice,
+  AddNoticeProps,
+  NoticeMessage,
+} from './types/src/frontend/store/with-notice'
+
 export { default as BaseProperty } from './types/src/backend/adapters/base-property'
 export { default as BaseResource } from './types/src/backend/adapters/base-resource'
 export { default as BaseDatabase } from './types/src/backend/adapters/base-database'
@@ -51,7 +57,7 @@ export { default as ResourceJSON } from './types/src/backend/decorators/resource
 export { default as ActionJSON } from './types/src/backend/decorators/resource-json.interface'
 export { default as PropertyJSON } from './types/src/backend/decorators/property-json.interface'
 
-export { BasePropertyProps, FilterPropertyProps, PropertyProps } from './types/src/frontend/components/property-type/base-property-props'
+export { BasePropertyProps, FilterPropertyProps, ShowPropertyProps, EditPropertyProps } from './types/src/frontend/components/property-type/base-property-props'
 export { ActionProps } from './types/src/frontend/components/actions/action.props'
 
 export type DefaultTheme = {
