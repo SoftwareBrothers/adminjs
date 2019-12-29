@@ -8,7 +8,7 @@ import WrapperBox from '../ui/wrapper-box'
 import Notice from '../app/notice'
 import BaseAction from '../app/base-action-component'
 import ResourceJSON from '../../../backend/decorators/resource-json.interface'
-import { Paths, ReduxState } from '../../store/store'
+import { ReduxState, NoticeMessage } from '../../store/store'
 import { NoResourceError, NoActionError, ErrorMessageBox } from '../ui/error404'
 import NoticeWrapper from './styled/notice-wrapper.styled'
 import RecordJSON from '../../../backend/decorators/record-json.interface'
@@ -20,9 +20,13 @@ import withNotice, { AddNoticeProps } from '../../store/with-notice'
 import getBulkActionsFromRecords from '../app/records-table/utils/get-bulk-actions-from-records'
 import ActionJSON from '../../../backend/decorators/action-json.interface'
 
+const NO_RECORDS_ERROR: NoticeMessage = {
+  message: 'There was an error fething records, Check out console to see more information.',
+  type: 'error',
+}
+
 type PropsFromState = {
   resources: Array<ResourceJSON>;
-  paths: Paths;
 }
 
 type MatchParams = Pick<BulkActionParams, 'actionName' | 'resourceId'>
@@ -62,29 +66,22 @@ class BulkAction extends React.Component<Props, State> {
     this.setState({ tag: tagName })
   }
 
-  fetchRecords({ resourceId, actionName }: MatchParams): void {
+  fetchRecords({ resourceId, actionName }: MatchParams): Promise<void> {
     const { addNotice, location } = this.props
     const recordIdsString = new URLSearchParams(location.search).get('recordIds')
+    const recordIds = recordIdsString ? recordIdsString.split(',') : []
 
     const api = new ApiClient()
     this.setState({
       isLoading: true,
       records: undefined,
     })
-    api.bulkAction({
-      resourceId,
-      recordIds: recordIdsString ? recordIdsString.split(',') : [],
-      actionName,
+    return api.bulkAction({
+      resourceId, recordIds, actionName,
     }).then((response) => {
-      this.setState({
-        isLoading: false,
-        records: response.data.records,
-      })
+      this.setState({ isLoading: false, records: response.data.records })
     }).catch((error) => {
-      addNotice({
-        message: 'There was an error fething records, Check out console to see more information.',
-        type: 'error',
-      })
+      addNotice(NO_RECORDS_ERROR)
       throw error
     })
   }
@@ -95,6 +92,7 @@ class BulkAction extends React.Component<Props, State> {
     const { isLoading, tag, records } = this.state
 
     const resource = resources.find(r => r.id === resourceId)
+
     if (!resource) {
       return (<NoResourceError resourceId={resourceId} />)
     }
@@ -143,7 +141,6 @@ class BulkAction extends React.Component<Props, State> {
 }
 
 const mapStateToProps = (state: ReduxState): PropsFromState => ({
-  paths: state.paths,
   resources: state.resources,
 })
 

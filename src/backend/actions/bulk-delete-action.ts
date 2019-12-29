@@ -1,5 +1,7 @@
 import Action, { ActionResponse } from './action.interface'
 import ViewHelpers from '../utils/view-helpers'
+import NotFoundError from '../utils/not-found-error'
+
 
 /**
  * @implements Action
@@ -8,7 +10,7 @@ import ViewHelpers from '../utils/view-helpers'
  * @description
  * Removes given records from the database.
  */
-const DeleteAction: Action<ActionResponse> = {
+const BulkDeleteAction: Action<ActionResponse> = {
   name: 'bulkDelete',
   isVisible: true,
   actionType: 'bulk',
@@ -27,7 +29,7 @@ const DeleteAction: Action<ActionResponse> = {
     const { records, resource, h } = data
 
     if (!records || !records.length) {
-      throw new Error('no records were selected.')
+      throw new NotFoundError('no records were selected.', 'Action#handler')
     }
     if (request.method === 'get') {
       const recordsInJSON = records.map(record => record.toJSON(data.currentAdmin))
@@ -50,4 +52,4 @@ const DeleteAction: Action<ActionResponse> = {
   },
 }
 
-export default DeleteAction
+export default BulkDeleteAction

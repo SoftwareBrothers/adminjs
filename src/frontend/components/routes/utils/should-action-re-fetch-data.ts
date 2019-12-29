@@ -19,19 +19,16 @@ const shouldActionReFetchData = (
     resourceId,
     recordId,
     actionName,
-    recordIds,
   } = currentMatchParams
   const {
     resourceId: newResourceId,
     recordId: newRecordId,
     actionName: newActionName,
-    recordIds: newRecordIds,
   } = newMatchParams
 
   return resourceId !== newResourceId
     || recordId !== newRecordId
     || actionName !== newActionName
-    || recordIds !== newRecordIds
 }
 
 export default shouldActionReFetchData
