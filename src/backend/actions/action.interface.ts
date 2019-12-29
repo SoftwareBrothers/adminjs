@@ -158,7 +158,7 @@ export type RecordActionResponse = ActionResponse & {
  */
 export type BulkActionResponse = ActionResponse & {
   /**
-   * Record object.
+   * Array of RecordJSON objects.
    */
   records: Array<RecordJSON>;
 }
