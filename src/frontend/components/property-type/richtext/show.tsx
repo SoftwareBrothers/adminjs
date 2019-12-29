@@ -1,11 +1,11 @@
 import React, { ReactNode } from 'react'
 import PropertyInShow from '../../ui/property-in-show'
-import { PropertyProps } from '../base-property-props'
+import { EditPropertyProps } from '../base-property-props'
 
-export default class Show extends React.PureComponent<PropertyProps> {
+export default class Show extends React.PureComponent<EditPropertyProps> {
   private contentRef: React.RefObject<any>
 
-  constructor(props: PropertyProps) {
+  constructor(props: EditPropertyProps) {
     super(props)
     this.contentRef = React.createRef()
   }

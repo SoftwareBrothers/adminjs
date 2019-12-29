@@ -5,10 +5,10 @@ import { withTheme, DefaultTheme } from 'styled-components'
 import ApiClient from '../../../utils/api-client'
 import PropertyInEdit from '../../ui/property-in-edit'
 import selectStyles from '../../../styles/select-styles'
-import { PropertyProps, SelectRecord } from '../base-property-props'
+import { EditPropertyProps, SelectRecord } from '../base-property-props'
 import RecordJSON from '../../../../backend/decorators/record-json.interface'
 
-type CombinedProps = PropertyProps & {theme: DefaultTheme}
+type CombinedProps = EditPropertyProps & {theme: DefaultTheme}
 type SelectRecordEnchanced = SelectRecord & {
   record: RecordJSON;
 }

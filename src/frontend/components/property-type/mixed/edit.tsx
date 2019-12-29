@@ -2,13 +2,13 @@ import React from 'react'
 
 import PropertyInEdit from '../../ui/property-in-edit'
 import StyledSection from '../../ui/styled-section'
-import { PropertyProps } from '../base-property-props'
+import { EditPropertyProps } from '../base-property-props'
 
 type Props = {
   ItemComponent: typeof React.Component;
 }
 
-const Edit: React.FC<Props & PropertyProps> = (props) => {
+const Edit: React.FC<Props & EditPropertyProps> = (props) => {
   const { property, record, ItemComponent } = props
   const error = record.errors && record.errors[property.name]
   return (

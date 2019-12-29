@@ -4,10 +4,10 @@ import { withTheme, DefaultTheme } from 'styled-components'
 
 import PropertyInEdit from '../../ui/property-in-edit'
 import StyledInput from '../../ui/styled-input'
-import { PropertyProps } from '../base-property-props'
+import { EditPropertyProps } from '../base-property-props'
 import selectStyles from '../../../styles/select-styles'
 
-type CombinedProps = PropertyProps & {theme: DefaultTheme}
+type CombinedProps = EditPropertyProps & {theme: DefaultTheme}
 
 class Edit extends React.Component<CombinedProps> {
   constructor(props) {

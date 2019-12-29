@@ -12,6 +12,7 @@ import * as richtext from './richtext'
 import * as reference from './reference'
 import * as textarea from './textarea'
 import { BasePropertyProps } from './base-property-props'
+import { PropertyPlace } from '../../../backend/decorators/property-json.interface'
 
 let globalAny: any = {}
 
@@ -34,6 +35,13 @@ const types = {
 
 type State = {
   isClient: boolean;
+}
+
+type Props = BasePropertyProps & {
+  /**
+   * Where given property schould be rendered
+   */
+  where: PropertyPlace;
 }
 
 /**
@@ -161,8 +169,8 @@ type State = {
  *   </WrapperBox>
  * )
  */
-export default class BasePropertyComponent extends React.Component<BasePropertyProps, State> {
-  constructor(props: BasePropertyProps) {
+export default class BasePropertyComponent extends React.Component<Props, State> {
+  constructor(props: Props) {
     super(props)
     this.state = {
       isClient: false,

@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 
 import ViewHelpers from '../../../../backend/utils/view-helpers'
 import Label from '../../ui/label'
-import { PropertyProps } from '../base-property-props'
+import { EditPropertyProps } from '../base-property-props'
 
 interface Props {
   ItemComponent: typeof React.Component;
@@ -11,7 +11,7 @@ interface Props {
 
 // TODO define ItemComponent interface
 
-export default class List extends React.PureComponent<Props & PropertyProps> {
+export default class List extends React.PureComponent<Props & EditPropertyProps> {
   renderItems(): React.ReactChild {
     const { property, ItemComponent } = this.props
     return (

@@ -61,10 +61,6 @@ export type BasePropertyProps = {
    */
   record?: RecordJSON;
   /**
-   * Where given property schould be rendered
-   */
-  where: PropertyPlace;
-  /**
    * callback function which should indicate change of the field value. You can use it
    * when overriding edit properties.
   */
@@ -98,14 +94,36 @@ export type FilterPropertyProps = BasePropertyProps & {
  * Props which are passed to all your custom property components in show
  *
  * @memberof BasePropertyComponent
- * @alias BasePropertyEditProps
+ * @alias EditPropertyProps
  * @extends BasePropertyProps
  */
-export type PropertyProps = BasePropertyProps & {
+export type EditPropertyProps = BasePropertyProps & {
   /**
    * callback function which should indicate change of the field value.
   */
   onChange: OnPropertyChange;
+  /**
+   * Record JSON representation. Null for filter
+   */
+  record: RecordJSON;
+}
+
+/**
+ * Props which are passed to all your custom property components in show
+ *
+ * @memberof BasePropertyComponent
+ * @alias BasePropertyEditProps
+ * @extends BasePropertyProps
+ */
+export type ShowPropertyProps = {
+  /**
+   * Property JSON representation
+   */
+  property: PropertyJSON;
+  /**
+   * Resource JSON representation
+   */
+  resource: ResourceJSON;
   /**
    * Record JSON representation. Null for filter
    */

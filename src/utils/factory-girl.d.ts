@@ -1,8 +1,12 @@
 declare module 'factory-girl' {
+  type DefineProperty<T> = () => T
+
   function define<T>(
     name: string,
     model: any,
-    attrs: T,
+    attrs: {
+      [P in keyof T]: (() => T[P]) | T[P] | Promise<T[P]> | (() => Promise<T[P]>)
+    }
   ): void;
 
   function build<T>(

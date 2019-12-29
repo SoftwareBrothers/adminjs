@@ -3,7 +3,7 @@ import React, { ReactNode } from 'react'
 import { findDOMNode } from 'react-dom'
 
 import styled from 'styled-components'
-import { PropertyProps } from '../base-property-props'
+import { EditPropertyProps } from '../base-property-props'
 import { Label } from '../../ui'
 
 const toolbarOptions = [
@@ -41,12 +41,12 @@ const Wrapper = styled.div.attrs({
   }
 `
 
-export default class Edit extends React.Component<PropertyProps> {
+export default class Edit extends React.Component<EditPropertyProps> {
   private wysiwigRef: React.RefObject<any>
 
   private quill: any
 
-  constructor(props: PropertyProps) {
+  constructor(props: EditPropertyProps) {
     super(props)
     this.wysiwigRef = React.createRef()
   }
@@ -55,7 +55,7 @@ export default class Edit extends React.Component<PropertyProps> {
     this.setupWysiwig()
   }
 
-  shouldComponentUpdate(nextProps: PropertyProps): boolean {
+  shouldComponentUpdate(nextProps: EditPropertyProps): boolean {
     const { record, property } = this.props
     if (!nextProps) { return false }
     const oldError = record.errors
