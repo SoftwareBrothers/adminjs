@@ -1,7 +1,8 @@
 import React from 'react'
 
 import PropertyHeader from './property-header'
-import PropertyJSON from '../../../backend/decorators/property-json.interface'
+import PropertyJSON from '../../../../backend/decorators/property-json.interface'
+import Th from './styled/th.styled'
 
 /**
  * @memberof RecordsTableHeader
@@ -24,6 +25,15 @@ type Props = {
    * Sort direction
    */
   direction?: 'asc' | 'desc';
+  /**
+   * Handler function invoked when checkbox is clicked. If given extra column
+   * with checkbox will be rendered
+   */
+  onSelectAll?: () => any;
+  /**
+   * Indicates if "bulk" checkbox should be checked
+   */
+  selectedAll?: boolean;
 }
 
 /**
@@ -58,10 +68,23 @@ type Props = {
  * )
  */
 const RecordsTableHeader: React.FC<Props> = (props) => {
-  const { titleProperty, properties, sortBy, direction } = props
+  const {
+    titleProperty, properties,
+    sortBy, direction,
+    onSelectAll, selectedAll } = props
   return (
     <thead>
       <tr key="header">
+        {onSelectAll ? (
+          <Th>
+            <input
+              style={{ marginLeft: 5 }}
+              type="checkbox"
+              onChange={(): void => onSelectAll()}
+              checked={selectedAll}
+            />
+          </Th>
+        ) : null}
         {properties.map(property => (
           <PropertyHeader
             key={property.name}

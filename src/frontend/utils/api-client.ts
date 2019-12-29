@@ -1,6 +1,6 @@
 import axios, { AxiosResponse, AxiosInstance, AxiosRequestConfig } from 'axios'
 import RecordJSON from '../../backend/decorators/record-json.interface'
-import { RecordActionResponse, ActionResponse } from '../../backend/actions/action.interface'
+import { RecordActionResponse, ActionResponse, BulkActionResponse } from '../../backend/actions/action.interface'
 
 let globalAny: any = {}
 
@@ -50,6 +50,26 @@ export type RecordActionAPIParams = AxiosRequestConfig & {
    * Id of a record taken from {@link RecordJSON}
    */
   recordId: string;
+  /**
+   * Id of a resource taken from {@link ResourceJSON}
+   */
+  resourceId: string;
+  /**
+   * Action name taken from  {@link ActionJSON}
+   */
+  actionName: string;
+}
+
+/**
+ * @alias BulkActionAPIParams
+ * @memberof ApiClient
+ * @extends AxiosRequestConfig
+ */
+export type BulkActionAPIParams = AxiosRequestConfig & {
+  /**
+   * Id of a record taken from {@link RecordJSON}
+   */
+  recordIds: Array<string>;
   /**
    * Id of a resource taken from {@link ResourceJSON}
    */
@@ -151,6 +171,29 @@ class ApiClient {
       method: data ? 'POST' : 'GET',
       ...axiosParams,
       data,
+    })
+    checkResponse(response)
+    return response
+  }
+
+  /**
+   * Invokes given record {@link Action} on the backend.
+   *
+   * @param   {BulkActionAPIParams} options
+   * @return  {Promise<BulkActionResponse>}            response from an {@link Action}
+   */
+  async bulkAction(options: BulkActionAPIParams): Promise<AxiosResponse<BulkActionResponse>> {
+    const { resourceId, recordIds, actionName, data, ...axiosParams } = options
+
+    const params = new URLSearchParams()
+    params.append('recordIds', recordIds.join(','))
+
+    const response = await this.client.request({
+      url: `/api/resources/${resourceId}/bulk/${actionName}`,
+      method: data ? 'POST' : 'GET',
+      ...axiosParams,
+      data,
+      params,
     })
     checkResponse(response)
     return response

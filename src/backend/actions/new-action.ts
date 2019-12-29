@@ -19,7 +19,7 @@ const NewAction: Action<RecordActionResponse> = {
    *
    * To invoke this action use {@link ApiClient#resourceAction}
    *
-   * @implements Action.handler
+   * @implements Action#handler
    * @memberof module:NewAction
    * @return {Promise<RecordActionResponse>} populated records
    */

@@ -5,7 +5,7 @@ import { ThemeProvider } from 'styled-components'
 import combineStyles from '../../styles/combine-styles'
 import { childrenType } from '../../types'
 
-const theme = combineStyles()
+const theme = combineStyles({})
 
 const TestContextProvider = (props) => {
   const { children } = props

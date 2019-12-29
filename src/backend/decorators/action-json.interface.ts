@@ -10,7 +10,7 @@ export default interface ActionJSON {
   /**
    * Type of an action
    */
-  actionType: 'record' | 'resource' | Array<'record' | 'resource'>;
+  actionType: 'record' | 'resource' | 'bulk' | Array<'record' | 'resource' | 'bulk'>;
   /**
    * Action icon
    */

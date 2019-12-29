@@ -4,6 +4,7 @@ import ViewHelpers from '../../../src/backend/utils/view-helpers'
 const expectedResult = {
   recordActionUrl: '#recordActionUrl',
   resourceActionUrl: '#resourceActionUrl',
+  bulkActionUrl: '#bulkActionUrl',
   loginUrl: 'loginUrl',
   logoutUrl: 'logoutUrl',
   rootUrl: 'admin',
@@ -22,6 +23,7 @@ export default (): ViewHelpers => (
     },
     recordActionUrl: sinon.stub().returns(expectedResult.recordActionUrl),
     resourceActionUrl: sinon.stub().returns(expectedResult.resourceActionUrl),
+    bulkActionUrl: sinon.stub().returns(expectedResult.bulkActionUrl),
     urlBuilder: sinon.stub(),
     loginUrl: sinon.stub().returns(expectedResult.loginUrl),
     logoutUrl: sinon.stub().returns(expectedResult.logoutUrl),

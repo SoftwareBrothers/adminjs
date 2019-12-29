@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import { connect } from 'react-redux'
-import styled from 'styled-components'
 
 import { RouteComponentProps } from 'react-router'
 import Breadcrumbs from '../app/breadcrumbs'
@@ -9,27 +8,21 @@ import WrapperBox from '../ui/wrapper-box'
 import Notice from '../app/notice'
 import BaseAction from '../app/base-action-component'
 import Filter from '../app/filter'
-import queryHasFilter from '../../utils/query-has-filter'
+import queryHasFilter from './utils/query-has-filter'
 import ResourceJSON from '../../../backend/decorators/resource-json.interface'
 import { Paths, ReduxState } from '../../store/store'
 import { NoResourceError, NoActionError } from '../ui/error404'
-
-const NoticeWrapper = styled.div`
-  width: 100%;
-  position: relative;
-`
+import NoticeWrapper from './styled/notice-wrapper.styled'
+import { ResourceActionParams } from '../../../backend/utils/view-helpers'
 
 type PropsFromState = {
   resources: Array<ResourceJSON>;
   paths: Paths;
 }
 
-type MatchParams = {
-  resourceId: string;
-  actionName: string;
-}
+type Props = PropsFromState & RouteComponentProps<ResourceActionParams>
 
-const ResourceAction: React.FC<PropsFromState & RouteComponentProps<MatchParams>> = (props) => {
+const ResourceAction: React.FC<Props> = (props) => {
   const { resources, match, location } = props
   const { resourceId, actionName } = match.params
 

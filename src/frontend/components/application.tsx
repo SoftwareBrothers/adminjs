@@ -3,11 +3,11 @@ import { Switch, Route } from 'react-router-dom'
 import styled, { createGlobalStyle } from 'styled-components'
 
 import ViewHelpers from '../../backend/utils/view-helpers'
-import Sidebar from './app/sidebar'
+import Sidebar from './app/sidebar/sidebar'
 import Topbar from './app/topbar'
 
 import {
-  Dashboard, ResourceAction, RecordAction, Page,
+  Dashboard, ResourceAction, RecordAction, Page, BulkAction,
 } from './routes'
 
 const GlobalStyle = createGlobalStyle`
@@ -57,6 +57,7 @@ const App: React.FC = () => {
 
   const recordActionUrl = h.recordActionUrl({ resourceId, recordId, actionName })
   const resourceActionUrl = h.resourceActionUrl({ resourceId, actionName })
+  const bulkActionUrl = h.bulkActionUrl({ resourceId, actionName })
   const pageUrl = h.pageUrl(pageName)
 
   return (
@@ -70,6 +71,7 @@ const App: React.FC = () => {
             <Route path={h.dashboardUrl()} exact component={Dashboard} />
             <Route path={resourceActionUrl} exact component={ResourceAction} />
             <Route path={recordActionUrl} exact component={RecordAction} />
+            <Route path={bulkActionUrl} exact component={BulkAction} />
             <Route path={pageUrl} exact component={Page} />
           </Switch>
         </Core>

@@ -100,29 +100,44 @@ const Router: RouterType = {
     action: 'resourceAction',
   }, {
     method: 'GET',
+    path: '/api/resources/{resourceId}/actions/{action}',
+    Controller: ApiController,
+    action: 'resourceAction',
+  }, {
+    method: 'POST',
+    path: '/api/resources/{resourceId}/actions/{action}',
+    Controller: ApiController,
+    action: 'resourceAction',
+  }, {
+    method: 'GET',
     path: '/resources/{resourceId}/records/{recordId}/{action}',
     Controller: AppController,
     action: 'recordAction',
   }, {
     method: 'GET',
-    path: '/api/resources/{resourceId}/actions/{action}',
+    path: '/api/resources/{resourceId}/records/{recordId}/{action}',
     Controller: ApiController,
-    action: 'resourceAction',
+    action: 'recordAction',
+  }, {
+    method: 'POST',
+    path: '/api/resources/{resourceId}/records/{recordId}/{action}',
+    Controller: ApiController,
+    action: 'recordAction',
   }, {
     method: 'GET',
-    path: '/api/resources/{resourceId}/records/{recordId}/{action}',
+    path: '/resources/{resourceId}/bulk/{action}',
+    Controller: AppController,
+    action: 'bulkAction',
+  }, {
+    method: 'GET',
+    path: '/api/resources/{resourceId}/bulk/{action}',
     Controller: ApiController,
-    action: 'recordAction',
+    action: 'bulkAction',
   }, {
     method: 'POST',
-    path: '/api/resources/{resourceId}/actions/{action}',
+    path: '/api/resources/{resourceId}/bulk/{action}',
     Controller: ApiController,
-    action: 'resourceAction',
-  }, {
-    method: 'POST',
-    path: '/api/resources/{resourceId}/records/{recordId}/{action}',
-    Controller: ApiController,
-    action: 'recordAction',
+    action: 'bulkAction',
   }, {
     method: 'GET',
     path: '/api/resources/{resourceId}/search/',

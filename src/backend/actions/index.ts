@@ -3,6 +3,7 @@ import showAction from './show-action'
 import editAction from './edit-action'
 import newAction from './new-action'
 import listAction from './list-action'
+import bulkDeleteAction from './bulk-delete-action'
 
 export {
   showAction as show,
@@ -10,4 +11,5 @@ export {
   deleteAction as delete,
   newAction as new,
   listAction as list,
+  bulkDeleteAction as bulkDelete,
 }

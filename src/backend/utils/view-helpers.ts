@@ -23,6 +23,17 @@ export type RecordActionParams = {
 }
 
 /**
+ * Params for a bulk action
+ * @alias BulkActionParams
+ * @memberof ViewHelpers
+ */
+export type BulkActionParams = {
+  resourceId: string;
+  actionName: string;
+  recordIds?: Array<string>;
+}
+
+/**
  * Params for a resource action
  * @alias ResourceActionParams
  * @memberof ViewHelpers
@@ -127,6 +138,28 @@ class ViewHelpers {
    */
   recordActionUrl({ resourceId, recordId, actionName }: RecordActionParams): string {
     return this.urlBuilder(['resources', resourceId, 'records', recordId, actionName])
+  }
+
+  /**
+   * Returns bulkAction url
+   *
+   * @param   {BulkActionParams}  options
+   * @param   {string}  options.resourceId
+   * @param   {string}  [options.recordIds]
+   * @param   {string}  options.actionName
+   *
+   * @return  {string}
+   */
+  bulkActionUrl({ resourceId, recordIds, actionName }: BulkActionParams): string {
+    const url = this.urlBuilder([
+      'resources', resourceId, 'bulk', actionName,
+    ])
+    if (recordIds && recordIds.length) {
+      const query = new URLSearchParams()
+      query.append('recordIds', recordIds.join(','))
+      return `${url}?${query.toString()}`
+    }
+    return url
   }
 
   /**

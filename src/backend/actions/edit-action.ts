@@ -22,7 +22,7 @@ const EditAction: Action<RecordActionResponse> = {
    * To invoke this action use {@link ApiClient#recordAction}
    *
    * @return  {RecordActionResponse}  populated record
-   * @implements Action.handler
+   * @implements Action#handler
    * @memberof module:EditAction
    */
   handler: async (request, response, data) => {

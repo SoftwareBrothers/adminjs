@@ -247,6 +247,22 @@ class ResourceDecorator {
   }
 
   /**
+   * List of all actions which should be invoked for entire resource and not
+   * for a particular record
+   *
+   * @param {CurrentAdmin} currentAdmin   currently logged in admin user
+   * @return  {Array<ActionDecorator>}     Actions assigned to resources
+   */
+  bulkActions(record: BaseRecord, currentAdmin?: CurrentAdmin): Array<ActionDecorator> {
+    return Object.values(this.actions)
+      .filter(action => (
+        action.isBulkType()
+        && action.isVisible(currentAdmin, record)
+        && action.isAccessible(currentAdmin, record)
+      ))
+  }
+
+  /**
    * List of all actions which should be invoked for given record and not
    * for an entire resource
    *

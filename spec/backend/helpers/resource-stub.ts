@@ -30,6 +30,7 @@ export default (): BaseResource => ({
   find: sinon.stub(),
   populate: sinon.stub(),
   findOne: sinon.stub(),
+  findMany: sinon.stub(),
   build: sinon.stub(),
   create: sinon.stub(),
   update: sinon.stub(),
