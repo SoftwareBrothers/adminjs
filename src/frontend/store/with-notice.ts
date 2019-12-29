@@ -33,6 +33,8 @@ const mapDispatchToProps = (dispatch): AddNoticeProps => ({
  * It gives you the additional prop: `addNotice(noticeMessage)` taking {@link NoticeMessage}.
  *
  * ```javascript
+ * import { withNotice } from 'admin-bro'
+ *
  * const MY_MESSAGE = {
  *   message: 'I am toast message',
  *   type: 'success',

@@ -6,7 +6,7 @@ import ErrorBoundary from '../app/error-boundary'
 import { ReduxState } from '../../store/store'
 import { ErrorMessageBox } from '../ui'
 import Notice from '../app/notice'
-import NoticeWrapper from './styled/notice-wrapper.styled.jsx'
+import NoticeWrapper from './styled/notice-wrapper.styled'
 
 declare const AdminBro: {
   UserComponents: Record<string, FunctionComponent>;
