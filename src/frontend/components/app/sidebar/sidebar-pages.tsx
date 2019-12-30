@@ -25,12 +25,20 @@ const SidebarPages: React.FC<Props> = (props) => {
     return (<></>)
   }
 
+  const isActive = (page, location): boolean => (
+    !!location.pathname.match(`/pages/${page.name}`)
+  )
+
   return (
     <SidebarSection>
       <SidebarLabel>Pages</SidebarLabel>
       <PagesListWrapper>
         {pages.map(page => (
-          <SidebarLink to={h.pageUrl(page.name)} key={page.name}>
+          <SidebarLink
+            to={h.pageUrl(page.name)}
+            key={page.name}
+            isActive={(match, location): boolean => isActive(page, location)}
+          >
             {page.label}
           </SidebarLink>
         ))}

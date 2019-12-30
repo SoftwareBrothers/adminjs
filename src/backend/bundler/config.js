@@ -59,7 +59,7 @@ const plugins = ({ babelConfig = {}, commonJSConfig = {}, minify = false } = {})
       namedExports: {
         'node_modules/flat/index.js': ['flatten', 'unflatten'],
         '@material-ui/utils/node_modules/react-is': [
-          'ForwardRef',
+          'isValidElementType', 'isContextConsumer', 'isElement', 'ForwardRef',
         ],
       },
       ...commonJSConfig,

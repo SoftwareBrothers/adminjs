@@ -41,7 +41,7 @@ describe('AdminBro', function () {
     })
   })
 
-  describe('.require', function () {
+  describe('.bundle', function () {
     afterEach(function () {
       AdminBro.UserComponents = {}
     })
