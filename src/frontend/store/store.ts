@@ -5,6 +5,7 @@ import { BrandingOptions, VersionProps, AdminPage } from '../../admin-bro-option
 import { CurrentAdmin } from '../../current-admin.interface'
 import { DEFAULT_PATHS } from '../../constants'
 import { NoticeMessage } from './with-notice'
+import PageJSON from '../../backend/decorators/page-json.interface'
 
 export const initializePages = (data: Array<AdminPage>): {
   type: string; data: Array<AdminPage>;
@@ -112,12 +113,6 @@ const resourcesReducer = (
     return action.data
   default: return state
   }
-}
-
-export type PageJSON = {
-  name: string;
-  label: string;
-  component: AdminPage['component'];
 }
 
 const pagesReducer = (

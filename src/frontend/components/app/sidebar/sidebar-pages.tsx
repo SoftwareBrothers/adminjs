@@ -38,6 +38,7 @@ const SidebarPages: React.FC<Props> = (props) => {
             to={h.pageUrl(page.name)}
             key={page.name}
             isActive={(match, location): boolean => isActive(page, location)}
+            data-testid="sidebar-page-link"
           >
             {page.label}
           </SidebarLink>

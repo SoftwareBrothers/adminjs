@@ -31,7 +31,10 @@ class SidebarParent extends React.PureComponent<Props> {
         </SidebarGroupTitle>
         <ResourcesList>
           {resources.map(resource => (
-            <SidebarResource resource={resource} key={resource.id} />
+            <SidebarResource
+              resource={resource}
+              key={resource.id}
+            />
           ))}
         </ResourcesList>
       </li>

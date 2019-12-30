@@ -15,7 +15,7 @@ const SidebarResource: React.FC<Props & RouteComponentProps> = (props) => {
   const isActive = (match, location): boolean => !!location.pathname.match(`/resources/${resource.id}/`)
   return (
     <li>
-      <SidebarLink to={resource.href} isActive={isActive}>
+      <SidebarLink to={resource.href} isActive={isActive} data-testid="sidebar-resource-link">
         {resource.name}
       </SidebarLink>
     </li>
