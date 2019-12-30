@@ -56,6 +56,7 @@ export { default as RecordJSON } from './types/src/backend/decorators/record-jso
 export { default as ResourceJSON } from './types/src/backend/decorators/resource-json.interface'
 export { default as ActionJSON } from './types/src/backend/decorators/resource-json.interface'
 export { default as PropertyJSON } from './types/src/backend/decorators/property-json.interface'
+export { default as PageJSON } from './types/src/backend/decorators/page-json.interface'
 
 export { BasePropertyProps, FilterPropertyProps, ShowPropertyProps, EditPropertyProps } from './types/src/frontend/components/property-type/base-property-props'
 export { ActionProps } from './types/src/frontend/components/actions/action.props'
