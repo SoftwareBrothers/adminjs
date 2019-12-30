@@ -27,6 +27,7 @@ Started since version 0.9.5
 * wrong property order [#223]
 * PropertyOptions for nested properties (#244)
 * Not showing 0 in list and show views (#247)
+* Selected sidebar alements after page reload (#241)
 
 ## 1.5.1 and 1.5.2 - 2019-12-21
 
