@@ -33,7 +33,7 @@ export interface ResourceOptions {
    */
   filterProperties?: Array<string>;
   /**
-   * Parent element under which resource should be nested in sidbear. Default
+   * Parent element under which resource should be nested in sidebar. Default
    * to the database name.
    */
   parent?: {

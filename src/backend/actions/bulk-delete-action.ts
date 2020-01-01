@@ -1,5 +1,4 @@
 import Action, { ActionResponse } from './action.interface'
-import ViewHelpers from '../utils/view-helpers'
 import NotFoundError from '../utils/not-found-error'
 
 
@@ -48,7 +47,7 @@ const BulkDeleteAction: Action<ActionResponse> = {
         redirectUrl: h.resourceActionUrl({ resourceId: resource.id(), actionName: 'list' }),
       }
     }
-    throw new Error('method shoud be either "post" or "get"')
+    throw new Error('method should be either "post" or "get"')
   },
 }
 

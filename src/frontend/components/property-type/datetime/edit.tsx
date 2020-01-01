@@ -78,6 +78,7 @@ export default class Edit extends React.Component<EditPropertyProps> {
         <div className="control has-icons-right">
           <StyledInput
             type="text"
+            /* cspell:disable-next-line */
             className="input pickadate"
             id={property.name}
             ref={this.datepickerRef}

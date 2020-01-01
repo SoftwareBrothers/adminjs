@@ -23,7 +23,7 @@ const Property = styled.div`
 `
 
 /**
- * Wrapps input with label in Filter
+ * Wraps input with label in Filter
  *
  * @component
  * @example

@@ -1,5 +1,3 @@
-import { AdminPage } from '../../admin-bro-options.interface'
-
 /**
  * Representing the page in the sidebar
  */
@@ -15,5 +13,5 @@ export default interface PageJSON {
   /**
    * Page component. Bundled with {@link AdminBro.bundle}
    */
-  component: AdminPage['component'];
+  component: string;
 }

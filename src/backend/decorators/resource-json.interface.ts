@@ -32,7 +32,7 @@ export default interface ResourceJSON {
     icon: string;
   };
   /**
-   * Property which should be treaten as a Main property
+   * Property which should be treated as a Main property
    */
   titleProperty: PropertyJSON;
   /**

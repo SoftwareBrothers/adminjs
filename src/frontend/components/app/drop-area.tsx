@@ -146,7 +146,7 @@ type Props = {
      */
     maxSize?: number;
     /**
-     * Avaliable mime types. When not defined - all mime types are allowed.
+     * Available mime types. When not defined - all mime types are allowed.
      */
     mimeTypes?: Array<string>;
   };
@@ -255,7 +255,7 @@ const DropArea: React.FC<Props & AddNoticeProps> = (props) => {
       onDragLeave={onDragLeave}
       onDrop={onDrop}
     >
-      <DropMessage className={isDragging ? 'active' : 'unactive'} onDragEnter={onDragEnter}>
+      <DropMessage className={isDragging ? 'active' : 'inactive'} onDragEnter={onDragEnter}>
         <h1>Drop Here</h1>
       </DropMessage>
       <UploadInput type="file" id={propertyName} onChange={(event): void => onDrop(event)} />

@@ -1,0 +1,35 @@
+{
+    "version": "0.1",
+    "language": "en",
+    "words": [
+        "crossorigin",
+        "nullish",
+        "envs",
+        "prefetch",
+        "expressjs",
+        "icomoon",
+        "populator",
+        "unflatten",
+        "datetime",
+        "richtext",
+        "promisify",
+        "hoverable",
+        "dropdown",
+        "flatpickr",
+        "codecov",
+        "bulma",
+        "unmount",
+        "testid",
+        "woff",
+        "iife",
+        "sourcemap",
+        "camelize",
+        "datepicker",
+        "camelcase",
+        "fullwidth",
+        "wysiwig"
+    ],
+    "ignorePaths": [
+        "src/frontend/assets/**/*"
+    ]
+}

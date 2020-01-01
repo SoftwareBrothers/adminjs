@@ -20,12 +20,12 @@ describe('layoutTemplate', function () {
     })
   })
 
-  describe('AdmionBro with branding options given', function () {
+  describe('AdminBro with branding options given', function () {
     beforeEach(function () {
       this.branding = {
         softwareBrothers: false,
         companyName: 'Other name',
-        favicon: '/someimage.png',
+        favicon: '/someImage.png',
       } as AdminBroOptions['branding']
 
       this.adminBro = new AdminBro({ branding: this.branding })

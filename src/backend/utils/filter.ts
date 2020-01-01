@@ -78,7 +78,7 @@ class Filter {
   }
 
   /**
-   * Populates all filtered properties which referes to other resources
+   * Populates all filtered properties which refers to other resources
    */
   async populate(): Promise<Filter> {
     const keys = Object.keys(this.filters)

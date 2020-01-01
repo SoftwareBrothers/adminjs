@@ -27,7 +27,7 @@ type PropsFromState = {
   };
 }
 
-const Topbar: React.FC<PropsFromState> = (props) => {
+const TopBar: React.FC<PropsFromState> = (props) => {
   const { session, versions, paths } = props
   return (
     <Navbar>
@@ -51,4 +51,4 @@ const mapStateToProps = (state: ReduxState): PropsFromState => ({
   versions: state.versions,
 })
 
-export default connect(mapStateToProps)(Topbar)
+export default connect(mapStateToProps)(TopBar)

@@ -1,40 +1,40 @@
 import sortSetter from './sort-setter'
 
 describe('sortSetter', function () {
-  const defautlFieldName = 'someFieldName'
-  const overridenFieldName = 'otherField'
-  const overridenDirection = 'desc'
+  const defaultFieldName = 'someFieldName'
+  const overriddenFieldName = 'otherField'
+  const overriddenDirection = 'desc'
   const resourceOptions = {
     sort: {
-      sortBy: overridenFieldName,
-      direction: overridenDirection,
+      sortBy: overriddenFieldName,
+      direction: overriddenDirection,
     },
   }
   it('returns query when it is passed', function () {
     const direction = 'asc'
     const sortBy = 'name'
-    expect(sortSetter({ direction, sortBy }), defautlFieldName, {}).to.deep.equal({
+    expect(sortSetter({ direction, sortBy }), defaultFieldName, {}).to.deep.equal({
       direction,
       sortBy,
     })
   })
 
   it('returns defaults when no query is given', function () {
-    expect(sortSetter({}, defautlFieldName, {})).to.deep.equal({
+    expect(sortSetter({}, defaultFieldName, {})).to.deep.equal({
       direction: sortSetter.DEFAULT_DIRECTION,
-      sortBy: defautlFieldName,
+      sortBy: defaultFieldName,
     })
   })
 
-  it('returns overriden sort settings when no defaults are given', function () {
-    expect(sortSetter({}, defautlFieldName, resourceOptions)).to.deep.equal(
+  it('returns overridden sort settings when no defaults are given', function () {
+    expect(sortSetter({}, defaultFieldName, resourceOptions)).to.deep.equal(
       resourceOptions.sort,
     )
   })
 
   it('throws an error when direction is not correct', function () {
     expect(() => {
-      sortSetter({}, defautlFieldName, { sort: { direction: 'other' } })
+      sortSetter({}, defaultFieldName, { sort: { direction: 'other' } })
     }).to.throw().property('name', 'ConfigurationError')
   })
 })

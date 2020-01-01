@@ -62,7 +62,7 @@ class BaseResource {
    * The name of the database to which resource belongs. When resource is
    * a mongoose model it should be database name of the mongo database.
    *
-   * Visuall, by default, all resources are nested in sidebar under their database names.
+   * Visually, by default, all resources are nested in sidebar under their database names.
    * @return {String}         database name
    * @abstract
    */
@@ -272,7 +272,7 @@ class BaseResource {
    */
   decorate(): ResourceDecorator {
     if (!this._decorated) {
-      throw new Error('resource don\'t have assinged decorator yet')
+      throw new Error('resource don\'t have assigned decorator yet')
     }
     return this._decorated
   }

@@ -60,7 +60,7 @@ describe('BulkDeleteAction', function () {
         })
       })
 
-      it('deltes all records for post request', async function () {
+      it('deletes all records for post request', async function () {
         request.method = 'post'
 
         await BulkDeleteAction.handler(request, response, data)

@@ -4,7 +4,7 @@ import styled, { createGlobalStyle } from 'styled-components'
 
 import ViewHelpers from '../../backend/utils/view-helpers'
 import Sidebar from './app/sidebar/sidebar'
-import Topbar from './app/topbar'
+import TopBar from './app/top-bar'
 
 import {
   Dashboard, ResourceAction, RecordAction, Page, BulkAction,
@@ -66,7 +66,7 @@ const App: React.FC = () => {
       <ApplicationWrapper>
         <Sidebar />
         <Core>
-          <Topbar />
+          <TopBar />
           <Switch>
             <Route path={h.dashboardUrl()} exact component={Dashboard} />
             <Route path={resourceActionUrl} exact component={ResourceAction} />

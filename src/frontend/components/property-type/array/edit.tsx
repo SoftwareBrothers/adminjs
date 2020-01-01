@@ -33,7 +33,7 @@ export default class Edit extends React.Component<Props> {
     const items = convertParamsToArrayItems(property, record)
     const newRecord = { ...record }
     newRecord.params = normalizeParams({
-      ...newRecord.params, // oterwise yarn types is not working
+      ...newRecord.params, // otherwise yarn types is not working
       [property.name]: [
         ...items,
         property.subProperties.length ? {} : '',

@@ -1,4 +1,4 @@
-import PropertyJSON, { PropertyPlace } from '../../../backend/decorators/property-json.interface'
+import PropertyJSON from '../../../backend/decorators/property-json.interface'
 import ResourceJSON from '../../../backend/decorators/resource-json.interface'
 import RecordJSON from '../../../backend/decorators/record-json.interface'
 
@@ -136,7 +136,7 @@ export type ShowPropertyProps = {
  * one argument which is entire {@link RecordJSON} or 2 arguments - one
  * __property.name__ and the second one: __value__. Used by the __edit__ and __filter__ components.
  *
- * Lets take a looka at an example of overriding edit component:
+ * Lets take a look at an example of overriding edit component:
  * ```typescript
  * import React, { ReactNode } from 'react'
  * import { BasePropertyProps, PropertyInEdit, StyledInput } from 'admin-bro'
@@ -150,7 +150,7 @@ export type ShowPropertyProps = {
  *   handleInputChange(event): void {
  *     const { onChange, property, record } = this.props
  *
- *     // Here is the iteresting part:
+ *     // Here is the interesting part:
  *     onChange(property.name, event.target.value)
  *
  *     // or you can pass an entire record. This is the same as above but gives you
@@ -187,7 +187,7 @@ export type ShowPropertyProps = {
  */
 export type OnPropertyChange = (
   /**
-   * proprty.name or updated RecordJSON object
+   * property.name or updated RecordJSON object
    */
   propertyOrRecord: RecordJSON | string,
   /**

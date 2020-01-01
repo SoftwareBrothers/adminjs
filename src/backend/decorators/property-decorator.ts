@@ -18,7 +18,7 @@ class PropertyDecorator {
    * Property path including all parents.
    * For root property (this without a parent) it will be its name.
    * But when property has children their paths will include parent path:
-   * `parentName.subPropertyname`.
+   * `parentName.subPropertyName`.
    *
    * This path serves as a key in {@link PropertyOptions} to identify which
    * property has to be updated
@@ -214,9 +214,9 @@ class PropertyDecorator {
   }
 
   /**
-   * Decorates subproperties
+   * Decorates subProperties
    *
-   * @return  {Array<PropertyDecorator>}  decorated subproperties
+   * @return  {Array<PropertyDecorator>}  decorated subProperties
    */
   subProperties(): Array<PropertyDecorator> {
     return this.property.subProperties().map((subProperty) => {

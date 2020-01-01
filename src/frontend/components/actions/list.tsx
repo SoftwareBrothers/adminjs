@@ -86,14 +86,14 @@ class List extends React.Component<Props, State> {
       resourceId: resource.id,
       params: query,
     }).then((response) => {
-      const listActionReponse = response.data as ListActionResponse
+      const listActionResponse = response.data as ListActionResponse
       this.setState({
-        records: listActionReponse.records,
-        page: listActionReponse.meta.page,
-        perPage: listActionReponse.meta.perPage,
-        total: listActionReponse.meta.total,
-        direction: listActionReponse.meta.direction,
-        sortBy: listActionReponse.meta.sortBy,
+        records: listActionResponse.records,
+        page: listActionResponse.meta.page,
+        perPage: listActionResponse.meta.perPage,
+        total: listActionResponse.meta.total,
+        direction: listActionResponse.meta.direction,
+        sortBy: listActionResponse.meta.sortBy,
         selectedRecords: oldResource.id === resource.id ? selectedRecords : [],
         loading: false,
       })
@@ -106,7 +106,7 @@ class List extends React.Component<Props, State> {
       }
     }).catch(() => {
       addNotice({
-        message: 'There was an error fething records, Check out console to see more information.',
+        message: 'There was an error fetching records, Check out console to see more information.',
         type: 'error',
       })
     })

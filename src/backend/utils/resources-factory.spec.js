@@ -100,7 +100,7 @@ describe('ResourcesFactory', function () {
       this.assignDecoratorStub = this.sinon.stub(BaseResource.prototype, 'assignDecorator')
     })
 
-    it('assigns ResourceDecorator when no options were gicen', function () {
+    it('assigns ResourceDecorator when no options were given', function () {
       this.resourcesFactory._decorateResources([{ resource: new BaseResource() }])
       expect(this.assignDecoratorStub).to.have.been.calledWith(
         this.sinon.match.any, this.sinon.match.falsy,
@@ -108,7 +108,7 @@ describe('ResourcesFactory', function () {
     })
 
     it('assigns ResourceDecorator with options when there were given', function () {
-      const options = { name: 'somename' }
+      const options = { name: 'someName' }
       const resource = new BaseResource()
       this.resourcesFactory._decorateResources([{ resource, options }])
 

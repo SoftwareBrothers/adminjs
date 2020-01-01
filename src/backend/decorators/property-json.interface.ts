@@ -14,7 +14,7 @@ export default interface PropertyJSON {
    */
   isTitle: boolean;
   /**
-   * If given property should be treaten as a Id field
+   * If given property should be treated as a Id field
    */
   isId: boolean;
   /**
@@ -55,7 +55,7 @@ export default interface PropertyJSON {
    */
   subProperties: Array<PropertyJSON>;
   /**
-   * All components overriden by the user in PropertyOptions
+   * All components overridden by the user in PropertyOptions
    */
   components?: {
     show?: string;

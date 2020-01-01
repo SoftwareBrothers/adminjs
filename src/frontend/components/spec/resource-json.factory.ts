@@ -6,11 +6,11 @@ import PropertyJSON from '../../../backend/decorators/property-json.interface'
 factory.define<ResourceJSON>('ResourceJSON', Object, {
   id: factory.sequence('ResourceJSON.id', i => `resource${i}`),
   name: factory.sequence('ResourceJSON.name', i => `resource ${i}`),
-  href: '/admin/resourcename',
+  href: '/admin/resourceName',
   titleProperty: () => factory.build<PropertyJSON>('PropertyJSON'),
   parent: {
-    name: 'somename',
-    icon: 'someicon',
+    name: 'someName',
+    icon: 'someIcon',
   },
   resourceActions: [],
   listProperties: [],

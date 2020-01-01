@@ -12,7 +12,7 @@ describe('convertParamsToArrayItems', function () {
     })
     this.record = await factory.build('record', {
       params: {
-        anotherProperty: 'somevalue',
+        anotherProperty: 'someValue',
         'stringArray.0': 'element 1',
         'stringArray.1': 'element 2',
         'stringArray.2': 'element last',
@@ -37,7 +37,7 @@ describe('convertParamsToArrayItems', function () {
 
   it('returns empty array for non existing property', async function () {
     this.property = await factory.build('property', {
-      name: 'unexistingProperty',
+      name: 'notExistingProperty',
       isArray: true,
     })
     const params = convertParamsToArrayItems(this.property, this.record)

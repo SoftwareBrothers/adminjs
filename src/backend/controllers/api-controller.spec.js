@@ -20,7 +20,7 @@ describe('ApiController', function () {
     this.isActionAccessibleStub = this.sinon.stub()
     const property = { name: () => this.fieldName, reference: () => false }
     this.resourceStub = {
-      id: this.sinon.stub().returns('someid'),
+      id: this.sinon.stub().returns('someId'),
       decorate: this.sinon.stub().returns({
         actions: {
           list: this.action,
@@ -128,7 +128,7 @@ describe('ApiController', function () {
 
     it('throws an error when action do not return record', function (done) {
       this.action.handler = async () => ({
-        somedata: 'without an record',
+        someData: 'without an record',
       })
 
       this.apiController.recordAction({

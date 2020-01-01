@@ -45,7 +45,7 @@ class ActionButton extends React.PureComponent<RouteComponentProps & Props & Add
     switch (actionType) {
     case 'record':
       if (!recordId) {
-        throw new Error('You have to speficy "recordId" for record action')
+        throw new Error('You have to specify "recordId" for record action')
       }
       return h.recordActionUrl({ resourceId, recordId, actionName })
     case 'resource':
@@ -69,7 +69,7 @@ class ActionButton extends React.PureComponent<RouteComponentProps & Props & Add
     switch (action.actionType) {
     case 'record':
       if (!recordId) {
-        throw new Error('You have to speficy "recordId" for record action')
+        throw new Error('You have to specify "recordId" for record action')
       }
       promise = api.recordAction({
         resourceId, actionName: action.name, recordId,
@@ -82,7 +82,7 @@ class ActionButton extends React.PureComponent<RouteComponentProps & Props & Add
       break
     case 'bulk':
       if (!recordIds) {
-        throw new Error('You have to speficy "recordIds" for bulk action')
+        throw new Error('You have to specify "recordIds" for bulk action')
       }
       promise = api.bulkAction({
         resourceId, actionName: action.name, recordIds,

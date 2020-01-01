@@ -39,7 +39,7 @@ type State = {
 
 type Props = BasePropertyProps & {
   /**
-   * Where given property schould be rendered
+   * Where given property should be rendered
    */
   where: PropertyPlace;
 }
@@ -54,11 +54,11 @@ type Props = BasePropertyProps & {
  * - **filter**: and finally on the sidebar filter,
  *
  * Based on the type of given property and where the property is rendered **BasePropertyComponent**
- * picks Component to use. That is how **date** fields are rendered as **datepickers**
+ * picks Component to use. That is how **date** fields are rendered as **datepicker**
  * or **boolean** values as **checkbox**'es.
  *
- * You can override default behaviour by changing **components** param
- * for given property in **AdminBroOptions**. Take a look at the folowing example:
+ * You can override default behavior by changing **components** param
+ * for given property in **AdminBroOptions**. Take a look at the following example:
  *
  * ```
  * const AdminBro = require('admin-bro')
@@ -97,10 +97,11 @@ type Props = BasePropertyProps & {
  * }
  * ```
  *
- * When record value for given property (**name**) equals 'foo' we will reder 'bar', otherwise 'zoe'
+ * When record value for given property (**name**) equals 'foo' we will render 'bar',
+ * otherwise 'zoe'
  *
  * We also use {@link PropertyInShow} helper component to render field with a label that it looks
- * similar to alredy defined properties. For other places you can use
+ * similar to already defined properties. For other places you can use
  * a different _wrapper components_:
  * - `edit`: {@link PropertyInEdit}
  * - `show`: {@link PropertyInShow}

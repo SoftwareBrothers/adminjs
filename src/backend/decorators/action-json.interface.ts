@@ -29,7 +29,7 @@ export default interface ActionJSON {
   showFilter: boolean;
   /**
    * Action component. When set to false action will be invoked immediately after clicking it,
-   * to put in another words: tere wont be an action view
+   * to put in another words: there wont be an action view
    */
   component?: string | false | null;
 }

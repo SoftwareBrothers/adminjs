@@ -9,7 +9,7 @@ import { EditPropertyProps, SelectRecord } from '../base-property-props'
 import RecordJSON from '../../../../backend/decorators/record-json.interface'
 
 type CombinedProps = EditPropertyProps & {theme: DefaultTheme}
-type SelectRecordEnchanced = SelectRecord & {
+type SelectRecordEnhanced = SelectRecord & {
   record: RecordJSON;
 }
 
@@ -23,7 +23,7 @@ class Edit extends React.Component<CombinedProps> {
     this.handleChange = this.handleChange.bind(this)
   }
 
-  handleChange(selected: SelectRecordEnchanced): void {
+  handleChange(selected: SelectRecordEnhanced): void {
     const { onChange, property } = this.props
     if (selected) {
       this.selected = selected.record
@@ -33,7 +33,7 @@ class Edit extends React.Component<CombinedProps> {
     }
   }
 
-  async loadOptions(inputValue: string): Promise<Array<SelectRecordEnchanced>> {
+  async loadOptions(inputValue: string): Promise<Array<SelectRecordEnhanced>> {
     const { property } = this.props
     const api = new ApiClient()
 

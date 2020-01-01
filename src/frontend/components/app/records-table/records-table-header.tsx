@@ -10,7 +10,7 @@ import Th from './styled/th.styled'
  */
 type Props = {
   /**
-   * Property which should be treaten as a Title Property
+   * Property which should be treated as a Title Property
    */
   titleProperty: PropertyJSON;
   /**

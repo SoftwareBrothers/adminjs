@@ -36,7 +36,7 @@ class ResourcesFactory {
   buildResources({ databases, resources }): Array<BaseResource> {
     const optionsResources = this._convertResources(resources)
 
-    // fetch only those resources from database which werent previousely given as a resource
+    // fetch only those resources from database which weren't previously given as a resource
     const databaseResources = this._convertDatabases(databases).filter(dr => (
       !optionsResources.find(optionResource => optionResource.resource.id() === dr.id())
     ))

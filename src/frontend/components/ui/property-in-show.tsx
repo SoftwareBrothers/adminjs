@@ -8,7 +8,7 @@ const Property = styled.div`
 `
 
 /**
- * Wrapps input with label in Show
+ * Wraps input with label in Show
  *
  * @component
  * @example

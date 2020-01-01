@@ -14,7 +14,7 @@ import NotImplementedError from '../utils/not-implemented-error'
  *   graph LR
  *   A[BaseDatabase] -->|has many| B(BaseResource)
  *   B --> |has many|C(BaseRecord)
- *   B --> |has many|D(BasePorperty)
+ *   B --> |has many|D(BaseProperty)
  */
 class BaseDatabase {
   constructor(database: any) {}

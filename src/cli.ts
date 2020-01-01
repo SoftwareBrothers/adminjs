@@ -23,7 +23,7 @@ program
     const config = require(path.join(process.cwd(), configFile))
     if (!config.databases && !config.resources) {
       console.log([
-        'Are you sure you pointed to the right configiration file?.',
+        'Are you sure you pointed to the right configuration file?.',
         `'${path.join(process.cwd(), configFile)}' does not have neither`,
         '"databases" nor "resources" properties.',
       ].join('\n'))

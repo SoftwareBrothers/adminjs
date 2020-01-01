@@ -47,7 +47,7 @@ describe('PropertyHeader', function () {
       expect(query.get('sortBy')).to.equal(this.property.name)
     })
 
-    it('doesn\t render a sort indicator', function () {
+    it('doesn\'t render a sort indicator', function () {
       expect(this.container.querySelector('i')).to.be.null
     })
   })

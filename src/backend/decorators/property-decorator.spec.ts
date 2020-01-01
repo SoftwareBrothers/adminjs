@@ -25,11 +25,11 @@ describe('PropertyDecorator', function () {
   })
 
   describe('#isVisible', function () {
-    it('passess execution to BaseProperty.isVisible for list when no options are specified', function () {
+    it('passes execution to BaseProperty.isVisible for list when no options are specified', function () {
       expect(new PropertyDecorator(args).isVisible('list')).to.equal(property.isVisible())
     })
 
-    it('passess execution to BaseProperty.isEditable for edit when no options are specified', function () {
+    it('passes execution to BaseProperty.isEditable for edit when no options are specified', function () {
       sinon.stub(BaseProperty.prototype, 'isVisible').returns(false)
       expect(new PropertyDecorator(args).isVisible('edit')).to.equal(property.isEditable())
     })
@@ -47,10 +47,10 @@ describe('PropertyDecorator', function () {
   // eslint-disable-next-line mocha/no-setup-in-describe
   fields.forEach((field) => {
     describe(`#${field}`, function () {
-      it('passess the execution to the overrideFromOptions', function () {
+      it('passes the execution to the overrideFromOptions', function () {
         const stub = sinon.stub(PropertyDecorator.prototype, 'overrideFromOptions')
         new PropertyDecorator(args)[field]()
-        // for some reason chai dont know that calledWith is a property
+        // for some reason chai don't know that calledWith is a property
         const assertion = expect(stub).to.have.been as any
         assertion.calledWith(field)
       })
@@ -64,17 +64,17 @@ describe('PropertyDecorator', function () {
       sinon.stub(BaseProperty.prototype, this.field).returns(this.value)
     })
 
-    it('passess the execution to the BaseProperty when no option is given', function () {
+    it('passes the execution to the BaseProperty when no option is given', function () {
       const res = new PropertyDecorator(args).overrideFromOptions(this.field)
       expect(res).to.equal(this.value)
     })
 
     it('returns the value from options when they were specified', function () {
-      this.overridenValue = 'overridenValue'
+      this.overriddenValue = 'overriddenValue'
       const res = new PropertyDecorator({
         ...args,
-        options: { [this.field]: this.overridenValue } }).overrideFromOptions(this.field)
-      expect(res).to.equal(this.overridenValue)
+        options: { [this.field]: this.overriddenValue } }).overrideFromOptions(this.field)
+      expect(res).to.equal(this.overriddenValue)
     })
 
     it('calls the modifier function when no options were given', function () {
@@ -85,9 +85,9 @@ describe('PropertyDecorator', function () {
   })
 
   describe('#label', function () {
-    it('returns camelcased name', function () {
-      sinon.stub(BaseProperty.prototype, 'name').returns('normalname')
-      expect(new PropertyDecorator(args).label()).to.equal('Normalname')
+    it('returns camelCased name', function () {
+      sinon.stub(BaseProperty.prototype, 'name').returns('normalName')
+      expect(new PropertyDecorator(args).label()).to.equal('Normal Name')
     })
   })
 
@@ -107,7 +107,7 @@ describe('PropertyDecorator', function () {
       expect(new PropertyDecorator(args).position()).to.equal(-1)
     })
 
-    it('returns 101 for seccond field', function () {
+    it('returns 101 for second field', function () {
       sinon.stub(BaseProperty.prototype, 'isTitle').returns(false)
       expect(new PropertyDecorator(args).position()).to.equal(101)
     })
@@ -122,7 +122,7 @@ describe('PropertyDecorator', function () {
   describe('#subProperties', function () {
     let propertyDecorator: PropertyDecorator
     const propertyName = 'super'
-    const subPropertyName = 'neted'
+    const subPropertyName = 'nested'
     const subPropertyLabel = 'nestedLabel'
 
     beforeEach(function () {
@@ -147,7 +147,6 @@ describe('PropertyDecorator', function () {
 
     it('changes label of the nested property to what was given in PropertyOptions', function () {
       const subProperty = propertyDecorator.subProperties()[0]
-      console.log(subProperty)
 
       expect(subProperty.label()).to.eq(subPropertyLabel)
     })

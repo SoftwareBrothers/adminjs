@@ -39,10 +39,10 @@ class SortLink extends React.PureComponent<Props & RouteComponentProps> {
   render(): ReactNode {
     const { property, location, direction } = this.props
     const query = new URLSearchParams(location.search)
-    const opositeDirection = (this.isActive() && direction === 'asc') ? 'desc' : 'asc'
+    const oppositeDirection = (this.isActive() && direction === 'asc') ? 'desc' : 'asc'
     const sortedByClass = `icomoon-dropdown-${direction === 'asc' ? 'open' : 'close'}`
 
-    query.set('direction', opositeDirection)
+    query.set('direction', oppositeDirection)
     query.set('sortBy', property.name)
 
     return (

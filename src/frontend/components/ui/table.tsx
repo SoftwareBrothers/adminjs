@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 /**
- * Simple compnent for styling tables
+ * Simple component for styling tables
  *
  * @component
  * @example

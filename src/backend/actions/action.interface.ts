@@ -205,7 +205,7 @@ export type Before = (
  */
 export type After<T> = (
   /**
-   * Reponse returned by the default ActionHandler
+   * Response returned by the default ActionHandler
    */
   response: T,
   /**
@@ -220,7 +220,7 @@ export type After<T> = (
 
 /**
  * @classdesc
- * Inteface representing an Action in AdminBro.
+ * Interface representing an Action in AdminBro.
  * Look at {@tutorial 05-actions} to see where you can use this interface.
  *
  * #### Example Action
@@ -249,7 +249,7 @@ export type After<T> = (
  * 3. {@link module:ShowAction show} (record action) - show details of given record
  * 3. {@link module:DeleteAction delete} (record action) - delete given record
  *
- * Users can also create their own actions or override those already exising by using
+ * Users can also create their own actions or override those already existing by using
  * {@link ResourceOptions}
  *
  * ```javascript
@@ -275,7 +275,7 @@ export type After<T> = (
  * }
  *
  * const { ACTIONS } = require('admin-bro')
- * // example of adding after filter for 'show' aciton for all resources
+ * // example of adding after filter for 'show' action for all resources
  * ACTIONS.show.after = async () => {...}
  * ```
  */
@@ -413,7 +413,7 @@ export default interface Action <T extends ActionResponse> {
    * 3. _(optional)_ recordId: string _(for recordAction)_
    *
    * When component is set to `false` then action doesn't have it's own view.
-   * Instead after clicking button it is immediatelly performed. Example of
+   * Instead after clicking button it is immediately performed. Example of
    * an action without a view is {@link module:DeleteAction}.
    */
   component?: string | false;
@@ -482,7 +482,7 @@ export default interface Action <T extends ActionResponse> {
    *   userId: { type: mongoose.Types.ObjectId, ref: 'User' },
    *   // on which resource
    *   resource: { type: String },
-   *   // was record involved (resource and recordId creates to polimorfic relation)
+   *   // was record involved (resource and recordId creates to polymorphic relation)
    *   recordId: { type: mongoose.Types.ObjectId },
    * }, { timestamps: true }))
    *

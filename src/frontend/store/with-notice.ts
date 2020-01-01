@@ -2,7 +2,7 @@ import { connect } from 'react-redux'
 import { addNotice } from './store'
 
 /**
- * NoticeMessage which can be presented as a Toast'like message.
+ * NoticeMessage which can be presented as a "Toast" message.
  * @alias NoticeMessage
  * @memberof withNotice
  */
@@ -28,7 +28,7 @@ const mapDispatchToProps = (dispatch): AddNoticeProps => ({
 })
 
 /**
- * HighOriderComponent which allows you to post notice messages from your components
+ * High Order Component which allows you to post notice messages from your components
  *
  * It gives you the additional prop: `addNotice(noticeMessage)` taking {@link NoticeMessage}.
  *

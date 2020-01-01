@@ -13,12 +13,24 @@ export type ParamsType = Record<string, any>
  * @category Base
  */
 class BaseRecord {
+  /**
+   * Resource to which record belongs
+   */
   public resource: BaseResource
 
+  /**
+   * Actual record data stored as a flatten object
+   */
   private params: ParamsType
 
+  /**
+   * Object containing all validation errors: this.errors[path] = 'errorMessage'
+   */
   private errors: PropertyErrors
 
+  /**
+   * Object containing all populated relations.
+   */
   private populated: {[key: string]: BaseRecord}
 
   /**
@@ -26,36 +38,17 @@ class BaseRecord {
    * @param  {BaseResource} resource       resource to which given record belongs
    */
   constructor(params, resource) {
-    /**
-     * Resource to which record belongs
-     * @type {BaseResource}
-     */
     this.resource = resource
-
-    /**
-     * Actual record data stored as a flatten object
-     * @type {Object}
-     */
     this.params = params ? flat.flatten(params) : {}
-
-    /**
-     * Object containing all validation errors: this.errors[path] = 'errorMessage'
-     * @type {Object}
-     */
     this.errors = {}
-
-    /**
-     * Object containing all populated relations.
-     *
-     * @type {Object<BaseRecord>}
-     */
     this.populated = {}
   }
 
   /**
    * Returns value for given field.
-   * @param  {String} path      path (name) for given field: i.e. 'email' or 'authentication.email'
-   *                            if email is nested within the authentication object in the datastore
+   * @param  {string} path      path (name) for given field: i.e. 'email' or 'authentication.email'
+   *                            if email is nested within the authentication object in the data
+   *                            store
    * @return {any}              value for given field
    */
   param(path: string): any {
@@ -86,10 +79,10 @@ class BaseRecord {
   }
 
   /**
-   * Updates given Record in the datastore. Practically it invokes
+   * Updates given Record in the data store. Practically it invokes
    * {@link BaseResource.update} method.
    *
-   * When validation error occures it stores that to {@link BaseResource.errors}
+   * When validation error occurs it stores that to {@link BaseResource.errors}
    *
    * @param  {Object} params all field with values which has to be updated
    * @return {BaseRecord}        given record (this)
@@ -116,7 +109,7 @@ class BaseRecord {
    * Practically it invokes
    * {@link BaseResource#create} or {@link BaseResource#update} methods.
    *
-   * When validation error occures it stores that to {@link BaseResource#errors}
+   * When validation error occurs it stores that to {@link BaseResource#errors}
    *
    * @return {BaseRecord}        given record (this)
    */

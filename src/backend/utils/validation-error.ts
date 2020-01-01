@@ -9,7 +9,7 @@ export type RecordError = {
    */
   type: string;
   /**
-   * human readible message
+   * human readable message
    */
   message: string;
 }
@@ -33,7 +33,7 @@ class ValidationError extends Error {
   public propertyErrors: PropertyErrors
 
   /**
-   * One root validatin error i.e. thrown when user wants to perform
+   * One root validation error i.e. thrown when user wants to perform
    * an action which violates foreign key constraint
    */
   public baseError: RecordError | null

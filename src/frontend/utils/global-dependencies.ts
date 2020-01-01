@@ -3,13 +3,13 @@ import ViewHelpers from '../../backend/utils/view-helpers'
 const onProd = process.env.NODE_ENV === 'production'
 
 /**
- * Returns external dependencies either from local bundle or from CDNs.
+ * Returns external dependencies either from local bundle or from CDN.
  * @private
  *
  * @param {Object}   options
  * @param {boolean} [options.fromCDN=true]    indicates if scripts should be fetched
  *                                            from external CDN
- * @param {ViewHelpers} options.viewHelpers   initilized ViewHelpers instance
+ * @param {ViewHelpers} options.viewHelpers   initialized ViewHelpers instance
  *
  * @return {string}                   list of scripts which has to be injected to to the
  *                                    head of the app

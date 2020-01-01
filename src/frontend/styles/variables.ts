@@ -53,5 +53,5 @@ export const breakpoints = {
   minTabletWidth: '769px',
   minDesktopWidth: '1024px',
   minWidescreenWidth: '1216px',
-  minFullhdWidth: '1408px',
+  minFullHDWidth: '1408px',
 }

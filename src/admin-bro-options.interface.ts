@@ -61,7 +61,7 @@ export default interface AdminBroOptions {
    */
   loginPath?: string;
   /**
-   * Array of all Databases which are suported by AdminBro via adapters
+   * Array of all Databases which are supported by AdminBro via adapters
    */
   databases?: Array<any>;
 

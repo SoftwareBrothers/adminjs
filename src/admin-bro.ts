@@ -11,7 +11,7 @@ import Filter from './backend/utils/filter'
 import ValidationError from './backend/utils/validation-error'
 import ConfigurationError from './backend/utils/configuration-error'
 import ResourcesFactory from './backend/utils/resources-factory'
-import userComponentsBunlder from './backend/bundler/user-components-bundler'
+import userComponentsBundler from './backend/bundler/user-components-bundler'
 import { RouterType } from './backend/router'
 import Action, { RecordActionResponse } from './backend/actions/action.interface'
 import { DEFAULT_PATHS } from './constants'
@@ -72,7 +72,7 @@ class AdminBro {
   public static registeredAdapters: Array<Adapter>
 
   /**
-   * Contains set of routes availables within the application.
+   * Contains set of routes available within the application.
    * It is used by external plugins.
    *
    * @example
@@ -119,7 +119,7 @@ class AdminBro {
 
 
   /**
-   * List of all default actions. If you want to change behaviour for all actions lika list,
+   * List of all default actions. If you want to change behavior for all actions like list,
    * edit, show and delete you can do this here.
    *
    * @example <caption>Modifying accessibility rules for all show actions</caption>
@@ -189,7 +189,7 @@ class AdminBro {
     if (Database.isAdapterFor && Resource.isAdapterFor) {
       AdminBro.registeredAdapters.push({ Database, Resource })
     } else {
-      throw new Error('Adapter elements has to be subclassess of AdminBro.BaseResource and AdminBro.BaseDatabase')
+      throw new Error('Adapter elements has to be a subclass of AdminBro.BaseResource and AdminBro.BaseDatabase')
     }
   }
 
@@ -200,7 +200,7 @@ class AdminBro {
   async initialize(): Promise<void> {
     if (process.env.NODE_ENV === 'production') {
       console.log('AdminBro: bundling user components...')
-      await userComponentsBunlder(this, { write: true })
+      await userComponentsBundler(this, { write: true })
     }
   }
 
@@ -270,7 +270,7 @@ class AdminBro {
       const stack = ((new Error()).stack || '').split('\n')
       const m = stack[2].match(/\((.*):[0-9]+:[0-9]+\)/)
       if (!m) {
-        throw new Error('STACK does not have a file url. Chcek out if the node version >= 8')
+        throw new Error('STACK does not have a file url. Check out if the node version >= 8')
       }
       filePath = path.join(path.dirname(m[1]), src)
     }

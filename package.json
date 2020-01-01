@@ -13,7 +13,9 @@
     "cover": "NODE_ENV=test nyc --reporter=lcov --reporter=text-lcov npm test",
     "codecov": "NODE_ENV=test nyc --reporter=text-lcov npm test | codecov --pipe",
     "bundle": "node bin/watch-dev.js",
-    "bundle:globals": "node bin/bundle-globals.js"
+    "bundle:globals": "node bin/bundle-globals.js",
+    "cspell": "cspell 'src/**/*.ts' 'src/**/*.js' 'src/**/*.tsx' 'src/**/*.jsx'",
+    "check:all": "yarn cspell && yarn lint && yarn test"
   },
   "bin": {
     "admin": "./cli.js"
@@ -116,6 +118,7 @@
     "chai": "^4.1.2",
     "chai-as-promised": "^7.1.1",
     "core-js": "2.5.7",
+    "cspell": "^4.0.44",
     "eslint": "^5.10.0",
     "eslint-config-airbnb": "^17.1.0",
     "eslint-plugin-import": "^2.14.0",

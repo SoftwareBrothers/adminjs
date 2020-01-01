@@ -17,7 +17,7 @@ export enum AvailablePropertyOptions {
  */
 export default interface PropertyOptions {
   /**
-   * if given property shoyld be visible. It can be either boolean for all possible views, or
+   * if given property should be visible. It can be either boolean for all possible views, or
    * you can verify which view in particular should be hidden/shown.
    */
   isVisible?: boolean | {
@@ -27,7 +27,7 @@ export default interface PropertyOptions {
     filter?: boolean;
   };
   /**
-   * List of possible overriden components for given property.
+   * List of possible overridden components for given property.
    */
   components?: {
     show?: string;

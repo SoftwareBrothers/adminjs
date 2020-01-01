@@ -45,14 +45,14 @@ const Dashboard: React.FC = () => (
         <Column width={6}>
           <ul>
             <li><a href="https://softwarebrothers.github.io/admin-bro-dev/tutorial-03-passing-resources.html">Adding Resources</a></li>
-            <li><a href="https://softwarebrothers.github.io/admin-bro-dev/tutorial-04-customizing-resources.html">Customising resources</a></li>
-            <li><a href="https://softwarebrothers.github.io/admin-bro-dev/tutorial-05-actions.html">Customising Actions</a></li>
+            <li><a href="https://softwarebrothers.github.io/admin-bro-dev/tutorial-04-customizing-resources.html">Customizing resources</a></li>
+            <li><a href="https://softwarebrothers.github.io/admin-bro-dev/tutorial-05-actions.html">Customizing Actions</a></li>
           </ul>
         </Column>
         <Column width={6}>
           <ul>
             <li><a href="https://softwarebrothers.github.io/admin-bro-dev/tutorial-06-writing-react-components.html">Writing your own components</a></li>
-            <li><a href="https://softwarebrothers.github.io/admin-bro-dev/tutorial-07-custom-dashboard.html">Customising Dashboard</a></li>
+            <li><a href="https://softwarebrothers.github.io/admin-bro-dev/tutorial-07-custom-dashboard.html">Customizing Dashboard</a></li>
           </ul>
         </Column>
       </Columns>

@@ -117,14 +117,14 @@ class ResourceDecorator {
 
   /**
    * Initializes PropertyDecorator for all properties within a resource. When
-   * user passess new property in the options - it will be created as well.
+   * user passes new property in the options - it will be created as well.
    *
    * @returns {Object<string,PropertyDecorator>}
    * @private
    */
   decorateProperties(): {[key: string]: PropertyDecorator} {
     const resourceProperties = this._resource.properties()
-    // decorate all exising properties
+    // decorate all existing properties
     const properties = resourceProperties.reduce((memo, property) => {
       const decorator = new PropertyDecorator({
         property,
@@ -175,7 +175,7 @@ class ResourceDecorator {
   }
 
   /**
-   * Returns propertyDecordator by giving property path
+   * Returns propertyDecorator by giving property path
    *
    * @param   {String}  propertyPath  property path
    *
@@ -198,7 +198,7 @@ class ResourceDecorator {
    *
    * @param   {Object}  options
    * @param   {String}  options.where   one of: 'list', 'show', 'edit', 'filter'
-   * @param   {String}  [options.max]   maximum number of properites retunred where there are
+   * @param   {String}  [options.max]   maximum number of properties returned where there are
    *                                    no overrides in the options
    *
    * @return {Array<PropertyDecorator>}
@@ -279,7 +279,7 @@ class ResourceDecorator {
   }
 
   /**
-   * Returns PropertyDecorator of a property which should be treaten as a title property.
+   * Returns PropertyDecorator of a property which should be treated as a title property.
    *
    * @return  {PropertyDecorator} PropertyDecorator of title property
    */

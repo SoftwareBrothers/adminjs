@@ -8,8 +8,8 @@ factory.define<RecordJSON>('RecordJSON', Object, {
   },
   populated: {},
   errors: {},
-  id: factory.sequence('JSONrecord.id', n => `someId${n}`),
-  title: factory.sequence('JSONrecord.id', n => `someTitle${n}`),
+  id: factory.sequence('JSONRecord.id', n => `someId${n}`),
+  title: factory.sequence('JSONRecord.id', n => `someTitle${n}`),
   recordActions: [],
   bulkActions: [],
 })

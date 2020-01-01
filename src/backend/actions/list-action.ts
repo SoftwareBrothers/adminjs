@@ -12,7 +12,7 @@ const PER_PAGE_LIMIT = 500
  * @category Actions
  * @module ListAction
  * @description
- * Retruns selected Records in a list
+ * Returns selected Records in a list form
  */
 const ListAction: Action<ListActionResponse> = {
   name: 'list',
@@ -85,7 +85,7 @@ export type ListActionResponse = {
    */
   records: Array<RecordJSON>;
   /**
-   * Pagination metadate
+   * Pagination metadata
    */
   meta: {
     page: number;

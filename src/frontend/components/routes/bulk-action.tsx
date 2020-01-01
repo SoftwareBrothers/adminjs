@@ -21,7 +21,7 @@ import getBulkActionsFromRecords from '../app/records-table/utils/get-bulk-actio
 import ActionJSON from '../../../backend/decorators/action-json.interface'
 
 const NO_RECORDS_ERROR: NoticeMessage = {
-  message: 'There was an error fething records, Check out console to see more information.',
+  message: 'There was an error fetching records, Check out console to see more information.',
   type: 'error',
 }
 

@@ -6,7 +6,7 @@ import NotFoundError from '../utils/not-found-error'
  * @category Actions
  * @module ShowAction
  * @description
- * Retruns selected Record
+ * Returns selected Record
  * Uses {@link ShowAction} component to render form
  */
 const ShowAction: Action<RecordActionResponse> = {

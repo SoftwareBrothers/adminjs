@@ -20,7 +20,7 @@ const Property = styled.div`
   }
 `
 /**
- * Wrapps input with label and optional error
+ * Wraps input with label and optional error
  *
  * @component
  * @example <caption>Standard property</caption>

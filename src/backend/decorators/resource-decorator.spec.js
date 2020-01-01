@@ -8,10 +8,10 @@ describe('ResourceDecorator', function () {
   beforeEach(function () {
     this.currentAdmin = {
       email: 'some@email.com',
-      name: 'somename',
-      otherValue: 'someother-value',
+      name: 'someName',
+      otherValue: 'someOther-value',
     }
-    this.stubedRecord = this.sinon.stub()
+    this.stubbedRecord = this.sinon.stub()
     this.stubbedResource = resourceStub(this.sinon)
     this.stubbedAdmin = this.sinon.createStubInstance(AdminBro)
     this.stubbedAdmin.options = {}
@@ -44,7 +44,7 @@ describe('ResourceDecorator', function () {
     })
     it('returns custom name with icon when options were specified', function () {
       const options = {
-        parent: { name: 'somename', icon: 'i-icon-some' },
+        parent: { name: 'someName', icon: 'i-icon-some' },
       }
       expect(
         new ResourceDecorator({ ...this.args, options }).getParent(),
@@ -154,7 +154,7 @@ describe('ResourceDecorator', function () {
       ).to.be.an.instanceof(PropertyDecorator)
     })
 
-    it('throws error when ther is no property by given key', function () {
+    it('throws error when there is no property by given key', function () {
       expect(() => {
         this.decorator.getPropertyByKey('some-unknown-name')
       }).to.throw(ConfigurationError)
@@ -166,7 +166,7 @@ describe('ResourceDecorator', function () {
       const options = {}
       const actions = new ResourceDecorator({
         ...this.args, options,
-      }).recordActions(this.stubedRecord, this.currentAdmin)
+      }).recordActions(this.stubbedRecord, this.currentAdmin)
       expect(actions).to.have.lengthOf(3)
     })
 
@@ -175,7 +175,7 @@ describe('ResourceDecorator', function () {
       const actions = new ResourceDecorator({
         ...this.args,
         options,
-      }).recordActions(this.stubedRecord, this.currentAdmin)
+      }).recordActions(this.stubbedRecord, this.currentAdmin)
       expect(actions).to.have.lengthOf(4)
     })
 
@@ -184,13 +184,13 @@ describe('ResourceDecorator', function () {
       const actions = new ResourceDecorator({
         ...this.args,
         options,
-      }).recordActions(this.stubedRecord, this.currentAdmin)
+      }).recordActions(this.stubbedRecord, this.currentAdmin)
       expect(actions).to.have.lengthOf(2)
     })
 
-    it('passess properties to isVisible when it is a function', function () {
+    it('passes properties to isVisible when it is a function', function () {
       const options = { actions: { show: { isVisible: (data) => {
-        // it passess current admin to the isVisible function
+        // it passes current admin to the isVisible function
         expect(data.currentAdmin).to.deep.equal(this.currentAdmin)
         expect(data.resource.id).to.equal(this.stubbedResource.id)
         expect(data.action.name).to.equal('show')
@@ -222,7 +222,7 @@ describe('ResourceDecorator', function () {
       )
     })
 
-    it('passess current admin to the resourceActions', function () {
+    it('passes current admin to the resourceActions', function () {
       const resourceActionsSpy = this.sinon.spy(ResourceDecorator.prototype, 'resourceActions')
 
       new ResourceDecorator(this.args).toJSON(this.currentAdmin)

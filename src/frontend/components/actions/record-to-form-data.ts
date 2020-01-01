@@ -15,8 +15,8 @@ export default function recordToFormData(record: RecordJSON): FormData {
   // That is why we unflatten all properties and create regular object, where flat
   // overwrite prevents from having 2 keys referencing the same property. And
   // the result is flatten again.
-  const normalisedParams = flatten<string, any>(unflatten(record.params, { overwrite: true }))
-  Object.entries(normalisedParams).forEach(([key, value]) => {
+  const normalizedParams = flatten<string, any>(unflatten(record.params, { overwrite: true }))
+  Object.entries(normalizedParams).forEach(([key, value]) => {
     // flatten does not change empty objects "{}" - so in order to prevent having them changed to
     // "[object Object]" we have to set them to empty strings.
     if (typeof value === 'object') {

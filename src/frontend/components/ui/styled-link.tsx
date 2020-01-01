@@ -18,11 +18,11 @@ type Props = {
    */
   children: ReactNode;
   /**
-   * clic callback
+   * click callback
    */
   onClick?: OnClickHandler;
   /**
-   * As which element it should be rentered. For example: as: 'a' or as: 'button'
+   * Kind of which element it should be rendered. For example: as: 'a' or as: 'button'
    */
   as?: string;
   /**
