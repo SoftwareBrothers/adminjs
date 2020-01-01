@@ -14,7 +14,7 @@
     "codecov": "NODE_ENV=test nyc --reporter=text-lcov npm test | codecov --pipe",
     "bundle": "node bin/watch-dev.js",
     "bundle:globals": "node bin/bundle-globals.js",
-    "cspell": "cspell 'src/**/*.ts' 'src/**/*.js' 'src/**/*.tsx' 'src/**/*.jsx'",
+    "cspell": "./node_modules/.bin/cspell 'src/**/*.ts' 'src/**/*.js' 'src/**/*.tsx' 'src/**/*.jsx'",
     "check:all": "yarn cspell && yarn lint && yarn test"
   },
   "bin": {
