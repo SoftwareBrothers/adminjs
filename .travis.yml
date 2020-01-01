@@ -6,6 +6,7 @@ install:
 script:
 - yarn
 - yarn run lint
+- yarn run cspell
 - yarn codecov
 - yarn build
 - NODE_ENV=production ONCE=true yarn bundle
