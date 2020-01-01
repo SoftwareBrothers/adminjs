@@ -242,7 +242,7 @@ export type AdminPage = {
 }
 
 /**
- * Defaut way of passing Options with a Resource
+ * Default way of passing Options with a Resource
  * @alias ResourceWithOptions
  * @memberof AdminBroOptions
  */
