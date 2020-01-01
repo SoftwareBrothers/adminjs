@@ -5,10 +5,11 @@ import BaseRecord from '../adapters/base-record'
 import BaseResource from '../adapters/base-resource'
 import ActionDecorator from '../decorators/action-decorator'
 import RecordJSON from '../decorators/record-json.interface'
+import { NoticeMessage } from '../../frontend/store/with-notice'
 
 /**
- * Execution context for an action. It is passed to the {@link Handler},
- * {@link Before} and {@link After} functions.
+ * Execution context for an action. It is passed to the {@link Action#handler},
+ * {@link Action#before} and {@link Action#after} functions.
  *
  * @memberof Action
  * @alias ActionContext
@@ -117,10 +118,7 @@ export type ActionResponse = {
   /**
    * Notice message which should be presented to the end user after showing the action
    */
-  notice?: {
-    type: 'error' | 'success';
-    message: string;
-  };
+  notice?: NoticeMessage;
   /**
    * redirect path
    */
@@ -133,14 +131,15 @@ export type ActionResponse = {
 
 /**
  * @description
- * Defines the type of {@link isAccessible} and {@link isVisible} functions
+ * Defines the type of {@link Action#isAccessible} and {@link Action#isVisible} functions
  * @alias IsFunction
  * @memberof Action
  */
 export type IsFunction = (context: ActionContext) => boolean
 
 /**
- * Required response of a Record action
+ * Required response of a Record action. Extends {@link ActionResponse}
+ *
  * @memberof Action
  * @alias RecordActionResponse
  */
@@ -152,7 +151,8 @@ export type RecordActionResponse = ActionResponse & {
 }
 
 /**
- * Required response of a Record action
+ * Required response of a Record action. Extends {@link ActionResponse}
+ *
  * @memberof Action
  * @alias RecordActionResponse
  */
@@ -164,7 +164,8 @@ export type BulkActionResponse = ActionResponse & {
 }
 
 /**
- * Type of a handler function. It has to return response compatible with {@link ActionResponse}
+ * Type of a handler function. It has to return response compatible
+ * with {@link ActionResponse}, {@link BulkActionResponse} or {@link RecordActionResponse}
  *
  * @alias ActionHandler
  * @async
@@ -227,7 +228,7 @@ export type After<T> = (
  *
  * ```
  * const action = {
- *   actionType: ['record'],
+ *   actionType: 'record',
  *   label: 'Publish',
  *   icon: 'fas fa-eye',
  *   isVisible: true,
@@ -236,18 +237,20 @@ export type After<T> = (
  * }
  * ```
  *
- * There are 2 kinds of actions:
+ * There are 3 kinds of actions:
  *
  * 1. Resource action, which is performed for an entire resource.
  * 2. Record action, invoked for an record in a resource
+ * 2. Bulk action, invoked for an set of records in a resource
  *
- * ...and there are 5 actions predefined in AdminBro
+ * ...and there are 6 actions predefined in AdminBro
  *
  * 1. {@link module:NewAction new} (resource action) - create new records in a resource
  * 1. {@link module:ListAction list} (resource action) - list all records within a resource
  * 2. {@link module:EditAction edit} (record action) - update records in a resource
  * 3. {@link module:ShowAction show} (record action) - show details of given record
  * 3. {@link module:DeleteAction delete} (record action) - delete given record
+ * 3. {@link module:BulkDeleteAction bulkDelete} (bulk action) - delete given records
  *
  * Users can also create their own actions or override those already existing by using
  * {@link ResourceOptions}
@@ -283,7 +286,7 @@ export default interface Action <T extends ActionResponse> {
   /**
    * Name of an action which is its uniq key.
    * If use one of _list_, _edit_, _new_, _show_ or _delete_ you override existing actions.
-   * For all other keys you create new action.
+   * For all other keys you create a new action.
    */
   name: string;
   /**
@@ -370,12 +373,11 @@ export default interface Action <T extends ActionResponse> {
    */
   showFilter?: boolean;
   /**
-   * Type of an action - could be either _resource_ or _record_
-   * or both (passed as an array):
+   * Type of an action - could be either _resource_, _record_ or _bulk_.
    *
    * <img src="./images/actions.png">
    *
-   * When you define new action - it is required.
+   * When you define a new action - it is required.
    */
   actionType: 'resource' | 'record' | 'bulk';
   /**
@@ -405,12 +407,11 @@ export default interface Action <T extends ActionResponse> {
    */
   guard?: string;
   /**
-   * Component which will be used to render the action.
-   * Action components accepts following prop types:
+   * Component which will be used to render the action. To pass the component
+   * use {@link AdminBro.bundle} method.
    *
-   * 1. resource: {@link ResourceJSON}
-   * 2. action: {@link ActionJSON}
-   * 3. _(optional)_ recordId: string _(for recordAction)_
+   * Action components accepts {@link ActionProps} and are rendered by the
+   * {@link BaseActionComponent}
    *
    * When component is set to `false` then action doesn't have it's own view.
    * Instead after clicking button it is immediately performed. Example of
@@ -418,11 +419,16 @@ export default interface Action <T extends ActionResponse> {
    */
   component?: string | false;
   /**
-   * handler function which will be invoked by {@link ApiController#resourceAction}
-   * or {@link ApiController#recordAction} when user visits clicks action link.
+   * handler function which will be invoked by either:
+   * - {@link ApiController#resourceAction}
+   * - {@link ApiController#recordAction}
+   * - or {@link ApiController#bulkAction}
+   * when user visits clicks action link.
    *
-   * If you are defining this action for a record it has to return {@link ActionResponse} with
-   * record property defined.
+   * If you are defining this action for a record it has to return:
+   * - {@link ActionResponse} for resource action
+   * - {@link RecordActionResponse} for record action
+   * - {@link BulkActionResponse} for bulk action
    *
    * ```javascript
    * // Handler of a 'record' action
@@ -436,14 +442,15 @@ export default interface Action <T extends ActionResponse> {
    * }
    * ```
    *
-   * Required for new actions.
+   * Required for new actions. For modifying already defined actions
+   * like new and edit please use {@link Action#before} and {@link Action#after} hooks.
    */
   handler: ActionHandler<T>;
   /**
    * Before action hook. When it is given - it is performed before the {@link Action#handler}
    * method.
    *
-   * Hashing password before creating it:
+   * Example of hashing password before creating it:
    *
    * ```javascript
    * actions: {
@@ -465,13 +472,13 @@ export default interface Action <T extends ActionResponse> {
   before?: Before;
   /**
    * After action hook. When it is given - it is performed on the returned,
-   * by {@link Action#handler handler} function object.
+   * by {@link Action#handler handler} function response.
    *
    * You can use it to (just an idea)
    * - create log of changes done in the app
    * - prefetch additional data after original {@link Handler} is being performed
    *
-   * Creating a changelog:
+   * Creating a changelog example:
    *
    * ```javascript
    * // example mongoose model

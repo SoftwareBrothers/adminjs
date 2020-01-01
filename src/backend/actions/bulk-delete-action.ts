@@ -1,4 +1,4 @@
-import Action, { ActionResponse } from './action.interface'
+import Action, { BulkActionResponse } from './action.interface'
 import NotFoundError from '../utils/not-found-error'
 
 
@@ -9,7 +9,7 @@ import NotFoundError from '../utils/not-found-error'
  * @description
  * Removes given records from the database.
  */
-const BulkDeleteAction: Action<ActionResponse> = {
+const BulkDeleteAction: Action<BulkActionResponse> = {
   name: 'bulkDelete',
   isVisible: true,
   actionType: 'bulk',
@@ -19,8 +19,9 @@ const BulkDeleteAction: Action<ActionResponse> = {
    * Responsible for deleting existing records.
    *
    * To invoke this action use {@link ApiClient#bulkAction}
+   * with {actionName: _bulkDelete_}
    *
-   * @return  {Promise<ActionResponse>}
+   * @return  {Promise<BulkActionResponse>}
    * @implements ActionHandler
    * @memberof module:BulkDeleteAction
    */

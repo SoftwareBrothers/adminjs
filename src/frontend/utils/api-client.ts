@@ -12,6 +12,15 @@ try {
   }
 }
 
+/**
+ * Type of an [axios request]{@link https://github.com/axios/axios/blob/master/index.d.ts#L43}
+ *
+ * @typedef {object} AxiosRequestConfig
+ * @alias AxiosRequestConfig
+ * @memberof ApiClient
+ * @see https://github.com/axios/axios/blob/master/index.d.ts#L43
+ */
+
 const checkResponse = (response: AxiosResponse): void => {
   const loginUrl = [window.location.origin, globalAny.REDUX_STATE.paths.loginPath].join('')
   // if response has redirect to loginUrl
@@ -25,66 +34,75 @@ const checkResponse = (response: AxiosResponse): void => {
 }
 
 /**
+ * Extends {@link AxiosRequestConfig}
+ *
  * @alias ResourceActionAPIParams
  * @memberof ApiClient
- * @extends AxiosRequestConfig
+ * @property {any}   ...    any property supported by {@link AxiosRequestConfig}
  */
 export type ResourceActionAPIParams = AxiosRequestConfig & {
   /**
-   * Id of a resource taken from {@link ResourceJSON}
+   * id of a resource taken from {@link ResourceJSON}
    */
   resourceId: string;
   /**
-   * Action name taken from  {@link ActionJSON}
+   * action name taken from  {@link ActionJSON}
    */
   actionName: string;
 }
 
 /**
+ * Extends {@link AxiosRequestConfig}
+ *
  * @alias RecordActionAPIParams
  * @memberof ApiClient
- * @extends AxiosRequestConfig
+ * @property {any}   ...    any property supported by {@link AxiosRequestConfig}
  */
 export type RecordActionAPIParams = AxiosRequestConfig & {
   /**
-   * Id of a record taken from {@link RecordJSON}
+   * id of a record taken from {@link RecordJSON}
    */
   recordId: string;
   /**
-   * Id of a resource taken from {@link ResourceJSON}
+   * id of a resource taken from {@link ResourceJSON}
    */
   resourceId: string;
   /**
-   * Action name taken from  {@link ActionJSON}
+   * action name taken from  {@link ActionJSON}
    */
   actionName: string;
 }
 
 /**
+ * Extends {@link AxiosRequestConfig}
+ *
  * @alias BulkActionAPIParams
  * @memberof ApiClient
- * @extends AxiosRequestConfig
+ * @see https://github.com/axios/axios/blob/master/index.d.ts#L43
+ * @property {any}   ...    any property supported by {@link AxiosRequestConfig}
  */
 export type BulkActionAPIParams = AxiosRequestConfig & {
   /**
-   * Id of a record taken from {@link RecordJSON}
+   * id of a record taken from {@link RecordJSON}
    */
   recordIds: Array<string>;
   /**
-   * Id of a resource taken from {@link ResourceJSON}
+   * id of a resource taken from {@link ResourceJSON}
    */
   resourceId: string;
   /**
-   * Action name taken from  {@link ActionJSON}
+   * action name taken from  {@link ActionJSON}
    */
   actionName: string;
 }
 
 
 /**
+ * Extends {@link AxiosRequestConfig}
+ *
  * @alias GetPageAPIParams
  * @memberof ApiClient
- * @extends AxiosRequestConfig
+ * @property {any}   ...    any property supported by {@link AxiosRequestConfig}
  */
 export type GetPageAPIParams = AxiosRequestConfig & {
   /**
@@ -125,10 +143,10 @@ class ApiClient {
    * Search by query string for records in a given resource.
    *
    * @param   {Object}  options
-   * @param   {String}  options.resourceId  Id of a {@link ResourceJSON}
+   * @param   {String}  options.resourceId  id of a {@link ResourceJSON}
    * @param   {String}  options.query       query string
    *
-   * @return  {Promise<Array<SearchRecord>>}
+   * @return  {Promise<SearchResponse>}
    */
   async searchRecords({ resourceId, query }: {
     resourceId: string;
@@ -143,8 +161,8 @@ class ApiClient {
   /**
    * Invokes given resource {@link Action} on the backend.
    *
-   * @param   {ResourceActionAPIParams} options
-   * @return  {Promise<Object>}            response from an {@link Action}
+   * @param   {ResourceActionAPIParams}     options
+   * @return  {Promise<ActionResponse>}     response from an {@link Action}
    */
   async resourceAction(options: ResourceActionAPIParams): Promise<AxiosResponse<ActionResponse>> {
     const { resourceId, actionName, data, ...axiosParams } = options
@@ -177,7 +195,7 @@ class ApiClient {
   }
 
   /**
-   * Invokes given record {@link Action} on the backend.
+   * Invokes given bulk {@link Action} on the backend.
    *
    * @param   {BulkActionAPIParams} options
    * @return  {Promise<BulkActionResponse>}            response from an {@link Action}
@@ -202,8 +220,9 @@ class ApiClient {
   /**
    * Invokes dashboard handler.
    *
-   * @param   {AxiosRequestConfig}                options
-   * @return  {Promise<any>}                      response from the dashboard handler
+   * @param   {AxiosRequestConfig}       options
+   * @return  {Promise<any>}             response from the handler function defined in
+   *                                     {@link AdminBroOptions#dashboard}
    */
   async getDashboard(options: AxiosRequestConfig = {}): Promise<any> {
     const response = await this.client.get('/api/dashboard', options)
@@ -212,10 +231,11 @@ class ApiClient {
   }
 
   /**
-   * Invokes dashboard handler.
+   * Invokes handler function of given page and returns its response.
    *
    * @param   {GetPageAPIParams}                options
-   * @return  {Promise<any>}                    response from the dashboard handler
+   * @return  {Promise<any>}                    response from the handler of given page
+   *                                            defined in {@link AdminBroOptions#pages}
    */
   async getPage(options: GetPageAPIParams): Promise<any> {
     const { pageName, ...axiosParams } = options

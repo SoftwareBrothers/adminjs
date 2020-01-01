@@ -67,18 +67,33 @@ export default interface AdminBroOptions {
 
   /**
    * List of custom pages which will be visible below all resources
+   * @example
+   * pages: {
+   *   customPage: {
+   *     label: "Custom page",
+   *     handler: async (request, response, context) => {
+   *       return {
+   *         text: 'I am fetched from the backend',
+   *       }
+   *     },
+   *     component: AdminBro.bundle('./components/some-stats'),
+   *   },
+   *   anotherPage: {
+   *     label: "TypeScript page",
+   *     component: AdminBro.bundle('./components/test-component'),
+   *   },
+   * },
    */
   pages?: Record<string, AdminPage>;
   /**
    * Array of all Resources which are supported by AdminBro via adapters.
    * You can pass either resource or resource with an options and thus modify it.
+   * @property {any} resources[].resource
+   * @property {ResourceOptions} resources[].options
    *
    * @see ResourceOptions
    */
-  resources?: Array<any | {
-    resource: any;
-    options: ResourceOptions;
-  }>;
+  resources?: Array<ResourceWithOptions | any>;
   /**
    * Option to modify the dashboard
    */
@@ -227,9 +242,19 @@ export type AdminPage = {
 }
 
 /**
+ * Defaut way of passing Options with a Resource
+ * @alias ResourceWithOptions
+ * @memberof AdminBroOptions
+ */
+export type ResourceWithOptions = {
+  resource: any;
+  options: ResourceOptions;
+}
+
+/**
  * Function which is invoked when user enters given AdminPage
  *
- * @alias AdminHandler
+ * @alias PageHandler
  * @memberof AdminBroOptions
  */
 export type PageHandler = (

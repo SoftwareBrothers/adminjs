@@ -13,7 +13,7 @@ import RecordJSON from '../decorators/record-json.interface'
 
 /**
  * Controller responsible for the auto-generated API: `/admin_root/api/...`, where
- * admin_root is the `rootPath` given in {@link AdminBroOptions}.
+ * _admin_root_ is the `rootPath` given in {@link AdminBroOptions}.
  *
  * The best way to utilise it is to use {@link ApiClient} on the frontend.
  *
@@ -21,12 +21,22 @@ import RecordJSON from '../decorators/record-json.interface'
  *
  * | Endpoint                 | Method                | Description |
  * |--------------------------|-----------------------|-------------|
- * | `.../api/resources/{resourceId}/search/{query}` | {@link ApiController#search} | Search record by query string |
- * | `.../api/resources/{resourceId}/actions/{action}` | {@link ApiController#resourceAction} | Perform customized resource action |
- * | `.../api/resources/{resourceId}/records/{recordId}/{action}` | {@link ApiController#recordAction} | Perform customized record action |
- * | `.../api/resources/{resourceId}/bulk/{action}?recordIds={recordId}` | {@link ApiController#bulkAction} | Perform customized bulk action |
- * | `.../api/pages/{pageName}` | {@link ApiController#page} | Perform customized page action |
- * | `.../api/dashboard` | {@link ApiController#dashboard} | Perform customized dashboard action |
+ * | .../api/resources/{resourceId}/search/{query} | {@link ApiController#search} | Search record by query string |
+ * | .../api/resources/{resourceId}/actions/{action} | {@link ApiController#resourceAction} | Perform customized resource action |
+ * | .../api/resources/{resourceId}/records/{recordId}/{action} | {@link ApiController#recordAction} | Perform customized record action |
+ * | .../api/resources/{resourceId}/bulk/{action}?recordIds={recordIds} | {@link ApiController#bulkAction} | Perform customized bulk action |
+ * | .../api/pages/{pageName}_ | {@link ApiController#page} | Perform customized page action |
+ * | .../api/dashboard_ | {@link ApiController#dashboard} | Perform customized dashboard action |
+ *
+ * ### Responsibility
+ *
+ * In general this controllers takes handler functions you define in {@link AdminBroOptions} and:
+ * - find all the [context information]{@link ActionContext} which is needed by the action
+ *   and is passed to the {@link Action#handler}, {@link Action#before} and {@link Action#after}
+ * - checks if action can be invoked by particular user {@link Action#isAccessible}
+ * - invokes {@link Action#before} and {@link Action#after} hooks
+ *
+ * You probably don't want to modify it, but you can call its methods by using {@link ApiClient}
  *
  * @hideconstructor
  */
@@ -65,9 +75,9 @@ class ApiController {
   /**
    * Search records by query string.
    *
-   * Handler function responsible for a `.../api/resources/{resourceId}/search/{query}` route
+   * Handler function responsible for a _.../api/resources/{resourceId}/search/{query}_ route
    *
-   * @param   {ActionRequest}  request
+   * @param   {ActionRequest}  request with __params.query__ set
    *
    * @return  {Promise<SearchResponse>}    found records
    */
@@ -100,7 +110,7 @@ class ApiController {
    * Performs a customized {@link Action resource action}.
    * To call it use {@link ApiClient#resourceAction} method.
    *
-   * Handler function responsible for a `.../api/resources/{resourceId}/actions/{action}`
+   * Handler function responsible for a _.../api/resources/{resourceId}/actions/{action}_
    *
    * @param   {ActionRequest}  request
    * @param   {object}         response object from the plugin (i.e. admin-bro-expressjs)
@@ -122,14 +132,14 @@ class ApiController {
    * Performs a customized {@link Action record action}.
    * To call it use {@link ApiClient#recordAction} method.
    *
-   * Handler function responsible for a `.../api/resources/{resourceId}/records/{recordId}/{action}`
+   * Handler function responsible for a _.../api/resources/{resourceId}/records/{recordId}/{action}_
    *
    * @param   {ActionRequest}  request
    * @param   {any}  response
    *
    * @return  {Promise<RecordActionResponse>}  action response
    * @throws  ConfigurationError      When given record action doesn't return {@link RecordJSON}
-   * @throws  ForbiddenError          When user cannot perform given action: {@linkAction.isAccessible}
+   * @throws  ForbiddenError          When user cannot perform given action: {@link Action#isAccessible}
    *                                  returns false
    * @throws  ConfigurationError      when action handler doesn't return Promise<{@link RecordActionResponse}>
    */
@@ -173,7 +183,7 @@ class ApiController {
    * Performs a customized {@link Action bulk action}.
    * To call it use {@link ApiClient#bulkAction} method.
    *
-   * Handler function responsible for a `.../api/resources/{resourceId}/bulk/{action}?recordIds={recordIds}`
+   * Handler function responsible for a _.../api/resources/{resourceId}/bulk/{action}?recordIds={recordIds}_
    *
    * @param   {ActionRequest}  request
    * @param   {any}  response
@@ -181,7 +191,7 @@ class ApiController {
    * @return  {Promise<BulkActionResponse>}  action response
    * @throws  NotFoundError           when recordIds are missing in query or they don't exists in
    *                                  the database
-   * @throws  ForbiddenError          When user cannot perform given action. {@link Action.isAccessible}
+   * @throws  ForbiddenError          When user cannot perform given action. {@link Action#isAccessible}
    *                                  returns false
    * @throws  ConfigurationError      when action handler doesn't return Promise<{@link BulkActionResponse}>
    */
@@ -227,7 +237,7 @@ class ApiController {
    * Gets optional data needed by the dashboard.
    * To call it use {@link ApiClient#getDashboard} method.
    *
-   * Handler function responsible for a `.../api/dashboard`
+   * Handler function responsible for a _.../api/dashboard_
    *
    * @param   {ActionRequest}  request
    * @param   {any}  response
@@ -256,7 +266,7 @@ class ApiController {
    * Gets optional data needed by the page.
    * To call it use {@link ApiClient#getPage} method.
    *
-   * Handler function responsible for a `.../api/pages/{pageName}`
+   * Handler function responsible for a _.../api/pages/{pageName}_
    *
    * @param   {ActionRequest}  request
    * @param   {any}  response
@@ -288,7 +298,7 @@ class ApiController {
 export default ApiController
 
 /**
- * Response of a Search action in the API
+ * Response of a [Search]{@link ApiController#search} action in the API
  * @memberof ApiController
  * @alias SearchResponse
  */
@@ -297,20 +307,4 @@ export type SearchResponse = {
    * List of records
    */
   records: Array<RecordJSON>;
-}
-
-/**
- * Response of a Search action in the API
- * @memberof ApiController
- * @alias SearchRecord
- */
-export type SearchRecord = {
-  /**
-   * record title - value of its titleProperty
-   */
-  title: string;
-  /**
-   * Record Id
-   */
-  id: string;
 }

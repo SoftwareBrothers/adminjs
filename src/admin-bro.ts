@@ -85,42 +85,56 @@ class AdminBro {
   public static Router: RouterType
 
   /**
-   * abstract class for all databases. External adapters have to implement that.
+   * An abstract class for all Database Adapters.
+   * External adapters have to implement it.
+   *
+   * @example <caption>Creating Database Adapter for some ORM</caption>
+   * const { BaseDatabase } = require('admin-bro')
+   *
+   * class Database extends BaseDatabase {
+   *   constructor(ormInstance) {
+   *     this.ormInstance = ormInstance
+   *   }
+   *   resources() {
+   *     // fetch resources from your orm and convert to BaseResource
+   *   }
+   * }
    */
   public static BaseDatabase: typeof BaseDatabase
 
   /**
-   * abstract class for all records. External adapters have to implement that or at least
-   * their BaseResource implementation should return records of this type.
+   * Class representing all records. External adapters have to implement that or at least
+   * their {@link BaseResource} implementation should return records of this type.
    */
   public static BaseRecord: typeof BaseRecord
 
   /**
-   * abstract class for all resources. External adapters have to implement that.
+   * An abstract class for all resources. External adapters have to implement that.
    */
   public static BaseResource: typeof BaseResource
 
   /**
-   * abstract class for all properties. External adapters have to implement that or at least
-   * their BaseResource implementation should return records of this type.
+   * Class for all properties. External adapters have to implement that or at least
+   * their {@link BaseResource} implementation should return records of this type.
    */
   public static BaseProperty: typeof BaseProperty
 
   /**
-   * Filter object passed to find method of BaseResource. External adapters have to use it
+   * Filter object passed to find method of {@link BaseResource}.
+   * External adapters have to use it
    */
   public static Filter: typeof Filter
 
   /**
    * Validation error which is thrown when record fails validation. External adapters have
-   * to use it.
+   * to use it, so AdminBro can print validation errors
    */
   public static ValidationError: typeof ValidationError
 
 
   /**
-   * List of all default actions. If you want to change behavior for all actions like list,
-   * edit, show and delete you can do this here.
+   * List of all default actions. If you want to change the behavior for all actions like:
+   * _list_, _edit_, _show_, _delete_ and _bulk delete_ you can do this here.
    *
    * @example <caption>Modifying accessibility rules for all show actions</caption>
    * const { ACTIONS } = require('admin-bro')
@@ -139,7 +153,7 @@ class AdminBro {
   public static UserComponents: UserComponentsMap
 
   /**
-   * @param   {AdminBroOptions}  options  options passed to adminBro
+   * @param   {AdminBroOptions} options      Options passed to AdminBro
    */
   constructor(options: AdminBroOptions = {}) {
     /**
@@ -175,8 +189,8 @@ class AdminBro {
    * AdminBro.registerAdapter(MongooseAdapter)
    *
    * @param  {Object}       options
-   * @param  {typeof BaseDatabase} options.Database subclass of BaseDatabase
-   * @param  {typeof BaseResource} options.Resource subclass of BaseResource
+   * @param  {typeof BaseDatabase} options.Database subclass of {@link BaseDatabase}
+   * @param  {typeof BaseResource} options.Resource subclass of {@link BaseResource}
    */
   static registerAdapter({ Database, Resource }: {
     Database: typeof BaseDatabase;
@@ -211,9 +225,9 @@ class AdminBro {
    * Used by external plugins
    *
    * @param  {Object} options
-   * @param  {String} options.action          login form action url - it could be
+   * @param  {String} options.action          Login form action url - it could be
    *                                          '/admin/login'
-   * @param  {String} [options.errorMessage]  optional error message. When set,
+   * @param  {String} [options.errorMessage]  Optional error message. When set,
    *                                          renderer will print this message in
    *                                          the form
    * @return {Promise<string>}                HTML of the rendered page
@@ -231,7 +245,7 @@ class AdminBro {
    *
    * @param  {String} resourceId    ID of a resource defined under {@link BaseResource#id}
    * @return {BaseResource}         found resource
-   * @throws {Error}                when resource with given id cannot be found
+   * @throws {Error}                When resource with given id cannot be found
    */
   findResource(resourceId): BaseResource {
     const resource = this.resources.find(m => m.id() === resourceId)
@@ -249,7 +263,7 @@ class AdminBro {
    * Requires given .jsx/.tsx file, that it can be bundled to the frontend.
    * It will be available under AdminBro.UserComponents[componentId].
    *
-   * @param   {String}  src  path to a file containing react component.
+   * @param   {String}  src  Path to a file containing react component.
    *
    * @return  {String}       componentId - uniq id of a component
    *

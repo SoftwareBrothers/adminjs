@@ -10,7 +10,7 @@ export default interface ActionJSON {
   /**
    * Type of an action
    */
-  actionType: 'record' | 'resource' | 'bulk' | Array<'record' | 'resource' | 'bulk'>;
+  actionType: 'record' | 'resource' | 'bulk';
   /**
    * Action icon
    */
@@ -20,7 +20,7 @@ export default interface ActionJSON {
    */
   label: string;
   /**
-   * Guarding message
+   * Guarding message which should be presented in `alert()` after clicking the action button
    */
   guard?: string;
   /**
