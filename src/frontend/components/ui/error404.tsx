@@ -97,9 +97,9 @@ const NoRecordError: React.FC<{
 }
 
 export {
-  Error404 as default,
+  Error404,
   NoResourceError,
   NoActionError,
   NoRecordError,
-  ErrorMessageBox,
+  ErrorMessageBox as default,
 }

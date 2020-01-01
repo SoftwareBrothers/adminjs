@@ -28,7 +28,7 @@ export type ActionProps = {
   records?: Array<RecordJSON>;
 
   /**
-   * Sets tag in a header of an action.
+   * Sets tag in a header of an action. It is a function taking tag as an argument
    */
   setTag?: Dispatch<SetStateAction<string>>;
 }
