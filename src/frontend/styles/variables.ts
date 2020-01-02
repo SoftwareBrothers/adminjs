@@ -2,6 +2,7 @@ import 'styled-components'
 
 /**
  * @file Default AdminBro theme
+ * @private
  */
 
 // sorted alphabetically

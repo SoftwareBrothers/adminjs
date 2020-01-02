@@ -1,6 +1,7 @@
 
 /**
  * Record Error
+ * @alias RecordError
  * @memberof ValidationError
  */
 export type RecordError = {
@@ -16,6 +17,7 @@ export type RecordError = {
 
 /**
  * Property Errors
+ * @alias PropertyErrors
  * @memberof ValidationError
  */
 export type PropertyErrors = {

@@ -5,6 +5,10 @@ import ValidationError, { RecordError, PropertyErrors } from '../utils/validatio
 import RecordJSON from '../decorators/record-json.interface'
 import { CurrentAdmin } from '../../current-admin.interface'
 
+/**
+ * @alias ParamsType
+ * @memberof BaseRecord
+ */
 export type ParamsType = Record<string, any>
 
 /**
@@ -34,10 +38,10 @@ class BaseRecord {
   private populated: {[key: string]: BaseRecord}
 
   /**
-   * @param  {Object}       params         all resource data. I.e. field values
+   * @param  {ParamsType}   params         all resource data. I.e. field values
    * @param  {BaseResource} resource       resource to which given record belongs
    */
-  constructor(params, resource) {
+  constructor(params: ParamsType, resource: BaseResource) {
     this.resource = resource
     this.params = params ? flat.flatten(params) : {}
     this.errors = {}
@@ -65,17 +69,17 @@ class BaseRecord {
 
   /**
    * Returns object containing all params keys starting with prefix
-   * @param   {String}  prefix
+   * @param   {string}  prefix
    *
-   * @return  {Object}
+   * @return  {object | undefined}
    */
-  namespaceParams(prefix: string): Record<string, any> {
+  namespaceParams(prefix: string): Record<string, any> | void {
     const regex = new RegExp(`^${prefix}`)
     const keys = Object.keys(this.params).filter(key => key.match(regex))
     if (keys.length) {
       return keys.reduce((memo, key) => ({ ...memo, [key]: this.params[key] }), {})
     }
-    return {}
+    return undefined
   }
 
   /**
@@ -84,8 +88,8 @@ class BaseRecord {
    *
    * When validation error occurs it stores that to {@link BaseResource.errors}
    *
-   * @param  {Object} params all field with values which has to be updated
-   * @return {BaseRecord}        given record (this)
+   * @param  {object} params all field with values which has to be updated
+   * @return {Promise<BaseRecord>}        given record (this)
    */
   async update(params): Promise<BaseRecord> {
     try {
@@ -111,7 +115,7 @@ class BaseRecord {
    *
    * When validation error occurs it stores that to {@link BaseResource#errors}
    *
-   * @return {BaseRecord}        given record (this)
+   * @return {Promise<BaseRecord>}        given record (this)
    */
   async save(): Promise<BaseRecord> {
     try {
@@ -134,7 +138,7 @@ class BaseRecord {
 
   /**
    * Returns uniq id of the Record.
-   * @return {String | Number} id of the Record
+   * @return {string | number} id of the Record
    */
   id(): string {
     const idProperty = this.resource.properties().find(p => p.isId())
@@ -150,7 +154,7 @@ class BaseRecord {
    *
    * Title will be shown in the breadcrumbs for example.
    *
-   * @return {String} title of the record
+   * @return {string} title of the record
    */
   title(): string {
     const nameProperty = this.resource.properties().find(p => p.isTitle())
@@ -159,23 +163,16 @@ class BaseRecord {
 
   /**
    * Return state of validation for given record
-   * @return {Boolean} if record is valid or not.
+   * @return {boolean} if record is valid or not.
    */
   isValid(): boolean {
     return Object.keys(this.errors).length === 0
   }
 
   /**
-   * Stores incoming payloadData in record params
-   */
-  storeParams(payloadData: object): void {
-    this.params = _.merge(this.params, payloadData)
-  }
-
-  /**
    * Returns error message for given property path (name)
-   * @param  {String} path path (name) of property which we want to check if is valid
-   * @return {String | null}      validation message of null
+   * @param  {string} path        (name) of property which we want to check if is valid
+   * @return {RecordError | null}      validation message of null
    */
   error(path: string): RecordError | null {
     return this.errors[path]
@@ -184,7 +181,7 @@ class BaseRecord {
   /**
    * Populate record relations
    *
-   * @param   {String}  propertyName  name of the property which should be populated
+   * @param   {string}  propertyName  name of the property which should be populated
    * @param   {BaseRecord}  record    record to which property relates
    */
   populate(propertyName: string, record: BaseRecord): void {
@@ -193,7 +190,7 @@ class BaseRecord {
 
   /**
    * Returns JSON representation of an record
-   * @param {CurrentAdmin} currentAdmin
+   * @param {CurrentAdmin} [currentAdmin]
    * @return  {RecordJSON}
    */
   toJSON(currentAdmin?: CurrentAdmin): RecordJSON {
@@ -214,6 +211,15 @@ class BaseRecord {
         this, currentAdmin,
       ).map(recordAction => recordAction.toJSON()),
     }
+  }
+
+  /**
+   * Stores incoming payloadData in record params
+   *
+   * @param {object} [payloadData]
+   */
+  storeParams(payloadData?: object): void {
+    this.params = _.merge(this.params, payloadData ? flat.flatten(payloadData) : {})
   }
 }
 
