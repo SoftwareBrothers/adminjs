@@ -272,7 +272,7 @@ class BaseResource {
    */
   decorate(): ResourceDecorator {
     if (!this._decorated) {
-      throw new Error('resource don\'t have assigned decorator yet')
+      throw new Error('resource does not have any assigned decorator yet')
     }
     return this._decorated
   }
