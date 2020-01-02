@@ -7,8 +7,8 @@ declare module 'factory-girl' {
     attrs: {
       [P in keyof T]: (() => T[P]) | T[P] | Promise<T[P]> | (() => Promise<T[P]>)
     },
-    options: {
-      afterBuild: ((T) => T | Promise<T>);
+    options?: {
+      afterBuild?: ((T) => T | Promise<T>);
     }
   ): void;
 
