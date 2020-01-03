@@ -27,13 +27,13 @@ const Td = styled.td`
   }
 `
 
-interface Props {
+type Props = {
   resource: ResourceJSON;
   record: RecordJSON;
   actionPerformed?: (actionName: string) => any;
-  isLoading: boolean;
-  onSelect: (record: RecordJSON) => void;
-  isSelected: boolean;
+  isLoading?: boolean;
+  onSelect?: (record: RecordJSON) => void;
+  isSelected?: boolean;
 }
 
 export default class RecordInList extends React.PureComponent<Props> {
@@ -47,7 +47,7 @@ export default class RecordInList extends React.PureComponent<Props> {
     return (
       <tr>
         <Td className={isSelected ? 'selected' : 'not-selected'}>
-          {record.bulkActions.length ? (
+          {onSelect && record.bulkActions.length ? (
             <input
               type="checkbox"
               onChange={(): void => onSelect(record)}
@@ -56,7 +56,11 @@ export default class RecordInList extends React.PureComponent<Props> {
           ) : null}
         </Td>
         {resource.listProperties.map(property => (
-          <Td key={property.name} className={resource.titleProperty.name === property.name ? 'main' : undefined}>
+          <Td
+            key={property.name}
+            data-property-name={property.name}
+            className={resource.titleProperty.name === property.name ? 'main' : undefined}
+          >
             {isLoading ? (
               <Placeholder style={{ height: 14 }} />
             ) : (

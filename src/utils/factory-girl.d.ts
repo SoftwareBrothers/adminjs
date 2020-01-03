@@ -25,6 +25,6 @@ declare module 'factory-girl' {
 
   function sequence<T>(
     name: string,
-    generator: (i: number) => T,
+    generator?: (i: number) => T,
   )
 }

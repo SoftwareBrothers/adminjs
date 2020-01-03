@@ -15,7 +15,7 @@ const SelectedRecordsWrapper = styled.section`
 
 type Props = {
   resource: ResourceJSON;
-  selectedRecords: Array<RecordJSON>;
+  selectedRecords?: Array<RecordJSON>;
 }
 
 const InlineLabel = styled(Label)`
@@ -28,11 +28,11 @@ const InlineLabel = styled(Label)`
 const SelectedRecords: React.FC<Props> = (props) => {
   const { resource, selectedRecords } = props
 
-  const bulkActions = getBulkActionsFromRecords(selectedRecords)
-
-  if (!selectedRecords.length) {
+  if (!selectedRecords || !selectedRecords.length) {
     return null
   }
+
+  const bulkActions = getBulkActionsFromRecords(selectedRecords)
 
   return (
     <SelectedRecordsWrapper>

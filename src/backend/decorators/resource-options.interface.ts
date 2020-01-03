@@ -1,4 +1,4 @@
-import Action, { ActionResponse, RecordActionResponse } from '../actions/action.interface'
+import Action, { ActionResponse, RecordActionResponse, BulkActionResponse } from '../actions/action.interface'
 import PropertyOptions from './property-options.interface'
 import { ListActionResponse } from '../actions/list-action'
 
@@ -58,6 +58,7 @@ export interface ResourceOptions {
     show?: Partial<Action<RecordActionResponse>>;
     edit?: Partial<Action<RecordActionResponse>>;
     delete?: Partial<Action<RecordActionResponse>>;
+    bulkDelete?: Partial<Action<BulkActionResponse>>;
     new?: Partial<Action<RecordActionResponse>>;
     list?: Partial<Action<ListActionResponse>>;
   } | {

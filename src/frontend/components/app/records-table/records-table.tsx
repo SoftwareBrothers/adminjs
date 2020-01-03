@@ -14,16 +14,16 @@ const RecordsTableWrapper = styled.section`
   position: relative;
 `
 
-type Props = {
+export type Props = {
   resource: ResourceJSON;
   records: Array<RecordJSON>;
   actionPerformed?: (actionName: string) => any;
   sortBy?: string;
   direction?: 'asc' | 'desc';
-  isLoading: boolean;
-  selectedRecords: Array<RecordJSON>;
-  onSelect: (record: RecordJSON) => any;
-  onSelectAll: () => any;
+  isLoading?: boolean;
+  selectedRecords?: Array<RecordJSON>;
+  onSelect?: (record: RecordJSON) => any;
+  onSelectAll?: () => any;
 }
 
 const RecordsTable: React.FC<Props> = (props) => {
@@ -38,7 +38,7 @@ const RecordsTable: React.FC<Props> = (props) => {
     return (<NoRecords resource={resource} />)
   }
 
-  const selectedAll = !!records.find(record => (
+  const selectedAll = selectedRecords && !!records.find(record => (
     selectedRecords.find(selected => selected.id === record.id)
   ))
 
@@ -66,7 +66,9 @@ const RecordsTable: React.FC<Props> = (props) => {
               actionPerformed={actionPerformed}
               isLoading={isLoading}
               onSelect={onSelect}
-              isSelected={!!selectedRecords.find(selected => selected.id === record.id)}
+              isSelected={
+                selectedRecords && !!selectedRecords.find(selected => selected.id === record.id)
+              }
             />
           ))}
         </tbody>
