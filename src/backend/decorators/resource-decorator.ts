@@ -101,10 +101,7 @@ class ResourceDecorator {
         }),
         ...actions[key],
       }
-      // action.name = action.name ? action.name : key
-      // action.label = action.label || key
 
-      // actions[key].handler = actions[key].handler
       returnActions[key] = new ActionDecorator({
         action,
         admin: this._admin,
