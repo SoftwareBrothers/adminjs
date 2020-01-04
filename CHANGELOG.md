@@ -27,7 +27,7 @@ Started since version 0.9.5
 * wrong property order [#223]
 * PropertyOptions for nested properties (#244)
 * Not showing 0 in list and show views (#247)
-* Selected sidebar alements after page reload (#241)
+* Selected sidebar elements after page reload (#241)
 
 ## 1.5.1 and 1.5.2 - 2019-12-21
 
@@ -91,7 +91,7 @@ Started since version 0.9.5
 
 ### Fixed
 
-* fix error when submit of entire record has been triggered by arra add/remove buttons
+* fix error when submit of entire record has been triggered by array add/remove buttons
 * overlay error with select in filter - #189
 
 ### Changed
