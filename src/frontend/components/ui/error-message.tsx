@@ -12,6 +12,7 @@ type Props = {
 export type ErrorMessageBoxProps = {
   title: string;
   children: ReactNode;
+  testId?: string;
 }
 
 /**
@@ -27,28 +28,12 @@ export type ErrorMessageBoxProps = {
  * )
  */
 const ErrorMessageBox: React.FC<ErrorMessageBoxProps> = (props) => {
-  const { children, title } = props
+  const { children, title, testId } = props
   return (
     <WrapperBox>
-      <WrapperBox border>
+      <WrapperBox border data-testid={testId}>
         <div className="content has-text-centered">
           <h3>{title}</h3>
-          <div>
-            {children}
-          </div>
-        </div>
-      </WrapperBox>
-    </WrapperBox>
-  )
-}
-
-const Error404: React.FC<Props> = (props) => {
-  const { children } = props
-  return (
-    <WrapperBox>
-      <WrapperBox border>
-        <div className="content has-text-centered">
-          <h3>404 - PAGE NOT FOUND</h3>
           <div>
             {children}
           </div>
@@ -61,23 +46,23 @@ const Error404: React.FC<Props> = (props) => {
 const NoResourceError: React.FC<{resourceId: string}> = (props) => {
   const { resourceId } = props
   return (
-    <Error404>
-    Resource of given id:
+    <ErrorMessageBox title="404 - PAGE NOT FOUND" testId="NoResourceError">
+      Resource of given id:
       <b>{` ${resourceId} `}</b>
-    cannot be found.
-    </Error404>
+      cannot be found.
+    </ErrorMessageBox>
   )
 }
 
 const NoActionError: React.FC<{resourceId: string; actionName: string}> = (props) => {
   const { resourceId, actionName } = props
   return (
-    <Error404>
+    <ErrorMessageBox title="404 - PAGE NOT FOUND" testId="NoActionError">
         Resource:
       <b>{` ${resourceId} `}</b>
         does not have an action with name:
       <b>{` ${actionName} `}</b>
-    </Error404>
+    </ErrorMessageBox>
   )
 }
 
@@ -87,17 +72,16 @@ const NoRecordError: React.FC<{
 }> = (props) => {
   const { resourceId, recordId } = props
   return (
-    <Error404>
+    <ErrorMessageBox title="404 - PAGE NOT FOUND" testId="NoRecordError">
         Resource:
       <b>{` ${resourceId} `}</b>
         does not have a record with id:
       <b>{` ${recordId} `}</b>
-    </Error404>
+    </ErrorMessageBox>
   )
 }
 
 export {
-  Error404,
   NoResourceError,
   NoActionError,
   NoRecordError,

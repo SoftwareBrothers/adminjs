@@ -15,7 +15,7 @@ import ItemComponent from '../default-type/edit'
 
 const AddNewItemText = 'Add new item'
 
-describe('Edit', function () {
+describe('<PropertyType.Array.Edit />', function () {
   const propertyName = 'arrayField'
   let property: PropertyJSON
   let record: RecordJSON

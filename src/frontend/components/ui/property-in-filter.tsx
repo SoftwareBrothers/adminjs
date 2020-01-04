@@ -42,7 +42,7 @@ const Property = styled.div`
 const PropertyInFilter: React.FC<Props> = (props) => {
   const { property, children } = props
   return (
-    <Property>
+    <Property data-testid={`PropertyInFilter-${property.name}`}>
       <Label>{property.label}</Label>
       {children}
     </Property>

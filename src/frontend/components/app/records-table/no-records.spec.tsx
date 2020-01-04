@@ -16,8 +16,7 @@ const renderComponent = (resource: ResourceJSON): RenderResult => render(
   </TestContextProvider>,
 )
 
-describe('NoRecords', function () {
-  this.timeout(5000)
+describe('<NoRecords />', function () {
   let resource: ResourceJSON
 
   beforeEach(async function () {

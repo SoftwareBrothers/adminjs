@@ -50,7 +50,7 @@ class ViewHelpers {
   public options: Paths
 
   constructor({ options }: { options?: AdminBroOptions } = {}) {
-    let opts: Paths = options || (globalAny.REDUX_STATE && globalAny.REDUX_STATE.paths)
+    let opts: Paths = ViewHelpers.getPaths(options)
 
     opts = opts || {
       rootPath: '/admin',
@@ -58,6 +58,10 @@ class ViewHelpers {
 
     // when ViewHelpers are used on the frontend, paths are taken from global Redux State
     this.options = opts
+  }
+
+  static getPaths(options?: AdminBroOptions): Paths {
+    return options || (globalAny.REDUX_STATE && globalAny.REDUX_STATE.paths)
   }
 
   /**

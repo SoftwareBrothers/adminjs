@@ -22,7 +22,7 @@ const renderTestSubject = (property, record, resource): RenderResult => render(
   </TestContextProvider>,
 )
 
-describe('DefaultProperty.Show', function () {
+describe('<PropertyType.Default.Show />', function () {
   let resource: ResourceJSON
   let property: PropertyJSON
   let record: RecordJSON

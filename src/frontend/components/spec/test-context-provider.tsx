@@ -8,13 +8,14 @@ const theme = combineStyles({})
 
 type Props = {
   children: ReactNode;
+  location?: string;
 }
 
 const TestContextProvider: React.FC<Props> = (props) => {
-  const { children } = props
+  const { children, location } = props
   return (
     <ThemeProvider theme={theme}>
-      <StaticRouter location="/">
+      <StaticRouter location={location || '/'}>
         {children}
       </StaticRouter>
     </ThemeProvider>

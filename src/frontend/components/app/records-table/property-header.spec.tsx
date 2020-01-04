@@ -30,7 +30,7 @@ const renderSubject = (
   </TestContextProvider>,
 )
 
-describe('PropertyHeader', function () {
+describe('<PropertyHeader />', function () {
   const direction = 'desc'
   const sortBy = 'otherProperty'
   let property: PropertyJSON

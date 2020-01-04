@@ -27,7 +27,7 @@ const Property = styled.div`
 const PropertyInShow: React.FC<Props> = (props) => {
   const { property, children } = props
   return (
-    <Property>
+    <Property data-testid={`PropertyInShow-${property.name}`}>
       <Label>{property.label}</Label>
       {children}
     </Property>

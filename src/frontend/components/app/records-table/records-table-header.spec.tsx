@@ -9,17 +9,19 @@ import PropertyJSON from '../../../../backend/decorators/property-json.interface
 
 require('../../spec/property-json.factory')
 
-describe('RecordsTableHeader', function () {
+describe('<RecordsTableHeader />', function () {
   it('renders columns for selected properties and actions', async function () {
     const property = await factory.build<PropertyJSON>('PropertyJSON', { isSortable: true })
     const { container } = render(
       <TestContextProvider>
-        <RecordsTableHeader
-          properties={[property]}
-          titleProperty={property}
-          sortBy={this.sortBy}
-          direction={this.direction}
-        />
+        <table>
+          <RecordsTableHeader
+            properties={[property]}
+            titleProperty={property}
+            sortBy={this.sortBy}
+            direction={this.direction}
+          />
+        </table>
       </TestContextProvider>,
     )
     expect(container.getElementsByTagName('th')).to.have.lengthOf(2)

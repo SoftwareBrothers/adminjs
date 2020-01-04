@@ -15,7 +15,7 @@ import '../../spec/resource-json.factory'
 import '../../spec/page-json.factory'
 import ActionJSON from '../../../../backend/decorators/action-json.interface'
 
-describe('Sidebar', function () {
+describe('<Sidebar />', function () {
   const renderTestSubject = (
     resources: Array<ResourceJSON> = [],
     branding: BrandingOptions = {},

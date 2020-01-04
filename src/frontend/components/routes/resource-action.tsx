@@ -11,7 +11,7 @@ import Filter from '../app/filter'
 import queryHasFilter from './utils/query-has-filter'
 import ResourceJSON from '../../../backend/decorators/resource-json.interface'
 import { Paths, ReduxState } from '../../store/store'
-import { NoResourceError, NoActionError } from '../ui/error404'
+import { NoResourceError, NoActionError } from '../ui/error-message'
 import NoticeWrapper from './styled/notice-wrapper.styled'
 import { ResourceActionParams } from '../../../backend/utils/view-helpers'
 

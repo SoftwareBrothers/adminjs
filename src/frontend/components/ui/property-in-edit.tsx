@@ -59,7 +59,7 @@ const Property = styled.div`
 const PropertyInEdit: React.FC<Props> = (props) => {
   const { children, property, error } = props
   return (
-    <Property>
+    <Property data-testid={`PropertyInEdit-${property.name}`}>
       <Label htmlFor={property.name}>{property.label}</Label>
       <div className="control">
         {children}

@@ -133,10 +133,14 @@ class ApiClient {
   private client: AxiosInstance
 
   constructor() {
-    this.baseURL = [window.location.origin, globalAny.REDUX_STATE.paths.rootPath].join('')
+    this.baseURL = ApiClient.getBaseUrl()
     this.client = axios.create({
       baseURL: this.baseURL,
     })
+  }
+
+  static getBaseUrl(): string {
+    return [window.location.origin, globalAny.REDUX_STATE.paths.rootPath].join('')
   }
 
   /**

@@ -44,7 +44,7 @@ const renderSubject = (props: Omit<Props, 'onSelect' | 'onSelectAll'>): RenderRe
     onSelectAll }
 }
 
-describe('RecordsTable', function () {
+describe('<RecordsTable />', function () {
   let properties: Array<PropertyJSON>
   let resource: ResourceJSON
   let records: Array<RecordJSON>
