@@ -12,11 +12,9 @@ import RecordAction from './record-action'
 import ApiClient from '../../utils/api-client'
 import RecordJSON from '../../../backend/decorators/record-json.interface'
 import ResourceJSON from '../../../backend/decorators/resource-json.interface'
-import PropertyJSON from '../../../backend/decorators/property-json.interface'
 
 import TestContextProvider from '../spec/test-context-provider'
 import factory from '../spec/factory'
-import ActionJSON from '../../../backend/decorators/action-json.interface'
 
 const defaultStore = {
   paths: {},
@@ -43,17 +41,9 @@ describe('<RecordAction />', function () {
   let resource: ResourceJSON
 
   beforeEach(async function () {
-    const action = await factory.build<ActionJSON>('ActionJSON', {
-      name: 'show',
-    })
-    record = await factory.build<RecordJSON>('RecordJSON', {
-      params: {
-        name: 'John',
-        surname: 'Doe',
-        gender: 'MALE',
-      },
-      recordActions: [action],
-    })
+    record = await factory.build<RecordJSON>('RecordJSON.total')
+    resource = await factory.build<ResourceJSON>('ResourceJSON.full')
+
     sinon.stub(ApiClient, 'getBaseUrl').returns('/admin')
     sinon.stub(ApiClient.prototype, 'recordAction').resolves({ data: { record } } as AxiosResponse)
   })
@@ -71,36 +61,16 @@ describe('<RecordAction />', function () {
   })
 
   describe('show action when record and resource are given', function () {
-    let properties: Array<PropertyJSON>
-
-    beforeEach(async function () {
-      properties = [
-        await factory.build<PropertyJSON>('PropertyJSON', { name: 'name', isTitle: true }),
-        await factory.build<PropertyJSON>('PropertyJSON', { name: 'surname' }),
-        await factory.build<PropertyJSON>('PropertyJSON', { name: 'gender',
-          availableValues: [{
-            label: 'male', value: 'MALE',
-          }, {
-            label: 'female', value: 'FEMALE',
-          }] }),
-      ]
-      resource = await factory.build<ResourceJSON>('ResourceJSON', {
-        showProperties: properties,
-      })
-    })
-
-    it('renders all PropertyInShow components', async function () {
+    it('renders all showProperties in a resource', async function () {
       const { findByTestId } = renderSubject({
         resources: [resource],
       }, `/resources/${resource.id}/records/1234/show`)
 
-      const name = await findByTestId('PropertyInShow-name')
-      const surname = await findByTestId('PropertyInShow-surname')
-      const gender = await findByTestId('PropertyInShow-gender')
-
-      expect(name).not.to.be.undefined
-      expect(surname).not.to.be.undefined
-      expect(gender).not.to.be.undefined
+      await Promise.all(resource.showProperties.map(async (property) => {
+        const propertyInShow = await findByTestId(`PropertyInShow-${property.name}`)
+        expect(propertyInShow).not.to.be.undefined
+        return propertyInShow
+      }))
     })
 
     it('calls the API', function () {
@@ -112,6 +82,20 @@ describe('<RecordAction />', function () {
         recordId,
         actionName: 'show',
       })
+    })
+  })
+
+  describe('edit action when record and resource are given', function () {
+    it('renders all editProperties in a resource', async function () {
+      const { findByTestId } = renderSubject({
+        resources: [resource],
+      }, `/resources/${resource.id}/records/1234/edit`)
+
+      await Promise.all(resource.editProperties.map(async (property) => {
+        const propertyInEdit = await findByTestId(`PropertyInEdit-${property.name}`)
+        expect(propertyInEdit).not.to.be.undefined
+        return propertyInEdit
+      }))
     })
   })
 })

@@ -47,7 +47,7 @@ describe('<NoRecords />', function () {
   context('resource can not be created', function () {
     it('does not have a link to create a new resource', function () {
       resource.resourceActions = []
-      const { container, debug } = renderComponent(resource)
+      const { container } = renderComponent(resource)
 
       const a = container.querySelector('a')
       expect(a).to.be.null

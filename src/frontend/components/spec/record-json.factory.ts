@@ -1,5 +1,7 @@
 import factory from 'factory-girl'
 import RecordJSON from '../../../backend/decorators/record-json.interface'
+import './action-json.factory'
+import ActionJSON from '../../../backend/decorators/action-json.interface'
 
 factory.define<RecordJSON>('RecordJSON', Object, {
   params: {
@@ -12,4 +14,30 @@ factory.define<RecordJSON>('RecordJSON', Object, {
   title: factory.sequence('JSONRecord.id', n => `someTitle${n}`),
   recordActions: [],
   bulkActions: [],
+})
+
+
+factory.extend<RecordJSON>('RecordJSON', 'RecordJSON.total', {
+  // params set for properties from ResourceJSON.total factory's properties
+  params: {
+    name: 'John',
+    surname: 'Doe',
+    gender: 'MALE',
+  },
+}, {
+  afterBuild: async (model) => {
+    const showAction = await factory.build<ActionJSON>('ActionJSON', {
+      name: 'show', actionType: 'record',
+    })
+    const editAction = await factory.build<ActionJSON>('ActionJSON', {
+      name: 'edit', actionType: 'record',
+    })
+    const deleteAction = await factory.build<ActionJSON>('ActionJSON', {
+      name: 'delete', actionType: 'record',
+    })
+    return {
+      ...model,
+      recordActions: [showAction, editAction, deleteAction],
+    }
+  },
 })

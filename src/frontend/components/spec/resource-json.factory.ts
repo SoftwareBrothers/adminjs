@@ -18,3 +18,28 @@ factory.define<ResourceJSON>('ResourceJSON', Object, {
   filterProperties: [],
   editProperties: [],
 })
+
+factory.extend<ResourceJSON>('ResourceJSON', 'ResourceJSON.full', {}, {
+  afterBuild: async (model) => {
+    const properties = [
+      await factory.build<PropertyJSON>('PropertyJSON', { name: 'name', isTitle: true }),
+      await factory.build<PropertyJSON>('PropertyJSON', { name: 'surname' }),
+      await factory.build<PropertyJSON>('PropertyJSON', { name: 'content', type: 'wysiwig' }),
+      await factory.build<PropertyJSON>('PropertyJSON', { name: 'longerData', type: 'textarea' }),
+      // await factory.build<PropertyJSON>('PropertyJSON', { name: 'publishedAt', type: 'date' }),
+      await factory.build<PropertyJSON>('PropertyJSON', { name: 'gender',
+        availableValues: [{
+          label: 'male', value: 'MALE',
+        }, {
+          label: 'female', value: 'FEMALE',
+        }] }),
+    ]
+    return {
+      ...model,
+      listProperties: properties,
+      showProperties: properties,
+      editProperties: properties,
+      filterProperties: properties,
+    }
+  },
+})
