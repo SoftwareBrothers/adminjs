@@ -117,6 +117,10 @@ class ViewHelpers {
     return this.urlBuilder(['pages', pageName])
   }
 
+  designSystemUrl(): string {
+    return this.urlBuilder(['design-system'])
+  }
+
   /**
    * Returns resourceAction url
    *

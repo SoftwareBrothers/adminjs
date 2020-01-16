@@ -7,7 +7,7 @@ import Sidebar from './app/sidebar/sidebar'
 import TopBar from './app/top-bar'
 
 import {
-  Dashboard, ResourceAction, RecordAction, Page, BulkAction,
+  Dashboard, ResourceAction, RecordAction, Page, BulkAction, DesignSystem,
 } from './routes'
 
 const GlobalStyle = createGlobalStyle`
@@ -59,6 +59,7 @@ const App: React.FC = () => {
   const resourceActionUrl = h.resourceActionUrl({ resourceId, actionName })
   const bulkActionUrl = h.bulkActionUrl({ resourceId, actionName })
   const pageUrl = h.pageUrl(pageName)
+  const designSystemUrl = h.designSystemUrl()
 
   return (
     <React.Fragment>
@@ -73,6 +74,7 @@ const App: React.FC = () => {
             <Route path={recordActionUrl} exact component={RecordAction} />
             <Route path={bulkActionUrl} exact component={BulkAction} />
             <Route path={pageUrl} exact component={Page} />
+            <Route path={designSystemUrl} exact component={DesignSystem} />
           </Switch>
         </Core>
       </ApplicationWrapper>

@@ -3,11 +3,13 @@ import RecordAction from './record-action'
 import ResourceAction from './resource-action'
 import BulkAction from './bulk-action'
 import Page from './page'
+import DesignSystem from './design-system'
 
 export {
   Dashboard,
   RecordAction,
   ResourceAction,
   BulkAction,
+  DesignSystem,
   Page,
 }
