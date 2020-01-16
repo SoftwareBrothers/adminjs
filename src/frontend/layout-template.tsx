@@ -54,6 +54,8 @@ const html = (admin: AdminBro, currentAdmin?: CurrentAdmin, location = '/'): str
     faviconTag = `<link rel="shortcut icon" type="${type}" href="${favicon}" />`
   }
 
+  // <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.5.1/css/bulma.min.css" type="text/css">
+
   return `
     <!DOCTYPE html>
     <html>
@@ -70,7 +72,6 @@ const html = (admin: AdminBro, currentAdmin?: CurrentAdmin, location = '/'): str
       <script src="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.5.7/flatpickr.min.js"></script>
       <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.5.7/flatpickr.min.css">
 
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.5.1/css/bulma.min.css" type="text/css">
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-mfizz/2.4.1/font-mfizz.min.css" type="text/css">
       <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,700" type="text/css">
       <link rel="stylesheet" type="text/css" href="${h.assetPath('icomoon.css')}">

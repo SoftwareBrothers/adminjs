@@ -12,6 +12,7 @@ const StyledInput = styled.input.attrs(props => ({
   &:hover{
     border-color: ${({ theme }): string => theme.colors.borderHover};
   }
+
 `
 
 export default StyledInput
