@@ -23,6 +23,12 @@ import shouldActionReFetchData from './utils/should-action-re-fetch-data'
 const ContainerRecord = styled.div`
   display: flex;
   flex-direction: column;
+  position: fixed;
+  right: 0;
+  top: 0;
+  height: 100%;
+  width: 500px;
+  border-left: 1px solid ${({ theme }) => theme.colors.border};
 `
 
 interface State {
@@ -125,32 +131,16 @@ class RecordAction extends React.Component<Props & AddNoticeProps, State> {
 
     return (
       <ContainerRecord>
-        <NoticeWrapper>
-          <Notice />
-        </NoticeWrapper>
-        <WrapperBox>
-          <Breadcrumbs
-            resource={resource}
-            actionName={actionName}
-            record={record}
-          />
-          <ActionHeader
-            resource={resource}
-            recordId={recordId}
-            action={action}
-            record={record}
-          />
-          {isLoading
-            ? <Loader />
-            : (
-              <BaseActionComponent
-                action={action as ActionJSON}
-                resource={resource}
-                record={record}
-              />
-            )
-          }
-        </WrapperBox>
+        {isLoading
+          ? <Loader />
+          : (
+            <BaseActionComponent
+              action={action as ActionJSON}
+              resource={resource}
+              record={record}
+            />
+          )
+        }
       </ContainerRecord>
     )
   }

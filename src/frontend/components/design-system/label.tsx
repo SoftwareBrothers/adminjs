@@ -1,7 +1,6 @@
 import styled, { keyframes, DefaultTheme } from 'styled-components'
 import { lighten } from 'polished'
 import { color, space, fontSize, ColorProps, SpaceProps, FontSizeProps, variant, display, DisplayProps } from 'styled-system'
-import css from '@styled-system/css'
 
 const variants = variant({
   variants: {
@@ -9,7 +8,7 @@ const variants = variant({
   },
 })
 
-export type LabelProps = ColorProps | SpaceProps | FontSizeProps | DisplayProps | {
+export type LabelProps = ColorProps & SpaceProps & FontSizeProps & DisplayProps & {
   variant?: 'required';
 }
 
@@ -18,7 +17,7 @@ const Label = styled.label<LabelProps>`
   display: block;
 
   &:before {
-    content: "${({ variant }): string => (variant === 'required' ? '*' : '')}";
+    content: "${(props): string => (props.variant === 'required' ? '*' : '')}";
     color: ${({ theme }): string => theme.colors.primary};
     margin-right: 2px;
   }

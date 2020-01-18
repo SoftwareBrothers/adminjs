@@ -134,6 +134,10 @@ class ViewHelpers {
     return this.urlBuilder(['resources', resourceId, 'actions', actionName])
   }
 
+  resourceUrl({ resourceId }): string {
+    return this.urlBuilder(['resources', resourceId])
+  }
+
   /**
    * Returns recordAction url
    *

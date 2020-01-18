@@ -2,20 +2,27 @@ import React, { useState } from 'react'
 import styled from 'styled-components'
 import { lighten } from 'polished'
 
-const Icon = styled.svg`
-  fill: none;
-  stroke: white;
-  stroke-width: 2px;
+const Circle = styled.span`
+  display: block;
+  width: 8px;
+  height: 8px;
+  margin-left: -4px;
+  margin-top: -4px;
+  border-radius: 9999px;
+  background: ${({ theme }) => theme.colors.primary};
+  position: absolute;
+  top: 50%;
+  left: 50%;
 `
 
-const CheckboxContainer = styled.span`
+const RadioContainer = styled.span`
   display: inline-block;
   vertical-align: middle;
 `
 
 // Hide checkbox visually but remain accessible to screen readers.
 // Source: https://polished.js.org/docs/#hidevisually
-const HiddenCheckbox = styled.input.attrs({ type: 'checkbox' })`
+const HiddenRadio = styled.input.attrs({ type: 'radio' })`
   border: 0;
   clip: rect(0 0 0 0);
   height: 1px;
@@ -27,26 +34,27 @@ const HiddenCheckbox = styled.input.attrs({ type: 'checkbox' })`
   width: 1px;
 `
 
-const StyledCheckbox = styled.span<{checked: boolean | undefined}>`
+const StyledRadio = styled.span<{checked: boolean | undefined}>`
   display: inline-block;
   width: 16px;
   border: 1px solid ${({ theme }) => theme.colors.textDefault};
+  border-radius: 1000px;
   height: 16px;
-  background: ${({ checked, theme }): string => (checked ? theme.colors.primary : theme.colors.white)};
   transition: all 150ms;
+  position: relative;
 
-  ${HiddenCheckbox}:focus + & {
+  ${HiddenRadio}:focus + & {
     box-shadow: 0 0 0 2px ${({ theme }): string => lighten(0.1, theme.colors.primary)};
   }
-  ${HiddenCheckbox}:hover + & {
+  ${HiddenRadio}:hover + & {
     border-color: ${({ theme }): string => theme.colors.borderHover};
   }
-  ${Icon} {
-    visibility: ${props => (props.checked ? 'visible' : 'hidden')};
+  ${Circle} {
+    visibility: ${({ checked }) => (checked ? 'visible' : 'hidden')};
   }
 `
 
-const Checkbox: React.FC<React.HTMLProps<HTMLInputElement>> = (props) => {
+const Radio: React.FC<React.HTMLProps<HTMLInputElement>> = (props) => {
   const { className, checked, onChange, ...restProps } = props
   let handleChange = onChange
   let isChecked = checked
@@ -61,15 +69,13 @@ const Checkbox: React.FC<React.HTMLProps<HTMLInputElement>> = (props) => {
     }
   }
   return (
-    <CheckboxContainer className={className}>
-      <HiddenCheckbox checked={isChecked} onChange={handleChange} {...restProps} />
-      <StyledCheckbox checked={isChecked} onClick={handleChange}>
-        <Icon viewBox="0 0 24 24">
-          <polyline points="20 6 9 17 4 12" />
-        </Icon>
-      </StyledCheckbox>
-    </CheckboxContainer>
+    <RadioContainer className={className}>
+      <HiddenRadio checked={isChecked} onChange={handleChange} {...restProps} />
+      <StyledRadio checked={isChecked} onClick={handleChange}>
+        <Circle />
+      </StyledRadio>
+    </RadioContainer>
   )
 }
 
-export default Checkbox
+export default Radio

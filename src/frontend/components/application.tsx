@@ -47,6 +47,16 @@ const Core = styled.section`
   flex-direction: column;
 `
 
+const Drawer = styled.div`
+  position: fixed;
+  right: 0;
+  top:0;
+  height: 100%;
+  width: 400px;
+  background: ${({ theme }): string => theme.colors.white};
+  border-left: 1px solid ${({ theme }): string => theme.colors.border};
+`
+
 const App: React.FC = () => {
   const h = new ViewHelpers()
 
@@ -56,6 +66,7 @@ const App: React.FC = () => {
   const pageName = ':pageName'
 
   const recordActionUrl = h.recordActionUrl({ resourceId, recordId, actionName })
+  const resourceUrl = h.resourceUrl({ resourceId })
   const resourceActionUrl = h.resourceActionUrl({ resourceId, actionName })
   const bulkActionUrl = h.bulkActionUrl({ resourceId, actionName })
   const pageUrl = h.pageUrl(pageName)
@@ -70,13 +81,19 @@ const App: React.FC = () => {
           <TopBar />
           <Switch>
             <Route path={h.dashboardUrl()} exact component={Dashboard} />
-            <Route path={resourceActionUrl} exact component={ResourceAction} />
-            <Route path={recordActionUrl} exact component={RecordAction} />
-            <Route path={bulkActionUrl} exact component={BulkAction} />
             <Route path={pageUrl} exact component={Page} />
             <Route path={designSystemUrl} exact component={DesignSystem} />
+            <Route
+              path={resourceUrl}
+              render={props => <ResourceAction {...props} match={{ ...props.match, params: { ...props.match.params, actionName: 'list' } }} />}
+            />
           </Switch>
         </Core>
+        <Switch>
+          <Route path={recordActionUrl} exact component={RecordAction} />
+          <Route path={bulkActionUrl} exact component={BulkAction} />
+          <Route path={resourceActionUrl} exact component={ResourceAction} />
+        </Switch>
       </ApplicationWrapper>
     </React.Fragment>
   )

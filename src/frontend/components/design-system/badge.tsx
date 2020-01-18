@@ -16,7 +16,11 @@ const colorVariant = variant({
   },
 })
 
-const Badge = styled.span<SpaceProps | FontSizeProps | ColorProps>`
+type Props = SpaceProps & FontSizeProps & ColorProps & {
+  variant?: 'primary' | 'danger';
+}
+
+const Badge = styled.span<Props>`
   border-radius: 4px;
   border: 2px solid ${({ theme }) => theme.colors.primary};
 

@@ -14,6 +14,7 @@ export const colors = {
   textDefault: '#111114',
   textLight: '#70728F',
   white: '#fff',
+  tableHover: '#FCFCFC',
 
 
   bck: '#fff',
