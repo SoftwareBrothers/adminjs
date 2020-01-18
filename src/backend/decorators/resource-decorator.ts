@@ -311,7 +311,7 @@ class ResourceDecorator {
       id: this._resource.id(),
       name: this.getResourceName(),
       parent: this.getParent(),
-      href: this.h.resourceActionUrl({ resourceId: this._resource.id(), actionName: 'list' }),
+      href: this.h.resourceUrl({ resourceId: this._resource.id() }),
       titleProperty: this.titleProperty().toJSON(),
       resourceActions: this.resourceActions(currentAdmin).map(ra => ra.toJSON()),
       listProperties: this.getProperties({

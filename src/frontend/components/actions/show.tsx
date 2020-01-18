@@ -17,7 +17,7 @@ const Show: React.FC<ActionProps> = (props) => {
   const properties = resource.showProperties
 
   return (
-    <WrapperBox border>
+    <React.Fragment>
       {properties.map(property => (
         <PropertyType
           key={property.name}
@@ -27,7 +27,7 @@ const Show: React.FC<ActionProps> = (props) => {
           record={record}
         />
       ))}
-    </WrapperBox>
+    </React.Fragment>
   )
 }
 

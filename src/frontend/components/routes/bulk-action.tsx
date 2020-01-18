@@ -2,15 +2,11 @@ import React, { ReactNode } from 'react'
 import { connect } from 'react-redux'
 
 import { RouteComponentProps } from 'react-router'
-import Breadcrumbs from '../app/breadcrumbs'
 import ActionHeader from '../app/action-header'
-import WrapperBox from '../ui/wrapper-box'
-import Notice from '../app/notice'
 import BaseAction from '../app/base-action-component'
 import ResourceJSON from '../../../backend/decorators/resource-json.interface'
 import { ReduxState } from '../../store/store'
 import ErrorMessageBox, { NoResourceError, NoActionError } from '../ui/error-message'
-import NoticeWrapper from './styled/notice-wrapper.styled'
 import RecordJSON from '../../../backend/decorators/record-json.interface'
 import { Loader } from '../ui'
 import shouldActionReFetchData from './utils/should-action-re-fetch-data'
@@ -112,30 +108,24 @@ class BulkAction extends React.Component<Props, State> {
     }
 
     return (
-      <div>
-        <NoticeWrapper>
-          <Notice />
-        </NoticeWrapper>
-        <WrapperBox>
-          <Breadcrumbs resource={resource} actionName={actionName} />
-          <ActionHeader
-            resource={resource}
-            action={action}
-            tag={tag}
-          />
-          {isLoading
-            ? <Loader />
-            : (
-              <BaseAction
-                action={action as ActionJSON}
-                resource={resource}
-                records={records}
-                setTag={this.setTag}
-              />
-            )
-          }
-        </WrapperBox>
-      </div>
+      <React.Fragment>
+        <ActionHeader
+          resource={resource}
+          action={action}
+          tag={tag}
+        />
+        {isLoading
+          ? <Loader />
+          : (
+            <BaseAction
+              action={action as ActionJSON}
+              resource={resource}
+              records={records}
+              setTag={this.setTag}
+            />
+          )
+        }
+      </React.Fragment>
     )
   }
 }

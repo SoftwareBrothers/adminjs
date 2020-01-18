@@ -3,11 +3,8 @@ import { connect } from 'react-redux'
 import styled from 'styled-components'
 
 import { RouteComponentProps } from 'react-router'
-import Breadcrumbs from '../app/breadcrumbs'
 import ActionHeader from '../app/action-header'
-import WrapperBox from '../ui/wrapper-box'
 import Loader from '../ui/loader'
-import Notice from '../app/notice'
 import BaseActionComponent from '../app/base-action-component'
 import ApiClient from '../../utils/api-client'
 import { RecordActionParams } from '../../../backend/utils/view-helpers'
@@ -17,18 +14,12 @@ import ActionJSON from '../../../backend/decorators/action-json.interface'
 import { ReduxState } from '../../store/store'
 import { NoResourceError, NoActionError, NoRecordError } from '../ui/error-message'
 import withNotice, { AddNoticeProps } from '../../store/with-notice'
-import NoticeWrapper from './styled/notice-wrapper.styled'
 import shouldActionReFetchData from './utils/should-action-re-fetch-data'
+import { Drawer } from '../design-system'
 
 const ContainerRecord = styled.div`
   display: flex;
   flex-direction: column;
-  position: fixed;
-  right: 0;
-  top: 0;
-  height: 100%;
-  width: 500px;
-  border-left: 1px solid ${({ theme }) => theme.colors.border};
 `
 
 interface State {
@@ -130,7 +121,13 @@ class RecordAction extends React.Component<Props & AddNoticeProps, State> {
     }
 
     return (
-      <ContainerRecord>
+      <React.Fragment>
+        <ActionHeader
+          resource={resource}
+          recordId={recordId}
+          action={action}
+          record={record}
+        />
         {isLoading
           ? <Loader />
           : (
@@ -141,7 +138,7 @@ class RecordAction extends React.Component<Props & AddNoticeProps, State> {
             />
           )
         }
-      </ContainerRecord>
+      </React.Fragment>
     )
   }
 }

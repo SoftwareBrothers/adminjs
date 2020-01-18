@@ -17,9 +17,22 @@ try {
  * @memberof ViewHelpers
  */
 export type RecordActionParams = {
+  /**
+   * Unique Resource ID
+   */
   resourceId: string;
+  /**
+   * Action name
+   */
   actionName: string;
+  /**
+   * Record ID
+   */
   recordId: string;
+  /**
+   * Optional query string: ?....
+   */
+  search? : string;
 }
 
 /**
@@ -28,9 +41,22 @@ export type RecordActionParams = {
  * @memberof ViewHelpers
  */
 export type BulkActionParams = {
+  /**
+   * Unique Resource ID
+   */
   resourceId: string;
+  /**
+   * Action name
+   */
   actionName: string;
+  /**
+   * Array of Records ID
+   */
   recordIds?: Array<string>;
+  /**
+   * Optional query string: ?....
+   */
+  search? : string;
 }
 
 /**
@@ -39,8 +65,18 @@ export type BulkActionParams = {
  * @memberof ViewHelpers
  */
 export type ResourceActionParams = {
+  /**
+   * Unique Resource ID
+   */
   resourceId: string;
+  /**
+   * Action name
+   */
   actionName: string;
+  /**
+   * Optional query string: ?....
+   */
+  search? : string;
 }
 
 /**
@@ -67,12 +103,14 @@ class ViewHelpers {
   /**
    * To each related path adds rootPath passed by the user, as well as a query string
    * @private
-   * @param  {Array<string>} paths   list of parts of the url
+   * @param  {Array<string>} paths      list of parts of the url
    * @return {string}       path
+   * @return {query}        [search=''] query string which can be fetch
+   *                                    from `location.search`
    */
-  urlBuilder(paths: Array<string>): string {
+  urlBuilder(paths: Array<string>, search = ''): string {
     const { rootPath } = this.options
-    return `${rootPath}/${paths.join('/')}`
+    return `${rootPath}/${paths.join('/')}${search}`
   }
 
   /**
@@ -130,12 +168,12 @@ class ViewHelpers {
    *
    * @return  {string}
    */
-  resourceActionUrl({ resourceId, actionName }: ResourceActionParams): string {
-    return this.urlBuilder(['resources', resourceId, 'actions', actionName])
+  resourceActionUrl({ resourceId, actionName, search }: ResourceActionParams): string {
+    return this.urlBuilder(['resources', resourceId, 'actions', actionName], search)
   }
 
-  resourceUrl({ resourceId }): string {
-    return this.urlBuilder(['resources', resourceId])
+  resourceUrl({ resourceId, search }): string {
+    return this.urlBuilder(['resources', resourceId], search)
   }
 
   /**
@@ -148,8 +186,8 @@ class ViewHelpers {
    *
    * @return  {string}
    */
-  recordActionUrl({ resourceId, recordId, actionName }: RecordActionParams): string {
-    return this.urlBuilder(['resources', resourceId, 'records', recordId, actionName])
+  recordActionUrl({ resourceId, recordId, actionName, search }: RecordActionParams): string {
+    return this.urlBuilder(['resources', resourceId, 'records', recordId, actionName], search)
   }
 
   /**
@@ -162,16 +200,16 @@ class ViewHelpers {
    *
    * @return  {string}
    */
-  bulkActionUrl({ resourceId, recordIds, actionName }: BulkActionParams): string {
+  bulkActionUrl({ resourceId, recordIds, actionName, search }: BulkActionParams): string {
     const url = this.urlBuilder([
       'resources', resourceId, 'bulk', actionName,
     ])
     if (recordIds && recordIds.length) {
-      const query = new URLSearchParams()
+      const query = new URLSearchParams(search)
       query.append('recordIds', recordIds.join(','))
       return `${url}?${query.toString()}`
     }
-    return url
+    return `${url}${search || ''}`
   }
 
   /**

@@ -23,6 +23,7 @@ type Props = SpaceProps & FontSizeProps & ColorProps & {
 const Badge = styled.span<Props>`
   border-radius: 4px;
   border: 2px solid ${({ theme }) => theme.colors.primary};
+  vertical-align: middle;
 
   ${space};
   ${color};
@@ -31,8 +32,8 @@ const Badge = styled.span<Props>`
 `
 
 Badge.defaultProps = {
-  px: 3,
-  py: 2,
+  px: 2,
+  py: 1,
   fontSize: 1,
   bg: 'white',
   color: 'primary',

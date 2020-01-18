@@ -40,6 +40,12 @@ export default class AppController {
     return layoutTemplate(this._admin, this.currentAdmin, href)
   }
 
+  async resource({ params }: ActionRequest): Promise<string> {
+    const { resourceId } = params
+    const href = this.h.resourceUrl({ resourceId })
+    return layoutTemplate(this._admin, this.currentAdmin, href)
+  }
+
   async recordAction({ params }: ActionRequest): Promise<string> {
     const { resourceId, actionName, recordId } = params
     if (!recordId) {

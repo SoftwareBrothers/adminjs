@@ -11,21 +11,18 @@ import ResourceJSON from '../../../backend/decorators/resource-json.interface'
 import ActionJSON from '../../../backend/decorators/action-json.interface'
 import RecordJSON from '../../../backend/decorators/record-json.interface'
 
-const HeaderWrapper = styled.section.attrs({
-  className: 'level',
-})`
-  &&& {
-    margin-bottom: ${({ theme }): string => theme.sizes.padding};
-  }
-`
+import { Badge, H1, Drawer } from '../design-system'
 
-const Tag = styled.span.attrs({
-  className: 'tag',
-})`
-  &&& {
-    background: ${({ theme }): string => theme.colors.primary};
-    color: #fff;
-    margin-left: ${({ theme }): string => theme.sizes.padding};
+const HeaderWrapper = styled.section`
+  margin-bottom: ${({ theme }): string => theme.sizes.padding};
+  display: flex;
+
+  & ${H1} {
+    flex-grow: 1;
+  }
+
+  ${Drawer} & {
+    display: block;
   }
 `
 
@@ -47,20 +44,18 @@ const BackBtn = styled(Link)`
   }
 `
 
-const HeaderTitle = styled.h1.attrs({
-  className: 'level-left',
-})`
-  &&& {
-    font-size: ${({ theme }): string => theme.fonts.header};
-    font-weight: normal;
-  }
-`
-
-const HeaderButtons = styled.div.attrs({
-  className: 'level-right',
-})`
-  &&& a {
+const HeaderButtons = styled.div`
+  & a {
     margin-left: ${({ theme }): string => theme.sizes.padding};
+  }
+  ${Drawer} & a {
+    margin-left: 0;
+    margin-right: ${({ theme }): string => theme.sizes.padding};
+  }
+  ${Drawer} & {
+    margin: ${({ theme }): string => theme.sizes.paddingLayout} 0;
+    padding-bottom: ${({ theme }): string => theme.sizes.paddingLayout};
+    border-bottom: 1px solid ${({ theme }): string => theme.colors.border};
   }
 `
 
@@ -100,15 +95,17 @@ const ActionHeader: React.FC<Props> = (props) => {
 
   return (
     <HeaderWrapper>
-      <HeaderTitle>
+      <H1>
         {!isList && (
-          <BackBtn to={h.resourceActionUrl({ resourceId, actionName: 'list' })}>
+          <BackBtn
+            to={h.resourceUrl({ resourceId, search: window.location.search })}
+          >
             <i className="icomoon-pagination-left" />
           </BackBtn>
         )}
         {title}
-        {tag ? (<Tag>{tag}</Tag>) : ''}
-      </HeaderTitle>
+        {tag ? (<Badge variant="primary" ml={3}>{tag}</Badge>) : ''}
+      </H1>
       <HeaderButtons>
         {actions.map(headerAction => (
           <ActionButton

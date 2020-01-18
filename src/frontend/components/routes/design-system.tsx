@@ -1,10 +1,9 @@
 import React, { useState } from 'react'
 
-import { IoMdArrowDropdown } from 'react-icons/io'
+import { IoMdArrowDropdown, IoIosArrowForward } from 'react-icons/io'
 
 import Button from '../design-system/button'
 import Link from '../design-system/link'
-import WrapperBox from '../ui/wrapper-box'
 import Label from '../design-system/label'
 import Input from '../design-system/input'
 import TextArea from '../design-system/text-area'
@@ -12,6 +11,8 @@ import Checkbox from '../design-system/check-box'
 import Radio from '../design-system/radio'
 import Badge from '../design-system/badge'
 import Icon from '../design-system/icon'
+import Box from '../design-system/box'
+import * as Header from '../design-system/header'
 import { Table, TableCell, TableRow, TableHead, TableBody } from '../design-system/table'
 
 
@@ -19,8 +20,15 @@ const DesignSystem: React.FC = () => {
   const [c1Checked, setC1Checked] = useState(false)
   const [c2Checked, setC2Checked] = useState(false)
   return (
-    <WrapperBox>
-      <WrapperBox border>
+    <Box bg="transparent">
+      <Box bg="white">
+        <Header.H3>Typography</Header.H3>
+        <Header.H1>This is header 1</Header.H1>
+        <Header.H2>This is header 2</Header.H2>
+        <Header.H3>This is header 3</Header.H3>
+        <Header.H4>This is header 4</Header.H4>
+        <Header.H5>This is header 5</Header.H5>
+
         <h3 style={{ marginTop: 100 }}>Buttons</h3>
         <p>
           <Button>Regular button</Button>
@@ -31,6 +39,9 @@ const DesignSystem: React.FC = () => {
             Filter Icon
           </Button>
           <Button ml={3} variant="text" as="a">Text Link</Button>
+          <Button ml={3}>
+            <IoIosArrowForward />
+          </Button>
         </p>
         <p>
           <Button size="sm">Small</Button>
@@ -107,8 +118,8 @@ const DesignSystem: React.FC = () => {
             </TableRow>
           </TableBody>
         </Table>
-      </WrapperBox>
-    </WrapperBox>
+      </Box>
+    </Box>
   )
 }
 

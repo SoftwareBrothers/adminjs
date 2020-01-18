@@ -1,14 +1,9 @@
-import styled, { keyframes, DefaultTheme } from 'styled-components'
+import styled, { DefaultTheme } from 'styled-components'
 import { lighten } from 'polished'
 import { color, space, fontSize, ColorProps, SpaceProps, FontSizeProps, variant } from 'styled-system'
 
 import Icon from './icon'
 
-const pulse = keyframes`
-  from {
-    box-shadow: 0 0 0 0 rgba(0,0,0,0);
-  }
-`
 const buttonVariants = (theme: DefaultTheme): any => variant({
   variants: {
     primary: {
@@ -23,9 +18,6 @@ const buttonVariants = (theme: DefaultTheme): any => variant({
       color: 'white',
       bg: 'danger',
       'border-color': 'transparent',
-      '&:hover': {
-        'box-shadow': `0 0 0 2px ${lighten(0.1, theme.colors.danger)};`,
-      },
       '& svg': {
         fill: 'white',
       },
@@ -36,7 +28,6 @@ const buttonVariants = (theme: DefaultTheme): any => variant({
       borderColor: 'transparent',
       '&:hover': {
         'text-decoration': 'underline',
-        'box-shadow': 'none',
       },
       '& svg': {
         fill: 'primary',
@@ -69,15 +60,15 @@ const Button = styled.button<Props>`
   border: 1px solid ${({ theme }): string => theme.colors.primary};
   cursor: pointer;
 
-  &:hover {
-    box-shadow: 0 0 0 2px ${({ theme }): string => lighten(0.1, theme.colors.primary)};
-    animation: ${pulse} .3s;
-  }
-
   ${Icon}:first-child {
     position: relative;
-    top: 1px;
     left: -6px;
+  }
+  & svg {
+    vertical-align: middle;
+    padding-bottom: 1px;
+    width: 15px;
+    height: 15px;
   }
 
   ${color};

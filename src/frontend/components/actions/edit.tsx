@@ -97,27 +97,25 @@ class Edit extends React.Component<ActionProps & RouteComponentProps & AddNotice
     const { record, loading } = this.state
 
     return (
-      <WrapperBox border>
-        <form onSubmit={this.handleSubmit.bind(this)}>
-          {properties.map(property => (
-            <PropertyType
-              key={property.name}
-              where={PropertyPlace.edit}
-              onChange={this.handleChange}
-              property={property}
-              resource={resource}
-              record={record}
-            />
-          ))}
-          <StyledButton
-            type="submit"
-            className={`is-primary${loading ? ' is-loading' : ''}`}
-          >
-            <i className="icomoon-save" />
-            <span className="btn-text">Save</span>
-          </StyledButton>
-        </form>
-      </WrapperBox>
+      <form onSubmit={this.handleSubmit.bind(this)}>
+        {properties.map(property => (
+          <PropertyType
+            key={property.name}
+            where={PropertyPlace.edit}
+            onChange={this.handleChange}
+            property={property}
+            resource={resource}
+            record={record}
+          />
+        ))}
+        <StyledButton
+          type="submit"
+          className={`is-primary${loading ? ' is-loading' : ''}`}
+        >
+          <i className="icomoon-save" />
+          <span className="btn-text">Save</span>
+        </StyledButton>
+      </form>
     )
   }
 }
