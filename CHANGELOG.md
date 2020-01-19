@@ -6,6 +6,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 Started since version 0.9.5
 
+## 1.6.0 - unreleased
+
+### Changed
+
+* change the way of showing resources. From dedicated page to the UI based on Drawer
+* chang the way of entering the resource from a list - now entire row is clickable
+* base the UI on a design-system
+** drop bulma CDN dependency
+** drop font awesome CDN dependency
+
 ## 1.6.0 - 01.01.2020
 
 ### Added
