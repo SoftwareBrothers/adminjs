@@ -1,6 +1,5 @@
 import React, { ReactNode } from 'react'
 import { connect } from 'react-redux'
-import styled from 'styled-components'
 
 import { RouteComponentProps } from 'react-router'
 import ActionHeader from '../app/action-header'

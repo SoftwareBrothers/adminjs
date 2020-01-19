@@ -3,7 +3,6 @@ import { withRouter } from 'react-router-dom'
 
 import { RouteComponentProps } from 'react-router'
 import PropertyType from '../property-type'
-import WrapperBox from '../ui/wrapper-box'
 import StyledButton from '../ui/styled-button'
 import ApiClient from '../../utils/api-client'
 import withNotice, { AddNoticeProps } from '../../store/with-notice'

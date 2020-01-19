@@ -96,7 +96,8 @@ class List extends React.Component<Props, State> {
     }
 
     const api = new ApiClient()
-    const shouldPreserveSelected = oldResource.id === resource.id && !hasForceRefresh(props.location.search)
+    const shouldPreserveSelected = oldResource.id === resource.id
+      && !hasForceRefresh(props.location.search)
     this.setState({ loading: true })
     const query = new URLSearchParams(location.search)
     api.resourceAction({

@@ -17,7 +17,6 @@ import { Table, TableCell, TableRow, TableHead, TableBody } from '../design-syst
 
 
 const DesignSystem: React.FC = () => {
-  const [c1Checked, setC1Checked] = useState(false)
   const [c2Checked, setC2Checked] = useState(false)
   return (
     <Box bg="transparent">
@@ -58,18 +57,14 @@ const DesignSystem: React.FC = () => {
           <TextArea name="example2" />
         </p>
         <p>
-          <Checkbox
-            id="example3"
-            checked={c1Checked}
-            onChange={(): void => { setC1Checked(!c1Checked); console.log(c1Checked) }}
-          />
+          <Checkbox id="example3" />
           <Label htmlFor="example3" variant="required" display="inline" ml="2">This is a checkbox</Label>
         </p>
         <p>
           <Radio
             id="example4"
             checked={c2Checked}
-            onChange={(): void => { setC2Checked(!c2Checked); console.log(c2Checked) }}
+            onChange={(): void => { setC2Checked(!c2Checked) }}
           />
           <Label htmlFor="example4" variant="required" display="inline" ml="2">This is a radio</Label>
         </p>

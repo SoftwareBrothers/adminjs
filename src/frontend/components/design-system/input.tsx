@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components'
-import { space, fontSize, SpaceProps, FontSizeProps, variant } from 'styled-system'
+import { space, fontSize, SpaceProps, FontSizeProps } from 'styled-system'
 import { lighten } from 'polished'
 
 const inputStyles = css`

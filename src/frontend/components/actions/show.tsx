@@ -1,7 +1,6 @@
 import React from 'react'
 
 import PropertyType from '../property-type'
-import WrapperBox from '../ui/wrapper-box'
 import { ActionProps } from './action.props'
 import { PropertyPlace } from '../../../backend/decorators/property-json.interface'
 

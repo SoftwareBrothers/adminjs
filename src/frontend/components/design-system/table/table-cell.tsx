@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { color, space, fontSize, SpaceProps, FontSizeProps, ColorProps, variant } from 'styled-system'
+import { color, space, fontSize, SpaceProps, FontSizeProps, ColorProps } from 'styled-system'
 
 import TableHead from './table-head'
 

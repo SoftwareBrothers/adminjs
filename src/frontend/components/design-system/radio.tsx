@@ -9,7 +9,7 @@ const Circle = styled.span`
   margin-left: -4px;
   margin-top: -4px;
   border-radius: 9999px;
-  background: ${({ theme }) => theme.colors.primary};
+  background: ${({ theme }): string => theme.colors.primary};
   position: absolute;
   top: 50%;
   left: 50%;
@@ -38,7 +38,7 @@ const StyledRadio = styled.span<{checked: boolean | undefined}>`
   display: inline-block;
   width: 16px;
   cursor: pointer;
-  border: 1px solid ${({ theme }) => theme.colors.textDefault};
+  border: 1px solid ${({ theme }): string => theme.colors.textDefault};
   border-radius: 1000px;
   height: 16px;
   transition: all 150ms;
@@ -51,7 +51,7 @@ const StyledRadio = styled.span<{checked: boolean | undefined}>`
     border-color: ${({ theme }): string => theme.colors.borderHover};
   }
   ${Circle} {
-    visibility: ${({ checked }) => (checked ? 'visible' : 'hidden')};
+    visibility: ${({ checked }): string => (checked ? 'visible' : 'hidden')};
   }
 `
 

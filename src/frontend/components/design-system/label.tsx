@@ -1,6 +1,9 @@
-import styled, { keyframes, DefaultTheme } from 'styled-components'
-import { lighten } from 'polished'
-import { color, space, fontSize, ColorProps, SpaceProps, FontSizeProps, variant, display, DisplayProps } from 'styled-system'
+import styled from 'styled-components'
+import {
+  color, space, fontSize,
+  ColorProps, SpaceProps, FontSizeProps,
+  variant, display, DisplayProps,
+} from 'styled-system'
 
 const variants = variant({
   variants: {

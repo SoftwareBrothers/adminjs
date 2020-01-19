@@ -1,10 +1,9 @@
-import styled, { DefaultTheme } from 'styled-components'
-import { lighten } from 'polished'
+import styled from 'styled-components'
 import { color, space, fontSize, ColorProps, SpaceProps, FontSizeProps, variant } from 'styled-system'
 
 import Icon from './icon'
 
-const buttonVariants = (theme: DefaultTheme): any => variant({
+const buttonVariants = variant({
   variants: {
     primary: {
       color: 'white',
@@ -74,7 +73,7 @@ const Button = styled.button<Props>`
   ${color};
   ${space};
   ${fontSize};
-  ${({ theme }): any => buttonVariants(theme)};
+  ${buttonVariants};
   ${sizeVariants};
 `
 

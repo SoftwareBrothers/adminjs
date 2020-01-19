@@ -31,7 +31,7 @@ const StyledCheckbox = styled.a<{checked: boolean | undefined}>`
   display: inline-block;
   width: 16px;
   cursor: pointer;
-  border: 1px solid ${({ theme }) => theme.colors.textDefault};
+  border: 1px solid ${({ theme }): string => theme.colors.textDefault};
   height: 16px;
   background: ${({ checked, theme }): string => (checked ? theme.colors.primary : theme.colors.white)};
   transition: all 150ms;
@@ -45,7 +45,7 @@ const StyledCheckbox = styled.a<{checked: boolean | undefined}>`
     border-color: ${({ theme }): string => theme.colors.borderHover};
   }
   ${Icon} {
-    visibility: ${props => (props.checked ? 'visible' : 'hidden')};
+    visibility: ${(props): string => (props.checked ? 'visible' : 'hidden')};
     z-index: 1;
   }
 
