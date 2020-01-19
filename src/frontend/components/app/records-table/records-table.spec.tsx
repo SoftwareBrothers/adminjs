@@ -108,12 +108,8 @@ describe('<RecordsTable />', function () {
       ({ container } = renderSubject({ resource, records, selectedRecords: [] }))
     })
 
-    it('renders title property as a link', function () {
-      expect(container.querySelectorAll('td[data-property-name="name"] a')).to.have.lengthOf(10)
-    })
-
     it('renders input checkbox for selecting many records', function () {
-      expect(container.querySelectorAll('td:first-child input')).to.have.lengthOf(10)
+      expect(container.querySelectorAll('tbody td:first-child input')).to.have.lengthOf(10)
     })
   })
 })

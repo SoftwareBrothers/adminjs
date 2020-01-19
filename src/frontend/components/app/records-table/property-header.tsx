@@ -2,7 +2,7 @@ import React from 'react'
 
 import PropertyJSON from '../../../../backend/decorators/property-json.interface'
 import SortLink from '../sort-link'
-import Th from './styled/th.styled'
+import { TableCell } from '../../design-system'
 
 type Props = {
   property: PropertyJSON;
@@ -26,9 +26,9 @@ const PropertyHeader: React.FC<Props> = (props) => {
   const isMain = property.name === titleProperty.name
 
   return (
-    <Th className={isMain ? 'main' : undefined}>
+    <TableCell className={isMain ? 'main' : undefined}>
       {property.isSortable ? <SortLink {...props} /> : property.label}
-    </Th>
+    </TableCell>
   )
 }
 
