@@ -80,6 +80,14 @@ class New extends React.Component<ActionProps & AddNoticeProps & RouteComponentP
       }
       if (response.data.redirectUrl) {
         history.push(appendForceRefresh(response.data.redirectUrl))
+        this.setState({
+          record: {
+            params: {},
+            errors: {},
+            populated: {},
+          } as RecordJSON,
+          loading: false,
+        })
       } else {
         this.setState(state => ({
           record: {

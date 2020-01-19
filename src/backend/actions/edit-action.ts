@@ -38,9 +38,7 @@ const EditAction: Action<RecordActionResponse> = {
     await record.update(request.payload)
     if (record.isValid()) {
       return {
-        redirectUrl: data.h.recordActionUrl({
-          resourceId: data.resource.id(), recordId: record.id(), actionName: 'show',
-        }),
+        redirectUrl: data.h.resourceUrl({ resourceId: data.resource.id() }),
         notice: {
           message: 'Successfully updated the record',
           type: 'success',

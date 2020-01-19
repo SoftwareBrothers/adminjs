@@ -33,8 +33,8 @@ const NewAction: Action<RecordActionResponse> = {
 
       if (record.isValid()) {
         return {
-          redirectUrl: context.h.recordActionUrl({
-            resourceId: context.resource.id(), recordId: record.id(), actionName: 'show',
+          redirectUrl: context.h.resourceActionUrl({
+            resourceId: context.resource.id(), actionName: 'new',
           }),
           notice: {
             message: 'Successfully created a new record',
