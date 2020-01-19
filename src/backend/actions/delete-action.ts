@@ -49,7 +49,7 @@ const DeleteAction: Action<RecordActionResponse> = {
     }
     return {
       record: data.record.toJSON(data.currentAdmin),
-      redirectUrl: data.h.resourceActionUrl({ resourceId: data.resource.id(), actionName: 'list' }),
+      redirectUrl: data.h.resourceUrl({ resourceId: data.resource.id() }),
       notice: {
         message: 'Successfully removed given record',
         type: 'success',

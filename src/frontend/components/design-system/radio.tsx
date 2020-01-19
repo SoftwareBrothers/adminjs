@@ -37,6 +37,7 @@ const HiddenRadio = styled.input.attrs({ type: 'radio' })`
 const StyledRadio = styled.span<{checked: boolean | undefined}>`
   display: inline-block;
   width: 16px;
+  cursor: pointer;
   border: 1px solid ${({ theme }) => theme.colors.textDefault};
   border-radius: 1000px;
   height: 16px;

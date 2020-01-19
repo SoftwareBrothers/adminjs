@@ -10,7 +10,7 @@ const TableCell = styled.td<SpaceProps | FontSizeProps | ColorProps>`
   ${fontSize};
 
   ${TableHead} & {
-    border-top: none;
+    border: none;
   }
 `
 

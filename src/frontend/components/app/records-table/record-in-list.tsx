@@ -1,5 +1,5 @@
 import React from 'react'
-import styled from 'styled-components'
+import { withRouter, RouteComponentProps } from 'react-router-dom'
 
 import ActionButton from '../action-button'
 import PropertyType from '../../property-type'
@@ -8,24 +8,8 @@ import Placeholder from '../../ui/placeholder'
 import ResourceJSON from '../../../../backend/decorators/resource-json.interface'
 import RecordJSON from '../../../../backend/decorators/record-json.interface'
 import { PropertyPlace } from '../../../../backend/decorators/property-json.interface'
-
-const Td = styled.td`
-  &&& {
-    color: ${({ theme }): string => theme.colors.defaultText};
-    & a:not(.in-dropdown) {
-      color: ${({ theme }): string => theme.colors.primary};
-    }
-    &.main {
-      font-weight: bold;
-    }
-    &.selected {
-      border-left: ${({ theme }): string => theme.sizes.paddingMin} ${({ theme }): string => theme.colors.primary} solid;
-    }
-    &.not-selected {
-      border-left: ${({ theme }): string => theme.sizes.paddingMin} solid transparent;
-    }
-  }
-`
+import { TableRow, TableCell, CheckBox } from '../../design-system'
+import ViewHelpers from '../../../../backend/utils/view-helpers'
 
 type Props = {
   resource: ResourceJSON;
@@ -36,7 +20,39 @@ type Props = {
   isSelected?: boolean;
 }
 
-export default class RecordInList extends React.PureComponent<Props> {
+class RecordInList extends React.PureComponent<Props & RouteComponentProps> {
+  private actionName: string
+
+  constructor(props) {
+    super(props)
+    const { record } = props
+
+    this.handleClick = this.handleClick.bind(this)
+
+    const show = record.recordActions.find(({ name }) => name === 'show')
+    const edit = record.recordActions.find(({ name }) => name === 'edit')
+
+    this.actionName = (show && show.name) || (edit && edit.name)
+  }
+
+  handleClick(event: React.MouseEvent<HTMLTableRowElement, MouseEvent>): void{
+    const h = new ViewHelpers()
+    const { resource, record, history } = this.props
+    const targetTagName = event.target.tagName.toLowerCase()
+    if (this.actionName
+        && targetTagName !== 'a'
+        && targetTagName !== 'button'
+        && targetTagName !== 'svg') {
+      const actionUrl = h.recordActionUrl({
+        resourceId: resource.id,
+        recordId: record.id,
+        actionName: this.actionName,
+        search: window.location.search,
+      })
+      history.push(actionUrl)
+    }
+  }
+
   render(): React.ReactChild {
     const {
       resource, record,
@@ -45,21 +61,20 @@ export default class RecordInList extends React.PureComponent<Props> {
     } = this.props
     const { recordActions } = record
     return (
-      <tr>
-        <Td className={isSelected ? 'selected' : 'not-selected'}>
+      <TableRow onClick={(event): void => this.handleClick(event)}>
+        <TableCell className={isSelected ? 'selected' : 'not-selected'}>
           {onSelect && record.bulkActions.length ? (
-            <input
-              type="checkbox"
+            <CheckBox
               onChange={(): void => onSelect(record)}
               checked={isSelected}
             />
           ) : null}
-        </Td>
+        </TableCell>
         {resource.listProperties.map(property => (
-          <Td
+          <TableCell
+            style={{ cursor: 'pointer' }}
             key={property.name}
             data-property-name={property.name}
-            className={resource.titleProperty.name === property.name ? 'main' : undefined}
           >
             {isLoading ? (
               <Placeholder style={{ height: 14 }} />
@@ -72,9 +87,9 @@ export default class RecordInList extends React.PureComponent<Props> {
                 record={record}
               />
             )}
-          </Td>
+          </TableCell>
         ))}
-        <Td key="options">
+        <TableCell key="options">
           {recordActions.length ? (
             <Dropdown className="is-right is-hoverable">
               {recordActions.map(action => (
@@ -89,8 +104,10 @@ export default class RecordInList extends React.PureComponent<Props> {
               ))}
             </Dropdown>
           ) : ''}
-        </Td>
-      </tr>
+        </TableCell>
+      </TableRow>
     )
   }
 }
+
+export default withRouter(RecordInList)

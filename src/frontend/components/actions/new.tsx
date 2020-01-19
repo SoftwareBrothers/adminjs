@@ -11,6 +11,7 @@ import { ActionProps } from './action.props'
 import { PropertyPlace } from '../../../backend/decorators/property-json.interface'
 import RecordJSON from '../../../backend/decorators/record-json.interface'
 import recordToFormData from './record-to-form-data'
+import { appendForceRefresh } from './utils/append-force-refresh'
 
 type State = {
   record: RecordJSON;
@@ -79,7 +80,7 @@ class New extends React.Component<ActionProps & AddNoticeProps & RouteComponentP
         addNotice(response.data.notice)
       }
       if (response.data.redirectUrl) {
-        history.push(response.data.redirectUrl)
+        history.push(appendForceRefresh(response.data.redirectUrl))
       } else {
         this.setState(state => ({
           record: {

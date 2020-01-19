@@ -3,6 +3,7 @@ import React from 'react'
 import PropertyHeader from './property-header'
 import PropertyJSON from '../../../../backend/decorators/property-json.interface'
 import Th from './styled/th.styled'
+import { CheckBox, TableHead, TableRow, TableCell } from '../../design-system'
 
 /**
  * @memberof RecordsTableHeader
@@ -73,17 +74,16 @@ const RecordsTableHeader: React.FC<Props> = (props) => {
     sortBy, direction,
     onSelectAll, selectedAll } = props
   return (
-    <thead>
-      <tr key="header">
+    <TableHead>
+      <TableRow>
         {onSelectAll ? (
-          <Th>
-            <input
+          <TableCell>
+            <CheckBox
               style={{ marginLeft: 5 }}
-              type="checkbox"
               onChange={(): void => onSelectAll()}
               checked={selectedAll}
             />
-          </Th>
+          </TableCell>
         ) : null}
         {properties.map(property => (
           <PropertyHeader
@@ -94,9 +94,9 @@ const RecordsTableHeader: React.FC<Props> = (props) => {
             direction={direction}
           />
         ))}
-        <th key="actions" style={{ width: 80 }} />
-      </tr>
-    </thead>
+        <TableCell key="actions" style={{ width: 80 }} />
+      </TableRow>
+    </TableHead>
   )
 }
 

@@ -12,7 +12,8 @@ type Props = {
 
 const SidebarResource: React.FC<Props & RouteComponentProps> = (props) => {
   const { resource } = props
-  const isActive = (match, location): boolean => !!location.pathname.match(`/resources/${resource.id}/`)
+  const regExp = new RegExp(`/resources/${resource.id}($|/)`)
+  const isActive = (match, location): boolean => !!location.pathname.match(regExp)
   return (
     <li>
       <SidebarLink to={resource.href} isActive={isActive} data-testid="sidebar-resource-link">

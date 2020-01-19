@@ -2,13 +2,14 @@ import React, { useState } from 'react'
 
 import { RouteComponentProps, withRouter } from 'react-router'
 import PropertyType from '../property-type'
-import WrapperBox from '../ui/wrapper-box'
 import { ActionProps } from './action.props'
 import { PropertyPlace } from '../../../backend/decorators/property-json.interface'
-import Table from '../ui/table'
 import { ErrorMessageBox, StyledButton } from '../ui'
 import ApiClient from '../../utils/api-client'
 import withNotice, { AddNoticeProps } from '../../store/with-notice'
+import { appendForceRefresh } from './utils/append-force-refresh'
+
+import { Table, TableBody, TableRow, TableCell, H3 } from '../design-system'
 
 /**
  * @name ShowAction
@@ -45,7 +46,10 @@ const BulkDelete: React.FC<ActionProps & AddNoticeProps & RouteComponentProps> =
         addNotice(response.data.notice)
       }
       if (response.data.redirectUrl) {
-        history.push(response.data.redirectUrl)
+        const search = new URLSearchParams(window.location.search)
+        // bulk function have recordIds in the URL so it has to be stripped before redirect
+        search.delete('recordIds')
+        history.push(appendForceRefresh(response.data.redirectUrl, search.toString()))
       }
     })).catch((error) => {
       setLoading(false)
@@ -58,23 +62,23 @@ const BulkDelete: React.FC<ActionProps & AddNoticeProps & RouteComponentProps> =
   }
 
   return (
-    <WrapperBox border>
-      <h1>Following records will be removed:</h1>
+    <React.Fragment>
+      <H3>Following records will be removed:</H3>
       <Table>
-        {records.map(record => (
-          <tr>
-            {resource.listProperties.map(property => (
-              <td key={property.name} className={resource.titleProperty.name === property.name ? 'main' : undefined}>
+        <TableBody>
+          {records.map(record => (
+            <TableRow key={record.id}>
+              <TableCell>
                 <PropertyType
                   where={PropertyPlace.list}
-                  property={property}
+                  property={resource.titleProperty}
                   resource={resource}
                   record={record}
                 />
-              </td>
-            ))}
-          </tr>
-        ))}
+              </TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
       </Table>
       <p>
         <StyledButton
@@ -84,7 +88,7 @@ const BulkDelete: React.FC<ActionProps & AddNoticeProps & RouteComponentProps> =
           {`Confirm the removal of ${records.length} records`}
         </StyledButton>
       </p>
-    </WrapperBox>
+    </React.Fragment>
   )
 }
 

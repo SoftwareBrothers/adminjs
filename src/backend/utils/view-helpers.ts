@@ -129,14 +129,6 @@ class ViewHelpers {
     return this.options.logoutPath
   }
 
-  listUrl({ resourceId }): string {
-    console.warn(`
-      Deprecation: this "ViewHelpers#listUrl" will be removed in the next versions.
-      Please use "resourceActionUrl({ resourceId, actionName: 'list'})"
-      instead`)
-    return this.resourceActionUrl({ resourceId, actionName: 'list' })
-  }
-
   /**
    * Returns URL for the dashboard
    * @return {string}
@@ -206,7 +198,7 @@ class ViewHelpers {
     ])
     if (recordIds && recordIds.length) {
       const query = new URLSearchParams(search)
-      query.append('recordIds', recordIds.join(','))
+      query.set('recordIds', recordIds.join(','))
       return `${url}?${query.toString()}`
     }
     return `${url}${search || ''}`

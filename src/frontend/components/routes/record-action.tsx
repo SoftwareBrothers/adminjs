@@ -15,12 +15,6 @@ import { ReduxState } from '../../store/store'
 import { NoResourceError, NoActionError, NoRecordError } from '../ui/error-message'
 import withNotice, { AddNoticeProps } from '../../store/with-notice'
 import shouldActionReFetchData from './utils/should-action-re-fetch-data'
-import { Drawer } from '../design-system'
-
-const ContainerRecord = styled.div`
-  display: flex;
-  flex-direction: column;
-`
 
 interface State {
   record: RecordJSON | undefined;

@@ -208,7 +208,7 @@ class ApiClient {
     const { resourceId, recordIds, actionName, data, ...axiosParams } = options
 
     const params = new URLSearchParams()
-    params.append('recordIds', recordIds.join(','))
+    params.set('recordIds', recordIds.join(','))
 
     const response = await this.client.request({
       url: `/api/resources/${resourceId}/bulk/${actionName}`,

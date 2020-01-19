@@ -27,13 +27,16 @@ const HiddenCheckbox = styled.input.attrs({ type: 'checkbox' })`
   width: 1px;
 `
 
-const StyledCheckbox = styled.span<{checked: boolean | undefined}>`
+const StyledCheckbox = styled.a<{checked: boolean | undefined}>`
   display: inline-block;
   width: 16px;
+  cursor: pointer;
   border: 1px solid ${({ theme }) => theme.colors.textDefault};
   height: 16px;
   background: ${({ checked, theme }): string => (checked ? theme.colors.primary : theme.colors.white)};
   transition: all 150ms;
+  position: relative;
+  z-index: 2;
 
   ${HiddenCheckbox}:focus + & {
     box-shadow: 0 0 0 2px ${({ theme }): string => lighten(0.1, theme.colors.primary)};
@@ -43,6 +46,22 @@ const StyledCheckbox = styled.span<{checked: boolean | undefined}>`
   }
   ${Icon} {
     visibility: ${props => (props.checked ? 'visible' : 'hidden')};
+    z-index: 1;
+  }
+
+  &:before {
+    content: '';
+    position: absolute;
+    left: -5px;
+    top: -5px;
+    z-index: 1;
+    width: 24px;
+    height: 24px;
+    opacity: 0;
+    background: ${({ theme }): string => theme.colors.primary};
+  }
+  &:hover:before {
+    opacity: 0.1;
   }
 `
 

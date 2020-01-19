@@ -13,6 +13,7 @@ import ViewHelpers from '../../../backend/utils/view-helpers'
 import withNotice, { AddNoticeProps } from '../../store/with-notice'
 import ActionJSON from '../../../backend/decorators/action-json.interface'
 import { ActionResponse } from '../../../backend/actions/action.interface'
+import { appendForceRefresh } from '../actions/utils/append-force-refresh'
 
 type Props = {
   action: ActionJSON;
@@ -47,11 +48,11 @@ class ActionButton extends React.PureComponent<RouteComponentProps & Props & Add
       if (!recordId) {
         throw new Error('You have to specify "recordId" for record action')
       }
-      return h.recordActionUrl({ resourceId, recordId, actionName })
+      return h.recordActionUrl({ resourceId, recordId, actionName, search: window.location.search })
     case 'resource':
-      return h.resourceActionUrl({ resourceId, actionName })
+      return h.resourceActionUrl({ resourceId, actionName, search: window.location.search })
     case 'bulk':
-      return h.bulkActionUrl({ resourceId, recordIds, actionName })
+      return h.bulkActionUrl({ resourceId, recordIds, actionName, search: window.location.search })
     default:
       throw new Error('"actionType" should be either record, resource or bulk')
     }
@@ -98,7 +99,7 @@ class ActionButton extends React.PureComponent<RouteComponentProps & Props & Add
         addNotice(data.notice)
       }
       if (data.redirectUrl && location.pathname !== data.redirectUrl) {
-        history.push(data.redirectUrl)
+        history.push(appendForceRefresh(data.redirectUrl))
       }
       if (actionPerformed) {
         actionPerformed(action.name)

@@ -11,6 +11,7 @@ import RecordJSON from '../../../backend/decorators/record-json.interface'
 import { ActionProps } from './action.props'
 import { PropertyPlace } from '../../../backend/decorators/property-json.interface'
 import recordToFormData from './record-to-form-data'
+import { appendForceRefresh } from './utils/append-force-refresh'
 
 /**
  * @name EditAction
@@ -70,7 +71,7 @@ class Edit extends React.Component<ActionProps & RouteComponentProps & AddNotice
         addNotice(response.data.notice)
       }
       if (response.data.redirectUrl) {
-        history.push(response.data.redirectUrl)
+        history.push(appendForceRefresh(response.data.redirectUrl))
       } else {
         this.setState(state => ({
           record: {

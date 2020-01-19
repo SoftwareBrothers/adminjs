@@ -10,6 +10,7 @@ import Paginate from '../ui/paginate'
 import { ActionProps } from './action.props'
 import RecordJSON from '../../../backend/decorators/record-json.interface'
 import { ListActionResponse } from '../../../backend/actions/list-action'
+import { hasForceRefresh, removeForceRefresh } from './utils/append-force-refresh'
 
 type State = {
   records: Array<RecordJSON>;
@@ -34,17 +35,20 @@ type Props = ActionProps & RouteComponentProps & AddNoticeProps
  * @private
  */
 class List extends React.Component<Props, State> {
+  private blockRefresh: boolean;
+
   constructor(props) {
     super(props)
     this.handleActionPerformed = this.handleActionPerformed.bind(this)
     this.handleSelect = this.handleSelect.bind(this)
     this.handleSelectAll = this.handleSelectAll.bind(this)
+    this.blockRefresh = false
     this.state = {
       records: [],
       page: 1,
       perPage: 20,
       total: 0,
-      loading: true,
+      loading: false,
       direction: 'asc',
       sortBy: undefined,
       selectedRecords: [],
@@ -56,7 +60,16 @@ class List extends React.Component<Props, State> {
   }
 
   shouldComponentUpdate(newProps): boolean {
-    const { resource, location } = this.props
+    const { resource, location, history } = this.props
+    if (hasForceRefresh(newProps.location.search)) {
+      this._fetchData(newProps)
+      this.blockRefresh = true
+      history.replace([
+        newProps.location.pathname,
+        removeForceRefresh(newProps.location.search).toString(),
+      ].join('?'))
+      return false
+    }
 
     if (resource.id !== newProps.resource.id
        || location.search !== newProps.location.search) {
@@ -77,8 +90,13 @@ class List extends React.Component<Props, State> {
     const { location, resource, setTag, addNotice } = props
     const { resource: oldResource } = this.props
     const { selectedRecords } = this.state
+    if (this.blockRefresh) {
+      this.blockRefresh = false
+      return
+    }
 
     const api = new ApiClient()
+    const shouldPreserveSelected = oldResource.id === resource.id && !hasForceRefresh(props.location.search)
     this.setState({ loading: true })
     const query = new URLSearchParams(location.search)
     api.resourceAction({
@@ -94,7 +112,7 @@ class List extends React.Component<Props, State> {
         total: listActionResponse.meta.total,
         direction: listActionResponse.meta.direction,
         sortBy: listActionResponse.meta.sortBy,
-        selectedRecords: oldResource.id === resource.id ? selectedRecords : [],
+        selectedRecords: shouldPreserveSelected ? selectedRecords : [],
         loading: false,
       })
       if (setTag) {
