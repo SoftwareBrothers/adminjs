@@ -11,7 +11,7 @@ Started since version 0.9.5
 ### Changed
 
 * change the way of showing resources. From dedicated page to the UI based on Drawer
-* chang the way of entering the resource from a list - now entire row is clickable
+* change the way of entering the resource from a list - now entire row is clickable
 * base the UI on a design-system
 ** drop bulma CDN dependency
 ** drop font awesome CDN dependency
