@@ -70,7 +70,7 @@ export const fonts = {
 export const space = [0, 2, 4, 8, 16, 32, 64, 128]
 export const fontSizes = [10, 12, 14, 16, 20, 24, 32, 40, 56, 72]
 export const lineHeights = {
-  standard: 1.5,
-  display: 1.4,
+  standard: '1.5',
+  display: '1.4',
 }
 export const font = '\'Roboto\', sans-serif'

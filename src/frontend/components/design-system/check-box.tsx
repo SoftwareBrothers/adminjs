@@ -81,8 +81,11 @@ const Checkbox: React.FC<React.HTMLProps<HTMLInputElement>> = (props) => {
   }
   return (
     <CheckboxContainer className={className}>
-      <HiddenCheckbox checked={isChecked} onChange={handleChange} {...restProps} />
-      <StyledCheckbox checked={isChecked} onClick={handleChange}>
+      <HiddenCheckbox checked={isChecked} onChange={handleChange} {...restProps as {}} />
+      <StyledCheckbox
+        checked={isChecked}
+        onClick={(event): void => handleChange && handleChange(event as any)}
+      >
         <Icon viewBox="0 0 24 24">
           <polyline points="20 6 9 17 4 12" />
         </Icon>

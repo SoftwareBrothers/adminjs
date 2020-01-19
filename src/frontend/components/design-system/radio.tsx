@@ -71,8 +71,8 @@ const Radio: React.FC<React.HTMLProps<HTMLInputElement>> = (props) => {
   }
   return (
     <RadioContainer className={className}>
-      <HiddenRadio checked={isChecked} onChange={handleChange} {...restProps} />
-      <StyledRadio checked={isChecked} onClick={handleChange}>
+      <HiddenRadio checked={isChecked} onChange={handleChange} {...restProps as {}} />
+      <StyledRadio checked={isChecked} onClick={(event): void => handleChange && handleChange(event as any)}>
         <Circle />
       </StyledRadio>
     </RadioContainer>

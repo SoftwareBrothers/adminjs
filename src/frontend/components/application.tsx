@@ -97,7 +97,7 @@ const App: React.FC = () => {
             path={resourceActionUrl}
             children={props => (
               <Drawer hidden={!props.match}>
-                {props.match && <ResourceAction {...props} />}
+                {props.match && <ResourceAction {...props as any} />}
               </Drawer>
             )}
           />

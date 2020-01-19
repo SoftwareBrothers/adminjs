@@ -38,7 +38,7 @@ class RecordInList extends React.PureComponent<Props & RouteComponentProps> {
   handleClick(event: React.MouseEvent<HTMLTableRowElement, MouseEvent>): void{
     const h = new ViewHelpers()
     const { resource, record, history } = this.props
-    const targetTagName = event.target.tagName.toLowerCase()
+    const targetTagName = (event.target as HTMLElement).tagName.toLowerCase()
     if (this.actionName
         && targetTagName !== 'a'
         && targetTagName !== 'button'

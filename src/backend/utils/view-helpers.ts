@@ -80,6 +80,22 @@ export type ResourceActionParams = {
 }
 
 /**
+ * Params for a resource list
+ * @alias ResourceParams
+ * @memberof ViewHelpers
+ */
+export type ResourceParams = {
+  /**
+   * Unique Resource ID
+   */
+  resourceId: string;
+  /**
+   * Action name
+   */
+  search? : string;
+}
+
+/**
  * Collection of helper methods available in the views
  */
 class ViewHelpers {
@@ -164,7 +180,7 @@ class ViewHelpers {
     return this.urlBuilder(['resources', resourceId, 'actions', actionName], search)
   }
 
-  resourceUrl({ resourceId, search }): string {
+  resourceUrl({ resourceId, search }: ResourceParams): string {
     return this.urlBuilder(['resources', resourceId], search)
   }
 
