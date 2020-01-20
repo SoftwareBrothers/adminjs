@@ -25,7 +25,6 @@ import { CurrentAdmin } from '../current-admin.interface'
 const html = (admin: AdminBro, currentAdmin?: CurrentAdmin, location = '/'): string => {
   const context = {}
   const h = new ViewHelpers({ options: admin.options })
-  const locationInAdmin = h.urlBuilder([location])
   const store = initializeStore(admin, currentAdmin)
   const reduxState = store.getState()
   const scripts = ((admin.options.assets && admin.options.assets.scripts) || [])
@@ -38,7 +37,7 @@ const html = (admin: AdminBro, currentAdmin?: CurrentAdmin, location = '/'): str
     // eslint-disable-next-line react/jsx-filename-extension
     <Provider store={store}>
       <ThemeProvider theme={theme}>
-        <StaticRouter context={context} location={locationInAdmin}>
+        <StaticRouter context={context} location={location}>
           <App />
         </StaticRouter>
       </ThemeProvider>
@@ -71,7 +70,6 @@ const html = (admin: AdminBro, currentAdmin?: CurrentAdmin, location = '/'): str
       ${faviconTag}
       <script src="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.5.7/flatpickr.min.js"></script>
       <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.5.7/flatpickr.min.css">
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.5.1/css/bulma.min.css" type="text/css">
 
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-mfizz/2.4.1/font-mfizz.min.css" type="text/css">
       <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,700" type="text/css">

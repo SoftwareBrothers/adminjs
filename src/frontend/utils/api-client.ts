@@ -9,6 +9,8 @@ try {
 } catch (error) {
   if (error.message !== 'window is not defined') {
     throw error
+  } else {
+    globalAny = { isOnServer: true }
   }
 }
 
@@ -22,14 +24,15 @@ try {
  */
 
 const checkResponse = (response: AxiosResponse): void => {
-  const loginUrl = [window.location.origin, globalAny.REDUX_STATE.paths.loginPath].join('')
+  if (globalAny.isOnServer) { return }
+  const loginUrl = [globalAny.location.origin, globalAny.REDUX_STATE.paths.loginPath].join('')
   // if response has redirect to loginUrl
   if (response.request.responseURL
       && response.request.responseURL.match(loginUrl)
   ) {
     // eslint-disable-next-line no-undef
     alert('Your session expired. You will be redirected to login screen')
-    window.location.assign(loginUrl)
+    globalAny.location.assign(loginUrl)
   }
 }
 
@@ -140,7 +143,8 @@ class ApiClient {
   }
 
   static getBaseUrl(): string {
-    return [window.location.origin, globalAny.REDUX_STATE.paths.rootPath].join('')
+    if (globalAny.isOnServer) { return '' }
+    return [globalAny.location.origin, globalAny.REDUX_STATE.paths.rootPath].join('')
   }
 
   /**
@@ -156,6 +160,7 @@ class ApiClient {
     resourceId: string;
     query: string;
   }): Promise<Array<RecordJSON>> {
+    if (globalAny.isOnServer) { return [] }
     const q = encodeURIComponent(query)
     const response = await this.client.get(`/api/resources/${resourceId}/search/${q}`)
     checkResponse(response)

@@ -10,14 +10,13 @@ import BaseAction from '../app/base-action-component'
 import Filter from '../app/filter'
 import queryHasFilter from './utils/query-has-filter'
 import ResourceJSON from '../../../backend/decorators/resource-json.interface'
-import { Paths, ReduxState } from '../../store/store'
+import { ReduxState } from '../../store/store'
 import { NoResourceError, NoActionError } from '../ui/error-message'
 import NoticeWrapper from './styled/notice-wrapper.styled'
 import { ResourceActionParams } from '../../../backend/utils/view-helpers'
 
 type PropsFromState = {
   resources: Array<ResourceJSON>;
-  paths: Paths;
 }
 
 type Props = PropsFromState & RouteComponentProps<ResourceActionParams>
@@ -66,7 +65,6 @@ const ResourceAction: React.FC<Props> = (props) => {
 }
 
 const mapStateToProps = (state: ReduxState): PropsFromState => ({
-  paths: state.paths,
   resources: state.resources,
 })
 

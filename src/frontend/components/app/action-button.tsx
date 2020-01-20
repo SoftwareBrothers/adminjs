@@ -38,7 +38,7 @@ class ActionButton extends React.PureComponent<RouteComponentProps & Props & Add
 
   href(): string {
     const {
-      action, resourceId, recordId, recordIds,
+      action, resourceId, recordId, recordIds, location,
     } = this.props
     const h = new ViewHelpers()
     const { name: actionName, actionType } = action
@@ -48,11 +48,11 @@ class ActionButton extends React.PureComponent<RouteComponentProps & Props & Add
       if (!recordId) {
         throw new Error('You have to specify "recordId" for record action')
       }
-      return h.recordActionUrl({ resourceId, recordId, actionName, search: window.location.search })
+      return h.recordActionUrl({ resourceId, recordId, actionName, search: location.search })
     case 'resource':
-      return h.resourceActionUrl({ resourceId, actionName, search: window.location.search })
+      return h.resourceActionUrl({ resourceId, actionName, search: location.search })
     case 'bulk':
-      return h.bulkActionUrl({ resourceId, recordIds, actionName, search: window.location.search })
+      return h.bulkActionUrl({ resourceId, recordIds, actionName, search: location.search })
     default:
       throw new Error('"actionType" should be either record, resource or bulk')
     }

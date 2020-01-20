@@ -8,6 +8,10 @@ Started since version 0.9.5
 
 ## 1.6.0 - unreleased
 
+### Added
+
+* add "password" field [#112]
+
 ### Changed
 
 * change the way of showing resources. From dedicated page to the UI based on Drawer
@@ -20,6 +24,7 @@ Started since version 0.9.5
 
 * Fixed wrong show values on boolean fields in the list [#270]
 * fixing wrong documentation in action interface [#264]
+* Fix wrong path when rendering on the server
 
 ## 1.6.0 - 01.01.2020
 
