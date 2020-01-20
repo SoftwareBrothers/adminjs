@@ -16,6 +16,11 @@ Started since version 0.9.5
 ** drop bulma CDN dependency
 ** drop font awesome CDN dependency
 
+### Fixed
+
+* Fixed wrong show values on boolean fields in the list [#270]
+* fixing wrong documentation in action interface [#264]
+
 ## 1.6.0 - 01.01.2020
 
 ### Added
