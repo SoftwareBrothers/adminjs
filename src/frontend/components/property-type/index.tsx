@@ -11,8 +11,10 @@ import * as datetime from './datetime'
 import * as richtext from './richtext'
 import * as reference from './reference'
 import * as textarea from './textarea'
+import * as password from './password'
 import { BasePropertyProps } from './base-property-props'
 import { PropertyPlace } from '../../../backend/decorators/property-json.interface'
+import { PropertyType } from '../../../backend/adapters/base-property'
 
 let globalAny: any = {}
 
@@ -24,13 +26,18 @@ try {
   }
 }
 
-const types = {
+const types: Record<PropertyType, any> = {
   textarea,
   boolean,
   datetime,
   reference,
+  password,
   date: datetime,
   richtext,
+  string: defaultType,
+  number: defaultType,
+  float: defaultType,
+  mixed: null,
 }
 
 type State = {
@@ -194,6 +201,8 @@ export default class BasePropertyComponent extends React.Component<Props, State>
 
   static TextArea
 
+  static Password
+
   render(): ReactNode {
     const { property, resource, record, filter, where, onChange } = this.props
     const { isClient } = this.state
@@ -273,3 +282,4 @@ BasePropertyComponent.DateTime = camelizePropertyType(datetime)
 BasePropertyComponent.RichText = camelizePropertyType(richtext)
 BasePropertyComponent.Reference = camelizePropertyType(reference)
 BasePropertyComponent.TextArea = camelizePropertyType(textarea)
+BasePropertyComponent.Password = camelizePropertyType(password)

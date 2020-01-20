@@ -1,3 +1,5 @@
+import { PropertyType } from '../adapters/base-property'
+
 export enum PropertyPlace {
   show = 'show',
   list = 'list',
@@ -40,7 +42,7 @@ export default interface PropertyJSON {
   /**
    * Property type
    */
-  type: string;
+  type: PropertyType;
   /**
    * Has a name of a resource to which it is a reference.
    * For instance property `userId` will have here `Users`

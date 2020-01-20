@@ -19,7 +19,7 @@ const TITLE_COLUMN_NAMES = ['title', 'name', 'subject', 'email']
 export type PropertyType =
   'string' | 'float' | 'number' | 'boolean' |
   'date' | 'datetime' | 'mixed' | 'reference' |
-  'richtext' | 'textarea';
+  'richtext' | 'textarea' | 'password';
 
 type BasePropertyAttrs = {
   path: string;
