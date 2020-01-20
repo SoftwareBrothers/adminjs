@@ -30,6 +30,8 @@ const HiddenCheckbox = styled.input.attrs({ type: 'checkbox' })`
 const StyledCheckbox = styled.a<{checked: boolean | undefined}>`
   display: inline-block;
   width: 16px;
+  /* when it is placed within a container setting different font size */
+  font-size: 12px;
   cursor: pointer;
   border: 1px solid ${({ theme }): string => theme.colors.textDefault};
   height: 16px;

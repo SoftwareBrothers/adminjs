@@ -1,30 +1,24 @@
-import React, { ReactNode } from 'react'
+import React from 'react'
 
 import PropertyInEdit from '../../ui/property-in-edit'
 import { EditPropertyProps } from '../base-property-props'
+import { CheckBox } from '../../design-system'
 
-export default class Edit extends React.PureComponent<EditPropertyProps> {
-  handleChange(event): void {
-    const { property, onChange } = this.props
-    const { checked } = event.target
-    onChange(property.name, checked)
-  }
+const Edit: React.FC<EditPropertyProps> = (props) => {
+  const { property, onChange, record } = props
+  const value = (record.params && record.params[property.name]) || ''
+  const error = record.errors && record.errors[property.name]
 
-  render(): ReactNode {
-    const { property, record } = this.props
-    const value = (record.params && record.params[property.name]) || ''
-    const error = record.errors && record.errors[property.name]
-    return (
-      <PropertyInEdit property={property} error={error}>
-        <input
-          type="checkbox"
-          className="checkbox"
-          id={property.name}
-          name={property.name}
-          onChange={this.handleChange.bind(this)}
-          checked={value}
-        />
-      </PropertyInEdit>
-    )
-  }
+  return (
+    <PropertyInEdit property={property} error={error}>
+      <CheckBox
+        id={property.name}
+        name={property.name}
+        onChange={(): void => onChange(property.name, !value)}
+        checked={value}
+      />
+    </PropertyInEdit>
+  )
 }
+
+export default Edit

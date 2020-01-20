@@ -1,13 +1,10 @@
 import React, { ReactNode } from 'react'
-import { withTheme, DefaultTheme } from 'styled-components'
 
 import PropertyInEdit from '../../ui/property-in-edit'
 import StyledInput from '../../ui/styled-input'
 import { EditPropertyProps } from '../base-property-props'
 
-type CombinedProps = EditPropertyProps & {theme: DefaultTheme}
-
-class Edit extends React.Component<CombinedProps> {
+class Edit extends React.Component<EditPropertyProps> {
   constructor(props) {
     super(props)
     this.handleInputChange = this.handleInputChange.bind(this)
@@ -45,4 +42,4 @@ class Edit extends React.Component<CombinedProps> {
   }
 }
 
-export default withTheme(Edit)
+export default Edit
