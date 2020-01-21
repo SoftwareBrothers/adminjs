@@ -28,6 +28,7 @@ import AdminBro from '../../admin-bro'
  * - {@link BaseResource#count count()}
  * - {@link BaseResource#find find()}
  * - {@link BaseResource#findOne findOne()}
+ * - {@link BaseResource#findMany findMany()}
  * - {@link BaseResource#create create()}
  * - {@link BaseResource#update update()}
  * - {@link BaseResource#delete delete()}
