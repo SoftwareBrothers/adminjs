@@ -6,6 +6,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 Started since version 0.9.5
 
+## 1.6.1 - 21.01.2020
+
+### Fixed
+
+* empty File object when uploading files
+
 ## 1.6.0 - 01.01.2020
 
 ### Added
