@@ -18,8 +18,9 @@ export default function recordToFormData(record: RecordJSON): FormData {
   const normalizedParams = flatten<string, any>(unflatten(record.params, { overwrite: true }))
   Object.entries(normalizedParams).forEach(([key, value]) => {
     // flatten does not change empty objects "{}" - so in order to prevent having them changed to
-    // "[object Object]" we have to set them to empty strings.
-    if (typeof value === 'object') {
+    // "[object Object]" we have to set them to empty strings. File objects has to go through.
+    // eslint-disable-next-line no-undef
+    if (typeof value === 'object' && (value as object).constructor !== File) {
       formData.set(key, '')
     } else {
       formData.set(key, value as string)
