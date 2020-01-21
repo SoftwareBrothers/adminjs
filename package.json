@@ -85,6 +85,7 @@
     "polished": "^3.4.2",
     "prop-types": "^15.7.2",
     "react": ">= 16.8.0",
+    "react-datepicker": "^2.11.0",
     "react-dom": ">= 16.8.0",
     "react-icons": "^3.8.0",
     "react-redux": "^6.0.1",

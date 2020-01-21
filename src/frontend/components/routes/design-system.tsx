@@ -11,6 +11,7 @@ import Checkbox from '../design-system/check-box'
 import Radio from '../design-system/radio'
 import Badge from '../design-system/badge'
 import Icon from '../design-system/icon'
+import DatePicker from '../design-system/datepicker'
 import Box from '../design-system/box'
 import * as Header from '../design-system/header'
 import { Table, TableCell, TableRow, TableHead, TableBody } from '../design-system/table'
@@ -18,6 +19,7 @@ import { Table, TableCell, TableRow, TableHead, TableBody } from '../design-syst
 
 const DesignSystem: React.FC = () => {
   const [c2Checked, setC2Checked] = useState(false)
+  const [startDate, setStartDate] = useState(new Date())
   return (
     <Box bg="transparent">
       <Box bg="white">
@@ -68,6 +70,7 @@ const DesignSystem: React.FC = () => {
           />
           <Label htmlFor="example4" variant="required" display="inline" ml="2">This is a radio</Label>
         </p>
+        <DatePicker selected={startDate} onChange={date => setStartDate(date)} />
         <h3>Badges</h3>
         <p>
           <Badge>default badge</Badge>
