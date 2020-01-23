@@ -7,25 +7,35 @@ import 'styled-components'
 
 // sorted alphabetically
 export const colors = {
-  // with styled-system
-  primary: '#4268F6',
-  primaryHover: '#535B8E',
-  danger: '#FF4567',
-  success: '#70C9B0',
-  info: '#718AF4',
-  secondary: '#38CAF1',
-  disabled: '#A9AABC',
+  // Blues
+  bluePrimary: '#4268F6',
+  blueLight: '#718AF4',
+  bluePale: '#CBD5FD',
+  blueHover: '#535B8E',
+  blueSecondary: '#38CAF1',
+  blueFilter: '#343F87',
 
+  // Blacks
+  black: '#111114',
+  darkGray: '#454655',
+  grey: '#707290',
+  greyLight: '#A9AABC',
+  greyPale: '#F7F7FA',
+  white: '#fff',
+
+  // Additional
+  red: '#FF4567',
+  paleRed: '#FFA5B5',
+  treal: '#70C9B0',
+  paleTreal: '#DBF0F1',
   love: '#e6282b',
-  grey: '#454655',
-
 
   textDefault: '#111114',
   textLight: '#70728F',
-  white: '#fff',
+
   tableHover: '#FCFCFC',
 
-
+  primary: '#4268F6',
   bck: '#fff',
   defaultText: '#111114',
   lightText: '#70728F',
@@ -64,8 +74,30 @@ export const fonts = {
   header: '32px',
 }
 
+export interface SpaceProps extends Array<string> {
+  default: string;
+  sm: string;
+  xs: string;
+  lg: string;
+  xl: string;
+  xxl: string;
+}
+
 // Styled system
-export const space = ['0', '2px', '4px', '8px', '16px', '24px', '32px', '48px', '64px', '128px']
+const space: SpaceProps = [
+  '0', '2px', '4px', '8px', '16px', '24px', '32px', '48px', '64px', '128px',
+] as SpaceProps
+space.default = '8px'
+space.sm = '4px'
+space.xs = '2px'
+space.lg = '16px'
+space.xl = '24px'
+space.xxl = '32px'
+
+export {
+  space,
+}
+
 
 export const fontSizes = ['10px', '12px', '14px', '16px', '18px', '24px', '28px', '32px', '40px']
 export const lineHeights = ['12px', '16px', '24px', '32px', '40px']

@@ -12,7 +12,7 @@ import {
 
 import { Table, TableCell, TableRow, TableHead, TableBody } from '../design-system/table'
 
-const mainColors: Array<'primary', 'danger', 'success', 'info', 'secondary'> = [
+const mainVariants: Array<'primary', 'danger', 'success', 'info', 'secondary'> = [
   'primary', 'danger', 'success', 'info', 'secondary']
 
 
@@ -56,7 +56,7 @@ const DesignSystem: React.FC<ThemeProps<DefaultTheme>> = ({ theme }) => {
         <H3 my={5}>Colors</H3>
         <Text textAlign="center">
           <Flex>
-            {mainColors.map(color => (
+            {mainVariants.map(color => (
               <Box key={color}>
                 <Box width="60px" height="60px" bg={color} />
                 <Text variant="sm" color={color} mb={0}>{theme.colors[color]}</Text>
@@ -77,7 +77,7 @@ const DesignSystem: React.FC<ThemeProps<DefaultTheme>> = ({ theme }) => {
         <H4 mb={5}>Variants</H4>
         <p>
           <Button>Regular</Button>
-          {mainColors.map(color => (
+          {mainVariants.map(color => (
             <Button key={color} ml={3} variant={color}>{color}</Button>
           ))}
           <Button ml={3} variant="text">Text</Button>
@@ -97,14 +97,14 @@ const DesignSystem: React.FC<ThemeProps<DefaultTheme>> = ({ theme }) => {
         <H4 my={5}>Variants</H4>
         <p>
           <Badge ml={3}>Default</Badge>
-          {mainColors.map(color => (
+          {mainVariants.map(color => (
             <Badge key={color} ml={3} variant={color}>{color}</Badge>
           ))}
         </p>
         <H4 my={5}>Outline</H4>
         <p>
           <Badge ml={3} outline>Default</Badge>
-          {mainColors.map(color => (
+          {mainVariants.map(color => (
             <Badge key={color} ml={3} variant={color} outline>{color}</Badge>
           ))}
         </p>

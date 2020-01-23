@@ -6,7 +6,7 @@
         "unflatten", "datetime", "richtext", "promisify", "hoverable", "dropdown", "flatpickr", 
         "codecov", "bulma", "unmount", "testid", "woff", "iife", "sourcemap", "Roboto",
         "camelize", "datepicker", "camelcase", "fullwidth", "wysiwig", "Helvetica", "Neue",
-        "Arial", "nowrap", "textfield", "scrollable", "flexbox"
+        "Arial", "nowrap", "textfield", "scrollable", "flexbox", "treal"
     ],
     "ignorePaths": [
         "src/frontend/assets/**/*"

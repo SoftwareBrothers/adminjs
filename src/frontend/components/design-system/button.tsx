@@ -9,44 +9,44 @@ const variantShared = {
     fill: 'white',
   },
   '&:disabled': {
-    bg: 'disabled',
+    bg: 'darkGrey',
   },
 }
 
 const buttonVariants = variant({
   variants: {
     primary: {
-      bg: 'primary',
+      bg: 'bluePrimary',
       '&:hover': {
-        bg: 'primaryHover',
+        bg: 'blueHover',
       },
       ...variantShared,
     },
     danger: {
-      bg: 'danger',
+      bg: 'red',
       ...variantShared,
     },
     success: {
-      bg: 'success',
+      bg: 'treal',
       ...variantShared,
     },
     info: {
-      bg: 'info',
+      bg: 'blueLight',
       ...variantShared,
     },
     secondary: {
-      bg: 'secondary',
+      bg: 'blueSecondary',
       ...variantShared,
     },
     text: {
-      color: 'primary',
+      color: 'bluePrimary',
       bg: 'transparent',
       borderColor: 'transparent',
       '&:hover': {
         'text-decoration': 'underline',
       },
       '& svg': {
-        fill: 'primary',
+        fill: 'bluePrimary',
       },
     },
   },
@@ -63,18 +63,27 @@ const sizeVariants = variant({
       fontSize: 3,
       py: 3,
     },
+    icon: {
+      py: 3,
+      px: 3,
+      lineHeight: 1,
+      height: '34px',
+      '& svg': {
+        padding: 0,
+      },
+    },
   },
 })
 
 type Props = ColorProps & SpaceProps & TypographyProps & {
   variant?: 'primary' | 'danger' | 'text' | 'success' | 'info' | 'secondary';
-  size?: 'sm' | 'lg';
+  size?: 'sm' | 'lg' | 'icon';
 }
 
 const Button = styled.button<Props>`
   outline: 0;
-  line-height: ${({ theme }): string => theme.lineHeights.default};
-  border: 1px solid ${({ theme }): string => theme.colors.primary};
+  line-height: ${({ theme }): string => theme.lineHeights[1]};
+  border: 1px solid ${({ theme }): string => theme.colors.bluePrimary};
   cursor: pointer;
 
   & svg {
@@ -86,13 +95,13 @@ const Button = styled.button<Props>`
   }
   &:hover {
     color: ${({ theme }): string => theme.colors.white};
-    background: ${({ theme }): string => theme.colors.primaryHover};
-    border-color: ${({ theme }): string => theme.colors.primaryHover};
+    background: ${({ theme }): string => theme.colors.blueHover};
+    border-color: ${({ theme }): string => theme.colors.blueHover};
   }
 
   &:disabled {
     color: ${({ theme }): string => theme.colors.grey};
-    border-color: ${({ theme }): string => theme.colors.disabled};
+    border-color: ${({ theme }): string => theme.colors.darkGray};
     background: ${({ theme }): string => theme.colors.white};
     cursor: default;
     & svg {
@@ -113,7 +122,7 @@ Button.defaultProps = {
   py: 3,
   fontSize: 2,
   lineHeight: 2,
-  color: 'primary',
+  color: 'bluePrimary',
 }
 
 export default Button
