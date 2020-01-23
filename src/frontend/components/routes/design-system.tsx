@@ -78,7 +78,7 @@ const DesignSystem: React.FC<ThemeProps<DefaultTheme>> = ({ theme }) => {
         <p>
           <Button>Regular</Button>
           {mainColors.map(color => (
-            <Button ml={3} variant={color}>{color}</Button>
+            <Button key={color} ml={3} variant={color}>{color}</Button>
           ))}
           <Button ml={3} variant="text">Text</Button>
         </p>
