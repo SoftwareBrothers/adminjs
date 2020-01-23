@@ -6,7 +6,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 Started since version 0.9.5
 
-## 1.6.1 - 21.01.2020
+## 1.6.3 - 23.01.2020
+
+### Added
+
+* add ADMIN_BRO_SKIP_BUNDLE flag
+
+## 1.6.1/1.6.2 - 21.01.2020
 
 ### Fixed
 
