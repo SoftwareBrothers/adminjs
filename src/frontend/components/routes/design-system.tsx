@@ -1,55 +1,119 @@
 import React, { useState } from 'react'
+import { withTheme, ThemeProps, DefaultTheme } from 'styled-components'
+import { Add16 } from '@carbon/icons-react'
 
-import { IoMdArrowDropdown, IoIosArrowForward } from 'react-icons/io'
+import {
+  Button, Badge, CheckBox, Text,
+  H1, H2, H3, H4, H5, H6,
+  Label, Link, Input, TextArea, Radio,
+  Box, DatePicker, Flex,
+} from '../design-system'
 
-import Button from '../design-system/button'
-import Link from '../design-system/link'
-import Label from '../design-system/label'
-import Input from '../design-system/input'
-import TextArea from '../design-system/text-area'
-import Checkbox from '../design-system/check-box'
-import Radio from '../design-system/radio'
-import Badge from '../design-system/badge'
-import Icon from '../design-system/icon'
-import DatePicker from '../design-system/datepicker'
-import Box from '../design-system/box'
-import * as Header from '../design-system/header'
+
 import { Table, TableCell, TableRow, TableHead, TableBody } from '../design-system/table'
 
+const mainColors: Array<'primary', 'danger', 'success', 'info', 'secondary'> = [
+  'primary', 'danger', 'success', 'info', 'secondary']
 
-const DesignSystem: React.FC = () => {
+
+const DesignSystem: React.FC<ThemeProps<DefaultTheme>> = ({ theme }) => {
   const [c2Checked, setC2Checked] = useState(false)
   const [startDate, setStartDate] = useState(new Date())
   return (
     <Box bg="transparent">
       <Box bg="white">
-        <Header.H3>Typography</Header.H3>
-        <Header.H1>This is header 1</Header.H1>
-        <Header.H2>This is header 2</Header.H2>
-        <Header.H3>This is header 3</Header.H3>
-        <Header.H4>This is header 4</Header.H4>
-        <Header.H5>This is header 5</Header.H5>
+        <H3 mb={5}>Typography</H3>
+        <Flex>
+          <Box width={1 / 2} p={0}>
+            <H1>H1 Header - 40</H1>
+            <Text variant="sm" mb={5}>Roboto 40 - line height - 40</Text>
+            <H2>H2 Header - 32</H2>
+            <Text variant="sm" mb={5}>Roboto 32 - line height - 40</Text>
+            <H3>H3 Header - 28</H3>
+            <Text variant="sm" mb={5}>Roboto 28 - line height - 32</Text>
+            <H4>H4 Header - 24</H4>
+            <Text variant="sm" mb={5}>Roboto 24 - line height - 32</Text>
+            <H5>H5 Header - 18</H5>
+            <Text variant="sm" mb={5}>Roboto 18 - line height - 24</Text>
+            <H6>H6 Header - 16</H6>
+            <Text variant="sm" mb={5}>Roboto 16 - line height - 24</Text>
+          </Box>
+          <Box width={1 / 2} p={0}>
+            <Text variant="sm" mb={5}>
+              <p>This is small [variant=sm] text</p>
+            </Text>
+            <Text mb={5}>
+              <p>This is regular text</p>
+            </Text>
+            <Text variant="lg" mb={5}>
+              <p>This is a big [variant=lg] text</p>
+            </Text>
+            <Text variant="xs" mb={5}>
+              <p>And there is also a super small [variant=xs] text</p>
+            </Text>
+          </Box>
+        </Flex>
+        <H3 my={5}>Colors</H3>
+        <Text textAlign="center">
+          <Flex>
+            {mainColors.map(color => (
+              <Box key={color}>
+                <Box width="60px" height="60px" bg={color} />
+                <Text variant="sm" color={color} mb={0}>{theme.colors[color]}</Text>
+                <Text mt={0}>{color}</Text>
+              </Box>
+            ))}
+          </Flex>
+          <Flex>
+            <Box>
+              <Box width="60px" height="60px" bg="primaryHover" />
+              <Text variant="sm" color="primaryHover" mb={0}>{theme.colors.primaryHover}</Text>
+              <Text mt={0}>Primary Hover</Text>
+            </Box>
+          </Flex>
+        </Text>
 
-        <h3 style={{ marginTop: 100 }}>Buttons</h3>
+        <H3 mb={5}>Buttons</H3>
+        <H4 mb={5}>Variants</H4>
         <p>
-          <Button>Regular button</Button>
-          <Button ml={3} variant="primary">Primary</Button>
-          <Button ml={3} variant="danger">Danger</Button>
-          <Button ml={3} variant="primary">
-            <Icon variant="Filter" />
-            Filter Icon
-          </Button>
-          <Button ml={3} variant="text" as="a">Text Link</Button>
-          <Button ml={3}>
-            <IoIosArrowForward />
-          </Button>
+          <Button>Regular</Button>
+          {mainColors.map(color => (
+            <Button ml={3} variant={color}>{color}</Button>
+          ))}
+          <Button ml={3} variant="text">Text</Button>
         </p>
+        <H4 my={5}>Sizes</H4>
         <p>
           <Button size="sm">Small</Button>
           <Button ml={3}>Regular size</Button>
           <Button size="lg" ml={3}>Large</Button>
         </p>
-        <h3>Inputs</h3>
+        <H4 my={5}>State</H4>
+        <p>
+          <Button disabled>Disabled</Button>
+          <Button ml={3} variant="primary" disabled>Disabled</Button>
+        </p>
+        <H3 mb={5}>Badges</H3>
+        <H4 my={5}>Variants</H4>
+        <p>
+          <Badge ml={3}>Default</Badge>
+          {mainColors.map(color => (
+            <Badge key={color} ml={3} variant={color}>{color}</Badge>
+          ))}
+        </p>
+        <H4 my={5}>Outline</H4>
+        <p>
+          <Badge ml={3} outline>Default</Badge>
+          {mainColors.map(color => (
+            <Badge key={color} ml={3} variant={color} outline>{color}</Badge>
+          ))}
+        </p>
+        <H4 my={5}>Sizes</H4>
+        <p>
+          <Badge ml={3} variant="primary" size="sm">small</Badge>
+          <Badge ml={3} variant="primary">regular</Badge>
+          <Badge ml={3} variant="primary" size="lg">large</Badge>
+        </p>
         <p>
           <Label>This is a label</Label>
           <Input name="example1" />
@@ -59,7 +123,7 @@ const DesignSystem: React.FC = () => {
           <TextArea name="example2" />
         </p>
         <p>
-          <Checkbox id="example3" />
+          <CheckBox id="example3" />
           <Label htmlFor="example3" variant="required" display="inline" ml="2">This is a checkbox</Label>
         </p>
         <p>
@@ -81,11 +145,10 @@ const DesignSystem: React.FC = () => {
         <Table>
           <TableHead>
             <TableRow>
-              <TableCell><Checkbox /></TableCell>
+              <TableCell><CheckBox /></TableCell>
               <TableCell>
                 <Link uppercase href="/#">
                   Name
-                  <IoMdArrowDropdown />
                 </Link>
               </TableCell>
               <TableCell>column 2</TableCell>
@@ -97,7 +160,7 @@ const DesignSystem: React.FC = () => {
           </TableHead>
           <TableBody>
             <TableRow>
-              <TableCell><Checkbox /></TableCell>
+              <TableCell><CheckBox /></TableCell>
               <TableCell>Value 1</TableCell>
               <TableCell>Value 2</TableCell>
               <TableCell>Value 2</TableCell>
@@ -106,7 +169,7 @@ const DesignSystem: React.FC = () => {
               <TableCell>Value 2</TableCell>
             </TableRow>
             <TableRow>
-              <TableCell><Checkbox /></TableCell>
+              <TableCell><CheckBox /></TableCell>
               <TableCell>Value 1</TableCell>
               <TableCell>Value 2</TableCell>
               <TableCell>Value 2</TableCell>
@@ -121,4 +184,4 @@ const DesignSystem: React.FC = () => {
   )
 }
 
-export default DesignSystem
+export default withTheme(DesignSystem)

@@ -54,6 +54,8 @@ const html = (admin: AdminBro, currentAdmin?: CurrentAdmin, location = '/'): str
   }
 
   // <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.5.1/css/bulma.min.css" type="text/css">
+  // <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-mfizz/2.4.1/font-mfizz.min.css" type="text/css">
+  // <script src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
 
   return `
     <!DOCTYPE html>
@@ -71,13 +73,11 @@ const html = (admin: AdminBro, currentAdmin?: CurrentAdmin, location = '/'): str
       <script src="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.5.7/flatpickr.min.js"></script>
       <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.5.7/flatpickr.min.css">
 
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-mfizz/2.4.1/font-mfizz.min.css" type="text/css">
-      <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,700" type="text/css">
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,700" type="text/css">
       <link rel="stylesheet" type="text/css" href="${h.assetPath('icomoon.css')}">
 
       <link rel="stylesheet" type="text/css" href="https://cdn.quilljs.com/1.3.6/quill.snow.css">
       <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
-      <script src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
       ${globalDependencies({ fromCDN: admin.options.assets.globalsFromCDN, viewHelpers: h })}
       <script src="${h.assetPath('app.bundle.js')}"></script>
       <script src="${h.assetPath('components.bundle.js')}"></script>

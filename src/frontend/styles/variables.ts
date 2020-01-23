@@ -8,9 +8,18 @@ import 'styled-components'
 // sorted alphabetically
 export const colors = {
   // with styled-system
+  primary: '#4268F6',
+  primaryHover: '#535B8E',
+  danger: '#FF4567',
+  success: '#70C9B0',
+  info: '#718AF4',
+  secondary: '#38CAF1',
+  disabled: '#A9AABC',
+
   love: '#e6282b',
-  primary: '#4A69F2',
-  danger: '#F0616F',
+  grey: '#454655',
+
+
   textDefault: '#111114',
   textLight: '#70728F',
   white: '#fff',
@@ -32,8 +41,6 @@ export const colors = {
   filterDefaultText: '#fff',
   filterLightText: '#b5b5b5',
 
-  primaryHover: '#545B8C',
-  success: '#21C197',
   successBorder: '#8CDAD9',
   lightSuccess: '#DBF0F1',
   error: '#F0616F',
@@ -57,20 +64,14 @@ export const fonts = {
   header: '32px',
 }
 
-// export const breakpoints = {
-//   minMobileWidth: '320px',
-//   minTabletWidth: '769px',
-//   minDesktopWidth: '1024px',
-//   minWidescreenWidth: '1216px',
-//   minFullHDWidth: '1408px',
-// }
-
-
 // Styled system
-export const space = [0, 2, 4, 8, 16, 32, 64, 128]
-export const fontSizes = [10, 12, 14, 16, 20, 24, 32, 40, 56, 72]
-export const lineHeights = {
-  standard: '1.5',
-  display: '1.4',
+export const space = ['0', '2px', '4px', '8px', '16px', '24px', '32px', '48px', '64px', '128px']
+
+export const fontSizes = ['10px', '12px', '14px', '16px', '18px', '24px', '28px', '32px', '40px']
+export const lineHeights = ['12px', '16px', '24px', '32px', '40px']
+export const fontWeights = {
+  lighter: 300,
+  normal: 400,
+  bold: 700,
 }
 export const font = '\'Roboto\', sans-serif'

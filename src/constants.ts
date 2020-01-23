@@ -6,4 +6,4 @@ export const DEFAULT_PATHS = {
 }
 
 /* cspell: disable-next-line */
-export const ADMIN_BRO_TMP_DIR = '.adminbro'
+export const ADMIN_BRO_TMP_DIR = process.env.ADMIN_BRO_TMP_DIR || '.adminbro'

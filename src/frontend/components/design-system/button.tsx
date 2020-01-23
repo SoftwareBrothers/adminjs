@@ -1,25 +1,42 @@
 import styled from 'styled-components'
-import { color, space, fontSize, ColorProps, SpaceProps, FontSizeProps, variant } from 'styled-system'
+import { color, space, ColorProps, SpaceProps,
+  TypographyProps, typography, variant } from 'styled-system'
 
-import Icon from './icon'
+const variantShared = {
+  color: 'white',
+  'border-color': 'transparent',
+  '& svg': {
+    fill: 'white',
+  },
+  '&:disabled': {
+    bg: 'disabled',
+  },
+}
 
 const buttonVariants = variant({
   variants: {
     primary: {
-      color: 'white',
       bg: 'primary',
-      'border-color': 'transparent',
-      '& svg': {
-        fill: 'white',
+      '&:hover': {
+        bg: 'primaryHover',
       },
+      ...variantShared,
     },
     danger: {
-      color: 'white',
       bg: 'danger',
-      'border-color': 'transparent',
-      '& svg': {
-        fill: 'white',
-      },
+      ...variantShared,
+    },
+    success: {
+      bg: 'success',
+      ...variantShared,
+    },
+    info: {
+      bg: 'info',
+      ...variantShared,
+    },
+    secondary: {
+      bg: 'secondary',
+      ...variantShared,
     },
     text: {
       color: 'primary',
@@ -43,44 +60,59 @@ const sizeVariants = variant({
       py: 2,
     },
     lg: {
-      fontSize: 2,
+      fontSize: 3,
+      py: 3,
     },
   },
 })
 
-type Props = ColorProps & SpaceProps & FontSizeProps & {
-  variant?: 'primary' | 'danger' | 'text';
+type Props = ColorProps & SpaceProps & TypographyProps & {
+  variant?: 'primary' | 'danger' | 'text' | 'success' | 'info' | 'secondary';
   size?: 'sm' | 'lg';
 }
 
 const Button = styled.button<Props>`
   outline: 0;
-  line-height: ${({ theme }): string => theme.lineHeights.standard};
+  line-height: ${({ theme }): string => theme.lineHeights.default};
   border: 1px solid ${({ theme }): string => theme.colors.primary};
   cursor: pointer;
 
-  ${Icon}:first-child {
-    position: relative;
-    left: -6px;
-  }
   & svg {
     vertical-align: middle;
-    padding-bottom: 1px;
-    width: 15px;
-    height: 15px;
+    padding-bottom: 2px;
+    padding-right: ${({ theme }): string => theme.space[3]};
+    width: 16px;
+    height: 16px;
+  }
+  &:hover {
+    color: ${({ theme }): string => theme.colors.white};
+    background: ${({ theme }): string => theme.colors.primaryHover};
+    border-color: ${({ theme }): string => theme.colors.primaryHover};
+  }
+
+  &:disabled {
+    color: ${({ theme }): string => theme.colors.grey};
+    border-color: ${({ theme }): string => theme.colors.disabled};
+    background: ${({ theme }): string => theme.colors.white};
+    cursor: default;
+    & svg {
+      fill: ${({ theme }): string => theme.colors.grey};
+    }
   }
 
   ${color};
   ${space};
-  ${fontSize};
+  ${typography};
   ${buttonVariants};
   ${sizeVariants};
+  
 `
 
 Button.defaultProps = {
-  px: 4,
+  px: 7,
   py: 3,
-  fontSize: 1,
+  fontSize: 2,
+  lineHeight: 2,
   color: 'primary',
 }
 
