@@ -11,7 +11,7 @@ import ResourceJSON from '../../../backend/decorators/resource-json.interface'
 import ActionJSON from '../../../backend/decorators/action-json.interface'
 import RecordJSON from '../../../backend/decorators/record-json.interface'
 
-import { Badge, H1, Drawer } from '../design-system'
+import { Badge, H1, Drawer, Button, Icon } from '../design-system'
 
 const HeaderWrapper = styled.section`
   margin-bottom: ${({ theme }): string => theme.sizes.padding};
@@ -45,9 +45,6 @@ const BackBtn = styled(Link)`
 `
 
 const HeaderButtons = styled.div`
-  & a {
-    margin-left: ${({ theme }): string => theme.sizes.padding};
-  }
   ${Drawer} & a {
     margin-left: 0;
     margin-right: ${({ theme }): string => theme.sizes.padding};
@@ -112,18 +109,20 @@ const ActionHeader: React.FC<Props> = (props) => {
             action={headerAction}
             key={headerAction.name}
             actionPerformed={actionPerformed}
-            className="is-primary"
             resourceId={resource.id}
             recordId={recordId}
-          />
+          >
+            <Button as="span" mr={3} variant="primary">
+              <Icon icon={headerAction.icon} />
+              {headerAction.label}
+            </Button>
+          </ActionButton>
         ))}
         {toggleFilter && (
-          <StyledButton onClick={toggleFilter} as="a">
-            <span className="icon">
-              <i className="fas fa-sliders-h" />
-            </span>
-            <span className="btn-text">Filter</span>
-          </StyledButton>
+          <Button onClick={toggleFilter}>
+            <Icon icon="SettingsAdjust" />
+            Filter
+          </Button>
         )}
       </HeaderButtons>
     </HeaderWrapper>

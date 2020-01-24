@@ -12,7 +12,7 @@ const NewAction: Action<RecordActionResponse> = {
   name: 'new',
   isVisible: true,
   actionType: 'resource',
-  icon: 'icomoon-add',
+  icon: 'Add',
   label: 'Add new',
   /**
    * Responsible for creating new record.

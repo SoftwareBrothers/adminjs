@@ -1,24 +1,6 @@
 import React, { ReactNode } from 'react'
-import styled from 'styled-components'
+import { Box, Label } from '../design-system'
 
-import Label from './label'
-
-const Property = styled.div`
-  margin-bottom: ${({ theme }): string => theme.sizes.paddingLayout};
-
-  & input {
-    border-radius: 0;
-    border-color: ${({ theme }): string => theme.colors.border};
-    box-shadow: none;
-    &:focus {
-      border-color: ${({ theme }): string => theme.colors.primary};
-    }
-  }
-
-  & .control > input[type=text]{
-    height: 40px;
-  }
-`
 /**
  * Wraps input with label and optional error
  *
@@ -59,15 +41,15 @@ const Property = styled.div`
 const PropertyInEdit: React.FC<Props> = (props) => {
   const { children, property, error } = props
   return (
-    <Property data-testid={`PropertyInEdit-${property.name}`}>
+    <Box data-testid={`PropertyInEdit-${property.name}`}>
       <Label htmlFor={property.name}>{property.label}</Label>
-      <div className="control">
+      <Box>
         {children}
-      </div>
+      </Box>
       {error && (
-        <div className="help is-danger">{error.message}</div>
+        <p>{error.message}</p>
       )}
-    </Property>
+    </Box>
   )
 }
 

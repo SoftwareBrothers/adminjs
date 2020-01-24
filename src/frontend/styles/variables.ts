@@ -17,7 +17,7 @@ export const colors = {
 
   // Blacks
   black: '#111114',
-  darkGray: '#454655',
+  darkGrey: '#454655',
   grey: '#707290',
   greyLight: '#A9AABC',
   greyPale: '#F7F7FA',

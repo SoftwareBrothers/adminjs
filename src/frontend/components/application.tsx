@@ -6,6 +6,7 @@ import styled, { createGlobalStyle } from 'styled-components'
 import ViewHelpers from '../../backend/utils/view-helpers'
 import Sidebar from './app/sidebar/sidebar'
 import TopBar from './app/top-bar'
+import normalize from './design-system/utils/normalize.styles'
 
 import {
   Dashboard, ResourceAction, RecordAction, Page, BulkAction, DesignSystem, Resource,
@@ -13,6 +14,7 @@ import {
 import { Drawer } from './design-system'
 
 const GlobalStyle = createGlobalStyle`
+  ${normalize};
   html, body, #app {
       width: 100%;
       height: 100%;
@@ -27,7 +29,7 @@ const GlobalStyle = createGlobalStyle`
   a {
     color: ${({ theme }): string => theme.colors.primary};
     &:hover {
-      color: ${({ theme }): string => theme.colors.primaryHover};
+      color: ${({ theme }): string => theme.colors.blueHover};
     }
   }
 `

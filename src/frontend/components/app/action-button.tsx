@@ -3,11 +3,11 @@
 /* eslint-disable no-restricted-globals */
 
 import React, { ReactNode, ComponentClass } from 'react'
-import { withRouter } from 'react-router-dom'
+import { withRouter, Link } from 'react-router-dom'
+import styled from 'styled-components'
 
 import { RouteComponentProps } from 'react-router'
 import { AxiosResponse } from 'axios'
-import StyledLink from '../ui/styled-link'
 import ApiClient from '../../utils/api-client'
 import ViewHelpers from '../../../backend/utils/view-helpers'
 import withNotice, { AddNoticeProps } from '../../store/with-notice'
@@ -23,6 +23,10 @@ type Props = {
   recordIds?: Array<string>;
   actionPerformed?: (actionName: string) => any;
 }
+
+const StyledLink = styled(Link)`
+  text-decoration: none;
+`
 
 /**
  * Renders Button for an action
@@ -123,21 +127,14 @@ class ActionButton extends React.PureComponent<RouteComponentProps & Props & Add
   }
 
   render(): ReactNode {
-    const {
-      action, className,
-    } = this.props
+    const { children } = this.props
+
     return (
       <StyledLink
         to={this.href()}
-        className={className || ''}
         onClick={this.handleClick}
       >
-        <span className="icon">
-          <i className={action.icon} />
-        </span>
-        <span className="btn-text">
-          {action.label}
-        </span>
+        {children}
       </StyledLink>
     )
   }

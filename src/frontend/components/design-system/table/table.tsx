@@ -3,6 +3,7 @@ import { layout, LayoutProps } from 'styled-system'
 
 const Table = styled.table<LayoutProps>`
   ${layout};
+  border-collapse: collapse;
 `
 
 Table.defaultProps = {
