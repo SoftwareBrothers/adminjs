@@ -6,15 +6,16 @@ import {
   position, PositionProps,
 } from 'styled-system'
 
-export type BoxProps = SpaceProps | ColorProps | SizeProps
-  | LayoutProps | FlexboxProps | BorderProps | PositionProps | {
-  flex?: boolean;
-}
+export type BoxProps = SpaceProps & ColorProps & SizeProps & LayoutProps &
+  Omit<FlexboxProps, 'flex'> & BorderProps & PositionProps & {
+    flex?: boolean;
+  }
 
 export const Box = styled.section<BoxProps>`
   box-sizing: border-box;
   min-width: 0;
   ${({ flex }): string => (flex ? 'display: flex;' : '')}
+  font-family: ${({ theme }): string => theme.font};
 
   ${space};
   ${color};

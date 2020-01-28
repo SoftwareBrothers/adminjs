@@ -38,17 +38,17 @@ const StyledRadio = styled.span<{checked: boolean | undefined}>`
   display: inline-block;
   width: 16px;
   cursor: pointer;
-  border: 1px solid ${({ theme }): string => theme.colors.textDefault};
+  border: 1px solid ${({ theme }): string => theme.colors.greyLight};
   border-radius: 1000px;
   height: 16px;
   transition: all 150ms;
   position: relative;
 
   ${HiddenRadio}:focus + & {
-    box-shadow: 0 0 0 2px ${({ theme }): string => lighten(0.1, theme.colors.primary)};
+    box-shadow: 0 0 0 2px ${({ theme }): string => lighten(0.1, theme.colors.bluePrimary)};
   }
   ${HiddenRadio}:hover + & {
-    border-color: ${({ theme }): string => theme.colors.borderHover};
+    border-color: ${({ theme }): string => theme.colors.grey};
   }
   ${Circle} {
     visibility: ${({ checked }): string => (checked ? 'visible' : 'hidden')};

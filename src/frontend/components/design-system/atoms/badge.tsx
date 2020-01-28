@@ -26,10 +26,10 @@ const sizeVariants = variant({
   prop: 'size',
   variants: {
     sm: {
-      py: 1,
+      py: 'xs',
     },
     lg: {
-      py: 3,
+      py: 'default',
       px: '10px',
     },
   },
@@ -51,8 +51,8 @@ export const Badge = styled.span<BadgeProps>`
 `
 
 Badge.defaultProps = {
-  px: 3,
+  px: 'default',
   py: '6px',
-  fontSize: 0,
+  fontSize: 'xs',
   bg: 'greyLight',
 }

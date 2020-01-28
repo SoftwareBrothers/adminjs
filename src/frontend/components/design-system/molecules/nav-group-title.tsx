@@ -17,7 +17,7 @@ export const NavGroupTitle = styled(Text)`
 
   & svg {
     vertical-align: middle;
-    padding-bottom: 2px;
+    padding-bottom: 'sm'px;
     flex-shrink: 0;
   }
   & svg:first-child {

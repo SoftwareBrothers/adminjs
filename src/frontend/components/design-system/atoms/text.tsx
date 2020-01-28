@@ -8,10 +8,10 @@ const variants = variant({
       fontSize: 0,
     },
     sm: {
-      fontSize: 1,
+      fontSize: 'sm',
     },
     lg: {
-      fontSize: 3,
+      fontSize: 'lg',
     },
   },
 })
@@ -34,7 +34,7 @@ export const Text = styled.div<TextProps>`
 `
 
 Text.defaultProps = {
-  lineHeight: 2,
-  fontSize: 2,
-  fontWeight: 'lighter',
+  lineHeight: 'lg',
+  fontSize: 'default',
+  fontWeight: 'normal',
 }

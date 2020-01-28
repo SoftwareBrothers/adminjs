@@ -70,7 +70,7 @@ export const DropDownItem = styled.span<SpaceProps>`
   }
   & svg {
     vertical-align: middle;
-    padding-bottom: 2px;
+    padding-bottom: 'sm'px;
     padding-right: ${({ theme }): string => theme.space[3]};
     fill: ${({ theme }): string => theme.colors.greyLight};
   }

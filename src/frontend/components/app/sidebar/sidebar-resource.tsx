@@ -1,8 +1,9 @@
 import React from 'react'
-import { withRouter } from 'react-router-dom'
+import { withRouter, NavLink } from 'react-router-dom'
 import { RouteComponentProps } from 'react-router'
 
 import ResourceJSON from '../../../../backend/decorators/resource-json.interface'
+import { Text } from '../../design-system'
 import SidebarLink from './styled/sidebar-link.styled'
 
 
@@ -15,11 +16,9 @@ const SidebarResource: React.FC<Props & RouteComponentProps> = (props) => {
   const regExp = new RegExp(`/resources/${resource.id}($|/)`)
   const isActive = (match, location): boolean => !!location.pathname.match(regExp)
   return (
-    <li>
-      <SidebarLink to={resource.href} isActive={isActive} data-testid="sidebar-resource-link">
-        {resource.name}
-      </SidebarLink>
-    </li>
+    <SidebarLink to={resource.href} isActive={isActive} data-testid="sidebar-resource-link">
+      <Text as="span">{resource.name}</Text>
+    </SidebarLink>
   )
 }
 

@@ -6,6 +6,8 @@ import { Button } from './button'
 const Base = styled.h3<TypographyProps & SpaceProps>`
   font-family: ${({ theme }): string => theme.font};
   vertical-align: middle;
+  margin: ${({ theme }): string => theme.space.default} 0;
+  padding: 0;
   * {
     vertical-align: middle;
   }
@@ -17,44 +19,41 @@ const Base = styled.h3<TypographyProps & SpaceProps>`
 `
 
 Base.defaultProps = {
-  mt: 3,
-  mb: 3,
-  p: 0,
   fontWeight: 'normal',
-  fontSize: 6,
-  lineHeight: 3,
+  fontSize: 'h3',
+  lineHeight: 'xl',
 }
 
 const H1 = styled(props => <Base as="h1" {...props} />)``
 H1.defaultProps = {
-  fontSize: 8,
-  lineHeight: 4,
+  fontSize: 'h1',
+  lineHeight: 'xxl',
 }
 
 const H2 = styled(props => <Base as="h2" {...props} />)``
 H2.defaultProps = {
-  fontSize: 7,
-  lineHeight: 4,
+  fontSize: 'h2',
+  lineHeight: 'xxl',
 }
 
 const H3 = Base
 
 const H4 = styled(props => <Base as="h4" {...props} />)``
 H4.defaultProps = {
-  fontSize: 5,
-  lineHeight: 3,
+  fontSize: 'h4',
+  lineHeight: 'xl',
 }
 
 const H5 = styled(props => <Base as="h5" {...props} />)``
 H5.defaultProps = {
-  fontSize: 4,
-  lineHeight: 2,
+  fontSize: 'xl',
+  lineHeight: 'lg',
 }
 
 const H6 = styled(props => <Base as="h6" {...props} />)``
 H6.defaultProps = {
-  fontSize: 3,
-  lineHeight: 2,
+  fontSize: 'lg',
+  lineHeight: 'lg',
 }
 
 export { H1, H2, H3, H4, H5, H6 }

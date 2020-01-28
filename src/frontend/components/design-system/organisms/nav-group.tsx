@@ -13,7 +13,7 @@ export const NavGroup: React.FC<NavGroupProps> = (props) => {
   const [isItOpen, toggleOpen] = useState(true)
   const chevron = isItOpen ? 'ChevronUp' : 'ChevronDown'
   return (
-    <Box p={0}>
+    <Box>
       <NavGroupTitle
         onClick={(): void => toggleOpen(!isItOpen)}
         bg={isItOpen ? 'greyPale' : 'transparent'}
@@ -23,7 +23,7 @@ export const NavGroup: React.FC<NavGroupProps> = (props) => {
         <Icon icon={chevron} />
       </NavGroupTitle>
       {isItOpen ? (
-        <Box p={0} pl={7} pb={3}>
+        <Box pl="x4" pb="xl" pt="sm">
           {children}
         </Box>
       ) : ''}

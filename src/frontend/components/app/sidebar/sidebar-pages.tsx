@@ -1,17 +1,9 @@
 import React from 'react'
-import styled from 'styled-components'
 
 import { ReduxState } from '../../../store/store'
-import SidebarLabel from './styled/sidebar-label.styled'
 import SidebarLink from './styled/sidebar-link.styled'
 import ViewHelpers from '../../../../backend/utils/view-helpers'
-import SidebarSection from './styled/sidebar-section.styled'
-
-const PagesListWrapper = styled.div`
-  &&& {
-    padding-left: 10px;
-  }
-`
+import { Box, Label, Text } from '../../design-system'
 
 type Props = {
   pages?: ReduxState['pages'];
@@ -30,21 +22,19 @@ const SidebarPages: React.FC<Props> = (props) => {
   )
 
   return (
-    <SidebarSection>
-      <SidebarLabel>Pages</SidebarLabel>
-      <PagesListWrapper>
-        {pages.map(page => (
-          <SidebarLink
-            to={h.pageUrl(page.name)}
-            key={page.name}
-            isActive={(match, location): boolean => isActive(page, location)}
-            data-testid="sidebar-page-link"
-          >
-            {page.label}
-          </SidebarLink>
-        ))}
-      </PagesListWrapper>
-    </SidebarSection>
+    <Box ml="lg">
+      <Label uppercase color="grey" mb="lg">Pages</Label>
+      {pages.map(page => (
+        <SidebarLink
+          to={h.pageUrl(page.name)}
+          key={page.name}
+          isActive={(match, location): boolean => isActive(page, location)}
+          data-testid="sidebar-page-link"
+        >
+          <Text as="span">{page.label}</Text>
+        </SidebarLink>
+      ))}
+    </Box>
   )
 }
 

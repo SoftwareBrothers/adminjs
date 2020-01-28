@@ -24,7 +24,7 @@ export const Label = styled.label<LabelProps>`
   &:before {
     content: "${({ required }): string => (required ? '*' : '')}";
     color: ${({ theme }): string => theme.colors.bluePrimary};
-    margin-right: ${({ theme }): string => theme.space[2]};
+    margin-right: ${({ theme }): string => theme.space.sm};
     display: ${({ required }): string => (required ? 'block-inline' : 'none')};
   }
 
@@ -39,6 +39,6 @@ export const Label = styled.label<LabelProps>`
 
 Label.defaultProps = {
   color: 'greyDark',
-  mb: 3,
-  fontSize: 1,
+  mb: 'default',
+  fontSize: 'sm',
 }

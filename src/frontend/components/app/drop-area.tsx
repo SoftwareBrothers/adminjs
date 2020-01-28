@@ -35,7 +35,7 @@ const Wrapper = styled.div`
 
   i {
     color: ${({ theme }: { theme }): string => theme.colors.superLightBack};
-    margin-bottom: 20px;
+    margin-bottom: 'sm'0px;
   }
   
   .innerWrapper {

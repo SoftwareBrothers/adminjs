@@ -25,27 +25,19 @@ export const colors = {
   love: '#e6282b',
 }
 
-export interface SpaceProps extends Array<string> {
-  default: string;
-  sm: string;
-  xs: string;
-  lg: string;
-  xl: string;
-  xxl: string;
-  xxxl: string;
-}
-
 // Styled system
-export const space: SpaceProps = [
-  '0', '2px', '4px', '8px', '16px', '24px', '32px', '48px', '64px', '80px', '128px',
-] as SpaceProps
-space.xs = '2px'
-space.sm = '4px'
-space.default = '8px'
-space.lg = '16px'
-space.xl = '24px'
-space.xxl = '32px'
-space.xxxl = '48px'
+export const space = {
+  xs: '2px',
+  sm: '4px',
+  default: '8px',
+  lg: '16px',
+  xl: '24px',
+  xxl: '32px',
+  x4: '48px',
+  x5: '64',
+  x6: '80',
+  x7: '128',
+}
 
 export const sizes = {
   navbarHeight: '64px',
@@ -65,20 +57,17 @@ export interface FontSizesProps extends Array<string> {
   h1: string;
 }
 
-export const fontSizes: FontSizesProps = [
-  '10px', '12px', '14px', '16px', '18px', '24px', '28px', '32px', '40px',
-] as FontSizesProps
-
-fontSizes.xs = '10px'
-fontSizes.sm = '12px'
-fontSizes.default = '14px'
-fontSizes.lg = '16px'
-fontSizes.xl = '18px'
-fontSizes.h1 = '40px'
-fontSizes.h2 = '32px'
-fontSizes.h3 = '28px'
-fontSizes.h4 = '24px'
-
+export const fontSizes = {
+  xs: '10px',
+  sm: '12px',
+  default: '14px',
+  lg: '16px',
+  xl: '18px',
+  h4: '24px',
+  h3: '28px',
+  h2: '32px',
+  h1: '40px',
+}
 
 export const fontWeights = {
   lighter: 300,
@@ -86,19 +75,12 @@ export const fontWeights = {
   bold: 700,
 }
 
-export interface LineHeightsProps extends Array<string> {
-  default: string;
-  sm: string;
-  lg: string;
-  xl: string;
-  xxl: string;
+export const lineHeights = {
+  sm: '12px',
+  default: '16px',
+  lg: '24px',
+  xl: '32px',
+  xxl: '40px',
 }
-
-export const lineHeights: LineHeightsProps = ['12px', '16px', '24px', '32px', '40px'] as LineHeightsProps
-lineHeights.sm = '12px'
-lineHeights.default = '16px'
-lineHeights.lg = '24px'
-lineHeights.xl = '32px'
-lineHeights.xxl = '40px'
 
 export const font = '\'Roboto\', sans-serif'

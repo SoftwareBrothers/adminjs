@@ -6,7 +6,6 @@ import { FullDrawer } from '../organisms/drawer.stories'
 import { TableStory } from '../organisms/table.stories'
 import { H2 } from '../atoms/header'
 import { Badge } from '../atoms/badge'
-import { PaginationStory } from '../organisms/organisms.stories'
 import { Pagination } from '../organisms/pagination'
 import { Text } from '../atoms/text'
 

@@ -6,8 +6,8 @@ export const InputStyles = css`
   color: ${({ theme }): string => theme.colors.darkGrey};
   background: ${({ theme }): string => theme.colors.white};
   border: 1px solid ${({ theme }): string => theme.colors.greyLight};
-  font-size: ${({ theme }): string => theme.fontSizes[2]};
-  line-height: ${({ theme }): string => theme.lineHeights[2]};
+  font-size: ${({ theme }): string => theme.fontSizes.default};
+  line-height: ${({ theme }): string => theme.lineHeights.lg};
   font-family: ${({ theme }): string => theme.font};
   outline: none;
   &:hover{
@@ -27,6 +27,6 @@ export const Input = styled.input<InputProps>`
 `
 
 Input.defaultProps = {
-  px: 3,
-  py: 2,
+  px: 'default',
+  py: 'sm',
 }

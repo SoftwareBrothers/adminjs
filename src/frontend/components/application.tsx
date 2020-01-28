@@ -6,49 +6,19 @@ import styled, { createGlobalStyle } from 'styled-components'
 import ViewHelpers from '../../backend/utils/view-helpers'
 import Sidebar from './app/sidebar/sidebar'
 import TopBar from './app/top-bar'
-import normalize from './design-system/utils/normalize.styles'
 
 import {
   Dashboard, ResourceAction, RecordAction, Page, BulkAction, DesignSystem, Resource,
 } from './routes'
-import { Drawer } from './design-system'
+import { Drawer, Box, Navigation } from './design-system'
 
 const GlobalStyle = createGlobalStyle`
-  ${normalize};
   html, body, #app {
-      width: 100%;
-      height: 100%;
-      background: ${({ theme }): string => theme.colors.bck};
-      color: ${({ theme }): string => theme.colors.defaultText};
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
   }
-
-  .content h1, .content h2, .content h3, .content h4, .content h5, .content h6 {
-    color: ${({ theme }): string => theme.colors.defaultText};
-  }
-
-  a {
-    color: ${({ theme }): string => theme.colors.primary};
-    &:hover {
-      color: ${({ theme }): string => theme.colors.blueHover};
-    }
-  }
-`
-
-const ApplicationWrapper = styled.section`
-  font-size: 14px;
-  font-family: 'Roboto', sans-serif;
-  display: flex;
-  flex-direction: row;
-  height: 100%;
-`
-
-const Core = styled.section`
-  height: 100%;
-  overflow-y: auto;
-  width: 100%;
-  background: ${({ theme }): string => theme.colors.innerBck};
-  display: flex;
-  flex-direction: column;
 `
 
 const App: React.FC = () => {
@@ -69,44 +39,51 @@ const App: React.FC = () => {
   return (
     <React.Fragment>
       <GlobalStyle />
-      <ApplicationWrapper>
+      <Box height="100%" flex>
         <Sidebar />
-        <Core>
-          {/* <TopBar /> */}
-          <Switch>
-            {/* <Route path={h.dashboardUrl()} exact component={Dashboard} /> */}
-            <Route path={pageUrl} exact component={Page} />
-            <Route path={designSystemUrl} exact component={DesignSystem} />
-            <Route path={resourceUrl} component={Resource} />
-          </Switch>
-          <Route
-            path={recordActionUrl}
-            children={props => (
-              <Drawer hidden={!props.match}>
-                {props.match && <RecordAction {...props} />}
-              </Drawer>
-            )}
-          />
-          <Route
-            path={bulkActionUrl}
-            children={props => (
-              <Drawer hidden={!props.match}>
-                {props.match && <BulkAction {...props} />}
-              </Drawer>
-            )}
-          />
-          <Route
-            path={resourceActionUrl}
-            children={props => (
-              <Drawer hidden={!props.match}>
-                {props.match && <ResourceAction {...props as any} />}
-              </Drawer>
-            )}
-          />
-        </Core>
-      </ApplicationWrapper>
+      </Box>
     </React.Fragment>
+
   )
 }
 
 export default App
+
+
+// <GlobalStyle />
+//       <ApplicationWrapper>
+//         <Sidebar />
+//         <Core>
+//           {/* <TopBar /> */}
+//           <Switch>
+//             {/* <Route path={h.dashboardUrl()} exact component={Dashboard} /> */}
+//             <Route path={pageUrl} exact component={Page} />
+//             <Route path={designSystemUrl} exact component={DesignSystem} />
+//             <Route path={resourceUrl} component={Resource} />
+//           </Switch>
+//           <Route
+//             path={recordActionUrl}
+//             children={props => (
+//               <Drawer hidden={!props.match}>
+//                 {props.match && <RecordAction {...props} />}
+//               </Drawer>
+//             )}
+//           />
+//           <Route
+//             path={bulkActionUrl}
+//             children={props => (
+//               <Drawer hidden={!props.match}>
+//                 {props.match && <BulkAction {...props} />}
+//               </Drawer>
+//             )}
+//           />
+//           <Route
+//             path={resourceActionUrl}
+//             children={props => (
+//               <Drawer hidden={!props.match}>
+//                 {props.match && <ResourceAction {...props as any} />}
+//               </Drawer>
+//             )}
+//           />
+//         </Core>
+//       </ApplicationWrapper>

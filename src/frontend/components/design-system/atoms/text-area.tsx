@@ -11,7 +11,7 @@ export const TextArea = styled.textarea<TextAreaProps>`
 `
 
 TextArea.defaultProps = {
-  px: 3,
-  py: 3,
-  fontSize: 3,
+  px: 'default',
+  py: 'default',
+  fontSize: 'lg',
 }

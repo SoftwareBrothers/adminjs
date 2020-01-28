@@ -56,21 +56,21 @@ const sizeVariants = variant({
   prop: 'size',
   variants: {
     sm: {
-      fontSize: 2,
-      py: 2,
-      px: 6,
+      fontSize: 'default',
+      py: 'sm',
+      px: 'xxl',
       '& svg': {
-        paddingRight: 2,
+        paddingRight: 'sm',
       },
     },
     lg: {
-      fontSize: 3,
+      fontSize: 'lg',
       py: 3,
     },
     icon: {
       py: 3,
       px: 3,
-      lineHeight: 1,
+      lineHeight: 'sm',
       minWidth: '34px',
       height: '34px',
       '& svg': {
@@ -90,12 +90,12 @@ export const ButtonCSS = css`
   outline: 0;
   display: inline-block;
   font-family: ${({ theme }): string => theme.font};
-  line-height: ${({ theme }): string => theme.lineHeights[1]};
+  line-height: ${({ theme }): string => theme.lineHeights.default};
   border: 1px solid ${({ theme }): string => theme.colors.bluePrimary};
   color: ${({ theme }): string => theme.colors.bluePrimary};
   cursor: pointer;
   text-decoration: none;
-  padding: ${({ theme }): string => theme.space.default} ${({ theme }): string => theme.space.xxxl};
+  padding: ${({ theme }): string => theme.space.default} ${({ theme }): string => theme.space.x4};
 
   & svg {
     vertical-align: middle;
@@ -103,7 +103,7 @@ export const ButtonCSS = css`
     width: 16px;
     height: 16px;
     fill: ${({ theme }): string => theme.colors.bluePrimary};
-    padding-right: ${({ theme }): string => theme.space[3]};
+    padding-right: ${({ theme }): string => theme.space.default};
   }
   &:hover {
     color: ${({ theme }): string => theme.colors.white};
@@ -141,7 +141,7 @@ export const Button = styled.button<ButtonProps>`
 `
 
 Button.defaultProps = {
-  fontSize: 2,
-  lineHeight: 2,
+  fontSize: 'default',
+  lineHeight: 'lg',
   bg: 'transparent',
 }

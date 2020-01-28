@@ -1,15 +1,23 @@
 import React from 'react'
-import styled, { css } from 'styled-components'
-import { compose, space, SpaceProps } from 'styled-system'
+import styled from 'styled-components'
+import { space, SpaceProps } from 'styled-system'
 import * as CarbonIcons from '@carbon/icons-react'
 
-export type IconProps = SpaceProps | {
+export type IconProps = SpaceProps & {
   icon?: string;
   size?: 16 | 20 | 24 | 32;
+  color?: string;
 }
 
-const defaultCSS = css`
+const Wrapper = styled.span<IconProps>`
   vertical-align: middle;
+  display: inline-block;
+  
+  & > svg {
+    ${({ theme, color }): string => (color ? `fill: ${theme.colors[color]}` : '')};
+  }
+
+  ${space};
 `
 
 export const Icon: React.FC<IconProps> = (props) => {
@@ -17,9 +25,8 @@ export const Icon: React.FC<IconProps> = (props) => {
   const iconSize = size || 16
   const CarbonIcon = CarbonIcons[`${icon}${iconSize}`]
   if (CarbonIcon) {
-    const StyledCarbonIcon = styled(CarbonIcon)(compose(defaultCSS, space))
     return (
-      <StyledCarbonIcon {...other} />
+      <Wrapper {...other}><CarbonIcon /></Wrapper>
     )
   }
   return null

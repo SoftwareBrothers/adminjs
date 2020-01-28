@@ -5,11 +5,11 @@ const sizeVariants = variant({
   prop: 'size',
   variants: {
     sm: {
-      fontSize: 0,
-      py: 2,
+      fontSize: 'xs',
+      py: 'sm',
     },
     lg: {
-      fontSize: 2,
+      fontSize: 'default',
     },
   },
 })
@@ -67,8 +67,8 @@ const variants = variant({
   },
 })
 
-export type LinkProps = ColorProps | FontSizeProps | SpaceProps | {
-  uppercase: boolean;
+export type LinkProps = ColorProps & FontSizeProps & SpaceProps & {
+  uppercase?: boolean;
   variant?: 'primary' | 'danger' | 'success' | 'info' | 'secondary';
 }
 
@@ -81,7 +81,7 @@ export const Link = styled.a<LinkProps>`
     text-decoration: underline;
   }
   & svg {
-    padding-right: ${({ theme }): string => theme.space[3]};
+    padding-right: ${({ theme }): string => theme.space.default};
     vertical-align: text-top;
   }
   ${({ uppercase }): string => (uppercase ? 'text-transform: uppercase;' : '')}
