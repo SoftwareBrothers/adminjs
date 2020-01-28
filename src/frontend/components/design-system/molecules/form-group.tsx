@@ -1,5 +1,6 @@
 import styled, { css } from 'styled-components'
 import { SpaceProps, space } from 'styled-system'
+
 import { Input } from '../atoms/input'
 import { Label } from '../atoms/label'
 import { Text } from '../atoms/text'
@@ -16,6 +17,9 @@ const formGroupWithErrorCSS = css`
     &:before {
       color: ${({ theme }): string => theme.colors.red};
     }
+  }
+  &&& ${Label}, &&& ${Button} {
+    border-color: ${({ theme }): string => theme.colors.red};
   }
 `
 
@@ -43,6 +47,14 @@ export const InputGroup = styled.div`
     border-width: 1px 1px 1px 0;
     margin: 0;
     color: ${({ theme }): string => theme.colors.greyLight};
+  }
+
+  ${Label}, ${Button} {
+    flex-shrink: 0;
+  }
+
+  ${Button}:first-child{
+    border-right: 0;
   }
 
   ${Input}:hover {

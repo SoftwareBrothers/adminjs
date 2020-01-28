@@ -13,10 +13,12 @@ const variants = variant({
 
 export type LabelProps = ColorProps & SpaceProps & FontSizeProps & DisplayProps & {
   required?: boolean;
+  uppercase?: boolean;
+  inline?: boolean;
 }
 
 export const Label = styled.label<LabelProps>`
-  display: block;
+  display: ${({ inline }): string => (inline ? 'inline' : 'block')};
   font-family: ${({ theme }): string => theme.font};
 
   &:before {
@@ -25,6 +27,8 @@ export const Label = styled.label<LabelProps>`
     margin-right: ${({ theme }): string => theme.space[2]};
     display: ${({ required }): string => (required ? 'block-inline' : 'none')};
   }
+
+  ${({ uppercase }): string => (uppercase ? 'text-transform: uppercase;' : '')}
 
   ${color};
   ${display};

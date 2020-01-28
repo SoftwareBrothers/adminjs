@@ -37,9 +37,10 @@ const sizeVariants = variant({
 
 export const Badge = styled.span<BadgeProps>`
   border-radius: 12px;
-  border: 2px solid ${({ theme }): string => theme.colors.grey};
-  color: ${({ outline, theme }): string => (outline ? theme.colors.darkGrey : theme.colors.white)};
+  border: 2px solid ${({ theme }): string => theme.colors.greyLight};
+  color: ${({ outline, theme }): string => (outline ? theme.colors.grey : theme.colors.white)};
   vertical-align: middle;
+  font-family: ${({ theme }): string => theme.font};
 
   ${space};
   ${color};
@@ -53,5 +54,5 @@ Badge.defaultProps = {
   px: 3,
   py: '6px',
   fontSize: 0,
-  bg: 'gray',
+  bg: 'greyLight',
 }

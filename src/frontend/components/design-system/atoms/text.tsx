@@ -24,6 +24,8 @@ export type TextProps = TypographyProps & SpaceProps & VariantsProps & ColorProp
 
 export const Text = styled.div<TextProps>`
   font-family: ${({ theme }): string => theme.font};
+  margin: 0;
+  padding: 0;
 
   ${typography};
   ${space};
@@ -32,10 +34,6 @@ export const Text = styled.div<TextProps>`
 `
 
 Text.defaultProps = {
-  p: 0,
-  mx: 0,
-  mt: 3,
-  mb: 3,
   lineHeight: 2,
   fontSize: 2,
   fontWeight: 'lighter',

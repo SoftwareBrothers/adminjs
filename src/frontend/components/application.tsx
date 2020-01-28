@@ -72,9 +72,9 @@ const App: React.FC = () => {
       <ApplicationWrapper>
         <Sidebar />
         <Core>
-          <TopBar />
+          {/* <TopBar /> */}
           <Switch>
-            <Route path={h.dashboardUrl()} exact component={Dashboard} />
+            {/* <Route path={h.dashboardUrl()} exact component={Dashboard} /> */}
             <Route path={pageUrl} exact component={Page} />
             <Route path={designSystemUrl} exact component={DesignSystem} />
             <Route path={resourceUrl} component={Resource} />

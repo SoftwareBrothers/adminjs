@@ -1,12 +1,18 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
-import { space, SpaceProps } from 'styled-system'
+import { space, SpaceProps, position, PositionProps } from 'styled-system'
 
-export const DropDownTrigger = styled.span`
+export const DropDownTrigger = styled.span<SpaceProps>`
   display: inline-block;
-  width: 100%;
+  ${space};
 `
 DropDownTrigger.displayName = 'DropDownTrigger'
+
+const StyledDropDown = styled.div`
+  position: relative;
+  z-index: 30;
+  display: inline-block;
+`
 
 
 export const DropDown: React.FC = (props) => {
@@ -23,23 +29,30 @@ export const DropDown: React.FC = (props) => {
     return child
   })
   return (
-    <div
+    <StyledDropDown
       onMouseEnter={(): void => setIsVisible(true)}
       onMouseLeave={(): void => setIsVisible(false)}
     >
       {elements}
-    </div>
+    </StyledDropDown>
   )
 }
 
-export type DropDownMenuProps = {
+export type DropDownMenuProps = PositionProps | {
   isVisible?: boolean;
 }
 
 export const DropDownMenu = styled.div<DropDownMenuProps>`
+  background: ${({ theme }): string => theme.colors.white};
+  display: inline-block;
   position: absolute;
+  z-index: 30;
+  right: 0;
+  top: 24px;
   box-shadow: 0 3px 6px ${({ theme }): string => theme.colors.greyLight};
+  min-width: 200px;
   ${({ isVisible }): string => (isVisible ? '' : 'display: none;')};
+  ${position};
 `
 
 DropDownMenu.displayName = 'DropDownMenu'
@@ -49,16 +62,23 @@ export const DropDownItem = styled.span<SpaceProps>`
   color: ${({ theme }): string => theme.colors.darkGrey};
   display: block;
   font-family: ${({ theme }): string => theme.font};
-  ${space};
   border: solid transparent;
   border-width: 0 ${({ theme }): string => theme.space[2]};
   &:hover {
     border-color: ${({ theme }): string => theme.colors.bluePrimary};
     background: ${({ theme }): string => theme.colors.greyPale};
   }
+  & svg {
+    vertical-align: middle;
+    padding-bottom: 2px;
+    padding-right: ${({ theme }): string => theme.space[3]};
+    fill: ${({ theme }): string => theme.colors.greyLight};
+  }
+
+  ${space};
 `
 
 DropDownItem.defaultProps = {
   px: 4,
-  py: 3,
+  py: 4,
 }

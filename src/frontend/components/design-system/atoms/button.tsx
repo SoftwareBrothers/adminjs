@@ -9,7 +9,7 @@ const variantShared = {
     fill: 'white',
   },
   '&:disabled': {
-    bg: 'darkGrey',
+    bg: 'greyLight',
   },
 }
 
@@ -42,8 +42,8 @@ const buttonVariants = variant({
       color: 'bluePrimary',
       bg: 'transparent',
       borderColor: 'transparent',
-      '&:hover': {
-        'text-decoration': 'underline',
+      '&:disabled': {
+        'border-color': 'transparent',
       },
       '& svg': {
         fill: 'bluePrimary',
@@ -56,8 +56,12 @@ const sizeVariants = variant({
   prop: 'size',
   variants: {
     sm: {
-      fontSize: 0,
+      fontSize: 2,
       py: 2,
+      px: 6,
+      '& svg': {
+        paddingRight: 2,
+      },
     },
     lg: {
       fontSize: 3,
@@ -67,6 +71,7 @@ const sizeVariants = variant({
       py: 3,
       px: 3,
       lineHeight: 1,
+      minWidth: '34px',
       height: '34px',
       '& svg': {
         padding: 0,
@@ -78,6 +83,7 @@ const sizeVariants = variant({
 export type ButtonProps = ColorProps & SpaceProps & TypographyProps & {
   variant?: 'primary' | 'danger' | 'text' | 'success' | 'info' | 'secondary';
   size?: 'sm' | 'lg' | 'icon';
+  rounded?: boolean;
 }
 
 export const ButtonCSS = css`
@@ -89,6 +95,7 @@ export const ButtonCSS = css`
   color: ${({ theme }): string => theme.colors.bluePrimary};
   cursor: pointer;
   text-decoration: none;
+  padding: ${({ theme }): string => theme.space.default} ${({ theme }): string => theme.space.xxxl};
 
   & svg {
     vertical-align: middle;
@@ -106,6 +113,9 @@ export const ButtonCSS = css`
       fill: ${({ theme }): string => theme.colors.white};
     }
   }
+  &:focus {
+    border-color: ${({ theme }): string => theme.colors.blueSecondary};
+  }
 
   &:disabled {
     color: ${({ theme }): string => theme.colors.grey};
@@ -116,6 +126,8 @@ export const ButtonCSS = css`
       fill: ${({ theme }): string => theme.colors.grey};
     }
   }
+
+  ${({ rounded }): string => (rounded ? 'border-radius: 9999px' : '')};
 
   ${color};
   ${space};
@@ -129,8 +141,6 @@ export const Button = styled.button<ButtonProps>`
 `
 
 Button.defaultProps = {
-  px: 7,
-  py: 3,
   fontSize: 2,
   lineHeight: 2,
   bg: 'transparent',

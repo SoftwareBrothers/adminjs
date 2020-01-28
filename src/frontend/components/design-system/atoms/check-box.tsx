@@ -33,15 +33,15 @@ const StyledCheckbox = styled.a<{checked: boolean | undefined}>`
   /* when it is placed within a container setting different font size */
   font-size: 12px;
   cursor: pointer;
-  border: 1px solid ${({ theme }): string => theme.colors.textDefault};
+  border: 1px solid ${({ theme }): string => theme.colors.black};
   height: 16px;
-  background: ${({ checked, theme }): string => (checked ? theme.colors.primary : theme.colors.white)};
+  background: ${({ checked, theme }): string => (checked ? theme.colors.bluePrimary : theme.colors.white)};
   transition: all 150ms;
   position: relative;
   z-index: 2;
 
   ${HiddenCheckbox}:focus + & {
-    box-shadow: 0 0 0 2px ${({ theme }): string => lighten(0.1, theme.colors.primary)};
+    box-shadow: 0 0 0 2px ${({ theme }): string => lighten(0.1, theme.colors.bluePrimary)};
   }
   ${HiddenCheckbox}:hover + & {
     border-color: ${({ theme }): string => theme.colors.borderHover};

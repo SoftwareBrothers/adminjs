@@ -1,11 +1,16 @@
 import React from 'react'
 import styled from 'styled-components'
 import { typography, TypographyProps, space, SpaceProps } from 'styled-system'
+import { Button } from './button'
 
 const Base = styled.h3<TypographyProps & SpaceProps>`
+  font-family: ${({ theme }): string => theme.font};
   vertical-align: middle;
   * {
     vertical-align: middle;
+  }
+  ${Button} {
+    vertical-align: bottom;
   }
   ${typography};
   ${space};

@@ -1,8 +1,7 @@
 import React from 'react'
 import { DatePicker } from './date-picker'
 
-export default { title: 'Molecules' }
-
+// eslint-disable-next-line import/prefer-default-export
 export const datePicker = () => (
   <DatePicker />
 )

@@ -4,7 +4,7 @@ import { renderToString } from 'react-dom/server'
 import { ServerStyleSheet, ThemeProvider } from 'styled-components'
 import LoginComponent from './components/login'
 
-import * as theme from './styles/variables'
+import * as theme from './components/design-system/theme'
 
 const onProd = process.env.NODE_ENV === 'production'
 
