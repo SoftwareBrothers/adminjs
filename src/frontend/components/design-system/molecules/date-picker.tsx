@@ -5,15 +5,14 @@ import styled from 'styled-components'
 import { Calendar16 } from '@carbon/icons-react'
 
 import styles from '../utils/datepicker.styles'
-import { Input } from '../atoms/input'
+import { Input, InputProps } from '../atoms/input'
 import { Button } from '../atoms/button'
+import { InputGroup } from '../molecules/form-group'
 
 
-const StyledDatePicker = styled.div`
+const StyledDatePicker = styled(InputGroup)`
   ${styles};
   position: relative;
-  display: flex;
-  width: 100%;
 
   & ${Input}, & ${Button} {
     z-index: 101;
@@ -106,13 +105,30 @@ const DatePickerWrapper = styled.div`
 `
 
 // TODO: change that
-export type DatePickerProps = any
+export type DatePickerProps = {
+  value?: string;
+  onChange: (date: string) => void;
+  variant?: InputProps['variant'];
+}
+
+const pad = (n: number): string => (n < 10 ? `0${n.toString()}` : n.toString())
+
+const format = (date: Date): string => `${date.getFullYear()}-${pad(date.getMonth() + 1)
+}-${pad(date.getDate())} ${pad(date.getHours())}:${pad(date.getMinutes())}`
 
 export const DatePicker: React.FC<DatePickerProps> = (props) => {
-  const { selected, onChange, ...other } = props
+  const { value, onChange, variant, ...other } = props
 
-  const value = selected ? selected.toLocaleString() : ''
   const [hidden, setHidden] = useState(true)
+
+  let dateValue = value
+  if (dateValue && dateValue.constructor.name !== 'Date') {
+    dateValue = Date.parse(dateValue) || undefined
+  }
+
+  const onDatePickerChange = (date: Date) => {
+    onChange(format(date))
+  }
 
   return (
     <React.Fragment>
@@ -122,12 +138,14 @@ export const DatePicker: React.FC<DatePickerProps> = (props) => {
       />
       <StyledDatePicker>
         <Input
-          value={value}
-          onChange={onChange}
+          variant={variant}
+          value={value || ''}
+          onChange={event => onChange(event.target.value)}
           onFocus={(): void => setHidden(false)}
         />
         <Button
           variant="primary"
+          type="button"
           size="icon"
           onClick={(): void => setHidden(!hidden)}
         >
@@ -135,7 +153,7 @@ export const DatePicker: React.FC<DatePickerProps> = (props) => {
         </Button>
         {!hidden ? (
           <DatePickerWrapper>
-            <ReactDatePicker selected={selected} onChange={onChange} inline {...other} />
+            <ReactDatePicker selected={dateValue} onChange={onDatePickerChange} inline {...other} />
           </DatePickerWrapper>
         ) : ''}
       </StyledDatePicker>

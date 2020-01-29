@@ -1,9 +1,24 @@
 import styled from 'styled-components'
-import { space, SpaceProps } from 'styled-system'
+import { space, SpaceProps, variant } from 'styled-system'
 
 export type DrawerProps = SpaceProps & {
-  hidden?: boolean;
+  isHidden?: boolean;
+  variant?: 'filter';
 }
+
+const variants = variant({
+  variants: {
+    filter: {
+      bg: 'blueFilter',
+      width: '400px',
+      color: 'white',
+      '& > *': {
+        width: '400px',
+        boxSizing: 'border-box',
+      },
+    },
+  },
+})
 
 export const Drawer = styled.section<DrawerProps>`
   z-index: 100;
@@ -20,12 +35,14 @@ export const Drawer = styled.section<DrawerProps>`
   transition: all 500ms;
   background: ${({ theme }): string => theme.colors.white};
 
-  ${({ hidden }): string => (hidden ? 'right: -500px;' : '')};
   ${space};
+  ${variants};
+
+  ${({ isHidden }): string => (isHidden ? 'width: 0px;' : '')};
 `
 
 export const DrawerFooter = styled.div`
-  padding: ${({ theme }): string => theme.space[6]};
+  padding: ${({ theme }): string => theme.space.xxl} ${({ theme }): string => theme.space.lg};
   text-align: center;
   border-top: 1px solid ${({ theme }): string => theme.colors.bluePale};
   flex-shrink: 0;
@@ -35,6 +52,6 @@ export const DrawerFooter = styled.div`
 export const DrawerContent = styled.div`
   flex-grow: 1;
   overflow: auto;
-  padding: ${({ theme }): string => theme.space[5]};
+  padding: ${({ theme }): string => theme.space.xl};
   ${space};
 `

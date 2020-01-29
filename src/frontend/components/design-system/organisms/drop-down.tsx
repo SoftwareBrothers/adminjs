@@ -2,8 +2,12 @@ import React, { useState } from 'react'
 import styled from 'styled-components'
 import { space, SpaceProps, position, PositionProps } from 'styled-system'
 
+import { Link } from '../atoms/link'
+
 export const DropDownTrigger = styled.span<SpaceProps>`
   display: inline-block;
+  z-index: 20;
+  position: relative;
   ${space};
 `
 DropDownTrigger.displayName = 'DropDownTrigger'
@@ -46,7 +50,7 @@ export const DropDownMenu = styled.div<DropDownMenuProps>`
   background: ${({ theme }): string => theme.colors.white};
   display: inline-block;
   position: absolute;
-  z-index: 30;
+  z-index: 40;
   right: 0;
   top: 24px;
   box-shadow: 0 3px 6px ${({ theme }): string => theme.colors.greyLight};
@@ -58,27 +62,32 @@ export const DropDownMenu = styled.div<DropDownMenuProps>`
 DropDownMenu.displayName = 'DropDownMenu'
 
 export const DropDownItem = styled.span<SpaceProps>`
+  position: relative;
+  z-index: 10000;
   border: none;
   color: ${({ theme }): string => theme.colors.darkGrey};
   display: block;
   font-family: ${({ theme }): string => theme.font};
   border: solid transparent;
-  border-width: 0 ${({ theme }): string => theme.space[2]};
+  border-width: 0 ${({ theme }): string => theme.space.sm};
   &:hover {
     border-color: ${({ theme }): string => theme.colors.bluePrimary};
     background: ${({ theme }): string => theme.colors.greyPale};
   }
   & svg {
     vertical-align: middle;
-    padding-bottom: 'sm'px;
-    padding-right: ${({ theme }): string => theme.space[3]};
+    padding-bottom: 2px;
+    padding-right: ${({ theme }): string => theme.space.default};
     fill: ${({ theme }): string => theme.colors.greyLight};
   }
 
   ${space};
-`
 
-DropDownItem.defaultProps = {
-  px: 4,
-  py: 4,
-}
+  & > ${Link}, & > a {
+    padding: ${({ theme }): string => theme.space.lg};
+    display: block;
+    &:hover{
+      text-decoration: none;
+    }
+  }
+`

@@ -4,20 +4,7 @@ import { NavLink, withRouter } from 'react-router-dom'
 
 import { RouteComponentProps } from 'react-router'
 import PropertyJSON from '../../../backend/decorators/property-json.interface'
-
-const StyledLink = styled(NavLink).attrs({
-  className: 'is-sortable text-small',
-})`
-  color: ${({ theme }): string => theme.colors.lightText};
-
-  &.active {
-    color: ${({ theme }): string => theme.colors.primary};
-  }
-
-  & > i {
-    margin-left: ${({ theme }): string => theme.sizes.padding}
-  }
-`
+import { Link, Icon } from '../design-system'
 
 type Props = {
   property: PropertyJSON;
@@ -40,16 +27,16 @@ class SortLink extends React.PureComponent<Props & RouteComponentProps> {
     const { property, location, direction } = this.props
     const query = new URLSearchParams(location.search)
     const oppositeDirection = (this.isActive() && direction === 'asc') ? 'desc' : 'asc'
-    const sortedByClass = `icomoon-dropdown-${direction === 'asc' ? 'open' : 'close'}`
+    const sortedByIcon = `Caret${direction === 'asc' ? 'Up' : 'Down'}`
 
     query.set('direction', oppositeDirection)
     query.set('sortBy', property.name)
 
     return (
-      <StyledLink to={{ search: query.toString() }} isActive={this.isActive}>
+      <NavLink to={{ search: query.toString() }}>
         {property.label}
-        {this.isActive() ? (<i className={sortedByClass} />) : ''}
-      </StyledLink>
+        {this.isActive() ? (<Icon icon={sortedByIcon} color="bluePrimary" ml="default" />) : ''}
+      </NavLink>
     )
   }
 }

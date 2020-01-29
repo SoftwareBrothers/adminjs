@@ -8,15 +8,14 @@ import Version from './version'
 import { CurrentAdmin } from '../../../current-admin.interface'
 import { VersionProps } from '../../../admin-bro-options.interface'
 import { ReduxState } from '../../store/store'
+import { Box } from '../design-system'
 
-const Navbar = styled.nav.attrs({
-  className: 'navbar',
-})`
+const NavBar = styled(Box)`
   height: ${({ theme }): string => theme.sizes.navbarHeight};
-  border-bottom: 1px solid ${({ theme }): string => theme.colors.border};
-  padding: 0 ${({ theme }): string => theme.sizes.paddingLayout};
-  flex-shrink: 0;
-  background: ${({ theme }): string => theme.colors.bck};
+  border-bottom: 1px solid ${({ theme }): string => theme.colors.greyPale};
+  background: ${({ theme }): string => theme.colors.white};
+  display: flex;
+  flex-direction: row;
 `
 
 type PropsFromState = {
@@ -30,16 +29,10 @@ type PropsFromState = {
 const TopBar: React.FC<PropsFromState> = (props) => {
   const { session, versions, paths } = props
   return (
-    <Navbar>
-      <div className="navbar-menu">
-        <div className="navbar-start">
-          <Version versions={versions} />
-        </div>
-        <div className="navbar-end">
-          {session && session.email ? <LoggedIn session={session} paths={paths} /> : ''}
-        </div>
-      </div>
-    </Navbar>
+    <NavBar>
+      <Version versions={versions} />
+      {session && session.email ? <LoggedIn session={session} paths={paths} /> : ''}
+    </NavBar>
   )
 }
 

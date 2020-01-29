@@ -3,14 +3,14 @@ import { withRouter } from 'react-router-dom'
 
 import { RouteComponentProps } from 'react-router'
 import ApiClient from '../../utils/api-client'
-import WrapperBox from '../ui/wrapper-box'
 import withNotice, { AddNoticeProps } from '../../store/with-notice'
+
 import RecordsTable from '../app/records-table/records-table'
-import Paginate from '../ui/paginate'
 import { ActionProps } from './action.props'
 import RecordJSON from '../../../backend/decorators/record-json.interface'
 import { ListActionResponse } from '../../../backend/actions/list-action'
 import { hasForceRefresh, removeForceRefresh } from './utils/append-force-refresh'
+import { Box, Pagination, Text } from '../design-system'
 
 type State = {
   records: Array<RecordJSON>;
@@ -42,6 +42,7 @@ class List extends React.Component<Props, State> {
     this.handleActionPerformed = this.handleActionPerformed.bind(this)
     this.handleSelect = this.handleSelect.bind(this)
     this.handleSelectAll = this.handleSelectAll.bind(this)
+    this.onPaginationChange = this.onPaginationChange.bind(this)
     this.blockRefresh = false
     this.state = {
       records: [],
@@ -84,6 +85,13 @@ class List extends React.Component<Props, State> {
     if (setTag) {
       setTag('')
     }
+  }
+
+  onPaginationChange(pageNumber): void {
+    const { location, history } = this.props
+    const search = new URLSearchParams(location.search)
+    search.set('page', pageNumber.toString())
+    history.push({ search: search.toString() })
   }
 
   _fetchData(props: Props): void {
@@ -171,7 +179,7 @@ class List extends React.Component<Props, State> {
       loading, direction, sortBy, selectedRecords,
     } = this.state
     return (
-      <WrapperBox border>
+      <Box variant="white">
         <RecordsTable
           resource={resource}
           records={records}
@@ -183,12 +191,15 @@ class List extends React.Component<Props, State> {
           sortBy={sortBy}
           isLoading={loading}
         />
-        <Paginate
-          page={page}
-          perPage={perPage}
-          total={total}
-        />
-      </WrapperBox>
+        <Text mt="xl" textAlign="center">
+          <Pagination
+            page={page}
+            perPage={perPage}
+            total={total}
+            onChange={this.onPaginationChange}
+          />
+        </Text>
+      </Box>
     )
   }
 }

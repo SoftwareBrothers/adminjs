@@ -1,18 +1,13 @@
 import React from 'react'
-import styled from 'styled-components'
 
 import RecordInList from './record-in-list'
 import RecordsTableHeader from './records-table-header'
 import NoRecords from './no-records'
 
-import { Table } from '../../design-system'
+import { Table, Box, TableCaption, TableBody } from '../../design-system'
 import ResourceJSON from '../../../../backend/decorators/resource-json.interface'
 import RecordJSON from '../../../../backend/decorators/record-json.interface'
 import SelectedRecords from './selected-records'
-
-const RecordsTableWrapper = styled.section`
-  position: relative;
-`
 
 export type Props = {
   resource: ResourceJSON;
@@ -43,37 +38,35 @@ const RecordsTable: React.FC<Props> = (props) => {
   ))
 
   return (
-    <RecordsTableWrapper>
+    <Table>
       <SelectedRecords
         resource={resource}
         selectedRecords={selectedRecords}
       />
-      <Table>
-        <RecordsTableHeader
-          properties={resource.listProperties}
-          titleProperty={resource.titleProperty}
-          direction={direction}
-          sortBy={sortBy}
-          onSelectAll={onSelectAll}
-          selectedAll={selectedAll}
-        />
-        <tbody>
-          {records.map(record => (
-            <RecordInList
-              record={record}
-              resource={resource}
-              key={record.id}
-              actionPerformed={actionPerformed}
-              isLoading={isLoading}
-              onSelect={onSelect}
-              isSelected={
-                selectedRecords && !!selectedRecords.find(selected => selected.id === record.id)
-              }
-            />
-          ))}
-        </tbody>
-      </Table>
-    </RecordsTableWrapper>
+      <RecordsTableHeader
+        properties={resource.listProperties}
+        titleProperty={resource.titleProperty}
+        direction={direction}
+        sortBy={sortBy}
+        onSelectAll={onSelectAll}
+        selectedAll={selectedAll}
+      />
+      <TableBody>
+        {records.map(record => (
+          <RecordInList
+            record={record}
+            resource={resource}
+            key={record.id}
+            actionPerformed={actionPerformed}
+            isLoading={isLoading}
+            onSelect={onSelect}
+            isSelected={
+              selectedRecords && !!selectedRecords.find(selected => selected.id === record.id)
+            }
+          />
+        ))}
+      </TableBody>
+    </Table>
   )
 }
 

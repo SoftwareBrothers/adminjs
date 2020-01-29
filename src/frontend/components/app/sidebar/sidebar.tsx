@@ -30,23 +30,6 @@ const Sidebar: React.FC<Props> = (props) => {
   )
 }
 
-// <SidebarWrapper className={hidden ? 'hidden' : 'active'}>
-//       <SidebarSection>
-//         <Hamburger onClick={(): void => setHidden(!hidden)} />
-//         <SidebarBranding branding={branding} />
-//       </SidebarSection>
-//       <SidebarSection style={{ flexGrow: 1 }}>
-//         <SidebarLabel>Navigation</SidebarLabel>
-//         <ul>
-//           {groupResources(resources).map(parent => (
-//             <SidebarParent parent={parent} key={parent.name} />
-//           ))}
-//         </ul>
-//       </SidebarSection>
-//       <SidebarPages pages={pages} />
-//       {branding.softwareBrothers && <SidebarFooter hidden={hidden} />}
-//     </SidebarWrapper>
-
 const mapStateToProps = (state: ReduxState): Props => ({
   resources: state.resources,
   branding: state.branding,

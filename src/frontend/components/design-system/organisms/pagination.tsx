@@ -23,6 +23,8 @@ export type PaginationProps = {
    * location
    */
   location?: Location;
+
+  onChange: (pageNumber: number) => void;
 }
 
 const PaginationLink = styled(Button).attrs(props => ({
@@ -57,7 +59,7 @@ const PaginationWrapper = styled(Box)`
 `
 
 export const Pagination: React.FC<PaginationProps> = (props) => {
-  const { total, page, perPage } = props
+  const { total, page, perPage, onChange, ...rest } = props
   const currentPage = page || 1
   const paginate = JWPaginate(total, currentPage, perPage)
 
@@ -67,36 +69,29 @@ export const Pagination: React.FC<PaginationProps> = (props) => {
   const prevPage = isFirstPage ? currentPage : currentPage - 1
   const nextPage = isLastPage ? currentPage : currentPage + 1
 
-  const linkToPage = (pageNumber: number): string => {
-    const { location } = props
-    const search = new URLSearchParams(location && location.search)
-    search.set('page', pageNumber.toString())
-    return search.toString()
-  }
-
   if (paginate.totalPages === 1 || total === 0) {
     return null
   }
 
   return (
-    <PaginationWrapper>
+    <PaginationWrapper {...rest}>
       <PaginationLink
-        to={{ search: linkToPage(prevPage) }}
         disabled={isFirstPage}
+        onClick={(): void => (!isFirstPage ? onChange(1) : undefined)}
       >
         <Icon icon="ChevronLeft" />
       </PaginationLink>
       {paginate.pages.map(p => (
         <PaginationLink
           key={p}
-          to={{ search: linkToPage(p) }}
+          onClick={(): void => onChange(p)}
           variant={p === currentPage ? 'primary' : 'text'}
         >
           {p}
         </PaginationLink>
       ))}
       <PaginationLink
-        to={{ search: linkToPage(nextPage) }}
+        onClick={(): void => (!isLastPage ? onChange(nextPage) : undefined)}
         disabled={isLastPage}
       >
         <Icon icon="ChevronRight" />

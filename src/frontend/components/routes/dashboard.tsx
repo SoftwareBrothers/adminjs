@@ -5,7 +5,6 @@ import DefaultDashboard from '../app/default-dashboard'
 import ErrorBoundary from '../app/error-boundary'
 import { ReduxState } from '../../store/store'
 import Notice from '../app/notice'
-import NoticeWrapper from './styled/notice-wrapper.styled'
 
 declare const AdminBro: {
   UserComponents: Record<string, FunctionComponent>;
@@ -46,14 +45,9 @@ class Dashboard extends React.Component<PropsFromState, State> {
     }
 
     return (
-      <>
-        <NoticeWrapper>
-          <Notice />
-        </NoticeWrapper>
-        <ErrorBoundary>
-          <Component />
-        </ErrorBoundary>
-      </>
+      <ErrorBoundary>
+        <Component />
+      </ErrorBoundary>
     )
   }
 }

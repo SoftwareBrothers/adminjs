@@ -2,7 +2,7 @@ import styled from 'styled-components'
 
 const Th = styled.th`
   &&& {
-    font-size: ${({ theme }): string => theme.fonts.min};
+    font-size: ${({ theme }): string => theme.fontSizes.sm};
     text-transform: uppercase;
     color: ${({ theme }): string => theme.colors.lightText};
     font-weight: normal;

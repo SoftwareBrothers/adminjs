@@ -1,12 +1,45 @@
 import React, { ReactNode } from 'react'
 
-import PropertyInFilter, { Label } from '../../ui/property-in-filter'
+import PropertyInFilter from '../../ui/property-in-filter'
 import * as BackendFilter from '../../../../backend/utils/filter'
 import { FilterPropertyProps } from '../base-property-props'
+import { FormGroup, Label, DatePicker } from '../../design-system'
 
 const { PARAM_SEPARATOR } = BackendFilter
 
-export default class Filter extends React.Component<FilterPropertyProps> {
+
+const Filter: React.FC<FilterPropertyProps> = (props) => {
+  const { property, filter, onChange } = props
+
+  const fromKey = `${property.name}${PARAM_SEPARATOR}from`
+  const toKey = `${property.name}${PARAM_SEPARATOR}to`
+  const fromValue = filter[fromKey]
+  const toValue = filter[toKey]
+
+  return (
+    <React.Fragment>
+      <FormGroup>
+        <Label>{property.label}</Label>
+        <Label>- From: </Label>
+        <DatePicker
+          variant="filter"
+          value={fromValue}
+          onChange={(data: string): void => onChange(fromKey, data)}
+        />
+        <Label>- To: </Label>
+        <DatePicker
+          variant="filter"
+          value={toValue}
+          onChange={(data: string): void => onChange(toKey, data)}
+        />
+      </FormGroup>
+    </React.Fragment>
+  )
+}
+
+export default Filter
+
+class FilterOld extends React.Component<FilterPropertyProps> {
   private pickerRef: {
     from: React.RefObject<any>;
     to: React.RefObject<any>;
@@ -87,11 +120,7 @@ export default class Filter extends React.Component<FilterPropertyProps> {
     const filterKey = `filter-${property.name}`
     return (
       <div>
-        <Label>
-        -
-          {where}
-        :
-        </Label>
+        <Label />
         <div className="control has-icons-right">
           <input
             type="text"

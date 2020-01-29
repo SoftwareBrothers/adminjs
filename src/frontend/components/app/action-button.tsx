@@ -17,7 +17,6 @@ import { appendForceRefresh } from '../actions/utils/append-force-refresh'
 
 type Props = {
   action: ActionJSON;
-  className?: string;
   resourceId: string;
   recordId?: string;
   recordIds?: Array<string>;
@@ -127,7 +126,11 @@ class ActionButton extends React.PureComponent<RouteComponentProps & Props & Add
   }
 
   render(): ReactNode {
-    const { children } = this.props
+    const { children, action } = this.props
+
+    if (!action) {
+      return null
+    }
 
     return (
       <StyledLink

@@ -33,28 +33,16 @@ export const space = {
   lg: '16px',
   xl: '24px',
   xxl: '32px',
-  x4: '48px',
-  x5: '64',
-  x6: '80',
-  x7: '128',
+  x3: '48px',
+  x4: '64px',
+  x5: '80px',
+  x6: '128px',
 }
 
 export const sizes = {
   navbarHeight: '64px',
   sidebarWidth: '300px',
   sidebarMobileWidth: '98px',
-}
-
-export interface FontSizesProps extends Array<string> {
-  default: string;
-  sm: string;
-  xs: string;
-  lg: string;
-  xl: string;
-  h4: string;
-  h3: string;
-  h2: string;
-  h1: string;
 }
 
 export const fontSizes = {

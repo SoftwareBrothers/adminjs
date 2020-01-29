@@ -26,8 +26,8 @@ const formGroupWithErrorCSS = css`
 export const FormMessage = styled(Text)`
   box-sizing: border-box;
   vertical-align: middle;
-  height: ${({ theme }): string => theme.space[5]};
-  margin: ${({ theme }): string => theme.space[2]} 0 0;
+  height: ${({ theme }): string => theme.space.xl};
+  margin: ${({ theme }): string => theme.space.sm} 0 0;
   font-weight: normal;
 `
 
@@ -77,12 +77,12 @@ export const FormGroup = styled.div<FormGroupProps>`
   width: 100%;
   ${({ error }): string => (error ? formGroupWithErrorCSS : '')};
   ${space};
-  
-  & > input:last-child, & > ${InputGroup}:last-child {
-    padding-bottom: ${({ theme }): string => theme.space[5]};
+
+  & > ${Input} {
+    width: 100%;
   }
 `
 
 FormGroup.defaultProps = {
-  mb: 4,
+  mb: 'lg',
 }

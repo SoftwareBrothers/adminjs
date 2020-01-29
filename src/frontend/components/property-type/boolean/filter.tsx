@@ -6,6 +6,7 @@ import mapValue from './map-value'
 import PropertyInFilter from '../../ui/property-in-filter'
 import { filterStyles } from '../../../styles/select-styles'
 import { FilterPropertyProps } from '../base-property-props'
+import { FormGroup, Label } from '../../design-system'
 
 class Filter extends React.PureComponent<FilterPropertyProps & ThemeProps<DefaultTheme>> {
   constructor(props) {
@@ -28,7 +29,8 @@ class Filter extends React.PureComponent<FilterPropertyProps & ThemeProps<Defaul
     ]
     const selected = options.find(o => o.value === value)
     return (
-      <PropertyInFilter property={property}>
+      <FormGroup>
+        <Label>{property.label}</Label>
         <Select
           value={typeof selected === 'undefined' ? '' : selected}
           isClearable
@@ -36,7 +38,7 @@ class Filter extends React.PureComponent<FilterPropertyProps & ThemeProps<Defaul
           styles={filterStyles(theme)}
           onChange={this.handleChange}
         />
-      </PropertyInFilter>
+      </FormGroup>
     )
   }
 }

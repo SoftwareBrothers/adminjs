@@ -1,20 +1,6 @@
 import React from 'react'
-import styled from 'styled-components'
-
-import Label from '../ui/label'
 import { VersionProps } from '../../../admin-bro-options.interface'
-
-const VersionWrapper = styled.div`
-  padding: 10px 0;
-`
-
-const VersionBlock = styled.p`
-  &&& {
-    & > label {
-      display: inline;
-    }
-  }
-`
+import { Text, Box } from '../design-system'
 
 export type Props = {
   versions: VersionProps;
@@ -25,20 +11,20 @@ const Version: React.FC<Props> = (props) => {
   const { versions } = props
   const { admin, app } = versions
   return (
-    <VersionWrapper>
+    <Box flexGrow={1} py="default" px="xxl">
       {admin && (
-        <VersionBlock>
-          <Label>admin:</Label>
+        <Text color="grey">
+          <b>Admin: </b>
           {admin}
-        </VersionBlock>
+        </Text>
       )}
       {app && (
-        <VersionBlock>
-          <Label>app:</Label>
+        <Text color="grey">
+          <b>app:</b>
           {app}
-        </VersionBlock>
+        </Text>
       )}
-    </VersionWrapper>
+    </Box>
   )
 }
 

@@ -6,6 +6,7 @@ import ApiClient from '../../../utils/api-client'
 import PropertyInFilter from '../../ui/property-in-filter'
 import { filterStyles } from '../../../styles/select-styles'
 import { FilterPropertyProps, SelectRecord } from '../base-property-props'
+import { FormGroup, Label } from '../../design-system'
 
 type CombinedProps = FilterPropertyProps & ThemeProps<DefaultTheme>
 
@@ -42,7 +43,8 @@ class Filter extends React.PureComponent<CombinedProps> {
     const value = typeof filter[property.name] === 'undefined' ? '' : filter[property.name]
     const selected = (this.options || []).find(o => o.value === value)
     return (
-      <PropertyInFilter property={property}>
+      <FormGroup>
+        <Label>{property.label}</Label>
         <Select
           value={typeof selected === 'undefined' ? '' : selected}
           isClearable
@@ -52,7 +54,7 @@ class Filter extends React.PureComponent<CombinedProps> {
           onChange={this.handleChange}
           defaultOptions
         />
-      </PropertyInFilter>
+      </FormGroup>
     )
   }
 }

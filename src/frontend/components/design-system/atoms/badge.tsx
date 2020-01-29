@@ -4,6 +4,7 @@ import { color, space, fontSize, SpaceProps, FontSizeProps, ColorProps, variant 
 export type BadgeProps = SpaceProps & FontSizeProps & ColorProps & {
   variant?: 'primary' | 'danger' | 'text' | 'success' | 'info' | 'secondary';
   outline?: boolean;
+  size?: 'sm' | 'lg';
 }
 
 const variantStyle = (color: string, props: BadgeProps) => ({

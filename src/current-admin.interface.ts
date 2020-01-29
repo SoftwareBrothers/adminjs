@@ -16,6 +16,10 @@ export type CurrentAdmin = {
    */
   email: string;
   /**
+   * Optional title/role of an admin - this will be presented below the email
+   */
+  title: string;
+  /**
    * Id of your admin user
    */
   id?: string;

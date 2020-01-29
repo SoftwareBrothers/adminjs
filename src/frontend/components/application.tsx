@@ -6,6 +6,7 @@ import styled, { createGlobalStyle } from 'styled-components'
 import ViewHelpers from '../../backend/utils/view-helpers'
 import Sidebar from './app/sidebar/sidebar'
 import TopBar from './app/top-bar'
+import Notice from './app/notice'
 
 import {
   Dashboard, ResourceAction, RecordAction, Page, BulkAction, DesignSystem, Resource,
@@ -41,6 +42,15 @@ const App: React.FC = () => {
       <GlobalStyle />
       <Box height="100%" flex>
         <Sidebar />
+        <Box flex flexGrow={1} flexDirection="column" overflowY="auto" bg="greyPale">
+          <TopBar />
+          <Box position="absolute" top={0}>
+            <Notice />
+          </Box>
+          <Switch>
+            <Route path={resourceUrl} component={Resource} />
+          </Switch>
+        </Box>
       </Box>
     </React.Fragment>
 

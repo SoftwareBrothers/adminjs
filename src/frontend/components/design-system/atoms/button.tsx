@@ -45,8 +45,16 @@ const buttonVariants = variant({
       '&:disabled': {
         'border-color': 'transparent',
       },
+      '&:hover': {
+        background: 'transparent',
+        color: 'blueHover',
+        'border-color': 'transparent',
+      },
       '& svg': {
         fill: 'bluePrimary',
+      },
+      '&:hover svg': {
+        fill: 'blueHover',
       },
     },
   },
@@ -64,12 +72,12 @@ const sizeVariants = variant({
       },
     },
     lg: {
-      fontSize: 'lg',
-      py: 3,
+      py: 'default',
+      lineHeight: 'lg',
     },
     icon: {
-      py: 3,
-      px: 3,
+      py: 'default',
+      px: 'default',
       lineHeight: 'sm',
       minWidth: '34px',
       height: '34px',
@@ -95,7 +103,7 @@ export const ButtonCSS = css`
   color: ${({ theme }): string => theme.colors.bluePrimary};
   cursor: pointer;
   text-decoration: none;
-  padding: ${({ theme }): string => theme.space.default} ${({ theme }): string => theme.space.x4};
+  padding: ${({ theme }): string => theme.space.default} ${({ theme }): string => theme.space.x3};
 
   & svg {
     vertical-align: middle;
@@ -142,6 +150,5 @@ export const Button = styled.button<ButtonProps>`
 
 Button.defaultProps = {
   fontSize: 'default',
-  lineHeight: 'lg',
   bg: 'transparent',
 }

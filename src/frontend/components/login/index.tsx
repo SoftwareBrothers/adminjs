@@ -10,7 +10,7 @@ const GlobalStyle = createGlobalStyle`
     width: 100%;
     height: 100%;
     background: ${({ theme }): string => theme.colors.superDarkBck};
-    font-size: ${({ theme }): string => theme.fonts.base};
+    font-size: ${({ theme }): string => theme.font};
   }
 
   a {

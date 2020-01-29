@@ -13,7 +13,7 @@ const BulkDeleteAction: Action<BulkActionResponse> = {
   name: 'bulkDelete',
   isVisible: true,
   actionType: 'bulk',
-  icon: 'icomoon-remove-2',
+  icon: 'Delete',
   label: 'Remove',
   /**
    * Responsible for deleting existing records.

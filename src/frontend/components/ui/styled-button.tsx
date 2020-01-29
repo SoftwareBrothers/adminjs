@@ -33,7 +33,7 @@ type Props = {
 
 const styles = css`
 &&& {
-    font-size: ${({ theme }): string => theme.fonts.medium};
+    font-size: ${({ theme }): string => theme.fontSizes.sm};
     border-radius: 0;
     border-color: ${({ theme }): string => theme.colors.primary};
     background: ${({ theme }): string => theme.colors.bck};
@@ -69,7 +69,7 @@ const styles = css`
 
     &.in-dropdown {
       color: ${({ theme }): string => theme.colors.defaultText};
-      font-size: ${({ theme }): string => theme.fonts.base};
+      font-size: ${({ theme }): string => theme.font};
       width: 100%;
       text-align: start;
       justify-content: flex-start;

@@ -2,10 +2,9 @@ import React, { ReactNode } from 'react'
 import Select from 'react-select'
 
 import { withTheme, ThemeProps, DefaultTheme } from 'styled-components'
-import PropertyInFilter from '../../ui/property-in-filter'
 import { filterStyles } from '../../../styles/select-styles'
 import { FilterPropertyProps } from '../base-property-props'
-import StyledInput from '../../ui/styled-input'
+import { FormGroup, Label, Input } from '../../design-system'
 
 class Filter extends React.PureComponent<FilterPropertyProps & ThemeProps<DefaultTheme>> {
   constructor(props) {
@@ -42,29 +41,22 @@ class Filter extends React.PureComponent<FilterPropertyProps & ThemeProps<Defaul
       )
     }
     return (
-      <React.Fragment>
-        <span className="icon is-small is-right">
-          <i className="fas fa-search" />
-        </span>
-        <StyledInput
-          type="text"
-          className="input filter"
-          name={filterKey}
-          onChange={this.handleInputChange}
-          value={value}
-        />
-      </React.Fragment>
+      <Input
+        variant="filter"
+        name={filterKey}
+        onChange={this.handleInputChange}
+        value={value}
+      />
     )
   }
 
   render(): ReactNode {
     const { property } = this.props
     return (
-      <PropertyInFilter property={property}>
-        <div className="control has-icons-left">
-          {this.renderInput()}
-        </div>
-      </PropertyInFilter>
+      <FormGroup>
+        <Label>{property.label}</Label>
+        {this.renderInput()}
+      </FormGroup>
     )
   }
 }

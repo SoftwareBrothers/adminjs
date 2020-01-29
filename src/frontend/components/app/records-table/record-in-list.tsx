@@ -3,12 +3,11 @@ import { withRouter, RouteComponentProps } from 'react-router-dom'
 
 import ActionButton from '../action-button'
 import PropertyType from '../../property-type'
-import Dropdown from '../../ui/dropdown'
 import Placeholder from '../../ui/placeholder'
 import ResourceJSON from '../../../../backend/decorators/resource-json.interface'
 import RecordJSON from '../../../../backend/decorators/record-json.interface'
 import { PropertyPlace } from '../../../../backend/decorators/property-json.interface'
-import { TableRow, TableCell, CheckBox } from '../../design-system'
+import { TableRow, TableCell, CheckBox, DropDown, DropDownTrigger, Icon, DropDownMenu, DropDownItem } from '../../design-system'
 import ViewHelpers from '../../../../backend/utils/view-helpers'
 
 type Props = {
@@ -91,18 +90,26 @@ class RecordInList extends React.PureComponent<Props & RouteComponentProps> {
         ))}
         <TableCell key="options">
           {recordActions.length ? (
-            <Dropdown className="is-right is-hoverable">
-              {recordActions.map(action => (
-                <ActionButton
-                  action={action}
-                  key={action.name}
-                  resourceId={resource.id}
-                  recordId={record.id}
-                  actionPerformed={actionPerformed}
-                  className="is-white in-dropdown"
-                />
-              ))}
-            </Dropdown>
+            <DropDown>
+              <DropDownTrigger p="sm">
+                <Icon icon="OverflowMenuHorizontal" />
+              </DropDownTrigger>
+              <DropDownMenu>
+                {recordActions.map(action => (
+                  <DropDownItem key={action.name}>
+                    <ActionButton
+                      action={action}
+                      resourceId={resource.id}
+                      recordId={record.id}
+                      actionPerformed={actionPerformed}
+                    >
+                      <Icon icon={action.icon} />
+                      {action.label}
+                    </ActionButton>
+                  </DropDownItem>
+                ))}
+              </DropDownMenu>
+            </DropDown>
           ) : ''}
         </TableCell>
       </TableRow>
@@ -111,3 +118,17 @@ class RecordInList extends React.PureComponent<Props & RouteComponentProps> {
 }
 
 export default withRouter(RecordInList)
+
+
+// <Dropdown className="is-right is-hoverable">
+// {recordActions.map(action => (
+//   <ActionButton
+//     action={action}
+//     key={action.name}
+//     resourceId={resource.id}
+//     recordId={record.id}
+//     actionPerformed={actionPerformed}
+//     className="is-white in-dropdown"
+//   />
+// ))}
+// </Dropdown>

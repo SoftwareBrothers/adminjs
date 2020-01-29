@@ -72,7 +72,7 @@ export type LinkProps = ColorProps & FontSizeProps & SpaceProps & {
   variant?: 'primary' | 'danger' | 'success' | 'info' | 'secondary';
 }
 
-export const Link = styled.a<LinkProps>`
+export const Link = styled.span<LinkProps>`
   font-family: ${({ theme }): string => theme.font};
   vertical-align: middle;
   cursor: pointer;

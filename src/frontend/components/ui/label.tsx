@@ -20,8 +20,8 @@ const Label = styled.label.attrs({
   &&& {
     display: block;
     text-transform: uppercase;
-    font-size: ${({ theme }): string => theme.fonts.min};
-    color: ${({ theme }): string => theme.colors.lightText};
+    font-size: ${({ theme }): string => theme.fontSizes.sm};
+    color: ${({ theme }): string => theme.colors.darkGrey};
     font-weight: normal;
     margin: 0 0 8px 0;
     letter-spacing: 0.1em;

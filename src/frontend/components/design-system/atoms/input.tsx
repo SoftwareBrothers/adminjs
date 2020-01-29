@@ -1,10 +1,18 @@
 import styled, { css } from 'styled-components'
-import { space, SpaceProps, layout, LayoutProps } from 'styled-system'
+import { space, SpaceProps, layout, LayoutProps, variant } from 'styled-system'
+
+const variants = variant({
+  variants: {
+    filter: {
+      color: 'white',
+    },
+  },
+})
 
 export const InputStyles = css`
   box-sizing: border-box;
   color: ${({ theme }): string => theme.colors.darkGrey};
-  background: ${({ theme }): string => theme.colors.white};
+  background: transparent;
   border: 1px solid ${({ theme }): string => theme.colors.greyLight};
   font-size: ${({ theme }): string => theme.fontSizes.default};
   line-height: ${({ theme }): string => theme.lineHeights.lg};
@@ -16,9 +24,12 @@ export const InputStyles = css`
   &:focus{
     border-color: ${({ theme }): string => theme.colors.bluePrimary};
   }
+  ${variants}
 `
 
-export type InputProps = SpaceProps | LayoutProps
+export type InputProps = SpaceProps & LayoutProps & {
+  variant?: 'filter';
+}
 
 export const Input = styled.input<InputProps>`
   ${InputStyles}

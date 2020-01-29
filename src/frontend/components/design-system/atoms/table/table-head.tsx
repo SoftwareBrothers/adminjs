@@ -1,13 +1,14 @@
 import styled from 'styled-components'
 
-import { Link } from '../link'
+import { Icon } from '../icon'
 
 const TableHead = styled.thead`
   background: ${({ theme }): string => theme.colors.greyPale};
 
-  & ${Link} > svg {
-    fill: ${({ theme }): string => theme.colors.bluePrimary};
-    padding-left: ${({ theme }): string => theme.space[3]};
+  & a {
+    color: ${({ theme }): string => theme.colors.grey};
+    text-decoration: none;
+    font-size: ${({ theme }): string => theme.fontSizes.sm};
   }
 `
 

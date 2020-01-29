@@ -23,7 +23,7 @@ export default class List extends React.PureComponent<Props> {
     }
 
     return (
-      <Badge>{value ?? value}</Badge>
+      <Badge outline size="sm">{value ?? value}</Badge>
     )
   }
 }

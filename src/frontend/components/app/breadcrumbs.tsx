@@ -4,21 +4,27 @@ import styled from 'styled-components'
 
 import ResourceJSON from '../../../backend/decorators/resource-json.interface'
 import RecordJSON from '../../../backend/decorators/record-json.interface'
-
-const BreadcrumbsContainer = styled.nav.attrs({
-  className: 'breadcrumb',
-})`
-  &&& {
-    margin: ${({ theme }): string => `-${theme.sizes.padding} 0 ${theme.sizes.padding} -10px`};
-    font-size: ${({ theme }): string => theme.fonts.base};
-  }
-`
+import { Box } from '../design-system'
 
 const BreadcrumbLink = styled(Link)`
-  &&& {
-    color: ${({ theme }): string => theme.colors.lightText};
-    &:hover {
-      color: ${({ theme }): string => theme.colors.primary};
+  color: ${({ theme }): string => theme.colors.greyLight};
+  font-family: ${({ theme }): string => theme.font};
+  line-height: ${({ theme }): string => theme.lineHeights.default};
+  font-size: ${({ theme }): string => theme.fontSizes.default};
+  text-decoration: none;
+
+  &:hover {
+    color: ${({ theme }): string => theme.colors.bluePrimary};
+  }
+
+  &:after {
+    content: '/';
+    padding: 0 ${({ theme }): string => theme.space.default};
+  }
+
+  &:last-child {
+    &:after {
+      content: '';
     }
   }
 `
@@ -49,11 +55,9 @@ class Breadcrumbs extends React.PureComponent<Props> {
   renderResource(): React.ReactNode {
     const { resource, record } = this.props
     return (
-      <li>
-        <BreadcrumbLink to={resource.href} className={record ? 'is-active' : ''}>
-          {resource.name}
-        </BreadcrumbLink>
-      </li>
+      <BreadcrumbLink to={resource.href} className={record ? 'is-active' : ''}>
+        {resource.name}
+      </BreadcrumbLink>
     )
   }
 
@@ -63,9 +67,7 @@ class Breadcrumbs extends React.PureComponent<Props> {
       || (record && record.recordActions.find(a => a.name === actionName))
     if (action) {
       return (
-        <li className="is-active">
-          <BreadcrumbLink to="#">{action.label}</BreadcrumbLink>
-        </li>
+        <BreadcrumbLink to="#">{action.label}</BreadcrumbLink>
       )
     }
     return null
@@ -73,12 +75,10 @@ class Breadcrumbs extends React.PureComponent<Props> {
 
   render(): ReactNode {
     return (
-      <BreadcrumbsContainer>
-        <ul>
-          {this.renderResource()}
-          {this.renderAction()}
-        </ul>
-      </BreadcrumbsContainer>
+      <Box>
+        {this.renderResource()}
+        {this.renderAction()}
+      </Box>
     )
   }
 }

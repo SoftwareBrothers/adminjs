@@ -9,19 +9,19 @@ export const NavGroupTitle = styled(Text)`
   display: flex;
   cursor: pointer;
 
-  & span {
+  & > ${Text} {
     display: block;
     flex-grow: 1;
-    line-height: ${({ theme }): string => theme.space[4]};
+    line-height: ${({ theme }): string => theme.lineHeights.lg};
   }
 
   & svg {
     vertical-align: middle;
-    padding-bottom: 'sm'px;
+    padding-bottom: 2px;
     flex-shrink: 0;
   }
   & svg:first-child {
-    padding-right: ${({ theme }): string => theme.space[4]};
+    padding-right: ${({ theme }): string => theme.space.lg};
   }
 
   & svg:last-child {

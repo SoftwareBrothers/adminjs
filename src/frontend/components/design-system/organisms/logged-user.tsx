@@ -11,10 +11,6 @@ const LoggedUserInfo = styled(Box)`
   vertical-align: middle;
   color: ${({ theme }): string => theme.colors.grey};
 
-  & ${Icon} {
-    fill: ${({ theme }): string => theme.colors.grey};
-  }
-
   & img {
     border-radius: 9999px;
     margin: 0 8px;
@@ -25,11 +21,11 @@ const LoggedUserInfo = styled(Box)`
 
 export type LoggedUserProps = {
   email: string;
-  role?: string;
+  title?: string;
 }
 
 export const LoggedUser: React.FC<LoggedUserProps> = (props) => {
-  const { email, role } = props
+  const { email, title, children } = props
 
   return (
     <DropDown>
@@ -38,21 +34,19 @@ export const LoggedUser: React.FC<LoggedUserProps> = (props) => {
           <Box>
             <Text
               fontSize="default"
-              lineHeight={role ? 'lg' : 'xl'}
+              lineHeight={title ? 'lg' : 'xl'}
               fontWeight="normal"
             >
               {email}
             </Text>
-            <Text fontSize="sm" color="greyLight" lineHeight="sm">{role}</Text>
+            <Text fontSize="sm" color="greyLight" lineHeight="sm">{title}</Text>
           </Box>
           <img src="https://api.adorable.io/avatars/24/softwarebrothers.png" alt="avatar" />
-          <Icon icon="OverflowMenuVertical" size={16} my="default" />
+          <Icon icon="OverflowMenuVertical" size={16} my="default" color="grey" />
         </LoggedUserInfo>
       </DropDownTrigger>
       <DropDownMenu top="36px">
-        <DropDownItem>
-          Sign out
-        </DropDownItem>
+        {children}
       </DropDownMenu>
     </DropDown>
   )

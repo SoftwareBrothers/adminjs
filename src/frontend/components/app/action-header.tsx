@@ -32,7 +32,7 @@ const BackBtn = styled(Link)`
     width: ${({ theme }): string => theme.sizes.paddingLayout};
     height: ${({ theme }): string => theme.sizes.paddingLayout};
     color: ${({ theme }): string => theme.colors.lightText};
-    font-size: ${({ theme }): string => theme.fonts.base};
+    font-size: ${({ theme }): string => theme.font};
     padding: ${({ theme }): string => theme.sizes.paddingMin};
     background-color: ${({ theme }): string => theme.colors.superLightBack};
     text-align: center;

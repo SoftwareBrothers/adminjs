@@ -10,63 +10,11 @@ import { PropertyPlace } from '../../../backend/decorators/property-json.interfa
 import RecordJSON from '../../../backend/decorators/record-json.interface'
 import Label from '../ui/label'
 import StyledInput from '../ui/styled-input'
+import { Box, H3, Button, Icon, Drawer, DrawerContent, DrawerFooter } from '../design-system'
 
-const FilterWrapper = styled.section`
-  background: ${({ theme }): string => theme.colors.darkBck};
-  flex-shrink: 0;
-  width: ${({ theme }): string => theme.sizes.sidebarWidth};
-  border-left: 1px solid ${({ theme }): string => theme.colors.borderOnDark};
-  color: ${({ theme }): string => theme.colors.filterDefaultText};
-  padding-top: 60px;
-  transition: width 0.5s;
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  overflow-x: hidden;
-  overflow-y: scroll;
-  &.filter-hidden {
-    width: 0;
-    transition: width 0.5s;
-  }
-
-  &&& ${Label}, &&& ${StyledInput} {
-    color: ${({ theme }): string => theme.colors.filterDefaultText};
-  }
-`
-
-const FilterLink = styled.a`
-  color: ${({ theme }): string => theme.colors.filterDefaultText};
-  & > span {
-    opacity: 0.5;
-    color: ${({ theme }): string => theme.colors.lightText};
-    border: 1px solid ${({ theme }): string => theme.colors.lightText};
-    border-radius: 3px;
-    padding: 8px 10px;
-    margin-right: ${({ theme }): string => theme.sizes.padding};
-  }
-  &:hover {
-    color: ${({ theme }): string => theme.colors.primary};
-    & span{
-      color: ${({ theme }): string => theme.colors.primary};
-      border-color: ${({ theme }): string => theme.colors.primary};
-      opacity: 1;
-    }
-  }
-`
-
-const FilterContent = styled.section`
-  padding: ${({ theme }): string => theme.sizes.paddingLayout};
-  width: ${({ theme }): string => theme.sizes.sidebarWidth};
-  min-width: ${({ theme }): string => theme.sizes.sidebarWidth};
-  overflow: hidden;
-  min-height: 100%;
-
-  & a, & button {
-    margin: ${({ theme }): string => theme.sizes.paddingMin} 0;
-    width: 100%;
-  }
-`
+type FilterProps = {
+  isHidden?: boolean;
+}
 
 type Props = {
   resource: ResourceJSON;
@@ -84,7 +32,7 @@ type MatchProps = {
 
 type CombinedProps = Props & RouteComponentProps<MatchProps>
 
-class Filter extends React.Component<CombinedProps, State> {
+class FilterContainer extends React.Component<CombinedProps, State> {
   constructor(props: CombinedProps) {
     super(props)
     this.handleSubmit = this.handleSubmit.bind(this)
@@ -164,13 +112,21 @@ class Filter extends React.Component<CombinedProps, State> {
     const { filter } = this.state
     const properties = resource.filterProperties
     return (
-      <FilterWrapper className={isVisible ? undefined : 'filter-hidden'}>
-        <FilterContent>
-          <FilterLink onClick={toggleFilter}>
-            <span><i className="fas fa-arrow-right" /></span>
-            Filter
-          </FilterLink>
-          <form onSubmit={this.handleSubmit.bind(this)}>
+      <Drawer variant="filter" isHidden={!isVisible} as="form" onSubmit={this.handleSubmit}>
+        <DrawerContent>
+          <H3>
+            <Button
+              type="button"
+              size="icon"
+              rounded
+              mr="lg"
+              onClick={(): void => toggleFilter()}
+            >
+              <Icon icon="ChevronRight" color="white" />
+            </Button>
+            Filters
+          </H3>
+          <Box my="x3">
             {properties.map(property => (
               <PropertyType
                 key={property.name}
@@ -181,21 +137,48 @@ class Filter extends React.Component<CombinedProps, State> {
                 resource={resource}
               />
             ))}
-            <StyledButton className="is-primary">
-              Apply Changes
-            </StyledButton>
-            <StyledButton
-              as="a"
-              className="is-text"
-              onClick={this.resetFilter}
-            >
-              Clear filters
-            </StyledButton>
-          </form>
-        </FilterContent>
-      </FilterWrapper>
+          </Box>
+        </DrawerContent>
+        <DrawerFooter>
+          <Button variant="primary" size="lg">
+            Apply changes
+          </Button>
+          <Button variant="text" size="lg" onClick={this.resetFilter} type="button">
+            Reset filter
+          </Button>
+        </DrawerFooter>
+      </Drawer>
     )
   }
 }
 
-export default withRouter(Filter)
+// <FilterContent>
+//   <FilterLink onClick={toggleFilter}>
+//     <span><i className="fas fa-arrow-right" /></span>
+//     Filter
+//   </FilterLink>
+// <form onSubmit={this.handleSubmit.bind(this)}>
+//   {properties.map(property => (
+//     <PropertyType
+//       key={property.name}
+//       where={PropertyPlace.filter}
+//       onChange={this.handleChange}
+//       property={property}
+//       filter={filter}
+//       resource={resource}
+//     />
+//   ))}
+//   <StyledButton className="is-primary">
+//     Apply Changes
+//   </StyledButton>
+//   <StyledButton
+//     as="a"
+//     className="is-text"
+//     onClick={this.resetFilter}
+//   >
+//     Clear filters
+//   </StyledButton>
+// </form>
+// </FilterContent>
+
+export default withRouter(FilterContainer)
