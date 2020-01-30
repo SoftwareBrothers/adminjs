@@ -1,7 +1,7 @@
 /* eslint-disable react/no-children-prop */
 import React from 'react'
 import { Switch, Route } from 'react-router-dom'
-import styled, { createGlobalStyle } from 'styled-components'
+import { createGlobalStyle } from 'styled-components'
 
 import ViewHelpers from '../../backend/utils/view-helpers'
 import Sidebar from './app/sidebar/sidebar'
@@ -11,7 +11,7 @@ import Notice from './app/notice'
 import {
   Dashboard, ResourceAction, RecordAction, Page, BulkAction, DesignSystem, Resource,
 } from './routes'
-import { Drawer, Box, Navigation } from './design-system'
+import { Drawer, Box } from './design-system'
 
 const GlobalStyle = createGlobalStyle`
   html, body, #app {

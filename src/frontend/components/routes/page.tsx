@@ -5,7 +5,6 @@ import { RouteComponentProps } from 'react-router'
 import ErrorBoundary from '../app/error-boundary'
 import { ReduxState } from '../../store/store'
 import { ErrorMessageBox } from '../ui'
-import Notice from '../app/notice'
 
 declare const AdminBro: {
   UserComponents: Record<string, FunctionComponent>;

@@ -7,10 +7,10 @@ export type BadgeProps = SpaceProps & FontSizeProps & ColorProps & {
   size?: 'sm' | 'lg';
 }
 
-const variantStyle = (color: string, props: BadgeProps) => ({
-  bg: color,
-  borderColor: color,
-  color: props.outline ? color : 'white',
+const variantStyle = (variantColor: string, props: BadgeProps) => ({
+  bg: variantColor,
+  borderColor: variantColor,
+  color: props.outline ? variantColor : 'white',
 })
 
 const colorVariant = (props: BadgeProps) => variant({

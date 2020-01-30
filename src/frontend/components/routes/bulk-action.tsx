@@ -2,7 +2,6 @@ import React, { ReactNode } from 'react'
 import { connect } from 'react-redux'
 
 import { RouteComponentProps } from 'react-router'
-import ActionHeader from '../app/action-header'
 import BaseAction from '../app/base-action-component'
 import ResourceJSON from '../../../backend/decorators/resource-json.interface'
 import { ReduxState } from '../../store/store'

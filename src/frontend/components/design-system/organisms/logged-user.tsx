@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { Box } from '../atoms/box'
-import { DropDown, DropDownTrigger, DropDownMenu, DropDownItem } from './drop-down'
+import { DropDown, DropDownTrigger, DropDownMenu } from './drop-down'
 import { Text } from '../atoms/text'
 import { Icon } from '../atoms/icon'
 

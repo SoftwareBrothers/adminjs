@@ -77,7 +77,7 @@ export const Pagination: React.FC<PaginationProps> = (props) => {
     <PaginationWrapper {...rest}>
       <PaginationLink
         disabled={isFirstPage}
-        onClick={(): void => (!isFirstPage ? onChange(1) : undefined)}
+        onClick={(): void => (!isFirstPage ? onChange(prevPage) : undefined)}
       >
         <Icon icon="ChevronLeft" />
       </PaginationLink>

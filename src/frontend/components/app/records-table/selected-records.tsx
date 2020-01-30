@@ -4,7 +4,7 @@ import ResourceJSON from '../../../../backend/decorators/resource-json.interface
 import RecordJSON from '../../../../backend/decorators/record-json.interface'
 import ActionButton from '../action-button'
 import getBulkActionsFromRecords from './utils/get-bulk-actions-from-records'
-import { TableCaption, Link, Icon, Text } from '../../design-system'
+import { TableCaption, Button, Icon, Text } from '../../design-system'
 
 type Props = {
   resource: ResourceJSON;
@@ -22,7 +22,7 @@ const SelectedRecords: React.FC<Props> = (props) => {
 
   return (
     <TableCaption>
-      <Text as="span" mr="lg">{`selected: ${selectedRecords.length}`}</Text>
+      <Text as="span" mr="lg">{`Selected: (${selectedRecords.length})`}</Text>
       {bulkActions.map(action => (
         <ActionButton
           action={action}
@@ -30,10 +30,10 @@ const SelectedRecords: React.FC<Props> = (props) => {
           resourceId={resource.id}
           recordIds={selectedRecords.map(records => records.id)}
         >
-          <Link variant="primary">
+          <Button variant="text" size="sm">
             <Icon icon={action.icon} />
             {action.label}
-          </Link>
+          </Button>
         </ActionButton>
       ))}
     </TableCaption>

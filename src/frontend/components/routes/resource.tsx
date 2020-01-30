@@ -3,9 +3,6 @@ import { connect } from 'react-redux'
 
 import { RouteComponentProps } from 'react-router'
 import Breadcrumbs from '../app/breadcrumbs'
-import ActionHeader from '../app/action-header'
-import WrapperBox from '../ui/wrapper-box'
-import Notice from '../app/notice'
 import BaseAction from '../app/base-action-component'
 import Filter from '../app/filter'
 import queryHasFilter from './utils/query-has-filter'
@@ -79,24 +76,6 @@ const ResourceAction: React.FC<Props> = (props) => {
     </Box>
   )
 }
-
-// /* <WrapperBox>
-//         <Breadcrumbs resource={resource} actionName={actionName} />
-// <ActionHeader
-//   resource={resource}
-//   action={action}
-//   tag={tag}
-//   toggleFilter={action.showFilter ? (): void => setFilerVisible(!filterVisible) : undefined}
-// />
-//         <BaseAction action={action} resource={resource} setTag={setTag} />
-//       </WrapperBox>
-//       {action.showFilter ? (
-//         <Filter
-//           resource={resource}
-//           isVisible={filterVisible}
-//           toggleFilter={(): void => { setFilerVisible(!filterVisible) }}
-//         />
-//       ) : ''} */}
 
 const mapStateToProps = (state: ReduxState): PropsFromState => ({
   resources: state.resources,

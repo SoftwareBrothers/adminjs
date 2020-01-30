@@ -1,7 +1,5 @@
 import styled from 'styled-components'
 
-import { Icon } from '../icon'
-
 const TableHead = styled.thead`
   background: ${({ theme }): string => theme.colors.greyPale};
 

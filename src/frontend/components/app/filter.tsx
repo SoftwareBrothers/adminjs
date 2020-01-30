@@ -1,15 +1,11 @@
 import React, { ReactNode, MouseEvent, SyntheticEvent } from 'react'
 import { withRouter } from 'react-router-dom'
-import styled from 'styled-components'
 
 import { RouteComponentProps } from 'react-router'
-import StyledButton from '../ui/styled-button'
 import PropertyType from '../property-type'
 import ResourceJSON from '../../../backend/decorators/resource-json.interface'
 import { PropertyPlace } from '../../../backend/decorators/property-json.interface'
 import RecordJSON from '../../../backend/decorators/record-json.interface'
-import Label from '../ui/label'
-import StyledInput from '../ui/styled-input'
 import { Box, H3, Button, Icon, Drawer, DrawerContent, DrawerFooter } from '../design-system'
 
 type FilterProps = {

@@ -1,5 +1,5 @@
 import React from 'react'
-import { withRouter, NavLink } from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
 import { RouteComponentProps } from 'react-router'
 
 import ResourceJSON from '../../../../backend/decorators/resource-json.interface'

@@ -3,7 +3,6 @@ import Select from 'react-select/lib/Async'
 import { ThemeProps, DefaultTheme, withTheme } from 'styled-components'
 import ApiClient from '../../../utils/api-client'
 
-import PropertyInFilter from '../../ui/property-in-filter'
 import { filterStyles } from '../../../styles/select-styles'
 import { FilterPropertyProps, SelectRecord } from '../base-property-props'
 import { FormGroup, Label } from '../../design-system'

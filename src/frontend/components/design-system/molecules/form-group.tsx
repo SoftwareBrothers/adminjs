@@ -1,10 +1,10 @@
 import styled, { css } from 'styled-components'
 import { SpaceProps, space } from 'styled-system'
 
-import { Input } from '../atoms/input'
 import { Label } from '../atoms/label'
 import { Text } from '../atoms/text'
 import { Button } from '../atoms/button'
+import { Input } from '../atoms/input'
 
 const formGroupWithErrorCSS = css`
   color: ${({ theme }): string => theme.colors.red};

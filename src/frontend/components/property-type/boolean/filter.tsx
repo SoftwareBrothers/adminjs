@@ -3,7 +3,6 @@ import Select from 'react-select'
 
 import { withTheme, DefaultTheme, ThemeProps } from 'styled-components'
 import mapValue from './map-value'
-import PropertyInFilter from '../../ui/property-in-filter'
 import { filterStyles } from '../../../styles/select-styles'
 import { FilterPropertyProps } from '../base-property-props'
 import { FormGroup, Label } from '../../design-system'

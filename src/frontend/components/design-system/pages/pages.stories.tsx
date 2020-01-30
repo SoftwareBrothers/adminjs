@@ -2,7 +2,6 @@ import React from 'react'
 
 import { Box } from '../atoms/box'
 import { Navigation, TopBar } from '../templates/template.stories'
-import { FullDrawer } from '../organisms/drawer.stories'
 import { TableStory } from '../organisms/table.stories'
 import { H2 } from '../atoms/header'
 import { Badge } from '../atoms/badge'

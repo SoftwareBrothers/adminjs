@@ -1,10 +1,9 @@
 import React, { ReactNode } from 'react'
-import styled from 'styled-components'
 import { NavLink, withRouter } from 'react-router-dom'
 
 import { RouteComponentProps } from 'react-router'
 import PropertyJSON from '../../../backend/decorators/property-json.interface'
-import { Link, Icon } from '../design-system'
+import { Icon } from '../design-system'
 
 type Props = {
   property: PropertyJSON;

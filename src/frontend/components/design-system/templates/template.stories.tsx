@@ -25,10 +25,10 @@ export const TopBar: React.FC = () => (
         </Text>
       </Box>
     </Box>
-    <Box shrink={0} py={3}>
+    <Box flexShrink={0} py={3}>
       <LoggedUser
         email="wojtek@krysiak.com"
-        role="Administrator"
+        title="Administrator"
       />
     </Box>
   </Box>

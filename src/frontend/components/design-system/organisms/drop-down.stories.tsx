@@ -2,7 +2,6 @@
 import React from 'react'
 import { DropDown, DropDownItem, DropDownTrigger, DropDownMenu } from './drop-down'
 import { Icon } from '../atoms/icon'
-import { Button } from '../atoms/button'
 
 export const DropDownStory = () => (
   <DropDown>
