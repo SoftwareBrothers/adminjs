@@ -39,11 +39,8 @@ const html = ({ action, errorMessage }: LoginTemplateAttributes): string => {
       <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
       <title>AdminPanel</title>
       ${style}
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.5.1/css/bulma.min.css" type="text/css">
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-mfizz/2.4.1/font-mfizz.min.css" type="text/css">
       <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,700" type="text/css">
 
-      <script src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
       <script crossorigin src="https://unpkg.com/react@16/umd/react.${onProd ? 'production.min' : 'development'}.js"></script>
       <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.${onProd ? 'production.min' : 'development'}.js"></script>
     </head>

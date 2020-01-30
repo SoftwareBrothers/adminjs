@@ -20,9 +20,9 @@ export const ListWithSidebar = () => (
       borderColor="greyPale"
       px="lg"
     />
-    <Box flex flexDirection="column" flexGrow="1">
+    <Box flex flexDirection="column" flexGrow={1}>
       <TopBar />
-      <Box flexGrow="1" bg="greyPale" p="xl">
+      <Box flexGrow={1} bg="greyPale" p="xl">
         <H2 mb="lg">
           Adding New Car
           <Badge variant="primary" size="sm" ml="lg">Draft</Badge>
@@ -31,7 +31,7 @@ export const ListWithSidebar = () => (
           <TableStory />
           <Box mt="xxl">
             <Text textAlign="center">
-              <Pagination page={3} perPage={4} total={214} />
+              <Pagination page={3} perPage={4} total={214} onChange={() => { console.log('clicked') }} />
             </Text>
           </Box>
         </Box>

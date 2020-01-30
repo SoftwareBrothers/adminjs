@@ -2,8 +2,8 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 
 import ViewHelpers from '../../../../backend/utils/view-helpers'
-import Label from '../../ui/label'
 import { EditPropertyProps } from '../base-property-props'
+import { Label } from '../../design-system'
 
 interface Props {
   ItemComponent: typeof React.Component;
@@ -18,7 +18,7 @@ export default class List extends React.PureComponent<Props & EditPropertyProps>
       <React.Fragment>
         {property.subProperties.map(subProperty => (
           <div key={subProperty.name}>
-            <Label style={{ display: 'inline' }}>{`${subProperty.label}: `}</Label>
+            <Label inline>{`${subProperty.label}: `}</Label>
             <ItemComponent
               {...this.props}
               key={subProperty.name}

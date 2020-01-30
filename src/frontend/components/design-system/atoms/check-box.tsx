@@ -44,7 +44,7 @@ const StyledCheckbox = styled.a<{checked: boolean | undefined}>`
     box-shadow: 0 0 0 2px ${({ theme }): string => lighten(0.1, theme.colors.bluePrimary)};
   }
   ${HiddenCheckbox}:hover + & {
-    border-color: ${({ theme }): string => theme.colors.borderHover};
+    border-color: ${({ theme }): string => theme.colors.blueHover};
   }
   ${Icon} {
     visibility: ${(props): string => (props.checked ? 'visible' : 'hidden')};
@@ -60,7 +60,7 @@ const StyledCheckbox = styled.a<{checked: boolean | undefined}>`
     width: 24px;
     height: 24px;
     opacity: 0;
-    background: ${({ theme }): string => theme.colors.primary};
+    background: ${({ theme }): string => theme.colors.bluePrimary};
   }
   &:hover:before {
     opacity: 0.1;

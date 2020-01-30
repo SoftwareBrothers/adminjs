@@ -2,7 +2,7 @@ import BaseResource from './backend/adapters/base-resource'
 import BaseDatabase from './backend/adapters/base-database'
 import { PageContext } from './backend/actions/action.interface'
 import { ResourceOptions } from './backend/decorators/resource-options.interface'
-import { colors, sizes, fonts } from './frontend/styles/variables'
+import { colors, sizes } from './frontend/styles/variables'
 import { NonNullishPartialRecord } from './utils/non-nullish-partial-record.type'
 
 /**
@@ -181,7 +181,6 @@ export type VersionProps = {
 export type CSSTheme = {
   colors?: NonNullishPartialRecord<typeof colors>;
   sizes?: NonNullishPartialRecord<typeof sizes>;
-  fonts?: NonNullishPartialRecord<typeof fonts>;
 };
 
 /**

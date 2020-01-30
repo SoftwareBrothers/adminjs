@@ -8,7 +8,7 @@ const DashboardWrapper = styled.section`
   flex-grow: 1;
   align-items: center;
   justify-content: center;
-  padding: ${({ theme }): string => theme.sizes.padding};
+  padding: ${({ theme }): string => theme.space.xl};
 `
 
 const InfoBox = styled.section.attrs({

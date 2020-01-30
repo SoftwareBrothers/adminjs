@@ -69,13 +69,13 @@ export const InputGroup = styled.div`
   } 
 `
 
-export type FormGroupProps = SpaceProps | {
+export type FormGroupProps = SpaceProps & {
   error?: boolean;
 }
 
 export const FormGroup = styled.div<FormGroupProps>`
   width: 100%;
-  ${({ error }): string => (error ? formGroupWithErrorCSS : '')};
+  ${({ error }) => (error ? formGroupWithErrorCSS : '')};
   ${space};
 
   & > ${Input} {

@@ -1,8 +1,8 @@
 import React, { useState, ComponentClass } from 'react'
 import styled from 'styled-components'
 
-import Label from '../ui/label'
 import withNotice, { AddNoticeProps } from '../../store/with-notice'
+import { Label } from '../design-system'
 
 const UploadInput = styled.input`
   font-size: 100px;
@@ -17,7 +17,7 @@ const UploadInput = styled.input`
 
 const ValidationInformation = styled.p`
   &&& {
-    font-size: ${({ theme }): string => theme.fonts.min};
+    font-size: ${({ theme }): string => theme.fontSizes.default};
     label {
       display: inline;
     }
@@ -25,39 +25,10 @@ const ValidationInformation = styled.p`
 `
 
 const Wrapper = styled.div`
-  position: relative;
-  border: dashed ${({ theme }: { theme }): string => theme.colors.border} 1px;
-  text-align: center;
-  padding: ${({ theme }: { theme }): string => theme.sizes.paddingLayout};
-  &:hover{
-    border-color: ${({ theme }: { theme }): string => theme.colors.borderHover};
-  }
 
-  i {
-    color: ${({ theme }: { theme }): string => theme.colors.superLightBack};
-    margin-bottom: 'sm'0px;
-  }
-  
-  .innerWrapper {
-    position: relative;
-  }
 `
 
 const DropMessage = styled.div`
-  position: absolute;
-  border: 5px solid ${({ theme }: { theme }): string => theme.colors.primaryHover};
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  opacity: 0;
-  & > h1 {
-    color: ${({ theme }: { theme }): string => theme.colors.filterDefaultText};
-    font-size: ${({ theme }: { theme }): string => theme.fonts.header};
-    margin-top: ${({ theme }: { theme }): string => theme.sizes.paddingLayout};
-    transition: transform 0.5s;
-  }
-
   &.active {
     background: ${({ theme }: { theme }): string => theme.colors.primary};
     opacity: 1;

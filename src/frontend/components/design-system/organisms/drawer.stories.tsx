@@ -10,9 +10,9 @@ import { FormGroupStory } from '../molecules/form-group.stories'
 
 export const FullDrawer: React.FC = () => (
   <Drawer>
-    <DrawerContent pt={8}>
+    <DrawerContent>
       <H3>
-        <Button size="icon" rounded mr={4}>
+        <Button size="icon" rounded mr="lg">
           <Icon icon="ChevronRight" />
         </Button>
         Edit
@@ -22,7 +22,7 @@ export const FullDrawer: React.FC = () => (
           <Icon icon="Information" />
           Info
         </Button>
-        <Button size="sm" ml={4}>
+        <Button size="sm" ml="lg">
           <Icon icon="Delete" />
           Delete
         </Button>

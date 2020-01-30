@@ -5,8 +5,8 @@ const Wrapper = styled.section.attrs({
   className: 'content',
 })`
   && {
-    padding: 90px ${({ theme }): string => theme.sizes.paddingLayout};
-    background: ${({ theme }): string => theme.colors.superDarkBck};
+    padding: 90px ${({ theme }): string => theme.space.x3};
+    background: ${({ theme }): string => theme.colors.blueFilter};
     color: #fff;
     margin-bottom: 0;
     & > * {

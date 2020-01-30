@@ -45,7 +45,6 @@ space.default = '8px'
 space.lg = '16px'
 space.xl = '24px'
 space.xxl = '32px'
-space.x4 = '48px'
 
 export const sizes = {
   navbarHeight: '64px',

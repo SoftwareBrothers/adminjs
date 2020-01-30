@@ -94,7 +94,7 @@ export type ButtonProps = ColorProps & SpaceProps & TypographyProps & {
   rounded?: boolean;
 }
 
-export const ButtonCSS = css`
+export const ButtonCSS = css<ButtonProps>`
   outline: 0;
   display: inline-block;
   font-family: ${({ theme }): string => theme.font};

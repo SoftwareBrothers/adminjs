@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import WrapperBox from './wrapper-box'
+import { Box } from '../design-system'
 
 const Spinner = styled.div.attrs({
   className: 'lds-facebook',
@@ -16,7 +16,7 @@ const Spinner = styled.div.attrs({
     position: absolute;
     left: 6px;
     width: 13px;
-    background: ${({ theme }): string => theme.colors.primary};
+    background: ${({ theme }): string => theme.colors.bluePrimary};
     animation: lds-facebook 1.2s cubic-bezier(0, 0.5, 0.5, 1) infinite;
   }
   & div:nth-child(1) {
@@ -54,13 +54,13 @@ const Spinner = styled.div.attrs({
  * )
  */
 const Loader: React.FC = () => (
-  <WrapperBox style={{ textAlign: 'center' }}>
+  <Box style={{ textAlign: 'center' }}>
     <Spinner>
       <div />
       <div />
       <div />
     </Spinner>
-  </WrapperBox>
+  </Box>
 )
 
 export default Loader

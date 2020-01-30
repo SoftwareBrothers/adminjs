@@ -42,7 +42,7 @@ export const DropDown: React.FC = (props) => {
   )
 }
 
-export type DropDownMenuProps = PositionProps | {
+export type DropDownMenuProps = PositionProps & {
   isVisible?: boolean;
 }
 

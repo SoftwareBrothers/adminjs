@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import JWPaginate from 'jw-paginate'
 
 import { Box } from '../atoms/box'
-import { Button } from '../atoms/button'
+import { Button, ButtonProps } from '../atoms/button'
 import { Icon } from '../atoms/icon'
 
 export type PaginationProps = {
@@ -27,7 +27,7 @@ export type PaginationProps = {
   onChange: (pageNumber: number) => void;
 }
 
-const PaginationLink = styled(Button).attrs(props => ({
+const PaginationLink = styled(Button).attrs((props: ButtonProps) => ({
   size: 'icon',
   variant: props.variant ? props.variant : 'text',
 }))`

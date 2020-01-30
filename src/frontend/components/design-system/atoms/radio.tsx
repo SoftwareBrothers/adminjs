@@ -9,7 +9,7 @@ const Circle = styled.span`
   margin-left: -4px;
   margin-top: -4px;
   border-radius: 9999px;
-  background: ${({ theme }): string => theme.colors.primary};
+  background: ${({ theme }): string => theme.colors.bluePrimary};
   position: absolute;
   top: 50%;
   left: 50%;

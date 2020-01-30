@@ -42,7 +42,6 @@ export const space = {
 export const sizes = {
   navbarHeight: '64px',
   sidebarWidth: '300px',
-  sidebarMobileWidth: '98px',
 }
 
 export const fontSizes = {

@@ -2,8 +2,7 @@ import React, { ReactNode } from 'react'
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 
-import WrapperBox from './wrapper-box'
-import Label from './label'
+import { Box, Label } from '../design-system'
 
 const OverlayLink = styled(Link)`
   position: absolute;
@@ -15,14 +14,14 @@ const OverlayLink = styled(Link)`
   transition: border-width 0.2s;
   &:hover {
     transition: border-width 0.2s;
-    border-bottom: 5px solid ${({ theme }): string => theme.colors.primary};
+    border-bottom: 5px solid ${({ theme }): string => theme.colors.bluePrimary};
   }
 `
 
 const Level = styled.div.attrs({
   className: 'level',
 })`
-  color: ${(props): string => props.color || props.theme.colors.primary};
+  color: ${(props): string => props.color || props.theme.colors.bluePrimary};
   margin-top: 8px;
 
   & .value {
@@ -58,7 +57,7 @@ const ValueBlock: React.FC<Props> = (props) => {
   const { icon, value, children, color, href, label } = props
 
   return (
-    <WrapperBox border style={{ position: 'relative' }}>
+    <Box>
       {href ? <OverlayLink to={href} /> : ''}
       { label ? <Label>{label}</Label> : '' }
       <Level color={color}>
@@ -70,7 +69,7 @@ const ValueBlock: React.FC<Props> = (props) => {
         </div>
       </Level>
       {children}
-    </WrapperBox>
+    </Box>
   )
 }
 

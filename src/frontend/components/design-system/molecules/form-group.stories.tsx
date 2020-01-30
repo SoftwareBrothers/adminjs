@@ -35,9 +35,7 @@ export const FormGroupStory: React.FC<{error?: boolean}> = (props) => {
       </FormGroup>
       <FormGroup error={error}>
         <Label>Some form data</Label>
-        <InputGroup>
-          <DatePicker />
-        </InputGroup>
+        <InputGroup />
       </FormGroup>
       <FormGroup error={error}>
         <Label>Some form data</Label>

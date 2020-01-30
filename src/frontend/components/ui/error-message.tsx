@@ -1,5 +1,5 @@
 import React, { ReactNode } from 'react'
-import WrapperBox from './wrapper-box'
+import { Box } from '../design-system/atoms/box'
 
 type Props = {
   children: ReactNode;
@@ -30,16 +30,14 @@ export type ErrorMessageBoxProps = {
 const ErrorMessageBox: React.FC<ErrorMessageBoxProps> = (props) => {
   const { children, title, testId } = props
   return (
-    <WrapperBox>
-      <WrapperBox border data-testid={testId}>
-        <div className="content has-text-centered">
-          <h3>{title}</h3>
-          <div>
-            {children}
-          </div>
+    <Box data-testid={testId}>
+      <div className="content has-text-centered">
+        <h3>{title}</h3>
+        <div>
+          {children}
         </div>
-      </WrapperBox>
-    </WrapperBox>
+      </div>
+    </Box>
   )
 }
 

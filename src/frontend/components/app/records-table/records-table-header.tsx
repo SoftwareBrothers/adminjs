@@ -61,7 +61,7 @@ type Props = {
  *    <tbody><tr>
  *      <td>John</td>
  *      <td>Doe</td>
- *      <td><StyledButton>Do something with John</StyledButton></td>
+ *      <td></td>
  *    </tr></tbody>
  *   </Table>
  * </WrapperBox>

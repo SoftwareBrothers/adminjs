@@ -24,7 +24,7 @@ factory.extend<ResourceJSON>('ResourceJSON', 'ResourceJSON.full', {}, {
     const properties = [
       await factory.build<PropertyJSON>('PropertyJSON', { name: 'name', isTitle: true }),
       await factory.build<PropertyJSON>('PropertyJSON', { name: 'surname' }),
-      await factory.build<PropertyJSON>('PropertyJSON', { name: 'content', type: 'wysiwig' }),
+      await factory.build<PropertyJSON>('PropertyJSON', { name: 'content', type: 'string' }),
       await factory.build<PropertyJSON>('PropertyJSON', { name: 'longerData', type: 'textarea' }),
       // await factory.build<PropertyJSON>('PropertyJSON', { name: 'publishedAt', type: 'date' }),
       await factory.build<PropertyJSON>('PropertyJSON', { name: 'gender',

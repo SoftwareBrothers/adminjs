@@ -8,8 +8,8 @@ import convertParamsToArrayItems from './convert-params-to-array-items'
 import StyledSection from '../../ui/styled-section'
 import PropertyJSON from '../../../../backend/decorators/property-json.interface'
 import RecordJSON from '../../../../backend/decorators/record-json.interface'
-import { StyledButton } from '../../ui'
 import updateParamsArray from './update-params-array'
+import { Button } from '../../design-system'
 
 const normalizeParams = (params: RecordJSON['params']): RecordJSON['params'] => (
   flatten<string, any>(unflatten(params, { overwrite: true }))
@@ -76,12 +76,13 @@ export default class Edit extends React.Component<Props> {
           />
         </Column>
         <Column width={2}>
-          <StyledButton
+          <Button
+            type="button"
             style={{ marginTop: 25 }}
             onClick={(event): false => this.removeItem(i, event)}
           >
             Remove
-          </StyledButton>
+          </Button>
         </Column>
       </Columns>
     )
@@ -94,9 +95,9 @@ export default class Edit extends React.Component<Props> {
       <StyledSection style={{ marginTop: 20 }}>
         {items.map((item, i) => this.renderItem(item, i))}
         <p>
-          <StyledButton onClick={this.addNew}>
+          <Button onClick={this.addNew} type="button">
             Add new item
-          </StyledButton>
+          </Button>
         </p>
       </StyledSection>
     )

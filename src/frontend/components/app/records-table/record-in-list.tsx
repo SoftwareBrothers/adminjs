@@ -118,17 +118,3 @@ class RecordInList extends React.PureComponent<Props & RouteComponentProps> {
 }
 
 export default withRouter(RecordInList)
-
-
-// <Dropdown className="is-right is-hoverable">
-// {recordActions.map(action => (
-//   <ActionButton
-//     action={action}
-//     key={action.name}
-//     resourceId={resource.id}
-//     recordId={record.id}
-//     actionPerformed={actionPerformed}
-//     className="is-white in-dropdown"
-//   />
-// ))}
-// </Dropdown>
