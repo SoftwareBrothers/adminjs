@@ -1,11 +1,5 @@
 import React, { ReactNode } from 'react'
-import styled from 'styled-components'
-
-import Label from './label'
-
-const Property = styled.div`
-  margin-bottom: ${({ theme }): string => theme.sizes.paddingLayout};
-`
+import { Box, Label } from '../design-system'
 
 /**
  * Wraps input with label in Show
@@ -27,10 +21,10 @@ const Property = styled.div`
 const PropertyInShow: React.FC<Props> = (props) => {
   const { property, children } = props
   return (
-    <Property data-testid={`PropertyInShow-${property.name}`}>
+    <Box data-testid={`PropertyInShow-${property.name}`} mb="xl">
       <Label>{property.label}</Label>
       {children}
-    </Property>
+    </Box>
   )
 }
 

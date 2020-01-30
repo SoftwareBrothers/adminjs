@@ -1,9 +1,8 @@
 import React from 'react'
-import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 
+import styled from 'styled-components'
 import ActionButton from './action-button'
-import StyledButton from '../ui/styled-button'
 
 import ViewHelpers from '../../../backend/utils/view-helpers'
 
@@ -11,50 +10,7 @@ import ResourceJSON from '../../../backend/decorators/resource-json.interface'
 import ActionJSON from '../../../backend/decorators/action-json.interface'
 import RecordJSON from '../../../backend/decorators/record-json.interface'
 
-import { Badge, H1, Drawer, Button, Icon } from '../design-system'
-
-const HeaderWrapper = styled.section`
-  margin-bottom: ${({ theme }): string => theme.sizes.padding};
-  display: flex;
-
-  & ${H1} {
-    flex-grow: 1;
-  }
-
-  ${Drawer} & {
-    display: block;
-  }
-`
-
-const BackBtn = styled(Link)`
-  &&& {
-    border-radius: 50%;
-    width: ${({ theme }): string => theme.sizes.paddingLayout};
-    height: ${({ theme }): string => theme.sizes.paddingLayout};
-    color: ${({ theme }): string => theme.colors.lightText};
-    font-size: ${({ theme }): string => theme.font};
-    padding: ${({ theme }): string => theme.sizes.paddingMin};
-    background-color: ${({ theme }): string => theme.colors.superLightBack};
-    text-align: center;
-    margin-right: ${({ theme }): string => theme.sizes.padding};
-    &:hover{
-      background-color: ${({ theme }): string => theme.colors.lightText};
-      color: #fff;
-    }
-  }
-`
-
-const HeaderButtons = styled.div`
-  ${Drawer} & a {
-    margin-left: 0;
-    margin-right: ${({ theme }): string => theme.sizes.padding};
-  }
-  ${Drawer} & {
-    margin: ${({ theme }): string => theme.sizes.paddingLayout} 0;
-    padding-bottom: ${({ theme }): string => theme.sizes.paddingLayout};
-    border-bottom: 1px solid ${({ theme }): string => theme.colors.border};
-  }
-`
+import { Box, Badge, H3, Button, Icon, ButtonCSS } from '../design-system'
 
 /**
  * @memberof ActionHeader
@@ -65,10 +21,11 @@ interface Props {
   record?: RecordJSON;
   toggleFilter?: () => any;
   actionPerformed?: () => any;
-  recordId?: string;
-  action?: ActionJSON;
+  action: ActionJSON;
   tag?: string;
 }
+
+const StyledLink = styled(Link)`${ButtonCSS}`
 
 /**
  * Header of an action
@@ -79,7 +36,7 @@ interface Props {
 const ActionHeader: React.FC<Props> = (props) => {
   const h = new ViewHelpers()
   const {
-    resource, toggleFilter, actionPerformed, record, action, tag, recordId,
+    resource, toggleFilter, actionPerformed, record, action, tag,
   } = props
   const resourceId = resource.id
   let actions = record ? record.recordActions : resource.resourceActions
@@ -91,28 +48,32 @@ const ActionHeader: React.FC<Props> = (props) => {
   const isList = action && action.name === 'list'
 
   return (
-    <HeaderWrapper>
-      <H1>
-        {!isList && (
-          <BackBtn
+    <Box>
+      <H3>
+        {!isList ? (
+          <StyledLink
+            size="icon"
             to={h.resourceUrl({ resourceId, search: window.location.search })}
+            rounded
+            mr="lg"
+            type="button"
           >
-            <i className="icomoon-pagination-left" />
-          </BackBtn>
-        )}
+            <Icon icon="ChevronRight" />
+          </StyledLink>
+        ) : ''}
         {title}
-        {tag ? (<Badge variant="primary" ml={3}>{tag}</Badge>) : ''}
-      </H1>
-      <HeaderButtons>
+        {tag ? (<Badge variant="primary" ml="default">{tag}</Badge>) : ''}
+      </H3>
+      <Box my="xl">
         {actions.map(headerAction => (
           <ActionButton
             action={headerAction}
             key={headerAction.name}
             actionPerformed={actionPerformed}
             resourceId={resource.id}
-            recordId={recordId}
+            recordId={record && record.id}
           >
-            <Button as="span" mr={3} variant="primary">
+            <Button as="span" mr="default" variant="primary">
               <Icon icon={headerAction.icon} />
               {headerAction.label}
             </Button>
@@ -124,8 +85,8 @@ const ActionHeader: React.FC<Props> = (props) => {
             Filter
           </Button>
         )}
-      </HeaderButtons>
-    </HeaderWrapper>
+      </Box>
+    </Box>
   )
 }
 

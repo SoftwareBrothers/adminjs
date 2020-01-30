@@ -4,13 +4,14 @@ import { withRouter } from 'react-router-dom'
 import { RouteComponentProps } from 'react-router'
 import PropertyType from '../property-type'
 import ApiClient from '../../utils/api-client'
-import StyledButton from '../ui/styled-button'
 import withNotice, { AddNoticeProps } from '../../store/with-notice'
 import { ActionProps } from './action.props'
 import { PropertyPlace } from '../../../backend/decorators/property-json.interface'
 import RecordJSON from '../../../backend/decorators/record-json.interface'
 import recordToFormData from './record-to-form-data'
 import { appendForceRefresh } from './utils/append-force-refresh'
+import { DrawerContent, Box, DrawerFooter, Button } from '../design-system'
+import ActionHeader from '../app/action-header'
 
 type State = {
   record: RecordJSON;
@@ -32,6 +33,7 @@ class New extends React.Component<ActionProps & AddNoticeProps & RouteComponentP
     const { record } = props
     this.api = new ApiClient()
     this.handleChange = this.handleChange.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this)
     this.state = {
       record: {
         ...record,
@@ -112,25 +114,26 @@ class New extends React.Component<ActionProps & AddNoticeProps & RouteComponentP
     const properties = resource.editProperties
     const { record, loading } = this.state
     return (
-      <form onSubmit={this.handleSubmit.bind(this)}>
-        {properties.map(property => (
-          <PropertyType
-            key={property.name}
-            where={PropertyPlace.edit}
-            property={property}
-            resource={resource}
-            onChange={this.handleChange}
-            record={record}
-          />
-        ))}
-        <StyledButton
-          type="submit"
-          className={`is-primary${loading ? ' is-loading' : ''}`}
-        >
-          <i className="icomoon-save" />
-          <span className="btn-text">Save</span>
-        </StyledButton>
-      </form>
+      <Box as="form" onSubmit={this.handleSubmit} flex flexGrow={1} flexDirection="column">
+        <DrawerContent>
+          <ActionHeader {...this.props} />
+          {properties.map(property => (
+            <PropertyType
+              key={property.name}
+              where={PropertyPlace.edit}
+              onChange={this.handleChange}
+              property={property}
+              resource={resource}
+              record={record}
+            />
+          ))}
+        </DrawerContent>
+        <DrawerFooter>
+          <Button variant="primary" size="lg">
+            Save
+          </Button>
+        </DrawerFooter>
+      </Box>
     )
   }
 }

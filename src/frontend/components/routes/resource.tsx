@@ -45,7 +45,7 @@ const ResourceAction: React.FC<Props> = (props) => {
       <Breadcrumbs resource={resource} actionName={actionName} />
       <Box flex flexDirection="row">
         <Box flexGrow={1}>
-          <H2 my="xl">
+          <H2 mb="lg" mt="xl">
             {listAction.label}
             {tag ? (<Badge variant="primary" size="sm" ml="default">{tag}</Badge>) : ''}
           </H2>

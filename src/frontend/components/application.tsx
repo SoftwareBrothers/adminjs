@@ -49,7 +49,24 @@ const App: React.FC = () => {
           </Box>
           <Switch>
             <Route path={resourceUrl} component={Resource} />
+            <Route path={pageUrl} exact component={Page} />
           </Switch>
+          <Route
+            path={recordActionUrl}
+            children={props => (
+              <Drawer isHidden={!props.match}>
+                {props.match && <RecordAction {...props} />}
+              </Drawer>
+            )}
+          />
+          <Route
+            path={resourceActionUrl}
+            children={props => (
+              <Drawer isHidden={!props.match}>
+                {props.match && <ResourceAction {...props as any} />}
+              </Drawer>
+            )}
+          />
         </Box>
       </Box>
     </React.Fragment>
@@ -71,14 +88,7 @@ export default App
 //             <Route path={designSystemUrl} exact component={DesignSystem} />
 //             <Route path={resourceUrl} component={Resource} />
 //           </Switch>
-//           <Route
-//             path={recordActionUrl}
-//             children={props => (
-//               <Drawer hidden={!props.match}>
-//                 {props.match && <RecordAction {...props} />}
-//               </Drawer>
-//             )}
-//           />
+
 //           <Route
 //             path={bulkActionUrl}
 //             children={props => (
@@ -87,13 +97,6 @@ export default App
 //               </Drawer>
 //             )}
 //           />
-//           <Route
-//             path={resourceActionUrl}
-//             children={props => (
-//               <Drawer hidden={!props.match}>
-//                 {props.match && <ResourceAction {...props as any} />}
-//               </Drawer>
-//             )}
-//           />
+
 //         </Core>
 //       </ApplicationWrapper>

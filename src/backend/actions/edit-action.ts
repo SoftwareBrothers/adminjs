@@ -14,7 +14,7 @@ const EditAction: Action<RecordActionResponse> = {
   name: 'edit',
   isVisible: true,
   actionType: 'record',
-  icon: 'icomoon-edit',
+  icon: 'Edit',
   label: 'Edit',
   /**
    * Responsible for updating existing record.

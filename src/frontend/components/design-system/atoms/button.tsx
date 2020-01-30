@@ -104,6 +104,7 @@ export const ButtonCSS = css`
   cursor: pointer;
   text-decoration: none;
   padding: ${({ theme }): string => theme.space.default} ${({ theme }): string => theme.space.x3};
+  box-sizing: border-box;
 
   & svg {
     vertical-align: middle;

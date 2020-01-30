@@ -4,7 +4,7 @@ import { findDOMNode } from 'react-dom'
 
 import styled from 'styled-components'
 import { EditPropertyProps } from '../base-property-props'
-import { Label } from '../../ui'
+import { FormGroup, Label, FormMessage } from '../../design-system'
 
 const toolbarOptions = [
   [{ header: [1, 2, 3, 4, 5, 6, false] }],
@@ -28,16 +28,16 @@ const Wrapper = styled.div.attrs({
   className: 'control has-icons-right',
 })`
   .ql-toolbar {
-    border-color: ${({ theme }): string => theme.colors.border};
+    border-color: ${({ theme }): string => theme.colors.greyLight};
 
     .ql-picker {
-      color: ${({ theme }): string => theme.colors.lightText};
+      color: ${({ theme }): string => theme.colors.grey};
     }
   }
 
   .ql-container {
-    border-color: ${({ theme }): string => theme.colors.border};
-    background: ${({ theme }): string => theme.colors.inputBck};
+    border-color: ${({ theme }): string => theme.colors.greyLight};
+    background: ${({ theme }): string => theme.colors.white};
   }
 `
 
@@ -105,15 +105,13 @@ export default class Edit extends React.Component<EditPropertyProps> {
     const { property, record } = this.props
     const error = record.errors && record.errors[property.name]
     return (
-      <div className="field">
+      <FormGroup error={!!error}>
         <Label htmlFor={property.name}>{property.label}</Label>
         <Wrapper>
           <div className="quill-editor" ref={this.wysiwigRef} style={{ height: '400px' }} />
         </Wrapper>
-        {error && (
-          <div className="help is-danger">{error.message}</div>
-        )}
-      </div>
+        <FormMessage>{error && error.message}</FormMessage>
+      </FormGroup>
     )
   }
 }

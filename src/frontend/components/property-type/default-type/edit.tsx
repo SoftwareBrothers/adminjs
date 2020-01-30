@@ -2,10 +2,9 @@ import React, { ReactNode } from 'react'
 import Select from 'react-select'
 import { withTheme, DefaultTheme } from 'styled-components'
 
-import PropertyInEdit from '../../ui/property-in-edit'
-import StyledInput from '../../ui/styled-input'
 import { EditPropertyProps } from '../base-property-props'
 import selectStyles from '../../../styles/select-styles'
+import { Input, FormMessage, FormGroup, Label } from '../../design-system'
 
 type CombinedProps = EditPropertyProps & {theme: DefaultTheme}
 
@@ -47,9 +46,7 @@ class Edit extends React.Component<CombinedProps> {
       )
     }
     return (
-      <StyledInput
-        type="text"
-        className="input"
+      <Input
         id={property.name}
         name={property.name}
         onChange={this.handleInputChange}
@@ -63,9 +60,11 @@ class Edit extends React.Component<CombinedProps> {
     const { property, record } = this.props
     const error = record.errors && record.errors[property.name]
     return (
-      <PropertyInEdit property={property} error={error}>
+      <FormGroup error={!!error}>
+        <Label htmlFor={property.name}>{property.label}</Label>
         {this.renderInput()}
-      </PropertyInEdit>
+        <FormMessage>{error && error.message}</FormMessage>
+      </FormGroup>
     )
   }
 }

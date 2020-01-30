@@ -1,14 +1,20 @@
 import React from 'react'
+import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 
 import ViewHelpers from '../../../../backend/utils/view-helpers'
 import PropertyJSON from '../../../../backend/decorators/property-json.interface'
 import RecordJSON from '../../../../backend/decorators/record-json.interface'
+import { ButtonCSS } from '../../design-system'
 
 interface Props {
   property: PropertyJSON;
   record: RecordJSON;
 }
+
+const StyledLink = styled(Link)`
+  ${ButtonCSS}
+`
 
 const ReferenceValue: React.FC<Props> = (props) => {
   const { property, record } = props
@@ -27,7 +33,7 @@ const ReferenceValue: React.FC<Props> = (props) => {
       resourceId: property.reference, recordId: refId, actionName: 'show',
     })
     return (
-      <Link to={href}>{value}</Link>
+      <StyledLink variant="text" to={href}>{value}</StyledLink>
     )
   }
   return (

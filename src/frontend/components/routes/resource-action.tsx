@@ -28,21 +28,11 @@ const ResourceAction: React.FC<Props> = (props) => {
     return (<NoActionError resourceId={resourceId} actionName={actionName} />)
   }
 
-  const [tag, setTag] = useState('')
-
   return (
-    <React.Fragment>
-      <ActionHeader
-        resource={resource}
-        action={action}
-        tag={tag}
-      />
-      <BaseActionComponent
-        action={action}
-        resource={resource}
-        setTag={setTag}
-      />
-    </React.Fragment>
+    <BaseActionComponent
+      action={action}
+      resource={resource}
+    />
   )
 }
 

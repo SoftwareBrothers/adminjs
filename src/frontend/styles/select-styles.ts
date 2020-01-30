@@ -6,7 +6,7 @@ const selectStyles = (theme: DefaultTheme) => ({
     ...provided,
     border: state.isFocused
       ? `1px solid ${theme.colors.bluePrimary}`
-      : `1px solid ${theme.colors.greyPale}`,
+      : `1px solid ${theme.colors.greyLight}`,
     borderRadius: '0px',
     background: theme.colors.white,
     color: theme.colors.darkGrey,

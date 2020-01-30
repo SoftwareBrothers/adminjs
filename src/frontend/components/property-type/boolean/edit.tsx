@@ -1,8 +1,7 @@
 import React from 'react'
 
-import PropertyInEdit from '../../ui/property-in-edit'
 import { EditPropertyProps } from '../base-property-props'
-import { CheckBox } from '../../design-system'
+import { CheckBox, FormGroup, Label, FormMessage } from '../../design-system'
 
 const Edit: React.FC<EditPropertyProps> = (props) => {
   const { property, onChange, record } = props
@@ -10,14 +9,16 @@ const Edit: React.FC<EditPropertyProps> = (props) => {
   const error = record.errors && record.errors[property.name]
 
   return (
-    <PropertyInEdit property={property} error={error}>
+    <FormGroup error={!!error}>
+      <Label htmlFor={property.name}>{property.label}</Label>
       <CheckBox
         id={property.name}
         name={property.name}
         onChange={(): void => onChange(property.name, !value)}
         checked={value}
       />
-    </PropertyInEdit>
+      <FormMessage>{error && error.message}</FormMessage>
+    </FormGroup>
   )
 }
 

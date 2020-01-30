@@ -106,7 +106,7 @@ const DatePickerWrapper = styled.div`
 
 // TODO: change that
 export type DatePickerProps = {
-  value?: string;
+  value?: string | Date;
   onChange: (date: string) => void;
   variant?: InputProps['variant'];
 }
@@ -121,9 +121,16 @@ export const DatePicker: React.FC<DatePickerProps> = (props) => {
 
   const [hidden, setHidden] = useState(true)
 
-  let dateValue = value
-  if (dateValue && dateValue.constructor.name !== 'Date') {
-    dateValue = Date.parse(dateValue) || undefined
+  let dateValue: Date | undefined
+  let stringValue: string | undefined = value && value.toString()
+
+  if (value && value.constructor.name !== 'Date') {
+    const dateNum = Date.parse(value as string) || undefined
+    if (dateNum) {
+      dateValue = new Date(dateNum)
+    }
+  } else if (value && value.constructor.name === 'Date') {
+    stringValue = format(value as Date)
   }
 
   const onDatePickerChange = (date: Date) => {
@@ -139,7 +146,7 @@ export const DatePicker: React.FC<DatePickerProps> = (props) => {
       <StyledDatePicker>
         <Input
           variant={variant}
-          value={value || ''}
+          value={stringValue || ''}
           onChange={event => onChange(event.target.value)}
           onFocus={(): void => setHidden(false)}
         />

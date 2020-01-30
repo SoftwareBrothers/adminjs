@@ -1,8 +1,7 @@
 import React, { ReactNode } from 'react'
 
-import PropertyInEdit from '../../ui/property-in-edit'
-import StyledInput from '../../ui/styled-input'
 import { EditPropertyProps } from '../base-property-props'
+import { Input, Label, FormGroup, FormMessage } from '../../design-system'
 
 class Edit extends React.Component<EditPropertyProps> {
   constructor(props) {
@@ -26,10 +25,10 @@ class Edit extends React.Component<EditPropertyProps> {
       : ''
     const error = record.errors && record.errors[property.name]
     return (
-      <PropertyInEdit property={property} error={error}>
-        <StyledInput
+      <FormGroup error={!!error}>
+        <Label htmlFor={property.name}>{property.label}</Label>
+        <Input
           as="textarea"
-          className="input"
           rows={(value.match(/\n/g) || []).length + 1}
           id={property.name}
           name={property.name}
@@ -37,7 +36,8 @@ class Edit extends React.Component<EditPropertyProps> {
           value={value}
           disabled={property.isDisabled}
         />
-      </PropertyInEdit>
+        <FormMessage>{error && error.message}</FormMessage>
+      </FormGroup>
     )
   }
 }

@@ -14,7 +14,7 @@ const DeleteAction: Action<RecordActionResponse> = {
   name: 'delete',
   isVisible: true,
   actionType: 'record',
-  icon: 'icomoon-remove-2',
+  icon: 'Delete',
   label: 'Remove',
   guard: 'Do you really want to remove this item?',
   component: false,

@@ -1,26 +1,39 @@
-import React from 'react'
+import React, { useState } from 'react'
 
-import PropertyInEdit from '../../ui/property-in-edit'
-import StyledInput from '../../ui/styled-input'
 import { EditPropertyProps } from '../base-property-props'
+import { Label, Input, FormGroup, InputGroup, FormMessage, Button, Icon } from '../../design-system'
 
 const Edit: React.FC<EditPropertyProps> = (props) => {
   const { property, record, onChange } = props
   const value = record.params[property.name]
   const error = record.errors && record.errors[property.name]
 
+  const [isInput, setIsInput] = useState(false)
+
   return (
-    <PropertyInEdit property={property} error={error}>
-      <StyledInput
-        type="password"
-        className="input"
-        id={property.name}
-        name={property.name}
-        onChange={(event): void => onChange(property.name, event.target.value)}
-        value={value}
-        disabled={property.isDisabled}
-      />
-    </PropertyInEdit>
+    <FormGroup error={!!error}>
+      <Label htmlFor={property.name}>{property.label}</Label>
+      <InputGroup>
+        <Input
+          type={isInput ? 'input' : 'password'}
+          className="input"
+          id={property.name}
+          name={property.name}
+          onChange={(event): void => onChange(property.name, event.target.value)}
+          value={value}
+          disabled={property.isDisabled}
+        />
+        <Button
+          variant={isInput ? 'primary' : 'text'}
+          type="button"
+          size="icon"
+          onClick={(): void => setIsInput(!isInput)}
+        >
+          <Icon icon="View" />
+        </Button>
+      </InputGroup>
+      <FormMessage>{error && error.message}</FormMessage>
+    </FormGroup>
   )
 }
 

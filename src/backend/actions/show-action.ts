@@ -13,7 +13,7 @@ const ShowAction: Action<RecordActionResponse> = {
   name: 'show',
   isVisible: true,
   actionType: 'record',
-  icon: 'icomoon-info',
+  icon: 'Screen',
   label: 'Info',
   /**
    * Responsible for returning data for given record.

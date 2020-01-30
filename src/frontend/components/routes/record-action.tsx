@@ -2,7 +2,7 @@ import React, { ReactNode } from 'react'
 import { connect } from 'react-redux'
 
 import { RouteComponentProps } from 'react-router'
-import ActionHeader from '../app/action-header'
+
 import Loader from '../ui/loader'
 import BaseActionComponent from '../app/base-action-component'
 import ApiClient from '../../utils/api-client'
@@ -113,25 +113,16 @@ class RecordAction extends React.Component<Props & AddNoticeProps, State> {
       return (<NoRecordError resourceId={resourceId} recordId={recordId} />)
     }
 
+    if (isLoading) {
+      return <Loader />
+    }
+
     return (
-      <React.Fragment>
-        <ActionHeader
-          resource={resource}
-          recordId={recordId}
-          action={action}
-          record={record}
-        />
-        {isLoading
-          ? <Loader />
-          : (
-            <BaseActionComponent
-              action={action as ActionJSON}
-              resource={resource}
-              record={record}
-            />
-          )
-        }
-      </React.Fragment>
+      <BaseActionComponent
+        action={action as ActionJSON}
+        resource={resource}
+        record={record}
+      />
     )
   }
 }
