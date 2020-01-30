@@ -15,6 +15,7 @@ import * as password from './password'
 import { BasePropertyProps } from './base-property-props'
 import { PropertyPlace } from '../../../backend/decorators/property-json.interface'
 import { PropertyType } from '../../../backend/adapters/base-property'
+import { Box } from '../design-system'
 
 let globalAny: any = {}
 
@@ -207,6 +208,8 @@ export default class BasePropertyComponent extends React.Component<Props, State>
     const { property, resource, record, filter, where, onChange } = this.props
     const { isClient } = this.state
 
+    const testId = `property-${where}-${property.name}`
+
     let Component: ReactComponentLike = (types[property.type] && types[property.type][where])
     || defaultType[where]
 
@@ -218,13 +221,15 @@ export default class BasePropertyComponent extends React.Component<Props, State>
       Component = globalAny.AdminBro.UserComponents[component]
       return (
         <ErrorBoundary>
-          <Component
-            property={property}
-            resource={resource}
-            record={record}
-            filter={filter}
-            onChange={onChange}
-          />
+          <Box data-testid={testId}>
+            <Component
+              property={property}
+              resource={resource}
+              record={record}
+              filter={filter}
+              onChange={onChange}
+            />
+          </Box>
         </ErrorBoundary>
       )
     }
@@ -254,13 +259,15 @@ export default class BasePropertyComponent extends React.Component<Props, State>
 
     return (
       <ErrorBoundary>
-        <Component
-          property={property}
-          resource={resource}
-          record={record}
-          filter={filter}
-          onChange={onChange}
-        />
+        <Box data-testid={testId}>
+          <Component
+            property={property}
+            resource={resource}
+            record={record}
+            filter={filter}
+            onChange={onChange}
+          />
+        </Box>
       </ErrorBoundary>
     )
   }

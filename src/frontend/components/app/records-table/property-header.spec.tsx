@@ -62,18 +62,7 @@ describe('<PropertyHeader />', function () {
     it('doesn\'t render a sort indicator', function () {
       const { container } = renderSubject(property, sortBy, direction)
 
-      expect(container.querySelector('i')).to.be.null
-    })
-  })
-
-  context('selected and searchable field', function () {
-    it('renders a sort indicator', function () {
-      const { container } = renderSubject(property, property.name, 'asc')
-
-      const icon = container.querySelector('i') as HTMLElement
-
-      expect(icon).not.to.be.null
-      expect(icon.classList['0']).to.equal('icomoon-dropdown-open')
+      expect(container.querySelector('svg')).to.be.null
     })
   })
 })

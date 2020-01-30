@@ -92,7 +92,7 @@ describe('<RecordAction />', function () {
       }, `/resources/${resource.id}/records/1234/edit`)
 
       await Promise.all(resource.editProperties.map(async (property) => {
-        const propertyInEdit = await findByTestId(`PropertyInEdit-${property.name}`)
+        const propertyInEdit = await findByTestId(`property-edit-${property.name}`)
         expect(propertyInEdit).not.to.be.undefined
         return propertyInEdit
       }))
