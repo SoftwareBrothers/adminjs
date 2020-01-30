@@ -67,6 +67,14 @@ const App: React.FC = () => {
               </Drawer>
             )}
           />
+          <Route
+            path={bulkActionUrl}
+            children={props => (
+              <Drawer isHidden={!props.match}>
+                {props.match && <BulkAction {...props} />}
+              </Drawer>
+            )}
+          />
         </Box>
       </Box>
     </React.Fragment>
@@ -89,14 +97,6 @@ export default App
 //             <Route path={resourceUrl} component={Resource} />
 //           </Switch>
 
-//           <Route
-//             path={bulkActionUrl}
-//             children={props => (
-//               <Drawer hidden={!props.match}>
-//                 {props.match && <BulkAction {...props} />}
-//               </Drawer>
-//             )}
-//           />
 
 //         </Core>
 //       </ApplicationWrapper>

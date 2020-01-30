@@ -4,12 +4,15 @@ import { RouteComponentProps, withRouter } from 'react-router'
 import PropertyType from '../property-type'
 import { ActionProps } from './action.props'
 import { PropertyPlace } from '../../../backend/decorators/property-json.interface'
-import { ErrorMessageBox, StyledButton } from '../ui'
 import ApiClient from '../../utils/api-client'
 import withNotice, { AddNoticeProps } from '../../store/with-notice'
 import { appendForceRefresh } from './utils/append-force-refresh'
 
-import { Table, TableBody, TableRow, TableCell, H3 } from '../design-system'
+import {
+  Table, TableBody, TableRow, TableCell, Text,
+  DrawerContent, DrawerFooter, Button,
+} from '../design-system'
+import ActionHeader from '../app/action-header'
 
 /**
  * @name ShowAction
@@ -25,9 +28,9 @@ const BulkDelete: React.FC<ActionProps & AddNoticeProps & RouteComponentProps> =
 
   if (!records) {
     return (
-      <ErrorMessageBox title="No records selected">
+      <Text>
         In order to remove records, you have to pick them first.
-      </ErrorMessageBox>
+      </Text>
     )
   }
 
@@ -63,31 +66,35 @@ const BulkDelete: React.FC<ActionProps & AddNoticeProps & RouteComponentProps> =
 
   return (
     <React.Fragment>
-      <H3>Following records will be removed:</H3>
-      <Table>
-        <TableBody>
-          {records.map(record => (
-            <TableRow key={record.id}>
-              <TableCell>
-                <PropertyType
-                  where={PropertyPlace.list}
-                  property={resource.titleProperty}
-                  resource={resource}
-                  record={record}
-                />
-              </TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-      <p>
-        <StyledButton
-          onClick={handleClick}
-          className={`is-primary${loading ? ' is-loading' : ''}`}
-        >
+      <DrawerContent>
+        <ActionHeader
+          resource={resource}
+          action={action}
+          omitActions
+        />
+        <Text mt="xl" mb="xxl">Following records will be removed:</Text>
+        <Table>
+          <TableBody>
+            {records.map(record => (
+              <TableRow key={record.id}>
+                <TableCell>
+                  <PropertyType
+                    where={PropertyPlace.list}
+                    property={resource.titleProperty}
+                    resource={resource}
+                    record={record}
+                  />
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </DrawerContent>
+      <DrawerFooter>
+        <Button variant="primary" size="lg" onClick={handleClick}>
           {`Confirm the removal of ${records.length} records`}
-        </StyledButton>
-      </p>
+        </Button>
+      </DrawerFooter>
     </React.Fragment>
   )
 }

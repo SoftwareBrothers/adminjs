@@ -23,6 +23,7 @@ interface Props {
   actionPerformed?: () => any;
   action: ActionJSON;
   tag?: string;
+  omitActions?: boolean;
 }
 
 const StyledLink = styled(Link)`${ButtonCSS}`
@@ -36,7 +37,7 @@ const StyledLink = styled(Link)`${ButtonCSS}`
 const ActionHeader: React.FC<Props> = (props) => {
   const h = new ViewHelpers()
   const {
-    resource, toggleFilter, actionPerformed, record, action, tag,
+    resource, toggleFilter, actionPerformed, record, action, tag, omitActions,
   } = props
   const resourceId = resource.id
   let actions = record ? record.recordActions : resource.resourceActions
@@ -64,28 +65,30 @@ const ActionHeader: React.FC<Props> = (props) => {
         {title}
         {tag ? (<Badge variant="primary" ml="default">{tag}</Badge>) : ''}
       </H3>
-      <Box my="xl">
-        {actions.map(headerAction => (
-          <ActionButton
-            action={headerAction}
-            key={headerAction.name}
-            actionPerformed={actionPerformed}
-            resourceId={resource.id}
-            recordId={record && record.id}
-          >
-            <Button as="span" mr="default" variant="primary">
-              <Icon icon={headerAction.icon} />
-              {headerAction.label}
+      {omitActions ? '' : (
+        <Box my="xl">
+          {actions.map(headerAction => (
+            <ActionButton
+              action={headerAction}
+              key={headerAction.name}
+              actionPerformed={actionPerformed}
+              resourceId={resource.id}
+              recordId={record && record.id}
+            >
+              <Button as="span" mr="default" variant="primary">
+                <Icon icon={headerAction.icon} />
+                {headerAction.label}
+              </Button>
+            </ActionButton>
+          ))}
+          {toggleFilter && (
+            <Button onClick={toggleFilter}>
+              <Icon icon="SettingsAdjust" />
+              Filter
             </Button>
-          </ActionButton>
-        ))}
-        {toggleFilter && (
-          <Button onClick={toggleFilter}>
-            <Icon icon="SettingsAdjust" />
-            Filter
-          </Button>
-        )}
-      </Box>
+          )}
+        </Box>
+      )}
     </Box>
   )
 }

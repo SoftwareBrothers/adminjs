@@ -107,25 +107,17 @@ class BulkAction extends React.Component<Props, State> {
       return (<NoActionError resourceId={resourceId} actionName={actionName} />)
     }
 
+    if (isLoading) {
+      return <Loader />
+    }
+
     return (
-      <React.Fragment>
-        <ActionHeader
-          resource={resource}
-          action={action}
-          tag={tag}
-        />
-        {isLoading
-          ? <Loader />
-          : (
-            <BaseAction
-              action={action as ActionJSON}
-              resource={resource}
-              records={records}
-              setTag={this.setTag}
-            />
-          )
-        }
-      </React.Fragment>
+      <BaseAction
+        action={action as ActionJSON}
+        resource={resource}
+        records={records}
+        setTag={this.setTag}
+      />
     )
   }
 }
