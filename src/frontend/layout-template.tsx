@@ -37,7 +37,7 @@ const html = (admin: AdminBro, currentAdmin?: CurrentAdmin, location = '/'): str
     // eslint-disable-next-line react/jsx-filename-extension
     <Provider store={store}>
       <ThemeProvider theme={theme}>
-        <StaticRouter context={context} location={location}>
+        <StaticRouter context={context} location="/">
           <App />
         </StaticRouter>
       </ThemeProvider>

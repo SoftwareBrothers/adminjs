@@ -25,7 +25,9 @@ export const DropDown: React.FC = (props) => {
   const elements = React.Children.map(children, (child: any) => {
     const type = child && child.type && child.type.displayName
     if (type === 'DropDownTrigger') {
-      return React.cloneElement(child, { onHover: () => setIsVisible(!isVisible) })
+      return React.cloneElement(child, {
+        onMouseEnter: () => setIsVisible(true),
+      })
     }
     if (type === 'DropDownMenu') {
       return React.cloneElement(child, { isVisible })
