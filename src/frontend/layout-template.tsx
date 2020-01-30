@@ -84,10 +84,10 @@ const html = (admin: AdminBro, currentAdmin?: CurrentAdmin, location = '/'): str
       ${styles.join('\n')}
     </head>
     <body>
-      <div id="app">${appComponent}</div>
+      <div id="app" />
       <script>
         var app = document.getElementById( 'app' );
-        ReactDOM.hydrate( AdminBro.Application, app );
+        ReactDOM.render( AdminBro.Application, app );
       </script>
       ${scripts.join('\n')}
     </body>
