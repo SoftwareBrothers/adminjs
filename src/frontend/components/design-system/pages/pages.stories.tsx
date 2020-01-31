@@ -16,18 +16,16 @@ export const ListWithSidebar = () => (
   <Box width="1200px" height="900px" flex>
     <Navigation
       width="300px"
-      borderRight="1px solid"
-      borderColor="greyPale"
       px="lg"
     />
     <Box flex flexDirection="column" flexGrow={1}>
       <TopBar />
-      <Box flexGrow={1} bg="greyPale" p="xl">
+      <Box flexGrow={1} variant="grey">
         <H2 mb="lg">
           Adding New Car
           <Badge variant="primary" size="sm" ml="lg">Draft</Badge>
         </H2>
-        <Box p="xxl" bg="white">
+        <Box variant="white">
           <TableStory />
           <Box mt="xxl">
             <Text textAlign="center">

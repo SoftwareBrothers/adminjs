@@ -41,17 +41,17 @@ const PaginationLink = styled(Button).attrs((props: ButtonProps) => ({
 const PaginationWrapper = styled(Box)`
   display: inline-block;
   padding: 2px;
-  border: 1px solid ${({ theme }): string => theme.colors.greyLight};
+  border: 1px solid ${({ theme }): string => theme.colors.grey40};
   & > :first-child {
     width: 56px;
-    border-right: 1px solid ${({ theme }): string => theme.colors.greyLight};
+    border-right: 1px solid ${({ theme }): string => theme.colors.grey40};
   }
   & > :nth-child(2) {
     padding-left: 16px;
   }
   & > :last-child {
     width: 56px;
-    border-left: 1px solid ${({ theme }): string => theme.colors.greyLight};
+    border-left: 1px solid ${({ theme }): string => theme.colors.grey40};
   }
   & > :nth-last-child(2) {
     padding-right: 16px;

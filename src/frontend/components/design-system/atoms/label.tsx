@@ -15,10 +15,11 @@ export type LabelProps = ColorProps & SpaceProps & FontSizeProps & DisplayProps 
   required?: boolean;
   uppercase?: boolean;
   inline?: boolean;
+  disabled?: boolean;
 }
 
 export const Label = styled.label<LabelProps>`
-  display: ${({ inline }): string => (inline ? 'inline' : 'block')};
+  display: ${({ inline }): string => (inline ? 'inline-block' : 'block')};
   font-family: ${({ theme }): string => theme.font};
 
   &:before {
@@ -35,10 +36,11 @@ export const Label = styled.label<LabelProps>`
   ${space};
   ${fontSize};
   ${variants}
+  ${({ disabled, theme }): string => (disabled ? `color: ${theme.colors.greyLight};` : '')}
 `
 
 Label.defaultProps = {
-  color: 'greyDark',
+  color: 'darkGrey',
   mb: 'default',
   fontSize: 'sm',
 }

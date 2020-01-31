@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
-import { lighten } from 'polished'
+import { opacify } from 'polished'
+
+import { Label } from './label'
 
 const Icon = styled.svg`
   fill: none;
@@ -8,9 +10,14 @@ const Icon = styled.svg`
   stroke-width: 2px;
 `
 
-const CheckboxContainer = styled.span`
+export const CheckboxRadioContainer = styled.span`
   display: inline-block;
   vertical-align: middle;
+  & + ${Label} {
+    margin-left: ${({ theme }): string => theme.space.default};
+    vertical-align: middle;
+    margin-bottom: ${({ theme }): string => theme.space.sm};
+  }
 `
 
 // Hide checkbox visually but remain accessible to screen readers.
@@ -27,31 +34,36 @@ const HiddenCheckbox = styled.input.attrs({ type: 'checkbox' })`
   width: 1px;
 `
 
-const StyledCheckbox = styled.a<{checked: boolean | undefined}>`
+type StyledProps = {
+  checked?: boolean;
+  disabled?: boolean;
+}
+
+const StyledCheckbox = styled.a<StyledProps>`
   display: inline-block;
   width: 16px;
   /* when it is placed within a container setting different font size */
   font-size: 12px;
   cursor: pointer;
-  border: 1px solid ${({ theme }): string => theme.colors.black};
+  border: 1px solid ${({ theme }): string => theme.colors.greyLight};
   height: 16px;
-  background: ${({ checked, theme }): string => (checked ? theme.colors.bluePrimary : theme.colors.white)};
+  background: ${({ checked, theme, disabled }): string => (checked ? (disabled ? theme.colors.greyLight : theme.colors.bluePrimary) : theme.colors.white)};
   transition: all 150ms;
   position: relative;
   z-index: 2;
 
   ${HiddenCheckbox}:focus + & {
-    box-shadow: 0 0 0 2px ${({ theme }): string => lighten(0.1, theme.colors.bluePrimary)};
+    box-shadow: 0 2px 4px 0 ${({ theme }): string => opacify(0.3, theme.colors.blueSecondary)};
   }
   ${HiddenCheckbox}:hover + & {
-    border-color: ${({ theme }): string => theme.colors.blueHover};
+    border-color: ${({ theme }): string => theme.colors.grey};
   }
   ${Icon} {
     visibility: ${(props): string => (props.checked ? 'visible' : 'hidden')};
     z-index: 1;
   }
 
-  &:before {
+  &:after {
     content: '';
     position: absolute;
     left: -5px;
@@ -62,7 +74,7 @@ const StyledCheckbox = styled.a<{checked: boolean | undefined}>`
     opacity: 0;
     background: ${({ theme }): string => theme.colors.bluePrimary};
   }
-  &:hover:before {
+  &:after:before {
     opacity: 0.1;
   }
 `
@@ -70,12 +82,12 @@ const StyledCheckbox = styled.a<{checked: boolean | undefined}>`
 export type CheckBoxProps = React.HTMLProps<HTMLInputElement>
 
 export const CheckBox: React.FC<CheckBoxProps> = (props) => {
-  const { className, checked, onChange, ...restProps } = props
+  const { className, checked, onChange, disabled, ...restProps } = props
   let handleChange = onChange
   let isChecked = checked
 
   // When onChange was not provided - it takes care of the state itself
-  if (!handleChange) {
+  if (!handleChange && !disabled) {
     let setChecked
     [isChecked, setChecked] = useState(!!checked)
 
@@ -84,16 +96,22 @@ export const CheckBox: React.FC<CheckBoxProps> = (props) => {
     }
   }
   return (
-    <CheckboxContainer className={className}>
-      <HiddenCheckbox checked={isChecked} onChange={handleChange} {...restProps as {}} />
+    <CheckboxRadioContainer className={className}>
+      <HiddenCheckbox
+        checked={isChecked}
+        onChange={handleChange}
+        {...restProps as {}}
+        disabled={disabled}
+      />
       <StyledCheckbox
         checked={isChecked}
+        disabled={disabled}
         onClick={(event): void => handleChange && handleChange(event as any)}
       >
         <Icon viewBox="0 0 24 24">
           <polyline points="20 6 9 17 4 12" />
         </Icon>
       </StyledCheckbox>
-    </CheckboxContainer>
+    </CheckboxRadioContainer>
   )
 }

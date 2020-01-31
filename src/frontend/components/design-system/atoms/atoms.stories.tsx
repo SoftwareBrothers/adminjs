@@ -1,4 +1,5 @@
 import React from 'react'
+import * as theme from '../theme'
 import { Box } from './box'
 import { Text } from './text'
 import { H1, H2, H3, H4, H5, H6 } from './header'
@@ -7,7 +8,7 @@ import { Icon } from './icon'
 import { Badge } from './badge'
 
 export default {
-  title: 'atoms',
+  title: 'Atoms',
 }
 
 const mainVariants: Array<'primary' | 'danger' | 'success' | 'info' | 'secondary'> = [
@@ -48,64 +49,129 @@ export const Typography: React.FC = () => (
 
 export const Buttons = () => (
   <Box padding="lg">
-    <H3 mb={5}>Buttons</H3>
-    <H4 mb={5}>Variants</H4>
-    <p>
+    <H3 my="lg">Buttons</H3>
+    <H4 my="lg">Variants</H4>
+    <Text>
       <Button>Regular</Button>
       {mainVariants.map(color => (
-        <Button key={color} m={3} variant={color}>{color}</Button>
+        <Button key={color} m="default" variant={color}>{color}</Button>
       ))}
-      <Button ml={3} variant="text">Text</Button>
-    </p>
-    <H4 my={5}>Sizes</H4>
-    <p>
+      <Button ml="default" variant="text">Text</Button>
+    </Text>
+    <H4 my="lg">Sizes</H4>
+    <Text>
       <Button size="sm">Small</Button>
-      <Button ml={3}>Regular size</Button>
-      <Button size="lg" ml={3}>Large</Button>
-    </p>
-    <H4 my={5}>Icons</H4>
-    <p>
-      <Button mr={3}>
+      <Button ml="default">Regular size</Button>
+      <Button size="lg" ml="default">Large</Button>
+    </Text>
+    <H4 my="lg">Icons</H4>
+    <Text>
+      <Button mr="default">
         <Icon icon="Settings" />
         With icon
       </Button>
-      <Button size="icon" mr={3}><Icon icon="Settings" /></Button>
-      <Button rounded size="icon" mr={3}><Icon icon="Settings" /></Button>
-      <Button variant="danger" mr={3}>
+      <Button size="icon" mr="default"><Icon icon="Settings" /></Button>
+      <Button rounded size="icon" mr="default"><Icon icon="Settings" /></Button>
+      <Button variant="danger" mr="default">
         <Icon icon="Delete" />
         Delete me
       </Button>
-    </p>
-    <H4 my={5}>State</H4>
-    <p>
+      <Button mr="default" variant="text" size="sm">
+        <Icon icon="Add" />
+        Create new item
+      </Button>
+    </Text>
+    <H4 my="lg">State</H4>
+    <Text>
       <Button disabled>Disabled</Button>
-      <Button ml={3} variant="primary" disabled>Disabled</Button>
-    </p>
+      <Button ml="default" variant="primary" disabled>Disabled</Button>
+    </Text>
   </Box>
 )
 
 export const Badges = () => (
   <Box p="lg">
-    <H3 mb={5}>Badges</H3>
-    <H4 my={5}>Variants</H4>
+    <H3 mb="xl">Badges</H3>
+    <H4 my="xl">Variants</H4>
     <p>
-      <Badge ml={3}>Default</Badge>
+      <Badge ml="default">Default</Badge>
       {mainVariants.map(color => (
-        <Badge key={color} ml={3} variant={color}>{color}</Badge>
+        <Badge key={color} ml="default" variant={color}>{color}</Badge>
       ))}
     </p>
-    <H4 my={5}>Outline</H4>
+    <H4 my="xl">Outline</H4>
     <p>
-      <Badge ml={3} outline>Default</Badge>
+      <Badge ml="default" outline>Default</Badge>
       {mainVariants.map(color => (
-        <Badge key={color} ml={3} variant={color} outline>{color}</Badge>
+        <Badge key={color} ml="default" variant={color} outline>{color}</Badge>
       ))}
     </p>
     <H4 my={5}>Sizes</H4>
     <p>
-      <Badge ml={3} variant="primary" size="sm">small</Badge>
-      <Badge ml={3} variant="primary">regular</Badge>
-      <Badge ml={3} variant="primary" size="lg">large</Badge>
+      <Badge ml="default" variant="primary" size="sm">small</Badge>
+      <Badge ml="default" variant="primary">regular</Badge>
+      <Badge ml="default" variant="primary" size="lg">large</Badge>
     </p>
   </Box>
 )
+
+export const Colors = () => {
+  const blueColors = Object.keys(theme.colors).filter(color => color.match('blue'))
+  const greyColors = Object.keys(theme.colors).filter(color => color.match(/grey/i))
+  const restColors = Object.keys(theme.colors).filter(color => !color.match(/grey/i) && !color.match('blue'))
+
+  return (
+    <Box>
+      <H3 my="xl">Blues</H3>
+      <Box flex>
+        {blueColors.map(name => (
+          <Text m="default" textAlign="center">
+            <Box display="inline-block" width="60px" height="60px" bg={theme.colors[name]} />
+            <Text>{name}</Text>
+          </Text>
+        ))}
+      </Box>
+      <H3 my="xl">Greys</H3>
+      <Box flex>
+        {greyColors.map(name => (
+          <Text m="default" textAlign="center">
+            <Box display="inline-block" width="60px" height="60px" bg={theme.colors[name]} />
+            <Text>{name}</Text>
+          </Text>
+        ))}
+      </Box>
+      <H3 my="xl">Rest</H3>
+      <Box flex>
+        {restColors.map(name => (
+          <Text m="default" textAlign="center">
+            <Box display="inline-block" width="60px" height="60px" bg={theme.colors[name]} />
+            <Text>{name}</Text>
+          </Text>
+        ))}
+      </Box>
+    </Box>
+  )
+}
+
+export const Spacings = () => {
+  const spaces = Object.keys(theme.space)
+  return (
+    <Box>
+      <H3 my="xl">Spacings</H3>
+      <Box>
+        {spaces.map(name => (
+          <Box>
+            <Text>
+              {name}
+              {' '}
+              [
+              {theme.space[name]}
+              ]
+            </Text>
+            <Box mb="xxl" width="600px" height={theme.space[name]} bg="#C7D2FC" />
+          </Box>
+        ))}
+      </Box>
+    </Box>
+  )
+}

@@ -6,7 +6,7 @@ import { Button } from '../atoms/button'
 import { Icon } from '../atoms/icon'
 import { Box } from '../atoms/box'
 
-import { FormGroupStory } from '../molecules/form-group.stories'
+import { FormElements } from '../molecules/form-group.stories'
 
 export const FullDrawer: React.FC = () => (
   <Drawer>
@@ -27,7 +27,7 @@ export const FullDrawer: React.FC = () => (
           Delete
         </Button>
       </Box>
-      <FormGroupStory />
+      <FormElements />
     </DrawerContent>
     <DrawerFooter>
       <Button variant="primary">

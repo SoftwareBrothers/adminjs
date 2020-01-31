@@ -6,13 +6,15 @@ import { Text } from '../atoms/text'
 import { H3 } from '../atoms/header'
 import { Icon } from '../atoms/icon'
 import { LoggedUser } from '../organisms/logged-user'
+import { DropDownItem } from '../organisms/drop-down'
+import { Link } from '../atoms/link'
 
 export default {
   title: 'Templates',
 }
 
 export const TopBar: React.FC = () => (
-  <Box height="64px" flex flexDirection="row" borderBottom="1px solid" borderColor="greyPale">
+  <Box height="64px" flex flexDirection="row" borderBottom="1px solid" borderColor="grey40">
     <Box flexGrow={1}>
       <Box py="default" px="xxl">
         <Text color="grey">
@@ -25,11 +27,15 @@ export const TopBar: React.FC = () => (
         </Text>
       </Box>
     </Box>
-    <Box flexShrink={0} py={3}>
+    <Box flexShrink={0} py="default">
       <LoggedUser
         email="wojtek@krysiak.com"
         title="Administrator"
-      />
+      >
+        <DropDownItem>
+          <Link href="#logout">Some element</Link>
+        </DropDownItem>
+      </LoggedUser>
     </Box>
   </Box>
 )

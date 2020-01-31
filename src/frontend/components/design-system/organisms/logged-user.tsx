@@ -30,7 +30,7 @@ export const LoggedUser: React.FC<LoggedUserProps> = (props) => {
   return (
     <DropDown>
       <DropDownTrigger>
-        <LoggedUserInfo pr={5}>
+        <LoggedUserInfo pr="xl">
           <Box>
             <Text
               fontSize="default"

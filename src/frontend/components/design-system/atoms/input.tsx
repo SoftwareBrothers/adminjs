@@ -18,11 +18,14 @@ export const InputStyles = css`
   line-height: ${({ theme }): string => theme.lineHeights.lg};
   font-family: ${({ theme }): string => theme.font};
   outline: none;
-  &:hover{
+  &:hover {
     border-color: ${({ theme }): string => theme.colors.grey};
   }
-  &:focus{
+  &:focus {
     border-color: ${({ theme }): string => theme.colors.bluePrimary};
+  }
+  &:disabled {
+    color: ${({ theme }): string => theme.colors.greyLight};
   }
   ${variants}
 `

@@ -2,18 +2,23 @@
 import React from 'react'
 import { DropDown, DropDownItem, DropDownTrigger, DropDownMenu } from './drop-down'
 import { Icon } from '../atoms/icon'
+import { Link } from '../atoms/link'
 
 export const DropDownStory = () => (
   <DropDown>
-    <DropDownTrigger p={2} m={-2}>
+    <DropDownTrigger p="default">
       <Icon icon="OverflowMenuHorizontal" />
     </DropDownTrigger>
     <DropDownMenu>
       <DropDownItem>
-        <Icon icon="Video" />
-        Some menu item
+        <Link href="/some">
+          <Icon icon="Video" />
+          Some menu item
+        </Link>
       </DropDownItem>
-      <DropDownItem>Other item</DropDownItem>
+      <DropDownItem>
+        <Link href="/some">Other item</Link>
+      </DropDownItem>
     </DropDownMenu>
   </DropDown>
 )

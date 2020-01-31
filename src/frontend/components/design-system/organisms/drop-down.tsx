@@ -6,15 +6,12 @@ import { Link } from '../atoms/link'
 
 export const DropDownTrigger = styled.span<SpaceProps>`
   display: inline-block;
-  z-index: 20;
-  position: relative;
   ${space};
 `
 DropDownTrigger.displayName = 'DropDownTrigger'
 
 const StyledDropDown = styled.div`
   position: relative;
-  z-index: 30;
   display: inline-block;
 `
 

@@ -4,16 +4,17 @@ import { CheckBox } from '../atoms/check-box'
 import { Link } from '../atoms/link'
 import { DropDownStory } from './drop-down.stories'
 import { Icon } from '../atoms/icon'
+import { Button } from '../atoms/button'
 
 // eslint-disable-next-line import/prefer-default-export
 export const TableStory = () => (
   <Table>
     <TableCaption>
       Monthly savings
-      <Link href="/#" variant="primary" ml={6}>
+      <Button variant="text" size="sm">
         <Icon icon="Delete" />
         Remove
-      </Link>
+      </Button>
     </TableCaption>
     <TableHead>
       <TableRow>
@@ -55,7 +56,9 @@ export const TableStory = () => (
         <TableCell>Value 2</TableCell>
         <TableCell>Value 2</TableCell>
         <TableCell>Value 2</TableCell>
-        <TableCell>Value 2</TableCell>
+        <TableCell>
+          <DropDownStory />
+        </TableCell>
       </TableRow>
     </TableBody>
   </Table>

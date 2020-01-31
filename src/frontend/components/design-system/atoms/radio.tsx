@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
-import { lighten } from 'polished'
+import { opacify } from 'polished'
+
+import { CheckboxRadioContainer } from './check-box'
 
 const Circle = styled.span`
   display: block;
@@ -9,15 +11,10 @@ const Circle = styled.span`
   margin-left: -4px;
   margin-top: -4px;
   border-radius: 9999px;
-  background: ${({ theme }): string => theme.colors.bluePrimary};
+  background: ${({ theme }): string => theme.colors.white};
   position: absolute;
   top: 50%;
   left: 50%;
-`
-
-const RadioContainer = styled.span`
-  display: inline-block;
-  vertical-align: middle;
 `
 
 // Hide checkbox visually but remain accessible to screen readers.
@@ -34,7 +31,12 @@ const HiddenRadio = styled.input.attrs({ type: 'radio' })`
   width: 1px;
 `
 
-const StyledRadio = styled.span<{checked: boolean | undefined}>`
+type StyledProps = {
+  checked?: boolean;
+  disabled?: boolean;
+}
+
+const StyledRadio = styled.span<StyledProps>`
   display: inline-block;
   width: 16px;
   cursor: pointer;
@@ -45,7 +47,7 @@ const StyledRadio = styled.span<{checked: boolean | undefined}>`
   position: relative;
 
   ${HiddenRadio}:focus + & {
-    box-shadow: 0 0 0 2px ${({ theme }): string => lighten(0.1, theme.colors.bluePrimary)};
+    box-shadow: 0 2px 4px 0 ${({ theme }): string => opacify(0.3, theme.colors.blueSecondary)};
   }
   ${HiddenRadio}:hover + & {
     border-color: ${({ theme }): string => theme.colors.grey};
@@ -53,17 +55,19 @@ const StyledRadio = styled.span<{checked: boolean | undefined}>`
   ${Circle} {
     visibility: ${({ checked }): string => (checked ? 'visible' : 'hidden')};
   }
+
+  background: ${({ checked, theme, disabled }): string => (checked ? (disabled ? theme.colors.greyLight : theme.colors.bluePrimary) : theme.colors.white)};
 `
 
 export type RadioProps = React.HTMLProps<HTMLInputElement>
 
 export const Radio: React.FC<RadioProps> = (props) => {
-  const { className, checked, onChange, ...restProps } = props
+  const { className, checked, onChange, disabled, ...restProps } = props
   let handleChange = onChange
   let isChecked = checked
 
   // When onChange was not provided - it takes care of the state itself
-  if (!handleChange) {
+  if (!handleChange && !disabled) {
     let setChecked
     [isChecked, setChecked] = useState(!!checked)
 
@@ -72,14 +76,20 @@ export const Radio: React.FC<RadioProps> = (props) => {
     }
   }
   return (
-    <RadioContainer className={className}>
-      <HiddenRadio checked={isChecked} onChange={handleChange} {...restProps as {}} />
+    <CheckboxRadioContainer className={className}>
+      <HiddenRadio
+        checked={isChecked}
+        onChange={handleChange}
+        {...restProps as {}}
+        disabled={disabled}
+      />
       <StyledRadio
         checked={isChecked}
         onClick={(event): void => handleChange && handleChange(event as any)}
+        disabled={disabled}
       >
         <Circle />
       </StyledRadio>
-    </RadioContainer>
+    </CheckboxRadioContainer>
   )
 }

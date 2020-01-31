@@ -5,6 +5,11 @@ import { Label } from '../atoms/label'
 import { Text } from '../atoms/text'
 import { Button } from '../atoms/button'
 import { Input } from '../atoms/input'
+import { Link } from '../atoms/link'
+
+const formGroupDisabledCSS = css`
+  color: ${({ theme }): string => theme.colors.greyLight};
+`
 
 const formGroupWithErrorCSS = css`
   color: ${({ theme }): string => theme.colors.red};
@@ -18,7 +23,7 @@ const formGroupWithErrorCSS = css`
       color: ${({ theme }): string => theme.colors.red};
     }
   }
-  &&& ${Label}, &&& ${Button} {
+  &&& ${Label}, &&& ${Button}, &&& ${Link} {
     border-color: ${({ theme }): string => theme.colors.red};
   }
 `
@@ -41,29 +46,29 @@ export const InputGroup = styled.div`
   ${Input}:not(:last-child) {
     border-right: none;
   }
-  ${Label}, ${Button}:last-child {
-    padding: ${({ theme }): string => theme.space[3]};
+  ${Label}, ${Button}:last-child, ${Link}:last-child {
+    padding: ${({ theme }): string => theme.space.sm};
     border: solid ${({ theme }): string => theme.colors.greyLight};
     border-width: 1px 1px 1px 0;
     margin: 0;
     color: ${({ theme }): string => theme.colors.greyLight};
   }
 
-  ${Label}, ${Button} {
+  ${Label}, ${Button}, ${Link} {
     flex-shrink: 0;
   }
 
-  ${Button}:first-child{
+  ${Button}:first-child, ${Link}:first-child {
     border-right: 0;
   }
 
   ${Input}:hover {
-    & + ${Label}, & + ${Button} {
+    & + ${Label}, & + ${Button}, & + ${Link} {
       border-color: ${({ theme }): string => theme.colors.grey};
     }
   } 
   ${Input}:focus {
-    & + ${Label}, & + ${Button} {
+    & + ${Label}, & + ${Button}, & + ${Link} {
       border-color: ${({ theme }): string => theme.colors.bluePrimary};
     }
   } 
@@ -71,11 +76,13 @@ export const InputGroup = styled.div`
 
 export type FormGroupProps = SpaceProps & {
   error?: boolean;
+  disabled?: boolean;
 }
 
 export const FormGroup = styled.div<FormGroupProps>`
   width: 100%;
   ${({ error }) => (error ? formGroupWithErrorCSS : '')};
+  ${({ disabled }) => (disabled ? formGroupDisabledCSS : '')};
   ${space};
 
   & > ${Input} {
