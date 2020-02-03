@@ -5,7 +5,7 @@ import { typography, TypographyProps, space, SpaceProps, variant, color, ColorPr
 const variants = variant({
   variants: {
     xs: {
-      fontSize: 0,
+      fontSize: 'xs',
     },
     sm: {
       fontSize: 'sm',
@@ -24,6 +24,7 @@ export type TextProps = TypographyProps & SpaceProps & VariantsProps & ColorProp
 
 export const Text = styled.div<TextProps>`
   font-family: ${({ theme }): string => theme.font};
+  color: ${({ theme }): string => theme.colors.black};
   margin: 0;
   padding: 0;
 

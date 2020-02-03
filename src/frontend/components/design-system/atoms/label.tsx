@@ -21,6 +21,9 @@ export type LabelProps = ColorProps & SpaceProps & FontSizeProps & DisplayProps 
 export const Label = styled.label<LabelProps>`
   display: ${({ inline }): string => (inline ? 'inline-block' : 'block')};
   font-family: ${({ theme }): string => theme.font};
+  font-size: ${({ theme }): string => theme.fontSizes.sm};
+  line-height: ${({ theme }): string => theme.lineHeights.default};
+  margin-bottom: ${({ theme, inline }): string => (inline ? 0 : theme.space.default)};
 
   &:before {
     content: "${({ required }): string => (required ? '*' : '')}";
@@ -41,6 +44,4 @@ export const Label = styled.label<LabelProps>`
 
 Label.defaultProps = {
   color: 'darkGrey',
-  mb: 'default',
-  fontSize: 'sm',
 }

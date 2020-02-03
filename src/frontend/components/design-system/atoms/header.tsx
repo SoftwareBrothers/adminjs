@@ -5,6 +5,7 @@ import { Button } from './button'
 
 const Base = styled.h3<TypographyProps & SpaceProps>`
   font-family: ${({ theme }): string => theme.font};
+  color: ${({ theme }): string => theme.colors.black};
   vertical-align: middle;
   margin: ${({ theme }): string => theme.space.default} 0;
   padding: 0;

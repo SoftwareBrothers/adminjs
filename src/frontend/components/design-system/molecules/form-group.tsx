@@ -58,6 +58,10 @@ export const InputGroup = styled.div`
     flex-shrink: 0;
   }
 
+  ${Label}, ${Link} {
+    line-height: ${({ theme }): string => theme.lineHeights.lg};
+  }
+
   ${Button}:first-child, ${Link}:first-child {
     border-right: 0;
   }

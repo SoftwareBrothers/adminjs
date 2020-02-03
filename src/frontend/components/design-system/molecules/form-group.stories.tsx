@@ -12,6 +12,7 @@ import { Link } from '../atoms/link'
 import { CheckBox } from '../atoms/check-box'
 import { Text } from '../atoms/text'
 import { Radio } from '../atoms/radio'
+import { DropZone } from './drop-zone'
 
 export const FormElements: React.FC<{error?: boolean}> = (props) => {
   const { error } = props
@@ -81,6 +82,11 @@ export const FormElements: React.FC<{error?: boolean}> = (props) => {
           <Radio disabled id="radio2" checked />
           <Label inline disabled htmlFor="radio2">radio disabled</Label>
         </Text>
+        <FormMessage />
+      </FormGroup>
+      <FormGroup error={error}>
+        <Label>And upload form</Label>
+        <DropZone />
         <FormMessage />
       </FormGroup>
     </Box>

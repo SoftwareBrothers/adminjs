@@ -8,6 +8,7 @@ import { Icon } from '../atoms/icon'
 import { LoggedUser } from '../organisms/logged-user'
 import { DropDownItem } from '../organisms/drop-down'
 import { Link } from '../atoms/link'
+import { Navigation } from './navigation'
 
 export default {
   title: 'Templates',
@@ -47,8 +48,8 @@ type NavigationProps = {
   px?: string;
 }
 
-export const Navigation: React.FC<NavigationProps> = props => (
-  <Box flex flexDirection="column" {...props}>
+export const NavigationTemplate: React.FC<NavigationProps> = props => (
+  <Navigation {...props}>
     <Box flexShrink={0} px="lg" pb="xxl">
       <H3>
         <Icon icon="Menu" size={24} pr={5} />
@@ -73,5 +74,5 @@ export const Navigation: React.FC<NavigationProps> = props => (
         <Text>Some other page</Text>
       </Box>
     </Box>
-  </Box>
+  </Navigation>
 )

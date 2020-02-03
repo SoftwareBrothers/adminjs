@@ -31,7 +31,7 @@ export const Box = styled.section<BoxProps>`
   min-width: 0;
   ${({ flex }): string => (flex ? 'display: flex;' : '')}
   font-family: ${({ theme }): string => theme.font};
-  line-height: ${({ theme }): string => theme.lineHeights.lg};
+  line-height: ${({ theme }): string => theme.lineHeights.default};
   font-size: ${({ theme }): string => theme.fontSizes.default};
   font-weight: normal;
 
