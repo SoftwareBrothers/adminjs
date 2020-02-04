@@ -79,6 +79,9 @@ export const DropDownItem = styled.span<SpaceProps>`
     padding-right: ${({ theme }): string => theme.space.default};
     fill: ${({ theme }): string => theme.colors.greyLight};
   }
+  & a {
+    color: ${({ theme }): string => theme.colors.darkGrey};
+  }
 
   ${space};
 

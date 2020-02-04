@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 import { Button } from '../button'
+import { Text } from '../text'
 
 const CAPTION_HEIGHT = '46px'
 
@@ -18,11 +19,15 @@ const TableCaption = styled.caption`
   background: ${({ theme }): string => theme.colors.bluePrimary};
   box-sizing: border-box;
 
-  & > ${Button} {
+  & ${Button} {
     color: ${({ theme }): string => theme.colors.white};
     & > span svg {
       fill: ${({ theme }): string => theme.colors.white};
     }
+  }
+
+  & ${Text} {
+    color: ${({ theme }): string => theme.colors.white};
   }
 `
 

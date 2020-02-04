@@ -75,7 +75,7 @@ const ActionHeader: React.FC<Props> = (props) => {
               resourceId={resource.id}
               recordId={record && record.id}
             >
-              <Button as="span" mr="default" variant="primary">
+              <Button as="span" mr="default" mb="default" size="sm">
                 <Icon icon={headerAction.icon} />
                 {headerAction.label}
               </Button>

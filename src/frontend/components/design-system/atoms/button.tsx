@@ -104,7 +104,7 @@ export const ButtonCSS = css<ButtonProps>`
   outline: 0;
   display: inline-block;
   font-family: ${({ theme }): string => theme.font};
-  line-height: ${({ theme }): string => theme.lineHeights.default};
+  line-height: ${({ theme }): string => theme.lineHeights.lg};
   border: 1px solid ${({ theme }): string => theme.colors.bluePrimary};
   color: ${({ theme }): string => theme.colors.bluePrimary};
   cursor: pointer;

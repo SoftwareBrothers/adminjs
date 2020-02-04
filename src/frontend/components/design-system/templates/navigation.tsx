@@ -9,7 +9,7 @@ export const Navigation = styled(Box)`
   display: flex;
   flex-direction: column;
   overflow: auto;
-  border-right: 1px solid ${({ theme }): string => theme.colors.grey40};
+  border-right: 1px solid ${({ theme }): string => theme.colors.greyPale};
   flex-shrink: 0;
   background: 1px solid ${({ theme }): string => theme.colors.white};
 `

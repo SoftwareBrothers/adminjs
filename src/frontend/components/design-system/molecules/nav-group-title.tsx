@@ -12,7 +12,7 @@ export const NavGroupTitle = styled(Text)`
   & > ${Text} {
     display: block;
     flex-grow: 1;
-    line-height: ${({ theme }): string => theme.lineHeights.lg};
+    line-height: ${({ theme }): string => theme.lineHeights.default};
   }
 
   & svg {

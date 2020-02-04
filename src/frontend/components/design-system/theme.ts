@@ -15,7 +15,6 @@ export const colors = {
   grey: '#898A9A',
   greyLight: '#C0C0CA',
   greyPale: '#F6F7FB',
-  grey40: '#C4C5CD',
   white: '#fff',
 
   // Additional

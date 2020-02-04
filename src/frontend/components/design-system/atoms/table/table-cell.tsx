@@ -4,7 +4,7 @@ import { color, space, SpaceProps, ColorProps } from 'styled-system'
 import TableHead from './table-head'
 
 const TableCell = styled.td<SpaceProps | ColorProps>`
-  border-bottom: 1px solid ${({ theme }): string => theme.colors.grey40};
+  border-bottom: 1px solid ${({ theme }): string => theme.colors.greyPale};
   font-size: ${({ theme }): string => theme.fontSizes.default};
   line-height: ${({ theme }): string => theme.lineHeights.default};
   ${color}; 

@@ -11,7 +11,7 @@ const SidebarLink = styled(NavLink)`
     color: ${({ theme }): string => theme.colors.blueHover};
   }
 
-  &.active {
+  &.active span{
     color: ${({ theme }): string => theme.colors.bluePrimary};
   }
 `

@@ -72,13 +72,14 @@ StyledCaption.defaultProps = {
 
 const StyledChildren = styled(Box)`
   padding: ${({ theme }): string => theme.space.lg} ${({ theme }): string => theme.space.xl};
+  background: ${({ theme }): string => theme.colors.white};
   border-style: solid;
   border-width: 0 1px 1px 1px;
   border-color: ${({ theme }): string => theme.colors.paleTreal};
 `
 
 
-export type MessageBoxProps = BoxProps & {
+export type MessageBoxProps = Omit<BoxProps, 'variant'> & {
   onCloseClick?: () => void;
   message?: string;
   variant?: 'error' | 'info' | 'success';

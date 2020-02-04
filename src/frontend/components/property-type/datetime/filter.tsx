@@ -25,7 +25,7 @@ const Filter: React.FC<FilterPropertyProps> = (props) => {
           value={fromValue}
           onChange={(data: string): void => onChange(fromKey, data)}
         />
-        <Label>- To: </Label>
+        <Label mt="default">- To: </Label>
         <DatePicker
           variant="filter"
           value={toValue}

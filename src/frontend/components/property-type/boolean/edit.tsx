@@ -10,13 +10,13 @@ const Edit: React.FC<EditPropertyProps> = (props) => {
 
   return (
     <FormGroup error={!!error}>
-      <Label htmlFor={property.name}>{property.label}</Label>
       <CheckBox
         id={property.name}
         name={property.name}
         onChange={(): void => onChange(property.name, !value)}
         checked={value}
       />
+      <Label inline htmlFor={property.name}>{property.label}</Label>
       <FormMessage>{error && error.message}</FormMessage>
     </FormGroup>
   )

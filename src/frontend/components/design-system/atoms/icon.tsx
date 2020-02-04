@@ -8,7 +8,7 @@ export type IconProps = SpaceProps & ColorProps & {
   icon?: string;
   size?: 16 | 20 | 24 | 32;
   color?: string;
-  bg: string;
+  bg?: string;
   rounded?: boolean;
 }
 

@@ -4,7 +4,7 @@ import RecordInList from './record-in-list'
 import RecordsTableHeader from './records-table-header'
 import NoRecords from './no-records'
 
-import { Table, Box, TableCaption, TableBody } from '../../design-system'
+import { Table, TableBody } from '../../design-system'
 import ResourceJSON from '../../../../backend/decorators/resource-json.interface'
 import RecordJSON from '../../../../backend/decorators/record-json.interface'
 import SelectedRecords from './selected-records'

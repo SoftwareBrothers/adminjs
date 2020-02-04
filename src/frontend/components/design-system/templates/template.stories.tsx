@@ -15,7 +15,7 @@ export default {
 }
 
 export const TopBar: React.FC = () => (
-  <Box height="64px" flex flexDirection="row" borderBottom="1px solid" borderColor="grey40">
+  <Box height="64px" flex flexDirection="row" borderBottom="1px solid" borderColor="greyPale">
     <Box flexGrow={1}>
       <Box py="default" px="xxl">
         <Text color="grey">

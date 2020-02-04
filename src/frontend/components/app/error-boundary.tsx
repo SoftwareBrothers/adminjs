@@ -1,4 +1,6 @@
 import React, { ReactNode } from 'react'
+import { MessageBox } from '../design-system/molecules/message-box'
+import { Text } from '../design-system'
 
 type State = {
   error: any;
@@ -23,10 +25,10 @@ class ErrorBoundary extends React.Component<any, State> {
 
     if (error !== null) {
       return (
-        <div className="notification is-danger">
-          <p>{error.toString()}</p>
-          <p>See development console for more details...</p>
-        </div>
+        <MessageBox m="xl" variant="error" message="Javascript Error">
+          <Text>{error.toString()}</Text>
+          <Text mt="default">See development console for more details...</Text>
+        </MessageBox>
       )
     }
 

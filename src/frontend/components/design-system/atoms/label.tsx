@@ -41,7 +41,3 @@ export const Label = styled.label<LabelProps>`
   ${variants}
   ${({ disabled, theme }): string => (disabled ? `color: ${theme.colors.greyLight};` : '')}
 `
-
-Label.defaultProps = {
-  color: 'darkGrey',
-}

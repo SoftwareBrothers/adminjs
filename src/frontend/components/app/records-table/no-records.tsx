@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom'
 
 import ViewHelpers from '../../../../backend/utils/view-helpers'
 import ResourceJSON from '../../../../backend/decorators/resource-json.interface'
+import { ErrorBox } from '../../design-system/molecules/error-box'
+import { Text, Button, Icon } from '../../design-system'
 
 type Props = {
   resource: ResourceJSON;
@@ -15,18 +17,21 @@ const NoRecords: React.FC<Props> = (props) => {
   const newAction = h.resourceActionUrl({ resourceId: resource.id, actionName: 'new' })
 
   return (
-    <div className="content has-text-centered">
-      <h3>No records</h3>
-      <p>
+    <ErrorBox title="No records">
+      <Text>
         There are no records in this resource.
-        {canCreate ? (
-          <React.Fragment>
-            <span>Create </span>
-            <Link to={newAction}>first record</Link>
-          </React.Fragment>
-        ) : ''}
-      </p>
-    </div>
+      </Text>
+      {canCreate ? (
+        <Text mt="xl">
+          <Link to={newAction}>
+            <Button variant="primary" as="span">
+              <Icon icon="Add" />
+            Create First Record
+            </Button>
+          </Link>
+        </Text>
+      ) : ''}
+    </ErrorBox>
   )
 }
 
