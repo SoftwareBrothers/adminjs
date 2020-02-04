@@ -1,5 +1,5 @@
 import React, { ReactNode } from 'react'
-import { Box } from '../design-system/atoms/box'
+import { Box, MessageBox, Text } from '../design-system'
 
 type Props = {
   children: ReactNode;
@@ -30,37 +30,48 @@ export type ErrorMessageBoxProps = {
 const ErrorMessageBox: React.FC<ErrorMessageBoxProps> = (props) => {
   const { children, title, testId } = props
   return (
-    <Box data-testid={testId}>
-      <div className="content has-text-centered">
-        <h3>{title}</h3>
-        <div>
-          {children}
-        </div>
-      </div>
-    </Box>
+    <MessageBox data-testid={testId} message={title}>
+      <Text>
+        {children}
+      </Text>
+    </MessageBox>
   )
 }
 
 const NoResourceError: React.FC<{resourceId: string}> = (props) => {
   const { resourceId } = props
   return (
-    <ErrorMessageBox title="404 - PAGE NOT FOUND" testId="NoResourceError">
-      Resource of given id:
-      <b>{` ${resourceId} `}</b>
-      cannot be found.
-    </ErrorMessageBox>
+    <MessageBox
+      message="404 - PAGE NOT FOUND"
+      data-testid="NoResourceError"
+      variant="info"
+      m="xxl"
+    >
+      <Text>
+        Resource of given id:
+        <b>{` ${resourceId} `}</b>
+        cannot be found.
+      </Text>
+    </MessageBox>
   )
 }
 
 const NoActionError: React.FC<{resourceId: string; actionName: string}> = (props) => {
   const { resourceId, actionName } = props
   return (
-    <ErrorMessageBox title="404 - PAGE NOT FOUND" testId="NoActionError">
+    <MessageBox
+      message="404 - PAGE NOT FOUND"
+      data-testid="NoActionError"
+      variant="info"
+      m="xxl"
+    >
+      <Text>
         Resource:
-      <b>{` ${resourceId} `}</b>
-        does not have an action with name:
-      <b>{` ${actionName} `}</b>
-    </ErrorMessageBox>
+        <b>{` ${resourceId} `}</b>
+          does not have an action with name:
+        <b>{` ${actionName} `}</b>
+      </Text>
+    </MessageBox>
   )
 }
 
@@ -70,12 +81,19 @@ const NoRecordError: React.FC<{
 }> = (props) => {
   const { resourceId, recordId } = props
   return (
-    <ErrorMessageBox title="404 - PAGE NOT FOUND" testId="NoRecordError">
+    <MessageBox
+      message="404 - PAGE NOT FOUND"
+      data-testid="NoRecordError"
+      variant="info"
+      m="xxl"
+    >
+      <Text>
         Resource:
-      <b>{` ${resourceId} `}</b>
-        does not have a record with id:
-      <b>{` ${recordId} `}</b>
-    </ErrorMessageBox>
+        <b>{` ${resourceId} `}</b>
+          does not have a record with id:
+        <b>{` ${recordId} `}</b>
+      </Text>
+    </MessageBox>
   )
 }
 

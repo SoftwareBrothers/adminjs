@@ -1,5 +1,5 @@
 import React, { ReactNode } from 'react'
-import PropertyInShow from '../../ui/property-in-show'
+import { FormGroup, Label } from '../../design-system'
 import { EditPropertyProps } from '../base-property-props'
 
 export default class Show extends React.PureComponent<EditPropertyProps> {
@@ -20,9 +20,10 @@ export default class Show extends React.PureComponent<EditPropertyProps> {
     const { property } = this.props
 
     return (
-      <PropertyInShow property={property}>
+      <FormGroup>
+        <Label>{property.label}</Label>
         <div className="rich-text-value content" ref={this.contentRef} />
-      </PropertyInShow>
+      </FormGroup>
     )
   }
 }

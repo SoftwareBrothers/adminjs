@@ -25,7 +25,7 @@ class ErrorBoundary extends React.Component<any, State> {
 
     if (error !== null) {
       return (
-        <MessageBox m="xl" variant="error" message="Javascript Error">
+        <MessageBox m="xxl" variant="error" message="Javascript Error">
           <Text>{error.toString()}</Text>
           <Text mt="default">See development console for more details...</Text>
         </MessageBox>

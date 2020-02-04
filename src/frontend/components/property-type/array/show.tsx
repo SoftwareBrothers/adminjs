@@ -1,8 +1,7 @@
 import React, { ReactNode } from 'react'
 
-import PropertyInShow from '../../ui/property-in-show'
 import convertParamsToArrayItems from './convert-params-to-array-items'
-import StyledSection from '../../ui/styled-section'
+import { Section, FormGroup, Label } from '../../design-system'
 import PropertyJSON from '../../../../backend/decorators/property-json.interface'
 import RecordJSON from '../../../../backend/decorators/record-json.interface'
 
@@ -19,8 +18,9 @@ export default class Show extends React.PureComponent<Props> {
     const items = convertParamsToArrayItems(property, record)
 
     return (
-      <PropertyInShow property={property}>
-        <StyledSection>
+      <FormGroup>
+        <Label>{property.label}</Label>
+        <Section>
           {items.map((item, i) => (
             <ItemComponent
               {...this.props}
@@ -34,8 +34,8 @@ export default class Show extends React.PureComponent<Props> {
               }}
             />
           ))}
-        </StyledSection>
-      </PropertyInShow>
+        </Section>
+      </FormGroup>
     )
   }
 }

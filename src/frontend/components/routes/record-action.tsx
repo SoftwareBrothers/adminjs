@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 
 import { RouteComponentProps } from 'react-router'
 
-import Loader from '../ui/loader'
+import { Loader } from '../design-system'
 import BaseActionComponent from '../app/base-action-component'
 import ApiClient from '../../utils/api-client'
 import { RecordActionParams } from '../../../backend/utils/view-helpers'
@@ -11,7 +11,7 @@ import ResourceJSON from '../../../backend/decorators/resource-json.interface'
 import RecordJSON from '../../../backend/decorators/record-json.interface'
 import ActionJSON from '../../../backend/decorators/action-json.interface'
 import { ReduxState } from '../../store/store'
-import { NoResourceError, NoActionError, NoRecordError } from '../ui/error-message'
+import { NoResourceError, NoActionError, NoRecordError } from '../app/error-message'
 import withNotice, { AddNoticeProps } from '../../store/with-notice'
 import shouldActionReFetchData from './utils/should-action-re-fetch-data'
 

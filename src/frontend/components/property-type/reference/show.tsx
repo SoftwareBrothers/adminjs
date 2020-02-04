@@ -1,6 +1,6 @@
 import React, { ReactNode } from 'react'
 
-import PropertyInShow from '../../ui/property-in-show'
+import { FormGroup, Label } from '../../design-system'
 import ReferenceValue from './reference-value'
 import { EditPropertyProps } from '../base-property-props'
 
@@ -9,12 +9,13 @@ export default class Show extends React.PureComponent<EditPropertyProps> {
     const { property, record } = this.props
 
     return (
-      <PropertyInShow property={property}>
+      <FormGroup>
+        <Label>{property.label}</Label>
         <ReferenceValue
           property={property}
           record={record}
         />
-      </PropertyInShow>
+      </FormGroup>
     )
   }
 }

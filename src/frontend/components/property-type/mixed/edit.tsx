@@ -1,7 +1,6 @@
 import React from 'react'
 
-import PropertyInEdit from '../../ui/property-in-edit'
-import StyledSection from '../../ui/styled-section'
+import { Section, FormGroup, Label, FormMessage } from '../../design-system'
 import { EditPropertyProps } from '../base-property-props'
 
 type Props = {
@@ -12,8 +11,9 @@ const Edit: React.FC<Props & EditPropertyProps> = (props) => {
   const { property, record, ItemComponent } = props
   const error = record.errors && record.errors[property.name]
   return (
-    <PropertyInEdit property={property} error={error}>
-      <StyledSection>
+    <FormGroup error={!!error}>
+      <Label htmlFor={property.name}>{property.label}</Label>
+      <Section>
         {property.subProperties.map(subProperty => (
           <ItemComponent
             {...props}
@@ -21,8 +21,9 @@ const Edit: React.FC<Props & EditPropertyProps> = (props) => {
             property={{ ...subProperty, name: `${property.name}.${subProperty.name}` }}
           />
         ))}
-      </StyledSection>
-    </PropertyInEdit>
+      </Section>
+      <FormMessage>{error && error.message}</FormMessage>
+    </FormGroup>
   )
 }
 

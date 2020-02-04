@@ -3,11 +3,13 @@ import { withRouter, RouteComponentProps } from 'react-router-dom'
 
 import ActionButton from '../action-button'
 import PropertyType from '../../property-type'
-import Placeholder from '../../ui/placeholder'
 import ResourceJSON from '../../../../backend/decorators/resource-json.interface'
 import RecordJSON from '../../../../backend/decorators/record-json.interface'
 import { PropertyPlace } from '../../../../backend/decorators/property-json.interface'
-import { TableRow, TableCell, CheckBox, DropDown, DropDownTrigger, Icon, DropDownMenu, DropDownItem } from '../../design-system'
+import {
+  Placeholder, TableRow, TableCell, CheckBox, DropDown,
+  DropDownTrigger, Icon, DropDownMenu, DropDownItem,
+} from '../../design-system'
 import ViewHelpers from '../../../../backend/utils/view-helpers'
 
 type Props = {

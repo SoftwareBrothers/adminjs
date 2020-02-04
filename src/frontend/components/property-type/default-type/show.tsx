@@ -1,7 +1,7 @@
 
 import React, { ReactNode } from 'react'
 
-import PropertyInShow from '../../ui/property-in-show'
+import { FormGroup, Label } from '../../design-system'
 import { ShowPropertyProps } from '../base-property-props'
 
 export default class Show extends React.PureComponent<ShowPropertyProps> {
@@ -13,11 +13,12 @@ export default class Show extends React.PureComponent<ShowPropertyProps> {
     const className = property.availableValues ? 'tag' : ''
 
     return (
-      <PropertyInShow property={property}>
+      <FormGroup>
+        <Label>{property.label}</Label>
         {typeof value !== 'undefined' ? (
           <span className={className}>{value}</span>
         ) : ''}
-      </PropertyInShow>
+      </FormGroup>
     )
   }
 }

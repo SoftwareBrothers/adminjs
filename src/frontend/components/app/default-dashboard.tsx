@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 
-import { Column, Columns } from '../ui'
+import { Box } from '../design-system'
 
 const DashboardWrapper = styled.section`
   display: flex;
@@ -41,21 +41,21 @@ const Dashboard: React.FC = () => (
         <b> AdminBro.</b>
       </p>
       <p>Next, you might want to check out the following tutorials:</p>
-      <Columns>
-        <Column width={6}>
+      <Box>
+        <Box>
           <ul>
             <li><a href="https://softwarebrothers.github.io/admin-bro-dev/tutorial-03-passing-resources.html">Adding Resources</a></li>
             <li><a href="https://softwarebrothers.github.io/admin-bro-dev/tutorial-04-customizing-resources.html">Customizing resources</a></li>
             <li><a href="https://softwarebrothers.github.io/admin-bro-dev/tutorial-05-actions.html">Customizing Actions</a></li>
           </ul>
-        </Column>
-        <Column width={6}>
+        </Box>
+        <Box>
           <ul>
             <li><a href="https://softwarebrothers.github.io/admin-bro-dev/tutorial-06-writing-react-components.html">Writing your own components</a></li>
             <li><a href="https://softwarebrothers.github.io/admin-bro-dev/tutorial-07-custom-dashboard.html">Customizing Dashboard</a></li>
           </ul>
-        </Column>
-      </Columns>
+        </Box>
+      </Box>
       <p>
         In case you found any errors,
         <a href="https://github.com/SoftwareBrothers/admin-bro/issues"> raise an issue </a>

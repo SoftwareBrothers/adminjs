@@ -1,15 +1,12 @@
 import React, { ReactNode, MouseEvent } from 'react'
 import { flatten, unflatten } from 'flat'
 
-import PropertyInEdit from '../../ui/property-in-edit'
-import Column from '../../ui/column'
-import Columns from '../../ui/columns'
 import convertParamsToArrayItems from './convert-params-to-array-items'
-import StyledSection from '../../ui/styled-section'
+import { Button, Section, FormGroup, FormMessage, Label, Icon, Box } from '../../design-system'
 import PropertyJSON from '../../../../backend/decorators/property-json.interface'
 import RecordJSON from '../../../../backend/decorators/record-json.interface'
 import updateParamsArray from './update-params-array'
-import { Button } from '../../design-system'
+
 
 const normalizeParams = (params: RecordJSON['params']): RecordJSON['params'] => (
   flatten<string, any>(unflatten(params, { overwrite: true }))
@@ -20,6 +17,41 @@ type Props = {
   record: RecordJSON;
   onChange: (record: RecordJSON) => any;
   ItemComponent: typeof React.Component;
+}
+
+type ItemRendererProps = {
+  i: number;
+  onDelete: (event: MouseEvent) => false;
+}
+
+const ItemRenderer: React.FC<Props & ItemRendererProps> = (props) => {
+  const { ItemComponent, property, i, onDelete } = props
+  return (
+    <Box flex flexDirection="row" alignItems="center">
+      <Box flexGrow={1}>
+        <ItemComponent
+          {...props}
+          property={{
+            ...property,
+            name: `${property.name}.${i}`,
+            label: `[${i + 1}]`,
+            isArray: false,
+          }}
+        />
+      </Box>
+      <Box flexShrink={0}>
+        <Button
+          ml="default"
+          type="button"
+          size="icon"
+          onClick={(event): false => onDelete(event)}
+          variant="danger"
+        >
+          <Icon icon="Delete" />
+        </Button>
+      </Box>
+    </Box>
+  )
 }
 
 export default class Edit extends React.Component<Props> {
@@ -60,46 +92,23 @@ export default class Edit extends React.Component<Props> {
     return false
   }
 
-  renderItem(item, i): ReactNode {
-    const { ItemComponent, property } = this.props
-    return (
-      <Columns key={i}>
-        <Column width={10}>
-          <ItemComponent
-            {...this.props}
-            property={{
-              ...property,
-              name: `${property.name}.${i}`,
-              label: `[${i + 1}]`,
-              isArray: false,
-            }}
-          />
-        </Column>
-        <Column width={2}>
-          <Button
-            type="button"
-            style={{ marginTop: 25 }}
-            onClick={(event): false => this.removeItem(i, event)}
-          >
-            Remove
-          </Button>
-        </Column>
-      </Columns>
-    )
-  }
-
   renderInput(): ReactNode {
     const { property, record } = this.props
     const items = convertParamsToArrayItems(property, record)
     return (
-      <StyledSection style={{ marginTop: 20 }}>
-        {items.map((item, i) => this.renderItem(item, i))}
-        <p>
-          <Button onClick={this.addNew} type="button">
-            Add new item
-          </Button>
-        </p>
-      </StyledSection>
+      <Section mt="xl">
+        {items.map((item, i) => (
+          <ItemRenderer
+            {...this.props}
+            i={i}
+            onDelete={(event): false => this.removeItem(i, event)}
+          />
+        ))}
+        <Button onClick={this.addNew} type="button" size="sm">
+          <Icon icon="Add" />
+          Add new item
+        </Button>
+      </Section>
     )
   }
 
@@ -107,9 +116,11 @@ export default class Edit extends React.Component<Props> {
     const { property, record } = this.props
     const error = record.errors && record.errors[property.name]
     return (
-      <PropertyInEdit property={property} error={error}>
+      <FormGroup error={!!error}>
+        <Label htmlFor={property.name}>{property.label}</Label>
         {this.renderInput()}
-      </PropertyInEdit>
+        <FormMessage>{error && error.message}</FormMessage>
+      </FormGroup>
     )
   }
 }

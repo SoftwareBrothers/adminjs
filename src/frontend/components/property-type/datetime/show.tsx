@@ -1,7 +1,7 @@
 import React, { ReactNode } from 'react'
 
 import mapValue from './map-value'
-import PropertyInShow from '../../ui/property-in-show'
+import { FormGroup, Label } from '../../design-system'
 import { EditPropertyProps } from '../base-property-props'
 
 export default class Show extends React.PureComponent<EditPropertyProps> {
@@ -10,9 +10,10 @@ export default class Show extends React.PureComponent<EditPropertyProps> {
     const value = mapValue(record.params[property.name])
 
     return (
-      <PropertyInShow property={property}>
+      <FormGroup>
+        <Label>{property.label}</Label>
         {value}
-      </PropertyInShow>
+      </FormGroup>
     )
   }
 }

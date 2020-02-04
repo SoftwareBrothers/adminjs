@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import { RouteComponentProps } from 'react-router'
 import ErrorBoundary from '../app/error-boundary'
 import { ReduxState } from '../../store/store'
-import { ErrorMessageBox } from '../ui'
+import ErrorMessageBox from '../app/error-message'
 
 declare const AdminBro: {
   UserComponents: Record<string, FunctionComponent>;

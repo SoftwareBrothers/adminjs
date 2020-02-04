@@ -1,7 +1,6 @@
 import React from 'react'
 
-import PropertyInShow from '../../ui/property-in-show'
-import StyledSection from '../../ui/styled-section'
+import { Section, FormGroup, Label } from '../../design-system'
 import { BasePropertyProps } from '../base-property-props'
 
 interface Props {
@@ -11,8 +10,9 @@ interface Props {
 const Show: React.FC<Props & BasePropertyProps> = (props) => {
   const { property, ItemComponent } = props
   return (
-    <PropertyInShow property={property}>
-      <StyledSection>
+    <FormGroup>
+      <Label>{property.label}</Label>
+      <Section>
         {property.subProperties.map(subProperty => (
           <ItemComponent
             {...props}
@@ -20,8 +20,8 @@ const Show: React.FC<Props & BasePropertyProps> = (props) => {
             property={{ ...subProperty, name: `${property.name}.${subProperty.name}` }}
           />
         ))}
-      </StyledSection>
-    </PropertyInShow>
+      </Section>
+    </FormGroup>
   )
 }
 

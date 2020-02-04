@@ -5,7 +5,7 @@ import { RouteComponentProps } from 'react-router'
 import BaseActionComponent from '../app/base-action-component'
 import ResourceJSON from '../../../backend/decorators/resource-json.interface'
 import { ReduxState } from '../../store/store'
-import { NoResourceError, NoActionError } from '../ui/error-message'
+import { NoResourceError, NoActionError } from '../app/error-message'
 import { ResourceActionParams } from '../../../backend/utils/view-helpers'
 
 type PropsFromState = {

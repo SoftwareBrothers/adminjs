@@ -1,13 +1,13 @@
 import React from 'react'
 import styled from 'styled-components'
-import { variant } from 'styled-system'
+import { variant as styledVariant, SpaceProps } from 'styled-system'
 
 
-import { Box, BoxProps } from '../atoms/box'
+import { Box } from '../atoms/box'
 import { Icon } from '../atoms/icon'
 import { Button } from '../atoms/button'
 
-const sizeVariants = variant({
+const sizeVariants = styledVariant({
   prop: 'size',
   variants: {
     sm: {
@@ -23,7 +23,7 @@ const sizeVariants = variant({
   },
 })
 
-const variants = theme => variant({
+const variants = theme => styledVariant({
   variants: {
     success: {},
     error: {
@@ -43,9 +43,11 @@ const variants = theme => variant({
   },
 })
 
-const StyledMessageBox = styled(Box)`
+const StyledMessageBox = styled.div<StyledMessageBoxProps>`
   line-height: ${({ theme }): string => theme.lineHeights.default};
   box-shadow: 0 2px 0 0 ${({ theme }): string => theme.colors.treal};
+  background: ${({ theme }): string => theme.colors.paleTreal};
+  color: ${({ theme }): string => theme.colors.darkGrey};
   & > ${Button} {
     float: right;
     margin: 8px;
@@ -53,14 +55,9 @@ const StyledMessageBox = styled(Box)`
       fill: ${({ theme }): string => theme.colors.darkGrey};
     }
   }
-  ${({ theme }): string => variants(theme)};
+  ${({ theme }) => variants(theme)};
   ${sizeVariants};
 `
-
-StyledMessageBox.defaultProps = {
-  bg: 'paleTreal',
-  color: 'darkGrey',
-}
 
 const StyledCaption = styled(Box)``
 
@@ -78,20 +75,22 @@ const StyledChildren = styled(Box)`
   border-color: ${({ theme }): string => theme.colors.paleTreal};
 `
 
-
-export type MessageBoxProps = Omit<BoxProps, 'variant'> & {
+type StyledMessageBoxProps = {
   onCloseClick?: () => void;
   message?: string;
   variant?: 'error' | 'info' | 'success';
   icon?: string;
+  size?: string;
 }
 
+export type MessageBoxProps = SpaceProps & StyledMessageBoxProps
+
 export const MessageBox: React.FC<MessageBoxProps> = (props) => {
-  const { onCloseClick, message, icon, children, ...other } = props
+  const { onCloseClick, message, icon, children, variant, size, ...other } = props
 
   return (
-    <React.Fragment>
-      <StyledMessageBox {...other}>
+    <Box {...other}>
+      <StyledMessageBox variant={variant} size={size}>
         {onCloseClick ? (
           <Button variant="text" size="icon" onClick={onCloseClick}>
             <Icon icon="Close" />
@@ -109,6 +108,6 @@ export const MessageBox: React.FC<MessageBoxProps> = (props) => {
           {children}
         </StyledChildren>
       ) : ''}
-    </React.Fragment>
+    </Box>
   )
 }

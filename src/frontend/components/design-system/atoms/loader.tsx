@@ -1,6 +1,7 @@
+/* eslint-disable import/prefer-default-export */
 import React from 'react'
 import styled from 'styled-components'
-import { Box } from '../design-system'
+import { Box } from './box'
 
 const Spinner = styled.div.attrs({
   className: 'lds-facebook',
@@ -53,7 +54,7 @@ const Spinner = styled.div.attrs({
  *   <WrapperBox border><Loader/></WrapperBox>
  * )
  */
-const Loader: React.FC = () => (
+export const Loader: React.FC = () => (
   <Box style={{ textAlign: 'center' }}>
     <Spinner>
       <div />
@@ -62,5 +63,3 @@ const Loader: React.FC = () => (
     </Spinner>
   </Box>
 )
-
-export default Loader
