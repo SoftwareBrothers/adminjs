@@ -39,6 +39,13 @@ type StyledProps = {
   disabled?: boolean;
 }
 
+const checkboxBackground = (theme, checked, disabled): string => {
+  if (checked) {
+    return disabled ? theme.colors.greyLight : theme.colors.bluePrimary
+  }
+  return theme.colors.white
+}
+
 const StyledCheckbox = styled.a<StyledProps>`
   display: inline-block;
   width: 16px;
@@ -47,7 +54,7 @@ const StyledCheckbox = styled.a<StyledProps>`
   cursor: pointer;
   border: 1px solid ${({ theme }): string => theme.colors.greyLight};
   height: 16px;
-  background: ${({ checked, theme, disabled }): string => (checked ? (disabled ? theme.colors.greyLight : theme.colors.bluePrimary) : theme.colors.white)};
+  background: ${({ checked, theme, disabled }): string => checkboxBackground(theme, checked, disabled)};
   transition: all 150ms;
   position: relative;
   z-index: 2;

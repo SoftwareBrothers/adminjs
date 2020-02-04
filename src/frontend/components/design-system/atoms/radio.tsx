@@ -36,6 +36,13 @@ type StyledProps = {
   disabled?: boolean;
 }
 
+const radioBackground = (theme, checked, disabled): string => {
+  if (checked) {
+    return disabled ? theme.colors.greyLight : theme.colors.bluePrimary
+  }
+  return theme.colors.white
+}
+
 const StyledRadio = styled.span<StyledProps>`
   display: inline-block;
   width: 16px;
@@ -56,7 +63,7 @@ const StyledRadio = styled.span<StyledProps>`
     visibility: ${({ checked }): string => (checked ? 'visible' : 'hidden')};
   }
 
-  background: ${({ checked, theme, disabled }): string => (checked ? (disabled ? theme.colors.greyLight : theme.colors.bluePrimary) : theme.colors.white)};
+  background: ${({ checked, theme, disabled }): string => radioBackground(theme, checked, disabled)};
 `
 
 export type RadioProps = React.HTMLProps<HTMLInputElement>
