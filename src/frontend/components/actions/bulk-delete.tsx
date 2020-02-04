@@ -10,7 +10,7 @@ import { appendForceRefresh } from './utils/append-force-refresh'
 
 import {
   Table, TableBody, TableRow, TableCell, Text,
-  DrawerContent, DrawerFooter, Button,
+  DrawerContent, DrawerFooter, Button, MessageBox,
 } from '../design-system'
 import ActionHeader from '../app/action-header'
 
@@ -67,12 +67,8 @@ const BulkDelete: React.FC<ActionProps & AddNoticeProps & RouteComponentProps> =
   return (
     <React.Fragment>
       <DrawerContent>
-        <ActionHeader
-          resource={resource}
-          action={action}
-          omitActions
-        />
-        <Text mt="xl" mb="xxl">Following records will be removed:</Text>
+        <ActionHeader {...props} />
+        <MessageBox mb="xxl" variant="danger" message="Following records will be removed" />
         <Table>
           <TableBody>
             {records.map(record => (

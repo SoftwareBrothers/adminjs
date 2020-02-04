@@ -314,6 +314,7 @@ class ResourceDecorator {
       href: this.h.resourceUrl({ resourceId: this._resource.id() }),
       titleProperty: this.titleProperty().toJSON(),
       resourceActions: this.resourceActions(currentAdmin).map(ra => ra.toJSON()),
+      actions: Object.values(this.actions).map(action => action.toJSON()),
       listProperties: this.getProperties({
         where: PropertyPlace.list, max: DEFAULT_MAX_COLUMNS_IN_LIST,
       }).map(property => property.toJSON()),

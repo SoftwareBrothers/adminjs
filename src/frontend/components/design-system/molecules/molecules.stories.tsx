@@ -31,14 +31,14 @@ export const Messages = () => (
     <H3 mb="xxl">Messages</H3>
     <H5 mb="xl">Variants</H5>
     <MessageBox message="Some default message" onCloseClick={action('close clicked')} />
-    <MessageBox message="Error message" mt="default" variant="error" onCloseClick={action('close clicked')} />
+    <MessageBox message="Error message" mt="default" variant="danger" onCloseClick={action('close clicked')} />
     <MessageBox message="Info message" mt="default" variant="info" onCloseClick={action('close clicked')} />
 
     <H5 mt="xxl" mb="xl">With text</H5>
     <MessageBox message="Some default message" onCloseClick={action('close clicked')}>
       With inside text
     </MessageBox>
-    <MessageBox message="Error message" mt="default" variant="error" onCloseClick={action('close clicked')}>
+    <MessageBox message="Error message" mt="default" variant="danger" onCloseClick={action('close clicked')}>
       With inside text
     </MessageBox>
     <MessageBox message="Info message" mt="default" variant="info" onCloseClick={action('close clicked')}>

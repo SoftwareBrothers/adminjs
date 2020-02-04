@@ -162,6 +162,7 @@ class ActionDecorator {
       guard: this.action.guard,
       showFilter: !!this.action.showFilter,
       component: this.action.component,
+      showInDrawer: !!this.action.showInDrawer,
     }
   }
 }

@@ -7,13 +7,15 @@ import ResourceJSON from '../../../backend/decorators/resource-json.interface'
 import { ReduxState } from '../../store/store'
 import ErrorMessageBox, { NoResourceError, NoActionError } from '../app/error-message'
 import RecordJSON from '../../../backend/decorators/record-json.interface'
-import { Loader } from '../design-system'
+import { Loader, Drawer } from '../design-system'
 import shouldActionReFetchData from './utils/should-action-re-fetch-data'
 import { BulkActionParams } from '../../../backend/utils/view-helpers'
 import ApiClient from '../../utils/api-client'
 import withNotice, { AddNoticeProps, NoticeMessage } from '../../store/with-notice'
 import getBulkActionsFromRecords from '../app/records-table/utils/get-bulk-actions-from-records'
 import ActionJSON from '../../../backend/decorators/action-json.interface'
+import Wrapper from './utils/wrapper'
+import { Breadcrumbs, ActionHeader } from '../app'
 
 const NO_RECORDS_ERROR: NoticeMessage = {
   message: 'There was an error fetching records, Check out console to see more information.',
@@ -106,17 +108,29 @@ class BulkAction extends React.Component<Props, State> {
       return (<NoActionError resourceId={resourceId} actionName={actionName} />)
     }
 
-    if (isLoading) {
+    if (isLoading || !action) {
       return <Loader />
     }
 
+    const ActionWrapper = (action.showInDrawer ? Drawer : Wrapper) as unknown as ComponentClass
+
     return (
-      <BaseAction
-        action={action as ActionJSON}
-        resource={resource}
-        records={records}
-        setTag={this.setTag}
-      />
+      <ActionWrapper>
+        {!action?.showInDrawer ? (
+          <Breadcrumbs resource={resource} actionName={action.name} />
+        ) : ''}
+        <ActionHeader
+          resource={resource}
+          action={action}
+          tag={tag}
+        />
+        <BaseAction
+          action={action as ActionJSON}
+          resource={resource}
+          records={records}
+          setTag={this.setTag}
+        />
+      </ActionWrapper>
     )
   }
 }

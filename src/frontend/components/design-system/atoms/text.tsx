@@ -24,7 +24,6 @@ export type TextProps = TypographyProps & SpaceProps & VariantsProps & ColorProp
 
 export const Text = styled.div<TextProps>`
   font-family: ${({ theme }): string => theme.font};
-  color: ${({ theme }): string => theme.colors.black};
   margin: 0;
   padding: 0;
 

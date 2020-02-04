@@ -521,4 +521,9 @@ export default interface Action <T extends ActionResponse> {
    *
    */
   after?: After<T>;
+
+  /**
+   * Indicates if given action should be seen in a drawer or in a full screen. Default to false
+   */
+  showInDrawer?: boolean;
 }

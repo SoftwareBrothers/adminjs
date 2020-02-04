@@ -32,4 +32,8 @@ export default interface ActionJSON {
    * to put in another words: there wont be an action view
    */
   component?: string | false | null;
+  /**
+   * Whether given action should be seen in a drawer
+   */
+  showInDrawer: boolean;
 }

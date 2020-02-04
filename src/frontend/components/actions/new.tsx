@@ -114,7 +114,7 @@ class New extends React.Component<ActionProps & AddNoticeProps & RouteComponentP
     const properties = resource.editProperties
     const { record, loading } = this.state
     return (
-      <Box as="form" onSubmit={this.handleSubmit} flex flexGrow={1} flexDirection="column">
+      <Box as="form" onSubmit={this.handleSubmit} flex flexGrow={1} flexDirection="column" height={1}>
         <DrawerContent>
           <ActionHeader {...this.props} />
           {properties.map(property => (

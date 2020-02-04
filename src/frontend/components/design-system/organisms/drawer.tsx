@@ -19,6 +19,15 @@ const variants = variant({
   },
 })
 
+
+export const DrawerFooter = styled.section<SpaceProps>`
+  ${space};
+`
+
+export const DrawerContent = styled.section<SpaceProps>`
+  ${space};
+`
+
 export const Drawer = styled.section<DrawerProps>`
   width: 500px;
   & > * {
@@ -42,20 +51,18 @@ export const Drawer = styled.section<DrawerProps>`
   ${variants};
 
   ${({ isHidden }): string => (isHidden ? 'width: 0px;' : '')};
-`
 
-export const DrawerFooter = styled.section`
-  padding: ${({ theme }): string => theme.space.xxl} ${({ theme }): string => theme.space.lg};
-  text-align: center;
-  border-top: 1px solid ${({ theme }): string => theme.colors.bluePale};
-  flex-shrink: 0;
-  ${space};
-`
+  & ${DrawerFooter} {
+    padding: ${({ theme }): string => theme.space.xxl} ${({ theme }): string => theme.space.lg};
+    text-align: center;
+    border-top: 1px solid ${({ theme }): string => theme.colors.bluePale};
+    flex-shrink: 0;
+  }
 
-export const DrawerContent = styled.section`
-  flex-grow: 1;
-  overflow: auto;
-  padding: ${({ theme }): string => theme.space.x3} ${({ theme }): string => theme.space.xxl} ${({ theme }): string => theme.space.xl};
-  box-sizing: border-box;
-  ${space};
+  & ${DrawerContent} {
+    flex-grow: 1;
+    overflow: auto;
+    padding: ${({ theme }): string => theme.space.x3} ${({ theme }): string => theme.space.xxl} ${({ theme }): string => theme.space.xl};
+    box-sizing: border-box;
+  }
 `

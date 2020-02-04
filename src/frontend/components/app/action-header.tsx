@@ -10,7 +10,7 @@ import ResourceJSON from '../../../backend/decorators/resource-json.interface'
 import ActionJSON from '../../../backend/decorators/action-json.interface'
 import RecordJSON from '../../../backend/decorators/record-json.interface'
 
-import { Box, Badge, H3, Button, Icon, ButtonCSS } from '../design-system'
+import { Box, Badge, H3, H2, Button, Icon, ButtonCSS } from '../design-system'
 
 /**
  * @memberof ActionHeader
@@ -49,24 +49,26 @@ const ActionHeader: React.FC<Props> = (props) => {
   const isList = action && action.name === 'list'
 
   return (
-    <Box>
-      <H3>
-        {!isList ? (
-          <StyledLink
-            size="icon"
-            to={h.resourceUrl({ resourceId, search: window.location.search })}
-            rounded
-            mr="lg"
-            type="button"
-          >
-            <Icon icon="ChevronRight" />
-          </StyledLink>
-        ) : ''}
-        {title}
-        {tag ? (<Badge variant="primary" ml="default">{tag}</Badge>) : ''}
-      </H3>
+    <Box flex={!action.showInDrawer}>
+      <Box mt={action.showInDrawer ? '' : 'lg'} flexGrow={1}>
+        <H2 mb="lg">
+          {!isList ? (
+            <StyledLink
+              size="icon"
+              to={h.resourceUrl({ resourceId, search: window.location.search })}
+              rounded
+              mr="lg"
+              type="button"
+            >
+              <Icon icon={`Chevron${action.showInDrawer ? 'Right' : 'Left'}`} />
+            </StyledLink>
+          ) : ''}
+          {title}
+          {tag ? (<Badge variant="primary" ml="default">{tag}</Badge>) : ''}
+        </H2>
+      </Box>
       {omitActions ? '' : (
-        <Box my="xl">
+        <Box mt="xl" mb={action.showInDrawer ? 'xl' : 'default'} flexShrink={0}>
           {actions.map(headerAction => (
             <ActionButton
               action={headerAction}
@@ -75,7 +77,7 @@ const ActionHeader: React.FC<Props> = (props) => {
               resourceId={resource.id}
               recordId={record && record.id}
             >
-              <Button as="span" mr="default" mb="default" size="sm">
+              <Button as="span" mr="default" mb="default" size={action.showInDrawer ? 'sm' : 'lg'}>
                 <Icon icon={headerAction.icon} />
                 {headerAction.label}
               </Button>

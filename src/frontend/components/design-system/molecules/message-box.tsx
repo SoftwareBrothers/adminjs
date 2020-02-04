@@ -26,7 +26,7 @@ const sizeVariants = styledVariant({
 const variants = theme => styledVariant({
   variants: {
     success: {},
-    error: {
+    danger: {
       bg: 'paleRed',
       'box-shadow': `0 2px 0 0 ${theme.colors.red};`,
       '& + section': {
@@ -78,7 +78,7 @@ const StyledChildren = styled(Box)`
 type StyledMessageBoxProps = {
   onCloseClick?: () => void;
   message?: string;
-  variant?: 'error' | 'info' | 'success';
+  variant?: 'danger' | 'info' | 'success';
   icon?: string;
   size?: string;
 }

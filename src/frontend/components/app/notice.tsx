@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import { connect } from 'react-redux'
 
 import { dropNotice, setNoticeProgress, NoticeMessageInState, ReduxState } from '../../store/store'
+import { MessageBox } from '../design-system'
 
 const TIME_TO_DISAPPEAR = 3
 
@@ -67,11 +68,11 @@ class NoticeElement extends React.Component<NoticeElementProps, NoticeElementSta
     const { notice, drop } = this.props
     const { progress } = this.state
     return (
-      <NoticeWrapper className={notice.type}>
-        <button className="delete" onClick={drop} type="button" />
-        { notice.message }
-        <div className="progressBar" style={{ width: `${progress}%` }} />
-      </NoticeWrapper>
+      <MessageBox
+        message={notice.message}
+        variant={notice.type === 'success' ? 'success' : 'danger'}
+        onCloseClick={drop}
+      />
     )
   }
 }

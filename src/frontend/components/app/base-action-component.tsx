@@ -5,7 +5,7 @@ import ErrorBoundary from './error-boundary'
 import * as actions from '../actions'
 import { DOCS } from '../../../constants'
 import { ActionProps } from '../actions/action.props'
-import { Box } from '../design-system'
+import { Box, MessageBox } from '../design-system'
 
 declare const AdminBro: {
   UserComponents: Array<string>;
@@ -101,14 +101,12 @@ class BaseActionComponent extends React.Component<ActionProps, State> {
       )
     }
     return Action || (
-      <Box>
-        <div className="notification">
-          You have to implement action component for your Action.
-          See:
-          {' '}
-          <a href={documentationLink}>the documentation</a>
-        </div>
-      </Box>
+      <MessageBox variant="danger">
+        You have to implement action component for your Action.
+        See:
+        {' '}
+        <a href={documentationLink}>the documentation</a>
+      </MessageBox>
     )
   }
 }

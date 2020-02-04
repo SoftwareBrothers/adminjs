@@ -11,7 +11,7 @@ const Base = styled.h3<TypographyProps & SpaceProps>`
   * {
     vertical-align: middle;
   }
-  ${Button}, a {
+  & ${Button}, a {
     vertical-align: bottom;
   }
   ${typography};
@@ -30,7 +30,11 @@ H1.defaultProps = {
   lineHeight: 'xxl',
 }
 
-const H2 = styled(props => <Base as="h2" {...props} />)``
+const H2 = styled(props => <Base as="h2" {...props} />)`
+  & ${Button}, a {
+    margin-bottom: 4px;
+  }
+`
 H2.defaultProps = {
   fontSize: 'h2',
   lineHeight: 'xxl',

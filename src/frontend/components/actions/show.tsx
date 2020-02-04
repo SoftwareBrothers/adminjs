@@ -14,16 +14,12 @@ import ActionHeader from '../app/action-header'
  * @private
  */
 const Show: React.FC<ActionProps> = (props) => {
-  const { resource, record, action } = props
+  const { resource, record } = props
   const properties = resource.showProperties
 
   return (
     <DrawerContent>
-      <ActionHeader
-        resource={resource}
-        record={record}
-        action={action}
-      />
+      <ActionHeader {...props} />
       {properties.map(property => (
         <PropertyType
           key={property.name}

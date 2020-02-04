@@ -14,6 +14,8 @@ import { appendForceRefresh } from './utils/append-force-refresh'
 import { DrawerContent, Box, DrawerFooter, Button } from '../design-system'
 import ActionHeader from '../app/action-header'
 
+// const [record, updateProperty, dispatchSubmit] = useRecordState(record)
+
 /**
  * @name EditAction
  * @category Actions
@@ -100,7 +102,7 @@ class Edit extends React.Component<ActionProps & RouteComponentProps & AddNotice
     const { record, loading } = this.state
 
     return (
-      <Box as="form" onSubmit={this.handleSubmit} flex flexGrow={1} flexDirection="column">
+      <Box as="form" onSubmit={this.handleSubmit} flex flexGrow={1} flexDirection="column" height={1}>
         <DrawerContent>
           <ActionHeader {...this.props} />
           {properties.map(property => (

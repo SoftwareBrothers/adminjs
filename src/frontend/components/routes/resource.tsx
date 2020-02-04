@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { connect } from 'react-redux'
+import { useRouteMatch } from 'react-router-dom'
 
 import { RouteComponentProps } from 'react-router'
 import Breadcrumbs from '../app/breadcrumbs'
@@ -9,15 +10,40 @@ import queryHasFilter from './utils/query-has-filter'
 import ResourceJSON from '../../../backend/decorators/resource-json.interface'
 import { ReduxState } from '../../store/store'
 import { NoResourceError, NoActionError } from '../app/error-message'
-import { ResourceActionParams } from '../../../backend/utils/view-helpers'
+import ViewHelpers, {
+  ResourceActionParams, RecordActionParams, BulkActionParams,
+} from '../../../backend/utils/view-helpers'
 import { Box, H2, Badge, Button, Icon } from '../design-system'
 import { ActionButton } from '../app'
+import ActionJSON from '../../../backend/decorators/action-json.interface'
 
 type PropsFromState = {
   resources: Array<ResourceJSON>;
 }
 
 type Props = PropsFromState & RouteComponentProps<ResourceActionParams>
+
+const getAction = (resource: ResourceJSON): ActionJSON | undefined => {
+  const h = new ViewHelpers()
+
+  const resourceId = ':resourceId'
+  const actionName = ':actionName'
+  const recordId = ':recordId'
+
+  const recordActionUrl = h.recordActionUrl({ resourceId, recordId, actionName })
+  const resourceActionUrl = h.resourceActionUrl({ resourceId, actionName })
+  const bulkActionUrl = h.bulkActionUrl({ resourceId, actionName, recordIds: undefined })
+
+  const resourceActionMatch = useRouteMatch<ResourceActionParams>(resourceActionUrl)
+  const recordActionMatch = useRouteMatch<RecordActionParams>(recordActionUrl)
+  const bulkActionMatch = useRouteMatch<BulkActionParams>(bulkActionUrl)
+
+  const action = resourceActionMatch?.params.actionName
+    || recordActionMatch?.params.actionName
+    || bulkActionMatch?.params.actionName
+
+  return action && resource.actions.find(a => a.name === action)
+}
 
 const ResourceAction: React.FC<Props> = (props) => {
   const { resources, match, location } = props
@@ -27,11 +53,17 @@ const ResourceAction: React.FC<Props> = (props) => {
   if (!resource) {
     return (<NoResourceError resourceId={resourceId} />)
   }
-  const actionName = 'list'
-  const listAction = resource.resourceActions.find(r => r.name === 'list')
+
+  const realEndAction = getAction(resource)
+  if (realEndAction && !realEndAction.showInDrawer) {
+    return null
+  }
+
+  const listActionName = 'list'
+  const listAction = resource.resourceActions.find(r => r.name === listActionName)
   const newAction = resource.resourceActions.find(r => r.name === 'new')
   if (!listAction) {
-    return (<NoActionError resourceId={resourceId} actionName={actionName} />)
+    return (<NoActionError resourceId={resourceId} actionName={listActionName} />)
   }
 
   const [filterVisible, setFilerVisible] = useState(queryHasFilter(location.search))
@@ -39,7 +71,7 @@ const ResourceAction: React.FC<Props> = (props) => {
 
   return (
     <Box variant="grey">
-      <Breadcrumbs resource={resource} actionName={actionName} />
+      <Breadcrumbs resource={resource} actionName={listActionName} />
       <Box flex flexDirection="row">
         <Box flexGrow={1}>
           <H2 mb="lg" mt="xl">

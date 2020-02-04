@@ -35,7 +35,6 @@ const App: React.FC = () => {
   const bulkActionUrl = h.bulkActionUrl({ resourceId, actionName })
   const resourceUrl = h.resourceUrl({ resourceId })
   const pageUrl = h.pageUrl(pageName)
-  const designSystemUrl = h.designSystemUrl()
 
   return (
     <React.Fragment>
@@ -51,30 +50,11 @@ const App: React.FC = () => {
             <Route path={resourceUrl} component={Resource} />
             <Route path={pageUrl} exact component={Page} />
           </Switch>
-          <Route
-            path={recordActionUrl}
-            children={props => (
-              <Drawer isHidden={!props.match}>
-                {props.match && <RecordAction {...props} />}
-              </Drawer>
-            )}
-          />
-          <Route
-            path={resourceActionUrl}
-            children={props => (
-              <Drawer isHidden={!props.match}>
-                {props.match && <ResourceAction {...props as any} />}
-              </Drawer>
-            )}
-          />
-          <Route
-            path={bulkActionUrl}
-            children={props => (
-              <Drawer isHidden={!props.match}>
-                {props.match && <BulkAction {...props} />}
-              </Drawer>
-            )}
-          />
+          <Switch>
+            <Route path={recordActionUrl} component={RecordAction} />
+            <Route path={resourceActionUrl} component={ResourceAction} />
+            <Route path={bulkActionUrl} component={BulkAction} />
+          </Switch>
         </Box>
       </Box>
     </React.Fragment>

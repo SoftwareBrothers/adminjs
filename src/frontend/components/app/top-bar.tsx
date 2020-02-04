@@ -16,6 +16,7 @@ const NavBar = styled(Box)`
   background: ${({ theme }): string => theme.colors.white};
   display: flex;
   flex-direction: row;
+  flex-shrink: 0;
 `
 
 type PropsFromState = {
