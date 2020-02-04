@@ -213,6 +213,7 @@ describe('ResourceDecorator', function () {
         'name',
         'parent',
         'href',
+        'actions',
         'titleProperty',
         'resourceActions',
         'listProperties',
