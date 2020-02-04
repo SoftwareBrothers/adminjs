@@ -12,6 +12,7 @@ factory.define<ResourceJSON>('ResourceJSON', Object, {
     name: 'someName',
     icon: 'someIcon',
   },
+  actions: [],
   resourceActions: [],
   listProperties: [],
   showProperties: [],

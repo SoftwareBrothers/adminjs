@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react'
+import React, { ReactNode, ComponentClass } from 'react'
 import { connect } from 'react-redux'
 
 import { RouteComponentProps } from 'react-router'

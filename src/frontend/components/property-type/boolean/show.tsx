@@ -11,7 +11,7 @@ export default class Show extends React.PureComponent<EditPropertyProps> {
     const value = mapValue(record.params[property.name])
 
     return (
-      <FormGroup property={property}>
+      <FormGroup>
         <Label>{property.label}</Label>
         {value}
       </FormGroup>

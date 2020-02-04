@@ -19,7 +19,7 @@ const Wrapper = styled.span<IconProps>`
   font-size: ${({ theme }): string => theme.fontSizes.sm};
   
   & > svg {
-    ${({ theme, color: colorProp }): string => (color ? `fill: ${theme.colors[colorProp]}` : '')};
+    ${({ theme, color: colorProp }): string => (colorProp ? `fill: ${theme.colors[colorProp]}` : '')};
   }
   ${({ rounded }): string => (rounded ? 'border-radius: 9999px;' : '')};
 

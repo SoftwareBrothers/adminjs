@@ -3,7 +3,10 @@ import AdminBro from './types/src/admin-bro'
 import * as ACTIONS from './types/src/backend/actions/index'
 import { ReduxState } from './types/src/frontend/store/store'
 
-import { colors, sizes, fonts, breakpoints } from './types/src/frontend/styles/variables'
+import {
+  colors, space, sizes, fontSizes, fontWeights,
+  lineHeights, font,
+} from './types/src/frontend/styles/variables'
 
 export { default as Router } from './types/src/backend/router'
 export { default as Filter } from './types/src/backend/utils/filter'
@@ -63,12 +66,15 @@ export { ActionProps } from './types/src/frontend/components/actions/action.prop
 
 export type DefaultTheme = {
   colors: typeof colors;
+  space: typeof space;
   sizes: typeof sizes;
-  fonts: typeof fonts;
-  breakpoints: typeof breakpoints;
+  fontSizes: typeof fontSizes;
+  fontWeights: typeof fontWeights;
+  lineHeights: typeof lineHeights;
+  font: typeof font;
 }
 
-export * from './types/src/frontend/components/ui'
+export * from './types/src/frontend/components/design-system'
 export * from './types/src/frontend/components/app'
 export * from './types/src/constants'
 

@@ -23,7 +23,7 @@ export const Label = styled.label<LabelProps>`
   font-family: ${({ theme }): string => theme.font};
   font-size: ${({ theme }): string => theme.fontSizes.sm};
   line-height: ${({ theme }): string => theme.lineHeights.default};
-  margin-bottom: ${({ theme, inline }): string => (inline ? 0 : theme.space.default)};
+  margin-bottom: ${({ theme, inline }): string => (inline ? '0' : theme.space.default)};
 
   &:before {
     content: "${({ required }): string => (required ? '*' : '')}";

@@ -1,0 +1,39 @@
+{
+  "name": "design-system",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "@carbon/icons-react": "^10.8.1",
+    "@types/react": "^16.9.19",
+    "awesome-typescript-loader": "^5.2.1",
+    "react": "^16.12.0",
+    "react-datepicker": "^2.11.0",
+    "react-docgen-typescript-loader": "^3.6.0",
+    "styled-components": "^5.0.0",
+    "styled-system": "^5.1.4",
+    "ts-loader": "^6.2.1",
+    "typescript": "^3.7.5"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.8.3",
+    "@storybook/addon-actions": "^5.3.10",
+    "@storybook/addon-links": "^5.3.8",
+    "@storybook/addons": "^5.3.8",
+    "@storybook/preset-typescript": "^1.2.0",
+    "@storybook/react": "^5.3.8",
+    "@typescript-eslint/eslint-plugin": "^2.3.1",
+    "@typescript-eslint/parser": "^2.3.1",
+    "babel-loader": "^8.0.6",
+    "eslint": "^5.10.0",
+    "eslint-config-airbnb": "^17.1.0",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-jsx-a11y": "^6.2.1",
+    "eslint-plugin-mocha": "^6.2.2",
+    "eslint-plugin-react": "^7.12.4"
+  },
+  "scripts": {
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook"
+  }
+}

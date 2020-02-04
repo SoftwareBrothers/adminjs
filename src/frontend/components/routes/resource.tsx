@@ -32,17 +32,17 @@ const getAction = (resource: ResourceJSON): ActionJSON | undefined => {
 
   const recordActionUrl = h.recordActionUrl({ resourceId, recordId, actionName })
   const resourceActionUrl = h.resourceActionUrl({ resourceId, actionName })
-  const bulkActionUrl = h.bulkActionUrl({ resourceId, actionName, recordIds: undefined })
+  const bulkActionUrl = h.bulkActionUrl({ resourceId, actionName })
 
   const resourceActionMatch = useRouteMatch<ResourceActionParams>(resourceActionUrl)
   const recordActionMatch = useRouteMatch<RecordActionParams>(recordActionUrl)
-  const bulkActionMatch = useRouteMatch<BulkActionParams>(bulkActionUrl)
+  const bulkActionMatch = useRouteMatch<Pick<BulkActionParams, 'actionName' | 'resourceId'>>(bulkActionUrl)
 
   const action = resourceActionMatch?.params.actionName
     || recordActionMatch?.params.actionName
     || bulkActionMatch?.params.actionName
 
-  return action && resource.actions.find(a => a.name === action)
+  return action ? resource.actions.find(a => a.name === action) : undefined
 }
 
 const ResourceAction: React.FC<Props> = (props) => {
