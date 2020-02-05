@@ -8,9 +8,11 @@ script:
 - yarn run lint
 - yarn run cspell
 - yarn codecov
-- yarn build
 - NODE_ENV=production ONCE=true yarn bundle
 - NODE_ENV=dev ONCE=true yarn bundle
+- NODE_ENV=production yarn bundle:globals
+- NODE_ENV=dev yarn bundle:globals
+- yarn build
 - yarn types
 deploy:
   skip_cleanup: true
