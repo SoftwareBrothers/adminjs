@@ -97,14 +97,16 @@ class Edit extends React.Component<ActionProps & RouteComponentProps & AddNotice
   }
 
   render(): ReactNode {
-    const { resource } = this.props
+    const { resource, action } = this.props
     const properties = resource.editProperties
     const { record, loading } = this.state
 
     return (
       <Box as="form" onSubmit={this.handleSubmit} flex flexGrow={1} flexDirection="column" height={1}>
         <DrawerContent>
-          <ActionHeader {...this.props} />
+          {action?.showInDrawer ? (
+            <ActionHeader {...this.props} />
+          ) : ''}
           {properties.map(property => (
             <PropertyType
               key={property.name}

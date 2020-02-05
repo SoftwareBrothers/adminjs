@@ -93,7 +93,7 @@ class RecordInList extends React.PureComponent<Props & RouteComponentProps> {
         <TableCell key="options">
           {recordActions.length ? (
             <DropDown>
-              <DropDownTrigger p="sm">
+              <DropDownTrigger py="sm" px="xl">
                 <Icon icon="OverflowMenuHorizontal" />
               </DropDownTrigger>
               <DropDownMenu>

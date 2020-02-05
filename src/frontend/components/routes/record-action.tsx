@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 
 import { RouteComponentProps } from 'react-router'
 
-import { Loader, Drawer, Box } from '../design-system'
+import { Loader, Drawer } from '../design-system'
 import BaseActionComponent from '../app/base-action-component'
 import ApiClient from '../../utils/api-client'
 import { RecordActionParams } from '../../../backend/utils/view-helpers'
@@ -15,7 +15,7 @@ import { NoResourceError, NoActionError, NoRecordError } from '../app/error-mess
 import withNotice, { AddNoticeProps } from '../../store/with-notice'
 import shouldActionReFetchData from './utils/should-action-re-fetch-data'
 import Wrapper from './utils/wrapper'
-import { Breadcrumbs } from '../app'
+import { Breadcrumbs, ActionHeader } from '../app'
 
 interface State {
   record: RecordJSON | undefined;
@@ -124,7 +124,14 @@ class RecordAction extends React.Component<Props & AddNoticeProps, State> {
     return (
       <ActionWrapper>
         {!action?.showInDrawer ? (
-          <Breadcrumbs resource={resource} actionName={action.name} record={record} />
+          <React.Fragment>
+            <Breadcrumbs resource={resource} actionName={action.name} record={record} />
+            <ActionHeader
+              resource={resource}
+              action={action}
+              record={record}
+            />
+          </React.Fragment>
         ) : ''}
         <BaseActionComponent
           action={action as ActionJSON}

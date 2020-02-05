@@ -12,7 +12,7 @@ const LogoLink = styled(Link)`
   color: ${({ theme }): string => theme.colors.darkGrey};
 
   & > img {
-    margin-right: ${({ theme }): string => theme.space.default};
+    margin-right: 12px;
   }
 `
 

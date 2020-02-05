@@ -5,7 +5,7 @@ import { Box } from '../atoms/box'
 export const Navigation = styled(Box)`
   height: 100%;
   width: ${({ theme }): string => theme.sizes.sidebarWidth};
-  padding: ${({ theme }): string => theme.space.xl} ${({ theme }): string => theme.space.lg};
+  padding: ${({ theme }): string => theme.space.lg};
   display: flex;
   flex-direction: column;
   overflow: auto;

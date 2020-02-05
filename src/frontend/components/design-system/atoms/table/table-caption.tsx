@@ -2,11 +2,11 @@ import styled from 'styled-components'
 import { Button } from '../button'
 import { Text } from '../text'
 
-const CAPTION_HEIGHT = '46px'
+const CAPTION_HEIGHT = '42px'
 
 const TableCaption = styled.caption`
   font-family: ${({ theme }): string => theme.font};
-  padding: ${({ theme }): string => theme.space.default} ${({ theme }): string => theme.space.lg};
+  padding: ${({ theme }): string => theme.space.sm} ${({ theme }): string => theme.space.lg};
   text-align: left;
   color: ${({ theme }): string => theme.colors.white};
   font-size: ${({ theme }): string => theme.fontSizes.default};

@@ -34,6 +34,7 @@ export const FormMessage = styled(Text)`
   height: ${({ theme }): string => theme.space.xl};
   margin: ${({ theme }): string => theme.space.sm} 0 0;
   font-weight: normal;
+  font-size: ${({ theme }): string => theme.fontSizes.sm};
 `
 
 export const InputGroup = styled.div`

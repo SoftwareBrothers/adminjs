@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom'
 
 const SidebarLink = styled(NavLink)`
   color: ${({ theme }): string => theme.colors.darkGrey};
-  padding: ${({ theme }): string => theme.space.sm} 0;
+  padding: ${({ theme }): string => theme.space.sm};
   display: block;
   text-decoration: none;
 

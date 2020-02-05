@@ -10,7 +10,7 @@ import ResourceJSON from '../../../backend/decorators/resource-json.interface'
 import ActionJSON from '../../../backend/decorators/action-json.interface'
 import RecordJSON from '../../../backend/decorators/record-json.interface'
 
-import { Box, Badge, H3, H2, Button, Icon, ButtonCSS } from '../design-system'
+import { Box, Badge, H3, H2, Button, Icon, ButtonCSS, ButtonProps } from '../design-system'
 
 /**
  * @memberof ActionHeader
@@ -26,7 +26,8 @@ interface Props {
   omitActions?: boolean;
 }
 
-const StyledLink = styled(Link)`${ButtonCSS}`
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const StyledLink = styled(({ rounded, ...rest }) => <Link {...rest} />)<ButtonProps>`${ButtonCSS}`
 
 /**
  * Header of an action
@@ -48,10 +49,18 @@ const ActionHeader: React.FC<Props> = (props) => {
   const title = action ? action.label : resource.name
   const isList = action && action.name === 'list'
 
+  // styled which differs if action header is in the drawer or not
+  const cssIsRootFlex = !action.showInDrawer
+  const cssHeaderMT = action.showInDrawer ? '' : 'lg'
+  const cssCloseIcon = action.showInDrawer ? 'ChevronRight' : 'ChevronLeft'
+  const cssActionButtonSize = action.showInDrawer ? 'sm' : 'lg'
+  const cssActionsMB = action.showInDrawer ? 'xl' : 'default'
+  const CssHComponent = action.showInDrawer ? H3 : H2
+
   return (
-    <Box flex={!action.showInDrawer}>
-      <Box mt={action.showInDrawer ? '' : 'lg'} flexGrow={1}>
-        <H2 mb="lg">
+    <Box flex={cssIsRootFlex}>
+      <Box mt={cssHeaderMT} flexGrow={1}>
+        <CssHComponent mb="lg">
           {!isList ? (
             <StyledLink
               size="icon"
@@ -60,15 +69,15 @@ const ActionHeader: React.FC<Props> = (props) => {
               mr="lg"
               type="button"
             >
-              <Icon icon={`Chevron${action.showInDrawer ? 'Right' : 'Left'}`} />
+              <Icon icon={cssCloseIcon} />
             </StyledLink>
           ) : ''}
           {title}
           {tag ? (<Badge variant="primary" ml="default">{tag}</Badge>) : ''}
-        </H2>
+        </CssHComponent>
       </Box>
       {omitActions ? '' : (
-        <Box mt="xl" mb={action.showInDrawer ? 'xl' : 'default'} flexShrink={0}>
+        <Box mt="xl" mb={cssActionsMB} flexShrink={0}>
           {actions.map(headerAction => (
             <ActionButton
               action={headerAction}
@@ -77,7 +86,13 @@ const ActionHeader: React.FC<Props> = (props) => {
               resourceId={resource.id}
               recordId={record && record.id}
             >
-              <Button as="span" mr="default" mb="default" size={action.showInDrawer ? 'sm' : 'lg'}>
+              <Button
+                as="span"
+                mr={action.showInDrawer ? 'default' : ''}
+                ml={!action.showInDrawer ? 'default' : ''}
+                mb="default"
+                size={cssActionButtonSize}
+              >
                 <Icon icon={headerAction.icon} />
                 {headerAction.label}
               </Button>

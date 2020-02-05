@@ -41,7 +41,6 @@ class BulkAction extends React.Component<Props, State> {
     this.state = {
       records: undefined,
       isLoading: true,
-      tag: undefined,
     }
   }
 
@@ -57,10 +56,6 @@ class BulkAction extends React.Component<Props, State> {
       return false
     }
     return true
-  }
-
-  setTag(tagName): void {
-    this.setState({ tag: tagName })
   }
 
   fetchRecords({ resourceId, actionName }: MatchParams): Promise<void> {
@@ -86,7 +81,7 @@ class BulkAction extends React.Component<Props, State> {
   render(): ReactNode {
     const { resources, match } = this.props
     const { resourceId, actionName } = match.params
-    const { isLoading, tag, records } = this.state
+    const { isLoading, records } = this.state
 
     const resource = resources.find(r => r.id === resourceId)
 
@@ -117,18 +112,18 @@ class BulkAction extends React.Component<Props, State> {
     return (
       <ActionWrapper>
         {!action?.showInDrawer ? (
-          <Breadcrumbs resource={resource} actionName={action.name} />
+          <React.Fragment>
+            <Breadcrumbs resource={resource} actionName={action.name} />
+            <ActionHeader
+              resource={resource}
+              action={action}
+            />
+          </React.Fragment>
         ) : ''}
-        <ActionHeader
-          resource={resource}
-          action={action}
-          tag={tag}
-        />
         <BaseAction
           action={action as ActionJSON}
           resource={resource}
           records={records}
-          setTag={this.setTag}
         />
       </ActionWrapper>
     )

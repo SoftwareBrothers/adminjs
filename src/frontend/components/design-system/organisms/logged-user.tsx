@@ -5,11 +5,14 @@ import { DropDown, DropDownTrigger, DropDownMenu } from './drop-down'
 import { Text } from '../atoms/text'
 import { Icon } from '../atoms/icon'
 
+const height = '46px'
+
 const LoggedUserInfo = styled(Box)`
   display: flex;
   flex-direction: row;
   vertical-align: middle;
   color: ${({ theme }): string => theme.colors.grey};
+  height: ${height};
 
   & img {
     border-radius: 9999px;
@@ -45,7 +48,7 @@ export const LoggedUser: React.FC<LoggedUserProps> = (props) => {
           <Icon icon="OverflowMenuVertical" size={16} my="default" color="grey" />
         </LoggedUserInfo>
       </DropDownTrigger>
-      <DropDownMenu top="36px">
+      <DropDownMenu top={height}>
         {children}
       </DropDownMenu>
     </DropDown>

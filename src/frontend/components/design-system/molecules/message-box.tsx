@@ -81,6 +81,7 @@ type StyledMessageBoxProps = {
   variant?: 'danger' | 'info' | 'success';
   icon?: string;
   size?: string;
+  style?: Record<string, string>;
 }
 
 export type MessageBoxProps = SpaceProps & StyledMessageBoxProps

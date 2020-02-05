@@ -57,7 +57,6 @@ const StyledCheckbox = styled.a<StyledProps>`
   background: ${({ checked, theme, disabled }): string => checkboxBackground(theme, checked, disabled)};
   transition: all 150ms;
   position: relative;
-  z-index: 2;
 
   ${HiddenCheckbox}:focus + & {
     box-shadow: 0 2px 4px 0 ${({ theme }): string => opacify(0.3, theme.colors.blueSecondary)};
@@ -67,7 +66,6 @@ const StyledCheckbox = styled.a<StyledProps>`
   }
   ${Icon} {
     visibility: ${(props): string => (props.checked ? 'visible' : 'hidden')};
-    z-index: 1;
   }
 
   &:after {
@@ -75,7 +73,6 @@ const StyledCheckbox = styled.a<StyledProps>`
     position: absolute;
     left: -5px;
     top: -5px;
-    z-index: 1;
     width: 24px;
     height: 24px;
     opacity: 0;

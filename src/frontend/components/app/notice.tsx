@@ -69,6 +69,7 @@ class NoticeElement extends React.Component<NoticeElementProps, NoticeElementSta
     const { progress } = this.state
     return (
       <MessageBox
+        style={{ minWidth: '480px' }}
         message={notice.message}
         variant={notice.type === 'success' ? 'success' : 'danger'}
         onCloseClick={drop}

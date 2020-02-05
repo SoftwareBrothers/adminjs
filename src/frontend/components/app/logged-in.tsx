@@ -13,7 +13,7 @@ type Props = {
 const LoggedIn: React.FC<Props> = (props) => {
   const { session, paths } = props
   return (
-    <Box flexShrink={0} py="default">
+    <Box flexShrink={0} py="lg">
       <LoggedUser
         email={session.email}
         title={session.title}

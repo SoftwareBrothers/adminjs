@@ -100,6 +100,8 @@ export default class Edit extends React.Component<Props> {
         {items.map((item, i) => (
           <ItemRenderer
             {...this.props}
+            // eslint-disable-next-line react/no-array-index-key
+            key={i}
             i={i}
             onDelete={(event): false => this.removeItem(i, event)}
           />

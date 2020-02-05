@@ -12,9 +12,9 @@ const SidebarFooter: React.FC = () => (
         href="http://softwarebrothers.co"
         target="_blank"
         rel="noopener noreferrer"
-        ml="sx"
+        mx="xs"
       >
-          SoftwareBrothers
+        SoftwareBrothers
       </Link>
     </Text>
   </Box>
