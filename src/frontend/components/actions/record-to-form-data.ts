@@ -1,6 +1,8 @@
-import { flatten, unflatten } from 'flat'
+import flat from 'flat'
 
 import RecordJSON from '../../../backend/decorators/record-json.interface'
+
+const { flatten, unflatten } = flat;
 
 /**
  * Changes RecordJSON that it can be send as a FormData to the backend.

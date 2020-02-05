@@ -1,6 +1,8 @@
-import { flatten } from 'flat'
+import flat from 'flat'
 
 import RecordJSON from '../../../../backend/decorators/record-json.interface'
+
+const { flatten } = flat;
 
 /**
  * for given params:
