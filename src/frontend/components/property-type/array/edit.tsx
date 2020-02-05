@@ -1,5 +1,5 @@
 import React, { ReactNode, MouseEvent } from 'react'
-import { flatten, unflatten } from 'flat'
+import flat from 'flat'
 
 import convertParamsToArrayItems from './convert-params-to-array-items'
 import { Button, Section, FormGroup, FormMessage, Label, Icon, Box } from '../../design-system'
@@ -7,6 +7,7 @@ import PropertyJSON from '../../../../backend/decorators/property-json.interface
 import RecordJSON from '../../../../backend/decorators/record-json.interface'
 import updateParamsArray from './update-params-array'
 
+const { flatten, unflatten } = flat
 
 const normalizeParams = (params: RecordJSON['params']): RecordJSON['params'] => (
   flatten<string, any>(unflatten(params, { overwrite: true }))

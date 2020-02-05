@@ -1,4 +1,4 @@
-import * as flat from 'flat'
+import flat from 'flat'
 import PropertyJSON from '../../../../backend/decorators/property-json.interface'
 import RecordJSON from '../../../../backend/decorators/record-json.interface'
 
