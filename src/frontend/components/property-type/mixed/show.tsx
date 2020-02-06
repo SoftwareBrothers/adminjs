@@ -13,7 +13,7 @@ const Show: React.FC<Props & BasePropertyProps> = (props) => {
     <FormGroup>
       <Label>{property.label}</Label>
       <Section>
-        {property.subProperties.map(subProperty => (
+        {property.subProperties.filter(subProperty => subProperty.name !== '_id').map(subProperty => (
           <ItemComponent
             {...props}
             key={subProperty.name}
