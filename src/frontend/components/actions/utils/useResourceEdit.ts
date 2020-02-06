@@ -13,12 +13,12 @@ const useResourceEdit = (
   resourceId: string,
   onNotice: (notice: NoticeMessage) => void
 ) => {
-  const [record, setRecord] = useState({
+  const [record, setRecord] = useState<RecordJSON>({
     ...initialRecord,
     params: initialRecord?.params ?? {},
     errors: initialRecord?.errors ?? {},
     populated: initialRecord?.populated ?? {},
-  });
+  } as any);
   const [loading, setLoading] = useState(false);
   const history = useHistory();
 
@@ -28,9 +28,10 @@ const useResourceEdit = (
   ): void => {
     if (
       typeof value === "undefined" &&
-      (propertyOrRecord as RecordJSON).params
+      !(typeof propertyOrRecord === 'string') &&
+      propertyOrRecord.params
     ) {
-      setRecord(propertyOrRecord as RecordJSON);
+      setRecord(propertyOrRecord);
     } else {
       setRecord(prev => ({
         ...prev,
@@ -40,13 +41,13 @@ const useResourceEdit = (
   };
 
   const handleSubmit = (event): boolean => {
-    const formData = recordToFormData(record as RecordJSON);
+    const formData = recordToFormData(record);
     setLoading(true);
     api
       .recordAction({
         resourceId,
         actionName: 'edit',
-        recordId: (record as RecordJSON).id,
+        recordId: (record).id,
         data: formData,
         headers: { "Content-Type": "multipart/form-data" }
       })

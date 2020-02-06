@@ -13,12 +13,12 @@ const useResourceNew = (
   resourceId: string,
   onNotice: (notice: NoticeMessage) => void
 ) => {
-  const [record, setRecord] = useState({
+  const [record, setRecord] = useState<RecordJSON>({
     ...initialRecord,
     params: initialRecord?.params ?? {},
     errors: initialRecord?.errors ?? {},
     populated: initialRecord?.populated ?? {},
-  });
+  } as any);
   const [loading, setLoading] = useState(false);
   const history = useHistory();
 
@@ -28,9 +28,10 @@ const useResourceNew = (
   ): void => {
     if (
       typeof value === "undefined" &&
-      (propertyOrRecord as RecordJSON).params
+      !(typeof propertyOrRecord === 'string') &&
+      (propertyOrRecord).params
     ) {
-      setRecord(propertyOrRecord as RecordJSON);
+      setRecord(propertyOrRecord);
     } else {
       setRecord(prev => ({
         ...prev,
@@ -40,7 +41,7 @@ const useResourceNew = (
   };
 
   const handleSubmit = (event): boolean => {
-    const formData = recordToFormData(record as RecordJSON);
+    const formData = recordToFormData(record);
     setLoading(true);
     api
       .resourceAction({
