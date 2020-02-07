@@ -43,6 +43,10 @@ export type ActionContext = {
    * Currently logged in admin
    */
   currentAdmin?: CurrentAdmin;
+  /**
+   * Any custom property which you can add to context
+   */
+  [key: string]: any;
 }
 
 /**

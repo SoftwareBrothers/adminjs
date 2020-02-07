@@ -39,6 +39,7 @@ export {
   ActionHandler,
   After,
   Before,
+  IsFunction,
   RecordActionResponse,
 } from './types/src/backend/actions/action.interface'
 
