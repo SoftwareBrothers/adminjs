@@ -68,6 +68,31 @@ const StyledRadio = styled.span<StyledProps>`
 
 export type RadioProps = React.HTMLProps<HTMLInputElement>
 
+/**
+ * @typedef {object} RadioProps
+ * @alias RadioProps
+ * @memberof Radio
+ * @property {string} [...] All props default to _radio_ html input like `onChange`,
+ *                          `checked` etc.
+ */
+
+/**
+ * Wrapped radio input.
+ *
+ * Usage:
+ * ```javascript
+ * import { Radio, RadioProps } from 'admin-bro'
+ * ```
+ *
+ * @component
+ * @example
+ * return (
+ *   <Box p="xl">
+ *      <Radio id="radio1"/>
+ *      <Label inline htmlFor="radio1" ml="default">Some example label</Label>
+ *   </Box>
+ * )
+ */
 export const Radio: React.FC<RadioProps> = (props) => {
   const { className, checked, onChange, disabled, ...restProps } = props
   let handleChange = onChange
@@ -100,3 +125,5 @@ export const Radio: React.FC<RadioProps> = (props) => {
     </CheckboxRadioContainer>
   )
 }
+
+export default Radio

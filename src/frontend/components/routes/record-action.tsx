@@ -15,7 +15,7 @@ import { NoResourceError, NoActionError, NoRecordError } from '../app/error-mess
 import withNotice, { AddNoticeProps } from '../../store/with-notice'
 import shouldActionReFetchData from './utils/should-action-re-fetch-data'
 import Wrapper from './utils/wrapper'
-import { Breadcrumbs, ActionHeader } from '../app'
+import { ActionHeader } from '../app'
 
 interface State {
   record: RecordJSON | undefined;
@@ -124,14 +124,11 @@ class RecordAction extends React.Component<Props & AddNoticeProps, State> {
     return (
       <ActionWrapper>
         {!action?.showInDrawer ? (
-          <React.Fragment>
-            <Breadcrumbs resource={resource} actionName={action.name} record={record} />
-            <ActionHeader
-              resource={resource}
-              action={action}
-              record={record}
-            />
-          </React.Fragment>
+          <ActionHeader
+            resource={resource}
+            action={action}
+            record={record}
+          />
         ) : ''}
         <BaseActionComponent
           action={action as ActionJSON}

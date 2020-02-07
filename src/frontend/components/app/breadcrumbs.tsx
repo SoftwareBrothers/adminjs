@@ -75,7 +75,7 @@ class Breadcrumbs extends React.PureComponent<Props> {
 
   render(): ReactNode {
     return (
-      <Box>
+      <Box flexGrow={1}>
         {this.renderResource()}
         {this.renderAction()}
       </Box>

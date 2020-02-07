@@ -4,6 +4,9 @@ import { Text } from '../text'
 
 const CAPTION_HEIGHT = '42px'
 
+/**
+ * @component
+ */
 const TableCaption = styled.caption`
   font-family: ${({ theme }): string => theme.font};
   padding: ${({ theme }): string => theme.space.sm} ${({ theme }): string => theme.space.lg};
@@ -23,6 +26,9 @@ const TableCaption = styled.caption`
     color: ${({ theme }): string => theme.colors.white};
     & > span svg {
       fill: ${({ theme }): string => theme.colors.white};
+    }
+    &:hover {
+      color: ${({ theme }): string => theme.colors.white};
     }
   }
 

@@ -1,23 +1,54 @@
 import styled from 'styled-components'
 import {
-  color, space, fontSize,
-  ColorProps, SpaceProps, FontSizeProps,
-  variant, display, DisplayProps,
+  color, space,
+  ColorProps, SpaceProps,
+  TypographyProps,
+  typography,
 } from 'styled-system'
 
-const variants = variant({
-  variants: {
-    required: {},
-  },
-})
-
-export type LabelProps = ColorProps & SpaceProps & FontSizeProps & DisplayProps & {
+/**
+ * Prop Types of a Label component.
+ * Apart from those explicitly specified below it extends all {@link ColorProps},
+ * {@link SpaceProps} and {@link TypographyProps}
+ *
+ * @memberof Label
+ * @alias LabelProps
+ * @property {string} [...] All props default to _label_ html component like `htmlFor`,
+ *                          `id` etc.
+ * @property {string} [...] Other props from {@link ColorProps}, {@link SpaceProps}
+ *                          and {@link TypographyProps}
+ */
+export type LabelProps = ColorProps & SpaceProps & TypographyProps & {
+  /** If label represents required field - appends star (*) */
   required?: boolean;
+  /** If label should be in uppercase version */
   uppercase?: boolean;
+  /** By default labels are displayed as a block. You can override this by setting `inline` */
   inline?: boolean;
+  /** If label represents disabled field (dimmed version) */
   disabled?: boolean;
 }
 
+/**
+ * Styled form of <label> element.
+ *
+ * Usage:
+ * ```javascript
+ * import { Label, LabelProps } from 'admin-bro'
+ * ```
+ * @component
+ * @example <caption>2 Different versions</caption>
+ * return (
+ * <Box p="xl">
+ *   <Text>
+ *     <Label uppercase>Some uppercase label</Label>
+ *   </Text>
+ *   <Text mt="default">
+ *     <Label required>Label for required field</Label>
+ *   </Text>
+ * </Box>
+ * )
+ */
 export const Label = styled.label<LabelProps>`
   display: ${({ inline }): string => (inline ? 'inline-block' : 'block')};
   font-family: ${({ theme }): string => theme.font};
@@ -35,9 +66,9 @@ export const Label = styled.label<LabelProps>`
   ${({ uppercase }): string => (uppercase ? 'text-transform: uppercase;' : '')}
 
   ${color};
-  ${display};
+  ${typography};
   ${space};
-  ${fontSize};
-  ${variants}
   ${({ disabled, theme }): string => (disabled ? `color: ${theme.colors.greyLight};` : '')}
 `
+
+export default Label

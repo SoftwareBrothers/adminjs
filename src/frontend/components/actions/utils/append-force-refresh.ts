@@ -6,6 +6,7 @@ export const REFRESH_KEY = 'refresh'
  * @param {string} url      url to which function should add `refresh`
  * @param {string} [search] optional search query which should be updated,
  *                          if not given function will use window.location.search
+ * @private
  */
 export const appendForceRefresh = (url: string, search?: string): string => {
   const params = new URLSearchParams(search ?? window.location.search)

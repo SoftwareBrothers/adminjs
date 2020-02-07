@@ -3,12 +3,34 @@ import styled from 'styled-components'
 import { space, SpaceProps, color, ColorProps } from 'styled-system'
 import * as CarbonIcons from '@carbon/icons-react'
 
-
+/**
+ * Prop Types of an Icon component.
+ * Apart from props defined below it extends all {@link ColorProps} and {@link SpaceProps}
+ *
+ * @memberof Icon
+ * @alias IconProps
+ * @property {string} [...] Other props from {@link ColorProps} and {@link SpaceProps}
+ */
 export type IconProps = SpaceProps & ColorProps & {
+  /**
+   * CamelCased name of an icon from https://www.carbondesignsystem.com/guidelines/icons/library/
+   */
   icon?: string;
+  /**
+   * Size variant. Default to 16
+   */
   size?: 16 | 20 | 24 | 32;
+  /**
+   * Icon color
+   */
   color?: string;
+  /**
+   * Icon background
+   */
   bg?: string;
+  /**
+   * If background should be rounded
+   */
   rounded?: boolean;
 }
 
@@ -27,6 +49,35 @@ const Wrapper = styled.span<IconProps>`
   ${color};
 `
 
+/**
+ * Component wrapping '@carbon/icons-react'. List of all icons can be found
+ * here: https://www.carbondesignsystem.com/guidelines/icons/library/
+ *
+ * @component
+ * @example <caption>Icons inside other elements</caption>
+ * return (
+ *   <Box variant="grey">
+ *     <Label mb="default"><Icon icon="Accessibility" />Icon in Label</Label>
+ *     <Button><Icon icon="Accessibility" />Icon in button</Button>
+ *   </Box>
+ * )
+ * @example <caption>Different sizes</caption>
+ * const sizes = [16, 20, 24, 32]
+ * return (
+ *   <Box variant="grey">
+ *     {sizes.map(size => (
+ *       <Label m="default"><Icon icon="Accessibility" size={size}/>Icon {size}</Label>
+ *     ))}
+ *   </Box>
+ * )
+ *
+ * @example <caption>Big rounded icon with background</caption>
+ * return (
+ *   <Box variant="grey">
+ *     <Icon icon="Add" color="white" bg="bluePrimary" rounded size={32} p="default"/>
+ *   </Box>
+ * )
+ */
 export const Icon: React.FC<IconProps> = (props) => {
   const { icon, size, ...other } = props
   const iconSize = size || 16
@@ -39,3 +90,5 @@ export const Icon: React.FC<IconProps> = (props) => {
   }
   return null
 }
+
+export default Icon

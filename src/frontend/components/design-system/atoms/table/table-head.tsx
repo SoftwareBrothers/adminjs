@@ -1,5 +1,8 @@
 import styled from 'styled-components'
 
+/**
+ * @component
+ */
 const TableHead = styled.thead`
   background: ${({ theme }): string => theme.colors.greyPale};
 

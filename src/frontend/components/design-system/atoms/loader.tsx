@@ -51,7 +51,7 @@ const Spinner = styled.div.attrs({
  * @component
  * @example
  * return (
- *   <WrapperBox border><Loader/></WrapperBox>
+ *   <Loader/>
  * )
  */
 export const Loader: React.FC = () => (
@@ -63,3 +63,5 @@ export const Loader: React.FC = () => (
     </Spinner>
   </Box>
 )
+
+export default Loader

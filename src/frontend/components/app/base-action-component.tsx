@@ -5,7 +5,7 @@ import ErrorBoundary from './error-boundary'
 import * as actions from '../actions'
 import { DOCS } from '../../../constants'
 import { ActionProps } from '../actions/action.props'
-import { Box, MessageBox } from '../design-system'
+import { MessageBox } from '../design-system'
 
 declare const AdminBro: {
   UserComponents: Array<string>;

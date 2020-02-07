@@ -1,8 +1,9 @@
 import React from 'react'
 
-import styled from 'styled-components'
+import styled, { StyledComponentProps } from 'styled-components'
+import { LayoutProps, layout } from 'styled-system'
 
-const StyledPlaceholder = styled.div`
+const StyledPlaceholder = styled.div<LayoutProps>`
   @keyframes placeHolderShimmer{
     0%{
         background-position: -468px 0
@@ -23,32 +24,50 @@ const StyledPlaceholder = styled.div`
   height: 338px;
   position: relative;
   overflow: hidden;
+  ${layout};
 `
 
 /**
  * Renders placeholder
  * @component
  *
+ * Usage:
+ * ```javascript
+ * import { Placeholder, PlaceholderProps } from 'admin-bro'
+ * ```
+ *
  * @example <caption>Image placeholder</caption>
  * return (
- *   <WrapperBox border>
- *     <Placeholder style={{ width: 100, height: 200 }} />
- *   </WrapperBox>
+ *   <Box>
+ *     <Placeholder width={100} height={200} />
+ *   </Box>
  * )
  *
  * @example <caption>Text placeholder</caption>
  * return (
- *   <WrapperBox border>
+ *   <Box>
  *     <Label>Some name</Label>
- *     <Placeholder style={{ width: 400, height: 14 }} />
- *   </WrapperBox>
+ *     <Placeholder width={400} height={14} />
+ *   </Box>
  * )
  */
-export const Placeholder: React.FC<PlaceholderProps> = props => (<StyledPlaceholder {...props} />)
+export const Placeholder: React.FC<PlaceholderProps> = ({ as: htmlAs, ref, ...other }) => (
+  <StyledPlaceholder as={htmlAs} {...other} />
+)
+
+export type PlaceholderProps = LayoutProps & React.HTMLProps<HTMLDivElement> & {
+  as?: 'div' | 'span';
+}
 
 /**
+ * Prop Types of a Placeholder component.
+ * Apart from standard html props it extends {@link LayoutProps}
+ * @typedef {object} PlaceholderProps
  * @memberof Placeholder
+ * @alias PlaceholderProps
+ * @property {string} [...] All props default to _div_ html component like `style`,
+ *                          `id` etc.
+ * @property {string} [...] Props from {@link LayoutProps}
  */
-export type PlaceholderProps = {
-  style?: React.CSSProperties;
-}
+
+export default Placeholder

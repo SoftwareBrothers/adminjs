@@ -3,8 +3,7 @@ import { Link } from 'react-router-dom'
 
 import ViewHelpers from '../../../../backend/utils/view-helpers'
 import ResourceJSON from '../../../../backend/decorators/resource-json.interface'
-import { ErrorBox } from '../../design-system/molecules/error-box'
-import { Text, Button, Icon } from '../../design-system'
+import { Text, Button, Icon, InfoBox } from '../../design-system'
 
 type Props = {
   resource: ResourceJSON;
@@ -17,7 +16,7 @@ const NoRecords: React.FC<Props> = (props) => {
   const newAction = h.resourceActionUrl({ resourceId: resource.id, actionName: 'new' })
 
   return (
-    <ErrorBox title="No records">
+    <InfoBox title="No records">
       <Text>
         There are no records in this resource.
       </Text>
@@ -31,7 +30,7 @@ const NoRecords: React.FC<Props> = (props) => {
           </Link>
         </Text>
       ) : ''}
-    </ErrorBox>
+    </InfoBox>
   )
 }
 

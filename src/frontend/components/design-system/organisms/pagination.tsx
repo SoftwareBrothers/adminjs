@@ -6,6 +6,10 @@ import { Box } from '../atoms/box'
 import { Button, ButtonProps } from '../atoms/button'
 import { Icon } from '../atoms/icon'
 
+/**
+ * @alias PaginationProps
+ * @memberof Pagination
+ */
 export type PaginationProps = {
   /**
    * Current page
@@ -20,10 +24,14 @@ export type PaginationProps = {
    */
   total: number;
   /**
-   * location
+   * location. You can pass window.location or the location object
+   * given by ReactRouter
    */
   location?: Location;
 
+  /**
+   * Triggers when user clicks any of the button
+   */
   onChange: (pageNumber: number) => void;
 }
 
@@ -58,6 +66,24 @@ const PaginationWrapper = styled(Box)`
   }
 `
 
+/**
+ * Pagination component
+ *
+ * @component
+ * @example
+ * const location = { search: ''}
+ * return (
+ *   <Text py="xl" textAlign="center">
+ *     <Pagination
+ *      total={100}
+ *      page={4}
+ *      perPage={10}
+ *      location={location}
+ *      onChange={(item) => alert(`clicked ${item}`)}
+ *   />
+ *   </Text>
+ * )
+ */
 export const Pagination: React.FC<PaginationProps> = (props) => {
   const { total, page, perPage, onChange, ...rest } = props
   const currentPage = page || 1
@@ -99,3 +125,5 @@ export const Pagination: React.FC<PaginationProps> = (props) => {
     </PaginationWrapper>
   )
 }
+
+export default Pagination

@@ -85,6 +85,31 @@ const StyledCheckbox = styled.a<StyledProps>`
 
 export type CheckBoxProps = React.HTMLProps<HTMLInputElement>
 
+/**
+ * @typedef {object} CheckBoxProps
+ * @alias CheckBoxProps
+ * @memberof CheckBox
+ * @property {string} [...] All props default to _checkbox_ html input like `onChange`,
+ *                          `checked` etc.
+ */
+
+/**
+ * Wrapped checkbox input.
+ *
+ * Usage:
+ * ```javascript
+ * import { CheckBox, CheckBoxProps } from 'admin-bro'
+ * ```
+ *
+ * @component
+ * @example
+ * return (
+ *   <Box p="xl">
+ *      <CheckBox id="checkbox1"/>
+ *      <Label inline htmlFor="checkbox1" ml="default">Some example label</Label>
+ *   </Box>
+ * )
+ */
 export const CheckBox: React.FC<CheckBoxProps> = (props) => {
   const { className, checked, onChange, disabled, ...restProps } = props
   let handleChange = onChange
@@ -119,3 +144,5 @@ export const CheckBox: React.FC<CheckBoxProps> = (props) => {
     </CheckboxRadioContainer>
   )
 }
+
+export default CheckBox
