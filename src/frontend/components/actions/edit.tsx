@@ -14,8 +14,6 @@ import { appendForceRefresh } from './utils/append-force-refresh'
 import { DrawerContent, Box, DrawerFooter, Button } from '../design-system'
 import ActionHeader from '../app/action-header'
 
-// const [record, updateProperty, dispatchSubmit] = useRecordState(record)
-
 /**
  * @name EditAction
  * @category Actions

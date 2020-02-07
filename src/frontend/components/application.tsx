@@ -9,9 +9,9 @@ import TopBar from './app/top-bar'
 import Notice from './app/notice'
 
 import {
-  Dashboard, ResourceAction, RecordAction, Page, BulkAction, DesignSystem, Resource,
+  Dashboard, ResourceAction, RecordAction, Page, BulkAction, Resource,
 } from './routes'
-import { Drawer, Box } from './design-system'
+import { Box } from './design-system'
 
 const GlobalStyle = createGlobalStyle`
   html, body, #app {

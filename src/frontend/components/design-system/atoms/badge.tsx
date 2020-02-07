@@ -1,9 +1,28 @@
 import styled from 'styled-components'
-import { color, space, fontSize, SpaceProps, FontSizeProps, ColorProps, variant } from 'styled-system'
+import { color, space, typography, SpaceProps, TypographyProps, ColorProps, variant } from 'styled-system'
 
-export type BadgeProps = SpaceProps & FontSizeProps & ColorProps & {
+/**
+ * Prop Types of an Button component.
+ * Apart from those defined below it extends all {@link ColorProps}, {@link SpaceProps}
+ * and {@link TypographyProps}
+ *
+ * @memberof Button
+ * @alias ButtonProps
+ * @property {string} [...] Other props from {@link ColorProps}, {@link SpaceProps}
+ *                          and {@link TypographyProps}
+ */
+export type BadgeProps = SpaceProps & TypographyProps & ColorProps & {
+  /**
+   * Color variant
+   */
   variant?: 'primary' | 'danger' | 'text' | 'success' | 'info' | 'secondary';
+  /**
+   * Outline version
+   */
   outline?: boolean;
+  /**
+   * Size variant
+   */
   size?: 'sm' | 'lg';
 }
 
@@ -36,6 +55,44 @@ const sizeVariants = variant({
   },
 })
 
+/**
+ * Component representing a badge.
+ *
+ * Usage
+ * ```javascript
+ * import { Badge, BadgeProps } from 'admin-bro'
+ * ```
+ *
+ * @component
+ * @example <caption>Color variants</caption>
+ * const variants = ['primary', 'danger', 'success', 'info', 'secondary']
+ * return (
+ * <Box py="lg">
+ *   <Badge mb="default" mr="default">default</Badge>
+ *   {variants.map(variant => (
+ *     <Badge mb="default" variant={variant} mr="default">{variant}</Badge>
+ *   ))}
+ * </Box>
+ * )
+ * @example <caption>Outline badges</caption>
+ * const variants = ['primary', 'danger', 'success', 'info', 'secondary']
+ * return (
+ * <Box py="lg">
+ *   <Badge mb="default" mr="default" outline>default</Badge>
+ *   {variants.map(variant => (
+ *     <Badge mb="default" variant={variant} mr="default" outline>{variant}</Badge>
+ *   ))}
+ * </Box>
+ * )
+ * @example <caption>Different sizes</caption>
+ * return (
+ * <Box py="lg">
+ *   <Badge ml="default" variant="primary" size="sm">small</Badge>
+ *   <Badge ml="default" variant="primary">regular</Badge>
+ *   <Badge ml="default" variant="primary" size="lg">large</Badge>
+ * </Box>
+ * )
+ */
 export const Badge = styled.span<BadgeProps>`
   border-radius: 12px;
   border: 1px solid ${({ theme }): string => theme.colors.greyLight};
@@ -45,7 +102,7 @@ export const Badge = styled.span<BadgeProps>`
 
   ${space};
   ${color};
-  ${fontSize};
+  ${typography};
   ${props => colorVariant(props)};
   ${sizeVariants};
   ${({ outline }): string => (outline ? 'background: transparent;' : '')}
@@ -57,3 +114,5 @@ Badge.defaultProps = {
   fontSize: 'xs',
   bg: 'greyLight',
 }
+
+export default Badge

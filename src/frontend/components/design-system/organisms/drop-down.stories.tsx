@@ -1,6 +1,6 @@
 /* eslint-disable import/prefer-default-export */
 import React from 'react'
-import { DropDown, DropDownItem, DropDownTrigger, DropDownMenu } from './drop-down'
+import { DropDown, DropDownItem, DropDownTrigger, DropDownMenu } from './drop-down/index'
 import { Icon } from '../atoms/icon'
 import { Link } from '../atoms/link'
 

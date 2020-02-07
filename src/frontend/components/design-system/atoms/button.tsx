@@ -94,12 +94,46 @@ const sizeVariants = variant({
   },
 })
 
+/**
+ * Prop Types of an Button component.
+ * Apart from those defined below it extends all {@link ColorProps}, {@link SpaceProps}
+ * and {@link TypographyProps}
+ *
+ * @memberof Button
+ * @alias ButtonProps
+ * @property {string} [...] Other props from {@link ColorProps}, {@link SpaceProps}
+ *                          and {@link TypographyProps}
+ */
 export type ButtonProps = ColorProps & SpaceProps & TypographyProps & {
+  /**
+   * Button color variant
+   */
   variant?: 'primary' | 'danger' | 'text' | 'success' | 'info' | 'secondary';
+  /**
+   * Button size variant
+   */
   size?: 'sm' | 'lg' | 'icon';
+  /**
+   * If button should be rounded
+   */
   rounded?: boolean;
 }
 
+/**
+ * Button CSS Styles which can be reused in another button-like component with styled-components
+ *
+ * Usage:
+ * ```
+ * import { ButtonCSS } from 'admin-bro'
+ * import { Link } from 'react-router-dom'
+ *
+ * const MyStyledLink = styled(Link)`
+ *   ${ButtonCSS}
+ * `
+ * ```
+ * @memberof Button
+ * @alias ButtonCSS
+ */
 export const ButtonCSS = css<ButtonProps>`
   outline: 0;
   display: inline-block;
@@ -152,6 +186,61 @@ export const ButtonCSS = css<ButtonProps>`
   ${sizeVariants};
 `
 
+/**
+ * Buttons make common actions immediately visible and easy to perform with one click or tap.
+ * They can be used for any type of action.
+ *
+ * * Usage
+ * ```javascript
+ * import { Button, ButtonCSS, ButtonProps } from 'admin-bro'
+ * ```
+ * @component
+ * @example <caption>Color variants</caption>
+ * const variants = ['primary', 'danger', 'success', 'info', 'secondary', 'text']
+ * return (
+ * <Box py="lg">
+ *   <Button mb="default" mr="default">default</Button>
+ *   {variants.map(variant => (
+ *     <Button mb="default" variant={variant} mr="default">{variant}</Button>
+ *   ))}
+ * </Box>
+ * )
+ * @example <caption>Size variants</caption>
+ * return (
+ * <Box py="lg">
+ *   <Button size="sm">Small</Button>
+ *   <Button ml="default">Regular size</Button>
+ *   <Button size="lg" ml="default">Large</Button>
+ * </Box>
+ * )
+ * @example <caption>Icons</caption>
+ * return (
+ * <Box py="lg">
+ *  <Button mr="default">
+ *    <Icon icon="Settings" />
+ *    With icon
+ *  </Button>
+ *  <Button size="icon" mr="default"><Icon icon="Settings" /></Button>
+ *  <Button rounded size="icon" mr="default"><Icon icon="Settings" /></Button>
+ *  <Button variant="danger" mr="default">
+ *    <Icon icon="Delete" />
+ *    Delete me
+ *  </Button>
+ *  <Button mr="default" variant="text" size="sm">
+ *    <Icon icon="Add" />
+ *    Create new item
+ *  </Button>
+ * </Box>
+ * )
+ * @example <caption>State</caption>
+ * return (
+ * <Box py="lg">
+ *   <Button disabled>Disabled</Button>
+ *   <Button ml="default" variant="primary" disabled>Disabled</Button>
+ * </Box>
+ * )
+ *
+ */
 export const Button = styled.button<ButtonProps>`
   ${ButtonCSS}
 `
@@ -160,3 +249,5 @@ Button.defaultProps = {
   fontSize: 'default',
   bg: 'transparent',
 }
+
+export default Button

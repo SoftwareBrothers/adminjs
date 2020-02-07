@@ -3,7 +3,6 @@ import { connect } from 'react-redux'
 import { useRouteMatch } from 'react-router-dom'
 
 import { RouteComponentProps } from 'react-router'
-import Breadcrumbs from '../app/breadcrumbs'
 import BaseAction from '../app/base-action-component'
 import Filter from '../app/filter'
 import queryHasFilter from './utils/query-has-filter'
@@ -13,8 +12,8 @@ import { NoResourceError, NoActionError } from '../app/error-message'
 import ViewHelpers, {
   ResourceActionParams, RecordActionParams, BulkActionParams,
 } from '../../../backend/utils/view-helpers'
-import { Box, H2, Badge, Button, Icon } from '../design-system'
-import { ActionButton } from '../app'
+import { Box } from '../design-system'
+import { ActionHeader } from '../app'
 import ActionJSON from '../../../backend/decorators/action-json.interface'
 
 type PropsFromState = {
@@ -61,7 +60,7 @@ const ResourceAction: React.FC<Props> = (props) => {
 
   const listActionName = 'list'
   const listAction = resource.resourceActions.find(r => r.name === listActionName)
-  const newAction = resource.resourceActions.find(r => r.name === 'new')
+
   if (!listAction) {
     return (<NoActionError resourceId={resourceId} actionName={listActionName} />)
   }
@@ -71,32 +70,12 @@ const ResourceAction: React.FC<Props> = (props) => {
 
   return (
     <Box variant="grey">
-      <Breadcrumbs resource={resource} actionName={listActionName} />
-      <Box flex flexDirection="row">
-        <Box flexGrow={1}>
-          <H2 mb="lg" mt="xl">
-            {listAction.label}
-            {tag ? (<Badge variant="primary" size="sm" ml="default">{tag}</Badge>) : ''}
-          </H2>
-        </Box>
-        <Box mt="xl">
-          {newAction ? (
-            <ActionButton
-              action={newAction}
-              resourceId={resource.id}
-            >
-              <Button as="span" variant="primary" mr="default">
-                <Icon icon={newAction.icon} />
-                {newAction.label}
-              </Button>
-            </ActionButton>
-          ) : ''}
-          <Button onClick={(): void => setFilerVisible(!filterVisible)}>
-            <Icon icon="SettingsAdjust" />
-            Filter
-          </Button>
-        </Box>
-      </Box>
+      <ActionHeader
+        resource={resource}
+        action={listAction}
+        tag={tag}
+        toggleFilter={(): void => setFilerVisible(!filterVisible)}
+      />
       <BaseAction action={listAction} resource={resource} setTag={setTag} />
       {listAction.showFilter ? (
         <Filter

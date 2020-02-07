@@ -1,5 +1,5 @@
 import React, { ReactNode } from 'react'
-import { Box, MessageBox, Text } from '../design-system'
+import { MessageBox, Text } from '../design-system'
 
 type Props = {
   children: ReactNode;

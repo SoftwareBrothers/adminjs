@@ -4,7 +4,6 @@ import { connect } from 'react-redux'
 import DefaultDashboard from '../app/default-dashboard'
 import ErrorBoundary from '../app/error-boundary'
 import { ReduxState } from '../../store/store'
-import Notice from '../app/notice'
 
 declare const AdminBro: {
   UserComponents: Record<string, FunctionComponent>;

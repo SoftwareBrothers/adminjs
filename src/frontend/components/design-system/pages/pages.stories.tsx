@@ -8,7 +8,7 @@ import { H3 } from '../atoms/header'
 import { Badge } from '../atoms/badge'
 import { Pagination } from '../organisms/pagination'
 import { Text } from '../atoms/text'
-import { ErrorBox } from '../molecules/error-box'
+import { InfoBox } from '../molecules/info-box'
 import { Button } from '../atoms/button'
 import { Icon } from '../atoms/icon'
 
@@ -56,7 +56,7 @@ export const EmptyList = () => (
       <TopBar />
       <Box flexGrow={1} variant="grey">
         <ActionHeader />
-        <ErrorBox title="There are no cars yet">
+        <InfoBox title="There are no cars yet">
           <Text>
             Currently we do not have any cars in the system.
             You can create first car by clicking create new car
@@ -67,7 +67,7 @@ export const EmptyList = () => (
               Create First Car
             </Button>
           </Text>
-        </ErrorBox>
+        </InfoBox>
       </Box>
     </Box>
   </Box>

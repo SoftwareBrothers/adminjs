@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import React from 'react'
 import styled from 'styled-components'
 import { variant as styledVariant, SpaceProps } from 'styled-system'
@@ -75,17 +76,84 @@ const StyledChildren = styled(Box)`
   border-color: ${({ theme }): string => theme.colors.paleTreal};
 `
 
+/**
+ * Prop Types of a MessageBox component.
+ * Apart from those defined below it extends all {@link SpaceProps}
+ *
+ * @memberof MessageBox
+ * @alias MessageBoxProps
+ */
 type StyledMessageBoxProps = {
+  /** Triggered when user clicks close button. If not given close button won't be seen */
   onCloseClick?: () => void;
+  /** Title content of a message */
   message?: string;
+  /** Variant */
   variant?: 'danger' | 'info' | 'success';
+  /** Icon which will be seen in the title */
   icon?: string;
-  size?: string;
+  /** Size variant */
+  size?: 'sm';
+  /** Optional html style property */
   style?: Record<string, string>;
+  /** Optional children, when given component will be expanded */
+  children?: React.ReactNode;
 }
 
 export type MessageBoxProps = SpaceProps & StyledMessageBoxProps
 
+
+/**
+ * Component responsible for rendering standard danger/info/success
+ * messages.
+ *
+ * It has 2 size versions: default and small. Also it can either contain or
+ * don't contain children, which causes different look.
+ *
+ * Usage
+ * ```javascript
+ * import { MessageBox, MessageBoxProps } from 'admin-bro'
+ * ```
+ *
+ * @component
+ * @example <caption>Different variants</caption>
+ * return (
+ *  <Box py="lg">
+ *   <MessageBox message="Some default message" onCloseClick={() => alert('close clicked')} />
+ *   <MessageBox message="Error message" mt="default" variant="danger" onCloseClick={() => alert('close clicked')} />
+ *   <MessageBox message="Info message" mt="default" variant="info" onCloseClick={() => alert('close clicked')} />
+ *  </Box>
+ * )
+ * @example <caption>Different variants with children</caption>
+ * return (
+ *  <Box py="lg">
+ *   <MessageBox message="Some default message" onCloseClick={() => alert('close clicked')}>
+ *     With inside text
+ *   </MessageBox>
+ *   <MessageBox message="Error message" mt="default" variant="danger" onCloseClick={() => alert('close clicked')}>
+ *     With inside text
+ *   </MessageBox>
+ *   <MessageBox message="Info message" mt="default" variant="info" onCloseClick={() => alert('close clicked')}>
+ *     With inside text
+ *   </MessageBox>
+ *  </Box>
+ * )
+ * @example <caption>Small with an icon and inside text</caption>
+ * return (
+ *  <Box py="lg">
+ *   <MessageBox
+ *     size="sm"
+ *     message="Info message"
+ *     mt="default"
+ *     variant="info"
+ *     icon="AddComment"
+ *     onCloseClick={() => alert('close clicked')}
+ *   >
+ *     With inside text
+ *   </MessageBox>
+ *  </Box>
+ * )
+ */
 export const MessageBox: React.FC<MessageBoxProps> = (props) => {
   const { onCloseClick, message, icon, children, variant, size, ...other } = props
 
@@ -112,3 +180,5 @@ export const MessageBox: React.FC<MessageBoxProps> = (props) => {
     </Box>
   )
 }
+
+export default MessageBox

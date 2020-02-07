@@ -3,6 +3,9 @@ import { color, space, SpaceProps, ColorProps } from 'styled-system'
 
 import TableHead from './table-head'
 
+/**
+ * @component
+ */
 const TableCell = styled.td<SpaceProps | ColorProps>`
   border-bottom: 1px solid ${({ theme }): string => theme.colors.greyPale};
   font-size: ${({ theme }): string => theme.fontSizes.default};

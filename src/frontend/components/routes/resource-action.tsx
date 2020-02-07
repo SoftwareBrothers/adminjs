@@ -7,7 +7,7 @@ import ResourceJSON from '../../../backend/decorators/resource-json.interface'
 import { ReduxState } from '../../store/store'
 import { NoResourceError, NoActionError } from '../app/error-message'
 import { ResourceActionParams } from '../../../backend/utils/view-helpers'
-import { Breadcrumbs, ActionHeader } from '../app'
+import { ActionHeader } from '../app'
 import { Drawer } from '../design-system'
 import Wrapper from './utils/wrapper'
 
@@ -35,7 +35,10 @@ const ResourceAction: React.FC<Props> = (props) => {
   return (
     <ActionWrapper>
       {!action?.showInDrawer ? (
-        <Breadcrumbs resource={resource} actionName={action.name} />
+        <ActionHeader
+          resource={resource}
+          action={action}
+        />
       ) : ''}
       <BaseActionComponent
         action={action}

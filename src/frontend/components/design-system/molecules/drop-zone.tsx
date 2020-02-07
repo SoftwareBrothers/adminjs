@@ -31,43 +31,17 @@ const inKb = (size: string | number): string => {
 
 /**
  * @returns {void}
- * @memberof DropArea
+ * @memberof DropZone
  * @alias OnUpload
  */
 type OnChange = (files: Array<File>) => void
 
 /**
- * @memberof DropArea
- * @alias FileObject
- */
-type FileObject = {
-  /**
-   * File size in bytes
-   */
-  size: number;
-  /**
-   * Original file name
-   */
-  name: string;
-  /**
-   * Mime Type
-   */
-  type?: string;
-  /**
-   * Actual file buffer.
-   */
-  file?: File;
-};
-
-/**
- * @memberof DropArea
+ * @memberof DropZone
+ * @alias DropZoneProps
  */
 export type DropZoneProps = {
   multiple?: boolean;
-  /**
-   * When given UI will show that file of this name and this size has been set.
-   */
-  files?: FileObject;
   /**
    * Callback performed when the file is dropped/selected
    */
@@ -116,6 +90,74 @@ type ErrorMessage = {
   title: string;
 }
 
+/**
+ * DropZone which can be used for uploading files.
+ *
+ * General usage:
+ * ```javascript
+ * import { DropZone, DropZoneProps } from 'admin-bro'
+ * ```
+ *
+ * how to use it in your custom component.tsx (TypesScript):
+ * ```
+ * import React, { useState } from 'react'
+ * import { DropZone, Label, BasePropertyProps } from 'admin-bro'
+ * import { unflatten } from 'flat'
+ *
+ * const UploadPhoto: React.FC<BasePropertyProps> = (props) => {
+ *   const { property, record, onChange } = props
+ *
+ *   const onUpload = (files: FileList) => {
+ *     const newRecord = {...record}
+ *     const file = files.length && files[0]
+ *
+ *     onChange({
+ *       ...newRecord,
+ *       params: {
+ *         ...newRecord.params,
+ *         [property.name]: file,
+ *       }
+ *     })
+ *     event.preventDefault()
+ *   }
+ *
+ *   return (
+ *     <Box>
+ *       <Label>{property.label}</Label>
+ *       <DropZone onChange={onUpload} />
+ *     </Box>
+ *   )
+ * }
+ * ```
+ *
+ * @component
+ *
+ * @example <caption>Single file with validation</caption>
+ * const maxSize = 1024 * 100
+ * const mimeTypes = ['application/pdf']
+ * const onUpload = (files) => { alert(files,length ? files[0].name : 'no files' ) }
+ * return (
+ * <Box>
+ *   <DropZone
+ *     onChange={onUpload}
+ *     validate= { { maxSize, mimeTypes } }
+ *   />
+ * </Box>
+ * )
+ *
+ * @example <caption>Multi file of photos</caption>
+ * const mimeTypes = ['image/png']
+ * const onUpload = (files) => { alert(files.length ? files.length : 'no files' ) }
+ * return (
+ * <Box>
+ *   <DropZone
+ *     multiple
+ *     onChange={onUpload}
+ *     validate= { { mimeTypes } }
+ *   />
+ * </Box>
+ * )
+ */
 const DropZone: React.FC<DropZoneProps> = (props) => {
   const { validate, onChange, multiple, ...other } = props
 
@@ -224,3 +266,5 @@ const DropZone: React.FC<DropZoneProps> = (props) => {
 }
 
 export { DropZone }
+
+export default DropZone

@@ -15,7 +15,7 @@ import withNotice, { AddNoticeProps, NoticeMessage } from '../../store/with-noti
 import getBulkActionsFromRecords from '../app/records-table/utils/get-bulk-actions-from-records'
 import ActionJSON from '../../../backend/decorators/action-json.interface'
 import Wrapper from './utils/wrapper'
-import { Breadcrumbs, ActionHeader } from '../app'
+import { ActionHeader } from '../app'
 
 const NO_RECORDS_ERROR: NoticeMessage = {
   message: 'There was an error fetching records, Check out console to see more information.',
@@ -112,13 +112,10 @@ class BulkAction extends React.Component<Props, State> {
     return (
       <ActionWrapper>
         {!action?.showInDrawer ? (
-          <React.Fragment>
-            <Breadcrumbs resource={resource} actionName={action.name} />
-            <ActionHeader
-              resource={resource}
-              action={action}
-            />
-          </React.Fragment>
+          <ActionHeader
+            resource={resource}
+            action={action}
+          />
         ) : ''}
         <BaseAction
           action={action as ActionJSON}

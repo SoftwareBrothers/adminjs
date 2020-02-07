@@ -104,11 +104,26 @@ const DatePickerWrapper = styled.div`
   top: ${({ theme }): string => theme.space.xxl};
 `
 
-// TODO: change that
+type Variant = InputProps['variant']
+
+/**
+ * Props for DatePicker
+ * @memberof DatePicker
+ * @alias DatePickerProps
+ */
 export type DatePickerProps = {
+  /**
+   * selected date
+   */
   value?: string | Date;
+  /**
+   * on change callback taking string as a date
+   */
   onChange: (date: string) => void;
-  variant?: InputProps['variant'];
+  /**
+   * variant - the same as variant in {@link InputProps}
+   */
+  variant?: Variant;
 }
 
 const pad = (n: number): string => (n < 10 ? `0${n.toString()}` : n.toString())
@@ -116,6 +131,20 @@ const pad = (n: number): string => (n < 10 ? `0${n.toString()}` : n.toString())
 const format = (date: Date): string => `${date.getFullYear()}-${pad(date.getMonth() + 1)
 }-${pad(date.getDate())} ${pad(date.getHours())}:${pad(date.getMinutes())}`
 
+/**
+ * Component responsible for showing dates. It is a wrapper to
+ * [react datepicker]{@link https://reactdatepicker.com/}.
+ *
+ * @component
+ * @see https://reactdatepicker.com/
+ *
+ * @example
+ * return (
+ * <Box width={1/2} height="300px">
+ *   <DatePicker onChange={(date) => console.log(date)}/>
+ * </Box>
+ * )
+ */
 export const DatePicker: React.FC<DatePickerProps> = (props) => {
   const { value, onChange, variant, ...other } = props
 
@@ -167,3 +196,5 @@ export const DatePicker: React.FC<DatePickerProps> = (props) => {
     </React.Fragment>
   )
 }
+
+export default DatePicker
