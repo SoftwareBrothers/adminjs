@@ -6,7 +6,7 @@ import Text from '../../atoms/text'
  * @component
  * @private
  */
-export const FormMessage = styled(Text)`
+const FormMessage = styled(Text)`
   box-sizing: border-box;
   vertical-align: middle;
   height: ${({ theme }): string => theme.space.xl};

@@ -8,7 +8,7 @@ import { Link } from '../../atoms/link'
  * @component
  * @private
  */
-export const InputGroup = styled.div`
+const InputGroup = styled.div`
   position: relative;
   display: flex;
   width: 100%;
