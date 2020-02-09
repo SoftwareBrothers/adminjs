@@ -4,6 +4,7 @@ import ActionJSON from './action-json.interface'
 /**
  * Resource object accessible on the fronted
  * @alias ResourceJSON
+ * @subcategory Frontend
  */
 export default interface ResourceJSON {
   /**

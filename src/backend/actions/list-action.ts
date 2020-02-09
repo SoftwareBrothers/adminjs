@@ -13,6 +13,7 @@ const PER_PAGE_LIMIT = 500
  * @module ListAction
  * @description
  * Returns selected Records in a list form
+ * @private
  */
 const ListAction: Action<ListActionResponse> = {
   name: 'list',

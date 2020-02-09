@@ -63,20 +63,3 @@ const App: React.FC = () => {
 }
 
 export default App
-
-
-// <GlobalStyle />
-//       <ApplicationWrapper>
-//         <Sidebar />
-//         <Core>
-//           {/* <TopBar /> */}
-//           <Switch>
-//             {/* <Route path={h.dashboardUrl()} exact component={Dashboard} /> */}
-//             <Route path={pageUrl} exact component={Page} />
-//             <Route path={designSystemUrl} exact component={DesignSystem} />
-//             <Route path={resourceUrl} component={Resource} />
-//           </Switch>
-
-
-//         </Core>
-//       </ApplicationWrapper>

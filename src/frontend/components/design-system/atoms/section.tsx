@@ -10,6 +10,7 @@ import { Box } from './box'
  * import { Section } from 'admin-bro'
  * ```
  * @component
+ * @subcategory Atoms
  * @example
  * return (
  *   <Section>

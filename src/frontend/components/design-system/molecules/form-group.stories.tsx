@@ -11,7 +11,7 @@ import { Link } from '../atoms/link'
 import { CheckBox } from '../atoms/check-box'
 import { Text } from '../atoms/text'
 import { Radio } from '../atoms/radio'
-import { DropZone } from './drop-zone'
+import { DropZone } from './drop-zone/drop-zone'
 
 export const FormElements: React.FC<{error?: boolean}> = (props) => {
   const { error } = props

@@ -43,6 +43,7 @@ export type TextProps = TypographyProps & SpaceProps & ColorProps & {
  * import { Text, TextProps } from 'admin-bro'
  * ```
  * @component
+ * @subcategory Atoms
  * @example <caption>Lorem ipsum</caption>
  * return (
  * <Box>

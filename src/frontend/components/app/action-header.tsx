@@ -16,15 +16,22 @@ import Breadcrumbs from './breadcrumbs'
 
 /**
  * @memberof ActionHeader
- * @private
+ * @alias ActionHeaderProps
  */
-interface Props {
+export type ActionHeaderProps = {
+  /** Resource for the action */
   resource: ResourceJSON;
+  /** Optional record - for _record_ actions */
   record?: RecordJSON;
+  /** If given, action header will render Filter button */
   toggleFilter?: () => any;
+
   actionPerformed?: () => any;
+  /** An action objet */
   action: ActionJSON;
+  /** Optional tag which will be rendered as a {@link Badge} */
   tag?: string;
+  /** If set, component wont render actions */
   omitActions?: boolean;
 }
 
@@ -32,12 +39,12 @@ interface Props {
 const StyledLink = styled(({ rounded, ...rest }) => <RouterLink {...rest} />)<ButtonProps>`${ButtonCSS}`
 
 /**
- * Header of an action
+ * Header of an action. It renders Action name with buttons for all the actions.
  *
- * @private
  * @component
+ * @subcategory Application
  */
-const ActionHeader: React.FC<Props> = (props) => {
+const ActionHeader: React.FC<ActionHeaderProps> = (props) => {
   const h = new ViewHelpers()
   const {
     resource, toggleFilter, actionPerformed, record, action, tag, omitActions,

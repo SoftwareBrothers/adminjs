@@ -5,8 +5,11 @@ export type DropDownMenuProps = PositionProps & {
   isVisible?: boolean;
 }
 
-/** @component */
-const DropDownMenu = styled.div<DropDownMenuProps>`
+/**
+ * @component
+ * @private
+ */
+export const DropDownMenu = styled.div<DropDownMenuProps>`
   background: ${({ theme }): string => theme.colors.white};
   display: inline-block;
   position: absolute;

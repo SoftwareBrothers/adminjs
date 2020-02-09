@@ -1,5 +1,7 @@
 export { default as ActionButton } from './action-button'
+export * from './action-button'
 export { default as ActionHeader } from './action-header'
+export * from './action-header'
 export { default as BaseActionComponent } from './base-action-component'
 export { default as Breadcrumbs } from './breadcrumbs'
 export { default as DefaultDashboard } from './default-dashboard'

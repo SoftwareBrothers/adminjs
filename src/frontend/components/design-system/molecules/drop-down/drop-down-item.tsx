@@ -5,8 +5,9 @@ import Link from '../../atoms/link'
 
 /**
  * @component
+ * @private
  */
-const DropDownItem = styled.span<SpaceProps>`
+export const DropDownItem = styled.span<SpaceProps>`
   position: relative;
   z-index: 10000;
   border: none;

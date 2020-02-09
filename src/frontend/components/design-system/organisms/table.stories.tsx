@@ -2,7 +2,7 @@ import React from 'react'
 import { Table, TableHead, TableRow, TableCell, TableBody, TableCaption } from '../atoms/table'
 import { CheckBox } from '../atoms/check-box'
 import { Link } from '../atoms/link'
-import { DropDownStory } from './drop-down.stories'
+import { DropDownStory } from '../molecules/drop-down.stories'
 import { Icon } from '../atoms/icon'
 import { Button } from '../atoms/button'
 

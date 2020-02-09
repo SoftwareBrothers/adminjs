@@ -5,7 +5,7 @@ import { FormElements, FormElementsWithError } from './form-group.stories'
 import { Box } from '../atoms/box'
 import { H3, H5 } from '../atoms/header'
 import { MessageBox } from './message-box'
-import { DropZone } from './drop-zone'
+import { DropZone } from './drop-zone/drop-zone'
 import { Label } from '../atoms/label'
 
 export default {

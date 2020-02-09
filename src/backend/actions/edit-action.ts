@@ -7,6 +7,7 @@ import NotFoundError from '../utils/not-found-error'
  * @module EditAction
  * @description
  * Shows form for updating existing record
+ * @private
  *
  * Uses {@link EditAction} component to render form
  */

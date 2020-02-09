@@ -9,6 +9,7 @@ export enum PropertyPlace {
 
 /**
  * JSON representation of a Property.
+ * @subcategory Frontend
  */
 export default interface PropertyJSON {
   /**

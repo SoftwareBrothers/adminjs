@@ -8,6 +8,7 @@ import NotFoundError from '../utils/not-found-error'
  * @module BulkDeleteAction
  * @description
  * Removes given records from the database.
+ * @private
  */
 const BulkDeleteAction: Action<BulkActionResponse> = {
   name: 'bulkDelete',

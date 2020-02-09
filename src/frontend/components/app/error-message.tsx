@@ -20,6 +20,7 @@ export type ErrorMessageBoxProps = {
  * Prints error message
  *
  * @component
+ * @private
  * @example
  * return (
  * <ErrorMessageBox title={'Some error'}>

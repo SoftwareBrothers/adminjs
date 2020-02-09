@@ -39,6 +39,7 @@ export type InfoBoxProps = {
  * ```
  *
  * @component
+ * @subcategory Molecules
  * @example
  * return (
  * <InfoBox title="There are no cars in the system">

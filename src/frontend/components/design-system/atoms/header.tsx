@@ -87,6 +87,7 @@ H6.defaultProps = {
  * By default, the Heading component renders an __h3__ element.
  *
  * @component
+ * @subcategory Atoms
  * @example
  * return (
  * <Box py="lg">

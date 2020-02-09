@@ -40,6 +40,7 @@ type Props = {
  * Prints `thead` section for table with records.
  *
  * @component
+ * @subcategory Application
  * @example <caption>List with 2 properties</caption>
  * const properties = [{
  *   label: 'First Name',
@@ -50,7 +51,7 @@ type Props = {
  *   name: 'lastName',
  * }]
  * return (
- * <WrapperBox border>
+ * <Box py="xl">
  *   <Table>
  *    <RecordsTableHeader
  *      properties={properties}
@@ -58,13 +59,20 @@ type Props = {
  *      sortBy={'firstName'}
  *      direction={'asc'}
  *    />
- *    <tbody><tr>
- *      <td>John</td>
- *      <td>Doe</td>
- *      <td></td>
- *    </tr></tbody>
+ *    <TableBody>
+ *      <TableRow>
+ *        <TableCell>John</TableCell>
+ *        <TableCell>Doe</TableCell>
+ *        <TableCell></TableCell>
+ *      </TableRow>
+ *      <TableRow>
+ *        <TableCell>Max</TableCell>
+ *        <TableCell>Kodaly</TableCell>
+ *        <TableCell></TableCell>
+ *      </TableRow>
+ *    </TableBody>
  *   </Table>
- * </WrapperBox>
+ * </Box>
  * )
  */
 const RecordsTableHeader: React.FC<Props> = (props) => {

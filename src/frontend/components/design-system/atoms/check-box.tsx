@@ -102,6 +102,7 @@ export type CheckBoxProps = React.HTMLProps<HTMLInputElement>
  * ```
  *
  * @component
+ * @subcategory Atoms
  * @example
  * return (
  *   <Box p="xl">

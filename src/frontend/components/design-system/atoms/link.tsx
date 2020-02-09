@@ -95,6 +95,7 @@ export type LinkProps = ColorProps & SpaceProps & {
  * import { Link, LinkProps } from 'admin-bro'
  * ```
  * @component
+ * @subcategory Atoms
  * @example <caption>All color variants</caption>
  * const variants = ['primary', 'danger', 'success', 'info', 'secondary']
  * return (

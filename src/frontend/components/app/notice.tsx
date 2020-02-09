@@ -1,17 +1,10 @@
 import React, { ReactNode } from 'react'
-import styled from 'styled-components'
 import { connect } from 'react-redux'
 
 import { dropNotice, setNoticeProgress, NoticeMessageInState, ReduxState } from '../../store/store'
 import { MessageBox } from '../design-system'
 
 const TIME_TO_DISAPPEAR = 3
-
-const NoticeWrapper = styled.div.attrs<{className: string}>({
-  className: 'notification',
-})`
-  
-`
 
 type NotifyProgress = (options: {
   noticeId: string; progress: number;

@@ -64,6 +64,7 @@ const sizeVariants = variant({
  * ```
  *
  * @component
+ * @subcategory Atoms
  * @example <caption>Color variants</caption>
  * const variants = ['primary', 'danger', 'success', 'info', 'secondary']
  * return (

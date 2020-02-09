@@ -56,14 +56,14 @@ type State = {
  *   const { resource, action, record } = props
  *   // do something with the props and render action
  *   return (
- *     <WrapperBox>Some Action Content</WrapperBox>
+ *     <Box>Some Action Content</Box>
  *   )
  * }
  * ```
  *
  * @component
  * @name BaseActionComponent
- * @category Base
+ * @subcategory Application
  */
 class BaseActionComponent extends React.Component<ActionProps, State> {
   constructor(props) {

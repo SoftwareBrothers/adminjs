@@ -6,6 +6,7 @@ const CAPTION_HEIGHT = '42px'
 
 /**
  * @component
+ * @private
  */
 const TableCaption = styled.caption`
   font-family: ${({ theme }): string => theme.font};

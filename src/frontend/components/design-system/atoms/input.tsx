@@ -68,6 +68,7 @@ export type InputProps = SpaceProps & LayoutProps & {
  * ```
  *
  * @component
+ * @subcategory Atoms
  * @example
  * return (
  *   <Box p="xl">

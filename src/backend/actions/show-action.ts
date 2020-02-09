@@ -8,6 +8,7 @@ import NotFoundError from '../utils/not-found-error'
  * @description
  * Returns selected Record
  * Uses {@link ShowAction} component to render form
+ * @private
  */
 const ShowAction: Action<RecordActionResponse> = {
   name: 'show',

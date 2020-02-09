@@ -4,6 +4,7 @@ type ErrorMessage = { message: string }
 
 /**
  * JSON representation of an record
+ * @subcategory Frontend
  */
 export default interface RecordJSON {
   /**
