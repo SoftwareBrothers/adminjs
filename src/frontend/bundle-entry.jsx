@@ -5,10 +5,12 @@ import { ThemeProvider } from 'styled-components'
 
 import App from './components/application'
 import PropertyTypes from './components/property-type'
+import { PropertyPlace } from '../backend/decorators/property-json.interface'
 import createStore from './store/store'
 import ViewHelpers from '../backend/utils/view-helpers'
 import * as Components from './components/design-system'
 import * as AppComponents from './components/app'
+import * as Hooks from './hooks'
 import ApiClient from './utils/api-client'
 import * as style from './styles/variables'
 import * as types from './types'
@@ -41,9 +43,11 @@ export default {
   ApiClient,
   style,
   PropertyTypes,
+  PropertyPlace,
   env,
   ...Components,
   ...AppComponents,
+  ...Hooks,
   types,
   // TODO: following is a backward compatible - remove this in version 2.0
   Components: { ...Components, ...AppComponents },

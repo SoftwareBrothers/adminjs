@@ -31,6 +31,7 @@ export {
   PageHandler,
 } from './types/src/admin-bro-options.interface'
 export { default as PropertyOptions } from './types/src/backend/decorators/property-options.interface'
+export { PropertyPlace } from './types/src/backend/decorators/property-json.interface'
 export {
   default as Action,
   ActionContext,
@@ -77,6 +78,9 @@ export type DefaultTheme = {
 export * from './types/src/frontend/components/design-system'
 export * from './types/src/frontend/components/app'
 export * from './types/src/constants'
+export * from './types/src/frontend/hooks'
+
+export { default as PropertyTypes } from './types/src/frontend/components/property-type'
 
 export {
   AdminBro as default,
