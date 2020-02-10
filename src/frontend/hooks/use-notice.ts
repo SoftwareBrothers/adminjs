@@ -20,9 +20,6 @@ export type AddNotice = (notice: NoticeMessage) => any;
  *     <Button onClick={() => sendNotice({ message: 'I am awesome' })}>I am awesome</Button>
  *   )
  * }
- *
- *
-
  * ```
  *
  * @component

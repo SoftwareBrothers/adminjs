@@ -4,7 +4,6 @@ import PropertyType from '../property-type'
 
 import withNotice, { AddNoticeProps } from '../../store/with-notice'
 import { ActionProps } from './action.props'
-import { PropertyPlace } from '../../../backend/decorators/property-json.interface'
 import { DrawerContent, Box, DrawerFooter, Button } from '../design-system'
 import ActionHeader from '../app/action-header'
 import useResourceEdit from '../../hooks/use-resource-edit'
