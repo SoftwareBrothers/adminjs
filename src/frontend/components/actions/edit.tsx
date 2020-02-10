@@ -7,7 +7,7 @@ import { ActionProps } from './action.props'
 import { PropertyPlace } from '../../../backend/decorators/property-json.interface'
 import { DrawerContent, Box, DrawerFooter, Button } from '../design-system'
 import ActionHeader from '../app/action-header'
-import useResourceEdit from './utils/useResourceEdit'
+import useResourceEdit from '../../hooks/useResourceEdit'
 import RecordJSON from '../../../backend/decorators/record-json.interface'
 
 const Edit: FC<ActionProps & AddNoticeProps> = (props) => {

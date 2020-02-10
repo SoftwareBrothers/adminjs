@@ -1,25 +1,25 @@
 import { useState } from 'react'
 import { useHistory } from 'react-router'
-import ApiClient from '../../../utils/api-client'
-import RecordJSON from '../../../../backend/decorators/record-json.interface'
-import { NoticeMessage } from '../../../store/with-notice'
-import recordToFormData from '../record-to-form-data'
-import { appendForceRefresh } from './append-force-refresh'
+import ApiClient from '../utils/api-client'
+import RecordJSON from '../../backend/decorators/record-json.interface'
+import { NoticeMessage } from '../store/with-notice'
+import recordToFormData from '../components/actions/record-to-form-data'
+import { appendForceRefresh } from '../components/actions/utils/append-force-refresh'
 
 const api = new ApiClient()
 
-interface ResourceNew {
+interface ResourceEdit {
   record: RecordJSON;
   handleChange: (propertyOrRecord: string | RecordJSON, value?: any) => void;
   handleSubmit: (event: any) => boolean;
   loading: boolean;
 }
 
-const useResourceNew = (
+const useResourceEdit = (
   initialRecord: RecordJSON | undefined,
   resourceId: string,
   onNotice: (notice: NoticeMessage) => void,
-): ResourceNew => {
+): ResourceEdit => {
   const [record, setRecord] = useState<RecordJSON>({
     ...initialRecord,
     params: initialRecord?.params ?? {},
@@ -51,9 +51,10 @@ const useResourceNew = (
     const formData = recordToFormData(record)
     setLoading(true)
     api
-      .resourceAction({
+      .recordAction({
         resourceId,
-        actionName: 'new',
+        actionName: 'edit',
+        recordId: record.id,
         data: formData,
         headers: { 'Content-Type': 'multipart/form-data' },
       })
@@ -83,4 +84,4 @@ const useResourceNew = (
   return { record, handleChange, handleSubmit, loading }
 }
 
-export default useResourceNew
+export default useResourceEdit
