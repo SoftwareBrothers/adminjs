@@ -51,6 +51,7 @@ const StyledDropDown = styled.div`
  *   </Box>
  * )
  * @component
+ * @subcategory Molecules
  */
 export const DropDown: React.FC = (props) => {
   const { children } = props

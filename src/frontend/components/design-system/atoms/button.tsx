@@ -195,6 +195,7 @@ export const ButtonCSS = css<ButtonProps>`
  * import { Button, ButtonCSS, ButtonProps } from 'admin-bro'
  * ```
  * @component
+ * @subcategory Atoms
  * @example <caption>Color variants</caption>
  * const variants = ['primary', 'danger', 'success', 'info', 'secondary', 'text']
  * return (

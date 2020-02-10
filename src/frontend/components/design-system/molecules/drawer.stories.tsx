@@ -1,12 +1,14 @@
 /* eslint-disable import/prefer-default-export */
 import React from 'react'
-import { Drawer, DrawerFooter, DrawerContent } from './drawer'
+import { Drawer } from './drawer/drawer'
+import { DrawerContent } from './drawer/drawer-content'
+import { DrawerFooter } from './drawer/drawer-footer'
 import { H3 } from '../atoms/header'
 import { Button } from '../atoms/button'
 import { Icon } from '../atoms/icon'
 import { Box } from '../atoms/box'
 
-import { FormElements } from '../molecules/form-group.stories'
+import { FormElements } from './form-group.stories'
 
 export const FullDrawer: React.FC = () => (
   <Drawer>

@@ -2,10 +2,16 @@ import styled from 'styled-components'
 import { layout, LayoutProps } from 'styled-system'
 
 /**
- * Main Table wrapper. Along with TableRow, TableCell, TableCaption, TableHead and TableBody
- * gives you the powerful tool for building tables.
+ * Main Table wrapper. Along with _TableRow_, _TableCell_, _TableCaption_,
+ * _TableHead_ and _TableBody_ gives you the powerful tool for building tables.
  *
- * It takes all the {@link LayoutProps}
+ *
+ * Props:
+ * - _Table_: {@link LayoutProps} & standard table html props
+ * - _TableBody_: standard tbody html props
+ * - _TableCell_: {@link SpaceProps} & {@link ColorProps} & standard td html props
+ * - _TableHead_: standard thead html props
+ * - _TableRow_:  standard tr html props
  *
  * Example
  * ```javascript
@@ -13,6 +19,7 @@ import { layout, LayoutProps } from 'styled-system'
  * ```
  *
  * @component
+ * @subcategory Atoms
  * @example
  * return (
  * <Box pt="x4">

@@ -54,6 +54,7 @@ const Wrapper = styled.span<IconProps>`
  * here: https://www.carbondesignsystem.com/guidelines/icons/library/
  *
  * @component
+ * @subcategory Atoms
  * @example <caption>Icons inside other elements</caption>
  * return (
  *   <Box variant="grey">

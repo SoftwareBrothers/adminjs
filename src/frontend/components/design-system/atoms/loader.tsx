@@ -49,6 +49,7 @@ const Spinner = styled.div.attrs({
  * Simple loader
  *
  * @component
+ * @subcategory Atoms
  * @example
  * return (
  *   <Loader/>

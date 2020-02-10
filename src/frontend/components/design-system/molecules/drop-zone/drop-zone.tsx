@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
 
-import { Label } from '../atoms/label'
-import { Box } from '../atoms/box'
-import { Text } from '../atoms/text'
-import { MessageBox } from './message-box'
+import { Label } from '../../atoms/label'
+import { Box } from '../../atoms/box'
+import { Text } from '../../atoms/text'
+import { MessageBox } from '../message-box'
 import { DropZoneItem } from './drop-zone-item'
 
 const validateContentType = (
@@ -32,9 +32,9 @@ const inKb = (size: string | number): string => {
 /**
  * @returns {void}
  * @memberof DropZone
- * @alias OnUpload
+ * @alias OnDropDownChange
  */
-type OnChange = (files: Array<File>) => void
+export type OnDropZoneChange = (files: Array<File>) => void
 
 /**
  * @memberof DropZone
@@ -45,7 +45,7 @@ export type DropZoneProps = {
   /**
    * Callback performed when the file is dropped/selected
    */
-  onChange?: OnChange;
+  onChange?: OnDropZoneChange;
   /**
    * Validate options
    */
@@ -131,6 +131,7 @@ type ErrorMessage = {
  * ```
  *
  * @component
+ * @subcategory Molecules
  *
  * @example <caption>Single file with validation</caption>
  * const maxSize = 1024 * 100
@@ -158,7 +159,7 @@ type ErrorMessage = {
  * </Box>
  * )
  */
-const DropZone: React.FC<DropZoneProps> = (props) => {
+export const DropZone: React.FC<DropZoneProps> = (props) => {
   const { validate, onChange, multiple, ...other } = props
 
   const [isDragging, setIsDragging] = useState(false)
@@ -264,7 +265,5 @@ const DropZone: React.FC<DropZoneProps> = (props) => {
     </Box>
   )
 }
-
-export { DropZone }
 
 export default DropZone

@@ -24,6 +24,7 @@ export type TextAreaProps = SpaceProps & TypographyProps & LayoutProps
  * ```
  *
  * @component
+ * @subcategory Atoms
  * @example
  * return (
  *   <Box p="xl">

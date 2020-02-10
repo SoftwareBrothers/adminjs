@@ -5,6 +5,7 @@ import TableHead from './table-head'
 
 /**
  * @component
+ * @private
  */
 const TableCell = styled.td<SpaceProps | ColorProps>`
   border-bottom: 1px solid ${({ theme }): string => theme.colors.greyPale};

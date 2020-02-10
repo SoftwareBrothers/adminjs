@@ -7,6 +7,7 @@ import Action, { RecordActionResponse } from './action.interface'
  * @description
  * Shows form for creating a new record
  * Uses {@link NewAction} component to render form
+ * @private
  */
 const NewAction: Action<RecordActionResponse> = {
   name: 'new',

@@ -37,6 +37,7 @@ export type LabelProps = ColorProps & SpaceProps & TypographyProps & {
  * import { Label, LabelProps } from 'admin-bro'
  * ```
  * @component
+ * @subcategory Atoms
  * @example <caption>2 Different versions</caption>
  * return (
  * <Box p="xl">

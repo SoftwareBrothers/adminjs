@@ -7,7 +7,7 @@ import { Calendar16 } from '@carbon/icons-react'
 import styles from '../utils/datepicker.styles'
 import { Input, InputProps } from '../atoms/input'
 import { Button } from '../atoms/button'
-import { InputGroup } from '../molecules/form-group'
+import { InputGroup } from './form-group'
 
 
 const StyledDatePicker = styled(InputGroup)`
@@ -136,6 +136,7 @@ const format = (date: Date): string => `${date.getFullYear()}-${pad(date.getMont
  * [react datepicker]{@link https://reactdatepicker.com/}.
  *
  * @component
+ * @subcategory Molecules
  * @see https://reactdatepicker.com/
  *
  * @example

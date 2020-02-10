@@ -70,6 +70,7 @@ const PaginationWrapper = styled(Box)`
  * Pagination component
  *
  * @component
+ * @subcategory Molecules
  * @example
  * const location = { search: ''}
  * return (

@@ -9,6 +9,7 @@ import ValidationError from '../utils/validation-error'
  * @description
  * Removes given record from the database. Since it doesn't have a
  * component - it redirects right away after clicking its {@link ActionButton}
+ * @private
  */
 const DeleteAction: Action<RecordActionResponse> = {
   name: 'delete',

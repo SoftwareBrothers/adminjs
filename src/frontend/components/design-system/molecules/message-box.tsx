@@ -116,6 +116,7 @@ export type MessageBoxProps = SpaceProps & StyledMessageBoxProps
  * ```
  *
  * @component
+ * @subcategory Molecules
  * @example <caption>Different variants</caption>
  * return (
  *  <Box py="lg">

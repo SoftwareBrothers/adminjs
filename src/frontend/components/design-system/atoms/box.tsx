@@ -44,6 +44,7 @@ export type BoxProps = SpaceProps & ColorProps & SizeProps & LayoutProps &
  * Main component which allows you to define entire layout of the application
  *
  * @component
+ * @subcategory Atoms
  * @example <caption>Simple White/Gray wrapper</caption>
  * return (
  * <Box variant="grey">

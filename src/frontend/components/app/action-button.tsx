@@ -15,11 +15,21 @@ import ActionJSON from '../../../backend/decorators/action-json.interface'
 import { ActionResponse } from '../../../backend/actions/action.interface'
 import { appendForceRefresh } from '../actions/utils/append-force-refresh'
 
-type Props = {
+
+/**
+ * @alias ActionButtonProps
+ * @memberof ActionButton
+ */
+export type ActionButtonProps = {
+  /** Action to which button should redirect */
   action: ActionJSON;
+  /** Id of a resource of an action */
   resourceId: string;
+  /** Optional recordId for _record_ action */
   recordId?: string;
+  /** Optional recordIds for _bulk_ action */
   recordIds?: Array<string>;
+  /** optional callback function which will be triggered when action is performed */
   actionPerformed?: (actionName: string) => any;
 }
 
@@ -28,12 +38,14 @@ const StyledLink = styled(Link)`
 `
 
 /**
- * Renders Button for an action
+ * Renders Button which redirects to given action
  *
- * @private
  * @component
+ * @subcategory Application
  */
-class ActionButton extends React.PureComponent<RouteComponentProps & Props & AddNoticeProps> {
+class ActionButton extends React.PureComponent<
+  RouteComponentProps & AddNoticeProps & ActionButtonProps
+> {
   constructor(props) {
     super(props)
     this.handleClick = this.handleClick.bind(this)
@@ -144,4 +156,4 @@ class ActionButton extends React.PureComponent<RouteComponentProps & Props & Add
 }
 
 // TODO - remove this hack
-export default withRouter(withNotice(ActionButton)) as unknown as ComponentClass<Props>
+export default withRouter(withNotice(ActionButton)) as unknown as ComponentClass<ActionButtonProps>

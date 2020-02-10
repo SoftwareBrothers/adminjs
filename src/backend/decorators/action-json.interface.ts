@@ -1,6 +1,7 @@
 /**
  * JSON representation of an {@link Action}
  * @see Action
+ * @subcategory Frontend
  */
 export default interface ActionJSON {
   /**

@@ -2,6 +2,7 @@ import styled from 'styled-components'
 
 /**
  * @component
+ * @private
  */
 const TableBody = styled.tbody`
 

@@ -51,6 +51,7 @@ export type NavGroupProps = {
  * ```
  *
  * @component
+ * @subcategory Molecules
  * @example
  * return (
  *   <Box py="xl">

@@ -1,5 +1,6 @@
 /**
  * Representing the page in the sidebar
+ * @subcategory Frontend
  */
 export default interface PageJSON {
   /**

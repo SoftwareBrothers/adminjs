@@ -48,6 +48,7 @@ const mapDispatchToProps = (dispatch): AddNoticeProps => ({
  * ```
  *
  * @component
+ * @subcategory HOC
  */
 const withNotice = Component => connect(null, mapDispatchToProps)(Component)
 

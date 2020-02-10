@@ -120,7 +120,7 @@ type Props = BasePropertyProps & {
  *
  * @component
  * @name BasePropertyComponent
- * @category Base
+ * @subcategory Application
  * @example
  * const booleanProperty = {
  *   isTitle: false,

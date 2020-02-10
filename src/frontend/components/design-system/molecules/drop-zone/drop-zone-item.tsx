@@ -1,8 +1,8 @@
 import React from 'react'
 import styled from 'styled-components'
-import { Box } from '../atoms/box'
-import { Icon } from '../atoms/icon'
-import { Button } from '../atoms/button'
+import { Box } from '../../atoms/box'
+import { Icon } from '../../atoms/icon'
+import { Button } from '../../atoms/button'
 
 
 const DropZoneImg = styled.div<{src: string}>`
@@ -52,6 +52,7 @@ export type DropZoneItemProps = {
  *  />
  * )
  * @component
+ * @subcategory Molecules
  */
 export const DropZoneItem: React.FC<DropZoneItemProps> = (props) => {
   const { file, onRemove, filename } = props

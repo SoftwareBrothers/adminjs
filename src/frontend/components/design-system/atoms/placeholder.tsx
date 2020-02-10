@@ -29,13 +29,14 @@ const StyledPlaceholder = styled.div<LayoutProps>`
 
 /**
  * Renders placeholder
- * @component
  *
  * Usage:
  * ```javascript
  * import { Placeholder, PlaceholderProps } from 'admin-bro'
  * ```
  *
+ * @component
+ * @subcategory Atoms
  * @example <caption>Image placeholder</caption>
  * return (
  *   <Box>

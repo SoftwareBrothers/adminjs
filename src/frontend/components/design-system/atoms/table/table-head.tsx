@@ -2,6 +2,7 @@ import styled from 'styled-components'
 
 /**
  * @component
+ * @private
  */
 const TableHead = styled.thead`
   background: ${({ theme }): string => theme.colors.greyPale};
