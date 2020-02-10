@@ -41,7 +41,7 @@ const getAction = (resource: ResourceJSON): ActionJSON | undefined => {
     || recordActionMatch?.params.actionName
     || bulkActionMatch?.params.actionName
 
-  return action ? resource.actions?.find(a => a.name === action) : undefined
+  return action ? resource.actions.find(a => a.name === action) : undefined
 }
 
 const ResourceAction: React.FC<Props> = (props) => {

@@ -1,2 +1,2 @@
-export { default as useResourceEdit } from './useResourceEdit'
-export { default as useResourceNew } from './useResourceNew'
+export { default as useResourceEdit } from './use-resource-edit'
+export { default as useResourceNew } from './use-resource-new'

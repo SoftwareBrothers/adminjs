@@ -7,7 +7,7 @@ import { ActionProps } from './action.props'
 import { PropertyPlace } from '../../../backend/decorators/property-json.interface'
 import { DrawerContent, Box, DrawerFooter, Button } from '../design-system'
 import ActionHeader from '../app/action-header'
-import useResourceNew from '../../hooks/useResourceNew'
+import useResourceNew from '../../hooks/use-resource-new'
 import RecordJSON from '../../../backend/decorators/record-json.interface'
 
 const New: FC<ActionProps & AddNoticeProps> = (props) => {

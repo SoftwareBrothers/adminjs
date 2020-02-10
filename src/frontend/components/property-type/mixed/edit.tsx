@@ -14,7 +14,7 @@ const Edit: React.FC<Props & EditPropertyProps> = (props) => {
     <FormGroup error={!!error}>
       <Label htmlFor={property.name}>{property.label}</Label>
       <Section>
-        {property.subProperties.filter(subProperty => subProperty.name !== '_id').map(subProperty => (
+        {property.subProperties.filter(subProperty => !subProperty.isId).map(subProperty => (
           <ItemComponent
             {...props}
             key={subProperty.name}
