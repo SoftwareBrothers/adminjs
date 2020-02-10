@@ -1,6 +1,6 @@
 {
   "name": "admin-bro",
-  "version": "2.0.0-beta.9",
+  "version": "2.0.0-beta.10",
   "description": "Admin panel for apps written in node.js",
   "main": "index.js",
   "types": "index.d.ts",

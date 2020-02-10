@@ -12,6 +12,7 @@ Started since version 0.9.5
 ### Added
 
 * add "password" field [#112]
+* add hooks
 
 ### Changed
 
