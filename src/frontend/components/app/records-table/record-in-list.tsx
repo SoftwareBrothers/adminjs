@@ -82,7 +82,7 @@ class RecordInList extends React.PureComponent<Props & RouteComponentProps> {
             ) : (
               <PropertyType
                 key={property.name}
-                where={PropertyPlace.list}
+                where="list"
                 property={property}
                 resource={resource}
                 record={record}

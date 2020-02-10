@@ -5,7 +5,6 @@ import { ThemeProvider } from 'styled-components'
 
 import App from './components/application'
 import PropertyTypes from './components/property-type'
-import { PropertyPlace } from '../backend/decorators/property-json.interface'
 import createStore from './store/store'
 import ViewHelpers from '../backend/utils/view-helpers'
 import * as Components from './components/design-system'
@@ -43,7 +42,6 @@ export default {
   ApiClient,
   style,
   PropertyTypes,
-  PropertyPlace,
   env,
   ...Components,
   ...AppComponents,

@@ -32,7 +32,7 @@ const Edit: FC<ActionProps & AddNoticeProps> = (props) => {
         {resource.editProperties.map(property => (
           <PropertyType
             key={property.name}
-            where={PropertyPlace.edit}
+            where="edit"
             onChange={handleChange}
             property={property}
             resource={resource}

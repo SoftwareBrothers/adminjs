@@ -3,7 +3,6 @@ import React, { useState } from 'react'
 import { RouteComponentProps, withRouter } from 'react-router'
 import PropertyType from '../property-type'
 import { ActionProps } from './action.props'
-import { PropertyPlace } from '../../../backend/decorators/property-json.interface'
 import ApiClient from '../../utils/api-client'
 import withNotice, { AddNoticeProps } from '../../store/with-notice'
 import { appendForceRefresh } from './utils/append-force-refresh'
@@ -75,7 +74,7 @@ const BulkDelete: React.FC<ActionProps & AddNoticeProps & RouteComponentProps> =
               <TableRow key={record.id}>
                 <TableCell>
                   <PropertyType
-                    where={PropertyPlace.list}
+                    where="list"
                     property={resource.titleProperty}
                     resource={resource}
                     record={record}
