@@ -224,7 +224,7 @@ class ResourceDecorator {
   }
 
   getListProperties(): Array<PropertyDecorator> {
-    return this.getProperties({ where: PropertyPlace.list, max: DEFAULT_MAX_COLUMNS_IN_LIST })
+    return this.getProperties({ where: 'list', max: DEFAULT_MAX_COLUMNS_IN_LIST })
   }
 
   /**
@@ -316,16 +316,16 @@ class ResourceDecorator {
       resourceActions: this.resourceActions(currentAdmin).map(ra => ra.toJSON()),
       actions: Object.values(this.actions).map(action => action.toJSON()),
       listProperties: this.getProperties({
-        where: PropertyPlace.list, max: DEFAULT_MAX_COLUMNS_IN_LIST,
+        where: 'list', max: DEFAULT_MAX_COLUMNS_IN_LIST,
       }).map(property => property.toJSON()),
       editProperties: this.getProperties({
-        where: PropertyPlace.edit,
+        where: 'edit',
       }).map(property => property.toJSON()),
       showProperties: this.getProperties({
-        where: PropertyPlace.show,
+        where: 'show',
       }).map(property => property.toJSON()),
       filterProperties: this.getProperties({
-        where: PropertyPlace.filter,
+        where: 'filter',
       }).map(property => property.toJSON()),
     }
   }

@@ -126,7 +126,7 @@ class FilterContainer extends React.Component<CombinedProps, State> {
             {properties.map(property => (
               <PropertyType
                 key={property.name}
-                where={PropertyPlace.filter}
+                where="filter"
                 onChange={this.handleChange}
                 property={property}
                 filter={filter}

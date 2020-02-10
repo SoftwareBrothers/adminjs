@@ -1,11 +1,6 @@
 import { PropertyType } from '../adapters/base-property'
 
-export enum PropertyPlace {
-  show = 'show',
-  list = 'list',
-  edit = 'edit',
-  filter = 'filter',
-}
+export type PropertyPlace = 'show' | 'list' | 'edit' | 'filter';
 
 /**
  * JSON representation of a Property.

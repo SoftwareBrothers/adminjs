@@ -16,7 +16,7 @@ export default class List extends React.PureComponent<Props & EditPropertyProps>
     const { property, ItemComponent } = this.props
     return (
       <React.Fragment>
-        {property.subProperties.map(subProperty => (
+        {property.subProperties.filter(subProperty => !subProperty.isId).map(subProperty => (
           <div key={subProperty.name}>
             <Label inline>{`${subProperty.label}: `}</Label>
             <ItemComponent
