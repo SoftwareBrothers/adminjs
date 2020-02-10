@@ -219,6 +219,15 @@ class AdminBro {
   }
 
   /**
+   * Watches for local changes in files imported via {@link AdminBro.bundle}.
+   *
+   * @return  {Promise<string>}
+   */
+  async watch(): Promise<string> {
+    return userComponentsBundler(this, { write: true, watch: true })
+  }
+
+  /**
    * Renders an entire login page with email and password fields
    * using {@link Renderer}.
    *
