@@ -66,14 +66,17 @@ export const DropZoneItem: React.FC<DropZoneItemProps> = (props) => {
       <Icon icon="Attachment" mr="default" />
       {src ? (<DropZoneImg src={src} />) : ''}
       <Box flexGrow={1}>{file?.name || filename}</Box>
-      <Button
-        variant="text"
-        m="-8px"
-        size="icon"
-        onClick={(): void => onRemove && onRemove()}
-      >
-        <Icon icon="Close" />
-      </Button>
+      {onRemove && (
+        <Button
+          variant="text"
+          m="-8px"
+          size="icon"
+          type="button"
+          onClick={(): void => onRemove && onRemove()}
+        >
+          <Icon icon="Close" />
+        </Button>
+      )}
     </Box>
   )
 }

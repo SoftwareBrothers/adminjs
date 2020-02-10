@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
-import { opacify } from 'polished'
 
 import { Label } from './label'
+import focusShadowStyle from '../utils/focus-shadow.style'
 
 const Icon = styled.svg`
   fill: none;
@@ -59,7 +59,7 @@ const StyledCheckbox = styled.a<StyledProps>`
   position: relative;
 
   ${HiddenCheckbox}:focus + & {
-    box-shadow: 0 2px 4px 0 ${({ theme }): string => opacify(0.3, theme.colors.blueSecondary)};
+    ${({ theme }): string => focusShadowStyle(theme)};
   }
   ${HiddenCheckbox}:hover + & {
     border-color: ${({ theme }): string => theme.colors.grey};

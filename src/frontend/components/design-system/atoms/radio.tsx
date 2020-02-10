@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
-import { opacify } from 'polished'
 
 import { CheckboxRadioContainer } from './check-box'
+import focusShadowStyle from '../utils/focus-shadow.style'
 
 const Circle = styled.span`
   display: block;
@@ -54,7 +54,7 @@ const StyledRadio = styled.span<StyledProps>`
   position: relative;
 
   ${HiddenRadio}:focus + & {
-    box-shadow: 0 2px 4px 0 ${({ theme }): string => opacify(0.3, theme.colors.blueSecondary)};
+    ${({ theme }): string => focusShadowStyle(theme)};
   }
   ${HiddenRadio}:hover + & {
     border-color: ${({ theme }): string => theme.colors.grey};

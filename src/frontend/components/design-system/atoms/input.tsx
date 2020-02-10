@@ -1,5 +1,6 @@
 import styled, { css } from 'styled-components'
 import { space, SpaceProps, layout, LayoutProps, variant } from 'styled-system'
+import focusShadowStyle from '../utils/focus-shadow.style'
 
 const variants = variant({
   variants: {
@@ -37,6 +38,7 @@ export const InputCSS = css`
   }
   &:focus {
     border-color: ${({ theme }): string => theme.colors.bluePrimary};
+    ${({ theme }): string => focusShadowStyle(theme)};
   }
   &:disabled {
     color: ${({ theme }): string => theme.colors.greyLight};
