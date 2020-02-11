@@ -2,7 +2,7 @@ import BaseResource from './backend/adapters/base-resource'
 import BaseDatabase from './backend/adapters/base-database'
 import { PageContext } from './backend/actions/action.interface'
 import { ResourceOptions } from './backend/decorators/resource-options.interface'
-import { colors, sizes } from './frontend/styles/variables'
+import { colors, sizes, font, fontSizes, fontWeights, space, lineHeights } from './frontend/styles/variables'
 import { NonNullishPartialRecord } from './utils/non-nullish-partial-record.type'
 
 /**
@@ -128,12 +128,6 @@ export default interface AdminBroOptions {
      * library - you can pass its url here.
      */
     scripts?: Array<string>;
-    /**
-     * Flag indicates if all default styles and scripts should be fetched from CDN or from local
-     * bundle. Default to CDN. You may change this if your internet connection is slow and you are
-     * developing AdminBro on local machine.
-     */
-    globalsFromCDN?: boolean;
   };
   /**
    * Environmental variables passed to the frontend.
@@ -178,9 +172,14 @@ export type VersionProps = {
   app?: string;
 }
 
-export type CSSTheme = {
-  colors?: NonNullishPartialRecord<typeof colors>;
-  sizes?: NonNullishPartialRecord<typeof sizes>;
+export type Theme = {
+  colors: NonNullishPartialRecord<typeof colors>;
+  sizes: NonNullishPartialRecord<typeof sizes>;
+  space: NonNullishPartialRecord<typeof space>;
+  fontSizes: NonNullishPartialRecord<typeof fontSizes>;
+  lineHeights: NonNullishPartialRecord<typeof lineHeights>;
+  fontWeights: NonNullishPartialRecord<typeof fontWeights>;
+  font: NonNullishPartialRecord<typeof font>;
 };
 
 /**
@@ -215,7 +214,7 @@ export type BrandingOptions = {
   /**
    * CSS theme.
    */
-  theme?: CSSTheme;
+  theme?: Theme;
   /**
    * Flag indicates if `SoftwareBrothers` tiny hart icon should be visible on the bottom sidebar.
    */
@@ -234,8 +233,17 @@ export type BrandingOptions = {
  * @memberof AdminBroOptions
  */
 export type AdminPage = {
+  /**
+   * Handler function
+   */
   handler?: PageHandler;
+  /**
+   * Component defined by using {@link AdminBro.bundle}
+   */
   component: string;
+  /**
+   * Page label
+   */
   label?: string;
 }
 
@@ -278,7 +286,6 @@ export interface AdminBroOptionsWithDefault extends AdminBroOptions {
   assets: {
     styles: Array<string>;
     scripts: Array<string>;
-    globalsFromCDN: boolean;
   };
   pages: Record<string, AdminPage>;
 }

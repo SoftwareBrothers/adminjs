@@ -1,4 +1,4 @@
-import PropertyJSON from '../../../backend/decorators/property-json.interface'
+import PropertyJSON, { PropertyPlace } from '../../../backend/decorators/property-json.interface'
 import ResourceJSON from '../../../backend/decorators/resource-json.interface'
 import RecordJSON from '../../../backend/decorators/record-json.interface'
 
@@ -69,6 +69,10 @@ export type BasePropertyProps = {
    * Filter object taken from the query params. It is used on the _filter_ components.
    */
   filter?: any;
+  /**
+   * Where given property should be rendered. Either of 'show' | 'list' | 'edit' | 'filter'.
+   */
+  where: PropertyPlace;
 }
 
 /**

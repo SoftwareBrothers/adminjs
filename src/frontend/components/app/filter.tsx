@@ -4,7 +4,6 @@ import { withRouter } from 'react-router-dom'
 import { RouteComponentProps } from 'react-router'
 import PropertyType from '../property-type'
 import ResourceJSON from '../../../backend/decorators/resource-json.interface'
-import { PropertyPlace } from '../../../backend/decorators/property-json.interface'
 import RecordJSON from '../../../backend/decorators/record-json.interface'
 import { Box, H3, Button, Icon, Drawer, DrawerContent, DrawerFooter } from '../design-system'
 

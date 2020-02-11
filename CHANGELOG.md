@@ -19,13 +19,18 @@ Started since version 0.9.5
 * change the way of entering the resource from a list - now entire row is clickable
 * base the UI on a design-system
 ** drop bulma CDN dependency
-** drop font awesome CDN dependency
+** drop font-awesome CDN dependency
+** move most of the dependencies to the global.bundle
 
 ### Fixed
 
 * Fixed wrong show values on boolean fields in the list [#270]
 * fixing wrong documentation in action interface [#264]
 * Fix wrong path when rendering on the server
+
+### Removed
+
+* remove AdminBroOption.assets.globalsFromCDN - they are always fetched from local bundle
 
 ## 1.6.1/2 - 21.01.2020
 

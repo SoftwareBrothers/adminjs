@@ -36,7 +36,6 @@ const defaults: AdminBroOptionsWithDefault = {
   assets: {
     styles: [],
     scripts: [],
-    globalsFromCDN: false,
   },
   pages: {},
 }
@@ -134,7 +133,7 @@ class AdminBro {
 
   /**
    * List of all default actions. If you want to change the behavior for all actions like:
-   * _list_, _edit_, _show_, _delete_ and _bulk delete_ you can do this here.
+   * _list_, _edit_, _show_, _delete_ and _bulkDelete_ you can do this here.
    *
    * @example <caption>Modifying accessibility rules for all show actions</caption>
    * const { ACTIONS } = require('admin-bro')
@@ -220,11 +219,15 @@ class AdminBro {
 
   /**
    * Watches for local changes in files imported via {@link AdminBro.bundle}.
+   * It doesn't work on production environment.
    *
-   * @return  {Promise<string>}
+   * @return  {Promise<never>}
    */
-  async watch(): Promise<string> {
-    return userComponentsBundler(this, { write: true, watch: true })
+  async watch(): Promise<string | undefined> {
+    if (process.env.NODE_ENV !== 'production') {
+      return userComponentsBundler(this, { write: true, watch: true })
+    }
+    return undefined
   }
 
   /**

@@ -14,6 +14,7 @@
  *
  * ```javascript
  * import styled from 'styled-components'
+ * import { Box } from 'admin-bro'
  *
  * const MyBlueBox = styled(Box)`
  *   background: ${({ theme }) => theme.colors.bluePrimary};
@@ -26,7 +27,7 @@
  * all the {@link ColorProps}.
  *
  * ```javascript
- * import Box from 'admin-bro'
+ * import { Box } from 'admin-bro'
  *
  * const ComponentWhereIWantToUseBlueBox = () => (
  *   <Box bg="bluePrimary">

@@ -68,7 +68,10 @@ export default interface PropertyOptions {
    * If options should be limited to finite set. After setting this
    * in the UI you will see select box instead of the input
    */
-  availableValues?: Array<{ value: string; label: string }>;
+  availableValues?: Array<{
+    value: string;
+    label: string;
+  }>;
 
   /**
    * Custom properties passed to the frontend in {@link PropertyJSON}

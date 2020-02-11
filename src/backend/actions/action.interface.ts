@@ -234,7 +234,7 @@ export type After<T> = (
  * const action = {
  *   actionType: 'record',
  *   label: 'Publish',
- *   icon: 'fas fa-eye',
+ *   icon: 'View',
  *   isVisible: true,
  *   handler: async () => {...},
  *   component: AdminBro.bundle('./my-action-component'),
@@ -289,7 +289,8 @@ export type After<T> = (
 export default interface Action <T extends ActionResponse> {
   /**
    * Name of an action which is its uniq key.
-   * If use one of _list_, _edit_, _new_, _show_ or _delete_ you override existing actions.
+   * If you use one of _list_, _edit_, _new_, _show_, _delete_ or
+   * _bulkDelete_ you override existing actions.
    * For all other keys you create a new action.
    */
   name: string;
@@ -332,7 +333,9 @@ export default interface Action <T extends ActionResponse> {
    * You can pass a boolean or function of type {@link IsFunction}, which
    * takes {@link ActionContext} as an argument.
    *
-   * Example for isVisible function which allows user to edit cars which belongs only
+   * You can use it as a carrier between the hooks.
+   *
+   * Example for isVisible function which allows the user to edit cars which belongs only
    * to her:
    *
    * ```javascript
@@ -385,12 +388,13 @@ export default interface Action <T extends ActionResponse> {
    */
   actionType: 'resource' | 'record' | 'bulk';
   /**
-   * icon class of an action
+   * icon name for the action. Take a look {@link Icon} component,
+   * because what you put here it is passed down to it.
    *
    * ```javascript
    * new AdminBro({ resources: [{
    *   resource: Car,
-   *   options: { actions: { edit: { icon: 'fa fa-bomb' } } },
+   *   options: { actions: { edit: { icon: 'Add' } } },
    * }]})
    * ```
    */

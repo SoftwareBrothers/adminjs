@@ -14,7 +14,7 @@ const StyledDatePicker = styled(InputGroup)`
   ${styles};
   position: relative;
 
-  & ${Input}, & ${Button} {
+  &.active ${Input}, &.active ${Button} {
     z-index: 101;
   }
 
@@ -173,7 +173,7 @@ export const DatePicker: React.FC<DatePickerProps> = (props) => {
         onClick={(): void => setHidden(true)}
         className={hidden ? 'hidden' : 'visible'}
       />
-      <StyledDatePicker>
+      <StyledDatePicker className={hidden ? 'normal' : 'active'}>
         <Input
           variant={variant}
           value={stringValue || ''}

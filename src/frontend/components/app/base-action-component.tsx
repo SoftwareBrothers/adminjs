@@ -32,7 +32,7 @@ type State = {
  *        actions: {
  *           myNewAction: {
  *             label: 'amazing action',
- *             icon: 'fas fa-eye',
+ *             icon: 'Add',
  *             inVisible: (resource, record) => record.param('email') !== '',
  *             actionType: 'record',
  *             component: AdminBro.bundle('./my-new-action'),
@@ -50,7 +50,7 @@ type State = {
  *
  * ```
  * // ./my-new-action.jsx
- * import WrapperBox from 'admin-bro'
+ * import { Box } from 'admin-bro'
  *
  * const MyNewAction = (props) => {
  *   const { resource, action, record } = props

@@ -14,6 +14,8 @@ interface Props {
 
 const StyledLink = styled(Link)`
   ${ButtonCSS}
+  padding-left: ${({ theme }): string => theme.space.xs};
+  padding-right: ${({ theme }): string => theme.space.xs};
 `
 
 const ReferenceValue: React.FC<Props> = (props) => {

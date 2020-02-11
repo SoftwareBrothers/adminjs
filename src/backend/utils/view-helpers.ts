@@ -113,7 +113,7 @@ class ViewHelpers {
   }
 
   static getPaths(options?: AdminBroOptions): Paths {
-    return options || (globalAny.REDUX_STATE && globalAny.REDUX_STATE.paths)
+    return options || (globalAny.REDUX_STATE?.paths)
   }
 
   /**

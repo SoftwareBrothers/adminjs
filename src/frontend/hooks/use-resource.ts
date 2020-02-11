@@ -15,6 +15,9 @@ export type UseResourceResult = {
   loading: boolean;
 }
 
+/**
+ * @component
+ */
 export const useResource = (
   initialRecord: RecordJSON | undefined,
   resourceId: string,
@@ -28,7 +31,6 @@ export const useResource = (
   } as RecordJSON)
 
   const onNotice = useNotice()
-
 
   const handleChange = (
     propertyOrRecord: RecordJSON | string,

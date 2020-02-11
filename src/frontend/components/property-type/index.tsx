@@ -13,7 +13,6 @@ import * as reference from './reference'
 import * as textarea from './textarea'
 import * as password from './password'
 import { BasePropertyProps } from './base-property-props'
-import { PropertyPlace } from '../../../backend/decorators/property-json.interface'
 import { PropertyType } from '../../../backend/adapters/base-property'
 import { Box } from '../design-system'
 
@@ -45,13 +44,6 @@ type State = {
   isClient: boolean;
 }
 
-type Props = BasePropertyProps & {
-  /**
-   * Where given property should be rendered
-   */
-  where: PropertyPlace;
-}
-
 /**
  * Component which renders properties in all the places in the AdminBro UI. By all the
  * places I mean:
@@ -65,8 +57,13 @@ type Props = BasePropertyProps & {
  * picks Component to use. That is how **date** fields are rendered as **datepicker**
  * or **boolean** values as **checkbox**'es.
  *
- * You can override default behavior by changing **components** param
- * for given property in **AdminBroOptions**. Take a look at the following example:
+ * ### Overriding default render logic
+ *
+ * By default BasePropertyComponent will render corresponding
+ * component: input for string, DatePicker for dates etc.
+ * But you can override this by passing a custom component to {@link PropertyOptions}.
+ *
+ * Take a look at the following example:
  *
  * ```
  * const AdminBro = require('admin-bro')
@@ -88,35 +85,23 @@ type Props = BasePropertyProps & {
  * ```
  *
  * In the example above we are altering how **name** property will look
- * like on the {@link ShowAction}. When we will define **my-react-component.jsx** like this:
+ * like on the Show action. We can define **my-react-component.jsx** like this:
  *
  * ```
  * import React from 'react'
- * import PropertyInShow from 'admin-bro'
+ * import { InputGroup, Label } from 'admin-bro'
  *
  * const MyReactComponent = props => {
  *   const { record, property } = props
- *   const value = record.params[property.name] === 'foo' ? 'bar' : 'zoe'
+ *   const value = record.params[property.name]
  *   return (
- *     <PropertyInShow property={property}>
- *       {value}
- *     </PropertyInShow>
+ *     <InputGroup>
+ *       <Label>{property.name}</Label>
+ *       {value} [meters]
+ *     </InputGroup>
  *   )
  * }
  * ```
- *
- * When record value for given property (**name**) equals 'foo' we will render 'bar',
- * otherwise 'zoe'
- *
- * We also use {@link PropertyInShow} helper component to render field with a label that it looks
- * similar to already defined properties. For other places you can use
- * a different _wrapper components_:
- * - `edit`: {@link PropertyInEdit}
- * - `show`: {@link PropertyInShow}
- * - `filter`: {@link PropertyInFilter}
- * - `list`: doesn't have any special wrapper,
- *
- * In your components you have access to the following prop types:
  *
  * @component
  * @name BasePropertyComponent
@@ -151,7 +136,7 @@ type Props = BasePropertyProps & {
  *   filterProperties: [booleanProperty, stringProperty],
  * }
  *
- * const record = {
+ * const initialRecord = {
  *   id: '1',
  *   title: 'John',
  *   params: {
@@ -160,26 +145,37 @@ type Props = BasePropertyProps & {
  *   },
  *   recordActions: [],
  * }
+ * const Wrapper = () => {
+ *   const { record, handleChange } = useResource(initialRecord, resource.id)
+ *   const params = JSON.stringify(record.params)
+ *   return (
+ *     <Box py="lg">
+ *       <BasePropertyComponent
+ *         property={booleanProperty}
+ *         resource={resource}
+ *         onChange={handleChange}
+ *         where="edit"
+ *         record={record}
+ *       />
+ *       <BasePropertyComponent
+ *         property={stringProperty}
+ *         resource={resource}
+ *         onChange={handleChange}
+ *         where="edit"
+ *         record={record}
+ *       />
+ *      <Box>
+ *        <Label>Params:</Label>
+ *        {params}
+ *      </Box>
+ *     </Box>
+ *   )
+ * }
  *
- * return (
- *   <WrapperBox border>
- *     <BasePropertyComponent
- *       property={booleanProperty}
- *       resource={resource}
- *       where="edit"
- *       record={record}
- *     />
- *     <BasePropertyComponent
- *       property={stringProperty}
- *       resource={resource}
- *       where="edit"
- *       record={record}
- *     />
- *   </WrapperBox>
- * )
+ * return (<Wrapper />)
  */
-export default class BasePropertyComponent extends React.Component<Props, State> {
-  constructor(props: Props) {
+export default class BasePropertyComponent extends React.Component<BasePropertyProps, State> {
+  constructor(props: BasePropertyProps) {
     super(props)
     this.state = {
       isClient: false,
@@ -228,6 +224,7 @@ export default class BasePropertyComponent extends React.Component<Props, State>
               record={record}
               filter={filter}
               onChange={onChange}
+              where={where}
             />
           </Box>
         </ErrorBoundary>
@@ -266,6 +263,7 @@ export default class BasePropertyComponent extends React.Component<Props, State>
             record={record}
             filter={filter}
             onChange={onChange}
+            where={where}
           />
         </Box>
       </ErrorBoundary>

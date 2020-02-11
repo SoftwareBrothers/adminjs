@@ -12,18 +12,28 @@ import * as ReactRouter from 'react-router'
 import * as ReactRouterDOM from 'react-router-dom'
 import PropTypes from 'prop-types'
 import * as styled from 'styled-components'
+import * as StyledSystem from 'styled-system'
 import * as Recharts from 'recharts'
+import flat from 'flat'
+import ReactDatepicker from 'react-datepicker'
+import ReactSelect from 'react-select/lib/Async'
+import * as CarbonIcons from '@carbon/icons-react'
 
 window.React = React
 window.ReactDOM = ReactDOM
+window.Redux = Redux
 window.ReactRedux = ReactRedux
+window.flat = flat
 window.ReactRouter = ReactRouter
 window.ReactRouterDOM = ReactRouterDOM
-window.Redux = Redux
+window.ReactDatepicker = ReactDatepicker
+window.styled = styled
+window.StyledSystem = StyledSystem
 window.PropTypes = PropTypes
 window.axios = axios
-window.styled = styled
 window.Recharts = Recharts
+window.CarbonIcons = CarbonIcons
+window.ReactSelect = ReactSelect
 
 export {
   React,

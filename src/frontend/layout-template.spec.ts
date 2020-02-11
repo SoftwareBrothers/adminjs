@@ -43,24 +43,6 @@ describe('layoutTemplate', function () {
     })
   })
 
-  describe('user defines that externals should be taken from CDN', function () {
-    context('user overrode defaults', function () {
-      it('takes React and other libraries from CDN', function () {
-        this.adminBro = new AdminBro({
-          assets: {
-            globalsFromCDN: true,
-          },
-        })
-
-        const template = layoutTemplate(this.adminBro, undefined, '/')
-
-        expect(template).not.to.contain('global.bundle.js')
-        expect(template).to.contain('https://unpkg.com/react@16/umd/react.development.js')
-        expect(template).to.contain('https://unpkg.com/react-dom@16/umd/react-dom.development.js')
-      })
-    })
-  })
-
   context('custom styles and scripts were defined in AdminBro options', function () {
     beforeEach(function () {
       this.scriptUrl = 'http://somescript.com'

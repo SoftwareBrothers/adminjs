@@ -8,7 +8,6 @@ import App from './components/application'
 import ViewHelpers from '../backend/utils/view-helpers'
 import initializeStore from './store'
 import combineStyles from './styles/combine-styles'
-import globalDependencies from './utils/global-dependencies'
 import AdminBro from '../admin-bro'
 import { CurrentAdmin } from '../current-admin.interface'
 
@@ -71,7 +70,7 @@ const html = (admin: AdminBro, currentAdmin?: CurrentAdmin, location = '/'): str
 
       <link rel="stylesheet" type="text/css" href="https://cdn.quilljs.com/1.3.6/quill.snow.css">
       <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
-      ${globalDependencies({ fromCDN: admin.options.assets.globalsFromCDN, viewHelpers: h })}
+      <script src="${h.assetPath('global.bundle.js')}"></script>
       <script src="${h.assetPath('app.bundle.js')}"></script>
       <script src="${h.assetPath('components.bundle.js')}"></script>
       ${styles.join('\n')}

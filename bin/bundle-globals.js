@@ -58,6 +58,7 @@ const run = async () => {
       axios: 'axios',
       recharts: 'Recharts',
       'styled-components': 'styled',
+      'styled-system': 'StyledSystem',
       'react-dom': 'ReactDOM',
       'prop-types': 'PropTypes',
       'react-redux': 'ReactRedux',

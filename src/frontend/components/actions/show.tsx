@@ -2,7 +2,6 @@ import React from 'react'
 
 import PropertyType from '../property-type'
 import { ActionProps } from './action.props'
-import { PropertyPlace } from '../../../backend/decorators/property-json.interface'
 import { DrawerContent } from '../design-system'
 import ActionHeader from '../app/action-header'
 

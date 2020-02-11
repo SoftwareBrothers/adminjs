@@ -126,7 +126,8 @@ export type GetPageAPIParams = AxiosRequestConfig & {
  * import { ApiClient } from 'admin-bro'
  *
  * const api = new ApiClient()
- * api.getRecords({ resourceId: 'Comments' }).then(results => {...})
+ * // fetching all records
+ * api.resourceAction({ resourceId: 'Comments', actionName: 'list' }).then(results => {...})
  * ```
  * @see https://github.com/axios/axios
  */
@@ -144,7 +145,7 @@ class ApiClient {
 
   static getBaseUrl(): string {
     if (globalAny.isOnServer) { return '' }
-    return [globalAny.location.origin, globalAny.REDUX_STATE.paths.rootPath].join('')
+    return [globalAny.location.origin, globalAny.REDUX_STATE?.paths.rootPath].join('')
   }
 
   /**

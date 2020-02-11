@@ -5,7 +5,6 @@ import ActionButton from '../action-button'
 import PropertyType from '../../property-type'
 import ResourceJSON from '../../../../backend/decorators/resource-json.interface'
 import RecordJSON from '../../../../backend/decorators/record-json.interface'
-import { PropertyPlace } from '../../../../backend/decorators/property-json.interface'
 import {
   Placeholder, TableRow, TableCell, CheckBox, DropDown,
   DropDownTrigger, Icon, DropDownMenu, DropDownItem,
