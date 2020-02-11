@@ -1,26 +1,34 @@
 import React, { FC } from 'react'
+import { useHistory } from 'react-router'
 
 import PropertyType from '../property-type'
-
-import withNotice, { AddNoticeProps } from '../../store/with-notice'
 import { ActionProps } from './action.props'
 import { DrawerContent, Box, DrawerFooter, Button } from '../design-system'
 import ActionHeader from '../app/action-header'
-import useResourceEdit from '../../hooks/use-resource-edit'
+import useResource from '../../hooks/use-resource'
 import RecordJSON from '../../../backend/decorators/record-json.interface'
+import { appendForceRefresh } from './utils/append-force-refresh'
 
-const Edit: FC<ActionProps & AddNoticeProps> = (props) => {
-  const { record: initialRecord, resource, addNotice, action } = props
-  const { record, handleChange, handleSubmit } = useResourceEdit(
-    initialRecord!,
-    resource.id,
-    addNotice,
-  )
+const Edit: FC<ActionProps> = (props) => {
+  const { record: initialRecord, resource, action } = props
+
+  const { record, handleChange, handleSubmit } = useResource(initialRecord, resource.id)
+  const history = useHistory()
+
+  const submit = (event: React.FormEvent<HTMLFormElement>): boolean => {
+    event.preventDefault()
+    handleSubmit().then((response) => {
+      if (response.data.redirectUrl) {
+        history.push(appendForceRefresh(response.data.redirectUrl))
+      }
+    })
+    return false
+  }
 
   return (
     <Box
       as="form"
-      onSubmit={handleSubmit}
+      onSubmit={submit}
       flex
       flexGrow={1}
       flexDirection="column"
@@ -48,4 +56,4 @@ const Edit: FC<ActionProps & AddNoticeProps> = (props) => {
   )
 }
 
-export default withNotice(Edit)
+export default Edit

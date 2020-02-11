@@ -53,13 +53,16 @@ class Edit extends React.Component<CombinedProps> {
     const error = record.errors && record.errors[property.name]
 
     const reference = record.populated && record.populated[property.name]
-    let selectedOption = reference && {
+    let selectedOption = reference ? {
       value: reference.id,
       label: reference.title,
+    } : {
+      value: '',
+      label: '',
     }
     const styles = selectStyles(theme)
 
-    if (this.selected) {
+    if (this.selected && record.params[property.name]) {
       selectedOption = {
         value: this.selected.id,
         label: this.selected.title,
