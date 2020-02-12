@@ -12,6 +12,7 @@ Started since version 0.9.5
 
 * add "password" field [#112]
 * add hooks: useNotice, useResourceEdit, useResourceNew, useResource
+* add option to change resource id [#286]
 
 ### Changed
 
