@@ -13,6 +13,14 @@ import { ListActionResponse } from '../actions/list-action'
  */
 export interface ResourceOptions {
   /**
+   * Unique id of a resource.
+   *
+   * So let's suppose that you connected 2 databases to AdminBro. Both of them have
+   * the same collection: 'users'. In this case AdminBro wont be able to distinguish them.
+   * In this case changing Id of one of the resources helps to solve this issue.
+   */
+  id?: string;
+  /**
    * Name of a resource
    */
   name?: string;

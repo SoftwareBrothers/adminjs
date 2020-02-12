@@ -26,8 +26,9 @@ const NewAction: Action<RecordActionResponse> = {
    * @return {Promise<RecordActionResponse>} populated records
    */
   handler: async (request, response, context) => {
+    const { resource, h, currentAdmin } = context
     if (request.method === 'post') {
-      let record = await context.resource.build(request.payload ? request.payload : {})
+      let record = await resource.build(request.payload ? request.payload : {})
       record = await record.save()
 
       // eslint-disable-next-line no-param-reassign
@@ -35,18 +36,19 @@ const NewAction: Action<RecordActionResponse> = {
 
       if (record.isValid()) {
         return {
-          redirectUrl: context.h.resourceActionUrl({
-            resourceId: context.resource.id(), actionName: 'new',
+          redirectUrl: h.resourceActionUrl({
+            resourceId: resource._decorated?.id() || resource.id(),
+            actionName: 'new',
           }),
           notice: {
             message: 'Successfully created a new record',
             type: 'success',
           },
-          record: record.toJSON(context.currentAdmin),
+          record: record.toJSON(currentAdmin),
         }
       }
       return {
-        record: record.toJSON(context.currentAdmin),
+        record: record.toJSON(currentAdmin),
         notice: {
           message: 'There are validation errors - check them out below.',
           type: 'error',

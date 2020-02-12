@@ -158,6 +158,14 @@ class ResourceDecorator {
   }
 
   /**
+   * Returns the id for the resource.
+   * @return {string} resource id
+   */
+  id(): string {
+    return this.options.id || this._resource.id()
+  }
+
+  /**
    * Returns resource parent along with the icon. By default it is a
    * database type with its icon
    * @return {Record<string,string>} returns { name, icon }
@@ -308,10 +316,10 @@ class ResourceDecorator {
    */
   toJSON(currentAdmin?: CurrentAdmin): ResourceJSON {
     return {
-      id: this._resource.id(),
+      id: this.id(),
       name: this.getResourceName(),
       parent: this.getParent(),
-      href: this.h.resourceUrl({ resourceId: this._resource.id() }),
+      href: this.h.resourceUrl({ resourceId: this.id() }),
       titleProperty: this.titleProperty().toJSON(),
       resourceActions: this.resourceActions(currentAdmin).map(ra => ra.toJSON()),
       actions: Object.values(this.actions).map(action => action.toJSON()),

@@ -47,7 +47,7 @@ const BulkDeleteAction: Action<BulkActionResponse> = {
           message: `Successfully deleted ${records.length} records.`,
           type: 'success',
         },
-        redirectUrl: h.resourceUrl({ resourceId: resource.id() }),
+        redirectUrl: h.resourceUrl({ resourceId: resource._decorated?.id() || resource.id() }),
       }
     }
     throw new Error('method should be either "post" or "get"')

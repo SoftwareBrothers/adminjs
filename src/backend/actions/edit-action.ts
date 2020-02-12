@@ -28,28 +28,28 @@ const EditAction: Action<RecordActionResponse> = {
    * @memberof module:EditAction
    */
   handler: async (request, response, data) => {
-    const { record } = data
+    const { record, resource, currentAdmin, h } = data
     if (!record) {
       throw new NotFoundError([
         `Record of given id ("${request.params.recordId}") could not be found`,
       ].join('\n'), 'Action#handler')
     }
     if (request.method === 'get') {
-      return { record: record.toJSON(data.currentAdmin) }
+      return { record: record.toJSON(currentAdmin) }
     }
     await record.update(request.payload)
     if (record.isValid()) {
       return {
-        redirectUrl: data.h.resourceUrl({ resourceId: data.resource.id() }),
+        redirectUrl: h.resourceUrl({ resourceId: resource._decorated?.id() || resource.id() }),
         notice: {
           message: 'Successfully updated the record',
           type: 'success',
         },
-        record: record.toJSON(data.currentAdmin),
+        record: record.toJSON(currentAdmin),
       }
     }
     return {
-      record: record.toJSON(data.currentAdmin),
+      record: record.toJSON(currentAdmin),
       notice: {
         message: 'There are validation errors - check them out below.',
         type: 'error',
