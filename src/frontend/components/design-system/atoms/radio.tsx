@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, ChangeEvent } from 'react'
 import styled from 'styled-components'
 
 import { CheckboxRadioContainer } from './check-box'
@@ -96,28 +96,26 @@ export type RadioProps = React.HTMLProps<HTMLInputElement>
  */
 export const Radio: React.FC<RadioProps> = (props) => {
   const { className, checked, onChange, disabled, ...restProps } = props
-  let handleChange = onChange
-  let isChecked = checked
 
-  // When onChange was not provided - it takes care of the state itself
-  if (!handleChange && !disabled) {
-    let setChecked
-    [isChecked, setChecked] = useState(!!checked)
-
-    handleChange = (): void => {
-      setChecked(!isChecked)
+  const [isChecked, setChecked] = useState(checked ?? false)
+  const actuallyChecked = checked ?? isChecked
+  const handleChange = (event: ChangeEvent<HTMLInputElement>): void => {
+    setChecked(!event.target.checked)
+    if (onChange) {
+      onChange(event)
     }
   }
+
   return (
     <CheckboxRadioContainer className={className}>
       <HiddenRadio
-        checked={isChecked}
+        checked={actuallyChecked}
         onChange={handleChange}
         {...restProps as {}}
         disabled={disabled}
       />
       <StyledRadio
-        checked={isChecked}
+        checked={actuallyChecked}
         onClick={(event): void => handleChange && handleChange(event as any)}
         disabled={disabled}
       >
