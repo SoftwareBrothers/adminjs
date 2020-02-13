@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, ChangeEvent } from 'react'
 import styled from 'styled-components'
 
 import { Label } from './label'
@@ -113,28 +113,26 @@ export type CheckBoxProps = React.HTMLProps<HTMLInputElement>
  */
 export const CheckBox: React.FC<CheckBoxProps> = (props) => {
   const { className, checked, onChange, disabled, ...restProps } = props
-  let handleChange = onChange
-  let isChecked = checked
 
-  // When onChange was not provided - it takes care of the state itself
-  if (!handleChange && !disabled) {
-    let setChecked
-    [isChecked, setChecked] = useState(!!checked)
-
-    handleChange = (): void => {
-      setChecked(!isChecked)
+  const [isChecked, setChecked] = useState(checked ?? false)
+  const actuallyChecked = checked ?? isChecked
+  const handleChange = (event: ChangeEvent<HTMLInputElement>): void => {
+    setChecked(!event.target.checked)
+    if (onChange) {
+      onChange(event)
     }
   }
+
   return (
     <CheckboxRadioContainer className={className}>
       <HiddenCheckbox
-        checked={isChecked}
+        checked={actuallyChecked}
         onChange={handleChange}
         {...restProps as {}}
         disabled={disabled}
       />
       <StyledCheckbox
-        checked={isChecked}
+        checked={actuallyChecked}
         disabled={disabled}
         onClick={(event): void => handleChange && handleChange(event as any)}
       >
