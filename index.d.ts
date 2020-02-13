@@ -23,7 +23,7 @@ export { PropertyType } from './types/src/backend/adapters/base-property'
 export { ResourceOptions } from './types/src/backend/decorators/resource-options.interface'
 export {
   default as AdminBroOptions,
-  CSSTheme,
+  Theme,
   VersionProps,
   VersionSettings,
   BrandingOptions,
