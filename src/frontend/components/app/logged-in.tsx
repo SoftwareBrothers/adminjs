@@ -2,6 +2,7 @@ import React from 'react'
 
 import { CurrentAdmin } from '../../../current-admin.interface'
 import { LoggedUser, Box, DropDownItem, Link } from '../design-system'
+import { useTranslation } from '../../hooks'
 
 type Props = {
   session: CurrentAdmin;
@@ -12,6 +13,7 @@ type Props = {
 
 const LoggedIn: React.FC<Props> = (props) => {
   const { session, paths } = props
+  const { translateButton } = useTranslation()
   return (
     <Box flexShrink={0} py="lg">
       <LoggedUser
@@ -19,7 +21,7 @@ const LoggedIn: React.FC<Props> = (props) => {
         title={session.title}
       >
         <DropDownItem>
-          <Link href={paths.logoutPath}>Log out</Link>
+          <Link href={paths.logoutPath}>{translateButton('logout')}</Link>
         </DropDownItem>
       </LoggedUser>
     </Box>

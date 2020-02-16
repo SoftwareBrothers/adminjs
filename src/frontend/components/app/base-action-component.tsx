@@ -1,11 +1,13 @@
-import React, { ReactNode } from 'react'
+import React, { useEffect, useState } from 'react'
 
+import { Trans } from 'react-i18next'
 import ErrorBoundary from './error-boundary'
 
 import * as actions from '../actions'
 import { DOCS } from '../../../constants'
 import { ActionProps } from '../actions/action.props'
-import { MessageBox } from '../design-system'
+import { MessageBox, Link } from '../design-system'
+import { useTranslation } from '../../hooks'
 
 declare const AdminBro: {
   UserComponents: Array<string>;
@@ -65,50 +67,43 @@ type State = {
  * @name BaseActionComponent
  * @subcategory Application
  */
-class BaseActionComponent extends React.Component<ActionProps, State> {
-  constructor(props) {
-    super(props)
-    this.state = {
-      isClient: false,
-    }
+const BaseActionComponent: React.FC<ActionProps> = (props) => {
+  const { resource, action, record, records, setTag } = props
+  const documentationLink = [DOCS, 'BaseAction.html'].join('/')
+
+  const [isClient, setIsClient] = useState(false)
+  const { translateMessage } = useTranslation()
+
+  useEffect(() => {
+    setIsClient(true)
+  })
+
+  let Action = actions[action.name]
+  if (isClient && action.component) {
+    Action = AdminBro.UserComponents[action.component]
   }
-
-  componentDidMount(): void {
-    this.setState({ isClient: true })
-  }
-
-  render(): ReactNode {
-    const { resource, action, record, records, setTag } = this.props
-
-    const { isClient } = this.state
-    const documentationLink = [DOCS, 'BaseAction.html'].join('/')
-
-    let Action = actions[action.name]
-    if (isClient && action.component) {
-      Action = AdminBro.UserComponents[action.component]
-    }
-    if (Action) {
-      return (
-        <ErrorBoundary>
-          <Action
-            action={action}
-            resource={resource}
-            record={record}
-            records={records}
-            setTag={setTag}
-          />
-        </ErrorBoundary>
-      )
-    }
-    return Action || (
-      <MessageBox variant="danger">
-        You have to implement action component for your Action.
-        See:
-        {' '}
-        <a href={documentationLink}>the documentation</a>
-      </MessageBox>
+  if (Action) {
+    return (
+      <ErrorBoundary>
+        <Action
+          action={action}
+          resource={resource}
+          record={record}
+          records={records}
+          setTag={setTag}
+        />
+      </ErrorBoundary>
     )
   }
+  return Action || (
+    <MessageBox variant="danger">
+      {translateMessage('noActionComponent')}
+      <Trans key="messages.buttons.seeTheDocumentation">
+        See:
+        <Link ml="default" href={documentationLink}>the documentation</Link>
+      </Trans>
+    </MessageBox>
+  )
 }
 
 export default BaseActionComponent

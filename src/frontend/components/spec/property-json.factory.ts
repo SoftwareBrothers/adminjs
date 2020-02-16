@@ -17,4 +17,5 @@ factory.define<PropertyJSON>('PropertyJSON', Object, {
   isArray: false,
   subProperties: [],
   components: undefined,
+  resourceId: 'someResourceId',
 })

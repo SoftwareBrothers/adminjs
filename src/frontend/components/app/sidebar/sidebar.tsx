@@ -8,18 +8,22 @@ import groupResources from './utils/group-resources'
 import { ReduxState } from '../../../store/store'
 import { Navigation, Box, Label } from '../../design-system'
 import SidebarFooter from './sidebar-footer'
+import { useTranslation } from '../../../hooks/use-translation'
 
 type Props = Pick<ReduxState, 'resources' | 'branding' | 'pages'>
 
 const Sidebar: React.FC<Props> = (props) => {
   const { branding, resources, pages } = props
+
+  const { tl } = useTranslation()
+
   return (
     <Navigation>
       <Box flexShrink={0} px="lg" pb="xxl">
         <SidebarBranding branding={branding} />
       </Box>
       <Box flexGrow={1}>
-        <Label uppercase ml="lg" color="grey">Navigation</Label>
+        <Label uppercase ml="lg" color="grey">{tl('navigation')}</Label>
         {groupResources(resources).map(parent => (
           <SidebarParent parent={parent} key={parent.name} />
         ))}

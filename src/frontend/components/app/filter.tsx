@@ -1,15 +1,11 @@
-import React, { ReactNode, MouseEvent, SyntheticEvent } from 'react'
-import { withRouter } from 'react-router-dom'
+import React, { MouseEvent, SyntheticEvent, useState, useEffect } from 'react'
+import { useHistory, useLocation, useRouteMatch } from 'react-router-dom'
 
-import { RouteComponentProps } from 'react-router'
 import PropertyType from '../property-type'
 import ResourceJSON from '../../../backend/decorators/resource-json.interface'
 import RecordJSON from '../../../backend/decorators/record-json.interface'
 import { Box, H3, Button, Icon, Drawer, DrawerContent, DrawerFooter } from '../design-system'
-
-type FilterProps = {
-  isHidden?: boolean;
-}
+import { useTranslation } from '../../hooks'
 
 type Props = {
   resource: ResourceJSON;
@@ -17,51 +13,36 @@ type Props = {
   isVisible: boolean;
 }
 
-type State = {
-  filter: any;
-}
-
 type MatchProps = {
   resourceId: string;
 }
 
-type CombinedProps = Props & RouteComponentProps<MatchProps>
-
-class FilterContainer extends React.Component<CombinedProps, State> {
-  constructor(props: CombinedProps) {
-    super(props)
-    this.handleSubmit = this.handleSubmit.bind(this)
-    this.handleChange = this.handleChange.bind(this)
-    this.resetFilter = this.resetFilter.bind(this)
-    this.state = {
-      filter: this.parseQuery(),
+const parseQuery = (location): any => {
+  const filter: Record<string, string> = {}
+  const query = new URLSearchParams(location.search)
+  for (const entry of query.entries()) {
+    const [key, value] = entry
+    if (key.match('filters.')) {
+      filter[key.replace('filters.', '')] = value
     }
   }
+  return filter
+}
 
-  componentWillReceiveProps(nextProps: CombinedProps): void {
-    const { match } = this.props
-    if (nextProps.match.params.resourceId !== match.params.resourceId) {
-      this.setState({ filter: {} })
-    }
-  }
+const FilterContainer: React.FC<Props> = (props) => {
+  const { resource, isVisible, toggleFilter } = props
+  const properties = resource.filterProperties
 
-  parseQuery(): any {
-    const { location } = this.props
-    const filter: Record<string, string> = {}
-    const query = new URLSearchParams(location.search)
-    for (const entry of query.entries()) {
-      const [key, value] = entry
-      if (key.match('filters.')) {
-        filter[key.replace('filters.', '')] = value
-      }
-    }
-    return filter
-  }
+  const location = useLocation()
+  const [filter, setFilter] = useState(parseQuery(location))
+  const match = useRouteMatch<MatchProps>()
+  const history = useHistory()
+  const { translateLabel, translateButton } = useTranslation()
 
-  handleSubmit(event: SyntheticEvent): false {
+  useEffect(() => setFilter({}), [match.params.resourceId])
+
+  const handleSubmit = (event: SyntheticEvent): false => {
     event.preventDefault()
-    const { filter } = this.state
-    const { history } = this.props
     const search = new URLSearchParams(window.location.search)
     Object.keys(filter).forEach((key) => {
       if (filter[key] !== '') {
@@ -75,8 +56,7 @@ class FilterContainer extends React.Component<CombinedProps, State> {
     return false
   }
 
-  resetFilter(event: MouseEvent): void {
-    const { history } = this.props
+  const resetFilter = (event: MouseEvent): void => {
     event.preventDefault()
     const filteredSearch = new URLSearchParams()
     const search = new URLSearchParams(window.location.search)
@@ -87,93 +67,57 @@ class FilterContainer extends React.Component<CombinedProps, State> {
     }
     const query = filteredSearch.toString() === '' ? `?${filteredSearch.toString()}` : ''
     history.push(history.location.pathname + query)
-    this.setState({ filter: {} })
+    setFilter({})
   }
 
-  handleChange(propertyName: string | RecordJSON, value: any): void {
+  const handleChange = (propertyName: string | RecordJSON, value: any): void => {
     if ((propertyName as RecordJSON).params) {
       throw new Error('you can not pass RecordJSON to filters')
     }
-    this.setState(state => ({
-      filter: {
-        ...state.filter,
-        [propertyName as string]: value,
-      },
-    }))
+    setFilter({
+      ...filter,
+      [propertyName as string]: value,
+    })
   }
 
-  render(): ReactNode {
-    const { resource, isVisible, toggleFilter } = this.props
-    const { filter } = this.state
-    const properties = resource.filterProperties
-    return (
-      <Drawer variant="filter" isHidden={!isVisible} as="form" onSubmit={this.handleSubmit}>
-        <DrawerContent>
-          <H3>
-            <Button
-              type="button"
-              size="icon"
-              rounded
-              mr="lg"
-              onClick={(): void => toggleFilter()}
-            >
-              <Icon icon="ChevronRight" color="white" />
-            </Button>
-            Filters
-          </H3>
-          <Box my="x3">
-            {properties.map(property => (
-              <PropertyType
-                key={property.name}
-                where="filter"
-                onChange={this.handleChange}
-                property={property}
-                filter={filter}
-                resource={resource}
-              />
-            ))}
-          </Box>
-        </DrawerContent>
-        <DrawerFooter>
-          <Button variant="primary" size="lg">
-            Apply changes
+  return (
+    <Drawer variant="filter" isHidden={!isVisible} as="form" onSubmit={handleSubmit}>
+      <DrawerContent>
+        <H3>
+          <Button
+            type="button"
+            size="icon"
+            rounded
+            mr="lg"
+            onClick={(): void => toggleFilter()}
+          >
+            <Icon icon="ChevronRight" color="white" />
           </Button>
-          <Button variant="text" size="lg" onClick={this.resetFilter} type="button">
-            Reset filter
-          </Button>
-        </DrawerFooter>
-      </Drawer>
-    )
-  }
+          {translateLabel('filters', resource.id)}
+        </H3>
+        <Box my="x3">
+          {properties.map(property => (
+            <PropertyType
+              key={property.name}
+              where="filter"
+              onChange={handleChange}
+              property={property}
+              filter={filter}
+              resource={resource}
+            />
+          ))}
+        </Box>
+      </DrawerContent>
+      <DrawerFooter>
+        <Button variant="primary" size="lg">
+          {translateButton('applyChanges', resource.id)}
+        </Button>
+        <Button variant="text" size="lg" onClick={resetFilter} type="button" color="white">
+          {translateButton('resetFilter', resource.id)}
+        </Button>
+      </DrawerFooter>
+    </Drawer>
+  )
 }
 
-// <FilterContent>
-//   <FilterLink onClick={toggleFilter}>
-//     <span><i className="fas fa-arrow-right" /></span>
-//     Filter
-//   </FilterLink>
-// <form onSubmit={this.handleSubmit.bind(this)}>
-//   {properties.map(property => (
-//     <PropertyType
-//       key={property.name}
-//       where={PropertyPlace.filter}
-//       onChange={this.handleChange}
-//       property={property}
-//       filter={filter}
-//       resource={resource}
-//     />
-//   ))}
-//   <StyledButton className="is-primary">
-//     Apply Changes
-//   </StyledButton>
-//   <StyledButton
-//     as="a"
-//     className="is-text"
-//     onClick={this.resetFilter}
-//   >
-//     Clear filters
-//   </StyledButton>
-// </form>
-// </FilterContent>
-
-export default withRouter(FilterContainer)
+export default FilterContainer

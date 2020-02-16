@@ -1,9 +1,20 @@
 import React, { ReactNode } from 'react'
 import { MessageBox } from '../design-system/molecules/message-box'
 import { Text } from '../design-system'
+import { useTranslation } from '../../hooks'
 
 type State = {
   error: any;
+}
+
+const ErrorMessage: React.FC<State> = ({ error }) => {
+  const { translateMessage } = useTranslation()
+  return (
+    <MessageBox m="xxl" variant="danger" message="Javascript Error">
+      <Text>{error.toString()}</Text>
+      <Text mt="default">{translateMessage('seeConsoleForMore')}</Text>
+    </MessageBox>
+  )
 }
 
 class ErrorBoundary extends React.Component<any, State> {
@@ -24,12 +35,7 @@ class ErrorBoundary extends React.Component<any, State> {
     const { error } = this.state
 
     if (error !== null) {
-      return (
-        <MessageBox m="xxl" variant="danger" message="Javascript Error">
-          <Text>{error.toString()}</Text>
-          <Text mt="default">See development console for more details...</Text>
-        </MessageBox>
-      )
+      return (<ErrorMessage error={error} />)
     }
 
     return children || null

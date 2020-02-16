@@ -7,6 +7,7 @@ import createStore, {
   initializePages,
   initializeSession,
   initializeVersions,
+  initializeLocale,
   ReduxState,
 } from './store'
 import AdminBro from '../../admin-bro'
@@ -17,6 +18,8 @@ const initializeStore = (admin: AdminBro, currentAdmin?: CurrentAdmin): Store<Re
   const store: Store<ReduxState> = createStore()
   const AdminClass: typeof AdminBro = admin.constructor as typeof AdminBro
   const adminVersion = AdminClass.VERSION
+
+  store.dispatch(initializeLocale(admin.locale))
 
   store.dispatch(initializeResources(
     admin.resources.map((resource) => {

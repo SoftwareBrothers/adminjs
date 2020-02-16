@@ -18,6 +18,8 @@ import flat from 'flat'
 import ReactDatepicker from 'react-datepicker'
 import ReactSelect from 'react-select/lib/Async'
 import * as CarbonIcons from '@carbon/icons-react'
+import i18n from 'i18next'
+import * as ReactI18Next from 'react-i18next'
 
 window.React = React
 window.ReactDOM = ReactDOM
@@ -34,6 +36,8 @@ window.axios = axios
 window.Recharts = Recharts
 window.CarbonIcons = CarbonIcons
 window.ReactSelect = ReactSelect
+window.i18n = i18n
+window.ReactI18Next = ReactI18Next
 
 export {
   React,

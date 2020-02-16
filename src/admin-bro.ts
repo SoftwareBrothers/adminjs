@@ -1,6 +1,7 @@
 import * as _ from 'lodash'
 import * as path from 'path'
 import * as fs from 'fs'
+import i18n, { i18n as I18n } from 'i18next'
 
 import AdminBroOptions, { AdminBroOptionsWithDefault } from './admin-bro-options.interface'
 import BaseResource from './backend/adapters/base-resource'
@@ -18,6 +19,9 @@ import { DEFAULT_PATHS } from './constants'
 
 import loginTemplate from './frontend/login-template'
 import { ListActionResponse } from './backend/actions/list-action'
+import { combineTranslations, Locale } from './locale/config'
+import en from './locale/en'
+import { TranslateFunctions, createFunctions } from './utils/translate-functions.factory'
 
 const pkg = JSON.parse(fs.readFileSync(path.join(__dirname, '../package.json'), 'utf-8'))
 export const VERSION = pkg.version
@@ -67,6 +71,12 @@ class AdminBro {
   public resources: Array<BaseResource>
 
   public options: AdminBroOptionsWithDefault
+
+  public locale!: Locale
+
+  public i18n!: I18n
+
+  public translateFunctions!: TranslateFunctions
 
   public static registeredAdapters: Array<Adapter>
 
@@ -174,9 +184,34 @@ class AdminBro {
       ? this.options.branding.logo
       : defaultLogo
 
+    this.initI18n()
+
     const { databases, resources } = this.options
     const resourcesFactory = new ResourcesFactory(this, AdminBro.registeredAdapters)
     this.resources = resourcesFactory.buildResources({ databases, resources })
+  }
+
+  initI18n(): void {
+    this.locale = {
+      translations: combineTranslations(en.translations, this.options.locale?.translations),
+      language: this.options.locale?.language || 'en',
+    }
+
+    i18n.init({
+      lng: this.locale.language,
+      initImmediate: false, // loads translations immediately
+      resources: {
+        [this.locale.language]: {
+          translation: this.locale.translations,
+        },
+      },
+    })
+
+    // mixin translate functions
+    this.translateFunctions = createFunctions(i18n)
+    Object.getOwnPropertyNames(this.translateFunctions).forEach((translateFunctionName) => {
+      this[translateFunctionName] = this.translateFunctions[translateFunctionName]
+    })
   }
 
   /**
@@ -318,6 +353,9 @@ class AdminBro {
 AdminBro.UserComponents = {}
 AdminBro.registeredAdapters = []
 AdminBro.VERSION = VERSION
+
+// eslint-disable-next-line @typescript-eslint/no-empty-interface
+interface AdminBro extends TranslateFunctions {}
 
 export const { registerAdapter } = AdminBro
 export const { bundle } = AdminBro

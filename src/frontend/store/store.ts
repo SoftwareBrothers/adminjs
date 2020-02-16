@@ -6,11 +6,19 @@ import { CurrentAdmin } from '../../current-admin.interface'
 import { DEFAULT_PATHS } from '../../constants'
 import { NoticeMessage } from './with-notice'
 import PageJSON from '../../backend/decorators/page-json.interface'
+import { Locale } from '../../locale/config'
 
 export const initializePages = (data: Array<AdminPage>): {
   type: string; data: Array<AdminPage>;
 } => ({
   type: 'PAGES_INITIALIZE',
+  data,
+})
+
+export const initializeLocale = (data: Locale): {
+  type: string; data: Locale;
+} => ({
+  type: 'LOCALE_INITIALIZE',
   data,
 })
 
@@ -129,6 +137,20 @@ const pagesReducer = (
   }
 }
 
+const localesReducer = (
+  state: Locale = { language: 'en', translations: {} } as Locale,
+  action: {
+    type: string;
+    data: Locale;
+  },
+) => {
+  switch (action.type) {
+  case 'LOCALE_INITIALIZE':
+    return action.data
+  default: return state
+  }
+}
+
 const brandingReducer = (state = {}, action: {
   type: string;
   data: BrandingOptions;
@@ -225,6 +247,7 @@ export type ReduxState = {
   notices: Array<NoticeMessageInState>;
   versions: VersionProps;
   pages: Array<PageJSON>;
+  locale: Locale;
 }
 
 const reducer = combineReducers<ReduxState>({
@@ -236,6 +259,7 @@ const reducer = combineReducers<ReduxState>({
   notices: noticesReducer,
   versions: versionsReducer,
   pages: pagesReducer,
+  locale: localesReducer,
 })
 
 export default (initialState = {}) => createStore(reducer, initialState)

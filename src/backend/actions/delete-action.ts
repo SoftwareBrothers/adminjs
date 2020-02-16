@@ -29,7 +29,7 @@ const DeleteAction: Action<RecordActionResponse> = {
    * @memberof module:DeleteAction
    */
   handler: async (request, response, data) => {
-    const { record, resource, currentAdmin, h } = data
+    const { record, resource, currentAdmin, h, translateMessage } = data
     if (!request.params.recordId || !record) {
       throw new NotFoundError([
         'You have to pass "recordId" to Delete Action',
@@ -53,7 +53,7 @@ const DeleteAction: Action<RecordActionResponse> = {
       record: record.toJSON(currentAdmin),
       redirectUrl: h.resourceUrl({ resourceId: resource._decorated?.id() || resource.id() }),
       notice: {
-        message: 'Successfully removed given record',
+        message: translateMessage('successfullyDeleted', resource.id()),
         type: 'success',
       },
     }

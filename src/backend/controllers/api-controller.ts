@@ -68,7 +68,12 @@ class ApiController {
     const resource = this._admin.findResource(resourceId)
     const action = resource.decorate().actions[actionName]
     return {
-      resource, action, h, currentAdmin: this.currentAdmin, _admin: this._admin,
+      resource,
+      action,
+      h,
+      currentAdmin: this.currentAdmin,
+      _admin: this._admin,
+      ...this._admin.translateFunctions,
     }
   }
 

@@ -2,6 +2,8 @@ import React from 'react'
 import { Provider } from 'react-redux'
 import { BrowserRouter } from 'react-router-dom'
 import { ThemeProvider } from 'styled-components'
+import { initReactI18next } from 'react-i18next'
+import i18n from 'i18next'
 
 import App from './components/application'
 import PropertyTypes from './components/property-type'
@@ -21,6 +23,19 @@ const env = {
 
 const store = createStore(window.REDUX_STATE)
 const theme = window.THEME
+const { locale } = window.REDUX_STATE
+
+i18n
+  .use(initReactI18next)
+  .init({
+    resources: {
+      [locale.language]: {
+        translation: locale.translations,
+      },
+    },
+    lng: locale.language,
+    interpolation: { escapeValue: false },
+  })
 
 const Application = (
   <Provider store={store}>

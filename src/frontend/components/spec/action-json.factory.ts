@@ -5,6 +5,7 @@ factory.define<ActionJSON>('ActionJSON', Object, {
   actionType: 'record',
   showInDrawer: true,
   name: 'edit',
-  label: 'edit',
+  label: 'someLabel',
   showFilter: false,
+  resourceId: 'resource',
 })

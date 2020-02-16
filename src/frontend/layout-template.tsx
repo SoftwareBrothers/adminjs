@@ -43,7 +43,7 @@ const html = (admin: AdminBro, currentAdmin?: CurrentAdmin, location = '/'): str
     </Provider>
   )
 
-  const appComponent = renderToString(jsx)
+  // const appComponent = renderToString(jsx)
 
   let faviconTag = ''
   if (admin.options.branding.favicon) {

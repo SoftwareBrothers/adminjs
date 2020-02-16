@@ -8,7 +8,7 @@ import { RecordActionResponse } from '../../backend/actions/action.interface'
 
 const api = new ApiClient()
 
-export type UseResourceResult = {
+export type UseRecordResult = {
   record: RecordJSON;
   handleChange: (propertyOrRecord: string | RecordJSON, value?: any) => void;
   handleSubmit: () => Promise<AxiosResponse<RecordActionResponse>>;
@@ -18,10 +18,10 @@ export type UseResourceResult = {
 /**
  * @component
  */
-export const useResource = (
+export const useRecord = (
   initialRecord: RecordJSON | undefined,
   resourceId: string,
-): UseResourceResult => {
+): UseRecordResult => {
   const [loading, setLoading] = useState(false)
   const [record, setRecord] = useState<RecordJSON>({
     ...initialRecord,
@@ -93,4 +93,4 @@ export const useResource = (
   return { record, handleChange, handleSubmit, loading }
 }
 
-export default useResource
+export default useRecord

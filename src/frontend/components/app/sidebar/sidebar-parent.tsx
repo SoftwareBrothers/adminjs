@@ -3,6 +3,7 @@ import React, { ReactNode } from 'react'
 import SidebarResource from './sidebar-resource'
 import ResourceJSON from '../../../../backend/decorators/resource-json.interface'
 import { NavGroup } from '../../design-system'
+import { useTranslation } from '../../../hooks'
 
 
 type Props = {
@@ -13,21 +14,20 @@ type Props = {
   };
 }
 
-class SidebarParent extends React.PureComponent<Props> {
-  render(): ReactNode {
-    const { parent } = this.props
-    const { icon, name, resources } = parent
+const SidebarParent: React.FC<Props> = (props) => {
+  const { parent } = props
+  const { icon, name, resources } = parent
+  const { tl } = useTranslation()
 
-    return (
-      <NavGroup icon={icon} title={name}>
-        {resources.map(resource => (
-          <SidebarResource
-            resource={resource}
-            key={resource.id}
-          />
-        ))}
-      </NavGroup>
-    )
-  }
+  return (
+    <NavGroup icon={icon} title={tl(name)}>
+      {resources.map(resource => (
+        <SidebarResource
+          resource={resource}
+          key={resource.id}
+        />
+      ))}
+    </NavGroup>
+  )
 }
 export default SidebarParent

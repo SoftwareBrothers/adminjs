@@ -6,6 +6,7 @@ import BaseResource from '../adapters/base-resource'
 import ActionDecorator from '../decorators/action-decorator'
 import RecordJSON from '../decorators/record-json.interface'
 import { NoticeMessage } from '../../frontend/store/with-notice'
+import { TranslateFunctions } from '../../utils/translate-functions.factory'
 
 /**
  * Execution context for an action. It is passed to the {@link Action#handler},
@@ -14,7 +15,7 @@ import { NoticeMessage } from '../../frontend/store/with-notice'
  * @memberof Action
  * @alias ActionContext
  */
-export type ActionContext = {
+export type ActionContext = TranslateFunctions & {
   /**
    * current instance of AdminBro. You may use it to fetch other Resources by their names:
    */

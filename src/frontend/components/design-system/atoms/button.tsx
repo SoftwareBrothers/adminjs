@@ -40,7 +40,6 @@ const buttonVariants = variant({
       ...variantShared,
     },
     text: {
-      color: 'bluePrimary',
       bg: 'transparent',
       borderColor: 'transparent',
       '&:disabled': {

@@ -28,6 +28,8 @@ const external = [
   'recharts',
   '@carbon/icons-react',
   'react-select/lib/Async',
+  'i18next',
+  'react-i18next',
 ]
 
 const globals = {
@@ -51,6 +53,8 @@ const globals = {
   'admin-bro/property-types': 'AdminBro.PropertyTypes',
   'admin-bro/types': 'AdminBro.types',
   'admin-bro/style': 'AdminBro.style',
+  i18next: 'i18n',
+  'react-i18next': 'ReactI18Next',
 }
 
 const extensions = ['.mjs', '.js', '.jsx', '.json', '.ts', '.tsx']

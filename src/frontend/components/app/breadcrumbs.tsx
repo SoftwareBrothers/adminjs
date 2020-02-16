@@ -5,6 +5,7 @@ import styled from 'styled-components'
 import ResourceJSON from '../../../backend/decorators/resource-json.interface'
 import RecordJSON from '../../../backend/decorators/record-json.interface'
 import { Box } from '../design-system'
+import { useTranslation } from '../../hooks'
 
 const BreadcrumbLink = styled(Link)`
   color: ${({ theme }): string => theme.colors.greyLight};
@@ -51,36 +52,19 @@ type Props = {
  * @component
  * @private
  */
-class Breadcrumbs extends React.PureComponent<Props> {
-  renderResource(): React.ReactNode {
-    const { resource, record } = this.props
-    return (
+const Breadcrumbs: React.FC<Props> = (props) => {
+  const { resource, record, actionName } = props
+
+  const action = resource.actions.find(a => a.name === actionName)
+
+  return (
+    <Box flexGrow={1}>
       <BreadcrumbLink to={resource.href} className={record ? 'is-active' : ''}>
         {resource.name}
       </BreadcrumbLink>
-    )
-  }
-
-  renderAction(): ReactNode {
-    const { actionName, resource, record } = this.props
-    const action = resource.resourceActions.find(a => a.name === actionName)
-      || (record && record.recordActions.find(a => a.name === actionName))
-    if (action) {
-      return (
-        <BreadcrumbLink to="#">{action.label}</BreadcrumbLink>
-      )
-    }
-    return null
-  }
-
-  render(): ReactNode {
-    return (
-      <Box flexGrow={1}>
-        {this.renderResource()}
-        {this.renderAction()}
-      </Box>
-    )
-  }
+      {action && record ? (<BreadcrumbLink to="#">{action.label}</BreadcrumbLink>) : null}
+    </Box>
+  )
 }
 
 export default Breadcrumbs
