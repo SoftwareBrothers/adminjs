@@ -8,10 +8,10 @@ import { TranslateFunctions, createFunctions } from '../../utils/translate-funct
 /**
  * Extends {@link TranslateFunctions}. Apart from that it also returns all the properties
  * defined below.
- * 
+ *
  * @memberof useTranslation
  * @alias UseTranslationResponse
- * 
+ *
  * @property {TranslateFunction} ... All functions defined in {@link TranslateFunctions}
  */
 export type UseTranslationResponse = TranslateFunctions & {
@@ -28,10 +28,10 @@ export type UseTranslationResponse = TranslateFunctions & {
 
 /**
  * Extends the useTranslation hook from react-i18next library.
- * 
+ *
  * Returns all the {@link TranslateFunctions} + methods returned by the original
  * useTranslation method from react-i18next like: `i18n` instance and `ready` flag.
- * 
+ *
  * @component
  * @subcategory Hooks
  */

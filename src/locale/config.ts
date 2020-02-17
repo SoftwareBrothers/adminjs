@@ -87,7 +87,7 @@ export type LocaleTranslations = LocaleTranslationsBlock & {
  * @property {Record<string, string>} [resources.resourceId.messages]
  * @property {Record<string, string>} [resources.resourceId.buttons]
  * @property {Record<string, string>} [resources.resourceId.labels]
- * 
+ *
  */
 
 // Escaping all keys with . (changing to '&#46;')

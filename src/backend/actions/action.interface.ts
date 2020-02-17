@@ -11,10 +11,10 @@ import { TranslateFunctions } from '../../utils/translate-functions.factory'
 /**
  * Execution context for an action. It is passed to the {@link Action#handler},
  * {@link Action#before} and {@link Action#after} functions.
- * 
+ *
  * Apart from the properties defined below it also extends {@link TranslateFunctions}.
  * So you can use i.e. context.translateMessage(...) and others...
- * 
+ *
  * @property {TranslateFunction} ...      all functions from {@link TranslateFunctions}
  *                                        interface.
  *

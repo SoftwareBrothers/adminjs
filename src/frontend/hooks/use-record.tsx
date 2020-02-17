@@ -10,7 +10,7 @@ const api = new ApiClient()
 
 /**
  * Result of useRecord hook
- * 
+ *
  * @memberof useRecord
  * @alias UseRecordResult
  */
@@ -36,29 +36,29 @@ export type UseRecordResult = {
 
 /**
  * A powerful, hook which allows you to manage an entire record of given type.
- * 
+ *
  * Take a look of creating a component which renders form for some non-existing record.
  * Form have name and surname fields. After clicking "save" user will create a new record.
  * Consecutive calls will update it.
- * 
+ *
  * ```javascript
  * import { BasePropertyComponent, useRecord, Box, useTranslation } from 'admin-bro'
- * 
+ *
  * const MyRecordActionComponent = (props) => {
  *   const { record: initialRecord, resource, action } = props
- * 
+ *
  *   const { record, handleChange, submit } = useRecord(initialRecord, resource.id)
  *   const { translateButton } = useTranslation()
- * 
+ *
  *   const nameProperty = resource.editProperties.find((property) => property.name === 'name')
  *   const surnameProperty = resource.editProperties.find((property) => property.name === 'surname')
- * 
+ *
  *   const handleSubmit = (event) => {
  *     submit().then(() => {
  *        // do something
  *     })
  *   }
- * 
+ *
  *   return (
  *     <Box
  *       as="form"
@@ -86,9 +86,9 @@ export type UseRecordResult = {
  * }
  * export default MyRecordActionComponent
  * ```
- * 
+ *
  * Returns {@link UseRecordResult}.
- * 
+ *
  * @subcategory Hooks
  * @component
  */
