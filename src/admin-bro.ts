@@ -194,7 +194,7 @@ class AdminBro {
   initI18n(): void {
     this.locale = {
       translations: combineTranslations(en.translations, this.options.locale?.translations),
-      language: this.options.locale?.language || 'en',
+      language: this.options.locale?.language || en.language,
     }
 
     i18n.init({
@@ -207,7 +207,8 @@ class AdminBro {
       },
     })
 
-    // mixin translate functions
+    // mixin translate functions to AdminBro instance so users will be able to
+    // call adminBro.translateMessage(...)
     this.translateFunctions = createFunctions(i18n)
     Object.getOwnPropertyNames(this.translateFunctions).forEach((translateFunctionName) => {
       this[translateFunctionName] = this.translateFunctions[translateFunctionName]

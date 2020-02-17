@@ -17,10 +17,10 @@ type Props = {
 const SidebarParent: React.FC<Props> = (props) => {
   const { parent } = props
   const { icon, name, resources } = parent
-  const { tl } = useTranslation()
+  const { translateLabel } = useTranslation()
 
   return (
-    <NavGroup icon={icon} title={tl(name)}>
+    <NavGroup icon={icon} title={translateLabel(name)}>
       {resources.map(resource => (
         <SidebarResource
           resource={resource}

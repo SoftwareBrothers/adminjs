@@ -15,7 +15,7 @@ type Props = Pick<ReduxState, 'resources' | 'branding' | 'pages'>
 const Sidebar: React.FC<Props> = (props) => {
   const { branding, resources, pages } = props
 
-  const { tl } = useTranslation()
+  const { translateLabel } = useTranslation()
 
   return (
     <Navigation>
@@ -23,7 +23,7 @@ const Sidebar: React.FC<Props> = (props) => {
         <SidebarBranding branding={branding} />
       </Box>
       <Box flexGrow={1}>
-        <Label uppercase ml="lg" color="grey">{tl('navigation')}</Label>
+        <Label uppercase ml="lg" color="grey">{translateLabel('navigation')}</Label>
         {groupResources(resources).map(parent => (
           <SidebarParent parent={parent} key={parent.name} />
         ))}

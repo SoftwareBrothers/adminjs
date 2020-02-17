@@ -13,7 +13,7 @@ type Props = {
 const SidebarPages: React.FC<Props> = (props) => {
   const { pages } = props
 
-  const { tl } = useTranslation()
+  const { translateLabel } = useTranslation()
 
   const h = new ViewHelpers()
 
@@ -27,7 +27,7 @@ const SidebarPages: React.FC<Props> = (props) => {
 
   return (
     <Box ml="lg">
-      <Label uppercase color="grey" mb="lg">{tl('pages')}</Label>
+      <Label uppercase color="grey" mb="lg">{translateLabel('pages')}</Label>
       {pages.map(page => (
         <SidebarLink
           to={h.pageUrl(page.name)}
