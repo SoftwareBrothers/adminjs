@@ -13,7 +13,7 @@ import { useTranslation } from '../../hooks/use-translation'
 
 const New: FC<ActionProps> = (props) => {
   const { record: initialRecord, resource, action } = props
-  const { record, handleChange, handleSubmit } = useRecord(initialRecord, resource.id)
+  const { record, handleChange, submit: handleSubmit } = useRecord(initialRecord, resource.id)
   const { translateButton } = useTranslation()
   const history = useHistory()
 

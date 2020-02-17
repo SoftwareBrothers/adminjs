@@ -21,15 +21,12 @@ export {
 export { CurrentAdmin } from './types/src/current-admin.interface'
 export { PropertyType } from './types/src/backend/adapters/base-property'
 export { ResourceOptions } from './types/src/backend/decorators/resource-options.interface'
-export {
-  default as AdminBroOptions,
-  Theme,
-  VersionProps,
-  VersionSettings,
-  BrandingOptions,
-  AdminPage,
-  PageHandler,
-} from './types/src/admin-bro-options.interface'
+export { default as AdminBroOptions } from './types/src/admin-bro-options.interface'
+export * from './types/src/admin-bro-options.interface'
+export * from './types/src/locale/config'
+
+export * from './types/src/utils/translate-functions.factory'
+
 export { default as PropertyOptions } from './types/src/backend/decorators/property-options.interface'
 export { PropertyPlace } from './types/src/backend/decorators/property-json.interface'
 export {
@@ -81,7 +78,7 @@ export * from './types/src/frontend/components/app'
 export * from './types/src/constants'
 export * from './types/src/frontend/hooks'
 
-export { default as PropertyTypes } from './types/src/frontend/components/property-type'
+export { default as BasePropertyComponent } from './types/src/frontend/components/property-type'
 
 export {
   AdminBro as default,

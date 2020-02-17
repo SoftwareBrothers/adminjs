@@ -6,7 +6,7 @@ import { initReactI18next } from 'react-i18next'
 import i18n from 'i18next'
 
 import App from './components/application'
-import PropertyTypes from './components/property-type'
+import BasePropertyComponent from './components/property-type'
 import createStore from './store/store'
 import ViewHelpers from '../backend/utils/view-helpers'
 import * as Components from './components/design-system'
@@ -56,7 +56,7 @@ export default {
   UserComponents: {},
   ApiClient,
   style,
-  PropertyTypes,
+  BasePropertyComponent,
   env,
   ...Components,
   ...AppComponents,
