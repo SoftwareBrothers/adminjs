@@ -12,7 +12,7 @@ Started since version 0.9.5
 
 * add i18n support
 * add "password" field [#112]
-* add hooks: useNotice, useResourceEdit, useResourceNew, useResource
+* add hooks: useNotice, useResourceEdit, useResourceNew, useResource, useResources
 * add option to change resource id [#286]
 
 ### Changed
