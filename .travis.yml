@@ -2,7 +2,7 @@ language: node_js
 node_js:
 - '10'
 install:
-- npm install -g codecov
+- yarn global add codecov
 script:
 - yarn
 - yarn run lint
