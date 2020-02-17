@@ -25,6 +25,7 @@ describe('BulkDeleteAction', function () {
     beforeEach(async function () {
       data = {
         _admin: sinon.createStubInstance(AdminBro),
+        translateMessage: sinon.stub<any, string>().returns('translatedMessage'),
         h: sinon.createStubInstance(ViewHelpers),
         resource: sinon.createStubInstance(BaseResource),
         action: sinon.createStubInstance(ActionDecorator) as unknown as ActionDecorator,

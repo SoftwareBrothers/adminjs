@@ -17,7 +17,7 @@ const DeleteAction: Action<RecordActionResponse> = {
   actionType: 'record',
   icon: 'Delete',
   label: 'Remove',
-  guard: 'Do you really want to remove this item?',
+  guard: 'confirmDelete',
   component: false,
   /**
    * Responsible for deleting existing record.

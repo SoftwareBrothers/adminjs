@@ -1,6 +1,5 @@
 import { i18n as I18n, TFunction, TOptions } from 'i18next'
 import startCase from 'lodash/startCase'
-import { LocaleTranslationsBlock } from '../locale/config'
 
 /**
  * @memberof TranslateFunctions

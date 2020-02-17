@@ -54,6 +54,7 @@ const translations = {
     seeConsoleForMore: 'See development console for more details...',
     noActionComponent: 'You have to implement action component for your Action',
     noRecordsInResource: 'There are no records in this resource',
+    confirmDelete: 'Do you really want to remove this item?',
   },
 }
 

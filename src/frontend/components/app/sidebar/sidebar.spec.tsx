@@ -1,3 +1,4 @@
+import sinon from 'sinon'
 import React from 'react'
 import { RenderResult, render } from 'react-testing-library'
 import { Provider } from 'react-redux'
@@ -10,6 +11,7 @@ import TestContextProvider from '../../spec/test-context-provider'
 import ResourceJSON from '../../../../backend/decorators/resource-json.interface'
 import { BrandingOptions } from '../../../../admin-bro-options.interface'
 import PageJSON from '../../../../backend/decorators/page-json.interface'
+import * as TranslateFunctionsFactory from '../../../../utils/translate-functions.factory'
 
 import '../../spec/resource-json.factory'
 import '../../spec/page-json.factory'
@@ -30,6 +32,18 @@ describe('<Sidebar />', function () {
       </Provider>,
     )
   }
+
+  beforeEach(async function () {
+    sinon.stub(TranslateFunctionsFactory, 'createFunctions').returns({
+      translateMessage: sinon.stub().returns('someMessage'),
+      translateButton: sinon.stub().returns('translated message'),
+      translateLabel: sinon.stub().returns('translated label'),
+    } as unknown as TranslateFunctionsFactory.TranslateFunctions)
+  })
+
+  afterEach(function () {
+    sinon.restore()
+  })
 
   context('Only 4 resources were set in a store, all having list action', function () {
     let resources: Array<ResourceJSON>

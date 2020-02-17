@@ -161,7 +161,7 @@ class ActionDecorator {
       icon: this.action.icon,
       label: this._admin.translateAction(this.action.name, resourceId),
       resourceId,
-      guard: this.action.guard,
+      guard: this.action.guard ? this._admin.translateMessage(this.action.guard, resourceId) : '',
       showFilter: !!this.action.showFilter,
       component: this.action.component,
       showInDrawer: !!this.action.showInDrawer,

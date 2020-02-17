@@ -1,4 +1,5 @@
 import React from 'react'
+import sinon from 'sinon'
 import { render, RenderResult } from 'react-testing-library'
 import factory from 'factory-girl'
 import { expect } from 'chai'
@@ -7,6 +8,7 @@ import TestContextProvider from '../../spec/test-context-provider'
 import NoRecords from './no-records'
 import ResourceJSON from '../../../../backend/decorators/resource-json.interface'
 import ActionJSON from '../../../../backend/decorators/action-json.interface'
+import * as TranslateFunctionsFactory from '../../../../utils/translate-functions.factory'
 
 require('../../spec/resource-json.factory')
 
@@ -21,9 +23,17 @@ describe('<NoRecords />', function () {
 
   beforeEach(async function () {
     const newAction = await factory.build<ActionJSON>('ActionJSON', { name: 'new' })
+    sinon.stub(TranslateFunctionsFactory, 'createFunctions').returns({
+      translateMessage: sinon.stub().returns('someMessage'),
+      translateButton: sinon.stub().returns('translated message'),
+    } as unknown as TranslateFunctionsFactory.TranslateFunctions)
     resource = await factory.build<ResourceJSON>('ResourceJSON', {
       resourceActions: [newAction],
     })
+  })
+
+  afterEach(function () {
+    sinon.restore()
   })
 
   context('resource can be created', function () {
