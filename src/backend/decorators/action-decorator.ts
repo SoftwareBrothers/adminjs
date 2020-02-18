@@ -117,7 +117,7 @@ class ActionDecorator {
         h: this.h,
         currentAdmin,
         _admin: this._admin,
-      })
+      } as unknown as ActionContext)
     } else if (typeof this.action[what] === 'undefined') {
       isAction = true
     } else {
@@ -154,12 +154,14 @@ class ActionDecorator {
    * @return  {ActionJSON}  serialized action
    */
   toJSON(): ActionJSON {
+    const resourceId = this._resource._decorated?.id() || this._resource.id()
     return {
       name: this.action.name,
       actionType: this.action.actionType,
       icon: this.action.icon,
-      label: this.action.label || this.action.name,
-      guard: this.action.guard,
+      label: this._admin.translateAction(this.action.name, resourceId),
+      resourceId,
+      guard: this.action.guard ? this._admin.translateMessage(this.action.guard, resourceId) : '',
       showFilter: !!this.action.showFilter,
       component: this.action.component,
       showInDrawer: !!this.action.showInDrawer,

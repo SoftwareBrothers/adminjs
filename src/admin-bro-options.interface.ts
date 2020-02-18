@@ -4,6 +4,7 @@ import { PageContext } from './backend/actions/action.interface'
 import { ResourceOptions } from './backend/decorators/resource-options.interface'
 import { colors, sizes, font, fontSizes, fontWeights, space, lineHeights } from './frontend/styles/variables'
 import { NonNullishPartialRecord } from './utils/non-nullish-partial-record.type'
+import { Locale } from './locale/config'
 
 /**
  * AdminBroOptions
@@ -144,11 +145,69 @@ export default interface AdminBroOptions {
    * and this token will be available on the frontend by using:
    *
    * ```javascript
-   * AdminBro.envs.GOOGLE_MAP_API_TOKEN
+   * AdminBro.env.GOOGLE_MAP_API_TOKEN
    * ```
    */
   env?: Record<string, string>;
+
+  /* cspell: disable */
+
+  /**
+   * Translation file. Put there your translations to:
+   * - localize admin panel
+   * - change any arbitrary text in the UI
+   *
+   * This is the example for changing name of couple of resources along with some
+   * properties to polish
+   *
+   * ```javascript
+   * {
+   *   ...
+   *   locale: {
+   *     language: 'pl',
+   *     translations: {
+   *       labels: {
+   *         Comments: 'Komentarze',
+   *       }
+   *       resources: {
+   *         Comments: {
+   *           properties: {
+   *             name: 'Nazwa Komentarza',
+   *             content: 'Zawartość',
+   *           }
+   *         }
+   *       }
+   *     }
+   *   }
+   * }
+   * ```
+   *
+   * As I mentioned you can use this technic to change any text even in english.
+   * So to change button label for new action from default "Create new" to "Create new Comment"
+   * only for Comment resource:
+   *
+   * ```javascript
+   * {
+   *   ...
+   *   locale: {
+   *     language: 'en',
+   *     translations: {
+   *       resources: {
+   *         Comments: {
+   *           actions: {
+   *             new: 'Create new Comment',
+   *           }
+   *         }
+   *       }
+   *     }
+   *   }
+   * }
+   * ```
+   */
+  locale?: Locale;
 }
+
+/* cspell: enable */
 
 /**
  * Version Props

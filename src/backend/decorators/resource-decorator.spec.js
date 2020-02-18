@@ -1,3 +1,5 @@
+import sinon from 'sinon'
+
 import ResourceDecorator from './resource-decorator'
 import PropertyDecorator from './property-decorator'
 import ConfigurationError from '../utils/configuration-error'
@@ -6,6 +8,7 @@ import resourceStub, { expectedResult } from '../../../spec/backend/helpers/reso
 
 describe('ResourceDecorator', function () {
   beforeEach(function () {
+    this.translatedLabel = 'translated label'
     this.currentAdmin = {
       email: 'some@email.com',
       name: 'someName',
@@ -13,7 +16,14 @@ describe('ResourceDecorator', function () {
     }
     this.stubbedRecord = this.sinon.stub()
     this.stubbedResource = resourceStub(this.sinon)
+    this.stubbedResource._decorated = {
+      id: () => 'resourceId',
+    }
     this.stubbedAdmin = this.sinon.createStubInstance(AdminBro)
+    this.stubbedAdmin.translateLabel = sinon.stub().returns(this.translatedLabel)
+    this.stubbedAdmin.translateProperty = sinon.stub().returns('translated property')
+    this.stubbedAdmin.translateAction = sinon.stub().returns('translated action')
+    this.stubbedAdmin.translateMessage = sinon.stub().returns('translate message')
     this.stubbedAdmin.options = {}
     this.args = { resource: this.stubbedResource, admin: this.stubbedAdmin }
   })
@@ -22,14 +32,7 @@ describe('ResourceDecorator', function () {
     it('returns resource when name is not specified in options', function () {
       expect(
         new ResourceDecorator({ ...this.args, options: {} }).getResourceName(),
-      ).to.equal(expectedResult.resourceName)
-    })
-
-    it('returns resource when name is specified in options', function () {
-      const name = 'newName'
-      expect(
-        new ResourceDecorator({ ...this.args, options: { name } }).getResourceName(),
-      ).to.equal(name)
+      ).to.equal(this.translatedLabel)
     })
   })
 

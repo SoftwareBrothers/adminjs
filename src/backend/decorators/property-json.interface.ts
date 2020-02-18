@@ -73,4 +73,9 @@ export default interface PropertyJSON {
    * Whether the field should be disabled in edition
    */
   isDisabled: boolean;
+
+  /**
+   * Resource to which given property belongs
+   */
+  resourceId: string;
 }

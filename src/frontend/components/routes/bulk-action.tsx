@@ -1,26 +1,21 @@
-import React, { ReactNode, ComponentClass } from 'react'
-import { connect } from 'react-redux'
+import React, { ComponentClass, useState, useEffect } from 'react'
+import { useSelector } from 'react-redux'
 
-import { RouteComponentProps } from 'react-router'
+import { RouteComponentProps, useRouteMatch, useLocation } from 'react-router'
 import BaseAction from '../app/base-action-component'
 import ResourceJSON from '../../../backend/decorators/resource-json.interface'
 import { ReduxState } from '../../store/store'
 import ErrorMessageBox, { NoResourceError, NoActionError } from '../app/error-message'
 import RecordJSON from '../../../backend/decorators/record-json.interface'
 import { Loader, Drawer } from '../design-system'
-import shouldActionReFetchData from './utils/should-action-re-fetch-data'
 import { BulkActionParams } from '../../../backend/utils/view-helpers'
 import ApiClient from '../../utils/api-client'
-import withNotice, { AddNoticeProps, NoticeMessage } from '../../store/with-notice'
+import { AddNoticeProps } from '../../store/with-notice'
 import getBulkActionsFromRecords from '../app/records-table/utils/get-bulk-actions-from-records'
 import ActionJSON from '../../../backend/decorators/action-json.interface'
 import Wrapper from './utils/wrapper'
 import { ActionHeader } from '../app'
-
-const NO_RECORDS_ERROR: NoticeMessage = {
-  message: 'There was an error fetching records, Check out console to see more information.',
-  type: 'error',
-}
+import { useTranslation, useNotice } from '../../hooks'
 
 type PropsFromState = {
   resources: Array<ResourceJSON>;
@@ -35,100 +30,83 @@ type State = {
   tag?: string;
 }
 
-class BulkAction extends React.Component<Props, State> {
-  constructor(props: Props) {
-    super(props)
-    this.state = {
-      records: undefined,
-      isLoading: true,
-    }
-  }
+const api = new ApiClient()
 
-  componentDidMount(): void {
-    const { match } = this.props
-    this.fetchRecords(match.params)
-  }
+const BulkAction: React.FC = () => {
+  const resources = useSelector((state: ReduxState) => state.resources)
+  const match = useRouteMatch<MatchParams>()
+  const [records, setRecords] = useState<Array<RecordJSON>>([])
+  const [loading, setLoading] = useState(false)
+  const { translateMessage } = useTranslation()
+  const addNotice = useNotice()
+  const location = useLocation()
 
-  shouldComponentUpdate(newProps: Props): boolean {
-    const { match } = this.props
-    if (shouldActionReFetchData(match.params, newProps.match.params)) {
-      this.fetchRecords(newProps.match.params)
-      return false
-    }
-    return true
-  }
+  const { resourceId, actionName } = match.params
+  const resource = resources.find(r => r.id === resourceId)
 
-  fetchRecords({ resourceId, actionName }: MatchParams): Promise<void> {
-    const { addNotice, location } = this.props
+  const fetchRecords = (): Promise<void> => {
     const recordIdsString = new URLSearchParams(location.search).get('recordIds')
     const recordIds = recordIdsString ? recordIdsString.split(',') : []
+    setLoading(true)
 
-    const api = new ApiClient()
-    this.setState({
-      isLoading: true,
-      records: undefined,
-    })
     return api.bulkAction({
       resourceId, recordIds, actionName,
     }).then((response) => {
-      this.setState({ isLoading: false, records: response.data.records })
+      setLoading(false)
+      setRecords(response.data.records)
     }).catch((error) => {
-      addNotice(NO_RECORDS_ERROR)
+      setLoading(false)
+      addNotice({
+        message: translateMessage('errorFetchingRecords', resourceId),
+        type: 'error',
+      })
       throw error
     })
   }
 
-  render(): ReactNode {
-    const { resources, match } = this.props
-    const { resourceId, actionName } = match.params
-    const { isLoading, records } = this.state
+  useEffect(() => {
+    fetchRecords()
+  }, [match.params.resourceId, match.params.actionName])
 
-    const resource = resources.find(r => r.id === resourceId)
+  if (!resource) {
+    return (<NoResourceError resourceId={resourceId} />)
+  }
 
-    if (!resource) {
-      return (<NoResourceError resourceId={resourceId} />)
-    }
-
-    if (!records && !isLoading) {
-      return (
-        <ErrorMessageBox title="No records">
-          <p>You have not selected any records</p>
-        </ErrorMessageBox>
-      )
-    }
-
-    const action = getBulkActionsFromRecords(records || []).find(r => r.name === actionName)
-
-    if (!action && !isLoading) {
-      return (<NoActionError resourceId={resourceId} actionName={actionName} />)
-    }
-
-    if (isLoading || !action) {
-      return <Loader />
-    }
-
-    const ActionWrapper = (action.showInDrawer ? Drawer : Wrapper) as unknown as ComponentClass
-
+  if (!records && !loading) {
     return (
-      <ActionWrapper>
-        {!action?.showInDrawer ? (
-          <ActionHeader
-            resource={resource}
-            action={action}
-          />
-        ) : ''}
-        <BaseAction
-          action={action as ActionJSON}
-          resource={resource}
-          records={records}
-        />
-      </ActionWrapper>
+      <ErrorMessageBox title="No records">
+        <p>{translateMessage('noRecordsSelected', resourceId)}</p>
+      </ErrorMessageBox>
     )
   }
+
+  const action = getBulkActionsFromRecords(records || []).find(r => r.name === actionName)
+
+  if (!action && !loading) {
+    return (<NoActionError resourceId={resourceId} actionName={actionName} />)
+  }
+
+  if (loading || !action) {
+    return <Loader />
+  }
+
+  const ActionWrapper = (action.showInDrawer ? Drawer : Wrapper) as unknown as ComponentClass
+
+  return (
+    <ActionWrapper>
+      {!action?.showInDrawer ? (
+        <ActionHeader
+          resource={resource}
+          action={action}
+        />
+      ) : ''}
+      <BaseAction
+        action={action as ActionJSON}
+        resource={resource}
+        records={records}
+      />
+    </ActionWrapper>
+  )
 }
 
-const mapStateToProps = (state: ReduxState): PropsFromState => ({
-  resources: state.resources,
-})
-
-export default withNotice(connect(mapStateToProps)(BulkAction))
+export default BulkAction

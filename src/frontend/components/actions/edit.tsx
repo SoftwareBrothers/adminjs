@@ -5,14 +5,16 @@ import PropertyType from '../property-type'
 import { ActionProps } from './action.props'
 import { DrawerContent, Box, DrawerFooter, Button } from '../design-system'
 import ActionHeader from '../app/action-header'
-import useResource from '../../hooks/use-resource'
+import useRecord from '../../hooks/use-record'
 import RecordJSON from '../../../backend/decorators/record-json.interface'
 import { appendForceRefresh } from './utils/append-force-refresh'
+import { useTranslation } from '../../hooks/use-translation'
 
 const Edit: FC<ActionProps> = (props) => {
   const { record: initialRecord, resource, action } = props
 
-  const { record, handleChange, handleSubmit } = useResource(initialRecord, resource.id)
+  const { record, handleChange, submit: handleSubmit } = useRecord(initialRecord, resource.id)
+  const { translateButton } = useTranslation()
   const history = useHistory()
 
   const submit = (event: React.FormEvent<HTMLFormElement>): boolean => {
@@ -49,7 +51,7 @@ const Edit: FC<ActionProps> = (props) => {
       </DrawerContent>
       <DrawerFooter>
         <Button variant="primary" size="lg">
-          Save
+          {translateButton('save', resource.id)}
         </Button>
       </DrawerFooter>
     </Box>

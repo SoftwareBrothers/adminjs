@@ -7,6 +7,7 @@ import AdminBro from '../../admin-bro'
 import ResourceDecorator from './resource-decorator'
 
 describe('PropertyDecorator', function () {
+  const translatedProperty = 'translated property'
   let stubbedAdmin: AdminBro
   let property: BaseProperty
   let args: { property: BaseProperty; admin: AdminBro; resource: ResourceDecorator }
@@ -14,7 +15,8 @@ describe('PropertyDecorator', function () {
   beforeEach(function () {
     property = new BaseProperty({ path: 'name', type: 'string' })
     stubbedAdmin = sinon.createStubInstance(AdminBro)
-    args = { property, admin: stubbedAdmin, resource: {} as ResourceDecorator }
+    stubbedAdmin.translateProperty = sinon.stub().returns(translatedProperty)
+    args = { property, admin: stubbedAdmin, resource: { id: () => 'someId' } as ResourceDecorator }
   })
 
   describe('#isSortable', function () {
@@ -85,9 +87,9 @@ describe('PropertyDecorator', function () {
   })
 
   describe('#label', function () {
-    it('returns camelCased name', function () {
+    it('returns translated label', function () {
       sinon.stub(BaseProperty.prototype, 'name').returns('normalName')
-      expect(new PropertyDecorator(args).label()).to.equal('Normal Name')
+      expect(new PropertyDecorator(args).label()).to.equal(translatedProperty)
     })
   })
 
@@ -134,9 +136,11 @@ describe('PropertyDecorator', function () {
       propertyDecorator = new PropertyDecorator({
         ...args,
         property,
-        resource: { options: { properties: {
-          [`${propertyName}.${subPropertyName}`]: { label: subPropertyLabel },
-        } } } as unknown as ResourceDecorator,
+        resource: {
+          id: () => 'resourceId',
+          options: { properties: {
+            [`${propertyName}.${subPropertyName}`]: { label: subPropertyLabel },
+          } } } as unknown as ResourceDecorator,
       })
     })
 
@@ -148,7 +152,7 @@ describe('PropertyDecorator', function () {
     it('changes label of the nested property to what was given in PropertyOptions', function () {
       const subProperty = propertyDecorator.subProperties()[0]
 
-      expect(subProperty.label()).to.eq(subPropertyLabel)
+      expect(subProperty.label()).to.eq(translatedProperty)
     })
   })
 
@@ -169,6 +173,7 @@ describe('PropertyDecorator', function () {
         'subProperties',
         'isArray',
         'custom',
+        'resourceId',
       )
     })
   })

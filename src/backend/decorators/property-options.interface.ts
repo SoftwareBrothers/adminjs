@@ -5,7 +5,6 @@ export enum AvailablePropertyOptions {
   isVisible = 'isVisible',
   components = 'components',
   type = 'type',
-  label = 'label',
   isId = 'isId',
   isTitle = 'isTitle',
   position = 'position',
@@ -39,10 +38,6 @@ export default interface PropertyOptions {
    * Property type
    */
   type?: PropertyType;
-  /**
-   * Human readable label of a property
-   */
-  label?: string;
   /**
    * Indicates if property should be treated as an ID
    */

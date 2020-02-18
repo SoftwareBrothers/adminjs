@@ -5,6 +5,7 @@ import RecordJSON from '../../../../backend/decorators/record-json.interface'
 import ActionButton from '../action-button'
 import getBulkActionsFromRecords from './utils/get-bulk-actions-from-records'
 import { TableCaption, Button, Icon, Text } from '../../design-system'
+import { useTranslation } from '../../../hooks'
 
 type Props = {
   resource: ResourceJSON;
@@ -13,6 +14,7 @@ type Props = {
 
 const SelectedRecords: React.FC<Props> = (props) => {
   const { resource, selectedRecords } = props
+  const { translateLabel } = useTranslation()
 
   if (!selectedRecords || !selectedRecords.length) {
     return null
@@ -22,7 +24,9 @@ const SelectedRecords: React.FC<Props> = (props) => {
 
   return (
     <TableCaption>
-      <Text as="span" mr="lg">{`Selected: (${selectedRecords.length})`}</Text>
+      <Text as="span" mr="lg">
+        {translateLabel('selectedRecords', resource.id, { selected: selectedRecords.length })}
+      </Text>
       {bulkActions.map(action => (
         <ActionButton
           action={action}

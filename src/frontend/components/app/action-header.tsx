@@ -6,6 +6,7 @@ import styled from 'styled-components'
 import ActionButton from './action-button'
 
 import ViewHelpers from '../../../backend/utils/view-helpers'
+import { useTranslation } from '../../hooks/use-translation'
 
 import ResourceJSON from '../../../backend/decorators/resource-json.interface'
 import ActionJSON from '../../../backend/decorators/action-json.interface'
@@ -45,10 +46,13 @@ const StyledLink = styled(({ rounded, ...rest }) => <RouterLink {...rest} />)<Bu
  * @subcategory Application
  */
 const ActionHeader: React.FC<ActionHeaderProps> = (props) => {
+  const { translateButton } = useTranslation()
+
   const h = new ViewHelpers()
   const {
     resource, toggleFilter, actionPerformed, record, action, tag, omitActions,
   } = props
+
   const resourceId = resource.id
   const actions = record
     ? record.recordActions.filter(ra => !action || action.name !== ra.name)
@@ -134,7 +138,7 @@ const ActionHeader: React.FC<ActionHeaderProps> = (props) => {
             {toggleFilter && (
               <Button onClick={toggleFilter} ml="default">
                 <Icon icon="SettingsAdjust" />
-                Filter
+                {translateButton('filter', resource.id)}
               </Button>
             )}
           </Box>

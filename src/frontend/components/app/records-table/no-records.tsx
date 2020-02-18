@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 import ViewHelpers from '../../../../backend/utils/view-helpers'
 import ResourceJSON from '../../../../backend/decorators/resource-json.interface'
 import { Text, Button, Icon, InfoBox } from '../../design-system'
+import { useTranslation } from '../../../hooks'
 
 type Props = {
   resource: ResourceJSON;
@@ -11,21 +12,23 @@ type Props = {
 
 const NoRecords: React.FC<Props> = (props) => {
   const { resource } = props
-  const canCreate = resource.resourceActions.find(a => a.name === 'new')
   const h = new ViewHelpers()
+  const { translateButton, translateMessage } = useTranslation()
+
+  const canCreate = resource.resourceActions.find(a => a.name === 'new')
   const newAction = h.resourceActionUrl({ resourceId: resource.id, actionName: 'new' })
 
   return (
     <InfoBox title="No records">
       <Text>
-        There are no records in this resource.
+        {translateMessage('noRecordsInResource', resource.id)}
       </Text>
       {canCreate ? (
         <Text mt="xl">
           <Link to={newAction}>
             <Button variant="primary" as="span">
               <Icon icon="Add" />
-            Create First Record
+              {translateButton('createFirstRecord', resource.id)}
             </Button>
           </Link>
         </Text>

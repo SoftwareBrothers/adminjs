@@ -24,6 +24,8 @@ async function build() {
       runtimeHelpers: true,
       include: [
         `${__dirname}/../src/frontend/**`,
+        `${__dirname}/../src/locale/*`,
+        `${__dirname}/../src/utils/*`,
         `${__dirname}/../src/backend/utils/view-helpers.ts`,
         `${__dirname}/../src/backend/utils/filter.ts`,
         `${__dirname}/../src/backend/decorators/**`,

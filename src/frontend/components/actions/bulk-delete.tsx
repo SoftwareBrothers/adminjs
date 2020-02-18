@@ -12,6 +12,7 @@ import {
   DrawerContent, DrawerFooter, Button, MessageBox,
 } from '../design-system'
 import ActionHeader from '../app/action-header'
+import { useTranslation } from '../../hooks'
 
 /**
  * @name ShowAction
@@ -24,11 +25,12 @@ const BulkDelete: React.FC<ActionProps & AddNoticeProps & RouteComponentProps> =
   const { resource, records, action, addNotice, history } = props
 
   const [loading, setLoading] = useState(false)
+  const { translateMessage, translateButton } = useTranslation()
 
   if (!records) {
     return (
       <Text>
-        In order to remove records, you have to pick them first.
+        {translateMessage('pickSomeFirstToRemove', resource.id)}
       </Text>
     )
   }
@@ -56,7 +58,7 @@ const BulkDelete: React.FC<ActionProps & AddNoticeProps & RouteComponentProps> =
     })).catch((error) => {
       setLoading(false)
       addNotice({
-        message: 'There was an error deleting records, Check out console to see more information.',
+        message: translateMessage('bulkDeleteError', resource.id),
         type: 'error',
       })
       throw error
@@ -67,7 +69,11 @@ const BulkDelete: React.FC<ActionProps & AddNoticeProps & RouteComponentProps> =
     <React.Fragment>
       <DrawerContent>
         <ActionHeader {...props} />
-        <MessageBox mb="xxl" variant="danger" message="Following records will be removed" />
+        <MessageBox
+          mb="xxl"
+          variant="danger"
+          message={translateMessage('theseRecordsWillBeRemoved', resource.id, { count: records.length })}
+        />
         <Table>
           <TableBody>
             {records.map(record => (
@@ -87,7 +93,7 @@ const BulkDelete: React.FC<ActionProps & AddNoticeProps & RouteComponentProps> =
       </DrawerContent>
       <DrawerFooter>
         <Button variant="primary" size="lg" onClick={handleClick}>
-          {`Confirm the removal of ${records.length} records`}
+          {translateButton('confirmRemovalMany', resource.id, { count: records.length })}
         </Button>
       </DrawerFooter>
     </React.Fragment>

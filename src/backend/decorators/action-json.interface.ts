@@ -37,4 +37,9 @@ export default interface ActionJSON {
    * Whether given action should be seen in a drawer
    */
   showInDrawer: boolean;
+
+  /**
+   * Id of a resource to which given belongs.
+   */
+  resourceId: string;
 }

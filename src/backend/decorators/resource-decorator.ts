@@ -154,7 +154,7 @@ class ResourceDecorator {
    * @return {string} resource name
    */
   getResourceName(): string {
-    return this.options.name || this._resource.name()
+    return this._admin.translateLabel(this.id(), this.id())
   }
 
   /**

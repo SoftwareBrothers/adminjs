@@ -26,7 +26,7 @@ const NewAction: Action<RecordActionResponse> = {
    * @return {Promise<RecordActionResponse>} populated records
    */
   handler: async (request, response, context) => {
-    const { resource, h, currentAdmin } = context
+    const { resource, h, currentAdmin, translateMessage } = context
     if (request.method === 'post') {
       let record = await resource.build(request.payload ? request.payload : {})
       record = await record.save()
@@ -41,7 +41,7 @@ const NewAction: Action<RecordActionResponse> = {
             actionName: 'new',
           }),
           notice: {
-            message: 'Successfully created a new record',
+            message: translateMessage('successfullyCreated', resource.id()),
             type: 'success',
           },
           record: record.toJSON(currentAdmin),
@@ -50,7 +50,7 @@ const NewAction: Action<RecordActionResponse> = {
       return {
         record: record.toJSON(currentAdmin),
         notice: {
-          message: 'There are validation errors - check them out below.',
+          message: translateMessage('thereWereValidationErrors', resource.id()),
           type: 'error',
         },
       }

@@ -4,6 +4,7 @@ import { ReduxState } from '../../../store/store'
 import SidebarLink from './styled/sidebar-link.styled'
 import ViewHelpers from '../../../../backend/utils/view-helpers'
 import { Box, Label, Text } from '../../design-system'
+import { useTranslation } from '../../../hooks/use-translation'
 
 type Props = {
   pages?: ReduxState['pages'];
@@ -11,6 +12,9 @@ type Props = {
 
 const SidebarPages: React.FC<Props> = (props) => {
   const { pages } = props
+
+  const { translateLabel } = useTranslation()
+
   const h = new ViewHelpers()
 
   if (!pages || !pages.length) {
@@ -23,7 +27,7 @@ const SidebarPages: React.FC<Props> = (props) => {
 
   return (
     <Box ml="lg">
-      <Label uppercase color="grey" mb="lg">Pages</Label>
+      <Label uppercase color="grey" mb="lg">{translateLabel('pages')}</Label>
       {pages.map(page => (
         <SidebarLink
           to={h.pageUrl(page.name)}

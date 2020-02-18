@@ -1,5 +1,6 @@
 import React, { ReactNode } from 'react'
 import { MessageBox, Text } from '../design-system'
+import { useTranslation } from '../../hooks'
 
 type Props = {
   children: ReactNode;
@@ -41,6 +42,7 @@ const ErrorMessageBox: React.FC<ErrorMessageBoxProps> = (props) => {
 
 const NoResourceError: React.FC<{resourceId: string}> = (props) => {
   const { resourceId } = props
+  const { translateMessage } = useTranslation()
   return (
     <MessageBox
       message="404 - PAGE NOT FOUND"
@@ -49,9 +51,7 @@ const NoResourceError: React.FC<{resourceId: string}> = (props) => {
       m="xxl"
     >
       <Text>
-        Resource of given id:
-        <b>{` ${resourceId} `}</b>
-        cannot be found.
+        {translateMessage('error404Resource', resourceId, { resourceId })}
       </Text>
     </MessageBox>
   )
@@ -59,6 +59,7 @@ const NoResourceError: React.FC<{resourceId: string}> = (props) => {
 
 const NoActionError: React.FC<{resourceId: string; actionName: string}> = (props) => {
   const { resourceId, actionName } = props
+  const { translateMessage } = useTranslation()
   return (
     <MessageBox
       message="404 - PAGE NOT FOUND"
@@ -67,10 +68,7 @@ const NoActionError: React.FC<{resourceId: string; actionName: string}> = (props
       m="xxl"
     >
       <Text>
-        Resource:
-        <b>{` ${resourceId} `}</b>
-          does not have an action with name:
-        <b>{` ${actionName} `}</b>
+        {translateMessage('error404Action', resourceId, { resourceId, actionName })}
       </Text>
     </MessageBox>
   )
@@ -81,6 +79,7 @@ const NoRecordError: React.FC<{
   recordId: string;
 }> = (props) => {
   const { resourceId, recordId } = props
+  const { translateMessage } = useTranslation()
   return (
     <MessageBox
       message="404 - PAGE NOT FOUND"
@@ -89,10 +88,7 @@ const NoRecordError: React.FC<{
       m="xxl"
     >
       <Text>
-        Resource:
-        <b>{` ${resourceId} `}</b>
-          does not have a record with id:
-        <b>{` ${recordId} `}</b>
+        {translateMessage('error404Record', resourceId, { resourceId, recordId })}
       </Text>
     </MessageBox>
   )

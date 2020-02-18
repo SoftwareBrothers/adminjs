@@ -108,9 +108,7 @@ class PropertyDecorator {
    * @return  {string}
    */
   label(): string {
-    return this.overrideFromOptions(AvailablePropertyOptions.label, () => (
-      _.startCase(this.property.name())
-    ))
+    return this._admin.translateProperty(this.path, this._resource.id())
   }
 
   /**
@@ -210,6 +208,7 @@ class PropertyDecorator {
       components: this.options.components,
       subProperties: this.subProperties().map(subProperty => subProperty.toJSON()),
       isArray: this.property.isArray(),
+      resourceId: this._resource.id(),
     }
   }
 

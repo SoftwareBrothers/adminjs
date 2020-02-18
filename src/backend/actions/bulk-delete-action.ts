@@ -27,14 +27,14 @@ const BulkDeleteAction: Action<BulkActionResponse> = {
    * @implements ActionHandler
    * @memberof module:BulkDeleteAction
    */
-  handler: async (request, response, data) => {
-    const { records, resource, h } = data
+  handler: async (request, response, context) => {
+    const { records, resource, h, translateMessage } = context
 
     if (!records || !records.length) {
       throw new NotFoundError('no records were selected.', 'Action#handler')
     }
     if (request.method === 'get') {
-      const recordsInJSON = records.map(record => record.toJSON(data.currentAdmin))
+      const recordsInJSON = records.map(record => record.toJSON(context.currentAdmin))
       return {
         records: recordsInJSON,
       }
@@ -42,9 +42,11 @@ const BulkDeleteAction: Action<BulkActionResponse> = {
     if (request.method === 'post') {
       await Promise.all(records.map(record => resource.delete(record.id())))
       return {
-        records: records.map(record => record.toJSON(data.currentAdmin)),
+        records: records.map(record => record.toJSON(context.currentAdmin)),
         notice: {
-          message: `Successfully deleted ${records.length} records.`,
+          message: translateMessage('successfullyBulkDeleted', resource.id(), {
+            count: records.length,
+          }),
           type: 'success',
         },
         redirectUrl: h.resourceUrl({ resourceId: resource._decorated?.id() || resource.id() }),
