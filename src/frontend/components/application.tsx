@@ -47,6 +47,7 @@ const App: React.FC = () => {
             <Notice />
           </Box>
           <Switch>
+            <Route path={h.dashboardUrl()} exact component={Dashboard} />
             <Route path={resourceUrl} component={Resource} />
             <Route path={pageUrl} exact component={Page} />
           </Switch>

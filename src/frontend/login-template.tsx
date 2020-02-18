@@ -39,7 +39,7 @@ const html = ({ action, errorMessage }: LoginTemplateAttributes): string => {
       <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
       <title>AdminPanel</title>
       ${style}
-      <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,700" type="text/css">
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,700" type="text/css">
 
       <script crossorigin src="https://unpkg.com/react@16/umd/react.${onProd ? 'production.min' : 'development'}.js"></script>
       <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.${onProd ? 'production.min' : 'development'}.js"></script>

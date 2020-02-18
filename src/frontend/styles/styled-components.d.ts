@@ -1,4 +1,13 @@
-import { colors, sizes, space, font, fontSizes, lineHeights, fontWeights } from './variables'
+import {
+  colors,
+  sizes,
+  space,
+  font,
+  fontSizes,
+  lineHeights,
+  fontWeights,
+  shadows,
+} from './variables'
 
 declare module 'styled-components' {
   export interface DefaultTheme {
@@ -9,5 +18,6 @@ declare module 'styled-components' {
     lineHeights: typeof lineHeights;
     fontWeights: typeof fontWeights;
     font: typeof font;
+    shadows: typeof shadows;
   }
 }

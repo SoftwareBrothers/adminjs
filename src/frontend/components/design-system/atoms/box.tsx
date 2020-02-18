@@ -4,6 +4,7 @@ import {
   size, SizeProps, layout, LayoutProps,
   flexbox, FlexboxProps, border, BorderProps,
   position, PositionProps, variant,
+  shadow, ShadowProps,
 } from 'styled-system'
 
 const variants = variant({
@@ -24,7 +25,7 @@ const variants = variant({
  * Prop Types of an Button component.
  * Apart from those defined below it extends all {@link SpaceProps}, {@link ColorProps}
  * {@link SizeProps}, {@link LayoutProps}, {@link FlexboxProps}, {@link PositionProps}
- * and {@link BorderProps}
+ * {@link BorderProps} and {@link ShadowProps}.
  *
  * @memberof Box
  * @alias BoxProps
@@ -33,7 +34,7 @@ const variants = variant({
  *                          {@link PositionProps} and {@link BorderProps}
  */
 export type BoxProps = SpaceProps & ColorProps & SizeProps & LayoutProps &
-  Omit<FlexboxProps, 'flex'> & BorderProps & PositionProps & {
+  Omit<FlexboxProps, 'flex'> & BorderProps & PositionProps & ShadowProps & {
     /** If box should be rendered as flex */
     flex?: boolean;
     /** Box variants */
@@ -82,6 +83,7 @@ export const Box = styled.section<BoxProps>`
   ${layout};
   ${flexbox};
   ${border};
+  ${shadow};
   ${position};
   ${variants};
 `
