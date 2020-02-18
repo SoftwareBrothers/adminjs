@@ -42,9 +42,20 @@ const List: React.FC<ActionProps> = ({ resource, setTag }) => {
     selectedRecords,
     handleSelect,
     handleSelectAll,
+    setSelectedRecords,
   } = useSelectedRecords(records)
   const location = useLocation()
   const history = useHistory()
+
+  useEffect(() => {
+    if (setTag) {
+      setTag(total.toString())
+    }
+  }, [total])
+
+  useEffect(() => {
+    setSelectedRecords([])
+  }, [resource.id])
 
   const handleActionPerformed = (): any => fetchData()
 
@@ -53,12 +64,6 @@ const List: React.FC<ActionProps> = ({ resource, setTag }) => {
     search.set('page', pageNumber.toString())
     history.push({ search: search.toString() })
   }
-
-  useEffect(() => {
-    if (setTag) {
-      setTag(total.toString())
-    }
-  }, [total])
 
   return (
     <Box variant="white">

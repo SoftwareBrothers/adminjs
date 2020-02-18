@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import RecordJSON from '../../backend/decorators/record-json.interface'
 
 export type UseSelectedRecordsResult = {
