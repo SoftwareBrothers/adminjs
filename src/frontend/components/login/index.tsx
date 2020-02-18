@@ -1,7 +1,10 @@
 import React from 'react'
 import styled, { createGlobalStyle } from 'styled-components'
 
+import { useSelector } from 'react-redux'
 import { Box, H5, H2, Label, Illustration, Input, FormGroup, Button, Text, Icon, Link, MessageBox } from '../design-system'
+import { useTranslation } from '../../hooks'
+import { ReduxState } from '../../store/store'
 
 const GlobalStyle = createGlobalStyle`
   html, body, #app {
@@ -24,8 +27,29 @@ type Props = {
   action: string;
 }
 
+const SoftwareBrothers: React.FC = () => (
+  <Box position="absolute" left={0} bottom={5} right={0}>
+    <Text fontWeight="lighter" variant="sm" textAlign="center">
+      Made with
+      <Icon icon="FavoriteFilled" color="love" mx="sm" />
+      by
+      <Link
+        href="http://softwarebrothers.co"
+        target="_blank"
+        rel="noopener noreferrer"
+        mx="sm"
+        color="white"
+      >
+        SoftwareBrothers
+      </Link>
+    </Text>
+  </Box>
+)
+
 const Login: React.FC<Props> = (props) => {
   const { action, message } = props
+  const { translateLabel, translateButton, translateProperty, translateMessage } = useTranslation()
+  const branding = useSelector((state: ReduxState) => state.branding)
 
   return (
     <React.Fragment>
@@ -41,9 +65,9 @@ const Login: React.FC<Props> = (props) => {
             display={['none', 'none', 'block']}
             position="relative"
           >
-            <H2 fontWeight="lighter">Welcome</H2>
+            <H2 fontWeight="lighter">{translateLabel('loginWelcome')}</H2>
             <Text fontWeight="lighter" mt="default">
-              To AdminBro - the best admin framework for Node.js apps, based on React.
+              {translateMessage('loginWelcome')}
             </Text>
             <Text textAlign="center" p="xxl">
               <Box display="inline" mr="default">
@@ -56,22 +80,7 @@ const Login: React.FC<Props> = (props) => {
                 <Illustration variant="FlagInCog" width={82} height={91} />
               </Box>
             </Text>
-            <Box position="absolute" left={0} bottom={5} right={0}>
-              <Text fontWeight="lighter" variant="sm" textAlign="center">
-                Made with
-                <Icon icon="FavoriteFilled" color="love" mx="sm" />
-                by
-                <Link
-                  href="http://softwarebrothers.co"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  mx="sm"
-                  color="white"
-                >
-                  SoftwareBrothers
-                </Link>
-              </Text>
-            </Box>
+            {branding.softwareBrothers ? (<SoftwareBrothers />) : null}
           </Box>
           <Box
             as="form"
@@ -81,27 +90,43 @@ const Login: React.FC<Props> = (props) => {
             flexGrow={1}
             width={['100%', '100%', '480px']}
           >
-            <H5>
-              <Box as="span" mr="lg"><Illustration variant="AdminBroLogo" width={36} height={36} /></Box>
-              AdminBro
+            <H5 mb="xl">
+              {branding.logo && (
+                <Box
+                  as="img"
+                  src={branding.logo}
+                  alt={branding.companyName}
+                  height="35px"
+                  width="35px"
+                  mr="lg"
+                  mt="-3px"
+                />
+              )}
+              {branding.companyName || 'AdminBro'}
             </H5>
-            {message && <MessageBox my="lg" message={message} variant="danger" />}
+            {message && (
+              <MessageBox
+                my="lg"
+                message={message.split(' ').length > 1 ? message : translateMessage(message)}
+                variant="danger"
+              />
+            )}
             <FormGroup>
-              <Label required>Email</Label>
-              <Input name="email" placeholder="Your Email Address" />
+              <Label required>{translateProperty('email')}</Label>
+              <Input name="email" placeholder={translateProperty('email')} />
             </FormGroup>
             <FormGroup>
-              <Label required>Password</Label>
+              <Label required>{translateProperty('password')}</Label>
               <Input
                 type="password"
                 name="password"
-                placeholder="Password"
+                placeholder={translateProperty('password')}
                 autoComplete="new-password"
               />
             </FormGroup>
             <Text mt="xl" textAlign="center">
               <Button variant="primary">
-                Login
+                {translateButton('login')}
               </Button>
             </Text>
           </Box>

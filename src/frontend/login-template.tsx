@@ -2,9 +2,21 @@
 import React from 'react'
 import { renderToString } from 'react-dom/server'
 import { ServerStyleSheet, ThemeProvider } from 'styled-components'
-import LoginComponent from './components/login'
+import { Store } from 'redux'
+import { initReactI18next, I18nextProvider } from 'react-i18next'
+import i18n from 'i18next'
 
-import * as theme from './components/design-system/theme'
+import { Provider } from 'react-redux'
+import LoginComponent from './components/login'
+import AdminBro from '../admin-bro'
+
+import createStore, {
+  initializeBranding,
+  initializeLocale,
+  ReduxState,
+} from './store/store'
+import combineStyles from './styles/combine-styles'
+import ViewHelpers from '../backend/utils/view-helpers'
 
 const onProd = process.env.NODE_ENV === 'production'
 
@@ -19,11 +31,34 @@ type LoginTemplateAttributes = {
   errorMessage?: string;
 }
 
-const html = ({ action, errorMessage }: LoginTemplateAttributes): string => {
+const html = (admin: AdminBro, { action, errorMessage }: LoginTemplateAttributes): string => {
+  const h = new ViewHelpers({ options: admin.options })
+
+  const store: Store<ReduxState> = createStore()
+  store.dispatch(initializeLocale(admin.locale))
+  store.dispatch(initializeBranding(admin.options.branding))
+
+  const theme = combineStyles((admin.options.branding && admin.options.branding.theme) || {})
+  const { locale } = store.getState()
+  i18n
+    .init({
+      resources: {
+        [locale.language]: {
+          translation: locale.translations,
+        },
+      },
+      lng: locale.language,
+      interpolation: { escapeValue: false },
+    })
+
   const loginComponent = renderToString(
-    <ThemeProvider theme={theme}>
-      <LoginComponent action={action} message={errorMessage} />
-    </ThemeProvider>,
+    <Provider store={store}>
+      <I18nextProvider i18n={i18n}>
+        <ThemeProvider theme={theme}>
+          <LoginComponent action={action} message={errorMessage} />
+        </ThemeProvider>
+      </I18nextProvider>
+    </Provider>,
   )
 
   const sheet = new ServerStyleSheet()
@@ -41,8 +76,7 @@ const html = ({ action, errorMessage }: LoginTemplateAttributes): string => {
       ${style}
       <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,700" type="text/css">
 
-      <script crossorigin src="https://unpkg.com/react@16/umd/react.${onProd ? 'production.min' : 'development'}.js"></script>
-      <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.${onProd ? 'production.min' : 'development'}.js"></script>
+      <script src="${h.assetPath('global.bundle.js')}"></script>
     </head>
     <body>
       <div id="app">${loginComponent}</div>

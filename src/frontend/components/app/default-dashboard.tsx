@@ -35,35 +35,35 @@ const DashboardHeader = () => {
   )
 }
 
-const boxes = ({ translateLabel }) => [{
+const boxes = ({ translateMessage }) => [{
   variant: 'Planet',
-  title: translateLabel('addingResources_title'),
-  subtitle: translateLabel('addingResources_subtitle'),
+  title: translateMessage('addingResources_title'),
+  subtitle: translateMessage('addingResources_subtitle'),
   href: 'https://softwarebrothers.github.io/admin-bro-dev/tutorial-03-passing-resources.html',
 }, {
   variant: 'DocumentCheck',
-  title: translateLabel('customizeResources_title'),
-  subtitle: translateLabel('customizeResources_subtitle'),
+  title: translateMessage('customizeResources_title'),
+  subtitle: translateMessage('customizeResources_subtitle'),
   href: 'https://softwarebrothers.github.io/admin-bro-dev/tutorial-04-customizing-resources.html',
 }, {
   variant: 'DocumentSearch',
-  title: translateLabel('customizeActions_title'),
-  subtitle: translateLabel('customizeActions_subtitle'),
+  title: translateMessage('customizeActions_title'),
+  subtitle: translateMessage('customizeActions_subtitle'),
   href: 'https://softwarebrothers.github.io/admin-bro-dev/tutorial-05-actions.html',
 }, {
   variant: 'FlagInCog',
-  title: translateLabel('writeOwnComponents_title'),
-  subtitle: translateLabel('writeOwnComponents_subtitle'),
+  title: translateMessage('writeOwnComponents_title'),
+  subtitle: translateMessage('writeOwnComponents_subtitle'),
   href: 'https://softwarebrothers.github.io/admin-bro-dev/tutorial-06-writing-react-components.html',
 }, {
   variant: 'Folders',
-  title: translateLabel('customDashboard_title'),
-  subtitle: translateLabel('customDashboard_subtitle'),
+  title: translateMessage('customDashboard_title'),
+  subtitle: translateMessage('customDashboard_subtitle'),
   href: 'https://softwarebrothers.github.io/admin-bro-dev/tutorial-07-custom-dashboard.html',
 }, {
   variant: 'Astronaut',
-  title: translateLabel('roleBasedAccess_title'),
-  subtitle: translateLabel('roleBasedAccess_subtitle'),
+  title: translateMessage('roleBasedAccess_title'),
+  subtitle: translateMessage('roleBasedAccess_subtitle'),
   href: 'https://softwarebrothers.github.io/admin-bro-dev/tutorial-08-rbac.html',
 }]
 
@@ -84,7 +84,7 @@ Card.defaultProps = {
 }
 
 const Dashboard: React.FC = () => {
-  const { translateMessage, translateLabel, translateButton } = useTranslation()
+  const { translateMessage, translateButton } = useTranslation()
   return (
     <Box>
       <DashboardHeader />
@@ -99,7 +99,7 @@ const Dashboard: React.FC = () => {
         flexWrap="wrap"
         width={[1, 1, 1, 1024]}
       >
-        {boxes({ translateLabel }).map(box => (
+        {boxes({ translateMessage }).map(box => (
           <Box width={[1, 1, 1 / 2, 1 / 3]} p="lg">
             <Card as="a" href={box.href}>
               <Text textAlign="center">
@@ -118,8 +118,8 @@ const Dashboard: React.FC = () => {
           <Card as="a" flex href="https://softwarebrothers.co/blog/">
             <Box flexShrink={0}><Illustration variant="AdminBroLogo" /></Box>
             <Box ml="xl">
-              <H4>{translateLabel('checkoutBlog_title')}</H4>
-              <Text>{translateLabel('checkoutBlog_subtitle')}</Text>
+              <H4>{translateMessage('checkoutBlog_title')}</H4>
+              <Text>{translateMessage('checkoutBlog_subtitle')}</Text>
             </Box>
           </Card>
         </Box>
@@ -127,16 +127,16 @@ const Dashboard: React.FC = () => {
           <Card as="a" flex href="https://github.com/SoftwareBrothers/admin-bro/issues">
             <Box flexShrink={0}><Illustration variant="GithubLogo" /></Box>
             <Box ml="xl">
-              <H4>{translateLabel('foundBug_title')}</H4>
-              <Text>{translateLabel('foundBug_subtitle')}</Text>
+              <H4>{translateMessage('foundBug_title')}</H4>
+              <Text>{translateMessage('foundBug_subtitle')}</Text>
             </Box>
           </Card>
         </Box>
         <Box variant="white" boxShadow="card" width={1} m="lg">
           <Text textAlign="center">
             <Illustration variant="SoftwareBrothersLogo" />
-            <H4>{translateLabel('needMoreSolutions_title')}</H4>
-            <Text>{translateLabel('needMoreSolutions_subtitle')}</Text>
+            <H4>{translateMessage('needMoreSolutions_title')}</H4>
+            <Text>{translateMessage('needMoreSolutions_subtitle')}</Text>
             <Text mt="xxl">
               <Button
                 as="a"
