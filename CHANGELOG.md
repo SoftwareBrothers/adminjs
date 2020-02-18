@@ -28,7 +28,8 @@ Started since version 0.9.5
 
 * Fixed wrong show values on boolean fields in the list [#270]
 * fixing wrong documentation in action interface [#264]
-* Fix wrong path when rendering on the server
+* fix wrong path when rendering on the server
+* fix responsive issues
 
 ### Removed
 
