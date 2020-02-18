@@ -1,7 +1,7 @@
 /* eslint-disable react/no-children-prop */
-import React from 'react'
+import React, { useState } from 'react'
 import { Switch, Route } from 'react-router-dom'
-import { createGlobalStyle } from 'styled-components'
+import styled, { createGlobalStyle } from 'styled-components'
 
 import ViewHelpers from '../../backend/utils/view-helpers'
 import Sidebar from './app/sidebar/sidebar'
@@ -11,7 +11,7 @@ import Notice from './app/notice'
 import {
   Dashboard, ResourceAction, RecordAction, Page, BulkAction, Resource,
 } from './routes'
-import { Box } from './design-system'
+import { Box, Overlay } from './design-system'
 
 const GlobalStyle = createGlobalStyle`
   html, body, #app {
@@ -23,6 +23,7 @@ const GlobalStyle = createGlobalStyle`
 `
 
 const App: React.FC = () => {
+  const [sidebarVisible, toggleSidebar] = useState(false)
   const h = new ViewHelpers()
 
   const resourceId = ':resourceId'
@@ -40,9 +41,14 @@ const App: React.FC = () => {
     <React.Fragment>
       <GlobalStyle />
       <Box height="100%" flex>
-        <Sidebar />
+        {sidebarVisible ? (
+          <Overlay
+            onClick={(): void => toggleSidebar(!sidebarVisible)}
+          />
+        ) : null}
+        <Sidebar isVisible={sidebarVisible} />
         <Box flex flexGrow={1} flexDirection="column" overflowY="auto" bg="greyPale">
-          <TopBar />
+          <TopBar toggleSidebar={() => toggleSidebar(!sidebarVisible)} />
           <Box position="absolute" top={0}>
             <Notice />
           </Box>

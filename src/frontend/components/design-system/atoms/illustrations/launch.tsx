@@ -5,9 +5,7 @@ export const Launch: React.FC<Props> = ({ width, height }) => {
   const svgWidth = width || '165px'
   const svgHeight = height || '184px'
   return (
-    <svg width={svgWidth} height={svgHeight} viewBox="0 0 165 184" version="1.1" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink">
-      <title>Group</title>
-      <desc>Created with Sketch.</desc>
+    <svg width={svgWidth} height={svgHeight} viewBox="0 0 165 184" version="1.1" xmlns="http://www.w3.org/2000/svg">
       <g id="Symbols" stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
         <g id="Group" transform="translate(2.000000, 1.000000)" fillRule="nonzero">
           <path d="M80.5,163.67556 L80.5,177.071797 C80.5,179.280936 78.709139,181.071797 76.5,181.071797 C75.7978533,181.071797 75.1080768,180.886972 74.5,180.535898 L5.39265015,140.636751 L5.39265015,140.636751 C2.29863938,138.850423 0.39265015,135.549153 0.39265015,131.976497 L0.39265015,51.0235027 C0.39265015,47.4508468 2.29863938,44.1495766 5.39265015,42.3632487 L75.5,1.88675135 C78.5940108,0.100423396 82.4059892,0.100423396 85.5,1.88675135 L155.60735,42.3632487 C158.701361,44.1495766 160.60735,47.4508468 160.60735,51.0235027 L160.60735,131.976497 C160.60735,135.549153 158.701361,138.850423 155.60735,140.636751 L94.0407624,176.182237" id="Path" stroke="#88A0FA" strokeWidth="3" strokeLinecap="round" />

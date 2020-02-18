@@ -5,7 +5,7 @@ const Moon: React.FC<Props> = ({ width, height }) => {
   const svgWidth = width || '260px'
   const svgHeight = height || '260px'
   return (
-    <svg width={svgWidth} height={svgHeight} viewBox="0 0 260 260" version="1.1" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink">
+    <svg width={svgWidth} height={svgHeight} viewBox="0 0 260 260" version="1.1" xmlns="http://www.w3.org/2000/svg">
       <defs>
         <circle id="path-1" cx="106" cy="106" r="106" />
         <filter x="-17.0%" y="-17.0%" width="134.0%" height="134.0%" filterUnits="objectBoundingBox" id="filter-2">

@@ -27,7 +27,7 @@ describe('<Sidebar />', function () {
     return render(
       <Provider store={store}>
         <TestContextProvider>
-          <Sidebar />
+          <Sidebar isVisible />
         </TestContextProvider>
       </Provider>,
     )

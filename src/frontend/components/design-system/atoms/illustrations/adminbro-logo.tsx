@@ -5,7 +5,7 @@ export const AdminBroLogo: React.FC<Props> = ({ width, height }) => {
   const svgWidth = width || '70px'
   const svgHeight = height || '70px'
   return (
-    <svg width={svgWidth} height={svgHeight} viewBox="0 0 70 70" version="1.1" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink">
+    <svg width={svgWidth} height={svgHeight} viewBox="0 0 70 70" version="1.1" xmlns="http://www.w3.org/2000/svg">
       <defs>
         <linearGradient x1="50%" y1="0%" x2="50%" y2="156.737419%" id="linearGradient-1">
           <stop stopColor="#879FFA" offset="0%" />

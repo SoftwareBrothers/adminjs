@@ -5,7 +5,7 @@ export const FlagInCog: React.FC<Props> = ({ width, height }) => {
   const svgWidth = width || '152px'
   const svgHeight = height || '169px'
   return (
-    <svg width={svgWidth} height={svgHeight} viewBox="0 0 152 169" version="1.1" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink">
+    <svg width={svgWidth} height={svgHeight} viewBox="0 0 152 169" version="1.1" xmlns="http://www.w3.org/2000/svg">
       <title>Group</title>
       <desc>Created with Sketch.</desc>
       <g id="Symbols" stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">

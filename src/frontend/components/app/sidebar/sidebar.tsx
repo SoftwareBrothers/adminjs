@@ -1,5 +1,5 @@
 import React from 'react'
-import { connect } from 'react-redux'
+import { useSelector } from 'react-redux'
 
 import SidebarBranding from './sidebar-branding'
 import SidebarParent from './sidebar-parent'
@@ -10,15 +10,23 @@ import { Navigation, Box, Label } from '../../design-system'
 import SidebarFooter from './sidebar-footer'
 import { useTranslation } from '../../../hooks/use-translation'
 
-type Props = Pick<ReduxState, 'resources' | 'branding' | 'pages'>
+type Props = {
+  isVisible: boolean;
+}
 
 const Sidebar: React.FC<Props> = (props) => {
-  const { branding, resources, pages } = props
+  const { isVisible } = props
+  const [branding, resources, pages] = useSelector((state: ReduxState) => [
+    state.branding, state.resources, state.pages,
+  ])
 
   const { translateLabel } = useTranslation()
 
   return (
-    <Navigation>
+    <Navigation
+      className={isVisible ? 'visible' : 'hidden'}
+      position={['absolute', 'absolute', 'inherit']}
+    >
       <Box flexShrink={0} px="lg" pb="xxl">
         <SidebarBranding branding={branding} />
       </Box>
@@ -34,10 +42,4 @@ const Sidebar: React.FC<Props> = (props) => {
   )
 }
 
-const mapStateToProps = (state: ReduxState): Props => ({
-  resources: state.resources,
-  branding: state.branding,
-  pages: state.pages,
-})
-
-export default connect(mapStateToProps)(Sidebar)
+export default Sidebar

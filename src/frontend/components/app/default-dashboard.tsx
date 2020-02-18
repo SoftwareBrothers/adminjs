@@ -12,17 +12,29 @@ const DashboardHeader = () => {
   const { translateMessage } = useTranslation()
   return (
     <Box position="relative" overflow="hidden">
-      <Box position="absolute" top={50} left={-10}>
+      <Box
+        position="absolute"
+        top={50}
+        left={-10}
+        opacity={[0.2, 0.4, 1]}
+        animate
+      >
         <Illustration variant="Rocket" />
       </Box>
-      <Box position="absolute" top={-70} right={-15}>
+      <Box
+        position="absolute"
+        top={-70}
+        right={-15}
+        opacity={[0.2, 0.4, 1]}
+        animate
+      >
         <Illustration variant="Moon" />
       </Box>
       <Box
         bg="black"
         height={pageHeaderHeight}
         py={pageHeaderPaddingY}
-        px={pageHeaderPaddingX}
+        px={['default', 'lg', pageHeaderPaddingX]}
       >
         <Text textAlign="center" color="white">
           <H2>{translateMessage('welcomeOnBoard_title')}</H2>
@@ -100,7 +112,7 @@ const Dashboard: React.FC = () => {
         width={[1, 1, 1, 1024]}
       >
         {boxes({ translateMessage }).map(box => (
-          <Box width={[1, 1, 1 / 2, 1 / 3]} p="lg">
+          <Box width={[1, 1 / 2, 1 / 2, 1 / 3]} p="lg">
             <Card as="a" href={box.href}>
               <Text textAlign="center">
                 <Illustration
@@ -155,37 +167,3 @@ const Dashboard: React.FC = () => {
 }
 
 export default Dashboard
-
-
-// <Box>
-//         <Box>
-//           <ul>
-//             <li><a href="https://softwarebrothers.github.io/admin-bro-dev/tutorial-03-passing-resources.html">Adding Resources</a></li>
-//             <li><a href="https://softwarebrothers.github.io/admin-bro-dev/tutorial-04-customizing-resources.html">Customizing resources</a></li>
-//             <li><a href="https://softwarebrothers.github.io/admin-bro-dev/tutorial-05-actions.html">Customizing Actions</a></li>
-//           </ul>
-//         </Box>
-//         <Box>
-//           <ul>
-//             <li><a href="https://softwarebrothers.github.io/admin-bro-dev/tutorial-06-writing-react-components.html">Writing your own components</a></li>
-//             <li><a href="https://softwarebrothers.github.io/admin-bro-dev/tutorial-07-custom-dashboard.html">Customizing Dashboard</a></li>
-//           </ul>
-//         </Box>
-//       </Box>
-//       <p>
-//         In case you found any errors,
-//         <a href="https://github.com/SoftwareBrothers/admin-bro/issues"> raise an issue </a>
-//         on our GitHub account.
-//       </p>
-//       <p>
-//         For the latest information about AdminBro and more -
-//         <a href="https://softwarebrothers.co/blog/"> check out our blog.</a>
-//       </p>
-//       <SoftwareBrothers>
-//         <img src="https://softwarebrothers.co/assets/images/software-brothers-logo-full.svg" alt="SoftwareBrothers" />
-//         <p>
-//           Want to add advanced fields like Google Maps,
-//           enrich interface with custom graphs or simply look for professional help? You can always
-//           <a href="https://softwarebrothers.co/services"> work with us!</a>
-//         </p>
-//       </SoftwareBrothers>

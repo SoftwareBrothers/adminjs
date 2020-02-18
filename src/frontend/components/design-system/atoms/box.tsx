@@ -39,6 +39,7 @@ export type BoxProps = SpaceProps & ColorProps & SizeProps & LayoutProps &
     flex?: boolean;
     /** Box variants */
     variant?: 'grey' | 'white';
+    animate?: boolean;
   }
 
 /**
@@ -76,6 +77,7 @@ export const Box = styled.section<BoxProps>`
   line-height: ${({ theme }): string => theme.lineHeights.default};
   font-size: ${({ theme }): string => theme.fontSizes.default};
   font-weight: normal;
+  ${({ animate }): string => (animate ? 'transition: all 500ms;' : '')};
 
   ${space};
   ${color};

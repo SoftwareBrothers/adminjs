@@ -5,7 +5,7 @@ export const SoftwareBrothersLogo: React.FC<Props> = ({ width, height }) => {
   const svgWidth = width || '72px'
   const svgHeight = height || '72px'
   return (
-    <svg width={svgWidth} height={svgHeight} viewBox="0 0 72 72" version="1.1" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink">
+    <svg width={svgWidth} height={svgHeight} viewBox="0 0 72 72" version="1.1" xmlns="http://www.w3.org/2000/svg">
       <defs>
         <polygon id="path-1" points="0 0.0011886196 40.3991072 0.0011886196 40.3991072 46.0126533 0 46.0126533" />
       </defs>

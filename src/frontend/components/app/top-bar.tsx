@@ -1,14 +1,12 @@
 import React from 'react'
-import { connect } from 'react-redux'
+import { useSelector } from 'react-redux'
 import styled from 'styled-components'
 
 import LoggedIn from './logged-in'
 import Version from './version'
 
-import { CurrentAdmin } from '../../../current-admin.interface'
-import { VersionProps } from '../../../admin-bro-options.interface'
 import { ReduxState } from '../../store/store'
-import { Box } from '../design-system'
+import { Box, Icon, Text } from '../design-system'
 
 const NavBar = styled(Box)`
   height: ${({ theme }): string => theme.sizes.navbarHeight};
@@ -19,30 +17,28 @@ const NavBar = styled(Box)`
   flex-shrink: 0;
 `
 
-type PropsFromState = {
-  versions: VersionProps;
-  session: CurrentAdmin | null;
-  paths: {
-    logoutPath: string;
-  };
+type Props = {
+  toggleSidebar: (any) => void;
 }
 
-const TopBar: React.FC<PropsFromState> = (props) => {
-  const { session, versions, paths } = props
+const TopBar: React.FC<Props> = (props) => {
+  const { toggleSidebar } = props
+  const [session, paths, versions] = useSelector(
+    (state: ReduxState) => [state.session, state.paths, state.versions],
+  )
   return (
     <NavBar>
+      <Box
+        p="lg"
+        onClick={toggleSidebar}
+        display={['block', 'block', 'none']}
+      >
+        <Icon icon="Menu" size={32} />
+      </Box>
       <Version versions={versions} />
       {session && session.email ? <LoggedIn session={session} paths={paths} /> : ''}
     </NavBar>
   )
 }
 
-const mapStateToProps = (state: ReduxState): PropsFromState => ({
-  session: state.session,
-  paths: {
-    logoutPath: state.paths.logoutPath,
-  },
-  versions: state.versions,
-})
-
-export default connect(mapStateToProps)(TopBar)
+export default TopBar
