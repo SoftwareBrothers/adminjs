@@ -9,7 +9,7 @@ import { appendForceRefresh } from './utils/append-force-refresh'
 
 import {
   Table, TableBody, TableRow, TableCell, Text,
-  DrawerContent, DrawerFooter, Button, MessageBox,
+  DrawerContent, DrawerFooter, Button, MessageBox, Icon,
 } from '../design-system'
 import ActionHeader from '../app/action-header'
 import { useTranslation } from '../../hooks'
@@ -93,6 +93,7 @@ const BulkDelete: React.FC<ActionProps & AddNoticeProps & RouteComponentProps> =
       </DrawerContent>
       <DrawerFooter>
         <Button variant="primary" size="lg" onClick={handleClick}>
+          {loading ? (<Icon icon="Fade" spin />) : null}
           {translateButton('confirmRemovalMany', resource.id, { count: records.length })}
         </Button>
       </DrawerFooter>

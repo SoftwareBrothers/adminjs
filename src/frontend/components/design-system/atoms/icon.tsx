@@ -1,5 +1,5 @@
 import React from 'react'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import { space, SpaceProps, color, ColorProps } from 'styled-system'
 import * as CarbonIcons from '@carbon/icons-react'
 
@@ -32,7 +32,28 @@ export type IconProps = SpaceProps & ColorProps & {
    * If background should be rounded
    */
   rounded?: boolean;
+
+  /**
+   * Indicates if given icons should spin
+   */
+  spin?: boolean;
 }
+
+const spinCss = css`
+  @keyframes iconSpin {
+    from {
+      transform:rotate(0deg);
+    }
+    to {
+      transform:rotate(360deg);
+    }
+  }
+
+  animation-name: iconSpin;
+  animation-duration: 1000ms;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear; 
+`
 
 const Wrapper = styled.span<IconProps>`
   vertical-align: middle;
@@ -42,9 +63,9 @@ const Wrapper = styled.span<IconProps>`
   
   & > svg {
     ${({ theme, color: colorProp }): string => (colorProp ? `fill: ${theme.colors[colorProp]}` : '')};
+    ${({ spin }): any => (spin ? spinCss : '')};
   }
   ${({ rounded }): string => (rounded ? 'border-radius: 9999px;' : '')};
-
   ${space};
   ${color};
 `
@@ -86,7 +107,7 @@ export const Icon: React.FC<IconProps> = (props) => {
 
   if (CarbonIcon) {
     return (
-      <Wrapper {...other}><CarbonIcon /></Wrapper>
+      <Wrapper className="admin-bro-icon" {...other}><CarbonIcon /></Wrapper>
     )
   }
   return null

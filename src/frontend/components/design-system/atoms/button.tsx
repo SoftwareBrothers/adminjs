@@ -2,6 +2,7 @@ import styled, { css } from 'styled-components'
 import { color, space, ColorProps, SpaceProps,
   TypographyProps, typography, variant } from 'styled-system'
 import focusShadowStyle from '../utils/focus-shadow.style'
+import Icon from './icon'
 
 const variantShared = {
   color: 'white',
@@ -72,7 +73,7 @@ const sizeVariants = variant({
       fontSize: 'default',
       py: 'sm',
       px: 'xxl',
-      '& svg': {
+      '& .admin-bro-icon': {
         paddingRight: 'sm',
       },
     },
@@ -86,7 +87,7 @@ const sizeVariants = variant({
       lineHeight: 'sm',
       minWidth: '34px',
       height: '34px',
-      '& svg': {
+      '& .admin-bro-icon': {
         padding: 0,
       },
     },
@@ -145,13 +146,16 @@ export const ButtonCSS = css<ButtonProps>`
   padding: ${({ theme }): string => theme.space.default} ${({ theme }): string => theme.space.x3};
   box-sizing: border-box;
 
-  & svg {
-    vertical-align: middle;
+  & > .admin-bro-icon {
     padding-bottom: 2px;
+    vertical-align: middle;
+    padding-right: ${({ theme }): string => theme.space.default};
+  }
+
+  & svg {
     width: 16px;
     height: 16px;
     fill: ${({ theme }): string => theme.colors.bluePrimary};
-    padding-right: ${({ theme }): string => theme.space.default};
   }
   &:hover {
     color: ${({ theme }): string => theme.colors.white};

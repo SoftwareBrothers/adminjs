@@ -4,7 +4,7 @@ import { useHistory } from 'react-router'
 import PropertyType from '../property-type'
 
 import { ActionProps } from './action.props'
-import { DrawerContent, Box, DrawerFooter, Button } from '../design-system'
+import { DrawerContent, Box, DrawerFooter, Button, Icon } from '../design-system'
 import ActionHeader from '../app/action-header'
 import RecordJSON from '../../../backend/decorators/record-json.interface'
 import useRecord from '../../hooks/use-record'
@@ -13,7 +13,7 @@ import { useTranslation } from '../../hooks/use-translation'
 
 const New: FC<ActionProps> = (props) => {
   const { record: initialRecord, resource, action } = props
-  const { record, handleChange, submit: handleSubmit } = useRecord(initialRecord, resource.id)
+  const { record, handleChange, submit: handleSubmit, loading } = useRecord(initialRecord, resource.id)
   const { translateButton } = useTranslation()
   const history = useHistory()
 
@@ -55,6 +55,7 @@ const New: FC<ActionProps> = (props) => {
       </DrawerContent>
       <DrawerFooter>
         <Button variant="primary" size="lg">
+          {loading ? (<Icon icon="Fade" spin />) : null}
           {translateButton('save', resource.id)}
         </Button>
       </DrawerFooter>
