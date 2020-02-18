@@ -11,5 +11,13 @@ export const Navigation = styled(Box)`
   overflow: auto;
   border-right: 1px solid ${({ theme }): string => theme.colors.greyPale};
   flex-shrink: 0;
-  background: 1px solid ${({ theme }): string => theme.colors.white};
+  background: ${({ theme }): string => theme.colors.white};
+  z-index: 50;
+  transition: all 500ms;
+  left: 0;
+
+  &.hidden {
+    left: -${({ theme }): string => theme.sizes.sidebarWidth};
+    transition: all 500ms;
+  }
 `

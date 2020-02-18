@@ -280,8 +280,8 @@ class AdminBro {
    *                                          the form
    * @return {Promise<string>}                HTML of the rendered page
    */
-  static async renderLogin({ action, errorMessage }): Promise<string> {
-    return loginTemplate({ action, errorMessage })
+  async renderLogin({ action, errorMessage }): Promise<string> {
+    return loginTemplate(this, { action, errorMessage })
   }
 
   /**
