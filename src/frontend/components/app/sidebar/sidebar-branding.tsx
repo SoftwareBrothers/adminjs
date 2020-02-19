@@ -32,7 +32,6 @@ const SidebarBranding: React.FC<Props> = (props) => {
             src={logo}
             alt={companyName}
             height="35px"
-            width="35px"
           />
         )}
         <span>{companyName}</span>

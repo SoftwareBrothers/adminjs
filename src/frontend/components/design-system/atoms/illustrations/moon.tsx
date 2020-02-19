@@ -1,7 +1,8 @@
 import React from 'react'
 import { Props } from './props.type'
 
-const Moon: React.FC<Props> = ({ width, height }) => {
+const Moon: React.FC<Props> = (props) => {
+  const { width, height } = props
   const svgWidth = width || '260px'
   const svgHeight = height || '260px'
   return (

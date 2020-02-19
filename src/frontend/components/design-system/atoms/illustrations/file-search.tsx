@@ -1,24 +1,25 @@
 import React from 'react'
 import { Props } from './props.type'
 
-export const FileSearch: React.FC<Props> = ({ width, height }) => {
+export const FileSearch: React.FC<Props> = (props) => {
+  const { width, height, theme } = props
   const svgWidth = width || '152px'
   const svgHeight = height || '169px'
   return (
     <svg width={svgWidth} height={svgHeight} viewBox="0 0 152 169" version="1.1" xmlns="http://www.w3.org/2000/svg">
       <defs>
         <linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="linearGradient-1">
-          <stop stopColor="#879FFA" offset="0%" />
-          <stop stopColor="#4268F6" offset="100%" />
+          <stop stopColor={theme.colors.primary60} offset="0%" />
+          <stop stopColor={theme.colors.primary100} offset="100%" />
         </linearGradient>
         <linearGradient x1="50%" y1="0%" x2="50%" y2="156.737419%" id="linearGradient-2">
-          <stop stopColor="#879FFA" offset="0%" />
-          <stop stopColor="#4268F6" offset="99.9727331%" />
-          <stop stopColor="#343F87" offset="100%" />
+          <stop stopColor={theme.colors.primary60} offset="0%" />
+          <stop stopColor={theme.colors.primary100} offset="99.9727331%" />
+          <stop stopColor={theme.colors.filterBg} offset="100%" />
         </linearGradient>
         <linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="linearGradient-3">
-          <stop stopColor="#879FFA" offset="0%" />
-          <stop stopColor="#4268F6" offset="100%" />
+          <stop stopColor={theme.colors.primary60} offset="0%" />
+          <stop stopColor={theme.colors.primary100} offset="100%" />
         </linearGradient>
       </defs>
       <g id="Symbols" stroke="none" strokeWidth="1" fill="none" fillRule="evenodd" strokeLinecap="round" strokeLinejoin="round">

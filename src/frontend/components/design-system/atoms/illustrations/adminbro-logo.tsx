@@ -1,7 +1,8 @@
 import React from 'react'
 import { Props } from './props.type'
 
-export const AdminBroLogo: React.FC<Props> = ({ width, height }) => {
+export const AdminBroLogo: React.FC<Props> = (props) => {
+  const { width, height } = props
   const svgWidth = width || '70px'
   const svgHeight = height || '70px'
   return (
