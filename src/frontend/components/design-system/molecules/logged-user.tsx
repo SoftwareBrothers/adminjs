@@ -11,7 +11,7 @@ const LoggedUserInfo = styled(Box)`
   display: flex;
   flex-direction: row;
   vertical-align: middle;
-  color: ${({ theme }): string => theme.colors.grey};
+  color: ${({ theme }): string => theme.colors.grey60};
   height: ${height};
 
   & img {
@@ -42,10 +42,10 @@ export const LoggedUser: React.FC<LoggedUserProps> = (props) => {
             >
               {email}
             </Text>
-            <Text fontSize="sm" color="greyLight" lineHeight="sm">{title}</Text>
+            <Text fontSize="sm" color="grey40" lineHeight="sm">{title}</Text>
           </Box>
           <img src="https://api.adorable.io/avatars/24/softwarebrothers.png" alt="avatar" />
-          <Icon icon="OverflowMenuVertical" size={16} my="default" color="grey" />
+          <Icon icon="OverflowMenuVertical" size={16} my="default" color="grey60" />
         </LoggedUserInfo>
       </DropDownTrigger>
       <DropDownMenu top={height}>

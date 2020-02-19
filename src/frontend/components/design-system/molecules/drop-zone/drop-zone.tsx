@@ -73,12 +73,12 @@ const UploadInput = styled.input`
 `
 
 const StyledDropZone = styled(Box)`
-  border: 1px dashed ${({ theme }): string => theme.colors.darkGrey};
+  border: 1px dashed ${({ theme }): string => theme.colors.grey80};
   position: relative;
   text-align: center;
 
   & ${Label} {
-    color: ${({ theme }): string => theme.colors.grey};
+    color: ${({ theme }): string => theme.colors.grey60};
     font-size: ${({ theme }): string => theme.fontSizes.xs};
     padding-right: 4px;
     letter-spacing: 1px;
@@ -232,13 +232,13 @@ export const DropZone: React.FC<DropZoneProps> = (props) => {
           </Text>
           <Box>
             {validate && validate.maxSize ? (
-              <Text variant="xs" color="grey" lineHeight="default" mt="sm">
+              <Text variant="xs" color="grey60" lineHeight="default" mt="sm">
                 <Label inline uppercase>Max size:</Label>
                 {inKb(validate.maxSize)}
               </Text>
             ) : ''}
             {validate && validate.mimeTypes && validate.mimeTypes.length ? (
-              <Text variant="xs" color="grey" lineHeight="default" mt="sm">
+              <Text variant="xs" color="grey60" lineHeight="default" mt="sm">
                 <Label inline uppercase>Available types:</Label>
                 {validate.mimeTypes.join(', ')}
               </Text>

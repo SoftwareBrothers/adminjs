@@ -10,14 +10,14 @@
  * it is used by almost all the components provided by AdminBro.
  *
  * So let's say you would like to create a box with the same background as our
- * bluePrimary color. This is one way of achieving that:
+ * primary100 color. This is one way of achieving that:
  *
  * ```javascript
  * import styled from 'styled-components'
  * import { Box } from 'admin-bro'
  *
  * const MyBlueBox = styled(Box)`
- *   background: ${({ theme }) => theme.colors.bluePrimary};
+ *   background: ${({ theme }) => theme.colors.primary100};
  *   // other css styles you want to override.
  * `
  * ```
@@ -30,7 +30,7 @@
  * import { Box } from 'admin-bro'
  *
  * const ComponentWhereIWantToUseBlueBox = () => (
- *   <Box bg="bluePrimary">
+ *   <Box bg="primary100">
  *   ...
  *   </Box>
  * )
@@ -41,51 +41,70 @@
  * @memberof Theme
  * @alias colors
  *
- * @property {string} bluePrimary=#4268F6       <div style="background: #4268F6; height: 20px;" />
- * @property {string} bluePrimary=#4268F6       <div style="background: #4268F6; height: 20px" />
- * @property {string} blue80=#6483F8            <div style="background: #6483F8; height: 20px" />
- * @property {string} blueLight=#879FFA         <div style="background: #879FFA; height: 20px" />
- * @property {string} blue40=#A9BAFA            <div style="background: #A9BAFA; height: 20px" />
- * @property {string} bluePale=#CBD5FD          <div style="background: #CBD5FD; height: 20px" />
- * @property {string} blueHover=#535B8E         <div style="background: #535B8E; height: 20px" />
- * @property {string} blueSecondary=#38CAF1     <div style="background: #38CAF1; height: 20px" />
- * @property {string} blueFilter=#343F87        <div style="background: #343F87; height: 20px" />
- * @property {string} black=#1C1C38             <div style="background: #1C1C38; height: 20px" />
- * @property {string} darkGrey=#454655          <div style="background: #454655; height: 20px" />
- * @property {string} grey=#898A9A              <div style="background: #898A9A; height: 20px" />
- * @property {string} greyLight=#C0C0CA         <div style="background: #C0C0CA; height: 20px" />
- * @property {string} greyPale=#F6F7FB          <div style="background: #F6F7FB; height: 20px" />
+ * @property {string} primary100=#4268F6       <div style="background: #4268F6; height: 20px;" />
+ * @property {string} primary80=#6483F8            <div style="background: #6483F8; height: 20px" />
+ * @property {string} primary60=#879FFA         <div style="background: #879FFA; height: 20px" />
+ * @property {string} primary40=#A9BAFA            <div style="background: #A9BAFA; height: 20px" />
+ * @property {string} primary20=#CBD5FD          <div style="background: #CBD5FD; height: 20px" />
+ * @property {string} hoverBg=#535B8E         <div style="background: #535B8E; height: 20px" />
+ * @property {string} accent=#38CAF1     <div style="background: #38CAF1; height: 20px" />
+ * @property {string} filterBg=#343F87        <div style="background: #343F87; height: 20px" />
+ * @property {string} grey100=#1C1C38             <div style="background: #1C1C38; height: 20px" />
+ * @property {string} grey80=#454655          <div style="background: #454655; height: 20px" />
+ * @property {string} grey60=#898A9A              <div style="background: #898A9A; height: 20px" />
+ * @property {string} grey40=#C0C0CA         <div style="background: #C0C0CA; height: 20px" />
+ * @property {string} grey20=#F6F7FB          <div style="background: #F6F7FB; height: 20px" />
  * @property {string} white=#fff                <div style="background: #fff; height: 20px" />
  * @property {string} red=#FF4567               <div style="background: #FF4567; height: 20px" />
- * @property {string} paleRed=#FFA5B5           <div style="background: #FFA5B5; height: 20px" />
- * @property {string} treal=#70C9B0             <div style="background: #70C9B0; height: 20px" />
- * @property {string} paleTreal=#DBF0F1         <div style="background: #DBF0F1; height: 20px" />
+ * @property {string} errorLight=#FFA5B5           <div style="background: #FFA5B5; height: 20px" />
+ * @property {string} success=#70C9B0             <div style="background: #70C9B0; height: 20px" />
+ * @property {string} successLight=#DBF0F1         <div style="background: #DBF0F1; height: 20px" />
  * @property {string} love=#e6282b              <div style="background: #e6282b; height: 20px" />
  */
 const colors = {
-  bluePrimary: '#4268F6',
-  blue80: '#6483F8',
-  blueLight: '#879FFA',
-  blue40: '#A9BAFA',
-  bluePale: '#CBD5FD',
-  blueHover: '#535B8E',
-  blueSecondary: '#38CAF1',
-  blueFilter: '#343F87',
+  // Primary
+  primary100: '#4268F6',
+  primary80: '#6483F8',
+  primary60: '#879FFA',
+  primary40: '#A9BAFA',
+  primary20: '#CBD5FD',
 
-  // Blacks
-  black: '#1C1C38',
-  darkGrey: '#454655',
-  grey: '#898A9A',
-  greyLight: '#C0C0CA',
-  greyPale: '#F6F7FB',
+  // accent
+  accent: '#38CAF1',
+  love: '#e6282b', // SoftwareBrothers logo color
+
+  // grey
+  grey100: '#1C1C38',
+  grey80: '#454655',
+  grey60: '#898A9A',
+  grey40: '#C0C0CA',
+  grey20: '#F6F7FB',
   white: '#fff',
 
-  // Additional
-  red: '#FF4567',
-  paleRed: '#FFA5B5',
-  treal: '#70C9B0',
-  paleTreal: '#DBF0F1',
-  love: '#e6282b',
+
+  // Alerts
+  errorDark: '#DE405D',
+  error: '#FF4567',
+  errorLight: '#FFA5B5',
+
+  successDark: '#32A887',
+  success: '#70C9B0',
+  successLight: '#DBF0F1',
+
+  infoDark: '#4268F6',
+  info: '#879FFA',
+  infoLight: '#CBD5FD',
+
+  // Backgrounds
+  filterBg: '#343F87',
+  hoverBg: '#535B8E',
+
+  // Elements
+  inputBorder: '#898A9A',
+  separator: '#C0C0CA',
+  highlight: '#F6F7FB',
+  filterInputBorder: 'rgba(255,255,255,0.15)',
+  filterDisabled: 'rgba(83,91,142,0.05)',
 }
 
 /**
@@ -221,7 +240,7 @@ export {
  * @memberof Theme
  * @property {string} [color]                 Text color. It could be either a #hash or
  *                                            {@link colors} from css theme name like
- *                                            `darkGrey`
+ *                                            `grey80`
  * @property {string} [backgroundColor, bg]   Background color. Similar as above could be a
  *                                            #hash or one of {@link colors}.
  */

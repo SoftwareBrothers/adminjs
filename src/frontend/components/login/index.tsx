@@ -57,7 +57,7 @@ const Login: React.FC<Props> = (props) => {
       <Wrapper flex variant="grey">
         <Box bg="white" height="440px" flex boxShadow="login" width={[1, 2 / 3, 'auto']}>
           <Box
-            bg="bluePrimary"
+            bg="primary100"
             color="white"
             p="x3"
             width="380px"

@@ -7,14 +7,14 @@ import RecordJSON from '../../../backend/decorators/record-json.interface'
 import { Box } from '../design-system'
 
 const BreadcrumbLink = styled(Link)`
-  color: ${({ theme }): string => theme.colors.greyLight};
+  color: ${({ theme }): string => theme.colors.grey40};
   font-family: ${({ theme }): string => theme.font};
   line-height: ${({ theme }): string => theme.lineHeights.default};
   font-size: ${({ theme }): string => theme.fontSizes.default};
   text-decoration: none;
 
   &:hover {
-    color: ${({ theme }): string => theme.colors.bluePrimary};
+    color: ${({ theme }): string => theme.colors.primary100};
   }
 
   &:after {

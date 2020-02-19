@@ -22,7 +22,7 @@ import { Box } from './box'
  * )
  */
 const Section = styled(Box)`
-  border-left: ${({ theme }): string => theme.space.sm} solid ${({ theme }): string => theme.colors.bluePale};
+  border-left: ${({ theme }): string => theme.space.sm} solid ${({ theme }): string => theme.colors.primary20};
   padding-left: ${({ theme }): string => theme.space.default};
 `
 

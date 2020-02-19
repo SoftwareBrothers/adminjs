@@ -38,7 +38,7 @@ type StyledProps = {
 
 const radioBackground = (theme, checked, disabled): string => {
   if (checked) {
-    return disabled ? theme.colors.greyLight : theme.colors.bluePrimary
+    return disabled ? theme.colors.grey40 : theme.colors.primary100
   }
   return theme.colors.white
 }
@@ -47,7 +47,7 @@ const StyledRadio = styled.span<StyledProps>`
   display: inline-block;
   width: 16px;
   cursor: pointer;
-  border: 1px solid ${({ theme }): string => theme.colors.greyLight};
+  border: 1px solid ${({ theme }): string => theme.colors.grey40};
   border-radius: 1000px;
   height: 16px;
   transition: all 150ms;
@@ -57,7 +57,7 @@ const StyledRadio = styled.span<StyledProps>`
     ${({ theme }): string => focusShadowStyle(theme)};
   }
   ${HiddenRadio}:hover + & {
-    border-color: ${({ theme }): string => theme.colors.grey};
+    border-color: ${({ theme }): string => theme.colors.grey60};
   }
   ${Circle} {
     visibility: ${({ checked }): string => (checked ? 'visible' : 'hidden')};

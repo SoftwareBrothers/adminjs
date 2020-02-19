@@ -96,7 +96,7 @@ const Wrapper = styled.span<IconProps>`
  * @example <caption>Big rounded icon with background</caption>
  * return (
  *   <Box variant="grey">
- *     <Icon icon="Add" color="white" bg="bluePrimary" rounded size={32} p="default"/>
+ *     <Icon icon="Add" color="white" bg="primary100" rounded size={32} p="default"/>
  *   </Box>
  * )
  */

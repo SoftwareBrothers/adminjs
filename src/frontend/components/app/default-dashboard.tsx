@@ -31,7 +31,7 @@ const DashboardHeader = () => {
         <Illustration variant="Moon" />
       </Box>
       <Box
-        bg="black"
+        bg="grey100"
         height={pageHeaderHeight}
         py={pageHeaderPaddingY}
         px={['default', 'lg', pageHeaderPaddingX]}
@@ -81,11 +81,11 @@ const boxes = ({ translateMessage }) => [{
 
 const Card = styled(Box)`
   display: ${({ flex }): string => (flex ? 'flex' : 'block')};
-  color: ${({ theme }): string => theme.colors.black};
+  color: ${({ theme }): string => theme.colors.grey100};
   text-decoration: none;
   border: 1px solid transparent;
   &:hover {
-    border: 1px solid ${({ theme }): string => theme.colors.bluePrimary};
+    border: 1px solid ${({ theme }): string => theme.colors.primary100};
     box-shadow: ${({ theme }): string => theme.shadows.cardHover};
   }
 `

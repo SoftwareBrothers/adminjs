@@ -17,7 +17,7 @@ const Spinner = styled.div.attrs({
     position: absolute;
     left: 6px;
     width: 13px;
-    background: ${({ theme }): string => theme.colors.bluePrimary};
+    background: ${({ theme }): string => theme.colors.primary100};
     animation: lds-facebook 1.2s cubic-bezier(0, 0.5, 0.5, 1) infinite;
   }
   & div:nth-child(1) {

@@ -34,11 +34,11 @@ const variantStyle = (variantColor: string, props: BadgeProps) => ({
 
 const colorVariant = (props: BadgeProps) => variant({
   variants: {
-    primary: variantStyle('bluePrimary', props),
-    danger: variantStyle('red', props),
-    success: variantStyle('treal', props),
-    info: variantStyle('blueLight', props),
-    secondary: variantStyle('blueSecondary', props),
+    primary: variantStyle('primary100', props),
+    danger: variantStyle('error', props),
+    success: variantStyle('success', props),
+    info: variantStyle('info', props),
+    secondary: variantStyle('accent', props),
   },
 })
 
@@ -96,8 +96,8 @@ const sizeVariants = variant({
  */
 export const Badge = styled.span<BadgeProps>`
   border-radius: 12px;
-  border: 1px solid ${({ theme }): string => theme.colors.greyLight};
-  color: ${({ outline, theme }): string => (outline ? theme.colors.grey : theme.colors.white)};
+  border: 1px solid ${({ theme }): string => theme.colors.grey40};
+  color: ${({ outline, theme }): string => (outline ? theme.colors.grey60 : theme.colors.white)};
   vertical-align: middle;
   font-family: ${({ theme }): string => theme.font};
 
@@ -113,7 +113,7 @@ Badge.defaultProps = {
   px: 'default',
   py: '6px',
   fontSize: 'xs',
-  bg: 'greyLight',
+  bg: 'grey40',
 }
 
 export default Badge

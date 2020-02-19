@@ -62,7 +62,7 @@ export const DropZoneItem: React.FC<DropZoneItemProps> = (props) => {
   }
 
   return (
-    <Box bg="greyPale" px="lg" py="default" mt="default" flex alignItems="center">
+    <Box bg="grey20" px="lg" py="default" mt="default" flex alignItems="center">
       <Icon icon="Attachment" mr="default" />
       {src ? (<DropZoneImg src={src} />) : ''}
       <Box flexGrow={1}>{file?.name || filename}</Box>

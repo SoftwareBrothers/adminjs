@@ -11,7 +11,7 @@ const variants = variant({
   variants: {
     grey: {
       flexGrow: 1,
-      bg: 'greyPale',
+      bg: 'grey20',
       p: 'xl',
     },
     white: {

@@ -8,21 +8,21 @@ import TableHead from './table-head'
  * @private
  */
 const TableCell = styled.td<SpaceProps | ColorProps>`
-  border-bottom: 1px solid ${({ theme }): string => theme.colors.greyPale};
+  border-bottom: 1px solid ${({ theme }): string => theme.colors.grey20};
   font-size: ${({ theme }): string => theme.fontSizes.default};
   line-height: ${({ theme }): string => theme.lineHeights.default};
   ${color}; 
   ${space};
 
   ${TableHead} & {
-    color: ${({ theme }): string => theme.colors.grey};
+    color: ${({ theme }): string => theme.colors.grey60};
     border: none;
   }
 `
 
 TableCell.defaultProps = {
   p: 'lg',
-  color: 'black',
+  color: 'grey100',
 }
 
 export default TableCell

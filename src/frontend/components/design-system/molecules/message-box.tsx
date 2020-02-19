@@ -1,6 +1,6 @@
 /* eslint-disable max-len */
 import React from 'react'
-import styled from 'styled-components'
+import styled, { DefaultTheme } from 'styled-components'
 import { variant as styledVariant, SpaceProps } from 'styled-system'
 
 
@@ -24,21 +24,21 @@ const sizeVariants = styledVariant({
   },
 })
 
-const variants = theme => styledVariant({
+const variants = (theme: DefaultTheme) => styledVariant({
   variants: {
     success: {},
     danger: {
-      bg: 'paleRed',
-      'box-shadow': `0 2px 0 0 ${theme.colors.red};`,
+      bg: 'errorLight',
+      'box-shadow': `0 2px 0 0 ${theme.colors.error};`,
       '& + section': {
-        borderColor: 'paleRed',
+        borderColor: 'errorLight',
       },
     },
     info: {
-      bg: 'bluePale',
-      'box-shadow': `0 2px 0 0 ${theme.colors.bluePrimary};`,
+      bg: 'primary20',
+      'box-shadow': `0 2px 0 0 ${theme.colors.primary100};`,
       '& + section': {
-        borderColor: 'bluePale',
+        borderColor: 'primary20',
       },
     },
   },
@@ -46,14 +46,14 @@ const variants = theme => styledVariant({
 
 const StyledMessageBox = styled.div<StyledMessageBoxProps>`
   line-height: ${({ theme }): string => theme.lineHeights.default};
-  box-shadow: 0 2px 0 0 ${({ theme }): string => theme.colors.treal};
-  background: ${({ theme }): string => theme.colors.paleTreal};
-  color: ${({ theme }): string => theme.colors.darkGrey};
+  box-shadow: 0 2px 0 0 ${({ theme }): string => theme.colors.success};
+  background: ${({ theme }): string => theme.colors.successLight};
+  color: ${({ theme }): string => theme.colors.grey80};
   & > ${Button} {
     float: right;
     margin: 8px;
     & svg {
-      fill: ${({ theme }): string => theme.colors.darkGrey};
+      fill: ${({ theme }): string => theme.colors.grey80};
     }
   }
   ${({ theme }) => variants(theme)};
@@ -73,7 +73,7 @@ const StyledChildren = styled(Box)`
   background: ${({ theme }): string => theme.colors.white};
   border-style: solid;
   border-width: 0 1px 1px 1px;
-  border-color: ${({ theme }): string => theme.colors.paleTreal};
+  border-color: ${({ theme }): string => theme.colors.successLight};
 `
 
 /**

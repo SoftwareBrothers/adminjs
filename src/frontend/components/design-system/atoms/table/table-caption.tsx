@@ -20,7 +20,7 @@ const TableCaption = styled.caption`
   left: 0;
   right: 0;
   top: -${CAPTION_HEIGHT};
-  background: ${({ theme }): string => theme.colors.bluePrimary};
+  background: ${({ theme }): string => theme.colors.primary100};
   box-sizing: border-box;
 
   & ${Button} {

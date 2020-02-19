@@ -34,7 +34,7 @@ class SortLink extends React.PureComponent<Props & RouteComponentProps> {
     return (
       <NavLink to={{ search: query.toString() }}>
         {property.label}
-        {this.isActive() ? (<Icon icon={sortedByIcon} color="bluePrimary" ml="default" />) : ''}
+        {this.isActive() ? (<Icon icon={sortedByIcon} color="primary100" ml="default" />) : ''}
       </NavLink>
     )
   }
