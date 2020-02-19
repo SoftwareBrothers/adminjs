@@ -97,12 +97,11 @@ const Login: React.FC<Props> = (props) => {
                   src={branding.logo}
                   alt={branding.companyName}
                   height="35px"
-                  width="35px"
                   mr="lg"
                   mt="-3px"
                 />
               )}
-              {branding.companyName || 'AdminBro'}
+              {branding.companyName ?? 'AdminBro'}
             </H5>
             {message && (
               <MessageBox
