@@ -2,17 +2,17 @@ import styled from 'styled-components'
 import { NavLink } from 'react-router-dom'
 
 const SidebarLink = styled(NavLink)`
-  color: ${({ theme }): string => theme.colors.darkGrey};
+  color: ${({ theme }): string => theme.colors.grey80};
   padding: ${({ theme }): string => theme.space.sm};
   display: block;
   text-decoration: none;
 
   &:hover {
-    color: ${({ theme }): string => theme.colors.blueHover};
+    color: ${({ theme }): string => theme.colors.hoverBg};
   }
 
   &.active span{
-    color: ${({ theme }): string => theme.colors.bluePrimary};
+    color: ${({ theme }): string => theme.colors.primary100};
   }
 `
 

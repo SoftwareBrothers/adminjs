@@ -17,51 +17,51 @@ const sizeVariants = variant({
 const variants = variant({
   variants: {
     primary: {
-      color: 'bluePrimary',
+      color: 'primary100',
       '&:hover': {
-        color: 'blueHover',
+        color: 'hoverBg',
         '& svg': {
-          fill: 'blueHover',
+          fill: 'hoverBg',
         },
       },
       '& svg': {
-        fill: 'bluePrimary',
+        fill: 'primary100',
       },
     },
     danger: {
-      color: 'red',
+      color: 'error',
       '&:hover': {
-        color: 'red',
+        color: 'error',
       },
       '& svg': {
-        fill: 'red',
+        fill: 'error',
       },
     },
     success: {
-      color: 'treal',
+      color: 'success',
       '&:hover': {
-        color: 'treal',
+        color: 'success',
       },
       '& svg': {
-        fill: 'treal',
+        fill: 'success',
       },
     },
     info: {
-      color: 'blueLight',
+      color: 'primary60',
       '&:hover': {
-        color: 'blueHover',
+        color: 'hoverBg',
       },
       '& svg': {
-        fill: 'blueLight',
+        fill: 'primary60',
       },
     },
     secondary: {
-      color: 'blueSecondary',
+      color: 'accent',
       '&:hover': {
-        color: 'blueHover',
+        color: 'hoverBg',
       },
       '& svg': {
-        fill: 'blueSecondary',
+        fill: 'accent',
       },
     },
   },
@@ -135,7 +135,7 @@ export const Link = styled.a<LinkProps>`
 `
 
 Link.defaultProps = {
-  color: 'grey',
+  color: 'grey60',
 }
 
 export default Link

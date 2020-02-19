@@ -7,23 +7,23 @@ import { Input } from '../../atoms/input'
 import { Link } from '../../atoms/link'
 
 const formGroupDisabledCSS = css`
-  color: ${({ theme }): string => theme.colors.greyLight};
+  color: ${({ theme }): string => theme.colors.grey40};
 `
 
 const formGroupWithErrorCSS = css`
-  color: ${({ theme }): string => theme.colors.red};
+  color: ${({ theme }): string => theme.colors.error};
   ${Input} {
-    color: ${({ theme }): string => theme.colors.red};
-    border-color: ${({ theme }): string => theme.colors.red};
+    color: ${({ theme }): string => theme.colors.error};
+    border-color: ${({ theme }): string => theme.colors.error};
   }
   &&& ${Label} {
-    color: ${({ theme }): string => theme.colors.red};
+    color: ${({ theme }): string => theme.colors.error};
     &:before {
-      color: ${({ theme }): string => theme.colors.red};
+      color: ${({ theme }): string => theme.colors.error};
     }
   }
   &&& ${Label}, &&& ${Button}, &&& ${Link} {
-    border-color: ${({ theme }): string => theme.colors.red};
+    border-color: ${({ theme }): string => theme.colors.error};
   }
 `
 

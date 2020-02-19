@@ -1,5 +1,7 @@
+/* eslint-disable no-shadow */
 import styled from 'styled-components'
 import { space, SpaceProps, variant } from 'styled-system'
+import DrawerFooter from './drawer-footer'
 
 /**
  * Props for Drawer component. Apart from those described below it also extends all
@@ -20,7 +22,7 @@ export type DrawerProps = SpaceProps & {
 const variants = variant({
   variants: {
     filter: {
-      bg: 'blueFilter',
+      bg: 'filterBg',
       width: '400px',
       color: 'white',
       '& > *': {
@@ -90,13 +92,17 @@ export const Drawer = styled.section<DrawerProps>`
   flex-direction: column;
   top: 0;
   right: 0;
-  box-shadow: 0 3px 6px ${({ theme }): string => theme.colors.greyLight};
+  box-shadow: 0 3px 6px ${({ theme }): string => theme.colors.grey40};
   height: 100%;
   overflow-y: auto;
   overflow-x: hidden;
   transition: all 500ms;
   background: ${({ theme }): string => theme.colors.white};
   box-sizing: border-box;
+  & > ${DrawerFooter} {
+    ${({ variant, theme }): string => (variant === 'filter' ? `border-color: ${theme.colors.filterInputBorder}` : '')};
+  }
+  
 
   ${space};
   ${variants};

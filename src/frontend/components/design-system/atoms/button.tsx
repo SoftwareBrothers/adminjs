@@ -11,33 +11,42 @@ const variantShared = {
     fill: 'white',
   },
   '&:disabled': {
-    bg: 'greyLight',
+    bg: 'grey40',
   },
 }
 
 const buttonVariants = variant({
   variants: {
     primary: {
-      bg: 'bluePrimary',
+      bg: 'primary100',
       '&:hover': {
-        bg: 'blueHover',
+        bg: 'hoverBg',
       },
       ...variantShared,
     },
     danger: {
-      bg: 'red',
+      bg: 'error',
+      '&:hover': {
+        bg: 'errorDark',
+      },
       ...variantShared,
     },
     success: {
-      bg: 'treal',
+      bg: 'success',
+      '&:hover': {
+        bg: 'successDark',
+      },
       ...variantShared,
     },
     info: {
-      bg: 'blueLight',
+      bg: 'info',
+      '&:hover': {
+        bg: 'infoDark',
+      },
       ...variantShared,
     },
     secondary: {
-      bg: 'blueSecondary',
+      bg: 'accent',
       ...variantShared,
     },
     text: {
@@ -48,7 +57,7 @@ const buttonVariants = variant({
       },
       '&:hover': {
         background: 'transparent',
-        color: 'blueHover',
+        color: 'hoverBg',
         'border-color': 'transparent',
         'text-decoration': 'underline',
       },
@@ -57,10 +66,10 @@ const buttonVariants = variant({
         'border-color': 'transparent',
       },
       '& svg': {
-        fill: 'bluePrimary',
+        fill: 'primary100',
       },
       '&:hover svg': {
-        fill: 'blueHover',
+        fill: 'hoverBg',
       },
     },
   },
@@ -139,8 +148,8 @@ export const ButtonCSS = css<ButtonProps>`
   display: inline-block;
   font-family: ${({ theme }): string => theme.font};
   line-height: ${({ theme }): string => theme.lineHeights.lg};
-  border: 1px solid ${({ theme }): string => theme.colors.bluePrimary};
-  color: ${({ theme }): string => theme.colors.bluePrimary};
+  border: 1px solid ${({ theme }): string => theme.colors.primary100};
+  color: ${({ theme }): string => theme.colors.primary100};
   cursor: pointer;
   text-decoration: none;
   padding: ${({ theme }): string => theme.space.default} ${({ theme }): string => theme.space.x3};
@@ -155,28 +164,28 @@ export const ButtonCSS = css<ButtonProps>`
   & svg {
     width: 16px;
     height: 16px;
-    fill: ${({ theme }): string => theme.colors.bluePrimary};
+    fill: ${({ theme }): string => theme.colors.primary100};
   }
   &:hover {
     color: ${({ theme }): string => theme.colors.white};
-    background: ${({ theme }): string => theme.colors.blueHover};
-    border-color: ${({ theme }): string => theme.colors.blueHover};
+    background: ${({ theme }): string => theme.colors.hoverBg};
+    border-color: ${({ theme }): string => theme.colors.hoverBg};
     svg {
       fill: ${({ theme }): string => theme.colors.white};
     }
   }
   &:focus {
-    border-color: ${({ theme }): string => theme.colors.blueSecondary};
+    border-color: ${({ theme }): string => theme.colors.accent};
     ${({ theme }): string => focusShadowStyle(theme)};
   }
 
   &:disabled {
-    color: ${({ theme }): string => theme.colors.grey};
-    border-color: ${({ theme }): string => theme.colors.darkGrey};
+    color: ${({ theme }): string => theme.colors.grey60};
+    border-color: ${({ theme }): string => theme.colors.grey80};
     background: ${({ theme }): string => theme.colors.white};
     cursor: default;
     & svg {
-      fill: ${({ theme }): string => theme.colors.grey};
+      fill: ${({ theme }): string => theme.colors.grey60};
     }
   }
 

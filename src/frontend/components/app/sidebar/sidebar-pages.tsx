@@ -27,7 +27,7 @@ const SidebarPages: React.FC<Props> = (props) => {
 
   return (
     <Box ml="lg">
-      <Label uppercase color="grey" mb="lg">{translateLabel('pages')}</Label>
+      <Label uppercase color="grey60" mb="lg">{translateLabel('pages')}</Label>
       {pages.map(page => (
         <SidebarLink
           to={h.pageUrl(page.name)}

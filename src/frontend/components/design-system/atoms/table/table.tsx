@@ -76,7 +76,7 @@ import { layout, LayoutProps } from 'styled-system'
 const Table = styled.table<LayoutProps>`
   position: relative;
   font-family: ${({ theme }): string => theme.font};
-  color: ${({ theme }): string => theme.colors.black};
+  color: ${({ theme }): string => theme.colors.grey100};
 
   ${layout};
   border-collapse: collapse;

@@ -8,7 +8,7 @@ export const Overlay = styled(Box)`
 Overlay.defaultProps = {
   width: '100%',
   height: '100%',
-  bg: 'black',
+  bg: 'grey100',
   opacity: 0.2,
   position: 'fixed',
   top: 0,

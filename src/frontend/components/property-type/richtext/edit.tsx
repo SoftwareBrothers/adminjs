@@ -28,15 +28,15 @@ const Wrapper = styled.div.attrs({
   className: 'control has-icons-right',
 })`
   .ql-toolbar {
-    border-color: ${({ theme }): string => theme.colors.greyLight};
+    border-color: ${({ theme }): string => theme.colors.grey40};
 
     .ql-picker {
-      color: ${({ theme }): string => theme.colors.grey};
+      color: ${({ theme }): string => theme.colors.grey60};
     }
   }
 
   .ql-container {
-    border-color: ${({ theme }): string => theme.colors.greyLight};
+    border-color: ${({ theme }): string => theme.colors.grey40};
     background: ${({ theme }): string => theme.colors.white};
   }
 `

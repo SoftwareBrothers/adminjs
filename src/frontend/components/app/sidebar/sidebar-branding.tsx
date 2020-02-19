@@ -9,7 +9,7 @@ const LogoLink = styled(Link)`
   display: flex;
   align-items: center;
   text-decoration: none;
-  color: ${({ theme }): string => theme.colors.darkGrey};
+  color: ${({ theme }): string => theme.colors.grey80};
 
   & > img {
     margin-right: 12px;

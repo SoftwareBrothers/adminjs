@@ -10,7 +10,7 @@ export type Props = {
 }
 
 const VersionItem = styled(Text)`
-  color: ${({ theme }): string => theme.colors.black};
+  color: ${({ theme }): string => theme.colors.grey100};
   padding: 12px 24px 12px 0;
   display: inline-block;
 `
@@ -24,12 +24,12 @@ const Version: React.FC<Props> = (props) => {
   return (
     <Box flexGrow={1} py="default" px="xxl">
       {admin && (
-        <VersionItem color="black">
+        <VersionItem color="grey100">
           {translateLabel('adminVersion', { version: admin })}
         </VersionItem>
       )}
       {app && (
-        <VersionItem color="black">
+        <VersionItem color="grey100">
           {translateLabel('appVersion', { version: app })}
         </VersionItem>
       )}

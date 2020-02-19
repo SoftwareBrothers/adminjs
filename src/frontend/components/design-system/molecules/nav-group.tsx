@@ -6,7 +6,7 @@ import { Text } from '../atoms/text'
 
 const NavGroupTitle = styled(Text)`
   padding: 11px 20px;
-  color: ${({ theme }): string => theme.colors.black};
+  color: ${({ theme }): string => theme.colors.grey100};
   border-radius: 9999px;
   display: flex;
   cursor: pointer;
@@ -69,7 +69,7 @@ export const NavGroup: React.FC<NavGroupProps> = (props) => {
     <Box>
       <NavGroupTitle
         onClick={(): void => toggleOpen(!isItOpen)}
-        bg={isItOpen ? 'greyPale' : 'transparent'}
+        bg={isItOpen ? 'grey20' : 'transparent'}
       >
         <Icon icon={icon || 'Settings'} />
         <Text>{title}</Text>

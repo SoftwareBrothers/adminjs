@@ -12,26 +12,26 @@ export * from '../components/design-system/theme'
 // // sorted alphabetically
 // export const colors = {
 //   // Blues
-//   bluePrimary: '#4268F6',
-//   blueLight: '#718AF4',
-//   bluePale: '#CBD5FD',
-//   blueHover: '#535B8E',
-//   blueSecondary: '#38CAF1',
-//   blueFilter: '#343F87',
+//   primary100: '#4268F6',
+//   primary60: '#718AF4',
+//   primary20: '#CBD5FD',
+//   hoverBg: '#535B8E',
+//   accent: '#38CAF1',
+//   filterBg: '#343F87',
 
 //   // Blacks
-//   black: '#111114',
-//   darkGrey: '#454655',
+//   grey100: '#111114',
+//   grey80: '#454655',
 //   grey: '#707290',
-//   greyLight: '#A9AABC',
-//   greyPale: '#F7F7FA',
+//   grey40: '#A9AABC',
+//   grey20: '#F7F7FA',
 //   white: '#fff',
 
 //   // Additional
 //   red: '#FF4567',
-//   paleRed: '#FFA5B5',
-//   treal: '#70C9B0',
-//   paleTreal: '#DBF0F1',
+//   errorLight: '#FFA5B5',
+//   success: '#70C9B0',
+//   successLight: '#DBF0F1',
 //   love: '#e6282b',
 
 //   textDefault: '#111114',

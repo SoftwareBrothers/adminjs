@@ -31,7 +31,7 @@ const Sidebar: React.FC<Props> = (props) => {
         <SidebarBranding branding={branding} />
       </Box>
       <Box flexGrow={1}>
-        <Label uppercase ml="lg" color="grey">{translateLabel('navigation')}</Label>
+        <Label uppercase ml="lg" color="grey60">{translateLabel('navigation')}</Label>
         {groupResources(resources).map(parent => (
           <SidebarParent parent={parent} key={parent.name} />
         ))}

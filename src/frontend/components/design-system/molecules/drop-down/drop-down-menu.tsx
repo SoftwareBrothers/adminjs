@@ -16,7 +16,7 @@ export const DropDownMenu = styled.div<DropDownMenuProps>`
   z-index: 40;
   right: 0;
   top: 24px;
-  box-shadow: 0 3px 6px ${({ theme }): string => theme.colors.greyLight};
+  box-shadow: 0 3px 6px ${({ theme }): string => theme.colors.grey40};
   min-width: 200px;
   ${({ isVisible }): string => (isVisible ? '' : 'display: none;')};
   ${position};

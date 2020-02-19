@@ -15,14 +15,14 @@ export default {
 }
 
 export const TopBar: React.FC = () => (
-  <Box height="64px" flex flexDirection="row" borderBottom="1px solid" borderColor="greyPale">
+  <Box height="64px" flex flexDirection="row" borderBottom="1px solid" borderColor="grey20">
     <Box flexGrow={1}>
       <Box py="default" px="xxl">
-        <Text color="grey">
+        <Text color="grey60">
           <b>Admin: </b>
           1.7.1
         </Text>
-        <Text color="grey">
+        <Text color="grey60">
           <b>App: </b>
           1.7.1
         </Text>

@@ -6,6 +6,7 @@ const variants = variant({
   variants: {
     filter: {
       color: 'white',
+      borderColor: 'filterInputBorder',
     },
   },
 })
@@ -26,22 +27,22 @@ const variants = variant({
  */
 export const InputCSS = css`
   box-sizing: border-box;
-  color: ${({ theme }): string => theme.colors.darkGrey};
+  color: ${({ theme }): string => theme.colors.grey80};
   background: transparent;
-  border: 1px solid ${({ theme }): string => theme.colors.greyLight};
+  border: 1px solid ${({ theme }): string => theme.colors.inputBorder};
   font-size: ${({ theme }): string => theme.fontSizes.default};
   line-height: ${({ theme }): string => theme.lineHeights.lg};
   font-family: ${({ theme }): string => theme.font};
   outline: none;
   &:hover {
-    border-color: ${({ theme }): string => theme.colors.grey};
+    border-color: ${({ theme }): string => theme.colors.grey60};
   }
   &:focus {
-    border-color: ${({ theme }): string => theme.colors.bluePrimary};
+    border-color: ${({ theme }): string => theme.colors.primary100};
     ${({ theme }): string => focusShadowStyle(theme)};
   }
   &:disabled {
-    color: ${({ theme }): string => theme.colors.greyLight};
+    color: ${({ theme }): string => theme.colors.grey40};
   }
   ${variants}
 `

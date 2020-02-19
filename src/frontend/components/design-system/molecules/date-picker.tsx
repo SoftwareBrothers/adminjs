@@ -20,24 +20,24 @@ const StyledDatePicker = styled(InputGroup)`
 
   & .react-datepicker {
     border-radius: 0;
-    border: 1px solid ${({ theme }): string => theme.colors.bluePrimary};
+    border: 1px solid ${({ theme }): string => theme.colors.primary100};
     padding: ${({ theme }): string => theme.space.default};
     font-family: ${({ theme }): string => theme.font};
     z-index: 101;
   }
 
   & .react-datepicker__navigation--next {
-    border-left-color: ${({ theme }): string => theme.colors.blueLight};
+    border-left-color: ${({ theme }): string => theme.colors.primary60};
   }
   & .react-datepicker__navigation--next:hover {
-    border-left-color: ${({ theme }): string => theme.colors.bluePrimary};
+    border-left-color: ${({ theme }): string => theme.colors.primary100};
   }
 
   & .react-datepicker__navigation--previous {
-    border-right-color: ${({ theme }): string => theme.colors.blueLight};
+    border-right-color: ${({ theme }): string => theme.colors.primary60};
   }
   & .react-datepicker__navigation--previous:hover {
-    border-right-color: ${({ theme }): string => theme.colors.bluePrimary};
+    border-right-color: ${({ theme }): string => theme.colors.primary100};
   }
 
   & .react-datepicker__navigation {
@@ -61,15 +61,15 @@ const StyledDatePicker = styled(InputGroup)`
   }
 
   & .react-datepicker__day-name {
-    color: ${({ theme }): string => theme.colors.blueLight};
+    color: ${({ theme }): string => theme.colors.primary60};
   }
   
   & .react-datepicker__day--outside-month {
-    color: ${({ theme }): string => theme.colors.greyLight};
+    color: ${({ theme }): string => theme.colors.grey40};
   }
   
   & .react-datepicker__day--today {
-    color: ${({ theme }): string => theme.colors.bluePrimary};
+    color: ${({ theme }): string => theme.colors.primary100};
   }
 
   & .react-datepicker__day:hover,
@@ -78,7 +78,7 @@ const StyledDatePicker = styled(InputGroup)`
   }
   
   & .react-datepicker__day--selected {
-    background: ${({ theme }): string => theme.colors.bluePrimary};
+    background: ${({ theme }): string => theme.colors.primary100};
     border-radius: 15px;
     color: ${({ theme }): string => theme.colors.white};
   }

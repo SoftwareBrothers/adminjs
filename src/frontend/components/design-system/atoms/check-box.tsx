@@ -41,7 +41,7 @@ type StyledProps = {
 
 const checkboxBackground = (theme, checked, disabled): string => {
   if (checked) {
-    return disabled ? theme.colors.greyLight : theme.colors.bluePrimary
+    return disabled ? theme.colors.grey40 : theme.colors.primary100
   }
   return theme.colors.white
 }
@@ -52,7 +52,7 @@ const StyledCheckbox = styled.a<StyledProps>`
   /* when it is placed within a container setting different font size */
   font-size: 12px;
   cursor: pointer;
-  border: 1px solid ${({ theme }): string => theme.colors.greyLight};
+  border: 1px solid ${({ theme }): string => theme.colors.grey40};
   height: 16px;
   background: ${({ checked, theme, disabled }): string => checkboxBackground(theme, checked, disabled)};
   transition: all 150ms;
@@ -62,7 +62,7 @@ const StyledCheckbox = styled.a<StyledProps>`
     ${({ theme }): string => focusShadowStyle(theme)};
   }
   ${HiddenCheckbox}:hover + & {
-    border-color: ${({ theme }): string => theme.colors.grey};
+    border-color: ${({ theme }): string => theme.colors.grey60};
   }
   ${Icon} {
     visibility: ${(props): string => (props.checked ? 'visible' : 'hidden')};
@@ -76,7 +76,7 @@ const StyledCheckbox = styled.a<StyledProps>`
     width: 24px;
     height: 24px;
     opacity: 0;
-    background: ${({ theme }): string => theme.colors.bluePrimary};
+    background: ${({ theme }): string => theme.colors.primary100};
   }
   &:after:before {
     opacity: 0.1;

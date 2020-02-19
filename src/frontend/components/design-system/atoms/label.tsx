@@ -59,7 +59,7 @@ export const Label = styled.label<LabelProps>`
 
   &:before {
     content: "${({ required }): string => (required ? '*' : '')}";
-    color: ${({ theme }): string => theme.colors.bluePrimary};
+    color: ${({ theme }): string => theme.colors.primary100};
     margin-right: ${({ theme }): string => theme.space.sm};
     display: ${({ required }): string => (required ? 'block-inline' : 'none')};
   }
@@ -69,7 +69,7 @@ export const Label = styled.label<LabelProps>`
   ${color};
   ${typography};
   ${space};
-  ${({ disabled, theme }): string => (disabled ? `color: ${theme.colors.greyLight};` : '')}
+  ${({ disabled, theme }): string => (disabled ? `color: ${theme.colors.grey40};` : '')}
 `
 
 export default Label

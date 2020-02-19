@@ -10,7 +10,7 @@ import { Box, Icon, Text } from '../design-system'
 
 const NavBar = styled(Box)`
   height: ${({ theme }): string => theme.sizes.navbarHeight};
-  border-bottom: 1px solid ${({ theme }): string => theme.colors.greyPale};
+  border-bottom: 1px solid ${({ theme }): string => theme.colors.grey20};
   background: ${({ theme }): string => theme.colors.white};
   display: flex;
   flex-direction: row;

@@ -11,23 +11,23 @@ export const DropDownItem = styled.span<SpaceProps>`
   position: relative;
   z-index: 10000;
   border: none;
-  color: ${({ theme }): string => theme.colors.darkGrey};
+  color: ${({ theme }): string => theme.colors.grey80};
   display: block;
   font-family: ${({ theme }): string => theme.font};
   border: solid transparent;
   border-width: 0 ${({ theme }): string => theme.space.sm};
   &:hover {
-    border-color: ${({ theme }): string => theme.colors.bluePrimary};
-    background: ${({ theme }): string => theme.colors.greyPale};
+    border-color: ${({ theme }): string => theme.colors.primary100};
+    background: ${({ theme }): string => theme.colors.grey20};
   }
   & svg {
     vertical-align: middle;
     padding-bottom: 2px;
     padding-right: ${({ theme }): string => theme.space.default};
-    fill: ${({ theme }): string => theme.colors.greyLight};
+    fill: ${({ theme }): string => theme.colors.grey40};
   }
   & a {
-    color: ${({ theme }): string => theme.colors.darkGrey};
+    color: ${({ theme }): string => theme.colors.grey80};
   }
 
   ${space};

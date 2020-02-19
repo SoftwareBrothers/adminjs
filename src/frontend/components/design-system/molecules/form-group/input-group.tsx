@@ -20,10 +20,10 @@ const InputGroup = styled.div`
   }
   ${Label}, ${Button}:last-child, ${Link}:last-child {
     padding: ${({ theme }): string => theme.space.sm};
-    border: solid ${({ theme }): string => theme.colors.greyLight};
+    border: solid ${({ theme }): string => theme.colors.grey40};
     border-width: 1px 1px 1px 0;
     margin: 0;
-    color: ${({ theme }): string => theme.colors.greyLight};
+    color: ${({ theme }): string => theme.colors.grey40};
   }
 
   ${Label}, ${Button}, ${Link} {
@@ -40,12 +40,12 @@ const InputGroup = styled.div`
 
   ${Input}:hover {
     & + ${Label}, & + ${Button}, & + ${Link} {
-      border-color: ${({ theme }): string => theme.colors.grey};
+      border-color: ${({ theme }): string => theme.colors.grey60};
     }
   } 
   ${Input}:focus {
     & + ${Label}, & + ${Button}, & + ${Link} {
-      border-color: ${({ theme }): string => theme.colors.bluePrimary};
+      border-color: ${({ theme }): string => theme.colors.primary100};
     }
   } 
 `
