@@ -1,3 +1,4 @@
+/* eslint-disable no-shadow */
 import styled from 'styled-components'
 import { space, SpaceProps, variant } from 'styled-system'
 import DrawerFooter from './drawer-footer'
@@ -99,7 +100,7 @@ export const Drawer = styled.section<DrawerProps>`
   background: ${({ theme }): string => theme.colors.white};
   box-sizing: border-box;
   & > ${DrawerFooter} {
-    ${({ variant, theme }) => (variant === 'filter' ? `border-color: ${theme.colors.filterInputBorder}` : '')};
+    ${({ variant, theme }): string => (variant === 'filter' ? `border-color: ${theme.colors.filterInputBorder}` : '')};
   }
   
 
