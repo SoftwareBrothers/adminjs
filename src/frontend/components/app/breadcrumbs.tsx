@@ -1,11 +1,10 @@
-import React, { ReactNode } from 'react'
+import React from 'react'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 
 import ResourceJSON from '../../../backend/decorators/resource-json.interface'
 import RecordJSON from '../../../backend/decorators/record-json.interface'
 import { Box } from '../design-system'
-import { useTranslation } from '../../hooks'
 
 const BreadcrumbLink = styled(Link)`
   color: ${({ theme }): string => theme.colors.greyLight};
