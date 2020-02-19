@@ -43,7 +43,6 @@ const New: FC<ActionProps> = (props) => {
       flex
       flexGrow={1}
       flexDirection="column"
-      height={1}
     >
       <DrawerContent>
         {action?.showInDrawer ? <ActionHeader {...props} /> : null}
