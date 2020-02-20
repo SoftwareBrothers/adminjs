@@ -23,6 +23,7 @@ Started since version 0.9.5
 ** drop bulma CDN dependency
 ** drop font-awesome CDN dependency
 ** move most of the dependencies to the global.bundle
+** ui is responsive
 
 ### Fixed
 
