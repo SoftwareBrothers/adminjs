@@ -11,6 +11,7 @@ import {
 } from '../../design-system'
 import ViewHelpers from '../../../../backend/utils/view-helpers'
 import { useTranslation } from '../../../hooks/use-translation'
+import { display } from './records-table-header'
 
 type Props = {
   resource: ResourceJSON;
@@ -64,6 +65,7 @@ const RecordInList: React.FC<Props> = (props) => {
           style={{ cursor: 'pointer' }}
           key={property.name}
           data-property-name={property.name}
+          display={display(property.isTitle)}
         >
           {isLoading ? (
             <Placeholder style={{ height: 14 }} />

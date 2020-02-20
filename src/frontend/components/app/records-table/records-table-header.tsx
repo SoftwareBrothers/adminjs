@@ -36,6 +36,13 @@ type Props = {
   selectedAll?: boolean;
 }
 
+export const display = (isTitle: boolean): Array<string> => [
+  isTitle ? 'table-cell' : 'none',
+  isTitle ? 'table-cell' : 'none',
+  'table-cell',
+  'table-cell',
+]
+
 /**
  * Prints `thead` section for table with records.
  *
@@ -94,6 +101,7 @@ const RecordsTableHeader: React.FC<Props> = (props) => {
         ) : null}
         {properties.map(property => (
           <PropertyHeader
+            display={display(property.isTitle)}
             key={property.name}
             titleProperty={titleProperty}
             property={property}

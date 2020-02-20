@@ -12,10 +12,12 @@ const variants = variant({
     grey: {
       flexGrow: 1,
       bg: 'grey20',
-      p: 'xl',
+      py: 'xl',
+      px: ['0', 'xl'],
     },
     white: {
-      p: 'xxl',
+      px: ['default', 'xxl'],
+      py: 'xxl',
       bg: 'white',
     },
   },

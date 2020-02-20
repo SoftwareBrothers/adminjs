@@ -211,9 +211,10 @@ const shadows = {
 }
 
 const breakpoints = [
-  '576px',
+  '577px',
+  '769px',
   '1024px',
-  '1280px',
+  '1324px', // 1024 + sidebarWidth
 ]
 
 const font = '\'Roboto\', sans-serif'

@@ -18,15 +18,20 @@ type Props = {
    * currently selected field by which list is sorted.
    */
   sortBy?: string;
+
+  display?: string | Array<string>;
 }
 
 const PropertyHeader: React.FC<Props> = (props) => {
-  const { property, titleProperty } = props
+  const { property, titleProperty, display } = props
 
   const isMain = property.name === titleProperty.name
 
   return (
-    <TableCell className={isMain ? 'main' : undefined}>
+    <TableCell
+      className={isMain ? 'main' : undefined}
+      display={display}
+    >
       {property.isSortable ? <SortLink {...props} /> : property.label}
     </TableCell>
   )

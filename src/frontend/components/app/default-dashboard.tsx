@@ -104,7 +104,7 @@ const Dashboard: React.FC = () => {
         mt={['xl', 'xl', '-100px']}
         mb="xl"
         mx={[0, 0, 0, 'auto']}
-        px={['default', 'lg', 'xxl', 'auto']}
+        px={['default', 'lg', 'xxl', '0']}
         position="relative"
         flex
         flexDirection="row"

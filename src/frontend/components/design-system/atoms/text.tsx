@@ -1,6 +1,16 @@
 import styled from 'styled-components'
 
-import { typography, TypographyProps, space, SpaceProps, variant, color, ColorProps } from 'styled-system'
+import {
+  typography,
+  TypographyProps,
+  space,
+  SpaceProps,
+  variant,
+  color,
+  ColorProps,
+  layout,
+  LayoutProps,
+} from 'styled-system'
 
 const variants = variant({
   variants: {
@@ -26,7 +36,7 @@ const variants = variant({
  * @property {string} [...] Other props from {@link ColorProps}, {@link SpaceProps}
  *                          and {@link TypographyProps}
  */
-export type TextProps = TypographyProps & SpaceProps & ColorProps & {
+export type TextProps = TypographyProps & SpaceProps & ColorProps & LayoutProps & {
   /** Optional variant of a <Text /> component */
   variant?: 'xs' | 'sm' | 'lg';
   /** Define this if you want to render element as something other than div */
@@ -68,6 +78,7 @@ export const Text = styled.div<TextProps>`
 
   ${typography};
   ${space};
+  ${layout};
   ${color};
   ${variants};
 `

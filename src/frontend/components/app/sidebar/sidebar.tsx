@@ -25,7 +25,7 @@ const Sidebar: React.FC<Props> = (props) => {
   return (
     <Navigation
       className={isVisible ? 'visible' : 'hidden'}
-      position={['absolute', 'absolute', 'inherit']}
+      position={['absolute', 'absolute', 'absolute', 'absolute', 'inherit']}
     >
       <Box flexShrink={0} px="lg" pb="xxl">
         <SidebarBranding branding={branding} />

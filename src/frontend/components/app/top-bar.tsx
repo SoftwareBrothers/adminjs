@@ -6,7 +6,7 @@ import LoggedIn from './logged-in'
 import Version from './version'
 
 import { ReduxState } from '../../store/store'
-import { Box, Icon, Text } from '../design-system'
+import { Box, Icon } from '../design-system'
 
 const NavBar = styled(Box)`
   height: ${({ theme }): string => theme.sizes.navbarHeight};
@@ -29,9 +29,10 @@ const TopBar: React.FC<Props> = (props) => {
   return (
     <NavBar>
       <Box
-        p="lg"
+        py="lg"
+        px={['default', 'lg']}
         onClick={toggleSidebar}
-        display={['block', 'block', 'none']}
+        display={['block', 'block', 'block', 'block', 'none']}
       >
         <Icon icon="Menu" size={32} />
       </Box>

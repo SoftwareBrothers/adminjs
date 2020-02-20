@@ -76,7 +76,7 @@ const ActionHeader: React.FC<ActionHeaderProps> = (props) => {
   return (
     <React.Fragment>
       {action.showInDrawer ? '' : (
-        <Box flex flexDirection="row">
+        <Box flex flexDirection="row" px={['default', 0]}>
           <Breadcrumbs resource={resource} actionName={action.name} record={record} />
           <Box flexShrink={0}>
             {customResourceActions.map(customAction => (
@@ -94,8 +94,8 @@ const ActionHeader: React.FC<ActionHeaderProps> = (props) => {
           </Box>
         </Box>
       )}
-      <Box flex={cssIsRootFlex}>
-        <Box mt={cssHeaderMT} flexGrow={1}>
+      <Box display={['block', cssIsRootFlex ? 'flex' : 'block']}>
+        <Box mt={cssHeaderMT} flexGrow={1} px={['default', 0]}>
           <CssHComponent mb="lg">
             {!isList ? (
               <StyledLink
