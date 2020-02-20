@@ -1,7 +1,9 @@
 /* eslint-disable no-shadow */
 import styled from 'styled-components'
-import { space, SpaceProps, variant } from 'styled-system'
+import { space, SpaceProps, LayoutProps, variant, layout } from 'styled-system'
 import DrawerFooter from './drawer-footer'
+
+const DEFAULT_WIDTH = '500px'
 
 /**
  * Props for Drawer component. Apart from those described below it also extends all
@@ -10,7 +12,7 @@ import DrawerFooter from './drawer-footer'
  * @alias DrawerProps
  * @memberof Drawer
  */
-export type DrawerProps = SpaceProps & {
+export type DrawerProps = SpaceProps & LayoutProps & {
   /** Indicates if drawer should be hidden */
   isHidden?: boolean;
   /**
@@ -25,9 +27,6 @@ const variants = variant({
       bg: 'filterBg',
       width: '400px',
       color: 'white',
-      '& > *': {
-        width: '400px',
-      },
     },
   },
 })
@@ -82,16 +81,12 @@ const variants = variant({
  * )
  */
 export const Drawer = styled.section<DrawerProps>`
-  width: 500px;
-  & > * {
-    width: 500px;
-  }
   z-index: 100;
   position: fixed;
   display: flex;
   flex-direction: column;
   top: 0;
-  right: 0;
+  right: ${({ isHidden, width }): string => (isHidden ? `-${width?.toString()}` : '0px;')};;
   box-shadow: 0 3px 6px ${({ theme }): string => theme.colors.grey40};
   height: 100%;
   overflow-y: auto;
@@ -102,12 +97,15 @@ export const Drawer = styled.section<DrawerProps>`
   & > ${DrawerFooter} {
     ${({ variant, theme }): string => (variant === 'filter' ? `border-color: ${theme.colors.filterInputBorder}` : '')};
   }
+  max-width: 100%;
   
-
   ${space};
+  ${layout};
   ${variants};
-
-  ${({ isHidden }): string => (isHidden ? 'width: 0px;' : '')};
 `
+
+Drawer.defaultProps = {
+  width: DEFAULT_WIDTH,
+}
 
 export default Drawer
