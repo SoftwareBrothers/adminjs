@@ -15,7 +15,6 @@ const ShowAction: Action<RecordActionResponse> = {
   isVisible: true,
   actionType: 'record',
   icon: 'Screen',
-  label: 'Info',
   showInDrawer: true,
   /**
    * Responsible for returning data for given record.

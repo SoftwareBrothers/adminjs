@@ -36,7 +36,7 @@ export default interface PropertyJSON {
    */
   label: string;
   /**
-   * Property type
+   * One of {@link PropertyType}s
    */
   type: PropertyType;
   /**
@@ -49,11 +49,12 @@ export default interface PropertyJSON {
    */
   isArray: boolean;
   /**
-   * Contain list of all sub properties
+   * Contain list of all sub properties.
+   * This is the case for nested schemas in MongoDB.
    */
   subProperties: Array<PropertyJSON>;
   /**
-   * All components overridden by the user in PropertyOptions
+   * All component names overridden by the user in PropertyOptions
    */
   components?: {
     show?: string;
@@ -63,7 +64,7 @@ export default interface PropertyJSON {
   };
 
   /**
-   * Custom parameters passed from the {@link PropertyOptions.custom}
+   * Custom parameters passed from the {@link PropertyOptions.custom}.
    */
   custom: {
     [key: string]: boolean | string | number | Date;

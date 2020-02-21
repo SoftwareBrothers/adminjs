@@ -35,7 +35,7 @@ const SidebarPages: React.FC<Props> = (props) => {
           isActive={(match, location): boolean => isActive(page, location)}
           data-testid="sidebar-page-link"
         >
-          <Text as="span">{page.label}</Text>
+          <Text as="span">{translateLabel(page.name)}</Text>
         </SidebarLink>
       ))}
     </Box>

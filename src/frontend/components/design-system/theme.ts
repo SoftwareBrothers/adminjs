@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 /**
  * @interface Theme
  * @subcategory Frontend
@@ -22,9 +23,9 @@
  * `
  * ```
  *
- * But, since AdminBro uses styled-system, you also can achieve a similar result by passing
- * a `bg` Prop to the [Box Component]{@link Box}, everything because Box supports
- * all the {@link ColorProps}.
+ * But, since AdminBro uses (styled-system)[https://styled-system.com/], you also can achieve
+ * a similar result by passing a `bg` Prop to the [Box Component]{@link Box},
+ * everything because Box supports all the {@link ColorProps}.
  *
  * ```javascript
  * import { Box } from 'admin-bro'
@@ -35,31 +36,84 @@
  *   </Box>
  * )
  * ```
+ *
+ * The last way of accessing theme is to use withTheme HOC provided by
+ * (styled-components)[https://styled-components.com/]
+ *
+ * ```
+ * import { withTheme } from 'styled-components'
+ *
+ *
+ * const MyComponent = (props) => {
+ *   const { theme } = props
+ *   // theme.colors.primary100
+ * }
+ *
+ * export default withTheme(MyComponent)
+ *
+ * ```
+ *
+ * {@link ColorProps} is only one of the extensions we provided. Take a look at the documentation
+ * below to see all possible options, but let me give you one last example:
+ *
+ * ```
+ * import { Box } from 'admin-bro'
+ *
+ * const ComponentWhereIWantToUseResponsiveStyle = () => (
+ *   <Box flex flexDirection="column">
+ *     <Box width={[1, 1/2, 1/3]}>Sidebar</Box>
+ *     <Box width={[1, 1/2, 2/3]}>Content</Box>
+ *   </Box>
+ * )
+ * ```
+ *
+ * Above we defined that the Sidebar box should have 100% width until viewport reach the first
+ * breakpoint, then 50% (until the next breakpoint) and then 1/3rd of the page for the remaining 2
+ * breakpoints.
+ *
+ * You can read more about responsive features on styled-system page
+ * https://styled-system.com/responsive-styles
+ *
+ * <style>
+ * .shadow-div { display: block; width: 80px; height: 80px;}
+ * .space-box { display: inline-block; height: 20px; background: #4268F6; vertical-align: middle;}
+ * </style>
  */
 
 /**
+ * Color palette.
+ *
  * @memberof Theme
  * @alias colors
- *
- * @property {string} primary100=#4268F6       <div style="background: #4268F6; height: 20px;" />
- * @property {string} primary80=#6483F8            <div style="background: #6483F8; height: 20px" />
- * @property {string} primary60=#879FFA         <div style="background: #879FFA; height: 20px" />
- * @property {string} primary40=#A9BAFA            <div style="background: #A9BAFA; height: 20px" />
- * @property {string} primary20=#CBD5FD          <div style="background: #CBD5FD; height: 20px" />
- * @property {string} hoverBg=#535B8E         <div style="background: #535B8E; height: 20px" />
- * @property {string} accent=#38CAF1     <div style="background: #38CAF1; height: 20px" />
- * @property {string} filterBg=#343F87        <div style="background: #343F87; height: 20px" />
- * @property {string} grey100=#1C1C38             <div style="background: #1C1C38; height: 20px" />
- * @property {string} grey80=#454655          <div style="background: #454655; height: 20px" />
- * @property {string} grey60=#898A9A              <div style="background: #898A9A; height: 20px" />
- * @property {string} grey40=#C0C0CA         <div style="background: #C0C0CA; height: 20px" />
- * @property {string} grey20=#F6F7FB          <div style="background: #F6F7FB; height: 20px" />
- * @property {string} white=#fff                <div style="background: #fff; height: 20px" />
- * @property {string} red=#FF4567               <div style="background: #FF4567; height: 20px" />
- * @property {string} errorLight=#FFA5B5           <div style="background: #FFA5B5; height: 20px" />
- * @property {string} success=#70C9B0             <div style="background: #70C9B0; height: 20px" />
- * @property {string} successLight=#DBF0F1         <div style="background: #DBF0F1; height: 20px" />
- * @property {string} love=#e6282b              <div style="background: #e6282b; height: 20px" />
+ * @property {string} primary100=#4268F6      <div style="background: #4268F6; height: 20px;" />
+ * @property {string} primary80=#6483F8     <div style="background: #6483F8; height: 20px;" />
+ * @property {string} primary60=#879FFA     <div style="background: #879FFA; height: 20px;" />
+ * @property {string} primary40=#A9BAFA     <div style="background: #A9BAFA; height: 20px;" />
+ * @property {string} primary20=#CBD5FD     <div style="background: #CBD5FD; height: 20px;" />
+ * @property {string} accent=#38CAF1      <div style="background: #38CAF1; height: 20px;" />
+ * @property {string} love=#e6282b      <div style="background: #e6282b; height: 20px;" />
+ * @property {string} grey100=#1C1C38     <div style="background: #1C1C38; height: 20px;" />
+ * @property {string} grey80=#454655      <div style="background: #454655; height: 20px;" />
+ * @property {string} grey60=#898A9A      <div style="background: #898A9A; height: 20px;" />
+ * @property {string} grey40=#C0C0CA      <div style="background: #C0C0CA; height: 20px;" />
+ * @property {string} grey20=#F6F7FB      <div style="background: #F6F7FB; height: 20px;" />
+ * @property {string} white=#fff      <div style="background: #fff; height: 20px;" />
+ * @property {string} errorDark=#DE405D     <div style="background: #DE405D; height: 20px;" />
+ * @property {string} error=#FF4567     <div style="background: #FF4567; height: 20px;" />
+ * @property {string} errorLight=#FFA5B5      <div style="background: #FFA5B5; height: 20px;" />
+ * @property {string} successDark=#32A887     <div style="background: #32A887; height: 20px;" />
+ * @property {string} success=#70C9B0     <div style="background: #70C9B0; height: 20px;" />
+ * @property {string} successLight=#DBF0F1      <div style="background: #DBF0F1; height: 20px;" />
+ * @property {string} infoDark=#4268F6      <div style="background: #4268F6; height: 20px;" />
+ * @property {string} info=#879FFA      <div style="background: #879FFA; height: 20px;" />
+ * @property {string} infoLight=#CBD5FD     <div style="background: #CBD5FD; height: 20px;" />
+ * @property {string} filterBg=#343F87      <div style="background: #343F87; height: 20px;" />
+ * @property {string} hoverBg=#535B8E     <div style="background: #535B8E; height: 20px;" />
+ * @property {string} inputBorder=#898A9A     <div style="background: #898A9A; height: 20px;" />
+ * @property {string} separator=#C0C0CA     <div style="background: #C0C0CA; height: 20px;" />
+ * @property {string} highlight=#F6F7FB     <div style="background: #F6F7FB; height: 20px;" />
+ * @property {string} filterInputBorder=rgba(255,255,255,0.15)      <div style="background: rgba(255,255,255,0.15); height: 20px;" />
+ * @property {string} filterDisabled=rgba(83,91,142,0.05)      <div style="background: rgba(83,91,142,0.05); height: 20px;" />
  */
 const colors = {
   // Primary
@@ -108,6 +162,17 @@ const colors = {
 }
 
 /**
+ * Sizes can be used with paddings, margins etc.
+ *
+ * This is the example of using responsive margin with Box component
+ *
+ * ```javascript
+ * <Box p=['default', 'xl']>some content</Box>
+ * ```
+ *
+ * This component will have 8px padding for lowest breakpoint and 24px above
+ * this breakpoint.
+ *
  * @memberof Theme
  * @alias space
 
@@ -201,6 +266,24 @@ const lineHeights = {
   xxl: '40px',
 }
 
+
+/**
+ * This dimension can be used with `testShadow` and `boxShadow` props provided
+ * by {@link ShadowProps}
+ *
+ * ```javascript
+ * <Box variant="grey" boxShadow="card">Some content...</Box>
+ * ```
+ *
+ * @memberof Theme
+ * @alias ShadowProps
+ * @property {string} login              <div class="shadow-div" style="box-shadow: 0 15px 24px 0 rgba(137,138,154,0.15);"/>
+ * @property {string} cardHover          <div class="shadow-div" style="box-shadow: 0 4px 12px 0 rgba(137,138,154,0.4);"/>
+ * @property {string} drawer             <div class="shadow-div" style="box-shadow: -2px 0 8px 0 rgba(137,138,154,0.2);"/>
+ * @property {string} card               <div class="shadow-div" style="box-shadow: 0 1px 6px 0 rgba(137,138,154,0.4);"/>
+ * @property {string} inputFocus         <div class="shadow-div" style="box-shadow: 0 2px 4px 0 rgba(135,159,250,0.4);"/>
+ * @property {string} buttonFocus        <div class="shadow-div" style="box-shadow: 0 4px 6px 0 rgba(56,202,241,0.3);"/>
+ */
 const shadows = {
   login: '0 15px 24px 0 rgba(137,138,154,0.15)',
   cardHover: '0 4px 12px 0 rgba(137,138,154,0.4)',
@@ -210,6 +293,26 @@ const shadows = {
   buttonFocus: '0 4px 6px 0 rgba(56,202,241,0.3)',
 }
 
+/**
+ * Responsive breakpoints
+ *
+ * How to use them - simply pass an array to given prop:
+ *
+ * ```javascript
+ * // Showing box on mobile devices
+ * <Box display={["block", "none"]}>...</Box>
+ *
+ * // responsive width
+ * <Box width={[1, 1/2, 1/3, 1/4]}>...</Box>
+ * ```
+ *
+ * @memberof Theme
+ * @alias breakpoints
+ * @property {string} 0=577px
+ * @property {string} 1=769px
+ * @property {string} 2=1024px
+ * @property {string} 3=1324px
+ */
 const breakpoints = [
   '577px',
   '769px',
@@ -449,4 +552,14 @@ export {
  * property {string | number} [right]
  * property {string | number} [bottom]
  * property {string | number} [left]
+ */
+
+/**
+ * The shadow utility includes style props for textShadow and boxShadow.
+ *
+ * @typedef {object} ShadowProps
+ * @alias ShadowProps
+ * @memberof Theme
+ * property {string} [boxShadow]
+ * property {string} [textShadow]
  */

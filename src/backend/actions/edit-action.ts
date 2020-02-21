@@ -16,7 +16,6 @@ const EditAction: Action<RecordActionResponse> = {
   isVisible: true,
   actionType: 'record',
   icon: 'Edit',
-  label: 'Edit',
   showInDrawer: true,
   /**
    * Responsible for updating existing record.

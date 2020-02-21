@@ -16,7 +16,6 @@ const DeleteAction: Action<RecordActionResponse> = {
   isVisible: true,
   actionType: 'record',
   icon: 'Delete',
-  label: 'Remove',
   guard: 'confirmDelete',
   component: false,
   /**

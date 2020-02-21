@@ -15,7 +15,6 @@ const BulkDeleteAction: Action<BulkActionResponse> = {
   isVisible: true,
   actionType: 'bulk',
   icon: 'Delete',
-  label: 'Remove',
   showInDrawer: true,
   /**
    * Responsible for deleting existing records.

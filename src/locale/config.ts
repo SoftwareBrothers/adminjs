@@ -1,8 +1,6 @@
 import merge from 'lodash/merge'
 import { formatName } from '../utils/translate-functions.factory'
 
-import en from './en'
-
 /**
  * Locale object passed to {@link AdminBroOptions} and stored in the application
  *

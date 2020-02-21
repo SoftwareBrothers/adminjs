@@ -20,7 +20,6 @@ const ListAction: Action<ListActionResponse> = {
   isVisible: true,
   actionType: 'resource',
   showFilter: true,
-  label: 'All records',
   showInDrawer: false,
   /**
    * Responsible for returning data for all records.

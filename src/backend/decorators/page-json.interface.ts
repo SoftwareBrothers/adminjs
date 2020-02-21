@@ -8,10 +8,6 @@ export default interface PageJSON {
    */
   name: string;
   /**
-   * Page label
-   */
-  label: string;
-  /**
    * Page component. Bundled with {@link AdminBro.bundle}
    */
   component: string;

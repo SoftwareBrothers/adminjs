@@ -9,6 +9,20 @@ import { TranslateFunctions, createFunctions } from '../../utils/translate-funct
  * Extends {@link TranslateFunctions}. Apart from that it also returns all the properties
  * defined below.
  *
+ * ```javascript
+ * import { useTranslation } from 'admin-bro'
+ *
+ * const MyComponent = () => {
+ *   const { translateButton } = useTranslation()
+ *
+ *   return (
+ *     <Box>
+ *       <Button variant="primary" onClick={...}>{translateButton('save')}<Button>
+ *     </Box>
+ *   )
+ * }
+ * ```
+ *
  * @memberof useTranslation
  * @alias UseTranslationResponse
  *

@@ -153,12 +153,12 @@ export default interface AdminBroOptions {
   /* cspell: disable */
 
   /**
-   * Translation file. Put there your translations to:
+   * Translation file. Change it in order to:
    * - localize admin panel
    * - change any arbitrary text in the UI
    *
-   * This is the example for changing name of couple of resources along with some
-   * properties to polish
+   * This is the example for changing name of a couple of resources along with some
+   * properties to Polish
    *
    * ```javascript
    * {
@@ -183,14 +183,13 @@ export default interface AdminBroOptions {
    * ```
    *
    * As I mentioned you can use this technic to change any text even in english.
-   * So to change button label for new action from default "Create new" to "Create new Comment"
-   * only for Comment resource:
+   * So to change button label for a "new action" from default "Create new" to "Create new Comment"
+   * only for Comment resource you can do:
    *
    * ```javascript
    * {
    *   ...
    *   locale: {
-   *     language: 'en',
    *     translations: {
    *       resources: {
    *         Comments: {
@@ -203,6 +202,9 @@ export default interface AdminBroOptions {
    *   }
    * }
    * ```
+   *
+   * Check out the [i18n tutorial]{@tutorial 09-i18n} to see how
+   * internationalization in AdminBro works.
    */
   locale?: Locale;
 }
@@ -300,10 +302,6 @@ export type AdminPage = {
    * Component defined by using {@link AdminBro.bundle}
    */
   component: string;
-  /**
-   * Page label
-   */
-  label?: string;
 }
 
 /**

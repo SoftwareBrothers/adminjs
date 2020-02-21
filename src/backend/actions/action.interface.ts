@@ -15,8 +15,8 @@ import { TranslateFunctions } from '../../utils/translate-functions.factory'
  * Apart from the properties defined below it also extends {@link TranslateFunctions}.
  * So you can use i.e. context.translateMessage(...) and others...
  *
- * @property {TranslateFunction} ...      all functions from {@link TranslateFunctions}
- *                                        interface.
+ * @property {TranslateFunction} {...}      all functions from {@link TranslateFunctions}
+ *                                          interface.
  *
  * @memberof Action
  * @alias ActionContext
@@ -240,7 +240,6 @@ export type After<T> = (
  * ```
  * const action = {
  *   actionType: 'record',
- *   label: 'Publish',
  *   icon: 'View',
  *   isVisible: true,
  *   handler: async () => {...},
@@ -275,7 +274,7 @@ export type After<T> = (
  *         // example of overriding existing 'new' action for
  *         // User resource.
  *         new: {
- *           label: 'Create new record'
+ *           icon: 'Add'
  *         },
  *         // Example of creating a new 'myNewAction' which will be
  *         // a resource action available for User model
@@ -364,10 +363,6 @@ export default interface Action <T extends ActionResponse> {
    */
   isAccessible?: boolean | IsFunction;
   /**
-   * name of the action which will appear in the UI
-   */
-  label?: string;
-  /**
    * if filter should be visible on the sidebar. Only for _resource_ actions
    *
    * Example of creating new resource action with filter
@@ -377,7 +372,6 @@ export default interface Action <T extends ActionResponse> {
    *   resource: Car,
    *   options: { actions: {
    *     newAction: {
-   *       label: 'New action',
    *       type: 'resource',
    *       showFilter: true,
    *     }
@@ -396,7 +390,7 @@ export default interface Action <T extends ActionResponse> {
   actionType: 'resource' | 'record' | 'bulk';
   /**
    * icon name for the action. Take a look {@link Icon} component,
-   * because what you put here it is passed down to it.
+   * because what you put here is passed down to it.
    *
    * ```javascript
    * new AdminBro({ resources: [{
@@ -414,11 +408,15 @@ export default interface Action <T extends ActionResponse> {
    *   resource: Car,
    *   options: { actions: {
    *     delete: {
-   *       guard: 'do you really want to delete this amazing element?',
+   *       guard: 'doYouReallyWantToDoThis',
    *     }
    *   }}
    * }]})
    * ```
+   *
+   * What you enter there goes to {@link TranslateFunctions#translateMessage} function,
+   * so in order to define the actual message you will have to specify its
+   * translation in {@link AdminBroOptions.Locale}
    */
   guard?: string;
   /**
@@ -458,7 +456,7 @@ export default interface Action <T extends ActionResponse> {
    * ```
    *
    * Required for new actions. For modifying already defined actions
-   * like new and edit please use {@link Action#before} and {@link Action#after} hooks.
+   * like new and edit we suggest using {@link Action#before} and {@link Action#after} hooks.
    */
   handler: ActionHandler<T>;
   /**

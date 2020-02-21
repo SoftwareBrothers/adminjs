@@ -14,7 +14,6 @@ const NewAction: Action<RecordActionResponse> = {
   isVisible: true,
   actionType: 'resource',
   icon: 'Add',
-  label: 'Add new',
   showInDrawer: true,
   /**
    * Responsible for creating new record.

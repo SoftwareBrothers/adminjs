@@ -71,8 +71,19 @@ const Wrapper = styled.span<IconProps>`
 `
 
 /**
- * Component wrapping '@carbon/icons-react'. List of all icons can be found
- * here: https://www.carbondesignsystem.com/guidelines/icons/library/
+ * Component wrapping [@carbon/icons-react](https://www.npmjs.com/package/@carbon/icons-react).
+ * List of all icons can be found here: https://www.carbondesignsystem.com/guidelines/icons/library/
+ * but keys are not always 1 to 1 in a relation to the `icons-react` library.
+ * If you have problem verifying the key of given icon - you can always open the
+ * Chrome Terminal (with AdminBro open) and write there:
+ *
+ * ```
+ * Object.keys(CarbonIcons)
+ * ```
+ *
+ * to see list of all possible icon keys.
+ *
+ *
  *
  * @component
  * @subcategory Atoms

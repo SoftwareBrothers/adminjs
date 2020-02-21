@@ -1,9 +1,8 @@
 /* eslint class-methods-use-this: 0 object-curly-newline: 0 */
 
-const TITLE_COLUMN_NAMES = ['title', 'name', 'subject', 'email']
-
 /**
- * @typedef {string} PropertyType
+ * @name PropertyType
+ * @typedef {object} PropertyType
  * @memberof BaseProperty
  * @alias PropertyType
  * @property {string} string      default property type
@@ -18,11 +17,16 @@ const TITLE_COLUMN_NAMES = ['title', 'name', 'subject', 'email']
  * @property {string} textarea    resizable textarea input
  * @property {string} password    password field
  */
+
+// Spacer
+const TITLE_COLUMN_NAMES = ['title', 'name', 'subject', 'email']
+
 export type PropertyType =
   'string' | 'float' | 'number' | 'boolean' |
   'date' | 'datetime' | 'mixed' | 'reference' |
   'richtext' | 'textarea' | 'password';
 
+// description
 type BasePropertyAttrs = {
   path: string;
   type?: PropertyType;
@@ -52,7 +56,7 @@ class BaseProperty {
    *                                                   property is for an object the path can be
    *                                                   divided to parts by dots: i.e.
    *                                                   'address.street'
-   * @param  {string}  [options.type='string']         one if: string, float, number, boolean, date
+   * @param  {PropertyType}  [options.type='string']
    * @param  {boolean} [options.isId=false]            true when field should be treated as an ID
    * @param  {boolean} [options.isSortable=true]       if property should be sortable
    */

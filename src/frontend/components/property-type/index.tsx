@@ -146,7 +146,7 @@ type State = {
  *   recordActions: [],
  * }
  * const Wrapper = () => {
- *   const { record, handleChange } = useResource(initialRecord, resource.id)
+ *   const { record, handleChange, submit } = useRecord(initialRecord, resource.id)
  *   const params = JSON.stringify(record.params)
  *   return (
  *     <Box py="lg">
@@ -167,6 +167,12 @@ type State = {
  *      <Box>
  *        <Label>Params:</Label>
  *        {params}
+ *      </Box>
+ *      <Box my="lg">
+ *        <Button variant="primary" onClick={submit}>Submit</Button>
+ *        <Text variant="sm">
+ *          This will throw an error because there is no AdminBro instance running
+ *        </Text>
  *      </Box>
  *     </Box>
  *   )

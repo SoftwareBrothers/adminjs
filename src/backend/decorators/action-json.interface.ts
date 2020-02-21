@@ -39,7 +39,7 @@ export default interface ActionJSON {
   showInDrawer: boolean;
 
   /**
-   * Id of a resource to which given belongs.
+   * Id of a resource to which given action belongs.
    */
   resourceId: string;
 }

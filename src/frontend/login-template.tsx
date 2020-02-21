@@ -3,7 +3,7 @@ import React from 'react'
 import { renderToString } from 'react-dom/server'
 import { ServerStyleSheet, ThemeProvider } from 'styled-components'
 import { Store } from 'redux'
-import { initReactI18next, I18nextProvider } from 'react-i18next'
+import { I18nextProvider } from 'react-i18next'
 import i18n from 'i18next'
 
 import { Provider } from 'react-redux'
@@ -17,8 +17,6 @@ import createStore, {
 } from './store/store'
 import combineStyles from './styles/combine-styles'
 import ViewHelpers from '../backend/utils/view-helpers'
-
-const onProd = process.env.NODE_ENV === 'production'
 
 type LoginTemplateAttributes = {
   /**

@@ -21,10 +21,6 @@ export interface ResourceOptions {
    */
   id?: string;
   /**
-   * Name of a resource
-   */
-  name?: string;
-  /**
    * List of properties which should be visible on a list
    */
   listProperties?: Array<string>;
