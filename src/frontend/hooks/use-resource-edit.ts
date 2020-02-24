@@ -72,7 +72,7 @@ const useResourceEdit = (
       .catch((error) => {
         setLoading(false)
         onNotice({
-          message: error.response?.data.notice
+          message: error.response?.data.message
             ?? 'There was an error updating record, Check out console to see more information.',
           type: 'error',
         })
