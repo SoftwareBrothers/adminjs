@@ -1,9 +1,9 @@
 /* eslint-disable max-len */
 /* eslint no-unused-vars: 0 */
+import HttpError from 'http-errors'
 import populator from '../utils/populator'
 import Filter from '../utils/filter'
 import ViewHelpers from '../utils/view-helpers'
-import ForbiddenError from '../utils/forbidden-error'
 import { CurrentAdmin } from '../../current-admin.interface'
 import AdminBro from '../../admin-bro'
 import { ActionContext, ActionRequest, RecordActionResponse, ActionResponse, BulkActionResponse } from '../actions/action.interface'
@@ -91,7 +91,7 @@ class ApiController {
     const resource = this._admin.findResource(request.params.resourceId)
     const decorated = resource.decorate()
     if (!decorated.actions.list.isAccessible(this.currentAdmin)) {
-      throw new ForbiddenError({ actionName: 'list', resourceId: resource.id() })
+      throw new HttpError.Forbidden()
     }
     const titlePropertyName = decorated.titleProperty().name()
 
@@ -125,10 +125,7 @@ class ApiController {
   async resourceAction(request: ActionRequest, response: any): Promise<ActionResponse> {
     const actionContext = await this.getActionContext(request)
     if (!actionContext.action.isAccessible(this.currentAdmin)) {
-      throw new ForbiddenError({
-        actionName: actionContext.action.name,
-        resourceId: actionContext.resource.id(),
-      })
+      throw new HttpError.Forbidden()
     }
     return actionContext.action.handler(request, response, actionContext)
   }
@@ -168,10 +165,7 @@ class ApiController {
     [record] = await populator([record])
 
     if (!actionContext.action.isAccessible(this.currentAdmin, record)) {
-      throw new ForbiddenError({
-        actionName: actionContext.action.name,
-        resourceId: actionContext.resource.id(),
-      })
+      throw new HttpError.Forbidden()
     }
     const jsonWithRecord = await actionContext.action.handler(request, response, { ...actionContext, record })
 
@@ -221,10 +215,7 @@ class ApiController {
     records = await populator(records)
     records.forEach((record) => {
       if (!actionContext.action.isAccessible(this.currentAdmin, record)) {
-        throw new ForbiddenError({
-          actionName: actionContext.action.name,
-          resourceId: actionContext.resource.id(),
-        })
+        throw new HttpError.Forbidden()
       }
     })
     const jsonWithRecord = await actionContext.action.handler(request, response, { ...actionContext, records })

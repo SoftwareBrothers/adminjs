@@ -68,11 +68,11 @@ const useResourceNew = (
           setLoading(false)
         }
       })
-      .catch(() => {
+      .catch((error) => {
         setLoading(false)
         onNotice({
-          message:
-            'There was an error updating record, Check out console to see more information.',
+          message: error.response?.data.notice
+            ?? 'There was an error updating record, Check out console to see more information.',
           type: 'error',
         })
       })
