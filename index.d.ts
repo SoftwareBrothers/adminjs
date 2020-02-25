@@ -8,6 +8,8 @@ import {
   lineHeights, font,
 } from './types/src/frontend/styles/variables'
 
+export * from './types/src/frontend/store/store'
+
 export { default as Router } from './types/src/backend/router'
 export { default as Filter } from './types/src/backend/utils/filter'
 export { default as ValidationError } from './types/src/backend/utils/validation-error'
