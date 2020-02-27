@@ -68,7 +68,7 @@ const BulkDelete: React.FC<ActionProps & AddNoticeProps & RouteComponentProps> =
   return (
     <React.Fragment>
       <DrawerContent>
-        <ActionHeader {...props} />
+        {action?.showInDrawer ? <ActionHeader omitActions {...props} /> : null}
         <MessageBox
           mb="xxl"
           variant="danger"

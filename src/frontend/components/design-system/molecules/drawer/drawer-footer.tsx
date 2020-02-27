@@ -8,7 +8,6 @@ import { space, SpaceProps } from 'styled-system'
 export const DrawerFooter = styled.section<SpaceProps>`
   padding: ${({ theme }): string => theme.space.xxl} ${({ theme }): string => theme.space.lg};
   text-align: center;
-  border-top: 1px solid ${({ theme }): string => theme.colors.primary20};
   flex-shrink: 0;
   ${space};
 `

@@ -96,6 +96,7 @@ export const Drawer = styled.section<DrawerProps>`
   box-sizing: border-box;
   & > ${DrawerFooter} {
     ${({ variant, theme }): string => (variant === 'filter' ? `border-color: ${theme.colors.filterInputBorder}` : '')};
+    border-top: 1px solid ${({ theme }): string => theme.colors.primary20};
   }
   max-width: 100%;
   

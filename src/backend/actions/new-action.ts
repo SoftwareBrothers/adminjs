@@ -14,7 +14,7 @@ const NewAction: Action<RecordActionResponse> = {
   isVisible: true,
   actionType: 'resource',
   icon: 'Add',
-  showInDrawer: true,
+  showInDrawer: false,
   /**
    * Responsible for creating new record.
    *
@@ -35,10 +35,7 @@ const NewAction: Action<RecordActionResponse> = {
 
       if (record.isValid()) {
         return {
-          redirectUrl: h.resourceActionUrl({
-            resourceId: resource._decorated?.id() || resource.id(),
-            actionName: 'new',
-          }),
+          redirectUrl: h.resourceUrl({ resourceId: resource._decorated?.id() || resource.id() }),
           notice: {
             message: translateMessage('successfullyCreated', resource.id()),
             type: 'success',
