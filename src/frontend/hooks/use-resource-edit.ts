@@ -5,6 +5,7 @@ import RecordJSON from '../../backend/decorators/record-json.interface'
 import { NoticeMessage } from '../store/with-notice'
 import recordToFormData from '../components/actions/record-to-form-data'
 import { appendForceRefresh } from '../components/actions/utils/append-force-refresh'
+import useTranslation from './use-translation'
 
 const api = new ApiClient()
 
@@ -28,6 +29,7 @@ const useResourceEdit = (
   } as any)
   const [loading, setLoading] = useState(false)
   const history = useHistory()
+  const { translateMessage } = useTranslation()
 
   const handleChange = (
     propertyOrRecord: RecordJSON | string,
@@ -72,8 +74,7 @@ const useResourceEdit = (
       .catch((error) => {
         setLoading(false)
         onNotice({
-          message: error.response?.data.message
-            ?? 'There was an error updating record, Check out console to see more information.',
+          message: translateMessage(error.response?.data.message ?? 'errorFetchingRecord'),
           type: 'error',
         })
       })

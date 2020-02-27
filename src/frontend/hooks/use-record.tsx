@@ -5,6 +5,7 @@ import RecordJSON from '../../backend/decorators/record-json.interface'
 import recordToFormData from '../components/actions/record-to-form-data'
 import useNotice from './use-notice'
 import { RecordActionResponse } from '../../backend/actions/action.interface'
+import useTranslation from './use-translation'
 
 const api = new ApiClient()
 
@@ -105,6 +106,7 @@ export const useRecord = (
   } as RecordJSON)
 
   const onNotice = useNotice()
+  const { translateMessage } = useTranslation()
 
   const handleChange = (
     propertyOrRecord: RecordJSON | string,
@@ -153,10 +155,9 @@ export const useRecord = (
         params: { ...prev.params, ...response.data.record.params },
       }))
       setLoading(false)
-    }).catch(() => {
+    }).catch((error) => {
       onNotice({
-        message:
-        'There was an error updating record, Check out console to see more information.',
+        message: translateMessage(error.response?.data.message ?? 'errorFetchingRecord'),
         type: 'error',
       })
       setLoading(false)
