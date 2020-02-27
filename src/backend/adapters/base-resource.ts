@@ -40,7 +40,11 @@ class BaseResource {
   public _decorated: ResourceDecorator | null
 
   /**
-   * Checks if given adapter supports resource provided by the user
+   * Checks if given adapter supports resource provided by the user.
+   * This function has to be implemented only if you want to create your custom
+   * database adapter.
+   *
+   * For one time Admin Resource creation - it is not needed.
    *
    * @param  {any}  rawResource resource provided in AdminBroOptions#resources array
    * @return {Boolean}          if given adapter supports this resource - returns true
@@ -53,9 +57,9 @@ class BaseResource {
   /**
    * Creates given resource based on the raw resource object
    *
-   * @param   {Object}  resource
+   * @param   {Object}  [resource]
    */
-  constructor(resource: any) {
+  constructor(resource?: any) {
     this._decorated = null
   }
 
@@ -210,6 +214,8 @@ class BaseResource {
    * Each Record is an representation of the resource item. Before it can be saved,
    * it has to be instantiated.
    *
+   * This function has to be implemented if you want to create new records.
+   *
    * @param  {Record<string, any>} params
    * @return {BaseRecord}
    */
@@ -262,6 +268,7 @@ class BaseResource {
    * @param  {BaseDecorator}  Decorator
    * @param  {AdminBro}       admin         current instance of AdminBro
    * @param  {ResourceOptions} [options]
+   * @private
    */
   assignDecorator(admin: AdminBro, options: ResourceOptions = {}): void {
     this._decorated = new ResourceDecorator({ resource: this, admin, options })

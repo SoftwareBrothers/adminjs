@@ -1,6 +1,7 @@
 import * as flat from 'flat'
 import BaseProperty from '../adapters/base-property'
 import BaseResource from '../adapters/base-resource'
+import BaseRecord from '../adapters/base-record'
 
 export const PARAM_SEPARATOR = '~~'
 
@@ -11,6 +12,7 @@ export type FilterElement = {
     from: string;
     to: string;
   };
+  populated?: BaseRecord | null;
 }
 
 interface ReduceCallback<T> {
@@ -22,9 +24,10 @@ interface ReduceCallback<T> {
  * @private
  */
 class Filter {
-  public filters: {[key: string]: FilterElement} | {}
+  public filters: {[key: string]: FilterElement}
 
   private resource: BaseResource
+
   /**
    * Changes raw nested filters to form Object<path, value>.
    *
@@ -45,7 +48,6 @@ class Filter {
    *
    * @return  {Object}
    */
-
   static normalizeKeys(filters): Map<string, any> {
     return flat.unflatten(flat.flatten(filters), { delimiter: PARAM_SEPARATOR })
   }
@@ -86,7 +88,9 @@ class Filter {
       const key = keys[index]
       const referenceResource = this.resource.decorate().getPropertyByKey(key).reference()
       if (referenceResource) {
-        this.filters[key].populated = await referenceResource.findOne(this.filters[key].value)
+        this.filters[key].populated = await referenceResource.findOne(
+          this.filters[key].value as string,
+        )
       }
     }
     return this

@@ -22,7 +22,7 @@ export type UseRecordsResult = {
 }
 
 
-const useRecords = (resourceId: string): UseRecordsResult => {
+export const useRecords = (resourceId: string): UseRecordsResult => {
   const [records, setRecords] = useState<Array<RecordJSON>>([])
   const [loading, setLoading] = useState(false)
   const [page, setPage] = useState(1)
