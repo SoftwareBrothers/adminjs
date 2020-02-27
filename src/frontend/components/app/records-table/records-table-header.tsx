@@ -90,15 +90,15 @@ const RecordsTableHeader: React.FC<Props> = (props) => {
   return (
     <TableHead>
       <TableRow>
-        {onSelectAll ? (
-          <TableCell>
+        <TableCell>
+          {onSelectAll ? (
             <CheckBox
               style={{ marginLeft: 5 }}
               onChange={(): void => onSelectAll()}
               checked={selectedAll}
             />
-          </TableCell>
-        ) : null}
+          ) : null}
+        </TableCell>
         {properties.map(property => (
           <PropertyHeader
             display={display(property.isTitle)}

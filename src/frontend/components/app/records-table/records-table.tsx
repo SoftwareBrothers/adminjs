@@ -37,6 +37,8 @@ const RecordsTable: React.FC<Props> = (props) => {
     selectedRecords.find(selected => selected.id === record.id)
   ))
 
+  const recordsHaveBulkAction = !!records.find(record => record.bulkActions.length)
+
   return (
     <Table>
       <SelectedRecords
@@ -48,7 +50,7 @@ const RecordsTable: React.FC<Props> = (props) => {
         titleProperty={resource.titleProperty}
         direction={direction}
         sortBy={sortBy}
-        onSelectAll={onSelectAll}
+        onSelectAll={recordsHaveBulkAction ? onSelectAll : undefined}
         selectedAll={selectedAll}
       />
       <TableBody>
