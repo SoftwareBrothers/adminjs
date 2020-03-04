@@ -178,7 +178,7 @@ class AdminBro {
      */
     this.options = _.merge({}, defaults, options)
 
-    const defaultLogo = `${this.options.rootPath}/frontend/assets/logo-mini.svg`
+    const defaultLogo = path.join(this.options.rootPath, '/frontend/assets/logo-mini.svg');
     this.options.branding = this.options.branding || {}
     this.options.branding.logo = this.options.branding.logo !== undefined
       ? this.options.branding.logo
