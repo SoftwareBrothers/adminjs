@@ -36,7 +36,13 @@ Started since version 0.9.5
 
 * remove AdminBroOption.assets.globalsFromCDN - they are always fetched from local bundle
 
-## 1.6.1/2 - 21.01.2020
+## 1.6.3 - 23.01.2020
+
+### Added
+
+* add ADMIN_BRO_SKIP_BUNDLE flag
+
+## 1.6.1/1.6.2 - 21.01.2020
 
 ### Fixed
 

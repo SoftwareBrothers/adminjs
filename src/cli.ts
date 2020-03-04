@@ -30,7 +30,7 @@ program
       return
     }
     const bundler = require('../lib/backend/bundler/user-components-bundler').default
-    bundler(new AdminBro(config), { watch: true, write: true })
+    bundler(new AdminBro(config), { watch: false, write: true })
   })
 
 program.parse(process.argv)

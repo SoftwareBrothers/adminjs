@@ -247,7 +247,8 @@ class AdminBro {
    * all external plugins.
    */
   async initialize(): Promise<void> {
-    if (process.env.NODE_ENV === 'production' && !process.env.SKIP_COMPONENT_BUNDLE) {
+    if (process.env.NODE_ENV === 'production'
+        && !(process.env.ADMIN_BRO_SKIP_BUNDLE === 'true')) {
       console.log('AdminBro: bundling user components...')
       await userComponentsBundler(this, { write: true })
     }
