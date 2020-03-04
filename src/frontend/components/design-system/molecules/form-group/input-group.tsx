@@ -20,7 +20,7 @@ const InputGroup = styled.div`
   }
   ${Label}, ${Button}:last-child, ${Link}:last-child {
     padding: ${({ theme }): string => theme.space.sm};
-    border: solid ${({ theme }): string => theme.colors.grey40};
+    border: solid ${({ theme }): string => theme.colors.inputBorder};
     border-width: 1px 1px 1px 0;
     margin: 0;
     color: ${({ theme }): string => theme.colors.grey40};
@@ -47,7 +47,7 @@ const InputGroup = styled.div`
     & + ${Label}, & + ${Button}, & + ${Link} {
       border-color: ${({ theme }): string => theme.colors.primary100};
     }
-  } 
+  }
 `
 
 export default InputGroup

@@ -1,4 +1,4 @@
-import React, { ComponentClass } from 'react'
+import React from 'react'
 import { connect } from 'react-redux'
 
 import { RouteComponentProps } from 'react-router'
@@ -8,8 +8,8 @@ import { ReduxState } from '../../store/store'
 import { NoResourceError, NoActionError } from '../app/error-message'
 import { ResourceActionParams } from '../../../backend/utils/view-helpers'
 import { ActionHeader } from '../app'
-import { Drawer } from '../design-system'
 import Wrapper from './utils/wrapper'
+import DrawerPortal from '../app/drawer-portal'
 
 type PropsFromState = {
   resources: Array<ResourceJSON>;
@@ -30,21 +30,28 @@ const ResourceAction: React.FC<Props> = (props) => {
     return (<NoActionError resourceId={resourceId} actionName={actionName} />)
   }
 
-  const ActionWrapper = (action.showInDrawer ? Drawer : Wrapper) as unknown as ComponentClass
+  if (action.showInDrawer) {
+    return (
+      <DrawerPortal>
+        <BaseActionComponent
+          action={action}
+          resource={resource}
+        />
+      </DrawerPortal>
+    )
+  }
 
   return (
-    <ActionWrapper>
-      {!action?.showInDrawer ? (
-        <ActionHeader
-          resource={resource}
-          action={action}
-        />
-      ) : ''}
+    <Wrapper>
+      <ActionHeader
+        resource={resource}
+        action={action}
+      />
       <BaseActionComponent
         action={action}
         resource={resource}
       />
-    </ActionWrapper>
+    </Wrapper>
   )
 }
 

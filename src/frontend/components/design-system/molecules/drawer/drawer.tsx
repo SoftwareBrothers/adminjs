@@ -86,7 +86,10 @@ export const Drawer = styled.section<DrawerProps>`
   display: flex;
   flex-direction: column;
   top: 0;
-  right: ${({ isHidden, width }): string => (isHidden ? `-${width?.toString()}` : '0px;')};;
+  right: ${({ isHidden, width }): string => (isHidden ? `-${width?.toString()}` : '0px;')};
+  &.hidden {
+    right: ${({ width }): string => (`-${width?.toString()}`)};
+  }
   box-shadow: 0 3px 6px ${({ theme }): string => theme.colors.grey40};
   height: 100%;
   overflow-y: auto;

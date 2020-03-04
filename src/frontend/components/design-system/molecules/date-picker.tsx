@@ -5,7 +5,7 @@ import styled from 'styled-components'
 import { Calendar16 } from '@carbon/icons-react'
 
 import styles from '../utils/datepicker.styles'
-import { Input, InputProps } from '../atoms/input'
+import { Input } from '../atoms/input'
 import { Button } from '../atoms/button'
 import { InputGroup } from './form-group'
 
@@ -104,8 +104,6 @@ const DatePickerWrapper = styled.div`
   top: ${({ theme }): string => theme.space.xxl};
 `
 
-type Variant = InputProps['variant']
-
 /**
  * Props for DatePicker
  * @memberof DatePicker
@@ -120,10 +118,6 @@ export type DatePickerProps = {
    * on change callback taking string as a date
    */
   onChange: (date: string) => void;
-  /**
-   * variant - the same as variant in {@link InputProps}
-   */
-  variant?: Variant;
 }
 
 const pad = (n: number): string => (n < 10 ? `0${n.toString()}` : n.toString())
@@ -147,7 +141,7 @@ const format = (date: Date): string => `${date.getFullYear()}-${pad(date.getMont
  * )
  */
 export const DatePicker: React.FC<DatePickerProps> = (props) => {
-  const { value, onChange, variant, ...other } = props
+  const { value, onChange, ...other } = props
 
   const [hidden, setHidden] = useState(true)
 
@@ -175,7 +169,6 @@ export const DatePicker: React.FC<DatePickerProps> = (props) => {
       />
       <StyledDatePicker className={hidden ? 'normal' : 'active'}>
         <Input
-          variant={variant}
           value={stringValue || ''}
           onChange={event => onChange(event.target.value)}
           onFocus={(): void => setHidden(false)}

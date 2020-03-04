@@ -1,6 +1,6 @@
 import React from 'react'
 
-import styled, { StyledComponentProps } from 'styled-components'
+import styled from 'styled-components'
 import { LayoutProps, layout } from 'styled-system'
 
 const StyledPlaceholder = styled.div<LayoutProps>`

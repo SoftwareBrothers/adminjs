@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 
-import { RouteComponentProps, useHistory, useLocation } from 'react-router'
+import { RouteComponentProps, useHistory, useLocation, useRouteMatch } from 'react-router'
 import { AddNoticeProps } from '../../store/with-notice'
 
 import RecordsTable from '../app/records-table/records-table'
@@ -9,6 +9,8 @@ import RecordJSON from '../../../backend/decorators/record-json.interface'
 import { Box, Pagination, Text } from '../design-system'
 import useRecords from '../../hooks/use-records'
 import useSelectedRecords from '../../hooks/use-selected-records'
+import { BulkActionParams } from '../../../backend/utils/view-helpers'
+import { REFRESH_KEY } from './utils/append-force-refresh'
 
 // TODO: change after implementing per page dropdown
 const PER_PAGE = 10
@@ -56,6 +58,12 @@ const List: React.FC<ActionProps> = ({ resource, setTag }) => {
   useEffect(() => {
     setSelectedRecords([])
   }, [resource.id])
+  useEffect(() => {
+    const search = new URLSearchParams(location.search)
+    if (search.get(REFRESH_KEY)) {
+      setSelectedRecords([])
+    }
+  }, [location.search])
 
   const handleActionPerformed = (): any => fetchData()
 

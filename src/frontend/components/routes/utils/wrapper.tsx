@@ -16,6 +16,7 @@ const StyledWrapper = styled(Box)`
 `
 
 const Wrapper: React.FC<BoxProps> = (props) => {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { children, variant, color, ...rest } = props
   return (
     <StyledWrapper {...rest} variant="grey">

@@ -1,15 +1,19 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 import { DefaultTheme } from 'styled-components'
+import focusShadowStyle from '../components/design-system/utils/focus-shadow.style'
 
 const selectStyles = (theme: DefaultTheme) => ({
   control: (provided, state) => ({
     ...provided,
-    border: state.isFocused
-      ? `1px solid ${theme.colors.primary100}`
-      : `1px solid ${theme.colors.grey40}`,
     borderRadius: '0px',
+    borderWidth: '1px',
     background: theme.colors.white,
     color: theme.colors.grey80,
+    '&:hover': {
+      borderColor: theme.colors.grey60,
+    },
+    borderColor: state.isFocused ? theme.colors.primary100 : theme.colors.inputBorder,
+    boxShadow: state.isFocused ? focusShadowStyle(theme) : 'none',
   }),
   menu: provided => ({
     ...provided,
@@ -20,6 +24,7 @@ const selectStyles = (theme: DefaultTheme) => ({
   input: () => ({
     color: theme.colors.grey80,
     background: theme.colors.white,
+    border: 'none',
   }),
   singleValue: () => ({
     color: theme.colors.grey80,
@@ -48,6 +53,7 @@ const filterStyles = (theme: DefaultTheme) => ({
     borderRadius: '0px',
     background: 'transparent',
     color: theme.colors.white,
+    boxShadow: state.isFocused ? focusShadowStyle(theme) : 'none',
   }),
   input: () => ({
     color: theme.colors.white,

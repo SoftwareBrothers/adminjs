@@ -54,7 +54,7 @@ const StyledRadio = styled.span<StyledProps>`
   position: relative;
 
   ${HiddenRadio}:focus + & {
-    ${({ theme }): string => focusShadowStyle(theme)};
+    ${({ theme }): string => `box-shadow: ${focusShadowStyle(theme)}`};
   }
   ${HiddenRadio}:hover + & {
     border-color: ${({ theme }): string => theme.colors.grey60};

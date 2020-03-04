@@ -1,9 +1,9 @@
-import React, { ComponentClass, useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useSelector } from 'react-redux'
 
 import { useRouteMatch } from 'react-router'
 
-import { Loader, Drawer } from '../design-system'
+import { Loader } from '../design-system'
 import BaseActionComponent from '../app/base-action-component'
 import ApiClient from '../../utils/api-client'
 import { RecordActionParams } from '../../../backend/utils/view-helpers'
@@ -14,12 +14,13 @@ import { NoResourceError, NoActionError, NoRecordError } from '../app/error-mess
 import Wrapper from './utils/wrapper'
 import { ActionHeader } from '../app'
 import { useNotice, useTranslation } from '../../hooks'
+import DrawerPortal from '../app/drawer-portal'
 
 const api = new ApiClient()
 
 const RecordAction: React.FC = () => {
   const [record, setRecord] = useState<RecordJSON>()
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(true)
   const match = useRouteMatch<RecordActionParams>()
   const resources = useSelector((state: ReduxState) => state.resources)
   const addNotice = useNotice()
@@ -51,7 +52,13 @@ const RecordAction: React.FC = () => {
   if (!resource) {
     return (<NoResourceError resourceId={resourceId} />)
   }
-  if (!action && !loading) {
+
+  if (loading) {
+    const actionFromResource = resource.actions.find(r => r.name === actionName)
+    return actionFromResource?.showInDrawer ? (<DrawerPortal><Loader /></DrawerPortal>) : <Loader />
+  }
+
+  if (!action) {
     return (<NoActionError resourceId={resourceId} actionName={actionName} />)
   }
 
@@ -59,27 +66,31 @@ const RecordAction: React.FC = () => {
     return (<NoRecordError resourceId={resourceId} recordId={recordId} />)
   }
 
-  if (loading || !action) {
-    return <Loader />
-  }
-
-  const ActionWrapper = (action.showInDrawer ? Drawer : Wrapper) as unknown as ComponentClass
-
-  return (
-    <ActionWrapper>
-      {!action?.showInDrawer ? (
-        <ActionHeader
+  if (action.showInDrawer) {
+    return (
+      <DrawerPortal>
+        <BaseActionComponent
+          action={action as ActionJSON}
           resource={resource}
-          action={action}
           record={record}
         />
-      ) : ''}
+      </DrawerPortal>
+    )
+  }
+
+  return (
+    <Wrapper>
+      <ActionHeader
+        resource={resource}
+        action={action}
+        record={record}
+      />
       <BaseActionComponent
-        action={action as ActionJSON}
+        action={action}
         resource={resource}
         record={record}
       />
-    </ActionWrapper>
+    </Wrapper>
   )
 }
 

@@ -24,6 +24,6 @@ describe('<RecordsTableHeader />', function () {
         </table>
       </TestContextProvider>,
     )
-    expect(container.getElementsByTagName('td')).to.have.lengthOf(2)
+    expect(container.getElementsByTagName('td')).to.have.lengthOf(3)
   })
 })

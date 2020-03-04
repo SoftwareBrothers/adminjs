@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react'
+import React from 'react'
 
 import SidebarResource from './sidebar-resource'
 import ResourceJSON from '../../../../backend/decorators/resource-json.interface'

@@ -1,15 +1,6 @@
 import styled, { css } from 'styled-components'
-import { space, SpaceProps, layout, LayoutProps, variant } from 'styled-system'
+import { space, SpaceProps, layout, LayoutProps } from 'styled-system'
 import focusShadowStyle from '../utils/focus-shadow.style'
-
-const variants = variant({
-  variants: {
-    filter: {
-      color: 'white',
-      borderColor: 'filterInputBorder',
-    },
-  },
-})
 
 /**
  * Input CSS Styles which can be reused in another input component with styled-components
@@ -39,12 +30,11 @@ export const InputCSS = css`
   }
   &:focus {
     border-color: ${({ theme }): string => theme.colors.primary100};
-    ${({ theme }): string => focusShadowStyle(theme)};
+    ${({ theme }): string => `box-shadow: ${focusShadowStyle(theme)}`};
   }
   &:disabled {
     color: ${({ theme }): string => theme.colors.grey40};
   }
-  ${variants}
 `
 
 /**
@@ -55,12 +45,7 @@ export const InputCSS = css`
  * @alias InputProps
  * @property {string} [...] Other props from {@link LayoutProps}, {@link SpaceProps}
  */
-export type InputProps = SpaceProps & LayoutProps & {
-  /**
-   * Input variant
-   */
-  variant?: 'filter';
-}
+export type InputProps = SpaceProps & LayoutProps
 
 /**
  * Wrapped `input` html element.
@@ -81,7 +66,7 @@ export type InputProps = SpaceProps & LayoutProps & {
  * )
  */
 export const Input = styled.input<InputProps>`
-  ${InputCSS}
+  ${InputCSS};
   ${space};
   ${layout};
 `

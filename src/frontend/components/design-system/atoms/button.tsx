@@ -2,7 +2,6 @@ import styled, { css } from 'styled-components'
 import { color, space, ColorProps, SpaceProps,
   TypographyProps, typography, variant } from 'styled-system'
 import focusShadowStyle from '../utils/focus-shadow.style'
-import Icon from './icon'
 
 const variantShared = {
   color: 'white',
@@ -176,7 +175,7 @@ export const ButtonCSS = css<ButtonProps>`
   }
   &:focus {
     border-color: ${({ theme }): string => theme.colors.accent};
-    ${({ theme }): string => focusShadowStyle(theme)};
+    ${({ theme }): string => `box-shadow: ${focusShadowStyle(theme)}`};
   }
 
   &:disabled {

@@ -65,17 +65,15 @@ describe('<RecordAction />', function () {
     expect(errorBox).not.to.be.undefined
   })
 
-  describe('show action when record and resource are given', function () {
-    it('renders all showProperties in a resource', async function () {
+  describe('page not loaded yet', function () {
+    it('renders loader', async function () {
       const { findByTestId } = renderSubject({
         resources: [resource],
       }, `/resources/${resource.id}/records/1234/show`)
 
-      await Promise.all(resource.showProperties.map(async (property) => {
-        const propertyInShow = await findByTestId(`property-show-${property.name}`)
-        expect(propertyInShow).not.to.be.undefined
-        return propertyInShow
-      }))
+      const loader = await findByTestId('Loader')
+
+      expect(loader).not.to.be.undefined
     })
   })
 })

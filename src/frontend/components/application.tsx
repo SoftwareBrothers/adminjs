@@ -1,7 +1,7 @@
 /* eslint-disable react/no-children-prop */
 import React, { useState } from 'react'
 import { Switch, Route } from 'react-router-dom'
-import styled, { createGlobalStyle } from 'styled-components'
+import { createGlobalStyle } from 'styled-components'
 
 import ViewHelpers from '../../backend/utils/view-helpers'
 import Sidebar from './app/sidebar/sidebar'
@@ -11,7 +11,7 @@ import Notice from './app/notice'
 import {
   Dashboard, ResourceAction, RecordAction, Page, BulkAction, Resource,
 } from './routes'
-import { Box, Overlay } from './design-system'
+import { Box, Overlay, Drawer } from './design-system'
 
 const GlobalStyle = createGlobalStyle`
   html, body, #app {
@@ -62,6 +62,7 @@ const App: React.FC = () => {
             <Route path={resourceActionUrl} component={ResourceAction} />
             <Route path={bulkActionUrl} component={BulkAction} />
           </Switch>
+          <Drawer id="drawerPortal" className="hidden" />
         </Box>
       </Box>
     </React.Fragment>

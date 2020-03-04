@@ -5,6 +5,7 @@ import { Label } from '../../atoms/label'
 import { Button } from '../../atoms/button'
 import { Input } from '../../atoms/input'
 import { Link } from '../../atoms/link'
+import InputGroup from './input-group'
 
 const formGroupDisabledCSS = css`
   color: ${({ theme }): string => theme.colors.grey40};
@@ -41,6 +42,10 @@ export type FormGroupProps = SpaceProps & {
    * If given FormGroup should be disabled
    */
   disabled?: boolean;
+  /**
+   * if given form group should be rendered in a filter
+   */
+  variant?: 'filter';
 }
 
 /**
@@ -126,6 +131,20 @@ export const FormGroup = styled.div<FormGroupProps>`
 
   & > ${Input} {
     width: 100%;
+  }
+
+  & ${Input} {
+    ${({ variant, theme }): string => (variant === 'filter' ? `border-color: ${theme.colors.filterInputBorder}` : '')};
+    ${({ variant, theme }): string => (variant === 'filter' ? `color: ${theme.colors.white}` : '')};
+    &:hover {
+      border-color: ${({ variant, theme }): string => (variant === 'filter' ? theme.colors.grey60 : theme.colors.grey60)};
+    }
+  }
+
+  & ${InputGroup} {
+    ${Label}, ${Button}:last-child, ${Link}:last-child {
+      ${({ variant, theme }): string => (variant === 'filter' ? `border-color: ${theme.colors.filterInputBorder}` : '')};
+    }
   }
 `
 

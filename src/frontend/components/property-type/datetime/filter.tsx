@@ -17,17 +17,15 @@ const Filter: React.FC<FilterPropertyProps> = (props) => {
 
   return (
     <React.Fragment>
-      <FormGroup>
+      <FormGroup variant="filter">
         <Label>{property.label}</Label>
         <Label>- From: </Label>
         <DatePicker
-          variant="filter"
           value={fromValue}
           onChange={(data: string): void => onChange(fromKey, data)}
         />
         <Label mt="default">- To: </Label>
         <DatePicker
-          variant="filter"
           value={toValue}
           onChange={(data: string): void => onChange(toKey, data)}
         />

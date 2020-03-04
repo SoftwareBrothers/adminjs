@@ -59,7 +59,7 @@ const StyledCheckbox = styled.a<StyledProps>`
   position: relative;
 
   ${HiddenCheckbox}:focus + & {
-    ${({ theme }): string => focusShadowStyle(theme)};
+    ${({ theme }): string => `box-shadow: ${focusShadowStyle(theme)};`};
   }
   ${HiddenCheckbox}:hover + & {
     border-color: ${({ theme }): string => theme.colors.grey60};

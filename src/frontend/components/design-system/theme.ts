@@ -154,7 +154,7 @@ const colors = {
   hoverBg: '#535B8E',
 
   // Elements
-  inputBorder: '#898A9A',
+  inputBorder: '#C0C0CA',
   separator: '#C0C0CA',
   highlight: '#F6F7FB',
   filterInputBorder: 'rgba(255,255,255,0.15)',

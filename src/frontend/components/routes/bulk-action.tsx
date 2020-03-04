@@ -1,4 +1,4 @@
-import React, { ComponentClass, useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useSelector } from 'react-redux'
 
 import { RouteComponentProps, useRouteMatch, useLocation } from 'react-router'
@@ -7,7 +7,7 @@ import ResourceJSON from '../../../backend/decorators/resource-json.interface'
 import { ReduxState } from '../../store/store'
 import ErrorMessageBox, { NoResourceError, NoActionError } from '../app/error-message'
 import RecordJSON from '../../../backend/decorators/record-json.interface'
-import { Loader, Drawer } from '../design-system'
+import { Loader } from '../design-system'
 import { BulkActionParams } from '../../../backend/utils/view-helpers'
 import ApiClient from '../../utils/api-client'
 import { AddNoticeProps } from '../../store/with-notice'
@@ -16,6 +16,7 @@ import ActionJSON from '../../../backend/decorators/action-json.interface'
 import Wrapper from './utils/wrapper'
 import { ActionHeader } from '../app'
 import { useTranslation, useNotice } from '../../hooks'
+import DrawerPortal from '../app/drawer-portal'
 
 type PropsFromState = {
   resources: Array<ResourceJSON>;
@@ -82,18 +83,29 @@ const BulkAction: React.FC = () => {
 
   const action = getBulkActionsFromRecords(records || []).find(r => r.name === actionName)
 
-  if (!action && !loading) {
+  if (loading) {
+    const actionFromResource = resource.actions.find(r => r.name === actionName)
+    return actionFromResource?.showInDrawer ? (<DrawerPortal><Loader /></DrawerPortal>) : <Loader />
+  }
+
+  if (!action) {
     return (<NoActionError resourceId={resourceId} actionName={actionName} />)
   }
 
-  if (loading || !action) {
-    return <Loader />
+  if (action.showInDrawer) {
+    return (
+      <DrawerPortal>
+        <BaseAction
+          action={action as ActionJSON}
+          resource={resource}
+          records={records}
+        />
+      </DrawerPortal>
+    )
   }
 
-  const ActionWrapper = (action.showInDrawer ? Drawer : Wrapper) as unknown as ComponentClass
-
   return (
-    <ActionWrapper>
+    <Wrapper>
       {!action?.showInDrawer ? (
         <ActionHeader
           resource={resource}
@@ -105,7 +117,7 @@ const BulkAction: React.FC = () => {
         resource={resource}
         records={records}
       />
-    </ActionWrapper>
+    </Wrapper>
   )
 }
 

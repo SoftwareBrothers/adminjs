@@ -42,7 +42,6 @@ class Filter extends React.PureComponent<FilterPropertyProps & ThemeProps<Defaul
     }
     return (
       <Input
-        variant="filter"
         name={filterKey}
         onChange={this.handleInputChange}
         value={value}
@@ -53,7 +52,7 @@ class Filter extends React.PureComponent<FilterPropertyProps & ThemeProps<Defaul
   render(): ReactNode {
     const { property } = this.props
     return (
-      <FormGroup>
+      <FormGroup variant="filter">
         <Label>{property.label}</Label>
         {this.renderInput()}
       </FormGroup>
