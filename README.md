@@ -18,7 +18,7 @@ Check out the example application with mongodb and postgres models here:
 - login: `test@example.com`
 - password: `password`
 
-https://admin-bro-example-app.herokuapp.com/admin
+https://admin-bro-example-app-staging.herokuapp.com/admin
 
 ## Getting Started
 
