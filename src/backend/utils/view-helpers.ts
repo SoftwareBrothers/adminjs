@@ -1,7 +1,5 @@
 import AdminBroOptions from '../../admin-bro-options.interface'
 import { Paths } from '../../frontend/store/store'
-import slash from 'slash'
-import path from 'path'
 
 let globalAny: any = {}
 
