@@ -1,5 +1,7 @@
 import AdminBroOptions from '../../admin-bro-options.interface'
 import { Paths } from '../../frontend/store/store'
+import slash from 'slash'
+import path from 'path'
 
 let globalAny: any = {}
 
@@ -228,6 +230,9 @@ class ViewHelpers {
    * @return {string}
    */
   assetPath(asset: string): string {
+    if (this.options.assetsCDN) {
+      return new URL(asset, this.options.assetsCDN).href
+    }
     return this.urlBuilder(['frontend', 'assets', asset])
   }
 }

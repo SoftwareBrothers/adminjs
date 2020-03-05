@@ -81,6 +81,7 @@ export type Paths = {
   rootPath: string;
   logoutPath: string;
   loginPath: string;
+  assetsCDN?: string;
 }
 
 export const addNotice = (data: NoticeMessage = { message: '' }): {

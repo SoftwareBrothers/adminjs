@@ -33,13 +33,13 @@ const initializeStore = (admin: AdminBro, currentAdmin?: CurrentAdmin): Store<Re
   ))
   store.dispatch(initializeBranding(admin.options.branding))
   const {
-    loginPath, logoutPath, rootPath, dashboard, pages,
+    loginPath, logoutPath, rootPath, dashboard, pages, assetsCDN,
   } = admin.options
 
   const pagesArray = pagesToStore(pages)
 
   store.dispatch(initializePages(pagesArray))
-  store.dispatch(initializePaths({ loginPath, logoutPath, rootPath }))
+  store.dispatch(initializePaths({ loginPath, logoutPath, rootPath, assetsCDN }))
   store.dispatch(initializeSession(currentAdmin))
   store.dispatch(initializeDashboard(dashboard))
   store.dispatch(initializeVersions({

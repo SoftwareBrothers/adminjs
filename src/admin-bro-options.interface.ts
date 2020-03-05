@@ -131,6 +131,12 @@ export default interface AdminBroOptions {
     scripts?: Array<string>;
   };
   /**
+   * Indicates bundled by AdminBro files should be taken from the same server
+   * as other AdminBro routes (default) or should be taken from an external CDN.
+   * If set - bundles will go from given CDN if unset - from the same server.
+   */
+  assetsCDN?: string;
+  /**
    * Environmental variables passed to the frontend.
    *
    * So let say you want to pass some _GOOGLE_MAP_API_TOKEN_ to the frontend.
@@ -275,7 +281,7 @@ export type BrandingOptions = {
   /**
    * CSS theme.
    */
-  theme?: Theme;
+  theme?: Partial<Theme>;
   /**
    * Flag indicates if `SoftwareBrothers` tiny hart icon should be visible on the bottom sidebar.
    */
@@ -343,6 +349,7 @@ export interface AdminBroOptionsWithDefault extends AdminBroOptions {
   assets: {
     styles: Array<string>;
     scripts: Array<string>;
+    bundlesCDN?: string;
   };
   pages: Record<string, AdminPage>;
 }
