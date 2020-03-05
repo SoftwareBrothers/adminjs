@@ -1,4 +1,5 @@
 import path from 'path'
+import slash from 'slash'
 import AdminBroOptions from '../../admin-bro-options.interface'
 import { Paths } from '../../frontend/store/store'
 
@@ -127,8 +128,9 @@ class ViewHelpers {
    */
   urlBuilder(paths: Array<string>, search = ''): string {
     const { rootPath } = this.options
+    const pathWithRoot = slash(path.join(rootPath, ...paths))
 
-    return `${path.join(rootPath, ...paths)}${search}`
+    return `${pathWithRoot}${search}`
   }
 
   /**
