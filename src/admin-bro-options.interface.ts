@@ -131,9 +131,35 @@ export default interface AdminBroOptions {
     scripts?: Array<string>;
   };
   /**
-   * Indicates bundled by AdminBro files should be taken from the same server
-   * as other AdminBro routes (default) or should be taken from an external CDN.
+   * Indicates is bundled by AdminBro files like:
+   * - components.bundle.js
+   * - global.bundle.js
+   * - app.bundle.js
+   * should be taken from the same server as other AdminBro routes (default)
+   * or should be taken from an external CDN.
+   *
    * If set - bundles will go from given CDN if unset - from the same server.
+   *
+   * When you can use this option? So let's say you want to deploy the app on
+   * serverless environment like Firebase Cloud Functions. In that case you don't
+   * want to serve static files with the same app because your function will be
+   * invoked every time frontend asks for static assets.
+   *
+   * Solution would be to:
+   * - create `public` folder in your app
+   * - generate `bundle.js` file to `.adminbro/` folder by using {@link AdminBro#initialize}
+   * function (with process.env.NODE_ENV set to 'production').
+   * - copy the before mentioned file to `public` folder and rename it to
+   * components.bundle.js
+   * - copy
+   * './node_modules/admin-bro/lib/frontend/assets/scripts/app-bundle.production.js' to
+   * './public/app.bundle.js',
+   * - copy
+   * './node_modules/admin-bro/lib/frontend/assets/scripts/global-bundle.production.js' to
+   * './public/global.bundle.js'
+   * - host entire public folder under some domain (if you use firebase - you can host them
+   * with firebase hosting)
+   * - point {@link AdminBro.assetsCDN} to this domain
    */
   assetsCDN?: string;
   /**
@@ -349,7 +375,6 @@ export interface AdminBroOptionsWithDefault extends AdminBroOptions {
   assets: {
     styles: Array<string>;
     scripts: Array<string>;
-    bundlesCDN?: string;
   };
   pages: Record<string, AdminPage>;
 }
