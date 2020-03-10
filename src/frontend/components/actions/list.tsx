@@ -9,7 +9,6 @@ import RecordJSON from '../../../backend/decorators/record-json.interface'
 import { Box, Pagination, Text } from '../design-system'
 import useRecords from '../../hooks/use-records'
 import useSelectedRecords from '../../hooks/use-selected-records'
-import { BulkActionParams } from '../../../backend/utils/view-helpers'
 import { REFRESH_KEY } from './utils/append-force-refresh'
 
 // TODO: change after implementing per page dropdown

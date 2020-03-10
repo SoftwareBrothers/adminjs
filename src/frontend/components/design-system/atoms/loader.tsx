@@ -56,7 +56,7 @@ const Spinner = styled.div.attrs({
  * )
  */
 export const Loader: React.FC = () => (
-  <Box style={{ textAlign: 'center' }} data-testid="Loader">
+  <Box p="x3" style={{ textAlign: 'center' }} data-testid="Loader">
     <Spinner>
       <div />
       <div />
