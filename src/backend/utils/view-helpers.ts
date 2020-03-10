@@ -121,16 +121,20 @@ class ViewHelpers {
   /**
    * To each related path adds rootPath passed by the user, as well as a query string
    * @private
-   * @param  {Array<string>} paths      list of parts of the url
+   * @param  {Array<string>} [paths]      list of parts of the url
    * @return {string}       path
    * @return {query}        [search=''] query string which can be fetch
    *                                    from `location.search`
    */
-  urlBuilder(paths: Array<string>, search = ''): string {
-    const { rootPath } = this.options
-    const pathWithRoot = slash(path.join(rootPath, ...paths))
+  urlBuilder(paths: Array<string> = [], search = ''): string {
+    let { rootPath } = this.options
+    if (!rootPath.startsWith('/')) { rootPath = `/${rootPath}` }
 
-    return `${pathWithRoot}${search}`
+    const separator = '/'
+    const replace = new RegExp(`${separator}{1,}`, 'g')
+
+    const parts = [rootPath, ...paths]
+    return `${parts.join(separator).replace(replace, separator)}${search}`
   }
 
   /**

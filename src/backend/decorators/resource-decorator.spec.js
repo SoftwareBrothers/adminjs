@@ -24,7 +24,7 @@ describe('ResourceDecorator', function () {
     this.stubbedAdmin.translateProperty = sinon.stub().returns('translated property')
     this.stubbedAdmin.translateAction = sinon.stub().returns('translated action')
     this.stubbedAdmin.translateMessage = sinon.stub().returns('translate message')
-    this.stubbedAdmin.options = {}
+    this.stubbedAdmin.options = { rootPath: '/admin' }
     this.args = { resource: this.stubbedResource, admin: this.stubbedAdmin }
   })
 
