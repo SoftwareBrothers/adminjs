@@ -20,6 +20,14 @@ export {
   GetPageAPIParams,
 } from './types/src/frontend/utils/api-client'
 
+export {
+  default as ViewHelpers,
+  ResourceActionAPIParams,
+  RecordActionAPIParams,
+  BulkActionAPIParams,
+  GetPageAPIParams,
+} from './types/src/backend/utils/view-helpers'
+
 export { CurrentAdmin } from './types/src/current-admin.interface'
 export { PropertyType } from './types/src/backend/adapters/base-property'
 export { ResourceOptions } from './types/src/backend/decorators/resource-options.interface'

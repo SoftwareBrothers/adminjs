@@ -58,6 +58,7 @@ const List: React.FC<ActionProps> = ({ resource, setTag }) => {
   useEffect(() => {
     setSelectedRecords([])
   }, [resource.id])
+
   useEffect(() => {
     const search = new URLSearchParams(location.search)
     if (search.get(REFRESH_KEY)) {
