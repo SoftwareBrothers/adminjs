@@ -111,8 +111,9 @@ const Dashboard: React.FC = () => {
         flexWrap="wrap"
         width={[1, 1, 1, 1024]}
       >
-        {boxes({ translateMessage }).map(box => (
-          <Box width={[1, 1 / 2, 1 / 2, 1 / 3]} p="lg">
+        {boxes({ translateMessage }).map((box, index) => (
+          // eslint-disable-next-line react/no-array-index-key
+          <Box key={index} width={[1, 1 / 2, 1 / 2, 1 / 3]} p="lg">
             <Card as="a" href={box.href}>
               <Text textAlign="center">
                 <Illustration
