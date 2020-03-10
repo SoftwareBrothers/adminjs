@@ -73,10 +73,10 @@ const Router: RouterType = {
     src: path.join(ASSETS_ROOT, `scripts/global-bundle.${env}.js`),
   }, {
     path: '/frontend/assets/logo.svg',
-    src: [ASSETS_ROOT, 'images/logo.svg'].join('/'),
+    src: path.join(ASSETS_ROOT, 'images/logo.svg'),
   }, {
     path: '/frontend/assets/logo-mini.svg',
-    src: [ASSETS_ROOT, 'images/logo-mini.svg'].join('/'),
+    src: path.join(ASSETS_ROOT, 'images/logo-mini.svg'),
   }],
   routes: [{
     method: 'GET',
