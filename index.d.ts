@@ -22,10 +22,9 @@ export {
 
 export {
   default as ViewHelpers,
-  ResourceActionAPIParams,
-  RecordActionAPIParams,
-  BulkActionAPIParams,
-  GetPageAPIParams,
+  ResourceActionParams,
+  RecordActionParams,
+  BulkActionParams,
 } from './types/src/backend/utils/view-helpers'
 
 export { CurrentAdmin } from './types/src/current-admin.interface'
