@@ -127,11 +127,11 @@ class ViewHelpers {
    *                                    from `location.search`
    */
   urlBuilder(paths: Array<string> = [], search = ''): string {
-    let { rootPath } = this.options
-    if (!rootPath.startsWith('/')) { rootPath = `/${rootPath}` }
-
     const separator = '/'
     const replace = new RegExp(`${separator}{1,}`, 'g')
+
+    let { rootPath } = this.options
+    if (!rootPath.startsWith(separator)) { rootPath = `${separator}${rootPath}` }
 
     const parts = [rootPath, ...paths]
     return `${parts.join(separator).replace(replace, separator)}${search}`
