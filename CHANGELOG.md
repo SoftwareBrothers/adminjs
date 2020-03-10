@@ -6,7 +6,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 Started since version 0.9.5
 
-## 2.0.1 - 07.01.2020
+## 2.0.2 - 10.03.2020
+
+### Fixed
+
+* empty loader bug #336
+* error when setting AdminBro in root path #272
+
+## 2.0.1 - 03.01.2020
 
 ### Added
 
