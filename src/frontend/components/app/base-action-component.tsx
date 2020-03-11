@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 
 import { Trans } from 'react-i18next'
 import ErrorBoundary from './error-boundary'
@@ -71,15 +71,10 @@ const BaseActionComponent: React.FC<ActionProps> = (props) => {
   const { resource, action, record, records, setTag } = props
   const documentationLink = [DOCS, 'BaseAction.html'].join('/')
 
-  const [isClient, setIsClient] = useState(false)
   const { translateMessage } = useTranslation()
 
-  useEffect(() => {
-    setIsClient(true)
-  })
-
   let Action = actions[action.name]
-  if (isClient && action.component) {
+  if (action.component) {
     Action = AdminBro.UserComponents[action.component]
   }
   if (Action) {

@@ -1,5 +1,3 @@
-import path from 'path'
-import slash from 'slash'
 import AdminBroOptions from '../../admin-bro-options.interface'
 import { Paths } from '../../frontend/store/store'
 

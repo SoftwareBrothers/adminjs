@@ -25,10 +25,6 @@ type State = {
   selectedRecords: Array<RecordJSON>;
 }
 
-type Props = ActionProps & RouteComponentProps & AddNoticeProps
-
-// TODO: add direction enum
-
 const List: React.FC<ActionProps> = ({ resource, setTag }) => {
   const {
     records,

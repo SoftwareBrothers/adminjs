@@ -114,6 +114,7 @@
  * @property {string} highlight=#F6F7FB     <div style="background: #F6F7FB; height: 20px;" />
  * @property {string} filterInputBorder=rgba(255,255,255,0.15)      <div style="background: rgba(255,255,255,0.15); height: 20px;" />
  * @property {string} filterDisabled=rgba(83,91,142,0.05)      <div style="background: rgba(83,91,142,0.05); height: 20px;" />
+ * @property {string} bg=#F6F7FB      <div style="background: #F6F7FB; height: 20px;" />
  */
 const colors = {
   // Primary
@@ -159,6 +160,7 @@ const colors = {
   highlight: '#F6F7FB',
   filterInputBorder: 'rgba(255,255,255,0.15)',
   filterDisabled: 'rgba(83,91,142,0.05)',
+  bg: '#F6F7FB',
 }
 
 /**

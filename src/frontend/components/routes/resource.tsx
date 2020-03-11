@@ -48,6 +48,9 @@ const ResourceAction: React.FC<Props> = (props) => {
   const { resources, match, location } = props
   const { resourceId } = match.params
 
+  const [filterVisible, setFilerVisible] = useState(queryHasFilter(location.search))
+  const [tag, setTag] = useState('')
+
   const resource = resources.find(r => r.id === resourceId)
   if (!resource) {
     return (<NoResourceError resourceId={resourceId} />)
@@ -65,8 +68,9 @@ const ResourceAction: React.FC<Props> = (props) => {
     return (<NoActionError resourceId={resourceId} actionName={listActionName} />)
   }
 
-  const [filterVisible, setFilerVisible] = useState(queryHasFilter(location.search))
-  const [tag, setTag] = useState('')
+  const toggleFilter = listAction.showFilter
+    ? ((): void => setFilerVisible(!filterVisible))
+    : undefined
 
   return (
     <Box variant="grey">
@@ -74,7 +78,7 @@ const ResourceAction: React.FC<Props> = (props) => {
         resource={resource}
         action={listAction}
         tag={tag}
-        toggleFilter={(): void => setFilerVisible(!filterVisible)}
+        toggleFilter={toggleFilter}
       />
       <BaseAction action={listAction} resource={resource} setTag={setTag} />
       {listAction.showFilter ? (

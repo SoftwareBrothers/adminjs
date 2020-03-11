@@ -47,7 +47,7 @@ const App: React.FC = () => {
           />
         ) : null}
         <Sidebar isVisible={sidebarVisible} />
-        <Box flex flexGrow={1} flexDirection="column" overflowY="auto" bg="grey20">
+        <Box flex flexGrow={1} flexDirection="column" overflowY="auto" bg="bg">
           <TopBar toggleSidebar={() => toggleSidebar(!sidebarVisible)} />
           <Box position="absolute" top={0}>
             <Notice />
