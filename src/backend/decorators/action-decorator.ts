@@ -165,6 +165,7 @@ class ActionDecorator {
       showFilter: !!this.action.showFilter,
       component: this.action.component,
       showInDrawer: !!this.action.showInDrawer,
+      hideActionHeader: !!this.action.hideActionHeader,
     }
   }
 }

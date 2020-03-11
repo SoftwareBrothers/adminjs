@@ -33,6 +33,7 @@ export const useRecords = (resourceId: string): UseRecordsResult => {
   const history = useHistory()
   const addNotice = useNotice()
   const { translateMessage } = useTranslation()
+  const onNotice = useNotice()
 
   const fetchData = () => {
     setLoading(true)
@@ -44,6 +45,13 @@ export const useRecords = (resourceId: string): UseRecordsResult => {
 
     promise.then((response) => {
       const listActionResponse = response.data as ListActionResponse
+      if (listActionResponse.notice) {
+        onNotice(listActionResponse.notice)
+      }
+      if (listActionResponse.redirectUrl) {
+        history.push(listActionResponse.redirectUrl)
+        return
+      }
 
       setRecords(listActionResponse.records)
       setPage(listActionResponse.meta.page)

@@ -308,6 +308,21 @@ class ResourceDecorator {
     return record.param(this.titleProperty().name())
   }
 
+  getHref(currentAdmin?: CurrentAdmin): string {
+    const { href } = this.options
+    if (href) {
+      if (typeof href === 'function') {
+        return href({
+          resource: this._resource,
+          currentAdmin,
+          h: this.h,
+        })
+      }
+      return href
+    }
+    return this.h.resourceUrl({ resourceId: this.id() })
+  }
+
   /**
    * Returns JSON representation of a resource
    *
@@ -319,7 +334,7 @@ class ResourceDecorator {
       id: this.id(),
       name: this.getResourceName(),
       parent: this.getParent(),
-      href: this.h.resourceUrl({ resourceId: this.id() }),
+      href: this.getHref(currentAdmin),
       titleProperty: this.titleProperty().toJSON(),
       resourceActions: this.resourceActions(currentAdmin).map(ra => ra.toJSON()),
       actions: Object.values(this.actions).map(action => action.toJSON()),

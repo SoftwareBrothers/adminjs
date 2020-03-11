@@ -1,5 +1,5 @@
 import * as flat from 'flat'
-import Action from './action.interface'
+import Action, { ActionResponse } from './action.interface'
 import sortSetter from '../services/sort-setter'
 import Filter from '../utils/filter'
 import populator from '../utils/populator'
@@ -80,7 +80,7 @@ export default ListAction
  * @memberof module:ListAction
  * @alias ListAction
  */
-export type ListActionResponse = {
+export type ListActionResponse = ActionResponse & {
   /**
    * Paginated collection of records
    */

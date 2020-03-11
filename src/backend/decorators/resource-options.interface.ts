@@ -1,6 +1,28 @@
 import Action, { ActionResponse, RecordActionResponse, BulkActionResponse } from '../actions/action.interface'
 import PropertyOptions from './property-options.interface'
 import { ListActionResponse } from '../actions/list-action'
+import { CurrentAdmin } from '../../current-admin.interface'
+import BaseResource from '../adapters/base-resource'
+import ViewHelpers from '../utils/view-helpers'
+
+/**
+ * @alias HrefContext
+ * @memberof ResourceOptions
+ */
+export type HrefContext = {
+  /**
+   * view helpers
+   */
+  h: ViewHelpers;
+  /**
+   * Resource on which href has been invoked.
+   */
+  resource: BaseResource;
+  /**
+   * Currently logged in admin
+   */
+  currentAdmin?: CurrentAdmin;
+}
 
 /**
  * Options for given resource
@@ -36,6 +58,10 @@ export interface ResourceOptions {
    * List of properties which should be visible on the filter
    */
   filterProperties?: Array<string>;
+  /**
+   * Where resource link in sidebar should redirect. Default to the list action.
+   */
+  href?: ((context: HrefContext) => string) | string;
   /**
    * Parent element under which resource should be nested in sidebar. Default
    * to the database name.

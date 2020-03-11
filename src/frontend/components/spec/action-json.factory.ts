@@ -8,4 +8,5 @@ factory.define<ActionJSON>('ActionJSON', Object, {
   label: 'someLabel',
   showFilter: false,
   resourceId: 'resource',
+  hideActionHeader: false,
 })

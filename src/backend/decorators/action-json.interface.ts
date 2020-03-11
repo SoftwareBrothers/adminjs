@@ -37,7 +37,10 @@ export default interface ActionJSON {
    * Whether given action should be seen in a drawer
    */
   showInDrawer: boolean;
-
+  /**
+   * Whether given action have an action header
+   */
+  hideActionHeader: boolean;
   /**
    * Id of a resource to which given action belongs.
    */

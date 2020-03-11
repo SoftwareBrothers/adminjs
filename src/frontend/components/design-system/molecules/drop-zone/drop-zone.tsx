@@ -239,7 +239,6 @@ export const DropZone: React.FC<DropZoneProps> = (props) => {
             ) : ''}
             {validate && validate.mimeTypes && validate.mimeTypes.length ? (
               <Text variant="xs" color="grey60" lineHeight="default" mt="sm">
-                <Label inline uppercase>Available types:</Label>
                 {validate.mimeTypes.join(', ')}
               </Text>
             ) : ''}

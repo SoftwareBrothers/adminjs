@@ -53,6 +53,10 @@ const ActionHeader: React.FC<ActionHeaderProps> = (props) => {
     resource, toggleFilter, actionPerformed, record, action, tag, omitActions,
   } = props
 
+  if (action.hideActionHeader) {
+    return null
+  }
+
   const resourceId = resource.id
   const actions = record
     ? record.recordActions.filter(ra => !action || action.name !== ra.name)
@@ -86,7 +90,7 @@ const ActionHeader: React.FC<ActionHeaderProps> = (props) => {
                 resourceId={resource.id}
               >
                 <Link as="span" ml="lg">
-                  <Icon icon={customAction.icon} />
+                  {customAction.icon ? <Icon icon={customAction.icon} /> : null}
                   {customAction.label}
                 </Link>
               </ActionButton>
@@ -130,7 +134,7 @@ const ActionHeader: React.FC<ActionHeaderProps> = (props) => {
                   variant={headerAction.name === 'new' ? 'primary' : undefined}
                   size={cssActionButtonSize}
                 >
-                  <Icon icon={headerAction.icon} />
+                  {headerAction.icon ? <Icon icon={headerAction.icon} /> : null}
                   {headerAction.label}
                 </Button>
               </ActionButton>

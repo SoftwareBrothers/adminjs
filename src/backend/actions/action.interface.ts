@@ -539,4 +539,13 @@ export default interface Action <T extends ActionResponse> {
    * Indicates if given action should be seen in a drawer or in a full screen. Default to false
    */
   showInDrawer?: boolean;
+
+  /**
+   * Indicates if Action Header should be hidden.
+   * Action header consist of:
+   * - breadcrumbs
+   * - action buttons
+   * - action title
+   */
+  hideActionHeader?: boolean;
 }

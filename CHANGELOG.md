@@ -6,7 +6,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 Started since version 0.9.5
 
-## 2.0.4 - unreleased
+## 2.1.0 - unreleased
+
+### Added
+
+* add the ability to hide action header (hideActionHeader)
+* add option to change the default href for a resource in a sidebar.
 
 ### Fixed
 
@@ -15,6 +20,8 @@ Started since version 0.9.5
 ### Changed
 
 * move out bg color to a separate property in Theme
+* useRecords automatically renders notice and redirects to given page
+if it was requested by the backend
 
 ## 2.0.2/2.0.3 - 10.03.2020
 
