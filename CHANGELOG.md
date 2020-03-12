@@ -14,6 +14,7 @@ Started since version 0.9.5
 * add option to change the default href for a resource in a sidebar.
 * add avatarUrl to CurrentAdmin
 * add currentAdmin hook
+* add `progress` to `useRecord` hook
 
 ### Fixed
 
@@ -25,6 +26,7 @@ Started since version 0.9.5
 * move out bg color to a separate property in Theme
 * useRecords automatically renders notice and redirects to given page
 if it was requested by the backend
+* drop zone can have external state via files prop
 
 ## 2.0.2/2.0.3 - 10.03.2020
 
