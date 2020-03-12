@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useCallback, useEffect } from 'react'
 import styled from 'styled-components'
 
 import { Label } from '../../atoms/label'
@@ -41,7 +41,14 @@ export type OnDropZoneChange = (files: Array<File>) => void
  * @alias DropZoneProps
  */
 export type DropZoneProps = {
+  /**
+   * if drop zone should handle multiple uploads
+   */
   multiple?: boolean;
+  /**
+   * Initial files collection (in case you want to hold files state)
+   */
+  files?: Array<File>;
   /**
    * Callback performed when the file is dropped/selected
    */
@@ -160,26 +167,32 @@ type ErrorMessage = {
  * )
  */
 export const DropZone: React.FC<DropZoneProps> = (props) => {
-  const { validate, onChange, multiple, ...other } = props
+  const { validate, onChange, multiple, files, ...other } = props
 
   const [isDragging, setIsDragging] = useState(false)
   const [error, setError] = useState<ErrorMessage | null>(null)
-  const [filesToUpload, setFilesToUpload] = useState<Array<File>>([])
+  const [filesToUpload, setFilesToUpload] = useState<Array<File>>(files ?? [])
+
+  useEffect(() => {
+    if (files) {
+      setFilesToUpload(files)
+    }
+  }, [files])
 
   const onDragEnter = (): void => setIsDragging(true)
   const onDragLeave = (): void => setIsDragging(false)
   const onDragOver = (): void => setIsDragging(true)
 
-  const removeItem = (index: number): void => {
+  const removeItem = useCallback((index: number): void => {
     const newItems = [...filesToUpload]
     newItems.splice(index, 1)
     if (onChange) {
       onChange(newItems)
     }
     setFilesToUpload(newItems)
-  }
+  }, [filesToUpload, setFilesToUpload, onChange])
 
-  const onDrop = (event: React.DragEvent | React.SyntheticEvent): void => {
+  const onDrop = useCallback((event: React.DragEvent | React.SyntheticEvent): void => {
     event.preventDefault()
     setIsDragging(false)
 
@@ -213,7 +226,7 @@ export const DropZone: React.FC<DropZoneProps> = (props) => {
       onChange(newFiles)
     }
     setFilesToUpload(newFiles)
-  }
+  }, [onChange, setFilesToUpload, setIsDragging])
 
   return (
     <Box>

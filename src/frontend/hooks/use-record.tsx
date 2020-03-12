@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useCallback } from 'react'
 import { AxiosResponse } from 'axios'
 import ApiClient from '../utils/api-client'
 import RecordJSON from '../../backend/decorators/record-json.interface'
@@ -32,6 +32,11 @@ export type UseRecordResult = {
    * Flag indicates loading.
    */
   loading: boolean;
+
+  /**
+   * Upload progress
+   */
+  progress: number;
 }
 
 /**
@@ -97,6 +102,7 @@ export const useRecord = (
   resourceId: string,
 ): UseRecordResult => {
   const [loading, setLoading] = useState(false)
+  const [progress, setProgress] = useState(0)
   const [record, setRecord] = useState<RecordJSON>({
     ...initialRecord,
     params: initialRecord?.params ?? {},
@@ -106,7 +112,7 @@ export const useRecord = (
 
   const onNotice = useNotice()
 
-  const handleChange = (
+  const handleChange = useCallback((
     propertyOrRecord: RecordJSON | string,
     value?: any,
   ): void => {
@@ -122,24 +128,26 @@ export const useRecord = (
         params: { ...prev.params, [propertyOrRecord as string]: value },
       }))
     }
-  }
+  }, [])
 
-  const handleSubmit = (): Promise<AxiosResponse<RecordActionResponse>> => {
+  const handleSubmit = useCallback((): Promise<AxiosResponse<RecordActionResponse>> => {
     setLoading(true)
     const formData = recordToFormData(record)
+    const params = {
+      resourceId,
+      onUploadProgress: (e): void => setProgress(Math.round((e.loaded * 100) / e.total)),
+      data: formData,
+      headers: { 'Content-Type': 'multipart/form-data' },
+    }
     const promise = record.id
       ? api.recordAction({
-        resourceId,
+        ...params,
         actionName: 'edit',
         recordId: record.id,
-        data: formData,
-        headers: { 'Content-Type': 'multipart/form-data' },
       })
       : api.resourceAction({
-        resourceId,
+        ...params,
         actionName: 'new',
-        data: formData,
-        headers: { 'Content-Type': 'multipart/form-data' },
       }) as Promise<AxiosResponse<RecordActionResponse>>
 
     promise.then((response) => {
@@ -152,6 +160,7 @@ export const useRecord = (
         populated: { ...prev.populated, ...response.data.record.populated },
         params: { ...prev.params, ...response.data.record.params },
       }))
+      setProgress(0)
       setLoading(false)
     }).catch(() => {
       onNotice({
@@ -159,12 +168,13 @@ export const useRecord = (
         'There was an error updating record, Check out console to see more information.',
         type: 'error',
       })
+      setProgress(0)
       setLoading(false)
     })
     return promise
-  }
+  }, [record, resourceId, setLoading, setProgress])
 
-  return { record, handleChange, submit: handleSubmit, loading }
+  return { record, handleChange, submit: handleSubmit, loading, progress }
 }
 
 export default useRecord
