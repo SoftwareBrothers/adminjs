@@ -10,7 +10,7 @@ const variants = variant({
   variants: {
     grey: {
       flexGrow: 1,
-      bg: 'grey20',
+      bg: 'bg',
       py: 'xl',
       px: ['0', 'xl'],
     },
