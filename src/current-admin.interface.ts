@@ -18,7 +18,7 @@ export type CurrentAdmin = {
   /**
    * Optional title/role of an admin - this will be presented below the email
    */
-  title: string;
+  title?: string;
   /**
    * Optional url for an avatar photo
    */

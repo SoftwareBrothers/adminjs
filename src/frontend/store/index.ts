@@ -5,7 +5,7 @@ import createStore, {
   initializeDashboard,
   initializePaths,
   initializePages,
-  initializeSession,
+  setCurrentAdmin,
   initializeVersions,
   initializeLocale,
   ReduxState,
@@ -40,7 +40,7 @@ const initializeStore = (admin: AdminBro, currentAdmin?: CurrentAdmin): Store<Re
 
   store.dispatch(initializePages(pagesArray))
   store.dispatch(initializePaths({ loginPath, logoutPath, rootPath, assetsCDN }))
-  store.dispatch(initializeSession(currentAdmin))
+  store.dispatch(setCurrentAdmin(currentAdmin))
   store.dispatch(initializeDashboard(dashboard))
   store.dispatch(initializeVersions({
     app: admin.options.version && admin.options.version.app,

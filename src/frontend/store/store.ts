@@ -65,7 +65,7 @@ export const initializeVersions = (data: VersionProps): {
   data,
 })
 
-export const initializeSession = (data = {}) => ({
+export const setCurrentAdmin = (data: CurrentAdmin | null = null) => ({
   type: 'SESSION_INITIALIZE',
   data,
 })
@@ -189,7 +189,7 @@ const sessionReducer = (
   state: CurrentAdmin | null = null,
   action: {
     type: string;
-    data: CurrentAdmin;
+    data: CurrentAdmin | null;
   },
 ) => {
   switch (action.type) {
