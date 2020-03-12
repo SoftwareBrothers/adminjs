@@ -16,25 +16,28 @@ const LoggedUserInfo = styled(Box)`
 
   & img {
     border-radius: 9999px;
-    margin: 0 8px;
+    margin-right: 0 8px;
     width: 36px;
     height: 36px;
+    object-fit: cover;
+    border-radius: 9999px;
   }
 `
 
 export type LoggedUserProps = {
   email: string;
   title?: string;
+  avatarUrl?: string;
 }
 
 export const LoggedUser: React.FC<LoggedUserProps> = (props) => {
-  const { email, title, children } = props
+  const { email, title, avatarUrl, children } = props
 
   return (
     <DropDown>
       <DropDownTrigger>
         <LoggedUserInfo pr="xl">
-          <Box>
+          <Box mr="default">
             <Text
               fontSize="default"
               lineHeight={title ? 'lg' : 'xl'}
@@ -44,7 +47,9 @@ export const LoggedUser: React.FC<LoggedUserProps> = (props) => {
             </Text>
             <Text fontSize="sm" color="grey40" lineHeight="sm">{title}</Text>
           </Box>
-          <img src="https://api.adorable.io/avatars/24/softwarebrothers.png" alt="avatar" />
+          {avatarUrl ? (
+            <img src={avatarUrl} alt="avatar" />
+          ) : null}
           <Icon icon="OverflowMenuVertical" size={16} my="default" color="grey60" />
         </LoggedUserInfo>
       </DropDownTrigger>

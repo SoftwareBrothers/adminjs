@@ -19,6 +19,7 @@ const LoggedIn: React.FC<Props> = (props) => {
       <LoggedUser
         email={session.email}
         title={session.title}
+        avatarUrl={session.avatarUrl}
       >
         <DropDownItem>
           <Link href={paths.logoutPath}>{translateButton('logout')}</Link>

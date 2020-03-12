@@ -20,6 +20,10 @@ export type CurrentAdmin = {
    */
   title: string;
   /**
+   * Optional url for an avatar photo
+   */
+  avatarUrl?: string;
+  /**
    * Id of your admin user
    */
   id?: string;
