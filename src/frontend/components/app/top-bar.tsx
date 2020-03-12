@@ -33,8 +33,9 @@ const TopBar: React.FC<Props> = (props) => {
         px={['default', 'lg']}
         onClick={toggleSidebar}
         display={['block', 'block', 'block', 'block', 'none']}
+        style={{ cursor: 'pointer' }}
       >
-        <Icon icon="Menu" size={32} />
+        <Icon icon="Menu" size={32} color="grey100" />
       </Box>
       <Version versions={versions} />
       {session && session.email ? <LoggedIn session={session} paths={paths} /> : ''}

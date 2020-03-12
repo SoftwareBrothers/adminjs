@@ -84,7 +84,7 @@ const RecordInList: React.FC<Props> = (props) => {
         {recordActions.length ? (
           <DropDown>
             <DropDownTrigger py="sm" px="xl">
-              <Icon icon="OverflowMenuHorizontal" />
+              <Icon icon="OverflowMenuHorizontal" color="grey100" />
             </DropDownTrigger>
             <DropDownMenu>
               {recordActions.map(action => (
