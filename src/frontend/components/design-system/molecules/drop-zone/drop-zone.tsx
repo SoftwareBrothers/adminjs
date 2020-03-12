@@ -167,17 +167,17 @@ type ErrorMessage = {
  * )
  */
 export const DropZone: React.FC<DropZoneProps> = (props) => {
-  const { validate, onChange, multiple, files, ...other } = props
+  const { validate, onChange, multiple, files: filesFromProps, ...other } = props
 
   const [isDragging, setIsDragging] = useState(false)
   const [error, setError] = useState<ErrorMessage | null>(null)
-  const [filesToUpload, setFilesToUpload] = useState<Array<File>>(files ?? [])
+  const [filesToUpload, setFilesToUpload] = useState<Array<File>>(filesFromProps ?? [])
 
   useEffect(() => {
-    if (files) {
-      setFilesToUpload(files)
+    if (filesFromProps) {
+      setFilesToUpload(filesFromProps)
     }
-  }, [files])
+  }, [filesFromProps])
 
   const onDragEnter = (): void => setIsDragging(true)
   const onDragLeave = (): void => setIsDragging(false)
