@@ -13,6 +13,7 @@ Started since version 0.9.5
 * add the ability to hide action header (hideActionHeader)
 * add option to change the default href for a resource in a sidebar.
 * add avatarUrl to CurrentAdmin
+* add currentAdmin hook
 
 ### Fixed
 
