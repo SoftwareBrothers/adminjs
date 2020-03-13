@@ -168,9 +168,13 @@ class ResourceDecorator {
   /**
    * Returns resource parent along with the icon. By default it is a
    * database type with its icon
-   * @return {Record<string,string>} returns { name, icon }
+   * @return {ResourceJSON['parent']}
    */
-  getParent(): {name: string; icon: string} {
+  getParent(): ResourceJSON['parent'] {
+    // when user gives parent: null
+    if (this.options.parent === null) {
+      return null
+    }
     const parent = (
       this.options.parent || this._resource.databaseName()
     ) as {name: string; icon: string}
@@ -308,7 +312,7 @@ class ResourceDecorator {
     return record.param(this.titleProperty().name())
   }
 
-  getHref(currentAdmin?: CurrentAdmin): string {
+  getHref(currentAdmin?: CurrentAdmin): string | null {
     const { href } = this.options
     if (href) {
       if (typeof href === 'function') {
@@ -320,7 +324,10 @@ class ResourceDecorator {
       }
       return href
     }
-    return this.h.resourceUrl({ resourceId: this.id() })
+    if (this.resourceActions(currentAdmin).find(action => action.name === 'list')) {
+      return this.h.resourceUrl({ resourceId: this.id() })
+    }
+    return null
   }
 
   /**

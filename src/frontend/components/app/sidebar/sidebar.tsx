@@ -9,6 +9,7 @@ import { ReduxState } from '../../../store/store'
 import { Navigation, Box, Label } from '../../design-system'
 import SidebarFooter from './sidebar-footer'
 import { useTranslation } from '../../../hooks/use-translation'
+import { cssClass } from '../../design-system/utils/css-class'
 
 type Props = {
   isVisible: boolean;
@@ -27,10 +28,10 @@ const Sidebar: React.FC<Props> = (props) => {
       className={isVisible ? 'visible' : 'hidden'}
       position={['absolute', 'absolute', 'absolute', 'absolute', 'inherit']}
     >
-      <Box flexShrink={0} px="lg" pb="xxl">
+      <Box flexShrink={0} px="lg" pb="xxl" className={cssClass('Logo')}>
         <SidebarBranding branding={branding} />
       </Box>
-      <Box flexGrow={1}>
+      <Box flexGrow={1} className={cssClass('Resources')}>
         <Label uppercase ml="lg" color="grey60">{translateLabel('navigation')}</Label>
         {groupResources(resources).map(parent => (
           <SidebarParent parent={parent} key={parent.name} />

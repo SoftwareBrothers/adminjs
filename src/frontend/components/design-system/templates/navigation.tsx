@@ -1,6 +1,7 @@
 /* eslint-disable import/prefer-default-export */
 import styled from 'styled-components'
 import { Box } from '../atoms/box'
+import { cssClass } from '../utils/css-class'
 
 export const Navigation = styled(Box)`
   height: 100%;
@@ -21,3 +22,7 @@ export const Navigation = styled(Box)`
     transition: all 500ms;
   }
 `
+
+Navigation.defaultProps = {
+  className: cssClass('Navigation'),
+}

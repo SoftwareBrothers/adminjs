@@ -65,11 +65,13 @@ export interface ResourceOptions {
   /**
    * Parent element under which resource should be nested in sidebar. Default
    * to the database name.
+   *
+   * If null is given. Parent wont be displayed
    */
   parent?: {
     name?: string;
     icon?: string;
-  } | string;
+  } | string | null;
   /**
    * Default sort property and direction.
    */
