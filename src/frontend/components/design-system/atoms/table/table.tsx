@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 import { layout, LayoutProps } from 'styled-system'
+import { cssClass } from '../../utils/css-class'
 
 /**
  * Main Table wrapper. Along with _TableRow_, _TableCell_, _TableCaption_,
@@ -84,6 +85,7 @@ const Table = styled.table<LayoutProps>`
 
 Table.defaultProps = {
   width: 1,
+  className: cssClass('Table'),
 }
 
 export default Table

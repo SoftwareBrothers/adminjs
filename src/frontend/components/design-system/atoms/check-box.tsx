@@ -124,7 +124,7 @@ export const CheckBox: React.FC<CheckBoxProps> = (props) => {
   }
 
   return (
-    <CheckboxRadioContainer className={className}>
+    <CheckboxRadioContainer className={[className ?? '', 'admin-bro_Checkbox'].join(' ')}>
       <HiddenCheckbox
         checked={actuallyChecked}
         onChange={handleChange}

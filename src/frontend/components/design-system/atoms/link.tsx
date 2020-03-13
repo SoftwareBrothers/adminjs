@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 import { color, space, ColorProps, variant, SpaceProps } from 'styled-system'
+import { cssClass } from '../utils/css-class'
 
 const sizeVariants = variant({
   prop: 'size',
@@ -136,6 +137,7 @@ export const Link = styled.a<LinkProps>`
 
 Link.defaultProps = {
   color: 'grey60',
+  className: cssClass('Link'),
 }
 
 export default Link

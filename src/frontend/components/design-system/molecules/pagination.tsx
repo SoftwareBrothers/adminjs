@@ -5,6 +5,7 @@ import JWPaginate from 'jw-paginate'
 import { Box } from '../atoms/box'
 import { Button, ButtonProps } from '../atoms/button'
 import { Icon } from '../atoms/icon'
+import { cssClass } from '../utils/css-class'
 
 /**
  * @alias PaginationProps
@@ -45,6 +46,10 @@ const PaginationLink = styled(Button).attrs((props: ButtonProps) => ({
   padding: 3px 6px;
   text-align: center;
 `
+
+PaginationLink.defaultProps = {
+  className: cssClass('PaginationLink'),
+}
 
 const PaginationWrapper = styled(Box)`
   display: inline-block;
@@ -101,7 +106,7 @@ export const Pagination: React.FC<PaginationProps> = (props) => {
   }
 
   return (
-    <PaginationWrapper {...rest}>
+    <PaginationWrapper className={cssClass('Pagination')} {...rest}>
       <PaginationLink
         disabled={isFirstPage}
         onClick={(): void => (!isFirstPage ? onChange(prevPage) : undefined)}

@@ -3,6 +3,7 @@ import styled from 'styled-components'
 
 import { Box, BoxProps } from '../atoms/box'
 import { H4 } from '../atoms/header'
+import { cssClass } from '../utils/css-class'
 
 const StyledInfoBox = styled(Box)<BoxProps>`
   display: flex;
@@ -52,7 +53,7 @@ export type InfoBoxProps = {
 export const InfoBox: React.FC<InfoBoxProps> = (props) => {
   const { children, title, testId } = props
   return (
-    <StyledInfoBox data-testid={testId} variant="white">
+    <StyledInfoBox data-testid={testId} variant="white" className={cssClass('InfoBox')}>
       <Box width={1 / 2}>
         <H4 mb="lg">{title}</H4>
         {children}

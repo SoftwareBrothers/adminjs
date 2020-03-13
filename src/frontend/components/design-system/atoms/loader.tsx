@@ -2,6 +2,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { Box } from './box'
+import { cssClass } from '../utils/css-class'
 
 const Spinner = styled.div.attrs({
   className: 'lds-facebook',
@@ -56,7 +57,12 @@ const Spinner = styled.div.attrs({
  * )
  */
 export const Loader: React.FC = () => (
-  <Box p="x3" style={{ textAlign: 'center' }} data-testid="Loader">
+  <Box
+    p="x3"
+    style={{ textAlign: 'center' }}
+    data-testid="Loader"
+    className={cssClass('Loader')}
+  >
     <Spinner>
       <div />
       <div />

@@ -2,6 +2,7 @@ import styled, { css } from 'styled-components'
 import { color, space, ColorProps, SpaceProps,
   TypographyProps, typography, variant } from 'styled-system'
 import focusShadowStyle from '../utils/focus-shadow.style'
+import { cssClass } from '../utils/css-class'
 
 const variantShared = {
   color: 'white',
@@ -21,6 +22,7 @@ const buttonVariants = variant({
       '&:hover': {
         bg: 'hoverBg',
       },
+      className: cssClass(['Button', 'Button_Primary']),
       ...variantShared,
     },
     danger: {
@@ -28,6 +30,7 @@ const buttonVariants = variant({
       '&:hover': {
         bg: 'errorDark',
       },
+      className: cssClass(['Button', 'Button_Danger']),
       ...variantShared,
     },
     success: {
@@ -35,6 +38,7 @@ const buttonVariants = variant({
       '&:hover': {
         bg: 'successDark',
       },
+      className: cssClass(['Button', 'Button_Success']),
       ...variantShared,
     },
     info: {
@@ -42,10 +46,12 @@ const buttonVariants = variant({
       '&:hover': {
         bg: 'infoDark',
       },
+      className: cssClass(['Button', 'Button_Info']),
       ...variantShared,
     },
     secondary: {
       bg: 'accent',
+      className: cssClass(['Button', 'Button_Secondary']),
       ...variantShared,
     },
     text: {
@@ -70,6 +76,7 @@ const buttonVariants = variant({
       '&:hover svg': {
         fill: 'hoverBg',
       },
+      className: cssClass(['Button', 'Button_Text']),
     },
   },
 })
@@ -81,7 +88,7 @@ const sizeVariants = variant({
       fontSize: 'default',
       py: 'sm',
       px: 'xxl',
-      '& .admin-bro-icon': {
+      [`& .${cssClass('Icon')}`]: {
         paddingRight: 'sm',
       },
     },
@@ -95,7 +102,7 @@ const sizeVariants = variant({
       lineHeight: 'sm',
       minWidth: '34px',
       height: '34px',
-      '& .admin-bro-icon': {
+      [`& .${cssClass('Icon')}`]: {
         padding: 0,
       },
     },
@@ -154,7 +161,7 @@ export const ButtonCSS = css<ButtonProps>`
   padding: ${({ theme }): string => theme.space.default} ${({ theme }): string => theme.space.x3};
   box-sizing: border-box;
 
-  & > .admin-bro-icon {
+  & > .${cssClass('Icon')} {
     padding-bottom: 2px;
     vertical-align: middle;
     padding-right: ${({ theme }): string => theme.space.default};
@@ -260,6 +267,7 @@ export const Button = styled.button<ButtonProps>`
 Button.defaultProps = {
   fontSize: 'default',
   bg: 'transparent',
+  className: cssClass('Button'),
 }
 
 export default Button

@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 import { space, typography, layout, SpaceProps, TypographyProps, LayoutProps } from 'styled-system'
 import { InputCSS } from './input'
+import { cssClass } from '../utils/css-class'
 
 
 /**
@@ -44,6 +45,7 @@ TextArea.defaultProps = {
   px: 'default',
   py: 'default',
   fontSize: 'lg',
+  className: cssClass('TextArea'),
 }
 
 export default TextArea

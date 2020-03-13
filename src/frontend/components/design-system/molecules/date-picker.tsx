@@ -8,6 +8,7 @@ import styles from '../utils/datepicker.styles'
 import { Input } from '../atoms/input'
 import { Button } from '../atoms/button'
 import { InputGroup } from './form-group'
+import { cssClass } from '../utils/css-class'
 
 
 const StyledDatePicker = styled(InputGroup)`
@@ -167,7 +168,7 @@ export const DatePicker: React.FC<DatePickerProps> = (props) => {
         onClick={(): void => setHidden(true)}
         className={hidden ? 'hidden' : 'visible'}
       />
-      <StyledDatePicker className={hidden ? 'normal' : 'active'}>
+      <StyledDatePicker className={cssClass('DatePicker', hidden ? 'normal' : 'active')}>
         <Input
           value={stringValue || ''}
           onChange={event => onChange(event.target.value)}

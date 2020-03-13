@@ -2,6 +2,7 @@
 import styled from 'styled-components'
 import { space, SpaceProps, LayoutProps, variant, layout } from 'styled-system'
 import DrawerFooter from './drawer-footer'
+import { cssClass } from '../../utils/css-class'
 
 const DEFAULT_WIDTH = '500px'
 
@@ -27,6 +28,7 @@ const variants = variant({
       bg: 'filterBg',
       width: '400px',
       color: 'white',
+      className: cssClass(['Drawer', 'Drawer_Filter']),
     },
   },
 })
@@ -110,6 +112,7 @@ export const Drawer = styled.section<DrawerProps>`
 
 Drawer.defaultProps = {
   width: DEFAULT_WIDTH,
+  className: cssClass('Drawer'),
 }
 
 export default Drawer

@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { cssClass } from '../../utils/css-class'
 
 /**
  * @component
@@ -14,5 +15,9 @@ const TableHead = styled.thead`
     white-space: nowrap;
   }
 `
+
+TableHead.defaultProps = {
+  className: cssClass('TableHead'),
+}
 
 export default TableHead

@@ -14,6 +14,7 @@ import RecordJSON from '../../../backend/decorators/record-json.interface'
 
 import { Box, Badge, H3, H2, Button, Icon, ButtonCSS, ButtonProps, Link } from '../design-system'
 import Breadcrumbs from './breadcrumbs'
+import { cssClass } from '../design-system/utils/css-class'
 
 /**
  * @memberof ActionHeader
@@ -78,7 +79,7 @@ const ActionHeader: React.FC<ActionHeaderProps> = (props) => {
   const CssHComponent = action.showInDrawer ? H3 : H2
 
   return (
-    <React.Fragment>
+    <Box className={cssClass('ActionHeader')}>
       {action.showInDrawer ? '' : (
         <Box flex flexDirection="row" px={['default', 0]}>
           <Breadcrumbs resource={resource} actionName={action.name} record={record} />
@@ -148,7 +149,7 @@ const ActionHeader: React.FC<ActionHeaderProps> = (props) => {
           </Box>
         )}
       </Box>
-    </React.Fragment>
+    </Box>
   )
 }
 

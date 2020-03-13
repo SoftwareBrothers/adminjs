@@ -2,6 +2,7 @@ import styled from 'styled-components'
 import { color, space, layout, SpaceProps, ColorProps, LayoutProps } from 'styled-system'
 
 import TableHead from './table-head'
+import { cssClass } from '../../utils/css-class'
 
 /**
  * @component
@@ -24,6 +25,7 @@ const TableCell = styled.td<SpaceProps | ColorProps | LayoutProps>`
 TableCell.defaultProps = {
   p: 'lg',
   color: 'grey100',
+  className: cssClass('TableCell'),
 }
 
 export default TableCell

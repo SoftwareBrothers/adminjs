@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 import { Button } from '../button'
 import { Text } from '../text'
+import { cssClass } from '../../utils/css-class'
 
 const CAPTION_HEIGHT = '42px'
 
@@ -37,5 +38,9 @@ const TableCaption = styled.caption`
     color: ${({ theme }): string => theme.colors.white};
   }
 `
+
+TableCaption.defaultProps = {
+  className: cssClass('TableCaption'),
+}
 
 export default TableCaption

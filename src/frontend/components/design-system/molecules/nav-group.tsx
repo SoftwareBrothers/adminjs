@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import { Icon } from '../atoms/icon'
 import { Box } from '../atoms/box'
 import { Text } from '../atoms/text'
+import { cssClass } from '../utils/css-class'
 
 const NavGroupTitle = styled(Text)`
   padding: 11px 20px;
@@ -30,6 +31,10 @@ const NavGroupTitle = styled(Text)`
     
   }
 `
+
+NavGroupTitle.defaultProps = {
+  className: cssClass('NavGroupTitle'),
+}
 
 /**
  * @memberof NavGroup
@@ -66,7 +71,7 @@ export const NavGroup: React.FC<NavGroupProps> = (props) => {
   const [isItOpen, toggleOpen] = useState(true)
   const chevron = isItOpen ? 'ChevronUp' : 'ChevronDown'
   return (
-    <Box>
+    <Box className={cssClass('NavGroup')}>
       <NavGroupTitle
         onClick={(): void => toggleOpen(!isItOpen)}
         bg={isItOpen ? 'grey20' : 'transparent'}

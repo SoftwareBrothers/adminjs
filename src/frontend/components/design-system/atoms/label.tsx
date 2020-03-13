@@ -5,6 +5,7 @@ import {
   TypographyProps,
   typography,
 } from 'styled-system'
+import { cssClass } from '../utils/css-class'
 
 /**
  * Prop Types of a Label component.
@@ -71,5 +72,9 @@ export const Label = styled.label<LabelProps>`
   ${space};
   ${({ disabled, theme }): string => (disabled ? `color: ${theme.colors.grey40};` : '')}
 `
+
+Label.defaultProps = {
+  className: cssClass('Label'),
+}
 
 export default Label

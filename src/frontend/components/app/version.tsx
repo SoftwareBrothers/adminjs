@@ -4,6 +4,7 @@ import styled from 'styled-components'
 import { VersionProps } from '../../../admin-bro-options.interface'
 import { Text, Box } from '../design-system'
 import { useTranslation } from '../../hooks'
+import { cssClass } from '../design-system/utils/css-class'
 
 export type Props = {
   versions: VersionProps;
@@ -25,7 +26,7 @@ const Version: React.FC<Props> = (props) => {
   const { translateLabel } = useTranslation()
 
   return (
-    <Box flexGrow={1} py="default" px="xxl">
+    <Box flexGrow={1} py="default" px="xxl" className={cssClass('Version')}>
       {admin && (
         <VersionItem>
           {translateLabel('adminVersion', { version: admin })}

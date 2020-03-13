@@ -1,6 +1,7 @@
 import styled, { css } from 'styled-components'
 import { space, SpaceProps, layout, LayoutProps } from 'styled-system'
 import focusShadowStyle from '../utils/focus-shadow.style'
+import { cssClass } from '../utils/css-class'
 
 /**
  * Input CSS Styles which can be reused in another input component with styled-components
@@ -74,6 +75,7 @@ export const Input = styled.input<InputProps>`
 Input.defaultProps = {
   px: 'default',
   py: 'sm',
+  className: cssClass('Input'),
 }
 
 export default Input

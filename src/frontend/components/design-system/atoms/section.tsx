@@ -1,6 +1,7 @@
 /* eslint-disable import/prefer-default-export */
 import styled from 'styled-components'
 import { Box } from './box'
+import { cssClass } from '../utils/css-class'
 
 /**
  * Marks group of fields as a section. Has the same props as [Box]{@link BoxProps}
@@ -25,6 +26,10 @@ const Section = styled(Box)`
   border-left: ${({ theme }): string => theme.space.sm} solid ${({ theme }): string => theme.colors.primary20};
   padding-left: ${({ theme }): string => theme.space.default};
 `
+
+Section.defaultProps = {
+  className: cssClass('Section'),
+}
 
 export { Section }
 

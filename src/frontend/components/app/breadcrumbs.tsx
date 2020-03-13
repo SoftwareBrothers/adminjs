@@ -5,6 +5,7 @@ import styled from 'styled-components'
 import ResourceJSON from '../../../backend/decorators/resource-json.interface'
 import RecordJSON from '../../../backend/decorators/record-json.interface'
 import { Box } from '../design-system'
+import { cssClass } from '../design-system/utils/css-class'
 
 const BreadcrumbLink = styled(Link)`
   color: ${({ theme }): string => theme.colors.grey40};
@@ -57,7 +58,7 @@ const Breadcrumbs: React.FC<Props> = (props) => {
   const action = resource.actions.find(a => a.name === actionName)
 
   return (
-    <Box flexGrow={1}>
+    <Box flexGrow={1} className={cssClass('Breadcrumbs')}>
       <BreadcrumbLink to={resource.href} className={record ? 'is-active' : ''}>
         {resource.name}
       </BreadcrumbLink>

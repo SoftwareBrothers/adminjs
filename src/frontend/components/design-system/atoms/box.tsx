@@ -5,6 +5,7 @@ import {
   position, PositionProps, variant,
   shadow, ShadowProps,
 } from 'styled-system'
+import { cssClass } from '../utils/css-class'
 
 const variants = variant({
   variants: {
@@ -13,11 +14,13 @@ const variants = variant({
       bg: 'bg',
       py: 'xl',
       px: ['0', 'xl'],
+      className: cssClass(['Box', 'Box_Grey']),
     },
     white: {
       px: ['default', 'xxl'],
       py: 'xxl',
       bg: 'white',
+      className: cssClass(['Box', 'Box_White']),
     },
   },
 })
@@ -89,5 +92,9 @@ export const Box = styled.section<BoxProps>`
   ${position};
   ${variants};
 `
+
+Box.defaultProps = {
+  className: cssClass('Box'),
+}
 
 export default Box

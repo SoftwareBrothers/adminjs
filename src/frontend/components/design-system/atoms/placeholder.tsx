@@ -1,7 +1,13 @@
 import React from 'react'
 
-import styled from 'styled-components'
+import styled, { DefaultTheme } from 'styled-components'
 import { LayoutProps, layout } from 'styled-system'
+
+import { cssClass } from '../utils/css-class'
+
+const linearGradient = (theme: DefaultTheme): string => (
+  `linear-gradient(to right, ${theme.colors.grey60} 8%, ${theme.colors.grey40} 18%, ${theme.colors.grey20} 33%)`
+)
 
 const StyledPlaceholder = styled.div<LayoutProps>`
   @keyframes placeHolderShimmer{
@@ -18,8 +24,8 @@ const StyledPlaceholder = styled.div<LayoutProps>`
   animation-iteration-count: infinite;
   animation-name: placeHolderShimmer;
   animation-timing-function: linear;
-  background: #f6f7f8;
-  background: linear-gradient(to right, #eeeeee 8%, #dddddd 18%, #eeeeee 33%);
+  background: ${({ theme }): string => theme.colors.white};
+  background: ${({ theme }): string => linearGradient(theme)};
   background-size: 1000px 104px;
   height: 338px;
   position: relative;
@@ -53,7 +59,7 @@ const StyledPlaceholder = styled.div<LayoutProps>`
  * )
  */
 export const Placeholder: React.FC<PlaceholderProps> = ({ as: htmlAs, ref, ...other }) => (
-  <StyledPlaceholder as={htmlAs} {...other} />
+  <StyledPlaceholder as={htmlAs} {...other} className={cssClass('Placeholder')} />
 )
 
 export type PlaceholderProps = LayoutProps & React.HTMLProps<HTMLDivElement> & {

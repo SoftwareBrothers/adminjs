@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { cssClass } from '../../utils/css-class'
 
 /**
  * @component
@@ -9,5 +10,9 @@ const TableRow = styled.tr`
     background: ${({ theme }): string => theme.colors.grey20};
   }
 `
+
+TableRow.defaultProps = {
+  className: cssClass('TableRow'),
+}
 
 export default TableRow

@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 import { color, space, typography, SpaceProps, TypographyProps, ColorProps, variant } from 'styled-system'
+import { cssClass } from '../utils/css-class'
 
 /**
  * Prop Types of an Button component.
@@ -114,6 +115,7 @@ Badge.defaultProps = {
   py: '6px',
   fontSize: 'xs',
   bg: 'grey40',
+  className: cssClass('Badge'),
 }
 
 export default Badge

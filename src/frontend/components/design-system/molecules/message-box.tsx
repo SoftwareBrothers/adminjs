@@ -7,6 +7,7 @@ import { variant as styledVariant, SpaceProps } from 'styled-system'
 import { Box } from '../atoms/box'
 import { Icon } from '../atoms/icon'
 import { Button } from '../atoms/button'
+import { cssClass } from '../utils/css-class'
 
 const sizeVariants = styledVariant({
   prop: 'size',
@@ -159,7 +160,7 @@ export const MessageBox: React.FC<MessageBoxProps> = (props) => {
   const { onCloseClick, message, icon, children, variant, size, ...other } = props
 
   return (
-    <Box {...other}>
+    <Box className={cssClass('MessageBox')} {...other}>
       <StyledMessageBox variant={variant} size={size}>
         {onCloseClick ? (
           <Button variant="text" size="icon" onClick={onCloseClick}>

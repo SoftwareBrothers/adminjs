@@ -7,6 +7,7 @@ import Version from './version'
 
 import { ReduxState } from '../../store/store'
 import { Box, Icon } from '../design-system'
+import { cssClass } from '../design-system/utils/css-class'
 
 const NavBar = styled(Box)`
   height: ${({ theme }): string => theme.sizes.navbarHeight};
@@ -16,6 +17,10 @@ const NavBar = styled(Box)`
   flex-direction: row;
   flex-shrink: 0;
 `
+
+NavBar.defaultProps = {
+  className: cssClass('NavBar'),
+}
 
 type Props = {
   toggleSidebar: (any) => void;

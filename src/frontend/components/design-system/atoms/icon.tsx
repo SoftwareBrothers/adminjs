@@ -2,6 +2,7 @@ import React from 'react'
 import styled, { css } from 'styled-components'
 import { space, SpaceProps, color, ColorProps } from 'styled-system'
 import * as CarbonIcons from '@carbon/icons-react'
+import { cssClass } from '../utils/css-class'
 
 /**
  * Prop Types of an Icon component.
@@ -118,7 +119,7 @@ export const Icon: React.FC<IconProps> = (props) => {
 
   if (CarbonIcon) {
     return (
-      <Wrapper className="admin-bro-icon" {...other}><CarbonIcon /></Wrapper>
+      <Wrapper className={cssClass('Icon')} {...other}><CarbonIcon /></Wrapper>
     )
   }
   return null

@@ -11,6 +11,7 @@ import {
   layout,
   LayoutProps,
 } from 'styled-system'
+import { cssClass } from '../utils/css-class'
 
 const variants = variant({
   variants: {
@@ -87,6 +88,7 @@ Text.defaultProps = {
   lineHeight: 'lg',
   fontSize: 'default',
   fontWeight: 'normal',
+  className: cssClass('Text'),
 }
 
 export default Text

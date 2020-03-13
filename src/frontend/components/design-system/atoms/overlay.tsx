@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 import Box from './box'
+import { cssClass } from '../utils/css-class'
 
 export const Overlay = styled(Box)`
 
@@ -14,6 +15,7 @@ Overlay.defaultProps = {
   top: 0,
   left: 0,
   zIndex: 40,
+  className: cssClass('Overlay'),
 }
 
 export default Overlay
