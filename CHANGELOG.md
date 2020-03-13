@@ -16,6 +16,7 @@ Started since version 0.9.5
 * add currentAdmin hook
 * add `progress` to `useRecord` hook
 * each DesignSystem component now has a custom css class starting with "admin-bro_" (#361)
+* add option to set ResourceOptions['parent'] to null, which hides navigation parent
 
 ### Fixed
 
