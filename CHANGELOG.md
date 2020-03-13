@@ -11,12 +11,12 @@ Started since version 0.9.5
 ### Added
 
 * add the ability to hide action header (hideActionHeader)
-* add option to change the default href for a resource in a sidebar.
+* add option to change the default href for a resource in a sidebar
 * add avatarUrl to CurrentAdmin
 * add currentAdmin hook
 * add `progress` to `useRecord` hook
 * each DesignSystem component now has a custom css class starting with "admin-bro_" (#361)
-* add option to set ResourceOptions['parent'] to null, which hides navigation parent
+* add option to set ResourceOptions['parent'] to null, which hides navigation parent (#169)
 
 ### Fixed
 
