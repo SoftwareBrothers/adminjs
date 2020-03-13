@@ -15,6 +15,7 @@ Started since version 0.9.5
 * add avatarUrl to CurrentAdmin
 * add currentAdmin hook
 * add `progress` to `useRecord` hook
+* each DesignSystem component now has a custom css class starting with "admin-bro_" (#361)
 
 ### Fixed
 
