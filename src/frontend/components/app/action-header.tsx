@@ -15,6 +15,7 @@ import RecordJSON from '../../../backend/decorators/record-json.interface'
 import { Box, Badge, H3, H2, Button, Icon, ButtonCSS, ButtonProps, Link } from '../design-system'
 import Breadcrumbs from './breadcrumbs'
 import { cssClass } from '../design-system/utils/css-class'
+import { ActionResponse } from '../../../backend/actions/action.interface'
 
 /**
  * @memberof ActionHeader
@@ -28,7 +29,7 @@ export type ActionHeaderProps = {
   /** If given, action header will render Filter button */
   toggleFilter?: () => any;
 
-  actionPerformed?: () => any;
+  actionPerformed?: (action: ActionResponse) => any;
   /** An action objet */
   action: ActionJSON;
   /** Optional tag which will be rendered as a {@link Badge} */

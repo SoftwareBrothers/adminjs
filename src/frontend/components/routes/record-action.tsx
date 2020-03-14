@@ -84,6 +84,10 @@ const RecordAction: React.FC = () => {
         resource={resource}
         action={action}
         record={record}
+        actionPerformed={response => (response.record
+          ? setRecord(response?.record)
+          : fetchRecord())
+        }
       />
       <BaseActionComponent
         action={action}

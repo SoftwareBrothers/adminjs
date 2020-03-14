@@ -1,10 +1,12 @@
 import React, { ReactNode } from 'react'
 import Select from 'react-select'
 import { withTheme, DefaultTheme } from 'styled-components'
+import isEqual from 'lodash/isEqual'
 
 import { EditPropertyProps } from '../base-property-props'
 import selectStyles from '../../../styles/select-styles'
 import { Input, FormMessage, FormGroup, Label } from '../../design-system'
+import { recordPropertyIsEqual } from '../record-property-is-equal'
 
 type CombinedProps = EditPropertyProps & {theme: DefaultTheme}
 
@@ -13,6 +15,10 @@ class Edit extends React.Component<CombinedProps> {
     super(props)
     this.handleInputChange = this.handleInputChange.bind(this)
     this.handleSelectChange = this.handleSelectChange.bind(this)
+  }
+
+  shouldComponentUpdate(prevProps: CombinedProps): boolean {
+    return !recordPropertyIsEqual(prevProps, this.props)
   }
 
   handleInputChange(event): void {

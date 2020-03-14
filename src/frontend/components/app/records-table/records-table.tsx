@@ -8,11 +8,12 @@ import { Table, TableBody, Loader } from '../../design-system'
 import ResourceJSON from '../../../../backend/decorators/resource-json.interface'
 import RecordJSON from '../../../../backend/decorators/record-json.interface'
 import SelectedRecords from './selected-records'
+import { ActionResponse } from '../../../../backend/actions/action.interface'
 
 export type Props = {
   resource: ResourceJSON;
   records: Array<RecordJSON>;
-  actionPerformed?: (actionName: string) => any;
+  actionPerformed?: (response: ActionResponse) => any;
   sortBy?: string;
   direction?: 'asc' | 'desc';
   isLoading?: boolean;
