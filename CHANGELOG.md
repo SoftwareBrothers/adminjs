@@ -17,6 +17,7 @@ Started since version 0.9.5
 * add `progress` to `useRecord` hook
 * each DesignSystem component now has a custom css class starting with "admin-bro_" (#361)
 * add option to set ResourceOptions['parent'] to null, which hides navigation parent (#169)
+* Added Rect.memo to BasePropertyComponents which speeds up an UI.
 
 ### Fixed
 
@@ -29,6 +30,8 @@ Started since version 0.9.5
 * useRecords automatically renders notice and redirects to given page
 if it was requested by the backend
 * drop zone can have external state via files prop
+* now after invoking action with no component there is no need to fetch data
+again from the backend to refresh the page.
 
 ## 2.0.2/2.0.3 - 10.03.2020
 
