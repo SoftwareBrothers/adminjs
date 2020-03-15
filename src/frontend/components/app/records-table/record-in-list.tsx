@@ -98,7 +98,7 @@ const RecordInList: React.FC<Props> = (props) => {
                     resourceId={resource.id}
                     recordId={record.id}
                     actionPerformed={(actionResponse: ActionResponse): void => (
-                      actionResponse.record
+                      actionResponse.record && !actionResponse.redirectUrl
                         ? setRecord(actionResponse.record)
                         : actionPerformed && actionPerformed(actionResponse))
                     }
