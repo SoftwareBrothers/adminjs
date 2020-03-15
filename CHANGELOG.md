@@ -32,6 +32,8 @@ if it was requested by the backend
 * drop zone can have external state via files prop
 * now after invoking action with no component there is no need to fetch data
 again from the backend to refresh the page.
+* if assets are taken from `assetsCDN` they url has a timestamp which invalidates the cache
+on every deploy
 
 ## 2.0.2/2.0.3 - 10.03.2020
 
