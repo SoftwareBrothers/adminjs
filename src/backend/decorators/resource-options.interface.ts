@@ -25,6 +25,14 @@ export type HrefContext = {
 }
 
 /**
+ * Function returning string or string
+ *
+ * @alias HrefFunction
+ * @memberof ResourceOptions
+ */
+export type HrefFunction = ((context: HrefContext) => string)
+
+/**
  * Options for given resource
  *
  * ### Usage with TypeScript
@@ -61,7 +69,7 @@ export interface ResourceOptions {
   /**
    * Where resource link in sidebar should redirect. Default to the list action.
    */
-  href?: ((context: HrefContext) => string) | string;
+  href?: HrefFunction | string;
   /**
    * Parent element under which resource should be nested in sidebar. Default
    * to the database name.

@@ -168,7 +168,7 @@ class ResourceDecorator {
   /**
    * Returns resource parent along with the icon. By default it is a
    * database type with its icon
-   * @return {ResourceJSON['parent']}
+   * @return {Parent}   ResourceJSON['parent']}
    */
   getParent(): ResourceJSON['parent'] {
     // when user gives parent: null
