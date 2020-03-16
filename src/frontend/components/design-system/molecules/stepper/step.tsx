@@ -34,6 +34,8 @@ export type StepProps = {
   disabled?: boolean;
   /** handler which passes a number of the step in an argument */
   onClick?: OnStepClickHandler;
+  /** Optional className */
+  className?: string;
 }
 
 const Circle = styled(Box)`
@@ -50,7 +52,7 @@ Circle.defaultProps = {
   height: '34px',
 }
 
-type StyledStepProps = SpaceProps & Pick<StepProps, 'active' | 'disabled' | 'onClick'>
+type StyledStepProps = SpaceProps & Pick<StepProps, 'active' | 'disabled'>
 
 const StyledStep = styled.div<StyledStepProps>`
   flex: 1 1 0px;
@@ -58,7 +60,7 @@ const StyledStep = styled.div<StyledStepProps>`
   flex-direction: row;
 
   & > ${Box} {
-    ${({ disabled, onClick }): string => (!disabled && onClick ? 'cursor: pointer' : '')};
+    ${({ disabled }): string => (!disabled ? 'cursor: pointer' : '')};
     border-bottom: 2px solid ${({ active, theme }): string => (active ? theme.colors.primary100 : 'transparent')};
   }
   
@@ -68,7 +70,7 @@ const StyledStep = styled.div<StyledStepProps>`
 /**
  * Step represents one of the tab in placed inside {@link Stepper} component.
  * You can use it alone or with before-mentioned {@link Stepper}.
- * 
+ *
  * @subcategory Molecules
  * @component
  * @example <caption>Regular step</caption>
@@ -77,36 +79,40 @@ const StyledStep = styled.div<StyledStepProps>`
  *     <Step number="1">Normal Step</Step>
  *  </Box>
  * )
- * 
+ *
  * @example <caption>Active steps</caption>
  * return (
  *   <Box p="default">
  *     <Step number="1" active>I am active</Step>
  *  </Box>
  * )
- * 
+ *
  * @example <caption>Active steps</caption>
  * return (
  *   <Box p="default">
- *     <Step number="1" compOnClickStepHandlerleted>This was done !!!</Step>
+ *     <Step number="1" completed>This was done !!!</Step>
  *  </Box>
  * )
- * 
+ *
  * @example <caption>Clickable step</caption>
  * const onClick = () => alert('Why did you click me?')
- * 
+ *
  * return (
  *   <Box p="default">
  *     <Step number="1" onClick={onClick}>Click me if you dare</Step>
  *  </Box>
  * )
- * 
+ *
  */
 export const Step: React.FC<StepProps> = (props) => {
   const { number, completed, children, active, disabled, onClick, className } = props
 
   return (
-    <StyledStep active={active} disabled={disabled} className={cssClass('Step', className)}>
+    <StyledStep
+      active={active}
+      disabled={disabled || !onClick}
+      className={cssClass('Step', className)}
+    >
       <Box
         flexShrink={1}
         flexGrow={0}

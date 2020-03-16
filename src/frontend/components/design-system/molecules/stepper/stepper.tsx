@@ -7,7 +7,7 @@ import { cssClass } from '../../utils/css-class'
  * Stepper makes sense when you use it along with {@link Step} component.
  *
  * It receives all the same props as {@link Box} - {@link BoxProps}.
- * 
+ *
  * @component
  * @subcategory Molecules
  * @example <caption>Clickable steps</caption>
@@ -38,7 +38,7 @@ import { cssClass } from '../../utils/css-class'
  *   </Box>
  *   )
  * }
- * 
+ *
  * return (<ComponentWithStepper />)
  *
  * @example <caption>Steps with bottom navigation</caption>
@@ -69,7 +69,7 @@ import { cssClass } from '../../utils/css-class'
  *       <Button
  *         disabled={currentStep === 1}
  *         mr="default"
-*          onClick={() => setCurrentStep(currentStep - 1)}
+ *         onClick={() => setCurrentStep(currentStep - 1)}
  *       >
  *         Previous Step
  *       </Button>
@@ -84,9 +84,9 @@ import { cssClass } from '../../utils/css-class'
  *   </Box>
  *   )
  * }
- * 
+ *
  * return (<ComponentWithStepper />)
- 
+
  */
 export const Stepper = styled(Box)`
 `
