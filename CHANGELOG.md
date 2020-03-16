@@ -18,6 +18,7 @@ Started since version 0.9.5
 * each DesignSystem component now has a custom css class starting with "admin-bro_" (#361)
 * add option to set ResourceOptions['parent'] to null, which hides navigation parent (#169)
 * Added Rect.memo to BasePropertyComponents which speeds up an UI.
+* add Step and Stepper components
 
 ### Fixed
 
