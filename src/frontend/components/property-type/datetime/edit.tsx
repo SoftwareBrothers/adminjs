@@ -1,7 +1,8 @@
-import React from 'react'
+import React, { memo } from 'react'
 
 import { EditPropertyProps } from '../base-property-props'
 import { DatePicker, Label, FormGroup, FormMessage } from '../../design-system'
+import { recordPropertyIsEqual } from '../record-property-is-equal'
 
 const Edit: React.FC<EditPropertyProps> = (props) => {
   const { property, onChange, record } = props
@@ -20,4 +21,4 @@ const Edit: React.FC<EditPropertyProps> = (props) => {
   )
 }
 
-export default Edit
+export default memo(Edit, recordPropertyIsEqual)

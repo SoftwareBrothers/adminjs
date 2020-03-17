@@ -59,7 +59,7 @@ const Breadcrumbs: React.FC<Props> = (props) => {
 
   return (
     <Box flexGrow={1} className={cssClass('Breadcrumbs')}>
-      <BreadcrumbLink to={resource.href} className={record ? 'is-active' : ''}>
+      <BreadcrumbLink to={resource.href ? resource.href : '/'} className={record ? 'is-active' : ''}>
         {resource.name}
       </BreadcrumbLink>
       {action && record ? (<BreadcrumbLink to="#">{action.label}</BreadcrumbLink>) : null}

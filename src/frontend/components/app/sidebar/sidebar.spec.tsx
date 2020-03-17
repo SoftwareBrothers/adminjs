@@ -73,14 +73,10 @@ describe('<Sidebar />', function () {
     })
   })
 
-  context('one resource without list action has been set in a store', function () {
+  context('one resource without href has been set in a store', function () {
     it('does not show any resources in the sidebar', async function () {
       const resources = await factory.buildMany<ResourceJSON>('ResourceJSON', 1, {
-        resourceActions: [
-          await factory.build<ActionJSON>('ActionJSON', {
-            name: 'edit',
-          }),
-        ],
+        href: null,
       })
 
       const { container } = await renderTestSubject(resources)

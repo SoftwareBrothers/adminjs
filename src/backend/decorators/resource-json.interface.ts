@@ -16,9 +16,9 @@ export default interface ResourceJSON {
    */
   name: string;
   /**
-   * url to a resource list action
+   * url to a resource list action. If null - resource should not be seen in the sidebar.
    */
-  href: string;
+  href: string | null;
   /**
    * Resource parent - visible on the sidebar
    */
@@ -31,7 +31,7 @@ export default interface ResourceJSON {
      * Parent icon
      */
     icon: string;
-  };
+  } | null;
   /**
    * Property which should be treated as a Main property
    */

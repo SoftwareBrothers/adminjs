@@ -26,5 +26,6 @@ export * from './molecules/pagination'
 export * from './molecules/drawer'
 export * from './molecules/logged-user'
 export * from './molecules/nav-group'
+export * from './molecules/stepper'
 
 export * from './templates/navigation'

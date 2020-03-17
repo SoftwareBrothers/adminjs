@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useHistory } from 'react-router-dom'
 
 import ActionButton from '../action-button'
@@ -10,20 +10,24 @@ import {
   DropDownTrigger, Icon, DropDownMenu, DropDownItem,
 } from '../../design-system'
 import ViewHelpers from '../../../../backend/utils/view-helpers'
-import { useTranslation } from '../../../hooks/use-translation'
 import { display } from './records-table-header'
+import { ActionResponse } from '../../../../backend/actions/action.interface'
 
 type Props = {
   resource: ResourceJSON;
   record: RecordJSON;
-  actionPerformed?: (actionName: string) => any;
+  actionPerformed?: (action: ActionResponse) => any;
   isLoading?: boolean;
   onSelect?: (record: RecordJSON) => void;
   isSelected?: boolean;
 }
 
 const RecordInList: React.FC<Props> = (props) => {
-  const { resource, record, actionPerformed, isLoading, onSelect, isSelected } = props
+  const {
+    resource, record: recordFromProps, actionPerformed,
+    isLoading, onSelect, isSelected,
+  } = props
+  const [record, setRecord] = useState<RecordJSON>(recordFromProps)
   const { recordActions } = record
 
   const history = useHistory()
@@ -93,7 +97,11 @@ const RecordInList: React.FC<Props> = (props) => {
                     action={action}
                     resourceId={resource.id}
                     recordId={record.id}
-                    actionPerformed={actionPerformed}
+                    actionPerformed={(actionResponse: ActionResponse): void => (
+                      actionResponse.record && !actionResponse.redirectUrl
+                        ? setRecord(actionResponse.record)
+                        : actionPerformed && actionPerformed(actionResponse))
+                    }
                   >
                     <Icon icon={action.icon} />
                     {action.label}

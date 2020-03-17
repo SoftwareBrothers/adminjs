@@ -67,7 +67,7 @@ export default interface PropertyJSON {
    * Custom parameters passed from the {@link PropertyOptions.custom}.
    */
   custom: {
-    [key: string]: boolean | string | number | Date;
+    [key: string]: any;
   };
 
   /**

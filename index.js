@@ -20,6 +20,7 @@ if (process.env.ADMIN_BRO_DEV_ENV) {
   AdminBro.Router = require('./src/backend/router').default
   AdminBro.Filter = require('./src/backend/utils/filter').default
   AdminBro.ValidationError = require('./src/backend/utils/validation-error').default
+  AdminBro.ForbiddenError = require('./src/backend/utils/forbidden-error').default
   AdminBro.ACTIONS = require('./src/backend/actions/index')
   constants = require('./src/constants')
 } else {
@@ -31,6 +32,7 @@ if (process.env.ADMIN_BRO_DEV_ENV) {
   AdminBro.Router = require('./lib/backend/router').default
   AdminBro.Filter = require('./lib/backend/utils/filter').default
   AdminBro.ValidationError = require('./lib/backend/utils/validation-error').default
+  AdminBro.ForbiddenError = require('./lib/backend/utils/forbidden-error').default
   AdminBro.ACTIONS = require('./lib/backend/actions/index')
   constants = require('./lib/constants')
 }

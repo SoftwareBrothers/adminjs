@@ -25,6 +25,8 @@ const variants = variant({
   },
 })
 
+type FlexboxFlexProp = boolean | FlexboxProps['flex']
+
 /**
  * Prop Types of an Button component.
  * Apart from those defined below it extends all {@link SpaceProps}, {@link ColorProps}
@@ -39,8 +41,8 @@ const variants = variant({
  */
 export type BoxProps = SpaceProps & ColorProps & LayoutProps &
   Omit<FlexboxProps, 'flex'> & BorderProps & PositionProps & ShadowProps & {
-    /** If box should be rendered as flex */
-    flex?: boolean;
+    /** If box should be rendered as flex. You can pass boolean or FlexboxProps['flex'] */
+    flex?: FlexboxFlexProp;
     /** Box variants */
     variant?: 'grey' | 'white';
     animate?: boolean;
@@ -76,7 +78,7 @@ export type BoxProps = SpaceProps & ColorProps & LayoutProps &
 export const Box = styled.section<BoxProps>`
   box-sizing: border-box;
   min-width: 0;
-  ${({ flex }): string => (flex ? 'display: flex;' : '')}
+  ${({ flex }): string => (flex && typeof flex === 'boolean' ? 'display: flex;' : '')}
   font-family: ${({ theme }): string => theme.font};
   line-height: ${({ theme }): string => theme.lineHeights.default};
   font-size: ${({ theme }): string => theme.fontSizes.default};

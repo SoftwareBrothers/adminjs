@@ -11,11 +11,14 @@ Started since version 0.9.5
 ### Added
 
 * add the ability to hide action header (hideActionHeader)
-* add option to change the default href for a resource in a sidebar.
+* add option to change the default href for a resource in a sidebar
 * add avatarUrl to CurrentAdmin
 * add currentAdmin hook
 * add `progress` to `useRecord` hook
 * each DesignSystem component now has a custom css class starting with "admin-bro_" (#361)
+* add option to set ResourceOptions['parent'] to null, which hides navigation parent (#169)
+* Added Rect.memo to BasePropertyComponents which speeds up an UI.
+* add Step and Stepper components
 
 ### Fixed
 
@@ -28,6 +31,10 @@ Started since version 0.9.5
 * useRecords automatically renders notice and redirects to given page
 if it was requested by the backend
 * drop zone can have external state via files prop
+* now after invoking action with no component there is no need to fetch data
+again from the backend to refresh the page.
+* if assets are taken from `assetsCDN` they url has a timestamp which invalidates the cache
+on every deploy
 
 ## 2.0.2/2.0.3 - 10.03.2020
 

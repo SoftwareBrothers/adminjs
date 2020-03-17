@@ -7,6 +7,7 @@ const StyledWrapper = styled(Box)`
   & ${DrawerContent} {
     background: ${({ theme }): string => theme.colors.white};
     padding: ${({ theme }): string => theme.space.xxl};
+    overflow: visible;
   }
   
   & ${DrawerFooter} {

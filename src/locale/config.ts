@@ -35,9 +35,9 @@ export type LocaleTranslationsBlock = {
 }
 
 // Locale translations is not well parsed by JSDoc so the typedef is placed below
-export type LocaleTranslations = LocaleTranslationsBlock & {
+export type LocaleTranslations = Partial<LocaleTranslationsBlock> & {
   resources?: {
-    [key: string]: LocaleTranslationsBlock;
+    [key: string]: Partial<LocaleTranslationsBlock>;
   };
 }
 
@@ -106,6 +106,6 @@ export const combineTranslations = (
   originalTranslations: LocaleTranslations,
   adminTranslations: Partial<LocaleTranslations> = {},
 ): LocaleTranslations => {
-  const formatedTranslations = renameKeys(adminTranslations)
-  return merge(originalTranslations, formatedTranslations)
+  const formattedTranslations = renameKeys(adminTranslations)
+  return merge(originalTranslations, formattedTranslations)
 }

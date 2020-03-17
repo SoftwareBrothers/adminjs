@@ -72,7 +72,7 @@ export default interface PropertyOptions {
    * Custom properties passed to the frontend in {@link PropertyJSON}
    */
   custom?: {
-    [key: string]: boolean | string | number | Date;
+    [key: string]: any;
   };
 
   /**

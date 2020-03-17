@@ -30,7 +30,7 @@ export type ActionButtonProps = {
   /** Optional recordIds for _bulk_ action */
   recordIds?: Array<string>;
   /** optional callback function which will be triggered when action is performed */
-  actionPerformed?: (actionName: string) => any;
+  actionPerformed?: (action: ActionResponse) => any;
 }
 
 const StyledLink = styled(Link)`
@@ -117,7 +117,7 @@ class ActionButton extends React.PureComponent<
         history.push(appendForceRefresh(data.redirectUrl))
       }
       if (actionPerformed) {
-        actionPerformed(action.name)
+        actionPerformed(data)
       }
     }).catch((error) => {
       throw error

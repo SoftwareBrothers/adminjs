@@ -15,6 +15,7 @@ import RecordJSON from '../../../backend/decorators/record-json.interface'
 import { Box, Badge, H3, H2, Button, Icon, ButtonCSS, ButtonProps, Link } from '../design-system'
 import Breadcrumbs from './breadcrumbs'
 import { cssClass } from '../design-system/utils/css-class'
+import { ActionResponse } from '../../../backend/actions/action.interface'
 
 /**
  * @memberof ActionHeader
@@ -28,7 +29,7 @@ export type ActionHeaderProps = {
   /** If given, action header will render Filter button */
   toggleFilter?: () => any;
 
-  actionPerformed?: () => any;
+  actionPerformed?: (action: ActionResponse) => any;
   /** An action objet */
   action: ActionJSON;
   /** Optional tag which will be rendered as a {@link Badge} */
@@ -69,6 +70,7 @@ const ActionHeader: React.FC<ActionHeaderProps> = (props) => {
 
   const title = action ? action.label : resource.name
   const isList = action && action.name === 'list'
+  const listAction = resource.resourceActions.find(ra => ra.name === 'list')
 
   // styled which differs if action header is in the drawer or not
   const cssIsRootFlex = !action.showInDrawer
@@ -102,7 +104,7 @@ const ActionHeader: React.FC<ActionHeaderProps> = (props) => {
       <Box display={['block', cssIsRootFlex ? 'flex' : 'block']}>
         <Box mt={cssHeaderMT} flexGrow={1} px={['default', 0]}>
           <CssHComponent mb="lg">
-            {!isList ? (
+            {!isList && listAction ? (
               <StyledLink
                 size="icon"
                 to={h.resourceUrl({ resourceId, search: window.location.search })}

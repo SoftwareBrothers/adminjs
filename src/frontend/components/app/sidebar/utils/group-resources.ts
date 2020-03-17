@@ -6,16 +6,15 @@ export default (resources: Array<ResourceJSON>): Array<{
   icon: string;
   resources: Array<ResourceJSON>;
 }> => {
-  const visibleResources = resources.filter(res => (
-    res.resourceActions.find(a => a.name === 'list')
-  ))
+  const visibleResources = resources.filter(res => res.href)
   const map = visibleResources.reduce((memo, resource) => {
-    if (memo[resource.parent.name]) {
-      memo[resource.parent.name].push(resource)
+    const key = resource.parent?.name || ''
+    if (memo[key]) {
+      memo[key].push(resource)
     } else {
-      memo[resource.parent.name] = [resource]
+      memo[key] = [resource]
     }
-    memo[resource.parent.name].icon = resource.parent.icon
+    memo[key].icon = resource.parent?.icon
     return memo
   }, {})
   return Object.keys(map).map(parentName => ({

@@ -1,5 +1,7 @@
 import React, { ReactNode } from 'react'
 import { ReactComponentLike } from 'prop-types'
+import isEqual from 'lodash/isEqual'
+
 import ErrorBoundary from '../app/error-boundary'
 
 import * as ArrayType from './array'
@@ -38,10 +40,6 @@ const types: Record<PropertyType, any> = {
   number: defaultType,
   float: defaultType,
   mixed: null,
-}
-
-type State = {
-  isClient: boolean;
 }
 
 /**
@@ -180,16 +178,9 @@ type State = {
  *
  * return (<Wrapper />)
  */
-export default class BasePropertyComponent extends React.Component<BasePropertyProps, State> {
-  constructor(props: BasePropertyProps) {
-    super(props)
-    this.state = {
-      isClient: false,
-    }
-  }
-
-  componentDidMount(): void {
-    this.setState({ isClient: true })
+export default class BasePropertyComponent extends React.Component<BasePropertyProps> {
+  shouldComponentUpdate(nextProps: BasePropertyProps): boolean {
+    return !isEqual(nextProps.record, this.props?.record)
   }
 
   static DefaultType
@@ -208,14 +199,13 @@ export default class BasePropertyComponent extends React.Component<BasePropertyP
 
   render(): ReactNode {
     const { property, resource, record, filter, where, onChange } = this.props
-    const { isClient } = this.state
 
     const testId = `property-${where}-${property.name}`
 
     let Component: ReactComponentLike = (types[property.type] && types[property.type][where])
     || defaultType[where]
 
-    if (property.components && property.components[where] && isClient) {
+    if (property.components && property.components[where]) {
       const component = property.components[where]
       if (!component) {
         throw new Error(`there is no "${property.name}.components.${where}"`)

@@ -7,7 +7,7 @@ import { cssClass } from '../utils/css-class'
 const variantShared = {
   color: 'white',
   'border-color': 'transparent',
-  '& svg': {
+  [`& .${cssClass('Icon')} svg`]: {
     fill: 'white',
   },
   '&:disabled': {
@@ -167,7 +167,7 @@ export const ButtonCSS = css<ButtonProps>`
     padding-right: ${({ theme }): string => theme.space.default};
   }
 
-  & svg {
+  & .${cssClass('Icon')} svg {
     width: 16px;
     height: 16px;
     fill: ${({ theme }): string => theme.colors.primary100};
@@ -176,7 +176,7 @@ export const ButtonCSS = css<ButtonProps>`
     color: ${({ theme }): string => theme.colors.white};
     background: ${({ theme }): string => theme.colors.hoverBg};
     border-color: ${({ theme }): string => theme.colors.hoverBg};
-    svg {
+    & .${cssClass('Icon')} svg {
       fill: ${({ theme }): string => theme.colors.white};
     }
   }
@@ -190,7 +190,7 @@ export const ButtonCSS = css<ButtonProps>`
     border-color: ${({ theme }): string => theme.colors.grey80};
     background: ${({ theme }): string => theme.colors.white};
     cursor: default;
-    & svg {
+    & .${cssClass('Icon')} svg {
       fill: ${({ theme }): string => theme.colors.grey60};
     }
   }

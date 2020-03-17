@@ -95,6 +95,8 @@ export type ResourceParams = {
   search? : string;
 }
 
+const runDate = new Date()
+
 /**
  * Collection of helper methods available in the views
  */
@@ -235,7 +237,10 @@ class ViewHelpers {
    */
   assetPath(asset: string): string {
     if (this.options.assetsCDN) {
-      return new URL(asset, this.options.assetsCDN).href
+      const url = new URL(asset, this.options.assetsCDN).href
+
+      // adding timestamp to the href invalidates the CDN cache
+      return `${url}?date=${runDate.getTime()}`
     }
     return this.urlBuilder(['frontend', 'assets', asset])
   }
