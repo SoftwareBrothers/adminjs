@@ -24,10 +24,20 @@ const validateSize = (
   return +maxSize >= +size
 }
 
-const inKb = (size: string | number): string => {
+const inUnit = (size: string | number, unit: FileSizeUnit = 'kb'): string => {
   if (!size) { return '' }
-  return `${Math.round(+size / 1024)} KB`
+
+  let divider = 1024
+  if (unit === 'mb') {
+    divider = 1024 * 1024
+  }
+
+  console.log({ size, unit, divider })
+
+  return `${Math.round(+size / divider)} ${unit.toUpperCase()}`
 }
+
+type FileSizeUnit = 'kb' | 'mb';
 
 /**
  * @returns {void}
@@ -66,6 +76,10 @@ export type DropZoneProps = {
      */
     mimeTypes?: Array<string>;
   };
+  /**
+   * Upload limit display can be either 'kb' or 'mb' (lower case)
+   */
+  uploadLimitIn: FileSizeUnit;
 }
 
 const UploadInput = styled.input`
@@ -167,7 +181,7 @@ type ErrorMessage = {
  * )
  */
 export const DropZone: React.FC<DropZoneProps> = (props) => {
-  const { validate, onChange, multiple, files: filesFromProps, ...other } = props
+  const { validate, onChange, multiple, files: filesFromProps, uploadLimitIn = 'kb', ...other } = props
 
   const [isDragging, setIsDragging] = useState(false)
   const [error, setError] = useState<ErrorMessage | null>(null)
@@ -228,6 +242,13 @@ export const DropZone: React.FC<DropZoneProps> = (props) => {
     setFilesToUpload(newFiles)
   }, [onChange, setFilesToUpload, setIsDragging])
 
+  const displayUploadLimit = useCallback(() => {
+    if (validate && validate.maxSize) {
+      return inUnit(validate.maxSize, uploadLimitIn)
+    }
+    return ''
+  }, [validate])
+
   return (
     <Box>
       <StyledDropZone
@@ -247,7 +268,7 @@ export const DropZone: React.FC<DropZoneProps> = (props) => {
             {validate && validate.maxSize ? (
               <Text variant="xs" color="grey60" lineHeight="default" mt="sm">
                 <Label inline uppercase>Max size:</Label>
-                {inKb(validate.maxSize)}
+                {displayUploadLimit()}
               </Text>
             ) : ''}
             {validate && validate.mimeTypes && validate.mimeTypes.length ? (
