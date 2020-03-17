@@ -13,7 +13,7 @@
       "strictBindCallApply": true,
       "noImplicitThis": true,
       "moduleResolution": "node",
-      "types": ["react", "mocha"]
+      "types": ["react", "mocha", "node"]
   },
   "include": [
       "./src/**/*",
