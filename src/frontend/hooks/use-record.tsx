@@ -26,8 +26,10 @@ export type UseRecordResult = {
   handleChange: (propertyOrRecord: string | RecordJSON, value?: any) => void;
   /**
    * Triggers submission of the record. Returns a promise.
+   * If custom params are given as an argument - they are merged
+   * to the payload.
    */
-  submit: () => Promise<AxiosResponse<RecordActionResponse>>;
+  submit: (customParams: Record<string, string>) => Promise<AxiosResponse<RecordActionResponse>>;
   /**
    * Flag indicates loading.
    */
@@ -130,9 +132,12 @@ export const useRecord = (
     }
   }, [])
 
-  const handleSubmit = useCallback((): Promise<AxiosResponse<RecordActionResponse>> => {
+  const handleSubmit = useCallback((
+    customParams: Record<string, string> = {},
+  ): Promise<AxiosResponse<RecordActionResponse>> => {
     setLoading(true)
     const formData = recordToFormData(record)
+    Object.entries(customParams).forEach(([key, value]) => formData.set(key, value))
     const params = {
       resourceId,
       onUploadProgress: (e): void => setProgress(Math.round((e.loaded * 100) / e.total)),

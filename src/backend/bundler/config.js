@@ -4,6 +4,7 @@ const babel = require('rollup-plugin-babel')
 const commonjs = require('rollup-plugin-commonjs')
 const resolve = require('rollup-plugin-node-resolve')
 const replace = require('rollup-plugin-replace')
+const json = require('rollup-plugin-json')
 const { terser } = require('rollup-plugin-terser')
 
 const external = [
@@ -64,6 +65,7 @@ const plugins = ({ babelConfig = {}, commonJSConfig = {}, minify = false } = {})
     resolve({
       extensions,
     }),
+    json(),
     replace({
       'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development'),
       'process.env.IS_BROWSER': 'true',

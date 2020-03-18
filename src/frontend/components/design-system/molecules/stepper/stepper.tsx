@@ -93,7 +93,7 @@ export const Stepper = styled(Box)`
 
 Stepper.defaultProps = {
   flex: true,
-  flexDirection: 'row',
+  flexDirection: ['column', 'row'],
   borderBottom: '1px solid',
   borderBottomColor: 'separator',
   className: cssClass('Stepper'),
