@@ -29,7 +29,7 @@ export type UseRecordResult = {
    * If custom params are given as an argument - they are merged
    * to the payload.
    */
-  submit: (customParams: Record<string, string>) => Promise<AxiosResponse<RecordActionResponse>>;
+  submit: (customParams?: Record<string, string>) => Promise<AxiosResponse<RecordActionResponse>>;
   /**
    * Flag indicates loading.
    */

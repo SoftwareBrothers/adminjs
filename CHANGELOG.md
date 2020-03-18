@@ -19,6 +19,8 @@ Started since version 0.9.5
 * add option to set ResourceOptions['parent'] to null, which hides navigation parent (#169)
 * Added Rect.memo to BasePropertyComponents which speeds up an UI.
 * add Step and Stepper components
+* add customParams to useRecord submit function
+* add support for bunding JSON files.
 
 ### Fixed
 
