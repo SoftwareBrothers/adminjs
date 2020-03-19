@@ -13,8 +13,6 @@ export const humanFileSize = (size: number | string, unit?: DisplaySizeUnit): st
     UNITS.length,
   )
 
-  console.log({ size, foundUnitIndex, unitIndex })
-
   const calculatedSize = (+size / (1024 ** unitIndex))
   const guessedUnit = ['B', 'kB', 'MB', 'GB', 'TB'][unitIndex]
 
