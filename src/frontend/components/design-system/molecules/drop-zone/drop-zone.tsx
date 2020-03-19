@@ -6,6 +6,7 @@ import { Box } from '../../atoms/box'
 import { Text } from '../../atoms/text'
 import { MessageBox } from '../message-box'
 import { DropZoneItem } from './drop-zone-item'
+import { humanFileSize, DisplaySizeUnit } from '../../utils/human-file-size'
 
 const validateContentType = (
   mimeTypes: undefined | Array<string>,
@@ -24,10 +25,17 @@ const validateSize = (
   return +maxSize >= +size
 }
 
-const inKb = (size: string | number): string => {
+const inUnit = (size: string | number, unit?: FileSizeUnit): string => {
   if (!size) { return '' }
-  return `${Math.round(+size / 1024)} KB`
+
+  return humanFileSize(size, unit)
 }
+
+/**
+ * @memberof DropZone
+ * @alias FileSizeUnit
+ */
+type FileSizeUnit = DisplaySizeUnit
 
 /**
  * @returns {void}
@@ -66,6 +74,10 @@ export type DropZoneProps = {
      */
     mimeTypes?: Array<string>;
   };
+  /**
+   * Upload limit display e.g.: 'KB' (upper case)
+   */
+  uploadLimitIn?: FileSizeUnit;
 }
 
 const UploadInput = styled.input`
@@ -167,7 +179,7 @@ type ErrorMessage = {
  * )
  */
 export const DropZone: React.FC<DropZoneProps> = (props) => {
-  const { validate, onChange, multiple, files: filesFromProps, ...other } = props
+  const { validate, onChange, multiple, files: filesFromProps, uploadLimitIn, ...other } = props
 
   const [isDragging, setIsDragging] = useState(false)
   const [error, setError] = useState<ErrorMessage | null>(null)
@@ -228,6 +240,13 @@ export const DropZone: React.FC<DropZoneProps> = (props) => {
     setFilesToUpload(newFiles)
   }, [onChange, setFilesToUpload, setIsDragging])
 
+  const displayUploadLimit = useCallback(() => {
+    if (validate && validate.maxSize) {
+      return inUnit(validate.maxSize, uploadLimitIn)
+    }
+    return ''
+  }, [validate])
+
   return (
     <Box>
       <StyledDropZone
@@ -247,7 +266,7 @@ export const DropZone: React.FC<DropZoneProps> = (props) => {
             {validate && validate.maxSize ? (
               <Text variant="xs" color="grey60" lineHeight="default" mt="sm">
                 <Label inline uppercase>Max size:</Label>
-                {inKb(validate.maxSize)}
+                {displayUploadLimit()}
               </Text>
             ) : ''}
             {validate && validate.mimeTypes && validate.mimeTypes.length ? (
