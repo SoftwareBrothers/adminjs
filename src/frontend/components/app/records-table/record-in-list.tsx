@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
 
 import ActionButton from '../action-button'
@@ -28,9 +28,13 @@ const RecordInList: React.FC<Props> = (props) => {
     isLoading, onSelect, isSelected,
   } = props
   const [record, setRecord] = useState<RecordJSON>(recordFromProps)
-  const { recordActions } = record
-
   const history = useHistory()
+
+  useEffect(() => {
+    setRecord(recordFromProps)
+  }, [recordFromProps])
+
+  const { recordActions } = record
 
   const show = record.recordActions.find(({ name }) => name === 'show')
   const edit = record.recordActions.find(({ name }) => name === 'edit')
