@@ -6,6 +6,7 @@ import { Box } from '../../atoms/box'
 import { Text } from '../../atoms/text'
 import { MessageBox } from '../message-box'
 import { DropZoneItem } from './drop-zone-item'
+import { humanFileSize, DisplaySizeUnit } from '../../utils/human-file-size'
 
 const validateContentType = (
   mimeTypes: undefined | Array<string>,
@@ -24,22 +25,17 @@ const validateSize = (
   return +maxSize >= +size
 }
 
-const inUnit = (size: string | number, unit: FileSizeUnit = 'kb'): string => {
+const inUnit = (size: string | number, unit?: FileSizeUnit): string => {
   if (!size) { return '' }
 
-  let divider = 1024
-  if (unit === 'mb') {
-    divider = 1024 * 1024
-  }
-
-  return `${Math.round(+size / divider)} ${unit.toUpperCase()}`
+  return humanFileSize(size, unit)
 }
 
 /**
  * @memberof DropZone
  * @alias FileSizeUnit
  */
-type FileSizeUnit = 'kb' | 'mb';
+type FileSizeUnit = DisplaySizeUnit
 
 /**
  * @returns {void}
@@ -79,7 +75,7 @@ export type DropZoneProps = {
     mimeTypes?: Array<string>;
   };
   /**
-   * Upload limit display can be either 'kb' or 'mb' (lower case)
+   * Upload limit display e.g.: 'KB' (upper case)
    */
   uploadLimitIn?: FileSizeUnit;
 }
@@ -183,7 +179,7 @@ type ErrorMessage = {
  * )
  */
 export const DropZone: React.FC<DropZoneProps> = (props) => {
-  const { validate, onChange, multiple, files: filesFromProps, uploadLimitIn = 'kb', ...other } = props
+  const { validate, onChange, multiple, files: filesFromProps, uploadLimitIn, ...other } = props
 
   const [isDragging, setIsDragging] = useState(false)
   const [error, setError] = useState<ErrorMessage | null>(null)
