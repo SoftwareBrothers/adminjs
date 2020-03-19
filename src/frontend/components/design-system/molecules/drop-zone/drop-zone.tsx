@@ -32,11 +32,13 @@ const inUnit = (size: string | number, unit: FileSizeUnit = 'kb'): string => {
     divider = 1024 * 1024
   }
 
-  console.log({ size, unit, divider })
-
   return `${Math.round(+size / divider)} ${unit.toUpperCase()}`
 }
 
+/**
+ * @memberof DropZone
+ * @alias FileSizeUnit
+ */
 type FileSizeUnit = 'kb' | 'mb';
 
 /**
