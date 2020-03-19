@@ -179,10 +179,6 @@ const types: Record<PropertyType, any> = {
  * return (<Wrapper />)
  */
 export default class BasePropertyComponent extends React.Component<BasePropertyProps> {
-  shouldComponentUpdate(nextProps: BasePropertyProps): boolean {
-    return !isEqual(nextProps.record, this.props?.record)
-  }
-
   static DefaultType
 
   static Boolean
