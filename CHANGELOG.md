@@ -37,6 +37,7 @@ if it was requested by the backend
 again from the backend to refresh the page.
 * if assets are taken from `assetsCDN` they url has a timestamp which invalidates the cache
 on every deploy
+* now DropZone shows upload limit in different units
 
 ## 2.0.2/2.0.3 - 10.03.2020
 
