@@ -548,4 +548,27 @@ export default interface Action <T extends ActionResponse> {
    * - action title
    */
   hideActionHeader?: boolean;
+
+  /**
+   * The max width of action HTML container.
+   * You can put here an actual size in px or an array wf widths, where different values
+   * will be responsible for different breakpoints.
+   * It is directly passed to action's wrapping {@link Box} component, to its `width` property.
+   *
+   * Examples
+   * ```javascript
+   *
+   * // passing regular string
+   * containerWidth: '800px'
+   *
+   * // passing number for 100% width
+   * containerWidth: 1
+   *
+   * // passing values for different {@link breakpoints}
+   * containerWidth: [1, 1/2, 1/3]
+   * ```
+   *
+   * @return  {[type]}  [return description]
+   */
+  containerWidth?: string | number | Array<string | number>;
 }

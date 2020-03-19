@@ -42,6 +42,10 @@ export default interface ActionJSON {
    */
   hideActionHeader: boolean;
   /**
+   * containerWidth passed from the action setup.
+   */
+  containerWidth: string | number | Array<string | number>;
+  /**
    * Id of a resource to which given action belongs.
    */
   resourceId: string;

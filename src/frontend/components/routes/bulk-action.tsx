@@ -94,7 +94,7 @@ const BulkAction: React.FC = () => {
 
   if (action.showInDrawer) {
     return (
-      <DrawerPortal>
+      <DrawerPortal width={action.containerWidth}>
         <BaseAction
           action={action as ActionJSON}
           resource={resource}
@@ -105,7 +105,7 @@ const BulkAction: React.FC = () => {
   }
 
   return (
-    <Wrapper>
+    <Wrapper width={action.containerWidth}>
       {!action?.showInDrawer ? (
         <ActionHeader
           resource={resource}

@@ -73,7 +73,7 @@ const ResourceAction: React.FC<Props> = (props) => {
     : undefined
 
   return (
-    <Box variant="grey">
+    <Box variant="grey" width={listAction.containerWidth} mx="auto">
       <ActionHeader
         resource={resource}
         action={listAction}

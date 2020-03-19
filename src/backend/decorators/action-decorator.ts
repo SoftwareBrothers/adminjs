@@ -6,6 +6,7 @@ import Action, { IsFunction, ActionContext, ActionRequest, ActionResponse } from
 import { CurrentAdmin } from '../../current-admin.interface'
 import ActionJSON from './action-json.interface'
 import BaseRecord from '../adapters/base-record'
+import { DEFAULT_DRAWER_WIDTH } from '../../constants'
 
 /**
  * Decorates an action
@@ -148,6 +149,15 @@ class ActionDecorator {
     return this.is('isAccessible', currentAdmin, record)
   }
 
+  containerWidth(): ActionJSON['containerWidth'] {
+    if (typeof this.action.containerWidth === 'undefined') {
+      return this.action.showInDrawer
+        ? DEFAULT_DRAWER_WIDTH
+        : 1 // 100% for a regular action
+    }
+    return this.action.containerWidth
+  }
+
   /**
    * Serializes action to JSON format
    *
@@ -166,6 +176,7 @@ class ActionDecorator {
       component: this.action.component,
       showInDrawer: !!this.action.showInDrawer,
       hideActionHeader: !!this.action.hideActionHeader,
+      containerWidth: this.containerWidth(),
     }
   }
 }

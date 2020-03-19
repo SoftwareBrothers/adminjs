@@ -32,7 +32,7 @@ const ResourceAction: React.FC<Props> = (props) => {
 
   if (action.showInDrawer) {
     return (
-      <DrawerPortal>
+      <DrawerPortal width={action.containerWidth}>
         <BaseActionComponent
           action={action}
           resource={resource}
@@ -42,7 +42,7 @@ const ResourceAction: React.FC<Props> = (props) => {
   }
 
   return (
-    <Wrapper>
+    <Wrapper width={action.containerWidth}>
       <ActionHeader
         resource={resource}
         action={action}

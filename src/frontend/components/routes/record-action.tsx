@@ -68,7 +68,7 @@ const RecordAction: React.FC = () => {
 
   if (action.showInDrawer) {
     return (
-      <DrawerPortal>
+      <DrawerPortal width={action.containerWidth}>
         <BaseActionComponent
           action={action as ActionJSON}
           resource={resource}
@@ -79,7 +79,7 @@ const RecordAction: React.FC = () => {
   }
 
   return (
-    <Wrapper>
+    <Wrapper width={action.containerWidth}>
       <ActionHeader
         resource={resource}
         action={action}

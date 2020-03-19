@@ -16,16 +16,11 @@ const StyledWrapper = styled(Box)`
   }
 `
 
-StyledWrapper.defaultProps = {
-  // width: [1, 1, 1, 1024],
-  // m: '0 auto',
-}
-
 const Wrapper: React.FC<BoxProps> = (props) => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { children, variant, color, ...rest } = props
   return (
-    <StyledWrapper {...rest} variant="grey">
+    <StyledWrapper {...rest} variant="grey" mx="auto">
       {children}
     </StyledWrapper>
   )

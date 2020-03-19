@@ -9,4 +9,5 @@ factory.define<ActionJSON>('ActionJSON', Object, {
   showFilter: false,
   resourceId: 'resource',
   hideActionHeader: false,
+  containerWidth: 1,
 })

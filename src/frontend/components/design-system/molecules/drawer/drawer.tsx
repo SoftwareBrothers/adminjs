@@ -3,8 +3,7 @@ import styled from 'styled-components'
 import { space, SpaceProps, LayoutProps, variant, layout } from 'styled-system'
 import DrawerFooter from './drawer-footer'
 import { cssClass } from '../../utils/css-class'
-
-const DEFAULT_WIDTH = '500px'
+import { DEFAULT_DRAWER_WIDTH } from '../../../../../constants'
 
 /**
  * Props for Drawer component. Apart from those described below it also extends all
@@ -111,7 +110,7 @@ export const Drawer = styled.section<DrawerProps>`
 `
 
 Drawer.defaultProps = {
-  width: DEFAULT_WIDTH,
+  width: DEFAULT_DRAWER_WIDTH,
   className: cssClass('Drawer'),
 }
 
