@@ -81,7 +81,7 @@ export type DropZoneProps = {
   /**
    * Upload limit display can be either 'kb' or 'mb' (lower case)
    */
-  uploadLimitIn: FileSizeUnit;
+  uploadLimitIn?: FileSizeUnit;
 }
 
 const UploadInput = styled.input`
