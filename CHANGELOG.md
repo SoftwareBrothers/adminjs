@@ -6,6 +6,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 Started since version 0.9.5
 
+## 2.1.2 - 19.03.2020
+
+### Fixed
+
+* not refreshing in list
+
+
 ## 2.1.1 - 19.03.2020
 
 ### Added
