@@ -19,6 +19,8 @@ import RecordJSON from '../decorators/record-json.interface'
  *
  * ### Available API endpoints
  *
+ * <div class='table-container'>
+ * 
  * | Endpoint                 | Method                | Description |
  * |--------------------------|-----------------------|-------------|
  * | .../api/resources/{resourceId}/search/{query} | {@link ApiController#search} | Search record by query string |
@@ -27,7 +29,9 @@ import RecordJSON from '../decorators/record-json.interface'
  * | .../api/resources/{resourceId}/bulk/{action}?recordIds={recordIds} | {@link ApiController#bulkAction} | Perform customized bulk action |
  * | .../api/pages/{pageName}_ | {@link ApiController#page} | Perform customized page action |
  * | .../api/dashboard_ | {@link ApiController#dashboard} | Perform customized dashboard action |
- *
+ * 
+ * </div>
+ * 
  * ### Responsibility
  *
  * In general this controllers takes handler functions you define in {@link AdminBroOptions} and:

@@ -567,8 +567,6 @@ export default interface Action <T extends ActionResponse> {
    * // passing values for different {@link breakpoints}
    * containerWidth: [1, 1/2, 1/3]
    * ```
-   *
-   * @return  {[type]}  [return description]
    */
   containerWidth?: string | number | Array<string | number>;
 }
