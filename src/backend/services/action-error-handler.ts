@@ -9,17 +9,13 @@ import ForbiddenError from '../utils/forbidden-error'
  */
 const actionErrorHandler = (error: any, context: ActionContext) => {
   if (error instanceof ValidationError) {
-    const { currentAdmin, record, resource } = context
+    const { resource } = context
 
-    const recordJSON = record?.toJSON(currentAdmin)
     const baseMessage = error.baseError?.message
       || context.translateMessage('thereWereValidationErrors', resource.id())
 
     return {
       record: {
-        ...recordJSON,
-        params: {},
-        populated: {},
         errors: error.propertyErrors,
       },
       notice: {
