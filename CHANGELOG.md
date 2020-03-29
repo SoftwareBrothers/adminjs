@@ -6,6 +6,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 Started since version 0.9.5
 
+## 2.2.0 - unreleased
+
+### Added
+
+* Throwing ValidationError and ForbiddenError in action before hook causes
+action to return real json with error message.
+
+### Changed
+
+* BREAKING CHANGE: Change interface of ValidationError and ForbiddenError, as they don't take error message as the first argument
+
 ## 2.1.2 - 19.03.2020
 
 ### Fixed
