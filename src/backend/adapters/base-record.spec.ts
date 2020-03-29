@@ -95,7 +95,7 @@ describe('Record', function () {
           message: 'Field is required',
         },
       }
-      resource.create = sinon.stub().rejects(new ValidationError('message', propertyErrors))
+      resource.create = sinon.stub().rejects(new ValidationError(propertyErrors))
       record = new BaseRecord(newParams, resource)
 
       await record.save()
@@ -148,7 +148,7 @@ describe('Record', function () {
         resource = sinon.createStubInstance(BaseResource, {
           properties: sinon.stub<[], BaseProperty[]>().returns(properties),
           update: sinon.stub<[string, Record<string, any>], Promise<ParamsType>>()
-            .rejects(new ValidationError('some message', propertyErrors)),
+            .rejects(new ValidationError(propertyErrors)),
         })
 
         record = new BaseRecord(params, resource)

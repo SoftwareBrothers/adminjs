@@ -28,7 +28,9 @@ export type ActionHeaderProps = {
   record?: RecordJSON;
   /** If given, action header will render Filter button */
   toggleFilter?: () => any;
-
+  /**
+   * It indicates if action without a component was performed.
+   */
   actionPerformed?: (action: ActionResponse) => any;
   /** An action objet */
   action: ActionJSON;

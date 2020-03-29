@@ -5,6 +5,7 @@ import RecordJSON from '../../backend/decorators/record-json.interface'
 import recordToFormData from '../components/actions/record-to-form-data'
 import useNotice from './use-notice'
 import { RecordActionResponse } from '../../backend/actions/action.interface'
+import mergeRecordResponse from '../utils/merge-record-response'
 
 const api = new ApiClient()
 
@@ -159,12 +160,7 @@ export const useRecord = (
       if (response.data.notice) {
         onNotice(response.data.notice)
       }
-      setRecord(prev => ({
-        ...response.data.record,
-        errors: response.data.record.errors,
-        populated: { ...prev.populated, ...response.data.record.populated },
-        params: { ...prev.params, ...response.data.record.params },
-      }))
+      setRecord(prev => mergeRecordResponse(prev, response.data))
       setProgress(0)
       setLoading(false)
     }).catch(() => {

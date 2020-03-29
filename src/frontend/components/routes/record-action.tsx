@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 import { useSelector } from 'react-redux'
 
 import { useRouteMatch } from 'react-router'
@@ -15,6 +15,8 @@ import Wrapper from './utils/wrapper'
 import { ActionHeader } from '../app'
 import { useNotice, useTranslation } from '../../hooks'
 import DrawerPortal from '../app/drawer-portal'
+import { ActionResponse, RecordActionResponse } from '../../../backend/actions/action.interface'
+import mergeRecordResponse from '../../utils/merge-record-response'
 
 const api = new ApiClient()
 
@@ -49,6 +51,14 @@ const RecordAction: React.FC = () => {
     fetchRecord()
   }, [actionName, recordId, resourceId])
 
+  const handleActionPerformed = useCallback((oldRecord: RecordJSON, response: ActionResponse) => {
+    if (response.record) {
+      setRecord(mergeRecordResponse(oldRecord, response as RecordActionResponse))
+    } else {
+      fetchRecord()
+    }
+  }, [fetchRecord])
+
   if (!resource) {
     return (<NoResourceError resourceId={resourceId} />)
   }
@@ -62,7 +72,7 @@ const RecordAction: React.FC = () => {
     return (<NoActionError resourceId={resourceId} actionName={actionName} />)
   }
 
-  if (!record && !loading) {
+  if (!record) {
     return (<NoRecordError resourceId={resourceId} recordId={recordId} />)
   }
 
@@ -84,10 +94,9 @@ const RecordAction: React.FC = () => {
         resource={resource}
         action={action}
         record={record}
-        actionPerformed={response => (response.record
-          ? setRecord(response?.record)
-          : fetchRecord())
-        }
+        actionPerformed={(response: ActionResponse): void => (
+          handleActionPerformed(record, response)
+        )}
       />
       <BaseActionComponent
         action={action}

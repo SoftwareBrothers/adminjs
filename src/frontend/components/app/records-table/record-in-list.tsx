@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 import { useHistory } from 'react-router-dom'
 
 import ActionButton from '../action-button'
@@ -11,7 +11,8 @@ import {
 } from '../../design-system'
 import ViewHelpers from '../../../../backend/utils/view-helpers'
 import { display } from './records-table-header'
-import { ActionResponse } from '../../../../backend/actions/action.interface'
+import { ActionResponse, RecordActionResponse } from '../../../../backend/actions/action.interface'
+import mergeRecordResponse from '../../../utils/merge-record-response'
 
 type Props = {
   resource: ResourceJSON;
@@ -58,6 +59,14 @@ const RecordInList: React.FC<Props> = (props) => {
     }
   }
 
+  const handleActionPerformed = useCallback((actionResponse: ActionResponse) => {
+    if (actionResponse.record && !actionResponse.redirectUrl) {
+      setRecord(mergeRecordResponse(record, actionResponse as RecordActionResponse))
+    } else if (actionPerformed) {
+      actionPerformed(actionResponse)
+    }
+  }, [actionPerformed])
+
   return (
     <TableRow onClick={(event): void => handleClick(event)}>
       <TableCell className={isSelected ? 'selected' : 'not-selected'}>
@@ -101,11 +110,7 @@ const RecordInList: React.FC<Props> = (props) => {
                     action={action}
                     resourceId={resource.id}
                     recordId={record.id}
-                    actionPerformed={(actionResponse: ActionResponse): void => (
-                      actionResponse.record && !actionResponse.redirectUrl
-                        ? setRecord(actionResponse.record)
-                        : actionPerformed && actionPerformed(actionResponse))
-                    }
+                    actionPerformed={handleActionPerformed}
                   >
                     <Icon icon={action.icon} />
                     {action.label}

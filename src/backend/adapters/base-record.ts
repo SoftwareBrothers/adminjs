@@ -25,17 +25,17 @@ class BaseRecord {
   /**
    * Actual record data stored as a flatten object
    */
-  private params: ParamsType
+  public params: ParamsType
 
   /**
    * Object containing all validation errors: this.errors[path] = 'errorMessage'
    */
-  private errors: PropertyErrors
+  public errors: PropertyErrors
 
   /**
    * Object containing all populated relations.
    */
-  private populated: {[key: string]: BaseRecord}
+  public populated: {[key: string]: BaseRecord}
 
   /**
    * @param  {ParamsType}   params         all resource data. I.e. field values

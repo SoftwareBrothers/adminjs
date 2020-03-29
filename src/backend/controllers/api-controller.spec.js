@@ -17,7 +17,6 @@ describe('ApiController', function () {
       handler: this.sinon.stub().returns({ record: this.recordStub }),
       isAccessible: this.sinon.stub().returns(true),
     }
-    this.isActionAccessibleStub = this.sinon.stub()
     const property = { name: () => this.fieldName, reference: () => false }
     this.resourceStub = {
       id: this.sinon.stub().returns('someId'),
@@ -46,6 +45,7 @@ describe('ApiController', function () {
     this.adminStub = {
       findResource: this.sinon.stub().returns(this.resourceStub),
       options: { rootPath: '/admin' },
+      translateMessage: () => 'message',
     }
     this.currentAdmin = { email: 'john@doe.com', name: 'John' }
     this.apiController = new ApiController({ admin: this.adminStub }, this.currentAdmin)
@@ -62,7 +62,6 @@ describe('ApiController', function () {
     it('throws an error when user doesn\'t have rights to access the list action', function (done) {
       this.action.isAccessible.returns(false)
       this.apiController.search({ params: {} }, {}).catch((error) => {
-        expect(error.message).to.include('list')
         expect(error.name).to.equal('ForbiddenError')
         done()
       })
@@ -84,16 +83,6 @@ describe('ApiController', function () {
         this.sinon.match.has('action', this.action),
       )
     })
-
-    it('calls isActionAccessible on the resource decorator', async function () {
-      await this.apiController.resourceAction({
-        params: {
-          action: this.action.name,
-        },
-      }, {})
-
-      expect(this.action.isAccessible).to.have.been.calledWith(this.currentAdmin)
-    })
   })
 
   describe('#recordAction', function () {
@@ -113,17 +102,6 @@ describe('ApiController', function () {
           this.sinon.match.has('record', this.recordStub),
         ),
       )
-    })
-
-    it('calls isActionAccessible on the resource decorator', async function () {
-      await this.apiController.recordAction({
-        params: {
-          action: this.action.name,
-          recordId: 'id',
-        },
-      }, {})
-
-      expect(this.action.isAccessible).to.have.been.calledWith(this.currentAdmin)
     })
 
     it('throws an error when action do not return record', function (done) {
