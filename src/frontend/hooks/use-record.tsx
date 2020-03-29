@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react'
+import { useState, useCallback, useEffect } from 'react'
 import { AxiosResponse } from 'axios'
 import flat from 'flat'
 import ApiClient from '../utils/api-client'
@@ -116,6 +116,12 @@ export const useRecord = (
 
   const onNotice = useNotice()
 
+  useEffect(() => {
+    if (initialRecord) {
+      setRecord(initialRecord)
+    }
+  }, [initialRecord])
+
   const handleChange = useCallback((
     propertyOrRecord: RecordJSON | string,
     value?: any,
@@ -153,7 +159,7 @@ export const useRecord = (
         }
       })
     }
-  }, [])
+  }, [setRecord])
 
   const handleSubmit = useCallback((
     customParams: Record<string, string> = {},
