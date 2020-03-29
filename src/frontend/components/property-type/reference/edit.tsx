@@ -14,11 +14,8 @@ type SelectRecordEnhanced = SelectRecord & {
 }
 
 class Edit extends React.Component<CombinedProps> {
-  private selected: RecordJSON | null
-
   constructor(props: CombinedProps) {
     super(props)
-    this.selected = null
     this.loadOptions = this.loadOptions.bind(this)
     this.handleChange = this.handleChange.bind(this)
   }
@@ -26,7 +23,6 @@ class Edit extends React.Component<CombinedProps> {
   handleChange(selected: SelectRecordEnhanced): void {
     const { onChange, property } = this.props
     if (selected) {
-      this.selected = selected.record
       onChange(property.name, selected.value, selected.record)
     } else {
       onChange(property.name, '')
@@ -53,7 +49,7 @@ class Edit extends React.Component<CombinedProps> {
     const error = record.errors && record.errors[property.name]
 
     const reference = record.populated && record.populated[property.name]
-    let selectedOption = reference ? {
+    const selectedOption = reference ? {
       value: reference.id,
       label: reference.title,
     } : {
@@ -61,13 +57,6 @@ class Edit extends React.Component<CombinedProps> {
       label: '',
     }
     const styles = selectStyles(theme)
-
-    if (this.selected && record.params[property.name]) {
-      selectedOption = {
-        value: this.selected.id,
-        label: this.selected.title,
-      }
-    }
 
     return (
       <FormGroup error={!!error}>
