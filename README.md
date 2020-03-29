@@ -22,8 +22,13 @@ https://admin-bro-example-app-staging.herokuapp.com/admin
 
 ## Getting Started
 
-- Check out the [documentation](https://softwarebrothers.github.io/admin-bro-dev/)
+- Check out the [documentation](https://adminbro.com/docs)
 - Try the [live demo](https://admin-bro-example-app.herokuapp.com/admin) as mentioned above
+
+## OpenSource SoftwareBrothers community
+
+- [Join the community](https://join.slack.com/t/adminbro/shared_invite/zt-czfb79t1-0U7pn_KCqd5Ts~lbJK0_RA) to get help and be inspired.
+- subscribe to our [newsletter](https://www.getrevue.co/profile/adminbro)
 
 # What kind of problems it solves
 
@@ -62,5 +67,5 @@ AdminBro is Copyright © 2018 SoftwareBrothers.co. It is free software, and may 
 
 We’re an open, friendly team that helps clients from all over the world to transform their businesses and create astonishing products.
 
-* We are available to [hire](https://softwarebrothers.co/contact).
+* We are available for [hire](https://softwarebrothers.co/contact).
 * If you want to work for us - checkout the [career page](https://softwarebrothers.co/career).
