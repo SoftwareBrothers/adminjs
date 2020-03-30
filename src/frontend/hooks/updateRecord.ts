@@ -27,10 +27,14 @@ const updateRecord = (
   }
   // set new value
   if (value) {
-    const flattened = flat.flatten(value) as any
-    Object.keys(flattened).forEach((key) => {
-      paramsCopy[`${property}.${key}`] = value
-    })
+    if (typeof value === 'object') {
+      const flattened = flat.flatten(value) as any
+      Object.keys(flattened).forEach((key) => {
+        paramsCopy[`${property}.${key}`] = flattened[key]
+      })
+    } else {
+      paramsCopy[property] = value
+    }
     if (refRecord) {
       populatedCopy[property] = refRecord
       populatedModified = true
