@@ -1,11 +1,11 @@
 import { useState, useCallback } from 'react'
 import { AxiosResponse } from 'axios'
-import flat from 'flat'
 import ApiClient from '../utils/api-client'
 import RecordJSON from '../../backend/decorators/record-json.interface'
 import recordToFormData from '../components/actions/record-to-form-data'
 import useNotice from './use-notice'
 import { RecordActionResponse } from '../../backend/actions/action.interface'
+import updateRecord from './updateRecord'
 
 const api = new ApiClient()
 
@@ -127,30 +127,7 @@ export const useRecord = (
     ) {
       setRecord(propertyOrRecord)
     } else {
-      setRecord((prev) => {
-        const key = propertyOrRecord as string
-        const inflated = flat.unflatten(prev.params) as Record<string, any>
-        let populatedModified = false
-        const populatedCopy = { ...prev.populated }
-        if (!value) {
-          delete inflated[key]
-          if (key in populatedCopy) {
-            delete populatedCopy[key]
-            populatedModified = true
-          }
-        } else {
-          inflated[key] = value
-          if (incomingRecord) {
-            populatedCopy[key] = incomingRecord
-            populatedModified = true
-          }
-        }
-        return {
-          ...prev,
-          params: flat.flatten(inflated),
-          populated: populatedModified ? populatedCopy : prev.populated,
-        }
-      })
+      setRecord(updateRecord(propertyOrRecord as string, value, incomingRecord))
     }
   }, [])
 
