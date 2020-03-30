@@ -42,6 +42,8 @@ describe('ActionErrorHandler', function () {
     expect(ActionErrorHandler(error, context)).to.deep.equal({
       record: {
         errors,
+        params: {},
+        populated: {},
       },
       notice,
     })

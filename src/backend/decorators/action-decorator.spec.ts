@@ -110,6 +110,8 @@ describe('ActionDecorator', function () {
         },
         record: {
           errors,
+          params: {},
+          populated: {},
         },
       })
       expect(handler).not.to.have.been.called
