@@ -13,6 +13,10 @@ Started since version 0.9.5
 * Throwing ValidationError and ForbiddenError in action before hook causes
 action to return real json with error message.
 
+### Fixed
+
+* export useSelectedRecord along with UseSelectedRecordResult
+
 ### Changed
 
 * BREAKING CHANGE: Change interface of ValidationError and ForbiddenError, as they don't take error message as the first argument
