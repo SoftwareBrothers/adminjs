@@ -23,7 +23,7 @@
  * `
  * ```
  *
- * But, since AdminBro uses (styled-system)[https://styled-system.com/], you also can achieve
+ * But, since AdminBro uses [styled-system]{@link https://styled-system.com/}, you also can achieve
  * a similar result by passing a `bg` Prop to the [Box Component]{@link Box},
  * everything because Box supports all the {@link ColorProps}.
  *
@@ -38,7 +38,7 @@
  * ```
  *
  * The last way of accessing theme is to use withTheme HOC provided by
- * (styled-components)[https://styled-components.com/]
+ * [styled-components]{@link https://styled-components.com/}
  *
  * ```
  * import { withTheme } from 'styled-components'
