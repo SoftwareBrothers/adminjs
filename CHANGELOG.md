@@ -20,6 +20,7 @@ action to return real json with error message.
 ### Changed
 
 * BREAKING CHANGE: Change interface of ValidationError and ForbiddenError, as they don't take error message as the first argument
+* Type of error message is optional.
 
 ## 2.1.2 - 19.03.2020
 

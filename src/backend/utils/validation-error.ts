@@ -8,7 +8,7 @@ export type RecordError = {
   /**
    * error type (i.e. required)
    */
-  type: string;
+  type?: string;
   /**
    * human readable message
    */
