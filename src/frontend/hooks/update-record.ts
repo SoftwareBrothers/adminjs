@@ -5,9 +5,13 @@ import RecordJSON from '../../backend/decorators/record-json.interface'
 /**
  * Returns a function which takes a record and returns an updated record.
  *
- * @param property property that must be updated, supports nesting with dots
- * @param value value that must be set, undefined or null if deleting, will be flattened
- * @param refRecord if value is reference ID, this must be a record it's referencing to
+ * @param {string}      property    property that must be updated, supports nesting
+ *                                  with dots
+ * @param {any}         value       value that must be set, undefined or null if
+ *                                  deleting, will be flattened
+ * @param {RecordJSON}  refRecord   if value is reference ID, this must be a record
+ *                                  it's referencing to
+ * @private
  */
 const updateRecord = (
   property: string,
@@ -27,7 +31,7 @@ const updateRecord = (
   }
   // set new value
   if (value) {
-    if (typeof value === 'object') {
+    if (typeof value === 'object' && !(value instanceof File)) {
       const flattened = flat.flatten(value) as any
       Object.keys(flattened).forEach((key) => {
         paramsCopy[`${property}.${key}`] = flattened[key]

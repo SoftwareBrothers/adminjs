@@ -6,7 +6,7 @@ import recordToFormData from '../components/actions/record-to-form-data'
 import useNotice from './use-notice'
 import { RecordActionResponse } from '../../backend/actions/action.interface'
 import mergeRecordResponse from '../utils/merge-record-response'
-import updateRecord from './updateRecord'
+import updateRecord from './update-record'
 
 const api = new ApiClient()
 
