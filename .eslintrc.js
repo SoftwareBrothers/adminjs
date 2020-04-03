@@ -74,5 +74,6 @@ module.exports = {
         'flatpickr': true,
         'Quill': true,
         'FormData': true,
+        'File': true,
     }
 }
