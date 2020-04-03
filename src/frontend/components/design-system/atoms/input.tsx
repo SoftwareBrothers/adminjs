@@ -20,7 +20,7 @@ import { cssClass } from '../utils/css-class'
 export const InputCSS = css`
   box-sizing: border-box;
   color: ${({ theme }): string => theme.colors.grey80};
-  background: ${({ theme }): string => theme.colors.white};
+  background: transparent;
   border: 1px solid ${({ theme }): string => theme.colors.inputBorder};
   font-size: ${({ theme }): string => theme.fontSizes.default};
   line-height: ${({ theme }): string => theme.lineHeights.lg};
