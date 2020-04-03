@@ -10,8 +10,8 @@ Started since version 0.9.5
 
 ### Added
 
-* Throwing ValidationError and ForbiddenError in action before hook causes
-action to return real json with error message.
+* Throwing ValidationError and ForbiddenError in action before hook causes action to return real json with error message.
+* added `dev` yarn command
 
 ### Fixed
 
