@@ -6,7 +6,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 Started since version 0.9.5
 
-## 2.2.0 - unreleased
+## 2.2.1 - 03.04.2020
+
+### Fixed
+
+* fixing upload files problem
+
+## 2.2.0 - 03.04.2020
 
 ### Added
 
