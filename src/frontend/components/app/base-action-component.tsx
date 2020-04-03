@@ -13,12 +13,6 @@ declare const AdminBro: {
   UserComponents: Array<string>;
 }
 
-// TODO: Remove the above hack to something more type safe
-
-type State = {
-  isClient: boolean;
-}
-
 /**
  * Component which renders all the default and custom actions for both the Resource and the Record.
  *

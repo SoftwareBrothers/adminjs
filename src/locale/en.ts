@@ -41,6 +41,8 @@ const translations = {
     successfullyDeleted: 'Successfully deleted given record',
     successfullyUpdated: 'Successfully updated given record',
     thereWereValidationErrors: 'There are validation errors - check them out below',
+    forbiddenError: 'You cannot perform action {{actionName}} on {{resourceId}}',
+    anyForbiddenError: 'You cannot perform given action',
     successfullyCreated: 'Successfully created a new record',
     bulkDeleteError: 'There was an error deleting records, Check out console to see more information',
     errorFetchingRecords: 'There was an error fetching records, Check out console to see more information',

@@ -1,10 +1,11 @@
-import { useState, useCallback } from 'react'
+import { useState, useCallback, useEffect } from 'react'
 import { AxiosResponse } from 'axios'
 import ApiClient from '../utils/api-client'
 import RecordJSON from '../../backend/decorators/record-json.interface'
 import recordToFormData from '../components/actions/record-to-form-data'
 import useNotice from './use-notice'
 import { RecordActionResponse } from '../../backend/actions/action.interface'
+import mergeRecordResponse from '../utils/merge-record-response'
 import updateRecord from './updateRecord'
 
 const api = new ApiClient()
@@ -115,6 +116,12 @@ export const useRecord = (
 
   const onNotice = useNotice()
 
+  useEffect(() => {
+    if (initialRecord) {
+      setRecord(initialRecord)
+    }
+  }, [initialRecord])
+
   const handleChange = useCallback((
     propertyOrRecord: RecordJSON | string,
     value?: any,
@@ -129,7 +136,7 @@ export const useRecord = (
     } else {
       setRecord(updateRecord(propertyOrRecord as string, value, incomingRecord))
     }
-  }, [])
+  }, [setRecord])
 
   const handleSubmit = useCallback((
     customParams: Record<string, string> = {},
@@ -158,12 +165,7 @@ export const useRecord = (
       if (response.data.notice) {
         onNotice(response.data.notice)
       }
-      setRecord(prev => ({
-        ...response.data.record,
-        errors: response.data.record.errors,
-        populated: { ...prev.populated, ...response.data.record.populated },
-        params: { ...prev.params, ...response.data.record.params },
-      }))
+      setRecord(prev => mergeRecordResponse(prev, response.data))
       setProgress(0)
       setLoading(false)
     }).catch(() => {

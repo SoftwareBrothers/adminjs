@@ -8,7 +8,7 @@ export type RecordError = {
   /**
    * error type (i.e. required)
    */
-  type: string;
+  type?: string;
   /**
    * human readable message
    */
@@ -41,15 +41,19 @@ class ValidationError extends Error {
   public baseError: RecordError | null
 
   /**
-   * @param {string} message   custom message
-   * @param {PropertyErrors} propertyErrors     error messages
-   * @param {RecordError} [baseError]           base error
+   * HTTP Status code: 400
    */
-  constructor(message: string, propertyErrors: PropertyErrors, baseError?: RecordError) {
-    super(message)
+  public statusCode: number
+
+  /**
+   * @param {PropertyErrors} propertyErrors     error messages
+   * @param {RecordError} [baseError]           base error message
+   */
+  constructor(propertyErrors: PropertyErrors, baseError?: RecordError) {
+    super('Resource cannot be stored because of validation errors')
+    this.statusCode = 400
     this.propertyErrors = propertyErrors
     this.baseError = baseError || null
-    this.message = message || 'Resource cannot be stored because of validation errors'
     this.name = 'ValidationError'
   }
 }

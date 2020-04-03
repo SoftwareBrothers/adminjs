@@ -8,7 +8,7 @@ export type UseSelectedRecordsResult = {
   handleSelectAll: () => void;
 }
 
-const useSelectedRecords = (records: Array<RecordJSON>): UseSelectedRecordsResult => {
+export const useSelectedRecords = (records: Array<RecordJSON>): UseSelectedRecordsResult => {
   const [selectedRecords, setSelectedRecords] = useState<Array<RecordJSON>>([])
 
   const handleSelect = (record: RecordJSON): void => {

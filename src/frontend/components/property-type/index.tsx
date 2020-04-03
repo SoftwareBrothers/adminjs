@@ -1,6 +1,5 @@
 import React, { ReactNode } from 'react'
 import { ReactComponentLike } from 'prop-types'
-import isEqual from 'lodash/isEqual'
 
 import ErrorBoundary from '../app/error-boundary'
 

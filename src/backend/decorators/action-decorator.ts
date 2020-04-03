@@ -7,6 +7,8 @@ import { CurrentAdmin } from '../../current-admin.interface'
 import ActionJSON from './action-json.interface'
 import BaseRecord from '../adapters/base-record'
 import { DEFAULT_DRAWER_WIDTH } from '../../constants'
+import actionErrorHandler from '../services/action-error-handler'
+import ForbiddenError from '../utils/forbidden-error'
 
 /**
  * Decorates an action
@@ -58,24 +60,29 @@ class ActionDecorator {
    *
    * @param {ActionRequest} request
    * @param {any} response
-   * @param {ActionContext} data
+   * @param {ActionContext} context
    *
    * @return {Promise<any>}
    */
   async handler(
     request: ActionRequest,
     response: any,
-    data: ActionContext,
+    context: ActionContext,
   ): Promise<any> {
-    let modifiedRequest = request
-    if (typeof this.action.before === 'function') {
-      modifiedRequest = await this.action.before(request, data)
+    try {
+      this.canInvokeAction(context)
+      let modifiedRequest = request
+      if (typeof this.action.before === 'function') {
+        modifiedRequest = await this.action.before(request, context)
+      }
+      let ret = await this.action.handler(modifiedRequest, response, context)
+      if (typeof this.action.after === 'function') {
+        ret = await this.action.after(ret, modifiedRequest, context)
+      }
+      return ret
+    } catch (error) {
+      return actionErrorHandler(error, context)
     }
-    let ret = await this.action.handler(modifiedRequest, response, data)
-    if (typeof this.action.after === 'function') {
-      ret = await this.action.after(ret, modifiedRequest, data)
-    }
-    return ret
   }
 
   /**
@@ -147,6 +154,35 @@ class ActionDecorator {
    */
   isAccessible(currentAdmin?: CurrentAdmin, record?: BaseRecord): boolean {
     return this.is('isAccessible', currentAdmin, record)
+  }
+
+  /**
+   * Indicates if user can invoke given action
+   *
+   * @param   {ActionContext}  context  passed action context
+   *
+   * @return  {boolean}                 true given user has rights to the action
+   * @throws  {ForbiddenError}          when user cannot perform given action
+   */
+  canInvokeAction(context: ActionContext): boolean {
+    const { record, records, currentAdmin, resource } = context
+
+    if (record && this.isAccessible(currentAdmin, record)) {
+      return true
+    }
+
+    if (records && !records.find(bulkRecord => !this.isAccessible(currentAdmin, bulkRecord))) {
+      return true
+    }
+
+    if (!record && !records && this.isAccessible(currentAdmin)) {
+      return true
+    }
+
+    throw new ForbiddenError(this._admin.translateMessage('forbiddenError', resource.id(), {
+      actionName: this.name,
+      resourceId: resource.id(),
+    }))
   }
 
   containerWidth(): ActionJSON['containerWidth'] {

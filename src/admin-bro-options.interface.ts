@@ -100,7 +100,7 @@ export default interface AdminBroOptions {
    */
   dashboard?: {
     /**
-     * Handler function which is triggered in the api when user launches the dashboard.
+     * Handler function which can be triggered using {@link ApiClient#getDashboard}.
      */
     handler?: PageHandler;
     /**

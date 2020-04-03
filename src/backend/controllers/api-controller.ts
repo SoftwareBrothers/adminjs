@@ -20,7 +20,7 @@ import RecordJSON from '../decorators/record-json.interface'
  * ### Available API endpoints
  *
  * <div class='table-container'>
- * 
+ *
  * | Endpoint                 | Method                | Description |
  * |--------------------------|-----------------------|-------------|
  * | .../api/resources/{resourceId}/search/{query} | {@link ApiController#search} | Search record by query string |
@@ -29,9 +29,9 @@ import RecordJSON from '../decorators/record-json.interface'
  * | .../api/resources/{resourceId}/bulk/{action}?recordIds={recordIds} | {@link ApiController#bulkAction} | Perform customized bulk action |
  * | .../api/pages/{pageName}_ | {@link ApiController#page} | Perform customized page action |
  * | .../api/dashboard_ | {@link ApiController#dashboard} | Perform customized dashboard action |
- * 
+ *
  * </div>
- * 
+ *
  * ### Responsibility
  *
  * In general this controllers takes handler functions you define in {@link AdminBroOptions} and:
@@ -91,11 +91,17 @@ class ApiController {
    * @return  {Promise<SearchResponse>}    found records
    */
   async search(request: ActionRequest): Promise<SearchResponse> {
+    // TODO - move this to resource actions
     const queryString = request.params && request.params.query
     const resource = this._admin.findResource(request.params.resourceId)
     const decorated = resource.decorate()
     if (!decorated.actions.list.isAccessible(this.currentAdmin)) {
-      throw new ForbiddenError({ actionName: 'list', resourceId: resource.id() })
+      throw new ForbiddenError(
+        this._admin.translateMessage('forbiddenError', resource.id(), {
+          actionName: 'search',
+          resourceId: resource.id(),
+        }),
+      )
     }
     const titlePropertyName = decorated.titleProperty().name()
 
@@ -128,12 +134,6 @@ class ApiController {
    */
   async resourceAction(request: ActionRequest, response: any): Promise<ActionResponse> {
     const actionContext = await this.getActionContext(request)
-    if (!actionContext.action.isAccessible(this.currentAdmin)) {
-      throw new ForbiddenError({
-        actionName: actionContext.action.name,
-        resourceId: actionContext.resource.id(),
-      })
-    }
     return actionContext.action.handler(request, response, actionContext)
   }
 
@@ -148,8 +148,6 @@ class ApiController {
    *
    * @return  {Promise<RecordActionResponse>}  action response
    * @throws  ConfigurationError      When given record action doesn't return {@link RecordJSON}
-   * @throws  ForbiddenError          When user cannot perform given action: {@link Action#isAccessible}
-   *                                  returns false
    * @throws  ConfigurationError      when action handler doesn't return Promise<{@link RecordActionResponse}>
    */
   async recordAction(request: ActionRequest, response: any): Promise<RecordActionResponse> {
@@ -171,12 +169,6 @@ class ApiController {
     }
     [record] = await populator([record])
 
-    if (!actionContext.action.isAccessible(this.currentAdmin, record)) {
-      throw new ForbiddenError({
-        actionName: actionContext.action.name,
-        resourceId: actionContext.resource.id(),
-      })
-    }
     const jsonWithRecord = await actionContext.action.handler(request, response, { ...actionContext, record })
 
     if (jsonWithRecord && jsonWithRecord.record && jsonWithRecord.record.recordActions) {
@@ -200,8 +192,6 @@ class ApiController {
    * @return  {Promise<BulkActionResponse>}  action response
    * @throws  NotFoundError           when recordIds are missing in query or they don't exists in
    *                                  the database
-   * @throws  ForbiddenError          When user cannot perform given action. {@link Action#isAccessible}
-   *                                  returns false
    * @throws  ConfigurationError      when action handler doesn't return Promise<{@link BulkActionResponse}>
    */
   async bulkAction(request: ActionRequest, response: any): Promise<BulkActionResponse> {
@@ -223,14 +213,6 @@ class ApiController {
       ].join('\n'), 'Action#handler')
     }
     records = await populator(records)
-    records.forEach((record) => {
-      if (!actionContext.action.isAccessible(this.currentAdmin, record)) {
-        throw new ForbiddenError({
-          actionName: actionContext.action.name,
-          resourceId: actionContext.resource.id(),
-        })
-      }
-    })
     const jsonWithRecord = await actionContext.action.handler(request, response, { ...actionContext, records })
 
     if (jsonWithRecord && jsonWithRecord.records) {

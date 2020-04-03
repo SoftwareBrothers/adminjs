@@ -6,17 +6,22 @@
  */
 class ForbiddenError extends Error {
   /**
-   * @param   {object} context
-   * @param   {string} context.actionName
-   * @param   {string} context.resourceId
+   * HTTP Status code: 403
    */
-  constructor({ actionName, resourceId }) {
-    const msg = `
-    You cannot perform an action: "${actionName}" on a 
-    resource: "${resourceId}"
-    `
-    super(msg)
-    this.message = msg
+  public statusCode: number
+
+  /**
+   * Any custom message which should be seen in the UI
+   */
+  public baseMessage?: string
+
+  /**
+   * @param {string} [message]
+   */
+  constructor(message?: string) {
+    super('You cannot perform this action')
+    this.statusCode = 403
+    this.baseMessage = message
     this.name = 'ForbiddenError'
   }
 }
