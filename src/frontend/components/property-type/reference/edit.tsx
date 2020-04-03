@@ -15,6 +15,11 @@ type SelectRecordEnhanced = SelectRecord & {
 
 const Edit: FC<CombinedProps> = (props) => {
   const { onChange, property, record, theme } = props
+  const { reference: resourceId } = property
+
+  if (!resourceId) {
+    throw new Error(`Cannot reference resource in property '${property.name}'`)
+  }
 
   const handleChange = (selected: SelectRecordEnhanced): void => {
     if (selected) {
@@ -27,17 +32,17 @@ const Edit: FC<CombinedProps> = (props) => {
   const loadOptions = async (inputValue: string): Promise<SelectRecordEnhanced[]> => {
     const api = new ApiClient()
 
-    const records = await api.searchRecords({
-      resourceId: property.reference as string,
+    const optionRecords = await api.searchRecords({
+      resourceId,
       query: inputValue,
     })
-    return records.map((r: RecordJSON) => ({
-      value: r.id,
-      label: r.title,
-      record: r,
+    return optionRecords.map((optionRecord: RecordJSON) => ({
+      value: optionRecord.id,
+      label: optionRecord.title,
+      record: optionRecord,
     }))
   }
-  const error = record.errors && record.errors[property.name]
+  const error = record?.errors[property.name]
 
   const selectedId = record?.params[property.name] as string | undefined
   const [loadedRecord, setLoadedRecord] = useState<RecordJSON | undefined>()
@@ -58,8 +63,7 @@ const Edit: FC<CombinedProps> = (props) => {
       const api = new ApiClient()
       api.recordAction({
         actionName: 'show',
-        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-        resourceId: property.reference!,
+        resourceId,
         recordId: selectedId,
       }).then(({ data }: any) => {
         setLoadedRecord(data.record)
@@ -67,10 +71,10 @@ const Edit: FC<CombinedProps> = (props) => {
         setLoadingRecord(c => c - 1)
       })
     }
-  }, [selectedValue, selectedId, property.reference])
+  }, [selectedValue, selectedId, resourceId])
 
   return (
-    <FormGroup error={!!error}>
+    <FormGroup error={Boolean(error)}>
       <Label htmlFor={property.name}>{property.label}</Label>
       <Select
         cacheOptions
@@ -82,7 +86,7 @@ const Edit: FC<CombinedProps> = (props) => {
         isDisabled={property.isDisabled}
         isLoading={loadingRecord}
       />
-      <FormMessage>{error && error.message}</FormMessage>
+      <FormMessage>{error?.message}</FormMessage>
     </FormGroup>
   )
 }
