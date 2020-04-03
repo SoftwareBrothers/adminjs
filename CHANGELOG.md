@@ -16,6 +16,7 @@ Started since version 0.9.5
 ### Fixed
 
 * export useSelectedRecord along with UseSelectedRecordResult
+* fix Edit reference component to render nested objects.
 
 ### Changed
 
