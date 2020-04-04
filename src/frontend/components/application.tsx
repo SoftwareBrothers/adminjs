@@ -11,7 +11,7 @@ import Notice from './app/notice'
 import {
   Dashboard, ResourceAction, RecordAction, Page, BulkAction, Resource,
 } from './routes'
-import { Box, Overlay, Drawer } from './design-system'
+import { Box, Overlay } from './design-system'
 
 const GlobalStyle = createGlobalStyle`
   html, body, #app {
@@ -63,7 +63,6 @@ const App: React.FC = () => {
             <Route path={resourceActionUrl} component={ResourceAction} />
             <Route path={bulkActionUrl} component={BulkAction} />
           </Switch>
-          <Drawer id="drawerPortal" className="hidden" />
         </Box>
       </Box>
     </React.Fragment>

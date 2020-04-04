@@ -6,6 +6,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 Started since version 0.9.5
 
+## 2.2.2-4 - 03.04.2020
+
+* bring back old background color to the input
+* fix drawer bottom line color
+* improve DrawerPortal that it creates new DOM element if it doesn't exist
+
 ## 2.2.1 - 03.04.2020
 
 ### Fixed
