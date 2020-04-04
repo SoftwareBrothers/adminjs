@@ -38,7 +38,7 @@ const DrawerPortal: React.FC<DrawerPortalProps> = ({ children, width }) => {
   if (!drawerElement && window) {
     const innerWrapper = window.document.createElement('div')
     const DrawerWrapper = (
-      <ThemeProvider theme={window.THEME}>
+      <ThemeProvider theme={(window as any).THEME}>
         <Drawer id={DRAWER_PORTAL_ID} className="hidden" />
       </ThemeProvider>
     )
