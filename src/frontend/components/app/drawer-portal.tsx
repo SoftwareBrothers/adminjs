@@ -59,6 +59,7 @@ const DrawerPortal: React.FC<DrawerPortalProps> = ({ children, width }) => {
         drawerElement.classList.add('hidden')
       }
     }
+    return (): void => undefined
   }, [drawerElement])
 
   if (!drawerElement) {
