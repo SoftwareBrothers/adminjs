@@ -47,7 +47,6 @@ const StyledDatePicker = styled(InputGroup)`
   }
 
   & .react-datepicker__header {
-    background: ${({ theme }): string => theme.colors.white};
     font-size: ${({ theme }): string => theme.fontSizes.default};
     border: none;
   }
