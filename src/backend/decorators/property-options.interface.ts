@@ -9,6 +9,7 @@ export enum AvailablePropertyOptions {
   isTitle = 'isTitle',
   position = 'position',
   availableValues = 'availableValues',
+  isSortable = 'isSortable',
 }
 
 /**
@@ -79,4 +80,9 @@ export default interface PropertyOptions {
    * Whether given property should be editable or not.
    */
   isDisabled?: boolean;
+
+  /**
+   * Whether given property should be sortable on list or not.
+   */
+  isSortable?: boolean;
 }
