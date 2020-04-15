@@ -6,7 +6,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 Started since version 0.9.5
 
+## 2.2.5 - 15.04.2020
+
+### Added
+
+* added `isSortable` to property options
+
 ## 2.2.2-4 - 03.04.2020
+
+### Fixed
 
 * bring back old background color to the input
 * fix drawer bottom line color
