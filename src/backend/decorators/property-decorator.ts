@@ -63,7 +63,8 @@ class PropertyDecorator {
    * @returns {boolean}
    */
   isSortable(): boolean {
-    return this.property.isSortable()
+    // return this.property.isSortable()
+    return this.overrideFromOptions(AvailablePropertyOptions.isSortable)
   }
 
   overrideFromOptions<T>(
