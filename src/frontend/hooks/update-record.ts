@@ -21,6 +21,7 @@ const updateRecord = (
   let populatedModified = false
   const populatedCopy = { ...previousRecord.populated }
   const paramsCopy = { ...previousRecord.params }
+
   // clear previous value
   Object.keys(paramsCopy)
     .filter(key => key === property || key.startsWith(`${property}.`))
@@ -29,8 +30,9 @@ const updateRecord = (
     delete populatedCopy[property]
     populatedModified = true
   }
+
   // set new value
-  if (value) {
+  if (typeof value !== 'undefined') {
     if (typeof value === 'object' && !(value instanceof File)) {
       const flattened = flat.flatten(value) as any
       Object.keys(flattened).forEach((key) => {

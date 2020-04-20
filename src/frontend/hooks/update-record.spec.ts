@@ -6,6 +6,7 @@ import RecordJSON from '../../backend/decorators/record-json.interface'
 
 describe('updateRecord', function () {
   const newPropertyName = 'newProperty'
+  const propertyName = 'propertyName'
   const populatedPropertyName = 'populatedProperty'
   const arrayPropertyName = 'nestedArray'
   const previousRecord: RecordJSON = {
@@ -21,6 +22,7 @@ describe('updateRecord', function () {
     errors: {},
     params: {
       email: 'john@doe.pl',
+      [propertyName]: 'some filled data',
       [`${arrayPropertyName}.0`]: 'First value in an array',
       [`${arrayPropertyName}.1`]: 'Second value in an array',
     },
@@ -85,10 +87,27 @@ describe('updateRecord', function () {
   })
 
   it('clears the populated value if it exists when no ref is given', function () {
-    const value = null
+    const value = undefined
 
     const update = updateRecord(populatedPropertyName, value)
 
     expect(update(previousRecord).populated[populatedPropertyName]).to.be.undefined
+  })
+
+  it('does not clear the value when empty string was given', function () {
+    const value = ''
+
+    const update = updateRecord(propertyName, value)
+
+    expect(update(previousRecord).params[propertyName]).to.eq(value)
+  })
+
+  it('deletes the entire property when undefined was given', function () {
+    const value = undefined
+
+    const update = updateRecord(propertyName, value)
+    const updatedRecord = update(previousRecord)
+
+    expect(Object.keys(updatedRecord.params).find(key => key === propertyName)).to.be.undefined
   })
 })
