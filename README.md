@@ -27,7 +27,7 @@ https://admin-bro-example-app-staging.herokuapp.com/admin
 
 ## OpenSource SoftwareBrothers community
 
-- [Join the community](https://join.slack.com/t/adminbro/shared_invite/zt-czfb79t1-0U7pn_KCqd5Ts~lbJK0_RA) to get help and be inspired.
+- [Join the community](https://join.slack.com/t/adminbro/shared_invite/zt-djsqxxpz-_YCS8UMtQ9Ade6DPuLR7Zw) to get help and be inspired.
 - subscribe to our [newsletter](http://opensource.softwarebrothers.co)
 
 # What kind of problems it solves
