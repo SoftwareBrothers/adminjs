@@ -6,6 +6,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 Started since version 0.9.5
 
+## 2.2.7 - 20.04.2020
+
+### Fixed
+
+* fixed warning in the terminal for password field
+* fixed button hover in password field
+
 ## 2.2.6 - 20.04.2020
 
 ### Fixed
