@@ -26,6 +26,10 @@ const InputGroup = styled.div`
     color: ${({ theme }): string => theme.colors.grey40};
   }
 
+  ${Button}:last-child:hover {
+    background: ${({ theme }): string => theme.colors.hoverBg};
+  }
+
   ${Label}, ${Button}, ${Link} {
     flex-shrink: 0;
   }

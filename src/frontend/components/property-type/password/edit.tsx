@@ -21,7 +21,7 @@ const Edit: React.FC<EditPropertyProps> = (props) => {
           id={property.name}
           name={property.name}
           onChange={(event): void => onChange(property.name, event.target.value)}
-          value={value}
+          value={value ?? ''}
           disabled={property.isDisabled}
         />
         <Button
