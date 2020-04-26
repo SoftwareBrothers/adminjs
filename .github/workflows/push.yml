@@ -1,43 +1,43 @@
 name: CI/CD
 on: push
 jobs:
-  test:
-    name: Test
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-      - name: Setup
-        uses: actions/setup-node@v1
-        with:
-          node-version: '10.x'
-      - name: Cache
-        uses: actions/cache@v1
-        id: cache
-        with:
-          path: node_modules
-          key: ${{ runner.os }}-yarn-${{ hashFiles('**/package.json') }}-${{ hashFiles('**/yarn.lock') }}
-      - name: Install
-        if: steps.cache.outputs.cache-hit != 'true'
-        run: yarn install
-      - name: Lint
-        run: yarn lint
-      - name: spell
-        run: yarn cspell
-      - name: test
-        run: yarn test
-      - name: bundle production
-        run: NODE_ENV=production ONCE=true yarn bundle
-      - name: bundle dev
-        run: ONCE=true yarn bundle
-      - name: bundle globals production
-        run: NODE_ENV=production yarn bundle:globals
-      - name: bundle globals dev
-        run: NODE_ENV=dev yarn bundle:globals
-      - name: build
-        run: yarn build
-      - name: types
-        run: yarn types
+  # test:
+  #   name: Test
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Checkout
+  #       uses: actions/checkout@v2
+  #     - name: Setup
+  #       uses: actions/setup-node@v1
+  #       with:
+  #         node-version: '10.x'
+  #     - name: Cache
+  #       uses: actions/cache@v1
+  #       id: cache
+  #       with:
+  #         path: node_modules
+  #         key: ${{ runner.os }}-yarn-${{ hashFiles('**/package.json') }}-${{ hashFiles('**/yarn.lock') }}
+  #     - name: Install
+  #       if: steps.cache.outputs.cache-hit != 'true'
+  #       run: yarn install
+  #     - name: Lint
+  #       run: yarn lint
+  #     - name: spell
+  #       run: yarn cspell
+  #     - name: test
+  #       run: yarn test
+  #     - name: bundle production
+  #       run: NODE_ENV=production ONCE=true yarn bundle
+  #     - name: bundle dev
+  #       run: ONCE=true yarn bundle
+  #     - name: bundle globals production
+  #       run: NODE_ENV=production yarn bundle:globals
+  #     - name: bundle globals dev
+  #       run: NODE_ENV=dev yarn bundle:globals
+  #     - name: build
+  #       run: yarn build
+  #     - name: types
+  #       run: yarn types
 
   e2e:
     name: Cypress
