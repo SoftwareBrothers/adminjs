@@ -2,11 +2,6 @@ name: CI/CD
 on: push
 jobs:
   test:
-    services:
-      mongodb:
-        image: mongo:3.4.23
-        ports:
-          - 27017:27017
     name: Test
     runs-on: ubuntu-latest
     steps:
@@ -44,11 +39,14 @@ jobs:
       - name: types
         run: yarn types
 
-  deploy:
-    name: Deploy
-    needs: test
+  e2e:
+    name: Cypress
+    services:
+      mongo:
+        image: mongo:3.4.23
+        ports:
+          - 27017:27017
     runs-on: ubuntu-latest
-    if: endsWith(github.ref, 'e2e')
     steps:
       - uses: chrislennon/action-aws-cli@v1.1
       - name: Checkout Repo
@@ -58,4 +56,11 @@ jobs:
         with:
           node-version: '8.x'
       - name: Install node_modules
-        run: npm install --frozen-lockfile --only=production
+        working-directory: 'example-app'
+        run: npm install
+      - name: Cypress run
+        uses: cypress-io/github-action@v1
+        with:
+          start: npm start
+          wait-on: http://localhost:3030
+      
