@@ -1,0 +1,42 @@
+name: CI/CD
+on: push
+jobs:
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Setup
+        uses: actions/setup-node@v1
+        with:
+          node-version: '10.x'
+      - name: Cache
+        uses: actions/cache@v1
+        id: cache
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/package.json') }}-${{ hashFiles('**/yarn.lock') }}
+      - name: Install
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: npm install --frozen-lockfile
+      - name: Lint
+        run: npm run lint
+      - name: types
+        run: npm run types
+
+  deploy:
+    name: Deploy
+    needs: test
+    runs-on: ubuntu-latest
+    if: endsWith(github.ref, 'master')
+    steps:
+      - uses: chrislennon/action-aws-cli@v1.1
+      - name: Checkout Repo
+        uses: actions/checkout@master
+      - name: Setup
+        uses: actions/setup-node@v1
+        with:
+          node-version: '8.x'
+      - name: Install node_modules
+        run: npm install --frozen-lockfile --only=production
