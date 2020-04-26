@@ -54,12 +54,19 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: '10.x'
-      - name: Install node_modules
+      - name: Cache
+        uses: actions/cache@v1
+        id: cache
+        with:
+          path: example-app/node_modules
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/example-app/package.json') }}-${{ hashFiles('**/example-app/yarn.lock') }}
+      - name: Install
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: yarn install
         working-directory: 'example-app'
-        run: yarn
       - name: Start server in the background
         working-directory: 'example-app'
-        run: yarn start
+        run: yarn start &
       - name: run cypress
         working-directory: 'example-app'
         run: yarn cypress:run

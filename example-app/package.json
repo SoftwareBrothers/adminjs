@@ -6,7 +6,7 @@
   "license": "MIT",
   "scripts": {
     "dev": "nodemon --ignore 'cypress/**/*.js'",
-    "start": "node",
+    "start": "node index.js",
     "cypress:open": "cypress open",
     "cypress:run": "cypress run"
   },
