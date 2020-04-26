@@ -22,6 +22,20 @@ jobs:
         run: yarn install
       - name: Lint
         run: yarn lint
+      - name: spell
+        run: yarn cspell
+      - name: test
+        run: yarn test
+      - name: bundle production
+        run: NODE_ENV=production ONCE=true yarn bundle
+      - name: bundle dev
+        run: ONCE=true yarn bundle
+      - name: bundle globals production
+        run: NODE_ENV=production yarn bundle:globals
+      - name: bundle globals dev
+        run: NODE_ENV=dev yarn bundle:globals
+      - name: build
+        run: yarn build
       - name: types
         run: yarn types
 
