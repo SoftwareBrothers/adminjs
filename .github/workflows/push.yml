@@ -57,11 +57,11 @@ jobs:
           node-version: '10.x'
       - name: Install node_modules
         working-directory: 'example-app'
-        run: npm install
-      - name: Cypress run
-        uses: cypress-io/github-action@v1
-        with:
-          start: npm start
-          wait-on: http://localhost:3000
-          working-directory: 'example-app'
+        run: yarn
+      - name: Start server in the background
+        working-directory: 'example-app'
+        run: yarn start &
+      - name: run cypress
+        working-directory: 'example-app'
+        run: yarn cypress:run
       
