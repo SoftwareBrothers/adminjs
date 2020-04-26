@@ -54,7 +54,7 @@ jobs:
       - name: Setup
         uses: actions/setup-node@v1
         with:
-          node-version: '8.x'
+          node-version: '10.x'
       - name: Install node_modules
         working-directory: 'example-app'
         run: npm install
@@ -62,5 +62,6 @@ jobs:
         uses: cypress-io/github-action@v1
         with:
           start: npm start
-          wait-on: http://localhost:3030
+          wait-on: http://localhost:3000
+          working-directory: 'example-app'
       
