@@ -2,6 +2,11 @@ name: CI/CD
 on: push
 jobs:
   test:
+    services:
+      mongodb:
+        image: mongo:3.4.23
+        ports:
+          - 27017:27017
     name: Test
     runs-on: ubuntu-latest
     steps:
@@ -43,7 +48,7 @@ jobs:
     name: Deploy
     needs: test
     runs-on: ubuntu-latest
-    if: endsWith(github.ref, 'master')
+    if: endsWith(github.ref, 'e2e')
     steps:
       - uses: chrislennon/action-aws-cli@v1.1
       - name: Checkout Repo
