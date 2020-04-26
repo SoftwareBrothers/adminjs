@@ -48,7 +48,6 @@ jobs:
           - 27017:27017
     runs-on: ubuntu-latest
     steps:
-      - uses: chrislennon/action-aws-cli@v1.1
       - name: Checkout Repo
         uses: actions/checkout@master
       - name: Setup
@@ -60,7 +59,7 @@ jobs:
         run: yarn
       - name: Start server in the background
         working-directory: 'example-app'
-        run: yarn start &
+        run: yarn start
       - name: run cypress
         working-directory: 'example-app'
         run: yarn cypress:run
