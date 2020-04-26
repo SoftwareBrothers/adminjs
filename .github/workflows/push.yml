@@ -19,11 +19,11 @@ jobs:
           key: ${{ runner.os }}-yarn-${{ hashFiles('**/package.json') }}-${{ hashFiles('**/yarn.lock') }}
       - name: Install
         if: steps.cache.outputs.cache-hit != 'true'
-        run: npm install --frozen-lockfile
+        run: yarn install
       - name: Lint
-        run: npm run lint
+        run: yarn lint
       - name: types
-        run: npm run types
+        run: yarn types
 
   deploy:
     name: Deploy
