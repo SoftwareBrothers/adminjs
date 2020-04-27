@@ -19,14 +19,6 @@ jobs:
         with:
           path: node_modules
           key: ${{ runner.os }}-yarn-${{ hashFiles('**/package-cache.json') }}
-      - name: Install
-        if: steps.cache.outputs.cache-hit != 'true'
-        run: yarn install
-      - name: Upload Packages
-        uses: actions/upload-artifact@v1
-        with:
-          name: node_modules
-          path: node_modules
 
   build:
     name: build
@@ -39,10 +31,9 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: '10.x'
-      - name: Download node_modules
-        uses: actions/download-artifact@v1
-        with:
-          name: node_modules
+      - name: Install
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: yarn install
       - name: bundle production
         run: NODE_ENV=production ONCE=true yarn bundle
       - name: bundle dev
