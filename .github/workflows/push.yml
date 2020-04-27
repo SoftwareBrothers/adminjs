@@ -43,14 +43,25 @@ jobs:
       - name: Install
         if: steps.yarn-cache.outputs.cache-hit != 'true'
         run: yarn install
+      
+      - uses: actions/cache@v1
+        id: assets-cache
+        with:
+          path: src/frontend/assets/scripts
+          key: assets-${{ hashFiles('**/src/frontend/global-entry.js') }}-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-node_modules-
+      - name: bundle globals production
+        if: steps.assets-cache.outputs.cache-hit != 'true'
+        run: NODE_ENV=production yarn bundle:globals
+      - name: bundle globals dev
+        if: steps.assets-cache.outputs.cache-hit != 'true'
+        run: NODE_ENV=dev yarn bundle:globals
+
       - name: bundle production
         run: NODE_ENV=production ONCE=true yarn bundle
       - name: bundle dev
         run: ONCE=true yarn bundle
-      - name: bundle globals production
-        run: NODE_ENV=production yarn bundle:globals
-      - name: bundle globals dev
-        run: NODE_ENV=dev yarn bundle:globals
       - name: build
         run: yarn build
       - name: types
