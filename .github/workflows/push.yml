@@ -211,5 +211,14 @@ jobs:
       - name: Publish
         if: "!contains(github.ref, 'beta')"
         run: yarn publish
+      - name: Generate Changelog
+        run: |
+          awk -v ver={{${GITHUB_REF##*/}}} '
+          /^## Version / { if (p) { exit }; if ($3 == ver) { p=1; next} } p && NF
+          ' CHANGELOG.md > changelog-message.md
+      - name: Release
+        uses: softprops/action-gh-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       

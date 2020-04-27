@@ -1350,7 +1350,7 @@ admin-bro-mongoose@^0.5.0:
     flat "^4.1.0"
     lodash "^4.17.11"
 
-admin-bro@^2.2.4:
+admin-bro@^2.2.7:
   version "2.2.7"
   resolved "https://registry.yarnpkg.com/admin-bro/-/admin-bro-2.2.7.tgz#b152f7fbbfd052fc33037f44db7d69ff5d73223a"
   integrity sha512-jUSFrh4PXRZJrgyFg34nANlYQyHKYN/Lkj3MtV7Ek/LhJN1QQhoUQRV2bPOCS3/8/p6gCdTj2w2J07x0IyMJLw==
