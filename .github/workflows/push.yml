@@ -114,60 +114,65 @@ jobs:
   #     - name: test
   #       run: yarn test
  
-  # e2e:
-  #   name: Cypress
-  #   needs: build
-  #   if: contains(github.ref, 'refs/tags') || contains(github.ref, 'refs/heads')
-  #   services:
-  #     mongo:
-  #       image: mongo:3.4.23
-  #       ports:
-  #         - 27017:27017
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - name: Checkout
-  #       uses: actions/checkout@v2
-  #     - name: Setup
-  #       uses: actions/setup-node@v1
-  #       with:
-  #         node-version: '10.x'
-  #     - uses: actions/cache@v1
-  #       id: yarn-cache
-  #       with:
-  #         path: node_modules
-  #         key: ${{ runner.os }}-node_modules-${{ hashFiles('**/yarn.lock') }}
-  #         restore-keys: |
-  #           ${{ runner.os }}-node_modules-
-  #     - name: Install
-  #       if: steps.yarn-cache.outputs.cache-hit != 'true'
-  #       run: yarn install
-  #     - name: Download Build
-  #       uses: actions/download-artifact@v1
-  #       with:
-  #         name: lib 
-  #     - name: Download Types
-  #       uses: actions/download-artifact@v1
-  #       with:
-  #         name: types
-  #     - name: Download Bundle
-  #       uses: actions/download-artifact@v1
-  #       with:
-  #         name: bundle
-  #     - name: Cache node_modules
-  #       uses: actions/cache@v1
-  #       id: yarn-cache-example
-  #       with:
-  #         path: example-app/node_modules
-  #         key: ${{ runner.os }}-example_node_modules-${{ hashFiles('**/example-app/yarn.lock') }}
-  #     - name: Install
-  #       run: yarn install
-  #       working-directory: 'example-app'
-  #     - name: Start server in the background
-  #       working-directory: 'example-app'
-  #       run: yarn start &
-  #     - name: run cypress
-  #       working-directory: 'example-app'
-  #       run: yarn cypress:run
+  e2e:
+    name: Cypress
+    needs: build
+    if: contains(github.ref, 'refs/tags') || contains(github.ref, 'refs/heads')
+    services:
+      mongo:
+        image: mongo:3.4.23
+        ports:
+          - 27017:27017
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Setup
+        uses: actions/setup-node@v1
+        with:
+          node-version: '10.x'
+      - uses: actions/cache@v1
+        id: yarn-cache
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-node_modules-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-node_modules-
+      - name: Install
+        if: steps.yarn-cache.outputs.cache-hit != 'true'
+        run: yarn install
+      - name: Download Build
+        uses: actions/download-artifact@v1
+        with:
+          name: lib 
+      - name: Download Types
+        uses: actions/download-artifact@v1
+        with:
+          name: types
+      - name: Download Bundle
+        uses: actions/download-artifact@v1
+        with:
+          name: bundle
+      - name: Cache node_modules
+        uses: actions/cache@v1
+        id: yarn-cache-example
+        with:
+          path: example-app/node_modules
+          key: ${{ runner.os }}-example_node_modules-${{ hashFiles('**/example-app/yarn.lock') }}
+      - name: Install
+        if: steps.yarn-cache-example.outputs.cache-hit != 'true'
+        run: yarn install
+        working-directory: 'example-app'
+      - name: Start server in the background
+        working-directory: 'example-app'
+        run: yarn start &
+      - uses: cypress-io/github-action@v1
+        with:
+          start: yarn start
+          working-directory: example-app
+      # - name: run cypress
+      #   working-directory: 'example-app'
+      #   run: yarn cypress:run
 
   publish:
     name: Publish
