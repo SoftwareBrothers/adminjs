@@ -70,12 +70,6 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: '10.x'
-      - name: Cache root node_modules
-        uses: actions/cache@v1
-        id: cache
-        with:
-          path: node_modules
-          key: ${{ runner.os }}-yarn-${{ hashFiles('**/package.json') }}
       - name: Upload Build
         uses: actions/download-artifact@v1
         with:
