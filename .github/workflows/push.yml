@@ -5,24 +5,20 @@ jobs:
     name: setup
     runs-on: ubuntu-latest
     steps:
-      - &CHECKOUT
-        name: Checkout
+      - name: Checkout
         uses: actions/checkout@v2
-      - &SETUP_NODE
-        name: Setup
+      - name: Setup
         uses: actions/setup-node@v1
         with:
           node-version: '10.x'
-      - &CACHE_NODE
-        uses: actions/cache@v1
+      - uses: actions/cache@v1
         id: yarn-cache
         with:
           path: node_modules
           key: ${{ runner.os }}-node_modules-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
             ${{ runner.os }}-node_modules-
-      - &YARN_INSTALL
-        name: Install
+      - name: Install
         if: steps.yarn-cache.outputs.cache-hit != 'true'
         run: yarn install
 
@@ -31,10 +27,22 @@ jobs:
     runs-on: ubuntu-latest
     needs: setup
     steps:
-      - *CHECKOUT
-      - *SETUP_NODE
-      - *CACHE_NODE
-      - *YARN_INSTALL
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Setup
+        uses: actions/setup-node@v1
+        with:
+          node-version: '10.x'
+      - uses: actions/cache@v1
+        id: yarn-cache
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-node_modules-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-node_modules-
+      - name: Install
+        if: steps.yarn-cache.outputs.cache-hit != 'true'
+        run: yarn install
       - name: bundle production
         run: NODE_ENV=production ONCE=true yarn bundle
       - name: bundle dev
@@ -68,10 +76,21 @@ jobs:
     runs-on: ubuntu-latest
     needs: setup
     steps:
-      - *CHECKOUT
-      - *SETUP_NODE
-      - *CACHE_NODE
-      - *YARN_INSTALL
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Setup
+        uses: actions/setup-node@v1
+        with:
+          node-version: '10.x'
+      - uses: actions/cache@v1
+        id: yarn-cache
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-node_modules-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-node_modules-
+      - name: Install
+        if: steps.yarn-cache.outputs.cache-hit != 'true'
       - name: Lint
         run: yarn lint
       - name: spell
