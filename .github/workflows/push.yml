@@ -86,35 +86,35 @@ jobs:
           name: bundle
           path: src/frontend/assets/scripts
 
-  # test:
-  #   name: Test
-  #   runs-on: ubuntu-latest
-  #   needs: setup
-  #   steps:
-  #     - name: Checkout
-  #       uses: actions/checkout@v2
-  #     - name: Setup
-  #       uses: actions/setup-node@v1
-  #       with:
-  #         node-version: '10.x'
-  #     - uses: actions/cache@v1
-  #       id: yarn-cache
-  #       with:
-  #         path: node_modules
-  #         key: ${{ runner.os }}-node_modules-${{ hashFiles('**/yarn.lock') }}
-  #         restore-keys: |
-  #           ${{ runner.os }}-node_modules-
-  #     - name: Install
-  #       if: steps.yarn-cache.outputs.cache-hit != 'true'
-  #       run: yarn install
-  #     - name: Lint
-  #       run: yarn lint
-  #     - name: spell
-  #       run: yarn cspell
-  #     - name: test
-  #       run: yarn test
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+    needs: setup
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Setup
+        uses: actions/setup-node@v1
+        with:
+          node-version: '10.x'
+      - uses: actions/cache@v1
+        id: yarn-cache
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-node_modules-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-node_modules-
+      - name: Install
+        if: steps.yarn-cache.outputs.cache-hit != 'true'
+        run: yarn install
+      - name: Lint
+        run: yarn lint
+      - name: spell
+        run: yarn cspell
+      - name: test
+        run: yarn test
  
-  e2e:
+  cypress:
     name: Cypress
     needs: build
     if: contains(github.ref, 'refs/tags') || contains(github.ref, 'refs/heads')
@@ -163,17 +163,18 @@ jobs:
         if: failure()
         with:
           name: cypress-screenshots
-          path: cypress/screenshots
+          path: example-app/cypress/screenshots
       - uses: actions/upload-artifact@v1
         if: always()
         with:
           name: cypress-videos
-          path: cypress/videos
+          path: example-app/cypress/videos
 
   publish:
     name: Publish
     needs: build
     if: contains(github.ref, 'refs/tags')
+    needs: cypress
     services:
       mongo:
         image: mongo:3.4.23
