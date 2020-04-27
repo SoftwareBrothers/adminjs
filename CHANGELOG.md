@@ -6,26 +6,26 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 Started since version 0.9.5
 
-## 2.2.7 - 20.04.2020
+## Version 2.2.7
 
 ### Fixed
 
 * fixed warning in the terminal for password field
 * fixed button hover in password field
 
-## 2.2.6 - 20.04.2020
+## Version 2.2.6 - 20.04.2020
 
 ### Fixed
 
 * fix error when empty inputs weren't saved
 
-## 2.2.5 - 15.04.2020
+## Version 2.2.5 - 15.04.2020
 
 ### Added
 
 * added `isSortable` to property options
 
-## 2.2.2-4 - 03.04.2020
+## Version 2.2.2-4 - 03.04.2020
 
 ### Fixed
 
@@ -33,13 +33,13 @@ Started since version 0.9.5
 * fix drawer bottom line color
 * improve DrawerPortal that it creates new DOM element if it doesn't exist
 
-## 2.2.1 - 03.04.2020
+## Version 2.2.1 - 03.04.2020
 
 ### Fixed
 
 * fixing upload files problem
 
-## 2.2.0 - 03.04.2020
+## Version 2.2.0 - 03.04.2020
 
 ### Added
 
@@ -56,20 +56,19 @@ Started since version 0.9.5
 * BREAKING CHANGE: Change interface of ValidationError and ForbiddenError, as they don't take error message as the first argument
 * Type of error message is optional.
 
-## 2.1.2 - 19.03.2020
+## Version 2.1.2 - 19.03.2020
 
 ### Fixed
 
 * not refreshing in list
 
-
-## 2.1.1 - 19.03.2020
+## Version 2.1.1 - 19.03.2020
 
 ### Added
 
 * added component width to Action (#365)
 
-## 2.1.0 - 19.03.2020
+## Version 2.1.0 - 19.03.2020
 
 ### Added
 
@@ -102,20 +101,20 @@ again from the backend to refresh the page.
 on every deploy
 * now DropZone shows upload limit in different units
 
-## 2.0.2/2.0.3 - 10.03.2020
+## Version 2.0.2/2.0.3 - 10.03.2020
 
 ### Fixed
 
 * empty loader bug #336
 * error when setting AdminBro in root path #272
 
-## 2.0.1 - 03.01.2020
+## Version 2.0.1 - 03.01.2020
 
 ### Added
 
 * add AdminBroOptions.assetsCDN
 
-## 2.0.0 - 04.01.2020
+## Version 2.0.0 - 04.01.2020
 
 ### Added
 
@@ -145,19 +144,19 @@ on every deploy
 
 * remove AdminBroOption.assets.globalsFromCDN - they are always fetched from local bundle
 
-## 1.6.3 - 23.01.2020
+## Version 1.6.3 - 23.01.2020
 
 ### Added
 
 * add ADMIN_BRO_SKIP_BUNDLE flag
 
-## 1.6.1/1.6.2 - 21.01.2020
+## Version 1.6.1/1.6.2 - 21.01.2020
 
 ### Fixed
 
 * empty File object when uploading files
 
-## 1.6.0 - 01.01.2020
+## Version 1.6.0 - 01.01.2020
 
 ### Added
 
@@ -180,13 +179,13 @@ on every deploy
 * Not showing 0 in list and show views (#247)
 * Selected sidebar elements after page reload (#241)
 
-## 1.5.1 and 1.5.2 - 2019-12-21
+## Version 1.5.1 and 1.5.2 - 2019-12-21
 
 ### fixed
 
 * error when decorating nested properties [#220]
 
-## 1.5.0 - 2019-12-17
+## Version 1.5.0 - 2019-12-17
 
 ### Added
 
@@ -211,13 +210,13 @@ on every deploy
 
 * showing validation errors for nested mongoose fields [#200, #199]
 
-## 1.4.2 - 2019-11-21
+## Version 1.4.2 - 2019-11-21
 
 ### Fixed
 
 * fixed issue with editing nested arrays: [#203]
 
-## 1.4.1 - 2019-11-11
+## Version 1.4.1 - 2019-11-11
 
 ### Fixed
 
@@ -231,7 +230,7 @@ on every deploy
 
 * better API errors support [#190]
 
-## 1.4.0 - 2019-11-04
+## Version 1.4.0 - 2019-11-04
 
 ### Added
 
@@ -250,19 +249,19 @@ on every deploy
 * Id fields are now second in list by default (after title) - #189
 * Improve typescript types export (fix errors when importing admin-bro)
 
-## [1.3.5] - 2019-10-17
+## Version [1.3.5] - 2019-10-17
 
 ### Fixed
 
 * fix error with hidden resource filter
 
-## [1.3.4] - 2019-10-17
+## Version [1.3.4] - 2019-10-17
 
 ### Fixed
 
 * 404 error has been seen when page loads - fixed.
 
-## [1.3.3] - 2019-10-17
+## Version [1.3.3] - 2019-10-17
 
 ### Added
 
@@ -273,7 +272,7 @@ on every deploy
 
 * fix error with removing records
 
-## [1.3.2] - 2019-10-14
+## Version [1.3.2] - 2019-10-14
 
 ### Added
 
@@ -283,7 +282,7 @@ on every deploy
 
 * migrate all remaining components to typescript
 
-## [1.3.1] - 2019-10-06
+## Version [1.3.1] - 2019-10-06
 
 ### Added
 
@@ -293,7 +292,7 @@ on every deploy
 
 * added ActionContext to both before nad after action hooks
 
-## [1.3.0] - 2019-10-06
+## Version [1.3.0] - 2019-10-06
 
 ### Added
 
@@ -312,7 +311,7 @@ on every deploy
 * bump up React version to 16.8.0
 * `BaseRecord.toJSON` now takes `currentAdmin` as an argument
 
-## [1.2.0] - 2019-09-21
+## Version [1.2.0] - 2019-09-21
 
 ### Fixed
 
@@ -331,7 +330,7 @@ on every deploy
 * add `Placeholder` component
 * export all Application components, that users can also use them
 
-## [1.1.4] - 2019-08-30
+## Version [1.1.4] - 2019-08-30
 
 ### Fixed
 
@@ -341,13 +340,13 @@ on every deploy
 
 * new welcome screen
 
-## [1.1.3] - 2019-08-28
+## Version [1.1.3] - 2019-08-28
 
 ### Fixed
 
 * PropertyTypes are now exported as they were before
 
-## [1.1.2] - 2019-08-27
+## Version [1.1.2] - 2019-08-27
 
 ### Added
 
@@ -357,7 +356,7 @@ on every deploy
 
 * obsolete `getRecord` action from `ApiClient`
 
-## [1.1.1] - 2019-08-27
+## Version [1.1.1] - 2019-08-27
 
 ### Fixed
 
@@ -369,7 +368,7 @@ on every deploy
 
 * Custom components now are rendered always first (no matter if the field is an array or mixed type)
 
-## [1.1.0] - 2019-08-25
+## Version [1.1.0] - 2019-08-25
 
 ### Added
 
@@ -380,7 +379,7 @@ on every deploy
 
 * BaseResource.param could return nested object
 
-## [1.0.2] - 2019-08-21
+## Version [1.0.2] - 2019-08-21
 
 ### Fixed
 
@@ -390,13 +389,13 @@ on every deploy
 
 * change deprecation message to better show which function is deprecated
 
-## [1.0.1] - 2019-08-21
+## Version [1.0.1] - 2019-08-21
 
 ### Fixed
 
 * fix error for not existing route [#127]
 
-## [1.0.0] - 2019-08-20
+## Version [1.0.0] - 2019-08-20
 
 ### Added
 
@@ -415,7 +414,7 @@ on every deploy
 * create new record button is hidden when user cannot have an access to it [#122]
 
 
-## [0.9.6] - 2019-08-17
+## Version [0.9.6] - 2019-08-17
 
 ### Added
 

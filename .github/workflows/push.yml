@@ -168,7 +168,6 @@ jobs:
         run: yarn start &
       - uses: cypress-io/github-action@v1
         with:
-          start: yarn start
           working-directory: example-app
       # - name: run cypress
       #   working-directory: 'example-app'
