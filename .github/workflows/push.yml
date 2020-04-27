@@ -86,88 +86,88 @@ jobs:
           name: bundle
           path: src/frontend/assets/scripts
 
-  test:
-    name: Test
-    runs-on: ubuntu-latest
-    needs: setup
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-      - name: Setup
-        uses: actions/setup-node@v1
-        with:
-          node-version: '10.x'
-      - uses: actions/cache@v1
-        id: yarn-cache
-        with:
-          path: node_modules
-          key: ${{ runner.os }}-node_modules-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-node_modules-
-      - name: Install
-        if: steps.yarn-cache.outputs.cache-hit != 'true'
-        run: yarn install
-      - name: Lint
-        run: yarn lint
-      - name: spell
-        run: yarn cspell
-      - name: test
-        run: yarn test
+  # test:
+  #   name: Test
+  #   runs-on: ubuntu-latest
+  #   needs: setup
+  #   steps:
+  #     - name: Checkout
+  #       uses: actions/checkout@v2
+  #     - name: Setup
+  #       uses: actions/setup-node@v1
+  #       with:
+  #         node-version: '10.x'
+  #     - uses: actions/cache@v1
+  #       id: yarn-cache
+  #       with:
+  #         path: node_modules
+  #         key: ${{ runner.os }}-node_modules-${{ hashFiles('**/yarn.lock') }}
+  #         restore-keys: |
+  #           ${{ runner.os }}-node_modules-
+  #     - name: Install
+  #       if: steps.yarn-cache.outputs.cache-hit != 'true'
+  #       run: yarn install
+  #     - name: Lint
+  #       run: yarn lint
+  #     - name: spell
+  #       run: yarn cspell
+  #     - name: test
+  #       run: yarn test
  
-  e2e:
-    name: Cypress
-    needs: build
-    if: contains(github.ref, 'refs/tags') || contains(github.ref, 'refs/heads')
-    services:
-      mongo:
-        image: mongo:3.4.23
-        ports:
-          - 27017:27017
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-      - name: Setup
-        uses: actions/setup-node@v1
-        with:
-          node-version: '10.x'
-      - uses: actions/cache@v1
-        id: yarn-cache
-        with:
-          path: node_modules
-          key: ${{ runner.os }}-node_modules-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-node_modules-
-      - name: Install
-        if: steps.yarn-cache.outputs.cache-hit != 'true'
-        run: yarn install
-      - name: Download Build
-        uses: actions/download-artifact@v1
-        with:
-          name: lib 
-      - name: Download Types
-        uses: actions/download-artifact@v1
-        with:
-          name: types
-      - name: Download Bundle
-        uses: actions/download-artifact@v1
-        with:
-          name: bundle
-      - name: Cache node_modules
-        uses: actions/cache@v1
-        id: yarn-cache-example
-        with:
-          path: example-app/node_modules
-          key: ${{ runner.os }}-example_node_modules-${{ hashFiles('**/example-app/yarn.lock') }}
-      - name: Install
-        run: yarn install
-        working-directory: 'example-app'
-      - name: Start server in the background
-        working-directory: 'example-app'
-        run: yarn start &
-      - name: run cypress
-        working-directory: 'example-app'
-        run: yarn cypress:run
+  # e2e:
+  #   name: Cypress
+  #   needs: build
+  #   if: contains(github.ref, 'refs/tags') || contains(github.ref, 'refs/heads')
+  #   services:
+  #     mongo:
+  #       image: mongo:3.4.23
+  #       ports:
+  #         - 27017:27017
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Checkout
+  #       uses: actions/checkout@v2
+  #     - name: Setup
+  #       uses: actions/setup-node@v1
+  #       with:
+  #         node-version: '10.x'
+  #     - uses: actions/cache@v1
+  #       id: yarn-cache
+  #       with:
+  #         path: node_modules
+  #         key: ${{ runner.os }}-node_modules-${{ hashFiles('**/yarn.lock') }}
+  #         restore-keys: |
+  #           ${{ runner.os }}-node_modules-
+  #     - name: Install
+  #       if: steps.yarn-cache.outputs.cache-hit != 'true'
+  #       run: yarn install
+  #     - name: Download Build
+  #       uses: actions/download-artifact@v1
+  #       with:
+  #         name: lib 
+  #     - name: Download Types
+  #       uses: actions/download-artifact@v1
+  #       with:
+  #         name: types
+  #     - name: Download Bundle
+  #       uses: actions/download-artifact@v1
+  #       with:
+  #         name: bundle
+  #     - name: Cache node_modules
+  #       uses: actions/cache@v1
+  #       id: yarn-cache-example
+  #       with:
+  #         path: example-app/node_modules
+  #         key: ${{ runner.os }}-example_node_modules-${{ hashFiles('**/example-app/yarn.lock') }}
+  #     - name: Install
+  #       run: yarn install
+  #       working-directory: 'example-app'
+  #     - name: Start server in the background
+  #       working-directory: 'example-app'
+  #       run: yarn start &
+  #     - name: run cypress
+  #       working-directory: 'example-app'
+  #       run: yarn cypress:run
 
   publish:
     name: Publish
@@ -208,4 +208,11 @@ jobs:
         run: yarn publish
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
+
+      - name: Publish
+        uses: pascalgn/npm-publish-action@4f4bf159e299f65d21cd1cbd96fc5d53228036df
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
       
