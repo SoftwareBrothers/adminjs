@@ -172,7 +172,6 @@ jobs:
 
   publish:
     name: Publish
-    needs: build
     if: contains(github.ref, 'refs/tags')
     needs: cypress
     services:
