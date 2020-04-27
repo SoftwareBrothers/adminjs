@@ -64,16 +64,4 @@ describe('<RecordAction />', function () {
 
     expect(errorBox).not.to.be.undefined
   })
-
-  describe('page not loaded yet', function () {
-    it('renders loader', async function () {
-      const { findByTestId } = renderSubject({
-        resources: [resource],
-      }, `/resources/${resource.id}/records/1234/show`)
-
-      const loader = await findByTestId('Loader')
-
-      expect(loader).not.to.be.undefined
-    })
-  })
 })
