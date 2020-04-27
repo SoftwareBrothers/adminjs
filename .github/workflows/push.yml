@@ -198,21 +198,14 @@ jobs:
         uses: actions/download-artifact@v1
         with:
           name: bundle
+      - uses: filipstefansson/set-npm-token-action@v1
+        with:
+          token: ${{ secrets.NPM_TOKEN }}
       - name: Publish beta
         if: contains(github.ref, 'beta')
         run: yarn publish --tag beta
-        env:
-          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
       - name: Publish
         if: "!contains(github.ref, 'beta')"
         run: yarn publish
-        env:
-          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
-
-      - name: Publish
-        uses: pascalgn/npm-publish-action@4f4bf159e299f65d21cd1cbd96fc5d53228036df
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NPM_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       
