@@ -153,25 +153,22 @@ jobs:
         uses: actions/download-artifact@v1
         with:
           name: bundle
-      - name: Cache node_modules
-        uses: actions/cache@v1
-        id: yarn-cache-example
-        with:
-          path: example-app/node_modules
-          key: ${{ runner.os }}-example_node_modules-${{ hashFiles('**/example-app/yarn.lock') }}
-      - name: Install
-        if: steps.yarn-cache-example.outputs.cache-hit != 'true'
-        run: yarn install
-        working-directory: 'example-app'
-      - name: Start server in the background
-        working-directory: 'example-app'
-        run: yarn start &
+      - run: yarn link
       - uses: cypress-io/github-action@v1
         with:
           working-directory: example-app
-      # - name: run cypress
-      #   working-directory: 'example-app'
-      #   run: yarn cypress:run
+          build: yarn link admin-bro
+          start: yarn start
+      - uses: actions/upload-artifact@v1
+        if: failure()
+        with:
+          name: cypress-screenshots
+          path: cypress/screenshots
+      - uses: actions/upload-artifact@v1
+        if: always()
+        with:
+          name: cypress-videos
+          path: cypress/videos
 
   publish:
     name: Publish
@@ -215,8 +212,11 @@ jobs:
         run: |
           awk -v ver={{${GITHUB_REF##*/}}} '
           /^## Version / { if (p) { exit }; if ($3 == ver) { p=1; next} } p && NF
-          ' CHANGELOG.md > changelog-message.md
+          ' CHANGELOG.md > changelog-message.txt
       - name: Release
+        with:
+          body_path: changelog-message.txt
+          prerelease: contains(github.ref, 'beta')
         uses: softprops/action-gh-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
