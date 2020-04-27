@@ -6,11 +6,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 Started since version 0.9.5
 
-## Version v2.2.8-beta.6
+## Version v2.2.8 - 27.04.2020
+
+### Added
+
+* link changelog with github releases
 
 ### Changed
 
-* change travis to github actions
+* Change CI from travis to github actions
+* add Cypress tests to CI
+
+### Fixed
+
+* [#422] - Cannot disable `datetime` and `boolean` fields
 
 ## Version 2.2.7
 
