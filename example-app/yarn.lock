@@ -1350,10 +1350,10 @@ admin-bro-mongoose@^0.5.0:
     flat "^4.1.0"
     lodash "^4.17.11"
 
-admin-bro@^2.2.7:
-  version "2.2.7"
-  resolved "https://registry.yarnpkg.com/admin-bro/-/admin-bro-2.2.7.tgz#b152f7fbbfd052fc33037f44db7d69ff5d73223a"
-  integrity sha512-jUSFrh4PXRZJrgyFg34nANlYQyHKYN/Lkj3MtV7Ek/LhJN1QQhoUQRV2bPOCS3/8/p6gCdTj2w2J07x0IyMJLw==
+admin-bro@^2.2.8-beta.6:
+  version "2.2.8-beta.6"
+  resolved "https://registry.yarnpkg.com/admin-bro/-/admin-bro-2.2.8-beta.6.tgz#a65759293b9db92f200b236ef6240e405944bd98"
+  integrity sha512-KVAfPLF7fQxZzcEsnnktZnvuWW7mAWtlxn60iH63rlVM3kFCQ/8qWO+VeLljsI58Znxk4b0UTbw9bIQoPV6+GA==
   dependencies:
     "@babel/core" "^7.8.3"
     "@babel/parser" "^7.6.2"

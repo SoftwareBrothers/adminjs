@@ -2,11 +2,10 @@ import React, { useState } from 'react'
 import ReactDatePicker from 'react-datepicker'
 import styled from 'styled-components'
 
-import { Calendar16 } from '@carbon/icons-react'
-
 import styles from '../utils/datepicker.styles'
 import { Input } from '../atoms/input'
 import { Button } from '../atoms/button'
+import { Icon } from '../atoms/icon'
 import { InputGroup } from './form-group'
 import { cssClass } from '../utils/css-class'
 
@@ -112,6 +111,10 @@ const DatePickerWrapper = styled.div`
  */
 export type DatePickerProps = {
   /**
+   * If datepicker should be disabled
+   */
+  disabled?: boolean;
+  /**
    * selected date
    */
   value?: string | Date;
@@ -142,7 +145,7 @@ const format = (date: Date): string => `${date.getFullYear()}-${pad(date.getMont
  * )
  */
 export const DatePicker: React.FC<DatePickerProps> = (props) => {
-  const { value, onChange, ...other } = props
+  const { value, onChange, disabled, ...other } = props
 
   const [hidden, setHidden] = useState(true)
 
@@ -159,7 +162,9 @@ export const DatePicker: React.FC<DatePickerProps> = (props) => {
   }
 
   const onDatePickerChange = (date: Date) => {
-    onChange(format(date))
+    if (!disabled) {
+      onChange(format(date))
+    }
   }
 
   return (
@@ -173,14 +178,16 @@ export const DatePicker: React.FC<DatePickerProps> = (props) => {
           value={stringValue || ''}
           onChange={event => onChange(event.target.value)}
           onFocus={(): void => setHidden(false)}
+          disabled={disabled}
         />
         <Button
           variant="primary"
           type="button"
           size="icon"
+          disabled={disabled}
           onClick={(): void => setHidden(!hidden)}
         >
-          <Calendar16 />
+          <Icon icon="Calendar" />
         </Button>
         {!hidden ? (
           <DatePickerWrapper>

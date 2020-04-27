@@ -14,6 +14,7 @@ const Edit: React.FC<EditPropertyProps> = (props) => {
       <Label htmlFor={property.name}>{property.label}</Label>
       <DatePicker
         value={value}
+        disabled={property.isDisabled}
         onChange={(data: string): void => onChange(property.name, data)}
       />
       <FormMessage>{error && error.message}</FormMessage>

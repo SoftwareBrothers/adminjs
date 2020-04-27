@@ -19,6 +19,15 @@ const CompanySchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  disabledAt: {
+    type: Date,
+  },
+  isAdmin: {
+    type: Boolean,
+  },
+  isBig: {
+    type: Boolean,
+  }
 })
 
 const Company = mongoose.model('Company', CompanySchema)

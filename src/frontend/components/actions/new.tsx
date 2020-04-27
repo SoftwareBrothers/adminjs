@@ -58,7 +58,7 @@ const New: FC<ActionProps> = (props) => {
         ))}
       </DrawerContent>
       <DrawerFooter>
-        <Button variant="primary" size="lg">
+        <Button variant="primary" size="lg" type="submit" data-testid="button-save">
           {loading ? (<Icon icon="Fade" spin />) : null}
           {translateButton('save', resource.id)}
         </Button>
