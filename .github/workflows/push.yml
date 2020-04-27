@@ -11,70 +11,65 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: '10.x'
-      # - name: Prepare cache
-      #   run: cat package.json | sed '/version/d' > package-cache.json
-      # - name: Cache
-      #   uses: actions/cache@v1
-      #   id: cache
-      #   with:
-      #     path: node_modules 
-      #     key: ${{ runner.os }}-yarn-${{ hashFiles('**/package-cache.json') }}
       - name: Get yarn cache directory path
         id: yarn-cache-dir-path
         run: echo "::set-output name=dir::$(yarn cache dir)"
-
       - uses: actions/cache@v1
         id: yarn-cache
         with:
           path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
-          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}-${{ hashFiles('**/example-app/yarn.lock') }}
           restore-keys: |
             ${{ runner.os }}-yarn-
       - name: Install
         if: steps.yarn-cache.outputs.cache-hit != 'true'
         run: yarn install
+      - name: Install example-app
+        if: steps.yarn-cache.outputs.cache-hit != 'true'
+        run: yarn install
+        working-directory: example-app
 
-  # build:
-  #   name: build
-  #   runs-on: ubuntu-latest
-  #   needs: setup
-  #   steps:
-  #     - name: Checkout
-  #       uses: actions/checkout@v2
-  #     - name: Setup
-  #       uses: actions/setup-node@v1
-  #       with:
-  #         node-version: '10.x'
-  #     - name: Install
-  #       if: steps.cache.outputs.cache-hit != 'true'
-  #       run: yarn install
-  #     - name: bundle production
-  #       run: NODE_ENV=production ONCE=true yarn bundle
-  #     - name: bundle dev
-  #       run: ONCE=true yarn bundle
-  #     - name: bundle globals production
-  #       run: NODE_ENV=production yarn bundle:globals
-  #     - name: bundle globals dev
-  #       run: NODE_ENV=dev yarn bundle:globals
-  #     - name: build
-  #       run: yarn build
-  #     - name: types
-  #       run: yarn types
-  #     - name: Upload Build
-  #       uses: actions/upload-artifact@v1
-  #       with:
-  #         name: lib
-  #         path: lib
-  #     - name: Upload Types
-  #       uses: actions/upload-artifact@v1
-  #       with:
-  #         name: types
-  #         path: types
-  #     - name: Upload Bundle
-  #       uses: actions/upload-artifact@v1
-  #       with:
-  #         name: bundle
-  #         path: src/frontend/assets/scripts
+  build:
+    name: build
+    runs-on: ubuntu-latest
+    needs: setup
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Setup
+        uses: actions/setup-node@v1
+        with:
+          node-version: '10.x'
+      - name: Install
+        if: steps.yarn-cache.outputs.cache-hit != 'true'
+        run: yarn install
+      - name: bundle production
+        run: NODE_ENV=production ONCE=true yarn bundle
+      - name: bundle dev
+        run: ONCE=true yarn bundle
+      - name: bundle globals production
+        run: NODE_ENV=production yarn bundle:globals
+      - name: bundle globals dev
+        run: NODE_ENV=dev yarn bundle:globals
+      - name: build
+        run: yarn build
+      - name: types
+        run: yarn types
+      - name: Upload Build
+        uses: actions/upload-artifact@v1
+        with:
+          name: lib
+          path: lib
+      - name: Upload Types
+        uses: actions/upload-artifact@v1
+        with:
+          name: types
+          path: types
+      - name: Upload Bundle
+        uses: actions/upload-artifact@v1
+        with:
+          name: bundle
+          path: src/frontend/assets/scripts
 
   test:
     name: Test
