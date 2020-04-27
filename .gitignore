@@ -16,3 +16,4 @@ node_modules
 src/frontend/assets/scripts
 
 .adminbro
+example-app/cypress/videos

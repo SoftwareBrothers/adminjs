@@ -1,8 +1,9 @@
 /// <reference types="cypress" />
+/// <reference types="../../support" />
 
 context('resources/Company', () => {
   beforeEach(() => {
-    cy.setCookie(Cypress.env('COOKIE_NAME'), Cypress.env('COOKIE'))
+    cy.login()
     cy.visit('resources/Company')
   })
 
