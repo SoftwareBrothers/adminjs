@@ -155,7 +155,6 @@ jobs:
           path: example-app/node_modules
           key: ${{ runner.os }}-example_node_modules-${{ hashFiles('**/example-app/yarn.lock') }}
       - name: Install
-        if: steps.yarn-cache-example.outputs.cache-hit != 'true'
         run: yarn install
         working-directory: 'example-app'
       - name: Start server in the background
