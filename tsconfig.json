@@ -20,6 +20,7 @@
       "./spec/**/*"
   ],
   "exclude": [
+      "./example-app/**/*",
       "./src/frontend/assets/**/*",
       "./src/frontend/components/**/*stories.tsx",
   ]

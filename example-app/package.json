@@ -1,0 +1,36 @@
+{
+  "name": "admin-bro-e2e",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Wojciech Krysiak",
+  "license": "MIT",
+  "scripts": {
+    "dev": "nodemon --ignore 'cypress/**/*.js'",
+    "start": "node index.js",
+    "cypress:open": "cypress open",
+    "cypress:run": "cypress run"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.6",
+    "eslint": "^6.8.0",
+    "eslint-config-airbnb": "^18.1.0",
+    "eslint-plugin-import": "^2.20.2",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
+    "eslint-plugin-react": "^7.19.0",
+    "eslint-plugin-react-hooks": "^2.5.1",
+    "nodemon": "^2.0.2"
+  },
+  "dependencies": {
+    "admin-bro": "^2.2.8-beta.6",
+    "admin-bro-expressjs": "^2.0.2",
+    "admin-bro-mongoose": "^0.5.0",
+    "argon2": "^0.26.2",
+    "connect-mongo": "^3.2.0",
+    "cypress": "^4.4.1",
+    "dotenv-json": "^1.0.0",
+    "express": "^4.17.1",
+    "express-formidable": "^1.2.0",
+    "express-session": "^1.17.0",
+    "mongoose": "^5.9.7"
+  }
+}

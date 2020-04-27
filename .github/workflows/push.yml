@@ -1,0 +1,234 @@
+name: CI/CD
+on: push
+jobs:
+  setup:
+    name: setup
+    runs-on: ubuntu-latest
+    steps:
+      - name: Dump GitHub context
+        env:
+          GITHUB_CONTEXT: ${{ toJson(github) }}
+        run: echo "$GITHUB_CONTEXT"
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Setup
+        uses: actions/setup-node@v1
+        with:
+          node-version: '10.x'
+      - uses: actions/cache@v1
+        id: yarn-cache
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-node_modules-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-node_modules-
+      - name: Install
+        if: steps.yarn-cache.outputs.cache-hit != 'true'
+        run: yarn install
+
+  build:
+    name: build
+    runs-on: ubuntu-latest
+    needs: setup
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Setup
+        uses: actions/setup-node@v1
+        with:
+          node-version: '10.x'
+      - uses: actions/cache@v1
+        id: yarn-cache
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-node_modules-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-node_modules-
+      - name: Install
+        if: steps.yarn-cache.outputs.cache-hit != 'true'
+        run: yarn install
+      
+      - uses: actions/cache@v1
+        id: assets-cache
+        with:
+          path: src/frontend/assets/scripts
+          key: assets-${{ hashFiles('**/src/frontend/global-entry.js') }}-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            assets-
+      - name: bundle globals production
+        if: steps.assets-cache.outputs.cache-hit != 'true'
+        run: NODE_ENV=production yarn bundle:globals
+      - name: bundle globals dev
+        if: steps.assets-cache.outputs.cache-hit != 'true'
+        run: NODE_ENV=dev yarn bundle:globals
+
+      - name: bundle production
+        run: NODE_ENV=production ONCE=true yarn bundle
+      - name: bundle dev
+        run: ONCE=true yarn bundle
+      - name: build
+        run: yarn build
+      - name: types
+        run: yarn types
+      - name: Upload Build
+        if: contains(github.ref, 'refs/tags') || contains(github.ref, 'refs/heads/master')
+        uses: actions/upload-artifact@v1
+        with:
+          name: lib
+          path: lib
+      - name: Upload Types
+        if: contains(github.ref, 'refs/tags') || contains(github.ref, 'refs/heads/master')
+        uses: actions/upload-artifact@v1
+        with:
+          name: types
+          path: types
+      - name: Upload Bundle
+        if: contains(github.ref, 'refs/tags') || contains(github.ref, 'refs/heads/master')
+        uses: actions/upload-artifact@v1
+        with:
+          name: bundle
+          path: src/frontend/assets/scripts
+
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+    needs: setup
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Setup
+        uses: actions/setup-node@v1
+        with:
+          node-version: '10.x'
+      - uses: actions/cache@v1
+        id: yarn-cache
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-node_modules-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-node_modules-
+      - name: Install
+        if: steps.yarn-cache.outputs.cache-hit != 'true'
+        run: yarn install
+      - name: Lint
+        run: yarn lint
+      - name: spell
+        run: yarn cspell
+      - name: cover
+        if: contains(github.ref, 'refs/heads/master')
+        run: yarn codecov
+        env:
+          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }} 
+      - name: test
+        if: "!contains(github.ref, 'refs/heads/master')"
+        run: yarn test
+ 
+  cypress:
+    name: Cypress
+    needs: build
+    if: contains(github.ref, 'refs/tags') || contains(github.ref, 'refs/heads/master')
+    services:
+      mongo:
+        image: mongo:3.4.23
+        ports:
+          - 27017:27017
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Setup
+        uses: actions/setup-node@v1
+        with:
+          node-version: '10.x'
+      - uses: actions/cache@v1
+        id: yarn-cache
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-node_modules-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-node_modules-
+      - name: Install
+        if: steps.yarn-cache.outputs.cache-hit != 'true'
+        run: yarn install
+      - name: Download Build
+        uses: actions/download-artifact@v1
+        with:
+          name: lib 
+      - name: Download Types
+        uses: actions/download-artifact@v1
+        with:
+          name: types
+      - name: Download Bundle
+        uses: actions/download-artifact@v1
+        with:
+          name: bundle
+      - run: yarn link
+      - uses: cypress-io/github-action@v1
+        with:
+          working-directory: example-app
+          build: yarn link admin-bro
+          start: yarn start
+      - uses: actions/upload-artifact@v1
+        if: failure()
+        with:
+          name: cypress-screenshots
+          path: example-app/cypress/screenshots
+      - uses: actions/upload-artifact@v1
+        if: always()
+        with:
+          name: cypress-videos
+          path: example-app/cypress/videos
+
+  publish:
+    name: Publish
+    if: contains(github.ref, 'refs/tags')
+    needs: cypress
+    services:
+      mongo:
+        image: mongo:3.4.23
+        ports:
+          - 27017:27017
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Setup
+        uses: actions/setup-node@v1
+        with:
+          node-version: '10.x'
+      - name: Download Build
+        uses: actions/download-artifact@v1
+        with:
+          name: lib 
+      - name: Download Types
+        uses: actions/download-artifact@v1
+        with:
+          name: types
+      - name: Download Bundle
+        uses: actions/download-artifact@v1
+        with:
+          name: bundle
+      - uses: filipstefansson/set-npm-token-action@v1
+        with:
+          token: ${{ secrets.NPM_TOKEN }}
+      - name: Publish beta
+        if: contains(github.ref, 'beta')
+        run: yarn publish --tag beta
+      - name: Publish
+        if: "!contains(github.ref, 'beta')"
+        run: yarn publish
+      - name: Generate Changelog
+        # this command extracts info about particular version from the changelog 
+        run: |
+          awk -v ver=${GITHUB_REF##*/} '
+          /^## Version / { if (p) { exit }; if ($3 == ver) { p=1; next} } p && NF
+          ' CHANGELOG.md > changelog-message.txt
+      - name: Release
+        with:
+          body_path: changelog-message.txt
+          prerelease: contains(github.ref, 'beta')
+        uses: softprops/action-gh-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      
