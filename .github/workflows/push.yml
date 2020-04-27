@@ -163,4 +163,39 @@ jobs:
       - name: run cypress
         working-directory: 'example-app'
         run: yarn cypress:run
+
+  publish:
+    name: Publish
+    needs: build
+    if: contains(github.ref, "release")
+    services:
+      mongo:
+        image: mongo:3.4.23
+        ports:
+          - 27017:27017
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Setup
+        uses: actions/setup-node@v1
+        with:
+          node-version: '10.x'
+      - name: Download Build
+        uses: actions/download-artifact@v1
+        with:
+          name: lib 
+      - name: Download Types
+        uses: actions/download-artifact@v1
+        with:
+          name: types
+      - name: Download Bundle
+        uses: actions/download-artifact@v1
+        with:
+          name: bundle
+      - run: echo {{github.ref}}
+      - name: Publish
+        run: yarn publish --tag beta
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
       

@@ -8,6 +8,9 @@ const AdminCompany = require('./companies/company.admin')
 /** @type {import('admin-bro').AdminBroOptions} */
 const options = {
   resources: [AdminCompany],
+  version: {
+    admin: true
+  }
 }
 
 module.exports = options
