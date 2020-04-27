@@ -73,10 +73,9 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: '10.x'
-      - name: Download node_modules
-        uses: actions/download-artifact@v1
-        with:
-          name: node_modules
+      - name: Install
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: yarn install
       - name: Lint
         run: yarn lint
       - name: spell
@@ -112,17 +111,16 @@ jobs:
         uses: actions/download-artifact@v1
         with:
           name: bundle
-      - name: Download node_modules
-        uses: actions/download-artifact@v1
-        with:
-          name: node_modules
+      - name: Install admin node_modules
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: yarn install
       - name: Cache node_modules
         uses: actions/cache@v1
         id: cache
         with:
           path: example-app/node_modules
           key: ${{ runner.os }}-yarn-${{ hashFiles('**/example-app/package.json') }}
-      - name: Install
+      - name: Install node_modules
         if: steps.cache.outputs.cache-hit != 'true'
         run: yarn install
         working-directory: 'example-app'
