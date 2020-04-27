@@ -50,7 +50,7 @@ jobs:
           path: src/frontend/assets/scripts
           key: assets-${{ hashFiles('**/src/frontend/global-entry.js') }}-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
-            ${{ runner.os }}-node_modules-
+            assets-
       - name: bundle globals production
         if: steps.assets-cache.outputs.cache-hit != 'true'
         run: NODE_ENV=production yarn bundle:globals
@@ -102,6 +102,7 @@ jobs:
             ${{ runner.os }}-node_modules-
       - name: Install
         if: steps.yarn-cache.outputs.cache-hit != 'true'
+        run: yarn install
       - name: Lint
         run: yarn lint
       - name: spell
