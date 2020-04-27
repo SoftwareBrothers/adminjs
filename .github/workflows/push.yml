@@ -56,7 +56,7 @@ jobs:
 
   e2e:
     name: Cypress
-    
+    needs: test
     services:
       mongo:
         image: mongo:3.4.23
@@ -70,15 +70,15 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: '10.x'
-      - name: Upload Build
+      - name: Download Build
         uses: actions/download-artifact@v1
         with:
           name: lib
-      - name: Upload Types
+      - name: Download Types
         uses: actions/download-artifact@v1
         with:
           name: types
-      - name: Upload Bundle
+      - name: Download Bundle
         uses: actions/download-artifact@v1
         with:
           name: bundle
