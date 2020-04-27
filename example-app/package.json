@@ -21,7 +21,7 @@
     "nodemon": "^2.0.2"
   },
   "dependencies": {
-    "admin-bro": "^2.2.4",
+    "admin-bro": "../",
     "admin-bro-expressjs": "^2.0.2",
     "admin-bro-mongoose": "^0.5.0",
     "argon2": "^0.26.2",

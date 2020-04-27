@@ -1,46 +1,62 @@
 name: CI/CD
 on: push
 jobs:
-  # test:
-  #   name: Test
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - name: Checkout
-  #       uses: actions/checkout@v2
-  #     - name: Setup
-  #       uses: actions/setup-node@v1
-  #       with:
-  #         node-version: '10.x'
-  #     - name: Cache
-  #       uses: actions/cache@v1
-  #       id: cache
-  #       with:
-  #         path: node_modules
-  #         key: ${{ runner.os }}-yarn-${{ hashFiles('**/package.json') }}-${{ hashFiles('**/yarn.lock') }}
-  #     - name: Install
-  #       if: steps.cache.outputs.cache-hit != 'true'
-  #       run: yarn install
-  #     - name: Lint
-  #       run: yarn lint
-  #     - name: spell
-  #       run: yarn cspell
-  #     - name: test
-  #       run: yarn test
-  #     - name: bundle production
-  #       run: NODE_ENV=production ONCE=true yarn bundle
-  #     - name: bundle dev
-  #       run: ONCE=true yarn bundle
-  #     - name: bundle globals production
-  #       run: NODE_ENV=production yarn bundle:globals
-  #     - name: bundle globals dev
-  #       run: NODE_ENV=dev yarn bundle:globals
-  #     - name: build
-  #       run: yarn build
-  #     - name: types
-  #       run: yarn types
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Setup
+        uses: actions/setup-node@v1
+        with:
+          node-version: '10.x'
+      - name: Cache
+        uses: actions/cache@v1
+        id: cache
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/package.json') }}
+      - name: Install
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: yarn install
+      - name: Lint
+        run: yarn lint
+      - name: spell
+        run: yarn cspell
+      - name: test
+        run: yarn test
+      - name: bundle production
+        run: NODE_ENV=production ONCE=true yarn bundle
+      - name: bundle dev
+        run: ONCE=true yarn bundle
+      - name: bundle globals production
+        run: NODE_ENV=production yarn bundle:globals
+      - name: bundle globals dev
+        run: NODE_ENV=dev yarn bundle:globals
+      - name: build
+        run: yarn build
+      - name: types
+        run: yarn types
+      - name: Upload Build
+        uses: actions/upload-artifact@v1
+        with:
+          name: lib
+          path: lib
+      - name: Upload Types
+        uses: actions/upload-artifact@v1
+        with:
+          name: types
+          path: types
+      - name: Upload Bundle
+        uses: actions/upload-artifact@v1
+        with:
+          name: bundle
+          path: src/frontend/assets/scripts
 
   e2e:
     name: Cypress
+    
     services:
       mongo:
         image: mongo:3.4.23
@@ -54,12 +70,30 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: '10.x'
-      - name: Cache
+      - name: Cache root node_modules
+        uses: actions/cache@v1
+        id: cache
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/package.json') }}
+      - name: Upload Build
+        uses: actions/download-artifact@v1
+        with:
+          name: lib
+      - name: Upload Types
+        uses: actions/download-artifact@v1
+        with:
+          name: types
+      - name: Upload Bundle
+        uses: actions/download-artifact@v1
+        with:
+          name: bundle
+      - name: Cache node_modules
         uses: actions/cache@v1
         id: cache
         with:
           path: example-app/node_modules
-          key: ${{ runner.os }}-yarn-${{ hashFiles('**/example-app/package.json') }}-${{ hashFiles('**/example-app/yarn.lock') }}
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/example-app/package.json') }}
       - name: Install
         if: steps.cache.outputs.cache-hit != 'true'
         run: yarn install
