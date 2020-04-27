@@ -217,7 +217,7 @@ jobs:
       - name: Generate Changelog
         # this command extracts info about particular version from the changelog 
         run: |
-          awk -v ver={{${GITHUB_REF##*/}}} '
+          awk -v ver=${GITHUB_REF##*/} '
           /^## Version / { if (p) { exit }; if ($3 == ver) { p=1; next} } p && NF
           ' CHANGELOG.md > changelog-message.txt
       - name: Release
