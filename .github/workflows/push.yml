@@ -1,8 +1,8 @@
 name: CI/CD
 on: push
 jobs:
-  test:
-    name: Test
+  setup:
+    name: setup
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -11,21 +11,37 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: '10.x'
+      - name: Prepare cache
+        run: cat package.json | sed '/version/d' > package-cache.json
       - name: Cache
         uses: actions/cache@v1
         id: cache
         with:
           path: node_modules
-          key: ${{ runner.os }}-yarn-${{ hashFiles('**/package.json') }}
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/package-cache.json') }}
       - name: Install
         if: steps.cache.outputs.cache-hit != 'true'
-        run: yarn install
-      - name: Lint
-        run: yarn lint
-      - name: spell
-        run: yarn cspell
-      - name: test
-        run: yarn test
+      - name: Upload Packages
+        uses: actions/upload-artifact@v1
+        with:
+          name: node_modules
+          path: node_modules
+
+  build:
+    name: build
+    runs-on: ubuntu-latest
+    needs: setup
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Setup
+        uses: actions/setup-node@v1
+        with:
+          node-version: '10.x'
+      - name: Download node_modules
+        uses: actions/download-artifact@v1
+        with:
+          name: node_modules
       - name: bundle production
         run: NODE_ENV=production ONCE=true yarn bundle
       - name: bundle dev
@@ -54,9 +70,31 @@ jobs:
           name: bundle
           path: src/frontend/assets/scripts
 
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+    needs: setup
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Setup
+        uses: actions/setup-node@v1
+        with:
+          node-version: '10.x'
+      - name: Download node_modules
+        uses: actions/download-artifact@v1
+        with:
+          name: node_modules
+      - name: Lint
+        run: yarn lint
+      - name: spell
+        run: yarn cspell
+      - name: test
+        run: yarn test
+
   e2e:
     name: Cypress
-    needs: test
+    needs: build
     services:
       mongo:
         image: mongo:3.4.23
@@ -82,6 +120,10 @@ jobs:
         uses: actions/download-artifact@v1
         with:
           name: bundle
+      - name: Download node_modules
+        uses: actions/download-artifact@v1
+        with:
+          name: node_modules
       - name: Cache node_modules
         uses: actions/cache@v1
         id: cache
