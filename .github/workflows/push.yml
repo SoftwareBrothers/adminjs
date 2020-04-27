@@ -5,46 +5,36 @@ jobs:
     name: setup
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      - &CHECKOUT
+        name: Checkout
         uses: actions/checkout@v2
-      - name: Setup
+      - &SETUP_NODE
+        name: Setup
         uses: actions/setup-node@v1
         with:
           node-version: '10.x'
-      - uses: actions/cache@v1
+      - &CACHE_NODE
+        uses: actions/cache@v1
         id: yarn-cache
         with:
           path: node_modules
           key: ${{ runner.os }}-node_modules-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
             ${{ runner.os }}-node_modules-
-      - name: Install
+      - &YARN_INSTALL
+        name: Install
         if: steps.yarn-cache.outputs.cache-hit != 'true'
         run: yarn install
-
-
 
   build:
     name: build
     runs-on: ubuntu-latest
     needs: setup
     steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-      - name: Setup
-        uses: actions/setup-node@v1
-        with:
-          node-version: '10.x'
-      - uses: actions/cache@v1
-        id: yarn-cache
-        with:
-          path: node_modules
-          key: ${{ runner.os }}-node_modules-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-node_modules-
-      - name: Install
-        if: steps.yarn-cache.outputs.cache-hit != 'true'
-        run: yarn install
+      - *CHECKOUT
+      - *SETUP_NODE
+      - *CACHE_NODE
+      - *YARN_INSTALL
       - name: bundle production
         run: NODE_ENV=production ONCE=true yarn bundle
       - name: bundle dev
@@ -73,26 +63,21 @@ jobs:
           name: bundle
           path: src/frontend/assets/scripts
 
-  # test:
-  #   name: Test
-  #   runs-on: ubuntu-latest
-  #   needs: setup
-  #   steps:
-  #     - name: Checkout
-  #       uses: actions/checkout@v2
-  #     - name: Setup
-  #       uses: actions/setup-node@v1
-  #       with:
-  #         node-version: '10.x'
-  #     - name: Install
-  #       if: steps.yarn-cache.outputs.cache-hit != 'true'
-  #       run: yarn install
-  #     - name: Lint
-  #       run: yarn lint
-  #     - name: spell
-  #       run: yarn cspell
-  #     - name: test
-  #       run: yarn test
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+    needs: setup
+    steps:
+      - *CHECKOUT
+      - *SETUP_NODE
+      - *CACHE_NODE
+      - *YARN_INSTALL
+      - name: Lint
+        run: yarn lint
+      - name: spell
+        run: yarn cspell
+      - name: test
+        run: yarn test
 
   # e2e:
   #   name: Cypress
