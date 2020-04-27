@@ -21,6 +21,7 @@ jobs:
           key: ${{ runner.os }}-yarn-${{ hashFiles('**/package-cache.json') }}
       - name: Install
         if: steps.cache.outputs.cache-hit != 'true'
+        run: yarn install
       - name: Upload Packages
         uses: actions/upload-artifact@v1
         with:
