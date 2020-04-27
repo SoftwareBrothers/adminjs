@@ -5,6 +5,7 @@ jobs:
     name: setup
     runs-on: ubuntu-latest
     steps:
+      - run: echo "{{github.ref}}"
       - name: Checkout
         uses: actions/checkout@v2
       - name: Setup
@@ -193,7 +194,6 @@ jobs:
         uses: actions/download-artifact@v1
         with:
           name: bundle
-      - run: echo {{github.ref}}
       - name: Publish
         run: yarn publish --tag beta
         env:
