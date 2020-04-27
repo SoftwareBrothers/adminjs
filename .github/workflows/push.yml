@@ -114,6 +114,9 @@ jobs:
         run: yarn lint
       - name: spell
         run: yarn cspell
+      - name: install codecov
+        run: yarn global add codecov
+        if: contains(github.ref, 'refs/heads/master')
       - name: cover
         if: contains(github.ref, 'refs/heads/master')
         run: yarn codecov
