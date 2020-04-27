@@ -5,8 +5,8 @@ jobs:
     name: setup
     runs-on: ubuntu-latest
     steps:
-      - run: echo ${GITHUB_REF}
-      - run: echo ${GITHUB_REF##*/}
+      - run: echo "::warning file=index.js,line=1,col=1::${GITHUB_REF}"
+      - run: echo "::warning file=index.js,line=1,col=2::${GITHUB_REF##*/}"
       - name: Checkout
         uses: actions/checkout@v2
       - name: Setup
