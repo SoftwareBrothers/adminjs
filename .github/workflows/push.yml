@@ -111,13 +111,19 @@ jobs:
         run: yarn lint
       - name: spell
         run: yarn cspell
+      - name: cover
+        if: contains(github.ref, 'refs/heads/master')
+        run: yarn codecov
+        env:
+          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }} 
       - name: test
+        if: "!contains(github.ref, 'refs/heads/master')"
         run: yarn test
  
   cypress:
     name: Cypress
     needs: build
-    if: contains(github.ref, 'refs/tags') || contains(github.ref, 'refs/heads')
+    if: contains(github.ref, 'refs/tags') || contains(github.ref, 'refs/heads/master')
     services:
       mongo:
         image: mongo:3.4.23
