@@ -71,16 +71,19 @@ jobs:
       - name: types
         run: yarn types
       - name: Upload Build
+        if: contains(github.ref, 'refs/tags') || contains(github.ref, 'refs/heads/master')
         uses: actions/upload-artifact@v1
         with:
           name: lib
           path: lib
       - name: Upload Types
+        if: contains(github.ref, 'refs/tags') || contains(github.ref, 'refs/heads/master')
         uses: actions/upload-artifact@v1
         with:
           name: types
           path: types
       - name: Upload Bundle
+        if: contains(github.ref, 'refs/tags') || contains(github.ref, 'refs/heads/master')
         uses: actions/upload-artifact@v1
         with:
           name: bundle
