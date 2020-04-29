@@ -68,7 +68,7 @@ const RecordInList: React.FC<Props> = (props) => {
   }, [actionPerformed])
 
   return (
-    <TableRow onClick={(event): void => handleClick(event)}>
+    <TableRow onClick={(event): void => handleClick(event)} data-id={record.id}>
       <TableCell className={isSelected ? 'selected' : 'not-selected'}>
         {onSelect && record.bulkActions.length ? (
           <CheckBox

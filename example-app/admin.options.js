@@ -15,7 +15,7 @@ const options = {
     language: 'en',
     translations: {
       properties: {
-        'isBig.false': 'nain',
+        'isBig.true': 'Ja',
         'companySize.b': 'superBig',
       },
     },

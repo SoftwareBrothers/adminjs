@@ -8,6 +8,6 @@ context('resources/Company', () => {
   })
 
   it('shows list of companies', () => {
-    cy.get('.admin-bro_TableRow [data-property-name="email"]').should('have.length', 1)
+    cy.get('.admin-bro_TableRow [data-property-name="email"]').should('have.length.gte', 1)
   })
 })

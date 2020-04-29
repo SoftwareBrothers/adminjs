@@ -31,7 +31,8 @@ module.exports = {
         'no-restricted-syntax': 'off',
         'no-await-in-loop': 'off',
         'object-curly-newline': 'off',
-        'import/extensions': 'off'
+        'import/extensions': 'off',
+        'mocha/no-hooks-for-single-case': 'off'
     },
     overrides: [
         {
@@ -62,7 +63,14 @@ module.exports = {
             rules: {
               "react/prop-types": 'off'
             }
-        }
+        },
+        {
+            files: ['**/*/cypress/integration/**/*.spec.js'],
+            rules: {
+                'mocha/no-mocha-arrows': 'off',
+                'spaced-comment': 'off'
+            }
+        },
     ],
     globals: {
         'expect': true,
@@ -75,5 +83,6 @@ module.exports = {
         'Quill': true,
         'FormData': true,
         'File': true,
+        'cy': true,
     }
 }
