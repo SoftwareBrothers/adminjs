@@ -6,6 +6,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 Started since version 0.9.5
 
+
+## Version v2.2.9 - 30.04.2020
+
+### Fixed
+
+* [#418] - showing property.availableValues in Badges
+* [#333] - translate Yes/No
+
 ## Version v2.2.8 - 27.04.2020
 
 ### Added
