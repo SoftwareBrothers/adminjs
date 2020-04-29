@@ -15,6 +15,10 @@ const CompanySchema = new mongoose.Schema({
   profilePhotoLocation: {
     type: String,
   },
+  companySize: {
+    type: String,
+    enum: ['b', 's', 't'],
+  },
   encryptedPassword: {
     type: String,
     required: true,
@@ -27,7 +31,7 @@ const CompanySchema = new mongoose.Schema({
   },
   isBig: {
     type: Boolean,
-  }
+  },
 })
 
 const Company = mongoose.model('Company', CompanySchema)

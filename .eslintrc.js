@@ -31,7 +31,7 @@ module.exports = {
         'no-restricted-syntax': 'off',
         'no-await-in-loop': 'off',
         'object-curly-newline': 'off',
-        'import/extensions': 'never'
+        'import/extensions': 'off'
     },
     overrides: [
         {

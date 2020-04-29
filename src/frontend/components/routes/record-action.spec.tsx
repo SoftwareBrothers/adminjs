@@ -12,7 +12,6 @@ import createStore, { ReduxState } from '../../store/store'
 import RecordAction from './record-action'
 import ApiClient from '../../utils/api-client'
 import RecordJSON from '../../../backend/decorators/record-json.interface'
-import ResourceJSON from '../../../backend/decorators/resource-json.interface'
 
 import TestContextProvider from '../spec/test-context-provider'
 import factory from '../spec/factory'
@@ -40,11 +39,9 @@ const renderSubject = (store: Partial<ReduxState> = {}, location?: string): Rend
 
 describe('<RecordAction />', function () {
   let record: RecordJSON
-  let resource: ResourceJSON
 
   beforeEach(async function () {
     record = await factory.build<RecordJSON>('RecordJSON.total')
-    resource = await factory.build<ResourceJSON>('ResourceJSON.full')
     sinon.stub(TranslateFunctionsFactory, 'createFunctions').returns({
       translateMessage: sinon.stub().returns('someMessage'),
     } as unknown as TranslateFunctionsFactory.TranslateFunctions)

@@ -9,8 +9,17 @@ const AdminCompany = require('./companies/company.admin')
 const options = {
   resources: [AdminCompany],
   version: {
-    admin: true
-  }
+    admin: true,
+  },
+  locale: {
+    language: 'en',
+    translations: {
+      properties: {
+        'isBig.false': 'nain',
+        'companySize.b': 'superBig',
+      },
+    },
+  },
 }
 
 module.exports = options

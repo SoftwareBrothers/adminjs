@@ -124,12 +124,15 @@ const translate = (
   options?: TOptions,
 ): string => {
   const realOptions: TOptions = (typeof resourceId === 'string' ? options : resourceId) || {}
-  const formatedName = formatName(name)
-  let keys = [`${key}.${formatedName}`]
+  const formattedName = formatName(name)
+  let keys = [`${key}.${formattedName}`]
   if (resourceId) {
-    keys = [`resources.${resourceId}.${key}.${formatedName}`, ...keys]
+    keys = [`resources.${resourceId}.${key}.${formattedName}`, ...keys]
   }
-  return i18n.exists(keys) ? i18n.t(keys, realOptions) : startCase(name)
+  if (i18n.exists(keys)) {
+    return i18n.t(keys, realOptions)
+  }
+  return realOptions.defaultValue ?? startCase(name)
 }
 
 export const createFunctions = (i18n: I18n): TranslateFunctions => {

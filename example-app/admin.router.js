@@ -15,7 +15,7 @@ const { ADMIN_PASSWORD, ADMIN_EMAIL, ADMIN_COMPANY } = process.env
  * @return {Promise<express.Router>} router
  */
 const buildAdminRouter = async (admin) => {
-  if(!await Company.countDocuments()){
+  if (!await Company.countDocuments()) {
     await Company.create({
       companyName: ADMIN_COMPANY,
       email: ADMIN_EMAIL,

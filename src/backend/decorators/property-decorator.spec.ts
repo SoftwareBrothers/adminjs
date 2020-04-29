@@ -94,11 +94,11 @@ describe('PropertyDecorator', function () {
   })
 
   describe('#availableValues', function () {
-    it('map default value to { value, label } object', function () {
+    it('map default value to { value, label } object and uses translations', function () {
       sinon.stub(BaseProperty.prototype, 'availableValues').returns(['val'])
       expect(new PropertyDecorator(args).availableValues()).to.deep.equal([{
         value: 'val',
-        label: 'val',
+        label: translatedProperty,
       }])
     })
   })

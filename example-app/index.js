@@ -5,7 +5,7 @@ const mongoose = require('mongoose')
 const options = require('./admin.options')
 const buildAdminRouter = require('./admin.router')
 
-const { APP_PORT, APP_HOST, APP_ROOT } = process.env
+const { APP_PORT, MONGO_URL, APP_ROOT } = process.env
 
 const app = express()
 
@@ -13,7 +13,7 @@ const app = express()
  * @return {Promise<void>}
  */
 const run = async () => {
-  await mongoose.connect('mongodb://localhost:27017/e2e', {
+  await mongoose.connect(MONGO_URL, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })

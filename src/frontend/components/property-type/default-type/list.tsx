@@ -3,6 +3,7 @@ import React from 'react'
 import PropertyJSON from '../../../../backend/decorators/property-json.interface'
 import RecordJSON from '../../../../backend/decorators/record-json.interface'
 import ResourceJSON from '../../../../backend/decorators/resource-json.interface'
+import DefaultPropertyValue from './default-property-value'
 
 interface Props {
   property: PropertyJSON;
@@ -12,11 +13,6 @@ interface Props {
 
 export default class List extends React.PureComponent<Props> {
   render(): React.ReactChild {
-    const { property, record } = this.props
-    const value = record.params[property.name]
-
-    const className = property.availableValues ? 'tag' : ''
-
-    return typeof value !== 'undefined' ? (<span className={className}>{value}</span>) : ''
+    return (<DefaultPropertyValue {...this.props} />)
   }
 }

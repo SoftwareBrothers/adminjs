@@ -1,7 +1,6 @@
 import React, { ReactNode } from 'react'
 import Select from 'react-select'
 import { withTheme, DefaultTheme } from 'styled-components'
-import isEqual from 'lodash/isEqual'
 
 import { EditPropertyProps } from '../base-property-props'
 import selectStyles from '../../../styles/select-styles'

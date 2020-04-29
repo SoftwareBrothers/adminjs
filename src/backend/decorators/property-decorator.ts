@@ -130,7 +130,14 @@ class PropertyDecorator {
     return this.overrideFromOptions(AvailablePropertyOptions.availableValues, () => {
       const values = this.property.availableValues()
       if (values) {
-        return values.map(val => ({ value: val, label: val }))
+        return values.map(val => ({
+          value: val,
+          label: this._admin.translateProperty(
+            `${this.path}.${val}`,
+            this._resource.id(),
+            { defaultValue: val },
+          ),
+        }))
       }
       return null
     })

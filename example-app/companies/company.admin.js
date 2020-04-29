@@ -4,7 +4,7 @@ const { Company } = require('./company.entity')
 const {
   after: passwordAfterHook,
   before: passwordBeforeHook,
-} = require('./actions/password.hook');
+} = require('./actions/password.hook')
 
 /** @type {AdminBro.ResourceOptions} */
 const options = {
@@ -23,12 +23,9 @@ const options = {
     },
     disabledAt: {
       isDisabled: true,
-    }
+    },
   },
   actions: {
-    show: {
-      isVisible: false,
-    },
     new: {
       after: passwordAfterHook,
       before: passwordBeforeHook,
@@ -36,7 +33,7 @@ const options = {
     edit: {
       after: passwordAfterHook,
       before: passwordBeforeHook,
-    }
+    },
   },
 }
 
