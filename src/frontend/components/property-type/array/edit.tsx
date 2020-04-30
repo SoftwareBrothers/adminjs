@@ -6,6 +6,8 @@ import { Button, Section, FormGroup, FormMessage, Label, Icon, Box } from '../..
 import PropertyJSON from '../../../../backend/decorators/property-json.interface'
 import RecordJSON from '../../../../backend/decorators/record-json.interface'
 import updateParamsArray from './update-params-array'
+import AddNewItemButton from './add-new-item-translation'
+import ResourceJSON from '../../../../backend/decorators/resource-json.interface'
 
 const { flatten, unflatten } = flat
 
@@ -18,6 +20,8 @@ type Props = {
   record: RecordJSON;
   onChange: (record: RecordJSON) => any;
   ItemComponent: typeof React.Component;
+  resource: ResourceJSON;
+  testId: string;
 }
 
 type ItemRendererProps = {
@@ -94,7 +98,7 @@ export default class Edit extends React.Component<Props> {
   }
 
   renderInput(): ReactNode {
-    const { property, record } = this.props
+    const { property, record, resource } = this.props
     const items = convertParamsToArrayItems(property, record)
     return (
       <Section mt="xl">
@@ -108,18 +112,17 @@ export default class Edit extends React.Component<Props> {
           />
         ))}
         <Button onClick={this.addNew} type="button" size="sm">
-          <Icon icon="Add" />
-          Add new item
+          <AddNewItemButton resource={resource} property={property} />
         </Button>
       </Section>
     )
   }
 
   render(): ReactNode {
-    const { property, record } = this.props
+    const { property, record, testId } = this.props
     const error = record.errors && record.errors[property.name]
     return (
-      <FormGroup error={!!error}>
+      <FormGroup error={!!error} data-testId={testId}>
         <Label htmlFor={property.name}>{property.label}</Label>
         {this.renderInput()}
         <FormMessage>{error && error.message}</FormMessage>

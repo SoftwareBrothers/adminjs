@@ -26,7 +26,7 @@ context('resources/Company/actions/new', () => {
       .should('not.be.checked')
   })
 
-  it('show translated select labels', () => {
+  it('show translated select labels and button', () => {
     cy.get('[data-testid="property-edit-companySize"] input').click()
     cy.get('[data-testid="property-edit-companySize"] [class$="option"]')
       .then((options) => {
@@ -34,6 +34,7 @@ context('resources/Company/actions/new', () => {
           options.map((k, option) => cy.$$(option).text()).toArray(),
         ).to.have.members(['superBig', 's', 't'])
       })
+    cy.get('[data-testid="property-edit-tags"] button').should('have.text', 'Add new Tag')
   })
 
   it('preserve regular checkbox value when validation fails', () => {

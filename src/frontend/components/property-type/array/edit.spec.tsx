@@ -12,6 +12,7 @@ import '../../spec/record-json.factory'
 import PropertyJSON from '../../../../backend/decorators/property-json.interface'
 import RecordJSON from '../../../../backend/decorators/record-json.interface'
 import ItemComponent from '../default-type/edit'
+import ResourceJSON from '../../../../backend/decorators/resource-json.interface'
 
 const AddNewItemText = 'Add new item'
 
@@ -29,6 +30,7 @@ describe('<PropertyType.Array.Edit />', function () {
         record={rec}
         ItemComponent={ItemComponent as unknown as typeof React.Component}
         onChange={onChange}
+        resource={{} as ResourceJSON}
       />
     </TestContextProvider>,
   )

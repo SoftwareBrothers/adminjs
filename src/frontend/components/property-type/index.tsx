@@ -231,6 +231,7 @@ export default class BasePropertyComponent extends React.Component<BasePropertyP
         <Array
           {...this.props}
           ItemComponent={BasePropertyComponent}
+          testId={testId}
         />
       )
     }
@@ -241,6 +242,7 @@ export default class BasePropertyComponent extends React.Component<BasePropertyP
         <Mixed
           {...this.props}
           ItemComponent={BasePropertyComponent}
+          testId={testId}
         />
       )
     }

@@ -11,6 +11,7 @@ const translations = {
   },
   buttons: {
     save: 'Save',
+    addNewItem: 'Add New Item',
     filter: 'Filter',
     applyChanges: 'Apply changes',
     resetFilter: 'Reset',

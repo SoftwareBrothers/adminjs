@@ -24,6 +24,7 @@
   "nyc": {
     "exclude": [
       "spec",
+      "example-app",
       "src/**/*.spec.ts",
       "src/**/*.spec.js",
       "src/**/*.spec.tsx",
@@ -36,6 +37,7 @@
       "src/frontend/assets/scripts",
       "lib",
       ".vscode",
+      ".github",
       "**/*.spec.js"
     ],
     "all": true,

@@ -32,6 +32,7 @@ const CompanySchema = new mongoose.Schema({
   isBig: {
     type: Boolean,
   },
+  tags: [String],
 })
 
 const Company = mongoose.model('Company', CompanySchema)

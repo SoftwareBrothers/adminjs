@@ -15,6 +15,7 @@ const options = {
     language: 'en',
     translations: {
       properties: {
+        'tags.addNewItem': 'Add new Tag',
         'isBig.true': 'Ja',
         'companySize.b': 'superBig',
       },
