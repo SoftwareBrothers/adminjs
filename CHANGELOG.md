@@ -10,7 +10,7 @@ Started since version 0.9.5
 
 ### Fixed
 
-* [#418] - translating "add new item" button in arrays
+* [#333] - translating "add new item" button in arrays
 
 ## Version v2.2.9 - 30.04.2020
 
