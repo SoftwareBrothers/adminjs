@@ -132,7 +132,6 @@ jobs:
     if: always()
     needs:
       - build
-      - bundle
       - test
       - setup
       - publish
