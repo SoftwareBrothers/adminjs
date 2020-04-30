@@ -32,13 +32,18 @@ describe('AdminBro', function () {
 
     it('throws an error when adapter is not full', function () {
       expect(() => {
-        AdminBro.registerAdapter({ Resource: AdminBro.BaseResource })
+        AdminBro.registerAdapter({
+          Resource: AdminBro.BaseResource,
+          Database: {} as typeof BaseDatabase })
       }).to.throw('Adapter has to have both Database and Resource')
     })
 
     it('throws an error when adapter has elements not being subclassed from base adapter', function () {
       expect(() => {
-        AdminBro.registerAdapter({ Resource: {}, Database: {} })
+        AdminBro.registerAdapter({
+          Resource: {} as typeof BaseResource,
+          Database: {} as typeof BaseDatabase,
+        })
       }).to.throw('Adapter elements has to be a subclass of AdminBro.BaseResource and AdminBro.BaseDatabase')
     })
   })
