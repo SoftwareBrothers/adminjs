@@ -250,6 +250,7 @@ class AdminBro {
   async initialize(): Promise<void> {
     if (process.env.NODE_ENV === 'production'
         && !(process.env.ADMIN_BRO_SKIP_BUNDLE === 'true')) {
+      // eslint-disable-next-line no-console
       console.log('AdminBro: bundling user components...')
       await userComponentsBundler(this, { write: true })
     }
@@ -332,11 +333,16 @@ class AdminBro {
       filePath = src
     } else {
       const stack = ((new Error()).stack || '').split('\n')
-      const m = stack[2].match(/\((.*):[0-9]+:[0-9]+\)/)
-      if (!m) {
+      // Node = 8 shows stack like that: '(/path/to/file.ts:77:27)
+      const pathNode8 = stack[2].match(/\((.*):[0-9]+:[0-9]+\)/)
+      // Node >= 10 shows stack like that: 'at /path/to/file.ts:77:27
+      const pathNode10 = stack[2].match(/at (.*):[0-9]+:[0-9]+/)
+
+      if (!pathNode8 && !pathNode10) {
         throw new Error('STACK does not have a file url. Check out if the node version >= 8')
       }
-      filePath = path.join(path.dirname(m[1]), src)
+      const executionPath = (pathNode8 && pathNode8[1]) || (pathNode10 && pathNode10[1])
+      filePath = path.join(path.dirname(executionPath as string), src)
     }
 
     const { root, dir, name } = path.parse(filePath)

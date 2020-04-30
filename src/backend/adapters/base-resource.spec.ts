@@ -19,6 +19,10 @@ describe('BaseResource', function () {
     resource = new BaseResource({})
   })
 
+  afterEach(function () {
+    sinon.restore()
+  })
+
   describe('.isAdapterFor', function () {
     it('throws NotImplementedError', async function () {
       expect(() => BaseResource.isAdapterFor({})).to.throw(NotImplementedError)

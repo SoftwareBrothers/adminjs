@@ -13,6 +13,10 @@ describe('Record', function () {
   let record: BaseRecord
   let params: BaseRecord['params'] = { param1: 'john' }
 
+  afterEach(function () {
+    sinon.restore()
+  })
+
   describe('#param', function () {
     context('record with nested parameters', function () {
       const nested3level = 'value'

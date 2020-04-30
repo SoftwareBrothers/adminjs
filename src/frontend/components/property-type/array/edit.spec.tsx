@@ -38,11 +38,14 @@ describe('<PropertyType.Array.Edit />', function () {
   )
 
   beforeEach(function () {
-    sinon.restore()
     sinon.stub(TranslateFunctionsFactory, 'createFunctions').returns({
       translateProperty: sinon.stub().returns(AddNewItemText),
       translateButton: sinon.stub().returns('someButton'),
     } as unknown as TranslateFunctionsFactory.TranslateFunctions)
+  })
+
+  afterEach(function () {
+    sinon.restore()
   })
 
   context('Property with a string array', function () {

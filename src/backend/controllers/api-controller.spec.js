@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/explicit-function-return-type */
 import ApiController from './api-controller'
 import Filter from '../utils/filter'
 

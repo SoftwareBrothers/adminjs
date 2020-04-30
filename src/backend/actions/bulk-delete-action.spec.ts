@@ -22,6 +22,10 @@ describe('BulkDeleteAction', function () {
   let response: any
 
   describe('.handler', function () {
+    afterEach(function () {
+      sinon.restore()
+    })
+
     beforeEach(async function () {
       data = {
         _admin: sinon.createStubInstance(AdminBro),

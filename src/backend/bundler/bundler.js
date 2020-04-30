@@ -38,6 +38,7 @@ async function build({
       }
       if (event.code === 'ERROR' || event.code === 'FATAL') {
         spinner.fail('Bundle fail:')
+        // eslint-disable-next-line no-console
         console.log(event)
       }
 

@@ -1,9 +1,11 @@
 import path from 'path'
+import { expect } from 'chai'
 
 import AdminBro from './admin-bro'
 
 import BaseDatabase from './backend/adapters/base-database'
 import BaseResource from './backend/adapters/base-resource'
+
 
 describe('AdminBro', function () {
   beforeEach(function () {

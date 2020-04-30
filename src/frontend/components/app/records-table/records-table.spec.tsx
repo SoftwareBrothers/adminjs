@@ -63,6 +63,10 @@ describe('<RecordsTable />', function () {
     })
   })
 
+  afterEach(function () {
+    sinon.restore()
+  })
+
   context('10 records are given without bulk and list actions', function () {
     beforeEach(async function () {
       records = await factory.buildMany<RecordJSON>('RecordJSON', 10, {
