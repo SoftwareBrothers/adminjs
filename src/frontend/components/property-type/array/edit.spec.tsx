@@ -13,6 +13,7 @@ import PropertyJSON from '../../../../backend/decorators/property-json.interface
 import RecordJSON from '../../../../backend/decorators/record-json.interface'
 import ItemComponent from '../default-type/edit'
 import ResourceJSON from '../../../../backend/decorators/resource-json.interface'
+import * as TranslateFunctionsFactory from '../../../../utils/translate-functions.factory'
 
 const AddNewItemText = 'Add new item'
 
@@ -30,10 +31,19 @@ describe('<PropertyType.Array.Edit />', function () {
         record={rec}
         ItemComponent={ItemComponent as unknown as typeof React.Component}
         onChange={onChange}
+        testId="some-test-id"
         resource={{} as ResourceJSON}
       />
     </TestContextProvider>,
   )
+
+  beforeEach(function () {
+    sinon.restore()
+    sinon.stub(TranslateFunctionsFactory, 'createFunctions').returns({
+      translateProperty: sinon.stub().returns(AddNewItemText),
+      translateButton: sinon.stub().returns('someButton'),
+    } as unknown as TranslateFunctionsFactory.TranslateFunctions)
+  })
 
   context('Property with a string array', function () {
     beforeEach(async function () {
