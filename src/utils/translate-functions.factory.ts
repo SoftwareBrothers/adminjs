@@ -114,7 +114,7 @@ export interface TranslateFunctions {
   translateMessage: TranslateFunction;
 }
 
-export const formatName = (name: string): string => name.replace('.', '&#46;')
+export const formatName = (name: string): string => name.split('.').join('&#46;')
 
 const translate = (
   i18n: I18n,

@@ -31,7 +31,7 @@ export type SelectRecord = {
  *   }],
  * }
  *
- * // my-react-component.jsx
+ * // my-react-component.tsx
  * const MyReactComponent = (props: BasePropertyProps) => {
  *   const { record, property } = props
  *   const value = record.params[property.name] === 'foo' ? 'bar' : 'zoe'
