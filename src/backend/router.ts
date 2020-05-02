@@ -85,11 +85,6 @@ const Router: RouterType = {
     action: 'index',
   }, {
     method: 'GET',
-    path: '/design-system',
-    Controller: AppController,
-    action: 'designSystem',
-  }, {
-    method: 'GET',
     path: '/resources/{resourceId}',
     Controller: AppController,
     action: 'resource',
@@ -106,6 +101,11 @@ const Router: RouterType = {
   }, {
     method: 'GET',
     path: '/api/resources/{resourceId}/actions/{action}',
+    Controller: ApiController,
+    action: 'resourceAction',
+  }, {
+    method: 'GET',
+    path: '/api/resources/{resourceId}/actions/{action}/{query}',
     Controller: ApiController,
     action: 'resourceAction',
   }, {

@@ -84,5 +84,6 @@ module.exports = {
         'FormData': true,
         'File': true,
         'cy': true,
+        'Cypress': true,
     }
 }

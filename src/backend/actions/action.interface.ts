@@ -103,6 +103,10 @@ export type ActionRequest = {
      * Name of an action
      */
     action: string;
+    /**
+     * an optional search query string (for `search` resource action)
+     */
+    query?: string;
 
     [key: string]: any;
   };
@@ -257,6 +261,7 @@ export type After<T> = (
  *
  * 1. {@link module:NewAction new} (resource action) - create new records in a resource
  * 1. {@link module:ListAction list} (resource action) - list all records within a resource
+ * 1. {@link module:SearchAction search} (resource action) - search by query string
  * 2. {@link module:EditAction edit} (record action) - update records in a resource
  * 3. {@link module:ShowAction show} (record action) - show details of given record
  * 3. {@link module:DeleteAction delete} (record action) - delete given record
@@ -295,7 +300,7 @@ export type After<T> = (
 export default interface Action <T extends ActionResponse> {
   /**
    * Name of an action which is its uniq key.
-   * If you use one of _list_, _edit_, _new_, _show_, _delete_ or
+   * If you use one of _list_, _search_, _edit_, _new_, _show_, _delete_ or
    * _bulkDelete_ you override existing actions.
    * For all other keys you create a new action.
    */

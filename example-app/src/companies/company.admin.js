@@ -34,6 +34,21 @@ const options = {
       after: passwordAfterHook,
       before: passwordBeforeHook,
     },
+    search: {
+      handler: async (request, response, data) => {
+        const { currentAdmin, resource } = data
+
+        const currentCompany = await Company.findById(currentAdmin._id)
+        const companyJSON = resource.build(currentCompany.toJSON()).toJSON(currentAdmin)
+        companyJSON.title = `${companyJSON.title} [me]`
+
+        return {
+          records: [
+            companyJSON,
+          ],
+        }
+      },
+    },
   },
 }
 

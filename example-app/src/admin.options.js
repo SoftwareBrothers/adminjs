@@ -4,10 +4,12 @@ const AdminBroMongoose = require('admin-bro-mongoose')
 AdminBro.registerAdapter(AdminBroMongoose)
 
 const AdminCompany = require('./companies/company.admin')
+const AdminEmployee = require('./employees/employee.admin')
+const AdminProfession = require('./professions/profession.admin')
 
 /** @type {import('admin-bro').AdminBroOptions} */
 const options = {
-  resources: [AdminCompany],
+  resources: [AdminCompany, AdminEmployee, AdminProfession],
   version: {
     admin: true,
   },

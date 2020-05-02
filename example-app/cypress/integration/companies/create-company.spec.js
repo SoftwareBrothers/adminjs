@@ -2,8 +2,12 @@
 /// <reference types="../../support" />
 
 context('resources/Company/actions/new', () => {
-  beforeEach(() => {
+  before(() => {
     cy.login()
+  })
+
+  beforeEach(() => {
+    Cypress.Cookies.preserveOnce(Cypress.env('COOKIE_NAME'))
     cy.visit('resources/Company/actions/new')
   })
 

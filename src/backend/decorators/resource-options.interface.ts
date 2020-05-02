@@ -4,6 +4,7 @@ import { ListActionResponse } from '../actions/list-action'
 import { CurrentAdmin } from '../../current-admin.interface'
 import BaseResource from '../adapters/base-resource'
 import ViewHelpers from '../utils/view-helpers'
+import { SearchActionResponse } from '../actions/search-action'
 
 /**
  * @alias HrefContext
@@ -101,6 +102,7 @@ export interface ResourceOptions {
     bulkDelete?: Partial<Action<BulkActionResponse>>;
     new?: Partial<Action<RecordActionResponse>>;
     list?: Partial<Action<ListActionResponse>>;
+    search?: Partial<Action<SearchActionResponse>>;
   } | {
     [key: string]: Partial<Action<ActionResponse>>;
   };

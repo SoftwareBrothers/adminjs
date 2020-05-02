@@ -3,9 +3,10 @@
   "version": "1.0.0",
   "main": "index.js",
   "author": "Wojciech Krysiak",
+  "type": "module",
   "license": "MIT",
   "scripts": {
-    "dev": "nodemon --ext '.js' --watch ../lib --watch ./ --ignore 'cypress/**/*.js'",
+    "dev": "nodemon --ext '.js,.mjs' --watch ../lib --watch ./ --ignore 'cypress/**/*.js'",
     "start": "node index.js",
     "cypress:open": "cypress open",
     "cypress:run": "cypress run"

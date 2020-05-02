@@ -52,6 +52,7 @@ export {
 } from './types/src/backend/actions/action.interface'
 
 export { ListActionResponse } from './types/src/backend/actions/list-action'
+export { SearchActionResponse } from './types/src/backend/actions/search-action'
 
 export {
   default as withNotice,

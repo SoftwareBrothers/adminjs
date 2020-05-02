@@ -52,6 +52,10 @@ export type ResourceActionAPIParams = AxiosRequestConfig & {
    * action name taken from  {@link ActionJSON}
    */
   actionName: string;
+  /**
+   * query string
+   */
+  query?: string;
 }
 
 /**
@@ -162,8 +166,8 @@ class ApiClient {
     query: string;
   }): Promise<Array<RecordJSON>> {
     if (globalAny.isOnServer) { return [] }
-    const q = encodeURIComponent(query)
-    const response = await this.client.get(`/api/resources/${resourceId}/search/${q}`)
+    const actionName = 'search'
+    const response = await this.resourceAction({ resourceId, actionName, query })
     checkResponse(response)
     return response.data.records
   }
@@ -175,9 +179,14 @@ class ApiClient {
    * @return  {Promise<ActionResponse>}     response from an {@link Action}
    */
   async resourceAction(options: ResourceActionAPIParams): Promise<AxiosResponse<ActionResponse>> {
-    const { resourceId, actionName, data, ...axiosParams } = options
+    const { resourceId, actionName, data, query, ...axiosParams } = options
+    let url = `/api/resources/${resourceId}/actions/${actionName}`
+    if (query) {
+      const q = encodeURIComponent(query)
+      url = [url, q].join('/')
+    }
     const response = await this.client.request({
-      url: `/api/resources/${resourceId}/actions/${actionName}`,
+      url,
       method: data ? 'POST' : 'GET',
       ...axiosParams,
       data,
