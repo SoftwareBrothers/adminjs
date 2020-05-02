@@ -186,15 +186,10 @@ jobs:
         with:
           name: bundle
       - run: yarn link
-      - name: link admin-bro
-        run: yarn link
-        working-directory: example-app
-      - name: link admin-bro
-        run: node bin/setup-db.js
-        working-directory: example-app
       - uses: cypress-io/github-action@v1
         with:
           working-directory: example-app
+          build:  yarn link admin-bro && node bin/setup-db.js
           start: yarn start
       - uses: actions/upload-artifact@v1
         if: failure()
