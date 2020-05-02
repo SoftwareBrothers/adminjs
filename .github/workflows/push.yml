@@ -137,9 +137,10 @@ jobs:
       - publish
       - cypress
     steps:
+      - uses: technote-space/workflow-conclusion-action@v1
       - uses: 8398a7/action-slack@v3
         with:
-          status: ${{ job.conclusion }}
+          status: ${{ env.WORKFLOW_CONCLUSION }}
           fields: repo,message,commit,author,action,eventName,ref,workflow # selectable (default: repo,message)
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -189,7 +190,7 @@ jobs:
       - uses: cypress-io/github-action@v1
         with:
           working-directory: example-app
-          build:  yarn link admin-bro && node bin/setup-db.js
+          build:  bash -c 'yarn link admin-bro && node bin/setup-db.js'
           start: yarn start
       - uses: actions/upload-artifact@v1
         if: failure()
