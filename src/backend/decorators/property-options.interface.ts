@@ -10,6 +10,7 @@ export enum AvailablePropertyOptions {
   position = 'position',
   availableValues = 'availableValues',
   isSortable = 'isSortable',
+  isRequired = 'isRequired'
 }
 
 /**
@@ -85,4 +86,9 @@ export default interface PropertyOptions {
    * Whether given property should be sortable on list or not.
    */
   isSortable?: boolean;
+
+  /**
+   * Whether given property should be marked as required.
+   */
+  isRequired?: boolean;
 }

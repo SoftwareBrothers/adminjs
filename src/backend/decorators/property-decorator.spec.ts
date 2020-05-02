@@ -174,6 +174,7 @@ describe('PropertyDecorator', function () {
         'isArray',
         'custom',
         'resourceId',
+        'isRequired',
       )
     })
   })

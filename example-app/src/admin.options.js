@@ -12,6 +12,7 @@ const options = {
   resources: [AdminCompany, AdminEmployee, AdminProfession],
   version: {
     admin: true,
+    app: process.env.npm_package_version,
   },
   locale: {
     language: 'en',

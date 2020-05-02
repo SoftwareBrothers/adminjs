@@ -185,6 +185,13 @@ class BaseProperty {
   isSortable(): boolean {
     return this._isSortable
   }
+
+  /**
+   * Indicates if given property is required
+   */
+  isRequired(): boolean {
+    return false
+  }
 }
 
 export default BaseProperty

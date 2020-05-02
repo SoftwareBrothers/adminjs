@@ -184,6 +184,15 @@ class PropertyDecorator {
   }
 
   /**
+   * If property should be marked as a required with a star (*)
+   *
+   * @return {boolean}
+   */
+  isRequired(): boolean {
+    return !!this.overrideFromOptions(AvailablePropertyOptions.isRequired)
+  }
+
+  /**
    * If property should be treated as an title field
    * Title field is used as a link to the resource page
    * in the list view and in the breadcrumbs
@@ -206,6 +215,7 @@ class PropertyDecorator {
       position: this.position(),
       custom: typeof this.options.custom === 'undefined' ? {} : this.options.custom,
       isSortable: this.isSortable(),
+      isRequired: this.isRequired(),
       availableValues: this.availableValues(),
       name: this.name(),
       isDisabled: !!this.options.isDisabled,
