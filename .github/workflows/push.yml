@@ -187,10 +187,20 @@ jobs:
         with:
           name: bundle
       - run: yarn link
+      - name: Install dependencies
+        uses: cypress-io/github-action@v1
+        with:
+          # just perform install
+          runTests: false
+          working-directory: example-app
+      - run: yarn link admin-bro
+        working-directory: example-app
+      - run: node bin/setup-db.js
+        working-directory: example-app
       - uses: cypress-io/github-action@v1
         with:
+          install: false
           working-directory: example-app
-          build:  bash -c 'yarn link admin-bro && node bin/setup-db.js'
           start: yarn start
       - uses: actions/upload-artifact@v1
         if: failure()
