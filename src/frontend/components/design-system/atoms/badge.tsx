@@ -7,8 +7,8 @@ import { cssClass } from '../utils/css-class'
  * Apart from those defined below it extends all {@link ColorProps}, {@link SpaceProps}
  * and {@link TypographyProps}
  *
- * @memberof Button
- * @alias ButtonProps
+ * @memberof Badge
+ * @alias BadgeProps
  * @property {string} [...] Other props from {@link ColorProps}, {@link SpaceProps}
  *                          and {@link TypographyProps}
  */

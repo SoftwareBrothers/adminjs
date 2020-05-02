@@ -255,17 +255,17 @@ export type After<T> = (
  *
  * 1. Resource action, which is performed for an entire resource.
  * 2. Record action, invoked for an record in a resource
- * 2. Bulk action, invoked for an set of records in a resource
+ * 3. Bulk action, invoked for an set of records in a resource
  *
- * ...and there are 6 actions predefined in AdminBro
+ * ...and there are 7 actions predefined in AdminBro
  *
  * 1. {@link module:NewAction new} (resource action) - create new records in a resource
- * 1. {@link module:ListAction list} (resource action) - list all records within a resource
- * 1. {@link module:SearchAction search} (resource action) - search by query string
- * 2. {@link module:EditAction edit} (record action) - update records in a resource
- * 3. {@link module:ShowAction show} (record action) - show details of given record
- * 3. {@link module:DeleteAction delete} (record action) - delete given record
- * 3. {@link module:BulkDeleteAction bulkDelete} (bulk action) - delete given records
+ * 2. {@link module:ListAction list} (resource action) - list all records within a resource
+ * 3. {@link module:SearchAction search} (resource action) - search by query string
+ * 4. {@link module:EditAction edit} (record action) - update records in a resource
+ * 5. {@link module:ShowAction show} (record action) - show details of given record
+ * 6. {@link module:DeleteAction delete} (record action) - delete given record
+ * 7. {@link module:BulkDeleteAction bulkDelete} (bulk action) - delete given records
  *
  * Users can also create their own actions or override those already existing by using
  * {@link ResourceOptions}
