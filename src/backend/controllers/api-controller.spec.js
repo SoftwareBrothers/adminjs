@@ -1,4 +1,6 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
+import { expect } from 'chai'
+
 import ApiController from './api-controller'
 import Filter from '../utils/filter'
 
@@ -52,21 +54,6 @@ describe('ApiController', function () {
     this.apiController = new ApiController({ admin: this.adminStub }, this.currentAdmin)
 
     this.sinon.stub(Filter.prototype, 'populate').returns([this.recordStub])
-  })
-
-  describe('#search', function () {
-    it('returns records taken from the find method for given resource', async function () {
-      const response = await this.apiController.search({ params: {} }, {})
-      expect(response.records).to.have.lengthOf(0)
-    })
-
-    it('throws an error when user doesn\'t have rights to access the list action', function (done) {
-      this.action.isAccessible.returns(false)
-      this.apiController.search({ params: {} }, {}).catch((error) => {
-        expect(error.name).to.equal('ForbiddenError')
-        done()
-      })
-    })
   })
 
   describe('#resourceAction', function () {

@@ -1,15 +1,13 @@
 /* eslint-disable max-len */
 /* eslint no-unused-vars: 0 */
 import populator from '../utils/populator'
-import Filter from '../utils/filter'
 import ViewHelpers from '../utils/view-helpers'
-import ForbiddenError from '../utils/forbidden-error'
 import { CurrentAdmin } from '../../current-admin.interface'
 import AdminBro from '../../admin-bro'
 import { ActionContext, ActionRequest, RecordActionResponse, ActionResponse, BulkActionResponse } from '../actions/action.interface'
 import ConfigurationError from '../utils/configuration-error'
 import NotFoundError from '../utils/not-found-error'
-import RecordJSON from '../decorators/record-json.interface'
+import { SearchActionResponse } from '../actions/search-action'
 
 /**
  * Controller responsible for the auto-generated API: `/admin_root/api/...`, where
@@ -23,7 +21,6 @@ import RecordJSON from '../decorators/record-json.interface'
  *
  * | Endpoint                 | Method                | Description |
  * |--------------------------|-----------------------|-------------|
- * | .../api/resources/{resourceId}/search/{query} | {@link ApiController#search} | Search record by query string |
  * | .../api/resources/{resourceId}/actions/{action} | {@link ApiController#resourceAction} | Perform customized resource action |
  * | .../api/resources/{resourceId}/records/{recordId}/{action} | {@link ApiController#recordAction} | Perform customized record action |
  * | .../api/resources/{resourceId}/bulk/{action}?recordIds={recordIds} | {@link ApiController#bulkAction} | Perform customized bulk action |
@@ -87,38 +84,18 @@ class ApiController {
    * Handler function responsible for a _.../api/resources/{resourceId}/search/{query}_ route
    *
    * @param   {ActionRequest}  request with __params.query__ set
+   * @param   {any}            response
    *
-   * @return  {Promise<SearchResponse>}    found records
+   * @return  {Promise<SearchActionResponse>}    found records
    */
-  async search(request: ActionRequest): Promise<SearchResponse> {
-    // TODO - move this to resource actions
-    const queryString = request.params && request.params.query
-    const resource = this._admin.findResource(request.params.resourceId)
-    const decorated = resource.decorate()
-    if (!decorated.actions.list.isAccessible(this.currentAdmin)) {
-      throw new ForbiddenError(
-        this._admin.translateMessage('forbiddenError', resource.id(), {
-          actionName: 'search',
-          resourceId: resource.id(),
-        }),
-      )
-    }
-    const titlePropertyName = decorated.titleProperty().name()
-
-    const filters = queryString ? { [titlePropertyName]: queryString } : {}
-    const filter = new Filter(filters, resource)
-
-    const records = await resource.find(filter, {
-      limit: 50,
-      sort: {
-        sortBy: titlePropertyName,
-        direction: 'asc',
-      },
-    })
-
-    return {
-      records: records.map(record => record.toJSON(this.currentAdmin)),
-    }
+  async search(request: ActionRequest, response): Promise<SearchActionResponse> {
+    request.params.action = 'search'
+    // eslint-disable-next-line no-console
+    console.log([
+      'Using ApiController#search is deprecated in favour of resourceAction',
+      'It will be removed in the next version',
+    ].join('\n'))
+    return this.resourceAction(request, response) as Promise<SearchActionResponse>
   }
 
   /**
@@ -128,7 +105,7 @@ class ApiController {
    * Handler function responsible for a _.../api/resources/{resourceId}/actions/{action}_
    *
    * @param   {ActionRequest}  request
-   * @param   {object}         response object from the plugin (i.e. admin-bro-expressjs)
+   * @param   {any}            response object from the plugin (i.e. admin-bro-expressjs)
    *
    * @return  {Promise<ActionResponse>}  action response
    */
@@ -287,15 +264,3 @@ class ApiController {
 }
 
 export default ApiController
-
-/**
- * Response of a [Search]{@link ApiController#search} action in the API
- * @memberof ApiController
- * @alias SearchResponse
- */
-export type SearchResponse = {
-  /**
-   * List of records
-   */
-  records: Array<RecordJSON>;
-}
