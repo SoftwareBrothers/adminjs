@@ -195,7 +195,6 @@ jobs:
       - uses: cypress-io/github-action@v1
         with:
           working-directory: example-app
-          build:  && yarn link admin-bro
           start: yarn start
       - uses: actions/upload-artifact@v1
         if: failure()
