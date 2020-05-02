@@ -76,6 +76,11 @@ export default interface PropertyJSON {
   isDisabled: boolean;
 
   /**
+   * Whether the field should be marked as required (with a star)
+   */
+  isRequired: boolean;
+
+  /**
    * Resource to which given property belongs
    */
   resourceId: string;

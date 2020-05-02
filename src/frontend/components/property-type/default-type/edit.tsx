@@ -66,7 +66,12 @@ class Edit extends React.Component<CombinedProps> {
     const error = record.errors && record.errors[property.name]
     return (
       <FormGroup error={!!error}>
-        <Label htmlFor={property.name}>{property.label}</Label>
+        <Label
+          htmlFor={property.name}
+          required={property.isRequired}
+        >
+          {property.label}
+        </Label>
         {this.renderInput()}
         <FormMessage>{error && error.message}</FormMessage>
       </FormGroup>

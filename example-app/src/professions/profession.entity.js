@@ -9,6 +9,12 @@ const ProfessionSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  randomContent: {
+    type: String,
+  },
+  otherNotRequired: {
+    type: String,
+  },
 })
 
 const Profession = mongoose.model('Profession', ProfessionSchema)
