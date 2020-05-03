@@ -14,6 +14,10 @@ const DefaultPropertyValue: React.FC<ShowPropertyProps> = (props) => {
   if (property.availableValues) {
     const option = property.availableValues.find(opt => opt.value === rawValue)
 
+    if (!option) {
+      return rawValue
+    }
+
     return (
       <Badge>{option?.label || rawValue}</Badge>
     )
