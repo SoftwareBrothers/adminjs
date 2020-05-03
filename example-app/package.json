@@ -9,15 +9,19 @@
     "dev": "nodemon --ext '.js,.mjs' --watch ../lib --watch ./ --ignore 'cypress/**/*.js'",
     "start": "node index.js",
     "cypress:open": "cypress open",
-    "cypress:run": "cypress run"
+    "cypress:run": "cypress run",
+    "sequelize": "sequelize"
   },
   "devDependencies": {
-    "nodemon": "^2.0.2"
+    "@types/sequelize": "^4.28.8",
+    "nodemon": "^2.0.2",
+    "sequelize-cli": "^5.5.1"
   },
   "dependencies": {
     "admin-bro": "^2.2.8",
     "admin-bro-expressjs": "^2.0.5",
-    "admin-bro-mongoose": "^0.5.0",
+    "admin-bro-mongoose": "^0.5.2",
+    "admin-bro-sequelizejs": "^0.4.2",
     "argon2": "^0.26.2",
     "connect-mongo": "^3.2.0",
     "cypress": "^4.4.1",
@@ -25,6 +29,7 @@
     "express": "^4.17.1",
     "express-formidable": "^1.2.0",
     "express-session": "^1.17.0",
-    "mongoose": "^5.9.7"
+    "mongoose": "^5.9.7",
+    "sequelize": "^5.21.7"
   }
 }
