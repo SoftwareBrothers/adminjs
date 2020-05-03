@@ -30,6 +30,7 @@
     "express-formidable": "^1.2.0",
     "express-session": "^1.17.0",
     "mongoose": "^5.9.7",
+    "pg": "^8.0.3",
     "sequelize": "^5.21.7"
   }
 }
