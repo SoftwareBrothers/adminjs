@@ -6,11 +6,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 Started since version 0.9.5
 
-## Version v2.3.0 - unpublished
+## Version v2.3.0 - 03.05.2020
 
 ### Changed
 
-* [#279] move search records to a separate action
+* [#279] move search records to a separate `search` action of type `resource`
 
 ### Fixed
 
