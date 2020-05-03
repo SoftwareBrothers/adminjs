@@ -209,14 +209,14 @@ jobs:
         working-directory: example-app
         env:
           POSTGRES_PASSWORD: postgres
-          POSTGRES_DATABASE: adminbro_e2e_development
           POSTGRES_USER: postgres
+          POSTGRES_DATABASE: adminbro_e2e_development
       - run: yarn run sequelize db:migrate
         working-directory: example-app
         env:
           POSTGRES_PASSWORD: postgres
-          POSTGRES_DATABASE: adminbro_e2e_development
           POSTGRES_USER: postgres
+          POSTGRES_DATABASE: adminbro_e2e_development
       - run: node bin/setup-db.js
         working-directory: example-app
       - uses: cypress-io/github-action@v1
