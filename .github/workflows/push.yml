@@ -208,16 +208,14 @@ jobs:
       - run: yarn run sequelize db:create
         working-directory: example-app
         env:
-          NODE_ENV: test
           POSTGRES_PASSWORD: postgres
-          POSTGRES_DATABASE: adminbro_e2e_test
+          POSTGRES_DATABASE: adminbro_e2e_development
           POSTGRES_USER: postgres
       - run: yarn run sequelize db:migrate
         working-directory: example-app
         env:
-          NODE_ENV: test
           POSTGRES_PASSWORD: postgres
-          POSTGRES_DATABASE: adminbro_e2e_test
+          POSTGRES_DATABASE: adminbro_e2e_development
           POSTGRES_USER: postgres
       - run: node bin/setup-db.js
         working-directory: example-app
