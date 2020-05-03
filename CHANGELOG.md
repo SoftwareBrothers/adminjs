@@ -6,11 +6,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 Started since version 0.9.5
 
-## Version v2.3.0-beta.1 - unpublished
+## Version v2.3.0 - unpublished
 
 ### Changed
 
 * [#279] move search records to a separate action
+
+### Fixed
+
+* fix of not showing empty badges in list and show (related to #418)
+
+### Added
+
+* e2e tests for sequelize
 
 ## Version v2.2.12 - 01.05.2020
 
