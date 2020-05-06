@@ -110,4 +110,13 @@ describe('updateRecord', function () {
 
     expect(Object.keys(updatedRecord.params).find(key => key === propertyName)).to.be.undefined
   })
+
+  it('properly sets nulls', function () {
+    const value = null
+
+    const update = updateRecord(propertyName, value)
+    const updatedRecord = update(previousRecord)
+
+    expect(updatedRecord.params[propertyName]).to.be.null
+  })
 })

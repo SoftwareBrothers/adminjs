@@ -33,7 +33,7 @@ const updateRecord = (
 
   // set new value
   if (typeof value !== 'undefined') {
-    if (typeof value === 'object' && !(value instanceof File)) {
+    if (typeof value === 'object' && !(value instanceof File) && value !== null) {
       const flattened = flat.flatten(value) as any
       Object.keys(flattened).forEach((key) => {
         paramsCopy[`${property}.${key}`] = flattened[key]

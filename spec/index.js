@@ -10,7 +10,6 @@ require('@babel/register')({
   ],
   extensions: ['.jsx', '.js', '.ts', '.tsx'],
   only: ['src/', 'spec/'],
-  sourceMaps: 'inline',
 })
 
 require('./setup')
