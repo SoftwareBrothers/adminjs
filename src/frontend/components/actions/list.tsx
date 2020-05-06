@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react'
 
-import { RouteComponentProps, useHistory, useLocation, useRouteMatch } from 'react-router'
-import { AddNoticeProps } from '../../store/with-notice'
+import { useHistory, useLocation } from 'react-router'
 
 import RecordsTable from '../app/records-table/records-table'
 import { ActionProps } from './action.props'

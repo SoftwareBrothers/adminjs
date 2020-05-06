@@ -125,8 +125,8 @@ export type FormGroupProps = SpaceProps & {
  */
 export const FormGroup = styled.div<FormGroupProps>`
   width: 100%;
-  ${({ error }) => (error ? formGroupWithErrorCSS : '')};
-  ${({ disabled }) => (disabled ? formGroupDisabledCSS : '')};
+  ${({ error }): any => (error ? formGroupWithErrorCSS : '')};
+  ${({ disabled }): any => (disabled ? formGroupDisabledCSS : '')};
   ${space};
 
   & > ${Input} {

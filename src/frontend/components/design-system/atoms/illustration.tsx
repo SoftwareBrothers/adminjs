@@ -1,7 +1,6 @@
 import React from 'react'
 import { ThemeProps, DefaultTheme, withTheme } from 'styled-components'
 import * as Illustrations from './illustrations'
-import { Props } from './illustrations/props.type'
 
 /**
  * @memberof Illustration

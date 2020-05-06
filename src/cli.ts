@@ -22,6 +22,7 @@ program
   .action((configFile) => {
     const config = require(path.join(process.cwd(), configFile))
     if (!config.databases && !config.resources) {
+      // eslint-disable-next-line no-console
       console.log([
         'Are you sure you pointed to the right configuration file?.',
         `'${path.join(process.cwd(), configFile)}' does not have neither`,

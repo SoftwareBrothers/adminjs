@@ -27,13 +27,13 @@ export type BadgeProps = SpaceProps & TypographyProps & ColorProps & {
   size?: 'sm' | 'lg';
 }
 
-const variantStyle = (variantColor: string, props: BadgeProps) => ({
+const variantStyle = (variantColor: string, props: BadgeProps): Record<string, any> => ({
   bg: variantColor,
   borderColor: variantColor,
   color: props.outline ? variantColor : 'white',
 })
 
-const colorVariant = (props: BadgeProps) => variant({
+const colorVariant = (props: BadgeProps): Record<string, any> => variant({
   variants: {
     primary: variantStyle('primary100', props),
     danger: variantStyle('error', props),
@@ -105,7 +105,7 @@ export const Badge = styled.span<BadgeProps>`
   ${space};
   ${color};
   ${typography};
-  ${props => colorVariant(props)};
+  ${(props): any => colorVariant(props)};
   ${sizeVariants};
   ${({ outline }): string => (outline ? 'background: transparent;' : '')}
 `

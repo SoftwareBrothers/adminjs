@@ -8,7 +8,7 @@ const pageHeaderHeight = 284
 const pageHeaderPaddingY = 74
 const pageHeaderPaddingX = 250
 
-const DashboardHeader = () => {
+const DashboardHeader: React.FC = () => {
   const { translateMessage } = useTranslation()
   return (
     <Box position="relative" overflow="hidden">
@@ -47,7 +47,14 @@ const DashboardHeader = () => {
   )
 }
 
-const boxes = ({ translateMessage }) => [{
+type BoxType = {
+  variant: string;
+  title: string;
+  subtitle: string;
+  href: string;
+}
+
+const boxes = ({ translateMessage }): Array<BoxType> => [{
   variant: 'Planet',
   title: translateMessage('addingResources_title'),
   subtitle: translateMessage('addingResources_subtitle'),

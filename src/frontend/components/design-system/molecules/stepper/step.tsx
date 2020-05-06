@@ -120,7 +120,7 @@ export const Step: React.FC<StepProps> = (props) => {
         flexDirection="row"
         pt="lg"
         pb="default"
-        onClick={() => !disabled && onClick && onClick(number)}
+        onClick={(): boolean | void => !disabled && onClick && onClick(number)}
       >
         <Circle
           bg={completed ? 'grey40' : 'transparent'}

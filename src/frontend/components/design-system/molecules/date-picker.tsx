@@ -161,7 +161,7 @@ export const DatePicker: React.FC<DatePickerProps> = (props) => {
     stringValue = format(value as Date)
   }
 
-  const onDatePickerChange = (date: Date) => {
+  const onDatePickerChange = (date: Date): void => {
     if (!disabled) {
       onChange(format(date))
     }
@@ -176,7 +176,7 @@ export const DatePicker: React.FC<DatePickerProps> = (props) => {
       <StyledDatePicker className={cssClass('DatePicker', hidden ? 'normal' : 'active')}>
         <Input
           value={stringValue || ''}
-          onChange={event => onChange(event.target.value)}
+          onChange={(event): void => onChange(event.target.value)}
           onFocus={(): void => setHidden(false)}
           disabled={disabled}
         />

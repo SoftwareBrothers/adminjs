@@ -26,6 +26,7 @@ const initializeStore = (admin: AdminBro, currentAdmin?: CurrentAdmin): Store<Re
       try {
         return resource.decorate().toJSON(currentAdmin)
       } catch (e) {
+        // eslint-disable-next-line no-console
         console.log('error', resource._decorated)
         throw e
       }

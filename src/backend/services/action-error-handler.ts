@@ -1,4 +1,4 @@
-import { ActionContext } from '../actions/action.interface'
+import { ActionContext, ActionResponse } from '../actions/action.interface'
 import ValidationError from '../utils/validation-error'
 import ForbiddenError from '../utils/forbidden-error'
 
@@ -7,7 +7,7 @@ import ForbiddenError from '../utils/forbidden-error'
  *
  * Function which catches all the errors thrown by the action hooks or handler
  */
-const actionErrorHandler = (error: any, context: ActionContext) => {
+const actionErrorHandler = (error: any, context: ActionContext): ActionResponse => {
   if (error instanceof ValidationError) {
     const { resource } = context
     const { record, currentAdmin } = context

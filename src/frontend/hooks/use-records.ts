@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 
 import { AxiosResponse } from 'axios'
 import { useLocation, useHistory } from 'react-router'
@@ -35,7 +35,7 @@ export const useRecords = (resourceId: string): UseRecordsResult => {
   const { translateMessage } = useTranslation()
   const onNotice = useNotice()
 
-  const fetchData = () => {
+  const fetchData = (): Promise<AxiosResponse<ListActionResponse>> => {
     setLoading(true)
     const query = new URLSearchParams(location.search)
 

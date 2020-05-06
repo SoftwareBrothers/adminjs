@@ -89,18 +89,20 @@ export type LocaleTranslations = Partial<LocaleTranslationsBlock> & {
  */
 
 // Escaping all keys with . (changing to '&#46;')
-const renameKeys = object => Object.entries(object).reduce((memo, [k, v]) => {
-  if (typeof v === 'object') {
+const renameKeys = (object: Partial<LocaleTranslations>): Partial<LocaleTranslations> => (
+  Object.entries(object).reduce((memo, [k, v]) => {
+    if (typeof v === 'object') {
+      return {
+        ...memo,
+        [formatName(k)]: renameKeys(v),
+      }
+    }
     return {
       ...memo,
-      [formatName(k)]: renameKeys(v),
+      [formatName(k)]: v,
     }
-  }
-  return {
-    ...memo,
-    [formatName(k)]: v,
-  }
-}, {})
+  }, {})
+)
 
 export const combineTranslations = (
   originalTranslations: LocaleTranslations,

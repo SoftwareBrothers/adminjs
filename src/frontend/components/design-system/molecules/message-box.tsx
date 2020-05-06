@@ -25,7 +25,7 @@ const sizeVariants = styledVariant({
   },
 })
 
-const variants = (theme: DefaultTheme) => styledVariant({
+const variants = (theme: DefaultTheme): Record<string, any> => styledVariant({
   variants: {
     success: {},
     danger: {
@@ -57,7 +57,7 @@ const StyledMessageBox = styled.div<StyledMessageBoxProps>`
       fill: ${({ theme }): string => theme.colors.grey80};
     }
   }
-  ${({ theme }) => variants(theme)};
+  ${({ theme }): any => variants(theme)};
   ${sizeVariants};
 `
 

@@ -181,7 +181,7 @@ type ErrorMessage = {
 export const DropZone: React.FC<DropZoneProps> = (props) => {
   const { validate, onChange, multiple, files: filesFromProps, uploadLimitIn, ...other } = props
 
-  const [isDragging, setIsDragging] = useState(false)
+  const [, setIsDragging] = useState(false)
   const [error, setError] = useState<ErrorMessage | null>(null)
   const [filesToUpload, setFilesToUpload] = useState<Array<File>>(filesFromProps ?? [])
 
@@ -291,7 +291,7 @@ export const DropZone: React.FC<DropZoneProps> = (props) => {
       ) : ''}
       {filesToUpload.map((file, index) => (
         // eslint-disable-next-line react/no-array-index-key
-        <DropZoneItem file={file} key={index} onRemove={() => removeItem(index)} />
+        <DropZoneItem file={file} key={index} onRemove={(): void => removeItem(index)} />
       ))}
     </Box>
   )

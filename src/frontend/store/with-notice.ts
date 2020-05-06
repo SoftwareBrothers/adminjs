@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/explicit-function-return-type */
 import { connect } from 'react-redux'
 import { addNotice } from './store'
 

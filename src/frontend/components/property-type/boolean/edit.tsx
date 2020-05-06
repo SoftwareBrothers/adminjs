@@ -4,7 +4,7 @@ import { EditPropertyProps } from '../base-property-props'
 import { CheckBox, FormGroup, Label, FormMessage } from '../../design-system'
 import { recordPropertyIsEqual } from '../record-property-is-equal'
 
-const parseValue = value => !(!value || value === 'false')
+const parseValue = (value): boolean => !(!value || value === 'false')
 
 const Edit: React.FC<EditPropertyProps> = (props) => {
   const { property, onChange, record } = props

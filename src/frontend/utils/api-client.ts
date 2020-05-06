@@ -1,3 +1,4 @@
+/* eslint-disable no-alert */
 import axios, { AxiosResponse, AxiosInstance, AxiosRequestConfig } from 'axios'
 import RecordJSON from '../../backend/decorators/record-json.interface'
 import { RecordActionResponse, ActionResponse, BulkActionResponse } from '../../backend/actions/action.interface'

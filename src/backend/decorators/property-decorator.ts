@@ -1,4 +1,3 @@
-import * as _ from 'lodash'
 import AdminBro from '../../admin-bro'
 import PropertyOptions, { AvailablePropertyOptions } from './property-options.interface'
 import BaseResource from '../adapters/base-resource'
