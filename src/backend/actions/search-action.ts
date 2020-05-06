@@ -35,7 +35,10 @@ const SearchAction: Action<SearchActionResponse> = {
     const filters = queryString ? { [titlePropertyName]: queryString } : {}
     const filter = new Filter(filters, resource)
 
-    const sortBy = decorated.options && decorated.options.sort && decorated.options.sort.sortBy || titlePropertyName
+    const sortBy = decorated.options
+        && decorated.options.sort
+        && decorated.options.sort.sortBy
+        || titlePropertyName
     const records = await resource.find(filter, {
       limit: 50,
       sort: {
