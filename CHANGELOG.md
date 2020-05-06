@@ -6,6 +6,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 Started since version 0.9.5
 
+## Version v2.3.1 - 03.07.2020
+
+### Fixed
+
+* all linter warnings
+* error when onChange() prop hangs when passing there `null`
+* now new search button accepts the sortBy param
+
 ## Version v2.3.0 - 03.05.2020
 
 ### Changed
