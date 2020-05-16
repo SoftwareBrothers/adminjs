@@ -63,6 +63,11 @@
   "browserslist": [
     "last 3 Chrome versions"
   ],
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
+  },
   "author": "Wojciech Krysiak",
   "license": "MIT",
   "bugs": {
@@ -151,6 +156,9 @@
     "rollup-plugin-node-builtins": "^2.1.2",
     "rollup-plugin-node-globals": "^1.4.0",
     "sinon": "^6.1.5",
+    "husky": "^4.2.5",
+    "@commitlint/cli": "^8.3.5",
+    "@commitlint/config-conventional": "^8.3.4",
     "sinon-chai": "^3.2.0",
     "semantic-release": "^17.0.7",
     "semantic-release-jira-releases-sb": "^0.7.2",
