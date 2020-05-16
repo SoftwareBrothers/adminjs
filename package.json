@@ -16,7 +16,8 @@
     "bundle:globals": "node bin/bundle-globals.js",
     "cspell": "cspell 'src/**/*.ts' 'src/**/*.js' 'src/**/*.tsx' 'src/**/*.jsx'",
     "check:all": "yarn types && yarn cspell && yarn lint && yarn test && ONCE=true yarn bundle && ONCE=true NODE_ENV=production yarn bundle",
-    "dev": "concurrently \"yarn build --watch\" \"yarn bundle\" \"yarn types --watch\""
+    "dev": "concurrently \"yarn build --watch\" \"yarn bundle\" \"yarn types --watch\"",
+    "release": "semantic-release"
   },
   "bin": {
     "admin": "./cli.js"
@@ -151,6 +152,9 @@
     "rollup-plugin-node-globals": "^1.4.0",
     "sinon": "^6.1.5",
     "sinon-chai": "^3.2.0",
+    "semantic-release": "^17.0.7",
+    "semantic-release-jira-releases-sb": "^0.7.2",
+    "@semantic-release/git": "^9.0.0",
     "typescript": "^3.7.3"
   }
 }
