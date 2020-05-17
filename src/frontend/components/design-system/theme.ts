@@ -322,7 +322,7 @@ const breakpoints = [
   '1324px', // 1024 + sidebarWidth
 ]
 
-const font = '\'Roboto\', sans-serif'
+const font = '\'Roboto\', sans-serif' as string
 
 export {
   colors,
