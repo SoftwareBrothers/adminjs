@@ -9,13 +9,14 @@ const AdminCompany = require('./companies/company.admin')
 const AdminEmployee = require('./employees/employee.admin')
 const AdminExternalEmployee = require('./external-employees/external-employee.admin')
 const AdminProfession = require('./professions/profession.admin')
+const AdminTool = require('./tools/tool.admin')
 
 AdminBro.bundle('./components/sidebar-footer', 'SidebarFooter')
 AdminBro.bundle('./components/no-records', 'NoRecords')
 
 /** @type {import('admin-bro').AdminBroOptions} */
 const options = {
-  resources: [AdminCompany, AdminEmployee, AdminProfession, AdminExternalEmployee],
+  resources: [AdminCompany, AdminEmployee, AdminProfession, AdminExternalEmployee, AdminTool],
   version: {
     admin: true,
     app: process.env.npm_package_version,

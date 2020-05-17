@@ -4,6 +4,7 @@ const mongoose = require('mongoose')
 const { Company } = require('../src/companies/company.entity')
 const { Profession } = require('../src/professions/profession.entity')
 const { Employee } = require('../src/employees/employee.entity')
+const { Tool } = require('../src/tools/tool.entity')
 
 const { MONGO_URL } = process.env
 
@@ -14,6 +15,7 @@ const setupDb = async () => {
   })
 
   await Company.deleteMany({})
+  await Tool.deleteMany({})
   await Profession.deleteMany({})
   await Employee.deleteMany({})
 
@@ -30,6 +32,10 @@ const setupDb = async () => {
     name: 'lover',
     description: ':)',
   }])
+
+  await Tool.create([...new Array(100)].map((el, index) => ({
+    name: `tool ${index}`,
+  })))
 }
 
 setupDb().then(() => {
