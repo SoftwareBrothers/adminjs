@@ -19,9 +19,9 @@ jobs:
         id: yarn-cache
         with:
           path: node_modules
-          key: ${{ runner.os }}-node_modules-${{ hashFiles('**/yarn.lock') }}
+          key: ${{ runner.os }}_node_modules_${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
-            ${{ runner.os }}-node_modules-
+            ${{ runner.os }}_node_modules_
       - name: Install
         if: steps.yarn-cache.outputs.cache-hit != 'true'
         run: yarn install
@@ -41,9 +41,9 @@ jobs:
         id: yarn-cache
         with:
           path: node_modules
-          key: ${{ runner.os }}-node_modules-${{ hashFiles('**/yarn.lock') }}
+          key: ${{ runner.os }}_node_modules_${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
-            ${{ runner.os }}-node_modules-
+            ${{ runner.os }}_node_modules_
       - name: Install
         if: steps.yarn-cache.outputs.cache-hit != 'true'
         run: yarn install
@@ -116,9 +116,9 @@ jobs:
         id: yarn-cache
         with:
           path: node_modules
-          key: ${{ runner.os }}-node_modules-${{ hashFiles('**/yarn.lock') }}
+          key: ${{ runner.os }}_node_modules_${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
-            ${{ runner.os }}-node_modules-
+            ${{ runner.os }}_node_modules_
       - name: Install
         if: steps.yarn-cache.outputs.cache-hit != 'true'
         run: yarn install
@@ -194,9 +194,9 @@ jobs:
         id: yarn-cache
         with:
           path: node_modules
-          key: ${{ runner.os }}-node_modules-${{ hashFiles('**/yarn.lock') }}
+          key: ${{ runner.os }}_node_modules_${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
-            ${{ runner.os }}-node_modules-
+            ${{ runner.os }}_node_modules_
       - name: Install
         if: steps.yarn-cache.outputs.cache-hit != 'true'
         run: yarn install
