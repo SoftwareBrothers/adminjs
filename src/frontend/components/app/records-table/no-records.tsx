@@ -5,12 +5,13 @@ import ViewHelpers from '../../../../backend/utils/view-helpers'
 import ResourceJSON from '../../../../backend/decorators/resource-json.interface'
 import { Text, Button, Icon, InfoBox } from '../../design-system'
 import { useTranslation } from '../../../hooks'
+import allowOverride from '../../../hoc/allow-override'
 
-type Props = {
+export type NoRecordsProps = {
   resource: ResourceJSON;
 }
 
-const NoRecords: React.FC<Props> = (props) => {
+const NoRecordsOriginal: React.FC<NoRecordsProps> = (props) => {
   const { resource } = props
   const h = new ViewHelpers()
   const { translateButton, translateMessage } = useTranslation()
@@ -36,5 +37,9 @@ const NoRecords: React.FC<Props> = (props) => {
     </InfoBox>
   )
 }
+
+// This hack prevents rollup from throwing an error
+const NoRecords = allowOverride(NoRecordsOriginal, 'NoRecords')
+export { NoRecords }
 
 export default NoRecords

@@ -10,6 +10,9 @@ const AdminEmployee = require('./employees/employee.admin')
 const AdminExternalEmployee = require('./external-employees/external-employee.admin')
 const AdminProfession = require('./professions/profession.admin')
 
+AdminBro.bundle('./components/sidebar-footer', 'SidebarFooter')
+AdminBro.bundle('./components/no-records', 'NoRecords')
+
 /** @type {import('admin-bro').AdminBroOptions} */
 const options = {
   resources: [AdminCompany, AdminEmployee, AdminProfession, AdminExternalEmployee],

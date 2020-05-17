@@ -1,7 +1,9 @@
 import styled from 'styled-components'
 import { position, PositionProps } from 'styled-system'
 
-export type DropDownMenuProps = PositionProps & {
+import Box, { BoxProps } from '../../atoms/box'
+
+export type DropDownMenuProps = PositionProps & BoxProps & {
   isVisible?: boolean;
 }
 
@@ -9,7 +11,7 @@ export type DropDownMenuProps = PositionProps & {
  * @component
  * @private
  */
-export const DropDownMenu = styled.div<DropDownMenuProps>`
+export const DropDownMenu = styled(Box)<DropDownMenuProps>`
   background: ${({ theme }): string => theme.colors.white};
   display: inline-block;
   position: absolute;

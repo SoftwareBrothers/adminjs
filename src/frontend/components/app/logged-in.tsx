@@ -3,6 +3,7 @@ import React from 'react'
 import { CurrentAdmin } from '../../../current-admin.interface'
 import { LoggedUser, Box, DropDownItem, Link } from '../design-system'
 import { useTranslation } from '../../hooks'
+import allowOverride from '../../hoc/allow-override'
 
 type Props = {
   session: CurrentAdmin;
@@ -29,4 +30,4 @@ const LoggedIn: React.FC<Props> = (props) => {
   )
 }
 
-export default LoggedIn
+export default allowOverride(LoggedIn, 'LoggedIn')

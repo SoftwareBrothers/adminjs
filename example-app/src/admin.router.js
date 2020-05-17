@@ -38,6 +38,7 @@ const buildAdminRouter = async (admin) => {
     saveUninitialized: true,
     store: new MongoStore({ mongooseConnection: mongoose.connection }),
   })
+  admin.watch()
   return router
 }
 

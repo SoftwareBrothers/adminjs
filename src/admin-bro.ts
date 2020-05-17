@@ -317,18 +317,22 @@ class AdminBro {
    * @param   {String}  src  Path to a file containing react component.
    *
    * @return  {String}       componentId - uniq id of a component
+   * @return  {String}       [componentName] - name of the component which you want to override
    *
-   * @example
+   * @example <caption>Passing custom components in AdminBro options</caption>
    * const adminBroOptions = {
    *   dashboard: {
    *     component: AdminBro.bundle('./path/to/component'),
    *   }
    * }
+   * @example <caption>Overriding AdminBro core components</caption>
+   * // somewhere in the code
+   * AdminBro.bundle('./path/to/new-sidebar/component', 'SidebarFooter')
    */
-  public static bundle(src: string): string {
+  public static bundle(src: string, componentName?: string): string {
     const extensions = ['.jsx', '.js', '.ts', '.tsx']
     let filePath = ''
-    const componentId = _.uniqueId('Component')
+    const componentId = componentName || _.uniqueId('Component')
     if (src[0] === '/') {
       filePath = src
     } else {
