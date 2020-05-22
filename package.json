@@ -51,7 +51,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/SoftwareBrothers/admin-bro.git"
+    "url": "git@github.com:SoftwareBrothers/admin-bro.git"
   },
   "keywords": [
     "hapi",
