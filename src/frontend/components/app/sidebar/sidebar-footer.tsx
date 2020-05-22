@@ -1,6 +1,7 @@
 import React from 'react'
 
 import { Box, Text, Icon, Link } from '../../design-system'
+import allowOverride from '../../../hoc/allow-override'
 
 const SidebarFooter: React.FC = () => (
   <Box mt="lg">
@@ -20,4 +21,4 @@ const SidebarFooter: React.FC = () => (
   </Box>
 )
 
-export default SidebarFooter
+export default allowOverride(SidebarFooter, 'SidebarFooter')

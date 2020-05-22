@@ -15,6 +15,7 @@ export type UseRecordsResult = {
   records: Array<RecordJSON>;
   loading: boolean;
   page: number;
+  perPage: number;
   total: number;
   direction: 'asc' | 'desc';
   sortBy?: string;
@@ -25,6 +26,7 @@ export type UseRecordsResult = {
 export const useRecords = (resourceId: string): UseRecordsResult => {
   const [records, setRecords] = useState<Array<RecordJSON>>([])
   const [loading, setLoading] = useState(false)
+  const [perPage, setPerPage] = useState(10)
   const [page, setPage] = useState(1)
   const [total, setTotal] = useState(0)
   const [direction, setDirection] = useState<'asc'| 'desc'>('asc')
@@ -55,6 +57,7 @@ export const useRecords = (resourceId: string): UseRecordsResult => {
 
       setRecords(listActionResponse.records)
       setPage(listActionResponse.meta.page)
+      setPerPage(listActionResponse.meta.perPage)
       setTotal(listActionResponse.meta.total)
       setDirection(listActionResponse.meta.direction)
       setSortBy(listActionResponse.meta.sortBy)
@@ -85,6 +88,7 @@ export const useRecords = (resourceId: string): UseRecordsResult => {
     total,
     direction,
     sortBy,
+    perPage,
     fetchData,
   }
 }

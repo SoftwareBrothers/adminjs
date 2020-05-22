@@ -4,25 +4,10 @@ import { useHistory, useLocation } from 'react-router'
 
 import RecordsTable from '../app/records-table/records-table'
 import { ActionProps } from './action.props'
-import RecordJSON from '../../../backend/decorators/record-json.interface'
 import { Box, Pagination, Text } from '../design-system'
 import useRecords from '../../hooks/use-records'
 import useSelectedRecords from '../../hooks/use-selected-records'
 import { REFRESH_KEY } from './utils/append-force-refresh'
-
-// TODO: change after implementing per page dropdown
-const PER_PAGE = 10
-
-type State = {
-  records: Array<RecordJSON>;
-  page: number;
-  perPage: number;
-  total: number;
-  loading: boolean;
-  direction: 'asc' | 'desc';
-  sortBy?: string;
-  selectedRecords: Array<RecordJSON>;
-}
 
 const List: React.FC<ActionProps> = ({ resource, setTag }) => {
   const {
@@ -33,6 +18,7 @@ const List: React.FC<ActionProps> = ({ resource, setTag }) => {
     page,
     total,
     fetchData,
+    perPage,
   } = useRecords(resource.id)
   const {
     selectedRecords,
@@ -84,7 +70,7 @@ const List: React.FC<ActionProps> = ({ resource, setTag }) => {
       <Text mt="xl" textAlign="center">
         <Pagination
           page={page}
-          perPage={PER_PAGE}
+          perPage={perPage}
           total={total}
           onChange={handlePaginationChange}
         />

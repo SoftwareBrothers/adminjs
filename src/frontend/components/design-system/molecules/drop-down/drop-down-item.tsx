@@ -2,12 +2,13 @@ import styled from 'styled-components'
 import { space, SpaceProps } from 'styled-system'
 
 import Link from '../../atoms/link'
+import Box from '../../atoms/box'
 
 /**
  * @component
  * @private
  */
-export const DropDownItem = styled.span<SpaceProps>`
+export const DropDownItem = styled(Box)<SpaceProps>`
   position: relative;
   z-index: 10000;
   border: none;

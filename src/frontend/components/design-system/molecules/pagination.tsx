@@ -108,6 +108,7 @@ export const Pagination: React.FC<PaginationProps> = (props) => {
   return (
     <PaginationWrapper className={cssClass('Pagination')} {...rest}>
       <PaginationLink
+        data-testid="previous"
         disabled={isFirstPage}
         onClick={(): void => (!isFirstPage ? onChange(prevPage) : undefined)}
       >
@@ -118,11 +119,14 @@ export const Pagination: React.FC<PaginationProps> = (props) => {
           key={p}
           onClick={(): void => onChange(p)}
           variant={p === currentPage ? 'primary' : 'text'}
+          className={cssClass('PaginationLink', p === currentPage ? 'current' : '')}
+          data-testid={`page-${p}`}
         >
           {p}
         </PaginationLink>
       ))}
       <PaginationLink
+        data-testid="next"
         onClick={(): void => (!isLastPage ? onChange(nextPage) : undefined)}
         disabled={isLastPage}
       >

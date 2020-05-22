@@ -73,6 +73,19 @@ describe('AdminBro', function () {
       })
     })
 
+    context('component name given', function () {
+      const componentName = 'Dashboard'
+      let result: string
+
+      beforeEach(function () {
+        result = AdminBro.bundle('../spec/fixtures/example-component', componentName)
+      })
+
+      it('returns the same component name as which was given', function () {
+        expect(result).to.eq(componentName)
+      })
+    })
+
     it('throws an error when component doesn\'t exist', function () {
       expect(() => {
         AdminBro.bundle('./fixtures/example-components')
