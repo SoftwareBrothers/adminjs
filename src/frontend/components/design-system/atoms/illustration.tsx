@@ -13,7 +13,8 @@ export type IllustrationProps = {
   variant: 'Moon' | 'Rocket' | 'Astronaut'
     | 'DocumentCheck' | 'DocumentSearch' | 'FileSearch'
     | 'FlagInCog' | 'Folders' | 'Launch' | 'Planet'
-    | 'AdminBroLogo' | 'SoftwareBrothersLogo' | 'GithubLogo';
+    | 'AdminBroLogo' | 'SoftwareBrothersLogo' | 'GithubLogo'
+    | 'SlackLogo';
   /** Optional max width restrictions */
   width?: number;
   /** Optional max height restrictions */

@@ -58,32 +58,32 @@ const boxes = ({ translateMessage }): Array<BoxType> => [{
   variant: 'Planet',
   title: translateMessage('addingResources_title'),
   subtitle: translateMessage('addingResources_subtitle'),
-  href: 'https://softwarebrothers.github.io/admin-bro-dev/tutorial-03-passing-resources.html',
+  href: 'https://adminbro.com/tutorial-passing-resources.html',
 }, {
   variant: 'DocumentCheck',
   title: translateMessage('customizeResources_title'),
   subtitle: translateMessage('customizeResources_subtitle'),
-  href: 'https://softwarebrothers.github.io/admin-bro-dev/tutorial-04-customizing-resources.html',
+  href: 'https://adminbro.com/tutorial-customizing-resources.html',
 }, {
   variant: 'DocumentSearch',
   title: translateMessage('customizeActions_title'),
   subtitle: translateMessage('customizeActions_subtitle'),
-  href: 'https://softwarebrothers.github.io/admin-bro-dev/tutorial-05-actions.html',
+  href: 'https://adminbro.com/tutorial-actions.html',
 }, {
   variant: 'FlagInCog',
   title: translateMessage('writeOwnComponents_title'),
   subtitle: translateMessage('writeOwnComponents_subtitle'),
-  href: 'https://softwarebrothers.github.io/admin-bro-dev/tutorial-06-writing-react-components.html',
+  href: 'https://adminbro.com/tutorial-writing-react-components.html',
 }, {
   variant: 'Folders',
   title: translateMessage('customDashboard_title'),
   subtitle: translateMessage('customDashboard_subtitle'),
-  href: 'https://softwarebrothers.github.io/admin-bro-dev/tutorial-07-custom-dashboard.html',
+  href: 'https://adminbro.com/tutorial-custom-dashboard.html',
 }, {
   variant: 'Astronaut',
   title: translateMessage('roleBasedAccess_title'),
   subtitle: translateMessage('roleBasedAccess_subtitle'),
-  href: 'https://softwarebrothers.github.io/admin-bro-dev/tutorial-08-rbac.html',
+  href: 'https://adminbro.com/tutorial-rbac.html',
 }]
 
 const Card = styled(Box)`
@@ -135,11 +135,11 @@ const Dashboard: React.FC = () => {
           </Box>
         ))}
         <Box width={[1, 1, 1 / 2]} p="lg">
-          <Card as="a" flex href="https://softwarebrothers.co/blog/">
-            <Box flexShrink={0}><Illustration variant="AdminBroLogo" /></Box>
+          <Card as="a" flex href="https://join.slack.com/t/adminbro/shared_invite/zt-djsqxxpz-_YCS8UMtQ9Ade6DPuLR7Zw">
+            <Box flexShrink={0}><Illustration variant="SlackLogo" /></Box>
             <Box ml="xl">
-              <H4>{translateMessage('checkoutBlog_title')}</H4>
-              <Text>{translateMessage('checkoutBlog_subtitle')}</Text>
+              <H4>{translateMessage('community_title')}</H4>
+              <Text>{translateMessage('community_subtitle')}</Text>
             </Box>
           </Card>
         </Box>
