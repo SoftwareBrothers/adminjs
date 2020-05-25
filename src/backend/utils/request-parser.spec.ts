@@ -16,10 +16,10 @@ describe('RequestParser', function () {
       property: name => new BaseProperty({ path: name, type: 'boolean' }),
     } as BaseResource
 
-    it('removes it from the request when empty string is given', function () {
+    it('sets value to `false` when empty string is given', function () {
       const request = { ...baseRequest, payload: { isHired: '' } }
 
-      expect(requestParser(request, resource).payload?.isHired).to.be.undefined
+      expect(requestParser(request, resource).payload?.isHired).to.be.false
     })
 
     it('changes "true" string to true', function () {
