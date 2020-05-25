@@ -258,7 +258,9 @@ jobs:
       || contains(github.ref, 'refs/heads/master')
       || contains(github.ref, 'refs/heads/next-major')
       || contains(github.ref, 'refs/heads/beta')
-    needs: cypress
+    needs:
+      - cypress
+      - test
     services:
       mongo:
         image: mongo:3.4.23
