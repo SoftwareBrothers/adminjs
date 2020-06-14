@@ -11,7 +11,7 @@ import BaseResource from '../adapters/base-resource'
  *
  * @private
  */
-const PayloadParser = (originalRequest: ActionRequest, resource: BaseResource): ActionRequest => {
+const RequestParser = (originalRequest: ActionRequest, resource: BaseResource): ActionRequest => {
   const { payload: originalPayload = {} } = originalRequest
 
   const payload = Object.entries(originalPayload).reduce((memo, [path, value]) => {
@@ -32,6 +32,9 @@ const PayloadParser = (originalRequest: ActionRequest, resource: BaseResource): 
           return { ...memo, [path]: null }
         }
       }
+      if (property.isArray() && value === '') {
+        return { ...memo, [path]: [] }
+      }
     }
 
     return {
@@ -46,4 +49,4 @@ const PayloadParser = (originalRequest: ActionRequest, resource: BaseResource): 
   }
 }
 
-export default PayloadParser
+export default RequestParser
