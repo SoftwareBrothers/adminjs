@@ -100,7 +100,7 @@ const RecordInList: React.FC<Props> = (props) => {
       <TableCell key="options">
         {recordActions.length ? (
           <DropDown>
-            <DropDownTrigger py="sm" px="xl">
+            <DropDownTrigger py="sm" px="xl" data-testid="actions-dropdown">
               <Icon icon="OverflowMenuHorizontal" color="grey100" />
             </DropDownTrigger>
             <DropDownMenu>

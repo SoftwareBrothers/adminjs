@@ -8,6 +8,7 @@ AdminBro.registerAdapter(AdminBroSequelize)
 const AdminCompany = require('./companies/company.admin')
 const AdminEmployee = require('./employees/employee.admin')
 const AdminExternalEmployee = require('./external-employees/external-employee.admin')
+const AdminTaggable = require('./taggables/taggable.admin')
 const AdminProfession = require('./professions/profession.admin')
 const AdminTool = require('./tools/tool.admin')
 
@@ -16,7 +17,14 @@ AdminBro.bundle('./components/no-records', 'NoRecords')
 
 /** @type {import('admin-bro').AdminBroOptions} */
 const options = {
-  resources: [AdminCompany, AdminEmployee, AdminProfession, AdminExternalEmployee, AdminTool],
+  resources: [
+    AdminCompany,
+    AdminEmployee,
+    AdminProfession,
+    AdminExternalEmployee,
+    AdminTool,
+    AdminTaggable,
+  ],
   version: {
     admin: true,
     app: process.env.npm_package_version,

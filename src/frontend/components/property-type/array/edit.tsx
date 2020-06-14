@@ -32,7 +32,7 @@ type ItemRendererProps = {
 const ItemRenderer: React.FC<Props & ItemRendererProps> = (props) => {
   const { ItemComponent, property, i, onDelete } = props
   return (
-    <Box flex flexDirection="row" alignItems="center">
+    <Box flex flexDirection="row" alignItems="center" data-testid={`array-item-${i}`}>
       <Box flexGrow={1}>
         <ItemComponent
           {...props}
@@ -47,6 +47,7 @@ const ItemRenderer: React.FC<Props & ItemRendererProps> = (props) => {
       <Box flexShrink={0}>
         <Button
           ml="default"
+          data-testid="delete-item"
           type="button"
           size="icon"
           onClick={(event): false => onDelete(event)}
