@@ -61,7 +61,7 @@
     "admin-panel"
   ],
   "browserslist": [
-    "last 3 Chrome versions"
+    "last 10 Chrome versions"
   ],
   "husky": {
     "hooks": {
