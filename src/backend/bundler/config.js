@@ -7,6 +7,8 @@ const replace = require('rollup-plugin-replace')
 const json = require('rollup-plugin-json')
 const { terser } = require('rollup-plugin-terser')
 
+const reactIsExport = ['isValidElementType', 'isContextConsumer', 'isElement', 'ForwardRef']
+
 const external = [
   'react',
   'react-dom',
@@ -74,9 +76,9 @@ const plugins = ({ babelConfig = {}, commonJSConfig = {}, minify = false } = {})
     commonjs({
       namedExports: {
         'node_modules/flat/index.js': ['flatten', 'unflatten'],
-        '@material-ui/utils/node_modules/react-is': [
-          'isValidElementType', 'isContextConsumer', 'isElement', 'ForwardRef',
-        ],
+        'node_modules/react-redux/node_modules/react-is/index.js': reactIsExport,
+        '@material-ui/utils/node_modules/react-is': reactIsExport,
+        'node_modules/react-is/index.js': reactIsExport,
       },
       ...commonJSConfig,
     }),
