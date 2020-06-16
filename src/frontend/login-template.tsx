@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 import React from 'react'
 import { renderToString } from 'react-dom/server'
-import { ServerStyleSheet, ThemeProvider } from 'styled-components'
+import { ServerStyleSheet, ThemeProvider, StyleSheetManager } from 'styled-components'
 import { Store } from 'redux'
 import { I18nextProvider } from 'react-i18next'
 import i18n from 'i18next'
@@ -49,18 +49,21 @@ const html = (admin: AdminBro, { action, errorMessage }: LoginTemplateAttributes
       interpolation: { escapeValue: false },
     })
 
+  const sheet = new ServerStyleSheet()
+
   const loginComponent = renderToString(
-    <Provider store={store}>
-      <I18nextProvider i18n={i18n}>
-        <ThemeProvider theme={theme}>
-          <LoginComponent action={action} message={errorMessage} />
-        </ThemeProvider>
-      </I18nextProvider>
-    </Provider>,
+    <StyleSheetManager sheet={sheet.instance}>
+      <Provider store={store}>
+        <I18nextProvider i18n={i18n}>
+          <ThemeProvider theme={theme}>
+            <LoginComponent action={action} message={errorMessage} />
+          </ThemeProvider>
+        </I18nextProvider>
+      </Provider>
+    </StyleSheetManager>,
   )
 
-  const sheet = new ServerStyleSheet()
-  sheet.collectStyles(LoginComponent)
+  sheet.collectStyles(<LoginComponent action={action} message={errorMessage} />)
   const style = sheet.getStyleTags()
   sheet.seal()
 
