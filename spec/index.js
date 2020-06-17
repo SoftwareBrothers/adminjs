@@ -5,7 +5,11 @@ require('@babel/polyfill')
 require('@babel/register')({
   presets: [
     require.resolve('@babel/preset-react'),
-    require.resolve('@babel/preset-env'),
+    [require.resolve('@babel/preset-env'), {
+      targets: {
+        node: '8',
+      },
+    }],
     require.resolve('@babel/preset-typescript'),
   ],
   extensions: ['.jsx', '.js', '.ts', '.tsx'],
