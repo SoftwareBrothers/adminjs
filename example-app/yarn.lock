@@ -1313,12 +1313,13 @@ admin-bro-mongoose@^0.5.2:
     flat "^4.1.0"
     lodash "^4.17.11"
 
-admin-bro-sequelizejs@^0.4.2:
-  version "0.4.2"
-  resolved "https://registry.yarnpkg.com/admin-bro-sequelizejs/-/admin-bro-sequelizejs-0.4.2.tgz#81e81cfaab47cd4cc27ce1268cdd3bada4eb9304"
-  integrity sha512-mPGcQSWXR+go5jLqeAxRIcHPHPBQkMkt1qN33Ft7Hdkk4pOnwEvTX/W6ZYAYzhQRVXjtsH8kbOAkmllZeckg6Q==
+admin-bro-sequelizejs@0.5.0:
+  version "0.5.0"
+  resolved "https://registry.yarnpkg.com/admin-bro-sequelizejs/-/admin-bro-sequelizejs-0.5.0.tgz#e00ec30e7696a8b60fc23025010bdf6e3e495696"
+  integrity sha512-PqfUGyorPd53Enmk4uRofoejGcCbATRCqcoYnDx2xSxRNYwhS3MLCJsIiEHhx/WoXYOIx65bVY3wCMPpMkVoHg==
   dependencies:
     escape-regexp "0.0.1"
+    flat "^5.0.0"
 
 admin-bro@^2.2.8:
   version "2.2.8"
@@ -2708,6 +2709,13 @@ flat@^4.1.0:
   dependencies:
     is-buffer "~2.0.3"
 
+flat@^5.0.0:
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/flat/-/flat-5.0.0.tgz#dab7d71d60413becb0ac2de9bf4304495e3af6af"
+  integrity sha512-6KSMM+cHHzXC/hpldXApL2S8Uz+QZv+tq5o/L0KQYleoG+GcwrnIJhTWC7tCOiKQp8D/fIvryINU1OZCCwevjA==
+  dependencies:
+    is-buffer "~2.0.4"
+
 follow-redirects@1.5.10:
   version "1.5.10"
   resolved "https://registry.yarnpkg.com/follow-redirects/-/follow-redirects-1.5.10.tgz#7b7a9f9aea2fdff36786a94ff643ed07f4ff5e2a"
@@ -3126,7 +3134,7 @@ is-bluebird@^1.0.2:
   resolved "https://registry.yarnpkg.com/is-bluebird/-/is-bluebird-1.0.2.tgz#096439060f4aa411abee19143a84d6a55346d6e2"
   integrity sha1-CWQ5Bg9KpBGr7hkUOoTWpVNG1uI=
 
-is-buffer@^2.0.2, is-buffer@~2.0.3:
+is-buffer@^2.0.2, is-buffer@~2.0.3, is-buffer@~2.0.4:
   version "2.0.4"
   resolved "https://registry.yarnpkg.com/is-buffer/-/is-buffer-2.0.4.tgz#3e572f23c8411a5cfd9557c849e3665e0b290623"
   integrity sha512-Kq1rokWXOPXWuaMAqZiJW4XxsmD9zGx9q4aePabbn3qCRGedtH7Cm+zV8WETitMfu1wdh+Rvd6w5egwSngUX2A==

@@ -121,7 +121,7 @@ class BaseResource {
    * @param {String} path           path/name of the property. Take a look at
    *                                {@link BaseProperty} to learn more about
    *                                property paths.
-   * @return {BaseProperty}
+   * @return {BaseProperty | null}
    * @abstract
    */
   property(path: string): BaseProperty | null {

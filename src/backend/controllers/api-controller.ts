@@ -7,6 +7,7 @@ import AdminBro from '../../admin-bro'
 import { ActionContext, ActionRequest, RecordActionResponse, ActionResponse, BulkActionResponse } from '../actions/action.interface'
 import ConfigurationError from '../utils/configuration-error'
 import NotFoundError from '../utils/not-found-error'
+import requestParser from '../utils/request-parser'
 import { SearchActionResponse } from '../actions/search-action'
 
 /**
@@ -104,13 +105,14 @@ class ApiController {
    *
    * Handler function responsible for a _.../api/resources/{resourceId}/actions/{action}_
    *
-   * @param   {ActionRequest}  request
+   * @param   {ActionRequest}  originalRequest
    * @param   {any}            response object from the plugin (i.e. admin-bro-expressjs)
    *
    * @return  {Promise<ActionResponse>}  action response
    */
-  async resourceAction(request: ActionRequest, response: any): Promise<ActionResponse> {
-    const actionContext = await this.getActionContext(request)
+  async resourceAction(originalRequest: ActionRequest, response: any): Promise<ActionResponse> {
+    const actionContext = await this.getActionContext(originalRequest)
+    const request = requestParser(originalRequest, actionContext.resource)
     return actionContext.action.handler(request, response, actionContext)
   }
 
@@ -120,16 +122,17 @@ class ApiController {
    *
    * Handler function responsible for a _.../api/resources/{resourceId}/records/{recordId}/{action}_
    *
-   * @param   {ActionRequest}  request
+   * @param   {ActionRequest}  originalRequest
    * @param   {any}  response
    *
    * @return  {Promise<RecordActionResponse>}  action response
    * @throws  ConfigurationError      When given record action doesn't return {@link RecordJSON}
    * @throws  ConfigurationError      when action handler doesn't return Promise<{@link RecordActionResponse}>
    */
-  async recordAction(request: ActionRequest, response: any): Promise<RecordActionResponse> {
-    const { recordId, resourceId } = request.params
-    const actionContext = await this.getActionContext(request)
+  async recordAction(originalRequest: ActionRequest, response: any): Promise<RecordActionResponse> {
+    const { recordId, resourceId } = originalRequest.params
+    const actionContext = await this.getActionContext(originalRequest)
+    const request = requestParser(originalRequest, actionContext.resource)
 
     if (!recordId) {
       throw new NotFoundError([
@@ -171,10 +174,11 @@ class ApiController {
    *                                  the database
    * @throws  ConfigurationError      when action handler doesn't return Promise<{@link BulkActionResponse}>
    */
-  async bulkAction(request: ActionRequest, response: any): Promise<BulkActionResponse> {
-    const { resourceId } = request.params
-    const { recordIds } = request.query || {}
-    const actionContext = await this.getActionContext(request)
+  async bulkAction(originalRequest: ActionRequest, response: any): Promise<BulkActionResponse> {
+    const { resourceId } = originalRequest.params
+    const { recordIds } = originalRequest.query || {}
+    const actionContext = await this.getActionContext(originalRequest)
+    const request = requestParser(originalRequest, actionContext.resource)
 
     if (!recordIds) {
       throw new NotFoundError([

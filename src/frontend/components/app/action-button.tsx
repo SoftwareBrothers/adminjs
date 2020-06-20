@@ -148,6 +148,7 @@ class ActionButton extends React.PureComponent<
       <StyledLink
         to={this.href()}
         onClick={this.handleClick}
+        data-testid={`action-${action.name}`}
       >
         {children}
       </StyledLink>

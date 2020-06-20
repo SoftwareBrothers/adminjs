@@ -21,7 +21,7 @@
     "admin-bro": "^2.2.8",
     "admin-bro-expressjs": "^2.0.5",
     "admin-bro-mongoose": "^0.5.2",
-    "admin-bro-sequelizejs": "^0.4.2",
+    "admin-bro-sequelizejs": "0.5.0",
     "argon2": "^0.26.2",
     "connect-mongo": "^3.2.0",
     "cypress": "^4.4.1",

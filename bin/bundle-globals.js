@@ -19,6 +19,8 @@ const React = require('react')
 const ReactDOM = require('react-dom')
 const env = require('../src/backend/bundler/bundler-env')
 
+const reactIsExport = ['isValidElementType', 'isContextConsumer', 'isElement', 'ForwardRef', 'typeOf']
+
 const run = async () => {
   const inputOptions = {
     input: `${__dirname}/../src/frontend/global-entry.js`,
@@ -38,7 +40,9 @@ const run = async () => {
         namedExports: {
           react: Object.keys(React),
           'react-dom': Object.keys(ReactDOM),
-          'react-is': ['isValidElementType', 'isContextConsumer', 'isElement', 'ForwardRef'],
+          'react-is': reactIsExport,
+          'node_modules/react-redux/node_modules/react-is/index.js': reactIsExport,
+          'node_modules/react-router/node_modules/react-is/index.js': reactIsExport,
         },
         ignoreGlobal: true,
       }),
