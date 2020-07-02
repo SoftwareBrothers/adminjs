@@ -84,12 +84,14 @@ const NoticeBox: React.FC<NoticeBoxPropsFromState & NoticeBoxDispatchFromState> 
   const notice = notices.length ? notices[notices.length - 1] : null
   if (notice) {
     return (
-      <NoticeElement
-        key={notice.id}
-        notice={notice}
-        drop={(): void => drop(notice.id)}
-        notifyProgress={notifyProgress}
-      />
+      <div data-testid="notice-wrapper">
+        <NoticeElement
+          key={notice.id}
+          notice={notice}
+          drop={(): void => drop(notice.id)}
+          notifyProgress={notifyProgress}
+        />
+      </div>
     )
   }
   return (

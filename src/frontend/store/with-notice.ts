@@ -29,7 +29,7 @@ const mapDispatchToProps = (dispatch): AddNoticeProps => ({
 })
 
 /**
- * High Order Component which allows you to post notice messages from your components
+ * Higher Order Component which allows you to post notice messages from your components
  *
  * It gives you the additional prop: `addNotice(noticeMessage)` taking {@link NoticeMessage}.
  *
