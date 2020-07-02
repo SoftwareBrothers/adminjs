@@ -1,6 +1,13 @@
 import ActionJSON from './action-json.interface'
 
-type ErrorMessage = { message: string }
+/**
+ * @memberof {RecordJSON}
+ * @alias ErrorMessage
+ */
+export type ErrorMessage = {
+  /** Human readable message */
+  message: string;
+}
 
 /**
  * JSON representation of an record

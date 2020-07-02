@@ -61,4 +61,18 @@ context('resources/Taggables/actions/new', () => {
       cy.get('td[data-property-name="name"]').should('not.exist')
     })
   })
+
+  describe('custom validation error', () => {
+    const name = 'forbidden'
+
+    it('show custom validation where forbidden name is given', () => {
+      cy.get('#name').type(name)
+      cy.get('[data-testid="property-edit-tags"] button').click()
+
+      cy.get('button[type="submit"]').click()
+
+      cy.get('[data-testid="property-edit-name"] .admin-bro_Text').contains('cannot be "forbidden"')
+      cy.get('[data-testid="notice-wrapper"]').contains('something wrong happened')
+    })
+  })
 })
