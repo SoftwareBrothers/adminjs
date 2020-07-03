@@ -41,6 +41,38 @@ const Wrapper = styled.div.attrs({
   }
 `
 
+const loadQuill = () => new Promise((resolve) => {
+  const id = 'quill-script-tag'
+  if (window.document.getElementById(id)) {
+    // it could be a situation where id exists but quill hasn't been loaded. In this case
+    // we check if Quill global variable exists
+    const checkIfLoaded = () => {
+      if (typeof Quill === 'function') {
+        resolve()
+      }
+    }
+    checkIfLoaded()
+    setInterval(checkIfLoaded, 500)
+    return
+  }
+  const script = window.document.createElement('script')
+  script.src = 'https://cdn.quilljs.com/1.3.6/quill.js'
+  script.async = true
+  script.defer = true
+  script.id = id
+  script.addEventListener('load', () => {
+    resolve()
+  })
+
+  const style = window.document.createElement('link')
+  style.rel = 'stylesheet'
+  style.type = 'text/css'
+  style.href = 'https://cdn.quilljs.com/1.3.6/quill.snow.css'
+
+  window.document.body.appendChild(script)
+  window.document.body.appendChild(style)
+})
+
 export default class Edit extends React.Component<EditPropertyProps> {
   private wysiwigRef: React.RefObject<any>
 
@@ -52,7 +84,9 @@ export default class Edit extends React.Component<EditPropertyProps> {
   }
 
   componentDidMount(): void {
-    this.setupWysiwig()
+    loadQuill().then(() => {
+      this.setupWysiwig()
+    })
   }
 
   shouldComponentUpdate(nextProps: EditPropertyProps): boolean {
@@ -89,6 +123,7 @@ export default class Edit extends React.Component<EditPropertyProps> {
         toolbar: toolbarOptions,
       },
       theme: 'snow',
+      ...property.custom,
     })
 
     this.quill.on('text-change', () => {

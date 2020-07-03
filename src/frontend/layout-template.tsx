@@ -69,8 +69,6 @@ const html = (admin: AdminBro, currentAdmin?: CurrentAdmin, location = '/'): str
 
       <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,700" type="text/css">
 
-      <link rel="stylesheet" type="text/css" href="https://cdn.quilljs.com/1.3.6/quill.snow.css">
-      <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
       <script src="${h.assetPath('global.bundle.js')}"></script>
       <script src="${h.assetPath('app.bundle.js')}"></script>
       <script src="${h.assetPath('components.bundle.js')}"></script>

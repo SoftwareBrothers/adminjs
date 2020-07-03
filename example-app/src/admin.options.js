@@ -11,9 +11,11 @@ const AdminExternalEmployee = require('./external-employees/external-employee.ad
 const AdminTaggable = require('./taggables/taggable.admin')
 const AdminProfession = require('./professions/profession.admin')
 const AdminTool = require('./tools/tool.admin')
+const AdminPage = require('./pages/page.admin')
 
 AdminBro.bundle('./components/sidebar-footer', 'SidebarFooter')
 AdminBro.bundle('./components/no-records', 'NoRecords')
+AdminBro.bundle('./components/quill-override')
 
 /** @type {import('admin-bro').AdminBroOptions} */
 const options = {
@@ -24,6 +26,7 @@ const options = {
     AdminExternalEmployee,
     AdminTool,
     AdminTaggable,
+    AdminPage,
   ],
   version: {
     admin: true,
