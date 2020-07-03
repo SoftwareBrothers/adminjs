@@ -140,6 +140,7 @@ const types: Record<PropertyType, any> = {
  *     name: 'John',
  *     gender: 'male',
  *   },
+ *   errors: {},
  *   recordActions: [],
  * }
  * const Wrapper = () => {
