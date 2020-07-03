@@ -348,16 +348,16 @@ class ResourceDecorator {
       actions: Object.values(this.actions).map(action => action.toJSON()),
       listProperties: this.getProperties({
         where: 'list', max: DEFAULT_MAX_COLUMNS_IN_LIST,
-      }).map(property => property.toJSON()),
+      }).map(property => property.toJSON('list')),
       editProperties: this.getProperties({
         where: 'edit',
-      }).map(property => property.toJSON()),
+      }).map(property => property.toJSON('edit')),
       showProperties: this.getProperties({
         where: 'show',
-      }).map(property => property.toJSON()),
+      }).map(property => property.toJSON('show')),
       filterProperties: this.getProperties({
         where: 'filter',
-      }).map(property => property.toJSON()),
+      }).map(property => property.toJSON('filter')),
     }
   }
 }

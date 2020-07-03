@@ -6,6 +6,9 @@ const options = {
     randomContent: {
       isRequired: true,
     },
+    'affects.speed.easy': {
+      isVisible: false,
+    },
   },
 }
 

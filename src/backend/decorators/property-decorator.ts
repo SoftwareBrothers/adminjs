@@ -3,7 +3,7 @@ import PropertyOptions, { AvailablePropertyOptions } from './property-options.in
 import BaseResource from '../adapters/base-resource'
 import BaseProperty, { PropertyType } from '../adapters/base-property'
 import ResourceDecorator from './resource-decorator'
-import PropertyJSON from './property-json.interface'
+import PropertyJSON, { PropertyPlace } from './property-json.interface'
 
 /**
  * Decorates property
@@ -145,16 +145,16 @@ class PropertyDecorator {
   /**
    * Indicates if given property should be visible
    *
-   * @param {boolean} element      it could be either "list", "edit" or "show"
+   * @param {'list' | 'edit' | 'show' | 'filter'} where
    */
-  isVisible(element): boolean {
+  isVisible(where: PropertyPlace): boolean {
     if (typeof this.options.isVisible === 'object') {
-      return this.options.isVisible[element]
+      return !!this.options.isVisible[where]
     }
     if (typeof this.options.isVisible === 'boolean') {
       return this.options.isVisible
     }
-    if (element === 'edit') {
+    if (where === 'edit') {
       return this.property.isEditable()
     }
     return this.property.isVisible()
@@ -205,9 +205,11 @@ class PropertyDecorator {
   /**
    * Returns JSON representation of a property
    *
+   * @param {PropertyPlace} [where]
+   *
    * @return {PropertyJSON}
    */
-  toJSON(): PropertyJSON {
+  toJSON(where?: PropertyPlace): PropertyJSON {
     return {
       isTitle: this.isTitle(),
       isId: this.isId(),
@@ -222,7 +224,9 @@ class PropertyDecorator {
       type: this.type(),
       reference: this.property.reference(),
       components: this.options.components,
-      subProperties: this.subProperties().map(subProperty => subProperty.toJSON()),
+      subProperties: this.subProperties()
+        .filter(subProperty => !where || subProperty.isVisible(where))
+        .map(subProperty => subProperty.toJSON(where)),
       isArray: this.property.isArray(),
       resourceId: this._resource.id(),
     }

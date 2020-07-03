@@ -27,4 +27,8 @@ context('resources/Profession/actions/new', () => {
         expect(contentValue).to.eq('""')
       })
   })
+
+  it('does not show hidden nested property', () => {
+    cy.get('[data-testid="property-edit-affects.speed.easy"]').should('not.exist')
+  })
 })

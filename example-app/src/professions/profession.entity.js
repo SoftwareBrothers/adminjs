@@ -1,5 +1,15 @@
 const mongoose = require('mongoose')
 
+const AffectsTypeSchema = new mongoose.Schema({
+  easy: String,
+  medium: String,
+  height: String,
+})
+
+const AffectsSchema = new mongoose.Schema({
+  speed: AffectsTypeSchema,
+})
+
 const ProfessionSchema = new mongoose.Schema({
   name: {
     type: String,
@@ -14,6 +24,9 @@ const ProfessionSchema = new mongoose.Schema({
   },
   otherNotRequired: {
     type: String,
+  },
+  affects: {
+    type: AffectsSchema,
   },
 })
 
