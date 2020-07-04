@@ -2,14 +2,13 @@ import React from 'react'
 import { useSelector } from 'react-redux'
 
 import SidebarBranding from './sidebar-branding'
-import SidebarParent from './sidebar-parent'
 import SidebarPages from './sidebar-pages'
-import groupResources from './utils/group-resources'
 import { ReduxState } from '../../../store/store'
 import { Navigation, Box, Label } from '../../design-system'
 import SidebarFooter from './sidebar-footer'
 import { useTranslation } from '../../../hooks/use-translation'
 import { cssClass } from '../../design-system/utils/css-class'
+import SidebarResourceSection from './sidebar-resource-section'
 
 type Props = {
   isVisible: boolean;
@@ -33,9 +32,7 @@ const Sidebar: React.FC<Props> = (props) => {
       </Box>
       <Box flexGrow={1} className={cssClass('Resources')}>
         <Label uppercase ml="lg" color="grey60">{translateLabel('navigation')}</Label>
-        {groupResources(resources).map(parent => (
-          <SidebarParent parent={parent} key={parent.name} />
-        ))}
+        <SidebarResourceSection resources={resources} />
       </Box>
       <SidebarPages pages={pages} />
       {branding.softwareBrothers && <SidebarFooter />}
