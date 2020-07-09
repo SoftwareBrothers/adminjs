@@ -75,7 +75,12 @@ const Edit: FC<CombinedProps> = (props) => {
 
   return (
     <FormGroup error={Boolean(error)}>
-      <Label htmlFor={property.name}>{property.label}</Label>
+      <Label
+        htmlFor={property.name}
+        required={property.isRequired}
+      >
+        {property.label}
+      </Label>
       <Select
         cacheOptions
         value={selectedOption}

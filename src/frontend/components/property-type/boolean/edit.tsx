@@ -26,7 +26,13 @@ const Edit: React.FC<EditPropertyProps> = (props) => {
         checked={value}
         disabled={property.isDisabled}
       />
-      <Label inline htmlFor={property.name}>{property.label}</Label>
+      <Label
+        inline
+        htmlFor={property.name}
+        required={property.isRequired}
+      >
+        {property.label}
+      </Label>
       <FormMessage>{error && error.message}</FormMessage>
     </FormGroup>
   )

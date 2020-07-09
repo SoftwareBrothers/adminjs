@@ -23,7 +23,12 @@ const Edit: React.FC<EditPropertyProps> = (props) => {
 
   return (
     <FormGroup error={!!error}>
-      <Label htmlFor={property.name}>{property.label}</Label>
+      <Label
+        htmlFor={property.name}
+        required={property.isRequired}
+      >
+        {property.label}
+      </Label>
       <Input
         as="textarea"
         rows={(value.match(/\n/g) || []).length + 1}

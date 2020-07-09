@@ -11,7 +11,12 @@ const Edit: React.FC<EditPropertyProps> = (props) => {
 
   return (
     <FormGroup error={!!error}>
-      <Label htmlFor={property.name}>{property.label}</Label>
+      <Label
+        htmlFor={property.name}
+        required={property.isRequired}
+      >
+        {property.label}
+      </Label>
       <DatePicker
         value={value}
         disabled={property.isDisabled}
