@@ -124,7 +124,12 @@ export default class Edit extends React.Component<Props> {
     const error = record.errors && record.errors[property.name]
     return (
       <FormGroup error={!!error} data-testid={testId}>
-        <Label htmlFor={property.name}>{property.label}</Label>
+        <Label
+          htmlFor={property.name}
+          required={property.isRequired}
+        >
+          {property.label}
+        </Label>
         {this.renderInput()}
         <FormMessage>{error && error.message}</FormMessage>
       </FormGroup>

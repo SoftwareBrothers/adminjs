@@ -12,7 +12,12 @@ const Edit: React.FC<Props & EditPropertyProps> = (props) => {
   const error = record.errors && record.errors[property.name]
   return (
     <FormGroup error={!!error}>
-      <Label htmlFor={property.name}>{property.label}</Label>
+      <Label
+        htmlFor={property.name}
+        required={property.isRequired}
+      >
+        {property.label}
+      </Label>
       <Section>
         {property.subProperties.filter(subProperty => !subProperty.isId).map(subProperty => (
           <ItemComponent
