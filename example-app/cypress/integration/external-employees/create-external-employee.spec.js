@@ -20,4 +20,11 @@ context('resources/ExternalEmployees/actions/new', () => {
         expect(contentValue).to.eq('"*"')
       })
   })
+
+  it('format date (only) in datepicker without time', () => {
+    const hiredAt = new Date().toISOString().slice(0, 10)
+    cy.get('[data-testid="property-edit-hiredAt"] button').click()
+    cy.get('.react-datepicker__day--today').click()
+    cy.get('[data-testid="property-edit-hiredAt"] input').should('have.value', hiredAt)
+  })
 })
