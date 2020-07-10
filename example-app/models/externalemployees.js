@@ -24,7 +24,7 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.BOOLEAN,
     },
     hiredAt: {
-      type: DataTypes.DATE,
+      type: DataTypes.DATEONLY,
     },
     role: {
       type: DataTypes.ENUM(['admin', 'guest']),
