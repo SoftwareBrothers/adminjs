@@ -141,7 +141,7 @@ const formatTime = (date: Date): string => `${pad(date.getHours())}:${pad(date.g
 
 const formatDateTime = (date: Date): string => `${formatDate(date)} ${formatTime(date)}`
 
-const formatType = (date: Date, propertyType: string): string => {
+const formatType = (date: Date, propertyType: string | undefined): string => {
   if (propertyType === 'date') {
     return formatDate(date)
   }
