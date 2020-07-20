@@ -47,6 +47,7 @@ const Edit: FC<CombinedProps> = (props) => {
   const selectedId = record?.params[property.name] as string | undefined
   const [loadedRecord, setLoadedRecord] = useState<RecordJSON | undefined>()
   const [loadingRecord, setLoadingRecord] = useState(0)
+  const isClearable = !property.isRequired
   const selectedValue = record?.populated[property.name] ?? loadedRecord
   const selectedOption = (selectedId && selectedValue) ? {
     value: selectedValue.id,
@@ -90,6 +91,7 @@ const Edit: FC<CombinedProps> = (props) => {
         onChange={handleChange}
         isDisabled={property.isDisabled}
         isLoading={loadingRecord}
+        isClearable={isClearable}
       />
       <FormMessage>{error?.message}</FormMessage>
     </FormGroup>
