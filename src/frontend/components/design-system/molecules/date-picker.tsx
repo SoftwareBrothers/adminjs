@@ -28,6 +28,7 @@ const StyledDatePicker = styled(InputGroup)`
 
   & .react-datepicker__navigation--next {
     border-left-color: ${({ theme }): string => theme.colors.primary60};
+    top: 16px;
   }
   & .react-datepicker__navigation--next:hover {
     border-left-color: ${({ theme }): string => theme.colors.primary100};
@@ -35,6 +36,7 @@ const StyledDatePicker = styled(InputGroup)`
 
   & .react-datepicker__navigation--previous {
     border-right-color: ${({ theme }): string => theme.colors.primary60};
+    top: 16px;
   }
   & .react-datepicker__navigation--previous:hover {
     border-right-color: ${({ theme }): string => theme.colors.primary100};
@@ -42,7 +44,10 @@ const StyledDatePicker = styled(InputGroup)`
 
   & .react-datepicker__navigation {
     outline: none;
-    top: 16px;
+  }
+
+  & .react-datepicker__year-read-view--down-arrow {
+    top: 5px;
   }
 
   & .react-datepicker__header {
