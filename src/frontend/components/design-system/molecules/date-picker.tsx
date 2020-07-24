@@ -128,13 +128,15 @@ export type DatePickerProps = {
    */
   onChange: (date: string) => void;
   /**
+   * Any custom props to pass down to the ReactDatePicker
    * property type, date or datetime
    */
   propertyType?: string;
+
   /**
-   * Indicates if year dropdown should be seen
+   * Any custom props to pass down to the ReactDatePicker
    */
-  showYearDropdown?: boolean;
+  [key: string]: any;
 }
 
 const pad = (n: number): string => (n < 10 ? `0${n.toString()}` : n.toString())
