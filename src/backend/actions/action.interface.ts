@@ -556,7 +556,7 @@ export default interface Action <T extends ActionResponse> {
 
   /**
    * The max width of action HTML container.
-   * You can put here an actual size in px or an array wf widths, where different values
+   * You can put here an actual size in px or an array of widths, where different values
    * will be responsible for different breakpoints.
    * It is directly passed to action's wrapping {@link Box} component, to its `width` property.
    *
