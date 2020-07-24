@@ -28,6 +28,7 @@ const StyledDatePicker = styled(InputGroup)`
 
   & .react-datepicker__navigation--next {
     border-left-color: ${({ theme }): string => theme.colors.primary60};
+    top: 16px;
   }
   & .react-datepicker__navigation--next:hover {
     border-left-color: ${({ theme }): string => theme.colors.primary100};
@@ -35,6 +36,7 @@ const StyledDatePicker = styled(InputGroup)`
 
   & .react-datepicker__navigation--previous {
     border-right-color: ${({ theme }): string => theme.colors.primary60};
+    top: 16px;
   }
   & .react-datepicker__navigation--previous:hover {
     border-right-color: ${({ theme }): string => theme.colors.primary100};
@@ -42,7 +44,10 @@ const StyledDatePicker = styled(InputGroup)`
 
   & .react-datepicker__navigation {
     outline: none;
-    top: 16px;
+  }
+
+  & .react-datepicker__year-read-view--down-arrow {
+    top: 5px;
   }
 
   & .react-datepicker__header {
@@ -124,14 +129,31 @@ export type DatePickerProps = {
   onChange: (date: string) => void;
   /**
    * Any custom props to pass down to the ReactDatePicker
+   * property type, date or datetime
+   */
+  propertyType?: string;
+
+  /**
+   * Any custom props to pass down to the ReactDatePicker
    */
   [key: string]: any;
 }
 
 const pad = (n: number): string => (n < 10 ? `0${n.toString()}` : n.toString())
 
-const format = (date: Date): string => `${date.getFullYear()}-${pad(date.getMonth() + 1)
-}-${pad(date.getDate())} ${pad(date.getHours())}:${pad(date.getMinutes())}`
+const formatDate = (date: Date): string => `${date.getFullYear()}-${pad(date.getMonth() + 1)
+}-${pad(date.getDate())}`
+
+const formatTime = (date: Date): string => `${pad(date.getHours())}:${pad(date.getMinutes())}`
+
+const formatDateTime = (date: Date): string => `${formatDate(date)} ${formatTime(date)}`
+
+const formatType = (date: Date, propertyType: string | undefined): string => {
+  if (propertyType === 'date') {
+    return formatDate(date)
+  }
+  return formatDateTime(date)
+}
 
 /**
  * Component responsible for showing dates. It is a wrapper to
@@ -149,7 +171,7 @@ const format = (date: Date): string => `${date.getFullYear()}-${pad(date.getMont
  * )
  */
 export const DatePicker: React.FC<DatePickerProps> = (props) => {
-  const { value, onChange, disabled, ...other } = props
+  const { value, onChange, disabled, propertyType, ...other } = props
 
   const [hidden, setHidden] = useState(true)
 
@@ -162,12 +184,12 @@ export const DatePicker: React.FC<DatePickerProps> = (props) => {
       dateValue = new Date(dateNum)
     }
   } else if (value && value.constructor.name === 'Date') {
-    stringValue = format(value as Date)
+    stringValue = formatType(value as Date, propertyType)
   }
 
   const onDatePickerChange = (date: Date): void => {
     if (!disabled) {
-      onChange(format(date))
+      onChange(formatType(date, propertyType))
     }
   }
 
