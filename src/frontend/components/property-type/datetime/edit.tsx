@@ -21,7 +21,7 @@ const Edit: React.FC<EditPropertyProps> = (props) => {
         value={value}
         disabled={property.isDisabled}
         onChange={(data: string): void => onChange(property.name, data)}
-        showYearDropdown
+        {...property.custom}
       />
       <FormMessage>{error && error.message}</FormMessage>
     </FormGroup>

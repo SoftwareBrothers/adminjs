@@ -123,10 +123,6 @@ export type DatePickerProps = {
    */
   onChange: (date: string) => void;
   /**
-   * Indicates if year dropdown should be seen
-   */
-  showYearDropdown?: boolean;
-  /**
    * Any custom props to pass down to the ReactDatePicker
    */
   [key: string]: any;
