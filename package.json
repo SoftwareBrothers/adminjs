@@ -1,6 +1,6 @@
 {
   "name": "admin-bro",
-  "version": "2.8.0",
+  "version": "2.9.0-beta.1",
   "description": "Admin panel for apps written in node.js",
   "main": "index.js",
   "types": "index.d.ts",
@@ -127,6 +127,7 @@
     "@types/flat": "^0.0.28",
     "@types/lodash": "^4.14.141",
     "@types/mocha": "^5.2.7",
+    "@types/react-datepicker": "^3.1.0",
     "@types/react-dom": "^16.9.8",
     "@types/react-redux": "^7.1.9",
     "@types/react-router": "^5.1.7",

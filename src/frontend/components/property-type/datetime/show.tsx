@@ -7,7 +7,7 @@ import { EditPropertyProps } from '../base-property-props'
 export default class Show extends React.PureComponent<EditPropertyProps> {
   render(): ReactNode {
     const { property, record } = this.props
-    const value = mapValue(record.params[property.name])
+    const value = mapValue(record.params[property.name], property.type)
 
     return (
       <FormGroup>

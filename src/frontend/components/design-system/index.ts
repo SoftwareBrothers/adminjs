@@ -27,5 +27,6 @@ export * from './molecules/drawer'
 export * from './molecules/logged-user'
 export * from './molecules/nav-group'
 export * from './molecules/stepper'
+export * from './utils/date-utils'
 
 export * from './templates/navigation'

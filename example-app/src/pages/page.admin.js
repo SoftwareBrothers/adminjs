@@ -11,6 +11,12 @@ const options = {
         },
       },
     },
+    createdDate: {
+      type: 'date',
+    },
+    createdDateTime: {
+      type: 'datetime',
+    },
   },
 }
 
