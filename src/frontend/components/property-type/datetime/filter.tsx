@@ -23,11 +23,13 @@ const Filter: React.FC<FilterPropertyProps> = (props) => {
         <DatePicker
           value={fromValue}
           onChange={(data: string): void => onChange(fromKey, data)}
+          propertyType={property.type}
         />
         <Label mt="default">- To: </Label>
         <DatePicker
           value={toValue}
           onChange={(data: string): void => onChange(toKey, data)}
+          propertyType={property.type}
         />
       </FormGroup>
     </React.Fragment>

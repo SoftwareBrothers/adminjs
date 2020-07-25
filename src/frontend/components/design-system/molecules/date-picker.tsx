@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import ReactDatePicker from 'react-datepicker'
+import ReactDatePicker, { ReactDatePickerProps } from 'react-datepicker'
 import styled from 'styled-components'
 
 import styles from '../utils/datepicker.styles'
@@ -8,7 +8,8 @@ import { Button } from '../atoms/button'
 import { Icon } from '../atoms/icon'
 import { InputGroup } from './form-group'
 import { cssClass } from '../utils/css-class'
-
+import { PropertyType } from '../../../../backend/adapters/base-property'
+import { formatDateProperty } from '../utils/date-utils'
 
 const StyledDatePicker = styled(InputGroup)`
   ${styles};
@@ -109,12 +110,16 @@ const DatePickerWrapper = styled.div`
   top: ${({ theme }): string => theme.space.xxl};
 `
 
+type CustomProps = Partial<Omit<ReactDatePickerProps, 'value' | 'disabled' | 'onChange'>>
+
 /**
  * Props for DatePicker
  * @memberof DatePicker
  * @alias DatePickerProps
+ * @property {any} {...}    Any custom props to pass down to the ReactDatePicker
+ * @see {https://reactdatepicker.com/}
  */
-export type DatePickerProps = {
+export type DatePickerProps = CustomProps & {
   /**
    * If datepicker should be disabled
    */
@@ -128,31 +133,9 @@ export type DatePickerProps = {
    */
   onChange: (date: string) => void;
   /**
-   * Any custom props to pass down to the ReactDatePicker
-   * property type, date or datetime
+   * property type, could be either 'date' or 'datetime'
    */
-  propertyType?: string;
-
-  /**
-   * Any custom props to pass down to the ReactDatePicker
-   */
-  [key: string]: any;
-}
-
-const pad = (n: number): string => (n < 10 ? `0${n.toString()}` : n.toString())
-
-const formatDate = (date: Date): string => `${date.getFullYear()}-${pad(date.getMonth() + 1)
-}-${pad(date.getDate())}`
-
-const formatTime = (date: Date): string => `${pad(date.getHours())}:${pad(date.getMinutes())}`
-
-const formatDateTime = (date: Date): string => `${formatDate(date)} ${formatTime(date)}`
-
-const formatType = (date: Date, propertyType: string | undefined): string => {
-  if (propertyType === 'date') {
-    return formatDate(date)
-  }
-  return formatDateTime(date)
+  propertyType?: PropertyType;
 }
 
 /**
@@ -176,20 +159,21 @@ export const DatePicker: React.FC<DatePickerProps> = (props) => {
   const [hidden, setHidden] = useState(true)
 
   let dateValue: Date | undefined
-  let stringValue: string | undefined = value && value.toString()
+  let stringValue: string | undefined
 
   if (value && value.constructor.name !== 'Date') {
     const dateNum = Date.parse(value as string) || undefined
     if (dateNum) {
       dateValue = new Date(dateNum)
+      stringValue = formatDateProperty(dateValue, propertyType)
     }
   } else if (value && value.constructor.name === 'Date') {
-    stringValue = formatType(value as Date, propertyType)
+    stringValue = formatDateProperty(value as Date, propertyType)
   }
 
   const onDatePickerChange = (date: Date): void => {
     if (!disabled) {
-      onChange(formatType(date, propertyType))
+      onChange(formatDateProperty(date, propertyType))
     }
   }
 
@@ -217,7 +201,13 @@ export const DatePicker: React.FC<DatePickerProps> = (props) => {
         </Button>
         {!hidden ? (
           <DatePickerWrapper>
-            <ReactDatePicker selected={dateValue} onChange={onDatePickerChange} inline {...other} />
+            <ReactDatePicker
+              selected={dateValue}
+              onChange={onDatePickerChange}
+              inline
+              showTimeInput={propertyType === 'datetime'}
+              {...other}
+            />
           </DatePickerWrapper>
         ) : ''}
       </StyledDatePicker>

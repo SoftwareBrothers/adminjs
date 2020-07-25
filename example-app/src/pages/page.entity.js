@@ -8,6 +8,8 @@ const PageSchema = new mongoose.Schema({
   content: {
     type: String,
   },
+  createdDate: Date,
+  createdDateTime: Date,
 })
 
 const Page = mongoose.model('Page', PageSchema)
