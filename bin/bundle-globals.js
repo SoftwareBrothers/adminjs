@@ -20,6 +20,7 @@ const ReactDOM = require('react-dom')
 const env = require('../src/backend/bundler/bundler-env')
 
 const reactIsExport = ['isValidElementType', 'isContextConsumer', 'isElement', 'ForwardRef', 'typeOf']
+const { theme, ...designSystem } = require('@admin-bro/design-system')
 
 const run = async () => {
   const inputOptions = {
@@ -27,7 +28,8 @@ const run = async () => {
     plugins: [
       resolve({
         extensions: ['.mjs', '.js', '.jsx', '.json'],
-        jsnext: true,
+        mainFields: ['browser'],
+        preferBuiltins: true,
       }),
       replace({
         'process.env.NODE_ENV': JSON.stringify(env),
@@ -43,6 +45,7 @@ const run = async () => {
           'react-is': reactIsExport,
           'node_modules/react-redux/node_modules/react-is/index.js': reactIsExport,
           'node_modules/react-router/node_modules/react-is/index.js': reactIsExport,
+          '@admin-bro/design-system/build/index.js': Object.keys(designSystem),
         },
         ignoreGlobal: true,
       }),

@@ -1,11 +1,10 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
+import { Box, cssClass } from '@admin-bro/design-system'
 
 import ResourceJSON from '../../../backend/decorators/resource-json.interface'
 import RecordJSON from '../../../backend/decorators/record-json.interface'
-import { Box } from '../design-system'
-import { cssClass } from '../design-system/utils/css-class'
 import ViewHelpers from '../../../backend/utils/view-helpers'
 
 const BreadcrumbLink = styled(Link)`

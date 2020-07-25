@@ -1,10 +1,9 @@
 import React, { ReactNode } from 'react'
 import Select from 'react-select'
-
 import { withTheme, ThemeProps, DefaultTheme } from 'styled-components'
-import { filterStyles } from '../../../styles/select-styles'
+import { FormGroup, Label, Input, filterStyles } from '@admin-bro/design-system'
+
 import { FilterPropertyProps } from '../base-property-props'
-import { FormGroup, Label, Input } from '../../design-system'
 
 class Filter extends React.PureComponent<FilterPropertyProps & ThemeProps<DefaultTheme>> {
   constructor(props) {

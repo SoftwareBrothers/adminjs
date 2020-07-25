@@ -20,6 +20,7 @@ import ReactSelect from 'react-select/lib/Async'
 import * as CarbonIcons from '@carbon/icons-react'
 import i18n from 'i18next'
 import * as ReactI18Next from 'react-i18next'
+import * as DesignSystem from '@admin-bro/design-system'
 
 window.React = React
 window.ReactDOM = ReactDOM
@@ -38,6 +39,7 @@ window.CarbonIcons = CarbonIcons
 window.ReactSelect = ReactSelect
 window.i18n = i18n
 window.ReactI18Next = ReactI18Next
+window.DesignSystem = DesignSystem
 
 export {
   React,

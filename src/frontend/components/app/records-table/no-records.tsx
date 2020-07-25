@@ -1,9 +1,9 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { Text, Button, Icon, InfoBox } from '@admin-bro/design-system'
 
 import ViewHelpers from '../../../../backend/utils/view-helpers'
 import ResourceJSON from '../../../../backend/decorators/resource-json.interface'
-import { Text, Button, Icon, InfoBox } from '../../design-system'
 import { useTranslation } from '../../../hooks'
 import allowOverride from '../../../hoc/allow-override'
 

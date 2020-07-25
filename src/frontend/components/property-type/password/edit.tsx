@@ -1,7 +1,7 @@
 import React, { useState, memo } from 'react'
+import { Label, Input, FormGroup, InputGroup, FormMessage, Button, Icon } from '@admin-bro/design-system'
 
 import { EditPropertyProps } from '../base-property-props'
-import { Label, Input, FormGroup, InputGroup, FormMessage, Button, Icon } from '../../design-system'
 import { recordPropertyIsEqual } from '../record-property-is-equal'
 
 const Edit: React.FC<EditPropertyProps> = (props) => {

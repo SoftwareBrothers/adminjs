@@ -1,9 +1,9 @@
 import React from 'react'
 import { withRouter } from 'react-router-dom'
 import { RouteComponentProps } from 'react-router'
+import { Text } from '@admin-bro/design-system'
 
 import ResourceJSON from '../../../../backend/decorators/resource-json.interface'
-import { Text } from '../../design-system'
 import SidebarLink from './styled/sidebar-link.styled'
 
 

@@ -1,14 +1,14 @@
 import React, { useState, useEffect, useCallback } from 'react'
 import { useHistory } from 'react-router-dom'
+import {
+  Placeholder, TableRow, TableCell, CheckBox, DropDown,
+  DropDownTrigger, Icon, DropDownMenu, DropDownItem,
+} from '@admin-bro/design-system'
 
 import ActionButton from '../action-button'
 import PropertyType from '../../property-type'
 import ResourceJSON from '../../../../backend/decorators/resource-json.interface'
 import RecordJSON from '../../../../backend/decorators/record-json.interface'
-import {
-  Placeholder, TableRow, TableCell, CheckBox, DropDown,
-  DropDownTrigger, Icon, DropDownMenu, DropDownItem,
-} from '../../design-system'
 import ViewHelpers from '../../../../backend/utils/view-helpers'
 import { display } from './records-table-header'
 import { ActionResponse, RecordActionResponse } from '../../../../backend/actions/action.interface'

@@ -22,8 +22,7 @@ const external = [
   'styled-system',
   'prop-types',
   'admin-bro',
-  // TODO remove next line in version 2.0, see comment in src/frontend/bundle-entry.jsx
-  'admin-bro/components',
+  '@admin-bro/design-system',
   'admin-bro/property-types',
   'admin-bro/types',
   'admin-bro/style',
@@ -52,7 +51,7 @@ const globals = {
   'react-router': 'ReactRouter',
   'react-router-dom': 'ReactRouterDOM',
   'admin-bro': 'AdminBro',
-  'admin-bro/components': 'AdminBro.Components',
+  '@admin-bro/design-system': 'DesignSystem',
   'admin-bro/property-types': 'AdminBro.PropertyTypes',
   'admin-bro/types': 'AdminBro.types',
   'admin-bro/style': 'AdminBro.style',

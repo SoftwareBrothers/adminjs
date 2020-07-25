@@ -1,8 +1,8 @@
 import React from 'react'
+import { CheckBox, TableHead, TableRow, TableCell } from '@admin-bro/design-system'
 
 import PropertyHeader from './property-header'
 import PropertyJSON from '../../../../backend/decorators/property-json.interface'
-import { CheckBox, TableHead, TableRow, TableCell } from '../../design-system'
 
 /**
  * @memberof RecordsTableHeader

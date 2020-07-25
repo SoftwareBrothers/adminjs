@@ -1,7 +1,8 @@
 import React from 'react'
+import { Icon } from '@admin-bro/design-system'
+
 import { useTranslation } from '../../../hooks'
 import ResourceJSON from '../../../../backend/decorators/resource-json.interface'
-import { Icon } from '../../design-system'
 import PropertyJSON from '../../../../backend/decorators/property-json.interface'
 
 type AddNewItemButtonProps = {

@@ -4,16 +4,15 @@ import { BrowserRouter } from 'react-router-dom'
 import { ThemeProvider } from 'styled-components'
 import { initReactI18next } from 'react-i18next'
 import i18n from 'i18next'
+import * as Components from '@admin-bro/design-system'
 
 import App from './components/application'
 import BasePropertyComponent from './components/property-type'
 import createStore from './store/store'
 import ViewHelpers from '../backend/utils/view-helpers'
-import * as Components from './components/design-system'
 import * as AppComponents from './components/app'
 import * as Hooks from './hooks'
 import ApiClient from './utils/api-client'
-import * as style from './styles/variables'
 import * as types from './types'
 import withNotice from './store/with-notice'
 
@@ -55,7 +54,7 @@ export default {
   ViewHelpers,
   UserComponents: {},
   ApiClient,
-  style,
+  style: Components.theme,
   BasePropertyComponent,
   env,
   ...Components,

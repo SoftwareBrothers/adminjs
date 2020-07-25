@@ -1,12 +1,11 @@
 import React, { FC, useState, useEffect } from 'react'
 import Select from 'react-select/lib/Async'
 import { withTheme, DefaultTheme } from 'styled-components'
+import { FormGroup, Label, FormMessage, selectStyles } from '@admin-bro/design-system'
 
 import ApiClient from '../../../utils/api-client'
-import selectStyles from '../../../styles/select-styles'
 import { EditPropertyProps, SelectRecord } from '../base-property-props'
 import RecordJSON from '../../../../backend/decorators/record-json.interface'
-import { FormGroup, Label, FormMessage } from '../../design-system'
 
 type CombinedProps = EditPropertyProps & {theme: DefaultTheme}
 type SelectRecordEnhanced = SelectRecord & {

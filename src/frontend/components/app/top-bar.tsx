@@ -1,13 +1,13 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
 import styled from 'styled-components'
+import { cssClass, Box, Icon } from '@admin-bro/design-system'
 
 import LoggedIn from './logged-in'
 import Version from './version'
 
 import { ReduxState } from '../../store/store'
-import { Box, Icon } from '../design-system'
-import { cssClass } from '../design-system/utils/css-class'
+
 
 const NavBar = styled(Box)`
   height: ${({ theme }): string => theme.sizes.navbarHeight};

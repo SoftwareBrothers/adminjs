@@ -1,10 +1,10 @@
 /* eslint-disable jsx-a11y/label-has-for */
 import React, { ReactNode } from 'react'
 import { findDOMNode } from 'react-dom'
+import { FormGroup, Label, FormMessage } from '@admin-bro/design-system'
 
 import styled from 'styled-components'
 import { EditPropertyProps } from '../base-property-props'
-import { FormGroup, Label, FormMessage } from '../../design-system'
 
 const toolbarOptions = [
   [{ header: [1, 2, 3, 4, 5, 6, false] }],

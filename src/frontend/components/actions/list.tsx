@@ -1,10 +1,9 @@
 import React, { useEffect } from 'react'
-
+import { Box, Pagination, Text } from '@admin-bro/design-system'
 import { useHistory, useLocation } from 'react-router'
 
 import RecordsTable from '../app/records-table/records-table'
 import { ActionProps } from './action.props'
-import { Box, Pagination, Text } from '../design-system'
 import useRecords from '../../hooks/use-records'
 import useSelectedRecords from '../../hooks/use-selected-records'
 import { REFRESH_KEY } from './utils/append-force-refresh'

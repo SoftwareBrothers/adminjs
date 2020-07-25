@@ -1,5 +1,5 @@
 import React, { ReactNode } from 'react'
-import { MessageBox, Text } from '../design-system'
+import { MessageBox, Text } from '@admin-bro/design-system'
 import { useTranslation } from '../../hooks'
 
 type Props = {

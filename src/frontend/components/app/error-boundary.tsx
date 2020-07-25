@@ -1,6 +1,6 @@
 import React, { ReactNode } from 'react'
-import { MessageBox } from '../design-system/molecules/message-box'
-import { Text } from '../design-system'
+import { Text, MessageBox } from '@admin-bro/design-system'
+
 import { useTranslation } from '../../hooks'
 
 type State = {

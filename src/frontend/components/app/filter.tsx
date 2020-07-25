@@ -1,10 +1,18 @@
 import React, { MouseEvent, SyntheticEvent, useState, useEffect } from 'react'
 import { useHistory, useLocation, useRouteMatch } from 'react-router-dom'
+import {
+  Box,
+  H3,
+  Button,
+  Icon,
+  Drawer,
+  DrawerContent,
+  DrawerFooter,
+} from '@admin-bro/design-system'
 
 import PropertyType from '../property-type'
 import ResourceJSON from '../../../backend/decorators/resource-json.interface'
 import RecordJSON from '../../../backend/decorators/record-json.interface'
-import { Box, H3, Button, Icon, Drawer, DrawerContent, DrawerFooter } from '../design-system'
 import { useTranslation } from '../../hooks'
 
 type Props = {

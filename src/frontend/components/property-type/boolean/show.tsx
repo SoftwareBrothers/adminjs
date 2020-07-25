@@ -1,7 +1,7 @@
 import React, { ReactNode } from 'react'
+import { FormGroup, Label } from '@admin-bro/design-system'
 
 import BooleanPropertyValue from './boolean-property-value'
-import { FormGroup, Label } from '../../design-system'
 import { EditPropertyProps } from '../base-property-props'
 
 export default class Show extends React.PureComponent<EditPropertyProps> {

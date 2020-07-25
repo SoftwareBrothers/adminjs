@@ -1,7 +1,7 @@
 import React from 'react'
 
 import styled from 'styled-components'
-import { Box, BoxProps, DrawerContent, DrawerFooter } from '../../design-system'
+import { Box, BoxProps, DrawerContent, DrawerFooter } from '@admin-bro/design-system'
 
 const StyledWrapper = styled(Box)`
   & ${DrawerContent} {

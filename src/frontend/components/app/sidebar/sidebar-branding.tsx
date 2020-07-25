@@ -1,9 +1,10 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
+import { H5 } from '@admin-bro/design-system'
+
 import ViewHelpers from '../../../../backend/utils/view-helpers'
 import { BrandingOptions } from '../../../../admin-bro-options.interface'
-import { H5 } from '../../design-system'
 
 const LogoLink = styled(Link)`
   display: flex;

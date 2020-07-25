@@ -1,7 +1,7 @@
 import React, { useCallback, memo } from 'react'
+import { Input, Label, FormGroup, FormMessage } from '@admin-bro/design-system'
 
 import { EditPropertyProps } from '../base-property-props'
-import { Input, Label, FormGroup, FormMessage } from '../../design-system'
 import { recordPropertyIsEqual } from '../record-property-is-equal'
 
 const Edit: React.FC<EditPropertyProps> = (props) => {

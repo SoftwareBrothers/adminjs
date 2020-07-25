@@ -1,10 +1,9 @@
 import React from 'react'
+import { NavGroup, Box, cssClass } from '@admin-bro/design-system'
 
 import SidebarResource from './sidebar-resource'
 import ResourceJSON from '../../../../backend/decorators/resource-json.interface'
-import { NavGroup, Box } from '../../design-system'
 import { useTranslation } from '../../../hooks'
-import { cssClass } from '../../design-system/utils/css-class'
 
 
 type Props = {

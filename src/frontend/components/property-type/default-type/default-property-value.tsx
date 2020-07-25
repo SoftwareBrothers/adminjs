@@ -1,6 +1,6 @@
 import React from 'react'
+import { Badge } from '@admin-bro/design-system'
 import { ShowPropertyProps } from '../base-property-props'
-import { Badge } from '../../design-system'
 
 const DefaultPropertyValue: React.FC<ShowPropertyProps> = (props) => {
   const { property, record } = props

@@ -1,9 +1,9 @@
+import { DefaultTheme as Theme } from '@admin-bro/design-system'
+
 import BaseResource from './backend/adapters/base-resource'
 import BaseDatabase from './backend/adapters/base-database'
 import { PageContext } from './backend/actions/action.interface'
 import { ResourceOptions } from './backend/decorators/resource-options.interface'
-import { colors, sizes, font, fontSizes, fontWeights, space, lineHeights } from './frontend/styles/variables'
-import { NonNullishPartialRecord } from './utils/non-nullish-partial-record.type'
 import { Locale } from './locale/config'
 
 /**
@@ -265,16 +265,6 @@ export type VersionProps = {
   app?: string;
 }
 
-export type Theme = {
-  colors: NonNullishPartialRecord<typeof colors>;
-  sizes: NonNullishPartialRecord<typeof sizes>;
-  space: NonNullishPartialRecord<typeof space>;
-  fontSizes: NonNullishPartialRecord<typeof fontSizes>;
-  lineHeights: NonNullishPartialRecord<typeof lineHeights>;
-  fontWeights: NonNullishPartialRecord<typeof fontWeights>;
-  font: NonNullishPartialRecord<typeof font>;
-};
-
 /**
  * Branding Options
  *
@@ -378,3 +368,5 @@ export interface AdminBroOptionsWithDefault extends AdminBroOptions {
   };
   pages: Record<string, AdminPage>;
 }
+
+export { Theme }

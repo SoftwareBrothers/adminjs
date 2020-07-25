@@ -1,11 +1,8 @@
 import { merge } from 'lodash'
-import { DefaultTheme } from 'styled-components'
+import { theme, DefaultTheme as Theme } from '@admin-bro/design-system'
 
-import * as variables from './variables'
-import { Theme } from '../../admin-bro-options.interface'
-
-const combineStyles = (newTheme: Partial<Theme>): DefaultTheme => {
-  const merged = merge(variables, newTheme)
+const combineStyles = (newTheme: Partial<Theme>): Theme => {
+  const merged = merge(theme, newTheme)
   if (newTheme.font) {
     return {
       ...merged,

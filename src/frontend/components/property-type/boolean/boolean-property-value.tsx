@@ -1,7 +1,8 @@
 import React from 'react'
+import { Badge } from '@admin-bro/design-system'
+
 import { ShowPropertyProps } from '../base-property-props'
 import { useTranslation } from '../../../hooks'
-import { Badge } from '../../design-system'
 import mapValue from './map-value'
 
 const BooleanPropertyValue: React.FC<ShowPropertyProps> = (props) => {

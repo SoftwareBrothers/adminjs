@@ -1,6 +1,6 @@
 import React, { ReactNode } from 'react'
+import { FormGroup, Label } from '@admin-bro/design-system'
 
-import { FormGroup, Label } from '../../design-system'
 import ReferenceValue from './reference-value'
 import { EditPropertyProps } from '../base-property-props'
 

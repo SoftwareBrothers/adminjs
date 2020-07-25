@@ -1,10 +1,9 @@
 import React, { ReactNode } from 'react'
 import Select from 'react-select'
 import { withTheme, DefaultTheme } from 'styled-components'
+import { Input, FormMessage, FormGroup, Label, selectStyles } from '@admin-bro/design-system'
 
 import { EditPropertyProps } from '../base-property-props'
-import selectStyles from '../../../styles/select-styles'
-import { Input, FormMessage, FormGroup, Label } from '../../design-system'
 import { recordPropertyIsEqual } from '../record-property-is-equal'
 
 type CombinedProps = EditPropertyProps & {theme: DefaultTheme}

@@ -1,10 +1,9 @@
 import React from 'react'
 import styled from 'styled-components'
+import { cssClass, Text, Box } from '@admin-bro/design-system'
 
 import { VersionProps } from '../../../admin-bro-options.interface'
-import { Text, Box } from '../design-system'
 import { useTranslation } from '../../hooks'
-import { cssClass } from '../design-system/utils/css-class'
 
 export type Props = {
   versions: VersionProps;

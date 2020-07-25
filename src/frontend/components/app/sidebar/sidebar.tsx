@@ -1,13 +1,13 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
+import { Navigation, Box, Label, cssClass } from '@admin-bro/design-system'
 
 import SidebarBranding from './sidebar-branding'
 import SidebarPages from './sidebar-pages'
 import { ReduxState } from '../../../store/store'
-import { Navigation, Box, Label } from '../../design-system'
 import SidebarFooter from './sidebar-footer'
 import { useTranslation } from '../../../hooks/use-translation'
-import { cssClass } from '../../design-system/utils/css-class'
+
 import SidebarResourceSection from './sidebar-resource-section'
 
 type Props = {
