@@ -18,7 +18,7 @@
     "sequelize-cli": "^5.5.1"
   },
   "dependencies": {
-    "@admin-bro/core": "^2.2.8",
+    "@admin-bro/core": "^3.0.0-beta.1",
     "admin-bro-expressjs": "^2.0.5",
     "admin-bro-mongoose": "^0.5.2",
     "admin-bro-sequelizejs": "0.5.0",
