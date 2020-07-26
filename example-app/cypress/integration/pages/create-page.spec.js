@@ -27,9 +27,9 @@ context('resources/Profession/actions/new', () => {
       .click()
       .type(data.content)
     cy.get('[data-testid="property-edit-createdDate"] input').type(data.createdDate)
-    cy.get('[class^="date-picker__Overlay"].visible').click()
+    cy.get('[data-testid="property-edit-createdDate"] > div > div.visible').click()
     cy.get('[data-testid="property-edit-createdDateTime"] input').type(data.createdDateTime)
-    cy.get('[class^="date-picker__Overlay"].visible').click()
+    cy.get('[data-testid="property-edit-createdDateTime"] > div > div.visible').click()
 
     cy.get('button[type=submit]').contains('Save').click()
 
