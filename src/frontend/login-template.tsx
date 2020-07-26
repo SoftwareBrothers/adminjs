@@ -78,6 +78,7 @@ const html = (admin: AdminBro, { action, errorMessage }: LoginTemplateAttributes
       <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,700" type="text/css">
 
       <script src="${h.assetPath('global.bundle.js')}"></script>
+      <script src="${h.assetPath('design-system.bundle.js')}"></script>
     </head>
     <body>
       <div id="app">${loginComponent}</div>

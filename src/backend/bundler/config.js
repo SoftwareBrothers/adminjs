@@ -51,7 +51,7 @@ const globals = {
   'react-router': 'ReactRouter',
   'react-router-dom': 'ReactRouterDOM',
   'admin-bro': 'AdminBro',
-  '@admin-bro/design-system': 'DesignSystem',
+  '@admin-bro/design-system': 'AdminBroDesignSystem',
   'admin-bro/property-types': 'AdminBro.PropertyTypes',
   'admin-bro/types': 'AdminBro.types',
   'admin-bro/style': 'AdminBro.style',

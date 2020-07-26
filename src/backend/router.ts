@@ -72,6 +72,12 @@ const Router: RouterType = {
     path: '/frontend/assets/global.bundle.js',
     src: path.join(ASSETS_ROOT, `scripts/global-bundle.${env}.js`),
   }, {
+    path: '/frontend/assets/design-system.bundle.js',
+    src: path.join(
+      path.parse(require.resolve('@admin-bro/design-system')).dir,
+      `../bundle.${env}.js`,
+    ),
+  }, {
     path: '/frontend/assets/logo.svg',
     src: path.join(ASSETS_ROOT, 'images/logo.svg'),
   }, {

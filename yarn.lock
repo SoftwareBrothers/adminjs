@@ -2,10 +2,10 @@
 # yarn lockfile v1
 
 
-"@admin-bro/design-system@^1.1.2":
-  version "1.1.2"
-  resolved "https://registry.yarnpkg.com/@admin-bro/design-system/-/design-system-1.1.2.tgz#787f7b480f3bedae06fe9cb113b4d3396e5bd6f5"
-  integrity sha512-GoRVpFNi2EXi1kR6cGjTr64gAGqSJimQs21hvhFfTCTSEz5xl2qUbgKX9W/VRVq2S50l764fc26ohj8/jjYqjg==
+"@admin-bro/design-system@^1.2.3":
+  version "1.2.3"
+  resolved "https://registry.yarnpkg.com/@admin-bro/design-system/-/design-system-1.2.3.tgz#edb4ef06695923449de47f077654a2c986590d96"
+  integrity sha512-JDlIQLdvfKfGozwN/GQ1crcBfy7RNUq0b7MU5rbHyRgpZz1q23FJq4vjLzpRXaHopmHpV02wsDrlMoXKrtukeQ==
   dependencies:
     "@carbon/icons-react" "^10.14.0"
     jw-paginate "^1.0.4"

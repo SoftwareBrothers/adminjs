@@ -4,7 +4,6 @@ import { BrowserRouter } from 'react-router-dom'
 import { ThemeProvider } from 'styled-components'
 import { initReactI18next } from 'react-i18next'
 import i18n from 'i18next'
-import * as Components from '@admin-bro/design-system'
 
 import App from './components/application'
 import BasePropertyComponent from './components/property-type'
@@ -48,19 +47,16 @@ const Application = (
 
 // eslint-disable-next-line no-undef
 window.regeneratorRuntime = regeneratorRuntime
+
 export default {
   withNotice,
   Application,
   ViewHelpers,
   UserComponents: {},
   ApiClient,
-  style: Components.theme,
   BasePropertyComponent,
   env,
-  ...Components,
   ...AppComponents,
   ...Hooks,
   types,
-  // TODO: following is a backward compatible - remove this in version 2.0
-  Components: { ...Components, ...AppComponents },
 }
