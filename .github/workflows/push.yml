@@ -219,7 +219,7 @@ jobs:
           # just perform install
           runTests: false
           working-directory: example-app
-      - run: yarn link admin-bro
+      - run: yarn link @admin-bro/core
         working-directory: example-app
       - run: yarn run sequelize db:create
         working-directory: example-app
