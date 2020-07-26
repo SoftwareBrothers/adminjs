@@ -261,6 +261,7 @@ jobs:
     needs:
       # - cypress
       - test
+      - build
     services:
       mongo:
         image: mongo:3.4.23
