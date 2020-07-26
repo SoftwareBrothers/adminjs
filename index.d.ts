@@ -84,7 +84,6 @@ export type DefaultTheme = {
   font: typeof font;
 }
 
-export * from './types/src/frontend/components/design-system'
 export * from './types/src/frontend/components/app'
 export * from './types/src/constants'
 export * from './types/src/frontend/hooks'
