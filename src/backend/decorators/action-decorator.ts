@@ -1,3 +1,4 @@
+import { DEFAULT_DRAWER_WIDTH } from '@admin-bro/design-system'
 import ConfigurationError from '../utils/configuration-error'
 import ViewHelpers from '../utils/view-helpers'
 import AdminBro from '../../admin-bro'
@@ -6,7 +7,6 @@ import Action, { IsFunction, ActionContext, ActionRequest, ActionResponse } from
 import { CurrentAdmin } from '../../current-admin.interface'
 import ActionJSON from './action-json.interface'
 import BaseRecord from '../adapters/base-record'
-import { DEFAULT_DRAWER_WIDTH } from '../../constants'
 import actionErrorHandler from '../services/action-error-handler'
 import ForbiddenError from '../utils/forbidden-error'
 

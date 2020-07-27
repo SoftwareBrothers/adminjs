@@ -3,11 +3,7 @@ import AdminBro from './types/src/admin-bro'
 import * as ACTIONS from './types/src/backend/actions/index'
 import { ReduxState } from './types/src/frontend/store/store'
 
-import {
-  colors, space, sizes, fontSizes, fontWeights,
-  lineHeights, font,
-} from './types/src/frontend/styles/variables'
-
+export * from '@admin-bro/design-system'
 export * from './types/src/frontend/store/store'
 
 export { default as Router } from './types/src/backend/router'
@@ -73,16 +69,6 @@ export { default as PageJSON } from './types/src/backend/decorators/page-json.in
 
 export { BasePropertyProps, FilterPropertyProps, ShowPropertyProps, EditPropertyProps } from './types/src/frontend/components/property-type/base-property-props'
 export { ActionProps } from './types/src/frontend/components/actions/action.props'
-
-export type DefaultTheme = {
-  colors: typeof colors;
-  space: typeof space;
-  sizes: typeof sizes;
-  fontSizes: typeof fontSizes;
-  fontWeights: typeof fontWeights;
-  lineHeights: typeof lineHeights;
-  font: typeof font;
-}
 
 export * from './types/src/frontend/components/app'
 export * from './types/src/constants'
