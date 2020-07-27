@@ -63,7 +63,7 @@ export {
 export { default as BaseProperty } from './types/src/backend/adapters/base-property'
 export { default as BaseResource } from './types/src/backend/adapters/base-resource'
 export { default as BaseDatabase } from './types/src/backend/adapters/base-database'
-export { default as BaseRecord } from './types/src/backend/adapters/base-record'
+export { ParamsType, default as BaseRecord } from './types/src/backend/adapters/base-record'
 
 export { default as RecordJSON } from './types/src/backend/decorators/record-json.interface'
 export { default as ResourceJSON } from './types/src/backend/decorators/resource-json.interface'
