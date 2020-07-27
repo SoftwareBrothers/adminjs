@@ -45,7 +45,7 @@ declare const AdminBro: {
  *
  * ```
  * // ./my-new-action.jsx
- * import { Box } from 'admin-bro'
+ * import { Box } from '@admin-bro/core'
  *
  * const MyNewAction = (props) => {
  *   const { resource, action, record } = props

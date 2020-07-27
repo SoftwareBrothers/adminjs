@@ -14,7 +14,7 @@ export type SelectRecord = {
  * Example
  * ```
  * // AdminBroOptions
- * const AdminBro = require('admin-bro')
+ * const AdminBro = require('@admin-bro/core')
  * const ResourceModel = require('./resource-model')
  * const AdminBroOptions = {
  *   resources: [{
@@ -143,7 +143,7 @@ export type ShowPropertyProps = {
  * Lets take a look at an example of overriding edit component:
  * ```typescript
  * import React, { ReactNode } from 'react'
- * import { BasePropertyProps, PropertyInEdit, StyledInput } from 'admin-bro'
+ * import { BasePropertyProps, PropertyInEdit, StyledInput } from '@admin-bro/core'
  *
  * export default class Edit extends React.Component<PropertyProps> {
  *   constructor(props) {

@@ -1,4 +1,4 @@
-const AdminBro = require('admin-bro')
+const AdminBro = require('@admin-bro/core')
 const { Company } = require('./company.entity')
 
 const {

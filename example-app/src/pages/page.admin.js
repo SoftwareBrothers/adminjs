@@ -1,6 +1,6 @@
 const { Page } = require('./page.entity')
 
-/** @type {import('admin-bro').ResourceOptions} */
+/** @type {import('@admin-bro/core').ResourceOptions} */
 const options = {
   properties: {
     content: {

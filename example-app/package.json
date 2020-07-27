@@ -13,6 +13,7 @@
     "sequelize": "sequelize"
   },
   "devDependencies": {
+    "@admin-bro/design-system": "^1.2.3",
     "@types/sequelize": "^4.28.8",
     "nodemon": "^2.0.2",
     "sequelize-cli": "^5.5.1"

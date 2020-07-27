@@ -128,7 +128,7 @@ export type GetPageAPIParams = AxiosRequestConfig & {
  *
  * Usage:
  * ```javascript
- * import { ApiClient } from 'admin-bro'
+ * import { ApiClient } from '@admin-bro/core'
  *
  * const api = new ApiClient()
  * // fetching all records

@@ -1,5 +1,5 @@
 import React from 'react'
-import { NoRecordsProps, Box } from 'admin-bro'
+import { NoRecordsProps, Box } from '@admin-bro/design-system'
 
 const NoRecords: React.FC<NoRecordsProps> = (props) => {
   const { resource, OriginalComponent } = props

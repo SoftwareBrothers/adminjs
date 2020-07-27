@@ -10,7 +10,7 @@ import { TranslateFunctions, createFunctions } from '../../utils/translate-funct
  * defined below.
  *
  * ```javascript
- * import { useTranslation } from 'admin-bro'
+ * import { useTranslation } from '@admin-bro/core'
  *
  * const MyComponent = () => {
  *   const { translateButton } = useTranslation()

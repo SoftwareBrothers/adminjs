@@ -4,7 +4,7 @@
  * ### Usage with TypeScript
  *
  * ```typescript
- * import { CurrentAdmin } from 'admin-bro'
+ * import { CurrentAdmin } from '@admin-bro/core'
  * ```
  *
  * @alias CurrentAdmin

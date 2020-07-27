@@ -15,7 +15,7 @@ export type UseCurrentAdminResponse = [
  * Hook which allows you to get and set currentAdmin
  *
  * ```usage
- * import { useCurrentAdmin } from 'admin-bro'
+ * import { useCurrentAdmin } from '@admin-bro/core'
  *
  * const myComponent = () => {
  *   const [currentAdmin, setCurrentAdmin] = useCurrentAdmin()

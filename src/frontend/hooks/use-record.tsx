@@ -51,7 +51,7 @@ export type UseRecordResult = {
  * Consecutive calls will update it.
  *
  * ```javascript
- * import { BasePropertyComponent, useRecord, Box, useTranslation } from 'admin-bro'
+ * import { BasePropertyComponent, useRecord, Box, useTranslation } from '@admin-bro/design-system'
  *
  * const MyRecordActionComponent = (props) => {
  *   const { record: initialRecord, resource, action } = props

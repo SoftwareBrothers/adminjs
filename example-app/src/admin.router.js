@@ -1,4 +1,4 @@
-const { default: AdminBro } = require('admin-bro')
+const { default: AdminBro } = require('@admin-bro/core')
 const { buildAuthenticatedRouter } = require('admin-bro-expressjs')
 const express = require('express')
 const argon2 = require('argon2')
