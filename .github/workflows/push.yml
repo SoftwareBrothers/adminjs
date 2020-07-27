@@ -159,97 +159,97 @@ jobs:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
         if: always()
 
-  cypress:
-    name: Cypress
-    needs: build
-    if: |
-      contains(github.ref, 'refs/heads/next')
-      || contains(github.ref, 'refs/heads/master')
-      || contains(github.ref, 'refs/heads/next-major')
-      || contains(github.ref, 'refs/heads/beta')
-    services:
-      mongo:
-        image: mongo:3.4.23
-        ports:
-          - 27017:27017
-      postgres:
-        image: postgres:10.8
-        env:
-          POSTGRES_USER: postgres
-          POSTGRES_PASSWORD: postgres
-          POSTGRES_DB: postgres
-        ports:
-        - 5432:5432
-        # needed because the postgres container does not provide a healthcheck
-        options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-      - name: Setup
-        uses: actions/setup-node@v1
-        with:
-          node-version: '10.x'
-      - uses: actions/cache@v1
-        id: yarn-cache
-        with:
-          path: node_modules
-          key: ${{ runner.os }}-node_modules-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-node_modules-
-      - name: Install
-        if: steps.yarn-cache.outputs.cache-hit != 'true'
-        run: yarn install
-      - name: Download Build
-        uses: actions/download-artifact@v1
-        with:
-          name: lib 
-      - name: Download Types
-        uses: actions/download-artifact@v1
-        with:
-          name: types
-      - name: Download Bundle
-        uses: actions/download-artifact@v1
-        with:
-          name: bundle
-      - run: yarn link
-      - name: Install dependencies
-        uses: cypress-io/github-action@v1
-        with:
-          # just perform install
-          runTests: false
-          working-directory: example-app
-      - run: yarn link @admin-bro/core
-        working-directory: example-app
-      - run: yarn run sequelize db:create
-        working-directory: example-app
-        env:
-          POSTGRES_PASSWORD: postgres
-          POSTGRES_USER: postgres
-          POSTGRES_DATABASE: adminbro_e2e_development
-      - run: yarn run sequelize db:migrate
-        working-directory: example-app
-        env:
-          POSTGRES_PASSWORD: postgres
-          POSTGRES_USER: postgres
-          POSTGRES_DATABASE: adminbro_e2e_development
-      - run: node bin/setup-db.js
-        working-directory: example-app
-      - uses: cypress-io/github-action@v1
-        with:
-          install: false
-          working-directory: example-app
-          start: yarn start
-      - uses: actions/upload-artifact@v1
-        if: failure()
-        with:
-          name: cypress-screenshots
-          path: example-app/cypress/screenshots
-      - uses: actions/upload-artifact@v1
-        if: always()
-        with:
-          name: cypress-videos
-          path: example-app/cypress/videos
+  # cypress:
+  #   name: Cypress
+  #   needs: build
+  #   if: |
+  #     contains(github.ref, 'refs/heads/next')
+  #     || contains(github.ref, 'refs/heads/master')
+  #     || contains(github.ref, 'refs/heads/next-major')
+  #     || contains(github.ref, 'refs/heads/beta')
+  #   services:
+  #     mongo:
+  #       image: mongo:3.4.23
+  #       ports:
+  #         - 27017:27017
+  #     postgres:
+  #       image: postgres:10.8
+  #       env:
+  #         POSTGRES_USER: postgres
+  #         POSTGRES_PASSWORD: postgres
+  #         POSTGRES_DB: postgres
+  #       ports:
+  #       - 5432:5432
+  #       # needed because the postgres container does not provide a healthcheck
+  #       options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Checkout
+  #       uses: actions/checkout@v2
+  #     - name: Setup
+  #       uses: actions/setup-node@v1
+  #       with:
+  #         node-version: '10.x'
+  #     - uses: actions/cache@v1
+  #       id: yarn-cache
+  #       with:
+  #         path: node_modules
+  #         key: ${{ runner.os }}-node_modules-${{ hashFiles('**/yarn.lock') }}
+  #         restore-keys: |
+  #           ${{ runner.os }}-node_modules-
+  #     - name: Install
+  #       if: steps.yarn-cache.outputs.cache-hit != 'true'
+  #       run: yarn install
+  #     - name: Download Build
+  #       uses: actions/download-artifact@v1
+  #       with:
+  #         name: lib 
+  #     - name: Download Types
+  #       uses: actions/download-artifact@v1
+  #       with:
+  #         name: types
+  #     - name: Download Bundle
+  #       uses: actions/download-artifact@v1
+  #       with:
+  #         name: bundle
+  #     - run: yarn link
+  #     - name: Install dependencies
+  #       uses: cypress-io/github-action@v1
+  #       with:
+  #         # just perform install
+  #         runTests: false
+  #         working-directory: example-app
+  #     - run: yarn link @admin-bro/core
+  #       working-directory: example-app
+  #     - run: yarn run sequelize db:create
+  #       working-directory: example-app
+  #       env:
+  #         POSTGRES_PASSWORD: postgres
+  #         POSTGRES_USER: postgres
+  #         POSTGRES_DATABASE: adminbro_e2e_development
+  #     - run: yarn run sequelize db:migrate
+  #       working-directory: example-app
+  #       env:
+  #         POSTGRES_PASSWORD: postgres
+  #         POSTGRES_USER: postgres
+  #         POSTGRES_DATABASE: adminbro_e2e_development
+  #     - run: node bin/setup-db.js
+  #       working-directory: example-app
+  #     - uses: cypress-io/github-action@v1
+  #       with:
+  #         install: false
+  #         working-directory: example-app
+  #         start: yarn start
+  #     - uses: actions/upload-artifact@v1
+  #       if: failure()
+  #       with:
+  #         name: cypress-screenshots
+  #         path: example-app/cypress/screenshots
+  #     - uses: actions/upload-artifact@v1
+  #       if: always()
+  #       with:
+  #         name: cypress-videos
+  #         path: example-app/cypress/videos
 
   publish:
     name: Publish
@@ -259,7 +259,7 @@ jobs:
       || contains(github.ref, 'refs/heads/next-major')
       || contains(github.ref, 'refs/heads/beta')
     needs:
-      - cypress
+      # - cypress
       - test
       - build
     services:
