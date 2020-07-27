@@ -2,10 +2,10 @@
 # yarn lockfile v1
 
 
-"@admin-bro/core@^3.0.0-beta.1":
-  version "3.0.0-beta.2"
-  resolved "https://registry.yarnpkg.com/@admin-bro/core/-/core-3.0.0-beta.2.tgz#1dd567a1ad63676319170a18d04ee7211510f7ec"
-  integrity sha512-mIez46h0GsXave0XJy6+4DDk3DYnKztYPzFn8vvg07jgvO/W3uFy85MCdgm0ZndyiSqQbklcdptpE+KvAb3DeA==
+"@admin-bro/core@^3.0.0-beta.3":
+  version "3.0.0-beta.3"
+  resolved "https://registry.yarnpkg.com/@admin-bro/core/-/core-3.0.0-beta.3.tgz#459a72314e77ccd916f4faf6a36a8795536b0e33"
+  integrity sha512-n+mPPDZ09P1770fMglYfElCoh03PK4rEiPC72ALdACRXaCWI37s9vXY8rkgIVzWICxR3KXNSomnKKEBs8NBEBQ==
   dependencies:
     "@admin-bro/design-system" "^1.2.3"
     "@babel/core" "^7.10.2"
@@ -53,6 +53,28 @@
     jw-paginate "^1.0.4"
     polished "^3.6.5"
     react-datepicker "^3.1.3"
+
+"@admin-bro/express@^3.0.0-beta.1":
+  version "3.0.0-beta.1"
+  resolved "https://registry.yarnpkg.com/@admin-bro/express/-/express-3.0.0-beta.1.tgz#df444f7a811621f8755dca19d7c130cc4677c8b7"
+  integrity sha512-RQemrf+sMUVdPkrniOxkBejvYvGgadxPn0Wg2tpHP2d8MRNbTN1aNIwLBB7yQgH/mYrs3vFYVOawIrj97rTBNA==
+
+"@admin-bro/mongoose@^1.0.0-beta.1":
+  version "1.0.0-beta.1"
+  resolved "https://registry.yarnpkg.com/@admin-bro/mongoose/-/mongoose-1.0.0-beta.1.tgz#db9952639f94e67c790d9b265cbe82ce7ef3a317"
+  integrity sha512-bHTq+0x0/vdWwUxWAr0uacetzj4Zd9vNucgRDf6WXDGoL5LT01kMS8iCKJypPBUlLWPGLRXFhKNYctCZL20Jwg==
+  dependencies:
+    escape-regexp "0.0.1"
+    flat "^4.1.0"
+    lodash "^4.17.11"
+
+"@admin-bro/sequelize@^1.0.0-beta.1":
+  version "1.0.0-beta.1"
+  resolved "https://registry.yarnpkg.com/@admin-bro/sequelize/-/sequelize-1.0.0-beta.1.tgz#820a8b2aa11c441d197f2bc8949c98d95822594f"
+  integrity sha512-z2uYDctHWDzmk2UY+oFsq4H8S8Rg04RfgYI+UG8ZKOb893VsrttQJ5E6t94Csba+Oae7FrMwYvDQcsX7QRrXZQ==
+  dependencies:
+    escape-regexp "0.0.1"
+    flat "^5.0.0"
 
 "@babel/code-frame@^7.0.0", "@babel/code-frame@^7.8.3":
   version "7.8.3"
@@ -1473,28 +1495,6 @@ accepts@~1.3.7:
     mime-types "~2.1.24"
     negotiator "0.6.2"
 
-admin-bro-expressjs@^2.0.5:
-  version "2.0.5"
-  resolved "https://registry.yarnpkg.com/admin-bro-expressjs/-/admin-bro-expressjs-2.0.5.tgz#031f615eb22af2b7a9d666f1a576df62cda0e1fa"
-  integrity sha512-I0m6S4LaO1v32O7tGY+zMjD04lXxkQnBTFohvQAHttz6wUB7rbqHaK9bU3b2omh2EWsuOkgc17BBAIxpgLi3aQ==
-
-admin-bro-mongoose@^0.5.2:
-  version "0.5.2"
-  resolved "https://registry.yarnpkg.com/admin-bro-mongoose/-/admin-bro-mongoose-0.5.2.tgz#06cc6a3a7a12432f69160228395912352b7d38e1"
-  integrity sha512-X93oGMySeWsl9ZzrbHSZninmB103p22gNK4/VrPA9MSUUyfWMHruCM/SQXK9guG2RjkIlpPI+xUV0jzNeN0gfQ==
-  dependencies:
-    escape-regexp "0.0.1"
-    flat "^4.1.0"
-    lodash "^4.17.11"
-
-admin-bro-sequelizejs@0.5.0:
-  version "0.5.0"
-  resolved "https://registry.yarnpkg.com/admin-bro-sequelizejs/-/admin-bro-sequelizejs-0.5.0.tgz#e00ec30e7696a8b60fc23025010bdf6e3e495696"
-  integrity sha512-PqfUGyorPd53Enmk4uRofoejGcCbATRCqcoYnDx2xSxRNYwhS3MLCJsIiEHhx/WoXYOIx65bVY3wCMPpMkVoHg==
-  dependencies:
-    escape-regexp "0.0.1"
-    flat "^5.0.0"
-
 ajv@^6.5.5:
   version "6.12.2"
   resolved "https://registry.yarnpkg.com/ajv/-/ajv-6.12.2.tgz#c629c5eced17baf314437918d2da88c99d5958cd"
@@ -1864,9 +1864,9 @@ caniuse-lite@^1.0.30001043:
   integrity sha512-g1iSHKVxornw0K8LG9LLdf+Fxnv7T1Z+mMsf0/YYLclQX4Cd522Ap0Lrw6NFqHgezit78dtyWxzlV2Xfc7vgRg==
 
 caniuse-lite@^1.0.30001093:
-  version "1.0.30001106"
-  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001106.tgz#7e2132711295ef30ffe5ee45b71936354d105d8c"
-  integrity sha512-XqSQKt9Fd3Z9BoN0cpSaITcTInKhMNGkaWtQ4rDnyQU1BJzzWDWCUi3cJflaPWk2kbrkYkfMrMrjIFzb3kd6NQ==
+  version "1.0.30001107"
+  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001107.tgz#809360df7a5b3458f627aa46b0f6ed6d5239da9a"
+  integrity sha512-86rCH+G8onCmdN4VZzJet5uPELII59cUzDphko3thQFgAQG1RNa+sVLDoALIhRYmflo5iSIzWY3vu1XTWtNMQQ==
 
 caseless@~0.12.0:
   version "0.12.0"

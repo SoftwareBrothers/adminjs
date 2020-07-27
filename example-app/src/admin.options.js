@@ -1,6 +1,6 @@
 const { default: AdminBro } = require('@admin-bro/core')
-const AdminBroMongoose = require('admin-bro-mongoose')
-const AdminBroSequelize = require('admin-bro-sequelizejs')
+const AdminBroMongoose = require('@admin-bro/mongoose')
+const AdminBroSequelize = require('@admin-bro/sequelize')
 
 AdminBro.registerAdapter(AdminBroMongoose)
 AdminBro.registerAdapter(AdminBroSequelize)
