@@ -12,9 +12,9 @@ import BaseResource from '../adapters/base-resource'
  * @private
  */
 const RequestParser = (originalRequest: ActionRequest, resource: BaseResource): ActionRequest => {
-  const { payload: originalPayload = {} } = originalRequest
+  const { payload: originalPayload } = originalRequest
 
-  const payload = Object.entries(originalPayload).reduce((memo, [path, value]) => {
+  const payload = Object.entries(originalPayload || {}).reduce((memo, [path, value]) => {
     const property = resource.property(path)
 
     if (property) {
