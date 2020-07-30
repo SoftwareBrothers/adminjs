@@ -305,5 +305,3 @@ jobs:
           JIRA_EMAIL: ${{ secrets.JIRA_EMAIL }}
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
         run: yarn release
-
-      
