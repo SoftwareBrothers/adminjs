@@ -155,6 +155,7 @@
     "require.all": "^2.0.4",
     "semantic-release": "^17.0.7",
     "semantic-release-jira-releases-sb": "^0.7.2",
+    "semantic-release-slack-bot": "^1.6.2",
     "sinon": "^6.1.5",
     "sinon-chai": "^3.2.0",
     "rollup-plugin-node-builtins": "^2.1.2",

@@ -138,10 +138,10 @@ jobs:
         if: "!contains(github.ref, 'refs/heads/master')"
         run: yarn test
 
-  notify: 
+  notify:
     name: Notify
     runs-on: ubuntu-latest
-    if: always()
+    if: failure()
     needs:
       - build
       - test
@@ -303,6 +303,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           JIRA_TOKEN: ${{ secrets.JIRA_TOKEN }}
           JIRA_EMAIL: ${{ secrets.JIRA_EMAIL }}
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
         run: yarn release
 
       

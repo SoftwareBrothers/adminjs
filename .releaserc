@@ -22,6 +22,13 @@
       "ticketPrefixes": [ "AB" ],
       "released": true,
       "setReleaseDate": true
-    }]
+    }],
+    [
+      "semantic-release-slack-bot",
+      {
+        "notifyOnSuccess": true,
+        "notifyOnFail": true
+      }
+    ]
   ]
 }
