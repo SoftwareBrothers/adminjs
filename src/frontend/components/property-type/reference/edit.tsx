@@ -58,7 +58,7 @@ const Edit: FC<CombinedProps> = (props) => {
   const styles = selectStyles(theme)
 
   useEffect(() => {
-    if (!selectedValue && selectedId) {
+    if (selectedId && (!selectedValue || selectedValue.id != selectedId)) {
       setLoadingRecord(c => c + 1)
       const api = new ApiClient()
       api.recordAction({
