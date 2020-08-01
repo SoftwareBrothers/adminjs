@@ -7,6 +7,7 @@ import { I18nextProvider } from 'react-i18next'
 import i18n from 'i18next'
 
 import { Provider } from 'react-redux'
+import { combineStyles } from '@admin-bro/design-system'
 import LoginComponent from './components/login'
 import AdminBro from '../admin-bro'
 
@@ -15,7 +16,6 @@ import createStore, {
   initializeLocale,
   ReduxState,
 } from './store/store'
-import combineStyles from './styles/combine-styles'
 import ViewHelpers from '../backend/utils/view-helpers'
 
 type LoginTemplateAttributes = {

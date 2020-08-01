@@ -1,4 +1,4 @@
-import { DefaultTheme as Theme } from '@admin-bro/design-system'
+import { ThemeOverride } from '@admin-bro/design-system'
 
 import BaseResource from './backend/adapters/base-resource'
 import BaseDatabase from './backend/adapters/base-database'
@@ -113,7 +113,7 @@ export default interface AdminBroOptions {
    */
   version?: VersionSettings;
   /**
-   * Options which are related to the branding.
+   * Options which are related to the ht.
    */
   branding?: BrandingOptions;
   /**
@@ -297,7 +297,7 @@ export type BrandingOptions = {
   /**
    * CSS theme.
    */
-  theme?: Partial<Theme>;
+  theme?: Partial<ThemeOverride>;
   /**
    * Flag indicates if `SoftwareBrothers` tiny hart icon should be visible on the bottom sidebar.
    */
@@ -368,5 +368,3 @@ export interface AdminBroOptionsWithDefault extends AdminBroOptions {
   };
   pages: Record<string, AdminPage>;
 }
-
-export { Theme }
