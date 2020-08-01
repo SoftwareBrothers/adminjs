@@ -3,7 +3,7 @@ import sinon from 'sinon'
 import ActionDecorator from './action-decorator'
 import AdminBro from '../../admin-bro'
 import BaseResource from '../adapters/base-resource'
-import { ActionRequest, ActionContext, ActionResponse } from '../actions/action.interface'
+import { ActionRequest, ActionContext, ActionResponse, Before, After } from '../actions/action.interface'
 import ForbiddenError from '../utils/forbidden-error'
 import ValidationError from '../utils/validation-error'
 
@@ -23,6 +23,65 @@ describe('ActionDecorator', function () {
 
   afterEach(function () {
     sinon.restore()
+  })
+
+  describe('#before', function () {
+    it('calls all functions if they were given as an array', async function () {
+      // 3 hooks one adding response1 key and the other adding response2 key
+      // and finally one async adding response3
+      const before = [
+        () => ({ response1: true }),
+        response => ({
+          ...response,
+          response2: true,
+        }),
+        async response => ({ ...response, response3: true }),
+      ] as unknown as Array<Before>
+      const decorator = new ActionDecorator({
+        action: { before, handler, name: 'myAction', actionType: 'resource' },
+        admin,
+        resource,
+      })
+
+      const ret = await decorator.before({} as ActionRequest, {} as ActionContext)
+
+      expect(ret).to.deep.eq({
+        response1: true,
+        response2: true,
+        response3: true,
+      })
+    })
+  })
+
+  describe('#after', function () {
+    it('calls all functions if they were given as an array', async function () {
+      // 2 hooks one adding response1 key and the other adding response2 key
+      const after = [
+        () => ({ response1: true }),
+        response => ({
+          ...response,
+          response2: true,
+        }),
+        async response => ({ ...response, response3: true }),
+      ] as unknown as Array<After<ActionResponse>>
+      const decorator = new ActionDecorator({
+        action: { after, handler, name: 'myAction', actionType: 'resource' },
+        admin,
+        resource,
+      })
+
+      const ret = await decorator.after(
+        {} as ActionResponse,
+        {} as ActionRequest,
+        {} as ActionContext,
+      )
+
+      expect(ret).to.deep.eq({
+        response1: true,
+        response2: true,
+        response3: true,
+      })
+    })
   })
 
   describe('#handler', function () {

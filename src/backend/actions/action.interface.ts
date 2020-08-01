@@ -487,7 +487,7 @@ export default interface Action <T extends ActionResponse> {
    * }
    * ```
    */
-  before?: Before;
+  before?: Before | Array<Before>;
   /**
    * After action hook. When it is given - it is performed on the returned,
    * by {@link Action#handler handler} function response.
@@ -538,7 +538,7 @@ export default interface Action <T extends ActionResponse> {
    * ```
    *
    */
-  after?: After<T>;
+  after?: After<T> | Array<After<T>>;
 
   /**
    * Indicates if given action should be seen in a drawer or in a full screen. Default to false
