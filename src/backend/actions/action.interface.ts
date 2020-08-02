@@ -463,7 +463,7 @@ export default interface Action <T extends ActionResponse> {
    * Required for new actions. For modifying already defined actions
    * like new and edit we suggest using {@link Action#before} and {@link Action#after} hooks.
    */
-  handler: ActionHandler<T>;
+  handler: ActionHandler<T> | Array<ActionHandler<T>>;
   /**
    * Before action hook. When it is given - it is performed before the {@link Action#handler}
    * method.

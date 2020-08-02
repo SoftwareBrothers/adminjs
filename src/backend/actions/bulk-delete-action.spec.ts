@@ -3,7 +3,7 @@ import chaiAsPromised from 'chai-as-promised'
 import sinon from 'sinon'
 
 import BulkDeleteAction from './bulk-delete-action'
-import { ActionContext, ActionRequest } from './action.interface'
+import { ActionContext, ActionRequest, ActionHandler, BulkActionResponse } from './action.interface'
 import BaseRecord from '../adapters/base-record'
 import AdminBro from '../../admin-bro'
 import ViewHelpers from '../utils/view-helpers'
@@ -38,7 +38,7 @@ describe('BulkDeleteAction', function () {
 
     it('throws error when no records are given', async function () {
       await expect(
-        BulkDeleteAction.handler(request, response, data),
+        (BulkDeleteAction.handler as ActionHandler<BulkActionResponse>)(request, response, data),
       ).to.rejectedWith(NotFoundError)
     })
 
@@ -59,7 +59,7 @@ describe('BulkDeleteAction', function () {
         request.method = 'get'
 
         await expect(
-          BulkDeleteAction.handler(request, response, data),
+          (BulkDeleteAction.handler as ActionHandler<BulkActionResponse>)(request, response, data),
         ).to.eventually.deep.equal({
           records: [recordJSON],
         })
@@ -68,7 +68,9 @@ describe('BulkDeleteAction', function () {
       it('deletes all records for post request', async function () {
         request.method = 'post'
 
-        await BulkDeleteAction.handler(request, response, data)
+        await (
+          BulkDeleteAction.handler as ActionHandler<BulkActionResponse>
+        )(request, response, data)
 
         expect(data.resource.delete).to.have.been.calledOnce
       })
@@ -76,7 +78,9 @@ describe('BulkDeleteAction', function () {
       it('returns deleted records, notice and redirectUrl for post request', async function () {
         request.method = 'post'
 
-        const actionResponse = await BulkDeleteAction.handler(request, response, data)
+        const actionResponse = await (
+          BulkDeleteAction.handler as ActionHandler<BulkActionResponse>
+        )(request, response, data)
 
         expect(actionResponse).to.have.property('notice')
         expect(actionResponse).to.have.property('redirectUrl')

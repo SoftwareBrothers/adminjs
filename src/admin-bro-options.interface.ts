@@ -334,7 +334,14 @@ export type AdminPage = {
 export type ResourceWithOptions = {
   resource: any;
   options: ResourceOptions;
+  features?: Array<FeatureType>;
 }
+
+/**
+ * Function taking ResourceOptions and merging it with all other
+ * options
+ */
+export type FeatureType = (ResourceOptions) => ResourceOptions
 
 /**
  * Function which is invoked when user enters given AdminPage

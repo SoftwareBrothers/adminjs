@@ -3,7 +3,15 @@ import ConfigurationError from '../utils/configuration-error'
 import ViewHelpers from '../utils/view-helpers'
 import AdminBro from '../../admin-bro'
 import BaseResource from '../adapters/base-resource'
-import Action, { IsFunction, ActionContext, ActionRequest, ActionResponse, After, Before } from '../actions/action.interface'
+import Action, {
+  IsFunction,
+  ActionContext,
+  ActionRequest,
+  ActionResponse,
+  After,
+  Before,
+  ActionHandler,
+} from '../actions/action.interface'
 import { CurrentAdmin } from '../../current-admin.interface'
 import ActionJSON from './action-json.interface'
 import BaseRecord from '../adapters/base-record'
@@ -71,9 +79,9 @@ class ActionDecorator {
   ): Promise<any> {
     try {
       this.canInvokeAction(context)
-      const modifiedRequest = await this.before(request, context)
-      const res = await this.action.handler(modifiedRequest, response, context)
-      return this.after(res, modifiedRequest, context)
+      const modifiedRequest = await this.invokeBeforeHook(request, context)
+      const res = await this.invokeHandler(modifiedRequest, response, context)
+      return this.invokeAfterHook(res, modifiedRequest, context)
     } catch (error) {
       return actionErrorHandler(error, context)
     }
@@ -87,7 +95,7 @@ class ActionDecorator {
    *
    * @return {Promise<ActionRequest>}
    */
-  async before(request: ActionRequest, context: ActionContext): Promise<ActionRequest> {
+  async invokeBeforeHook(request: ActionRequest, context: ActionContext): Promise<ActionRequest> {
     if (!this.action.before) {
       return request
     }
@@ -108,6 +116,38 @@ class ActionDecorator {
   }
 
   /**
+   * Invokes action handler if there is any
+   *
+   * @param {ActionRequest} request
+   * @param {any} response
+   * @param {ActionContext} context
+   *
+   * @return {Promise<ActionResponse>}
+   */
+  async invokeHandler(
+    request: ActionRequest,
+    response: any,
+    context: ActionContext,
+  ): Promise<ActionResponse> {
+    if (typeof this.action.handler === 'function') {
+      return this.action.handler(request, response, context)
+    }
+    if (Array.isArray(this.action.handler)) {
+      return (this.action.handler as Array<ActionHandler<ActionResponse>>).reduce(
+        (prevPromise, handler) => (
+          prevPromise.then(() => (
+            handler(request, response, context)
+          ))
+        ), Promise.resolve({}),
+      )
+    }
+    throw new ConfigurationError(
+      'Before action hook has to be either function or Array<function>',
+      'Action#Before',
+    )
+  }
+
+  /**
    * Invokes after action hooks if there are any
    *
    * @param {ActionResponse} response
@@ -116,7 +156,7 @@ class ActionDecorator {
    *
    * @return {Promise<ActionResponse>}
    */
-  async after(
+  async invokeAfterHook(
     response: ActionResponse,
     request: ActionRequest,
     context: ActionContext,

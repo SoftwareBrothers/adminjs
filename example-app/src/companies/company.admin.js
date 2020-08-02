@@ -1,22 +1,12 @@
 const AdminBro = require('@admin-bro/core')
 const { Company } = require('./company.entity')
-
-const {
-  after: passwordAfterHook,
-  before: passwordBeforeHook,
-} = require('./actions/password.hook')
+const passwordFeature = require('../features/password/password.feature')
 
 /** @type {AdminBro.ResourceOptions} */
 const options = {
   properties: {
-    encryptedPassword: {
-      isVisible: false,
-    },
     profilePhotoLocation: {
       isVisible: false,
-    },
-    password: {
-      type: 'password',
     },
     isAdmin: {
       isDisabled: true,
@@ -26,14 +16,6 @@ const options = {
     },
   },
   actions: {
-    new: {
-      after: passwordAfterHook,
-      before: passwordBeforeHook,
-    },
-    edit: {
-      after: passwordAfterHook,
-      before: passwordBeforeHook,
-    },
     search: {
       handler: async (request, response, data) => {
         const { currentAdmin, resource } = data
@@ -52,7 +34,9 @@ const options = {
   },
 }
 
+/** @type {import('@admin-bro/core').ResourceWithOptions} */
 module.exports = {
   options,
   resource: Company,
+  features: [passwordFeature],
 }

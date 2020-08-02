@@ -1,8 +1,7 @@
+const { buildFeature } = require('@admin-bro/core')
 const argon2 = require('argon2')
-const AdminBro = require('@admin-bro/core')
 
-
-/** @type {AdminBro.After<AdminBro.ActionResponse>} */
+/** @type {import('@admin-bro/core').After<import('@admin-bro/core').ActionResponse>} */
 const after = async (response) => {
   if (response.record && response.record.errors && response.record.errors.encryptedPassword) {
     response.record.errors.password = response.record.errors.encryptedPassword
@@ -10,7 +9,7 @@ const after = async (response) => {
   return response
 }
 
-/** @type {AdminBro.Before} */
+/** @type {import('@admin-bro/core').Before} */
 const before = async (request) => {
   if (request.method === 'post') {
     const { password, ...otherParams } = request.payload
@@ -30,4 +29,17 @@ const before = async (request) => {
   return request
 }
 
-module.exports = { after, before }
+module.exports = buildFeature({
+  properties: {
+    password: {
+      type: 'password',
+    },
+    encryptedPassword: {
+      isVisible: false,
+    },
+  },
+  actions: {
+    new: { after, before },
+    edit: { after, before },
+  },
+})

@@ -43,7 +43,7 @@ describe('ActionDecorator', function () {
         resource,
       })
 
-      const ret = await decorator.before({} as ActionRequest, {} as ActionContext)
+      const ret = await decorator.invokeBeforeHook({} as ActionRequest, {} as ActionContext)
 
       expect(ret).to.deep.eq({
         response1: true,
@@ -70,7 +70,7 @@ describe('ActionDecorator', function () {
         resource,
       })
 
-      const ret = await decorator.after(
+      const ret = await decorator.invokeAfterHook(
         {} as ActionResponse,
         {} as ActionRequest,
         {} as ActionContext,

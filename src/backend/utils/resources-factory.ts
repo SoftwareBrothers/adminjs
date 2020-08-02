@@ -1,5 +1,7 @@
 import BaseResource from '../adapters/base-resource'
 import AdminBro, { Adapter } from '../../admin-bro'
+import { ResourceWithOptions } from '../../admin-bro-options.interface'
+import { mergeResourceOptions } from './build-feature'
 
 class NoDatabaseAdapterError extends Error {
   private database: string
@@ -78,7 +80,7 @@ class ResourcesFactory {
    * // => returns: [AdminModel, {resource: UserModel, options: {}}]
    * // where AdminModel and UserModel were converted by appropriate database adapters.
    */
-  _convertResources(resources: Array<any | { resource: any; options: any }>): Array<any> {
+  _convertResources(resources: Array<any | ResourceWithOptions>): Array<any> {
     return resources.map((rawResource) => {
       // resource can be given either by a value or within an object within resource key
       const resourceObject = rawResource.resource || rawResource
@@ -91,6 +93,7 @@ class ResourcesFactory {
       return {
         resource: resourceAdapter ? new resourceAdapter.Resource(resourceObject) : resourceObject,
         options: rawResource.options,
+        features: rawResource.features,
       }
     })
   }
@@ -106,10 +109,19 @@ class ResourcesFactory {
    * @param  {Object} [resources[].options]              options for given resource
    * @return {BaseResource[]}                            list of resources with decorator assigned
    */
-  _decorateResources(resources): Array<BaseResource> {
+  _decorateResources(resources: Array<ResourceWithOptions>): Array<BaseResource> {
     return resources.map((resourceObject) => {
       const resource = resourceObject.resource || resourceObject
-      resource.assignDecorator(this.admin, resourceObject.options)
+      const { features = [], options = {} } = resourceObject
+
+      const optionsFromFeatures = features.reduce((opts, feature) => (
+        feature(opts)
+      ), {})
+
+      resource.assignDecorator(
+        this.admin,
+        mergeResourceOptions(optionsFromFeatures, options),
+      )
       return resource
     })
   }
