@@ -1,5 +1,5 @@
 {
-  "name": "@admin-bro/core",
+  "name": "admin-bro",
   "version": "3.0.0-beta.5",
   "description": "Admin panel for apps written in node.js",
   "main": "index.js",
@@ -153,13 +153,13 @@
     "react-testing-library": "^7.0.0",
     "recharts": "^1.7.1",
     "require.all": "^2.0.4",
+    "rollup-plugin-node-builtins": "^2.1.2",
+    "rollup-plugin-node-globals": "^1.4.0",
     "semantic-release": "^17.0.7",
     "semantic-release-jira-releases-sb": "^0.7.2",
     "semantic-release-slack-bot": "^1.6.2",
     "sinon": "^6.1.5",
     "sinon-chai": "^3.2.0",
-    "rollup-plugin-node-builtins": "^2.1.2",
-    "rollup-plugin-node-globals": "^1.4.0",
-    "typescript": "^3.9.5"
+    "typescript": "^3.9.7"
   }
 }
