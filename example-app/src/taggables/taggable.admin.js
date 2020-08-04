@@ -1,7 +1,7 @@
-const { ValidationError } = require('@admin-bro/core')
+const { ValidationError } = require('admin-bro')
 const { Taggable } = require('../../models/index')
 
-/** @type {import('@admin-bro/core').ResourceOptions} */
+/** @type {import('admin-bro').ResourceOptions} */
 const options = {
   actions: {
     show: {

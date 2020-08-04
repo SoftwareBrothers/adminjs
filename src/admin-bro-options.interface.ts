@@ -14,7 +14,7 @@ import { Locale } from './locale/config'
  * ### Usage with regular javascript
  *
  * ```javascript
- * const AdminBro = require('@admin-bro/core')
+ * const AdminBro = require('admin-bro')
  * //...
  * const adminBro = new AdminBro({
  *   rootPath: '/xyz-admin',

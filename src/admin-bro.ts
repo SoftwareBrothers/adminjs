@@ -65,7 +65,7 @@ export type Adapter = { Database: typeof BaseDatabase; Resource: typeof BaseReso
  * user. Its instance is a currier - injected in all other classes.
  *
  * @example
- * const AdminBro = require('@admin-bro/core')
+ * const AdminBro = require('admin-bro')
  * const admin = new AdminBro(AdminBroOptions)
  */
 class AdminBro {
@@ -86,7 +86,7 @@ class AdminBro {
    * It is used by external plugins.
    *
    * @example
-   * const { Router } = require('@admin-bro/core')
+   * const { Router } = require('admin-bro')
    * Router.routes.forEach(route => {
    *   // map your framework routes to admin-bro routes
    *   // see how `admin-bro-expressjs` plugin does it.
@@ -99,7 +99,7 @@ class AdminBro {
    * External adapters have to implement it.
    *
    * @example <caption>Creating Database Adapter for some ORM</caption>
-   * const { BaseDatabase } = require('@admin-bro/core')
+   * const { BaseDatabase } = require('admin-bro')
    *
    * class Database extends BaseDatabase {
    *   constructor(ormInstance) {
@@ -147,7 +147,7 @@ class AdminBro {
    * _list_, _edit_, _show_, _delete_ and _bulkDelete_ you can do this here.
    *
    * @example <caption>Modifying accessibility rules for all show actions</caption>
-   * const { ACTIONS } = require('@admin-bro/core')
+   * const { ACTIONS } = require('admin-bro')
    * ACTIONS.show.isAccessible = () => {...}
    */
   public static ACTIONS: ActionsMap
@@ -220,7 +220,7 @@ class AdminBro {
    * Registers various database adapters written for AdminBro.
    *
    * @example
-   * const AdminBro = require('@admin-bro/core')
+   * const AdminBro = require('admin-bro')
    * const MongooseAdapter = require('admin-bro-mongoose')
    * AdminBro.registerAdapter(MongooseAdapter)
    *

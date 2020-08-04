@@ -1,6 +1,6 @@
 const { ExternalEmployees } = require('../../models/index')
 
-/** @type {import('@admin-bro/core').ResourceOptions} */
+/** @type {import('admin-bro').ResourceOptions} */
 const options = {
 
 }

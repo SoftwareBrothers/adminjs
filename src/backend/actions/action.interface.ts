@@ -292,7 +292,7 @@ export type After<T> = (
  *   }]
  * }
  *
- * const { ACTIONS } = require('@admin-bro/core')
+ * const { ACTIONS } = require('admin-bro')
  * // example of adding after filter for 'show' action for all resources
  * ACTIONS.show.after = async () => {...}
  * ```
@@ -530,7 +530,7 @@ export default interface Action <T extends ActionResponse> {
    * }
    *
    * // and attaching this function to actions for all resources
-   * const { ACTIONS } = require('@admin-bro/core')
+   * const { ACTIONS } = require('admin-bro')
    *
    * ACTIONS.edit.after = createLog
    * ACTIONS.delete.after = createLog

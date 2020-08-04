@@ -1,4 +1,4 @@
-const AdminBro = require('@admin-bro/core')
+const AdminBro = require('admin-bro')
 const { Company } = require('./company.entity')
 const passwordFeature = require('../features/password/password.feature')
 
@@ -34,7 +34,7 @@ const options = {
   },
 }
 
-/** @type {import('@admin-bro/core').ResourceWithOptions} */
+/** @type {import('admin-bro').ResourceWithOptions} */
 module.exports = {
   options,
   resource: Company,

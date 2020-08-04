@@ -1,6 +1,6 @@
 require('dotenv-json')({ path: 'cypress.env.json' })
 const express = require('express')
-const { default: AdminBro } = require('@admin-bro/core')
+const { default: AdminBro } = require('admin-bro')
 const mongoose = require('mongoose')
 const options = require('./src/admin.options')
 const buildAdminRouter = require('./src/admin.router')

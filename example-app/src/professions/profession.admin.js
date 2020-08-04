@@ -1,6 +1,6 @@
 const { Profession } = require('./profession.entity')
 
-/** @type {import('@admin-bro/core').ResourceOptions} */
+/** @type {import('admin-bro').ResourceOptions} */
 const options = {
   properties: {
     randomContent: {

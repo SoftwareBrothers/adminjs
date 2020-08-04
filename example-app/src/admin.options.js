@@ -1,4 +1,4 @@
-const { default: AdminBro } = require('@admin-bro/core')
+const { default: AdminBro } = require('admin-bro')
 const AdminBroMongoose = require('@admin-bro/mongoose')
 const AdminBroSequelize = require('@admin-bro/sequelize')
 
@@ -17,7 +17,7 @@ AdminBro.bundle('./components/sidebar-footer', 'SidebarFooter')
 AdminBro.bundle('./components/no-records', 'NoRecords')
 AdminBro.bundle('./components/quill-override')
 
-/** @type {import('@admin-bro/core').AdminBroOptions} */
+/** @type {import('admin-bro').AdminBroOptions} */
 const options = {
   resources: [
     AdminCompany,

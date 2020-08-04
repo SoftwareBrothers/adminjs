@@ -1,6 +1,6 @@
 const { Employee } = require('./employee.entity')
 
-/** @type {import('@admin-bro/core').ResourceOptions} */
+/** @type {import('admin-bro').ResourceOptions} */
 const options = {
 
 }

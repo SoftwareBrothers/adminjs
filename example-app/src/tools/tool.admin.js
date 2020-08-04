@@ -1,6 +1,6 @@
 const { Tool } = require('./tool.entity')
 
-/** @type {import('@admin-bro/core').ResourceOptions} */
+/** @type {import('admin-bro').ResourceOptions} */
 const options = {
 
 }

@@ -63,7 +63,7 @@ const types: Record<PropertyType, any> = {
  * Take a look at the following example:
  *
  * ```
- * const AdminBro = require('@admin-bro/core')
+ * const AdminBro = require('admin-bro')
  * const ResourceModel = require('./resource-model')
  * const AdminBroOptions = {
  *   resources: [{
@@ -86,7 +86,7 @@ const types: Record<PropertyType, any> = {
  *
  * ```
  * import React from 'react'
- * import { InputGroup, Label } from '@admin-bro/core'
+ * import { InputGroup, Label } from 'admin-bro'
  *
  * const MyReactComponent = props => {
  *   const { record, property } = props

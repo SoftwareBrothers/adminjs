@@ -1,7 +1,7 @@
-const { buildFeature } = require('@admin-bro/core')
+const { buildFeature } = require('admin-bro')
 const argon2 = require('argon2')
 
-/** @type {import('@admin-bro/core').After<import('@admin-bro/core').ActionResponse>} */
+/** @type {import('admin-bro').After<import('admin-bro').ActionResponse>} */
 const after = async (response) => {
   if (response.record && response.record.errors && response.record.errors.encryptedPassword) {
     response.record.errors.password = response.record.errors.encryptedPassword
@@ -9,7 +9,7 @@ const after = async (response) => {
   return response
 }
 
-/** @type {import('@admin-bro/core').Before} */
+/** @type {import('admin-bro').Before} */
 const before = async (request) => {
   if (request.method === 'post') {
     const { password, ...otherParams } = request.payload

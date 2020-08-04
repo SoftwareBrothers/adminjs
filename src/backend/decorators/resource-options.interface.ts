@@ -39,7 +39,7 @@ export type HrefFunction = ((context: HrefContext) => string)
  * ### Usage with TypeScript
  *
  * ```typescript
- * import { ResourceOptions } from '@admin-bro/core'
+ * import { ResourceOptions } from 'admin-bro'
  * ```
  */
 export interface ResourceOptions {
