@@ -101,7 +101,7 @@ const mergeResourceOptions = (
  * @return  {FeatureType}
  * @example
  * const { buildFeature } = require('admin-bro/@core')
- * 
+ *
  * const feature = buildFeature({
  *   // resource options goes here.
  * })
