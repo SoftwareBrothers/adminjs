@@ -3,6 +3,7 @@ import React, { ComponentType } from 'react'
 /**
  * @private
  *
+ * @classdesc
  * Overrides one of the component form AdminBro core when user pass its name to
  * {@link AdminBro.bundle} method.
  *

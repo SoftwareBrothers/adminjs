@@ -28,6 +28,9 @@ function mergeActionHooks<T>(
 }
 
 /**
+ * @name mergeResourceOptions
+ * @function
+ * @description
  * Merges 2 ResourceOptions together. Used by features
  *
  * - 'id', 'href', 'parent', 'sort' from `newOptions` override `oldOptions`
@@ -38,11 +41,11 @@ function mergeActionHooks<T>(
  *   except hooks and handler - which are chained.
  *
  * @param   {ResourceOptions}  oldOptions
- * @param   {ResourceOptions}  oldOptions
+ * @param   {ResourceOptions}  newOptions
  *
  * @return  {ResourceOptions}
  */
-export const mergeResourceOptions = (
+const mergeResourceOptions = (
   oldOptions: ResourceOptions = {},
   newOptions: ResourceOptions = {},
 ): ResourceOptions => {
@@ -88,12 +91,23 @@ export const mergeResourceOptions = (
 }
 
 /**
+ * @name buildFeature
+ * @function
+ * @description
  * Higher Order Function which creates a feature
  *
  * @param   {ResourceOptions}  options
  *
  * @return  {FeatureType}
+ * @example
+ * const { buildFeature } = require('admin-bro/@core')
+ * 
+ * const feature = buildFeature({
+ *   // resource options goes here.
+ * })
  */
-export const buildFeature = (options: ResourceOptions = {}): FeatureType => (
+const buildFeature = (options: ResourceOptions = {}): FeatureType => (
   (prevOptions: ResourceOptions = {}): ResourceOptions => mergeResourceOptions(prevOptions, options)
 )
+
+export { mergeResourceOptions, buildFeature }

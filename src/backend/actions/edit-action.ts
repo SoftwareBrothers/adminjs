@@ -9,6 +9,7 @@ import NotFoundError from '../utils/not-found-error'
  * Shows form for updating existing record
  * @private
  *
+ * @classdesc
  * Uses {@link EditAction} component to render form
  */
 const EditAction: Action<RecordActionResponse> = {

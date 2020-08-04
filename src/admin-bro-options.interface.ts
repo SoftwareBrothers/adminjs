@@ -91,6 +91,7 @@ export default interface AdminBroOptions {
    * You can pass either resource or resource with an options and thus modify it.
    * @property {any} resources[].resource
    * @property {ResourceOptions} resources[].options
+   * @property {Array<FeatureType>} resources[].features
    *
    * @see ResourceOptions
    */
@@ -338,10 +339,14 @@ export type ResourceWithOptions = {
 }
 
 /**
- * Function taking ResourceOptions and merging it with all other
- * options
+ * Function taking {@link ResourceOptions} and merging it with all other options
+ *
+ * @alias FeatureType
+ * @memberof AdminBroOptions
  */
-export type FeatureType = (ResourceOptions) => ResourceOptions
+export type FeatureType = (
+  options: ResourceOptions
+) => ResourceOptions
 
 /**
  * Function which is invoked when user enters given AdminPage
