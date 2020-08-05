@@ -53,8 +53,6 @@ type ActionsMap = {
   list: Action<ListActionResponse>;
 }
 
-type UserComponentsMap = {[key: string]: string}
-
 export type Adapter = { Database: typeof BaseDatabase; Resource: typeof BaseResource }
 
 /**
@@ -156,11 +154,6 @@ class AdminBro {
    * AdminBro version
    */
   public static VERSION: string
-
-  /**
-   * List of all bundled components
-   */
-  public static UserComponents: UserComponentsMap
 
   /**
    * @param   {AdminBroOptions} options      Options passed to AdminBro
@@ -357,13 +350,20 @@ class AdminBro {
       throw new ConfigurationError(`Given file "${src}", doesn't exist.`, 'AdminBro.html')
     }
 
-    AdminBro.UserComponents[componentId] = path.format({ root, dir, name })
+    // We have to put this to the global scope because of the NPM resolution. If we put this to
+    // let say `AdminBro.UserComponents` (static member) it wont work in a case where user uses
+    // AdminBro.bundle from a different packages (i.e. from the extension) because there, there
+    // is an another AdminBro version (npm installs different versions for each package). Also
+    // putting admin to peerDependencies wont solve this issue, because in the development mode
+    // we have to install admin-bro it as a devDependency, because we want to run test or have
+    // proper types.
+    global.UserComponents = global.UserComponents || {}
+    global.UserComponents[componentId] = path.format({ root, dir, name })
 
     return componentId
   }
 }
 
-AdminBro.UserComponents = {}
 AdminBro.registeredAdapters = []
 AdminBro.VERSION = VERSION
 
