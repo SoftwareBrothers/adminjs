@@ -5,6 +5,7 @@ import AdminBro from './admin-bro'
 
 import BaseDatabase from './backend/adapters/base-database'
 import BaseResource from './backend/adapters/base-resource'
+import { OverridableComponent } from './frontend/utils/overridable-component'
 
 
 describe('AdminBro', function () {
@@ -78,7 +79,10 @@ describe('AdminBro', function () {
       let result: string
 
       beforeEach(function () {
-        result = AdminBro.bundle('../spec/fixtures/example-component', componentName)
+        result = AdminBro.bundle(
+          '../spec/fixtures/example-component',
+          componentName as OverridableComponent,
+        )
       })
 
       it('returns the same component name as which was given', function () {
