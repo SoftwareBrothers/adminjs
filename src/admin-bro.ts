@@ -23,6 +23,7 @@ import { ListActionResponse } from './backend/actions/list-action'
 import { combineTranslations, Locale } from './locale/config'
 import en from './locale/en'
 import { TranslateFunctions, createFunctions } from './utils/translate-functions.factory'
+import { OverridableComponent } from './frontend/utils/overridable-component'
 
 const pkg = JSON.parse(fs.readFileSync(path.join(__dirname, '../package.json'), 'utf-8'))
 export const VERSION = pkg.version
@@ -322,7 +323,7 @@ class AdminBro {
    * // somewhere in the code
    * AdminBro.bundle('./path/to/new-sidebar/component', 'SidebarFooter')
    */
-  public static bundle(src: string, componentName?: string): string {
+  public static bundle(src: string, componentName?: OverridableComponent): string {
     const extensions = ['.jsx', '.js', '.ts', '.tsx']
     let filePath = ''
     const componentId = componentName || _.uniqueId('Component')

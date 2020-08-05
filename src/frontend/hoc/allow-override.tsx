@@ -1,4 +1,5 @@
 import React, { ComponentType } from 'react'
+import { OverridableComponent } from '../utils/overridable-component'
 
 /**
  * @private
@@ -14,7 +15,7 @@ import React, { ComponentType } from 'react'
  */
 function allowOverride<P>(
   OriginalComponent: ComponentType<P>,
-  name: string,
+  name: OverridableComponent,
 ): ComponentType<P & {OriginalComponent?: ComponentType<P>}> {
   const WrapperComponent: React.FC<P> = (props) => {
     let globalAny: any = window
