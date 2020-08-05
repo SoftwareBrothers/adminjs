@@ -41,12 +41,6 @@ describe('BaseResource', function () {
     })
   })
 
-  describe('#name', function () {
-    it('throws NotImplementedError', async function () {
-      expect(() => resource.name()).to.throw(NotImplementedError)
-    })
-  })
-
   describe('#id', function () {
     it('throws NotImplementedError', async function () {
       expect(() => resource.id()).to.throw(NotImplementedError)

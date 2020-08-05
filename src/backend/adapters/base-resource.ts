@@ -85,19 +85,6 @@ class BaseResource {
   }
 
   /**
-   * Return name of the resource.
-   * It could be a table name in SQL database, or collection name in mongoDB.
-   *
-   * Visually it will be shown as the name of the resource in the UI.
-   * @return {String}
-   * @abstract
-   */
-  name(): string {
-    throw new NotImplementedError('BaseResource#name')
-  }
-
-
-  /**
    * Each resource has to have uniq id which will be put to an URL of AdminBro routes.
    * For instance in {@link Router} path for the `new` form is `/resources/{resourceId}/new`
    * @return {String} uniq resource id

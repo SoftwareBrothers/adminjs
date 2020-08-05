@@ -22,7 +22,6 @@ export default (): BaseResource => ({
   _decorated: {} as ResourceDecorator,
   id: sinon.stub().returns(expectedResult.id),
   properties: sinon.stub().returns(expectedResult.properties),
-  name: sinon.stub().returns(expectedResult.resourceName),
   property: sinon.stub().returns(new BaseProperty({ path: 'prop', type: 'string' })),
   databaseName: sinon.stub().returns(expectedResult.databaseName),
   databaseType: sinon.stub().returns(expectedResult.databaseType),
