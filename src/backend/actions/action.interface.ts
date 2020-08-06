@@ -237,7 +237,7 @@ export type After<T> = (
 /**
  * @classdesc
  * Interface representing an Action in AdminBro.
- * Look at {@tutorial 05-actions} to see where you can use this interface.
+ * Look at {@tutorial actions} to see where you can use this interface.
  *
  * #### Example Action
  *

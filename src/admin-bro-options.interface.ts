@@ -236,7 +236,7 @@ export default interface AdminBroOptions {
    * }
    * ```
    *
-   * Check out the [i18n tutorial]{@tutorial 09-i18n} to see how
+   * Check out the [i18n tutorial]{@tutorial i18n} to see how
    * internationalization in AdminBro works.
    */
   locale?: Locale;
