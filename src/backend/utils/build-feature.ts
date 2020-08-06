@@ -59,7 +59,7 @@ const mergeResourceOptions = (
 
   ['listProperties', 'showProperties', 'editProperties', 'filterProperties'].forEach((propName) => {
     if (newOptions[propName]) {
-      options[propName] = uniq([...oldOptions[propName], newOptions[propName]])
+      options[propName] = uniq([...(oldOptions[propName] || []), newOptions[propName]])
     }
   })
 
