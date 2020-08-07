@@ -1,15 +1,25 @@
-import React, { useState, memo } from 'react'
+/* eslint-disable @typescript-eslint/explicit-function-return-type */
+import React, { useState, memo, useEffect } from 'react'
 import { Label, Input, FormGroup, InputGroup, FormMessage, Button, Icon } from '@admin-bro/design-system'
 
 import { EditPropertyProps } from '../base-property-props'
 import { recordPropertyIsEqual } from '../record-property-is-equal'
+import usePrevious from '../../../utils/usePrevious'
 
 const Edit: React.FC<EditPropertyProps> = (props) => {
   const { property, record, onChange } = props
-  const value = record.params[property.name]
+  const propValue = record.params[property.name]
+  const [value, setValue] = useState(propValue)
   const error = record.errors && record.errors[property.name]
-
   const [isInput, setIsInput] = useState(false)
+
+  const previous = usePrevious(propValue)
+  useEffect(() => {
+    // this means props updated
+    if (propValue !== previous) {
+      setValue(propValue)
+    }
+  }, [])
 
   return (
     <FormGroup error={!!error}>
@@ -25,7 +35,8 @@ const Edit: React.FC<EditPropertyProps> = (props) => {
           className="input"
           id={property.name}
           name={property.name}
-          onChange={(event): void => onChange(property.name, event.target.value)}
+          onChange={event => setValue(event.target.value)}
+          onBlur={() => onChange(property.name, value)}
           value={value ?? ''}
           disabled={property.isDisabled}
         />
@@ -33,7 +44,7 @@ const Edit: React.FC<EditPropertyProps> = (props) => {
           variant={isInput ? 'primary' : 'text'}
           type="button"
           size="icon"
-          onClick={(): void => setIsInput(!isInput)}
+          onClick={() => setIsInput(!isInput)}
         >
           <Icon icon="View" />
         </Button>
