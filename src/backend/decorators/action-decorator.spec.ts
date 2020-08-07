@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/explicit-function-return-type */
 import { expect } from 'chai'
 import sinon from 'sinon'
 import ActionDecorator from './action-decorator'
