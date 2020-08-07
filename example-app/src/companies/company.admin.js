@@ -4,7 +4,7 @@ const passwordFeature = require('../features/password/password.feature')
 
 /** @type {AdminBro.ResourceOptions} */
 const options = {
-  listProperties: ['companyName', 'email', 'address'],
+  listProperties: ['companyName', 'email', 'address', 'companySize', 'isAdmin', 'isBig'],
   properties: {
     profilePhotoLocation: {
       isVisible: false,
