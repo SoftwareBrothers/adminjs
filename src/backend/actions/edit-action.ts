@@ -1,5 +1,6 @@
 import Action, { RecordActionResponse } from './action.interface'
 import NotFoundError from '../utils/not-found-error'
+import populator from '../utils/populator'
 
 /**
  * @implements Action
@@ -38,6 +39,8 @@ const EditAction: Action<RecordActionResponse> = {
       return { record: record.toJSON(currentAdmin) }
     }
     await record.update(request.payload)
+    const [populatedRecord] = await populator([record])
+
     if (record.isValid()) {
       return {
         redirectUrl: h.resourceUrl({ resourceId: resource._decorated?.id() || resource.id() }),
@@ -45,11 +48,11 @@ const EditAction: Action<RecordActionResponse> = {
           message: translateMessage('successfullyUpdated', resource.id()),
           type: 'success',
         },
-        record: record.toJSON(currentAdmin),
+        record: populatedRecord.toJSON(currentAdmin),
       }
     }
     return {
-      record: record.toJSON(currentAdmin),
+      record: populatedRecord.toJSON(currentAdmin),
       notice: {
         message: translateMessage('thereWereValidationErrors'),
         type: 'error',
