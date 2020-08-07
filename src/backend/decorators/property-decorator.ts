@@ -47,7 +47,7 @@ class PropertyDecorator {
     this.property = property
     this._admin = admin
     this._resource = resource
-    this.path = path || (options && options.name) || property.name()
+    this.path = path || property.name()
 
     /**
      * Options passed along with a given resource
