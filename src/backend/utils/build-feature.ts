@@ -1,5 +1,6 @@
 /* eslint-disable no-nested-ternary */
 import uniq from 'lodash/uniq'
+import merge from 'lodash/merge'
 import { FeatureType } from '../../admin-bro-options.interface'
 import { ResourceOptions } from '../decorators/resource-options.interface'
 import Action, { ActionResponse } from '../actions/action.interface'
@@ -59,15 +60,17 @@ const mergeResourceOptions = (
 
   ['listProperties', 'showProperties', 'editProperties', 'filterProperties'].forEach((propName) => {
     if (newOptions[propName]) {
-      options[propName] = uniq([...(oldOptions[propName] || []), newOptions[propName]])
+      const mergedOptions = [
+        ...(oldOptions && oldOptions[propName] ? oldOptions[propName] : []),
+        ...(newOptions && newOptions[propName] ? newOptions[propName] : []),
+      ]
+
+      options[propName] = uniq(mergedOptions)
     }
   })
 
   if (oldOptions.properties || newOptions.properties) {
-    options.properties = {
-      ...oldOptions.properties,
-      ...newOptions.properties,
-    }
+    options.properties = merge({}, oldOptions.properties, newOptions.properties)
   }
 
   if (oldOptions.actions || newOptions.actions) {
