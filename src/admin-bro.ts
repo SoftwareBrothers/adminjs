@@ -78,8 +78,6 @@ class AdminBro {
 
   public translateFunctions!: TranslateFunctions
 
-  public static registeredAdapters: Array<Adapter>
-
   /**
    * Contains set of routes available within the application.
    * It is used by external plugins.
@@ -182,7 +180,7 @@ class AdminBro {
     this.initI18n()
 
     const { databases, resources } = this.options
-    const resourcesFactory = new ResourcesFactory(this, AdminBro.registeredAdapters)
+    const resourcesFactory = new ResourcesFactory(this, global.RegisteredAdapters || [])
     this.resources = resourcesFactory.buildResources({ databases, resources })
   }
 
@@ -231,7 +229,8 @@ class AdminBro {
     }
     // checking if both Database and Resource have at least isAdapterFor method
     if (Database.isAdapterFor && Resource.isAdapterFor) {
-      AdminBro.registeredAdapters.push({ Database, Resource })
+      global.RegisteredAdapters = global.RegisteredAdapters || []
+      global.RegisteredAdapters.push({ Database, Resource })
     } else {
       throw new Error('Adapter elements has to be a subclass of AdminBro.BaseResource and AdminBro.BaseDatabase')
     }
@@ -365,7 +364,6 @@ class AdminBro {
   }
 }
 
-AdminBro.registeredAdapters = []
 AdminBro.VERSION = VERSION
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
