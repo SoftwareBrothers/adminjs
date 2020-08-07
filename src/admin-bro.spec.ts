@@ -10,7 +10,7 @@ import { OverridableComponent } from './frontend/utils/overridable-component'
 
 describe('AdminBro', function () {
   beforeEach(function () {
-    AdminBro.registeredAdapters = []
+    global.RegisteredAdapters = []
   })
 
   describe('#constructor', function () {
@@ -28,7 +28,7 @@ describe('AdminBro', function () {
 
     it('adds given adapter to list off all available adapters', function () {
       AdminBro.registerAdapter(this.DatabaseAdapter)
-      expect(AdminBro.registeredAdapters).to.have.lengthOf(1)
+      expect(global.RegisteredAdapters).to.have.lengthOf(1)
     })
 
     it('throws an error when adapter is not full', function () {
