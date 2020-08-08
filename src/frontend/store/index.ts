@@ -3,6 +3,7 @@ import createStore, {
   initializeResources,
   initializeBranding,
   initializeDashboard,
+  initializeAssets,
   initializePaths,
   initializePages,
   setCurrentAdmin,
@@ -13,8 +14,12 @@ import createStore, {
 import AdminBro from '../../admin-bro'
 import { CurrentAdmin } from '../../current-admin.interface'
 import pagesToStore from './pages-to-store'
+import { getBranding, getAssets } from '../../backend/utils/options-parser'
 
-const initializeStore = (admin: AdminBro, currentAdmin?: CurrentAdmin): Store<ReduxState> => {
+const initializeStore = async (
+  admin: AdminBro,
+  currentAdmin?: CurrentAdmin,
+): Promise<Store<ReduxState>> => {
   const store: Store<ReduxState> = createStore()
   const AdminClass: typeof AdminBro = admin.constructor as typeof AdminBro
   const adminVersion = AdminClass.VERSION
@@ -32,7 +37,13 @@ const initializeStore = (admin: AdminBro, currentAdmin?: CurrentAdmin): Store<Re
       }
     }),
   ))
-  store.dispatch(initializeBranding(admin.options.branding))
+
+  const branding = await getBranding(admin, currentAdmin)
+  const assets = await getAssets(admin, currentAdmin)
+
+  store.dispatch(initializeBranding(branding || {}))
+  store.dispatch(initializeAssets(assets || {}))
+
   const {
     loginPath, logoutPath, rootPath, dashboard, pages, assetsCDN,
   } = admin.options

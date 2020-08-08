@@ -32,6 +32,9 @@ const options = {
     admin: true,
     app: process.env.npm_package_version,
   },
+  branding: currentUser => ({
+    companyName: currentUser ? currentUser.email : 'something',
+  }),
   locale: {
     language: 'en',
     translations: {

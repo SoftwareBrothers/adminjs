@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 import { createStore, combineReducers } from 'redux'
 import ResourceJSON from '../../backend/decorators/resource-json.interface'
-import { BrandingOptions, VersionProps, AdminPage } from '../../admin-bro-options.interface'
+import { BrandingOptions, VersionProps, AdminPage, Assets } from '../../admin-bro-options.interface'
 import { CurrentAdmin } from '../../current-admin.interface'
 import { DEFAULT_PATHS } from '../../constants'
 import { NoticeMessage } from './with-notice'
@@ -46,6 +46,14 @@ export const initializeBranding = (data: BrandingOptions): {
   data: BrandingOptions;
 } => ({
   type: 'BRANDING_INITIALIZE',
+  data,
+})
+
+export const initializeAssets = (data: Assets): {
+  type: string;
+  data: Assets;
+} => ({
+  type: 'ASSETS_INITIALIZE',
   data,
 })
 
@@ -163,6 +171,17 @@ const brandingReducer = (state = {}, action: {
   }
 }
 
+const assetsReducer = (state = {}, action: {
+  type: string;
+  data: Assets;
+}) => {
+  switch (action.type) {
+  case 'ASSETS_INITIALIZE':
+    return action.data
+  default: return state
+  }
+}
+
 const pathsReducer = (
   state: Paths = DEFAULT_PATHS,
   action: {type: string; data: Paths},
@@ -242,6 +261,7 @@ const noticesReducer = (state: Array<NoticeMessageInState> = [], action: {
 export type ReduxState = {
   resources: Array<ResourceJSON>;
   branding: BrandingOptions;
+  assets: Assets;
   paths: Paths;
   session: CurrentAdmin | null;
   dashboard: DashboardInState;
@@ -254,6 +274,7 @@ export type ReduxState = {
 const reducer = combineReducers<ReduxState>({
   resources: resourcesReducer,
   branding: brandingReducer,
+  assets: assetsReducer,
   paths: pathsReducer,
   session: sessionReducer,
   dashboard: dashboardReducer,

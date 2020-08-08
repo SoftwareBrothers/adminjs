@@ -3,7 +3,6 @@ import * as path from 'path'
 import * as fs from 'fs'
 import i18n, { i18n as I18n } from 'i18next'
 
-import slash from 'slash'
 import AdminBroOptions, { AdminBroOptionsWithDefault } from './admin-bro-options.interface'
 import BaseResource from './backend/adapters/base-resource'
 import BaseDatabase from './backend/adapters/base-database'
@@ -34,15 +33,7 @@ const defaults: AdminBroOptionsWithDefault = {
   loginPath: DEFAULT_PATHS.loginPath,
   databases: [],
   resources: [],
-  branding: {
-    companyName: 'Company',
-    softwareBrothers: true,
-  },
   dashboard: {},
-  assets: {
-    styles: [],
-    scripts: [],
-  },
   pages: {},
 }
 
@@ -170,12 +161,6 @@ class AdminBro {
      * @description Options given by a user
      */
     this.options = _.merge({}, defaults, options)
-
-    const defaultLogo = slash(path.join(this.options.rootPath, '/frontend/assets/logo-mini.svg'))
-    this.options.branding = this.options.branding || {}
-    this.options.branding.logo = this.options.branding.logo !== undefined
-      ? this.options.branding.logo
-      : defaultLogo
 
     this.initI18n()
 

@@ -15,8 +15,10 @@ import createStore, {
   initializeBranding,
   initializeLocale,
   ReduxState,
+  initializeAssets,
 } from './store/store'
 import ViewHelpers from '../backend/utils/view-helpers'
+import { getBranding, getAssets, getFaviconFromBranding } from '../backend/utils/options-parser'
 
 type LoginTemplateAttributes = {
   /**
@@ -29,14 +31,23 @@ type LoginTemplateAttributes = {
   errorMessage?: string;
 }
 
-const html = (admin: AdminBro, { action, errorMessage }: LoginTemplateAttributes): string => {
+const html = async (
+  admin: AdminBro,
+  { action, errorMessage }: LoginTemplateAttributes,
+): Promise<string> => {
   const h = new ViewHelpers({ options: admin.options })
 
   const store: Store<ReduxState> = createStore()
-  store.dispatch(initializeLocale(admin.locale))
-  store.dispatch(initializeBranding(admin.options.branding))
 
-  const theme = combineStyles((admin.options.branding && admin.options.branding.theme) || {})
+  const branding = await getBranding(admin)
+  const assets = await getAssets(admin)
+  const faviconTag = getFaviconFromBranding(branding)
+
+  store.dispatch(initializeBranding(branding))
+  store.dispatch(initializeAssets(assets))
+  store.dispatch(initializeLocale(admin.locale))
+
+  const theme = combineStyles((branding && branding.theme) || {})
   const { locale } = store.getState()
   i18n
     .init({
@@ -75,6 +86,7 @@ const html = (admin: AdminBro, { action, errorMessage }: LoginTemplateAttributes
       <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
       <title>AdminPanel</title>
       ${style}
+      ${faviconTag}
       <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,700" type="text/css">
 
       <script src="${h.assetPath('global.bundle.js')}"></script>

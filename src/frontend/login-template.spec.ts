@@ -6,11 +6,12 @@ import AdminBro from '../admin-bro'
 describe('login-template', function () {
   const action = '/login'
 
-  it('renders error message', function () {
+  it('renders error message', async function () {
     const adminBro = new AdminBro({})
     const errorMessage = 'Something went wrong'
-    expect(
-      loginTemplate(adminBro, { action, errorMessage }),
-    ).to.contain(errorMessage)
+
+    const html = await loginTemplate(adminBro, { action, errorMessage })
+
+    expect(html).to.contain(errorMessage)
   })
 })
