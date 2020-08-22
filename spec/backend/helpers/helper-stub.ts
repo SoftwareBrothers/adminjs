@@ -10,7 +10,6 @@ const expectedResult = {
   rootUrl: 'admin',
   assetPath: 'assetPath',
   resourceUrl: 'resourceUrl',
-  designSystemUrl: 'designSystemUrl',
   dashboardUrl: 'dashboardUrl',
   pageUrl: 'pageUrl',
 }
@@ -30,7 +29,6 @@ export default (): ViewHelpers => (
     logoutUrl: sinon.stub().returns(expectedResult.logoutUrl),
     assetPath: sinon.stub().returns(expectedResult.assetPath),
     resourceUrl: sinon.stub().returns(expectedResult.resourceUrl),
-    designSystemUrl: sinon.stub().returns(expectedResult.designSystemUrl),
     dashboardUrl: sinon.stub().returns(expectedResult.dashboardUrl),
     pageUrl: sinon.stub().returns(expectedResult.pageUrl),
   }

@@ -1,5 +1,6 @@
 import React, { ReactNode } from 'react'
 import { ReactComponentLike } from 'prop-types'
+import { Box } from '@admin-bro/design-system'
 
 import ErrorBoundary from '../app/error-boundary'
 
@@ -15,7 +16,6 @@ import * as textarea from './textarea'
 import * as password from './password'
 import { BasePropertyProps } from './base-property-props'
 import { PropertyType } from '../../../backend/adapters/base-property'
-import { Box } from '../design-system'
 
 let globalAny: any = {}
 

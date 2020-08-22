@@ -1,8 +1,8 @@
 
 import React, { ReactNode } from 'react'
+import { Label, FormGroup } from '@admin-bro/design-system'
 
 import { EditPropertyProps } from '../base-property-props'
-import { Label, FormGroup } from '../../design-system'
 
 export default class Show extends React.PureComponent<EditPropertyProps> {
   render(): ReactNode {

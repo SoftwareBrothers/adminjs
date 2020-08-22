@@ -4,7 +4,7 @@ import ForbiddenError from '../utils/forbidden-error'
 
 /**
  * @private
- *
+ * @classdesc
  * Function which catches all the errors thrown by the action hooks or handler
  */
 const actionErrorHandler = (error: any, context: ActionContext): ActionResponse => {

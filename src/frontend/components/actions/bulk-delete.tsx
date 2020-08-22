@@ -1,4 +1,8 @@
 import React, { useState } from 'react'
+import {
+  Table, TableBody, TableRow, TableCell, Text,
+  DrawerContent, DrawerFooter, Button, MessageBox, Icon,
+} from '@admin-bro/design-system'
 
 import { RouteComponentProps, withRouter } from 'react-router'
 import PropertyType from '../property-type'
@@ -7,10 +11,6 @@ import ApiClient from '../../utils/api-client'
 import withNotice, { AddNoticeProps } from '../../store/with-notice'
 import { appendForceRefresh } from './utils/append-force-refresh'
 
-import {
-  Table, TableBody, TableRow, TableCell, Text,
-  DrawerContent, DrawerFooter, Button, MessageBox, Icon,
-} from '../design-system'
 import ActionHeader from '../app/action-header'
 import { useTranslation } from '../../hooks'
 

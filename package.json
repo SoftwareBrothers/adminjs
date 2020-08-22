@@ -1,6 +1,6 @@
 {
   "name": "admin-bro",
-  "version": "2.9.0",
+  "version": "3.0.0-beta.15",
   "description": "Admin panel for apps written in node.js",
   "main": "index.js",
   "types": "index.d.ts",
@@ -75,6 +75,7 @@
   },
   "homepage": "https://github.com/SoftwareBrothers/admin-bro#readme",
   "dependencies": {
+    "@admin-bro/design-system": "^1.3.3",
     "@babel/core": "^7.10.2",
     "@babel/parser": "^7.10.2",
     "@babel/plugin-transform-runtime": "^7.10.1",
@@ -83,23 +84,17 @@
     "@babel/preset-react": "^7.10.1",
     "@babel/preset-typescript": "^7.10.1",
     "@babel/register": "^7.10.1",
-    "@carbon/icons-react": "^10.12.0",
     "@types/react": "^16.9.16",
     "axios": "^0.19.2",
-    "babel-plugin-styled-components": "^1.10.7",
     "commander": "^5.1.0",
     "flat": "^4.1.0",
     "i18next": "^19.1.0",
-    "jw-paginate": "^1.0.2",
     "lodash": "^4.17.11",
     "ora": "^4.0.2",
-    "polished": "^3.4.2",
     "prop-types": "^15.7.2",
     "react": ">= 16.13.1",
-    "react-datepicker": "^2.11.0",
     "react-dom": ">= 16.13.1",
     "react-i18next": "^11.3.1",
-    "react-icons": "^3.8.0",
     "react-is": "^16.13.1",
     "react-redux": "^7.2.0",
     "react-router": "^5.2.0",
@@ -127,7 +122,6 @@
     "@types/flat": "^0.0.28",
     "@types/lodash": "^4.14.141",
     "@types/mocha": "^5.2.7",
-    "@types/react-datepicker": "^3.1.0",
     "@types/react-dom": "^16.9.8",
     "@types/react-redux": "^7.1.9",
     "@types/react-router": "^5.1.7",
@@ -163,8 +157,9 @@
     "rollup-plugin-node-globals": "^1.4.0",
     "semantic-release": "^17.0.7",
     "semantic-release-jira-releases-sb": "^0.7.2",
+    "semantic-release-slack-bot": "^1.6.2",
     "sinon": "^6.1.5",
     "sinon-chai": "^3.2.0",
-    "typescript": "^3.9.5"
+    "typescript": "^3.9.7"
   }
 }

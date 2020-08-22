@@ -1,8 +1,8 @@
 import React, { ReactNode } from 'react'
 import { connect } from 'react-redux'
+import { MessageBox } from '@admin-bro/design-system'
 
 import { dropNotice, setNoticeProgress, NoticeMessageInState, ReduxState } from '../../store/store'
-import { MessageBox } from '../design-system'
 
 const TIME_TO_DISAPPEAR = 3
 

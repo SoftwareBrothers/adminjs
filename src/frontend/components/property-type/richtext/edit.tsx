@@ -1,10 +1,79 @@
-/* eslint-disable jsx-a11y/label-has-for */
-import React, { ReactNode } from 'react'
-import { findDOMNode } from 'react-dom'
-
+/* eslint-disable @typescript-eslint/no-use-before-define */
+/* eslint-disable @typescript-eslint/explicit-function-return-type */
+/* eslint-disable no-unused-expressions */
+import React, { useRef, useEffect, FC, useState, memo } from 'react'
 import styled from 'styled-components'
+import { FormGroup, Label, FormMessage } from '@admin-bro/design-system'
+
 import { EditPropertyProps } from '../base-property-props'
-import { FormGroup, Label, FormMessage } from '../../design-system'
+import { recordPropertyIsEqual } from '../record-property-is-equal'
+import loadQuill from '../../../utils/loadQuill'
+
+
+const Edit: FC<EditPropertyProps> = (props) => {
+  const { property, record, onChange } = props
+  const value = record.params?.[property.name] ?? ''
+  const error = record.errors && record.errors[property.name]
+
+  const [quill, setQuill] = useState<Quill | null>(null)
+  const editorRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    let shouldLoad = true
+    loadQuill().then(() => {
+      if (!shouldLoad) {
+        return
+      }
+      const quillInstance = new (Quill as any)(editorRef.current, {
+        modules: { toolbar: toolbarOptions },
+        theme: 'snow',
+      })
+      setQuill(quillInstance)
+    })
+    return () => {
+      shouldLoad = false
+    }
+  }, [])
+
+  useEffect(() => {
+    if (!editorRef.current || !quill) {
+      return
+    }
+    if (value) {
+      quill.root.innerHTML = value
+    }
+  }, [value, quill])
+
+  useEffect(() => {
+    const editor = quill?.root
+    if (!editor) {
+      return undefined
+    }
+    const handler = () => {
+      const content = editor.innerHTML
+      onChange?.(property.name, content)
+    }
+    editor?.addEventListener('blur', handler)
+    return () => {
+      editor?.removeEventListener('blur', handler)
+    }
+  }, [onChange, property.name, quill])
+
+  return (
+    <FormGroup error={Boolean(error)}>
+      <Label
+        htmlFor={property.name}
+        required={property.isRequired}
+      >
+        {property.label}
+      </Label>
+      <Wrapper>
+        <div className="quill-editor" ref={editorRef} style={{ height: '400px' }} />
+      </Wrapper>
+      <FormMessage>{error?.message}</FormMessage>
+    </FormGroup>
+  )
+}
 
 const toolbarOptions = [
   [{ header: [1, 2, 3, 4, 5, 6, false] }],
@@ -41,117 +110,4 @@ const Wrapper = styled.div.attrs({
   }
 `
 
-const loadQuill = () => new Promise((resolve) => {
-  const id = 'quill-script-tag'
-  if (window.document.getElementById(id)) {
-    // it could be a situation where id exists but quill hasn't been loaded. In this case
-    // we check if Quill global variable exists
-    const checkIfLoaded = () => {
-      if (typeof Quill === 'function') {
-        resolve()
-      }
-    }
-    checkIfLoaded()
-    setInterval(checkIfLoaded, 500)
-    return
-  }
-  const script = window.document.createElement('script')
-  script.src = 'https://cdn.quilljs.com/1.3.6/quill.js'
-  script.async = true
-  script.defer = true
-  script.id = id
-  script.addEventListener('load', () => {
-    resolve()
-  })
-
-  const style = window.document.createElement('link')
-  style.rel = 'stylesheet'
-  style.type = 'text/css'
-  style.href = 'https://cdn.quilljs.com/1.3.6/quill.snow.css'
-
-  window.document.body.appendChild(script)
-  window.document.body.appendChild(style)
-})
-
-export default class Edit extends React.Component<EditPropertyProps> {
-  private wysiwigRef: React.RefObject<any>
-
-  private quill: any
-
-  constructor(props: EditPropertyProps) {
-    super(props)
-    this.wysiwigRef = React.createRef()
-  }
-
-  componentDidMount(): void {
-    loadQuill().then(() => {
-      this.setupWysiwig()
-    })
-  }
-
-  shouldComponentUpdate(nextProps: EditPropertyProps): boolean {
-    const { record, property } = this.props
-    if (!nextProps) { return false }
-    const oldError = record.errors
-                     && record.errors[property.name]
-                     && record.errors[property.name].message
-    const newError = nextProps.record.errors
-                     && nextProps.record.errors[property.name]
-                     && nextProps.record.errors[property.name].message
-    return oldError !== newError
-  }
-
-  componentDidUpdate(): void {
-    this.setupWysiwig()
-  }
-
-  setupWysiwig(): void {
-    const { property, record } = this.props
-    const value = (record.params && record.params[property.name]) || ''
-    this.wysiwigRef.current.innerHTML = value
-    if (this.quill) {
-      delete this.quill
-      // eslint-disable-next-line react/no-find-dom-node
-      const thisNode = findDOMNode(this) as Element
-      const toolbars = thisNode.getElementsByClassName('ql-toolbar')
-      for (let index = 0; index < toolbars.length; index += 1) {
-        toolbars[index].remove()
-      }
-    }
-    this.quill = new Quill(this.wysiwigRef.current, {
-      modules: {
-        toolbar: toolbarOptions,
-      },
-      theme: 'snow',
-      ...property.custom,
-    })
-
-    this.quill.on('text-change', () => {
-      this.handleChange(this.wysiwigRef.current.children[0].innerHTML)
-    })
-  }
-
-  handleChange(value: any): void {
-    const { onChange, property } = this.props
-    onChange(property.name, value)
-  }
-
-  render(): ReactNode {
-    const { property, record } = this.props
-    const error = record.errors && record.errors[property.name]
-    return (
-      <FormGroup error={!!error}>
-        <Label
-          htmlFor={property.name}
-          required={property.isRequired}
-        >
-          {property.label}
-        </Label>
-        <Wrapper>
-          <div className="quill-editor" ref={this.wysiwigRef} style={{ height: '400px' }} />
-        </Wrapper>
-        <FormMessage>{error && error.message}</FormMessage>
-      </FormGroup>
-    )
-  }
-}
+export default memo(Edit, recordPropertyIsEqual)

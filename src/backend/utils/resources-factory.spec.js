@@ -1,3 +1,4 @@
+import { expect } from 'chai'
 import ResourcesFactory from './resources-factory'
 import BaseDatabase from '../adapters/base-database'
 import BaseResource from '../adapters/base-resource'
@@ -103,17 +104,17 @@ describe('ResourcesFactory', function () {
     it('assigns ResourceDecorator when no options were given', function () {
       this.resourcesFactory._decorateResources([{ resource: new BaseResource() }])
       expect(this.assignDecoratorStub).to.have.been.calledWith(
-        this.sinon.match.any, this.sinon.match.falsy,
+        this.sinon.match.any, this.sinon.match({}),
       )
     })
 
     it('assigns ResourceDecorator with options when there were given', function () {
-      const options = { name: 'someName' }
+      const options = { id: 'someId' }
       const resource = new BaseResource()
       this.resourcesFactory._decorateResources([{ resource, options }])
 
       expect(this.assignDecoratorStub).to.have.been.calledWith(
-        this.sinon.match.any, this.sinon.match.same(options),
+        this.sinon.match.any, this.sinon.match(options),
       )
     })
   })

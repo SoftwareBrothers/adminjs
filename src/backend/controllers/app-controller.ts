@@ -23,11 +23,6 @@ export default class AppController {
     return layoutTemplate(this._admin, this.currentAdmin, '')
   }
 
-  async designSystem(): Promise<string> {
-    const href = this.h.designSystemUrl()
-    return layoutTemplate(this._admin, this.currentAdmin, href)
-  }
-
   async resourceAction({ params }: ActionRequest): Promise<string> {
     const { resourceId, actionName } = params
     const href = this.h.resourceActionUrl({ resourceId, actionName })

@@ -4,7 +4,7 @@ import { createStore } from 'redux'
 import { Provider } from 'react-redux'
 import { ThemeProvider, StyleSheetManager } from 'styled-components'
 
-import * as theme from '../src/frontend/components/design-system/theme'
+import * as theme from '../../admin-bro-design-system/src/theme'
 
 const store = createStore(() => ({}), {})
 

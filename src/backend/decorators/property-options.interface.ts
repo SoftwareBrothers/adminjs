@@ -57,11 +57,6 @@ export default interface PropertyOptions {
   position?: number;
 
   /**
-   * Name of the property
-   */
-  name?: string;
-
-  /**
    * If options should be limited to finite set. After setting this
    * in the UI you will see select box instead of the input
    */

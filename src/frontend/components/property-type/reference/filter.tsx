@@ -1,11 +1,10 @@
 import React, { ReactNode } from 'react'
 import Select from 'react-select/lib/Async'
 import { ThemeProps, DefaultTheme, withTheme } from 'styled-components'
-import ApiClient from '../../../utils/api-client'
+import { FormGroup, Label, filterStyles } from '@admin-bro/design-system'
 
-import { filterStyles } from '../../../styles/select-styles'
+import ApiClient from '../../../utils/api-client'
 import { FilterPropertyProps, SelectRecord } from '../base-property-props'
-import { FormGroup, Label } from '../../design-system'
 
 type CombinedProps = FilterPropertyProps & ThemeProps<DefaultTheme>
 

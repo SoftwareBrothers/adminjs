@@ -4,13 +4,14 @@ import { renderToString } from 'react-dom/server'
 import { StaticRouter } from 'react-router-dom'
 import { Provider } from 'react-redux'
 import { ThemeProvider } from 'styled-components'
+import { combineStyles } from '@admin-bro/design-system'
 
 import App from './components/application'
 import ViewHelpers from '../backend/utils/view-helpers'
 import initializeStore from './store'
-import combineStyles from './styles/combine-styles'
 import AdminBro from '../admin-bro'
 import { CurrentAdmin } from '../current-admin.interface'
+import { getFaviconFromBranding } from '../backend/utils/options-parser'
 
 /**
  * Renders (SSR) html for given location
@@ -22,16 +23,24 @@ import { CurrentAdmin } from '../current-admin.interface'
  *
  * @private
  */
-const html = (admin: AdminBro, currentAdmin?: CurrentAdmin, location = '/'): string => {
+const html = async (
+  admin: AdminBro,
+  currentAdmin?: CurrentAdmin,
+  location = '/',
+): Promise<string> => {
   const context = {}
   const h = new ViewHelpers({ options: admin.options })
-  const store = initializeStore(admin, currentAdmin)
+
+  const store = await initializeStore(admin, currentAdmin)
   const reduxState = store.getState()
-  const scripts = ((admin.options.assets && admin.options.assets.scripts) || [])
+
+  const { branding, assets } = reduxState
+
+  const scripts = ((assets && assets.scripts) || [])
     .map(s => `<script src="${s}"></script>`)
-  const styles = ((admin.options.assets && admin.options.assets.styles) || [])
+  const styles = ((assets && assets.styles) || [])
     .map(l => `<link rel="stylesheet" type="text/css" href="${l}">`)
-  const theme = combineStyles((admin.options.branding && admin.options.branding.theme) || {})
+  const theme = combineStyles((branding.theme) || {})
 
   const jsx = (
     // eslint-disable-next-line react/jsx-filename-extension
@@ -46,12 +55,7 @@ const html = (admin: AdminBro, currentAdmin?: CurrentAdmin, location = '/'): str
 
   // const appComponent = renderToString(jsx)
 
-  let faviconTag = ''
-  if (admin.options.branding.favicon) {
-    const { favicon } = admin.options.branding
-    const type = favicon.match(/.*\.png$/) ? 'image/png' : 'image/x-icon'
-    faviconTag = `<link rel="shortcut icon" type="${type}" href="${favicon}" />`
-  }
+  const faviconTag = getFaviconFromBranding(branding)
 
   return `
     <!DOCTYPE html>
@@ -64,12 +68,13 @@ const html = (admin: AdminBro, currentAdmin?: CurrentAdmin, location = '/'): str
       </script>
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-      <title>${admin.options.branding.companyName}</title>
+      <title>${branding.companyName}</title>
       ${faviconTag}
 
       <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,700" type="text/css">
 
       <script src="${h.assetPath('global.bundle.js')}"></script>
+      <script src="${h.assetPath('design-system.bundle.js')}"></script>
       <script src="${h.assetPath('app.bundle.js')}"></script>
       <script src="${h.assetPath('components.bundle.js')}"></script>
       ${styles.join('\n')}

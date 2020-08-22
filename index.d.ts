@@ -3,12 +3,10 @@ import AdminBro from './types/src/admin-bro'
 import * as ACTIONS from './types/src/backend/actions/index'
 import { ReduxState } from './types/src/frontend/store/store'
 
-import {
-  colors, space, sizes, fontSizes, fontWeights,
-  lineHeights, font,
-} from './types/src/frontend/styles/variables'
-
+export * from '@admin-bro/design-system'
 export * from './types/src/frontend/store/store'
+export * from './types/src/backend/utils/build-feature'
+export * from './types/src/frontend/utils/overridable-component'
 
 export { default as Router } from './types/src/backend/router'
 export { default as Filter } from './types/src/backend/utils/filter'
@@ -63,7 +61,7 @@ export {
 export { default as BaseProperty } from './types/src/backend/adapters/base-property'
 export { default as BaseResource } from './types/src/backend/adapters/base-resource'
 export { default as BaseDatabase } from './types/src/backend/adapters/base-database'
-export { default as BaseRecord } from './types/src/backend/adapters/base-record'
+export { ParamsType, default as BaseRecord } from './types/src/backend/adapters/base-record'
 
 export { default as RecordJSON } from './types/src/backend/decorators/record-json.interface'
 export { default as ResourceJSON } from './types/src/backend/decorators/resource-json.interface'
@@ -74,17 +72,6 @@ export { default as PageJSON } from './types/src/backend/decorators/page-json.in
 export { BasePropertyProps, FilterPropertyProps, ShowPropertyProps, EditPropertyProps } from './types/src/frontend/components/property-type/base-property-props'
 export { ActionProps } from './types/src/frontend/components/actions/action.props'
 
-export type DefaultTheme = {
-  colors: typeof colors;
-  space: typeof space;
-  sizes: typeof sizes;
-  fontSizes: typeof fontSizes;
-  fontWeights: typeof fontWeights;
-  lineHeights: typeof lineHeights;
-  font: typeof font;
-}
-
-export * from './types/src/frontend/components/design-system'
 export * from './types/src/frontend/components/app'
 export * from './types/src/constants'
 export * from './types/src/frontend/hooks'

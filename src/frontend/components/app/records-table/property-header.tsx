@@ -1,8 +1,8 @@
 import React from 'react'
+import { TableCell } from '@admin-bro/design-system'
 
 import PropertyJSON from '../../../../backend/decorators/property-json.interface'
 import SortLink from '../sort-link'
-import { TableCell } from '../../design-system'
 
 type Props = {
   property: PropertyJSON;

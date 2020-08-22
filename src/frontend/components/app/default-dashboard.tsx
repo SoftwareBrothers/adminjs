@@ -1,7 +1,16 @@
 import React from 'react'
 import styled from 'styled-components'
+import {
+  Box,
+  H2,
+  H5,
+  H4,
+  Text,
+  Illustration,
+  IllustrationProps,
+  Button,
+} from '@admin-bro/design-system'
 
-import { Box, H2, H5, H4, Text, Illustration, IllustrationProps, Button } from '../design-system'
 import { useTranslation } from '../../hooks'
 
 const pageHeaderHeight = 284

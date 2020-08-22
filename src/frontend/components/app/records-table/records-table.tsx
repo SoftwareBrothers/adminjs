@@ -1,10 +1,10 @@
 import React from 'react'
+import { Table, TableBody, Loader } from '@admin-bro/design-system'
 
 import RecordInList from './record-in-list'
 import RecordsTableHeader from './records-table-header'
 import NoRecords from './no-records'
 
-import { Table, TableBody, Loader } from '../../design-system'
 import ResourceJSON from '../../../../backend/decorators/resource-json.interface'
 import RecordJSON from '../../../../backend/decorators/record-json.interface'
 import SelectedRecords from './selected-records'

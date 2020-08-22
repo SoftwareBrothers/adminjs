@@ -1,8 +1,10 @@
 import React, { ComponentType } from 'react'
+import { OverridableComponent } from '../utils/overridable-component'
 
 /**
  * @private
  *
+ * @classdesc
  * Overrides one of the component form AdminBro core when user pass its name to
  * {@link AdminBro.bundle} method.
  *
@@ -13,7 +15,7 @@ import React, { ComponentType } from 'react'
  */
 function allowOverride<P>(
   OriginalComponent: ComponentType<P>,
-  name: string,
+  name: OverridableComponent,
 ): ComponentType<P & {OriginalComponent?: ComponentType<P>}> {
   const WrapperComponent: React.FC<P> = (props) => {
     let globalAny: any = window

@@ -1,10 +1,10 @@
 import React from 'react'
+import { TableCaption, Button, Icon, Text } from '@admin-bro/design-system'
 
 import ResourceJSON from '../../../../backend/decorators/resource-json.interface'
 import RecordJSON from '../../../../backend/decorators/record-json.interface'
 import ActionButton from '../action-button'
 import getBulkActionsFromRecords from './utils/get-bulk-actions-from-records'
-import { TableCaption, Button, Icon, Text } from '../../design-system'
 import { useTranslation } from '../../../hooks'
 
 type Props = {

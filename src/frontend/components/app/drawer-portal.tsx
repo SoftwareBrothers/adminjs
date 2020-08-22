@@ -1,9 +1,7 @@
 import React, { useEffect, ReactNode, useState } from 'react'
 import { createPortal, render } from 'react-dom'
-
+import { Drawer, DEFAULT_DRAWER_WIDTH } from '@admin-bro/design-system'
 import { ThemeProvider } from 'styled-components'
-import { DEFAULT_DRAWER_WIDTH } from '../../../constants'
-import { Drawer } from '../design-system'
 
 /**
  * @alias DrawerPortalProps

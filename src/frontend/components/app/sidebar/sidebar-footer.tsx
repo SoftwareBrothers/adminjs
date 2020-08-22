@@ -1,6 +1,6 @@
 import React from 'react'
+import { Box, Text, Icon, Link } from '@admin-bro/design-system'
 
-import { Box, Text, Icon, Link } from '../../design-system'
 import allowOverride from '../../../hoc/allow-override'
 
 const SidebarFooter: React.FC = () => (

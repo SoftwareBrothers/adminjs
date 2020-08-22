@@ -2,7 +2,20 @@ import React from 'react'
 import styled, { createGlobalStyle } from 'styled-components'
 
 import { useSelector } from 'react-redux'
-import { Box, H5, H2, Label, Illustration, Input, FormGroup, Button, Text, Icon, Link, MessageBox } from '../design-system'
+import {
+  Box,
+  H5,
+  H2,
+  Label,
+  Illustration,
+  Input,
+  FormGroup,
+  Button,
+  Text,
+  Icon,
+  Link,
+  MessageBox,
+} from '@admin-bro/design-system'
 import { useTranslation } from '../../hooks'
 import { ReduxState } from '../../store/store'
 

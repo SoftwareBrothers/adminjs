@@ -3,7 +3,6 @@ import * as path from 'path'
 import * as fs from 'fs'
 import i18n, { i18n as I18n } from 'i18next'
 
-import slash from 'slash'
 import AdminBroOptions, { AdminBroOptionsWithDefault } from './admin-bro-options.interface'
 import BaseResource from './backend/adapters/base-resource'
 import BaseDatabase from './backend/adapters/base-database'
@@ -23,6 +22,7 @@ import { ListActionResponse } from './backend/actions/list-action'
 import { combineTranslations, Locale } from './locale/config'
 import en from './locale/en'
 import { TranslateFunctions, createFunctions } from './utils/translate-functions.factory'
+import { OverridableComponent } from './frontend/utils/overridable-component'
 
 const pkg = JSON.parse(fs.readFileSync(path.join(__dirname, '../package.json'), 'utf-8'))
 export const VERSION = pkg.version
@@ -33,15 +33,7 @@ const defaults: AdminBroOptionsWithDefault = {
   loginPath: DEFAULT_PATHS.loginPath,
   databases: [],
   resources: [],
-  branding: {
-    companyName: 'Company',
-    softwareBrothers: true,
-  },
   dashboard: {},
-  assets: {
-    styles: [],
-    scripts: [],
-  },
   pages: {},
 }
 
@@ -52,8 +44,6 @@ type ActionsMap = {
   new: Action<RecordActionResponse>;
   list: Action<ListActionResponse>;
 }
-
-type UserComponentsMap = {[key: string]: string}
 
 export type Adapter = { Database: typeof BaseDatabase; Resource: typeof BaseResource }
 
@@ -78,8 +68,6 @@ class AdminBro {
   public i18n!: I18n
 
   public translateFunctions!: TranslateFunctions
-
-  public static registeredAdapters: Array<Adapter>
 
   /**
    * Contains set of routes available within the application.
@@ -158,11 +146,6 @@ class AdminBro {
   public static VERSION: string
 
   /**
-   * List of all bundled components
-   */
-  public static UserComponents: UserComponentsMap
-
-  /**
    * @param   {AdminBroOptions} options      Options passed to AdminBro
    */
   constructor(options: AdminBroOptions = {}) {
@@ -179,16 +162,10 @@ class AdminBro {
      */
     this.options = _.merge({}, defaults, options)
 
-    const defaultLogo = slash(path.join(this.options.rootPath, '/frontend/assets/logo-mini.svg'))
-    this.options.branding = this.options.branding || {}
-    this.options.branding.logo = this.options.branding.logo !== undefined
-      ? this.options.branding.logo
-      : defaultLogo
-
     this.initI18n()
 
     const { databases, resources } = this.options
-    const resourcesFactory = new ResourcesFactory(this, AdminBro.registeredAdapters)
+    const resourcesFactory = new ResourcesFactory(this, global.RegisteredAdapters || [])
     this.resources = resourcesFactory.buildResources({ databases, resources })
   }
 
@@ -237,7 +214,8 @@ class AdminBro {
     }
     // checking if both Database and Resource have at least isAdapterFor method
     if (Database.isAdapterFor && Resource.isAdapterFor) {
-      AdminBro.registeredAdapters.push({ Database, Resource })
+      global.RegisteredAdapters = global.RegisteredAdapters || []
+      global.RegisteredAdapters.push({ Database, Resource })
     } else {
       throw new Error('Adapter elements has to be a subclass of AdminBro.BaseResource and AdminBro.BaseDatabase')
     }
@@ -329,7 +307,7 @@ class AdminBro {
    * // somewhere in the code
    * AdminBro.bundle('./path/to/new-sidebar/component', 'SidebarFooter')
    */
-  public static bundle(src: string, componentName?: string): string {
+  public static bundle(src: string, componentName?: OverridableComponent): string {
     const extensions = ['.jsx', '.js', '.ts', '.tsx']
     let filePath = ''
     const componentId = componentName || _.uniqueId('Component')
@@ -357,14 +335,20 @@ class AdminBro {
       throw new ConfigurationError(`Given file "${src}", doesn't exist.`, 'AdminBro.html')
     }
 
-    AdminBro.UserComponents[componentId] = path.format({ root, dir, name })
+    // We have to put this to the global scope because of the NPM resolution. If we put this to
+    // let say `AdminBro.UserComponents` (static member) it wont work in a case where user uses
+    // AdminBro.bundle from a different packages (i.e. from the extension) because there, there
+    // is an another AdminBro version (npm installs different versions for each package). Also
+    // putting admin to peerDependencies wont solve this issue, because in the development mode
+    // we have to install admin-bro it as a devDependency, because we want to run test or have
+    // proper types.
+    global.UserComponents = global.UserComponents || {}
+    global.UserComponents[componentId] = path.format({ root, dir, name })
 
     return componentId
   }
 }
 
-AdminBro.UserComponents = {}
-AdminBro.registeredAdapters = []
 AdminBro.VERSION = VERSION
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface

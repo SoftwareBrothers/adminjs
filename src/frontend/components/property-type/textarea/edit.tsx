@@ -1,28 +1,27 @@
-import React, { useCallback, memo } from 'react'
+/* eslint-disable @typescript-eslint/explicit-function-return-type */
+import React, { memo, useState, FC, useEffect } from 'react'
+import { Input, Label, FormGroup, FormMessage } from '@admin-bro/design-system'
 
 import { EditPropertyProps } from '../base-property-props'
-import { Input, Label, FormGroup, FormMessage } from '../../design-system'
 import { recordPropertyIsEqual } from '../record-property-is-equal'
+import usePrevious from '../../../utils/usePrevious'
 
-const Edit: React.FC<EditPropertyProps> = (props) => {
+const Edit: FC<EditPropertyProps> = (props) => {
   const { onChange, property, record } = props
+  const propValue = record.params?.[property.name] ?? ''
+  const [value, setValue] = useState(propValue)
+  const error = record.errors?.[property.name]
 
-  const handleInputChange = useCallback((event): void => {
-    onChange(property.name, event.target.value)
-  }, [onChange, property.name])
-
-  const value = (
-    record.params
-    && typeof record.params[property.name] !== 'undefined'
-    && record.params[property.name] !== null
-  )
-    ? record.params[property.name]
-    : ''
-
-  const error = record.errors && record.errors[property.name]
+  const previous = usePrevious(propValue)
+  useEffect(() => {
+    // this means props updated
+    if (propValue !== previous) {
+      setValue(propValue)
+    }
+  }, [])
 
   return (
-    <FormGroup error={!!error}>
+    <FormGroup error={Boolean(error)}>
       <Label
         htmlFor={property.name}
         required={property.isRequired}
@@ -34,7 +33,8 @@ const Edit: React.FC<EditPropertyProps> = (props) => {
         rows={(value.match(/\n/g) || []).length + 1}
         id={property.name}
         name={property.name}
-        onChange={handleInputChange}
+        onChange={e => setValue(e.target.value)}
+        onBlur={() => onChange(property.name, value)}
         value={value}
         disabled={property.isDisabled}
       />

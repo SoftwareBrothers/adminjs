@@ -1,12 +1,11 @@
 import React from 'react'
-
 import { Trans } from 'react-i18next'
-import ErrorBoundary from './error-boundary'
+import { MessageBox, Link } from '@admin-bro/design-system'
 
+import ErrorBoundary from './error-boundary'
 import * as actions from '../actions'
 import { DOCS } from '../../../constants'
 import { ActionProps } from '../actions/action.props'
-import { MessageBox, Link } from '../design-system'
 import { useTranslation } from '../../hooks'
 
 declare const AdminBro: {

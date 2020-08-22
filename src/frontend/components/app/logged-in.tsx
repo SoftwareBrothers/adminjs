@@ -1,7 +1,7 @@
 import React from 'react'
+import { LoggedUser, Box, DropDownItem, Link } from '@admin-bro/design-system'
 
 import { CurrentAdmin } from '../../../current-admin.interface'
-import { LoggedUser, Box, DropDownItem, Link } from '../design-system'
 import { useTranslation } from '../../hooks'
 import allowOverride from '../../hoc/allow-override'
 

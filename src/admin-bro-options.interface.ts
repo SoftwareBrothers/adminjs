@@ -1,10 +1,11 @@
+import { ThemeOverride } from '@admin-bro/design-system'
+
 import BaseResource from './backend/adapters/base-resource'
 import BaseDatabase from './backend/adapters/base-database'
 import { PageContext } from './backend/actions/action.interface'
 import { ResourceOptions } from './backend/decorators/resource-options.interface'
-import { colors, sizes, font, fontSizes, fontWeights, space, lineHeights } from './frontend/styles/variables'
-import { NonNullishPartialRecord } from './utils/non-nullish-partial-record.type'
 import { Locale } from './locale/config'
+import { CurrentAdmin } from './current-admin.interface'
 
 /**
  * AdminBroOptions
@@ -91,6 +92,7 @@ export default interface AdminBroOptions {
    * You can pass either resource or resource with an options and thus modify it.
    * @property {any} resources[].resource
    * @property {ResourceOptions} resources[].options
+   * @property {Array<FeatureType>} resources[].features
    *
    * @see ResourceOptions
    */
@@ -113,27 +115,18 @@ export default interface AdminBroOptions {
    */
   version?: VersionSettings;
   /**
-   * Options which are related to the branding.
+   * Options which are related to the ht.
    */
-  branding?: BrandingOptions;
+  branding?: BrandingOptions | BrandingOptionsFunction;
   /**
    * Custom assets you want to pass to AdminBro
    */
-  assets?: {
-    /**
-     * List to urls of custom stylesheets. You can pass your font - icons here (as an example)
-     */
-    styles?: Array<string>;
-    /**
-     * List of urls to custom scripts. If you use some particular js
-     * library - you can pass its url here.
-     */
-    scripts?: Array<string>;
-  };
+  assets?: Assets | AssetsFunction;
   /**
    * Indicates is bundled by AdminBro files like:
    * - components.bundle.js
    * - global.bundle.js
+   * - design-system.bundle.js
    * - app.bundle.js
    * should be taken from the same server as other AdminBro routes (default)
    * or should be taken from an external CDN.
@@ -157,6 +150,9 @@ export default interface AdminBroOptions {
    * - copy
    * './node_modules/admin-bro/lib/frontend/assets/scripts/global-bundle.production.js' to
    * './public/global.bundle.js'
+   * * - copy
+   * './node_modules/admin-bro/node_modules/@admin-bro/design-system/bundle.production.js' to
+   * './public/design-system.bundle.js'
    * - host entire public folder under some domain (if you use firebase - you can host them
    * with firebase hosting)
    * - point {@link AdminBro.assetsCDN} to this domain
@@ -235,13 +231,44 @@ export default interface AdminBroOptions {
    * }
    * ```
    *
-   * Check out the [i18n tutorial]{@tutorial 09-i18n} to see how
+   * Check out the [i18n tutorial]{@tutorial i18n} to see how
    * internationalization in AdminBro works.
    */
   locale?: Locale;
 }
 
 /* cspell: enable */
+
+/**
+ * @memberof AdminBroOptions
+ * @alias Assets
+ *
+ * Optional assets (stylesheets, and javascript libraries) which can be
+ * appended to the HEAD of the page.
+ *
+ * you can also pass {@link AssetsFunction} instead.
+ */
+export type Assets = {
+  /**
+   * List to urls of custom stylesheets. You can pass your font - icons here (as an example)
+   */
+  styles?: Array<string>;
+  /**
+   * List of urls to custom scripts. If you use some particular js
+   * library - you can pass its url here.
+   */
+  scripts?: Array<string>;
+}
+
+/**
+ * @alias AssetsFunction
+ * @name AssetsFunction
+ * @memberof AdminBroOptions
+ * @returns {Assets | Promise<Assets>}
+ * @description
+ * Function returning {@link Assets}
+ */
+export type AssetsFunction = (admin?: CurrentAdmin) => Assets | Promise<Assets>
 
 /**
  * Version Props
@@ -265,16 +292,6 @@ export type VersionProps = {
   app?: string;
 }
 
-export type Theme = {
-  colors: NonNullishPartialRecord<typeof colors>;
-  sizes: NonNullishPartialRecord<typeof sizes>;
-  space: NonNullishPartialRecord<typeof space>;
-  fontSizes: NonNullishPartialRecord<typeof fontSizes>;
-  lineHeights: NonNullishPartialRecord<typeof lineHeights>;
-  fontWeights: NonNullishPartialRecord<typeof fontWeights>;
-  font: NonNullishPartialRecord<typeof font>;
-};
-
 /**
  * Branding Options
  *
@@ -282,8 +299,6 @@ export type Theme = {
  * colors (dark theme) run:
  *
  * ```javascript
- * const theme = require('admin-bro-theme-dark')
- *
  * new AdminBro({
  *   branding: {
  *     companyName: 'John Doe Family Business',
@@ -307,7 +322,7 @@ export type BrandingOptions = {
   /**
    * CSS theme.
    */
-  theme?: Partial<Theme>;
+  theme?: Partial<ThemeOverride>;
   /**
    * Flag indicates if `SoftwareBrothers` tiny hart icon should be visible on the bottom sidebar.
    */
@@ -318,6 +333,19 @@ export type BrandingOptions = {
    */
   favicon?: string;
 }
+
+/**
+ * Branding Options Function
+ *
+ * function returning BrandingOptions.
+ *
+ * @alias BrandingOptionsFunction
+ * @memberof AdminBroOptions
+ * @returns {BrandingOptions | Promise<BrandingOptions>}
+ */
+export type BrandingOptionsFunction = (
+  admin?: CurrentAdmin
+) => BrandingOptions | Promise<BrandingOptions>
 
 /**
  * Object describing regular page in AdminBro
@@ -344,7 +372,23 @@ export type AdminPage = {
 export type ResourceWithOptions = {
   resource: any;
   options: ResourceOptions;
+  features?: Array<FeatureType>;
 }
+
+/**
+ * Function taking {@link ResourceOptions} and merging it with all other options
+ *
+ * @alias FeatureType
+ * @type function
+ * @returns {ResourceOptions}
+ * @memberof AdminBroOptions
+ */
+export type FeatureType = (
+  /**
+   * Options returned by the feature added before
+   */
+  options: ResourceOptions
+) => ResourceOptions
 
 /**
  * Function which is invoked when user enters given AdminPage
@@ -370,11 +414,6 @@ export interface AdminBroOptionsWithDefault extends AdminBroOptions {
   dashboard: {
     handler?: PageHandler;
     component?: string;
-  };
-  branding: BrandingOptions & Required<Pick<BrandingOptions, 'softwareBrothers' | 'companyName'>>;
-  assets: {
-    styles: Array<string>;
-    scripts: Array<string>;
   };
   pages: Record<string, AdminPage>;
 }

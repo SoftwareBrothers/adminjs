@@ -1,12 +1,20 @@
+import { DEFAULT_DRAWER_WIDTH } from '@admin-bro/design-system'
 import ConfigurationError from '../utils/configuration-error'
 import ViewHelpers from '../utils/view-helpers'
 import AdminBro from '../../admin-bro'
 import BaseResource from '../adapters/base-resource'
-import Action, { IsFunction, ActionContext, ActionRequest, ActionResponse } from '../actions/action.interface'
+import Action, {
+  IsFunction,
+  ActionContext,
+  ActionRequest,
+  ActionResponse,
+  After,
+  Before,
+  ActionHandler,
+} from '../actions/action.interface'
 import { CurrentAdmin } from '../../current-admin.interface'
 import ActionJSON from './action-json.interface'
 import BaseRecord from '../adapters/base-record'
-import { DEFAULT_DRAWER_WIDTH } from '../../constants'
 import actionErrorHandler from '../services/action-error-handler'
 import ForbiddenError from '../utils/forbidden-error'
 
@@ -71,18 +79,105 @@ class ActionDecorator {
   ): Promise<any> {
     try {
       this.canInvokeAction(context)
-      let modifiedRequest = request
-      if (typeof this.action.before === 'function') {
-        modifiedRequest = await this.action.before(request, context)
-      }
-      let ret = await this.action.handler(modifiedRequest, response, context)
-      if (typeof this.action.after === 'function') {
-        ret = await this.action.after(ret, modifiedRequest, context)
-      }
-      return ret
+      const modifiedRequest = await this.invokeBeforeHook(request, context)
+      const res = await this.invokeHandler(modifiedRequest, response, context)
+      return this.invokeAfterHook(res, modifiedRequest, context)
     } catch (error) {
       return actionErrorHandler(error, context)
     }
+  }
+
+  /**
+   * Invokes before action hooks if there are any
+   *
+   * @param {ActionRequest} request
+   * @param {ActionContext} context
+   *
+   * @return {Promise<ActionRequest>}
+   */
+  async invokeBeforeHook(request: ActionRequest, context: ActionContext): Promise<ActionRequest> {
+    if (!this.action.before) {
+      return request
+    }
+    if (typeof this.action.before === 'function') {
+      return this.action.before(request, context)
+    }
+    if (Array.isArray(this.action.before)) {
+      return (this.action.before as Array<Before>).reduce((prevPromise, hook) => (
+        prevPromise.then(modifiedRequest => (
+          hook(modifiedRequest, context)
+        ))
+      ), Promise.resolve(request))
+    }
+    throw new ConfigurationError(
+      'Before action hook has to be either function or Array<function>',
+      'Action#Before',
+    )
+  }
+
+  /**
+   * Invokes action handler if there is any
+   *
+   * @param {ActionRequest} request
+   * @param {any} response
+   * @param {ActionContext} context
+   *
+   * @return {Promise<ActionResponse>}
+   */
+  async invokeHandler(
+    request: ActionRequest,
+    response: any,
+    context: ActionContext,
+  ): Promise<ActionResponse> {
+    if (typeof this.action.handler === 'function') {
+      return this.action.handler(request, response, context)
+    }
+    if (Array.isArray(this.action.handler)) {
+      return (this.action.handler as Array<ActionHandler<ActionResponse>>).reduce(
+        (prevPromise, handler) => (
+          prevPromise.then(() => (
+            handler(request, response, context)
+          ))
+        ), Promise.resolve({}),
+      )
+    }
+    throw new ConfigurationError(
+      'Before action hook has to be either function or Array<function>',
+      'Action#Before',
+    )
+  }
+
+  /**
+   * Invokes after action hooks if there are any
+   *
+   * @param {ActionResponse} response
+   * @param {ActionRequest} request
+   * @param {ActionContext} context
+   *
+   * @return {Promise<ActionResponse>}
+   */
+  async invokeAfterHook(
+    response: ActionResponse,
+    request: ActionRequest,
+    context: ActionContext,
+  ): Promise<ActionResponse> {
+    if (!this.action.after) {
+      return response
+    }
+    if (typeof this.action.after === 'function') {
+      return this.action.after(response, request, context)
+    }
+    if (Array.isArray(this.action.after)) {
+      return (this.action.after as Array<After<ActionResponse>>).reduce((prevPromise, hook) => (
+        prevPromise.then(modifiedResponse => (
+          hook(modifiedResponse, request, context)
+        ))
+      ), Promise.resolve(response))
+    }
+    throw new ConfigurationError(
+      'After action hook has to be either function or Array<function>',
+      'Action#After',
+    )
   }
 
   /**

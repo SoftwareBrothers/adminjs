@@ -237,7 +237,7 @@ export type After<T> = (
 /**
  * @classdesc
  * Interface representing an Action in AdminBro.
- * Look at {@tutorial 05-actions} to see where you can use this interface.
+ * Look at {@tutorial actions} to see where you can use this interface.
  *
  * #### Example Action
  *
@@ -463,7 +463,7 @@ export default interface Action <T extends ActionResponse> {
    * Required for new actions. For modifying already defined actions
    * like new and edit we suggest using {@link Action#before} and {@link Action#after} hooks.
    */
-  handler: ActionHandler<T>;
+  handler: ActionHandler<T> | Array<ActionHandler<T>>;
   /**
    * Before action hook. When it is given - it is performed before the {@link Action#handler}
    * method.
@@ -487,7 +487,7 @@ export default interface Action <T extends ActionResponse> {
    * }
    * ```
    */
-  before?: Before;
+  before?: Before | Array<Before>;
   /**
    * After action hook. When it is given - it is performed on the returned,
    * by {@link Action#handler handler} function response.
@@ -538,7 +538,7 @@ export default interface Action <T extends ActionResponse> {
    * ```
    *
    */
-  after?: After<T>;
+  after?: After<T> | Array<After<T>>;
 
   /**
    * Indicates if given action should be seen in a drawer or in a full screen. Default to false

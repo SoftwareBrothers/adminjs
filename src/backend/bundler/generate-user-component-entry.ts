@@ -16,7 +16,7 @@ import slash from 'slash'
  */
 const generateUserComponentEntry = (admin, entryPath: string): string => {
   const { env = {} } = admin.options
-  const { UserComponents } = admin.constructor
+  const { UserComponents } = global
 
   const absoluteEntryPath = path.resolve(entryPath)
 
@@ -25,8 +25,11 @@ const generateUserComponentEntry = (admin, entryPath: string): string => {
   const envPart = Object.keys(env).map(envKey => (
     `AdminBro.env.${envKey} = ${JSON.stringify(env[envKey])}\n`
   )).join('')
-  const componentsPart = Object.keys(UserComponents).map((componentId) => {
-    const componentUrl = path.relative(absoluteEntryPath, UserComponents[componentId])
+  const componentsPart = Object.keys(UserComponents || {}).map((componentId) => {
+    const componentUrl = path.relative(
+      absoluteEntryPath,
+      (UserComponents as UserComponentsMap)[componentId],
+    )
     return [
       `import ${componentId} from '${slash(componentUrl)}'`,
       `AdminBro.UserComponents.${componentId} = ${componentId}`,

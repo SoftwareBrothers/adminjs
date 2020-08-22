@@ -1,7 +1,7 @@
 import React, { memo } from 'react'
+import { CheckBox, FormGroup, Label, FormMessage } from '@admin-bro/design-system'
 
 import { EditPropertyProps } from '../base-property-props'
-import { CheckBox, FormGroup, Label, FormMessage } from '../../design-system'
 import { recordPropertyIsEqual } from '../record-property-is-equal'
 
 const parseValue = (value): boolean => !(!value || value === 'false')

@@ -1,9 +1,9 @@
 import React from 'react'
+import { Box, Label, Text } from '@admin-bro/design-system'
 
 import { ReduxState } from '../../../store/store'
 import SidebarLink from './styled/sidebar-link.styled'
 import ViewHelpers from '../../../../backend/utils/view-helpers'
-import { Box, Label, Text } from '../../design-system'
 import { useTranslation } from '../../../hooks/use-translation'
 
 type Props = {

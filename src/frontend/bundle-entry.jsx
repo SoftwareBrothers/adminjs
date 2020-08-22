@@ -9,11 +9,9 @@ import App from './components/application'
 import BasePropertyComponent from './components/property-type'
 import createStore from './store/store'
 import ViewHelpers from '../backend/utils/view-helpers'
-import * as Components from './components/design-system'
 import * as AppComponents from './components/app'
 import * as Hooks from './hooks'
 import ApiClient from './utils/api-client'
-import * as style from './styles/variables'
 import * as types from './types'
 import withNotice from './store/with-notice'
 
@@ -49,19 +47,20 @@ const Application = (
 
 // eslint-disable-next-line no-undef
 window.regeneratorRuntime = regeneratorRuntime
+
 export default {
   withNotice,
   Application,
   ViewHelpers,
   UserComponents: {},
   ApiClient,
-  style,
   BasePropertyComponent,
   env,
-  ...Components,
   ...AppComponents,
   ...Hooks,
+  // DEPRECATED: this should be removed in the next version
+  // now it was added here to ensure backwards compatibility
+  // window.AdminBroDesignSystem is set by design-system bundle
+  ...window.AdminBroDesignSystem,
   types,
-  // TODO: following is a backward compatible - remove this in version 2.0
-  Components: { ...Components, ...AppComponents },
 }

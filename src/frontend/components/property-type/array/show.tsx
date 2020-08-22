@@ -1,7 +1,7 @@
 import React, { ReactNode } from 'react'
+import { Section, FormGroup, Label } from '@admin-bro/design-system'
 
 import convertParamsToArrayItems from './convert-params-to-array-items'
-import { Section, FormGroup, Label } from '../../design-system'
 import PropertyJSON from '../../../../backend/decorators/property-json.interface'
 import RecordJSON from '../../../../backend/decorators/record-json.interface'
 

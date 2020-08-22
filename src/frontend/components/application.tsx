@@ -2,6 +2,7 @@
 import React, { useState } from 'react'
 import { Switch, Route } from 'react-router-dom'
 import { createGlobalStyle } from 'styled-components'
+import { Box, Overlay } from '@admin-bro/design-system'
 
 import ViewHelpers from '../../backend/utils/view-helpers'
 import Sidebar from './app/sidebar/sidebar'
@@ -11,7 +12,6 @@ import Notice from './app/notice'
 import {
   Dashboard, ResourceAction, RecordAction, Page, BulkAction, Resource,
 } from './routes'
-import { Box, Overlay } from './design-system'
 
 const GlobalStyle = createGlobalStyle`
   html, body, #app {

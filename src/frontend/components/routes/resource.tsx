@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { connect } from 'react-redux'
 import { useRouteMatch } from 'react-router-dom'
+import { Box } from '@admin-bro/design-system'
 
 import { RouteComponentProps } from 'react-router'
 import BaseAction from '../app/base-action-component'
@@ -12,7 +13,6 @@ import { NoResourceError, NoActionError } from '../app/error-message'
 import ViewHelpers, {
   ResourceActionParams, RecordActionParams, BulkActionParams,
 } from '../../../backend/utils/view-helpers'
-import { Box } from '../design-system'
 import { ActionHeader } from '../app'
 import ActionJSON from '../../../backend/decorators/action-json.interface'
 

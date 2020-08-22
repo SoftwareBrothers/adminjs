@@ -2,8 +2,8 @@ import React, { useState, useEffect, useCallback } from 'react'
 import { useSelector } from 'react-redux'
 
 import { useRouteMatch } from 'react-router'
+import { Loader } from '@admin-bro/design-system'
 
-import { Loader } from '../design-system'
 import BaseActionComponent from '../app/base-action-component'
 import ApiClient from '../../utils/api-client'
 import { RecordActionParams } from '../../../backend/utils/view-helpers'

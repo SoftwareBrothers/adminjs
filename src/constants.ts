@@ -7,5 +7,3 @@ export const DEFAULT_PATHS = {
 
 /* cspell: disable-next-line */
 export const ADMIN_BRO_TMP_DIR = '.adminbro'
-
-export const DEFAULT_DRAWER_WIDTH = '500px'

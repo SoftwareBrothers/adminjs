@@ -5,11 +5,12 @@ import AdminBro from './admin-bro'
 
 import BaseDatabase from './backend/adapters/base-database'
 import BaseResource from './backend/adapters/base-resource'
+import { OverridableComponent } from './frontend/utils/overridable-component'
 
 
 describe('AdminBro', function () {
   beforeEach(function () {
-    AdminBro.registeredAdapters = []
+    global.RegisteredAdapters = []
   })
 
   describe('#constructor', function () {
@@ -27,7 +28,7 @@ describe('AdminBro', function () {
 
     it('adds given adapter to list off all available adapters', function () {
       AdminBro.registerAdapter(this.DatabaseAdapter)
-      expect(AdminBro.registeredAdapters).to.have.lengthOf(1)
+      expect(global.RegisteredAdapters).to.have.lengthOf(1)
     })
 
     it('throws an error when adapter is not full', function () {
@@ -50,7 +51,7 @@ describe('AdminBro', function () {
 
   describe('.bundle', function () {
     afterEach(function () {
-      AdminBro.UserComponents = {}
+      global.UserComponents = {}
     })
     context('file exists', function () {
       beforeEach(function () {
@@ -58,17 +59,17 @@ describe('AdminBro', function () {
       })
 
       it('adds given file to a UserComponents object', function () {
-        expect(Object.keys(AdminBro.UserComponents)).to.have.lengthOf(1)
+        expect(Object.keys(global.UserComponents || {})).to.have.lengthOf(1)
       })
 
       it('returns uniq id', function () {
-        expect(AdminBro.UserComponents[this.result]).not.to.be.undefined
+        expect(global.UserComponents && global.UserComponents[this.result]).not.to.be.undefined
         expect(this.result).to.be.a('string')
       })
 
       it('converts relative path to absolute path', function () {
         expect(
-          AdminBro.UserComponents[this.result],
+          global.UserComponents && global.UserComponents[this.result],
         ).to.equal(path.join(__dirname, '../spec/fixtures/example-component'))
       })
     })
@@ -78,7 +79,10 @@ describe('AdminBro', function () {
       let result: string
 
       beforeEach(function () {
-        result = AdminBro.bundle('../spec/fixtures/example-component', componentName)
+        result = AdminBro.bundle(
+          '../spec/fixtures/example-component',
+          componentName as OverridableComponent,
+        )
       })
 
       it('returns the same component name as which was given', function () {

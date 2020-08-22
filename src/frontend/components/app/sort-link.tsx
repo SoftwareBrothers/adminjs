@@ -2,9 +2,10 @@ import React, { ReactNode } from 'react'
 import { NavLink, withRouter } from 'react-router-dom'
 
 import { RouteComponentProps } from 'react-router'
+import { Icon, cssClass } from '@admin-bro/design-system'
+
 import PropertyJSON from '../../../backend/decorators/property-json.interface'
-import { Icon } from '../design-system'
-import { cssClass } from '../design-system/utils/css-class'
+
 
 type Props = {
   property: PropertyJSON;

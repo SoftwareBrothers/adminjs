@@ -1,6 +1,6 @@
 import React from 'react'
+import { Section, FormGroup, Label, FormMessage } from '@admin-bro/design-system'
 
-import { Section, FormGroup, Label, FormMessage } from '../../design-system'
 import { EditPropertyProps } from '../base-property-props'
 
 type Props = {

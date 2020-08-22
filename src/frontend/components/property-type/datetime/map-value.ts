@@ -1,4 +1,4 @@
-import { formatDateProperty } from '../../design-system'
+import { formatDateProperty } from '@admin-bro/design-system'
 import { PropertyType } from '../../../../backend/adapters/base-property'
 
 export default (value: Date, propertyType: PropertyType): string => {

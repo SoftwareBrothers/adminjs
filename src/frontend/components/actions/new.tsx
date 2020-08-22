@@ -1,10 +1,10 @@
 import React, { FC } from 'react'
 import { useHistory } from 'react-router'
+import { DrawerContent, Box, DrawerFooter, Button, Icon } from '@admin-bro/design-system'
 
 import PropertyType from '../property-type'
 
 import { ActionProps } from './action.props'
-import { DrawerContent, Box, DrawerFooter, Button, Icon } from '../design-system'
 import ActionHeader from '../app/action-header'
 import RecordJSON from '../../../backend/decorators/record-json.interface'
 import useRecord from '../../hooks/use-record'

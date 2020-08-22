@@ -50,6 +50,7 @@ module.exports = {
             'func-names': 'off',
             'prefer-arrow-callback': 'off',
             'import/no-extraneous-dependencies': 'off',
+            '@typescript-eslint/explicit-function-return-type': 'off',
           },
         },
         {
