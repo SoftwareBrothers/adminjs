@@ -44,8 +44,9 @@ describe('<NoRecords />', function () {
     })
 
     it('shows notification that there are no records', async function () {
-      const info = await this.findAllByText('No records')
-      expect(info).to.have.lengthOf(1)
+      const info = await this.findAllByText('someMessage')
+      // translation message is show twice in noRecords component
+      expect(info).to.have.lengthOf(2)
     })
 
     it('has a link to create a new resource', function () {
