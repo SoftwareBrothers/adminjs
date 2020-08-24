@@ -23,10 +23,31 @@ class Filter extends React.PureComponent<FilterPropertyProps & ThemeProps<Defaul
     onChange(property.name, value)
   }
 
+  getNumberProps(type, options): object {
+    if (type !== 'number' && type !== 'float') {
+      return {}
+    }
+    let min = options.min
+    let max = options.max
+    if (typeof min === 'undefined') {
+      min = type === 'number' ? Number.MIN_SAFE_INTEGER : Number.MIN_VALUE
+    }
+    if (typeof max === 'undefined') {
+      max = type === 'number' ? Number.MAX_SAFE_INTEGER : Number.MAX_VALUE
+    }
+    return {
+      type: 'number',
+      min,
+      max,
+      step: options.step || 1,
+    }
+  }
+
   renderInput(): ReactNode {
     const { property, filter, theme } = this.props
     const filterKey = `filter-${property.name}`
     const value = filter[property.name] || ''
+    const numberProps = this.getNumberProps(property.type, property.custom)
     if (property.availableValues) {
       const selected = property.availableValues.find(av => av.value === value)
       return (
@@ -44,6 +65,7 @@ class Filter extends React.PureComponent<FilterPropertyProps & ThemeProps<Defaul
         name={filterKey}
         onChange={this.handleInputChange}
         value={value}
+        {...numberProps}
       />
     )
   }

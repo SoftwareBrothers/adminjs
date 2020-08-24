@@ -10,6 +10,26 @@ import usePrevious from '../../../utils/usePrevious'
 
 type CombinedProps = EditPropertyProps & {theme: DefaultTheme}
 
+const getNumberProps = (type, options) : object => {
+  if (type !== 'number' && type !== 'float') {
+    return {}
+  }
+  let min = options.min
+  let max = options.max
+  if (typeof min === 'undefined') {
+    min = type === 'number' ? Number.MIN_SAFE_INTEGER : Number.MIN_VALUE
+  }
+  if (typeof max === 'undefined') {
+    max = type === 'number' ? Number.MAX_SAFE_INTEGER : Number.MAX_VALUE
+  }
+  return {
+    type: 'number',
+    min,
+    max,
+    step: options.step || 1,
+  }
+}
+
 const Edit: FC<CombinedProps> = (props) => {
   const { property, record } = props
   const error = record.errors?.[property.name]
@@ -51,6 +71,7 @@ const TextEdit: FC<CombinedProps> = (props) => {
   const { property, record, onChange } = props
   const propValue = record.params?.[property.name] ?? ''
   const [value, setValue] = useState(propValue)
+  const numberProps = getNumberProps(property.type, property.custom)
 
   const previous = usePrevious(propValue)
   useEffect(() => {
@@ -68,6 +89,7 @@ const TextEdit: FC<CombinedProps> = (props) => {
       onBlur={() => onChange(property.name, value)}
       value={value}
       disabled={property.isDisabled}
+      {...numberProps}
     />
   )
 }
