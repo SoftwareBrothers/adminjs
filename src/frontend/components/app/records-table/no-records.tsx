@@ -20,7 +20,7 @@ const NoRecordsOriginal: React.FC<NoRecordsProps> = (props) => {
   const newAction = h.resourceActionUrl({ resourceId: resource.id, actionName: 'new' })
 
   return (
-    <InfoBox title="No records">
+    <InfoBox title={translateMessage('noRecords', resource.id)}>
       <Text>
         {translateMessage('noRecordsInResource', resource.id)}
       </Text>

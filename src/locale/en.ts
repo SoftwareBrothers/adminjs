@@ -58,6 +58,7 @@ const translations = {
     seeConsoleForMore: 'See development console for more details...',
     noActionComponent: 'You have to implement action component for your Action',
     noRecordsInResource: 'There are no records in this resource',
+    noRecords: 'No records',
     confirmDelete: 'Do you really want to remove this item?',
     welcomeOnBoard_title: 'Welcome on Board!',
     welcomeOnBoard_subtitle: 'Now you are one of us! We prepared a few tips for you to start:',
