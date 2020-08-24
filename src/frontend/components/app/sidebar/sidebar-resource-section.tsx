@@ -15,9 +15,9 @@ export type SidebarResourceSectionProps = {
 
 /**
  * Groups resources by sections and renders the list in {@link Sidebar}
- * 
+ *
  * ### Usage
- * 
+ *
  * ```
  * import { SidebarResourceSection } from 'admin-bro`
  * ```

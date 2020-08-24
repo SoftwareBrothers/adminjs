@@ -39,9 +39,9 @@ const StyledLink = styled(Link)`
 
 /**
  * Renders Button which redirects to given action
- * 
+ *
  * ### Usage
- * 
+ *
  * ```
  * import { ActionButton } from 'admin-bro'
  * ```

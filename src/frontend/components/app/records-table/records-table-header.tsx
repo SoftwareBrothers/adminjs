@@ -45,7 +45,7 @@ export const display = (isTitle: boolean): Array<string> => [
 
 /**
  * Prints `thead` section for table with records.
- * 
+ *
  * ```
  * import { RecordsTableHeader } from 'admin-bro'
  * ```

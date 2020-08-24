@@ -56,9 +56,9 @@ const StyledLink = styled(({ rounded, ...rest }) => <RouterLink {...rest} />)<Bu
 
 /**
  * Header of an action. It renders Action name with buttons for all the actions.
- * 
+ *
  * ### Usage
- * 
+ *
  * ```
  * import { ActionHeader } from 'admin-bro'
  * ```
