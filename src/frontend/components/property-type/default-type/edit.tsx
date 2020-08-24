@@ -66,6 +66,8 @@ const TextEdit: FC<CombinedProps> = (props) => {
       name={property.name}
       onChange={e => setValue(e.target.value)}
       onBlur={() => onChange(property.name, value)}
+      // handle clicking ENTER
+      onKeyDown={e => e.keyCode === 13 && onChange(property.name, value)}
       value={value}
       disabled={property.isDisabled}
     />
