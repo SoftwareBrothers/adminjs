@@ -1,5 +1,5 @@
 name: CI/CD
-on: push
+on: [push, pull_request]
 jobs:
   setup:
     name: setup
@@ -254,10 +254,13 @@ jobs:
   publish:
     name: Publish
     if: |
-      contains(github.ref, 'refs/heads/next')
-      || contains(github.ref, 'refs/heads/master')
-      || contains(github.ref, 'refs/heads/next-major')
-      || contains(github.ref, 'refs/heads/beta')
+      github.event_name == 'push'
+      && (
+        contains(github.ref, 'refs/heads/next')
+        || contains(github.ref, 'refs/heads/master')
+        || contains(github.ref, 'refs/heads/next-major')
+        || contains(github.ref, 'refs/heads/beta')
+      )
     needs:
       - cypress
       - test

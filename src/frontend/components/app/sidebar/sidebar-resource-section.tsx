@@ -10,14 +10,20 @@ import allowOverride from '../../../hoc/allow-override'
  */
 export type SidebarResourceSectionProps = {
   /** List of the resources which should be rendered */
-  resources: ResourceJSON[];
+  resources: Array<ResourceJSON>;
 }
 
 /**
  * Groups resources by sections and renders the list in {@link Sidebar}
+ * 
+ * ### Usage
+ * 
+ * ```
+ * import { SidebarResourceSection } from 'admin-bro`
+ * ```
  *
  * @component
- * @subcategory Molecules
+ * @subcategory Application
  * @name SidebarResourceSection
  */
 const SidebarResourceSectionOriginal: FC<SidebarResourceSectionProps> = ({ resources }) => {
