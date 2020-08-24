@@ -37,6 +37,7 @@ const Edit: React.FC<EditPropertyProps> = (props) => {
           name={property.name}
           onChange={event => setValue(event.target.value)}
           onBlur={() => onChange(property.name, value)}
+          onKeyDown={e => e.keyCode === 13 && onChange(property.name, value)}
           value={value ?? ''}
           disabled={property.isDisabled}
         />

@@ -17,3 +17,4 @@ src/frontend/assets/scripts
 
 .adminbro
 example-app/cypress/videos
+example-app/cypress/screenshots

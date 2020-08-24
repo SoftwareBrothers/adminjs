@@ -26,6 +26,12 @@ const DRAWER_PORTAL_ID = 'drawerPortal'
  * Instead of rendering it's own {@link Drawer} component it reuses
  * the global Drawer via React Portal.
  *
+ * ### Usage
+ *
+ * ```
+ * import { DrawerPortal } from 'admin-bro'
+ * ```
+ *
  * @component
  * @subcategory Application
  */

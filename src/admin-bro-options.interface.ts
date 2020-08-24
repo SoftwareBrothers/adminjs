@@ -115,7 +115,7 @@ export default interface AdminBroOptions {
    */
   version?: VersionSettings;
   /**
-   * Options which are related to the ht.
+   * Options which are related to the branding.
    */
   branding?: BrandingOptions | BrandingOptionsFunction;
   /**

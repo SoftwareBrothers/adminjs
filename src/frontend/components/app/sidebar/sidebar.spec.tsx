@@ -33,7 +33,7 @@ describe('<Sidebar />', function () {
     )
   }
 
-  beforeEach(async function () {
+  beforeEach(function () {
     sinon.stub(TranslateFunctionsFactory, 'createFunctions').returns({
       translateMessage: sinon.stub().returns('someMessage'),
       translateButton: sinon.stub().returns('translated message'),
