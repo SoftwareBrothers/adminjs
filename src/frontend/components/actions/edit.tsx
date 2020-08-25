@@ -5,7 +5,7 @@ import { DrawerContent, Box, DrawerFooter, Button, Icon } from '@admin-bro/desig
 import PropertyType from '../property-type'
 import { ActionProps } from './action.props'
 import ActionHeader from '../app/action-header'
-import useRecord from '../../hooks/use-record'
+import useRecord from '../../hooks/use-record/use-record'
 import RecordJSON from '../../../backend/decorators/record-json.interface'
 import { appendForceRefresh } from './utils/append-force-refresh'
 import { useTranslation } from '../../hooks/use-translation'

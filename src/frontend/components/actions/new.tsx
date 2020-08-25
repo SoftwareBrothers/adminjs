@@ -7,7 +7,7 @@ import PropertyType from '../property-type'
 import { ActionProps } from './action.props'
 import ActionHeader from '../app/action-header'
 import RecordJSON from '../../../backend/decorators/record-json.interface'
-import useRecord from '../../hooks/use-record'
+import useRecord from '../../hooks/use-record/use-record'
 import { appendForceRefresh } from './utils/append-force-refresh'
 import { useTranslation } from '../../hooks/use-translation'
 

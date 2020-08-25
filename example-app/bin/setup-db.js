@@ -35,6 +35,7 @@ const setupDb = async () => {
 
   await Tool.create([...new Array(100)].map((el, index) => ({
     name: `tool ${index}`,
+    description: null,
   })))
 }
 

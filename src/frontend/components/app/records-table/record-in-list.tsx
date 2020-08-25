@@ -12,7 +12,7 @@ import RecordJSON from '../../../../backend/decorators/record-json.interface'
 import ViewHelpers from '../../../../backend/utils/view-helpers'
 import { display } from './records-table-header'
 import { ActionResponse, RecordActionResponse } from '../../../../backend/actions/action.interface'
-import mergeRecordResponse from '../../../utils/merge-record-response'
+import mergeRecordResponse from '../../../hooks/use-record/merge-record-response'
 
 type Props = {
   resource: ResourceJSON;

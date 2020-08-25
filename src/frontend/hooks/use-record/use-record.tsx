@@ -1,14 +1,26 @@
 import { useState, useCallback, useEffect } from 'react'
 import { AxiosResponse } from 'axios'
-import ApiClient from '../utils/api-client'
-import RecordJSON from '../../backend/decorators/record-json.interface'
-import recordToFormData from '../components/actions/record-to-form-data'
-import useNotice from './use-notice'
-import { RecordActionResponse } from '../../backend/actions/action.interface'
-import mergeRecordResponse from '../utils/merge-record-response'
+import ApiClient from '../../utils/api-client'
+import RecordJSON from '../../../backend/decorators/record-json.interface'
+import recordToFormData from './record-to-form-data'
+import useNotice from '../use-notice'
+import { RecordActionResponse } from '../../../backend/actions/action.interface'
+import mergeRecordResponse from './merge-record-response'
 import updateRecord from './update-record'
+import { OnPropertyChange } from '../../components/property-type/base-property-props'
 
 const api = new ApiClient()
+
+const isEntireRecordGiven = (
+  propertyOrRecord: RecordJSON | string,
+  value?: string,
+): boolean => !!(typeof value === 'undefined'
+    // user can pass property and omit value. This makes sense when
+    // third argument of the function (selectedRecord) is passed to onChange
+    // callback
+    && !(typeof propertyOrRecord === 'string')
+    // we assume that only params has to be given
+    && propertyOrRecord.params)
 
 /**
  * Result of useRecord hook
@@ -25,7 +37,7 @@ export type UseRecordResult = {
    * Function compatible with onChange method supported by all the components wrapped by
    * {@link BasePropertyComponent}.
    */
-  handleChange: (propertyOrRecord: string | RecordJSON, value?: any) => void;
+  handleChange: OnPropertyChange;
   /**
    * Triggers submission of the record. Returns a promise.
    * If custom params are given as an argument - they are merged
@@ -127,12 +139,8 @@ export const useRecord = (
     value?: any,
     incomingRecord?: RecordJSON,
   ): void => {
-    if (
-      typeof value === 'undefined'
-      && !(typeof propertyOrRecord === 'string')
-      && propertyOrRecord.params
-    ) {
-      setRecord(propertyOrRecord)
+    if (isEntireRecordGiven(propertyOrRecord, value)) {
+      setRecord(propertyOrRecord as RecordJSON)
     } else {
       setRecord(updateRecord(propertyOrRecord as string, value, incomingRecord))
     }
@@ -142,14 +150,17 @@ export const useRecord = (
     customParams: Record<string, string> = {},
   ): Promise<AxiosResponse<RecordActionResponse>> => {
     setLoading(true)
+
     const formData = recordToFormData(record)
     Object.entries(customParams).forEach(([key, value]) => formData.set(key, value))
+
     const params = {
       resourceId,
       onUploadProgress: (e): void => setProgress(Math.round((e.loaded * 100) / e.total)),
       data: formData,
       headers: { 'Content-Type': 'multipart/form-data' },
     }
+
     const promise = record.id
       ? api.recordAction({
         ...params,
