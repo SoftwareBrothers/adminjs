@@ -12,6 +12,7 @@ const AdminTaggable = require('./taggables/taggable.admin')
 const AdminProfession = require('./professions/profession.admin')
 const AdminTool = require('./tools/tool.admin')
 const AdminPage = require('./pages/page.admin')
+const AdminNested = require('./nested/nested.admin')
 
 AdminBro.bundle('./components/sidebar-footer', 'SidebarFooter')
 AdminBro.bundle('./components/no-records', 'NoRecords')
@@ -27,6 +28,7 @@ const options = {
     AdminTool,
     AdminTaggable,
     AdminPage,
+    AdminNested,
   ],
   version: {
     admin: true,
