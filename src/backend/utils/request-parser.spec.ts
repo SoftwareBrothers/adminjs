@@ -19,12 +19,6 @@ describe('RequestParser', function () {
         return newProperty
       },
     } as BaseResource
-
-    it('converts empty string to an empty array', function () {
-      const request = { ...baseRequest, payload: { arrayed: '' } }
-
-      expect(requestParser(request, resource).payload?.arrayed).to.deep.eq([])
-    })
   })
 
   describe('boolean values', function () {

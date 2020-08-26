@@ -16,7 +16,7 @@ import { ActionHeader } from '../app'
 import { useNotice, useTranslation } from '../../hooks'
 import DrawerPortal from '../app/drawer-portal'
 import { ActionResponse, RecordActionResponse } from '../../../backend/actions/action.interface'
-import mergeRecordResponse from '../../utils/merge-record-response'
+import mergeRecordResponse from '../../hooks/use-record/merge-record-response'
 
 const api = new ApiClient()
 
