@@ -24,7 +24,7 @@ const Edit: FC<CombinedProps> = (props) => {
     if (selected) {
       onChange(property.name, selected.value, selected.record)
     } else {
-      onChange(property.name, '')
+      onChange(property.name, null)
     }
   }
 
@@ -87,6 +87,7 @@ const Edit: FC<CombinedProps> = (props) => {
         defaultOptions
         loadOptions={loadOptions}
         onChange={handleChange}
+        isClearable
         isDisabled={property.isDisabled}
         isLoading={loadingRecord}
       />
