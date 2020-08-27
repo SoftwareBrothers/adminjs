@@ -86,7 +86,7 @@ class Filter {
     const keys = Object.keys(this.filters)
     for (let index = 0; index < keys.length; index += 1) {
       const key = keys[index]
-      const referenceResource = this.resource.decorate().getPropertyByKey(key).reference()
+      const referenceResource = this.resource.decorate().getPropertyByKey(key)?.reference()
       if (referenceResource) {
         this.filters[key].populated = await referenceResource.findOne(
           this.filters[key].value as string,

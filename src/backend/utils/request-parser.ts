@@ -16,7 +16,7 @@ const RequestParser = (originalRequest: ActionRequest, resource: BaseResource): 
   const { payload: originalPayload } = originalRequest
 
   const payload = Object.entries(originalPayload || {}).reduce((memo, [path, formValue]) => {
-    const property = resource.property(path)
+    const property = resource._decorated?.getPropertyByKey(path)
 
     let value = formValue
     if (formValue === FORM_VALUE_NULL) { value = null }
@@ -24,6 +24,9 @@ const RequestParser = (originalRequest: ActionRequest, resource: BaseResource): 
     if (formValue === FORM_VALUE_EMPTY_ARRAY) { value = [] }
 
     if (property) {
+      // strip payload from disabled properties
+      if (property.isDisabled()) { return { ...memo } }
+
       if (property.type() === 'boolean') {
         if (value === 'true') { return { ...memo, [path]: true } }
         if (value === 'false') { return { ...memo, [path]: false } }

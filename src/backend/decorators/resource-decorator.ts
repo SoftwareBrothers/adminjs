@@ -3,7 +3,6 @@ import BaseProperty from '../adapters/base-property'
 import PropertyDecorator from './property-decorator'
 import ActionDecorator from './action-decorator'
 import ViewHelpers from '../utils/view-helpers'
-import ConfigurationError from '../utils/configuration-error'
 import BaseResource from '../adapters/base-resource'
 import AdminBro from '../../admin-bro'
 import * as ACTIONS from '../actions/index'
@@ -21,6 +20,69 @@ import BaseRecord from '../adapters/base-record'
  * @private
  */
 export const DEFAULT_MAX_COLUMNS_IN_LIST = 8
+
+type PathParts = Array<string>
+
+/**
+ * Changes path with flatten notation, with dots (.) inside, to array of all possible
+ * keys which can have a property.
+ *
+ * - changes: `nested.nested2.normalInner`
+ * - to `["nested", "nested.nested2", "nested.nested2.normalInner"]`
+ *
+ * Also it takes care of the arrays, which are separated by numbers (indexes).
+ * - changes: `nested.0.normalInner.1`
+ * - to: `nested.normalInner`
+ *
+ * Everything because when we look for a property of a given path it can be inside a
+ * mixed property. So first, we have to find top level mixed property, and then,
+ * step by step, find inside each of them.
+ *
+ * @private
+ *
+ * @param   {string}  propertyPath
+ *
+ * @return  {PathParts}
+ */
+const pathToParts = (propertyPath: string): PathParts => (
+  // eslint-disable-next-line no-restricted-globals
+  propertyPath.split('.').filter(part => isNaN(+part)).reduce((memo, part) => {
+    if (memo.length) {
+      return [
+        ...memo,
+        [memo[memo.length - 1], part].join('.'),
+      ]
+    }
+    return [part]
+  }, [] as Array<string>)
+)
+
+/**
+ * @private
+ *
+ * @param   {PathParts}  pathParts    parts returned by `pathToParts` method
+ * @param   {PropertyDecorator}       rootProperty where function should recursively search for
+ *                                    a subProperty matching one of the pathParts
+ *
+ * @return  {PropertyDecorator | null}  found subProperty
+ */
+const findSubProperty = (
+  pathParts: PathParts,
+  rootProperty: PropertyDecorator,
+): PropertyDecorator | null => {
+  const subProperties = rootProperty.subProperties()
+  const foundPath = pathParts.find(path => (
+    subProperties.find(supProperty => supProperty.path === path)))
+  if (foundPath) {
+    const subProperty = subProperties.find(supProperty => supProperty.path === foundPath)
+    if (subProperty && foundPath !== pathParts[pathParts.length - 1]) {
+      // if foundPath is not the last (full) path - checkout recursively all subProperties
+      return findSubProperty(pathParts, subProperty)
+    }
+    return subProperty || null
+  }
+  return null
+}
 
 /**
  * Base decorator class which decorates the Resource.
@@ -190,17 +252,30 @@ class ResourceDecorator {
    * @param   {String}  propertyPath  property path
    *
    * @return  {PropertyDecorator}
-   * @throws  {ConfigurationError} when there is no property for given key
    */
-  getPropertyByKey(propertyPath: string): PropertyDecorator {
-    const property = this.properties[propertyPath]
+  getPropertyByKey(propertyPath: string): PropertyDecorator | null {
+    const parts = pathToParts(propertyPath)
+    const fullPath = parts[parts.length - 1]
+    const property = this.properties[fullPath]
+
     if (!property) {
-      throw new ConfigurationError(
-        `there is no property by the name of '${propertyPath}' in resource ${this.getResourceName()}`,
-        'tutorial-04-customizing-resources.html',
-      )
+      // User asks for nested property (embed inside the mixed property)
+      if (parts.length > 1) {
+        const mixedPropertyPath = parts.find(part => (
+          this.properties[part]
+          && this.properties[part].type() === 'mixed'
+        ))
+        if (mixedPropertyPath) {
+          const mixedProperty = this.properties[mixedPropertyPath]
+          const subProperty = findSubProperty(parts, mixedProperty)
+
+          if (subProperty) {
+            return subProperty
+          }
+        }
+      }
     }
-    return property
+    return property || null
   }
 
   /**
