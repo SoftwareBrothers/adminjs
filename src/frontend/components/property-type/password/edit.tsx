@@ -4,7 +4,6 @@ import { Label, Input, FormGroup, InputGroup, FormMessage, Button, Icon } from '
 
 import { EditPropertyProps } from '../base-property-props'
 import { recordPropertyIsEqual } from '../record-property-is-equal'
-import usePrevious from '../../../utils/usePrevious'
 
 const Edit: React.FC<EditPropertyProps> = (props) => {
   const { property, record, onChange } = props
@@ -13,13 +12,11 @@ const Edit: React.FC<EditPropertyProps> = (props) => {
   const error = record.errors && record.errors[property.name]
   const [isInput, setIsInput] = useState(false)
 
-  const previous = usePrevious(propValue)
   useEffect(() => {
-    // this means props updated
-    if (propValue !== previous) {
+    if (value !== propValue) {
       setValue(propValue)
     }
-  }, [])
+  }, [propValue])
 
   return (
     <FormGroup error={!!error}>
