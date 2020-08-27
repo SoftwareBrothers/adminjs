@@ -3,7 +3,6 @@ import { expect } from 'chai'
 
 import ResourceDecorator from './resource-decorator'
 import PropertyDecorator from './property-decorator'
-import ConfigurationError from '../utils/configuration-error'
 import AdminBro, { defaultOptions } from '../../admin-bro'
 import resourceStub, { expectedResult } from '../../../spec/backend/helpers/resource-stub'
 import BaseResource from '../adapters/base-resource'
