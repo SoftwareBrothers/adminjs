@@ -2,6 +2,7 @@ import * as _ from 'lodash'
 import * as path from 'path'
 import * as fs from 'fs'
 import i18n, { i18n as I18n } from 'i18next'
+import { flatten, unflatten } from 'flat'
 
 import AdminBroOptions, { AdminBroOptionsWithDefault } from './admin-bro-options.interface'
 import BaseResource from './backend/adapters/base-resource'
@@ -356,5 +357,6 @@ interface AdminBro extends TranslateFunctions {}
 
 export const { registerAdapter } = AdminBro
 export const { bundle } = AdminBro
+export { flatten, unflatten }
 
 export default AdminBro

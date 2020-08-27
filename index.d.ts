@@ -3,6 +3,8 @@ import AdminBro from './types/src/admin-bro'
 import * as ACTIONS from './types/src/backend/actions/index'
 import { ReduxState } from './types/src/frontend/store/store'
 
+export { flatten, unflatten } from './types/src/admin-bro'
+
 export * from '@admin-bro/design-system'
 export * from './types/src/frontend/store/store'
 export * from './types/src/backend/utils/build-feature'
