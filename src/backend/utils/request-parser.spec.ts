@@ -22,7 +22,6 @@ describe('RequestParser', function () {
   describe('boolean values', function () {
     beforeEach(function () {
       resource = buildResourceWithProperty('isHired', {
-        isDisabled: () => false,
         type: () => 'boolean',
       })
     })
@@ -43,21 +42,6 @@ describe('RequestParser', function () {
       const request = { ...baseRequest, payload: { isHired: 'false' } }
 
       expect(requestParser(request, resource).payload?.isHired).to.be.false
-    })
-  })
-
-  describe('disabled values', function () {
-    beforeEach(function () {
-      resource = buildResourceWithProperty('anyProperty', {
-        isDisabled: () => true,
-        type: () => 'number',
-      })
-    })
-
-    it('strips payload from disabled properties', function () {
-      const request = { ...baseRequest, payload: { anyProperty: 'yeAaa' } }
-
-      expect(requestParser(request, resource).payload?.anyProperty).to.be.undefined
     })
   })
 })
