@@ -4,7 +4,6 @@ import { Input, Label, FormGroup, FormMessage } from '@admin-bro/design-system'
 
 import { EditPropertyProps } from '../base-property-props'
 import { recordPropertyIsEqual } from '../record-property-is-equal'
-import usePrevious from '../../../utils/usePrevious'
 
 const Edit: FC<EditPropertyProps> = (props) => {
   const { onChange, property, record } = props
@@ -12,13 +11,11 @@ const Edit: FC<EditPropertyProps> = (props) => {
   const [value, setValue] = useState(propValue)
   const error = record.errors?.[property.name]
 
-  const previous = usePrevious(propValue)
   useEffect(() => {
-    // this means props updated
-    if (propValue !== previous) {
+    if (value !== propValue) {
       setValue(propValue)
     }
-  }, [])
+  }, [propValue])
 
   return (
     <FormGroup error={Boolean(error)}>

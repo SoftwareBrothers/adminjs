@@ -1,4 +1,4 @@
-export const DOCS = 'https://softwarebrothers.github.io/admin-bro-dev'
+export const DOCS = 'https://adminbro.com'
 export const DEFAULT_PATHS = {
   rootPath: '/admin',
   logoutPath: '/admin/logout',

@@ -22,7 +22,7 @@ class PropertyDecorator {
    * This path serves as a key in {@link PropertyOptions} to identify which
    * property has to be updated
    */
-  private path: string
+  public path: string
 
   private _admin: AdminBro
 
@@ -203,6 +203,15 @@ class PropertyDecorator {
   }
 
   /**
+   * If property should be disabled in the UI
+   *
+   * @return  {boolean}
+   */
+  isDisabled(): boolean {
+    return !!this.options.isDisabled
+  }
+
+  /**
    * Returns JSON representation of a property
    *
    * @param {PropertyPlace} [where]
@@ -219,7 +228,7 @@ class PropertyDecorator {
       isRequired: this.isRequired(),
       availableValues: this.availableValues(),
       name: this.name(),
-      isDisabled: !!this.options.isDisabled,
+      isDisabled: this.isDisabled(),
       label: this.label(),
       type: this.type(),
       reference: this.property.reference(),

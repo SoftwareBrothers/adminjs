@@ -2,7 +2,15 @@ import { expect } from 'chai'
 import requestParser from './request-parser'
 import { ActionRequest } from '../actions/action.interface'
 import BaseResource from '../adapters/base-resource'
-import BaseProperty from '../adapters/base-property'
+
+const buildResourceWithProperty = (key, property) => {
+  const resource = {
+    _decorated: { getPropertyByKey: path => (key === path ? property : null) },
+  } as unknown as BaseResource
+  return resource
+}
+
+let resource
 
 describe('RequestParser', function () {
   const baseRequest: ActionRequest = {
@@ -11,26 +19,13 @@ describe('RequestParser', function () {
     payload: {},
   }
 
-  describe('array property', function () {
-    const resource = {
-      property: (name) => {
-        const newProperty = new BaseProperty({ path: name, type: 'string' })
-        newProperty.isArray = (): boolean => true
-        return newProperty
-      },
-    } as BaseResource
-
-    it('converts empty string to an empty array', function () {
-      const request = { ...baseRequest, payload: { arrayed: '' } }
-
-      expect(requestParser(request, resource).payload?.arrayed).to.deep.eq([])
-    })
-  })
-
   describe('boolean values', function () {
-    const resource = {
-      property: name => new BaseProperty({ path: name, type: 'boolean' }),
-    } as BaseResource
+    beforeEach(function () {
+      resource = buildResourceWithProperty('isHired', {
+        isDisabled: () => false,
+        type: () => 'boolean',
+      })
+    })
 
     it('sets value to `false` when empty string is given', function () {
       const request = { ...baseRequest, payload: { isHired: '' } }
@@ -48,6 +43,21 @@ describe('RequestParser', function () {
       const request = { ...baseRequest, payload: { isHired: 'false' } }
 
       expect(requestParser(request, resource).payload?.isHired).to.be.false
+    })
+  })
+
+  describe('disabled values', function () {
+    beforeEach(function () {
+      resource = buildResourceWithProperty('anyProperty', {
+        isDisabled: () => true,
+        type: () => 'number',
+      })
+    })
+
+    it('strips payload from disabled properties', function () {
+      const request = { ...baseRequest, payload: { anyProperty: 'yeAaa' } }
+
+      expect(requestParser(request, resource).payload?.anyProperty).to.be.undefined
     })
   })
 })

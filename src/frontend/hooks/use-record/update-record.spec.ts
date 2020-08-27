@@ -2,7 +2,7 @@ import { expect } from 'chai'
 import { unflatten } from 'flat'
 
 import updateRecord from './update-record'
-import RecordJSON from '../../backend/decorators/record-json.interface'
+import RecordJSON from '../../../backend/decorators/record-json.interface'
 
 describe('updateRecord', function () {
   const newPropertyName = 'newProperty'
@@ -118,5 +118,23 @@ describe('updateRecord', function () {
     const updatedRecord = update(previousRecord)
 
     expect(updatedRecord.params[propertyName]).to.be.null
+  })
+
+  it('leaves {} when it was given', function () {
+    const value = {}
+
+    const update = updateRecord(propertyName, value)
+    const updatedRecord = update(previousRecord)
+
+    expect(updatedRecord.params[propertyName]).to.deep.eq({})
+  })
+
+  it('leaves [] when it was given', function () {
+    const value = []
+
+    const update = updateRecord(propertyName, value)
+    const updatedRecord = update(previousRecord)
+
+    expect(updatedRecord.params[propertyName]).to.deep.eq([])
   })
 })

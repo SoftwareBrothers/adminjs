@@ -6,7 +6,6 @@ import { Input, FormMessage, FormGroup, Label, selectStyles } from '@admin-bro/d
 
 import { EditPropertyProps } from '../base-property-props'
 import { recordPropertyIsEqual } from '../record-property-is-equal'
-import usePrevious from '../../../utils/usePrevious'
 
 type CombinedProps = EditPropertyProps & {theme: DefaultTheme}
 
@@ -52,13 +51,11 @@ const TextEdit: FC<CombinedProps> = (props) => {
   const propValue = record.params?.[property.name] ?? ''
   const [value, setValue] = useState(propValue)
 
-  const previous = usePrevious(propValue)
   useEffect(() => {
-    // this means props updated
-    if (propValue !== previous) {
+    if (value !== propValue) {
       setValue(propValue)
     }
-  }, [])
+  }, [propValue])
 
   return (
     <Input
