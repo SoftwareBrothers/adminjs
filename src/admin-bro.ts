@@ -27,7 +27,7 @@ import { OverridableComponent } from './frontend/utils/overridable-component'
 const pkg = JSON.parse(fs.readFileSync(path.join(__dirname, '../package.json'), 'utf-8'))
 export const VERSION = pkg.version
 
-const defaults: AdminBroOptionsWithDefault = {
+export const defaultOptions: AdminBroOptionsWithDefault = {
   rootPath: DEFAULT_PATHS.rootPath,
   logoutPath: DEFAULT_PATHS.logoutPath,
   loginPath: DEFAULT_PATHS.loginPath,
@@ -160,7 +160,7 @@ class AdminBro {
      * @type {AdminBroOptions}
      * @description Options given by a user
      */
-    this.options = _.merge({}, defaults, options)
+    this.options = _.merge({}, defaultOptions, options)
 
     this.initI18n()
 
