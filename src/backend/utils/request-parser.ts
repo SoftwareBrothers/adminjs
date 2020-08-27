@@ -24,8 +24,10 @@ const RequestParser = (originalRequest: ActionRequest, resource: BaseResource): 
     if (formValue === FORM_VALUE_EMPTY_ARRAY) { value = [] }
 
     if (property) {
-      // strip payload from disabled properties
-      if (property.isDisabled()) { return { ...memo } }
+      // Strip payload from disabled properties.
+      // isDisabled method has been added recently so this check is needed
+      // so adapters with older version of admin-bro will also work
+      if (property.isDisabled && property.isDisabled()) { return { ...memo } }
 
       if (property.type() === 'boolean') {
         if (value === 'true') { return { ...memo, [path]: true } }
