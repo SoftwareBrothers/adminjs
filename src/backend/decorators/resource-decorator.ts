@@ -10,7 +10,7 @@ import { ResourceOptions } from './resource-options.interface'
 import Action, { ActionResponse } from '../actions/action.interface'
 import { CurrentAdmin } from '../../current-admin.interface'
 import ResourceJSON from './resource-json.interface'
-import { PropertyPlace } from './property-json.interface'
+import PropertyJSON, { PropertyPlace } from './property-json.interface'
 import BaseRecord from '../adapters/base-record'
 
 /**
@@ -83,6 +83,26 @@ const findSubProperty = (
   }
   return null
 }
+
+/**
+ * Bu default all subProperties are nested as an array in root Property. This is easy for
+ * adapter to maintain. But in AdminBro core we need a fast way to access them by path.
+ *
+ * This function changes an array to object recursively (for nested subProperties) so they
+ * could be accessed via properties['path.to.sub.property']
+ *
+ * @param   {PropertyDecorator}  rootProperty
+ *
+ * @return  {Record<PropertyDecorator>}
+ * @private
+ */
+const flatSubProperties = (rootProperty: PropertyDecorator): Record<string, PropertyJSON> => (
+  rootProperty.subProperties().reduce((subMemo, subProperty) => ({
+    ...subMemo,
+    [subProperty.path]: subProperty.toJSON(),
+    ...flatSubProperties(subProperty),
+  }), {})
+)
 
 /**
  * Base decorator class which decorates the Resource.
@@ -289,26 +309,40 @@ class ResourceDecorator {
    * @return {Array<PropertyDecorator>}
    */
   getProperties({ where, max = 0 }: {
-    where: PropertyPlace;
+    where?: PropertyPlace;
     max?: number;
   }): Array<PropertyDecorator> {
     const whereProperties = `${where}Properties` // like listProperties, viewProperties etc
-    if (this.options[whereProperties] && this.options[whereProperties].length) {
+    if (where && this.options[whereProperties] && this.options[whereProperties].length) {
       return this.options[whereProperties].map(this.getPropertyByKey)
     }
 
     const properties = Object.keys(this.properties)
-      .filter(key => this.properties[key].isVisible(where))
+      .filter(key => !where || this.properties[key].isVisible(where))
       .sort((key1, key2) => (
-        this.properties[key1].position()
-
-        > this.properties[key2].position() ? 1 : -1))
+        this.properties[key1].position() > this.properties[key2].position()
+          ? 1
+          : -1
+      ))
       .map(key => this.properties[key])
 
     if (max) {
       return properties.slice(0, max)
     }
     return properties
+  }
+
+  getFlattenProperties(): Record<string, PropertyJSON> {
+    return Object.keys(this.properties).reduce((memo, propertyName) => {
+      const property = this.properties[propertyName]
+
+      const subProperties = flatSubProperties(property)
+      return {
+        ...memo,
+        [propertyName]: property.toJSON(),
+        ...subProperties,
+      }
+    }, {})
   }
 
   getListProperties(): Array<PropertyDecorator> {
@@ -419,8 +453,9 @@ class ResourceDecorator {
       parent: this.getParent(),
       href: this.getHref(currentAdmin),
       titleProperty: this.titleProperty().toJSON(),
-      resourceActions: this.resourceActions(currentAdmin).map(ra => ra.toJSON()),
-      actions: Object.values(this.actions).map(action => action.toJSON()),
+      resourceActions: this.resourceActions(currentAdmin).map(ra => ra.toJSON(currentAdmin)),
+      actions: Object.values(this.actions).map(action => action.toJSON(currentAdmin)),
+      properties: this.getFlattenProperties(),
       listProperties: this.getProperties({
         where: 'list', max: DEFAULT_MAX_COLUMNS_IN_LIST,
       }).map(property => property.toJSON('list')),

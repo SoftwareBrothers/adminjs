@@ -4,7 +4,7 @@ import { DrawerContent } from '@admin-bro/design-system'
 import PropertyType from '../property-type'
 import { ActionProps } from './action.props'
 import ActionHeader from '../app/action-header'
-
+import LayoutElementRenderer from './utils/layout-element-renderer'
 
 /**
  * @name ShowAction
@@ -20,7 +20,15 @@ const Show: React.FC<ActionProps> = (props) => {
   return (
     <DrawerContent>
       {action?.showInDrawer ? <ActionHeader {...props} /> : null}
-      {properties.map(property => (
+      {action.layout ? action.layout.map((layoutElement, i) => (
+        <LayoutElementRenderer
+          // eslint-disable-next-line react/no-array-index-key
+          key={i}
+          layoutElement={layoutElement}
+          {...props}
+          where="show"
+        />
+      )) : properties.map(property => (
         <PropertyType
           key={property.name}
           where="show"
@@ -29,6 +37,7 @@ const Show: React.FC<ActionProps> = (props) => {
           record={record}
         />
       ))}
+
     </DrawerContent>
   )
 }

@@ -206,10 +206,10 @@ class BaseRecord {
       title: this.resource.decorate().titleOf(this),
       recordActions: this.resource.decorate().recordActions(
         this, currentAdmin,
-      ).map(recordAction => recordAction.toJSON()),
+      ).map(recordAction => recordAction.toJSON(currentAdmin)),
       bulkActions: this.resource.decorate().bulkActions(
         this, currentAdmin,
-      ).map(recordAction => recordAction.toJSON()),
+      ).map(recordAction => recordAction.toJSON(currentAdmin)),
     }
   }
 

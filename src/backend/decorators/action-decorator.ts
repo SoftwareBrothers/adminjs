@@ -17,6 +17,7 @@ import ActionJSON from './action-json.interface'
 import BaseRecord from '../adapters/base-record'
 import actionErrorHandler from '../services/action-error-handler'
 import ForbiddenError from '../utils/forbidden-error'
+import layoutElementParser, { ParsedLayoutElement, LayoutElement } from '../utils/layout-element-parser'
 
 /**
  * Decorates an action
@@ -289,12 +290,27 @@ class ActionDecorator {
     return this.action.containerWidth
   }
 
+  layout(currentAdmin?: CurrentAdmin): Array<ParsedLayoutElement> | null {
+    if (this.action.layout) {
+      let layoutConfig: Array<LayoutElement>
+      if (typeof this.action.layout === 'function') {
+        layoutConfig = this.action.layout(currentAdmin) as Array<LayoutElement>
+      } else {
+        layoutConfig = this.action.layout
+      }
+      return layoutConfig.map(element => layoutElementParser(element))
+    }
+    return null
+  }
+
   /**
    * Serializes action to JSON format
    *
+   * @param {CurrentAdmin} [currentAdmin]
+   *
    * @return  {ActionJSON}  serialized action
    */
-  toJSON(): ActionJSON {
+  toJSON(currentAdmin?: CurrentAdmin): ActionJSON {
     const resourceId = this._resource._decorated?.id() || this._resource.id()
     return {
       name: this.action.name,
@@ -308,6 +324,7 @@ class ActionDecorator {
       showInDrawer: !!this.action.showInDrawer,
       hideActionHeader: !!this.action.hideActionHeader,
       containerWidth: this.containerWidth(),
+      layout: this.layout(currentAdmin),
     }
   }
 }
