@@ -60,4 +60,9 @@ export default interface ResourceJSON {
    * Properties which should be visible on the filter
    */
   filterProperties: Array<PropertyJSON>;
+  /**
+   * Map of all properties inside the resource. It also contains nested properties.
+   * So this is the easies way of getting any property you like from a resource.
+   */
+  properties: Record<string, PropertyJSON>;
 }

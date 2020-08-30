@@ -1,3 +1,5 @@
+import { ParsedLayoutElement } from '../utils/layout-element-parser'
+
 /**
  * JSON representation of an {@link Action}
  * @see Action
@@ -49,4 +51,9 @@ export default interface ActionJSON {
    * Id of a resource to which given action belongs.
    */
   resourceId: string;
+
+  /**
+   * Parsed layout passed in {@link Action#layout}
+   */
+  layout: Array<ParsedLayoutElement> | null;
 }

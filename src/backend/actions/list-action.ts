@@ -30,10 +30,10 @@ const ListAction: Action<ListActionResponse> = {
    * @memberof module:ListAction
    * @return {Promise<ListActionResponse>} records with metadata
    */
-  handler: async (request, response, data) => {
+  handler: async (request, response, context) => {
     const { query } = request
     const { sortBy, direction, filters = {} } = flat.unflatten(query || {})
-    const { resource } = data
+    const { resource } = context
     let { page, perPage } = flat.unflatten(query || {})
 
     const listProperties = resource.decorate().getListProperties()
@@ -59,6 +59,9 @@ const ListAction: Action<ListActionResponse> = {
     })
     const populatedRecords = await populator(records, listProperties)
 
+    // eslint-disable-next-line no-param-reassign
+    context.records = populatedRecords
+
     const total = await resource.count(filter)
     return {
       meta: {
@@ -68,7 +71,7 @@ const ListAction: Action<ListActionResponse> = {
         direction: sort.direction,
         sortBy: sort.sortBy,
       },
-      records: populatedRecords.map(r => r.toJSON(data.currentAdmin)),
+      records: populatedRecords.map(r => r.toJSON(context.currentAdmin)),
     }
   },
 }

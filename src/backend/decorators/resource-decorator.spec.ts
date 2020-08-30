@@ -308,6 +308,7 @@ describe('ResourceDecorator', function () {
         'editProperties',
         'showProperties',
         'filterProperties',
+        'properties',
       )
     })
 

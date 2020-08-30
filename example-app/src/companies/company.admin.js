@@ -2,6 +2,21 @@ const AdminBro = require('admin-bro')
 const { Company } = require('./company.entity')
 const passwordFeature = require('../features/password/password.feature')
 
+const layout = currentAdmin => ([
+  ['@MessageBox', {
+    message: `Welcome ${currentAdmin.email}`,
+    children: 'On this page yo can do whatever you like',
+    variant: 'info',
+    mb: 'xxl',
+  }],
+  [
+    'companyName',
+    'companySize',
+    'email',
+    'address',
+  ],
+])
+
 /** @type {AdminBro.ResourceOptions} */
 const options = {
   listProperties: ['companyName', 'email', 'address', 'companySize', 'isAdmin', 'isBig'],
@@ -32,6 +47,7 @@ const options = {
         }
       },
     },
+    show: { layout },
   },
 }
 

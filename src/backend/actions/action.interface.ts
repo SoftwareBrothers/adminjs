@@ -4,6 +4,7 @@ import ViewHelpers from '../utils/view-helpers'
 import BaseRecord from '../adapters/base-record'
 import BaseResource from '../adapters/base-resource'
 import ActionDecorator from '../decorators/action-decorator'
+import { LayoutElement } from '../utils/layout-element-parser'
 import RecordJSON from '../decorators/record-json.interface'
 import { NoticeMessage } from '../../frontend/store/with-notice'
 import { TranslateFunctions } from '../../utils/translate-functions.factory'
@@ -574,4 +575,34 @@ export default interface Action <T extends ActionResponse> {
    * ```
    */
   containerWidth?: string | number | Array<string | number>;
+  /**
+   * Definition for the layout. Works with the edit and show actions.
+   *
+   * With the help of {@link LayoutElement} you can put all the properties to whatever
+   * layout you like, without knowing React.
+   *
+   * This is an example of defining a layout
+   *
+   * const layout = [{ width: 1 / 2 }, [
+   *     ['@H3', { children: 'Company data' }],
+   *     'companyName',
+   *     'companySize',
+   *   ]],
+   *   [
+   *     ['@H3', { children: 'Contact Info' }],
+   *     [{ flexDirection: 'row', flex: true }, [
+   *       ['email', { pr: 'default', flexGrow: 1 }],
+   *       ['address', { flexGrow: 1 }],
+   *     ]],
+   *   ],
+   * ]
+   *
+   * Alternatively you can pass a function taking {@link CurrentAdmin} as an argument.
+   * This will allow you to show/hide given property for restricted users.
+   *
+   * To see entire documentation and more examples visit {@link LayoutElement}
+   *
+   * @see LayoutElement
+   */
+  layout?: ((currentAdmin?: CurrentAdmin) => Array<LayoutElement>) | Array<LayoutElement>;
 }

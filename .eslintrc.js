@@ -26,6 +26,7 @@ module.exports = {
         'quotes': ['error', 'single'],
         'semi': ['error', 'never'],
         'import/no-unresolved': 'off',
+        'func-names': 'off',
         'no-underscore-dangle': 'off',
         'guard-for-in': 'off',
         'no-restricted-syntax': 'off',
