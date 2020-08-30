@@ -8,6 +8,7 @@ export { flatten, unflatten } from './types/src/admin-bro'
 export * from '@admin-bro/design-system'
 export * from './types/src/frontend/store/store'
 export * from './types/src/backend/utils/build-feature'
+export * from './types/src/backend/utils/layout-element-parser'
 export * from './types/src/frontend/utils/overridable-component'
 
 export { default as Router } from './types/src/backend/router'

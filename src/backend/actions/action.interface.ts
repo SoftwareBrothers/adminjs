@@ -4,7 +4,7 @@ import ViewHelpers from '../utils/view-helpers'
 import BaseRecord from '../adapters/base-record'
 import BaseResource from '../adapters/base-resource'
 import ActionDecorator from '../decorators/action-decorator'
-import { LayoutElement } from '../utils/layout-element-parser'
+import { LayoutElement, LayoutElementFunction } from '../utils/layout-element-parser'
 import RecordJSON from '../decorators/record-json.interface'
 import { NoticeMessage } from '../../frontend/store/with-notice'
 import { TranslateFunctions } from '../../utils/translate-functions.factory'
@@ -583,6 +583,7 @@ export default interface Action <T extends ActionResponse> {
    *
    * This is an example of defining a layout
    *
+   * ```
    * const layout = [{ width: 1 / 2 }, [
    *     ['@H3', { children: 'Company data' }],
    *     'companyName',
@@ -596,13 +597,16 @@ export default interface Action <T extends ActionResponse> {
    *     ]],
    *   ],
    * ]
+   * ```
    *
-   * Alternatively you can pass a function taking {@link CurrentAdmin} as an argument.
-   * This will allow you to show/hide given property for restricted users.
+   * Alternatively you can pass a {@link LayoutElementFunction function} taking
+   * {@link CurrentAdmin} as an argument. This will allow you to show/hide
+   * given property for restricted users.
    *
    * To see entire documentation and more examples visit {@link LayoutElement}
    *
    * @see LayoutElement
+   * @see LayoutElementFunction
    */
-  layout?: ((currentAdmin?: CurrentAdmin) => Array<LayoutElement>) | Array<LayoutElement>;
+  layout?: LayoutElementFunction | Array<LayoutElement>;
 }
