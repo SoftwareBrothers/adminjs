@@ -1,9 +1,12 @@
 import React from 'react'
-import { EditPropertyProps } from 'admin-bro'
+import { EditPropertyProps, unflatten } from 'admin-bro'
 import { Button, Box } from '@admin-bro/design-system'
 
 const ValueTrigger: React.FC<EditPropertyProps> = (props) => {
   const { onChange, record } = props
+
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const data = unflatten(record.params)
 
   const handleClick = (): void => {
     onChange({

@@ -17,6 +17,8 @@ const { buildFeature, mergeResourceOptions } = require('./lib/backend/utils/buil
 
 AdminBro.buildFeature = buildFeature
 AdminBro.mergeResourceOptions = mergeResourceOptions
+AdminBro.flatten = require('./lib/admin-bro').flatten
+AdminBro.unflatten = require('./lib/admin-bro').unflatten
 
 AdminBro.require = AdminBro.bundle
 Object.keys(constants).forEach((key) => {

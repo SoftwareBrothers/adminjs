@@ -4,6 +4,7 @@ import { BrowserRouter } from 'react-router-dom'
 import { ThemeProvider } from 'styled-components'
 import { initReactI18next } from 'react-i18next'
 import i18n from 'i18next'
+import flat from 'flat'
 
 import App from './components/application'
 import BasePropertyComponent from './components/property-type'
@@ -58,6 +59,8 @@ export default {
   env,
   ...AppComponents,
   ...Hooks,
+  flatten: flat.flatten,
+  unflatten: flat.unflatten,
   // DEPRECATED: this should be removed in the next version
   // now it was added here to ensure backwards compatibility
   // window.AdminBroDesignSystem is set by design-system bundle
