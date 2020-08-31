@@ -314,7 +314,17 @@ class ResourceDecorator {
   }): Array<PropertyDecorator> {
     const whereProperties = `${where}Properties` // like listProperties, viewProperties etc
     if (where && this.options[whereProperties] && this.options[whereProperties].length) {
-      return this.options[whereProperties].map(this.getPropertyByKey)
+      return this.options[whereProperties]
+        .map((propertyName) => {
+          const property = this.getPropertyByKey(propertyName)
+          if (!property) {
+            console.error([
+              `[AdminBro]: There is no property of the name: "${propertyName}".`,
+              `Check out the "${where}Properties" in the`,
+              `resource: "${this._resource.id()}"`].join(' '))
+          }
+          return property
+        }).filter(property => property)
     }
 
     const properties = Object.keys(this.properties)
