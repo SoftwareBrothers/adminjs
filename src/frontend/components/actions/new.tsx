@@ -10,6 +10,7 @@ import RecordJSON from '../../../backend/decorators/record-json.interface'
 import useRecord from '../../hooks/use-record/use-record'
 import { appendForceRefresh } from './utils/append-force-refresh'
 import { useTranslation } from '../../hooks/use-translation'
+import LayoutElementRenderer from './utils/layout-element-renderer'
 
 const New: FC<ActionProps> = (props) => {
   const { record: initialRecord, resource, action } = props
@@ -46,7 +47,17 @@ const New: FC<ActionProps> = (props) => {
     >
       <DrawerContent>
         {action?.showInDrawer ? <ActionHeader {...props} /> : null}
-        {resource.editProperties.map(property => (
+        {action.layout ? action.layout.map((layoutElement, i) => (
+          <LayoutElementRenderer
+            // eslint-disable-next-line react/no-array-index-key
+            key={i}
+            layoutElement={layoutElement}
+            {...props}
+            where="edit"
+            onChange={handleChange}
+            record={record as RecordJSON}
+          />
+        )) : resource.editProperties.map(property => (
           <PropertyType
             key={property.name}
             where="edit"

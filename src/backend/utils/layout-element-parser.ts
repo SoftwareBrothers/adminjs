@@ -140,7 +140,7 @@ export default layoutElementParser
 
 
 /**
- * {@link LayoutElement} is used to change the default layout of edit and show {@link Action actions}.
+ * {@link LayoutElement} is used to change the default layout of edit, show and new {@link Action actions}.
  * You define the layout as an {@link Array<LayoutElement>} and AdminBro renders it with React components.
  *
  * You don't have to know React to create usable Layout for you actions but be sure

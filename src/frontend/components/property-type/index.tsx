@@ -86,7 +86,7 @@ const types: Record<PropertyType, any> = {
  *
  * ```
  * import React from 'react'
- * import { InputGroup, Label } from 'admin-bro'
+ * import { InputGroup, Label } from '@admin-bro/design-system'
  *
  * const MyReactComponent = props => {
  *   const { record, property } = props
