@@ -84,7 +84,7 @@ const plugins = ({ babelConfig = {}, commonJSConfig = {}, minify = false } = {})
     babel({
       extensions,
       babelrc: false,
-      exclude: 'node_modules/**',
+      exclude: 'node_modules/**/*.js',
       presets: [
         require.resolve('@babel/preset-react'),
         require.resolve('@babel/preset-env'),
