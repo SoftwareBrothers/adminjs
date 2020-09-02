@@ -309,9 +309,10 @@ class AdminBro {
    * AdminBro.bundle('./path/to/new-sidebar/component', 'SidebarFooter')
    */
   public static bundle(src: string, componentName?: OverridableComponent): string {
+    const nextId = Object.keys(global.UserComponents || {}).length + 1
     const extensions = ['.jsx', '.js', '.ts', '.tsx']
     let filePath = ''
-    const componentId = componentName || _.uniqueId('Component')
+    const componentId = componentName || `Component${nextId}`
     if (src[0] === '/') {
       filePath = src
     } else {
