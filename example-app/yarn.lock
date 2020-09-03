@@ -13,6 +13,17 @@
     react-datepicker "^3.1.3"
     styled-system "^5.1.4"
 
+"@admin-bro/design-system@^1.3.3":
+  version "1.6.0"
+  resolved "https://registry.yarnpkg.com/@admin-bro/design-system/-/design-system-1.6.0.tgz#4371a57c7faed4e6d49eafe50615217a73a933d5"
+  integrity sha512-mVo26KVeB80tXEsqyc5Bw9Ysyod7k4VRuAF30isu1wqkwgJLbaAih8tDcNiahB4Ga0AKHKAYBfA5TUa4ULKvMQ==
+  dependencies:
+    "@carbon/icons-react" "^10.14.0"
+    jw-paginate "^1.0.4"
+    polished "^3.6.5"
+    react-datepicker "^3.1.3"
+    styled-system "^5.1.4"
+
 "@admin-bro/express@^3.0.0-beta.3":
   version "3.0.0-beta.3"
   resolved "https://registry.yarnpkg.com/@admin-bro/express/-/express-3.0.0-beta.3.tgz#61fe45945712781a50c1092c926b5fe5a7bd3f71"
@@ -1454,12 +1465,12 @@ accepts@~1.3.7:
     mime-types "~2.1.24"
     negotiator "0.6.2"
 
-admin-bro@^3.0.0-beta.7:
-  version "3.0.0-beta.7"
-  resolved "https://registry.yarnpkg.com/admin-bro/-/admin-bro-3.0.0-beta.7.tgz#c257b70c48163f7f35ac580bf1ad39b5f26c1fc6"
-  integrity sha512-1F11kuWeVmB3nxhrPqZpt/SouCY8SqPy9dfgXApCjhM9gL1NfaaEXEq+QM48q69wvgcYvamRo3Dre9sIDLTJxQ==
+admin-bro@^3.2.2:
+  version "3.2.2"
+  resolved "https://registry.yarnpkg.com/admin-bro/-/admin-bro-3.2.2.tgz#b7a35f702211e5c8a541419283fbf049cfc91a37"
+  integrity sha512-GHg/UCoTgtn7T9z2641XJ4MOtkb0wg/kTFM4KJevW4PSEHfljCei7sI8qKxXw8xXEcwDXEisQu/GEYZaNvkoWA==
   dependencies:
-    "@admin-bro/design-system" "^1.3.2"
+    "@admin-bro/design-system" "^1.3.3"
     "@babel/core" "^7.10.2"
     "@babel/parser" "^7.10.2"
     "@babel/plugin-transform-runtime" "^7.10.1"
