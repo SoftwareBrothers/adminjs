@@ -177,7 +177,7 @@ class BaseResource {
    * Finds one Record in the Resource by its id
    *
    * @param  {String} id      uniq id of the Resource Record
-   * @return {Promise<BaseRecord>}   record
+   * @return {Promise<BaseRecord> | null}   record
    * @abstract
    */
   async findOne(id: string): Promise<BaseRecord | null> {
