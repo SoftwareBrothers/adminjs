@@ -175,16 +175,19 @@ class AdminBro {
       translations: combineTranslations(en.translations, this.options.locale?.translations),
       language: this.options.locale?.language || en.language,
     }
-
-    i18n.init({
-      lng: this.locale.language,
-      initImmediate: false, // loads translations immediately
-      resources: {
-        [this.locale.language]: {
-          translation: this.locale.translations,
+    if (i18n.isInitialized) {
+      i18n.addResourceBundle(this.locale.language, 'translation', this.locale.translations)
+    } else {
+      i18n.init({
+        lng: this.locale.language,
+        initImmediate: false, // loads translations immediately
+        resources: {
+          [this.locale.language]: {
+            translation: this.locale.translations,
+          },
         },
-      },
-    })
+      })
+    }
 
     // mixin translate functions to AdminBro instance so users will be able to
     // call adminBro.translateMessage(...)
