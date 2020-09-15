@@ -47,7 +47,7 @@ const DashboardHeader: React.FC = () => {
       >
         <Text textAlign="center" color="white">
           <H2>{translateMessage('welcomeOnBoard_title')}</H2>
-          <Text opacity="0.8">
+          <Text opacity={0.8}>
             {translateMessage('welcomeOnBoard_subtitle')}
           </Text>
         </Text>

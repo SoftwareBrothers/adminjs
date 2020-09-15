@@ -7,73 +7,73 @@ import { FormGroup, Label, FormMessage } from '@admin-bro/design-system'
 
 import { EditPropertyProps } from '../base-property-props'
 import { recordPropertyIsEqual } from '../record-property-is-equal'
-import loadQuill from '../../../utils/loadQuill'
 
 
-const Edit: FC<EditPropertyProps> = (props) => {
-  const { property, record, onChange } = props
-  const value = record.params?.[property.name] ?? ''
-  const error = record.errors && record.errors[property.name]
+const Edit: FC<EditPropertyProps> = props =>
+// const { property, record, onChange } = props
+// const value = record.params?.[property.name] ?? ''
+// const error = record.errors && record.errors[property.name]
 
-  const [quill, setQuill] = useState<Quill | null>(null)
-  const editorRef = useRef<HTMLDivElement>(null)
+// // const [quill, setQuill] = useState<Quill | null>(null)
+// const editorRef = useRef<HTMLDivElement>(null)
 
-  useEffect(() => {
-    let shouldLoad = true
-    loadQuill().then(() => {
-      if (!shouldLoad) {
-        return
-      }
-      const quillInstance = new (Quill as any)(editorRef.current, {
-        modules: { toolbar: toolbarOptions },
-        theme: 'snow',
-      })
-      setQuill(quillInstance)
-    })
-    return () => {
-      shouldLoad = false
-    }
-  }, [])
+// // useEffect(() => {
+// //   let shouldLoad = true
+// //   loadQuill().then(() => {
+// //     if (!shouldLoad) {
+// //       return
+// //     }
+// //     const quillInstance = new (Quill as any)(editorRef.current, {
+// //       modules: { toolbar: toolbarOptions },
+// //       theme: 'snow',
+// //     })
+// //     setQuill(quillInstance)
+// //   })
+// //   return () => {
+// //     shouldLoad = false
+// //   }
+// // }, [])
 
-  useEffect(() => {
-    if (!editorRef.current || !quill) {
-      return
-    }
-    if (value) {
-      quill.root.innerHTML = value
-    }
-  }, [value, quill])
+// useEffect(() => {
+//   if (!editorRef.current || !quill) {
+//     return
+//   }
+//   if (value) {
+//     quill.root.innerHTML = value
+//   }
+// }, [value, quill])
 
-  useEffect(() => {
-    const editor = quill?.root
-    if (!editor) {
-      return undefined
-    }
-    const handler = () => {
-      const content = editor.innerHTML
-      onChange?.(property.name, content)
-    }
-    editor?.addEventListener('blur', handler)
-    return () => {
-      editor?.removeEventListener('blur', handler)
-    }
-  }, [onChange, property.name, quill])
+// useEffect(() => {
+//   const editor = quill?.root
+//   if (!editor) {
+//     return undefined
+//   }
+//   const handler = () => {
+//     const content = editor.innerHTML
+//     onChange?.(property.name, content)
+//   }
+//   editor?.addEventListener('blur', handler)
+//   return () => {
+//     editor?.removeEventListener('blur', handler)
+//   }
+// }, [onChange, property.name, quill])
 
-  return (
-    <FormGroup error={Boolean(error)}>
-      <Label
-        htmlFor={property.name}
-        required={property.isRequired}
-      >
-        {property.label}
-      </Label>
-      <Wrapper>
-        <div className="quill-editor" ref={editorRef} style={{ height: '400px' }} />
-      </Wrapper>
-      <FormMessage>{error?.message}</FormMessage>
-    </FormGroup>
-  )
-}
+  // return (
+  //   <FormGroup error={Boolean(error)}>
+  //     <Label
+  //       htmlFor={property.name}
+  //       required={property.isRequired}
+  //     >
+  //       {property.label}
+  //     </Label>
+  //     <Wrapper>
+  //       <div className="quill-editor" ref={editorRef} style={{ height: '400px' }} />
+  //     </Wrapper>
+  //     <FormMessage>{error?.message}</FormMessage>
+  //   </FormGroup>
+  // )
+  <div>hello</div>
+
 
 const toolbarOptions = [
   [{ header: [1, 2, 3, 4, 5, 6, false] }],

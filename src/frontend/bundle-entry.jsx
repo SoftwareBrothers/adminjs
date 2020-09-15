@@ -61,9 +61,5 @@ export default {
   ...Hooks,
   flatten: flat.flatten,
   unflatten: flat.unflatten,
-  // DEPRECATED: this should be removed in the next version
-  // now it was added here to ensure backwards compatibility
-  // window.AdminBroDesignSystem is set by design-system bundle
-  ...window.AdminBroDesignSystem,
   types,
 }

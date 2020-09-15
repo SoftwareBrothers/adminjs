@@ -82,7 +82,6 @@ module.exports = {
         'window': true,
         'AdminBro': true,
         'flatpickr': true,
-        'Quill': true,
         'FormData': true,
         'File': true,
         'cy': true,

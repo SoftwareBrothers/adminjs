@@ -31,7 +31,7 @@ export type HrefContext = {
  * @alias HrefFunction
  * @memberof ResourceOptions
  */
-export type HrefFunction = ((context: HrefContext) => string)
+export type HrefFunction = (context: HrefContext) => string
 
 /**
  * Options for given resource

@@ -1,7 +1,7 @@
 import React from 'react'
-import styled from 'styled-components'
+import styled, { DefaultTheme, ThemedStyledProps } from 'styled-components'
 import { Link } from 'react-router-dom'
-import { ButtonCSS } from '@admin-bro/design-system'
+import { ButtonCSS, ButtonProps } from '@admin-bro/design-system'
 
 import ViewHelpers from '../../../../backend/utils/view-helpers'
 import PropertyJSON from '../../../../backend/decorators/property-json.interface'
@@ -13,7 +13,7 @@ interface Props {
 }
 
 const StyledLink = styled(Link)`
-  ${ButtonCSS}
+  ${ButtonCSS};
   padding-left: ${({ theme }): string => theme.space.xs};
   padding-right: ${({ theme }): string => theme.space.xs};
 `

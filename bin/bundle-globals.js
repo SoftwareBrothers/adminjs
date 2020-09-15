@@ -20,7 +20,6 @@ const ReactDOM = require('react-dom')
 const env = require('../src/backend/bundler/bundler-env')
 
 const reactIsExport = ['isValidElementType', 'isContextConsumer', 'isElement', 'ForwardRef', 'typeOf']
-const { theme, ...designSystem } = require('@admin-bro/design-system')
 
 const run = async () => {
   const inputOptions = {
@@ -45,7 +44,6 @@ const run = async () => {
           'react-is': reactIsExport,
           'node_modules/react-redux/node_modules/react-is/index.js': reactIsExport,
           'node_modules/react-router/node_modules/react-is/index.js': reactIsExport,
-          '@admin-bro/design-system/build/index.js': Object.keys(designSystem),
         },
         ignoreGlobal: true,
       }),
@@ -65,7 +63,6 @@ const run = async () => {
       axios: 'axios',
       recharts: 'Recharts',
       'styled-components': 'styled',
-      'styled-system': 'StyledSystem',
       'react-dom': 'ReactDOM',
       'prop-types': 'PropTypes',
       'react-redux': 'ReactRedux',

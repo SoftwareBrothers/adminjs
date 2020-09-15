@@ -16,7 +16,6 @@ const AdminNested = require('./nested/nested.admin')
 
 AdminBro.bundle('./components/sidebar-footer', 'SidebarFooter')
 AdminBro.bundle('./components/no-records', 'NoRecords')
-AdminBro.bundle('./components/quill-override')
 
 /** @type {import('admin-bro').AdminBroOptions} */
 const options = {
