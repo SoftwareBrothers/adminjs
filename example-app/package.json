@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "main": "index.js",
   "author": "Wojciech Krysiak",
-  "type": "module",
   "license": "MIT",
   "scripts": {
     "dev": "nodemon --ext '.js,.mjs' --watch ../lib --watch ./ --ignore 'cypress/**/*.js'",

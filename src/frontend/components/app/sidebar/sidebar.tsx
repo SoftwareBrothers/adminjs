@@ -17,9 +17,8 @@ type Props = {
 const Sidebar: React.FC<Props> = (props) => {
   const { isVisible } = props
   const [branding, resources, pages] = useSelector((state: ReduxState) => [
-    state.branding, state.resources, state.pages,
+    state.branding, state.resources, state.pages
   ])
-
   const { translateLabel } = useTranslation()
 
   return (

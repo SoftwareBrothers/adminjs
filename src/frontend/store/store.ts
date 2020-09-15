@@ -258,6 +258,22 @@ const noticesReducer = (state: Array<NoticeMessageInState> = [], action: {
   }
 }
 
+
+export type SidebarMessageInState = {}
+export type SidebarStore = {
+  isOpen: boolean
+}
+const sidebarReducer = (state = { isOpen: false }, action: {
+  type: string;
+  data: SidebarMessageInState;
+}): SidebarStore => {
+  switch (action.type) {
+  case 'SIDEBAR_TOGGLE':
+    return {...action.data, isOpen: !state.isOpen}
+  default: return state
+  }
+}
+
 export type ReduxState = {
   resources: Array<ResourceJSON>;
   branding: BrandingOptions;
@@ -269,6 +285,7 @@ export type ReduxState = {
   versions: VersionProps;
   pages: Array<PageJSON>;
   locale: Locale;
+  sidebar: SidebarStore;
 }
 
 const reducer = combineReducers<ReduxState>({
@@ -282,6 +299,7 @@ const reducer = combineReducers<ReduxState>({
   versions: versionsReducer,
   pages: pagesReducer,
   locale: localesReducer,
+  sidebar: sidebarReducer
 })
 
 export default (initialState = {}) => createStore(reducer, initialState)

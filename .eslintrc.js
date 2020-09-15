@@ -73,6 +73,12 @@ module.exports = {
                 'spaced-comment': 'off'
             }
         },
+        {
+            files: ['example-app/**/*.js'],
+            rules: {
+                'no-var-requires': off
+            },
+        }
     ],
     globals: {
         'expect': true,

@@ -1,5 +1,6 @@
 /* eslint-disable react/no-children-prop */
-import React, { useState } from 'react'
+import React from 'react'
+import { useSelector } from 'react-redux'
 import { Switch, Route } from 'react-router-dom'
 import { createGlobalStyle } from 'styled-components'
 import { Box, Overlay } from '@admin-bro/design-system'
@@ -8,10 +9,13 @@ import ViewHelpers from '../../backend/utils/view-helpers'
 import Sidebar from './app/sidebar/sidebar'
 import TopBar from './app/top-bar'
 import Notice from './app/notice'
+import { ReduxState } from './../store/store'
+import { useSidebar } from './../hooks/use-sidebar'
 
 import {
   Dashboard, ResourceAction, RecordAction, Page, BulkAction, Resource,
 } from './routes'
+import isMobileDevice from '../utils/isMobileDevice'
 
 const GlobalStyle = createGlobalStyle`
   html, body, #app {
@@ -24,7 +28,12 @@ const GlobalStyle = createGlobalStyle`
 `
 
 const App: React.FC = () => {
-  const [sidebarVisible, toggleSidebar] = useState(false)
+  const [sidebar] = useSelector((state: ReduxState) => [
+    state.sidebar
+  ])
+
+  const { toggleSidebar } = useSidebar()
+
   const h = new ViewHelpers()
 
   const resourceId = ':resourceId'
@@ -42,14 +51,15 @@ const App: React.FC = () => {
     <React.Fragment>
       <GlobalStyle />
       <Box height="100%" flex>
-        {sidebarVisible ? (
+        {sidebar.isOpen ? (
           <Overlay
-            onClick={(): void => toggleSidebar(!sidebarVisible)}
+            hidden={isMobileDevice() ? false : true}
+            onClick={(): void => toggleSidebar()}
           />
         ) : null}
-        <Sidebar isVisible={sidebarVisible} />
+        <Sidebar isVisible={sidebar.isOpen} />
         <Box flex flexGrow={1} flexDirection="column" overflowY="auto" bg="bg">
-          <TopBar toggleSidebar={(): void => toggleSidebar(!sidebarVisible)} />
+          <TopBar toggleSidebar={(): void => toggleSidebar()} />
           <Box position="absolute" top={0}>
             <Notice />
           </Box>
