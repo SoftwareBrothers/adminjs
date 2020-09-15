@@ -1,9 +1,11 @@
-import { SidebarMessageInState } from "../store";
+import { SidebarMessageInState } from '../store'
 
-export const toggleSidebar = (): {
+const toggleSidebar = (): {
     type: string;
     data: SidebarMessageInState;
 } => ({
-    type: 'SIDEBAR_TOGGLE',
-    data: {},
+  type: 'SIDEBAR_TOGGLE',
+  data: {},
 })
+
+export default toggleSidebar

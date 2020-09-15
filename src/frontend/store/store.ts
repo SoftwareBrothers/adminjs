@@ -260,16 +260,14 @@ const noticesReducer = (state: Array<NoticeMessageInState> = [], action: {
 
 
 export type SidebarMessageInState = {}
-export type SidebarStore = {
-  isOpen: boolean
-}
+export type SidebarStore = { isOpen: boolean }
 const sidebarReducer = (state = { isOpen: false }, action: {
   type: string;
   data: SidebarMessageInState;
 }): SidebarStore => {
   switch (action.type) {
   case 'SIDEBAR_TOGGLE':
-    return {...action.data, isOpen: !state.isOpen}
+    return { ...action.data, isOpen: !state.isOpen }
   default: return state
   }
 }
@@ -299,7 +297,7 @@ const reducer = combineReducers<ReduxState>({
   versions: versionsReducer,
   pages: pagesReducer,
   locale: localesReducer,
-  sidebar: sidebarReducer
+  sidebar: sidebarReducer,
 })
 
 export default (initialState = {}) => createStore(reducer, initialState)

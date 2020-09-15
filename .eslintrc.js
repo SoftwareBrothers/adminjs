@@ -76,7 +76,7 @@ module.exports = {
         {
             files: ['example-app/**/*.js'],
             rules: {
-                'no-var-requires': off
+                'no-var-requires': 'off',
             },
         }
     ],

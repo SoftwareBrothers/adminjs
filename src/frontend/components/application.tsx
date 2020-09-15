@@ -9,8 +9,8 @@ import ViewHelpers from '../../backend/utils/view-helpers'
 import Sidebar from './app/sidebar/sidebar'
 import TopBar from './app/top-bar'
 import Notice from './app/notice'
-import { ReduxState } from './../store/store'
-import { useSidebar } from './../hooks/use-sidebar'
+import { ReduxState } from '../store/store'
+import { useSidebar } from '../hooks/use-sidebar'
 
 import {
   Dashboard, ResourceAction, RecordAction, Page, BulkAction, Resource,
@@ -29,7 +29,7 @@ const GlobalStyle = createGlobalStyle`
 
 const App: React.FC = () => {
   const [sidebar] = useSelector((state: ReduxState) => [
-    state.sidebar
+    state.sidebar,
   ])
 
   const { toggleSidebar } = useSidebar()
@@ -53,7 +53,7 @@ const App: React.FC = () => {
       <Box height="100%" flex>
         {sidebar.isOpen ? (
           <Overlay
-            hidden={isMobileDevice() ? false : true}
+            hidden={!isMobileDevice()}
             onClick={(): void => toggleSidebar()}
           />
         ) : null}

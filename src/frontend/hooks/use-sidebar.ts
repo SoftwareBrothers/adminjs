@@ -1,12 +1,12 @@
 import { useDispatch } from 'react-redux'
-import { toggleSidebar } from '../store/actions/sidebar'
+import toggleSidebar from '../store/actions/sidebar'
 
 /**
  * @memberof useSidebar
  * @alias Sidebar
  */
 export interface Sidebar {
-  toggleSidebar: () => any
+  toggleSidebar: () => void;
 }
 
 /**
@@ -29,7 +29,7 @@ export interface Sidebar {
 export const useSidebar = (): Sidebar => {
   const dispatch = useDispatch()
   return {
-    toggleSidebar() { dispatch(toggleSidebar()) }
+    toggleSidebar(): void { dispatch(toggleSidebar()) },
   }
 }
 

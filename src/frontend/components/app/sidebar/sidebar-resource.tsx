@@ -1,12 +1,11 @@
 import React from 'react'
-import { useSelector } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import { RouteComponentProps } from 'react-router'
 import { Text } from '@admin-bro/design-system'
 
 import ResourceJSON from '../../../../backend/decorators/resource-json.interface'
 import SidebarLink from './styled/sidebar-link.styled'
-import { useSidebar } from './../../../hooks/use-sidebar'
+import { useSidebar } from '../../../hooks/use-sidebar'
 
 type Props = {
   resource: ResourceJSON;
@@ -22,7 +21,7 @@ const SidebarResource: React.FC<Props & RouteComponentProps> = (props) => {
     return null
   }
   return (
-    <SidebarLink to={resource.href} onClick={() => toggleSidebar()} isActive={isActive} data-testid="sidebar-resource-link">
+    <SidebarLink to={resource.href} onClick={(): void => toggleSidebar()} isActive={isActive} data-testid="sidebar-resource-link">
       <Text as="span">{resource.name}</Text>
     </SidebarLink>
   )
