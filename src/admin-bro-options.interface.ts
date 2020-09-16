@@ -362,6 +362,11 @@ export type AdminPage = {
    * Component defined by using {@link AdminBro.bundle}
    */
   component: string;
+
+  /**
+   * Page icon
+   */
+  icon?: string;
 }
 
 /**

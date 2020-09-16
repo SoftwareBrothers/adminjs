@@ -11,4 +11,9 @@ export default interface PageJSON {
    * Page component. Bundled with {@link AdminBro.bundle}
    */
   component: string;
+
+  /**
+   * Page icon
+   */
+  icon?: string;
 }

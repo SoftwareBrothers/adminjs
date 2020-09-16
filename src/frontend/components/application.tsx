@@ -2,7 +2,7 @@
 import React, { useState } from 'react'
 import { Switch, Route } from 'react-router-dom'
 import { createGlobalStyle } from 'styled-components'
-import { Box, Overlay } from '@admin-bro/design-system'
+import { Box, Overlay, Reset } from '@admin-bro/design-system'
 
 import ViewHelpers from '../../backend/utils/view-helpers'
 import Sidebar from './app/sidebar/sidebar'
@@ -40,6 +40,7 @@ const App: React.FC = () => {
 
   return (
     <React.Fragment>
+      <Reset />
       <GlobalStyle />
       <Box height="100%" flex>
         {sidebarVisible ? (

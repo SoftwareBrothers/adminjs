@@ -1,44 +1,51 @@
 import React from 'react'
-import { Box, Label, Text } from '@admin-bro/design-system'
+import { Navigation, NavigationElementProps } from '@admin-bro/design-system'
 
-import { ReduxState } from '../../../store/store'
-import SidebarLink from './styled/sidebar-link.styled'
+import { useHistory, useLocation } from 'react-router'
 import ViewHelpers from '../../../../backend/utils/view-helpers'
 import { useTranslation } from '../../../hooks/use-translation'
+import { ReduxState } from '../../../store/store'
 
 type Props = {
   pages?: ReduxState['pages'];
 }
 
+const h = new ViewHelpers()
+
 const SidebarPages: React.FC<Props> = (props) => {
   const { pages } = props
 
   const { translateLabel } = useTranslation()
-
-  const h = new ViewHelpers()
+  const location = useLocation()
+  const history = useHistory()
 
   if (!pages || !pages.length) {
     return (<></>)
   }
 
-  const isActive = (page, location): boolean => (
+  const isActive = (page): boolean => (
     !!location.pathname.match(`/pages/${page.name}`)
   )
 
+  const elements: Array<NavigationElementProps> = pages.map(page => ({
+    id: page.name,
+    label: page.name,
+    isSelected: isActive(page),
+    icon: page.icon,
+    href: h.pageUrl(page.name),
+    onClick: (event, element): void => {
+      event.preventDefault()
+      if (element.href) {
+        history.push(element.href)
+      }
+    },
+  }))
+
   return (
-    <Box ml="lg">
-      <Label uppercase color="grey60" mb="lg">{translateLabel('pages')}</Label>
-      {pages.map(page => (
-        <SidebarLink
-          to={h.pageUrl(page.name)}
-          key={page.name}
-          isActive={(match, location): boolean => isActive(page, location)}
-          data-testid="sidebar-page-link"
-        >
-          <Text as="span">{translateLabel(page.name)}</Text>
-        </SidebarLink>
-      ))}
-    </Box>
+    <Navigation
+      label={translateLabel('pages')}
+      elements={elements}
+    />
   )
 }
 

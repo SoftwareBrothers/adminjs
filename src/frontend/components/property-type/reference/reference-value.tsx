@@ -1,5 +1,5 @@
 import React from 'react'
-import styled, { DefaultTheme, ThemedStyledProps } from 'styled-components'
+import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 import { ButtonCSS, ButtonProps } from '@admin-bro/design-system'
 
@@ -12,7 +12,7 @@ interface Props {
   record: RecordJSON;
 }
 
-const StyledLink = styled(Link)`
+const StyledLink = styled<any>(Link)`
   ${ButtonCSS};
   padding-left: ${({ theme }): string => theme.space.xs};
   padding-right: ${({ theme }): string => theme.space.xs};

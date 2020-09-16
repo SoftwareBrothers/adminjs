@@ -4,5 +4,6 @@ export * from './use-translation'
 export * from './use-record/use-record'
 export * from './use-records'
 export * from './use-current-admin'
+export * from './use-local-storage'
 
 export { default as updateRecord } from './use-record/update-record'

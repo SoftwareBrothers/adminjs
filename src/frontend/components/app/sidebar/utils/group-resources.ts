@@ -1,11 +1,15 @@
+import { NavigationElementProps, NavigationProps } from '@admin-bro/design-system'
 import ResourceJSON from '../../../../../backend/decorators/resource-json.interface'
 
+const resourceToNavigationElement = (
+  resource: ResourceJSON,
+): NavigationElementProps => ({
+  href: resource.href || undefined,
+  label: resource.name,
+})
+
 /* eslint-disable no-param-reassign */
-export default (resources: Array<ResourceJSON>): Array<{
-  name: string;
-  icon: string;
-  resources: Array<ResourceJSON>;
-}> => {
+export default (resources: Array<ResourceJSON>): NavigationProps['elements'] => {
   const visibleResources = resources.filter(res => res.href)
   const map = visibleResources.reduce((memo, resource) => {
     const key = resource.parent?.name || ''
@@ -18,8 +22,8 @@ export default (resources: Array<ResourceJSON>): Array<{
     return memo
   }, {})
   return Object.keys(map).map(parentName => ({
-    name: parentName,
+    label: parentName,
     icon: map[parentName].icon,
-    resources: map[parentName],
+    elements: map[parentName].map(resourceToNavigationElement),
   }))
 }

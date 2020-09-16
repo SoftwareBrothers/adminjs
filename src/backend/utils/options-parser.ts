@@ -34,7 +34,7 @@ export const getBranding = async (
   const { branding } = admin.options
   const defaultLogo = slash(path.join(
     admin.options.rootPath,
-    '/frontend/assets/logo-mini.svg',
+    '/frontend/assets/logo.svg',
   ))
 
   const computed = typeof branding === 'function'

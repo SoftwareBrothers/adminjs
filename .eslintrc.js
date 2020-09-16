@@ -51,6 +51,7 @@ module.exports = {
             'func-names': 'off',
             'prefer-arrow-callback': 'off',
             'import/no-extraneous-dependencies': 'off',
+            'mocha/no-mocha-arrows': 'off',
             '@typescript-eslint/explicit-function-return-type': 'off',
           },
         },
