@@ -12,18 +12,33 @@ const resourceToNavigationElement = (
 export default (resources: Array<ResourceJSON>): NavigationProps['elements'] => {
   const visibleResources = resources.filter(res => res.href)
   const map = visibleResources.reduce((memo, resource) => {
-    const key = resource.parent?.name || ''
-    if (memo[key]) {
+    // in case resource has the same name as parent we namespace it wit "resource-""
+    const key = resource.parent?.name || ['resource', resource.name].join('-')
+
+    if (!resource.parent || resource.parent.name === null) {
+      memo[key] = resource
+    } else if (resource.parent?.name && memo[key]) {
       memo[key].push(resource)
     } else {
       memo[key] = [resource]
     }
-    memo[key].icon = resource.parent?.icon
+
+    memo[key].icon = memo[key].icon || resource.parent?.icon
     return memo
   }, {})
-  return Object.keys(map).map(parentName => ({
-    label: parentName,
-    icon: map[parentName].icon,
-    elements: map[parentName].map(resourceToNavigationElement),
-  }))
+
+  return Object.keys(map).map((parentName) => {
+    if (!Array.isArray(map[parentName])) {
+      return {
+        ...resourceToNavigationElement(map[parentName]),
+        icon: map[parentName].icon,
+        elements: [],
+      }
+    }
+    return {
+      label: parentName,
+      icon: map[parentName].icon,
+      elements: map[parentName].map(resourceToNavigationElement),
+    }
+  })
 }

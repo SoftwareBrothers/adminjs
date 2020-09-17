@@ -78,7 +78,7 @@ export interface ResourceOptions {
    * If null is given. Parent wont be displayed
    */
   parent?: {
-    name?: string;
+    name?: string | null;
     icon?: string;
   } | string | null;
   /**

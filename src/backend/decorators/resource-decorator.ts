@@ -254,16 +254,22 @@ class ResourceDecorator {
    * @return {Parent}   ResourceJSON['parent']}
    */
   getParent(): ResourceJSON['parent'] {
+    const DEFAULT_ICON = 'Archive'
     // when user gives parent: null
     if (this.options.parent === null) {
       return null
     }
-    const parent = (
-      this.options.parent || this._resource.databaseName()
-    ) as {name: string; icon: string}
-    const name = (parent.name || parent) as string
-    const icon = parent.icon ? parent.icon : `icon-${this._resource.databaseType() || 'database'}`
-    return { name, icon }
+    if (this.options.parent === undefined || typeof this.options.parent === 'string') {
+      return {
+        name: this.options.parent || this._resource.databaseName(),
+        icon: this._resource.databaseType() || DEFAULT_ICON,
+      }
+    }
+    const { name, icon } = this.options.parent
+    return {
+      name: name || null,
+      icon: icon || DEFAULT_ICON,
+    }
   }
 
   /**

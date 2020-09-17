@@ -26,7 +26,7 @@ export default interface ResourceJSON {
     /**
      * Parent name
      */
-    name: string;
+    name: string | null;
     /**
      * Parent icon
      */

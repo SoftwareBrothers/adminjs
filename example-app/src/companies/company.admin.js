@@ -31,6 +31,10 @@ const options = {
       isDisabled: true,
     },
   },
+  parent: {
+    name: null,
+    icon: 'Enterprise',
+  },
   actions: {
     search: {
       handler: async (request, response, data) => {

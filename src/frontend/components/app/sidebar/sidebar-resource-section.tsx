@@ -1,5 +1,5 @@
 import React, { FC } from 'react'
-import { Box, cssClass, Navigation } from '@admin-bro/design-system'
+import { Box, cssClass, Navigation, NavigationElementWithChildrenProps } from '@admin-bro/design-system'
 import { useHistory, useLocation } from 'react-router'
 import { useTranslation } from '../../../hooks/use-translation'
 import groupResources from './utils/group-resources'
@@ -41,24 +41,34 @@ const SidebarResourceSectionOriginal: FC<SidebarResourceSectionProps> = ({ resou
   const history = useHistory()
   const location = useLocation()
 
-  const elements = groupResources(resources).map((element, index) => ({
-    ...element,
-    onClick: (): void => setOpenElements({
-      ...openElements,
-      [index]: !openElements[index],
-    }),
-    isOpen: !!openElements[index],
-    elements: element.elements?.map(subElement => ({
-      ...subElement,
-      onClick: (event): void => {
-        if (subElement.href) {
-          event.preventDefault()
-          history.push(subElement.href)
-        }
-      },
-      isSelected: isSelected(subElement.href, location),
-    })),
+  const enrichElement = ((
+    subElement: NavigationElementWithChildrenProps,
+  ): NavigationElementWithChildrenProps => ({
+    ...subElement,
+    onClick: (event): void => {
+      if (subElement.href) {
+        event.preventDefault()
+        history.push(subElement.href)
+      }
+    },
+    isSelected: isSelected(subElement.href, location),
   }))
+
+  const elements = groupResources(resources).map((element, index) => {
+    if (!element.elements || !element.elements.length) {
+      return enrichElement(element)
+    }
+    return {
+      ...element,
+      onClick: (): void => setOpenElements({
+        ...openElements,
+        [index]: !openElements[index],
+      }),
+      isOpen: !!openElements[index],
+      elements: element.elements?.map(enrichElement),
+    }
+  })
+
   const { translateLabel } = useTranslation()
 
   return (
