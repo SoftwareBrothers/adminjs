@@ -34,13 +34,12 @@ const options = {
     app: process.env.npm_package_version,
   },
   branding: currentUser => ({
-    logo: false,
     companyName: currentUser ? currentUser.email : 'something',
   }),
   pages: {
     aboutUs: {
       handler: async () => { console.log('clicked') },
-      component: AdminBro.bundle('./components/no-records'),
+      component: AdminBro.bundle('./components/example-page'),
       icon: 'Add',
     },
   },

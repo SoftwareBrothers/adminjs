@@ -1,16 +1,14 @@
 import { Store } from 'redux'
-import createStore, {
-  initializeResources,
-  initializeBranding,
-  initializeDashboard,
-  initializeAssets,
-  initializePaths,
-  initializePages,
-  setCurrentAdmin,
-  initializeVersions,
-  initializeLocale,
-  ReduxState,
-} from './store'
+import createStore, { ReduxState } from './store'
+import { initializeResources } from './actions/initialize-resources'
+import { initializeBranding } from './actions/initialize-branding'
+import { initializeDashboard } from './actions/initialize-dashboard'
+import { initializeAssets } from './actions/initialize-assets'
+import { initializePaths } from './actions/initialize-paths'
+import { initializePages } from './actions/initialize-pages'
+import { setCurrentAdmin } from './actions/set-current-admin'
+import { initializeVersions } from './actions/initialize-versions'
+import { initializeLocale } from './actions/initialize-locale'
 import AdminBro from '../../admin-bro'
 import { CurrentAdmin } from '../../current-admin.interface'
 import pagesToStore from './pages-to-store'

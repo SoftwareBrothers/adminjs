@@ -1,5 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux'
-import { setCurrentAdmin, ReduxState } from '../store/store'
+import { ReduxState } from '../store/store'
+import { setCurrentAdmin } from '../store/actions/set-current-admin'
 import { CurrentAdmin } from '../../current-admin.interface'
 
 /**

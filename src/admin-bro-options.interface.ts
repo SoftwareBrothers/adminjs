@@ -86,7 +86,7 @@ export default interface AdminBroOptions {
    *   },
    * },
    */
-  pages?: Record<string, AdminPage>;
+  pages?: AdminPages;
   /**
    * Array of all Resources which are supported by AdminBro via adapters.
    * You can pass either resource or resource with an options and thus modify it.
@@ -370,6 +370,14 @@ export type AdminPage = {
 }
 
 /**
+ * Object describing map of regular pages in AdminBro
+ *
+ * @alias AdminPages
+ * @memberof AdminBroOptions
+ */
+export type AdminPages = Record<string, AdminPage>
+
+/**
  * Default way of passing Options with a Resource
  * @alias ResourceWithOptions
  * @memberof AdminBroOptions
@@ -420,5 +428,5 @@ export interface AdminBroOptionsWithDefault extends AdminBroOptions {
     handler?: PageHandler;
     component?: string;
   };
-  pages: Record<string, AdminPage>;
+  pages: AdminBroOptions['pages'];
 }

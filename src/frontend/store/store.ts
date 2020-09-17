@@ -1,82 +1,16 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
-import { createStore, combineReducers } from 'redux'
-import ResourceJSON from '../../backend/decorators/resource-json.interface'
-import { BrandingOptions, VersionProps, AdminPage, Assets } from '../../admin-bro-options.interface'
-import { CurrentAdmin } from '../../current-admin.interface'
-import { DEFAULT_PATHS } from '../../constants'
-import { NoticeMessage } from './with-notice'
+import { combineReducers, createStore } from 'redux'
+import { Assets, BrandingOptions, VersionProps } from '../../admin-bro-options.interface'
 import PageJSON from '../../backend/decorators/page-json.interface'
+import ResourceJSON from '../../backend/decorators/resource-json.interface'
+import { DEFAULT_PATHS } from '../../constants'
+import { CurrentAdmin } from '../../current-admin.interface'
 import { Locale } from '../../locale/config'
-
-export const initializePages = (data: Array<AdminPage>): {
-  type: string; data: Array<AdminPage>;
-} => ({
-  type: 'PAGES_INITIALIZE',
-  data,
-})
-
-export const initializeLocale = (data: Locale): {
-  type: string; data: Locale;
-} => ({
-  type: 'LOCALE_INITIALIZE',
-  data,
-})
-
-export const initializeResources = (data: Array<ResourceJSON>): {
-  type: string; data: Array<ResourceJSON>;
-} => ({
-  type: 'RESOURCES_INITIALIZE',
-  data,
-})
+import { NoticeMessage } from './with-notice'
 
 export type DashboardInState = {
   component?: string;
 }
-
-export const initializeDashboard = (data: DashboardInState): {
-  type: string;
-  data: DashboardInState;
-} => ({
-  type: 'DASHBOARD_INITIALIZE',
-  data,
-})
-
-export const initializeBranding = (data: BrandingOptions): {
-  type: string;
-  data: BrandingOptions;
-} => ({
-  type: 'BRANDING_INITIALIZE',
-  data,
-})
-
-export const initializeAssets = (data: Assets): {
-  type: string;
-  data: Assets;
-} => ({
-  type: 'ASSETS_INITIALIZE',
-  data,
-})
-
-export const initializePaths = (data: Paths): {
-  type: string;
-  data: Paths;
-} => ({
-  type: 'PATHS_INITIALIZE',
-  data,
-})
-
-export const initializeVersions = (data: VersionProps): {
-  type: string;
-  data: VersionProps;
-} => ({
-  type: 'VERSIONS_INITIALIZE',
-  data,
-})
-
-export const setCurrentAdmin = (data: CurrentAdmin | null = null) => ({
-  type: 'SESSION_INITIALIZE',
-  data,
-})
 
 export type NoticeMessageInState = NoticeMessage & {
   message: string;
@@ -91,32 +25,6 @@ export type Paths = {
   loginPath: string;
   assetsCDN?: string;
 }
-
-export const addNotice = (data: NoticeMessage = { message: '' }): {
-  type: string;
-  data: NoticeMessageInState;
-} => ({
-  type: 'ADD_NOTICE',
-  data: {
-    message: data.message,
-    id: Math.random().toString(36).substr(2, 9),
-    type: data.type || 'success',
-    progress: 0,
-  },
-})
-
-export const setNoticeProgress = ({ noticeId, progress }: {
-  noticeId: string;
-  progress: number;
-}) => ({
-  type: 'SET_NOTICE_PROGRESS',
-  data: { noticeId, progress },
-})
-
-export const dropNotice = (noticeId: string) => ({
-  type: 'DROP_NOTICE',
-  data: { noticeId },
-})
 
 const resourcesReducer = (
   state: Array<ResourceJSON> = [],

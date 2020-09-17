@@ -247,7 +247,8 @@ class ApiController {
    */
   async page(request: any, response: any): Promise<any> {
     const h = new ViewHelpers(this._admin)
-    const { pages } = this._admin.options
+    const { pages = {} } = this._admin.options
+
     const { pageName } = request.params
     const { handler } = (pages[pageName] || {})
 

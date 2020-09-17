@@ -1,5 +1,5 @@
 import { useDispatch } from 'react-redux'
-import { addNotice } from '../store/store'
+import { addNotice } from '../store/actions/add-notice'
 import { NoticeMessage } from '../store/with-notice'
 
 /**
