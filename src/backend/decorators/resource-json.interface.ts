@@ -22,7 +22,7 @@ export default interface ResourceJSON {
   /**
    * Resource parent - visible on the sidebar
    */
-  parent: {
+  navigation: {
     /**
      * Parent name
      */
@@ -32,6 +32,7 @@ export default interface ResourceJSON {
      */
     icon: string;
   } | null;
+
   /**
    * Property which should be treated as a Main property
    */

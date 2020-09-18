@@ -60,7 +60,7 @@ describe('ResourceDecorator', function () {
   describe('#getParent', function () {
     it('returns database name with its icon when no options were specified', function () {
       expect(
-        new ResourceDecorator({ ...args, options: {} }).getParent(),
+        new ResourceDecorator({ ...args, options: {} }).getNavigation(),
       ).to.deep.equal({
         name: expectedResult.databaseName,
         icon: `icon-${expectedResult.databaseType}`,
@@ -71,7 +71,7 @@ describe('ResourceDecorator', function () {
         parent: { name: 'someName', icon: 'i-icon-some' },
       }
       expect(
-        new ResourceDecorator({ ...args, options }).getParent(),
+        new ResourceDecorator({ ...args, options }).getNavigation(),
       ).to.deep.equal(options.parent)
     })
   })

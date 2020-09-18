@@ -42,3 +42,5 @@ export function useLocalStorage<T>(key: string, initialValue: T): UseLocalStorag
 
   return [storedValue, setValue]
 }
+
+export default useLocalStorage

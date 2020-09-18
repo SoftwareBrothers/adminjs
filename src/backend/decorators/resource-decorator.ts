@@ -253,19 +253,25 @@ class ResourceDecorator {
    * database type with its icon
    * @return {Parent}   ResourceJSON['parent']}
    */
-  getParent(): ResourceJSON['parent'] {
+  getNavigation(): ResourceJSON['navigation'] {
     const DEFAULT_ICON = 'Archive'
-    // when user gives parent: null
-    if (this.options.parent === null) {
+
+    // For obsolete use of parent instead of navigation
+    const parentOption = typeof this.options.navigation !== 'undefined'
+      ? this.options.navigation
+      : this.options.parent
+
+    if (parentOption === null) {
       return null
     }
-    if (this.options.parent === undefined || typeof this.options.parent === 'string') {
+
+    if (parentOption === undefined || typeof parentOption === 'string') {
       return {
-        name: this.options.parent || this._resource.databaseName(),
+        name: parentOption || this._resource.databaseName(),
         icon: this._resource.databaseType() || DEFAULT_ICON,
       }
     }
-    const { name, icon } = this.options.parent
+    const { name, icon } = parentOption
     return {
       name: name || null,
       icon: icon || DEFAULT_ICON,
@@ -466,7 +472,7 @@ class ResourceDecorator {
     return {
       id: this.id(),
       name: this.getResourceName(),
-      parent: this.getParent(),
+      navigation: this.getNavigation(),
       href: this.getHref(currentAdmin),
       titleProperty: this.titleProperty().toJSON(),
       resourceActions: this.resourceActions(currentAdmin).map(ra => ra.toJSON(currentAdmin)),

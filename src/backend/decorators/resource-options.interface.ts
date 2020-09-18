@@ -72,11 +72,21 @@ export interface ResourceOptions {
    */
   href?: HrefFunction | string;
   /**
-   * Parent element under which resource should be nested in sidebar. Default
-   * to the database name.
+   * Navigation option saying under which resource should be nested in sidebar.
+   * Default to the database name.
    *
-   * If null is given. Parent wont be displayed
+   * You have couple of options:
+   * - when you give both name and icon - your resource will be nested under this menu.
+   * - when you set it to null - resource will be top level, but without the icon
+   * - finally you can set the icon but leave name as `null`. In such case resource will be
+   *   top level and it will have an icon.
    */
+  navigation?: {
+    name?: string | null;
+    icon?: string;
+  } | string | null;
+
+  // TODO: deprecate
   parent?: {
     name?: string | null;
     icon?: string;

@@ -8,7 +8,7 @@ factory.define<ResourceJSON>('ResourceJSON', Object, {
   name: factory.sequence('ResourceJSON.name', i => `resource ${i}`),
   href: '/admin/resourceName',
   titleProperty: () => factory.build<PropertyJSON>('PropertyJSON'),
-  parent: {
+  navigation: {
     name: 'someName',
     icon: 'someIcon',
   },
