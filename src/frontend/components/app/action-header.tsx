@@ -95,7 +95,6 @@ const ActionHeader: React.FC<ActionHeaderProps> = (props) => {
   const cssIsRootFlex = !action.showInDrawer
   const cssHeaderMT = action.showInDrawer ? '' : 'lg'
   const cssCloseIcon = action.showInDrawer ? 'ChevronRight' : 'ChevronLeft'
-  const cssActionButtonSize = action.showInDrawer ? 'sm' : 'lg'
   const cssActionsMB = action.showInDrawer ? 'xl' : 'default'
   const CssHComponent = action.showInDrawer ? H3 : H2
 
@@ -111,10 +110,10 @@ const ActionHeader: React.FC<ActionHeaderProps> = (props) => {
                 key={customAction.name}
                 resourceId={resource.id}
               >
-                <Link as="span" ml="lg">
+                <Button as="a">
                   {customAction.icon ? <Icon icon={customAction.icon} /> : null}
                   {customAction.label}
-                </Link>
+                </Button>
               </ActionButton>
             ))}
           </Box>
@@ -149,12 +148,11 @@ const ActionHeader: React.FC<ActionHeaderProps> = (props) => {
                 recordId={record && record.id}
               >
                 <Button
-                  as="span"
+                  as="a"
                   mr={action.showInDrawer ? 'default' : ''}
                   ml={!action.showInDrawer ? 'default' : ''}
                   mb="default"
                   variant={headerAction.name === 'new' ? 'primary' : undefined}
-                  size={cssActionButtonSize}
                 >
                   {headerAction.icon ? <Icon icon={headerAction.icon} /> : null}
                   {headerAction.label}

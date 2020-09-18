@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react'
 import { useHistory } from 'react-router-dom'
 import {
   Placeholder, TableRow, TableCell, CheckBox, DropDown,
-  DropDownTrigger, Icon, DropDownMenu, DropDownItem,
+  DropDownTrigger, Icon, DropDownMenu, DropDownItem, Button,
 } from '@admin-bro/design-system'
 
 import ActionButton from '../action-button'
@@ -99,23 +99,26 @@ const RecordInList: React.FC<Props> = (props) => {
       ))}
       <TableCell key="options">
         {recordActions.length ? (
-          <DropDown>
+          <DropDown stick="right">
             <DropDownTrigger data-testid="actions-dropdown">
-              <Icon icon="OverflowMenuHorizontal" color="grey100" />
+              <Button variant="text" size="icon">
+                <Icon icon="OverflowMenuHorizontal" color="grey100" />
+              </Button>
             </DropDownTrigger>
-            <DropDownMenu>
+            <DropDownMenu minWidth="200px">
               {recordActions.map(action => (
-                <DropDownItem key={action.name}>
-                  <ActionButton
-                    action={action}
-                    resourceId={resource.id}
-                    recordId={record.id}
-                    actionPerformed={handleActionPerformed}
-                  >
+                <ActionButton
+                  key={action.name}
+                  action={action}
+                  resourceId={resource.id}
+                  recordId={record.id}
+                  actionPerformed={handleActionPerformed}
+                >
+                  <DropDownItem>
                     <Icon icon={action.icon} />
                     {action.label}
-                  </ActionButton>
-                </DropDownItem>
+                  </DropDownItem>
+                </ActionButton>
               ))}
             </DropDownMenu>
           </DropDown>

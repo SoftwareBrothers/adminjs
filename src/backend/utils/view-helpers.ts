@@ -13,11 +13,11 @@ try {
 
 /**
  * Params for a record action
- * @alias RecordActionParams
+ * @alias ActionParams
  * @memberof ViewHelpers
  */
-export type RecordActionParams = {
-  /**
+export type ActionParams = {
+    /**
    * Unique Resource ID
    */
   resourceId: string;
@@ -26,73 +26,44 @@ export type RecordActionParams = {
    */
   actionName: string;
   /**
-   * Record ID
-   */
-  recordId: string;
-  /**
    * Optional query string: ?....
    */
   search? : string;
+}
+
+/**
+ * Params for a record action
+ * @alias RecordActionParams
+ * @extends ActionParams
+ * @memberof ViewHelpers
+ */
+export type RecordActionParams = ActionParams & {
+  /**
+   * Record ID
+   */
+  recordId: string;
 }
 
 /**
  * Params for a bulk action
  * @alias BulkActionParams
+ * @extends ActionParams
  * @memberof ViewHelpers
  */
-export type BulkActionParams = {
-  /**
-   * Unique Resource ID
-   */
-  resourceId: string;
-  /**
-   * Action name
-   */
-  actionName: string;
+export type BulkActionParams = ActionParams & {
   /**
    * Array of Records ID
    */
   recordIds?: Array<string>;
-  /**
-   * Optional query string: ?....
-   */
-  search? : string;
 }
 
 /**
  * Params for a resource action
  * @alias ResourceActionParams
+ * @extends ActionParams
  * @memberof ViewHelpers
  */
-export type ResourceActionParams = {
-  /**
-   * Unique Resource ID
-   */
-  resourceId: string;
-  /**
-   * Action name
-   */
-  actionName: string;
-  /**
-   * Optional query string: ?....
-   */
-  search? : string;
-}
-
-/**
- * Params for a resource list
- * @alias ResourceParams
- * @memberof ViewHelpers
- */
-export type ResourceParams = {
-  /**
-   * Unique Resource ID
-   */
-  resourceId: string;
-  /**
-   * Action name
-   */
-  search? : string;
+export type ResourceActionParams = ActionParams & {
 }
 
 const runDate = new Date()
@@ -184,7 +155,7 @@ class ViewHelpers {
     return this.urlBuilder(['resources', resourceId, 'actions', actionName], search)
   }
 
-  resourceUrl({ resourceId, search }: ResourceParams): string {
+  resourceUrl({ resourceId, search }: ResourceActionParams): string {
     return this.urlBuilder(['resources', resourceId], search)
   }
 

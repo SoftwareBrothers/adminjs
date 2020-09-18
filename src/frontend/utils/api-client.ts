@@ -1,5 +1,7 @@
-/* eslint-disable no-alert */
 import axios, { AxiosResponse, AxiosInstance, AxiosRequestConfig } from 'axios'
+import { ResourceActionParams, BulkActionParams, RecordActionParams } from '../../../lib/backend/utils/view-helpers'
+import { ActionParams } from '../../backend/utils/view-helpers'
+/* eslint-disable no-alert */
 import RecordJSON from '../../backend/decorators/record-json.interface'
 import { RecordActionResponse, ActionResponse, BulkActionResponse } from '../../backend/actions/action.interface'
 
@@ -40,69 +42,39 @@ const checkResponse = (response: AxiosResponse): void => {
 /**
  * Extends {@link AxiosRequestConfig}
  *
+ * @alias ActionAPIParams
+ * @memberof ApiClient
+ * @property {any}   ...    any property supported by {@link AxiosRequestConfig}
+ */
+export type ActionAPIParams = AxiosRequestConfig & ActionParams
+
+/**
+ * Extends {@link ActionAPIParams}
+ *
  * @alias ResourceActionAPIParams
  * @memberof ApiClient
  * @property {any}   ...    any property supported by {@link AxiosRequestConfig}
  */
-export type ResourceActionAPIParams = AxiosRequestConfig & {
-  /**
-   * id of a resource taken from {@link ResourceJSON}
-   */
-  resourceId: string;
-  /**
-   * action name taken from  {@link ActionJSON}
-   */
-  actionName: string;
-  /**
-   * query string
-   */
-  query?: string;
-}
+export type ResourceActionAPIParams = AxiosRequestConfig & ResourceActionParams
 
 /**
- * Extends {@link AxiosRequestConfig}
+ * Extends {@link ActionAPIParams}
  *
  * @alias RecordActionAPIParams
  * @memberof ApiClient
- * @property {any}   ...    any property supported by {@link AxiosRequestConfig}
+ * @property {any}   ...    any property supported by {@link ActionAPIParams}
  */
-export type RecordActionAPIParams = AxiosRequestConfig & {
-  /**
-   * id of a record taken from {@link RecordJSON}
-   */
-  recordId: string;
-  /**
-   * id of a resource taken from {@link ResourceJSON}
-   */
-  resourceId: string;
-  /**
-   * action name taken from  {@link ActionJSON}
-   */
-  actionName: string;
-}
+export type RecordActionAPIParams = AxiosRequestConfig & RecordActionParams
 
 /**
- * Extends {@link AxiosRequestConfig}
+ * Extends {@link ActionAPIParams}
  *
  * @alias BulkActionAPIParams
  * @memberof ApiClient
  * @see https://github.com/axios/axios/blob/master/index.d.ts#L43
- * @property {any}   ...    any property supported by {@link AxiosRequestConfig}
+ * @property {any}   ...    any property supported by {@link ActionAPIParams}
  */
-export type BulkActionAPIParams = AxiosRequestConfig & {
-  /**
-   * id of a record taken from {@link RecordJSON}
-   */
-  recordIds: Array<string>;
-  /**
-   * id of a resource taken from {@link ResourceJSON}
-   */
-  resourceId: string;
-  /**
-   * action name taken from  {@link ActionJSON}
-   */
-  actionName: string;
-}
+export type BulkActionAPIParams = AxiosRequestConfig & BulkActionParams
 
 
 /**

@@ -6,5 +6,6 @@ export * from './use-records'
 export * from './use-current-admin'
 export * from './use-local-storage'
 export * from './use-navigation-resources'
+export * from './use-action'
 
 export { default as updateRecord } from './use-record/update-record'

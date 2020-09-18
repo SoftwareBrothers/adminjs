@@ -2,18 +2,10 @@
 /* eslint-disable no-alert */
 /* eslint-disable no-restricted-globals */
 
-import React, { ReactNode, ComponentClass } from 'react'
-import { withRouter, Link } from 'react-router-dom'
-import styled from 'styled-components'
+import React, { ReactElement } from 'react'
 
-import { RouteComponentProps } from 'react-router'
-import { AxiosResponse } from 'axios'
-import ApiClient from '../../utils/api-client'
-import ViewHelpers from '../../../backend/utils/view-helpers'
-import withNotice, { AddNoticeProps } from '../../store/with-notice'
 import ActionJSON from '../../../backend/decorators/action-json.interface'
-import { ActionResponse } from '../../../backend/actions/action.interface'
-import { appendForceRefresh } from '../actions/utils/append-force-refresh'
+import { useAction } from '../../hooks'
 
 
 /**
@@ -33,10 +25,6 @@ export type ActionButtonProps = {
   actionPerformed?: (action: ActionResponse) => any;
 }
 
-const StyledLink = styled(Link)`
-  text-decoration: none;
-`
-
 /**
  * Renders Button which redirects to given action
  *
@@ -49,118 +37,35 @@ const StyledLink = styled(Link)`
  * @component
  * @subcategory Application
  */
-class ActionButton extends React.PureComponent<
-  RouteComponentProps & AddNoticeProps & ActionButtonProps
-> {
-  constructor(props) {
-    super(props)
-    this.handleClick = this.handleClick.bind(this)
+const ActionButton: React.FC<ActionButtonProps> = (props) => {
+  const { children, action, actionPerformed, resourceId, recordId, recordIds } = props
+
+  const { href, handleClick } = useAction(action, {
+    resourceId, recordId, recordIds,
+  }, actionPerformed)
+
+  if (!action) {
+    return null
   }
 
-  href(): string {
-    const {
-      action, resourceId, recordId, recordIds, location,
-    } = this.props
-    const h = new ViewHelpers()
-    const { name: actionName, actionType } = action
+  const firstChild = React.Children.toArray(children)[0]
 
-    switch (actionType) {
-    case 'record':
-      if (!recordId) {
-        throw new Error('You have to specify "recordId" for record action')
-      }
-      return h.recordActionUrl({ resourceId, recordId, actionName, search: location.search })
-    case 'resource':
-      return h.resourceActionUrl({ resourceId, actionName, search: location.search })
-    case 'bulk':
-      return h.bulkActionUrl({ resourceId, recordIds, actionName, search: location.search })
-    default:
-      throw new Error('"actionType" should be either record, resource or bulk')
-    }
+  if (!firstChild
+    || typeof firstChild === 'string'
+    || typeof firstChild === 'number'
+    || typeof firstChild === 'boolean') {
+    throw new Error('ActionButton has to have one child')
   }
 
-  callApi(): void {
-    const {
-      action, resourceId, recordId, location,
-      history, actionPerformed, addNotice, recordIds,
-    } = this.props
+  const WrappedElement = React.cloneElement(firstChild as ReactElement<any>, {
+    onClick: handleClick,
+    'data-testid': `action-${action.name}`,
+    href,
+  })
 
-    const api = new ApiClient()
-    let promise: Promise<AxiosResponse<ActionResponse>>
 
-    switch (action.actionType) {
-    case 'record':
-      if (!recordId) {
-        throw new Error('You have to specify "recordId" for record action')
-      }
-      promise = api.recordAction({
-        resourceId, actionName: action.name, recordId,
-      })
-      break
-    case 'resource':
-      promise = api.resourceAction({
-        resourceId, actionName: action.name,
-      })
-      break
-    case 'bulk':
-      if (!recordIds) {
-        throw new Error('You have to specify "recordIds" for bulk action')
-      }
-      promise = api.bulkAction({
-        resourceId, actionName: action.name, recordIds,
-      })
-      break
-    default:
-      throw new Error('"actionType" should be either record, resource or bulk')
-    }
-
-    promise.then((response) => {
-      const { data } = response
-      if (data.notice) {
-        addNotice(data.notice)
-      }
-      if (data.redirectUrl && location.pathname !== data.redirectUrl) {
-        history.push(appendForceRefresh(data.redirectUrl))
-      }
-      if (actionPerformed) {
-        actionPerformed(data)
-      }
-    }).catch((error) => {
-      throw error
-    })
-  }
-
-  handleClick(event): void {
-    const { action } = this.props
-
-    if (action.guard && !confirm(action.guard)) {
-      event.preventDefault()
-      return
-    }
-    if (typeof action.component !== 'undefined' && action.component === false) {
-      event.preventDefault()
-      this.callApi()
-    }
-  }
-
-  render(): ReactNode {
-    const { children, action } = this.props
-
-    if (!action) {
-      return null
-    }
-
-    return (
-      <StyledLink
-        to={this.href()}
-        onClick={this.handleClick}
-        data-testid={`action-${action.name}`}
-      >
-        {children}
-      </StyledLink>
-    )
-  }
+  return WrappedElement
 }
 
 // TODO - remove this hack
-export default withRouter(withNotice(ActionButton)) as unknown as ComponentClass<ActionButtonProps>
+export default ActionButton
