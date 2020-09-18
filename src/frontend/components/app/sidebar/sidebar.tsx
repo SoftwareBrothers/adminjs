@@ -1,6 +1,7 @@
 import React from 'react'
+import styled from 'styled-components'
 import { useSelector } from 'react-redux'
-import { Box, cssClass } from '@admin-bro/design-system'
+import { Box, cssClass, themeGet } from '@admin-bro/design-system'
 
 import { BrandingOptions } from 'src/admin-bro-options.interface'
 import ResourceJSON from 'src/backend/decorators/resource-json.interface'
@@ -16,6 +17,29 @@ type Props = {
   isVisible: boolean;
 }
 
+const StyledSidebar = styled(Box)`
+  transition: left 0.3s;
+  top: 0;
+  bottom: 0;
+
+  &.hidden {
+    left: -${themeGet('sizes', 'sidebarWidth')};
+  }
+  &.visible {
+    left: 0;
+  }
+`
+
+StyledSidebar.defaultProps = {
+  position: ['absolute', 'absolute', 'absolute', 'absolute', 'inherit'],
+  width: 'sidebarWidth',
+  borderRight: 'default',
+  display: 'flex',
+  flexDirection: 'column',
+  zIndex: 1000,
+  bg: 'white',
+}
+
 const Sidebar: React.FC<Props> = (props) => {
   const { isVisible } = props
   const [branding, resources, pages]: [BrandingOptions, ResourceJSON[], PageJSON[]] = useSelector(
@@ -25,13 +49,8 @@ const Sidebar: React.FC<Props> = (props) => {
   )
 
   return (
-    <Box
+    <StyledSidebar
       className={isVisible ? 'visible' : 'hidden'}
-      position={['absolute', 'absolute', 'absolute', 'absolute', 'inherit']}
-      width="sidebarWidth"
-      borderRight="default"
-      display="flex"
-      flexDirection="column"
     >
       <SidebarBranding branding={branding} />
       <Box flexGrow={1} className={cssClass('Resources')}>
@@ -39,7 +58,7 @@ const Sidebar: React.FC<Props> = (props) => {
       </Box>
       <SidebarPages pages={pages} />
       {branding?.softwareBrothers && <SidebarFooter />}
-    </Box>
+    </StyledSidebar>
   )
 }
 
