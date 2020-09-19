@@ -330,6 +330,7 @@ class ResourceDecorator {
         .map((propertyName) => {
           const property = this.getPropertyByKey(propertyName)
           if (!property) {
+            // eslint-disable-next-line no-console
             console.error([
               `[AdminBro]: There is no property of the name: "${propertyName}".`,
               `Check out the "${where}Properties" in the`,

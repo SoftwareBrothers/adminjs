@@ -3,10 +3,12 @@ import { NoticeMessage } from '../with-notice'
 
 export const ADD_NOTICE = 'ADD_NOTICE'
 
-export const addNotice = (data: NoticeMessage = { message: '' }): {
-  type: string;
+export type AddNoticeResponse = {
+  type: typeof ADD_NOTICE;
   data: NoticeMessageInState;
-} => ({
+}
+
+export const addNotice = (data: NoticeMessage = { message: '' }): AddNoticeResponse => ({
   type: ADD_NOTICE,
   data: {
     message: data.message,

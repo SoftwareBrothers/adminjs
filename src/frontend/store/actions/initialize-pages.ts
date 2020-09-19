@@ -2,9 +2,12 @@ import { AdminPage } from '../../../admin-bro-options.interface'
 
 export const PAGES_INITIALIZE = 'PAGES_INITIALIZE'
 
-export const initializePages = (data: Array<AdminPage>): {
-  type: string; data: Array<AdminPage>;
-} => ({
+export type InitializePagesResponse = {
+  type: typeof RAGES_INITIALIZE;
+  data: Array<AdminPage>;
+}
+
+export const initializePages = (data: Array<AdminPage>): InitializePagesResponse => ({
   type: PAGES_INITIALIZE,
   data,
 })

@@ -1,5 +1,17 @@
-/* eslint-disable @typescript-eslint/explicit-function-return-type */
 import { combineReducers, createStore } from 'redux'
+import { VERSIONS_INITIALIZE } from './actions/initialize-versions'
+import { SESSION_INITIALIZE } from './actions/set-current-admin'
+import { DASHBOARD_INITIALIZE } from './actions/initialize-dashboard'
+import { PATHS_INITIALIZE } from './actions/initialize-paths'
+import { ASSETS_INITIALIZE } from './actions/initialize-assets'
+import { BRANDING_INITIALIZE } from './actions/initialize-branding'
+import { LOCALE_INITIALIZE } from './actions/initialize-locale'
+import { PAGES_INITIALIZE } from './actions/initialize-pages'
+import { RESOURCES_INITIALIZE } from './actions/initialize-resources'
+/* eslint-disable @typescript-eslint/explicit-function-return-type */
+import { SET_NOTICE_PROGRESS } from './actions/set-notice-progress'
+import { DROP_NOTICE } from './actions/drop-notice'
+import { ADD_NOTICE } from './actions/add-notice'
 import { Assets, BrandingOptions, VersionProps } from '../../admin-bro-options.interface'
 import PageJSON from '../../backend/decorators/page-json.interface'
 import ResourceJSON from '../../backend/decorators/resource-json.interface'
@@ -34,7 +46,7 @@ const resourcesReducer = (
   },
 ) => {
   switch (action.type) {
-  case 'RESOURCES_INITIALIZE':
+  case RESOURCES_INITIALIZE:
     return action.data
   default: return state
   }
@@ -48,7 +60,7 @@ const pagesReducer = (
   },
 ) => {
   switch (action.type) {
-  case 'PAGES_INITIALIZE':
+  case PAGES_INITIALIZE:
     return action.data
   default: return state
   }
@@ -62,7 +74,7 @@ const localesReducer = (
   },
 ) => {
   switch (action.type) {
-  case 'LOCALE_INITIALIZE':
+  case LOCALE_INITIALIZE:
     return action.data
   default: return state
   }
@@ -73,7 +85,7 @@ const brandingReducer = (state = {}, action: {
   data: BrandingOptions;
 }) => {
   switch (action.type) {
-  case 'BRANDING_INITIALIZE':
+  case BRANDING_INITIALIZE:
     return action.data
   default: return state
   }
@@ -84,7 +96,7 @@ const assetsReducer = (state = {}, action: {
   data: Assets;
 }) => {
   switch (action.type) {
-  case 'ASSETS_INITIALIZE':
+  case ASSETS_INITIALIZE:
     return action.data
   default: return state
   }
@@ -95,7 +107,7 @@ const pathsReducer = (
   action: {type: string; data: Paths},
 ): Paths => {
   switch (action.type) {
-  case 'PATHS_INITIALIZE':
+  case PATHS_INITIALIZE:
     return action.data
   default: return state
   }
@@ -106,7 +118,7 @@ const dashboardReducer = (state = {}, action: {
   data: DashboardInState;
 }): DashboardInState => {
   switch (action.type) {
-  case 'DASHBOARD_INITIALIZE':
+  case DASHBOARD_INITIALIZE:
     return action.data
   default: return state
   }
@@ -120,7 +132,7 @@ const sessionReducer = (
   },
 ) => {
   switch (action.type) {
-  case 'SESSION_INITIALIZE':
+  case SESSION_INITIALIZE:
     return action.data
   default: return state
   }
@@ -131,7 +143,7 @@ const versionsReducer = (state = {}, action: {
   data: VersionProps;
 }) => {
   switch (action.type) {
-  case 'VERSIONS_INITIALIZE':
+  case VERSIONS_INITIALIZE:
     return {
       admin: action.data.admin,
       app: action.data.app,
@@ -147,14 +159,14 @@ const noticesReducer = (state: Array<NoticeMessageInState> = [], action: {
   data: NoticeMessageInState | NoticeArgs;
 }): Array<NoticeMessageInState> => {
   switch (action.type) {
-  case 'ADD_NOTICE': {
+  case ADD_NOTICE: {
     const notices = [action.data as NoticeMessageInState]
     return notices
   }
-  case 'DROP_NOTICE': {
+  case DROP_NOTICE: {
     return state.filter(notice => notice.id !== (action.data as NoticeArgs).noticeId)
   }
-  case 'SET_NOTICE_PROGRESS': {
+  case SET_NOTICE_PROGRESS: {
     return state.map(notice => ({
       ...notice,
       progress: notice.id === (action.data as NoticeArgs).noticeId

@@ -2,10 +2,12 @@ import { DashboardInState } from '../store'
 
 export const DASHBOARD_INITIALIZE = 'DASHBOARD_INITIALIZE'
 
-export const initializeDashboard = (data: DashboardInState): {
-  type: string;
+export type InitializeDashboardResponse = {
+  type: typeof DASHBOARD_INITIALIZE;
   data: DashboardInState;
-} => ({
+}
+
+export const initializeDashboard = (data: DashboardInState): InitializeDashboardResponse => ({
   type: DASHBOARD_INITIALIZE,
   data,
 })
