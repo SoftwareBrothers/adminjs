@@ -20,7 +20,11 @@ type PropsFromState = {
   resources: Array<ResourceJSON>;
 }
 
-type Props = PropsFromState & RouteComponentProps<ResourceActionParams>
+type Props = PropsFromState & RouteComponentProps<StringifiedBulk<ResourceActionParams>>
+
+type StringifiedBulk<T> = Omit<T, 'recordsId'> & {
+  recordsIds?: string;
+}
 
 const getAction = (resource: ResourceJSON): ActionJSON | undefined => {
   const h = new ViewHelpers()

@@ -1,15 +1,30 @@
+/* eslint-disable no-restricted-globals */
+/* eslint-disable no-undef */
+/* eslint-disable no-alert */
 import { AxiosResponse } from 'axios'
 import { useLocation, useHistory } from 'react-router'
 import { useMemo } from 'react'
+import ViewHelpers, {
+  BulkActionParams,
+  ResourceActionParams,
+  RecordActionParams,
+} from '../../backend/utils/view-helpers'
+
 
 import { appendForceRefresh } from '../../../lib/frontend/components/actions/utils/append-force-refresh'
 import ApiClient from '../../../lib/frontend/utils/api-client'
 
 import { ActionResponse } from '../../backend/actions/action.interface'
-import ViewHelpers, { ActionParams } from '../../backend/utils/view-helpers'
+
 import ActionJSON from '../../backend/decorators/action-json.interface'
 
 import useNotice from './use-notice'
+
+type DifferentActionParams = Omit<RecordActionParams, 'actionName'>
+  | Omit<BulkActionParams, 'actionName'>
+  | Omit<ResourceActionParams, 'actionName'>
+
+type MergedActionParams = RecordActionParams & BulkActionParams & ResourceActionParams
 
 export type ActionCallCallback = (action: ActionResponse) => any
 export type UseActionResultCallApi<K extends ActionResponse> = () => Promise<AxiosResponse<K>>
@@ -22,36 +37,48 @@ export type UseActionResult<K extends ActionResponse> = {
 
 const h = new ViewHelpers()
 
-export function useAction<T extends ActionParams, K extends ActionResponse>(
+const isRecordAction = (
+  params: DifferentActionParams,
   action: ActionJSON,
-  params: T,
+): params is RecordActionParams => 'recordId' in params && action.actionType === 'record'
+
+const isBulkAction = (
+  params: DifferentActionParams,
+  action: ActionJSON,
+): params is BulkActionParams => 'recordIds' in params && action.actionType === 'bulk'
+
+const isResourceAction = (
+  params: DifferentActionParams,
+  action: ActionJSON,
+): params is ResourceActionParams => 'recordIds' in params && action.actionType === 'resource'
+
+export function useAction<K extends ActionResponse>(
+  action: ActionJSON,
+  params: DifferentActionParams,
   onActionCall?: ActionCallCallback,
 ): UseActionResult<K> {
   const location = useLocation()
   const history = useHistory()
   const addNotice = useNotice()
 
-  const { name: actionName, actionType } = action
+  const { name: actionName } = action
 
   const {
     resourceId, recordId, recordIds,
-  } = params
+  } = params as MergedActionParams
 
   const href: string = useMemo(() => {
-    switch (actionType) {
-    case 'record':
-      if (!recordId) {
-        throw new Error('You have to specify "recordId" for record action')
-      }
-      return h.recordActionUrl({ resourceId, recordId, actionName, search: location.search })
-    case 'resource':
-      return h.resourceActionUrl({ resourceId, actionName, search: location.search })
-    case 'bulk':
-      return h.bulkActionUrl({ resourceId, recordIds, actionName, search: location.search })
-    default:
-      throw new Error('"actionType" should be either record, resource or bulk')
+    if (isRecordAction(params, action)) {
+      return h.recordActionUrl({ ...params, actionName, search: location.search })
     }
-  }, [resourceId, recordId, actionName, location.search])
+    if (isBulkAction(params, action)) {
+      return h.bulkActionUrl({ ...params, actionName, search: location.search })
+    }
+    if (isResourceAction(params, action)) {
+      return h.resourceActionUrl({ resourceId, actionName, search: location.search })
+    }
+    throw new Error('"actionType" should be either record, resource or bulk')
+  }, [resourceId, recordId, recordIds, actionName, location.search])
 
   const callApi = (): Promise<AxiosResponse<K>> => {
     const api = new ApiClient()

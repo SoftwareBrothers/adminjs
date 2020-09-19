@@ -12,12 +12,12 @@ try {
 }
 
 /**
- * Params for a record action
+ * Base Params for a any function
  * @alias ActionParams
  * @memberof ViewHelpers
  */
 export type ActionParams = {
-    /**
+  /**
    * Unique Resource ID
    */
   resourceId: string;
@@ -63,8 +63,7 @@ export type BulkActionParams = ActionParams & {
  * @extends ActionParams
  * @memberof ViewHelpers
  */
-export type ResourceActionParams = ActionParams & {
-}
+export type ResourceActionParams = ActionParams
 
 const runDate = new Date()
 
@@ -155,7 +154,7 @@ class ViewHelpers {
     return this.urlBuilder(['resources', resourceId, 'actions', actionName], search)
   }
 
-  resourceUrl({ resourceId, search }: ResourceActionParams): string {
+  resourceUrl({ resourceId, search }: Omit<ResourceActionParams, 'actionName'>): string {
     return this.urlBuilder(['resources', resourceId], search)
   }
 

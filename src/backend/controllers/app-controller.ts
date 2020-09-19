@@ -30,8 +30,12 @@ export default class AppController {
   }
 
   async bulkAction({ params }: ActionRequest): Promise<string> {
-    const { resourceId, actionName } = params
-    const href = this.h.bulkActionUrl({ resourceId, actionName })
+    const { resourceId, actionName, recordIds } = params
+    if (!recordIds) {
+      throw new Error('you have to give "recordIds" in the request parameters')
+    }
+    const arrayOfIds = recordIds.split(',')
+    const href = this.h.bulkActionUrl({ resourceId, actionName, recordIds: arrayOfIds })
     return layoutTemplate(this._admin, this.currentAdmin, href)
   }
 
