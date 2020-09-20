@@ -65,7 +65,7 @@ const RecordInList: React.FC<Props> = (props) => {
     } else if (actionPerformed) {
       actionPerformed(actionResponse)
     }
-  }, [actionPerformed])
+  }, [actionPerformed, record])
 
   return (
     <TableRow onClick={(event): void => handleClick(event)} data-id={record.id}>
@@ -100,8 +100,8 @@ const RecordInList: React.FC<Props> = (props) => {
       <TableCell key="options">
         {recordActions.length ? (
           <DropDown stick="right">
-            <DropDownTrigger data-testid="actions-dropdown">
-              <Button variant="text" size="icon">
+            <DropDownTrigger>
+              <Button variant="text" size="icon" data-testid="actions-dropdown">
                 <Icon icon="OverflowMenuHorizontal" color="grey100" />
               </Button>
             </DropDownTrigger>

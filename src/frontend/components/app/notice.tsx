@@ -4,7 +4,7 @@ import { MessageBox } from '@admin-bro/design-system'
 
 import { NoticeMessageInState, ReduxState } from '../../store/store'
 import { dropNotice } from '../../store/actions/drop-notice'
-import { setNoticeProgress } from '../../store/actions/set-Notice-progress'
+import { setNoticeProgress } from '../../store/actions/set-notice-progress'
 
 const TIME_TO_DISAPPEAR = 3
 

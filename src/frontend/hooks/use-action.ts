@@ -1,9 +1,10 @@
+import React, { useCallback } from 'react'
 /* eslint-disable no-restricted-globals */
 /* eslint-disable no-undef */
 /* eslint-disable no-alert */
 import { AxiosResponse } from 'axios'
 import { useLocation, useHistory } from 'react-router'
-import { useMemo } from 'react'
+
 import ViewHelpers, {
   BulkActionParams,
   ResourceActionParams,
@@ -11,8 +12,8 @@ import ViewHelpers, {
 } from '../../backend/utils/view-helpers'
 
 
-import { appendForceRefresh } from '../../../lib/frontend/components/actions/utils/append-force-refresh'
-import ApiClient from '../../../lib/frontend/utils/api-client'
+import { appendForceRefresh } from '../../frontend/components/actions/utils/append-force-refresh'
+import ApiClient from '../../frontend/utils/api-client'
 
 import { ActionResponse } from '../../backend/actions/action.interface'
 
@@ -67,7 +68,7 @@ export function useAction<K extends ActionResponse>(
     resourceId, recordId, recordIds,
   } = params as MergedActionParams
 
-  const href: string = useMemo(() => {
+  const setHref = useCallback(() => {
     if (isRecordAction(params, action)) {
       return h.recordActionUrl({ ...params, actionName, search: location.search })
     }
@@ -78,7 +79,9 @@ export function useAction<K extends ActionResponse>(
       return h.resourceActionUrl({ resourceId, actionName, search: location.search })
     }
     throw new Error('"actionType" should be either record, resource or bulk')
-  }, [resourceId, recordId, recordIds, actionName, location.search])
+  }, [resourceId, location, action])
+
+  const href = setHref()
 
   const callApi = (): Promise<AxiosResponse<K>> => {
     const api = new ApiClient()
@@ -89,14 +92,15 @@ export function useAction<K extends ActionResponse>(
       if (!recordId) {
         throw new Error('You have to specify "recordId" for record action')
       }
+      // TODO: change type from any - in general handle types for Action
       promise = api.recordAction({
         resourceId, actionName: action.name, recordId,
-      })
+      }) as any
       break
     case 'resource':
       promise = api.resourceAction({
         resourceId, actionName: action.name,
-      })
+      }) as any
       break
     case 'bulk':
       if (!recordIds) {
@@ -104,7 +108,7 @@ export function useAction<K extends ActionResponse>(
       }
       promise = api.bulkAction({
         resourceId, actionName: action.name, recordIds,
-      })
+      }) as any
       break
     default:
       throw new Error('"actionType" should be either record, resource or bulk')
@@ -116,7 +120,8 @@ export function useAction<K extends ActionResponse>(
         addNotice(data.notice)
       }
       if (data.redirectUrl && location.pathname !== data.redirectUrl) {
-        history.push(appendForceRefresh(data.redirectUrl))
+        const appended = appendForceRefresh(data.redirectUrl)
+        history.push(appended)
       }
       if (onActionCall) {
         onActionCall(data)
@@ -129,13 +134,15 @@ export function useAction<K extends ActionResponse>(
 
   const handleClick = (event: React.MouseEvent<HTMLElement>): void => {
     event.preventDefault()
+    event.stopPropagation()
     if (action.guard && !confirm(action.guard)) {
       return
     }
     if (typeof action.component !== 'undefined' && action.component === false) {
       callApi()
+    } else {
+      history.push(href)
     }
-    history.push(href)
   }
 
   return {

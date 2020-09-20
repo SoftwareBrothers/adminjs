@@ -12,13 +12,11 @@ import {
   FormGroup,
   Button,
   Text,
-  H3,
   MessageBox,
   SoftwareBrothers,
 } from '@admin-bro/design-system'
 import { useTranslation } from '../../hooks'
 import { ReduxState } from '../../store/store'
-import SidebarBranding from '../app/sidebar/sidebar-branding'
 
 const GlobalStyle = createGlobalStyle`
   html, body, #app {

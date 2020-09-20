@@ -1,6 +1,11 @@
 import axios, { AxiosResponse, AxiosInstance, AxiosRequestConfig } from 'axios'
-import { ResourceActionParams, BulkActionParams, RecordActionParams } from '../../../lib/backend/utils/view-helpers'
-import { ActionParams } from '../../backend/utils/view-helpers'
+import {
+  ResourceActionParams,
+  BulkActionParams,
+  RecordActionParams,
+  ActionParams,
+} from '../../backend/utils/view-helpers'
+
 /* eslint-disable no-alert */
 import RecordJSON from '../../backend/decorators/record-json.interface'
 import { RecordActionResponse, ActionResponse, BulkActionResponse } from '../../backend/actions/action.interface'
@@ -55,8 +60,9 @@ export type ActionAPIParams = AxiosRequestConfig & ActionParams
  * @memberof ApiClient
  * @property {any}   ...    any property supported by {@link AxiosRequestConfig}
  */
-export type ResourceActionAPIParams = AxiosRequestConfig & ResourceActionParams
-
+export type ResourceActionAPIParams = AxiosRequestConfig & ResourceActionParams & {
+  query?: string;
+}
 /**
  * Extends {@link ActionAPIParams}
  *
@@ -196,7 +202,7 @@ class ApiClient {
     const { resourceId, recordIds, actionName, data, ...axiosParams } = options
 
     const params = new URLSearchParams()
-    params.set('recordIds', recordIds.join(','))
+    params.set('recordIds', (recordIds || []).join(','))
 
     const response = await this.client.request({
       url: `/api/resources/${resourceId}/bulk/${actionName}`,
