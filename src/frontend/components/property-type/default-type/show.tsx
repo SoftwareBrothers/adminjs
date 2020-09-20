@@ -8,8 +8,8 @@ export default class Show extends React.PureComponent<ShowPropertyProps> {
   render(): ReactNode {
     const { property } = this.props
     return (
-      <FormGroup>
-        <Label>{property.label}</Label>
+      <FormGroup mb="xl">
+        <Label color="grey60">{property.label}</Label>
         <DefaultPropertyValue {...this.props} />
       </FormGroup>
     )

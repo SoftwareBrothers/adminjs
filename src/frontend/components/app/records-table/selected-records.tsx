@@ -1,5 +1,5 @@
 import React from 'react'
-import { TableCaption, Button, Icon, Text } from '@admin-bro/design-system'
+import { TableCaption, Button, Icon, CardTitle } from '@admin-bro/design-system'
 
 import ResourceJSON from '../../../../backend/decorators/resource-json.interface'
 import RecordJSON from '../../../../backend/decorators/record-json.interface'
@@ -24,9 +24,9 @@ const SelectedRecords: React.FC<Props> = (props) => {
 
   return (
     <TableCaption>
-      <Text as="span" mr="lg">
+      <CardTitle as="span" mr="lg">
         {translateLabel('selectedRecords', resource.id, { selected: selectedRecords.length })}
-      </Text>
+      </CardTitle>
       {bulkActions.map(action => (
         <ActionButton
           action={action}
@@ -34,7 +34,7 @@ const SelectedRecords: React.FC<Props> = (props) => {
           resourceId={resource.id}
           recordIds={selectedRecords.map(records => records.id)}
         >
-          <Button variant="text" size="sm">
+          <Button variant="text">
             <Icon icon={action.icon} />
             {action.label}
           </Button>

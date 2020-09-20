@@ -3,7 +3,7 @@ import { AdminPage } from '../../../admin-bro-options.interface'
 export const PAGES_INITIALIZE = 'PAGES_INITIALIZE'
 
 export type InitializePagesResponse = {
-  type: typeof RAGES_INITIALIZE;
+  type: typeof PAGES_INITIALIZE;
   data: Array<AdminPage>;
 }
 

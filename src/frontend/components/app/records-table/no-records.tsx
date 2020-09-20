@@ -1,11 +1,10 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
 import { Text, Button, Icon, InfoBox } from '@admin-bro/design-system'
 
-import ViewHelpers from '../../../../backend/utils/view-helpers'
 import ResourceJSON from '../../../../backend/decorators/resource-json.interface'
 import { useTranslation } from '../../../hooks'
 import allowOverride from '../../../hoc/allow-override'
+import ActionButton from '../action-button'
 
 export type NoRecordsProps = {
   resource: ResourceJSON;
@@ -13,11 +12,9 @@ export type NoRecordsProps = {
 
 const NoRecordsOriginal: React.FC<NoRecordsProps> = (props) => {
   const { resource } = props
-  const h = new ViewHelpers()
   const { translateButton, translateMessage } = useTranslation()
 
   const canCreate = resource.resourceActions.find(a => a.name === 'new')
-  const newAction = h.resourceActionUrl({ resourceId: resource.id, actionName: 'new' })
 
   return (
     <InfoBox title={translateMessage('noRecords', resource.id)}>
@@ -25,14 +22,12 @@ const NoRecordsOriginal: React.FC<NoRecordsProps> = (props) => {
         {translateMessage('noRecordsInResource', resource.id)}
       </Text>
       {canCreate ? (
-        <Text mt="xl">
-          <Link to={newAction}>
-            <Button variant="primary" as="span">
-              <Icon icon="Add" />
-              {translateButton('createFirstRecord', resource.id)}
-            </Button>
-          </Link>
-        </Text>
+        <ActionButton action={canCreate} resourceId={resource.id}>
+          <Button variant="primary">
+            <Icon icon="Add" />
+            {translateButton('createFirstRecord', resource.id)}
+          </Button>
+        </ActionButton>
       ) : ''}
     </InfoBox>
   )

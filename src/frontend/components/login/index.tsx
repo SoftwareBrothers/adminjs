@@ -12,12 +12,13 @@ import {
   FormGroup,
   Button,
   Text,
-  Icon,
-  Link,
+  H3,
   MessageBox,
+  SoftwareBrothers,
 } from '@admin-bro/design-system'
 import { useTranslation } from '../../hooks'
 import { ReduxState } from '../../store/store'
+import SidebarBranding from '../app/sidebar/sidebar-branding'
 
 const GlobalStyle = createGlobalStyle`
   html, body, #app {
@@ -39,25 +40,6 @@ type Props = {
   message?: string;
   action: string;
 }
-
-const SoftwareBrothers: React.FC = () => (
-  <Box position="absolute" left={0} bottom={5} right={0}>
-    <Text fontWeight="lighter" variant="sm" textAlign="center">
-      Made with
-      <Icon icon="FavoriteFilled" color="love" mx="sm" />
-      by
-      <Link
-        href="http://softwarebrothers.co"
-        target="_blank"
-        rel="noopener noreferrer"
-        mx="sm"
-        color="white"
-      >
-        SoftwareBrothers
-      </Link>
-    </Text>
-  </Box>
-)
 
 const Login: React.FC<Props> = (props) => {
   const { action, message } = props
@@ -93,7 +75,6 @@ const Login: React.FC<Props> = (props) => {
                 <Illustration variant="FlagInCog" width={82} height={91} />
               </Box>
             </Text>
-            {branding.softwareBrothers ? (<SoftwareBrothers />) : null}
           </Box>
           <Box
             as="form"
@@ -103,18 +84,13 @@ const Login: React.FC<Props> = (props) => {
             flexGrow={1}
             width={['100%', '100%', '480px']}
           >
-            <H5 mb="xl">
-              {branding.logo && (
-                <Box
-                  as="img"
+            <H5 marginBottom="xxl">
+              {branding.logo ? (
+                <img
                   src={branding.logo}
                   alt={branding.companyName}
-                  height="35px"
-                  mr="lg"
-                  mt="-3px"
                 />
-              )}
-              {branding.companyName ?? 'AdminBro'}
+              ) : branding.companyName}
             </H5>
             {message && (
               <MessageBox
@@ -143,6 +119,7 @@ const Login: React.FC<Props> = (props) => {
             </Text>
           </Box>
         </Box>
+        {branding.softwareBrothers ? (<Box mt="xxl"><SoftwareBrothers /></Box>) : null}
       </Wrapper>
     </React.Fragment>
   )

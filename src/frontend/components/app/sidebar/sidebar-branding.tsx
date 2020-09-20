@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
-import { cssClass, themeGet, Text } from '@admin-bro/design-system'
+import { cssClass, themeGet } from '@admin-bro/design-system'
 
 import ViewHelpers from '../../../../backend/utils/view-helpers'
 import { BrandingOptions } from '../../../../admin-bro-options.interface'
@@ -11,7 +11,7 @@ type Props = {
   branding: BrandingOptions;
 }
 
-const StyledLogo = styled(Link)`
+export const StyledLogo = styled(Link)`
   text-align: center;
   display: flex;
   align-content: center;
@@ -49,7 +49,7 @@ const SidebarBranding: React.FC<Props> = (props) => {
           src={logo}
           alt={companyName}
         />
-      ) : <h1>companyName</h1>}
+      ) : <h1>{companyName}</h1>}
     </StyledLogo>
   )
 }

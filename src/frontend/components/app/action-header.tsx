@@ -12,7 +12,6 @@ import {
   Icon,
   ButtonCSS,
   ButtonProps,
-  Link,
   cssClass,
 } from '@admin-bro/design-system'
 
@@ -152,6 +151,7 @@ const ActionHeader: React.FC<ActionHeaderProps> = (props) => {
                   mr={action.showInDrawer ? 'default' : ''}
                   ml={!action.showInDrawer ? 'default' : ''}
                   mb="default"
+                  size="lg"
                   variant={headerAction.name === 'new' ? 'primary' : undefined}
                 >
                   {headerAction.icon ? <Icon icon={headerAction.icon} /> : null}
@@ -160,7 +160,7 @@ const ActionHeader: React.FC<ActionHeaderProps> = (props) => {
               </ActionButton>
             ))}
             {toggleFilter && (
-              <Button onClick={toggleFilter} ml="default">
+              <Button onClick={toggleFilter} ml="default" size="lg">
                 <Icon icon="SettingsAdjust" />
                 {translateButton('filter', resource.id)}
               </Button>

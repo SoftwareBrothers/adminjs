@@ -57,13 +57,13 @@ describe('ResourceDecorator', function () {
     })
   })
 
-  describe('#getParent', function () {
+  describe('#getNavigation', function () {
     it('returns database name with its icon when no options were specified', function () {
       expect(
         new ResourceDecorator({ ...args, options: {} }).getNavigation(),
       ).to.deep.equal({
         name: expectedResult.databaseName,
-        icon: `icon-${expectedResult.databaseType}`,
+        icon: expectedResult.databaseType,
       })
     })
     it('returns custom name with icon when options were specified', function () {
@@ -299,7 +299,7 @@ describe('ResourceDecorator', function () {
       expect(json).to.have.keys(
         'id',
         'name',
-        'parent',
+        'navigation',
         'href',
         'actions',
         'titleProperty',

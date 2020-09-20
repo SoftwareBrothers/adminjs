@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
-import { ButtonCSS, ButtonProps } from '@admin-bro/design-system'
+import { ButtonCSS } from '@admin-bro/design-system'
 
 import ViewHelpers from '../../../../backend/utils/view-helpers'
 import PropertyJSON from '../../../../backend/decorators/property-json.interface'
