@@ -44,8 +44,9 @@ const ItemRenderer: React.FC<Props & ItemRendererProps> = (props) => {
           }}
         />
       </Box>
-      <Box flexShrink={0}>
+      <Box flexShrink={0} ml="lg">
         <Button
+          rounded
           ml="default"
           data-testid="delete-item"
           type="button"
@@ -112,7 +113,7 @@ export default class Edit extends React.Component<Props> {
             onDelete={(event): false => this.removeItem(i, event)}
           />
         ))}
-        <Button onClick={this.addNew} type="button" size="sm">
+        <Button onClick={this.addNew} type="button" rounded>
           <AddNewItemButton resource={resource} property={property} />
         </Button>
       </Section>
