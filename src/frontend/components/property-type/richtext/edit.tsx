@@ -22,10 +22,11 @@ const Edit: FC<EditPropertyProps> = (props) => {
 
   const { custom } = property
 
-  const quill = custom as QuillOptions
+  const quill = custom as QuillOptions || {}
   quill.theme = quill.theme || 'snow'
   quill.modules = {
     toolbar: DefaultQuillToolbarOptions,
+    ...(quill.modules || {}),
   }
 
   return (

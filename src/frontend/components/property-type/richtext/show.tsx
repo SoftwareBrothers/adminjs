@@ -1,5 +1,5 @@
 import React, { ReactNode } from 'react'
-import { ValueGroup } from '@admin-bro/design-system'
+import { ValueGroup, Text, Box } from '@admin-bro/design-system'
 
 import { EditPropertyProps } from '../base-property-props'
 
@@ -22,7 +22,9 @@ export default class Show extends React.PureComponent<EditPropertyProps> {
 
     return (
       <ValueGroup label={property.label}>
-        <div className="rich-text-value content" ref={this.contentRef} />
+        <Box variant="grey" border="default">
+          <Text ref={this.contentRef} />
+        </Box>
       </ValueGroup>
     )
   }
