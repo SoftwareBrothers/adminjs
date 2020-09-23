@@ -1,5 +1,5 @@
 import React from 'react'
-import { Section, FormGroup, Label } from '@admin-bro/design-system'
+import { Section, ValueGroup } from '@admin-bro/design-system'
 
 import { BasePropertyProps } from '../base-property-props'
 
@@ -10,8 +10,7 @@ interface Props {
 const Show: React.FC<Props & BasePropertyProps> = (props) => {
   const { property, ItemComponent } = props
   return (
-    <FormGroup>
-      <Label>{property.label}</Label>
+    <ValueGroup label={property.label}>
       <Section>
         {property.subProperties.filter(subProperty => !subProperty.isId).map(subProperty => (
           <ItemComponent
@@ -21,7 +20,7 @@ const Show: React.FC<Props & BasePropertyProps> = (props) => {
           />
         ))}
       </Section>
-    </FormGroup>
+    </ValueGroup>
   )
 }
 

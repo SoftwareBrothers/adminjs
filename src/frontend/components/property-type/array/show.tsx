@@ -1,5 +1,5 @@
 import React, { ReactNode } from 'react'
-import { Section, FormGroup, Label } from '@admin-bro/design-system'
+import { Section, ValueGroup } from '@admin-bro/design-system'
 
 import convertParamsToArrayItems from './convert-params-to-array-items'
 import PropertyJSON from '../../../../backend/decorators/property-json.interface'
@@ -18,8 +18,7 @@ export default class Show extends React.PureComponent<Props> {
     const items = convertParamsToArrayItems(property, record)
 
     return (
-      <FormGroup>
-        <Label>{property.label}</Label>
+      <ValueGroup label={property.label}>
         <Section>
           {items.map((item, i) => (
             <ItemComponent
@@ -35,7 +34,7 @@ export default class Show extends React.PureComponent<Props> {
             />
           ))}
         </Section>
-      </FormGroup>
+      </ValueGroup>
     )
   }
 }
