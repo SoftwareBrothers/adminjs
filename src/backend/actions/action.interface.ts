@@ -235,6 +235,15 @@ export type After<T> = (
   context: ActionContext,
 ) => Promise<T>
 
+export type BuildInActions =
+  'show' |
+  'edit' |
+  'list' |
+  'delete' |
+  'bulkDelete' |
+  'new' |
+  'search'
+
 /**
  * @classdesc
  * Interface representing an Action in AdminBro.
@@ -305,7 +314,7 @@ export interface Action <T extends ActionResponse> {
    * _bulkDelete_ you override existing actions.
    * For all other keys you create a new action.
    */
-  name: string;
+  name: BuildInActions | string;
   /**
    * indicates if action should be visible for given invocation context.
    * It also can be a simple boolean value.

@@ -3,7 +3,7 @@ import { Trans } from 'react-i18next'
 import { MessageBox, Link } from '@admin-bro/design-system'
 
 import ErrorBoundary from './error-boundary'
-import * as actions from '../actions'
+import { actions } from '../actions'
 import { DOCS } from '../../../constants'
 import { ActionProps } from '../actions/action.props'
 import { useTranslation } from '../../hooks'

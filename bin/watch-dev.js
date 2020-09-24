@@ -7,8 +7,8 @@
 
 const runtime = require('@babel/plugin-transform-runtime')
 const styled = require('babel-plugin-styled-components')
-const bundler = require('../lib/backend/bundler/bundler')
-const env = require('../lib/backend/bundler/bundler-env')
+const bundler = require('../src/backend/bundler/bundler')
+const env = require('../src/backend/bundler/bundler-env')
 
 const once = !!process.env.ONCE
 
