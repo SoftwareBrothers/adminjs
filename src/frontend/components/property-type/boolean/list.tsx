@@ -1,8 +1,8 @@
 import React from 'react'
 
-import PropertyJSON from '../../../types/property-json.interface'
-import RecordJSON from '../../../types/record-json.interface'
-import ResourceJSON from '../../../types/resource-json.interface'
+import PropertyJSON from '../../../interfaces/property-json.interface'
+import RecordJSON from '../../../interfaces/record-json.interface'
+import ResourceJSON from '../../../interfaces/resource-json.interface'
 import BooleanPropertyValue from './boolean-property-value'
 
 interface Props {

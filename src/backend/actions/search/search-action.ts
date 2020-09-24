@@ -1,5 +1,5 @@
 import Action, { ActionResponse } from '../action.interface'
-import RecordJSON from '../../../frontend/types/record-json.interface'
+import RecordJSON from '../../../frontend/interfaces/record-json.interface'
 import Filter from '../../utils/filter/filter'
 
 /**

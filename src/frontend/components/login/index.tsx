@@ -34,12 +34,12 @@ const Wrapper = styled(Box)`
   height: 100%;
 `
 
-type Props = {
+export type LoginProps = {
   message?: string;
   action: string;
 }
 
-const Login: React.FC<Props> = (props) => {
+export const Login: React.FC<LoginProps> = (props) => {
   const { action, message } = props
   const { translateLabel, translateButton, translateProperty, translateMessage } = useTranslation()
   const branding = useSelector((state: ReduxState) => state.branding)

@@ -42,4 +42,7 @@ const Show: React.FC<ActionProps> = (props) => {
   )
 }
 
-export default Show
+export {
+  Show as default,
+  Show,
+}

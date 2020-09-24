@@ -9,8 +9,8 @@ import * as ACTIONS from '../../actions/index'
 import { ResourceOptions } from './resource-options.interface'
 import Action, { ActionResponse } from '../../actions/action.interface'
 import { CurrentAdmin } from '../../../current-admin.interface'
-import ResourceJSON from '../../../frontend/types/resource-json.interface'
-import PropertyJSON, { PropertyPlace } from '../../../frontend/types/property-json.interface'
+import ResourceJSON from '../../../frontend/interfaces/resource-json.interface'
+import PropertyJSON, { PropertyPlace } from '../../../frontend/interfaces/property-json.interface'
 import BaseRecord from '../../adapters/record/base-record'
 
 /**

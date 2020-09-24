@@ -1,7 +1,7 @@
 import React from 'react'
 import { Text, Button, Icon, InfoBox } from '@admin-bro/design-system'
 
-import ResourceJSON from '../../../types/resource-json.interface'
+import ResourceJSON from '../../../interfaces/resource-json.interface'
 import { useTranslation } from '../../../hooks'
 import allowOverride from '../../../hoc/allow-override'
 import ActionButton from '../action-button'
@@ -35,6 +35,6 @@ const NoRecordsOriginal: React.FC<NoRecordsProps> = (props) => {
 
 // This hack prevents rollup from throwing an error
 const NoRecords = allowOverride(NoRecordsOriginal, 'NoRecords')
-export { NoRecords }
 
+export { NoRecords }
 export default NoRecords

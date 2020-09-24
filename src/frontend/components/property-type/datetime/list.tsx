@@ -1,9 +1,9 @@
 import React from 'react'
 
 import mapValue from './map-value'
-import PropertyJSON from '../../../types/property-json.interface'
-import RecordJSON from '../../../types/record-json.interface'
-import ResourceJSON from '../../../types/resource-json.interface'
+import PropertyJSON from '../../../interfaces/property-json.interface'
+import RecordJSON from '../../../interfaces/record-json.interface'
+import ResourceJSON from '../../../interfaces/resource-json.interface'
 
 interface Props {
   property: PropertyJSON;

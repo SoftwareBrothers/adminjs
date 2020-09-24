@@ -26,7 +26,7 @@ type Props = {
   toggleSidebar: (any) => void;
 }
 
-const TopBar: React.FC<Props> = (props) => {
+export const TopBar: React.FC<Props> = (props) => {
   const { toggleSidebar } = props
   const [session, paths, versions] = useSelector(
     (state: ReduxState) => [state.session, state.paths, state.versions],

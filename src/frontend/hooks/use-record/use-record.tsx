@@ -1,7 +1,7 @@
 import { useState, useCallback, useEffect } from 'react'
 import { AxiosResponse } from 'axios'
 import ApiClient, { RecordActionAPIParams } from '../../utils/api-client'
-import RecordJSON from '../../types/record-json.interface'
+import RecordJSON from '../../interfaces/record-json.interface'
 import recordToFormData from './record-to-form-data'
 import useNotice from '../use-notice'
 import { RecordActionResponse } from '../../../backend/actions/action.interface'

@@ -1,5 +1,5 @@
 import factory from 'factory-girl'
-import ActionJSON from '../../types/action-json.interface'
+import ActionJSON from '../../interfaces/action-json.interface'
 
 factory.define<ActionJSON>('ActionJSON', Object, {
   actionType: 'record',

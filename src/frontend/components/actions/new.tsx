@@ -6,7 +6,7 @@ import PropertyType from '../property-type'
 
 import { ActionProps } from './action.props'
 import ActionHeader from '../app/action-header'
-import RecordJSON from '../../types/record-json.interface'
+import RecordJSON from '../../interfaces/record-json.interface'
 import useRecord from '../../hooks/use-record/use-record'
 import { appendForceRefresh } from './utils/append-force-refresh'
 import { useTranslation } from '../../hooks/use-translation'
@@ -78,4 +78,7 @@ const New: FC<ActionProps> = (props) => {
   )
 }
 
-export default New
+export {
+  New as default,
+  New,
+}

@@ -5,12 +5,12 @@ import { expect } from 'chai'
 import factory from 'factory-girl'
 
 import { Provider } from 'react-redux'
-import RecordsTable, { Props } from './records-table'
+import { RecordsTable, RecordsTableProps } from './records-table'
 import TestContextProvider from '../../spec/test-context-provider'
-import ResourceJSON from '../../../types/resource-json.interface'
-import RecordJSON from '../../../types/record-json.interface'
-import PropertyJSON from '../../../types/property-json.interface'
-import ActionJSON from '../../../types/action-json.interface'
+import ResourceJSON from '../../../interfaces/resource-json.interface'
+import RecordJSON from '../../../interfaces/record-json.interface'
+import PropertyJSON from '../../../interfaces/property-json.interface'
+import ActionJSON from '../../../interfaces/action-json.interface'
 import createStore from '../../../store/store'
 
 import '../../spec/resource-json.factory'
@@ -23,7 +23,7 @@ type StubsType = {
   onSelectAll: sinon.SinonStub<any[], any>;
 }
 
-const renderSubject = (props: Omit<Props, 'onSelect' | 'onSelectAll'>): RenderResult & StubsType => {
+const renderSubject = (props: Omit<RecordsTableProps, 'onSelect' | 'onSelectAll'>): RenderResult & StubsType => {
   const onSelect = sinon.stub()
   const onSelectAll = sinon.stub()
   const renderResult = render(

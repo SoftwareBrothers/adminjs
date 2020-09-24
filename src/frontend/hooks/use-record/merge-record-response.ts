@@ -1,4 +1,4 @@
-import RecordJSON from '../../types/record-json.interface'
+import RecordJSON from '../../interfaces/record-json.interface'
 import { RecordActionResponse } from '../../../backend/actions/action.interface'
 
 /**

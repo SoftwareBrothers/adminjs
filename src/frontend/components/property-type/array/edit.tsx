@@ -3,11 +3,11 @@ import flat from 'flat'
 import { Button, Section, FormGroup, FormMessage, Label, Icon, Box } from '@admin-bro/design-system'
 
 import convertParamsToArrayItems from './convert-params-to-array-items'
-import PropertyJSON from '../../../types/property-json.interface'
-import RecordJSON from '../../../types/record-json.interface'
+import PropertyJSON from '../../../interfaces/property-json.interface'
+import RecordJSON from '../../../interfaces/record-json.interface'
 import updateParamsArray from './update-params-array'
 import AddNewItemButton from './add-new-item-translation'
-import ResourceJSON from '../../../types/resource-json.interface'
+import ResourceJSON from '../../../interfaces/resource-json.interface'
 
 const { flatten, unflatten } = flat
 

@@ -3,7 +3,7 @@ import { expect } from 'chai'
 
 import recordToFormData, { FORM_VALUE_EMPTY_OBJECT, FORM_VALUE_NULL, FORM_VALUE_EMPTY_ARRAY } from './record-to-form-data'
 import '../../components/spec/record-json.factory'
-import RecordJSON from '../../types/record-json.interface'
+import RecordJSON from '../../interfaces/record-json.interface'
 
 describe('recordToFormData', function () {
   const propertyKey = 'someProperty'

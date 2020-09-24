@@ -18,7 +18,7 @@ VersionItem.defaultProps = {
   color: 'grey100',
 }
 
-const Version: React.FC<Props> = (props) => {
+export const Version: React.FC<Props> = (props) => {
   const { versions } = props
   const { admin, app } = versions
 

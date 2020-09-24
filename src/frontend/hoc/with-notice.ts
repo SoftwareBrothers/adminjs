@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 import { connect } from 'react-redux'
-import { addNotice } from './actions/add-notice'
+import { addNotice } from '../store/actions/add-notice'
 
 /**
  * NoticeMessage which can be presented as a "Toast" message.
@@ -53,4 +53,7 @@ const mapDispatchToProps = (dispatch): AddNoticeProps => ({
  */
 const withNotice = Component => connect(null, mapDispatchToProps)(Component)
 
-export default withNotice
+export {
+  withNotice as default,
+  withNotice,
+}

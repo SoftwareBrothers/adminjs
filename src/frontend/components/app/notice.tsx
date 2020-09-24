@@ -22,7 +22,7 @@ export type NoticeElementState = {
   progress: number;
 }
 
-class NoticeElement extends React.Component<NoticeElementProps, NoticeElementState> {
+export class NoticeElement extends React.Component<NoticeElementProps, NoticeElementState> {
   private timer: NodeJS.Timeout | null
 
   constructor(props) {

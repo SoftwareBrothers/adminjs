@@ -21,9 +21,9 @@ import Breadcrumbs from './breadcrumbs'
 import ViewHelpers from '../../../backend/utils/view-helpers/view-helpers'
 import { useTranslation } from '../../hooks/use-translation'
 
-import ResourceJSON from '../../types/resource-json.interface'
-import ActionJSON from '../../types/action-json.interface'
-import RecordJSON from '../../types/record-json.interface'
+import ResourceJSON from '../../interfaces/resource-json.interface'
+import ActionJSON from '../../interfaces/action-json.interface'
+import RecordJSON from '../../interfaces/record-json.interface'
 import { ActionResponse } from '../../../backend/actions/action.interface'
 
 

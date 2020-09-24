@@ -7,14 +7,14 @@ import {
 
 import ActionButton from '../action-button'
 import PropertyType from '../../property-type'
-import ResourceJSON from '../../../types/resource-json.interface'
-import RecordJSON from '../../../types/record-json.interface'
+import ResourceJSON from '../../../interfaces/resource-json.interface'
+import RecordJSON from '../../../interfaces/record-json.interface'
 import ViewHelpers from '../../../../backend/utils/view-helpers/view-helpers'
-import { display } from './records-table-header'
+import { display } from './utils/display'
 import { ActionResponse, RecordActionResponse } from '../../../../backend/actions/action.interface'
 import mergeRecordResponse from '../../../hooks/use-record/merge-record-response'
 
-type Props = {
+type RecordInListProps = {
   resource: ResourceJSON;
   record: RecordJSON;
   actionPerformed?: (action: ActionResponse) => any;
@@ -23,7 +23,7 @@ type Props = {
   isSelected?: boolean;
 }
 
-const RecordInList: React.FC<Props> = (props) => {
+export const RecordInList: React.FC<RecordInListProps> = (props) => {
   const {
     resource, record: recordFromProps, actionPerformed,
     isLoading, onSelect, isSelected,

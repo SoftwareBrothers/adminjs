@@ -4,16 +4,16 @@ import { NavLink, withRouter } from 'react-router-dom'
 import { RouteComponentProps } from 'react-router'
 import { Icon, cssClass } from '@admin-bro/design-system'
 
-import PropertyJSON from '../../types/property-json.interface'
+import PropertyJSON from '../../interfaces/property-json.interface'
 
 
-type Props = {
+export type SortLinkProps = {
   property: PropertyJSON;
   direction?: 'asc' | 'desc';
   sortBy?: string;
 }
 
-class SortLink extends React.PureComponent<Props & RouteComponentProps> {
+class SortLink extends React.PureComponent<SortLinkProps & RouteComponentProps> {
   constructor(props) {
     super(props)
     this.isActive = this.isActive.bind(this)

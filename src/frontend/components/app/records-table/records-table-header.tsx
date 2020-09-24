@@ -2,13 +2,14 @@ import React from 'react'
 import { CheckBox, TableHead, TableRow, TableCell } from '@admin-bro/design-system'
 
 import PropertyHeader from './property-header'
-import PropertyJSON from '../../../types/property-json.interface'
+import PropertyJSON from '../../../interfaces/property-json.interface'
+import { display } from './utils/display'
 
 /**
  * @memberof RecordsTableHeader
- * @alias RecordsTableHeader
+ * @alias RecordsTableHeaderProps
  */
-type Props = {
+export type RecordsTableHeaderProps = {
   /**
    * Property which should be treated as a Title Property
    */
@@ -35,13 +36,6 @@ type Props = {
    */
   selectedAll?: boolean;
 }
-
-export const display = (isTitle: boolean): Array<string> => [
-  isTitle ? 'table-cell' : 'none',
-  isTitle ? 'table-cell' : 'none',
-  'table-cell',
-  'table-cell',
-]
 
 /**
  * Prints `thead` section for table with records.
@@ -86,7 +80,7 @@ export const display = (isTitle: boolean): Array<string> => [
  * </Box>
  * )
  */
-const RecordsTableHeader: React.FC<Props> = (props) => {
+export const RecordsTableHeader: React.FC<RecordsTableHeaderProps> = (props) => {
   const {
     titleProperty, properties,
     sortBy, direction,

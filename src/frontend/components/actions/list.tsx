@@ -78,4 +78,7 @@ const List: React.FC<ActionProps> = ({ resource, setTag }) => {
   )
 }
 
-export default List
+export {
+  List as default,
+  List,
+}

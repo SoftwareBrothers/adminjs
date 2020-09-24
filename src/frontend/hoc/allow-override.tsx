@@ -42,4 +42,7 @@ function allowOverride<P>(
   return WrapperComponent
 }
 
-export default allowOverride
+export {
+  allowOverride as default,
+  allowOverride,
+}

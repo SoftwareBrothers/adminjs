@@ -5,8 +5,8 @@ import BaseRecord from '../adapters/record/base-record'
 import BaseResource from '../adapters/resource/base-resource'
 import ActionDecorator from '../decorators/action/action-decorator'
 import { LayoutElement, LayoutElementFunction } from '../utils/layout-element-parser'
-import RecordJSON from '../../frontend/types/record-json.interface'
-import { NoticeMessage } from '../../frontend/store/with-notice'
+import RecordJSON from '../../frontend/interfaces/record-json.interface'
+import { NoticeMessage } from '../../frontend/hoc/with-notice'
 import { TranslateFunctions } from '../../utils/translate-functions.factory'
 
 /**

@@ -7,7 +7,7 @@ import TestContextProvider from '../../spec/test-context-provider'
 import PropertyHeader from './property-header'
 
 import '../../spec/property-json.factory'
-import PropertyJSON from '../../../types/property-json.interface'
+import PropertyJSON from '../../../interfaces/property-json.interface'
 
 const renderSubject = (
   property: PropertyJSON,

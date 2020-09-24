@@ -6,7 +6,7 @@ import PropertyType from '../property-type'
 import { ActionProps } from './action.props'
 import ActionHeader from '../app/action-header'
 import useRecord from '../../hooks/use-record/use-record'
-import RecordJSON from '../../types/record-json.interface'
+import RecordJSON from '../../interfaces/record-json.interface'
 import { appendForceRefresh } from './utils/append-force-refresh'
 import { useTranslation } from '../../hooks/use-translation'
 import LayoutElementRenderer from './utils/layout-element-renderer'
@@ -74,4 +74,7 @@ const Edit: FC<ActionProps> = (props) => {
   )
 }
 
-export default Edit
+export {
+  Edit as default,
+  Edit,
+}

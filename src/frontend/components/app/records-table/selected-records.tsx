@@ -1,18 +1,18 @@
 import React from 'react'
 import { TableCaption, Button, Icon, CardTitle } from '@admin-bro/design-system'
 
-import ResourceJSON from '../../../types/resource-json.interface'
-import RecordJSON from '../../../types/record-json.interface'
+import ResourceJSON from '../../../interfaces/resource-json.interface'
+import RecordJSON from '../../../interfaces/record-json.interface'
 import ActionButton from '../action-button'
 import getBulkActionsFromRecords from './utils/get-bulk-actions-from-records'
 import { useTranslation } from '../../../hooks'
 
-type Props = {
+type SelectedRecordsProps = {
   resource: ResourceJSON;
   selectedRecords?: Array<RecordJSON>;
 }
 
-const SelectedRecords: React.FC<Props> = (props) => {
+export const SelectedRecords: React.FC<SelectedRecordsProps> = (props) => {
   const { resource, selectedRecords } = props
   const { translateLabel } = useTranslation()
 

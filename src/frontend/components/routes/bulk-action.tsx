@@ -2,17 +2,16 @@ import React, { useState, useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import { Loader } from '@admin-bro/design-system'
 
-import { RouteComponentProps, useRouteMatch, useLocation } from 'react-router'
+import { useRouteMatch, useLocation } from 'react-router'
 import BaseAction from '../app/base-action-component'
-import ResourceJSON from '../../types/resource-json.interface'
+import ResourceJSON from '../../interfaces/resource-json.interface'
 import { ReduxState } from '../../store/store'
 import ErrorMessageBox, { NoResourceError, NoActionError } from '../app/error-message'
-import RecordJSON from '../../types/record-json.interface'
+import RecordJSON from '../../interfaces/record-json.interface'
 import { BulkActionParams } from '../../../backend/utils/view-helpers/view-helpers'
 import ApiClient from '../../utils/api-client'
-import { AddNoticeProps } from '../../store/with-notice'
 import getBulkActionsFromRecords from '../app/records-table/utils/get-bulk-actions-from-records'
-import ActionJSON from '../../types/action-json.interface'
+import ActionJSON from '../../interfaces/action-json.interface'
 import Wrapper from './utils/wrapper'
 import { ActionHeader } from '../app'
 import { useTranslation, useNotice } from '../../hooks'
@@ -23,13 +22,6 @@ type PropsFromState = {
 }
 
 type MatchParams = Pick<BulkActionParams, 'actionName' | 'resourceId'>
-type Props = PropsFromState & RouteComponentProps<MatchParams> & AddNoticeProps
-
-type State = {
-  records?: Array<RecordJSON>;
-  isLoading: boolean;
-  tag?: string;
-}
 
 const api = new ApiClient()
 

@@ -5,7 +5,7 @@
 import React, { ReactElement } from 'react'
 import { ActionResponse } from '../../../backend/actions/action.interface'
 
-import ActionJSON from '../../types/action-json.interface'
+import ActionJSON from '../../interfaces/action-json.interface'
 import { useAction } from '../../hooks'
 
 

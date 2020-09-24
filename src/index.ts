@@ -1,6 +1,7 @@
 import AdminBro from './admin-bro'
 
 export * from './backend'
+export * from './frontend'
 export * from './locale'
 export * from './utils'
 export * from './constants'

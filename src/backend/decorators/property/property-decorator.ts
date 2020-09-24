@@ -3,7 +3,7 @@ import PropertyOptions, { AvailablePropertyOptions } from './property-options.in
 import BaseResource from '../../adapters/resource/base-resource'
 import BaseProperty, { PropertyType } from '../../adapters/property/base-property'
 import ResourceDecorator from '../resource/resource-decorator'
-import PropertyJSON, { PropertyPlace } from '../../../frontend/types/property-json.interface'
+import PropertyJSON, { PropertyPlace } from '../../../frontend/interfaces/property-json.interface'
 
 /**
  * Decorates property

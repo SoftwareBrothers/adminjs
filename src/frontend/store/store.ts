@@ -1,24 +1,26 @@
-import { combineReducers, createStore } from 'redux'
-import { VERSIONS_INITIALIZE } from './actions/initialize-versions'
-import { SESSION_INITIALIZE } from './actions/set-current-admin'
-import { DASHBOARD_INITIALIZE } from './actions/initialize-dashboard'
-import { PATHS_INITIALIZE } from './actions/initialize-paths'
-import { ASSETS_INITIALIZE } from './actions/initialize-assets'
-import { BRANDING_INITIALIZE } from './actions/initialize-branding'
-import { LOCALE_INITIALIZE } from './actions/initialize-locale'
-import { PAGES_INITIALIZE } from './actions/initialize-pages'
-import { RESOURCES_INITIALIZE } from './actions/initialize-resources'
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
-import { SET_NOTICE_PROGRESS } from './actions/set-notice-progress'
-import { DROP_NOTICE } from './actions/drop-notice'
-import { ADD_NOTICE } from './actions/add-notice'
+import { combineReducers, createStore } from 'redux'
+import {
+  VERSIONS_INITIALIZE,
+  SESSION_INITIALIZE,
+  DASHBOARD_INITIALIZE,
+  PATHS_INITIALIZE,
+  ASSETS_INITIALIZE,
+  BRANDING_INITIALIZE,
+  LOCALE_INITIALIZE,
+  PAGES_INITIALIZE,
+  RESOURCES_INITIALIZE,
+  SET_NOTICE_PROGRESS,
+  DROP_NOTICE,
+  ADD_NOTICE } from './actions'
+
 import { Assets, BrandingOptions, VersionProps } from '../../admin-bro-options.interface'
-import PageJSON from '../types/page-json.interface'
-import ResourceJSON from '../types/resource-json.interface'
+import PageJSON from '../interfaces/page-json.interface'
+import ResourceJSON from '../interfaces/resource-json.interface'
 import { DEFAULT_PATHS } from '../../constants'
 import { CurrentAdmin } from '../../current-admin.interface'
 import { Locale } from '../../locale/config'
-import { NoticeMessage } from './with-notice'
+import { NoticeMessage } from '../hoc/with-notice'
 
 export type DashboardInState = {
   component?: string;

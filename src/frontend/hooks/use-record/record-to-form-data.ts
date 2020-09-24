@@ -1,4 +1,4 @@
-import RecordJSON from '../../types/record-json.interface'
+import RecordJSON from '../../interfaces/record-json.interface'
 
 export const FORM_VALUE_NULL = '__FORM_VALUE_NULL__'
 export const FORM_VALUE_EMPTY_OBJECT = '__FORM_VALUE_EMPTY_OBJECT__'

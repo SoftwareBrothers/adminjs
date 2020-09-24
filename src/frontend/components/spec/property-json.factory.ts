@@ -1,5 +1,5 @@
 import factory from 'factory-girl'
-import PropertyJSON from '../../types/property-json.interface'
+import PropertyJSON from '../../interfaces/property-json.interface'
 
 
 factory.define<PropertyJSON>('PropertyJSON', Object, {

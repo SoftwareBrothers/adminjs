@@ -2,10 +2,6 @@ import React, { ReactNode } from 'react'
 import { MessageBox, Text } from '@admin-bro/design-system'
 import { useTranslation } from '../../hooks'
 
-type Props = {
-  children: ReactNode;
-}
-
 /**
  * @memberof ErrorMessageBox
  * @alias ErrorMessageBoxProps
@@ -98,5 +94,6 @@ export {
   NoResourceError,
   NoActionError,
   NoRecordError,
+  ErrorMessageBox,
   ErrorMessageBox as default,
 }

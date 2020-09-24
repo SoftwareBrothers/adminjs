@@ -1,6 +1,6 @@
 import flat from 'flat'
 
-import RecordJSON from '../../../types/record-json.interface'
+import RecordJSON from '../../../interfaces/record-json.interface'
 
 const { flatten } = flat
 

@@ -178,7 +178,7 @@ const types: Record<PropertyType, any> = {
  *
  * return (<Wrapper />)
  */
-export default class BasePropertyComponent extends React.Component<BasePropertyProps> {
+class BasePropertyComponent extends React.Component<BasePropertyProps> {
   static DefaultType
 
   static Boolean
@@ -282,3 +282,10 @@ BasePropertyComponent.RichText = camelizePropertyType(richtext)
 BasePropertyComponent.Reference = camelizePropertyType(reference)
 BasePropertyComponent.TextArea = camelizePropertyType(textarea)
 BasePropertyComponent.Password = camelizePropertyType(password)
+
+export {
+  BasePropertyComponent as default,
+  BasePropertyComponent,
+}
+
+export * from './base-property-props'

@@ -5,12 +5,12 @@ import RecordInList from './record-in-list'
 import RecordsTableHeader from './records-table-header'
 import NoRecords from './no-records'
 
-import ResourceJSON from '../../../types/resource-json.interface'
-import RecordJSON from '../../../types/record-json.interface'
+import ResourceJSON from '../../../interfaces/resource-json.interface'
+import RecordJSON from '../../../interfaces/record-json.interface'
 import SelectedRecords from './selected-records'
 import { ActionResponse } from '../../../../backend/actions/action.interface'
 
-export type Props = {
+export type RecordsTableProps = {
   resource: ResourceJSON;
   records: Array<RecordJSON>;
   actionPerformed?: (response: ActionResponse) => any;
@@ -22,7 +22,7 @@ export type Props = {
   onSelectAll?: () => any;
 }
 
-const RecordsTable: React.FC<Props> = (props) => {
+export const RecordsTable: React.FC<RecordsTableProps> = (props) => {
   const {
     resource, records,
     actionPerformed, sortBy,

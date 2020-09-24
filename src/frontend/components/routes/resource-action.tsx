@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 
 import { RouteComponentProps } from 'react-router'
 import BaseActionComponent from '../app/base-action-component'
-import ResourceJSON from '../../types/resource-json.interface'
+import ResourceJSON from '../../interfaces/resource-json.interface'
 import { ReduxState } from '../../store/store'
 import { NoResourceError, NoActionError } from '../app/error-message'
 import { ResourceActionParams } from '../../../backend/utils/view-helpers/view-helpers'

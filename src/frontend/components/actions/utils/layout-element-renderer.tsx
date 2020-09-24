@@ -2,7 +2,7 @@ import React from 'react'
 import * as DesignSystem from '@admin-bro/design-system'
 import { ActionProps } from '../action.props'
 import PropertyType from '../../property-type'
-import { PropertyPlace } from '../../../types/property-json.interface'
+import { PropertyPlace } from '../../../interfaces/property-json.interface'
 import { ParsedLayoutElement } from '../../../../backend/utils/layout-element-parser'
 import { BasePropertyProps } from '../../property-type/base-property-props'
 

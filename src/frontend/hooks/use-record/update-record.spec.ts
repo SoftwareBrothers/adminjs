@@ -2,7 +2,7 @@ import { expect } from 'chai'
 import { unflatten } from 'flat'
 
 import updateRecord from './update-record'
-import RecordJSON from '../../types/record-json.interface'
+import RecordJSON from '../../interfaces/record-json.interface'
 
 describe('updateRecord', function () {
   const newPropertyName = 'newProperty'

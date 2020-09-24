@@ -1,10 +1,10 @@
 import React from 'react'
 import { TableCell } from '@admin-bro/design-system'
 
-import PropertyJSON from '../../../types/property-json.interface'
+import PropertyJSON from '../../../interfaces/property-json.interface'
 import SortLink from '../sort-link'
 
-type Props = {
+export type PropertyHeaderProps = {
   property: PropertyJSON;
   /**
    * Property which should be treated as main property.
@@ -22,7 +22,7 @@ type Props = {
   display?: string | Array<string>;
 }
 
-const PropertyHeader: React.FC<Props> = (props) => {
+export const PropertyHeader: React.FC<PropertyHeaderProps> = (props) => {
   const { property, titleProperty, display } = props
 
   const isMain = property.name === titleProperty.name

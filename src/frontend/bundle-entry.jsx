@@ -13,7 +13,6 @@ import ViewHelpers from '../backend/utils/view-helpers/view-helpers'
 import * as AppComponents from './components/app'
 import * as Hooks from './hooks'
 import ApiClient from './utils/api-client'
-import * as types from './types'
 import withNotice from './store/with-notice'
 
 const env = {
@@ -61,5 +60,4 @@ export default {
   ...Hooks,
   flatten: flat.flatten,
   unflatten: flat.unflatten,
-  types,
 }
