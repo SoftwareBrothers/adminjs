@@ -3,7 +3,7 @@ import { ThemeOverride } from '@admin-bro/design-system'
 import BaseResource from './backend/adapters/base-resource'
 import BaseDatabase from './backend/adapters/base-database'
 import { PageContext } from './backend/actions/action.interface'
-import { ResourceOptions } from './backend/decorators/resource-options.interface'
+import { ResourceOptions } from './backend/decorators/resource/resource-options.interface'
 import { Locale } from './locale/config'
 import { CurrentAdmin } from './current-admin.interface'
 

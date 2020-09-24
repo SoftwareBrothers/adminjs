@@ -8,7 +8,7 @@ import Filter from '../utils/filter'
 import BaseProperty from './base-property'
 import BaseRecord from './base-record'
 import AdminBro from '../../admin-bro'
-import ResourceDecorator from '../decorators/resource-decorator'
+import ResourceDecorator from '../decorators/resource/resource-decorator'
 
 chai.use(chaiAsPromised)
 

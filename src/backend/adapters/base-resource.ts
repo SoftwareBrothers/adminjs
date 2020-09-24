@@ -5,9 +5,9 @@
 import BaseProperty from './base-property'
 import BaseRecord, { ParamsType } from './base-record'
 import Filter from '../utils/filter'
-import ResourceDecorator from '../decorators/resource-decorator'
+import ResourceDecorator from '../decorators/resource/resource-decorator'
 import NotImplementedError from '../utils/not-implemented-error'
-import { ResourceOptions } from '../decorators/resource-options.interface'
+import { ResourceOptions } from '../decorators/resource/resource-options.interface'
 import AdminBro from '../../admin-bro'
 
 /**

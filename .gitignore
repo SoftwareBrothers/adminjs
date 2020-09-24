@@ -16,6 +16,13 @@ node_modules
 src/frontend/assets/scripts
 
 .adminbro
+
+# example app 1
 example-app/cypress/videos
 example-app/cypress/screenshots
+
+# example app 2
+app/cypress/videos
+app/cypress/screenshots
+app/build
 .env

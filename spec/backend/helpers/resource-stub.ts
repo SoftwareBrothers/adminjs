@@ -2,7 +2,7 @@ import sinon from 'sinon'
 
 import BaseProperty from '../../../src/backend/adapters/base-property'
 import BaseResource from '../../../src/backend/adapters/base-resource'
-import ResourceDecorator from '../../../src/backend/decorators/resource-decorator'
+import ResourceDecorator from '../../../src/backend/decorators/resource/resource-decorator'
 
 /**
  * returns properties with following absolute paths:
