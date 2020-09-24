@@ -1,4 +1,4 @@
-import Action, { RecordActionResponse } from '../action.interface'
+import { Action, RecordActionResponse } from '../action.interface'
 
 /**
  * @implements Action

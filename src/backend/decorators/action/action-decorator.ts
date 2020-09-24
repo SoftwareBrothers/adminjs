@@ -3,7 +3,8 @@ import ConfigurationError from '../../utils/errors/configuration-error'
 import ViewHelpers from '../../utils/view-helpers/view-helpers'
 import AdminBro from '../../../admin-bro'
 import BaseResource from '../../adapters/resource/base-resource'
-import Action, {
+import {
+  Action,
   IsFunction,
   ActionContext,
   ActionRequest,
@@ -13,7 +14,7 @@ import Action, {
   ActionHandler,
 } from '../../actions/action.interface'
 import { CurrentAdmin } from '../../../current-admin.interface'
-import ActionJSON from '../../../frontend/interfaces/action-json.interface'
+import { ActionJSON } from '../../../frontend/interfaces/action-json.interface'
 import BaseRecord from '../../adapters/record/base-record'
 import actionErrorHandler from '../../services/action-error-handler/action-error-handler'
 import ForbiddenError from '../../utils/errors/forbidden-error'

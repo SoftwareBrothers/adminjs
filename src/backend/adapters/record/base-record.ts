@@ -2,7 +2,7 @@ import * as flat from 'flat'
 import _ from 'lodash'
 import BaseResource from '../resource/base-resource'
 import ValidationError, { RecordError, PropertyErrors } from '../../utils/errors/validation-error'
-import RecordJSON from '../../../frontend/interfaces/record-json.interface'
+import { RecordJSON } from '../../../frontend/interfaces'
 import { CurrentAdmin } from '../../../current-admin.interface'
 
 /**

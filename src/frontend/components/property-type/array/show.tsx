@@ -2,8 +2,7 @@ import React, { ReactNode } from 'react'
 import { Section, ValueGroup } from '@admin-bro/design-system'
 
 import convertParamsToArrayItems from './convert-params-to-array-items'
-import PropertyJSON from '../../../interfaces/property-json.interface'
-import RecordJSON from '../../../interfaces/record-json.interface'
+import { RecordJSON, PropertyJSON } from '../../../interfaces'
 
 type Props = {
   property: PropertyJSON;

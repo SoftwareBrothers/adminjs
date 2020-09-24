@@ -1,4 +1,4 @@
-import Action, { ActionResponse, RecordActionResponse, BulkActionResponse } from '../../actions/action.interface'
+import { Action, ActionResponse, RecordActionResponse, BulkActionResponse } from '../../actions/action.interface'
 import PropertyOptions from '../property/property-options.interface'
 import { ListActionResponse } from '../../actions/list/list-action'
 import { CurrentAdmin } from '../../../current-admin.interface'

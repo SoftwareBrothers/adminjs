@@ -2,7 +2,7 @@ import React from 'react'
 import { CheckBox, TableHead, TableRow, TableCell } from '@admin-bro/design-system'
 
 import PropertyHeader from './property-header'
-import PropertyJSON from '../../../interfaces/property-json.interface'
+import { PropertyJSON } from '../../../interfaces'
 import { display } from './utils/display'
 
 /**

@@ -1,4 +1,4 @@
-import ActionJSON from './action-json.interface'
+import { ActionJSON } from './action-json.interface'
 
 /**
  * @memberof {RecordJSON}
@@ -13,7 +13,7 @@ export type ErrorMessage = {
  * JSON representation of an record
  * @subcategory Frontend
  */
-interface RecordJSON {
+export interface RecordJSON {
   /**
    * all flatten params of given record
    */
@@ -45,8 +45,3 @@ interface RecordJSON {
 }
 
 // TODO: describe flatten params
-
-export {
-  RecordJSON as default,
-  RecordJSON,
-}

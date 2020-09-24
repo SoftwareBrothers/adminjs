@@ -48,7 +48,7 @@ import { CurrentAdmin } from './current-admin.interface'
  * const adminBro = new AdminBro(options)
  * ```
  */
-interface AdminBroOptions {
+export interface AdminBroOptions {
   /**
    * path, under which, AdminBro will be available. Default to `/admin`
    *
@@ -429,9 +429,4 @@ export interface AdminBroOptionsWithDefault extends AdminBroOptions {
     component?: string;
   };
   pages: AdminBroOptions['pages'];
-}
-
-export {
-  AdminBroOptions as default,
-  AdminBroOptions,
 }

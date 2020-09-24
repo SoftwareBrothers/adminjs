@@ -1,6 +1,5 @@
 import flat from 'flat'
-import PropertyJSON from '../../../interfaces/property-json.interface'
-import RecordJSON from '../../../interfaces/record-json.interface'
+import { RecordJSON, PropertyJSON } from '../../../interfaces'
 
 /**
  * Converts flatten params to array items when given property is an array.

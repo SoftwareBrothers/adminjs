@@ -3,7 +3,7 @@ import AdminBro, { Adapter } from '../../../admin-bro'
 import { ResourceWithOptions } from '../../../admin-bro-options.interface'
 import { mergeResourceOptions } from '../build-feature'
 
-class NoDatabaseAdapterError extends Error {
+export class NoDatabaseAdapterError extends Error {
   private database: string
 
   constructor(database: string) {
@@ -14,7 +14,7 @@ class NoDatabaseAdapterError extends Error {
   }
 }
 
-class NoResourceAdapterError extends Error {
+export class NoResourceAdapterError extends Error {
   private resource: BaseResource
 
   constructor(resource: BaseResource) {
@@ -25,7 +25,7 @@ class NoResourceAdapterError extends Error {
   }
 }
 
-class ResourcesFactory {
+export class ResourcesFactory {
   private adapters: Array<Adapter>
 
   private admin: AdminBro

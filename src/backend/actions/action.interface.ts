@@ -5,7 +5,7 @@ import BaseRecord from '../adapters/record/base-record'
 import BaseResource from '../adapters/resource/base-resource'
 import ActionDecorator from '../decorators/action/action-decorator'
 import { LayoutElement, LayoutElementFunction } from '../utils/layout-element-parser'
-import RecordJSON from '../../frontend/interfaces/record-json.interface'
+import { RecordJSON } from '../../frontend/interfaces'
 import { NoticeMessage } from '../../frontend/hoc/with-notice'
 import { TranslateFunctions } from '../../utils/translate-functions.factory'
 
@@ -298,7 +298,7 @@ export type After<T> = (
  * ACTIONS.show.after = async () => {...}
  * ```
  */
-interface Action <T extends ActionResponse> {
+export interface Action <T extends ActionResponse> {
   /**
    * Name of an action which is its uniq key.
    * If you use one of _list_, _search_, _edit_, _new_, _show_, _delete_ or
@@ -609,9 +609,4 @@ interface Action <T extends ActionResponse> {
    * @see LayoutElementFunction
    */
   layout?: LayoutElementFunction | Array<LayoutElement>;
-}
-
-export {
-  Action as default,
-  Action,
 }

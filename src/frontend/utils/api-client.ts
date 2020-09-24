@@ -7,7 +7,7 @@ import {
 } from '../../backend/utils/view-helpers/view-helpers'
 
 /* eslint-disable no-alert */
-import RecordJSON from '../interfaces/record-json.interface'
+import { RecordJSON } from '../interfaces'
 import { RecordActionResponse, ActionResponse, BulkActionResponse } from '../../backend/actions/action.interface'
 
 let globalAny: any = {}

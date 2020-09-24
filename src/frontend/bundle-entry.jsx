@@ -13,7 +13,7 @@ import ViewHelpers from '../backend/utils/view-helpers/view-helpers'
 import * as AppComponents from './components/app'
 import * as Hooks from './hooks'
 import ApiClient from './utils/api-client'
-import withNotice from './store/with-notice'
+import withNotice from './hoc/with-notice'
 
 const env = {
   NODE_ENV: process.env.NODE_ENV || 'development',

@@ -4,7 +4,7 @@ import { NavLink, withRouter } from 'react-router-dom'
 import { RouteComponentProps } from 'react-router'
 import { Icon, cssClass } from '@admin-bro/design-system'
 
-import PropertyJSON from '../../interfaces/property-json.interface'
+import { PropertyJSON } from '../../interfaces'
 
 
 export type SortLinkProps = {

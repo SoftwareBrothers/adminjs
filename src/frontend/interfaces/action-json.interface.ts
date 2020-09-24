@@ -5,7 +5,7 @@ import { ParsedLayoutElement } from '../../backend/utils/layout-element-parser'
  * @see Action
  * @subcategory Frontend
  */
-interface ActionJSON {
+export interface ActionJSON {
   /**
    * Unique action name
    */
@@ -56,9 +56,4 @@ interface ActionJSON {
    * Parsed layout passed in {@link Action#layout}
    */
   layout: Array<ParsedLayoutElement> | null;
-}
-
-export {
-  ActionJSON as default,
-  ActionJSON,
 }

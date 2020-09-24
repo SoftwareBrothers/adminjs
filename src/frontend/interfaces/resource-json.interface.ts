@@ -1,12 +1,12 @@
-import PropertyJSON from './property-json.interface'
-import ActionJSON from './action-json.interface'
+import { PropertyJSON } from './property-json.interface'
+import { ActionJSON } from './action-json.interface'
 
 /**
  * Resource object accessible on the fronted
  * @alias ResourceJSON
  * @subcategory Frontend
  */
-interface ResourceJSON {
+export interface ResourceJSON {
   /**
    * Unique Id of a resource
    */
@@ -66,10 +66,4 @@ interface ResourceJSON {
    * So this is the easies way of getting any property you like from a resource.
    */
   properties: Record<string, PropertyJSON>;
-}
-
-
-export {
-  ResourceJSON as default,
-  ResourceJSON,
 }

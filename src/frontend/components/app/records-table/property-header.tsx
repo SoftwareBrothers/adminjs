@@ -1,7 +1,7 @@
 import React from 'react'
 import { TableCell } from '@admin-bro/design-system'
 
-import PropertyJSON from '../../../interfaces/property-json.interface'
+import { PropertyJSON } from '../../../interfaces'
 import SortLink from '../sort-link'
 
 export type PropertyHeaderProps = {

@@ -1,9 +1,9 @@
 import * as flat from 'flat'
-import Action, { ActionResponse } from '../action.interface'
+import { Action, ActionResponse } from '../action.interface'
 import sortSetter from '../../services/sort-setter/sort-setter'
 import Filter from '../../utils/filter/filter'
 import populator from '../../utils/populator/populator'
-import RecordJSON from '../../../frontend/interfaces/record-json.interface'
+import { RecordJSON } from '../../../frontend/interfaces'
 
 const PER_PAGE_LIMIT = 500
 

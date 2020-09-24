@@ -3,8 +3,7 @@ import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import { Box, cssClass } from '@admin-bro/design-system'
 
-import ResourceJSON from '../../interfaces/resource-json.interface'
-import RecordJSON from '../../interfaces/record-json.interface'
+import { RecordJSON, ResourceJSON } from '../../interfaces'
 import ViewHelpers from '../../../backend/utils/view-helpers/view-helpers'
 
 export const BreadcrumbLink = styled(Link)`

@@ -1,5 +1,5 @@
 import { expect } from 'chai'
-import ResourcesFactory from '../resources-factory'
+import { ResourcesFactory } from './resources-factory'
 import { BaseDatabase, BaseResource } from '../../adapters'
 
 describe('ResourcesFactory', function () {

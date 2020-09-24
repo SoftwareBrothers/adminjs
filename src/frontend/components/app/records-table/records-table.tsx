@@ -5,8 +5,8 @@ import RecordInList from './record-in-list'
 import RecordsTableHeader from './records-table-header'
 import NoRecords from './no-records'
 
-import ResourceJSON from '../../../interfaces/resource-json.interface'
-import RecordJSON from '../../../interfaces/record-json.interface'
+
+import { RecordJSON, ResourceJSON } from '../../../interfaces'
 import SelectedRecords from './selected-records'
 import { ActionResponse } from '../../../../backend/actions/action.interface'
 

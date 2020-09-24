@@ -11,8 +11,7 @@ import {
 } from '@admin-bro/design-system'
 
 import PropertyType from '../property-type'
-import ResourceJSON from '../../interfaces/resource-json.interface'
-import RecordJSON from '../../interfaces/record-json.interface'
+import { RecordJSON, ResourceJSON } from '../../interfaces'
 import { useTranslation } from '../../hooks'
 
 export type FilterProps = {

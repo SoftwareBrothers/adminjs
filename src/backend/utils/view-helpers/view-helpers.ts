@@ -1,4 +1,4 @@
-import AdminBroOptions from '../../../admin-bro-options.interface'
+import { AdminBroOptions } from '../../../admin-bro-options.interface'
 import { Paths } from '../../../frontend/store/store'
 
 let globalAny: any = {}

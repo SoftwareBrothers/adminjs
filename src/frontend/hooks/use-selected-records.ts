@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import RecordJSON from '../interfaces/record-json.interface'
+import { RecordJSON } from '../interfaces'
 
 export type UseSelectedRecordsResult = {
   selectedRecords: Array<RecordJSON>;

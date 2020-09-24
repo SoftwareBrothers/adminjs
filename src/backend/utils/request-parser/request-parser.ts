@@ -16,7 +16,10 @@ import {
  *
  * @private
  */
-export const requestParser = (originalRequest: ActionRequest, resource: BaseResource): ActionRequest => {
+export const requestParser = (
+  originalRequest: ActionRequest,
+  resource: BaseResource,
+): ActionRequest => {
   const { payload: originalPayload } = originalRequest
 
   const payload = Object.entries(originalPayload || {}).reduce((memo, [path, formValue]) => {

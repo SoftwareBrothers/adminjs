@@ -1,7 +1,6 @@
 import factory from 'factory-girl'
-import RecordJSON from '../../interfaces/record-json.interface'
 import './action-json.factory'
-import ActionJSON from '../../interfaces/action-json.interface'
+import { ActionJSON, RecordJSON } from '../../interfaces'
 
 factory.define<RecordJSON>('RecordJSON', Object, {
   params: {

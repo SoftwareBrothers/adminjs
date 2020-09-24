@@ -2,7 +2,7 @@
  * Representing the page in the sidebar
  * @subcategory Frontend
  */
-interface PageJSON {
+export interface PageJSON {
   /**
    * Page name
    */
@@ -16,9 +16,4 @@ interface PageJSON {
    * Page icon
    */
   icon?: string;
-}
-
-export {
-  PageJSON as default,
-  PageJSON,
 }

@@ -1,4 +1,4 @@
-import Action, { BulkActionResponse } from '../action.interface'
+import { Action, BulkActionResponse } from '../action.interface'
 import NotFoundError from '../../utils/errors/not-found-error'
 
 

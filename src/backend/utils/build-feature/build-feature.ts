@@ -3,7 +3,7 @@ import uniq from 'lodash/uniq'
 import merge from 'lodash/merge'
 import { FeatureType } from '../../../admin-bro-options.interface'
 import { ResourceOptions } from '../../decorators/resource/resource-options.interface'
-import Action, { ActionResponse } from '../../actions/action.interface'
+import { Action, ActionResponse } from '../../actions/action.interface'
 
 function mergeActionHooks<T>(
   key: string,

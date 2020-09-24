@@ -7,8 +7,7 @@ import {
 
 import ActionButton from '../action-button'
 import PropertyType from '../../property-type'
-import ResourceJSON from '../../../interfaces/resource-json.interface'
-import RecordJSON from '../../../interfaces/record-json.interface'
+import { RecordJSON, ResourceJSON } from '../../../interfaces'
 import ViewHelpers from '../../../../backend/utils/view-helpers/view-helpers'
 import { display } from './utils/display'
 import { ActionResponse, RecordActionResponse } from '../../../../backend/actions/action.interface'

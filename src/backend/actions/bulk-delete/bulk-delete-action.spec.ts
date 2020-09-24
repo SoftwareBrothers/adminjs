@@ -10,7 +10,7 @@ import ViewHelpers from '../../utils/view-helpers/view-helpers'
 import BaseResource from '../../adapters/resource/base-resource'
 import ActionDecorator from '../../decorators/action/action-decorator'
 import NotFoundError from '../../utils/errors/not-found-error'
-import RecordJSON from '../../../frontend/interfaces/record-json.interface'
+import { RecordJSON } from '../../../frontend/interfaces'
 import { CurrentAdmin } from '../../../current-admin.interface'
 
 

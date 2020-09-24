@@ -7,14 +7,13 @@ import { RouteComponentProps } from 'react-router'
 import BaseAction from '../app/base-action-component'
 import FilterDrawer from '../app/filter-drawer'
 import queryHasFilter from './utils/query-has-filter'
-import ResourceJSON from '../../interfaces/resource-json.interface'
 import { ReduxState } from '../../store/store'
 import { NoResourceError, NoActionError } from '../app/error-message'
 import ViewHelpers, {
   ResourceActionParams, RecordActionParams, BulkActionParams,
 } from '../../../backend/utils/view-helpers/view-helpers'
 import { ActionHeader } from '../app'
-import ActionJSON from '../../interfaces/action-json.interface'
+import { ActionJSON, ResourceJSON } from '../../interfaces'
 
 type PropsFromState = {
   resources: Array<ResourceJSON>;

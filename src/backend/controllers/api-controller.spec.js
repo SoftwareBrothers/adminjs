@@ -2,7 +2,7 @@
 import { expect } from 'chai'
 
 import ApiController from './api-controller'
-import Filter from '../utils/filter'
+import { Filter } from '../utils/filter'
 
 describe('ApiController', function () {
   beforeEach(function () {

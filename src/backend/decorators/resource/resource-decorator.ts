@@ -7,10 +7,9 @@ import BaseResource from '../../adapters/resource/base-resource'
 import AdminBro from '../../../admin-bro'
 import * as ACTIONS from '../../actions/index'
 import { ResourceOptions } from './resource-options.interface'
-import Action, { ActionResponse } from '../../actions/action.interface'
+import { Action, ActionResponse } from '../../actions/action.interface'
 import { CurrentAdmin } from '../../../current-admin.interface'
-import ResourceJSON from '../../../frontend/interfaces/resource-json.interface'
-import PropertyJSON, { PropertyPlace } from '../../../frontend/interfaces/property-json.interface'
+import { ResourceJSON, PropertyJSON, PropertyPlace } from '../../../frontend/interfaces'
 import BaseRecord from '../../adapters/record/base-record'
 
 /**

@@ -1,6 +1,4 @@
-import PropertyJSON, { PropertyPlace } from '../../interfaces/property-json.interface'
-import ResourceJSON from '../../interfaces/resource-json.interface'
-import RecordJSON from '../../interfaces/record-json.interface'
+import { RecordJSON, ResourceJSON, PropertyJSON, PropertyPlace } from '../../interfaces'
 
 export type SelectRecord = {
   value: string;

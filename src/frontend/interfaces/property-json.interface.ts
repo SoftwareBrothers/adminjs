@@ -6,7 +6,7 @@ export type PropertyPlace = 'show' | 'list' | 'edit' | 'filter';
  * JSON representation of a Property.
  * @subcategory Frontend
  */
-interface PropertyJSON {
+export interface PropertyJSON {
   /**
    * If given property should be treated as a title
    */
@@ -84,10 +84,4 @@ interface PropertyJSON {
    * Resource to which given property belongs
    */
   resourceId: string;
-}
-
-
-export {
-  PropertyJSON as default,
-  PropertyJSON,
 }

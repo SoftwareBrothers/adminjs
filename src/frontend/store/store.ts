@@ -15,8 +15,7 @@ import {
   ADD_NOTICE } from './actions'
 
 import { Assets, BrandingOptions, VersionProps } from '../../admin-bro-options.interface'
-import PageJSON from '../interfaces/page-json.interface'
-import ResourceJSON from '../interfaces/resource-json.interface'
+import { PageJSON, ResourceJSON } from '../interfaces'
 import { DEFAULT_PATHS } from '../../constants'
 import { CurrentAdmin } from '../../current-admin.interface'
 import { Locale } from '../../locale/config'

@@ -1,21 +1,25 @@
 import React, { useState, useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import { Loader } from '@admin-bro/design-system'
-
 import { useRouteMatch, useLocation } from 'react-router'
-import BaseAction from '../app/base-action-component'
-import ResourceJSON from '../../interfaces/resource-json.interface'
+
 import { ReduxState } from '../../store/store'
-import ErrorMessageBox, { NoResourceError, NoActionError } from '../app/error-message'
-import RecordJSON from '../../interfaces/record-json.interface'
+
 import { BulkActionParams } from '../../../backend/utils/view-helpers/view-helpers'
+
 import ApiClient from '../../utils/api-client'
 import getBulkActionsFromRecords from '../app/records-table/utils/get-bulk-actions-from-records'
-import ActionJSON from '../../interfaces/action-json.interface'
+import { ActionJSON, RecordJSON, ResourceJSON } from '../../interfaces'
 import Wrapper from './utils/wrapper'
-import { ActionHeader } from '../app'
+import {
+  ActionHeader,
+  DrawerPortal,
+  BaseActionComponent,
+  ErrorMessageBox,
+  NoResourceError,
+  NoActionError,
+} from '../app'
 import { useTranslation, useNotice } from '../../hooks'
-import DrawerPortal from '../app/drawer-portal'
 
 type PropsFromState = {
   resources: Array<ResourceJSON>;
@@ -87,7 +91,7 @@ const BulkAction: React.FC = () => {
   if (action.showInDrawer) {
     return (
       <DrawerPortal width={action.containerWidth}>
-        <BaseAction
+        <BaseActionComponent
           action={action as ActionJSON}
           resource={resource}
           records={records}
@@ -104,7 +108,7 @@ const BulkAction: React.FC = () => {
           action={action}
         />
       ) : ''}
-      <BaseAction
+      <BaseActionComponent
         action={action as ActionJSON}
         resource={resource}
         records={records}
