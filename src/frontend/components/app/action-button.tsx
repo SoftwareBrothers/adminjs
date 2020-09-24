@@ -5,7 +5,7 @@
 import React, { ReactElement } from 'react'
 import { ActionResponse } from '../../../backend/actions/action.interface'
 
-import ActionJSON from '../../../backend/decorators/action-json.interface'
+import ActionJSON from '../../types/action-json.interface'
 import { useAction } from '../../hooks'
 
 
@@ -38,7 +38,7 @@ export type ActionButtonProps = {
  * @component
  * @subcategory Application
  */
-const ActionButton: React.FC<ActionButtonProps> = (props) => {
+export const ActionButton: React.FC<ActionButtonProps> = (props) => {
   const { children, action, actionPerformed, resourceId, recordId, recordIds } = props
 
   const { href, handleClick } = useAction(action, {

@@ -4,7 +4,7 @@ import { NavLink, withRouter } from 'react-router-dom'
 import { RouteComponentProps } from 'react-router'
 import { Icon, cssClass } from '@admin-bro/design-system'
 
-import PropertyJSON from '../../../backend/decorators/property-json.interface'
+import PropertyJSON from '../../types/property-json.interface'
 
 
 type Props = {

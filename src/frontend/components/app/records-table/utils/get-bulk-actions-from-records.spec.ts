@@ -3,8 +3,8 @@ import factory from 'factory-girl'
 
 import '../../../spec/record-json.factory'
 import '../../../spec/action-json.factory'
-import ActionJSON from '../../../../../backend/decorators/action-json.interface'
-import RecordJSON from '../../../../../backend/decorators/record-json.interface'
+import ActionJSON from '../../../../types/action-json.interface'
+import RecordJSON from '../../../../types/record-json.interface'
 
 import getBulkActionsFromRecords from './get-bulk-actions-from-records'
 

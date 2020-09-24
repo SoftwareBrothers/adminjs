@@ -15,7 +15,7 @@ import * as reference from './reference'
 import * as textarea from './textarea'
 import * as password from './password'
 import { BasePropertyProps } from './base-property-props'
-import { PropertyType } from '../../../backend/adapters/base-property'
+import { PropertyType } from '../../../backend/adapters/property/base-property'
 
 let globalAny: any = {}
 

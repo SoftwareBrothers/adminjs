@@ -9,7 +9,7 @@ import ViewHelpers, {
   BulkActionParams,
   ResourceActionParams,
   RecordActionParams,
-} from '../../backend/utils/view-helpers'
+} from '../../backend/utils/view-helpers/view-helpers'
 
 
 import { appendForceRefresh } from '../../frontend/components/actions/utils/append-force-refresh'
@@ -17,7 +17,7 @@ import ApiClient from '../../frontend/utils/api-client'
 
 import { ActionResponse } from '../../backend/actions/action.interface'
 
-import ActionJSON from '../../backend/decorators/action-json.interface'
+import ActionJSON from '../types/action-json.interface'
 
 import useNotice from './use-notice'
 

@@ -1,7 +1,7 @@
 import React, { FC } from 'react'
 import { Navigation } from '@admin-bro/design-system'
 import { useTranslation } from '../../../hooks/use-translation'
-import ResourceJSON from '../../../../backend/decorators/resource-json.interface'
+import ResourceJSON from '../../../types/resource-json.interface'
 import allowOverride from '../../../hoc/allow-override'
 import { useNavigationResources } from '../../../hooks'
 

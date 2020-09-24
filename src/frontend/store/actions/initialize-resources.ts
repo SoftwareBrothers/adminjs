@@ -1,4 +1,4 @@
-import ResourceJSON from '../../../backend/decorators/resource-json.interface'
+import ResourceJSON from '../../types/resource-json.interface'
 
 export const RESOURCES_INITIALIZE = 'RESOURCES_INITIALIZE'
 

@@ -1,7 +1,7 @@
 import factory from 'factory-girl'
-import RecordJSON from '../../../backend/decorators/record-json.interface'
+import RecordJSON from '../../types/record-json.interface'
 import './action-json.factory'
-import ActionJSON from '../../../backend/decorators/action-json.interface'
+import ActionJSON from '../../types/action-json.interface'
 
 factory.define<RecordJSON>('RecordJSON', Object, {
   params: {

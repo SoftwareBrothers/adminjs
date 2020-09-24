@@ -1,7 +1,7 @@
 import React from 'react'
 import { Text, Button, Icon, InfoBox } from '@admin-bro/design-system'
 
-import ResourceJSON from '../../../../backend/decorators/resource-json.interface'
+import ResourceJSON from '../../../types/resource-json.interface'
 import { useTranslation } from '../../../hooks'
 import allowOverride from '../../../hoc/allow-override'
 import ActionButton from '../action-button'

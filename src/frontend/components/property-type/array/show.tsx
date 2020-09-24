@@ -2,8 +2,8 @@ import React, { ReactNode } from 'react'
 import { Section, ValueGroup } from '@admin-bro/design-system'
 
 import convertParamsToArrayItems from './convert-params-to-array-items'
-import PropertyJSON from '../../../../backend/decorators/property-json.interface'
-import RecordJSON from '../../../../backend/decorators/record-json.interface'
+import PropertyJSON from '../../../types/property-json.interface'
+import RecordJSON from '../../../types/record-json.interface'
 
 type Props = {
   property: PropertyJSON;

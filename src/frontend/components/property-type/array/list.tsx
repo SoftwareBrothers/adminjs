@@ -1,9 +1,9 @@
 import React from 'react'
 import flat from 'flat'
 
-import PropertyJSON from '../../../../backend/decorators/property-json.interface'
-import RecordJSON from '../../../../backend/decorators/record-json.interface'
-import ResourceJSON from '../../../../backend/decorators/resource-json.interface'
+import PropertyJSON from '../../../types/property-json.interface'
+import RecordJSON from '../../../types/record-json.interface'
+import ResourceJSON from '../../../types/resource-json.interface'
 import { ShowPropertyProps } from '../base-property-props'
 
 interface Props {

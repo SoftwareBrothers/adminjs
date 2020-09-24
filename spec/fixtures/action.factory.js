@@ -2,7 +2,7 @@ import { factory } from 'factory-girl'
 
 factory.define('action', Object, {
   name: 'customAction',
-  actionType: ['resource', 'record'],
+  actionType: 'record',
   icon: 'icon',
   label: 'Custom action',
   guard: null,
@@ -11,9 +11,9 @@ factory.define('action', Object, {
 })
 
 factory.extend('action', 'recordAction', {
-  actionType: ['record'],
+  actionType: 'record',
 })
 
 factory.extend('action', 'resourceAction', {
-  actionType: ['resource'],
+  actionType: 'resource',
 })

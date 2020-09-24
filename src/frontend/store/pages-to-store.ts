@@ -1,6 +1,6 @@
 import AdminBroOptions from '../../admin-bro-options.interface'
 
-import PageJSON from '../../backend/decorators/page-json.interface'
+import PageJSON from '../types/page-json.interface'
 
 const pagesToStore = (pages: AdminBroOptions['pages'] = {}): Array<PageJSON> => Object.entries(pages)
   .map(([key, adminPage]) => ({

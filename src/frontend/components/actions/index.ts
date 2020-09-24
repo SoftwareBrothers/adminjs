@@ -1,13 +1,6 @@
-import NewAction from './new'
-import EditAction from './edit'
-import ShowAction from './show'
-import ListAction from './list'
-import BulkDeleteAction from './bulk-delete'
-
-export {
-  NewAction as new,
-  EditAction as edit,
-  ShowAction as show,
-  ListAction as list,
-  BulkDeleteAction as bulkDelete,
-}
+export { default as new } from './new'
+export { default as edit } from './edit'
+export { default as show } from './show'
+export { default as list } from './list'
+export { default as bulkDelete } from './bulk-delete'
+export * from './utils'

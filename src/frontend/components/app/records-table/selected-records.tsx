@@ -1,8 +1,8 @@
 import React from 'react'
 import { TableCaption, Button, Icon, CardTitle } from '@admin-bro/design-system'
 
-import ResourceJSON from '../../../../backend/decorators/resource-json.interface'
-import RecordJSON from '../../../../backend/decorators/record-json.interface'
+import ResourceJSON from '../../../types/resource-json.interface'
+import RecordJSON from '../../../types/record-json.interface'
 import ActionButton from '../action-button'
 import getBulkActionsFromRecords from './utils/get-bulk-actions-from-records'
 import { useTranslation } from '../../../hooks'

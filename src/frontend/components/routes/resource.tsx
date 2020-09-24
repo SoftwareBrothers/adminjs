@@ -5,16 +5,16 @@ import { Box } from '@admin-bro/design-system'
 
 import { RouteComponentProps } from 'react-router'
 import BaseAction from '../app/base-action-component'
-import Filter from '../app/filter'
+import FilterDrawer from '../app/filter-drawer'
 import queryHasFilter from './utils/query-has-filter'
-import ResourceJSON from '../../../backend/decorators/resource-json.interface'
+import ResourceJSON from '../../types/resource-json.interface'
 import { ReduxState } from '../../store/store'
 import { NoResourceError, NoActionError } from '../app/error-message'
 import ViewHelpers, {
   ResourceActionParams, RecordActionParams, BulkActionParams,
-} from '../../../backend/utils/view-helpers'
+} from '../../../backend/utils/view-helpers/view-helpers'
 import { ActionHeader } from '../app'
-import ActionJSON from '../../../backend/decorators/action-json.interface'
+import ActionJSON from '../../types/action-json.interface'
 
 type PropsFromState = {
   resources: Array<ResourceJSON>;
@@ -86,7 +86,7 @@ const ResourceAction: React.FC<Props> = (props) => {
       />
       <BaseAction action={listAction} resource={resource} setTag={setTag} />
       {listAction.showFilter ? (
-        <Filter
+        <FilterDrawer
           resource={resource}
           isVisible={filterVisible}
           toggleFilter={(): void => { setFilerVisible(!filterVisible) }}

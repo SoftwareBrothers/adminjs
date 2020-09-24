@@ -1,5 +1,5 @@
 import factory from 'factory-girl'
-import PageJSON from '../../../backend/decorators/page-json.interface'
+import PageJSON from '../../types/page-json.interface'
 
 factory.define<PageJSON>('PageJSON', Object, {
   name: factory.sequence('PageJSON.name', n => `page${n}`),

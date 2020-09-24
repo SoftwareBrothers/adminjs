@@ -2,7 +2,7 @@ import React from 'react'
 import { Navigation, NavigationElementProps } from '@admin-bro/design-system'
 
 import { useHistory, useLocation } from 'react-router'
-import ViewHelpers from '../../../../backend/utils/view-helpers'
+import ViewHelpers from '../../../../backend/utils/view-helpers/view-helpers'
 import { useTranslation } from '../../../hooks/use-translation'
 import { ReduxState } from '../../../store/store'
 

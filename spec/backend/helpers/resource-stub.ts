@@ -1,7 +1,7 @@
 import sinon from 'sinon'
 
-import BaseProperty from '../../../src/backend/adapters/base-property'
-import BaseResource from '../../../src/backend/adapters/base-resource'
+import BaseProperty from '../../../src/backend/adapters/property/base-property'
+import BaseResource from '../../../src/backend/adapters/resource/base-resource'
 import ResourceDecorator from '../../../src/backend/decorators/resource/resource-decorator'
 
 /**

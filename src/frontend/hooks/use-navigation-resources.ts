@@ -6,7 +6,7 @@ import {
   NavigationElementWithChildrenProps,
 } from '@admin-bro/design-system'
 import { useMemo } from 'react'
-import ResourceJSON from '../../backend/decorators/resource-json.interface'
+import ResourceJSON from '../types/resource-json.interface'
 import useLocalStorage from './use-local-storage'
 
 const isSelected = (href, location): boolean => {

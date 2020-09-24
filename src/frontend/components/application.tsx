@@ -4,7 +4,7 @@ import { Switch, Route } from 'react-router-dom'
 import { createGlobalStyle } from 'styled-components'
 import { Box, Overlay, Reset } from '@admin-bro/design-system'
 
-import ViewHelpers from '../../backend/utils/view-helpers'
+import ViewHelpers from '../../backend/utils/view-helpers/view-helpers'
 import Sidebar from './app/sidebar/sidebar'
 import TopBar from './app/top-bar'
 import Notice from './app/notice'

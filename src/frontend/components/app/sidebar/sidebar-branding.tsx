@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import { cssClass, themeGet } from '@admin-bro/design-system'
 
-import ViewHelpers from '../../../../backend/utils/view-helpers'
+import ViewHelpers from '../../../../backend/utils/view-helpers/view-helpers'
 import { BrandingOptions } from '../../../../admin-bro-options.interface'
 import allowOverride from '../../../hoc/allow-override'
 

@@ -12,7 +12,7 @@ import { initializeLocale } from './actions/initialize-locale'
 import AdminBro from '../../admin-bro'
 import { CurrentAdmin } from '../../current-admin.interface'
 import pagesToStore from './pages-to-store'
-import { getBranding, getAssets } from '../../backend/utils/options-parser'
+import { getBranding, getAssets } from '../../backend/utils/options-parser/options-parser'
 
 const initializeStore = async (
   admin: AdminBro,

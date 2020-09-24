@@ -3,9 +3,9 @@ import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 import { ButtonCSS } from '@admin-bro/design-system'
 
-import ViewHelpers from '../../../../backend/utils/view-helpers'
-import PropertyJSON from '../../../../backend/decorators/property-json.interface'
-import RecordJSON from '../../../../backend/decorators/record-json.interface'
+import ViewHelpers from '../../../../backend/utils/view-helpers/view-helpers'
+import PropertyJSON from '../../../types/property-json.interface'
+import RecordJSON from '../../../types/record-json.interface'
 
 interface Props {
   property: PropertyJSON;

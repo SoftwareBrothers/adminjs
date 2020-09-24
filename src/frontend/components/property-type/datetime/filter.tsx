@@ -1,7 +1,7 @@
 import React from 'react'
 import { FormGroup, Label, DatePicker } from '@admin-bro/design-system'
 
-import * as BackendFilter from '../../../../backend/utils/filter'
+import * as BackendFilter from '../../../../backend/utils/filter/filter'
 import { FilterPropertyProps } from '../base-property-props'
 
 const { PARAM_SEPARATOR } = BackendFilter

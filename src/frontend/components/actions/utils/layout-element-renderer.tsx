@@ -2,7 +2,7 @@ import React from 'react'
 import * as DesignSystem from '@admin-bro/design-system'
 import { ActionProps } from '../action.props'
 import PropertyType from '../../property-type'
-import { PropertyPlace } from '../../../../backend/decorators/property-json.interface'
+import { PropertyPlace } from '../../../types/property-json.interface'
 import { ParsedLayoutElement } from '../../../../backend/utils/layout-element-parser'
 import { BasePropertyProps } from '../../property-type/base-property-props'
 
@@ -12,7 +12,7 @@ type Props = ActionProps & {
   onChange?: BasePropertyProps['onChange'];
 }
 
-const LayoutElementRenderer: React.FC<Props> = (props) => {
+export const LayoutElementRenderer: React.FC<Props> = (props) => {
   const { layoutElement, resource, where, record, onChange } = props
 
   const {

@@ -65,6 +65,7 @@ const plugins = ({ babelConfig = {}, commonJSConfig = {}, minify = false } = {})
       extensions,
     }),
     json(),
+    // typescript(),
     replace({
       'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development'),
       'process.env.IS_BROWSER': 'true',

@@ -1,5 +1,5 @@
 import flat from 'flat'
-import RecordJSON from '../../../backend/decorators/record-json.interface'
+import RecordJSON from '../../types/record-json.interface'
 
 /**
  * HOF returning a function which takes a record and returns an updated record.

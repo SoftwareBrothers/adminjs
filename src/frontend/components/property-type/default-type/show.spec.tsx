@@ -8,9 +8,9 @@ import TestContextProvider from '../../spec/test-context-provider'
 import '../../spec/resource-json.factory'
 import '../../spec/record-json.factory'
 
-import ResourceJSON from '../../../../backend/decorators/resource-json.interface'
-import PropertyJSON from '../../../../backend/decorators/property-json.interface'
-import RecordJSON from '../../../../backend/decorators/record-json.interface'
+import ResourceJSON from '../../../types/resource-json.interface'
+import PropertyJSON from '../../../types/property-json.interface'
+import RecordJSON from '../../../types/record-json.interface'
 
 const renderTestSubject = (property, record, resource): RenderResult => render(
   <TestContextProvider>

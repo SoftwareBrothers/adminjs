@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import ViewHelpers from '../utils/view-helpers'
+import ViewHelpers from '../utils/view-helpers/view-helpers'
 import componentsBundler from '../bundler/user-components-bundler'
 import layoutTemplate from '../../frontend/layout-template'
 import { ActionRequest } from '../actions/action.interface'

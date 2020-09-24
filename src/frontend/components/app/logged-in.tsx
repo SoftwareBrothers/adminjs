@@ -6,14 +6,14 @@ import { CurrentAdmin } from '../../../current-admin.interface'
 import { useTranslation } from '../../hooks'
 import allowOverride from '../../hoc/allow-override'
 
-type Props = {
+export type LoggedInProps = {
   session: CurrentAdmin;
   paths: {
     logoutPath: string;
   };
 }
 
-const LoggedIn: React.FC<Props> = (props) => {
+const LoggedIn: React.FC<LoggedInProps> = (props) => {
   const { session, paths } = props
   const { translateButton } = useTranslation()
   const history = useHistory()
@@ -38,4 +38,9 @@ const LoggedIn: React.FC<Props> = (props) => {
   )
 }
 
-export default allowOverride(LoggedIn, 'LoggedIn')
+const OverridableLoggedIn = allowOverride(LoggedIn, 'LoggedIn')
+
+export {
+  OverridableLoggedIn as default,
+  OverridableLoggedIn as LoggedIn,
+}

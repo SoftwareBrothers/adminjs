@@ -60,7 +60,7 @@ declare const AdminBro: {
  * @name BaseActionComponent
  * @subcategory Application
  */
-const BaseActionComponent: React.FC<ActionProps> = (props) => {
+export const BaseActionComponent: React.FC<ActionProps> = (props) => {
   const { resource, action, record, records, setTag } = props
   const documentationLink = [DOCS, 'BaseAction.html'].join('/')
 

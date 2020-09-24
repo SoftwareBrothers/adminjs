@@ -1,17 +1,9 @@
-import deleteAction from './delete-action'
-import showAction from './show-action'
-import editAction from './edit-action'
-import newAction from './new-action'
-import listAction from './list-action'
-import searchAction from './search-action'
-import bulkDeleteAction from './bulk-delete-action'
+export { default as delete } from './delete/delete-action'
+export { default as show } from './show/show-action'
+export { default as new } from './new/new-action'
+export { default as edit } from './edit/edit-action'
+export { default as search } from './search/search-action'
+export { default as list } from './list/list-action'
+export { default as bulkDelete } from './bulk-delete/bulk-delete-action'
 
-export {
-  showAction as show,
-  editAction as edit,
-  deleteAction as delete,
-  newAction as new,
-  searchAction as search,
-  listAction as list,
-  bulkDeleteAction as bulkDelete,
-}
+export * from './action.interface'

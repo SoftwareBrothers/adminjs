@@ -8,17 +8,17 @@ import { setNoticeProgress } from '../../store/actions/set-notice-progress'
 
 const TIME_TO_DISAPPEAR = 3
 
-type NotifyProgress = (options: {
+export type NotifyProgress = (options: {
   noticeId: string; progress: number;
 }) => void
 
-type NoticeElementProps = {
+export type NoticeElementProps = {
   notice: NoticeMessageInState;
   drop: () => any;
   notifyProgress: NotifyProgress;
 }
 
-type NoticeElementState = {
+export type NoticeElementState = {
   progress: number;
 }
 
@@ -113,6 +113,11 @@ const mapDispatchToProps = (dispatch): NoticeBoxDispatchFromState => ({
   }): void => dispatch(setNoticeProgress({ noticeId, progress })),
 })
 
-export default connect(
+const ConnectedNoticeBox = connect(
   mapStateToProps, mapDispatchToProps,
 )(NoticeBox)
+
+export {
+  ConnectedNoticeBox as default,
+  ConnectedNoticeBox as NoticeBox,
+}

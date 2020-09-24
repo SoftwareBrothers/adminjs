@@ -1,11 +1,11 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { combineStyles } from '@admin-bro/design-system'
 
-import ViewHelpers from '../backend/utils/view-helpers'
+import ViewHelpers from '../backend/utils/view-helpers/view-helpers'
 import initializeStore from './store'
 import AdminBro from '../admin-bro'
 import { CurrentAdmin } from '../current-admin.interface'
-import { getFaviconFromBranding } from '../backend/utils/options-parser'
+import { getFaviconFromBranding } from '../backend/utils/options-parser/options-parser'
 
 /**
  * Renders (SSR) html for given location

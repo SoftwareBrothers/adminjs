@@ -2,10 +2,10 @@ import { useState, useEffect } from 'react'
 
 import { AxiosResponse } from 'axios'
 import { useLocation, useHistory } from 'react-router'
-import RecordJSON from '../../backend/decorators/record-json.interface'
+import RecordJSON from '../types/record-json.interface'
 import useNotice from './use-notice'
 import ApiClient from '../utils/api-client'
-import { ListActionResponse } from '../../backend/actions/list-action'
+import { ListActionResponse } from '../../backend/actions/list/list-action'
 import { useTranslation } from './use-translation'
 import { hasForceRefresh, removeForceRefresh } from '../components/actions/utils/append-force-refresh'
 

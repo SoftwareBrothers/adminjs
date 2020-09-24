@@ -7,9 +7,9 @@ import {
 
 import ActionButton from '../action-button'
 import PropertyType from '../../property-type'
-import ResourceJSON from '../../../../backend/decorators/resource-json.interface'
-import RecordJSON from '../../../../backend/decorators/record-json.interface'
-import ViewHelpers from '../../../../backend/utils/view-helpers'
+import ResourceJSON from '../../../types/resource-json.interface'
+import RecordJSON from '../../../types/record-json.interface'
+import ViewHelpers from '../../../../backend/utils/view-helpers/view-helpers'
 import { display } from './records-table-header'
 import { ActionResponse, RecordActionResponse } from '../../../../backend/actions/action.interface'
 import mergeRecordResponse from '../../../hooks/use-record/merge-record-response'

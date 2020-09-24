@@ -1,7 +1,7 @@
 import { ThemeOverride } from '@admin-bro/design-system'
 
-import BaseResource from './backend/adapters/base-resource'
-import BaseDatabase from './backend/adapters/base-database'
+import BaseResource from './backend/adapters/resource/base-resource'
+import BaseDatabase from './backend/adapters/database/base-database'
 import { PageContext } from './backend/actions/action.interface'
 import { ResourceOptions } from './backend/decorators/resource/resource-options.interface'
 import { Locale } from './locale/config'
@@ -48,7 +48,7 @@ import { CurrentAdmin } from './current-admin.interface'
  * const adminBro = new AdminBro(options)
  * ```
  */
-export default interface AdminBroOptions {
+interface AdminBroOptions {
   /**
    * path, under which, AdminBro will be available. Default to `/admin`
    *
@@ -429,4 +429,9 @@ export interface AdminBroOptionsWithDefault extends AdminBroOptions {
     component?: string;
   };
   pages: AdminBroOptions['pages'];
+}
+
+export {
+  AdminBroOptions as default,
+  AdminBroOptions,
 }

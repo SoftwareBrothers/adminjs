@@ -1,5 +1,5 @@
 import sinon from 'sinon'
-import ViewHelpers from '../../../src/backend/utils/view-helpers'
+import ViewHelpers from '../../../src/backend/utils/view-helpers/view-helpers'
 
 const expectedResult = {
   recordActionUrl: '#recordActionUrl',

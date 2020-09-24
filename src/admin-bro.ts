@@ -2,24 +2,24 @@ import * as _ from 'lodash'
 import * as path from 'path'
 import * as fs from 'fs'
 import i18n, { i18n as I18n } from 'i18next'
-import { flatten, unflatten } from 'flat'
 
 import AdminBroOptions, { AdminBroOptionsWithDefault } from './admin-bro-options.interface'
-import BaseResource from './backend/adapters/base-resource'
-import BaseDatabase from './backend/adapters/base-database'
-import BaseRecord from './backend/adapters/base-record'
-import BaseProperty from './backend/adapters/base-property'
-import Filter from './backend/utils/filter'
-import ValidationError from './backend/utils/validation-error'
-import ConfigurationError from './backend/utils/configuration-error'
-import ResourcesFactory from './backend/utils/resources-factory'
+import BaseResource from './backend/adapters/resource/base-resource'
+import BaseDatabase from './backend/adapters/database/base-database'
+import BaseRecord from './backend/adapters/record/base-record'
+import BaseProperty from './backend/adapters/property/base-property'
+import Filter from './backend/utils/filter/filter'
+import ValidationError from './backend/utils/errors/validation-error'
+import ConfigurationError from './backend/utils/errors/configuration-error'
+import ResourcesFactory from './backend/utils/resources-factory/resources-factory'
 import userComponentsBundler from './backend/bundler/user-components-bundler'
-import { RouterType } from './backend/router'
+import { RouterType } from './backend/utils/router/router'
 import Action, { RecordActionResponse } from './backend/actions/action.interface'
 import { DEFAULT_PATHS } from './constants'
+import * as Actions from './backend/actions'
 
 import loginTemplate from './frontend/login-template'
-import { ListActionResponse } from './backend/actions/list-action'
+import { ListActionResponse } from './backend/actions/list/list-action'
 import { combineTranslations, Locale } from './locale/config'
 import en from './locale/en'
 import { TranslateFunctions, createFunctions } from './utils/translate-functions.factory'
@@ -355,12 +355,12 @@ class AdminBro {
 }
 
 AdminBro.VERSION = VERSION
+AdminBro.ACTIONS = Actions
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 interface AdminBro extends TranslateFunctions {}
 
 export const { registerAdapter } = AdminBro
 export const { bundle } = AdminBro
-export { flatten, unflatten }
 
 export default AdminBro

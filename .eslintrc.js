@@ -22,6 +22,7 @@ module.exports = {
             'error',
             2
         ],
+        'import/prefer-default-export': 'off',
         'linebreak-style': ['error', 'unix'],
         'quotes': ['error', 'single'],
         'semi': ['error', 'never'],

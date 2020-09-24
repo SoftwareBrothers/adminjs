@@ -4,10 +4,10 @@ import {
   BulkActionParams,
   RecordActionParams,
   ActionParams,
-} from '../../backend/utils/view-helpers'
+} from '../../backend/utils/view-helpers/view-helpers'
 
 /* eslint-disable no-alert */
-import RecordJSON from '../../backend/decorators/record-json.interface'
+import RecordJSON from '../types/record-json.interface'
 import { RecordActionResponse, ActionResponse, BulkActionResponse } from '../../backend/actions/action.interface'
 
 let globalAny: any = {}
