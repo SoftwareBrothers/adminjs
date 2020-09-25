@@ -37,7 +37,7 @@ describe('BaseResource', function () {
 
   describe('#databaseType', function () {
     it('returns "database" by default', async function () {
-      expect(resource.databaseType()).to.eq('database')
+      expect(resource.databaseType()).to.eq('other')
     })
   })
 

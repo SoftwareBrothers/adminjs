@@ -16,7 +16,7 @@ import userComponentsBundler from './backend/bundler/user-components-bundler'
 import { RouterType } from './backend/utils/router/router'
 import { RecordActionResponse, Action } from './backend/actions/action.interface'
 import { DEFAULT_PATHS } from './constants'
-import * as Actions from './backend/actions'
+import { ACTIONS } from './backend/actions'
 
 import loginTemplate from './frontend/login-template'
 import { ListActionResponse } from './backend/actions/list/list-action'
@@ -355,7 +355,7 @@ class AdminBro {
 }
 
 AdminBro.VERSION = VERSION
-AdminBro.ACTIONS = Actions
+AdminBro.ACTIONS = ACTIONS
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 interface AdminBro extends TranslateFunctions {}

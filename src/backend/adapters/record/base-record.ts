@@ -1,15 +1,10 @@
 import * as flat from 'flat'
 import _ from 'lodash'
+import { ParamsType } from './params.type'
 import BaseResource from '../resource/base-resource'
 import ValidationError, { RecordError, PropertyErrors } from '../../utils/errors/validation-error'
 import { RecordJSON } from '../../../frontend/interfaces'
 import { CurrentAdmin } from '../../../current-admin.interface'
-
-/**
- * @alias ParamsType
- * @memberof BaseRecord
- */
-export type ParamsType = Record<string, any>
 
 /**
  * Representation of an particular ORM/ODM Record in given Resource in AdminBro

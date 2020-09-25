@@ -58,21 +58,13 @@ describe('ResourceDecorator', function () {
   })
 
   describe('#getNavigation', function () {
-    it('returns database name with its icon when no options were specified', function () {
-      expect(
-        new ResourceDecorator({ ...args, options: {} }).getNavigation(),
-      ).to.deep.equal({
-        name: expectedResult.databaseName,
-        icon: expectedResult.databaseType,
-      })
-    })
     it('returns custom name with icon when options were specified', function () {
       const options = {
-        parent: { name: 'someName', icon: 'i-icon-some' },
+        navigation: { name: 'someName', icon: 'someIcon' },
       }
       expect(
         new ResourceDecorator({ ...args, options }).getNavigation(),
-      ).to.deep.equal(options.parent)
+      ).to.deep.equal(options.navigation)
     })
   })
 

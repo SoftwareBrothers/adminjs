@@ -10,7 +10,7 @@ import NotFoundError from '../../utils/errors/not-found-error'
  * Removes given records from the database.
  * @private
  */
-const BulkDeleteAction: Action<BulkActionResponse> = {
+export const BulkDeleteAction: Action<BulkActionResponse> = {
   name: 'bulkDelete',
   isVisible: true,
   actionType: 'bulk',

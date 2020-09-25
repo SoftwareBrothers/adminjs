@@ -12,7 +12,7 @@ import Filter from '../../utils/filter/filter'
  * Uses {@link ShowAction} component to render form
  * @private
  */
-const SearchAction: Action<SearchActionResponse> = {
+export const SearchAction: Action<SearchActionResponse> = {
   name: 'search',
   isVisible: false,
   actionType: 'resource',

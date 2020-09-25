@@ -10,7 +10,7 @@ import NotFoundError from '../../utils/errors/not-found-error'
  * Uses {@link ShowAction} component to render form
  * @private
  */
-const ShowAction: Action<RecordActionResponse> = {
+export const ShowAction: Action<RecordActionResponse> = {
   name: 'show',
   isVisible: true,
   actionType: 'record',

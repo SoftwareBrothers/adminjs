@@ -28,6 +28,23 @@ function mergeActionHooks<T>(
   return hooks.length ? { [key]: hooks } : {}
 }
 
+const basicOptions = ['id', 'href', 'parent', 'sort', 'navigation'] as const
+const listOptions = [
+  'listProperties', 'showProperties', 'editProperties', 'filterProperties',
+] as const
+
+type BasicOption = typeof basicOptions[number]
+type ListOption = typeof listOptions[number]
+
+type MissingKeys = Required<Omit<ResourceOptions, BasicOption | ListOption | 'actions' | 'properties'>>
+
+// The following check is done in typescript to ensure that the `basicOptions` and `listOptions`
+// contains all the keys from ResourceOptions (+ actions and properties) which are copied
+// separately. If type MissingKeys has any key following condition is not meet and typescript
+// throws an error.
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const hasMissingKeys: MissingKeys = {} as const
+
 /**
  * @name mergeResourceOptions
  * @function
@@ -50,15 +67,15 @@ const mergeResourceOptions = (
   oldOptions: ResourceOptions = {},
   newOptions: ResourceOptions = {},
 ): ResourceOptions => {
-  const options = { ...oldOptions };
+  const options = { ...oldOptions }
 
-  ['id', 'href', 'parent', 'sort'].forEach((propName) => {
+  basicOptions.forEach((propName: string) => {
     if (newOptions[propName]) {
       options[propName] = newOptions[propName]
     }
-  });
+  })
 
-  ['listProperties', 'showProperties', 'editProperties', 'filterProperties'].forEach((propName) => {
+  listOptions.forEach((propName: string) => {
     if (newOptions[propName]) {
       const mergedOptions = [
         ...(oldOptions && oldOptions[propName] ? oldOptions[propName] : []),

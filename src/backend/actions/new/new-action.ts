@@ -9,7 +9,7 @@ import { Action, RecordActionResponse } from '../action.interface'
  * Uses {@link NewAction} component to render form
  * @private
  */
-const NewAction: Action<RecordActionResponse> = {
+export const NewAction: Action<RecordActionResponse> = {
   name: 'new',
   isVisible: true,
   actionType: 'resource',

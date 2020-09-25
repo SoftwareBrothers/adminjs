@@ -2,12 +2,10 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint class-methods-use-this: 0 no-unused-vars: 0 */
 /* eslint no-useless-constructor: 0 */
-import BaseProperty from '../property/base-property'
-import BaseRecord, { ParamsType } from '../record/base-record'
-import Filter from '../../utils/filter/filter'
-import ResourceDecorator from '../../decorators/resource/resource-decorator'
-import NotImplementedError from '../../utils/errors/not-implemented-error'
-import { ResourceOptions } from '../../decorators/resource/resource-options.interface'
+import { SupportedDatabasesType } from './supported-databases.type'
+import { BaseProperty, BaseRecord, ParamsType } from '..'
+import { NotImplementedError, Filter } from '../../utils'
+import { ResourceOptions, ResourceDecorator } from '../../decorators'
 import AdminBro from '../../../admin-bro'
 
 /**
@@ -80,8 +78,8 @@ class BaseResource {
    * given resource. Default: 'database'
    * @return {String}
    */
-  databaseType(): string {
-    return 'database'
+  databaseType(): SupportedDatabasesType | string {
+    return 'other'
   }
 
   /**

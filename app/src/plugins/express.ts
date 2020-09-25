@@ -11,7 +11,6 @@ export const listen = (admin: AdminBro, port = PORT) => {
 
   app.use(admin.options.rootPath, router)
 
-
   app.use((error, req, res, next) => {
     if (error) {
       console.error(error)

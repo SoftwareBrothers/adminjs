@@ -13,7 +13,7 @@ import populator from '../../utils/populator/populator'
  * @classdesc
  * Uses {@link EditAction} component to render form
  */
-const EditAction: Action<RecordActionResponse> = {
+export const EditAction: Action<RecordActionResponse> = {
   name: 'edit',
   isVisible: true,
   actionType: 'record',

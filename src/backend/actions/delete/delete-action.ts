@@ -11,7 +11,7 @@ import ValidationError from '../../utils/errors/validation-error'
  * component - it redirects right away after clicking its {@link ActionButton}
  * @private
  */
-const DeleteAction: Action<RecordActionResponse> = {
+export const DeleteAction: Action<RecordActionResponse> = {
   name: 'delete',
   isVisible: true,
   actionType: 'record',

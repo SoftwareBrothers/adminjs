@@ -15,7 +15,7 @@ const PER_PAGE_LIMIT = 500
  * Returns selected Records in a list form
  * @private
  */
-const ListAction: Action<ListActionResponse> = {
+export const ListAction: Action<ListActionResponse> = {
   name: 'list',
   isVisible: true,
   actionType: 'resource',

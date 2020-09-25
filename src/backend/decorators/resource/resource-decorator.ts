@@ -1,16 +1,16 @@
 import * as _ from 'lodash'
-import BaseProperty from '../../adapters/property/base-property'
-import PropertyDecorator from '../property/property-decorator'
-import ActionDecorator from '../action/action-decorator'
+import * as utils from './utils'
+
+import { BaseProperty, BaseResource, BaseRecord } from '../../adapters'
+import { PropertyDecorator, ActionDecorator } from '..'
 import ViewHelpers from '../../utils/view-helpers/view-helpers'
-import BaseResource from '../../adapters/resource/base-resource'
 import AdminBro from '../../../admin-bro'
-import * as ACTIONS from '../../actions/index'
+
 import { ResourceOptions } from './resource-options.interface'
-import { Action, ActionResponse } from '../../actions/action.interface'
+import { Action, ActionResponse, ACTIONS } from '../../actions'
 import { CurrentAdmin } from '../../../current-admin.interface'
 import { ResourceJSON, PropertyJSON, PropertyPlace } from '../../../frontend/interfaces'
-import BaseRecord from '../../adapters/record/base-record'
+
 
 /**
  * Default maximum number of items which should be present in a list.
@@ -19,89 +19,6 @@ import BaseRecord from '../../adapters/record/base-record'
  * @private
  */
 export const DEFAULT_MAX_COLUMNS_IN_LIST = 8
-
-type PathParts = Array<string>
-
-/**
- * Changes path with flatten notation, with dots (.) inside, to array of all possible
- * keys which can have a property.
- *
- * - changes: `nested.nested2.normalInner`
- * - to `["nested", "nested.nested2", "nested.nested2.normalInner"]`
- *
- * Also it takes care of the arrays, which are separated by numbers (indexes).
- * - changes: `nested.0.normalInner.1`
- * - to: `nested.normalInner`
- *
- * Everything because when we look for a property of a given path it can be inside a
- * mixed property. So first, we have to find top level mixed property, and then,
- * step by step, find inside each of them.
- *
- * @private
- *
- * @param   {string}  propertyPath
- *
- * @return  {PathParts}
- */
-const pathToParts = (propertyPath: string): PathParts => (
-  // eslint-disable-next-line no-restricted-globals
-  propertyPath.split('.').filter(part => isNaN(+part)).reduce((memo, part) => {
-    if (memo.length) {
-      return [
-        ...memo,
-        [memo[memo.length - 1], part].join('.'),
-      ]
-    }
-    return [part]
-  }, [] as Array<string>)
-)
-
-/**
- * @private
- *
- * @param   {PathParts}  pathParts    parts returned by `pathToParts` method
- * @param   {PropertyDecorator}       rootProperty where function should recursively search for
- *                                    a subProperty matching one of the pathParts
- *
- * @return  {PropertyDecorator | null}  found subProperty
- */
-const findSubProperty = (
-  pathParts: PathParts,
-  rootProperty: PropertyDecorator,
-): PropertyDecorator | null => {
-  const subProperties = rootProperty.subProperties()
-  const foundPath = pathParts.find(path => (
-    subProperties.find(supProperty => supProperty.path === path)))
-  if (foundPath) {
-    const subProperty = subProperties.find(supProperty => supProperty.path === foundPath)
-    if (subProperty && foundPath !== pathParts[pathParts.length - 1]) {
-      // if foundPath is not the last (full) path - checkout recursively all subProperties
-      return findSubProperty(pathParts, subProperty)
-    }
-    return subProperty || null
-  }
-  return null
-}
-
-/**
- * Bu default all subProperties are nested as an array in root Property. This is easy for
- * adapter to maintain. But in AdminBro core we need a fast way to access them by path.
- *
- * This function changes an array to object recursively (for nested subProperties) so they
- * could be accessed via properties['path.to.sub.property']
- *
- * @param   {PropertyDecorator}  rootProperty
- *
- * @return  {Record<PropertyDecorator>}
- * @private
- */
-const flatSubProperties = (rootProperty: PropertyDecorator): Record<string, PropertyJSON> => (
-  rootProperty.subProperties().reduce((subMemo, subProperty) => ({
-    ...subMemo,
-    [subProperty.path]: subProperty.toJSON(),
-    ...flatSubProperties(subProperty),
-  }), {})
-)
 
 /**
  * Base decorator class which decorates the Resource.
@@ -253,28 +170,7 @@ class ResourceDecorator {
    * @return {Parent}   ResourceJSON['parent']}
    */
   getNavigation(): ResourceJSON['navigation'] {
-    const DEFAULT_ICON = 'Archive'
-
-    // For obsolete use of parent instead of navigation
-    const parentOption = typeof this.options.navigation !== 'undefined'
-      ? this.options.navigation
-      : this.options.parent
-
-    if (parentOption === null) {
-      return null
-    }
-
-    if (parentOption === undefined || typeof parentOption === 'string') {
-      return {
-        name: parentOption || this._resource.databaseName(),
-        icon: this._resource.databaseType() || DEFAULT_ICON,
-      }
-    }
-    const { name, icon } = parentOption
-    return {
-      name: name || null,
-      icon: icon || DEFAULT_ICON,
-    }
+    return utils.getNavigation(this.options, this._resource)
   }
 
   /**
@@ -285,7 +181,7 @@ class ResourceDecorator {
    * @return  {PropertyDecorator}
    */
   getPropertyByKey(propertyPath: string): PropertyDecorator | null {
-    const parts = pathToParts(propertyPath)
+    const parts = utils.pathToParts(propertyPath)
     const fullPath = parts[parts.length - 1]
     const property = this.properties[fullPath]
 
@@ -298,7 +194,7 @@ class ResourceDecorator {
         ))
         if (mixedPropertyPath) {
           const mixedProperty = this.properties[mixedPropertyPath]
-          const subProperty = findSubProperty(parts, mixedProperty)
+          const subProperty = utils.findSubProperty(parts, mixedProperty)
 
           if (subProperty) {
             return subProperty
@@ -358,7 +254,7 @@ class ResourceDecorator {
     return Object.keys(this.properties).reduce((memo, propertyName) => {
       const property = this.properties[propertyName]
 
-      const subProperties = flatSubProperties(property)
+      const subProperties = utils.flatSubProperties(property)
       return {
         ...memo,
         [propertyName]: property.toJSON(),
@@ -495,3 +391,5 @@ class ResourceDecorator {
 }
 
 export default ResourceDecorator
+
+export { utils as exportedUtils }

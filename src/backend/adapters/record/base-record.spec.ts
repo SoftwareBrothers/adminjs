@@ -1,8 +1,9 @@
 import chai, { expect } from 'chai'
 import sinon from 'sinon'
 import chaiAsPromised from 'chai-as-promised'
+import { ParamsType } from './params.type'
 
-import BaseRecord, { ParamsType } from './base-record'
+import BaseRecord from './base-record'
 import BaseResource from '../resource/base-resource'
 import BaseProperty from '../property/base-property'
 import ValidationError, { PropertyErrors } from '../../utils/errors/validation-error'
