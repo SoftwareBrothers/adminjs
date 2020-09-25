@@ -5,4 +5,9 @@ export const UserResource: ResourceOptions = {
     name: null,
     icon: 'User',
   },
+  properties: {
+    encryptedPassword: {
+      isVisible: false,
+    },
+  },
 }

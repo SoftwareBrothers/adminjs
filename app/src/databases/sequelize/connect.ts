@@ -5,6 +5,7 @@ const {
   POSTGRES_PASSWORD,
   POSTGRES_DATABASE,
   POSTGRES_PORT,
+  SYNC,
   POSTGRES_HOST,
 } = process.env
 const sequelizeUrl = [
@@ -12,7 +13,9 @@ const sequelizeUrl = [
   '/', POSTGRES_DATABASE,
 ].join('')
 
-export const sequelize = new Sequelize(sequelizeUrl)
+export const sequelize = new Sequelize(sequelizeUrl, {
+  logging: false,
+})
 
 export const connect = async () => {
   try {
@@ -22,6 +25,13 @@ export const connect = async () => {
     console.error('Unable to connect to the database:', error)
   }
 
-  await sequelize.sync({ force: true })
+  if (SYNC) {
+    await sequelize.sync({ force: true })
+  }
+
   return sequelize
 }
+
+process.on('exit', () => {
+  sequelize.close()
+})

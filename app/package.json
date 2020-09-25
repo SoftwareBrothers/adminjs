@@ -6,23 +6,28 @@
   "scripts": {
     "build": "tsc",
     "start": "yarn build && node build/index.js",
-    "dev": "concurrently \"yarn build --watch\" \"nodemon node build/src/index.js\"",
+    "dev": "concurrently \"wait-on build/src/index.js && nodemon node build/src/index.js\" \"yarn build --watch\"",
     "cypress:open": "cypress open",
     "cypress:run": "cypress run"
   },
   "devDependencies": {
     "@types/express": "^4.17.7",
     "concurrently": "^5.2.0",
-    "cypress": "^4.11.0",
+    "cypress": "^5.2.0",
     "nodemon": "^2.0.4",
     "ts-node": "^8.10.2",
-    "typescript": "^3.9.7"
+    "typescript": "^3.9.7",
+    "wait-on": "^5.2.0"
   },
   "dependencies": {
     "@admin-bro/express": "^3.0.0",
-    "@admin-bro/sequelize": "1.0.0-beta.5",
+    "@admin-bro/passwords": "^1.0.3",
+    "@admin-bro/sequelize": "1.1.1",
     "admin-bro": "^3.1.1",
+    "argon2": "^0.27.0",
+    "connect-session-sequelize": "^7.0.3",
     "dotenv": "^8.2.0",
+    "dotenv-json": "^1.0.0",
     "express": "^4.17.1",
     "express-formidable": "^1.2.0",
     "express-session": "^1.17.1",
