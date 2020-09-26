@@ -7,6 +7,8 @@ import AdminBro from 'admin-bro'
 import AdminBroSequelize from '@admin-bro/sequelize'
 import * as UserAdmin from './admin/resources/user'
 import * as BlogPostAdmin from './admin/resources/blog-post'
+import * as BrandAdmin from './admin/resources/brand'
+import * as ProductAdmin from './admin/resources/product'
 
 import { connect, models, sessionStore, authenticate, createAdmin } from './databases/sequelize'
 import { listen } from './plugins/express'
@@ -19,13 +21,12 @@ const run = async (): Promise<void> => {
 
   const admin = new AdminBro({
     ...options,
-    resources: [{
-      resource: models.User,
-      ...UserAdmin,
-    }, {
-      resource: models.BlogPost,
-      ...BlogPostAdmin,
-    }],
+    resources: [
+      { resource: models.User, ...UserAdmin },
+      { resource: models.BlogPost, ...BlogPostAdmin },
+      { resource: models.Brand, ...BrandAdmin },
+      { resource: models.Product, ...ProductAdmin },
+    ],
   })
 
   await createAdmin()

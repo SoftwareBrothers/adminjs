@@ -7,6 +7,7 @@
     "build": "tsc",
     "start": "yarn build && node build/src/index.js",
     "dev": "concurrently \"wait-on build/src/index.js && nodemon node build/src/index.js\" \"yarn build --watch\"",
+    "clean": "rm -rf build && mkdir build",
     "cypress:open": "cypress open",
     "cypress:run": "cypress run"
   },

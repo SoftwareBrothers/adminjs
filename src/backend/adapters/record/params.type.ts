@@ -1,5 +1,3 @@
-import { number } from 'prop-types'
-
 /**
  * @alias ParamsTypeValue
  * @memberof BaseRecord

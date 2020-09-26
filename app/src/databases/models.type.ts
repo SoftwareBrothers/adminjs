@@ -1,1 +1,1 @@
-export type AvailableModels = 'User' | 'BlogPost'
+export type AvailableModels = 'User' | 'BlogPost' | 'Brand' | 'Product'

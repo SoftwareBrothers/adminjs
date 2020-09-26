@@ -72,12 +72,16 @@ class PropertyDecorator {
    * @return  {BaseResource} reference resource
    */
   reference(): BaseResource | null {
-    const referenceResourceId = this.property.reference()
+    const referenceResourceId = this.referenceName()
     if (referenceResourceId) {
       const resource = this._admin.findResource(referenceResourceId)
       return resource
     }
     return null
+  }
+
+  referenceName(): string | null {
+    return this.options.reference || this.property.reference()
   }
 
   /**
@@ -111,7 +115,9 @@ class PropertyDecorator {
    * @returns {PropertyType}
    */
   type(): PropertyType {
-    // return this.overrideFromOptions(AvailablePropertyOptions.type)
+    if (this.options.reference) {
+      return 'reference'
+    }
     return overrideFromOptions('type', this.property, this.options) as PropertyType
   }
 
@@ -230,7 +236,7 @@ class PropertyDecorator {
       isDisabled: this.isDisabled(),
       label: this.label(),
       type: this.type(),
-      reference: this.property.reference(),
+      reference: this.referenceName(),
       components: this.options.components,
       subProperties: this.subProperties()
         .filter(subProperty => !where || subProperty.isVisible(where))

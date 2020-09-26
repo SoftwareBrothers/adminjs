@@ -7,7 +7,7 @@
   "scripts": {
     "test": "mocha ./spec/index.js",
     "types": "tsc",
-    "clean": "rm -rf lib && mkdir lib",
+    "clean": "rm -rf lib && mkdir lib && rm -fr types && mkdir types",
     "build": "babel src --out-dir lib --copy-files --extensions '.ts,.js,.jsx,.tsx'",
     "lint": "eslint './spec/**/*.js' './spec/**/*.ts' './src/**/*.js' './src/**/*.jsx' './src/**/*.ts' './src/**/*.tsx' --ignore-pattern='*bundle.*.js' --ignore-pattern='*.d.ts'",
     "cover": "NODE_ENV=test nyc --reporter=lcov --reporter=text-lcov npm test",

@@ -73,4 +73,10 @@ export default interface PropertyOptions {
    * Whether given property should be marked as required.
    */
   isRequired?: boolean;
+
+  /**
+   * Name of the resource to which this property should be a reference.
+   * If set - {@link PropertyOptions.type} always returns `reference`
+   */
+  reference?: string;
 }

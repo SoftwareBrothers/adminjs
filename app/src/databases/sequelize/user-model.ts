@@ -1,4 +1,5 @@
 import { DataTypes, Model, UUIDV4 } from 'sequelize'
+import { BlogPostModel } from './blog-post-model'
 import { sequelize } from './connect'
 
 export interface UserInterface extends Model {
@@ -32,8 +33,4 @@ export const UserModel = sequelize.define<UserInterface>('Users', {
   },
 }, {
   // Other model options go here
-})
-
-UserModel.hasMany(UserModel, {
-  foreignKey: 'userId',
 })
