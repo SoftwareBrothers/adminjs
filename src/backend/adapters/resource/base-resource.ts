@@ -153,24 +153,6 @@ class BaseResource {
     throw new NotImplementedError('BaseResource#find')
   }
 
-
-  /**
-   * Populates records with references for given property.
-   *
-   * Example: Let say resource `Article` has property `user_id` and it is a reference
-   * to `User` resource. When you call this `User.populate([...articleRecords], userIdProperty)`
-   * it should populate `articleRecords` with corresponding users.
-   * So after that invoking `articleRecord.populated['user_id']` will return the user Record
-   *
-   * @param   {Array<BaseRecord>}  records  all records which should be populated
-   * @param   {BaseProperty}  property      property which is a reference to `this` Resource
-   *
-   * @return  {Promise<Array<BaseRecord>>}  populated records
-   */
-  async populate(records: Array<BaseRecord>, property: BaseProperty): Promise<Array<BaseRecord>> {
-    throw new NotImplementedError('BaseResource#populate')
-  }
-
   /**
    * Finds one Record in the Resource by its id
    *
@@ -238,8 +220,8 @@ class BaseResource {
   /**
    * Delete given record by id
    *
-   * @param  {String|Number}           id id of the Record
-   * @throws {ValidationError}         If there are validation errors it should be thrown
+   * @param  {String | Number}           id id of the Record
+   * @throws {ValidationError}           If there are validation errors it should be thrown
    * @abstract
    */
   async delete(id: string): Promise<void> {

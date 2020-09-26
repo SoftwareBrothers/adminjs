@@ -57,7 +57,7 @@ export const ListAction: Action<ListActionResponse> = {
       offset: (page - 1) * perPage,
       sort,
     })
-    const populatedRecords = await populator(records, listProperties)
+    const populatedRecords = await populator(records)
 
     // eslint-disable-next-line no-param-reassign
     context.records = populatedRecords

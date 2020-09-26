@@ -28,9 +28,14 @@ export interface PropertyJSON {
    */
   availableValues: Array<{label: string; value: string}> | null;
   /**
-   * Property uniq name/path
+   * Property uniq name
    */
   name: string;
+  /**
+   * Property uniq path. For top level properties - the same as name, but for nested
+   * properties it is separated with dot notation: `nested.property`
+   */
+  path: string;
   /**
    * Property label
    */

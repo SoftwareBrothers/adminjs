@@ -62,7 +62,6 @@ export default (): BaseResource => ({
   databaseType: sinon.stub().returns(expectedResult.databaseType),
   count: sinon.stub(),
   find: sinon.stub(),
-  populate: sinon.stub(),
   findOne: sinon.stub(),
   findMany: sinon.stub(),
   build: sinon.stub(),

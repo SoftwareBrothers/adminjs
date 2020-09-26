@@ -176,11 +176,11 @@ class BaseRecord {
   /**
    * Populate record relations
    *
-   * @param   {string}  propertyName  name of the property which should be populated
+   * @param   {string}  propertyPath  name of the property which should be populated
    * @param   {BaseRecord}  record    record to which property relates
    */
-  populate(propertyName: string, record: BaseRecord): void {
-    this.populated[propertyName] = record
+  populate(propertyPath: string, record: BaseRecord): void {
+    this.populated[propertyPath] = record
   }
 
   /**

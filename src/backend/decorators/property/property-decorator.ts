@@ -102,6 +102,13 @@ class PropertyDecorator {
   }
 
   /**
+   * Resource decorator of given property
+   */
+  resource(): ResourceDecorator {
+    return this._resource
+  }
+
+  /**
    * Label of a property
    *
    * @return  {string}
@@ -228,6 +235,7 @@ class PropertyDecorator {
       isRequired: this.isRequired(),
       availableValues: this.availableValues(),
       name: this.name(),
+      path: this.path,
       isDisabled: this.isDisabled(),
       label: this.label(),
       type: this.type(),

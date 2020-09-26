@@ -13,7 +13,7 @@ import { display } from './utils/display'
 import { ActionResponse, RecordActionResponse } from '../../../../backend/actions/action.interface'
 import mergeRecordResponse from '../../../hooks/use-record/merge-record-response'
 
-type RecordInListProps = {
+export type RecordInListProps = {
   resource: ResourceJSON;
   record: RecordJSON;
   actionPerformed?: (action: ActionResponse) => any;

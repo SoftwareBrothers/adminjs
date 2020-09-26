@@ -1,5 +1,5 @@
 import BaseRecord from '../../adapters/record/base-record'
-import PropertyDecorator from '../../decorators/property/property-decorator'
+import { populateProperty } from './populate-property'
 
 /**
  * Populates all records references. If the record has a reference to let say `user_id`
@@ -8,30 +8,20 @@ import PropertyDecorator from '../../decorators/property/property-decorator'
  * It mutates the `records` param
  *
  * @param {Array<BaseRecord>} records
- * @param {Array<PropertyDecorator>} [properties] when given it will only populate those properties
- * @private
  */
 export const populator = async (
   records: Array<BaseRecord>,
-  properties?: Array<PropertyDecorator>,
 ): Promise<Array<BaseRecord>> => {
   if (!records || !records.length) {
     return records
   }
-  const allProperties = Object.values(records[0].resource.decorate().properties)
-  const populateProperties = properties || allProperties
+  const resourceDecorator = records[0].resource.decorate()
+  const allProperties = Object.values(resourceDecorator.properties)
 
-  const references = populateProperties.filter(p => !!p.reference())
+  const references = allProperties.filter(p => !!p.reference())
 
   await Promise.all(references.map(async (propertyDecorator) => {
-    const referenceResource = propertyDecorator.reference()
-    if (!referenceResource) {
-      throw new Error([
-        `There is no reference resource named: "${propertyDecorator.property.reference}"`,
-        `for property: "${propertyDecorator.name}"`,
-      ].join('\n'))
-    }
-    await referenceResource.populate(records, propertyDecorator.property)
+    await populateProperty(records, propertyDecorator)
   }))
   return records
 }

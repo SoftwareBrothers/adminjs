@@ -71,12 +71,6 @@ describe('BaseResource', function () {
     })
   })
 
-  describe('#populate', function () {
-    it('throws NotImplementedError', async function () {
-      expect(resource.populate([], {} as BaseProperty)).to.be.rejectedWith(NotImplementedError)
-    })
-  })
-
   describe('#findOne', function () {
     it('throws NotImplementedError', async function () {
       expect(resource.findOne('someId')).to.be.rejectedWith(NotImplementedError)
