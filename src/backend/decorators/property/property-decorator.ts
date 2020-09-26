@@ -145,6 +145,13 @@ class PropertyDecorator {
     return null
   }
 
+  isArray(): boolean {
+    if (typeof this.options.isArray !== 'undefined') {
+      return !!this.options.isArray
+    }
+    return this.property.isArray()
+  }
+
   /**
    * Indicates if given property should be visible
    *
@@ -241,7 +248,7 @@ class PropertyDecorator {
       subProperties: this.subProperties()
         .filter(subProperty => !where || subProperty.isVisible(where))
         .map(subProperty => subProperty.toJSON(where)),
-      isArray: this.property.isArray(),
+      isArray: this.isArray(),
       resourceId: this._resource.id(),
     }
   }

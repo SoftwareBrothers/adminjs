@@ -6,9 +6,7 @@ export interface BlogPostInterface extends Model {
   id: string;
   title: string;
   body?: string;
-  meta?: {
-    tags: Array<string>;
-  };
+  meta?: Array<string>;
 }
 
 export const BlogPostModel = sequelize.define<BlogPostInterface>('BlogPosts', {

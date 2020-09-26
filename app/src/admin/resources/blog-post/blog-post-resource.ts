@@ -4,9 +4,9 @@ import { ContentParent } from '../../parents'
 export const BlogPostResource: ResourceOptions = {
   parent: ContentParent,
   properties: {
-    'meta.tags' {
+    meta: {
       type: 'string',
       isArray: true,
-    }
-  }
+    },
+  },
 }

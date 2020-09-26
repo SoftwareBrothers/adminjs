@@ -32,10 +32,15 @@ export default interface PropertyOptions {
    */
   isId?: boolean;
   /**
-   * Of given property should be treated as an "title property". Title property is "clickable" when
-   * user sees the record in a list or show views.
+   * One of given property should be treated as an "title property". Title property is "clickable"
+   * when user sees the record in a list or show views.
    */
   isTitle?: boolean;
+
+  /**
+   * Indicates if given property should be treated as array of elements.
+   */
+  isArray?: boolean;
   /**
    * position of the field in a list,
    * title field (isTitle) gets position -1 by default other
