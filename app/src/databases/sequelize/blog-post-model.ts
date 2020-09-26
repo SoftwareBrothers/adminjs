@@ -6,6 +6,9 @@ export interface BlogPostInterface extends Model {
   id: string;
   title: string;
   body?: string;
+  meta?: {
+    tags: Array<string>;
+  };
 }
 
 export const BlogPostModel = sequelize.define<BlogPostInterface>('BlogPosts', {
@@ -20,6 +23,9 @@ export const BlogPostModel = sequelize.define<BlogPostInterface>('BlogPosts', {
   },
   body: {
     type: DataTypes.TEXT,
+  },
+  meta: {
+    type: DataTypes.JSONB,
   },
 }, {
   // Other model options go here

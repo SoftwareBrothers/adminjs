@@ -68,46 +68,6 @@ describe('ResourceDecorator', function () {
     })
   })
 
-  describe('#decorateProperties', function () {
-    beforeEach(function () {
-      this.PropertyDecoratorSpy = sinon.spy<any>(PropertyDecorator)
-      this.defaultProperties = expectedResult.properties
-      this.originalPropertyName = this.defaultProperties[1].name()
-      this.defaultPropertyName = this.defaultProperties[0].name()
-      this.defaultPropertyOptions = { enable: false, isSortable: false }
-      this.customPropertyOptions = { enable: true, sortable: false }
-      this.options = {
-        properties: {
-          [this.defaultPropertyName]: this.defaultPropertyOptions,
-          newProperty: this.customPropertyOptions,
-        },
-      }
-      this.decorator = new ResourceDecorator({ ...args, options: this.options })
-    })
-
-    it('decorates all default properties - default and newProperty', function () {
-      expect(
-        Object.keys(this.decorator.properties),
-      ).to.have.lengthOf(this.defaultProperties.length + 1)
-    })
-
-    it('returns default property with options', function () {
-      expect(this.decorator.properties[this.defaultPropertyName].options).to.deep.equal(
-        this.defaultPropertyOptions,
-      )
-    })
-
-    it('returns custom property with options', function () {
-      expect(this.decorator.properties.newProperty.options).to.deep.equal(
-        this.customPropertyOptions,
-      )
-    })
-
-    it('does not pass options where there were not given', function () {
-      expect(this.decorator.properties[this.originalPropertyName].options).to.deep.equal({})
-    })
-  })
-
   describe('#getProperties', function () {
     context('all properties are visible', function () {
       beforeEach(function () {

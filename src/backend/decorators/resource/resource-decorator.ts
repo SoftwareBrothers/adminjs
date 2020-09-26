@@ -1,15 +1,22 @@
-import * as _ from 'lodash'
-import * as utils from './utils'
+import { DecoratedActions } from './utils/decorate-actions'
 
-import { BaseProperty, BaseResource, BaseRecord } from '../../adapters'
+import { BaseResource, BaseRecord } from '../../adapters'
 import { PropertyDecorator, ActionDecorator } from '..'
 import ViewHelpers from '../../utils/view-helpers/view-helpers'
 import AdminBro from '../../../admin-bro'
 
 import { ResourceOptions } from './resource-options.interface'
-import { Action, ActionResponse, ACTIONS } from '../../actions'
 import { CurrentAdmin } from '../../../current-admin.interface'
 import { ResourceJSON, PropertyJSON, PropertyPlace } from '../../../frontend/interfaces'
+import {
+  decorateActions,
+  decorateProperties,
+  getNavigation,
+  pathToParts,
+  flatSubProperties,
+  findSubProperty,
+  DecoratedProperties,
+} from './utils'
 
 
 /**
@@ -26,11 +33,11 @@ export const DEFAULT_MAX_COLUMNS_IN_LIST = 8
  * @category Decorators
  */
 class ResourceDecorator {
-  public properties: {[key: string]: PropertyDecorator}
+  public properties: DecoratedProperties
 
   public options: ResourceOptions
 
-  public actions: {[key: string]: ActionDecorator}
+  public actions: DecoratedActions
 
   private _resource: BaseResource
 
@@ -66,86 +73,13 @@ class ResourceDecorator {
      * List of all decorated properties
      * @type {Array<PropertyDecorator>}
      */
-    this.properties = this.decorateProperties()
+    this.properties = decorateProperties(resource, admin, this)
 
     /**
      * Actions for a resource
      * @type {Object<String, ActionDecorator>}
      */
-    this.actions = this.decorateActions()
-  }
-
-  /**
-   * Used to create an {@link ActionDecorator} based on both
-   * {@link AdminBro.ACTIONS default actions} and actions specified by the user
-   * via {@link AdminBroOptions}
-   *
-   * @returns {Record<string, ActionDecorator>}
-   */
-  decorateActions(): {[key: string]: ActionDecorator} {
-    // in the end we merge actions defined by the user with the default actions.
-    // since _.merge is a deep merge it also overrides defaults with the parameters
-    // specified by the user.
-    const actions = _.merge({}, ACTIONS, this.options.actions || {})
-    const returnActions = {}
-    // setting default values for actions
-    Object.keys(actions).forEach((key: string) => {
-      const action: Action<ActionResponse> = {
-        name: actions[key].name || key,
-        label: actions[key].label || key,
-        actionType: actions[key].actionType || ['resource'],
-        handler: actions[key].handler || (async (): Promise<void> => {
-          // eslint-disable-next-line no-console
-          console.log('You have to define handler function')
-        }),
-        ...actions[key],
-      }
-
-      returnActions[key] = new ActionDecorator({
-        action,
-        admin: this._admin,
-        resource: this._resource,
-      })
-    })
-
-    return returnActions
-  }
-
-  /**
-   * Initializes PropertyDecorator for all properties within a resource. When
-   * user passes new property in the options - it will be created as well.
-   *
-   * @returns {Object<string,PropertyDecorator>}
-   * @private
-   */
-  decorateProperties(): {[key: string]: PropertyDecorator} {
-    const resourceProperties = this._resource.properties()
-    // decorate all existing properties
-    const properties = resourceProperties.reduce((memo, property) => {
-      const decorator = new PropertyDecorator({
-        property,
-        admin: this._admin,
-        options: this.options.properties && this.options.properties[property.name()],
-        resource: this,
-      })
-      return { ...memo, [property.name()]: decorator }
-    }, {})
-
-    if (this.options.properties) {
-    // decorate all properties user gave in options but they don't exist in the resource
-      Object.keys(this.options.properties).forEach((key) => {
-        if (!properties[key] && !key.match(/\./)) {
-          const property = new BaseProperty({ path: key, isSortable: false })
-          properties[key] = new PropertyDecorator({
-            property,
-            admin: this._admin,
-            options: this.options.properties && this.options.properties[key],
-            resource: this,
-          })
-        }
-      })
-    }
-    return properties
+    this.actions = decorateActions(resource, admin, this)
   }
 
   /**
@@ -170,7 +104,7 @@ class ResourceDecorator {
    * @return {Parent}   ResourceJSON['parent']}
    */
   getNavigation(): ResourceJSON['navigation'] {
-    return utils.getNavigation(this.options, this._resource)
+    return getNavigation(this.options, this._resource)
   }
 
   /**
@@ -181,7 +115,7 @@ class ResourceDecorator {
    * @return  {PropertyDecorator}
    */
   getPropertyByKey(propertyPath: string): PropertyDecorator | null {
-    const parts = utils.pathToParts(propertyPath)
+    const parts = pathToParts(propertyPath)
     const fullPath = parts[parts.length - 1]
     const property = this.properties[fullPath]
 
@@ -194,7 +128,7 @@ class ResourceDecorator {
         ))
         if (mixedPropertyPath) {
           const mixedProperty = this.properties[mixedPropertyPath]
-          const subProperty = utils.findSubProperty(parts, mixedProperty)
+          const subProperty = findSubProperty(parts, mixedProperty)
 
           if (subProperty) {
             return subProperty
@@ -254,7 +188,7 @@ class ResourceDecorator {
     return Object.keys(this.properties).reduce((memo, propertyName) => {
       const property = this.properties[propertyName]
 
-      const subProperties = utils.flatSubProperties(property)
+      const subProperties = flatSubProperties(property)
       return {
         ...memo,
         [propertyName]: property.toJSON(),
@@ -391,5 +325,3 @@ class ResourceDecorator {
 }
 
 export default ResourceDecorator
-
-export { utils as exportedUtils }
