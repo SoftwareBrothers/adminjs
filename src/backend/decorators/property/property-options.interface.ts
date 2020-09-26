@@ -1,18 +1,5 @@
 import { PropertyType } from '../../adapters/property/base-property'
 
-export enum AvailablePropertyOptions {
-  name = 'name',
-  isVisible = 'isVisible',
-  components = 'components',
-  type = 'type',
-  isId = 'isId',
-  isTitle = 'isTitle',
-  position = 'position',
-  availableValues = 'availableValues',
-  isSortable = 'isSortable',
-  isRequired = 'isRequired'
-}
-
 /**
  * Options passed to a given property
  */

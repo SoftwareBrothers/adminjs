@@ -1,9 +1,10 @@
 import AdminBro from '../../../admin-bro'
-import PropertyOptions, { AvailablePropertyOptions } from './property-options.interface'
+import PropertyOptions from './property-options.interface'
 import BaseResource from '../../adapters/resource/base-resource'
 import BaseProperty, { PropertyType } from '../../adapters/property/base-property'
 import ResourceDecorator from '../resource/resource-decorator'
 import { PropertyPlace, PropertyJSON } from '../../../frontend/interfaces'
+import { overrideFromOptions } from './utils'
 
 /**
  * Decorates property
@@ -62,20 +63,7 @@ class PropertyDecorator {
    * @returns {boolean}
    */
   isSortable(): boolean {
-    return this.overrideFromOptions(AvailablePropertyOptions.isSortable)
-  }
-
-  overrideFromOptions<T>(
-    optionName: AvailablePropertyOptions,
-    defaultValue?: () => T,
-  ): T {
-    if (typeof this.options[optionName] === 'undefined') {
-      if (defaultValue) {
-        return defaultValue()
-      }
-      return this.property[optionName]()
-    }
-    return this.options[optionName] as T
+    return !!overrideFromOptions('isSortable', this.property, this.options)
   }
 
   /**
@@ -98,7 +86,7 @@ class PropertyDecorator {
    * @returns {string}
    */
   name(): string {
-    return this.overrideFromOptions(AvailablePropertyOptions.name)
+    return this.property.name()
   }
 
   /**
@@ -123,7 +111,8 @@ class PropertyDecorator {
    * @returns {PropertyType}
    */
   type(): PropertyType {
-    return this.overrideFromOptions(AvailablePropertyOptions.type)
+    // return this.overrideFromOptions(AvailablePropertyOptions.type)
+    return overrideFromOptions('type', this.property, this.options) as PropertyType
   }
 
   /**
@@ -133,20 +122,21 @@ class PropertyDecorator {
    * @returns {Array<{value: string, label: string}>}
    */
   availableValues(): null | Array<{value: string; label: string}> {
-    return this.overrideFromOptions(AvailablePropertyOptions.availableValues, () => {
-      const values = this.property.availableValues()
-      if (values) {
-        return values.map(val => ({
-          value: val,
-          label: this._admin.translateProperty(
-            `${this.path}.${val}`,
-            this._resource.id(),
-            { defaultValue: val },
-          ),
-        }))
-      }
-      return null
-    })
+    if (this.options.availableValues) {
+      return this.options.availableValues
+    }
+    const values = this.property.availableValues()
+    if (values) {
+      return values.map(val => ({
+        value: val,
+        label: this._admin.translateProperty(
+          `${this.path}.${val}`,
+          this._resource.id(),
+          { defaultValue: val },
+        ),
+      }))
+    }
+    return null
   }
 
   /**
@@ -155,7 +145,7 @@ class PropertyDecorator {
    * @param {'list' | 'edit' | 'show' | 'filter'} where
    */
   isVisible(where: PropertyPlace): boolean {
-    if (typeof this.options.isVisible === 'object') {
+    if (typeof this.options.isVisible === 'object' && this.options.isVisible !== 'null') {
       return !!this.options.isVisible[where]
     }
     if (typeof this.options.isVisible === 'boolean') {
@@ -173,11 +163,12 @@ class PropertyDecorator {
    * @return {number}
    */
   position(): number {
-    return this.overrideFromOptions(AvailablePropertyOptions.position, () => {
-      if (this.isTitle()) { return -1 }
-      if (this.isId()) { return 0 }
-      return 100 + this.property.position()
-    })
+    if (this.options.position) {
+      return this.options.position
+    }
+    if (this.isTitle()) { return -1 }
+    if (this.isId()) { return 0 }
+    return 100 + this.property.position()
   }
 
   /**
@@ -186,7 +177,7 @@ class PropertyDecorator {
    * @return {boolean}
    */
   isId(): boolean {
-    return !!this.overrideFromOptions(AvailablePropertyOptions.isId)
+    return !!overrideFromOptions('isId', this.property, this.options)
   }
 
   /**
@@ -195,7 +186,7 @@ class PropertyDecorator {
    * @return {boolean}
    */
   isRequired(): boolean {
-    return !!this.overrideFromOptions(AvailablePropertyOptions.isRequired)
+    return !!overrideFromOptions('isRequired', this.property, this.options)
   }
 
   /**
@@ -206,7 +197,7 @@ class PropertyDecorator {
    * @return {boolean}
    */
   isTitle(): boolean {
-    return !!this.overrideFromOptions(AvailablePropertyOptions.isTitle)
+    return !!overrideFromOptions('isTitle', this.property, this.options)
   }
 
   /**

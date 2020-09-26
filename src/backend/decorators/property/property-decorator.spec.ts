@@ -44,48 +44,6 @@ describe('PropertyDecorator', function () {
     })
   })
 
-  const fields = ['isId', 'isTitle', 'type', 'name']
-
-  // eslint-disable-next-line mocha/no-setup-in-describe
-  fields.forEach((field) => {
-    describe(`#${field}`, function () {
-      it('passes the execution to the overrideFromOptions', function () {
-        const stub = sinon.stub(PropertyDecorator.prototype, 'overrideFromOptions')
-        new PropertyDecorator(args)[field]()
-        // for some reason chai don't know that calledWith is a property
-        const assertion = expect(stub).to.have.been as any
-        assertion.calledWith(field)
-      })
-    })
-  })
-
-  describe('#overrideFromOptions', function () {
-    beforeEach(function () {
-      this.field = 'name'
-      this.value = 'valueSetByAdapter'
-      sinon.stub(BaseProperty.prototype, this.field).returns(this.value)
-    })
-
-    it('passes the execution to the BaseProperty when no option is given', function () {
-      const res = new PropertyDecorator(args).overrideFromOptions(this.field)
-      expect(res).to.equal(this.value)
-    })
-
-    it('returns the value from options when they were specified', function () {
-      this.overriddenValue = 'overriddenValue'
-      const res = new PropertyDecorator({
-        ...args,
-        options: { [this.field]: this.overriddenValue } }).overrideFromOptions(this.field)
-      expect(res).to.equal(this.overriddenValue)
-    })
-
-    it('calls the modifier function when no options were given', function () {
-      const newValue = 'someModifierFunctionValue'
-      const res = new PropertyDecorator(args).overrideFromOptions(this.field, () => newValue)
-      expect(res).to.equal(newValue)
-    })
-  })
-
   describe('#label', function () {
     it('returns translated label', function () {
       sinon.stub(BaseProperty.prototype, 'name').returns('normalName')
