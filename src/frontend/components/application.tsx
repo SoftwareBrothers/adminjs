@@ -1,9 +1,10 @@
 /* eslint-disable react/no-children-prop */
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Switch, Route } from 'react-router-dom'
 import { createGlobalStyle } from 'styled-components'
 import { Box, Overlay, Reset } from '@admin-bro/design-system'
 
+import { useLocation } from 'react-router'
 import ViewHelpers from '../../backend/utils/view-helpers/view-helpers'
 import Sidebar from './app/sidebar/sidebar'
 import TopBar from './app/top-bar'
@@ -12,7 +13,6 @@ import Notice from './app/notice'
 import {
   Dashboard, ResourceAction, RecordAction, Page, BulkAction, Resource,
 } from './routes'
-import { useLocalStorage } from '../hooks'
 
 const GlobalStyle = createGlobalStyle`
   html, body, #app {
@@ -24,9 +24,15 @@ const GlobalStyle = createGlobalStyle`
   }
 `
 
+const h = new ViewHelpers()
+
 const App: React.FC = () => {
-  const [sidebarVisible, toggleSidebar] = useLocalStorage('sidebarVisible', false)
-  const h = new ViewHelpers()
+  const [sidebarVisible, toggleSidebar] = useState(false)
+  const location = useLocation()
+
+  useEffect(() => {
+    if (sidebarVisible) { toggleSidebar(false) }
+  }, [location])
 
   const resourceId = ':resourceId'
   const actionName = ':actionName'
