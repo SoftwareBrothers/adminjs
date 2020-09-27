@@ -8,6 +8,7 @@ import { populateProperty } from './populate-property'
  * It mutates the `records` param
  *
  * @param {Array<BaseRecord>} records
+ * @new In version 3.3
  */
 export const populator = async (
   records: Array<BaseRecord>,

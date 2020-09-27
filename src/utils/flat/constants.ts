@@ -1,6 +1,9 @@
 /**
  *
  * @memberof module:flat
- * @new
+ * @new In version 3.3
  */
-export const DELIMITER = '.'
+const DELIMITER = '.'
+
+
+export { DELIMITER }

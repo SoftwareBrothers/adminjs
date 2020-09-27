@@ -39,6 +39,7 @@ export default interface PropertyOptions {
 
   /**
    * Indicates if given property should be treated as array of elements.
+   * @new In version 3.3
    */
   isArray?: boolean;
   /**
@@ -82,6 +83,7 @@ export default interface PropertyOptions {
   /**
    * Name of the resource to which this property should be a reference.
    * If set - {@link PropertyOptions.type} always returns `reference`
+   * @new In version 3.3
    */
   reference?: string;
 }

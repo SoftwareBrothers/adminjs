@@ -12,7 +12,7 @@ const TEMP_HOLDING_KEY = 'TEMP_HOLDING_KEY'
  * @param {FlattenParams} params
  * @param {string} property
  */
-export const get = (params: FlattenParams = {}, property: string): any => {
+const get = (params: FlattenParams = {}, property: string): any => {
   if (params[property]) {
     return params[property]
   }
@@ -30,3 +30,5 @@ export const get = (params: FlattenParams = {}, property: string): any => {
   }
   return undefined
 }
+
+export { get }

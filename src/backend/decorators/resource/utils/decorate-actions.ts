@@ -14,6 +14,7 @@ export type DecoratedActions = {[key: string]: ActionDecorator}
  * via {@link AdminBroOptions}
  *
  * @returns {Record<string, ActionDecorator>}
+ * @private
  */
 export function decorateActions(
   resource: BaseResource,

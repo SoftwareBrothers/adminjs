@@ -6,9 +6,9 @@ import { FlattenParams } from '.'
  * @memberof module:flat
  * @param {FlattenParams} params
  * @param {string} property
- * @new
+ * @new In version 3.3
  */
-export const filterParams = (params: FlattenParams, property: string): FlattenParams => {
+const filterParams = (params: FlattenParams, property: string): FlattenParams => {
   const regex = propertyKeyRegex(property)
 
   // filter all keys which starts with property
@@ -19,3 +19,5 @@ export const filterParams = (params: FlattenParams, property: string): FlattenPa
       [key]: (params[key] as string),
     }), {} as FlattenParams)
 }
+
+export { filterParams }

@@ -23,8 +23,21 @@ export type FlatModuleType = {
  *
  * Helpers gathered in this module will help you manage them
  *
+ * ### Usage
+ *
+ * ```javascript
+ * // on the frontend (i.e in components)
+ * import { flat } from 'admin-bro'
+ *
+ * // on the backend (i.e. in action hooks)
+ * const { flat } = require('admin-bro')
+ *
+ * flat.set(...)
+ * ```
+ *
  * @module flat
- * @new
+ * @name flat
+ * @new In version 3.3
  */
 export const flat: FlatModuleType = {
   /**

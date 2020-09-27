@@ -7,6 +7,7 @@ import PropertyDecorator from '../../decorators/property/property-decorator'
  *
  * @param {Array<BaseRecord>} records   array of records to populate
  * @param {PropertyDecorator} property  Decorator for the reference property to populate
+ * @new In version 3.3
  */
 export const populateProperty = async (
   records: Array<BaseRecord> | null,

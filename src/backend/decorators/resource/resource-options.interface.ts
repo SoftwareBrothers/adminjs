@@ -80,13 +80,17 @@ export interface ResourceOptions {
    * - when you set it to null - resource will be top level, but without the icon
    * - finally you can set the icon but leave name as `null`. In such case resource will be
    *   top level and it will have an icon.
+   * @new In version 3.3
    */
   navigation?: {
     name?: string | null;
     icon?: string;
   } | string | null;
 
-  // TODO: deprecate
+
+  /**
+   * @deprecated in favour of {@link ResourceOptions.navigation}
+   */
   parent?: {
     name?: string | null;
     icon?: string;
