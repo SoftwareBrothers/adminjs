@@ -1,5 +1,5 @@
-import * as flat from 'flat'
 import _ from 'lodash'
+import { flat } from '../../../utils/flat'
 import { ParamsType } from './params.type'
 import BaseResource from '../resource/base-resource'
 import ValidationError, { RecordError, PropertyErrors } from '../../utils/errors/validation-error'
@@ -51,30 +51,18 @@ class BaseRecord {
    * @return {any}              value for given field
    */
   param(path: string): any {
-    if (this.params && this.params[path]) {
-      return this.params[path]
-    }
-    const subParams = this.namespaceParams(path)
-    if (subParams) {
-      const unflattenSubParams = flat.unflatten(subParams) as Record<string, any>
-      return path.split('.').reduce((m, v) => m[v], unflattenSubParams)
-    }
-    return undefined
+    return flat.get(this.params, path)
   }
 
   /**
    * Returns object containing all params keys starting with prefix
+   *
    * @param   {string}  prefix
    *
    * @return  {object | undefined}
    */
   namespaceParams(prefix: string): Record<string, any> | void {
-    const regex = new RegExp(`^${prefix}`)
-    const keys = Object.keys(this.params).filter(key => key.match(regex))
-    if (keys.length) {
-      return keys.reduce((memo, key) => ({ ...memo, [key]: this.params[key] }), {})
-    }
-    return undefined
+    return flat.filterParams(this.params, prefix)
   }
 
   /**

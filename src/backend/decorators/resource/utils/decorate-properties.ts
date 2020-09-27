@@ -33,13 +33,15 @@ export function decorateProperties(
   // decorate all properties user gave in options but they don't exist in the resource
   if (options.properties) {
     Object.keys(options.properties).forEach((key) => {
-      const property = new BaseProperty({ path: key, isSortable: false })
-      properties[key] = new PropertyDecorator({
-        property,
-        admin,
-        options: options.properties && options.properties[key],
-        resource: decorator,
-      })
+      if (!properties[key]) { // checking if property hasn't been decorated yet
+        const property = new BaseProperty({ path: key, isSortable: false })
+        properties[key] = new PropertyDecorator({
+          property,
+          admin,
+          options: options.properties && options.properties[key],
+          resource: decorator,
+        })
+      }
     })
   }
   return properties

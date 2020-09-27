@@ -4,7 +4,6 @@ import { BrowserRouter } from 'react-router-dom'
 import { ThemeProvider } from 'styled-components'
 import { initReactI18next } from 'react-i18next'
 import i18n from 'i18next'
-import flat from 'flat'
 
 import App from './components/application'
 import BasePropertyComponent from './components/property-type'
@@ -14,6 +13,7 @@ import * as AppComponents from './components/app'
 import * as Hooks from './hooks'
 import ApiClient from './utils/api-client'
 import withNotice from './hoc/with-notice'
+import { flat } from '../utils/flat'
 
 const env = {
   NODE_ENV: process.env.NODE_ENV || 'development',
@@ -58,6 +58,8 @@ export default {
   env,
   ...AppComponents,
   ...Hooks,
+  flat,
+  // TODO: remove this from the next release
   flatten: flat.flatten,
   unflatten: flat.unflatten,
 }

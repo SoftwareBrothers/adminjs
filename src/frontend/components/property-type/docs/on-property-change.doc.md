@@ -13,7 +13,6 @@ property: `name`.
 
 ```javascript
   import React from 'react'
-  import { unflatten } from 'admin-bro'
   import { Button, Box } from '@admin-bro/design-system'
 
   const ValueTrigger = (props) => {

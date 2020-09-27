@@ -1,10 +1,6 @@
+import { DELIMITER } from '../../../utils/flat/constants'
 import { BaseRecord } from '../../adapters'
 import PropertyDecorator from '../../decorators/property/property-decorator'
-
-export type PopulatorNarrowedProperty = Pick<
-  InstanceType<typeof PropertyDecorator>,
-  'resource' | 'reference' | 'property' | 'path'
->
 
 /**
  * It populates one property in given records
@@ -14,7 +10,7 @@ export type PopulatorNarrowedProperty = Pick<
  */
 export const populateProperty = async (
   records: Array<BaseRecord> | null,
-  property: PopulatorNarrowedProperty,
+  property: PropertyDecorator,
 ): Promise<Array<BaseRecord> | null> => {
   const decoratedResource = property.resource()
 
@@ -44,6 +40,13 @@ export const populateProperty = async (
     // BaseResource#findMany (which we will use) might break for nulls
     if (!foreignKeyValue) {
       return memo
+    }
+    // array properties returns arrays so we have to take the all into consideration
+    if (property.isArray()) {
+      return foreignKeyValue.reduce((arrayMemo, valueInArray) => ({
+        ...arrayMemo,
+        [valueInArray]: null,
+      }), memo)
     }
     return {
       ...memo,
@@ -76,8 +79,20 @@ export const populateProperty = async (
 
   return records.map((record) => {
     // we set record.populated['userId'] = externalIdsMap[record.param('userId)]
+    // but this can also be an array - we have to check it
     const foreignKeyValue = record.param(property.path)
-    record.populate(property.path, externalIdsMap[foreignKeyValue])
+
+    if (Array.isArray(foreignKeyValue)) {
+      foreignKeyValue.forEach((foreignKeyValueItem, index) => {
+        record.populate(
+          [property.path, index].join(DELIMITER),
+          externalIdsMap[foreignKeyValueItem],
+        )
+      })
+    } else {
+      record.populate(property.path, externalIdsMap[foreignKeyValue])
+    }
+
     return record
   })
 }

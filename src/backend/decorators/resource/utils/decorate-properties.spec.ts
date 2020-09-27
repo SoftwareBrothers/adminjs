@@ -28,12 +28,14 @@ describe('decorateProperties', () => {
 
   context('One property with options', () => {
     let decoratedProperties: DecoratedProperties
-    const newType = 'boolean'
+    const isSortable = true
+    const newIsSortable = false
+    const type = 'boolean'
 
     beforeEach(() => {
-      property = new BaseProperty({ path, type: 'string' })
+      property = new BaseProperty({ path, type, isSortable })
       resource.properties.returns([property])
-      decorator.options = { properties: { [path]: { type: newType } } }
+      decorator.options = { properties: { [path]: { isSortable: newIsSortable } } }
 
       decoratedProperties = decorateProperties(resource, admin, decorator)
     })
@@ -43,10 +45,16 @@ describe('decorateProperties', () => {
       expect(decoratedProperties[path]).not.to.be.undefined
     })
 
-    it('decorates it that the type is updated', () => {
+    it('decorates it that the isSortable is updated', () => {
       const decorated = decoratedProperties[path]
 
-      expect(decorated.type()).to.eq(newType)
+      expect(decorated.isSortable()).to.eq(newIsSortable)
+    })
+
+    it('leaves all other fields like type unchanged', () => {
+      const decorated = decoratedProperties[path]
+
+      expect(decorated.type()).to.eq(type)
     })
   })
 

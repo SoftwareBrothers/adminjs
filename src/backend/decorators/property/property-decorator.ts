@@ -115,7 +115,7 @@ class PropertyDecorator {
    * @returns {PropertyType}
    */
   type(): PropertyType {
-    if (this.options.reference) {
+    if (typeof this.options.reference === 'string') {
       return 'reference'
     }
     return overrideFromOptions('type', this.property, this.options) as PropertyType
