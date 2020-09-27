@@ -1,15 +1,24 @@
 {
   "name": "app",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "build/src/firebase.js",
   "license": "MIT",
   "scripts": {
     "build": "tsc",
+    "bundle": "NODE_ENV=production node bin/bundle",
     "start": "yarn build && node build/src/index.js",
     "dev": "concurrently \"wait-on build/src/index.js && nodemon node build/src/index.js\" \"yarn build --watch\"",
     "clean": "rm -rf build && mkdir build",
     "cypress:open": "cypress open",
-    "cypress:run": "cypress run"
+    "cypress:run": "cypress run",
+    "ff:serve": "yarn build && firebase emulators:start --only functions,hosting",
+    "ff:shell": "yarn build && firebase functions:shell",
+    "ff:start": "yarn shell",
+    "ff:deploy": "yarn bundle && firebase deploy --only functions,hosting",
+    "ff:logs": "firebase functions:log"
+  },
+  "engines": {
+    "node": "10"
   },
   "devDependencies": {
     "@types/express": "^4.17.7",
@@ -22,9 +31,10 @@
   },
   "dependencies": {
     "@admin-bro/express": "^3.0.0",
+    "@admin-bro/firebase-functions": "^3.0.1",
     "@admin-bro/passwords": "^1.0.3",
     "@admin-bro/sequelize": "1.1.1",
-    "admin-bro": "^3.1.1",
+    "admin-bro": "^3.3.0-beta.7",
     "argon2": "^0.27.0",
     "connect-session-sequelize": "^7.0.3",
     "dotenv": "^8.2.0",
@@ -32,6 +42,8 @@
     "express": "^4.17.1",
     "express-formidable": "^1.2.0",
     "express-session": "^1.17.1",
+    "firebase-admin": "^8.10.0",
+    "firebase-functions": "^3.6.1",
     "morgan": "^1.10.0",
     "pg": "^8.3.0",
     "sequelize": "^6.3.5"
