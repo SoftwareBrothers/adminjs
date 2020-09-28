@@ -1,7 +1,6 @@
 import React from 'react'
 import { CurrentUserNav, Box, CurrentUserNavProps } from '@admin-bro/design-system'
 
-import { useHistory } from 'react-router'
 import { CurrentAdmin } from '../../../current-admin.interface'
 import { useTranslation } from '../../hooks'
 import allowOverride from '../../hoc/allow-override'
@@ -16,13 +15,12 @@ export type LoggedInProps = {
 const LoggedIn: React.FC<LoggedInProps> = (props) => {
   const { session, paths } = props
   const { translateButton } = useTranslation()
-  const history = useHistory()
 
   const dropActions: CurrentUserNavProps['dropActions'] = [{
     label: translateButton('logout'),
     onClick: (event: Event): void => {
       event.preventDefault()
-      history.push(paths.logoutPath)
+      window.location.href = paths.logoutPath
     },
     icon: 'Logout',
   }]
