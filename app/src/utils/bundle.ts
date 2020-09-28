@@ -13,6 +13,12 @@ export const bundle = async () => {
     './node_modules/admin-bro/lib/frontend/assets/scripts/app-bundle.production.js',
     './public/app.bundle.js',
   )
+
+  await fs.promises.copyFile(
+    './node_modules/admin-bro/lib/frontend/assets/images/logo.svg',
+    './public/logo.svg',
+  )
+
   await fs.promises.copyFile(
     './node_modules/admin-bro/lib/frontend/assets/scripts/global-bundle.production.js',
     './public/global.bundle.js',

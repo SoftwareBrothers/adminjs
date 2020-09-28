@@ -1,9 +1,8 @@
 import merge from 'lodash/merge'
-import slash from 'slash'
-import path from 'path'
 import AdminBro from '../../../admin-bro'
 import { CurrentAdmin } from '../../../current-admin.interface'
 import { BrandingOptions, Assets } from '../../../admin-bro-options.interface'
+import ViewHelpers from '../view-helpers/view-helpers'
 
 
 const defaultBranding = {
@@ -32,10 +31,9 @@ export const getBranding = async (
   currentAdmin?: CurrentAdmin,
 ): Promise<BrandingOptions> => {
   const { branding } = admin.options
-  const defaultLogo = slash(path.join(
-    admin.options.rootPath,
-    '/frontend/assets/logo.svg',
-  ))
+
+  const h = new ViewHelpers(admin)
+  const defaultLogo = h.assetPath('logo.svg')
 
   const computed = typeof branding === 'function'
     ? await branding(currentAdmin)
