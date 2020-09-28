@@ -5,14 +5,10 @@ import * as BlogPostAdmin from './resources/blog-post'
 import * as BrandAdmin from './resources/brand'
 import * as ProductAdmin from './resources/product'
 
-const rootPath = '/'
-const loginPath = '/login'
-const logoutPath = '/logout'
+const rootPath = '/admin'
 
 export const options: AdminBroOptions = {
   rootPath,
-  loginPath,
-  logoutPath,
   resources: [
     { resource: models.User, ...UserAdmin },
     { resource: models.BlogPost, ...BlogPostAdmin },

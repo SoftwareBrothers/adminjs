@@ -9,6 +9,12 @@
       "firebase.json",
       "**/.*",
       "**/node_modules/**"
+    ],
+    "rewrites": [
+      {
+        "source": "/admin/**",
+        "function": "admin"
+      }
     ]
   },
   "emulators": {
