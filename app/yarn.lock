@@ -20,10 +20,10 @@
   resolved "https://registry.yarnpkg.com/@admin-bro/express/-/express-3.0.1.tgz#21e6693cce257da6f25e75be28b4e2b7ef387531"
   integrity sha512-CNGZxdMBFhhr9WGDKmdEpuxYumryO9VNZN+HK93o+Xjqx7lDfFk7smUDFRxmfoHsmaI4QRpErmvswNwpGGzevA==
 
-"@admin-bro/firebase-functions@^3.0.1":
-  version "3.0.1"
-  resolved "https://registry.yarnpkg.com/@admin-bro/firebase-functions/-/firebase-functions-3.0.1.tgz#52a1197698639c31d9b014bf94fb149cd591ee0d"
-  integrity sha512-hY+rTP/rM0eeZyeHg9SxJKVGIafYPMgRALZrqWG1EMNxXyj6imMre3mgJ2gn1xwhvL+m6xEOOQq+LpcipI7KuA==
+"@admin-bro/firebase-functions@^3.1.0-beta.5":
+  version "3.1.0-beta.5"
+  resolved "https://registry.yarnpkg.com/@admin-bro/firebase-functions/-/firebase-functions-3.1.0-beta.5.tgz#3ed2ac7d16f490ae8ef430dfa9a416e034b18340"
+  integrity sha512-wihX9AalvzcMO2DbBHxvqd7M/LG4y4OpffJNY+j4Gy0b3c3n8CSjzCHw66dQCf+/aezR51DILKjZgvnVBN6bAA==
   dependencies:
     busboy "^0.3.1"
     cookie "^0.4.0"
@@ -1632,10 +1632,10 @@ accepts@~1.3.7:
     mime-types "~2.1.24"
     negotiator "0.6.2"
 
-admin-bro@^3.3.0-beta.7:
-  version "3.3.0-beta.7"
-  resolved "https://registry.yarnpkg.com/admin-bro/-/admin-bro-3.3.0-beta.7.tgz#3bf877404a6492a5192b7bf36881c37e39d6ccae"
-  integrity sha512-env9eqtCOQilt/jROWDtosHujY28NUxCQpt9LFw0esG/DS/5HTr9vhjA7dVG6opCtsqzQgt7ihBm0UmR5SPdZA==
+admin-bro@^3.3.0-beta.8:
+  version "3.3.0-beta.8"
+  resolved "https://registry.yarnpkg.com/admin-bro/-/admin-bro-3.3.0-beta.8.tgz#0d48cefa795d3ac54bec803194e99d8002be9cc3"
+  integrity sha512-G1Klw4E51cB0qxnr0lRP/KCay/wz0DKLKmyE0CqvCHrnHnUSVLjj9j9KJXhcywp/gFzDIjKzDqiS4k0z39dz7Q==
   dependencies:
     "@admin-bro/design-system" "^1.7.0-beta.8"
     "@babel/core" "^7.10.2"

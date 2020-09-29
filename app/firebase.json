@@ -12,7 +12,7 @@
     ],
     "rewrites": [
       {
-        "source": "/admin/**",
+        "source": "/admin{,/**}",
         "function": "admin"
       }
     ]

@@ -12,11 +12,14 @@ import { options } from './admin/options'
 const firebaseOptions: AdminBroOptions = {
   ...options,
   assetsCDN: process.env.ASSETS_CDN,
+  rootPath: '/',
+  loginPath: '/login',
+  logoutPath: '/logout',
 }
 
 AdminBro.registerAdapter(AdminBroSequelize)
 
-const onRequestHandler = buildHandler(options, {
+const handlerOptions = {
   region: 'us-central1',
   before: async () => {
     await connect()
@@ -27,6 +30,9 @@ const onRequestHandler = buildHandler(options, {
     secret: 'super-secret-string-which-encrypts-session2',
     authenticate,
   },
-})
+  customFunctionPath: 'admin',
+}
+
+const onRequestHandler = buildHandler(options, handlerOptions)
 
 export const admin = functions.https.onRequest(onRequestHandler)
