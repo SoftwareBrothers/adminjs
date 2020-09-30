@@ -24,8 +24,10 @@ export type UseCurrentAdminResponse = [
  * }
  * ```
  *
- * @component
+ * @class
  * @subcategory Hooks
+ * @bundle
+ * @hideconstructor
  */
 export const useCurrentAdmin = (): UseCurrentAdminResponse => {
   const currentAdmin = useSelector((state: ReduxState) => state.session)

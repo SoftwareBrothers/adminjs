@@ -22,8 +22,10 @@ export type AddNotice = (notice: NoticeMessage) => any;
  * }
  * ```
  *
- * @component
+ * @class
  * @subcategory Hooks
+ * @bundle
+ * @hideconstructor
  */
 export const useNotice = (): AddNotice => {
   const dispatch = useDispatch()

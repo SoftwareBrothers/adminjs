@@ -5,54 +5,36 @@ import React, { useCallback } from 'react'
 import { AxiosResponse } from 'axios'
 import { useLocation, useHistory } from 'react-router'
 
-import ViewHelpers, {
-  BulkActionParams,
-  ResourceActionParams,
-  RecordActionParams,
-} from '../../backend/utils/view-helpers/view-helpers'
+import ViewHelpers from '../../../backend/utils/view-helpers/view-helpers'
 
 
-import { appendForceRefresh } from '../../frontend/components/actions/utils/append-force-refresh'
-import ApiClient from '../../frontend/utils/api-client'
+import { appendForceRefresh } from '../../components/actions/utils/append-force-refresh'
+import ApiClient from '../../utils/api-client'
 
-import { ActionResponse } from '../../backend/actions/action.interface'
+import { ActionResponse } from '../../../backend/actions/action.interface'
 
-import { ActionJSON } from '../interfaces'
+import { ActionJSON } from '../../interfaces'
 
-import useNotice from './use-notice'
-
-type DifferentActionParams = Omit<RecordActionParams, 'actionName'>
-  | Omit<BulkActionParams, 'actionName'>
-  | Omit<ResourceActionParams, 'actionName'>
-
-type MergedActionParams = RecordActionParams & BulkActionParams & ResourceActionParams
-
-export type ActionCallCallback = (action: ActionResponse) => any
-export type UseActionResultCallApi<K extends ActionResponse> = () => Promise<AxiosResponse<K>>
-
-export type UseActionResult<K extends ActionResponse> = {
-  href: string;
-  callApi: UseActionResultCallApi<K>;
-  handleClick: (event: React.MouseEvent<HTMLElement>) => void;
-}
+import useNotice from '../use-notice'
+import { isResourceAction } from './is-resource-action'
+import { isBulkAction } from './is-bulk-action'
+import { isRecordAction } from './is-record-action'
+import { DifferentActionParams, ActionCallCallback, UseActionResult, MergedActionParams } from './use-action.types'
 
 const h = new ViewHelpers()
 
-const isRecordAction = (
-  params: DifferentActionParams,
-  action: ActionJSON,
-): params is RecordActionParams => 'recordId' in params && action.actionType === 'record'
-
-const isBulkAction = (
-  params: DifferentActionParams,
-  action: ActionJSON,
-): params is BulkActionParams => 'recordIds' in params && action.actionType === 'bulk'
-
-const isResourceAction = (
-  params: DifferentActionParams,
-  action: ActionJSON,
-): params is ResourceActionParams => 'recordIds' in params && action.actionType === 'resource'
-
+/**
+ * @load ./use-action.doc.md
+ * @subcategory Hooks
+ *
+ * @param {ActionJSON}   action      action object
+ * @param {ActionParams} params
+ * @param {ActionCallCallback} onActionCall - callback triggered when action is performed
+ * @return {UseActionResult}
+ * @new In version 3.3
+ * @class
+ * @hideconstructor
+ */
 export function useAction<K extends ActionResponse>(
   action: ActionJSON,
   params: DifferentActionParams,

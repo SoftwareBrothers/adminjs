@@ -15,7 +15,12 @@ const api = new ApiClient()
 /**
  * @load ./use-record.doc.md
  * @subcategory Hooks
- * @component
+ * @class
+ * @hideconstructor
+ * @bundle
+ * @param {RecordJSON} [initialRecord],
+ * @param {string} resourceId
+ * @return {UseRecordResult}*
  */
 export const useRecord = (
   initialRecord: RecordJSON | undefined,

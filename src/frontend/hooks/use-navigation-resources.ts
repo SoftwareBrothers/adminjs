@@ -7,7 +7,7 @@ import {
 } from '@admin-bro/design-system'
 import { useMemo } from 'react'
 import { ResourceJSON } from '../interfaces'
-import useLocalStorage from './use-local-storage'
+import useLocalStorage from './use-local-storage/use-local-storage'
 
 const isSelected = (href, location): boolean => {
   const regExp = new RegExp(`${href}($|/)`)
