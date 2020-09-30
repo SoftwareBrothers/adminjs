@@ -1,1 +1,1 @@
-export { default as BaseProperty } from './base-property'
+export { default as BaseProperty, PropertyType } from './base-property'
