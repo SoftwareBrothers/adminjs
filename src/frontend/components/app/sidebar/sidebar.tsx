@@ -20,6 +20,7 @@ const StyledSidebar = styled(Box)`
   transition: left 0.3s;
   top: 0;
   bottom: 0;
+  flex-shrink: 0;
 
   &.hidden {
     left: -${themeGet('sizes', 'sidebarWidth')};
