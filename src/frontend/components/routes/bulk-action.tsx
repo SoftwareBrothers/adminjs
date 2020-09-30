@@ -1,9 +1,6 @@
 import React, { useState, useEffect } from 'react'
-import { useSelector } from 'react-redux'
 import { Loader } from '@admin-bro/design-system'
 import { useRouteMatch, useLocation } from 'react-router'
-
-import { ReduxState } from '../../store/store'
 
 import { BulkActionParams } from '../../../backend/utils/view-helpers/view-helpers'
 
@@ -19,7 +16,7 @@ import {
   NoResourceError,
   NoActionError,
 } from '../app'
-import { useTranslation, useNotice } from '../../hooks'
+import { useTranslation, useNotice, useResource } from '../../hooks'
 
 type PropsFromState = {
   resources: Array<ResourceJSON>;
@@ -30,7 +27,6 @@ type MatchParams = Pick<BulkActionParams, 'actionName' | 'resourceId'>
 const api = new ApiClient()
 
 const BulkAction: React.FC = () => {
-  const resources = useSelector((state: ReduxState) => state.resources)
   const match = useRouteMatch<MatchParams>()
   const [records, setRecords] = useState<Array<RecordJSON>>([])
   const [loading, setLoading] = useState(false)
@@ -39,7 +35,7 @@ const BulkAction: React.FC = () => {
   const location = useLocation()
 
   const { resourceId, actionName } = match.params
-  const resource = resources.find(r => r.id === resourceId)
+  const resource = useResource(resourceId)
 
   const fetchRecords = (): Promise<void> => {
     const recordIdsString = new URLSearchParams(location.search).get('recordIds')
