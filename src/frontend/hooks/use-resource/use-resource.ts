@@ -17,7 +17,5 @@ export const useResource = (resourceId: string): ResourceJSON | undefined => {
 
   const foundResource = resources.find(resource => resource.id === resourceId)
 
-  console.log({ foundResource })
-
   return foundResource
 }
