@@ -28,7 +28,7 @@ export type PropertyErrors = {
  * Error which is thrown when there are validation errors with records
  * @category Errors
  */
-class ValidationError extends Error {
+export class ValidationError extends Error {
   /**
    * Validation errors for all properties
    */

@@ -21,6 +21,7 @@ const StyledSidebar = styled(Box)`
   top: 0;
   bottom: 0;
   flex-shrink: 0;
+  overflow-y: auto;
 
   &.hidden {
     left: -${themeGet('sizes', 'sidebarWidth')};

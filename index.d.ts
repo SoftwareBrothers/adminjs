@@ -6,6 +6,7 @@ export * from './types/src'
 
 export {
   AdminBro as default,
+  ReduxState,
 }
 
 declare const REDUX_STATE: ReduxState

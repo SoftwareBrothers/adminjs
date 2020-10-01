@@ -9,7 +9,7 @@ const buildUrl = (page: string): string => (
  *
  * @category Errors
  */
-class ConfigurationError extends Error {
+export class ConfigurationError extends Error {
   /**
    * @param   {string}  fnName  name of the function, base on which error will
    * print on the output link to the method documentation.

@@ -29,6 +29,10 @@ export const StyledLogo = styled(Link)`
     line-height: ${themeGet('lineHeights', 'xl')};
   }
 
+  & > img {
+    max-width: 170px;
+  }
+
   &:hover h1 {
     color: ${themeGet('colors', 'primary100')};
   }

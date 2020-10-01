@@ -14,6 +14,7 @@ import {
   Text,
   MessageBox,
   SoftwareBrothers,
+  themeGet,
 } from '@admin-bro/design-system'
 import { useTranslation } from '../../hooks'
 import { ReduxState } from '../../store/store'
@@ -32,6 +33,11 @@ const Wrapper = styled(Box)`
   justify-content: center;
   flex-direction: column;
   height: 100%;
+`
+
+const StyledLogo = styled.img`
+  max-width: 200px;
+  margin: ${themeGet('space', 'md')} 0;
 `
 
 export type LoginProps = {
@@ -84,7 +90,7 @@ export const Login: React.FC<LoginProps> = (props) => {
           >
             <H5 marginBottom="xxl">
               {branding.logo ? (
-                <img
+                <StyledLogo
                   src={branding.logo}
                   alt={branding.companyName}
                 />

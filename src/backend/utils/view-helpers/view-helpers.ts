@@ -70,7 +70,7 @@ const runDate = new Date()
 /**
  * Collection of helper methods available in the views
  */
-class ViewHelpers {
+export class ViewHelpers {
   public options: Paths
 
   constructor({ options }: { options?: AdminBroOptions } = {}) {

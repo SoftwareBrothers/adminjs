@@ -4,7 +4,7 @@
  *
  * @category Errors
  */
-class ForbiddenError extends Error {
+export class ForbiddenError extends Error {
   /**
    * HTTP Status code: 403
    */

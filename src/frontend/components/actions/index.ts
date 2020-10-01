@@ -5,6 +5,7 @@ import { List } from './list'
 import { BulkDelete } from './bulk-delete'
 
 export * from './new'
+export * from './action.props'
 export * from './edit'
 export * from './show'
 export * from './list'

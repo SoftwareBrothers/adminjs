@@ -20,7 +20,7 @@ const buildUrl = (fnName: string): string => {
  *
  * @category Errors
  */
-class NotImplementedError extends Error {
+export class NotImplementedError extends Error {
   /**
    * @param   {string}  fnName  name of the function, base on which error will
    * print on the output link to the method documentation.

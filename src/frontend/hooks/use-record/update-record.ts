@@ -27,7 +27,7 @@ import { RecordJSON } from '../../interfaces'
  *                                      it's referencing to
  * @private
  */
-const updateRecord = (
+export const updateRecord = (
   property: string,
   value: any,
   selectedRecord?: RecordJSON,
