@@ -16,6 +16,8 @@ describe('decorateProperties', () => {
   let decorator: SinonStubbedInstance<ResourceDecorator> & ResourceDecorator
   let property: BaseProperty
 
+  let decoratedProperties: DecoratedProperties
+
   beforeEach(() => {
     admin = sinon.createStubInstance(AdminBro)
     resource = sinon.createStubInstance(BaseResource)
@@ -27,7 +29,6 @@ describe('decorateProperties', () => {
   })
 
   context('One property with options', () => {
-    let decoratedProperties: DecoratedProperties
     const isSortable = true
     const newIsSortable = false
     const type = 'boolean'
@@ -56,10 +57,15 @@ describe('decorateProperties', () => {
 
       expect(decorated.type()).to.eq(type)
     })
+
+    it('does not set `isVirtual` property', () => {
+      const decorated = decoratedProperties[path]
+
+      expect(decorated.isVirtual).to.eq(false)
+    })
   })
 
   context('just options without any properties', () => {
-    let decoratedProperties: DecoratedProperties
     const newType = 'string'
     const availableValues: PropertyOptions['availableValues'] = [
       { value: 'male', label: 'male' },
@@ -86,6 +92,85 @@ describe('decorateProperties', () => {
 
       expect(decorated.type()).to.eq(newType)
       expect(decorated.availableValues()).to.deep.eq(availableValues)
+    })
+
+    it('sets `isVirtual` property to true', () => {
+      const decorated = decoratedProperties[path]
+
+      expect(decorated.isVirtual).to.eq(true)
+    })
+  })
+
+  context('nested properties', () => {
+    let subPropertyLevel1: BaseProperty
+    let subPropertyLevel2: BaseProperty
+    const newIsVisible = false
+    const nestedPath = 'root.level1.level2'
+
+    beforeEach(() => {
+      property = new BaseProperty({ path: nestedPath.split('.')[0], type: 'mixed' })
+      subPropertyLevel1 = new BaseProperty({ path: nestedPath.split('.')[1], type: 'mixed' })
+      subPropertyLevel2 = new BaseProperty({ path: nestedPath.split('.')[2], type: 'mixed' })
+
+
+      sinon.stub(property, 'subProperties').returns([subPropertyLevel1])
+      sinon.stub(subPropertyLevel1, 'subProperties').returns([subPropertyLevel2])
+
+      resource.properties.returns([property])
+    })
+
+    context('options were not set', () => {
+      beforeEach(() => {
+        decorator.options = { properties: { } }
+
+        decoratedProperties = decorateProperties(resource, admin, decorator)
+      })
+
+      it('returns one property', () => {
+        expect(Object.keys(decoratedProperties)).to.have.lengthOf(1)
+      })
+
+      it('returns only root property which is not virtual', () => {
+        expect(decoratedProperties[nestedPath.split('.')[0]]).to.have.property('isVirtual', false)
+      })
+    })
+
+    context('options were set for root property', () => {
+      beforeEach(() => {
+        decorator.options = { properties: { [nestedPath.split('.')[0]]: {
+          isVisible: newIsVisible,
+        } } }
+        decoratedProperties = decorateProperties(resource, admin, decorator)
+      })
+
+      it('returns one property', () => {
+        expect(Object.keys(decoratedProperties)).to.have.lengthOf(1)
+      })
+
+      it('changes its param', () => {
+        expect(
+          decoratedProperties[nestedPath.split('.')[0]].isVisible('show'),
+        ).to.eq(newIsVisible)
+      })
+    })
+
+    context('options were set for nested property', () => {
+      beforeEach(() => {
+        decorator.options = { properties: { [nestedPath]: {
+          isVisible: newIsVisible,
+        } } }
+        decoratedProperties = decorateProperties(resource, admin, decorator)
+      })
+
+      it('returns one property', () => {
+        expect(Object.keys(decoratedProperties)).to.have.lengthOf(1)
+      })
+
+      it('does not change the root property', () => {
+        expect(
+          decoratedProperties[nestedPath.split('.')[0]].isVisible('show'),
+        ).not.to.eq(newIsVisible)
+      })
     })
   })
 })

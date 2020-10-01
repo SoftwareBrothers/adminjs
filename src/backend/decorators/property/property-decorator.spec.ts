@@ -195,6 +195,7 @@ describe('PropertyDecorator', () => {
         'resourceId',
         'path',
         'isRequired',
+        'isVirtual',
       )
     })
   })

@@ -89,4 +89,10 @@ export interface PropertyJSON {
    * Resource to which given property belongs
    */
   resourceId: string;
+
+  /**
+   * Indicates if given property has been created in AdminBro {@link PropertyOptions} and hasn't
+   * been returned by the database adapter.
+   */
+  isVirtual: boolean;
 }

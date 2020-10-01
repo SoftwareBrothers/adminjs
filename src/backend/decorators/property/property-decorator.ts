@@ -25,6 +25,12 @@ class PropertyDecorator {
    */
   public path: string
 
+  /**
+   * Indicates if given property has been created in AdminBro and hasn't been returned by the
+   * database adapter
+   */
+  public isVirtual: boolean
+
   private _admin: AdminBro
 
   private _resource: ResourceDecorator
@@ -38,17 +44,19 @@ class PropertyDecorator {
    * @param {PropertyOptions}     opts.options
    * @param {ResourceDecorator}   opts.resource
    */
-  constructor({ property, admin, options = {}, resource, path }: {
+  constructor({ property, admin, options = {}, resource, path, isVirtual }: {
     property: BaseProperty;
     admin: AdminBro;
     options?: PropertyOptions;
     resource: ResourceDecorator;
     path?: string;
+    isVirtual?: boolean;
   }) {
     this.property = property
     this._admin = admin
     this._resource = resource
     this.path = path || property.name()
+    this.isVirtual = !!isVirtual
 
     /**
      * Options passed along with a given resource
@@ -250,6 +258,7 @@ class PropertyDecorator {
         .map(subProperty => subProperty.toJSON(where)),
       isArray: this.isArray(),
       resourceId: this._resource.id(),
+      isVirtual: this.isVirtual,
     }
   }
 

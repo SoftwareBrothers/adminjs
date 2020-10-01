@@ -2,6 +2,7 @@ import { ResourceDecorator } from '..'
 import AdminBro from '../../../../admin-bro'
 import { BaseProperty, BaseResource } from '../../../adapters'
 import { PropertyDecorator } from '../../property'
+import { getPropertyByKey } from './get-property-by-key'
 
 export type DecoratedProperties = {[key: string]: PropertyDecorator}
 
@@ -33,13 +34,15 @@ export function decorateProperties(
   // decorate all properties user gave in options but they don't exist in the resource
   if (options.properties) {
     Object.keys(options.properties).forEach((key) => {
-      if (!properties[key]) { // checking if property hasn't been decorated yet
+      const existingProperty = getPropertyByKey(key, properties)
+      if (!existingProperty) {
         const property = new BaseProperty({ path: key, isSortable: false })
         properties[key] = new PropertyDecorator({
           property,
           admin,
           options: options.properties && options.properties[key],
           resource: decorator,
+          isVirtual: true,
         })
       }
     })

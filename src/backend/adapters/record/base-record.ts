@@ -170,6 +170,7 @@ class BaseRecord {
    */
   populate(propertyPath: string, record?: BaseRecord | null): void {
     if (record === null || typeof record === 'undefined') {
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const { [propertyPath]: oldValue, ...rest } = this.populated
       this.populated = rest
     } else {

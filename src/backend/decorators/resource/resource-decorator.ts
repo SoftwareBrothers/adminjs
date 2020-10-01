@@ -12,10 +12,9 @@ import {
   decorateActions,
   decorateProperties,
   getNavigation,
-  pathToParts,
   flatSubProperties,
-  findSubProperty,
   DecoratedProperties,
+  getPropertyByKey,
 } from './utils'
 
 
@@ -115,28 +114,7 @@ class ResourceDecorator {
    * @return  {PropertyDecorator}
    */
   getPropertyByKey(propertyPath: string): PropertyDecorator | null {
-    const parts = pathToParts(propertyPath)
-    const fullPath = parts[parts.length - 1]
-    const property = this.properties[fullPath]
-
-    if (!property) {
-      // User asks for nested property (embed inside the mixed property)
-      if (parts.length > 1) {
-        const mixedPropertyPath = parts.find(part => (
-          this.properties[part]
-          && this.properties[part].type() === 'mixed'
-        ))
-        if (mixedPropertyPath) {
-          const mixedProperty = this.properties[mixedPropertyPath]
-          const subProperty = findSubProperty(parts, mixedProperty)
-
-          if (subProperty) {
-            return subProperty
-          }
-        }
-      }
-    }
-    return property || null
+    return getPropertyByKey(propertyPath, this.properties)
   }
 
   /**
