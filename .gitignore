@@ -26,3 +26,4 @@ app/cypress/videos
 app/cypress/screenshots
 app/build
 .env
+yarn-error.log

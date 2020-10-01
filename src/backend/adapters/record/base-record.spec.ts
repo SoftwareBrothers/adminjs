@@ -1,4 +1,5 @@
 import chai, { expect } from 'chai'
+import chaiChange from 'chai-change'
 import sinon from 'sinon'
 import chaiAsPromised from 'chai-as-promised'
 import { ParamsType } from './params.type'
@@ -9,6 +10,7 @@ import BaseProperty from '../property/base-property'
 import ValidationError, { PropertyErrors } from '../../utils/errors/validation-error'
 
 chai.use(chaiAsPromised)
+chai.use(chaiChange)
 
 describe('Record', function () {
   let record: BaseRecord
@@ -210,6 +212,15 @@ describe('Record', function () {
       record.populate('value', populated.value)
 
       expect((record as any).populated.value).to.equal(populated.value)
+    })
+
+    it('clears populated field when record is null or undefined', () => {
+      record = new BaseRecord(params, {} as BaseResource)
+      record.populate('value', 'something' as any)
+
+      expect(() => {
+        record.populate('value', null)
+      }).to.alter(() => record.populated.value, { from: 'something', to: undefined })
     })
   })
 })

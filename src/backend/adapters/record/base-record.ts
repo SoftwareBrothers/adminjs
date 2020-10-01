@@ -164,11 +164,17 @@ class BaseRecord {
   /**
    * Populate record relations
    *
-   * @param   {string}  propertyPath  name of the property which should be populated
-   * @param   {BaseRecord}  record    record to which property relates
+   * @param   {string}  propertyPath           name of the property which should be populated
+   * @param   {BaseRecord | null}  [record]    record to which property relates. If record is null
+   *                                           or undefined - function clears the previous value
    */
-  populate(propertyPath: string, record: BaseRecord): void {
-    this.populated[propertyPath] = record
+  populate(propertyPath: string, record?: BaseRecord | null): void {
+    if (record === null || typeof record === 'undefined') {
+      const { [propertyPath]: oldValue, ...rest } = this.populated
+      this.populated = rest
+    } else {
+      this.populated[propertyPath] = record
+    }
   }
 
   /**
