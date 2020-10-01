@@ -142,11 +142,77 @@ export class ViewHelpers {
   }
 
   /**
+   * Returns url for a `edit` action in given Resource. Uses {@link recordActionUrl}
+   *
+   * @param {string} resourceId  id to the resource
+   * @param {string} recordId    id to the record
+   * @param {string} [search]        optional query string
+   */
+  editUrl(resourceId: string, recordId: string, search?: string): string {
+    return this.recordActionUrl({ resourceId, recordId, actionName: 'edit', search })
+  }
+
+  /**
+   * Returns url for a `show` action in given Resource. Uses {@link recordActionUrl}
+   *
+   * @param {string} resourceId  id to the resource
+   * @param {string} recordId    id to the record
+   * @param {string} [search]        optional query string
+   */
+  showUrl(resourceId: string, recordId: string, search?: string): string {
+    return this.recordActionUrl({ resourceId, recordId, actionName: 'show', search })
+  }
+
+  /**
+   * Returns url for a `delete` action in given Resource. Uses {@link recordActionUrl}
+   *
+   * @param {string} resourceId  id to the resource
+   * @param {string} recordId    id to the record
+   * @param {string} [search]        optional query string
+   */
+  deleteUrl(resourceId: string, recordId: string, search?: string): string {
+    return this.recordActionUrl({ resourceId, recordId, actionName: 'delete', search })
+  }
+
+
+  /**
+   * Returns url for a `new` action in given Resource. Uses {@link resourceActionUrl}
+   *
+   * @param {string} resourceId  id to the resource
+   * @param {string} [search]        optional query string
+   */
+  newUrl(resourceId: string, search?: string): string {
+    return this.resourceActionUrl({ resourceId, actionName: 'new', search })
+  }
+
+  /**
+   * Returns url for a `new` action in given Resource. Uses {@link resourceActionUrl}
+   *
+   * @param {string} resourceId  id to the resource
+   * @param {string} [search]        optional query string
+   */
+  listUrl(resourceId: string, search?: string): string {
+    return this.resourceActionUrl({ resourceId, actionName: 'list', search })
+  }
+
+  /**
+   * Returns url for a `bulkDelete` action in given Resource. Uses {@link bulkActionUrl}
+   *
+   * @param {string} resourceId  id to the resource
+   * @param {Array<string>} recordIds   separated by comma records
+   * @param {string} [search]        optional query string
+   */
+  bulkDeleteUrl(resourceId: string, recordIds: Array<string>, search?: string): string {
+    return this.bulkActionUrl({ resourceId, recordIds, actionName: 'bulkDelete', search })
+  }
+
+  /**
    * Returns resourceAction url
    *
    * @param   {ResourceActionParams}  options
    * @param   {string}  options.resourceId
    * @param   {string}  options.actionName
+   * @param   {string}  [options.search]        optional query string
    *
    * @return  {string}
    */
@@ -177,7 +243,7 @@ export class ViewHelpers {
    *
    * @param   {BulkActionParams}  options
    * @param   {string}  options.resourceId
-   * @param   {string}  [options.recordIds]
+   * @param   {Array<string>}  [options.recordIds]
    * @param   {string}  options.actionName
    *
    * @return  {string}
