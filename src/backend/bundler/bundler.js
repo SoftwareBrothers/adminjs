@@ -2,6 +2,7 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 const rollup = require('rollup')
 const ora = require('ora')
+const util = require('util')
 const { external, globals, plugins } = require('./config')
 
 async function build({
@@ -27,6 +28,9 @@ async function build({
 
   if (watch) {
     const bundle = await rollup.rollup(inputOptions)
+    if (process.env.DEBUG_BUNDLER) {
+      console.log(util.inspect(bundle.watchFiles, { maxArrayLength: null }))
+    }
     const spinner = ora('Bundling files')
     const watcher = rollup.watch({
       ...inputOptions,
