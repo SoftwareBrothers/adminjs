@@ -15,6 +15,7 @@ export const NewAction: Action<RecordActionResponse> = {
   actionType: 'resource',
   icon: 'Add',
   showInDrawer: false,
+  variant: 'primary',
   /**
    * Responsible for creating new record.
    *

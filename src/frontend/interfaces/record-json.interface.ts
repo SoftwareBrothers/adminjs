@@ -1,4 +1,4 @@
-import { ActionJSON } from './action-json.interface'
+import { ActionJSON } from './action/action-json.interface'
 
 /**
  * @memberof {RecordJSON}

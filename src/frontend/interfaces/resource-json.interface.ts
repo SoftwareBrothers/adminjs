@@ -1,5 +1,5 @@
 import { PropertyJSON } from './property-json.interface'
-import { ActionJSON } from './action-json.interface'
+import { ActionJSON } from './action/action-json.interface'
 
 /**
  * Resource object accessible on the fronted

@@ -3,7 +3,7 @@ import { DrawerContent } from '@admin-bro/design-system'
 
 import PropertyType from '../property-type'
 import { ActionProps } from './action.props'
-import ActionHeader from '../app/action-header'
+import ActionHeader from '../app/action-header/action-header'
 import LayoutElementRenderer from './utils/layout-element-renderer'
 
 /**

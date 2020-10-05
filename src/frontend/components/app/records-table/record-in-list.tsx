@@ -5,7 +5,7 @@ import {
   DropDownTrigger, Icon, DropDownMenu, DropDownItem, Button,
 } from '@admin-bro/design-system'
 
-import ActionButton from '../action-button'
+import ActionButton from '../action-button/action-button'
 import PropertyType from '../../property-type'
 import { RecordJSON, ResourceJSON } from '../../../interfaces'
 import ViewHelpers from '../../../../backend/utils/view-helpers/view-helpers'

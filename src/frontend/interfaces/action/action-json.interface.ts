@@ -1,4 +1,5 @@
-import { ParsedLayoutElement } from '../../backend/utils/layout-element-parser'
+import { VariantType } from '@admin-bro/design-system'
+import { ParsedLayoutElement } from '../../../backend/utils/layout-element-parser'
 
 /**
  * JSON representation of an {@link Action}
@@ -56,4 +57,9 @@ export interface ActionJSON {
    * Parsed layout passed in {@link Action#layout}
    */
   layout: Array<ParsedLayoutElement> | null;
+
+  /**
+   * action variant
+   */
+  variant: VariantType;
 }

@@ -1,3 +1,4 @@
+import { VariantType } from '@admin-bro/design-system'
 import AdminBro from '../../admin-bro'
 import { CurrentAdmin } from '../../current-admin.interface'
 import ViewHelpers from '../utils/view-helpers/view-helpers'
@@ -8,6 +9,8 @@ import { LayoutElement, LayoutElementFunction } from '../utils/layout-element-pa
 import { RecordJSON } from '../../frontend/interfaces'
 import { NoticeMessage } from '../../frontend/hoc/with-notice'
 import { TranslateFunctions } from '../../utils/translate-functions.factory'
+
+export type ActionType = 'resource' | 'record' | 'bulk'
 
 /**
  * Execution context for an action. It is passed to the {@link Action#handler},
@@ -402,7 +405,7 @@ export interface Action <T extends ActionResponse> {
    *
    * When you define a new action - it is required.
    */
-  actionType: 'resource' | 'record' | 'bulk';
+  actionType: ActionType;
   /**
    * icon name for the action. Take a look {@link Icon} component,
    * because what you put here is passed down to it.
@@ -618,4 +621,9 @@ export interface Action <T extends ActionResponse> {
    * @see LayoutElementFunction
    */
   layout?: LayoutElementFunction | Array<LayoutElement>;
+
+  /**
+   * Defines the variant of the action. based on that it will receive given color.
+   */
+  variant?: VariantType;
 }

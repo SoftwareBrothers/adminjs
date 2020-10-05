@@ -18,6 +18,7 @@ export const DeleteAction: Action<RecordActionResponse> = {
   icon: 'TrashCan',
   guard: 'confirmDelete',
   component: false,
+  variant: 'danger',
   /**
    * Responsible for deleting existing record.
    *

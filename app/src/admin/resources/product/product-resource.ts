@@ -9,4 +9,11 @@ export const ProductResource: ResourceOptions = {
       position: 10,
     },
   },
+  actions: {
+    export: {
+      actionType: 'resource',
+      icon: 'Export',
+      variant: 'light',
+    },
+  },
 }

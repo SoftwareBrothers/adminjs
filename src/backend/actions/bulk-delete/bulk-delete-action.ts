@@ -16,6 +16,7 @@ export const BulkDeleteAction: Action<BulkActionResponse> = {
   actionType: 'bulk',
   icon: 'Delete',
   showInDrawer: true,
+  variant: 'danger',
   /**
    * Responsible for deleting existing records.
    *

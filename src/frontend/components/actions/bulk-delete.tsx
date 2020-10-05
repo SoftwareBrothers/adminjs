@@ -11,7 +11,7 @@ import ApiClient from '../../utils/api-client'
 import withNotice, { AddNoticeProps } from '../../hoc/with-notice'
 import { appendForceRefresh } from './utils/append-force-refresh'
 
-import ActionHeader from '../app/action-header'
+import ActionHeader from '../app/action-header/action-header'
 import { useTranslation } from '../../hooks'
 
 /**

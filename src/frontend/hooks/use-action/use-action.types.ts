@@ -3,13 +3,16 @@ import { AxiosResponse } from 'axios'
 import {
   BulkActionParams,
   ResourceActionParams,
-  RecordActionParams,
+  RecordActionParams, ActionParams,
 } from '../../../backend/utils/view-helpers/view-helpers'
 import { ActionResponse } from '../../../backend/actions/action.interface'
 
-export type DifferentActionParams = Omit<RecordActionParams, 'actionName'> |
-  Omit<BulkActionParams, 'actionName'> |
-  Omit<ResourceActionParams, 'actionName'>;
+export type DifferentActionParams = {
+  resourceId: ActionParams['resourceId'];
+  recordId?: RecordActionParams['recordId'];
+  recordIds?: BulkActionParams['recordIds'];
+}
+
 export type MergedActionParams = RecordActionParams & BulkActionParams & ResourceActionParams;
 
 export type ActionCallCallback = (action: ActionResponse) => any;

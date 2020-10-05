@@ -4,7 +4,7 @@ import { Text, Button, Icon, InfoBox } from '@admin-bro/design-system'
 import { ResourceJSON } from '../../../interfaces'
 import { useTranslation } from '../../../hooks'
 import allowOverride from '../../../hoc/allow-override'
-import ActionButton from '../action-button'
+import ActionButton from '../action-button/action-button'
 
 export type NoRecordsProps = {
   resource: ResourceJSON;

@@ -2,6 +2,19 @@
 # yarn lockfile v1
 
 
+"@admin-bro/design-system@1.7.0-beta.12":
+  version "1.7.0-beta.12"
+  resolved "https://registry.yarnpkg.com/@admin-bro/design-system/-/design-system-1.7.0-beta.12.tgz#2e97de7f553b20f105d41ea2152ebf0bf5f5f16e"
+  integrity sha512-mF5lxh+TQ/42GFIu36tZTJXe9jbDD+CcarGUFUNQ8ZrwUHXX03Lkj0OiNnzst1omCGFDbs5MPu6NQv6+dliMtw==
+  dependencies:
+    "@carbon/icons-react" "^10.14.0"
+    jw-paginate "^1.0.4"
+    lodash "^4.17.20"
+    polished "^3.6.5"
+    quill "^1.3.7"
+    react-datepicker "^3.1.3"
+    styled-system "^5.1.5"
+
 "@admin-bro/design-system@^1.7.0-beta.8":
   version "1.7.0-beta.8"
   resolved "https://registry.yarnpkg.com/@admin-bro/design-system/-/design-system-1.7.0-beta.8.tgz#1834e02b5f3314c16be61518ff783f6c5c9c22d2"

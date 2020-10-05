@@ -1,4 +1,4 @@
-import { DEFAULT_DRAWER_WIDTH } from '@admin-bro/design-system'
+import { DEFAULT_DRAWER_WIDTH, VariantType } from '@admin-bro/design-system'
 import ConfigurationError from '../../utils/errors/configuration-error'
 import ViewHelpers from '../../utils/view-helpers/view-helpers'
 import AdminBro from '../../../admin-bro'
@@ -14,7 +14,7 @@ import {
   ActionHandler,
 } from '../../actions/action.interface'
 import { CurrentAdmin } from '../../../current-admin.interface'
-import { ActionJSON } from '../../../frontend/interfaces/action-json.interface'
+import { ActionJSON } from '../../../frontend/interfaces/action/action-json.interface'
 import BaseRecord from '../../adapters/record/base-record'
 import actionErrorHandler from '../../services/action-error-handler/action-error-handler'
 import ForbiddenError from '../../utils/errors/forbidden-error'
@@ -23,6 +23,8 @@ import {
   LayoutElement,
   layoutElementParser,
 } from '../../utils/layout-element-parser'
+
+const DEFAULT_VARIANT: VariantType = 'default'
 
 /**
  * Decorates an action
@@ -308,6 +310,10 @@ class ActionDecorator {
     return null
   }
 
+  variant(): VariantType {
+    return this.action.variant || DEFAULT_VARIANT
+  }
+
   /**
    * Serializes action to JSON format
    *
@@ -330,6 +336,7 @@ class ActionDecorator {
       hideActionHeader: !!this.action.hideActionHeader,
       containerWidth: this.containerWidth(),
       layout: this.layout(currentAdmin),
+      variant: this.variant(),
     }
   }
 }

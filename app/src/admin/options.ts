@@ -9,6 +9,9 @@ const rootPath = '/admin'
 
 export const options: AdminBroOptions = {
   rootPath,
+  version: {
+    admin: true,
+  },
   resources: [
     { resource: models.User, ...UserAdmin },
     { resource: models.BlogPost, ...BlogPostAdmin },

@@ -3,10 +3,10 @@
 /* eslint-disable no-restricted-globals */
 
 import React, { ReactElement } from 'react'
-import { ActionResponse } from '../../../backend/actions/action.interface'
+import { ActionResponse } from '../../../../backend/actions/action.interface'
 
-import { ActionJSON } from '../../interfaces'
-import { useAction } from '../../hooks'
+import { ActionJSON, buildActionTestId } from '../../../interfaces'
+import { useAction } from '../../../hooks'
 
 
 /**
@@ -60,7 +60,7 @@ export const ActionButton: React.FC<ActionButtonProps> = (props) => {
 
   const WrappedElement = React.cloneElement(firstChild as ReactElement<any>, {
     onClick: handleClick,
-    'data-testid': `action-${action.name}`,
+    'data-testid': buildActionTestId(action),
     href,
   })
 

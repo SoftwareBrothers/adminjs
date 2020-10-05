@@ -1,6 +1,6 @@
 import { ResourceActionParams } from '../../../backend/utils/view-helpers/view-helpers'
-import { ActionJSON } from '../../interfaces'
-import { DifferentActionParams } from './use-action.types'
+import { ActionJSON } from '..'
+import { DifferentActionParams } from '../../hooks/use-action/use-action.types'
 
 export const isResourceAction = (
   params: DifferentActionParams,
