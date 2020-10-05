@@ -77,4 +77,47 @@ describe('populateProperty', () => {
       expect(referenceResource.findMany).to.have.been.calledOnceWith([userId1, userId2])
     })
   })
+
+  context('empty references', () => {
+    it('does not findMany for null values', async () => {
+      record.param.returns(null)
+
+      populatedResponse = await populateProperty([record], property)
+
+      expect(referenceResource.findMany).not.to.have.been.called
+    })
+
+    it('does not findMany for undefined values', async () => {
+      record.param.returns(undefined)
+
+      populatedResponse = await populateProperty([record], property)
+
+      expect(referenceResource.findMany).not.to.have.been.called
+    })
+
+    it('findMany for 0 values', async () => {
+      record.param.returns(0)
+
+      populatedResponse = await populateProperty([record], property)
+
+      expect(referenceResource.findMany).to.have.been.called
+    })
+
+    it('does not findMany for "" empty strings', async () => {
+      record.param.returns('')
+
+      populatedResponse = await populateProperty([record], property)
+
+      expect(referenceResource.findMany).not.to.have.been.called
+    })
+
+    it('does not findMany for "" empty strings in array', async () => {
+      record.param.returns([''])
+      property.isArray.returns(true)
+
+      populatedResponse = await populateProperty([record], property)
+
+      expect(referenceResource.findMany).not.to.have.been.called
+    })
+  })
 })

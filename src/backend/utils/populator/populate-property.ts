@@ -2,6 +2,11 @@ import { DELIMITER } from '../../../utils/flat/constants'
 import { BaseRecord } from '../../adapters'
 import PropertyDecorator from '../../decorators/property/property-decorator'
 
+const isValueSearchable = (value: any): boolean => (
+  ['string', 'bigint', 'number'].includes(typeof value)
+    && value !== null
+    && value !== ''
+)
 /**
  * It populates one property in given records
  *
@@ -37,17 +42,17 @@ export const populateProperty = async (
   // nulls to each of them
   const externalIdsMap = records.reduce((memo, baseRecord) => {
     const foreignKeyValue = baseRecord.param(property.path)
-    // when foreign key is not filled (like null) - don't add this because
-    // BaseResource#findMany (which we will use) might break for nulls
-    if (!foreignKeyValue) {
-      return memo
-    }
     // array properties returns arrays so we have to take the all into consideration
     if (property.isArray()) {
       return foreignKeyValue.reduce((arrayMemo, valueInArray) => ({
         ...arrayMemo,
-        [valueInArray]: null,
+        ...(isValueSearchable(valueInArray) ? { [valueInArray]: null } : {}),
+        // [valueInArray]: null,
       }), memo)
+    }
+
+    if (!isValueSearchable(foreignKeyValue)) {
+      return memo
     }
     return {
       ...memo,
