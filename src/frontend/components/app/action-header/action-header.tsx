@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from 'react'
 import { Box, Badge, H3, H2, ButtonGroup, cssClass } from '@admin-bro/design-system'
-import { useHistory, useLocation } from 'react-router'
+import { useHistory } from 'react-router'
 
 import Breadcrumbs from '../breadcrumbs'
 import { ActionHeaderProps } from './action-header-props'
@@ -29,7 +29,6 @@ export const ActionHeader: React.FC<ActionHeaderProps> = (props) => {
   } = props
 
   const { translateButton } = useTranslation()
-  const location = useLocation()
   const history = useHistory()
   const actionResponseHandler = useActionResponseHandler(actionPerformed)
 
@@ -45,7 +44,6 @@ export const ActionHeader: React.FC<ActionHeaderProps> = (props) => {
       action: sourceAction,
       params,
       actionResponseHandler,
-      search: location.search,
       push: history.push,
     })(event)
   )
@@ -56,7 +54,6 @@ export const ActionHeader: React.FC<ActionHeaderProps> = (props) => {
       // only new action should be seen in regular "Big" actions place
       : resource.resourceActions.filter(ra => ra.name === 'new' && (!action || action.name !== ra.name)),
     params,
-    search: location.search,
     handleClick: handleActionClick,
   })
 
@@ -72,7 +69,6 @@ export const ActionHeader: React.FC<ActionHeaderProps> = (props) => {
   const customResourceButtons = actionsToButtonGroup({
     actions: resource.resourceActions.filter(ra => !['list', 'new'].includes(ra.name)),
     params: { resourceId },
-    search: location.search,
     handleClick: handleActionClick,
   })
 

@@ -1,4 +1,4 @@
-import { useLocation, useHistory } from 'react-router'
+import { useHistory } from 'react-router'
 
 import { ActionResponse } from '../../../backend/actions/action.interface'
 
@@ -25,25 +25,22 @@ export function useAction<K extends ActionResponse>(
   params: DifferentActionParams,
   onActionCall?: ActionCallCallback,
 ): UseActionResult<K> {
-  const location = useLocation()
   const history = useHistory()
 
   const actionResponseHandler = useActionResponseHandler(onActionCall)
 
-  const href = actionHref(action, params, location.search)
+  const href = actionHref(action, params)
 
   const callApi = buildActionCallApiTrigger<K>({
     action,
     params,
     actionResponseHandler,
-    search: location.search,
   })
 
   const handleClick = buildActionClickHandler({
     action,
     params,
     actionResponseHandler,
-    search: location.search,
     push: history.push,
   })
 

@@ -4,7 +4,6 @@ import {
   Placeholder, TableRow, TableCell, CheckBox, ButtonGroup,
 } from '@admin-bro/design-system'
 
-import { useLocation } from 'react-router'
 import PropertyType from '../../property-type'
 import { ActionJSON, buildActionClickHandler, RecordJSON, ResourceJSON } from '../../../interfaces'
 import { display } from './utils/display'
@@ -29,7 +28,6 @@ export const RecordInList: React.FC<RecordInListProps> = (props) => {
   } = props
   const [record, setRecord] = useState<RecordJSON>(recordFromProps)
   const history = useHistory()
-  const location = useLocation()
 
   const handleActionCallback = useCallback((actionResponse: ActionResponse) => {
     if (actionResponse.record && !actionResponse.redirectUrl) {
@@ -62,7 +60,6 @@ export const RecordInList: React.FC<RecordInListProps> = (props) => {
         action,
         params: { resourceId: resource.id, recordId: record.id },
         actionResponseHandler,
-        search: location.search,
         push: history.push,
       })(event)
     }
@@ -75,7 +72,6 @@ export const RecordInList: React.FC<RecordInListProps> = (props) => {
       action: sourceAction,
       params: actionParams,
       actionResponseHandler,
-      search: location.search,
       push: history.push,
     })(event)
   )
@@ -88,7 +84,6 @@ export const RecordInList: React.FC<RecordInListProps> = (props) => {
     buttons: actionsToButtonGroup({
       actions: recordActions,
       params: actionParams,
-      search: location.search,
       handleClick: handleActionClick,
     }),
   }]

@@ -1,10 +1,11 @@
 import React from 'react'
-import { TableCaption, Button, Icon, CardTitle } from '@admin-bro/design-system'
+import { TableCaption, Title, ButtonGroup, Box } from '@admin-bro/design-system'
 
-import { RecordJSON, ResourceJSON } from '../../../interfaces'
-import ActionButton from '../action-button/action-button'
+import { useHistory } from 'react-router'
+import { ActionJSON, buildActionClickHandler, RecordJSON, ResourceJSON } from '../../../interfaces'
 import getBulkActionsFromRecords from './utils/get-bulk-actions-from-records'
-import { useTranslation } from '../../../hooks'
+import { useActionResponseHandler, useTranslation } from '../../../hooks'
+import { actionsToButtonGroup } from '../action-header/actions-to-button-group'
 
 type SelectedRecordsProps = {
   resource: ResourceJSON;
@@ -14,31 +15,38 @@ type SelectedRecordsProps = {
 export const SelectedRecords: React.FC<SelectedRecordsProps> = (props) => {
   const { resource, selectedRecords } = props
   const { translateLabel } = useTranslation()
+  const history = useHistory()
+  const actionResponseHandler = useActionResponseHandler()
 
   if (!selectedRecords || !selectedRecords.length) {
     return null
   }
 
-  const bulkActions = getBulkActionsFromRecords(selectedRecords)
+  const params = { resourceId: resource.id, recordIds: selectedRecords.map(records => records.id) }
+
+  const handleActionClick = (event, sourceAction: ActionJSON): void => (
+    buildActionClickHandler({
+      action: sourceAction,
+      params,
+      actionResponseHandler,
+      push: history.push,
+    })(event)
+  )
+
+  const bulkButtons = actionsToButtonGroup({
+    actions: getBulkActionsFromRecords(selectedRecords),
+    params,
+    handleClick: handleActionClick,
+  })
 
   return (
     <TableCaption>
-      <CardTitle as="span" mr="lg">
-        {translateLabel('selectedRecords', resource.id, { selected: selectedRecords.length })}
-      </CardTitle>
-      {bulkActions.map(action => (
-        <ActionButton
-          action={action}
-          key={action.name}
-          resourceId={resource.id}
-          recordIds={selectedRecords.map(records => records.id)}
-        >
-          <Button variant="text">
-            <Icon icon={action.icon} />
-            {action.label}
-          </Button>
-        </ActionButton>
-      ))}
+      <Box flex py="sm" alignItems="center">
+        <Title mr="lg">
+          {translateLabel('selectedRecords', resource.id, { selected: selectedRecords.length })}
+        </Title>
+        <ButtonGroup size="sm" rounded buttons={bulkButtons} />
+      </Box>
     </TableCaption>
   )
 }

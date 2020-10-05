@@ -12,7 +12,6 @@ export type BuildActionClickOptions = {
   params: DifferentActionParams;
   actionResponseHandler: ReturnType<typeof useActionResponseHandler>;
   push: (path: string, state?: any) => void;
-  search?: Location['search'];
 }
 
 export type BuildActionClickReturn = (event: any) => any
@@ -20,16 +19,18 @@ export type BuildActionClickReturn = (event: any) => any
 export const buildActionClickHandler = (
   options: BuildActionClickOptions,
 ): BuildActionClickReturn => {
-  const { action, params, actionResponseHandler, search, push } = options
+  const { action, params, actionResponseHandler, push } = options
 
   const handleActionClick = (event: React.MouseEvent<HTMLElement>): void => {
     event.preventDefault()
     event.stopPropagation()
 
-    const href = actionHref(action, params, search)
+    const href = actionHref(action, params)
+
+    console.log({ href })
 
     const callApi = buildActionCallApiTrigger({
-      params, action, actionResponseHandler, search,
+      params, action, actionResponseHandler,
     })
 
     if (action.guard && !confirm(action.guard)) {

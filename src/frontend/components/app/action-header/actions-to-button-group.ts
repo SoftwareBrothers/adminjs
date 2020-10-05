@@ -6,16 +6,15 @@ import { DifferentActionParams } from '../../../hooks'
 export type actionsToButtonGroupOptions = {
   actions: Array<ActionJSON>;
   params: DifferentActionParams;
-  search: Location['search'];
   handleClick: ButtonInGroupProps['onClick'];
 }
 
 export const actionsToButtonGroup = (
   options: actionsToButtonGroupOptions,
 ): ButtonGroupProps['buttons'] => {
-  const { actions, params, search, handleClick } = options
+  const { actions, params, handleClick } = options
   const buttons = actions.map((action) => {
-    const href = actionHref(action, params, search)
+    const href = actionHref(action, params)
     return {
       icon: action.icon,
       label: action.label,

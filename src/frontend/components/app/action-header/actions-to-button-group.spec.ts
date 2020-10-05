@@ -16,7 +16,6 @@ describe('actionsToButtonGroup', () => {
   }
   let buttonGroupProps: ButtonGroupProps['buttons']
 
-  const search = ''
   const handleClick = () => true
 
   context('flat actions (no nesting)', () => {
@@ -28,7 +27,6 @@ describe('actionsToButtonGroup', () => {
       buttonGroupProps = actionsToButtonGroup({
         actions,
         params,
-        search,
         handleClick,
       })
     })
@@ -75,7 +73,6 @@ describe('actionsToButtonGroup', () => {
           ...actionsExport,
         ],
         params,
-        search,
         handleClick,
       })
     })
@@ -107,7 +104,6 @@ describe('actionsToButtonGroup', () => {
       buttonGroupProps = actionsToButtonGroup({
         actions,
         params,
-        search,
         handleClick,
       })
     })

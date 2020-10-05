@@ -7,7 +7,6 @@ const h = new ViewHelpers()
 export const actionHref = (
   action: ActionJSON,
   params: DifferentActionParams,
-  search?: Location['search'],
 ): string | null => {
   const actionName = action.name
 
@@ -19,17 +18,14 @@ export const actionHref = (
     record: (): string => h.recordActionUrl({
       ...params as RecordActionParams,
       actionName,
-      search,
     }),
     resource: (): string => h.resourceActionUrl({
       resourceId: params.resourceId,
       actionName,
-      search,
     }),
     bulk: (): string => h.bulkActionUrl({
       ...params,
       actionName,
-      search,
     }),
   }
   if (hrefMap[action.actionType]) {
