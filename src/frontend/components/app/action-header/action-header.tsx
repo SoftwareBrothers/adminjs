@@ -40,17 +40,15 @@ export const ActionHeader: React.FC<ActionHeaderProps> = (props) => {
   const resourceId = resource.id
   const params = { resourceId, recordId: record?.id }
 
-  const handleActionClick = (event, sourceAction: ActionJSON): void => {
-    event.preventDefault()
-    event.stopPropagation()
-    return buildActionClickHandler({
+  const handleActionClick = (event, sourceAction: ActionJSON): void => (
+    buildActionClickHandler({
       action: sourceAction,
       params,
       actionResponseHandler,
       search: location.search,
       push: history.push,
     })(event)
-  }
+  )
 
   const actionButtons = actionsToButtonGroup({
     actions: record

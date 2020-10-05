@@ -17,11 +17,11 @@ export * from './bulk-delete/bulk-delete-action'
 export * from './action.interface'
 
 export const ACTIONS: {[key in BuildInActions]: any} = {
-  delete: DeleteAction,
-  show: ShowAction,
   new: NewAction,
-  edit: EditAction,
-  search: SearchAction,
   list: ListAction,
+  show: ShowAction,
+  edit: EditAction,
+  delete: DeleteAction,
   bulkDelete: BulkDeleteAction,
+  search: SearchAction,
 }

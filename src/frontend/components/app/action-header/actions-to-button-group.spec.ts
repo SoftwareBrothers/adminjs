@@ -6,7 +6,7 @@ import { actionsToButtonGroup } from './actions-to-button-group'
 
 import '../../spec/action-json.factory'
 
-describe.only('actionsToButtonGroup', () => {
+describe('actionsToButtonGroup', () => {
   let actions: Array<ActionJSON>
   const params = {
     recordId: 'recordId',
@@ -16,10 +16,6 @@ describe.only('actionsToButtonGroup', () => {
 
   const search = ''
   const handleClick = () => true
-
-  beforeEach(() => {
-
-  })
 
   context('flat actions (no nesting)', () => {
     const actionsCount = 5

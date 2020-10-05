@@ -1,3 +1,6 @@
+/* eslint-disable no-restricted-globals */
+/* eslint-disable no-undef */
+/* eslint-disable no-alert */
 import { DifferentActionParams, useActionResponseHandler } from '../../hooks'
 import { actionHasComponent } from './action-has-component'
 import { actionHref } from './action-href'

@@ -1,8 +1,3 @@
-import React from 'react'
-/* eslint-disable no-restricted-globals */
-/* eslint-disable no-undef */
-/* eslint-disable no-alert */
-import { AxiosResponse } from 'axios'
 import { useLocation, useHistory } from 'react-router'
 
 import { ActionResponse } from '../../../backend/actions/action.interface'
@@ -11,7 +6,6 @@ import { ActionJSON, buildActionCallApiTrigger, buildActionClickHandler } from '
 
 import { DifferentActionParams, ActionCallCallback, UseActionResult } from './use-action.types'
 import { actionHref } from '../../interfaces/action/action-href'
-import { callActionApi } from '../../interfaces/action/call-action-api'
 import { useActionResponseHandler } from './use-action-response-handler'
 
 /**

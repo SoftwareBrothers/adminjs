@@ -29,6 +29,7 @@ async function build({
   if (watch) {
     const bundle = await rollup.rollup(inputOptions)
     if (process.env.DEBUG_BUNDLER) {
+      // eslint-disable-next-line no-console
       console.log(util.inspect(bundle.watchFiles, { maxArrayLength: null }))
     }
     const spinner = ora('Bundling files')
