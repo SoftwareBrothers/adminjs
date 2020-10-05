@@ -52,10 +52,11 @@ export const RecordInList: React.FC<RecordInListProps> = (props) => {
   const action = show || edit
 
   const handleClick = (event): void => {
+    const targetTagName = (event.target as HTMLElement).tagName.toLowerCase()
     if (action
-      && event.targetTagName !== 'a'
-      && event.targetTagName !== 'button'
-      && event.targetTagName !== 'svg'
+      && targetTagName !== 'a'
+      && targetTagName !== 'button'
+      && targetTagName !== 'svg'
     ) {
       buildActionClickHandler({
         action,
@@ -83,6 +84,7 @@ export const RecordInList: React.FC<RecordInListProps> = (props) => {
     icon: 'OverflowMenuHorizontal',
     variant: 'light',
     label: null,
+    'data-testid': 'actions-dropdown',
     buttons: actionsToButtonGroup({
       actions: recordActions,
       params: actionParams,

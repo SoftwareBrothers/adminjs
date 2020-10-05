@@ -150,7 +150,7 @@ class ActionDecorator {
       )
     }
     throw new ConfigurationError(
-      'Before action hook has to be either function or Array<function>',
+      'Action handler has to be either function or Array<function>',
       'Action#Before',
     )
   }
@@ -314,6 +314,14 @@ class ActionDecorator {
     return this.action.variant || DEFAULT_VARIANT
   }
 
+  parent(): string | null {
+    return this.action.parent || null
+  }
+
+  hasHandler(): boolean {
+    return !!this.action.handler
+  }
+
   /**
    * Serializes action to JSON format
    *
@@ -337,6 +345,8 @@ class ActionDecorator {
       containerWidth: this.containerWidth(),
       layout: this.layout(currentAdmin),
       variant: this.variant(),
+      parent: this.parent(),
+      hasHandler: this.hasHandler(),
     }
   }
 }

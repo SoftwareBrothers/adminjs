@@ -26,8 +26,11 @@ export type UseActionResultCallApi<K extends ActionResponse> = () => Promise<Axi
  * @alias UseActionResult
  */
 export type UseActionResult<K extends ActionResponse> = {
-  /** Href to an action */
-  href: string;
+  /**
+   * Href to an action. When null it means that action doesn't have neither component nor action
+   * handler
+   */
+  href: string | null;
   /** function which will call the API */
   callApi: UseActionResultCallApi<K>;
   /** ready handleClick handler */

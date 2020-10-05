@@ -476,7 +476,7 @@ export interface Action <T extends ActionResponse> {
    * Required for new actions. For modifying already defined actions
    * like new and edit we suggest using {@link Action#before} and {@link Action#after} hooks.
    */
-  handler: ActionHandler<T> | Array<ActionHandler<T>>;
+  handler: ActionHandler<T> | Array<ActionHandler<T>> | null;
   /**
    * Before action hook. When it is given - it is performed before the {@link Action#handler}
    * method.
@@ -626,4 +626,10 @@ export interface Action <T extends ActionResponse> {
    * Defines the variant of the action. based on that it will receive given color.
    */
   variant?: VariantType;
+
+  /**
+   * Action can be nested. If you give here another action name - it will be nested under it.
+   * If parent action doesn't exists - it will be nested under name in the parent.
+   */
+  parent?: string;
 }

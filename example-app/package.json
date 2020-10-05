@@ -13,13 +13,13 @@
     "sequelize": "sequelize"
   },
   "devDependencies": {
-    "@admin-bro/design-system": "1.7.0-beta.8",
     "@types/sequelize": "^4.28.8",
     "nodemon": "^2.0.2",
     "sequelize-cli": "^6.2.0"
   },
   "dependencies": {
-    "admin-bro": "3.3.0-beta.8",
+    "admin-bro": "3.3.0-beta.13",
+    "@admin-bro/design-system": "1.7.0-beta.16",
     "@admin-bro/express": "3.0.1",
     "@admin-bro/mongoose": "1.0.0",
     "@admin-bro/sequelize": "1.1.1",

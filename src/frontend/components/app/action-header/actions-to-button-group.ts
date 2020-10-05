@@ -22,10 +22,35 @@ export const actionsToButtonGroup = (
       variant: action.variant,
       source: action,
       href,
-      onClick: handleClick,
+      // when href is not defined - handle click should also be not defined
+      // This prevents from "cursor: pointer;"
+      onClick: href ? handleClick : null,
       'data-testid': buildActionTestId(action),
       buttons: [],
     }
   })
-  return buttons
+
+  // nesting buttons
+  const buttonsMap = buttons.reduce((memo, button) => {
+    const action = button.source
+    if (action.parent) {
+      const parent: ButtonInGroupProps = memo[action.parent]
+        || buttons.find(btn => btn.source.name === action.parent)
+        || {
+          label: action.parent,
+        }
+
+      parent.buttons = parent.buttons || []
+      parent.buttons.push(button)
+      return {
+        ...memo,
+        [action.parent]: parent,
+      }
+    }
+    return {
+      ...memo,
+      [button.source.name]: button,
+    }
+  }, {} as Record<string, ButtonInGroupProps>)
+  return Object.values(buttonsMap)
 }

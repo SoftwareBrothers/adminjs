@@ -9,6 +9,7 @@ describe('mergeResourceOptions', function () {
       actions: {
         new: {
           before: function firstBeforeHook() {} as unknown as Before,
+          handler: null,
         },
         edit: {
           after: [function firstAfterHook() {} as unknown as After<ActionResponse>],
@@ -19,6 +20,7 @@ describe('mergeResourceOptions', function () {
       actions: {
         new: {
           before: function lastBeforeHook() {} as unknown as Before,
+          handler: function lastHandler() {} as unknown as ActionHandler<ActionResponse>,
         },
         edit: {
           after: function lastAfterHook() {} as unknown as After<ActionResponse>,
@@ -35,6 +37,9 @@ describe('mergeResourceOptions', function () {
           before: [
             existingOptions.actions.new.before,
             newOptions.actions.new.before,
+          ],
+          handler: [
+            newOptions.actions.new.handler,
           ],
         },
         edit: {

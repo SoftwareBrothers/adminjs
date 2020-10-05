@@ -62,4 +62,14 @@ export interface ActionJSON {
    * action variant
    */
   variant: VariantType;
+
+  /**
+   * If action is nested
+   */
+  parent: string | null;
+
+  /**
+   * Indicates if action has action handler defined
+   */
+  hasHandler: boolean;
 }

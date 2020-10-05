@@ -7,21 +7,21 @@ import { Action, ActionResponse } from '../../actions/action.interface'
 
 function mergeActionHooks<T>(
   key: string,
-  oldHook?: T | Array<T>,
-  newHook?: T | Array<T>,
+  oldHook?: T | Array<T> | null,
+  newHook?: T | Array<T> | null,
 ): Record<string, Array<T>> | {} {
   let hooks: Array<T> = []
   if (oldHook) {
     if (Array.isArray(oldHook)) {
       hooks = [...hooks, ...oldHook]
-    } else {
+    } else if (oldHook) {
       hooks = [...hooks, oldHook]
     }
   }
   if (newHook) {
     if (Array.isArray(newHook)) {
       hooks = [...hooks, ...newHook]
-    } else {
+    } else if (newHook) {
       hooks = [...hooks, newHook]
     }
   }

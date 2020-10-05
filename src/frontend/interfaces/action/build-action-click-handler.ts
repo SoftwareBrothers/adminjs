@@ -37,7 +37,7 @@ export const buildActionClickHandler = (
     }
     if (actionHasComponent(action)) {
       callApi()
-    } else {
+    } else if (href) {
       push(href)
     }
   }

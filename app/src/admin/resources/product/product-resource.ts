@@ -10,10 +10,21 @@ export const ProductResource: ResourceOptions = {
     },
   },
   actions: {
-    export: {
-      actionType: 'resource',
+    exporter: {
+      actionType: 'record',
       icon: 'Export',
+    },
+    export: {
+      actionType: 'record',
+      icon: 'DocumentExport',
       variant: 'light',
+      parent: 'exporter',
+    },
+    import: {
+      actionType: 'record',
+      icon: 'DocumentImport',
+      variant: 'light',
+      parent: 'exporter',
     },
   },
 }

@@ -33,10 +33,6 @@ export function decorateActions(
       name: actions[key].name || key,
       label: actions[key].label || key,
       actionType: actions[key].actionType || ['resource'],
-      handler: actions[key].handler || (async (): Promise<void> => {
-        // eslint-disable-next-line no-console
-        console.log('You have to define handler function')
-      }),
       ...actions[key],
     }
 

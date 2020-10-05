@@ -8,8 +8,12 @@ export const actionHref = (
   action: ActionJSON,
   params: DifferentActionParams,
   search?: Location['search'],
-): string => {
+): string | null => {
   const actionName = action.name
+
+  if (!action.component && !action.hasHandler) {
+    return null
+  }
 
   const hrefMap = {
     record: (): string => h.recordActionUrl({
