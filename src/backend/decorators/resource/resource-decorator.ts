@@ -249,7 +249,7 @@ class ResourceDecorator {
    * @return  {String}      title of given record
    */
   titleOf(record: BaseRecord): string {
-    return record.param(this.titleProperty().name())
+    return record.get(this.titleProperty().name()) as string
   }
 
   getHref(currentAdmin?: CurrentAdmin): string | null {

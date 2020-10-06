@@ -2,7 +2,7 @@ import { DELIMITER } from '../../../utils/flat/constants'
 import { BaseRecord } from '../../adapters'
 import PropertyDecorator from '../../decorators/property/property-decorator'
 
-const isValueSearchable = (value: any): boolean => (
+const isValueSearchable = (value: any): value is string | number => (
   ['string', 'bigint', 'number'].includes(typeof value)
     && value !== null
     && value !== ''
@@ -41,13 +41,12 @@ export const populateProperty = async (
   // first, we create externalIdsMap[1] = null where 1 is userId. This make keys unique and assign
   // nulls to each of them
   const externalIdsMap = records.reduce((memo, baseRecord) => {
-    const foreignKeyValue = baseRecord.param(property.path)
+    const foreignKeyValue = baseRecord.get(property.path)
     // array properties returns arrays so we have to take the all into consideration
     if (property.isArray()) {
-      return foreignKeyValue.reduce((arrayMemo, valueInArray) => ({
+      return (foreignKeyValue as Array<string | number>).reduce((arrayMemo, valueInArray) => ({
         ...arrayMemo,
         ...(isValueSearchable(valueInArray) ? { [valueInArray]: null } : {}),
-        // [valueInArray]: null,
       }), memo)
     }
 
@@ -86,7 +85,7 @@ export const populateProperty = async (
   return records.map((record) => {
     // we set record.populated['userId'] = externalIdsMap[record.param('userId)]
     // but this can also be an array - we have to check it
-    const foreignKeyValue = record.param(property.path)
+    const foreignKeyValue = record.get(property.path)
 
     if (Array.isArray(foreignKeyValue)) {
       foreignKeyValue.forEach((foreignKeyValueItem, index) => {
@@ -95,7 +94,7 @@ export const populateProperty = async (
           externalIdsMap[foreignKeyValueItem],
         )
       })
-    } else {
+    } else if (typeof foreignKeyValue === 'string' || typeof foreignKeyValue === 'number') {
       record.populate(property.path, externalIdsMap[foreignKeyValue])
     }
 

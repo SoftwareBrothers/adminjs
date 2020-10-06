@@ -38,7 +38,7 @@ describe('populateProperty', () => {
 
   context('2 same records with reference key', () => {
     beforeEach(async () => {
-      record.param.returns(userId)
+      record.get.returns(userId)
       userRecord.id.returns(userId)
       referenceResource.findMany.resolves([userRecord])
 
@@ -64,7 +64,7 @@ describe('populateProperty', () => {
     const [userId1, userId2] = ['user1', 'user2']
 
     beforeEach(async () => {
-      record.param.returns([userId1, userId2])
+      record.get.returns([userId1, userId2])
       // resourceDecorator
       userRecord.id.returns(userId)
       property.isArray.returns(true)
@@ -80,7 +80,7 @@ describe('populateProperty', () => {
 
   context('empty references', () => {
     it('does not findMany for null values', async () => {
-      record.param.returns(null)
+      record.get.returns(null)
 
       populatedResponse = await populateProperty([record], property)
 
@@ -88,7 +88,7 @@ describe('populateProperty', () => {
     })
 
     it('does not findMany for undefined values', async () => {
-      record.param.returns(undefined)
+      record.get.returns(undefined)
 
       populatedResponse = await populateProperty([record], property)
 
@@ -96,7 +96,7 @@ describe('populateProperty', () => {
     })
 
     it('findMany for 0 values', async () => {
-      record.param.returns(0)
+      record.get.returns(0)
 
       populatedResponse = await populateProperty([record], property)
 
@@ -104,7 +104,7 @@ describe('populateProperty', () => {
     })
 
     it('does not findMany for "" empty strings', async () => {
-      record.param.returns('')
+      record.get.returns('')
 
       populatedResponse = await populateProperty([record], property)
 
@@ -112,7 +112,7 @@ describe('populateProperty', () => {
     })
 
     it('does not findMany for "" empty strings in array', async () => {
-      record.param.returns([''])
+      record.get.returns([''])
       property.isArray.returns(true)
 
       populatedResponse = await populateProperty([record], property)

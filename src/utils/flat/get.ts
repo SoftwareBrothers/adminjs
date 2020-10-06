@@ -7,12 +7,18 @@ import { propertyKeyRegex } from './property-key-regex'
 const TEMP_HOLDING_KEY = 'TEMP_HOLDING_KEY'
 
 /**
- *
  * @memberof module:flat
- * @param {FlattenParams} params
- * @param {string} property
+ * @param {FlattenParams}   params      flatten params from which property has to be taken
+ * @param {string}          [property]  name of the property
+ * @returns {any}                       when property key exists directly it returns what is inside,
+ *                                      otherwise it tries to find any nested objects and returns
+ *                                      them
  */
-const get = (params: FlattenParams = {}, property: string): any => {
+const get = (params: FlattenParams = {}, property?: string): any => {
+  if (!property) {
+    return unflatten(params)
+  }
+
   if (params[property]) {
     return params[property]
   }

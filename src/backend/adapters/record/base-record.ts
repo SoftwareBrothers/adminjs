@@ -1,6 +1,6 @@
 import _ from 'lodash'
 import { flat } from '../../../utils/flat'
-import { ParamsType } from './params.type'
+import { ParamsType, ParamsTypeValue } from './params.type'
 import BaseResource from '../resource/base-resource'
 import ValidationError, { RecordError, PropertyErrors } from '../../utils/errors/validation-error'
 import { RecordJSON } from '../../../frontend/interfaces'
@@ -18,7 +18,8 @@ class BaseRecord {
   public resource: BaseResource
 
   /**
-   * Actual record data stored as a flatten object
+   * Actual record data stored as a flatten object. You shouldn't access them directly - always
+   * with {@link BaseRecord#get} and {@link BaseRecord#set} property.
    */
   public params: ParamsType
 
@@ -49,9 +50,45 @@ class BaseRecord {
    *                            if email is nested within the authentication object in the data
    *                            store
    * @return {any}              value for given field
+   * @deprecated in favour of {@link BaseRecord#get} and {@link BaseRecord#set} methods
    */
   param(path: string): any {
     return flat.get(this.params, path)
+  }
+
+  /**
+   * Returns unflatten (regular) value for given field. So if you have in the params following
+   * structure:
+   * ```javascript
+   * params = {
+   *   genre.0: 'male',
+   *   genre.1: 'female',
+   * }
+   * ```
+   *
+   * for `get('genre')` function will return ['male', 'female']
+   *
+   * @param {string} [propertyPath]     path for the property. If not set function returns an entire
+   *                                    unflatten object
+   * @return {any}                      unflatten data under given path
+   * @new in version 3.3
+   */
+  get(propertyPath: string | undefined): ParamsTypeValue | object {
+    return flat.get(this.params, propertyPath)
+  }
+
+  /**
+   * Sets given value under the propertyPath. Value is flatten and all previous values under this
+   * path are replaced. When value is `undefined` function just clears the old values
+   *
+   * @param {string}    propertyPath
+   * @param {any}       value
+   * @returns           an entire, updated, params object
+   * @new in version 3.3
+   */
+  set(propertyPath: string, value: any): any {
+    this.params = flat.set(this.params, propertyPath, value)
+    return this.params
   }
 
   /**
@@ -128,7 +165,7 @@ class BaseRecord {
     if (!idProperty) {
       throw new Error(`Resource: "${this.resource.id()}" does not have an id property`)
     }
-    return this.param(idProperty.name())
+    return this.params[idProperty.name()]
   }
 
   /**

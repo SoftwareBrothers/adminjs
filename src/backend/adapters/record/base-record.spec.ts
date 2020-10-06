@@ -20,7 +20,7 @@ describe('Record', function () {
     sinon.restore()
   })
 
-  describe('#param', function () {
+  describe('#get', function () {
     context('record with nested parameters', function () {
       const nested3level = 'value'
 
@@ -32,21 +32,21 @@ describe('Record', function () {
       })
 
       it('returns deepest field when all up-level keys are given', function () {
-        expect(record.param('nested1level.nested2level.nested3level')).to.equal(nested3level)
+        expect(record.get('nested1level.nested2level.nested3level')).to.equal(nested3level)
       })
 
       it('returns object when all up-level keys are given except one', function () {
-        expect(record.param('nested1level.nested2level')).to.deep.equal({ nested3level })
+        expect(record.get('nested1level.nested2level')).to.deep.equal({ nested3level })
       })
 
       it('returns object when only first level key is given', function () {
-        expect(record.param('nested1level')).to.deep.equal({
+        expect(record.get('nested1level')).to.deep.equal({
           nested2level: { nested3level },
         })
       })
 
       it('returns undefined when passing unknown param', function () {
-        expect(record.param('nested1level.nested2')).to.be.undefined
+        expect(record.get('nested1level.nested2')).to.be.undefined
       })
     })
   })
@@ -131,7 +131,7 @@ describe('Record', function () {
       })
 
       it('stores what was returned by BaseResource#update to this.params', function () {
-        expect(record.param('param2')).to.equal(newParams.param2)
+        expect(record.get('param2')).to.equal(newParams.param2)
       })
 
       it('resets the errors when there are no', function () {
