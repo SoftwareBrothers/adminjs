@@ -2,23 +2,10 @@
 # yarn lockfile v1
 
 
-"@admin-bro/design-system@1.7.0-beta.15":
-  version "1.7.0-beta.15"
-  resolved "https://registry.yarnpkg.com/@admin-bro/design-system/-/design-system-1.7.0-beta.15.tgz#7d0b76fab9f423068003da519c30697abccc4c00"
-  integrity sha512-MAEKjuGKiDAe/5knt2QNqZ65nLaqUq7zRf0Lb3h8OJVGsnOmFdexT4eMGzpCFfwnYkeF2JAI5nICCl3ceaoeYA==
-  dependencies:
-    "@carbon/icons-react" "^10.14.0"
-    jw-paginate "^1.0.4"
-    lodash "^4.17.20"
-    polished "^3.6.5"
-    quill "^1.3.7"
-    react-datepicker "^3.1.3"
-    styled-system "^5.1.5"
-
-"@admin-bro/design-system@^1.7.0-beta.8":
-  version "1.7.0-beta.8"
-  resolved "https://registry.yarnpkg.com/@admin-bro/design-system/-/design-system-1.7.0-beta.8.tgz#1834e02b5f3314c16be61518ff783f6c5c9c22d2"
-  integrity sha512-hByMBplQNfOjEbmo1lHX/wK8VGBwp4eXeM0tUUGnd73alSsAVOXkwZ2hhygeCbTj6NEpekny6ls51BQJmAXl0g==
+"@admin-bro/design-system@1.7.0-beta.16":
+  version "1.7.0-beta.16"
+  resolved "https://registry.yarnpkg.com/@admin-bro/design-system/-/design-system-1.7.0-beta.16.tgz#8441e6183e3df71d0fb200dd8f233872d63569eb"
+  integrity sha512-szT1x2ni3n6LEIAPGPms7zAbCsHff58AkcBraRbPNEUi52QiKlJjBbjG6KgxakRSlEtilElJrd/6XfszG+5Irw==
   dependencies:
     "@carbon/icons-react" "^10.14.0"
     jw-paginate "^1.0.4"
@@ -1645,12 +1632,11 @@ accepts@~1.3.7:
     mime-types "~2.1.24"
     negotiator "0.6.2"
 
-admin-bro@^3.3.0-beta.8:
-  version "3.3.0-beta.8"
-  resolved "https://registry.yarnpkg.com/admin-bro/-/admin-bro-3.3.0-beta.8.tgz#0d48cefa795d3ac54bec803194e99d8002be9cc3"
-  integrity sha512-G1Klw4E51cB0qxnr0lRP/KCay/wz0DKLKmyE0CqvCHrnHnUSVLjj9j9KJXhcywp/gFzDIjKzDqiS4k0z39dz7Q==
+admin-bro@^3.3.0-beta.13:
+  version "3.3.0-beta.15"
+  resolved "https://registry.yarnpkg.com/admin-bro/-/admin-bro-3.3.0-beta.15.tgz#0e68eae767f2649d5a4093fe7bd99f40aa0fcf64"
+  integrity sha512-Urf4boWYlk43YiqO4zZLPsAElAkjmSfmHIr1+lxnMw/SAZ30ez78IaDtbwK26xFEjNuaDJCBmLoCBp9YMwUCAQ==
   dependencies:
-    "@admin-bro/design-system" "^1.7.0-beta.8"
     "@babel/core" "^7.10.2"
     "@babel/parser" "^7.10.2"
     "@babel/plugin-transform-runtime" "^7.10.1"
