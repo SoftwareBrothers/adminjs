@@ -38,6 +38,14 @@ class PropertyDecorator {
   public options: PropertyOptions
 
   /**
+   * Array of all subProperties which were added in {@link ResourceOption} interface rather than
+   * in the database
+   *
+   * @private
+   */
+  private virtualSubProperties: Array<PropertyDecorator>
+
+  /**
    * @param {Object} opts
    * @param {BaseProperty}        opts.property
    * @param  {AdminBro}           opts.admin  current instance of AdminBro
@@ -57,6 +65,7 @@ class PropertyDecorator {
     this._resource = resource
     this.path = path || property.name()
     this.isVirtual = !!isVirtual
+    this.virtualSubProperties = []
 
     /**
      * Options passed along with a given resource
@@ -268,7 +277,7 @@ class PropertyDecorator {
    * @return  {Array<PropertyDecorator>}  decorated subProperties
    */
   subProperties(): Array<PropertyDecorator> {
-    return this.property.subProperties().map((subProperty) => {
+    const dbSubProperties = this.property.subProperties().map((subProperty) => {
       const path = `${this.path}.${subProperty.name()}`
       const decorated = new PropertyDecorator({
         property: subProperty,
@@ -279,6 +288,11 @@ class PropertyDecorator {
       })
       return decorated
     })
+    return [...dbSubProperties, ...this.virtualSubProperties]
+  }
+
+  addSubProperty(subProperty: PropertyDecorator): void {
+    this.virtualSubProperties.push(subProperty)
   }
 
   /**

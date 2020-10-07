@@ -2,9 +2,98 @@ import { ResourceDecorator } from '..'
 import AdminBro from '../../../../admin-bro'
 import { BaseProperty, BaseResource } from '../../../adapters'
 import { PropertyDecorator } from '../../property'
+import { findSubProperty } from './find-sub-property'
 import { getPropertyByKey } from './get-property-by-key'
+import { pathToParts } from './path-to-parts'
 
 export type DecoratedProperties = {[key: string]: PropertyDecorator}
+
+const decorateDatabaseProperties = (
+  resource: BaseResource,
+  admin: AdminBro,
+  decorator: ResourceDecorator,
+): DecoratedProperties => {
+  const { options } = decorator
+
+  return resource.properties().reduce((memo, property) => {
+    const decoratedProperty = new PropertyDecorator({
+      property,
+      admin,
+      options: options.properties && options.properties[property.name()],
+      resource: decorator,
+    })
+    return { ...memo, [property.name()]: decoratedProperty }
+  }, {} as DecoratedProperties)
+}
+
+const decorateVirtualProperties = (
+  dbProperties: DecoratedProperties,
+  admin: AdminBro,
+  decorator: ResourceDecorator,
+): DecoratedProperties => {
+  const { options } = decorator
+
+  if (options.properties) {
+    return Object.keys(options.properties).reduce((memo, key) => {
+      const existingProperty = getPropertyByKey(key, dbProperties)
+      if (!existingProperty) {
+        const property = new BaseProperty({ path: key, isSortable: false })
+        return {
+          ...memo,
+          [key]: new PropertyDecorator({
+            property,
+            admin,
+            options: options.properties && options.properties[key],
+            resource: decorator,
+            isVirtual: true,
+          }),
+        }
+      }
+      return {}
+    }, {} as DecoratedProperties)
+  }
+  return {}
+}
+
+/**
+ * This function moves nested properties to existing mixed properties if there are any.
+ * So that they could be printed as Section in the UI, and handled together as an Array if there
+ * is a need for that.
+ *
+ * @param {DecoratedProperties} dbProperties
+ * @param {DecoratedProperties} virtualProperties
+ */
+const organizeNestedProperties = (
+  dbProperties: DecoratedProperties,
+  virtualProperties: DecoratedProperties,
+): DecoratedProperties => {
+  const properties = { ...dbProperties, ...virtualProperties }
+  const rootPropertyKeys = Object.keys(properties).filter((key) => {
+    const property = properties[key]
+    // reverse because we start by by finding from the longest path
+    // and removes itself.
+    // changes 'root.nested.nested1' to [root.nested', 'root']
+    const parts = pathToParts(property.path).reverse().splice(1)
+    if (parts.length) {
+      const mixedPropertyPath = parts.find(part => (
+        properties[part] && properties[part].type() === 'mixed'
+      ))
+      if (mixedPropertyPath) {
+        const mixedProperty = properties[mixedPropertyPath]
+        mixedProperty.addSubProperty(property)
+        // remove from the root properties
+        return false
+      }
+    }
+
+    return true
+  })
+
+  return rootPropertyKeys.reduce((memo, key) => ({
+    ...memo,
+    [key]: properties[key],
+  }), {} as DecoratedProperties)
+}
 
 /**
  * Initializes PropertyDecorator for all properties within a resource. When
@@ -18,34 +107,7 @@ export function decorateProperties(
   admin: AdminBro,
   decorator: ResourceDecorator,
 ): DecoratedProperties {
-  const { options } = decorator
-
-  // decorate all existing top-level properties
-  const properties = resource.properties().reduce((memo, property) => {
-    const decoratedProperty = new PropertyDecorator({
-      property,
-      admin,
-      options: options.properties && options.properties[property.name()],
-      resource: decorator,
-    })
-    return { ...memo, [property.name()]: decoratedProperty }
-  }, {} as DecoratedProperties)
-
-  // decorate all properties user gave in options but they don't exist in the resource
-  if (options.properties) {
-    Object.keys(options.properties).forEach((key) => {
-      const existingProperty = getPropertyByKey(key, properties)
-      if (!existingProperty) {
-        const property = new BaseProperty({ path: key, isSortable: false })
-        properties[key] = new PropertyDecorator({
-          property,
-          admin,
-          options: options.properties && options.properties[key],
-          resource: decorator,
-          isVirtual: true,
-        })
-      }
-    })
-  }
-  return properties
+  const dbProperties = decorateDatabaseProperties(resource, admin, decorator)
+  const virtualProperties = decorateVirtualProperties(dbProperties, admin, decorator)
+  return organizeNestedProperties(dbProperties, virtualProperties)
 }

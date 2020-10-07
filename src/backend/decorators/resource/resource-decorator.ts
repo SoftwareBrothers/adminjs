@@ -32,6 +32,23 @@ export const DEFAULT_MAX_COLUMNS_IN_LIST = 8
  * @category Decorators
  */
 class ResourceDecorator {
+  /**
+   * Map of all root level properties. By root properties we mean property which is not nested
+   * under other mixed property.
+   *
+   * Examples from PropertyOptions:
+   * {
+   *   rootProperty: { type: mixed }, // root property
+   *
+   *    // nested property - this should go be the subProperty of rootProperty
+   *   'rootProperty.nested': { type: 'string' }
+   *
+   *   // also root property because there is no another property of type mixed
+   *   'another.property': { type: 'string' },
+   * }
+   *
+   * for a the reference {@see decorateProperties}
+   */
   public properties: DecoratedProperties
 
   public options: ResourceOptions

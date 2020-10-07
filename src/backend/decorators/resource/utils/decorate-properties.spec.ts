@@ -101,7 +101,7 @@ describe('decorateProperties', () => {
     })
   })
 
-  context('nested properties', () => {
+  context('nested properties in the database', () => {
     let subPropertyLevel1: BaseProperty
     let subPropertyLevel2: BaseProperty
     const newIsVisible = false
@@ -171,6 +171,53 @@ describe('decorateProperties', () => {
           decoratedProperties[nestedPath.split('.')[0]].isVisible('show'),
         ).not.to.eq(newIsVisible)
       })
+    })
+  })
+
+  context('virtual nested properties and one db property', () => {
+    beforeEach(() => {
+      property = new BaseProperty({ path: 'otherProperty', type: 'mixed' })
+      decorator.options = {
+        properties: {
+          root: {
+            type: 'mixed',
+          },
+          'root.nested1': { type: 'string' },
+          'root.nested2': { type: 'string' },
+          'root.nested3': { type: 'string' },
+          'root.nestedArray': {
+            type: 'mixed',
+            isArray: true,
+          },
+          'root.nestedArray.name': { type: 'string' },
+          'root.nestedArray.surName': { type: 'string' },
+          'otherProperty.name': { type: 'string' },
+        },
+      }
+      resource.properties.returns([property])
+      decoratedProperties = decorateProperties(resource, admin, decorator)
+    })
+
+    it('returns root properties: one db property and 1 virtual', () => {
+      expect(Object.keys(decoratedProperties)).to.have.lengthOf(2)
+    })
+
+    it('nests 3 nested properties under the root mixed type', () => {
+      const subProperties = decoratedProperties.root.subProperties()
+
+      expect(subProperties).to.have.lengthOf(4)
+    })
+
+    it('nests 2 properties under the root.nestedArray mixed type', () => {
+      const subProperties = decoratedProperties.root.subProperties()[3].subProperties()
+
+      expect(subProperties).to.have.lengthOf(2)
+    })
+
+    it('nests 1 property under the `otherProperty` mixed dbProperty', () => {
+      const subProperties = decoratedProperties.otherProperty.subProperties()
+
+      expect(subProperties).to.have.lengthOf(1)
     })
   })
 })
