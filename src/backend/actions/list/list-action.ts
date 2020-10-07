@@ -36,19 +36,23 @@ export const ListAction: Action<ListActionResponse> = {
     const { resource } = context
     let { page, perPage } = flat.unflatten(query || {})
 
-    const listProperties = resource.decorate().getListProperties()
-
     if (perPage) {
       perPage = +perPage > PER_PAGE_LIMIT ? PER_PAGE_LIMIT : +perPage
     } else {
       perPage = 10 // default
     }
     page = Number(page) || 1
-    const sort = sortSetter(
-      { sortBy, direction },
-      listProperties[0].name(),
-      resource.decorate().options,
-    )
+
+    const listProperties = resource.decorate().getListProperties()
+    const firstProperty = listProperties.find(p => p.isSortable())
+    let sort
+    if (firstProperty) {
+      sort = sortSetter(
+        { sortBy, direction },
+        firstProperty.name(),
+        resource.decorate().options,
+      )
+    }
 
     const filter = await new Filter(filters, resource).populate()
 
