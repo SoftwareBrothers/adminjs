@@ -34,6 +34,7 @@ const Edit: FC<EditPropertyProps> = (props) => {
         onBlur={() => onChange(property.name, value)}
         value={value}
         disabled={property.isDisabled}
+        {...property.custom}
       />
       <FormMessage>{error && error.message}</FormMessage>
     </FormGroup>

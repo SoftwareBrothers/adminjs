@@ -14,6 +14,10 @@ import {
 import { EditPropertyProps } from '../base-property-props'
 import { recordPropertyIsEqual } from '../record-property-is-equal'
 
+type CustomType = {
+  borderless?: boolean;
+  quill?: QuillOptions;
+}
 
 const Edit: FC<EditPropertyProps> = (props) => {
   const { property, record, onChange } = props
@@ -22,7 +26,7 @@ const Edit: FC<EditPropertyProps> = (props) => {
 
   const { custom } = property
 
-  const quill = custom as QuillOptions || {}
+  const { quill = {}, ...customProps } = custom as CustomType || {}
   quill.theme = quill.theme || 'snow'
   quill.modules = {
     toolbar: DefaultQuillToolbarOptions,
@@ -38,6 +42,7 @@ const Edit: FC<EditPropertyProps> = (props) => {
         {property.label}
       </Label>
       <RichText
+        {...customProps}
         value={value}
         onChange={content => onChange(property.name, content)}
         quill={quill}

@@ -42,6 +42,7 @@ const SelectEdit: FC<CombinedProps> = (props) => {
       options={property.availableValues}
       onChange={s => onChange(property.name, s?.value ?? '')}
       isDisabled={property.isDisabled}
+      {...property.custom}
     />
   )
 }
@@ -67,6 +68,7 @@ const TextEdit: FC<CombinedProps> = (props) => {
       onKeyDown={e => e.keyCode === 13 && onChange(property.name, value)}
       value={value}
       disabled={property.isDisabled}
+      {...property.custom}
     />
   )
 }

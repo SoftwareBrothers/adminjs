@@ -90,6 +90,7 @@ const Edit: FC<CombinedProps> = (props) => {
         isClearable
         isDisabled={property.isDisabled}
         isLoading={loadingRecord}
+        {...property.custom}
       />
       <FormMessage>{error?.message}</FormMessage>
     </FormGroup>
