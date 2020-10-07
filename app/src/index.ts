@@ -19,6 +19,8 @@ const run = async (): Promise<void> => {
 
   await createAdmin()
 
+  admin.watch()
+
   listen(admin, sessionStore(sequelize), authenticate)
 }
 

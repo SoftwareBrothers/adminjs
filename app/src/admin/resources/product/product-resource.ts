@@ -8,6 +8,19 @@ export const ProductResource: ResourceOptions = {
       reference: 'Brands',
       position: 10,
     },
+    ogTags: {
+      type: 'mixed',
+      isArray: true,
+    },
+    'ogTags.title': {
+      type: 'string',
+    },
+    'ogTags.description': {
+      type: 'string',
+    },
+    'ogTags.image': {
+      type: 'string',
+    },
   },
   actions: {
     exporter: {

@@ -1,11 +1,8 @@
 import { DataTypes, Model, UUIDV4 } from 'sequelize'
 import { sequelize } from './connect'
+import { Product } from '../interfaces/product'
 
-export interface ProductInterface extends Model {
-  id: string;
-  name: string;
-  description?: string;
-}
+export interface ProductInterface extends Model, Product {}
 
 export const ProductModel = sequelize.define<ProductInterface>('Products', {
   // Model attributes are defined here
@@ -23,6 +20,9 @@ export const ProductModel = sequelize.define<ProductInterface>('Products', {
   },
   brandId: {
     type: DataTypes.STRING,
+  },
+  ogTags: {
+    type: DataTypes.JSONB,
   },
 }, {
   // Other model options go here
