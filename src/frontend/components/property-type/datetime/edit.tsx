@@ -22,7 +22,7 @@ const Edit: React.FC<EditPropertyProps> = (props) => {
         disabled={property.isDisabled}
         onChange={(data: string): void => onChange(property.name, data)}
         propertyType={property.type}
-        {...property.custom}
+        {...property.props}
       />
       <FormMessage>{error && error.message}</FormMessage>
     </FormGroup>

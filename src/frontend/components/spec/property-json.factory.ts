@@ -21,4 +21,5 @@ factory.define<PropertyJSON>('PropertyJSON', Object, {
   path: factory.sequence('JSONProperty.name', n => `someProperty${n}`),
   resourceId: 'someResourceId',
   isVirtual: false,
+  props: {},
 })

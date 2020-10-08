@@ -268,6 +268,7 @@ class PropertyDecorator {
       isArray: this.isArray(),
       resourceId: this._resource.id(),
       isVirtual: this.isVirtual,
+      props: this.options.props || {},
     }
   }
 

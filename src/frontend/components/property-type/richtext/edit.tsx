@@ -24,9 +24,9 @@ const Edit: FC<EditPropertyProps> = (props) => {
   const value = record.params?.[property.name] ?? ''
   const error = record.errors && record.errors[property.name]
 
-  const { custom } = property
+  const { props: propertyProps } = property
 
-  const { quill = {}, ...customProps } = custom as CustomType || {}
+  const { quill = {}, ...customProps } = propertyProps as CustomType || {}
   quill.theme = quill.theme || 'snow'
   quill.modules = {
     toolbar: DefaultQuillToolbarOptions,

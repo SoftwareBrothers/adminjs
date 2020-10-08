@@ -76,6 +76,14 @@ export interface PropertyJSON {
   };
 
   /**
+   * Additional props passed to the actual react component
+   * @new in version 3.3
+   */
+  props: {
+    [key: string]: any;
+  };
+
+  /**
    * Whether the field should be disabled in edition
    */
   isDisabled: boolean;

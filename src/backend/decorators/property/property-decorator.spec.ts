@@ -196,6 +196,7 @@ describe('PropertyDecorator', () => {
         'path',
         'isRequired',
         'isVirtual',
+        'props',
       )
     })
   })

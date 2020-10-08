@@ -27,8 +27,6 @@ export const buildActionClickHandler = (
 
     const href = actionHref(action, params)
 
-    console.log({ href })
-
     const callApi = buildActionCallApiTrigger({
       params, action, actionResponseHandler,
     })

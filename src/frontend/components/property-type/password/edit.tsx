@@ -37,7 +37,7 @@ const Edit: React.FC<EditPropertyProps> = (props) => {
           onKeyDown={e => e.keyCode === 13 && onChange(property.name, value)}
           value={value ?? ''}
           disabled={property.isDisabled}
-          {...property.custom}
+          {...property.props}
         />
         <Button
           variant={isInput ? 'primary' : 'text'}

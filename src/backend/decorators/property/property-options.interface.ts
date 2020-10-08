@@ -66,6 +66,16 @@ export default interface PropertyOptions {
   };
 
   /**
+   * Additional props passed to the actual React component rendering given property in Edit
+   * component.
+   *
+   * @new in version 3.3
+   */
+  props?: {
+    [key: string]: any;
+  };
+
+  /**
    * Whether given property should be editable or not.
    */
   isDisabled?: boolean;

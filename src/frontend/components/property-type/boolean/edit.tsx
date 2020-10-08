@@ -25,7 +25,7 @@ const Edit: React.FC<EditPropertyProps> = (props) => {
         onChange={handleChange}
         checked={value}
         disabled={property.isDisabled}
-        {...property.custom}
+        {...property.props}
       />
       <Label
         inline

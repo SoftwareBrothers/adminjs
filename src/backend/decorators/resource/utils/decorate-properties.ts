@@ -2,7 +2,6 @@ import { ResourceDecorator } from '..'
 import AdminBro from '../../../../admin-bro'
 import { BaseProperty, BaseResource } from '../../../adapters'
 import { PropertyDecorator } from '../../property'
-import { findSubProperty } from './find-sub-property'
 import { getPropertyByKey } from './get-property-by-key'
 import { pathToParts } from './path-to-parts'
 
@@ -49,7 +48,7 @@ const decorateVirtualProperties = (
           }),
         }
       }
-      return {}
+      return memo
     }, {} as DecoratedProperties)
   }
   return {}
