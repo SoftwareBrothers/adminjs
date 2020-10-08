@@ -74,10 +74,8 @@
     "url": "https://github.com/SoftwareBrothers/admin-bro/issues"
   },
   "homepage": "https://github.com/SoftwareBrothers/admin-bro#readme",
-  "peerDependencies": {
-    "@admin-bro/design-system": "^1.7.0-beta.17"
-  },
   "dependencies": {
+    "@admin-bro/design-system": "^1.7.0-beta.17",
     "@babel/core": "^7.10.2",
     "@babel/parser": "^7.10.2",
     "@babel/plugin-transform-runtime": "^7.10.1",
