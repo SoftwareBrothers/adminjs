@@ -196,7 +196,7 @@ class BasePropertyComponent extends React.Component<BasePropertyProps> {
   render(): ReactNode {
     const { property, resource, record, filter, where, onChange } = this.props
 
-    const testId = `property-${where}-${property.name}`
+    const testId = `property-${where}-${property.path}`
 
     let Component: ReactComponentLike = (types[property.type] && types[property.type][where])
     || defaultType[where]
@@ -204,7 +204,7 @@ class BasePropertyComponent extends React.Component<BasePropertyProps> {
     if (property.components && property.components[where]) {
       const component = property.components[where]
       if (!component) {
-        throw new Error(`there is no "${property.name}.components.${where}"`)
+        throw new Error(`there is no "${property.path}.components.${where}"`)
       }
       Component = globalAny.AdminBro.UserComponents[component]
       return (

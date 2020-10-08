@@ -15,8 +15,8 @@ const Show: React.FC<Props & BasePropertyProps> = (props) => {
         {property.subProperties.filter(subProperty => !subProperty.isId).map(subProperty => (
           <ItemComponent
             {...props}
-            key={subProperty.name}
-            property={{ ...subProperty, name: `${property.name}.${subProperty.name}` }}
+            key={subProperty.path}
+            property={subProperty}
           />
         ))}
       </Section>

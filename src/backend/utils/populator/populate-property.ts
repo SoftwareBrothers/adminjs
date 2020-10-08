@@ -46,7 +46,7 @@ export const populateProperty = async (
     if (property.isArray()) {
       return (foreignKeyValue as Array<string | number>).reduce((arrayMemo, valueInArray) => ({
         ...arrayMemo,
-        ...(isValueSearchable(valueInArray) ? { [valueInArray]: null } : {}),
+        ...(isValueSearchable(valueInArray) ? { [valueInArray]: valueInArray } : {}),
       }), memo)
     }
 
@@ -55,11 +55,11 @@ export const populateProperty = async (
     }
     return {
       ...memo,
-      [foreignKeyValue]: null,
+      [foreignKeyValue]: foreignKeyValue,
     }
   }, {})
 
-  const uniqueExternalIds = Object.keys(externalIdsMap)
+  const uniqueExternalIds = Object.values<string | number>(externalIdsMap)
 
   // when no record has `userId` filled = return input `records`
   if (!uniqueExternalIds.length) {

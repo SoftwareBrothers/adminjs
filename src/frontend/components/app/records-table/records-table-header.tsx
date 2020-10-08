@@ -100,7 +100,7 @@ export const RecordsTableHeader: React.FC<RecordsTableHeaderProps> = (props) => 
         {properties.map(property => (
           <PropertyHeader
             display={display(property.isTitle)}
-            key={property.name}
+            key={property.path}
             titleProperty={titleProperty}
             property={property}
             sortBy={sortBy}

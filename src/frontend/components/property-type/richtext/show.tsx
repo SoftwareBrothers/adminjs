@@ -13,7 +13,7 @@ export default class Show extends React.PureComponent<EditPropertyProps> {
 
   componentDidMount(): void {
     const { property, record } = this.props
-    const value = record.params[property.name]
+    const value = record.params[property.path]
     this.contentRef.current.innerHTML = value
   }
 

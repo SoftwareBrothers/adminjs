@@ -7,9 +7,9 @@ import { recordPropertyIsEqual } from '../record-property-is-equal'
 
 const Edit: React.FC<EditPropertyProps> = (props) => {
   const { property, record, onChange } = props
-  const propValue = record.params[property.name]
+  const propValue = record.params[property.path]
   const [value, setValue] = useState(propValue)
-  const error = record.errors && record.errors[property.name]
+  const error = record.errors && record.errors[property.path]
   const [isInput, setIsInput] = useState(false)
 
   useEffect(() => {
@@ -21,7 +21,7 @@ const Edit: React.FC<EditPropertyProps> = (props) => {
   return (
     <FormGroup error={!!error}>
       <Label
-        htmlFor={property.name}
+        htmlFor={property.path}
         required={property.isRequired}
       >
         {property.label}
@@ -30,11 +30,11 @@ const Edit: React.FC<EditPropertyProps> = (props) => {
         <Input
           type={isInput ? 'input' : 'password'}
           className="input"
-          id={property.name}
-          name={property.name}
+          id={property.path}
+          name={property.path}
           onChange={event => setValue(event.target.value)}
-          onBlur={() => onChange(property.name, value)}
-          onKeyDown={e => e.keyCode === 13 && onChange(property.name, value)}
+          onBlur={() => onChange(property.path, value)}
+          onKeyDown={e => e.keyCode === 13 && onChange(property.path, value)}
           value={value ?? ''}
           disabled={property.isDisabled}
           {...property.props}

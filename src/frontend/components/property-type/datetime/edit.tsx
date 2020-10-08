@@ -6,13 +6,13 @@ import { recordPropertyIsEqual } from '../record-property-is-equal'
 
 const Edit: React.FC<EditPropertyProps> = (props) => {
   const { property, onChange, record } = props
-  const value = (record.params && record.params[property.name]) || ''
-  const error = record.errors && record.errors[property.name]
+  const value = (record.params && record.params[property.path]) || ''
+  const error = record.errors && record.errors[property.path]
 
   return (
     <FormGroup error={!!error}>
       <Label
-        htmlFor={property.name}
+        htmlFor={property.path}
         required={property.isRequired}
       >
         {property.label}
@@ -20,7 +20,7 @@ const Edit: React.FC<EditPropertyProps> = (props) => {
       <DatePicker
         value={value}
         disabled={property.isDisabled}
-        onChange={(data: string): void => onChange(property.name, data)}
+        onChange={(data: string): void => onChange(property.path, data)}
         propertyType={property.type}
         {...property.props}
       />

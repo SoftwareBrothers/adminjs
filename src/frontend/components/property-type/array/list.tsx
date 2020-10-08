@@ -1,5 +1,5 @@
 import React from 'react'
-import flat from 'flat'
+import { flat } from '../../../../utils'
 
 import { RecordJSON, ResourceJSON, PropertyJSON } from '../../../interfaces'
 import { ShowPropertyProps } from '../base-property-props'
@@ -12,8 +12,7 @@ interface Props {
 
 const List: React.FC<ShowPropertyProps> = (props) => {
   const { property, record } = props
-  const unflatten = flat.unflatten(record.params) as Record<string, any>
-  const values = unflatten[property.name] || []
+  const values = flat.get(record.params, property.path) || []
 
   return (
     <span>{`length: ${values.length}`}</span>

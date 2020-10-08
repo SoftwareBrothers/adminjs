@@ -1,24 +1,14 @@
 import React, { ReactNode, MouseEvent } from 'react'
-import flat from 'flat'
 import { Button, Section, FormGroup, FormMessage, Label, Icon, Box } from '@admin-bro/design-system'
 
-import convertParamsToArrayItems from './convert-params-to-array-items'
-import { RecordJSON, PropertyJSON, ResourceJSON } from '../../../interfaces'
-import updateParamsArray from './update-params-array'
+import { RecordJSON } from '../../../interfaces'
 import AddNewItemButton from './add-new-item-translation'
+import { flat } from '../../../../utils'
+import { EditPropertyProps } from '../base-property-props'
 
-const { flatten, unflatten } = flat
-
-const normalizeParams = (params: RecordJSON['params']): RecordJSON['params'] => (
-  flatten<string, any>(unflatten(params, { overwrite: true }))
-)
-
-type Props = {
-  property: PropertyJSON;
-  record: RecordJSON;
+type Props = EditPropertyProps & {
   onChange: (record: RecordJSON) => any;
   ItemComponent: typeof React.Component;
-  resource: ResourceJSON;
   testId: string;
 }
 
@@ -36,7 +26,7 @@ const ItemRenderer: React.FC<Props & ItemRendererProps> = (props) => {
           {...props}
           property={{
             ...property,
-            name: `${property.name}.${i}`,
+            path: `${property.path}.${i}`,
             label: `[${i + 1}]`,
             isArray: false,
           }}
@@ -67,39 +57,28 @@ export default class Edit extends React.Component<Props> {
 
   addNew(event: MouseEvent): false {
     const { property, record, onChange } = this.props
-    const items = convertParamsToArrayItems(property, record)
-    const newRecord = { ...record }
-    newRecord.params = normalizeParams({
-      ...newRecord.params, // otherwise yarn types is not working
-      [property.name]: [
-        ...items,
-        property.subProperties.length ? {} : '',
-      ],
-    })
-    onChange(newRecord)
+    const items = [
+      ...(flat.get(record.params, property.path) || []),
+      property.subProperties.length ? {} : '',
+    ]
+    onChange(property.path, items)
     event.preventDefault()
     return false
   }
 
   removeItem(i, event: MouseEvent): false {
     const { property, record, onChange } = this.props
-    const items = convertParamsToArrayItems(property, record)
+    const items = flat.get(record.params, property.path)
     const newItems = [...items]
     newItems.splice(i, 1)
-    const newRecord = { ...record }
-
-    newRecord.params = updateParamsArray(
-      newRecord.params, property.name, newItems,
-    )
-
-    onChange(newRecord)
+    onChange(property.path, newItems)
     event.preventDefault()
     return false
   }
 
   renderInput(): ReactNode {
     const { property, record, resource } = this.props
-    const items = convertParamsToArrayItems(property, record)
+    const items = flat.get(record.params, property.path) || []
     return (
       <Section mt="xl">
         {items.map((item, i) => (
@@ -120,11 +99,11 @@ export default class Edit extends React.Component<Props> {
 
   render(): ReactNode {
     const { property, record, testId } = this.props
-    const error = record.errors && record.errors[property.name]
+    const error = record.errors && record.errors[property.path]
     return (
       <FormGroup error={!!error} data-testid={testId}>
         <Label
-          htmlFor={property.name}
+          htmlFor={property.path}
           required={property.isRequired}
         >
           {property.label}

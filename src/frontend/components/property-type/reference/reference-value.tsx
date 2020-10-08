@@ -21,12 +21,12 @@ const ReferenceValue: React.FC<Props> = (props) => {
   const { property, record } = props
 
   const h = new ViewHelpers()
-  const refId = record.params[property.name]
-  const populated = record.populated[property.name]
+  const refId = record.params[property.path]
+  const populated = record.populated[property.path]
   const value = (populated && populated.title) || refId
 
   if (!property.reference) {
-    throw new Error(`property: "${property.name}" does not have a reference`)
+    throw new Error(`property: "${property.path}" does not have a reference`)
   }
 
   if (populated && populated.recordActions.find(a => a.name === 'show')) {

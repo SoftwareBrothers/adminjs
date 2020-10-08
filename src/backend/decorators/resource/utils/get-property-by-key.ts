@@ -1,7 +1,7 @@
 import { PropertyDecorator } from '../../property'
 import { DecoratedProperties } from './decorate-properties'
 import { findSubProperty } from './find-sub-property'
-import { pathToParts } from './path-to-parts'
+import { pathToParts } from '../../../../utils/flat/path-to-parts'
 
 
 export const getPropertyByKey = (

@@ -8,7 +8,7 @@ export default class Show extends React.PureComponent<EditPropertyProps> {
   render(): ReactNode {
     const { property, record } = this.props
 
-    const value = record.params[property.name] || ''
+    const value = record.params[property.path] || ''
 
     return (
       <ValueGroup label={property.label}>

@@ -8,20 +8,20 @@ const parseValue = (value): boolean => !(!value || value === 'false')
 
 const Edit: React.FC<EditPropertyProps> = (props) => {
   const { property, onChange, record } = props
-  const value = parseValue(record.params && record.params[property.name])
-  const error = record.errors && record.errors[property.name]
+  const value = parseValue(record.params && record.params[property.path])
+  const error = record.errors && record.errors[property.path]
 
   const handleChange = (): void => {
     if (!property.isDisabled) {
-      onChange(property.name, !value)
+      onChange(property.path, !value)
     }
   }
 
   return (
     <FormGroup error={!!error}>
       <CheckBox
-        id={property.name}
-        name={property.name}
+        id={property.path}
+        name={property.path}
         onChange={handleChange}
         checked={value}
         disabled={property.isDisabled}
@@ -29,7 +29,7 @@ const Edit: React.FC<EditPropertyProps> = (props) => {
       />
       <Label
         inline
-        htmlFor={property.name}
+        htmlFor={property.path}
         required={property.isRequired}
       >
         {property.label}

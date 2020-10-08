@@ -48,11 +48,11 @@ describe('<RecordsTable />', function () {
   let container: RenderResult['container']
 
   beforeEach(async function () {
-    const name = await factory.build<PropertyJSON>('PropertyJSON', { name: 'name', isTitle: true })
+    const name = await factory.build<PropertyJSON>('PropertyJSON', { path: 'path', isTitle: true })
     properties = [
-      await factory.build<PropertyJSON>('PropertyJSON', { name: 'id', isId: true }),
+      await factory.build<PropertyJSON>('PropertyJSON', { path: 'id', isId: true }),
       name,
-      await factory.build<PropertyJSON>('PropertyJSON', { name: 'surname' }),
+      await factory.build<PropertyJSON>('PropertyJSON', { path: 'surname' }),
     ]
     resource = await factory.build<ResourceJSON>('ResourceJSON', {
       listProperties: properties,

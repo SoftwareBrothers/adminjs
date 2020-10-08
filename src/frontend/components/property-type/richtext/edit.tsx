@@ -21,8 +21,8 @@ type CustomType = {
 
 const Edit: FC<EditPropertyProps> = (props) => {
   const { property, record, onChange } = props
-  const value = record.params?.[property.name] ?? ''
-  const error = record.errors && record.errors[property.name]
+  const value = record.params?.[property.path] ?? ''
+  const error = record.errors && record.errors[property.path]
 
   const { props: propertyProps } = property
 
@@ -36,7 +36,7 @@ const Edit: FC<EditPropertyProps> = (props) => {
   return (
     <FormGroup error={Boolean(error)}>
       <Label
-        htmlFor={property.name}
+        htmlFor={property.path}
         required={property.isRequired}
       >
         {property.label}
@@ -44,7 +44,7 @@ const Edit: FC<EditPropertyProps> = (props) => {
       <RichText
         {...customProps}
         value={value}
-        onChange={content => onChange(property.name, content)}
+        onChange={content => onChange(property.path, content)}
         quill={quill}
       />
       <FormMessage>{error?.message}</FormMessage>

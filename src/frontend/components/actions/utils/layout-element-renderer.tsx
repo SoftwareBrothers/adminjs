@@ -47,9 +47,9 @@ export const LayoutElementRenderer: React.FC<Props> = (props) => {
   return (
     <Component {...other as any}>
       {properties.map(property => (
-        <DesignSystem.Box flexGrow={1} key={property.name}>
+        <DesignSystem.Box flexGrow={1} key={property.path}>
           <PropertyType
-            key={property.name}
+            key={property.path}
             where={where}
             property={property}
             resource={resource}

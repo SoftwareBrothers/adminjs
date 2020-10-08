@@ -29,6 +29,7 @@ export interface PropertyJSON {
   availableValues: Array<{label: string; value: string}> | null;
   /**
    * Property uniq name
+   * @deprecated in version 3.3 in favour of `path`
    */
   name: string;
   /**

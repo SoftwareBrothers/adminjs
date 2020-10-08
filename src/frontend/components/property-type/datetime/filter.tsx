@@ -10,8 +10,8 @@ const { PARAM_SEPARATOR } = BackendFilter
 const Filter: React.FC<FilterPropertyProps> = (props) => {
   const { property, filter, onChange } = props
 
-  const fromKey = `${property.name}${PARAM_SEPARATOR}from`
-  const toKey = `${property.name}${PARAM_SEPARATOR}to`
+  const fromKey = `${property.path}${PARAM_SEPARATOR}from`
+  const toKey = `${property.path}${PARAM_SEPARATOR}to`
   const fromValue = filter[fromKey]
   const toValue = filter[toKey]
 

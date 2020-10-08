@@ -17,12 +17,12 @@ export default class List extends React.PureComponent<Props & EditPropertyProps>
     return (
       <React.Fragment>
         {property.subProperties.filter(subProperty => !subProperty.isId).map(subProperty => (
-          <div key={subProperty.name}>
+          <div key={subProperty.path}>
             <Label inline>{`${subProperty.label}: `}</Label>
             <ItemComponent
               {...this.props}
-              key={subProperty.name}
-              property={{ ...subProperty, name: `${property.name}.${subProperty.name}` }}
+              key={subProperty.path}
+              property={{ ...subProperty }}
             />
           </div>
         ))}
@@ -34,7 +34,7 @@ export default class List extends React.PureComponent<Props & EditPropertyProps>
     const { property, record, resource } = this.props
     const showAction = record.recordActions.find(a => a.name === 'show')
 
-    if (resource.titleProperty.name === property.name && showAction) {
+    if (resource.titleProperty.path === property.path && showAction) {
       const h = new ViewHelpers()
       const href = h.recordActionUrl({
         resourceId: resource.id, recordId: record.id, actionName: 'show',

@@ -105,7 +105,7 @@ export const FilterDrawer: React.FC<FilterProps> = (props) => {
         <Box my="x3">
           {properties.map(property => (
             <PropertyType
-              key={property.name}
+              key={property.path}
               where="filter"
               onChange={handleChange}
               property={property}

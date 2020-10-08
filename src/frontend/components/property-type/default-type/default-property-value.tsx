@@ -5,7 +5,7 @@ import { ShowPropertyProps } from '../base-property-props'
 const DefaultPropertyValue: React.FC<ShowPropertyProps> = (props) => {
   const { property, record } = props
 
-  const rawValue = record?.params[property.name]
+  const rawValue = record?.params[property.path]
 
   if (typeof rawValue === 'undefined') {
     return null

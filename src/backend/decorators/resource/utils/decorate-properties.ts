@@ -3,7 +3,7 @@ import AdminBro from '../../../../admin-bro'
 import { BaseProperty, BaseResource } from '../../../adapters'
 import { PropertyDecorator } from '../../property'
 import { getPropertyByKey } from './get-property-by-key'
-import { pathToParts } from './path-to-parts'
+import { pathToParts } from '../../../../utils/flat/path-to-parts'
 
 export type DecoratedProperties = {[key: string]: PropertyDecorator}
 

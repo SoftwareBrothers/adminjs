@@ -17,14 +17,14 @@ const Edit: FC<CombinedProps> = (props) => {
   const { reference: resourceId } = property
 
   if (!resourceId) {
-    throw new Error(`Cannot reference resource in property '${property.name}'`)
+    throw new Error(`Cannot reference resource in property '${property.path}'`)
   }
 
   const handleChange = (selected: SelectRecordEnhanced): void => {
     if (selected) {
-      onChange(property.name, selected.value, selected.record)
+      onChange(property.path, selected.value, selected.record)
     } else {
-      onChange(property.name, null)
+      onChange(property.path, null)
     }
   }
 
@@ -41,12 +41,12 @@ const Edit: FC<CombinedProps> = (props) => {
       record: optionRecord,
     }))
   }
-  const error = record?.errors[property.name]
+  const error = record?.errors[property.path]
 
-  const selectedId = record?.params[property.name] as string | undefined
+  const selectedId = record?.params[property.path] as string | undefined
   const [loadedRecord, setLoadedRecord] = useState<RecordJSON | undefined>()
   const [loadingRecord, setLoadingRecord] = useState(0)
-  const selectedValue = record?.populated[property.name] ?? loadedRecord
+  const selectedValue = record?.populated[property.path] ?? loadedRecord
   const selectedOption = (selectedId && selectedValue) ? {
     value: selectedValue.id,
     label: selectedValue.title,
@@ -75,7 +75,7 @@ const Edit: FC<CombinedProps> = (props) => {
   return (
     <FormGroup error={Boolean(error)}>
       <Label
-        htmlFor={property.name}
+        htmlFor={property.path}
         required={property.isRequired}
       >
         {property.label}

@@ -21,7 +21,7 @@ class SortLink extends React.PureComponent<SortLinkProps & RouteComponentProps> 
 
   isActive(): boolean {
     const { sortBy, property } = this.props
-    return sortBy === property.name
+    return sortBy === property.path
   }
 
   render(): ReactNode {
@@ -31,7 +31,7 @@ class SortLink extends React.PureComponent<SortLinkProps & RouteComponentProps> 
     const sortedByIcon = `Caret${direction === 'asc' ? 'Up' : 'Down'}`
 
     query.set('direction', oppositeDirection)
-    query.set('sortBy', property.name)
+    query.set('sortBy', property.path)
 
     return (
       <NavLink to={{ search: query.toString() }} className={cssClass('SortLink')}>

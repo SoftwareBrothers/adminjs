@@ -53,4 +53,8 @@ describe('module:flat.get', () => {
   it('returns undefined when not exact property is given', () => {
     expect(get(params, 'interest.Of')).to.be.undefined
   })
+
+  it('returns null for null values', () => {
+    expect(get(params, 'nulled')).to.eq(null)
+  })
 })

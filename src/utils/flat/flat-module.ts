@@ -4,6 +4,7 @@ import { DELIMITER } from './constants'
 import { filterParams } from './filter-params'
 import { set } from './set'
 import { get } from './get'
+import { pathToParts } from './path-to-parts'
 
 /**
  *
@@ -16,6 +17,7 @@ export type FlatModuleType = {
   get: typeof get;
   filterParams: typeof filterParams;
   DELIMITER: typeof DELIMITER;
+  pathToParts: typeof pathToParts;
 }
 
 /**
@@ -52,4 +54,5 @@ export const flat: FlatModuleType = {
   get,
   filterParams,
   DELIMITER,
+  pathToParts,
 }

@@ -171,7 +171,7 @@ class BaseResource {
    *
    * @return  {Promise<Array<BaseRecord>>} records
    */
-  async findMany(ids: Array<string>): Promise<Array<BaseRecord>> {
+  async findMany(ids: Array<string | number>): Promise<Array<BaseRecord>> {
     throw new NotImplementedError('BaseResource#findMany')
   }
 

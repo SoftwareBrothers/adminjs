@@ -59,7 +59,7 @@ const New: FC<ActionProps> = (props) => {
           />
         )) : resource.editProperties.map(property => (
           <PropertyType
-            key={property.name}
+            key={property.path}
             where="edit"
             onChange={handleChange}
             property={property}

@@ -9,22 +9,22 @@ const TEMP_HOLDING_KEY = 'TEMP_HOLDING_KEY'
 /**
  * @memberof module:flat
  * @param {FlattenParams}   params      flatten params from which property has to be taken
- * @param {string}          [property]  name of the property
+ * @param {string}          [propertyPath]  name of the property
  * @returns {any}                       when property key exists directly it returns what is inside,
  *                                      otherwise it tries to find any nested objects and returns
  *                                      them
  */
-const get = (params: FlattenParams = {}, property?: string): any => {
-  if (!property) {
+const get = (params: FlattenParams = {}, propertyPath?: string): any => {
+  if (!propertyPath) {
     return unflatten(params)
   }
 
-  if (params[property]) {
-    return params[property]
+  if (typeof params[propertyPath] !== 'undefined') {
+    return params[propertyPath]
   }
 
-  const regex = propertyKeyRegex(property)
-  const filteredParams = filterParams(params, property)
+  const regex = propertyKeyRegex(propertyPath)
+  const filteredParams = filterParams(params, propertyPath)
 
   const nestedProperties = Object.keys(filteredParams).reduce((memo, key) => ({
     ...memo,

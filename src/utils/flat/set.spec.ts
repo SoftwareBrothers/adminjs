@@ -20,6 +20,7 @@ describe('module:flat.set', () => {
       'meta.workingHours': '9:00-17:00',
       'meta.duties': 'everything',
       'meta.fun': '8/10',
+      initiallyNull: null,
     }
   })
 
@@ -116,6 +117,23 @@ describe('module:flat.set', () => {
         'meta.position': meta.position,
         'meta.workingHours': meta.workingHours,
       })
+    })
+  })
+
+  context('user wants to set nested property for already given root property', () => {
+    const newNestedNullValue = 'this is not null'
+    const newNestedNullKey = 'initiallyNull.nested'
+
+    beforeEach(() => {
+      newParams = set(params, newNestedNullKey, newNestedNullValue)
+    })
+
+    it('sets value for new nested property', () => {
+      expect(newParams[newNestedNullKey]).to.eq(newNestedNullValue)
+    })
+
+    it('removes root property from keys', () => {
+      expect(Object.keys(newParams)).not.to.include('initiallyNull')
     })
   })
 })

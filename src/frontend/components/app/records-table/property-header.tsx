@@ -25,7 +25,7 @@ export type PropertyHeaderProps = {
 export const PropertyHeader: React.FC<PropertyHeaderProps> = (props) => {
   const { property, titleProperty, display } = props
 
-  const isMain = property.name === titleProperty.name
+  const isMain = property.path === titleProperty.path
 
   return (
     <TableCell

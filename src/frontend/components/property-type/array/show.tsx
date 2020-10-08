@@ -1,8 +1,8 @@
 import React, { ReactNode } from 'react'
 import { Section, ValueGroup } from '@admin-bro/design-system'
 
-import convertParamsToArrayItems from './convert-params-to-array-items'
 import { RecordJSON, PropertyJSON } from '../../../interfaces'
+import { flat } from '../../../../utils'
 
 type Props = {
   property: PropertyJSON;
@@ -14,7 +14,7 @@ export default class Show extends React.PureComponent<Props> {
   render(): ReactNode {
     const { property, record, ItemComponent } = this.props
 
-    const items = convertParamsToArrayItems(property, record)
+    const items = flat.get(record.params, property.path) || []
 
     return (
       <ValueGroup label={property.label}>
@@ -26,7 +26,7 @@ export default class Show extends React.PureComponent<Props> {
               key={i}
               property={{
                 ...property,
-                name: `${property.name}.${i}`,
+                path: `${property.path}.${i}`,
                 label: `[${i + 1}]`,
                 isArray: false,
               }}

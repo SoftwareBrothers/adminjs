@@ -9,11 +9,11 @@ type Props = {
 
 const Edit: React.FC<Props & EditPropertyProps> = (props) => {
   const { property, record, ItemComponent } = props
-  const error = record.errors && record.errors[property.name]
+  const error = record.errors && record.errors[property.path]
   return (
     <FormGroup error={!!error}>
       <Label
-        htmlFor={property.name}
+        htmlFor={property.path}
         required={property.isRequired}
       >
         {property.label}
@@ -22,8 +22,8 @@ const Edit: React.FC<Props & EditPropertyProps> = (props) => {
         {property.subProperties.filter(subProperty => !subProperty.isId).map(subProperty => (
           <ItemComponent
             {...props}
-            key={subProperty.name}
-            property={{ ...subProperty, name: `${property.name}.${subProperty.name}` }}
+            key={subProperty.path}
+            property={subProperty}
           />
         ))}
       </Section>

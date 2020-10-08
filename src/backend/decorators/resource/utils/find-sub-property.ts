@@ -1,5 +1,5 @@
 import PropertyDecorator from '../../property/property-decorator'
-import { PathParts } from './path-parts.type'
+import { PathParts } from '../../../../utils/flat/path-parts.type'
 
 /**
  * @private

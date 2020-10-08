@@ -2,16 +2,21 @@ import { flatten } from 'flat'
 import { DELIMITER } from './constants'
 import { FlattenParams } from '../flat'
 import { propertyKeyRegex } from './property-key-regex'
+import { pathToParts } from './path-to-parts'
+
+const isObject = (value: any): boolean => (
+  typeof value === 'object' && !(value instanceof File) && value !== null
+)
 
 /**
  *
  * @memberof module:flat
  * @param {FlattenParams} params
- * @param {string} property
+ * @param {string} propertyPath
  * @param {any} [value]       if not give function will only try to remove old keys
  */
-const set = (params: FlattenParams = {}, property: string, value?: any): FlattenParams => {
-  const regex = propertyKeyRegex(property)
+const set = (params: FlattenParams = {}, propertyPath: string, value?: any): FlattenParams => {
+  const regex = propertyKeyRegex(propertyPath)
 
   // remove all existing keys
   const paramsCopy = Object.keys(params)
@@ -19,20 +24,29 @@ const set = (params: FlattenParams = {}, property: string, value?: any): Flatten
     .reduce((memo, key) => ({ ...memo, [key]: params[key] }), {} as FlattenParams)
 
   if (typeof value !== 'undefined') {
-    if (typeof value === 'object' && !(value instanceof File) && value !== null) {
+    if (isObject(value)) {
       const flattened = flatten(value) as any
 
       if (Object.keys(flattened).length) {
         Object.keys(flattened).forEach((key) => {
-          paramsCopy[`${property}${DELIMITER}${key}`] = flattened[key]
+          paramsCopy[`${propertyPath}${DELIMITER}${key}`] = flattened[key]
         })
       } else if (Array.isArray(value)) {
-        paramsCopy[property] = []
+        paramsCopy[propertyPath] = []
       } else {
-        paramsCopy[property] = {}
+        paramsCopy[propertyPath] = {}
       }
     } else {
-      paramsCopy[property] = value
+      paramsCopy[propertyPath] = value
+    }
+
+    // when user gave { "nested.value": "something" } and had "nested" set to `null`, then
+    // nested should be removed
+    const parts = pathToParts(propertyPath).slice(0, -1)
+    if (parts.length) {
+      return Object.keys(paramsCopy)
+        .filter(key => !parts.includes(key))
+        .reduce((memo, key) => ({ ...memo, [key]: paramsCopy[key] }), {} as FlattenParams)
     }
   }
   return paramsCopy
