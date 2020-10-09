@@ -53,7 +53,11 @@ class BaseRecord {
    * @deprecated in favour of {@link BaseRecord#get} and {@link BaseRecord#set} methods
    */
   param(path: string): any {
-    return flat.get(this.params, path)
+    const paramValue = flat.get(this.params, path)
+    if (Array.isArray(paramValue) && paramValue.every(v => !v)) {
+      return null
+    }
+    return paramValue
   }
 
   /**
