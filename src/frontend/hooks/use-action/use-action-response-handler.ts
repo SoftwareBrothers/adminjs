@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/explicit-function-return-type */
 import { useHistory, useLocation } from 'react-router'
 import { ActionResponse } from '../../../backend/actions/action.interface'
 import { appendForceRefresh } from '../../components/actions/utils/append-force-refresh'

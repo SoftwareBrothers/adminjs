@@ -1,3 +1,4 @@
 {
-  "baseUrl": "http://localhost:3000/admin"
+  "baseUrl": "http://localhost:3000/admin",
+  "videoUploadOnPasses": false
 }

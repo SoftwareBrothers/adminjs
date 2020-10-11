@@ -4,9 +4,14 @@ import { FlattenParams } from '../flat'
 import { propertyKeyRegex } from './property-key-regex'
 import { pathToParts } from './path-to-parts'
 
-const isObject = (value: any): boolean => (
-  typeof value === 'object' && !(value instanceof File) && value !== null
-)
+const isObject = (value: any): boolean => {
+  // Node environment
+  if (typeof File === 'undefined') {
+    return typeof value === 'object' && value !== null
+  }
+  // Window environment
+  return typeof value === 'object' && !(value instanceof File) && value !== null
+}
 
 /**
  *

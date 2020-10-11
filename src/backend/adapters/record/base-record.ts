@@ -1,6 +1,6 @@
 import _ from 'lodash'
 import { flat } from '../../../utils/flat'
-import { ParamsType, ParamsTypeValue } from './params.type'
+import { ParamsType } from './params.type'
 import BaseResource from '../resource/base-resource'
 import ValidationError, { RecordError, PropertyErrors } from '../../utils/errors/validation-error'
 import { RecordJSON } from '../../../frontend/interfaces'
@@ -73,7 +73,7 @@ class BaseRecord {
    * @return {any}                      unflatten data under given path
    * @new in version 3.3
    */
-  get(propertyPath: string | undefined): ParamsTypeValue | object {
+  get(propertyPath: string | undefined): any {
     return flat.get(this.params, propertyPath)
   }
 
@@ -99,7 +99,7 @@ class BaseRecord {
    * @return  {object | undefined}
    */
   namespaceParams(prefix: string): Record<string, any> | void {
-    return flat.filterParams(this.params, prefix)
+    return flat.selectParams(this.params, prefix)
   }
 
   /**

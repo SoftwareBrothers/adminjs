@@ -52,6 +52,10 @@ describe('module:flat.set', () => {
     it('sets empty array', () => {
       expect(set(params, newPropertyName, [])).to.deep.include({ [newPropertyName]: [] })
     })
+
+    it('does nothing when setting undefined to some random key', () => {
+      expect(set(params, newPropertyName, undefined)).to.deep.equal(params)
+    })
   })
 
   context('passing array', () => {

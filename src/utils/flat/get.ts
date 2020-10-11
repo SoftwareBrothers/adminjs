@@ -1,6 +1,6 @@
 import { unflatten } from 'flat'
 import { DELIMITER } from './constants'
-import { filterParams } from './filter-params'
+import { selectParams } from './filter-params'
 import { FlattenParams } from '../flat'
 import { propertyKeyRegex } from './property-key-regex'
 
@@ -24,11 +24,11 @@ const get = (params: FlattenParams = {}, propertyPath?: string): any => {
   }
 
   const regex = propertyKeyRegex(propertyPath)
-  const filteredParams = filterParams(params, propertyPath)
+  const selectedParams = selectParams(params, propertyPath)
 
-  const nestedProperties = Object.keys(filteredParams).reduce((memo, key) => ({
+  const nestedProperties = Object.keys(selectedParams).reduce((memo, key) => ({
     ...memo,
-    [key.replace(regex, `${TEMP_HOLDING_KEY}${DELIMITER}`)]: filteredParams[key],
+    [key.replace(regex, `${TEMP_HOLDING_KEY}${DELIMITER}`)]: selectedParams[key],
   }), {} as FlattenParams)
 
   if (Object.keys(nestedProperties).length) {
