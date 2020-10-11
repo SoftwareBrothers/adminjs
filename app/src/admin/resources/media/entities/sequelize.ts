@@ -1,17 +1,10 @@
 import { DataTypes, Model, UUIDV4 } from 'sequelize'
-import { sequelize } from './connect'
+import { sequelize } from '../../../../databases/sequelize'
+import { MediaInterface } from '../media.interface'
 
-export interface MediaInterface extends Model {
-  id: string;
-  key: string;
-  filename: string;
-  description?: string;
-  mimetype?: string;
-  size?: number;
-  bucket?: string;
-}
+interface MediaSequelizeInterface extends MediaInterface, Model {}
 
-export const MediaModel = sequelize.define<MediaInterface>('Media', {
+export const MediaModel = sequelize.define<MediaSequelizeInterface>('Media', {
   // Model attributes are defined here
   id: {
     primaryKey: true,

@@ -1,16 +1,10 @@
 import { DataTypes, Model, UUIDV4 } from 'sequelize'
-import { BlogPostModel } from './blog-post-model'
-import { sequelize } from './connect'
+import { UserInterface } from '../user.interface'
+import { sequelize } from '../../../../databases/sequelize'
 
-export interface UserInterface extends Model {
-  id: string;
-  firstName: string;
-  lastName?: string;
-  email: string;
-  encryptedPassword: string;
-}
+export interface UserSequelizeInterface extends UserInterface, Model {}
 
-export const UserModel = sequelize.define<UserInterface>('Users', {
+export const UserModel = sequelize.define<UserSequelizeInterface>('Users', {
   // Model attributes are defined here
   id: {
     primaryKey: true,

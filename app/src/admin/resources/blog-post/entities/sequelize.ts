@@ -1,11 +1,11 @@
 import { DataTypes, Model, UUIDV4 } from 'sequelize'
-import { sequelize } from './connect'
-import { UserModel } from './user-model'
-import { BlogPost } from '../interfaces/blog-post'
+import { sequelize } from '../../../../databases/sequelize/connect'
+import { BlogPostInterface } from '../blog-post'
+import { UserModel } from '../../user/entities/sequelize'
 
-export interface BlogPostInterface extends BlogPost, Model {}
+export interface BlogPostSequelizeInterface extends BlogPostInterface, Model {}
 
-export const BlogPostModel = sequelize.define<BlogPostInterface>('BlogPosts', {
+export const BlogPostModel = sequelize.define<BlogPostSequelizeInterface>('BlogPosts', {
   id: {
     primaryKey: true,
     type: DataTypes.UUID,

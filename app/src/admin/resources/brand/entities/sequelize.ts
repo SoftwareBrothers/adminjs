@@ -1,12 +1,11 @@
 import { DataTypes, Model, UUIDV4 } from 'sequelize'
-import { sequelize } from './connect'
+import { sequelize } from '../../../../databases/sequelize/connect'
+import { BrandInterface } from '../brand.interface'
 
-export interface BrandInterface extends Model {
-  id: string;
-  name: string;
+export interface BrandSequelizeInterface extends BrandInterface, Model {
 }
 
-export const BrandModel = sequelize.define<BrandInterface>('Brands', {
+export const BrandModel = sequelize.define<BrandSequelizeInterface>('Brands', {
   // Model attributes are defined here
   id: {
     primaryKey: true,

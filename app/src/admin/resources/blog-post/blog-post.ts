@@ -3,7 +3,7 @@ export type BlogPostMeta = {
   description?: string;
 }
 
-export interface BlogPost {
+export interface BlogPostInterface {
   id: string;
   title: string;
   body?: string;

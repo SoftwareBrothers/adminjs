@@ -1,5 +1,4 @@
 import { AdminBroOptions } from 'admin-bro'
-import { models } from '../databases/sequelize/models'
 import * as UserAdmin from './resources/user'
 import * as BlogPostAdmin from './resources/blog-post'
 import * as MediaAdmin from './resources/media'
@@ -14,10 +13,10 @@ export const options: AdminBroOptions = {
     admin: true,
   },
   resources: [
-    { resource: models.User, ...UserAdmin },
-    { resource: models.BlogPost, ...BlogPostAdmin },
-    { resource: models.Media, ...MediaAdmin },
-    { resource: models.Brand, ...BrandAdmin },
-    { resource: models.Product, ...ProductAdmin },
+    UserAdmin,
+    ProductAdmin,
+    BlogPostAdmin,
+    MediaAdmin,
+    BrandAdmin,
   ],
 }

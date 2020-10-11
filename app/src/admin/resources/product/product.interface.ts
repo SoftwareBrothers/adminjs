@@ -4,7 +4,7 @@ export type OgTags = {
   image?: string;
 }
 
-export interface Product {
+export interface ProductInterface {
   id: string;
   name: string;
   description?: string;

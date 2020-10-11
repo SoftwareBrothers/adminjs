@@ -1,10 +1,10 @@
 import { DataTypes, Model, UUIDV4 } from 'sequelize'
-import { sequelize } from './connect'
-import { Product } from '../interfaces/product'
+import { sequelize } from '../../../../databases/sequelize/connect'
+import { ProductInterface } from '../product.interface'
 
-export interface ProductInterface extends Model, Product {}
+export interface ProductSequelizeInterface extends Model, ProductInterface {}
 
-export const ProductModel = sequelize.define<ProductInterface>('Products', {
+export const ProductModel = sequelize.define<ProductSequelizeInterface>('Products', {
   // Model attributes are defined here
   id: {
     primaryKey: true,

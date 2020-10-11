@@ -1,6 +1,6 @@
 import { CurrentAdmin } from 'admin-bro'
 import argon2 from 'argon2'
-import { UserModel } from './user-model'
+import { UserModel } from '../../admin/resources/user/entities/sequelize'
 
 const { ADMIN_PASSWORD, ADMIN_EMAIL } = process.env
 
