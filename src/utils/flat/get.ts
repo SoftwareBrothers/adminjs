@@ -1,6 +1,6 @@
 import { unflatten } from 'flat'
 import { DELIMITER } from './constants'
-import { selectParams } from './filter-params'
+import { selectParams } from './select-params'
 import { FlattenParams } from '../flat'
 import { propertyKeyRegex } from './property-key-regex'
 

@@ -1,7 +1,8 @@
 import { flatten, unflatten } from 'flat'
 
 import { DELIMITER } from './constants'
-import { selectParams, filterOutParams } from './filter-params'
+import { selectParams } from './select-params'
+import { filterOutParams } from './filter-out-params'
 import { set } from './set'
 import { get } from './get'
 import { pathToParts } from './path-to-parts'
