@@ -1,6 +1,6 @@
 import { DataTypes, Model, UUIDV4 } from 'sequelize'
 import { sequelize } from '../../../../databases/sequelize/connect'
-import { BlogPostInterface } from '../blog-post'
+import { BlogPostInterface } from '../blog-post.interface'
 import { UserModel } from '../../user/entities/sequelize'
 
 export interface BlogPostSequelizeInterface extends BlogPostInterface, Model {}

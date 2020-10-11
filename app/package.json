@@ -35,7 +35,7 @@
     "@admin-bro/firebase-functions": "^3.1.0",
     "@admin-bro/passwords": "^1.0.3",
     "@admin-bro/sequelize": "1.1.1",
-    "@admin-bro/upload": "^1.1.0",
+    "@admin-bro/upload": "^1.2.0-beta.2",
     "admin-bro": "^3.3.0-beta.13",
     "argon2": "^0.27.0",
     "connect-session-sequelize": "^7.0.3",

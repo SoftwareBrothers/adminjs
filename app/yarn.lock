@@ -45,10 +45,10 @@
     escape-regexp "0.0.1"
     flat "^5.0.0"
 
-"@admin-bro/upload@^1.1.0":
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/@admin-bro/upload/-/upload-1.1.0.tgz#16d8b5cf3f25513980d85df4dae6346dca498bb6"
-  integrity sha512-PRpbttd1S6ndLuzWwB+glgproiAZCP8jlOst5l8mNG1HcJGW+X/t29f4LdFN/TeEzKqOBPOGCYQMeUEIuz5aeg==
+"@admin-bro/upload@^1.2.0-beta.2":
+  version "1.2.0-beta.2"
+  resolved "https://registry.yarnpkg.com/@admin-bro/upload/-/upload-1.2.0-beta.2.tgz#614d92c8f3b862bed91a59f3590fcfc976c94baf"
+  integrity sha512-BJ9n/Gfddx/CvK565TCQwHbNKEFynRd6ORtI2hkW2uO7Wh/nC1k8t3H2/6eRAa+H5ACnnMGfFQVx3xKepqNn5g==
   optionalDependencies:
     "@google-cloud/storage" "^5.3.0"
     aws-sdk "^2.728.0"

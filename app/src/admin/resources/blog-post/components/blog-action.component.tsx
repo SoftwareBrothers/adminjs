@@ -16,7 +16,7 @@ const BlogAction: React.FC<ActionProps> = (props) => {
   const { resource, record: initialRecord } = props
 
   const { record, handleChange } = useRecord(initialRecord, resource.id)
-  const [showSettings, setSettingsVisibility] = useState(false)
+  const [showSettings, setSettingsVisibility] = useState(true)
 
   const quill = {
     theme: 'snow' as const,
@@ -65,9 +65,7 @@ const BlogAction: React.FC<ActionProps> = (props) => {
         </Box>
         {showSettings ? (
           <BlogDrawer
-            resource={resource}
-            handleChange={handleChange}
-            record={record}
+            {...props}
             toggle={(): void => setSettingsVisibility(!showSettings)}
           />
         ) : ''}
