@@ -7,8 +7,9 @@ import useNotice from '../use-notice'
 import { RecordActionResponse } from '../../../backend/actions/action.interface'
 import mergeRecordResponse from './merge-record-response'
 import updateRecord from './update-record'
-import { UseRecordResult } from './use-record-result.type'
+import { UseRecordOptions, UseRecordResult } from './use-record.type'
 import isEntireRecordGiven from './is-entire-record-given'
+import { flat } from '../../../utils'
 
 const api = new ApiClient()
 
@@ -20,29 +21,30 @@ const api = new ApiClient()
  * @bundle
  * @param {RecordJSON} [initialRecord],
  * @param {string} resourceId
- * @return {UseRecordResult}*
+ * @param {UseRecordOptions} [options]
+ * @return {UseRecordResult}
  */
 export const useRecord = (
   initialRecord: RecordJSON | undefined,
   resourceId: string,
+  options?: UseRecordOptions,
 ): UseRecordResult => {
   // setting up state
   const [loading, setLoading] = useState(false)
   const [progress, setProgress] = useState(0)
+
+  const filteredPrams = options?.onlyParams
+    ? flat.selectParams(initialRecord?.params || {}, ...options.onlyParams)
+    : initialRecord?.params ?? {}
+
   const [record, setRecord] = useState<RecordJSON>({
     ...initialRecord,
-    params: initialRecord?.params ?? {},
+    params: filteredPrams,
     errors: initialRecord?.errors ?? {},
     populated: initialRecord?.populated ?? {},
   } as RecordJSON)
 
   const onNotice = useNotice()
-
-  useEffect(() => {
-    if (initialRecord) {
-      setRecord(initialRecord)
-    }
-  }, [initialRecord])
 
   const handleChange = useCallback((
     propertyOrRecord: RecordJSON | string,
@@ -99,9 +101,9 @@ export const useRecord = (
       setLoading(false)
     })
     return promise
-  }, [record, resourceId, setLoading, setProgress])
+  }, [record, resourceId, setLoading, setProgress, setRecord])
 
-  return { record, handleChange, submit: handleSubmit, loading, progress }
+  return { record, handleChange, submit: handleSubmit, loading, progress, setRecord }
 }
 
 export default useRecord

@@ -4,6 +4,18 @@ import { OnPropertyChange } from '../../components/property-type/base-property-p
 import { RecordActionResponse } from '../../../backend/actions/action.interface'
 import { RecordJSON } from '../../interfaces'
 
+/**
+ * Custom options passed to useRecord
+ *
+ * @memberof useRecord
+ * @alias UseRecordOptions
+ */
+export type UseRecordOptions = {
+  /**
+   * If set, useRecord will operates only on selected params.
+   */
+  onlyParams?: Array<string>;
+}
 
 /**
  * Result of useRecord hook
@@ -36,4 +48,10 @@ export type UseRecordResult = {
    * Upload progress
    */
   progress: number;
+
+  /**
+   * Sets value for the record from the outside. You might use it when you update the record
+   * simultaneously in an another place.
+   */
+  setRecord: React.Dispatch<React.SetStateAction<RecordJSON>>;
 }

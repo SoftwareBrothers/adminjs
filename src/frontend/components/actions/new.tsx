@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import React, { FC, useEffect } from 'react'
 import { useHistory } from 'react-router'
 import { DrawerContent, Box, DrawerFooter, Button, Icon } from '@admin-bro/design-system'
 
@@ -19,9 +19,16 @@ const New: FC<ActionProps> = (props) => {
     handleChange,
     submit: handleSubmit,
     loading,
+    setRecord,
   } = useRecord(initialRecord, resource.id)
   const { translateButton } = useTranslation()
   const history = useHistory()
+
+  useEffect(() => {
+    if (initialRecord) {
+      setRecord(initialRecord)
+    }
+  }, [initialRecord])
 
   const submit = (event: React.FormEvent<HTMLFormElement>): boolean => {
     event.preventDefault()
