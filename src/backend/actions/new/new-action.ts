@@ -1,3 +1,4 @@
+import { populator } from '../../utils'
 import { Action, RecordActionResponse } from '../action.interface'
 
 /**
@@ -29,10 +30,13 @@ export const NewAction: Action<RecordActionResponse> = {
     const { resource, h, currentAdmin, translateMessage } = context
     if (request.method === 'post') {
       let record = await resource.build(request.payload ? request.payload : {})
+
       record = await record.save()
+      const [populatedRecord] = await populator([record])
 
       // eslint-disable-next-line no-param-reassign
-      context.record = record
+      context.record = populatedRecord
+
 
       if (record.isValid()) {
         return {
