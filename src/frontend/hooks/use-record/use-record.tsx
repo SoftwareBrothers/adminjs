@@ -1,4 +1,4 @@
-import { useState, useCallback, useEffect } from 'react'
+import { useState, useCallback } from 'react'
 import { AxiosResponse } from 'axios'
 import ApiClient, { RecordActionAPIParams } from '../../utils/api-client'
 import { RecordJSON } from '../../interfaces'
@@ -7,7 +7,7 @@ import useNotice from '../use-notice'
 import { RecordActionResponse } from '../../../backend/actions/action.interface'
 import mergeRecordResponse from './merge-record-response'
 import updateRecord from './update-record'
-import { UseRecordOptions, UseRecordResult } from './use-record.type'
+import { UseRecordOptions, UseRecordResult, UseRecordSubmitOptions } from './use-record.type'
 import isEntireRecordGiven from './is-entire-record-given'
 import { flat } from '../../../utils'
 
@@ -31,10 +31,11 @@ export const useRecord = (
 ): UseRecordResult => {
   // setting up state
   const [loading, setLoading] = useState(false)
+  const [isSynced, setIsSynced] = useState(true)
   const [progress, setProgress] = useState(0)
 
-  const filteredPrams = options?.onlyParams
-    ? flat.selectParams(initialRecord?.params || {}, ...options.onlyParams)
+  const filteredPrams = options?.includeParams
+    ? flat.selectParams(initialRecord?.params || {}, ...options.includeParams)
     : initialRecord?.params ?? {}
 
   const [record, setRecord] = useState<RecordJSON>({
@@ -56,13 +57,14 @@ export const useRecord = (
     } else {
       setRecord(updateRecord(propertyOrRecord as string, value, incomingRecord))
     }
+    setIsSynced(false)
   }, [setRecord])
 
-  const handleSubmit = useCallback((
+  const handleSubmit: UseRecordResult['submit'] = useCallback((
     customParams: Record<string, string> = {},
+    submitOptions?: UseRecordSubmitOptions,
   ): Promise<AxiosResponse<RecordActionResponse>> => {
     setLoading(true)
-
     const formData = recordToFormData(record)
     Object.entries(customParams).forEach(([key, value]) => formData.set(key, value))
 
@@ -88,9 +90,12 @@ export const useRecord = (
       if (response.data.notice) {
         onNotice(response.data.notice)
       }
-      setRecord(prev => mergeRecordResponse(prev, response.data))
+      if (submitOptions?.updateOnSave !== false) {
+        setRecord(prev => mergeRecordResponse(prev, response.data))
+      }
       setProgress(0)
       setLoading(false)
+      setIsSynced(true)
     }).catch(() => {
       onNotice({
         message:
@@ -103,7 +108,7 @@ export const useRecord = (
     return promise
   }, [record, resourceId, setLoading, setProgress, setRecord])
 
-  return { record, handleChange, submit: handleSubmit, loading, progress, setRecord }
+  return { record, handleChange, submit: handleSubmit, loading, progress, setRecord, isSynced }
 }
 
 export default useRecord

@@ -14,7 +14,22 @@ export type UseRecordOptions = {
   /**
    * If set, useRecord will operates only on selected params.
    */
-  onlyParams?: Array<string>;
+  includeParams?: Array<string>;
+}
+
+/**
+ * Custom options passed to useRecord
+ *
+ * @memberof useRecord
+ * @alias UseRecordSubmitOptions
+ */
+export type UseRecordSubmitOptions = {
+  /**
+   * Indicates if record should be updated after the submit action, which returns updated record.
+   * You might turn this of if you use function like lodash debounce, where you might have old
+   * state in the action response.
+   */
+  updateOnSave?: boolean;
 }
 
 /**
@@ -38,7 +53,10 @@ export type UseRecordResult = {
    * If custom params are given as an argument - they are merged
    * to the payload.
    */
-  submit: (customParams?: Record<string, string>) => Promise<AxiosResponse<RecordActionResponse>>;
+  submit: (
+    customParams?: Record<string, string>,
+    options?: UseRecordSubmitOptions
+  ) => Promise<AxiosResponse<RecordActionResponse>>;
   /**
    * Flag indicates loading.
    */
@@ -54,4 +72,10 @@ export type UseRecordResult = {
    * simultaneously in an another place.
    */
   setRecord: React.Dispatch<React.SetStateAction<RecordJSON>>;
+
+  /**
+   * Indicates if record is in "synced" state. It is when it was either just created from initial
+   * record or submitted. After at least one handleChange it is false until the successful submit
+   */
+  isSynced: boolean;
 }
