@@ -29,7 +29,7 @@ export const EditAction: Action<RecordActionResponse> = {
    * @memberof module:EditAction
    */
   handler: async (request, response, data) => {
-    const { record, resource, currentAdmin, h, translateMessage } = data
+    const { record, resource, currentAdmin, h, translateMessage, context } = data
     if (!record) {
       throw new NotFoundError([
         `Record of given id ("${request.params.recordId}") could not be found`,
@@ -38,8 +38,12 @@ export const EditAction: Action<RecordActionResponse> = {
     if (request.method === 'get') {
       return { record: record.toJSON(currentAdmin) }
     }
-    await record.update(request.payload)
-    const [populatedRecord] = await populator([record])
+
+    const newRecord = await record.update(request.payload)
+    const [populatedRecord] = await populator([newRecord])
+
+    // eslint-disable-next-line no-param-reassign
+    context.record = populatedRecord
 
     if (record.isValid()) {
       return {
