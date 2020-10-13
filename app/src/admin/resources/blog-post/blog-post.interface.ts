@@ -3,17 +3,20 @@ export type BlogPostMeta = {
   description?: string;
 }
 
+export type PostImage = {
+  key: string;
+  mimetype: string;
+  size: string;
+  bucket: string;
+}
+
 export interface BlogPostInterface {
   id: string;
   title: string;
   body?: string;
   status: 'published' | 'draft';
-  postImage?: {
-    key: string;
-    mimetype: string;
-    size: string;
-    bucket: string;
-  };
+  postImage?: PostImage;
+  images: Array<PostImage>;
   postUrl: string;
   authorId?: string;
   excerpt?: string;

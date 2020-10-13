@@ -18,10 +18,12 @@
     "paths": {
       "react": ["node_modules/@types/react"],
       "admin-bro": ["node_modules/admin-bro"],
+      "styled-components": ["node_modules/@types/styled-components", "vendor-types/styled-components"]
     },
     "baseUrl": "."
   },
   "include": [
+    "./vendor-types/**/*",
     "./src/**/*",
     "./cypress/**/*"
   ]

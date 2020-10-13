@@ -1,4 +1,4 @@
-import AdminBro, { ResourceOptions, FeatureType, PropertyOptions } from 'admin-bro'
+import { ResourceOptions, FeatureType, PropertyOptions } from 'admin-bro'
 import uploadFeature from '@admin-bro/upload'
 import { ContentParent } from '../../parents'
 
@@ -61,15 +61,6 @@ export const BlogPostResource: ResourceOptions = {
     ...postMetaProperties('facebook'),
   },
   actions: {
-    edit: {
-      component: AdminBro.bundle(
-        '../../../../../src/admin/resources/blog-post/components/blog-action.component.tsx',
-      ),
-      hideActionHeader: true,
-    },
-    show: {
-      isAccessible: false,
-    },
   },
 }
 
@@ -83,20 +74,21 @@ const uploadFeatureFor = (name?: string, multiple = false) => (
     },
     multiple,
     properties: {
-      file: `${name}.file`,
-      filePath: `${name}.filePath`,
-      filesToDelete: `${name}.filesToDelete`,
-      key: `${name}.key`,
-      mimeType: `${name}.mime`,
-      bucket: `${name}.bucket`,
-      size: `${name}.size`,
+      file: name ? `${name}.file` : 'blogImageFiles',
+      filePath: name ? `${name}.filePath` : 'blogImagePaths',
+      filesToDelete: name ? `${name}.filesToDelete` : 'blogImagesToDelete',
+      key: name ? `${name}.key` : 'blogImageKeys',
+      mimeType: name ? `${name}.mime` : 'blogImageMimeTypes',
+      bucket: name ? `${name}.bucket` : 'blogImageBuckets',
+      size: name ? `${name}.size` : 'blogImageSizes',
     },
     uploadPath: (record, filename) => (
-      `${record.id()}/${name}/${filename}`
+      name ? `${record.id()}/${name}/${filename}` : `${record.id()}/blog-images/${filename}`
     ),
   })
 )
 
 export const BlogPostFeatures: Array<FeatureType> = [
   uploadFeatureFor('postImage'),
+  uploadFeatureFor(undefined, true),
 ]

@@ -27,6 +27,18 @@ export const BlogPostModel = sequelize.define<BlogPostSequelizeInterface>('BlogP
   postImage: {
     type: DataTypes.JSONB,
   },
+  blogImageKeys: {
+    type: DataTypes.JSONB,
+  },
+  blogImageMimeTypes: {
+    type: DataTypes.JSONB,
+  },
+  blogImageBuckets: {
+    type: DataTypes.JSONB,
+  },
+  blogImageSizes: {
+    type: DataTypes.JSONB,
+  },
   postUrl: {
     type: DataTypes.STRING,
     allowNull: false,
