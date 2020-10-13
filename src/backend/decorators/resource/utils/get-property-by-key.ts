@@ -8,7 +8,7 @@ export const getPropertyByKey = (
   propertyPath: string,
   properties: DecoratedProperties,
 ): PropertyDecorator | null => {
-  const parts = pathToParts(propertyPath)
+  const parts = pathToParts(propertyPath, { skipArrayIndexes: true })
   const fullPath = parts[parts.length - 1]
   const property = properties[fullPath]
 

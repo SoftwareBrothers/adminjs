@@ -70,9 +70,9 @@ const organizeNestedProperties = (
   const rootPropertyKeys = Object.keys(properties).filter((key) => {
     const property = properties[key]
     // reverse because we start by by finding from the longest path
-    // and removes itself.
-    // changes 'root.nested.nested1' to [root.nested', 'root']
-    const parts = pathToParts(property.path).reverse().splice(1)
+    // and removes itself. (skips arrays)
+    // changes 'root.nested.0.nested1' to [root.nested', 'root']
+    const parts = pathToParts(property.path, { skipArrayIndexes: true }).reverse().splice(1)
     if (parts.length) {
       const mixedPropertyPath = parts.find(part => (
         properties[part] && properties[part].type() === 'mixed'

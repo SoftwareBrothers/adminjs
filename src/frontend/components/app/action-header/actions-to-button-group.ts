@@ -20,10 +20,10 @@ export const actionsToButtonGroup = (
       label: action.label,
       variant: action.variant,
       source: action,
-      href,
+      href: href || undefined,
       // when href is not defined - handle click should also be not defined
       // This prevents from "cursor: pointer;"
-      onClick: href ? handleClick : null,
+      onClick: href ? handleClick : undefined,
       'data-testid': buildActionTestId(action),
       buttons: [],
     }

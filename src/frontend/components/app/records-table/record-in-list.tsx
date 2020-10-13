@@ -78,8 +78,8 @@ export const RecordInList: React.FC<RecordInListProps> = (props) => {
 
   const buttons = [{
     icon: 'OverflowMenuHorizontal',
-    variant: 'light',
-    label: null,
+    variant: 'light' as const,
+    label: undefined,
     'data-testid': 'actions-dropdown',
     buttons: actionsToButtonGroup({
       actions: recordActions,

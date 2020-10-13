@@ -33,10 +33,10 @@
   resolved "https://registry.yarnpkg.com/@admin-bro/express/-/express-3.0.1.tgz#21e6693cce257da6f25e75be28b4e2b7ef387531"
   integrity sha512-CNGZxdMBFhhr9WGDKmdEpuxYumryO9VNZN+HK93o+Xjqx7lDfFk7smUDFRxmfoHsmaI4QRpErmvswNwpGGzevA==
 
-"@admin-bro/mongoose@1.0.0":
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/@admin-bro/mongoose/-/mongoose-1.0.0.tgz#4cdfbba15d0bc67d081235887f8c92ef210498e0"
-  integrity sha512-U85x7Rc8ApadNRFQHQLZkGcDP+f6WFhYJheCMISDzaMHQ+/hSp8eFWQd/2Y/RBvfDwHuzZLqBQkFVazSXUWGCQ==
+"@admin-bro/mongoose@1.0.2":
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/@admin-bro/mongoose/-/mongoose-1.0.2.tgz#e9a380240ad37f3777439df873972e1f5351d85b"
+  integrity sha512-vOnTElNrbdlml+FTqMCxKgu+u1m8c86RwuGhBrsIbwo5wr6ER0s+SV2fzCo5aKsxa4Jy2aAMR3FmYy01PxVaKA==
   dependencies:
     escape-regexp "0.0.1"
     flat "^4.1.0"

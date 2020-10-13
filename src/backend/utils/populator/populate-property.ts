@@ -43,8 +43,8 @@ export const populateProperty = async (
   const externalIdsMap = records.reduce((memo, baseRecord) => {
     const foreignKeyValue = baseRecord.get(property.path)
     // array properties returns arrays so we have to take the all into consideration
-    if (property.isArray()) {
-      return (foreignKeyValue as Array<string | number>).reduce((arrayMemo, valueInArray) => ({
+    if (Array.isArray(foreignKeyValue) && property.isArray()) {
+      return foreignKeyValue.reduce((arrayMemo, valueInArray) => ({
         ...arrayMemo,
         ...(isValueSearchable(valueInArray) ? { [valueInArray]: valueInArray } : {}),
       }), memo)

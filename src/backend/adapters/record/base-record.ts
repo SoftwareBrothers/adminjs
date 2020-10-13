@@ -73,7 +73,7 @@ class BaseRecord {
    * @return {any}                      unflatten data under given path
    * @new in version 3.3
    */
-  get(propertyPath: string | undefined): any {
+  get(propertyPath?: string): any {
     return flat.get(this.params, propertyPath)
   }
 
@@ -114,7 +114,8 @@ class BaseRecord {
   async update(params): Promise<BaseRecord> {
     try {
       this.storeParams(params)
-      this.params = await this.resource.update(this.id(), params)
+      const returnedParams = await this.resource.update(this.id(), params)
+      this.storeParams(returnedParams)
     } catch (e) {
       if (e instanceof ValidationError) {
         this.errors = e.propertyErrors
@@ -139,11 +140,13 @@ class BaseRecord {
    */
   async save(): Promise<BaseRecord> {
     try {
+      let returnedParams
       if (this.id()) {
-        this.params = await this.resource.update(this.id(), this.params)
+        returnedParams = await this.resource.update(this.id(), this.params)
       } else {
-        this.params = await this.resource.create(this.params)
+        returnedParams = await this.resource.create(this.params)
       }
+      this.storeParams(returnedParams)
     } catch (e) {
       if (e instanceof ValidationError) {
         this.errors = e.propertyErrors
@@ -246,7 +249,7 @@ class BaseRecord {
    * @param {object} [payloadData]
    */
   storeParams(payloadData?: object): void {
-    this.params = _.merge(this.params, payloadData ? flat.flatten(payloadData) : {})
+    this.params = flat.merge(this.params, payloadData)
   }
 }
 

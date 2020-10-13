@@ -5,6 +5,7 @@ import { selectParams } from './select-params'
 import { filterOutParams } from './filter-out-params'
 import { set } from './set'
 import { get } from './get'
+import { merge } from './merge'
 import { pathToParts } from './path-to-parts'
 
 /**
@@ -20,6 +21,7 @@ export type FlatModuleType = {
   filterOutParams: typeof filterOutParams;
   DELIMITER: typeof DELIMITER;
   pathToParts: typeof pathToParts;
+  merge: typeof merge;
 }
 
 /**
@@ -58,4 +60,5 @@ export const flat: FlatModuleType = {
   filterOutParams,
   DELIMITER,
   pathToParts,
+  merge,
 }

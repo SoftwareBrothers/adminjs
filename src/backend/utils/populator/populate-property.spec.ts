@@ -69,12 +69,27 @@ describe('populateProperty', () => {
       userRecord.id.returns(userId)
       property.isArray.returns(true)
       referenceResource.findMany.resolves([userRecord])
-
-      populatedResponse = await populateProperty([record, record], property)
     })
 
-    it('properly finds references in arrays', () => {
-      expect(referenceResource.findMany).to.have.been.calledOnceWith([userId1, userId2])
+    context('filled array ', () => {
+      beforeEach(async () => {
+        record.get.returns([userId1, userId2])
+        populatedResponse = await populateProperty([record, record], property)
+      })
+      it('properly finds references in arrays', async () => {
+        expect(referenceResource.findMany).to.have.been.calledOnceWith([userId1, userId2])
+      })
+    })
+
+    context('array value set to null', () => {
+      beforeEach(async () => {
+        record.get.returns(undefined)
+        populatedResponse = await populateProperty([record, record], property)
+      })
+
+      it('dees not look for any record', () => {
+        expect(referenceResource.findMany).not.to.have.been.called
+      })
     })
   })
 

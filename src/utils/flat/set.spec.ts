@@ -126,18 +126,40 @@ describe('module:flat.set', () => {
 
   context('user wants to set nested property for already given root property', () => {
     const newNestedNullValue = 'this is not null'
-    const newNestedNullKey = 'initiallyNull.nested'
 
     beforeEach(() => {
-      newParams = set(params, newNestedNullKey, newNestedNullValue)
+      params = {
+        id: '6e264607-ad0b-4480-8e25-1bf54063465b',
+        title: 'Your new story',
+        status: 'draft',
+        postImage: null,
+        blogImageKeys: null,
+        blogImageMimeTypes: null,
+        blogImageBuckets: null,
+        blogImageSizes: null,
+        postUrl: 'your-new-story',
+      }
     })
 
     it('sets value for new nested property', () => {
+      const newNestedNullKey = 'blogImageKeys.nested'
+      newParams = set(params, newNestedNullKey, newNestedNullValue)
+
       expect(newParams[newNestedNullKey]).to.eq(newNestedNullValue)
     })
 
     it('removes root property from keys', () => {
-      expect(Object.keys(newParams)).not.to.include('initiallyNull')
+      const newNestedNullKey = 'blogImageKeys.nested'
+      newParams = set(params, newNestedNullKey, newNestedNullValue)
+
+      expect(Object.keys(newParams)).not.to.include(newNestedNullKey.split('.')[0])
+    })
+
+    it('removes value from keys if new value is an array', () => {
+      const newNestedNullKey = 'blogImageKeys.0'
+      newParams = set(params, newNestedNullKey, newNestedNullValue)
+
+      expect(Object.keys(newParams)).not.to.include(newNestedNullKey.split('.')[0])
     })
   })
 })
