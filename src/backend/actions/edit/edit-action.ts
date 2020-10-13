@@ -28,8 +28,8 @@ export const EditAction: Action<RecordActionResponse> = {
    * @implements Action#handler
    * @memberof module:EditAction
    */
-  handler: async (request, response, data) => {
-    const { record, resource, currentAdmin, h, translateMessage, context } = data
+  handler: async (request, response, context) => {
+    const { record, resource, currentAdmin, h, translateMessage } = context
     if (!record) {
       throw new NotFoundError([
         `Record of given id ("${request.params.recordId}") could not be found`,
