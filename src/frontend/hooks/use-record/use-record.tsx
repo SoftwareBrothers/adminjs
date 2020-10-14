@@ -1,5 +1,6 @@
-import { useState, useCallback } from 'react'
+import { useState, useCallback, Dispatch, SetStateAction } from 'react'
 import { AxiosResponse } from 'axios'
+import { join } from 'lodash'
 import ApiClient, { RecordActionAPIParams } from '../../utils/api-client'
 import { RecordJSON } from '../../interfaces'
 import recordToFormData from './record-to-form-data'
@@ -9,7 +10,7 @@ import mergeRecordResponse from './merge-record-response'
 import updateRecord from './update-record'
 import { UseRecordOptions, UseRecordResult, UseRecordSubmitOptions } from './use-record.type'
 import isEntireRecordGiven from './is-entire-record-given'
-import { flat } from '../../../utils'
+import { filterRecordParams, isPropertyPermitted } from './filter-record'
 
 const api = new ApiClient()
 
@@ -34,16 +35,20 @@ export const useRecord = (
   const [isSynced, setIsSynced] = useState(true)
   const [progress, setProgress] = useState(0)
 
-  const filteredPrams = options?.includeParams
-    ? flat.selectParams(initialRecord?.params || {}, ...options.includeParams)
-    : initialRecord?.params ?? {}
+  const filteredRecord = initialRecord ? filterRecordParams(initialRecord, options) : null
 
   const [record, setRecord] = useState<RecordJSON>({
-    ...initialRecord,
-    params: filteredPrams,
+    ...filteredRecord,
+    params: filteredRecord?.params ?? {},
     errors: initialRecord?.errors ?? {},
     populated: initialRecord?.populated ?? {},
   } as RecordJSON)
+
+  // it keeps the same format as useState function which can take either value or function
+  const setFilteredRecord: Dispatch<SetStateAction<RecordJSON>> = useCallback((value) => {
+    const newRecord = value instanceof Function ? value(record) : value
+    setRecord(filterRecordParams(newRecord, options))
+  }, [options, record])
 
   const onNotice = useNotice()
 
@@ -53,12 +58,18 @@ export const useRecord = (
     incomingRecord?: RecordJSON,
   ): void => {
     if (isEntireRecordGiven(propertyOrRecord, value)) {
-      setRecord(propertyOrRecord as RecordJSON)
-    } else {
+      setFilteredRecord(propertyOrRecord as RecordJSON)
+    } else if (isPropertyPermitted(propertyOrRecord as string, options)) {
       setRecord(updateRecord(propertyOrRecord as string, value, incomingRecord))
+    } else if (process.env.NODE_ENV === 'development') {
+      // eslint-disable-next-line no-console
+      console.warn([
+        `You are trying to set property: "${propertyOrRecord as string}" which`,
+        'is not permitted. Take a look at `useRecord(..., { includeParams: [...]})`',
+      ].join('\n'))
     }
     setIsSynced(false)
-  }, [setRecord])
+  }, [setRecord, options])
 
   const handleSubmit: UseRecordResult['submit'] = useCallback((
     customParams: Record<string, string> = {},
@@ -108,7 +119,15 @@ export const useRecord = (
     return promise
   }, [record, resourceId, setLoading, setProgress, setRecord])
 
-  return { record, handleChange, submit: handleSubmit, loading, progress, setRecord, isSynced }
+  return {
+    record,
+    handleChange,
+    submit: handleSubmit,
+    loading,
+    progress,
+    setRecord: setFilteredRecord,
+    isSynced,
+  }
 }
 
 export default useRecord

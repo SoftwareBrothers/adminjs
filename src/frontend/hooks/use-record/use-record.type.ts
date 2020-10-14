@@ -12,7 +12,9 @@ import { RecordJSON } from '../../interfaces'
  */
 export type UseRecordOptions = {
   /**
-   * If set, useRecord will operates only on selected params.
+   * If set, useRecord will operates only on selected params. The rules here will be applied to
+   * both initialRecord params and all the params set by handleChange. It wont be applied to params
+   * set in submit
    */
   includeParams?: Array<string>;
 }
