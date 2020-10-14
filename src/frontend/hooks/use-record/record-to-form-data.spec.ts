@@ -31,4 +31,13 @@ describe('recordToFormData', function () {
 
     expect(recordToFormData(record).get(propertyKey)).to.equal(FORM_VALUE_EMPTY_ARRAY)
   })
+
+  it('does not convert date to empty object', async () => {
+    const date = new Date()
+    const record = await factory.build<RecordJSON>('RecordJSON', { params: {
+      [propertyKey]: date,
+    } })
+
+    expect(recordToFormData(record).get(propertyKey)).to.equal(date.toString())
+  })
 })

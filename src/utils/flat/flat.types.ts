@@ -7,6 +7,7 @@
 export type FlattenValue = 'string' |
   'boolean' |
   'number' |
+  Date |
   null |
   [] |
   {} |

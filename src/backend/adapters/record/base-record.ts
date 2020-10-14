@@ -1,4 +1,3 @@
-import _ from 'lodash'
 import { flat } from '../../../utils/flat'
 import { ParamsType } from './params.type'
 import BaseResource from '../resource/base-resource'
