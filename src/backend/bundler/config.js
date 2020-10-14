@@ -8,6 +8,7 @@ const json = require('rollup-plugin-json')
 const { terser } = require('rollup-plugin-terser')
 
 const reactIsExport = ['isValidElementType', 'isContextConsumer', 'isElement', 'ForwardRef']
+const esreverExport = ['reverse']
 
 const external = [
   'react',
@@ -77,6 +78,8 @@ const plugins = ({ babelConfig = {}, commonJSConfig = {}, minify = false } = {})
         'node_modules/react-redux/node_modules/react-is/index.js': reactIsExport,
         '@material-ui/utils/node_modules/react-is': reactIsExport,
         'node_modules/react-is/index.js': reactIsExport,
+        'node_modules/esrever/esrever.js': esreverExport,
+        '../node_modules/esrever/esrever.js': esreverExport,
       },
       ...commonJSConfig,
     }),

@@ -8,7 +8,7 @@
         "camelize", "datepicker", "camelcase", "fullwidth", "wysiwig", "Helvetica", "Neue",
         "Arial", "nowrap", "textfield", "scrollable", "flexbox", "treal", "xxxl",
         "adminbro", "Checkmark", "overridable", "Postgres", "Hana", "Wojtek", "Krysiak", "bigint",
-        "borderless", "metadetaksamosone"
+        "borderless", "metadetaksamosone", "esrever"
     ],
     "ignorePaths": [
         "src/frontend/assets/**/*"
