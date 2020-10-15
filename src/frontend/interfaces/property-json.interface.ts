@@ -95,6 +95,11 @@ export interface PropertyJSON {
   isRequired: boolean;
 
   /**
+   * if label above the input should be hidden
+   */
+  hideLabel: boolean;
+
+  /**
    * Resource to which given property belongs
    */
   resourceId: string;

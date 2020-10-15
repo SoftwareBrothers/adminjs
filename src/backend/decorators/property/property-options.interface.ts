@@ -91,6 +91,12 @@ export default interface PropertyOptions {
   isRequired?: boolean;
 
   /**
+   * if label should be hidden - false by default
+   * @new in version 3.3
+   */
+  hideLabel?: boolean;
+
+  /**
    * Name of the resource to which this property should be a reference.
    * If set - {@link PropertyOptions.type} always returns `reference`
    * @new In version 3.3

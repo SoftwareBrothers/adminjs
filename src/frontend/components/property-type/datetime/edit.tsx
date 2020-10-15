@@ -1,8 +1,9 @@
 import React, { memo } from 'react'
-import { DatePicker, Label, FormGroup, FormMessage } from '@admin-bro/design-system'
+import { DatePicker, FormGroup, FormMessage } from '@admin-bro/design-system'
 
 import { EditPropertyProps } from '../base-property-props'
 import { recordPropertyIsEqual } from '../record-property-is-equal'
+import { PropertyLabel } from '../../app/property-label'
 
 const Edit: React.FC<EditPropertyProps> = (props) => {
   const { property, onChange, record } = props
@@ -11,12 +12,7 @@ const Edit: React.FC<EditPropertyProps> = (props) => {
 
   return (
     <FormGroup error={!!error}>
-      <Label
-        htmlFor={property.path}
-        required={property.isRequired}
-      >
-        {property.label}
-      </Label>
+      <PropertyLabel property={property} />
       <DatePicker
         value={value}
         disabled={property.isDisabled}

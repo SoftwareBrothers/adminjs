@@ -1,9 +1,10 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 import React, { useState, memo, useEffect } from 'react'
-import { Label, Input, FormGroup, InputGroup, FormMessage, Button, Icon } from '@admin-bro/design-system'
+import { Input, FormGroup, InputGroup, FormMessage, Button, Icon } from '@admin-bro/design-system'
 
 import { EditPropertyProps } from '../base-property-props'
 import { recordPropertyIsEqual } from '../record-property-is-equal'
+import { PropertyLabel } from '../../app/property-label'
 
 const Edit: React.FC<EditPropertyProps> = (props) => {
   const { property, record, onChange } = props
@@ -20,12 +21,7 @@ const Edit: React.FC<EditPropertyProps> = (props) => {
 
   return (
     <FormGroup error={!!error}>
-      <Label
-        htmlFor={property.path}
-        required={property.isRequired}
-      >
-        {property.label}
-      </Label>
+      <PropertyLabel property={property} />
       <InputGroup>
         <Input
           type={isInput ? 'input' : 'password'}

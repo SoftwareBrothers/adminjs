@@ -1,8 +1,9 @@
 import React, { memo } from 'react'
-import { CheckBox, FormGroup, Label, FormMessage } from '@admin-bro/design-system'
+import { CheckBox, FormGroup, FormMessage } from '@admin-bro/design-system'
 
 import { EditPropertyProps } from '../base-property-props'
 import { recordPropertyIsEqual } from '../record-property-is-equal'
+import { PropertyLabel } from '../../app/property-label'
 
 const parseValue = (value): boolean => !(!value || value === 'false')
 
@@ -27,13 +28,7 @@ const Edit: React.FC<EditPropertyProps> = (props) => {
         disabled={property.isDisabled}
         {...property.props}
       />
-      <Label
-        inline
-        htmlFor={property.path}
-        required={property.isRequired}
-      >
-        {property.label}
-      </Label>
+      <PropertyLabel property={property} props={{ inline: true }} />
       <FormMessage>{error && error.message}</FormMessage>
     </FormGroup>
   )

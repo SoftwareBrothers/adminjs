@@ -22,4 +22,5 @@ factory.define<PropertyJSON>('PropertyJSON', Object, {
   resourceId: 'someResourceId',
   isVirtual: false,
   props: {},
+  hideLabel: false,
 })

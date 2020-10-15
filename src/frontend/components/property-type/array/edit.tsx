@@ -5,6 +5,7 @@ import { RecordJSON } from '../../../interfaces'
 import AddNewItemButton from './add-new-item-translation'
 import { flat } from '../../../../utils'
 import { EditPropertyProps } from '../base-property-props'
+import { PropertyLabel } from '../../app/property-label'
 
 type Props = EditPropertyProps & {
   onChange: (record: RecordJSON) => any;
@@ -102,12 +103,7 @@ export default class Edit extends React.Component<Props> {
     const error = record.errors && record.errors[property.path]
     return (
       <FormGroup error={!!error} data-testid={testId}>
-        <Label
-          htmlFor={property.path}
-          required={property.isRequired}
-        >
-          {property.label}
-        </Label>
+        <PropertyLabel property={property} />
         {this.renderInput()}
         <FormMessage>{error && error.message}</FormMessage>
       </FormGroup>

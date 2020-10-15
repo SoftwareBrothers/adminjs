@@ -260,6 +260,7 @@ class PropertyDecorator {
       isDisabled: this.isDisabled(),
       label: this.label(),
       type: this.type(),
+      hideLabel: !!this.options.hideLabel,
       reference: this.referenceName(),
       components: this.options.components,
       subProperties: this.subProperties()

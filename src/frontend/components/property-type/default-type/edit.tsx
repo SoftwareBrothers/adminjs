@@ -2,10 +2,11 @@
 import React, { FC, useState, memo, useEffect } from 'react'
 import Select from 'react-select'
 import { withTheme, DefaultTheme } from 'styled-components'
-import { Input, FormMessage, FormGroup, Label, selectStyles } from '@admin-bro/design-system'
+import { Input, FormMessage, FormGroup, selectStyles } from '@admin-bro/design-system'
 
 import { EditPropertyProps } from '../base-property-props'
 import { recordPropertyIsEqual } from '../record-property-is-equal'
+import { PropertyLabel } from '../../app/property-label'
 
 type CombinedProps = EditPropertyProps & {theme: DefaultTheme}
 
@@ -14,12 +15,7 @@ const Edit: FC<CombinedProps> = (props) => {
   const error = record.errors?.[property.path]
   return (
     <FormGroup error={Boolean(error)}>
-      <Label
-        htmlFor={property.path}
-        required={property.isRequired}
-      >
-        {property.label}
-      </Label>
+      <PropertyLabel property={property} />
       {property.availableValues ? <SelectEdit {...props} /> : <TextEdit {...props} />}
       <FormMessage>{error && error.message}</FormMessage>
     </FormGroup>

@@ -1,9 +1,10 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 import React, { memo, useState, FC, useEffect } from 'react'
-import { Input, Label, FormGroup, FormMessage } from '@admin-bro/design-system'
+import { Input, FormGroup, FormMessage } from '@admin-bro/design-system'
 
 import { EditPropertyProps } from '../base-property-props'
 import { recordPropertyIsEqual } from '../record-property-is-equal'
+import { PropertyLabel } from '../../app/property-label'
 
 const Edit: FC<EditPropertyProps> = (props) => {
   const { onChange, property, record } = props
@@ -19,12 +20,7 @@ const Edit: FC<EditPropertyProps> = (props) => {
 
   return (
     <FormGroup error={Boolean(error)}>
-      <Label
-        htmlFor={property.path}
-        required={property.isRequired}
-      >
-        {property.label}
-      </Label>
+      <PropertyLabel property={property} />
       <Input
         as="textarea"
         rows={(value.match(/\n/g) || []).length + 1}

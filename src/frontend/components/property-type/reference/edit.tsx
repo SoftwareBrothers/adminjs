@@ -1,11 +1,12 @@
 import React, { FC, useState, useEffect } from 'react'
 import Select from 'react-select/lib/Async'
 import { withTheme, DefaultTheme } from 'styled-components'
-import { FormGroup, Label, FormMessage, selectStyles } from '@admin-bro/design-system'
+import { FormGroup, FormMessage, selectStyles } from '@admin-bro/design-system'
 
 import ApiClient from '../../../utils/api-client'
 import { EditPropertyProps, SelectRecord } from '../base-property-props'
 import { RecordJSON } from '../../../interfaces'
+import { PropertyLabel } from '../../app/property-label'
 
 type CombinedProps = EditPropertyProps & {theme: DefaultTheme}
 type SelectRecordEnhanced = SelectRecord & {
@@ -74,12 +75,7 @@ const Edit: FC<CombinedProps> = (props) => {
 
   return (
     <FormGroup error={Boolean(error)}>
-      <Label
-        htmlFor={property.path}
-        required={property.isRequired}
-      >
-        {property.label}
-      </Label>
+      <PropertyLabel property={property} />
       <Select
         cacheOptions
         value={selectedOption}

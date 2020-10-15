@@ -4,7 +4,6 @@
 import React, { FC, memo } from 'react'
 import {
   FormGroup,
-  Label,
   FormMessage,
   RichText,
   QuillOptions,
@@ -13,6 +12,7 @@ import {
 
 import { EditPropertyProps } from '../base-property-props'
 import { recordPropertyIsEqual } from '../record-property-is-equal'
+import { PropertyLabel } from '../../app/property-label'
 
 type CustomType = {
   borderless?: boolean;
@@ -35,12 +35,7 @@ const Edit: FC<EditPropertyProps> = (props) => {
 
   return (
     <FormGroup error={Boolean(error)}>
-      <Label
-        htmlFor={property.path}
-        required={property.isRequired}
-      >
-        {property.label}
-      </Label>
+      <PropertyLabel property={property} />
       <RichText
         {...customProps}
         value={value}
