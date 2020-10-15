@@ -1,6 +1,6 @@
 import { Label, LabelProps } from '@admin-bro/design-system'
 import React from 'react'
-import { PropertyJSON } from '../../../interfaces'
+import { PropertyJSON } from '../../../../interfaces'
 
 export type PropertyLabelProps = {
   property: PropertyJSON;

@@ -2,7 +2,7 @@ import React from 'react'
 import { Section, FormGroup, FormMessage } from '@admin-bro/design-system'
 
 import { EditPropertyProps } from '../base-property-props'
-import { PropertyLabel } from '../../app/property-label'
+import { PropertyLabel } from '../utils/property-label'
 
 type Props = {
   ItemComponent: typeof React.Component;

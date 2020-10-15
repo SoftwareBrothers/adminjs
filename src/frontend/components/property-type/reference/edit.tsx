@@ -6,7 +6,7 @@ import { FormGroup, FormMessage, selectStyles } from '@admin-bro/design-system'
 import ApiClient from '../../../utils/api-client'
 import { EditPropertyProps, SelectRecord } from '../base-property-props'
 import { RecordJSON } from '../../../interfaces'
-import { PropertyLabel } from '../../app/property-label'
+import { PropertyLabel } from '../utils/property-label'
 
 type CombinedProps = EditPropertyProps & {theme: DefaultTheme}
 type SelectRecordEnhanced = SelectRecord & {

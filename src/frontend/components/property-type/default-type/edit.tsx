@@ -6,13 +6,14 @@ import { Input, FormMessage, FormGroup, selectStyles } from '@admin-bro/design-s
 
 import { EditPropertyProps } from '../base-property-props'
 import { recordPropertyIsEqual } from '../record-property-is-equal'
-import { PropertyLabel } from '../../app/property-label'
+import { PropertyLabel } from '../utils/property-label'
 
 type CombinedProps = EditPropertyProps & {theme: DefaultTheme}
 
 const Edit: FC<CombinedProps> = (props) => {
   const { property, record } = props
   const error = record.errors?.[property.path]
+
   return (
     <FormGroup error={Boolean(error)}>
       <PropertyLabel property={property} />
@@ -30,6 +31,7 @@ const SelectEdit: FC<CombinedProps> = (props) => {
   const propValue = record.params?.[property.path] ?? ''
   const styles = selectStyles(theme)
   const selected = property.availableValues.find(av => av.value === propValue)
+
   return (
     <Select
       isClearable

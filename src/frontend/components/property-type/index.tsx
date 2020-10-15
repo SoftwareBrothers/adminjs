@@ -289,3 +289,4 @@ export {
 }
 
 export * from './base-property-props'
+export * from './utils'

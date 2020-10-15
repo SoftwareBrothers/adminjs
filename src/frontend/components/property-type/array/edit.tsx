@@ -5,7 +5,7 @@ import { RecordJSON } from '../../../interfaces'
 import AddNewItemButton from './add-new-item-translation'
 import { flat } from '../../../../utils'
 import { EditPropertyProps } from '../base-property-props'
-import { PropertyLabel } from '../../app/property-label'
+import { PropertyLabel } from '../utils/property-label'
 
 type Props = EditPropertyProps & {
   onChange: (record: RecordJSON) => any;

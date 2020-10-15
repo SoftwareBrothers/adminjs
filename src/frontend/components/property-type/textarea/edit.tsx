@@ -4,7 +4,7 @@ import { Input, FormGroup, FormMessage } from '@admin-bro/design-system'
 
 import { EditPropertyProps } from '../base-property-props'
 import { recordPropertyIsEqual } from '../record-property-is-equal'
-import { PropertyLabel } from '../../app/property-label'
+import { PropertyLabel } from '../utils/property-label'
 
 const Edit: FC<EditPropertyProps> = (props) => {
   const { onChange, property, record } = props
