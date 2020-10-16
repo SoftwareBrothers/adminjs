@@ -1,7 +1,7 @@
 import factory from 'factory-girl'
 import { expect } from 'chai'
 
-import recordToFormData, { FORM_VALUE_EMPTY_OBJECT, FORM_VALUE_NULL, FORM_VALUE_EMPTY_ARRAY } from './record-to-form-data'
+import recordToFormData, { FORM_VALUE_EMPTY_OBJECT, FORM_VALUE_NULL, FORM_VALUE_EMPTY_ARRAY } from './params-to-form-data'
 import '../../components/spec/record-json.factory'
 import { RecordJSON } from '../../interfaces'
 
@@ -13,7 +13,7 @@ describe('recordToFormData', function () {
       [propertyKey]: {},
     } })
 
-    expect(recordToFormData(record).get(propertyKey)).to.equal(FORM_VALUE_EMPTY_OBJECT)
+    expect(recordToFormData(record.params).get(propertyKey)).to.equal(FORM_VALUE_EMPTY_OBJECT)
   })
 
   it('converts nulls to const', async function () {
@@ -21,7 +21,7 @@ describe('recordToFormData', function () {
       [propertyKey]: null,
     } })
 
-    expect(recordToFormData(record).get(propertyKey)).to.equal(FORM_VALUE_NULL)
+    expect(recordToFormData(record.params).get(propertyKey)).to.equal(FORM_VALUE_NULL)
   })
 
   it('converts empty array to const', async function () {
@@ -29,7 +29,7 @@ describe('recordToFormData', function () {
       [propertyKey]: [],
     } })
 
-    expect(recordToFormData(record).get(propertyKey)).to.equal(FORM_VALUE_EMPTY_ARRAY)
+    expect(recordToFormData(record.params).get(propertyKey)).to.equal(FORM_VALUE_EMPTY_ARRAY)
   })
 
   it('does not convert date to empty object', async () => {
@@ -38,6 +38,6 @@ describe('recordToFormData', function () {
       [propertyKey]: date,
     } })
 
-    expect(recordToFormData(record).get(propertyKey)).to.equal(date.toString())
+    expect(recordToFormData(record.params).get(propertyKey)).to.equal(date.toString())
   })
 })

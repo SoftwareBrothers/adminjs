@@ -4,7 +4,7 @@ import {
   FORM_VALUE_NULL,
   FORM_VALUE_EMPTY_OBJECT,
   FORM_VALUE_EMPTY_ARRAY,
-} from '../../../frontend/hooks/use-record/record-to-form-data'
+} from '../../../frontend/hooks/use-record/params-to-form-data'
 
 /**
  * Takes the original ActionRequest and convert string values to a corresponding

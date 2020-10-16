@@ -1,3 +1,4 @@
+import { ParamsType } from '../../backend'
 import { ActionJSON } from './action/action-json.interface'
 
 /**
@@ -17,7 +18,7 @@ export interface RecordJSON {
   /**
    * all flatten params of given record
    */
-  params: Record<string, any>;
+  params: ParamsType;
   /**
    * If the record has properties which are references - here there will be populated records
    */

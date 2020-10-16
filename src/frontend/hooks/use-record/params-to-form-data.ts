@@ -1,5 +1,3 @@
-import { RecordJSON } from '../../interfaces'
-
 export const FORM_VALUE_NULL = '__FORM_VALUE_NULL__'
 export const FORM_VALUE_EMPTY_OBJECT = '__FORM_VALUE_EMPTY_OBJECT__'
 export const FORM_VALUE_EMPTY_ARRAY = '__FORM_VALUE_EMPTY_ARRAY__'
@@ -22,11 +20,11 @@ const isObjectOrArray = (value: any): boolean => (
  * @param   {RecordJSON}  record
  * @return  {FormData}
  */
-export default function recordToFormData(record: RecordJSON): FormData {
+function paramsToFormData(params: Record<string, any>): FormData {
   const formData = new FormData()
 
-  // Assume that record.params are flatted
-  Object.entries(record.params).forEach(([key, value]) => {
+  // Assume that params are flatted
+  Object.entries(params).forEach(([key, value]) => {
     // {@link updateRecord} does not change empty objects "{}" - so in order to prevent having
     // them changed to "[object Object]" we have to set them to empty strings.
     if (value === null) {
@@ -44,4 +42,9 @@ export default function recordToFormData(record: RecordJSON): FormData {
     return formData.set(key, value as string)
   })
   return formData
+}
+
+export {
+  paramsToFormData as default,
+  paramsToFormData,
 }

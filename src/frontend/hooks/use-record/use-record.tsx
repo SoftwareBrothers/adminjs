@@ -1,9 +1,8 @@
 import { useState, useCallback, Dispatch, SetStateAction } from 'react'
 import { AxiosResponse } from 'axios'
-import { join } from 'lodash'
 import ApiClient, { RecordActionAPIParams } from '../../utils/api-client'
 import { RecordJSON } from '../../interfaces'
-import recordToFormData from './record-to-form-data'
+import { paramsToFormData } from './params-to-form-data'
 import useNotice from '../use-notice'
 import { RecordActionResponse } from '../../../backend/actions/action.interface'
 import mergeRecordResponse from './merge-record-response'
@@ -11,6 +10,7 @@ import updateRecord from './update-record'
 import { UseRecordOptions, UseRecordResult, UseRecordSubmitOptions } from './use-record.type'
 import isEntireRecordGiven from './is-entire-record-given'
 import { filterRecordParams, isPropertyPermitted } from './filter-record'
+import { flat } from '../../../utils'
 
 const api = new ApiClient()
 
@@ -76,8 +76,9 @@ export const useRecord = (
     submitOptions?: UseRecordSubmitOptions,
   ): Promise<AxiosResponse<RecordActionResponse>> => {
     setLoading(true)
-    const formData = recordToFormData(record)
-    Object.entries(customParams).forEach(([key, value]) => formData.set(key, value))
+
+    const mergedParams = flat.merge(record.params, customParams)
+    const formData = paramsToFormData(mergedParams)
 
     const params: Omit<RecordActionAPIParams, 'actionName' | 'recordId'> = {
       resourceId,
