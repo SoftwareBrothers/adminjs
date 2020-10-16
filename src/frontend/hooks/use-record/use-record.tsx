@@ -103,7 +103,7 @@ export const useRecord = (
         onNotice(response.data.notice)
       }
       if (submitOptions?.updateOnSave !== false) {
-        setRecord(prev => mergeRecordResponse(prev, response.data))
+        setFilteredRecord(prev => mergeRecordResponse(prev, response.data))
       }
       setProgress(0)
       setLoading(false)
