@@ -32,7 +32,7 @@
     "wait-on": "^5.2.0"
   },
   "dependencies": {
-    "@admin-bro/design-system": "1.7.0-beta.18",
+    "@admin-bro/design-system": "1.7.0-beta.21",
     "@admin-bro/express": "^3.0.1",
     "@admin-bro/firebase-functions": "^3.1.0",
     "@admin-bro/passwords": "^1.0.3",
