@@ -19,7 +19,10 @@ const get = (params: FlattenParams = {}, propertyPath?: string): any => {
     return unflatten(params)
   }
 
-  if (typeof params[propertyPath] !== 'undefined') {
+  // when object has this key - simply return it
+  // we cannot rely on typeof params[propertyPath !== 'undefined' because params can actually be
+  // undefined and in such case if would pass and function would return [undefined]
+  if (Object.keys(params).find(key => (key === propertyPath))) {
     return params[propertyPath]
   }
 

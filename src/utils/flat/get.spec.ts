@@ -32,6 +32,12 @@ describe('module:flat.get', () => {
     expect(get(params, 'nameNotExisting')).to.be.undefined
   })
 
+  it('returns undefined for property set to undefined', () => {
+    expect(get({
+      property: undefined as any,
+    }, 'property')).to.be.undefined
+  })
+
   it('returns nested array', () => {
     expect(get(params, 'interest.OfMe')).to.deep.equal([
       'javascript',
