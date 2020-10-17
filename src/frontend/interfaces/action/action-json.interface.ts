@@ -75,4 +75,10 @@ export interface ActionJSON {
    * @new in version 3.3
    */
   hasHandler: boolean;
+
+  /**
+   * Any custom options passed from the {@link Action} configuration.
+   * @new in version 3.3
+   */
+  custom: Record<string, any>;
 }

@@ -318,6 +318,10 @@ class ActionDecorator {
     return this.action.parent || null
   }
 
+  custom(): Record<string, any> {
+    return this.action.custom || {}
+  }
+
   hasHandler(): boolean {
     return !!this.action.handler
   }
@@ -347,6 +351,7 @@ class ActionDecorator {
       variant: this.variant(),
       parent: this.parent(),
       hasHandler: this.hasHandler(),
+      custom: this.custom(),
     }
   }
 }

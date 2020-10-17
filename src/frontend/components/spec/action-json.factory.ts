@@ -14,4 +14,5 @@ factory.define<ActionJSON>('ActionJSON', Object, {
   variant: 'default',
   parent: null,
   hasHandler: true,
+  custom: {},
 })

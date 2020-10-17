@@ -624,12 +624,21 @@ export interface Action <T extends ActionResponse> {
 
   /**
    * Defines the variant of the action. based on that it will receive given color.
+   * @new in version v3.3
    */
   variant?: VariantType;
 
   /**
    * Action can be nested. If you give here another action name - it will be nested under it.
    * If parent action doesn't exists - it will be nested under name in the parent.
+   * @deprecated in version v3.3
    */
   parent?: string;
+
+  /**
+   * Any custom properties you want to pass down to {@link ActionJSON}. They have to
+   * be stringified.
+   * @new in version v3.3
+   */
+  custom?: Record<string, any>;
 }
