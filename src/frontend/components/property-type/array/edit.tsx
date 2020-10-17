@@ -1,5 +1,5 @@
-import React, { ReactNode, MouseEvent } from 'react'
-import { Button, Section, FormGroup, FormMessage, Label, Icon, Box } from '@admin-bro/design-system'
+import React, { MouseEvent, useCallback } from 'react'
+import { Button, Section, FormGroup, FormMessage, Icon, Box } from '@admin-bro/design-system'
 
 import { RecordJSON } from '../../../interfaces'
 import AddNewItemButton from './add-new-item-translation'
@@ -7,7 +7,7 @@ import { flat } from '../../../../utils'
 import { EditPropertyProps } from '../base-property-props'
 import { PropertyLabel } from '../utils/property-label'
 
-type Props = EditPropertyProps & {
+type EditProps = EditPropertyProps & {
   onChange: (record: RecordJSON) => any;
   ItemComponent: typeof React.Component;
   testId: string;
@@ -15,10 +15,10 @@ type Props = EditPropertyProps & {
 
 type ItemRendererProps = {
   i: number;
-  onDelete: (event: MouseEvent) => false;
+  onDelete: (event: MouseEvent) => boolean;
 }
 
-const ItemRenderer: React.FC<Props & ItemRendererProps> = (props) => {
+const ItemRenderer: React.FC<EditProps & ItemRendererProps> = (props) => {
   const { ItemComponent, property, i, onDelete } = props
   return (
     <Box flex flexDirection="row" alignItems="center" data-testid={`array-item-${i}`}>
@@ -40,7 +40,7 @@ const ItemRenderer: React.FC<Props & ItemRendererProps> = (props) => {
           data-testid="delete-item"
           type="button"
           size="icon"
-          onClick={(event): false => onDelete(event)}
+          onClick={(event): boolean => onDelete(event)}
           variant="danger"
         >
           <Icon icon="TrashCan" />
@@ -50,63 +50,60 @@ const ItemRenderer: React.FC<Props & ItemRendererProps> = (props) => {
   )
 }
 
-export default class Edit extends React.Component<Props> {
-  constructor(props) {
-    super(props)
-    this.addNew = this.addNew.bind(this)
-  }
+const InputsInSection: React.FC<EditProps> = (props) => {
+  const { property, record, resource, onChange } = props
+  const items = flat.get(record.params, property.path) || []
 
-  addNew(event: MouseEvent): false {
-    const { property, record, onChange } = this.props
-    const items = [
-      ...(flat.get(record.params, property.path) || []),
+  const addNew = useCallback((event: MouseEvent): boolean => {
+    const newItems = [
+      ...items,
       property.subProperties.length ? {} : '',
     ]
-    onChange(property.path, items)
+    onChange(property.path, newItems)
     event.preventDefault()
     return false
-  }
+  }, [record, onChange, property])
 
-  removeItem(i, event: MouseEvent): false {
-    const { property, record, onChange } = this.props
-    const items = flat.get(record.params, property.path)
+  const removeItem = useCallback((i, event: MouseEvent): boolean => {
     const newItems = [...items]
     newItems.splice(i, 1)
     onChange(property.path, newItems)
     event.preventDefault()
     return false
-  }
+  }, [record, onChange, property])
 
-  renderInput(): ReactNode {
-    const { property, record, resource } = this.props
-    const items = flat.get(record.params, property.path) || []
-    return (
-      <Section mt="xl">
-        {items.map((item, i) => (
-          <ItemRenderer
-            {...this.props}
-            // eslint-disable-next-line react/no-array-index-key
-            key={i}
-            i={i}
-            onDelete={(event): false => this.removeItem(i, event)}
-          />
-        ))}
-        <Button onClick={this.addNew} type="button" rounded>
-          <AddNewItemButton resource={resource} property={property} />
-        </Button>
-      </Section>
-    )
-  }
+  return (
+    <Section mt="xl">
+      {items.map((item, i) => (
+        <ItemRenderer
+          {...props}
+          // eslint-disable-next-line react/no-array-index-key
+          key={i}
+          i={i}
+          onDelete={(event): boolean => removeItem(i, event)}
+        />
+      ))}
+      <Button onClick={addNew} type="button" rounded>
+        <AddNewItemButton resource={resource} property={property} />
+      </Button>
+    </Section>
+  )
+}
 
-  render(): ReactNode {
-    const { property, record, testId } = this.props
-    const error = record.errors && record.errors[property.path]
-    return (
-      <FormGroup error={!!error} data-testid={testId}>
-        <PropertyLabel property={property} />
-        {this.renderInput()}
-        <FormMessage>{error && error.message}</FormMessage>
-      </FormGroup>
-    )
-  }
+const Edit: React.FC<EditProps> = (props) => {
+  const { property, record, testId } = props
+  const error = record.errors && record.errors[property.path]
+
+  return (
+    <FormGroup error={!!error} data-testid={testId}>
+      <PropertyLabel property={property} />
+      <InputsInSection {...props} />
+      <FormMessage>{error && error.message}</FormMessage>
+    </FormGroup>
+  )
+}
+
+export {
+  Edit as default,
+  Edit,
 }
