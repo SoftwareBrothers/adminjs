@@ -60,16 +60,19 @@ export interface ActionJSON {
 
   /**
    * action variant
+   * @new in version 3.3
    */
   variant: VariantType;
 
   /**
    * If action is nested
+   * @deprecated in version 3.3
    */
   parent: string | null;
 
   /**
    * Indicates if action has action handler defined
+   * @new in version 3.3
    */
   hasHandler: boolean;
 }
