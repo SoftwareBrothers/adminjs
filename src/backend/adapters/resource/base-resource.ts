@@ -204,7 +204,7 @@ class BaseResource {
   }
 
   /**
-   * Updates an object
+   * Updates an the record.
    *
    * @param  {String} id               uniq id of the Resource Record
    * @param  {Record<string, any>}     params
