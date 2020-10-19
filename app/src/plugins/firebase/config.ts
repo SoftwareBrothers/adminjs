@@ -16,5 +16,6 @@ process.env.ASSETS_CDN = config?.env?.assets_cdn || process.env.ASSETS_CDN
 process.env.MEDIA_BUCKET = config?.env?.media_bucket || process.env.MEDIA_BUCKET
 process.env.USERS_BUCKET = config?.env?.users_bucket || process.env.USERS_BUCKET
 process.env.PRODUCTS_BUCKET = config?.env?.products_bucket || process.env.PRODUCTS_BUCKET
+process.env.BLOG_BUCKET = config?.env?.blog_bucket || process.env.BLOG_BUCKET
 process.env.SYNC = config?.env?.sync || process.env.SYNC
 process.env.SENTRY_DSN = config?.env?.sentry_dsn || process.env.SENTRY_DSN

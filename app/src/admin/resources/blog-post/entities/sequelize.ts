@@ -1,7 +1,6 @@
 import { DataTypes, Model, UUIDV4 } from 'sequelize'
 import { sequelize } from '../../../../databases/sequelize/connect'
 import { BlogPostInterface } from '../blog-post.interface'
-import { UserModel } from '../../user/entities/sequelize'
 
 export interface BlogPostSequelizeInterface extends BlogPostInterface, Model {}
 
@@ -27,16 +26,7 @@ export const BlogPostModel = sequelize.define<BlogPostSequelizeInterface>('BlogP
   postImage: {
     type: DataTypes.JSONB,
   },
-  blogImageKeys: {
-    type: DataTypes.JSONB,
-  },
-  blogImageMimeTypes: {
-    type: DataTypes.JSONB,
-  },
-  blogImageBuckets: {
-    type: DataTypes.JSONB,
-  },
-  blogImageSizes: {
+  inlineImages: {
     type: DataTypes.JSONB,
   },
   postUrl: {
@@ -57,9 +47,6 @@ export const BlogPostModel = sequelize.define<BlogPostSequelizeInterface>('BlogP
   },
   facebook: {
     type: DataTypes.JSONB,
-  },
-  publishAt: {
-    type: DataTypes.DATE,
   },
 }, {
   // Other model options go here

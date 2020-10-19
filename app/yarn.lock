@@ -45,10 +45,10 @@
     escape-regexp "0.0.1"
     flat "^5.0.0"
 
-"@admin-bro/upload@^1.2.0-beta.7":
-  version "1.2.0-beta.7"
-  resolved "https://registry.yarnpkg.com/@admin-bro/upload/-/upload-1.2.0-beta.7.tgz#69e5f81d64f25954acda990580959d9c8f413ca7"
-  integrity sha512-soYoGOvR3gcY9WRumBFNAwnbOuQAXr9uurAYbuRHwhP3b3R3uK/ck8T52pv5U5U/5Jk14pjy3tn5qj9yG0ztpg==
+"@admin-bro/upload@^1.2.0-beta.8":
+  version "1.2.0-beta.8"
+  resolved "https://registry.yarnpkg.com/@admin-bro/upload/-/upload-1.2.0-beta.8.tgz#f26a9aca7a53d6c21e9dd66700a7246891ca43bf"
+  integrity sha512-mvojTTp9xqnjrLwhwVA49sNSlxydCYiw7+28UhC/4IOP+jQnDuTLAeHLjPAaQufic59WC/BuaEx2uPDhoohArg==
   optionalDependencies:
     "@google-cloud/storage" "^5.3.0"
     aws-sdk "^2.728.0"
@@ -1506,6 +1506,11 @@
   version "0.14.0"
   resolved "https://registry.yarnpkg.com/@sindresorhus/is/-/is-0.14.0.tgz#9fb3a3cf3132328151f353de4632e01e52102bea"
   integrity sha512-9NET910DNaIPngYnLLPeg+Ogzqsi9uM4mSboU5y6p8S5DzMTVEsJZrawi+BoDNUVBa2DhJqQYUFvMDfgU062LQ==
+
+"@softwarebrothers/admin-bro-blog@^1.0.0-beta.3":
+  version "1.0.0-beta.3"
+  resolved "https://npm.pkg.github.com/download/@softwarebrothers/admin-bro-blog/1.0.0-beta.3/5ec4bbf459f0301b450da1cc0104e8509c4b87062cbe7ce49906657d3d01a856#f1ef428ebe6a8846c51cc43275061543d32c6226"
+  integrity sha512-Q8wswo+ltwxULYaYw3UsIz08bRmeBO1lxYkPPW3tmm+CcXiu/0Al+sWyqdN0fyiqkM/wWdiVjam5DUTejy87Jg==
 
 "@styled-system/background@^5.1.2":
   version "5.1.2"
