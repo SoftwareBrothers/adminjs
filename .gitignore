@@ -26,4 +26,5 @@ app/cypress/videos
 app/cypress/screenshots
 app/build
 .env
+firebase.env.json
 yarn-error.log

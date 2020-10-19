@@ -68,7 +68,7 @@ const uploadFeatureFor = (name?: string, multiple = false) => (
   uploadFeature({
     provider: {
       gcp: {
-        bucket: process.env.GOOGLE_STORAGE_MEDIA_BUCKET as string,
+        bucket: process.env.MEDIA_BUCKET as string,
         expires: 0,
       },
     },

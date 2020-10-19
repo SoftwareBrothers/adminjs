@@ -2,23 +2,10 @@
 # yarn lockfile v1
 
 
-"@admin-bro/design-system@1.7.0-beta.21":
+"@admin-bro/design-system@1.7.0-beta.21", "@admin-bro/design-system@^1.7.0-beta.21":
   version "1.7.0-beta.21"
   resolved "https://registry.yarnpkg.com/@admin-bro/design-system/-/design-system-1.7.0-beta.21.tgz#3195ee9750c76865a86e8be22148e163ef29a4e9"
   integrity sha512-NR/GlRCd8o47JKZ3pUc/sy5VUxR/ftUHHD5arQSMNIlSM9DvvOY6mQjzo2sJ8PuMGXt/cMofXmJ+bO/9ZtzzVA==
-  dependencies:
-    "@carbon/icons-react" "^10.14.0"
-    jw-paginate "^1.0.4"
-    lodash "^4.17.20"
-    polished "^3.6.5"
-    quill "^1.3.7"
-    react-datepicker "^3.1.3"
-    styled-system "^5.1.5"
-
-"@admin-bro/design-system@^1.7.0-beta.9":
-  version "1.7.0-beta.16"
-  resolved "https://registry.yarnpkg.com/@admin-bro/design-system/-/design-system-1.7.0-beta.16.tgz#8441e6183e3df71d0fb200dd8f233872d63569eb"
-  integrity sha512-szT1x2ni3n6LEIAPGPms7zAbCsHff58AkcBraRbPNEUi52QiKlJjBbjG6KgxakRSlEtilElJrd/6XfszG+5Irw==
   dependencies:
     "@carbon/icons-react" "^10.14.0"
     jw-paginate "^1.0.4"
@@ -33,10 +20,10 @@
   resolved "https://registry.yarnpkg.com/@admin-bro/express/-/express-3.0.1.tgz#21e6693cce257da6f25e75be28b4e2b7ef387531"
   integrity sha512-CNGZxdMBFhhr9WGDKmdEpuxYumryO9VNZN+HK93o+Xjqx7lDfFk7smUDFRxmfoHsmaI4QRpErmvswNwpGGzevA==
 
-"@admin-bro/mongoose@1.0.2":
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/@admin-bro/mongoose/-/mongoose-1.0.2.tgz#e9a380240ad37f3777439df873972e1f5351d85b"
-  integrity sha512-vOnTElNrbdlml+FTqMCxKgu+u1m8c86RwuGhBrsIbwo5wr6ER0s+SV2fzCo5aKsxa4Jy2aAMR3FmYy01PxVaKA==
+"@admin-bro/mongoose@1.1.0-beta.2":
+  version "1.1.0-beta.2"
+  resolved "https://registry.yarnpkg.com/@admin-bro/mongoose/-/mongoose-1.1.0-beta.2.tgz#9e581424a1254b16e23d756164ac5de68bfaa50e"
+  integrity sha512-NLpLjDcJEtYP4h431FmXKchaDLXhbLS1KfhQjXnHwph0/rcvSHe2UyfVs3z0hGWDs0Gb3HvbytjlFG+NLgBq3g==
   dependencies:
     escape-regexp "0.0.1"
     flat "^4.1.0"
@@ -1469,12 +1456,12 @@ accepts@~1.3.7:
     mime-types "~2.1.24"
     negotiator "0.6.2"
 
-admin-bro@3.3.0-beta.13:
-  version "3.3.0-beta.13"
-  resolved "https://registry.yarnpkg.com/admin-bro/-/admin-bro-3.3.0-beta.13.tgz#6b996e5e4646811bea6f34fc3fc1c081c80acbc2"
-  integrity sha512-pSPEATReBhl5rJCwx6M3ROJCE7dK5rgaudorXT/uYl8HHEIW/qXZ60hy1vcodgyVvh2ARPrFyTML5Oa7YUX7mA==
+admin-bro@3.3.0-beta.28:
+  version "3.3.0-beta.28"
+  resolved "https://registry.yarnpkg.com/admin-bro/-/admin-bro-3.3.0-beta.28.tgz#a7833f9ed236573afefed488b449cdbe5952bd1f"
+  integrity sha512-dqLwlb7JppbvzqtdkjLSp4+7JjNarQgUIFUkgCQvQHDtTnwHZzoYOHV5JZITrj7Cp3MF3/1h6/fYweYRLpe80w==
   dependencies:
-    "@admin-bro/design-system" "^1.7.0-beta.9"
+    "@admin-bro/design-system" "^1.7.0-beta.21"
     "@babel/core" "^7.10.2"
     "@babel/parser" "^7.10.2"
     "@babel/plugin-transform-runtime" "^7.10.1"

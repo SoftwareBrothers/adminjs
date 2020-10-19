@@ -29,7 +29,7 @@ export const MediaResource: ResourceOptions = {
 export const MediaFeatures: Array<FeatureType> = [uploadFeature({
   provider: {
     gcp: {
-      bucket: process.env.GOOGLE_STORAGE_MEDIA_BUCKET as string,
+      bucket: process.env.MEDIA_BUCKET as string,
     },
   },
   properties: {

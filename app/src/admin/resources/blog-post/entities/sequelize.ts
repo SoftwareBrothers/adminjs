@@ -65,5 +65,4 @@ export const BlogPostModel = sequelize.define<BlogPostSequelizeInterface>('BlogP
   // Other model options go here
 })
 
-BlogPostModel.belongsTo(UserModel)
-BlogPostModel.belongsTo(BlogPostModel, { as: 'PublishedVersion' })
+// BlogPostModel.belongsTo(UserModel)

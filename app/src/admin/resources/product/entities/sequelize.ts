@@ -17,12 +17,15 @@ export const ProductModel = sequelize.define<ProductSequelizeInterface>('Product
   },
   description: {
     type: DataTypes.TEXT,
+    allowNull: true,
   },
   brandId: {
     type: DataTypes.STRING,
+    allowNull: true,
   },
-  ogTags: {
+  photos: {
     type: DataTypes.JSONB,
+    allowNull: true,
   },
 }, {
   // Other model options go here

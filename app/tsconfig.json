@@ -3,7 +3,7 @@
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "outDir": "./build",
-    "target": "es2020",
+    "target": "es2018",
     "esModuleInterop": true,
     "jsx": "preserve",
     "strictNullChecks": true,

@@ -12,7 +12,7 @@ export const sessionStore = (sequelize: Sequelize) => {
     db: sequelize,
   })
 
-  if (SYNC) {
+  if (SYNC === 'true') {
     store.sync()
   }
 

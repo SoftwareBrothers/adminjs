@@ -27,7 +27,7 @@ export const createAdmin = async (): Promise<void> => {
 
   if (!existingUser) {
     await UserModel.create({
-      email: ADMIN_EMAIL,
+      email: ADMIN_EMAIL as string,
       encryptedPassword: await argon2.hash(ADMIN_PASSWORD as string),
     })
   }

@@ -8,33 +8,23 @@ export const ProductResource: ResourceOptions = {
       reference: 'Brands',
       position: 10,
     },
-    ogTags: {
+    photos: {
       type: 'mixed',
-      isArray: true,
-    },
-    'ogTags.title': {
-      type: 'string',
-    },
-    'ogTags.description': {
-      type: 'string',
-    },
-    'ogTags.image': {
-      type: 'string',
     },
   },
   actions: {
     exporter: {
-      actionType: 'record',
+      actionType: 'resource',
       icon: 'Export',
     },
     export: {
-      actionType: 'record',
+      actionType: 'resource',
       icon: 'DocumentExport',
       variant: 'light',
       parent: 'exporter',
     },
     import: {
-      actionType: 'record',
+      actionType: 'resource',
       icon: 'DocumentImport',
       variant: 'light',
       parent: 'exporter',

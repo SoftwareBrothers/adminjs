@@ -25,6 +25,10 @@ export const UserModel = sequelize.define<UserSequelizeInterface>('Users', {
     allowNull: false,
     type: DataTypes.STRING,
   },
+  profilePhoto: {
+    allowNull: true,
+    type: DataTypes.JSONB,
+  },
 }, {
   // Other model options go here
 })

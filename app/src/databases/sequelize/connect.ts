@@ -25,8 +25,9 @@ export const connect = async () => {
     console.error('Unable to connect to the database:', error)
   }
 
-  if (SYNC) {
+  if (SYNC === 'true') {
     await sequelize.sync({ force: true })
+    console.log('Database has been synced.')
   }
 
   return sequelize
