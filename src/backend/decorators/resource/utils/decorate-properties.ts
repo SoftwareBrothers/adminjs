@@ -61,6 +61,8 @@ const decorateVirtualProperties = (
  *
  * @param {DecoratedProperties} dbProperties
  * @param {DecoratedProperties} virtualProperties
+ * @private
+ * @hide
  */
 const organizeNestedProperties = (
   dbProperties: DecoratedProperties,

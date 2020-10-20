@@ -9,9 +9,10 @@ import { NoticeMessage } from '../hoc/with-notice'
 export type AddNotice = (notice: NoticeMessage) => any;
 
 /**
+ * @classdesc
  * Hook which allows you to add notice message to the app.
  *
- * ```usage
+ * ```javascript
  * import { useNotice, Button } from 'admin-bro'
  *
  * const myComponent = () => {

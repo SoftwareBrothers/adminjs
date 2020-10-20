@@ -12,12 +12,12 @@ const isValueSearchable = (value: any): value is string | number => (
  *
  * @param {Array<BaseRecord>} records   array of records to populate
  * @param {PropertyDecorator} property  Decorator for the reference property to populate
- * @new In version 3.3
+ * @private
  */
-export const populateProperty = async (
+export async function populateProperty (
   records: Array<BaseRecord> | null,
   property: PropertyDecorator,
-): Promise<Array<BaseRecord> | null> => {
+): Promise<Array<BaseRecord> | null> {
   const decoratedResource = property.resource()
 
   if (!records || !records.length) {

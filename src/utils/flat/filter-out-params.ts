@@ -2,13 +2,11 @@ import { propertyKeyRegex } from './property-key-regex'
 import { FlattenParams } from './flat.types'
 
 /**
- *
- * From all params it removes keys starting with property
- *
- * @memberof module:flat
+ * @load ./filter-out-params.doc.md
+ * @memberof flat
  * @param {FlattenParams} params
  * @param {string} property
- * @new In version 3.3
+ * @returns {FlattenParams}
  */
 const filterOutParams = (params: FlattenParams, property: string): FlattenParams => {
   const regex = propertyKeyRegex(property)

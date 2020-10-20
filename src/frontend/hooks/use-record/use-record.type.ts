@@ -5,14 +5,24 @@ import { RecordActionResponse } from '../../../backend/actions/action.interface'
 import { RecordJSON } from '../../interfaces'
 
 /**
- * Custom options passed to useRecord
+ * Custom options passed to useRecord as the third argument.
+ * 
+ * Example of restricting useRecord to operate only on a finite set of properties:
+ * 
+ * ```javascript
+ * const { record, handleChange, submit } = useRecord(initialRecord, resource.id, {
+ *   includeParams: ['name', 'surname', 'school.name'],
+ * })
+ * 
+ * // handleChange('otherProperty', 'value') wont affect the `record`
+ * ```
  *
  * @memberof useRecord
  * @alias UseRecordOptions
  */
 export type UseRecordOptions = {
   /**
-   * If set, useRecord will operates only on selected params. The rules here will be applied to
+   * If set, useRecord will operate only on selected params. The rules here will be applied to
    * both initialRecord params and all the params set by handleChange. It wont be applied to params
    * set in submit
    */
@@ -20,19 +30,30 @@ export type UseRecordOptions = {
 }
 
 /**
- * Custom options passed to useRecord
+ * Submit function which either creates a record or updates it. By default, after successful
+ * execution function updates its inner state with the returned by the backend record. This might
+ * not be the need in your case, so you can turn it of by setting `updateOnSave` to false.
  *
  * @memberof useRecord
- * @alias UseRecordSubmitOptions
+ * @alias UseRecordSubmitFunction
+ * @param {boolean} [options.updateOnSave] Indicates if record should be updated after the
+ *                                         submit action, which returns updated record.
+ *                                         You might turn this of if you use function like lodash
+ *                                         debounce, where you might have old
+ *                                         state in the action response.
  */
-export type UseRecordSubmitOptions = {
+export type UseRecordSubmitFunction = (
   /**
-   * Indicates if record should be updated after the submit action, which returns updated record.
-   * You might turn this of if you use function like lodash debounce, where you might have old
-   * state in the action response.
+   * Any additional parameters you want to be merged to the payload.
    */
-  updateOnSave?: boolean;
-}
+  customParams?: Record<string, string>,
+  /**
+   * Custom options passed to submit function
+   */
+  options?: {
+    updateOnSave?: boolean;
+  }
+) => Promise<AxiosResponse<RecordActionResponse>>;
 
 /**
  * Result of useRecord hook
@@ -52,13 +73,8 @@ export type UseRecordResult = {
   handleChange: OnPropertyChange;
   /**
    * Triggers submission of the record. Returns a promise.
-   * If custom params are given as an argument - they are merged
-   * to the payload.
    */
-  submit: (
-    customParams?: Record<string, string>,
-    options?: UseRecordSubmitOptions
-  ) => Promise<AxiosResponse<RecordActionResponse>>;
+  submit: UseRecordSubmitFunction;
   /**
    * Flag indicates loading.
    */

@@ -7,9 +7,10 @@ import { set } from './set'
  *
  * @param {any} params
  * @param {Array<any>} ...mergeParams
+ * @returns {FlattenParams}
  * @memberof flat
  */
-export const merge = (params: any = {}, ...mergeParams: Array<any>): FlattenParams => {
+const merge = (params: any = {}, ...mergeParams: Array<any>): FlattenParams => {
   const flattenParams = flatten(params)
 
   // reverse because we merge from right
@@ -20,3 +21,5 @@ export const merge = (params: any = {}, ...mergeParams: Array<any>): FlattenPara
       ), globalMemo)
   ), flattenParams as Record<string, any>)
 }
+
+export { merge }

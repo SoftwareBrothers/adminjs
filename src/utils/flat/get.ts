@@ -7,7 +7,8 @@ import { propertyKeyRegex } from './property-key-regex'
 const TEMP_HOLDING_KEY = 'TEMP_HOLDING_KEY'
 
 /**
- * @memberof module:flat
+ * @load ./get.doc.md
+ * @memberof flat
  * @param {FlattenParams}   params      flatten params from which property has to be taken
  * @param {string}          [propertyPath]  name of the property
  * @returns {any}                       when property key exists directly it returns what is inside,

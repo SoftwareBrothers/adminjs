@@ -1,7 +1,7 @@
 import { PathParts } from './path-parts.type'
 
 /**
- * @memberof module:flat
+ * @memberof flat
  * @alias PathToPartsOptions
  */
 export type PathToPartsOptions = {
@@ -12,29 +12,15 @@ export type PathToPartsOptions = {
 }
 
 /**
- * Changes path with flatten notation, with dots (.) inside, to array of all possible
- * keys which can have a property.
- *
- * - changes: `nested.nested2.normalInner`
- * - to `["nested", "nested.nested2", "nested.nested2.normalInner"]`
- *
- * When skipArrayIndexes is set to true it also it takes care of the arrays, which are
- * separated by numbers (indexes). Then it:
- * - changes: `nested.0.normalInner.1`
- * - to: `nested.normalInner`
- *
- * Everything because when we look for a property of a given path it can be inside a
- * mixed property. So first, we have to find top level mixed property, and then,
- * step by step, find inside each of them.
- *
+ * @load ./path-to-parts.doc.md
  * @param   {string}              propertyPath
  * @param   {PathToPartsOptions}  options
- * @return  {PathParts}
+ * @returns  {PathParts}
  *
- * @memberof module:flat
+ * @memberof flat
  * @alias pathToParts
  */
-export const pathToParts = (propertyPath: string, options: PathToPartsOptions = {}): PathParts => {
+const pathToParts = (propertyPath: string, options: PathToPartsOptions = {}): PathParts => {
   let allParts = propertyPath.split('.')
   if (options.skipArrayIndexes) {
     // eslint-disable-next-line no-restricted-globals
@@ -50,3 +36,5 @@ export const pathToParts = (propertyPath: string, options: PathToPartsOptions = 
     return [part]
   }, [] as Array<string>)
 }
+
+export {pathToParts}

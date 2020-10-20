@@ -13,6 +13,7 @@ import { UseLocalStorageResult } from './use-local-storage-result.type'
  * @return {UseLocalStorageResult<T>}
  * @new In version 3.3
  * @bundle
+ * @type {Function}
  */
 export function useLocalStorage<T>(key: string, initialValue: T): UseLocalStorageResult<T> {
   // State to store our value

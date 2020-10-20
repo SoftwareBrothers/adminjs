@@ -1,23 +1,26 @@
-
 /**
- * Available fo flatten value
+ * Type of flatten params.
  *
- * @memberof module:flat
- */
-export type FlattenValue = 'string' |
-  'boolean' |
-  'number' |
-  Date |
-  null |
-  [] |
-  {} |
-  File
-
-/**
- * Type of flatten params
- *
- * @memberof module:flat
+ * @memberof flat
+ * @alias FlattenParams
  */
 export type FlattenParams = {
   [key: string]: FlattenValue;
 }
+
+export type FlattenValue = string | boolean | number | Date | null | [] | {} | File
+
+/**
+ * Available types for flatten values. This is an Union of types:
+ * - `string`
+ * - `boolean`
+ * - `number`
+ * - `Date`
+ * - `null`
+ * - `[]` (empty array)
+ * - `{}` (empty object)
+ * - `File`
+ * @memberof flat
+ * @alias FlattenValue
+ * @typedef {Union} FlattenValue
+ */

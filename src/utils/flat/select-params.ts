@@ -2,13 +2,11 @@ import { propertyKeyRegex } from './property-key-regex'
 import { FlattenParams } from './flat.types'
 
 /**
- *
- * From all params it selects only those starting with property
- *
- * @memberof module:flat
+ * @load ./select-params.doc.md
+ * @memberof flat
  * @param {FlattenParams} params
  * @param {...string} properties
- * @new In version 3.3
+ * @returns {FlattenParams}
  */
 const selectParams = (params: FlattenParams, ...properties: Array<string>): FlattenParams => (
   properties.reduce((globalMemo, property) => {

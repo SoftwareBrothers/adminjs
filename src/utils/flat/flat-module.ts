@@ -8,10 +8,6 @@ import { get } from './get'
 import { merge } from './merge'
 import { pathToParts } from './path-to-parts'
 
-/**
- *
- * @memberof module:flat
- */
 export type FlatModuleType = {
   flatten: typeof flatten;
   unflatten: typeof unflatten;
@@ -25,35 +21,23 @@ export type FlatModuleType = {
 }
 
 /**
- * All the data in records are stored in flatten version.
- *
- * Helpers gathered in this module will help you manage them
- *
- * ### Usage
- *
- * ```javascript
- * // on the frontend (i.e in components)
- * import { flat } from 'admin-bro'
- *
- * // on the backend (i.e. in action hooks)
- * const { flat } = require('admin-bro')
- *
- * flat.set(...)
- * ```
- *
- * @module flat
+ * @namespace flat
  * @name flat
- * @new In version 3.3
+ * @new in version 3.3
+ * @load ./flat.doc.md
  */
 export const flat: FlatModuleType = {
   /**
-   * Raw `flatten` function exported from original `flat` package.
+   * Raw `flatten` function exported from original {@link https://www.npmjs.com/package/flat flat}
+   * package.
    */
   flatten,
   /**
-   * Raw `unflatten` function exported from original `flat` package.
+   * Raw `unflatten` function exported from original {@link https://www.npmjs.com/package/flat flat}
+   * package.
    */
   unflatten,
+
   set,
   get,
   selectParams,

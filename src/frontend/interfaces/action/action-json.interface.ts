@@ -66,7 +66,7 @@ export interface ActionJSON {
 
   /**
    * If action is nested
-   * @deprecated in version 3.3
+   * @new in version 3.3
    */
   parent: string | null;
 

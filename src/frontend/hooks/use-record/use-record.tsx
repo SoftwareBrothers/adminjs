@@ -7,7 +7,7 @@ import useNotice from '../use-notice'
 import { RecordActionResponse } from '../../../backend/actions/action.interface'
 import mergeRecordResponse from './merge-record-response'
 import updateRecord from './update-record'
-import { UseRecordOptions, UseRecordResult, UseRecordSubmitOptions } from './use-record.type'
+import { UseRecordOptions, UseRecordResult, UseRecordSubmitFunction } from './use-record.type'
 import isEntireRecordGiven from './is-entire-record-given'
 import { filterRecordParams, isPropertyPermitted } from './filter-record'
 import { flat } from '../../../utils'
@@ -71,9 +71,8 @@ export const useRecord = (
     setIsSynced(false)
   }, [setRecord, options])
 
-  const handleSubmit: UseRecordResult['submit'] = useCallback((
-    customParams: Record<string, string> = {},
-    submitOptions?: UseRecordSubmitOptions,
+  const handleSubmit: UseRecordSubmitFunction = useCallback((
+    customParams = {}, submitOptions,
   ): Promise<AxiosResponse<RecordActionResponse>> => {
     setLoading(true)
 
