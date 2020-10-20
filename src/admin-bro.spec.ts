@@ -34,7 +34,7 @@ describe('AdminBro', function () {
     it('throws an error when adapter is not full', function () {
       expect(() => {
         AdminBro.registerAdapter({
-          Resource: AdminBro.BaseResource,
+          Resource: BaseResource,
           Database: {} as typeof BaseDatabase })
       }).to.throw('Adapter has to have both Database and Resource')
     })
