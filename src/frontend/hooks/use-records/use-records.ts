@@ -2,28 +2,17 @@ import { useState, useEffect } from 'react'
 
 import { AxiosResponse } from 'axios'
 import { useLocation, useHistory } from 'react-router'
-import { RecordJSON } from '../interfaces'
-import useNotice from './use-notice'
-import ApiClient from '../utils/api-client'
-import { ListActionResponse } from '../../backend/actions/list/list-action'
-import { useTranslation } from './use-translation'
-import { hasForceRefresh, removeForceRefresh } from '../components/actions/utils/append-force-refresh'
+import { RecordJSON } from '../../interfaces'
+import useNotice from '../use-notice'
+import ApiClient from '../../utils/api-client'
+import { ListActionResponse } from '../../../backend/actions/list/list-action'
+import { useTranslation } from '../use-translation'
+import { hasForceRefresh, removeForceRefresh } from '../../components/actions/utils/append-force-refresh'
+import { UseRecordsResult } from './use-records-result.type'
 
 const api = new ApiClient()
 
-export type UseRecordsResult = {
-  records: Array<RecordJSON>;
-  loading: boolean;
-  page: number;
-  perPage: number;
-  total: number;
-  direction: 'asc' | 'desc';
-  sortBy?: string;
-  fetchData: () => Promise<AxiosResponse<ListActionResponse>>;
-}
-
-
-export const useRecords = (resourceId: string): UseRecordsResult => {
+const useRecords = (resourceId: string): UseRecordsResult => {
   const [records, setRecords] = useState<Array<RecordJSON>>([])
   const [loading, setLoading] = useState(false)
   const [perPage, setPerPage] = useState(10)
@@ -93,4 +82,7 @@ export const useRecords = (resourceId: string): UseRecordsResult => {
   }
 }
 
-export default useRecords
+export {
+  useRecords as default,
+  useRecords,
+}

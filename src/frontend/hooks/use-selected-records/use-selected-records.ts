@@ -1,14 +1,8 @@
 import { useState } from 'react'
-import { RecordJSON } from '../interfaces'
+import { RecordJSON } from '../../interfaces'
+import { UseSelectedRecordsResult } from './use-selected-records-result.type'
 
-export type UseSelectedRecordsResult = {
-  selectedRecords: Array<RecordJSON>;
-  setSelectedRecords: any;
-  handleSelect: (record: RecordJSON) => void;
-  handleSelectAll: () => void;
-}
-
-export const useSelectedRecords = (records: Array<RecordJSON>): UseSelectedRecordsResult => {
+const useSelectedRecords = (records: Array<RecordJSON>): UseSelectedRecordsResult => {
   const [selectedRecords, setSelectedRecords] = useState<Array<RecordJSON>>([])
 
   const handleSelect = (record: RecordJSON): void => {
@@ -45,4 +39,7 @@ export const useSelectedRecords = (records: Array<RecordJSON>): UseSelectedRecor
   }
 }
 
-export default useSelectedRecords
+export {
+  useSelectedRecords as default,
+  useSelectedRecords,
+}
