@@ -8,7 +8,7 @@ export type OverridableComponent = 'LoggedIn'
 /**
  * Name of the components which can be overridden by AdminBro.bundle. It currently following
  * components can be override:
- * 
+ *
  * - LoggedIn
  * - NoRecords
  * - SidebarResourceSection

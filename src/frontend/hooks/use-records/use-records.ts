@@ -12,7 +12,18 @@ import { UseRecordsResult } from './use-records-result.type'
 
 const api = new ApiClient()
 
-const useRecords = (resourceId: string): UseRecordsResult => {
+/**
+ * @load ./use-records.doc.md
+ * @subcategory Hooks
+ * @class
+ *
+ * @param {string} resourceId      id of a resource for which you want to fetch records
+ * @return {UseRecordsResult}
+ * @new In version 3.3
+ * @bundle
+ * @type {Function}
+ */
+function useRecords(resourceId: string): UseRecordsResult {
   const [records, setRecords] = useState<Array<RecordJSON>>([])
   const [loading, setLoading] = useState(false)
   const [perPage, setPerPage] = useState(10)

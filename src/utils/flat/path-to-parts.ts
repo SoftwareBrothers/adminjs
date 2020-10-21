@@ -37,4 +37,4 @@ const pathToParts = (propertyPath: string, options: PathToPartsOptions = {}): Pa
   }, [] as Array<string>)
 }
 
-export {pathToParts}
+export { pathToParts }

@@ -35,7 +35,7 @@ describe('AdminBro', function () {
       expect(() => {
         AdminBro.registerAdapter({
           Resource: BaseResource,
-          Database: {} as typeof BaseDatabase })
+          Database: null as unknown as typeof BaseDatabase })
       }).to.throw('Adapter has to have both Database and Resource')
     })
 

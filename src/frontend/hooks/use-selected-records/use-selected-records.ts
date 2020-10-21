@@ -2,7 +2,17 @@ import { useState } from 'react'
 import { RecordJSON } from '../../interfaces'
 import { UseSelectedRecordsResult } from './use-selected-records-result.type'
 
-const useSelectedRecords = (records: Array<RecordJSON>): UseSelectedRecordsResult => {
+/**
+ * @load ./use-selected-records.doc.md
+ * @subcategory Hooks
+ * @class
+ * @param {Array<RecordJSON>} records     List of records on which you can perform `select` action
+ * @return {UseSelectedRecordsResult}
+ * @new In version 3.3
+ * @bundle
+ * @type {Function}
+ */
+function useSelectedRecords(records: Array<RecordJSON>): UseSelectedRecordsResult {
   const [selectedRecords, setSelectedRecords] = useState<Array<RecordJSON>>([])
 
   const handleSelect = (record: RecordJSON): void => {

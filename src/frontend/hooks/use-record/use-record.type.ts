@@ -6,14 +6,14 @@ import { RecordJSON } from '../../interfaces'
 
 /**
  * Custom options passed to useRecord as the third argument.
- * 
+ *
  * Example of restricting useRecord to operate only on a finite set of properties:
- * 
+ *
  * ```javascript
  * const { record, handleChange, submit } = useRecord(initialRecord, resource.id, {
  *   includeParams: ['name', 'surname', 'school.name'],
  * })
- * 
+ *
  * // handleChange('otherProperty', 'value') wont affect the `record`
  * ```
  *

@@ -11,9 +11,9 @@ export type UseCurrentAdminResponse = [
 /**
  * @classdesc
  * Hook which allows you to get and set currentAdmin
- * 
+ *
  * ### Usage
- * 
+ *
  * ```javascript
  * import { useCurrentAdmin } from 'admin-bro'
  *
@@ -22,7 +22,7 @@ export type UseCurrentAdminResponse = [
  *   // ...
  * }
  * ```
- * 
+ *
  * @class
  * @subcategory Hooks
  * @bundle
