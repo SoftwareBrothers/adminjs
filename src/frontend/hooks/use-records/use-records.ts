@@ -16,6 +16,7 @@ const api = new ApiClient()
  * @load ./use-records.doc.md
  * @subcategory Hooks
  * @class
+ * @hideconstructor
  *
  * @param {string} resourceId      id of a resource for which you want to fetch records
  * @return {UseRecordsResult}

@@ -43,6 +43,7 @@ export type RecordsTableProps = {
 }
 
 /**
+ * @classdesc
  * Renders an entire records table. To fill the data you might need:
  *
  * - {@link useRecords} and
@@ -51,6 +52,8 @@ export type RecordsTableProps = {
  * so make sure to see at the documentation pages for both of them
  *
  * @component
+ * @class
+ * @hideconstructor
  * @subcategory Application
  * @new in version 3.3
  */

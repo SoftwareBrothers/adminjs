@@ -3,9 +3,9 @@ import { ListActionResponse } from '../../../backend'
 import { RecordJSON } from '../../interfaces'
 
 /**
- * Result of the {@link UseRecords} hook.
+ * Result of the {@link useRecords} hook.
  * It is a object containing multiple tools you can use in your component
- * @memberof UseRecords
+ * @memberof useRecords
  * @alias UseRecordsResult
  */
 export type UseRecordsResult = {
