@@ -29,7 +29,7 @@ export async function populateProperty(
   if (!referencedResource) {
     throw new Error([
       `There is no reference resource named: "${property.property.reference}"`,
-      `for property: "${decoratedResource.id()}.properties.${property.path}"`,
+      `for property: "${decoratedResource.id()}.properties.${property.propertyPath}"`,
     ].join('\n'))
   }
 
@@ -41,7 +41,7 @@ export async function populateProperty(
   // first, we create externalIdsMap[1] = null where 1 is userId. This make keys unique and assign
   // nulls to each of them
   const externalIdsMap = records.reduce((memo, baseRecord) => {
-    const foreignKeyValue = baseRecord.get(property.path)
+    const foreignKeyValue = baseRecord.get(property.propertyPath)
     // array properties returns arrays so we have to take the all into consideration
     if (Array.isArray(foreignKeyValue) && property.isArray()) {
       return foreignKeyValue.reduce((arrayMemo, valueInArray) => ({
@@ -85,17 +85,17 @@ export async function populateProperty(
   return records.map((record) => {
     // we set record.populated['userId'] = externalIdsMap[record.param('userId)]
     // but this can also be an array - we have to check it
-    const foreignKeyValue = record.get(property.path)
+    const foreignKeyValue = record.get(property.propertyPath)
 
     if (Array.isArray(foreignKeyValue)) {
       foreignKeyValue.forEach((foreignKeyValueItem, index) => {
         record.populate(
-          [property.path, index].join(DELIMITER),
+          [property.propertyPath, index].join(DELIMITER),
           externalIdsMap[foreignKeyValueItem],
         )
       })
     } else if (typeof foreignKeyValue === 'string' || typeof foreignKeyValue === 'number') {
-      record.populate(property.path, externalIdsMap[foreignKeyValue])
+      record.populate(property.propertyPath, externalIdsMap[foreignKeyValue])
     }
 
     return record

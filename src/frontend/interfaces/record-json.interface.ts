@@ -22,7 +22,7 @@ export interface RecordJSON {
   /**
    * If the record has properties which are references - here there will be populated records
    */
-  populated: Record<string, RecordJSON>;
+  populated: Record<string, RecordJSON | null | undefined>;
   /**
    * List of all validation errors
    */

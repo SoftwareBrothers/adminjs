@@ -159,7 +159,7 @@ describe('ResourceDecorator', function () {
       const decoratedProperty = decorator.getPropertyByKey(path) as PropertyDecorator
 
       expect(decoratedProperty).to.be.an.instanceof(PropertyDecorator)
-      expect(decoratedProperty.path).to.eq(path)
+      expect(decoratedProperty.propertyPath).to.eq(path)
     })
 
     it('returns nested property under 2 level nested mixed', function () {
@@ -171,7 +171,7 @@ describe('ResourceDecorator', function () {
       const decoratedProperty = decorator.getPropertyByKey(path) as PropertyDecorator
 
       expect(decoratedProperty).to.be.an.instanceof(PropertyDecorator)
-      expect(decoratedProperty.path).to.eq(path)
+      expect(decoratedProperty.propertyPath).to.eq(path)
     })
 
     it('returns property when it is an array', function () {
@@ -182,7 +182,7 @@ describe('ResourceDecorator', function () {
       const decoratedProperty = decorator.getPropertyByKey(path) as PropertyDecorator
 
       expect(decoratedProperty).to.be.an.instanceof(PropertyDecorator)
-      expect(decoratedProperty.path).to.eq(arrayProperty.path())
+      expect(decoratedProperty.propertyPath).to.eq(arrayProperty.path())
     })
 
     it('returns property when it is an nested array', function () {
@@ -196,7 +196,7 @@ describe('ResourceDecorator', function () {
       const decoratedProperty = decorator.getPropertyByKey(path) as PropertyDecorator
 
       expect(decoratedProperty).to.be.an.instanceof(PropertyDecorator)
-      expect(decoratedProperty.path).to.eq([arrayProperty.path(), nested1Property.path()].join('.'))
+      expect(decoratedProperty.propertyPath).to.eq([arrayProperty.path(), nested1Property.path()].join('.'))
     })
   })
 

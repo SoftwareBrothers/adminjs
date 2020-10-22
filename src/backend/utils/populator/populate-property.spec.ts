@@ -25,7 +25,7 @@ describe('populateProperty', () => {
     property.resource.returns(resourceDecorator as unknown as ResourceDecorator)
     property.reference.returns(referenceResource as unknown as BaseResource)
     property.property = { reference: 'someRawReference' } as unknown as BaseProperty
-    property.path = path
+    property.propertyPath = path
   })
 
   afterEach(() => {

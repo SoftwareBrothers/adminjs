@@ -1,4 +1,6 @@
+import React from 'react'
 import { RecordJSON, ResourceJSON, PropertyJSON, PropertyPlace } from '../../interfaces'
+import { BasePropertyJSON } from '../../interfaces/property-json/property-json.interface'
 
 export type SelectRecord = {
   value: string;
@@ -73,6 +75,15 @@ export type BasePropertyProps = {
   where: PropertyPlace;
 }
 
+export type BasePropertyComponentProps = Omit<BasePropertyProps, 'property'> & {
+  property: BasePropertyJSON;
+}
+
+export type BasePropertyPropsExtended = BasePropertyProps & {
+  ItemComponent: typeof React.Component;
+  testId: string;
+}
+
 /**
  * Props which are passed to all your custom property components in filter
  *
@@ -108,6 +119,11 @@ export type EditPropertyProps = BasePropertyProps & {
    * Record JSON representation. Null for filter
    */
   record: RecordJSON;
+}
+
+export type EditPropertyPropsInArray = EditPropertyProps & {
+  ItemComponent: typeof React.Component;
+  testId: string;
 }
 
 /**

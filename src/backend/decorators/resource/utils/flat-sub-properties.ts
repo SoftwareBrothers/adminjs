@@ -18,7 +18,7 @@ export const flatSubProperties = (
 ): Record<string, PropertyJSON> => (
   rootProperty.subProperties().reduce((subMemo, subProperty) => ({
     ...subMemo,
-    [subProperty.path]: subProperty.toJSON(),
+    [subProperty.propertyPath]: subProperty.toJSON(),
     ...flatSubProperties(subProperty),
   }), {})
 )
