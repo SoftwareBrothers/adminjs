@@ -1,10 +1,10 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
-const babel = require('rollup-plugin-babel')
-const commonjs = require('rollup-plugin-commonjs')
-const resolve = require('rollup-plugin-node-resolve')
-const replace = require('rollup-plugin-replace')
-const json = require('rollup-plugin-json')
+const { babel } = require('@rollup/plugin-babel')
+const commonjs = require('@rollup/plugin-commonjs')
+const { nodeResolve: resolve } = require('@rollup/plugin-node-resolve')
+const replace = require('@rollup/plugin-replace')
+const json = require('@rollup/plugin-json')
 const { terser } = require('rollup-plugin-terser')
 
 const reactIsExport = ['isValidElementType', 'isContextConsumer', 'isElement', 'ForwardRef']
@@ -73,12 +73,12 @@ const plugins = ({ babelConfig = {}, commonJSConfig = {}, minify = false } = {})
       'process.env.': 'AdminBro.env.',
     }),
     commonjs({
-      namedExports: {
+      /* namedExports: {
         'node_modules/flat/index.js': ['flatten', 'unflatten'],
         'node_modules/react-redux/node_modules/react-is/index.js': reactIsExport,
         '@material-ui/utils/node_modules/react-is': reactIsExport,
         'node_modules/react-is/index.js': reactIsExport,
-      },
+      }, */
       ...commonJSConfig,
     }),
     babel({

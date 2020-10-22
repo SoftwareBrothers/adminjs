@@ -21,7 +21,7 @@ async function build() {
     watch: !once,
     babelConfig: {
       plugins: [runtime, styled],
-      runtimeHelpers: true,
+      babelHelpers: "runtime",
       include: [
         `${__dirname}/../src/frontend/**`,
         `${__dirname}/../src/locale/*`,

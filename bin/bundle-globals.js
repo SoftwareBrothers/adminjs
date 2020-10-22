@@ -6,11 +6,11 @@
  * to the  `global-bundle.js`.
  */
 
-const rollup = require('rollup')
-const resolve = require('rollup-plugin-node-resolve')
-const commonjs = require('rollup-plugin-commonjs')
-const replace = require('rollup-plugin-replace')
-const json = require('rollup-plugin-json')
+const { rollup: _rollup }= require('rollup')
+const { nodeResolve: resolve } = require('@rollup/plugin-node-resolve')
+const commonjs = require('@rollup/plugin-commonjs')
+const replace = require('@rollup/plugin-replace')
+const json = require('@rollup/plugin-json')
 const builtins = require('rollup-plugin-node-builtins')
 const globals = require('rollup-plugin-node-globals')
 const { terser } = require('rollup-plugin-terser')
@@ -39,14 +39,14 @@ const run = async () => {
       json(),
       commonjs({
         include: ['node_modules/**'],
-        namedExports: {
+        /* namedExports: {
           react: Object.keys(React),
           'react-dom': Object.keys(ReactDOM),
           'react-is': reactIsExport,
           'node_modules/react-redux/node_modules/react-is/index.js': reactIsExport,
           'node_modules/react-router/node_modules/react-is/index.js': reactIsExport,
           '@admin-bro/design-system/build/index.js': Object.keys(designSystem),
-        },
+        }, */
         ignoreGlobal: true,
       }),
       globals(),
@@ -54,7 +54,7 @@ const run = async () => {
       ...(env === 'production' ? [terser()] : []),
     ],
   }
-  const bundle = await rollup.rollup(inputOptions)
+  const bundle = await _rollup(inputOptions)
 
   return bundle.write({
     format: 'iife',
