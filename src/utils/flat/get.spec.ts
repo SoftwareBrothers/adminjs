@@ -21,6 +21,10 @@ describe('module:flat.get', () => {
       nulled: null,
       emptyArray: [],
       emptyObject: {},
+      'nested.0.el.0.value': 'val0.0',
+      'nested.0.el.1.value': 'val0.1',
+      'nested.1.el.0.value': 'val1',
+      'nested.1.el.1.value': 'val2',
     }
   })
 
@@ -62,5 +66,43 @@ describe('module:flat.get', () => {
 
   it('returns null for null values', () => {
     expect(get(params, 'nulled')).to.eq(null)
+  })
+
+  it('returns nested arrays', () => {
+    expect(get(params, 'nested.0.el')).to.deep.equal([
+      { value: 'val0.0' },
+      { value: 'val0.1' },
+    ])
+  })
+
+  it('returns nested arrays with siblings when `includeAllSiblings` is set', () => {
+    expect(get(params, 'nested.el', { includeAllSiblings: true })).to.deep.equal([
+      { value: 'val0.0' },
+      { value: 'val0.1' },
+      { value: 'val1' },
+      { value: 'val2' },
+    ])
+  })
+
+  context('gets nested reference id', () => {
+    const referenceId = '5f7462621eb3495ea0f0edd9'
+
+    beforeEach(() => {
+      params = {
+        'Skills._id': '5f925f58016eab056c8c35a7',
+        'Skills.softShills': [],
+        'Skills.hardSkills.0._id': '5f925f58016eab056c8c35a8',
+        'Skills.hardSkills.0.name': '123',
+        'Skills.hardSkills.0.level': 'junior',
+        'Skills.hardSkills.0.Profession': referenceId,
+      }
+    })
+
+    it('returns referenceId when propertyPath is given', () => {
+      const propertyPath = 'Skills.hardSkills.Profession'
+      expect(get(params, propertyPath, { includeAllSiblings: true })).to.deep.equal(
+        [referenceId],
+      )
+    })
   })
 })

@@ -39,6 +39,7 @@ describe('populateProperty', () => {
   context('2 same records with reference key', () => {
     beforeEach(async () => {
       record.get.returns(userId)
+      record.selectParams.returns({ [path]: userId })
       userRecord.id.returns(userId)
       referenceResource.findMany.resolves([userRecord])
 

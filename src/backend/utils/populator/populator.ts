@@ -13,7 +13,7 @@ export async function populator(
     return records
   }
   const resourceDecorator = records[0].resource.decorate()
-  const allProperties = Object.values(resourceDecorator.properties)
+  const allProperties = Object.values(resourceDecorator.getFlattenProperties())
 
   const references = allProperties.filter(p => !!p.reference())
 
