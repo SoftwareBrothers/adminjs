@@ -3,6 +3,7 @@ import { Section, ValueGroup } from '@admin-bro/design-system'
 
 import { RecordJSON, PropertyJSON } from '../../../interfaces'
 import { flat } from '../../../../utils'
+import { convertToSubProperty } from './convert-to-sub-property'
 
 type Props = {
   property: PropertyJSON;
@@ -19,19 +20,16 @@ export default class Show extends React.PureComponent<Props> {
     return (
       <ValueGroup label={property.label}>
         <Section>
-          {items.map((item, i) => (
-            <ItemComponent
-              {...this.props}
-              // eslint-disable-next-line react/no-array-index-key
-              key={i}
-              property={{
-                ...property,
-                path: `${property.path}.${i}`,
-                label: `[${i + 1}]`,
-                isArray: false,
-              }}
-            />
-          ))}
+          {(items || []).map((item, i) => {
+            const itemProperty = convertToSubProperty(property, i)
+            return (
+              <ItemComponent
+                {...this.props}
+                key={itemProperty.path}
+                property={itemProperty}
+              />
+            )
+          })}
         </Section>
       </ValueGroup>
     )

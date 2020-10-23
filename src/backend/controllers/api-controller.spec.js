@@ -38,6 +38,7 @@ describe('ApiController', function () {
         resourceActions: () => [this.action],
         recordActions: () => [this.action],
         recordsDecorator: records => records,
+        getFlattenProperties: this.sinon.stub().returns([property]),
         id: this.resourceName,
       }),
       find: this.sinon.stub().returns([]),

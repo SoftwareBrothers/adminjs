@@ -3,6 +3,7 @@ import { Section, FormGroup, FormMessage } from '@admin-bro/design-system'
 
 import { EditPropertyProps } from '../base-property-props'
 import { PropertyLabel } from '../utils/property-label'
+import { convertToSubProperty } from './convert-to-sub-property'
 
 type Props = {
   ItemComponent: typeof React.Component;
@@ -15,13 +16,16 @@ const Edit: React.FC<Props & EditPropertyProps> = (props) => {
     <FormGroup error={!!error}>
       <PropertyLabel property={property} />
       <Section {...property.props}>
-        {property.subProperties.filter(subProperty => !subProperty.isId).map(subProperty => (
-          <ItemComponent
-            {...props}
-            key={subProperty.path}
-            property={subProperty}
-          />
-        ))}
+        {property.subProperties.filter(subProperty => !subProperty.isId).map((subProperty) => {
+          const subPropertyWithPath = convertToSubProperty(property, subProperty)
+          return (
+            <ItemComponent
+              {...props}
+              key={subPropertyWithPath.path}
+              property={subPropertyWithPath}
+            />
+          )
+        })}
       </Section>
       <FormMessage>{error && error.message}</FormMessage>
     </FormGroup>

@@ -1,4 +1,4 @@
-import { PropertyType } from '../../backend/adapters/property/base-property'
+import { PropertyType } from '../../../backend/adapters/property/base-property'
 
 export type PropertyPlace = 'show' | 'list' | 'edit' | 'filter';
 
@@ -29,12 +29,16 @@ export interface PropertyJSON {
   availableValues: Array<{label: string; value: string}> | null;
   /**
    * Property uniq name
-   * @deprecated in version 3.3 in favour of `path`
    */
   name: string;
   /**
    * Property uniq path. For top level properties - the same as name, but for nested
    * properties it is separated with dot notation: `nested.property`
+   */
+  propertyPath: string;
+  /**
+   * Path of the actual value inside the record. It is usually the same as propertyPath, with the
+   * exception of array values.
    */
   path: string;
   /**
@@ -58,7 +62,7 @@ export interface PropertyJSON {
    * Contain list of all sub properties.
    * This is the case for nested schemas in MongoDB.
    */
-  subProperties: Array<PropertyJSON>;
+  subProperties: Array<BasePropertyJSON>;
   /**
    * All component names overridden by the user in PropertyOptions
    */
@@ -110,3 +114,10 @@ export interface PropertyJSON {
    */
   isVirtual: boolean;
 }
+
+/**
+ * Property without the path
+ *
+ * @memberof PropertyJSON
+ */
+export type BasePropertyJSON = Omit<PropertyJSON, 'path'>

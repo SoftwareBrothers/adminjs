@@ -1,5 +1,6 @@
-import { PropertyJSON } from './property-json.interface'
+import { BasePropertyJSON } from './property-json'
 import { ActionJSON } from './action/action-json.interface'
+
 
 /**
  * Resource object accessible on the fronted
@@ -36,7 +37,7 @@ export interface ResourceJSON {
   /**
    * Property which should be treated as a Main property
    */
-  titleProperty: PropertyJSON;
+  titleProperty: BasePropertyJSON;
   /**
    * Actions available for entire resource with type: resource
    */
@@ -48,22 +49,22 @@ export interface ResourceJSON {
   /**
    * Properties which should be visible on the list
    */
-  listProperties: Array<PropertyJSON>;
+  listProperties: Array<BasePropertyJSON>;
   /**
    * Properties which should be visible on the edit view
    */
-  editProperties: Array<PropertyJSON>;
+  editProperties: Array<BasePropertyJSON>;
   /**
    * Properties which should be visible on the show view
    */
-  showProperties: Array<PropertyJSON>;
+  showProperties: Array<BasePropertyJSON>;
   /**
    * Properties which should be visible on the filter
    */
-  filterProperties: Array<PropertyJSON>;
+  filterProperties: Array<BasePropertyJSON>;
   /**
    * Map of all properties inside the resource. It also contains nested properties.
    * So this is the easies way of getting any property you like from a resource.
    */
-  properties: Record<string, PropertyJSON>;
+  properties: Record<string, BasePropertyJSON>;
 }

@@ -9,7 +9,7 @@ export const filterRecordParams = function<T extends RecordJSON> (
   if (options.includeParams && record) {
     return {
       ...record,
-      params: flat.selectParams(record.params || {}, ...options.includeParams),
+      params: flat.selectParams(record.params || {}, options.includeParams),
     }
   }
   return record

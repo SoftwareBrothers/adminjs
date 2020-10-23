@@ -7,6 +7,7 @@ import { set } from './set'
 import { get } from './get'
 import { merge } from './merge'
 import { pathToParts } from './path-to-parts'
+import { removePath } from './remove-path'
 
 export type FlatModuleType = {
   flatten: typeof flatten;
@@ -17,6 +18,7 @@ export type FlatModuleType = {
   filterOutParams: typeof filterOutParams;
   DELIMITER: typeof DELIMITER;
   pathToParts: typeof pathToParts;
+  removePath: typeof removePath;
   merge: typeof merge;
 }
 
@@ -42,6 +44,7 @@ export const flat: FlatModuleType = {
   get,
   selectParams,
   filterOutParams,
+  removePath,
   DELIMITER,
   pathToParts,
   merge,

@@ -31,14 +31,14 @@ describe('selectParams', () => {
   })
 
   it('returns multiple properties when they are given', () => {
-    expect(selectParams(params, 'name', 'surname')).to.deep.equal({
+    expect(selectParams(params, ['name', 'surname'])).to.deep.equal({
       name: 'John',
       surname: 'Doe',
     })
   })
 
   it('does not one property when is empty for multi-properties', () => {
-    expect(selectParams(params, 'name', 'surname', 'meta', 'empty')).to.deep.equal({
+    expect(selectParams(params, ['name', 'surname', 'meta', 'empty'])).to.deep.equal({
       name: 'John',
       surname: 'Doe',
       'meta.description': 'very ugly',
