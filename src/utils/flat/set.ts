@@ -30,7 +30,7 @@ const set = (params: FlattenParams = {}, propertyPath: string, value?: any): Fla
     .reduce((memo, key) => ({ ...memo, [key]: params[key] }), {} as FlattenParams)
 
   if (typeof value !== 'undefined') {
-    if (isObject(value)) {
+    if (isObject(value) && !(value instanceof Date)) {
       const flattened = flatten(value) as any
 
       if (Object.keys(flattened).length) {
