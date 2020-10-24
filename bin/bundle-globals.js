@@ -6,7 +6,7 @@
  * to the  `global-bundle.js`.
  */
 
-const { rollup: _rollup }= require('rollup')
+const { rollup } = require('rollup')
 const { nodeResolve: resolve } = require('@rollup/plugin-node-resolve')
 const commonjs = require('@rollup/plugin-commonjs')
 const replace = require('@rollup/plugin-replace')
@@ -54,7 +54,7 @@ const run = async () => {
       ...(env === 'production' ? [terser()] : []),
     ],
   }
-  const bundle = await _rollup(inputOptions)
+  const bundle = await rollup(inputOptions)
 
   return bundle.write({
     format: 'iife',
