@@ -46,4 +46,10 @@ describe('selectParams', () => {
       'meta.otherInfo': 'he stinks',
     })
   })
+
+  it('does not throw an error when user passes undefined as a propertyPath', () => {
+    expect(() => {
+      selectParams(params, ['name', undefined as unknown as string])
+    }).not.to.throw()
+  })
 })

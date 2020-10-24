@@ -5,19 +5,27 @@ import { FlattenParams } from './flat.types'
  * @load ./filter-out-params.doc.md
  * @memberof flat
  * @param {FlattenParams} params
- * @param {string} property
+ * @param {string | Array<string>} properties
  * @returns {FlattenParams}
  */
-const filterOutParams = (params: FlattenParams, property: string): FlattenParams => {
-  const regex = propertyKeyRegex(property)
+const filterOutParams = (
+  params: FlattenParams,
+  properties: string | Array<string>,
+): FlattenParams => {
+  const propertyArray = Array.isArray(properties) ? properties : [properties]
 
-  // filter all keys which starts with property
-  return Object.keys(params)
-    .filter(key => !key.match(regex))
-    .reduce((memo, key) => ({
-      ...memo,
-      [key]: (params[key] as string),
-    }), {} as FlattenParams)
+  return propertyArray
+    .filter(propertyPath => !!propertyPath)
+    .reduce((globalFiltered, propertyPath) => {
+      const regex = propertyKeyRegex(propertyPath)
+
+      return Object.keys(globalFiltered)
+        .filter(key => !key.match(regex))
+        .reduce((memo, key) => ({
+          ...memo,
+          [key]: (params[key] as string),
+        }), {} as FlattenParams)
+    }, params)
 }
 
 export { filterOutParams }
