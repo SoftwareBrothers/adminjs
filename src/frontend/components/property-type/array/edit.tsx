@@ -1,138 +1,99 @@
-import React, { ReactNode, MouseEvent } from 'react'
-import flat from 'flat'
-import { Button, Section, FormGroup, FormMessage, Label, Icon, Box } from '@admin-bro/design-system'
+import React, { MouseEvent, useCallback } from 'react'
+import { Button, Section, FormGroup, FormMessage, Icon, Box } from '@admin-bro/design-system'
 
-import convertParamsToArrayItems from './convert-params-to-array-items'
-import PropertyJSON from '../../../../backend/decorators/property-json.interface'
-import RecordJSON from '../../../../backend/decorators/record-json.interface'
-import updateParamsArray from './update-params-array'
 import AddNewItemButton from './add-new-item-translation'
-import ResourceJSON from '../../../../backend/decorators/resource-json.interface'
+import { flat } from '../../../../utils'
+import { EditPropertyPropsInArray } from '../base-property-props'
+import { PropertyLabel } from '../utils/property-label'
+import { convertToSubProperty } from './convert-to-sub-property'
+import { PropertyJSON } from '../../../interfaces'
+import { removeSubProperty } from './remove-sub-property'
 
-const { flatten, unflatten } = flat
-
-const normalizeParams = (params: RecordJSON['params']): RecordJSON['params'] => (
-  flatten<string, any>(unflatten(params, { overwrite: true }))
-)
-
-type Props = {
-  property: PropertyJSON;
-  record: RecordJSON;
-  onChange: (record: RecordJSON) => any;
-  ItemComponent: typeof React.Component;
-  resource: ResourceJSON;
-  testId: string;
-}
+type EditProps = Required<EditPropertyPropsInArray>
 
 type ItemRendererProps = {
-  i: number;
-  onDelete: (event: MouseEvent) => false;
+  onDelete: (event: MouseEvent, property: PropertyJSON) => boolean;
 }
 
-const ItemRenderer: React.FC<Props & ItemRendererProps> = (props) => {
-  const { ItemComponent, property, i, onDelete } = props
+const ItemRenderer: React.FC<EditProps & ItemRendererProps> = (props) => {
+  const { ItemComponent, property, onDelete } = props
   return (
-    <Box flex flexDirection="row" alignItems="center" data-testid={`array-item-${i}`}>
+    <Box flex flexDirection="row" alignItems="center" data-testid={property.path}>
       <Box flexGrow={1}>
-        <ItemComponent
-          {...props}
-          property={{
-            ...property,
-            name: `${property.name}.${i}`,
-            label: `[${i + 1}]`,
-            isArray: false,
-          }}
-        />
+        <ItemComponent {...props} />
       </Box>
-      <Box flexShrink={0}>
+      <Box flexShrink={0} ml="lg">
         <Button
+          rounded
           ml="default"
           data-testid="delete-item"
           type="button"
           size="icon"
-          onClick={(event): false => onDelete(event)}
+          onClick={(event): boolean => onDelete(event, property)}
           variant="danger"
         >
-          <Icon icon="Delete" />
+          <Icon icon="TrashCan" />
         </Button>
       </Box>
     </Box>
   )
 }
 
-export default class Edit extends React.Component<Props> {
-  constructor(props) {
-    super(props)
-    this.addNew = this.addNew.bind(this)
-  }
+const InputsInSection: React.FC<EditProps> = (props) => {
+  const { property, record, resource, onChange } = props
+  const items = flat.get(record.params, property.path) || []
 
-  addNew(event: MouseEvent): false {
-    const { property, record, onChange } = this.props
-    const items = convertParamsToArrayItems(property, record)
-    const newRecord = { ...record }
-    newRecord.params = normalizeParams({
-      ...newRecord.params, // otherwise yarn types is not working
-      [property.name]: [
-        ...items,
-        property.subProperties.length ? {} : '',
-      ],
-    })
+  const addNew = useCallback((event: MouseEvent): boolean => {
+    const newItems = [
+      ...items,
+      property.subProperties.length ? {} : '',
+    ]
+    onChange(property.path, newItems)
+    event.preventDefault()
+    return false
+  }, [record, onChange, property])
+
+  const removeItem = useCallback((event: MouseEvent, subProperty: PropertyJSON): boolean => {
+    const newRecord = removeSubProperty(record, subProperty.path)
     onChange(newRecord)
     event.preventDefault()
     return false
-  }
+  }, [record, onChange, property])
 
-  removeItem(i, event: MouseEvent): false {
-    const { property, record, onChange } = this.props
-    const items = convertParamsToArrayItems(property, record)
-    const newItems = [...items]
-    newItems.splice(i, 1)
-    const newRecord = { ...record }
-
-    newRecord.params = updateParamsArray(
-      newRecord.params, property.name, newItems,
-    )
-
-    onChange(newRecord)
-    event.preventDefault()
-    return false
-  }
-
-  renderInput(): ReactNode {
-    const { property, record, resource } = this.props
-    const items = convertParamsToArrayItems(property, record)
-    return (
-      <Section mt="xl">
-        {items.map((item, i) => (
+  return (
+    <Section mt="xl">
+      {items.map((item, i) => {
+        const itemProperty = convertToSubProperty(props.property, i)
+        return (
           <ItemRenderer
-            {...this.props}
-            // eslint-disable-next-line react/no-array-index-key
-            key={i}
-            i={i}
-            onDelete={(event): false => this.removeItem(i, event)}
+            {...props}
+            property={itemProperty}
+            key={itemProperty.path}
+            onDelete={removeItem}
           />
-        ))}
-        <Button onClick={this.addNew} type="button" size="sm">
-          <AddNewItemButton resource={resource} property={property} />
-        </Button>
-      </Section>
-    )
-  }
+        )
+      })}
+      <Button onClick={addNew} type="button" rounded>
+        <AddNewItemButton resource={resource} property={property} />
+      </Button>
+    </Section>
+  )
+}
 
-  render(): ReactNode {
-    const { property, record, testId } = this.props
-    const error = record.errors && record.errors[property.name]
-    return (
-      <FormGroup error={!!error} data-testid={testId}>
-        <Label
-          htmlFor={property.name}
-          required={property.isRequired}
-        >
-          {property.label}
-        </Label>
-        {this.renderInput()}
-        <FormMessage>{error && error.message}</FormMessage>
-      </FormGroup>
-    )
-  }
+const Edit: React.FC<EditProps> = (props) => {
+  const { property, record, testId } = props
+  const error = record.errors && record.errors[property.propertyPath]
+
+  return (
+    <FormGroup error={!!error} data-testid={testId}>
+      <PropertyLabel property={property} />
+      <InputsInSection {...props} />
+      <FormMessage>{error && error.message}</FormMessage>
+    </FormGroup>
+  )
+}
+
+export {
+  Edit as default,
+  Edit,
 }

@@ -1,5 +1,5 @@
-import flat from 'flat'
-import RecordJSON from '../../../backend/decorators/record-json.interface'
+import { flat } from '../../../utils/flat'
+import { RecordJSON } from '../../interfaces'
 
 /**
  * HOF returning a function which takes a record and returns an updated record.
@@ -27,40 +27,18 @@ import RecordJSON from '../../../backend/decorators/record-json.interface'
  *                                      it's referencing to
  * @private
  */
-const updateRecord = (
+export const updateRecord = (
   property: string,
   value: any,
   selectedRecord?: RecordJSON,
 ) => (previousRecord: RecordJSON): RecordJSON => {
   let populatedModified = false
   const populatedCopy = { ...previousRecord.populated }
-  const paramsCopy = { ...previousRecord.params }
+  const paramsCopy = flat.set(previousRecord.params, property, value)
 
-  // clear previous value
-  Object.keys(paramsCopy)
-    .filter(key => key === property || key.startsWith(`${property}.`))
-    .forEach(k => delete paramsCopy[k])
   if (property in populatedCopy) {
     delete populatedCopy[property]
     populatedModified = true
-  }
-
-  // set new value
-  if (typeof value !== 'undefined') {
-    if (typeof value === 'object' && !(value instanceof File) && value !== null) {
-      const flattened = flat.flatten(value) as any
-      if (Object.keys(flattened).length) {
-        Object.keys(flattened).forEach((key) => {
-          paramsCopy[`${property}.${key}`] = flattened[key]
-        })
-      } else if (Array.isArray(value)) {
-        paramsCopy[property] = []
-      } else {
-        paramsCopy[property] = {}
-      }
-    } else {
-      paramsCopy[property] = value
-    }
   }
 
   if (selectedRecord) {

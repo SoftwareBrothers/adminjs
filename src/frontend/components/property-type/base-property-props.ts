@@ -1,6 +1,6 @@
-import PropertyJSON, { PropertyPlace } from '../../../backend/decorators/property-json.interface'
-import ResourceJSON from '../../../backend/decorators/resource-json.interface'
-import RecordJSON from '../../../backend/decorators/record-json.interface'
+import React from 'react'
+import { RecordJSON, ResourceJSON, PropertyJSON, PropertyPlace } from '../../interfaces'
+import { BasePropertyJSON } from '../../interfaces/property-json/property-json.interface'
 
 export type SelectRecord = {
   value: string;
@@ -75,6 +75,15 @@ export type BasePropertyProps = {
   where: PropertyPlace;
 }
 
+export type BasePropertyComponentProps = Omit<BasePropertyProps, 'property'> & {
+  property: BasePropertyJSON;
+}
+
+export type BasePropertyPropsExtended = BasePropertyProps & {
+  ItemComponent: typeof React.Component;
+  testId: string;
+}
+
 /**
  * Props which are passed to all your custom property components in filter
  *
@@ -112,6 +121,11 @@ export type EditPropertyProps = BasePropertyProps & {
   record: RecordJSON;
 }
 
+export type EditPropertyPropsInArray = EditPropertyProps & {
+  ItemComponent: typeof React.Component;
+  testId: string;
+}
+
 /**
  * Props which are passed to all your custom property components in show
  *
@@ -136,56 +150,7 @@ export type ShowPropertyProps = {
 
 
 /**
- * On change callback - It takes either
- * one argument which is entire {@link RecordJSON} or 2 arguments - one
- * __property.name__ and the second one: __value__. Used by the __edit__ and __filter__ components.
- *
- * Lets take a look at an example of overriding edit component:
- * ```typescript
- * import React, { ReactNode } from 'react'
- * import { BasePropertyProps, PropertyInEdit, StyledInput } from 'admin-bro'
- *
- * export default class Edit extends React.Component<PropertyProps> {
- *   constructor(props) {
- *     super(props)
- *     this.handleInputChange = this.handleInputChange.bind(this)
- *   }
- *
- *   handleInputChange(event): void {
- *     const { onChange, property, record } = this.props
- *
- *     // Here is the interesting part:
- *     onChange(property.name, event.target.value)
- *
- *     // or you can pass an entire record. This is the same as above but gives you
- *     // much more flexibility
- *     const newRecord = { ...record }
- *     newRecord.params[property.name] = event.target.value
- *     onChange(newRecord)
- *   }
- *
- *   render(): ReactNode {
- *     const { property, record } = this.props
- *     const error = record.errors && record.errors[property.name]
- *     const value = (record.params && typeof record.params[property.name] !== 'undefined')
- *       ? record.params[property.name]
- *       : ''
- *     return (
- *       <PropertyInEdit property={property} error={error}>
- *         <StyledInput
- *           type="text"
- *           className="input"
- *           id={property.name}
- *           name={property.name}
- *           onChange={this.handleInputChange}
- *           value={value}
- *         />
- *       </PropertyInEdit>
- *     )
- *   }
- * }
- * ```
- *
+ * @load ./docs/on-property-change.doc.md
  * @memberof BasePropertyComponent
  * @alias OnPropertyChange
  */

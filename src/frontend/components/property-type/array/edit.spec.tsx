@@ -1,6 +1,6 @@
 import React from 'react'
 import { expect } from 'chai'
-import { render, RenderResult, fireEvent } from 'react-testing-library'
+import { render, RenderResult, fireEvent, cleanup } from 'react-testing-library'
 import factory from 'factory-girl'
 import sinon from 'sinon'
 import 'sinon-chai'
@@ -9,16 +9,14 @@ import Edit from './edit'
 import TestContextProvider from '../../spec/test-context-provider'
 import '../../spec/property-json.factory'
 import '../../spec/record-json.factory'
-import PropertyJSON from '../../../../backend/decorators/property-json.interface'
-import RecordJSON from '../../../../backend/decorators/record-json.interface'
+import { RecordJSON, PropertyJSON, ResourceJSON } from '../../../interfaces'
 import ItemComponent from '../default-type/edit'
-import ResourceJSON from '../../../../backend/decorators/resource-json.interface'
 import * as TranslateFunctionsFactory from '../../../../utils/translate-functions.factory'
 
 const AddNewItemText = 'Add new item'
 
 describe('<PropertyType.Array.Edit />', function () {
-  const propertyName = 'arrayField'
+  const propertyPath = 'arrayField'
   let property: PropertyJSON
   let record: RecordJSON
   // eslint-disable-next-line mocha/no-setup-in-describe
@@ -27,11 +25,13 @@ describe('<PropertyType.Array.Edit />', function () {
   const renderTestSubject = (prop: PropertyJSON, rec: RecordJSON): RenderResult => render(
     <TestContextProvider>
       <Edit
+        where="edit"
         property={prop}
         record={rec}
         ItemComponent={ItemComponent as unknown as typeof React.Component}
         onChange={onChange}
         testId="some-test-id"
+        filter={{}}
         resource={{} as ResourceJSON}
       />
     </TestContextProvider>,
@@ -46,12 +46,13 @@ describe('<PropertyType.Array.Edit />', function () {
 
   afterEach(function () {
     sinon.restore()
+    cleanup()
   })
 
   context('Property with a string array', function () {
     beforeEach(async function () {
       property = await factory.build<PropertyJSON>('PropertyJSON', {
-        name: propertyName,
+        path: propertyPath,
         isArray: true,
       })
     })
@@ -73,14 +74,12 @@ describe('<PropertyType.Array.Edit />', function () {
         expect(addItemBtn).not.to.be.null
       })
 
-      it('renders new empty input field after clicking "add"', async function () {
+      it('renders new empty input field after clicking "add"', function () {
         const { getByText } = renderTestSubject(property, record)
 
         fireEvent.click(getByText(AddNewItemText))
 
-        expect(onChange).to.has.been.calledWith(
-          sinon.match.has('params', sinon.match.has(`${property.name}.0`, '')),
-        )
+        expect(onChange).to.has.been.calledWith(property.path, [''])
       })
     })
 
@@ -89,8 +88,8 @@ describe('<PropertyType.Array.Edit />', function () {
 
       it('2 <input> tags already filed with values', async function () {
         record = await factory.build<RecordJSON>('RecordJSON', { params: {
-          [`${property.name}.0`]: values[0],
-          [`${property.name}.1`]: values[1],
+          [`${property.path}.0`]: values[0],
+          [`${property.path}.1`]: values[1],
         } })
 
         const { findByDisplayValue } = renderTestSubject(property, record)

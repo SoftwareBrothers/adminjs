@@ -14,9 +14,8 @@ const AdminTool = require('./tools/tool.admin')
 const AdminPage = require('./pages/page.admin')
 const AdminNested = require('./nested/nested.admin')
 
-AdminBro.bundle('./components/sidebar-footer', 'SidebarFooter')
-AdminBro.bundle('./components/no-records', 'NoRecords')
-AdminBro.bundle('./components/quill-override')
+// AdminBro.bundle('./components/sidebar-footer', 'SidebarFooter')
+// AdminBro.bundle('./components/no-records', 'NoRecords')
 
 /** @type {import('admin-bro').AdminBroOptions} */
 const options = {
@@ -37,6 +36,13 @@ const options = {
   branding: currentUser => ({
     companyName: currentUser ? currentUser.email : 'something',
   }),
+  pages: {
+    aboutUs: {
+      handler: async () => { console.log('clicked') },
+      component: AdminBro.bundle('./components/example-page'),
+      icon: 'Add',
+    },
+  },
   locale: {
     language: 'en',
     translations: {

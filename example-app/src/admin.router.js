@@ -29,7 +29,11 @@ const buildAdminRouter = async (admin) => {
       const company = await Company.findOne({ email })
 
       if (company && await argon2.verify(company.encryptedPassword, password)) {
-        return company.toJSON()
+        return {
+          ...company.toJSON(),
+          title: 'Company',
+          avatarUrl: 'https://api.adorable.io/avatars/285/abott@adorable.png',
+        }
       }
       return null
     },

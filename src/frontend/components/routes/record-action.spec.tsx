@@ -11,7 +11,7 @@ import { AxiosResponse } from 'axios'
 import createStore, { ReduxState } from '../../store/store'
 import RecordAction from './record-action'
 import ApiClient from '../../utils/api-client'
-import RecordJSON from '../../../backend/decorators/record-json.interface'
+import { RecordJSON } from '../../interfaces'
 
 import TestContextProvider from '../spec/test-context-provider'
 import factory from '../spec/factory'

@@ -13,7 +13,7 @@ const env = require('../src/backend/bundler/bundler-env')
 const once = !!process.env.ONCE
 
 async function build() {
-  bundler({
+  return bundler({
     name: 'AdminBro',
     input: `${__dirname}/../src/frontend/bundle-entry.jsx`,
     file: `${__dirname}/../src/frontend/assets/scripts/app-bundle.${env}.js`,
@@ -25,13 +25,15 @@ async function build() {
       include: [
         `${__dirname}/../src/frontend/**`,
         `${__dirname}/../src/locale/*`,
-        `${__dirname}/../src/utils/*`,
-        `${__dirname}/../src/backend/utils/view-helpers.ts`,
-        `${__dirname}/../src/backend/utils/filter.ts`,
+        `${__dirname}/../src/utils/**`,
+        `${__dirname}/../src/backend/utils/view-helpers/view-helpers.ts`,
+        `${__dirname}/../src/backend/utils/filter/filter.ts`,
         `${__dirname}/../src/backend/decorators/**`,
       ],
     },
   })
 }
 
-build()
+build().catch((error) => {
+  console.log(error)
+})

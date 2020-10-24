@@ -1,11 +1,12 @@
 import React, { FC, useState, useEffect } from 'react'
 import Select from 'react-select/lib/Async'
 import { withTheme, DefaultTheme } from 'styled-components'
-import { FormGroup, Label, FormMessage, selectStyles } from '@admin-bro/design-system'
+import { FormGroup, FormMessage, selectStyles } from '@admin-bro/design-system'
 
 import ApiClient from '../../../utils/api-client'
 import { EditPropertyProps, SelectRecord } from '../base-property-props'
-import RecordJSON from '../../../../backend/decorators/record-json.interface'
+import { RecordJSON } from '../../../interfaces'
+import { PropertyLabel } from '../utils/property-label'
 
 type CombinedProps = EditPropertyProps & {theme: DefaultTheme}
 type SelectRecordEnhanced = SelectRecord & {
@@ -17,14 +18,14 @@ const Edit: FC<CombinedProps> = (props) => {
   const { reference: resourceId } = property
 
   if (!resourceId) {
-    throw new Error(`Cannot reference resource in property '${property.name}'`)
+    throw new Error(`Cannot reference resource in property '${property.path}'`)
   }
 
   const handleChange = (selected: SelectRecordEnhanced): void => {
     if (selected) {
-      onChange(property.name, selected.value, selected.record)
+      onChange(property.path, selected.value, selected.record)
     } else {
-      onChange(property.name, null)
+      onChange(property.path, null)
     }
   }
 
@@ -41,12 +42,12 @@ const Edit: FC<CombinedProps> = (props) => {
       record: optionRecord,
     }))
   }
-  const error = record?.errors[property.name]
+  const error = record?.errors[property.path]
 
-  const selectedId = record?.params[property.name] as string | undefined
+  const selectedId = record?.params[property.path] as string | undefined
   const [loadedRecord, setLoadedRecord] = useState<RecordJSON | undefined>()
   const [loadingRecord, setLoadingRecord] = useState(0)
-  const selectedValue = record?.populated[property.name] ?? loadedRecord
+  const selectedValue = record?.populated[property.path] ?? loadedRecord
   const selectedOption = (selectedId && selectedValue) ? {
     value: selectedValue.id,
     label: selectedValue.title,
@@ -74,12 +75,7 @@ const Edit: FC<CombinedProps> = (props) => {
 
   return (
     <FormGroup error={Boolean(error)}>
-      <Label
-        htmlFor={property.name}
-        required={property.isRequired}
-      >
-        {property.label}
-      </Label>
+      <PropertyLabel property={property} />
       <Select
         cacheOptions
         value={selectedOption}
@@ -90,6 +86,7 @@ const Edit: FC<CombinedProps> = (props) => {
         isClearable
         isDisabled={property.isDisabled}
         isLoading={loadingRecord}
+        {...property.props}
       />
       <FormMessage>{error?.message}</FormMessage>
     </FormGroup>

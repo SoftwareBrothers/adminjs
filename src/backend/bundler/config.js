@@ -18,7 +18,6 @@ const external = [
   'react-router-dom',
   'react-datepicker',
   'styled-components',
-  'styled-system',
   'prop-types',
   'admin-bro',
   '@admin-bro/design-system',
@@ -43,7 +42,6 @@ const globals = {
   '@carbon/icons-react': 'CarbonIcons',
   'react-datepicker': 'ReactDatepicker',
   'styled-components': 'styled',
-  'styled-system': 'StyledSystem',
   'react-dom': 'ReactDOM',
   'prop-types': 'PropTypes',
   'react-redux': 'ReactRedux',
@@ -67,6 +65,7 @@ const plugins = ({ babelConfig = {}, commonJSConfig = {}, minify = false } = {})
       mainFields: ['main', 'module', 'jsnext:main'],
     }),
     json(),
+    // typescript(),
     replace({
       'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development'),
       'process.env.IS_BROWSER': 'true',

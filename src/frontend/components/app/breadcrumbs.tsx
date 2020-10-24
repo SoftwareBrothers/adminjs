@@ -3,11 +3,10 @@ import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import { Box, cssClass } from '@admin-bro/design-system'
 
-import ResourceJSON from '../../../backend/decorators/resource-json.interface'
-import RecordJSON from '../../../backend/decorators/record-json.interface'
-import ViewHelpers from '../../../backend/utils/view-helpers'
+import { RecordJSON, ResourceJSON } from '../../interfaces'
+import ViewHelpers from '../../../backend/utils/view-helpers/view-helpers'
 
-const BreadcrumbLink = styled(Link)`
+export const BreadcrumbLink = styled(Link)`
   color: ${({ theme }): string => theme.colors.grey40};
   font-family: ${({ theme }): string => theme.font};
   line-height: ${({ theme }): string => theme.lineHeights.default};
@@ -33,7 +32,7 @@ const BreadcrumbLink = styled(Link)`
 /**
  * @memberof Breadcrumbs
  */
-type Props = {
+export type BreadcrumbProps = {
   /**
    * Resource
    */
@@ -52,7 +51,7 @@ type Props = {
  * @component
  * @private
  */
-const Breadcrumbs: React.FC<Props> = (props) => {
+export const Breadcrumbs: React.FC<BreadcrumbProps> = (props) => {
   const { resource, record, actionName } = props
 
   const action = resource.actions.find(a => a.name === actionName)

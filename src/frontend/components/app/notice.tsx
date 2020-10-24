@@ -2,25 +2,27 @@ import React, { ReactNode } from 'react'
 import { connect } from 'react-redux'
 import { MessageBox } from '@admin-bro/design-system'
 
-import { dropNotice, setNoticeProgress, NoticeMessageInState, ReduxState } from '../../store/store'
+import { NoticeMessageInState, ReduxState } from '../../store/store'
+import { dropNotice } from '../../store/actions/drop-notice'
+import { setNoticeProgress } from '../../store/actions/set-notice-progress'
 
 const TIME_TO_DISAPPEAR = 3
 
-type NotifyProgress = (options: {
+export type NotifyProgress = (options: {
   noticeId: string; progress: number;
 }) => void
 
-type NoticeElementProps = {
+export type NoticeElementProps = {
   notice: NoticeMessageInState;
   drop: () => any;
   notifyProgress: NotifyProgress;
 }
 
-type NoticeElementState = {
+export type NoticeElementState = {
   progress: number;
 }
 
-class NoticeElement extends React.Component<NoticeElementProps, NoticeElementState> {
+export class NoticeElement extends React.Component<NoticeElementProps, NoticeElementState> {
   private timer: NodeJS.Timeout | null
 
   constructor(props) {
@@ -111,6 +113,11 @@ const mapDispatchToProps = (dispatch): NoticeBoxDispatchFromState => ({
   }): void => dispatch(setNoticeProgress({ noticeId, progress })),
 })
 
-export default connect(
+const ConnectedNoticeBox = connect(
   mapStateToProps, mapDispatchToProps,
 )(NoticeBox)
+
+export {
+  ConnectedNoticeBox as default,
+  ConnectedNoticeBox as NoticeBox,
+}

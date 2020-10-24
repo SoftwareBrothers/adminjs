@@ -1,14 +1,14 @@
 /* eslint-disable max-len */
 /* eslint no-unused-vars: 0 */
-import populator from '../utils/populator'
-import ViewHelpers from '../utils/view-helpers'
+import populator from '../utils/populator/populator'
+import ViewHelpers from '../utils/view-helpers/view-helpers'
 import { CurrentAdmin } from '../../current-admin.interface'
 import AdminBro from '../../admin-bro'
 import { ActionContext, ActionRequest, RecordActionResponse, ActionResponse, BulkActionResponse } from '../actions/action.interface'
-import ConfigurationError from '../utils/configuration-error'
-import NotFoundError from '../utils/not-found-error'
-import requestParser from '../utils/request-parser'
-import { SearchActionResponse } from '../actions/search-action'
+import ConfigurationError from '../utils/errors/configuration-error'
+import NotFoundError from '../utils/errors/not-found-error'
+import { requestParser } from '../utils/request-parser'
+import { SearchActionResponse } from '../actions/search/search-action'
 
 /**
  * Controller responsible for the auto-generated API: `/admin_root/api/...`, where
@@ -247,7 +247,8 @@ class ApiController {
    */
   async page(request: any, response: any): Promise<any> {
     const h = new ViewHelpers(this._admin)
-    const { pages } = this._admin.options
+    const { pages = {} } = this._admin.options
+
     const { pageName } = request.params
     const { handler } = (pages[pageName] || {})
 

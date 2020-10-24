@@ -8,10 +8,10 @@ import { RouteComponentProps, withRouter } from 'react-router'
 import PropertyType from '../property-type'
 import { ActionProps } from './action.props'
 import ApiClient from '../../utils/api-client'
-import withNotice, { AddNoticeProps } from '../../store/with-notice'
+import withNotice, { AddNoticeProps } from '../../hoc/with-notice'
 import { appendForceRefresh } from './utils/append-force-refresh'
 
-import ActionHeader from '../app/action-header'
+import ActionHeader from '../app/action-header/action-header'
 import { useTranslation } from '../../hooks'
 
 /**
@@ -101,4 +101,9 @@ const BulkDelete: React.FC<ActionProps & AddNoticeProps & RouteComponentProps> =
   )
 }
 
-export default withNotice(withRouter(BulkDelete))
+const FormattedBulkDelete = withNotice(withRouter(BulkDelete))
+
+export {
+  FormattedBulkDelete as default,
+  FormattedBulkDelete as BulkDelete,
+}

@@ -10,13 +10,13 @@ const BooleanPropertyValue: React.FC<ShowPropertyProps> = (props) => {
 
   const { translateProperty } = useTranslation()
 
-  const rawValue = record?.params[property.name]
+  const rawValue = record?.params[property.path]
 
   if (typeof rawValue === 'undefined' || rawValue === '') {
     return null
   }
   const base = mapValue(rawValue)
-  const translation = translateProperty(`${property.name}.${rawValue}`, resource.id, {
+  const translation = translateProperty(`${property.path}.${rawValue}`, resource.id, {
     defaultValue: base,
   })
 

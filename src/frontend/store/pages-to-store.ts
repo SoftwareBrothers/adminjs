@@ -1,12 +1,12 @@
-import { AdminPage } from '../../admin-bro-options.interface'
-import PageJSON from '../../backend/decorators/page-json.interface'
+import { AdminBroOptions } from '../../admin-bro-options.interface'
 
-const pagesToStore = (pages: Record<string, AdminPage>): Array<PageJSON> => {
-  const pagesArray = Object.entries(pages).map(([key, adminPage]) => ({
+import { PageJSON } from '../interfaces'
+
+const pagesToStore = (pages: AdminBroOptions['pages'] = {}): Array<PageJSON> => Object.entries(pages)
+  .map(([key, adminPage]) => ({
     name: key,
     component: adminPage.component,
+    icon: adminPage.icon,
   }))
-  return pagesArray
-}
 
 export default pagesToStore

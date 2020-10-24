@@ -1,7 +1,7 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
 import styled from 'styled-components'
-import { cssClass, Box, Icon } from '@admin-bro/design-system'
+import { cssClass, Box, Icon, themeGet } from '@admin-bro/design-system'
 
 import LoggedIn from './logged-in'
 import Version from './version'
@@ -11,7 +11,7 @@ import { ReduxState } from '../../store/store'
 
 const NavBar = styled(Box)`
   height: ${({ theme }): string => theme.sizes.navbarHeight};
-  border-bottom: 1px solid ${({ theme }): string => theme.colors.grey20};
+  border-bottom: ${themeGet('borders', 'default')};
   background: ${({ theme }): string => theme.colors.white};
   display: flex;
   flex-direction: row;
@@ -26,7 +26,7 @@ type Props = {
   toggleSidebar: (any) => void;
 }
 
-const TopBar: React.FC<Props> = (props) => {
+export const TopBar: React.FC<Props> = (props) => {
   const { toggleSidebar } = props
   const [session, paths, versions] = useSelector(
     (state: ReduxState) => [state.session, state.paths, state.versions],

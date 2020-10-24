@@ -5,22 +5,25 @@ import { Box } from '@admin-bro/design-system'
 
 import { RouteComponentProps } from 'react-router'
 import BaseAction from '../app/base-action-component'
-import Filter from '../app/filter'
+import FilterDrawer from '../app/filter-drawer'
 import queryHasFilter from './utils/query-has-filter'
-import ResourceJSON from '../../../backend/decorators/resource-json.interface'
 import { ReduxState } from '../../store/store'
 import { NoResourceError, NoActionError } from '../app/error-message'
 import ViewHelpers, {
   ResourceActionParams, RecordActionParams, BulkActionParams,
-} from '../../../backend/utils/view-helpers'
+} from '../../../backend/utils/view-helpers/view-helpers'
 import { ActionHeader } from '../app'
-import ActionJSON from '../../../backend/decorators/action-json.interface'
+import { ActionJSON, ResourceJSON } from '../../interfaces'
 
 type PropsFromState = {
   resources: Array<ResourceJSON>;
 }
 
-type Props = PropsFromState & RouteComponentProps<ResourceActionParams>
+type Props = PropsFromState & RouteComponentProps<StringifiedBulk<ResourceActionParams>>
+
+type StringifiedBulk<T> = Omit<T, 'recordsId'> & {
+  recordsIds?: string;
+}
 
 const getAction = (resource: ResourceJSON): ActionJSON | undefined => {
   const h = new ViewHelpers()
@@ -82,7 +85,7 @@ const ResourceAction: React.FC<Props> = (props) => {
       />
       <BaseAction action={listAction} resource={resource} setTag={setTag} />
       {listAction.showFilter ? (
-        <Filter
+        <FilterDrawer
           resource={resource}
           isVisible={filterVisible}
           toggleFilter={(): void => { setFilerVisible(!filterVisible) }}

@@ -1,40 +1,32 @@
 import React, { useState, useEffect } from 'react'
-import { useSelector } from 'react-redux'
 import { Loader } from '@admin-bro/design-system'
+import { useRouteMatch, useLocation } from 'react-router'
 
-import { RouteComponentProps, useRouteMatch, useLocation } from 'react-router'
-import BaseAction from '../app/base-action-component'
-import ResourceJSON from '../../../backend/decorators/resource-json.interface'
-import { ReduxState } from '../../store/store'
-import ErrorMessageBox, { NoResourceError, NoActionError } from '../app/error-message'
-import RecordJSON from '../../../backend/decorators/record-json.interface'
-import { BulkActionParams } from '../../../backend/utils/view-helpers'
+import { BulkActionParams } from '../../../backend/utils/view-helpers/view-helpers'
+
 import ApiClient from '../../utils/api-client'
-import { AddNoticeProps } from '../../store/with-notice'
 import getBulkActionsFromRecords from '../app/records-table/utils/get-bulk-actions-from-records'
-import ActionJSON from '../../../backend/decorators/action-json.interface'
+import { ActionJSON, RecordJSON, ResourceJSON } from '../../interfaces'
 import Wrapper from './utils/wrapper'
-import { ActionHeader } from '../app'
-import { useTranslation, useNotice } from '../../hooks'
-import DrawerPortal from '../app/drawer-portal'
+import {
+  ActionHeader,
+  DrawerPortal,
+  BaseActionComponent,
+  ErrorMessageBox,
+  NoResourceError,
+  NoActionError,
+} from '../app'
+import { useTranslation, useNotice, useResource } from '../../hooks'
 
 type PropsFromState = {
   resources: Array<ResourceJSON>;
 }
 
 type MatchParams = Pick<BulkActionParams, 'actionName' | 'resourceId'>
-type Props = PropsFromState & RouteComponentProps<MatchParams> & AddNoticeProps
-
-type State = {
-  records?: Array<RecordJSON>;
-  isLoading: boolean;
-  tag?: string;
-}
 
 const api = new ApiClient()
 
 const BulkAction: React.FC = () => {
-  const resources = useSelector((state: ReduxState) => state.resources)
   const match = useRouteMatch<MatchParams>()
   const [records, setRecords] = useState<Array<RecordJSON>>([])
   const [loading, setLoading] = useState(false)
@@ -43,7 +35,7 @@ const BulkAction: React.FC = () => {
   const location = useLocation()
 
   const { resourceId, actionName } = match.params
-  const resource = resources.find(r => r.id === resourceId)
+  const resource = useResource(resourceId)
 
   const fetchRecords = (): Promise<void> => {
     const recordIdsString = new URLSearchParams(location.search).get('recordIds')
@@ -95,7 +87,7 @@ const BulkAction: React.FC = () => {
   if (action.showInDrawer) {
     return (
       <DrawerPortal width={action.containerWidth}>
-        <BaseAction
+        <BaseActionComponent
           action={action as ActionJSON}
           resource={resource}
           records={records}
@@ -112,7 +104,7 @@ const BulkAction: React.FC = () => {
           action={action}
         />
       ) : ''}
-      <BaseAction
+      <BaseActionComponent
         action={action as ActionJSON}
         resource={resource}
         records={records}

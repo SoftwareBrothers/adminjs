@@ -57,7 +57,8 @@ context('resources/Employee/actions/new', () => {
       expect(record.params.name).to.eq(data.name)
       expect(record.params.email).to.eq(data.email)
       expect(record.params.company).not.to.undefined
-      expect(record.params.professions).to.have.lengthOf(2)
+      expect(record.params['professions.0']).not.to.undefined
+      expect(record.params['professions.1']).not.to.undefined
     })
   })
 })

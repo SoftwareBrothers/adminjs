@@ -1,8 +1,9 @@
 import React, { FC } from 'react'
-import groupResources from './utils/group-resources'
-import SidebarParent from './sidebar-parent'
-import ResourceJSON from '../../../../backend/decorators/resource-json.interface'
+import { Navigation } from '@admin-bro/design-system'
+import { useTranslation } from '../../../hooks/use-translation'
+import { ResourceJSON } from '../../../interfaces'
 import allowOverride from '../../../hoc/allow-override'
+import { useNavigationResources } from '../../../hooks'
 
 /**
  * @alias SidebarResourceSectionProps
@@ -27,17 +28,15 @@ export type SidebarResourceSectionProps = {
  * @name SidebarResourceSection
  */
 const SidebarResourceSectionOriginal: FC<SidebarResourceSectionProps> = ({ resources }) => {
-  const groupedResources = groupResources(resources)
+  const elements = useNavigationResources(resources)
+
+  const { translateLabel } = useTranslation()
 
   return (
-    <>
-      {
-        groupedResources
-          .map(parent => (
-            <SidebarParent parent={parent} key={parent.name} />
-          ))
-      }
-    </>
+    <Navigation
+      label={translateLabel('navigation')}
+      elements={elements}
+    />
   )
 }
 

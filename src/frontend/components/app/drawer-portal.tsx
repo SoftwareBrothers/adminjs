@@ -35,7 +35,7 @@ const DRAWER_PORTAL_ID = 'drawerPortal'
  * @component
  * @subcategory Application
  */
-const DrawerPortal: React.FC<DrawerPortalProps> = ({ children, width }) => {
+export const DrawerPortal: React.FC<DrawerPortalProps> = ({ children, width }) => {
   const [drawerElement, setDrawerElement] = useState<HTMLElement | null>(
     window.document.getElementById(DRAWER_PORTAL_ID),
   )

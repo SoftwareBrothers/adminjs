@@ -1,24 +1,22 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
+import { combineStyles } from '@admin-bro/design-system'
+import i18n from 'i18next'
 import React from 'react'
 import { renderToString } from 'react-dom/server'
-import { ServerStyleSheet, ThemeProvider, StyleSheetManager } from 'styled-components'
-import { Store } from 'redux'
 import { I18nextProvider } from 'react-i18next'
-import i18n from 'i18next'
-
 import { Provider } from 'react-redux'
-import { combineStyles } from '@admin-bro/design-system'
-import LoginComponent from './components/login'
+import { Store } from 'redux'
+import { ServerStyleSheet, StyleSheetManager, ThemeProvider } from 'styled-components'
 import AdminBro from '../admin-bro'
-
+import { getAssets, getBranding, getFaviconFromBranding } from '../backend/utils/options-parser/options-parser'
+import ViewHelpers from '../backend/utils/view-helpers/view-helpers'
+import LoginComponent from './components/login'
+import { initializeAssets } from './store/actions/initialize-assets'
+import { initializeBranding } from './store/actions/initialize-branding'
+import { initializeLocale } from './store/actions/initialize-locale'
 import createStore, {
-  initializeBranding,
-  initializeLocale,
   ReduxState,
-  initializeAssets,
 } from './store/store'
-import ViewHelpers from '../backend/utils/view-helpers'
-import { getBranding, getAssets, getFaviconFromBranding } from '../backend/utils/options-parser'
 
 type LoginTemplateAttributes = {
   /**

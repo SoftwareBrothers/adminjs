@@ -22,6 +22,7 @@ module.exports = {
             'error',
             2
         ],
+        'import/prefer-default-export': 'off',
         'linebreak-style': ['error', 'unix'],
         'quotes': ['error', 'single'],
         'semi': ['error', 'never'],
@@ -51,6 +52,7 @@ module.exports = {
             'func-names': 'off',
             'prefer-arrow-callback': 'off',
             'import/no-extraneous-dependencies': 'off',
+            'mocha/no-mocha-arrows': 'off',
             '@typescript-eslint/explicit-function-return-type': 'off',
           },
         },
@@ -82,7 +84,6 @@ module.exports = {
         'window': true,
         'AdminBro': true,
         'flatpickr': true,
-        'Quill': true,
         'FormData': true,
         'File': true,
         'cy': true,

@@ -12,7 +12,6 @@ import ReactRouter from 'react-router'
 import ReactRouterDOM from 'react-router-dom'
 import PropTypes from 'prop-types'
 import * as styled from 'styled-components'
-import StyledSystem from 'styled-system'
 import Recharts from 'recharts'
 import flat from 'flat'
 import ReactDatepicker from 'react-datepicker'
@@ -29,7 +28,6 @@ window.ReactRouter = ReactRouter
 window.ReactRouterDOM = ReactRouterDOM
 window.ReactDatepicker = ReactDatepicker
 window.styled = styled
-window.StyledSystem = StyledSystem
 window.PropTypes = PropTypes
 window.axios = axios
 window.Recharts = Recharts

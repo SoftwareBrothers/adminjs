@@ -3,8 +3,8 @@ import { expect } from 'chai'
 
 import AdminBro from './admin-bro'
 
-import BaseDatabase from './backend/adapters/base-database'
-import BaseResource from './backend/adapters/base-resource'
+import BaseDatabase from './backend/adapters/database/base-database'
+import BaseResource from './backend/adapters/resource/base-resource'
 import { OverridableComponent } from './frontend/utils/overridable-component'
 
 
@@ -34,8 +34,8 @@ describe('AdminBro', function () {
     it('throws an error when adapter is not full', function () {
       expect(() => {
         AdminBro.registerAdapter({
-          Resource: AdminBro.BaseResource,
-          Database: {} as typeof BaseDatabase })
+          Resource: BaseResource,
+          Database: null as unknown as typeof BaseDatabase })
       }).to.throw('Adapter has to have both Database and Resource')
     })
 

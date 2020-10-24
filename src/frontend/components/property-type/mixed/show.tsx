@@ -1,7 +1,8 @@
 import React from 'react'
-import { Section, FormGroup, Label } from '@admin-bro/design-system'
+import { Section, ValueGroup } from '@admin-bro/design-system'
 
 import { BasePropertyProps } from '../base-property-props'
+import { convertToSubProperty } from './convert-to-sub-property'
 
 interface Props {
   ItemComponent: typeof React.Component;
@@ -10,18 +11,20 @@ interface Props {
 const Show: React.FC<Props & BasePropertyProps> = (props) => {
   const { property, ItemComponent } = props
   return (
-    <FormGroup>
-      <Label>{property.label}</Label>
+    <ValueGroup label={property.label}>
       <Section>
-        {property.subProperties.filter(subProperty => !subProperty.isId).map(subProperty => (
-          <ItemComponent
-            {...props}
-            key={subProperty.name}
-            property={{ ...subProperty, name: `${property.name}.${subProperty.name}` }}
-          />
-        ))}
+        {property.subProperties.filter(subProperty => !subProperty.isId).map((subProperty) => {
+          const subPropertyWithPath = convertToSubProperty(property, subProperty)
+          return (
+            <ItemComponent
+              {...props}
+              key={subPropertyWithPath.path}
+              property={subPropertyWithPath}
+            />
+          )
+        })}
       </Section>
-    </FormGroup>
+    </ValueGroup>
   )
 }
 

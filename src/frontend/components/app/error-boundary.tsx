@@ -17,7 +17,7 @@ const ErrorMessage: React.FC<State> = ({ error }) => {
   )
 }
 
-class ErrorBoundary extends React.Component<any, State> {
+export class ErrorBoundary extends React.Component<any, State> {
   constructor(props) {
     super(props)
     this.state = {

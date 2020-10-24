@@ -5,12 +5,9 @@ import { expect } from 'chai'
 import factory from 'factory-girl'
 
 import { Provider } from 'react-redux'
-import RecordsTable, { Props } from './records-table'
+import { RecordsTable, RecordsTableProps } from './records-table'
 import TestContextProvider from '../../spec/test-context-provider'
-import ResourceJSON from '../../../../backend/decorators/resource-json.interface'
-import RecordJSON from '../../../../backend/decorators/record-json.interface'
-import PropertyJSON from '../../../../backend/decorators/property-json.interface'
-import ActionJSON from '../../../../backend/decorators/action-json.interface'
+import { ActionJSON, ResourceJSON, RecordJSON, PropertyJSON } from '../../../interfaces'
 import createStore from '../../../store/store'
 
 import '../../spec/resource-json.factory'
@@ -23,7 +20,7 @@ type StubsType = {
   onSelectAll: sinon.SinonStub<any[], any>;
 }
 
-const renderSubject = (props: Omit<Props, 'onSelect' | 'onSelectAll'>): RenderResult & StubsType => {
+const renderSubject = (props: Omit<RecordsTableProps, 'onSelect' | 'onSelectAll'>): RenderResult & StubsType => {
   const onSelect = sinon.stub()
   const onSelectAll = sinon.stub()
   const renderResult = render(
@@ -51,11 +48,11 @@ describe('<RecordsTable />', function () {
   let container: RenderResult['container']
 
   beforeEach(async function () {
-    const name = await factory.build<PropertyJSON>('PropertyJSON', { name: 'name', isTitle: true })
+    const name = await factory.build<PropertyJSON>('PropertyJSON', { path: 'path', isTitle: true })
     properties = [
-      await factory.build<PropertyJSON>('PropertyJSON', { name: 'id', isId: true }),
+      await factory.build<PropertyJSON>('PropertyJSON', { path: 'id', isId: true }),
       name,
-      await factory.build<PropertyJSON>('PropertyJSON', { name: 'surname' }),
+      await factory.build<PropertyJSON>('PropertyJSON', { path: 'surname' }),
     ]
     resource = await factory.build<ResourceJSON>('ResourceJSON', {
       listProperties: properties,

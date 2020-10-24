@@ -1,6 +1,6 @@
 {
   "name": "admin-bro",
-  "version": "3.2.5",
+  "version": "3.3.0-beta.30",
   "description": "Admin panel for apps written in node.js",
   "main": "index.js",
   "types": "index.d.ts",
@@ -16,7 +16,7 @@
     "bundle:globals": "node bin/bundle-globals.js",
     "cspell": "cspell 'src/**/*.ts' 'src/**/*.js' 'src/**/*.tsx' 'src/**/*.jsx'",
     "check:all": "yarn types && yarn cspell && yarn lint && yarn test && ONCE=true yarn bundle && ONCE=true NODE_ENV=production yarn bundle",
-    "dev": "concurrently \"yarn build --watch\" \"yarn bundle\" \"yarn types --watch\"",
+    "dev": "yarn clean && concurrently \"yarn build --watch\" \"yarn bundle\" \"yarn types --watch\"",
     "release": "semantic-release"
   },
   "bin": {
@@ -75,7 +75,7 @@
   },
   "homepage": "https://github.com/SoftwareBrothers/admin-bro#readme",
   "dependencies": {
-    "@admin-bro/design-system": "^1.3.3",
+    "@admin-bro/design-system": "^1.7.0-beta.21",
     "@babel/core": "^7.10.2",
     "@babel/parser": "^7.10.2",
     "@babel/plugin-transform-runtime": "^7.10.1",
@@ -109,10 +109,10 @@
     "rollup": "^2.32.1",
     "rollup-plugin-terser": "^6.1.0",
     "slash": "^3.0.0",
-    "styled-components": "^5.1.1",
-    "styled-system": "^5.1.5"
+    "styled-components": "^5.1.0"
   },
   "devDependencies": {
+    "@admin-bro/design-system": "^1.7.0-beta.21",
     "@babel/cli": "^7.4.4",
     "@commitlint/cli": "^8.3.5",
     "@commitlint/config-conventional": "^8.3.4",
@@ -121,19 +121,19 @@
     "@types/chai-as-promised": "^7.1.2",
     "@types/flat": "^0.0.28",
     "@types/lodash": "^4.14.141",
-    "@types/mocha": "^5.2.7",
+    "@types/mocha": "^8.0.3",
     "@types/react-dom": "^16.9.8",
     "@types/react-redux": "^7.1.9",
     "@types/react-router": "^5.1.7",
     "@types/react-router-dom": "^5.1.5",
-    "@types/sinon": "^7.5.0",
-    "@types/sinon-chai": "^3.2.3",
+    "@types/sinon": "^9.0.6",
+    "@types/sinon-chai": "^3.2.5",
     "@types/styled-components": "^5.1.0",
-    "@types/styled-system": "^5.1.4",
     "@typescript-eslint/eslint-plugin": "^2.3.1",
     "@typescript-eslint/parser": "^2.3.1",
     "chai": "^4.1.2",
     "chai-as-promised": "^7.1.1",
+    "chai-change": "^2.1.2",
     "concurrently": "^5.1.0",
     "core-js": "2.5.7",
     "cspell": "^4.0.44",
@@ -148,7 +148,7 @@
     "istanbul": "^0.4.5",
     "jsdom": "^15.1.0",
     "jsdom-global": "^3.0.2",
-    "mocha": "^5.2.0",
+    "mocha": "^8.1.3",
     "nyc": "^14.1.1",
     "react-testing-library": "^7.0.0",
     "recharts": "^1.7.1",
@@ -158,8 +158,8 @@
     "semantic-release": "^17.0.7",
     "semantic-release-jira-releases-sb": "^0.7.2",
     "semantic-release-slack-bot": "^1.6.2",
-    "sinon": "^6.1.5",
-    "sinon-chai": "^3.2.0",
+    "sinon": "^9.0.3",
+    "sinon-chai": "^3.5.0",
     "typescript": "^3.9.7"
   }
 }

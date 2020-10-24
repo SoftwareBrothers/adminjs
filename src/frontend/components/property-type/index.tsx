@@ -14,8 +14,9 @@ import * as richtext from './richtext'
 import * as reference from './reference'
 import * as textarea from './textarea'
 import * as password from './password'
-import { BasePropertyProps } from './base-property-props'
-import { PropertyType } from '../../../backend/adapters/base-property'
+import { BasePropertyComponentProps } from './base-property-props'
+import { PropertyType } from '../../../backend/adapters/property/base-property'
+import { PropertyJSON } from '../../interfaces'
 
 let globalAny: any = {}
 
@@ -178,7 +179,7 @@ const types: Record<PropertyType, any> = {
  *
  * return (<Wrapper />)
  */
-export default class BasePropertyComponent extends React.Component<BasePropertyProps> {
+class BasePropertyComponent extends React.Component<BasePropertyComponentProps> {
   static DefaultType
 
   static Boolean
@@ -194,9 +195,17 @@ export default class BasePropertyComponent extends React.Component<BasePropertyP
   static Password
 
   render(): ReactNode {
-    const { property, resource, record, filter, where, onChange } = this.props
+    const { property: baseProperty, resource, record, filter, where, onChange } = this.props
 
-    const testId = `property-${where}-${property.name}`
+    const property: PropertyJSON = {
+      ...baseProperty,
+      // we fill the path if it is not there. That is why all the actual Component Renderers are
+      // called with the path set to this root path. Next mixed and array components adds to this
+      // path either index (for array) or subProperty name.
+      path: (baseProperty as PropertyJSON).path || baseProperty.propertyPath,
+    }
+
+    const testId = `property-${where}-${property.path}`
 
     let Component: ReactComponentLike = (types[property.type] && types[property.type][where])
     || defaultType[where]
@@ -204,7 +213,7 @@ export default class BasePropertyComponent extends React.Component<BasePropertyP
     if (property.components && property.components[where]) {
       const component = property.components[where]
       if (!component) {
-        throw new Error(`there is no "${property.name}.components.${where}"`)
+        throw new Error(`there is no "${property.path}.components.${where}"`)
       }
       Component = globalAny.AdminBro.UserComponents[component]
       return (
@@ -226,22 +235,24 @@ export default class BasePropertyComponent extends React.Component<BasePropertyP
     const Array = ArrayType[where]
     const Mixed = MixedType[where]
 
-    if (property.isArray) {
+    if (baseProperty.isArray) {
       if (!Array) { return (<div />) }
       return (
         <Array
           {...this.props}
+          property={property}
           ItemComponent={BasePropertyComponent}
           testId={testId}
         />
       )
     }
 
-    if (property.type === 'mixed' && property.subProperties && property.subProperties.length) {
+    if (baseProperty.type === 'mixed') {
       if (!Mixed) { return (<div />) }
       return (
         <Mixed
           {...this.props}
+          property={property}
           ItemComponent={BasePropertyComponent}
           testId={testId}
         />
@@ -282,3 +293,11 @@ BasePropertyComponent.RichText = camelizePropertyType(richtext)
 BasePropertyComponent.Reference = camelizePropertyType(reference)
 BasePropertyComponent.TextArea = camelizePropertyType(textarea)
 BasePropertyComponent.Password = camelizePropertyType(password)
+
+export {
+  BasePropertyComponent as default,
+  BasePropertyComponent,
+}
+
+export * from './base-property-props'
+export * from './utils'

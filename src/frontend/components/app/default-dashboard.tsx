@@ -17,7 +17,7 @@ const pageHeaderHeight = 284
 const pageHeaderPaddingY = 74
 const pageHeaderPaddingX = 250
 
-const DashboardHeader: React.FC = () => {
+export const DashboardHeader: React.FC = () => {
   const { translateMessage } = useTranslation()
   return (
     <Box position="relative" overflow="hidden">
@@ -47,7 +47,7 @@ const DashboardHeader: React.FC = () => {
       >
         <Text textAlign="center" color="white">
           <H2>{translateMessage('welcomeOnBoard_title')}</H2>
-          <Text opacity="0.8">
+          <Text opacity={0.8}>
             {translateMessage('welcomeOnBoard_subtitle')}
           </Text>
         </Text>
@@ -111,7 +111,7 @@ Card.defaultProps = {
   boxShadow: 'card',
 }
 
-const Dashboard: React.FC = () => {
+export const Dashboard: React.FC = () => {
   const { translateMessage, translateButton } = useTranslation()
   return (
     <Box>
@@ -169,7 +169,6 @@ const Dashboard: React.FC = () => {
             <Text mt="xxl">
               <Button
                 as="a"
-                size="sm"
                 variant="primary"
                 href="https://softwarebrothers.co/services"
               >

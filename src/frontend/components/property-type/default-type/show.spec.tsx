@@ -8,9 +8,7 @@ import TestContextProvider from '../../spec/test-context-provider'
 import '../../spec/resource-json.factory'
 import '../../spec/record-json.factory'
 
-import ResourceJSON from '../../../../backend/decorators/resource-json.interface'
-import PropertyJSON from '../../../../backend/decorators/property-json.interface'
-import RecordJSON from '../../../../backend/decorators/record-json.interface'
+import { RecordJSON, PropertyJSON, ResourceJSON } from '../../../interfaces'
 
 const renderTestSubject = (property, record, resource): RenderResult => render(
   <TestContextProvider>
@@ -35,22 +33,22 @@ describe('<PropertyType.Default.Show />', function () {
   it('renders regular value when it is just a string', async function () {
     record = await factory.build<RecordJSON>('RecordJSON', {
       params: {
-        [property.name]: 'some value',
+        [property.path]: 'some Value',
       },
     })
     const { findByText } = await renderTestSubject(property, record, resource)
-    const value = await findByText(record.params[property.name])
+    const value = await findByText(record.params[property.path])
     expect(value).not.to.be.null
   })
 
   it('renders 0 when value is a 0', async function () {
     record = await factory.build<RecordJSON>('RecordJSON', {
       params: {
-        [property.name]: 0,
+        [property.path]: 0,
       },
     })
     const { findByText } = await renderTestSubject(property, record, resource)
-    const value = await findByText(record.params[property.name].toString())
+    const value = await findByText(record.params[property.path].toString())
     expect(value).not.to.be.null
   })
 })

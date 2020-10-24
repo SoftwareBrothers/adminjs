@@ -3,7 +3,7 @@ import { DrawerContent } from '@admin-bro/design-system'
 
 import PropertyType from '../property-type'
 import { ActionProps } from './action.props'
-import ActionHeader from '../app/action-header'
+import ActionHeader from '../app/action-header/action-header'
 import LayoutElementRenderer from './utils/layout-element-renderer'
 
 /**
@@ -30,7 +30,7 @@ const Show: React.FC<ActionProps> = (props) => {
         />
       )) : properties.map(property => (
         <PropertyType
-          key={property.name}
+          key={property.propertyPath}
           where="show"
           property={property}
           resource={resource}
@@ -42,4 +42,7 @@ const Show: React.FC<ActionProps> = (props) => {
   )
 }
 
-export default Show
+export {
+  Show as default,
+  Show,
+}

@@ -1,12 +1,12 @@
-import React, { FC } from 'react'
+import React, { FC, useEffect } from 'react'
 import { useHistory } from 'react-router'
 import { DrawerContent, Box, DrawerFooter, Button, Icon } from '@admin-bro/design-system'
 
 import PropertyType from '../property-type'
 
 import { ActionProps } from './action.props'
-import ActionHeader from '../app/action-header'
-import RecordJSON from '../../../backend/decorators/record-json.interface'
+import ActionHeader from '../app/action-header/action-header'
+import { RecordJSON } from '../../interfaces'
 import useRecord from '../../hooks/use-record/use-record'
 import { appendForceRefresh } from './utils/append-force-refresh'
 import { useTranslation } from '../../hooks/use-translation'
@@ -19,9 +19,16 @@ const New: FC<ActionProps> = (props) => {
     handleChange,
     submit: handleSubmit,
     loading,
+    setRecord,
   } = useRecord(initialRecord, resource.id)
   const { translateButton } = useTranslation()
   const history = useHistory()
+
+  useEffect(() => {
+    if (initialRecord) {
+      setRecord(initialRecord)
+    }
+  }, [initialRecord])
 
   const submit = (event: React.FormEvent<HTMLFormElement>): boolean => {
     event.preventDefault()
@@ -59,7 +66,7 @@ const New: FC<ActionProps> = (props) => {
           />
         )) : resource.editProperties.map(property => (
           <PropertyType
-            key={property.name}
+            key={property.propertyPath}
             where="edit"
             onChange={handleChange}
             property={property}
@@ -78,4 +85,7 @@ const New: FC<ActionProps> = (props) => {
   )
 }
 
-export default New
+export {
+  New as default,
+  New,
+}

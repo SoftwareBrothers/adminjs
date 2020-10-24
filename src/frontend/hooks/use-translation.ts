@@ -41,13 +41,17 @@ export type UseTranslationResponse = TranslateFunctions & {
 }
 
 /**
+ * @classdesc
  * Extends the useTranslation hook from react-i18next library.
  *
  * Returns all the {@link TranslateFunctions} + methods returned by the original
  * useTranslation method from react-i18next like: `i18n` instance and `ready` flag.
  *
- * @component
+ * @class
  * @subcategory Hooks
+ * @bundle
+ * @hideconstructor
+ * @returns {UseTranslationResponse}
  */
 export const useTranslation = (): UseTranslationResponse => {
   // eslint-disable-next-line no-shadow
