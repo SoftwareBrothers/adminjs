@@ -64,7 +64,7 @@ const plugins = ({ babelConfig = {}, commonJSConfig = {}, minify = false } = {})
   const pluginStack = [
     resolve({
       extensions,
-      mainFields: ['main', 'module'],
+      mainFields: ['main', 'module', 'jsnext:main'],
     }),
     json(),
     replace({
