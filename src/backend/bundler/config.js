@@ -7,7 +7,6 @@ const replace = require('@rollup/plugin-replace')
 const json = require('@rollup/plugin-json')
 const { terser } = require('rollup-plugin-terser')
 
-const reactIsExport = ['isValidElementType', 'isContextConsumer', 'isElement', 'ForwardRef']
 
 const external = [
   'react',
@@ -65,6 +64,7 @@ const plugins = ({ babelConfig = {}, commonJSConfig = {}, minify = false } = {})
   const pluginStack = [
     resolve({
       extensions,
+      mainFields: ['main', 'module'],
     }),
     json(),
     replace({
@@ -73,17 +73,12 @@ const plugins = ({ babelConfig = {}, commonJSConfig = {}, minify = false } = {})
       'process.env.': 'AdminBro.env.',
     }),
     commonjs({
-      /* namedExports: {
-        'node_modules/flat/index.js': ['flatten', 'unflatten'],
-        'node_modules/react-redux/node_modules/react-is/index.js': reactIsExport,
-        '@material-ui/utils/node_modules/react-is': reactIsExport,
-        'node_modules/react-is/index.js': reactIsExport,
-      }, */
       ...commonJSConfig,
     }),
     babel({
       extensions,
       babelrc: false,
+      babelHelpers: 'bundled',
       exclude: 'node_modules/**/*.js',
       presets: [
         require.resolve('@babel/preset-react'),
