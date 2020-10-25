@@ -30,6 +30,7 @@ export const BlogPostFeatures: Array<FeatureType> = [
       inlineImages: 'inlineImages',
       twitterMeta: 'twitter',
       facebookMeta: 'facebook',
+      updatedAt: 'updatedAt',
     },
     uploadProvider: {
       gcp: {

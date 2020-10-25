@@ -1,3 +1,4 @@
 //npm.pkg.github.com/:_authToken=YOUR-GITHUB-TOKEN
 registry=https://npm.pkg.github.com/softwarebrothers
 @softwarebrothers:registry=https://npm.pkg.github.com
+registry=https://registry.npmjs.org
