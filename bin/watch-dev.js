@@ -23,12 +23,12 @@ async function build() {
       plugins: [runtime, styled],
       babelHelpers: 'runtime',
       include: [
-        `${__dirname}/../src/frontend/**`,
-        `${__dirname}/../src/locale/*`,
-        `${__dirname}/../src/utils/**`,
-        `${__dirname}/../src/backend/utils/view-helpers/view-helpers.ts`,
-        `${__dirname}/../src/backend/utils/filter/filter.ts`,
-        `${__dirname}/../src/backend/decorators/**`,
+        'src/frontend/**',
+        'src/locale/*',
+        'src/utils/**',
+        'src/backend/utils/view-helpers/view-helpers.ts',
+        'src/backend/utils/filter/filter.ts',
+        'src/backend/decorators/**',
       ],
     },
   })
