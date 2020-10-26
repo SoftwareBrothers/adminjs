@@ -5,8 +5,8 @@
  * It reruns whenever user changes something.
  */
 
-const runtime = require('@babel/plugin-transform-runtime')
-const styled = require('babel-plugin-styled-components')
+const { default: runtime } = require('@babel/plugin-transform-runtime')
+const { default: styled } = require('babel-plugin-styled-components')
 const bundler = require('../src/backend/bundler/bundler')
 const env = require('../src/backend/bundler/bundler-env')
 
@@ -21,7 +21,7 @@ async function build() {
     watch: !once,
     babelConfig: {
       plugins: [runtime, styled],
-      babelHelpers: "runtime",
+      babelHelpers: 'runtime',
       include: [
         `${__dirname}/../src/frontend/**`,
         `${__dirname}/../src/locale/*`,
