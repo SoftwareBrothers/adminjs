@@ -52,7 +52,7 @@ jobs:
         id: assets-cache
         with:
           path: src/frontend/assets/scripts
-          key: assets-${{ hashFiles('**/src/frontend/global-entry.js') }}-${{ hashFiles('**/yarn.lock') }}-{{ hashFiles('**/bin/bundle-globals.js')}}
+          key: assets-${{ hashFiles('**/src/frontend/global-entry.js') }}-${{ hashFiles('**/yarn.lock') }}-{{ hashFiles('**/bin/bundle-globals.js') }}
           restore-keys: |
             assets-
       - name: bundle globals production
