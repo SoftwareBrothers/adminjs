@@ -74,22 +74,18 @@ const plugins = ({ babelConfig = {}, commonJSConfig = {}, minify = false } = {})
     commonjs({
       ...commonJSConfig,
     }),
-    babel((() => {
-      const test = {
-        extensions,
-        babelrc: false,
-        babelHelpers: 'bundled',
-        exclude: 'node_modules/**/*.js',
-        presets: [
-          require.resolve('@babel/preset-react'),
-          require.resolve('@babel/preset-env'),
-          require.resolve('@babel/preset-typescript'),
-        ],
-        ...babelConfig,
-      }
-      console.log(test)
-      return test
-    })()),
+    babel({
+      extensions,
+      babelrc: false,
+      babelHelpers: 'bundled',
+      exclude: 'node_modules/**/*.js',
+      presets: [
+        require.resolve('@babel/preset-react'),
+        require.resolve('@babel/preset-env'),
+        require.resolve('@babel/preset-typescript'),
+      ],
+      ...babelConfig,
+    }),
   ]
   if (minify) {
     pluginStack.push(terser())
