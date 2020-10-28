@@ -21,7 +21,10 @@ const decorateDatabaseProperties = (
       options: options.properties && options.properties[property.name()],
       resource: decorator,
     })
-    return { ...memo, [property.name()]: decoratedProperty }
+
+    memo[property.name()] = decoratedProperty
+
+    return memo
   }, {} as DecoratedProperties)
 }
 
@@ -37,16 +40,16 @@ const decorateVirtualProperties = (
       const existingProperty = getPropertyByKey(key, dbProperties)
       if (!existingProperty) {
         const property = new BaseProperty({ path: key, isSortable: false })
-        return {
-          ...memo,
-          [key]: new PropertyDecorator({
-            property,
-            admin,
-            options: options.properties && options.properties[key],
-            resource: decorator,
-            isVirtual: true,
-          }),
-        }
+
+        memo[key] = new PropertyDecorator({
+          property,
+          admin,
+          options: options.properties && options.properties[key],
+          resource: decorator,
+          isVirtual: true,
+        })
+
+        return memo
       }
       return memo
     }, {} as DecoratedProperties)
@@ -88,10 +91,11 @@ const organizeNestedProperties = (
     return true
   })
 
-  return rootPropertyKeys.reduce((memo, key) => ({
-    ...memo,
-    [key]: properties[key],
-  }), {} as DecoratedProperties)
+  return rootPropertyKeys.reduce((memo, key) => {
+    memo[key] = properties[key]
+
+    return memo
+  }, {} as DecoratedProperties)
 }
 
 /**

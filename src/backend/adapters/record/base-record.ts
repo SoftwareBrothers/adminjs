@@ -112,7 +112,6 @@ class BaseRecord {
    */
   async update(params): Promise<BaseRecord> {
     try {
-      this.storeParams(params)
       const returnedParams = await this.resource.update(this.id(), params)
       this.storeParams(returnedParams)
     } catch (e) {
@@ -223,10 +222,11 @@ class BaseRecord {
    * @return  {RecordJSON}
    */
   toJSON(currentAdmin?: CurrentAdmin): RecordJSON {
-    const populated = Object.keys(this.populated).reduce((m, key) => ({
-      ...m,
-      [key]: this.populated[key].toJSON(currentAdmin),
-    }), {})
+    const populated = Object.keys(this.populated).reduce((m, key) => {
+      m[key] = this.populated[key].toJSON(currentAdmin)
+
+      return m
+    }, {})
     return {
       params: this.params,
       populated,
