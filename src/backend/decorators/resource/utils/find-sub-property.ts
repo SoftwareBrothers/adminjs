@@ -16,9 +16,9 @@ export const findSubProperty = (
 ): PropertyDecorator | null => {
   const subProperties = rootProperty.subProperties()
   const foundPath = pathParts.find(path => (
-    subProperties.find(supProperty => supProperty.path === path)))
+    subProperties.find(supProperty => supProperty.propertyPath === path)))
   if (foundPath) {
-    const subProperty = subProperties.find(supProperty => supProperty.path === foundPath)
+    const subProperty = subProperties.find(supProperty => supProperty.propertyPath === foundPath)
     if (subProperty && foundPath !== pathParts[pathParts.length - 1]) {
       // if foundPath is not the last (full) path - checkout recursively all subProperties
       return findSubProperty(pathParts, subProperty)

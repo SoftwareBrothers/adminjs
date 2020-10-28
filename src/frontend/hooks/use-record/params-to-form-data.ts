@@ -16,7 +16,7 @@ const isObjectOrArray = (value: any): boolean => (
  * standard types like NULL to constants so they can be property converted back by the backend.
  * And thus properly handled.
  *
- *
+ * @private
  * @param   {RecordJSON}  record
  * @return  {FormData}
  */

@@ -3,6 +3,7 @@ Base on the action type and parameters (like {@link ActionJSON.guard}) it behave
 
 ### Usage
 
+```javascript
 import { useAction } from 'admin-bro'
 import { Button } from '@admin-bro/design-system'
 
@@ -15,5 +16,4 @@ const myComponent = ({ action }) => {
     <Button as="a" onClick={handleClick} href={href}>Click this action</Button>
   )
 }
-
-
+```

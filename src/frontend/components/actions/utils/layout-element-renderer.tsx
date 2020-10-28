@@ -2,7 +2,7 @@ import React from 'react'
 import * as DesignSystem from '@admin-bro/design-system'
 import { ActionProps } from '../action.props'
 import PropertyType from '../../property-type'
-import { PropertyPlace } from '../../../interfaces/property-json.interface'
+import { PropertyPlace } from '../../../interfaces/property-json/property-json.interface'
 import { ParsedLayoutElement } from '../../../../backend/utils/layout-element-parser'
 import { BasePropertyProps } from '../../property-type/base-property-props'
 
@@ -47,9 +47,9 @@ export const LayoutElementRenderer: React.FC<Props> = (props) => {
   return (
     <Component {...other as any}>
       {properties.map(property => (
-        <DesignSystem.Box flexGrow={1} key={property.path}>
+        <DesignSystem.Box flexGrow={1} key={property.propertyPath}>
           <PropertyType
-            key={property.path}
+            key={property.propertyPath}
             where={where}
             property={property}
             resource={resource}

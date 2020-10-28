@@ -193,7 +193,7 @@ describe('PropertyDecorator', () => {
         'isArray',
         'custom',
         'resourceId',
-        'path',
+        'propertyPath',
         'isRequired',
         'isVirtual',
         'props',

@@ -3,7 +3,7 @@ import PropertyOptions from './property-options.interface'
 import BaseResource from '../../adapters/resource/base-resource'
 import BaseProperty, { PropertyType } from '../../adapters/property/base-property'
 import ResourceDecorator from '../resource/resource-decorator'
-import { PropertyPlace, PropertyJSON } from '../../../frontend/interfaces'
+import { PropertyPlace, BasePropertyJSON } from '../../../frontend/interfaces'
 import { overrideFromOptions } from './utils'
 
 /**
@@ -23,7 +23,7 @@ class PropertyDecorator {
    * This path serves as a key in {@link PropertyOptions} to identify which
    * property has to be updated
    */
-  public path: string
+  public propertyPath: string
 
   /**
    * Indicates if given property has been created in AdminBro and hasn't been returned by the
@@ -63,7 +63,7 @@ class PropertyDecorator {
     this.property = property
     this._admin = admin
     this._resource = resource
-    this.path = path || property.name()
+    this.propertyPath = path || property.name()
     this.isVirtual = !!isVirtual
     this.virtualSubProperties = []
 
@@ -123,7 +123,7 @@ class PropertyDecorator {
    * @return  {string}
    */
   label(): string {
-    return this._admin.translateProperty(this.path, this._resource.id())
+    return this._admin.translateProperty(this.propertyPath, this._resource.id())
   }
 
   /**
@@ -153,7 +153,7 @@ class PropertyDecorator {
       return values.map(val => ({
         value: val,
         label: this._admin.translateProperty(
-          `${this.path}.${val}`,
+          `${this.propertyPath}.${val}`,
           this._resource.id(),
           { defaultValue: val },
         ),
@@ -246,7 +246,7 @@ class PropertyDecorator {
    *
    * @return {PropertyJSON}
    */
-  toJSON(where?: PropertyPlace): PropertyJSON {
+  toJSON(where?: PropertyPlace): BasePropertyJSON {
     return {
       isTitle: this.isTitle(),
       isId: this.isId(),
@@ -256,7 +256,7 @@ class PropertyDecorator {
       isRequired: this.isRequired(),
       availableValues: this.availableValues(),
       name: this.name(),
-      path: this.path,
+      propertyPath: this.propertyPath,
       isDisabled: this.isDisabled(),
       label: this.label(),
       type: this.type(),
@@ -280,7 +280,7 @@ class PropertyDecorator {
    */
   subProperties(): Array<PropertyDecorator> {
     const dbSubProperties = this.property.subProperties().map((subProperty) => {
-      const path = `${this.path}.${subProperty.name()}`
+      const path = `${this.propertyPath}.${subProperty.name()}`
       const decorated = new PropertyDecorator({
         property: subProperty,
         admin: this._admin,
@@ -301,14 +301,14 @@ class PropertyDecorator {
    * Returns PropertyOptions passed by the user for a subProperty. Furthermore
    * it changes property name to the nested property key.
    *
-   * @param   {BaseProperty}     subProperty
+   * @param   {String}     propertyPath
    * @return  {PropertyOptions}
    * @private
    */
-  private getOptionsForSubProperty(path: string): PropertyOptions {
+  private getOptionsForSubProperty(propertyPath: string): PropertyOptions {
     const propertyOptions = (this._resource.options || {}).properties || {}
     return {
-      ...propertyOptions[path],
+      ...propertyOptions[propertyPath],
     }
   }
 }

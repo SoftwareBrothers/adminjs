@@ -8,7 +8,7 @@ import { ReduxState } from '../../store/store'
  * @subcategory Hooks
  * @class
  * @hideconstructor
- * @new
+ * @new in version 3.3
  * @bundle
  * @param {string} resourceId    Id of a resource you want to get
  */

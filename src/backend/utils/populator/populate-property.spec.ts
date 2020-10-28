@@ -25,7 +25,7 @@ describe('populateProperty', () => {
     property.resource.returns(resourceDecorator as unknown as ResourceDecorator)
     property.reference.returns(referenceResource as unknown as BaseResource)
     property.property = { reference: 'someRawReference' } as unknown as BaseProperty
-    property.path = path
+    property.propertyPath = path
   })
 
   afterEach(() => {
@@ -39,6 +39,7 @@ describe('populateProperty', () => {
   context('2 same records with reference key', () => {
     beforeEach(async () => {
       record.get.returns(userId)
+      record.selectParams.returns({ [path]: userId })
       userRecord.id.returns(userId)
       referenceResource.findMany.resolves([userRecord])
 

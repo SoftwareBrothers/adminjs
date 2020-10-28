@@ -14,11 +14,12 @@ const isObject = (value: any): boolean => {
 }
 
 /**
- *
- * @memberof module:flat
+ * @load ./set.doc.md
+ * @memberof flat
  * @param {FlattenParams} params
  * @param {string} propertyPath
  * @param {any} [value]       if not give function will only try to remove old keys
+ * @returns {FlattenParams}
  */
 const set = (params: FlattenParams = {}, propertyPath: string, value?: any): FlattenParams => {
   const regex = propertyKeyRegex(propertyPath)
@@ -33,7 +34,7 @@ const set = (params: FlattenParams = {}, propertyPath: string, value?: any): Fla
     }, {} as FlattenParams)
 
   if (typeof value !== 'undefined') {
-    if (isObject(value)) {
+    if (isObject(value) && !(value instanceof Date)) {
       const flattened = flatten(value) as any
 
       if (Object.keys(flattened).length) {

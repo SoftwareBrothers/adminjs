@@ -9,7 +9,7 @@ const ASSETS_ROOT = `${__dirname}/../../../frontend/assets/`
 
 /**
  * Type representing the AdminBro.Router
- * @memberof AdminBro
+ * @memberof Router
  * @alias RouterType
  */
 export type RouterType = {
@@ -27,27 +27,8 @@ export type RouterType = {
 }
 
 /**
- * Contains list of all routes grouped to `assets` and `routes`.
- *
- * ```
- * {
- *   assets: [{
- *     path: '/frontend/assets/app.min.js',
- *     src: path.join(ASSETS_ROOT, 'scripts/app.min.js'),
- *   }, ...],
- *   routes: [{
- *     method: 'GET',
- *     path: '/resources/{resourceId}',
- *     Controller: ResourcesController,
- *     action: 'index',
- *   }, ...]
- * }
- *
- * ```
- *
- * It is used by supported frameworks to render AdminBro pages.
- *
- * @private
+ * @load ./router.doc.md
+ * @namespace
  */
 export const Router: RouterType = {
   assets: [{

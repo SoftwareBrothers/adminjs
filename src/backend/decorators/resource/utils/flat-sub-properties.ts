@@ -1,5 +1,4 @@
 import PropertyDecorator from '../../property/property-decorator'
-import { PropertyJSON } from '../../../../frontend/interfaces'
 
 /**
  * Bu default all subProperties are nested as an array in root Property. This is easy for
@@ -15,11 +14,11 @@ import { PropertyJSON } from '../../../../frontend/interfaces'
  */
 export const flatSubProperties = (
   rootProperty: PropertyDecorator,
-): Record<string, PropertyJSON> => (
+): Record<string, PropertyDecorator> => (
   rootProperty.subProperties().reduce((subMemo, subProperty) => {
     return Object.assign(
       subMemo,
-      { [subProperty.path]: subProperty.toJSON() },
+      { [subProperty.propertyPath]: subProperty },
       flatSubProperties(subProperty),
     )
   }, {})

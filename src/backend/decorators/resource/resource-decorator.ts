@@ -7,7 +7,7 @@ import AdminBro from '../../../admin-bro'
 
 import { ResourceOptions } from './resource-options.interface'
 import { CurrentAdmin } from '../../../current-admin.interface'
-import { ResourceJSON, PropertyJSON, PropertyPlace } from '../../../frontend/interfaces'
+import { ResourceJSON, PropertyPlace } from '../../../frontend/interfaces'
 import {
   decorateActions,
   decorateProperties,
@@ -86,7 +86,7 @@ class ResourceDecorator {
     this.options.properties = this.options.properties || {}
 
     /**
-     * List of all decorated properties
+     * List of all decorated root properties
      * @type {Array<PropertyDecorator>}
      */
     this.properties = decorateProperties(resource, admin, this)
@@ -179,12 +179,15 @@ class ResourceDecorator {
     return properties
   }
 
-  getFlattenProperties(): Record<string, PropertyJSON> {
+  /**
+   * Returns all the properties with corresponding subProperties in one object.
+   */
+  getFlattenProperties(): Record<string, PropertyDecorator> {
     return Object.keys(this.properties).reduce((memo, propertyName) => {
       const property = this.properties[propertyName]
 
       const subProperties = flatSubProperties(property)
-      return Object.assign(memo, { [propertyName]: property.toJSON() }, subProperties)
+      return Object.assign(memo, { [propertyName]: property }, subProperties)
     }, {})
   }
 
@@ -290,6 +293,12 @@ class ResourceDecorator {
    * @return  {ResourceJSON}
    */
   toJSON(currentAdmin?: CurrentAdmin): ResourceJSON {
+    const flattenProperties = this.getFlattenProperties()
+    const flattenPropertiesJSON = Object.keys(flattenProperties).reduce((memo, key) => ({
+      ...memo,
+      [key]: flattenProperties[key].toJSON(),
+    }), {})
+
     return {
       id: this.id(),
       name: this.getResourceName(),
@@ -298,7 +307,7 @@ class ResourceDecorator {
       titleProperty: this.titleProperty().toJSON(),
       resourceActions: this.resourceActions(currentAdmin).map(ra => ra.toJSON(currentAdmin)),
       actions: Object.values(this.actions).map(action => action.toJSON(currentAdmin)),
-      properties: this.getFlattenProperties(),
+      properties: flattenPropertiesJSON,
       listProperties: this.getProperties({
         where: 'list', max: DEFAULT_MAX_COLUMNS_IN_LIST,
       }).map(property => property.toJSON('list')),

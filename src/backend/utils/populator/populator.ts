@@ -2,22 +2,18 @@ import BaseRecord from '../../adapters/record/base-record'
 import { populateProperty } from './populate-property'
 
 /**
- * Populates all records references. If the record has a reference to let say `user_id`
- * it will fill record.populated['user_id'] with the corresponding User record.
- *
- * It mutates the `records` param
- *
+ * @load ./populator.doc.md
  * @param {Array<BaseRecord>} records
  * @new In version 3.3
  */
-export const populator = async (
+export async function populator(
   records: Array<BaseRecord>,
-): Promise<Array<BaseRecord>> => {
+): Promise<Array<BaseRecord>> {
   if (!records || !records.length) {
     return records
   }
   const resourceDecorator = records[0].resource.decorate()
-  const allProperties = Object.values(resourceDecorator.properties)
+  const allProperties = Object.values(resourceDecorator.getFlattenProperties())
 
   const references = allProperties.filter(p => !!p.reference())
 

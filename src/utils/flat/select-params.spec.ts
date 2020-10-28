@@ -31,19 +31,25 @@ describe('selectParams', () => {
   })
 
   it('returns multiple properties when they are given', () => {
-    expect(selectParams(params, 'name', 'surname')).to.deep.equal({
+    expect(selectParams(params, ['name', 'surname'])).to.deep.equal({
       name: 'John',
       surname: 'Doe',
     })
   })
 
   it('does not one property when is empty for multi-properties', () => {
-    expect(selectParams(params, 'name', 'surname', 'meta', 'empty')).to.deep.equal({
+    expect(selectParams(params, ['name', 'surname', 'meta', 'empty'])).to.deep.equal({
       name: 'John',
       surname: 'Doe',
       'meta.description': 'very ugly',
       'meta.title': 'cto',
       'meta.otherInfo': 'he stinks',
     })
+  })
+
+  it('does not throw an error when user passes undefined as a propertyPath', () => {
+    expect(() => {
+      selectParams(params, ['name', undefined as unknown as string])
+    }).not.to.throw()
   })
 })

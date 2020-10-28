@@ -11,6 +11,4 @@ docker-compose.ovverride.yml
 node_modules
 
 docs
-/docs-helpers
-/example-app
-/app
+/packages

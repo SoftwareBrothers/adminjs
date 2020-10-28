@@ -1,6 +1,6 @@
 {
   "name": "admin-bro",
-  "version": "3.3.0-beta.28",
+  "version": "3.3.0-beta.33",
   "description": "Admin panel for apps written in node.js",
   "main": "index.js",
   "types": "index.d.ts",
@@ -16,7 +16,7 @@
     "bundle:globals": "node bin/bundle-globals.js",
     "cspell": "cspell 'src/**/*.ts' 'src/**/*.js' 'src/**/*.tsx' 'src/**/*.jsx'",
     "check:all": "yarn types && yarn cspell && yarn lint && yarn test && ONCE=true yarn bundle && ONCE=true NODE_ENV=production yarn bundle",
-    "dev": "yarn clean && concurrently \"yarn build --watch\" \"yarn bundle\" \"yarn types --watch\"",
+    "dev": "concurrently \"yarn build --watch\" \"yarn bundle\" \"yarn types --watch\"",
     "release": "semantic-release"
   },
   "bin": {

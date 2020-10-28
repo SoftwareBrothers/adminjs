@@ -59,7 +59,15 @@ const RecordAction: React.FC = () => {
     return (<NoResourceError resourceId={resourceId} />)
   }
 
-  if (loading) {
+  // When the user visits this route (record action) from a different, than the current one, record.
+  // It renders everything with a new resource. The old record remains until useEffect fetches data
+  // from the API. that is why we have to check if the current record has correct record.id.
+  // Alternative approach would be to setRecord(undefined) before the fetch, but it is async and
+  // we cannot be sure that the component wont be rendered (it will be at least once) with the
+  // wrong data.
+  const hasDifferentRecord = record && record.id.toString() !== recordId
+
+  if (loading || hasDifferentRecord) {
     const actionFromResource = resource.actions.find(r => r.name === actionName)
     return actionFromResource?.showInDrawer ? (<DrawerPortal><Loader /></DrawerPortal>) : <Loader />
   }

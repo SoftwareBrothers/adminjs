@@ -113,6 +113,7 @@ export type GetPageAPIParams = AxiosRequestConfig & {
  * api.resourceAction({ resourceId: 'Comments', actionName: 'list' }).then(results => {...})
  * ```
  * @see https://github.com/axios/axios
+ * @hideconstructor
  */
 class ApiClient {
   private baseURL: string

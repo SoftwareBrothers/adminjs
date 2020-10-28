@@ -1,4 +1,4 @@
-import { flat } from '../../../utils/flat'
+import { flat, GetOptions } from '../../../utils/flat'
 import { ParamsType } from './params.type'
 import BaseResource from '../resource/base-resource'
 import ValidationError, { RecordError, PropertyErrors } from '../../utils/errors/validation-error'
@@ -69,11 +69,12 @@ class BaseRecord {
    *
    * @param {string} [propertyPath]     path for the property. If not set function returns an entire
    *                                    unflatten object
+   * @param {GetOptions} [options]
    * @return {any}                      unflatten data under given path
    * @new in version 3.3
    */
-  get(propertyPath?: string): any {
-    return flat.get(this.params, propertyPath)
+  get(propertyPath?: string, options?: GetOptions): any {
+    return flat.get(this.params, propertyPath, options)
   }
 
   /**
@@ -96,9 +97,23 @@ class BaseRecord {
    * @param   {string}  prefix
    *
    * @return  {object | undefined}
+   * @deprecated in favour of {@link selectParams}
    */
   namespaceParams(prefix: string): Record<string, any> | void {
     return flat.selectParams(this.params, prefix)
+  }
+
+  /**
+   * Returns object containing all params keys starting with prefix
+   *
+   * @param   {string}  prefix
+   * @param {GetOptions} [options]
+   *
+   * @return  {object | undefined}
+   * @new in version 3.3
+   */
+  selectParams(prefix: string, options?: GetOptions): Record<string, any> | void {
+    return flat.selectParams(this.params, prefix, options)
   }
 
   /**

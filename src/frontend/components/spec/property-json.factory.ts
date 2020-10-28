@@ -19,6 +19,7 @@ factory.define<PropertyJSON>('PropertyJSON', Object, {
   isRequired: true,
   components: undefined,
   path: factory.sequence('JSONProperty.path', n => `someProperty${n}`),
+  propertyPath: factory.sequence('JSONProperty.propertyPath', n => `someProperty${n}`),
   resourceId: 'someResourceId',
   isVirtual: false,
   props: {},

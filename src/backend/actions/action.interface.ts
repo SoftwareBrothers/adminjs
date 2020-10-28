@@ -631,7 +631,7 @@ export interface Action <T extends ActionResponse> {
   /**
    * Action can be nested. If you give here another action name - it will be nested under it.
    * If parent action doesn't exists - it will be nested under name in the parent.
-   * @deprecated in version v3.3
+   * @new in version v3.3
    */
   parent?: string;
 

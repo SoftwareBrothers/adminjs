@@ -102,15 +102,15 @@ export const RecordInList: React.FC<RecordInListProps> = (props) => {
       {resource.listProperties.map(property => (
         <TableCell
           style={{ cursor: 'pointer' }}
-          key={property.path}
-          data-property-name={property.path}
+          key={property.propertyPath}
+          data-property-name={property.propertyPath}
           display={display(property.isTitle)}
         >
           {isLoading ? (
             <Placeholder style={{ height: 14 }} />
           ) : (
             <PropertyType
-              key={property.path}
+              key={property.propertyPath}
               where="list"
               property={property}
               resource={resource}

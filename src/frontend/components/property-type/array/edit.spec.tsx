@@ -31,6 +31,7 @@ describe('<PropertyType.Array.Edit />', function () {
         ItemComponent={ItemComponent as unknown as typeof React.Component}
         onChange={onChange}
         testId="some-test-id"
+        filter={{}}
         resource={{} as ResourceJSON}
       />
     </TestContextProvider>,

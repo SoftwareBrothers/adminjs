@@ -1,4 +1,3 @@
-import { DELIMITER } from '../../../utils/flat/constants'
 import { BaseRecord } from '../../adapters'
 import PropertyDecorator from '../../decorators/property/property-decorator'
 
@@ -12,12 +11,13 @@ const isValueSearchable = (value: any): value is string | number => (
  *
  * @param {Array<BaseRecord>} records   array of records to populate
  * @param {PropertyDecorator} property  Decorator for the reference property to populate
- * @new In version 3.3
+ * @private
+ * @hide
  */
-export const populateProperty = async (
+export async function populateProperty(
   records: Array<BaseRecord> | null,
   property: PropertyDecorator,
-): Promise<Array<BaseRecord> | null> => {
+): Promise<Array<BaseRecord> | null> {
   const decoratedResource = property.resource()
 
   if (!records || !records.length) {
@@ -29,7 +29,7 @@ export const populateProperty = async (
   if (!referencedResource) {
     throw new Error([
       `There is no reference resource named: "${property.property.reference}"`,
-      `for property: "${decoratedResource.id()}.properties.${property.path}"`,
+      `for property: "${decoratedResource.id()}.properties.${property.propertyPath}"`,
     ].join('\n'))
   }
 
@@ -41,9 +41,13 @@ export const populateProperty = async (
   // first, we create externalIdsMap[1] = null where 1 is userId. This make keys unique and assign
   // nulls to each of them
   const externalIdsMap = records.reduce((memo, baseRecord) => {
-    const foreignKeyValue = baseRecord.get(property.path)
-    // array properties returns arrays so we have to take the all into consideration
-    if (Array.isArray(foreignKeyValue) && property.isArray()) {
+    const foreignKeyValue = baseRecord.get(property.propertyPath, { includeAllSiblings: true })
+    // 2 kind of properties returning arrays
+    //   - the one with the array type
+    //   - the one which are nested within an arrays (fetched by the help of
+    //   the options { includeAllSiblings: true } in baseRecord.get().
+    // so we have to take it all into consideration
+    if (Array.isArray(foreignKeyValue)) {
       return foreignKeyValue.reduce((arrayMemo, valueInArray) => ({
         ...arrayMemo,
         ...(isValueSearchable(valueInArray) ? { [valueInArray]: valueInArray } : {}),
@@ -61,7 +65,7 @@ export const populateProperty = async (
 
   const uniqueExternalIds = Object.values<string | number>(externalIdsMap)
 
-  // when no record has `userId` filled = return input `records`
+  // when no record has reference filled (ie `userId`) = return input `records`
   if (!uniqueExternalIds.length) {
     return records
   }
@@ -69,13 +73,15 @@ export const populateProperty = async (
   // now find all referenced records: all users
   const referenceRecords = await referencedResource.findMany(uniqueExternalIds)
 
-  //
+  // even if record has value for this reference - it might not have the referenced record itself
+  // this happens quite often in mongodb where there are no constrains on the database
   if (!referenceRecords || !referenceRecords.length) {
     return records
   }
 
   // now assign these users to `externalIdsMap` instead of the empty object we had. To speed up
-  // assigning them to record#populated we will do in the next step
+  // assigning them to record#populated we will do in the next step by calling:
+  // `externalIdsMap[id]` to get populated record instead of finding them in an array
   referenceRecords.forEach((referenceRecord) => {
     // example: externalIds[1] = { ...userRecord } | null (if not found)
     const foreignKeyValue = referenceRecord.id()
@@ -83,20 +89,22 @@ export const populateProperty = async (
   })
 
   return records.map((record) => {
-    // we set record.populated['userId'] = externalIdsMap[record.param('userId)]
-    // but this can also be an array - we have to check it
-    const foreignKeyValue = record.get(property.path)
+    // first lets extract all the existing params from the given record which belongs to given
+    // property. Usually it will be just one element, but for arrays and items nested inside arrays
+    // there will be more like this for array:
+    // {
+    //    'professions.0': '5f7462621eb3495ea0f0edd7',
+    //    'professions.1': '5f7462621eb3495ea0f0edd6',
+    // }
+    const referenceParams = record.selectParams(property.propertyPath, {
+      includeAllSiblings: true,
+    }) || {}
 
-    if (Array.isArray(foreignKeyValue)) {
-      foreignKeyValue.forEach((foreignKeyValueItem, index) => {
-        record.populate(
-          [property.path, index].join(DELIMITER),
-          externalIdsMap[foreignKeyValueItem],
-        )
-      })
-    } else if (typeof foreignKeyValue === 'string' || typeof foreignKeyValue === 'number') {
-      record.populate(property.path, externalIdsMap[foreignKeyValue])
-    }
+    // next we copy the exact params structure to record.populated changing the value with found
+    // record
+    Object.entries(referenceParams).forEach(([path, foreignKeyValueItem]) => {
+      record.populate(path, externalIdsMap[foreignKeyValueItem])
+    })
 
     return record
   })
