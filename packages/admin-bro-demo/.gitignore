@@ -66,3 +66,5 @@ node_modules/
 .env
 
 public
+
+build

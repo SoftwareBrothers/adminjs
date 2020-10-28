@@ -1,5 +1,5 @@
 {
-  "name": "app",
+  "name": "admin-bro-demo",
   "version": "1.0.0",
   "main": "build/src/firebase.js",
   "license": "MIT",
