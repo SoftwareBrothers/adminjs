@@ -112,6 +112,7 @@ class BaseRecord {
    */
   async update(params): Promise<BaseRecord> {
     try {
+      this.storeParams(params)
       const returnedParams = await this.resource.update(this.id(), params)
       this.storeParams(returnedParams)
     } catch (e) {
