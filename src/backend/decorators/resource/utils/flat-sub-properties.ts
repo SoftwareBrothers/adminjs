@@ -15,11 +15,9 @@ import PropertyDecorator from '../../property/property-decorator'
 export const flatSubProperties = (
   rootProperty: PropertyDecorator,
 ): Record<string, PropertyDecorator> => (
-  rootProperty.subProperties().reduce((subMemo, subProperty) => {
-    return Object.assign(
-      subMemo,
-      { [subProperty.propertyPath]: subProperty },
-      flatSubProperties(subProperty),
-    )
-  }, {})
+  rootProperty.subProperties().reduce((subMemo, subProperty) => Object.assign(
+    subMemo,
+    { [subProperty.propertyPath]: subProperty },
+    flatSubProperties(subProperty),
+  ), {})
 )
