@@ -187,11 +187,7 @@ class ResourceDecorator {
       const property = this.properties[propertyName]
 
       const subProperties = flatSubProperties(property)
-      return {
-        ...memo,
-        [propertyName]: property,
-        ...subProperties,
-      }
+      return Object.assign(memo, { [propertyName]: property }, subProperties)
     }, {})
   }
 

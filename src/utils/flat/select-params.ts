@@ -22,10 +22,10 @@ const selectParams = (
       const filtered = Object.keys(params)
       // filter all keys which starts with property path
         .filter(key => key.match(regex))
-        .reduce((memo, key) => ({
-          ...memo,
-          [key]: (params[key] as string),
-        }), {} as FlattenParams)
+        .reduce((memo, key) => {
+          memo[key] = (params[key] as string)
+          return memo
+        }, {} as FlattenParams)
       return {
         ...globalMemo,
         ...filtered,

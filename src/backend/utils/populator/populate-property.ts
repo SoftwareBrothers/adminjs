@@ -57,10 +57,10 @@ export async function populateProperty(
     if (!isValueSearchable(foreignKeyValue)) {
       return memo
     }
-    return {
-      ...memo,
-      [foreignKeyValue]: foreignKeyValue,
-    }
+
+    memo[foreignKeyValue] = foreignKeyValue
+
+    return memo
   }, {})
 
   const uniqueExternalIds = Object.values<string | number>(externalIdsMap)

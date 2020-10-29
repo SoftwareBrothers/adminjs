@@ -21,10 +21,10 @@ const filterOutParams = (
 
       return Object.keys(globalFiltered)
         .filter(key => !key.match(regex))
-        .reduce((memo, key) => ({
-          ...memo,
-          [key]: (params[key] as string),
-        }), {} as FlattenParams)
+        .reduce((memo, key) => {
+          memo[key] = (params[key] as string)
+          return memo
+        }, {} as FlattenParams)
     }, params)
 }
 

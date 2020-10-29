@@ -32,25 +32,37 @@ export const requestParser = (
 
     if (property) {
       if (property.type() === 'boolean') {
-        if (value === 'true') { return { ...memo, [path]: true } }
-        if (value === 'false') { return { ...memo, [path]: false } }
-        if (value === '') { return { ...memo, [path]: false } }
+        if (value === 'true') {
+          memo[path] = true
+          return memo
+        }
+        if (value === 'false') {
+          memo[path] = false
+          return memo
+        }
+        if (value === '') {
+          memo[path] = false
+          return memo
+        }
       }
       if (['date', 'datetime'].includes(property.type())) {
-        if (value === '' || value === null) { return { ...memo, [path]: null } }
+        if (value === '' || value === null) {
+          memo[path] = null
+          return memo
+        }
       }
       if (property.type() === 'string') {
         const availableValues = property.availableValues()
         if (availableValues && !availableValues.includes(value) && value === '') {
-          return { ...memo, [path]: null }
+          memo[path] = null
+          return memo
         }
       }
     }
 
-    return {
-      ...memo,
-      [path]: value,
-    }
+    memo[path] = value
+
+    return memo
   }, {})
 
   return {

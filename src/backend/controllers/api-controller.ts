@@ -149,7 +149,8 @@ class ApiController {
     }
     [record] = await populator([record])
 
-    const jsonWithRecord = await actionContext.action.handler(request, response, { ...actionContext, record })
+    actionContext.record = record
+    const jsonWithRecord = await actionContext.action.handler(request, response, actionContext)
 
     if (jsonWithRecord && jsonWithRecord.record && jsonWithRecord.record.recordActions) {
       return jsonWithRecord

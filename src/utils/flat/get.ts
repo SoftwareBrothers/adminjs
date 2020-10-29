@@ -55,10 +55,10 @@ const get = (params: FlattenParams = {}, propertyPath?: string, options?: GetOpt
         `${TEMP_HOLDING_KEY}.${index}`,
       )
     }
-    return {
-      ...memo,
-      [newKey]: selectedParams[key],
-    }
+
+    memo[newKey] = selectedParams[key]
+
+    return memo
   }, {} as FlattenParams)
 
   if (Object.keys(nestedProperties).length) {

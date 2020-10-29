@@ -16,9 +16,7 @@ const merge = (params: any = {}, ...mergeParams: Array<any>): FlattenParams => {
   // reverse because we merge from right
   return mergeParams.reverse().reduce((globalMemo, mergeParam) => (
     Object.keys(mergeParam)
-      .reduce((memo, key) => (
-        set(memo, key, mergeParam[key])
-      ), globalMemo)
+      .reduce((memo, key) => (set(memo, key, mergeParam[key])), globalMemo)
   ), flattenParams as Record<string, any>)
 }
 
