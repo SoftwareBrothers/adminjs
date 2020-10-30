@@ -34,7 +34,8 @@ module.exports = {
         'no-await-in-loop': 'off',
         'object-curly-newline': 'off',
         'import/extensions': 'off',
-        'mocha/no-hooks-for-single-case': 'off'
+        'mocha/no-hooks-for-single-case': 'off',
+        'no-param-reassign': 'off',
     },
     overrides: [
         {

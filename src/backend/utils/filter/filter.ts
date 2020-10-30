@@ -64,9 +64,9 @@ export class Filter {
         path,
         property: this.resource.property(path),
         value: normalized[path],
-      };
+      }
 
-      return memo;
+      return memo
     }, {})
   }
 
