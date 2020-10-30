@@ -59,14 +59,15 @@ export class Filter {
   constructor(filters = {}, resource) {
     this.resource = resource
     const normalized = Filter.normalizeKeys(filters)
-    this.filters = Object.keys(normalized).reduce((memo, path) => ({
-      [path]: {
+    this.filters = Object.keys(normalized).reduce((memo, path) => {
+      memo[path] = {
         path,
         property: this.resource.property(path),
         value: normalized[path],
-      },
-      ...memo,
-    }), {})
+      };
+
+      return memo;
+    }, {})
   }
 
   /**

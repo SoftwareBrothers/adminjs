@@ -29,10 +29,11 @@ const get = (params: FlattenParams = {}, propertyPath?: string): any => {
   const regex = propertyKeyRegex(propertyPath)
   const selectedParams = selectParams(params, propertyPath)
 
-  const nestedProperties = Object.keys(selectedParams).reduce((memo, key) => ({
-    ...memo,
-    [key.replace(regex, `${TEMP_HOLDING_KEY}${DELIMITER}`)]: selectedParams[key],
-  }), {} as FlattenParams)
+  const nestedProperties = Object.keys(selectedParams).reduce((memo, key) => {
+    memo[key.replace(regex, `${TEMP_HOLDING_KEY}${DELIMITER}`)] = selectedParams[key]
+
+    return memo
+  }, {} as FlattenParams)
 
   if (Object.keys(nestedProperties).length) {
     return (unflatten(nestedProperties) as {})[TEMP_HOLDING_KEY]

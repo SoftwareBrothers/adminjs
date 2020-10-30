@@ -16,9 +16,11 @@ import { PropertyJSON } from '../../../../frontend/interfaces'
 export const flatSubProperties = (
   rootProperty: PropertyDecorator,
 ): Record<string, PropertyJSON> => (
-  rootProperty.subProperties().reduce((subMemo, subProperty) => ({
-    ...subMemo,
-    [subProperty.path]: subProperty.toJSON(),
-    ...flatSubProperties(subProperty),
-  }), {})
+  rootProperty.subProperties().reduce((subMemo, subProperty) => {
+    return Object.assign(
+      subMemo,
+      { [subProperty.path]: subProperty.toJSON() },
+      flatSubProperties(subProperty),
+    )
+  }, {})
 )

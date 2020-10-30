@@ -223,10 +223,11 @@ class BaseRecord {
    * @return  {RecordJSON}
    */
   toJSON(currentAdmin?: CurrentAdmin): RecordJSON {
-    const populated = Object.keys(this.populated).reduce((m, key) => ({
-      ...m,
-      [key]: this.populated[key].toJSON(currentAdmin),
-    }), {})
+    const populated = Object.keys(this.populated).reduce((m, key) => {
+      m[key] = this.populated[key].toJSON(currentAdmin)
+
+      return m
+    }, {})
     return {
       params: this.params,
       populated,

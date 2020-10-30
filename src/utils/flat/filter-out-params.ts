@@ -16,10 +16,11 @@ const filterOutParams = (params: FlattenParams, property: string): FlattenParams
   // filter all keys which starts with property
   return Object.keys(params)
     .filter(key => !key.match(regex))
-    .reduce((memo, key) => ({
-      ...memo,
-      [key]: (params[key] as string),
-    }), {} as FlattenParams)
+    .reduce((memo, key) => {
+      memo[key] = (params[key] as string)
+
+      return memo
+    }, {} as FlattenParams)
 }
 
 export { filterOutParams }
