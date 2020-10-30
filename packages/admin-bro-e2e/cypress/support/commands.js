@@ -24,9 +24,4 @@
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite("visit", (originalFn, url, options) => { ... })
 
-Cypress.Commands.add('login', () => {
-  cy.visit('/login')
-  cy.get('[name=email]').type(Cypress.env('ADMIN_EMAIL'))
-  cy.get('[name=password]').type(Cypress.env('ADMIN_PASSWORD'))
-  cy.get('button').click()
-})
+require('admin-bro/cy')
