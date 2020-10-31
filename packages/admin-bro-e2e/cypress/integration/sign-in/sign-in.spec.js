@@ -3,7 +3,7 @@
 
 context('SignIn page', () => {
   beforeEach(() => {
-    cy.login()
+    cy.abLogin({ password: Cypress.env('ADMIN_PASSWORD'), email: Cypress.env('ADMIN_EMAIL') })
   })
 
   it('logs in to the application', () => {
