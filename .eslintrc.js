@@ -81,7 +81,10 @@ module.exports = {
       },
     },
     {
-      files: ['**/*/cypress/integration/**/*.spec.js'],
+      files: [
+        '**/*/cypress/integration/**/*.spec.js',
+        './cy/**/*.js',
+      ],
       rules: {
         'mocha/no-mocha-arrows': 'off',
         'spaced-comment': 'off',

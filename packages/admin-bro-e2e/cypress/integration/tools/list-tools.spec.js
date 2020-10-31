@@ -3,11 +3,11 @@
 
 context('resources/Tool', () => {
   before(() => {
-    cy.login()
+    cy.abLoginAPI({ password: Cypress.env('ADMIN_PASSWORD'), email: Cypress.env('ADMIN_EMAIL') })
   })
 
   beforeEach(() => {
-    Cypress.Cookies.preserveOnce(Cypress.env('COOKIE_NAME'))
+    cy.abKeepLoggedIn({ cookie: Cypress.env('COOKIE_NAME') })
     cy.visit('resources/Tool')
     cy.get('.admin-bro_PaginationLink')
     cy.get('.admin-bro_H2 .admin-bro_Badge').invoke('text').as('total')

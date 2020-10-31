@@ -3,11 +3,11 @@
 
 context('resources/Nested/actions/new', () => {
   before(() => {
-    cy.login()
+    cy.abLoginAPI({ password: Cypress.env('ADMIN_PASSWORD'), email: Cypress.env('ADMIN_EMAIL') })
   })
 
   beforeEach(() => {
-    Cypress.Cookies.preserveOnce(Cypress.env('COOKIE_NAME'))
+    cy.abKeepLoggedIn({ cookie: Cypress.env('COOKIE_NAME') })
     cy.visit('resources/Nested/actions/new')
   })
 

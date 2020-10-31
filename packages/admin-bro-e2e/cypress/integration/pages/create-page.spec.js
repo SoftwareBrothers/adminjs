@@ -6,11 +6,11 @@ const dateTimeRegex = /^[\d]{4}-[\d]{2}-[\d]{2} [\d]{2}:[\d]{2}$/
 
 context('resources/Profession/actions/new', () => {
   before(() => {
-    cy.login()
+    cy.abLoginAPI({ password: Cypress.env('ADMIN_PASSWORD'), email: Cypress.env('ADMIN_EMAIL') })
   })
 
   beforeEach(() => {
-    Cypress.Cookies.preserveOnce(Cypress.env('COOKIE_NAME'))
+    cy.abKeepLoggedIn({ cookie: Cypress.env('COOKIE_NAME') })
     cy.visit('resources/Page/actions/new')
   })
 

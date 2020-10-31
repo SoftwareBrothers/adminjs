@@ -3,7 +3,7 @@
 
 context('resources/Company', () => {
   beforeEach(() => {
-    cy.login()
+    cy.abLoginAPI({ password: Cypress.env('ADMIN_PASSWORD'), email: Cypress.env('ADMIN_EMAIL') })
     cy.visit('resources/Company')
   })
 
