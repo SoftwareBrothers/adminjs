@@ -33,12 +33,20 @@ describe('module:flat.set', () => {
   context('passing basic types', () => {
     const newPropertyName = 'newProperty'
 
-    it('does not change the record when regular file is set', function () {
+    it('does not change the type when regular file is set', function () {
       const file = new File([], 'amazing.me')
 
       newParams = set(params, newPropertyName, file)
 
       expect(newParams[newPropertyName]).to.equal(file)
+    })
+
+    it('does not change the type when Date is set', () => {
+      const date = new Date()
+
+      newParams = set(params, newPropertyName, date)
+
+      expect(newParams[newPropertyName]).to.equal(date)
     })
 
     it('sets null', () => {

@@ -37,7 +37,7 @@ StyledSidebar.defaultProps = {
   borderRight: 'default',
   display: 'flex',
   flexDirection: 'column',
-  zIndex: 1000,
+  zIndex: 50,
   bg: 'white',
 }
 

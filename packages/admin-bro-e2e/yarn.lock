@@ -1456,10 +1456,10 @@ accepts@~1.3.7:
     mime-types "~2.1.24"
     negotiator "0.6.2"
 
-admin-bro@3.3.0-beta.28:
-  version "3.3.0-beta.28"
-  resolved "https://registry.yarnpkg.com/admin-bro/-/admin-bro-3.3.0-beta.28.tgz#a7833f9ed236573afefed488b449cdbe5952bd1f"
-  integrity sha512-dqLwlb7JppbvzqtdkjLSp4+7JjNarQgUIFUkgCQvQHDtTnwHZzoYOHV5JZITrj7Cp3MF3/1h6/fYweYRLpe80w==
+admin-bro@3.3.0-beta.33:
+  version "3.3.0-beta.33"
+  resolved "https://registry.yarnpkg.com/admin-bro/-/admin-bro-3.3.0-beta.33.tgz#bb6b96838c82407831996a8493b1f8bb919aa4a2"
+  integrity sha512-m7xKwQ8/OJnJGrQJI3rpuinj3QHWFJTG1TGJjeQKl/Rm9DsAAXhoyOy8KY6cpFSXMF8unaNfaswzs9Yitr2onQ==
   dependencies:
     "@admin-bro/design-system" "^1.7.0-beta.21"
     "@babel/core" "^7.10.2"

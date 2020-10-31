@@ -218,38 +218,38 @@ jobs:
         with:
           # just perform install
           runTests: false
-          working-directory: example-app
+          working-directory: packages/admin-bro-e2e
       - run: yarn link admin-bro
-        working-directory: example-app
+        working-directory: packages/admin-bro-e2e
       - run: yarn run sequelize db:create
-        working-directory: example-app
+        working-directory: packages/admin-bro-e2e
         env:
           POSTGRES_PASSWORD: postgres
           POSTGRES_USER: postgres
           POSTGRES_DATABASE: adminbro_e2e_development
       - run: yarn run sequelize db:migrate
-        working-directory: example-app
+        working-directory: packages/admin-bro-e2e
         env:
           POSTGRES_PASSWORD: postgres
           POSTGRES_USER: postgres
           POSTGRES_DATABASE: adminbro_e2e_development
       - run: node bin/setup-db.js
-        working-directory: example-app
+        working-directory: packages/admin-bro-e2e
       - uses: cypress-io/github-action@v1
         with:
           install: false
-          working-directory: example-app
+          working-directory: packages/admin-bro-e2e
           start: yarn start
       - uses: actions/upload-artifact@v1
         if: failure()
         with:
           name: cypress-screenshots
-          path: example-app/cypress/screenshots
+          path: packages/admin-bro-e2e/cypress/screenshots
       - uses: actions/upload-artifact@v1
         if: always()
         with:
           name: cypress-videos
-          path: example-app/cypress/videos
+          path: packages/admin-bro-e2e/cypress/videos
 
   publish:
     name: Publish

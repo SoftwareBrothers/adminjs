@@ -27,10 +27,14 @@ const set = (params: FlattenParams = {}, propertyPath: string, value?: any): Fla
   // remove all existing keys
   const paramsCopy = Object.keys(params)
     .filter(key => !key.match(regex))
-    .reduce((memo, key) => ({ ...memo, [key]: params[key] }), {} as FlattenParams)
+    .reduce((memo, key) => {
+      memo[key] = params[key]
+
+      return memo
+    }, {} as FlattenParams)
 
   if (typeof value !== 'undefined') {
-    if (isObject(value)) {
+    if (isObject(value) && !(value instanceof Date)) {
       const flattened = flatten(value) as any
 
       if (Object.keys(flattened).length) {
@@ -52,7 +56,11 @@ const set = (params: FlattenParams = {}, propertyPath: string, value?: any): Fla
     if (parts.length) {
       return Object.keys(paramsCopy)
         .filter(key => !parts.includes(key))
-        .reduce((memo, key) => ({ ...memo, [key]: paramsCopy[key] }), {} as FlattenParams)
+        .reduce((memo, key) => {
+          memo[key] = paramsCopy[key]
+
+          return memo
+        }, {} as FlattenParams)
     }
   }
   return paramsCopy

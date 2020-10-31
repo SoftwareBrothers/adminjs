@@ -66,4 +66,5 @@ node_modules/
 .env
 
 public
-.npmrc
+
+build

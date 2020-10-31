@@ -17,14 +17,12 @@ src/frontend/assets/scripts
 
 .adminbro
 
-# example app 1
-example-app/cypress/videos
-example-app/cypress/screenshots
+# cypress output
+**/*/cypress/videos
+**/*/cypress/screenshots
 
-# example app 2
-app/cypress/videos
-app/cypress/screenshots
-app/build
+/packages/app/build
+
 .env
 firebase.env.json
 yarn-error.log

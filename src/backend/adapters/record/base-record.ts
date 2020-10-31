@@ -238,10 +238,17 @@ class BaseRecord {
    * @return  {RecordJSON}
    */
   toJSON(currentAdmin?: CurrentAdmin): RecordJSON {
-    const populated = Object.keys(this.populated).reduce((m, key) => ({
-      ...m,
-      [key]: this.populated[key].toJSON(currentAdmin),
-    }), {})
+    const populated = Object.keys(this.populated).reduce((m, key) => {
+      // sometimes user can add some arbitrary element to populated object. In such case
+      // we should omit toJSON call.
+      if ((this.populated[key] as any).toJSON) {
+        m[key] = this.populated[key].toJSON(currentAdmin)
+      } else {
+        m[key] = this.populated[key]
+      }
+
+      return m
+    }, {})
     return {
       params: this.params,
       populated,
