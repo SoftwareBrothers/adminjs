@@ -1,6 +1,7 @@
 import chai, { expect } from 'chai'
 import chaiChange from 'chai-change'
 import sinon from 'sinon'
+import sinonChai from 'sinon-chai'
 import chaiAsPromised from 'chai-as-promised'
 import { ParamsType } from './params.type'
 
@@ -8,9 +9,11 @@ import BaseRecord from './base-record'
 import BaseResource from '../resource/base-resource'
 import BaseProperty from '../property/base-property'
 import ValidationError, { PropertyErrors } from '../../utils/errors/validation-error'
+import { ActionDecorator, ResourceDecorator } from '../../decorators'
 
 chai.use(chaiAsPromised)
 chai.use(chaiChange)
+chai.use(sinonChai)
 
 describe('Record', function () {
   let record: BaseRecord
@@ -221,6 +224,45 @@ describe('Record', function () {
       expect(() => {
         record.populate('value', null)
       }).to.alter(() => record.populated.value, { from: 'something', to: undefined })
+    })
+  })
+
+  describe('#toJSON', () => {
+    const param = 'populatedProperty'
+    let resource: BaseResource
+
+    beforeEach(() => {
+      resource = sinon.createStubInstance(BaseResource, {
+        properties: sinon.stub<[], BaseProperty[]>().returns([]),
+        decorate: sinon.stub<[], ResourceDecorator>().returns(
+          sinon.createStubInstance(ResourceDecorator, {
+            recordActions: sinon.stub<[BaseRecord], ActionDecorator[]>().returns([]),
+            bulkActions: sinon.stub<[BaseRecord], ActionDecorator[]>().returns([]),
+          }) as unknown as ResourceDecorator,
+        ),
+      })
+      record = new BaseRecord(params, resource)
+    })
+
+    it('changes populated records to JSON', () => {
+      const refRecord = sinon.createStubInstance(BaseRecord, {
+        toJSON: sinon.stub(),
+      })
+      record.populate(param, refRecord)
+      sinon.stub(record, 'id').returns('1')
+
+      record.toJSON()
+
+      expect(refRecord.toJSON).to.have.been.calledOnce
+    })
+
+    it('does not changes to JSON when in populated there is something else than BaseRecord', () => {
+      record.populate(param, 'something else' as unknown as BaseRecord)
+      sinon.stub(record, 'id').returns('1')
+
+      expect(() => {
+        record.toJSON()
+      }).not.to.throw()
     })
   })
 })
