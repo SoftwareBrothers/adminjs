@@ -9,6 +9,7 @@ const { terser } = require('rollup-plugin-terser')
 
 
 const external = [
+  'lodash',
   'react',
   'react-dom',
   'redux',
@@ -27,18 +28,23 @@ const external = [
   'axios',
   'recharts',
   '@carbon/icons-react',
-  'react-select/lib/Async',
+  'react-select',
+  'react-select/async',
+  'react-select/creatable',
   'i18next',
   'react-i18next',
 ]
 
 const globals = {
+  lodash: 'Lodash',
   react: 'React',
   redux: 'Redux',
   axios: 'axios',
   flat: 'flat',
   recharts: 'Recharts',
-  'react-select/lib/Async': 'ReactSelect',
+  'react-select': 'ReactSelect',
+  'react-select/async': 'ReactSelectAsync',
+  'react-select/creatable': 'ReactSelectCreatable',
   '@carbon/icons-react': 'CarbonIcons',
   'react-datepicker': 'ReactDatepicker',
   'styled-components': 'styled',

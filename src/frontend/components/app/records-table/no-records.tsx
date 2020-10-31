@@ -18,7 +18,7 @@ const NoRecordsOriginal: React.FC<NoRecordsProps> = (props) => {
 
   return (
     <InfoBox title={translateMessage('noRecords', resource.id)}>
-      <Text>
+      <Text mb="xxl">
         {translateMessage('noRecordsInResource', resource.id)}
       </Text>
       {canCreate ? (

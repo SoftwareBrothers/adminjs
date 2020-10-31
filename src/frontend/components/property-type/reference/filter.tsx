@@ -1,5 +1,5 @@
 import React, { ReactNode } from 'react'
-import Select from 'react-select/lib/Async'
+import Select from 'react-select/async'
 import { ThemeProps, DefaultTheme, withTheme } from 'styled-components'
 import { FormGroup, Label, filterStyles } from '@admin-bro/design-system'
 

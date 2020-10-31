@@ -3,6 +3,7 @@
 
 window.global = {}
 
+import * as Lodash from 'lodash'
 import React from 'react'
 import Redux from 'redux'
 import axios from 'axios'
@@ -15,10 +16,13 @@ import * as styled from 'styled-components'
 import Recharts from 'recharts'
 import flat from 'flat'
 import ReactDatepicker from 'react-datepicker'
-import ReactSelect from 'react-select/lib/Async'
+import ReactSelectAsync from 'react-select/async'
+import ReactSelectCreatable from 'react-select/creatable'
+import ReactSelect from 'react-select'
 import i18n from 'i18next'
 import ReactI18Next from 'react-i18next'
 
+window.Lodash = Lodash
 window.React = React
 window.ReactDOM = ReactDOM
 window.Redux = Redux
@@ -32,6 +36,8 @@ window.PropTypes = PropTypes
 window.axios = axios
 window.Recharts = Recharts
 window.ReactSelect = ReactSelect
+window.ReactSelectAsync = ReactSelectAsync
+window.ReactSelectCreatable = ReactSelectCreatable
 window.i18n = i18n
 window.ReactI18Next = ReactI18Next
 

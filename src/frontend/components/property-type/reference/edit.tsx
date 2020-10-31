@@ -1,5 +1,5 @@
 import React, { FC, useState, useEffect } from 'react'
-import Select from 'react-select/lib/Async'
+import Select from 'react-select/async'
 import { withTheme, DefaultTheme } from 'styled-components'
 import { FormGroup, FormMessage, selectStyles } from '@admin-bro/design-system'
 
