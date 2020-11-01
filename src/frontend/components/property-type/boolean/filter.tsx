@@ -15,12 +15,12 @@ class Filter extends React.PureComponent<FilterPropertyProps & ThemeProps<Defaul
   handleChange(selected): void {
     const { onChange, property } = this.props
     const value = selected ? selected.value : ''
-    onChange(property.name, value)
+    onChange(property.path, value)
   }
 
   render(): ReactNode {
     const { property, filter = {}, theme } = this.props
-    const value = typeof filter[property.name] === 'undefined' ? '' : filter[property.name]
+    const value = typeof filter[property.path] === 'undefined' ? '' : filter[property.path]
     const options = [
       { value: true, label: mapValue(true) },
       { value: false, label: mapValue(false) },

@@ -1,17 +1,11 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import React from 'react'
-import { renderToString } from 'react-dom/server'
-import { StaticRouter } from 'react-router-dom'
-import { Provider } from 'react-redux'
-import { ThemeProvider } from 'styled-components'
 import { combineStyles } from '@admin-bro/design-system'
 
-import App from './components/application'
-import ViewHelpers from '../backend/utils/view-helpers'
-import initializeStore from './store'
+import ViewHelpers from '../backend/utils/view-helpers/view-helpers'
+import { initializeStore } from './store'
 import AdminBro from '../admin-bro'
 import { CurrentAdmin } from '../current-admin.interface'
-import { getFaviconFromBranding } from '../backend/utils/options-parser'
+import { getFaviconFromBranding } from '../backend/utils/options-parser/options-parser'
 
 /**
  * Renders (SSR) html for given location
@@ -28,7 +22,6 @@ const html = async (
   currentAdmin?: CurrentAdmin,
   location = '/',
 ): Promise<string> => {
-  const context = {}
   const h = new ViewHelpers({ options: admin.options })
 
   const store = await initializeStore(admin, currentAdmin)
@@ -41,20 +34,6 @@ const html = async (
   const styles = ((assets && assets.styles) || [])
     .map(l => `<link rel="stylesheet" type="text/css" href="${l}">`)
   const theme = combineStyles((branding.theme) || {})
-
-  const jsx = (
-    // eslint-disable-next-line react/jsx-filename-extension
-    <Provider store={store}>
-      <ThemeProvider theme={theme}>
-        <StaticRouter context={context} location="/">
-          <App />
-        </StaticRouter>
-      </ThemeProvider>
-    </Provider>
-  )
-
-  // const appComponent = renderToString(jsx)
-
   const faviconTag = getFaviconFromBranding(branding)
 
   return `

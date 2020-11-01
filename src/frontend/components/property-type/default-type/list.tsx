@@ -1,8 +1,6 @@
 import React from 'react'
 
-import PropertyJSON from '../../../../backend/decorators/property-json.interface'
-import RecordJSON from '../../../../backend/decorators/record-json.interface'
-import ResourceJSON from '../../../../backend/decorators/resource-json.interface'
+import { RecordJSON, ResourceJSON, PropertyJSON } from '../../../interfaces'
 import DefaultPropertyValue from './default-property-value'
 
 interface Props {

@@ -2,21 +2,22 @@ import React from 'react'
 import { CheckBox, TableHead, TableRow, TableCell } from '@admin-bro/design-system'
 
 import PropertyHeader from './property-header'
-import PropertyJSON from '../../../../backend/decorators/property-json.interface'
+import { BasePropertyJSON } from '../../../interfaces'
+import { display } from './utils/display'
 
 /**
  * @memberof RecordsTableHeader
- * @alias RecordsTableHeader
+ * @alias RecordsTableHeaderProps
  */
-type Props = {
+export type RecordsTableHeaderProps = {
   /**
    * Property which should be treated as a Title Property
    */
-  titleProperty: PropertyJSON;
+  titleProperty: BasePropertyJSON;
   /**
    * All properties which should be presented
    */
-  properties: Array<PropertyJSON>;
+  properties: Array<BasePropertyJSON>;
   /**
    * Name of the property which should be marked as currently sorted by
    */
@@ -35,13 +36,6 @@ type Props = {
    */
   selectedAll?: boolean;
 }
-
-export const display = (isTitle: boolean): Array<string> => [
-  isTitle ? 'table-cell' : 'none',
-  isTitle ? 'table-cell' : 'none',
-  'table-cell',
-  'table-cell',
-]
 
 /**
  * Prints `thead` section for table with records.
@@ -86,7 +80,7 @@ export const display = (isTitle: boolean): Array<string> => [
  * </Box>
  * )
  */
-const RecordsTableHeader: React.FC<Props> = (props) => {
+export const RecordsTableHeader: React.FC<RecordsTableHeaderProps> = (props) => {
   const {
     titleProperty, properties,
     sortBy, direction,
@@ -106,7 +100,7 @@ const RecordsTableHeader: React.FC<Props> = (props) => {
         {properties.map(property => (
           <PropertyHeader
             display={display(property.isTitle)}
-            key={property.name}
+            key={property.propertyPath}
             titleProperty={titleProperty}
             property={property}
             sortBy={sortBy}

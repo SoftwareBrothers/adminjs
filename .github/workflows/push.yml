@@ -14,7 +14,7 @@ jobs:
       - name: Setup
         uses: actions/setup-node@v1
         with:
-          node-version: '10.x'
+          node-version: "10.x"
       - uses: actions/cache@v1
         id: yarn-cache
         with:
@@ -36,7 +36,7 @@ jobs:
       - name: Setup
         uses: actions/setup-node@v1
         with:
-          node-version: '10.x'
+          node-version: "10.x"
       - uses: actions/cache@v1
         id: yarn-cache
         with:
@@ -47,12 +47,12 @@ jobs:
       - name: Install
         if: steps.yarn-cache.outputs.cache-hit != 'true'
         run: yarn install
-      
+
       - uses: actions/cache@v1
         id: assets-cache
         with:
           path: src/frontend/assets/scripts
-          key: assets-${{ hashFiles('**/src/frontend/global-entry.js') }}-${{ hashFiles('**/yarn.lock') }}
+          key: assets-${{ hashFiles('**/src/frontend/global-entry.js') }}-${{ hashFiles('**/yarn.lock') }}-{{ hashFiles('**/bin/bundle-globals.js') }}
           restore-keys: |
             assets-
       - name: bundle globals production
@@ -71,7 +71,7 @@ jobs:
       - name: types
         run: yarn types
       - name: Upload Build
-        if: | 
+        if: |
           contains(github.ref, 'refs/heads/next')
           || contains(github.ref, 'refs/heads/master')
           || contains(github.ref, 'refs/heads/next-major')
@@ -81,7 +81,7 @@ jobs:
           name: lib
           path: lib
       - name: Upload Types
-        if: | 
+        if: |
           contains(github.ref, 'refs/heads/next')
           || contains(github.ref, 'refs/heads/master')
           || contains(github.ref, 'refs/heads/next-major')
@@ -91,7 +91,7 @@ jobs:
           name: types
           path: types
       - name: Upload Bundle
-        if: | 
+        if: |
           contains(github.ref, 'refs/heads/next')
           || contains(github.ref, 'refs/heads/master')
           || contains(github.ref, 'refs/heads/next-major')
@@ -111,7 +111,7 @@ jobs:
       - name: Setup
         uses: actions/setup-node@v1
         with:
-          node-version: '10.x'
+          node-version: "10.x"
       - uses: actions/cache@v1
         id: yarn-cache
         with:
@@ -133,7 +133,7 @@ jobs:
         if: contains(github.ref, 'refs/heads/master')
         run: yarn codecov
         env:
-          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }} 
+          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
       - name: test
         if: "!contains(github.ref, 'refs/heads/master')"
         run: yarn test
@@ -179,7 +179,7 @@ jobs:
           POSTGRES_PASSWORD: postgres
           POSTGRES_DB: postgres
         ports:
-        - 5432:5432
+          - 5432:5432
         # needed because the postgres container does not provide a healthcheck
         options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
     runs-on: ubuntu-latest
@@ -189,7 +189,7 @@ jobs:
       - name: Setup
         uses: actions/setup-node@v1
         with:
-          node-version: '10.x'
+          node-version: "10.x"
       - uses: actions/cache@v1
         id: yarn-cache
         with:
@@ -203,7 +203,7 @@ jobs:
       - name: Download Build
         uses: actions/download-artifact@v1
         with:
-          name: lib 
+          name: lib
       - name: Download Types
         uses: actions/download-artifact@v1
         with:
@@ -218,38 +218,38 @@ jobs:
         with:
           # just perform install
           runTests: false
-          working-directory: example-app
+          working-directory: packages/admin-bro-e2e
       - run: yarn link admin-bro
-        working-directory: example-app
+        working-directory: packages/admin-bro-e2e
       - run: yarn run sequelize db:create
-        working-directory: example-app
+        working-directory: packages/admin-bro-e2e
         env:
           POSTGRES_PASSWORD: postgres
           POSTGRES_USER: postgres
           POSTGRES_DATABASE: adminbro_e2e_development
       - run: yarn run sequelize db:migrate
-        working-directory: example-app
+        working-directory: packages/admin-bro-e2e
         env:
           POSTGRES_PASSWORD: postgres
           POSTGRES_USER: postgres
           POSTGRES_DATABASE: adminbro_e2e_development
       - run: node bin/setup-db.js
-        working-directory: example-app
+        working-directory: packages/admin-bro-e2e
       - uses: cypress-io/github-action@v1
         with:
           install: false
-          working-directory: example-app
+          working-directory: packages/admin-bro-e2e
           start: yarn start
       - uses: actions/upload-artifact@v1
         if: failure()
         with:
           name: cypress-screenshots
-          path: example-app/cypress/screenshots
+          path: packages/admin-bro-e2e/cypress/screenshots
       - uses: actions/upload-artifact@v1
         if: always()
         with:
           name: cypress-videos
-          path: example-app/cypress/videos
+          path: packages/admin-bro-e2e/cypress/videos
 
   publish:
     name: Publish
@@ -277,7 +277,7 @@ jobs:
       - name: Setup
         uses: actions/setup-node@v1
         with:
-          node-version: '10.x'
+          node-version: "10.x"
       - uses: actions/cache@v1
         id: yarn-cache
         with:
@@ -291,7 +291,7 @@ jobs:
       - name: Download Build
         uses: actions/download-artifact@v1
         with:
-          name: lib 
+          name: lib
       - name: Download Types
         uses: actions/download-artifact@v1
         with:

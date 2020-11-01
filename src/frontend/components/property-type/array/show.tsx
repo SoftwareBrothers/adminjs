@@ -1,9 +1,9 @@
 import React, { ReactNode } from 'react'
-import { Section, FormGroup, Label } from '@admin-bro/design-system'
+import { Section, ValueGroup } from '@admin-bro/design-system'
 
-import convertParamsToArrayItems from './convert-params-to-array-items'
-import PropertyJSON from '../../../../backend/decorators/property-json.interface'
-import RecordJSON from '../../../../backend/decorators/record-json.interface'
+import { RecordJSON, PropertyJSON } from '../../../interfaces'
+import { flat } from '../../../../utils'
+import { convertToSubProperty } from './convert-to-sub-property'
 
 type Props = {
   property: PropertyJSON;
@@ -15,27 +15,23 @@ export default class Show extends React.PureComponent<Props> {
   render(): ReactNode {
     const { property, record, ItemComponent } = this.props
 
-    const items = convertParamsToArrayItems(property, record)
+    const items = flat.get(record.params, property.path) || []
 
     return (
-      <FormGroup>
-        <Label>{property.label}</Label>
+      <ValueGroup label={property.label}>
         <Section>
-          {items.map((item, i) => (
-            <ItemComponent
-              {...this.props}
-              // eslint-disable-next-line react/no-array-index-key
-              key={i}
-              property={{
-                ...property,
-                name: `${property.name}.${i}`,
-                label: `[${i + 1}]`,
-                isArray: false,
-              }}
-            />
-          ))}
+          {(items || []).map((item, i) => {
+            const itemProperty = convertToSubProperty(property, i)
+            return (
+              <ItemComponent
+                {...this.props}
+                key={itemProperty.path}
+                property={itemProperty}
+              />
+            )
+          })}
         </Section>
-      </FormGroup>
+      </ValueGroup>
     )
   }
 }

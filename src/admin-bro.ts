@@ -2,24 +2,19 @@ import * as _ from 'lodash'
 import * as path from 'path'
 import * as fs from 'fs'
 import i18n, { i18n as I18n } from 'i18next'
-import { flatten, unflatten } from 'flat'
 
-import AdminBroOptions, { AdminBroOptionsWithDefault } from './admin-bro-options.interface'
-import BaseResource from './backend/adapters/base-resource'
-import BaseDatabase from './backend/adapters/base-database'
-import BaseRecord from './backend/adapters/base-record'
-import BaseProperty from './backend/adapters/base-property'
-import Filter from './backend/utils/filter'
-import ValidationError from './backend/utils/validation-error'
-import ConfigurationError from './backend/utils/configuration-error'
-import ResourcesFactory from './backend/utils/resources-factory'
+import { AdminBroOptionsWithDefault, AdminBroOptions } from './admin-bro-options.interface'
+import BaseResource from './backend/adapters/resource/base-resource'
+import BaseDatabase from './backend/adapters/database/base-database'
+import ConfigurationError from './backend/utils/errors/configuration-error'
+import ResourcesFactory from './backend/utils/resources-factory/resources-factory'
 import userComponentsBundler from './backend/bundler/user-components-bundler'
-import { RouterType } from './backend/router'
-import Action, { RecordActionResponse } from './backend/actions/action.interface'
+import { RecordActionResponse, Action } from './backend/actions/action.interface'
 import { DEFAULT_PATHS } from './constants'
+import { ACTIONS } from './backend/actions'
 
 import loginTemplate from './frontend/login-template'
-import { ListActionResponse } from './backend/actions/list-action'
+import { ListActionResponse } from './backend/actions/list/list-action'
 import { combineTranslations, Locale } from './locale/config'
 import en from './locale/en'
 import { TranslateFunctions, createFunctions } from './utils/translate-functions.factory'
@@ -71,67 +66,6 @@ class AdminBro {
   public translateFunctions!: TranslateFunctions
 
   /**
-   * Contains set of routes available within the application.
-   * It is used by external plugins.
-   *
-   * @example
-   * const { Router } = require('admin-bro')
-   * Router.routes.forEach(route => {
-   *   // map your framework routes to admin-bro routes
-   *   // see how `admin-bro-expressjs` plugin does it.
-   * })
-   */
-  public static Router: RouterType
-
-  /**
-   * An abstract class for all Database Adapters.
-   * External adapters have to implement it.
-   *
-   * @example <caption>Creating Database Adapter for some ORM</caption>
-   * const { BaseDatabase } = require('admin-bro')
-   *
-   * class Database extends BaseDatabase {
-   *   constructor(ormInstance) {
-   *     this.ormInstance = ormInstance
-   *   }
-   *   resources() {
-   *     // fetch resources from your orm and convert to BaseResource
-   *   }
-   * }
-   */
-  public static BaseDatabase: typeof BaseDatabase
-
-  /**
-   * Class representing all records. External adapters have to implement that or at least
-   * their {@link BaseResource} implementation should return records of this type.
-   */
-  public static BaseRecord: typeof BaseRecord
-
-  /**
-   * An abstract class for all resources. External adapters have to implement that.
-   */
-  public static BaseResource: typeof BaseResource
-
-  /**
-   * Class for all properties. External adapters have to implement that or at least
-   * their {@link BaseResource} implementation should return records of this type.
-   */
-  public static BaseProperty: typeof BaseProperty
-
-  /**
-   * Filter object passed to find method of {@link BaseResource}.
-   * External adapters have to use it
-   */
-  public static Filter: typeof Filter
-
-  /**
-   * Validation error which is thrown when record fails validation. External adapters have
-   * to use it, so AdminBro can print validation errors
-   */
-  public static ValidationError: typeof ValidationError
-
-
-  /**
    * List of all default actions. If you want to change the behavior for all actions like:
    * _list_, _edit_, _show_, _delete_ and _bulkDelete_ you can do this here.
    *
@@ -175,16 +109,19 @@ class AdminBro {
       translations: combineTranslations(en.translations, this.options.locale?.translations),
       language: this.options.locale?.language || en.language,
     }
-
-    i18n.init({
-      lng: this.locale.language,
-      initImmediate: false, // loads translations immediately
-      resources: {
-        [this.locale.language]: {
-          translation: this.locale.translations,
+    if (i18n.isInitialized) {
+      i18n.addResourceBundle(this.locale.language, 'translation', this.locale.translations)
+    } else {
+      i18n.init({
+        lng: this.locale.language,
+        initImmediate: false, // loads translations immediately
+        resources: {
+          [this.locale.language]: {
+            translation: this.locale.translations,
+          },
         },
-      },
-    })
+      })
+    }
 
     // mixin translate functions to AdminBro instance so users will be able to
     // call adminBro.translateMessage(...)
@@ -290,13 +227,14 @@ class AdminBro {
   }
 
   /**
-   * Requires given .jsx/.tsx file, that it can be bundled to the frontend.
+   * Requires given `.jsx/.tsx` file, that it can be bundled to the frontend.
    * It will be available under AdminBro.UserComponents[componentId].
    *
    * @param   {String}  src  Path to a file containing react component.
    *
-   * @return  {String}       componentId - uniq id of a component
-   * @return  {String}       [componentName] - name of the component which you want to override
+   * @param  {OverridableComponent}  [componentName] - name of the component which you want
+   *                                  to override
+   * @returns {String}                componentId - uniq id of a component
    *
    * @example <caption>Passing custom components in AdminBro options</caption>
    * const adminBroOptions = {
@@ -352,12 +290,12 @@ class AdminBro {
 }
 
 AdminBro.VERSION = VERSION
+AdminBro.ACTIONS = ACTIONS
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 interface AdminBro extends TranslateFunctions {}
 
 export const { registerAdapter } = AdminBro
 export const { bundle } = AdminBro
-export { flatten, unflatten }
 
 export default AdminBro

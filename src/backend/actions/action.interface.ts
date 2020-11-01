@@ -1,13 +1,16 @@
+import { VariantType } from '@admin-bro/design-system'
 import AdminBro from '../../admin-bro'
 import { CurrentAdmin } from '../../current-admin.interface'
-import ViewHelpers from '../utils/view-helpers'
-import BaseRecord from '../adapters/base-record'
-import BaseResource from '../adapters/base-resource'
-import ActionDecorator from '../decorators/action-decorator'
+import ViewHelpers from '../utils/view-helpers/view-helpers'
+import BaseRecord from '../adapters/record/base-record'
+import BaseResource from '../adapters/resource/base-resource'
+import ActionDecorator from '../decorators/action/action-decorator'
 import { LayoutElement, LayoutElementFunction } from '../utils/layout-element-parser'
-import RecordJSON from '../decorators/record-json.interface'
-import { NoticeMessage } from '../../frontend/store/with-notice'
+import { RecordJSON } from '../../frontend/interfaces'
+import { NoticeMessage } from '../../frontend/hoc/with-notice'
 import { TranslateFunctions } from '../../utils/translate-functions.factory'
+
+export type ActionType = 'resource' | 'record' | 'bulk'
 
 /**
  * Execution context for an action. It is passed to the {@link Action#handler},
@@ -235,6 +238,15 @@ export type After<T> = (
   context: ActionContext,
 ) => Promise<T>
 
+export type BuildInActions =
+  'show' |
+  'edit' |
+  'list' |
+  'delete' |
+  'bulkDelete' |
+  'new' |
+  'search'
+
 /**
  * @classdesc
  * Interface representing an Action in AdminBro.
@@ -298,14 +310,14 @@ export type After<T> = (
  * ACTIONS.show.after = async () => {...}
  * ```
  */
-export default interface Action <T extends ActionResponse> {
+export interface Action <T extends ActionResponse> {
   /**
    * Name of an action which is its uniq key.
    * If you use one of _list_, _search_, _edit_, _new_, _show_, _delete_ or
    * _bulkDelete_ you override existing actions.
    * For all other keys you create a new action.
    */
-  name: string;
+  name: BuildInActions | string;
   /**
    * indicates if action should be visible for given invocation context.
    * It also can be a simple boolean value.
@@ -393,7 +405,7 @@ export default interface Action <T extends ActionResponse> {
    *
    * When you define a new action - it is required.
    */
-  actionType: 'resource' | 'record' | 'bulk';
+  actionType: ActionType;
   /**
    * icon name for the action. Take a look {@link Icon} component,
    * because what you put here is passed down to it.
@@ -464,7 +476,7 @@ export default interface Action <T extends ActionResponse> {
    * Required for new actions. For modifying already defined actions
    * like new and edit we suggest using {@link Action#before} and {@link Action#after} hooks.
    */
-  handler: ActionHandler<T> | Array<ActionHandler<T>>;
+  handler: ActionHandler<T> | Array<ActionHandler<T>> | null;
   /**
    * Before action hook. When it is given - it is performed before the {@link Action#handler}
    * method.
@@ -609,4 +621,24 @@ export default interface Action <T extends ActionResponse> {
    * @see LayoutElementFunction
    */
   layout?: LayoutElementFunction | Array<LayoutElement>;
+
+  /**
+   * Defines the variant of the action. based on that it will receive given color.
+   * @new in version v3.3
+   */
+  variant?: VariantType;
+
+  /**
+   * Action can be nested. If you give here another action name - it will be nested under it.
+   * If parent action doesn't exists - it will be nested under name in the parent.
+   * @new in version v3.3
+   */
+  parent?: string;
+
+  /**
+   * Any custom properties you want to pass down to {@link ActionJSON}. They have to
+   * be stringified.
+   * @new in version v3.3
+   */
+  custom?: Record<string, any>;
 }

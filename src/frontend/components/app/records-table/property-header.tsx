@@ -1,15 +1,15 @@
 import React from 'react'
 import { TableCell } from '@admin-bro/design-system'
 
-import PropertyJSON from '../../../../backend/decorators/property-json.interface'
+import { BasePropertyJSON } from '../../../interfaces'
 import SortLink from '../sort-link'
 
-type Props = {
-  property: PropertyJSON;
+export type PropertyHeaderProps = {
+  property: BasePropertyJSON;
   /**
    * Property which should be treated as main property.
    */
-  titleProperty: PropertyJSON;
+  titleProperty: BasePropertyJSON;
   /**
    * currently selected direction. Either 'asc' or 'desc'.
    */
@@ -22,10 +22,10 @@ type Props = {
   display?: string | Array<string>;
 }
 
-const PropertyHeader: React.FC<Props> = (props) => {
+export const PropertyHeader: React.FC<PropertyHeaderProps> = (props) => {
   const { property, titleProperty, display } = props
 
-  const isMain = property.name === titleProperty.name
+  const isMain = property.propertyPath === titleProperty.propertyPath
 
   return (
     <TableCell

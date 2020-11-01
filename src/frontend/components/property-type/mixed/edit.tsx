@@ -1,7 +1,9 @@
 import React from 'react'
-import { Section, FormGroup, Label, FormMessage } from '@admin-bro/design-system'
+import { Section, FormGroup, FormMessage } from '@admin-bro/design-system'
 
 import { EditPropertyProps } from '../base-property-props'
+import { PropertyLabel } from '../utils/property-label'
+import { convertToSubProperty } from './convert-to-sub-property'
 
 type Props = {
   ItemComponent: typeof React.Component;
@@ -9,23 +11,21 @@ type Props = {
 
 const Edit: React.FC<Props & EditPropertyProps> = (props) => {
   const { property, record, ItemComponent } = props
-  const error = record.errors && record.errors[property.name]
+  const error = record.errors && record.errors[property.path]
   return (
     <FormGroup error={!!error}>
-      <Label
-        htmlFor={property.name}
-        required={property.isRequired}
-      >
-        {property.label}
-      </Label>
-      <Section>
-        {property.subProperties.filter(subProperty => !subProperty.isId).map(subProperty => (
-          <ItemComponent
-            {...props}
-            key={subProperty.name}
-            property={{ ...subProperty, name: `${property.name}.${subProperty.name}` }}
-          />
-        ))}
+      <PropertyLabel property={property} />
+      <Section {...property.props}>
+        {property.subProperties.filter(subProperty => !subProperty.isId).map((subProperty) => {
+          const subPropertyWithPath = convertToSubProperty(property, subProperty)
+          return (
+            <ItemComponent
+              {...props}
+              key={subPropertyWithPath.path}
+              property={subPropertyWithPath}
+            />
+          )
+        })}
       </Section>
       <FormMessage>{error && error.message}</FormMessage>
     </FormGroup>

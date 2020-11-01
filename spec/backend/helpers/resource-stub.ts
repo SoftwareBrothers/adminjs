@@ -1,8 +1,8 @@
 import sinon from 'sinon'
 
-import BaseProperty from '../../../src/backend/adapters/base-property'
-import BaseResource from '../../../src/backend/adapters/base-resource'
-import ResourceDecorator from '../../../src/backend/decorators/resource-decorator'
+import BaseProperty from '../../../src/backend/adapters/property/base-property'
+import BaseResource from '../../../src/backend/adapters/resource/base-resource'
+import ResourceDecorator from '../../../src/backend/decorators/resource/resource-decorator'
 
 /**
  * returns properties with following absolute paths:
@@ -62,7 +62,6 @@ export default (): BaseResource => ({
   databaseType: sinon.stub().returns(expectedResult.databaseType),
   count: sinon.stub(),
   find: sinon.stub(),
-  populate: sinon.stub(),
   findOne: sinon.stub(),
   findMany: sinon.stub(),
   build: sinon.stub(),

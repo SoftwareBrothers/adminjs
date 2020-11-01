@@ -3,7 +3,7 @@ import { Trans } from 'react-i18next'
 import { MessageBox, Link } from '@admin-bro/design-system'
 
 import ErrorBoundary from './error-boundary'
-import * as actions from '../actions'
+import { actions } from '../actions'
 import { DOCS } from '../../../constants'
 import { ActionProps } from '../actions/action.props'
 import { useTranslation } from '../../hooks'
@@ -60,16 +60,18 @@ declare const AdminBro: {
  * @name BaseActionComponent
  * @subcategory Application
  */
-const BaseActionComponent: React.FC<ActionProps> = (props) => {
+export const BaseActionComponent: React.FC<ActionProps> = (props) => {
   const { resource, action, record, records, setTag } = props
   const documentationLink = [DOCS, 'BaseAction.html'].join('/')
 
   const { translateMessage } = useTranslation()
 
   let Action = actions[action.name]
+
   if (action.component) {
     Action = AdminBro.UserComponents[action.component]
   }
+
   if (Action) {
     return (
       <ErrorBoundary>

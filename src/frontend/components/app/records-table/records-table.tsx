@@ -5,24 +5,59 @@ import RecordInList from './record-in-list'
 import RecordsTableHeader from './records-table-header'
 import NoRecords from './no-records'
 
-import ResourceJSON from '../../../../backend/decorators/resource-json.interface'
-import RecordJSON from '../../../../backend/decorators/record-json.interface'
+
+import { RecordJSON, ResourceJSON } from '../../../interfaces'
 import SelectedRecords from './selected-records'
 import { ActionResponse } from '../../../../backend/actions/action.interface'
 
-export type Props = {
+/**
+ * @alias RecordsTableProps
+ * @memberof RecordsTable
+ */
+export type RecordsTableProps = {
+  /**
+   * Resource which type records are rendered. Base on that we define which columns should be seen.
+   */
   resource: ResourceJSON;
+  /**
+   * Array of records seen in the table
+   */
   records: Array<RecordJSON>;
+  /**
+   * Handler function invoked when someone performs action without component on a given record.
+   * Action without component is a `delete` action - you might want to refresh the list after that
+   */
   actionPerformed?: (response: ActionResponse) => any;
+  /** default sort by column */
   sortBy?: string;
+  /** sort direction */
   direction?: 'asc' | 'desc';
+  /** indicates if the table should be in loading state */
   isLoading?: boolean;
+  /** list of selected records */
   selectedRecords?: Array<RecordJSON>;
+  /** handler function triggered when record is selected */
   onSelect?: (record: RecordJSON) => any;
+  /** handler function triggered when all items are selected */
   onSelectAll?: () => any;
 }
 
-const RecordsTable: React.FC<Props> = (props) => {
+/**
+ * @classdesc
+ * Renders an entire records table. To fill the data you might need:
+ *
+ * - {@link useRecords} and
+ * - {@link useSelectedRecords} hooks
+ *
+ * so make sure to see at the documentation pages for both of them
+ *
+ * @component
+ * @class
+ * @hideconstructor
+ * @subcategory Application
+ * @new in version 3.3
+ */
+export const RecordsTable: React.FC<RecordsTableProps> = (props) => {
   const {
     resource, records,
     actionPerformed, sortBy,

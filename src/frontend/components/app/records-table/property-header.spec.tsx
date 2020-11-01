@@ -7,7 +7,7 @@ import TestContextProvider from '../../spec/test-context-provider'
 import PropertyHeader from './property-header'
 
 import '../../spec/property-json.factory'
-import PropertyJSON from '../../../../backend/decorators/property-json.interface'
+import { PropertyJSON } from '../../../interfaces'
 
 const renderSubject = (
   property: PropertyJSON,
@@ -56,7 +56,7 @@ describe('<PropertyHeader />', function () {
       const query = new URLSearchParams(href.replace('/?', ''))
 
       expect(query.get('direction')).to.equal('asc')
-      expect(query.get('sortBy')).to.equal(property.name)
+      expect(query.get('sortBy')).to.equal(property.path)
     })
 
     it('doesn\'t render a sort indicator', function () {

@@ -1,0 +1,4 @@
+const DELIMITER = '.'
+
+
+export { DELIMITER }

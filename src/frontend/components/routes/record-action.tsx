@@ -1,19 +1,16 @@
 import React, { useState, useEffect, useCallback } from 'react'
-import { useSelector } from 'react-redux'
 
 import { useRouteMatch } from 'react-router'
 import { Loader } from '@admin-bro/design-system'
 
 import BaseActionComponent from '../app/base-action-component'
 import ApiClient from '../../utils/api-client'
-import { RecordActionParams } from '../../../backend/utils/view-helpers'
-import RecordJSON from '../../../backend/decorators/record-json.interface'
-import ActionJSON from '../../../backend/decorators/action-json.interface'
-import { ReduxState } from '../../store/store'
+import { RecordActionParams } from '../../../backend/utils/view-helpers/view-helpers'
+import { ActionJSON, RecordJSON } from '../../interfaces'
 import { NoResourceError, NoActionError, NoRecordError } from '../app/error-message'
 import Wrapper from './utils/wrapper'
 import { ActionHeader } from '../app'
-import { useNotice, useTranslation } from '../../hooks'
+import { useNotice, useResource, useTranslation } from '../../hooks'
 import DrawerPortal from '../app/drawer-portal'
 import { ActionResponse, RecordActionResponse } from '../../../backend/actions/action.interface'
 import mergeRecordResponse from '../../hooks/use-record/merge-record-response'
@@ -24,12 +21,11 @@ const RecordAction: React.FC = () => {
   const [record, setRecord] = useState<RecordJSON>()
   const [loading, setLoading] = useState(true)
   const match = useRouteMatch<RecordActionParams>()
-  const resources = useSelector((state: ReduxState) => state.resources)
   const addNotice = useNotice()
   const { translateMessage } = useTranslation()
 
   const { actionName, recordId, resourceId } = match.params
-  const resource = resources.find(r => r.id === resourceId)
+  const resource = useResource(resourceId)
 
   const action = record && record.recordActions.find(r => r.name === actionName)
 
@@ -63,7 +59,15 @@ const RecordAction: React.FC = () => {
     return (<NoResourceError resourceId={resourceId} />)
   }
 
-  if (loading) {
+  // When the user visits this route (record action) from a different, than the current one, record.
+  // It renders everything with a new resource. The old record remains until useEffect fetches data
+  // from the API. that is why we have to check if the current record has correct record.id.
+  // Alternative approach would be to setRecord(undefined) before the fetch, but it is async and
+  // we cannot be sure that the component wont be rendered (it will be at least once) with the
+  // wrong data.
+  const hasDifferentRecord = record && record.id.toString() !== recordId
+
+  if (loading || hasDifferentRecord) {
     const actionFromResource = resource.actions.find(r => r.name === actionName)
     return actionFromResource?.showInDrawer ? (<DrawerPortal><Loader /></DrawerPortal>) : <Loader />
   }

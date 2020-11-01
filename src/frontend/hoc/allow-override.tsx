@@ -17,6 +17,11 @@ function allowOverride<P>(
   OriginalComponent: ComponentType<P>,
   name: OverridableComponent,
 ): ComponentType<P & {OriginalComponent?: ComponentType<P>}> {
+  // ssr
+  if (typeof window === 'undefined') {
+    return OriginalComponent
+  }
+
   const WrapperComponent: React.FC<P> = (props) => {
     let globalAny: any = window
     globalAny = window
@@ -37,4 +42,7 @@ function allowOverride<P>(
   return WrapperComponent
 }
 
-export default allowOverride
+export {
+  allowOverride as default,
+  allowOverride,
+}

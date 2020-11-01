@@ -1,5 +1,5 @@
 import { formatDateProperty } from '@admin-bro/design-system'
-import { PropertyType } from '../../../../backend/adapters/base-property'
+import { PropertyType } from '../../../../backend/adapters/property/base-property'
 
 export default (value: Date, propertyType: PropertyType): string => {
   if (!value) {

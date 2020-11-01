@@ -1,9 +1,7 @@
 import React from 'react'
 
 import mapValue from './map-value'
-import PropertyJSON from '../../../../backend/decorators/property-json.interface'
-import RecordJSON from '../../../../backend/decorators/record-json.interface'
-import ResourceJSON from '../../../../backend/decorators/resource-json.interface'
+import { ResourceJSON, RecordJSON, PropertyJSON } from '../../../interfaces'
 
 interface Props {
   property: PropertyJSON;
@@ -14,7 +12,7 @@ interface Props {
 export default class List extends React.PureComponent<Props> {
   render(): React.ReactChild {
     const { property, record } = this.props
-    const value = mapValue(record.params[property.name], property.type)
+    const value = mapValue(record.params[property.path], property.type)
 
     return (
       <span>{value}</span>

@@ -4,16 +4,16 @@ import { NavLink, withRouter } from 'react-router-dom'
 import { RouteComponentProps } from 'react-router'
 import { Icon, cssClass } from '@admin-bro/design-system'
 
-import PropertyJSON from '../../../backend/decorators/property-json.interface'
+import { BasePropertyJSON } from '../../interfaces'
 
 
-type Props = {
-  property: PropertyJSON;
+export type SortLinkProps = {
+  property: BasePropertyJSON;
   direction?: 'asc' | 'desc';
   sortBy?: string;
 }
 
-class SortLink extends React.PureComponent<Props & RouteComponentProps> {
+class SortLink extends React.PureComponent<SortLinkProps & RouteComponentProps> {
   constructor(props) {
     super(props)
     this.isActive = this.isActive.bind(this)
@@ -21,7 +21,7 @@ class SortLink extends React.PureComponent<Props & RouteComponentProps> {
 
   isActive(): boolean {
     const { sortBy, property } = this.props
-    return sortBy === property.name
+    return sortBy === property.propertyPath
   }
 
   render(): ReactNode {
@@ -31,7 +31,7 @@ class SortLink extends React.PureComponent<Props & RouteComponentProps> {
     const sortedByIcon = `Caret${direction === 'asc' ? 'Up' : 'Down'}`
 
     query.set('direction', oppositeDirection)
-    query.set('sortBy', property.name)
+    query.set('sortBy', property.propertyPath)
 
     return (
       <NavLink to={{ search: query.toString() }} className={cssClass('SortLink')}>

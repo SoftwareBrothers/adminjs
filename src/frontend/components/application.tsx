@@ -1,10 +1,11 @@
 /* eslint-disable react/no-children-prop */
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Switch, Route } from 'react-router-dom'
 import { createGlobalStyle } from 'styled-components'
-import { Box, Overlay } from '@admin-bro/design-system'
+import { Box, Overlay, Reset } from '@admin-bro/design-system'
 
-import ViewHelpers from '../../backend/utils/view-helpers'
+import { useLocation } from 'react-router'
+import ViewHelpers from '../../backend/utils/view-helpers/view-helpers'
 import Sidebar from './app/sidebar/sidebar'
 import TopBar from './app/top-bar'
 import Notice from './app/notice'
@@ -23,9 +24,15 @@ const GlobalStyle = createGlobalStyle`
   }
 `
 
+const h = new ViewHelpers()
+
 const App: React.FC = () => {
   const [sidebarVisible, toggleSidebar] = useState(false)
-  const h = new ViewHelpers()
+  const location = useLocation()
+
+  useEffect(() => {
+    if (sidebarVisible) { toggleSidebar(false) }
+  }, [location])
 
   const resourceId = ':resourceId'
   const actionName = ':actionName'
@@ -40,6 +47,7 @@ const App: React.FC = () => {
 
   return (
     <React.Fragment>
+      <Reset />
       <GlobalStyle />
       <Box height="100%" flex>
         {sidebarVisible ? (
@@ -50,7 +58,7 @@ const App: React.FC = () => {
         <Sidebar isVisible={sidebarVisible} />
         <Box flex flexGrow={1} flexDirection="column" overflowY="auto" bg="bg">
           <TopBar toggleSidebar={(): void => toggleSidebar(!sidebarVisible)} />
-          <Box position="absolute" top={0}>
+          <Box position="absolute" top={0} zIndex="2000">
             <Notice />
           </Box>
           <Switch>

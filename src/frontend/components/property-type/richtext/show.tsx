@@ -1,5 +1,5 @@
 import React, { ReactNode } from 'react'
-import { FormGroup, Label } from '@admin-bro/design-system'
+import { ValueGroup, Text, Box } from '@admin-bro/design-system'
 
 import { EditPropertyProps } from '../base-property-props'
 
@@ -13,7 +13,7 @@ export default class Show extends React.PureComponent<EditPropertyProps> {
 
   componentDidMount(): void {
     const { property, record } = this.props
-    const value = record.params[property.name]
+    const value = record.params[property.path]
     this.contentRef.current.innerHTML = value
   }
 
@@ -21,10 +21,11 @@ export default class Show extends React.PureComponent<EditPropertyProps> {
     const { property } = this.props
 
     return (
-      <FormGroup>
-        <Label>{property.label}</Label>
-        <div className="rich-text-value content" ref={this.contentRef} />
-      </FormGroup>
+      <ValueGroup label={property.label}>
+        <Box variant="grey" border="default">
+          <Text ref={this.contentRef} />
+        </Box>
+      </ValueGroup>
     )
   }
 }

@@ -1,6 +1,6 @@
 import { useDispatch } from 'react-redux'
-import { addNotice } from '../store/store'
-import { NoticeMessage } from '../store/with-notice'
+import { addNotice } from '../store/actions/add-notice'
+import { NoticeMessage } from '../hoc/with-notice'
 
 /**
  * @memberof useNotice
@@ -9,9 +9,10 @@ import { NoticeMessage } from '../store/with-notice'
 export type AddNotice = (notice: NoticeMessage) => any;
 
 /**
+ * @classdesc
  * Hook which allows you to add notice message to the app.
  *
- * ```usage
+ * ```javascript
  * import { useNotice, Button } from 'admin-bro'
  *
  * const myComponent = () => {
@@ -22,8 +23,10 @@ export type AddNotice = (notice: NoticeMessage) => any;
  * }
  * ```
  *
- * @component
+ * @class
  * @subcategory Hooks
+ * @bundle
+ * @hideconstructor
  */
 export const useNotice = (): AddNotice => {
   const dispatch = useDispatch()

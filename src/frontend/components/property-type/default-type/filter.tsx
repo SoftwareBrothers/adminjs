@@ -14,19 +14,19 @@ class Filter extends React.PureComponent<FilterPropertyProps & ThemeProps<Defaul
 
   handleInputChange(event): void {
     const { onChange, property } = this.props
-    onChange(property.name, event.target.value)
+    onChange(property.path, event.target.value)
   }
 
   handleSelectChange(selected): void {
     const { onChange, property } = this.props
     const value = selected ? selected.value : ''
-    onChange(property.name, value)
+    onChange(property.path, value)
   }
 
   renderInput(): ReactNode {
     const { property, filter, theme } = this.props
-    const filterKey = `filter-${property.name}`
-    const value = filter[property.name] || ''
+    const filterKey = `filter-${property.path}`
+    const value = filter[property.path] || ''
     if (property.availableValues) {
       const selected = property.availableValues.find(av => av.value === value)
       return (

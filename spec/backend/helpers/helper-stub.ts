@@ -1,5 +1,5 @@
 import sinon from 'sinon'
-import ViewHelpers from '../../../src/backend/utils/view-helpers'
+import ViewHelpers from '../../../src/backend/utils/view-helpers/view-helpers'
 
 const expectedResult = {
   recordActionUrl: '#recordActionUrl',
@@ -12,6 +12,12 @@ const expectedResult = {
   resourceUrl: 'resourceUrl',
   dashboardUrl: 'dashboardUrl',
   pageUrl: 'pageUrl',
+  editUrl: 'editUrl',
+  showUrl: 'showUrl',
+  deleteUrl: 'deleteUrl',
+  newUrl: 'newUrl',
+  listUrl: 'listUrl',
+  bulkDeleteUrl: 'bulkDeleteUrl',
 }
 
 export default (): ViewHelpers => (
@@ -31,6 +37,12 @@ export default (): ViewHelpers => (
     resourceUrl: sinon.stub().returns(expectedResult.resourceUrl),
     dashboardUrl: sinon.stub().returns(expectedResult.dashboardUrl),
     pageUrl: sinon.stub().returns(expectedResult.pageUrl),
+    editUrl: sinon.stub().returns(expectedResult.editUrl),
+    showUrl: sinon.stub().returns(expectedResult.showUrl),
+    deleteUrl: sinon.stub().returns(expectedResult.deleteUrl),
+    newUrl: sinon.stub().returns(expectedResult.newUrl),
+    listUrl: sinon.stub().returns(expectedResult.listUrl),
+    bulkDeleteUrl: sinon.stub().returns(expectedResult.bulkDeleteUrl),
   }
 )
 

@@ -1,20 +1,18 @@
 import React, { useState, useEffect, useCallback } from 'react'
 import { useHistory } from 'react-router-dom'
 import {
-  Placeholder, TableRow, TableCell, CheckBox, DropDown,
-  DropDownTrigger, Icon, DropDownMenu, DropDownItem,
+  Placeholder, TableRow, TableCell, CheckBox, ButtonGroup,
 } from '@admin-bro/design-system'
 
-import ActionButton from '../action-button'
 import PropertyType from '../../property-type'
-import ResourceJSON from '../../../../backend/decorators/resource-json.interface'
-import RecordJSON from '../../../../backend/decorators/record-json.interface'
-import ViewHelpers from '../../../../backend/utils/view-helpers'
-import { display } from './records-table-header'
+import { ActionJSON, buildActionClickHandler, RecordJSON, ResourceJSON } from '../../../interfaces'
+import { display } from './utils/display'
 import { ActionResponse, RecordActionResponse } from '../../../../backend/actions/action.interface'
 import mergeRecordResponse from '../../../hooks/use-record/merge-record-response'
+import { useActionResponseHandler } from '../../../hooks'
+import { actionsToButtonGroup } from '../action-header/actions-to-button-group'
 
-type Props = {
+export type RecordInListProps = {
   resource: ResourceJSON;
   record: RecordJSON;
   actionPerformed?: (action: ActionResponse) => any;
@@ -23,13 +21,23 @@ type Props = {
   isSelected?: boolean;
 }
 
-const RecordInList: React.FC<Props> = (props) => {
+export const RecordInList: React.FC<RecordInListProps> = (props) => {
   const {
     resource, record: recordFromProps, actionPerformed,
     isLoading, onSelect, isSelected,
   } = props
   const [record, setRecord] = useState<RecordJSON>(recordFromProps)
   const history = useHistory()
+
+  const handleActionCallback = useCallback((actionResponse: ActionResponse) => {
+    if (actionResponse.record && !actionResponse.redirectUrl) {
+      setRecord(mergeRecordResponse(record, actionResponse as RecordActionResponse))
+    } else if (actionPerformed) {
+      actionPerformed(actionResponse)
+    }
+  }, [actionPerformed, record])
+
+  const actionResponseHandler = useActionResponseHandler(handleActionCallback)
 
   useEffect(() => {
     setRecord(recordFromProps)
@@ -39,36 +47,50 @@ const RecordInList: React.FC<Props> = (props) => {
 
   const show = record.recordActions.find(({ name }) => name === 'show')
   const edit = record.recordActions.find(({ name }) => name === 'edit')
-  const actionName = (show && show.name) || (edit && edit.name)
+  const action = show || edit
 
-  const handleClick = (event: React.MouseEvent<HTMLTableRowElement, MouseEvent>): void => {
-    const h = new ViewHelpers()
+  const handleClick = (event): void => {
     const targetTagName = (event.target as HTMLElement).tagName.toLowerCase()
-
-    if (actionName
-        && targetTagName !== 'a'
-        && targetTagName !== 'button'
-        && targetTagName !== 'svg') {
-      const actionUrl = h.recordActionUrl({
-        resourceId: resource.id,
-        recordId: record.id,
-        actionName,
-        search: window.location.search,
-      })
-      history.push(actionUrl)
+    if (action
+      && targetTagName !== 'a'
+      && targetTagName !== 'button'
+      && targetTagName !== 'svg'
+    ) {
+      buildActionClickHandler({
+        action,
+        params: { resourceId: resource.id, recordId: record.id },
+        actionResponseHandler,
+        push: history.push,
+      })(event)
     }
   }
 
-  const handleActionPerformed = useCallback((actionResponse: ActionResponse) => {
-    if (actionResponse.record && !actionResponse.redirectUrl) {
-      setRecord(mergeRecordResponse(record, actionResponse as RecordActionResponse))
-    } else if (actionPerformed) {
-      actionPerformed(actionResponse)
-    }
-  }, [actionPerformed])
+  const actionParams = { resourceId: resource.id, recordId: record.id }
+
+  const handleActionClick = (event, sourceAction: ActionJSON): void => (
+    buildActionClickHandler({
+      action: sourceAction,
+      params: actionParams,
+      actionResponseHandler,
+      push: history.push,
+    })(event)
+  )
+
+  const buttons = [{
+    icon: 'OverflowMenuHorizontal',
+    variant: 'light' as const,
+    label: undefined,
+    'data-testid': 'actions-dropdown',
+    buttons: actionsToButtonGroup({
+      actions: recordActions,
+      params: actionParams,
+      handleClick: handleActionClick,
+    }),
+  }]
+
 
   return (
-    <TableRow onClick={(event): void => handleClick(event)} data-id={record.id}>
+    <TableRow onClick={handleClick} data-id={record.id}>
       <TableCell className={isSelected ? 'selected' : 'not-selected'}>
         {onSelect && record.bulkActions.length ? (
           <CheckBox
@@ -80,15 +102,15 @@ const RecordInList: React.FC<Props> = (props) => {
       {resource.listProperties.map(property => (
         <TableCell
           style={{ cursor: 'pointer' }}
-          key={property.name}
-          data-property-name={property.name}
+          key={property.propertyPath}
+          data-property-name={property.propertyPath}
           display={display(property.isTitle)}
         >
           {isLoading ? (
             <Placeholder style={{ height: 14 }} />
           ) : (
             <PropertyType
-              key={property.name}
+              key={property.propertyPath}
               where="list"
               property={property}
               resource={resource}
@@ -99,26 +121,7 @@ const RecordInList: React.FC<Props> = (props) => {
       ))}
       <TableCell key="options">
         {recordActions.length ? (
-          <DropDown>
-            <DropDownTrigger py="sm" px="xl" data-testid="actions-dropdown">
-              <Icon icon="OverflowMenuHorizontal" color="grey100" />
-            </DropDownTrigger>
-            <DropDownMenu>
-              {recordActions.map(action => (
-                <DropDownItem key={action.name}>
-                  <ActionButton
-                    action={action}
-                    resourceId={resource.id}
-                    recordId={record.id}
-                    actionPerformed={handleActionPerformed}
-                  >
-                    <Icon icon={action.icon} />
-                    {action.label}
-                  </ActionButton>
-                </DropDownItem>
-              ))}
-            </DropDownMenu>
-          </DropDown>
+          <ButtonGroup buttons={buttons} />
         ) : ''}
       </TableCell>
     </TableRow>

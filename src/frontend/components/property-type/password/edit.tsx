@@ -1,15 +1,16 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 import React, { useState, memo, useEffect } from 'react'
-import { Label, Input, FormGroup, InputGroup, FormMessage, Button, Icon } from '@admin-bro/design-system'
+import { Input, FormGroup, InputGroup, FormMessage, Button, Icon } from '@admin-bro/design-system'
 
 import { EditPropertyProps } from '../base-property-props'
 import { recordPropertyIsEqual } from '../record-property-is-equal'
+import { PropertyLabel } from '../utils/property-label'
 
 const Edit: React.FC<EditPropertyProps> = (props) => {
   const { property, record, onChange } = props
-  const propValue = record.params[property.name]
+  const propValue = record.params[property.path]
   const [value, setValue] = useState(propValue)
-  const error = record.errors && record.errors[property.name]
+  const error = record.errors && record.errors[property.path]
   const [isInput, setIsInput] = useState(false)
 
   useEffect(() => {
@@ -20,23 +21,19 @@ const Edit: React.FC<EditPropertyProps> = (props) => {
 
   return (
     <FormGroup error={!!error}>
-      <Label
-        htmlFor={property.name}
-        required={property.isRequired}
-      >
-        {property.label}
-      </Label>
+      <PropertyLabel property={property} />
       <InputGroup>
         <Input
           type={isInput ? 'input' : 'password'}
           className="input"
-          id={property.name}
-          name={property.name}
+          id={property.path}
+          name={property.path}
           onChange={event => setValue(event.target.value)}
-          onBlur={() => onChange(property.name, value)}
-          onKeyDown={e => e.keyCode === 13 && onChange(property.name, value)}
+          onBlur={() => onChange(property.path, value)}
+          onKeyDown={e => e.keyCode === 13 && onChange(property.path, value)}
           value={value ?? ''}
           disabled={property.isDisabled}
+          {...property.props}
         />
         <Button
           variant={isInput ? 'primary' : 'text'}

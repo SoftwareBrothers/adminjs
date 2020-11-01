@@ -1,9 +1,9 @@
 import { ThemeOverride } from '@admin-bro/design-system'
 
-import BaseResource from './backend/adapters/base-resource'
-import BaseDatabase from './backend/adapters/base-database'
+import BaseResource from './backend/adapters/resource/base-resource'
+import BaseDatabase from './backend/adapters/database/base-database'
 import { PageContext } from './backend/actions/action.interface'
-import { ResourceOptions } from './backend/decorators/resource-options.interface'
+import { ResourceOptions } from './backend/decorators/resource/resource-options.interface'
 import { Locale } from './locale/config'
 import { CurrentAdmin } from './current-admin.interface'
 
@@ -48,7 +48,7 @@ import { CurrentAdmin } from './current-admin.interface'
  * const adminBro = new AdminBro(options)
  * ```
  */
-export default interface AdminBroOptions {
+export interface AdminBroOptions {
   /**
    * path, under which, AdminBro will be available. Default to `/admin`
    *
@@ -86,7 +86,7 @@ export default interface AdminBroOptions {
    *   },
    * },
    */
-  pages?: Record<string, AdminPage>;
+  pages?: AdminPages;
   /**
    * Array of all Resources which are supported by AdminBro via adapters.
    * You can pass either resource or resource with an options and thus modify it.
@@ -362,7 +362,20 @@ export type AdminPage = {
    * Component defined by using {@link AdminBro.bundle}
    */
   component: string;
+
+  /**
+   * Page icon
+   */
+  icon?: string;
 }
+
+/**
+ * Object describing map of regular pages in AdminBro
+ *
+ * @alias AdminPages
+ * @memberof AdminBroOptions
+ */
+export type AdminPages = Record<string, AdminPage>
 
 /**
  * Default way of passing Options with a Resource
@@ -415,5 +428,5 @@ export interface AdminBroOptionsWithDefault extends AdminBroOptions {
     handler?: PageHandler;
     component?: string;
   };
-  pages: Record<string, AdminPage>;
+  pages: AdminBroOptions['pages'];
 }

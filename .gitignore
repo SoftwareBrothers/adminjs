@@ -16,5 +16,13 @@ node_modules
 src/frontend/assets/scripts
 
 .adminbro
-example-app/cypress/videos
-example-app/cypress/screenshots
+
+# cypress output
+**/*/cypress/videos
+**/*/cypress/screenshots
+
+/packages/app/build
+
+.env
+firebase.env.json
+yarn-error.log

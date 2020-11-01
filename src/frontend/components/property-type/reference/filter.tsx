@@ -1,5 +1,5 @@
 import React, { ReactNode } from 'react'
-import Select from 'react-select/lib/Async'
+import Select from 'react-select/async'
 import { ThemeProps, DefaultTheme, withTheme } from 'styled-components'
 import { FormGroup, Label, filterStyles } from '@admin-bro/design-system'
 
@@ -23,7 +23,7 @@ class Filter extends React.PureComponent<CombinedProps> {
 
   handleChange(selected: SelectRecord): void {
     const { onChange, property } = this.props
-    onChange(property.name, selected ? selected.value : '')
+    onChange(property.path, selected ? selected.value : '')
   }
 
   async loadOptions(inputValue: string): Promise<Array<{value: string; label: string }>> {
@@ -38,7 +38,7 @@ class Filter extends React.PureComponent<CombinedProps> {
 
   render(): ReactNode {
     const { property, filter, theme } = this.props
-    const value = typeof filter[property.name] === 'undefined' ? '' : filter[property.name]
+    const value = typeof filter[property.path] === 'undefined' ? '' : filter[property.path]
     const selected = (this.options || []).find(o => o.value === value)
     return (
       <FormGroup>

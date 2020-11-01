@@ -1,138 +1,56 @@
-import { useState, useCallback, useEffect } from 'react'
+import { useState, useCallback, Dispatch, SetStateAction } from 'react'
 import { AxiosResponse } from 'axios'
-import ApiClient from '../../utils/api-client'
-import RecordJSON from '../../../backend/decorators/record-json.interface'
-import recordToFormData from './record-to-form-data'
+import ApiClient, { RecordActionAPIParams } from '../../utils/api-client'
+import { RecordJSON } from '../../interfaces'
+import { paramsToFormData } from './params-to-form-data'
 import useNotice from '../use-notice'
 import { RecordActionResponse } from '../../../backend/actions/action.interface'
 import mergeRecordResponse from './merge-record-response'
 import updateRecord from './update-record'
-import { OnPropertyChange } from '../../components/property-type/base-property-props'
+import { UseRecordOptions, UseRecordResult, UseRecordSubmitFunction } from './use-record.type'
+import isEntireRecordGiven from './is-entire-record-given'
+import { filterRecordParams, isPropertyPermitted } from './filter-record'
+import { flat } from '../../../utils'
 
 const api = new ApiClient()
 
-const isEntireRecordGiven = (
-  propertyOrRecord: RecordJSON | string,
-  value?: string,
-): boolean => !!(typeof value === 'undefined'
-    // user can pass property and omit value. This makes sense when
-    // third argument of the function (selectedRecord) is passed to onChange
-    // callback
-    && !(typeof propertyOrRecord === 'string')
-    // we assume that only params has to be given
-    && propertyOrRecord.params)
-
 /**
- * Result of useRecord hook
- *
- * @memberof useRecord
- * @alias UseRecordResult
- */
-export type UseRecordResult = {
-  /**
-   * recordJSON instance for given resource.
-   */
-  record: RecordJSON;
-  /**
-   * Function compatible with onChange method supported by all the components wrapped by
-   * {@link BasePropertyComponent}.
-   */
-  handleChange: OnPropertyChange;
-  /**
-   * Triggers submission of the record. Returns a promise.
-   * If custom params are given as an argument - they are merged
-   * to the payload.
-   */
-  submit: (customParams?: Record<string, string>) => Promise<AxiosResponse<RecordActionResponse>>;
-  /**
-   * Flag indicates loading.
-   */
-  loading: boolean;
-
-  /**
-   * Upload progress
-   */
-  progress: number;
-}
-
-/**
- * A powerful, hook which allows you to manage an entire record of given type.
- *
- * Take a look of creating a component which renders form for some non-existing record.
- * Form have name and surname fields. After clicking "save" user will create a new record.
- * Consecutive calls will update it.
- *
- * ```javascript
- * import { BasePropertyComponent, useRecord, Box, useTranslation } from '@admin-bro/design-system'
- *
- * const MyRecordActionComponent = (props) => {
- *   const { record: initialRecord, resource, action } = props
- *
- *   const { record, handleChange, submit } = useRecord(initialRecord, resource.id)
- *   const { translateButton } = useTranslation()
- *
- *   const nameProperty = resource.editProperties.find((property) => property.name === 'name')
- *   const surnameProperty = resource.editProperties.find((property) => property.name === 'surname')
- *
- *   const handleSubmit = (event) => {
- *     submit().then(() => {
- *        // do something
- *     })
- *   }
- *
- *   return (
- *     <Box
- *       as="form"
- *       onSubmit={handleSubmit}
- *     >
- *       <BasePropertyComponent
- *         where="edit"
- *         onChange={handleChange}
- *         property={nameProperty}
- *         resource={resource}
- *         record={record}
- *       />
- *       <BasePropertyComponent
- *         where="edit"
- *         onChange={handleChange}
- *         property={surnameProperty}
- *         resource={resource}
- *         record={record}
- *       />
- *       <Button variant="primary" size="lg">
- *         {translateButton('save', resource.id)}
- *       </Button>
- *     </Box>
- *   )
- * }
- * export default MyRecordActionComponent
- * ```
- *
- * Returns {@link UseRecordResult}.
- *
+ * @load ./use-record.doc.md
  * @subcategory Hooks
- * @component
+ * @class
+ * @hideconstructor
+ * @bundle
+ * @param {RecordJSON} [initialRecord],
+ * @param {string} resourceId
+ * @param {UseRecordOptions} [options]
+ * @return {UseRecordResult}
  */
 export const useRecord = (
   initialRecord: RecordJSON | undefined,
   resourceId: string,
+  options?: UseRecordOptions,
 ): UseRecordResult => {
+  // setting up state
   const [loading, setLoading] = useState(false)
+  const [isSynced, setIsSynced] = useState(true)
   const [progress, setProgress] = useState(0)
+
+  const filteredRecord = initialRecord ? filterRecordParams(initialRecord, options) : null
+
   const [record, setRecord] = useState<RecordJSON>({
-    ...initialRecord,
-    params: initialRecord?.params ?? {},
+    ...filteredRecord,
+    params: filteredRecord?.params ?? {},
     errors: initialRecord?.errors ?? {},
     populated: initialRecord?.populated ?? {},
   } as RecordJSON)
 
-  const onNotice = useNotice()
+  // it keeps the same format as useState function which can take either value or function
+  const setFilteredRecord: Dispatch<SetStateAction<RecordJSON>> = useCallback((value) => {
+    const newRecord = value instanceof Function ? value(record) : value
+    setRecord(filterRecordParams(newRecord, options))
+  }, [options, record])
 
-  useEffect(() => {
-    if (initialRecord) {
-      setRecord(initialRecord)
-    }
-  }, [initialRecord])
+  const onNotice = useNotice()
 
   const handleChange = useCallback((
     propertyOrRecord: RecordJSON | string,
@@ -140,21 +58,28 @@ export const useRecord = (
     incomingRecord?: RecordJSON,
   ): void => {
     if (isEntireRecordGiven(propertyOrRecord, value)) {
-      setRecord(propertyOrRecord as RecordJSON)
-    } else {
+      setFilteredRecord(propertyOrRecord as RecordJSON)
+    } else if (isPropertyPermitted(propertyOrRecord as string, options)) {
       setRecord(updateRecord(propertyOrRecord as string, value, incomingRecord))
+    } else if (process.env.NODE_ENV === 'development') {
+      // eslint-disable-next-line no-console
+      console.warn([
+        `You are trying to set property: "${propertyOrRecord as string}" which`,
+        'is not permitted. Take a look at `useRecord(..., { includeParams: [...]})`',
+      ].join('\n'))
     }
-  }, [setRecord])
+    setIsSynced(false)
+  }, [setRecord, options])
 
-  const handleSubmit = useCallback((
-    customParams: Record<string, string> = {},
+  const handleSubmit: UseRecordSubmitFunction = useCallback((
+    customParams = {}, submitOptions,
   ): Promise<AxiosResponse<RecordActionResponse>> => {
     setLoading(true)
 
-    const formData = recordToFormData(record)
-    Object.entries(customParams).forEach(([key, value]) => formData.set(key, value))
+    const mergedParams = flat.merge(record.params, customParams)
+    const formData = paramsToFormData(mergedParams)
 
-    const params = {
+    const params: Omit<RecordActionAPIParams, 'actionName' | 'recordId'> = {
       resourceId,
       onUploadProgress: (e): void => setProgress(Math.round((e.loaded * 100) / e.total)),
       data: formData,
@@ -176,9 +101,12 @@ export const useRecord = (
       if (response.data.notice) {
         onNotice(response.data.notice)
       }
-      setRecord(prev => mergeRecordResponse(prev, response.data))
+      if (submitOptions?.updateOnSave !== false) {
+        setFilteredRecord(prev => mergeRecordResponse(prev, response.data))
+      }
       setProgress(0)
       setLoading(false)
+      setIsSynced(true)
     }).catch(() => {
       onNotice({
         message:
@@ -189,9 +117,17 @@ export const useRecord = (
       setLoading(false)
     })
     return promise
-  }, [record, resourceId, setLoading, setProgress])
+  }, [record, resourceId, setLoading, setProgress, setRecord])
 
-  return { record, handleChange, submit: handleSubmit, loading, progress }
+  return {
+    record,
+    handleChange,
+    submit: handleSubmit,
+    loading,
+    progress,
+    setRecord: setFilteredRecord,
+    isSynced,
+  }
 }
 
 export default useRecord
