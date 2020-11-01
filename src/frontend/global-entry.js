@@ -18,7 +18,7 @@ import flat from 'flat'
 import ReactDatepicker from 'react-datepicker'
 import ReactSelectAsync from 'react-select/async'
 import ReactSelectCreatable from 'react-select/creatable'
-import ReactSelect from 'react-select'
+import * as ReactSelect from 'react-select'
 import i18n from 'i18next'
 import ReactI18Next from 'react-i18next'
 

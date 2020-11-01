@@ -15,11 +15,7 @@ const builtins = require('rollup-plugin-node-builtins')
 const globals = require('rollup-plugin-node-globals')
 const { terser } = require('rollup-plugin-terser')
 
-const React = require('react')
-const ReactDOM = require('react-dom')
 const env = require('../src/backend/bundler/bundler-env')
-
-const reactIsExport = ['isValidElementType', 'isContextConsumer', 'isElement', 'ForwardRef', 'typeOf']
 
 const run = async () => {
   const inputOptions = {

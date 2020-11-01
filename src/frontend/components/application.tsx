@@ -58,7 +58,7 @@ const App: React.FC = () => {
         <Sidebar isVisible={sidebarVisible} />
         <Box flex flexGrow={1} flexDirection="column" overflowY="auto" bg="bg">
           <TopBar toggleSidebar={(): void => toggleSidebar(!sidebarVisible)} />
-          <Box position="absolute" top={0}>
+          <Box position="absolute" top={0} zIndex="2000">
             <Notice />
           </Box>
           <Switch>
