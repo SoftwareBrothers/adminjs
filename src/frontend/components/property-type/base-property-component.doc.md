@@ -1,11 +1,8 @@
-Component which renders properties in all the places in the AdminBro UI. By all the
+The component which renders properties in all the places in the AdminBro UI. By all the
 places I mean:
 
 - **list**: on the List,
-- **edit**: on default actions where user can modify the record like: {@link EditAction},
-
-and {@link NewAction},
-
+- **edit**: on default actions where user can modify the record like: {@link EditAction}, and {@link NewAction},
 - **show**: on the default {@link ShowAction} where user can see the details of a record,
 - **filter**: and finally on the sidebar filter,
 
@@ -15,8 +12,8 @@ or **boolean** values as **checkbox**'es.
 
 ### Overriding default render logic
 
-By default BasePropertyComponent will render corresponding
-component: input for string, DatePicker for dates etc.
+By default BasePropertyComponent will render the corresponding
+component: input for string, DatePicker for dates, etc.
 But you can override this by passing a custom component to {@link PropertyOptions}.
 
 Take a look at the following example:
@@ -46,13 +43,13 @@ like on the Show action. We can define **my-react-component.jsx** like this:
 ```jsx
 import React from 'react'
 import { InputGroup, Label } from '@admin-bro/design-system'
- *
+
 const MyReactComponent = props => {
   const { record, property } = props
-  const value = record.params[property.name]
+  const value = record.params[property.path]
   return (
     <InputGroup>
-      <Label>{property.name}</Label>
+      <Label>{property.label}</Label>
       {value} [meters]
     </InputGroup>
   )

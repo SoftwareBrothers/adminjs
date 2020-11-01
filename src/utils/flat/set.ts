@@ -15,7 +15,7 @@ const isObject = (value: any): boolean => {
 
 /**
  * @load ./set.doc.md
- * @memberof flat
+ * @memberof module:flat
  * @param {FlattenParams} params
  * @param {string} propertyPath
  * @param {any} [value]       if not give function will only try to remove old keys

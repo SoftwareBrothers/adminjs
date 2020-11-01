@@ -1,7 +1,7 @@
 /**
  * Type of flatten params.
  *
- * @memberof flat
+ * @memberof module:flat
  * @alias FlattenParams
  */
 export type FlattenParams = {
@@ -11,7 +11,7 @@ export type FlattenParams = {
 export type FlattenValue = string | boolean | number | Date | null | [] | {} | File
 
 /**
- * @memberof flat
+ * @memberof module:flat
  * @alias GetOptions
  */
 export type GetOptions = {
@@ -33,7 +33,7 @@ export type GetOptions = {
  * - `[]` (empty array)
  * - `{}` (empty object)
  * - `File`
- * @memberof flat
+ * @memberof module:flat
  * @alias FlattenValue
  * @typedef {Union} FlattenValue
  */

@@ -1586,10 +1586,10 @@
   resolved "https://registry.yarnpkg.com/@sindresorhus/is/-/is-0.14.0.tgz#9fb3a3cf3132328151f353de4632e01e52102bea"
   integrity sha512-9NET910DNaIPngYnLLPeg+Ogzqsi9uM4mSboU5y6p8S5DzMTVEsJZrawi+BoDNUVBa2DhJqQYUFvMDfgU062LQ==
 
-"@softwarebrothers/admin-bro-blog@^1.0.0":
-  version "1.0.0"
-  resolved "https://npm.pkg.github.com/download/@softwarebrothers/admin-bro-blog/1.0.0/8eb33ba772ca504c2e9e3c0319874c0b1bee28a7188a4248cc38f7769ba6fbd3#d2a7898db238a206fd0bbaae85e86246ad19796b"
-  integrity sha512-Z7PDaAKR/X61WMLZTsy5WTA7FAaU8iIzn9GwVcvU7vaASkV+x+itg4Or/YyCeHme0n/wxmVU+xU4AwupQlhadQ==
+"@softwarebrothers/admin-bro-blog@1.0.1":
+  version "1.0.1"
+  resolved "https://npm.pkg.github.com/download/@softwarebrothers/admin-bro-blog/1.0.1/a5bb3319182812547c66a2a31a440e9138fcc020419658ea41aa9f1b2194d38e#19c220aea0028170cd0bbc8ba2096311eb91336d"
+  integrity sha512-WJf2/B38Y3nabNleK0olNmhAULNFEhR3/BnXoiRg25TBJT59Z75d42nMhN0abl94TUKB/mxitzvWpWYlupvqYw==
 
 "@styled-system/background@^5.1.2":
   version "5.1.2"

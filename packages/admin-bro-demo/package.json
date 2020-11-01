@@ -41,7 +41,7 @@
     "@admin-bro/upload": "^1.2.0",
     "@sentry/node": "^5.26.0",
     "@sentry/tracing": "^5.26.0",
-    "@softwarebrothers/admin-bro-blog": "^1.0.0",
+    "@softwarebrothers/admin-bro-blog": "1.0.1",
     "@types/quill": "^2.0.4",
     "argon2": "^0.27.0",
     "connect-session-sequelize": "^7.0.3",

@@ -2,6 +2,7 @@
 
 /**
  * @method abKeepLoggedIn
+ * @memberof module:cy
  * @param {object} [options]
  * @param {object} [options.cookie]   session cookie name: default to Cypress.env('AB_COOKIE_NAME')
  * @example

@@ -3,7 +3,7 @@ import { FlattenParams, GetOptions } from './flat.types'
 
 /**
  * @load ./select-params.doc.md
- * @memberof flat
+ * @memberof module:flat
  * @param {FlattenParams} params
  * @param {string | Array<string>} properties
  * @param {GetOptions} [options]
