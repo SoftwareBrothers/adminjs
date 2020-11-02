@@ -238,9 +238,9 @@ class AdminBro {
       } else {
         const stack = ((new Error()).stack || '').split('\n')
         // Node = 8 shows stack like that: '(/path/to/file.ts:77:27)
-        const pathNode8 = stack[2].match(/\((.*):[0-9]+:[0-9]+\)/)
+        const pathNode8 = stack[3].match(/\((.*):[0-9]+:[0-9]+\)/)
         // Node >= 10 shows stack like that: 'at /path/to/file.ts:77:27
-        const pathNode10 = stack[2].match(/at (.*):[0-9]+:[0-9]+/)
+        const pathNode10 = stack[3].match(/at (.*):[0-9]+:[0-9]+/)
 
         if (!pathNode8 && !pathNode10) {
           throw new Error('STACK does not have a file url. Check out if the node version >= 8')
@@ -248,8 +248,7 @@ class AdminBro {
         const executionPath = (pathNode8 && pathNode8[1]) || (pathNode10 && pathNode10[1])
         filePath = path.join(path.dirname(executionPath as string), this.options.babelConfig)
       }
-      const { root, dir, name } = path.parse(filePath)
-      console.log(root, dir, name);
+
       if (!fs.existsSync(filePath)) {
         throw new ConfigurationError(`Given babel config "${filePath}", doesn't exist.`, 'AdminBro.html')
       }
