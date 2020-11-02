@@ -23,6 +23,7 @@ import { OverridableComponent } from './frontend/utils/overridable-component'
 const pkg = JSON.parse(fs.readFileSync(path.join(__dirname, '../package.json'), 'utf-8'))
 export const VERSION = pkg.version
 
+
 export const defaultOptions: AdminBroOptionsWithDefault = {
   rootPath: DEFAULT_PATHS.rootPath,
   logoutPath: DEFAULT_PATHS.logoutPath,
@@ -31,6 +32,7 @@ export const defaultOptions: AdminBroOptionsWithDefault = {
   resources: [],
   dashboard: {},
   pages: {},
+  babelConfig: {},
 }
 
 type ActionsMap = {
@@ -96,6 +98,8 @@ class AdminBro {
      * @description Options given by a user
      */
     this.options = _.merge({}, defaultOptions, options)
+
+    this.resolveBabelConfigPath()
 
     this.initI18n()
 
@@ -224,6 +228,59 @@ class AdminBro {
       ].join('\n'))
     }
     return resource
+  }
+
+  resolveBabelConfigPath(): void {
+    if (typeof this.options.babelConfig === 'string') {
+      let filePath = ''
+      if (this.options.babelConfig[0] === '/') {
+        filePath = this.options.babelConfig
+      } else {
+        const stack = ((new Error()).stack || '').split('\n')
+        // Node = 8 shows stack like that: '(/path/to/file.ts:77:27)
+        const pathNode8 = stack[2].match(/\((.*):[0-9]+:[0-9]+\)/)
+        // Node >= 10 shows stack like that: 'at /path/to/file.ts:77:27
+        const pathNode10 = stack[2].match(/at (.*):[0-9]+:[0-9]+/)
+
+        if (!pathNode8 && !pathNode10) {
+          throw new Error('STACK does not have a file url. Check out if the node version >= 8')
+        }
+        const executionPath = (pathNode8 && pathNode8[1]) || (pathNode10 && pathNode10[1])
+        filePath = path.join(path.dirname(executionPath as string), this.options.babelConfig)
+      }
+      const { root, dir, name } = path.parse(filePath)
+      console.log(root, dir, name);
+      if (!fs.existsSync(filePath)) {
+        throw new ConfigurationError(`Given babel config "${filePath}", doesn't exist.`, 'AdminBro.html')
+      }
+      if (path.extname(filePath) === '.js') {
+        // eslint-disable-next-line
+        const configModule = require(filePath)
+        this.options.babelConfig = configModule && configModule.__esModule
+          ? configModule.default || undefined
+          : configModule
+        if (!this.options.babelConfig || typeof this.options.babelConfig !== 'object' || Array.isArray(this.options.babelConfig)) {
+          throw new Error(
+            `${filePath}: Configuration should be an exported JavaScript object.`,
+          )
+        }
+      } else {
+        let config
+        try {
+          config = JSON.parse(fs.readFileSync(filePath, 'utf8'))
+        } catch (err) {
+          throw new Error(`${filePath}: Error while parsing config - ${err.message}`)
+        }
+        if (!this.options) throw new Error(`${filePath}: No config detected`)
+        if (typeof this.options !== 'object') {
+          throw new Error(`${filePath}: Config returned typeof ${typeof this.options}`)
+        }
+        if (Array.isArray(this.options)) {
+          throw new Error(`${filePath}: Expected config object but found array`)
+        }
+        this.options.babelConfig = config
+      }
+    }
   }
 
   /**

@@ -235,6 +235,11 @@ export interface AdminBroOptions {
    * internationalization in AdminBro works.
    */
   locale?: Locale;
+
+  /**
+   * The file path to babel config file or json object of babel config.
+   */
+  babelConfig?: string | Record<string, any> | Function;
 }
 
 /* cspell: enable */
