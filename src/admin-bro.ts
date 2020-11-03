@@ -233,8 +233,9 @@ class AdminBro {
   resolveBabelConfigPath(): void {
     if (typeof this.options.babelConfig === 'string') {
       let filePath = ''
-      if (this.options.babelConfig[0] === '/') {
-        filePath = this.options.babelConfig
+      let config = this.options.babelConfig
+      if (config[0] === '/') {
+        filePath = config
       } else {
         const stack = ((new Error()).stack || '').split('\n')
         // Node = 8 shows stack like that: '(/path/to/file.ts:77:27)
@@ -246,7 +247,7 @@ class AdminBro {
           throw new Error('STACK does not have a file url. Check out if the node version >= 8')
         }
         const executionPath = (pathNode8 && pathNode8[1]) || (pathNode10 && pathNode10[1])
-        filePath = path.join(path.dirname(executionPath as string), this.options.babelConfig)
+        filePath = path.join(path.dirname(executionPath as string), config)
       }
 
       if (!fs.existsSync(filePath)) {
@@ -255,30 +256,29 @@ class AdminBro {
       if (path.extname(filePath) === '.js') {
         // eslint-disable-next-line
         const configModule = require(filePath)
-        this.options.babelConfig = configModule && configModule.__esModule
+        config = configModule && configModule.__esModule
           ? configModule.default || undefined
           : configModule
-        if (!this.options.babelConfig || typeof this.options.babelConfig !== 'object' || Array.isArray(this.options.babelConfig)) {
+        if (!config || typeof config !== 'object' || Array.isArray(config)) {
           throw new Error(
             `${filePath}: Configuration should be an exported JavaScript object.`,
           )
         }
       } else {
-        let config
         try {
           config = JSON.parse(fs.readFileSync(filePath, 'utf8'))
         } catch (err) {
           throw new Error(`${filePath}: Error while parsing config - ${err.message}`)
         }
-        if (!this.options) throw new Error(`${filePath}: No config detected`)
-        if (typeof this.options !== 'object') {
-          throw new Error(`${filePath}: Config returned typeof ${typeof this.options}`)
+        if (!config) throw new Error(`${filePath}: No config detected`)
+        if (typeof config !== 'object') {
+          throw new Error(`${filePath}: Config returned typeof ${typeof config}`)
         }
-        if (Array.isArray(this.options)) {
+        if (Array.isArray(config)) {
           throw new Error(`${filePath}: Expected config object but found array`)
         }
-        this.options.babelConfig = config
       }
+      this.options.babelConfig = config
     }
   }
 
