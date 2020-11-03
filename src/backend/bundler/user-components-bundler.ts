@@ -11,7 +11,7 @@ const outPath = path.join(ADMIN_BRO_TMP_DIR, 'bundle.js')
 
 async function build(admin, { write = false, watch = false } = {}): Promise<string> {
   const entryFile = generateEntry(admin, ADMIN_BRO_TMP_DIR)
-  const { options } = admin
+  const { options: { bundler: bundlerOptions } } = admin
 
   try {
     await util.promisify(fs.mkdir)(ADMIN_BRO_TMP_DIR, { recursive: true })
@@ -38,7 +38,7 @@ async function build(admin, { write = false, watch = false } = {}): Promise<stri
     watch,
     file: write ? outPath : null,
     minify: env === 'production',
-    ...options,
+    ...bundlerOptions,
   })
 
   let jsOutput = output.code

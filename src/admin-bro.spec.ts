@@ -49,6 +49,41 @@ describe('AdminBro', function () {
     })
   })
 
+  describe('resolveBabelConfigPath', function () {
+    it('load .babelrc file', function () {
+      const adminBro = new AdminBro({ bundler: { babelConfig: '../.babelrc' } })
+      expect(adminBro.options.bundler.babelConfig).not.to.undefined
+    })
+
+    it('load with json object directly', function () {
+      const adminBro = new AdminBro({ bundler: { babelConfig: {
+        presets: [
+          '@babel/preset-react',
+          ['@babel/preset-env', {
+            targets: {
+              node: '8',
+            },
+          }],
+          '@babel/preset-typescript',
+        ],
+        plugins: ['babel-plugin-styled-components'],
+        only: ['src/', 'spec/'],
+        ignore: [
+          'src/frontend/assets/scripts/app-bundle.development.js',
+          'src/frontend/assets/scripts/app-bundle.production.js',
+          'src/frontend/assets/scripts/global-bundle.development.js',
+          'src/frontend/assets/scripts/global-bundle.production.js',
+        ],
+      } } })
+      expect(adminBro.options.bundler.babelConfig).not.to.undefined
+    })
+
+    it('load babel.config.js file', function () {
+      const adminBro = new AdminBro({ bundler: { babelConfig: '../babel.config.js' } })
+      expect(adminBro.options.bundler.babelConfig).not.to.undefined
+    })
+  })
+
   describe('.bundle', function () {
     afterEach(function () {
       global.UserComponents = {}

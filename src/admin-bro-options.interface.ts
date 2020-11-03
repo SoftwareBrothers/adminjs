@@ -237,9 +237,9 @@ export interface AdminBroOptions {
   locale?: Locale;
 
   /**
-   * The file path to babel config file or json object of babel config.
+   * rollup bundle options;
    */
-  babelConfig?: string | Record<string, any> | Function;
+  bundler?: BundlerOptions;
 }
 
 /* cspell: enable */
@@ -420,6 +420,25 @@ export type PageHandler = (
   context: PageContext,
 ) => Promise<any>
 
+/**
+ * Bundle options
+ *
+ * @alias BundlerOptions
+ * @memberof AdminBroOptions
+ * @example
+ * const adminBro = new AdminBro({
+    resources: [],
+    rootPath: '/admin',
+    babelConfig: './.adminbro.babelrc'
+   })
+ */
+export type BundlerOptions = {
+  /**
+   * The file path to babel config file or json object of babel config.
+   */
+  babelConfig?: Record<string, any> | string;
+}
+
 export interface AdminBroOptionsWithDefault extends AdminBroOptions {
   rootPath: string;
   logoutPath: string;
@@ -434,4 +453,5 @@ export interface AdminBroOptionsWithDefault extends AdminBroOptions {
     component?: string;
   };
   pages: AdminBroOptions['pages'];
+  bundler: BundlerOptions;
 }
