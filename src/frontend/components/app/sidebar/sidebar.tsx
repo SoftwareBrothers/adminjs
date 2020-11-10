@@ -58,7 +58,7 @@ const Sidebar: React.FC<Props> = (props) => {
         <SidebarResourceSection resources={resources} />
       </Box>
       <SidebarPages pages={pages} />
-      {branding?.softwareBrothers && <SidebarFooter />}
+      <SidebarFooter />
     </StyledSidebar>
   )
 }
