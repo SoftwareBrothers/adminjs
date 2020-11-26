@@ -12,8 +12,8 @@ import {
   FormGroup,
   Button,
   Text,
+  Icon,
   MessageBox,
-  SoftwareBrothers,
   themeGet,
 } from '@admin-bro/design-system'
 import { useTranslation } from '../../hooks'
@@ -44,6 +44,21 @@ export type LoginProps = {
   message?: string;
   action: string;
 }
+
+const Webircle: React.FC = () => (
+  <div style={{fontSize: '12px', color: '#fff', textAlign: 'center'}}>
+    With
+    <Icon icon="FavoriteFilled" color="love" />
+    by
+    <a
+      href="https://webircle.com"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      Webircle
+    </a>
+  </div>
+)
 
 export const Login: React.FC<LoginProps> = (props) => {
   const { action, message } = props
@@ -123,7 +138,7 @@ export const Login: React.FC<LoginProps> = (props) => {
             </Text>
           </Box>
         </Box>
-        {branding.softwareBrothers ? (<Box mt="xxl"><SoftwareBrothers /></Box>) : null}
+        {branding.softwareBrothers ? (<Box mt="xxl"><Webircle /></Box>) : null}
       </Wrapper>
     </React.Fragment>
   )
