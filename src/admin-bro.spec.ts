@@ -79,7 +79,7 @@ describe('AdminBro', function () {
     })
 
     it('load babel.config.js file', function () {
-      const adminBro = new AdminBro({ bundler: { babelConfig: '../babel.config.js' } })
+      const adminBro = new AdminBro({ bundler: { babelConfig: './babel.test.config.js' } })
       expect(adminBro.options.bundler.babelConfig).not.to.undefined
     })
   })
