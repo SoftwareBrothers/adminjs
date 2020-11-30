@@ -1,5 +1,5 @@
 import { ThemeOverride } from '@admin-bro/design-system'
-
+import { TransformOptions as BabelConfig } from 'babel-core'
 import BaseResource from './backend/adapters/resource/base-resource'
 import BaseDatabase from './backend/adapters/database/base-database'
 import { PageContext } from './backend/actions/action.interface'
@@ -436,7 +436,7 @@ export type BundlerOptions = {
   /**
    * The file path to babel config file or json object of babel config.
    */
-  babelConfig?: Record<string, any> | string;
+  babelConfig?: BabelConfig | string;
 }
 
 export interface AdminBroOptionsWithDefault extends AdminBroOptions {
