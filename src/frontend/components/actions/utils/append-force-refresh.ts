@@ -9,9 +9,12 @@ export const REFRESH_KEY = 'refresh'
  * @private
  */
 export const appendForceRefresh = (url: string, search?: string): string => {
-  const params = new URLSearchParams(search ?? window.location.search)
-  params.set(REFRESH_KEY, 'true')
-  return `${url}?${params}`
+  const urlObject = new URL(url)
+  const oldParams = search ?? urlObject.search ?? window.location.search
+  const newParams = new URLSearchParams(oldParams)
+
+  newParams.set(REFRESH_KEY, 'true')
+  return `${urlObject.origin}${urlObject.pathname}?${newParams.toString()}`
 }
 
 export const hasForceRefresh = (search: string): boolean => {
