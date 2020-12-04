@@ -9,12 +9,21 @@ export const REFRESH_KEY = 'refresh'
  * @private
  */
 export const appendForceRefresh = (url: string, search?: string): string => {
-  const urlObject = new URL(url)
-  const oldParams = search ?? urlObject.search ?? window.location.search
+  const searchParamsIdx = url.lastIndexOf('?')
+  const urlSearchParams = searchParamsIdx !== -1
+    ? url.substring(searchParamsIdx + 1)
+    : null
+
+  const oldParams = search ?? urlSearchParams ?? window.location.search
   const newParams = new URLSearchParams(oldParams)
 
   newParams.set(REFRESH_KEY, 'true')
-  return `${urlObject.origin}${urlObject.pathname}?${newParams.toString()}`
+
+  const newUrl = searchParamsIdx !== -1
+    ? url.substring(0, searchParamsIdx)
+    : url
+
+  return `${newUrl}?${newParams.toString()}`
 }
 
 export const hasForceRefresh = (search: string): boolean => {
