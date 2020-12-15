@@ -9,7 +9,7 @@ const TEMP_HOLDING_KEY = 'TEMP_HOLDING_KEY'
 
 /**
  * @load ./get.doc.md
- * @memberof flat
+ * @memberof module:flat
  * @param {FlattenParams}   params      flatten params from which property has to be taken
  * @param {string}          [propertyPath]  name of the property
  * @param {GetOptions}      options     options

@@ -2,6 +2,10 @@
 
 /**
  * @method abLogin
+ * @description
+ * logs you to the AdminBro. Since the system uses cookie for storing the session information, you
+ * can use {@link module:cy.abKeepLoggedIn} helper to keep it between test cases.
+ * @memberof module:cy
  * @param {object} [options]
  * @param {object} [options.email]          login email: default to Cypress.env('AB_EMAIL')
  * @param {object} [options.password]       login password: default to Cypress.env('AB_PASSWORD')

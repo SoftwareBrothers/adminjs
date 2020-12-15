@@ -220,10 +220,10 @@ class ApiClient {
    * Invokes dashboard handler.
    *
    * @param   {AxiosRequestConfig}       options
-   * @return  {Promise<any>}             response from the handler function defined in
+   * @return  {Promise<AxiosResponse<any>>} response from the handler function defined in
    *                                     {@link AdminBroOptions#dashboard}
    */
-  async getDashboard(options: AxiosRequestConfig = {}): Promise<any> {
+  async getDashboard(options: AxiosRequestConfig = {}): Promise<AxiosResponse<any>> {
     const response = await this.client.get('/api/dashboard', options)
     checkResponse(response)
     return response
@@ -233,10 +233,10 @@ class ApiClient {
    * Invokes handler function of given page and returns its response.
    *
    * @param   {GetPageAPIParams}                options
-   * @return  {Promise<any>}                    response from the handler of given page
+   * @return  {Promise<AxiosResponse<any>>}     response from the handler of given page
    *                                            defined in {@link AdminBroOptions#pages}
    */
-  async getPage(options: GetPageAPIParams): Promise<any> {
+  async getPage(options: GetPageAPIParams): Promise<AxiosResponse<any>> {
     const { pageName, ...axiosParams } = options
     const response = await this.client.request({
       url: `/api/pages/${pageName}`,

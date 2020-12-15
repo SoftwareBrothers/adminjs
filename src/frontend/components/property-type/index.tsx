@@ -8,16 +8,6 @@ import * as textarea from './textarea'
 import * as password from './password'
 import { BasePropertyComponentProps } from './base-property-props'
 
-let globalAny: any = {}
-
-try {
-  globalAny = window
-} catch (error) {
-  if (error.message !== 'window is not defined') {
-    throw error
-  }
-}
-
 type BasePropertyComponentType = React.FC<BasePropertyComponentProps> & {
   DefaultType: any;
   Boolean: any;

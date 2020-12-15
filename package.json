@@ -1,6 +1,6 @@
 {
   "name": "admin-bro",
-  "version": "3.3.0-beta.39",
+  "version": "3.3.1",
   "description": "Admin panel for apps written in node.js",
   "main": "index.js",
   "types": "index.d.ts",
@@ -75,7 +75,7 @@
   },
   "homepage": "https://github.com/SoftwareBrothers/admin-bro#readme",
   "dependencies": {
-    "@admin-bro/design-system": "^1.7.0-beta.22",
+    "@admin-bro/design-system": "^1.7.0-beta.24",
     "@babel/core": "^7.10.2",
     "@babel/parser": "^7.10.2",
     "@babel/plugin-transform-runtime": "^7.10.1",
@@ -113,7 +113,7 @@
     "styled-components": "^5.1.0"
   },
   "devDependencies": {
-    "@admin-bro/design-system": "^1.7.0-beta.22",
+    "@admin-bro/design-system": "^1.7.0-beta.24",
     "@babel/cli": "^7.4.4",
     "@commitlint/cli": "^8.3.5",
     "@commitlint/config-conventional": "^8.3.4",

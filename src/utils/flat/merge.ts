@@ -8,7 +8,7 @@ import { set } from './set'
  * @param {any} params
  * @param {Array<any>} ...mergeParams
  * @returns {FlattenParams}
- * @memberof flat
+ * @memberof module:flat
  */
 const merge = (params: any = {}, ...mergeParams: Array<any>): FlattenParams => {
   const flattenParams = flatten(params)

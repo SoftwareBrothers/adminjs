@@ -34,7 +34,7 @@ export type SelectRecord = {
  * // my-react-component.tsx
  * const MyReactComponent = (props: BasePropertyProps) => {
  *   const { record, property } = props
- *   const value = record.params[property.name] === 'foo' ? 'bar' : 'zoe'
+ *   const value = record.params[property.path] === 'foo' ? 'bar' : 'zoe'
  *   return (
  *     <PropertyInShow property={property}>
  *       {value}
@@ -156,11 +156,11 @@ export type ShowPropertyProps = {
  */
 export type OnPropertyChange = (
   /**
-   * property.name or updated RecordJSON object
+   * property.path or updated RecordJSON object
    */
   propertyOrRecord: RecordJSON | string,
   /**
-   * when propertyOrRecord is a property.name, here should be an updated value.
+   * when propertyOrRecord is a property.path, here should be an updated value.
    */
   value?: any,
   /**

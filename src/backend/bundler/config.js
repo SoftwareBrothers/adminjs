@@ -60,6 +60,7 @@ const globals = {
   'admin-bro/style': 'AdminBro.style',
   i18next: 'i18n',
   'react-i18next': 'ReactI18Next',
+  Quill: 'Quill',
 }
 
 const extensions = ['.mjs', '.js', '.jsx', '.json', '.ts', '.tsx']

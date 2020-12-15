@@ -3,7 +3,7 @@ import { FlattenParams } from './flat.types'
 
 /**
  * @load ./filter-out-params.doc.md
- * @memberof flat
+ * @memberof module:flat
  * @param {FlattenParams} params
  * @param {string | Array<string>} properties
  * @returns {FlattenParams}

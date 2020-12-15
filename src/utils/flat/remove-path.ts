@@ -7,12 +7,12 @@ import { DELIMITER } from './constants'
 
 /**
  * @load ./remove-path.doc.md
- * @memberof flat
+ * @memberof module:flat
  * @param {FlattenParams} params
  * @param {...string} properties
  * @returns {FlattenParams}
  */
-export const removePath = (params: FlattenParams, path: string): FlattenParams => {
+const removePath = (params: FlattenParams, path: string): FlattenParams => {
   // by default simply filter out elements from the object
   let filtered = filterOutParams(params, path)
 
@@ -38,3 +38,5 @@ export const removePath = (params: FlattenParams, path: string): FlattenParams =
 
   return filtered
 }
+
+export { removePath }

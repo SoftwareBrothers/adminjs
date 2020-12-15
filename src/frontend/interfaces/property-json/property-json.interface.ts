@@ -34,11 +34,13 @@ export interface PropertyJSON {
   /**
    * Property uniq path. For top level properties - the same as name, but for nested
    * properties it is separated with dot notation: `nested.property`
+   * @new in version 3.3
    */
   propertyPath: string;
   /**
    * Path of the actual value inside the record. It is usually the same as propertyPath, with the
    * exception of array values.
+   * @new in version 3.3
    */
   path: string;
   /**
@@ -111,13 +113,19 @@ export interface PropertyJSON {
   /**
    * Indicates if given property has been created in AdminBro {@link PropertyOptions} and hasn't
    * been returned by the database adapter.
+   * @new in version 3.3
    */
   isVirtual: boolean;
 }
 
-/**
- * Property without the path
- *
- * @memberof PropertyJSON
- */
 export type BasePropertyJSON = Omit<PropertyJSON, 'path'>
+
+/**
+ * Property without the path. Defined as `Omit<PropertyJSON, 'path'>`
+ *
+ * @typedef {Object} BasePropertyJSON
+ * @property {any} ...   properties from {@link PropertyJSON} except `path`
+ * @alias BasePropertyJSON
+ * @memberof PropertyJSON
+ * @new in version 3.3
+ */

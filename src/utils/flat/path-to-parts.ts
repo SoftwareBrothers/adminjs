@@ -1,7 +1,7 @@
 import { PathParts } from './path-parts.type'
 
 /**
- * @memberof flat
+ * @memberof module:flat
  * @alias PathToPartsOptions
  */
 export type PathToPartsOptions = {
@@ -17,7 +17,7 @@ export type PathToPartsOptions = {
  * @param   {PathToPartsOptions}  options
  * @returns  {PathParts}
  *
- * @memberof flat
+ * @memberof module:flat
  * @alias pathToParts
  */
 const pathToParts = (propertyPath: string, options: PathToPartsOptions = {}): PathParts => {

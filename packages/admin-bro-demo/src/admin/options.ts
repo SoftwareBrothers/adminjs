@@ -1,4 +1,4 @@
-import { AdminBroOptions } from 'admin-bro'
+import AdminBro, { AdminBroOptions } from 'admin-bro'
 import * as UserAdmin from './resources/user'
 import * as BlogPostAdmin from './resources/blog-post'
 import * as MediaAdmin from './resources/media'
@@ -12,6 +12,12 @@ export const options: AdminBroOptions = {
   rootPath,
   version: {
     admin: true,
+  },
+  dashboard: {
+    handler: async () => {
+      return { some: 'output' }
+    },
+    component: AdminBro.bundle('../../../src/admin/components/dashboard')
   },
   resources: [
     UserAdmin,

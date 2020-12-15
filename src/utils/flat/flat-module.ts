@@ -23,7 +23,7 @@ export type FlatModuleType = {
 }
 
 /**
- * @namespace flat
+ * @module flat
  * @name flat
  * @new in version 3.3
  * @load ./flat.doc.md

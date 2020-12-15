@@ -11,6 +11,17 @@ export const ProductResource: ResourceOptions = {
     photos: {
       type: 'mixed',
     },
+    description: {
+      type: 'richtext',
+      props: {
+        quill: {
+          theme: 'bubble',
+          modules: {
+            toolbar: [['bold', 'italic'], ['link', 'image']],
+          }
+        }
+      }
+    },
   },
   actions: {
     exporter: {
