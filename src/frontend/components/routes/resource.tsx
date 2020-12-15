@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import React, { useState } from 'react'
 import { connect } from 'react-redux'
 import { useRouteMatch } from 'react-router-dom'

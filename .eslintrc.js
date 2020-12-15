@@ -10,6 +10,7 @@ module.exports = {
     'airbnb',
     'plugin:@typescript-eslint/recommended',
     'plugin:mocha/recommended',
+    'plugin:react-hooks/recommended',
   ],
   parserOptions: {
     ecmaVersion: 2018,

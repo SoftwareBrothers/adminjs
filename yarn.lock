@@ -2,7 +2,7 @@
 # yarn lockfile v1
 
 
-"@admin-bro/design-system@^1.7.0":
+"@admin-bro/design-system@^1.7.0-beta.24":
   version "1.7.0"
   resolved "https://registry.yarnpkg.com/@admin-bro/design-system/-/design-system-1.7.0.tgz#1a5f46bff89db7aba33367db9a84cf00ddaaea5c"
   integrity sha512-pf+b/YkKoylvcg1wp1yUhbWv0e5MZHjKQdPqTt6UXutVgpqldimDv5be3i2avkqNSB5XrOXVZTIcW4vj0vy33g==
@@ -4619,6 +4619,11 @@ eslint-plugin-mocha@^6.2.2:
   dependencies:
     eslint-utils "^2.0.0"
     ramda "^0.27.0"
+
+eslint-plugin-react-hooks@^4.2.0:
+  version "4.2.0"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-react-hooks/-/eslint-plugin-react-hooks-4.2.0.tgz#8c229c268d468956334c943bb45fc860280f5556"
+  integrity sha512-623WEiZJqxR7VdxFCKLI6d6LLpwJkGPYKODnkH3D7WpOG5KM8yWueBd8TLsNAetEJNF5iJmolaAKO3F8yzyVBQ==
 
 eslint-plugin-react@^7.21.2:
   version "7.21.5"

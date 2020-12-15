@@ -46,6 +46,7 @@ export const updateRecord = (
     populatedModified = true
   }
 
+  delete previousRecord.errors[property]
   return {
     ...previousRecord,
     params: paramsCopy,

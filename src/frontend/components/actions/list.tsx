@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect } from 'react'
 import { Box, Pagination, Text } from '@admin-bro/design-system'
 import { useHistory, useLocation } from 'react-router'

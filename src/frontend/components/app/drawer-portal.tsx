@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, ReactNode, useState } from 'react'
 import { createPortal, render } from 'react-dom'
 import { Drawer, DEFAULT_DRAWER_WIDTH } from '@admin-bro/design-system'

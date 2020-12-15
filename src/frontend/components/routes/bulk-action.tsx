@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from 'react'
 import { Loader } from '@admin-bro/design-system'
 import { useRouteMatch, useLocation } from 'react-router'

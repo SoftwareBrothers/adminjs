@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import axios, { AxiosResponse, AxiosInstance, AxiosRequestConfig } from 'axios'
 import {
   ResourceActionParams,

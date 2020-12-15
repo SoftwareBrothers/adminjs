@@ -1,8 +1,9 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
-import React, { FC, useState, memo, useEffect } from 'react'
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { FC, memo, useEffect, useState } from 'react'
 import Select from 'react-select'
-import { withTheme, DefaultTheme } from 'styled-components'
-import { Input, FormMessage, FormGroup, selectStyles } from '@admin-bro/design-system'
+import { DefaultTheme, withTheme } from 'styled-components'
+import { FormGroup, FormMessage, Input, selectStyles } from '@admin-bro/design-system'
 
 import { EditPropertyProps } from '../base-property-props'
 import { recordPropertyIsEqual } from '../record-property-is-equal'
@@ -54,7 +55,17 @@ const TextEdit: FC<CombinedProps> = (props) => {
     if (value !== propValue) {
       setValue(propValue)
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [propValue])
+
+  useEffect(() => {
+    const hasError = !!record.errors?.[property.path]
+    const userStartedTyping = value !== propValue
+
+    if (hasError && userStartedTyping) {
+      onChange(property.path, value)
+    }
+  }, [onChange, propValue, property.path, record.errors, value])
 
   return (
     <Input

@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, memo, useEffect } from 'react'
 import { Input, FormGroup, InputGroup, FormMessage, Button, Icon } from '@admin-bro/design-system'
 
