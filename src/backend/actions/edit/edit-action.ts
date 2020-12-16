@@ -1,3 +1,4 @@
+import omit from 'lodash/omit';
 import { Action, RecordActionResponse } from '../action.interface'
 import NotFoundError from '../../utils/errors/not-found-error'
 import populator from '../../utils/populator/populator'
@@ -39,7 +40,7 @@ export const EditAction: Action<RecordActionResponse> = {
       return { record: record.toJSON(currentAdmin) }
     }
 
-    const newRecord = await record.update(request.payload)
+    const newRecord = await record.update(omit(request.payload, 'id'))
     const [populatedRecord] = await populator([newRecord])
 
     // eslint-disable-next-line no-param-reassign
