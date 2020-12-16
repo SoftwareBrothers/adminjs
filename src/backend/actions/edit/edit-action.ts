@@ -1,4 +1,4 @@
-import omit from 'lodash/omit';
+import omit from 'lodash/omit'
 import { Action, RecordActionResponse } from '../action.interface'
 import NotFoundError from '../../utils/errors/not-found-error'
 import populator from '../../utils/populator/populator'
