@@ -5,7 +5,7 @@
     "next",
     "next-major",
     {
-      "name": "beta",
+      "name": "cf",
       "prerelease": true
     }
   ],
