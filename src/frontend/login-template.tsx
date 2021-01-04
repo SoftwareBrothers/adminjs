@@ -41,6 +41,11 @@ const html = async (
   const assets = await getAssets(admin)
   const faviconTag = getFaviconFromBranding(branding)
 
+  const scripts = ((assets && assets.scripts) || [])
+    .map(s => `<script src="${s}"></script>`)
+  const styles = ((assets && assets.styles) || [])
+    .map(l => `<link rel="stylesheet" type="text/css" href="${l}">`)
+
   store.dispatch(initializeBranding(branding))
   store.dispatch(initializeAssets(assets))
   store.dispatch(initializeLocale(admin.locale))
@@ -86,12 +91,14 @@ const html = async (
       ${style}
       ${faviconTag}
       <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,700" type="text/css">
+      ${styles.join('\n')}
 
       <script src="${h.assetPath('global.bundle.js')}"></script>
       <script src="${h.assetPath('design-system.bundle.js')}"></script>
     </head>
     <body>
       <div id="app">${loginComponent}</div>
+      ${scripts.join('\n')}
     </body>
     </html>
   `
