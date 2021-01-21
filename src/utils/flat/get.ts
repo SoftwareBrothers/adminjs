@@ -51,8 +51,8 @@ const get = (params: FlattenParams = {}, propertyPath?: string, options?: GetOpt
     //  'TEMP_HOLDING_KEY.3.value': 'val2',
     if (options?.includeAllSiblings) {
       newKey = newKey.replace(
-        new RegExp(`${TEMP_HOLDING_KEY}\\${DELIMITER}(\\d+)`),
-        `${TEMP_HOLDING_KEY}.${index}`,
+        new RegExp(`${TEMP_HOLDING_KEY}\\${DELIMITER}(\\d*)`),
+        `${TEMP_HOLDING_KEY}${DELIMITER}${index}`,
       )
     }
 
