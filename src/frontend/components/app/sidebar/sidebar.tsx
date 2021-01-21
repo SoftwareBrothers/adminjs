@@ -11,10 +11,11 @@ import { ReduxState } from '../../../store/store'
 import SidebarFooter from './sidebar-footer'
 
 import SidebarResourceSection from './sidebar-resource-section'
+import allowOverride from '../../../hoc/allow-override'
 
 type Props = {
   isVisible: boolean;
-}
+};
 
 const StyledSidebar = styled(Box)`
   transition: left 0.3s;
@@ -41,18 +42,20 @@ StyledSidebar.defaultProps = {
   bg: 'white',
 }
 
-const Sidebar: React.FC<Props> = (props) => {
+const SidebarOriginal: React.FC<Props> = (props) => {
   const { isVisible } = props
-  const [branding, resources, pages]: [BrandingOptions, ResourceJSON[], PageJSON[]] = useSelector(
-    (state: ReduxState) => [
-      state.branding, state.resources, state.pages,
-    ],
-  )
+  const [branding, resources, pages]: [
+    BrandingOptions,
+    ResourceJSON[],
+    PageJSON[]
+  ] = useSelector((state: ReduxState) => [
+    state.branding,
+    state.resources,
+    state.pages,
+  ])
 
   return (
-    <StyledSidebar
-      className={isVisible ? 'visible' : 'hidden'}
-    >
+    <StyledSidebar className={isVisible ? 'visible' : 'hidden'}>
       <SidebarBranding branding={branding} />
       <Box flexGrow={1} className={cssClass('Resources')}>
         <SidebarResourceSection resources={resources} />
@@ -63,4 +66,7 @@ const Sidebar: React.FC<Props> = (props) => {
   )
 }
 
+const Sidebar = allowOverride(SidebarOriginal, 'Sidebar')
+
+export { Sidebar }
 export default Sidebar
