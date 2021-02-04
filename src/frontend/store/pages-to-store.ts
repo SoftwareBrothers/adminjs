@@ -7,7 +7,7 @@ const pagesToStore = (pages: AdminBroOptions['pages'] = {}): Array<PageJSON> => 
     name: key,
     component: adminPage.component,
     icon: adminPage.icon,
-    isVisible: adminPage.isVisible === undefined ? true : adminPage.isVisible
+    isVisible: adminPage.isVisible === undefined ? true : adminPage.isVisible,
   }))
 
 export default pagesToStore

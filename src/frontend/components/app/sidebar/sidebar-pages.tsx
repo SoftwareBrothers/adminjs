@@ -27,9 +27,9 @@ const SidebarPages: React.FC<Props> = (props) => {
     !!location.pathname.match(`/pages/${page.name}`)
   )
 
-  const elements: Array<NavigationElementProps> = pages.reduce((elements: NavigationElementProps[], page) => {
+  const elements = pages.reduce((visibleElements: NavigationElementProps[], page) => {
     if (page.isVisible) {
-      elements.push({
+      visibleElements.push({
         id: page.name,
         label: page.name,
         isSelected: isActive(page),
@@ -43,8 +43,8 @@ const SidebarPages: React.FC<Props> = (props) => {
         },
       })
     }
-    return elements
-  }, []);
+    return visibleElements
+  }, [])
 
   return (
     <Navigation
