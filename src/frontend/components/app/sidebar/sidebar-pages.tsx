@@ -19,7 +19,7 @@ const SidebarPages: React.FC<Props> = (props) => {
   const location = useLocation()
   const history = useHistory()
 
-  if (!pages || !pages.length) {
+  if (!pages || !pages.length || !pages.filter(x => x.isVisible === true).length) {
     return (<></>)
   }
 
@@ -27,19 +27,24 @@ const SidebarPages: React.FC<Props> = (props) => {
     !!location.pathname.match(`/pages/${page.name}`)
   )
 
-  const elements: Array<NavigationElementProps> = pages.map(page => ({
-    id: page.name,
-    label: page.name,
-    isSelected: isActive(page),
-    icon: page.icon,
-    href: h.pageUrl(page.name),
-    onClick: (event, element): void => {
-      event.preventDefault()
-      if (element.href) {
-        history.push(element.href)
-      }
-    },
-  }))
+  const elements: Array<NavigationElementProps> = pages.reduce((elements: NavigationElementProps[], page) => {
+    if (page.isVisible) {
+      elements.push({
+        id: page.name,
+        label: page.name,
+        isSelected: isActive(page),
+        icon: page.icon,
+        href: h.pageUrl(page.name),
+        onClick: (event, element): void => {
+          event.preventDefault()
+          if (element.href) {
+            history.push(element.href)
+          }
+        },
+      })
+    }
+    return elements
+  }, []);
 
   return (
     <Navigation
