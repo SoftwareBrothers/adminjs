@@ -1,6 +1,6 @@
 import React, { MouseEvent, useCallback } from 'react'
 import { Button, Section, FormGroup, FormMessage, Icon, Box } from '@admin-bro/design-system'
-import { DragDropContext, Droppable, Draggable, DropResult } from 'react-beautiful-dnd';
+import { DragDropContext, Droppable, Draggable, DropResult } from 'react-beautiful-dnd'
 
 import AddNewItemButton from './add-new-item-translation'
 import { flat } from '../../../../utils'
@@ -24,7 +24,7 @@ const ItemRenderer: React.FC<EditProps & ItemRendererProps> = (props) => {
       draggableId={`draggable-${property.path}`}
       index={index}
     >
-      {(provided) => (
+      {(provided): JSX.Element => (
         <Box
           ref={provided.innerRef}
           {...provided.draggableProps}
@@ -53,7 +53,7 @@ const ItemRenderer: React.FC<EditProps & ItemRendererProps> = (props) => {
           </Box>
         </Box>
       )}
-  </Draggable>
+    </Draggable>
   )
 }
 
@@ -78,23 +78,23 @@ const InputsInSection: React.FC<EditProps> = (props) => {
     return false
   }, [record, onChange, property])
 
-  const handleOnDragEnd = (result: DropResult) => {
-    const { source, destination } = result;
-    if (!source || !destination) return;
+  const handleOnDragEnd = (result: DropResult): void => {
+    const { source, destination } = result
+    if (!source || !destination) return
 
-    const itemsCopy = [...items];
-    const sourceItem = itemsCopy[source.index];
+    const itemsCopy = [...items]
+    const sourceItem = itemsCopy[source.index]
 
-    itemsCopy.splice(source.index, 1);
-    itemsCopy.splice(destination.index, 0, sourceItem);
+    itemsCopy.splice(source.index, 1)
+    itemsCopy.splice(destination.index, 0, sourceItem)
 
-    onChange(property.path, itemsCopy);
+    onChange(property.path, itemsCopy)
   }
 
   return (
     <DragDropContext onDragEnd={handleOnDragEnd}>
       <Droppable droppableId={`droppable-${property.path}`}>
-        {(provided) => (
+        {(provided): JSX.Element => (
           <Section
             ref={provided.innerRef}
             {...provided.droppableProps}
