@@ -18,11 +18,15 @@ type ItemRendererProps = {
 }
 
 const ItemRenderer: React.FC<EditProps & ItemRendererProps> = (props) => {
-  const { ItemComponent, property, onDelete, index } = props
+  const { ItemComponent, property, onDelete, index, record } = props
+  
+  const uniqueDraggableId = btoa(`${JSON.stringify(flat.get(record.params, property.path))}-${property.path}`)
+
   return (
     <Draggable
-      draggableId={`draggable-${property.path}`}
+      draggableId={uniqueDraggableId}
       index={index}
+      key={uniqueDraggableId}
     >
       {(provided): JSX.Element => (
         <Box
@@ -78,22 +82,20 @@ const InputsInSection: React.FC<EditProps> = (props) => {
     return false
   }, [record, onChange, property])
 
-  const handleOnDragEnd = (result: DropResult): void => {
+  const handleOnDragEnd = useCallback((result: DropResult): void => {
     const { source, destination } = result
-    if (!source || !destination) return
+    if (!source || !destination || destination.index === source.index) return
 
-    const itemsCopy = [...items]
-    const sourceItem = itemsCopy[source.index]
-
-    itemsCopy.splice(source.index, 1)
+    const itemsCopy = Array.from(items)
+    const [sourceItem] = itemsCopy.splice(source.index, 1)
     itemsCopy.splice(destination.index, 0, sourceItem)
 
     onChange(property.path, itemsCopy)
-  }
+  }, [record, onChange, property])
 
   return (
     <DragDropContext onDragEnd={handleOnDragEnd}>
-      <Droppable droppableId={`droppable-${property.path}`}>
+      <Droppable droppableId={property.path}>
         {(provided): JSX.Element => (
           <Section
             ref={provided.innerRef}
