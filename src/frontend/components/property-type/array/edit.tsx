@@ -19,7 +19,7 @@ type ItemRendererProps = {
 
 const ItemRenderer: React.FC<EditProps & ItemRendererProps> = (props) => {
   const { ItemComponent, property, onDelete, index, record } = props
-  
+  // eslint-disable-next-line no-undef
   const uniqueDraggableId = btoa(`${JSON.stringify(flat.get(record.params, property.path))}-${property.path}`)
 
   return (
