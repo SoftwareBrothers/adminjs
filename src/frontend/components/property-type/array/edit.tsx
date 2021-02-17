@@ -15,18 +15,19 @@ type EditProps = Required<EditPropertyPropsInArray>
 type ItemRendererProps = {
   onDelete: (event: MouseEvent, property: PropertyJSON) => boolean;
   index: number;
+  isDraggable: boolean;
 }
 
 const ItemRenderer: React.FC<EditProps & ItemRendererProps> = (props) => {
-  const { ItemComponent, property, onDelete, index, record } = props
-  // eslint-disable-next-line no-undef
-  const uniqueDraggableId = btoa(`${JSON.stringify(flat.get(record.params, property.path))}-${property.path}`)
+  const { ItemComponent, property, onDelete, index, record, isDraggable } = props
+  const uniqueDraggableId = window.btoa(`${JSON.stringify(flat.get(record.params, property.path))}-${property.path}`)
 
   return (
     <Draggable
       draggableId={uniqueDraggableId}
       index={index}
       key={uniqueDraggableId}
+      isDragDisabled={!isDraggable}
     >
       {(provided): JSX.Element => (
         <Box
@@ -109,6 +110,7 @@ const InputsInSection: React.FC<EditProps> = (props) => {
                 <ItemRenderer
                   {...props}
                   property={itemProperty}
+                  isDraggable={property.isDraggable}
                   key={itemProperty.path}
                   onDelete={removeItem}
                   index={i}
