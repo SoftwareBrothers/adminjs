@@ -31,7 +31,7 @@ export const NewAction: Action<RecordActionResponse> = {
     if (request.method === 'post') {
       let record = await resource.build(request.payload ? request.payload : {})
 
-      record = await record.save()
+      record = await record.create()
       const [populatedRecord] = await populator([record])
 
       // eslint-disable-next-line no-param-reassign
