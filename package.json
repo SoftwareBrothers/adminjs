@@ -94,7 +94,7 @@
     "babel-plugin-styled-components": "^1.11.1",
     "commander": "^5.1.0",
     "flat": "^4.1.0",
-    "i18next": "19.8.7",
+    "i18next": "^19.9.2",
     "lodash": "^4.17.11",
     "ora": "^4.0.2",
     "prop-types": "^15.7.2",
