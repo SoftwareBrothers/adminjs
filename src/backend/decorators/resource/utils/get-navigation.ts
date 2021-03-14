@@ -35,19 +35,29 @@ export const getNavigation = (
     ? options.navigation
     : options.parent
 
-  if (navigationOption === null) {
+  if (navigationOption === null || navigationOption === true) {
     return null
+  }
+
+  if (navigationOption === false) {
+    return {
+      name: null,
+      icon: '',
+      show: false,
+    }
   }
 
   if (navigationOption === undefined || typeof navigationOption === 'string') {
     return {
       name: navigationOption || database.databaseName(),
       icon: getIcon(database.databaseType()),
+      show: true,
     }
   }
   const { name, icon } = navigationOption
   return {
     name: name || null,
     icon: icon || getIcon(database.databaseType()),
+    show: true,
   }
 }
