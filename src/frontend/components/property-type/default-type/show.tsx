@@ -1,5 +1,5 @@
 import React, { ReactNode } from 'react'
-import { ValueGroup } from '@admin-bro/design-system'
+import { Box, Label } from '@admin-bro/design-system'
 
 import { ShowPropertyProps } from '../base-property-props'
 import DefaultPropertyValue from './default-property-value'
@@ -8,9 +8,10 @@ export default class Show extends React.PureComponent<ShowPropertyProps> {
   render(): ReactNode {
     const { property } = this.props
     return (
-      <ValueGroup label={property.label}>
+      <Box mb="xl">
+        {property.hideLabel ? null : <Label variant="light">{property.label}</Label>}
         <DefaultPropertyValue {...this.props} />
-      </ValueGroup>
+      </Box>
     )
   }
 }
