@@ -144,7 +144,7 @@ class PropertyDecorator {
    *
    * @returns {Array<{value: string, label: string}>}
    */
-  availableValues(): null | Array<{value: string | number; label: string}> {
+  availableValues(): null | Array<{value: string; label: string}> {
     if (this.options.availableValues) {
       return this.options.availableValues
     }

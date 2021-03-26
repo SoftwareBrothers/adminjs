@@ -54,7 +54,7 @@ export default interface PropertyOptions {
    * in the UI you will see select box instead of the input
    */
   availableValues?: Array<{
-    value: string | number;
+    value: string;
     label: string;
   }>;
 
