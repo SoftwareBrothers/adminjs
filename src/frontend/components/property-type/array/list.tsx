@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { useTranslation } from '../../../hooks/use-translation
+import { useTranslation } from '../../../hooks/use-translation'
 import { flat } from '../../../../utils'
 import { RecordJSON, ResourceJSON, PropertyJSON } from '../../../interfaces'
 import { ShowPropertyProps } from '../base-property-props'
