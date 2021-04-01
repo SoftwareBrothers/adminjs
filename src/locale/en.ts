@@ -18,6 +18,7 @@ const translations = {
     confirmRemovalMany: 'Confirm the removal of {{count}} record',
     confirmRemovalMany_plural: 'Confirm the removal of {{count}} records',
     logout: 'Log out',
+    login: 'Log in',
     seeTheDocumentation: 'See: <1>the documentation</1>',
     createFirstRecord: 'Create First Record',
   },
@@ -82,6 +83,7 @@ const translations = {
     needMoreSolutions_title: 'Need more advanced solutions?',
     needMoreSolutions_subtitle: 'We are here to provide you a beautiful UX/UI design and tailor made software based (not only) on AdminBro',
     invalidCredentials: 'Wrong email and/or password',
+    lengthProperty: 'Length',
   },
 }
 
