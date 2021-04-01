@@ -32,7 +32,7 @@ const translations = {
     loginWelcome: 'Welcome',
   },
   properties: {
-
+    length: 'Length',
   },
   resources: {
 
@@ -83,7 +83,6 @@ const translations = {
     needMoreSolutions_title: 'Need more advanced solutions?',
     needMoreSolutions_subtitle: 'We are here to provide you a beautiful UX/UI design and tailor made software based (not only) on AdminBro',
     invalidCredentials: 'Wrong email and/or password',
-    lengthProperty: 'Length',
   },
 }
 

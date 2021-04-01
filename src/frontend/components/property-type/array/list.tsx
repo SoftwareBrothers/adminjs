@@ -1,7 +1,6 @@
 import React from 'react'
 
-import { useTranslation } from 'src/frontend/hooks'
-
+import { useTranslation } from '../../../hooks/use-translation
 import { flat } from '../../../../utils'
 import { RecordJSON, ResourceJSON, PropertyJSON } from '../../../interfaces'
 import { ShowPropertyProps } from '../base-property-props'
@@ -15,10 +14,10 @@ interface Props {
 const List: React.FC<ShowPropertyProps> = (props) => {
   const { property, record } = props
   const values = flat.get(record.params, property.path) || []
-  const { translateMessage } = useTranslation()
+  const { translateProperty } = useTranslation()
 
   return (
-    <span>{`${translateMessage('lengthProperty')}: ${values.length}`}</span>
+    <span>{`${translateProperty('length')}: ${values.length}`}</span>
   )
 }
 
