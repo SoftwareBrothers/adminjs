@@ -23,7 +23,7 @@ https://admin-bro-example-app-staging.herokuapp.com/admin
 ## Getting Started
 
 - Check out the [documentation](https://adminbro.com/docs)
-- Try the [live demo](https://admin-bro-example-app.herokuapp.com/admin) as mentioned above
+- Try the [live demo](https://admin-bro-example-app-staging.herokuapp.com/admin) as mentioned above
 
 ## OpenSource SoftwareBrothers community
 
