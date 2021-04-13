@@ -1,9 +1,10 @@
-export type OverridableComponent = 'LoggedIn'
+export type OverridableComponent =
+  | 'LoggedIn'
   | 'NoRecords'
   | 'SidebarResourceSection'
   | 'SidebarFooter'
   | 'SidebarBranding'
-
+  | 'Sidebar';
 
 /**
  * Name of the components which can be overridden by AdminBro.bundle. It currently following
@@ -11,6 +12,7 @@ export type OverridableComponent = 'LoggedIn'
  *
  * - LoggedIn
  * - NoRecords
+ * - Sidebar
  * - SidebarResourceSection
  * - SidebarFooter
  * - SidebarBranding

@@ -50,4 +50,12 @@ describe('appendForceRefresh', () => {
 
     expect(newUrl).to.equal('http://example.com/resources/Test?other_param=test2&refresh=true')
   })
+
+  it('should ignore old search params if `ignore_params=true` is contained in the new url', () => {
+    const oldUrl = 'http://example.com/resources/Test?ignore_params=true'
+
+    const newUrl = appendForceRefresh(oldUrl, 'old_param=test2')
+
+    expect(newUrl).to.equal('http://example.com/resources/Test?refresh=true')
+  })
 })

@@ -169,6 +169,16 @@ class BaseProperty {
   }
 
   /**
+   * Returns true when given property has draggable elements.
+   * Only usable for array properties.
+   *
+   * @return  {boolean}
+   */
+  isDraggable(): boolean {
+    return false
+  }
+
+  /**
    * In case of `mixed` type returns all nested properties.
    *
    * @return  {Array<BaseProperty>} sub properties
