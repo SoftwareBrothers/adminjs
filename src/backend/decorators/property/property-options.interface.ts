@@ -42,6 +42,14 @@ export default interface PropertyOptions {
    * @new In version 3.3
    */
   isArray?: boolean;
+
+  /**
+   * Indicates if array elements should be draggable when editing.
+   * It is only usable if the property is an array.
+   * @new In version 3.5
+   */
+  isDraggable?: boolean;
+
   /**
    * position of the field in a list,
    * title field (isTitle) gets position -1 by default other

@@ -86,8 +86,8 @@ class ActionDecorator {
     context: ActionContext,
   ): Promise<any> {
     try {
-      this.canInvokeAction(context)
       const modifiedRequest = await this.invokeBeforeHook(request, context)
+      this.canInvokeAction(context)
       const res = await this.invokeHandler(modifiedRequest, response, context)
       return this.invokeAfterHook(res, modifiedRequest, context)
     } catch (error) {
