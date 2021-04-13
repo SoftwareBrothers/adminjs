@@ -61,6 +61,11 @@ export interface PropertyJSON {
    */
   isArray: boolean;
   /**
+   * Indicates if array elements should be draggable when editing.
+   * It is only usable if the property is an array.
+   */
+  isDraggable: boolean;
+  /**
    * Contain list of all sub properties.
    * This is the case for nested schemas in MongoDB.
    */

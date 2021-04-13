@@ -152,9 +152,13 @@ class ApiController {
     actionContext.record = record
     const jsonWithRecord = await actionContext.action.handler(request, response, actionContext)
 
-    if (jsonWithRecord && jsonWithRecord.record && jsonWithRecord.record.recordActions) {
+    const isValidRecord = !!(jsonWithRecord && jsonWithRecord.record && jsonWithRecord.record.recordActions)
+    const anErrorWasHandled = jsonWithRecord && jsonWithRecord.notice && jsonWithRecord.notice.type === 'error'
+
+    if (isValidRecord || anErrorWasHandled) {
       return jsonWithRecord
     }
+
     throw new ConfigurationError(
       'handler of a recordAction should return a RecordJSON object',
       'Action#handler',

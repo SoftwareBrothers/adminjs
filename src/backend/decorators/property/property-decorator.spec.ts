@@ -191,6 +191,7 @@ describe('PropertyDecorator', () => {
         'isDisabled',
         'subProperties',
         'isArray',
+        'isDraggable',
         'custom',
         'resourceId',
         'propertyPath',

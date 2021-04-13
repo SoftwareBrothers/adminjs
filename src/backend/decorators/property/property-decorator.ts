@@ -169,6 +169,13 @@ class PropertyDecorator {
     return this.property.isArray()
   }
 
+  isDraggable(): boolean {
+    if (typeof this.options.isDraggable !== 'undefined') {
+      return this.isArray() && !!this.options.isDraggable
+    }
+    return this.property.isDraggable()
+  }
+
   /**
    * Indicates if given property should be visible
    *
@@ -267,6 +274,7 @@ class PropertyDecorator {
         .filter(subProperty => !where || subProperty.isVisible(where))
         .map(subProperty => subProperty.toJSON(where)),
       isArray: this.isArray(),
+      isDraggable: this.isDraggable(),
       resourceId: this._resource.id(),
       isVirtual: this.isVirtual,
       props: this.options.props || {},
