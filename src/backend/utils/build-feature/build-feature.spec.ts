@@ -82,4 +82,19 @@ describe('mergeResourceOptions', function () {
       },
     })
   })
+
+  it('merges falsey options', function () {
+    const existingOptions = {
+      navigation: {
+        name: 'db',
+      },
+    }
+    const newOptions = {
+      navigation: false,
+    }
+
+    expect(mergeResourceOptions(existingOptions, newOptions)).to.deep.eq({
+      navigation: false,
+    })
+  })
 })

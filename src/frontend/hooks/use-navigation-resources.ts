@@ -42,7 +42,8 @@ export function useNavigationResources(
 
   // grouping resources into parents
   const map = resources
-    .filter(res => res.href) // first filter out resource which are not visible
+    // first filter out resources which are not visible
+    .filter(res => res.href && res.navigation?.show !== false)
     .reduce((memo, resource) => {
       // in case resource has the same name as parent we namespace it wit "resource-""
       const key = resource.navigation?.name || ['resource', resource.name].join('-')

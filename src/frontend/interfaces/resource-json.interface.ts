@@ -32,6 +32,10 @@ export interface ResourceJSON {
      * Parent icon
      */
     icon: string;
+    /**
+     * Visibility
+     */
+    show: boolean;
   } | null;
 
   /**

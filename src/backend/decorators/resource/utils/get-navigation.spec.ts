@@ -26,6 +26,7 @@ describe('.getNavigation', () => {
     expect(getNavigation(resourceOptions, defaultDatabase)).to.deep.eq({
       icon: mappedIcon,
       name: databaseName,
+      show: true,
     })
   })
 
@@ -35,6 +36,16 @@ describe('.getNavigation', () => {
     expect(getNavigation(resourceOptions, defaultDatabase)).to.be.null
   })
 
+  it('returns show false when options are set to false', () => {
+    resourceOptions.navigation = false
+
+    expect(getNavigation(resourceOptions, defaultDatabase)).to.deep.eq({
+      name: null,
+      icon: '',
+      show: false,
+    })
+  })
+
   it('returns parent with a default icon when options was set as a string', () => {
     const parentName = 'my navigation name'
     resourceOptions.navigation = parentName
@@ -42,6 +53,7 @@ describe('.getNavigation', () => {
     expect(getNavigation(resourceOptions, defaultDatabase)).to.deep.eq({
       icon: mappedIcon,
       name: parentName,
+      show: true,
     })
   })
 
@@ -52,6 +64,7 @@ describe('.getNavigation', () => {
     expect(getNavigation(resourceOptions, defaultDatabase)).to.deep.eq({
       icon,
       name: null,
+      show: true,
     })
   })
 
@@ -62,6 +75,7 @@ describe('.getNavigation', () => {
     expect(getNavigation(resourceOptions, defaultDatabase)).to.deep.eq({
       icon,
       name: null,
+      show: true,
     })
   })
 })
