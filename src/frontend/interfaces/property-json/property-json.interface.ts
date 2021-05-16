@@ -26,7 +26,7 @@ export interface PropertyJSON {
   /**
    * If property has restricted number of values
    */
-  availableValues: Array<{label: string; value: string | number}> | null;
+  availableValues: Array<{label: string; value: string}> | null;
   /**
    * Property uniq name
    */
