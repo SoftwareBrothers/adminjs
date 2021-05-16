@@ -38,6 +38,6 @@ describe('recordToFormData', function () {
       [propertyKey]: date,
     } })
 
-    expect(recordToFormData(record.params).get(propertyKey)).to.equal(date.toString())
+    expect(recordToFormData(record.params).get(propertyKey)).to.equal(date.toUTCString())
   })
 })
