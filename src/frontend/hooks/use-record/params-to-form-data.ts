@@ -38,7 +38,7 @@ function paramsToFormData(params: Record<string, any>): FormData {
       return formData.set(key, FORM_VALUE_EMPTY_OBJECT)
     }
     // Convert Date fields to UTC timezone
-    if (Date.parse(value)) {
+    if (typeof value === 'string' && value.search(/^([0-9]{4}-[0-9]{2}-[0-9]{2}\s[0-9]{2}:[0-9]{2})$/g) !== -1) {
       const date = new Date(value)
       return formData.set(key, date.toISOString())
     }
