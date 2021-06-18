@@ -8,7 +8,7 @@ import {
   RichText,
   QuillOptions,
   DefaultQuillToolbarOptions,
-} from '@admin-bro/design-system'
+} from '@adminjs/design-system'
 
 import { EditPropertyProps } from '../base-property-props'
 import { recordPropertyIsEqual } from '../record-property-is-equal'

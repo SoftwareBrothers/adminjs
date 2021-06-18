@@ -6,7 +6,7 @@ import { RecordJSON } from '../../../frontend/interfaces'
 import { CurrentAdmin } from '../../../current-admin.interface'
 
 /**
- * Representation of an particular ORM/ODM Record in given Resource in AdminBro
+ * Representation of an particular ORM/ODM Record in given Resource in AdminJS
  *
  * @category Base
  */

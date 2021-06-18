@@ -1,5 +1,5 @@
 import React, { ReactNode } from 'react'
-import { ValueGroup, Text, Box } from '@admin-bro/design-system'
+import { ValueGroup, Text, Box } from '@adminjs/design-system'
 
 import { EditPropertyProps } from '../base-property-props'
 

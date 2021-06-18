@@ -13,7 +13,7 @@ export type AddNotice = (notice: NoticeMessage) => any;
  * Hook which allows you to add notice message to the app.
  *
  * ```javascript
- * import { useNotice, Button } from 'admin-bro'
+ * import { useNotice, Button } from 'adminjs'
  *
  * const myComponent = () => {
  *   const sendNotice = useNotice()

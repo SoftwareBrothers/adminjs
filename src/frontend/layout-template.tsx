@@ -1,16 +1,16 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { combineStyles } from '@admin-bro/design-system'
+import { combineStyles } from '@adminjs/design-system'
 
 import ViewHelpers from '../backend/utils/view-helpers/view-helpers'
 import { initializeStore } from './store'
-import AdminBro from '../admin-bro'
+import AdminJS from '../adminjs'
 import { CurrentAdmin } from '../current-admin.interface'
 import { getFaviconFromBranding } from '../backend/utils/options-parser/options-parser'
 
 /**
  * Renders (SSR) html for given location
  *
- * @param {AdminBro} admin
+ * @param {AdminJS} admin
  * @param {Object} [currentAdmin]
  * @param {String} currentAdmin.email
  * @param {String} location='/'
@@ -18,7 +18,7 @@ import { getFaviconFromBranding } from '../backend/utils/options-parser/options-
  * @private
  */
 const html = async (
-  admin: AdminBro,
+  admin: AdminJS,
   currentAdmin?: CurrentAdmin,
   location = '/',
 ): Promise<string> => {
@@ -43,7 +43,7 @@ const html = async (
       <script>
         window.REDUX_STATE = ${JSON.stringify(reduxState)};
         window.THEME = ${JSON.stringify(theme)};
-        window.AdminBro = { Components: {} };
+        window.AdminJS = { Components: {} };
       </script>
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -62,7 +62,7 @@ const html = async (
       <div id="app" />
       <script>
         var app = document.getElementById( 'app' );
-        ReactDOM.render( AdminBro.Application, app );
+        ReactDOM.render( AdminJS.Application, app );
       </script>
       ${scripts.join('\n')}
     </body>

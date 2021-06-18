@@ -8,7 +8,7 @@ complicated than just simply removing its key.
 
 ```javascript
 
-import { flat } from 'admin-bro'
+import { flat } from 'adminjs'
 
 // do something with flat.removePath
 const paramsWithoutName = flat.removePath(otherParams, 'name.0')

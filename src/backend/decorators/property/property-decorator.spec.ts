@@ -3,13 +3,13 @@ import sinon, { SinonStubbedInstance } from 'sinon'
 
 import PropertyDecorator from './property-decorator'
 import BaseProperty from '../../adapters/property/base-property'
-import AdminBro from '../../../admin-bro'
+import AdminJS from '../../../adminjs'
 import ResourceDecorator from '../resource/resource-decorator'
 import { BaseResource } from '../../adapters'
 
 describe('PropertyDecorator', () => {
   const translatedProperty = 'translated property'
-  let stubbedAdmin: SinonStubbedInstance<AdminBro> & AdminBro
+  let stubbedAdmin: SinonStubbedInstance<AdminJS> & AdminJS
   let property: BaseProperty
   let args: {
     property: BaseProperty;
@@ -19,7 +19,7 @@ describe('PropertyDecorator', () => {
 
   beforeEach(() => {
     property = new BaseProperty({ path: 'name', type: 'string' })
-    stubbedAdmin = sinon.createStubInstance(AdminBro)
+    stubbedAdmin = sinon.createStubInstance(AdminJS)
     stubbedAdmin.translateProperty = sinon.stub().returns(translatedProperty) as any
     args = { property, admin: stubbedAdmin, resource: { id: () => 'someId' } as ResourceDecorator }
   })
@@ -67,7 +67,7 @@ describe('PropertyDecorator', () => {
       args.admin.findResource.returns(ReferenceResource)
     })
 
-    it('returns model from AdminBro for reference name in properties', () => {
+    it('returns model from AdminJS for reference name in properties', () => {
       new PropertyDecorator({ ...args, property }).reference()
 
       expect(args.admin.findResource).to.have.been.calledWith(rawReferenceValue)

@@ -13,17 +13,17 @@ export type SelectRecord = {
  *
  * Example
  * ```
- * // AdminBroOptions
- * const AdminBro = require('admin-bro')
+ * // AdminJSOptions
+ * const AdminJS = require('adminjs')
  * const ResourceModel = require('./resource-model')
- * const AdminBroOptions = {
+ * const AdminJSOptions = {
  *   resources: [{
  *     resource: ResourceModel
  *     options: {
  *       properties: {
  *         name: {
  *           components: {
- *             show: AdminBro.bundle('./my-react-component'),
+ *             show: AdminJS.bundle('./my-react-component'),
  *           },
  *         },
  *       },

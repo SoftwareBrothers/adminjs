@@ -3,7 +3,7 @@ The hook which allows you to get {@link ResourceJSON} object for a particular re
 ### Usage
 
 ```javascript
-import { useResource } from 'admin-bro'
+import { useResource } from 'adminjs'
 
 const MyRecordActionComponent = (props) => {
   const UsersResource = useResource('Users')

@@ -1,6 +1,6 @@
 
 import React, { ReactNode } from 'react'
-import { ValueGroup } from '@admin-bro/design-system'
+import { ValueGroup } from '@adminjs/design-system'
 
 import { EditPropertyProps } from '../base-property-props'
 

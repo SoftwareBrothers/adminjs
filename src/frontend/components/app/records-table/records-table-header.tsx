@@ -1,5 +1,5 @@
 import React from 'react'
-import { CheckBox, TableHead, TableRow, TableCell } from '@admin-bro/design-system'
+import { CheckBox, TableHead, TableRow, TableCell } from '@adminjs/design-system'
 
 import PropertyHeader from './property-header'
 import { BasePropertyJSON } from '../../../interfaces'
@@ -41,7 +41,7 @@ export type RecordsTableHeaderProps = {
  * Prints `thead` section for table with records.
  *
  * ```
- * import { RecordsTableHeader } from 'admin-bro'
+ * import { RecordsTableHeader } from 'adminjs'
  * ```
  *
  * @component

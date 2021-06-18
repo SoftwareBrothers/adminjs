@@ -1,4 +1,4 @@
-import { Assets } from '../../../admin-bro-options.interface'
+import { Assets } from '../../../adminjs-options.interface'
 
 export const ASSETS_INITIALIZE = 'ASSETS_INITIALIZE'
 

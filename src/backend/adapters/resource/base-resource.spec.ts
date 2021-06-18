@@ -6,7 +6,7 @@ import BaseResource from './base-resource'
 import NotImplementedError from '../../utils/errors/not-implemented-error'
 import Filter from '../../utils/filter/filter'
 import BaseRecord from '../record/base-record'
-import AdminBro from '../../../admin-bro'
+import AdminJS from '../../../adminjs'
 import ResourceDecorator from '../../decorators/resource/resource-decorator'
 
 chai.use(chaiAsPromised)
@@ -104,7 +104,7 @@ describe('BaseResource', function () {
   describe('#decorate', function () {
     it('returns new Decorator when resource has been decorated', function () {
       sinon.stub(resource, 'properties').returns([])
-      resource.assignDecorator(new AdminBro(), {})
+      resource.assignDecorator(new AdminJS(), {})
 
       expect(resource.decorate()).to.be.instanceOf(ResourceDecorator)
     })

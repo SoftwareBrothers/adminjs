@@ -14,7 +14,7 @@ import {
   DROP_NOTICE,
   ADD_NOTICE } from './actions'
 
-import { Assets, BrandingOptions, VersionProps } from '../../admin-bro-options.interface'
+import { Assets, BrandingOptions, VersionProps } from '../../adminjs-options.interface'
 import { PageJSON, ResourceJSON } from '../interfaces'
 import { DEFAULT_PATHS } from '../../constants'
 import { CurrentAdmin } from '../../current-admin.interface'

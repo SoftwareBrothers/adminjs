@@ -3,7 +3,7 @@ import { expect } from 'chai'
 
 import ResourceDecorator from './resource-decorator'
 import PropertyDecorator from '../property/property-decorator'
-import AdminBro, { defaultOptions } from '../../../admin-bro'
+import AdminJS, { defaultOptions } from '../../../adminjs'
 import resourceStub, { expectedResult } from '../../../../spec/backend/helpers/resource-stub'
 import BaseResource from '../../adapters/resource/base-resource'
 import BaseRecord from '../../adapters/record/base-record'
@@ -16,8 +16,8 @@ const currentAdmin = {
   otherValue: 'someOther-value',
 }
 
-const stubAdminBro = (): AdminBro => {
-  const stubbedAdmin = sinon.createStubInstance(AdminBro)
+const stubAdminJS = (): AdminJS => {
+  const stubbedAdmin = sinon.createStubInstance(AdminJS)
   return Object.assign(stubbedAdmin, {
     translateLabel: sinon.stub<any, string>().returns(translatedLabel),
     translateProperty: sinon.stub<any, string>().returns('translated property'),
@@ -28,7 +28,7 @@ const stubAdminBro = (): AdminBro => {
 }
 
 describe('ResourceDecorator', function () {
-  let stubbedAdmin: AdminBro
+  let stubbedAdmin: AdminJS
   let stubbedRecord: any
   let stubbedResource: BaseResource
   let args
@@ -39,7 +39,7 @@ describe('ResourceDecorator', function () {
     stubbedResource._decorated = {
       id: () => 'resourceId',
     } as ResourceDecorator
-    stubbedAdmin = stubAdminBro()
+    stubbedAdmin = stubAdminJS()
     args = {
       resource: stubbedResource, admin: stubbedAdmin,
     }

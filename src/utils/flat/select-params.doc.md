@@ -4,7 +4,7 @@ From all keys in `params` it selects only those passed in arguments.
 
 ```javascript
 
-import flat from '@admin-bro'
+import flat from '@adminjs'
 
 const params = {
   name: 'John',

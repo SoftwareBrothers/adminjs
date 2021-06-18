@@ -1,7 +1,7 @@
 import React, { FC, useState, useEffect } from 'react'
 import Select from 'react-select/async'
 import { withTheme, DefaultTheme } from 'styled-components'
-import { FormGroup, FormMessage, selectStyles } from '@admin-bro/design-system'
+import { FormGroup, FormMessage, selectStyles } from '@adminjs/design-system'
 
 import ApiClient from '../../../utils/api-client'
 import { EditPropertyProps, SelectRecord } from '../base-property-props'

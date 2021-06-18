@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react'
 
 import { useRouteMatch } from 'react-router'
-import { Loader } from '@admin-bro/design-system'
+import { Loader } from '@adminjs/design-system'
 
 import BaseActionComponent from '../app/base-action-component'
 import ApiClient from '../../utils/api-client'

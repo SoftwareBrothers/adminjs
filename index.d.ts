@@ -1,11 +1,11 @@
-import AdminBro from './types/src'
+import AdminJS from './types/src'
 
 import { ReduxState } from './types/src/frontend/store/store'
 
 export * from './types/src'
 
 export {
-  AdminBro as default,
+  AdminJS as default,
   ReduxState,
 }
 

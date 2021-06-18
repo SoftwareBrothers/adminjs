@@ -1,5 +1,5 @@
 import React from 'react'
-import { Badge } from '@admin-bro/design-system'
+import { Badge } from '@adminjs/design-system'
 
 import { ShowPropertyProps } from '../base-property-props'
 import { useTranslation } from '../../../hooks'

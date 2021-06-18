@@ -99,14 +99,14 @@ export type GetPageAPIParams = AxiosRequestConfig & {
 
 /**
  * Client which access the admin API.
- * Use it to fetch data from auto generated AdminBro API.
+ * Use it to fetch data from auto generated AdminJS API.
  *
  * In the backend it uses [axios](https://github.com/axios/axios) client
  * library.
  *
  * Usage:
  * ```javascript
- * import { ApiClient } from 'admin-bro'
+ * import { ApiClient } from 'adminjs'
  *
  * const api = new ApiClient()
  * // fetching all records
@@ -221,7 +221,7 @@ class ApiClient {
    *
    * @param   {AxiosRequestConfig}       options
    * @return  {Promise<AxiosResponse<any>>} response from the handler function defined in
-   *                                     {@link AdminBroOptions#dashboard}
+   *                                     {@link AdminJSOptions#dashboard}
    */
   async getDashboard(options: AxiosRequestConfig = {}): Promise<AxiosResponse<any>> {
     const response = await this.client.get('/api/dashboard', options)
@@ -234,7 +234,7 @@ class ApiClient {
    *
    * @param   {GetPageAPIParams}                options
    * @return  {Promise<AxiosResponse<any>>}     response from the handler of given page
-   *                                            defined in {@link AdminBroOptions#pages}
+   *                                            defined in {@link AdminJSOptions#pages}
    */
   async getPage(options: GetPageAPIParams): Promise<AxiosResponse<any>> {
     const { pageName, ...axiosParams } = options

@@ -1,5 +1,5 @@
 import React, { MouseEvent, useCallback } from 'react'
-import { Button, Section, FormGroup, FormMessage, Icon, Box } from '@admin-bro/design-system'
+import { Button, Section, FormGroup, FormMessage, Icon, Box } from '@adminjs/design-system'
 import { DragDropContext, Droppable, Draggable, DropResult } from 'react-beautiful-dnd'
 
 import AddNewItemButton from './add-new-item-translation'
