@@ -1,4 +1,4 @@
-import { VariantType } from '@admin-bro/design-system'
+import { VariantType } from '@adminjs/design-system'
 import { ParsedLayoutElement } from '../../../backend/utils/layout-element-parser'
 
 /**

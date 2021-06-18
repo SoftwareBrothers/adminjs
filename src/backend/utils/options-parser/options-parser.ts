@@ -1,7 +1,7 @@
 import merge from 'lodash/merge'
-import AdminBro from '../../../admin-bro'
+import AdminJS from '../../../adminjs'
 import { CurrentAdmin } from '../../../current-admin.interface'
-import { BrandingOptions, Assets } from '../../../admin-bro-options.interface'
+import { BrandingOptions, Assets } from '../../../adminjs-options.interface'
 import ViewHelpers from '../view-helpers/view-helpers'
 
 
@@ -15,7 +15,7 @@ const defaultAssets = {
 }
 
 export const getAssets = async (
-  admin: AdminBro,
+  admin: AdminJS,
   currentAdmin?: CurrentAdmin,
 ): Promise<Assets> => {
   const { assets } = admin.options || {}
@@ -27,7 +27,7 @@ export const getAssets = async (
 }
 
 export const getBranding = async (
-  admin: AdminBro,
+  admin: AdminJS,
   currentAdmin?: CurrentAdmin,
 ): Promise<BrandingOptions> => {
   const { branding } = admin.options

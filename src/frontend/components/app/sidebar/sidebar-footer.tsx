@@ -1,5 +1,5 @@
 import React from 'react'
-import { Box, SoftwareBrothers } from '@admin-bro/design-system'
+import { Box, SoftwareBrothers } from '@adminjs/design-system'
 
 import allowOverride from '../../../hoc/allow-override'
 

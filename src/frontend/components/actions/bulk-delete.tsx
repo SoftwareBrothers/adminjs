@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import {
   Table, TableBody, TableRow, TableCell, Text,
   DrawerContent, DrawerFooter, Button, MessageBox, Icon,
-} from '@admin-bro/design-system'
+} from '@adminjs/design-system'
 
 import { RouteComponentProps, withRouter } from 'react-router'
 import PropertyType from '../property-type'

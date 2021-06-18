@@ -25,7 +25,7 @@ export type TranslateFunction = (
  * your application.
  *
  * On the fronted they can be used with {@link useTranslation} hook. On the backend
- * they are injected to any {@link AdminBro} instance and {@link ActionContext}.
+ * they are injected to any {@link AdminJS} instance and {@link ActionContext}.
  */
 export interface TranslateFunctions {
   /**

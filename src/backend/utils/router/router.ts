@@ -8,7 +8,7 @@ import env from '../../bundler/bundler-env'
 const ASSETS_ROOT = `${__dirname}/../../../frontend/assets/`
 
 /**
- * Type representing the AdminBro.Router
+ * Type representing the AdminJS.Router
  * @memberof Router
  * @alias RouterType
  */
@@ -55,7 +55,7 @@ export const Router: RouterType = {
   }, {
     path: '/frontend/assets/design-system.bundle.js',
     src: path.join(
-      path.parse(require.resolve('@admin-bro/design-system')).dir,
+      path.parse(require.resolve('@adminjs/design-system')).dir,
       `../bundle.${env}.js`,
     ),
   }, {

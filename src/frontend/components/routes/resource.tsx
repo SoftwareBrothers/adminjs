@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { connect } from 'react-redux'
 import { useRouteMatch } from 'react-router-dom'
-import { Box } from '@admin-bro/design-system'
+import { Box } from '@adminjs/design-system'
 
 import { RouteComponentProps } from 'react-router'
 import BaseAction from '../app/base-action-component'

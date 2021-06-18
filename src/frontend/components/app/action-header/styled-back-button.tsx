@@ -5,7 +5,7 @@ import {
   ButtonCSS,
   ButtonProps,
   Icon,
-} from '@admin-bro/design-system'
+} from '@adminjs/design-system'
 
 import ViewHelpers from '../../../../backend/utils/view-helpers/view-helpers'
 

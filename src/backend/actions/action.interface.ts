@@ -1,5 +1,5 @@
-import { VariantType } from '@admin-bro/design-system'
-import AdminBro from '../../admin-bro'
+import { VariantType } from '@adminjs/design-system'
+import AdminJS from '../../adminjs'
 import { CurrentAdmin } from '../../current-admin.interface'
 import ViewHelpers from '../utils/view-helpers/view-helpers'
 import BaseRecord from '../adapters/record/base-record'
@@ -27,9 +27,9 @@ export type ActionType = 'resource' | 'record' | 'bulk'
  */
 export type ActionContext = TranslateFunctions & {
   /**
-   * current instance of AdminBro. You may use it to fetch other Resources by their names:
+   * current instance of AdminJS. You may use it to fetch other Resources by their names:
    */
-  _admin: AdminBro;
+  _admin: AdminJS;
   /**
    * Resource on which action has been invoked. Null for dashboard handler.
    */
@@ -64,13 +64,13 @@ export type ActionContext = TranslateFunctions & {
  * Context object passed to a PageHandler
  *
  * @alias PageContext
- * @memberof AdminBroOptions
+ * @memberof AdminJSOptions
  */
 export type PageContext = {
   /**
-   * current instance of AdminBro. You may use it to fetch other Resources by their names:
+   * current instance of AdminJS. You may use it to fetch other Resources by their names:
    */
-  _admin: AdminBro;
+  _admin: AdminJS;
     /**
    * Currently logged in admin
    */
@@ -249,7 +249,7 @@ export type BuildInActions =
 
 /**
  * @classdesc
- * Interface representing an Action in AdminBro.
+ * Interface representing an Action in AdminJS.
  * Look at {@tutorial actions} to see where you can use this interface.
  *
  * #### Example Action
@@ -260,7 +260,7 @@ export type BuildInActions =
  *   icon: 'View',
  *   isVisible: true,
  *   handler: async () => {...},
- *   component: AdminBro.bundle('./my-action-component'),
+ *   component: AdminJS.bundle('./my-action-component'),
  * }
  * ```
  *
@@ -270,7 +270,7 @@ export type BuildInActions =
  * 2. Record action, invoked for an record in a resource
  * 3. Bulk action, invoked for an set of records in a resource
  *
- * ...and there are 7 actions predefined in AdminBro
+ * ...and there are 7 actions predefined in AdminJS
  *
  * 1. {@link module:NewAction new} (resource action) - create new records in a resource
  * 2. {@link module:ListAction list} (resource action) - list all records within a resource
@@ -284,7 +284,7 @@ export type BuildInActions =
  * {@link ResourceOptions}
  *
  * ```javascript
- * const AdminBroOptions = {
+ * const AdminJSOptions = {
  *   resources: [{
  *     resource: User,
  *     options: {
@@ -305,7 +305,7 @@ export type BuildInActions =
  *   }]
  * }
  *
- * const { ACTIONS } = require('admin-bro')
+ * const { ACTIONS } = require('adminjs')
  * // example of adding after filter for 'show' action for all resources
  * ACTIONS.show.after = async () => {...}
  * ```
@@ -340,7 +340,7 @@ export interface Action <T extends ActionResponse> {
    * creating cars. We can do this like this:
    *
    * ```javascript
-   * new AdminBro({ resources: [{
+   * new AdminJS({ resources: [{
    *   resource: User,
    *   options: { actions: { list: { isVisible: false } } }
    * }]})
@@ -370,7 +370,7 @@ export interface Action <T extends ActionResponse> {
    *   )
    * }
    *
-   * new AdminBro({ resources: [{
+   * new AdminJS({ resources: [{
    *   resource: Car,
    *   options: { actions: { edit: { isAccessible: canEditCars } } }
    * }]})
@@ -386,7 +386,7 @@ export interface Action <T extends ActionResponse> {
    * Example of creating new resource action with filter
    *
    * ```javascript
-   * new AdminBro({ resources: [{
+   * new AdminJS({ resources: [{
    *   resource: Car,
    *   options: { actions: {
    *     newAction: {
@@ -411,7 +411,7 @@ export interface Action <T extends ActionResponse> {
    * because what you put here is passed down to it.
    *
    * ```javascript
-   * new AdminBro({ resources: [{
+   * new AdminJS({ resources: [{
    *   resource: Car,
    *   options: { actions: { edit: { icon: 'Add' } } },
    * }]})
@@ -422,7 +422,7 @@ export interface Action <T extends ActionResponse> {
    * guard message - user will have to confirm it before executing an action.
    *
    * ```javascript
-   * new AdminBro({ resources: [{
+   * new AdminJS({ resources: [{
    *   resource: Car,
    *   options: { actions: {
    *     delete: {
@@ -434,12 +434,12 @@ export interface Action <T extends ActionResponse> {
    *
    * What you enter there goes to {@link TranslateFunctions#translateMessage} function,
    * so in order to define the actual message you will have to specify its
-   * translation in {@link AdminBroOptions.Locale}
+   * translation in {@link AdminJSOptions.Locale}
    */
   guard?: string;
   /**
    * Component which will be used to render the action. To pass the component
-   * use {@link AdminBro.bundle} method.
+   * use {@link AdminJS.bundle} method.
    *
    * Action components accepts {@link ActionProps} and are rendered by the
    * {@link BaseActionComponent}
@@ -543,7 +543,7 @@ export interface Action <T extends ActionResponse> {
    * }
    *
    * // and attaching this function to actions for all resources
-   * const { ACTIONS } = require('admin-bro')
+   * const { ACTIONS } = require('adminjs')
    *
    * ACTIONS.edit.after = createLog
    * ACTIONS.delete.after = createLog

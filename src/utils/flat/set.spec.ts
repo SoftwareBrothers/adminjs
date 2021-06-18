@@ -112,7 +112,7 @@ describe('module:flat.set', () => {
 
   context('mixed type was inside and should be updated', () => {
     const meta = {
-      position: 'adminBroCEO',
+      position: 'adminJSCEO',
       workingHours: '6:00-21:00',
     }
 

@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
-import { combineStyles } from '@admin-bro/design-system'
+import { combineStyles } from '@adminjs/design-system'
 import i18n from 'i18next'
 import React from 'react'
 import { renderToString } from 'react-dom/server'
@@ -7,7 +7,7 @@ import { I18nextProvider } from 'react-i18next'
 import { Provider } from 'react-redux'
 import { Store } from 'redux'
 import { ServerStyleSheet, StyleSheetManager, ThemeProvider } from 'styled-components'
-import AdminBro from '../admin-bro'
+import AdminJS from '../adminjs'
 import { getAssets, getBranding, getFaviconFromBranding } from '../backend/utils/options-parser/options-parser'
 import ViewHelpers from '../backend/utils/view-helpers/view-helpers'
 import LoginComponent from './components/login'
@@ -30,7 +30,7 @@ type LoginTemplateAttributes = {
 }
 
 const html = async (
-  admin: AdminBro,
+  admin: AdminJS,
   { action, errorMessage }: LoginTemplateAttributes,
 ): Promise<string> => {
   const h = new ViewHelpers({ options: admin.options })

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Section, FormGroup, FormMessage } from '@admin-bro/design-system'
+import { Section, FormGroup, FormMessage } from '@adminjs/design-system'
 
 import { EditPropertyProps } from '../base-property-props'
 import { PropertyLabel } from '../utils/property-label'

@@ -5,7 +5,7 @@ import sinon from 'sinon'
 import BulkDeleteAction from './bulk-delete-action'
 import { ActionContext, ActionRequest, ActionHandler, BulkActionResponse } from '../action.interface'
 import BaseRecord from '../../adapters/record/base-record'
-import AdminBro from '../../../admin-bro'
+import AdminJS from '../../../adminjs'
 import ViewHelpers from '../../utils/view-helpers/view-helpers'
 import BaseResource from '../../adapters/resource/base-resource'
 import ActionDecorator from '../../decorators/action/action-decorator'
@@ -28,7 +28,7 @@ describe('BulkDeleteAction', function () {
 
     beforeEach(async function () {
       data = {
-        _admin: sinon.createStubInstance(AdminBro),
+        _admin: sinon.createStubInstance(AdminJS),
         translateMessage: sinon.stub<any, string>().returns('translatedMessage'),
         h: sinon.createStubInstance(ViewHelpers),
         resource: sinon.createStubInstance(BaseResource),

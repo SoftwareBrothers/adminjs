@@ -39,15 +39,15 @@ export type HrefFunction = (context: HrefContext) => string
  * ### Usage with TypeScript
  *
  * ```typescript
- * import { ResourceOptions } from 'admin-bro'
+ * import { ResourceOptions } from 'adminjs'
  * ```
  */
 export interface ResourceOptions {
   /**
    * Unique id of a resource.
    *
-   * So let's suppose that you connected 2 databases to AdminBro. Both of them have
-   * the same collection: 'users'. In this case AdminBro wont be able to distinguish them.
+   * So let's suppose that you connected 2 databases to AdminJS. Both of them have
+   * the same collection: 'users'. In this case AdminJS wont be able to distinguish them.
    * In this case changing Id of one of the resources helps to solve this issue.
    */
   id?: string;

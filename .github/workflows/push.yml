@@ -164,9 +164,6 @@ jobs:
     needs: build
     if: |
       contains(github.ref, 'refs/heads/next')
-      || contains(github.ref, 'refs/heads/master')
-      || contains(github.ref, 'refs/heads/next-major')
-      || contains(github.ref, 'refs/heads/beta')
     services:
       mongo:
         image: mongo:3.4.23
@@ -218,38 +215,38 @@ jobs:
         with:
           # just perform install
           runTests: false
-          working-directory: packages/admin-bro-e2e
-      - run: yarn link admin-bro
-        working-directory: packages/admin-bro-e2e
+          working-directory: packages/adminjs-e2e
+      - run: yarn link adminjs
+        working-directory: packages/adminjs-e2e
       - run: yarn run sequelize db:create
-        working-directory: packages/admin-bro-e2e
+        working-directory: packages/adminjs-e2e
         env:
           POSTGRES_PASSWORD: postgres
           POSTGRES_USER: postgres
-          POSTGRES_DATABASE: adminbro_e2e_development
+          POSTGRES_DATABASE: adminjs_e2e_development
       - run: yarn run sequelize db:migrate
-        working-directory: packages/admin-bro-e2e
+        working-directory: packages/adminjs-e2e
         env:
           POSTGRES_PASSWORD: postgres
           POSTGRES_USER: postgres
-          POSTGRES_DATABASE: adminbro_e2e_development
+          POSTGRES_DATABASE: adminjs_e2e_development
       - run: node bin/setup-db.js
-        working-directory: packages/admin-bro-e2e
+        working-directory: packages/adminjs-e2e
       - uses: cypress-io/github-action@v2
         with:
           install: false
-          working-directory: packages/admin-bro-e2e
+          working-directory: packages/adminjs-e2e
           start: yarn start
       - uses: actions/upload-artifact@v1
         if: failure()
         with:
           name: cypress-screenshots
-          path: packages/admin-bro-e2e/cypress/screenshots
+          path: packages/adminjs-e2e/cypress/screenshots
       - uses: actions/upload-artifact@v1
         if: always()
         with:
           name: cypress-videos
-          path: packages/admin-bro-e2e/cypress/videos
+          path: packages/adminjs-e2e/cypress/videos
 
   publish:
     name: Publish

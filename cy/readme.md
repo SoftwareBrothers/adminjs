@@ -18,7 +18,7 @@
 
 #### Preconditions
 
-*   Open a login page in a browser([https://admin-bro-example-app-staging.herokuapp.com/admin/login](https://admin-bro-example-app-staging.herokuapp.com/admin/login))
+*   Open a login page in a browser([https://demo.adminjs.co/admin](https://demo.adminjs.co/admin))
 *   User is not already logged and has got an active account
 
 <table>

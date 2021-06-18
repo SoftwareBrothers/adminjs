@@ -1,5 +1,5 @@
 import React from 'react'
-import { CurrentUserNav, Box, CurrentUserNavProps } from '@admin-bro/design-system'
+import { CurrentUserNav, Box, CurrentUserNavProps } from '@adminjs/design-system'
 
 import { CurrentAdmin } from '../../../current-admin.interface'
 import { useTranslation } from '../../hooks'

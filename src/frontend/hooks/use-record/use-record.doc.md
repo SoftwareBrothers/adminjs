@@ -8,7 +8,7 @@ Let say you have a record action defined like this:
 actions: {
   comment: {
     actionType: 'record',
-    component: AdminBro.bundle('./comment-component.tsx'),
+    component: AdminJS.bundle('./comment-component.tsx'),
   }
 },
 properties: {
@@ -25,7 +25,7 @@ You can use `useRecord` hook to do all of this.
 This is how `CommentComponent` from the previous example could look like:
 
 ```javascript
-import { BasePropertyComponent, useRecord, Box, useTranslation } from '@admin-bro/design-system'
+import { BasePropertyComponent, useRecord, Box, useTranslation } from '@adminjs/design-system'
 
 const MyRecordActionComponent = (props) => {
   const { record: initialRecord, resource, action } = props
@@ -70,7 +70,7 @@ In the first step:
 const { record, handleChange, submit } = useRecord(initialRecord, resource.id)
 ```
 
-`useRecord` has been initialized with the initial state returned by AdminBro. It was possible because
+`useRecord` has been initialized with the initial state returned by AdminJS. It was possible because
 record actions have the current record in the props.
 The next argument was the `resource.id` which tells useRecord where it should send API requests.
 

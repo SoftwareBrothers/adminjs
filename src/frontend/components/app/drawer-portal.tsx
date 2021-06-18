@@ -1,6 +1,6 @@
 import React, { useEffect, ReactNode, useState } from 'react'
 import { createPortal, render } from 'react-dom'
-import { Drawer, DEFAULT_DRAWER_WIDTH } from '@admin-bro/design-system'
+import { Drawer, DEFAULT_DRAWER_WIDTH } from '@adminjs/design-system'
 import { ThemeProvider } from 'styled-components'
 
 /**
@@ -29,7 +29,7 @@ const DRAWER_PORTAL_ID = 'drawerPortal'
  * ### Usage
  *
  * ```
- * import { DrawerPortal } from 'admin-bro'
+ * import { DrawerPortal } from 'adminjs'
  * ```
  *
  * @component

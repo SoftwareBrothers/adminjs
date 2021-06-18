@@ -6,10 +6,10 @@ import { SupportedDatabasesType } from './supported-databases.type'
 import { BaseProperty, BaseRecord, ParamsType } from '..'
 import { NotImplementedError, Filter } from '../../utils'
 import { ResourceOptions, ResourceDecorator } from '../../decorators'
-import AdminBro from '../../../admin-bro'
+import AdminJS from '../../../adminjs'
 
 /**
- * Representation of a ORM Resource in AdminBro. Visually resource is a list item in the sidebar.
+ * Representation of a ORM Resource in AdminJS. Visually resource is a list item in the sidebar.
  * Each resource has many records and many properties.
  *
  * Analogy is REST resource.
@@ -44,7 +44,7 @@ class BaseResource {
    *
    * For one time Admin Resource creation - it is not needed.
    *
-   * @param  {any}  rawResource resource provided in AdminBroOptions#resources array
+   * @param  {any}  rawResource resource provided in AdminJSOptions#resources array
    * @return {Boolean}          if given adapter supports this resource - returns true
    * @abstract
    */
@@ -83,7 +83,7 @@ class BaseResource {
   }
 
   /**
-   * Each resource has to have uniq id which will be put to an URL of AdminBro routes.
+   * Each resource has to have uniq id which will be put to an URL of AdminJS routes.
    * For instance in {@link Router} path for the `new` form is `/resources/{resourceId}/new`
    * @return {String} uniq resource id
    * @abstract
@@ -233,11 +233,11 @@ class BaseResource {
    * resource.decorate() method
    *
    * @param  {BaseDecorator}  Decorator
-   * @param  {AdminBro}       admin         current instance of AdminBro
+   * @param  {AdminJS}       admin         current instance of AdminJS
    * @param  {ResourceOptions} [options]
    * @private
    */
-  assignDecorator(admin: AdminBro, options: ResourceOptions = {}): void {
+  assignDecorator(admin: AdminJS, options: ResourceOptions = {}): void {
     this._decorated = new ResourceDecorator({ resource: this, admin, options })
   }
 

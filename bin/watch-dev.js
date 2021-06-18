@@ -14,7 +14,7 @@ const once = !!process.env.ONCE
 
 async function build() {
   return bundler({
-    name: 'AdminBro',
+    name: 'AdminJS',
     input: `${__dirname}/../src/frontend/bundle-entry.jsx`,
     file: `${__dirname}/../src/frontend/assets/scripts/app-bundle.${env}.js`,
     minify: env === 'production',

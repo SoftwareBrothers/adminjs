@@ -12,17 +12,17 @@ import {
   initializeVersions,
 } from './actions'
 
-import AdminBro from '../../admin-bro'
+import AdminJS from '../../adminjs'
 import { CurrentAdmin } from '../../current-admin.interface'
 import pagesToStore from './pages-to-store'
 import { getBranding, getAssets } from '../../backend/utils/options-parser/options-parser'
 
 export const initializeStore = async (
-  admin: AdminBro,
+  admin: AdminJS,
   currentAdmin?: CurrentAdmin,
 ): Promise<Store<ReduxState>> => {
   const store: Store<ReduxState> = createStore()
-  const AdminClass: typeof AdminBro = admin.constructor as typeof AdminBro
+  const AdminClass: typeof AdminJS = admin.constructor as typeof AdminJS
   const adminVersion = AdminClass.VERSION
 
   store.dispatch(initializeLocale(admin.locale))

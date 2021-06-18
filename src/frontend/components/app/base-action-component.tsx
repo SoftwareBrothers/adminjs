@@ -1,6 +1,6 @@
 import React from 'react'
 import { Trans } from 'react-i18next'
-import { MessageBox, Link } from '@admin-bro/design-system'
+import { MessageBox, Link } from '@adminjs/design-system'
 
 import ErrorBoundary from './error-boundary'
 import { actions } from '../actions'
@@ -8,7 +8,7 @@ import { DOCS } from '../../../constants'
 import { ActionProps } from '../actions/action.props'
 import { useTranslation } from '../../hooks'
 
-declare const AdminBro: {
+declare const AdminJS: {
   UserComponents: Array<string>;
 }
 
@@ -19,8 +19,8 @@ declare const AdminBro: {
  *
  * Example of creating your own actions:
  * ```
- * // AdminBro options
- * const AdminBroOptions = {
+ * // AdminJS options
+ * const AdminJSOptions = {
  *   resources: [
  *      resource,
  *      options: {
@@ -30,7 +30,7 @@ declare const AdminBro: {
  *             icon: 'Add',
  *             inVisible: (resource, record) => record.param('email') !== '',
  *             actionType: 'record',
- *             component: AdminBro.bundle('./my-new-action'),
+ *             component: AdminJS.bundle('./my-new-action'),
  *             handler: (request, response, data) => {
  *               return {
  *                  ...
@@ -45,7 +45,7 @@ declare const AdminBro: {
  *
  * ```
  * // ./my-new-action.jsx
- * import { Box } from 'admin-bro'
+ * import { Box } from 'adminjs'
  *
  * const MyNewAction = (props) => {
  *   const { resource, action, record } = props
@@ -69,7 +69,7 @@ export const BaseActionComponent: React.FC<ActionProps> = (props) => {
   let Action = actions[action.name]
 
   if (action.component) {
-    Action = AdminBro.UserComponents[action.component]
+    Action = AdminJS.UserComponents[action.component]
   }
 
   if (Action) {

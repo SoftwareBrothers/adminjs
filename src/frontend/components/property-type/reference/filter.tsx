@@ -1,7 +1,7 @@
 import React, { ReactNode } from 'react'
 import Select from 'react-select/async'
 import { ThemeProps, DefaultTheme, withTheme } from 'styled-components'
-import { FormGroup, Label, filterStyles } from '@admin-bro/design-system'
+import { FormGroup, Label, filterStyles } from '@adminjs/design-system'
 
 import ApiClient from '../../../utils/api-client'
 import { FilterPropertyProps, SelectRecord } from '../base-property-props'

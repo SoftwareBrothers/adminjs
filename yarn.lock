@@ -2,12 +2,13 @@
 # yarn lockfile v1
 
 
-"@admin-bro/design-system@^1.7.3":
-  version "1.7.3"
-  resolved "https://registry.yarnpkg.com/@admin-bro/design-system/-/design-system-1.7.3.tgz#ca4f20819f71f43ec133bbe56929111b72effc8a"
-  integrity sha512-XEPV8gUG0Kob3v5K93QAQs7wVV13V0oWCxn4x0ZSKwYNq+5iV+sYVF27NnXMf+Qqlu3VD3JuQAEVEJ1V5mQAHw==
+"@adminjs/design-system@^2.0.0":
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/@adminjs/design-system/-/design-system-2.0.0.tgz#3380910ffa2c8dc7418476e83474f586896104e2"
+  integrity sha512-nVObZNsFtU9k/qLw6AylLTwg9gR0aOpxImgDZf21crKCz7s/9u+N2BVozr3SWU94m90nz/VEL/3mOqRGQ2uk2w==
   dependencies:
     "@carbon/icons-react" "^10.14.0"
+    date-fns "2.15.0"
     jw-paginate "^1.0.4"
     lodash "^4.17.20"
     polished "^3.6.5"
@@ -4020,6 +4021,11 @@ data-urls@^1.1.0:
     abab "^2.0.0"
     whatwg-mimetype "^2.2.0"
     whatwg-url "^7.0.0"
+
+date-fns@2.15.0:
+  version "2.15.0"
+  resolved "https://registry.yarnpkg.com/date-fns/-/date-fns-2.15.0.tgz#424de6b3778e4e69d3ff27046ec136af58ae5d5f"
+  integrity sha512-ZCPzAMJZn3rNUvvQIMlXhDr4A+Ar07eLeGsGREoWU19a3Pqf5oYa+ccd+B3F6XVtQY6HANMFdOQ8A+ipFnvJdQ==
 
 date-fns@^2.0.1:
   version "2.16.1"

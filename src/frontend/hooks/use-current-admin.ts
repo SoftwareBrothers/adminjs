@@ -15,7 +15,7 @@ export type UseCurrentAdminResponse = [
  * ### Usage
  *
  * ```javascript
- * import { useCurrentAdmin } from 'admin-bro'
+ * import { useCurrentAdmin } from 'adminjs'
  *
  * const myComponent = () => {
  *   const [currentAdmin, setCurrentAdmin] = useCurrentAdmin()
