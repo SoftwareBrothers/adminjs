@@ -53,7 +53,7 @@ const globals = {
   'react-redux': 'ReactRedux',
   'react-router': 'ReactRouter',
   'react-router-dom': 'ReactRouterDOM',
-  'adminjs': 'AdminJS',
+  adminJs: 'AdminJS',
   '@adminjs/design-system': 'AdminJSDesignSystem',
   'adminjs/property-types': 'AdminJS.PropertyTypes',
   'adminjs/types': 'AdminJS.types',
