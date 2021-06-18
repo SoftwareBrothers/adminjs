@@ -259,7 +259,6 @@ jobs:
         || contains(github.ref, 'refs/heads/beta')
       )
     needs:
-      - cypress
       - test
       - build
     services:
