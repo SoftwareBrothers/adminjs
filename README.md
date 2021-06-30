@@ -19,7 +19,7 @@ https://adminjs-example-app-staging.herokuapp.com/admin
 
 ## Getting Started
 
-- Check out the [documentation](https://AdminJS.com/docs)
+- Check out the [documentation](https://adminbro.com/docs.html)
 - Try the [live demo](https://adminjs-example-app-staging.herokuapp.com/admin) as mentioned above
 
 ## OpenSource SoftwareBrothers community
