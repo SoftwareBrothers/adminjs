@@ -15,16 +15,16 @@ Check out the example application with mongodb and postgres models here:
 - login: `test@example.com`
 - password: `password`
 
-https://adminjs-example-app-staging.herokuapp.com/admin
+https://demo.adminjs.co/admin
 
 ## Getting Started
 
-- Check out the [documentation](https://AdminJS.com/docs)
-- Try the [live demo](https://adminjs-example-app-staging.herokuapp.com/admin) as mentioned above
+- Check out the [documentation](https://adminjs.co)
+- Try the [live demo](https://demo.adminjs.co/admin) as mentioned above
 
 ## OpenSource SoftwareBrothers community
 
-- [Join the community](https://join.slack.com/t/AdminJS/shared_invite/zt-djsqxxpz-_YCS8UMtQ9Ade6DPuLR7Zw) to get help and be inspired.
+- [Join the community](https://join.slack.com/t/AdminBro/shared_invite/zt-djsqxxpz-_YCS8UMtQ9Ade6DPuLR7Zw) to get help and be inspired.
 - subscribe to our [newsletter](http://opensource.softwarebrothers.co)
 
 # What kind of problems it solves
