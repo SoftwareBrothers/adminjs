@@ -1,7 +1,7 @@
 import React, { ReactNode } from 'react'
 import Select from 'react-select'
 import { withTheme, ThemeProps, DefaultTheme } from 'styled-components'
-import { FormGroup, Label, Input, filterStyles } from '@admin-bro/design-system'
+import { FormGroup, Label, Input, filterStyles } from '@adminjs/design-system'
 
 import { FilterPropertyProps } from '../base-property-props'
 

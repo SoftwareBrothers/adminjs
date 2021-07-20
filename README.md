@@ -1,9 +1,6 @@
-# Admin Bro
+# AdminJS
 
-[![codecov](https://codecov.io/gh/SoftwareBrothers/admin-bro/branch/master/graph/badge.svg)](https://codecov.io/gh/SoftwareBrothers/admin-bro)
-[![Build Status](https://travis-ci.com/SoftwareBrothers/admin-bro.svg?branch=master)](https://travis-ci.com/SoftwareBrothers/admin-bro)
-
-[AdminBro](https://softwarebrothers.github.io/admin-bro-dev/) is An automatic admin interface which can be plugged into your application. You, as a developer, provide database models (like posts, comments, stores, products or whatever else your application uses), and AdminBro generates UI which allows you (or other trusted users) to manage content.
+[AdminJS](https://softwarebrothers.github.io/adminjs-dev/) is An automatic admin interface which can be plugged into your application. You, as a developer, provide database models (like posts, comments, stores, products or whatever else your application uses), and AdminJS generates UI which allows you (or other trusted users) to manage content.
 
 Inspired by: [django admin](https://docs.djangoproject.com), [rails admin](https://github.com/sferik/rails_admin) and [active admin](https://activeadmin.info/).
 
@@ -18,16 +15,16 @@ Check out the example application with mongodb and postgres models here:
 - login: `test@example.com`
 - password: `password`
 
-https://admin-bro-example-app-staging.herokuapp.com/admin
+https://demo.adminjs.co/admin
 
 ## Getting Started
 
-- Check out the [documentation](https://adminbro.com/docs)
-- Try the [live demo](https://admin-bro-example-app-staging.herokuapp.com/admin) as mentioned above
+- Check out the [documentation](https://adminjs.co)
+- Try the [live demo](https://demo.adminjs.co/admin) as mentioned above
 
 ## OpenSource SoftwareBrothers community
 
-- [Join the community](https://join.slack.com/t/adminbro/shared_invite/zt-djsqxxpz-_YCS8UMtQ9Ade6DPuLR7Zw) to get help and be inspired.
+- [Join the community](https://join.slack.com/t/AdminBro/shared_invite/zt-djsqxxpz-_YCS8UMtQ9Ade6DPuLR7Zw) to get help and be inspired.
 - subscribe to our [newsletter](http://opensource.softwarebrothers.co)
 
 # What kind of problems it solves
@@ -41,7 +38,7 @@ Everything works fine, but now you would like to:
 * build custom report pages,
 * allow other team members (not necessary programmers) to see what is going on in the application.
 
-And all these cases can be solved by AdminBro. By adding couple of lines of code you have a running admin interface.
+And all these cases can be solved by AdminJS. By adding couple of lines of code you have a running admin interface.
 
 # Features
 
@@ -53,13 +50,13 @@ And all these cases can be solved by AdminBro. By adding couple of lines of code
 
 ## Contribute
 
-If you would like work on an admin-bro and develop new features - take a look at our dev repository: https://github.com/SoftwareBrothers/admin-bro-dev
+If you would like work on an adminjs and develop new features - take a look at our dev repository: https://github.com/SoftwareBrothers/adminjs-dev
 
-You can find there instructions on how to run admin-bro for development.
+You can find there instructions on how to run adminjs for development.
 
 ## License
 
-AdminBro is Copyright © 2018 SoftwareBrothers.co. It is free software, and may be redistributed under the terms specified in the [LICENSE](LICENSE.md) file.
+AdminJS is Copyright © 2021 SoftwareBrothers.co. It is free software, and may be redistributed under the terms specified in the [LICENSE](LICENSE.md) file.
 
 ## About SoftwareBrothers.co
 

@@ -4,7 +4,7 @@ import {
   NavigationProps,
   NavigationElementProps,
   NavigationElementWithChildrenProps,
-} from '@admin-bro/design-system'
+} from '@adminjs/design-system'
 import { useMemo } from 'react'
 import { ResourceJSON } from '../interfaces'
 import useLocalStorage from './use-local-storage/use-local-storage'

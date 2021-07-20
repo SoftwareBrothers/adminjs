@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { Label } from '@admin-bro/design-system'
+import { Label } from '@adminjs/design-system'
 
 import ViewHelpers from '../../../../backend/utils/view-helpers/view-helpers'
 import { EditPropertyProps } from '../base-property-props'

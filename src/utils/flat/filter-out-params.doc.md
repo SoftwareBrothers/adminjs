@@ -4,7 +4,7 @@ From all keys in `params` it removes this passed in an argument.
 
 ```javascript
 
-import flat from '@admin-bro'
+import flat from '@adminjs'
 
 const params = {
   name: 'John',

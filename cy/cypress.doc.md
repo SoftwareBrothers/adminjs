@@ -1,6 +1,6 @@
 ### Cypress helpers
 
-This module gathers helpers which can be used when you E2E test your AdminBro dashboard with
+This module gathers helpers which can be used when you E2E test your AdminJS dashboard with
 {@link https://www.cypress.io/} as we do.
 
 ### Usage
@@ -9,14 +9,14 @@ First, you have to import helpers to your cypress project. You can do this in:
 
 `/support/index.js` or `/support/commands.js`
 ```javascript
-require('admin-bro/cy')
+require('adminjs/cy')
 ```
 
 and now you can use our helpers
 
 ```javascript
 /// <reference types="cypress" />
-/// <reference types="admin-bro/cy" />
+/// <reference types="adminjs/cy" />
 
 context('resources/Company/actions/new', () => {
   before(() => {

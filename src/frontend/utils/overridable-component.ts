@@ -7,7 +7,7 @@ export type OverridableComponent =
   | 'Sidebar';
 
 /**
- * Name of the components which can be overridden by AdminBro.bundle. It currently following
+ * Name of the components which can be overridden by AdminJS.bundle. It currently following
  * components can be override:
  *
  * - LoggedIn
@@ -17,7 +17,7 @@ export type OverridableComponent =
  * - SidebarFooter
  * - SidebarBranding
  * @new in version 3.3
- * @memberof AdminBro
+ * @memberof AdminJS
  * @alias OverridableComponent
  * @typedef {Union} OverridableComponent
  */

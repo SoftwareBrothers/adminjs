@@ -12,9 +12,9 @@ A clear and concise description of what the bug is.
 
 **Installed libraries and their versions**
 
-* admin-bro@2.0.1
-* admin-bro-expressjs@2.0.0
-* admin-bro-mongoose@1.4.0
+* adminjs@4.0.1
+* @adminjs/express@2.0.0
+* @adminjs/mongoose@1.4.0
 ... mongo, express (whatever you think is relevant)
 
 **To Reproduce**
@@ -30,8 +30,8 @@ A clear and concise description of what you expected to happen.
 **Screenshots**
 If applicable, add screenshots to help explain your problem.
 
-**AdminBroOptions with schema**
-Paste your AdminBro config with database schema if it could be related to the issue
+**AdminJSOptions with schema**
+Paste your AdminJS config with database schema if it could be related to the issue
 
 **Desktop (please complete the following information if relevant):**
  - OS: [e.g. iOS]

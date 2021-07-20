@@ -1,9 +1,9 @@
-Contains a list of all the routes used in AdminBro. They are grouped within 2 arrays:
+Contains a list of all the routes used in AdminJS. They are grouped within 2 arrays:
 
 - `assets`
 - `routes`
 
-It is used by supported HTTP frameworks to render AdminBro pages. You can also use it to write your
+It is used by supported HTTP frameworks to render AdminJS pages. You can also use it to write your
 own rendering logic.
 
 ### How it looks
@@ -33,11 +33,11 @@ To create your router with authentication logic you have to:
 * iterate all `assets` and `routes` and handle them.
 
 
-The following code is almost an identical copy from @admin-bro/express plugin.js file. It shows you
+The following code is almost an identical copy from @adminjs/express plugin.js file. It shows you
 how you can assign all the routes to express framework.
 
 ```javascript
-const { Router } = require('admin-bro')
+const { Router } = require('adminjs')
 
 const { routes, assets } = Router
 const router = new express.Router()
@@ -45,7 +45,7 @@ const router = new express.Router()
 // here you can write your authentication logic
 
 routes.forEach((route) => {
-  // we have to change routes defined in AdminBro from {recordId} to :recordId
+  // we have to change routes defined in AdminJS from {recordId} to :recordId
   const expressPath = route.path.replace(/{/g, ':').replace(/}/g, '')
   
   const handler = async (req, res, next) => {

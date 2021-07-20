@@ -5,7 +5,7 @@ an entire unflatten object.
 
 ```javascript
 
-import flat from '@admin-bro'
+import flat from '@adminjs'
 
 const params = {
   name: 'John',

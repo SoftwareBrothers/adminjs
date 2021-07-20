@@ -1,5 +1,5 @@
 import React, { MouseEvent, useCallback } from 'react'
-import { Button, Section, FormGroup, FormMessage, Icon, Box } from '@admin-bro/design-system'
+import { Button, Section, FormGroup, FormMessage, Icon, Box } from '@adminjs/design-system'
 import { DragDropContext, Droppable, Draggable, DropResult } from 'react-beautiful-dnd'
 
 import AddNewItemButton from './add-new-item-translation'
@@ -20,7 +20,7 @@ type ItemRendererProps = {
 
 const ItemRenderer: React.FC<EditProps & ItemRendererProps> = (props) => {
   const { ItemComponent, property, onDelete, index, record, isDraggable } = props
-  const uniqueDraggableId = window.btoa(`${JSON.stringify(flat.get(record.params, property.path))}-${property.path}`)
+  const uniqueDraggableId = window.btoa(unescape(encodeURIComponent(`${JSON.stringify(flat.get(record.params, property.path))}-${property.path}`)))
 
   return (
     <Draggable

@@ -1,5 +1,5 @@
 import React, { ReactNode } from 'react'
-import { Section, ValueGroup } from '@admin-bro/design-system'
+import { Section, ValueGroup } from '@adminjs/design-system'
 
 import { RecordJSON, PropertyJSON } from '../../../interfaces'
 import { flat } from '../../../../utils'

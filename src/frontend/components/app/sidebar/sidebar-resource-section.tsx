@@ -1,5 +1,5 @@
 import React, { FC } from 'react'
-import { Navigation } from '@admin-bro/design-system'
+import { Navigation } from '@adminjs/design-system'
 import { useTranslation } from '../../../hooks/use-translation'
 import { ResourceJSON } from '../../../interfaces'
 import allowOverride from '../../../hoc/allow-override'
@@ -20,7 +20,7 @@ export type SidebarResourceSectionProps = {
  * ### Usage
  *
  * ```
- * import { SidebarResourceSection } from 'admin-bro`
+ * import { SidebarResourceSection } from 'adminjs`
  * ```
  *
  * @component

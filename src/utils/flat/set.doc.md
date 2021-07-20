@@ -8,7 +8,7 @@ be flattened and added to `params`.
 
 ```javascript
 
-import flat from '@admin-bro'
+import flat from '@adminjs'
 
 const params = {
   name: 'John',

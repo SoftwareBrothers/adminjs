@@ -1,4 +1,4 @@
-import { AdminBroOptions } from '../../../admin-bro-options.interface'
+import { AdminJSOptions } from '../../../adminjs-options.interface'
 import { Paths } from '../../../frontend/store/store'
 
 let globalAny: any = {}
@@ -73,7 +73,7 @@ const runDate = new Date()
 export class ViewHelpers {
   public options: Paths
 
-  constructor({ options }: { options?: AdminBroOptions } = {}) {
+  constructor({ options }: { options?: AdminJSOptions } = {}) {
     let opts: Paths = ViewHelpers.getPaths(options)
 
     opts = opts || {
@@ -84,7 +84,7 @@ export class ViewHelpers {
     this.options = opts
   }
 
-  static getPaths(options?: AdminBroOptions): Paths {
+  static getPaths(options?: AdminJSOptions): Paths {
     return options || (globalAny.REDUX_STATE?.paths)
   }
 
@@ -134,7 +134,7 @@ export class ViewHelpers {
   /**
    * Returns URL for given page name
    * @param {string} pageName       page name which is a unique key specified in
-   *                                {@link AdminBroOptions}
+   *                                {@link AdminJSOptions}
    * @return {string}
    */
   pageUrl(pageName: string): string {

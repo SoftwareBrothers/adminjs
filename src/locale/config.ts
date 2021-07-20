@@ -2,9 +2,9 @@ import merge from 'lodash/merge'
 import { formatName } from '../utils/translate-functions.factory'
 
 /**
- * Locale object passed to {@link AdminBroOptions} and stored in the application
+ * Locale object passed to {@link AdminJSOptions} and stored in the application
  *
- * @memberof AdminBroOptions
+ * @memberof AdminJSOptions
  * @alias Locale
  */
 export type Locale = {
@@ -69,7 +69,7 @@ export type LocaleTranslations = Partial<LocaleTranslationsBlock> & {
  * In the example above all save buttons will be named: 'Save it'. All but save button in
  * Comments resource. Where the button name will be: Save this comment.
  *
- * @memberof AdminBroOptions
+ * @memberof AdminJSOptions
  * @alias LocaleTranslations
  * @typedef {Object} LocaleTranslations
  * @property {Record<string, string>} [actions]         translated action labels

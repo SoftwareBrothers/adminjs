@@ -7,7 +7,7 @@
         "codecov", "bulma", "unmount", "testid", "woff", "iife", "sourcemap", "Roboto",
         "camelize", "datepicker", "camelcase", "fullwidth", "wysiwig", "Helvetica", "Neue",
         "Arial", "nowrap", "textfield", "scrollable", "flexbox", "treal", "xxxl",
-        "adminbro", "Checkmark", "overridable", "Postgres", "Hana", "Wojtek", "Krysiak", "bigint",
+        "adminjs", "Checkmark", "overridable", "Postgres", "Hana", "Wojtek", "Krysiak", "bigint",
         "borderless", "metadetaksamosone", "esrever", "jsnext"
     ],
     "ignorePaths": [
