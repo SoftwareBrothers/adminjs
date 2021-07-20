@@ -60,7 +60,7 @@ describe('ResourceDecorator', function () {
   describe('#getNavigation', function () {
     it('returns custom name with icon when options were specified', function () {
       const options = {
-        navigation: { name: 'someName', icon: 'someIcon' },
+        navigation: { name: 'someName', icon: 'someIcon', show: true },
       }
       expect(
         new ResourceDecorator({ ...args, options }).getNavigation(),

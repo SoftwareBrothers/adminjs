@@ -70,16 +70,16 @@ const mergeResourceOptions = (
   const options = { ...oldOptions }
 
   basicOptions.forEach((propName: string) => {
-    if (newOptions[propName]) {
+    if (propName in newOptions) {
       options[propName] = newOptions[propName]
     }
   })
 
   listOptions.forEach((propName: string) => {
-    if (newOptions[propName]) {
+    if (propName in newOptions) {
       const mergedOptions = [
-        ...(oldOptions && oldOptions[propName] ? oldOptions[propName] : []),
-        ...(newOptions && newOptions[propName] ? newOptions[propName] : []),
+        ...(oldOptions && (propName in oldOptions) ? oldOptions[propName] : []),
+        ...(newOptions && (propName in newOptions) ? newOptions[propName] : []),
       ]
 
       options[propName] = uniq(mergedOptions)

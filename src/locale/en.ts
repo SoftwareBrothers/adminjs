@@ -18,6 +18,7 @@ const translations = {
     confirmRemovalMany: 'Confirm the removal of {{count}} record',
     confirmRemovalMany_plural: 'Confirm the removal of {{count}} records',
     logout: 'Log out',
+    login: 'Log in',
     seeTheDocumentation: 'See: <1>the documentation</1>',
     createFirstRecord: 'Create First Record',
   },
@@ -31,7 +32,7 @@ const translations = {
     loginWelcome: 'Welcome',
   },
   properties: {
-
+    length: 'Length',
   },
   resources: {
 

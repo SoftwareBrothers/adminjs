@@ -37,7 +37,7 @@ const New: FC<ActionProps> = (props) => {
         history.push(appendForceRefresh(response.data.redirectUrl))
       }
       // if record has id === has been created
-      if (response.data.record.id) {
+      if (response.data.record.id && !Object.keys(response.data.record.errors).length) {
         handleChange({ params: {}, populated: {}, errors: {} } as RecordJSON)
       }
     })

@@ -9,7 +9,7 @@ import BaseDatabase from './backend/adapters/database/base-database'
 import ConfigurationError from './backend/utils/errors/configuration-error'
 import ResourcesFactory from './backend/utils/resources-factory/resources-factory'
 import userComponentsBundler from './backend/bundler/user-components-bundler'
-import { RecordActionResponse, Action } from './backend/actions/action.interface'
+import { RecordActionResponse, Action, BulkActionResponse } from './backend/actions/action.interface'
 import { DEFAULT_PATHS } from './constants'
 import { ACTIONS } from './backend/actions'
 
@@ -37,6 +37,7 @@ type ActionsMap = {
   show: Action<RecordActionResponse>;
   edit: Action<RecordActionResponse>;
   delete: Action<RecordActionResponse>;
+  bulkDelete: Action<BulkActionResponse>;
   new: Action<RecordActionResponse>;
   list: Action<ListActionResponse>;
 }

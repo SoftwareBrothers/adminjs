@@ -44,7 +44,7 @@ context('resources/Taggables/actions/new', () => {
       cy.get('button[type="submit"]').click()
 
       cy.location('pathname').should('eq', '/admin/resources/Taggables').then(function () {
-        cy.get(`[data-id="${this.data.id}"] [data-property-name="tags"]`).should('have.text', 'length: 0')
+        cy.get(`[data-id="${this.data.id}"] [data-property-name="tags"]`).should('have.text', 'Length: 0')
       })
     })
 
