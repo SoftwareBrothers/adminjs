@@ -38,6 +38,8 @@ function paramsToFormData(params: Record<string, any>): FormData {
       return formData.set(key, FORM_VALUE_EMPTY_OBJECT)
     }
     // Convert Date fields to UTC timezone
+    // Convert Date Picker values (YYYY-MM-DD HH:mm) to UTC timezone
+    // https://github.com/SoftwareBrothers/adminjs-design-system/blob/master/src/utils/date-utils.ts
     if (
       value instanceof Date
       || (typeof value === 'string' && value.search(/^([0-9]{4}-[0-9]{2}-[0-9]{2}\s[0-9]{2}:[0-9]{2})$/g) !== -1)
