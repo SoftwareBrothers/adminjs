@@ -1,7 +1,7 @@
-import { DEFAULT_DRAWER_WIDTH, VariantType } from '@admin-bro/design-system'
+import { DEFAULT_DRAWER_WIDTH, VariantType } from '@adminjs/design-system'
 import ConfigurationError from '../../utils/errors/configuration-error'
 import ViewHelpers from '../../utils/view-helpers/view-helpers'
-import AdminBro from '../../../admin-bro'
+import AdminJS from '../../../adminjs'
 import BaseResource from '../../adapters/resource/base-resource'
 import {
   Action,
@@ -34,7 +34,7 @@ const DEFAULT_VARIANT: VariantType = 'default'
 class ActionDecorator {
   public name: string
 
-  private _admin: AdminBro
+  private _admin: AdminJS
 
   private _resource: BaseResource
 
@@ -46,11 +46,11 @@ class ActionDecorator {
    * @param {Object}        params
    * @param {Action}        params.action
    * @param {BaseResource}  params.resource
-   * @param {AdminBro}      params.admin  current instance of AdminBro
+   * @param {AdminJS}      params.admin  current instance of AdminJS
    */
   constructor({ action, admin, resource }: {
     action: Action<ActionResponse>;
-    admin: AdminBro;
+    admin: AdminJS;
     resource: BaseResource;
   }) {
     if (!action.actionType) {

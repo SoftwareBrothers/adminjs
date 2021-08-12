@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from 'react'
-import { Box, Badge, H3, H2, ButtonGroup, cssClass } from '@admin-bro/design-system'
+import { Box, Badge, H3, H2, ButtonGroup, cssClass } from '@adminjs/design-system'
 import { useHistory } from 'react-router'
 
 import Breadcrumbs from '../breadcrumbs'
@@ -17,7 +17,7 @@ import { ActionJSON, buildActionClickHandler } from '../../../interfaces/action'
  * ### Usage
  *
  * ```
- * import { ActionHeader } from 'admin-bro'
+ * import { ActionHeader } from 'adminjs'
  * ```
  *
  * @component

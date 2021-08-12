@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { Box, Pagination, Text } from '@admin-bro/design-system'
+import { Box, Pagination, Text } from '@adminjs/design-system'
 import { useHistory, useLocation } from 'react-router'
 
 import RecordsTable from '../app/records-table/records-table'

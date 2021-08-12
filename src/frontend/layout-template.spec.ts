@@ -1,19 +1,19 @@
 import { expect } from 'chai'
 import layoutTemplate from './layout-template'
-import AdminBro from '../admin-bro'
-import { BrandingOptions } from '../admin-bro-options.interface'
+import AdminJS from '../adminjs'
+import { BrandingOptions } from '../adminjs-options.interface'
 
 describe('layoutTemplate', function () {
-  context('AdminBro with branding options set as a function', function () {
+  context('AdminJS with branding options set as a function', function () {
     const companyName = 'Dynamic Company'
     let html: string
 
     beforeEach(async function () {
-      const adminBro = new AdminBro({
+      const adminJs = new AdminJS({
         branding: async () => ({ companyName }),
       })
 
-      html = await layoutTemplate(adminBro, undefined, '/')
+      html = await layoutTemplate(adminJs, undefined, '/')
     })
 
     it('renders default company name', function () {
@@ -25,7 +25,7 @@ describe('layoutTemplate', function () {
     })
   })
 
-  describe('AdminBro with branding options given', function () {
+  describe('AdminJS with branding options given', function () {
     const branding = {
       softwareBrothers: false,
       companyName: 'Other name',
@@ -34,9 +34,9 @@ describe('layoutTemplate', function () {
     let html: string
 
     beforeEach(async function () {
-      const adminBro = new AdminBro({ branding })
+      const adminJs = new AdminJS({ branding })
 
-      html = await layoutTemplate(adminBro, undefined, '/')
+      html = await layoutTemplate(adminJs, undefined, '/')
     })
 
     it('renders company name', function () {
@@ -50,20 +50,20 @@ describe('layoutTemplate', function () {
     })
   })
 
-  context('custom styles and scripts were defined in AdminBro options', function () {
+  context('custom styles and scripts were defined in AdminJS options', function () {
     let html: string
     const scriptUrl = 'http://somescript.com'
     const styleUrl = 'http://somestyle.com'
 
     beforeEach(async function () {
-      const adminBro = new AdminBro({
+      const adminJs = new AdminJS({
         assets: {
           styles: [styleUrl],
           scripts: [scriptUrl],
         },
       })
 
-      html = await layoutTemplate(adminBro, undefined, '/')
+      html = await layoutTemplate(adminJs, undefined, '/')
     })
 
     it('adds styles to the head section', function () {

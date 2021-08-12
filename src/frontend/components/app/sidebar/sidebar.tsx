@@ -1,9 +1,9 @@
 import React from 'react'
 import styled from 'styled-components'
 import { useSelector } from 'react-redux'
-import { Box, cssClass, themeGet } from '@admin-bro/design-system'
+import { Box, cssClass, themeGet } from '@adminjs/design-system'
 
-import { BrandingOptions } from 'src/admin-bro-options.interface'
+import { BrandingOptions } from 'src/adminjs-options.interface'
 import { ResourceJSON, PageJSON } from 'src/frontend/interfaces'
 import SidebarBranding from './sidebar-branding'
 import SidebarPages from './sidebar-pages'

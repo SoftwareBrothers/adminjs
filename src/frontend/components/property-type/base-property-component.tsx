@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react'
 import { ReactComponentLike } from 'prop-types'
-import { Box } from '@admin-bro/design-system'
+import { Box } from '@adminjs/design-system'
 
 import ErrorBoundary from '../app/error-boundary'
 
@@ -71,7 +71,7 @@ const BasePropertyComponent: React.FC<BasePropertyComponentProps> = (props) => {
     if (!component) {
       throw new Error(`there is no "${property.path}.components.${where}"`)
     }
-    Component = globalAny.AdminBro.UserComponents[component]
+    Component = globalAny.AdminJS.UserComponents[component]
     return (
       <ErrorBoundary>
         <Box data-testid={testId}>

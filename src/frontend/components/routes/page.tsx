@@ -6,7 +6,7 @@ import ErrorBoundary from '../app/error-boundary'
 import { ReduxState } from '../../store/store'
 import ErrorMessageBox from '../app/error-message'
 
-declare const AdminBro: {
+declare const AdminJS: {
   UserComponents: Record<string, FunctionComponent>;
 }
 
@@ -54,7 +54,7 @@ class Page extends React.Component<Props, State> {
       )
     }
 
-    const Component = AdminBro.UserComponents[currentPage.component]
+    const Component = AdminJS.UserComponents[currentPage.component]
 
     if (!Component || !isClient) {
       return (

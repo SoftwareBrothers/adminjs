@@ -2,7 +2,7 @@ import React, { ReactNode } from 'react'
 import { NavLink, withRouter } from 'react-router-dom'
 
 import { RouteComponentProps } from 'react-router'
-import { Icon, cssClass } from '@admin-bro/design-system'
+import { Icon, cssClass } from '@adminjs/design-system'
 
 import { BasePropertyJSON } from '../../interfaces'
 

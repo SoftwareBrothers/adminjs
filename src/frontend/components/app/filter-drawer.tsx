@@ -8,7 +8,7 @@ import {
   Drawer,
   DrawerContent,
   DrawerFooter,
-} from '@admin-bro/design-system'
+} from '@adminjs/design-system'
 
 import PropertyType from '../property-type'
 import { RecordJSON, ResourceJSON } from '../../interfaces'

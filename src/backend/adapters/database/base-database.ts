@@ -7,7 +7,7 @@ import BaseResource from '../resource/base-resource'
 import NotImplementedError from '../../utils/errors/not-implemented-error'
 
 /**
- * Representation of an ORM database in AdminBro
+ * Representation of an ORM database in AdminJS
  * @category Base
  *
  * @mermaid
@@ -22,7 +22,7 @@ class BaseDatabase {
   /**
    * Checks if given adapter supports database provided by user
    *
-   * @param  {any}  database    database provided in AdminBroOptions#databases array
+   * @param  {any}  database    database provided in AdminJSOptions#databases array
    * @return {Boolean}          if given adapter supports this database - returns true
    */
   static isAdapterFor(database: any): boolean {

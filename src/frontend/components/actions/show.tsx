@@ -1,5 +1,5 @@
 import React from 'react'
-import { DrawerContent } from '@admin-bro/design-system'
+import { DrawerContent } from '@adminjs/design-system'
 
 import PropertyType from '../property-type'
 import { ActionProps } from './action.props'

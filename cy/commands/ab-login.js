@@ -3,7 +3,7 @@
 /**
  * @method abLogin
  * @description
- * logs you to the AdminBro. Since the system uses cookie for storing the session information, you
+ * logs you to the AdminJS. Since the system uses cookie for storing the session information, you
  * can use {@link module:cy.abKeepLoggedIn} helper to keep it between test cases.
  * @memberof module:cy
  * @param {object} [options]

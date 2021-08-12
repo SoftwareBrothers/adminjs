@@ -15,7 +15,7 @@ import {
   MessageBox,
   SoftwareBrothers,
   themeGet,
-} from '@admin-bro/design-system'
+} from '@adminjs/design-system'
 import { useTranslation } from '../../hooks'
 import { ReduxState } from '../../store/store'
 

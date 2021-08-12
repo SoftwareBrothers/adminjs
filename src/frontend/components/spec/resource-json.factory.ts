@@ -10,6 +10,7 @@ factory.define<ResourceJSON>('ResourceJSON', Object, {
   navigation: {
     name: 'someName',
     icon: 'someIcon',
+    show: true,
   },
   actions: [],
   resourceActions: [],

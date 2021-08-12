@@ -6,7 +6,7 @@
  * ### Usage
  *
  * ```javascript
- * // your property in AdminBro
+ * // your property in AdminJS
  * resourceOptions: {
  *   properties: {
  *     isAdmin: {...}
