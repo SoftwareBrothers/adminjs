@@ -1,6 +1,6 @@
 import BaseResource from '../../adapters/resource/base-resource'
-import AdminBro, { Adapter } from '../../../admin-bro'
-import { ResourceWithOptions } from '../../../admin-bro-options.interface'
+import AdminJS, { Adapter } from '../../../adminjs'
+import { ResourceWithOptions } from '../../../adminjs-options.interface'
 import { mergeResourceOptions } from '../build-feature'
 
 export class NoDatabaseAdapterError extends Error {
@@ -28,7 +28,7 @@ export class NoResourceAdapterError extends Error {
 export class ResourcesFactory {
   private adapters: Array<Adapter>
 
-  private admin: AdminBro
+  private admin: AdminJS
 
   constructor(admin, adapters: Array<Adapter> = []) {
     this.adapters = adapters
@@ -49,7 +49,7 @@ export class ResourcesFactory {
   /**
    * Changes database give by the user in configuration to list of supported resources
    * @param  {Array<any>} databases    list of all databases given by the user in
-   *                                   {@link AdminBroOptions}
+   *                                   {@link AdminJSOptions}
    * @return {Array<BaseResource>}     list of all resources from given databases
   */
   _convertDatabases(databases: Array<any>): Array<BaseResource> {
@@ -65,10 +65,10 @@ export class ResourcesFactory {
   }
 
   /**
-   * Maps resources given by user to resources supported by AdminBro.
+   * Maps resources given by user to resources supported by AdminJS.
    *
    * @param  {any[]}           resources                array of all resources given by the user
-   *                                                    in {@link AdminBroOptions}
+   *                                                    in {@link AdminJSOptions}
    * @param  {any}             resources[].resource     optionally user can give resource along
    *                                                    with options
    * @param  {Object}          resources[].options      options given along with the resource
@@ -76,7 +76,7 @@ export class ResourcesFactory {
    *                                                    keys
    *
    * @example
-   * AdminBro._convertResources([rawAdminModel, {resource: rawUserMode, options: {}}])
+   * AdminJS._convertResources([rawAdminModel, {resource: rawUserMode, options: {}}])
    * // => returns: [AdminModel, {resource: UserModel, options: {}}]
    * // where AdminModel and UserModel were converted by appropriate database adapters.
    */
@@ -102,7 +102,7 @@ export class ResourcesFactory {
    * Assigns decorator to each resource and initializes it with `options` and current `admin`
    * instance
    * @param  {Array<Object | BaseResource>} resources    array of all mapped resources given by the
-   *                                                     user in {@link AdminBroOptions} along with
+   *                                                     user in {@link AdminJSOptions} along with
    *                                                     options
    * @param  {BaseResource}  resources[].resource        optionally user can give resource along
    *                                                     with options

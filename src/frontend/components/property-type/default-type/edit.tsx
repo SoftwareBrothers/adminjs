@@ -2,7 +2,7 @@
 import React, { FC, useState, memo, useEffect } from 'react'
 import Select from 'react-select'
 import { withTheme, DefaultTheme } from 'styled-components'
-import { Input, FormMessage, FormGroup, selectStyles } from '@admin-bro/design-system'
+import { Input, FormMessage, FormGroup, selectStyles } from '@adminjs/design-system'
 
 import { EditPropertyProps } from '../base-property-props'
 import { recordPropertyIsEqual } from '../record-property-is-equal'

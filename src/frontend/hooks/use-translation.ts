@@ -10,7 +10,7 @@ import { TranslateFunctions, createFunctions } from '../../utils/translate-funct
  * defined below.
  *
  * ```javascript
- * import { useTranslation } from 'admin-bro'
+ * import { useTranslation } from 'adminjs'
  *
  * const MyComponent = () => {
  *   const { translateButton } = useTranslation()
@@ -35,7 +35,7 @@ export type UseTranslationResponse = TranslateFunctions & {
    */
   i18n: i18n;
   /**
-   * Indicates if translation system is ready. In AdminBro it is always ready :).
+   * Indicates if translation system is ready. In AdminJS it is always ready :).
    */
   ready: boolean;
 }

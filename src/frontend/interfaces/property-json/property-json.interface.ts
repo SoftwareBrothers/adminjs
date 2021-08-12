@@ -116,7 +116,7 @@ export interface PropertyJSON {
   resourceId: string;
 
   /**
-   * Indicates if given property has been created in AdminBro {@link PropertyOptions} and hasn't
+   * Indicates if given property has been created in AdminJS {@link PropertyOptions} and hasn't
    * been returned by the database adapter.
    * @new in version 3.3
    */

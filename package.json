@@ -1,6 +1,6 @@
 {
-  "name": "admin-bro",
-  "version": "4.0.1",
+  "name": "adminjs",
+  "version": "5.1.0",
   "description": "Admin panel for apps written in node.js",
   "main": "index.js",
   "types": "index.d.ts",
@@ -51,7 +51,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/SoftwareBrothers/admin-bro.git"
+    "url": "https://github.com/SoftwareBrothers/adminjs.git"
   },
   "keywords": [
     "hapi",
@@ -71,11 +71,11 @@
   "author": "Wojciech Krysiak",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/SoftwareBrothers/admin-bro/issues"
+    "url": "https://github.com/SoftwareBrothers/adminjs/issues"
   },
-  "homepage": "https://github.com/SoftwareBrothers/admin-bro#readme",
+  "homepage": "https://github.com/SoftwareBrothers/adminjs#readme",
   "dependencies": {
-    "@admin-bro/design-system": "^1.7.3",
+    "@adminjs/design-system": "^2.0.0",
     "@babel/core": "^7.10.2",
     "@babel/parser": "^7.10.2",
     "@babel/plugin-transform-runtime": "^7.10.1",

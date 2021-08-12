@@ -1,8 +1,8 @@
 import React from 'react'
 import styled from 'styled-components'
-import { cssClass, Text, Box } from '@admin-bro/design-system'
+import { cssClass, Text, Box } from '@adminjs/design-system'
 
-import { VersionProps } from '../../../admin-bro-options.interface'
+import { VersionProps } from '../../../adminjs-options.interface'
 import { useTranslation } from '../../hooks'
 
 export type Props = {

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Table, TableBody, Loader } from '@admin-bro/design-system'
+import { Table, TableBody, Loader } from '@adminjs/design-system'
 
 import RecordInList from './record-in-list'
 import RecordsTableHeader from './records-table-header'

@@ -3,7 +3,7 @@ import { DecoratedActions } from './utils/decorate-actions'
 import { BaseResource, BaseRecord } from '../../adapters'
 import { PropertyDecorator, ActionDecorator } from '..'
 import ViewHelpers from '../../utils/view-helpers/view-helpers'
-import AdminBro from '../../../admin-bro'
+import AdminJS from '../../../adminjs'
 
 import { ResourceOptions } from './resource-options.interface'
 import { CurrentAdmin } from '../../../current-admin.interface'
@@ -57,19 +57,19 @@ class ResourceDecorator {
 
   private _resource: BaseResource
 
-  private _admin: AdminBro
+  private _admin: AdminJS
 
   private h: ViewHelpers
 
   /**
    * @param  {object}       options
    * @param  {BaseResource} options.resource  resource which is decorated
-   * @param  {AdminBro}     options.admin  current instance of AdminBro
+   * @param  {AdminJS}     options.admin  current instance of AdminJS
    * @param  {ResourceOptions} [options.options]
    */
   constructor({ resource, admin, options = {} }: {
     resource: BaseResource;
-    admin: AdminBro;
+    admin: AdminJS;
     options: ResourceOptions;
   }) {
     this.getPropertyByKey = this.getPropertyByKey.bind(this)
@@ -156,7 +156,7 @@ class ResourceDecorator {
           if (!property) {
             // eslint-disable-next-line no-console
             console.error([
-              `[AdminBro]: There is no property of the name: "${propertyName}".`,
+              `[AdminJS]: There is no property of the name: "${propertyName}".`,
               `Check out the "${where}Properties" in the`,
               `resource: "${this._resource.id()}"`].join(' '))
           }

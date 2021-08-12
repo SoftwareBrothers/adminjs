@@ -1,7 +1,7 @@
-## The AdminBro Data model
+## The AdminJS Data model
 
 Before you dive into the details of the flat helpers, let me briefly introduce the way how the
-database data is stored in AdminBro.
+database data is stored in AdminJS.
 
 ### The Simple Case
 
@@ -73,14 +73,14 @@ ORM should keep the value of the `auth.twitter`
 
 **2. Sending data between the Frontend and the Backend in {@link https://developer.mozilla.org/en-US/docs/Web/API/FormData FormData} format**
 
-AdminBro allows you to upload Files from the Frontend to the Backend. The most optimal way of
+AdminJS allows you to upload Files from the Frontend to the Backend. The most optimal way of
 doing that is by using {@link https://developer.mozilla.org/en-US/docs/Web/API/FormData FormData}.
 But, this requires that values for all the fields are send in `[key: string]: string` form.
 And this, as you might guess, fits perfectly to our flatten `params` logic.
 
 ### Consequences
 
-Flattening in AdminBro has its consequences everywhere where you use
+Flattening in AdminJS has its consequences everywhere where you use
 
 - {@link BaseRecord} and
 - {@link RecordJSON}, 

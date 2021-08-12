@@ -1,6 +1,6 @@
 import React, { FC, useEffect } from 'react'
 import { useHistory } from 'react-router'
-import { DrawerContent, Box, DrawerFooter, Button, Icon } from '@admin-bro/design-system'
+import { DrawerContent, Box, DrawerFooter, Button, Icon } from '@adminjs/design-system'
 
 import PropertyType from '../property-type'
 
@@ -37,7 +37,7 @@ const New: FC<ActionProps> = (props) => {
         history.push(appendForceRefresh(response.data.redirectUrl))
       }
       // if record has id === has been created
-      if (response.data.record.id) {
+      if (response.data.record.id && !Object.keys(response.data.record.errors).length) {
         handleChange({ params: {}, populated: {}, errors: {} } as RecordJSON)
       }
     })

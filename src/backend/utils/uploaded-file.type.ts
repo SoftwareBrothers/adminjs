@@ -1,7 +1,7 @@
 /**
  * File uploaded via FormData to the backend.
  *
- * @memberof AdminBro
+ * @memberof AdminJS
  * @alias UploadedFile
  */
 export type UploadedFile = {

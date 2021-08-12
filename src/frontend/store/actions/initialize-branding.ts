@@ -1,4 +1,4 @@
-import { BrandingOptions } from '../../../admin-bro-options.interface'
+import { BrandingOptions } from '../../../adminjs-options.interface'
 
 export const BRANDING_INITIALIZE = 'BRANDING_INITIALIZE'
 

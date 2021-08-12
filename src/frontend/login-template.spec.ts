@@ -1,16 +1,16 @@
 import { expect } from 'chai'
 
 import loginTemplate from './login-template'
-import AdminBro from '../admin-bro'
+import AdminJS from '../adminjs'
 
 describe('login-template', function () {
   const action = '/login'
 
   it('renders error message', async function () {
-    const adminBro = new AdminBro({})
+    const adminJs = new AdminJS({})
     const errorMessage = 'Something went wrong'
 
-    const html = await loginTemplate(adminBro, { action, errorMessage })
+    const html = await loginTemplate(adminJs, { action, errorMessage })
 
     expect(html).to.contain(errorMessage)
   })

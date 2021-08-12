@@ -1,5 +1,5 @@
 import React, { ReactNode } from 'react'
-import { Text, MessageBox } from '@admin-bro/design-system'
+import { Text, MessageBox } from '@adminjs/design-system'
 
 import { useTranslation } from '../../hooks'
 

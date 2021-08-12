@@ -15,7 +15,7 @@ node_modules
 
 src/frontend/assets/scripts
 
-.adminbro
+.adminjs
 
 # cypress output
 **/*/cypress/videos

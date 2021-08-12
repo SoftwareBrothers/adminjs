@@ -1,5 +1,5 @@
 import React, { ReactNode } from 'react'
-import { ValueGroup } from '@admin-bro/design-system'
+import { ValueGroup } from '@adminjs/design-system'
 
 import { ShowPropertyProps } from '../base-property-props'
 import DefaultPropertyValue from './default-property-value'

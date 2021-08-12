@@ -1,4 +1,4 @@
-import { ButtonGroupProps } from '@admin-bro/design-system'
+import { ButtonGroupProps } from '@adminjs/design-system'
 import { expect } from 'chai'
 import factory from 'factory-girl'
 import { ActionJSON } from '../../../interfaces'

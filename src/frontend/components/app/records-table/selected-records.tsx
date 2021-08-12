@@ -1,5 +1,5 @@
 import React from 'react'
-import { TableCaption, Title, ButtonGroup, Box } from '@admin-bro/design-system'
+import { TableCaption, Title, ButtonGroup, Box } from '@adminjs/design-system'
 
 import { useHistory } from 'react-router'
 import { ActionJSON, buildActionClickHandler, RecordJSON, ResourceJSON } from '../../../interfaces'

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Section, ValueGroup } from '@admin-bro/design-system'
+import { Section, ValueGroup } from '@adminjs/design-system'
 
 import { BasePropertyProps } from '../base-property-props'
 import { convertToSubProperty } from './convert-to-sub-property'

@@ -9,7 +9,7 @@ import {
   Illustration,
   IllustrationProps,
   Button,
-} from '@admin-bro/design-system'
+} from '@adminjs/design-system'
 
 import { useTranslation } from '../../hooks'
 
@@ -67,32 +67,32 @@ const boxes = ({ translateMessage }): Array<BoxType> => [{
   variant: 'Planet',
   title: translateMessage('addingResources_title'),
   subtitle: translateMessage('addingResources_subtitle'),
-  href: 'https://adminbro.com/tutorial-passing-resources.html',
+  href: 'https://adminjs.co/tutorial-passing-resources.html',
 }, {
   variant: 'DocumentCheck',
   title: translateMessage('customizeResources_title'),
   subtitle: translateMessage('customizeResources_subtitle'),
-  href: 'https://adminbro.com/tutorial-customizing-resources.html',
+  href: 'https://adminjs.co/tutorial-customizing-resources.html',
 }, {
   variant: 'DocumentSearch',
   title: translateMessage('customizeActions_title'),
   subtitle: translateMessage('customizeActions_subtitle'),
-  href: 'https://adminbro.com/tutorial-actions.html',
+  href: 'https://adminjs.co/tutorial-actions.html',
 }, {
   variant: 'FlagInCog',
   title: translateMessage('writeOwnComponents_title'),
   subtitle: translateMessage('writeOwnComponents_subtitle'),
-  href: 'https://adminbro.com/tutorial-writing-react-components.html',
+  href: 'https://adminjs.co/tutorial-writing-react-components.html',
 }, {
   variant: 'Folders',
   title: translateMessage('customDashboard_title'),
   subtitle: translateMessage('customDashboard_subtitle'),
-  href: 'https://adminbro.com/tutorial-custom-dashboard.html',
+  href: 'https://adminjs.co/tutorial-custom-dashboard.html',
 }, {
   variant: 'Astronaut',
   title: translateMessage('roleBasedAccess_title'),
   subtitle: translateMessage('roleBasedAccess_subtitle'),
-  href: 'https://adminbro.com/tutorial-rbac.html',
+  href: 'https://adminjs.co/tutorial-rbac.html',
 }]
 
 const Card = styled(Box)`
@@ -153,7 +153,7 @@ export const Dashboard: React.FC = () => {
           </Card>
         </Box>
         <Box width={[1, 1, 1 / 2]} p="lg">
-          <Card as="a" flex href="https://github.com/SoftwareBrothers/admin-bro/issues">
+          <Card as="a" flex href="https://github.com/SoftwareBrothers/adminjs/issues">
             <Box flexShrink={0}><Illustration variant="GithubLogo" /></Box>
             <Box ml="xl">
               <H4>{translateMessage('foundBug_title')}</H4>

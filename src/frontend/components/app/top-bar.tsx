@@ -1,7 +1,7 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
 import styled from 'styled-components'
-import { cssClass, Box, Icon, themeGet } from '@admin-bro/design-system'
+import { cssClass, Box, Icon, themeGet } from '@adminjs/design-system'
 
 import LoggedIn from './logged-in'
 import Version from './version'

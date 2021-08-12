@@ -1,6 +1,6 @@
 import React, { ReactNode } from 'react'
 import { connect } from 'react-redux'
-import { MessageBox } from '@admin-bro/design-system'
+import { MessageBox } from '@adminjs/design-system'
 
 import { NoticeMessageInState, ReduxState } from '../../store/store'
 import { dropNotice } from '../../store/actions/drop-notice'
