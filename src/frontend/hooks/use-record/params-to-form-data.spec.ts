@@ -40,4 +40,23 @@ describe('recordToFormData', function () {
 
     expect(recordToFormData(record.params).get(propertyKey)).to.equal(date.toISOString())
   })
+
+  it('convert date picker value to ISO string', async () => {
+    const datePickerValue = '2021-08-12 22:00'
+    const date = new Date(datePickerValue)
+    const record = await factory.build<RecordJSON>('RecordJSON', { params: {
+      [propertyKey]: date,
+    } })
+
+    expect(recordToFormData(record.params).get(propertyKey)).to.equal(date.toISOString())
+  })
+
+  it('does not convert strings to ISO string', async () => {
+    const someString = 'some string with date string 2021-08-12 22:00'
+    const record = await factory.build<RecordJSON>('RecordJSON', { params: {
+      [propertyKey]: someString,
+    } })
+
+    expect(recordToFormData(record.params).get(propertyKey)).to.equal(someString)
+  })
 })
