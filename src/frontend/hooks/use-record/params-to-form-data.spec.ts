@@ -45,7 +45,7 @@ describe('recordToFormData', function () {
     const datePickerValue = '2021-08-12 22:00'
     const date = new Date(datePickerValue)
     const record = await factory.build<RecordJSON>('RecordJSON', { params: {
-      [propertyKey]: date,
+      [propertyKey]: datePickerValue,
     } })
 
     expect(recordToFormData(record.params).get(propertyKey)).to.equal(date.toISOString())
