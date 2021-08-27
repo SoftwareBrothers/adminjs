@@ -59,7 +59,7 @@ export const FilterDrawer: React.FC<FilterProps> = (props) => {
       }
     })
     search.set('page', '1')
-    history.push(`${history.location.pathname}?${search.toString()}`)
+    history.push(`${history.location.pathname}?${search.toString()}`, { previousPage: window.location.href })
     return false
   }
 
@@ -73,7 +73,7 @@ export const FilterDrawer: React.FC<FilterProps> = (props) => {
       }
     }
     const query = filteredSearch.toString() === '' ? `?${filteredSearch.toString()}` : ''
-    history.push(history.location.pathname + query)
+    history.push(history.location.pathname + query, { previousPage: window.location.href })
     setFilter({})
   }
 

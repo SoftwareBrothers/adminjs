@@ -34,7 +34,9 @@ const Edit: FC<ActionProps> = (props) => {
     event.preventDefault()
     handleSubmit().then((response) => {
       if (response.data.redirectUrl) {
-        history.push(appendForceRefresh(response.data.redirectUrl))
+        history.push(appendForceRefresh(response.data.redirectUrl), {
+          previousPage: window.location.href,
+        })
       }
     })
     return false
