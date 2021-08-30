@@ -31,10 +31,9 @@ export const StyledBackButton: React.FC<StyledBackButtonProps> = (props) => {
 
   const { previousPage } = location.state as LocationState
   const previousPageUrl = previousPage ? new URL(previousPage) : null
-  let backButtonUrl = h.resourceUrl({ resourceId, search: window.location.search })
-  if (previousPageUrl) {
-    backButtonUrl = previousPageUrl.pathname + previousPageUrl.search
-  }
+  const backButtonUrl = previousPageUrl
+    ? previousPageUrl.pathname + previousPageUrl.search
+    : h.resourceUrl({ resourceId, search: window.location.search })
 
   return (
     <StyledLink
