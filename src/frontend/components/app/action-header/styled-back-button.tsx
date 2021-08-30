@@ -29,7 +29,7 @@ export const StyledBackButton: React.FC<StyledBackButtonProps> = (props) => {
   const location = useLocation()
   const cssCloseIcon = showInDrawer ? 'ChevronRight' : 'ChevronLeft'
 
-  const { previousPage } = location.state as LocationState
+  const { previousPage } = (location.state || {}) as LocationState 
   const previousPageUrl = previousPage ? new URL(previousPage) : null
   const backButtonUrl = previousPageUrl
     ? previousPageUrl.pathname + previousPageUrl.search
