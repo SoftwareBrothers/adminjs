@@ -46,7 +46,10 @@ const List: React.FC<ActionProps> = ({ resource }) => {
   const handlePaginationChange = (pageNumber: number): void => {
     const search = new URLSearchParams(location.search)
     search.set('page', pageNumber.toString())
-    history.push({ search: search.toString() })
+    history.push({
+      search: search.toString(),
+      state: { previousPage: window.location.href },
+    })
   }
 
   return (

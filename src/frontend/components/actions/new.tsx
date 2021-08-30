@@ -34,7 +34,10 @@ const New: FC<ActionProps> = (props) => {
     event.preventDefault()
     handleSubmit().then((response) => {
       if (response.data.redirectUrl) {
-        history.push(appendForceRefresh(response.data.redirectUrl))
+        history.push(
+          appendForceRefresh(response.data.redirectUrl),
+          { previousPage: window.location.href },
+        )
       }
       // if record has id === has been created
       if (response.data.record.id && !Object.keys(response.data.record.errors).length) {
