@@ -21,13 +21,13 @@ const Filter: React.FC<FilterPropertyProps> = (props) => {
     <React.Fragment>
       <FormGroup variant="filter">
         <Label>{property.label}</Label>
-        <Label>{`- ${translateProperty('datetime.filter.from')}: `}</Label>
+        <Label>{`- ${translateProperty('from')}: `}</Label>
         <DatePicker
           value={fromValue}
           onChange={(data: string): void => onChange(fromKey, data)}
           propertyType={property.type}
         />
-        <Label mt="default">{`- ${translateProperty('datetime.filter.to')}: `}</Label>
+        <Label mt="default">{`- ${translateProperty('to')}: `}</Label>
         <DatePicker
           value={toValue}
           onChange={(data: string): void => onChange(toKey, data)}
