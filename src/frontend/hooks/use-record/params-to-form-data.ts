@@ -42,7 +42,7 @@ function paramsToFormData(params: Record<string, any>): FormData {
     // https://github.com/SoftwareBrothers/adminjs-design-system/blob/master/src/utils/date-utils.ts
     if (
       value instanceof Date
-      || (typeof value === 'string' && value.search(/^([0-9]{4}-[0-9]{2}-[0-9]{2}\s[0-9]{2}:[0-9]{2})$/g) !== -1)
+      || (typeof value === 'string' && /^([0-9]{4}-[0-9]{2}-[0-9]{2}\s[0-9]{2}:[0-9]{2})$/.test(value))
     ) {
       const date = new Date(value)
       return formData.set(key, date.toISOString())
