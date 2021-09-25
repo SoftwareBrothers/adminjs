@@ -33,6 +33,12 @@ const translations = {
   },
   properties: {
     length: 'Length',
+    datetime: {
+      filter: {
+        from: 'From',
+        to: 'To',
+      },
+    },
   },
   resources: {
 
