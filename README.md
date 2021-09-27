@@ -19,13 +19,13 @@ https://demo.adminjs.co/admin
 
 ## Getting Started
 
-- Check out the [documentation](https://adminjs.co)
-- Try the [live demo](https://demo.adminjs.co/admin) as mentioned above
+- Check out the [documentation](https://adminjs.com)
+- Try the [live demo](https://demo.adminjs.com/admin) as mentioned above
 
 ## OpenSource SoftwareBrothers community
 
 - [Join the community](https://join.slack.com/t/AdminBro/shared_invite/zt-djsqxxpz-_YCS8UMtQ9Ade6DPuLR7Zw) to get help and be inspired.
-- subscribe to our [newsletter](http://opensource.softwarebrothers.co)
+- subscribe to our [newsletter](http://opensource.softwarebrothers.com)
 
 # What kind of problems it solves
 
