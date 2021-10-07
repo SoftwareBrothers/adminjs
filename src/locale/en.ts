@@ -33,6 +33,8 @@ const translations = {
   },
   properties: {
     length: 'Length',
+    from: 'From',
+    to: 'To',
   },
   resources: {
 
