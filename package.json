@@ -8,7 +8,8 @@
     "test": "mocha ./spec/index.js",
     "types": "tsc",
     "clean": "rm -rf lib && mkdir lib && rm -fr types && mkdir types",
-    "build": "babel src --out-dir lib --copy-files --extensions '.ts,.js,.jsx,.tsx'",
+    "build": "babel src --out-dir lib --copy-files --extensions .ts,.js,.jsx,.tsx",
+    "build:bundle": "env-cmd -f ./.env.bundle --use-shell \"npm run clean && npm run bundle && npm run bundle:globals && npm run build && npm run types\"",
     "lint": "eslint './spec/**/*' './src/**/*' './cy/**/*' './*'",
     "cover": "NODE_ENV=test nyc --reporter=lcov --reporter=text-lcov npm test",
     "codecov": "NODE_ENV=test nyc --reporter=text-lcov npm test | codecov --pipe",
@@ -63,11 +64,6 @@
   "browserslist": [
     "last 10 Chrome versions"
   ],
-  "husky": {
-    "hooks": {
-      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
-    }
-  },
   "author": "Wojciech Krysiak",
   "license": "MIT",
   "bugs": {
@@ -93,6 +89,7 @@
     "axios": "^0.21.1",
     "babel-plugin-styled-components": "^1.11.1",
     "commander": "^5.1.0",
+    "env-cmd": "^10.1.0",
     "flat": "^4.1.0",
     "i18next": "19.8.7",
     "lodash": "^4.17.11",

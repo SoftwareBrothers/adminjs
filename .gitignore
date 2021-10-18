@@ -17,6 +17,8 @@ src/frontend/assets/scripts
 
 .adminjs
 
+yarn.lock
+
 # cypress output
 **/*/cypress/videos
 **/*/cypress/screenshots
