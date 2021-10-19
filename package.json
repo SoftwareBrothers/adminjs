@@ -7,7 +7,7 @@
   "scripts": {
     "test": "mocha ./spec/index.js",
     "types": "tsc",
-    "clean": "rm -rf lib && mkdir lib && rm -fr types && mkdir types",
+    "clean": "rimraf lib && mkdir lib && rimraf types && mkdir types",
     "build": "babel src --out-dir lib --copy-files --extensions .ts,.js,.jsx,.tsx",
     "build:bundle": "env-cmd -f ./.env.bundle --use-shell \"npm run clean && npm run bundle && npm run bundle:globals && npm run build && npm run types\"",
     "lint": "eslint './spec/**/*' './src/**/*' './cy/**/*' './*'",
@@ -105,6 +105,7 @@
     "react-router-dom": "=5.2.0",
     "react-select": "=3.1.0",
     "redux": "=4.0.5",
+    "rimraf": "^3.0.2",
     "rollup": "^2.32.1",
     "rollup-plugin-terser": "^6.1.0",
     "slash": "^3.0.0",
