@@ -40,6 +40,7 @@ const SelectEdit: FC<CombinedProps> = (props) => {
       options={property.availableValues}
       onChange={s => onChange(property.path, s?.value ?? '')}
       isDisabled={property.isDisabled}
+      placeholder="Выберите..."
       {...property.props}
     />
   )

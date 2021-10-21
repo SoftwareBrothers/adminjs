@@ -23,7 +23,6 @@ module.exports = {
       2,
     ],
     'import/prefer-default-export': 'off',
-    'linebreak-style': ['error', 'unix'],
     quotes: ['error', 'single'],
     semi: ['error', 'never'],
     'import/no-unresolved': 'off',
@@ -36,6 +35,7 @@ module.exports = {
     'import/extensions': 'off',
     'mocha/no-hooks-for-single-case': 'off',
     'no-param-reassign': 'off',
+    'linebreak-style': 0,
   },
   ignorePatterns: [
     '*/build/**/*',

@@ -1,8 +1,9 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from 'react'
-import { Box, Badge, H3, H2, ButtonGroup, cssClass } from '@adminjs/design-system'
+import { Box, H3, ButtonGroup, cssClass, ButtonInGroup } from '@adminjs/design-system'
 import { useHistory } from 'react-router'
 
+import styled from 'styled-components'
 import Breadcrumbs from '../breadcrumbs'
 import { ActionHeaderProps } from './action-header-props'
 import { actionsToButtonGroup } from './actions-to-button-group'
@@ -10,6 +11,9 @@ import { StyledBackButton } from './styled-back-button'
 
 import { useActionResponseHandler, useTranslation } from '../../../hooks'
 import { ActionJSON, buildActionClickHandler } from '../../../interfaces/action'
+import { StyledH2 } from '../../../customize/StyledH2'
+import { StyledBadge } from '../../../customize/StyledBadge'
+import { StyledContainer } from '../../../customize/StyledContainer'
 
 /**
  * Header of an action. It renders Action name with buttons for all the actions.
@@ -58,10 +62,11 @@ export const ActionHeader: React.FC<ActionHeaderProps> = (props) => {
   })
 
   if (toggleFilter) {
-    actionButtons.push({
+    actionButtons.unshift({
       label: translateButton('filter', resource.id),
       onClick: toggleFilter,
       icon: 'SettingsAdjust',
+      className: 'btn filter_btn',
     })
   }
 
@@ -78,37 +83,62 @@ export const ActionHeader: React.FC<ActionHeaderProps> = (props) => {
 
   // styled which differs if action header is in the drawer or not
   const cssIsRootFlex = !action.showInDrawer
-  const cssHeaderMT = action.showInDrawer ? '' : 'lg'
-  const cssActionsMB = action.showInDrawer ? 'xl' : 'default'
-  const CssHComponent = action.showInDrawer ? H3 : H2
+  const CssHComponent = action.showInDrawer ? H3 : StyledH2
+
+  const StyledTitleWithBreadcrumb = styled.div<{withBreadcrumbs: boolean}>`
+  display: flex;
+  flex-direction: ${styledProps => (styledProps.withBreadcrumbs ? 'column' : 'row')};
+  flex-wrap: nowrap;
+  ${styledProps => (styledProps.withBreadcrumbs ? '' : 'align-items: center;')};
+`
 
   return (
-    <Box className={cssClass('ActionHeader')}>
-      {action.showInDrawer ? '' : (
-        <Box flex flexDirection="row" px={['default', 0]}>
-          <Breadcrumbs resource={resource} actionName={action.name} record={record} />
-          <Box flexShrink={0}>
-            <ButtonGroup size="sm" rounded buttons={customResourceButtons} />
-          </Box>
-        </Box>
-      )}
-      <Box display={['block', cssIsRootFlex ? 'flex' : 'block']}>
-        <Box mt={cssHeaderMT} flexGrow={1} px={['default', 0]}>
-          <CssHComponent mb="lg">
-            {!isList && listAction ? (
-              <StyledBackButton resourceId={resourceId} showInDrawer={action.showInDrawer} />
-            ) : ''}
-            {title}
-            {tag ? (<Badge variant="primary" ml="default">{tag}</Badge>) : ''}
-          </CssHComponent>
-        </Box>
-        {omitActions ? '' : (
-          <Box mt="xl" mb={cssActionsMB} flexShrink={0}>
-            <ButtonGroup buttons={actionButtons} />
+    <StyledContainer
+      withBorder
+      withTopBottomPadding
+    >
+      <Box className={cssClass('ActionHeader')}>
+        {action.showInDrawer ? '' : (
+          <Box flex flexDirection="row" px={['default', 0]}>
+            <Box flexShrink={0}>
+              <ButtonGroup size="sm" rounded buttons={customResourceButtons} />
+            </Box>
           </Box>
         )}
+        <Box
+          display={['block', cssIsRootFlex ? 'flex' : 'block']}
+          style={{
+            alignItems: 'center',
+          }}
+        >
+          <Box flexGrow={1} px={['default', 0]}>
+            <CssHComponent>
+              {!isList && listAction ? (
+                <StyledBackButton resourceId={resourceId} showInDrawer={action.showInDrawer} />
+              ) : ''}
+              <StyledTitleWithBreadcrumb withBreadcrumbs={!isList}>
+                {!isList && (
+                  <Breadcrumbs resource={resource} actionName={action.name} record={record} />
+                )}
+                {title}
+                {tag ? (<StyledBadge>{tag}</StyledBadge>) : ''}
+              </StyledTitleWithBreadcrumb>
+            </CssHComponent>
+          </Box>
+          {omitActions ? '' : (
+            <Box flexShrink={0} flex style={{ gap: '16px' }}>
+              {actionButtons.map((button, i) => (
+                <ButtonInGroup
+                  key={`${button.label || ''}-${i}`}
+                  {...button}
+                  className={button.className}
+                />
+              )) }
+            </Box>
+          )}
+        </Box>
       </Box>
-    </Box>
+    </StyledContainer>
   )
 }
 

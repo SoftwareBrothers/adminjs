@@ -1,17 +1,13 @@
 import React from 'react'
-import styled from 'styled-components'
-import { Link as RouterLink, useLocation } from 'react-router-dom'
-import {
-  ButtonCSS,
-  ButtonProps,
-  Icon,
-} from '@adminjs/design-system'
+import { useLocation } from 'react-router-dom'
 
 import ViewHelpers from '../../../../backend/utils/view-helpers/view-helpers'
+import { Icon } from '../../../customize/Icon'
+import { StyledBackBtn } from '../../../customize/StyledBackBtn'
 
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-const StyledLink = styled(({ rounded, ...rest }) => <RouterLink {...rest} />)<ButtonProps>`${ButtonCSS}`
+const StyledLink = StyledBackBtn
 const h = new ViewHelpers()
 
 export type StyledBackButtonProps = {
@@ -27,7 +23,7 @@ type LocationState = {
 export const StyledBackButton: React.FC<StyledBackButtonProps> = (props) => {
   const { resourceId, showInDrawer } = props
   const location = useLocation()
-  const cssCloseIcon = showInDrawer ? 'ChevronRight' : 'ChevronLeft'
+  const cssCloseIcon = showInDrawer ? 'close' : 'arrow-left'
 
   const { previousPage } = (location.state || {}) as LocationState
   const previousPageUrl = previousPage ? new URL(previousPage) : null

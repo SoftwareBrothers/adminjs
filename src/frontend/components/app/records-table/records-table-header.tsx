@@ -86,7 +86,11 @@ export const RecordsTableHeader: React.FC<RecordsTableHeaderProps> = (props) => 
     sortBy, direction,
     onSelectAll, selectedAll } = props
   return (
-    <TableHead>
+    <TableHead style={{
+      backgroundColor: '#FFF',
+      boxShadow: 'inset 0px -1px 0px #e0e0e0',
+    }}
+    >
       <TableRow>
         <TableCell>
           {onSelectAll ? (

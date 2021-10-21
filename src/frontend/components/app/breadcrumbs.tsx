@@ -59,7 +59,7 @@ export const Breadcrumbs: React.FC<BreadcrumbProps> = (props) => {
 
   return (
     <Box flexGrow={1} className={cssClass('Breadcrumbs')}>
-      <BreadcrumbLink to={h.dashboardUrl()}>Dashboard</BreadcrumbLink>
+      <BreadcrumbLink to={h.dashboardUrl()}>Рабочий стол</BreadcrumbLink>
       <BreadcrumbLink to={resource.href ? resource.href : '/'} className={record ? 'is-active' : ''}>
         {resource.name}
       </BreadcrumbLink>

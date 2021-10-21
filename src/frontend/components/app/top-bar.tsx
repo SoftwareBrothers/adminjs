@@ -1,7 +1,7 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
 import styled from 'styled-components'
-import { cssClass, Box, Icon, themeGet } from '@adminjs/design-system'
+import { cssClass, Box, Icon } from '@adminjs/design-system'
 
 import LoggedIn from './logged-in'
 import Version from './version'
@@ -11,7 +11,6 @@ import { ReduxState } from '../../store/store'
 
 const NavBar = styled(Box)`
   height: ${({ theme }): string => theme.sizes.navbarHeight};
-  border-bottom: ${themeGet('borders', 'default')};
   background: ${({ theme }): string => theme.colors.white};
   display: flex;
   flex-direction: row;
@@ -34,11 +33,9 @@ export const TopBar: React.FC<Props> = (props) => {
   return (
     <NavBar>
       <Box
-        py="lg"
-        px={['default', 'lg']}
         onClick={toggleSidebar}
-        display={['block', 'block', 'block', 'block', 'none']}
-        style={{ cursor: 'pointer' }}
+        display={['flex', 'flex', 'flex', 'flex', 'none']}
+        style={{ cursor: 'pointer', alignItems: 'center' }}
       >
         <Icon icon="Menu" size={32} color="grey100" />
       </Box>

@@ -36,6 +36,7 @@ class Filter extends React.PureComponent<FilterPropertyProps & ThemeProps<Defaul
           options={property.availableValues}
           styles={filterStyles(theme)}
           onChange={this.handleSelectChange}
+          placeholder="Выберите..."
         />
       )
     }

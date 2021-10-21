@@ -1,7 +1,6 @@
-import React, { useState } from 'react'
+import React, { useState, Fragment } from 'react'
 import { connect } from 'react-redux'
 import { useRouteMatch } from 'react-router-dom'
-import { Box } from '@adminjs/design-system'
 
 import { RouteComponentProps } from 'react-router'
 import BaseAction from '../app/base-action-component'
@@ -76,7 +75,8 @@ const ResourceAction: React.FC<Props> = (props) => {
     : undefined
 
   return (
-    <Box variant="grey" width={listAction.containerWidth} mx="auto">
+    <Fragment>
+
       <ActionHeader
         resource={resource}
         action={listAction}
@@ -84,6 +84,7 @@ const ResourceAction: React.FC<Props> = (props) => {
         toggleFilter={toggleFilter}
       />
       <BaseAction action={listAction} resource={resource} setTag={setTag} />
+
       {listAction.showFilter ? (
         <FilterDrawer
           resource={resource}
@@ -91,7 +92,7 @@ const ResourceAction: React.FC<Props> = (props) => {
           toggleFilter={(): void => { setFilerVisible(!filterVisible) }}
         />
       ) : ''}
-    </Box>
+    </Fragment>
   )
 }
 

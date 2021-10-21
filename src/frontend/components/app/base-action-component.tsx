@@ -7,6 +7,7 @@ import { actions } from '../actions'
 import { DOCS } from '../../../constants'
 import { ActionProps } from '../actions/action.props'
 import { useTranslation } from '../../hooks'
+import { StyledContainer } from '../../customize/StyledContainer'
 
 declare const AdminJS: {
   UserComponents: Array<string>;
@@ -75,13 +76,15 @@ export const BaseActionComponent: React.FC<ActionProps> = (props) => {
   if (Action) {
     return (
       <ErrorBoundary>
-        <Action
-          action={action}
-          resource={resource}
-          record={record}
-          records={records}
-          setTag={setTag}
-        />
+        <StyledContainer withTopBottomPadding>
+          <Action
+            action={action}
+            resource={resource}
+            record={record}
+            records={records}
+            setTag={setTag}
+          />
+        </StyledContainer>
       </ErrorBoundary>
     )
   }

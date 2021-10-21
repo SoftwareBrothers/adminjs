@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react'
+import React, { useState, useEffect, useCallback, Fragment } from 'react'
 
 import { useRouteMatch } from 'react-router'
 import { Loader } from '@adminjs/design-system'
@@ -8,7 +8,6 @@ import ApiClient from '../../utils/api-client'
 import { RecordActionParams } from '../../../backend/utils/view-helpers/view-helpers'
 import { ActionJSON, RecordJSON } from '../../interfaces'
 import { NoResourceError, NoActionError, NoRecordError } from '../app/error-message'
-import Wrapper from './utils/wrapper'
 import { ActionHeader } from '../app'
 import { useNotice, useResource, useTranslation } from '../../hooks'
 import DrawerPortal from '../app/drawer-portal'
@@ -96,7 +95,7 @@ const RecordAction: React.FC = () => {
   }
 
   return (
-    <Wrapper width={action.containerWidth}>
+    <Fragment>
       <ActionHeader
         resource={resource}
         action={action}
@@ -110,7 +109,7 @@ const RecordAction: React.FC = () => {
         resource={resource}
         record={record}
       />
-    </Wrapper>
+    </Fragment>
   )
 }
 

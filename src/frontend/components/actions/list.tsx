@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { Box, Pagination, Text } from '@adminjs/design-system'
+import { Pagination, Text } from '@adminjs/design-system'
 import { useHistory, useLocation } from 'react-router'
 
 import RecordsTable from '../app/records-table/records-table'
@@ -57,7 +57,7 @@ const List: React.FC<ActionProps> = ({ resource, setTag }) => {
   }
 
   return (
-    <Box variant="white">
+    <>
       <RecordsTable
         resource={resource}
         records={records}
@@ -77,7 +77,7 @@ const List: React.FC<ActionProps> = ({ resource, setTag }) => {
           onChange={handlePaginationChange}
         />
       </Text>
-    </Box>
+    </>
   )
 }
 

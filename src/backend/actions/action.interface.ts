@@ -641,4 +641,5 @@ export interface Action <T extends ActionResponse> {
    * @new in version v3.3
    */
   custom?: Record<string, any>;
+  label?: string;
 }

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 import { connect } from 'react-redux'
 
 import { RouteComponentProps } from 'react-router'
@@ -8,7 +8,6 @@ import { ReduxState } from '../../store/store'
 import { NoResourceError, NoActionError } from '../app/error-message'
 import { ResourceActionParams } from '../../../backend/utils/view-helpers/view-helpers'
 import { ActionHeader } from '../app'
-import Wrapper from './utils/wrapper'
 import DrawerPortal from '../app/drawer-portal'
 
 type PropsFromState = {
@@ -42,7 +41,7 @@ const ResourceAction: React.FC<Props> = (props) => {
   }
 
   return (
-    <Wrapper width={action.containerWidth}>
+    <Fragment>
       <ActionHeader
         resource={resource}
         action={action}
@@ -51,7 +50,7 @@ const ResourceAction: React.FC<Props> = (props) => {
         action={action}
         resource={resource}
       />
-    </Wrapper>
+    </Fragment>
   )
 }
 

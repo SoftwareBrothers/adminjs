@@ -13,6 +13,7 @@ import Notice from './app/notice'
 import {
   Dashboard, ResourceAction, RecordAction, Page, BulkAction, Resource,
 } from './routes'
+import { StyledContainer } from '../customize/StyledContainer'
 
 const GlobalStyle = createGlobalStyle`
   html, body, #app {
@@ -56,8 +57,10 @@ const App: React.FC = () => {
           />
         ) : null}
         <Sidebar isVisible={sidebarVisible} />
-        <Box flex flexGrow={1} flexDirection="column" overflowY="auto" bg="bg">
-          <TopBar toggleSidebar={(): void => toggleSidebar(!sidebarVisible)} />
+        <Box flex flexGrow={1} flexDirection="column" overflowY="auto" bg="bg" style={{ padding: 'auto 32px' }}>
+          <StyledContainer withBorder>
+            <TopBar toggleSidebar={(): void => toggleSidebar(!sidebarVisible)} />
+          </StyledContainer>
           <Box position="absolute" top={0} zIndex="2000">
             <Notice />
           </Box>

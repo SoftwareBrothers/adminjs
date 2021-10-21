@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, Fragment } from 'react'
 import { Loader } from '@adminjs/design-system'
 import { useRouteMatch, useLocation } from 'react-router'
 
@@ -7,7 +7,6 @@ import { BulkActionParams } from '../../../backend/utils/view-helpers/view-helpe
 import ApiClient from '../../utils/api-client'
 import getBulkActionsFromRecords from '../app/records-table/utils/get-bulk-actions-from-records'
 import { ActionJSON, RecordJSON, ResourceJSON } from '../../interfaces'
-import Wrapper from './utils/wrapper'
 import {
   ActionHeader,
   DrawerPortal,
@@ -97,7 +96,7 @@ const BulkAction: React.FC = () => {
   }
 
   return (
-    <Wrapper width={action.containerWidth}>
+    <Fragment>
       {!action?.showInDrawer ? (
         <ActionHeader
           resource={resource}
@@ -109,7 +108,7 @@ const BulkAction: React.FC = () => {
         resource={resource}
         records={records}
       />
-    </Wrapper>
+    </Fragment>
   )
 }
 

@@ -6,13 +6,13 @@ import { Box, BoxProps, DrawerContent, DrawerFooter } from '@adminjs/design-syst
 const StyledWrapper = styled(Box)`
   & ${DrawerContent} {
     background: ${({ theme }): string => theme.colors.white};
-    padding: ${({ theme }): string => theme.space.xxl};
+    padding: 0 32px;
     overflow: visible;
   }
   
   & ${DrawerFooter} {
     background: ${({ theme }): string => theme.colors.white};
-    padding: 0 ${({ theme }): string => theme.space.xxl} ${({ theme }): string => theme.space.xxl};
+    padding: 0 32px;
   }
 `
 
