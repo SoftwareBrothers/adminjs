@@ -1,5 +1,6 @@
 import { populator } from '../../utils'
 import { Action, RecordActionResponse } from '../action.interface'
+import { paramConverter } from '../../../utils/param-converter'
 
 /**
  * @implements Action
@@ -29,7 +30,9 @@ export const NewAction: Action<RecordActionResponse> = {
   handler: async (request, response, context) => {
     const { resource, h, currentAdmin, translateMessage } = context
     if (request.method === 'post') {
-      let record = await resource.build(request.payload ? request.payload : {})
+      const params = paramConverter.prepareParams(request.payload ?? {}, resource)
+
+      let record = await resource.build(params)
 
       record = await record.create()
       const [populatedRecord] = await populator([record])
