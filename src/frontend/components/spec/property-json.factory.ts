@@ -15,6 +15,7 @@ factory.define<PropertyJSON>('PropertyJSON', Object, {
   reference: null,
   isDisabled: false,
   isArray: false,
+  isDraggable: false,
   subProperties: [],
   isRequired: true,
   components: undefined,

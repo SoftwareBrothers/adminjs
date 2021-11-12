@@ -32,7 +32,7 @@ export type ActionButtonProps = {
  * ### Usage
  *
  * ```
- * import { ActionButton } from 'admin-bro'
+ * import { ActionButton } from 'adminjs'
  * ```
  *
  * @component

@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
-import { Box, cssClass } from '@admin-bro/design-system'
+import { Box, cssClass } from '@adminjs/design-system'
 
 import { RecordJSON, ResourceJSON } from '../../interfaces'
 import ViewHelpers from '../../../backend/utils/view-helpers/view-helpers'

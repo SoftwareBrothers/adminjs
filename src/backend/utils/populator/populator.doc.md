@@ -7,7 +7,7 @@ that Product has categoryId and it is marked as a 'reference' ({@link PropertyOp
 a Category.
 
 ```javascript
-const { populator } = require('admin-bro')
+const { populator } = require('adminjs')
 
 
 // action handler for showing product with categories

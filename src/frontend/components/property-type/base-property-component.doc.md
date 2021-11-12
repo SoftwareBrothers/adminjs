@@ -1,4 +1,4 @@
-The component which renders properties in all the places in the AdminBro UI. By all the
+The component which renders properties in all the places in the AdminJS UI. By all the
 places I mean:
 
 - **list**: on the List,
@@ -19,16 +19,16 @@ But you can override this by passing a custom component to {@link PropertyOption
 Take a look at the following example:
 
 ```javascript
-const AdminBro = require('admin-bro')
+const AdminJS = require('adminjs')
 const ResourceModel = require('./resource-model')
-const AdminBroOptions = {
+const AdminJSOptions = {
   resources: [{
     resource: ResourceModel
     options: {
       properties: {
         name: {
           components: {
-            show: AdminBro.bundle('./my-react-component'),
+            show: AdminJS.bundle('./my-react-component'),
           },
         },
       },
@@ -42,7 +42,7 @@ like on the Show action. We can define **my-react-component.jsx** like this:
 
 ```jsx
 import React from 'react'
-import { InputGroup, Label } from '@admin-bro/design-system'
+import { InputGroup, Label } from '@adminjs/design-system'
 
 const MyReactComponent = props => {
   const { record, property } = props
@@ -124,7 +124,7 @@ const Wrapper = () => {
      <Box my="lg">
        <Button variant="primary" onClick={submit}>Submit</Button>
        <Text variant="sm">
-         This will throw an error because there is no AdminBro instance running
+         This will throw an error because there is no AdminJS instance running
        </Text>
      </Box>
     </Box>

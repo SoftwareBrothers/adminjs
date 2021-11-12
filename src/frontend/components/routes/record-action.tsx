@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react'
 
 import { useRouteMatch } from 'react-router'
-import { Loader } from '@admin-bro/design-system'
+import { Loader } from '@adminjs/design-system'
 
 import BaseActionComponent from '../app/base-action-component'
 import ApiClient from '../../utils/api-client'
@@ -33,6 +33,9 @@ const RecordAction: React.FC = () => {
     setLoading(true)
     api.recordAction(match.params).then((response) => {
       setLoading(false)
+      if (response.data.notice && response.data.notice.type === 'error') {
+        addNotice(response.data.notice)
+      }
       setRecord(response.data.record)
     }).catch((error) => {
       addNotice({
@@ -65,7 +68,7 @@ const RecordAction: React.FC = () => {
   // Alternative approach would be to setRecord(undefined) before the fetch, but it is async and
   // we cannot be sure that the component wont be rendered (it will be at least once) with the
   // wrong data.
-  const hasDifferentRecord = record && record.id.toString() !== recordId
+  const hasDifferentRecord = record && record.id && record.id.toString() !== recordId
 
   if (loading || hasDifferentRecord) {
     const actionFromResource = resource.actions.find(r => r.name === actionName)

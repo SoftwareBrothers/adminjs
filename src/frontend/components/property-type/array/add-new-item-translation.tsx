@@ -1,5 +1,5 @@
 import React from 'react'
-import { Icon } from '@admin-bro/design-system'
+import { Icon } from '@adminjs/design-system'
 
 import { useTranslation } from '../../../hooks'
 import { ResourceJSON, PropertyJSON } from '../../../interfaces'

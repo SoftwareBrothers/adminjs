@@ -39,15 +39,15 @@ export type HrefFunction = (context: HrefContext) => string
  * ### Usage with TypeScript
  *
  * ```typescript
- * import { ResourceOptions } from 'admin-bro'
+ * import { ResourceOptions } from 'adminjs'
  * ```
  */
 export interface ResourceOptions {
   /**
    * Unique id of a resource.
    *
-   * So let's suppose that you connected 2 databases to AdminBro. Both of them have
-   * the same collection: 'users'. In this case AdminBro wont be able to distinguish them.
+   * So let's suppose that you connected 2 databases to AdminJS. Both of them have
+   * the same collection: 'users'. In this case AdminJS wont be able to distinguish them.
    * In this case changing Id of one of the resources helps to solve this issue.
    */
   id?: string;
@@ -72,20 +72,24 @@ export interface ResourceOptions {
    */
   href?: HrefFunction | string;
   /**
-   * Navigation option saying under which resource should be nested in sidebar.
+   * Navigation option saying under which menu this resource should be nested in sidebar.
    * Default to the database name.
    *
    * You have couple of options:
-   * - when you give both name and icon - your resource will be nested under this menu.
-   * - when you set it to null - resource will be top level, but without the icon
-   * - finally you can set the icon but leave name as `null`. In such case resource will be
-   *   top level and it will have an icon.
+   * - when you set both navigation.name and navigation.icon this resource will be nested under
+   *   this menu.
+   * - when you set navigation.name or navigation to a string this resource will be nested under
+   *   this menu and the icon will come from the database type
+   * - when you set navigation.icon but leave navigation.name as `null` this resource will be top
+   *   level and it will have an icon.
+   * - when you set navigation to null this resource will be top level, but without the icon
+   * - when you set navigation to false this resource will be hidden in the navigation
    * @new In version 3.3
    */
   navigation?: {
     name?: string | null;
     icon?: string;
-  } | string | null;
+  } | string | boolean | null;
 
 
   /**

@@ -26,7 +26,7 @@ export interface PropertyJSON {
   /**
    * If property has restricted number of values
    */
-  availableValues: Array<{label: string; value: string}> | null;
+  availableValues: Array<{label: string; value: string | number}> | null;
   /**
    * Property uniq name
    */
@@ -60,6 +60,11 @@ export interface PropertyJSON {
    * Indicates if property is an array of properties
    */
   isArray: boolean;
+  /**
+   * Indicates if array elements should be draggable when editing.
+   * It is only usable if the property is an array.
+   */
+  isDraggable: boolean;
   /**
    * Contain list of all sub properties.
    * This is the case for nested schemas in MongoDB.
@@ -111,7 +116,7 @@ export interface PropertyJSON {
   resourceId: string;
 
   /**
-   * Indicates if given property has been created in AdminBro {@link PropertyOptions} and hasn't
+   * Indicates if given property has been created in AdminJS {@link PropertyOptions} and hasn't
    * been returned by the database adapter.
    * @new in version 3.3
    */

@@ -3,18 +3,18 @@ import * as path from 'path'
 import * as util from 'util'
 import bundler from './bundler'
 import generateEntry from './generate-user-component-entry'
-import { ADMIN_BRO_TMP_DIR } from '../../constants'
+import { ADMIN_JS_TMP_DIR } from '../../constants'
 import env from './bundler-env'
 
-const entryPath = path.join(ADMIN_BRO_TMP_DIR, '.entry.js')
-const outPath = path.join(ADMIN_BRO_TMP_DIR, 'bundle.js')
+const entryPath = path.join(ADMIN_JS_TMP_DIR, '.entry.js')
+const outPath = path.join(ADMIN_JS_TMP_DIR, 'bundle.js')
 
 async function build(admin, { write = false, watch = false } = {}): Promise<string> {
-  const entryFile = generateEntry(admin, ADMIN_BRO_TMP_DIR)
   const { options: { bundler: bundlerOptions } } = admin
+  const entryFile = generateEntry(admin, ADMIN_JS_TMP_DIR)
 
   try {
-    await util.promisify(fs.mkdir)(ADMIN_BRO_TMP_DIR, { recursive: true })
+    await util.promisify(fs.mkdir)(ADMIN_JS_TMP_DIR, { recursive: true })
   } catch (error) {
     if (error.code !== 'EEXIST') { throw error }
   }
@@ -33,7 +33,7 @@ async function build(admin, { write = false, watch = false } = {}): Promise<stri
   await util.promisify(fs.writeFile)(entryPath, entryFile)
 
   const output = await bundler({
-    name: 'AdminBroCustom',
+    name: 'AdminJSCustom',
     input: entryPath,
     watch,
     file: write ? outPath : null,

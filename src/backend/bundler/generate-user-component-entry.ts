@@ -4,11 +4,11 @@ import slash from 'slash'
 /**
  * Generates entry file for all UsersComponents.
  * Entry consists of 3 parts:
- * 1. setup AdminBro.UserComponents map.
- * 2. List of all environmental variables passed to AdminBro in configuration option.
- * 3. Import of UserComponents defined by AdminBro.bundle(src)
+ * 1. setup AdminJS.UserComponents map.
+ * 2. List of all environmental variables passed to AdminJS in configuration option.
+ * 3. Import of UserComponents defined by AdminJS.bundle(src)
  *
- * @param {AdminBro}    admin
+ * @param {AdminJS}    admin
  * @param {String}      entryPath  path to folder where entry file is located
  * @return {String}     content of an entry file
  *
@@ -20,10 +20,10 @@ const generateUserComponentEntry = (admin, entryPath: string): string => {
 
   const absoluteEntryPath = path.resolve(entryPath)
 
-  const setupPart = 'AdminBro.UserComponents = {}\n'
+  const setupPart = 'AdminJS.UserComponents = {}\n'
 
   const envPart = Object.keys(env).map(envKey => (
-    `AdminBro.env.${envKey} = ${JSON.stringify(env[envKey])}\n`
+    `AdminJS.env.${envKey} = ${JSON.stringify(env[envKey])}\n`
   )).join('')
   const componentsPart = Object.keys(UserComponents || {}).map((componentId) => {
     const componentUrl = path.relative(
@@ -32,7 +32,7 @@ const generateUserComponentEntry = (admin, entryPath: string): string => {
     )
     return [
       `import ${componentId} from '${slash(componentUrl)}'`,
-      `AdminBro.UserComponents.${componentId} = ${componentId}`,
+      `AdminJS.UserComponents.${componentId} = ${componentId}`,
     ].join('\n')
   }).join('\n')
   return setupPart + envPart + componentsPart

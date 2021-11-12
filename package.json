@@ -1,6 +1,6 @@
 {
-  "name": "admin-bro",
-  "version": "3.3.1",
+  "name": "adminjs",
+  "version": "5.2.3",
   "description": "Admin panel for apps written in node.js",
   "main": "index.js",
   "types": "index.d.ts",
@@ -51,7 +51,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/SoftwareBrothers/admin-bro.git"
+    "url": "https://github.com/SoftwareBrothers/adminjs.git"
   },
   "keywords": [
     "hapi",
@@ -71,11 +71,11 @@
   "author": "Wojciech Krysiak",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/SoftwareBrothers/admin-bro/issues"
+    "url": "https://github.com/SoftwareBrothers/adminjs/issues"
   },
-  "homepage": "https://github.com/SoftwareBrothers/admin-bro#readme",
+  "homepage": "https://github.com/SoftwareBrothers/adminjs#readme",
   "dependencies": {
-    "@admin-bro/design-system": "^1.7.0",
+    "@adminjs/design-system": "^2.0.0",
     "@babel/core": "^7.10.2",
     "@babel/parser": "^7.10.2",
     "@babel/plugin-transform-runtime": "^7.10.1",
@@ -90,15 +90,16 @@
     "@rollup/plugin-node-resolve": "^9.0.0",
     "@rollup/plugin-replace": "^2.3.3",
     "@types/react": "^16.9.16",
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "babel-plugin-styled-components": "^1.11.1",
     "commander": "^5.1.0",
     "flat": "^4.1.0",
-    "i18next": "^19.1.0",
-    "lodash": "^4.17.11",
+    "i18next": "19.8.7",
+    "lodash": "^4.17.21",
     "ora": "^4.0.2",
     "prop-types": "^15.7.2",
     "react": "=16.13.1",
+    "react-beautiful-dnd": "^13.0.0",
     "react-dom": "=16.13.1",
     "react-i18next": "^11.3.1",
     "react-is": "=16.13.1",
@@ -113,7 +114,6 @@
     "styled-components": "^5.1.0"
   },
   "devDependencies": {
-    "@admin-bro/design-system": "^1.7.0",
     "@babel/cli": "^7.4.4",
     "@commitlint/cli": "^8.3.5",
     "@commitlint/config-conventional": "^8.3.4",
@@ -124,6 +124,7 @@
     "@types/flat": "^0.0.28",
     "@types/lodash": "^4.14.141",
     "@types/mocha": "^8.0.3",
+    "@types/react-beautiful-dnd": "^13.0.0",
     "@types/react-dom": "^16.9.8",
     "@types/react-redux": "^7.1.9",
     "@types/react-router": "^5.1.7",

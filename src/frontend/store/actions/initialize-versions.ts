@@ -1,4 +1,4 @@
-import { VersionProps } from '../../../admin-bro-options.interface'
+import { VersionProps } from '../../../adminjs-options.interface'
 
 export const VERSIONS_INITIALIZE = 'VERSIONS_INITIALIZE'
 

@@ -1,4 +1,4 @@
-import { AdminPage } from '../../../admin-bro-options.interface'
+import { AdminPage } from '../../../adminjs-options.interface'
 
 export const PAGES_INITIALIZE = 'PAGES_INITIALIZE'
 

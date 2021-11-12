@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { Box, Pagination, Text } from '@admin-bro/design-system'
+import { Box, Pagination, Text } from '@adminjs/design-system'
 import { useHistory, useLocation } from 'react-router'
 
 import RecordsTable from '../app/records-table/records-table'
@@ -50,7 +50,10 @@ const List: React.FC<ActionProps> = ({ resource, setTag }) => {
   const handlePaginationChange = (pageNumber: number): void => {
     const search = new URLSearchParams(location.search)
     search.set('page', pageNumber.toString())
-    history.push({ search: search.toString() })
+    history.push({
+      search: search.toString(),
+      state: { previousPage: window.location.href },
+    })
   }
 
   return (

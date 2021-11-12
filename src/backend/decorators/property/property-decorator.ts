@@ -1,4 +1,4 @@
-import AdminBro from '../../../admin-bro'
+import AdminJS from '../../../adminjs'
 import PropertyOptions from './property-options.interface'
 import BaseResource from '../../adapters/resource/base-resource'
 import BaseProperty, { PropertyType } from '../../adapters/property/base-property'
@@ -26,12 +26,12 @@ class PropertyDecorator {
   public propertyPath: string
 
   /**
-   * Indicates if given property has been created in AdminBro and hasn't been returned by the
+   * Indicates if given property has been created in AdminJS and hasn't been returned by the
    * database adapter
    */
   public isVirtual: boolean
 
-  private _admin: AdminBro
+  private _admin: AdminJS
 
   private _resource: ResourceDecorator
 
@@ -48,13 +48,13 @@ class PropertyDecorator {
   /**
    * @param {Object} opts
    * @param {BaseProperty}        opts.property
-   * @param  {AdminBro}           opts.admin  current instance of AdminBro
+   * @param  {AdminJS}           opts.admin  current instance of AdminJS
    * @param {PropertyOptions}     opts.options
    * @param {ResourceDecorator}   opts.resource
    */
   constructor({ property, admin, options = {}, resource, path, isVirtual }: {
     property: BaseProperty;
-    admin: AdminBro;
+    admin: AdminJS;
     options?: PropertyOptions;
     resource: ResourceDecorator;
     path?: string;
@@ -144,7 +144,7 @@ class PropertyDecorator {
    *
    * @returns {Array<{value: string, label: string}>}
    */
-  availableValues(): null | Array<{value: string; label: string}> {
+  availableValues(): null | Array<{value: string | number; label: string}> {
     if (this.options.availableValues) {
       return this.options.availableValues
     }
@@ -167,6 +167,13 @@ class PropertyDecorator {
       return !!this.options.isArray
     }
     return this.property.isArray()
+  }
+
+  isDraggable(): boolean {
+    if (typeof this.options.isDraggable !== 'undefined') {
+      return this.isArray() && !!this.options.isDraggable
+    }
+    return this.property.isDraggable()
   }
 
   /**
@@ -267,6 +274,7 @@ class PropertyDecorator {
         .filter(subProperty => !where || subProperty.isVisible(where))
         .map(subProperty => subProperty.toJSON(where)),
       isArray: this.isArray(),
+      isDraggable: this.isDraggable(),
       resourceId: this._resource.id(),
       isVirtual: this.isVirtual,
       props: this.options.props || {},

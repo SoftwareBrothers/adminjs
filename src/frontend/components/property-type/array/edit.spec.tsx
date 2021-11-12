@@ -1,6 +1,6 @@
 import React from 'react'
 import { expect } from 'chai'
-import { render, RenderResult, fireEvent, cleanup } from 'react-testing-library'
+import { render, RenderResult, fireEvent, cleanup, wait } from 'react-testing-library'
 import factory from 'factory-girl'
 import sinon from 'sinon'
 import 'sinon-chai'
@@ -67,11 +67,13 @@ describe('<PropertyType.Array.Edit />', function () {
       it('renders label and addItem button', async function () {
         const { findByText } = renderTestSubject(property, record)
 
-        const label = await findByText(property.label)
-        const addItemBtn = await findByText(AddNewItemText)
+        const label = findByText(property.label)
+        const addItemBtn = findByText(AddNewItemText)
 
-        expect(label).not.to.be.null
-        expect(addItemBtn).not.to.be.null
+        await wait(() => {
+          expect(label).not.to.be.null
+          expect(addItemBtn).not.to.be.null
+        })
       })
 
       it('renders new empty input field after clicking "add"', function () {
@@ -94,8 +96,10 @@ describe('<PropertyType.Array.Edit />', function () {
 
         const { findByDisplayValue } = renderTestSubject(property, record)
 
-        expect(findByDisplayValue(values[0])).not.to.be.null
-        expect(findByDisplayValue(values[1])).not.to.be.null
+        await wait(() => {
+          expect(findByDisplayValue(values[0])).not.to.be.null
+          expect(findByDisplayValue(values[1])).not.to.be.null
+        })
       })
     })
   })

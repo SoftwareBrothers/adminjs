@@ -1,5 +1,5 @@
 import { ResourceDecorator } from '..'
-import AdminBro from '../../../../admin-bro'
+import AdminJS from '../../../../adminjs'
 import { BaseProperty, BaseResource } from '../../../adapters'
 import { PropertyDecorator } from '../../property'
 import { getPropertyByKey } from './get-property-by-key'
@@ -9,7 +9,7 @@ export type DecoratedProperties = {[key: string]: PropertyDecorator}
 
 const decorateDatabaseProperties = (
   resource: BaseResource,
-  admin: AdminBro,
+  admin: AdminJS,
   decorator: ResourceDecorator,
 ): DecoratedProperties => {
   const { options } = decorator
@@ -30,7 +30,7 @@ const decorateDatabaseProperties = (
 
 const decorateVirtualProperties = (
   dbProperties: DecoratedProperties,
-  admin: AdminBro,
+  admin: AdminJS,
   decorator: ResourceDecorator,
 ): DecoratedProperties => {
   const { options } = decorator
@@ -109,7 +109,7 @@ const organizeNestedProperties = (
  */
 export function decorateProperties(
   resource: BaseResource,
-  admin: AdminBro,
+  admin: AdminJS,
   decorator: ResourceDecorator,
 ): DecoratedProperties {
   const dbProperties = decorateDatabaseProperties(resource, admin, decorator)

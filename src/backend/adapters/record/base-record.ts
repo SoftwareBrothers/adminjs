@@ -6,7 +6,7 @@ import { RecordJSON } from '../../../frontend/interfaces'
 import { CurrentAdmin } from '../../../current-admin.interface'
 
 /**
- * Representation of an particular ORM/ODM Record in given Resource in AdminBro
+ * Representation of an particular ORM/ODM Record in given Resource in AdminJS
  *
  * @category Base
  */
@@ -172,6 +172,30 @@ class BaseRecord {
     return this
   }
 
+  /**
+   * Creates the record in the database
+   *
+   * Practically it invokes
+   * {@link BaseResource#create}.
+   *
+   * When validation error occurs it stores that to {@link BaseResource#errors}
+   *
+   * @return {Promise<BaseRecord>}        given record (this)
+   */
+  async create(): Promise<BaseRecord> {
+    try {
+      const returnedParams = await this.resource.create(this.params)
+      this.storeParams(returnedParams)
+    } catch (e) {
+      if (e instanceof ValidationError) {
+        this.errors = e.propertyErrors
+        return this
+      }
+      throw e
+    }
+    this.errors = {}
+    return this
+  }
 
   /**
    * Returns uniq id of the Record.

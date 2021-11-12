@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react'
 import { Switch, Route } from 'react-router-dom'
 import { createGlobalStyle } from 'styled-components'
-import { Box, Overlay, Reset } from '@admin-bro/design-system'
+import { Box, Overlay, Reset } from '@adminjs/design-system'
 
 import { useLocation } from 'react-router'
 import ViewHelpers from '../../backend/utils/view-helpers/view-helpers'

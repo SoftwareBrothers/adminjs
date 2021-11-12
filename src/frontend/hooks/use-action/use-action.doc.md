@@ -4,8 +4,8 @@ Base on the action type and parameters (like {@link ActionJSON.guard}) it behave
 ### Usage
 
 ```javascript
-import { useAction } from 'admin-bro'
-import { Button } from '@admin-bro/design-system'
+import { useAction } from 'adminjs'
+import { Button } from '@adminjs/design-system'
 
 const myComponent = ({ action }) => {
   const { href, handleClick } = useAction(action, {

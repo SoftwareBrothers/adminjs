@@ -1,6 +1,6 @@
 import merge from 'lodash/merge'
 import { ResourceDecorator } from '..'
-import AdminBro from '../../../../admin-bro'
+import AdminJS from '../../../../adminjs'
 import { Action, ActionResponse, ACTIONS } from '../../../actions'
 
 import { BaseResource } from '../../../adapters'
@@ -10,15 +10,15 @@ export type DecoratedActions = {[key: string]: ActionDecorator}
 
 /**
  * Used to create an {@link ActionDecorator} based on both
- * {@link AdminBro.ACTIONS default actions} and actions specified by the user
- * via {@link AdminBroOptions}
+ * {@link AdminJS.ACTIONS default actions} and actions specified by the user
+ * via {@link AdminJSOptions}
  *
  * @returns {Record<string, ActionDecorator>}
  * @private
  */
 export function decorateActions(
   resource: BaseResource,
-  admin: AdminBro,
+  admin: AdminJS,
   decorator: ResourceDecorator,
 ): DecoratedActions {
   const { options } = decorator

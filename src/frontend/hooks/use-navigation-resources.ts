@@ -4,7 +4,7 @@ import {
   NavigationProps,
   NavigationElementProps,
   NavigationElementWithChildrenProps,
-} from '@admin-bro/design-system'
+} from '@adminjs/design-system'
 import { useMemo } from 'react'
 import { ResourceJSON } from '../interfaces'
 import useLocalStorage from './use-local-storage/use-local-storage'
@@ -35,14 +35,15 @@ export function useNavigationResources(
     onClick: (event): void => {
       if (resource.href) {
         event.preventDefault()
-        history.push(resource.href)
+        history.push(resource.href, { previousPage: window.location.href })
       }
     },
   }), [location, history])
 
   // grouping resources into parents
   const map = resources
-    .filter(res => res.href) // first filter out resource which are not visible
+    // first filter out resources which are not visible
+    .filter(res => res.href && res.navigation?.show !== false)
     .reduce((memo, resource) => {
       // in case resource has the same name as parent we namespace it wit "resource-""
       const key = resource.navigation?.name || ['resource', resource.name].join('-')

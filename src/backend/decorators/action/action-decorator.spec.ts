@@ -2,7 +2,7 @@
 import { expect } from 'chai'
 import sinon from 'sinon'
 import ActionDecorator from './action-decorator'
-import AdminBro from '../../../admin-bro'
+import AdminJS from '../../../adminjs'
 import BaseResource from '../../adapters/resource/base-resource'
 import { ActionRequest, ActionContext, ActionResponse, Before, After } from '../../actions/action.interface'
 import ForbiddenError from '../../utils/errors/forbidden-error'
@@ -10,13 +10,13 @@ import ValidationError from '../../utils/errors/validation-error'
 
 describe('ActionDecorator', function () {
   const request = { response: true } as unknown as ActionRequest
-  let admin: AdminBro
+  let admin: AdminJS
   let resource: BaseResource
   let context: ActionContext
   let handler: sinon.SinonStub<any, Promise<ActionResponse>>
 
   beforeEach(function () {
-    admin = sinon.createStubInstance(AdminBro)
+    admin = sinon.createStubInstance(AdminJS)
     resource = sinon.createStubInstance(BaseResource)
     context = { resource, _admin: admin } as ActionContext
     handler = sinon.stub()

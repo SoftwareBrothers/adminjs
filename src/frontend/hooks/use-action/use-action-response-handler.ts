@@ -18,7 +18,7 @@ export const useActionResponseHandler = (onActionCall?: ActionCallCallback) => {
     }
     if (data.redirectUrl && location.pathname !== data.redirectUrl) {
       const appended = appendForceRefresh(data.redirectUrl)
-      history.push(appended)
+      history.push(appended, { previousPage: window.location.href })
     }
     if (onActionCall) {
       onActionCall(data)

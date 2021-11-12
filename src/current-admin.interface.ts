@@ -4,11 +4,11 @@
  * ### Usage with TypeScript
  *
  * ```typescript
- * import { CurrentAdmin } from 'admin-bro'
+ * import { CurrentAdmin } from 'adminjs'
  * ```
  *
  * @alias CurrentAdmin
- * @memberof AdminBro
+ * @memberof AdminJS
  */
 export type CurrentAdmin = {
   /**

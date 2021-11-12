@@ -17,5 +17,6 @@ export const convertToSubProperty = (arrayProperty: PropertyJSON, index: number)
     path: [arrayProperty.path, index].join(DELIMITER),
     label: `[${index + 1}]`,
     isArray: false,
+    isDraggable: false,
   }
 )

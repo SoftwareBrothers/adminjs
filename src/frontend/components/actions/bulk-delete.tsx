@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import {
   Table, TableBody, TableRow, TableCell, Text,
   DrawerContent, DrawerFooter, Button, MessageBox, Icon,
-} from '@admin-bro/design-system'
+} from '@adminjs/design-system'
 
 import { RouteComponentProps, withRouter } from 'react-router'
 import PropertyType from '../property-type'
@@ -53,7 +53,9 @@ const BulkDelete: React.FC<ActionProps & AddNoticeProps & RouteComponentProps> =
         const search = new URLSearchParams(window.location.search)
         // bulk function have recordIds in the URL so it has to be stripped before redirect
         search.delete('recordIds')
-        history.push(appendForceRefresh(response.data.redirectUrl, search.toString()))
+        history.push(appendForceRefresh(response.data.redirectUrl, search.toString()), {
+          previousPage: window.location.href,
+        })
       }
     })).catch((error) => {
       setLoading(false)
@@ -92,7 +94,7 @@ const BulkDelete: React.FC<ActionProps & AddNoticeProps & RouteComponentProps> =
         </Table>
       </DrawerContent>
       <DrawerFooter>
-        <Button variant="primary" size="lg" onClick={handleClick}>
+        <Button variant="primary" size="lg" onClick={handleClick} disabled={loading}>
           {loading ? (<Icon icon="Fade" spin />) : null}
           {translateButton('confirmRemovalMany', resource.id, { count: records.length })}
         </Button>

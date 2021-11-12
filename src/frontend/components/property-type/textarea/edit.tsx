@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 import React, { memo, useState, FC, useEffect } from 'react'
-import { Input, FormGroup, FormMessage } from '@admin-bro/design-system'
+import { Input, FormGroup, FormMessage } from '@adminjs/design-system'
 
 import { EditPropertyProps } from '../base-property-props'
 import { recordPropertyIsEqual } from '../record-property-is-equal'

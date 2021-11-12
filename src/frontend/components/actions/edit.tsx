@@ -1,6 +1,6 @@
 import React, { FC, useEffect } from 'react'
 import { useHistory } from 'react-router'
-import { DrawerContent, Box, DrawerFooter, Button, Icon } from '@admin-bro/design-system'
+import { DrawerContent, Box, DrawerFooter, Button, Icon } from '@adminjs/design-system'
 
 import PropertyType from '../property-type'
 import { ActionProps } from './action.props'
@@ -34,7 +34,9 @@ const Edit: FC<ActionProps> = (props) => {
     event.preventDefault()
     handleSubmit().then((response) => {
       if (response.data.redirectUrl) {
-        history.push(appendForceRefresh(response.data.redirectUrl))
+        history.push(appendForceRefresh(response.data.redirectUrl), {
+          previousPage: window.location.href,
+        })
       }
     })
     return false
@@ -72,7 +74,7 @@ const Edit: FC<ActionProps> = (props) => {
         ))}
       </DrawerContent>
       <DrawerFooter>
-        <Button variant="primary" size="lg" type="submit" data-testid="button-save">
+        <Button variant="primary" size="lg" type="submit" data-testid="button-save" disabled={loading}>
           {loading ? (<Icon icon="Fade" spin />) : null}
           {translateButton('save', resource.id)}
         </Button>

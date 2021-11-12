@@ -98,7 +98,7 @@ module.exports = {
     sandbox: true,
     server: true,
     window: true,
-    AdminBro: true,
+    AdminJS: true,
     flatpickr: true,
     FormData: true,
     File: true,

@@ -2,7 +2,7 @@
 import React, { FC, useState, memo, useEffect } from 'react'
 import Select from 'react-select'
 import { withTheme, DefaultTheme } from 'styled-components'
-import { Input, FormMessage, FormGroup, selectStyles } from '@admin-bro/design-system'
+import { Input, FormMessage, FormGroup, selectStyles } from '@adminjs/design-system'
 
 import { EditPropertyProps } from '../base-property-props'
 import { recordPropertyIsEqual } from '../record-property-is-equal'
@@ -37,6 +37,7 @@ const SelectEdit: FC<CombinedProps> = (props) => {
       isClearable
       styles={styles}
       value={selected}
+      required={property.isRequired}
       options={property.availableValues}
       onChange={s => onChange(property.path, s?.value ?? '')}
       isDisabled={property.isDisabled}
@@ -60,6 +61,7 @@ const TextEdit: FC<CombinedProps> = (props) => {
     <Input
       id={property.path}
       name={property.path}
+      required={property.isRequired}
       onChange={e => setValue(e.target.value)}
       onBlur={() => onChange(property.path, value)}
       // handle clicking ENTER

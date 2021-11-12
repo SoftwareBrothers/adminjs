@@ -1,5 +1,5 @@
 import React from 'react'
-import { Navigation, NavigationElementProps } from '@admin-bro/design-system'
+import { Navigation, NavigationElementProps } from '@adminjs/design-system'
 
 import { useHistory, useLocation } from 'react-router'
 import ViewHelpers from '../../../../backend/utils/view-helpers/view-helpers'
@@ -36,7 +36,7 @@ const SidebarPages: React.FC<Props> = (props) => {
     onClick: (event, element): void => {
       event.preventDefault()
       if (element.href) {
-        history.push(element.href)
+        history.push(element.href, { previousPage: window.location.href })
       }
     },
   }))

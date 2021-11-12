@@ -1,7 +1,7 @@
 import { expect } from 'chai'
 import sinon, { SinonStubbedInstance } from 'sinon'
 import { ResourceDecorator } from '..'
-import AdminBro from '../../../../admin-bro'
+import AdminJS from '../../../../adminjs'
 import { BaseProperty, BaseResource } from '../../../adapters'
 import { PropertyOptions } from '../../property'
 
@@ -11,7 +11,7 @@ import { DecoratedProperties, decorateProperties } from './decorate-properties'
 describe('decorateProperties', () => {
   const path = 'propertyPath'
 
-  let admin: AdminBro
+  let admin: AdminJS
   let resource: SinonStubbedInstance<BaseResource> & BaseResource
   let decorator: SinonStubbedInstance<ResourceDecorator> & ResourceDecorator
   let property: BaseProperty
@@ -19,7 +19,7 @@ describe('decorateProperties', () => {
   let decoratedProperties: DecoratedProperties
 
   beforeEach(() => {
-    admin = sinon.createStubInstance(AdminBro)
+    admin = sinon.createStubInstance(AdminJS)
     resource = sinon.createStubInstance(BaseResource)
     decorator = sinon.createStubInstance(ResourceDecorator) as any
   })

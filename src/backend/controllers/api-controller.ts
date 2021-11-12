@@ -3,7 +3,7 @@
 import populator from '../utils/populator/populator'
 import ViewHelpers from '../utils/view-helpers/view-helpers'
 import { CurrentAdmin } from '../../current-admin.interface'
-import AdminBro from '../../admin-bro'
+import AdminJS from '../../adminjs'
 import { ActionContext, ActionRequest, RecordActionResponse, ActionResponse, BulkActionResponse } from '../actions/action.interface'
 import ConfigurationError from '../utils/errors/configuration-error'
 import NotFoundError from '../utils/errors/not-found-error'
@@ -12,7 +12,7 @@ import { SearchActionResponse } from '../actions/search/search-action'
 
 /**
  * Controller responsible for the auto-generated API: `/admin_root/api/...`, where
- * _admin_root_ is the `rootPath` given in {@link AdminBroOptions}.
+ * _admin_root_ is the `rootPath` given in {@link AdminJSOptions}.
  *
  * The best way to utilise it is to use {@link ApiClient} on the frontend.
  *
@@ -32,7 +32,7 @@ import { SearchActionResponse } from '../actions/search/search-action'
  *
  * ### Responsibility
  *
- * In general this controllers takes handler functions you define in {@link AdminBroOptions} and:
+ * In general this controllers takes handler functions you define in {@link AdminJSOptions} and:
  * - find all the [context information]{@link ActionContext} which is needed by the action
  *   and is passed to the {@link Action#handler}, {@link Action#before} and {@link Action#after}
  * - checks if action can be invoked by particular user {@link Action#isAccessible}
@@ -43,13 +43,13 @@ import { SearchActionResponse } from '../actions/search/search-action'
  * @hideconstructor
  */
 class ApiController {
-  private _admin: AdminBro
+  private _admin: AdminJS
 
   private currentAdmin: CurrentAdmin
 
   /**
    * @param {Object} options
-   * @param {AdminBroOptions} options.admin
+   * @param {AdminJSOptions} options.admin
    * @param {CurrentAdmin} [currentAdmin]
    */
   constructor({ admin }, currentAdmin) {
@@ -106,7 +106,7 @@ class ApiController {
    * Handler function responsible for a _.../api/resources/{resourceId}/actions/{action}_
    *
    * @param   {ActionRequest}  originalRequest
-   * @param   {any}            response object from the plugin (i.e. admin-bro-expressjs)
+   * @param   {any}            response object from the plugin (i.e. adminjs-expressjs)
    *
    * @return  {Promise<ActionResponse>}  action response
    */
@@ -152,9 +152,13 @@ class ApiController {
     actionContext.record = record
     const jsonWithRecord = await actionContext.action.handler(request, response, actionContext)
 
-    if (jsonWithRecord && jsonWithRecord.record && jsonWithRecord.record.recordActions) {
+    const isValidRecord = !!(jsonWithRecord && jsonWithRecord.record && jsonWithRecord.record.recordActions)
+    const anErrorWasHandled = jsonWithRecord && jsonWithRecord.notice && jsonWithRecord.notice.type === 'error'
+
+    if (isValidRecord || anErrorWasHandled) {
       return jsonWithRecord
     }
+
     throw new ConfigurationError(
       'handler of a recordAction should return a RecordJSON object',
       'Action#handler',
@@ -230,7 +234,7 @@ class ApiController {
     return {
       message: [
         'You can override this method by setting up dashboard.handler',
-        'function in AdminBro options',
+        'function in AdminJS options',
       ].join('\n'),
     }
   }
@@ -263,7 +267,7 @@ class ApiController {
     return {
       message: [
         'You can override this method by setting up pages[pageName].handler',
-        'function in AdminBro options',
+        'function in AdminJS options',
       ].join('\n'),
     }
   }

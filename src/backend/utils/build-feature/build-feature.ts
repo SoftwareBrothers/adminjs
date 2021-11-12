@@ -1,7 +1,7 @@
 /* eslint-disable no-nested-ternary */
 import uniq from 'lodash/uniq'
 import merge from 'lodash/merge'
-import { FeatureType } from '../../../admin-bro-options.interface'
+import { FeatureType } from '../../../adminjs-options.interface'
 import { ResourceOptions } from '../../decorators/resource/resource-options.interface'
 import { Action, ActionResponse } from '../../actions/action.interface'
 
@@ -70,16 +70,16 @@ const mergeResourceOptions = (
   const options = { ...oldOptions }
 
   basicOptions.forEach((propName: string) => {
-    if (newOptions[propName]) {
+    if (propName in newOptions) {
       options[propName] = newOptions[propName]
     }
   })
 
   listOptions.forEach((propName: string) => {
-    if (newOptions[propName]) {
+    if (propName in newOptions) {
       const mergedOptions = [
-        ...(oldOptions && oldOptions[propName] ? oldOptions[propName] : []),
-        ...(newOptions && newOptions[propName] ? newOptions[propName] : []),
+        ...(oldOptions && (propName in oldOptions) ? oldOptions[propName] : []),
+        ...(newOptions && (propName in newOptions) ? newOptions[propName] : []),
       ]
 
       options[propName] = uniq(mergedOptions)
@@ -120,7 +120,7 @@ const mergeResourceOptions = (
  *
  * @return  {FeatureType}
  * @example
- * const { buildFeature } = require('admin-bro/@core')
+ * const { buildFeature } = require('adminjs')
  *
  * const feature = buildFeature({
  *   // resource options goes here.

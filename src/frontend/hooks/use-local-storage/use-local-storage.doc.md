@@ -6,7 +6,7 @@ will be stored.
 ### Usage
 
 ```javascript
-import { useLocalStorage } from 'admin-bro'
+import { useLocalStorage } from 'adminjs'
 
 const MyRecordActionComponent = (props) => {
   const [isOpen, setIsOpen] = useLocalStorage('isSidebarOpen', false)
