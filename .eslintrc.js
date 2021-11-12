@@ -47,6 +47,7 @@ module.exports = {
     '*.yaml',
     '**/*/frontend/assets/**/*',
     '*.d.ts',
+    '*.config.js',
   ],
   overrides: [
     {

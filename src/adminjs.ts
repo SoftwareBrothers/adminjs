@@ -19,6 +19,7 @@ import { combineTranslations, Locale } from './locale/config'
 import en from './locale/en'
 import { TranslateFunctions, createFunctions } from './utils/translate-functions.factory'
 import { OverridableComponent } from './frontend/utils/overridable-component'
+import { relativeFilePathResolver } from './utils/file-resolver'
 
 const pkg = JSON.parse(fs.readFileSync(path.join(__dirname, '../package.json'), 'utf-8'))
 export const VERSION = pkg.version
@@ -31,6 +32,7 @@ export const defaultOptions: AdminJSOptionsWithDefault = {
   resources: [],
   dashboard: {},
   pages: {},
+  bundler: {},
 }
 
 type ActionsMap = {
@@ -97,6 +99,8 @@ class AdminJS {
      * @description Options given by a user
      */
     this.options = _.merge({}, defaultOptions, options)
+
+    this.resolveBabelConfigPath()
 
     this.initI18n()
 
@@ -228,6 +232,53 @@ class AdminJS {
   }
 
   /**
+   * Resolve babel config file path,
+   * and load configuration to this.options.bundler.babelConfig.
+   */
+  resolveBabelConfigPath(): void {
+    if (typeof this.options?.bundler?.babelConfig !== 'string') {
+      return
+    }
+    let filePath = ''
+    let config = this.options?.bundler?.babelConfig
+    if (config[0] === '/') {
+      filePath = config
+    } else {
+      filePath = relativeFilePathResolver(config, /new AdminJS/)
+    }
+
+    if (!fs.existsSync(filePath)) {
+      throw new ConfigurationError(`Given babel config "${filePath}", doesn't exist.`, 'AdminJS.html')
+    }
+    if (path.extname(filePath) === '.js') {
+      // eslint-disable-next-line
+      const configModule = require(filePath)
+      config = configModule && configModule.__esModule
+        ? configModule.default || undefined
+        : configModule
+      if (!config || typeof config !== 'object' || Array.isArray(config)) {
+        throw new Error(
+          `${filePath}: Configuration should be an exported JavaScript object.`,
+        )
+      }
+    } else {
+      try {
+        config = JSON.parse(fs.readFileSync(filePath, 'utf8'))
+      } catch (err) {
+        throw new Error(`${filePath}: Error while parsing config - ${err.message}`)
+      }
+      if (!config) throw new Error(`${filePath}: No config detected`)
+      if (typeof config !== 'object') {
+        throw new Error(`${filePath}: Config returned typeof ${typeof config}`)
+      }
+      if (Array.isArray(config)) {
+        throw new Error(`${filePath}: Expected config object but found array`)
+      }
+    }
+    this.options.bundler.babelConfig = config
+  }
+
+  /**
    * Requires given `.jsx/.tsx` file, that it can be bundled to the frontend.
    * It will be available under AdminJS.UserComponents[componentId].
    *
@@ -255,17 +306,7 @@ class AdminJS {
     if (src[0] === '/') {
       filePath = src
     } else {
-      const stack = ((new Error()).stack || '').split('\n')
-      // Node = 8 shows stack like that: '(/path/to/file.ts:77:27)
-      const pathNode8 = stack[2].match(/\((.*):[0-9]+:[0-9]+\)/)
-      // Node >= 10 shows stack like that: 'at /path/to/file.ts:77:27
-      const pathNode10 = stack[2].match(/at (.*):[0-9]+:[0-9]+/)
-
-      if (!pathNode8 && !pathNode10) {
-        throw new Error('STACK does not have a file url. Check out if the node version >= 8')
-      }
-      const executionPath = (pathNode8 && pathNode8[1]) || (pathNode10 && pathNode10[1])
-      filePath = path.join(path.dirname(executionPath as string), src)
+      filePath = relativeFilePathResolver(src, /Function\.bundle/)
     }
 
     const { root, dir, name } = path.parse(filePath)

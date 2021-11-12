@@ -1,4 +1,5 @@
 import { ThemeOverride } from '@adminjs/design-system'
+import { TransformOptions as BabelConfig } from 'babel-core'
 
 import BaseResource from './backend/adapters/resource/base-resource'
 import BaseDatabase from './backend/adapters/database/base-database'
@@ -235,6 +236,11 @@ export interface AdminJSOptions {
    * internationalization in AdminJS works.
    */
   locale?: Locale;
+
+  /**
+   * rollup bundle options;
+   */
+  bundler?: BundlerOptions;
 }
 
 /* cspell: enable */
@@ -415,6 +421,25 @@ export type PageHandler = (
   context: PageContext,
 ) => Promise<any>
 
+/**
+ * Bundle options
+ *
+ * @alias BundlerOptions
+ * @memberof AdminJSOptions
+ * @example
+ * const adminJS = new AdminJS({
+    resources: [],
+    rootPath: '/admin',
+    babelConfig: './.adminJS.babelrc'
+   })
+ */
+export type BundlerOptions = {
+  /**
+   * The file path to babel config file or json object of babel config.
+   */
+  babelConfig?: BabelConfig | string;
+}
+
 export interface AdminJSOptionsWithDefault extends AdminJSOptions {
   rootPath: string;
   logoutPath: string;
@@ -428,5 +453,6 @@ export interface AdminJSOptionsWithDefault extends AdminJSOptions {
     handler?: PageHandler;
     component?: string;
   };
+  bundler: BundlerOptions;
   pages: AdminJSOptions['pages'];
 }
