@@ -425,12 +425,12 @@ export type PageHandler = (
  * Bundle options
  *
  * @alias BundlerOptions
- * @memberof AdminBroOptions
+ * @memberof AdminJSOptions
  * @example
- * const adminBro = new AdminBro({
+ * const adminJS = new AdminJS({
     resources: [],
     rootPath: '/admin',
-    babelConfig: './.adminbro.babelrc'
+    babelConfig: './.adminJS.babelrc'
    })
  */
 export type BundlerOptions = {
