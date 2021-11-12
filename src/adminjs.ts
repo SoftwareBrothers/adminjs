@@ -244,11 +244,11 @@ class AdminJS {
     if (config[0] === '/') {
       filePath = config
     } else {
-      filePath = relativeFilePathResolver(config, /new AdminBro/)
+      filePath = relativeFilePathResolver(config, /new AdminJS/)
     }
 
     if (!fs.existsSync(filePath)) {
-      throw new ConfigurationError(`Given babel config "${filePath}", doesn't exist.`, 'AdminBro.html')
+      throw new ConfigurationError(`Given babel config "${filePath}", doesn't exist.`, 'AdminJS.html')
     }
     if (path.extname(filePath) === '.js') {
       // eslint-disable-next-line

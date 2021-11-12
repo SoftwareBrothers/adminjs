@@ -51,12 +51,12 @@ describe('AdminJS', function () {
 
   describe('resolveBabelConfigPath', function () {
     it('load .babelrc file', function () {
-      const adminBro = new AdminBro({ bundler: { babelConfig: '../.babelrc' } })
+      const adminBro = new AdminJS({ bundler: { babelConfig: '../.babelrc' } })
       expect(adminBro.options.bundler.babelConfig).not.to.undefined
     })
 
     it('load with json object directly', function () {
-      const adminBro = new AdminBro({ bundler: { babelConfig: {
+      const adminBro = new AdminJS({ bundler: { babelConfig: {
         presets: [
           '@babel/preset-react',
           ['@babel/preset-env', {
@@ -79,7 +79,7 @@ describe('AdminJS', function () {
     })
 
     it('load babel.config.js file', function () {
-      const adminBro = new AdminBro({ bundler: { babelConfig: './babel.test.config.js' } })
+      const adminBro = new AdminJS({ bundler: { babelConfig: './babel.test.config.js' } })
       expect(adminBro.options.bundler.babelConfig).not.to.undefined
     })
   })
