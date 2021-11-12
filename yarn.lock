@@ -9808,9 +9808,9 @@ semantic-release-slack-bot@^1.6.2:
     slackify-markdown "^1.1.1"
 
 semantic-release@^17.0.7:
-  version "17.2.1"
-  resolved "https://registry.yarnpkg.com/semantic-release/-/semantic-release-17.2.1.tgz#739bad395219110cc30d1ef7029fa2e03e3b4b72"
-  integrity sha512-+xbLWsT9NoibeMMJw4te0pbY4q/Z1gt/vzhB0z9RRNGVyqCgQiK5NUJ11eW6etSyPZ9QFeAMnqO2dzscWUTy2w==
+  version "17.2.3"
+  resolved "https://registry.yarnpkg.com/semantic-release/-/semantic-release-17.2.3.tgz#11f10b851d4e75b1015b17515c433049b3df994c"
+  integrity sha512-MY1MlowGQrkOR7+leOD8ICkVOC6i1szbwDODdbJ0UdshtMx8Ms0bhpRQmEEliqYKEb5PLv/dqs6zKKuHT7UxTg==
   dependencies:
     "@semantic-release/commit-analyzer" "^8.0.0"
     "@semantic-release/error" "^2.2.0"
