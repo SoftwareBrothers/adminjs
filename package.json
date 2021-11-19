@@ -118,7 +118,7 @@
     "@commitlint/cli": "^8.3.5",
     "@commitlint/config-conventional": "^8.3.4",
     "@semantic-release/git": "^9.0.0",
-    "@types/babel-core": "^6.25.6",
+    "@types/babel-core": "^6.25.7",
     "@types/chai": "^4.1.2",
     "@types/chai-as-promised": "^7.1.2",
     "@types/flat": "^0.0.28",

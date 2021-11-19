@@ -306,7 +306,7 @@ class AdminJS {
     if (src[0] === '/') {
       filePath = src
     } else {
-      filePath = relativeFilePathResolver(src, /Function\.bundle/)
+      filePath = relativeFilePathResolver(src, /.*\.{1}bundle/)
     }
 
     const { root, dir, name } = path.parse(filePath)
