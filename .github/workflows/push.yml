@@ -14,7 +14,7 @@ jobs:
       - name: Setup
         uses: actions/setup-node@v1
         with:
-          node-version: "10.x"
+          node-version: "14.x"
       - uses: actions/cache@v1
         id: yarn-cache
         with:
@@ -36,7 +36,7 @@ jobs:
       - name: Setup
         uses: actions/setup-node@v1
         with:
-          node-version: "10.x"
+          node-version: "14.x"
       - uses: actions/cache@v1
         id: yarn-cache
         with:
@@ -111,7 +111,7 @@ jobs:
       - name: Setup
         uses: actions/setup-node@v1
         with:
-          node-version: "10.x"
+          node-version: "14.x"
       - uses: actions/cache@v1
         id: yarn-cache
         with:
@@ -186,7 +186,7 @@ jobs:
       - name: Setup
         uses: actions/setup-node@v1
         with:
-          node-version: "10.x"
+          node-version: "14.x"
       - uses: actions/cache@v1
         id: yarn-cache
         with:
@@ -273,7 +273,7 @@ jobs:
       - name: Setup
         uses: actions/setup-node@v1
         with:
-          node-version: "10.x"
+          node-version: "14.x"
       - uses: actions/cache@v1
         id: yarn-cache
         with:
