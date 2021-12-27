@@ -47,6 +47,8 @@ export interface PropertyJSON {
    * Property label
    */
   label: string;
+
+  description?: string;
   /**
    * One of {@link PropertyType}s
    */

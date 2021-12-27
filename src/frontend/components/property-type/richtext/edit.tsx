@@ -42,6 +42,7 @@ const Edit: FC<EditPropertyProps> = (props) => {
         onChange={content => onChange(property.path, content)}
         quill={quill}
       />
+      {property.description && <FormMessage>{property.description}</FormMessage>}
       <FormMessage>{error?.message}</FormMessage>
     </FormGroup>
   )

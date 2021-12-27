@@ -20,6 +20,7 @@ const Edit: React.FC<EditPropertyProps> = (props) => {
         propertyType={property.type}
         {...property.props}
       />
+      {property.description && <FormMessage>{property.description}</FormMessage>}
       <FormMessage>{error && error.message}</FormMessage>
     </FormGroup>
   )

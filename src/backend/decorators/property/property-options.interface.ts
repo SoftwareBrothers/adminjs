@@ -110,4 +110,6 @@ export default interface PropertyOptions {
    * @new In version 3.3
    */
   reference?: string;
+
+  description?: string;
 }

@@ -278,6 +278,7 @@ class PropertyDecorator {
       resourceId: this._resource.id(),
       isVirtual: this.isVirtual,
       props: this.options.props || {},
+      description: this.options.description,
     }
   }
 

@@ -88,6 +88,7 @@ const Edit: FC<CombinedProps> = (props) => {
         isLoading={loadingRecord}
         {...property.props}
       />
+      {property.description && <FormMessage>{property.description}</FormMessage>}
       <FormMessage>{error?.message}</FormMessage>
     </FormGroup>
   )
