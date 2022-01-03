@@ -1,6 +1,7 @@
 import { Action, RecordActionResponse } from '../action.interface'
 import NotFoundError from '../../utils/errors/not-found-error'
 import populator from '../../utils/populator/populator'
+import { paramConverter } from '../../../utils/param-converter'
 
 /**
  * @implements Action
@@ -39,7 +40,8 @@ export const EditAction: Action<RecordActionResponse> = {
       return { record: record.toJSON(currentAdmin) }
     }
 
-    const newRecord = await record.update(request.payload)
+    const params = paramConverter.prepareParams(request.payload ?? {}, resource)
+    const newRecord = await record.update(params)
     const [populatedRecord] = await populator([newRecord])
 
     // eslint-disable-next-line no-param-reassign
