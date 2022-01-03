@@ -1,4 +1,4 @@
-import merge from 'lodash/merge'
+import mergeWith from 'lodash/mergeWith'
 import { ResourceDecorator } from '..'
 import AdminJS from '../../../../adminjs'
 import { Action, ActionResponse, ACTIONS } from '../../../actions'
@@ -7,6 +7,13 @@ import { BaseResource } from '../../../adapters'
 import { ActionDecorator } from '../../action'
 
 export type DecoratedActions = {[key: string]: ActionDecorator}
+
+
+function mergeCustomizer<T>(destValue: T | Array<T>, sourceValue: T | Array<T>): void {
+  if (Array.isArray(destValue)) {
+    destValue.concat(sourceValue)
+  }
+}
 
 /**
  * Used to create an {@link ActionDecorator} based on both
@@ -25,7 +32,7 @@ export function decorateActions(
   // in the end we merge actions defined by the user with the default actions.
   // since _.merge is a deep merge it also overrides defaults with the parameters
   // specified by the user.
-  const actions = merge({}, ACTIONS, options.actions || {})
+  const actions = mergeWith({}, ACTIONS, options.actions || {}, mergeCustomizer)
   const returnActions = {}
   // setting default values for actions
   Object.keys(actions).forEach((key: string) => {
