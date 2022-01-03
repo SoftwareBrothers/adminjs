@@ -545,9 +545,9 @@ export interface Action <T extends ActionResponse> {
    * // and attaching this function to actions for all resources
    * const { ACTIONS } = require('adminjs')
    *
-   * ACTIONS.edit.after = createLog
-   * ACTIONS.delete.after = createLog
-   * ACTIONS.new.after = createLog
+   * ACTIONS.edit.after = [createLog]
+   * ACTIONS.delete.after = [createLog]
+   * ACTIONS.new.after = [createLog]
    * ```
    *
    */
