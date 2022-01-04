@@ -1,3 +1,4 @@
+import * as flat from 'flat'
 import { Action, ActionResponse } from '../action.interface'
 import { RecordJSON } from '../../../frontend/interfaces'
 import Filter from '../../utils/filter/filter'
@@ -27,20 +28,33 @@ export const SearchAction: Action<SearchActionResponse> = {
    */
   handler: async (request, response, data) => {
     const { currentAdmin, resource } = data
+    const { query } = request
 
-    const queryString = request.params && request.params.query
     const decorated = resource.decorate()
     const titlePropertyName = decorated.titleProperty().name()
 
-    const filters = queryString ? { [titlePropertyName]: queryString } : {}
+    const {
+      sortBy = decorated.options?.sort?.sortBy || titlePropertyName,
+      direction = 'asc',
+      filters: customFilters = {},
+      perPage = 50,
+      page = 1,
+    } = flat.unflatten(query || {})
+
+    const queryString = request.params && request.params.query
+    const queryFilter = queryString ? { [titlePropertyName]: queryString } : {}
+    const filters = {
+      ...customFilters,
+      ...queryFilter,
+    }
     const filter = new Filter(filters, resource)
 
-    const sortBy = decorated.options?.sort?.sortBy || titlePropertyName
     const records = await resource.find(filter, {
-      limit: 50,
+      limit: perPage,
+      offset: (page - 1) * perPage,
       sort: {
         sortBy,
-        direction: 'asc',
+        direction,
       },
     })
 
