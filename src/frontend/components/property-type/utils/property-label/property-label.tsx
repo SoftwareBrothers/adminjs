@@ -20,7 +20,6 @@ const PropertyLabel: React.FC<PropertyLabelProps> = (props) => {
       {...labelProps}
     >
       {property.label}
-
       {property.description && <PropertyDescription property={property} />}
     </Label>
   )

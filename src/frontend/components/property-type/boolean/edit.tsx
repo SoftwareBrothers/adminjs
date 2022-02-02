@@ -29,7 +29,6 @@ const Edit: React.FC<EditPropertyProps> = (props) => {
         {...property.props}
       />
       <PropertyLabel property={property} props={{ inline: true }} />
-
       <FormMessage>{error && error.message}</FormMessage>
     </FormGroup>
   )

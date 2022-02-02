@@ -47,7 +47,10 @@ export interface PropertyJSON {
    * Property label
    */
   label: string;
-
+  /**
+   * Description of field. Shown as hoverable hint after label.
+   * @new In version 5.6
+   */
   description?: string;
   /**
    * One of {@link PropertyType}s
