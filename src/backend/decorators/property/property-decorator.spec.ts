@@ -199,6 +199,7 @@ describe('PropertyDecorator', () => {
         'isVirtual',
         'props',
         'hideLabel',
+        'description',
       )
     })
   })
