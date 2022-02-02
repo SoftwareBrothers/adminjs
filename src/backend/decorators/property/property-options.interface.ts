@@ -99,8 +99,7 @@ export default interface PropertyOptions {
   isRequired?: boolean;
 
   /**
-   * if label should be hidden - false by default
-   * @new in version 3.3
+   * Whether label should be hidden - false by default
    */
   hideLabel?: boolean;
 
@@ -113,7 +112,7 @@ export default interface PropertyOptions {
 
   /**
    * Description of field. Shown as hoverable hint after label.
-   * @new In version 5.3
+   * @new In version 5.6
    */
   description?: string;
 }
