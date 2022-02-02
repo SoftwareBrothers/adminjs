@@ -32,7 +32,6 @@ const Edit: FC<EditPropertyProps> = (props) => {
         disabled={property.isDisabled}
         {...property.props}
       />
-      {property.description && <FormMessage>{property.description}</FormMessage>}
       <FormMessage>{error && error.message}</FormMessage>
     </FormGroup>
   )

@@ -44,7 +44,6 @@ const Edit: React.FC<EditPropertyProps> = (props) => {
           <Icon icon="View" />
         </Button>
       </InputGroup>
-      {property.description && <FormMessage>{property.description}</FormMessage>}
       <FormMessage>{error && error.message}</FormMessage>
     </FormGroup>
   )

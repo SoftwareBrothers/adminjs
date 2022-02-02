@@ -111,5 +111,9 @@ export default interface PropertyOptions {
    */
   reference?: string;
 
+  /**
+   * Description of field. Shown as hoverable hint after label.
+   * @new In version 5.3
+   */
   description?: string;
 }

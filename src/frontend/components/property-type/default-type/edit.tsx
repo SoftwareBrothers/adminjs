@@ -18,7 +18,6 @@ const Edit: FC<CombinedProps> = (props) => {
     <FormGroup error={Boolean(error)}>
       <PropertyLabel property={property} />
       {property.availableValues ? <SelectEdit {...props} /> : <TextEdit {...props} />}
-      {property.description && <FormMessage>{property.description}</FormMessage>}
       <FormMessage>{error && error.message}</FormMessage>
     </FormGroup>
   )
