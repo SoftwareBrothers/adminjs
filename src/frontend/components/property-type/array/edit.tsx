@@ -34,7 +34,7 @@ const ItemRenderer: React.FC<EditProps & ItemRendererProps> = (props) => {
           ref={provided.innerRef}
           {...provided.draggableProps}
           {...provided.dragHandleProps}
-          background="white"
+          backgroundColor="white"
           flex
           flexDirection="row"
           alignItems="center"
