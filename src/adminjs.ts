@@ -309,25 +309,27 @@ class AdminJS {
       filePath = relativeFilePathResolver(src, /.*\.{1}bundle/)
     }
 
-    const { root, dir, name } = path.parse(filePath)
-    if (!extensions.find((ext) => {
+    const { ext: originalFileExtension } = path.parse(filePath)
+    for (const extension of extensions) {
+      const forcedExt = extensions.includes(originalFileExtension) ? null : extension
+      const { root, dir, name, ext } = path.parse(filePath + forcedExt)
       const fileName = path.format({ root, dir, name, ext })
-      return fs.existsSync(fileName)
-    })) {
-      throw new ConfigurationError(`Given file "${src}", doesn't exist.`, 'AdminJS.html')
+      if (fs.existsSync(fileName)) {
+        // We have to put this to the global scope because of the NPM resolution. If we put this to
+        // let say `AdminJS.UserComponents` (static member) it wont work in a case where user uses
+        // AdminJS.bundle from a different packages (i.e. from the extension) because there, there
+        // is an another AdminJS version (npm installs different versions for each package). Also
+        // putting admin to peerDependencies wont solve this issue, because in the development mode
+        // we have to install adminjs it as a devDependency, because we want to run test or have
+        // proper types.
+        global.UserComponents = global.UserComponents || {}
+        global.UserComponents[componentId] = path.format({ root, dir, name })
+
+        return componentId
+      }
     }
 
-    // We have to put this to the global scope because of the NPM resolution. If we put this to
-    // let say `AdminJS.UserComponents` (static member) it wont work in a case where user uses
-    // AdminJS.bundle from a different packages (i.e. from the extension) because there, there
-    // is an another AdminJS version (npm installs different versions for each package). Also
-    // putting admin to peerDependencies wont solve this issue, because in the development mode
-    // we have to install adminjs it as a devDependency, because we want to run test or have
-    // proper types.
-    global.UserComponents = global.UserComponents || {}
-    global.UserComponents[componentId] = path.format({ root, dir, name })
-
-    return componentId
+    throw new ConfigurationError(`Given file "${src}", doesn't exist.`, 'AdminJS.html')
   }
 }
 
