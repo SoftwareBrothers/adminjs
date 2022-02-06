@@ -22,10 +22,9 @@ const run = async () => {
     input: `${__dirname}/../src/frontend/global-entry.js`,
     plugins: [
       resolve({
-        extensions: ['.mjs', '.js', '.jsx', '.json', '.scss'],
+        extensions: ['.mjs', '.js', '.jsx', '.json'],
         mainFields: ['browser'],
         preferBuiltins: true,
-        exportConditions: ['default', 'module', 'import', 'node'],
       }),
       replace({
         'process.env.NODE_ENV': JSON.stringify(env),
