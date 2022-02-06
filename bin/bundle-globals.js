@@ -24,7 +24,7 @@ const run = async () => {
       resolve({
         extensions: ['.mjs', '.js', '.jsx', '.json', '.scss'],
         mainFields: ['browser'],
-        preferBuiltins: true,
+        preferBuiltins: false,
         exportConditions: ['default', 'module', 'import', 'node'],
       }),
       replace({
