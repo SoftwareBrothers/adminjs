@@ -33,6 +33,8 @@ const external = [
   'react-select/creatable',
   'i18next',
   'react-i18next',
+  'punycode',
+  'uuid',
 ]
 
 const globals = {
@@ -61,6 +63,7 @@ const globals = {
   i18next: 'i18n',
   'react-i18next': 'ReactI18Next',
   Quill: 'Quill',
+  punycode: 'punycode',
 }
 
 const extensions = ['.mjs', '.js', '.jsx', '.json', '.ts', '.tsx']
@@ -70,6 +73,7 @@ const plugins = ({ babelConfig = {}, commonJSConfig = {}, minify = false } = {})
     resolve({
       extensions,
       mainFields: ['main', 'module', 'jsnext:main'],
+      preferBuiltins: false,
     }),
     json(),
     // typescript(),

@@ -32,7 +32,7 @@ async function build({
       // eslint-disable-next-line no-console
       console.log(util.inspect(bundle.watchFiles, { maxArrayLength: null }))
     }
-    const spinner = ora('Bundling files')
+    const spinner = ora('Bundling files in watchmode: ' + JSON.stringify(inputOptions))
     const watcher = rollup.watch({
       ...inputOptions,
       output: outputOptions,
