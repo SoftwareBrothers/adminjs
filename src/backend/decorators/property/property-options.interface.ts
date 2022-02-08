@@ -99,8 +99,7 @@ export default interface PropertyOptions {
   isRequired?: boolean;
 
   /**
-   * if label should be hidden - false by default
-   * @new in version 3.3
+   * Whether label should be hidden - false by default
    */
   hideLabel?: boolean;
 
@@ -110,4 +109,40 @@ export default interface PropertyOptions {
    * @new In version 3.3
    */
   reference?: string;
+
+  /**
+   * Description of field. Shown as hoverable hint after label.
+   *
+   * To use translations provide it in locale with specified options key from resource
+   * @example
+   * ```js
+   * new AdminJS({
+   *   resources: [
+   *     {
+   *       resource: myResource,
+   *       options: {
+   *         properties: {
+   *           myAwesomeProperty: {
+   *             description: "Plane description" || "awesomeHint", // <- message key in locale
+   *           },
+   *         },
+   *       },
+   *     },
+   *   ],
+   *   locale: {
+   *     translations: {
+   *       resources: {
+   *         myResource: {
+   *           messages: {
+   *             awesomeHint: "Locale description",
+   *           },
+   *         },
+   *       },
+   *     },
+   *   },
+   * });
+   * ```
+   * @new In version 5.6
+   */
+  description?: string;
 }

@@ -186,7 +186,7 @@ export class ViewHelpers {
   }
 
   /**
-   * Returns url for a `new` action in given Resource. Uses {@link resourceActionUrl}
+   * Returns url for a `list` action in given Resource. Uses {@link resourceActionUrl}
    *
    * @param {string} resourceId  id to the resource
    * @param {string} [search]        optional query string
