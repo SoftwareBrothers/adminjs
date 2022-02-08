@@ -2,10 +2,10 @@
 # yarn lockfile v1
 
 
-"@adminjs/design-system@^2.0.0":
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/@adminjs/design-system/-/design-system-2.0.0.tgz#3380910ffa2c8dc7418476e83474f586896104e2"
-  integrity sha512-nVObZNsFtU9k/qLw6AylLTwg9gR0aOpxImgDZf21crKCz7s/9u+N2BVozr3SWU94m90nz/VEL/3mOqRGQ2uk2w==
+"@adminjs/design-system@^2.1.0":
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/@adminjs/design-system/-/design-system-2.1.0.tgz#cdfecaba779bff47ea9eaae8b8ca615689d1a44f"
+  integrity sha512-W5jbPJTL1v1Y2BTRXKgatVAphK7tdFYRJbGZH+yDliLinCh9pfBAE/P4iC47NYEOHx+TKqtTQPjn97efZSL5Ww==
   dependencies:
     "@carbon/icons-react" "^10.14.0"
     date-fns "2.15.0"
