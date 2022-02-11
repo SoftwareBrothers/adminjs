@@ -1,6 +1,7 @@
 import { Label, LabelProps } from '@adminjs/design-system'
 import React from 'react'
 import { PropertyJSON } from '../../../../interfaces'
+import { PropertyDescription } from '../property-description'
 
 export type PropertyLabelProps = {
   property: PropertyJSON;
@@ -19,6 +20,7 @@ const PropertyLabel: React.FC<PropertyLabelProps> = (props) => {
       {...labelProps}
     >
       {property.label}
+      {property.description && <PropertyDescription property={property} />}
     </Label>
   )
 }

@@ -17,7 +17,7 @@ Check out the example application with mongodb and postgres models here:
 
 https://admin-bro-example-app-staging.herokuapp.com/admin/login
 
-## Getting Started
+## Getting started
 
 - Check out the [documentation](https://adminjs.co)
 - Try the [live demo](https://admin-bro-example-app-staging.herokuapp.com/admin/login) as mentioned above

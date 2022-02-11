@@ -1,4 +1,4 @@
-import React, { MouseEvent, SyntheticEvent, useState, useEffect } from 'react'
+import React, { MouseEvent, SyntheticEvent, useState, useEffect, useRef } from 'react'
 import { useHistory, useLocation, useRouteMatch } from 'react-router-dom'
 import {
   Box,
@@ -45,8 +45,15 @@ export const FilterDrawer: React.FC<FilterProps> = (props) => {
   const match = useRouteMatch<MatchProps>()
   const history = useHistory()
   const { translateLabel, translateButton } = useTranslation()
+  const initialLoad = useRef(true)
 
-  useEffect(() => setFilter({}), [match.params.resourceId])
+  useEffect(() => {
+    if (initialLoad.current) {
+      initialLoad.current = false
+    } else {
+      setFilter({})
+    }
+  }, [match.params.resourceId])
 
   const handleSubmit = (event: SyntheticEvent): false => {
     event.preventDefault()
