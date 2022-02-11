@@ -303,7 +303,7 @@ class AdminJS {
     const extensions = ['.jsx', '.js', '.ts', '.tsx']
     let filePath = ''
     const componentId = componentName || `Component${nextId}`
-    if (src[0] === '/') {
+    if (path.isAbsolute(src)) {
       filePath = src
     } else {
       filePath = relativeFilePathResolver(src, /.*\.{1}bundle/)
