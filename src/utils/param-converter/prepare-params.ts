@@ -36,7 +36,7 @@ const prepareParams = (
     }
   }
 
-  return preparedParams
+  return { ...params, ...preparedParams }
 }
 
 export { prepareParams }
