@@ -311,7 +311,7 @@ class AdminJS {
 
     const { ext: originalFileExtension } = path.parse(filePath)
     for (const extension of extensions) {
-      const forcedExt = extensions.includes(originalFileExtension) ? null : extension
+      const forcedExt = extensions.includes(originalFileExtension) ? '' : extension
       const { root, dir, name, ext } = path.parse(filePath + forcedExt)
       const fileName = path.format({ root, dir, name, ext })
       if (fs.existsSync(fileName)) {
