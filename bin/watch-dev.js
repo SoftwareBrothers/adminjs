@@ -37,6 +37,4 @@ async function build() {
 build().catch((error) => {
   console.log(error)
   process.exit(1)
-}).finally(() => {
-  process.exit()
 })
