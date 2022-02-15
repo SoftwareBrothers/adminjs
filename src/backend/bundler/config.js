@@ -78,7 +78,7 @@ const plugins = ({ babelConfig = {}, commonJSConfig = {}, minify = false } = {})
       'process.env.IS_BROWSER': 'true',
       'process.env.': 'AdminJS.env.',
       preventAssignment: true,
-	    'process.browser': true,
+      'process.browser': true,
     }),
     commonjs({
       ...commonJSConfig,
