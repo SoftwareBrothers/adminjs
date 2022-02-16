@@ -123,6 +123,9 @@ export interface AdminJSOptions {
    * Custom assets you want to pass to AdminJS
    */
   assets?: Assets | AssetsFunction;
+
+  filterUser?: FilterUser;
+
   /**
    * Indicates is bundled by AdminJS files like:
    * - components.bundle.js
@@ -264,6 +267,10 @@ export type Assets = {
    * library - you can pass its url here.
    */
   scripts?: Array<string>;
+}
+
+export declare type FilterUser = {
+  fields: Array<string>;
 }
 
 /**

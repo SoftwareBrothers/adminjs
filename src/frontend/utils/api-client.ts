@@ -162,8 +162,7 @@ class ApiClient {
     const { resourceId, actionName, data, query, ...axiosParams } = options
     let url = `/api/resources/${resourceId}/actions/${actionName}`
     if (query) {
-      const q = encodeURIComponent(query)
-      url = [url, q].join('/')
+      url = url.concat('/').concat(query)
     }
     const response = await this.client.request({
       url,

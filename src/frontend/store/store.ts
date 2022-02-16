@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 import { combineReducers, createStore } from 'redux'
+import { FilterUser } from 'adminjs/src'
 import {
   VERSIONS_INITIALIZE,
   SESSION_INITIALIZE,
@@ -12,7 +13,8 @@ import {
   RESOURCES_INITIALIZE,
   SET_NOTICE_PROGRESS,
   DROP_NOTICE,
-  ADD_NOTICE } from './actions'
+  ADD_NOTICE,
+  FILTER_USER_INITIALIZE } from './actions'
 
 import { Assets, BrandingOptions, VersionProps } from '../../adminjs-options.interface'
 import { PageJSON, ResourceJSON } from '../interfaces'
@@ -78,6 +80,21 @@ const localesReducer = (
   case LOCALE_INITIALIZE:
     return action.data
   default: return state
+  }
+}
+
+const filterUserReducer = (
+  state = '',
+  action: {
+    type: string;
+    data: string;
+  },
+) => {
+  switch (action.type) {
+  case FILTER_USER_INITIALIZE:
+    return action.data
+  default:
+    return state
   }
 }
 
@@ -190,6 +207,7 @@ export type ReduxState = {
   versions: VersionProps;
   pages: Array<PageJSON>;
   locale: Locale;
+  filterUser: string;
 }
 
 const reducer = combineReducers<ReduxState>({
@@ -203,6 +221,7 @@ const reducer = combineReducers<ReduxState>({
   versions: versionsReducer,
   pages: pagesReducer,
   locale: localesReducer,
+  filterUser: filterUserReducer,
 })
 
 export default (initialState = {}) => createStore(reducer, initialState)

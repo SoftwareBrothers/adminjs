@@ -10,6 +10,7 @@ import {
   initializePages,
   setCurrentAdmin,
   initializeVersions,
+  initializeFilterUser,
 } from './actions'
 
 import AdminJS from '../../adminjs'
@@ -41,6 +42,21 @@ export const initializeStore = async (
 
   const branding = await getBranding(admin, currentAdmin)
   const assets = await getAssets(admin, currentAdmin)
+  const fields = admin.options.filterUser?.fields
+  const fieldsWithValues = []
+
+  console.log('fields =>> ', fields)
+
+  if (currentAdmin && currentAdmin.role === 'admin' && fields) {
+    fields.forEach((field) => {
+      Object.entries(currentAdmin).forEach(([key, value]) => {
+        if (field === key) {
+          fieldsWithValues.push(`?filters.${field}=${value}`)
+        }
+      })
+    })
+    store.dispatch(initializeFilterUser(fieldsWithValues.join('?')))
+  }
 
   store.dispatch(initializeBranding(branding || {}))
   store.dispatch(initializeAssets(assets || {}))

@@ -2,7 +2,8 @@ import React, { FC, useState, useEffect } from 'react'
 import Select from 'react-select/async'
 import { withTheme, DefaultTheme } from 'styled-components'
 import { FormGroup, FormMessage, selectStyles } from '@adminjs/design-system'
-
+import { useSelector } from 'react-redux'
+import { ReduxState } from 'src'
 import ApiClient from '../../../utils/api-client'
 import { EditPropertyProps, SelectRecord } from '../base-property-props'
 import { RecordJSON } from '../../../interfaces'
@@ -16,6 +17,7 @@ type SelectRecordEnhanced = SelectRecord & {
 const Edit: FC<CombinedProps> = (props) => {
   const { onChange, property, record, theme } = props
   const { reference: resourceId } = property
+  const [filterUser] = useSelector((state: ReduxState) => [state.filterUser])
 
   if (!resourceId) {
     throw new Error(`Cannot reference resource in property '${property.path}'`)
@@ -29,12 +31,12 @@ const Edit: FC<CombinedProps> = (props) => {
     }
   }
 
-  const loadOptions = async (inputValue: string): Promise<SelectRecordEnhanced[]> => {
+  const loadOptions = async (): Promise<SelectRecordEnhanced[]> => {
     const api = new ApiClient()
 
     const optionRecords = await api.searchRecords({
       resourceId,
-      query: inputValue,
+      query: filterUser,
     })
     return optionRecords.map((optionRecord: RecordJSON) => ({
       value: optionRecord.id,

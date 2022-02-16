@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react'
 
 import { AxiosResponse } from 'axios'
 import { useLocation, useHistory } from 'react-router'
+import { useSelector } from 'react-redux'
+import { ReduxState } from 'src'
 import { RecordJSON } from '../../interfaces'
 import useNotice from '../use-notice'
 import ApiClient from '../../utils/api-client'
@@ -37,13 +39,16 @@ function useRecords(resourceId: string): UseRecordsResult {
   const addNotice = useNotice()
   const { translateMessage } = useTranslation()
   const onNotice = useNotice()
+  const [filterUser] = useSelector((state: ReduxState) => [state.filterUser])
+  console.log('filterUser --> ', filterUser)
 
   const fetchData = (): Promise<AxiosResponse<ListActionResponse>> => {
     setLoading(true)
-    const query = new URLSearchParams(location.search)
 
     const promise = api.resourceAction({
-      actionName: 'list', resourceId, params: query,
+      actionName: 'list',
+      resourceId,
+      query: filterUser,
     }) as Promise<AxiosResponse<ListActionResponse>>
 
     promise.then((response) => {

@@ -2,6 +2,8 @@ import React from 'react'
 import { Trans } from 'react-i18next'
 import { MessageBox, Link } from '@adminjs/design-system'
 
+import { useSelector } from 'react-redux'
+import { ReduxState } from 'src'
 import ErrorBoundary from './error-boundary'
 import { actions } from '../actions'
 import { DOCS } from '../../../constants'
@@ -63,7 +65,7 @@ declare const AdminJS: {
 export const BaseActionComponent: React.FC<ActionProps> = (props) => {
   const { resource, action, record, records, setTag } = props
   const documentationLink = [DOCS, 'BaseAction.html'].join('/')
-
+  const [session] = useSelector((state: ReduxState) => [state.session])
   const { translateMessage } = useTranslation()
 
   let Action = actions[action.name]
@@ -76,6 +78,7 @@ export const BaseActionComponent: React.FC<ActionProps> = (props) => {
     return (
       <ErrorBoundary>
         <Action
+          session={session}
           action={action}
           resource={resource}
           record={record}
