@@ -21,5 +21,5 @@ beforeEach(function () {
 
 afterEach(function () {
   this.sinon.restore()
-  this.jsdom()
+  jsdom()
 })
