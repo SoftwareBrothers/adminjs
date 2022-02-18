@@ -16,7 +16,7 @@ import slash from 'slash'
  */
 const generateUserComponentEntry = (admin, entryPath: string): string => {
   const { env = {} } = admin.options
-  const { UserComponents } = global
+  const { UserComponents } = global as any
 
   const absoluteEntryPath = path.resolve(entryPath)
 

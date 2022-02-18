@@ -77,6 +77,8 @@ const plugins = ({ babelConfig = {}, commonJSConfig = {}, minify = false } = {})
       'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development'),
       'process.env.IS_BROWSER': 'true',
       'process.env.': 'AdminJS.env.',
+      preventAssignment: true,
+      'process.browser': true,
     }),
     commonjs({
       ...commonJSConfig,
