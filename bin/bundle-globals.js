@@ -25,15 +25,18 @@ const run = async () => {
         extensions: ['.mjs', '.js', '.jsx', '.json', '.scss'],
         mainFields: ['browser'],
         preferBuiltins: false,
+        browser: true,
       }),
       replace({
         'process.env.NODE_ENV': JSON.stringify(env),
         'process.env.IS_BROWSER': 'true',
         'process.stderr.fd': 'false',
+        preventAssignment: true,
+        'process.browser': true,
       }),
       json(),
       commonjs({
-        include: ['node_modules/**'],
+        include: ['node_modules/**', env === 'development' ? '../../node_modules/**' : ''],
         ignoreGlobal: true,
       }),
       globals(),
@@ -64,4 +67,9 @@ const run = async () => {
   })
 }
 
-run()
+run().catch((error) => {
+  console.log(error)
+  process.exit(1)
+}).finally(() => {
+  process.exit()
+})

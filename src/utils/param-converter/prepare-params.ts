@@ -19,7 +19,11 @@ const prepareParams = (
     if (param === undefined) continue
 
     if (property.type() !== 'mixed') {
-      preparedParams[key] = convertParam(param, property.type())
+      if (propertyDecorator?.isArray) {
+        preparedParams[key] = param.map(p => convertParam(p, property.type()))
+      } else {
+        preparedParams[key] = convertParam(param, property.type())
+      }
     } else {
       if (propertyDecorator?.subProperties.length) {
         const { subProperties } = propertyDecorator
