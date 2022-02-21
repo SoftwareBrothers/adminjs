@@ -1,6 +1,4 @@
 /* eslint-disable import/first, import/no-extraneous-dependencies */
-
-
 window.global = {}
 
 import * as Lodash from 'lodash'
@@ -21,6 +19,8 @@ import ReactSelectCreatable from 'react-select/creatable'
 import * as ReactSelect from 'react-select'
 import i18n from 'i18next'
 import ReactI18Next from 'react-i18next'
+import * as uuid from 'uuid'
+import * as punycode from 'punycode/'
 
 window.Lodash = Lodash
 window.React = React
@@ -40,6 +40,8 @@ window.ReactSelectAsync = ReactSelectAsync
 window.ReactSelectCreatable = ReactSelectCreatable
 window.i18n = i18n
 window.ReactI18Next = ReactI18Next
+window.punycode = punycode
+window.uuid = uuid
 
 export {
   React,

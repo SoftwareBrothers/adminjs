@@ -1,6 +1,6 @@
 {
   "name": "adminjs",
-  "version": "5.6.2",
+  "version": "5.7.0-beta.3",
   "description": "Admin panel for apps written in node.js",
   "main": "index.js",
   "types": "index.d.ts",
@@ -99,6 +99,7 @@
     "lodash": "^4.17.21",
     "ora": "^5.4.1",
     "prop-types": "^15.7.2",
+    "punycode": "^2.1.1",
     "react": "17.0.2",
     "react-beautiful-dnd": "^13.0.0",
     "react-dom": "17.0.2",
@@ -112,7 +113,8 @@
     "rollup": "^2.32.1",
     "rollup-plugin-terser": "^6.1.0",
     "slash": "^3.0.0",
-    "styled-components": "^5.1.0"
+    "styled-components": "^5.1.0",
+    "uuid": "^8.3.2"
   },
   "devDependencies": {
     "@babel/cli": "^7.4.4",
