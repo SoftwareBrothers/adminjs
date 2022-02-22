@@ -23,9 +23,15 @@ const BrandingSelector: FC = () => {
   const selectableBrandings: SelectableBranding[] = [
     {
       value: {
-        logo: 'https://stackoverflow.design/assets/img/logos/so/logo-stackoverflow.svg',
+        logo: 'https://softwarebrothers.co/assets/images/software-brothers-logo-full.svg',
       },
-      label: 'Logo',
+      label: 'SoftwareBrothers',
+    },
+    {
+      value: {
+        logo: 'https://cdn.bulldogjob.com/system/companies/logos/000/000/070/original/RST_SoftwareMasters_square.png',
+      },
+      label: 'RST',
     },
   ];
 
