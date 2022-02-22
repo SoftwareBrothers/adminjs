@@ -315,6 +315,7 @@ export type VersionProps = {
  *
  * @alias BrandingOptions
  * @memberof AdminJSOptions
+ * @deprecated since version 5.7.0
  */
 export type BrandingOptions = {
   /**

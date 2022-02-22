@@ -12,6 +12,7 @@ import SidebarFooter from './sidebar-footer'
 
 import SidebarResourceSection from './sidebar-resource-section'
 import allowOverride from '../../../hoc/allow-override'
+import BrandingSelector from '../branding-selector'
 
 type Props = {
   isVisible: boolean;
@@ -61,6 +62,7 @@ const SidebarOriginal: React.FC<Props> = (props) => {
         <SidebarResourceSection resources={resources} />
       </Box>
       <SidebarPages pages={pages} />
+      <BrandingSelector />
       {branding?.softwareBrothers && <SidebarFooter />}
     </StyledSidebar>
   )

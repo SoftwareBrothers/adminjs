@@ -4,6 +4,7 @@ import {
   initializeLocale,
   initializeResources,
   initializeBranding,
+  initializeDefaultBranding,
   initializeDashboard,
   initializeAssets,
   initializePaths,
@@ -43,6 +44,7 @@ export const initializeStore = async (
   const assets = await getAssets(admin, currentAdmin)
 
   store.dispatch(initializeBranding(branding || {}))
+  store.dispatch(initializeDefaultBranding(branding || {}))
   store.dispatch(initializeAssets(assets || {}))
 
   const {
