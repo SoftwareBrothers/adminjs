@@ -7,7 +7,6 @@ import {
   PATHS_INITIALIZE,
   ASSETS_INITIALIZE,
   BRANDING_INITIALIZE,
-  DEFAULT_BRANDING_INITIALIZE,
   LOCALE_INITIALIZE,
   PAGES_INITIALIZE,
   RESOURCES_INITIALIZE,
@@ -89,17 +88,6 @@ const brandingReducer = (state = {}, action: {
 }) => {
   switch (action.type) {
   case BRANDING_INITIALIZE:
-    return {...state, ...action.data}
-  default: return state
-  }
-}
-
-const defaultBrandingReducer = (state = {}, action: {
-  type: string;
-  data: Branding;
-}) => {
-  switch (action.type) {
-  case DEFAULT_BRANDING_INITIALIZE:
     return {...state, ...action.data}
   default: return state
   }
@@ -195,7 +183,6 @@ const noticesReducer = (state: Array<NoticeMessageInState> = [], action: {
 export type ReduxState = {
   resources: Array<ResourceJSON>;
   branding: BrandingOptions;
-  defaultBranding: Branding;
   assets: Assets;
   paths: Paths;
   session: CurrentAdmin | null;
@@ -209,7 +196,6 @@ export type ReduxState = {
 const reducer = combineReducers<ReduxState>({
   resources: resourcesReducer,
   branding: brandingReducer,
-  defaultBranding: defaultBrandingReducer,
   assets: assetsReducer,
   paths: pathsReducer,
   session: sessionReducer,

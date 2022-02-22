@@ -1,5 +1,5 @@
 import { Box, cssClass } from '@adminjs/design-system';
-import React, { FC, useCallback } from 'react';
+import React, { FC, useCallback, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import Select from 'react-select';
 import styled from 'styled-components';
@@ -19,7 +19,7 @@ interface SelectableBranding {
 
 const BrandingSelector: FC = () => {
   const dispatch = useDispatch();
-  const selected = '';
+  const [selected, setSelected] = useState<SelectableBranding>();
   const selectableBrandings: SelectableBranding[] = [
     {
       value: {
@@ -35,9 +35,12 @@ const BrandingSelector: FC = () => {
     },
   ];
 
-  const handleChange = useCallback(({ value }: SelectableBranding) => {
-    dispatch(initializeBranding(value));
+  const handleChange = useCallback((event: SelectableBranding) => {
+    setSelected(event);
+    dispatch(initializeBranding(event.value));
   }, []);
+
+  if (!selectableBrandings.length) return null;
 
   return (
     <SelectContainer padding="xl">
