@@ -141,7 +141,7 @@ jobs:
   notify:
     name: Notify
     runs-on: ubuntu-latest
-    if: failure()
+    if: 'false'
     needs:
       - build
       - test
