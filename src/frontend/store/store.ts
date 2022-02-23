@@ -20,7 +20,7 @@ import { DEFAULT_PATHS } from '../../constants'
 import { CurrentAdmin } from '../../current-admin.interface'
 import { Locale } from '../../locale/config'
 import { NoticeMessage } from '../hoc/with-notice'
-import { Branding } from '../..'
+import { composeWithDevTools } from 'redux-devtools-extension';
 
 export type DashboardInState = {
   component?: string;
@@ -206,4 +206,4 @@ const reducer = combineReducers<ReduxState>({
   locale: localesReducer,
 })
 
-export default (initialState = {}) => createStore(reducer, initialState)
+export default (initialState = {}) => createStore(reducer, initialState, composeWithDevTools())

@@ -13,7 +13,7 @@ SelectContainer.defaultProps = {
 };
 
 interface SelectableBranding {
-  value: Branding;
+  value: any;
   label: string;
 }
 

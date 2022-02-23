@@ -158,6 +158,7 @@
     "nyc": "^14.1.1",
     "react-testing-library": "^7.0.0",
     "recharts": "^1.7.1",
+    "redux-devtools-extension": "^2.13.9",
     "require.all": "^2.0.4",
     "rollup-plugin-node-builtins": "^2.1.2",
     "rollup-plugin-node-globals": "^1.4.0",

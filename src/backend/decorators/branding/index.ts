@@ -1,1 +1,1 @@
-export { default as BrandingDecorator } from './branding-decorator';
+export { default as Branding } from './branding';

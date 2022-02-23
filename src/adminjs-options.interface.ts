@@ -117,8 +117,13 @@ export interface AdminJSOptions {
   version?: VersionSettings;
   /**
    * Options which are related to the branding.
+   * @deprecated since version 5.7.0. Please use defaultBranding instead
    */
   branding?: BrandingOptions | BrandingOptionsFunction;
+  /**
+   * Options which are related to the branding.
+   */
+  brandings?: BrandingOptions[];
   /**
    * Custom assets you want to pass to AdminJS
    */
@@ -315,7 +320,6 @@ export type VersionProps = {
  *
  * @alias BrandingOptions
  * @memberof AdminJSOptions
- * @deprecated since version 5.7.0
  */
 export type BrandingOptions = {
   /**
