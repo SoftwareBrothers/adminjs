@@ -25,7 +25,7 @@ const prepareParams = (
         preparedParams[key] = convertParam(param, property.type())
       }
     } else {
-      if (propertyDecorator?.subProperties.length) {
+      if (param !== null && propertyDecorator?.subProperties.length) {
         const { subProperties } = propertyDecorator
         for (const subProperty of subProperties) {
           if (propertyDecorator.isArray) {
