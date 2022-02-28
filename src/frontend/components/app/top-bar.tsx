@@ -12,7 +12,8 @@ import { ReduxState } from '../../store/store'
 const NavBar = styled(Box)`
   height: ${({ theme }): string => theme.sizes.navbarHeight};
   border-bottom: ${themeGet('borders', 'default')};
-  background: ${({ theme }): string => theme.colors.white};
+  border-color: ${themeGet('colors', 'border')};
+  background: ${themeGet('colors', 'navbar')};
   display: flex;
   flex-direction: row;
   flex-shrink: 0;

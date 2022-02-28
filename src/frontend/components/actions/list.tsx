@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react'
-import { Box, Pagination, Text } from '@adminjs/design-system'
+import { Box, Text } from '@adminjs/design-system'
+import { Pagination } from '../styled'
 import { useHistory, useLocation } from 'react-router'
 
 import RecordsTable from '../app/records-table/records-table'
@@ -57,7 +58,7 @@ const List: React.FC<ActionProps> = ({ resource, setTag }) => {
   }
 
   return (
-    <Box variant="white">
+    <Box bg="container" px={['default', 'xxl']} py="xxl">
       <RecordsTable
         resource={resource}
         records={records}

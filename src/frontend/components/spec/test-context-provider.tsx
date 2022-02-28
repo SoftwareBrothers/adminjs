@@ -1,9 +1,9 @@
 import React, { ReactNode } from 'react'
 import { StaticRouter } from 'react-router-dom'
-import { ThemeProvider } from 'styled-components'
+import { DefaultTheme, ThemeProvider } from 'styled-components'
 import { combineStyles } from '@adminjs/design-system'
 
-const theme = combineStyles({})
+const theme = combineStyles({}) as DefaultTheme
 
 type Props = {
   children: ReactNode;

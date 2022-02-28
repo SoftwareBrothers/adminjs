@@ -1,9 +1,10 @@
 import React from 'react'
-import { CheckBox, TableHead, TableRow, TableCell } from '@adminjs/design-system'
+import { CheckBox } from '@adminjs/design-system'
 
 import PropertyHeader from './property-header'
 import { BasePropertyJSON } from '../../../interfaces'
 import { display } from './utils/display'
+import { TableCell, TableRow, TableHead } from '../../styled'
 
 /**
  * @memberof RecordsTableHeader

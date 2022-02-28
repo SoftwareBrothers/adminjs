@@ -6,7 +6,7 @@ import { renderToString } from 'react-dom/server'
 import { I18nextProvider } from 'react-i18next'
 import { Provider } from 'react-redux'
 import { Store } from 'redux'
-import { ServerStyleSheet, StyleSheetManager, ThemeProvider } from 'styled-components'
+import { DefaultTheme, ServerStyleSheet, StyleSheetManager, ThemeProvider } from 'styled-components'
 import AdminJS from '../adminjs'
 import { getAssets, getBranding, getFaviconFromBranding } from '../backend/utils/options-parser/options-parser'
 import ViewHelpers from '../backend/utils/view-helpers/view-helpers'
@@ -50,7 +50,7 @@ const html = async (
   store.dispatch(initializeAssets(assets))
   store.dispatch(initializeLocale(admin.locale))
 
-  const theme = combineStyles((branding && branding.theme) || {})
+  const theme = combineStyles((branding && branding.theme) || {}) as DefaultTheme
   const { locale } = store.getState()
   i18n
     .init({

@@ -1,4 +1,4 @@
-import { ThemeOverride } from '@adminjs/design-system'
+import { AdminJSTheme } from './theme'
 import { TransformOptions as BabelConfig } from 'babel-core'
 
 import BaseResource from './backend/adapters/resource/base-resource'
@@ -333,7 +333,7 @@ export type BrandingOptions = {
   /**
    * CSS theme.
    */
-  theme?: Partial<ThemeOverride>;
+  theme?: AdminJSTheme;
   /**
    * Flag indicates if `SoftwareBrothers` tiny hart icon should be visible on the bottom sidebar.
    */

@@ -1,10 +1,11 @@
 import { Box, cssClass } from '@adminjs/design-system';
 import React, { FC, useCallback, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import Select from 'react-select';
 import styled from 'styled-components';
-import { Branding } from '../../..';
-import { initializeBranding } from '../../store/actions';
+import { ReduxState } from '../..';
+import { BrandingOptions } from '../../..';
+import { changeBranding } from '../../store/actions';
 
 const SelectContainer = styled(Box)``;
 
@@ -13,31 +14,24 @@ SelectContainer.defaultProps = {
 };
 
 interface SelectableBranding {
-  value: any;
+  value: BrandingOptions;
   label: string;
 }
 
 const BrandingSelector: FC = () => {
   const dispatch = useDispatch();
+  const brandings = useSelector<ReduxState, BrandingOptions[]>(
+    ({ availableBrandings }) => availableBrandings
+  );
   const [selected, setSelected] = useState<SelectableBranding>();
-  const selectableBrandings: SelectableBranding[] = [
-    {
-      value: {
-        logo: 'https://softwarebrothers.co/assets/images/software-brothers-logo-full.svg',
-      },
-      label: 'SoftwareBrothers',
-    },
-    {
-      value: {
-        logo: 'https://cdn.bulldogjob.com/system/companies/logos/000/000/070/original/RST_SoftwareMasters_square.png',
-      },
-      label: 'RST',
-    },
-  ];
+  const selectableBrandings: SelectableBranding[] = brandings?.map((b, i) => ({
+    value: { ...b, companyName: `${i}` },
+    label: `${i}`,
+  }));
 
   const handleChange = useCallback((event: SelectableBranding) => {
     setSelected(event);
-    dispatch(initializeBranding(event.value));
+    dispatch(changeBranding(event.value));
   }, []);
 
   if (!selectableBrandings.length) return null;

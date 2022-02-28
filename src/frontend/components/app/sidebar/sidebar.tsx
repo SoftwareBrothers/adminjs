@@ -24,6 +24,8 @@ const StyledSidebar = styled(Box)`
   bottom: 0;
   flex-shrink: 0;
   overflow-y: auto;
+  border-color: ${themeGet('colors', 'border')};
+  background: ${({ theme }): string => theme.colors.sidebar};
 
   &.hidden {
     left: -${themeGet('sizes', 'sidebarWidth')};

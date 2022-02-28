@@ -40,7 +40,7 @@ export const DashboardHeader: React.FC = () => {
         <Illustration variant="Moon" />
       </Box>
       <Box
-        bg="grey100"
+        bg="container"
         height={pageHeaderHeight}
         py={pageHeaderPaddingY}
         px={['default', 'lg', pageHeaderPaddingX]}
@@ -100,6 +100,7 @@ const Card = styled(Box)`
   color: ${({ theme }): string => theme.colors.grey100};
   text-decoration: none;
   border: 1px solid transparent;
+  background-color: ${({ theme }): string => theme.colors.container};
   &:hover {
     border: 1px solid ${({ theme }): string => theme.colors.primary100};
     box-shadow: ${({ theme }): string => theme.shadows.cardHover};
@@ -161,21 +162,23 @@ export const Dashboard: React.FC = () => {
             </Box>
           </Card>
         </Box>
-        <Box variant="white" boxShadow="card" width={1} m="lg">
-          <Text textAlign="center">
-            <Illustration variant="SoftwareBrothersLogo" />
-            <H4>{translateMessage('needMoreSolutions_title')}</H4>
-            <Text>{translateMessage('needMoreSolutions_subtitle')}</Text>
-            <Text mt="xxl">
-              <Button
-                as="a"
-                variant="primary"
-                href="https://softwarebrothers.co/services"
-              >
-                {translateButton('contactUs')}
-              </Button>
+        <Box width={1} p="lg">
+          <Card flex justifyContent="center">
+            <Text textAlign="center">
+              <Illustration variant="SoftwareBrothersLogo" />
+              <H4>{translateMessage('needMoreSolutions_title')}</H4>
+              <Text>{translateMessage('needMoreSolutions_subtitle')}</Text>
+              <Text mt="xxl">
+                <Button
+                  as="a"
+                  variant="primary"
+                  href="https://softwarebrothers.co/services"
+                >
+                  {translateButton('contactUs')}
+                </Button>
+              </Text>
             </Text>
-          </Text>
+          </Card>
         </Box>
       </Box>
     </Box>

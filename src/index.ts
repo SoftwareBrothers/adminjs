@@ -7,5 +7,6 @@ export * from './utils'
 export * from './constants'
 export * from './adminjs-options.interface'
 export * from './current-admin.interface'
+export * from './theme'
 
 export default AdminJS

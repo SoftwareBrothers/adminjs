@@ -20,7 +20,7 @@ const GlobalStyle = createGlobalStyle`
     padding: 0;
     width: 100%;
     height: 100%;
-    color: ${({ theme }): string => theme.colors.grey100}
+    color: ${({ theme }): string => theme.colors.defaultText}
   }
 `
 
