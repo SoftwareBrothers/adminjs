@@ -72,8 +72,8 @@ export const ListAction: Action<ListActionResponse> = {
         total,
         perPage,
         page,
-        direction: sort.direction,
-        sortBy: sort.sortBy,
+        direction: sort?.direction,
+        sortBy: sort?.sortBy,
       },
       records: populatedRecords.map(r => r.toJSON(context.currentAdmin)),
     }
