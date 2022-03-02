@@ -1,5 +1,6 @@
 import { Theme as DefaultTheme } from '@adminjs/design-system';
 import { NonNullishPartialRecord } from '@adminjs/design-system/types/utils/non-nullish-partial-record.type';
+import { colors as defaultColors } from '@adminjs/design-system';
 
 /**
  * @interface Theme
@@ -9,24 +10,28 @@ import { NonNullishPartialRecord } from '@adminjs/design-system/types/utils/non-
  *
  * @memberof Theme
  * @alias colors
- * @property {string} defaultText=#FFFFFF      <div style="background: #FFFFFF; height: 20px;" />
  * @property {string} sidebar=#FFFFFF      <div style="background: #FFFFFF; height: 20px;" />
  * @property {string} navbar=#FFFFFF      <div style="background: #FFFFFF; height: 20px;" />
- * @property {string} container=#FFFFFF      <div style="background: #FFFFFF; height: 20px;" />
- * @property {string} tableHover=#FFFFFF      <div style="background: #FFFFFF; height: 20px;" />
- * @property {string} tableHeader=#FFFFFF      <div style="background: #FFFFFF; height: 20px;" />
+ * @property {string} loginWelcomeText=#FFFFFF      <div style="background: #FFFFFF; height: 20px;" />
+ * @property {string} loginText=#000000      <div style="background: #FFFFFF; height: 20px;" />
+ * @property {string} loginBg=#FFFFFF      <div style="background: #FFFFFF; height: 20px;" />
  */
 const colors = {
-  defaultText: '#FFFFF',
-  sidebar: '#FFFFF',
-  navbar: '#FFFFF',
-  container: '#FFFFF',
-  tableHover: '#FFFFF',
-  tableHeader: '#FFFFF',
+  ...defaultColors,
+  sidebar: '#FFFFFF',
+  navbar: '#FFFFFF',
+  loginWelcomeText: '#FFFFFF',
+  loginText: '#000000',
+  loginBg: '#FFFFFF',
 };
 
 const details = {
   name: 'AdminJS Theme',
+};
+
+export const AdminJSDefaultTheme = {
+  colors,
+  details,
 };
 
 export declare interface Theme extends Omit<DefaultTheme, 'colors'> {

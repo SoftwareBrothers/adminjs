@@ -3,6 +3,7 @@ import createStore, { ReduxState } from './store'
 import {
   initializeLocale,
   initializeResources,
+  initializeAvailableBrandings,
   initializeBranding,
   initializeDashboard,
   initializeAssets,
@@ -42,6 +43,7 @@ export const initializeStore = async (
   const branding = await getBranding(admin, currentAdmin)
   const assets = await getAssets(admin, currentAdmin)
 
+  store.dispatch(initializeAvailableBrandings(admin.options.brandings || []))
   store.dispatch(initializeBranding(branding || {}))
   store.dispatch(initializeAssets(assets || {}))
 

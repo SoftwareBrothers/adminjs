@@ -1,6 +1,5 @@
 import React from 'react'
-import { Text, Button, Icon } from '@adminjs/design-system'
-import { InfoBox } from '../../styled'
+import { Text, Button, Icon, InfoBox } from '@adminjs/design-system'
 
 import { ResourceJSON } from '../../../interfaces'
 import { useTranslation } from '../../../hooks'

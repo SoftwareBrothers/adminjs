@@ -25,6 +25,7 @@ const GlobalStyle = createGlobalStyle`
     height: 100%;
     margin: 0;
     padding: 0;
+    color: ${themeGet('colors', 'loginText')};
   }
 `
 
@@ -54,10 +55,10 @@ export const Login: React.FC<LoginProps> = (props) => {
     <React.Fragment>
       <GlobalStyle />
       <Wrapper flex variant="grey">
-        <Box bg="white" height="440px" flex boxShadow="login" width={[1, 2 / 3, 'auto']}>
+        <Box bg="loginBg" height="440px" flex boxShadow="login" width={[1, 2 / 3, 'auto']}>
           <Box
             bg="primary100"
-            color="white"
+            color="loginWelcomeText"
             p="x3"
             width="380px"
             flexGrow={0}

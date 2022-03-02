@@ -45,7 +45,7 @@ export const DashboardHeader: React.FC = () => {
         py={pageHeaderPaddingY}
         px={['default', 'lg', pageHeaderPaddingX]}
       >
-        <Text textAlign="center" color="white">
+        <Text textAlign="center" color="defaultText">
           <H2>{translateMessage('welcomeOnBoard_title')}</H2>
           <Text opacity={0.8}>
             {translateMessage('welcomeOnBoard_subtitle')}

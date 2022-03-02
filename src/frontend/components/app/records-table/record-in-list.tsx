@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react'
 import { useHistory } from 'react-router-dom'
-import { CheckBox, ButtonGroup } from '@adminjs/design-system'
-import { TableCell, TableRow , Placeholder} from '../../styled'
+import { CheckBox, ButtonGroup, TableCell, TableRow } from '@adminjs/design-system'
+import { Placeholder } from '../../styled'
 
 import PropertyType from '../../property-type'
 import { ActionJSON, buildActionClickHandler, RecordJSON, ResourceJSON } from '../../../interfaces'
@@ -77,7 +77,7 @@ export const RecordInList: React.FC<RecordInListProps> = (props) => {
 
   const buttons = [{
     icon: 'OverflowMenuHorizontal',
-    variant: 'light' as const,
+    variant: 'text' as const,
     label: undefined,
     'data-testid': 'actions-dropdown',
     buttons: actionsToButtonGroup({
@@ -105,7 +105,7 @@ export const RecordInList: React.FC<RecordInListProps> = (props) => {
           data-property-name={property.propertyPath}
           display={display(property.isTitle)}
         >
-          {isLoading ? (
+          {!isLoading ? (
             <Placeholder style={{ height: 14 }} />
           ) : (
             <PropertyType

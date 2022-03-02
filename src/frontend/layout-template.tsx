@@ -33,7 +33,7 @@ const html = async (
     .map(s => `<script src="${s}"></script>`)
   const styles = ((assets && assets.styles) || [])
     .map(l => `<link rel="stylesheet" type="text/css" href="${l}">`)
-  const theme = combineStyles((branding.theme) || {})
+  const theme = combineStyles(branding.theme || {})
   const faviconTag = getFaviconFromBranding(branding)
 
   return `
