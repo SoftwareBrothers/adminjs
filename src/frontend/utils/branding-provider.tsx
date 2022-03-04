@@ -1,9 +1,9 @@
 import React, { createContext, FC, useContext } from 'react';
 import { useSelector } from 'react-redux';
-import { ReduxState } from '../store';
-import { BrandingOptions } from '../../adminjs-options.interface';
 import { DefaultTheme, ThemeProvider } from 'styled-components';
-import merge from 'lodash/merge';
+import { BrandingOptions } from '../../adminjs-options.interface';
+import { useLocalStorage } from '../hooks/use-local-storage';
+import { ReduxState } from '../store';
 
 const useBrandingProps = () => {
   const branding = useSelector<ReduxState, BrandingOptions>(
@@ -20,18 +20,19 @@ const BrandingContext = createContext<BrandingContextValue | undefined>(
 );
 
 interface BrandingProviderProps {
-  theme: DefaultTheme
+  theme: DefaultTheme;
 }
 
-const BrandingProvider: FC<BrandingProviderProps> = ({ children, theme }) => {
-  const value = useBrandingProps();
-  console.log(value);
-
-  const combinedTheme = merge((window as any).THEME, theme, value.theme || {})
+const BrandingProvider: FC<BrandingProviderProps> = ({ children }) => {
+  const branding = useBrandingProps();
+  const [storedTheme] = useLocalStorage<DefaultTheme>(
+    'adminjs-theme',
+    (window as any).THEME
+  );
 
   return (
-    <BrandingContext.Provider value={value}>
-      <ThemeProvider theme={combinedTheme}>{children}</ThemeProvider>
+    <BrandingContext.Provider value={branding}>
+      <ThemeProvider theme={storedTheme}>{children}</ThemeProvider>
     </BrandingContext.Provider>
   );
 };

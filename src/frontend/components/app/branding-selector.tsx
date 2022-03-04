@@ -1,11 +1,17 @@
-import { Box, cssClass } from '@adminjs/design-system';
+import {
+  Box,
+  combineStyles,
+  cssClass,
+  selectStyles
+} from '@adminjs/design-system';
+import omit from 'lodash/omit';
 import React, { FC, useCallback, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Select from 'react-select';
-import styled from 'styled-components';
+import styled, { DefaultTheme, withTheme } from 'styled-components';
 import { ReduxState } from '../..';
 import { BrandingOptions } from '../../..';
-import { changeBranding } from '../../store/actions';
+import { useLocalStorage } from '../../hooks/use-local-storage';
 
 const SelectContainer = styled(Box)``;
 
@@ -18,20 +24,34 @@ interface SelectableBranding {
   label: string;
 }
 
-const BrandingSelector: FC = () => {
-  const dispatch = useDispatch();
+interface BrandingSelector {
+  theme: DefaultTheme;
+}
+
+const BrandingSelector: FC<BrandingSelector> = (props) => {
+  const { theme } = props;
   const brandings = useSelector<ReduxState, BrandingOptions[]>(
     ({ availableBrandings }) => availableBrandings
   );
   const [selected, setSelected] = useState<SelectableBranding>();
-  const selectableBrandings: SelectableBranding[] = brandings?.map((b, i) => ({
-    value: { ...b, companyName: `${i}` },
-    label: `${i}`,
-  }));
+  const selectableBrandings: SelectableBranding[] = brandings?.map(
+    (branding) => ({
+      value: branding,
+      label: branding.theme?.details?.name || 'Undefined theme',
+    })
+  );
+  const styles = selectStyles(theme);
+
+  const [, storeTheme] = useLocalStorage<DefaultTheme>(
+    'adminjs-theme',
+    (window as any).THEME
+  );
 
   const handleChange = useCallback((event: SelectableBranding) => {
     setSelected(event);
-    dispatch(changeBranding(event.value));
+    const combinedTheme = combineStyles(omit(event.value.theme, 'details'));
+    storeTheme(combinedTheme as DefaultTheme);
+    window.location.reload();
   }, []);
 
   if (!selectableBrandings.length) return null;
@@ -39,13 +59,15 @@ const BrandingSelector: FC = () => {
   return (
     <SelectContainer padding="xl">
       <Select
+        placeholder="Select theme..."
         value={selected}
         onChange={handleChange}
         options={selectableBrandings}
         menuPlacement="top"
+        styles={styles}
       />
     </SelectContainer>
   );
 };
 
-export default BrandingSelector;
+export default withTheme(BrandingSelector);

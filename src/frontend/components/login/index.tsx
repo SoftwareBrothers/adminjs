@@ -58,7 +58,7 @@ export const Login: React.FC<LoginProps> = (props) => {
         <Box bg="loginBg" height="440px" flex boxShadow="login" width={[1, 2 / 3, 'auto']}>
           <Box
             bg="primary100"
-            color="loginWelcomeText"
+            color="white"
             p="x3"
             width="380px"
             flexGrow={0}

@@ -40,12 +40,12 @@ export const DashboardHeader: React.FC = () => {
         <Illustration variant="Moon" />
       </Box>
       <Box
-        bg="container"
+        bg="welcomeBg"
         height={pageHeaderHeight}
         py={pageHeaderPaddingY}
         px={['default', 'lg', pageHeaderPaddingX]}
       >
-        <Text textAlign="center" color="defaultText">
+        <Text textAlign="center" color="welcomeText">
           <H2>{translateMessage('welcomeOnBoard_title')}</H2>
           <Text opacity={0.8}>
             {translateMessage('welcomeOnBoard_subtitle')}
@@ -97,7 +97,7 @@ const boxes = ({ translateMessage }): Array<BoxType> => [{
 
 const Card = styled(Box)`
   display: ${({ flex }): string => (flex ? 'flex' : 'block')};
-  color: ${({ theme }): string => theme.colors.grey100};
+  color: ${({ theme }): string => theme.colors.defaultText};
   text-decoration: none;
   border: 1px solid transparent;
   background-color: ${({ theme }): string => theme.colors.container};

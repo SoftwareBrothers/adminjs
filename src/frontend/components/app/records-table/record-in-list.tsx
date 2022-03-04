@@ -105,7 +105,7 @@ export const RecordInList: React.FC<RecordInListProps> = (props) => {
           data-property-name={property.propertyPath}
           display={display(property.isTitle)}
         >
-          {!isLoading ? (
+          {isLoading ? (
             <Placeholder style={{ height: 14 }} />
           ) : (
             <PropertyType

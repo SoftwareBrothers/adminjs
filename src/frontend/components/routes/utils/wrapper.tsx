@@ -5,13 +5,13 @@ import { Box, BoxProps, DrawerContent, DrawerFooter } from '@adminjs/design-syst
 
 const StyledWrapper = styled(Box)`
   & ${DrawerContent} {
-    background: ${({ theme }): string => theme.colors.white};
+    background: ${({ theme }): string => theme.colors.container};
     padding: ${({ theme }): string => theme.space.xxl};
     overflow: visible;
   }
-  
+
   & ${DrawerFooter} {
-    background: ${({ theme }): string => theme.colors.white};
+    background: ${({ theme }): string => theme.colors.container};
     padding: 0 ${({ theme }): string => theme.space.xxl} ${({ theme }): string => theme.space.xxl};
   }
 `

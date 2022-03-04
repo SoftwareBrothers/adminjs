@@ -3,6 +3,7 @@ import AdminJS from '../../../adminjs'
 import { CurrentAdmin } from '../../../current-admin.interface'
 import { BrandingOptions, Assets } from '../../../adminjs-options.interface'
 import ViewHelpers from '../view-helpers/view-helpers'
+import { AdminJSDefaultTheme } from '../../../theme'
 
 
 const defaultBranding = {
@@ -42,6 +43,7 @@ export const getBranding = async (
 
   // checking for undefined because logo can also be `false` or `null`
   merged.logo = merged.logo !== undefined ? merged.logo : defaultLogo
+  merged.theme = merge(AdminJSDefaultTheme, merged.theme)
 
   return merged
 }

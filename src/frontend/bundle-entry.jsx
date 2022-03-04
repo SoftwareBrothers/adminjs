@@ -14,6 +14,7 @@ import * as Hooks from './hooks'
 import ApiClient from './utils/api-client'
 import withNotice from './hoc/with-notice'
 import { flat } from '../utils/flat'
+import BrandingProvider from './utils/branding-provider'
 
 const env = {
   NODE_ENV: process.env.NODE_ENV || 'development',
@@ -37,11 +38,11 @@ i18n
 
 const Application = (
   <Provider store={store}>
-    <ThemeProvider theme={theme}>
+    <BrandingProvider theme={theme}>
       <BrowserRouter>
         <App />
       </BrowserRouter>
-    </ThemeProvider>
+    </BrandingProvider>
   </Provider>
 )
 
