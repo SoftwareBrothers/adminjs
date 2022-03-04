@@ -1,46 +1,29 @@
-import { BrandingOptions, BrandingOptionsFunction } from '../../..';
-import AdminJS from '../../../adminjs';
-import { CurrentAdmin } from '../../../current-admin.interface';
+import { BrandingOptions, BrandingOptionsFunction } from 'src'
+import AdminJS from '../../../adminjs'
+import { CurrentAdmin } from '../../../current-admin.interface'
 
 class Branding {
   private _admin?: AdminJS;
+
   private _currentAdmin?: CurrentAdmin;
 
   constructor(admin?: AdminJS, currentAdmin?: CurrentAdmin) {
-    this._admin = admin;
-    this._currentAdmin = currentAdmin;
+    this._admin = admin
+    this._currentAdmin = currentAdmin
   }
 
-  getSelectableBrandings = () => {
-    const availableBrandings = this._admin?.options.brandings;
-    if (!availableBrandings) return [];
+  toJSON = (
+    predicate?: (currentAdmin: CurrentAdmin) => boolean,
+  ): BrandingOptions | BrandingOptionsFunction | null => {
+    const branding = this._admin?.options.branding
+    if (!branding) return null
 
-    return availableBrandings.map(branding => ({
-      value: branding,
-      name: branding.companyName
-    }))
-  };
+    if (!predicate) return branding
 
-  /**
-   * Is action accessible
-   * @param {CurrentAdmin} [currentAdmin] Current logged in user
-   * @return  {Boolean}
-   */
-  isAccessible(): boolean {
-    return true;
-  }
+    if (predicate && this._currentAdmin && predicate(this._currentAdmin)) { return branding }
 
-  toJSON = (predicate?: (currentAdmin: CurrentAdmin) => boolean) => {
-    const branding = this._admin?.options.branding;
-    if (!branding) return null;
-
-    if (!predicate) return branding;
-
-    if (predicate && this._currentAdmin && predicate(this._currentAdmin))
-      return branding;
-
-    return null;
+    return null
   };
 }
 
-export default Branding;
+export default Branding

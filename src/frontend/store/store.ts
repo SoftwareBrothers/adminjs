@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 import { combineReducers, createStore } from 'redux'
+import { composeWithDevTools } from 'redux-devtools-extension'
 import {
   VERSIONS_INITIALIZE,
   SESSION_INITIALIZE,
@@ -22,7 +23,6 @@ import { DEFAULT_PATHS } from '../../constants'
 import { CurrentAdmin } from '../../current-admin.interface'
 import { Locale } from '../../locale/config'
 import { NoticeMessage } from '../hoc/with-notice'
-import { composeWithDevTools } from 'redux-devtools-extension';
 
 export type DashboardInState = {
   component?: string;
@@ -92,7 +92,7 @@ const brandingReducer = (state = {}, action: {
   case BRANDING_INITIALIZE:
     return action.data
   case BRANDING_CHANGE:
-    return {...state, ...action.data}
+    return { ...state, ...action.data }
   default: return state
   }
 }

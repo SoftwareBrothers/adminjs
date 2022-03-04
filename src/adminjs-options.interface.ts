@@ -1,5 +1,5 @@
-import { AdminJSTheme } from './theme'
 import { TransformOptions as BabelConfig } from 'babel-core'
+import { AdminJSTheme } from './theme'
 
 import BaseResource from './backend/adapters/resource/base-resource'
 import BaseDatabase from './backend/adapters/database/base-database'
@@ -117,7 +117,6 @@ export interface AdminJSOptions {
   version?: VersionSettings;
   /**
    * Options which are related to the branding.
-   * @deprecated since version 5.7.0. Please use defaultBranding instead
    */
   branding?: BrandingOptions | BrandingOptionsFunction;
   /**

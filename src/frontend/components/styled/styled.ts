@@ -1,21 +1,21 @@
 import {
   DrawerContent,
   DrawerFooter, Pagination,
-  Placeholder, themeGet
-} from '@adminjs/design-system';
-import styled from 'styled-components';
+  Placeholder, themeGet,
+} from '@adminjs/design-system'
+import styled from 'styled-components'
 
 const StyledDrawerContent = styled(DrawerContent)`
   &&& {
     background-color: ${themeGet('colors', 'container')};
   }
-`;
+`
 
 const StyledDrawerFooter = styled(DrawerFooter)`
   &&& {
     background-color: ${themeGet('colors', 'container')};
   }
-`;
+`
 
 const StyledPagination = styled(Pagination)`
   border: ${themeGet('colors', 'border')}
@@ -31,5 +31,5 @@ export {
   StyledDrawerContent as DrawerContent,
   StyledDrawerFooter as DrawerFooter,
   StyledPagination as Pagination,
-  StyledPlaceholder as Placeholder
-};
+  StyledPlaceholder as Placeholder,
+}

@@ -20,7 +20,9 @@ export type InitializeAvailableBrandingResponse = {
   data: BrandingOptions[];
 }
 
-export const initializeAvailableBrandings = (data: BrandingOptions[]): InitializeAvailableBrandingResponse => ({
+export const initializeAvailableBrandings = (
+  data: BrandingOptions[],
+): InitializeAvailableBrandingResponse => ({
   type: AVAILABLE_BRANDING_INITIALIZE,
   data,
 })
@@ -34,4 +36,3 @@ export const changeBranding = (data: BrandingOptions): ChangeBrandingResponse =>
   type: BRANDING_CHANGE,
   data,
 })
-

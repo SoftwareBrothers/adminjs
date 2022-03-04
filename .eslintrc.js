@@ -76,9 +76,10 @@ module.exports = {
       },
     },
     {
-      files: ['*.tsx'],
+      files: ['*.tsx', '*.ts'],
       rules: {
         'react/prop-types': 'off',
+        'import/no-extraneous-dependencies': ['error', { devDependencies: true }],
       },
     },
     {

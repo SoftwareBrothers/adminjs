@@ -6,8 +6,7 @@ import { renderToString } from 'react-dom/server'
 import { I18nextProvider } from 'react-i18next'
 import { Provider } from 'react-redux'
 import { Store } from 'redux'
-import { DefaultTheme, ServerStyleSheet, StyleSheetManager, ThemeProvider } from 'styled-components'
-import { AdminJSDefaultTheme } from '../theme'
+import { DefaultTheme, ServerStyleSheet, StyleSheetManager } from 'styled-components'
 import AdminJS from '../adminjs'
 import { getAssets, getBranding, getFaviconFromBranding } from '../backend/utils/options-parser/options-parser'
 import ViewHelpers from '../backend/utils/view-helpers/view-helpers'
@@ -15,9 +14,8 @@ import LoginComponent from './components/login'
 import { initializeAssets } from './store/actions/initialize-assets'
 import { initializeBranding } from './store/actions/initialize-branding'
 import { initializeLocale } from './store/actions/initialize-locale'
-import createStore, {
-  ReduxState,
-} from './store/store'
+import createStore, { ReduxState } from './store/store'
+import BrandingProvider from './utils/branding-provider'
 
 type LoginTemplateAttributes = {
   /**
@@ -70,9 +68,9 @@ const html = async (
     <StyleSheetManager sheet={sheet.instance}>
       <Provider store={store}>
         <I18nextProvider i18n={i18n}>
-          <ThemeProvider theme={theme}>
+          <BrandingProvider theme={theme}>
             <LoginComponent action={action} message={errorMessage} />
-          </ThemeProvider>
+          </BrandingProvider>
         </I18nextProvider>
       </Provider>
     </StyleSheetManager>,

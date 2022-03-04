@@ -1,6 +1,6 @@
-import { Theme as DefaultTheme } from '@adminjs/design-system';
-import { NonNullishPartialRecord } from '@adminjs/design-system/types/utils/non-nullish-partial-record.type';
-import { colors as defaultColors } from '@adminjs/design-system';
+import { Theme as DefaultTheme, colors as defaultColors } from '@adminjs/design-system'
+import { NonNullishPartialRecord } from '@adminjs/design-system/types/utils/non-nullish-partial-record.type'
+
 
 /**
  * @interface Theme
@@ -23,16 +23,16 @@ const colors = {
   loginBg: '#FFFFFF',
   welcomeBg: '#1C1C38',
   welcomeText: '#FFFFFF',
-};
+}
 
 const details = {
   name: 'AdminJS Theme',
-};
+}
 
 export const AdminJSDefaultTheme = {
   colors,
   details,
-};
+}
 
 export declare interface Theme extends Omit<DefaultTheme, 'colors'> {
   details: typeof details;
