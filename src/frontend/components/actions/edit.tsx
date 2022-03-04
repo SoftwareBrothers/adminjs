@@ -1,7 +1,6 @@
 import React, { FC, useEffect } from 'react'
 import { useHistory } from 'react-router'
-import { Box, Button, Icon } from '@adminjs/design-system'
-import { DrawerContent, DrawerFooter } from '../styled'
+import { Box, Button, DrawerContent, DrawerFooter, Icon } from '@adminjs/design-system'
 
 import PropertyType from '../property-type'
 import { ActionProps } from './action.props'

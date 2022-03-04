@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react'
 import { useHistory } from 'react-router-dom'
-import { CheckBox, ButtonGroup, TableCell, TableRow } from '@adminjs/design-system'
-import { Placeholder } from '../../styled'
+import { CheckBox, ButtonGroup, Placeholder, TableCell, TableRow } from '@adminjs/design-system'
 
 import PropertyType from '../../property-type'
 import { ActionJSON, buildActionClickHandler, RecordJSON, ResourceJSON } from '../../../interfaces'

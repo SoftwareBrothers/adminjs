@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react'
-import { Box, Text } from '@adminjs/design-system'
+import { Box, Pagination, Text } from '@adminjs/design-system'
 import { useHistory, useLocation } from 'react-router'
-import { Pagination } from '../styled'
 
 import RecordsTable from '../app/records-table/records-table'
 import { ActionProps } from './action.props'

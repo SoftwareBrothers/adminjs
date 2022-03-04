@@ -36,7 +36,7 @@ export const AdminJSDefaultTheme = {
 
 export declare interface Theme extends Omit<DefaultTheme, 'colors'> {
   details: typeof details;
-  colors: typeof colors & DefaultTheme['colors'];
+  colors: typeof colors;
 }
 
 export declare type AdminJSTheme<T = Theme> = {
