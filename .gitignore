@@ -5,7 +5,6 @@
 .cache
 lib
 built
-types
 
 coverage
 

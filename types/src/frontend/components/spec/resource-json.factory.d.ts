@@ -1,0 +1,1 @@
+import './property-json.factory';
