@@ -1,11 +1,11 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { combineStyles } from '@adminjs/design-system'
+import { combineStyles } from "@adminjs/design-system";
 
-import ViewHelpers from '../backend/utils/view-helpers/view-helpers'
-import { initializeStore } from './store'
-import AdminJS from '../adminjs'
-import { CurrentAdmin } from '../current-admin.interface'
-import { getFaviconFromBranding } from '../backend/utils/options-parser/options-parser'
+import ViewHelpers from "../backend/utils/view-helpers/view-helpers";
+import { initializeStore } from "./store";
+import AdminJS from "../adminjs";
+import { CurrentAdmin } from "../current-admin.interface";
+import { getFaviconFromBranding } from "../backend/utils/options-parser/options-parser";
 
 /**
  * Renders (SSR) html for given location
@@ -20,26 +20,32 @@ import { getFaviconFromBranding } from '../backend/utils/options-parser/options-
 const html = async (
   admin: AdminJS,
   currentAdmin?: CurrentAdmin,
-  location = '/',
+  location = "/"
 ): Promise<string> => {
-  const h = new ViewHelpers({ options: admin.options })
+  const h = new ViewHelpers({ options: admin.options });
 
-  const store = await initializeStore(admin, currentAdmin)
-  const reduxState = store.getState()
+  const store = await initializeStore(admin, currentAdmin);
+  const reduxState = store.getState();
 
-  const { branding, assets } = reduxState
+  const { branding, assets } = reduxState;
 
-  const scripts = ((assets && assets.scripts) || [])
-    .map(s => `<script src="${s}"></script>`)
-  const styles = ((assets && assets.styles) || [])
-    .map(l => `<link rel="stylesheet" type="text/css" href="${l}">`)
-  const theme = combineStyles((branding.theme) || {})
-  const faviconTag = getFaviconFromBranding(branding)
+  const scripts = ((assets && assets.scripts) || []).map(
+    (s) => `<script src="${s}"></script>`
+  );
+  const headScripts = ((assets && assets.headScripts) || []).map(
+    (s) => `<script src="${s}"></script>`
+  );
+  const styles = ((assets && assets.styles) || []).map(
+    (l) => `<link rel="stylesheet" type="text/css" href="${l}">`
+  );
+  const theme = combineStyles(branding.theme || {});
+  const faviconTag = getFaviconFromBranding(branding);
 
   return `
     <!DOCTYPE html>
     <html>
     <head>
+      ${headScripts.join("\n")}
       <script>
         window.REDUX_STATE = ${JSON.stringify(reduxState)};
         window.THEME = ${JSON.stringify(theme)};
@@ -52,11 +58,11 @@ const html = async (
 
       <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,700" type="text/css">
 
-      <script src="${h.assetPath('global.bundle.js')}"></script>
-      <script src="${h.assetPath('design-system.bundle.js')}"></script>
-      <script src="${h.assetPath('app.bundle.js')}"></script>
-      <script src="${h.assetPath('components.bundle.js')}"></script>
-      ${styles.join('\n')}
+      <script src="${h.assetPath("global.bundle.js")}"></script>
+      <script src="${h.assetPath("design-system.bundle.js")}"></script>
+      <script src="${h.assetPath("app.bundle.js")}"></script>
+      <script src="${h.assetPath("components.bundle.js")}"></script>
+      ${styles.join("\n")}
     </head>
     <body>
       <div id="app" />
@@ -64,9 +70,9 @@ const html = async (
         var app = document.getElementById( 'app' );
         ReactDOM.render( AdminJS.Application, app );
       </script>
-      ${scripts.join('\n')}
+      ${scripts.join("\n")}
     </body>
     </html>
-  `
-}
-export default html
+  `;
+};
+export default html;

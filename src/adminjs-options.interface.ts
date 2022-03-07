@@ -1,12 +1,12 @@
-import { ThemeOverride } from '@adminjs/design-system'
-import { TransformOptions as BabelConfig } from 'babel-core'
+import { ThemeOverride } from "@adminjs/design-system";
+import { TransformOptions as BabelConfig } from "babel-core";
 
-import BaseResource from './backend/adapters/resource/base-resource'
-import BaseDatabase from './backend/adapters/database/base-database'
-import { PageContext } from './backend/actions/action.interface'
-import { ResourceOptions } from './backend/decorators/resource/resource-options.interface'
-import { Locale } from './locale/config'
-import { CurrentAdmin } from './current-admin.interface'
+import BaseResource from "./backend/adapters/resource/base-resource";
+import BaseDatabase from "./backend/adapters/database/base-database";
+import { PageContext } from "./backend/actions/action.interface";
+import { ResourceOptions } from "./backend/decorators/resource/resource-options.interface";
+import { Locale } from "./locale/config";
+import { CurrentAdmin } from "./current-admin.interface";
 
 /**
  * AdminJSOptions
@@ -264,7 +264,12 @@ export type Assets = {
    * library - you can pass its url here.
    */
   scripts?: Array<string>;
-}
+  /**
+   * List of urls to custom scripts. If you use some particular js
+   * library - you can pass its url here.
+   */
+  headScripts?: Array<string>;
+};
 
 /**
  * @alias AssetsFunction
@@ -274,7 +279,7 @@ export type Assets = {
  * @description
  * Function returning {@link Assets}
  */
-export type AssetsFunction = (admin?: CurrentAdmin) => Assets | Promise<Assets>
+export type AssetsFunction = (admin?: CurrentAdmin) => Assets | Promise<Assets>;
 
 /**
  * Version Props
@@ -291,12 +296,12 @@ export type VersionSettings = {
    * You can pass here your current API version.
    */
   app?: string;
-}
+};
 
 export type VersionProps = {
   admin?: string;
   app?: string;
-}
+};
 
 /**
  * Branding Options
@@ -338,7 +343,7 @@ export type BrandingOptions = {
    * URL to a favicon
    */
   favicon?: string;
-}
+};
 
 /**
  * Branding Options Function
@@ -351,7 +356,7 @@ export type BrandingOptions = {
  */
 export type BrandingOptionsFunction = (
   admin?: CurrentAdmin
-) => BrandingOptions | Promise<BrandingOptions>
+) => BrandingOptions | Promise<BrandingOptions>;
 
 /**
  * Object describing regular page in AdminJS
@@ -373,7 +378,7 @@ export type AdminPage = {
    * Page icon
    */
   icon?: string;
-}
+};
 
 /**
  * Object describing map of regular pages in AdminJS
@@ -381,7 +386,7 @@ export type AdminPage = {
  * @alias AdminPages
  * @memberof AdminJSOptions
  */
-export type AdminPages = Record<string, AdminPage>
+export type AdminPages = Record<string, AdminPage>;
 
 /**
  * Default way of passing Options with a Resource
@@ -392,7 +397,7 @@ export type ResourceWithOptions = {
   resource: any;
   options: ResourceOptions;
   features?: Array<FeatureType>;
-}
+};
 
 /**
  * Function taking {@link ResourceOptions} and merging it with all other options
@@ -407,7 +412,7 @@ export type FeatureType = (
    * Options returned by the feature added before
    */
   options: ResourceOptions
-) => ResourceOptions
+) => ResourceOptions;
 
 /**
  * Function which is invoked when user enters given AdminPage
@@ -418,8 +423,8 @@ export type FeatureType = (
 export type PageHandler = (
   request: any,
   response: any,
-  context: PageContext,
-) => Promise<any>
+  context: PageContext
+) => Promise<any>;
 
 /**
  * Bundle options
@@ -438,21 +443,24 @@ export type BundlerOptions = {
    * The file path to babel config file or json object of babel config.
    */
   babelConfig?: BabelConfig | string;
-}
+};
 
 export interface AdminJSOptionsWithDefault extends AdminJSOptions {
   rootPath: string;
   logoutPath: string;
   loginPath: string;
   databases?: Array<BaseDatabase>;
-  resources?: Array<BaseResource | {
-    resource: BaseResource;
-    options: ResourceOptions;
-  }>;
+  resources?: Array<
+    | BaseResource
+    | {
+        resource: BaseResource;
+        options: ResourceOptions;
+      }
+  >;
   dashboard: {
     handler?: PageHandler;
     component?: string;
   };
   bundler: BundlerOptions;
-  pages: AdminJSOptions['pages'];
+  pages: AdminJSOptions["pages"];
 }
