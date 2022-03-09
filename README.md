@@ -65,4 +65,4 @@ AdminJS is Copyright © 2021 SoftwareBrothers.co. It is free software, and may b
 We’re an open, friendly team that helps clients from all over the world to transform their businesses and create astonishing products.
 
 * We are available for [hire](https://softwarebrothers.co/contact).
-* If you want to work for us - checkout the [career page](https://softwarebrothers.co/career).
+* If you want to work for us - check out the [career page](https://softwarebrothers.co/career).
