@@ -11,7 +11,7 @@ interface BrandingProviderProps {
   theme: DefaultTheme;
 }
 
-const BrandingProvider: FC<BrandingProviderProps> = ({ children }) => {
+const BrandingProvider: FC<BrandingProviderProps> = ({ children, theme }) => {
   const branding = useSelector<ReduxState, BrandingOptions>(
     ({ branding: storeBranding }) => storeBranding,
   )
@@ -22,7 +22,7 @@ const BrandingProvider: FC<BrandingProviderProps> = ({ children }) => {
 
   return (
     <BrandingContext.Provider value={branding}>
-      <ThemeProvider theme={storedTheme}>{children}</ThemeProvider>
+      <ThemeProvider theme={storedTheme || theme}>{children}</ThemeProvider>
     </BrandingContext.Provider>
   )
 }
