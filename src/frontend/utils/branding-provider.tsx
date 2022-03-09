@@ -17,7 +17,7 @@ const BrandingProvider: FC<BrandingProviderProps> = ({ children, theme }) => {
   )
   const [storedTheme] = useLocalStorage<DefaultTheme>(
     'adminjs-theme',
-    (window as any).THEME,
+    theme,
   )
 
   return (
