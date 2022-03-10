@@ -1,45 +1,42 @@
-import React, { createContext, FC, useContext } from 'react';
-import { useSelector } from 'react-redux';
-import { DefaultTheme, ThemeProvider } from 'styled-components';
-import { useLocalStorage } from '../hooks/use-local-storage';
-import { ReduxState } from '../store';
+import React, { createContext, FC, useContext } from 'react'
+import { useSelector } from 'react-redux'
+import { DefaultTheme, ThemeProvider } from 'styled-components'
+import { useLocalStorage } from '../hooks/use-local-storage'
+import { ReduxState } from '../store'
 
 const useBrandingProviderProps = () => {
-  return useSelector<
-    ReduxState,
-    [ReduxState['branding'], ReduxState['availableBrandings']]
-  >(({ branding, availableBrandings }) => [branding, availableBrandings]);
-};
+  return useSelector<ReduxState, [ReduxState['branding'], ReduxState['availableBrandings']]>(
+    ({ branding, availableBrandings }) => [branding, availableBrandings]
+  )
+}
 
-type BrandingContextValue = ReturnType<typeof useBrandingProviderProps>;
+type BrandingContextValue = ReturnType<typeof useBrandingProviderProps>
 
-const BrandingContext = createContext<BrandingContextValue | undefined>(
-  undefined
-);
+const BrandingContext = createContext<BrandingContextValue | undefined>(undefined)
 
 interface BrandingProviderProps {
-  theme: DefaultTheme;
+  theme: DefaultTheme
 }
 
 const BrandingProvider: FC<BrandingProviderProps> = ({ children, theme }) => {
-  const value = useBrandingProviderProps();
-  const [storedTheme] = useLocalStorage<DefaultTheme>('adminjs-theme', theme);
+  const value = useBrandingProviderProps()
+  const [storedTheme] = useLocalStorage<DefaultTheme>('adminjs-theme', theme)
 
   return (
     <BrandingContext.Provider value={value}>
       <ThemeProvider theme={storedTheme || theme}>{children}</ThemeProvider>
     </BrandingContext.Provider>
-  );
-};
+  )
+}
 
 export const useBranding = (): BrandingContextValue => {
-  const ctx = useContext(BrandingContext);
+  const ctx = useContext(BrandingContext)
 
   if (!ctx) {
-    throw new Error('Component beyond BrandingContext!');
+    throw new Error('Component beyond BrandingContext!')
   }
 
-  return ctx;
-};
+  return ctx
+}
 
-export default BrandingProvider;
+export default BrandingProvider
