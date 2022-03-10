@@ -43,7 +43,7 @@ export const initializeStore = async (
   const branding = await getBranding(admin, currentAdmin)
   const assets = await getAssets(admin, currentAdmin)
 
-  store.dispatch(initializeAvailableBrandings(admin.options.brandings || []))
+  store.dispatch(initializeAvailableBrandings(admin.options.availableBrandings || []))
   store.dispatch(initializeBranding(branding || {}))
   store.dispatch(initializeAssets(assets || {}))
 
