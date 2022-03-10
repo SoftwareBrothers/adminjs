@@ -7,7 +7,7 @@ import {
   DASHBOARD_INITIALIZE,
   PATHS_INITIALIZE,
   ASSETS_INITIALIZE,
-  AVAILABLE_BRANDING_INITIALIZE,
+  AVAILABLE_BRANDINGS_INITIALIZE,
   BRANDING_INITIALIZE,
   BRANDING_CHANGE,
   LOCALE_INITIALIZE,
@@ -23,6 +23,7 @@ import { DEFAULT_PATHS } from '../../constants'
 import { CurrentAdmin } from '../../current-admin.interface'
 import { Locale } from '../../locale/config'
 import { NoticeMessage } from '../hoc/with-notice'
+import { AdminJSOptions } from '../../adminjs-options.interface'
 
 export type DashboardInState = {
   component?: string;
@@ -97,16 +98,20 @@ const brandingReducer = (state = {}, action: {
   }
 }
 
-const availableBrandingsReducer = (state: BrandingOptions[] = [], action: {
-  type: string;
-  data: BrandingOptions[];
-}) => {
-  switch (action.type) {
-  case AVAILABLE_BRANDING_INITIALIZE:
-    return action.data
-  default: return state
+const availableBrandingsReducer = (
+  state: AdminJSOptions['availableBrandings'] = [],
+  action: {
+    type: string;
+    data: AdminJSOptions['availableBrandings'];
   }
-}
+) => {
+  switch (action.type) {
+    case AVAILABLE_BRANDINGS_INITIALIZE:
+      return action.data;
+    default:
+      return state;
+  }
+};
 
 const assetsReducer = (state = {}, action: {
   type: string;
@@ -198,7 +203,7 @@ const noticesReducer = (state: Array<NoticeMessageInState> = [], action: {
 export type ReduxState = {
   resources: Array<ResourceJSON>;
   branding: BrandingOptions;
-  availableBrandings: BrandingOptions[];
+  availableBrandings: AdminJSOptions['availableBrandings'];
   assets: Assets;
   paths: Paths;
   session: CurrentAdmin | null;
@@ -223,4 +228,9 @@ const reducer = combineReducers<ReduxState>({
   locale: localesReducer,
 })
 
-export default (initialState = {}) => createStore(reducer, initialState, composeWithDevTools())
+export default (initialState = {}) =>
+  createStore(
+    reducer,
+    initialState,
+    process.env.NODE_ENV === 'development' ? composeWithDevTools() : undefined
+  );

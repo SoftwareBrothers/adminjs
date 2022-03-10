@@ -3,24 +3,23 @@ import {
   combineStyles,
   cssClass,
   selectStyles,
-} from '@adminjs/design-system'
-import omit from 'lodash/omit'
-import React, { FC, useCallback, useState } from 'react'
-import { useSelector } from 'react-redux'
-import Select from 'react-select'
-import styled, { DefaultTheme, withTheme } from 'styled-components'
-import { ReduxState } from '../..'
-import { BrandingOptions } from '../../..'
-import { useLocalStorage } from '../../hooks/use-local-storage'
+} from '@adminjs/design-system';
+import omit from 'lodash/omit';
+import React, { FC, useCallback, useState } from 'react';
+import Select from 'react-select';
+import styled, { DefaultTheme, withTheme } from 'styled-components';
+import { AdminJSOptions } from '../../../adminjs-options.interface';
+import { useLocalStorage } from '../../hooks/use-local-storage';
+import { useBranding } from '../../utils/branding-provider';
 
-const SelectContainer = styled(Box)``
+const SelectContainer = styled(Box)``;
 
 SelectContainer.defaultProps = {
   className: cssClass('BrandingSelector'),
-}
+};
 
 interface SelectableBranding {
-  value: BrandingOptions;
+  value: Required<AdminJSOptions['branding']>;
   label: string;
 }
 
@@ -29,32 +28,37 @@ interface BrandingSelector {
 }
 
 const BrandingSelector: FC<BrandingSelector> = (props) => {
-  const { theme } = props
-  const brandings = useSelector<ReduxState, BrandingOptions[]>(
-    ({ availableBrandings }) => availableBrandings,
-  )
-  const [selected, setSelected] = useState<SelectableBranding>()
-  const selectableBrandings: SelectableBranding[] = brandings?.map(
-    branding => ({
-      value: branding,
-      label: branding.theme?.details?.name || 'Undefined theme',
-    })
-  )
-  const styles = selectStyles(theme)
-
-  const [, storeTheme] = useLocalStorage<DefaultTheme>(
+  const { theme } = props;
+  const styles = selectStyles(theme);
+  const [selected, setSelected] = useState<SelectableBranding>();
+  const [, availableBrandings] = useBranding();
+  const [, storeTheme] = useLocalStorage<DefaultTheme | null>(
     'adminjs-theme',
-    (window as any).THEME,
-  )
+    null
+  );
+  const handleChange = useCallback(async (event: SelectableBranding) => {
+    const branding =
+      typeof event.value === 'function' ? await event.value() : event.value;
+    const combinedTheme = combineStyles(omit(branding.theme, 'details'));
+    storeTheme(combinedTheme as DefaultTheme);
+    setSelected(event);
+    window.location.reload();
+  }, []);
 
-  const handleChange = useCallback((event: SelectableBranding) => {
-    setSelected(event)
-    const combinedTheme = combineStyles(omit(event.value.theme, 'details'))
-    storeTheme(combinedTheme as DefaultTheme)
-    window.location.reload()
-  }, [])
+  if (!availableBrandings?.length) return null;
 
-  if (!selectableBrandings.length) return null
+  const selectableBrandings = availableBrandings.reduce((acc, curr) => {
+    if (curr && typeof curr !== 'function') {
+      const selectable: SelectableBranding = {
+        value: curr,
+        label: curr.theme?.details?.name || 'Undefined theme',
+      };
+      acc.push(selectable);
+    }
+    return acc;
+  }, [] as SelectableBranding[]);
+
+  if (!selectableBrandings.length) return null;
 
   return (
     <SelectContainer padding="xl">
@@ -67,7 +71,7 @@ const BrandingSelector: FC<BrandingSelector> = (props) => {
         styles={styles}
       />
     </SelectContainer>
-  )
-}
+  );
+};
 
-export default withTheme(BrandingSelector)
+export default withTheme(BrandingSelector);

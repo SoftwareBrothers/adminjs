@@ -120,9 +120,9 @@ export interface AdminJSOptions {
    */
   branding?: BrandingOptions | BrandingOptionsFunction;
   /**
-   * Options which are related to the branding.
+   * List of available brandings to choose
    */
-  brandings?: BrandingOptions[];
+  availableBrandings?: (BrandingOptions | BrandingOptionsFunction)[];
   /**
    * Custom assets you want to pass to AdminJS
    */
