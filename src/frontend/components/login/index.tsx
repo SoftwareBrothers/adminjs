@@ -123,7 +123,7 @@ export const Login: React.FC<LoginProps> = (props) => {
             </Text>
           </Box>
         </Box>
-        {branding.softwareBrothers ? (<Box mt="xxl"><MadeWithLove /></Box>) : null}
+        {branding.withMadeWithLove ? (<Box mt="xxl"><MadeWithLove /></Box>) : null}
       </Wrapper>
     </React.Fragment>
   )
