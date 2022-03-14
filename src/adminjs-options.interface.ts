@@ -122,7 +122,7 @@ export interface AdminJSOptions {
   /**
    * List of available brandings to choose
    */
-  availableBrandings?: (BrandingOptions | BrandingOptionsFunction)[];
+  availableBrandings?: SelectableBranding[];
   /**
    * Custom assets you want to pass to AdminJS
    */
@@ -356,6 +356,20 @@ export type BrandingOptions = {
 export type BrandingOptionsFunction = (
   admin?: CurrentAdmin
 ) => BrandingOptions | Promise<BrandingOptions>
+
+/**
+ * Selectable Branding
+ *
+ * An object containing AdminJSTheme, optional logo and availability function.
+ *
+ * @alias SelectableBranding
+ * @memberof AdminJSOptions
+ */
+export type SelectableBranding = {
+  theme: AdminJSTheme;
+  logo?: string | false;
+  isAvailable?: (admin?: CurrentAdmin) => Promise<boolean> | boolean;
+}
 
 /**
  * Object describing regular page in AdminJS

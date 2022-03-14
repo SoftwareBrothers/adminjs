@@ -1,8 +1,10 @@
 import React, { createContext, FC, useContext } from 'react'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { DefaultTheme, ThemeProvider } from 'styled-components'
+import { BrandingSelector } from '../components/app/branding-selector'
 import { useLocalStorage } from '../hooks/use-local-storage'
 import { ReduxState } from '../store'
+import { changeBranding } from '../store/actions/initialize-branding';
 
 const useBrandingProviderProps = () => {
   return useSelector<ReduxState, [ReduxState['branding'], ReduxState['availableBrandings']]>(
@@ -20,11 +22,21 @@ interface BrandingProviderProps {
 
 const BrandingProvider: FC<BrandingProviderProps> = ({ children, theme }) => {
   const value = useBrandingProviderProps()
-  const [storedTheme] = useLocalStorage<DefaultTheme>('adminjs-theme', theme)
+  const dispatch = useDispatch();
+  const currentBranding = useSelector((state: ReduxState) => state.branding);
+  const [storedBranding] = useLocalStorage<BrandingSelector>('adminjs-branding', { theme })
+
+  const { theme: storedTheme, logo } = storedBranding;
+
+  React.useEffect(() => {
+    if (logo) {
+      dispatch(changeBranding({ ...currentBranding, logo }))
+    }
+  }, [storedBranding]);
 
   return (
     <BrandingContext.Provider value={value}>
-      <ThemeProvider theme={storedTheme || theme}>{children}</ThemeProvider>
+      <ThemeProvider theme={storedTheme}>{children}</ThemeProvider>
     </BrandingContext.Provider>
   )
 }

@@ -9,6 +9,7 @@ import SidebarBranding from './sidebar-branding'
 import SidebarPages from './sidebar-pages'
 import { ReduxState } from '../../../store/store'
 import SidebarFooter from './sidebar-footer'
+import { useBranding } from '../../../utils/branding-provider'
 
 import SidebarResourceSection from './sidebar-resource-section'
 import allowOverride from '../../../hoc/allow-override'
@@ -47,15 +48,15 @@ StyledSidebar.defaultProps = {
 
 const SidebarOriginal: React.FC<Props> = (props) => {
   const { isVisible } = props
-  const [branding, resources, pages]: [
-    BrandingOptions,
+  const [resources, pages]: [
     ResourceJSON[],
     PageJSON[]
   ] = useSelector((state: ReduxState) => [
-    state.branding,
     state.resources,
     state.pages,
   ])
+
+  const [branding] = useBranding()
 
   return (
     <StyledSidebar className={isVisible ? 'visible' : 'hidden'}>

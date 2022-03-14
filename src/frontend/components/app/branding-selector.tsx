@@ -23,8 +23,9 @@ interface SelectableBranding {
   label: string;
 }
 
-interface BrandingSelector {
+export interface BrandingSelector {
   theme: DefaultTheme;
+  logo?: string | false;
 }
 
 const BrandingSelector: FC<BrandingSelector> = (props) => {
@@ -32,15 +33,15 @@ const BrandingSelector: FC<BrandingSelector> = (props) => {
   const styles = selectStyles(theme);
   const [selected, setSelected] = useState<SelectableBranding>();
   const [, availableBrandings] = useBranding();
-  const [, storeTheme] = useLocalStorage<DefaultTheme | null>(
-    'adminjs-theme',
+  const [, storeTheme] = useLocalStorage<BrandingSelector | null>(
+    'adminjs-branding',
     null
   );
   const handleChange = useCallback(async (event: SelectableBranding) => {
     const branding =
       typeof event.value === 'function' ? await event.value() : event.value;
-    const combinedTheme = combineStyles(omit(branding.theme, 'details'));
-    storeTheme(combinedTheme as DefaultTheme);
+    const combinedTheme = combineStyles(omit(branding.theme, 'details')) as DefaultTheme;
+    storeTheme({ theme: combinedTheme, logo: branding.logo });
     setSelected(event);
     window.location.reload();
   }, []);

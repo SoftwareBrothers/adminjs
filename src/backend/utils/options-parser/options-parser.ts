@@ -4,12 +4,14 @@ import { CurrentAdmin } from '../../../current-admin.interface'
 import { BrandingOptions, Assets } from '../../../adminjs-options.interface'
 import ViewHelpers from '../view-helpers/view-helpers'
 import { AdminJSDefaultTheme } from '../../../theme'
+import { SelectableBranding } from '../../..'
 
 
 const defaultBranding = {
   companyName: 'Company',
   softwareBrothers: true,
 }
+
 const defaultAssets = {
   styles: [],
   scripts: [],
@@ -46,6 +48,27 @@ export const getBranding = async (
   merged.theme = merge(AdminJSDefaultTheme, merged.theme)
 
   return merged
+}
+
+export const getAvailableBrandings = async (
+  admin: AdminJS,
+  currentAdmin?: CurrentAdmin,
+): Promise<SelectableBranding[]> => {
+  const { availableBrandings = [] } = admin.options
+
+  const authorizedBrandings = await Promise.all(availableBrandings.map(async ({
+    isAvailable,
+    theme,
+    logo,
+  }) => {
+    if (typeof isAvailable === 'undefined') return { theme, logo }
+    if (typeof isAvailable === 'function' && await isAvailable(currentAdmin)) {
+      return { theme, logo }
+    }
+    return false
+  }))
+
+  return authorizedBrandings.filter(Boolean) as SelectableBranding[]
 }
 
 export const getFaviconFromBranding = (branding: BrandingOptions): string => {
