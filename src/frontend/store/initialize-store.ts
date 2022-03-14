@@ -16,7 +16,11 @@ import {
 import AdminJS from '../../adminjs'
 import { CurrentAdmin } from '../../current-admin.interface'
 import pagesToStore from './pages-to-store'
-import { getBranding, getAssets } from '../../backend/utils/options-parser/options-parser'
+import {
+  getBranding,
+  getAvailableBrandings,
+  getAssets,
+} from '../../backend/utils/options-parser/options-parser'
 
 export const initializeStore = async (
   admin: AdminJS,
@@ -41,9 +45,10 @@ export const initializeStore = async (
   ))
 
   const branding = await getBranding(admin, currentAdmin)
+  const availableBrandings = await getAvailableBrandings(admin, currentAdmin)
   const assets = await getAssets(admin, currentAdmin)
 
-  store.dispatch(initializeAvailableBrandings(admin.options.availableBrandings || []))
+  store.dispatch(initializeAvailableBrandings(availableBrandings || []))
   store.dispatch(initializeBranding(branding || {}))
   store.dispatch(initializeAssets(assets || {}))
 
