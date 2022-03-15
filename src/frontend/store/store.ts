@@ -18,13 +18,12 @@ import {
   ADD_NOTICE,
 } from './actions'
 
-import { Assets, BrandingOptions, VersionProps } from '../../adminjs-options.interface'
+import { AdminJSOptions, Assets, BrandingOptions, VersionProps } from '../../adminjs-options.interface'
 import { PageJSON, ResourceJSON } from '../interfaces'
 import { DEFAULT_PATHS } from '../../constants'
 import { CurrentAdmin } from '../../current-admin.interface'
 import { Locale } from '../../locale/config'
 import { NoticeMessage } from '../hoc/with-notice'
-import { AdminJSOptions } from '../../adminjs-options.interface'
 
 export type DashboardInState = {
   component?: string
@@ -49,13 +48,13 @@ const resourcesReducer = (
   action: {
     type: string
     data: Array<ResourceJSON>
-  }
+  },
 ) => {
   switch (action.type) {
-    case RESOURCES_INITIALIZE:
-      return action.data
-    default:
-      return state
+  case RESOURCES_INITIALIZE:
+    return action.data
+  default:
+    return state
   }
 }
 
@@ -64,13 +63,13 @@ const pagesReducer = (
   action: {
     type: string
     data: Array<PageJSON>
-  }
+  },
 ) => {
   switch (action.type) {
-    case PAGES_INITIALIZE:
-      return action.data
-    default:
-      return state
+  case PAGES_INITIALIZE:
+    return action.data
+  default:
+    return state
   }
 }
 
@@ -79,13 +78,13 @@ const localesReducer = (
   action: {
     type: string
     data: Locale
-  }
+  },
 ) => {
   switch (action.type) {
-    case LOCALE_INITIALIZE:
-      return action.data
-    default:
-      return state
+  case LOCALE_INITIALIZE:
+    return action.data
+  default:
+    return state
   }
 }
 
@@ -94,15 +93,15 @@ const brandingReducer = (
   action: {
     type: string
     data: BrandingOptions
-  }
+  },
 ) => {
   switch (action.type) {
-    case BRANDING_INITIALIZE:
-      return action.data
-    case BRANDING_CHANGE:
-      return { ...state, ...action.data }
-    default:
-      return state
+  case BRANDING_INITIALIZE:
+    return action.data
+  case BRANDING_CHANGE:
+    return { ...state, ...action.data }
+  default:
+    return state
   }
 }
 
@@ -111,13 +110,13 @@ const availableBrandingsReducer = (
   action: {
     type: string
     data: AdminJSOptions['availableBrandings']
-  }
+  },
 ) => {
   switch (action.type) {
-    case AVAILABLE_BRANDINGS_INITIALIZE:
-      return action.data
-    default:
-      return state
+  case AVAILABLE_BRANDINGS_INITIALIZE:
+    return action.data
+  default:
+    return state
   }
 }
 
@@ -126,22 +125,23 @@ const assetsReducer = (
   action: {
     type: string
     data: Assets
-  }
+  },
 ) => {
   switch (action.type) {
-    case ASSETS_INITIALIZE:
-      return action.data
-    default:
-      return state
+  case ASSETS_INITIALIZE:
+    return action.data
+  default:
+    return state
   }
 }
 
+// eslint-disable-next-line max-len
 const pathsReducer = (state: Paths = DEFAULT_PATHS, action: { type: string; data: Paths }): Paths => {
   switch (action.type) {
-    case PATHS_INITIALIZE:
-      return action.data
-    default:
-      return state
+  case PATHS_INITIALIZE:
+    return action.data
+  default:
+    return state
   }
 }
 
@@ -150,13 +150,13 @@ const dashboardReducer = (
   action: {
     type: string
     data: DashboardInState
-  }
+  },
 ): DashboardInState => {
   switch (action.type) {
-    case DASHBOARD_INITIALIZE:
-      return action.data
-    default:
-      return state
+  case DASHBOARD_INITIALIZE:
+    return action.data
+  default:
+    return state
   }
 }
 
@@ -165,13 +165,13 @@ const sessionReducer = (
   action: {
     type: string
     data: CurrentAdmin | null
-  }
+  },
 ) => {
   switch (action.type) {
-    case SESSION_INITIALIZE:
-      return action.data
-    default:
-      return state
+  case SESSION_INITIALIZE:
+    return action.data
+  default:
+    return state
   }
 }
 
@@ -180,16 +180,16 @@ const versionsReducer = (
   action: {
     type: string
     data: VersionProps
-  }
+  },
 ) => {
   switch (action.type) {
-    case VERSIONS_INITIALIZE:
-      return {
-        admin: action.data.admin,
-        app: action.data.app,
-      }
-    default:
-      return state
+  case VERSIONS_INITIALIZE:
+    return {
+      admin: action.data.admin,
+      app: action.data.app,
+    }
+  default:
+    return state
   }
 }
 
@@ -200,24 +200,25 @@ const noticesReducer = (
   action: {
     type: string
     data: NoticeMessageInState | NoticeArgs
-  }
+  },
 ): Array<NoticeMessageInState> => {
   switch (action.type) {
-    case ADD_NOTICE: {
-      const notices = [action.data as NoticeMessageInState]
-      return notices
-    }
-    case DROP_NOTICE: {
-      return state.filter((notice) => notice.id !== (action.data as NoticeArgs).noticeId)
-    }
-    case SET_NOTICE_PROGRESS: {
-      return state.map((notice) => ({
-        ...notice,
-        progress: notice.id === (action.data as NoticeArgs).noticeId ? action.data.progress : notice.progress,
-      }))
-    }
-    default:
-      return state
+  case ADD_NOTICE: {
+    const notices = [action.data as NoticeMessageInState]
+    return notices
+  }
+  case DROP_NOTICE: {
+    return state.filter(notice => notice.id !== (action.data as NoticeArgs).noticeId)
+  }
+  case SET_NOTICE_PROGRESS: {
+    return state.map(notice => ({
+      ...notice,
+      // eslint-disable-next-line max-len
+      progress: notice.id === (action.data as NoticeArgs).noticeId ? action.data.progress : notice.progress,
+    }))
+  }
+  default:
+    return state
   }
 }
 
@@ -249,5 +250,5 @@ const reducer = combineReducers<ReduxState>({
   locale: localesReducer,
 })
 
-export default (initialState = {}) =>
-  createStore(reducer, initialState, process.env.NODE_ENV === 'development' ? composeWithDevTools() : undefined)
+// eslint-disable-next-line max-len
+export default (initialState = {}) => createStore(reducer, initialState, process.env.NODE_ENV === 'development' ? composeWithDevTools() : undefined)

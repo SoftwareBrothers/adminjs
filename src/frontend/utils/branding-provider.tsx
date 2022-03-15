@@ -6,10 +6,12 @@ import { useLocalStorage } from '../hooks/use-local-storage'
 import { ReduxState } from '../store'
 import { changeBranding } from '../store/actions/initialize-branding'
 
-const useBrandingProviderProps = () => {
-  return useSelector<ReduxState, [ReduxState['branding'], ReduxState['availableBrandings']]>(
-    ({ branding, availableBrandings }) => [branding, availableBrandings]
-  )
+const useBrandingProviderProps = (): [ReduxState['branding'], ReduxState['availableBrandings']] => {
+  const [storedBranding, storedAvailableBrandings] = useSelector<
+    ReduxState,
+    [ReduxState['branding'], ReduxState['availableBrandings']]
+  >(({ branding, availableBrandings }) => [branding, availableBrandings])
+  return [storedBranding, storedAvailableBrandings]
 }
 
 type BrandingContextValue = ReturnType<typeof useBrandingProviderProps>
@@ -23,7 +25,7 @@ interface BrandingProviderProps {
 const BrandingProvider: FC<BrandingProviderProps> = ({ children, theme }) => {
   const dispatch = useDispatch()
   const value = useBrandingProviderProps()
-  const [currentBranding] = value;
+  const [currentBranding] = value
   const [storedBranding] = useLocalStorage<BrandingSelector>('adminjs-branding', { theme })
 
   const { theme: storedTheme, logo } = storedBranding
