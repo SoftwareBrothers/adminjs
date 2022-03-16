@@ -10,6 +10,8 @@ module.exports = {
     'airbnb',
     'plugin:@typescript-eslint/recommended',
     'plugin:mocha/recommended',
+    'prettier/@typescript-eslint',
+    '../../.eslintrc',
   ],
   parserOptions: {
     ecmaVersion: 2018,
@@ -18,10 +20,7 @@ module.exports = {
   rules: {
     'react/jsx-filename-extension': 'off',
     '@typescript-eslint/no-explicit-any': 'off',
-    indent: [
-      'error',
-      2,
-    ],
+    indent: ['error', 2],
     'import/prefer-default-export': 'off',
     'linebreak-style': ['error', 'unix'],
     quotes: ['error', 'single'],
@@ -82,10 +81,7 @@ module.exports = {
       },
     },
     {
-      files: [
-        '**/*/cypress/integration/**/*.spec.js',
-        './cy/**/*.js',
-      ],
+      files: ['**/*/cypress/integration/**/*.spec.js', './cy/**/*.js'],
       rules: {
         'mocha/no-mocha-arrows': 'off',
         'spaced-comment': 'off',
