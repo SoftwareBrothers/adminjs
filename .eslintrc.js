@@ -6,16 +6,12 @@ module.exports = {
     node: true,
     mocha: true,
   },
-  extends: (() => {
-    const arr = [
-      'airbnb',
-      'plugin:@typescript-eslint/recommended',
-      'plugin:mocha/recommended',
-      ...[process.env.NODE_ENV === undefined ? '../../.eslintrc' : undefined]
-    ]
-    console.log(arr)
-    return arr
-  })(),
+  extends: [
+    'airbnb',
+    'plugin:@typescript-eslint/recommended',
+    'plugin:mocha/recommended',
+    ...(process.env.NODE_ENV === undefined ? ['../../.eslintrc'] : [])
+  ],
   parserOptions: {
     ecmaVersion: 2018,
     sourceType: 'module',
