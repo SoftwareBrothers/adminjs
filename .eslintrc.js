@@ -10,7 +10,6 @@ module.exports = {
     'airbnb',
     'plugin:@typescript-eslint/recommended',
     'plugin:mocha/recommended',
-    '../../.eslintrc',
   ],
   parserOptions: {
     ecmaVersion: 2018,
