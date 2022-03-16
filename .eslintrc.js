@@ -10,7 +10,7 @@ module.exports = {
     'airbnb',
     'plugin:@typescript-eslint/recommended',
     'plugin:mocha/recommended',
-    process.env.NODE_ENV === 'development' ?? '../../.eslintrc',
+    '../../.eslintrc',
   ],
   parserOptions: {
     ecmaVersion: 2018,
@@ -100,4 +100,4 @@ module.exports = {
     cy: true,
     Cypress: true,
   },
-};
+}

@@ -9,7 +9,7 @@
     "types": "tsc",
     "clean": "rm -rf lib && mkdir lib && rm -fr types && mkdir types",
     "build": "babel src --out-dir lib --copy-files --extensions '.ts,.js,.jsx,.tsx'",
-    "lint": "eslint './spec/**/*' './src/**/*' './cy/**/*' './*'",
+    "lint": "eslint './spec/**/*' './src/**/*' './cy/**/*' './*' -c \"airbnb\" \"plugin:@typescript-eslint/recommended\" \"plugin:mocha/recommended\"",
     "cover": "NODE_ENV=test nyc --reporter=lcov --reporter=text-lcov npm test",
     "codecov": "NODE_ENV=test nyc --reporter=text-lcov npm test | codecov --pipe",
     "bundle": "node bin/watch-dev.js",
