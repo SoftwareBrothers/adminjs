@@ -8,10 +8,9 @@ import { ReduxState } from '../../../store'
 const SidebarFooter: React.FC = () => {
   const branding = useSelector<ReduxState, BrandingOptions>(({ branding }) => branding)
 
-  // TODO: remove depracated branding.softwareBrothers in next version
   return (
     <Box mt="lg" mb="md">
-      {branding.withMadeWithLove || branding.softwareBrothers && <MadeWithLove />}
+      {branding.withMadeWithLove && <MadeWithLove />}
     </Box>
   )
 }

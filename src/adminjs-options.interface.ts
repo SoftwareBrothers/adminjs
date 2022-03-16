@@ -330,13 +330,8 @@ export type BrandingOptions = {
    */
   theme?: Partial<ThemeOverride>;
   /**
-   * Flag indicates if `SoftwareBrothers` tiny hart icon should be visible on the bottom sidebar.
-   * @deprecated since 5.8.0
-   */
-  softwareBrothers?: boolean;
-  /**
-   * Flag indicates if "made with love" tiny hart icon should be visible on the bottom sidebar.
-   * @new since 5.8.0
+   * Flag indicates if "made with love" tiny heart icon should be visible on the bottom sidebar and login page.
+   * @new since 6.0.0
    */
   withMadeWithLove?: boolean;
 
