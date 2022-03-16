@@ -10,7 +10,6 @@ module.exports = {
     'airbnb',
     'plugin:@typescript-eslint/recommended',
     'plugin:mocha/recommended',
-    'prettier/@typescript-eslint',
     '../../.eslintrc',
   ],
   parserOptions: {
