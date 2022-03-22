@@ -16,7 +16,7 @@ const prepareParams = (
     const propertyDecorator = resource._decorated?.properties[key].toJSON()
 
     // eslint-disable-next-line no-continue
-    if (param === undefined) continue
+    if (param === undefined || param === null) continue
 
     if (property.type() !== 'mixed') {
       if (propertyDecorator?.isArray) {
