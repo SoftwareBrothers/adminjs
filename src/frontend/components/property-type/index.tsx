@@ -3,6 +3,7 @@ import * as defaultType from './default-type'
 import * as boolean from './boolean'
 import * as datetime from './datetime'
 import * as richtext from './richtext'
+import * as newrichtext from './slatetext'
 import * as reference from './reference'
 import * as textarea from './textarea'
 import * as password from './password'
@@ -33,6 +34,7 @@ const BasePropertyComponentExtended: BasePropertyComponentType = Object.assign(
     Boolean: camelizePropertyType(boolean),
     DateTime: camelizePropertyType(datetime),
     RichText: camelizePropertyType(richtext),
+    NewRichText: camelizePropertyType(newrichtext),
     Reference: camelizePropertyType(reference),
     TextArea: camelizePropertyType(textarea),
     Password: camelizePropertyType(password),

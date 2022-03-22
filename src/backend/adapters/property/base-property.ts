@@ -14,6 +14,7 @@
  * @property {string} mixed       type representing an object
  * @property {string} reference   many to one reference
  * @property {string} richtext    wysiwig editor
+ * @property {string} slatetext    wysiwig editor
  * @property {string} textarea    resizable textarea input
  * @property {string} password    password field
  */
@@ -24,7 +25,7 @@ const TITLE_COLUMN_NAMES = ['title', 'name', 'subject', 'email']
 export type PropertyType =
   'string' | 'float' | 'number' | 'boolean' |
   'date' | 'datetime' | 'mixed' | 'reference' |
-  'richtext' | 'textarea' | 'password';
+  'richtext' | 'slatetext' | 'textarea' | 'password';
 
 // description
 type BasePropertyAttrs = {
