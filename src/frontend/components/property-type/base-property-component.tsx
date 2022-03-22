@@ -11,6 +11,7 @@ import * as defaultType from './default-type'
 import * as boolean from './boolean'
 import * as datetime from './datetime'
 import * as richtext from './richtext'
+import * as newrichtext from './newrichtext'
 import * as slatetext from './slatetext'
 import * as reference from './reference'
 import * as textarea from './textarea'
@@ -37,6 +38,7 @@ const types: Record<PropertyType, any> = {
   password,
   date: datetime,
   richtext,
+  newrichtext,
   slatetext,
   string: defaultType,
   number: defaultType,
