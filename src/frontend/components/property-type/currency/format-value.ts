@@ -21,7 +21,7 @@ const pickFormatOptions = (props: Record<string, string>): FormatCurrencyOptions
 }
 
 const formatValue = (value: string, props: Record<string, string> = {}): string => {
-  const formatOptions = pickFormatOptions({ value: `${value}`, ...props })
+  const formatOptions = pickFormatOptions({ value, ...props })
   return formatCurrencyProperty(formatOptions)
 }
 

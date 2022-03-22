@@ -1,15 +1,17 @@
-import React, { PureComponent, ReactNode } from 'react'
 import { ValueGroup } from '@adminjs/design-system'
-
+import React, { FC } from 'react'
 import { EditPropertyProps } from '../base-property-props'
 import formatValue from './format-value'
 
-export default class Show extends PureComponent<EditPropertyProps> {
-  render(): ReactNode {
-    const { property, record } = this.props
+const Show: FC<EditPropertyProps> = (props) => {
+  const { property, record } = props
+  const value = `${record.params[property.path]}`
 
-    const value = formatValue(record.params[property.path], property.props)
-
-    return <ValueGroup label={property.label}>{value}</ValueGroup>
-  }
+  return (
+    <ValueGroup label={property.label}>
+      {formatValue(value, property.props)}
+    </ValueGroup>
+  )
 }
+
+export default Show
