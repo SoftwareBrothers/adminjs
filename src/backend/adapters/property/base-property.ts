@@ -24,7 +24,7 @@ const TITLE_COLUMN_NAMES = ['title', 'name', 'subject', 'email']
 export type PropertyType =
   'string' | 'float' | 'number' | 'boolean' |
   'date' | 'datetime' | 'mixed' | 'reference' |
-  'richtext' | 'textarea' | 'password';
+  'richtext' | 'textarea' | 'password' | 'currency';
 
 // description
 type BasePropertyAttrs = {
