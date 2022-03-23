@@ -7,6 +7,7 @@ import * as newrichtext from './newrichtext'
 import * as reference from './reference'
 import * as textarea from './textarea'
 import * as password from './password'
+import * as currency from './currency'
 import { BasePropertyComponentProps } from './base-property-props'
 
 type BasePropertyComponentType = React.FC<BasePropertyComponentProps> & {
@@ -38,6 +39,7 @@ const BasePropertyComponentExtended: BasePropertyComponentType = Object.assign(
     Reference: camelizePropertyType(reference),
     TextArea: camelizePropertyType(textarea),
     Password: camelizePropertyType(password),
+    Currency: camelizePropertyType(currency),
   },
 )
 
