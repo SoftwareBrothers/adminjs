@@ -163,14 +163,14 @@ export const Dashboard: React.FC = () => {
         </Box>
         <Box variant="white" boxShadow="card" width={1} m="lg">
           <Text textAlign="center">
-            <Illustration variant="SoftwareBrothersLogo" />
+            <Illustration variant="AdminJSLogo" />
             <H4>{translateMessage('needMoreSolutions_title')}</H4>
             <Text>{translateMessage('needMoreSolutions_subtitle')}</Text>
             <Text mt="xxl">
               <Button
                 as="a"
                 variant="primary"
-                href="https://softwarebrothers.co/services"
+                href="https://share.hsforms.com/1IedvmEz6RH2orhcL6g2UHA8oc5a"
               >
                 {translateButton('contactUs')}
               </Button>
