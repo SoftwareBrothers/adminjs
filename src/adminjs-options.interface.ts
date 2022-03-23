@@ -330,7 +330,8 @@ export type BrandingOptions = {
    */
   theme?: Partial<ThemeOverride>;
   /**
-   * Flag indicates if "made with love" tiny heart icon should be visible on the bottom sidebar and login page.
+   * Flag indicates if "made with love" tiny heart icon
+   * should be visible on the bottom sidebar and login page.
    * @new since 6.0.0
    */
   withMadeWithLove?: boolean;
