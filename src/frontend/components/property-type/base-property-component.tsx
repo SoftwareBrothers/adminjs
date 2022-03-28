@@ -11,8 +11,9 @@ import * as defaultType from './default-type'
 import * as boolean from './boolean'
 import * as datetime from './datetime'
 import * as richtext from './richtext'
-import * as newrichtext from './newrichtext'
-import * as slatetext from './slatetext'
+import * as tiptap from './tiptap'
+import * as tinymce from './tinymce'
+import * as slate from './slate'
 import * as reference from './reference'
 import * as textarea from './textarea'
 import * as password from './password'
@@ -39,8 +40,9 @@ const types: Record<PropertyType, any> = {
   password,
   date: datetime,
   richtext,
-  newrichtext,
-  slatetext,
+  tiptap,
+  tinymce,
+  slate,
   string: defaultType,
   number: defaultType,
   float: defaultType,
