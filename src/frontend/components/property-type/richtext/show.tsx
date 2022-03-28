@@ -8,7 +8,7 @@ const Show: FC<EditPropertyProps> = (props) => {
 
   useEffect(() => {
     if (contentRef.current) {
-      const value = record.params[property.path]
+      const value: string = record.params[property.path] || ''
       contentRef.current.innerHTML = value
     }
   }, [])
