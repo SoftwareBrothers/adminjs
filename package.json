@@ -93,7 +93,6 @@
     "@tiptap/starter-kit": "^2.0.0-beta.183",
     "@types/babel-core": "^6.25.7",
     "@types/react": "^16.9.16",
-    "@types/slate-html-serializer": "^0.6.5",
     "axios": "^0.24.0",
     "babel-plugin-styled-components": "^1.11.1",
     "commander": "^5.1.0",
@@ -116,7 +115,6 @@
     "rollup": "^2.32.1",
     "rollup-plugin-terser": "^6.1.0",
     "slash": "^3.0.0",
-    "slate-html-serializer": "^0.8.13",
     "styled-components": "^5.1.0",
     "uuid": "^8.3.2"
   },
