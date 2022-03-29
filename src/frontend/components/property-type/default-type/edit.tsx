@@ -1,14 +1,12 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 import React, { FC, useState, memo, useEffect } from 'react'
-import Select from 'react-select'
-import { withTheme, DefaultTheme } from 'styled-components'
-import { Input, FormMessage, FormGroup, selectStyles } from '@adminjs/design-system'
+import { Input, FormMessage, FormGroup, Select } from '@adminjs/design-system'
 
 import { EditPropertyProps } from '../base-property-props'
 import { recordPropertyIsEqual } from '../record-property-is-equal'
 import { PropertyLabel } from '../utils/property-label'
 
-type CombinedProps = EditPropertyProps & {theme: DefaultTheme}
+type CombinedProps = EditPropertyProps
 
 const Edit: FC<CombinedProps> = (props) => {
   const { property, record } = props
@@ -24,20 +22,16 @@ const Edit: FC<CombinedProps> = (props) => {
 }
 
 const SelectEdit: FC<CombinedProps> = (props) => {
-  const { theme, record, property, onChange } = props
+  const { record, property, onChange } = props
   if (!property.availableValues) {
     return null
   }
   const propValue = record.params?.[property.path] ?? ''
-  const styles = selectStyles(theme)
   const selected = property.availableValues.find(av => av.value === propValue)
 
   return (
     <Select
-      isClearable
-      styles={styles}
       value={selected}
-      required={property.isRequired}
       options={property.availableValues}
       onChange={s => onChange(property.path, s?.value ?? '')}
       isDisabled={property.isDisabled}
@@ -73,4 +67,4 @@ const TextEdit: FC<CombinedProps> = (props) => {
   )
 }
 
-export default withTheme(memo(Edit, recordPropertyIsEqual))
+export default memo(Edit, recordPropertyIsEqual)
