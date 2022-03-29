@@ -1,8 +1,0 @@
-{
-  "ignore": ["cypress/**/*.js"],
-  "ext": "js",
-  "watch": [
-    "../lib",
-    "./build"
-  ]
-}
