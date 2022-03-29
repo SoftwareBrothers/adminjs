@@ -6,7 +6,7 @@ import { PropertyLabel } from '../utils/property-label'
 
 const Edit: FC<EditPropertyProps> = (props) => {
   const { property, record, onChange } = props
-  const value = record.params?.[property.path] ?? ''
+  const value = record.params?.[property.path]
   const error = record.errors && record.errors[property.path]
 
   const handleUpdate = useCallback((newValue: string) => {
