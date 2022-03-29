@@ -20,6 +20,7 @@ const Filter: FC<CurrencyEditPropertyProps> = (props) => {
         name={`filter-${property.path}`}
         onValueChange={handleChange}
         value={filter[property.path]}
+        enterKeyHint="go"
         {...property.props}
       />
     </FormGroup>

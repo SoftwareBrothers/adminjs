@@ -62,7 +62,6 @@ const globals = {
   'adminjs/style': 'AdminJS.style',
   i18next: 'i18n',
   'react-i18next': 'ReactI18Next',
-  Quill: 'Quill',
   punycode: 'punycode',
 }
 

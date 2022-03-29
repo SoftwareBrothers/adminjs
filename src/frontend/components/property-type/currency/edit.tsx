@@ -27,6 +27,7 @@ const Edit: FC<CurrencyEditPropertyProps> = (props) => {
         onValueChange={setValue}
         onBlur={(): void => onChange(property.path, value)}
         value={value}
+        enterKeyHint="go"
         {...property.props}
       />
       <FormMessage>{error && error.message}</FormMessage>
