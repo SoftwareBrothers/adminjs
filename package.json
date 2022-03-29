@@ -89,8 +89,6 @@
     "@rollup/plugin-json": "^4.1.0",
     "@rollup/plugin-node-resolve": "^9.0.0",
     "@rollup/plugin-replace": "^2.3.3",
-    "@tiptap/react": "^2.0.0-beta.108",
-    "@tiptap/starter-kit": "^2.0.0-beta.183",
     "@types/babel-core": "^6.25.7",
     "@types/react": "^16.9.16",
     "axios": "^0.24.0",
