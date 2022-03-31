@@ -5,6 +5,7 @@ import { Box, cssClass } from '@adminjs/design-system'
 
 import { RecordJSON, ResourceJSON } from '../../interfaces'
 import ViewHelpers from '../../../backend/utils/view-helpers/view-helpers'
+import { useTranslation } from '../../hooks/use-translation'
 
 export const BreadcrumbLink = styled(Link)`
   color: ${({ theme }): string => theme.colors.grey40};
@@ -56,10 +57,11 @@ export const Breadcrumbs: React.FC<BreadcrumbProps> = (props) => {
 
   const action = resource.actions.find(a => a.name === actionName)
   const h = new ViewHelpers()
+  const { translateLabel: tl } = useTranslation()
 
   return (
     <Box flexGrow={1} className={cssClass('Breadcrumbs')}>
-      <BreadcrumbLink to={h.dashboardUrl()}>Dashboard</BreadcrumbLink>
+      <BreadcrumbLink to={h.dashboardUrl()}>{tl('dashboard')}</BreadcrumbLink>
       <BreadcrumbLink to={resource.href ? resource.href : '/'} className={record ? 'is-active' : ''}>
         {resource.name}
       </BreadcrumbLink>

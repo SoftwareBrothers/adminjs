@@ -30,6 +30,7 @@ const translations = {
     adminVersion: 'Admin: {{version}}',
     appVersion: 'App: {{version}}',
     loginWelcome: 'Welcome',
+    dashboard: 'Dashboard',
   },
   properties: {
     length: 'Length',
