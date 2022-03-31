@@ -1,5 +1,6 @@
 export type OverridableComponent =
   | 'LoggedIn'
+  | 'Login'
   | 'NoRecords'
   | 'SidebarResourceSection'
   | 'SidebarFooter'

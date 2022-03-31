@@ -18,6 +18,7 @@ import {
 } from '@adminjs/design-system'
 import { useTranslation } from '../../hooks'
 import { ReduxState } from '../../store/store'
+import allowOverride from '../../hoc/allow-override'
 
 const GlobalStyle = createGlobalStyle`
   html, body, #app {
@@ -45,7 +46,7 @@ export type LoginProps = {
   action: string;
 }
 
-export const Login: React.FC<LoginProps> = (props) => {
+const Login: React.FC<LoginProps> = (props) => {
   const { action, message } = props
   const { translateLabel, translateButton, translateProperty, translateMessage } = useTranslation()
   const branding = useSelector((state: ReduxState) => state.branding)
@@ -129,4 +130,9 @@ export const Login: React.FC<LoginProps> = (props) => {
   )
 }
 
-export default Login
+const OverridableLoginComponent = allowOverride(Login, 'Login')
+
+export {
+  OverridableLoginComponent as default,
+  OverridableLoginComponent as Login,
+}
