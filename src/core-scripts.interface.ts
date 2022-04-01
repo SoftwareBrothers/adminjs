@@ -21,18 +21,18 @@
  * }
  * ```
  */
- export interface CoreScripts {
+export interface CoreScripts {
   /**
-  * App Bundle
-  */
+   * App Bundle
+   */
   'app.bundle.js': string;
   /**
-  * Custom Components
-  */
+   * Custom Components
+   */
   'components.bundle.js': string;
   /**
-  * Design System Bundle
-  */
+   * Design System Bundle
+   */
   'design-system.bundle.js': string;
   /**
    * Global bundle
