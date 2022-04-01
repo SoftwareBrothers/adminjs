@@ -7,6 +7,7 @@ import { PageContext } from './backend/actions/action.interface'
 import { ResourceOptions } from './backend/decorators/resource/resource-options.interface'
 import { Locale } from './locale/config'
 import { CurrentAdmin } from './current-admin.interface'
+import { CoreScripts } from './core-scripts.interface'
 
 /**
  * AdminJSOptions
@@ -264,6 +265,10 @@ export type Assets = {
    * library - you can pass its url here.
    */
   scripts?: Array<string>;
+  /**
+   *  Mapping of core scripts in case you want to version your assets
+   */
+  coreScripts?: CoreScripts;
 }
 
 /**
