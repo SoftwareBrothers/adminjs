@@ -1,4 +1,4 @@
-import { AdminJSOptions } from '../../../adminjs-options.interface'
+import { AdminJSOptions, Assets } from '../../../adminjs-options.interface'
 import { Paths } from '../../../frontend/store/store'
 
 let globalAny: any = {}
@@ -265,11 +265,13 @@ export class ViewHelpers {
    * @private
    *
    * @param  {string} asset
+   * @param  {Assets | undefined} assetsConfig
    * @return {string}
    */
-  assetPath(asset: string): string {
+  assetPath(asset: string, assetsConfig?: Assets): string {
     if (this.options.assetsCDN) {
-      const url = new URL(asset, this.options.assetsCDN).href
+      const pathname = assetsConfig?.coreScripts?.[asset] ?? asset
+      const url = new URL(pathname, this.options.assetsCDN).href
 
       // adding timestamp to the href invalidates the CDN cache
       return `${url}?date=${runDate.getTime()}`
