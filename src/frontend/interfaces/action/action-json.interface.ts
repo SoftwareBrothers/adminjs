@@ -32,6 +32,14 @@ export interface ActionJSON {
    */
   showFilter: boolean;
   /**
+   * If action should have resource actions buttons displayed above action header.
+   *
+   * Defaults to `true`
+   *
+   * @new in version 5.8.1
+   */
+  showResourceActions: boolean;
+  /**
    * Action component. When set to false action will be invoked immediately after clicking it,
    * to put in another words: there wont be an action view
    */

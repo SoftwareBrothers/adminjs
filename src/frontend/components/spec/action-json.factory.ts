@@ -7,6 +7,7 @@ factory.define<ActionJSON>('ActionJSON', Object, {
   name: factory.sequence('ActionJSON.name', n => `action${n}`),
   label: factory.sequence('ActionJSON.label', n => `action ${n}`),
   showFilter: false,
+  showResourceActions: true,
   resourceId: 'resource',
   hideActionHeader: false,
   containerWidth: 1,
