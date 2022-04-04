@@ -381,7 +381,7 @@ export interface Action <T extends ActionResponse> {
    */
   isAccessible?: boolean | IsFunction;
   /**
-   * if filter should be visible on the sidebar. Only for _resource_ actions
+   * If filter should be visible on the sidebar. Only for _resource_ actions
    *
    * Example of creating new resource action with filter
    *
@@ -398,6 +398,14 @@ export interface Action <T extends ActionResponse> {
    * ```
    */
   showFilter?: boolean;
+  /**
+   * If action should have resource actions buttons displayed above action header.
+   *
+   * Defaults to `true`
+   *
+   * @new in version v5.8.1
+   */
+  showResourceActions?: boolean;
   /**
    * Type of an action - could be either _resource_, _record_ or _bulk_.
    *
