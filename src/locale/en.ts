@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/camelcase */
+/* spellchecker: disable */
 
 const translations = {
   actions: {
@@ -37,9 +38,7 @@ const translations = {
     from: 'From',
     to: 'To',
   },
-  resources: {
-
-  },
+  resources: {},
   messages: {
     successfullyBulkDeleted: 'successfully removed {{count}} record',
     successfullyBulkDeleted_plural: 'successfully removed {{count}} records',
@@ -66,7 +65,7 @@ const translations = {
     confirmDelete: 'Do you really want to remove this item?',
     welcomeOnBoard_title: 'Welcome on Board!',
     welcomeOnBoard_subtitle: 'Now you are one of us! We prepared a few tips for you to start:',
-    loginWelcome: 'To AdminJS - the best admin framework for Node.js apps, based on React.',
+    loginWelcome: 'to AdminJS – the world\'s leading open-source auto-generated admin panel for your Node.js application that allows you to manage all your data in one place',
     addingResources_title: 'Adding Resources',
     addingResources_subtitle: 'How to add new resources to the sidebar',
     customizeResources_title: 'Customize Resources',
