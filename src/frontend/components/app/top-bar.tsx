@@ -7,6 +7,7 @@ import LoggedIn from './logged-in'
 import Version from './version'
 
 import { ReduxState } from '../../store/store'
+import LanguageSelect from './language-select/language-select'
 
 
 const NavBar = styled(Box)`
@@ -43,6 +44,7 @@ export const TopBar: React.FC<Props> = (props) => {
         <Icon icon="Menu" size={32} color="grey100" />
       </Box>
       <Version versions={versions} />
+      <LanguageSelect />
       {session && session.email ? <LoggedIn session={session} paths={paths} /> : ''}
     </NavBar>
   )

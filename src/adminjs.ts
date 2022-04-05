@@ -1,7 +1,8 @@
-import * as _ from 'lodash'
 import * as path from 'path'
 import * as fs from 'fs'
 import i18n, { i18n as I18n } from 'i18next'
+import isArray from 'lodash/isArray'
+import merge from 'lodash/merge'
 
 import { AdminJSOptionsWithDefault, AdminJSOptions } from './adminjs-options.interface'
 import BaseResource from './backend/adapters/resource/base-resource'
@@ -64,6 +65,8 @@ class AdminJS {
 
   public locale!: Locale
 
+  public availableLocales!: Locale[]
+
   public i18n!: I18n
 
   public translateFunctions!: TranslateFunctions
@@ -98,7 +101,7 @@ class AdminJS {
      * @type {AdminJSOptions}
      * @description Options given by a user
      */
-    this.options = _.merge({}, defaultOptions, options)
+    this.options = merge({}, defaultOptions, options)
 
     this.resolveBabelConfigPath()
 
@@ -110,9 +113,17 @@ class AdminJS {
   }
 
   initI18n(): void {
+    const { locale } = this.options
+    let defaultLocale
+    if (isArray(locale)) {
+      [defaultLocale] = locale
+      this.availableLocales = [...locale]
+    } else {
+      defaultLocale = locale
+    }
     this.locale = {
-      translations: combineTranslations(en.translations, this.options.locale?.translations),
-      language: this.options.locale?.language || en.language,
+      translations: combineTranslations(en.translations, defaultLocale?.translations),
+      language: defaultLocale?.language || en.language,
     }
     if (i18n.isInitialized) {
       i18n.addResourceBundle(this.locale.language, 'translation', this.locale.translations)

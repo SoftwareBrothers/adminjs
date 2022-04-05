@@ -48,7 +48,7 @@ const html = async (
 
   store.dispatch(initializeBranding(branding))
   store.dispatch(initializeAssets(assets))
-  store.dispatch(initializeLocale(admin.locale))
+  store.dispatch(initializeLocale(admin))
 
   const theme = combineStyles((branding && branding.theme) || {})
   const { locale } = store.getState()

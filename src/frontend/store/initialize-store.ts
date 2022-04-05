@@ -25,7 +25,7 @@ export const initializeStore = async (
   const AdminClass: typeof AdminJS = admin.constructor as typeof AdminJS
   const adminVersion = AdminClass.VERSION
 
-  store.dispatch(initializeLocale(admin.locale))
+  store.dispatch(initializeLocale(admin))
 
   store.dispatch(initializeResources(
     admin.resources.map((resource) => {
