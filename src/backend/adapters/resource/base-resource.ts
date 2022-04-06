@@ -25,6 +25,7 @@ import AdminJS from '../../../adminjs'
  * - {@link BaseResource#property property()}
  * - {@link BaseResource#count count()}
  * - {@link BaseResource#find find()}
+ * - {@link BaseResource#findBy findOneBy()}
  * - {@link BaseResource#findOne findOne()}
  * - {@link BaseResource#findMany findMany()}
  * - {@link BaseResource#create create()}
@@ -151,6 +152,26 @@ class BaseResource {
     };
   }): Promise<Array<BaseRecord>> {
     throw new NotImplementedError('BaseResource#find')
+  }
+
+  /**
+   * Returns a single record fitting given filter
+   *
+   * @param  {Filter} filters                        filters to search by
+   * @return {Promise<BaseRecord | null>}            a single record
+   * @abstract
+   * @example
+   * // filters example
+   * {
+   *    name: 'Tom',
+   *    createdAt: { from: '2019-01-01', to: '2019-01-18' }
+   * }
+   */
+  async findOneBy(filters: Record<string, any>): Promise<BaseRecord | null> {
+    const filter = await new Filter(filters, this.id()).populate();
+    const records = await this.find(filter, { limit: 1 })
+
+    return records[0] ?? null
   }
 
   /**

@@ -1,7 +1,7 @@
 import AdminJS from '../../../adminjs'
 import PropertyOptions from './property-options.interface'
 import BaseResource from '../../adapters/resource/base-resource'
-import BaseProperty, { PropertyType } from '../../adapters/property/base-property'
+import BaseProperty, { PropertyReferenceOptions, PropertyType } from '../../adapters/property/base-property'
 import ResourceDecorator from '../resource/resource-decorator'
 import { PropertyPlace, BasePropertyJSON } from '../../../frontend/interfaces'
 import { overrideFromOptions } from './utils'
@@ -89,7 +89,10 @@ class PropertyDecorator {
    * @return  {BaseResource} reference resource
    */
   reference(): BaseResource | null {
-    const referenceResourceId = this.referenceName()
+    const referenceOpts = this.referenceOptions()
+    if (!referenceOpts) return null
+
+    const { resourceId: referenceResourceId } = referenceOpts
     if (referenceResourceId) {
       const resource = this._admin.findResource(referenceResourceId)
       return resource
@@ -97,8 +100,16 @@ class PropertyDecorator {
     return null
   }
 
-  referenceName(): string | null {
-    return this.options.reference || this.property.reference()
+  referenceOptions(): PropertyReferenceOptions | null {
+    const reference = this.options.reference ?? this.property.reference()
+
+    if (!reference) return null
+    if (typeof reference === 'string') return {
+      resourceId: reference,
+    }
+    if (reference.resourceId) return reference
+
+    return null
   }
 
   /**
@@ -268,7 +279,7 @@ class PropertyDecorator {
       label: this.label(),
       type: this.type(),
       hideLabel: !!this.options.hideLabel,
-      reference: this.referenceName(),
+      reference: this.referenceOptions(),
       components: this.options.components,
       subProperties: this.subProperties()
         .filter(subProperty => !where || subProperty.isVisible(where))

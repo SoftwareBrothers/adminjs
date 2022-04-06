@@ -1,4 +1,4 @@
-import { PropertyType } from '../../../backend/adapters/property/base-property'
+import { PropertyReferenceOptions, PropertyType } from '../../../backend/adapters/property/base-property'
 
 export type PropertyPlace = 'show' | 'list' | 'edit' | 'filter';
 
@@ -90,7 +90,7 @@ export interface PropertyJSON {
    * Has a name of a resource to which it is a reference.
    * For instance property `userId` will have here `Users`
    */
-  reference: string | null;
+  reference: string | PropertyReferenceOptions | null;
   /**
    * Indicates if property is an array of properties
    */

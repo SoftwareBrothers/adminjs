@@ -87,11 +87,12 @@ export class Filter {
     const keys = Object.keys(this.filters)
     for (let index = 0; index < keys.length; index += 1) {
       const key = keys[index]
-      const referenceResource = this.resource.decorate().getPropertyByKey(key)?.reference()
+      const property = this.resource.decorate().getPropertyByKey(key)
+      const referenceResource = property?.reference()
       if (referenceResource) {
-        this.filters[key].populated = await referenceResource.findOne(
-          this.filters[key].value as string,
-        )
+        this.filters[key].populated = await referenceResource.findOneBy({
+          [this.filters[key].path]: this.filters[key].value
+        })
       }
     }
     return this

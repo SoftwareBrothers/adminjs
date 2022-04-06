@@ -21,6 +21,11 @@
 // Spacer
 const TITLE_COLUMN_NAMES = ['title', 'name', 'subject', 'email']
 
+export type PropertyReferenceOptions = {
+  resourceId: string;
+  referencedProperty?: string;
+}
+
 export type PropertyType =
   'string' | 'float' | 'number' | 'boolean' |
   'date' | 'datetime' | 'mixed' | 'reference' |
@@ -144,7 +149,7 @@ class BaseProperty {
    * When property is responsible for the field: 'user_id' in SQL database
    * reference should be the name of the Resource which it refers to: `Users`
    */
-  reference(): string | null {
+  reference(): string | PropertyReferenceOptions | null {
     return null
   }
 
