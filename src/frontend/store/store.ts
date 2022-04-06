@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 import { combineReducers, createStore } from 'redux'
+import type { useLocation } from 'react-router'
 import {
   VERSIONS_INITIALIZE,
   SESSION_INITIALIZE,
@@ -12,7 +13,8 @@ import {
   RESOURCES_INITIALIZE,
   SET_NOTICE_PROGRESS,
   DROP_NOTICE,
-  ADD_NOTICE } from './actions'
+  ADD_NOTICE,
+  ROUTE_CHANGED } from './actions'
 
 import { Assets, BrandingOptions, VersionProps } from '../../adminjs-options.interface'
 import { PageJSON, ResourceJSON } from '../interfaces'
@@ -153,6 +155,25 @@ const versionsReducer = (state = {}, action: {
   }
 }
 
+export type RouterProps = {
+  from: Partial<ReturnType<typeof useLocation>>;
+  to: Partial<ReturnType<typeof useLocation>>;
+}
+
+const routerReducer = (state: RouterProps = { from: {}, to: {} }, action: {
+  type: string;
+  data: any;
+}) => {
+  switch (action.type) {
+  case ROUTE_CHANGED:
+    return {
+      from: { ...state.to },
+      to: { ...action.data },
+    }
+  default: return state
+  }
+}
+
 type NoticeArgs = { noticeId: string; progress: number }
 
 const noticesReducer = (state: Array<NoticeMessageInState> = [], action: {
@@ -190,6 +211,7 @@ export type ReduxState = {
   versions: VersionProps;
   pages: Array<PageJSON>;
   locale: Locale;
+  router: RouterProps;
 }
 
 const reducer = combineReducers<ReduxState>({
@@ -203,6 +225,7 @@ const reducer = combineReducers<ReduxState>({
   versions: versionsReducer,
   pages: pagesReducer,
   locale: localesReducer,
+  router: routerReducer,
 })
 
 export default (initialState = {}) => createStore(reducer, initialState)

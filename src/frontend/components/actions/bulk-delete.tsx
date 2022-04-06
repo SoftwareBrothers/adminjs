@@ -53,9 +53,7 @@ const BulkDelete: React.FC<ActionProps & AddNoticeProps & RouteComponentProps> =
         const search = new URLSearchParams(window.location.search)
         // bulk function have recordIds in the URL so it has to be stripped before redirect
         search.delete('recordIds')
-        history.push(appendForceRefresh(response.data.redirectUrl, search.toString()), {
-          previousPage: window.location.href,
-        })
+        history.push(appendForceRefresh(response.data.redirectUrl, search.toString()))
       }
     })).catch((error) => {
       setLoading(false)

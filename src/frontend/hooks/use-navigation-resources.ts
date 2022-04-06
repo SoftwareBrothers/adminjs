@@ -35,7 +35,7 @@ export function useNavigationResources(
     onClick: (event): void => {
       if (resource.href) {
         event.preventDefault()
-        history.push(resource.href, { previousPage: window.location.href })
+        history.push(resource.href)
       }
     },
   }), [location, history])
