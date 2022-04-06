@@ -37,7 +37,7 @@ export const buildActionClickHandler = (
     if (actionHasComponent(action)) {
       callApi()
     } else if (href) {
-      push(href, { previousPage: window.location.href })
+      push(href)
     }
   }
 
