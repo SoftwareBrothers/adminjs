@@ -14,7 +14,8 @@ import {
   SET_NOTICE_PROGRESS,
   DROP_NOTICE,
   ADD_NOTICE,
-  ROUTE_CHANGED } from './actions'
+  ROUTE_CHANGED,
+  INITIAL_ROUTE } from './actions'
 
 import { Assets, BrandingOptions, VersionProps } from '../../adminjs-options.interface'
 import { PageJSON, ResourceJSON } from '../interfaces'
@@ -165,6 +166,11 @@ const routerReducer = (state: RouterProps = { from: {}, to: {} }, action: {
   data: any;
 }) => {
   switch (action.type) {
+  case INITIAL_ROUTE:
+    return {
+      ...state,
+      from: { ...action.data },
+    }
   case ROUTE_CHANGED:
     return {
       from: { ...state.to },
