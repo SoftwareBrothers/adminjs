@@ -11,7 +11,6 @@ import { ActionHeader } from '../app'
 import Wrapper from './utils/wrapper'
 import DrawerPortal from '../app/drawer-portal'
 import FilterDrawer from '../app/filter-drawer'
-import queryHasFilter from './utils/query-has-filter'
 
 type PropsFromState = {
   resources: Array<ResourceJSON>;
@@ -20,9 +19,9 @@ type PropsFromState = {
 type Props = PropsFromState & RouteComponentProps<ResourceActionParams>
 
 const ResourceAction: React.FC<Props> = (props) => {
-  const { resources, match, location } = props
+  const { resources, match } = props
   const { resourceId, actionName } = match.params
-  const [filterVisible, setFilerVisible] = useState(queryHasFilter(location.search))
+  const [filterVisible, setFilterVisible] = useState(false)
   const [tag, setTag] = useState('')
 
   const resource = resources.find(r => r.id === resourceId)
@@ -35,7 +34,7 @@ const ResourceAction: React.FC<Props> = (props) => {
   }
 
   const toggleFilter = action.showFilter
-    ? ((): void => setFilerVisible(!filterVisible))
+    ? ((): void => setFilterVisible(!filterVisible))
     : undefined
 
   if (action.showInDrawer) {
@@ -64,6 +63,7 @@ const ResourceAction: React.FC<Props> = (props) => {
       />
       {action.showFilter ? (
         <FilterDrawer
+          key={filterVisible.toString()}
           resource={resource}
           isVisible={filterVisible}
           toggleFilter={toggleFilter!}
