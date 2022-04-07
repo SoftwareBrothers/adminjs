@@ -3,7 +3,7 @@ import React from 'react'
 import styled from 'styled-components'
 import { Box, BoxProps, DrawerContent, DrawerFooter } from '@adminjs/design-system'
 
-const StyledResourceActionWrapper = styled(Box)`
+const StyledWrapperWithFilter = styled(Box)`
   & > ${DrawerContent} {
     background: ${({ theme }): string => theme.colors.white};
     padding: ${({ theme }): string => theme.space.xxl};
@@ -16,7 +16,7 @@ const StyledResourceActionWrapper = styled(Box)`
   }
 `
 
-const StyledRecordActionWrapper = styled(Box)`
+const StyledWrapper = styled(Box)`
   & ${DrawerContent} {
     background: ${({ theme }): string => theme.colors.white};
     padding: ${({ theme }): string => theme.space.xxl};
@@ -29,11 +29,11 @@ const StyledRecordActionWrapper = styled(Box)`
   }
 `
 
-const Wrapper: React.FC<BoxProps & { actionType?: string }> = (props) => {
+const Wrapper: React.FC<BoxProps & { showFilter?: boolean }> = (props) => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { children, variant, color, actionType = 'record', ...rest } = props
+  const { children, variant, color, showFilter = false, ...rest } = props
 
-  const Component = actionType === 'record' ? StyledRecordActionWrapper : StyledResourceActionWrapper
+  const Component = showFilter ? StyledWrapperWithFilter : StyledWrapper
   return (
     <Component {...rest} variant="grey" mx="auto">
       {children}
