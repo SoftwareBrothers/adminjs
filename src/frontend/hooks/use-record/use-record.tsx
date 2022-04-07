@@ -86,7 +86,7 @@ export const useRecord = (
       headers: { 'Content-Type': 'multipart/form-data' },
     }
 
-    const promise = record.id
+    const promise = initialRecord?.id
       ? api.recordAction({
         ...params,
         actionName: 'edit',
