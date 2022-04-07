@@ -49,7 +49,7 @@ const ResourceAction: React.FC<Props> = (props) => {
   }
 
   return (
-    <Wrapper width={action.containerWidth} actionType={action.actionType}>
+    <Wrapper width={action.containerWidth} showFilter={action.showFilter}>
       <ActionHeader
         resource={resource}
         action={action}
