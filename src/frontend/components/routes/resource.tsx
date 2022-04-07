@@ -6,7 +6,6 @@ import { Box } from '@adminjs/design-system'
 import { RouteComponentProps } from 'react-router'
 import BaseAction from '../app/base-action-component'
 import FilterDrawer from '../app/filter-drawer'
-import queryHasFilter from './utils/query-has-filter'
 import { ReduxState } from '../../store/store'
 import { NoResourceError, NoActionError } from '../app/error-message'
 import ViewHelpers, {
@@ -48,10 +47,10 @@ const getAction = (resource: ResourceJSON): ActionJSON | undefined => {
 }
 
 const ResourceAction: React.FC<Props> = (props) => {
-  const { resources, match, location } = props
+  const { resources, match } = props
   const { resourceId } = match.params
 
-  const [filterVisible, setFilerVisible] = useState(queryHasFilter(location.search))
+  const [filterVisible, setFilterVisible] = useState(false)
   const [tag, setTag] = useState('')
 
   const resource = resources.find(r => r.id === resourceId)
@@ -72,7 +71,7 @@ const ResourceAction: React.FC<Props> = (props) => {
   }
 
   const toggleFilter = listAction.showFilter
-    ? ((): void => setFilerVisible(!filterVisible))
+    ? ((): void => setFilterVisible(!filterVisible))
     : undefined
 
   return (
@@ -86,9 +85,10 @@ const ResourceAction: React.FC<Props> = (props) => {
       <BaseAction action={listAction} resource={resource} setTag={setTag} />
       {listAction.showFilter ? (
         <FilterDrawer
+          key={filterVisible.toString()}
           resource={resource}
           isVisible={filterVisible}
-          toggleFilter={(): void => { setFilerVisible(!filterVisible) }}
+          toggleFilter={(): void => { setFilterVisible(!filterVisible) }}
         />
       ) : ''}
     </Box>

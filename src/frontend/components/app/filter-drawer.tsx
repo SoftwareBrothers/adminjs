@@ -65,6 +65,7 @@ export const FilterDrawer: React.FC<FilterProps> = (props) => {
         search.delete(`filters.${key}`)
       }
     })
+    toggleFilter()
     search.set('page', '1')
     history.push(`${history.location.pathname}?${search.toString()}`)
     return false
@@ -80,6 +81,7 @@ export const FilterDrawer: React.FC<FilterProps> = (props) => {
       }
     }
     const query = filteredSearch.toString() === '' ? `?${filteredSearch.toString()}` : ''
+    toggleFilter()
     history.push(history.location.pathname + query)
     setFilter({})
   }
