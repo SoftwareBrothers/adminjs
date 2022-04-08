@@ -39,7 +39,7 @@ export const ActionHeader: React.FC<ActionHeaderProps> = (props) => {
   const resourceId = resource.id
   const params = { resourceId, recordId: record?.id }
 
-  const handleActionClick = (event, sourceAction: ActionJSON): void => (
+  const handleActionClick = (event, sourceAction: ActionJSON): any | Promise<any> => (
     buildActionClickHandler({
       action: sourceAction,
       params,
