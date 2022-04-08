@@ -14,14 +14,14 @@ export type BuildActionClickOptions = {
   push: (path: string, state?: any) => void;
 }
 
-export type BuildActionClickReturn = (event: any) => any
+export type BuildActionClickReturn = (event: any) => any | Promise<any>
 
 export const buildActionClickHandler = (
   options: BuildActionClickOptions,
 ): BuildActionClickReturn => {
   const { action, params, actionResponseHandler, push } = options
 
-  const handleActionClick = (event: React.MouseEvent<HTMLElement>): void => {
+  const handleActionClick = (event: React.MouseEvent<HTMLElement>): Promise<any> | any => {
     event.preventDefault()
     event.stopPropagation()
 
@@ -34,9 +34,13 @@ export const buildActionClickHandler = (
     if (action.guard && !confirm(action.guard)) {
       return
     }
+
     if (actionHasComponent(action)) {
-      callApi()
-    } else if (href) {
+      // eslint-disable-next-line consistent-return
+      return callApi()
+    }
+
+    if (href) {
       push(href)
     }
   }
