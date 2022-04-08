@@ -15,6 +15,7 @@
       "releaseRules": [
         {"type": "feat", "scope": "locale", "release": "patch"},
         {"type": "feat", "scope": "small", "release": "patch"},
+        {"type": "chore", "scope": "deps", "release": "patch"},
         {"scope": "no-release", "release": false}
       ]
     }],
