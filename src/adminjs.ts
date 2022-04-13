@@ -111,7 +111,7 @@ class AdminJS {
 
   initI18n(): void {
     const language = this.options.locale?.language || locales.en.language
-    const defaultTranslations = locales[language].translations || locales.en.translations
+    const defaultTranslations = locales[language]?.translations || locales.en.translations
     this.locale = {
       translations: combineTranslations(defaultTranslations, this.options.locale?.translations),
       language,
