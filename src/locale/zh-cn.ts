@@ -3,7 +3,7 @@
 
 const translations = {
   actions: {
-    new: '创建新...',
+    new: '创建新记录',
     edit: '编辑',
     show: '显示',
     delete: '删除',
