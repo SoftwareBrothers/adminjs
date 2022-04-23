@@ -3,7 +3,7 @@
 
 const translations = {
   actions: {
-    new: '创建新记录',
+    new: '创建',
     edit: '编辑',
     show: '显示',
     delete: '删除',
@@ -15,7 +15,7 @@ const translations = {
     addNewItem: '添加新的项目',
     filter: '筛选',
     applyChanges: '应用更改',
-    resetFilter: '重置选择器',
+    resetFilter: '重置筛选器',
     confirmRemovalMany: '确认删除 {{count}} 个记录',
     confirmRemovalMany_plural: '确认删除 {{count}} 个记录',
     logout: '登出',
