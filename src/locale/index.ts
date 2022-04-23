@@ -1,6 +1,6 @@
 import enLocale from './en'
 import uaLocale from './ua'
-import zhCNLocale from './zh-CN'
+import zhCNLocale from './zh-cn'
 
 export * from './config'
 
