@@ -7,7 +7,7 @@ export * from './config'
 export const locales = {
   en: enLocale,
   ua: uaLocale,
-  'zh-cn': zhCNLocale
+  'zh-CN': zhCNLocale
 }
 
 export { uaLocale, enLocale, zhCNLocale }
