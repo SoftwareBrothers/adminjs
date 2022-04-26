@@ -10,10 +10,11 @@ const PropertyDescription: React.FC<PropertyDescriptionProps> = (props) => {
   const { property } = props
 
   if (!property.description) { return null }
+  const direction = property.custom?.tooltipDirection || 'top'
 
   return (
     <Box mx="sm" display="inline-flex">
-      <Tooltip direction="top" title={property.description} size="lg">
+      <Tooltip direction={direction} title={property.description} size="lg">
         <Box>
           <Icon icon="Help" color="info" />
         </Box>
