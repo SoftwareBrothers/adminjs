@@ -29,7 +29,12 @@ const StyledWrapper = styled(Box)`
   }
 `
 
-const Wrapper: React.FC<BoxProps & { showFilter?: boolean }> = (props) => {
+type WrapperProps = BoxProps & {
+  showFilter?: boolean;
+  children?: React.ReactNode;
+}
+
+const Wrapper: React.FC<WrapperProps> = (props) => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { children, variant, color, showFilter = false, ...rest } = props
 
