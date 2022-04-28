@@ -24,6 +24,7 @@ export type ActionButtonProps = {
   recordIds?: Array<string>;
   /** optional callback function which will be triggered when action is performed */
   actionPerformed?: (action: ActionResponse) => any;
+  children?: React.ReactNode;
 }
 
 /**
