@@ -61,8 +61,9 @@ const html = async (
     <body>
       <div id="app" />
       <script>
-        var app = document.getElementById( 'app' );
-        ReactDOM.render( AdminJS.Application, app );
+        var app = document.getElementById('app');
+        var root = createRoot(app)
+        root.render(AdminJS.Application);
       </script>
       ${scripts.join('\n')}
     </body>
