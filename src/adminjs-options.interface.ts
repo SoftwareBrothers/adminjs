@@ -242,7 +242,16 @@ export interface AdminJSOptions {
    * rollup bundle options;
    */
   bundler?: BundlerOptions;
+
+  /**
+   * Additional settings.
+   */
+  settings?: Partial<AdminJSSettings>;
 }
+
+export type AdminJSSettings = {
+  defaultPerPage: number;
+};
 
 /* cspell: enable */
 
