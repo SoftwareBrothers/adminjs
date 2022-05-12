@@ -173,6 +173,7 @@ describe('ActionDecorator', function () {
           params: {},
           populated: {},
         },
+        records: [],
       })
       expect(handler).not.to.have.been.called
     })
