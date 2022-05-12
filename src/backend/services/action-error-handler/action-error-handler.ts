@@ -22,6 +22,7 @@ const actionErrorHandler = (error: any, context: ActionContext): ActionResponse 
         populated: {},
         errors: error.propertyErrors,
       },
+      records: [],
       notice: {
         message: baseMessage,
         type: 'error',

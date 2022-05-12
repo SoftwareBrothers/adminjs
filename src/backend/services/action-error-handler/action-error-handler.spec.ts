@@ -46,6 +46,7 @@ describe('ActionErrorHandler', function () {
         populated: {},
       },
       notice,
+      records: [],
     })
   })
 

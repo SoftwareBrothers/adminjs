@@ -29,8 +29,9 @@ export default class AppController {
     return layoutTemplate(this._admin, this.currentAdmin, href)
   }
 
-  async bulkAction({ params }: ActionRequest): Promise<string> {
-    const { resourceId, actionName, recordIds } = params
+  async bulkAction({ params, query }: ActionRequest): Promise<string> {
+    const { resourceId, actionName } = params
+    const recordIds = params.recordIds ?? query?.recordIds
     if (!recordIds) {
       throw new Error('you have to give "recordIds" in the request parameters')
     }
