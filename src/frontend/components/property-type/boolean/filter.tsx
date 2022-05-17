@@ -1,12 +1,10 @@
 import React, { ReactNode } from 'react'
-import Select from 'react-select'
-import { withTheme, DefaultTheme, ThemeProps } from 'styled-components'
-import { FormGroup, Label, filterStyles } from '@adminjs/design-system'
+import { FormGroup, Label, Select } from '@adminjs/design-system'
 
 import mapValue from './map-value'
 import { FilterPropertyProps } from '../base-property-props'
 
-class Filter extends React.PureComponent<FilterPropertyProps & ThemeProps<DefaultTheme>> {
+class Filter extends React.PureComponent<FilterPropertyProps> {
   constructor(props) {
     super(props)
     this.handleChange = this.handleChange.bind(this)
@@ -19,7 +17,7 @@ class Filter extends React.PureComponent<FilterPropertyProps & ThemeProps<Defaul
   }
 
   render(): ReactNode {
-    const { property, filter = {}, theme } = this.props
+    const { property, filter = {} } = this.props
     const value = typeof filter[property.path] === 'undefined' ? '' : filter[property.path]
     const options = [
       { value: true, label: mapValue(true) },
@@ -30,10 +28,10 @@ class Filter extends React.PureComponent<FilterPropertyProps & ThemeProps<Defaul
       <FormGroup>
         <Label>{property.label}</Label>
         <Select
+          variant="filter"
           value={typeof selected === 'undefined' ? '' : selected}
           isClearable
           options={options}
-          styles={filterStyles(theme)}
           onChange={this.handleChange}
         />
       </FormGroup>
@@ -41,4 +39,4 @@ class Filter extends React.PureComponent<FilterPropertyProps & ThemeProps<Defaul
   }
 }
 
-export default withTheme(Filter as never)
+export default Filter
