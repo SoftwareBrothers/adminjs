@@ -1,11 +1,9 @@
 import React, { ReactNode } from 'react'
-import Select from 'react-select'
-import { withTheme, ThemeProps, DefaultTheme } from 'styled-components'
-import { FormGroup, Label, Input, filterStyles } from '@adminjs/design-system'
+import { FormGroup, Label, Input, filterStyles, Select } from '@adminjs/design-system'
 
 import { FilterPropertyProps } from '../base-property-props'
 
-class Filter extends React.PureComponent<FilterPropertyProps & ThemeProps<DefaultTheme>> {
+class Filter extends React.PureComponent<FilterPropertyProps> {
   constructor(props) {
     super(props)
     this.handleInputChange = this.handleInputChange.bind(this)
@@ -24,17 +22,17 @@ class Filter extends React.PureComponent<FilterPropertyProps & ThemeProps<Defaul
   }
 
   renderInput(): ReactNode {
-    const { property, filter, theme } = this.props
+    const { property, filter } = this.props
     const filterKey = `filter-${property.path}`
     const value = filter[property.path] || ''
     if (property.availableValues) {
       const selected = property.availableValues.find(av => av.value === value)
       return (
         <Select
+          variant="filter"
           value={typeof selected === 'undefined' ? '' : selected}
           isClearable
           options={property.availableValues}
-          styles={filterStyles(theme)}
           onChange={this.handleSelectChange}
         />
       )
@@ -58,4 +56,4 @@ class Filter extends React.PureComponent<FilterPropertyProps & ThemeProps<Defaul
     )
   }
 }
-export default withTheme(Filter)
+export default Filter
