@@ -7,6 +7,7 @@ import * as reference from './reference'
 import * as textarea from './textarea'
 import * as password from './password'
 import * as currency from './currency'
+import * as phone from './phone'
 import { BasePropertyComponentProps } from './base-property-props'
 
 type BasePropertyComponentType = React.FC<BasePropertyComponentProps> & {
@@ -38,6 +39,7 @@ const BasePropertyComponentExtended: BasePropertyComponentType = Object.assign(
     TextArea: camelizePropertyType(textarea),
     Password: camelizePropertyType(password),
     Currency: camelizePropertyType(currency),
+    Phone: camelizePropertyType(phone),
   },
 )
 

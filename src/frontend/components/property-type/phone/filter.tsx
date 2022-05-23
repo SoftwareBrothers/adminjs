@@ -1,11 +1,11 @@
-import { CurrencyInput, CurrencyInputProps, FormGroup } from '@adminjs/design-system'
+import { PhoneInput, PhoneInputProps, FormGroup } from '@adminjs/design-system'
 import React, { FC, useCallback } from 'react'
 import { EditPropertyProps } from '../base-property-props'
 import { PropertyLabel } from '../utils/property-label'
 
-type CurrencyEditPropertyProps = EditPropertyProps & CurrencyInputProps
+type PhoneEditPropertyProps = EditPropertyProps & PhoneInputProps
 
-const Filter: FC<CurrencyEditPropertyProps> = (props) => {
+const Filter: FC<PhoneEditPropertyProps> = (props) => {
   const { onChange, property, filter } = props
 
   const handleChange = useCallback((value) => {
@@ -15,10 +15,12 @@ const Filter: FC<CurrencyEditPropertyProps> = (props) => {
   return (
     <FormGroup variant="filter">
       <PropertyLabel property={property} />
-      <CurrencyInput
+      <PhoneInput
         id={property.path}
-        name={`filter-${property.path}`}
-        onValueChange={handleChange}
+        inputProps={{
+          name: `filter-${property.path}`,
+        }}
+        onChange={handleChange}
         value={filter[property.path]}
         {...property.props}
       />
