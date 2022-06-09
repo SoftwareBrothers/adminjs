@@ -36,7 +36,7 @@ const translations = {
   properties: {
     length: 'Tamanho',
     from: 'De',
-    to: 'Até'
+    to: 'Até',
   },
   resources: {},
   messages: {

@@ -9,7 +9,7 @@ export const locales = {
   en: enLocale,
   ua: uaLocale,
   'zh-CN': zhCNLocale,
-  'pt-BR': ptBrLocale
+  'pt-BR': ptBrLocale,
 }
 
 export { uaLocale, enLocale, zhCNLocale, ptBrLocale }
