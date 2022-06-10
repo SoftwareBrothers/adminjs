@@ -9,36 +9,36 @@ import { formatName } from '../utils/translate-functions.factory'
  */
 export type Locale = {
   /** Language ISO string like: 'en' 'pl' or 'de' */
-  language: string;
+  language: string
   /**
    * All the translations.
    */
-  translations: Partial<LocaleTranslations>;
+  translations: Partial<LocaleTranslations>
 }
 
 export type LocaleTranslationsBlock = {
   actions: {
-    [key: string]: string;
-  };
+    [key: string]: string
+  }
   buttons: {
-    [key: string]: string;
-  };
+    [key: string]: string
+  }
   labels: {
-    [key: string]: string;
-  };
+    [key: string]: string
+  }
   messages: {
-    [key: string]: string;
-  };
+    [key: string]: string
+  }
   properties: {
-    [key: string]: string;
-  };
+    [key: string]: string
+  }
 }
 
 // Locale translations is not well parsed by JSDoc so the typedef is placed below
 export type LocaleTranslations = Partial<LocaleTranslationsBlock> & {
   resources?: {
-    [key: string]: Partial<LocaleTranslationsBlock>;
-  };
+    [key: string]: Partial<LocaleTranslationsBlock>
+  }
 }
 
 /**
@@ -89,7 +89,9 @@ export type LocaleTranslations = Partial<LocaleTranslationsBlock> & {
  */
 
 // Escaping all keys with . (changing to '&#46;')
-const renameKeys = (object: Partial<LocaleTranslations>): Partial<LocaleTranslations> => (
+const renameKeys = (
+  object: Partial<LocaleTranslations>
+): Partial<LocaleTranslations> =>
   Object.entries(object).reduce((memo, [k, v]) => {
     if (typeof v === 'object') {
       return {
@@ -102,11 +104,10 @@ const renameKeys = (object: Partial<LocaleTranslations>): Partial<LocaleTranslat
       [formatName(k)]: v,
     }
   }, {})
-)
 
 export const combineTranslations = (
   originalTranslations: LocaleTranslations,
-  adminTranslations: Partial<LocaleTranslations> = {},
+  adminTranslations: Partial<LocaleTranslations> = {}
 ): LocaleTranslations => {
   const formattedTranslations = renameKeys(adminTranslations)
   return merge(originalTranslations, formattedTranslations)

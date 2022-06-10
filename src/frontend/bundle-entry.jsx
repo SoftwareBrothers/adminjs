@@ -21,19 +21,19 @@ const env = {
 
 const store = createStore(window.REDUX_STATE)
 const theme = window.THEME
-const { locale } = window.REDUX_STATE
+//const { locale } = window.REDUX_STATE
+const currentLocale = JSON.parse(window.localStorage.getItem('locale'))
+const locale = currentLocale || window.REDUX_STATE.locale
 
-i18n
-  .use(initReactI18next)
-  .init({
-    resources: {
-      [locale.language]: {
-        translation: locale.translations,
-      },
+i18n.use(initReactI18next).init({
+  resources: {
+    [locale.language]: {
+      translation: locale.translations,
     },
-    lng: locale.language,
-    interpolation: { escapeValue: false },
-  })
+  },
+  lng: locale.language,
+  interpolation: { escapeValue: false },
+})
 
 const Application = (
   <Provider store={store}>
