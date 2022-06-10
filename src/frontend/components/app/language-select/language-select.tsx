@@ -2,9 +2,7 @@ import { Box, Button } from '@adminjs/design-system'
 import React, { FC, useCallback } from 'react'
 import { locales } from '../../../../locale'
 
-interface LanguageSelectProps {}
-
-const LanguageSelect: FC<LanguageSelectProps> = () => {
+const LanguageSelect: FC = () => {
   const handleButton = useCallback((lang) => {
     window.localStorage.setItem('locale', JSON.stringify(locales[lang]))
     window.location.reload(true)

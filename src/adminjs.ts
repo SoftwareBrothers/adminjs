@@ -1,7 +1,7 @@
 import * as path from 'path'
 import * as fs from 'fs'
 import i18n, { i18n as I18n } from 'i18next'
-import isArray from 'lodash/isArray'
+/* import isArray from 'lodash/isArray' */
 import merge from 'lodash/merge'
 
 import {
