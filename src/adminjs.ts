@@ -33,7 +33,7 @@ import { OverridableComponent } from './frontend/utils/overridable-component'
 import { relativeFilePathResolver } from './utils/file-resolver'
 
 const pkg = JSON.parse(
-  fs.readFileSync(path.join(__dirname, '../package.json'), 'utf-8')
+  fs.readFileSync(path.join(__dirname, '../package.json'), 'utf-8'),
 )
 export const VERSION = pkg.version
 
@@ -49,17 +49,17 @@ export const defaultOptions: AdminJSOptionsWithDefault = {
 }
 
 type ActionsMap = {
-  show: Action<RecordActionResponse>
-  edit: Action<RecordActionResponse>
-  delete: Action<RecordActionResponse>
-  bulkDelete: Action<BulkActionResponse>
-  new: Action<RecordActionResponse>
-  list: Action<ListActionResponse>
+  show: Action<RecordActionResponse>;
+  edit: Action<RecordActionResponse>;
+  delete: Action<RecordActionResponse>;
+  bulkDelete: Action<BulkActionResponse>;
+  new: Action<RecordActionResponse>;
+  list: Action<ListActionResponse>;
 }
 
 export type Adapter = {
-  Database: typeof BaseDatabase
-  Resource: typeof BaseResource
+  Database: typeof BaseDatabase;
+  Resource: typeof BaseResource;
 }
 
 /**
@@ -123,19 +123,18 @@ class AdminJS {
     const { databases, resources } = this.options
     const resourcesFactory = new ResourcesFactory(
       this,
-      global.RegisteredAdapters || []
+      global.RegisteredAdapters || [],
     )
     this.resources = resourcesFactory.buildResources({ databases, resources })
   }
 
   initI18n(): void {
     const language = this.options.locale?.language || locales.en.language
-    const defaultTranslations =
-      locales[language]?.translations || locales.en.translations
+    const defaultTranslations = locales[language]?.translations || locales.en.translations
     this.locale = {
       translations: combineTranslations(
         defaultTranslations,
-        this.options.locale?.translations
+        this.options.locale?.translations,
       ),
       language,
     }
@@ -143,7 +142,7 @@ class AdminJS {
       i18n.addResourceBundle(
         this.locale.language,
         'translation',
-        this.locale.translations
+        this.locale.translations,
       )
     } else {
       i18n.init({
@@ -162,9 +161,8 @@ class AdminJS {
     this.translateFunctions = createFunctions(i18n)
     Object.getOwnPropertyNames(this.translateFunctions).forEach(
       (translateFunctionName) => {
-        this[translateFunctionName] =
-          this.translateFunctions[translateFunctionName]
-      }
+        this[translateFunctionName] = this.translateFunctions[translateFunctionName]
+      },
     )
   }
 
@@ -184,8 +182,8 @@ class AdminJS {
     Database,
     Resource,
   }: {
-    Database: typeof BaseDatabase
-    Resource: typeof BaseResource
+    Database: typeof BaseDatabase;
+    Resource: typeof BaseResource;
   }): void {
     if (!Database || !Resource) {
       throw new Error('Adapter has to have both Database and Resource')
@@ -196,7 +194,7 @@ class AdminJS {
       global.RegisteredAdapters.push({ Database, Resource })
     } else {
       throw new Error(
-        'Adapter elements has to be a subclass of AdminJS.BaseResource and AdminJS.BaseDatabase'
+        'Adapter elements has to be a subclass of AdminJS.BaseResource and AdminJS.BaseDatabase',
       )
     }
   }
@@ -207,8 +205,8 @@ class AdminJS {
    */
   async initialize(): Promise<void> {
     if (
-      process.env.NODE_ENV === 'production' &&
-      !(process.env.ADMIN_JS_SKIP_BUNDLE === 'true')
+      process.env.NODE_ENV === 'production'
+      && !(process.env.ADMIN_JS_SKIP_BUNDLE === 'true')
     ) {
       // eslint-disable-next-line no-console
       console.log('AdminJS: bundling user components...')
@@ -260,15 +258,15 @@ class AdminJS {
    */
   findResource(resourceId): BaseResource {
     const resource = this.resources.find(
-      (m) => m._decorated?.id() === resourceId
+      m => m._decorated?.id() === resourceId,
     )
     if (!resource) {
       throw new Error(
         [
           `There are no resources with given id: "${resourceId}"`,
           'This is the list of all registered resources you can use:',
-          this.resources.map((r) => r._decorated?.id() || r.id()).join(', '),
-        ].join('\n')
+          this.resources.map(r => r._decorated?.id() || r.id()).join(', '),
+        ].join('\n'),
       )
     }
     return resource
@@ -293,19 +291,18 @@ class AdminJS {
     if (!fs.existsSync(filePath)) {
       throw new ConfigurationError(
         `Given babel config "${filePath}", doesn't exist.`,
-        'AdminJS.html'
+        'AdminJS.html',
       )
     }
     if (path.extname(filePath) === '.js') {
       // eslint-disable-next-line
       const configModule = require(filePath)
-      config =
-        configModule && configModule.__esModule
-          ? configModule.default || undefined
-          : configModule
+      config = configModule && configModule.__esModule
+        ? configModule.default || undefined
+        : configModule
       if (!config || typeof config !== 'object' || Array.isArray(config)) {
         throw new Error(
-          `${filePath}: Configuration should be an exported JavaScript object.`
+          `${filePath}: Configuration should be an exported JavaScript object.`,
         )
       }
     } else {
@@ -313,7 +310,7 @@ class AdminJS {
         config = JSON.parse(fs.readFileSync(filePath, 'utf8'))
       } catch (err) {
         throw new Error(
-          `${filePath}: Error while parsing config - ${err.message}`
+          `${filePath}: Error while parsing config - ${err.message}`,
         )
       }
       if (!config) throw new Error(`${filePath}: No config detected`)
@@ -349,7 +346,7 @@ class AdminJS {
    */
   public static bundle(
     src: string,
-    componentName?: OverridableComponent
+    componentName?: OverridableComponent,
   ): string {
     const nextId = Object.keys(global.UserComponents || {}).length + 1
     const extensions = ['.jsx', '.js', '.ts', '.tsx']
@@ -385,7 +382,7 @@ class AdminJS {
 
     throw new ConfigurationError(
       `Given file "${src}", doesn't exist.`,
-      'AdminJS.html'
+      'AdminJS.html',
     )
   }
 }

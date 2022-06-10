@@ -54,19 +54,19 @@ export interface AdminJSOptions {
    * path, under which, AdminJS will be available. Default to `/admin`
    *
    */
-  rootPath?: string
+  rootPath?: string;
   /**
    * url to a logout action, default to `/admin/logout`
    */
-  logoutPath?: string
+  logoutPath?: string;
   /**
    * url to a login page, default to `/admin/login`
    */
-  loginPath?: string
+  loginPath?: string;
   /**
    * Array of all Databases which are supported by AdminJS via adapters
    */
-  databases?: Array<any>
+  databases?: Array<any>;
 
   /**
    * List of custom pages which will be visible below all resources
@@ -87,7 +87,7 @@ export interface AdminJSOptions {
    *   },
    * },
    */
-  pages?: AdminPages
+  pages?: AdminPages;
   /**
    * Array of all Resources which are supported by AdminJS via adapters.
    * You can pass either resource or resource with an options and thus modify it.
@@ -97,7 +97,7 @@ export interface AdminJSOptions {
    *
    * @see ResourceOptions
    */
-  resources?: Array<ResourceWithOptions | any>
+  resources?: Array<ResourceWithOptions | any>;
   /**
    * Option to modify the dashboard
    */
@@ -105,24 +105,24 @@ export interface AdminJSOptions {
     /**
      * Handler function which can be triggered using {@link ApiClient#getDashboard}.
      */
-    handler?: PageHandler
+    handler?: PageHandler;
     /**
      * Bundled component name which should be rendered when user opens the dashboard
      */
-    component?: string
-  }
+    component?: string;
+  };
   /**
    * Flag which indicates if version number should be visible on the UI
    */
-  version?: VersionSettings
+  version?: VersionSettings;
   /**
    * Options which are related to the branding.
    */
-  branding?: BrandingOptions | BrandingOptionsFunction
+  branding?: BrandingOptions | BrandingOptionsFunction;
   /**
    * Custom assets you want to pass to AdminJS
    */
-  assets?: Assets | AssetsFunction
+  assets?: Assets | AssetsFunction;
   /**
    * Indicates is bundled by AdminJS files like:
    * - components.bundle.js
@@ -158,7 +158,7 @@ export interface AdminJSOptions {
    * with firebase hosting)
    * - point {@link AdminJS.assetsCDN} to this domain
    */
-  assetsCDN?: string
+  assetsCDN?: string;
   /**
    * Environmental variables passed to the frontend.
    *
@@ -177,7 +177,7 @@ export interface AdminJSOptions {
    * AdminJS.env.GOOGLE_MAP_API_TOKEN
    * ```
    */
-  env?: Record<string, string>
+  env?: Record<string, string>;
 
   /* cspell: disable */
 
@@ -235,12 +235,12 @@ export interface AdminJSOptions {
    * Check out the [i18n tutorial]{@tutorial i18n} to see how
    * internationalization in AdminJS works.
    */
-  locale?: Locale
+  locale?: Locale;
 
   /**
    * rollup bundle options;
    */
-  bundler?: BundlerOptions
+  bundler?: BundlerOptions;
 }
 
 /* cspell: enable */
@@ -258,12 +258,12 @@ export type Assets = {
   /**
    * List to urls of custom stylesheets. You can pass your font - icons here (as an example)
    */
-  styles?: Array<string>
+  styles?: Array<string>;
   /**
    * List of urls to custom scripts. If you use some particular js
    * library - you can pass its url here.
    */
-  scripts?: Array<string>
+  scripts?: Array<string>;
 }
 
 /**
@@ -285,17 +285,17 @@ export type VersionSettings = {
   /**
    * if set to true - current admin version will be visible
    */
-  admin?: boolean
+  admin?: boolean;
   /**
    * Here you can pass any arbitrary version text which will be seen in the US.
    * You can pass here your current API version.
    */
-  app?: string
+  app?: string;
 }
 
 export type VersionProps = {
-  admin?: string
-  app?: string
+  admin?: string;
+  app?: string;
 }
 
 /**
@@ -320,24 +320,24 @@ export type BrandingOptions = {
   /**
    * URL to a logo, or `false` if you want to hide the default one.
    */
-  logo?: string | false
+  logo?: string | false;
   /**
    * Name of your company, which will replace "AdminJS".
    */
-  companyName?: string
+  companyName?: string;
   /**
    * CSS theme.
    */
-  theme?: Partial<ThemeOverride>
+  theme?: Partial<ThemeOverride>;
   /**
    * Flag indicates if `SoftwareBrothers` tiny hart icon should be visible on the bottom sidebar.
    */
-  softwareBrothers?: boolean
+  softwareBrothers?: boolean;
 
   /**
    * URL to a favicon
    */
-  favicon?: string
+  favicon?: string;
 }
 
 /**
@@ -363,16 +363,16 @@ export type AdminPage = {
   /**
    * Handler function
    */
-  handler?: PageHandler
+  handler?: PageHandler;
   /**
    * Component defined by using {@link AdminJS.bundle}
    */
-  component: string
+  component: string;
 
   /**
    * Page icon
    */
-  icon?: string
+  icon?: string;
 }
 
 /**
@@ -389,9 +389,9 @@ export type AdminPages = Record<string, AdminPage>
  * @memberof AdminJSOptions
  */
 export type ResourceWithOptions = {
-  resource: any
-  options: ResourceOptions
-  features?: Array<FeatureType>
+  resource: any;
+  options: ResourceOptions;
+  features?: Array<FeatureType>;
 }
 
 /**
@@ -437,25 +437,25 @@ export type BundlerOptions = {
   /**
    * The file path to babel config file or json object of babel config.
    */
-  babelConfig?: BabelConfig | string
+  babelConfig?: BabelConfig | string;
 }
 
 export interface AdminJSOptionsWithDefault extends AdminJSOptions {
-  rootPath: string
-  logoutPath: string
-  loginPath: string
-  databases?: Array<BaseDatabase>
+  rootPath: string;
+  logoutPath: string;
+  loginPath: string;
+  databases?: Array<BaseDatabase>;
   resources?: Array<
     | BaseResource
     | {
-        resource: BaseResource
-        options: ResourceOptions
+        resource: BaseResource;
+        options: ResourceOptions;
       }
-  >
+  >;
   dashboard: {
-    handler?: PageHandler
-    component?: string
-  }
-  bundler: BundlerOptions
-  pages: AdminJSOptions['pages']
+    handler?: PageHandler;
+    component?: string;
+  };
+  bundler: BundlerOptions;
+  pages: AdminJSOptions['pages'];
 }

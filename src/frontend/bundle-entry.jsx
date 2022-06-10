@@ -21,7 +21,6 @@ const env = {
 
 const store = createStore(window.REDUX_STATE)
 const theme = window.THEME
-//const { locale } = window.REDUX_STATE
 const currentLocale = JSON.parse(window.localStorage.getItem('locale'))
 const locale = currentLocale || window.REDUX_STATE.locale
 

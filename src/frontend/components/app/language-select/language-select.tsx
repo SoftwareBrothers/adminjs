@@ -12,10 +12,10 @@ const LanguageSelect: FC<LanguageSelectProps> = () => {
 
   return (
     <Box flex>
-      <Button onClick={() => handleButton('pl')}>PL</Button>
-      <Button onClick={() => handleButton('en')}>EN</Button>
-      <Button onClick={() => handleButton('ua')}>UA</Button>
-      <Button onClick={() => handleButton('pt-BR')}>BR</Button>
+      <Button onClick={(): void => handleButton('pl')}>PL</Button>
+      <Button onClick={(): void => handleButton('en')}>EN</Button>
+      <Button onClick={(): void => handleButton('ua')}>UA</Button>
+      <Button onClick={(): void => handleButton('pt-BR')}>BR</Button>
     </Box>
   )
 }
