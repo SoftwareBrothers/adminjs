@@ -1,21 +1,38 @@
 import { Box, Button } from '@adminjs/design-system'
-import React, { FC, useCallback } from 'react'
+import React, { FC } from 'react'
+import { useSelector } from 'react-redux'
 import { locales } from '../../../../locale'
+import { ReduxState } from '../../../store/store'
 
-const LanguageSelect: FC = () => {
-  const handleButton = useCallback((lang) => {
-    window.localStorage.setItem('locale', JSON.stringify(locales[lang]))
+
+const LanguageButtons: FC = () => {
+  const { locale } = useSelector((state: ReduxState) => state)
+  const { availableLanguages } = locale
+  const handleButton = (lng: string): void => {
+    const _locale = { ...locales[lng] }
+    _locale.availableLanguages = availableLanguages
+    window.localStorage.setItem('locale', JSON.stringify(_locale))
     window.location.reload(true)
-  }, [])
-
+  }
+  if (availableLanguages.length <= 1) {
+    return null
+  }
   return (
-    <Box flex>
-      <Button onClick={(): void => handleButton('pl')}>PL</Button>
-      <Button onClick={(): void => handleButton('en')}>EN</Button>
-      <Button onClick={(): void => handleButton('ua')}>UA</Button>
-      <Button onClick={(): void => handleButton('pt-BR')}>BR</Button>
-    </Box>
+    <>
+      { availableLanguages.map(
+        lang => (
+          <Button key={lang} onClick={(): void => handleButton(lang)}>
+            {lang.substring(0, 2).toUpperCase()}
+          </Button>
+        ),
+      )}
+    </>
   )
 }
 
+const LanguageSelect: FC = () => (
+  <Box flex>
+    <LanguageButtons />
+  </Box>
+)
 export default LanguageSelect

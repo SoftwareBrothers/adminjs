@@ -8,8 +8,8 @@ export type InitializeLocaleResponse = {
 };
 
 export const initializeLocale = (
-  data: any,
+  data: Locale,
 ): InitializeLocaleResponse => ({
   type: LOCALE_INITIALIZE,
-  data: data.locale,
+  data,
 })

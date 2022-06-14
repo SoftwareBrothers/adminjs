@@ -25,8 +25,6 @@ export const initializeStore = async (
   const AdminClass: typeof AdminJS = admin.constructor as typeof AdminJS
   const adminVersion = AdminClass.VERSION
 
-  store.dispatch(initializeLocale(admin))
-
   store.dispatch(initializeResources(
     admin.resources.map((resource) => {
       try {
@@ -46,7 +44,7 @@ export const initializeStore = async (
   store.dispatch(initializeAssets(assets || {}))
 
   const {
-    loginPath, logoutPath, rootPath, dashboard, pages, assetsCDN,
+    loginPath, logoutPath, rootPath, dashboard, pages, assetsCDN, locale,
   } = admin.options
 
   const pagesArray = pagesToStore(pages)
@@ -55,6 +53,9 @@ export const initializeStore = async (
   store.dispatch(initializePaths({ loginPath, logoutPath, rootPath, assetsCDN }))
   store.dispatch(setCurrentAdmin(currentAdmin))
   store.dispatch(initializeDashboard(dashboard))
+  if (locale) {
+    store.dispatch(initializeLocale(locale))
+  }
   store.dispatch(initializeVersions({
     app: admin.options.version && admin.options.version.app,
     admin: admin.options.version && admin.options.version.admin ? adminVersion : undefined,
