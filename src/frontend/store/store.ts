@@ -68,7 +68,7 @@ const pagesReducer = (
 }
 
 const localesReducer = (
-  state: Locale = { language: 'en', translations: {} } as Locale,
+  state: Locale = { language: 'en', translations: {}, availableLanguages: ['en'] },
   action: {
     type: string;
     data: Locale;
@@ -76,7 +76,7 @@ const localesReducer = (
 ) => {
   switch (action.type) {
   case LOCALE_INITIALIZE:
-    return action.data
+    return action.data || state
   default: return state
   }
 }

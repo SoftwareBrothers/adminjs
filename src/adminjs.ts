@@ -1,7 +1,6 @@
 import * as path from 'path'
 import * as fs from 'fs'
 import i18n, { i18n as I18n } from 'i18next'
-/* import isArray from 'lodash/isArray' */
 import merge from 'lodash/merge'
 
 import {
@@ -131,12 +130,14 @@ class AdminJS {
   initI18n(): void {
     const language = this.options.locale?.language || locales.en.language
     const defaultTranslations = locales[language]?.translations || locales.en.translations
+    const availableLanguages = locales[language]?.availableLanguages || ['en']
     this.locale = {
       translations: combineTranslations(
         defaultTranslations,
         this.options.locale?.translations,
       ),
       language,
+      availableLanguages,
     }
     if (i18n.isInitialized) {
       i18n.addResourceBundle(
