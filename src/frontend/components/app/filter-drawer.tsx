@@ -65,8 +65,9 @@ export const FilterDrawer: React.FC<FilterProps> = (props) => {
         search.delete(`filters.${key}`)
       }
     })
+    toggleFilter()
     search.set('page', '1')
-    history.push(`${history.location.pathname}?${search.toString()}`, { previousPage: window.location.href })
+    history.push(`${history.location.pathname}?${search.toString()}`)
     return false
   }
 
@@ -80,7 +81,8 @@ export const FilterDrawer: React.FC<FilterProps> = (props) => {
       }
     }
     const query = filteredSearch.toString() === '' ? `?${filteredSearch.toString()}` : ''
-    history.push(history.location.pathname + query, { previousPage: window.location.href })
+    toggleFilter()
+    history.push(history.location.pathname + query)
     setFilter({})
   }
 

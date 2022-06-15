@@ -28,9 +28,6 @@ const external = [
   'axios',
   'recharts',
   '@carbon/icons-react',
-  'react-select',
-  'react-select/async',
-  'react-select/creatable',
   'i18next',
   'react-i18next',
   'punycode',
@@ -44,9 +41,6 @@ const globals = {
   axios: 'axios',
   flat: 'flat',
   recharts: 'Recharts',
-  'react-select': 'ReactSelect',
-  'react-select/async': 'ReactSelectAsync',
-  'react-select/creatable': 'ReactSelectCreatable',
   '@carbon/icons-react': 'CarbonIcons',
   'react-datepicker': 'ReactDatepicker',
   'styled-components': 'styled',
@@ -62,7 +56,6 @@ const globals = {
   'adminjs/style': 'AdminJS.style',
   i18next: 'i18n',
   'react-i18next': 'ReactI18Next',
-  Quill: 'Quill',
   punycode: 'punycode',
 }
 

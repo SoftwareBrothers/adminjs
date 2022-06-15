@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { connect } from 'react-redux'
 
 import { RouteComponentProps } from 'react-router'
@@ -10,6 +10,7 @@ import { ResourceActionParams } from '../../../backend/utils/view-helpers/view-h
 import { ActionHeader } from '../app'
 import Wrapper from './utils/wrapper'
 import DrawerPortal from '../app/drawer-portal'
+import FilterDrawer from '../app/filter-drawer'
 
 type PropsFromState = {
   resources: Array<ResourceJSON>;
@@ -20,6 +21,8 @@ type Props = PropsFromState & RouteComponentProps<ResourceActionParams>
 const ResourceAction: React.FC<Props> = (props) => {
   const { resources, match } = props
   const { resourceId, actionName } = match.params
+  const [filterVisible, setFilterVisible] = useState(false)
+  const [tag, setTag] = useState('')
 
   const resource = resources.find(r => r.id === resourceId)
   if (!resource) {
@@ -29,6 +32,10 @@ const ResourceAction: React.FC<Props> = (props) => {
   if (!action) {
     return (<NoActionError resourceId={resourceId} actionName={actionName} />)
   }
+
+  const toggleFilter = action.showFilter
+    ? ((): void => setFilterVisible(!filterVisible))
+    : undefined
 
   if (action.showInDrawer) {
     return (
@@ -42,15 +49,26 @@ const ResourceAction: React.FC<Props> = (props) => {
   }
 
   return (
-    <Wrapper width={action.containerWidth}>
+    <Wrapper width={action.containerWidth} showFilter={action.showFilter}>
       <ActionHeader
         resource={resource}
         action={action}
+        toggleFilter={toggleFilter}
+        tag={tag}
       />
       <BaseActionComponent
         action={action}
         resource={resource}
+        setTag={setTag}
       />
+      {action.showFilter ? (
+        <FilterDrawer
+          key={filterVisible.toString()}
+          resource={resource}
+          isVisible={filterVisible}
+          toggleFilter={toggleFilter!}
+        />
+      ) : ''}
     </Wrapper>
   )
 }

@@ -7,6 +7,7 @@ import { PageContext } from './backend/actions/action.interface'
 import { ResourceOptions } from './backend/decorators/resource/resource-options.interface'
 import { Locale } from './locale/config'
 import { CurrentAdmin } from './current-admin.interface'
+import { CoreScripts } from './core-scripts.interface'
 
 /**
  * AdminJSOptions
@@ -241,7 +242,16 @@ export interface AdminJSOptions {
    * rollup bundle options;
    */
   bundler?: BundlerOptions;
+
+  /**
+   * Additional settings.
+   */
+  settings?: Partial<AdminJSSettings>;
 }
+
+export type AdminJSSettings = {
+  defaultPerPage: number;
+};
 
 /* cspell: enable */
 
@@ -264,6 +274,10 @@ export type Assets = {
    * library - you can pass its url here.
    */
   scripts?: Array<string>;
+  /**
+   *  Mapping of core scripts in case you want to version your assets
+   */
+  coreScripts?: CoreScripts;
 }
 
 /**
@@ -330,9 +344,11 @@ export type BrandingOptions = {
    */
   theme?: Partial<ThemeOverride>;
   /**
-   * Flag indicates if `SoftwareBrothers` tiny hart icon should be visible on the bottom sidebar.
+   * Flag indicates if "made with love" tiny heart icon
+   * should be visible on the bottom sidebar and login page.
+   * @new since 6.0.0
    */
-  softwareBrothers?: boolean;
+  withMadeWithLove?: boolean;
 
   /**
    * URL to a favicon

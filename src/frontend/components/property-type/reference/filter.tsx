@@ -1,12 +1,10 @@
 import React, { ReactNode } from 'react'
-import Select from 'react-select/async'
-import { ThemeProps, DefaultTheme, withTheme } from 'styled-components'
-import { FormGroup, Label, filterStyles } from '@adminjs/design-system'
+import { FormGroup, Label, SelectAsync } from '@adminjs/design-system'
 
 import ApiClient from '../../../utils/api-client'
 import { FilterPropertyProps, SelectRecord } from '../base-property-props'
 
-type CombinedProps = FilterPropertyProps & ThemeProps<DefaultTheme>
+type CombinedProps = FilterPropertyProps
 
 class Filter extends React.PureComponent<CombinedProps> {
   private api: ApiClient
@@ -37,17 +35,17 @@ class Filter extends React.PureComponent<CombinedProps> {
   }
 
   render(): ReactNode {
-    const { property, filter, theme } = this.props
+    const { property, filter } = this.props
     const value = typeof filter[property.path] === 'undefined' ? '' : filter[property.path]
     const selected = (this.options || []).find(o => o.value === value)
     return (
       <FormGroup>
         <Label>{property.label}</Label>
-        <Select
+        <SelectAsync
+          variant="filter"
           value={typeof selected === 'undefined' ? '' : selected}
           isClearable
           cacheOptions
-          styles={filterStyles(theme)}
           loadOptions={this.loadOptions}
           onChange={this.handleChange}
           defaultOptions
@@ -57,4 +55,4 @@ class Filter extends React.PureComponent<CombinedProps> {
   }
 }
 
-export default withTheme(Filter)
+export default Filter

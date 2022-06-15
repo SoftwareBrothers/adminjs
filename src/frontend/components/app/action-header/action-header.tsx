@@ -39,7 +39,7 @@ export const ActionHeader: React.FC<ActionHeaderProps> = (props) => {
   const resourceId = resource.id
   const params = { resourceId, recordId: record?.id }
 
-  const handleActionClick = (event, sourceAction: ActionJSON): void => (
+  const handleActionClick = (event, sourceAction: ActionJSON): any | Promise<any> => (
     buildActionClickHandler({
       action: sourceAction,
       params,
@@ -67,7 +67,9 @@ export const ActionHeader: React.FC<ActionHeaderProps> = (props) => {
 
   // list and new actions are special and are are always
   const customResourceButtons = actionsToButtonGroup({
-    actions: resource.resourceActions.filter(ra => !['list', 'new'].includes(ra.name)),
+    actions: action.showResourceActions
+      ? resource.resourceActions.filter(ra => !['list', 'new'].includes(ra.name))
+      : [],
     params: { resourceId },
     handleClick: handleActionClick,
   })

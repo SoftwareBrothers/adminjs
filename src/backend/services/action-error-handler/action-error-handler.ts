@@ -15,13 +15,16 @@ const actionErrorHandler = (error: any, context: ActionContext): ActionResponse 
     const baseMessage = error.baseError?.message
       || context.translateMessage('thereWereValidationErrors', resource.id())
 
+    const recordJson = record?.toJSON?.(currentAdmin)
+
     return {
       record: {
-        ...record?.toJSON(currentAdmin),
-        params: {},
-        populated: {},
+        ...recordJson,
+        params: recordJson?.params ?? {},
+        populated: recordJson?.populated ?? {},
         errors: error.propertyErrors,
       },
+      records: [],
       notice: {
         message: baseMessage,
         type: 'error',

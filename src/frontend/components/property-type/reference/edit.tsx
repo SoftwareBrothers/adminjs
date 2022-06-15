@@ -1,20 +1,18 @@
 import React, { FC, useState, useEffect } from 'react'
-import Select from 'react-select/async'
-import { withTheme, DefaultTheme } from 'styled-components'
-import { FormGroup, FormMessage, selectStyles } from '@adminjs/design-system'
+import { FormGroup, FormMessage, selectStyles, SelectAsync } from '@adminjs/design-system'
 
 import ApiClient from '../../../utils/api-client'
 import { EditPropertyProps, SelectRecord } from '../base-property-props'
 import { RecordJSON } from '../../../interfaces'
 import { PropertyLabel } from '../utils/property-label'
 
-type CombinedProps = EditPropertyProps & {theme: DefaultTheme}
+type CombinedProps = EditPropertyProps
 type SelectRecordEnhanced = SelectRecord & {
   record: RecordJSON;
 }
 
 const Edit: FC<CombinedProps> = (props) => {
-  const { onChange, property, record, theme } = props
+  const { onChange, property, record } = props
   const { reference: resourceId } = property
 
   if (!resourceId) {
@@ -55,7 +53,6 @@ const Edit: FC<CombinedProps> = (props) => {
     value: '',
     label: '',
   }
-  const styles = selectStyles(theme)
 
   useEffect(() => {
     if (!selectedValue && selectedId) {
@@ -76,16 +73,15 @@ const Edit: FC<CombinedProps> = (props) => {
   return (
     <FormGroup error={Boolean(error)}>
       <PropertyLabel property={property} />
-      <Select
+      <SelectAsync
         cacheOptions
         value={selectedOption}
-        styles={styles}
         defaultOptions
         loadOptions={loadOptions}
         onChange={handleChange}
         isClearable
         isDisabled={property.isDisabled}
-        isLoading={loadingRecord}
+        isLoading={!!loadingRecord}
         {...property.props}
       />
       <FormMessage>{error?.message}</FormMessage>
@@ -93,4 +89,4 @@ const Edit: FC<CombinedProps> = (props) => {
   )
 }
 
-export default withTheme(Edit)
+export default Edit

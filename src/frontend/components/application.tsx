@@ -13,6 +13,7 @@ import Notice from './app/notice'
 import {
   Dashboard, ResourceAction, RecordAction, Page, BulkAction, Resource,
 } from './routes'
+import useHistoryListen from '../hooks/use-history-listen'
 
 const GlobalStyle = createGlobalStyle`
   html, body, #app {
@@ -29,6 +30,8 @@ const h = new ViewHelpers()
 const App: React.FC = () => {
   const [sidebarVisible, toggleSidebar] = useState(false)
   const location = useLocation()
+
+  useHistoryListen()
 
   useEffect(() => {
     if (sidebarVisible) { toggleSidebar(false) }

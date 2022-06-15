@@ -67,7 +67,7 @@ export const RecordInList: React.FC<RecordInListProps> = (props) => {
 
   const actionParams = { resourceId: resource.id, recordId: record.id }
 
-  const handleActionClick = (event, sourceAction: ActionJSON): void => (
+  const handleActionClick = (event, sourceAction: ActionJSON): void | Promise<void> => (
     buildActionClickHandler({
       action: sourceAction,
       params: actionParams,

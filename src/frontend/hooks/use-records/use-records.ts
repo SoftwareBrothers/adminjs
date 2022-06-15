@@ -52,7 +52,7 @@ function useRecords(resourceId: string): UseRecordsResult {
         onNotice(listActionResponse.notice)
       }
       if (listActionResponse.redirectUrl) {
-        history.push(listActionResponse.redirectUrl, { previousPage: window.location.href })
+        history.push(listActionResponse.redirectUrl)
         return
       }
 
@@ -74,14 +74,8 @@ function useRecords(resourceId: string): UseRecordsResult {
 
   useEffect(() => {
     if (hasForceRefresh(location.search)) {
-      const locationState: any = location.state || {}
-      if (!locationState.previousPage) {
-        locationState.previousPage = window.location.href
-      }
-
       history.replace({
         pathname: location.pathname,
-        state: locationState,
         search: removeForceRefresh(location.search).toString(),
       })
     } else {

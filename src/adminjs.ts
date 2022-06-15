@@ -24,10 +24,12 @@ import loginTemplate from './frontend/login-template'
 import { ListActionResponse } from './backend/actions/list/list-action'
 import { combineTranslations, Locale } from './locale/config'
 import { locales } from './locale'
+
 import {
   TranslateFunctions,
   createFunctions,
 } from './utils/translate-functions.factory'
+
 import { OverridableComponent } from './frontend/utils/overridable-component'
 import { relativeFilePathResolver } from './utils/file-resolver'
 

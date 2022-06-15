@@ -6,6 +6,7 @@ import React from 'react'
 import Redux from 'redux'
 import axios from 'axios'
 import ReactDOM from 'react-dom'
+import { createRoot } from 'react-dom/client'
 import ReactRedux from 'react-redux'
 import ReactRouter from 'react-router'
 import ReactRouterDOM from 'react-router-dom'
@@ -25,6 +26,7 @@ import * as punycode from 'punycode/'
 window.Lodash = Lodash
 window.React = React
 window.ReactDOM = ReactDOM
+window.createRoot = createRoot
 window.Redux = Redux
 window.ReactRedux = ReactRedux
 window.flat = flat
