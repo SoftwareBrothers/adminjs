@@ -15,6 +15,7 @@ import * as reference from './reference'
 import * as textarea from './textarea'
 import * as password from './password'
 import * as currency from './currency'
+import * as phone from './phone'
 import { BasePropertyComponentProps } from './base-property-props'
 import { PropertyType } from '../../../backend/adapters/property/base-property'
 import { PropertyJSON } from '../../interfaces'
@@ -42,6 +43,7 @@ const types: Record<PropertyType, any> = {
   float: defaultType,
   mixed: null,
   currency,
+  phone,
 }
 
 /**
