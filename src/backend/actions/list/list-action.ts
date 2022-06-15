@@ -39,7 +39,7 @@ export const ListAction: Action<ListActionResponse> = {
     if (perPage) {
       perPage = +perPage > PER_PAGE_LIMIT ? PER_PAGE_LIMIT : +perPage
     } else {
-      perPage = 10 // default
+      perPage = context._admin.options.settings?.defaultPerPage ?? 10
     }
     page = Number(page) || 1
 
