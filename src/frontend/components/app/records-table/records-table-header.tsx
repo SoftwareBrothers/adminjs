@@ -92,7 +92,7 @@ export const RecordsTableHeader: React.FC<RecordsTableHeaderProps> = (props) => 
           {onSelectAll ? (
             <CheckBox
               style={{ marginLeft: 5 }}
-              onChange={(): void => onSelectAll()}
+              onChange={() => onSelectAll()}
               checked={selectedAll}
             />
           ) : null}

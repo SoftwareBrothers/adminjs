@@ -22,6 +22,9 @@ module.exports = {
       'error',
       2,
     ],
+    '@typescript-eslint/explicit-function-return-type': {
+      allowExpressions: true,
+    },
     'import/prefer-default-export': 'off',
     'linebreak-style': ['error', 'unix'],
     quotes: ['error', 'single'],
