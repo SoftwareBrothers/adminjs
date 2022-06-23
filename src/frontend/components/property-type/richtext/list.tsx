@@ -1,24 +1,20 @@
-import { Box } from '@adminjs/design-system'
 import truncate from 'lodash/truncate'
-import React, { FC, useEffect, useRef } from 'react'
+import React, { FC } from 'react'
 import { ShowPropertyProps } from '../base-property-props'
 
 const List: FC<ShowPropertyProps> = (props) => {
-  
   const { property, record } = props
-  const maxLength = property.custom.maxLength || 15
+  const maxLength = property.custom?.maxLength || 15
   const value: string = record.params[property.path] || ''
-  const contentRef = useRef<HTMLDivElement>(null)
-  const regex = /(<([^>]+)>)/gi
-  const result = value.replace(regex, '')
+  const textValue = stripHtml(value)
 
-  useEffect(() => {
-    if (contentRef.current) {
-      contentRef.current.innerHTML = truncate(result, { length: maxLength, separator: ' ' })
-    }
-  }, [])
+  return <>{truncate(textValue, { length: maxLength, separator: ' ' })}</>
+}
 
-  return <Box ref={contentRef} />
+const stripHtml = (html: string): string => {
+  let el = document.createElement('DIV')
+  el.innerHTML = html
+  return el.textContent || el.innerText || ''
 }
 
 export default List
