@@ -1,5 +1,5 @@
 import { ActionContext, ActionResponse } from '../../actions/action.interface'
-import ValidationError from '../../utils/errors/validation-error'
+import ValidationError, { PropertyErrors, RecordError } from '../../utils/errors/validation-error'
 import ForbiddenError from '../../utils/errors/forbidden-error'
 
 /**
@@ -8,12 +8,35 @@ import ForbiddenError from '../../utils/errors/forbidden-error'
  * Function which catches all the errors thrown by the action hooks or handler
  */
 const actionErrorHandler = (error: any, context: ActionContext): ActionResponse => {
-  if (error instanceof ValidationError) {
-    const { resource } = context
-    const { record, currentAdmin } = context
+  if (error instanceof ValidationError || error instanceof ForbiddenError) {
+    const { resource, record, currentAdmin, action } = context
 
-    const baseMessage = error.baseError?.message
-      || context.translateMessage('thereWereValidationErrors', resource.id())
+    let baseMessage = ''
+    let baseError: RecordError | null = null
+    let errors: PropertyErrors = {}
+    let meta: any = undefined
+
+    if (error instanceof ValidationError) {
+      baseMessage = error.baseError?.message
+        || context.translateMessage('thereWereValidationErrors', resource.id())
+      baseError = error.baseError
+      errors = error.propertyErrors
+    } else {
+      // Defaults to ForbiddenError
+      baseMessage = error.baseMessage
+        || context.translateMessage('anyForbiddenError', resource.id())
+    }
+  
+    // Add required meta data for the list action
+    if (action.name == 'list') {
+      meta = {
+        total: 0,
+        perPage: 0,
+        page: 0,
+        direction: null,
+        sortBy: null,
+      }
+    }
 
     const recordJson = record?.toJSON?.(currentAdmin)
 
@@ -22,26 +45,15 @@ const actionErrorHandler = (error: any, context: ActionContext): ActionResponse 
         ...recordJson,
         params: recordJson?.params ?? {},
         populated: recordJson?.populated ?? {},
-        errors: error.propertyErrors,
+        baseError,
+        errors,
       },
       records: [],
       notice: {
         message: baseMessage,
         type: 'error',
       },
-    }
-  }
-  if (error instanceof ForbiddenError) {
-    const { resource } = context
-
-    const baseMessage = error.baseMessage
-      || context.translateMessage('anyForbiddenError', resource.id())
-
-    return {
-      notice: {
-        message: baseMessage,
-        type: 'error',
-      },
+      meta
     }
   }
   throw error
