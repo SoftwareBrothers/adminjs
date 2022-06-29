@@ -51,10 +51,12 @@ export const NewAction: Action<RecordActionResponse> = {
           record: record.toJSON(currentAdmin),
         }
       }
+      const baseMessage = populatedRecord.baseError?.message
+        || translateMessage('thereWereValidationErrors', resource.id())
       return {
         record: record.toJSON(currentAdmin),
         notice: {
-          message: translateMessage('thereWereValidationErrors', resource.id()),
+          message: baseMessage,
           type: 'error',
         },
       }
