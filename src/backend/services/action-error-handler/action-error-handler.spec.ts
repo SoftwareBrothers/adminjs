@@ -28,7 +28,7 @@ describe('ActionErrorHandler', function () {
     record = sinon.createStubInstance(BaseRecord) as unknown as BaseRecord
     translateMessage = sinon.stub().returns(notice.message)
     action = { name: 'myAction' } as ActionDecorator
-    context = { resource, record, currentAdmin, translateMessage, action} as ActionContext
+    context = { resource, record, currentAdmin, translateMessage, action } as ActionContext
   })
 
   afterEach(function () {
@@ -51,7 +51,7 @@ describe('ActionErrorHandler', function () {
       },
       notice,
       records: [],
-      meta: undefined
+      meta: undefined,
     })
   })
 
@@ -78,7 +78,7 @@ describe('ActionErrorHandler', function () {
         page: 0,
         direction: null,
         sortBy: null,
-      }
+      },
     })
   })
 
@@ -106,7 +106,7 @@ describe('ActionErrorHandler', function () {
         message: errorMessage,
         type: 'error',
       },
-      meta: undefined
+      meta: undefined,
     })
   })
 
@@ -133,7 +133,7 @@ describe('ActionErrorHandler', function () {
         page: 0,
         direction: null,
         sortBy: null,
-      }
+      },
     })
   })
 })

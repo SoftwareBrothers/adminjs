@@ -14,21 +14,21 @@ const actionErrorHandler = (error: any, context: ActionContext): ActionResponse 
     let baseMessage = ''
     let baseError: RecordError | null = null
     let errors: PropertyErrors = {}
-    let meta: any = undefined
+    let meta: any
 
     if (error instanceof ValidationError) {
       baseMessage = error.baseError?.message
         || context.translateMessage('thereWereValidationErrors', resource.id())
-      baseError = error.baseError
+      baseError = error.baseError ?? null
       errors = error.propertyErrors
     } else {
       // Defaults to ForbiddenError
       baseMessage = error.baseMessage
         || context.translateMessage('anyForbiddenError', resource.id())
     }
-  
+
     // Add required meta data for the list action
-    if (action.name == 'list') {
+    if (action.name === 'list') {
       meta = {
         total: 0,
         perPage: 0,
@@ -53,7 +53,7 @@ const actionErrorHandler = (error: any, context: ActionContext): ActionResponse 
         message: baseMessage,
         type: 'error',
       },
-      meta
+      meta,
     }
   }
   throw error
