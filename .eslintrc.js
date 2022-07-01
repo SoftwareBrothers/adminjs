@@ -6,11 +6,7 @@ module.exports = {
     node: true,
     mocha: true,
   },
-  extends: [
-    'airbnb',
-    'plugin:@typescript-eslint/recommended',
-    'plugin:mocha/recommended',
-  ],
+  extends: ['airbnb', 'plugin:@typescript-eslint/recommended', 'plugin:mocha/recommended'],
   parserOptions: {
     ecmaVersion: 2018,
     sourceType: 'module',
@@ -18,13 +14,8 @@ module.exports = {
   rules: {
     'react/jsx-filename-extension': 'off',
     '@typescript-eslint/no-explicit-any': 'off',
-    indent: [
-      'error',
-      2,
-    ],
-    '@typescript-eslint/explicit-function-return-type': {
-      allowExpressions: true,
-    },
+    indent: ['error', 2],
+    '@typescript-eslint/explicit-function-return-type': 'off',
     'import/prefer-default-export': 'off',
     'linebreak-style': ['error', 'unix'],
     quotes: ['error', 'single'],
@@ -54,15 +45,7 @@ module.exports = {
   ],
   overrides: [
     {
-      files: [
-        '*-test.js',
-        '*.spec.js',
-        '*-test.ts',
-        '*.spec.ts',
-        '*.spec.tsx',
-        '*.factory.ts',
-        '*.factory.js',
-      ],
+      files: ['*-test.js', '*.spec.js', '*-test.ts', '*.spec.ts', '*.spec.tsx', '*.factory.ts', '*.factory.js'],
       rules: {
         'no-unused-expressions': 'off',
         'func-names': 'off',
@@ -85,10 +68,7 @@ module.exports = {
       },
     },
     {
-      files: [
-        '**/*/cypress/integration/**/*.spec.js',
-        './cy/**/*.js',
-      ],
+      files: ['**/*/cypress/integration/**/*.spec.js', './cy/**/*.js'],
       rules: {
         'mocha/no-mocha-arrows': 'off',
         'spaced-comment': 'off',
