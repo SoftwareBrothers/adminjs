@@ -1,22 +1,23 @@
 import { Box, Text, ValueGroup } from '@adminjs/design-system'
-import React, { FC, useEffect, useRef } from 'react'
+import React, { FC } from 'react'
 import { EditPropertyProps } from '../base-property-props'
+import xss from 'xss'
+
+type innerHtmlProp = {
+  __html: string
+}
 
 const Show: FC<EditPropertyProps> = (props) => {
   const { property, record } = props
-  const contentRef = useRef<any>(null)
 
-  useEffect(() => {
-    if (contentRef.current) {
-      const value: string = record.params[property.path] || ''
-      contentRef.current.innerHTML = value
-    }
-  }, [])
+  const value: string = record.params[property.path] || ''
+
+  const createMarkup = (html: string): innerHtmlProp => ({ __html: xss(html) })
 
   return (
     <ValueGroup label={property.label}>
       <Box py="xl" px={['0', 'xl']} border="default">
-        <Text ref={contentRef} />
+        <Text dangerouslySetInnerHTML={createMarkup(value)} />
       </Box>
     </ValueGroup>
   )

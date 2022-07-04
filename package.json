@@ -75,7 +75,7 @@
   },
   "homepage": "https://github.com/SoftwareBrothers/adminjs#readme",
   "dependencies": {
-    "@adminjs/design-system": "^3.0.0-beta.1",
+    "@adminjs/design-system": "^3.0.0-beta.3",
     "@babel/core": "^7.10.2",
     "@babel/parser": "^7.10.2",
     "@babel/plugin-transform-runtime": "^7.10.1",
@@ -113,7 +113,8 @@
     "rollup-plugin-terser": "^6.1.0",
     "slash": "^3.0.0",
     "styled-components": "^5.3.5",
-    "uuid": "^8.3.2"
+    "uuid": "^8.3.2",
+    "xss": "^1.0.13"
   },
   "devDependencies": {
     "@babel/cli": "^7.4.4",
