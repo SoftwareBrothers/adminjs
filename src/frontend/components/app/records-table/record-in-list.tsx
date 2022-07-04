@@ -94,7 +94,7 @@ export const RecordInList: React.FC<RecordInListProps> = (props) => {
       <TableCell className={isSelected ? 'selected' : 'not-selected'}>
         {onSelect && record.bulkActions.length ? (
           <CheckBox
-            onChange={(): void => onSelect(record)}
+            onChange={() => onSelect(record)}
             checked={isSelected}
           />
         ) : null}
