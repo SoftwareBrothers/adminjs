@@ -1,5 +1,5 @@
 import React from 'react'
-import { Icon } from '@adminjs/design-system'
+import { Icon, Box } from '@adminjs/design-system'
 
 import { useTranslation } from '../../../hooks'
 import { ResourceJSON, PropertyJSON } from '../../../interfaces'
@@ -20,10 +20,10 @@ const AddNewItemButton: React.FC<AddNewItemButtonProps> = (props) => {
   )
 
   return (
-    <>
+    <Box>
       <Icon icon="Add" />
       {label}
-    </>
+    </Box>
   )
 }
 

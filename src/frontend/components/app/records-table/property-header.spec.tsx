@@ -1,5 +1,5 @@
 import React from 'react'
-import { render, RenderResult } from 'react-testing-library'
+import { render, RenderResult } from '@testing-library/react'
 import factory from 'factory-girl'
 import { expect } from 'chai'
 
