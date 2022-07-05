@@ -12,11 +12,13 @@ type Props = {
 
 const TestContextProvider: React.FC<Props> = (props) => {
   const { children, location } = props
+  // TODO: fix children props
+  const Router = StaticRouter as any
   return (
     <ThemeProvider theme={theme}>
-      <StaticRouter location={location || '/'}>
+      <Router location={location || '/'}>
         {children}
-      </StaticRouter>
+      </Router>
     </ThemeProvider>
   )
 }
