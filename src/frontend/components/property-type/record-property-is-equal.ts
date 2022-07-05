@@ -8,8 +8,8 @@ import { EditPropertyProps, ShowPropertyProps } from './base-property-props'
  * @private
  */
 export const recordPropertyIsEqual = (
-  prevProps: EditPropertyProps | ShowPropertyProps,
-  nextProps: EditPropertyProps | ShowPropertyProps,
+  prevProps: Readonly<EditPropertyProps | ShowPropertyProps>,
+  nextProps: Readonly<EditPropertyProps | ShowPropertyProps>,
 ): boolean => {
   const prevValue = prevProps.record.params[prevProps.property.path]
   const nextValue = nextProps.record.params[nextProps.property.path]
