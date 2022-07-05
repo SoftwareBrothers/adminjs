@@ -1,10 +1,11 @@
 import { Box, Text, ValueGroup } from '@adminjs/design-system'
 import React, { FC } from 'react'
-import { EditPropertyProps } from '../base-property-props'
 import xss from 'xss'
 
-type innerHtmlProp = {
-  __html: string
+import { EditPropertyProps } from '../base-property-props'
+
+type InnerHtmlProp = {
+  __html: string;
 }
 
 const Show: FC<EditPropertyProps> = (props) => {
@@ -12,7 +13,7 @@ const Show: FC<EditPropertyProps> = (props) => {
 
   const value: string = record.params[property.path] || ''
 
-  const createMarkup = (html: string): innerHtmlProp => ({ __html: xss(html) })
+  const createMarkup = (html: string): InnerHtmlProp => ({ __html: xss(html) })
 
   return (
     <ValueGroup label={property.label}>
