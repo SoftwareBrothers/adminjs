@@ -24,6 +24,10 @@ export interface RecordJSON {
    */
   populated: Record<string, RecordJSON | null | undefined>;
   /**
+   * Any base/overall validation error for the record
+   */
+  baseError: ErrorMessage | null;
+  /**
    * List of all validation errors
    */
   errors: Record<string, ErrorMessage>;

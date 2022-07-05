@@ -19,6 +19,7 @@ describe('updateRecord', function () {
         id: 'someId',
       } as RecordJSON,
     },
+    baseError: null,
     errors: {},
     params: {
       email: 'john@doe.pl',
@@ -48,6 +49,7 @@ describe('updateRecord', function () {
       id,
       title: 'Adolf',
       populated: {},
+      baseError: null,
       errors: {},
       params: {
         name: 'Adolf',

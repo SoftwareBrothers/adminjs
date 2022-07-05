@@ -23,7 +23,13 @@ class BaseRecord {
   public params: ParamsType
 
   /**
-   * Object containing all validation errors: this.errors[path] = 'errorMessage'
+   * Object containing any base/overall validation error messages:
+   * this.baseError = { message: 'errorMessage' }
+   */
+  public baseError: RecordError | null
+
+  /**
+   * Object containing all validation errors: this.errors[path] = { message: 'errorMessage' }
    */
   public errors: PropertyErrors
 
@@ -39,6 +45,7 @@ class BaseRecord {
   constructor(params: ParamsType, resource: BaseResource) {
     this.resource = resource
     this.params = params ? flat.flatten(params) : {}
+    this.baseError = null
     this.errors = {}
     this.populated = {}
   }
@@ -132,11 +139,13 @@ class BaseRecord {
       this.storeParams(returnedParams)
     } catch (e) {
       if (e instanceof ValidationError) {
+        this.baseError = e.baseError
         this.errors = e.propertyErrors
         return this
       }
       throw e
     }
+    this.baseError = null
     this.errors = {}
     return this
   }
@@ -163,11 +172,13 @@ class BaseRecord {
       this.storeParams(returnedParams)
     } catch (e) {
       if (e instanceof ValidationError) {
+        this.baseError = e.baseError
         this.errors = e.propertyErrors
         return this
       }
       throw e
     }
+    this.baseError = null
     this.errors = {}
     return this
   }
@@ -188,11 +199,13 @@ class BaseRecord {
       this.storeParams(returnedParams)
     } catch (e) {
       if (e instanceof ValidationError) {
+        this.baseError = e.baseError
         this.errors = e.propertyErrors
         return this
       }
       throw e
     }
+    this.baseError = null
     this.errors = {}
     return this
   }
@@ -276,6 +289,7 @@ class BaseRecord {
     return {
       params: this.params,
       populated,
+      baseError: this.baseError,
       errors: this.errors,
       id: this.id(),
       title: this.resource.decorate().titleOf(this),

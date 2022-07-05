@@ -8,6 +8,7 @@ factory.define<RecordJSON>('RecordJSON', Object, {
     'nested.param': 'value2',
   },
   populated: {},
+  baseError: null,
   errors: {},
   id: factory.sequence('JSONRecord.id', n => `someId${n}`),
   title: factory.sequence('JSONRecord.id', n => `someTitle${n}`),

@@ -57,10 +57,12 @@ export const EditAction: Action<RecordActionResponse> = {
         record: populatedRecord.toJSON(currentAdmin),
       }
     }
+    const baseMessage = populatedRecord.baseError?.message
+      || translateMessage('thereWereValidationErrors', resource.id())
     return {
       record: populatedRecord.toJSON(currentAdmin),
       notice: {
-        message: translateMessage('thereWereValidationErrors'),
+        message: baseMessage,
         type: 'error',
       },
     }
