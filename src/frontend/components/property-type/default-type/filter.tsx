@@ -1,5 +1,5 @@
 import React, { ReactNode } from 'react'
-import { FormGroup, Label, Input, filterStyles, Select } from '@adminjs/design-system'
+import { FormGroup, Label, Input, Select } from '@adminjs/design-system'
 
 import { FilterPropertyProps } from '../base-property-props'
 

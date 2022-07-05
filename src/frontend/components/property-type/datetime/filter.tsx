@@ -24,13 +24,13 @@ const Filter: React.FC<FilterPropertyProps> = (props) => {
         <Label>{`- ${translateProperty('from')}: `}</Label>
         <DatePicker
           value={fromValue}
-          onChange={(date) => onChange(fromKey, date)}
+          onChange={date => onChange(fromKey, date)}
           propertyType={property.type}
         />
         <Label mt="default">{`- ${translateProperty('to')}: `}</Label>
         <DatePicker
           value={toValue}
-          onChange={(date) => onChange(toKey, date)}
+          onChange={date => onChange(toKey, date)}
           propertyType={property.type}
         />
       </FormGroup>
