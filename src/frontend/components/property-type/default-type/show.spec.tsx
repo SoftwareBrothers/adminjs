@@ -2,7 +2,7 @@ import React from 'react'
 import factory from 'factory-girl'
 import { expect } from 'chai'
 
-import { RenderResult, render } from 'react-testing-library'
+import { RenderResult, render } from '@testing-library/react'
 import Show from './show'
 import TestContextProvider from '../../spec/test-context-provider'
 import '../../spec/resource-json.factory'
