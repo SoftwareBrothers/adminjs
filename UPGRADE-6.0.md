@@ -12,14 +12,18 @@ This should update the version of ```adminjs``` and ```adminjs-design-system``` 
 
 ## Changes
 
-### :warning: React upgrade to v18
+### :warning: React upgrade to v18.1.0+
 
-AdminJS now uses React v18 as a dependency. Hence if you're using react outside of AdminJS, please upgrade it to the matching version. 
+**If you don't have react as a dependency in your project you won't have to do anything 😉**
+
+AdminJS now uses ```react``` and ```react-dom``` in ```v18.1.0+``` as a dependency. Hence if you're using react outside of AdminJS, please upgrade it to the matching version. 
 Instructions on how to do it are available [here](https://reactjs.org/blog/2022/03/08/react-18-upgrade-guide.html)
+
+Additionally, we upgraded the ```styled-components``` package to ```v5.3.5```, which works well with react v18. 
 
 ### :warning: Rebranding
 
-Branding option `softwareBrothers` is now deprecated and replaced with `withMadeWithLove`
+Branding option `softwareBrothers` is now not supported and replaced with `withMadeWithLove`
 which shows a tiny heart icon on the bottom sidebar and login page.
 
 ```ts
