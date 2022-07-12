@@ -5,7 +5,7 @@
 To update AdminJS package to the sixth wersion please use following npm command
 
 ```
-npm install adminjs@beta
+npm install adminjs
 ```
 
 This should update the version of ```adminjs``` and ```adminjs-design-system``` packages to newest beta versions. 
