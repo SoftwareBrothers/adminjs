@@ -10,6 +10,8 @@ npm install adminjs@beta
 
 This should update the version of ```adminjs``` and ```adminjs-design-system``` packages to newest beta versions. 
 
+If you have ```adminjs-design-system``` in your dependencies you should update it accordingly.
+
 ## Changes
 
 ### :warning: React upgrade to v18.1.0+
@@ -25,30 +27,6 @@ Additionally, we upgraded the ```styled-components``` package to ```v5.3.5```, w
 
 Branding option `softwareBrothers` is now not supported and replaced with `withMadeWithLove`
 which shows a tiny heart icon on the bottom sidebar and login page.
-
-```ts
-  /**
-   * Flag indicates if `SoftwareBrothers` tiny hart icon should be visible on the bottom sidebar.
-   * @deprecated since 6.0.0
-   */
-  softwareBrothers?: boolean;
-  /**
-   * Flag indicates if "made with love" tiny heart icon should be visible on the bottom sidebar.
-   * @new since 6.0.0
-   */
-  withMadeWithLove?: boolean;
-```
-
-**Example of use**
-
-```ts
-const admin = new AdminJS({
-  branding: {
-    withMadeWithLove: true
-  }
-})
-
-```
 
 ### ⚠️ New RichText input library
 
