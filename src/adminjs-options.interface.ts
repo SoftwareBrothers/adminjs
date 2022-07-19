@@ -8,6 +8,8 @@ import { ResourceOptions } from './backend/decorators/resource/resource-options.
 import { Locale } from './locale/config'
 import { CurrentAdmin } from './current-admin.interface'
 import { CoreScripts } from './core-scripts.interface'
+import { ResourceJSON } from './frontend/interfaces/resource-json.interface'
+import { PageJSON } from './frontend/interfaces/page-json.interface'
 
 /**
  * AdminJSOptions
@@ -471,4 +473,18 @@ export interface AdminJSOptionsWithDefault extends AdminJSOptions {
   };
   bundler: BundlerOptions;
   pages: AdminJSOptions['pages'];
+}
+
+export interface AdminJSOptionsJson {
+  resources: ResourceJSON[];
+  paths: {
+    rootPath: string;
+    loginPath: string;
+    logoutPath: string;
+    [path: string]: string;
+  };
+  branding: BrandingOptions;
+  versions: VersionProps;
+  locale: Locale;
+  pages: PageJSON[]
 }

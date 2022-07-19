@@ -3,7 +3,7 @@ import * as path from 'path'
 import * as fs from 'fs'
 import i18n, { i18n as I18n } from 'i18next'
 
-import { AdminJSOptionsWithDefault, AdminJSOptions } from './adminjs-options.interface'
+import { AdminJSOptionsWithDefault, AdminJSOptions, AdminJSOptionsJson } from './adminjs-options.interface'
 import BaseResource from './backend/adapters/resource/base-resource'
 import BaseDatabase from './backend/adapters/database/base-database'
 import ConfigurationError from './backend/utils/errors/configuration-error'
@@ -20,6 +20,9 @@ import { locales } from './locale'
 import { TranslateFunctions, createFunctions } from './utils/translate-functions.factory'
 import { OverridableComponent } from './frontend/utils/overridable-component'
 import { relativeFilePathResolver } from './utils/file-resolver'
+import { CurrentAdmin } from './current-admin.interface'
+import { ResourceJSON } from './frontend/interfaces/resource-json.interface'
+import pagesToStore from './frontend/store/pages-to-store'
 
 const pkg = JSON.parse(fs.readFileSync(path.join(__dirname, '../package.json'), 'utf-8'))
 export const VERSION = pkg.version
@@ -335,6 +338,35 @@ class AdminJS {
     }
 
     throw new ConfigurationError(`Given file "${src}", doesn't exist.`, 'AdminJS.html')
+  }
+
+  async toJSON(currentAdmin?: CurrentAdmin): Promise<AdminJSOptionsJson> {
+    let jsonResources: ResourceJSON[] = []
+    try {
+      jsonResources = this.resources.map((r) => r.decorate().toJSON(currentAdmin))
+    } catch (err) {
+      // eslint-disable-next-line no-console
+      console.error(err)
+    }
+    const branding = typeof this.options.branding === 'function'
+      ? await this.options.branding(currentAdmin)
+      : this.options.branding
+
+    return {
+      resources: jsonResources,
+      paths: {
+        rootPath: this.options.rootPath,
+        loginPath: this.options.loginPath,
+        logoutPath: this.options.logoutPath,
+      },
+      branding: branding ?? {},
+      versions: {
+        app: this.options.version && this.options.version.app,
+        admin: this.options.version && this.options.version.admin ? AdminJS.VERSION : undefined,
+      },
+      locale: this.locale,
+      pages: pagesToStore(this.options.pages),
+    }
   }
 }
 
