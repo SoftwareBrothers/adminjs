@@ -157,6 +157,11 @@ export const Router: RouterType = {
     path: '/api/pages/{pageName}',
     Controller: ApiController,
     action: 'page',
+  }, { // Metadata
+    method: 'GET',
+    path: '/api/metadata',
+    Controller: ApiController,
+    action: 'metadata',
   }],
 }
 
