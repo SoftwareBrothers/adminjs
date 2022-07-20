@@ -130,7 +130,7 @@ export const Dashboard: React.FC = () => {
         {boxes({ translateMessage }).map((box, index) => (
           // eslint-disable-next-line react/no-array-index-key
           <Box key={index} width={[1, 1 / 2, 1 / 2, 1 / 3]} p="lg">
-            <Card as="a" href={box.href}>
+            <Card as="a" href={box.href} target="_blank">
               <Text textAlign="center">
                 <Illustration
                   variant={box.variant as IllustrationProps['variant']}
@@ -144,7 +144,7 @@ export const Dashboard: React.FC = () => {
           </Box>
         ))}
         <Box width={[1, 1, 1 / 2]} p="lg">
-          <Card as="a" flex href="https://join.slack.com/t/adminbro/shared_invite/zt-djsqxxpz-_YCS8UMtQ9Ade6DPuLR7Zw">
+          <Card as="a" flex href="https://join.slack.com/t/adminbro/shared_invite/zt-djsqxxpz-_YCS8UMtQ9Ade6DPuLR7Zw" target="_blank">
             <Box flexShrink={0}><Illustration variant="SlackLogo" /></Box>
             <Box ml="xl">
               <H4>{translateMessage('community_title')}</H4>
@@ -153,7 +153,7 @@ export const Dashboard: React.FC = () => {
           </Card>
         </Box>
         <Box width={[1, 1, 1 / 2]} p="lg">
-          <Card as="a" flex href="https://github.com/SoftwareBrothers/adminjs/issues">
+          <Card as="a" flex href="https://github.com/SoftwareBrothers/adminjs/issues" target="_blank">
             <Box flexShrink={0}><Illustration variant="GithubLogo" /></Box>
             <Box ml="xl">
               <H4>{translateMessage('foundBug_title')}</H4>
@@ -171,6 +171,7 @@ export const Dashboard: React.FC = () => {
                 as="a"
                 variant="primary"
                 href="https://share.hsforms.com/1IedvmEz6RH2orhcL6g2UHA8oc5a"
+                target="_blank"
               >
                 {translateButton('contactUs')}
               </Button>
