@@ -14,6 +14,26 @@ AdminJS also has got it's own design system library (`@adminjs/design-system`) a
 ### Development
 If you want to contribute to the project, fork repositories you will be working on and after you're done with your changes, open a pull request.
 
+AdminJS team uses [semantic-release](https://github.com/semantic-release/semantic-release) library to automatically create `releases` when a pull request is merged to `master` branch or `pre-releases` when a pull request is merged to `beta` branch. Additionally, based on your commit messages, the library automatically generates a changelog.
+
+Because of this, there is a strict requirement on how you should name your `branches` and `commits`.
+
+Branch names should be prefixed with `fix/`, `chore/`, `feat/` or `test/`.
+
+Commit messages should start with `fix:`, `chore:`, `feat:`, `test:` with the following rules:
+1. When a commit starting with `chore:` or `test:` is merged, it **will not** create a new release.
+2. When a commit starting with `fix:` is merged, a release will be created which upgrades the patch version of the library (example: 6.0.0 -> 6.0.1).
+3. When a commit starting with `feat:` is merged, a release will be created which upgrades the minor version of the library (example: 6.0.1 -> 6.1.0).
+4. When a commit has `BREAKING CHANGE: xxxxx` inside of it's **description**, a release will be created which upgrades the major version of the library (example: 6.1.0 -> 7.0.0).
+5. There are also additional rules defined in `.releaserc`:
+- commits starting with `feat(locale):` and `feat(small):` will only upgrade the patch version despite being `feat` (feature) commits. This type of commit message should be used when you want to create a new translation (`feat(locale)`) or when you add a small feature that doesn't affect the library much (`feat(small)`).
+- commits starting with `chore(deps):` will upgrade the patch version despite being `chore` commits. These are commits automatically created by [dependabot](https://github.com/dependabot) but you should also use this message type when you want to only upgrade a package manually.
+6. When a pull request is merged which contains multiple commit messages, the higher version upgrades take precedence, for example a pull request with `feat:` and `fix:` messages will upgrade the `minor version` (because of `feat: ...` message) but both commit messages will appear in the changelog.
+
+When you work on your bug fixes or new features, make sure they only concern the subject of your pull request. Ideally you would be using `git commit --amend` so that there's only one commit in your pull request.
+If for some reason you want to make more than one change and you need to have multiple commit messages in a pull request, each commit message should only contain changes it refers to.
+
+When a pull request contains a lot of commits without proper messages, we usually `squash` them when merging which can result in a poor release changelog.
 
 ### Issues
 When creating an issue please try to describe your problem with as many details as possible. If your issue is a complex one and would require us to reproduce this to respond, a test repository or a code sample which would allow us to reproduce your problem would be ideal.
