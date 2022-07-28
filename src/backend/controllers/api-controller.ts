@@ -9,6 +9,7 @@ import ConfigurationError from '../utils/errors/configuration-error'
 import NotFoundError from '../utils/errors/not-found-error'
 import { requestParser } from '../utils/request-parser'
 import { SearchActionResponse } from '../actions/search/search-action'
+import { AdminJSOptionsJson } from '../../adminjs-options.interface'
 
 /**
  * Controller responsible for the auto-generated API: `/admin_root/api/...`, where
@@ -270,6 +271,20 @@ class ApiController {
         'function in AdminJS options',
       ].join('\n'),
     }
+  }
+
+  /**
+   * Gets metadata required by the frontend.
+   *
+   * Handler function responsible for a _.../api/metadata_
+   *
+   * @param   {ActionRequest}  request
+   * @param   {AdminJSOptionsJson}  response
+   *
+   * @return  {Promise<AdminJSOptionsJson>}  action response
+   */
+  async metadata(): Promise<AdminJSOptionsJson> {
+    return this._admin.toJSON(this.currentAdmin)
   }
 }
 
