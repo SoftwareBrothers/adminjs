@@ -24,15 +24,13 @@ const defaultStore = {
 const renderSubject = (store: Partial<ReduxState> = {}, location?: string): RenderResult => {
   const path = '/resources/:resourceId/records/:recordId/:actionName'
   const storeWithDefault = _.merge(defaultStore, store)
-  // TODO: fix children props
-  const StoreProvider = Provider as any
   const renderResult = render(
     <TestContextProvider location={location}>
-      <StoreProvider store={createStore(storeWithDefault)}>
+      <Provider store={createStore(storeWithDefault)}>
         <Switch>
           <Route path={path} exact component={RecordAction} />
         </Switch>
-      </StoreProvider>
+      </Provider>
     </TestContextProvider>,
   )
 

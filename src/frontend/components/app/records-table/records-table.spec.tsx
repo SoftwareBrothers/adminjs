@@ -23,17 +23,16 @@ type StubsType = {
 const renderSubject = (props: Omit<RecordsTableProps, 'onSelect' | 'onSelectAll'>): RenderResult & StubsType => {
   const onSelect = sinon.stub()
   const onSelectAll = sinon.stub()
-  // TODO: fix children props
-  const StoreProvider = Provider as any
+
   const renderResult = render(
     <TestContextProvider>
-      <StoreProvider store={createStore({})}>
+      <Provider store={createStore({})}>
         <RecordsTable
           {...props}
           onSelect={onSelect}
           onSelectAll={onSelectAll}
         />
-      </StoreProvider>
+      </Provider>
     </TestContextProvider>,
   )
 

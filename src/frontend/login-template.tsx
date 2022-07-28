@@ -64,18 +64,16 @@ const html = async (
     })
 
   const sheet = new ServerStyleSheet()
-  // TODO: fix children props
-  const StoreProvider = Provider as any
 
   const loginComponent = renderToString(
     <StyleSheetManager sheet={sheet.instance}>
-      <StoreProvider store={store}>
+      <Provider store={store}>
         <I18nextProvider i18n={i18n}>
           <ThemeProvider theme={theme}>
             <LoginComponent action={action} message={errorMessage} />
           </ThemeProvider>
         </I18nextProvider>
-      </StoreProvider>
+      </Provider>
     </StyleSheetManager>,
   )
 
