@@ -1,5 +1,3 @@
-/* eslint-disable no-restricted-exports */
-/* eslint-disable react/function-component-definition */
 import React from 'react'
 import { useSelector } from 'react-redux'
 import styled from 'styled-components'

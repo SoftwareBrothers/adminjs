@@ -76,6 +76,7 @@ module.exports = {
       files: ['*.tsx'],
       rules: {
         'react/prop-types': 'off',
+        'react/function-component-definition': 'off',
       },
     },
     {
