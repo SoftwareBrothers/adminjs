@@ -50,9 +50,9 @@ export const ActionHeader: React.FC<ActionHeaderProps> = (props) => {
 
   const actionButtons = actionsToButtonGroup({
     actions: record
-      ? record.recordActions.filter(ra => !action || action.name !== ra.name)
+      ? record.recordActions.filter((ra) => !action || action.name !== ra.name)
       // only new action should be seen in regular "Big" actions place
-      : resource.resourceActions.filter(ra => ra.name === 'new' && (!action || action.name !== ra.name)),
+      : resource.resourceActions.filter((ra) => ra.name === 'new' && (!action || action.name !== ra.name)),
     params,
     handleClick: handleActionClick,
   })
@@ -68,7 +68,7 @@ export const ActionHeader: React.FC<ActionHeaderProps> = (props) => {
   // list and new actions are special and are are always
   const customResourceButtons = actionsToButtonGroup({
     actions: action.showResourceActions
-      ? resource.resourceActions.filter(ra => !['list', 'new'].includes(ra.name))
+      ? resource.resourceActions.filter((ra) => !['list', 'new'].includes(ra.name))
       : [],
     params: { resourceId },
     handleClick: handleActionClick,
@@ -76,7 +76,7 @@ export const ActionHeader: React.FC<ActionHeaderProps> = (props) => {
 
   const title = action ? action.label : resource.name
   const isList = action && action.name === 'list'
-  const listAction = resource.resourceActions.find(ra => ra.name === 'list')
+  const listAction = resource.resourceActions.find((ra) => ra.name === 'list')
 
   // styled which differs if action header is in the drawer or not
   const cssIsRootFlex = !action.showInDrawer

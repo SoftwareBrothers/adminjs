@@ -112,7 +112,7 @@ export const FilterDrawer: React.FC<FilterProps> = (props) => {
           {translateLabel('filters', resource.id)}
         </H3>
         <Box my="x3">
-          {properties.map(property => (
+          {properties.map((property) => (
             <PropertyType
               key={property.propertyPath}
               where="filter"

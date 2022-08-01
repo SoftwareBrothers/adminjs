@@ -17,7 +17,7 @@ const List: React.FC<Props & EditPropertyProps> = (props) => {
 
   const renderItems = () => (
     <>
-      {property.subProperties.filter(subProperty => !subProperty.isId).map((subProperty) => {
+      {property.subProperties.filter((subProperty) => !subProperty.isId).map((subProperty) => {
         const subPropertyWithPath = convertToSubProperty(property, subProperty)
         return (
           <div key={subPropertyWithPath.path}>
@@ -32,7 +32,7 @@ const List: React.FC<Props & EditPropertyProps> = (props) => {
     </>
   )
 
-  const showAction = record.recordActions.find(a => a.name === 'show')
+  const showAction = record.recordActions.find((a) => a.name === 'show')
 
   if (resource.titleProperty.propertyPath === property.propertyPath && showAction) {
     const h = new ViewHelpers()

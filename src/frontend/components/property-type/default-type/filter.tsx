@@ -26,7 +26,7 @@ class Filter extends React.PureComponent<FilterPropertyProps> {
     const filterKey = `filter-${property.path}`
     const value = filter[property.path] || ''
     if (property.availableValues) {
-      const selected = property.availableValues.find(av => av.value === value)
+      const selected = property.availableValues.find((av) => av.value === value)
       return (
         <Select
           variant="filter"

@@ -88,7 +88,6 @@ export const RecordInList: React.FC<RecordInListProps> = (props) => {
     }),
   }]
 
-
   return (
     <TableRow onClick={handleClick} data-id={record.id}>
       <TableCell className={isSelected ? 'selected' : 'not-selected'}>
@@ -99,7 +98,7 @@ export const RecordInList: React.FC<RecordInListProps> = (props) => {
           />
         ) : null}
       </TableCell>
-      {resource.listProperties.map(property => (
+      {resource.listProperties.map((property) => (
         <TableCell
           style={{ cursor: 'pointer' }}
           key={property.propertyPath}

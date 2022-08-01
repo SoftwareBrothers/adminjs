@@ -60,7 +60,7 @@ const Edit: FC<ActionProps> = (props) => {
             onChange={handleChange}
             record={record as RecordJSON}
           />
-        )) : resource.editProperties.map(property => (
+        )) : resource.editProperties.map((property) => (
           <PropertyType
             key={property.propertyPath}
             where="edit"

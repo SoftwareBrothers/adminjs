@@ -26,7 +26,7 @@ const Edit: FC<EditPropertyProps> = (props) => {
         rows={(value.match(/\n/g) || []).length + 1}
         id={property.path}
         name={property.path}
-        onChange={e => setValue(e.target.value)}
+        onChange={(e) => setValue(e.target.value)}
         onBlur={() => onChange(property.path, value)}
         value={value}
         disabled={property.isDisabled}

@@ -194,10 +194,10 @@ const noticesReducer = (state: Array<NoticeMessageInState> = [], action: {
     return notices
   }
   case DROP_NOTICE: {
-    return state.filter(notice => notice.id !== (action.data as NoticeArgs).noticeId)
+    return state.filter((notice) => notice.id !== (action.data as NoticeArgs).noticeId)
   }
   case SET_NOTICE_PROGRESS: {
-    return state.map(notice => ({
+    return state.map((notice) => ({
       ...notice,
       progress: notice.id === (action.data as NoticeArgs).noticeId
         ? action.data.progress

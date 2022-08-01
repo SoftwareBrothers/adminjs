@@ -51,7 +51,7 @@ export const Login: React.FC<LoginProps> = (props) => {
   const branding = useSelector((state: ReduxState) => state.branding)
 
   return (
-    <React.Fragment>
+    <>
       <GlobalStyle />
       <Wrapper flex variant="grey">
         <Box bg="white" height="440px" flex boxShadow="login" width={[1, 2 / 3, 'auto']}>
@@ -125,7 +125,7 @@ export const Login: React.FC<LoginProps> = (props) => {
         </Box>
         {branding.withMadeWithLove ? (<Box mt="xxl"><MadeWithLove /></Box>) : null}
       </Wrapper>
-    </React.Fragment>
+    </>
   )
 }
 

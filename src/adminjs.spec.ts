@@ -7,7 +7,6 @@ import BaseDatabase from './backend/adapters/database/base-database'
 import BaseResource from './backend/adapters/resource/base-resource'
 import { OverridableComponent } from './frontend/utils/overridable-component'
 
-
 describe('AdminJS', function () {
   beforeEach(function () {
     global.RegisteredAdapters = []

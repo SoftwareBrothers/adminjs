@@ -6,6 +6,7 @@ import { ResourceJSON, RecordJSON, PropertyJSON } from '../../../interfaces'
 interface Props {
   property: PropertyJSON;
   record: RecordJSON;
+  // eslint-disable-next-line react/no-unused-prop-types
   resource: ResourceJSON;
 }
 

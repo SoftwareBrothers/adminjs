@@ -103,7 +103,8 @@ describe('ResourcesFactory', function () {
     it('assigns ResourceDecorator when no options were given', function () {
       this.resourcesFactory._decorateResources([{ resource: new BaseResource() }])
       expect(this.assignDecoratorStub).to.have.been.calledWith(
-        this.sinon.match.any, this.sinon.match({}),
+        this.sinon.match.any,
+        this.sinon.match({}),
       )
     })
 
@@ -113,7 +114,8 @@ describe('ResourcesFactory', function () {
       this.resourcesFactory._decorateResources([{ resource, options }])
 
       expect(this.assignDecoratorStub).to.have.been.calledWith(
-        this.sinon.match.any, this.sinon.match(options),
+        this.sinon.match.any,
+        this.sinon.match(options),
       )
     })
   })

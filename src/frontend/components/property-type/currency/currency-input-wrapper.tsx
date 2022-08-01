@@ -5,6 +5,7 @@ export type CurrencyInputWrapperProps = {
   id: string;
   initial: string;
   options?: Record<string, any>;
+  // eslint-disable-next-line @typescript-eslint/ban-types
   onChange: Function;
 } & CurrencyInputProps
 

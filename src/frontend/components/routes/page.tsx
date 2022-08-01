@@ -24,7 +24,7 @@ const Page: React.FC = () => {
   const { pageName } = params
   const [isClient, setIsClient] = useState(false)
 
-  const currentPage = pages.find(page => page.name === pageName)
+  const currentPage = pages.find((page) => page.name === pageName)
 
   useEffect(() => {
     setIsClient(true)

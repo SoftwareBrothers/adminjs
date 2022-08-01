@@ -8,7 +8,14 @@ export type FlattenParams = {
   [key: string]: FlattenValue;
 }
 
-export type FlattenValue = string | boolean | number | Date | null | [] | {} | File
+export type FlattenValue = string
+  | boolean
+  | number
+  | Date
+  | null
+  | []
+  | Record<string, unknown>
+  | File
 
 /**
  * @memberof module:flat

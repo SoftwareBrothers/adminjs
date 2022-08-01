@@ -42,7 +42,7 @@ const getAction = (resource: ResourceJSON): ActionJSON | undefined => {
     || recordActionMatch?.params.actionName
     || bulkActionMatch?.params.actionName
 
-  return action ? resource.actions.find(a => a.name === action) : undefined
+  return action ? resource.actions.find((a) => a.name === action) : undefined
 }
 
 const ResourceAction: React.FC<Props> = (props) => {
@@ -57,7 +57,7 @@ const ResourceAction: React.FC<Props> = (props) => {
     return null
   }
 
-  const resource = resources.find(r => r.id === resourceId)
+  const resource = resources.find((r) => r.id === resourceId)
   if (!resource) {
     return (<NoResourceError resourceId={resourceId} />)
   }
@@ -68,7 +68,7 @@ const ResourceAction: React.FC<Props> = (props) => {
   }
 
   const listActionName = 'list'
-  const listAction = resource.resourceActions.find(r => r.name === listActionName)
+  const listAction = resource.resourceActions.find((r) => r.name === listActionName)
 
   if (!listAction) {
     return (<NoActionError resourceId={resourceId} actionName={listActionName} />)

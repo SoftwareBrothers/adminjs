@@ -24,7 +24,7 @@ const pathToParts = (propertyPath: string, options: PathToPartsOptions = {}): Pa
   let allParts = propertyPath.split('.')
   if (options.skipArrayIndexes) {
     // eslint-disable-next-line no-restricted-globals
-    allParts = allParts.filter(part => isNaN(+part))
+    allParts = allParts.filter((part) => isNaN(+part))
   }
   return allParts.reduce((memo, part) => {
     if (memo.length) {

@@ -79,7 +79,7 @@ const organizeNestedProperties = (
     // changes 'root.nested.0.nested1' to [root.nested', 'root']
     const parts = pathToParts(property.propertyPath, { skipArrayIndexes: true }).reverse().splice(1)
     if (parts.length) {
-      const mixedPropertyPath = parts.find(part => (
+      const mixedPropertyPath = parts.find((part) => (
         properties[part] && properties[part].type() === 'mixed'
       ))
       if (mixedPropertyPath) {

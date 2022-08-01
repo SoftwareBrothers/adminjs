@@ -42,9 +42,9 @@ const html = async (
   const faviconTag = getFaviconFromBranding(branding)
 
   const scripts = ((assets && assets.scripts) || [])
-    .map(s => `<script src="${s}"></script>`)
+    .map((s) => `<script src="${s}"></script>`)
   const styles = ((assets && assets.styles) || [])
-    .map(l => `<link rel="stylesheet" type="text/css" href="${l}">`)
+    .map((l) => `<link rel="stylesheet" type="text/css" href="${l}">`)
 
   store.dispatch(initializeBranding(branding))
   store.dispatch(initializeAssets(assets))

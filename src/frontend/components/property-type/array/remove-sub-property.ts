@@ -29,12 +29,11 @@ export const removeSubProperty = (record: RecordJSON, subPropertyPath: string): 
   )
 
   const newPopulatedKeyMap = flat.removePath(populatedKeyMap, subPropertyPath)
-  const newPopulated = Object.entries(newPopulatedKeyMap).reduce(
-    (memo, [newPropertyKey, oldPropertyKey]) => ({
+  const newPopulated = Object.entries(newPopulatedKeyMap)
+    .reduce((memo, [newPropertyKey, oldPropertyKey]) => ({
       ...memo,
       [newPropertyKey]: oldPropertyKey && record.populated[oldPropertyKey?.toString()],
-    }), {},
-  )
+    }), {})
 
   return {
     ...record,

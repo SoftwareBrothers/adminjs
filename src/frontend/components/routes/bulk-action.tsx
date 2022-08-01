@@ -75,10 +75,10 @@ const BulkAction: React.FC = () => {
     )
   }
 
-  const action = getBulkActionsFromRecords(records || []).find(r => r.name === actionName)
+  const action = getBulkActionsFromRecords(records || []).find((r) => r.name === actionName)
 
   if (loading) {
-    const actionFromResource = resource.actions.find(r => r.name === actionName)
+    const actionFromResource = resource.actions.find((r) => r.name === actionName)
     return actionFromResource?.showInDrawer ? (<DrawerPortal><Loader /></DrawerPortal>) : <Loader />
   }
 

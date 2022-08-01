@@ -19,7 +19,7 @@ export const isPropertyPermitted = (propertyName, options: UseRecordOptions = {}
   const { includeParams } = options
   if (includeParams) {
     const parts = flat.pathToParts(propertyName, { skipArrayIndexes: true })
-    return parts.some(part => includeParams.includes(part))
+    return parts.some((part) => includeParams.includes(part))
   }
   return true
 }

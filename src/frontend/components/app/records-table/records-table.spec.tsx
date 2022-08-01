@@ -14,7 +14,6 @@ import '../../spec/resource-json.factory'
 import '../../spec/record-json.factory'
 import '../../spec/property-json.factory'
 
-
 type StubsType = {
   onSelect: sinon.SinonStub<any[], any>;
   onSelectAll: sinon.SinonStub<any[], any>;
@@ -70,8 +69,8 @@ describe('<RecordsTable />', function () {
       records = await factory.buildMany<RecordJSON>('RecordJSON', 10, {
         params: {
           id: factory.sequence('record.id'),
-          name: factory.sequence('record.name', n => `name ${n}`),
-          surname: factory.sequence('record.surname', n => `surname ${n}`),
+          name: factory.sequence('record.name', (n) => `name ${n}`),
+          surname: factory.sequence('record.surname', (n) => `surname ${n}`),
         },
       });
 
@@ -96,8 +95,8 @@ describe('<RecordsTable />', function () {
       records = await factory.buildMany<RecordJSON>('RecordJSON', 10, {
         params: {
           id: factory.sequence('record.id'),
-          name: factory.sequence('record.name', n => `name ${n}`),
-          surname: factory.sequence('record.surname', n => `surname ${n}`),
+          name: factory.sequence('record.name', (n) => `name ${n}`),
+          surname: factory.sequence('record.surname', (n) => `surname ${n}`),
         },
         recordActions: [await factory.build<ActionJSON>('ActionJSON', {
           name: 'show', actionType: 'record',

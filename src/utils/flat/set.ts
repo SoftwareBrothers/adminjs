@@ -26,7 +26,7 @@ const set = (params: FlattenParams = {}, propertyPath: string, value?: any): Fla
 
   // remove all existing keys
   const paramsCopy = Object.keys(params)
-    .filter(key => !key.match(regex))
+    .filter((key) => !key.match(regex))
     .reduce((memo, key) => {
       memo[key] = params[key]
 
@@ -55,7 +55,7 @@ const set = (params: FlattenParams = {}, propertyPath: string, value?: any): Fla
     const parts = pathToParts(propertyPath).slice(0, -1)
     if (parts.length) {
       return Object.keys(paramsCopy)
-        .filter(key => !parts.includes(key))
+        .filter((key) => !parts.includes(key))
         .reduce((memo, key) => {
           memo[key] = paramsCopy[key]
 

@@ -225,12 +225,12 @@ class AdminJS {
    * @throws {Error}                When resource with given id cannot be found
    */
   findResource(resourceId): BaseResource {
-    const resource = this.resources.find(m => m._decorated?.id() === resourceId)
+    const resource = this.resources.find((m) => m._decorated?.id() === resourceId)
     if (!resource) {
       throw new Error([
         `There are no resources with given id: "${resourceId}"`,
         'This is the list of all registered resources you can use:',
-        this.resources.map(r => r._decorated?.id() || r.id()).join(', '),
+        this.resources.map((r) => r._decorated?.id() || r.id()).join(', '),
       ].join('\n'))
     }
     return resource

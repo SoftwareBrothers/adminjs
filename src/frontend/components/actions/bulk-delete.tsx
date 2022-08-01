@@ -39,7 +39,7 @@ const BulkDelete: React.FC<ActionProps & AddNoticeProps> = (props) => {
   const handleClick = (): void => {
     const api = new ApiClient()
     setLoading(true)
-    const recordIds = records.map(r => r.id)
+    const recordIds = records.map((r) => r.id)
     api.bulkAction({
       resourceId: resource.id,
       actionName: action.name,
@@ -77,7 +77,7 @@ const BulkDelete: React.FC<ActionProps & AddNoticeProps> = (props) => {
         />
         <Table>
           <TableBody>
-            {records.map(record => (
+            {records.map((record) => (
               <TableRow key={record.id}>
                 <TableCell>
                   <PropertyType

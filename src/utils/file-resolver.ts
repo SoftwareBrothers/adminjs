@@ -7,7 +7,7 @@ import path from 'path'
  */
 export const relativeFilePathResolver = (filePath: string, syntax: RegExp): string => {
   const stack = (new Error().stack || '').split('\n')
-  const target = stack.findIndex(s => syntax.test(s))
+  const target = stack.findIndex((s) => syntax.test(s))
   // Node = 8 shows stack like that: '(/path/to/file.ts:77:27)
   const pathNode8 = stack[target + 1].match(/\((.*):[0-9]+:[0-9]+\)/)
   // Node >= 10 shows stack like that: 'at /path/to/file.ts:77:27

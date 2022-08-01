@@ -47,15 +47,9 @@ describe('actionsToButtonGroup', () => {
 
     beforeEach(async () => {
       rootActions = {
-        normal: await factory.build<ActionJSON>(
-          'ActionJSON', { actionType: 'record' },
-        ),
-        publish: await factory.build<ActionJSON>(
-          'ActionJSON', { actionType: 'record', name: 'publish' },
-        ),
-        export: await factory.build<ActionJSON>(
-          'ActionJSON', { actionType: 'record', name: 'publish' },
-        ),
+        normal: await factory.build<ActionJSON>('ActionJSON', { actionType: 'record' }),
+        publish: await factory.build<ActionJSON>('ActionJSON', { actionType: 'record', name: 'publish' }),
+        export: await factory.build<ActionJSON>('ActionJSON', { actionType: 'record', name: 'publish' }),
       }
       actionsPublish = await factory.buildMany<ActionJSON>('ActionJSON', actionsCount, {
         actionType: 'record',

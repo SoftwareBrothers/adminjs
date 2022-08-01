@@ -25,11 +25,11 @@ const ResourceAction: React.FC<Props> = (props) => {
   const [filterVisible, setFilterVisible] = useState(false)
   const [tag, setTag] = useState('')
 
-  const resource = resources.find(r => r.id === resourceId)
+  const resource = resources.find((r) => r.id === resourceId)
   if (!resource) {
     return (<NoResourceError resourceId={resourceId!} />)
   }
-  const action = resource.resourceActions.find(r => r.name === actionName)
+  const action = resource.resourceActions.find((r) => r.name === actionName)
   if (!action) {
     return (<NoActionError resourceId={resourceId!} actionName={actionName!} />)
   }

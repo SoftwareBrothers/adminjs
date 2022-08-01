@@ -20,14 +20,14 @@ const SidebarPages: React.FC<Props> = (props) => {
   const navigate = useNavigate()
 
   if (!pages || !pages.length) {
-    return (<></>)
+    return null
   }
 
   const isActive = (page): boolean => (
     !!location.pathname.match(`/pages/${page.name}`)
   )
 
-  const elements: Array<NavigationElementProps> = pages.map(page => ({
+  const elements: Array<NavigationElementProps> = pages.map((page) => ({
     id: page.name,
     label: page.name,
     isSelected: isActive(page),

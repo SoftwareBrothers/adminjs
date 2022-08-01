@@ -27,7 +27,7 @@ const RecordAction: React.FC = () => {
   const { actionName, recordId, resourceId } = params
   const resource = useResource(resourceId!)
 
-  const action = record && record.recordActions.find(r => r.name === actionName)
+  const action = record && record.recordActions.find((r) => r.name === actionName)
 
   const fetchRecord = (): void => {
     setLoading(true)
@@ -71,7 +71,7 @@ const RecordAction: React.FC = () => {
   const hasDifferentRecord = record && record.id && record.id.toString() !== recordId
 
   if (loading || hasDifferentRecord) {
-    const actionFromResource = resource.actions.find(r => r.name === actionName)
+    const actionFromResource = resource.actions.find((r) => r.name === actionName)
     return actionFromResource?.showInDrawer ? (<DrawerPortal><Loader /></DrawerPortal>) : <Loader />
   }
 

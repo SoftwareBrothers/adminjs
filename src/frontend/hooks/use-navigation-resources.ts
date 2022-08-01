@@ -17,9 +17,7 @@ const isSelected = (href, location): boolean => {
 export function useNavigationResources(
   resources: Array<ResourceJSON>,
 ): NavigationProps['elements'] {
-  const [openElements, setOpenElements] = useLocalStorage<Record<string, boolean>>(
-    'sidebarElements', {},
-  )
+  const [openElements, setOpenElements] = useLocalStorage<Record<string, boolean>>('sidebarElements', {})
   const navigate = useNavigate()
   const location = useLocation()
 
@@ -43,7 +41,7 @@ export function useNavigationResources(
   // grouping resources into parents
   const map = resources
     // first filter out resources which are not visible
-    .filter(res => res.href && res.navigation?.show !== false)
+    .filter((res) => res.href && res.navigation?.show !== false)
     .reduce((memo, resource) => {
       // in case resource has the same name as parent we namespace it wit "resource-""
       const key = resource.navigation?.name || ['resource', resource.name].join('-')

@@ -5,7 +5,6 @@ import { appendForceRefresh } from '../../components/actions/utils/append-force-
 import { ActionCallCallback } from '.'
 import { useNotice } from '../use-notice'
 
-
 export const useActionResponseHandler = (onActionCall?: ActionCallCallback) => {
   const location = useLocation()
   const navigate = useNavigate()

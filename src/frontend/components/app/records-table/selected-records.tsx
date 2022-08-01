@@ -22,7 +22,10 @@ export const SelectedRecords: React.FC<SelectedRecordsProps> = (props) => {
     return null
   }
 
-  const params = { resourceId: resource.id, recordIds: selectedRecords.map(records => records.id) }
+  const params = {
+    resourceId: resource.id,
+    recordIds: selectedRecords.map((records) => records.id),
+  }
 
   const handleActionClick = (event, sourceAction: ActionJSON): void => (
     buildActionClickHandler({

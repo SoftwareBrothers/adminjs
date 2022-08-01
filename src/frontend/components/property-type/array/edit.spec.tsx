@@ -88,7 +88,7 @@ describe('<PropertyType.Array.Edit />', function () {
     context('2 items inside', function () {
       const values = ['element1', 'element2']
 
-      xit('2 <input> tags already filed with values', async function () {
+      it('2 <input> tags already filed with values', async function () {
         record = await factory.build<RecordJSON>('RecordJSON', { params: {
           [`${property.path}.0`]: values[0],
           [`${property.path}.1`]: values[1],

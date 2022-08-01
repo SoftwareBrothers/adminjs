@@ -1,7 +1,7 @@
 import React from 'react'
 
-const ExampleComponent = () => (
-  <div>Some example text</div>
-)
+function ExampleComponent() {
+  return <div>Some example text</div>
+}
 
 export default ExampleComponent

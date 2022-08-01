@@ -39,8 +39,8 @@ export class ResourcesFactory {
     const optionsResources = this._convertResources(resources)
 
     // fetch only those resources from database which weren't previously given as a resource
-    const databaseResources = this._convertDatabases(databases).filter(dr => (
-      !optionsResources.find(optionResource => optionResource.resource.id() === dr.id())
+    const databaseResources = this._convertDatabases(databases).filter((dr) => (
+      !optionsResources.find((optionResource) => optionResource.resource.id() === dr.id())
     ))
 
     return this._decorateResources([...databaseResources, ...optionsResources])
@@ -54,7 +54,7 @@ export class ResourcesFactory {
   */
   _convertDatabases(databases: Array<any>): Array<BaseResource> {
     return databases.reduce((memoArray, db) => {
-      const databaseAdapter = this.adapters.find(adapter => (
+      const databaseAdapter = this.adapters.find((adapter) => (
         adapter.Database.isAdapterFor(db)
       ))
       if (!databaseAdapter) {
@@ -84,7 +84,7 @@ export class ResourcesFactory {
     return resources.map((rawResource) => {
       // resource can be given either by a value or within an object within resource key
       const resourceObject = rawResource.resource || rawResource
-      const resourceAdapter = this.adapters.find(adapter => (
+      const resourceAdapter = this.adapters.find((adapter) => (
         adapter.Resource.isAdapterFor(resourceObject)
       ))
       if (!resourceAdapter && !(resourceObject instanceof BaseResource)) {

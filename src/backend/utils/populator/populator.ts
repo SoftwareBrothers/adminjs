@@ -15,7 +15,7 @@ export async function populator(
   const resourceDecorator = records[0].resource.decorate()
   const allProperties = Object.values(resourceDecorator.getFlattenProperties())
 
-  const references = allProperties.filter(p => !!p.reference())
+  const references = allProperties.filter((p) => !!p.reference())
 
   await Promise.all(references.map(async (propertyDecorator) => {
     await populateProperty(records, propertyDecorator)

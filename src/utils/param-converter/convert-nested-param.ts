@@ -17,7 +17,7 @@ const convertNestedParam = (
 
     for (const nestedSubProperty of nestedSubProperties) {
       if (subProperty.isArray) {
-        value = [...value].map(element => convertNestedParam(element, nestedSubProperty))
+        value = [...value].map((element) => convertNestedParam(element, nestedSubProperty))
       } else {
         value = convertNestedParam(value, nestedSubProperty)
       }

@@ -7,7 +7,6 @@ const replace = require('@rollup/plugin-replace')
 const json = require('@rollup/plugin-json')
 const { terser } = require('rollup-plugin-terser')
 
-
 const external = [
   'lodash',
   'react',
