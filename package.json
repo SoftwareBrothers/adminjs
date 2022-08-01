@@ -102,6 +102,8 @@
     "punycode": "^2.1.1",
     "react": "^18.1.0",
     "react-beautiful-dnd": "git+https://github.com/dziraf/react-beautiful-dnd.git",
+    "react-dnd": "^15.1",
+    "react-dnd-html5-backend": "^15.1",
     "react-dom": "^18.1.0",
     "react-i18next": "^11.16.7",
     "react-is": "^18.1.0",
