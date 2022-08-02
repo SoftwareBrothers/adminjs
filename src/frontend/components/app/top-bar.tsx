@@ -3,11 +3,11 @@ import { useSelector } from 'react-redux'
 import styled from 'styled-components'
 import { cssClass, Box, Icon, themeGet } from '@adminjs/design-system'
 
+import allowOverride from '../../hoc/allow-override'
 import LoggedIn from './logged-in'
 import Version from './version'
 
 import { ReduxState } from '../../store/store'
-
 
 const NavBar = styled(Box)`
   height: ${({ theme }): string => theme.sizes.navbarHeight};
@@ -26,11 +26,9 @@ type Props = {
   toggleSidebar: (any) => void;
 }
 
-export const TopBar: React.FC<Props> = (props) => {
+const TopBar: React.FC<Props> = (props) => {
   const { toggleSidebar } = props
-  const [session, paths, versions] = useSelector(
-    (state: ReduxState) => [state.session, state.paths, state.versions],
-  )
+  const [session, paths, versions] = useSelector((state: ReduxState) => [state.session, state.paths, state.versions])
   return (
     <NavBar>
       <Box
@@ -48,4 +46,6 @@ export const TopBar: React.FC<Props> = (props) => {
   )
 }
 
-export default TopBar
+const OverridableTopbar = allowOverride(TopBar, 'TopBar')
+
+export { OverridableTopbar as default, OverridableTopbar as TopBar }
