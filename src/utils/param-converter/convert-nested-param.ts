@@ -12,12 +12,10 @@ const convertNestedParam = (
 
   let value = parentValue[path]
 
-  if (type === 'mixed') {
+  if (type === 'mixed' && value) {
     const nestedSubProperties = subProperty.subProperties
 
     for (const nestedSubProperty of nestedSubProperties) {
-      if (!value) continue;
-
       if (subProperty.isArray) {
         value = [...value].map(element => convertNestedParam(element, nestedSubProperty))
       } else {
