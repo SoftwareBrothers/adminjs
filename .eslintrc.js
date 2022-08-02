@@ -30,7 +30,6 @@ module.exports = {
     'import/extensions': 'off',
     'mocha/no-hooks-for-single-case': 'off',
     'no-param-reassign': 'off',
-    'max-len': 'off',
   },
   ignorePatterns: [
     '*/build/**/*',

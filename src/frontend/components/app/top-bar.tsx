@@ -28,6 +28,7 @@ type Props = {
 
 const TopBar: React.FC<Props> = (props) => {
   const { toggleSidebar } = props
+  // eslint-disable-next-line max-len
   const [session, paths, versions] = useSelector((state: ReduxState) => [state.session, state.paths, state.versions])
   return (
     <NavBar>
