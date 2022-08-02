@@ -4,7 +4,8 @@ export type OverridableComponent =
   | 'SidebarResourceSection'
   | 'SidebarFooter'
   | 'SidebarBranding'
-  | 'Sidebar';
+  | 'Sidebar'
+  | 'TopBar'
 
 /**
  * Name of the components which can be overridden by AdminJS.bundle. It currently following
@@ -16,6 +17,7 @@ export type OverridableComponent =
  * - SidebarResourceSection
  * - SidebarFooter
  * - SidebarBranding
+ * - TopBar
  * @new in version 3.3
  * @memberof AdminJS
  * @alias OverridableComponent
