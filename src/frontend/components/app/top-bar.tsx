@@ -23,7 +23,7 @@ NavBar.defaultProps = {
 }
 
 type Props = {
-  toggleSidebar: (any) => void
+  toggleSidebar: (any) => void;
 }
 
 const TopBar: React.FC<Props> = (props) => {
