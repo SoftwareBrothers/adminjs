@@ -24,9 +24,7 @@ import { ActionJSON, buildActionClickHandler } from '../../../interfaces/action'
  * @subcategory Application
  */
 export const ActionHeader: React.FC<ActionHeaderProps> = (props) => {
-  const {
-    resource, toggleFilter, actionPerformed, record, action, tag, omitActions,
-  } = props
+  const { resource, toggleFilter, actionPerformed, record, action, tag, omitActions } = props
 
   const { translateButton } = useTranslation()
   const history = useHistory()
@@ -39,14 +37,13 @@ export const ActionHeader: React.FC<ActionHeaderProps> = (props) => {
   const resourceId = resource.id
   const params = { resourceId, recordId: record?.id }
 
-  const handleActionClick = (event, sourceAction: ActionJSON): any | Promise<any> => (
-    buildActionClickHandler({
-      action: sourceAction,
-      params,
-      actionResponseHandler,
-      push: history.push,
-    })(event)
-  )
+  // eslint-disable-next-line max-len
+  const handleActionClick = (event, sourceAction: ActionJSON): any | Promise<any> => buildActionClickHandler({
+    action: sourceAction,
+    params,
+    actionResponseHandler,
+    push: history.push,
+  })(event)
 
   const actionButtons = actionsToButtonGroup({
     actions: record
@@ -65,10 +62,20 @@ export const ActionHeader: React.FC<ActionHeaderProps> = (props) => {
     })
   }
 
+  const addCustomLinks = resource?.resourceActions
+    ?.filter(ra => ra.custom.Link)
+    .map((ra) => {
+      actionButtons.unshift({
+        label: ra.label || 'link',
+        icon: ra.icon || 'Link',
+        href: ra.custom.Link,
+      })
+    })
+
   // list and new actions are special and are are always
   const customResourceButtons = actionsToButtonGroup({
     actions: action.showResourceActions
-      ? resource.resourceActions.filter(ra => !['list', 'new'].includes(ra.name))
+      ? resource.resourceActions.filter(ra => !['list', 'new'].includes(ra.name) && !ra.custom.Link)
       : [],
     params: { resourceId },
     handleClick: handleActionClick,
@@ -86,7 +93,9 @@ export const ActionHeader: React.FC<ActionHeaderProps> = (props) => {
 
   return (
     <Box className={cssClass('ActionHeader')}>
-      {action.showInDrawer ? '' : (
+      {action.showInDrawer ? (
+        ''
+      ) : (
         <Box flex flexDirection="row" px={['default', 0]}>
           <Breadcrumbs resource={resource} actionName={action.name} record={record} />
           <Box flexShrink={0}>
@@ -99,12 +108,22 @@ export const ActionHeader: React.FC<ActionHeaderProps> = (props) => {
           <CssHComponent mb="lg">
             {!isList && listAction ? (
               <StyledBackButton resourceId={resourceId} showInDrawer={action.showInDrawer} />
-            ) : ''}
+            ) : (
+              ''
+            )}
             {title}
-            {tag ? (<Badge variant="primary" ml="default">{tag}</Badge>) : ''}
+            {tag ? (
+              <Badge variant="primary" ml="default">
+                {tag}
+              </Badge>
+            ) : (
+              ''
+            )}
           </CssHComponent>
         </Box>
-        {omitActions ? '' : (
+        {omitActions ? (
+          ''
+        ) : (
           <Box mt="xl" mb={cssActionsMB} flexShrink={0}>
             <ButtonGroup buttons={actionButtons} />
           </Box>

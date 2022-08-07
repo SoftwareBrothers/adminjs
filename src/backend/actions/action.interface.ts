@@ -71,11 +71,11 @@ export type PageContext = {
    * current instance of AdminJS. You may use it to fetch other Resources by their names:
    */
   _admin: AdminJS;
-    /**
+  /**
    * Currently logged in admin
    */
   currentAdmin?: CurrentAdmin;
-    /**
+  /**
    * view helpers
    */
   h: ViewHelpers;
@@ -191,11 +191,8 @@ export type BulkActionResponse = ActionResponse & {
  * @memberof Action
  * @returns {Promise<T>}
  */
-export type ActionHandler<T> = (
-  request: ActionRequest,
-  response: any,
-  context: ActionContext
-) => Promise<T>
+// eslint-disable-next-line max-len
+export type ActionHandler<T> = (request: ActionRequest, response: any, context: ActionContext) => Promise<T>
 
 /**
  * Before action hook. When it is given - it is performed before the {@link ActionHandler}
@@ -210,10 +207,10 @@ export type Before = (
    * Request object
    */
   request: ActionRequest,
-    /**
+  /**
    * Invocation context
    */
-  context: ActionContext,
+  context: ActionContext
 ) => Promise<ActionRequest>
 
 /**
@@ -235,17 +232,10 @@ export type After<T> = (
   /**
    * Invocation context
    */
-  context: ActionContext,
+  context: ActionContext
 ) => Promise<T>
 
-export type BuildInActions =
-  'show' |
-  'edit' |
-  'list' |
-  'delete' |
-  'bulkDelete' |
-  'new' |
-  'search'
+export type BuildInActions = 'show' | 'edit' | 'list' | 'delete' | 'bulkDelete' | 'new' | 'search'
 
 /**
  * @classdesc
@@ -300,6 +290,15 @@ export type BuildInActions =
  *           actionType: 'resource',
  *           handler: async (request, response, context) => {...}
  *         }
+ *         // Example of adding a link button to Action header
+ *         //  for User model
+ *         someLinkAction: {
+ *           actionType: "resource",
+ *           name: "link #1",
+ *           custom: { Link: "https://google.com" },
+ *           variant: "info",
+ *           icon: "SettingsAdjust",
+ *         },
  *       }
  *     }
  *   }]
@@ -310,7 +309,7 @@ export type BuildInActions =
  * ACTIONS.show.after = async () => {...}
  * ```
  */
-export interface Action <T extends ActionResponse> {
+export interface Action<T extends ActionResponse> {
   /**
    * Name of an action which is its uniq key.
    * If you use one of _list_, _search_, _edit_, _new_, _show_, _delete_ or
