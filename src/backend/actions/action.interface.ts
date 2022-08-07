@@ -29,35 +29,35 @@ export type ActionContext = TranslateFunctions & {
   /**
    * current instance of AdminJS. You may use it to fetch other Resources by their names:
    */
-  _admin: AdminJS;
+  _admin: AdminJS
   /**
    * Resource on which action has been invoked. Null for dashboard handler.
    */
-  resource: BaseResource;
+  resource: BaseResource
   /**
    * Record on which action has been invoked (only for {@link actionType} === 'record')
    */
-  record?: BaseRecord;
+  record?: BaseRecord
   /**
    * Records on which action has been invoked (only for {@link actionType} === 'bulk')
    */
-  records?: Array<BaseRecord>;
+  records?: Array<BaseRecord>
   /**
    * view helpers
    */
-  h: ViewHelpers;
+  h: ViewHelpers
   /**
    * Object of currently invoked function. Not present for dashboard action
    */
-  action: ActionDecorator;
+  action: ActionDecorator
   /**
    * Currently logged in admin
    */
-  currentAdmin?: CurrentAdmin;
+  currentAdmin?: CurrentAdmin
   /**
    * Any custom property which you can add to context
    */
-  [key: string]: any;
+  [key: string]: any
 }
 
 /**
@@ -70,15 +70,15 @@ export type PageContext = {
   /**
    * current instance of AdminJS. You may use it to fetch other Resources by their names:
    */
-  _admin: AdminJS;
-    /**
+  _admin: AdminJS
+  /**
    * Currently logged in admin
    */
-  currentAdmin?: CurrentAdmin;
-    /**
+  currentAdmin?: CurrentAdmin
+  /**
    * view helpers
    */
-  h: ViewHelpers;
+  h: ViewHelpers
 }
 
 /**
@@ -94,38 +94,38 @@ export type ActionRequest = {
     /**
      * Id of current resource
      */
-    resourceId: string;
+    resourceId: string
     /**
      * Id of current record (in case of record action)
      */
-    recordId?: string;
+    recordId?: string
     /**
      * Id of selected records (in case of bulk action) divided by commas
      */
-    recordIds?: string;
+    recordIds?: string
     /**
      * Name of an action
      */
-    action: string;
+    action: string
     /**
      * an optional search query string (for `search` resource action)
      */
-    query?: string;
+    query?: string
 
-    [key: string]: any;
-  };
+    [key: string]: any
+  }
   /**
    * POST data passed to the backend
    */
-  payload?: Record<string, any>;
+  payload?: Record<string, any>
   /**
    * Elements of query string
    */
-  query?: Record<string, any>;
+  query?: Record<string, any>
   /**
    * HTTP method
    */
-  method: 'post' | 'get';
+  method: 'post' | 'get'
 }
 
 /**
@@ -137,15 +137,15 @@ export type ActionResponse = {
   /**
    * Notice message which should be presented to the end user after showing the action
    */
-  notice?: NoticeMessage;
+  notice?: NoticeMessage
   /**
    * redirect path
    */
-  redirectUrl?: string;
+  redirectUrl?: string
   /**
    * Any other custom parameter
    */
-  [key: string]: any;
+  [key: string]: any
 }
 
 /**
@@ -166,7 +166,7 @@ export type RecordActionResponse = ActionResponse & {
   /**
    * Record object.
    */
-  record: RecordJSON;
+  record: RecordJSON
 }
 
 /**
@@ -179,7 +179,7 @@ export type BulkActionResponse = ActionResponse & {
   /**
    * Array of RecordJSON objects.
    */
-  records: Array<RecordJSON>;
+  records: Array<RecordJSON>
 }
 
 /**
@@ -191,11 +191,7 @@ export type BulkActionResponse = ActionResponse & {
  * @memberof Action
  * @returns {Promise<T>}
  */
-export type ActionHandler<T> = (
-  request: ActionRequest,
-  response: any,
-  context: ActionContext
-) => Promise<T>
+export type ActionHandler<T> = (request: ActionRequest, response: any, context: ActionContext) => Promise<T>
 
 /**
  * Before action hook. When it is given - it is performed before the {@link ActionHandler}
@@ -210,10 +206,10 @@ export type Before = (
    * Request object
    */
   request: ActionRequest,
-    /**
+  /**
    * Invocation context
    */
-  context: ActionContext,
+  context: ActionContext
 ) => Promise<ActionRequest>
 
 /**
@@ -235,17 +231,10 @@ export type After<T> = (
   /**
    * Invocation context
    */
-  context: ActionContext,
+  context: ActionContext
 ) => Promise<T>
 
-export type BuildInActions =
-  'show' |
-  'edit' |
-  'list' |
-  'delete' |
-  'bulkDelete' |
-  'new' |
-  'search'
+export type BuildInActions = 'show' | 'edit' | 'list' | 'delete' | 'bulkDelete' | 'new' | 'search'
 
 /**
  * @classdesc
@@ -300,6 +289,15 @@ export type BuildInActions =
  *           actionType: 'resource',
  *           handler: async (request, response, context) => {...}
  *         }
+ *         // Example of adding a link button to Action header
+ *         //  for User model
+ *         someLinkAction: {
+ *           actionType: "resource",
+ *           name: "link #1",
+ *           custom: { Link: "https://google.com" },
+ *           variant: "info",
+ *           icon: "SettingsAdjust",
+ *         },
  *       }
  *     }
  *   }]
@@ -310,14 +308,14 @@ export type BuildInActions =
  * ACTIONS.show.after = async () => {...}
  * ```
  */
-export interface Action <T extends ActionResponse> {
+export interface Action<T extends ActionResponse> {
   /**
    * Name of an action which is its uniq key.
    * If you use one of _list_, _search_, _edit_, _new_, _show_, _delete_ or
    * _bulkDelete_ you override existing actions.
    * For all other keys you create a new action.
    */
-  name: BuildInActions | string;
+  name: BuildInActions | string
   /**
    * indicates if action should be visible for given invocation context.
    * It also can be a simple boolean value.
@@ -351,7 +349,7 @@ export interface Action <T extends ActionResponse> {
    * @see {@link ActionContext}   parameter passed to isAccessible
    * @see {@link IsFunction}      exact type of the function
    */
-  isVisible?: boolean | IsFunction;
+  isVisible?: boolean | IsFunction
   /**
    * Indicates if the action can be invoked for given invocation context.
    * You can pass a boolean or function of type {@link IsFunction}, which
@@ -379,7 +377,7 @@ export interface Action <T extends ActionResponse> {
    * @see {@link ActionContext}   parameter passed to isAccessible
    * @see {@link IsFunction}      exact type of the function
    */
-  isAccessible?: boolean | IsFunction;
+  isAccessible?: boolean | IsFunction
   /**
    * If filter should be visible on the sidebar. Only for _resource_ actions
    *
@@ -397,7 +395,7 @@ export interface Action <T extends ActionResponse> {
    * }]})
    * ```
    */
-  showFilter?: boolean;
+  showFilter?: boolean
   /**
    * If action should have resource actions buttons displayed above action header.
    *
@@ -405,7 +403,7 @@ export interface Action <T extends ActionResponse> {
    *
    * @new in version v5.8.1
    */
-  showResourceActions?: boolean;
+  showResourceActions?: boolean
   /**
    * Type of an action - could be either _resource_, _record_ or _bulk_.
    *
@@ -413,7 +411,7 @@ export interface Action <T extends ActionResponse> {
    *
    * When you define a new action - it is required.
    */
-  actionType: ActionType;
+  actionType: ActionType
   /**
    * icon name for the action. Take a look {@link Icon} component,
    * because what you put here is passed down to it.
@@ -425,7 +423,7 @@ export interface Action <T extends ActionResponse> {
    * }]})
    * ```
    */
-  icon?: string;
+  icon?: string
   /**
    * guard message - user will have to confirm it before executing an action.
    *
@@ -444,7 +442,7 @@ export interface Action <T extends ActionResponse> {
    * so in order to define the actual message you will have to specify its
    * translation in {@link AdminJSOptions.Locale}
    */
-  guard?: string;
+  guard?: string
   /**
    * Component which will be used to render the action. To pass the component
    * use {@link AdminJS.bundle} method.
@@ -456,7 +454,7 @@ export interface Action <T extends ActionResponse> {
    * Instead after clicking button it is immediately performed. Example of
    * an action without a view is {@link module:DeleteAction}.
    */
-  component?: string | false;
+  component?: string | false
   /**
    * handler function which will be invoked by either:
    * - {@link ApiController#resourceAction}
@@ -484,7 +482,7 @@ export interface Action <T extends ActionResponse> {
    * Required for new actions. For modifying already defined actions
    * like new and edit we suggest using {@link Action#before} and {@link Action#after} hooks.
    */
-  handler: ActionHandler<T> | Array<ActionHandler<T>> | null;
+  handler: ActionHandler<T> | Array<ActionHandler<T>> | null
   /**
    * Before action hook. When it is given - it is performed before the {@link Action#handler}
    * method.
@@ -508,7 +506,7 @@ export interface Action <T extends ActionResponse> {
    * }
    * ```
    */
-  before?: Before | Array<Before>;
+  before?: Before | Array<Before>
   /**
    * After action hook. When it is given - it is performed on the returned,
    * by {@link Action#handler handler} function response.
@@ -559,12 +557,12 @@ export interface Action <T extends ActionResponse> {
    * ```
    *
    */
-  after?: After<T> | Array<After<T>>;
+  after?: After<T> | Array<After<T>>
 
   /**
    * Indicates if given action should be seen in a drawer or in a full screen. Default to false
    */
-  showInDrawer?: boolean;
+  showInDrawer?: boolean
 
   /**
    * Indicates if Action Header should be hidden.
@@ -573,7 +571,7 @@ export interface Action <T extends ActionResponse> {
    * - action buttons
    * - action title
    */
-  hideActionHeader?: boolean;
+  hideActionHeader?: boolean
 
   /**
    * The max width of action HTML container.
@@ -594,7 +592,7 @@ export interface Action <T extends ActionResponse> {
    * containerWidth: [1, 1/2, 1/3]
    * ```
    */
-  containerWidth?: string | number | Array<string | number>;
+  containerWidth?: string | number | Array<string | number>
   /**
    * Definition for the layout. Works with the edit and show actions.
    *
@@ -628,25 +626,25 @@ export interface Action <T extends ActionResponse> {
    * @see LayoutElement
    * @see LayoutElementFunction
    */
-  layout?: LayoutElementFunction | Array<LayoutElement>;
+  layout?: LayoutElementFunction | Array<LayoutElement>
 
   /**
    * Defines the variant of the action. based on that it will receive given color.
    * @new in version v3.3
    */
-  variant?: VariantType;
+  variant?: VariantType
 
   /**
    * Action can be nested. If you give here another action name - it will be nested under it.
    * If parent action doesn't exists - it will be nested under name in the parent.
    * @new in version v3.3
    */
-  parent?: string;
+  parent?: string
 
   /**
    * Any custom properties you want to pass down to {@link ActionJSON}. They have to
    * be stringified.
    * @new in version v3.3
    */
-  custom?: Record<string, any>;
+  custom?: Record<string, any>
 }
