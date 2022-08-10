@@ -1,8 +1,8 @@
-import React from 'react'
-import { TableCell } from '@adminjs/design-system'
+import React from 'react';
+import { TableCell } from '@adminjs/design-system';
 
-import { BasePropertyJSON } from '../../../interfaces'
-import SortLink from '../sort-link'
+import { BasePropertyJSON } from '../../../interfaces';
+import SortLink from '../sort-link';
 
 export type PropertyHeaderProps = {
   property: BasePropertyJSON;
@@ -23,9 +23,9 @@ export type PropertyHeaderProps = {
 }
 
 export const PropertyHeader: React.FC<PropertyHeaderProps> = (props) => {
-  const { property, titleProperty, display } = props
+  const { property, titleProperty, display } = props;
 
-  const isMain = property.propertyPath === titleProperty.propertyPath
+  const isMain = property.propertyPath === titleProperty.propertyPath;
 
   return (
     <TableCell
@@ -34,7 +34,7 @@ export const PropertyHeader: React.FC<PropertyHeaderProps> = (props) => {
     >
       {property.isSortable ? <SortLink {...props} /> : property.label}
     </TableCell>
-  )
-}
+  );
+};
 
-export default PropertyHeader
+export default PropertyHeader;

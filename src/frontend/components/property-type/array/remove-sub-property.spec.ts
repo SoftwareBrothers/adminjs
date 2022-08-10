@@ -1,17 +1,17 @@
-import { expect } from 'chai'
-import { RecordJSON } from '../../../interfaces'
-import { removeSubProperty } from './remove-sub-property'
+import { expect } from 'chai';
+import { RecordJSON } from '../../../interfaces';
+import { removeSubProperty } from './remove-sub-property';
 
-import factory from '../../spec/factory'
+import factory from '../../spec/factory';
 
 describe('removeSubProperty', () => {
-  let record: RecordJSON
-  let populated1: RecordJSON
-  let populated2: RecordJSON
+  let record: RecordJSON;
+  let populated1: RecordJSON;
+  let populated2: RecordJSON;
 
   beforeEach(async () => {
-    populated1 = await factory.build<RecordJSON>('RecordJSON')
-    populated2 = await factory.build<RecordJSON>('RecordJSON')
+    populated1 = await factory.build<RecordJSON>('RecordJSON');
+    populated2 = await factory.build<RecordJSON>('RecordJSON');
     record = await factory.build<RecordJSON>('RecordJSON', {
       params: {
         'property.0': 'val1',
@@ -29,15 +29,15 @@ describe('removeSubProperty', () => {
         'property.1': populated1,
         'property.2.nested.1': populated2,
       },
-    })
-  })
+    });
+  });
 
   context('remove populated record', () => {
-    let updatedRecord: RecordJSON
+    let updatedRecord: RecordJSON;
 
     beforeEach(() => {
-      updatedRecord = removeSubProperty(record, 'property.1')
-    })
+      updatedRecord = removeSubProperty(record, 'property.1');
+    });
 
     it('removes selected, populated, property from params and adjusts the keys', () => {
       expect(updatedRecord.params).to.deep.equal({
@@ -49,14 +49,14 @@ describe('removeSubProperty', () => {
         'property.3': 'val3',
         'notPopulated.0': 'val1',
         'notPopulated.1': 'val2',
-      })
-    })
+      });
+    });
 
     it('removes populated, record, adjusts the keys and keep it unflatten', () => {
       expect(updatedRecord.populated).to.deep.equal({
         'property.0': null,
         'property.1.nested.1': populated2,
-      })
-    })
-  })
-})
+      });
+    });
+  });
+});

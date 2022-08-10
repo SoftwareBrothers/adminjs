@@ -1,16 +1,16 @@
-import { expect } from 'chai'
-import factory from 'factory-girl'
+import { expect } from 'chai';
+import factory from 'factory-girl';
 
-import '../../../spec/record-json.factory'
-import '../../../spec/action-json.factory'
-import { RecordJSON, ActionJSON } from '../../../../interfaces'
+import '../../../spec/record-json.factory';
+import '../../../spec/action-json.factory';
+import { RecordJSON, ActionJSON } from '../../../../interfaces';
 
-import getBulkActionsFromRecords from './get-bulk-actions-from-records'
+import getBulkActionsFromRecords from './get-bulk-actions-from-records';
 
 describe('getBulkActionsFromRecords', function () {
   context('records with 2 bulk actions', function () {
-    let actions: Array<ActionJSON> = []
-    let records: Array<RecordJSON>
+    let actions: Array<ActionJSON> = [];
+    let records: Array<RecordJSON>;
 
     it('returns array of uniq bulk actions', async function () {
       actions = [
@@ -22,12 +22,12 @@ describe('getBulkActionsFromRecords', function () {
           name: 'bulkAction2',
           actionType: 'bulk',
         }),
-      ]
+      ];
       records = await factory.buildMany<RecordJSON>('RecordJSON', 5, {
         bulkActions: actions,
-      })
+      });
 
-      expect(getBulkActionsFromRecords(records)).to.deep.equal(actions)
-    })
-  })
-})
+      expect(getBulkActionsFromRecords(records)).to.deep.equal(actions);
+    });
+  });
+});

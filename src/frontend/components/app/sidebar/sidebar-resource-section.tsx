@@ -1,9 +1,9 @@
-import React, { FC } from 'react'
-import { Navigation } from '@adminjs/design-system'
-import { useTranslation } from '../../../hooks/use-translation'
-import { ResourceJSON } from '../../../interfaces'
-import allowOverride from '../../../hoc/allow-override'
-import { useNavigationResources } from '../../../hooks'
+import React, { FC } from 'react';
+import { Navigation } from '@adminjs/design-system';
+import { useTranslation } from '../../../hooks/use-translation';
+import { ResourceJSON } from '../../../interfaces';
+import allowOverride from '../../../hoc/allow-override';
+import { useNavigationResources } from '../../../hooks';
 
 /**
  * @alias SidebarResourceSectionProps
@@ -28,21 +28,21 @@ export type SidebarResourceSectionProps = {
  * @name SidebarResourceSection
  */
 const SidebarResourceSectionOriginal: FC<SidebarResourceSectionProps> = ({ resources }) => {
-  const elements = useNavigationResources(resources)
+  const elements = useNavigationResources(resources);
 
-  const { translateLabel } = useTranslation()
+  const { translateLabel } = useTranslation();
 
   return (
     <Navigation
       label={translateLabel('navigation')}
       elements={elements}
     />
-  )
-}
+  );
+};
 
 // Rollup cannot handle type exports well - that is why we need to do this hack with
 // exporting default and named SidebarResourceSection
-const SidebarResourceSection = allowOverride(SidebarResourceSectionOriginal, 'SidebarResourceSection')
+const SidebarResourceSection = allowOverride(SidebarResourceSectionOriginal, 'SidebarResourceSection');
 
-export { SidebarResourceSection }
-export default SidebarResourceSection
+export { SidebarResourceSection };
+export default SidebarResourceSection;

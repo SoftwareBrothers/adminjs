@@ -1,10 +1,12 @@
-import { Action, ActionResponse, RecordActionResponse, BulkActionResponse } from '../../actions/action.interface'
-import PropertyOptions from '../property/property-options.interface'
-import { ListActionResponse } from '../../actions/list/list-action'
-import { CurrentAdmin } from '../../../current-admin.interface'
-import BaseResource from '../../adapters/resource/base-resource'
-import ViewHelpers from '../../utils/view-helpers/view-helpers'
-import { SearchActionResponse } from '../../actions/search/search-action'
+import {
+  Action, ActionResponse, RecordActionResponse, BulkActionResponse,
+} from '../../actions/action.interface';
+import PropertyOptions from '../property/property-options.interface';
+import { ListActionResponse } from '../../actions/list/list-action';
+import { CurrentAdmin } from '../../../current-admin.interface';
+import BaseResource from '../../adapters/resource/base-resource';
+import ViewHelpers from '../../utils/view-helpers/view-helpers';
+import { SearchActionResponse } from '../../actions/search/search-action';
 
 /**
  * @alias HrefContext

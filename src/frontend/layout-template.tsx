@@ -1,11 +1,11 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { combineStyles } from '@adminjs/design-system'
+import { combineStyles } from '@adminjs/design-system';
 
-import ViewHelpers from '../backend/utils/view-helpers/view-helpers'
-import { initializeStore } from './store'
-import AdminJS from '../adminjs'
-import { CurrentAdmin } from '../current-admin.interface'
-import { getFaviconFromBranding } from '../backend/utils/options-parser/options-parser'
+import ViewHelpers from '../backend/utils/view-helpers/view-helpers';
+import { initializeStore } from './store';
+import AdminJS from '../adminjs';
+import { CurrentAdmin } from '../current-admin.interface';
+import { getFaviconFromBranding } from '../backend/utils/options-parser/options-parser';
 
 /**
  * Renders (SSR) html for given location
@@ -22,19 +22,19 @@ const html = async (
   currentAdmin?: CurrentAdmin,
   location = '/',
 ): Promise<string> => {
-  const h = new ViewHelpers({ options: admin.options })
+  const h = new ViewHelpers({ options: admin.options });
 
-  const store = await initializeStore(admin, currentAdmin)
-  const reduxState = store.getState()
+  const store = await initializeStore(admin, currentAdmin);
+  const reduxState = store.getState();
 
-  const { branding, assets } = reduxState
+  const { branding, assets } = reduxState;
 
   const scripts = ((assets && assets.scripts) || [])
-    .map((s) => `<script src="${s}"></script>`)
+    .map((s) => `<script src="${s}"></script>`);
   const styles = ((assets && assets.styles) || [])
-    .map((l) => `<link rel="stylesheet" type="text/css" href="${l}">`)
-  const theme = combineStyles((branding.theme) || {})
-  const faviconTag = getFaviconFromBranding(branding)
+    .map((l) => `<link rel="stylesheet" type="text/css" href="${l}">`);
+  const theme = combineStyles((branding.theme) || {});
+  const faviconTag = getFaviconFromBranding(branding);
 
   return `
     <!DOCTYPE html>
@@ -68,6 +68,6 @@ const html = async (
       ${scripts.join('\n')}
     </body>
     </html>
-  `
-}
-export default html
+  `;
+};
+export default html;

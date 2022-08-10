@@ -1,9 +1,9 @@
 import {
   useTranslation as originalUseTranslation,
-} from 'react-i18next'
-import { TFunction, i18n } from 'i18next'
+} from 'react-i18next';
+import { TFunction, i18n } from 'i18next';
 
-import { TranslateFunctions, createFunctions } from '../../utils/translate-functions.factory'
+import { TranslateFunctions, createFunctions } from '../../utils/translate-functions.factory';
 
 /**
  * Extends {@link TranslateFunctions}. Apart from that it also returns all the properties
@@ -55,14 +55,14 @@ export type UseTranslationResponse = TranslateFunctions & {
  */
 export const useTranslation = (): UseTranslationResponse => {
   // eslint-disable-next-line no-shadow
-  const { i18n, ...rest } = originalUseTranslation()
-  const translateFunctions = createFunctions(i18n)
+  const { i18n, ...rest } = originalUseTranslation();
+  const translateFunctions = createFunctions(i18n);
 
   return {
     ...rest,
     i18n,
     ...translateFunctions,
-  }
-}
+  };
+};
 
-export default useTranslation
+export default useTranslation;

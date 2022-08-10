@@ -1,11 +1,11 @@
-import React from 'react'
-import { AxiosResponse } from 'axios'
+import React from 'react';
+import { AxiosResponse } from 'axios';
 import {
   BulkActionParams,
   ResourceActionParams,
   RecordActionParams, ActionParams,
-} from '../../../backend/utils/view-helpers/view-helpers'
-import { ActionResponse } from '../../../backend/actions/action.interface'
+} from '../../../backend/utils/view-helpers/view-helpers';
+import { ActionResponse } from '../../../backend/actions/action.interface';
 
 export type DifferentActionParams = {
   resourceId: ActionParams['resourceId'];

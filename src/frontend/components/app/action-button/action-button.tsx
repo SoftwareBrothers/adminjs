@@ -2,11 +2,11 @@
 /* eslint-disable no-alert */
 /* eslint-disable no-restricted-globals */
 
-import React, { ReactElement } from 'react'
-import { ActionResponse } from '../../../../backend/actions/action.interface'
+import React, { ReactElement } from 'react';
+import { ActionResponse } from '../../../../backend/actions/action.interface';
 
-import { ActionJSON, buildActionTestId } from '../../../interfaces'
-import { useAction } from '../../../hooks'
+import { ActionJSON, buildActionTestId } from '../../../interfaces';
+import { useAction } from '../../../hooks';
 
 /**
  * @alias ActionButtonProps
@@ -39,33 +39,35 @@ export type ActionButtonProps = {
  * @subcategory Application
  */
 export const ActionButton: React.FC<ActionButtonProps> = (props) => {
-  const { children, action, actionPerformed, resourceId, recordId, recordIds } = props
+  const {
+    children, action, actionPerformed, resourceId, recordId, recordIds,
+  } = props;
 
   const { href, handleClick } = useAction(action, {
     resourceId, recordId, recordIds,
-  }, actionPerformed)
+  }, actionPerformed);
 
   if (!action) {
-    return null
+    return null;
   }
 
-  const firstChild = React.Children.toArray(children)[0]
+  const firstChild = React.Children.toArray(children)[0];
 
   if (!firstChild
     || typeof firstChild === 'string'
     || typeof firstChild === 'number'
     || typeof firstChild === 'boolean') {
-    throw new Error('ActionButton has to have one child')
+    throw new Error('ActionButton has to have one child');
   }
 
   const WrappedElement = React.cloneElement(firstChild as ReactElement<any>, {
     onClick: handleClick,
     'data-testid': buildActionTestId(action),
     href,
-  })
+  });
 
-  return WrappedElement
-}
+  return WrappedElement;
+};
 
 // TODO - remove this hack
-export default ActionButton
+export default ActionButton;

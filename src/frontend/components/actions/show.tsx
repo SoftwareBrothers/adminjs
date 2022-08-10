@@ -1,10 +1,10 @@
-import React from 'react'
-import { DrawerContent } from '@adminjs/design-system'
+import React from 'react';
+import { DrawerContent } from '@adminjs/design-system';
 
-import PropertyType from '../property-type'
-import { ActionProps } from './action.props'
-import ActionHeader from '../app/action-header/action-header'
-import LayoutElementRenderer from './utils/layout-element-renderer'
+import PropertyType from '../property-type';
+import { ActionProps } from './action.props';
+import ActionHeader from '../app/action-header/action-header';
+import LayoutElementRenderer from './utils/layout-element-renderer';
 
 /**
  * @name ShowAction
@@ -14,8 +14,8 @@ import LayoutElementRenderer from './utils/layout-element-renderer'
  * @private
  */
 const Show: React.FC<ActionProps> = (props) => {
-  const { resource, record, action } = props
-  const properties = resource.showProperties
+  const { resource, record, action } = props;
+  const properties = resource.showProperties;
 
   return (
     <DrawerContent>
@@ -39,10 +39,10 @@ const Show: React.FC<ActionProps> = (props) => {
       ))}
 
     </DrawerContent>
-  )
-}
+  );
+};
 
 export {
   Show as default,
   Show,
-}
+};

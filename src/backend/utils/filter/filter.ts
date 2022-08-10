@@ -1,9 +1,9 @@
-import * as flat from 'flat'
-import BaseProperty from '../../adapters/property/base-property'
-import BaseResource from '../../adapters/resource/base-resource'
-import BaseRecord from '../../adapters/record/base-record'
+import * as flat from 'flat';
+import BaseProperty from '../../adapters/property/base-property';
+import BaseResource from '../../adapters/resource/base-resource';
+import BaseRecord from '../../adapters/record/base-record';
 
-export const PARAM_SEPARATOR = '~~'
+export const PARAM_SEPARATOR = '~~';
 
 export type FilterElement = {
   path: string;
@@ -24,9 +24,9 @@ interface ReduceCallback<T> {
  * @private
  */
 export class Filter {
-  public filters: {[key: string]: FilterElement}
+  public filters: {[key: string]: FilterElement};
 
-  private resource: BaseResource
+  private resource: BaseResource;
 
   /**
    * Changes raw nested filters to form Object<path, value>.
@@ -49,25 +49,26 @@ export class Filter {
    * @return  {Object}
    */
   static normalizeKeys(filters): Map<string, any> {
-    return flat.unflatten(flat.flatten(filters), { delimiter: PARAM_SEPARATOR })
+    return flat.unflatten(flat.flatten(filters), { delimiter: PARAM_SEPARATOR });
   }
 
   /**
    * @param   {Object<String,Object | String>}  filters   selected filters
    * @param   {BaseResource}                    resource    resource which is filtered
    */
+  // eslint-disable-next-line default-param-last
   constructor(filters = {}, resource) {
-    this.resource = resource
-    const normalized = Filter.normalizeKeys(filters)
+    this.resource = resource;
+    const normalized = Filter.normalizeKeys(filters);
     this.filters = Object.keys(normalized).reduce((memo, path) => {
       memo[path] = {
         path,
         property: this.resource.property(path),
         value: normalized[path],
-      }
+      };
 
-      return memo
-    }, {})
+      return memo;
+    }, {});
   }
 
   /**
@@ -77,33 +78,34 @@ export class Filter {
    * @returns {Filter.Property | undefined}
    */
   get(key: string): FilterElement | null {
-    return this.filters[key]
+    return this.filters[key];
   }
 
   /**
    * Populates all filtered properties which refers to other resources
    */
   async populate(): Promise<Filter> {
-    const keys = Object.keys(this.filters)
+    const keys = Object.keys(this.filters);
     for (let index = 0; index < keys.length; index += 1) {
-      const key = keys[index]
-      const referenceResource = this.resource.decorate().getPropertyByKey(key)?.reference()
+      const key = keys[index];
+      const referenceResource = this.resource.decorate().getPropertyByKey(key)?.reference();
       if (referenceResource) {
+        // eslint-disable-next-line no-await-in-loop
         this.filters[key].populated = await referenceResource.findOne(
           this.filters[key].value as string,
-        )
+        );
       }
     }
-    return this
+    return this;
   }
 
   reduce<T>(callback: ReduceCallback<T>, initial: T): T {
-    return Object.values(this.filters).reduce(callback, initial || {} as T)
+    return Object.values(this.filters).reduce(callback, initial || {} as T);
   }
 
   isVisible(): boolean {
-    return !!Object.keys(this.filters).length
+    return !!Object.keys(this.filters).length;
   }
 }
 
-export default Filter
+export default Filter;

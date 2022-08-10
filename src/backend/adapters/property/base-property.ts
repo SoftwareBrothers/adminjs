@@ -19,7 +19,7 @@
  */
 
 // Spacer
-const TITLE_COLUMN_NAMES = ['title', 'name', 'subject', 'email']
+const TITLE_COLUMN_NAMES = ['title', 'name', 'subject', 'email'];
 
 export type PropertyType =
   'string' | 'float' | 'number' | 'boolean' |
@@ -40,15 +40,15 @@ type BasePropertyAttrs = {
  * @category Base
  */
 class BaseProperty {
-  private _path: string
+  private _path: string;
 
-  private _type: PropertyType
+  private _type: PropertyType;
 
-  private _isId: boolean
+  private _isId: boolean;
 
-  private _isSortable: boolean
+  private _isSortable: boolean;
 
-  private _position: number
+  private _position: number;
 
   /**
    * @param  {object} options
@@ -67,14 +67,14 @@ class BaseProperty {
     isSortable = true,
     position = 1,
   }: BasePropertyAttrs) {
-    this._path = path
-    this._type = type
-    this._isId = isId
+    this._path = path;
+    this._type = type;
+    this._isId = isId;
     if (!this._path) {
-      throw new Error('you have to give path parameter when creating BaseProperty')
+      throw new Error('you have to give path parameter when creating BaseProperty');
     }
-    this._isSortable = isSortable
-    this._position = position
+    this._isSortable = isSortable;
+    this._position = position;
   }
 
   /**
@@ -82,15 +82,15 @@ class BaseProperty {
    * @return {string} name of the property
    */
   name(): string {
-    return this._path
+    return this._path;
   }
 
   path(): string {
-    return this.name()
+    return this.name();
   }
 
   position(): number {
-    return this._position === undefined ? 1 : this._position
+    return this._position === undefined ? 1 : this._position;
   }
 
   /**
@@ -98,7 +98,7 @@ class BaseProperty {
    * @return {PropertyType}
    */
   type(): PropertyType {
-    return this._type || 'string'
+    return this._type || 'string';
   }
 
   /**
@@ -107,7 +107,7 @@ class BaseProperty {
    * @return {boolean}
    */
   isTitle(): boolean {
-    return TITLE_COLUMN_NAMES.includes(this._path.toLowerCase())
+    return TITLE_COLUMN_NAMES.includes(this._path.toLowerCase());
   }
 
   /**
@@ -116,7 +116,7 @@ class BaseProperty {
    * @return {Boolean}
    */
   isVisible(): boolean {
-    return !this._path || !this._path.match('password')
+    return !this._path || !this._path.match('password');
   }
 
   /**
@@ -125,7 +125,7 @@ class BaseProperty {
    * @return {boolean}
    */
   isEditable(): boolean {
-    return true
+    return true;
   }
 
   /**
@@ -134,7 +134,7 @@ class BaseProperty {
    * @return {boolean}
    */
   isId(): boolean {
-    return !!this._isId
+    return !!this._isId;
   }
 
   /**
@@ -145,7 +145,7 @@ class BaseProperty {
    * reference should be the name of the Resource which it refers to: `Users`
    */
   reference(): string | null {
-    return null
+    return null;
   }
 
   /**
@@ -156,7 +156,7 @@ class BaseProperty {
    *                                  is not an enum.
    */
   availableValues(): Array<string> | null {
-    return null
+    return null;
   }
 
   /**
@@ -165,7 +165,7 @@ class BaseProperty {
    * @return  {boolean}
    */
   isArray(): boolean {
-    return false
+    return false;
   }
 
   /**
@@ -175,7 +175,7 @@ class BaseProperty {
    * @return  {boolean}
    */
   isDraggable(): boolean {
-    return false
+    return false;
   }
 
   /**
@@ -184,7 +184,7 @@ class BaseProperty {
    * @return  {Array<BaseProperty>} sub properties
    */
   subProperties(): Array<BaseProperty> {
-    return []
+    return [];
   }
 
   /**
@@ -193,15 +193,15 @@ class BaseProperty {
    * @return {boolean}
    */
   isSortable(): boolean {
-    return this._isSortable
+    return this._isSortable;
   }
 
   /**
    * Indicates if given property is required
    */
   isRequired(): boolean {
-    return false
+    return false;
   }
 }
 
-export default BaseProperty
+export default BaseProperty;

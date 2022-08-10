@@ -8,9 +8,9 @@ import {
   LinkProps,
   LabelProps,
   IconProps,
-} from '@adminjs/design-system'
-import { PropsWithChildren } from 'react'
-import { CurrentAdmin } from '../../../current-admin.interface'
+} from '@adminjs/design-system';
+import { PropsWithChildren } from 'react';
+import { CurrentAdmin } from '../../../current-admin.interface';
 
 export type LayoutElement =
   string |
@@ -60,14 +60,14 @@ export type ParsedLayoutElement = {
 
 const isProp = (element): boolean => !!element
   && typeof element === 'object'
-  && !Array.isArray(element)
+  && !Array.isArray(element);
 
 const isComponentTag = (layoutElement: LayoutElement): boolean => (
   Array.isArray(layoutElement)
     && typeof layoutElement[0] === 'string'
     && layoutElement[0].startsWith('@')
     && isProp(layoutElement[1])
-)
+);
 
 const hasOnlyStringsProperties = function (
   layoutElement: LayoutElement,
@@ -75,77 +75,77 @@ const hasOnlyStringsProperties = function (
   return Array.isArray(layoutElement)
     && layoutElement.length > 0
     && !isComponentTag(layoutElement)
-    && !(layoutElement as Array<any>).find((el) => (typeof el !== 'string'))
-}
+    && !(layoutElement as Array<any>).find((el) => (typeof el !== 'string'));
+};
 
 const hasArrayOfLayoutElements = function (
   layoutElement: LayoutElement,
 ): layoutElement is [LayoutElement] {
   return Array.isArray(layoutElement)
     && layoutElement.length > 0
-    && !(layoutElement as Array<any>).find((element) => !Array.isArray(element))
-}
+    && !(layoutElement as Array<any>).find((element) => !Array.isArray(element));
+};
 
 const hasFirstStringProperty = function (layoutElement: LayoutElement): boolean {
   return Array.isArray(layoutElement)
     && typeof layoutElement[0] === 'string'
-    && !isComponentTag(layoutElement)
-}
+    && !isComponentTag(layoutElement);
+};
 
 const getPropertyNames = (layoutElement: LayoutElement): Array<string> => {
-  if (typeof layoutElement === 'string') { return [layoutElement] }
+  if (typeof layoutElement === 'string') { return [layoutElement]; }
 
   if (hasOnlyStringsProperties(layoutElement)) {
-    return layoutElement
+    return layoutElement;
   }
   if (hasFirstStringProperty(layoutElement)) {
-    return [layoutElement[0]] as Array<string>
+    return [layoutElement[0]] as Array<string>;
   }
-  return []
-}
+  return [];
+};
 
 const getInnerLayoutElements = (layoutElement: LayoutElement): Array<LayoutElement> => {
   // only cases like [{}, layoutElement] (whatever follows props)
   if (Array.isArray(layoutElement)
     && isProp(layoutElement[0])) {
-    return layoutElement[1] as Array<LayoutElement>
+    return layoutElement[1] as Array<LayoutElement>;
   }
   if (hasArrayOfLayoutElements(layoutElement)) {
-    return layoutElement
+    return layoutElement;
   }
-  return []
-}
+  return [];
+};
 
 const getComponent = (layoutElement: LayoutElement): string => {
   if (isComponentTag(layoutElement)) {
-    return (layoutElement[0] as string).slice(1)
+    return (layoutElement[0] as string).slice(1);
   }
-  return 'Box'
-}
+  return 'Box';
+};
 
 const getProps = (layoutElement: LayoutElement): BoxProps => {
   if (Array.isArray(layoutElement) && layoutElement.length) {
-    const boxProps = (layoutElement as Array<any>).find(isProp)
-    return boxProps as unknown as BoxProps || {}
+    const boxProps = (layoutElement as Array<any>).find(isProp);
+    return boxProps as unknown as BoxProps || {};
   }
-  return {}
-}
+  return {};
+};
 
 export const layoutElementParser = (layoutElement: LayoutElement): ParsedLayoutElement => {
-  const props = getProps(layoutElement)
-  const innerLayoutElements = getInnerLayoutElements(layoutElement)
-  const properties = getPropertyNames(layoutElement)
-  const component = getComponent(layoutElement)
+  const props = getProps(layoutElement);
+  const innerLayoutElements = getInnerLayoutElements(layoutElement);
+  const properties = getPropertyNames(layoutElement);
+  const component = getComponent(layoutElement);
 
   return {
     props,
     layoutElements: innerLayoutElements.map((el) => layoutElementParser(el)),
     properties,
     component,
-  }
-}
+  };
+};
 
-export default layoutElementParser
+export default layoutElementParser;
 
 /**
  * @load layout-element.doc.md

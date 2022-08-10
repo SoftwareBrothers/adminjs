@@ -1,11 +1,11 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
-const { babel } = require('@rollup/plugin-babel')
-const commonjs = require('@rollup/plugin-commonjs')
-const { nodeResolve: resolve } = require('@rollup/plugin-node-resolve')
-const replace = require('@rollup/plugin-replace')
-const json = require('@rollup/plugin-json')
-const { terser } = require('rollup-plugin-terser')
+const { babel } = require('@rollup/plugin-babel');
+const commonjs = require('@rollup/plugin-commonjs');
+const { nodeResolve: resolve } = require('@rollup/plugin-node-resolve');
+const replace = require('@rollup/plugin-replace');
+const json = require('@rollup/plugin-json');
+const { terser } = require('rollup-plugin-terser');
 
 const external = [
   'lodash',
@@ -30,7 +30,7 @@ const external = [
   'react-i18next',
   'punycode',
   'uuid',
-]
+];
 
 const globals = {
   lodash: 'Lodash',
@@ -54,9 +54,9 @@ const globals = {
   i18next: 'i18n',
   'react-i18next': 'ReactI18Next',
   punycode: 'punycode',
-}
+};
 
-const extensions = ['.mjs', '.js', '.jsx', '.json', '.ts', '.tsx', '.scss']
+const extensions = ['.mjs', '.js', '.jsx', '.json', '.ts', '.tsx', '.scss'];
 
 const plugins = ({ babelConfig = {}, commonJSConfig = {}, minify = false } = {}) => {
   const pluginStack = [
@@ -89,15 +89,15 @@ const plugins = ({ babelConfig = {}, commonJSConfig = {}, minify = false } = {})
       ],
       ...babelConfig,
     }),
-  ]
+  ];
   if (minify) {
-    pluginStack.push(terser())
+    pluginStack.push(terser());
   }
-  return pluginStack
-}
+  return pluginStack;
+};
 
 module.exports = {
   external,
   globals,
   plugins,
-}
+};

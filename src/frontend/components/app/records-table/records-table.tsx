@@ -1,13 +1,13 @@
-import React from 'react'
-import { Table, TableBody, Loader } from '@adminjs/design-system'
+import React from 'react';
+import { Table, TableBody, Loader } from '@adminjs/design-system';
 
-import RecordInList from './record-in-list'
-import RecordsTableHeader from './records-table-header'
-import NoRecords from './no-records'
+import RecordInList from './record-in-list';
+import RecordsTableHeader from './records-table-header';
+import NoRecords from './no-records';
 
-import { RecordJSON, ResourceJSON } from '../../../interfaces'
-import SelectedRecords from './selected-records'
-import { ActionResponse } from '../../../../backend/actions/action.interface'
+import { RecordJSON, ResourceJSON } from '../../../interfaces';
+import SelectedRecords from './selected-records';
+import { ActionResponse } from '../../../../backend/actions/action.interface';
 
 /**
  * @alias RecordsTableProps
@@ -62,19 +62,19 @@ export const RecordsTable: React.FC<RecordsTableProps> = (props) => {
     direction, isLoading,
     onSelect, selectedRecords,
     onSelectAll,
-  } = props
+  } = props;
   if (!records.length) {
     if (isLoading) {
-      return (<Loader />)
+      return (<Loader />);
     }
-    return (<NoRecords resource={resource} />)
+    return (<NoRecords resource={resource} />);
   }
 
   const selectedAll = selectedRecords && !!records.find((record) => (
     selectedRecords.find((selected) => selected.id === record.id)
-  ))
+  ));
 
-  const recordsHaveBulkAction = !!records.find((record) => record.bulkActions.length)
+  const recordsHaveBulkAction = !!records.find((record) => record.bulkActions.length);
 
   return (
     <Table>
@@ -106,7 +106,7 @@ export const RecordsTable: React.FC<RecordsTableProps> = (props) => {
         ))}
       </TableBody>
     </Table>
-  )
-}
+  );
+};
 
-export default RecordsTable
+export default RecordsTable;

@@ -1,4 +1,4 @@
-export const SET_NOTICE_PROGRESS = 'SET_NOTICE_PROGRESS'
+export const SET_NOTICE_PROGRESS = 'SET_NOTICE_PROGRESS';
 
 export type SetNoticeProgress = {
   noticeId: string;
@@ -13,4 +13,4 @@ export type SetNoticeProgressResponse = {
 export const setNoticeProgress = (data: SetNoticeProgress): SetNoticeProgressResponse => ({
   type: SET_NOTICE_PROGRESS,
   data,
-})
+});

@@ -1,23 +1,25 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
-import React, { useState, memo, useEffect } from 'react'
-import { Input, FormGroup, InputGroup, FormMessage, Button, Icon } from '@adminjs/design-system'
+import React, { useState, memo, useEffect } from 'react';
+import {
+  Input, FormGroup, InputGroup, FormMessage, Button, Icon,
+} from '@adminjs/design-system';
 
-import { EditPropertyProps } from '../base-property-props'
-import { recordPropertyIsEqual } from '../record-property-is-equal'
-import { PropertyLabel } from '../utils/property-label'
+import { EditPropertyProps } from '../base-property-props';
+import { recordPropertyIsEqual } from '../record-property-is-equal';
+import { PropertyLabel } from '../utils/property-label';
 
 const Edit: React.FC<EditPropertyProps> = (props) => {
-  const { property, record, onChange } = props
-  const propValue = record.params[property.path]
-  const [value, setValue] = useState(propValue)
-  const error = record.errors && record.errors[property.path]
-  const [isInput, setIsInput] = useState(false)
+  const { property, record, onChange } = props;
+  const propValue = record.params[property.path];
+  const [value, setValue] = useState(propValue);
+  const error = record.errors && record.errors[property.path];
+  const [isInput, setIsInput] = useState(false);
 
   useEffect(() => {
     if (value !== propValue) {
-      setValue(propValue)
+      setValue(propValue);
     }
-  }, [propValue])
+  }, [propValue]);
 
   return (
     <FormGroup error={!!error}>
@@ -46,7 +48,7 @@ const Edit: React.FC<EditPropertyProps> = (props) => {
       </InputGroup>
       <FormMessage>{error && error.message}</FormMessage>
     </FormGroup>
-  )
-}
+  );
+};
 
-export default memo(Edit, recordPropertyIsEqual)
+export default memo(Edit, recordPropertyIsEqual);

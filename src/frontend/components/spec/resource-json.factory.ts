@@ -1,6 +1,6 @@
-import factory from 'factory-girl'
-import './property-json.factory'
-import { PropertyJSON, ResourceJSON } from '../../interfaces'
+import factory from 'factory-girl';
+import './property-json.factory';
+import { PropertyJSON, ResourceJSON } from '../../interfaces';
 
 factory.define<ResourceJSON>('ResourceJSON', Object, {
   id: factory.sequence('ResourceJSON.id', (i) => `resource${i}`),
@@ -19,7 +19,7 @@ factory.define<ResourceJSON>('ResourceJSON', Object, {
   showProperties: [],
   filterProperties: [],
   editProperties: [],
-})
+});
 
 factory.extend<ResourceJSON>('ResourceJSON', 'ResourceJSON.full', {}, {
   afterBuild: async (model) => {
@@ -29,19 +29,21 @@ factory.extend<ResourceJSON>('ResourceJSON', 'ResourceJSON.full', {}, {
       await factory.build<PropertyJSON>('PropertyJSON', { name: 'content', type: 'string' }),
       await factory.build<PropertyJSON>('PropertyJSON', { name: 'longerData', type: 'textarea' }),
       // await factory.build<PropertyJSON>('PropertyJSON', { name: 'publishedAt', type: 'date' }),
-      await factory.build<PropertyJSON>('PropertyJSON', { name: 'gender',
+      await factory.build<PropertyJSON>('PropertyJSON', {
+        name: 'gender',
         availableValues: [{
           label: 'male', value: 'MALE',
         }, {
           label: 'female', value: 'FEMALE',
-        }] }),
-    ]
+        }],
+      }),
+    ];
     return {
       ...model,
       listProperties: properties,
       showProperties: properties,
       editProperties: properties,
       filterProperties: properties,
-    }
+    };
   },
-})
+});

@@ -1,4 +1,4 @@
-import { factory } from 'factory-girl'
+import { factory } from 'factory-girl';
 
 factory.define('property', Object, {
   isId: false,
@@ -8,4 +8,4 @@ factory.define('property', Object, {
   name: factory.sequence('property.name', (n) => `someProperty${n}`),
   position: factory.sequence('property.position', (n) => n),
   type: 'string',
-})
+});

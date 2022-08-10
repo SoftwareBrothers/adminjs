@@ -12,35 +12,19 @@ module.exports = {
     sourceType: 'module',
   },
   rules: {
-    'react/jsx-filename-extension': 'off',
-    '@typescript-eslint/no-explicit-any': 'off',
     indent: ['error', 2],
-    '@typescript-eslint/explicit-function-return-type': 'off',
     '@typescript-eslint/no-non-null-assertion': 'off',
-    '@typescript-eslint/ban-ts-ignore': 'off',
     'import/prefer-default-export': 'off',
     'linebreak-style': ['error', 'unix'],
     quotes: ['error', 'single'],
-    semi: ['error', 'never'],
-    'import/no-unresolved': 'off',
-    'func-names': 'off',
     'no-underscore-dangle': 'off',
-    'guard-for-in': 'off',
-    'no-restricted-syntax': 'off',
-    'no-await-in-loop': 'off',
-    'object-curly-newline': 'off',
-    'import/extensions': 'off',
-    'mocha/no-hooks-for-single-case': 'off',
+    'import/extensions': ['off', { json: 'always' }],
     'no-param-reassign': 'off',
-    'default-param-last': 'off',
     'no-use-before-define': 'off',
     'no-restricted-exports': 'off',
-    'react/require-default-props': 'off',
-    'react/jsx-props-no-spreading': 'off',
-    'react/function-component-definition': 'off',
     'max-classes-per-file': 'off',
-    '@typescript-eslint/ban-ts-comment': 'off',
-    'import/no-import-module-exports': 'off',
+    'max-len': ['error', 120],
+    '@typescript-eslint/no-extra-semi': 'off',
   },
   ignorePatterns: [
     '*/build/**/*',
@@ -76,7 +60,10 @@ module.exports = {
       files: ['*.tsx'],
       rules: {
         'react/prop-types': 'off',
+        'react/require-default-props': 'off',
         'react/function-component-definition': 'off',
+        'react/jsx-filename-extension': ['error', { extensions: ['.jsx', '.tsx'] }],
+        'react/jsx-props-no-spreading': ['error', { custom: 'ignore' }],
       },
     },
     {
@@ -86,7 +73,20 @@ module.exports = {
         'spaced-comment': 'off',
       },
     },
+    {
+      files: ['src/locale/*.ts'],
+      rules: {
+        'max-len': 'off',
+      },
+    },
   ],
+  settings: {
+    'import/resolver': {
+      node: {
+        extensions: ['.js', '.jsx', '.ts', '.tsx'],
+      },
+    },
+  },
   globals: {
     expect: true,
     factory: true,
@@ -100,4 +100,4 @@ module.exports = {
     cy: true,
     Cypress: true,
   },
-}
+};

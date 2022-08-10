@@ -1,10 +1,10 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
-import { Label } from '@adminjs/design-system'
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { Label } from '@adminjs/design-system';
 
-import ViewHelpers from '../../../../backend/utils/view-helpers/view-helpers'
-import { EditPropertyProps, BasePropertyProps } from '../base-property-props'
-import { convertToSubProperty } from './convert-to-sub-property'
+import ViewHelpers from '../../../../backend/utils/view-helpers/view-helpers';
+import { EditPropertyProps, BasePropertyProps } from '../base-property-props';
+import { convertToSubProperty } from './convert-to-sub-property';
 
 type ItemComponentProps = BasePropertyProps;
 
@@ -13,12 +13,14 @@ interface Props {
 }
 
 const List: React.FC<Props & EditPropertyProps> = (props) => {
-  const { property, record, resource, ItemComponent } = props
+  const {
+    property, record, resource, ItemComponent,
+  } = props;
 
   const renderItems = () => (
     <>
       {property.subProperties.filter((subProperty) => !subProperty.isId).map((subProperty) => {
-        const subPropertyWithPath = convertToSubProperty(property, subProperty)
+        const subPropertyWithPath = convertToSubProperty(property, subProperty);
         return (
           <div key={subPropertyWithPath.path}>
             <Label inline>{`${subProperty.label}: `}</Label>
@@ -27,24 +29,24 @@ const List: React.FC<Props & EditPropertyProps> = (props) => {
               property={subPropertyWithPath}
             />
           </div>
-        )
+        );
       })}
     </>
-  )
+  );
 
-  const showAction = record.recordActions.find((a) => a.name === 'show')
+  const showAction = record.recordActions.find((a) => a.name === 'show');
 
   if (resource.titleProperty.propertyPath === property.propertyPath && showAction) {
-    const h = new ViewHelpers()
+    const h = new ViewHelpers();
     const href = h.recordActionUrl({
       resourceId: resource.id, recordId: record.id, actionName: 'show',
-    })
+    });
     return (
       <Link to={href}>{renderItems()}</Link>
-    )
+    );
   }
 
-  return renderItems()
-}
+  return renderItems();
+};
 
-export default List
+export default List;

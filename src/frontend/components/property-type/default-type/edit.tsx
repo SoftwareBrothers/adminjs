@@ -1,16 +1,20 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
-import React, { FC, useState, memo, useEffect } from 'react'
-import { Input, FormMessage, FormGroup, Select } from '@adminjs/design-system'
+import React, {
+  FC, useState, memo, useEffect,
+} from 'react';
+import {
+  Input, FormMessage, FormGroup, Select,
+} from '@adminjs/design-system';
 
-import { EditPropertyProps } from '../base-property-props'
-import { recordPropertyIsEqual } from '../record-property-is-equal'
-import { PropertyLabel } from '../utils/property-label'
+import { EditPropertyProps } from '../base-property-props';
+import { recordPropertyIsEqual } from '../record-property-is-equal';
+import { PropertyLabel } from '../utils/property-label';
 
 type CombinedProps = EditPropertyProps
 
 const Edit: FC<CombinedProps> = (props) => {
-  const { property, record } = props
-  const error = record.errors?.[property.path]
+  const { property, record } = props;
+  const error = record.errors?.[property.path];
 
   return (
     <FormGroup error={Boolean(error)}>
@@ -18,16 +22,16 @@ const Edit: FC<CombinedProps> = (props) => {
       {property.availableValues ? <SelectEdit {...props} /> : <TextEdit {...props} />}
       <FormMessage>{error && error.message}</FormMessage>
     </FormGroup>
-  )
-}
+  );
+};
 
 const SelectEdit: FC<CombinedProps> = (props) => {
-  const { record, property, onChange } = props
+  const { record, property, onChange } = props;
   if (!property.availableValues) {
-    return null
+    return null;
   }
-  const propValue = record.params?.[property.path] ?? ''
-  const selected = property.availableValues.find((av) => av.value === propValue)
+  const propValue = record.params?.[property.path] ?? '';
+  const selected = property.availableValues.find((av) => av.value === propValue);
 
   return (
     <Select
@@ -37,19 +41,19 @@ const SelectEdit: FC<CombinedProps> = (props) => {
       isDisabled={property.isDisabled}
       {...property.props}
     />
-  )
-}
+  );
+};
 
 const TextEdit: FC<CombinedProps> = (props) => {
-  const { property, record, onChange } = props
-  const propValue = record.params?.[property.path] ?? ''
-  const [value, setValue] = useState(propValue)
+  const { property, record, onChange } = props;
+  const propValue = record.params?.[property.path] ?? '';
+  const [value, setValue] = useState(propValue);
 
   useEffect(() => {
     if (value !== propValue) {
-      setValue(propValue)
+      setValue(propValue);
     }
-  }, [propValue])
+  }, [propValue]);
 
   return (
     <Input
@@ -64,7 +68,7 @@ const TextEdit: FC<CombinedProps> = (props) => {
       disabled={property.isDisabled}
       {...property.props}
     />
-  )
-}
+  );
+};
 
-export default memo(Edit, recordPropertyIsEqual)
+export default memo(Edit, recordPropertyIsEqual);

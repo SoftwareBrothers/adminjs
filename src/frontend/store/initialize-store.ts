@@ -1,5 +1,5 @@
-import { Store } from 'redux'
-import createStore, { ReduxState } from './store'
+import { Store } from 'redux';
+import createStore, { ReduxState } from './store';
 import {
   initializeLocale,
   initializeResources,
@@ -10,56 +10,58 @@ import {
   initializePages,
   setCurrentAdmin,
   initializeVersions,
-} from './actions'
+} from './actions';
 
-import AdminJS from '../../adminjs'
-import { CurrentAdmin } from '../../current-admin.interface'
-import pagesToStore from './pages-to-store'
-import { getBranding, getAssets } from '../../backend/utils/options-parser/options-parser'
+import AdminJS from '../../adminjs';
+import { CurrentAdmin } from '../../current-admin.interface';
+import pagesToStore from './pages-to-store';
+import { getBranding, getAssets } from '../../backend/utils/options-parser/options-parser';
 
 export const initializeStore = async (
   admin: AdminJS,
   currentAdmin?: CurrentAdmin,
 ): Promise<Store<ReduxState>> => {
-  const store: Store<ReduxState> = createStore()
-  const AdminClass: typeof AdminJS = admin.constructor as typeof AdminJS
-  const adminVersion = AdminClass.VERSION
+  const store: Store<ReduxState> = createStore();
+  const AdminClass: typeof AdminJS = admin.constructor as typeof AdminJS;
+  const adminVersion = AdminClass.VERSION;
 
-  store.dispatch(initializeLocale(admin.locale))
+  store.dispatch(initializeLocale(admin.locale));
 
   store.dispatch(initializeResources(
     admin.resources.map((resource) => {
       try {
-        return resource.decorate().toJSON(currentAdmin)
+        return resource.decorate().toJSON(currentAdmin);
       } catch (e) {
         // eslint-disable-next-line no-console
-        console.log('error', resource._decorated)
-        throw e
+        console.log('error', resource._decorated);
+        throw e;
       }
     }),
-  ))
+  ));
 
-  const branding = await getBranding(admin, currentAdmin)
-  const assets = await getAssets(admin, currentAdmin)
+  const branding = await getBranding(admin, currentAdmin);
+  const assets = await getAssets(admin, currentAdmin);
 
-  store.dispatch(initializeBranding(branding || {}))
-  store.dispatch(initializeAssets(assets || {}))
+  store.dispatch(initializeBranding(branding || {}));
+  store.dispatch(initializeAssets(assets || {}));
 
   const {
     loginPath, logoutPath, rootPath, dashboard, pages, assetsCDN,
-  } = admin.options
+  } = admin.options;
 
-  const pagesArray = pagesToStore(pages)
+  const pagesArray = pagesToStore(pages);
 
-  store.dispatch(initializePages(pagesArray))
-  store.dispatch(initializePaths({ loginPath, logoutPath, rootPath, assetsCDN }))
-  store.dispatch(setCurrentAdmin(currentAdmin))
-  store.dispatch(initializeDashboard(dashboard))
+  store.dispatch(initializePages(pagesArray));
+  store.dispatch(initializePaths({
+    loginPath, logoutPath, rootPath, assetsCDN,
+  }));
+  store.dispatch(setCurrentAdmin(currentAdmin));
+  store.dispatch(initializeDashboard(dashboard));
   store.dispatch(initializeVersions({
     app: admin.options.version && admin.options.version.app,
     admin: admin.options.version && admin.options.version.admin ? adminVersion : undefined,
-  }))
-  return store
-}
+  }));
+  return store;
+};
 
-export default initializeStore
+export default initializeStore;

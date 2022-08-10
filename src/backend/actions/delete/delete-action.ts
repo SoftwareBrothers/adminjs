@@ -1,6 +1,6 @@
-import { Action, RecordActionResponse } from '../action.interface'
-import NotFoundError from '../../utils/errors/not-found-error'
-import ValidationError from '../../utils/errors/validation-error'
+import { Action, RecordActionResponse } from '../action.interface';
+import NotFoundError from '../../utils/errors/not-found-error';
+import ValidationError from '../../utils/errors/validation-error';
 
 /**
  * @implements Action
@@ -29,27 +29,29 @@ export const DeleteAction: Action<RecordActionResponse> = {
    * @memberof module:DeleteAction
    */
   handler: async (request, response, data) => {
-    const { record, resource, currentAdmin, h, translateMessage } = data
+    const {
+      record, resource, currentAdmin, h, translateMessage,
+    } = data;
     if (!request.params.recordId || !record) {
       throw new NotFoundError([
         'You have to pass "recordId" to Delete Action',
-      ].join('\n'), 'Action#handler')
+      ].join('\n'), 'Action#handler');
     }
     try {
-      await resource.delete(request.params.recordId)
+      await resource.delete(request.params.recordId);
     } catch (error) {
       if (error instanceof ValidationError) {
         const baseMessage = error.baseError?.message
-          || translateMessage('thereWereValidationErrors', resource.id())
+          || translateMessage('thereWereValidationErrors', resource.id());
         return {
           record: record.toJSON(currentAdmin),
           notice: {
             message: baseMessage,
             type: 'error',
           },
-        }
+        };
       }
-      throw error
+      throw error;
     }
     return {
       record: record.toJSON(currentAdmin),
@@ -58,8 +60,8 @@ export const DeleteAction: Action<RecordActionResponse> = {
         message: translateMessage('successfullyDeleted', resource.id()),
         type: 'success',
       },
-    }
+    };
   },
-}
+};
 
-export default DeleteAction
+export default DeleteAction;

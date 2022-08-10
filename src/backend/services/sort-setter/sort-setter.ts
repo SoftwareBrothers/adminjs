@@ -1,7 +1,7 @@
-import ConfigurationError from '../../utils/errors/configuration-error'
-import { ResourceOptions } from '../../decorators/resource/resource-options.interface'
+import ConfigurationError from '../../utils/errors/configuration-error';
+import { ResourceOptions } from '../../decorators/resource/resource-options.interface';
 
-const DEFAULT_DIRECTION = 'asc'
+const DEFAULT_DIRECTION = 'asc';
 
 type Sort = {
   direction: 'asc' | 'desc';
@@ -21,30 +21,31 @@ type Sort = {
  * @return {Sort}
  */
 const sortSetter = (
+  // eslint-disable-next-line default-param-last
   { direction, sortBy }: {direction?: 'asc' | 'desc'; sortBy?: string} = {},
   firstPropertyName: string,
   resourceOptions: ResourceOptions = {},
 ): Sort => {
-  const options = resourceOptions.sort || {} as Sort
+  const options = resourceOptions.sort || {} as Sort;
   if (resourceOptions
       && resourceOptions.sort
       && resourceOptions.sort.direction
       && !['asc', 'desc'].includes(resourceOptions.sort.direction)) {
     throw new ConfigurationError(`
     Sort direction should be either "asc" or "desc",
-    "${resourceOptions.sort.direction} was given"`, 'global.html#ResourceOptions')
+    "${resourceOptions.sort.direction} was given"`, 'global.html#ResourceOptions');
   }
-  const computedDirection = direction || options.direction || DEFAULT_DIRECTION
+  const computedDirection = direction || options.direction || DEFAULT_DIRECTION;
   const params = {
     direction: computedDirection === 'asc' ? 'asc' : 'desc' as 'asc' | 'desc',
     sortBy: sortBy || options.sortBy || firstPropertyName,
-  }
+  };
 
-  return params
-}
+  return params;
+};
 
-sortSetter.DEFAULT_DIRECTION = DEFAULT_DIRECTION
+sortSetter.DEFAULT_DIRECTION = DEFAULT_DIRECTION;
 
-export { DEFAULT_DIRECTION }
+export { DEFAULT_DIRECTION };
 
-export default sortSetter
+export default sortSetter;

@@ -1,9 +1,9 @@
-import React from 'react'
-import styled from 'styled-components'
-import { cssClass, Text, Box } from '@adminjs/design-system'
+import React from 'react';
+import styled from 'styled-components';
+import { cssClass, Text, Box } from '@adminjs/design-system';
 
-import { VersionProps } from '../../../adminjs-options.interface'
-import { useTranslation } from '../../hooks'
+import { VersionProps } from '../../../adminjs-options.interface';
+import { useTranslation } from '../../hooks';
 
 export type Props = {
   versions: VersionProps;
@@ -11,18 +11,18 @@ export type Props = {
 
 const VersionItem = styled(Text)`
   padding: 12px 24px 12px 0;
-`
+`;
 
 VersionItem.defaultProps = {
   display: ['none', 'block'],
   color: 'grey100',
-}
+};
 
 export const Version: React.FC<Props> = (props) => {
-  const { versions } = props
-  const { admin, app } = versions
+  const { versions } = props;
+  const { admin, app } = versions;
 
-  const { translateLabel } = useTranslation()
+  const { translateLabel } = useTranslation();
 
   return (
     <Box flex flexGrow={1} py="default" px="xxl" className={cssClass('Version')}>
@@ -37,7 +37,7 @@ export const Version: React.FC<Props> = (props) => {
         </VersionItem>
       )}
     </Box>
-  )
-}
+  );
+};
 
-export default Version
+export default Version;

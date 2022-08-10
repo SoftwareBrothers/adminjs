@@ -1,7 +1,7 @@
-import React from 'react'
-import styled, { createGlobalStyle } from 'styled-components'
+import React from 'react';
+import styled, { createGlobalStyle } from 'styled-components';
 
-import { useSelector } from 'react-redux'
+import { useSelector } from 'react-redux';
 import {
   Box,
   H5,
@@ -15,9 +15,9 @@ import {
   MessageBox,
   MadeWithLove,
   themeGet,
-} from '@adminjs/design-system'
-import { useTranslation } from '../../hooks'
-import { ReduxState } from '../../store/store'
+} from '@adminjs/design-system';
+import { useTranslation } from '../../hooks';
+import { ReduxState } from '../../store/store';
 
 const GlobalStyle = createGlobalStyle`
   html, body, #app {
@@ -26,19 +26,19 @@ const GlobalStyle = createGlobalStyle`
     margin: 0;
     padding: 0;
   }
-`
+`;
 
 const Wrapper = styled(Box)`
   align-items: center;
   justify-content: center;
   flex-direction: column;
   height: 100%;
-`
+`;
 
 const StyledLogo = styled.img`
   max-width: 200px;
   margin: ${themeGet('space', 'md')} 0;
-`
+`;
 
 export type LoginProps = {
   message?: string;
@@ -46,9 +46,11 @@ export type LoginProps = {
 }
 
 export const Login: React.FC<LoginProps> = (props) => {
-  const { action, message } = props
-  const { translateLabel, translateButton, translateProperty, translateMessage } = useTranslation()
-  const branding = useSelector((state: ReduxState) => state.branding)
+  const { action, message } = props;
+  const {
+    translateLabel, translateButton, translateProperty, translateMessage,
+  } = useTranslation();
+  const branding = useSelector((state: ReduxState) => state.branding);
 
   return (
     <>
@@ -126,7 +128,7 @@ export const Login: React.FC<LoginProps> = (props) => {
         {branding.withMadeWithLove ? (<Box mt="xxl"><MadeWithLove /></Box>) : null}
       </Wrapper>
     </>
-  )
-}
+  );
+};
 
-export default Login
+export default Login;

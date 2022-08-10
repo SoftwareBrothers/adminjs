@@ -85,9 +85,9 @@ const translations = {
     needMoreSolutions_subtitle: 'Estamos aqui para te entregar um belo desenho de UX/UI e software feito sob medida baseado (não apenas) no AdminJS',
     invalidCredentials: 'Nome de usuário e/ou senha incorretos',
   },
-}
+};
 
 export default {
   language: 'pt-BR',
   translations,
-}
+};

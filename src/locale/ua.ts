@@ -88,9 +88,9 @@ const translations = {
     needMoreSolutions_subtitle: 'Ми тут, щоб допомогти Вам з UX/UI дизайном та розробленням програмного забезпечення на основі (та не тільки) AdminJS',
     invalidCredentials: 'Неправильна адреса електронної пошти та/або пароль',
   },
-}
+};
 
 export default {
   language: 'ua',
   translations,
-}
+};

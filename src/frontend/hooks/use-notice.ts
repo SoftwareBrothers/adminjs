@@ -1,6 +1,6 @@
-import { useDispatch } from 'react-redux'
-import { addNotice } from '../store/actions/add-notice'
-import { NoticeMessage } from '../hoc/with-notice'
+import { useDispatch } from 'react-redux';
+import { addNotice } from '../store/actions/add-notice';
+import { NoticeMessage } from '../hoc/with-notice';
 
 /**
  * @memberof useNotice
@@ -29,8 +29,8 @@ export type AddNotice = (notice: NoticeMessage) => any;
  * @hideconstructor
  */
 export const useNotice = (): AddNotice => {
-  const dispatch = useDispatch()
-  return (notice): any => dispatch(addNotice(notice))
-}
+  const dispatch = useDispatch();
+  return (notice): any => dispatch(addNotice(notice));
+};
 
-export default useNotice
+export default useNotice;

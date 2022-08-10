@@ -1,5 +1,5 @@
-import { flat } from '../../../../utils'
-import { RecordJSON } from '../../../interfaces'
+import { flat } from '../../../../utils';
+import { RecordJSON } from '../../../interfaces';
 
 /**
  * Removes selected array item from given record. It performs following tasks:
@@ -26,18 +26,18 @@ export const removeSubProperty = (record: RecordJSON, subPropertyPath: string): 
       [propertyKey]: propertyKey,
     }),
     {},
-  )
+  );
 
-  const newPopulatedKeyMap = flat.removePath(populatedKeyMap, subPropertyPath)
+  const newPopulatedKeyMap = flat.removePath(populatedKeyMap, subPropertyPath);
   const newPopulated = Object.entries(newPopulatedKeyMap)
     .reduce((memo, [newPropertyKey, oldPropertyKey]) => ({
       ...memo,
       [newPropertyKey]: oldPropertyKey && record.populated[oldPropertyKey?.toString()],
-    }), {})
+    }), {});
 
   return {
     ...record,
     params: flat.removePath(record.params, subPropertyPath),
     populated: newPopulated,
-  }
-}
+  };
+};

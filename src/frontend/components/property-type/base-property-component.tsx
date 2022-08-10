@@ -1,32 +1,32 @@
-import React, { useMemo } from 'react'
-import { ReactComponentLike } from 'prop-types'
-import { Box } from '@adminjs/design-system'
+import React, { useMemo } from 'react';
+import { ReactComponentLike } from 'prop-types';
+import { Box } from '@adminjs/design-system';
 
-import ErrorBoundary from '../app/error-boundary'
+import ErrorBoundary from '../app/error-boundary';
 
-import * as ArrayType from './array'
-import * as MixedType from './mixed'
+import * as ArrayType from './array';
+import * as MixedType from './mixed';
 
-import * as defaultType from './default-type'
-import * as boolean from './boolean'
-import * as datetime from './datetime'
-import * as richtext from './richtext'
-import * as reference from './reference'
-import * as textarea from './textarea'
-import * as password from './password'
-import * as currency from './currency'
-import * as phone from './phone'
-import { BasePropertyComponentProps } from './base-property-props'
-import { PropertyType } from '../../../backend/adapters/property/base-property'
-import { PropertyJSON } from '../../interfaces'
+import * as defaultType from './default-type';
+import * as boolean from './boolean';
+import * as datetime from './datetime';
+import * as richtext from './richtext';
+import * as reference from './reference';
+import * as textarea from './textarea';
+import * as password from './password';
+import * as currency from './currency';
+import * as phone from './phone';
+import { BasePropertyComponentProps } from './base-property-props';
+import { PropertyType } from '../../../backend/adapters/property/base-property';
+import { PropertyJSON } from '../../interfaces';
 
-let globalAny: any = {}
+let globalAny: any = {};
 
 try {
-  globalAny = window
+  globalAny = window;
 } catch (error) {
   if (error.message !== 'window is not defined') {
-    throw error
+    throw error;
   }
 }
 
@@ -44,7 +44,7 @@ const types: Record<PropertyType, any> = {
   mixed: null,
   currency,
   phone,
-}
+};
 
 /**
  * @load ./base-property-component.doc.md
@@ -55,7 +55,9 @@ const types: Record<PropertyType, any> = {
  * @hideconstructor
  */
 const BasePropertyComponent: React.FC<BasePropertyComponentProps> = (props) => {
-  const { property: baseProperty, resource, record, filter, where, onChange } = props
+  const {
+    property: baseProperty, resource, record, filter, where, onChange,
+  } = props;
 
   const property: PropertyJSON = useMemo(() => ({
     ...baseProperty,
@@ -63,19 +65,19 @@ const BasePropertyComponent: React.FC<BasePropertyComponentProps> = (props) => {
     // called with the path set to this root path. Next mixed and array components adds to this
     // path either index (for array) or subProperty name.
     path: (baseProperty as PropertyJSON).path || baseProperty.propertyPath,
-  }), [baseProperty])
+  }), [baseProperty]);
 
-  const testId = `property-${where}-${property.path}`
+  const testId = `property-${where}-${property.path}`;
 
   let Component: ReactComponentLike = (types[property.type] && types[property.type][where])
-  || defaultType[where]
+  || defaultType[where];
 
   if (property.components && property.components[where]) {
-    const component = property.components[where]
+    const component = property.components[where];
     if (!component) {
-      throw new Error(`there is no "${property.path}.components.${where}"`)
+      throw new Error(`there is no "${property.path}.components.${where}"`);
     }
-    Component = globalAny.AdminJS.UserComponents[component]
+    Component = globalAny.AdminJS.UserComponents[component];
     return (
       <ErrorBoundary>
         <Box data-testid={testId}>
@@ -89,14 +91,14 @@ const BasePropertyComponent: React.FC<BasePropertyComponentProps> = (props) => {
           />
         </Box>
       </ErrorBoundary>
-    )
+    );
   }
 
-  const Array = ArrayType[where]
-  const Mixed = MixedType[where]
+  const Array = ArrayType[where];
+  const Mixed = MixedType[where];
 
   if (baseProperty.isArray) {
-    if (!Array) { return (<div />) }
+    if (!Array) { return (<div />); }
     return (
       <Array
         {...props}
@@ -104,11 +106,11 @@ const BasePropertyComponent: React.FC<BasePropertyComponentProps> = (props) => {
         ItemComponent={BasePropertyComponent}
         testId={testId}
       />
-    )
+    );
   }
 
   if (baseProperty.type === 'mixed') {
-    if (!Mixed) { return (<div />) }
+    if (!Mixed) { return (<div />); }
     return (
       <Mixed
         {...props}
@@ -116,7 +118,7 @@ const BasePropertyComponent: React.FC<BasePropertyComponentProps> = (props) => {
         ItemComponent={BasePropertyComponent}
         testId={testId}
       />
-    )
+    );
   }
 
   return (
@@ -132,9 +134,9 @@ const BasePropertyComponent: React.FC<BasePropertyComponentProps> = (props) => {
         />
       </Box>
     </ErrorBoundary>
-  )
-}
+  );
+};
 export {
   BasePropertyComponent as default,
   BasePropertyComponent,
-}
+};

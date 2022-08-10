@@ -1,7 +1,7 @@
-import React, { FC } from 'react'
+import React, { FC } from 'react';
 
-import { RecordJSON, ResourceJSON, PropertyJSON } from '../../../interfaces'
-import DefaultPropertyValue from '../default-type/default-property-value'
+import { RecordJSON, ResourceJSON, PropertyJSON } from '../../../interfaces';
+import DefaultPropertyValue from '../default-type/default-property-value';
 
 interface Props {
   property: PropertyJSON;
@@ -9,6 +9,6 @@ interface Props {
   resource: ResourceJSON;
 }
 
-const List: FC<Props> = (props) => <DefaultPropertyValue {...props} />
+const List: FC<Props> = (props) => <DefaultPropertyValue {...props} />;
 
-export default List
+export default List;

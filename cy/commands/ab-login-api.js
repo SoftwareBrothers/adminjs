@@ -17,4 +17,4 @@ Cypress.Commands.add('abLoginAPI', ({ email, password, loginPath } = {}) => (
     email: email || Cypress.env('AB_EMAIL'),
     password: password || Cypress.env('AB_PASSWORD'),
   })
-))
+));

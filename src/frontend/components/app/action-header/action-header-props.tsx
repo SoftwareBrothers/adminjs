@@ -1,5 +1,5 @@
-import { ActionJSON, RecordJSON, ResourceJSON } from '../../../interfaces'
-import { ActionResponse } from '../../../../backend/actions/action.interface'
+import { ActionJSON, RecordJSON, ResourceJSON } from '../../../interfaces';
+import { ActionResponse } from '../../../../backend/actions/action.interface';
 
 /**
  * @memberof ActionHeader

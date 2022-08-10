@@ -1,13 +1,13 @@
-import { AdminJSOptions, Assets } from '../../../adminjs-options.interface'
-import { Paths } from '../../../frontend/store/store'
+import { AdminJSOptions, Assets } from '../../../adminjs-options.interface';
+import { Paths } from '../../../frontend/store/store';
 
-let globalAny: any = {}
+let globalAny: any = {};
 
 try {
-  globalAny = window
+  globalAny = window;
 } catch (error) {
   if (error.message !== 'window is not defined') {
-    throw error
+    throw error;
   }
 }
 
@@ -65,27 +65,27 @@ export type BulkActionParams = ActionParams & {
  */
 export type ResourceActionParams = ActionParams
 
-const runDate = new Date()
+const runDate = new Date();
 
 /**
  * Collection of helper methods available in the views
  */
 export class ViewHelpers {
-  public options: Paths
+  public options: Paths;
 
   constructor({ options }: { options?: AdminJSOptions } = {}) {
-    let opts: Paths = ViewHelpers.getPaths(options)
+    let opts: Paths = ViewHelpers.getPaths(options);
 
     opts = opts || {
       rootPath: '/admin',
-    }
+    };
 
     // when ViewHelpers are used on the frontend, paths are taken from global Redux State
-    this.options = opts
+    this.options = opts;
   }
 
   static getPaths(options?: AdminJSOptions): Paths {
-    return options || (globalAny.REDUX_STATE?.paths)
+    return options || (globalAny.REDUX_STATE?.paths);
   }
 
   /**
@@ -97,14 +97,14 @@ export class ViewHelpers {
    *                                    from `location.search`
    */
   urlBuilder(paths: Array<string> = [], search = ''): string {
-    const separator = '/'
-    const replace = new RegExp(`${separator}{1,}`, 'g')
+    const separator = '/';
+    const replace = new RegExp(`${separator}{1,}`, 'g');
 
-    let { rootPath } = this.options
-    if (!rootPath.startsWith(separator)) { rootPath = `${separator}${rootPath}` }
+    let { rootPath } = this.options;
+    if (!rootPath.startsWith(separator)) { rootPath = `${separator}${rootPath}`; }
 
-    const parts = [rootPath, ...paths]
-    return `${parts.join(separator).replace(replace, separator)}${search}`
+    const parts = [rootPath, ...paths];
+    return `${parts.join(separator).replace(replace, separator)}${search}`;
   }
 
   /**
@@ -112,7 +112,7 @@ export class ViewHelpers {
    * @return {string}
    */
   loginUrl(): string {
-    return this.options.loginPath
+    return this.options.loginPath;
   }
 
   /**
@@ -120,7 +120,7 @@ export class ViewHelpers {
    * @return {string}
    */
   logoutUrl(): string {
-    return this.options.logoutPath
+    return this.options.logoutPath;
   }
 
   /**
@@ -128,7 +128,7 @@ export class ViewHelpers {
    * @return {string}
    */
   dashboardUrl(): string {
-    return this.options.rootPath
+    return this.options.rootPath;
   }
 
   /**
@@ -138,7 +138,7 @@ export class ViewHelpers {
    * @return {string}
    */
   pageUrl(pageName: string): string {
-    return this.urlBuilder(['pages', pageName])
+    return this.urlBuilder(['pages', pageName]);
   }
 
   /**
@@ -149,7 +149,9 @@ export class ViewHelpers {
    * @param {string} [search]        optional query string
    */
   editUrl(resourceId: string, recordId: string, search?: string): string {
-    return this.recordActionUrl({ resourceId, recordId, actionName: 'edit', search })
+    return this.recordActionUrl({
+      resourceId, recordId, actionName: 'edit', search,
+    });
   }
 
   /**
@@ -160,7 +162,9 @@ export class ViewHelpers {
    * @param {string} [search]        optional query string
    */
   showUrl(resourceId: string, recordId: string, search?: string): string {
-    return this.recordActionUrl({ resourceId, recordId, actionName: 'show', search })
+    return this.recordActionUrl({
+      resourceId, recordId, actionName: 'show', search,
+    });
   }
 
   /**
@@ -171,7 +175,9 @@ export class ViewHelpers {
    * @param {string} [search]        optional query string
    */
   deleteUrl(resourceId: string, recordId: string, search?: string): string {
-    return this.recordActionUrl({ resourceId, recordId, actionName: 'delete', search })
+    return this.recordActionUrl({
+      resourceId, recordId, actionName: 'delete', search,
+    });
   }
 
   /**
@@ -181,7 +187,7 @@ export class ViewHelpers {
    * @param {string} [search]        optional query string
    */
   newUrl(resourceId: string, search?: string): string {
-    return this.resourceActionUrl({ resourceId, actionName: 'new', search })
+    return this.resourceActionUrl({ resourceId, actionName: 'new', search });
   }
 
   /**
@@ -191,7 +197,7 @@ export class ViewHelpers {
    * @param {string} [search]        optional query string
    */
   listUrl(resourceId: string, search?: string): string {
-    return this.resourceActionUrl({ resourceId, actionName: 'list', search })
+    return this.resourceActionUrl({ resourceId, actionName: 'list', search });
   }
 
   /**
@@ -202,7 +208,9 @@ export class ViewHelpers {
    * @param {string} [search]        optional query string
    */
   bulkDeleteUrl(resourceId: string, recordIds: Array<string>, search?: string): string {
-    return this.bulkActionUrl({ resourceId, recordIds, actionName: 'bulkDelete', search })
+    return this.bulkActionUrl({
+      resourceId, recordIds, actionName: 'bulkDelete', search,
+    });
   }
 
   /**
@@ -216,11 +224,11 @@ export class ViewHelpers {
    * @return  {string}
    */
   resourceActionUrl({ resourceId, actionName, search }: ResourceActionParams): string {
-    return this.urlBuilder(['resources', resourceId, 'actions', actionName], search)
+    return this.urlBuilder(['resources', resourceId, 'actions', actionName], search);
   }
 
   resourceUrl({ resourceId, search }: Omit<ResourceActionParams, 'actionName'>): string {
-    return this.urlBuilder(['resources', resourceId], search)
+    return this.urlBuilder(['resources', resourceId], search);
   }
 
   /**
@@ -233,8 +241,10 @@ export class ViewHelpers {
    *
    * @return  {string}
    */
-  recordActionUrl({ resourceId, recordId, actionName, search }: RecordActionParams): string {
-    return this.urlBuilder(['resources', resourceId, 'records', recordId, actionName], search)
+  recordActionUrl({
+    resourceId, recordId, actionName, search,
+  }: RecordActionParams): string {
+    return this.urlBuilder(['resources', resourceId, 'records', recordId, actionName], search);
   }
 
   /**
@@ -247,16 +257,18 @@ export class ViewHelpers {
    *
    * @return  {string}
    */
-  bulkActionUrl({ resourceId, recordIds, actionName, search }: BulkActionParams): string {
+  bulkActionUrl({
+    resourceId, recordIds, actionName, search,
+  }: BulkActionParams): string {
     const url = this.urlBuilder([
       'resources', resourceId, 'bulk', actionName,
-    ])
+    ]);
     if (recordIds && recordIds.length) {
-      const query = new URLSearchParams(search)
-      query.set('recordIds', recordIds.join(','))
-      return `${url}?${query.toString()}`
+      const query = new URLSearchParams(search);
+      query.set('recordIds', recordIds.join(','));
+      return `${url}?${query.toString()}`;
     }
-    return `${url}${search || ''}`
+    return `${url}${search || ''}`;
   }
 
   /**
@@ -269,14 +281,14 @@ export class ViewHelpers {
    */
   assetPath(asset: string, assetsConfig?: Assets): string {
     if (this.options.assetsCDN) {
-      const pathname = assetsConfig?.coreScripts?.[asset] ?? asset
-      const url = new URL(pathname, this.options.assetsCDN).href
+      const pathname = assetsConfig?.coreScripts?.[asset] ?? asset;
+      const url = new URL(pathname, this.options.assetsCDN).href;
 
       // adding timestamp to the href invalidates the CDN cache
-      return `${url}?date=${runDate.getTime()}`
+      return `${url}?date=${runDate.getTime()}`;
     }
-    return this.urlBuilder(['frontend', 'assets', asset])
+    return this.urlBuilder(['frontend', 'assets', asset]);
   }
 }
 
-export default ViewHelpers
+export default ViewHelpers;

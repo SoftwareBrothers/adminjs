@@ -1,17 +1,17 @@
-import React from 'react'
-import styled from 'styled-components'
-import { useSelector } from 'react-redux'
-import { Box, cssClass, themeGet } from '@adminjs/design-system'
+import React from 'react';
+import styled from 'styled-components';
+import { useSelector } from 'react-redux';
+import { Box, cssClass, themeGet } from '@adminjs/design-system';
 
-import { BrandingOptions } from 'src/adminjs-options.interface'
-import { ResourceJSON, PageJSON } from 'src/frontend/interfaces'
-import SidebarBranding from './sidebar-branding'
-import SidebarPages from './sidebar-pages'
-import { ReduxState } from '../../../store/store'
-import SidebarFooter from './sidebar-footer'
+import { BrandingOptions } from '../../../../adminjs-options.interface';
+import { ResourceJSON, PageJSON } from '../../../interfaces';
+import SidebarBranding from './sidebar-branding';
+import SidebarPages from './sidebar-pages';
+import { ReduxState } from '../../../store/store';
+import SidebarFooter from './sidebar-footer';
 
-import SidebarResourceSection from './sidebar-resource-section'
-import allowOverride from '../../../hoc/allow-override'
+import SidebarResourceSection from './sidebar-resource-section';
+import allowOverride from '../../../hoc/allow-override';
 
 type Props = {
   isVisible: boolean;
@@ -30,7 +30,7 @@ const StyledSidebar = styled(Box)`
   &.visible {
     left: 0;
   }
-`
+`;
 
 StyledSidebar.defaultProps = {
   position: ['absolute', 'absolute', 'absolute', 'absolute', 'inherit'],
@@ -40,10 +40,10 @@ StyledSidebar.defaultProps = {
   flexDirection: 'column',
   zIndex: 50,
   bg: 'white',
-}
+};
 
 const SidebarOriginal: React.FC<Props> = (props) => {
-  const { isVisible } = props
+  const { isVisible } = props;
   const [branding, resources, pages]: [
     BrandingOptions,
     ResourceJSON[],
@@ -52,7 +52,7 @@ const SidebarOriginal: React.FC<Props> = (props) => {
     state.branding,
     state.resources,
     state.pages,
-  ])
+  ]);
 
   return (
     <StyledSidebar className={isVisible ? 'visible' : 'hidden'}>
@@ -63,10 +63,10 @@ const SidebarOriginal: React.FC<Props> = (props) => {
       <SidebarPages pages={pages} />
       <SidebarFooter />
     </StyledSidebar>
-  )
-}
+  );
+};
 
-const Sidebar = allowOverride(SidebarOriginal, 'Sidebar')
+const Sidebar = allowOverride(SidebarOriginal, 'Sidebar');
 
-export { Sidebar }
-export default Sidebar
+export { Sidebar };
+export default Sidebar;

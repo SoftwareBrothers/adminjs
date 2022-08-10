@@ -1,9 +1,9 @@
-import React, { ReactNode } from 'react'
-import { StaticRouter } from 'react-router-dom/server'
-import { ThemeProvider } from 'styled-components'
-import { combineStyles } from '@adminjs/design-system'
+import React, { ReactNode } from 'react';
+import { StaticRouter } from 'react-router-dom/server';
+import { ThemeProvider } from 'styled-components';
+import { combineStyles } from '@adminjs/design-system';
 
-const theme = combineStyles({})
+const theme = combineStyles({});
 
 type Props = {
   children: ReactNode;
@@ -11,7 +11,7 @@ type Props = {
 }
 
 const TestContextProvider: React.FC<Props> = (props) => {
-  const { children, location } = props
+  const { children, location } = props;
 
   return (
     <ThemeProvider theme={theme}>
@@ -19,7 +19,7 @@ const TestContextProvider: React.FC<Props> = (props) => {
         {children}
       </StaticRouter>
     </ThemeProvider>
-  )
-}
+  );
+};
 
-export default TestContextProvider
+export default TestContextProvider;

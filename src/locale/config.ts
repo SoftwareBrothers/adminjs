@@ -1,5 +1,5 @@
-import merge from 'lodash/merge'
-import { formatName } from '../utils/translate-functions.factory'
+import merge from 'lodash/merge';
+import { formatName } from '../utils/translate-functions.factory';
 
 /**
  * Locale object passed to {@link AdminJSOptions} and stored in the application
@@ -95,19 +95,19 @@ const renameKeys = (object: Partial<LocaleTranslations>): Partial<LocaleTranslat
       return {
         ...memo,
         [formatName(k)]: renameKeys(v),
-      }
+      };
     }
     return {
       ...memo,
       [formatName(k)]: v,
-    }
+    };
   }, {})
-)
+);
 
 export const combineTranslations = (
   originalTranslations: LocaleTranslations,
   adminTranslations: Partial<LocaleTranslations> = {},
 ): LocaleTranslations => {
-  const formattedTranslations = renameKeys(adminTranslations)
-  return merge(originalTranslations, formattedTranslations)
-}
+  const formattedTranslations = renameKeys(adminTranslations);
+  return merge(originalTranslations, formattedTranslations);
+};

@@ -1,13 +1,13 @@
-import React from 'react'
-import { render, RenderResult } from '@testing-library/react'
-import factory from 'factory-girl'
-import { expect } from 'chai'
+import React from 'react';
+import { render, RenderResult } from '@testing-library/react';
+import factory from 'factory-girl';
+import { expect } from 'chai';
 
-import TestContextProvider from '../../spec/test-context-provider'
-import PropertyHeader from './property-header'
+import TestContextProvider from '../../spec/test-context-provider';
+import PropertyHeader from './property-header';
 
-import '../../spec/property-json.factory'
-import { PropertyJSON } from '../../../interfaces'
+import '../../spec/property-json.factory';
+import { PropertyJSON } from '../../../interfaces';
 
 const renderSubject = (
   property: PropertyJSON,
@@ -28,41 +28,41 @@ const renderSubject = (
       </tbody>
     </table>
   </TestContextProvider>,
-)
+);
 
 describe('<PropertyHeader />', function () {
-  const direction = 'desc'
-  const sortBy = 'otherProperty'
-  let property: PropertyJSON
+  const direction = 'desc';
+  const sortBy = 'otherProperty';
+  let property: PropertyJSON;
 
   beforeEach(async function () {
-    property = await factory.build<PropertyJSON>('PropertyJSON', { isSortable: true })
-  })
+    property = await factory.build<PropertyJSON>('PropertyJSON', { isSortable: true });
+  });
 
   context('render not selected but searchable field', function () {
     it('renders a label', async function () {
-      const { findAllByText } = renderSubject(property, sortBy, direction)
+      const { findAllByText } = renderSubject(property, sortBy, direction);
 
-      const label = await findAllByText(property.label)
+      const label = await findAllByText(property.label);
 
-      expect(label).to.have.lengthOf(1)
-    })
+      expect(label).to.have.lengthOf(1);
+    });
 
     it('wraps it within a link with an opposite direction', function () {
-      const { container } = renderSubject(property, sortBy, direction)
+      const { container } = renderSubject(property, sortBy, direction);
 
-      const a = container.querySelector('a')
-      const href = (a && a.getAttribute('href')) || ''
-      const query = new URLSearchParams(href.replace('/?', ''))
+      const a = container.querySelector('a');
+      const href = (a && a.getAttribute('href')) || '';
+      const query = new URLSearchParams(href.replace('/?', ''));
 
-      expect(query.get('direction')).to.equal('asc')
-      expect(query.get('sortBy')).to.equal(property.path)
-    })
+      expect(query.get('direction')).to.equal('asc');
+      expect(query.get('sortBy')).to.equal(property.path);
+    });
 
     it('doesn\'t render a sort indicator', function () {
-      const { container } = renderSubject(property, sortBy, direction)
+      const { container } = renderSubject(property, sortBy, direction);
 
-      expect(container.querySelector('svg')).to.be.null
-    })
-  })
-})
+      expect(container.querySelector('svg')).to.be.null;
+    });
+  });
+});

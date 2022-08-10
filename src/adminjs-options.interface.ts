@@ -1,13 +1,15 @@
-import { ThemeOverride } from '@adminjs/design-system'
-import { TransformOptions as BabelConfig } from 'babel-core'
+import { ThemeOverride } from '@adminjs/design-system';
+// Note: we need @types/babel-core only
+// eslint-disable-next-line import/no-unresolved
+import { TransformOptions as BabelConfig } from 'babel-core';
 
-import BaseResource from './backend/adapters/resource/base-resource'
-import BaseDatabase from './backend/adapters/database/base-database'
-import { PageContext } from './backend/actions/action.interface'
-import { ResourceOptions } from './backend/decorators/resource/resource-options.interface'
-import { Locale } from './locale/config'
-import { CurrentAdmin } from './current-admin.interface'
-import { CoreScripts } from './core-scripts.interface'
+import BaseResource from './backend/adapters/resource/base-resource';
+import BaseDatabase from './backend/adapters/database/base-database';
+import { PageContext } from './backend/actions/action.interface';
+import { ResourceOptions } from './backend/decorators/resource/resource-options.interface';
+import { Locale } from './locale/config';
+import { CurrentAdmin } from './current-admin.interface';
+import { CoreScripts } from './core-scripts.interface';
 
 /**
  * AdminJSOptions

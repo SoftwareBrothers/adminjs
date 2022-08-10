@@ -1,5 +1,5 @@
-import { Action, BulkActionResponse } from '../action.interface'
-import NotFoundError from '../../utils/errors/not-found-error'
+import { Action, BulkActionResponse } from '../action.interface';
+import NotFoundError from '../../utils/errors/not-found-error';
 
 /**
  * @implements Action
@@ -27,19 +27,21 @@ export const BulkDeleteAction: Action<BulkActionResponse> = {
    * @memberof module:BulkDeleteAction
    */
   handler: async (request, response, context) => {
-    const { records, resource, h, translateMessage } = context
+    const {
+      records, resource, h, translateMessage,
+    } = context;
 
     if (!records || !records.length) {
-      throw new NotFoundError('no records were selected.', 'Action#handler')
+      throw new NotFoundError('no records were selected.', 'Action#handler');
     }
     if (request.method === 'get') {
-      const recordsInJSON = records.map((record) => record.toJSON(context.currentAdmin))
+      const recordsInJSON = records.map((record) => record.toJSON(context.currentAdmin));
       return {
         records: recordsInJSON,
-      }
+      };
     }
     if (request.method === 'post') {
-      await Promise.all(records.map((record) => resource.delete(record.id())))
+      await Promise.all(records.map((record) => resource.delete(record.id())));
       return {
         records: records.map((record) => record.toJSON(context.currentAdmin)),
         notice: {
@@ -49,10 +51,10 @@ export const BulkDeleteAction: Action<BulkActionResponse> = {
           type: 'success',
         },
         redirectUrl: h.resourceUrl({ resourceId: resource._decorated?.id() || resource.id() }),
-      }
+      };
     }
-    throw new Error('method should be either "post" or "get"')
+    throw new Error('method should be either "post" or "get"');
   },
-}
+};
 
-export default BulkDeleteAction
+export default BulkDeleteAction;

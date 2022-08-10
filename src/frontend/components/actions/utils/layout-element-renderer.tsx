@@ -1,10 +1,10 @@
-import React from 'react'
-import * as DesignSystem from '@adminjs/design-system'
-import { ActionProps } from '../action.props'
-import PropertyType from '../../property-type'
-import { PropertyPlace } from '../../../interfaces/property-json/property-json.interface'
-import { ParsedLayoutElement } from '../../../../backend/utils/layout-element-parser'
-import { BasePropertyProps } from '../../property-type/base-property-props'
+import React from 'react';
+import * as DesignSystem from '@adminjs/design-system';
+import { ActionProps } from '../action.props';
+import PropertyType from '../../property-type';
+import { PropertyPlace } from '../../../interfaces/property-json/property-json.interface';
+import { ParsedLayoutElement } from '../../../../backend/utils/layout-element-parser';
+import { BasePropertyProps } from '../../property-type/base-property-props';
 
 type Props = ActionProps & {
   layoutElement: ParsedLayoutElement;
@@ -13,20 +13,22 @@ type Props = ActionProps & {
 }
 
 export const LayoutElementRenderer: React.FC<Props> = (props) => {
-  const { layoutElement, resource, where, record, onChange } = props
+  const {
+    layoutElement, resource, where, record, onChange,
+  } = props;
 
   const {
     props: layoutProps,
     properties: propertyNames,
     layoutElements: innerLayoutElements,
     component,
-  } = layoutElement
+  } = layoutElement;
 
-  const { children, ...other } = layoutProps
+  const { children, ...other } = layoutProps;
 
-  const properties = propertyNames.map((name) => resource.properties[name])
+  const properties = propertyNames.map((name) => resource.properties[name]);
 
-  const Component = DesignSystem[component]
+  const Component = DesignSystem[component];
   if (!Component) {
     return (
       <DesignSystem.MessageBox
@@ -41,7 +43,7 @@ export const LayoutElementRenderer: React.FC<Props> = (props) => {
         <DesignSystem.Badge size="sm" variant="danger" mx="default">{`@${component}`}</DesignSystem.Badge>
         to available component like @Header
       </DesignSystem.MessageBox>
-    )
+    );
   }
 
   return (
@@ -68,7 +70,7 @@ export const LayoutElementRenderer: React.FC<Props> = (props) => {
       ))}
       {children}
     </Component>
-  )
-}
+  );
+};
 
-export default LayoutElementRenderer
+export default LayoutElementRenderer;

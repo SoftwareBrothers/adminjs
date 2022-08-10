@@ -1,6 +1,8 @@
-import React from 'react'
-import { RecordJSON, ResourceJSON, PropertyJSON, PropertyPlace } from '../../interfaces'
-import { BasePropertyJSON } from '../../interfaces/property-json/property-json.interface'
+import React from 'react';
+import {
+  RecordJSON, ResourceJSON, PropertyJSON, PropertyPlace,
+} from '../../interfaces';
+import { BasePropertyJSON } from '../../interfaces/property-json/property-json.interface';
 
 export type SelectRecord = {
   value: string;

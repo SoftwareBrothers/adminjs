@@ -1,4 +1,4 @@
-import PropertyDecorator from '../../property/property-decorator'
+import PropertyDecorator from '../../property/property-decorator';
 
 /**
  * Bu default all subProperties are nested as an array in root Property. This is easy for
@@ -20,4 +20,4 @@ export const flatSubProperties = (
     { [subProperty.propertyPath]: subProperty },
     flatSubProperties(subProperty),
   ), {})
-)
+);

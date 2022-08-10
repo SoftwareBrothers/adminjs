@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 // spacer
 export type UseLocalStorageResult<T> = [
   T,

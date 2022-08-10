@@ -1,1 +1,1 @@
-export * from './layout-element-parser'
+export * from './layout-element-parser';

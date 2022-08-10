@@ -1,17 +1,17 @@
-import { RecordActionParams, ViewHelpers } from '../../../backend/utils/view-helpers'
-import { DifferentActionParams } from '../../hooks'
-import { ActionJSON } from './action-json.interface'
+import { RecordActionParams, ViewHelpers } from '../../../backend/utils/view-helpers';
+import { DifferentActionParams } from '../../hooks';
+import { ActionJSON } from './action-json.interface';
 
-const h = new ViewHelpers()
+const h = new ViewHelpers();
 
 export const actionHref = (
   action: ActionJSON,
   params: DifferentActionParams,
 ): string | null => {
-  const actionName = action.name
+  const actionName = action.name;
 
   if (!action.component && !action.hasHandler) {
-    return null
+    return null;
   }
 
   const hrefMap = {
@@ -27,9 +27,9 @@ export const actionHref = (
       ...params,
       actionName,
     }),
-  }
+  };
   if (hrefMap[action.actionType]) {
-    return hrefMap[action.actionType]()
+    return hrefMap[action.actionType]();
   }
-  throw new Error('"actionType" should be either record, resource or bulk')
-}
+  throw new Error('"actionType" should be either record, resource or bulk');
+};

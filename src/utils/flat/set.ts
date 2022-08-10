@@ -1,17 +1,18 @@
-import { flatten } from 'flat'
-import { DELIMITER } from './constants'
-import { FlattenParams } from '../flat'
-import { propertyKeyRegex } from './property-key-regex'
-import { pathToParts } from './path-to-parts'
+/* eslint-disable default-param-last */
+import { flatten } from 'flat';
+import { DELIMITER } from './constants';
+import { FlattenParams } from '.';
+import { propertyKeyRegex } from './property-key-regex';
+import { pathToParts } from './path-to-parts';
 
 const isObject = (value: any): boolean => {
   // Node environment
   if (typeof File === 'undefined') {
-    return typeof value === 'object' && value !== null
+    return typeof value === 'object' && value !== null;
   }
   // Window environment
-  return typeof value === 'object' && !(value instanceof File) && value !== null
-}
+  return typeof value === 'object' && !(value instanceof File) && value !== null;
+};
 
 /**
  * @load ./set.doc.md
@@ -22,48 +23,48 @@ const isObject = (value: any): boolean => {
  * @returns {FlattenParams}
  */
 const set = (params: FlattenParams = {}, propertyPath: string, value?: any): FlattenParams => {
-  const regex = propertyKeyRegex(propertyPath)
+  const regex = propertyKeyRegex(propertyPath);
 
   // remove all existing keys
   const paramsCopy = Object.keys(params)
     .filter((key) => !key.match(regex))
     .reduce((memo, key) => {
-      memo[key] = params[key]
+      memo[key] = params[key];
 
-      return memo
-    }, {} as FlattenParams)
+      return memo;
+    }, {} as FlattenParams);
 
   if (typeof value !== 'undefined') {
     if (isObject(value) && !(value instanceof Date)) {
-      const flattened = flatten(value) as any
+      const flattened = flatten(value) as any;
 
       if (Object.keys(flattened).length) {
         Object.keys(flattened).forEach((key) => {
-          paramsCopy[`${propertyPath}${DELIMITER}${key}`] = flattened[key]
-        })
+          paramsCopy[`${propertyPath}${DELIMITER}${key}`] = flattened[key];
+        });
       } else if (Array.isArray(value)) {
-        paramsCopy[propertyPath] = []
+        paramsCopy[propertyPath] = [];
       } else {
-        paramsCopy[propertyPath] = {}
+        paramsCopy[propertyPath] = {};
       }
     } else {
-      paramsCopy[propertyPath] = value
+      paramsCopy[propertyPath] = value;
     }
 
     // when user gave { "nested.value": "something" } and had "nested" set to `null`, then
     // nested should be removed
-    const parts = pathToParts(propertyPath).slice(0, -1)
+    const parts = pathToParts(propertyPath).slice(0, -1);
     if (parts.length) {
       return Object.keys(paramsCopy)
         .filter((key) => !parts.includes(key))
         .reduce((memo, key) => {
-          memo[key] = paramsCopy[key]
+          memo[key] = paramsCopy[key];
 
-          return memo
-        }, {} as FlattenParams)
+          return memo;
+        }, {} as FlattenParams);
     }
   }
-  return paramsCopy
-}
+  return paramsCopy;
+};
 
-export { set }
+export { set };

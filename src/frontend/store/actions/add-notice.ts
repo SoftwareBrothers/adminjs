@@ -1,7 +1,7 @@
-import { NoticeMessageInState } from '../store'
-import { NoticeMessage } from '../../hoc/with-notice'
+import { NoticeMessageInState } from '../store';
+import { NoticeMessage } from '../../hoc/with-notice';
 
-export const ADD_NOTICE = 'ADD_NOTICE'
+export const ADD_NOTICE = 'ADD_NOTICE';
 
 export type AddNoticeResponse = {
   type: typeof ADD_NOTICE;
@@ -16,4 +16,4 @@ export const addNotice = (data: NoticeMessage = { message: '' }): AddNoticeRespo
     type: data.type || 'success',
     progress: 0,
   },
-})
+});

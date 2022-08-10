@@ -1,4 +1,4 @@
-import { RecordJSON } from '../../interfaces'
+import { RecordJSON } from '../../interfaces';
 
 const isEntireRecordGiven = (
   propertyOrRecord: RecordJSON | string,
@@ -9,9 +9,9 @@ const isEntireRecordGiven = (
     // callback
     && !(typeof propertyOrRecord === 'string')
     // we assume that only params has to be given
-    && propertyOrRecord.params)
+    && propertyOrRecord.params);
 
 export {
   isEntireRecordGiven as default,
   isEntireRecordGiven,
-}
+};

@@ -1,7 +1,7 @@
-import * as flat from 'flat'
-import { Action, ActionResponse } from '../action.interface'
-import { RecordJSON } from '../../../frontend/interfaces'
-import Filter from '../../utils/filter/filter'
+import * as flat from 'flat';
+import { Action, ActionResponse } from '../action.interface';
+import { RecordJSON } from '../../../frontend/interfaces';
+import Filter from '../../utils/filter/filter';
 
 /**
  * @implements Action
@@ -27,11 +27,11 @@ export const SearchAction: Action<SearchActionResponse> = {
    * @implements ActionHandler
    */
   handler: async (request, response, data) => {
-    const { currentAdmin, resource } = data
-    const { query } = request
+    const { currentAdmin, resource } = data;
+    const { query } = request;
 
-    const decorated = resource.decorate()
-    const titlePropertyName = decorated.titleProperty().name()
+    const decorated = resource.decorate();
+    const titlePropertyName = decorated.titleProperty().name();
 
     const {
       sortBy = decorated.options?.sort?.sortBy || titlePropertyName,
@@ -39,15 +39,15 @@ export const SearchAction: Action<SearchActionResponse> = {
       filters: customFilters = {},
       perPage = 50,
       page = 1,
-    } = flat.unflatten(query || {})
+    } = flat.unflatten(query || {});
 
-    const queryString = request.params && request.params.query
-    const queryFilter = queryString ? { [titlePropertyName]: queryString } : {}
+    const queryString = request.params && request.params.query;
+    const queryFilter = queryString ? { [titlePropertyName]: queryString } : {};
     const filters = {
       ...customFilters,
       ...queryFilter,
-    }
-    const filter = new Filter(filters, resource)
+    };
+    const filter = new Filter(filters, resource);
 
     const records = await resource.find(filter, {
       limit: perPage,
@@ -56,15 +56,15 @@ export const SearchAction: Action<SearchActionResponse> = {
         sortBy,
         direction,
       },
-    })
+    });
 
     return {
       records: records.map((record) => record.toJSON(currentAdmin)),
-    }
+    };
   },
-}
+};
 
-export default SearchAction
+export default SearchAction;
 
 /**
  * Response of a [Search]{@link ApiController#search} action in the API

@@ -85,9 +85,9 @@ const translations = {
     needMoreSolutions_subtitle: '我们已经准备好为您提供优美的 UX/UI 设计, 并量身定制基于 AdminJS 等的软件',
     invalidCredentials: '错误的电子邮箱或密码',
   },
-}
+};
 
 export default {
   language: 'zh-CN',
   translations,
-}
+};

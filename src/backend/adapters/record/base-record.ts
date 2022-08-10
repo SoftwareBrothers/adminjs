@@ -1,9 +1,9 @@
-import { flat, GetOptions } from '../../../utils/flat'
-import { ParamsType } from './params.type'
-import BaseResource from '../resource/base-resource'
-import ValidationError, { RecordError, PropertyErrors } from '../../utils/errors/validation-error'
-import { RecordJSON } from '../../../frontend/interfaces'
-import { CurrentAdmin } from '../../../current-admin.interface'
+import { flat, GetOptions } from '../../../utils/flat';
+import { ParamsType } from './params.type';
+import BaseResource from '../resource/base-resource';
+import ValidationError, { RecordError, PropertyErrors } from '../../utils/errors/validation-error';
+import { RecordJSON } from '../../../frontend/interfaces';
+import { CurrentAdmin } from '../../../current-admin.interface';
 
 /**
  * Representation of an particular ORM/ODM Record in given Resource in AdminJS
@@ -14,40 +14,40 @@ class BaseRecord {
   /**
    * Resource to which record belongs
    */
-  public resource: BaseResource
+  public resource: BaseResource;
 
   /**
    * Actual record data stored as a flatten object. You shouldn't access them directly - always
    * with {@link BaseRecord#get} and {@link BaseRecord#set} property.
    */
-  public params: ParamsType
+  public params: ParamsType;
 
   /**
    * Object containing any base/overall validation error messages:
    * this.baseError = { message: 'errorMessage' }
    */
-  public baseError: RecordError | null
+  public baseError: RecordError | null;
 
   /**
    * Object containing all validation errors: this.errors[path] = { message: 'errorMessage' }
    */
-  public errors: PropertyErrors
+  public errors: PropertyErrors;
 
   /**
    * Object containing all populated relations.
    */
-  public populated: {[key: string]: BaseRecord}
+  public populated: {[key: string]: BaseRecord};
 
   /**
    * @param  {ParamsType}   params         all resource data. I.e. field values
    * @param  {BaseResource} resource       resource to which given record belongs
    */
   constructor(params: ParamsType, resource: BaseResource) {
-    this.resource = resource
-    this.params = params ? flat.flatten(params) : {}
-    this.baseError = null
-    this.errors = {}
-    this.populated = {}
+    this.resource = resource;
+    this.params = params ? flat.flatten(params) : {};
+    this.baseError = null;
+    this.errors = {};
+    this.populated = {};
   }
 
   /**
@@ -59,7 +59,7 @@ class BaseRecord {
    * @deprecated in favour of {@link BaseRecord#get} and {@link BaseRecord#set} methods
    */
   param(path: string): any {
-    return flat.get(this.params, path)
+    return flat.get(this.params, path);
   }
 
   /**
@@ -81,7 +81,7 @@ class BaseRecord {
    * @new in version 3.3
    */
   get(propertyPath?: string, options?: GetOptions): any {
-    return flat.get(this.params, propertyPath, options)
+    return flat.get(this.params, propertyPath, options);
   }
 
   /**
@@ -94,8 +94,8 @@ class BaseRecord {
    * @new in version 3.3
    */
   set(propertyPath: string, value: any): any {
-    this.params = flat.set(this.params, propertyPath, value)
-    return this.params
+    this.params = flat.set(this.params, propertyPath, value);
+    return this.params;
   }
 
   /**
@@ -107,7 +107,7 @@ class BaseRecord {
    * @deprecated in favour of {@link selectParams}
    */
   namespaceParams(prefix: string): Record<string, any> | void {
-    return flat.selectParams(this.params, prefix)
+    return flat.selectParams(this.params, prefix);
   }
 
   /**
@@ -120,7 +120,7 @@ class BaseRecord {
    * @new in version 3.3
    */
   selectParams(prefix: string, options?: GetOptions): Record<string, any> | void {
-    return flat.selectParams(this.params, prefix, options)
+    return flat.selectParams(this.params, prefix, options);
   }
 
   /**
@@ -134,20 +134,20 @@ class BaseRecord {
    */
   async update(params): Promise<BaseRecord> {
     try {
-      this.storeParams(params)
-      const returnedParams = await this.resource.update(this.id(), params)
-      this.storeParams(returnedParams)
+      this.storeParams(params);
+      const returnedParams = await this.resource.update(this.id(), params);
+      this.storeParams(returnedParams);
     } catch (e) {
       if (e instanceof ValidationError) {
-        this.baseError = e.baseError
-        this.errors = e.propertyErrors
-        return this
+        this.baseError = e.baseError;
+        this.errors = e.propertyErrors;
+        return this;
       }
-      throw e
+      throw e;
     }
-    this.baseError = null
-    this.errors = {}
-    return this
+    this.baseError = null;
+    this.errors = {};
+    return this;
   }
 
   /**
@@ -163,24 +163,24 @@ class BaseRecord {
    */
   async save(): Promise<BaseRecord> {
     try {
-      let returnedParams
+      let returnedParams;
       if (this.id()) {
-        returnedParams = await this.resource.update(this.id(), this.params)
+        returnedParams = await this.resource.update(this.id(), this.params);
       } else {
-        returnedParams = await this.resource.create(this.params)
+        returnedParams = await this.resource.create(this.params);
       }
-      this.storeParams(returnedParams)
+      this.storeParams(returnedParams);
     } catch (e) {
       if (e instanceof ValidationError) {
-        this.baseError = e.baseError
-        this.errors = e.propertyErrors
-        return this
+        this.baseError = e.baseError;
+        this.errors = e.propertyErrors;
+        return this;
       }
-      throw e
+      throw e;
     }
-    this.baseError = null
-    this.errors = {}
-    return this
+    this.baseError = null;
+    this.errors = {};
+    return this;
   }
 
   /**
@@ -195,19 +195,19 @@ class BaseRecord {
    */
   async create(): Promise<BaseRecord> {
     try {
-      const returnedParams = await this.resource.create(this.params)
-      this.storeParams(returnedParams)
+      const returnedParams = await this.resource.create(this.params);
+      this.storeParams(returnedParams);
     } catch (e) {
       if (e instanceof ValidationError) {
-        this.baseError = e.baseError
-        this.errors = e.propertyErrors
-        return this
+        this.baseError = e.baseError;
+        this.errors = e.propertyErrors;
+        return this;
       }
-      throw e
+      throw e;
     }
-    this.baseError = null
-    this.errors = {}
-    return this
+    this.baseError = null;
+    this.errors = {};
+    return this;
   }
 
   /**
@@ -215,11 +215,11 @@ class BaseRecord {
    * @return {string | number} id of the Record
    */
   id(): string {
-    const idProperty = this.resource.properties().find((p) => p.isId())
+    const idProperty = this.resource.properties().find((p) => p.isId());
     if (!idProperty) {
-      throw new Error(`Resource: "${this.resource.id()}" does not have an id property`)
+      throw new Error(`Resource: "${this.resource.id()}" does not have an id property`);
     }
-    return this.params[idProperty.name()]
+    return this.params[idProperty.name()];
   }
 
   /**
@@ -231,8 +231,8 @@ class BaseRecord {
    * @return {string} title of the record
    */
   title(): string {
-    const nameProperty = this.resource.properties().find((p) => p.isTitle())
-    return nameProperty ? this.param(nameProperty.name()) : this.id()
+    const nameProperty = this.resource.properties().find((p) => p.isTitle());
+    return nameProperty ? this.param(nameProperty.name()) : this.id();
   }
 
   /**
@@ -240,7 +240,7 @@ class BaseRecord {
    * @return {boolean} if record is valid or not.
    */
   isValid(): boolean {
-    return Object.keys(this.errors).length === 0
+    return Object.keys(this.errors).length === 0;
   }
 
   /**
@@ -249,7 +249,7 @@ class BaseRecord {
    * @return {RecordError | null}      validation message of null
    */
   error(path: string): RecordError | null {
-    return this.errors[path]
+    return this.errors[path];
   }
 
   /**
@@ -262,10 +262,10 @@ class BaseRecord {
   populate(propertyPath: string, record?: BaseRecord | null): void {
     if (record === null || typeof record === 'undefined') {
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      const { [propertyPath]: oldValue, ...rest } = this.populated
-      this.populated = rest
+      const { [propertyPath]: oldValue, ...rest } = this.populated;
+      this.populated = rest;
     } else {
-      this.populated[propertyPath] = record
+      this.populated[propertyPath] = record;
     }
   }
 
@@ -279,13 +279,13 @@ class BaseRecord {
       // sometimes user can add some arbitrary element to populated object. In such case
       // we should omit toJSON call.
       if ((this.populated[key] as any).toJSON) {
-        m[key] = this.populated[key].toJSON(currentAdmin)
+        m[key] = this.populated[key].toJSON(currentAdmin);
       } else {
-        m[key] = this.populated[key]
+        m[key] = this.populated[key];
       }
 
-      return m
-    }, {})
+      return m;
+    }, {});
     return {
       params: this.params,
       populated,
@@ -297,7 +297,7 @@ class BaseRecord {
         .map((recordAction) => recordAction.toJSON(currentAdmin)),
       bulkActions: this.resource.decorate().bulkActions(this, currentAdmin)
         .map((recordAction) => recordAction.toJSON(currentAdmin)),
-    }
+    };
   }
 
   /**
@@ -306,8 +306,8 @@ class BaseRecord {
    * @param {object} [payloadData]
    */
   storeParams(payloadData?: object): void {
-    this.params = flat.merge(this.params, payloadData)
+    this.params = flat.merge(this.params, payloadData);
   }
 }
 
-export default BaseRecord
+export default BaseRecord;

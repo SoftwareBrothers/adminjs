@@ -1,5 +1,5 @@
-import { flat } from '../../../utils/flat'
-import { RecordJSON } from '../../interfaces'
+import { flat } from '../../../utils/flat';
+import { RecordJSON } from '../../interfaces';
 
 /**
  * HOF returning a function which takes a record and returns an updated record.
@@ -32,25 +32,25 @@ export const updateRecord = (
   value: any,
   selectedRecord?: RecordJSON,
 ) => (previousRecord: RecordJSON): RecordJSON => {
-  let populatedModified = false
-  const populatedCopy = { ...previousRecord.populated }
-  const paramsCopy = flat.set(previousRecord.params, property, value)
+  let populatedModified = false;
+  const populatedCopy = { ...previousRecord.populated };
+  const paramsCopy = flat.set(previousRecord.params, property, value);
 
   if (property in populatedCopy) {
-    delete populatedCopy[property]
-    populatedModified = true
+    delete populatedCopy[property];
+    populatedModified = true;
   }
 
   if (selectedRecord) {
-    populatedCopy[property] = selectedRecord
-    populatedModified = true
+    populatedCopy[property] = selectedRecord;
+    populatedModified = true;
   }
 
   return {
     ...previousRecord,
     params: paramsCopy,
     populated: populatedModified ? populatedCopy : previousRecord.populated,
-  }
-}
+  };
+};
 
-export default updateRecord
+export default updateRecord;

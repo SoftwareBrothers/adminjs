@@ -1,7 +1,7 @@
-import { Action, RecordActionResponse } from '../action.interface'
-import NotFoundError from '../../utils/errors/not-found-error'
-import populator from '../../utils/populator/populator'
-import { paramConverter } from '../../../utils/param-converter'
+import { Action, RecordActionResponse } from '../action.interface';
+import NotFoundError from '../../utils/errors/not-found-error';
+import populator from '../../utils/populator/populator';
+import { paramConverter } from '../../../utils/param-converter';
 
 /**
  * @implements Action
@@ -30,22 +30,24 @@ export const EditAction: Action<RecordActionResponse> = {
    * @memberof module:EditAction
    */
   handler: async (request, response, context) => {
-    const { record, resource, currentAdmin, h, translateMessage } = context
+    const {
+      record, resource, currentAdmin, h, translateMessage,
+    } = context;
     if (!record) {
       throw new NotFoundError([
         `Record of given id ("${request.params.recordId}") could not be found`,
-      ].join('\n'), 'Action#handler')
+      ].join('\n'), 'Action#handler');
     }
     if (request.method === 'get') {
-      return { record: record.toJSON(currentAdmin) }
+      return { record: record.toJSON(currentAdmin) };
     }
 
-    const params = paramConverter.prepareParams(request.payload ?? {}, resource)
-    const newRecord = await record.update(params)
-    const [populatedRecord] = await populator([newRecord])
+    const params = paramConverter.prepareParams(request.payload ?? {}, resource);
+    const newRecord = await record.update(params);
+    const [populatedRecord] = await populator([newRecord]);
 
     // eslint-disable-next-line no-param-reassign
-    context.record = populatedRecord
+    context.record = populatedRecord;
 
     if (record.isValid()) {
       return {
@@ -55,18 +57,18 @@ export const EditAction: Action<RecordActionResponse> = {
           type: 'success',
         },
         record: populatedRecord.toJSON(currentAdmin),
-      }
+      };
     }
     const baseMessage = populatedRecord.baseError?.message
-      || translateMessage('thereWereValidationErrors', resource.id())
+      || translateMessage('thereWereValidationErrors', resource.id());
     return {
       record: populatedRecord.toJSON(currentAdmin),
       notice: {
         message: baseMessage,
         type: 'error',
       },
-    }
+    };
   },
-}
+};
 
-export default EditAction
+export default EditAction;

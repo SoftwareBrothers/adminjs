@@ -1,8 +1,8 @@
-import { expect } from 'chai'
-import { removePath } from './remove-path'
+import { expect } from 'chai';
+import { removePath } from './remove-path';
 
 describe('removePath', () => {
-  let params
+  let params;
 
   beforeEach(() => {
     params = {
@@ -19,15 +19,15 @@ describe('removePath', () => {
       'property.3.nested.4.some-other': 'val41',
       'property.4': 'val4',
       'property.5.nested.0': 'val5',
-    }
-  })
+    };
+  });
 
   it('removes regular property', () => {
-    expect(removePath(params, 'name')).not.to.have.keys('name')
-  })
+    expect(removePath(params, 'name')).not.to.have.keys('name');
+  });
 
   it('removes element from the array and updates other indexes', () => {
-    const newParams = removePath(params, 'property.1')
+    const newParams = removePath(params, 'property.1');
 
     expect(newParams).to.deep.equal({
       name: 'value',
@@ -42,11 +42,11 @@ describe('removePath', () => {
       'property.2.nested.4.some-other': 'val41',
       'property.3': 'val4',
       'property.4.nested.0': 'val5',
-    })
-  })
+    });
+  });
 
   it('removes parent element from the array and updates other indexes', () => {
-    const newParams = removePath(params, 'property.3.nested.3.some')
+    const newParams = removePath(params, 'property.3.nested.3.some');
 
     expect(newParams).to.deep.equal({
       name: 'value',
@@ -61,12 +61,12 @@ describe('removePath', () => {
       'property.3.nested.3.some-other': 'val41',
       'property.4': 'val4',
       'property.5.nested.0': 'val5',
-    })
-  })
+    });
+  });
 
   it('leaves empty array when removing last element', () => {
-    let newParams = removePath(params, 'notPopulated.0')
-    newParams = removePath(newParams, 'notPopulated.0')
+    let newParams = removePath(params, 'notPopulated.0');
+    newParams = removePath(newParams, 'notPopulated.0');
 
     expect(newParams).to.deep.equal({
       name: 'value',
@@ -81,6 +81,6 @@ describe('removePath', () => {
       'property.3.nested.4.some-other': 'val41',
       'property.4': 'val4',
       'property.5.nested.0': 'val5',
-    })
-  })
-})
+    });
+  });
+});

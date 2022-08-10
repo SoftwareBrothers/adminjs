@@ -1,13 +1,13 @@
-import { DecoratedActions } from './utils/decorate-actions'
+import { DecoratedActions } from './utils/decorate-actions';
 
-import { BaseResource, BaseRecord } from '../../adapters'
-import { PropertyDecorator, ActionDecorator } from '..'
-import ViewHelpers from '../../utils/view-helpers/view-helpers'
-import AdminJS from '../../../adminjs'
+import { BaseResource, BaseRecord } from '../../adapters';
+import { PropertyDecorator, ActionDecorator } from '..';
+import ViewHelpers from '../../utils/view-helpers/view-helpers';
+import AdminJS from '../../../adminjs';
 
-import { ResourceOptions } from './resource-options.interface'
-import { CurrentAdmin } from '../../../current-admin.interface'
-import { ResourceJSON, PropertyPlace } from '../../../frontend/interfaces'
+import { ResourceOptions } from './resource-options.interface';
+import { CurrentAdmin } from '../../../current-admin.interface';
+import { ResourceJSON, PropertyPlace } from '../../../frontend/interfaces';
 import {
   decorateActions,
   decorateProperties,
@@ -15,7 +15,7 @@ import {
   flatSubProperties,
   DecoratedProperties,
   getPropertyByKey,
-} from './utils'
+} from './utils';
 
 /**
  * Default maximum number of items which should be present in a list.
@@ -23,7 +23,7 @@ import {
  * @type {Number}
  * @private
  */
-export const DEFAULT_MAX_COLUMNS_IN_LIST = 8
+export const DEFAULT_MAX_COLUMNS_IN_LIST = 8;
 
 /**
  * Base decorator class which decorates the Resource.
@@ -48,17 +48,17 @@ class ResourceDecorator {
    *
    * for a the reference {@see decorateProperties}
    */
-  public properties: DecoratedProperties
+  public properties: DecoratedProperties;
 
-  public options: ResourceOptions
+  public options: ResourceOptions;
 
-  public actions: DecoratedActions
+  public actions: DecoratedActions;
 
-  private _resource: BaseResource
+  private _resource: BaseResource;
 
-  private _admin: AdminJS
+  private _admin: AdminJS;
 
-  private h: ViewHelpers
+  private h: ViewHelpers;
 
   /**
    * @param  {object}       options
@@ -71,30 +71,30 @@ class ResourceDecorator {
     admin: AdminJS;
     options: ResourceOptions;
   }) {
-    this.getPropertyByKey = this.getPropertyByKey.bind(this)
-    this._resource = resource
-    this._admin = admin
-    this.h = new ViewHelpers({ options: admin.options })
+    this.getPropertyByKey = this.getPropertyByKey.bind(this);
+    this._resource = resource;
+    this._admin = admin;
+    this.h = new ViewHelpers({ options: admin.options });
 
     /**
      * Options passed along with a given resource
      * @type {ResourceOptions}
     */
-    this.options = options
+    this.options = options;
 
-    this.options.properties = this.options.properties || {}
+    this.options.properties = this.options.properties || {};
 
     /**
      * List of all decorated root properties
      * @type {Array<PropertyDecorator>}
      */
-    this.properties = decorateProperties(resource, admin, this)
+    this.properties = decorateProperties(resource, admin, this);
 
     /**
      * Actions for a resource
      * @type {Object<String, ActionDecorator>}
      */
-    this.actions = decorateActions(resource, admin, this)
+    this.actions = decorateActions(resource, admin, this);
   }
 
   /**
@@ -102,7 +102,7 @@ class ResourceDecorator {
    * @return {string} resource name
    */
   getResourceName(): string {
-    return this._admin.translateLabel(this.id(), this.id())
+    return this._admin.translateLabel(this.id(), this.id());
   }
 
   /**
@@ -110,7 +110,7 @@ class ResourceDecorator {
    * @return {string} resource id
    */
   id(): string {
-    return this.options.id || this._resource.id()
+    return this.options.id || this._resource.id();
   }
 
   /**
@@ -119,7 +119,7 @@ class ResourceDecorator {
    * @return {Parent}   ResourceJSON['parent']}
    */
   getNavigation(): ResourceJSON['navigation'] {
-    return getNavigation(this.options, this._resource)
+    return getNavigation(this.options, this._resource);
   }
 
   /**
@@ -130,7 +130,7 @@ class ResourceDecorator {
    * @return  {PropertyDecorator}
    */
   getPropertyByKey(propertyPath: string): PropertyDecorator | null {
-    return getPropertyByKey(propertyPath, this.properties)
+    return getPropertyByKey(propertyPath, this.properties);
   }
 
   /**
@@ -147,20 +147,20 @@ class ResourceDecorator {
     where?: PropertyPlace;
     max?: number;
   }): Array<PropertyDecorator> {
-    const whereProperties = `${where}Properties` // like listProperties, viewProperties etc
+    const whereProperties = `${where}Properties`; // like listProperties, viewProperties etc
     if (where && this.options[whereProperties] && this.options[whereProperties].length) {
       return this.options[whereProperties]
         .map((propertyName) => {
-          const property = this.getPropertyByKey(propertyName)
+          const property = this.getPropertyByKey(propertyName);
           if (!property) {
             // eslint-disable-next-line no-console
             console.error([
               `[AdminJS]: There is no property of the name: "${propertyName}".`,
               `Check out the "${where}Properties" in the`,
-              `resource: "${this._resource.id()}"`].join(' '))
+              `resource: "${this._resource.id()}"`].join(' '));
           }
-          return property
-        }).filter((property) => property)
+          return property;
+        }).filter((property) => property);
     }
 
     const properties = Object.keys(this.properties)
@@ -170,12 +170,12 @@ class ResourceDecorator {
           ? 1
           : -1
       ))
-      .map((key) => this.properties[key])
+      .map((key) => this.properties[key]);
 
     if (max) {
-      return properties.slice(0, max)
+      return properties.slice(0, max);
     }
-    return properties
+    return properties;
   }
 
   /**
@@ -183,15 +183,15 @@ class ResourceDecorator {
    */
   getFlattenProperties(): Record<string, PropertyDecorator> {
     return Object.keys(this.properties).reduce((memo, propertyName) => {
-      const property = this.properties[propertyName]
+      const property = this.properties[propertyName];
 
-      const subProperties = flatSubProperties(property)
-      return Object.assign(memo, { [propertyName]: property }, subProperties)
-    }, {})
+      const subProperties = flatSubProperties(property);
+      return Object.assign(memo, { [propertyName]: property }, subProperties);
+    }, {});
   }
 
   getListProperties(): Array<PropertyDecorator> {
-    return this.getProperties({ where: 'list', max: DEFAULT_MAX_COLUMNS_IN_LIST })
+    return this.getProperties({ where: 'list', max: DEFAULT_MAX_COLUMNS_IN_LIST });
   }
 
   /**
@@ -207,7 +207,7 @@ class ResourceDecorator {
         action.isResourceType()
         && action.isVisible(currentAdmin)
         && action.isAccessible(currentAdmin)
-      ))
+      ));
   }
 
   /**
@@ -223,7 +223,7 @@ class ResourceDecorator {
         action.isBulkType()
         && action.isVisible(currentAdmin, record)
         && action.isAccessible(currentAdmin, record)
-      ))
+      ));
   }
 
   /**
@@ -239,7 +239,7 @@ class ResourceDecorator {
         action.isRecordType()
         && action.isVisible(currentAdmin, record)
         && action.isAccessible(currentAdmin, record)
-      ))
+      ));
   }
 
   /**
@@ -248,9 +248,9 @@ class ResourceDecorator {
    * @return  {PropertyDecorator} PropertyDecorator of title property
    */
   titleProperty(): PropertyDecorator {
-    const properties = Object.values(this.properties)
-    const titleProperty = properties.find((p) => p.isTitle())
-    return titleProperty || properties[0]
+    const properties = Object.values(this.properties);
+    const titleProperty = properties.find((p) => p.isTitle());
+    return titleProperty || properties[0];
   }
 
   /**
@@ -264,25 +264,25 @@ class ResourceDecorator {
    * @return  {String}      title of given record
    */
   titleOf(record: BaseRecord): string {
-    return record.get(this.titleProperty().name()) as string
+    return record.get(this.titleProperty().name()) as string;
   }
 
   getHref(currentAdmin?: CurrentAdmin): string | null {
-    const { href } = this.options
+    const { href } = this.options;
     if (href) {
       if (typeof href === 'function') {
         return href({
           resource: this._resource,
           currentAdmin,
           h: this.h,
-        })
+        });
       }
-      return href
+      return href;
     }
     if (this.resourceActions(currentAdmin).find((action) => action.name === 'list')) {
-      return this.h.resourceUrl({ resourceId: this.id() })
+      return this.h.resourceUrl({ resourceId: this.id() });
     }
-    return null
+    return null;
   }
 
   /**
@@ -292,11 +292,11 @@ class ResourceDecorator {
    * @return  {ResourceJSON}
    */
   toJSON(currentAdmin?: CurrentAdmin): ResourceJSON {
-    const flattenProperties = this.getFlattenProperties()
+    const flattenProperties = this.getFlattenProperties();
     const flattenPropertiesJSON = Object.keys(flattenProperties).reduce((memo, key) => ({
       ...memo,
       [key]: flattenProperties[key].toJSON(),
-    }), {})
+    }), {});
 
     return {
       id: this.id(),
@@ -319,8 +319,8 @@ class ResourceDecorator {
       filterProperties: this.getProperties({
         where: 'filter',
       }).map((property) => property.toJSON('filter')),
-    }
+    };
   }
 }
 
-export default ResourceDecorator
+export default ResourceDecorator;

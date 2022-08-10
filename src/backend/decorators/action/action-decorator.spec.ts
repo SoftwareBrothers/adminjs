@@ -1,32 +1,34 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
-import { expect } from 'chai'
-import sinon from 'sinon'
-import ActionDecorator from './action-decorator'
-import AdminJS from '../../../adminjs'
-import BaseResource from '../../adapters/resource/base-resource'
-import { ActionRequest, ActionContext, ActionResponse, Before, After } from '../../actions/action.interface'
-import ForbiddenError from '../../utils/errors/forbidden-error'
-import ValidationError from '../../utils/errors/validation-error'
+import { expect } from 'chai';
+import sinon from 'sinon';
+import ActionDecorator from './action-decorator';
+import AdminJS from '../../../adminjs';
+import BaseResource from '../../adapters/resource/base-resource';
+import {
+  ActionRequest, ActionContext, ActionResponse, Before, After,
+} from '../../actions/action.interface';
+import ForbiddenError from '../../utils/errors/forbidden-error';
+import ValidationError from '../../utils/errors/validation-error';
 
 describe('ActionDecorator', function () {
-  const request = { response: true } as unknown as ActionRequest
-  let admin: AdminJS
-  let resource: BaseResource
-  let context: ActionContext
-  let action: ActionDecorator
-  let handler: sinon.SinonStub<any, Promise<ActionResponse>>
+  const request = { response: true } as unknown as ActionRequest;
+  let admin: AdminJS;
+  let resource: BaseResource;
+  let context: ActionContext;
+  let action: ActionDecorator;
+  let handler: sinon.SinonStub<any, Promise<ActionResponse>>;
 
   beforeEach(function () {
-    admin = sinon.createStubInstance(AdminJS)
-    resource = sinon.createStubInstance(BaseResource)
-    action = { name: 'myAction' } as ActionDecorator
-    context = { resource, _admin: admin, action } as ActionContext
-    handler = sinon.stub()
-  })
+    admin = sinon.createStubInstance(AdminJS);
+    resource = sinon.createStubInstance(BaseResource);
+    action = { name: 'myAction' } as ActionDecorator;
+    context = { resource, _admin: admin, action } as ActionContext;
+    handler = sinon.stub();
+  });
 
   afterEach(function () {
-    sinon.restore()
-  })
+    sinon.restore();
+  });
 
   describe('#before', function () {
     it('calls all functions if they were given as an array', async function () {
@@ -39,22 +41,24 @@ describe('ActionDecorator', function () {
           response2: true,
         }),
         async (response) => ({ ...response, response3: true }),
-      ] as unknown as Array<Before>
+      ] as unknown as Array<Before>;
       const decorator = new ActionDecorator({
-        action: { before, handler, name: 'myAction', actionType: 'resource' },
+        action: {
+          before, handler, name: 'myAction', actionType: 'resource',
+        },
         admin,
         resource,
-      })
+      });
 
-      const ret = await decorator.invokeBeforeHook({} as ActionRequest, {} as ActionContext)
+      const ret = await decorator.invokeBeforeHook({} as ActionRequest, {} as ActionContext);
 
       expect(ret).to.deep.eq({
         response1: true,
         response2: true,
         response3: true,
-      })
-    })
-  })
+      });
+    });
+  });
 
   describe('#after', function () {
     it('calls all functions if they were given as an array', async function () {
@@ -66,84 +70,92 @@ describe('ActionDecorator', function () {
           response2: true,
         }),
         async (response) => ({ ...response, response3: true }),
-      ] as unknown as Array<After<ActionResponse>>
+      ] as unknown as Array<After<ActionResponse>>;
       const decorator = new ActionDecorator({
-        action: { after, handler, name: 'myAction', actionType: 'resource' },
+        action: {
+          after, handler, name: 'myAction', actionType: 'resource',
+        },
         admin,
         resource,
-      })
+      });
 
       const ret = await decorator.invokeAfterHook(
         {} as ActionResponse,
         {} as ActionRequest,
         {} as ActionContext,
-      )
+      );
 
       expect(ret).to.deep.eq({
         response1: true,
         response2: true,
         response3: true,
-      })
-    })
-  })
+      });
+    });
+  });
 
   describe('#handler', function () {
     it('calls the before action when it is given', async function () {
-      const mockedRequest = { response: true }
-      const before = sinon.stub().returns(mockedRequest)
+      const mockedRequest = { response: true };
+      const before = sinon.stub().returns(mockedRequest);
 
       const decorator = new ActionDecorator({
-        action: { before, handler, name: 'myAction', actionType: 'resource' },
+        action: {
+          before, handler, name: 'myAction', actionType: 'resource',
+        },
         admin,
         resource,
-      })
+      });
 
-      await decorator.handler(request, 'res', context)
+      await decorator.handler(request, 'res', context);
 
-      expect(before).to.have.been.calledWith(request)
+      expect(before).to.have.been.calledWith(request);
       expect(handler).to.have.been.calledWith(
         sinon.match(mockedRequest),
-      )
-    })
+      );
+    });
 
     it('calls the after action when it is given', async function () {
-      const modifiedData = { records: false }
-      const data = {}
-      const after = sinon.stub().returns(modifiedData)
-      handler = handler.resolves(data)
+      const modifiedData = { records: false };
+      const data = {};
+      const after = sinon.stub().returns(modifiedData);
+      handler = handler.resolves(data);
       const decorator = new ActionDecorator({
-        action: { name: 'myAction', handler, after, actionType: 'resource' },
+        action: {
+          name: 'myAction', handler, after, actionType: 'resource',
+        },
         admin,
         resource,
-      })
+      });
 
-      const ret = await decorator.handler(request, 'res', context)
+      const ret = await decorator.handler(request, 'res', context);
 
-      expect(ret).to.equal(modifiedData)
-      expect(handler).to.have.been.called
-      expect(after).to.have.been.calledWith(data)
-    })
+      expect(ret).to.equal(modifiedData);
+      expect(handler).to.have.been.called;
+      expect(after).to.have.been.calledWith(data);
+    });
 
     it('returns forbidden error when its thrown', async function () {
-      const errorMessage = 'you cannot edit this resource'
-      const before = sinon.stub().throws(new ForbiddenError(errorMessage))
+      const errorMessage = 'you cannot edit this resource';
+      const before = sinon.stub().throws(new ForbiddenError(errorMessage));
 
       const decorator = new ActionDecorator({
-        action: { before, handler, name: 'myAction', actionType: 'record' },
+        action: {
+          before, handler, name: 'myAction', actionType: 'record',
+        },
         admin,
         resource,
-      })
+      });
 
-      const ret = await decorator.handler(request, 'res', context)
+      const ret = await decorator.handler(request, 'res', context);
 
-      expect(before).to.have.been.calledWith(request)
-      expect(ret).to.have.property('notice')
+      expect(before).to.have.been.calledWith(request);
+      expect(ret).to.have.property('notice');
       expect(ret.notice).to.deep.equal({
         message: errorMessage,
         type: 'error',
-      })
-      expect(handler).not.to.have.been.called
-    })
+      });
+      expect(handler).not.to.have.been.called;
+    });
 
     it('returns record with validation errors when they are thrown', async function () {
       const errors = {
@@ -151,28 +163,30 @@ describe('ActionDecorator', function () {
           message: 'Wrong email',
           type: 'notGood',
         },
-      }
-      const notice = { message: 'There are validation errors', type: 'validationError' }
-      const before = sinon.stub().throws(new ValidationError(errors, notice))
+      };
+      const notice = { message: 'There are validation errors', type: 'validationError' };
+      const before = sinon.stub().throws(new ValidationError(errors, notice));
 
       const decorator = new ActionDecorator({
-        action: { before, handler, name: 'myAction', actionType: 'record' },
+        action: {
+          before, handler, name: 'myAction', actionType: 'record',
+        },
         admin,
         resource,
-      })
+      });
 
-      const ret = await decorator.handler(request, 'res', context)
+      const ret = await decorator.handler(request, 'res', context);
 
-      expect(before).to.have.been.calledWith(request)
-      expect(ret).to.have.property('notice')
+      expect(before).to.have.been.calledWith(request);
+      expect(ret).to.have.property('notice');
       expect(ret.notice).to.deep.equal({
         message: notice.message,
         type: 'error',
-      })
-      expect(ret).to.have.property('record')
-      expect(ret.record).to.have.property('errors')
-      expect(ret.record.errors).to.deep.equal(errors)
-      expect(handler).not.to.have.been.called
-    })
-  })
-})
+      });
+      expect(ret).to.have.property('record');
+      expect(ret.record).to.have.property('errors');
+      expect(ret.record.errors).to.deep.equal(errors);
+      expect(handler).not.to.have.been.called;
+    });
+  });
+});

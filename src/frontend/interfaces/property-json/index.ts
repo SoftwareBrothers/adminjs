@@ -1,1 +1,1 @@
-export * from './property-json.interface'
+export * from './property-json.interface';

@@ -1,28 +1,28 @@
-import * as _ from 'lodash'
-import * as path from 'path'
-import * as fs from 'fs'
-import i18n, { i18n as I18n } from 'i18next'
+import * as _ from 'lodash';
+import * as path from 'path';
+import * as fs from 'fs';
+import i18n, { i18n as I18n } from 'i18next';
 
-import { AdminJSOptionsWithDefault, AdminJSOptions } from './adminjs-options.interface'
-import BaseResource from './backend/adapters/resource/base-resource'
-import BaseDatabase from './backend/adapters/database/base-database'
-import ConfigurationError from './backend/utils/errors/configuration-error'
-import ResourcesFactory from './backend/utils/resources-factory/resources-factory'
-import userComponentsBundler from './backend/bundler/user-components-bundler'
-import { RecordActionResponse, Action, BulkActionResponse } from './backend/actions/action.interface'
-import { DEFAULT_PATHS } from './constants'
-import { ACTIONS } from './backend/actions'
+import { AdminJSOptionsWithDefault, AdminJSOptions } from './adminjs-options.interface';
+import BaseResource from './backend/adapters/resource/base-resource';
+import BaseDatabase from './backend/adapters/database/base-database';
+import ConfigurationError from './backend/utils/errors/configuration-error';
+import ResourcesFactory from './backend/utils/resources-factory/resources-factory';
+import userComponentsBundler from './backend/bundler/user-components-bundler';
+import { RecordActionResponse, Action, BulkActionResponse } from './backend/actions/action.interface';
+import { DEFAULT_PATHS } from './constants';
+import { ACTIONS } from './backend/actions';
 
-import loginTemplate from './frontend/login-template'
-import { ListActionResponse } from './backend/actions/list/list-action'
-import { combineTranslations, Locale } from './locale/config'
-import { locales } from './locale'
-import { TranslateFunctions, createFunctions } from './utils/translate-functions.factory'
-import { OverridableComponent } from './frontend/utils/overridable-component'
-import { relativeFilePathResolver } from './utils/file-resolver'
+import loginTemplate from './frontend/login-template';
+import { ListActionResponse } from './backend/actions/list/list-action';
+import { combineTranslations, Locale } from './locale/config';
+import { locales } from './locale';
+import { TranslateFunctions, createFunctions } from './utils/translate-functions.factory';
+import { OverridableComponent } from './frontend/utils/overridable-component';
+import { relativeFilePathResolver } from './utils/file-resolver';
 
-const pkg = JSON.parse(fs.readFileSync(path.join(__dirname, '../package.json'), 'utf-8'))
-export const VERSION = pkg.version
+const pkg = JSON.parse(fs.readFileSync(path.join(__dirname, '../package.json'), 'utf-8'));
+export const VERSION = pkg.version;
 
 export const defaultOptions: AdminJSOptionsWithDefault = {
   rootPath: DEFAULT_PATHS.rootPath,
@@ -33,7 +33,7 @@ export const defaultOptions: AdminJSOptionsWithDefault = {
   dashboard: {},
   pages: {},
   bundler: {},
-}
+};
 
 type ActionsMap = {
   show: Action<RecordActionResponse>;
@@ -58,15 +58,15 @@ export type Adapter = { Database: typeof BaseDatabase; Resource: typeof BaseReso
  * const admin = new AdminJS(AdminJSOptions)
  */
 class AdminJS {
-  public resources: Array<BaseResource>
+  public resources: Array<BaseResource>;
 
-  public options: AdminJSOptionsWithDefault
+  public options: AdminJSOptionsWithDefault;
 
-  public locale!: Locale
+  public locale!: Locale;
 
-  public i18n!: I18n
+  public i18n!: I18n;
 
-  public translateFunctions!: TranslateFunctions
+  public translateFunctions!: TranslateFunctions;
 
   /**
    * List of all default actions. If you want to change the behavior for all actions like:
@@ -76,12 +76,12 @@ class AdminJS {
    * const { ACTIONS } = require('adminjs')
    * ACTIONS.show.isAccessible = () => {...}
    */
-  public static ACTIONS: ActionsMap
+  public static ACTIONS: ActionsMap;
 
   /**
    * AdminJS version
    */
-  public static VERSION: string
+  public static VERSION: string;
 
   /**
    * @param   {AdminJSOptions} options      Options passed to AdminJS
@@ -92,32 +92,32 @@ class AdminJS {
      * @description List of all resources available for the AdminJS.
      * They can be fetched with the {@link AdminJS#findResource} method
      */
-    this.resources = []
+    this.resources = [];
 
     /**
      * @type {AdminJSOptions}
      * @description Options given by a user
      */
-    this.options = _.merge({}, defaultOptions, options)
+    this.options = _.merge({}, defaultOptions, options);
 
-    this.resolveBabelConfigPath()
+    this.resolveBabelConfigPath();
 
-    this.initI18n()
+    this.initI18n();
 
-    const { databases, resources } = this.options
-    const resourcesFactory = new ResourcesFactory(this, global.RegisteredAdapters || [])
-    this.resources = resourcesFactory.buildResources({ databases, resources })
+    const { databases, resources } = this.options;
+    const resourcesFactory = new ResourcesFactory(this, global.RegisteredAdapters || []);
+    this.resources = resourcesFactory.buildResources({ databases, resources });
   }
 
   initI18n(): void {
-    const language = this.options.locale?.language || locales.en.language
-    const defaultTranslations = locales[language]?.translations || locales.en.translations
+    const language = this.options.locale?.language || locales.en.language;
+    const defaultTranslations = locales[language]?.translations || locales.en.translations;
     this.locale = {
       translations: combineTranslations(defaultTranslations, this.options.locale?.translations),
       language,
-    }
+    };
     if (i18n.isInitialized) {
-      i18n.addResourceBundle(this.locale.language, 'translation', this.locale.translations)
+      i18n.addResourceBundle(this.locale.language, 'translation', this.locale.translations);
     } else {
       i18n.init({
         lng: this.locale.language,
@@ -127,15 +127,15 @@ class AdminJS {
             translation: this.locale.translations,
           },
         },
-      })
+      });
     }
 
     // mixin translate functions to AdminJS instance so users will be able to
     // call AdminJS.translateMessage(...)
-    this.translateFunctions = createFunctions(i18n)
+    this.translateFunctions = createFunctions(i18n);
     Object.getOwnPropertyNames(this.translateFunctions).forEach((translateFunctionName) => {
-      this[translateFunctionName] = this.translateFunctions[translateFunctionName]
-    })
+      this[translateFunctionName] = this.translateFunctions[translateFunctionName];
+    });
   }
 
   /**
@@ -155,17 +155,18 @@ class AdminJS {
     Resource: typeof BaseResource;
   }): void {
     if (!Database || !Resource) {
-      throw new Error('Adapter has to have both Database and Resource')
+      throw new Error('Adapter has to have both Database and Resource');
     }
 
     // TODO: check if this is actually valid because "isAdapterFor" is always defined.
     // checking if both Database and Resource have at least isAdapterFor method
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
     if (Database.isAdapterFor && Resource.isAdapterFor) {
-      global.RegisteredAdapters = global.RegisteredAdapters || []
-      global.RegisteredAdapters.push({ Database, Resource })
+      global.RegisteredAdapters = global.RegisteredAdapters || [];
+      global.RegisteredAdapters.push({ Database, Resource });
     } else {
-      throw new Error('Adapter elements have to be a subclass of AdminJS.BaseResource and AdminJS.BaseDatabase')
+      throw new Error('Adapter elements have to be a subclass of AdminJS.BaseResource and AdminJS.BaseDatabase');
     }
   }
 
@@ -177,8 +178,8 @@ class AdminJS {
     if (process.env.NODE_ENV === 'production'
         && !(process.env.ADMIN_JS_SKIP_BUNDLE === 'true')) {
       // eslint-disable-next-line no-console
-      console.log('AdminJS: bundling user components...')
-      await userComponentsBundler(this, { write: true })
+      console.log('AdminJS: bundling user components...');
+      await userComponentsBundler(this, { write: true });
     }
   }
 
@@ -190,9 +191,9 @@ class AdminJS {
    */
   async watch(): Promise<string | undefined> {
     if (process.env.NODE_ENV !== 'production') {
-      return userComponentsBundler(this, { write: true, watch: true })
+      return userComponentsBundler(this, { write: true, watch: true });
     }
-    return undefined
+    return undefined;
   }
 
   /**
@@ -210,7 +211,7 @@ class AdminJS {
    * @return {Promise<string>}                HTML of the rendered page
    */
   async renderLogin({ action, errorMessage }): Promise<string> {
-    return loginTemplate(this, { action, errorMessage })
+    return loginTemplate(this, { action, errorMessage });
   }
 
   /**
@@ -225,15 +226,15 @@ class AdminJS {
    * @throws {Error}                When resource with given id cannot be found
    */
   findResource(resourceId): BaseResource {
-    const resource = this.resources.find((m) => m._decorated?.id() === resourceId)
+    const resource = this.resources.find((m) => m._decorated?.id() === resourceId);
     if (!resource) {
       throw new Error([
         `There are no resources with given id: "${resourceId}"`,
         'This is the list of all registered resources you can use:',
         this.resources.map((r) => r._decorated?.id() || r.id()).join(', '),
-      ].join('\n'))
+      ].join('\n'));
     }
-    return resource
+    return resource;
   }
 
   /**
@@ -242,45 +243,45 @@ class AdminJS {
    */
   resolveBabelConfigPath(): void {
     if (typeof this.options?.bundler?.babelConfig !== 'string') {
-      return
+      return;
     }
-    let filePath = ''
-    let config = this.options?.bundler?.babelConfig
+    let filePath = '';
+    let config = this.options?.bundler?.babelConfig;
     if (config[0] === '/') {
-      filePath = config
+      filePath = config;
     } else {
-      filePath = relativeFilePathResolver(config, /new AdminJS/)
+      filePath = relativeFilePathResolver(config, /new AdminJS/);
     }
 
     if (!fs.existsSync(filePath)) {
-      throw new ConfigurationError(`Given babel config "${filePath}", doesn't exist.`, 'AdminJS.html')
+      throw new ConfigurationError(`Given babel config "${filePath}", doesn't exist.`, 'AdminJS.html');
     }
     if (path.extname(filePath) === '.js') {
       // eslint-disable-next-line
       const configModule = require(filePath)
       config = configModule && configModule.__esModule
         ? configModule.default || undefined
-        : configModule
+        : configModule;
       if (!config || typeof config !== 'object' || Array.isArray(config)) {
         throw new Error(
           `${filePath}: Configuration should be an exported JavaScript object.`,
-        )
+        );
       }
     } else {
       try {
-        config = JSON.parse(fs.readFileSync(filePath, 'utf8'))
+        config = JSON.parse(fs.readFileSync(filePath, 'utf8'));
       } catch (err) {
-        throw new Error(`${filePath}: Error while parsing config - ${err.message}`)
+        throw new Error(`${filePath}: Error while parsing config - ${err.message}`);
       }
-      if (!config) throw new Error(`${filePath}: No config detected`)
+      if (!config) throw new Error(`${filePath}: No config detected`);
       if (typeof config !== 'object') {
-        throw new Error(`${filePath}: Config returned typeof ${typeof config}`)
+        throw new Error(`${filePath}: Config returned typeof ${typeof config}`);
       }
       if (Array.isArray(config)) {
-        throw new Error(`${filePath}: Expected config object but found array`)
+        throw new Error(`${filePath}: Expected config object but found array`);
       }
     }
-    this.options.bundler.babelConfig = config
+    this.options.bundler.babelConfig = config;
   }
 
   /**
@@ -304,21 +305,26 @@ class AdminJS {
    * AdminJS.bundle('./path/to/new-sidebar/component', 'SidebarFooter')
    */
   public static bundle(src: string, componentName?: OverridableComponent): string {
-    const nextId = Object.keys(global.UserComponents || {}).length + 1
-    const extensions = ['.jsx', '.js', '.ts', '.tsx']
-    let filePath = ''
-    const componentId = componentName || `Component${nextId}`
+    const nextId = Object.keys(global.UserComponents || {}).length + 1;
+    const extensions = ['.jsx', '.js', '.ts', '.tsx'];
+    let filePath = '';
+    const componentId = componentName || `Component${nextId}`;
     if (path.isAbsolute(src)) {
-      filePath = src
+      filePath = src;
     } else {
-      filePath = relativeFilePathResolver(src, /.*\.{1}bundle/)
+      filePath = relativeFilePathResolver(src, /.*\.{1}bundle/);
     }
 
-    const { ext: originalFileExtension } = path.parse(filePath)
+    const { ext: originalFileExtension } = path.parse(filePath);
+    // eslint-disable-next-line no-restricted-syntax
     for (const extension of extensions) {
-      const forcedExt = extensions.includes(originalFileExtension) ? '' : extension
-      const { root, dir, name, ext } = path.parse(filePath + forcedExt)
-      const fileName = path.format({ root, dir, name, ext })
+      const forcedExt = extensions.includes(originalFileExtension) ? '' : extension;
+      const {
+        root, dir, name, ext,
+      } = path.parse(filePath + forcedExt);
+      const fileName = path.format({
+        root, dir, name, ext,
+      });
       if (fs.existsSync(fileName)) {
         // We have to put this to the global scope because of the NPM resolution. If we put this to
         // let say `AdminJS.UserComponents` (static member) it wont work in a case where user uses
@@ -327,24 +333,24 @@ class AdminJS {
         // putting admin to peerDependencies wont solve this issue, because in the development mode
         // we have to install adminjs it as a devDependency, because we want to run test or have
         // proper types.
-        global.UserComponents = global.UserComponents || {}
-        global.UserComponents[componentId] = path.format({ root, dir, name })
+        global.UserComponents = global.UserComponents || {};
+        global.UserComponents[componentId] = path.format({ root, dir, name });
 
-        return componentId
+        return componentId;
       }
     }
 
-    throw new ConfigurationError(`Given file "${src}", doesn't exist.`, 'AdminJS.html')
+    throw new ConfigurationError(`Given file "${src}", doesn't exist.`, 'AdminJS.html');
   }
 }
 
-AdminJS.VERSION = VERSION
-AdminJS.ACTIONS = ACTIONS
+AdminJS.VERSION = VERSION;
+AdminJS.ACTIONS = ACTIONS;
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 interface AdminJS extends TranslateFunctions {}
 
-export const { registerAdapter } = AdminJS
-export const { bundle } = AdminJS
+export const { registerAdapter } = AdminJS;
+export const { bundle } = AdminJS;
 
-export default AdminJS
+export default AdminJS;

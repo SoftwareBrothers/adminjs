@@ -1,6 +1,6 @@
-import React, { ReactNode } from 'react'
-import { MessageBox, Text } from '@adminjs/design-system'
-import { useTranslation } from '../../hooks'
+import React, { ReactNode } from 'react';
+import { MessageBox, Text } from '@adminjs/design-system';
+import { useTranslation } from '../../hooks';
 
 /**
  * @memberof ErrorMessageBox
@@ -26,19 +26,19 @@ export type ErrorMessageBoxProps = {
  * )
  */
 const ErrorMessageBox: React.FC<ErrorMessageBoxProps> = (props) => {
-  const { children, title, testId } = props
+  const { children, title, testId } = props;
   return (
     <MessageBox data-testid={testId} message={title}>
       <Text>
         {children}
       </Text>
     </MessageBox>
-  )
-}
+  );
+};
 
 const NoResourceError: React.FC<{resourceId: string}> = (props) => {
-  const { resourceId } = props
-  const { translateMessage } = useTranslation()
+  const { resourceId } = props;
+  const { translateMessage } = useTranslation();
   return (
     <MessageBox
       message="404 - PAGE NOT FOUND"
@@ -50,12 +50,12 @@ const NoResourceError: React.FC<{resourceId: string}> = (props) => {
         {translateMessage('error404Resource', resourceId, { resourceId })}
       </Text>
     </MessageBox>
-  )
-}
+  );
+};
 
 const NoActionError: React.FC<{ resourceId: string; actionName: string }> = (props) => {
-  const { resourceId, actionName } = props
-  const { translateMessage } = useTranslation()
+  const { resourceId, actionName } = props;
+  const { translateMessage } = useTranslation();
   return (
     <MessageBox
       message="404 - PAGE NOT FOUND"
@@ -67,15 +67,15 @@ const NoActionError: React.FC<{ resourceId: string; actionName: string }> = (pro
         {translateMessage('error404Action', resourceId, { resourceId, actionName })}
       </Text>
     </MessageBox>
-  )
-}
+  );
+};
 
 const NoRecordError: React.FC<{
   resourceId: string;
   recordId: string;
 }> = (props) => {
-  const { resourceId, recordId } = props
-  const { translateMessage } = useTranslation()
+  const { resourceId, recordId } = props;
+  const { translateMessage } = useTranslation();
   return (
     <MessageBox
       message="404 - PAGE NOT FOUND"
@@ -87,8 +87,8 @@ const NoRecordError: React.FC<{
         {translateMessage('error404Record', resourceId, { resourceId, recordId })}
       </Text>
     </MessageBox>
-  )
-}
+  );
+};
 
 export {
   NoResourceError,
@@ -96,4 +96,4 @@ export {
   NoRecordError,
   ErrorMessageBox,
   ErrorMessageBox as default,
-}
+};

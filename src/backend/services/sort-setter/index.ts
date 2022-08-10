@@ -1,1 +1,1 @@
-export { default as SortSetter } from './sort-setter'
+export { default as SortSetter } from './sort-setter';

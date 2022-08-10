@@ -1,9 +1,9 @@
-import { expect } from 'chai'
-import { FlattenParams } from '../flat'
-import { get } from './get'
+import { expect } from 'chai';
+import { FlattenParams } from '.';
+import { get } from './get';
 
 describe('module:flat.get', () => {
-  let params: FlattenParams
+  let params: FlattenParams;
 
   beforeEach(() => {
     params = {
@@ -25,30 +25,30 @@ describe('module:flat.get', () => {
       'nested.0.el.1.value': 'val0.1',
       'nested.1.el.0.value': 'val1',
       'nested.1.el.1.value': 'val2',
-    }
-  })
+    };
+  });
 
   it('returns regular string', () => {
-    expect(get(params, 'name')).to.eq(params.name)
-  })
+    expect(get(params, 'name')).to.eq(params.name);
+  });
 
   it('returns undefined for non existing property', () => {
-    expect(get(params, 'nameNotExisting')).to.be.undefined
-  })
+    expect(get(params, 'nameNotExisting')).to.be.undefined;
+  });
 
   it('returns undefined for property set to undefined', () => {
     expect(get({
       property: undefined as any,
-    }, 'property')).to.be.undefined
-  })
+    }, 'property')).to.be.undefined;
+  });
 
   it('returns nested array', () => {
     expect(get(params, 'interest.OfMe')).to.deep.equal([
       'javascript',
       'typescript',
       'brainTumor',
-    ])
-  })
+    ]);
+  });
 
   it('returns object with nested array', () => {
     expect(get(params, 'interest')).to.deep.equal({
@@ -57,23 +57,23 @@ describe('module:flat.get', () => {
         'typescript',
         'brainTumor',
       ],
-    })
-  })
+    });
+  });
 
   it('returns undefined when not exact property is given', () => {
-    expect(get(params, 'interest.Of')).to.be.undefined
-  })
+    expect(get(params, 'interest.Of')).to.be.undefined;
+  });
 
   it('returns null for null values', () => {
-    expect(get(params, 'nulled')).to.eq(null)
-  })
+    expect(get(params, 'nulled')).to.eq(null);
+  });
 
   it('returns nested arrays', () => {
     expect(get(params, 'nested.0.el')).to.deep.equal([
       { value: 'val0.0' },
       { value: 'val0.1' },
-    ])
-  })
+    ]);
+  });
 
   it('returns nested arrays with siblings when `includeAllSiblings` is set', () => {
     expect(get(params, 'nested.el', { includeAllSiblings: true })).to.deep.equal([
@@ -81,11 +81,11 @@ describe('module:flat.get', () => {
       { value: 'val0.1' },
       { value: 'val1' },
       { value: 'val2' },
-    ])
-  })
+    ]);
+  });
 
   context('gets nested reference id', () => {
-    const referenceId = '5f7462621eb3495ea0f0edd9'
+    const referenceId = '5f7462621eb3495ea0f0edd9';
 
     beforeEach(() => {
       params = {
@@ -95,14 +95,14 @@ describe('module:flat.get', () => {
         'Skills.hardSkills.0.name': '123',
         'Skills.hardSkills.0.level': 'junior',
         'Skills.hardSkills.0.Profession': referenceId,
-      }
-    })
+      };
+    });
 
     it('returns referenceId when propertyPath is given', () => {
-      const propertyPath = 'Skills.hardSkills.Profession'
+      const propertyPath = 'Skills.hardSkills.Profession';
       expect(get(params, propertyPath, { includeAllSiblings: true })).to.deep.equal(
         [referenceId],
-      )
-    })
-  })
-})
+      );
+    });
+  });
+});

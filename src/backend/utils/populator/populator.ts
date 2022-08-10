@@ -1,5 +1,5 @@
-import BaseRecord from '../../adapters/record/base-record'
-import { populateProperty } from './populate-property'
+import BaseRecord from '../../adapters/record/base-record';
+import { populateProperty } from './populate-property';
 
 /**
  * @load ./populator.doc.md
@@ -10,17 +10,17 @@ export async function populator(
   records: Array<BaseRecord>,
 ): Promise<Array<BaseRecord>> {
   if (!records || !records.length) {
-    return records
+    return records;
   }
-  const resourceDecorator = records[0].resource.decorate()
-  const allProperties = Object.values(resourceDecorator.getFlattenProperties())
+  const resourceDecorator = records[0].resource.decorate();
+  const allProperties = Object.values(resourceDecorator.getFlattenProperties());
 
-  const references = allProperties.filter((p) => !!p.reference())
+  const references = allProperties.filter((p) => !!p.reference());
 
   await Promise.all(references.map(async (propertyDecorator) => {
-    await populateProperty(records, propertyDecorator)
-  }))
-  return records
+    await populateProperty(records, propertyDecorator);
+  }));
+  return records;
 }
 
-export default populator
+export default populator;

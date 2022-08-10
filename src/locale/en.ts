@@ -85,9 +85,9 @@ const translations = {
     needMoreSolutions_subtitle: 'We are here to provide you a beautiful UX/UI design and tailor made software based (not only) on AdminJS',
     invalidCredentials: 'Wrong email and/or password',
   },
-}
+};
 
 export default {
   language: 'en',
   translations,
-}
+};

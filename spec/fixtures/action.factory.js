@@ -1,4 +1,4 @@
-import { factory } from 'factory-girl'
+import { factory } from 'factory-girl';
 
 factory.define('action', Object, {
   name: factory.sequence('action.name', (n) => `action${n}`),
@@ -8,12 +8,12 @@ factory.define('action', Object, {
   guard: null,
   showFilter: false,
   component: undefined,
-})
+});
 
 factory.extend('action', 'recordAction', {
   actionType: 'record',
-})
+});
 
 factory.extend('action', 'resourceAction', {
   actionType: 'resource',
-})
+});

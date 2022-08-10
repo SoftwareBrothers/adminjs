@@ -1,49 +1,49 @@
-import BaseResource from '../../adapters/resource/base-resource'
-import AdminJS, { Adapter } from '../../../adminjs'
-import { ResourceWithOptions } from '../../../adminjs-options.interface'
-import { mergeResourceOptions } from '../build-feature'
+import BaseResource from '../../adapters/resource/base-resource';
+import AdminJS, { Adapter } from '../../../adminjs';
+import { ResourceWithOptions } from '../../../adminjs-options.interface';
+import { mergeResourceOptions } from '../build-feature';
 
 export class NoDatabaseAdapterError extends Error {
-  private database: string
+  private database: string;
 
   constructor(database: string) {
-    const message = 'There are no adapters supporting one of the database you provided'
-    super(message)
-    this.database = database
-    this.name = 'NoDatabaseAdapterError'
+    const message = 'There are no adapters supporting one of the database you provided';
+    super(message);
+    this.database = database;
+    this.name = 'NoDatabaseAdapterError';
   }
 }
 
 export class NoResourceAdapterError extends Error {
-  private resource: BaseResource
+  private resource: BaseResource;
 
   constructor(resource: BaseResource) {
-    const message = 'There are no adapters supporting one of the resource you provided'
-    super(message)
-    this.resource = resource
-    this.name = 'NoResourceAdapterError'
+    const message = 'There are no adapters supporting one of the resource you provided';
+    super(message);
+    this.resource = resource;
+    this.name = 'NoResourceAdapterError';
   }
 }
 
 export class ResourcesFactory {
-  private adapters: Array<Adapter>
+  private adapters: Array<Adapter>;
 
-  private admin: AdminJS
+  private admin: AdminJS;
 
   constructor(admin, adapters: Array<Adapter> = []) {
-    this.adapters = adapters
-    this.admin = admin
+    this.adapters = adapters;
+    this.admin = admin;
   }
 
   buildResources({ databases, resources }): Array<BaseResource> {
-    const optionsResources = this._convertResources(resources)
+    const optionsResources = this._convertResources(resources);
 
     // fetch only those resources from database which weren't previously given as a resource
     const databaseResources = this._convertDatabases(databases).filter((dr) => (
       !optionsResources.find((optionResource) => optionResource.resource.id() === dr.id())
-    ))
+    ));
 
-    return this._decorateResources([...databaseResources, ...optionsResources])
+    return this._decorateResources([...databaseResources, ...optionsResources]);
   }
 
   /**
@@ -56,12 +56,12 @@ export class ResourcesFactory {
     return databases.reduce((memoArray, db) => {
       const databaseAdapter = this.adapters.find((adapter) => (
         adapter.Database.isAdapterFor(db)
-      ))
+      ));
       if (!databaseAdapter) {
-        throw new NoDatabaseAdapterError(db)
+        throw new NoDatabaseAdapterError(db);
       }
-      return memoArray.concat(new databaseAdapter.Database(db).resources())
-    }, [])
+      return memoArray.concat(new databaseAdapter.Database(db).resources());
+    }, []);
   }
 
   /**
@@ -83,19 +83,19 @@ export class ResourcesFactory {
   _convertResources(resources: Array<any | ResourceWithOptions>): Array<any> {
     return resources.map((rawResource) => {
       // resource can be given either by a value or within an object within resource key
-      const resourceObject = rawResource.resource || rawResource
+      const resourceObject = rawResource.resource || rawResource;
       const resourceAdapter = this.adapters.find((adapter) => (
         adapter.Resource.isAdapterFor(resourceObject)
-      ))
+      ));
       if (!resourceAdapter && !(resourceObject instanceof BaseResource)) {
-        throw new NoResourceAdapterError(resourceObject)
+        throw new NoResourceAdapterError(resourceObject);
       }
       return {
         resource: resourceAdapter ? new resourceAdapter.Resource(resourceObject) : resourceObject,
         options: rawResource.options,
         features: rawResource.features,
-      }
-    })
+      };
+    });
   }
 
   /**
@@ -111,20 +111,20 @@ export class ResourcesFactory {
    */
   _decorateResources(resources: Array<ResourceWithOptions>): Array<BaseResource> {
     return resources.map((resourceObject) => {
-      const resource = resourceObject.resource || resourceObject
-      const { features = [], options = {} } = resourceObject
+      const resource = resourceObject.resource || resourceObject;
+      const { features = [], options = {} } = resourceObject;
 
       const optionsFromFeatures = features.reduce((opts, feature) => (
         feature(opts)
-      ), {})
+      ), {});
 
       resource.assignDecorator(
         this.admin,
         mergeResourceOptions(optionsFromFeatures, options),
-      )
-      return resource
-    })
+      );
+      return resource;
+    });
   }
 }
 
-export default ResourcesFactory
+export default ResourcesFactory;

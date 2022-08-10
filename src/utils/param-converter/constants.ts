@@ -1,3 +1,3 @@
-const DELIMITER = '.'
+const DELIMITER = '.';
 
-export { DELIMITER }
+export { DELIMITER };

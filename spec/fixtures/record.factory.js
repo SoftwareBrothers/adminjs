@@ -1,4 +1,4 @@
-import { factory } from 'factory-girl'
+import { factory } from 'factory-girl';
 
 factory.define('record', Object, {
   params: {
@@ -9,4 +9,4 @@ factory.define('record', Object, {
   populated: {},
   errors: {},
   id: '5d6165fc1af7720536be0930',
-})
+});

@@ -1,5 +1,5 @@
-import { BaseProperty } from '../../../adapters'
-import PropertyOptions from '../property-options.interface'
+import { BaseProperty } from '../../../adapters';
+import PropertyOptions from '../property-options.interface';
 
 export type OverridableFromOptionsType = keyof Pick<BaseProperty,
   'isSortable' |
@@ -15,7 +15,7 @@ export function overrideFromOptions<T extends OverridableFromOptionsType>(
   options: PropertyOptions,
 ): ReturnType<BaseProperty[OverridableFromOptionsType]> | null | undefined {
   if (typeof options[optionName] === 'undefined') {
-    return property[optionName]()
+    return property[optionName]();
   }
-  return options[optionName]
+  return options[optionName];
 }

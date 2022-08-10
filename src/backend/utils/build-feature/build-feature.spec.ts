@@ -1,7 +1,9 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
-import { expect } from 'chai'
-import { mergeResourceOptions } from '../build-feature'
-import { Before, After, ActionResponse, ActionHandler } from '../../actions/action.interface'
+import { expect } from 'chai';
+import { mergeResourceOptions } from '.';
+import {
+  Before, After, ActionResponse, ActionHandler,
+} from '../../actions/action.interface';
 
 describe('mergeResourceOptions', function () {
   it('chaines before hooks', function () {
@@ -15,7 +17,7 @@ describe('mergeResourceOptions', function () {
           after: [function firstAfterHook() {} as unknown as After<ActionResponse>],
         },
       },
-    }
+    };
     const newOptions = {
       actions: {
         new: {
@@ -29,7 +31,7 @@ describe('mergeResourceOptions', function () {
           handler: function newHandler() {} as unknown as ActionHandler<ActionResponse>,
         },
       },
-    }
+    };
 
     expect(mergeResourceOptions(existingOptions, newOptions)).to.deep.eq({
       actions: {
@@ -54,8 +56,8 @@ describe('mergeResourceOptions', function () {
           ],
         },
       },
-    })
-  })
+    });
+  });
 
   it('chaines properties', function () {
     const existingOptions = {
@@ -65,7 +67,7 @@ describe('mergeResourceOptions', function () {
           component: 'ala',
         },
       },
-    }
+    };
     const newOptions = {
       properties: {
         password2: {
@@ -73,28 +75,28 @@ describe('mergeResourceOptions', function () {
           component: 'ela',
         },
       },
-    }
+    };
 
     expect(mergeResourceOptions(existingOptions, newOptions)).to.deep.eq({
       properties: {
         ...existingOptions.properties,
         ...newOptions.properties,
       },
-    })
-  })
+    });
+  });
 
   it('merges falsey options', function () {
     const existingOptions = {
       navigation: {
         name: 'db',
       },
-    }
+    };
     const newOptions = {
       navigation: false,
-    }
+    };
 
     expect(mergeResourceOptions(existingOptions, newOptions)).to.deep.eq({
       navigation: false,
-    })
-  })
-})
+    });
+  });
+});

@@ -1,7 +1,7 @@
-import { Label, LabelProps } from '@adminjs/design-system'
-import React from 'react'
-import { PropertyJSON } from '../../../../interfaces'
-import { PropertyDescription } from '../property-description'
+import { Label, LabelProps } from '@adminjs/design-system';
+import React from 'react';
+import { PropertyJSON } from '../../../../interfaces';
+import { PropertyDescription } from '../property-description';
 
 export type PropertyLabelProps = {
   property: PropertyJSON;
@@ -9,9 +9,9 @@ export type PropertyLabelProps = {
 }
 
 const PropertyLabel: React.FC<PropertyLabelProps> = (props) => {
-  const { property, props: labelProps } = props
+  const { property, props: labelProps } = props;
 
-  if (property.hideLabel) { return null }
+  if (property.hideLabel) { return null; }
 
   return (
     <Label
@@ -22,10 +22,10 @@ const PropertyLabel: React.FC<PropertyLabelProps> = (props) => {
       {property.label}
       {property.description && <PropertyDescription property={property} />}
     </Label>
-  )
-}
+  );
+};
 
 export {
   PropertyLabel as default,
   PropertyLabel,
-}
+};

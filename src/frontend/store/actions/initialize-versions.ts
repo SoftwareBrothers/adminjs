@@ -1,6 +1,6 @@
-import { VersionProps } from '../../../adminjs-options.interface'
+import { VersionProps } from '../../../adminjs-options.interface';
 
-export const VERSIONS_INITIALIZE = 'VERSIONS_INITIALIZE'
+export const VERSIONS_INITIALIZE = 'VERSIONS_INITIALIZE';
 
 export type InitializeVersionsResponse = {
   type: typeof VERSIONS_INITIALIZE;
@@ -10,4 +10,4 @@ export type InitializeVersionsResponse = {
 export const initializeVersions = (data: VersionProps): InitializeVersionsResponse => ({
   type: VERSIONS_INITIALIZE,
   data,
-})
+});

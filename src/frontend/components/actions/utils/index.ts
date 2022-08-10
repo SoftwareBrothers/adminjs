@@ -1,1 +1,1 @@
-export * from './layout-element-renderer'
+export * from './layout-element-renderer';

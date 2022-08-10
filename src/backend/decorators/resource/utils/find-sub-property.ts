@@ -1,5 +1,5 @@
-import PropertyDecorator from '../../property/property-decorator'
-import { PathParts } from '../../../../utils/flat/path-parts.type'
+import PropertyDecorator from '../../property/property-decorator';
+import { PathParts } from '../../../../utils/flat/path-parts.type';
 
 /**
  * @private
@@ -14,16 +14,16 @@ export const findSubProperty = (
   pathParts: PathParts,
   rootProperty: PropertyDecorator,
 ): PropertyDecorator | null => {
-  const subProperties = rootProperty.subProperties()
+  const subProperties = rootProperty.subProperties();
   const foundPath = pathParts.find((path) => (
-    subProperties.find((supProperty) => supProperty.propertyPath === path)))
+    subProperties.find((supProperty) => supProperty.propertyPath === path)));
   if (foundPath) {
-    const subProperty = subProperties.find((supProperty) => supProperty.propertyPath === foundPath)
+    const subProperty = subProperties.find((supProperty) => supProperty.propertyPath === foundPath);
     if (subProperty && foundPath !== pathParts[pathParts.length - 1]) {
       // if foundPath is not the last (full) path - checkout recursively all subProperties
-      return findSubProperty(pathParts, subProperty)
+      return findSubProperty(pathParts, subProperty);
     }
-    return subProperty || null
+    return subProperty || null;
   }
-  return null
-}
+  return null;
+};

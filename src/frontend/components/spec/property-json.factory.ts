@@ -1,5 +1,5 @@
-import factory from 'factory-girl'
-import { PropertyJSON } from '../../interfaces'
+import factory from 'factory-girl';
+import { PropertyJSON } from '../../interfaces';
 
 factory.define<PropertyJSON>('PropertyJSON', Object, {
   custom: {},
@@ -24,4 +24,4 @@ factory.define<PropertyJSON>('PropertyJSON', Object, {
   isVirtual: false,
   props: {},
   hideLabel: false,
-})
+});

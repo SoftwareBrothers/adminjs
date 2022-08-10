@@ -1,6 +1,6 @@
-import { Assets } from '../../../adminjs-options.interface'
+import { Assets } from '../../../adminjs-options.interface';
 
-export const ASSETS_INITIALIZE = 'ASSETS_INITIALIZE'
+export const ASSETS_INITIALIZE = 'ASSETS_INITIALIZE';
 
 export type initializeAssetsResponse = {
   type: string;
@@ -10,4 +10,4 @@ export type initializeAssetsResponse = {
 export const initializeAssets = (data: Assets): initializeAssetsResponse => ({
   type: ASSETS_INITIALIZE,
   data,
-})
+});

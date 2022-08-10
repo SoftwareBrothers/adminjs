@@ -85,9 +85,9 @@ const translations = {
     needMoreSolutions_subtitle: 'Wir sind hier, um Ihnen ein schönes UX/UI-Design und eine maßgeschneiderte Software zu bieten, die (nicht nur) auf AdminJS basiert.',
     invalidCredentials: 'Falsche E-Mail und/oder falsches Passwort',
   },
-}
+};
 
 export default {
   language: 'de',
   translations,
-}
+};

@@ -1,16 +1,18 @@
-import React, { useState, useEffect, useCallback } from 'react'
-import { useNavigate } from 'react-router'
+import React, { useState, useEffect, useCallback } from 'react';
+import { useNavigate } from 'react-router';
 import {
   Placeholder, TableRow, TableCell, CheckBox, ButtonGroup,
-} from '@adminjs/design-system'
+} from '@adminjs/design-system';
 
-import PropertyType from '../../property-type'
-import { ActionJSON, buildActionClickHandler, RecordJSON, ResourceJSON } from '../../../interfaces'
-import { display } from './utils/display'
-import { ActionResponse, RecordActionResponse } from '../../../../backend/actions/action.interface'
-import mergeRecordResponse from '../../../hooks/use-record/merge-record-response'
-import { useActionResponseHandler } from '../../../hooks'
-import { actionsToButtonGroup } from '../action-header/actions-to-button-group'
+import PropertyType from '../../property-type';
+import {
+  ActionJSON, buildActionClickHandler, RecordJSON, ResourceJSON,
+} from '../../../interfaces';
+import { display } from './utils/display';
+import { ActionResponse, RecordActionResponse } from '../../../../backend/actions/action.interface';
+import mergeRecordResponse from '../../../hooks/use-record/merge-record-response';
+import { useActionResponseHandler } from '../../../hooks';
+import { actionsToButtonGroup } from '../action-header/actions-to-button-group';
 
 export type RecordInListProps = {
   resource: ResourceJSON;
@@ -25,32 +27,32 @@ export const RecordInList: React.FC<RecordInListProps> = (props) => {
   const {
     resource, record: recordFromProps, actionPerformed,
     isLoading, onSelect, isSelected,
-  } = props
-  const [record, setRecord] = useState<RecordJSON>(recordFromProps)
-  const navigate = useNavigate()
+  } = props;
+  const [record, setRecord] = useState<RecordJSON>(recordFromProps);
+  const navigate = useNavigate();
 
   const handleActionCallback = useCallback((actionResponse: ActionResponse) => {
     if (actionResponse.record && !actionResponse.redirectUrl) {
-      setRecord(mergeRecordResponse(record, actionResponse as RecordActionResponse))
+      setRecord(mergeRecordResponse(record, actionResponse as RecordActionResponse));
     } else if (actionPerformed) {
-      actionPerformed(actionResponse)
+      actionPerformed(actionResponse);
     }
-  }, [actionPerformed, record])
+  }, [actionPerformed, record]);
 
-  const actionResponseHandler = useActionResponseHandler(handleActionCallback)
+  const actionResponseHandler = useActionResponseHandler(handleActionCallback);
 
   useEffect(() => {
-    setRecord(recordFromProps)
-  }, [recordFromProps])
+    setRecord(recordFromProps);
+  }, [recordFromProps]);
 
-  const { recordActions } = record
+  const { recordActions } = record;
 
-  const show = record.recordActions.find(({ name }) => name === 'show')
-  const edit = record.recordActions.find(({ name }) => name === 'edit')
-  const action = show || edit
+  const show = record.recordActions.find(({ name }) => name === 'show');
+  const edit = record.recordActions.find(({ name }) => name === 'edit');
+  const action = show || edit;
 
   const handleClick = (event): void => {
-    const targetTagName = (event.target as HTMLElement).tagName.toLowerCase()
+    const targetTagName = (event.target as HTMLElement).tagName.toLowerCase();
     if (action
       && targetTagName !== 'a'
       && targetTagName !== 'button'
@@ -61,11 +63,11 @@ export const RecordInList: React.FC<RecordInListProps> = (props) => {
         params: { resourceId: resource.id, recordId: record.id },
         actionResponseHandler,
         navigate,
-      })(event)
+      })(event);
     }
-  }
+  };
 
-  const actionParams = { resourceId: resource.id, recordId: record.id }
+  const actionParams = { resourceId: resource.id, recordId: record.id };
 
   const handleActionClick = (event, sourceAction: ActionJSON): void | Promise<void> => (
     buildActionClickHandler({
@@ -74,7 +76,7 @@ export const RecordInList: React.FC<RecordInListProps> = (props) => {
       actionResponseHandler,
       navigate,
     })(event)
-  )
+  );
 
   const buttons = [{
     icon: 'OverflowMenuHorizontal',
@@ -86,7 +88,7 @@ export const RecordInList: React.FC<RecordInListProps> = (props) => {
       params: actionParams,
       handleClick: handleActionClick,
     }),
-  }]
+  }];
 
   return (
     <TableRow onClick={handleClick} data-id={record.id}>
@@ -124,7 +126,7 @@ export const RecordInList: React.FC<RecordInListProps> = (props) => {
         ) : ''}
       </TableCell>
     </TableRow>
-  )
-}
+  );
+};
 
-export default RecordInList
+export default RecordInList;

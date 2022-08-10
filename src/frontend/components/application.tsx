@@ -1,19 +1,19 @@
 /* eslint-disable react/no-children-prop */
-import React, { useEffect, useState } from 'react'
-import { Routes, Route } from 'react-router-dom'
-import { createGlobalStyle } from 'styled-components'
-import { Box, Overlay, Reset } from '@adminjs/design-system'
+import React, { useEffect, useState } from 'react';
+import { Routes, Route } from 'react-router-dom';
+import { createGlobalStyle } from 'styled-components';
+import { Box, Overlay, Reset } from '@adminjs/design-system';
 
-import { useLocation } from 'react-router'
-import ViewHelpers from '../../backend/utils/view-helpers/view-helpers'
-import Sidebar from './app/sidebar/sidebar'
-import TopBar from './app/top-bar'
-import Notice from './app/notice'
+import { useLocation } from 'react-router';
+import ViewHelpers from '../../backend/utils/view-helpers/view-helpers';
+import Sidebar from './app/sidebar/sidebar';
+import TopBar from './app/top-bar';
+import Notice from './app/notice';
 
 import {
   Dashboard, ResourceAction, RecordAction, Page, BulkAction, Resource,
-} from './routes'
-import useHistoryListen from '../hooks/use-history-listen'
+} from './routes';
+import useHistoryListen from '../hooks/use-history-listen';
 
 const GlobalStyle = createGlobalStyle`
   html, body, #app {
@@ -23,30 +23,30 @@ const GlobalStyle = createGlobalStyle`
     height: 100%;
     color: ${({ theme }): string => theme.colors.grey100}
   }
-`
+`;
 
-const h = new ViewHelpers()
+const h = new ViewHelpers();
 
 const App: React.FC = () => {
-  const [sidebarVisible, toggleSidebar] = useState(false)
-  const location = useLocation()
+  const [sidebarVisible, toggleSidebar] = useState(false);
+  const location = useLocation();
 
-  useHistoryListen()
+  useHistoryListen();
 
   useEffect(() => {
-    if (sidebarVisible) { toggleSidebar(false) }
-  }, [location])
+    if (sidebarVisible) { toggleSidebar(false); }
+  }, [location]);
 
-  const resourceId = ':resourceId'
-  const actionName = ':actionName'
-  const recordId = ':recordId'
-  const pageName = ':pageName'
+  const resourceId = ':resourceId';
+  const actionName = ':actionName';
+  const recordId = ':recordId';
+  const pageName = ':pageName';
 
-  const recordActionUrl = h.recordActionUrl({ resourceId, recordId, actionName })
-  const resourceActionUrl = h.resourceActionUrl({ resourceId, actionName })
-  const bulkActionUrl = h.bulkActionUrl({ resourceId, actionName })
-  const resourceUrl = h.resourceUrl({ resourceId })
-  const pageUrl = h.pageUrl(pageName)
+  const recordActionUrl = h.recordActionUrl({ resourceId, recordId, actionName });
+  const resourceActionUrl = h.resourceActionUrl({ resourceId, actionName });
+  const bulkActionUrl = h.bulkActionUrl({ resourceId, actionName });
+  const resourceUrl = h.resourceUrl({ resourceId });
+  const pageUrl = h.pageUrl(pageName);
 
   return (
     <>
@@ -76,7 +76,7 @@ const App: React.FC = () => {
       </Box>
     </>
 
-  )
-}
+  );
+};
 
-export default App
+export default App;

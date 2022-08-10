@@ -1,1 +1,1 @@
-export { default as ActionDecorator } from './action-decorator'
+export { default as ActionDecorator } from './action-decorator';

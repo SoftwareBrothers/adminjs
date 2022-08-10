@@ -1,6 +1,6 @@
-import { AdminPage } from '../../../adminjs-options.interface'
+import { AdminPage } from '../../../adminjs-options.interface';
 
-export const PAGES_INITIALIZE = 'PAGES_INITIALIZE'
+export const PAGES_INITIALIZE = 'PAGES_INITIALIZE';
 
 export type InitializePagesResponse = {
   type: typeof PAGES_INITIALIZE;
@@ -10,4 +10,4 @@ export type InitializePagesResponse = {
 export const initializePages = (data: Array<AdminPage>): InitializePagesResponse => ({
   type: PAGES_INITIALIZE,
   data,
-})
+});

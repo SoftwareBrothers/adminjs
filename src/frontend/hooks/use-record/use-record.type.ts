@@ -1,8 +1,8 @@
-import { AxiosResponse } from 'axios'
+import { AxiosResponse } from 'axios';
 
-import { OnPropertyChange } from '../../components/property-type/base-property-props'
-import { RecordActionResponse } from '../../../backend/actions/action.interface'
-import { RecordJSON } from '../../interfaces'
+import { OnPropertyChange } from '../../components/property-type/base-property-props';
+import { RecordActionResponse } from '../../../backend/actions/action.interface';
+import { RecordJSON } from '../../interfaces';
 
 /**
  * Custom options passed to useRecord as the third argument.

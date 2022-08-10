@@ -1,6 +1,6 @@
 /* eslint-disable react/function-component-definition */
-import React, { ComponentType } from 'react'
-import { OverridableComponent } from '../utils/overridable-component'
+import React, { ComponentType } from 'react';
+import { OverridableComponent } from '../utils/overridable-component';
 
 /**
  * @private
@@ -20,30 +20,30 @@ function allowOverride<P>(
 ): ComponentType<P & {OriginalComponent?: ComponentType<P>}> {
   // ssr
   if (typeof window === 'undefined') {
-    return OriginalComponent
+    return OriginalComponent;
   }
 
   const WrapperComponent: React.FC<P> = (props) => {
-    let globalAny: any = window
-    globalAny = window
+    let globalAny: any = window;
+    globalAny = window;
 
-    let Component = OriginalComponent
+    let Component = OriginalComponent;
 
     if (globalAny.AdminJS
       && globalAny.AdminJS.UserComponents
       && globalAny.AdminJS.UserComponents[name]
     ) {
-      Component = globalAny.AdminJS.UserComponents[name]
-      return <Component {...props} OriginalComponent={OriginalComponent} />
+      Component = globalAny.AdminJS.UserComponents[name];
+      return <Component {...props} OriginalComponent={OriginalComponent} />;
     }
 
-    return <Component {...props} />
-  }
+    return <Component {...props} />;
+  };
 
-  return WrapperComponent
+  return WrapperComponent;
 }
 
 export {
   allowOverride as default,
   allowOverride,
-}
+};

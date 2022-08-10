@@ -1,11 +1,11 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
-import styled from 'styled-components'
-import { cssClass, themeGet } from '@adminjs/design-system'
+import React from 'react';
+import { Link } from 'react-router-dom';
+import styled from 'styled-components';
+import { cssClass, themeGet } from '@adminjs/design-system';
 
-import ViewHelpers from '../../../../backend/utils/view-helpers/view-helpers'
-import { BrandingOptions } from '../../../../adminjs-options.interface'
-import allowOverride from '../../../hoc/allow-override'
+import ViewHelpers from '../../../../backend/utils/view-helpers/view-helpers';
+import { BrandingOptions } from '../../../../adminjs-options.interface';
+import allowOverride from '../../../hoc/allow-override';
 
 type Props = {
   branding: BrandingOptions;
@@ -36,13 +36,13 @@ export const StyledLogo = styled(Link)`
   &:hover h1 {
     color: ${themeGet('colors', 'primary100')};
   }
-`
+`;
 
-const h = new ViewHelpers()
+const h = new ViewHelpers();
 
 const SidebarBranding: React.FC<Props> = (props) => {
-  const { branding } = props
-  const { logo, companyName } = branding
+  const { branding } = props;
+  const { logo, companyName } = branding;
   return (
     <StyledLogo
       className={cssClass('Logo')}
@@ -55,7 +55,7 @@ const SidebarBranding: React.FC<Props> = (props) => {
         />
       ) : <h1>{companyName}</h1>}
     </StyledLogo>
-  )
-}
+  );
+};
 
-export default allowOverride(SidebarBranding, 'SidebarBranding')
+export default allowOverride(SidebarBranding, 'SidebarBranding');

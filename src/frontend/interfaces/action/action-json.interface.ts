@@ -1,5 +1,5 @@
-import { VariantType } from '@adminjs/design-system'
-import { ParsedLayoutElement } from '../../../backend/utils/layout-element-parser'
+import { VariantType } from '@adminjs/design-system';
+import { ParsedLayoutElement } from '../../../backend/utils/layout-element-parser';
 
 /**
  * JSON representation of an {@link Action}

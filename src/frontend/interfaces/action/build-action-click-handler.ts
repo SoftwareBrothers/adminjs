@@ -1,12 +1,12 @@
 /* eslint-disable no-restricted-globals */
 /* eslint-disable no-undef */
 /* eslint-disable no-alert */
-import { NavigateFunction } from 'react-router'
-import { DifferentActionParams, useActionResponseHandler } from '../../hooks'
-import { actionHasComponent } from './action-has-component'
-import { actionHref } from './action-href'
-import { ActionJSON } from './action-json.interface'
-import { buildActionCallApiTrigger } from './build-action-api-call-trigger'
+import { NavigateFunction } from 'react-router';
+import { DifferentActionParams, useActionResponseHandler } from '../../hooks';
+import { actionHasComponent } from './action-has-component';
+import { actionHref } from './action-href';
+import { ActionJSON } from './action-json.interface';
+import { buildActionCallApiTrigger } from './build-action-api-call-trigger';
 
 export type BuildActionClickOptions = {
   action: ActionJSON;
@@ -20,31 +20,33 @@ export type BuildActionClickReturn = (event: any) => any | Promise<any>
 export const buildActionClickHandler = (
   options: BuildActionClickOptions,
 ): BuildActionClickReturn => {
-  const { action, params, actionResponseHandler, navigate } = options
+  const {
+    action, params, actionResponseHandler, navigate,
+  } = options;
 
   const handleActionClick = (event: React.MouseEvent<HTMLElement>): Promise<any> | any => {
-    event.preventDefault()
-    event.stopPropagation()
+    event.preventDefault();
+    event.stopPropagation();
 
-    const href = actionHref(action, params)
+    const href = actionHref(action, params);
 
     const callApi = buildActionCallApiTrigger({
       params, action, actionResponseHandler,
-    })
+    });
 
     if (action.guard && !confirm(action.guard)) {
-      return
+      return;
     }
 
     if (actionHasComponent(action)) {
       // eslint-disable-next-line consistent-return
-      return callApi()
+      return callApi();
     }
 
     if (href) {
-      navigate(href)
+      navigate(href);
     }
-  }
+  };
 
-  return handleActionClick
-}
+  return handleActionClick;
+};

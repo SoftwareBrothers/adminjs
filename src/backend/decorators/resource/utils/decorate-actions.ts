@@ -1,16 +1,16 @@
-import mergeWith from 'lodash/mergeWith'
-import { ResourceDecorator } from '..'
-import AdminJS from '../../../../adminjs'
-import { Action, ActionResponse, ACTIONS } from '../../../actions'
+import mergeWith from 'lodash/mergeWith';
+import { ResourceDecorator } from '..';
+import AdminJS from '../../../../adminjs';
+import { Action, ActionResponse, ACTIONS } from '../../../actions';
 
-import { BaseResource } from '../../../adapters'
-import { ActionDecorator } from '../../action'
+import { BaseResource } from '../../../adapters';
+import { ActionDecorator } from '../../action';
 
 export type DecoratedActions = {[key: string]: ActionDecorator}
 
 function mergeCustomizer<T>(destValue: T | Array<T>, sourceValue: T | Array<T>): void {
   if (Array.isArray(destValue)) {
-    destValue.concat(sourceValue)
+    destValue.concat(sourceValue);
   }
 }
 
@@ -27,12 +27,12 @@ export function decorateActions(
   admin: AdminJS,
   decorator: ResourceDecorator,
 ): DecoratedActions {
-  const { options } = decorator
+  const { options } = decorator;
   // in the end we merge actions defined by the user with the default actions.
   // since _.merge is a deep merge it also overrides defaults with the parameters
   // specified by the user.
-  const actions = mergeWith({}, ACTIONS, options.actions || {}, mergeCustomizer)
-  const returnActions = {}
+  const actions = mergeWith({}, ACTIONS, options.actions || {}, mergeCustomizer);
+  const returnActions = {};
   // setting default values for actions
   Object.keys(actions).forEach((key: string) => {
     const action: Action<ActionResponse> = {
@@ -40,14 +40,14 @@ export function decorateActions(
       label: actions[key].label || key,
       actionType: actions[key].actionType || ['resource'],
       ...actions[key],
-    }
+    };
 
     returnActions[key] = new ActionDecorator({
       action,
       admin,
       resource,
-    })
-  })
+    });
+  });
 
-  return returnActions
+  return returnActions;
 }

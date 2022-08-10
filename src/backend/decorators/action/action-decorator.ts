@@ -1,8 +1,8 @@
-import { DEFAULT_DRAWER_WIDTH, VariantType } from '@adminjs/design-system'
-import ConfigurationError from '../../utils/errors/configuration-error'
-import ViewHelpers from '../../utils/view-helpers/view-helpers'
-import AdminJS from '../../../adminjs'
-import BaseResource from '../../adapters/resource/base-resource'
+import { DEFAULT_DRAWER_WIDTH, VariantType } from '@adminjs/design-system';
+import ConfigurationError from '../../utils/errors/configuration-error';
+import ViewHelpers from '../../utils/view-helpers/view-helpers';
+import AdminJS from '../../../adminjs';
+import BaseResource from '../../adapters/resource/base-resource';
 import {
   Action,
   IsFunction,
@@ -12,19 +12,19 @@ import {
   After,
   Before,
   ActionHandler,
-} from '../../actions/action.interface'
-import { CurrentAdmin } from '../../../current-admin.interface'
-import { ActionJSON } from '../../../frontend/interfaces/action/action-json.interface'
-import BaseRecord from '../../adapters/record/base-record'
-import actionErrorHandler from '../../services/action-error-handler/action-error-handler'
-import ForbiddenError from '../../utils/errors/forbidden-error'
+} from '../../actions/action.interface';
+import { CurrentAdmin } from '../../../current-admin.interface';
+import { ActionJSON } from '../../../frontend/interfaces/action/action-json.interface';
+import BaseRecord from '../../adapters/record/base-record';
+import actionErrorHandler from '../../services/action-error-handler/action-error-handler';
+import ForbiddenError from '../../utils/errors/forbidden-error';
 import {
   ParsedLayoutElement,
   LayoutElement,
   layoutElementParser,
-} from '../../utils/layout-element-parser'
+} from '../../utils/layout-element-parser';
 
-const DEFAULT_VARIANT: VariantType = 'default'
+const DEFAULT_VARIANT: VariantType = 'default';
 
 /**
  * Decorates an action
@@ -32,15 +32,15 @@ const DEFAULT_VARIANT: VariantType = 'default'
  * @category Decorators
  */
 class ActionDecorator {
-  public name: string
+  public name: string;
 
-  private _admin: AdminJS
+  private _admin: AdminJS;
 
-  private _resource: BaseResource
+  private _resource: BaseResource;
 
-  private h: ViewHelpers
+  private h: ViewHelpers;
 
-  private action: Action<ActionResponse>
+  private action: Action<ActionResponse>;
 
   /**
    * @param {Object}        params
@@ -57,18 +57,18 @@ class ActionDecorator {
       throw new ConfigurationError(
         `action: "${action.name}" does not have an "actionType" property`,
         'Action',
-      )
+      );
     }
-    this.name = action.name
-    this._admin = admin
-    this._resource = resource
-    this.h = new ViewHelpers({ options: admin.options })
+    this.name = action.name;
+    this._admin = admin;
+    this._resource = resource;
+    this.h = new ViewHelpers({ options: admin.options });
 
     /**
      * Original action object
      * @type {Action}
      */
-    this.action = action
+    this.action = action;
   }
 
   /**
@@ -86,12 +86,12 @@ class ActionDecorator {
     context: ActionContext,
   ): Promise<any> {
     try {
-      const modifiedRequest = await this.invokeBeforeHook(request, context)
-      this.canInvokeAction(context)
-      const res = await this.invokeHandler(modifiedRequest, response, context)
-      return this.invokeAfterHook(res, modifiedRequest, context)
+      const modifiedRequest = await this.invokeBeforeHook(request, context);
+      this.canInvokeAction(context);
+      const res = await this.invokeHandler(modifiedRequest, response, context);
+      return this.invokeAfterHook(res, modifiedRequest, context);
     } catch (error) {
-      return actionErrorHandler(error, context)
+      return actionErrorHandler(error, context);
     }
   }
 
@@ -105,22 +105,22 @@ class ActionDecorator {
    */
   async invokeBeforeHook(request: ActionRequest, context: ActionContext): Promise<ActionRequest> {
     if (!this.action.before) {
-      return request
+      return request;
     }
     if (typeof this.action.before === 'function') {
-      return this.action.before(request, context)
+      return this.action.before(request, context);
     }
     if (Array.isArray(this.action.before)) {
       return (this.action.before as Array<Before>).reduce((prevPromise, hook) => (
         prevPromise.then((modifiedRequest) => (
           hook(modifiedRequest, context)
         ))
-      ), Promise.resolve(request))
+      ), Promise.resolve(request));
     }
     throw new ConfigurationError(
       'Before action hook has to be either function or Array<function>',
       'Action#Before',
-    )
+    );
   }
 
   /**
@@ -138,7 +138,7 @@ class ActionDecorator {
     context: ActionContext,
   ): Promise<ActionResponse> {
     if (typeof this.action.handler === 'function') {
-      return this.action.handler(request, response, context)
+      return this.action.handler(request, response, context);
     }
     if (Array.isArray(this.action.handler)) {
       return (this.action.handler as Array<ActionHandler<ActionResponse>>)
@@ -146,12 +146,12 @@ class ActionDecorator {
           prevPromise.then(() => (
             handler(request, response, context)
           ))
-        ), Promise.resolve({}))
+        ), Promise.resolve({}));
     }
     throw new ConfigurationError(
       'Action handler has to be either function or Array<function>',
       'Action#Before',
-    )
+    );
   }
 
   /**
@@ -169,22 +169,22 @@ class ActionDecorator {
     context: ActionContext,
   ): Promise<ActionResponse> {
     if (!this.action.after) {
-      return response
+      return response;
     }
     if (typeof this.action.after === 'function') {
-      return this.action.after(response, request, context)
+      return this.action.after(response, request, context);
     }
     if (Array.isArray(this.action.after)) {
       return (this.action.after as Array<After<ActionResponse>>).reduce((prevPromise, hook) => (
         prevPromise.then((modifiedResponse) => (
           hook(modifiedResponse, request, context)
         ))
-      ), Promise.resolve(response))
+      ), Promise.resolve(response));
     }
     throw new ConfigurationError(
       'After action hook has to be either function or Array<function>',
       'Action#After',
-    )
+    );
   }
 
   /**
@@ -193,7 +193,7 @@ class ActionDecorator {
    * @return  {Boolean}
    */
   isRecordType(): boolean {
-    return this.action.actionType.includes('record')
+    return this.action.actionType.includes('record');
   }
 
   /**
@@ -202,7 +202,7 @@ class ActionDecorator {
    * @return  {Boolean}
    */
   isResourceType(): boolean {
-    return this.action.actionType.includes('resource')
+    return this.action.actionType.includes('resource');
   }
 
   /**
@@ -211,14 +211,14 @@ class ActionDecorator {
    * @return  {Boolean}
    */
   isBulkType(): boolean {
-    return this.action.actionType.includes('bulk')
+    return this.action.actionType.includes('bulk');
   }
 
   is(what: 'isAccessible' | 'isVisible', currentAdmin?: CurrentAdmin, record?: BaseRecord): boolean {
     if (!['isAccessible', 'isVisible'].includes(what)) {
-      throw new Error(`'what' has to be either "isAccessible" or "isVisible". You gave ${what}`)
+      throw new Error(`'what' has to be either "isAccessible" or "isVisible". You gave ${what}`);
     }
-    let isAction
+    let isAction;
     if (typeof this.action[what] === 'function') {
       isAction = (this.action[what] as IsFunction)({
         resource: this._resource,
@@ -227,13 +227,13 @@ class ActionDecorator {
         h: this.h,
         currentAdmin,
         _admin: this._admin,
-      } as unknown as ActionContext)
+      } as unknown as ActionContext);
     } else if (typeof this.action[what] === 'undefined') {
-      isAction = true
+      isAction = true;
     } else {
-      isAction = this.action[what]
+      isAction = this.action[what];
     }
-    return isAction
+    return isAction;
   }
 
   /**
@@ -244,7 +244,7 @@ class ActionDecorator {
    * @return  {Boolean}
    */
   isVisible(currentAdmin?: CurrentAdmin, record?: BaseRecord): boolean {
-    return this.is('isVisible', currentAdmin, record)
+    return this.is('isVisible', currentAdmin, record);
   }
 
   /**
@@ -255,7 +255,7 @@ class ActionDecorator {
    * @return  {Boolean}
    */
   isAccessible(currentAdmin?: CurrentAdmin, record?: BaseRecord): boolean {
-    return this.is('isAccessible', currentAdmin, record)
+    return this.is('isAccessible', currentAdmin, record);
   }
 
   /**
@@ -267,68 +267,70 @@ class ActionDecorator {
    * @throws  {ForbiddenError}          when user cannot perform given action
    */
   canInvokeAction(context: ActionContext): boolean {
-    const { record, records, currentAdmin, resource } = context
+    const {
+      record, records, currentAdmin, resource,
+    } = context;
 
     if (record && this.isAccessible(currentAdmin, record)) {
-      return true
+      return true;
     }
 
     if (records && !records.find((bulkRecord) => !this.isAccessible(currentAdmin, bulkRecord))) {
-      return true
+      return true;
     }
 
     if (!record && !records && this.isAccessible(currentAdmin)) {
-      return true
+      return true;
     }
 
     throw new ForbiddenError(this._admin.translateMessage('forbiddenError', resource.id(), {
       actionName: this.name,
       resourceId: resource.id(),
-    }))
+    }));
   }
 
   containerWidth(): ActionJSON['containerWidth'] {
     if (typeof this.action.containerWidth === 'undefined') {
       return this.action.showInDrawer
         ? DEFAULT_DRAWER_WIDTH
-        : 1 // 100% for a regular action
+        : 1; // 100% for a regular action
     }
-    return this.action.containerWidth
+    return this.action.containerWidth;
   }
 
   layout(currentAdmin?: CurrentAdmin): Array<ParsedLayoutElement> | null {
     if (this.action.layout) {
-      let layoutConfig: Array<LayoutElement>
+      let layoutConfig: Array<LayoutElement>;
       if (typeof this.action.layout === 'function') {
-        layoutConfig = this.action.layout(currentAdmin) as Array<LayoutElement>
+        layoutConfig = this.action.layout(currentAdmin) as Array<LayoutElement>;
       } else {
-        layoutConfig = this.action.layout
+        layoutConfig = this.action.layout;
       }
-      return layoutConfig.map((element) => layoutElementParser(element))
+      return layoutConfig.map((element) => layoutElementParser(element));
     }
-    return null
+    return null;
   }
 
   variant(): VariantType {
-    return this.action.variant || DEFAULT_VARIANT
+    return this.action.variant || DEFAULT_VARIANT;
   }
 
   parent(): string | null {
-    return this.action.parent || null
+    return this.action.parent || null;
   }
 
   custom(): Record<string, any> {
-    return this.action.custom || {}
+    return this.action.custom || {};
   }
 
   hasHandler(): boolean {
-    return !!this.action.handler
+    return !!this.action.handler;
   }
 
   showResourceActions(): boolean {
-    if (this.action.showResourceActions === undefined) return true
+    if (this.action.showResourceActions === undefined) return true;
 
-    return !!this.action.showResourceActions
+    return !!this.action.showResourceActions;
   }
 
   /**
@@ -339,7 +341,7 @@ class ActionDecorator {
    * @return  {ActionJSON}  serialized action
    */
   toJSON(currentAdmin?: CurrentAdmin): ActionJSON {
-    const resourceId = this._resource._decorated?.id() || this._resource.id()
+    const resourceId = this._resource._decorated?.id() || this._resource.id();
     return {
       name: this.action.name,
       actionType: this.action.actionType,
@@ -358,8 +360,8 @@ class ActionDecorator {
       parent: this.parent(),
       hasHandler: this.hasHandler(),
       custom: this.custom(),
-    }
+    };
   }
 }
 
-export default ActionDecorator
+export default ActionDecorator;

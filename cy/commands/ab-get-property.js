@@ -37,9 +37,9 @@
  * })
  */
 Cypress.Commands.add('abGetProperty', (path, selector = null) => {
-  let propertySelector = `[data-testid$="-${path}"]`
+  let propertySelector = `[data-testid$="-${path}"]`;
   if (selector) {
-    propertySelector = [propertySelector, selector].join(' ')
+    propertySelector = [propertySelector, selector].join(' ');
   }
-  return cy.get(propertySelector)
-})
+  return cy.get(propertySelector);
+});

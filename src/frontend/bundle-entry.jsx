@@ -1,29 +1,29 @@
-import React from 'react'
-import { Provider } from 'react-redux'
-import { BrowserRouter } from 'react-router-dom'
-import { ThemeProvider } from 'styled-components'
-import { initReactI18next } from 'react-i18next'
-import i18n from 'i18next'
-import { DndProvider } from 'react-dnd'
-import { HTML5Backend } from 'react-dnd-html5-backend'
+import React from 'react';
+import { Provider } from 'react-redux';
+import { BrowserRouter } from 'react-router-dom';
+import { ThemeProvider } from 'styled-components';
+import { initReactI18next } from 'react-i18next';
+import i18n from 'i18next';
+import { DndProvider } from 'react-dnd';
+import { HTML5Backend } from 'react-dnd-html5-backend';
 
-import App from './components/application'
-import BasePropertyComponent from './components/property-type'
-import createStore from './store/store'
-import ViewHelpers from '../backend/utils/view-helpers/view-helpers'
-import * as AppComponents from './components/app'
-import * as Hooks from './hooks'
-import ApiClient from './utils/api-client'
-import withNotice from './hoc/with-notice'
-import { flat } from '../utils/flat'
+import App from './components/application';
+import BasePropertyComponent from './components/property-type';
+import createStore from './store/store';
+import ViewHelpers from '../backend/utils/view-helpers/view-helpers';
+import * as AppComponents from './components/app';
+import * as Hooks from './hooks';
+import ApiClient from './utils/api-client';
+import withNotice from './hoc/with-notice';
+import { flat } from '../utils/flat';
 
 const env = {
   NODE_ENV: process.env.NODE_ENV || 'development',
-}
+};
 
-const store = createStore(window.REDUX_STATE)
-const theme = window.THEME
-const { locale } = window.REDUX_STATE
+const store = createStore(window.REDUX_STATE);
+const theme = window.THEME;
+const { locale } = window.REDUX_STATE;
 
 i18n
   .use(initReactI18next)
@@ -35,7 +35,7 @@ i18n
     },
     lng: locale.language,
     interpolation: { escapeValue: false },
-  })
+  });
 
 const Application = (
   <Provider store={store}>
@@ -47,10 +47,10 @@ const Application = (
       </DndProvider>
     </ThemeProvider>
   </Provider>
-)
+);
 
 // eslint-disable-next-line no-undef
-window.regeneratorRuntime = regeneratorRuntime
+window.regeneratorRuntime = regeneratorRuntime;
 
 export default {
   withNotice,
@@ -66,4 +66,4 @@ export default {
   // TODO: remove this from the next release
   flatten: flat.flatten,
   unflatten: flat.unflatten,
-}
+};

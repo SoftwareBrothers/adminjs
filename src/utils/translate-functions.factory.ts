@@ -1,5 +1,5 @@
-import { i18n as I18n, TFunction, TOptions } from 'i18next'
-import startCase from 'lodash/startCase'
+import { i18n as I18n, TFunction, TOptions } from 'i18next';
+import startCase from 'lodash/startCase';
 
 /**
  * @memberof TranslateFunctions
@@ -114,7 +114,7 @@ export interface TranslateFunctions {
   translateMessage: TranslateFunction;
 }
 
-export const formatName = (name: string): string => name.split('.').join('&#46;')
+export const formatName = (name: string): string => name.split('.').join('&#46;');
 
 const translate = (
   i18n: I18n,
@@ -123,38 +123,38 @@ const translate = (
   resourceId?: string | TOptions,
   options?: TOptions,
 ): string => {
-  const realOptions: TOptions = (typeof resourceId === 'string' ? options : resourceId) || {}
-  const formattedName = formatName(name)
-  let keys = [`${key}.${formattedName}`]
+  const realOptions: TOptions = (typeof resourceId === 'string' ? options : resourceId) || {};
+  const formattedName = formatName(name);
+  let keys = [`${key}.${formattedName}`];
   if (resourceId) {
-    keys = [`resources.${resourceId}.${key}.${formattedName}`, ...keys]
+    keys = [`resources.${resourceId}.${key}.${formattedName}`, ...keys];
   }
   if (i18n.exists(keys)) {
-    return i18n.t(keys, realOptions)
+    return i18n.t(keys, realOptions);
   }
-  return realOptions.defaultValue ?? startCase(name)
-}
+  return realOptions.defaultValue ?? startCase(name);
+};
 
 export const createFunctions = (i18n: I18n): TranslateFunctions => {
   const translateAction: TranslateFunction = (actionName, resourceId, options) => (
     translate(i18n, 'actions', actionName as string, resourceId, options)
-  )
+  );
 
   const translateButton: TranslateFunction = (buttonLabel, resourceId, options) => (
     translate(i18n, 'buttons', buttonLabel, resourceId, options)
-  )
+  );
 
   const translateLabel: TranslateFunction = (label, resourceId, options) => (
     translate(i18n, 'labels', label as string, resourceId, options)
-  )
+  );
 
   const translateProperty: TranslateFunction = (propertyName, resourceId, options) => (
     translate(i18n, 'properties', propertyName, resourceId, options)
-  )
+  );
 
   const translateMessage: TranslateFunction = (messageName, resourceId, options) => (
     translate(i18n, 'messages', messageName, resourceId, options)
-  )
+  );
 
   return {
     translateAction,
@@ -169,5 +169,5 @@ export const createFunctions = (i18n: I18n): TranslateFunctions => {
     tm: translateMessage,
     t: i18n.t,
     translate: i18n.t,
-  }
-}
+  };
+};

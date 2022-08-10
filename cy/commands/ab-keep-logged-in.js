@@ -16,5 +16,5 @@
  * })
  */
 Cypress.Commands.add('abKeepLoggedIn', ({ cookie }) => {
-  Cypress.Cookies.preserveOnce(cookie || Cypress.env('AB_COOKIE_NAME'))
-})
+  Cypress.Cookies.preserveOnce(cookie || Cypress.env('AB_COOKIE_NAME'));
+});

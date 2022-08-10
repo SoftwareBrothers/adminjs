@@ -1,7 +1,9 @@
-import React from 'react'
+import React from 'react';
 
-import styled from 'styled-components'
-import { Box, BoxProps, DrawerContent, DrawerFooter } from '@adminjs/design-system'
+import styled from 'styled-components';
+import {
+  Box, BoxProps, DrawerContent, DrawerFooter,
+} from '@adminjs/design-system';
 
 const StyledWrapperWithFilter = styled(Box)`
   & > ${DrawerContent} {
@@ -14,7 +16,7 @@ const StyledWrapperWithFilter = styled(Box)`
     background: ${({ theme }): string => theme.colors.white};
     padding: 0 ${({ theme }): string => theme.space.xxl} ${({ theme }): string => theme.space.xxl};
   }
-`
+`;
 
 const StyledWrapper = styled(Box)`
   & ${DrawerContent} {
@@ -27,7 +29,7 @@ const StyledWrapper = styled(Box)`
     background: ${({ theme }): string => theme.colors.white};
     padding: 0 ${({ theme }): string => theme.space.xxl} ${({ theme }): string => theme.space.xxl};
   }
-`
+`;
 
 type WrapperProps = BoxProps & {
   showFilter?: boolean;
@@ -35,15 +37,17 @@ type WrapperProps = BoxProps & {
 }
 
 const Wrapper: React.FC<WrapperProps> = (props) => {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { children, variant, color, showFilter = false, ...rest } = props
+  const {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    children, variant, color, showFilter = false, ...rest
+  } = props;
 
-  const Component = showFilter ? StyledWrapperWithFilter : StyledWrapper
+  const Component = showFilter ? StyledWrapperWithFilter : StyledWrapper;
   return (
     <Component {...rest} variant="grey" mx="auto">
       {children}
     </Component>
-  )
-}
+  );
+};
 
-export default Wrapper
+export default Wrapper;

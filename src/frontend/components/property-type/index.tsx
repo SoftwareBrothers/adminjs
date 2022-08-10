@@ -1,14 +1,14 @@
-import BasePropertyComponent from './base-property-component'
-import * as defaultType from './default-type'
-import * as boolean from './boolean'
-import * as datetime from './datetime'
-import * as richtext from './richtext'
-import * as reference from './reference'
-import * as textarea from './textarea'
-import * as password from './password'
-import * as currency from './currency'
-import * as phone from './phone'
-import { BasePropertyComponentProps } from './base-property-props'
+import BasePropertyComponent from './base-property-component';
+import * as defaultType from './default-type';
+import * as boolean from './boolean';
+import * as datetime from './datetime';
+import * as richtext from './richtext';
+import * as reference from './reference';
+import * as textarea from './textarea';
+import * as password from './password';
+import * as currency from './currency';
+import * as phone from './phone';
+import { BasePropertyComponentProps } from './base-property-props';
 
 type BasePropertyComponentType = React.FC<BasePropertyComponentProps> & {
   DefaultType: any;
@@ -26,7 +26,7 @@ function camelizePropertyType<T>(type: {[key: string]: T}): {[key: string]: T} {
     Show: type.show,
     List: type.list,
     Filter: type.filter,
-  }
+  };
 }
 
 const BasePropertyComponentExtended: BasePropertyComponentType = Object.assign(
@@ -42,12 +42,12 @@ const BasePropertyComponentExtended: BasePropertyComponentType = Object.assign(
     Currency: camelizePropertyType(currency),
     Phone: camelizePropertyType(phone),
   },
-)
+);
 
 export {
   BasePropertyComponentExtended as default,
   BasePropertyComponentExtended as BasePropertyComponent,
-}
+};
 
-export * from './base-property-props'
-export * from './utils'
+export * from './base-property-props';
+export * from './utils';

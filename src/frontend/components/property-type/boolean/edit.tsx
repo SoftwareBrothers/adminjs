@@ -1,22 +1,22 @@
-import React, { memo } from 'react'
-import { CheckBox, FormGroup, FormMessage } from '@adminjs/design-system'
+import React, { memo } from 'react';
+import { CheckBox, FormGroup, FormMessage } from '@adminjs/design-system';
 
-import { EditPropertyProps } from '../base-property-props'
-import { recordPropertyIsEqual } from '../record-property-is-equal'
-import { PropertyLabel } from '../utils/property-label'
+import { EditPropertyProps } from '../base-property-props';
+import { recordPropertyIsEqual } from '../record-property-is-equal';
+import { PropertyLabel } from '../utils/property-label';
 
-const parseValue = (value): boolean => !(!value || value === 'false')
+const parseValue = (value): boolean => !(!value || value === 'false');
 
 const Edit: React.FC<EditPropertyProps> = (props) => {
-  const { property, onChange, record } = props
-  const value = parseValue(record.params && record.params[property.path])
-  const error = record.errors && record.errors[property.path]
+  const { property, onChange, record } = props;
+  const value = parseValue(record.params && record.params[property.path]);
+  const error = record.errors && record.errors[property.path];
 
   const handleChange = (): void => {
     if (!property.isDisabled) {
-      onChange(property.path, !value)
+      onChange(property.path, !value);
     }
-  }
+  };
 
   return (
     <FormGroup error={!!error}>
@@ -31,7 +31,7 @@ const Edit: React.FC<EditPropertyProps> = (props) => {
       <PropertyLabel property={property} props={{ inline: true }} />
       <FormMessage>{error && error.message}</FormMessage>
     </FormGroup>
-  )
-}
+  );
+};
 
-export default memo(Edit, recordPropertyIsEqual)
+export default memo(Edit, recordPropertyIsEqual);

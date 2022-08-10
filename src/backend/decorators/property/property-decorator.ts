@@ -1,10 +1,10 @@
-import AdminJS from '../../../adminjs'
-import PropertyOptions from './property-options.interface'
-import BaseResource from '../../adapters/resource/base-resource'
-import BaseProperty, { PropertyType } from '../../adapters/property/base-property'
-import ResourceDecorator from '../resource/resource-decorator'
-import { PropertyPlace, BasePropertyJSON } from '../../../frontend/interfaces'
-import { overrideFromOptions } from './utils'
+import AdminJS from '../../../adminjs';
+import PropertyOptions from './property-options.interface';
+import BaseResource from '../../adapters/resource/base-resource';
+import BaseProperty, { PropertyType } from '../../adapters/property/base-property';
+import ResourceDecorator from '../resource/resource-decorator';
+import { PropertyPlace, BasePropertyJSON } from '../../../frontend/interfaces';
+import { overrideFromOptions } from './utils';
 
 /**
  * Decorates property
@@ -12,7 +12,7 @@ import { overrideFromOptions } from './utils'
  * @category Decorators
  */
 class PropertyDecorator {
-  public property: BaseProperty
+  public property: BaseProperty;
 
   /**
    * Property path including all parents.
@@ -23,19 +23,19 @@ class PropertyDecorator {
    * This path serves as a key in {@link PropertyOptions} to identify which
    * property has to be updated
    */
-  public propertyPath: string
+  public propertyPath: string;
 
   /**
    * Indicates if given property has been created in AdminJS and hasn't been returned by the
    * database adapter
    */
-  public isVirtual: boolean
+  public isVirtual: boolean;
 
-  private _admin: AdminJS
+  private _admin: AdminJS;
 
-  private _resource: ResourceDecorator
+  private _resource: ResourceDecorator;
 
-  public options: PropertyOptions
+  public options: PropertyOptions;
 
   /**
    * Array of all subProperties which were added in {@link ResourceOption} interface rather than
@@ -43,7 +43,7 @@ class PropertyDecorator {
    *
    * @private
    */
-  private virtualSubProperties: Array<PropertyDecorator>
+  private virtualSubProperties: Array<PropertyDecorator>;
 
   /**
    * @param {Object} opts
@@ -52,7 +52,9 @@ class PropertyDecorator {
    * @param {PropertyOptions}     opts.options
    * @param {ResourceDecorator}   opts.resource
    */
-  constructor({ property, admin, options = {}, resource, path, isVirtual }: {
+  constructor({
+    property, admin, options = {}, resource, path, isVirtual,
+  }: {
     property: BaseProperty;
     admin: AdminJS;
     options?: PropertyOptions;
@@ -60,18 +62,18 @@ class PropertyDecorator {
     path?: string;
     isVirtual?: boolean;
   }) {
-    this.property = property
-    this._admin = admin
-    this._resource = resource
-    this.propertyPath = path || property.name()
-    this.isVirtual = !!isVirtual
-    this.virtualSubProperties = []
+    this.property = property;
+    this._admin = admin;
+    this._resource = resource;
+    this.propertyPath = path || property.name();
+    this.isVirtual = !!isVirtual;
+    this.virtualSubProperties = [];
 
     /**
      * Options passed along with a given resource
      * @type {PropertyOptions}
     */
-    this.options = options
+    this.options = options;
   }
 
   /**
@@ -80,7 +82,7 @@ class PropertyDecorator {
    * @returns {boolean}
    */
   isSortable(): boolean {
-    return !!overrideFromOptions('isSortable', this.property, this.options)
+    return !!overrideFromOptions('isSortable', this.property, this.options);
   }
 
   /**
@@ -89,16 +91,16 @@ class PropertyDecorator {
    * @return  {BaseResource} reference resource
    */
   reference(): BaseResource | null {
-    const referenceResourceId = this.referenceName()
+    const referenceResourceId = this.referenceName();
     if (referenceResourceId) {
-      const resource = this._admin.findResource(referenceResourceId)
-      return resource
+      const resource = this._admin.findResource(referenceResourceId);
+      return resource;
     }
-    return null
+    return null;
   }
 
   referenceName(): string | null {
-    return this.options.reference || this.property.reference()
+    return this.options.reference || this.property.reference();
   }
 
   /**
@@ -107,14 +109,14 @@ class PropertyDecorator {
    * @returns {string}
    */
   name(): string {
-    return this.property.name()
+    return this.property.name();
   }
 
   /**
    * Resource decorator of given property
    */
   resource(): ResourceDecorator {
-    return this._resource
+    return this._resource;
   }
 
   /**
@@ -123,7 +125,7 @@ class PropertyDecorator {
    * @return  {string}
    */
   label(): string {
-    return this._admin.translateProperty(this.propertyPath, this._resource.id())
+    return this._admin.translateProperty(this.propertyPath, this._resource.id());
   }
 
   /**
@@ -133,9 +135,9 @@ class PropertyDecorator {
    */
   type(): PropertyType {
     if (typeof this.options.reference === 'string') {
-      return 'reference'
+      return 'reference';
     }
-    return overrideFromOptions('type', this.property, this.options) as PropertyType
+    return overrideFromOptions('type', this.property, this.options) as PropertyType;
   }
 
   /**
@@ -146,9 +148,9 @@ class PropertyDecorator {
    */
   availableValues(): null | Array<{value: string | number; label: string}> {
     if (this.options.availableValues) {
-      return this.options.availableValues
+      return this.options.availableValues;
     }
-    const values = this.property.availableValues()
+    const values = this.property.availableValues();
     if (values) {
       return values.map((val) => ({
         value: val,
@@ -157,23 +159,23 @@ class PropertyDecorator {
           this._resource.id(),
           { defaultValue: val },
         ),
-      }))
+      }));
     }
-    return null
+    return null;
   }
 
   isArray(): boolean {
     if (typeof this.options.isArray !== 'undefined') {
-      return !!this.options.isArray
+      return !!this.options.isArray;
     }
-    return this.property.isArray()
+    return this.property.isArray();
   }
 
   isDraggable(): boolean {
     if (typeof this.options.isDraggable !== 'undefined') {
-      return this.isArray() && !!this.options.isDraggable
+      return this.isArray() && !!this.options.isDraggable;
     }
-    return this.property.isDraggable()
+    return this.property.isDraggable();
   }
 
   /**
@@ -183,15 +185,15 @@ class PropertyDecorator {
    */
   isVisible(where: PropertyPlace): boolean {
     if (typeof this.options.isVisible === 'object' && this.options.isVisible !== 'null') {
-      return !!this.options.isVisible[where]
+      return !!this.options.isVisible[where];
     }
     if (typeof this.options.isVisible === 'boolean') {
-      return this.options.isVisible
+      return this.options.isVisible;
     }
     if (where === 'edit') {
-      return this.property.isEditable()
+      return this.property.isEditable();
     }
-    return this.property.isVisible()
+    return this.property.isVisible();
   }
 
   /**
@@ -201,11 +203,11 @@ class PropertyDecorator {
    */
   position(): number {
     if (this.options.position) {
-      return this.options.position
+      return this.options.position;
     }
-    if (this.isTitle()) { return -1 }
-    if (this.isId()) { return 0 }
-    return 100 + this.property.position()
+    if (this.isTitle()) { return -1; }
+    if (this.isId()) { return 0; }
+    return 100 + this.property.position();
   }
 
   /**
@@ -214,7 +216,7 @@ class PropertyDecorator {
    * @return {boolean}
    */
   isId(): boolean {
-    return !!overrideFromOptions('isId', this.property, this.options)
+    return !!overrideFromOptions('isId', this.property, this.options);
   }
 
   /**
@@ -223,7 +225,7 @@ class PropertyDecorator {
    * @return {boolean}
    */
   isRequired(): boolean {
-    return !!overrideFromOptions('isRequired', this.property, this.options)
+    return !!overrideFromOptions('isRequired', this.property, this.options);
   }
 
   /**
@@ -234,7 +236,7 @@ class PropertyDecorator {
    * @return {boolean}
    */
   isTitle(): boolean {
-    return !!overrideFromOptions('isTitle', this.property, this.options)
+    return !!overrideFromOptions('isTitle', this.property, this.options);
   }
 
   /**
@@ -243,7 +245,7 @@ class PropertyDecorator {
    * @return  {boolean}
    */
   isDisabled(): boolean {
-    return !!this.options.isDisabled
+    return !!this.options.isDisabled;
   }
 
   /**
@@ -283,7 +285,7 @@ class PropertyDecorator {
           this.options.description,
           this._resource.id(),
         ) : undefined,
-    }
+    };
   }
 
   /**
@@ -293,21 +295,21 @@ class PropertyDecorator {
    */
   subProperties(): Array<PropertyDecorator> {
     const dbSubProperties = this.property.subProperties().map((subProperty) => {
-      const path = `${this.propertyPath}.${subProperty.name()}`
+      const path = `${this.propertyPath}.${subProperty.name()}`;
       const decorated = new PropertyDecorator({
         property: subProperty,
         admin: this._admin,
         options: this.getOptionsForSubProperty(path),
         resource: this._resource,
         path,
-      })
-      return decorated
-    })
-    return [...dbSubProperties, ...this.virtualSubProperties]
+      });
+      return decorated;
+    });
+    return [...dbSubProperties, ...this.virtualSubProperties];
   }
 
   addSubProperty(subProperty: PropertyDecorator): void {
-    this.virtualSubProperties.push(subProperty)
+    this.virtualSubProperties.push(subProperty);
   }
 
   /**
@@ -319,11 +321,11 @@ class PropertyDecorator {
    * @private
    */
   private getOptionsForSubProperty(propertyPath: string): PropertyOptions {
-    const propertyOptions = (this._resource.options || {}).properties || {}
+    const propertyOptions = (this._resource.options || {}).properties || {};
     return {
       ...propertyOptions[propertyPath],
-    }
+    };
   }
 }
 
-export default PropertyDecorator
+export default PropertyDecorator;

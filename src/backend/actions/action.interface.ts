@@ -1,14 +1,14 @@
-import { VariantType } from '@adminjs/design-system'
-import AdminJS from '../../adminjs'
-import { CurrentAdmin } from '../../current-admin.interface'
-import ViewHelpers from '../utils/view-helpers/view-helpers'
-import BaseRecord from '../adapters/record/base-record'
-import BaseResource from '../adapters/resource/base-resource'
-import ActionDecorator from '../decorators/action/action-decorator'
-import { LayoutElement, LayoutElementFunction } from '../utils/layout-element-parser'
-import { RecordJSON } from '../../frontend/interfaces'
-import { NoticeMessage } from '../../frontend/hoc/with-notice'
-import { TranslateFunctions } from '../../utils/translate-functions.factory'
+import { VariantType } from '@adminjs/design-system';
+import AdminJS from '../../adminjs';
+import { CurrentAdmin } from '../../current-admin.interface';
+import ViewHelpers from '../utils/view-helpers/view-helpers';
+import BaseRecord from '../adapters/record/base-record';
+import BaseResource from '../adapters/resource/base-resource';
+import ActionDecorator from '../decorators/action/action-decorator';
+import { LayoutElement, LayoutElementFunction } from '../utils/layout-element-parser';
+import { RecordJSON } from '../../frontend/interfaces';
+import { NoticeMessage } from '../../frontend/hoc/with-notice';
+import { TranslateFunctions } from '../../utils/translate-functions.factory';
 
 export type ActionType = 'resource' | 'record' | 'bulk'
 

@@ -1,12 +1,13 @@
-import { factory } from 'factory-girl'
+/* eslint-disable import/no-unresolved */
+import { factory } from 'factory-girl';
 
-process.env.MONGO_URL = 'mongodb://mongo/admin-server-test'
+process.env.MONGO_URL = 'mongodb://mongo/admin-server-test';
 
-global.factory = factory
+global.factory = factory;
 
-require('./adapters/base-record.spec')
-require('./bundler/generate-user-component-entry.spec')
-require('./decorators/property-decorator.spec')
-require('./decorators/resource-decorator.spec')
-require('./utils/populator.spec')
-require('./utils/resources-factory.spec')
+require('./adapters/base-record.spec');
+require('./bundler/generate-user-component-entry.spec');
+require('./decorators/property-decorator.spec');
+require('./decorators/resource-decorator.spec');
+require('./utils/populator.spec');
+require('./utils/resources-factory.spec');

@@ -1,56 +1,56 @@
-import merge from 'lodash/merge'
-import AdminJS from '../../../adminjs'
-import { AdminJSOptions, Assets, BrandingOptions } from '../../../adminjs-options.interface'
-import { CurrentAdmin } from '../../../current-admin.interface'
-import ViewHelpers from '../view-helpers/view-helpers'
+import merge from 'lodash/merge';
+import AdminJS from '../../../adminjs';
+import { AdminJSOptions, Assets, BrandingOptions } from '../../../adminjs-options.interface';
+import { CurrentAdmin } from '../../../current-admin.interface';
+import ViewHelpers from '../view-helpers/view-helpers';
 
 const defaultBranding: AdminJSOptions['branding'] = {
   companyName: 'Company',
   withMadeWithLove: true,
-}
+};
 const defaultAssets = {
   styles: [],
   scripts: [],
-}
+};
 
 export const getAssets = async (
   admin: AdminJS,
   currentAdmin?: CurrentAdmin,
 ): Promise<Assets> => {
-  const { assets } = admin.options || {}
+  const { assets } = admin.options || {};
   const computed = typeof assets === 'function'
     ? await assets(currentAdmin)
-    : assets
+    : assets;
 
-  return merge({}, defaultAssets, computed)
-}
+  return merge({}, defaultAssets, computed);
+};
 
 export const getBranding = async (
   admin: AdminJS,
   currentAdmin?: CurrentAdmin,
 ): Promise<BrandingOptions> => {
-  const { branding } = admin.options
+  const { branding } = admin.options;
 
-  const h = new ViewHelpers(admin)
-  const defaultLogo = h.assetPath('logo.svg')
+  const h = new ViewHelpers(admin);
+  const defaultLogo = h.assetPath('logo.svg');
 
   const computed = typeof branding === 'function'
     ? await branding(currentAdmin)
-    : branding
-  const merged = merge({}, defaultBranding, computed)
+    : branding;
+  const merged = merge({}, defaultBranding, computed);
 
   // checking for undefined because logo can also be `false` or `null`
-  merged.logo = merged.logo !== undefined ? merged.logo : defaultLogo
+  merged.logo = merged.logo !== undefined ? merged.logo : defaultLogo;
 
-  return merged
-}
+  return merged;
+};
 
 export const getFaviconFromBranding = (branding: BrandingOptions): string => {
   if (branding.favicon) {
-    const { favicon } = branding
-    const type = favicon.match(/.*\.png$/) ? 'image/png' : 'image/x-icon'
-    return `<link rel="shortcut icon" type="${type}" href="${favicon}" />`
+    const { favicon } = branding;
+    const type = favicon.match(/.*\.png$/) ? 'image/png' : 'image/x-icon';
+    return `<link rel="shortcut icon" type="${type}" href="${favicon}" />`;
   }
 
-  return ''
-}
+  return '';
+};

@@ -1,8 +1,8 @@
-import * as CONSTANTS from '../../../constants'
+import * as CONSTANTS from '../../../constants';
 
 const buildUrl = (page: string): string => (
   `${CONSTANTS.DOCS}/${page}`
-)
+);
 
 /**
  * Error which is thrown when given record/resource/action hasn't been found.
@@ -19,11 +19,11 @@ export class NotFoundError extends Error {
     const msg = `
     ${message}
     More information can be found at: ${buildUrl(fnName)}
-    `
-    super(msg)
-    this.message = msg
-    this.name = 'ConfigurationError'
+    `;
+    super(msg);
+    this.message = msg;
+    this.name = 'ConfigurationError';
   }
 }
 
-export default NotFoundError
+export default NotFoundError;

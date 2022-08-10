@@ -1,4 +1,4 @@
-import { PropertyType } from '../../../backend/adapters/property/base-property'
+import { PropertyType } from '../../../backend/adapters/property/base-property';
 
 export type PropertyPlace = 'show' | 'list' | 'edit' | 'filter';
 

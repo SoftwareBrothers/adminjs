@@ -1,5 +1,5 @@
-import { CurrencyInput, CurrencyInputProps } from '@adminjs/design-system'
-import React, { FC, useState } from 'react'
+import { CurrencyInput, CurrencyInputProps } from '@adminjs/design-system';
+import React, { FC, useState } from 'react';
 
 export type CurrencyInputWrapperProps = {
   id: string;
@@ -10,12 +10,14 @@ export type CurrencyInputWrapperProps = {
 } & CurrencyInputProps
 
 export const CurrencyInputWrapper: FC<CurrencyInputWrapperProps> = (props) => {
-  const { id, initial, onChange, options } = props
-  const [value, setValue] = useState(initial)
+  const {
+    id, initial, onChange, options,
+  } = props;
+  const [value, setValue] = useState(initial);
   const onValueChange = (currentValue: string): void => {
-    setValue(currentValue)
-    onChange(currentValue)
-  }
+    setValue(currentValue);
+    onChange(currentValue);
+  };
   return (
     <CurrencyInput
       id={id}
@@ -24,5 +26,5 @@ export const CurrencyInputWrapper: FC<CurrencyInputWrapperProps> = (props) => {
       onValueChange={onValueChange}
       {...options}
     />
-  )
-}
+  );
+};

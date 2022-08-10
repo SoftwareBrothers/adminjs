@@ -1,5 +1,5 @@
-import factory from 'factory-girl'
-import { ActionJSON } from '../../interfaces'
+import factory from 'factory-girl';
+import { ActionJSON } from '../../interfaces';
 
 factory.define<ActionJSON>('ActionJSON', Object, {
   actionType: 'record',
@@ -16,4 +16,4 @@ factory.define<ActionJSON>('ActionJSON', Object, {
   parent: null,
   hasHandler: true,
   custom: {},
-})
+});

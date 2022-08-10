@@ -1,3 +1,3 @@
-import { ActionJSON } from './action-json.interface'
+import { ActionJSON } from './action-json.interface';
 
-export const buildActionTestId = (action: ActionJSON): string => `action-${action.name}`
+export const buildActionTestId = (action: ActionJSON): string => `action-${action.name}`;

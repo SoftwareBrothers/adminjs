@@ -1,48 +1,50 @@
-import React, { FC, useEffect } from 'react'
-import { useNavigate } from 'react-router'
-import { DrawerContent, Box, DrawerFooter, Button, Icon } from '@adminjs/design-system'
+import React, { FC, useEffect } from 'react';
+import { useNavigate } from 'react-router';
+import {
+  DrawerContent, Box, DrawerFooter, Button, Icon,
+} from '@adminjs/design-system';
 
-import PropertyType from '../property-type'
+import PropertyType from '../property-type';
 
-import { ActionProps } from './action.props'
-import ActionHeader from '../app/action-header/action-header'
-import { RecordJSON } from '../../interfaces'
-import useRecord from '../../hooks/use-record/use-record'
-import { appendForceRefresh } from './utils/append-force-refresh'
-import { useTranslation } from '../../hooks/use-translation'
-import LayoutElementRenderer from './utils/layout-element-renderer'
+import { ActionProps } from './action.props';
+import ActionHeader from '../app/action-header/action-header';
+import { RecordJSON } from '../../interfaces';
+import useRecord from '../../hooks/use-record/use-record';
+import { appendForceRefresh } from './utils/append-force-refresh';
+import { useTranslation } from '../../hooks/use-translation';
+import LayoutElementRenderer from './utils/layout-element-renderer';
 
 const New: FC<ActionProps> = (props) => {
-  const { record: initialRecord, resource, action } = props
+  const { record: initialRecord, resource, action } = props;
   const {
     record,
     handleChange,
     submit: handleSubmit,
     loading,
     setRecord,
-  } = useRecord(initialRecord, resource.id)
-  const { translateButton } = useTranslation()
-  const navigate = useNavigate()
+  } = useRecord(initialRecord, resource.id);
+  const { translateButton } = useTranslation();
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (initialRecord) {
-      setRecord(initialRecord)
+      setRecord(initialRecord);
     }
-  }, [initialRecord])
+  }, [initialRecord]);
 
   const submit = (event: React.FormEvent<HTMLFormElement>): boolean => {
-    event.preventDefault()
+    event.preventDefault();
     handleSubmit().then((response) => {
       if (response.data.redirectUrl) {
-        navigate(appendForceRefresh(response.data.redirectUrl))
+        navigate(appendForceRefresh(response.data.redirectUrl));
       }
       // if record has id === has been created
       if (response.data.record.id && !Object.keys(response.data.record.errors).length) {
-        handleChange({ params: {}, populated: {}, errors: {} } as RecordJSON)
+        handleChange({ params: {}, populated: {}, errors: {} } as RecordJSON);
       }
-    })
-    return false
-  }
+    });
+    return false;
+  };
 
   return (
     <Box
@@ -82,10 +84,10 @@ const New: FC<ActionProps> = (props) => {
         </Button>
       </DrawerFooter>
     </Box>
-  )
-}
+  );
+};
 
 export {
   New as default,
   New,
-}
+};

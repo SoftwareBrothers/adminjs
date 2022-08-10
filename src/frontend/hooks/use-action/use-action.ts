@@ -1,10 +1,10 @@
-import { useNavigate } from 'react-router'
+import { useNavigate } from 'react-router';
 
-import { ActionResponse } from '../../../backend/actions/action.interface'
-import { ActionJSON, buildActionCallApiTrigger, buildActionClickHandler } from '../../interfaces'
-import { DifferentActionParams, ActionCallCallback, UseActionResult } from './use-action.types'
-import { actionHref } from '../../interfaces/action/action-href'
-import { useActionResponseHandler } from './use-action-response-handler'
+import { ActionResponse } from '../../../backend/actions/action.interface';
+import { ActionJSON, buildActionCallApiTrigger, buildActionClickHandler } from '../../interfaces';
+import { DifferentActionParams, ActionCallCallback, UseActionResult } from './use-action.types';
+import { actionHref } from '../../interfaces/action/action-href';
+import { useActionResponseHandler } from './use-action-response-handler';
 
 /**
  * @load ./use-action.doc.md
@@ -22,28 +22,28 @@ export function useAction<K extends ActionResponse>(
   params: DifferentActionParams,
   onActionCall?: ActionCallCallback,
 ): UseActionResult<K> {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
-  const actionResponseHandler = useActionResponseHandler(onActionCall)
+  const actionResponseHandler = useActionResponseHandler(onActionCall);
 
-  const href = actionHref(action, params)
+  const href = actionHref(action, params);
 
   const callApi = buildActionCallApiTrigger<K>({
     action,
     params,
     actionResponseHandler,
-  })
+  });
 
   const handleClick = buildActionClickHandler({
     action,
     params,
     actionResponseHandler,
     navigate,
-  })
+  });
 
   return {
     href,
     callApi,
     handleClick,
-  }
+  };
 }

@@ -1,5 +1,5 @@
-import * as path from 'path'
-import slash from 'slash'
+import * as path from 'path';
+import slash from 'slash';
 
 /**
  * Generates entry file for all UsersComponents.
@@ -15,27 +15,27 @@ import slash from 'slash'
  * @private
  */
 const generateUserComponentEntry = (admin, entryPath: string): string => {
-  const { env = {} } = admin.options
-  const { UserComponents } = global as any
+  const { env = {} } = admin.options;
+  const { UserComponents } = global as any;
 
-  const absoluteEntryPath = path.resolve(entryPath)
+  const absoluteEntryPath = path.resolve(entryPath);
 
-  const setupPart = 'AdminJS.UserComponents = {}\n'
+  const setupPart = 'AdminJS.UserComponents = {}\n';
 
   const envPart = Object.keys(env).map((envKey) => (
     `AdminJS.env.${envKey} = ${JSON.stringify(env[envKey])}\n`
-  )).join('')
+  )).join('');
   const componentsPart = Object.keys(UserComponents || {}).map((componentId) => {
     const componentUrl = path.relative(
       absoluteEntryPath,
       (UserComponents as UserComponentsMap)[componentId],
-    )
+    );
     return [
       `import ${componentId} from '${slash(componentUrl)}'`,
       `AdminJS.UserComponents.${componentId} = ${componentId}`,
-    ].join('\n')
-  }).join('\n')
-  return setupPart + envPart + componentsPart
-}
+    ].join('\n');
+  }).join('\n');
+  return setupPart + envPart + componentsPart;
+};
 
-export default generateUserComponentEntry
+export default generateUserComponentEntry;

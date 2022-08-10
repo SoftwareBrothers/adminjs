@@ -1,4 +1,4 @@
-import Sidebar from './sidebar'
+import Sidebar from './sidebar';
 
-export * from './sidebar-resource-section'
-export { Sidebar }
+export * from './sidebar-resource-section';
+export { Sidebar };

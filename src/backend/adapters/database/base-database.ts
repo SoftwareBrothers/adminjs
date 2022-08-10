@@ -3,8 +3,8 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
 /* eslint class-methods-use-this: 0 no-unused-vars: 0 */
 
-import BaseResource from '../resource/base-resource'
-import NotImplementedError from '../../utils/errors/not-implemented-error'
+import BaseResource from '../resource/base-resource';
+import NotImplementedError from '../../utils/errors/not-implemented-error';
 
 /**
  * Representation of an ORM database in AdminJS
@@ -26,7 +26,7 @@ class BaseDatabase {
    * @return {Boolean}          if given adapter supports this database - returns true
    */
   static isAdapterFor(database: any): boolean {
-    throw new NotImplementedError('BaseDatabase.isAdapterFor')
+    throw new NotImplementedError('BaseDatabase.isAdapterFor');
   }
 
   /**
@@ -35,8 +35,8 @@ class BaseDatabase {
    * @return {BaseResource[]}
    */
   resources(): Array<BaseResource> {
-    throw new NotImplementedError('BaseDatabase#resources')
+    throw new NotImplementedError('BaseDatabase#resources');
   }
 }
 
-export default BaseDatabase
+export default BaseDatabase;

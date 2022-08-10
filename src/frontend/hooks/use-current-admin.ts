@@ -1,7 +1,7 @@
-import { useDispatch, useSelector } from 'react-redux'
-import { ReduxState } from '../store/store'
-import { setCurrentAdmin } from '../store/actions/set-current-admin'
-import { CurrentAdmin } from '../../current-admin.interface'
+import { useDispatch, useSelector } from 'react-redux';
+import { ReduxState } from '../store/store';
+import { setCurrentAdmin } from '../store/actions/set-current-admin';
+import { CurrentAdmin } from '../../current-admin.interface';
 
 export type UseCurrentAdminResponse = [
   CurrentAdmin | null,
@@ -30,18 +30,18 @@ export type UseCurrentAdminResponse = [
  * @hideconstructor
  */
 function useCurrentAdmin(): UseCurrentAdminResponse {
-  const currentAdmin = useSelector((state: ReduxState) => state.session)
-  const dispatch = useDispatch()
+  const currentAdmin = useSelector((state: ReduxState) => state.session);
+  const dispatch = useDispatch();
   return [
     currentAdmin,
     (admin: CurrentAdmin | null): any => dispatch(setCurrentAdmin(admin)),
-  ]
+  ];
 }
 
 export {
   useCurrentAdmin,
   useCurrentAdmin as default,
-}
+};
 
 /**
  * Result of the {@link useCurrentAdmin}.

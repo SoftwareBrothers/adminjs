@@ -1,4 +1,4 @@
-import { PropertyType } from '../../adapters/property/base-property'
+import { PropertyType } from '../../adapters/property/base-property';
 
 /**
  * Options passed to a given property
@@ -145,4 +145,5 @@ export default interface PropertyOptions {
    * @new In version 5.6
    */
   description?: string;
-}
+// eslint-disable-next-line semi
+};

@@ -1,7 +1,7 @@
-import { ButtonGroupProps, ButtonInGroupProps } from '@adminjs/design-system'
+import { ButtonGroupProps, ButtonInGroupProps } from '@adminjs/design-system';
 
-import { actionHref, ActionJSON, buildActionTestId } from '../../../interfaces'
-import { DifferentActionParams } from '../../../hooks'
+import { actionHref, ActionJSON, buildActionTestId } from '../../../interfaces';
+import { DifferentActionParams } from '../../../hooks';
 
 export type actionsToButtonGroupOptions = {
   actions: Array<ActionJSON>;
@@ -12,9 +12,9 @@ export type actionsToButtonGroupOptions = {
 export const actionsToButtonGroup = (
   options: actionsToButtonGroupOptions,
 ): ButtonGroupProps['buttons'] => {
-  const { actions, params, handleClick } = options
+  const { actions, params, handleClick } = options;
   const buttons = actions.map((action) => {
-    const href = actionHref(action, params)
+    const href = actionHref(action, params);
     return {
       icon: action.icon,
       label: action.label,
@@ -26,30 +26,30 @@ export const actionsToButtonGroup = (
       onClick: href ? handleClick : undefined,
       'data-testid': buildActionTestId(action),
       buttons: [],
-    }
-  })
+    };
+  });
 
   // nesting buttons
   const buttonsMap = buttons.reduce((memo, button) => {
-    const action = button.source
+    const action = button.source;
     if (action.parent) {
       const parent: ButtonInGroupProps = memo[action.parent]
         || buttons.find((btn) => btn.source.name === action.parent)
         || {
           label: action.parent,
-        }
+        };
 
-      parent.buttons = parent.buttons || []
-      parent.buttons.push(button)
+      parent.buttons = parent.buttons || [];
+      parent.buttons.push(button);
       return {
         ...memo,
         [action.parent]: parent,
-      }
+      };
     }
     return {
       ...memo,
       [button.source.name]: button,
-    }
-  }, {} as Record<string, ButtonInGroupProps>)
-  return Object.values(buttonsMap)
-}
+    };
+  }, {} as Record<string, ButtonInGroupProps>);
+  return Object.values(buttonsMap);
+};

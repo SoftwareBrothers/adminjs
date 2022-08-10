@@ -1,31 +1,31 @@
-import React from 'react'
-import { Navigation, NavigationElementProps } from '@adminjs/design-system'
+import React from 'react';
+import { Navigation, NavigationElementProps } from '@adminjs/design-system';
 
-import { useNavigate, useLocation } from 'react-router'
-import ViewHelpers from '../../../../backend/utils/view-helpers/view-helpers'
-import { useTranslation } from '../../../hooks/use-translation'
-import { ReduxState } from '../../../store/store'
+import { useNavigate, useLocation } from 'react-router';
+import ViewHelpers from '../../../../backend/utils/view-helpers/view-helpers';
+import { useTranslation } from '../../../hooks/use-translation';
+import { ReduxState } from '../../../store/store';
 
 type Props = {
   pages?: ReduxState['pages'];
 }
 
-const h = new ViewHelpers()
+const h = new ViewHelpers();
 
 const SidebarPages: React.FC<Props> = (props) => {
-  const { pages } = props
+  const { pages } = props;
 
-  const { translateLabel } = useTranslation()
-  const location = useLocation()
-  const navigate = useNavigate()
+  const { translateLabel } = useTranslation();
+  const location = useLocation();
+  const navigate = useNavigate();
 
   if (!pages || !pages.length) {
-    return null
+    return null;
   }
 
   const isActive = (page): boolean => (
     !!location.pathname.match(`/pages/${page.name}`)
-  )
+  );
 
   const elements: Array<NavigationElementProps> = pages.map((page) => ({
     id: page.name,
@@ -34,19 +34,19 @@ const SidebarPages: React.FC<Props> = (props) => {
     icon: page.icon,
     href: h.pageUrl(page.name),
     onClick: (event, element): void => {
-      event.preventDefault()
+      event.preventDefault();
       if (element.href) {
-        navigate(element.href)
+        navigate(element.href);
       }
     },
-  }))
+  }));
 
   return (
     <Navigation
       label={translateLabel('pages')}
       elements={elements}
     />
-  )
-}
+  );
+};
 
-export default SidebarPages
+export default SidebarPages;

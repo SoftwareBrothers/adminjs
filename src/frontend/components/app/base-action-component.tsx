@@ -1,16 +1,16 @@
-import React from 'react'
-import { Trans } from 'react-i18next'
-import { MessageBox, Link } from '@adminjs/design-system'
+import React from 'react';
+import { Trans } from 'react-i18next';
+import { MessageBox, Link } from '@adminjs/design-system';
 
-import ErrorBoundary from './error-boundary'
-import { actions } from '../actions'
-import { DOCS } from '../../../constants'
-import { ActionProps } from '../actions/action.props'
-import { useTranslation } from '../../hooks'
+import ErrorBoundary from './error-boundary';
+import { actions } from '../actions';
+import { DOCS } from '../../../constants';
+import { ActionProps } from '../actions/action.props';
+import { useTranslation } from '../../hooks';
 
 declare const AdminJS: {
   UserComponents: Array<string>;
-}
+};
 
 /**
  * Component which renders all the default and custom actions for both the Resource and the Record.
@@ -61,15 +61,17 @@ declare const AdminJS: {
  * @subcategory Application
  */
 export const BaseActionComponent: React.FC<ActionProps> = (props) => {
-  const { resource, action, record, records, setTag } = props
-  const documentationLink = [DOCS, 'BaseAction.html'].join('/')
+  const {
+    resource, action, record, records, setTag,
+  } = props;
+  const documentationLink = [DOCS, 'BaseAction.html'].join('/');
 
-  const { translateMessage } = useTranslation()
+  const { translateMessage } = useTranslation();
 
-  let Action = actions[action.name]
+  let Action = actions[action.name];
 
   if (action.component) {
-    Action = AdminJS.UserComponents[action.component]
+    Action = AdminJS.UserComponents[action.component];
   }
 
   if (Action) {
@@ -83,7 +85,7 @@ export const BaseActionComponent: React.FC<ActionProps> = (props) => {
           setTag={setTag}
         />
       </ErrorBoundary>
-    )
+    );
   }
   return Action || (
     <MessageBox variant="danger">
@@ -93,7 +95,7 @@ export const BaseActionComponent: React.FC<ActionProps> = (props) => {
         <Link ml="default" href={documentationLink}>the documentation</Link>
       </Trans>
     </MessageBox>
-  )
-}
+  );
+};
 
-export default BaseActionComponent
+export default BaseActionComponent;

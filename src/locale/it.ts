@@ -85,9 +85,9 @@ const translations = {
     needMoreSolutions_subtitle: 'Siamo qui per fortnirti una bella UI/UX e un software personalizzato (non solo) su AdminJS',
     invalidCredentials: 'E-mail o password errati',
   },
-}
+};
 
 export default {
   language: 'it',
   translations,
-}
+};

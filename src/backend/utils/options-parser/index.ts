@@ -1,1 +1,1 @@
-export * from './options-parser'
+export * from './options-parser';

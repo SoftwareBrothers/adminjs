@@ -1,13 +1,13 @@
-import { ResourceJSON } from '../../../../frontend/interfaces'
-import { ResourceOptions } from '..'
-import { BaseResource, SupportedDatabasesType } from '../../../adapters'
+import { ResourceJSON } from '../../../../frontend/interfaces';
+import { ResourceOptions } from '..';
+import { BaseResource, SupportedDatabasesType } from '../../../adapters';
 
 export type DatabaseData = {
   databaseName: BaseResource['databaseName'];
   databaseType: BaseResource['databaseType'];
 }
 
-export const DEFAULT_ICON = 'Archive'
+export const DEFAULT_ICON = 'Archive';
 
 type IconMapType = {[key in SupportedDatabasesType]: string}
 
@@ -23,9 +23,9 @@ export const getIcon = (icon?: SupportedDatabasesType | string): string => {
     SAPHana: 'CloudApp',
     MongoDB: 'Archive',
     other: 'Archive',
-  }
-  return (icon && IconMap[icon]) ? IconMap[icon] : DEFAULT_ICON
-}
+  };
+  return (icon && IconMap[icon]) ? IconMap[icon] : DEFAULT_ICON;
+};
 
 export const getNavigation = (
   options: ResourceOptions,
@@ -33,10 +33,10 @@ export const getNavigation = (
 ): ResourceJSON['navigation'] => {
   const navigationOption = typeof options.navigation !== 'undefined'
     ? options.navigation
-    : options.parent
+    : options.parent;
 
   if (navigationOption === null || navigationOption === true) {
-    return null
+    return null;
   }
 
   if (navigationOption === false) {
@@ -44,7 +44,7 @@ export const getNavigation = (
       name: null,
       icon: '',
       show: false,
-    }
+    };
   }
 
   if (navigationOption === undefined || typeof navigationOption === 'string') {
@@ -52,12 +52,12 @@ export const getNavigation = (
       name: navigationOption || database.databaseName(),
       icon: getIcon(database.databaseType()),
       show: true,
-    }
+    };
   }
-  const { name, icon } = navigationOption
+  const { name, icon } = navigationOption;
   return {
     name: name || null,
     icon: icon || getIcon(database.databaseType()),
     show: true,
-  }
-}
+  };
+};

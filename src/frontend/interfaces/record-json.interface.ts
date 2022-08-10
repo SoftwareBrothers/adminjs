@@ -1,5 +1,5 @@
-import { ParamsType } from '../../backend'
-import { ActionJSON } from './action/action-json.interface'
+import { ParamsType } from '../../backend';
+import { ActionJSON } from './action/action-json.interface';
 
 /**
  * @memberof {RecordJSON}

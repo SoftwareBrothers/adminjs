@@ -1,5 +1,6 @@
-import sinon from 'sinon'
-import ViewHelpers from '../../../src/backend/utils/view-helpers/view-helpers'
+/* eslint-disable import/no-import-module-exports */
+import sinon from 'sinon';
+import ViewHelpers from '../../../src/backend/utils/view-helpers/view-helpers';
 
 const expectedResult = {
   recordActionUrl: '#recordActionUrl',
@@ -18,7 +19,7 @@ const expectedResult = {
   newUrl: 'newUrl',
   listUrl: 'listUrl',
   bulkDeleteUrl: 'bulkDeleteUrl',
-}
+};
 
 export default (): ViewHelpers => (
   {
@@ -44,6 +45,6 @@ export default (): ViewHelpers => (
     listUrl: sinon.stub().returns(expectedResult.listUrl),
     bulkDeleteUrl: sinon.stub().returns(expectedResult.bulkDeleteUrl),
   }
-)
+);
 
-module.exports.expectedResult = expectedResult
+module.exports.expectedResult = expectedResult;

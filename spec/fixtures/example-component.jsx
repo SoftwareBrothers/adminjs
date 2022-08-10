@@ -1,7 +1,7 @@
-import React from 'react'
+import React from 'react';
 
 function ExampleComponent() {
-  return <div>Some example text</div>
+  return <div>Some example text</div>;
 }
 
-export default ExampleComponent
+export default ExampleComponent;

@@ -1,32 +1,34 @@
-import React, { ReactNode } from 'react'
-import { FormGroup, Label, Input, Select } from '@adminjs/design-system'
+import React, { ReactNode } from 'react';
+import {
+  FormGroup, Label, Input, Select,
+} from '@adminjs/design-system';
 
-import { FilterPropertyProps } from '../base-property-props'
+import { FilterPropertyProps } from '../base-property-props';
 
 class Filter extends React.PureComponent<FilterPropertyProps> {
   constructor(props) {
-    super(props)
-    this.handleInputChange = this.handleInputChange.bind(this)
-    this.handleSelectChange = this.handleSelectChange.bind(this)
+    super(props);
+    this.handleInputChange = this.handleInputChange.bind(this);
+    this.handleSelectChange = this.handleSelectChange.bind(this);
   }
 
   handleInputChange(event): void {
-    const { onChange, property } = this.props
-    onChange(property.path, event.target.value)
+    const { onChange, property } = this.props;
+    onChange(property.path, event.target.value);
   }
 
   handleSelectChange(selected): void {
-    const { onChange, property } = this.props
-    const value = selected ? selected.value : ''
-    onChange(property.path, value)
+    const { onChange, property } = this.props;
+    const value = selected ? selected.value : '';
+    onChange(property.path, value);
   }
 
   renderInput(): ReactNode {
-    const { property, filter } = this.props
-    const filterKey = `filter-${property.path}`
-    const value = filter[property.path] || ''
+    const { property, filter } = this.props;
+    const filterKey = `filter-${property.path}`;
+    const value = filter[property.path] || '';
     if (property.availableValues) {
-      const selected = property.availableValues.find((av) => av.value === value)
+      const selected = property.availableValues.find((av) => av.value === value);
       return (
         <Select
           variant="filter"
@@ -35,7 +37,7 @@ class Filter extends React.PureComponent<FilterPropertyProps> {
           options={property.availableValues}
           onChange={this.handleSelectChange}
         />
-      )
+      );
     }
     return (
       <Input
@@ -43,17 +45,17 @@ class Filter extends React.PureComponent<FilterPropertyProps> {
         onChange={this.handleInputChange}
         value={value}
       />
-    )
+    );
   }
 
   render(): ReactNode {
-    const { property } = this.props
+    const { property } = this.props;
     return (
       <FormGroup variant="filter">
         <Label>{property.label}</Label>
         {this.renderInput()}
       </FormGroup>
-    )
+    );
   }
 }
-export default Filter
+export default Filter;

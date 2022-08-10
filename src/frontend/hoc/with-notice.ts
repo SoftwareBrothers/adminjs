@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
-import { connect } from 'react-redux'
-import { addNotice } from '../store/actions/add-notice'
+import { connect } from 'react-redux';
+import { addNotice } from '../store/actions/add-notice';
 
 /**
  * NoticeMessage which can be presented as a "Toast" message.
@@ -24,7 +24,7 @@ export type AddNoticeProps = {
 
 const mapDispatchToProps = (dispatch): AddNoticeProps => ({
   addNotice: (notice: NoticeMessage): void => dispatch(addNotice(notice)),
-})
+});
 
 /**
  * Higher Order Component which allows you to post notice messages from your components
@@ -49,9 +49,9 @@ const mapDispatchToProps = (dispatch): AddNoticeProps => ({
  * @component
  * @subcategory HOC
  */
-const withNotice = (Component) => connect(null, mapDispatchToProps)(Component)
+const withNotice = (Component) => connect(null, mapDispatchToProps)(Component);
 
 export {
   withNotice as default,
   withNotice,
-}
+};

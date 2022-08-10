@@ -1,2 +1,2 @@
-export * from './api-client'
-export * from './overridable-component'
+export * from './api-client';
+export * from './overridable-component';

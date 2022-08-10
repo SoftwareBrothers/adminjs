@@ -1,20 +1,20 @@
-import React from 'react'
-import { FormGroup, Label, DatePicker } from '@adminjs/design-system'
+import React from 'react';
+import { FormGroup, Label, DatePicker } from '@adminjs/design-system';
 
-import * as BackendFilter from '../../../../backend/utils/filter/filter'
-import { useTranslation } from '../../../hooks/use-translation'
-import { FilterPropertyProps } from '../base-property-props'
+import * as BackendFilter from '../../../../backend/utils/filter/filter';
+import { useTranslation } from '../../../hooks/use-translation';
+import { FilterPropertyProps } from '../base-property-props';
 
-const { PARAM_SEPARATOR } = BackendFilter
+const { PARAM_SEPARATOR } = BackendFilter;
 
 const Filter: React.FC<FilterPropertyProps> = (props) => {
-  const { property, filter, onChange } = props
-  const { translateProperty } = useTranslation()
+  const { property, filter, onChange } = props;
+  const { translateProperty } = useTranslation();
 
-  const fromKey = `${property.path}${PARAM_SEPARATOR}from`
-  const toKey = `${property.path}${PARAM_SEPARATOR}to`
-  const fromValue = filter[fromKey]
-  const toValue = filter[toKey]
+  const fromKey = `${property.path}${PARAM_SEPARATOR}from`;
+  const toKey = `${property.path}${PARAM_SEPARATOR}to`;
+  const fromValue = filter[fromKey];
+  const toValue = filter[toKey];
 
   return (
     <FormGroup variant="filter">
@@ -32,7 +32,7 @@ const Filter: React.FC<FilterPropertyProps> = (props) => {
         propertyType={property.type}
       />
     </FormGroup>
-  )
-}
+  );
+};
 
-export default Filter
+export default Filter;

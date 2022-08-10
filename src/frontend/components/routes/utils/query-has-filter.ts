@@ -1,9 +1,10 @@
+/* eslint-disable no-restricted-syntax */
 export default (queryString: string): boolean => {
-  const query = new URLSearchParams(queryString)
+  const query = new URLSearchParams(queryString);
   for (const key of query.keys()) {
     if (key.match('filters.')) {
-      return true
+      return true;
     }
   }
-  return false
-}
+  return false;
+};

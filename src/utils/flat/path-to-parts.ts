@@ -1,4 +1,4 @@
-import { PathParts } from './path-parts.type'
+import { PathParts } from './path-parts.type';
 
 /**
  * @memberof module:flat
@@ -21,20 +21,20 @@ export type PathToPartsOptions = {
  * @alias pathToParts
  */
 const pathToParts = (propertyPath: string, options: PathToPartsOptions = {}): PathParts => {
-  let allParts = propertyPath.split('.')
+  let allParts = propertyPath.split('.');
   if (options.skipArrayIndexes) {
     // eslint-disable-next-line no-restricted-globals
-    allParts = allParts.filter((part) => isNaN(+part))
+    allParts = allParts.filter((part) => isNaN(+part));
   }
   return allParts.reduce((memo, part) => {
     if (memo.length) {
       return [
         ...memo,
         [memo[memo.length - 1], part].join('.'),
-      ]
+      ];
     }
-    return [part]
-  }, [] as Array<string>)
-}
+    return [part];
+  }, [] as Array<string>);
+};
 
-export { pathToParts }
+export { pathToParts };

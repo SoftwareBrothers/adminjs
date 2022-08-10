@@ -1,11 +1,11 @@
-import * as path from 'path'
-import { outPath as COMPONENT_BUNDLE_PATH } from '../../bundler/user-components-bundler'
+import * as path from 'path';
+import { outPath as COMPONENT_BUNDLE_PATH } from '../../bundler/user-components-bundler';
 
-import AppController from '../../controllers/app-controller'
-import ApiController from '../../controllers/api-controller'
-import env from '../../bundler/bundler-env'
+import AppController from '../../controllers/app-controller';
+import ApiController from '../../controllers/api-controller';
+import env from '../../bundler/bundler-env';
 
-const ASSETS_ROOT = `${__dirname}/../../../frontend/assets/`
+const ASSETS_ROOT = `${__dirname}/../../../frontend/assets/`;
 
 /**
  * Type representing the AdminJS.Router
@@ -158,13 +158,13 @@ export const Router: RouterType = {
     Controller: ApiController,
     action: 'page',
   }],
-}
+};
 
 if (process.env.NODE_ENV === 'production') {
   Router.assets.push({
     path: '/frontend/assets/components.bundle.js',
     src: COMPONENT_BUNDLE_PATH,
-  })
+  });
 } else {
   Router.routes.push({
     method: 'GET',
@@ -172,7 +172,7 @@ if (process.env.NODE_ENV === 'production') {
     Controller: AppController,
     action: 'bundleComponents',
     contentType: 'text/javascript;charset=utf-8',
-  })
+  });
 }
 
-export default Router
+export default Router;

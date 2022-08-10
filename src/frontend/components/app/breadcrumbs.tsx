@@ -1,11 +1,11 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
-import styled from 'styled-components'
-import { Box, Text, cssClass } from '@adminjs/design-system'
+import React from 'react';
+import { Link } from 'react-router-dom';
+import styled from 'styled-components';
+import { Box, Text, cssClass } from '@adminjs/design-system';
 
-import { RecordJSON, ResourceJSON } from '../../interfaces'
-import ViewHelpers from '../../../backend/utils/view-helpers/view-helpers'
-import { useTranslation } from '../../hooks/use-translation'
+import { RecordJSON, ResourceJSON } from '../../interfaces';
+import ViewHelpers from '../../../backend/utils/view-helpers/view-helpers';
+import { useTranslation } from '../../hooks/use-translation';
 
 export const BreadcrumbLink = styled(Link)`
   color: ${({ theme }): string => theme.colors.grey40};
@@ -28,7 +28,7 @@ export const BreadcrumbLink = styled(Link)`
       content: '';
     }
   }
-`
+`;
 
 export const BreadcrumbText = styled(Text)`
   color: ${({ theme }): string => theme.colors.grey40};
@@ -49,7 +49,7 @@ export const BreadcrumbText = styled(Text)`
       content: '';
     }
   }
-`
+`;
 
 /**
  * @memberof Breadcrumbs
@@ -74,12 +74,12 @@ export type BreadcrumbProps = {
  * @private
  */
 export const Breadcrumbs: React.FC<BreadcrumbProps> = (props) => {
-  const { resource, record, actionName } = props
+  const { resource, record, actionName } = props;
 
-  const listAction = resource.resourceActions.find(({ name }) => name === 'list')
-  const action = resource.actions.find((a) => a.name === actionName)
-  const h = new ViewHelpers()
-  const { translateLabel: tl } = useTranslation()
+  const listAction = resource.resourceActions.find(({ name }) => name === 'list');
+  const action = resource.actions.find((a) => a.name === actionName);
+  const h = new ViewHelpers();
+  const { translateLabel: tl } = useTranslation();
 
   return (
     <Box flexGrow={1} className={cssClass('Breadcrumbs')}>
@@ -98,7 +98,7 @@ export const Breadcrumbs: React.FC<BreadcrumbProps> = (props) => {
         <BreadcrumbLink to="#">{action.label}</BreadcrumbLink>
       )}
     </Box>
-  )
-}
+  );
+};
 
-export default Breadcrumbs
+export default Breadcrumbs;

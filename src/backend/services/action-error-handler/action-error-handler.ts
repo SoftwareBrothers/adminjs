@@ -1,6 +1,6 @@
-import { ActionContext, ActionResponse } from '../../actions/action.interface'
-import ValidationError, { PropertyErrors, RecordError } from '../../utils/errors/validation-error'
-import ForbiddenError from '../../utils/errors/forbidden-error'
+import { ActionContext, ActionResponse } from '../../actions/action.interface';
+import ValidationError, { PropertyErrors, RecordError } from '../../utils/errors/validation-error';
+import ForbiddenError from '../../utils/errors/forbidden-error';
 
 /**
  * @private
@@ -9,22 +9,24 @@ import ForbiddenError from '../../utils/errors/forbidden-error'
  */
 const actionErrorHandler = (error: any, context: ActionContext): ActionResponse => {
   if (error instanceof ValidationError || error instanceof ForbiddenError) {
-    const { resource, record, currentAdmin, action } = context
+    const {
+      resource, record, currentAdmin, action,
+    } = context;
 
-    let baseMessage = ''
-    let baseError: RecordError | null = null
-    let errors: PropertyErrors = {}
-    let meta: any
+    let baseMessage = '';
+    let baseError: RecordError | null = null;
+    let errors: PropertyErrors = {};
+    let meta: any;
 
     if (error instanceof ValidationError) {
       baseMessage = error.baseError?.message
-        || context.translateMessage('thereWereValidationErrors', resource.id())
-      baseError = error.baseError ?? null
-      errors = error.propertyErrors
+        || context.translateMessage('thereWereValidationErrors', resource.id());
+      baseError = error.baseError ?? null;
+      errors = error.propertyErrors;
     } else {
       // Defaults to ForbiddenError
       baseMessage = error.baseMessage
-        || context.translateMessage('anyForbiddenError', resource.id())
+        || context.translateMessage('anyForbiddenError', resource.id());
     }
 
     // Add required meta data for the list action
@@ -35,10 +37,10 @@ const actionErrorHandler = (error: any, context: ActionContext): ActionResponse 
         page: 0,
         direction: null,
         sortBy: null,
-      }
+      };
     }
 
-    const recordJson = record?.toJSON?.(currentAdmin)
+    const recordJson = record?.toJSON?.(currentAdmin);
 
     return {
       record: {
@@ -54,9 +56,9 @@ const actionErrorHandler = (error: any, context: ActionContext): ActionResponse 
         type: 'error',
       },
       meta,
-    }
+    };
   }
-  throw error
-}
+  throw error;
+};
 
-export default actionErrorHandler
+export default actionErrorHandler;

@@ -1,11 +1,11 @@
-import { DELIMITER } from '../../../../utils/flat/constants'
-import { PropertyJSON } from '../../../interfaces'
+import { DELIMITER } from '../../../../utils/flat/constants';
+import { PropertyJSON } from '../../../interfaces';
 
-export const getSubpropertyPath = (path: string, index: number) => [path, index].join(DELIMITER)
+export const getSubpropertyPath = (path: string, index: number) => [path, index].join(DELIMITER);
 export const getIndexFromSubpropertyPath = (subpropertyPath: string) => {
-  const [, index] = subpropertyPath.split(DELIMITER)
-  return parseInt(index, 10)
-}
+  const [, index] = subpropertyPath.split(DELIMITER);
+  return parseInt(index, 10);
+};
 
 /**
  * Converts property: PropertyJSON from an array to a sub-property for an actual item in the array
@@ -25,4 +25,4 @@ export const convertToSubProperty = (arrayProperty: PropertyJSON, index: number)
     isArray: false,
     isDraggable: false,
   }
-)
+);

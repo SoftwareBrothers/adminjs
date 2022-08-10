@@ -2,11 +2,11 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint class-methods-use-this: 0 no-unused-vars: 0 */
 /* eslint no-useless-constructor: 0 */
-import { SupportedDatabasesType } from './supported-databases.type'
-import { BaseProperty, BaseRecord, ParamsType } from '..'
-import { NotImplementedError, Filter } from '../../utils'
-import { ResourceOptions, ResourceDecorator } from '../../decorators'
-import AdminJS from '../../../adminjs'
+import { SupportedDatabasesType } from './supported-databases.type';
+import { BaseProperty, BaseRecord, ParamsType } from '..';
+import { NotImplementedError, Filter } from '../../utils';
+import { ResourceOptions, ResourceDecorator } from '../../decorators';
+import AdminJS from '../../../adminjs';
 
 /**
  * Representation of a ORM Resource in AdminJS. Visually resource is a list item in the sidebar.
@@ -35,7 +35,7 @@ import AdminJS from '../../../adminjs'
  * @hideconstructor
  */
 class BaseResource {
-  public _decorated: ResourceDecorator | null
+  public _decorated: ResourceDecorator | null;
 
   /**
    * Checks if given adapter supports resource provided by the user.
@@ -49,7 +49,7 @@ class BaseResource {
    * @abstract
    */
   static isAdapterFor(rawResource): boolean {
-    throw new NotImplementedError('BaseResource.isAdapterFor')
+    throw new NotImplementedError('BaseResource.isAdapterFor');
   }
 
   /**
@@ -58,7 +58,7 @@ class BaseResource {
    * @param   {Object}  [resource]
    */
   constructor(resource?: any) {
-    this._decorated = null
+    this._decorated = null;
   }
 
   /**
@@ -70,7 +70,7 @@ class BaseResource {
    * @abstract
    */
   databaseName(): string {
-    throw new NotImplementedError('BaseResource#databaseName')
+    throw new NotImplementedError('BaseResource#databaseName');
   }
 
   /**
@@ -79,7 +79,7 @@ class BaseResource {
    * @return {String}
    */
   databaseType(): SupportedDatabasesType | string {
-    return 'other'
+    return 'other';
   }
 
   /**
@@ -89,7 +89,7 @@ class BaseResource {
    * @abstract
    */
   id(): string {
-    throw new NotImplementedError('BaseResource#id')
+    throw new NotImplementedError('BaseResource#id');
   }
 
   /**
@@ -98,7 +98,7 @@ class BaseResource {
    * @abstract
    */
   properties(): Array<BaseProperty> {
-    throw new NotImplementedError('BaseResource#properties')
+    throw new NotImplementedError('BaseResource#properties');
   }
 
   /**
@@ -110,7 +110,7 @@ class BaseResource {
    * @abstract
    */
   property(path: string): BaseProperty | null {
-    throw new NotImplementedError('BaseResource#property')
+    throw new NotImplementedError('BaseResource#property');
   }
 
   /**
@@ -120,7 +120,7 @@ class BaseResource {
    * @abstract
    */
   async count(filter: Filter): Promise<number> {
-    throw new NotImplementedError('BaseResource#count')
+    throw new NotImplementedError('BaseResource#count');
   }
 
   /**
@@ -150,7 +150,7 @@ class BaseResource {
       direction?: 'asc' | 'desc';
     };
   }): Promise<Array<BaseRecord>> {
-    throw new NotImplementedError('BaseResource#find')
+    throw new NotImplementedError('BaseResource#find');
   }
 
   /**
@@ -161,7 +161,7 @@ class BaseResource {
    * @abstract
    */
   async findOne(id: string): Promise<BaseRecord | null> {
-    throw new NotImplementedError('BaseResource#findOne')
+    throw new NotImplementedError('BaseResource#findOne');
   }
 
   /**
@@ -172,7 +172,7 @@ class BaseResource {
    * @return  {Promise<Array<BaseRecord>>} records
    */
   async findMany(ids: Array<string | number>): Promise<Array<BaseRecord>> {
-    throw new NotImplementedError('BaseResource#findMany')
+    throw new NotImplementedError('BaseResource#findMany');
   }
 
   /**
@@ -187,7 +187,7 @@ class BaseResource {
    * @return {BaseRecord}
    */
   build(params: Record<string, any>): BaseRecord {
-    return new BaseRecord(params, this)
+    return new BaseRecord(params, this);
   }
 
   /**
@@ -200,7 +200,7 @@ class BaseResource {
    * @abstract
    */
   async create(params: Record<string, any>): Promise<ParamsType> {
-    throw new NotImplementedError('BaseResource#create')
+    throw new NotImplementedError('BaseResource#create');
   }
 
   /**
@@ -214,7 +214,7 @@ class BaseResource {
    * @abstract
    */
   async update(id: string, params: Record<string, any>): Promise<ParamsType> {
-    throw new NotImplementedError('BaseResource#update')
+    throw new NotImplementedError('BaseResource#update');
   }
 
   /**
@@ -225,7 +225,7 @@ class BaseResource {
    * @abstract
    */
   async delete(id: string): Promise<void> {
-    throw new NotImplementedError('BaseResource#delete')
+    throw new NotImplementedError('BaseResource#delete');
   }
 
   /**
@@ -238,7 +238,7 @@ class BaseResource {
    * @private
    */
   assignDecorator(admin: AdminJS, options: ResourceOptions = {}): void {
-    this._decorated = new ResourceDecorator({ resource: this, admin, options })
+    this._decorated = new ResourceDecorator({ resource: this, admin, options });
   }
 
   /**
@@ -247,10 +247,10 @@ class BaseResource {
    */
   decorate(): ResourceDecorator {
     if (!this._decorated) {
-      throw new Error('resource does not have any assigned decorator yet')
+      throw new Error('resource does not have any assigned decorator yet');
     }
-    return this._decorated
+    return this._decorated;
   }
 }
 
-export default BaseResource
+export default BaseResource;

@@ -1,29 +1,29 @@
-import React from 'react'
-import { Badge } from '@adminjs/design-system'
-import { ShowPropertyProps } from '../base-property-props'
+import React from 'react';
+import { Badge } from '@adminjs/design-system';
+import { ShowPropertyProps } from '../base-property-props';
 
 const DefaultPropertyValue: React.FC<ShowPropertyProps> = (props) => {
-  const { property, record } = props
+  const { property, record } = props;
 
-  const rawValue = record?.params[property.path]
+  const rawValue = record?.params[property.path];
 
   if (typeof rawValue === 'undefined') {
-    return null
+    return null;
   }
 
   if (property.availableValues) {
-    const option = property.availableValues.find((opt) => opt.value === rawValue)
+    const option = property.availableValues.find((opt) => opt.value === rawValue);
 
     if (!option) {
-      return rawValue
+      return rawValue;
     }
 
     return (
       <Badge>{option?.label || rawValue}</Badge>
-    )
+    );
   }
 
-  return rawValue
-}
+  return rawValue;
+};
 
-export default DefaultPropertyValue
+export default DefaultPropertyValue;

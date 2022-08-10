@@ -1,6 +1,6 @@
-import { CurrentAdmin } from '../../../current-admin.interface'
+import { CurrentAdmin } from '../../../current-admin.interface';
 
-export const SESSION_INITIALIZE = 'SESSION_INITIALIZE'
+export const SESSION_INITIALIZE = 'SESSION_INITIALIZE';
 
 export type SetCurrentAdminResponse = {
   type: typeof SESSION_INITIALIZE;
@@ -10,4 +10,4 @@ export type SetCurrentAdminResponse = {
 export const setCurrentAdmin = (data: CurrentAdmin | null = null): SetCurrentAdminResponse => ({
   type: SESSION_INITIALIZE,
   data,
-})
+});

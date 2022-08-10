@@ -1,5 +1,5 @@
-import { Action, RecordActionResponse } from '../action.interface'
-import NotFoundError from '../../utils/errors/not-found-error'
+import { Action, RecordActionResponse } from '../action.interface';
+import NotFoundError from '../../utils/errors/not-found-error';
 
 /**
  * @implements Action
@@ -29,12 +29,12 @@ export const ShowAction: Action<RecordActionResponse> = {
     if (!data.record) {
       throw new NotFoundError([
         `Record of given id ("${request.params.recordId}") could not be found`,
-      ].join('\n'), 'Action#handler')
+      ].join('\n'), 'Action#handler');
     }
     return {
       record: data.record.toJSON(data.currentAdmin),
-    }
+    };
   },
-}
+};
 
-export default ShowAction
+export default ShowAction;

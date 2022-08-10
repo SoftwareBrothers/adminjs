@@ -1,12 +1,12 @@
-import React, { useEffect } from 'react'
-import { Box, Pagination, Text } from '@adminjs/design-system'
-import { useNavigate, useLocation } from 'react-router'
+import React, { useEffect } from 'react';
+import { Box, Pagination, Text } from '@adminjs/design-system';
+import { useNavigate, useLocation } from 'react-router';
 
-import RecordsTable from '../app/records-table/records-table'
-import { ActionProps } from './action.props'
-import useRecords from '../../hooks/use-records/use-records'
-import useSelectedRecords from '../../hooks/use-selected-records/use-selected-records'
-import { REFRESH_KEY } from './utils/append-force-refresh'
+import RecordsTable from '../app/records-table/records-table';
+import { ActionProps } from './action.props';
+import useRecords from '../../hooks/use-records/use-records';
+import useSelectedRecords from '../../hooks/use-selected-records/use-selected-records';
+import { REFRESH_KEY } from './utils/append-force-refresh';
 
 const List: React.FC<ActionProps> = ({ resource, setTag }) => {
   const {
@@ -18,40 +18,40 @@ const List: React.FC<ActionProps> = ({ resource, setTag }) => {
     total,
     fetchData,
     perPage,
-  } = useRecords(resource.id)
+  } = useRecords(resource.id);
   const {
     selectedRecords,
     handleSelect,
     handleSelectAll,
     setSelectedRecords,
-  } = useSelectedRecords(records)
-  const location = useLocation()
-  const navigate = useNavigate()
+  } = useSelectedRecords(records);
+  const location = useLocation();
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (setTag) {
-      setTag(total.toString())
+      setTag(total.toString());
     }
-  }, [total])
+  }, [total]);
 
   useEffect(() => {
-    setSelectedRecords([])
-  }, [resource.id])
+    setSelectedRecords([]);
+  }, [resource.id]);
 
   useEffect(() => {
-    const search = new URLSearchParams(location.search)
+    const search = new URLSearchParams(location.search);
     if (search.get(REFRESH_KEY)) {
-      setSelectedRecords([])
+      setSelectedRecords([]);
     }
-  }, [location.search])
+  }, [location.search]);
 
-  const handleActionPerformed = (): any => fetchData()
+  const handleActionPerformed = (): any => fetchData();
 
   const handlePaginationChange = (pageNumber: number): void => {
-    const search = new URLSearchParams(location.search)
-    search.set('page', pageNumber.toString())
-    navigate({ search: search.toString() })
-  }
+    const search = new URLSearchParams(location.search);
+    search.set('page', pageNumber.toString());
+    navigate({ search: search.toString() });
+  };
 
   return (
     <Box variant="white">
@@ -75,10 +75,10 @@ const List: React.FC<ActionProps> = ({ resource, setTag }) => {
         />
       </Text>
     </Box>
-  )
-}
+  );
+};
 
 export {
   List as default,
   List,
-}
+};

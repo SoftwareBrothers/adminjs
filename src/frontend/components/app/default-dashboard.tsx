@@ -1,5 +1,5 @@
-import React from 'react'
-import styled from 'styled-components'
+import React from 'react';
+import styled from 'styled-components';
 import {
   Box,
   H2,
@@ -9,16 +9,16 @@ import {
   Illustration,
   IllustrationProps,
   Button,
-} from '@adminjs/design-system'
+} from '@adminjs/design-system';
 
-import { useTranslation } from '../../hooks'
+import { useTranslation } from '../../hooks';
 
-const pageHeaderHeight = 284
-const pageHeaderPaddingY = 74
-const pageHeaderPaddingX = 250
+const pageHeaderHeight = 284;
+const pageHeaderPaddingY = 74;
+const pageHeaderPaddingX = 250;
 
 export const DashboardHeader: React.FC = () => {
-  const { translateMessage } = useTranslation()
+  const { translateMessage } = useTranslation();
   return (
     <Box position="relative" overflow="hidden">
       <Box
@@ -53,8 +53,8 @@ export const DashboardHeader: React.FC = () => {
         </Text>
       </Box>
     </Box>
-  )
-}
+  );
+};
 
 type BoxType = {
   variant: string;
@@ -93,7 +93,7 @@ const boxes = ({ translateMessage }): Array<BoxType> => [{
   title: translateMessage('roleBasedAccess_title'),
   subtitle: translateMessage('roleBasedAccess_subtitle'),
   href: 'https://adminjs.co/tutorial-rbac.html',
-}]
+}];
 
 const Card = styled(Box)`
   display: ${({ flex }): string => (flex ? 'flex' : 'block')};
@@ -104,15 +104,15 @@ const Card = styled(Box)`
     border: 1px solid ${({ theme }): string => theme.colors.primary100};
     box-shadow: ${({ theme }): string => theme.shadows.cardHover};
   }
-`
+`;
 
 Card.defaultProps = {
   variant: 'white',
   boxShadow: 'card',
-}
+};
 
 export const Dashboard: React.FC = () => {
-  const { translateMessage, translateButton } = useTranslation()
+  const { translateMessage, translateButton } = useTranslation();
   return (
     <Box>
       <DashboardHeader />
@@ -144,7 +144,12 @@ export const Dashboard: React.FC = () => {
           </Box>
         ))}
         <Box width={[1, 1, 1 / 2]} p="lg">
-          <Card as="a" flex href="https://join.slack.com/t/adminbro/shared_invite/zt-djsqxxpz-_YCS8UMtQ9Ade6DPuLR7Zw" target="_blank">
+          <Card
+            as="a"
+            flex
+            href="https://join.slack.com/t/adminbro/shared_invite/zt-1c7z4k0v9-kBNAivB8lX3OWLWu6TLE7A"
+            target="_blank"
+          >
             <Box flexShrink={0}><Illustration variant="SlackLogo" /></Box>
             <Box ml="xl">
               <H4>{translateMessage('community_title')}</H4>
@@ -180,7 +185,7 @@ export const Dashboard: React.FC = () => {
         </Box>
       </Box>
     </Box>
-  )
-}
+  );
+};
 
-export default Dashboard
+export default Dashboard;

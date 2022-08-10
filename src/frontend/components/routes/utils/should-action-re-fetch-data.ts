@@ -1,4 +1,8 @@
-import { RecordActionParams, BulkActionParams, ResourceActionParams } from '../../../../backend/utils/view-helpers/view-helpers'
+import {
+  RecordActionParams,
+  BulkActionParams,
+  ResourceActionParams,
+} from '../../../../backend/utils/view-helpers/view-helpers';
 
 type AnyActionParams = RecordActionParams & ResourceActionParams & BulkActionParams
 
@@ -19,16 +23,16 @@ const shouldActionReFetchData = (
     resourceId,
     recordId,
     actionName,
-  } = currentMatchParams
+  } = currentMatchParams;
   const {
     resourceId: newResourceId,
     recordId: newRecordId,
     actionName: newActionName,
-  } = newMatchParams
+  } = newMatchParams;
 
   return resourceId !== newResourceId
     || recordId !== newRecordId
-    || actionName !== newActionName
-}
+    || actionName !== newActionName;
+};
 
-export default shouldActionReFetchData
+export default shouldActionReFetchData;

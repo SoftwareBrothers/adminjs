@@ -1,6 +1,6 @@
-import { AxiosResponse } from 'axios'
-import { ListActionResponse } from '../../../backend'
-import { RecordJSON } from '../../interfaces'
+import { AxiosResponse } from 'axios';
+import { ListActionResponse } from '../../../backend';
+import { RecordJSON } from '../../interfaces';
 
 /**
  * Result of the {@link useRecords} hook.

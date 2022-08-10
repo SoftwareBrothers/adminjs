@@ -1,24 +1,24 @@
-import axios, { AxiosResponse, AxiosInstance, AxiosRequestConfig } from 'axios'
+import axios, { AxiosResponse, AxiosInstance, AxiosRequestConfig } from 'axios';
 import {
   ResourceActionParams,
   BulkActionParams,
   RecordActionParams,
   ActionParams,
-} from '../../backend/utils/view-helpers/view-helpers'
+} from '../../backend/utils/view-helpers/view-helpers';
 
 /* eslint-disable no-alert */
-import { RecordJSON } from '../interfaces'
-import { RecordActionResponse, ActionResponse, BulkActionResponse } from '../../backend/actions/action.interface'
+import { RecordJSON } from '../interfaces';
+import { RecordActionResponse, ActionResponse, BulkActionResponse } from '../../backend/actions/action.interface';
 
-let globalAny: any = {}
+let globalAny: any = {};
 
 try {
-  globalAny = window
+  globalAny = window;
 } catch (error) {
   if (error.message !== 'window is not defined') {
-    throw error
+    throw error;
   } else {
-    globalAny = { isOnServer: true }
+    globalAny = { isOnServer: true };
   }
 }
 
@@ -32,17 +32,17 @@ try {
  */
 
 const checkResponse = (response: AxiosResponse): void => {
-  if (globalAny.isOnServer) { return }
-  const loginUrl = [globalAny.location.origin, globalAny.REDUX_STATE.paths.loginPath].join('')
+  if (globalAny.isOnServer) { return; }
+  const loginUrl = [globalAny.location.origin, globalAny.REDUX_STATE.paths.loginPath].join('');
   // if response has redirect to loginUrl
   if (response.request.responseURL
       && response.request.responseURL.match(loginUrl)
   ) {
     // eslint-disable-next-line no-undef
-    alert('Your session expired. You will be redirected to login screen')
-    globalAny.location.assign(loginUrl)
+    alert('Your session expired. You will be redirected to login screen');
+    globalAny.location.assign(loginUrl);
   }
-}
+};
 
 /**
  * Extends {@link AxiosRequestConfig}
@@ -115,20 +115,20 @@ export type GetPageAPIParams = AxiosRequestConfig & {
  * @hideconstructor
  */
 class ApiClient {
-  private baseURL: string
+  private baseURL: string;
 
-  private client: AxiosInstance
+  private client: AxiosInstance;
 
   constructor() {
-    this.baseURL = ApiClient.getBaseUrl()
+    this.baseURL = ApiClient.getBaseUrl();
     this.client = axios.create({
       baseURL: this.baseURL,
-    })
+    });
   }
 
   static getBaseUrl(): string {
-    if (globalAny.isOnServer) { return '' }
-    return [globalAny.location.origin, globalAny.REDUX_STATE?.paths.rootPath].join('')
+    if (globalAny.isOnServer) { return ''; }
+    return [globalAny.location.origin, globalAny.REDUX_STATE?.paths.rootPath].join('');
   }
 
   /**
@@ -144,11 +144,11 @@ class ApiClient {
     resourceId: string;
     query: string;
   }): Promise<Array<RecordJSON>> {
-    if (globalAny.isOnServer) { return [] }
-    const actionName = 'search'
-    const response = await this.resourceAction({ resourceId, actionName, query })
-    checkResponse(response)
-    return response.data.records
+    if (globalAny.isOnServer) { return []; }
+    const actionName = 'search';
+    const response = await this.resourceAction({ resourceId, actionName, query });
+    checkResponse(response);
+    return response.data.records;
   }
 
   /**
@@ -158,20 +158,22 @@ class ApiClient {
    * @return  {Promise<ActionResponse>}     response from an {@link Action}
    */
   async resourceAction(options: ResourceActionAPIParams): Promise<AxiosResponse<ActionResponse>> {
-    const { resourceId, actionName, data, query, ...axiosParams } = options
-    let url = `/api/resources/${resourceId}/actions/${actionName}`
+    const {
+      resourceId, actionName, data, query, ...axiosParams
+    } = options;
+    let url = `/api/resources/${resourceId}/actions/${actionName}`;
     if (query) {
-      const q = encodeURIComponent(query)
-      url = [url, q].join('/')
+      const q = encodeURIComponent(query);
+      url = [url, q].join('/');
     }
     const response = await this.client.request({
       url,
       method: data ? 'POST' : 'GET',
       ...axiosParams,
       data,
-    })
-    checkResponse(response)
-    return response
+    });
+    checkResponse(response);
+    return response;
   }
 
   /**
@@ -181,15 +183,17 @@ class ApiClient {
    * @return  {Promise<RecordActionResponse>}            response from an {@link Action}
    */
   async recordAction(options: RecordActionAPIParams): Promise<AxiosResponse<RecordActionResponse>> {
-    const { resourceId, recordId, actionName, data, ...axiosParams } = options
+    const {
+      resourceId, recordId, actionName, data, ...axiosParams
+    } = options;
     const response = await this.client.request({
       url: `/api/resources/${resourceId}/records/${recordId}/${actionName}`,
       method: data ? 'POST' : 'GET',
       ...axiosParams,
       data,
-    })
-    checkResponse(response)
-    return response
+    });
+    checkResponse(response);
+    return response;
   }
 
   /**
@@ -199,10 +203,12 @@ class ApiClient {
    * @return  {Promise<BulkActionResponse>}            response from an {@link Action}
    */
   async bulkAction(options: BulkActionAPIParams): Promise<AxiosResponse<BulkActionResponse>> {
-    const { resourceId, recordIds, actionName, data, ...axiosParams } = options
+    const {
+      resourceId, recordIds, actionName, data, ...axiosParams
+    } = options;
 
-    const params = new URLSearchParams()
-    params.set('recordIds', (recordIds || []).join(','))
+    const params = new URLSearchParams();
+    params.set('recordIds', (recordIds || []).join(','));
 
     const response = await this.client.request({
       url: `/api/resources/${resourceId}/bulk/${actionName}`,
@@ -210,9 +216,9 @@ class ApiClient {
       ...axiosParams,
       data,
       params,
-    })
-    checkResponse(response)
-    return response
+    });
+    checkResponse(response);
+    return response;
   }
 
   /**
@@ -223,9 +229,9 @@ class ApiClient {
    *                                     {@link AdminJSOptions#dashboard}
    */
   async getDashboard(options: AxiosRequestConfig = {}): Promise<AxiosResponse<any>> {
-    const response = await this.client.get('/api/dashboard', options)
-    checkResponse(response)
-    return response
+    const response = await this.client.get('/api/dashboard', options);
+    checkResponse(response);
+    return response;
   }
 
   /**
@@ -236,17 +242,17 @@ class ApiClient {
    *                                            defined in {@link AdminJSOptions#pages}
    */
   async getPage(options: GetPageAPIParams): Promise<AxiosResponse<any>> {
-    const { pageName, ...axiosParams } = options
+    const { pageName, ...axiosParams } = options;
     const response = await this.client.request({
       url: `/api/pages/${pageName}`,
       ...axiosParams,
-    })
-    checkResponse(response)
-    return response
+    });
+    checkResponse(response);
+    return response;
   }
 }
 
 export {
   ApiClient as default,
   ApiClient,
-}
+};

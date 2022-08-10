@@ -1,5 +1,5 @@
-import { RecordJSON } from '../../interfaces'
-import { RecordActionResponse } from '../../../backend/actions/action.interface'
+import { RecordJSON } from '../../interfaces';
+import { RecordActionResponse } from '../../../backend/actions/action.interface';
 
 /**
  * Handlers of all [Actions]{@link Action} of type `record` returns record.
@@ -19,6 +19,6 @@ const mergeRecordResponse = (record: RecordJSON, response: RecordActionResponse)
   errors: response.record.errors,
   populated: { ...record.populated, ...response.record.populated },
   params: { ...record.params, ...response.record.params },
-})
+});
 
-export default mergeRecordResponse
+export default mergeRecordResponse;

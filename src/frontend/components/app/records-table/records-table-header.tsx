@@ -1,9 +1,11 @@
-import React from 'react'
-import { CheckBox, TableHead, TableRow, TableCell } from '@adminjs/design-system'
+import React from 'react';
+import {
+  CheckBox, TableHead, TableRow, TableCell,
+} from '@adminjs/design-system';
 
-import PropertyHeader from './property-header'
-import { BasePropertyJSON } from '../../../interfaces'
-import { display } from './utils/display'
+import PropertyHeader from './property-header';
+import { BasePropertyJSON } from '../../../interfaces';
+import { display } from './utils/display';
 
 /**
  * @memberof RecordsTableHeader
@@ -84,7 +86,8 @@ export const RecordsTableHeader: React.FC<RecordsTableHeaderProps> = (props) => 
   const {
     titleProperty, properties,
     sortBy, direction,
-    onSelectAll, selectedAll } = props
+    onSelectAll, selectedAll,
+  } = props;
   return (
     <TableHead>
       <TableRow>
@@ -110,7 +113,7 @@ export const RecordsTableHeader: React.FC<RecordsTableHeaderProps> = (props) => 
         <TableCell key="actions" style={{ width: 80 }} />
       </TableRow>
     </TableHead>
-  )
-}
+  );
+};
 
-export default RecordsTableHeader
+export default RecordsTableHeader;

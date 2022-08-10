@@ -1,19 +1,19 @@
-import { DOCS } from '../../../constants'
+import { DOCS } from '../../../constants';
 
 const buildUrl = (fnName: string): string => {
   if (fnName) {
-    let obj
-    let fn
+    let obj;
+    let fn;
     if (fnName.indexOf('.') > 0) {
-      [obj, fn] = fnName.split('.')
-      fn = `.${fn}`
+      [obj, fn] = fnName.split('.');
+      fn = `.${fn}`;
     } else {
-      [obj, fn] = fnName.split('#')
+      [obj, fn] = fnName.split('#');
     }
-    return `${DOCS}/${obj}.html#${fn}`
+    return `${DOCS}/${obj}.html#${fn}`;
   }
-  return DOCS
-}
+  return DOCS;
+};
 
 /**
  * Error which is thrown when an abstract method is not implemented
@@ -29,10 +29,10 @@ export class NotImplementedError extends Error {
     const message = `
     You have to implement the method: ${fnName}
     Check out the documentation at: ${buildUrl(fnName)}
-    `
-    super(message)
-    this.message = message
+    `;
+    super(message);
+    this.message = message;
   }
 }
 
-export default NotImplementedError
+export default NotImplementedError;

@@ -1,7 +1,7 @@
-import React from 'react'
+import React from 'react';
 
-import { RecordJSON, ResourceJSON, PropertyJSON } from '../../../interfaces'
-import DefaultPropertyValue from './default-property-value'
+import { RecordJSON, ResourceJSON, PropertyJSON } from '../../../interfaces';
+import DefaultPropertyValue from './default-property-value';
 
 interface Props {
   property: PropertyJSON;
@@ -11,6 +11,6 @@ interface Props {
 
 export default class List extends React.PureComponent<Props> {
   render(): React.ReactChild {
-    return (<DefaultPropertyValue {...this.props} />)
+    return (<DefaultPropertyValue {...this.props} />);
   }
 }

@@ -1,18 +1,18 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
 import {
   Table, TableBody, TableRow, TableCell, Text,
   DrawerContent, DrawerFooter, Button, MessageBox, Icon,
-} from '@adminjs/design-system'
+} from '@adminjs/design-system';
 
-import { useNavigate } from 'react-router'
-import PropertyType from '../property-type'
-import { ActionProps } from './action.props'
-import ApiClient from '../../utils/api-client'
-import withNotice, { AddNoticeProps } from '../../hoc/with-notice'
-import { appendForceRefresh } from './utils/append-force-refresh'
+import { useNavigate } from 'react-router';
+import PropertyType from '../property-type';
+import { ActionProps } from './action.props';
+import ApiClient from '../../utils/api-client';
+import withNotice, { AddNoticeProps } from '../../hoc/with-notice';
+import { appendForceRefresh } from './utils/append-force-refresh';
 
-import ActionHeader from '../app/action-header/action-header'
-import { useTranslation } from '../../hooks'
+import ActionHeader from '../app/action-header/action-header';
+import { useTranslation } from '../../hooks';
 
 /**
  * @name BulkDeleteAction
@@ -22,49 +22,51 @@ import { useTranslation } from '../../hooks'
  * @private
  */
 const BulkDelete: React.FC<ActionProps & AddNoticeProps> = (props) => {
-  const { resource, records, action, addNotice } = props
+  const {
+    resource, records, action, addNotice,
+  } = props;
 
-  const navigate = useNavigate()
-  const [loading, setLoading] = useState(false)
-  const { translateMessage, translateButton } = useTranslation()
+  const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
+  const { translateMessage, translateButton } = useTranslation();
 
   if (!records) {
     return (
       <Text>
         {translateMessage('pickSomeFirstToRemove', resource.id)}
       </Text>
-    )
+    );
   }
 
   const handleClick = (): void => {
-    const api = new ApiClient()
-    setLoading(true)
-    const recordIds = records.map((r) => r.id)
+    const api = new ApiClient();
+    setLoading(true);
+    const recordIds = records.map((r) => r.id);
     api.bulkAction({
       resourceId: resource.id,
       actionName: action.name,
       recordIds,
       method: 'post',
     }).then(((response) => {
-      setLoading(false)
+      setLoading(false);
       if (response.data.notice) {
-        addNotice(response.data.notice)
+        addNotice(response.data.notice);
       }
       if (response.data.redirectUrl) {
-        const search = new URLSearchParams(window.location.search)
+        const search = new URLSearchParams(window.location.search);
         // bulk function have recordIds in the URL so it has to be stripped before redirect
-        search.delete('recordIds')
-        navigate(appendForceRefresh(response.data.redirectUrl, search.toString()))
+        search.delete('recordIds');
+        navigate(appendForceRefresh(response.data.redirectUrl, search.toString()));
       }
     })).catch((error) => {
-      setLoading(false)
+      setLoading(false);
       addNotice({
         message: translateMessage('bulkDeleteError', resource.id),
         type: 'error',
-      })
-      throw error
-    })
-  }
+      });
+      throw error;
+    });
+  };
 
   return (
     <>
@@ -99,12 +101,12 @@ const BulkDelete: React.FC<ActionProps & AddNoticeProps> = (props) => {
         </Button>
       </DrawerFooter>
     </>
-  )
-}
+  );
+};
 
-const FormattedBulkDelete = withNotice(BulkDelete)
+const FormattedBulkDelete = withNotice(BulkDelete);
 
 export {
   FormattedBulkDelete as default,
   FormattedBulkDelete as BulkDelete,
-}
+};

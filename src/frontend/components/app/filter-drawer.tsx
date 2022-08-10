@@ -1,5 +1,8 @@
-import React, { MouseEvent, SyntheticEvent, useState, useEffect, useRef } from 'react'
-import { useNavigate, useLocation, useParams } from 'react-router-dom'
+/* eslint-disable no-restricted-syntax */
+import React, {
+  MouseEvent, SyntheticEvent, useState, useEffect, useRef,
+} from 'react';
+import { useNavigate, useLocation, useParams } from 'react-router-dom';
 import {
   Box,
   H3,
@@ -8,11 +11,11 @@ import {
   Drawer,
   DrawerContent,
   DrawerFooter,
-} from '@adminjs/design-system'
+} from '@adminjs/design-system';
 
-import PropertyType from '../property-type'
-import { RecordJSON, ResourceJSON } from '../../interfaces'
-import { useTranslation } from '../../hooks'
+import PropertyType from '../property-type';
+import { RecordJSON, ResourceJSON } from '../../interfaces';
+import { useTranslation } from '../../hooks';
 
 export type FilterProps = {
   resource: ResourceJSON;
@@ -25,76 +28,76 @@ type MatchProps = {
 }
 
 const parseQuery = (location): any => {
-  const filter: Record<string, string> = {}
-  const query = new URLSearchParams(location.search)
+  const filter: Record<string, string> = {};
+  const query = new URLSearchParams(location.search);
   for (const entry of query.entries()) {
-    const [key, value] = entry
+    const [key, value] = entry;
     if (key.match('filters.')) {
-      filter[key.replace('filters.', '')] = value
+      filter[key.replace('filters.', '')] = value;
     }
   }
-  return filter
-}
+  return filter;
+};
 
 export const FilterDrawer: React.FC<FilterProps> = (props) => {
-  const { resource, isVisible, toggleFilter } = props
-  const properties = resource.filterProperties
+  const { resource, isVisible, toggleFilter } = props;
+  const properties = resource.filterProperties;
 
-  const location = useLocation()
-  const [filter, setFilter] = useState(parseQuery(location))
-  const params = useParams<MatchProps>()
-  const navigate = useNavigate()
-  const { translateLabel, translateButton } = useTranslation()
-  const initialLoad = useRef(true)
+  const location = useLocation();
+  const [filter, setFilter] = useState(parseQuery(location));
+  const params = useParams<MatchProps>();
+  const navigate = useNavigate();
+  const { translateLabel, translateButton } = useTranslation();
+  const initialLoad = useRef(true);
 
   useEffect(() => {
     if (initialLoad.current) {
-      initialLoad.current = false
+      initialLoad.current = false;
     } else {
-      setFilter({})
+      setFilter({});
     }
-  }, [params.resourceId])
+  }, [params.resourceId]);
 
   const handleSubmit = (event: SyntheticEvent): false => {
-    event.preventDefault()
-    const search = new URLSearchParams(window.location.search)
+    event.preventDefault();
+    const search = new URLSearchParams(window.location.search);
     Object.keys(filter).forEach((key) => {
       if (filter[key] !== '') {
-        search.set(`filters.${key}`, filter[key])
+        search.set(`filters.${key}`, filter[key]);
       } else {
-        search.delete(`filters.${key}`)
+        search.delete(`filters.${key}`);
       }
-    })
-    toggleFilter()
-    search.set('page', '1')
-    navigate(`${location.pathname}?${search.toString()}`)
-    return false
-  }
+    });
+    toggleFilter();
+    search.set('page', '1');
+    navigate(`${location.pathname}?${search.toString()}`);
+    return false;
+  };
 
   const resetFilter = (event: MouseEvent): void => {
-    event.preventDefault()
-    const filteredSearch = new URLSearchParams()
-    const search = new URLSearchParams(window.location.search)
+    event.preventDefault();
+    const filteredSearch = new URLSearchParams();
+    const search = new URLSearchParams(window.location.search);
     for (const key of search.keys()) {
       if (!key.match('filters.')) {
-        filteredSearch.set(key, search.get(key) as string)
+        filteredSearch.set(key, search.get(key) as string);
       }
     }
-    const query = filteredSearch.toString() === '' ? `?${filteredSearch.toString()}` : ''
-    toggleFilter()
-    navigate(location.pathname + query)
-    setFilter({})
-  }
+    const query = filteredSearch.toString() === '' ? `?${filteredSearch.toString()}` : '';
+    toggleFilter();
+    navigate(location.pathname + query);
+    setFilter({});
+  };
 
   const handleChange = (propertyName: string | RecordJSON, value: any): void => {
     if ((propertyName as RecordJSON).params) {
-      throw new Error('you can not pass RecordJSON to filters')
+      throw new Error('you can not pass RecordJSON to filters');
     }
     setFilter({
       ...filter,
       [propertyName as string]: value,
-    })
-  }
+    });
+  };
 
   return (
     <Drawer variant="filter" isHidden={!isVisible} as="form" onSubmit={handleSubmit}>
@@ -133,7 +136,7 @@ export const FilterDrawer: React.FC<FilterProps> = (props) => {
         </Button>
       </DrawerFooter>
     </Drawer>
-  )
-}
+  );
+};
 
-export default FilterDrawer
+export default FilterDrawer;
