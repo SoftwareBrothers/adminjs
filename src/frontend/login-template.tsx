@@ -42,9 +42,9 @@ const html = async (
   const faviconTag = getFaviconFromBranding(branding)
 
   const scripts = ((assets && assets.scripts) || [])
-    .map(s => `<script src="${s}"></script>`)
+    .map((s) => `<script src="${s}"></script>`)
   const styles = ((assets && assets.styles) || [])
-    .map(l => `<link rel="stylesheet" type="text/css" href="${l}">`)
+    .map((l) => `<link rel="stylesheet" type="text/css" href="${l}">`)
 
   store.dispatch(initializeBranding(branding))
   store.dispatch(initializeAssets(assets))
@@ -64,18 +64,16 @@ const html = async (
     })
 
   const sheet = new ServerStyleSheet()
-  // TODO: fix children props
-  const StoreProvider = Provider as any
 
   const loginComponent = renderToString(
     <StyleSheetManager sheet={sheet.instance}>
-      <StoreProvider store={store}>
+      <Provider store={store}>
         <I18nextProvider i18n={i18n}>
           <ThemeProvider theme={theme}>
             <LoginComponent action={action} message={errorMessage} />
           </ThemeProvider>
         </I18nextProvider>
-      </StoreProvider>
+      </Provider>
     </StyleSheetManager>,
   )
 

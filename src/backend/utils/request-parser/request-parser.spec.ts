@@ -5,7 +5,7 @@ import BaseResource from '../../adapters/resource/base-resource'
 
 const buildResourceWithProperty = (key, property) => {
   const resource = {
-    _decorated: { getPropertyByKey: path => (key === path ? property : null) },
+    _decorated: { getPropertyByKey: (path) => (key === path ? property : null) },
   } as unknown as BaseResource
   return resource
 }

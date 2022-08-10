@@ -77,7 +77,7 @@ export const Breadcrumbs: React.FC<BreadcrumbProps> = (props) => {
   const { resource, record, actionName } = props
 
   const listAction = resource.resourceActions.find(({ name }) => name === 'list')
-  const action = resource.actions.find(a => a.name === actionName)
+  const action = resource.actions.find((a) => a.name === actionName)
   const h = new ViewHelpers()
   const { translateLabel: tl } = useTranslation()
 

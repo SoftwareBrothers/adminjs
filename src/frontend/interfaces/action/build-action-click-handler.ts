@@ -1,6 +1,7 @@
 /* eslint-disable no-restricted-globals */
 /* eslint-disable no-undef */
 /* eslint-disable no-alert */
+import { NavigateFunction } from 'react-router'
 import { DifferentActionParams, useActionResponseHandler } from '../../hooks'
 import { actionHasComponent } from './action-has-component'
 import { actionHref } from './action-href'
@@ -11,7 +12,7 @@ export type BuildActionClickOptions = {
   action: ActionJSON;
   params: DifferentActionParams;
   actionResponseHandler: ReturnType<typeof useActionResponseHandler>;
-  push: (path: string, state?: any) => void;
+  navigate: NavigateFunction;
 }
 
 export type BuildActionClickReturn = (event: any) => any | Promise<any>
@@ -19,7 +20,7 @@ export type BuildActionClickReturn = (event: any) => any | Promise<any>
 export const buildActionClickHandler = (
   options: BuildActionClickOptions,
 ): BuildActionClickReturn => {
-  const { action, params, actionResponseHandler, push } = options
+  const { action, params, actionResponseHandler, navigate } = options
 
   const handleActionClick = (event: React.MouseEvent<HTMLElement>): Promise<any> | any => {
     event.preventDefault()
@@ -41,7 +42,7 @@ export const buildActionClickHandler = (
     }
 
     if (href) {
-      push(href)
+      navigate(href)
     }
   }
 

@@ -16,6 +16,8 @@ module.exports = {
     '@typescript-eslint/no-explicit-any': 'off',
     indent: ['error', 2],
     '@typescript-eslint/explicit-function-return-type': 'off',
+    '@typescript-eslint/no-non-null-assertion': 'off',
+    '@typescript-eslint/ban-ts-ignore': 'off',
     'import/prefer-default-export': 'off',
     'linebreak-style': ['error', 'unix'],
     quotes: ['error', 'single'],
@@ -30,6 +32,15 @@ module.exports = {
     'import/extensions': 'off',
     'mocha/no-hooks-for-single-case': 'off',
     'no-param-reassign': 'off',
+    'default-param-last': 'off',
+    'no-use-before-define': 'off',
+    'no-restricted-exports': 'off',
+    'react/require-default-props': 'off',
+    'react/jsx-props-no-spreading': 'off',
+    'react/function-component-definition': 'off',
+    'max-classes-per-file': 'off',
+    '@typescript-eslint/ban-ts-comment': 'off',
+    'import/no-import-module-exports': 'off',
   },
   ignorePatterns: [
     '*/build/**/*',
@@ -65,6 +76,7 @@ module.exports = {
       files: ['*.tsx'],
       rules: {
         'react/prop-types': 'off',
+        'react/function-component-definition': 'off',
       },
     },
     {

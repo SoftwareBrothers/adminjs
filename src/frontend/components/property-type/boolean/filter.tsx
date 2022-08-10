@@ -23,7 +23,7 @@ class Filter extends React.PureComponent<FilterPropertyProps> {
       { value: true, label: mapValue(true) },
       { value: false, label: mapValue(false) },
     ]
-    const selected = options.find(o => o.value === value)
+    const selected = options.find((o) => o.value === value)
     return (
       <FormGroup>
         <Label>{property.label}</Label>

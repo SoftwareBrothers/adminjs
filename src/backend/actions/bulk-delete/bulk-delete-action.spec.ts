@@ -13,7 +13,6 @@ import NotFoundError from '../../utils/errors/not-found-error'
 import { RecordJSON } from '../../../frontend/interfaces'
 import { CurrentAdmin } from '../../../current-admin.interface'
 
-
 chai.use(chaiAsPromised)
 
 describe('BulkDeleteAction', function () {

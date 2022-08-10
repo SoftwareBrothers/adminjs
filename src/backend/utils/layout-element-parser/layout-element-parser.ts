@@ -75,7 +75,7 @@ const hasOnlyStringsProperties = function (
   return Array.isArray(layoutElement)
     && layoutElement.length > 0
     && !isComponentTag(layoutElement)
-    && !(layoutElement as Array<any>).find(el => (typeof el !== 'string'))
+    && !(layoutElement as Array<any>).find((el) => (typeof el !== 'string'))
 }
 
 const hasArrayOfLayoutElements = function (
@@ -83,7 +83,7 @@ const hasArrayOfLayoutElements = function (
 ): layoutElement is [LayoutElement] {
   return Array.isArray(layoutElement)
     && layoutElement.length > 0
-    && !(layoutElement as Array<any>).find(element => !Array.isArray(element))
+    && !(layoutElement as Array<any>).find((element) => !Array.isArray(element))
 }
 
 const hasFirstStringProperty = function (layoutElement: LayoutElement): boolean {
@@ -139,14 +139,13 @@ export const layoutElementParser = (layoutElement: LayoutElement): ParsedLayoutE
 
   return {
     props,
-    layoutElements: innerLayoutElements.map(el => layoutElementParser(el)),
+    layoutElements: innerLayoutElements.map((el) => layoutElementParser(el)),
     properties,
     component,
   }
 }
 
 export default layoutElementParser
-
 
 /**
  * @load layout-element.doc.md

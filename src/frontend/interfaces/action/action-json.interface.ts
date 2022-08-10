@@ -35,8 +35,6 @@ export interface ActionJSON {
    * If action should have resource actions buttons displayed above action header.
    *
    * Defaults to `true`
-   *
-   * @new in version 5.8.1
    */
   showResourceActions: boolean;
   /**
@@ -67,26 +65,22 @@ export interface ActionJSON {
   layout: Array<ParsedLayoutElement> | null;
 
   /**
-   * action variant
-   * @new in version 3.3
+   * Action variant
    */
   variant: VariantType;
 
   /**
    * If action is nested
-   * @new in version 3.3
    */
   parent: string | null;
 
   /**
    * Indicates if action has action handler defined
-   * @new in version 3.3
    */
   hasHandler: boolean;
 
   /**
    * Any custom options passed from the {@link Action} configuration.
-   * @new in version 3.3
    */
   custom: Record<string, any>;
 }

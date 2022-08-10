@@ -40,7 +40,6 @@ const buildProperties = (): Array<BaseProperty> => {
   return [normalProperty, nestedProperty, arrayProperty, arrayMixedProperty]
 }
 
-
 export const expectedResult = {
   id: 'someID',
   properties: buildProperties(),

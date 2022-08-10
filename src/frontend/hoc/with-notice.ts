@@ -12,7 +12,6 @@ export type NoticeMessage = {
   type?: 'success' | 'error';
 }
 
-
 /**
  * Additional props which are passed to your component
  * @alias AddNoticeProps
@@ -22,7 +21,6 @@ export type AddNoticeProps = {
   // Function triggering notice messages
   addNotice: (notice: NoticeMessage) => void;
 }
-
 
 const mapDispatchToProps = (dispatch): AddNoticeProps => ({
   addNotice: (notice: NoticeMessage): void => dispatch(addNotice(notice)),
@@ -51,7 +49,7 @@ const mapDispatchToProps = (dispatch): AddNoticeProps => ({
  * @component
  * @subcategory HOC
  */
-const withNotice = Component => connect(null, mapDispatchToProps)(Component)
+const withNotice = (Component) => connect(null, mapDispatchToProps)(Component)
 
 export {
   withNotice as default,

@@ -97,7 +97,7 @@ export const RecordsTableHeader: React.FC<RecordsTableHeaderProps> = (props) => 
             />
           ) : null}
         </TableCell>
-        {properties.map(property => (
+        {properties.map((property) => (
           <PropertyHeader
             display={display(property.isTitle)}
             key={property.propertyPath}

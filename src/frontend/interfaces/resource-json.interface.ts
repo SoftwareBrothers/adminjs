@@ -1,7 +1,6 @@
 import { BasePropertyJSON } from './property-json'
 import { ActionJSON } from './action/action-json.interface'
 
-
 /**
  * Resource object accessible on the fronted
  * @alias ResourceJSON

@@ -215,7 +215,7 @@ class BaseRecord {
    * @return {string | number} id of the Record
    */
   id(): string {
-    const idProperty = this.resource.properties().find(p => p.isId())
+    const idProperty = this.resource.properties().find((p) => p.isId())
     if (!idProperty) {
       throw new Error(`Resource: "${this.resource.id()}" does not have an id property`)
     }
@@ -231,7 +231,7 @@ class BaseRecord {
    * @return {string} title of the record
    */
   title(): string {
-    const nameProperty = this.resource.properties().find(p => p.isTitle())
+    const nameProperty = this.resource.properties().find((p) => p.isTitle())
     return nameProperty ? this.param(nameProperty.name()) : this.id()
   }
 
@@ -293,12 +293,10 @@ class BaseRecord {
       errors: this.errors,
       id: this.id(),
       title: this.resource.decorate().titleOf(this),
-      recordActions: this.resource.decorate().recordActions(
-        this, currentAdmin,
-      ).map(recordAction => recordAction.toJSON(currentAdmin)),
-      bulkActions: this.resource.decorate().bulkActions(
-        this, currentAdmin,
-      ).map(recordAction => recordAction.toJSON(currentAdmin)),
+      recordActions: this.resource.decorate().recordActions(this, currentAdmin)
+        .map((recordAction) => recordAction.toJSON(currentAdmin)),
+      bulkActions: this.resource.decorate().bulkActions(this, currentAdmin)
+        .map((recordAction) => recordAction.toJSON(currentAdmin)),
     }
   }
 

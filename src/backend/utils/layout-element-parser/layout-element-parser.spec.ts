@@ -54,7 +54,7 @@ describe('layoutElementParser', function () {
     expect(layoutElementParser(complicatedElement)).to.deep.eq({
       properties: [],
       props,
-      layoutElements: nested.map(el => layoutElementParser(el)),
+      layoutElements: nested.map((el) => layoutElementParser(el)),
       component: 'Box',
     })
   })
@@ -68,7 +68,7 @@ describe('layoutElementParser', function () {
       properties: [],
       props: {},
       component: 'Box',
-      layoutElements: arrayElements.map(innerElement => layoutElementParser(innerElement)),
+      layoutElements: arrayElements.map((innerElement) => layoutElementParser(innerElement)),
     })
   })
 

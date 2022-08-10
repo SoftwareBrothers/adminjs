@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 
 import { AxiosResponse } from 'axios'
-import { useLocation, useHistory } from 'react-router'
+import { useLocation, useNavigate } from 'react-router'
 import { RecordJSON } from '../../interfaces'
 import useNotice from '../use-notice'
 import ApiClient from '../../utils/api-client'
@@ -20,7 +20,6 @@ const api = new ApiClient()
  *
  * @param {string} resourceId      id of a resource for which you want to fetch records
  * @return {UseRecordsResult}
- * @new In version 3.3
  * @bundle
  * @type {Function}
  */
@@ -33,7 +32,7 @@ function useRecords(resourceId: string): UseRecordsResult {
   const [direction, setDirection] = useState<'asc'| 'desc'>('asc')
   const [sortBy, setSortBy] = useState<string | undefined>()
   const location = useLocation()
-  const history = useHistory()
+  const navigate = useNavigate()
   const addNotice = useNotice()
   const { translateMessage } = useTranslation()
   const onNotice = useNotice()
@@ -52,7 +51,7 @@ function useRecords(resourceId: string): UseRecordsResult {
         onNotice(listActionResponse.notice)
       }
       if (listActionResponse.redirectUrl) {
-        history.push(listActionResponse.redirectUrl)
+        navigate(listActionResponse.redirectUrl)
         return
       }
 
@@ -74,10 +73,10 @@ function useRecords(resourceId: string): UseRecordsResult {
 
   useEffect(() => {
     if (hasForceRefresh(location.search)) {
-      history.replace({
+      navigate({
         pathname: location.pathname,
         search: removeForceRefresh(location.search).toString(),
-      })
+      }, { replace: true })
     } else {
       fetchData()
     }

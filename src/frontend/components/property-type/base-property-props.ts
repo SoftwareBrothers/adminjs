@@ -148,7 +148,6 @@ export type ShowPropertyProps = {
   record: RecordJSON;
 }
 
-
 /**
  * @load ./docs/on-property-change.doc.md
  * @memberof BasePropertyComponent

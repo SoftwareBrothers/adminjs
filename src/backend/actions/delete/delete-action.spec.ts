@@ -14,7 +14,6 @@ import { ValidationError } from '../../utils/errors/validation-error'
 import { RecordJSON } from '../../../frontend/interfaces'
 import { CurrentAdmin } from '../../../current-admin.interface'
 
-
 chai.use(chaiAsPromised)
 
 describe('DeleteAction', function () {

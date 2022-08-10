@@ -44,7 +44,7 @@ export const ListAction: Action<ListActionResponse> = {
     page = Number(page) || 1
 
     const listProperties = resource.decorate().getListProperties()
-    const firstProperty = listProperties.find(p => p.isSortable())
+    const firstProperty = listProperties.find((p) => p.isSortable())
     let sort
     if (firstProperty) {
       sort = sortSetter(
@@ -75,7 +75,7 @@ export const ListAction: Action<ListActionResponse> = {
         direction: sort?.direction,
         sortBy: sort?.sortBy,
       },
-      records: populatedRecords.map(r => r.toJSON(context.currentAdmin)),
+      records: populatedRecords.map((r) => r.toJSON(context.currentAdmin)),
     }
   },
 }

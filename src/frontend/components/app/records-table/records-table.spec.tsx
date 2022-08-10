@@ -14,7 +14,6 @@ import '../../spec/resource-json.factory'
 import '../../spec/record-json.factory'
 import '../../spec/property-json.factory'
 
-
 type StubsType = {
   onSelect: sinon.SinonStub<any[], any>;
   onSelectAll: sinon.SinonStub<any[], any>;
@@ -23,17 +22,16 @@ type StubsType = {
 const renderSubject = (props: Omit<RecordsTableProps, 'onSelect' | 'onSelectAll'>): RenderResult & StubsType => {
   const onSelect = sinon.stub()
   const onSelectAll = sinon.stub()
-  // TODO: fix children props
-  const StoreProvider = Provider as any
+
   const renderResult = render(
     <TestContextProvider>
-      <StoreProvider store={createStore({})}>
+      <Provider store={createStore({})}>
         <RecordsTable
           {...props}
           onSelect={onSelect}
           onSelectAll={onSelectAll}
         />
-      </StoreProvider>
+      </Provider>
     </TestContextProvider>,
   )
 
@@ -71,8 +69,8 @@ describe('<RecordsTable />', function () {
       records = await factory.buildMany<RecordJSON>('RecordJSON', 10, {
         params: {
           id: factory.sequence('record.id'),
-          name: factory.sequence('record.name', n => `name ${n}`),
-          surname: factory.sequence('record.surname', n => `surname ${n}`),
+          name: factory.sequence('record.name', (n) => `name ${n}`),
+          surname: factory.sequence('record.surname', (n) => `surname ${n}`),
         },
       });
 
@@ -97,8 +95,8 @@ describe('<RecordsTable />', function () {
       records = await factory.buildMany<RecordJSON>('RecordJSON', 10, {
         params: {
           id: factory.sequence('record.id'),
-          name: factory.sequence('record.name', n => `name ${n}`),
-          surname: factory.sequence('record.surname', n => `surname ${n}`),
+          name: factory.sequence('record.name', (n) => `name ${n}`),
+          surname: factory.sequence('record.surname', (n) => `surname ${n}`),
         },
         recordActions: [await factory.build<ActionJSON>('ActionJSON', {
           name: 'show', actionType: 'record',

@@ -82,7 +82,6 @@ export type RecordActionAPIParams = AxiosRequestConfig & RecordActionParams
  */
 export type BulkActionAPIParams = AxiosRequestConfig & BulkActionParams
 
-
 /**
  * Extends {@link AxiosRequestConfig}
  *

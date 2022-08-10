@@ -22,6 +22,7 @@ import { OverridableComponent } from './frontend/utils/overridable-component'
 import { relativeFilePathResolver } from './utils/file-resolver'
 import { CurrentAdmin } from './current-admin.interface'
 import { ResourceJSON } from './frontend/interfaces/resource-json.interface'
+import pagesToStore from './frontend/store/pages-to-store'
 
 const pkg = JSON.parse(fs.readFileSync(path.join(__dirname, '../package.json'), 'utf-8'))
 export const VERSION = pkg.version
@@ -159,12 +160,15 @@ class AdminJS {
     if (!Database || !Resource) {
       throw new Error('Adapter has to have both Database and Resource')
     }
+
+    // TODO: check if this is actually valid because "isAdapterFor" is always defined.
     // checking if both Database and Resource have at least isAdapterFor method
+    // @ts-ignore
     if (Database.isAdapterFor && Resource.isAdapterFor) {
       global.RegisteredAdapters = global.RegisteredAdapters || []
       global.RegisteredAdapters.push({ Database, Resource })
     } else {
-      throw new Error('Adapter elements has to be a subclass of AdminJS.BaseResource and AdminJS.BaseDatabase')
+      throw new Error('Adapter elements have to be a subclass of AdminJS.BaseResource and AdminJS.BaseDatabase')
     }
   }
 
@@ -224,12 +228,12 @@ class AdminJS {
    * @throws {Error}                When resource with given id cannot be found
    */
   findResource(resourceId): BaseResource {
-    const resource = this.resources.find(m => m._decorated?.id() === resourceId)
+    const resource = this.resources.find((m) => m._decorated?.id() === resourceId)
     if (!resource) {
       throw new Error([
         `There are no resources with given id: "${resourceId}"`,
         'This is the list of all registered resources you can use:',
-        this.resources.map(r => r._decorated?.id() || r.id()).join(', '),
+        this.resources.map((r) => r._decorated?.id() || r.id()).join(', '),
       ].join('\n'))
     }
     return resource
@@ -339,7 +343,7 @@ class AdminJS {
   async toJSON(currentAdmin?: CurrentAdmin): Promise<AdminJSOptionsJson> {
     let jsonResources: ResourceJSON[] = []
     try {
-      jsonResources = this.resources.map(r => r.decorate().toJSON(currentAdmin))
+      jsonResources = this.resources.map((r) => r.decorate().toJSON(currentAdmin))
     } catch (err) {
       // eslint-disable-next-line no-console
       console.error(err)
@@ -357,10 +361,11 @@ class AdminJS {
       },
       branding: branding ?? {},
       versions: {
-        app: this.options.version?.app,
-        admin: this.options.version?.admin ? AdminJS.VERSION : undefined,
+        app: this.options.version && this.options.version.app,
+        admin: this.options.version && this.options.version.admin ? AdminJS.VERSION : undefined,
       },
-      locale: this.options.locale ?? locales.en,
+      locale: this.locale,
+      pages: pagesToStore(this.options.pages),
     }
   }
 }

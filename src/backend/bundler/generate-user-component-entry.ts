@@ -22,7 +22,7 @@ const generateUserComponentEntry = (admin, entryPath: string): string => {
 
   const setupPart = 'AdminJS.UserComponents = {}\n'
 
-  const envPart = Object.keys(env).map(envKey => (
+  const envPart = Object.keys(env).map((envKey) => (
     `AdminJS.env.${envKey} = ${JSON.stringify(env[envKey])}\n`
   )).join('')
   const componentsPart = Object.keys(UserComponents || {}).map((componentId) => {

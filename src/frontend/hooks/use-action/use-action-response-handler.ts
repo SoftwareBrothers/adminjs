@@ -1,14 +1,13 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
-import { useHistory, useLocation } from 'react-router'
+import { useNavigate, useLocation } from 'react-router'
 import { ActionResponse } from '../../../backend/actions/action.interface'
 import { appendForceRefresh } from '../../components/actions/utils/append-force-refresh'
 import { ActionCallCallback } from '.'
 import { useNotice } from '../use-notice'
 
-
 export const useActionResponseHandler = (onActionCall?: ActionCallCallback) => {
   const location = useLocation()
-  const history = useHistory()
+  const navigate = useNavigate()
   const addNotice = useNotice()
 
   return (response: ActionResponse) => {
@@ -18,7 +17,7 @@ export const useActionResponseHandler = (onActionCall?: ActionCallCallback) => {
     }
     if (data.redirectUrl && location.pathname !== data.redirectUrl) {
       const appended = appendForceRefresh(data.redirectUrl)
-      history.push(appended)
+      navigate(appended)
     }
     if (onActionCall) {
       onActionCall(data)

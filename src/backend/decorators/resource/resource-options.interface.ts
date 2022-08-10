@@ -91,7 +91,6 @@ export interface ResourceOptions {
     icon?: string;
   } | string | boolean | null;
 
-
   /**
    * @deprecated in favour of {@link ResourceOptions.navigation}
    */

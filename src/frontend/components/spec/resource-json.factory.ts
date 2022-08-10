@@ -3,8 +3,8 @@ import './property-json.factory'
 import { PropertyJSON, ResourceJSON } from '../../interfaces'
 
 factory.define<ResourceJSON>('ResourceJSON', Object, {
-  id: factory.sequence('ResourceJSON.id', i => `resource${i}`),
-  name: factory.sequence('ResourceJSON.name', i => `resource ${i}`),
+  id: factory.sequence('ResourceJSON.id', (i) => `resource${i}`),
+  name: factory.sequence('ResourceJSON.name', (i) => `resource ${i}`),
   href: '/admin/resourceName',
   titleProperty: () => factory.build<PropertyJSON>('PropertyJSON'),
   navigation: {

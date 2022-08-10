@@ -20,7 +20,7 @@ const prepareParams = (
 
     if (property.type() !== 'mixed') {
       if (propertyDecorator?.isArray) {
-        preparedParams[key] = param.map(p => convertParam(p, property.type()))
+        preparedParams[key] = param.map((p) => convertParam(p, property.type()))
       } else {
         preparedParams[key] = convertParam(param, property.type())
       }
@@ -29,7 +29,7 @@ const prepareParams = (
         const { subProperties } = propertyDecorator
         for (const subProperty of subProperties) {
           if (propertyDecorator.isArray) {
-            param = param.map(p => convertNestedParam(p, subProperty))
+            param = param.map((p) => convertNestedParam(p, subProperty))
           } else {
             param = convertNestedParam(param, subProperty)
           }

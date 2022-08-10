@@ -105,7 +105,6 @@ const mapStateToProps = (state: ReduxState): NoticeBoxPropsFromState => ({
   notices: state.notices,
 })
 
-
 const mapDispatchToProps = (dispatch): NoticeBoxDispatchFromState => ({
   drop: (noticeId: string): void => dispatch(dropNotice(noticeId)),
   notifyProgress: ({
@@ -113,9 +112,7 @@ const mapDispatchToProps = (dispatch): NoticeBoxDispatchFromState => ({
   }): void => dispatch(setNoticeProgress({ noticeId, progress })),
 })
 
-const ConnectedNoticeBox = connect(
-  mapStateToProps, mapDispatchToProps,
-)(NoticeBox)
+const ConnectedNoticeBox = connect(mapStateToProps, mapDispatchToProps)(NoticeBox)
 
 export {
   ConnectedNoticeBox as default,

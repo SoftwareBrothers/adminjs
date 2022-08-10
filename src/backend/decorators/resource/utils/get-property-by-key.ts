@@ -3,7 +3,6 @@ import { DecoratedProperties } from './decorate-properties'
 import { findSubProperty } from './find-sub-property'
 import { pathToParts } from '../../../../utils/flat/path-to-parts'
 
-
 export const getPropertyByKey = (
   propertyPath: string,
   properties: DecoratedProperties,
@@ -15,7 +14,7 @@ export const getPropertyByKey = (
   if (!property) {
     // User asks for nested property (embed inside the mixed property)
     if (parts.length > 1) {
-      const mixedPropertyPath = parts.find(part => (
+      const mixedPropertyPath = parts.find((part) => (
         properties[part] && properties[part].type() === 'mixed'
       ))
       if (mixedPropertyPath) {

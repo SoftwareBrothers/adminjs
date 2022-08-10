@@ -2,7 +2,6 @@ import { expect } from 'chai'
 
 import populator from './populator'
 
-
 describe('populator', () => {
   context('empty array given as params', () => {
     it('returns empty array when no records are given', async () => {
