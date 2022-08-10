@@ -1,7 +1,7 @@
-import React, { ReactNode, FunctionComponent } from 'react'
-import { connect } from 'react-redux'
+import React, { FunctionComponent, useState, useEffect } from 'react'
+import { useSelector } from 'react-redux'
+import { useParams } from 'react-router'
 
-import { RouteComponentProps } from 'react-router'
 import ErrorBoundary from '../app/error-boundary'
 import { ReduxState } from '../../store/store'
 import ErrorMessageBox from '../app/error-message'
@@ -14,66 +14,49 @@ type State = {
   isClient: boolean;
 }
 
-type PropsFromState = {
-  pages: ReduxState['pages'];
+type PageRouteProps = {
+  pageName: string;
 }
 
-type Props = PropsFromState & RouteComponentProps<{
-  pageName: string;
-}>
+const Page: React.FC = () => {
+  const [pages] = useSelector((state: ReduxState) => [state.pages])
+  const params = useParams<PageRouteProps>()
+  const { pageName } = params
+  const [isClient, setIsClient] = useState(false)
 
-class Page extends React.Component<Props, State> {
-  constructor(props: Props) {
-    super(props)
-    this.state = {
-      isClient: false,
-    }
-  }
+  const currentPage = pages.find(page => page.name === pageName)
 
-  componentDidMount(): void {
-    this.setState({ isClient: true })
-  }
+  useEffect(() => {
+    setIsClient(true)
+  }, [])
 
-  render(): ReactNode {
-    const { pages, match } = this.props
-    const { params } = match
-    const { pageName } = params
-    const { isClient } = this.state
-
-    const currentPage = pages.find(page => page.name === pageName)
-
-    if (!currentPage) {
-      return (
-        <ErrorMessageBox title="There is no page of given name">
-          <p>
-            Page:
-            <b>{` "${pageName}" `}</b>
-            does not exist.
-          </p>
-        </ErrorMessageBox>
-      )
-    }
-
-    const Component = AdminJS.UserComponents[currentPage.component]
-
-    if (!Component || !isClient) {
-      return (
-        <ErrorMessageBox title="No component specified">
-          <p>You have to specify component which will render this Page</p>
-        </ErrorMessageBox>
-      )
-    }
-
+  if (!currentPage) {
     return (
-      <ErrorBoundary>
-        <Component />
-      </ErrorBoundary>
+      <ErrorMessageBox title="There is no page of given name">
+        <p>
+          Page:
+          <b>{` "${pageName}" `}</b>
+          does not exist.
+        </p>
+      </ErrorMessageBox>
     )
   }
+
+  const Component = AdminJS.UserComponents[currentPage.component]
+
+  if (!Component || !isClient) {
+    return (
+      <ErrorMessageBox title="No component specified">
+        <p>You have to specify component which will render this Page</p>
+      </ErrorMessageBox>
+    )
+  }
+
+  return (
+    <ErrorBoundary>
+      <Component />
+    </ErrorBoundary>
+  )
 }
 
-const mapStateToProps = (state: ReduxState): PropsFromState => ({
-  pages: state.pages,
-})
-
-export default connect(mapStateToProps)(Page)
+export default Page

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Loader } from '@adminjs/design-system'
-import { useRouteMatch, useLocation } from 'react-router'
+import { useLocation, useParams } from 'react-router'
 
 import { BulkActionParams } from '../../../backend/utils/view-helpers/view-helpers'
 
@@ -27,15 +27,15 @@ type MatchParams = Pick<BulkActionParams, 'actionName' | 'resourceId'>
 const api = new ApiClient()
 
 const BulkAction: React.FC = () => {
-  const match = useRouteMatch<MatchParams>()
+  const params = useParams<MatchParams>()
   const [records, setRecords] = useState<Array<RecordJSON>>([])
   const [loading, setLoading] = useState(false)
   const { translateMessage } = useTranslation()
   const addNotice = useNotice()
   const location = useLocation()
 
-  const { resourceId, actionName } = match.params
-  const resource = useResource(resourceId)
+  const { resourceId, actionName } = params
+  const resource = useResource(resourceId!)
 
   const fetchRecords = (): Promise<void> => {
     const recordIdsString = new URLSearchParams(location.search).get('recordIds')
@@ -43,7 +43,9 @@ const BulkAction: React.FC = () => {
     setLoading(true)
 
     return api.bulkAction({
-      resourceId, recordIds, actionName,
+      resourceId: resourceId!,
+      recordIds,
+      actionName: actionName!,
     }).then((response) => {
       setLoading(false)
       setRecords(response.data.records)
@@ -59,10 +61,10 @@ const BulkAction: React.FC = () => {
 
   useEffect(() => {
     fetchRecords()
-  }, [match.params.resourceId, match.params.actionName])
+  }, [params.resourceId, params.actionName])
 
   if (!resource) {
-    return (<NoResourceError resourceId={resourceId} />)
+    return (<NoResourceError resourceId={resourceId!} />)
   }
 
   if (!records && !loading) {
@@ -81,7 +83,7 @@ const BulkAction: React.FC = () => {
   }
 
   if (!action) {
-    return (<NoActionError resourceId={resourceId} actionName={actionName} />)
+    return (<NoActionError resourceId={resourceId!} actionName={actionName!} />)
   }
 
   if (action.showInDrawer) {

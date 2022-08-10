@@ -5,7 +5,7 @@ import _ from 'lodash'
 import i18n from 'i18next'
 import { render, RenderResult } from '@testing-library/react'
 import { Provider } from 'react-redux'
-import { Switch, Route } from 'react-router'
+import { Route, Routes } from 'react-router'
 import { AxiosResponse } from 'axios'
 
 import createStore, { ReduxState } from '../../store/store'
@@ -27,9 +27,9 @@ const renderSubject = (store: Partial<ReduxState> = {}, location?: string): Rend
   const renderResult = render(
     <TestContextProvider location={location}>
       <Provider store={createStore(storeWithDefault)}>
-        <Switch>
-          <Route path={path} exact component={RecordAction} />
-        </Switch>
+        <Routes>
+          <Route path={path} element={<RecordAction />} />
+        </Routes>
       </Provider>
     </TestContextProvider>,
   )

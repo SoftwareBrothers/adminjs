@@ -1,7 +1,7 @@
 import React from 'react'
 import { TableCaption, Title, ButtonGroup, Box } from '@adminjs/design-system'
 
-import { useHistory } from 'react-router'
+import { useNavigate } from 'react-router'
 import { ActionJSON, buildActionClickHandler, RecordJSON, ResourceJSON } from '../../../interfaces'
 import getBulkActionsFromRecords from './utils/get-bulk-actions-from-records'
 import { useActionResponseHandler, useTranslation } from '../../../hooks'
@@ -15,7 +15,7 @@ type SelectedRecordsProps = {
 export const SelectedRecords: React.FC<SelectedRecordsProps> = (props) => {
   const { resource, selectedRecords } = props
   const { translateLabel } = useTranslation()
-  const history = useHistory()
+  const navigate = useNavigate()
   const actionResponseHandler = useActionResponseHandler()
 
   if (!selectedRecords || !selectedRecords.length) {
@@ -29,7 +29,7 @@ export const SelectedRecords: React.FC<SelectedRecordsProps> = (props) => {
       action: sourceAction,
       params,
       actionResponseHandler,
-      push: history.push,
+      navigate,
     })(event)
   )
 

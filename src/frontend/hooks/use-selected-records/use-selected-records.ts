@@ -9,7 +9,6 @@ import { UseSelectedRecordsResult } from './use-selected-records-result.type'
  * @hideconstructor
  * @param {Array<RecordJSON>} records     List of records on which you can perform `select` action
  * @return {UseSelectedRecordsResult}
- * @new In version 3.3
  * @bundle
  * @type {Function}
  */

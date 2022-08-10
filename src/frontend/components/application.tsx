@@ -1,6 +1,6 @@
 /* eslint-disable react/no-children-prop */
 import React, { useEffect, useState } from 'react'
-import { Switch, Route } from 'react-router-dom'
+import { Routes, Route } from 'react-router-dom'
 import { createGlobalStyle } from 'styled-components'
 import { Box, Overlay, Reset } from '@adminjs/design-system'
 
@@ -49,7 +49,7 @@ const App: React.FC = () => {
   const pageUrl = h.pageUrl(pageName)
 
   return (
-    <React.Fragment>
+    <>
       <Reset />
       <GlobalStyle />
       <Box height="100%" flex>
@@ -64,19 +64,17 @@ const App: React.FC = () => {
           <Box position="absolute" top={0} zIndex={2000}>
             <Notice />
           </Box>
-          <Switch>
-            <Route path={h.dashboardUrl()} exact component={Dashboard} />
-            <Route path={resourceUrl} component={Resource} />
-            <Route path={pageUrl} exact component={Page} />
-          </Switch>
-          <Switch>
-            <Route path={recordActionUrl} component={RecordAction} />
-            <Route path={resourceActionUrl} component={ResourceAction} />
-            <Route path={bulkActionUrl} component={BulkAction} />
-          </Switch>
+          <Routes>
+            <Route path={h.dashboardUrl()} element={<Dashboard />} />
+            <Route path={`${resourceUrl}/*`} element={<Resource />} />
+            <Route path={pageUrl} element={<Page />} />
+            <Route path={`${recordActionUrl}/*`} element={<RecordAction />} />
+            <Route path={`${resourceActionUrl}/*`} element={<ResourceAction />} />
+            <Route path={`${bulkActionUrl}/*`} element={<BulkAction />} />
+          </Routes>
         </Box>
       </Box>
-    </React.Fragment>
+    </>
 
   )
 }

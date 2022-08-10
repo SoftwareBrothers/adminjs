@@ -157,12 +157,15 @@ class AdminJS {
     if (!Database || !Resource) {
       throw new Error('Adapter has to have both Database and Resource')
     }
+
+    // TODO: check if this is actually valid because "isAdapterFor" is always defined.
     // checking if both Database and Resource have at least isAdapterFor method
+    // @ts-ignore
     if (Database.isAdapterFor && Resource.isAdapterFor) {
       global.RegisteredAdapters = global.RegisteredAdapters || []
       global.RegisteredAdapters.push({ Database, Resource })
     } else {
-      throw new Error('Adapter elements has to be a subclass of AdminJS.BaseResource and AdminJS.BaseDatabase')
+      throw new Error('Adapter elements have to be a subclass of AdminJS.BaseResource and AdminJS.BaseDatabase')
     }
   }
 

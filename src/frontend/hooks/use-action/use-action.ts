@@ -1,9 +1,7 @@
-import { useHistory } from 'react-router'
+import { useNavigate } from 'react-router'
 
 import { ActionResponse } from '../../../backend/actions/action.interface'
-
 import { ActionJSON, buildActionCallApiTrigger, buildActionClickHandler } from '../../interfaces'
-
 import { DifferentActionParams, ActionCallCallback, UseActionResult } from './use-action.types'
 import { actionHref } from '../../interfaces/action/action-href'
 import { useActionResponseHandler } from './use-action-response-handler'
@@ -16,7 +14,6 @@ import { useActionResponseHandler } from './use-action-response-handler'
  * @param {ActionParams} params
  * @param {ActionCallCallback} onActionCall - callback triggered when action is performed
  * @return {UseActionResult}
- * @new In version 3.3
  * @class
  * @hideconstructor
  */
@@ -25,7 +22,7 @@ export function useAction<K extends ActionResponse>(
   params: DifferentActionParams,
   onActionCall?: ActionCallCallback,
 ): UseActionResult<K> {
-  const history = useHistory()
+  const navigate = useNavigate()
 
   const actionResponseHandler = useActionResponseHandler(onActionCall)
 
@@ -41,7 +38,7 @@ export function useAction<K extends ActionResponse>(
     action,
     params,
     actionResponseHandler,
-    push: history.push,
+    navigate,
   })
 
   return {

@@ -1,5 +1,7 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
-import { combineReducers, createStore } from 'redux'
+// Note: We are using legacy "createStore"
+// because AdminJS will switch to Eventrix from v7 onwards anyway
+import { combineReducers, legacy_createStore as createStore } from 'redux'
 import type { useLocation } from 'react-router'
 import {
   VERSIONS_INITIALIZE,

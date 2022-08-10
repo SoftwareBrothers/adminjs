@@ -1,16 +1,13 @@
 import React, { useState } from 'react'
 import { connect } from 'react-redux'
-import { useRouteMatch } from 'react-router-dom'
+import { useMatch, useParams } from 'react-router'
 import { Box } from '@adminjs/design-system'
 
-import { RouteComponentProps } from 'react-router'
 import BaseAction from '../app/base-action-component'
 import FilterDrawer from '../app/filter-drawer'
 import { ReduxState } from '../../store/store'
 import { NoResourceError, NoActionError } from '../app/error-message'
-import ViewHelpers, {
-  ResourceActionParams, RecordActionParams, BulkActionParams,
-} from '../../../backend/utils/view-helpers/view-helpers'
+import ViewHelpers, { ResourceActionParams } from '../../../backend/utils/view-helpers/view-helpers'
 import { ActionHeader } from '../app'
 import { ActionJSON, ResourceJSON } from '../../interfaces'
 
@@ -18,7 +15,7 @@ type PropsFromState = {
   resources: Array<ResourceJSON>;
 }
 
-type Props = PropsFromState & RouteComponentProps<StringifiedBulk<ResourceActionParams>>
+type Props = PropsFromState
 
 type StringifiedBulk<T> = Omit<T, 'recordsId'> & {
   recordsIds?: string;
@@ -35,9 +32,11 @@ const getAction = (resource: ResourceJSON): ActionJSON | undefined => {
   const resourceActionUrl = h.resourceActionUrl({ resourceId, actionName })
   const bulkActionUrl = h.bulkActionUrl({ resourceId, actionName })
 
-  const resourceActionMatch = useRouteMatch<ResourceActionParams>(resourceActionUrl)
-  const recordActionMatch = useRouteMatch<RecordActionParams>(recordActionUrl)
-  const bulkActionMatch = useRouteMatch<Pick<BulkActionParams, 'actionName' | 'resourceId'>>(bulkActionUrl)
+  const resourceActionMatch = useMatch(
+    resourceActionUrl,
+  )
+  const recordActionMatch = useMatch(recordActionUrl)
+  const bulkActionMatch = useMatch(bulkActionUrl)
 
   const action = resourceActionMatch?.params.actionName
     || recordActionMatch?.params.actionName
@@ -47,11 +46,16 @@ const getAction = (resource: ResourceJSON): ActionJSON | undefined => {
 }
 
 const ResourceAction: React.FC<Props> = (props) => {
-  const { resources, match } = props
-  const { resourceId } = match.params
+  const params = useParams<StringifiedBulk<ResourceActionParams>>()
+  const { resources } = props
+  const { resourceId } = params
 
   const [filterVisible, setFilterVisible] = useState(false)
   const [tag, setTag] = useState('')
+
+  if (!resourceId) {
+    return null
+  }
 
   const resource = resources.find(r => r.id === resourceId)
   if (!resource) {

@@ -55,7 +55,6 @@ export type RecordsTableProps = {
  * @class
  * @hideconstructor
  * @subcategory Application
- * @new in version 3.3
  */
 export const RecordsTable: React.FC<RecordsTableProps> = (props) => {
   const {

@@ -18,7 +18,6 @@ export type OverridableComponent =
  * - SidebarFooter
  * - SidebarBranding
  * - TopBar
- * @new in version 3.3
  * @memberof AdminJS
  * @alias OverridableComponent
  * @typedef {Union} OverridableComponent

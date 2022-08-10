@@ -16,6 +16,8 @@ module.exports = {
     '@typescript-eslint/no-explicit-any': 'off',
     indent: ['error', 2],
     '@typescript-eslint/explicit-function-return-type': 'off',
+    '@typescript-eslint/no-non-null-assertion': 'off',
+    '@typescript-eslint/ban-ts-ignore': 'off',
     'import/prefer-default-export': 'off',
     'linebreak-style': ['error', 'unix'],
     quotes: ['error', 'single'],

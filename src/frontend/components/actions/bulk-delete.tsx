@@ -4,7 +4,7 @@ import {
   DrawerContent, DrawerFooter, Button, MessageBox, Icon,
 } from '@adminjs/design-system'
 
-import { RouteComponentProps, withRouter } from 'react-router'
+import { useNavigate } from 'react-router'
 import PropertyType from '../property-type'
 import { ActionProps } from './action.props'
 import ApiClient from '../../utils/api-client'
@@ -15,15 +15,16 @@ import ActionHeader from '../app/action-header/action-header'
 import { useTranslation } from '../../hooks'
 
 /**
- * @name ShowAction
+ * @name BulkDeleteAction
  * @category Actions
- * @description Shows a given record.
+ * @description Deletes selected records.
  * @component
  * @private
  */
-const BulkDelete: React.FC<ActionProps & AddNoticeProps & RouteComponentProps> = (props) => {
-  const { resource, records, action, addNotice, history } = props
+const BulkDelete: React.FC<ActionProps & AddNoticeProps> = (props) => {
+  const { resource, records, action, addNotice } = props
 
+  const navigate = useNavigate()
   const [loading, setLoading] = useState(false)
   const { translateMessage, translateButton } = useTranslation()
 
@@ -53,7 +54,7 @@ const BulkDelete: React.FC<ActionProps & AddNoticeProps & RouteComponentProps> =
         const search = new URLSearchParams(window.location.search)
         // bulk function have recordIds in the URL so it has to be stripped before redirect
         search.delete('recordIds')
-        history.push(appendForceRefresh(response.data.redirectUrl, search.toString()))
+        navigate(appendForceRefresh(response.data.redirectUrl, search.toString()))
       }
     })).catch((error) => {
       setLoading(false)
@@ -66,7 +67,7 @@ const BulkDelete: React.FC<ActionProps & AddNoticeProps & RouteComponentProps> =
   }
 
   return (
-    <React.Fragment>
+    <>
       <DrawerContent>
         {action?.showInDrawer ? <ActionHeader omitActions {...props} /> : null}
         <MessageBox
@@ -97,11 +98,11 @@ const BulkDelete: React.FC<ActionProps & AddNoticeProps & RouteComponentProps> =
           {translateButton('confirmRemovalMany', resource.id, { count: records.length })}
         </Button>
       </DrawerFooter>
-    </React.Fragment>
+    </>
   )
 }
 
-const FormattedBulkDelete = withNotice(withRouter(BulkDelete))
+const FormattedBulkDelete = withNotice(BulkDelete)
 
 export {
   FormattedBulkDelete as default,
