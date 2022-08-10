@@ -9,7 +9,7 @@ function mergeActionHooks<T>(
   key: string,
   oldHook?: T | Array<T> | null,
   newHook?: T | Array<T> | null,
-): Record<string, Array<T>> | {} {
+): Record<string, Array<T>> | Record<string, unknown> {
   let hooks: Array<T> = []
   if (oldHook) {
     if (Array.isArray(oldHook)) {

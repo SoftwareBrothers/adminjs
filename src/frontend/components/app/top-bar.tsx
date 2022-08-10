@@ -6,8 +6,9 @@ import { cssClass, Box, Icon, themeGet } from '@adminjs/design-system'
 import allowOverride from '../../hoc/allow-override'
 import LoggedIn from './logged-in'
 import Version from './version'
-
-import { ReduxState } from '../../store/store'
+import { ReduxState, Paths } from '../../store/store'
+import { CurrentAdmin } from '../../../current-admin.interface'
+import { VersionProps } from '../../../adminjs-options.interface'
 
 const NavBar = styled(Box)`
   height: ${({ theme }): string => theme.sizes.navbarHeight};
@@ -23,13 +24,19 @@ NavBar.defaultProps = {
 }
 
 type Props = {
-  toggleSidebar: (any) => void;
+  toggleSidebar: (any) => void
 }
 
 const TopBar: React.FC<Props> = (props) => {
   const { toggleSidebar } = props
-  // eslint-disable-next-line max-len
-  const [session, paths, versions] = useSelector((state: ReduxState) => [state.session, state.paths, state.versions])
+  const [session, paths, versions] = useSelector(
+    (state: ReduxState): [CurrentAdmin | null, Paths, VersionProps] => [
+      state.session,
+      state.paths,
+      state.versions,
+    ],
+  )
+
   return (
     <NavBar>
       <Box

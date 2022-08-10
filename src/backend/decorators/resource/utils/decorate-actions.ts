@@ -8,7 +8,6 @@ import { ActionDecorator } from '../../action'
 
 export type DecoratedActions = {[key: string]: ActionDecorator}
 
-
 function mergeCustomizer<T>(destValue: T | Array<T>, sourceValue: T | Array<T>): void {
   if (Array.isArray(destValue)) {
     destValue.concat(sourceValue)

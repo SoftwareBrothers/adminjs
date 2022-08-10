@@ -13,7 +13,7 @@ const Show: React.FC<Props & BasePropertyProps> = (props) => {
   return (
     <ValueGroup label={property.label}>
       <Section>
-        {property.subProperties.filter(subProperty => !subProperty.isId).map((subProperty) => {
+        {property.subProperties.filter((subProperty) => !subProperty.isId).map((subProperty) => {
           const subPropertyWithPath = convertToSubProperty(property, subProperty)
           return (
             <ItemComponent

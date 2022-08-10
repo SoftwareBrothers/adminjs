@@ -56,7 +56,7 @@ const Edit: FC<CombinedProps> = (props) => {
 
   useEffect(() => {
     if (!selectedValue && selectedId) {
-      setLoadingRecord(c => c + 1)
+      setLoadingRecord((c) => c + 1)
       const api = new ApiClient()
       api.recordAction({
         actionName: 'show',
@@ -65,7 +65,7 @@ const Edit: FC<CombinedProps> = (props) => {
       }).then(({ data }: any) => {
         setLoadedRecord(data.record)
       }).finally(() => {
-        setLoadingRecord(c => c - 1)
+        setLoadingRecord((c) => c - 1)
       })
     }
   }, [selectedValue, selectedId, resourceId])

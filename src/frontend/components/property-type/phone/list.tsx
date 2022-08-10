@@ -9,6 +9,6 @@ interface Props {
   resource: ResourceJSON;
 }
 
-const List: FC<Props> = props => <DefaultPropertyValue {...props} />
+const List: FC<Props> = (props) => <DefaultPropertyValue {...props} />
 
 export default List

@@ -27,13 +27,13 @@ const SelectEdit: FC<CombinedProps> = (props) => {
     return null
   }
   const propValue = record.params?.[property.path] ?? ''
-  const selected = property.availableValues.find(av => av.value === propValue)
+  const selected = property.availableValues.find((av) => av.value === propValue)
 
   return (
     <Select
       value={selected}
       options={property.availableValues}
-      onChange={s => onChange(property.path, s?.value ?? '')}
+      onChange={(s) => onChange(property.path, s?.value ?? '')}
       isDisabled={property.isDisabled}
       {...property.props}
     />
@@ -56,10 +56,10 @@ const TextEdit: FC<CombinedProps> = (props) => {
       id={property.path}
       name={property.path}
       required={property.isRequired}
-      onChange={e => setValue(e.target.value)}
+      onChange={(e) => setValue(e.target.value)}
       onBlur={() => onChange(property.path, value)}
       // handle clicking ENTER
-      onKeyDown={e => e.keyCode === 13 && onChange(property.path, value)}
+      onKeyDown={(e) => e.keyCode === 13 && onChange(property.path, value)}
       value={value}
       disabled={property.isDisabled}
       {...property.props}

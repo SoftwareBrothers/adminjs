@@ -7,14 +7,13 @@ import { ReduxState } from '../../store/store'
  * @subcategory Hooks
  * @class
  * @hideconstructor
- * @new in version 3.3
  * @bundle
  * @param {string} resourceId    Id of a resource you want to get
  */
 const useResource = (resourceId: string): ResourceJSON | undefined => {
   const resources = useSelector((state: ReduxState) => state.resources)
 
-  const foundResource = resources.find(resource => resource.id === resourceId)
+  const foundResource = resources.find((resource) => resource.id === resourceId)
 
   return foundResource
 }

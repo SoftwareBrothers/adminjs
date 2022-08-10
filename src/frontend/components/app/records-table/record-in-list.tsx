@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react'
-import { useHistory } from 'react-router-dom'
+import { useNavigate } from 'react-router'
 import {
   Placeholder, TableRow, TableCell, CheckBox, ButtonGroup,
 } from '@adminjs/design-system'
@@ -27,7 +27,7 @@ export const RecordInList: React.FC<RecordInListProps> = (props) => {
     isLoading, onSelect, isSelected,
   } = props
   const [record, setRecord] = useState<RecordJSON>(recordFromProps)
-  const history = useHistory()
+  const navigate = useNavigate()
 
   const handleActionCallback = useCallback((actionResponse: ActionResponse) => {
     if (actionResponse.record && !actionResponse.redirectUrl) {
@@ -60,7 +60,7 @@ export const RecordInList: React.FC<RecordInListProps> = (props) => {
         action,
         params: { resourceId: resource.id, recordId: record.id },
         actionResponseHandler,
-        push: history.push,
+        navigate,
       })(event)
     }
   }
@@ -72,7 +72,7 @@ export const RecordInList: React.FC<RecordInListProps> = (props) => {
       action: sourceAction,
       params: actionParams,
       actionResponseHandler,
-      push: history.push,
+      navigate,
     })(event)
   )
 
@@ -88,7 +88,6 @@ export const RecordInList: React.FC<RecordInListProps> = (props) => {
     }),
   }]
 
-
   return (
     <TableRow onClick={handleClick} data-id={record.id}>
       <TableCell className={isSelected ? 'selected' : 'not-selected'}>
@@ -99,7 +98,7 @@ export const RecordInList: React.FC<RecordInListProps> = (props) => {
           />
         ) : null}
       </TableCell>
-      {resource.listProperties.map(property => (
+      {resource.listProperties.map((property) => (
         <TableCell
           style={{ cursor: 'pointer' }}
           key={property.propertyPath}

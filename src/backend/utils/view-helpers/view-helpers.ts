@@ -174,7 +174,6 @@ export class ViewHelpers {
     return this.recordActionUrl({ resourceId, recordId, actionName: 'delete', search })
   }
 
-
   /**
    * Returns url for a `new` action in given Resource. Uses {@link resourceActionUrl}
    *

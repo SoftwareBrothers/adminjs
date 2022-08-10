@@ -140,9 +140,7 @@ export const createFunctions = (i18n: I18n): TranslateFunctions => {
     translate(i18n, 'actions', actionName as string, resourceId, options)
   )
 
-  const translateButton: TranslateFunction = (
-    buttonLabel, resourceId, options,
-  ) => (
+  const translateButton: TranslateFunction = (buttonLabel, resourceId, options) => (
     translate(i18n, 'buttons', buttonLabel, resourceId, options)
   )
 

@@ -1,11 +1,9 @@
-import React, { ReactNode } from 'react'
-import { NavLink, withRouter } from 'react-router-dom'
+import React, { memo, useMemo } from 'react'
+import { useLocation, NavLink } from 'react-router-dom'
 
-import { RouteComponentProps } from 'react-router'
 import { Icon, cssClass } from '@adminjs/design-system'
 
 import { BasePropertyJSON } from '../../interfaces'
-
 
 export type SortLinkProps = {
   property: BasePropertyJSON;
@@ -13,33 +11,32 @@ export type SortLinkProps = {
   sortBy?: string;
 }
 
-class SortLink extends React.PureComponent<SortLinkProps & RouteComponentProps> {
-  constructor(props) {
-    super(props)
-    this.isActive = this.isActive.bind(this)
-  }
+const SortLink: React.FC<SortLinkProps> = (props) => {
+  const { sortBy, property, direction } = props
+  const location = useLocation()
 
-  isActive(): boolean {
-    const { sortBy, property } = this.props
-    return sortBy === property.propertyPath
-  }
+  const isActive = useMemo(() => sortBy === property.propertyPath, [sortBy, property])
 
-  render(): ReactNode {
-    const { property, location, direction } = this.props
-    const query = new URLSearchParams(location.search)
-    const oppositeDirection = (this.isActive() && direction === 'asc') ? 'desc' : 'asc'
-    const sortedByIcon = `Caret${direction === 'asc' ? 'Up' : 'Down'}`
+  const query = new URLSearchParams(location.search)
+  const oppositeDirection = (isActive && direction === 'asc') ? 'desc' : 'asc'
+  const sortedByIcon = `Caret${direction === 'asc' ? 'Up' : 'Down'}`
 
-    query.set('direction', oppositeDirection)
-    query.set('sortBy', property.propertyPath)
+  query.set('direction', oppositeDirection)
+  query.set('sortBy', property.propertyPath)
 
-    return (
-      <NavLink to={{ search: query.toString() }} className={cssClass('SortLink')}>
-        {property.label}
-        {this.isActive() ? (<Icon icon={sortedByIcon} color="primary100" ml="default" />) : ''}
-      </NavLink>
-    )
-  }
+  return (
+    <NavLink to={{ search: query.toString() }} className={cssClass('SortLink')}>
+      {property.label}
+      {isActive ? (<Icon icon={sortedByIcon} color="primary100" ml="default" />) : ''}
+    </NavLink>
+  )
 }
 
-export default withRouter(SortLink)
+const checkSortProps = (
+  prevProps: Readonly<SortLinkProps>,
+  nextProps: Readonly<SortLinkProps>,
+) => (prevProps.direction === nextProps.direction
+  && prevProps.property.propertyPath === nextProps.property.propertyPath
+  && prevProps.sortBy === nextProps.sortBy)
+
+export default memo(SortLink, checkSortProps)

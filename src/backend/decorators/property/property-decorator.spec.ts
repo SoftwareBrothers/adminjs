@@ -111,7 +111,6 @@ describe('PropertyDecorator', () => {
     })
   })
 
-
   describe('#availableValues', () => {
     it('map default value to { value, label } object and uses translations', () => {
       sinon.stub(BaseProperty.prototype, 'availableValues').returns(['val'])

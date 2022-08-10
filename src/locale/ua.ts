@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/camelcase */
 /* spellchecker: disable */
 
 const translations = {

@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react'
 
-import { useRouteMatch } from 'react-router'
+import { useParams } from 'react-router'
 import { Loader } from '@adminjs/design-system'
 
 import BaseActionComponent from '../app/base-action-component'
@@ -20,18 +20,18 @@ const api = new ApiClient()
 const RecordAction: React.FC = () => {
   const [record, setRecord] = useState<RecordJSON>()
   const [loading, setLoading] = useState(true)
-  const match = useRouteMatch<RecordActionParams>()
+  const params = useParams<RecordActionParams>()
   const addNotice = useNotice()
   const { translateMessage } = useTranslation()
 
-  const { actionName, recordId, resourceId } = match.params
-  const resource = useResource(resourceId)
+  const { actionName, recordId, resourceId } = params
+  const resource = useResource(resourceId!)
 
-  const action = record && record.recordActions.find(r => r.name === actionName)
+  const action = record && record.recordActions.find((r) => r.name === actionName)
 
   const fetchRecord = (): void => {
     setLoading(true)
-    api.recordAction(match.params).then((response) => {
+    api.recordAction(params as RecordActionParams).then((response) => {
       setLoading(false)
       if (response.data.notice && response.data.notice.type === 'error') {
         addNotice(response.data.notice)
@@ -59,7 +59,7 @@ const RecordAction: React.FC = () => {
   }, [fetchRecord])
 
   if (!resource) {
-    return (<NoResourceError resourceId={resourceId} />)
+    return (<NoResourceError resourceId={resourceId!} />)
   }
 
   // When the user visits this route (record action) from a different, than the current one, record.
@@ -71,16 +71,16 @@ const RecordAction: React.FC = () => {
   const hasDifferentRecord = record && record.id && record.id.toString() !== recordId
 
   if (loading || hasDifferentRecord) {
-    const actionFromResource = resource.actions.find(r => r.name === actionName)
+    const actionFromResource = resource.actions.find((r) => r.name === actionName)
     return actionFromResource?.showInDrawer ? (<DrawerPortal><Loader /></DrawerPortal>) : <Loader />
   }
 
   if (!action) {
-    return (<NoActionError resourceId={resourceId} actionName={actionName} />)
+    return (<NoActionError resourceId={resourceId!} actionName={actionName!} />)
   }
 
   if (!record) {
-    return (<NoRecordError resourceId={resourceId} recordId={recordId} />)
+    return (<NoRecordError resourceId={resourceId!} recordId={recordId!} />)
   }
 
   if (action.showInDrawer) {

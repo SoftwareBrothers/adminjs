@@ -1,4 +1,3 @@
-
 /**
  * Record Error
  * @alias RecordError

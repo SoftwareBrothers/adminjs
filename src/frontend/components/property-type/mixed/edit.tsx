@@ -16,7 +16,7 @@ const Edit: React.FC<Props & EditPropertyProps> = (props) => {
     <FormGroup error={!!error}>
       <PropertyLabel property={property} />
       <Section {...property.props}>
-        {property.subProperties.filter(subProperty => !subProperty.isId).map((subProperty) => {
+        {property.subProperties.filter((subProperty) => !subProperty.isId).map((subProperty) => {
           const subPropertyWithPath = convertToSubProperty(property, subProperty)
           return (
             <ItemComponent

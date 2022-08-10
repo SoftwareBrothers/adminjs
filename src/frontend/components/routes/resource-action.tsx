@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { connect } from 'react-redux'
 
-import { RouteComponentProps } from 'react-router'
+import { useParams } from 'react-router'
 import BaseActionComponent from '../app/base-action-component'
 import { ResourceJSON } from '../../interfaces'
 import { ReduxState } from '../../store/store'
@@ -16,21 +16,22 @@ type PropsFromState = {
   resources: Array<ResourceJSON>;
 }
 
-type Props = PropsFromState & RouteComponentProps<ResourceActionParams>
+type Props = PropsFromState
 
 const ResourceAction: React.FC<Props> = (props) => {
-  const { resources, match } = props
-  const { resourceId, actionName } = match.params
+  const params = useParams<ResourceActionParams>()
+  const { resources } = props
+  const { resourceId, actionName } = params
   const [filterVisible, setFilterVisible] = useState(false)
   const [tag, setTag] = useState('')
 
-  const resource = resources.find(r => r.id === resourceId)
+  const resource = resources.find((r) => r.id === resourceId)
   if (!resource) {
-    return (<NoResourceError resourceId={resourceId} />)
+    return (<NoResourceError resourceId={resourceId!} />)
   }
-  const action = resource.resourceActions.find(r => r.name === actionName)
+  const action = resource.resourceActions.find((r) => r.name === actionName)
   if (!action) {
-    return (<NoActionError resourceId={resourceId} actionName={actionName} />)
+    return (<NoActionError resourceId={resourceId!} actionName={actionName!} />)
   }
 
   const toggleFilter = action.showFilter

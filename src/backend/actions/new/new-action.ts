@@ -40,7 +40,6 @@ export const NewAction: Action<RecordActionResponse> = {
       // eslint-disable-next-line no-param-reassign
       context.record = populatedRecord
 
-
       if (record.isValid()) {
         return {
           redirectUrl: h.resourceUrl({ resourceId: resource._decorated?.id() || resource.id() }),

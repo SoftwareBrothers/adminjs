@@ -5,7 +5,7 @@ import { CurrentAdmin } from '../../current-admin.interface'
 
 export type UseCurrentAdminResponse = [
   CurrentAdmin | null,
-  (currentAdmin: CurrentAdmin | null) => CurrentAdmin | {}
+  (currentAdmin: CurrentAdmin | null) => CurrentAdmin | Record<string, unknown>
 ]
 
 /**

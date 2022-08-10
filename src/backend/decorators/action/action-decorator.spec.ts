@@ -34,11 +34,11 @@ describe('ActionDecorator', function () {
       // and finally one async adding response3
       const before = [
         () => ({ response1: true }),
-        response => ({
+        (response) => ({
           ...response,
           response2: true,
         }),
-        async response => ({ ...response, response3: true }),
+        async (response) => ({ ...response, response3: true }),
       ] as unknown as Array<Before>
       const decorator = new ActionDecorator({
         action: { before, handler, name: 'myAction', actionType: 'resource' },
@@ -61,11 +61,11 @@ describe('ActionDecorator', function () {
       // 2 hooks one adding response1 key and the other adding response2 key
       const after = [
         () => ({ response1: true }),
-        response => ({
+        (response) => ({
           ...response,
           response2: true,
         }),
-        async response => ({ ...response, response3: true }),
+        async (response) => ({ ...response, response3: true }),
       ] as unknown as Array<After<ActionResponse>>
       const decorator = new ActionDecorator({
         action: { after, handler, name: 'myAction', actionType: 'resource' },

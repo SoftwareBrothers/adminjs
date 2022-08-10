@@ -112,7 +112,7 @@ class ActionDecorator {
     }
     if (Array.isArray(this.action.before)) {
       return (this.action.before as Array<Before>).reduce((prevPromise, hook) => (
-        prevPromise.then(modifiedRequest => (
+        prevPromise.then((modifiedRequest) => (
           hook(modifiedRequest, context)
         ))
       ), Promise.resolve(request))
@@ -141,13 +141,12 @@ class ActionDecorator {
       return this.action.handler(request, response, context)
     }
     if (Array.isArray(this.action.handler)) {
-      return (this.action.handler as Array<ActionHandler<ActionResponse>>).reduce(
-        (prevPromise, handler) => (
+      return (this.action.handler as Array<ActionHandler<ActionResponse>>)
+        .reduce((prevPromise, handler) => (
           prevPromise.then(() => (
             handler(request, response, context)
           ))
-        ), Promise.resolve({}),
-      )
+        ), Promise.resolve({}))
     }
     throw new ConfigurationError(
       'Action handler has to be either function or Array<function>',
@@ -177,7 +176,7 @@ class ActionDecorator {
     }
     if (Array.isArray(this.action.after)) {
       return (this.action.after as Array<After<ActionResponse>>).reduce((prevPromise, hook) => (
-        prevPromise.then(modifiedResponse => (
+        prevPromise.then((modifiedResponse) => (
           hook(modifiedResponse, request, context)
         ))
       ), Promise.resolve(response))
@@ -274,7 +273,7 @@ class ActionDecorator {
       return true
     }
 
-    if (records && !records.find(bulkRecord => !this.isAccessible(currentAdmin, bulkRecord))) {
+    if (records && !records.find((bulkRecord) => !this.isAccessible(currentAdmin, bulkRecord))) {
       return true
     }
 
@@ -305,7 +304,7 @@ class ActionDecorator {
       } else {
         layoutConfig = this.action.layout
       }
-      return layoutConfig.map(element => layoutElementParser(element))
+      return layoutConfig.map((element) => layoutElementParser(element))
     }
     return null
   }

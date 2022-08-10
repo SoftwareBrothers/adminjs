@@ -150,7 +150,7 @@ class PropertyDecorator {
     }
     const values = this.property.availableValues()
     if (values) {
-      return values.map(val => ({
+      return values.map((val) => ({
         value: val,
         label: this._admin.translateProperty(
           `${this.propertyPath}.${val}`,
@@ -271,8 +271,8 @@ class PropertyDecorator {
       reference: this.referenceName(),
       components: this.options.components,
       subProperties: this.subProperties()
-        .filter(subProperty => !where || subProperty.isVisible(where))
-        .map(subProperty => subProperty.toJSON(where)),
+        .filter((subProperty) => !where || subProperty.isVisible(where))
+        .map((subProperty) => subProperty.toJSON(where)),
       isArray: this.isArray(),
       isDraggable: this.isDraggable(),
       resourceId: this._resource.id(),

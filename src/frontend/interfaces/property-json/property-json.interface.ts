@@ -34,13 +34,11 @@ export interface PropertyJSON {
   /**
    * Property uniq path. For top level properties - the same as name, but for nested
    * properties it is separated with dot notation: `nested.property`
-   * @new in version 3.3
    */
   propertyPath: string;
   /**
    * Path of the actual value inside the record. It is usually the same as propertyPath, with the
    * exception of array values.
-   * @new in version 3.3
    */
   path: string;
   /**
@@ -79,7 +77,6 @@ export interface PropertyJSON {
    *   },
    * });
    * ```
-   * @new In version 5.6
    */
   description?: string;
   /**
@@ -124,7 +121,6 @@ export interface PropertyJSON {
 
   /**
    * Additional props passed to the actual react component
-   * @new in version 3.3
    */
   props: {
     [key: string]: any;
@@ -153,7 +149,6 @@ export interface PropertyJSON {
   /**
    * Indicates if given property has been created in AdminJS {@link PropertyOptions} and hasn't
    * been returned by the database adapter.
-   * @new in version 3.3
    */
   isVirtual: boolean;
 }
@@ -167,5 +162,4 @@ export type BasePropertyJSON = Omit<PropertyJSON, 'path'>
  * @property {any} ...   properties from {@link PropertyJSON} except `path`
  * @alias BasePropertyJSON
  * @memberof PropertyJSON
- * @new in version 3.3
  */

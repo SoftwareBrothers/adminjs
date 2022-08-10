@@ -5,7 +5,7 @@ import _ from 'lodash'
 import i18n from 'i18next'
 import { render, RenderResult } from '@testing-library/react'
 import { Provider } from 'react-redux'
-import { Switch, Route } from 'react-router'
+import { Route, Routes } from 'react-router'
 import { AxiosResponse } from 'axios'
 
 import createStore, { ReduxState } from '../../store/store'
@@ -24,15 +24,13 @@ const defaultStore = {
 const renderSubject = (store: Partial<ReduxState> = {}, location?: string): RenderResult => {
   const path = '/resources/:resourceId/records/:recordId/:actionName'
   const storeWithDefault = _.merge(defaultStore, store)
-  // TODO: fix children props
-  const StoreProvider = Provider as any
   const renderResult = render(
     <TestContextProvider location={location}>
-      <StoreProvider store={createStore(storeWithDefault)}>
-        <Switch>
-          <Route path={path} exact component={RecordAction} />
-        </Switch>
-      </StoreProvider>
+      <Provider store={createStore(storeWithDefault)}>
+        <Routes>
+          <Route path={path} element={<RecordAction />} />
+        </Routes>
+      </Provider>
     </TestContextProvider>,
   )
 

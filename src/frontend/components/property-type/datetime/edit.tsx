@@ -16,7 +16,7 @@ const Edit: React.FC<EditPropertyProps> = (props) => {
       <DatePicker
         value={value}
         disabled={property.isDisabled}
-        onChange={date => onChange(property.path, date)}
+        onChange={(date) => onChange(property.path, date)}
         propertyType={property.type}
         {...property.props}
       />

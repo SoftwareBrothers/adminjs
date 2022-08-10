@@ -144,7 +144,7 @@ describe('ResourceDecorator', function () {
     })
 
     it('returns mixed property', function () {
-      const propertyPath = expectedResult.properties.find(p => p.type() === 'mixed')?.path()
+      const propertyPath = expectedResult.properties.find((p) => p.type() === 'mixed')?.path()
 
       expect(
         decorator.getPropertyByKey(propertyPath as string),
@@ -152,8 +152,8 @@ describe('ResourceDecorator', function () {
     })
 
     it('returns nested property under mixed', function () {
-      const property = expectedResult.properties.find(p => p.type() === 'mixed') as BaseProperty
-      const nested1Property = property?.subProperties().find(p => p.type() !== 'mixed') as BaseProperty
+      const property = expectedResult.properties.find((p) => p.type() === 'mixed') as BaseProperty
+      const nested1Property = property?.subProperties().find((p) => p.type() !== 'mixed') as BaseProperty
       const path = [property.path(), nested1Property.path()].join('.')
 
       const decoratedProperty = decorator.getPropertyByKey(path) as PropertyDecorator
@@ -163,8 +163,8 @@ describe('ResourceDecorator', function () {
     })
 
     it('returns nested property under 2 level nested mixed', function () {
-      const property = expectedResult.properties.find(p => p.type() === 'mixed') as BaseProperty
-      const nested1Property = property?.subProperties().find(p => p.type() === 'mixed') as BaseProperty
+      const property = expectedResult.properties.find((p) => p.type() === 'mixed') as BaseProperty
+      const nested1Property = property?.subProperties().find((p) => p.type() === 'mixed') as BaseProperty
       const nested2Property = nested1Property?.subProperties()[0] as BaseProperty
       const path = [property.path(), nested1Property.path(), nested2Property.path()].join('.')
 
@@ -175,7 +175,7 @@ describe('ResourceDecorator', function () {
     })
 
     it('returns property when it is an array', function () {
-      const arrayProperty = expectedResult.properties.find(p => p.isArray()) as BaseProperty
+      const arrayProperty = expectedResult.properties.find((p) => p.isArray()) as BaseProperty
       // checking of a property of first item in an array
       const path = [arrayProperty.path(), '0'].join('.')
 
@@ -187,7 +187,7 @@ describe('ResourceDecorator', function () {
 
     it('returns property when it is an nested array', function () {
       const arrayProperty = expectedResult.properties
-        .find(p => p.isArray() && p.type() === 'mixed') as BaseProperty
+        .find((p) => p.isArray() && p.type() === 'mixed') as BaseProperty
       const nested1Property = arrayProperty?.subProperties()[0] as BaseProperty
 
       // checking of a property of first item in an array

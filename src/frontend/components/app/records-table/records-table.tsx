@@ -5,7 +5,6 @@ import RecordInList from './record-in-list'
 import RecordsTableHeader from './records-table-header'
 import NoRecords from './no-records'
 
-
 import { RecordJSON, ResourceJSON } from '../../../interfaces'
 import SelectedRecords from './selected-records'
 import { ActionResponse } from '../../../../backend/actions/action.interface'
@@ -55,7 +54,6 @@ export type RecordsTableProps = {
  * @class
  * @hideconstructor
  * @subcategory Application
- * @new in version 3.3
  */
 export const RecordsTable: React.FC<RecordsTableProps> = (props) => {
   const {
@@ -72,11 +70,11 @@ export const RecordsTable: React.FC<RecordsTableProps> = (props) => {
     return (<NoRecords resource={resource} />)
   }
 
-  const selectedAll = selectedRecords && !!records.find(record => (
-    selectedRecords.find(selected => selected.id === record.id)
+  const selectedAll = selectedRecords && !!records.find((record) => (
+    selectedRecords.find((selected) => selected.id === record.id)
   ))
 
-  const recordsHaveBulkAction = !!records.find(record => record.bulkActions.length)
+  const recordsHaveBulkAction = !!records.find((record) => record.bulkActions.length)
 
   return (
     <Table>
@@ -93,7 +91,7 @@ export const RecordsTable: React.FC<RecordsTableProps> = (props) => {
         selectedAll={selectedAll}
       />
       <TableBody>
-        {records.map(record => (
+        {records.map((record) => (
           <RecordInList
             record={record}
             resource={resource}
@@ -102,7 +100,7 @@ export const RecordsTable: React.FC<RecordsTableProps> = (props) => {
             isLoading={isLoading}
             onSelect={onSelect}
             isSelected={
-              selectedRecords && !!selectedRecords.find(selected => selected.id === record.id)
+              selectedRecords && !!selectedRecords.find((selected) => selected.id === record.id)
             }
           />
         ))}

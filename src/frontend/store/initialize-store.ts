@@ -62,5 +62,4 @@ export const initializeStore = async (
   return store
 }
 
-
 export default initializeStore

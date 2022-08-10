@@ -7,7 +7,6 @@ import BaseDatabase from './backend/adapters/database/base-database'
 import BaseResource from './backend/adapters/resource/base-resource'
 import { OverridableComponent } from './frontend/utils/overridable-component'
 
-
 describe('AdminJS', function () {
   beforeEach(function () {
     global.RegisteredAdapters = []
@@ -45,7 +44,7 @@ describe('AdminJS', function () {
           Resource: {} as typeof BaseResource,
           Database: {} as typeof BaseDatabase,
         })
-      }).to.throw('Adapter elements has to be a subclass of AdminJS.BaseResource and AdminJS.BaseDatabase')
+      }).to.throw('Adapter elements have to be a subclass of AdminJS.BaseResource and AdminJS.BaseDatabase')
     })
   })
 

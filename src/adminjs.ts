@@ -157,12 +157,15 @@ class AdminJS {
     if (!Database || !Resource) {
       throw new Error('Adapter has to have both Database and Resource')
     }
+
+    // TODO: check if this is actually valid because "isAdapterFor" is always defined.
     // checking if both Database and Resource have at least isAdapterFor method
+    // @ts-ignore
     if (Database.isAdapterFor && Resource.isAdapterFor) {
       global.RegisteredAdapters = global.RegisteredAdapters || []
       global.RegisteredAdapters.push({ Database, Resource })
     } else {
-      throw new Error('Adapter elements has to be a subclass of AdminJS.BaseResource and AdminJS.BaseDatabase')
+      throw new Error('Adapter elements have to be a subclass of AdminJS.BaseResource and AdminJS.BaseDatabase')
     }
   }
 
@@ -222,12 +225,12 @@ class AdminJS {
    * @throws {Error}                When resource with given id cannot be found
    */
   findResource(resourceId): BaseResource {
-    const resource = this.resources.find(m => m._decorated?.id() === resourceId)
+    const resource = this.resources.find((m) => m._decorated?.id() === resourceId)
     if (!resource) {
       throw new Error([
         `There are no resources with given id: "${resourceId}"`,
         'This is the list of all registered resources you can use:',
-        this.resources.map(r => r._decorated?.id() || r.id()).join(', '),
+        this.resources.map((r) => r._decorated?.id() || r.id()).join(', '),
       ].join('\n'))
     }
     return resource

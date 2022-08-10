@@ -72,7 +72,8 @@ export const useRecord = (
   }, [setRecord, options])
 
   const handleSubmit: UseRecordSubmitFunction = useCallback((
-    customParams = {}, submitOptions,
+    customParams = {},
+    submitOptions,
   ): Promise<AxiosResponse<RecordActionResponse>> => {
     setLoading(true)
 
@@ -102,7 +103,7 @@ export const useRecord = (
         onNotice(response.data.notice)
       }
       if (submitOptions?.updateOnSave !== false) {
-        setFilteredRecord(prev => mergeRecordResponse(prev, response.data))
+        setFilteredRecord((prev) => mergeRecordResponse(prev, response.data))
       }
       setProgress(0)
       setLoading(false)

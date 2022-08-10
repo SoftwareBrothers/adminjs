@@ -30,6 +30,7 @@ const List: React.FC<ActionProps> = ({ resource }) => {
     handleSelectAll,
     setSelectedRecords,
   } = useSelectedRecords(records)
+  const navigate = useNavigate()
 
   const handleActionPerformed = () => {
     // here is a trigger for a case when user performs an action without component (like `delete`)
@@ -38,7 +39,7 @@ const List: React.FC<ActionProps> = ({ resource }) => {
   const handlePaginationChange = (pageNumber: number): void => {
     const search = new URLSearchParams(location.search)
     search.set('page', pageNumber.toString())
-    history.push({ search: search.toString() })
+    navigate({ search: search.toString() })
   }
 
   return (
