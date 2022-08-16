@@ -4,25 +4,15 @@
 .idea
 .cache
 lib
-built
 types
-
-coverage
 
 docker-compose.ovverride.yml
 
 node_modules
 
-src/frontend/assets/scripts
-
 .adminjs
-
-# cypress output
-**/*/cypress/videos
-**/*/cypress/screenshots
 
 /packages/app/build
 
 .env
-firebase.env.json
-yarn-error.log
+*.log

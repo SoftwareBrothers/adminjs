@@ -1,18 +1,16 @@
 module.exports = {
   parser: '@typescript-eslint/parser',
-  plugins: ['@typescript-eslint', 'mocha'],
+  plugins: ['@typescript-eslint'],
   env: {
     es6: true,
     node: true,
-    mocha: true,
   },
-  extends: ['airbnb', 'plugin:@typescript-eslint/recommended', 'plugin:mocha/recommended'],
+  extends: ['airbnb', 'plugin:@typescript-eslint/recommended'],
   parserOptions: {
     ecmaVersion: 2018,
     sourceType: 'module',
   },
   rules: {
-    'react/jsx-filename-extension': 'off',
     '@typescript-eslint/no-explicit-any': 'off',
     indent: ['error', 2],
     '@typescript-eslint/explicit-function-return-type': 'off',
@@ -30,14 +28,10 @@ module.exports = {
     'no-await-in-loop': 'off',
     'object-curly-newline': 'off',
     'import/extensions': 'off',
-    'mocha/no-hooks-for-single-case': 'off',
     'no-param-reassign': 'off',
     'default-param-last': 'off',
     'no-use-before-define': 'off',
     'no-restricted-exports': 'off',
-    'react/require-default-props': 'off',
-    'react/jsx-props-no-spreading': 'off',
-    'react/function-component-definition': 'off',
     'max-classes-per-file': 'off',
     '@typescript-eslint/ban-ts-comment': 'off',
     'import/no-import-module-exports': 'off',
@@ -50,40 +44,24 @@ module.exports = {
     '*.lock',
     '*.log',
     '*.yaml',
-    '**/*/frontend/assets/**/*',
     '*.d.ts',
     '*.config.js',
   ],
   overrides: [
     {
-      files: ['*-test.js', '*.spec.js', '*-test.ts', '*.spec.ts', '*.spec.tsx', '*.factory.ts', '*.factory.js'],
+      files: ['*-test.js', '*.spec.js', '*-test.ts', '*.spec.ts', '*.factory.ts', '*.factory.js'],
       rules: {
         'no-unused-expressions': 'off',
         'func-names': 'off',
         'prefer-arrow-callback': 'off',
         'import/no-extraneous-dependencies': 'off',
-        'mocha/no-mocha-arrows': 'off',
         '@typescript-eslint/explicit-function-return-type': 'off',
       },
     },
     {
-      files: ['*.jsx', '*.js'],
+      files: ['*.js'],
       rules: {
         '@typescript-eslint/explicit-function-return-type': 'off',
-      },
-    },
-    {
-      files: ['*.tsx'],
-      rules: {
-        'react/prop-types': 'off',
-        'react/function-component-definition': 'off',
-      },
-    },
-    {
-      files: ['**/*/cypress/integration/**/*.spec.js', './cy/**/*.js'],
-      rules: {
-        'mocha/no-mocha-arrows': 'off',
-        'spaced-comment': 'off',
       },
     },
   ],
@@ -92,12 +70,8 @@ module.exports = {
     factory: true,
     sandbox: true,
     server: true,
-    window: true,
     AdminJS: true,
     flatpickr: true,
-    FormData: true,
     File: true,
-    cy: true,
-    Cypress: true,
   },
 }
