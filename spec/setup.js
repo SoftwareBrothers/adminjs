@@ -1,5 +1,4 @@
 /* eslint-disable func-names */
-/* eslint-disable mocha/no-top-level-hooks */
 import { URLSearchParams } from 'url'
 
 import chai from 'chai'
