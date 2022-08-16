@@ -1,14 +1,12 @@
-import { expect } from 'chai'
-
 import layoutElementParser, { LayoutElement } from './layout-element-parser'
 
-describe('layoutElementParser', function () {
+describe('layoutElementParser', () => {
   const propertyName = 'name'
   const property2 = 'surname'
   const props = { mt: 'default', ml: 'xxxl' }
 
-  it('parses regular string', function () {
-    expect(layoutElementParser(propertyName)).to.deep.eq({
+  it('parses regular string', () => {
+    expect(layoutElementParser(propertyName)).toEqual({
       properties: [propertyName],
       props: {},
       layoutElements: [],
@@ -16,8 +14,8 @@ describe('layoutElementParser', function () {
     })
   })
 
-  it('parses list of strings', function () {
-    expect(layoutElementParser([propertyName, property2])).to.deep.eq({
+  it('parses list of strings', () => {
+    expect(layoutElementParser([propertyName, property2])).toEqual({
       properties: [propertyName, property2],
       props: { },
       layoutElements: [],
@@ -25,8 +23,8 @@ describe('layoutElementParser', function () {
     })
   })
 
-  it('parses property and props', function () {
-    expect(layoutElementParser([propertyName, props])).to.deep.eq({
+  it('parses property and props', () => {
+    expect(layoutElementParser([propertyName, props])).toEqual({
       properties: [propertyName],
       props,
       layoutElements: [],
@@ -34,9 +32,9 @@ describe('layoutElementParser', function () {
     })
   })
 
-  it('recursively parses and inner element as string', function () {
+  it('recursively parses and inner element as string', () => {
     const innerElement: LayoutElement = ['string2', { width: 1 / 2 }]
-    expect(layoutElementParser([props, [innerElement]])).to.deep.eq({
+    expect(layoutElementParser([props, [innerElement]])).toEqual({
       properties: [],
       props,
       layoutElements: [layoutElementParser(innerElement)],
@@ -44,14 +42,14 @@ describe('layoutElementParser', function () {
     })
   })
 
-  it('recursively parses nested objects', function () {
+  it('recursively parses nested objects', () => {
     const nested: Array<LayoutElement> = [
       ['companyName', { ml: 'xxl' }],
       'email',
       ['address', 'profilePhotoLocation'],
     ]
     const complicatedElement: LayoutElement = [props, nested]
-    expect(layoutElementParser(complicatedElement)).to.deep.eq({
+    expect(layoutElementParser(complicatedElement)).toEqual({
       properties: [],
       props,
       layoutElements: nested.map((el) => layoutElementParser(el)),
@@ -59,12 +57,12 @@ describe('layoutElementParser', function () {
     })
   })
 
-  it('returns layoutElements when array is passed', function () {
+  it('returns layoutElements when array is passed', () => {
     const arrayElements: LayoutElement = [
       ['string1', { width: 1 / 2 }],
       ['string2', { width: 1 / 2 }],
     ]
-    expect(layoutElementParser(arrayElements)).to.deep.eq({
+    expect(layoutElementParser(arrayElements)).toEqual({
       properties: [],
       props: {},
       component: 'Box',
@@ -72,11 +70,11 @@ describe('layoutElementParser', function () {
     })
   })
 
-  it('changes the component when @ is appended', function () {
+  it('changes the component when @ is appended', () => {
     const headerProps = { children: 'Welcome my boy' }
     const componentElements: LayoutElement = ['@Header', headerProps]
 
-    expect(layoutElementParser(componentElements)).to.deep.eq({
+    expect(layoutElementParser(componentElements)).toEqual({
       properties: [],
       props: headerProps,
       component: 'Header',

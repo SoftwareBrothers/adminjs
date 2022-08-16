@@ -1,5 +1,3 @@
-import { expect } from 'chai'
-
 import { FlattenParams } from './flat.types'
 import { set } from './set'
 
@@ -27,18 +25,18 @@ describe('module:flat.set', () => {
   it('sets regular property when it is default type', () => {
     const age = 37
 
-    expect(set(params, 'age', age)).to.have.property('age', 37)
+    expect(set(params, 'age', age)).toHaveProperty('age', 37)
   })
 
-  context('passing basic types', () => {
+  describe('passing basic types', () => {
     const newPropertyName = 'newProperty'
 
-    it('does not change the type when regular file is set', function () {
+    it('does not change the type when regular file is set', () => {
       const file = new File([], 'amazing.me')
 
       newParams = set(params, newPropertyName, file)
 
-      expect(newParams[newPropertyName]).to.equal(file)
+      expect(newParams[newPropertyName]).toBe(file)
     })
 
     it('does not change the type when Date is set', () => {
@@ -46,27 +44,27 @@ describe('module:flat.set', () => {
 
       newParams = set(params, newPropertyName, date)
 
-      expect(newParams[newPropertyName]).to.equal(date)
+      expect(newParams[newPropertyName]).toBe(date)
     })
 
     it('sets null', () => {
-      expect(set(params, newPropertyName, null)).to.have.property(newPropertyName, null)
+      expect(set(params, newPropertyName, null)).toHaveProperty(newPropertyName, null)
     })
 
     it('sets empty object', () => {
-      expect(set(params, newPropertyName, {})).to.deep.include({ [newPropertyName]: {} })
+      expect(set(params, newPropertyName, {})).toMatchObject({ [newPropertyName]: {} })
     })
 
     it('sets empty array', () => {
-      expect(set(params, newPropertyName, [])).to.deep.include({ [newPropertyName]: [] })
+      expect(set(params, newPropertyName, [])).toMatchObject({ [newPropertyName]: [] })
     })
 
     it('does nothing when setting undefined to some random key', () => {
-      expect(set(params, newPropertyName, undefined)).to.deep.equal(params)
+      expect(set(params, newPropertyName, undefined)).toEqual(params)
     })
   })
 
-  context('passing array', () => {
+  describe('passing array', () => {
     const interest = ['js', 'ts']
 
     beforeEach(() => {
@@ -74,22 +72,22 @@ describe('module:flat.set', () => {
     })
 
     it('replaces sets values for all new arrays items', () => {
-      expect(newParams).to.include({
+      expect(newParams).toMatchObject({
         'interest.OfMe.0': 'js',
         'interest.OfMe.1': 'ts',
       })
     })
 
     it('removes old values', () => {
-      expect(newParams).not.to.have.property('interest.OfMe.2')
+      expect(newParams).not.toHaveProperty('interest.OfMe.2')
     })
 
     it('leaves other values which name starts the same', () => {
-      expect(newParams).to.have.property('interests', params.interests)
+      expect(newParams).toHaveProperty('interests', params.interests)
     })
   })
 
-  context('value is undefined', () => {
+  describe('value is undefined', () => {
     const property = 'meta'
 
     beforeEach(() => {
@@ -97,20 +95,17 @@ describe('module:flat.set', () => {
     })
 
     it('removes all existing properties', () => {
-      expect(newParams).not.to.have.keys(
-        'meta.position',
-        'meta.workingHours',
-        'meta.duties',
-        'meta.fun',
+      expect(Object.keys(newParams)).not.toEqual(
+        expect.arrayContaining(['meta.position', 'meta.workingHours', 'meta.duties', 'meta.fun'])
       )
     })
 
     it('does not set any new key', () => {
-      expect(Object.keys(newParams).length).to.eq(Object.keys(params).length - 4)
+      expect(Object.keys(newParams).length).toBe(Object.keys(params).length - 4)
     })
   })
 
-  context('mixed type was inside and should be updated', () => {
+  describe('mixed type was inside and should be updated', () => {
     const meta = {
       position: 'adminJSCEO',
       workingHours: '6:00-21:00',
@@ -121,53 +116,56 @@ describe('module:flat.set', () => {
     })
 
     it('clears the previous value for nested string', () => {
-      expect(newParams).not.to.have.keys('meta.duties', 'meta.fun')
+      expect(Object.keys(newParams)).not.toEqual(expect.arrayContaining(['meta.duties', 'meta.fun']))
     })
 
     it('sets the new value for nested string', () => {
-      expect(newParams).to.include({
+      expect(newParams).toMatchObject({
         'meta.position': meta.position,
         'meta.workingHours': meta.workingHours,
       })
     })
   })
 
-  context('user wants to set nested property for already given root property', () => {
-    const newNestedNullValue = 'this is not null'
+  describe(
+    'user wants to set nested property for already given root property',
+    () => {
+      const newNestedNullValue = 'this is not null'
 
-    beforeEach(() => {
-      params = {
-        id: '6e264607-ad0b-4480-8e25-1bf54063465b',
-        title: 'Your new story',
-        status: 'draft',
-        postImage: null,
-        blogImageKeys: null,
-        blogImageMimeTypes: null,
-        blogImageBuckets: null,
-        blogImageSizes: null,
-        postUrl: 'your-new-story',
-      }
-    })
+      beforeEach(() => {
+        params = {
+          id: '6e264607-ad0b-4480-8e25-1bf54063465b',
+          title: 'Your new story',
+          status: 'draft',
+          postImage: null,
+          blogImageKeys: null,
+          blogImageMimeTypes: null,
+          blogImageBuckets: null,
+          blogImageSizes: null,
+          postUrl: 'your-new-story',
+        }
+      })
 
-    it('sets value for new nested property', () => {
-      const newNestedNullKey = 'blogImageKeys.nested'
-      newParams = set(params, newNestedNullKey, newNestedNullValue)
+      it('sets value for new nested property', () => {
+        const newNestedNullKey = 'blogImageKeys.nested'
+        newParams = set(params, newNestedNullKey, newNestedNullValue)
 
-      expect(newParams[newNestedNullKey]).to.eq(newNestedNullValue)
-    })
+        expect(newParams[newNestedNullKey]).toBe(newNestedNullValue)
+      })
 
-    it('removes root property from keys', () => {
-      const newNestedNullKey = 'blogImageKeys.nested'
-      newParams = set(params, newNestedNullKey, newNestedNullValue)
+      it('removes root property from keys', () => {
+        const newNestedNullKey = 'blogImageKeys.nested'
+        newParams = set(params, newNestedNullKey, newNestedNullValue)
 
-      expect(Object.keys(newParams)).not.to.include(newNestedNullKey.split('.')[0])
-    })
+        expect(Object.keys(newParams)).toEqual(expect.not.arrayContaining([newNestedNullKey.split('.')[0]]))
+      })
 
-    it('removes value from keys if new value is an array', () => {
-      const newNestedNullKey = 'blogImageKeys.0'
-      newParams = set(params, newNestedNullKey, newNestedNullValue)
+      it('removes value from keys if new value is an array', () => {
+        const newNestedNullKey = 'blogImageKeys.0'
+        newParams = set(params, newNestedNullKey, newNestedNullValue)
 
-      expect(Object.keys(newParams)).not.to.include(newNestedNullKey.split('.')[0])
-    })
-  })
+        expect(Object.keys(newParams)).toEqual(expect.not.arrayContaining([newNestedNullKey.split('.')[0]]))
+      })
+    }
+  )
 })

@@ -1,5 +1,3 @@
-import { expect } from 'chai'
-import sinon, { SinonStubbedInstance } from 'sinon'
 import { ResourceDecorator } from '..'
 import AdminJS from '../../../../adminjs'
 import { BaseProperty, BaseResource } from '../../../adapters'
@@ -24,47 +22,47 @@ describe('decorateProperties', () => {
   })
 
   afterEach(() => {
-    sinon.restore()
+    jest.restoreAllMocks()
   })
 
-  context('One property with options', () => {
+  describe('One property with options', () => {
     const isSortable = true
     const newIsSortable = false
     const type = 'boolean'
 
     beforeEach(() => {
       property = new BaseProperty({ path, type, isSortable })
-      resource.properties.returns([property])
+      resource.properties.mockReturnValue([property])
       decorator.options = { properties: { [path]: { isSortable: newIsSortable } } }
 
       decoratedProperties = decorateProperties(resource, admin, decorator)
     })
 
     it('returns just this one property', () => {
-      expect(Object.keys(decoratedProperties)).to.have.lengthOf(1)
-      expect(decoratedProperties[path]).not.to.be.undefined
+      expect(Object.keys(decoratedProperties)).toHaveLength(1)
+      expect(decoratedProperties[path]).toBeDefined()
     })
 
     it('decorates it that the isSortable is updated', () => {
       const decorated = decoratedProperties[path]
 
-      expect(decorated.isSortable()).to.eq(newIsSortable)
+      expect(decorated.isSortable()).toBe(newIsSortable)
     })
 
     it('leaves all other fields like type unchanged', () => {
       const decorated = decoratedProperties[path]
 
-      expect(decorated.type()).to.eq(type)
+      expect(decorated.type()).toBe(type)
     })
 
     it('does not set `isVirtual` property', () => {
       const decorated = decoratedProperties[path]
 
-      expect(decorated.isVirtual).to.eq(false)
+      expect(decorated.isVirtual).toBe(false)
     })
   })
 
-  context('just options without any properties', () => {
+  describe('just options without any properties', () => {
     const newType = 'string'
     const availableValues: PropertyOptions['availableValues'] = [
       { value: 'male', label: 'male' },
@@ -72,7 +70,7 @@ describe('decorateProperties', () => {
     ]
 
     beforeEach(() => {
-      resource.properties.returns([])
+      resource.properties.mockReturnValue([])
       decorator.options = { properties: { [path]: {
         type: newType,
         availableValues,
@@ -82,25 +80,25 @@ describe('decorateProperties', () => {
     })
 
     it('returns just this one property', () => {
-      expect(Object.keys(decoratedProperties)).to.have.lengthOf(1)
-      expect(decoratedProperties[path]).not.to.be.undefined
+      expect(Object.keys(decoratedProperties)).toHaveLength(1)
+      expect(decoratedProperties[path]).toBeDefined()
     })
 
     it('decorates it that it has type and availableValues', () => {
       const decorated = decoratedProperties[path]
 
-      expect(decorated.type()).to.eq(newType)
-      expect(decorated.availableValues()).to.deep.eq(availableValues)
+      expect(decorated.type()).toBe(newType)
+      expect(decorated.availableValues()).toEqual(availableValues)
     })
 
     it('sets `isVirtual` property to true', () => {
       const decorated = decoratedProperties[path]
 
-      expect(decorated.isVirtual).to.eq(true)
+      expect(decorated.isVirtual).toBe(true)
     })
   })
 
-  context('nested properties in the database', () => {
+  describe('nested properties in the database', () => {
     let subPropertyLevel1: BaseProperty
     let subPropertyLevel2: BaseProperty
     const newIsVisible = false
@@ -111,13 +109,13 @@ describe('decorateProperties', () => {
       subPropertyLevel1 = new BaseProperty({ path: nestedPath.split('.')[1], type: 'mixed' })
       subPropertyLevel2 = new BaseProperty({ path: nestedPath.split('.')[2], type: 'mixed' })
 
-      sinon.stub(property, 'subProperties').returns([subPropertyLevel1])
-      sinon.stub(subPropertyLevel1, 'subProperties').returns([subPropertyLevel2])
+      jest.spyOn(property, 'subProperties').mockClear().mockReturnValue([subPropertyLevel1])
+      jest.spyOn(subPropertyLevel1, 'subProperties').mockClear().mockReturnValue([subPropertyLevel2])
 
-      resource.properties.returns([property])
+      resource.properties.mockReturnValue([property])
     })
 
-    context('options were not set', () => {
+    describe('options were not set', () => {
       beforeEach(() => {
         decorator.options = { properties: { } }
 
@@ -125,15 +123,15 @@ describe('decorateProperties', () => {
       })
 
       it('returns one property', () => {
-        expect(Object.keys(decoratedProperties)).to.have.lengthOf(1)
+        expect(Object.keys(decoratedProperties)).toHaveLength(1)
       })
 
       it('returns only root property which is not virtual', () => {
-        expect(decoratedProperties[nestedPath.split('.')[0]]).to.have.property('isVirtual', false)
+        expect(decoratedProperties[nestedPath.split('.')[0]]).toHaveProperty('isVirtual', false)
       })
     })
 
-    context('options were set for root property', () => {
+    describe('options were set for root property', () => {
       beforeEach(() => {
         decorator.options = { properties: { [nestedPath.split('.')[0]]: {
           isVisible: newIsVisible,
@@ -142,17 +140,17 @@ describe('decorateProperties', () => {
       })
 
       it('returns one property', () => {
-        expect(Object.keys(decoratedProperties)).to.have.lengthOf(1)
+        expect(Object.keys(decoratedProperties)).toHaveLength(1)
       })
 
       it('changes its param', () => {
         expect(
           decoratedProperties[nestedPath.split('.')[0]].isVisible('show'),
-        ).to.eq(newIsVisible)
+        ).toBe(newIsVisible)
       })
     })
 
-    context('options were set for nested property', () => {
+    describe('options were set for nested property', () => {
       beforeEach(() => {
         decorator.options = { properties: { [nestedPath]: {
           isVisible: newIsVisible,
@@ -161,18 +159,18 @@ describe('decorateProperties', () => {
       })
 
       it('returns one property', () => {
-        expect(Object.keys(decoratedProperties)).to.have.lengthOf(1)
+        expect(Object.keys(decoratedProperties)).toHaveLength(1)
       })
 
       it('does not change the root property', () => {
         expect(
           decoratedProperties[nestedPath.split('.')[0]].isVisible('show'),
-        ).not.to.eq(newIsVisible)
+        ).not.toBe(newIsVisible)
       })
     })
   })
 
-  context('virtual nested properties and one db property', () => {
+  describe('virtual nested properties and one db property', () => {
     beforeEach(() => {
       property = new BaseProperty({ path: 'otherProperty', type: 'mixed' })
       decorator.options = {
@@ -192,30 +190,30 @@ describe('decorateProperties', () => {
           'otherProperty.name': { type: 'string' },
         },
       }
-      resource.properties.returns([property])
+      resource.properties.mockReturnValue([property])
       decoratedProperties = decorateProperties(resource, admin, decorator)
     })
 
     it('returns root properties: one db property and 1 virtual', () => {
-      expect(Object.keys(decoratedProperties)).to.have.lengthOf(2)
+      expect(Object.keys(decoratedProperties)).toHaveLength(2)
     })
 
     it('nests 3 nested properties under the root mixed type', () => {
       const subProperties = decoratedProperties.root.subProperties()
 
-      expect(subProperties).to.have.lengthOf(4)
+      expect(subProperties).toHaveLength(4)
     })
 
     it('nests 2 properties under the root.nestedArray mixed type', () => {
       const subProperties = decoratedProperties.root.subProperties()[3].subProperties()
 
-      expect(subProperties).to.have.lengthOf(2)
+      expect(subProperties).toHaveLength(2)
     })
 
     it('nests 1 property under the `otherProperty` mixed dbProperty', () => {
       const subProperties = decoratedProperties.otherProperty.subProperties()
 
-      expect(subProperties).to.have.lengthOf(1)
+      expect(subProperties).toHaveLength(1)
     })
   })
 })

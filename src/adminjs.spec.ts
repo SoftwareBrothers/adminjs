@@ -1,5 +1,4 @@
 import path from 'path'
-import { expect } from 'chai'
 
 import AdminJS from './adminjs'
 
@@ -7,54 +6,65 @@ import BaseDatabase from './backend/adapters/database/base-database'
 import BaseResource from './backend/adapters/resource/base-resource'
 import { OverridableComponent } from './frontend/utils/overridable-component'
 
-describe('AdminJS', function () {
-  beforeEach(function () {
+describe('AdminJS', () => {
+  let testContext: any;
+
+  beforeEach(() => {
+    testContext = {};
+  });
+
+  beforeEach(() => {
     global.RegisteredAdapters = []
   })
 
-  describe('#constructor', function () {
-    it('sets default root path when no given', function () {
-      expect(new AdminJS().options.rootPath).to.equal('/admin')
+  describe('#constructor', () => {
+    it('sets default root path when no given', () => {
+      expect(new AdminJS().options.rootPath).toBe('/admin')
     })
   })
 
-  describe('.AdminJS.registerAdapter', function () {
-    beforeEach(function () {
+  describe('.AdminJS.registerAdapter', () => {
+    beforeEach(() => {
       class Database extends BaseDatabase {}
       class Resource extends BaseResource {}
-      this.DatabaseAdapter = { Database, Resource }
+      testContext.DatabaseAdapter = { Database, Resource }
     })
 
-    it('adds given adapter to list off all available adapters', function () {
-      AdminJS.registerAdapter(this.DatabaseAdapter)
-      expect(global.RegisteredAdapters).to.have.lengthOf(1)
+    it('adds given adapter to list off all available adapters', () => {
+      AdminJS.registerAdapter(testContext.DatabaseAdapter)
+      expect(global.RegisteredAdapters).toHaveLength(1)
     })
 
-    it('throws an error when adapter is not full', function () {
+    it('throws an error when adapter is not full', () => {
       expect(() => {
         AdminJS.registerAdapter({
           Resource: BaseResource,
           Database: null as unknown as typeof BaseDatabase })
-      }).to.throw('Adapter has to have both Database and Resource')
+      }).toThrowError('Adapter has to have both Database and Resource')
     })
 
-    it('throws an error when adapter has elements not being subclassed from base adapter', function () {
-      expect(() => {
-        AdminJS.registerAdapter({
-          Resource: {} as typeof BaseResource,
-          Database: {} as typeof BaseDatabase,
-        })
-      }).to.throw('Adapter elements have to be a subclass of AdminJS.BaseResource and AdminJS.BaseDatabase')
-    })
+    it(
+      'throws an error when adapter has elements not being subclassed from base adapter',
+      () => {
+        expect(() => {
+          AdminJS.registerAdapter({
+            Resource: {} as typeof BaseResource,
+            Database: {} as typeof BaseDatabase,
+          })
+        }).toThrowError(
+          'Adapter elements have to be a subclass of AdminJS.BaseResource and AdminJS.BaseDatabase'
+        )
+      }
+    )
   })
 
-  describe('resolveBabelConfigPath', function () {
-    it('load .babelrc file', function () {
+  describe('resolveBabelConfigPath', () => {
+    it('load .babelrc file', () => {
       const adminJS = new AdminJS({ bundler: { babelConfig: '../.babelrc' } })
-      expect(adminJS.options.bundler.babelConfig).not.to.undefined
+      expect(adminJS.options.bundler.babelConfig).toBeDefined()
     })
 
-    it('load with json object directly', function () {
+    it('load with json object directly', () => {
       const adminJS = new AdminJS({ bundler: { babelConfig: {
         presets: [
           '@babel/preset-react',
@@ -74,60 +84,60 @@ describe('AdminJS', function () {
           'src/frontend/assets/scripts/global-bundle.production.js',
         ],
       } } })
-      expect(adminJS.options.bundler.babelConfig).not.to.undefined
+      expect(adminJS.options.bundler.babelConfig).toBeDefined()
     })
 
-    it('load babel.config.js file', function () {
+    it('load babel.config.js file', () => {
       const adminJS = new AdminJS({ bundler: { babelConfig: './babel.test.config.js' } })
-      expect(adminJS.options.bundler.babelConfig).not.to.undefined
+      expect(adminJS.options.bundler.babelConfig).toBeDefined()
     })
   })
 
-  describe('.bundle', function () {
-    afterEach(function () {
+  describe('.bundle', () => {
+    afterEach(() => {
       global.UserComponents = {}
     })
-    context('file exists', function () {
-      beforeEach(function () {
-        this.result = AdminJS.bundle('../spec/fixtures/example-component')
+    describe('file exists', () => {
+      beforeEach(() => {
+        testContext.result = AdminJS.bundle('../spec/fixtures/example-component')
       })
 
-      it('adds given file to a UserComponents object', function () {
-        expect(Object.keys(global.UserComponents || {})).to.have.lengthOf(1)
+      it('adds given file to a UserComponents object', () => {
+        expect(Object.keys(global.UserComponents || {})).toHaveLength(1)
       })
 
-      it('returns uniq id', function () {
-        expect(global.UserComponents && global.UserComponents[this.result]).not.to.be.undefined
-        expect(this.result).to.be.a('string')
+      it('returns uniq id', () => {
+        expect(global.UserComponents && global.UserComponents[testContext.result]).toBeDefined()
+        expect(typeof testContext.result).toBe('string')
       })
 
-      it('converts relative path to absolute path', function () {
+      it('converts relative path to absolute path', () => {
         expect(
-          global.UserComponents && global.UserComponents[this.result],
-        ).to.equal(path.join(__dirname, '../spec/fixtures/example-component'))
+          global.UserComponents && global.UserComponents[testContext.result],
+        ).toBe(path.join(__dirname, '../spec/fixtures/example-component'))
       })
     })
 
-    context('component name given', function () {
+    describe('component name given', () => {
       const componentName = 'Dashboard'
       let result: string
 
-      beforeEach(function () {
+      beforeEach(() => {
         result = AdminJS.bundle(
           '../spec/fixtures/example-component',
           componentName as OverridableComponent,
         )
       })
 
-      it('returns the same component name as which was given', function () {
-        expect(result).to.eq(componentName)
+      it('returns the same component name as which was given', () => {
+        expect(result).toBe(componentName)
       })
     })
 
-    it('throws an error when component doesn\'t exist', function () {
+    it('throws an error when component doesn\'t exist', () => {
       expect(() => {
         AdminJS.bundle('./fixtures/example-components')
-      }).to.throw().property('name', 'ConfigurationError')
+      }).to.throw().toHaveProperty('name', 'ConfigurationError')
     })
   })
 })

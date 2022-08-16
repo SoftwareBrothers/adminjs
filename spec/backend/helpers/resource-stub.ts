@@ -1,5 +1,3 @@
-import sinon from 'sinon'
-
 import BaseProperty from '../../../src/backend/adapters/property/base-property'
 import BaseResource from '../../../src/backend/adapters/resource/base-resource'
 import ResourceDecorator from '../../../src/backend/decorators/resource/resource-decorator'
@@ -54,19 +52,19 @@ export const expectedResult = {
 
 export default (): BaseResource => ({
   _decorated: {} as ResourceDecorator,
-  id: sinon.stub().returns(expectedResult.id),
-  properties: sinon.stub().returns(expectedResult.properties),
-  property: sinon.stub().returns(new BaseProperty({ path: 'prop', type: 'string' })),
-  databaseName: sinon.stub().returns(expectedResult.databaseName),
-  databaseType: sinon.stub().returns(expectedResult.databaseType),
-  count: sinon.stub(),
-  find: sinon.stub(),
-  findOne: sinon.stub(),
-  findMany: sinon.stub(),
-  build: sinon.stub(),
-  create: sinon.stub(),
-  update: sinon.stub(),
-  delete: sinon.stub(),
-  assignDecorator: sinon.stub(),
-  decorate: sinon.stub(),
+  id: jest.fn().mockReturnValue(expectedResult.id),
+  properties: jest.fn().mockReturnValue(expectedResult.properties),
+  property: jest.fn().mockReturnValue(new BaseProperty({ path: 'prop', type: 'string' })),
+  databaseName: jest.fn().mockReturnValue(expectedResult.databaseName),
+  databaseType: jest.fn().mockReturnValue(expectedResult.databaseType),
+  count: jest.fn(),
+  find: jest.fn(),
+  findOne: jest.fn(),
+  findMany: jest.fn(),
+  build: jest.fn(),
+  create: jest.fn(),
+  update: jest.fn(),
+  delete: jest.fn(),
+  assignDecorator: jest.fn(),
+  decorate: jest.fn(),
 })
