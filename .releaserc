@@ -27,14 +27,6 @@
     "@semantic-release/npm",
     "@semantic-release/github",
     "@semantic-release/git",
-    ["semantic-release-jira-releases-sb", {
-      "projectId": "AB",
-      "releaseNameTemplate": "v${version}",
-      "jiraHost": "kmpgroup.atlassian.net",
-      "ticketPrefixes": [ "AB" ],
-      "released": true,
-      "setReleaseDate": true
-    }],
     [
       "semantic-release-slack-bot",
       {
