@@ -1,4 +1,3 @@
-import { expect } from 'chai'
 import { selectParams } from './select-params'
 
 describe('selectParams', () => {
@@ -13,13 +12,13 @@ describe('selectParams', () => {
   }
 
   it('selects params for given property', () => {
-    expect(selectParams(params, 'age')).to.deep.equal({
+    expect(selectParams(params, 'age')).toEqual({
       age: 31,
     })
   })
 
   it('select params for nested property', () => {
-    expect(selectParams(params, 'meta')).to.deep.equal({
+    expect(selectParams(params, 'meta')).toEqual({
       'meta.description': 'very ugly',
       'meta.title': 'cto',
       'meta.otherInfo': 'he stinks',
@@ -27,18 +26,18 @@ describe('selectParams', () => {
   })
 
   it('returns empty object when there is no match', () => {
-    expect(selectParams(params, 'nothingIsThere')).to.deep.eq({})
+    expect(selectParams(params, 'nothingIsThere')).toEqual({})
   })
 
   it('returns multiple properties when they are given', () => {
-    expect(selectParams(params, ['name', 'surname'])).to.deep.equal({
+    expect(selectParams(params, ['name', 'surname'])).toEqual({
       name: 'John',
       surname: 'Doe',
     })
   })
 
   it('does not one property when is empty for multi-properties', () => {
-    expect(selectParams(params, ['name', 'surname', 'meta', 'empty'])).to.deep.equal({
+    expect(selectParams(params, ['name', 'surname', 'meta', 'empty'])).toEqual({
       name: 'John',
       surname: 'Doe',
       'meta.description': 'very ugly',
@@ -47,9 +46,12 @@ describe('selectParams', () => {
     })
   })
 
-  it('does not throw an error when user passes undefined as a propertyPath', () => {
-    expect(() => {
-      selectParams(params, ['name', undefined as unknown as string])
-    }).not.to.throw()
-  })
+  it(
+    'does not throw an error when user passes undefined as a propertyPath',
+    () => {
+      expect(() => {
+        selectParams(params, ['name', undefined as unknown as string])
+      }).not.toThrowError()
+    }
+  )
 })

@@ -1,6 +1,5 @@
 import chai, { expect } from 'chai'
 import chaiAsPromised from 'chai-as-promised'
-import sinon from 'sinon'
 
 import BulkDeleteAction from './bulk-delete-action'
 import { ActionContext, ActionRequest, ActionHandler, BulkActionResponse } from '../action.interface'
@@ -15,46 +14,46 @@ import { CurrentAdmin } from '../../../current-admin.interface'
 
 chai.use(chaiAsPromised)
 
-describe('BulkDeleteAction', function () {
+describe('BulkDeleteAction', () => {
   let data: ActionContext
   const request = {} as ActionRequest
   let response: any
 
-  describe('.handler', function () {
-    afterEach(function () {
-      sinon.restore()
+  describe('.handler', () => {
+    afterEach(() => {
+      jest.restoreAllMocks()
     })
 
-    beforeEach(async function () {
+    beforeEach(async () => {
       data = {
         _admin: sinon.createStubInstance(AdminJS),
-        translateMessage: sinon.stub<any, string>().returns('translatedMessage'),
+        translateMessage: jest.fn().mockReturnValue('translatedMessage'),
         h: sinon.createStubInstance(ViewHelpers),
         resource: sinon.createStubInstance(BaseResource),
         action: sinon.createStubInstance(ActionDecorator) as unknown as ActionDecorator,
       } as unknown as ActionContext
     })
 
-    it('throws error when no records are given', async function () {
+    it('throws error when no records are given', async () => {
       await expect(
         (BulkDeleteAction.handler as ActionHandler<BulkActionResponse>)(request, response, data),
       ).to.rejectedWith(NotFoundError)
     })
 
-    context('2 records were selected', function () {
+    describe('2 records were selected', () => {
       let record: BaseRecord
       let recordJSON: RecordJSON
 
-      beforeEach(function () {
+      beforeEach(() => {
         recordJSON = { id: 'someId' } as RecordJSON
         record = sinon.createStubInstance(BaseRecord, {
-          toJSON: sinon.stub<[(CurrentAdmin)?]>().returns(recordJSON),
+          toJSON: jest.fn().mockReturnValue(recordJSON),
         }) as unknown as BaseRecord
 
         data.records = [record]
       })
 
-      it('returns all records for get request', async function () {
+      it('returns all records for get request', async () => {
         request.method = 'get'
 
         await expect(
@@ -64,7 +63,7 @@ describe('BulkDeleteAction', function () {
         })
       })
 
-      it('deletes all records for post request', async function () {
+      it('deletes all records for post request', async () => {
         request.method = 'post'
 
         await (
@@ -74,17 +73,20 @@ describe('BulkDeleteAction', function () {
         expect(data.resource.delete).to.have.been.calledOnce
       })
 
-      it('returns deleted records, notice and redirectUrl for post request', async function () {
-        request.method = 'post'
+      it(
+        'returns deleted records, notice and redirectUrl for post request',
+        async () => {
+          request.method = 'post'
 
-        const actionResponse = await (
-          BulkDeleteAction.handler as ActionHandler<BulkActionResponse>
-        )(request, response, data)
+          const actionResponse = await (
+            BulkDeleteAction.handler as ActionHandler<BulkActionResponse>
+          )(request, response, data)
 
-        expect(actionResponse).to.have.property('notice')
-        expect(actionResponse).to.have.property('redirectUrl')
-        expect(actionResponse).to.have.property('records')
-      })
+          expect(actionResponse).to.have.property('notice')
+          expect(actionResponse).to.have.property('redirectUrl')
+          expect(actionResponse).to.have.property('records')
+        }
+      )
     })
   })
 })

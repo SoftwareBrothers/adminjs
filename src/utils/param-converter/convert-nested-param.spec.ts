@@ -1,4 +1,3 @@
-import { expect } from 'chai'
 import { convertNestedParam } from './convert-nested-param'
 
 const jsonField = {
@@ -24,7 +23,7 @@ describe('module:paramConverter.convertNestedParam', () => {
 
     const convertedJson = convertNestedParam(jsonField, property as any)
 
-    expect(convertedJson.number).to.equal(123)
+    expect(convertedJson.number).toBe(123)
   })
 
   it('should convert date property of a JSON to actual number', () => {
@@ -36,39 +35,45 @@ describe('module:paramConverter.convertNestedParam', () => {
 
     const convertedJson = convertNestedParam(jsonField, property as any)
 
-    expect(convertedJson.date.getTime()).to.equal(new Date('2020-11-08').getTime())
+    expect(convertedJson.date.getTime()).toBe(new Date('2020-11-08').getTime())
   })
 
-  it('should convert a nested json property\'s number string to actual number', () => {
-    const property = {
-      type: 'mixed',
-      propertyPath: 'jsonField.nested',
-      isArray: false,
-      subProperties: [{
-        propertyPath: 'jsonField.nested.number',
-        type: 'number',
-      }],
+  it(
+    'should convert a nested json property\'s number string to actual number',
+    () => {
+      const property = {
+        type: 'mixed',
+        propertyPath: 'jsonField.nested',
+        isArray: false,
+        subProperties: [{
+          propertyPath: 'jsonField.nested.number',
+          type: 'number',
+        }],
+      }
+
+      const convertedJson = convertNestedParam(jsonField, property as any)
+
+      expect(convertedJson.nested.number).toBe(456)
     }
+  )
 
-    const convertedJson = convertNestedParam(jsonField, property as any)
+  it(
+    'should convert a nested json array property\'s number string to actual number',
+    () => {
+      const property = {
+        type: 'mixed',
+        propertyPath: 'jsonField.nestedList',
+        isArray: true,
+        subProperties: [{
+          propertyPath: 'jsonField.nestedList.number',
+          type: 'number',
+        }],
+      }
 
-    expect(convertedJson.nested.number).to.equal(456)
-  })
+      const convertedJson = convertNestedParam(jsonField, property as any)
 
-  it('should convert a nested json array property\'s number string to actual number', () => {
-    const property = {
-      type: 'mixed',
-      propertyPath: 'jsonField.nestedList',
-      isArray: true,
-      subProperties: [{
-        propertyPath: 'jsonField.nestedList.number',
-        type: 'number',
-      }],
+      expect(convertedJson.nestedList[0].number).toBe(789)
+      expect(convertedJson.nestedList[1].number).toBe(111)
     }
-
-    const convertedJson = convertNestedParam(jsonField, property as any)
-
-    expect(convertedJson.nestedList[0].number).to.equal(789)
-    expect(convertedJson.nestedList[1].number).to.equal(111)
-  })
+  )
 })

@@ -1,14 +1,12 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
-import { expect } from 'chai'
-import sinon from 'sinon'
-import ActionDecorator from './action-decorator'
+import ActionDecorator from './action-decorator';
 import AdminJS from '../../../adminjs'
 import BaseResource from '../../adapters/resource/base-resource'
 import { ActionRequest, ActionContext, ActionResponse, Before, After } from '../../actions/action.interface'
 import ForbiddenError from '../../utils/errors/forbidden-error'
 import ValidationError from '../../utils/errors/validation-error'
 
-describe('ActionDecorator', function () {
+describe('ActionDecorator', () => {
   const request = { response: true } as unknown as ActionRequest
   let admin: AdminJS
   let resource: BaseResource
@@ -16,20 +14,20 @@ describe('ActionDecorator', function () {
   let action: ActionDecorator
   let handler: sinon.SinonStub<any, Promise<ActionResponse>>
 
-  beforeEach(function () {
+  beforeEach(() => {
     admin = sinon.createStubInstance(AdminJS)
     resource = sinon.createStubInstance(BaseResource)
     action = { name: 'myAction' } as ActionDecorator
     context = { resource, _admin: admin, action } as ActionContext
-    handler = sinon.stub()
+    handler = jest.fn()
   })
 
-  afterEach(function () {
-    sinon.restore()
+  afterEach(() => {
+    jest.restoreAllMocks()
   })
 
-  describe('#before', function () {
-    it('calls all functions if they were given as an array', async function () {
+  describe('#before', () => {
+    it('calls all functions if they were given as an array', async () => {
       // 3 hooks one adding response1 key and the other adding response2 key
       // and finally one async adding response3
       const before = [
@@ -48,7 +46,7 @@ describe('ActionDecorator', function () {
 
       const ret = await decorator.invokeBeforeHook({} as ActionRequest, {} as ActionContext)
 
-      expect(ret).to.deep.eq({
+      expect(ret).toEqual({
         response1: true,
         response2: true,
         response3: true,
@@ -56,8 +54,8 @@ describe('ActionDecorator', function () {
     })
   })
 
-  describe('#after', function () {
-    it('calls all functions if they were given as an array', async function () {
+  describe('#after', () => {
+    it('calls all functions if they were given as an array', async () => {
       // 2 hooks one adding response1 key and the other adding response2 key
       const after = [
         () => ({ response1: true }),
@@ -79,7 +77,7 @@ describe('ActionDecorator', function () {
         {} as ActionContext,
       )
 
-      expect(ret).to.deep.eq({
+      expect(ret).toEqual({
         response1: true,
         response2: true,
         response3: true,
@@ -87,10 +85,10 @@ describe('ActionDecorator', function () {
     })
   })
 
-  describe('#handler', function () {
-    it('calls the before action when it is given', async function () {
+  describe('#handler', () => {
+    it('calls the before action when it is given', async () => {
       const mockedRequest = { response: true }
-      const before = sinon.stub().returns(mockedRequest)
+      const before = jest.fn().mockReturnValue(mockedRequest)
 
       const decorator = new ActionDecorator({
         action: { before, handler, name: 'myAction', actionType: 'resource' },
@@ -100,16 +98,14 @@ describe('ActionDecorator', function () {
 
       await decorator.handler(request, 'res', context)
 
-      expect(before).to.have.been.calledWith(request)
-      expect(handler).to.have.been.calledWith(
-        sinon.match(mockedRequest),
-      )
+      expect(before).toBeCalledWith(request)
+      expect(handler).toBeCalledWith(expect.objectContaining(mockedRequest))
     })
 
-    it('calls the after action when it is given', async function () {
+    it('calls the after action when it is given', async () => {
       const modifiedData = { records: false }
       const data = {}
-      const after = sinon.stub().returns(modifiedData)
+      const after = jest.fn().mockReturnValue(modifiedData)
       handler = handler.resolves(data)
       const decorator = new ActionDecorator({
         action: { name: 'myAction', handler, after, actionType: 'resource' },
@@ -119,14 +115,14 @@ describe('ActionDecorator', function () {
 
       const ret = await decorator.handler(request, 'res', context)
 
-      expect(ret).to.equal(modifiedData)
-      expect(handler).to.have.been.called
-      expect(after).to.have.been.calledWith(data)
+      expect(ret).toBe(modifiedData)
+      expect(handler).toBeCalled()
+      expect(after).toBeCalledWith(data)
     })
 
-    it('returns forbidden error when its thrown', async function () {
+    it('returns forbidden error when its thrown', async () => {
       const errorMessage = 'you cannot edit this resource'
-      const before = sinon.stub().throws(new ForbiddenError(errorMessage))
+      const before = jest.fn().throws(new ForbiddenError(errorMessage))
 
       const decorator = new ActionDecorator({
         action: { before, handler, name: 'myAction', actionType: 'record' },
@@ -136,43 +132,46 @@ describe('ActionDecorator', function () {
 
       const ret = await decorator.handler(request, 'res', context)
 
-      expect(before).to.have.been.calledWith(request)
-      expect(ret).to.have.property('notice')
-      expect(ret.notice).to.deep.equal({
+      expect(before).toBeCalledWith(request)
+      expect(ret).toHaveProperty('notice')
+      expect(ret.notice).toEqual({
         message: errorMessage,
         type: 'error',
       })
-      expect(handler).not.to.have.been.called
+      expect(handler).not.toBeCalled()
     })
 
-    it('returns record with validation errors when they are thrown', async function () {
-      const errors = {
-        email: {
-          message: 'Wrong email',
-          type: 'notGood',
-        },
+    it(
+      'returns record with validation errors when they are thrown',
+      async () => {
+        const errors = {
+          email: {
+            message: 'Wrong email',
+            type: 'notGood',
+          },
+        }
+        const notice = { message: 'There are validation errors', type: 'validationError' }
+        const before = jest.fn().throws(new ValidationError(errors, notice))
+
+        const decorator = new ActionDecorator({
+          action: { before, handler, name: 'myAction', actionType: 'record' },
+          admin,
+          resource,
+        })
+
+        const ret = await decorator.handler(request, 'res', context)
+
+        expect(before).toBeCalledWith(request)
+        expect(ret).toHaveProperty('notice')
+        expect(ret.notice).toEqual({
+          message: notice.message,
+          type: 'error',
+        })
+        expect(ret).toHaveProperty('record')
+        expect(ret.record).toHaveProperty('errors')
+        expect(ret.record.errors).toEqual(errors)
+        expect(handler).not.toBeCalled()
       }
-      const notice = { message: 'There are validation errors', type: 'validationError' }
-      const before = sinon.stub().throws(new ValidationError(errors, notice))
-
-      const decorator = new ActionDecorator({
-        action: { before, handler, name: 'myAction', actionType: 'record' },
-        admin,
-        resource,
-      })
-
-      const ret = await decorator.handler(request, 'res', context)
-
-      expect(before).to.have.been.calledWith(request)
-      expect(ret).to.have.property('notice')
-      expect(ret.notice).to.deep.equal({
-        message: notice.message,
-        type: 'error',
-      })
-      expect(ret).to.have.property('record')
-      expect(ret.record).to.have.property('errors')
-      expect(ret.record.errors).to.deep.equal(errors)
-      expect(handler).not.to.have.been.called
-    })
+    )
   })
 })

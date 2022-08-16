@@ -1,4 +1,3 @@
-import { expect } from 'chai'
 import requestParser from './request-parser'
 import { ActionRequest } from '../../actions/action.interface'
 import BaseResource from '../../adapters/resource/base-resource'
@@ -12,36 +11,36 @@ const buildResourceWithProperty = (key, property) => {
 
 let resource
 
-describe('RequestParser', function () {
+describe('RequestParser', () => {
   const baseRequest: ActionRequest = {
     params: { resourceId: 'resourceId', action: 'edit' },
     method: 'post',
     payload: {},
   }
 
-  describe('boolean values', function () {
-    beforeEach(function () {
+  describe('boolean values', () => {
+    beforeEach(() => {
       resource = buildResourceWithProperty('isHired', {
         type: () => 'boolean',
       })
     })
 
-    it('sets value to `false` when empty string is given', function () {
+    it('sets value to `false` when empty string is given', () => {
       const request = { ...baseRequest, payload: { isHired: '' } }
 
-      expect(requestParser(request, resource).payload?.isHired).to.be.false
+      expect(requestParser(request, resource).payload?.isHired).toBe(false)
     })
 
-    it('changes "true" string to true', function () {
+    it('changes "true" string to true', () => {
       const request = { ...baseRequest, payload: { isHired: 'true' } }
 
-      expect(requestParser(request, resource).payload?.isHired).to.be.true
+      expect(requestParser(request, resource).payload?.isHired).toBe(true)
     })
 
-    it('changes "false" string to true', function () {
+    it('changes "false" string to true', () => {
       const request = { ...baseRequest, payload: { isHired: 'false' } }
 
-      expect(requestParser(request, resource).payload?.isHired).to.be.false
+      expect(requestParser(request, resource).payload?.isHired).toBe(false)
     })
   })
 })

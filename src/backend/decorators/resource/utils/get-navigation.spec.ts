@@ -1,4 +1,3 @@
-import { expect } from 'chai'
 import { ResourceOptions } from '..'
 
 import { getNavigation, DatabaseData, getIcon } from './get-navigation'
@@ -23,7 +22,7 @@ describe('.getNavigation', () => {
   it('returns parent with icon when no options are given', () => {
     resourceOptions.navigation = undefined
 
-    expect(getNavigation(resourceOptions, defaultDatabase)).to.deep.eq({
+    expect(getNavigation(resourceOptions, defaultDatabase)).toEqual({
       icon: mappedIcon,
       name: databaseName,
       show: true,
@@ -33,35 +32,38 @@ describe('.getNavigation', () => {
   it('returns null when options are set to null', () => {
     resourceOptions.navigation = null
 
-    expect(getNavigation(resourceOptions, defaultDatabase)).to.be.null
+    expect(getNavigation(resourceOptions, defaultDatabase)).toBeNull()
   })
 
   it('returns show false when options are set to false', () => {
     resourceOptions.navigation = false
 
-    expect(getNavigation(resourceOptions, defaultDatabase)).to.deep.eq({
+    expect(getNavigation(resourceOptions, defaultDatabase)).toEqual({
       name: null,
       icon: '',
       show: false,
     })
   })
 
-  it('returns parent with a default icon when options was set as a string', () => {
-    const parentName = 'my navigation name'
-    resourceOptions.navigation = parentName
+  it(
+    'returns parent with a default icon when options was set as a string',
+    () => {
+      const parentName = 'my navigation name'
+      resourceOptions.navigation = parentName
 
-    expect(getNavigation(resourceOptions, defaultDatabase)).to.deep.eq({
-      icon: mappedIcon,
-      name: parentName,
-      show: true,
-    })
-  })
+      expect(getNavigation(resourceOptions, defaultDatabase)).toEqual({
+        icon: mappedIcon,
+        name: parentName,
+        show: true,
+      })
+    }
+  )
 
   it('returns empty parent with an icon when this was set in options', () => {
     const icon = 'Car'
     resourceOptions.navigation = { icon, name: null }
 
-    expect(getNavigation(resourceOptions, defaultDatabase)).to.deep.eq({
+    expect(getNavigation(resourceOptions, defaultDatabase)).toEqual({
       icon,
       name: null,
       show: true,
@@ -72,7 +74,7 @@ describe('.getNavigation', () => {
     const icon = 'Car'
     resourceOptions.parent = { icon, name: null }
 
-    expect(getNavigation(resourceOptions, defaultDatabase)).to.deep.eq({
+    expect(getNavigation(resourceOptions, defaultDatabase)).toEqual({
       icon,
       name: null,
       show: true,

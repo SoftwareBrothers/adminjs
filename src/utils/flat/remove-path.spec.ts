@@ -1,4 +1,3 @@
-import { expect } from 'chai'
 import { removePath } from './remove-path'
 
 describe('removePath', () => {
@@ -23,13 +22,13 @@ describe('removePath', () => {
   })
 
   it('removes regular property', () => {
-    expect(removePath(params, 'name')).not.to.have.keys('name')
+    expect(Object.keys(removePath(params, 'name'))).not.toContain('name')
   })
 
   it('removes element from the array and updates other indexes', () => {
     const newParams = removePath(params, 'property.1')
 
-    expect(newParams).to.deep.equal({
+    expect(newParams).toEqual({
       name: 'value',
       'notPopulated.0': 'val1',
       'notPopulated.1': 'val2',
@@ -48,7 +47,7 @@ describe('removePath', () => {
   it('removes parent element from the array and updates other indexes', () => {
     const newParams = removePath(params, 'property.3.nested.3.some')
 
-    expect(newParams).to.deep.equal({
+    expect(newParams).toEqual({
       name: 'value',
       'notPopulated.0': 'val1',
       'notPopulated.1': 'val2',
@@ -68,7 +67,7 @@ describe('removePath', () => {
     let newParams = removePath(params, 'notPopulated.0')
     newParams = removePath(newParams, 'notPopulated.0')
 
-    expect(newParams).to.deep.equal({
+    expect(newParams).toEqual({
       name: 'value',
       notPopulated: [],
       'property.0': 'val1',

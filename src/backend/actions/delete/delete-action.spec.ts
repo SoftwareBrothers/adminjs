@@ -1,6 +1,5 @@
 import chai, { expect } from 'chai'
 import chaiAsPromised from 'chai-as-promised'
-import sinon from 'sinon'
 
 import DeleteAction from './delete-action'
 import { ActionContext, ActionRequest, ActionHandler, RecordActionResponse } from '../action.interface'
@@ -16,7 +15,7 @@ import { CurrentAdmin } from '../../../current-admin.interface'
 
 chai.use(chaiAsPromised)
 
-describe('DeleteAction', function () {
+describe('DeleteAction', () => {
   let data: ActionContext
   const request = {
     params: {},
@@ -24,42 +23,42 @@ describe('DeleteAction', function () {
   } as ActionRequest
   let response: any
 
-  describe('.handler', function () {
-    afterEach(function () {
-      sinon.restore()
+  describe('.handler', () => {
+    afterEach(() => {
+      jest.restoreAllMocks()
     })
 
-    beforeEach(async function () {
+    beforeEach(async () => {
       data = {
         _admin: sinon.createStubInstance(AdminJS),
-        translateMessage: sinon.stub<any, string>().returns('translatedMessage'),
+        translateMessage: jest.fn().mockReturnValue('translatedMessage'),
         h: sinon.createStubInstance(ViewHelpers),
         resource: sinon.createStubInstance(BaseResource),
         action: sinon.createStubInstance(ActionDecorator) as unknown as ActionDecorator,
       } as unknown as ActionContext
     })
 
-    it('throws error when no records are given', async function () {
+    it('throws error when no records are given', async () => {
       await expect(
         (DeleteAction.handler as ActionHandler<RecordActionResponse>)(request, response, data),
       ).to.rejectedWith(NotFoundError)
     })
 
-    context('A record has been selected', function () {
+    describe('A record has been selected', () => {
       let record: BaseRecord
       let recordJSON: RecordJSON
 
-      beforeEach(function () {
+      beforeEach(() => {
         recordJSON = { id: 'someId' } as RecordJSON
         record = sinon.createStubInstance(BaseRecord, {
-          toJSON: sinon.stub<[(CurrentAdmin)?]>().returns(recordJSON),
+          toJSON: jest.fn().mockReturnValue(recordJSON),
         }) as unknown as BaseRecord
 
         request.params.recordId = recordJSON.id
         data.record = record
       })
 
-      it('returns deleted record, notice and redirectUrl', async function () {
+      it('returns deleted record, notice and redirectUrl', async () => {
         const actionResponse = await (
           DeleteAction.handler as ActionHandler<RecordActionResponse>
         )(request, response, data)
@@ -69,11 +68,11 @@ describe('DeleteAction', function () {
         expect(actionResponse).to.have.property('record')
       })
 
-      context('ValidationError is thrown by Resource.delete', function () {
-        it('returns error notice', async function () {
+      describe('ValidationError is thrown by Resource.delete', () => {
+        it('returns error notice', async () => {
           const errorMessage = 'test validation error'
           data.resource = sinon.createStubInstance(BaseResource, {
-            delete: sinon.stub().rejects(new ValidationError({}, { message: errorMessage })) as any,
+            delete: jest.fn().rejects(new ValidationError({}, { message: errorMessage })) as any,
           })
 
           const actionResponse = await (
@@ -88,22 +87,25 @@ describe('DeleteAction', function () {
           expect(actionResponse).to.have.property('record')
         })
 
-        it('returns error notice with default message when ValidationError has no baseError', async function () {
-          data.resource = sinon.createStubInstance(BaseResource, {
-            delete: sinon.stub().rejects(new ValidationError({})) as any,
-          })
+        it(
+          'returns error notice with default message when ValidationError has no baseError',
+          async () => {
+            data.resource = sinon.createStubInstance(BaseResource, {
+              delete: jest.fn().rejects(new ValidationError({})) as any,
+            })
 
-          const actionResponse = await (
-            DeleteAction.handler as ActionHandler<RecordActionResponse>
-          )(request, response, data)
+            const actionResponse = await (
+              DeleteAction.handler as ActionHandler<RecordActionResponse>
+            )(request, response, data)
 
-          expect(actionResponse).to.have.property('notice')
-          expect(actionResponse.notice).to.deep.equal({
-            message: 'translatedMessage',
-            type: 'error',
-          })
-          expect(actionResponse).to.have.property('record')
-        })
+            expect(actionResponse).to.have.property('notice')
+            expect(actionResponse.notice).to.deep.equal({
+              message: 'translatedMessage',
+              type: 'error',
+            })
+            expect(actionResponse).to.have.property('record')
+          }
+        )
       })
     })
   })

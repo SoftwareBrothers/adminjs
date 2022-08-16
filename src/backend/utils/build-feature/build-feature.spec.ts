@@ -1,10 +1,9 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
-import { expect } from 'chai'
-import { mergeResourceOptions } from '../build-feature'
+import { mergeResourceOptions } from '../build-feature';
 import { Before, After, ActionResponse, ActionHandler } from '../../actions/action.interface'
 
-describe('mergeResourceOptions', function () {
-  it('chaines before hooks', function () {
+describe('mergeResourceOptions', () => {
+  it('chaines before hooks', () => {
     const existingOptions = {
       actions: {
         new: {
@@ -31,7 +30,7 @@ describe('mergeResourceOptions', function () {
       },
     }
 
-    expect(mergeResourceOptions(existingOptions, newOptions)).to.deep.eq({
+    expect(mergeResourceOptions(existingOptions, newOptions)).toEqual({
       actions: {
         new: {
           before: [
@@ -57,7 +56,7 @@ describe('mergeResourceOptions', function () {
     })
   })
 
-  it('chaines properties', function () {
+  it('chaines properties', () => {
     const existingOptions = {
       properties: {
         password: {
@@ -75,7 +74,7 @@ describe('mergeResourceOptions', function () {
       },
     }
 
-    expect(mergeResourceOptions(existingOptions, newOptions)).to.deep.eq({
+    expect(mergeResourceOptions(existingOptions, newOptions)).toEqual({
       properties: {
         ...existingOptions.properties,
         ...newOptions.properties,
@@ -83,7 +82,7 @@ describe('mergeResourceOptions', function () {
     })
   })
 
-  it('merges falsey options', function () {
+  it('merges falsey options', () => {
     const existingOptions = {
       navigation: {
         name: 'db',
@@ -93,7 +92,7 @@ describe('mergeResourceOptions', function () {
       navigation: false,
     }
 
-    expect(mergeResourceOptions(existingOptions, newOptions)).to.deep.eq({
+    expect(mergeResourceOptions(existingOptions, newOptions)).toEqual({
       navigation: false,
     })
   })
