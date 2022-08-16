@@ -15,8 +15,7 @@
       "baseUrl": ".",
       "skipLibCheck": true,
       "types": [
-        "node",
-        "mocha"
+        "node"
       ]
   },
   "include": [
