@@ -13,7 +13,8 @@
     "lint": "eslint './spec/**/*' './src/**/*' './*'",
     "cspell": "cspell src/**/*.ts src/**/*.js src/**/*.tsx src/**/*.jsx",
     "check:all": "yarn build && yarn cspell && yarn lint && yarn test",
-    "release": "semantic-release"
+    "release": "semantic-release",
+    "prepare": "npx husky install"
   },
   "repository": {
     "type": "git",
@@ -31,7 +32,7 @@
   ],
   "husky": {
     "hooks": {
-      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+      "commit-msg": "npx husky install && commitlint -E HUSKY_GIT_PARAMS"
     }
   },
   "author": "Wojciech Krysiak",
