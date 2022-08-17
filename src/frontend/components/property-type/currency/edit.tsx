@@ -19,7 +19,7 @@ const Edit: FC<CurrencyEditPropertyProps> = (props) => {
         id={property.path}
         initial={propValue}
         options={property.props}
-        onChange={(value: string): void => onChange(property.path, value)}
+        onChange={(value) => onChange(property.path, value)}
       />
       <FormMessage>{error && error.message}</FormMessage>
     </FormGroup>

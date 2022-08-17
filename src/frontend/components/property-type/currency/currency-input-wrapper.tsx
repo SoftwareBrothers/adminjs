@@ -6,13 +6,13 @@ export type CurrencyInputWrapperProps = {
   initial: string;
   options?: Record<string, any>;
   // eslint-disable-next-line @typescript-eslint/ban-types
-  onChange: Function;
+  onChange: (value: string | undefined) => void;
 } & CurrencyInputProps
 
 export const CurrencyInputWrapper: FC<CurrencyInputWrapperProps> = (props) => {
   const { id, initial, onChange, options } = props
-  const [value, setValue] = useState(initial)
-  const onValueChange = (currentValue: string): void => {
+  const [value, setValue] = useState<string | undefined>(initial)
+  const onValueChange = (currentValue: string | undefined): void => {
     setValue(currentValue)
     onChange(currentValue)
   }
