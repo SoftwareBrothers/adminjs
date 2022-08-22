@@ -349,7 +349,10 @@ export type BrandingOptions = {
    * @new since 6.0.0
    */
   withMadeWithLove?: boolean;
-
+  /**
+   * Optional additional text below the logo/companyName.
+   */
+  additionalText?: string;
   /**
    * URL to a favicon
    */
