@@ -4,8 +4,6 @@ import { BrowserRouter } from 'react-router-dom'
 import { ThemeProvider } from 'styled-components'
 import { initReactI18next } from 'react-i18next'
 import i18n from 'i18next'
-import { DndProvider } from 'react-dnd'
-import { HTML5Backend } from 'react-dnd-html5-backend'
 
 import App from './components/application'
 import BasePropertyComponent from './components/property-type'
@@ -40,11 +38,9 @@ i18n
 const Application = (
   <Provider store={store}>
     <ThemeProvider theme={theme}>
-      <DndProvider backend={HTML5Backend}>
-        <BrowserRouter>
-          <App />
-        </BrowserRouter>
-      </DndProvider>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
     </ThemeProvider>
   </Provider>
 )

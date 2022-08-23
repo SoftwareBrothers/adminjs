@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 const { babel } = require('@rollup/plugin-babel')
-const alias = require('@rollup/plugin-alias')
 const commonjs = require('@rollup/plugin-commonjs')
 const { nodeResolve: resolve } = require('@rollup/plugin-node-resolve')
 const replace = require('@rollup/plugin-replace')
@@ -61,12 +60,6 @@ const extensions = ['.mjs', '.js', '.jsx', '.json', '.ts', '.tsx', '.scss']
 
 const plugins = ({ babelConfig = {}, commonJSConfig = {}, minify = false } = {}) => {
   const pluginStack = [
-    alias({
-      entries: [
-        { find: 'react/jsx-runtime.js', replacement: require.resolve('react/jsx-runtime') },
-        { find: 'react/jsx-dev-runtime.js', replacement: require.resolve('react/jsx-dev-runtime') },
-      ],
-    }),
     resolve({
       extensions,
       mainFields: ['browser', 'main', 'module', 'jsnext:main'],
