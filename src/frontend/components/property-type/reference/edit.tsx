@@ -1,10 +1,12 @@
-import React, { FC, useState, useEffect } from 'react'
+import React, { FC, useState, useEffect, useMemo, memo } from 'react'
 import { FormGroup, FormMessage, SelectAsync } from '@adminjs/design-system'
 
 import ApiClient from '../../../utils/api-client'
 import { EditPropertyProps, SelectRecord } from '../base-property-props'
 import { RecordJSON } from '../../../interfaces'
 import { PropertyLabel } from '../utils/property-label'
+import { flat } from '../../../../utils/flat'
+import { recordPropertyIsEqual } from '../record-property-is-equal'
 
 type CombinedProps = EditPropertyProps
 type SelectRecordEnhanced = SelectRecord & {
@@ -42,20 +44,15 @@ const Edit: FC<CombinedProps> = (props) => {
   }
   const error = record?.errors[property.path]
 
-  const selectedId = record?.params[property.path] as string | undefined
+  const selectedId = useMemo(
+    () => flat.get(record?.params, property.path) as string | undefined,
+    [record],
+  )
   const [loadedRecord, setLoadedRecord] = useState<RecordJSON | undefined>()
   const [loadingRecord, setLoadingRecord] = useState(0)
-  const selectedValue = record?.populated[property.path] ?? loadedRecord
-  const selectedOption = (selectedId && selectedValue) ? {
-    value: selectedValue.id,
-    label: selectedValue.title,
-  } : {
-    value: '',
-    label: '',
-  }
 
   useEffect(() => {
-    if (!selectedValue && selectedId) {
+    if (selectedId) {
       setLoadingRecord((c) => c + 1)
       const api = new ApiClient()
       api.recordAction({
@@ -68,7 +65,16 @@ const Edit: FC<CombinedProps> = (props) => {
         setLoadingRecord((c) => c - 1)
       })
     }
-  }, [selectedValue, selectedId, resourceId])
+  }, [selectedId, resourceId])
+
+  const selectedValue = loadedRecord
+  const selectedOption = (selectedId && selectedValue) ? {
+    value: selectedValue.id,
+    label: selectedValue.title,
+  } : {
+    value: '',
+    label: '',
+  }
 
   return (
     <FormGroup error={Boolean(error)}>
@@ -89,4 +95,4 @@ const Edit: FC<CombinedProps> = (props) => {
   )
 }
 
-export default Edit
+export default memo(Edit, recordPropertyIsEqual)
