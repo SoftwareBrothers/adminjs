@@ -1590,6 +1590,19 @@
     minimatch "^3.1.2"
     strip-json-comments "^3.1.1"
 
+"@hello-pangea/dnd@^16.0.0":
+  version "16.0.0"
+  resolved "https://registry.yarnpkg.com/@hello-pangea/dnd/-/dnd-16.0.0.tgz#b97791286395924ffbdb4cd0f27f06f2985766d5"
+  integrity sha512-FprEzwrGMvyclVf8pWTrPbUV7/ZFt6NmL76ePj1mMyZG195htDUkmvET6CBwKJTXmV+AE/GyK4Lv3wpCqrlY/g==
+  dependencies:
+    "@babel/runtime" "^7.18.9"
+    css-box-model "^1.2.1"
+    memoize-one "^6.0.0"
+    raf-schd "^4.0.3"
+    react-redux "^8.0.2"
+    redux "^4.2.0"
+    use-memo-one "^1.1.2"
+
 "@humanwhocodes/config-array@^0.10.4":
   version "0.10.4"
   resolved "https://registry.yarnpkg.com/@humanwhocodes/config-array/-/config-array-0.10.4.tgz#01e7366e57d2ad104feea63e72248f22015c520c"
@@ -1816,19 +1829,6 @@
   version "2.11.6"
   resolved "https://registry.yarnpkg.com/@popperjs/core/-/core-2.11.6.tgz#cee20bd55e68a1720bdab363ecf0c821ded4cd45"
   integrity sha512-50/17A98tWUfQ176raKiOGXuYpLyyVMkxxG6oylzL3BPOlA6ADGdK7EYunSa4I064xerltq9TGXs8HmOk5E+vw==
-
-"@react-forked/dnd@^15.0.0":
-  version "15.0.0"
-  resolved "https://registry.yarnpkg.com/@react-forked/dnd/-/dnd-15.0.0.tgz#7fcf1200486fa2a194153b1a0cebbaa642f99cf1"
-  integrity sha512-8AYjDxtlZzZcXlXjWv9B8ZiRzcHsn4xjvzA+FIo0u7EGuL1qlOrkvu13eHuBX33x4S4xWdsMYxY3EBpgt4qmHQ==
-  dependencies:
-    "@babel/runtime" "^7.18.9"
-    css-box-model "^1.2.1"
-    memoize-one "^6.0.0"
-    raf-schd "^4.0.3"
-    react-redux "^8.0.2"
-    redux "^4.2.0"
-    use-memo-one "^1.1.2"
 
 "@rollup/plugin-babel@^5.2.1":
   version "5.2.1"
