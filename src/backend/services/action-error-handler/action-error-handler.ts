@@ -69,5 +69,4 @@ const actionErrorHandler = (
   throw error
 }
 
-
 export default actionErrorHandler

@@ -7,6 +7,10 @@
     {
       "name": "beta",
       "prerelease": true
+    },
+    {
+      "name": "scalerr",
+      "prerelease": true
     }
   ],
   "plugins": [
@@ -30,13 +34,6 @@
       "ticketPrefixes": [ "AB" ],
       "released": true,
       "setReleaseDate": true
-    }],
-    [
-      "semantic-release-slack-bot",
-      {
-        "notifyOnSuccess": true,
-        "notifyOnFail": false
-      }
-    ]
+    }]
   ]
 }

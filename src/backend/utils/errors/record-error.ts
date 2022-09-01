@@ -1,10 +1,5 @@
 import { ErrorTypeEnum } from '../../../utils/error-type.enum'
 
-/**
- * Record Error
- * @alias RecordError
- * @memberof ValidationError
- */
 export type RecordError = {
   /**
    * error type (i.e. required)
@@ -16,4 +11,5 @@ export type RecordError = {
   message: string;
 }
 
+// eslint-disable-next-line no-undef
 export default RecordError
