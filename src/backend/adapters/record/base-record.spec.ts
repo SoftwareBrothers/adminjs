@@ -8,7 +8,8 @@ import { ParamsType } from './params.type'
 import BaseRecord from './base-record'
 import BaseResource from '../resource/base-resource'
 import BaseProperty from '../property/base-property'
-import ValidationError, { PropertyErrors, RecordError } from '../../utils/errors/validation-error'
+import ValidationError, { PropertyErrors } from '../../utils/errors/validation-error'
+import RecordError from '../../utils/errors/record-error'
 import { ActionDecorator, ResourceDecorator } from '../../decorators'
 
 chai.use(chaiAsPromised)

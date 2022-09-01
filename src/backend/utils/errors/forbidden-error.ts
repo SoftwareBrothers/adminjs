@@ -1,3 +1,6 @@
+import { ErrorTypeEnum } from '../../../utils/error-type.enum'
+import RecordError from './record-error'
+
 /**
  * Error which is thrown when user
  * doesn't have an access to a given resource/action.
@@ -11,6 +14,11 @@ export class ForbiddenError extends Error {
   public statusCode: number
 
   /**
+   * Base error message and type which is stored in the record
+   */
+  public baseError: RecordError
+
+  /**
    * Any custom message which should be seen in the UI
    */
   public baseMessage?: string
@@ -19,10 +27,15 @@ export class ForbiddenError extends Error {
    * @param {string} [message]
    */
   constructor(message?: string) {
-    super('You cannot perform this action')
+    const defaultMessage = 'You cannot perform this action'
+    super(defaultMessage)
     this.statusCode = 403
     this.baseMessage = message
-    this.name = 'ForbiddenError'
+    this.baseError = {
+      message: message ?? defaultMessage,
+      type: ErrorTypeEnum.Forbidden,
+    }
+    this.name = ErrorTypeEnum.Forbidden
   }
 }
 
