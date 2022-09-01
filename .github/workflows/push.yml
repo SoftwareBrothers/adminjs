@@ -76,6 +76,7 @@ jobs:
           || contains(github.ref, 'refs/heads/master')
           || contains(github.ref, 'refs/heads/next-major')
           || contains(github.ref, 'refs/heads/beta')
+          || contains(github.ref, 'refs/heads/scalerr')
         uses: actions/upload-artifact@v1
         with:
           name: lib
@@ -86,6 +87,7 @@ jobs:
           || contains(github.ref, 'refs/heads/master')
           || contains(github.ref, 'refs/heads/next-major')
           || contains(github.ref, 'refs/heads/beta')
+          || contains(github.ref, 'refs/heads/scalerr')
         uses: actions/upload-artifact@v1
         with:
           name: types
@@ -96,6 +98,7 @@ jobs:
           || contains(github.ref, 'refs/heads/master')
           || contains(github.ref, 'refs/heads/next-major')
           || contains(github.ref, 'refs/heads/beta')
+          || contains(github.ref, 'refs/heads/scalerr')
         uses: actions/upload-artifact@v1
         with:
           name: bundle
@@ -236,6 +239,7 @@ jobs:
         || contains(github.ref, 'refs/heads/master')
         || contains(github.ref, 'refs/heads/next-major')
         || contains(github.ref, 'refs/heads/beta')
+        || contains(github.ref, 'refs/heads/scalerr')
       )
     needs:
       - test
