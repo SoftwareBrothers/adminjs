@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useCallback } from 'react'
-
 import { useParams } from 'react-router'
 import { Loader } from '@adminjs/design-system'
 
+import { ErrorTypeEnum } from '../../../utils/error-type.enum'
 import BaseActionComponent from '../app/base-action-component'
 import ApiClient from '../../utils/api-client'
 import { RecordActionParams } from '../../../backend/utils/view-helpers/view-helpers'
@@ -36,7 +36,16 @@ const RecordAction: React.FC = () => {
       if (response.data.notice && response.data.notice.type === 'error') {
         addNotice(response.data.notice)
       }
-      setRecord(response.data.record)
+      if (
+        !response.data.record?.baseError?.type
+        || ![
+          ErrorTypeEnum.App,
+          ErrorTypeEnum.NotFound,
+          ErrorTypeEnum.Forbidden,
+        ].includes(response.data.record?.baseError?.type as ErrorTypeEnum)
+      ) {
+        setRecord(response.data.record)
+      }
     }).catch((error) => {
       addNotice({
         message: translateMessage('errorFetchingRecord', resourceId),
