@@ -1,7 +1,8 @@
 import { flat, GetOptions } from '../../../utils/flat'
 import { ParamsType } from './params.type'
 import BaseResource from '../resource/base-resource'
-import ValidationError, { RecordError, PropertyErrors } from '../../utils/errors/validation-error'
+import ValidationError, { PropertyErrors } from '../../utils/errors/validation-error'
+import RecordError from '../../utils/errors/record-error'
 import { RecordJSON } from '../../../frontend/interfaces'
 import { CurrentAdmin } from '../../../current-admin.interface'
 

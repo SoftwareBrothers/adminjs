@@ -6,7 +6,6 @@ import BaseResource from '../../adapters/resource/base-resource'
 import { CurrentAdmin } from '../../../current-admin.interface'
 import BaseRecord from '../../adapters/record/base-record'
 import ValidationError from '../../utils/errors/validation-error'
-
 import ActionErrorHandler from './action-error-handler'
 import ForbiddenError from '../../utils/errors/forbidden-error'
 import { ActionDecorator } from '../../decorators'
@@ -91,12 +90,15 @@ describe('ActionErrorHandler', function () {
   })
 
   it('returns record with forbidden error when ForbiddenError is thrown', function () {
-    const errorMessage = 'you cannot perform this action'
+    const errorMessage = 'You cannot perform this action'
     const error = new ForbiddenError(errorMessage)
 
     expect(ActionErrorHandler(error, context)).to.deep.equal({
       record: {
-        baseError: null,
+        baseError: {
+          message: errorMessage,
+          type: 'ForbiddenError',
+        },
         errors: {},
         params: {},
         populated: {},
@@ -111,13 +113,16 @@ describe('ActionErrorHandler', function () {
   })
 
   it('returns meta when ForbiddenError is thrown for the list action', function () {
-    const errorMessage = 'you cannot perform this action'
+    const errorMessage = 'You cannot perform this action'
     const error = new ForbiddenError(errorMessage)
     action.name = 'list'
 
     expect(ActionErrorHandler(error, context)).to.deep.equal({
       record: {
-        baseError: null,
+        baseError: {
+          message: errorMessage,
+          type: 'ForbiddenError',
+        },
         errors: {},
         params: {},
         populated: {},

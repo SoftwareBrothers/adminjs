@@ -1,19 +1,5 @@
-
-/**
- * Record Error
- * @alias RecordError
- * @memberof ValidationError
- */
-export type RecordError = {
-  /**
-   * error type (i.e. required)
-   */
-  type?: string;
-  /**
-   * human readable message
-   */
-  message: string;
-}
+import { ErrorTypeEnum } from '../../../utils/error-type.enum'
+import RecordError from './record-error'
 
 /**
  * Property Errors
@@ -54,7 +40,7 @@ export class ValidationError extends Error {
     this.statusCode = 400
     this.propertyErrors = propertyErrors
     this.baseError = baseError || null
-    this.name = 'ValidationError'
+    this.name = ErrorTypeEnum.Validation
   }
 }
 

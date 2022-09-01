@@ -3,6 +3,7 @@ import React, { useState, useEffect, useCallback } from 'react'
 import { useRouteMatch } from 'react-router'
 import { Loader } from '@adminjs/design-system'
 
+import { ErrorTypeEnum } from '../../../utils/error-type.enum'
 import BaseActionComponent from '../app/base-action-component'
 import ApiClient from '../../utils/api-client'
 import { RecordActionParams } from '../../../backend/utils/view-helpers/view-helpers'
@@ -17,6 +18,7 @@ import mergeRecordResponse from '../../hooks/use-record/merge-record-response'
 
 const api = new ApiClient()
 
+// eslint-disable-next-line react/function-component-definition
 const RecordAction: React.FC = () => {
   const [record, setRecord] = useState<RecordJSON>()
   const [loading, setLoading] = useState(true)
@@ -36,7 +38,16 @@ const RecordAction: React.FC = () => {
       if (response.data.notice && response.data.notice.type === 'error') {
         addNotice(response.data.notice)
       }
-      setRecord(response.data.record)
+      if (
+        !response.data.record?.baseError?.type
+        || ![
+          ErrorTypeEnum.App,
+          ErrorTypeEnum.NotFound,
+          ErrorTypeEnum.Forbidden,
+        ].includes(response.data.record?.baseError?.type as ErrorTypeEnum)
+      ) {
+        setRecord(response.data.record)
+      }
     }).catch((error) => {
       addNotice({
         message: translateMessage('errorFetchingRecord', resourceId),

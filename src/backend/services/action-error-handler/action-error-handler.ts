@@ -1,28 +1,38 @@
-import { ActionContext, ActionResponse } from '../../actions/action.interface'
-import ValidationError, { PropertyErrors, RecordError } from '../../utils/errors/validation-error'
+import { ActionContext, RecordActionResponse, BulkActionResponse } from '../../actions/action.interface'
+import ValidationError, { PropertyErrors } from '../../utils/errors/validation-error'
 import ForbiddenError from '../../utils/errors/forbidden-error'
+import NotFoundError from '../../utils/errors/not-found-error'
+import AppError from '../../utils/errors/app-error'
+import RecordError from '../../utils/errors/record-error'
 
 /**
  * @private
  * @classdesc
  * Function which catches all the errors thrown by the action hooks or handler
  */
-const actionErrorHandler = (error: any, context: ActionContext): ActionResponse => {
-  if (error instanceof ValidationError || error instanceof ForbiddenError) {
-    const { resource, record, currentAdmin, action } = context
+const actionErrorHandler = (
+  error: Error,
+  context: ActionContext,
+): RecordActionResponse | BulkActionResponse => {
+  if (
+    error instanceof ValidationError
+    || error instanceof ForbiddenError
+    || error instanceof NotFoundError
+    || error instanceof AppError
+  ) {
+    const { record, resource, currentAdmin, action } = context
 
+    const baseError: RecordError | null = error.baseError ?? null
     let baseMessage = ''
-    let baseError: RecordError | null = null
     let errors: PropertyErrors = {}
     let meta: any
 
     if (error instanceof ValidationError) {
       baseMessage = error.baseError?.message
         || context.translateMessage('thereWereValidationErrors', resource.id())
-      baseError = error.baseError ?? null
       errors = error.propertyErrors
     } else {
-      // Defaults to ForbiddenError
+      // ForbiddenError, NotFoundError, AppError
       baseMessage = error.baseMessage
         || context.translateMessage('anyForbiddenError', resource.id())
     }

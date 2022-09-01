@@ -9,6 +9,7 @@ import ConfigurationError from '../utils/errors/configuration-error'
 import NotFoundError from '../utils/errors/not-found-error'
 import { requestParser } from '../utils/request-parser'
 import { SearchActionResponse } from '../actions/search/search-action'
+import actionErrorHandler from '../services/action-error-handler/action-error-handler'
 
 /**
  * Controller responsible for the auto-generated API: `/admin_root/api/...`, where
@@ -143,10 +144,16 @@ class ApiController {
     let record = await actionContext.resource.findOne(recordId)
 
     if (!record) {
-      throw new NotFoundError([
-        `record with given id: "${recordId}" cannot be found in resource "${resourceId}"`,
-      ].join('\n'), 'Action#handler')
+      const missingRecordError = actionErrorHandler(
+        new NotFoundError([
+          `Record with given id: "${recordId}" cannot be found in resource "${resourceId}"`,
+        ].join('\n'), 'Action#handler'),
+        actionContext,
+      )
+
+      return missingRecordError as RecordActionResponse
     }
+
     [record] = await populator([record])
 
     actionContext.record = record
