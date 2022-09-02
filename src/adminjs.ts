@@ -2,6 +2,7 @@ import * as _ from 'lodash'
 import * as path from 'path'
 import * as fs from 'fs'
 import i18n, { i18n as I18n } from 'i18next'
+import { FC } from 'react'
 
 import { AdminJSOptionsWithDefault, AdminJSOptions } from './adminjs-options.interface'
 import BaseResource from './backend/adapters/resource/base-resource'
@@ -18,8 +19,9 @@ import { ListActionResponse } from './backend/actions/list/list-action'
 import { combineTranslations, Locale } from './locale/config'
 import { locales } from './locale'
 import { TranslateFunctions, createFunctions } from './utils/translate-functions.factory'
-import { OverridableComponent } from './frontend/utils/overridable-component'
 import { relativeFilePathResolver } from './utils/file-resolver'
+import { OverridableComponent } from './frontend/utils/overridable-component'
+import { getComponentHtml } from './backend/utils'
 
 const pkg = JSON.parse(fs.readFileSync(path.join(__dirname, '../package.json'), 'utf-8'))
 export const VERSION = pkg.version
@@ -42,6 +44,11 @@ type ActionsMap = {
   bulkDelete: Action<BulkActionResponse>;
   new: Action<RecordActionResponse>;
   list: Action<ListActionResponse>;
+}
+
+export type LoginOverride<T = Record<string, unknown>> = {
+  component: FC<T>;
+  props?: T;
 }
 
 export type Adapter = { Database: typeof BaseDatabase; Resource: typeof BaseResource }
@@ -82,6 +89,11 @@ class AdminJS {
    * AdminJS version
    */
   public static VERSION: string
+
+  /**
+   * Login override
+   */
+  private loginOverride?: LoginOverride
 
   /**
    * @param   {AdminJSOptions} options      Options passed to AdminJS
@@ -196,6 +208,19 @@ class AdminJS {
   }
 
   /**
+   * Allows you to override the default login view by providing your React components
+   * and custom props.
+   *
+   * @param  {Object} options
+   * @param  {String} options.component       Custom React component
+   * @param  {String} [options.props]         Props to be passed to React component
+   * @return {Promise<void>}
+   */
+  overrideLogin({ component, props }: LoginOverride): void {
+    this.loginOverride = { component, props: props ?? {} }
+  }
+
+  /**
    * Renders an entire login page with email and password fields
    * using {@link Renderer}.
    *
@@ -210,6 +235,15 @@ class AdminJS {
    * @return {Promise<string>}                HTML of the rendered page
    */
   async renderLogin({ action, errorMessage }): Promise<string> {
+    if (this.loginOverride) {
+      const { component, props = {} } = this.loginOverride
+      const mergedProps = {
+        action,
+        message: errorMessage,
+        ...props,
+      }
+      return getComponentHtml(component, mergedProps, this)
+    }
     return loginTemplate(this, { action, errorMessage })
   }
 
