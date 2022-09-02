@@ -1,4 +1,5 @@
 export * from './build-feature'
+export * from './custom-views'
 export * from './errors'
 export * from './filter'
 export * from './layout-element-parser'

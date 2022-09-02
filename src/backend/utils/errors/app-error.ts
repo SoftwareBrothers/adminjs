@@ -28,11 +28,10 @@ export class AppError extends Error {
   public data?: Record<string, unknown>
 
   /**
-   * @param   {string}  fnName  name of the function, base on which error will
-   * print on the output link to the method documentation.
-   * @param {string} message
+   * @param {string} message    a message to be shared with the client
+   * @param {string} data       additional data to be shared with the client
    */
-  constructor(message, data) {
+  constructor(message: string, data?: Record<string, unknown>) {
     super(message)
     this.statusCode = 400
     this.baseMessage = message
