@@ -32,7 +32,6 @@ const RecordAction: React.FC = () => {
   const fetchRecord = (): void => {
     setLoading(true)
     api.recordAction(params as RecordActionParams).then((response) => {
-      setLoading(false)
       if (response.data.notice && response.data.notice.type === 'error') {
         addNotice(response.data.notice)
       }
@@ -52,6 +51,8 @@ const RecordAction: React.FC = () => {
         type: 'error',
       })
       throw error
+    }).finally(() => {
+      setLoading(false)
     })
   }
 
