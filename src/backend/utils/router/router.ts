@@ -132,7 +132,7 @@ export const Router: RouterType = {
     action: 'bulkAction',
   }, {
     method: 'GET',
-    path: '/api/resources/{resourceId}/search/',
+    path: '/api/resources/{resourceId}/search',
     Controller: ApiController,
     action: 'search',
   }, {
