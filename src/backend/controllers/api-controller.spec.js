@@ -20,7 +20,7 @@ describe('ApiController', function () {
       handler: this.sinon.stub().returns({ record: this.recordStub }),
       isAccessible: this.sinon.stub().returns(true),
     }
-    const property = { name: () => this.fieldName, reference: () => false }
+    const property = { name: () => this.fieldName, reference: () => false, isId: () => true, type: () => 'string' }
     this.resourceStub = {
       id: this.sinon.stub().returns('someId'),
       decorate: this.sinon.stub().returns({

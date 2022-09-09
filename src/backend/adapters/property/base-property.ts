@@ -24,7 +24,11 @@ const TITLE_COLUMN_NAMES = ['title', 'name', 'subject', 'email']
 export type PropertyType =
   'string' | 'float' | 'number' | 'boolean' |
   'date' | 'datetime' | 'mixed' | 'reference' |
+<<<<<<< HEAD
   'richtext' | 'textarea' | 'password';
+=======
+  'richtext' | 'textarea' | 'password' | 'currency' | 'phone' | 'uuid';
+>>>>>>> 9f19ad46 (fix: add uuid type, validate recordId type in recordAction)
 
 // description
 type BasePropertyAttrs = {
