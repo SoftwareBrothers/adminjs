@@ -144,7 +144,7 @@ class ApiController {
     }
 
     const idProperty = Object.values(actionContext.resource.decorate().properties ?? {})
-      .find((p) => p.isId())
+      .find(p => p.isId())
     if (!idProperty || !validateParam(recordId, idProperty)) {
       const invalidRecordError = actionErrorHandler(
         new ForbiddenError([
