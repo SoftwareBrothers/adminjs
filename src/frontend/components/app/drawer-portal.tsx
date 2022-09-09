@@ -20,10 +20,14 @@ export type DrawerPortalProps = {
   width?: number | string | Array<number | string>;
 }
 
+export type DrawerWrapperProps = {
+  onMount: () => void;
+}
+
 const DRAWER_PORTAL_ID = 'drawerPortal'
 const DRAWER_PORTAL_WRAPPER_ID = 'drawerPortalWrapper'
 
-const DrawerWrapper = ({ onMount }) => {
+const DrawerWrapper: React.FC<DrawerWrapperProps> = ({ onMount }) => {
   useEffect(() => {
     onMount()
   }, [])
@@ -34,7 +38,7 @@ const DrawerWrapper = ({ onMount }) => {
   )
 }
 
-const createPortalContainer = (id: string) => {
+const getOrCreatePortalContainer = (id: string) => {
   let container = document.getElementById(id)
 
   if (!container) {
@@ -68,7 +72,7 @@ export const DrawerPortal: React.FC<DrawerPortalProps> = ({ children, width }) =
   }
 
   useEffect(() => {
-    const innerWrapperElement = createPortalContainer(DRAWER_PORTAL_WRAPPER_ID)
+    const innerWrapperElement = getOrCreatePortalContainer(DRAWER_PORTAL_WRAPPER_ID)
     if (!drawerElement && window) {
       const drawerRoot = createRoot(innerWrapperElement)
       drawerRoot.render(<DrawerWrapper onMount={handleDrawerMount} />)
