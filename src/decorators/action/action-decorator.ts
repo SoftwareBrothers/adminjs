@@ -2,7 +2,6 @@ import {
   ParsedLayoutElement,
   LayoutElement,
   layoutElementParser,
-  ViewHelpers,
 } from '@adminjs/common/utils'
 import {
   ActionJSON,
@@ -37,8 +36,6 @@ class ActionDecorator {
 
   private _resource: BaseResource
 
-  private h: ViewHelpers
-
   private action: Action<ActionResponse>
 
   /**
@@ -61,7 +58,6 @@ class ActionDecorator {
     this.name = action.name
     this._admin = admin
     this._resource = resource
-    this.h = new ViewHelpers(admin.options)
 
     /**
      * Original action object
@@ -223,7 +219,6 @@ class ActionDecorator {
         resource: this._resource,
         record,
         action: this,
-        h: this.h,
         currentAdmin,
         _admin: this._admin,
       } as unknown as ActionContext)
@@ -280,10 +275,10 @@ class ActionDecorator {
       return true
     }
 
-    throw new ForbiddenError(this._admin.translateMessage('forbiddenError', resource.id(), {
-      actionName: this.name,
-      resourceId: resource.id(),
-    }))
+    throw new ForbiddenError(
+      'forbiddenError',
+      { resourceId: resource.decorate().id(), actionName: this.name },
+    )
   }
 
   containerWidth(): ActionJSON['containerWidth'] {
@@ -338,14 +333,13 @@ class ActionDecorator {
    * @return  {ActionJSON}  serialized action
    */
   toJSON(currentAdmin?: CurrentAdmin): ActionJSON {
-    const resourceId = this._resource._decorated?.id() || this._resource.id()
+    const resourceId = this._resource._decorated?.id?.() || this._resource.id()
     return {
       name: this.action.name,
       actionType: this.action.actionType,
       icon: this.action.icon,
-      label: this._admin.translateAction(this.action.name, resourceId),
       resourceId,
-      guard: this.action.guard ? this._admin.translateMessage(this.action.guard, resourceId) : '',
+      guard: this.action.guard ?? '',
       showFilter: !!this.action.showFilter,
       showResourceActions: this.showResourceActions(),
       component: this.action.component,

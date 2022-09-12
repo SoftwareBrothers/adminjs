@@ -1,7 +1,12 @@
 {
   "compilerOptions": {
       "outDir": "./lib",
+      "module": "commonjs",
       "target": "ESNext",
+      "lib": [
+        "es2018",
+        "DOM"
+      ],
       "esModuleInterop": true,
       "declaration": true,
       "declarationDir": "./types",

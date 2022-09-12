@@ -29,7 +29,7 @@ export const DeleteAction: Action<RecordActionResponse> = {
    * @memberof module:DeleteAction
    */
   handler: async (request, response, data) => {
-    const { record, resource, currentAdmin, h, translateMessage } = data
+    const { record, resource, currentAdmin } = data
     if (!request.params.recordId || !record) {
       throw new NotFoundError([
         'You have to pass "recordId" to Delete Action',
@@ -39,12 +39,12 @@ export const DeleteAction: Action<RecordActionResponse> = {
       await resource.delete(request.params.recordId)
     } catch (error) {
       if (error instanceof ValidationError) {
-        const baseMessage = error.baseError?.message
-          || translateMessage('thereWereValidationErrors', resource.id())
+        const baseMessage = error.baseError?.message ?? 'thereWereValidationErrors'
         return {
           record: record.toJSON(currentAdmin),
           notice: {
             message: baseMessage,
+            resourceId: resource._decorated?.id?.() || resource.id(),
             type: 'error',
           },
         }
@@ -53,9 +53,9 @@ export const DeleteAction: Action<RecordActionResponse> = {
     }
     return {
       record: record.toJSON(currentAdmin),
-      redirectUrl: h.resourceUrl({ resourceId: resource._decorated?.id() || resource.id() }),
       notice: {
-        message: translateMessage('successfullyDeleted', resource.id()),
+        message: 'successfullyDeleted',
+        resourceId: resource._decorated?.id?.() || resource.id(),
         type: 'success',
       },
     }

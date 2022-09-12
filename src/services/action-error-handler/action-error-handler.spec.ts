@@ -12,21 +12,20 @@ import { ActionDecorator } from '../../decorators'
 describe('ActionErrorHandler', function () {
   let resource: BaseResource
   let record: BaseRecord
-  let translateMessage
   let context: ActionContext
   let action: ActionDecorator
   const notice = {
-    message: 'stubbed translation message',
+    message: 'thereWereValidationErrors',
+    resourceId: 'resourceId',
     type: 'error',
   }
   const currentAdmin = {} as CurrentAdmin
 
   beforeEach(function () {
-    resource = sinon.createStubInstance(BaseResource)
+    resource = sinon.createStubInstance(BaseResource, { id: 'resourceId' })
     record = sinon.createStubInstance(BaseRecord) as unknown as BaseRecord
-    translateMessage = sinon.stub().returns(notice.message)
     action = { name: 'myAction' } as ActionDecorator
-    context = { resource, record, currentAdmin, translateMessage, action } as ActionContext
+    context = { resource, record, currentAdmin, action } as ActionContext
   })
 
   afterEach(function () {
@@ -102,6 +101,7 @@ describe('ActionErrorHandler', function () {
       records: [],
       notice: {
         message: errorMessage,
+        resourceId: 'resourceId',
         type: 'error',
       },
       meta: undefined,
@@ -122,6 +122,7 @@ describe('ActionErrorHandler', function () {
       },
       notice: {
         message: errorMessage,
+        resourceId: 'resourceId',
         type: 'error',
       },
       records: [],

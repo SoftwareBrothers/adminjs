@@ -26,7 +26,7 @@ Commit messages should start with `fix:`, `chore:`, `feat:`, `test:` with the fo
 3. When a commit starting with `feat:` is merged, a release will be created which upgrades the minor version of the library (example: 6.0.1 -> 6.1.0).
 4. When a commit has `BREAKING CHANGE: xxxxx` inside of it's **description**, a release will be created which upgrades the major version of the library (example: 6.1.0 -> 7.0.0).
 5. There are also additional rules defined in `.releaserc`:
-- commits starting with `feat(locale):` and `feat(small):` will only upgrade the patch version despite being `feat` (feature) commits. This type of commit message should be used when you want to create a new translation (`feat(locale)`) or when you add a small feature that doesn't affect the library much (`feat(small)`).
+- commits starting with `feat(small):` will only upgrade the patch version despite being `feat` (feature) commits. This type of commit message should be used when you add a small feature that doesn't affect the library much (`feat(small)`).
 - commits starting with `chore(deps):` will upgrade the patch version despite being `chore` commits. These are commits automatically created by [dependabot](https://github.com/dependabot) but you should also use this message type when you want to only upgrade a package manually.
 6. When a pull request is merged which contains multiple commit messages, the higher version upgrades take precedence, for example a pull request with `feat:` and `fix:` messages will upgrade the `minor version` (because of `feat: ...` message) but both commit messages will appear in the changelog.
 

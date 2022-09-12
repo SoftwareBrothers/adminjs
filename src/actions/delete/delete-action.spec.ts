@@ -1,7 +1,6 @@
 import chai, { expect } from 'chai'
 import chaiAsPromised from 'chai-as-promised'
 import sinon from 'sinon'
-import { ViewHelpers } from '@adminjs/common/utils'
 import { NotFoundError, ValidationError } from '@adminjs/common/errors'
 import { RecordJSON, CurrentAdmin } from '@adminjs/common/interfaces'
 
@@ -30,9 +29,7 @@ describe('DeleteAction', function () {
     beforeEach(async function () {
       data = {
         _admin: sinon.createStubInstance(AdminJS),
-        translateMessage: sinon.stub<any, string>().returns('translatedMessage'),
-        h: sinon.createStubInstance(ViewHelpers),
-        resource: sinon.createStubInstance(BaseResource),
+        resource: sinon.createStubInstance(BaseResource, { id: 'resourceId' }),
         action: sinon.createStubInstance(ActionDecorator) as unknown as ActionDecorator,
       } as unknown as ActionContext
     })
@@ -63,7 +60,6 @@ describe('DeleteAction', function () {
         )(request, response, data)
 
         expect(actionResponse).to.have.property('notice')
-        expect(actionResponse).to.have.property('redirectUrl')
         expect(actionResponse).to.have.property('record')
       })
 
@@ -71,6 +67,7 @@ describe('DeleteAction', function () {
         it('returns error notice', async function () {
           const errorMessage = 'test validation error'
           data.resource = sinon.createStubInstance(BaseResource, {
+            id: 'resourceId',
             delete: sinon.stub().rejects(new ValidationError({}, { message: errorMessage })) as any,
           })
 
@@ -81,6 +78,7 @@ describe('DeleteAction', function () {
           expect(actionResponse).to.have.property('notice')
           expect(actionResponse.notice).to.deep.equal({
             message: errorMessage,
+            resourceId: 'resourceId',
             type: 'error',
           })
           expect(actionResponse).to.have.property('record')
@@ -88,6 +86,7 @@ describe('DeleteAction', function () {
 
         it('returns error notice with default message when ValidationError has no baseError', async function () {
           data.resource = sinon.createStubInstance(BaseResource, {
+            id: 'resourceId',
             delete: sinon.stub().rejects(new ValidationError({})) as any,
           })
 
@@ -97,7 +96,8 @@ describe('DeleteAction', function () {
 
           expect(actionResponse).to.have.property('notice')
           expect(actionResponse.notice).to.deep.equal({
-            message: 'translatedMessage',
+            message: 'thereWereValidationErrors',
+            resourceId: 'resourceId',
             type: 'error',
           })
           expect(actionResponse).to.have.property('record')
