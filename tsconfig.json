@@ -12,18 +12,18 @@
       "strictBindCallApply": true,
       "noImplicitThis": true,
       "moduleResolution": "node",
-      "baseUrl": ".",
+      "baseUrl": "./src",
       "skipLibCheck": true,
       "types": [
+        "mocha",
         "node"
       ]
   },
   "include": [
-    "./vendor-types/**/*",
-    "./src/**/*",
-    "./spec/**/*"
+    "./src/**/*"
   ],
   "exclude": [
-    "./node-modules"
+    "./node-modules",
+    "**/*.spec.ts"
   ]
 }

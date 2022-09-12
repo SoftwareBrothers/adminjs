@@ -1,6 +1,6 @@
-import { BasePropertyJSON } from '../../frontend/interfaces/property-json/property-json.interface'
+import { BasePropertyJSON } from '@adminjs/common/interfaces'
+import { DELIMITER } from '@adminjs/common/constants'
 
-import { DELIMITER } from './constants'
 import { convertParam } from './convert-param'
 
 const convertNestedParam = (

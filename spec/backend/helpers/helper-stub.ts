@@ -1,4 +1,5 @@
-import ViewHelpers from '../../../src/backend/utils/view-helpers/view-helpers'
+import sinon from 'sinon'
+import { ViewHelpers } from '@adminjs/common/utils'
 
 const expectedResult = {
   recordActionUrl: '#recordActionUrl',
@@ -26,22 +27,21 @@ export default (): ViewHelpers => (
       logoutPath: expectedResult.logoutUrl,
       rootPath: expectedResult.rootUrl,
     },
-    recordActionUrl: jest.fn().mockReturnValue(expectedResult.recordActionUrl),
-    resourceActionUrl: jest.fn().mockReturnValue(expectedResult.resourceActionUrl),
-    bulkActionUrl: jest.fn().mockReturnValue(expectedResult.bulkActionUrl),
-    urlBuilder: jest.fn(),
-    loginUrl: jest.fn().mockReturnValue(expectedResult.loginUrl),
-    logoutUrl: jest.fn().mockReturnValue(expectedResult.logoutUrl),
-    assetPath: jest.fn().mockReturnValue(expectedResult.assetPath),
-    resourceUrl: jest.fn().mockReturnValue(expectedResult.resourceUrl),
-    dashboardUrl: jest.fn().mockReturnValue(expectedResult.dashboardUrl),
-    pageUrl: jest.fn().mockReturnValue(expectedResult.pageUrl),
-    editUrl: jest.fn().mockReturnValue(expectedResult.editUrl),
-    showUrl: jest.fn().mockReturnValue(expectedResult.showUrl),
-    deleteUrl: jest.fn().mockReturnValue(expectedResult.deleteUrl),
-    newUrl: jest.fn().mockReturnValue(expectedResult.newUrl),
-    listUrl: jest.fn().mockReturnValue(expectedResult.listUrl),
-    bulkDeleteUrl: jest.fn().mockReturnValue(expectedResult.bulkDeleteUrl),
+    recordActionUrl: sinon.stub().returns(expectedResult.recordActionUrl),
+    resourceActionUrl: sinon.stub().returns(expectedResult.resourceActionUrl),
+    bulkActionUrl: sinon.stub().returns(expectedResult.bulkActionUrl),
+    urlBuilder: sinon.stub(),
+    loginUrl: sinon.stub().returns(expectedResult.loginUrl),
+    logoutUrl: sinon.stub().returns(expectedResult.logoutUrl),
+    resourceUrl: sinon.stub().returns(expectedResult.resourceUrl),
+    dashboardUrl: sinon.stub().returns(expectedResult.dashboardUrl),
+    pageUrl: sinon.stub().returns(expectedResult.pageUrl),
+    editUrl: sinon.stub().returns(expectedResult.editUrl),
+    showUrl: sinon.stub().returns(expectedResult.showUrl),
+    deleteUrl: sinon.stub().returns(expectedResult.deleteUrl),
+    newUrl: sinon.stub().returns(expectedResult.newUrl),
+    listUrl: sinon.stub().returns(expectedResult.listUrl),
+    bulkDeleteUrl: sinon.stub().returns(expectedResult.bulkDeleteUrl),
   }
 )
 
