@@ -1,5 +1,4 @@
 import { CurrentAdmin } from '@adminjs/common/interfaces'
-import { ViewHelpers } from '@adminjs/common/utils'
 
 import { Action, ActionResponse, RecordActionResponse, BulkActionResponse } from '../../actions/action.interface'
 import PropertyOptions from '../property/property-options.interface'
@@ -12,10 +11,6 @@ import BaseResource from '../../adapters/resource/base-resource'
  * @memberof ResourceOptions
  */
 export type HrefContext = {
-  /**
-   * view helpers
-   */
-  h: ViewHelpers;
   /**
    * Resource on which href has been invoked.
    */

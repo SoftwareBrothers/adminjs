@@ -5,7 +5,6 @@ export * from './adapters'
 export * from './adminjs-options.interface'
 export * from './controllers'
 export * from './decorators'
-export * from './locale'
 export * from './services'
 export * from './utils'
 

@@ -112,37 +112,6 @@ export default interface PropertyOptions {
 
   /**
    * Description of field. Shown as hoverable hint after label.
-   *
-   * To use translations provide it in locale with specified options key from resource
-   * @example
-   * ```js
-   * new AdminJS({
-   *   resources: [
-   *     {
-   *       resource: myResource,
-   *       options: {
-   *         properties: {
-   *           myAwesomeProperty: {
-   *             description: "Plane description" || "awesomeHint", // <- message key in locale
-   *           },
-   *         },
-   *       },
-   *     },
-   *   ],
-   *   locale: {
-   *     translations: {
-   *       resources: {
-   *         myResource: {
-   *           messages: {
-   *             awesomeHint: "Locale description",
-   *           },
-   *         },
-   *       },
-   *     },
-   *   },
-   * });
-   * ```
-   * @new In version 5.6
    */
   description?: string;
 }

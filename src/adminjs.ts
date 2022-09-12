@@ -1,9 +1,7 @@
 import merge from 'lodash/merge'
 import * as path from 'path'
 import * as fs from 'fs'
-import i18n, { i18n as I18n } from 'i18next'
-import { ResourceJSON, CurrentAdmin, Locale } from '@adminjs/common/interfaces'
-import { TranslateFunctions, createFunctions } from '@adminjs/common/utils'
+import { ResourceJSON, CurrentAdmin } from '@adminjs/common/interfaces'
 import { DEFAULT_PATHS } from '@adminjs/common/constants'
 
 import { AdminJSOptionsWithDefault, AdminJSOptions, AdminJSOptionsJson } from './adminjs-options.interface'
@@ -14,8 +12,6 @@ import { RecordActionResponse, Action, BulkActionResponse } from './actions/acti
 import { ACTIONS } from './actions'
 
 import { ListActionResponse } from './actions/list/list-action'
-import { combineTranslations } from './locale/config'
-import { locales } from './locale'
 
 const pkg = JSON.parse(fs.readFileSync(path.join(__dirname, '../package.json'), 'utf-8'))
 export const VERSION = pkg.version
@@ -55,12 +51,6 @@ class AdminJS {
 
   public options: AdminJSOptionsWithDefault
 
-  public locale!: Locale
-
-  public i18n!: I18n
-
-  public translateFunctions!: TranslateFunctions
-
   /**
    * List of all default actions. If you want to change the behavior for all actions like:
    * _list_, _edit_, _show_, _delete_ and _bulkDelete_ you can do this here.
@@ -95,40 +85,9 @@ class AdminJS {
      */
     this.options = merge({}, defaultOptions, options)
 
-    this.initI18n()
-
     const { databases, resources } = this.options
     const resourcesFactory = new ResourcesFactory(this, AdminJS.RegisteredAdapters || [])
     this.resources = resourcesFactory.buildResources({ databases, resources })
-  }
-
-  initI18n(): void {
-    const language = this.options.locale?.language || locales.en.language
-    const defaultTranslations = locales[language]?.translations || locales.en.translations
-    this.locale = {
-      translations: combineTranslations(defaultTranslations, this.options.locale?.translations),
-      language,
-    }
-    if (i18n.isInitialized) {
-      i18n.addResourceBundle(this.locale.language, 'translation', this.locale.translations)
-    } else {
-      i18n.init({
-        lng: this.locale.language,
-        initImmediate: false, // loads translations immediately
-        resources: {
-          [this.locale.language]: {
-            translation: this.locale.translations,
-          },
-        },
-      })
-    }
-
-    // mixin translate functions to AdminJS instance so users will be able to
-    // call AdminJS.translateMessage(...)
-    this.translateFunctions = createFunctions(i18n)
-    Object.getOwnPropertyNames(this.translateFunctions).forEach((translateFunctionName) => {
-      this[translateFunctionName] = this.translateFunctions[translateFunctionName]
-    })
   }
 
   /**
@@ -206,6 +165,20 @@ class AdminJS {
     return resource
   }
 
+  // eslint-disable-next-line class-methods-use-this
+  initialize(): Promise<void> {
+    console.log('todo: remove admin.initialize')
+
+    return Promise.resolve()
+  }
+
+  // eslint-disable-next-line class-methods-use-this
+  watch(): Promise<void> {
+    console.log('todo: remove admin.watch')
+
+    return Promise.resolve()
+  }
+
   async toJSON(currentAdmin?: CurrentAdmin): Promise<AdminJSOptionsJson> {
     let jsonResources: ResourceJSON[] = []
     try {
@@ -228,7 +201,6 @@ class AdminJS {
       resources: jsonResources,
       paths: this.options.paths,
       branding: branding ?? {},
-      locale: this.locale,
       pages,
     }
   }
@@ -239,7 +211,7 @@ AdminJS.VERSION = VERSION
 AdminJS.ACTIONS = ACTIONS
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
-interface AdminJS extends TranslateFunctions {}
+interface AdminJS {}
 
 export const { registerAdapter } = AdminJS
 

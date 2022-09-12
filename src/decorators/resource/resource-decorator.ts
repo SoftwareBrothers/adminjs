@@ -1,4 +1,3 @@
-import { ViewHelpers } from '@adminjs/common/utils'
 import { CurrentAdmin, ResourceJSON, PropertyPlace } from '@adminjs/common/interfaces'
 
 import { DecoratedActions } from './utils/decorate-actions'
@@ -56,8 +55,6 @@ class ResourceDecorator {
 
   private _admin: AdminJS
 
-  private h: ViewHelpers
-
   /**
    * @param  {object}       options
    * @param  {BaseResource} options.resource  resource which is decorated
@@ -72,7 +69,6 @@ class ResourceDecorator {
     this.getPropertyByKey = this.getPropertyByKey.bind(this)
     this._resource = resource
     this._admin = admin
-    this.h = new ViewHelpers(admin.options)
 
     /**
      * Options passed along with a given resource
@@ -100,7 +96,7 @@ class ResourceDecorator {
    * @return {string} resource name
    */
   getResourceName(): string {
-    return this._admin.translateLabel(this.id(), this.id())
+    return this.id()
   }
 
   /**
@@ -272,14 +268,13 @@ class ResourceDecorator {
         return href({
           resource: this._resource,
           currentAdmin,
-          h: this.h,
         })
       }
       return href
     }
-    if (this.resourceActions(currentAdmin).find((action) => action.name === 'list')) {
-      return this.h.resourceUrl({ resourceId: this.id() })
-    }
+    // if (this.resourceActions(currentAdmin).find((action) => action.name === 'list')) {
+    //   return this.h.resourceUrl({ resourceId: this.id() })
+    // }
     return null
   }
 

@@ -9,7 +9,6 @@ import BaseResource from '../../adapters/resource/base-resource'
 import BaseRecord from '../../adapters/record/base-record'
 import BaseProperty from '../../adapters/property/base-property'
 
-const translatedLabel = 'translated label'
 const currentAdmin = {
   email: 'some@email.com',
   name: 'someName',
@@ -19,10 +18,6 @@ const currentAdmin = {
 const stubAdminJS = (): AdminJS => {
   const stubbedAdmin = sinon.createStubInstance(AdminJS)
   return Object.assign(stubbedAdmin, {
-    translateLabel: sinon.stub<any, string>().returns(translatedLabel),
-    translateProperty: sinon.stub<any, string>().returns('translated property'),
-    translateAction: sinon.stub<any, string>().returns('translated action'),
-    translateMessage: sinon.stub<any, string>().returns('translate message'),
     options: { ...defaultOptions, rootPath: '/admin' },
   })
 }
@@ -53,7 +48,7 @@ describe('ResourceDecorator', function () {
     it('returns resource when name is not specified in options', function () {
       expect(
         new ResourceDecorator({ ...args, options: {} }).getResourceName(),
-      ).to.equal(translatedLabel)
+      ).to.equal('someID')
     })
   })
 

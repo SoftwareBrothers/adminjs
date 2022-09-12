@@ -119,15 +119,6 @@ class PropertyDecorator {
   }
 
   /**
-   * Label of a property
-   *
-   * @return  {string}
-   */
-  label(): string {
-    return this._admin.translateProperty(this.propertyPath, this._resource.id())
-  }
-
-  /**
    * Property type
    *
    * @returns {PropertyType}
@@ -153,11 +144,7 @@ class PropertyDecorator {
     if (values) {
       return values.map((val) => ({
         value: val,
-        label: this._admin.translateProperty(
-          `${this.propertyPath}.${val}`,
-          this._resource.id(),
-          { defaultValue: val },
-        ),
+        label: val,
       }))
     }
     return null
@@ -266,7 +253,6 @@ class PropertyDecorator {
       name: this.name(),
       propertyPath: this.propertyPath,
       isDisabled: this.isDisabled(),
-      label: this.label(),
       type: this.type(),
       hideLabel: !!this.options.hideLabel,
       reference: this.referenceName(),
@@ -279,11 +265,7 @@ class PropertyDecorator {
       resourceId: this._resource.id(),
       isVirtual: this.isVirtual,
       props: this.options.props || {},
-      description: this.options.description
-        ? this._admin.translateMessage(
-          this.options.description,
-          this._resource.id(),
-        ) : undefined,
+      description: this.options.description,
     }
   }
 

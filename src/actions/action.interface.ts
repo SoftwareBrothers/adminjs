@@ -1,5 +1,5 @@
 import { CurrentAdmin, RecordJSON, NoticeMessage } from '@adminjs/common/interfaces'
-import { TranslateFunctions, LayoutElement, LayoutElementFunction, ViewHelpers } from '@adminjs/common/utils'
+import { LayoutElement, LayoutElementFunction } from '@adminjs/common/utils'
 
 import BaseRecord from '../adapters/record/base-record'
 import BaseResource from '../adapters/resource/base-resource'
@@ -12,16 +12,12 @@ export type ActionType = 'resource' | 'record' | 'bulk'
  * Execution context for an action. It is passed to the {@link Action#handler},
  * {@link Action#before} and {@link Action#after} functions.
  *
- * Apart from the properties defined below it also extends {@link TranslateFunctions}.
- * So you can use i.e. context.translateMessage(...) and others...
  *
- * @property {TranslateFunctions} {...}      all functions from {@link TranslateFunctions}
- *                                          interface.
  *
  * @memberof Action
  * @alias ActionContext
  */
-export type ActionContext = TranslateFunctions & {
+export type ActionContext = {
   /**
    * current instance of AdminJS. You may use it to fetch other Resources by their names:
    */
@@ -38,10 +34,6 @@ export type ActionContext = TranslateFunctions & {
    * Records on which action has been invoked (only for {@link actionType} === 'bulk')
    */
   records?: Array<BaseRecord>;
-  /**
-   * view helpers
-   */
-  h: ViewHelpers;
   /**
    * Object of currently invoked function. Not present for dashboard action
    */
@@ -71,10 +63,6 @@ export type PageContext = {
    * Currently logged in admin
    */
   currentAdmin?: CurrentAdmin;
-    /**
-   * view helpers
-   */
-  h: ViewHelpers;
 }
 
 /**
@@ -435,10 +423,6 @@ export interface Action <T extends ActionResponse> {
    *   }}
    * }]})
    * ```
-   *
-   * What you enter there goes to {@link TranslateFunctions#translateMessage} function,
-   * so in order to define the actual message you will have to specify its
-   * translation in {@link AdminJSOptions.Locale}
    */
   guard?: string;
   /**

@@ -76,7 +76,5 @@ module.exports = {
     AdminJS: true,
     flatpickr: true,
     File: true,
-    cy: true,
-    Cypress: true,
   },
 }

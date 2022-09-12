@@ -48,8 +48,7 @@ describe('ApiController', function () {
     this.recordStub.resource = this.resourceStub
     this.adminStub = {
       findResource: this.sinon.stub().returns(this.resourceStub),
-      options: { rootPath: '/admin' },
-      translateMessage: () => 'message',
+      options: { paths: { rootPath: '/admin' } },
     }
     this.currentAdmin = { email: 'john@doe.com', name: 'John' }
     this.apiController = new ApiController({ admin: this.adminStub }, this.currentAdmin)

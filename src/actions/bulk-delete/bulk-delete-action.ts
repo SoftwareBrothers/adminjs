@@ -28,7 +28,7 @@ export const BulkDeleteAction: Action<BulkActionResponse> = {
    * @memberof module:BulkDeleteAction
    */
   handler: async (request, response, context) => {
-    const { records, resource, h, translateMessage } = context
+    const { records, resource } = context
 
     if (!records || !records.length) {
       throw new NotFoundError('no records were selected.', 'Action#handler')
@@ -44,12 +44,11 @@ export const BulkDeleteAction: Action<BulkActionResponse> = {
       return {
         records: records.map((record) => record.toJSON(context.currentAdmin)),
         notice: {
-          message: translateMessage('successfullyBulkDeleted', resource.id(), {
-            count: records.length,
-          }),
+          message: 'successfullyBulkDeleted',
+          resourceId: resource._decorated?.id?.() || resource.id(),
+          payload: { count: records.length },
           type: 'success',
         },
-        redirectUrl: h.resourceUrl({ resourceId: resource._decorated?.id() || resource.id() }),
       }
     }
     throw new Error('method should be either "post" or "get"')

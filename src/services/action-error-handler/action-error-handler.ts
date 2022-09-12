@@ -17,14 +17,12 @@ const actionErrorHandler = (error: any, context: ActionContext): ActionResponse 
     let meta: any
 
     if (error instanceof ValidationError) {
-      baseMessage = error.baseError?.message
-        || context.translateMessage('thereWereValidationErrors', resource.id())
+      baseMessage = error.baseError?.message ?? 'thereWereValidationErrors'
       baseError = error.baseError ?? null
       errors = error.propertyErrors
     } else {
       // Defaults to ForbiddenError
-      baseMessage = error.baseMessage
-        || context.translateMessage('anyForbiddenError', resource.id())
+      baseMessage = error.baseMessage ?? 'anyForbiddenError'
     }
 
     // Add required meta data for the list action
@@ -51,6 +49,7 @@ const actionErrorHandler = (error: any, context: ActionContext): ActionResponse 
       records: [],
       notice: {
         message: baseMessage,
+        resourceId: resource._decorated ? resource._decorated.id() : resource.id(),
         type: 'error',
       },
       meta,

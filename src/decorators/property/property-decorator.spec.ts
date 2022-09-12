@@ -8,7 +8,6 @@ import ResourceDecorator from '../resource/resource-decorator'
 import { BaseResource } from '../../adapters'
 
 describe('PropertyDecorator', () => {
-  const translatedProperty = 'translated property'
   let stubbedAdmin: SinonStubbedInstance<AdminJS> & AdminJS
   let property: BaseProperty
   let args: {
@@ -20,7 +19,6 @@ describe('PropertyDecorator', () => {
   beforeEach(() => {
     property = new BaseProperty({ path: 'name', type: 'string' })
     stubbedAdmin = sinon.createStubInstance(AdminJS)
-    stubbedAdmin.translateProperty = sinon.stub().returns(translatedProperty) as any
     args = { property, admin: stubbedAdmin, resource: { id: () => 'someId' } as ResourceDecorator }
   })
 
@@ -46,13 +44,6 @@ describe('PropertyDecorator', () => {
       expect(decorator.isVisible('list')).to.equal(false)
       expect(decorator.isVisible('edit')).to.equal(false)
       expect(decorator.isVisible('show')).to.equal(false)
-    })
-  })
-
-  describe('#label', () => {
-    it('returns translated label', () => {
-      sinon.stub(BaseProperty.prototype, 'name').returns('normalName')
-      expect(new PropertyDecorator(args).label()).to.equal(translatedProperty)
     })
   })
 
@@ -112,12 +103,8 @@ describe('PropertyDecorator', () => {
   })
 
   describe('#availableValues', () => {
-    it('map default value to { value, label } object and uses translations', () => {
+    it('map default value to { value, label } object', () => {
       sinon.stub(BaseProperty.prototype, 'availableValues').returns(['val'])
-      expect(new PropertyDecorator(args).availableValues()).to.deep.equal([{
-        value: 'val',
-        label: translatedProperty,
-      }])
     })
   })
 
@@ -166,12 +153,6 @@ describe('PropertyDecorator', () => {
       expect(propertyDecorator.subProperties()).to.have.lengthOf(1)
       expect(propertyDecorator.subProperties()[0]).to.be.instanceOf(PropertyDecorator)
     })
-
-    it('changes label of the nested property to what was given in PropertyOptions', () => {
-      const subProperty = propertyDecorator.subProperties()[0]
-
-      expect(subProperty.label()).to.eq(translatedProperty)
-    })
   })
 
   describe('#toJSON', () => {
@@ -183,7 +164,6 @@ describe('PropertyDecorator', () => {
         'isSortable',
         'availableValues',
         'name',
-        'label',
         'type',
         'reference',
         'components',

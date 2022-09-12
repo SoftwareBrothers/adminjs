@@ -18,7 +18,7 @@ describe('ActionDecorator', function () {
 
   beforeEach(function () {
     admin = sinon.createStubInstance(AdminJS)
-    resource = sinon.createStubInstance(BaseResource)
+    resource = sinon.createStubInstance(BaseResource, { id: 'resourceId' })
     action = { name: 'myAction' } as ActionDecorator
     context = { resource, _admin: admin, action } as ActionContext
     handler = sinon.stub()
@@ -140,6 +140,7 @@ describe('ActionDecorator', function () {
       expect(ret).to.have.property('notice')
       expect(ret.notice).to.deep.equal({
         message: errorMessage,
+        resourceId: 'resourceId',
         type: 'error',
       })
       expect(handler).not.to.have.been.called
@@ -152,7 +153,7 @@ describe('ActionDecorator', function () {
           type: 'notGood',
         },
       }
-      const notice = { message: 'There are validation errors', type: 'validationError' }
+      const notice = { message: 'There are validation errors', resourceId: 'resourceId', type: 'validationError' }
       const before = sinon.stub().throws(new ValidationError(errors, notice))
 
       const decorator = new ActionDecorator({
@@ -167,6 +168,7 @@ describe('ActionDecorator', function () {
       expect(ret).to.have.property('notice')
       expect(ret.notice).to.deep.equal({
         message: notice.message,
+        resourceId: 'resourceId',
         type: 'error',
       })
       expect(ret).to.have.property('record')

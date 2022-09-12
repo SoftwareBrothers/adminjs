@@ -1,4 +1,4 @@
-import { CurrentAdmin, ResourceJSON, PageJSON, Locale } from '@adminjs/common/interfaces'
+import { CurrentAdmin, ResourceJSON, PageJSON } from '@adminjs/common/interfaces'
 
 import BaseResource from './adapters/resource/base-resource'
 import BaseDatabase from './adapters/database/base-database'
@@ -114,64 +114,6 @@ export interface AdminJSOptions<T = unknown> {
    * Options which are related to the branding.
    */
   branding?: BrandingOptions | BrandingOptionsFunction;
-
-  /* cspell: disable */
-
-  /**
-   * Translation file. Change it in order to:
-   * - localize admin panel
-   * - change any arbitrary text in the UI
-   *
-   * This is the example for changing name of a couple of resources along with some
-   * properties to Polish
-   *
-   * ```javascript
-   * {
-   *   ...
-   *   locale: {
-   *     language: 'pl',
-   *     translations: {
-   *       labels: {
-   *         Comments: 'Komentarze',
-   *       }
-   *       resources: {
-   *         Comments: {
-   *           properties: {
-   *             name: 'Nazwa Komentarza',
-   *             content: 'Zawartość',
-   *           }
-   *         }
-   *       }
-   *     }
-   *   }
-   * }
-   * ```
-   *
-   * As I mentioned you can use this technic to change any text even in english.
-   * So to change button label for a "new action" from default "Create new" to "Create new Comment"
-   * only for Comment resource you can do:
-   *
-   * ```javascript
-   * {
-   *   ...
-   *   locale: {
-   *     translations: {
-   *       resources: {
-   *         Comments: {
-   *           actions: {
-   *             new: 'Create new Comment',
-   *           }
-   *         }
-   *       }
-   *     }
-   *   }
-   * }
-   * ```
-   *
-   * Check out the [i18n tutorial]{@tutorial i18n} to see how
-   * internationalization in AdminJS works.
-   */
-  locale?: Locale;
 
   /**
    * Additional settings.
@@ -315,6 +257,5 @@ export interface AdminJSOptionsJson {
     [path: string]: string;
   };
   branding: BrandingOptions;
-  locale: Locale;
   pages: PageJSON[]
 }

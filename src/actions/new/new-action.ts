@@ -28,7 +28,7 @@ export const NewAction: Action<RecordActionResponse> = {
    * @return {Promise<RecordActionResponse>} populated records
    */
   handler: async (request, response, context) => {
-    const { resource, h, currentAdmin, translateMessage } = context
+    const { resource, currentAdmin } = context
     if (request.method === 'post') {
       const params = paramConverter.prepareParams(request.payload ?? {}, resource)
 
@@ -42,20 +42,20 @@ export const NewAction: Action<RecordActionResponse> = {
 
       if (record.isValid()) {
         return {
-          redirectUrl: h.resourceUrl({ resourceId: resource._decorated?.id() || resource.id() }),
           notice: {
-            message: translateMessage('successfullyCreated', resource.id()),
+            message: 'successfullyCreated',
+            resourceId: resource.decorate().id(),
             type: 'success',
           },
           record: record.toJSON(currentAdmin),
         }
       }
-      const baseMessage = populatedRecord.baseError?.message
-        || translateMessage('thereWereValidationErrors', resource.id())
+      const baseMessage = populatedRecord.baseError?.message ?? 'thereWereValidationErrors'
       return {
         record: record.toJSON(currentAdmin),
         notice: {
           message: baseMessage,
+          resourceId: resource.decorate().id(),
           type: 'error',
         },
       }

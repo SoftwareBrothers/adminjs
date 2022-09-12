@@ -193,7 +193,7 @@ class BaseRecord {
   id(): string {
     const idProperty = this.resource.properties().find((p) => p.isId())
     if (!idProperty) {
-      throw new Error(`Resource: "${this.resource.id()}" does not have an id property`)
+      throw new Error(`Resource: "${this.resource.decorate().id()}" does not have an id property`)
     }
     return this.params[idProperty.name()] as string
   }

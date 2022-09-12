@@ -4,7 +4,6 @@
   "description": "Admin panel for apps written in node.js",
   "main": "lib/index.js",
   "types": "types/index.d.ts",
-  "type": "module",
   "scripts": {
     "test": "mocha ./spec/index.cjs",
     "clean": "rimraf lib && mkdir lib && rimraf types && mkdir types",
@@ -41,13 +40,15 @@
     "url": "https://github.com/SoftwareBrothers/adminjs/issues"
   },
   "homepage": "https://github.com/SoftwareBrothers/adminjs#readme",
+  "peerDependencies": {
+    "@adminjs/common": "*"
+  },
   "dependencies": {
-    "@adminjs/common": "*",
     "flat": "^4.1.0",
-    "i18next": "^21.9.1",
     "lodash": "^4.17.21"
   },
   "devDependencies": {
+    "@adminjs/common": "*",
     "@babel/core": "^7.18.13",
     "@babel/preset-env": "^7.18.10",
     "@babel/preset-typescript": "^7.18.6",

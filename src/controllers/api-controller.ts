@@ -1,6 +1,5 @@
 /* eslint-disable max-len */
 /* eslint no-unused-vars: 0 */
-import { ViewHelpers } from '@adminjs/common/utils'
 import { CurrentAdmin } from '@adminjs/common/interfaces'
 import { ConfigurationError, NotFoundError } from '@adminjs/common/errors'
 import populator from '../utils/populator/populator'
@@ -66,16 +65,13 @@ class ApiController {
    */
   async getActionContext(request: ActionRequest): Promise<ActionContext> {
     const { resourceId, action: actionName } = request.params
-    const h = new ViewHelpers(this._admin.options)
     const resource = this._admin.findResource(resourceId)
     const action = resource.decorate().actions[actionName]
     return {
       resource,
       action,
-      h,
       currentAdmin: this.currentAdmin,
       _admin: this._admin,
-      ...this._admin.translateFunctions,
     }
   }
 
@@ -222,11 +218,9 @@ class ApiController {
    * @return  {Promise<any>}  action response
    */
   async dashboard(request: any, response: any): Promise<any> {
-    const h = new ViewHelpers(this._admin.options)
     const handler = this._admin.options.dashboard && this._admin.options.dashboard.handler
     if (handler) {
       return handler(request, response, {
-        h,
         currentAdmin: this.currentAdmin,
         _admin: this._admin,
       })
@@ -251,7 +245,6 @@ class ApiController {
    * @return  {Promise<any>}  action response
    */
   async page(request: any, response: any): Promise<any> {
-    const h = new ViewHelpers(this._admin.options)
     const { pages = {} } = this._admin.options
 
     const { pageName } = request.params
@@ -259,7 +252,6 @@ class ApiController {
 
     if (handler) {
       return handler(request, response, {
-        h,
         currentAdmin: this.currentAdmin,
         _admin: this._admin,
       })
