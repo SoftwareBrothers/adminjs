@@ -1,5 +1,6 @@
-import { BaseResource } from '../..'
-import { flat } from '../flat'
+import { flat } from '@adminjs/common/utils'
+
+import { BaseResource } from '../../adapters'
 import { convertNestedParam } from './convert-nested-param'
 import { convertParam } from './convert-param'
 

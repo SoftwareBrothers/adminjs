@@ -1,11 +1,12 @@
 module.exports = {
   parser: '@typescript-eslint/parser',
-  plugins: ['@typescript-eslint'],
+  plugins: ['@typescript-eslint', 'mocha'],
   env: {
     es6: true,
     node: true,
+    mocha: true,
   },
-  extends: ['airbnb', 'plugin:@typescript-eslint/recommended'],
+  extends: ['airbnb', 'plugin:@typescript-eslint/recommended', 'plugin:mocha/recommended'],
   parserOptions: {
     ecmaVersion: 2018,
     sourceType: 'module',
@@ -49,12 +50,13 @@ module.exports = {
   ],
   overrides: [
     {
-      files: ['*-test.js', '*.spec.js', '*-test.ts', '*.spec.ts', '*.factory.ts', '*.factory.js'],
+      files: ['*-test.js', '*.spec.js', '*-test.ts', '*.spec.ts', '*.spec.tsx', '*.factory.ts', '*.factory.js'],
       rules: {
         'no-unused-expressions': 'off',
         'func-names': 'off',
         'prefer-arrow-callback': 'off',
         'import/no-extraneous-dependencies': 'off',
+        'mocha/no-mocha-arrows': 'off',
         '@typescript-eslint/explicit-function-return-type': 'off',
       },
     },
@@ -67,11 +69,14 @@ module.exports = {
   ],
   globals: {
     expect: true,
+    describe: true,
     factory: true,
     sandbox: true,
     server: true,
     AdminJS: true,
     flatpickr: true,
     File: true,
+    cy: true,
+    Cypress: true,
   },
 }

@@ -1,20 +1,5 @@
 import merge from 'lodash/merge'
-import { formatName } from '../utils/translate-functions.factory'
-
-/**
- * Locale object passed to {@link AdminJSOptions} and stored in the application
- *
- * @memberof AdminJSOptions
- * @alias Locale
- */
-export type Locale = {
-  /** Language ISO string like: 'en' 'pl' or 'de' */
-  language: string;
-  /**
-   * All the translations.
-   */
-  translations: Partial<LocaleTranslations>;
-}
+import { formatName } from '@adminjs/common/utils'
 
 export type LocaleTranslationsBlock = {
   actions: {
