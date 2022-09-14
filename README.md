@@ -12,10 +12,10 @@ Inspired by: [django admin](https://docs.djangoproject.com), [rails admin](https
 
 Check out the example application with mongodb and postgres models here:
 
-- login: `test@example.com`
+- login: `admin@example.com`
 - password: `password`
 
-https://admin-bro-example-app-staging.herokuapp.com/admin/login
+https://adminjs-demo.herokuapp.com
 
 ## Getting started
 
