@@ -2,6 +2,20 @@
 # yarn lockfile v1
 
 
+"@adminjs/common@^1.0.0-dev.3":
+  version "1.0.0-dev.3"
+  resolved "https://registry.yarnpkg.com/@adminjs/common/-/common-1.0.0-dev.3.tgz#d24a09d5b3afcf7c509e1076c9327d34fb148ccc"
+  integrity sha512-hpX1r0sEXoJB0HYPau2/Eo87MKDGDE57V2DEzKYgG3m41aNIqK8ZYKIuJBgMfHg4y51Ncrp9J4VS6XLD7GUFgw==
+  dependencies:
+    "@babel/core" "^7.18.2"
+    "@babel/polyfill" "^7.12.1"
+    "@babel/preset-env" "^7.18.2"
+    "@babel/preset-react" "^7.17.12"
+    "@babel/preset-typescript" "^7.17.12"
+    "@babel/register" "^7.17.7"
+    flat "^4.1.0"
+    lodash "^4.17.21"
+
 "@ampproject/remapping@^2.1.0":
   version "2.2.0"
   resolved "https://registry.yarnpkg.com/@ampproject/remapping/-/remapping-2.2.0.tgz#56c133824780de3174aed5ab6834f3026790154d"
