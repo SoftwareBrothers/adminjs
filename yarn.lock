@@ -2,10 +2,10 @@
 # yarn lockfile v1
 
 
-"@adminjs/common@^1.0.0-dev.1":
-  version "1.0.0-dev.1"
-  resolved "https://registry.yarnpkg.com/@adminjs/common/-/common-1.0.0-dev.1.tgz#25dd6afa5ab9db7510a6c664177aeb98af5add13"
-  integrity sha512-rPtToCblvqzAK1Vcaf8wIB+M8Rpz9Ty5SwqPZ93eA2buBIMxL1HZlMMqfiwF6Xhm/My2XGYEwMNCcjFxkkeRhg==
+"@adminjs/common@^1.0.0-dev.3":
+  version "1.0.0-dev.3"
+  resolved "https://registry.yarnpkg.com/@adminjs/common/-/common-1.0.0-dev.3.tgz#d24a09d5b3afcf7c509e1076c9327d34fb148ccc"
+  integrity sha512-hpX1r0sEXoJB0HYPau2/Eo87MKDGDE57V2DEzKYgG3m41aNIqK8ZYKIuJBgMfHg4y51Ncrp9J4VS6XLD7GUFgw==
   dependencies:
     "@babel/core" "^7.18.2"
     "@babel/polyfill" "^7.12.1"

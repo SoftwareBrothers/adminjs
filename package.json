@@ -41,14 +41,14 @@
   },
   "homepage": "https://github.com/SoftwareBrothers/adminjs#readme",
   "peerDependencies": {
-    "@adminjs/common": "^1.0.0-dev.1"
+    "@adminjs/common": "^1.0.0-dev.3"
   },
   "dependencies": {
     "flat": "^4.1.0",
     "lodash": "^4.17.21"
   },
   "devDependencies": {
-    "@adminjs/common": "^1.0.0-dev.1",
+    "@adminjs/common": "^1.0.0-dev.3",
     "@babel/core": "^7.18.13",
     "@babel/preset-env": "^7.18.10",
     "@babel/preset-typescript": "^7.18.6",
