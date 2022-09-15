@@ -49,8 +49,6 @@ jobs:
         run: yarn install
       - name: build
         run: yarn build
-      - name: types
-        run: yarn types
       - name: Upload Build
         if: |
           contains(github.ref, 'refs/heads/next')
