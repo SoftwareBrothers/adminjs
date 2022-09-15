@@ -1,19 +1,20 @@
 import ApiController from '../../controllers/api-controller'
 
+export type AdminRoute = {
+  method: string;
+  path: string;
+  Controller: any;
+  action: string;
+  contentType?: string;
+}
+
 /**
  * Type representing the AdminJS.Router
  * @memberof Router
  * @alias RouterType
  */
 export type RouterType = {
-  assets: Array<any>;
-  routes: Array<{
-    method: string;
-    path: string;
-    Controller: any;
-    action: string;
-    contentType?: string;
-  }>;
+  routes: Array<AdminRoute>;
 }
 
 /**
@@ -21,7 +22,6 @@ export type RouterType = {
  * @namespace
  */
 export const Router: RouterType = {
-  assets: [], // todo: remove assets
   routes: [{
     method: 'GET',
     path: '/api/resources/{resourceId}/search/{query}',
