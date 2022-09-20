@@ -44,7 +44,7 @@ class Filter extends React.PureComponent<CombinedProps, FilterState> {
     const { property, filter } = this.props
     const { options } = this.state
     const value = typeof filter[property.path] === 'undefined' ? '' : filter[property.path]
-    const selected = (options || []).find((o) => o.value === Number(value))
+    const selected = (options || []).find((o) => String(o.value) === String(value))
     return (
       <FormGroup>
         <Label>{property.label}</Label>
