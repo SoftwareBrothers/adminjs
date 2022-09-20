@@ -1,6 +1,5 @@
 export * from './build-feature'
 export * from './filter'
-export * from './options-parser'
 export * from './param-converter'
 export * from './populator'
 export * from './request-parser'

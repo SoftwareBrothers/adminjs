@@ -1,4 +1,4 @@
-import { CurrentAdmin, ResourceJSON, PageJSON } from '@adminjs/common/interfaces'
+import { ResourceJSON, PageJSON } from '@adminjs/common/interfaces'
 
 import BaseResource from './adapters/resource/base-resource'
 import BaseDatabase from './adapters/database/base-database'
@@ -23,9 +23,6 @@ import { ResourceOptions } from './decorators/resource/resource-options.interfac
  *   },
  *   databases: [mongooseConnection],
  *   resources: [{ resource: ArticleModel, options: {...}}],
- *   branding: {
- *     companyName: 'XYZ c.o.',
- *   },
  * })
  * ```
  *
@@ -42,9 +39,6 @@ import { ResourceOptions } from './decorators/resource/resource-options.interfac
  *   },
  *   databases: [mongooseConnection],
  *   resources: [{ resource: ArticleModel, options: {...}}],
- *   branding: {
- *     companyName: 'XYZ c.o.',
- *   },
  * }
  *
  * const adminJs = new AdminJS(options)
@@ -76,16 +70,11 @@ export interface AdminJSOptions<T = unknown> {
    * @example
    * pages: {
    *   customPage: {
-   *     label: "Custom page",
    *     handler: async (request, response, context) => {
    *       return {
    *         text: 'I am fetched from the backend',
    *       }
    *     },
-   *   },
-   *   anotherPage: {
-   *     label: "TypeScript page",
-   *     component: AdminJS.bundle('./components/test-component'),
    *   },
    * },
    */
@@ -111,11 +100,6 @@ export interface AdminJSOptions<T = unknown> {
   };
 
   /**
-   * Options which are related to the branding.
-   */
-  branding?: BrandingOptions | BrandingOptionsFunction;
-
-  /**
    * Additional settings.
    */
   settings?: Partial<AdminJSSettings>;
@@ -124,45 +108,6 @@ export interface AdminJSOptions<T = unknown> {
 export type AdminJSSettings = {
   defaultPerPage: number;
 };
-
-/* cspell: enable */
-
-/**
- * Branding Options
- *
- * You can use them to change how AdminJS looks. For instance to change name and
- * colors (dark theme) run:
- *
- * ```javascript
- * new AdminJS({
- *   branding: {
- *     companyName: 'John Doe Family Business',
- *   }
- * })
- * ```
- *
- * @alias BrandingOptions
- * @memberof AdminJSOptions
- */
-export type BrandingOptions = {
-  /**
-   * Name of your company, which will replace "AdminJS".
-   */
-  companyName?: string;
-}
-
-/**
- * Branding Options Function
- *
- * function returning BrandingOptions.
- *
- * @alias BrandingOptionsFunction
- * @memberof AdminJSOptions
- * @returns {BrandingOptions | Promise<BrandingOptions>}
- */
-export type BrandingOptionsFunction = (
-  admin?: CurrentAdmin
-) => BrandingOptions | Promise<BrandingOptions>
 
 /**
  * Object describing regular page in AdminJS
@@ -174,15 +119,7 @@ export type AdminPage = {
   /**
    * Page label/name
    */
-  label?: string;
-  /**
-   * Handler function
-   */
   handler?: PageHandler;
-  /**
-   * Component's name
-   */
-  component?: string;
 }
 
 /**
@@ -251,11 +188,9 @@ export interface AdminJSOptionsWithDefault extends AdminJSOptions {
 export interface AdminJSOptionsJson {
   resources: ResourceJSON[];
   paths: {
-    rootPath: string;
     loginPath: string;
     logoutPath: string;
     [path: string]: string;
   };
-  branding: BrandingOptions;
-  pages: PageJSON[]
+  pages: PageJSON[];
 }

@@ -1,6 +1,4 @@
 import merge from 'lodash/merge'
-import * as path from 'path'
-import * as fs from 'fs'
 import { ResourceJSON, CurrentAdmin } from '@adminjs/common/interfaces'
 import { DEFAULT_PATHS } from '@adminjs/common/constants'
 
@@ -10,11 +8,7 @@ import BaseDatabase from './adapters/database/base-database'
 import ResourcesFactory from './utils/resources-factory/resources-factory'
 import { RecordActionResponse, Action, BulkActionResponse } from './actions/action.interface'
 import { ACTIONS } from './actions'
-
 import { ListActionResponse } from './actions/list/list-action'
-
-const pkg = JSON.parse(fs.readFileSync(path.join(__dirname, '../package.json'), 'utf-8'))
-export const VERSION = pkg.version
 
 export const defaultOptions: AdminJSOptionsWithDefault = {
   paths: DEFAULT_PATHS,
@@ -110,36 +104,8 @@ class AdminJS {
       throw new Error('Adapter has to have both Database and Resource')
     }
 
-    // TODO: check if this is actually valid because "isAdapterFor" is always defined.
-    // checking if both Database and Resource have at least isAdapterFor method
-    // @ts-ignore
-    if (Database.isAdapterFor && Resource.isAdapterFor) {
-      AdminJS.RegisteredAdapters = AdminJS.RegisteredAdapters || []
-      AdminJS.RegisteredAdapters.push({ Database, Resource })
-    } else {
-      throw new Error('Adapter elements have to be a subclass of AdminJS.BaseResource and AdminJS.BaseDatabase')
-    }
-  }
-
-  /**
-   * Renders an entire login page with email and password fields
-   * using {@link Renderer}.
-   *
-   * Used by external plugins
-   *
-   * @param  {Object} options
-   * @param  {String} options.action          Login form action url - it could be
-   *                                          '/admin/login'
-   * @param  {String} [options.errorMessage]  Optional error message. When set,
-   *                                          renderer will print this message in
-   *                                          the form
-   * @return {Promise<string>}                HTML of the rendered page
-   */
-  // eslint-disable-next-line class-methods-use-this
-  async renderLogin({ action, errorMessage }): Promise<string | null> {
-    // todo: allow serving login
-    // return loginTemplate(this, { action, errorMessage })
-    return null
+    AdminJS.RegisteredAdapters = AdminJS.RegisteredAdapters || []
+    AdminJS.RegisteredAdapters.push({ Database, Resource })
   }
 
   /**
@@ -165,20 +131,6 @@ class AdminJS {
     return resource
   }
 
-  // eslint-disable-next-line class-methods-use-this
-  initialize(): Promise<void> {
-    console.log('todo: remove admin.initialize')
-
-    return Promise.resolve()
-  }
-
-  // eslint-disable-next-line class-methods-use-this
-  watch(): Promise<void> {
-    console.log('todo: remove admin.watch')
-
-    return Promise.resolve()
-  }
-
   async toJSON(currentAdmin?: CurrentAdmin): Promise<AdminJSOptionsJson> {
     let jsonResources: ResourceJSON[] = []
     try {
@@ -187,27 +139,29 @@ class AdminJS {
       // eslint-disable-next-line no-console
       console.error(err)
     }
-    const branding = typeof this.options.branding === 'function'
-      ? await this.options.branding(currentAdmin)
-      : this.options.branding
     const pages = Object.entries(this.options.pages ?? {})
       .map(([key, info]) => ({
         name: key,
-        label: info.label ?? key,
-        component: info.component,
+        hasHandler: !!info.handler,
       }))
+    const { rootPath } = this.options.paths
+    const paths = Object.entries(this.options.paths ?? {})
+      .reduce((memo, [pathName, pathString]) => {
+        if (pathName === rootPath) return memo
+        memo[pathName] = pathString.replace(rootPath, '')
+
+        return memo
+      }, {})
 
     return {
       resources: jsonResources,
-      paths: this.options.paths,
-      branding: branding ?? {},
+      paths: paths as AdminJSOptionsJson['paths'],
       pages,
     }
   }
 }
 
 AdminJS.RegisteredAdapters = []
-AdminJS.VERSION = VERSION
 AdminJS.ACTIONS = ACTIONS
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
