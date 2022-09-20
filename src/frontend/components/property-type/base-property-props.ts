@@ -3,7 +3,7 @@ import { RecordJSON, ResourceJSON, PropertyJSON, PropertyPlace } from '../../int
 import { BasePropertyJSON } from '../../interfaces/property-json/property-json.interface'
 
 export type SelectRecord = {
-  value: string;
+  value: string | number;
   label: string;
 }
 

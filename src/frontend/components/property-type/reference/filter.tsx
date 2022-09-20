@@ -5,18 +5,21 @@ import ApiClient from '../../../utils/api-client'
 import { FilterPropertyProps, SelectRecord } from '../base-property-props'
 
 type CombinedProps = FilterPropertyProps
+type FilterState = {
+  options: Array<SelectRecord>
+}
 
-class Filter extends React.PureComponent<CombinedProps> {
+class Filter extends React.PureComponent<CombinedProps, FilterState> {
   private api: ApiClient
-
-  private options: Array<SelectRecord>
 
   constructor(props: CombinedProps) {
     super(props)
     this.api = new ApiClient()
-    this.options = []
     this.loadOptions = this.loadOptions.bind(this)
     this.handleChange = this.handleChange.bind(this)
+    this.state = {
+      options: [],
+    }
   }
 
   handleChange(selected: SelectRecord): void {
@@ -24,20 +27,24 @@ class Filter extends React.PureComponent<CombinedProps> {
     onChange(property.path, selected ? selected.value : '')
   }
 
-  async loadOptions(inputValue: string): Promise<Array<{value: string; label: string }>> {
+  async loadOptions(inputValue: string): Promise<Array<{value: string | number; label: string }>> {
     const { property } = this.props
     const records = await this.api.searchRecords({
       resourceId: property.reference as string,
       query: inputValue,
     })
-    this.options = records.map((r) => ({ value: r.id, label: r.title }))
-    return this.options
+    const options = records.map((r) => ({ value: r.id, label: r.title }))
+    this.setState({
+      options,
+    })
+    return options
   }
 
   render(): ReactNode {
     const { property, filter } = this.props
+    const { options } = this.state
     const value = typeof filter[property.path] === 'undefined' ? '' : filter[property.path]
-    const selected = (this.options || []).find((o) => o.value === value)
+    const selected = (options || []).find((o) => String(o.value) === String(value))
     return (
       <FormGroup>
         <Label>{property.label}</Label>
