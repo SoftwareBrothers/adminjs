@@ -34,14 +34,5 @@ describe('AdminJS', function () {
           Database: null as unknown as typeof BaseDatabase })
       }).to.throw('Adapter has to have both Database and Resource')
     })
-
-    it('throws an error when adapter has elements not being subclassed from base adapter', function () {
-      expect(() => {
-        AdminJS.registerAdapter({
-          Resource: {} as typeof BaseResource,
-          Database: {} as typeof BaseDatabase,
-        })
-      }).to.throw('Adapter elements have to be a subclass of AdminJS.BaseResource and AdminJS.BaseDatabase')
-    })
   })
 })
