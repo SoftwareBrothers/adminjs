@@ -14,9 +14,6 @@ export const BulkDeleteAction: Action<BulkActionResponse> = {
   name: 'bulkDelete',
   isVisible: true,
   actionType: 'bulk',
-  icon: 'Delete',
-  showInDrawer: true,
-  variant: 'danger',
   /**
    * Responsible for deleting existing records.
    *
@@ -31,7 +28,7 @@ export const BulkDeleteAction: Action<BulkActionResponse> = {
     const { records, resource } = context
 
     if (!records || !records.length) {
-      throw new NotFoundError('no records were selected.', 'Action#handler')
+      throw new NotFoundError('No records were selected.', 'Action#handler')
     }
     if (request.method === 'get') {
       const recordsInJSON = records.map((record) => record.toJSON(context.currentAdmin))
@@ -51,7 +48,7 @@ export const BulkDeleteAction: Action<BulkActionResponse> = {
         },
       }
     }
-    throw new Error('method should be either "post" or "get"')
+    throw new Error('Method should be either "post" or "get"')
   },
 }
 

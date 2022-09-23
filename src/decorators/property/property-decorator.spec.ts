@@ -166,19 +166,13 @@ describe('PropertyDecorator', () => {
         'name',
         'type',
         'reference',
-        'components',
         'isDisabled',
         'subProperties',
         'isArray',
-        'isDraggable',
-        'custom',
         'resourceId',
         'propertyPath',
         'isRequired',
         'isVirtual',
-        'props',
-        'hideLabel',
-        'description',
       )
     })
   })

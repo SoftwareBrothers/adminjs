@@ -1,5 +1,4 @@
 import { CurrentAdmin, RecordJSON, NoticeMessage } from '@adminjs/common/interfaces'
-import { LayoutElement, LayoutElementFunction } from '@adminjs/common/utils'
 
 import BaseRecord from '../adapters/record/base-record'
 import BaseResource from '../adapters/resource/base-resource'
@@ -365,32 +364,6 @@ export interface Action <T extends ActionResponse> {
    */
   isAccessible?: boolean | IsFunction;
   /**
-   * If filter should be visible on the sidebar. Only for _resource_ actions
-   *
-   * Example of creating new resource action with filter
-   *
-   * ```javascript
-   * new AdminJS({ resources: [{
-   *   resource: Car,
-   *   options: { actions: {
-   *     newAction: {
-   *       type: 'resource',
-   *       showFilter: true,
-   *     }
-   *   }}
-   * }]})
-   * ```
-   */
-  showFilter?: boolean;
-  /**
-   * If action should have resource actions buttons displayed above action header.
-   *
-   * Defaults to `true`
-   *
-   * @new in version v5.8.1
-   */
-  showResourceActions?: boolean;
-  /**
    * Type of an action - could be either _resource_, _record_ or _bulk_.
    *
    * <img src="./images/actions.png">
@@ -398,45 +371,6 @@ export interface Action <T extends ActionResponse> {
    * When you define a new action - it is required.
    */
   actionType: ActionType;
-  /**
-   * icon name for the action. Take a look {@link Icon} component,
-   * because what you put here is passed down to it.
-   *
-   * ```javascript
-   * new AdminJS({ resources: [{
-   *   resource: Car,
-   *   options: { actions: { edit: { icon: 'Add' } } },
-   * }]})
-   * ```
-   */
-  icon?: string;
-  /**
-   * guard message - user will have to confirm it before executing an action.
-   *
-   * ```javascript
-   * new AdminJS({ resources: [{
-   *   resource: Car,
-   *   options: { actions: {
-   *     delete: {
-   *       guard: 'doYouReallyWantToDoThis',
-   *     }
-   *   }}
-   * }]})
-   * ```
-   */
-  guard?: string;
-  /**
-   * Component which will be used to render the action. To pass the component
-   * use {@link AdminJS.bundle} method.
-   *
-   * Action components accepts {@link ActionProps} and are rendered by the
-   * {@link BaseActionComponent}
-   *
-   * When component is set to `false` then action doesn't have it's own view.
-   * Instead after clicking button it is immediately performed. Example of
-   * an action without a view is {@link module:DeleteAction}.
-   */
-  component?: string | false;
   /**
    * handler function which will be invoked by either:
    * - {@link ApiController#resourceAction}
@@ -540,90 +474,4 @@ export interface Action <T extends ActionResponse> {
    *
    */
   after?: After<T> | Array<After<T>>;
-
-  /**
-   * Indicates if given action should be seen in a drawer or in a full screen. Default to false
-   */
-  showInDrawer?: boolean;
-
-  /**
-   * Indicates if Action Header should be hidden.
-   * Action header consist of:
-   * - breadcrumbs
-   * - action buttons
-   * - action title
-   */
-  hideActionHeader?: boolean;
-
-  /**
-   * The max width of action HTML container.
-   * You can put here an actual size in px or an array of widths, where different values
-   * will be responsible for different breakpoints.
-   * It is directly passed to action's wrapping {@link Box} component, to its `width` property.
-   *
-   * Examples
-   * ```javascript
-   *
-   * // passing regular string
-   * containerWidth: '800px'
-   *
-   * // passing number for 100% width
-   * containerWidth: 1
-   *
-   * // passing values for different {@link breakpoints}
-   * containerWidth: [1, 1/2, 1/3]
-   * ```
-   */
-  containerWidth?: string | number | Array<string | number>;
-  /**
-   * Definition for the layout. Works with the edit and show actions.
-   *
-   * With the help of {@link LayoutElement} you can put all the properties to whatever
-   * layout you like, without knowing React.
-   *
-   * This is an example of defining a layout
-   *
-   * ```
-   * const layout = [{ width: 1 / 2 }, [
-   *     ['@H3', { children: 'Company data' }],
-   *     'companyName',
-   *     'companySize',
-   *   ]],
-   *   [
-   *     ['@H3', { children: 'Contact Info' }],
-   *     [{ flexDirection: 'row', flex: true }, [
-   *       ['email', { pr: 'default', flexGrow: 1 }],
-   *       ['address', { flexGrow: 1 }],
-   *     ]],
-   *   ],
-   * ]
-   * ```
-   *
-   * Alternatively you can pass a {@link LayoutElementFunction function} taking
-   * {@link CurrentAdmin} as an argument. This will allow you to show/hide
-   * given property for restricted users.
-   *
-   * To see entire documentation and more examples visit {@link LayoutElement}
-   *
-   * @see LayoutElement
-   * @see LayoutElementFunction
-   */
-  layout?: LayoutElementFunction | Array<LayoutElement>;
-
-  /**
-   * Defines the variant of the action. based on that it will receive given color.
-   */
-  variant?: string;
-
-  /**
-   * Action can be nested. If you give here another action name - it will be nested under it.
-   * If parent action doesn't exists - it will be nested under name in the parent.
-   */
-  parent?: string;
-
-  /**
-   * Any custom properties you want to pass down to {@link ActionJSON}. They have to
-   * be stringified.
-   */
-  custom?: Record<string, any>;
 }

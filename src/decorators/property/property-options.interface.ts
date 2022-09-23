@@ -15,15 +15,6 @@ export default interface PropertyOptions {
     filter?: boolean;
   };
   /**
-   * List of possible overridden components for given property.
-   */
-  components?: {
-    show?: string;
-    list?: string;
-    edit?: string;
-    filter?: string;
-  };
-  /**
    * Property type
    */
   type?: PropertyType;
@@ -39,16 +30,8 @@ export default interface PropertyOptions {
 
   /**
    * Indicates if given property should be treated as array of elements.
-   * @new In version 3.3
    */
   isArray?: boolean;
-
-  /**
-   * Indicates if array elements should be draggable when editing.
-   * It is only usable if the property is an array.
-   * @new In version 3.5
-   */
-  isDraggable?: boolean;
 
   /**
    * position of the field in a list,
@@ -67,23 +50,6 @@ export default interface PropertyOptions {
   }>;
 
   /**
-   * Custom properties passed to the frontend in {@link PropertyJSON}
-   */
-  custom?: {
-    [key: string]: any;
-  };
-
-  /**
-   * Additional props passed to the actual React component rendering given property in Edit
-   * component.
-   *
-   * @new in version 3.3
-   */
-  props?: {
-    [key: string]: any;
-  };
-
-  /**
    * Whether given property should be editable or not.
    */
   isDisabled?: boolean;
@@ -99,19 +65,9 @@ export default interface PropertyOptions {
   isRequired?: boolean;
 
   /**
-   * Whether label should be hidden - false by default
-   */
-  hideLabel?: boolean;
-
-  /**
    * Name of the resource to which this property should be a reference.
    * If set - {@link PropertyOptions.type} always returns `reference`
    * @new In version 3.3
    */
   reference?: string;
-
-  /**
-   * Description of field. Shown as hoverable hint after label.
-   */
-  description?: string;
 }

@@ -8,7 +8,6 @@ import { ResourceOptions } from './resource-options.interface'
 import {
   decorateActions,
   decorateProperties,
-  getNavigation,
   flatSubProperties,
   DecoratedProperties,
   getPropertyByKey,
@@ -105,15 +104,6 @@ class ResourceDecorator {
    */
   id(): string {
     return this.options.id || this._resource.id()
-  }
-
-  /**
-   * Returns resource parent along with the icon. By default it is a
-   * database type with its icon
-   * @return {Parent}   ResourceJSON['parent']}
-   */
-  getNavigation(): ResourceJSON['navigation'] {
-    return getNavigation(this.options, this._resource)
   }
 
   /**
@@ -261,23 +251,6 @@ class ResourceDecorator {
     return record.get(this.titleProperty().name()) as string
   }
 
-  getHref(currentAdmin?: CurrentAdmin): string | null {
-    const { href } = this.options
-    if (href) {
-      if (typeof href === 'function') {
-        return href({
-          resource: this._resource,
-          currentAdmin,
-        })
-      }
-      return href
-    }
-    // if (this.resourceActions(currentAdmin).find((action) => action.name === 'list')) {
-    //   return this.h.resourceUrl({ resourceId: this.id() })
-    // }
-    return null
-  }
-
   /**
    * Returns JSON representation of a resource
    *
@@ -294,11 +267,9 @@ class ResourceDecorator {
     return {
       id: this.id(),
       name: this.getResourceName(),
-      navigation: this.getNavigation(),
-      href: this.getHref(currentAdmin),
       titleProperty: this.titleProperty().toJSON(),
-      resourceActions: this.resourceActions(currentAdmin).map((ra) => ra.toJSON(currentAdmin)),
-      actions: Object.values(this.actions).map((action) => action.toJSON(currentAdmin)),
+      resourceActions: this.resourceActions(currentAdmin).map((ra) => ra.toJSON()),
+      actions: Object.values(this.actions).map((action) => action.toJSON()),
       properties: flattenPropertiesJSON,
       listProperties: this.getProperties({
         where: 'list', max: DEFAULT_MAX_COLUMNS_IN_LIST,

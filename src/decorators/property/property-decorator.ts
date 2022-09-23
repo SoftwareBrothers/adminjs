@@ -157,13 +157,6 @@ class PropertyDecorator {
     return this.property.isArray()
   }
 
-  isDraggable(): boolean {
-    if (typeof this.options.isDraggable !== 'undefined') {
-      return this.isArray() && !!this.options.isDraggable
-    }
-    return this.property.isDraggable()
-  }
-
   /**
    * Indicates if given property should be visible
    *
@@ -246,7 +239,6 @@ class PropertyDecorator {
       isTitle: this.isTitle(),
       isId: this.isId(),
       position: this.position(),
-      custom: typeof this.options.custom === 'undefined' ? {} : this.options.custom,
       isSortable: this.isSortable(),
       isRequired: this.isRequired(),
       availableValues: this.availableValues(),
@@ -254,18 +246,13 @@ class PropertyDecorator {
       propertyPath: this.propertyPath,
       isDisabled: this.isDisabled(),
       type: this.type(),
-      hideLabel: !!this.options.hideLabel,
       reference: this.referenceName(),
-      components: this.options.components,
       subProperties: this.subProperties()
         .filter((subProperty) => !where || subProperty.isVisible(where))
         .map((subProperty) => subProperty.toJSON(where)),
       isArray: this.isArray(),
-      isDraggable: this.isDraggable(),
       resourceId: this._resource.id(),
       isVirtual: this.isVirtual,
-      props: this.options.props || {},
-      description: this.options.description,
     }
   }
 

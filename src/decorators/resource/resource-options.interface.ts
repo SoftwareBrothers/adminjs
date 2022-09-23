@@ -63,29 +63,6 @@ export interface ResourceOptions {
    * List of properties which should be visible on the filter
    */
   filterProperties?: Array<string>;
-  /**
-   * Where resource link in sidebar should redirect. Default to the list action.
-   */
-  href?: HrefFunction | string;
-  /**
-   * Navigation option saying under which menu this resource should be nested in sidebar.
-   * Default to the database name.
-   *
-   * You have couple of options:
-   * - when you set both navigation.name and navigation.icon this resource will be nested under
-   *   this menu.
-   * - when you set navigation.name or navigation to a string this resource will be nested under
-   *   this menu and the icon will come from the database type
-   * - when you set navigation.icon but leave navigation.name as `null` this resource will be top
-   *   level and it will have an icon.
-   * - when you set navigation to null this resource will be top level, but without the icon
-   * - when you set navigation to false this resource will be hidden in the navigation
-   * @new In version 3.3
-   */
-  navigation?: {
-    name?: string | null;
-    icon?: string;
-  } | string | boolean | null;
 
   /**
    * Default sort property and direction.

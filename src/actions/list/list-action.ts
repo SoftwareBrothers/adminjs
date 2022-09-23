@@ -20,8 +20,6 @@ export const ListAction: Action<ListActionResponse> = {
   name: 'list',
   isVisible: true,
   actionType: 'resource',
-  showFilter: true,
-  showInDrawer: false,
   /**
    * Responsible for returning data for all records.
    *

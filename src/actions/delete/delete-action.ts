@@ -15,10 +15,6 @@ export const DeleteAction: Action<RecordActionResponse> = {
   name: 'delete',
   isVisible: true,
   actionType: 'record',
-  icon: 'TrashCan',
-  guard: 'confirmDelete',
-  component: false,
-  variant: 'danger',
   /**
    * Responsible for deleting existing record.
    *

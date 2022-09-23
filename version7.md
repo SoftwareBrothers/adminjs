@@ -14,21 +14,30 @@ For now, most notable changes in configuration are:
 6. all bundling related logic has been removed, you will now have to bundle frontend code by yourself using Webpack. This adds more flexibility to what you can do with the frontend.
 
 
-removed "label" from action config, action should be translated by it's name in the frontend
-wywalic redirectURl
-notice message
+ResourceOptions:
+- deleted `href`
 
-          message: translateMessage('successfullyBulkDeleted', resource.id(), {
-            count: records.length,
-          }),
+PropertyOptions:
+- deleted `custom`
+- deleted `props`
+- deleted `label`
+- deleted `description`
+- deleted `hideLabel`
+- deleted `isDraggable`
+- deleted `components`
 
-na
+Action:
+- deleted `showResourceActions`
+- deleted `showFilter`
+- deleted `label`
+- deleted `icon`
+- deleted `guard`
+- deleted `component`
+- deleted `showInDrawer`
+- deleted `hideActionHeader`
+- deleted `containerWidth`
+- deleted `layout`
+- deleted `variant`
+- deleted `parent`
+- deleted `custom`
 
-        notice: {
-          message: 'successfullyBulkDeleted',
-          resourceId: resource.decorate().id(),
-          payload: { count: records.length },
-          type: 'success',
-        },
-
-ogarnac resource.id()

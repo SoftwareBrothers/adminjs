@@ -1,9 +1,4 @@
 import {
-  ParsedLayoutElement,
-  LayoutElement,
-  layoutElementParser,
-} from '@adminjs/common/utils'
-import {
   ActionJSON,
   CurrentAdmin,
 } from '@adminjs/common/interfaces'
@@ -281,48 +276,8 @@ class ActionDecorator {
     )
   }
 
-  containerWidth(): ActionJSON['containerWidth'] {
-    if (typeof this.action.containerWidth === 'undefined') {
-      return this.action.showInDrawer
-        ? 'default'
-        : 1
-    }
-    return this.action.containerWidth
-  }
-
-  layout(currentAdmin?: CurrentAdmin): Array<ParsedLayoutElement> | null {
-    if (this.action.layout) {
-      let layoutConfig: Array<LayoutElement>
-      if (typeof this.action.layout === 'function') {
-        layoutConfig = this.action.layout(currentAdmin) as Array<LayoutElement>
-      } else {
-        layoutConfig = this.action.layout
-      }
-      return layoutConfig.map((element) => layoutElementParser(element))
-    }
-    return null
-  }
-
-  variant(): string {
-    return this.action.variant || 'default'
-  }
-
-  parent(): string | null {
-    return this.action.parent || null
-  }
-
-  custom(): Record<string, any> {
-    return this.action.custom || {}
-  }
-
   hasHandler(): boolean {
     return !!this.action.handler
-  }
-
-  showResourceActions(): boolean {
-    if (this.action.showResourceActions === undefined) return true
-
-    return !!this.action.showResourceActions
   }
 
   /**
@@ -332,25 +287,13 @@ class ActionDecorator {
    *
    * @return  {ActionJSON}  serialized action
    */
-  toJSON(currentAdmin?: CurrentAdmin): ActionJSON {
+  toJSON(): ActionJSON {
     const resourceId = this._resource._decorated?.id?.() || this._resource.id()
     return {
       name: this.action.name,
       actionType: this.action.actionType,
-      icon: this.action.icon,
       resourceId,
-      guard: this.action.guard ?? '',
-      showFilter: !!this.action.showFilter,
-      showResourceActions: this.showResourceActions(),
-      component: this.action.component,
-      showInDrawer: !!this.action.showInDrawer,
-      hideActionHeader: !!this.action.hideActionHeader,
-      containerWidth: this.containerWidth(),
-      layout: this.layout(currentAdmin),
-      variant: this.variant(),
-      parent: this.parent(),
       hasHandler: this.hasHandler(),
-      custom: this.custom(),
     }
   }
 }
