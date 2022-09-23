@@ -2,17 +2,11 @@
 # yarn lockfile v1
 
 
-"@adminjs/common@^1.0.0-dev.3":
-  version "1.0.0-dev.3"
-  resolved "https://registry.yarnpkg.com/@adminjs/common/-/common-1.0.0-dev.3.tgz#d24a09d5b3afcf7c509e1076c9327d34fb148ccc"
-  integrity sha512-hpX1r0sEXoJB0HYPau2/Eo87MKDGDE57V2DEzKYgG3m41aNIqK8ZYKIuJBgMfHg4y51Ncrp9J4VS6XLD7GUFgw==
+"@adminjs/common@^1.0.0-dev.4":
+  version "1.0.0-dev.4"
+  resolved "https://registry.yarnpkg.com/@adminjs/common/-/common-1.0.0-dev.4.tgz#f8de162c780842af514942b918f59ad10a581740"
+  integrity sha512-hlO9sL2drTX77XQFGlm0gnKx8qVUmmRCoHUaFpZf2D7C8Ms6SAXnZyOnI5KtTpHIOMaaPiq4yOzmhv4RInWi3A==
   dependencies:
-    "@babel/core" "^7.18.2"
-    "@babel/polyfill" "^7.12.1"
-    "@babel/preset-env" "^7.18.2"
-    "@babel/preset-react" "^7.17.12"
-    "@babel/preset-typescript" "^7.17.12"
-    "@babel/register" "^7.17.7"
     flat "^4.1.0"
     lodash "^4.17.21"
 
@@ -944,13 +938,6 @@
   version "7.18.9"
   resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.18.9.tgz#b4fcfce55db3d2e5e080d2490f608a3b9f407f4a"
   integrity sha512-lkqXDcvlFT5rvEjiu6+QYO+1GXrEHRo2LOtS7E4GtX5ESIZOgepqsZBVIj6Pv+a6zqsya9VCgiK1KAK4BvJDAw==
-  dependencies:
-    regenerator-runtime "^0.13.4"
-
-"@babel/runtime@^7.17.2":
-  version "7.17.9"
-  resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.17.9.tgz#d19fbf802d01a8cb6cf053a64e472d42c434ba72"
-  integrity sha512-lSiBBvodq29uShpWGNbgFdKYNiFDo5/HIYsaCEY9ff4sb10x9jizo2+pRrSyF4jKZCXqgzuqBOQKbUm90gQwJg==
   dependencies:
     regenerator-runtime "^0.13.4"
 
@@ -4484,13 +4471,6 @@ global-dirs@^3.0.0:
   dependencies:
     ini "2.0.0"
 
-global-dirs@^3.0.0:
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/global-dirs/-/global-dirs-3.0.0.tgz#70a76fe84ea315ab37b1f5576cbde7d48ef72686"
-  integrity sha512-v8ho2DS5RiCjftj1nD9NmnfaOzTdud7RRnVd9kFNOjqZbISlx5DQ+OrTkywgd0dIt7oFCvKetZSHoHcP3sDdiA==
-  dependencies:
-    ini "2.0.0"
-
 globals@^11.1.0:
   version "11.12.0"
   resolved "https://registry.yarnpkg.com/globals/-/globals-11.12.0.tgz#ab8795338868a0babd8525758018c2a7eb95c42e"
@@ -4711,13 +4691,6 @@ husky@^8.0.1:
   version "8.0.1"
   resolved "https://registry.yarnpkg.com/husky/-/husky-8.0.1.tgz#511cb3e57de3e3190514ae49ed50f6bc3f50b3e9"
   integrity sha512-xs7/chUH/CKdOCs7Zy0Aev9e/dKOMZf3K1Az1nar3tzlv0jfqnYtu235bstsWTmXOR0EfINrPa97yy4Lz6RiKw==
-
-i18next@^21.9.1:
-  version "21.9.1"
-  resolved "https://registry.yarnpkg.com/i18next/-/i18next-21.9.1.tgz#9e3428990f5b2cc9ac1b98dd025f3e411c368249"
-  integrity sha512-ITbDrAjbRR73spZAiu6+ex5WNlHRr1mY+acDi2ioTHuUiviJqSz269Le1xHAf0QaQ6GgIHResUhQNcxGwa/PhA==
-  dependencies:
-    "@babel/runtime" "^7.17.2"
 
 iconv-lite@^0.6.2:
   version "0.6.2"

@@ -48,7 +48,7 @@
     "lodash": "^4.17.21"
   },
   "devDependencies": {
-    "@adminjs/common": "^1.0.0-dev.3",
+    "@adminjs/common": "^1.0.0-dev.4",
     "@babel/core": "^7.18.13",
     "@babel/preset-env": "^7.18.10",
     "@babel/preset-typescript": "^7.18.6",
