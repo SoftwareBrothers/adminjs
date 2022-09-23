@@ -14,6 +14,8 @@ For now, most notable changes in configuration are:
 6. all bundling related logic has been removed, you will now have to bundle frontend code by yourself using Webpack. This adds more flexibility to what you can do with the frontend.
 
 
+Changes in configuration:
+
 ResourceOptions:
 - deleted `href`
 
