@@ -1,5 +1,5 @@
 import { Dispatch, SetStateAction } from 'react'
-import { ActionJSON, RecordJSON, ResourceJSON, PageJSON } from '../../interfaces'
+import { ActionJSON, RecordJSON, ResourceJSON } from '../../interfaces'
 
 /**
  * Props which are passed to all action components
@@ -10,23 +10,23 @@ export type ActionProps = {
   /**
    * Action object describing the action
    */
-  action: ActionJSON
+  action: ActionJSON;
   /**
    * Object of type: {@link ResourceJSON}
    */
-  resource: ResourceJSON
+  resource: ResourceJSON;
   /**
    * Selected record. Passed for actions with "record" actionType
    */
-  record?: RecordJSON
+  record?: RecordJSON;
 
   /**
    * Selected records. Passed for actions with "bulk" actionType
    */
-  records?: Array<RecordJSON>
+  records?: Array<RecordJSON>;
 
   /**
    * Sets tag in a header of an action. It is a function taking tag as an argument
    */
-  setTag?: Dispatch<SetStateAction<string>>
+  setTag?: Dispatch<SetStateAction<string>>;
 }

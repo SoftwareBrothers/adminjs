@@ -1,3 +1,6 @@
+import { IsFunction } from 'src/backend'
+import { ActionJSON } from './action'
+
 /**
  * Representing the page in the sidebar
  * @subcategory Frontend
@@ -16,4 +19,9 @@ export interface PageJSON {
    * Page icon
    */
   icon?: string;
+
+  /**
+   * Page visibility
+   */
+  isVisible: boolean | IsFunction;
 }

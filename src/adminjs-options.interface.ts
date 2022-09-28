@@ -3,7 +3,7 @@ import { TransformOptions as BabelConfig } from 'babel-core'
 
 import BaseResource from './backend/adapters/resource/base-resource'
 import BaseDatabase from './backend/adapters/database/base-database'
-import { PageContext } from './backend/actions/action.interface'
+import { IsFunction, PageContext } from './backend/actions/action.interface'
 import { ResourceOptions } from './backend/decorators/resource/resource-options.interface'
 import { Locale } from './locale/config'
 import { CurrentAdmin } from './current-admin.interface'
@@ -389,6 +389,11 @@ export type AdminPage = {
    * Page icon
    */
   icon?: string;
+
+  /**
+   * Page visibility
+   */
+  isVisible?: boolean | IsFunction
 }
 
 /**
