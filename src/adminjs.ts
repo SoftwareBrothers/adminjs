@@ -1,4 +1,4 @@
-import * as _ from 'lodash'
+import merge from 'lodash/merge'
 import * as path from 'path'
 import * as fs from 'fs'
 import i18n, { i18n as I18n } from 'i18next'
@@ -110,7 +110,7 @@ class AdminJS {
      * @type {AdminJSOptions}
      * @description Options given by a user
      */
-    this.options = _.merge({}, defaultOptions, options)
+    this.options = merge({}, defaultOptions, options)
 
     this.resolveBabelConfigPath()
 

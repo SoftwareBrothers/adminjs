@@ -1,5 +1,5 @@
-import * as flat from 'flat'
-import { Action, ActionResponse } from '../action.interface'
+import { flat } from '../../../utils/flat'
+import { Action, ActionResponse, ActionQueryParameters } from '../action.interface'
 import { RecordJSON } from '../../../frontend/interfaces'
 import Filter from '../../utils/filter/filter'
 
@@ -39,7 +39,7 @@ export const SearchAction: Action<SearchActionResponse> = {
       filters: customFilters = {},
       perPage = 50,
       page = 1,
-    } = flat.unflatten(query || {})
+    } = flat.unflatten(query || {}) as ActionQueryParameters
 
     const queryString = request.params && request.params.query
     const queryFilter = queryString ? { [titlePropertyName]: queryString } : {}

@@ -24,7 +24,7 @@ NavBar.defaultProps = {
 }
 
 type Props = {
-  toggleSidebar: (any) => void
+  toggleSidebar: () => void
 }
 
 const TopBar: React.FC<Props> = (props) => {
@@ -54,6 +54,6 @@ const TopBar: React.FC<Props> = (props) => {
   )
 }
 
-const OverridableTopbar = allowOverride(TopBar, 'TopBar')
+const OverridableTopbar = allowOverride<Props>(TopBar, 'TopBar')
 
 export { OverridableTopbar as default, OverridableTopbar as TopBar }

@@ -10,6 +10,14 @@ import { RecordJSON } from '../../frontend/interfaces'
 import { NoticeMessage } from '../../frontend/hoc/with-notice'
 import { TranslateFunctions } from '../../utils/translate-functions.factory'
 
+export type ActionQueryParameters = {
+  sortBy?: string
+  direction?: 'asc' | 'desc'
+  filters?: Record<string, unknown>
+  perPage?: number
+  page?: number
+}
+
 export type ActionType = 'resource' | 'record' | 'bulk'
 
 /**

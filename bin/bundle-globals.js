@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 /* eslint-disable import/no-extraneous-dependencies */
 /**
  * @private
@@ -67,6 +68,7 @@ const run = async () => {
 }
 
 run().catch((error) => {
+  // eslint-disable-next-line no-console
   console.log(error)
   process.exit(1)
 }).finally(() => {

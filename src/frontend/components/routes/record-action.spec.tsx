@@ -1,7 +1,7 @@
 import React from 'react'
 import sinon from 'sinon'
 import { expect } from 'chai'
-import _ from 'lodash'
+import merge from 'lodash/merge'
 import i18n from 'i18next'
 import { render, RenderResult } from '@testing-library/react'
 import { Provider } from 'react-redux'
@@ -23,7 +23,8 @@ const defaultStore = {
 
 const renderSubject = (store: Partial<ReduxState> = {}, location?: string): RenderResult => {
   const path = '/resources/:resourceId/records/:recordId/:actionName'
-  const storeWithDefault = _.merge(defaultStore, store)
+  const storeWithDefault = merge(defaultStore, store)
+
   const renderResult = render(
     <TestContextProvider location={location}>
       <Provider store={createStore(storeWithDefault)}>

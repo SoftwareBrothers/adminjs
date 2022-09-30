@@ -14,7 +14,7 @@ export type BuildActionCallApiTriggerOptions = {
   search?: Location['search'];
 }
 
-export const buildActionCallApiTrigger = <K>(
+export const buildActionCallApiTrigger = <K extends ActionResponse>(
   options: BuildActionCallApiTriggerOptions,
 ): CallApiFunction<K> => {
   const { action, params, actionResponseHandler, search } = options
