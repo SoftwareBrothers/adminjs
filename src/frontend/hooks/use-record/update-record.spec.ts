@@ -1,5 +1,5 @@
 import { expect } from 'chai'
-import { unflatten } from 'flat'
+import { flat } from '../../../utils/flat'
 
 import updateRecord from './update-record'
 import { RecordJSON } from '../../interfaces'
@@ -83,7 +83,7 @@ describe('updateRecord', function () {
 
     const update = updateRecord(arrayPropertyName, value)
     const updatedRecord = update(previousRecord)
-    const unflattenParams = unflatten<Record<string, any>, any>(updatedRecord.params)
+    const unflattenParams = flat.unflatten<Record<string, any>, any>(updatedRecord.params)
 
     expect(unflattenParams[arrayPropertyName]).to.deep.equal(value)
   })

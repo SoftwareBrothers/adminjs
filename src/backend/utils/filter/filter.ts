@@ -1,4 +1,4 @@
-import * as flat from 'flat'
+import { flat } from '../../../utils/flat'
 import BaseProperty from '../../adapters/property/base-property'
 import BaseResource from '../../adapters/resource/base-resource'
 import BaseRecord from '../../adapters/record/base-record'

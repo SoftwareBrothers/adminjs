@@ -1,5 +1,3 @@
-export { flatten, unflatten } from 'flat'
-
 export * from './actions'
 export * from './adapters'
 export * from './controllers'

@@ -1,5 +1,5 @@
-import * as flat from 'flat'
-import { Action, ActionResponse } from '../action.interface'
+import { flat } from '../../../utils/flat'
+import { Action, ActionResponse, ActionQueryParameters } from '../action.interface'
 import sortSetter from '../../services/sort-setter/sort-setter'
 import Filter from '../../utils/filter/filter'
 import populator from '../../utils/populator/populator'
@@ -32,14 +32,14 @@ export const ListAction: Action<ListActionResponse> = {
    */
   handler: async (request, response, context) => {
     const { query } = request
-    const { sortBy, direction, filters = {} } = flat.unflatten(query || {})
-    const { resource } = context
-    let { page, perPage } = flat.unflatten(query || {})
+    const { sortBy, direction, filters = {} } = flat.unflatten(query || {}) as ActionQueryParameters
+    const { resource, _admin } = context
+    let { page, perPage } = flat.unflatten(query || {}) as ActionQueryParameters
 
     if (perPage) {
       perPage = +perPage > PER_PAGE_LIMIT ? PER_PAGE_LIMIT : +perPage
     } else {
-      perPage = context._admin.options.settings?.defaultPerPage ?? 10
+      perPage = _admin.options.settings?.defaultPerPage ?? 10
     }
     page = Number(page) || 1
 
