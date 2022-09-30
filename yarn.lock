@@ -13,12 +13,12 @@
     prosemirror-transform "^1.2.1"
     prosemirror-view "^1.13.3"
 
-"@adminjs/design-system@^3.0.1":
-  version "3.0.1"
-  resolved "https://registry.yarnpkg.com/@adminjs/design-system/-/design-system-3.0.1.tgz#1a866244da3c1b833a53aee56307907a16295317"
-  integrity sha512-s7/zAMIWzCb/O2NHfOJ1TNcAVrWe1EeDref3fM1Y1Bsyocj6IkGBVU+0Q1AUIOzEQJlmDxFAyrPUzFgFOKUaoQ==
+"@adminjs/design-system@^3.0.3":
+  version "3.0.3"
+  resolved "https://registry.yarnpkg.com/@adminjs/design-system/-/design-system-3.0.3.tgz#64614d9688840dcf6b28dbd7544f7f611854e0aa"
+  integrity sha512-+lYXXXqmThA5de9+wSCvmeTq4z9K+GzoUleG2itWJg0m7Hx9jIJkJL2BPkAVd0wnSzELKLC8wo0CxqBVmNT0vw==
   dependencies:
-    "@carbon/icons-react" "^10.49.0"
+    "@carbon/icons-react" "^11.8.0"
     "@hypnosphi/create-react-context" "^0.3.1"
     "@tiptap/extension-character-count" "2.0.0-beta.31"
     "@tiptap/extension-code" "2.0.0-beta.28"
@@ -39,7 +39,7 @@
     jw-paginate "^1.0.4"
     lodash "^4.17.20"
     polished "^3.6.5"
-    react-currency-input-field "https://github.com/dziraf/react-currency-input-field"
+    react-currency-input-field "^3.6.5"
     react-datepicker "^4.8.0"
     react-phone-input-2 "^2.15.1"
     react-select "^5.2.2"
@@ -1080,17 +1080,17 @@
     "@babel/helper-validator-identifier" "^7.19.1"
     to-fast-properties "^2.0.0"
 
-"@carbon/icon-helpers@^10.28.0":
+"@carbon/icon-helpers@^10.33.0":
   version "10.33.0"
   resolved "https://registry.yarnpkg.com/@carbon/icon-helpers/-/icon-helpers-10.33.0.tgz#6b9e467529c7f950fe87a6f45ae0efdcb9b55a26"
   integrity sha512-cdax+RiemAnrATgxL5zyCsD5CV1rJAVTjORXyKxhKSu9Fw6AFJEovJLR9+QQBbPaj/QNTB4o7mJ3YD15LLlB2w==
 
-"@carbon/icons-react@^10.49.0":
-  version "10.49.0"
-  resolved "https://registry.yarnpkg.com/@carbon/icons-react/-/icons-react-10.49.0.tgz#178f62fe2f5b343fa2d2034fb14203b01d44b894"
-  integrity sha512-Lzz0A/DfR0fBye0pyxA/7+EPr1e0GeA5qYlxoOwOVJrp/L2vFuKPOe7QLBHkNgKly/BAdqN9Uo1IHKbp6Zljeg==
+"@carbon/icons-react@^11.8.0":
+  version "11.8.0"
+  resolved "https://registry.yarnpkg.com/@carbon/icons-react/-/icons-react-11.8.0.tgz#cae7405a364b567792bd90f9f120dab28b3652cf"
+  integrity sha512-bMn/+heKO8G/OdBAcL8/93lBfVdj6uq+B+Gm4Y/MoLNFXfV8TpO5e4rQ1cgshbfoIxtj2D2tUHmFmucBnrUerg==
   dependencies:
-    "@carbon/icon-helpers" "^10.28.0"
+    "@carbon/icon-helpers" "^10.33.0"
     "@carbon/telemetry" "0.1.0"
     prop-types "^15.7.2"
 
@@ -8546,9 +8546,10 @@ rc@1.2.8, rc@^1.2.8:
     minimist "^1.2.0"
     strip-json-comments "~2.0.1"
 
-"react-currency-input-field@https://github.com/dziraf/react-currency-input-field":
-  version "3.6.4"
-  resolved "https://github.com/dziraf/react-currency-input-field#8899f7505f854eaeb58cc9674b69f0f379e65ca1"
+react-currency-input-field@^3.6.5:
+  version "3.6.5"
+  resolved "https://registry.yarnpkg.com/react-currency-input-field/-/react-currency-input-field-3.6.5.tgz#67ed7005a2f1402cb70a23050f6b997e6d1452b6"
+  integrity sha512-tP62WFAhkVv0RGOQVGEPE3MfgciQ4gkiASlmLBDu6tdfMC3jFhIkLU1uqUy3glUvRHyT4avnX/YVVbbXKHLtnA==
 
 react-datepicker@^4.8.0:
   version "4.8.0"
