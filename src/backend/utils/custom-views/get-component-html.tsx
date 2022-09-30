@@ -17,7 +17,7 @@ import createStore, {
 } from '../../../frontend/store/store'
 import AdminJS from '../../../adminjs'
 
-export async function getComponentHtml<T extends Record<string, unknown> = {}>(
+export async function getComponentHtml<T extends Record<string, unknown>>(
   Component: React.FC<T>,
   props: T,
   admin: AdminJS,
