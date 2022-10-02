@@ -23,5 +23,5 @@ export interface PageJSON {
   /**
    * Page visibility
    */
-  isVisible: boolean | IsFunction;
+  isVisible: boolean;
 }
