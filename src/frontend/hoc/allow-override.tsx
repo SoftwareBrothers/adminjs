@@ -14,7 +14,7 @@ import { OverridableComponent } from '../utils/overridable-component'
  * @example
  * AdminJS.bundle('./path/to/component', 'SidebarFooter')
  */
-function allowOverride<P>(
+function allowOverride<P extends Record<string, unknown>>(
   OriginalComponent: ComponentType<P>,
   name: OverridableComponent,
 ): ComponentType<P & {OriginalComponent?: ComponentType<P>}> {
@@ -23,7 +23,9 @@ function allowOverride<P>(
     return OriginalComponent
   }
 
-  const WrapperComponent: React.FC<P> = (props) => {
+  const WrapperComponent: React.FC<P & {
+    OriginalComponent?: ComponentType<P> | undefined;
+  }> = (props) => {
     let globalAny: any = window
     globalAny = window
 

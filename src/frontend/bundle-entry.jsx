@@ -59,7 +59,4 @@ export default {
   ...AppComponents,
   ...Hooks,
   flat,
-  // TODO: remove this from the next release
-  flatten: flat.flatten,
-  unflatten: flat.unflatten,
 }
