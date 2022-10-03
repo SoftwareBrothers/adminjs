@@ -1,65 +1,51 @@
-import React, { ReactNode } from 'react'
+import React, { useState } from 'react'
 import { FormGroup, Label, SelectAsync } from '@adminjs/design-system'
 
 import ApiClient from '../../../utils/api-client'
 import { FilterPropertyProps, SelectRecord } from '../base-property-props'
+import allowOverride from '../../../hoc/allow-override'
 
-type CombinedProps = FilterPropertyProps
-type FilterState = {
-  options: Array<SelectRecord>
-}
+type SelectOptions = Array<{value: string | number; label: string }>
 
-class Filter extends React.PureComponent<CombinedProps, FilterState> {
-  private api: ApiClient
+const Filter: React.FC<FilterPropertyProps> = (props) => {
+  const { property, filter, onChange } = props
+  const [options, setOptions] = useState<SelectOptions>([])
 
-  constructor(props: CombinedProps) {
-    super(props)
-    this.api = new ApiClient()
-    this.loadOptions = this.loadOptions.bind(this)
-    this.handleChange = this.handleChange.bind(this)
-    this.state = {
-      options: [],
-    }
-  }
+  const api = new ApiClient()
 
-  handleChange(selected: SelectRecord): void {
-    const { onChange, property } = this.props
+  const handleChange = (selected: SelectRecord) => {
     onChange(property.path, selected ? selected.value : '')
   }
 
-  async loadOptions(inputValue: string): Promise<Array<{value: string | number; label: string }>> {
-    const { property } = this.props
-    const records = await this.api.searchRecords({
+  const loadOptions = async (inputValue: string): Promise<SelectOptions> => {
+    const records = await api.searchRecords({
       resourceId: property.reference as string,
       query: inputValue,
     })
-    const options = records.map((r) => ({ value: r.id, label: r.title }))
-    this.setState({
-      options,
-    })
-    return options
+
+    const loadedOptions = records.map((r) => ({ value: r.id, label: r.title }))
+    setOptions(loadedOptions)
+
+    return loadedOptions
   }
 
-  render(): ReactNode {
-    const { property, filter } = this.props
-    const { options } = this.state
-    const value = typeof filter[property.path] === 'undefined' ? '' : filter[property.path]
-    const selected = (options || []).find((o) => String(o.value) === String(value))
-    return (
-      <FormGroup>
-        <Label>{property.label}</Label>
-        <SelectAsync
-          variant="filter"
-          value={typeof selected === 'undefined' ? '' : selected}
-          isClearable
-          cacheOptions
-          loadOptions={this.loadOptions}
-          onChange={this.handleChange}
-          defaultOptions
-        />
-      </FormGroup>
-    )
-  }
+  const value = typeof filter[property.path] === 'undefined' ? '' : filter[property.path]
+  const selected = (options || []).find((o) => String(o.value) === String(value))
+
+  return (
+    <FormGroup>
+      <Label>{property.label}</Label>
+      <SelectAsync
+        variant="filter"
+        value={typeof selected === 'undefined' ? '' : selected}
+        isClearable
+        cacheOptions
+        loadOptions={loadOptions}
+        onChange={handleChange}
+        defaultOptions
+      />
+    </FormGroup>
+  )
 }
 
-export default Filter
+export default allowOverride(Filter, 'DefaultReferenceFilterProperty')

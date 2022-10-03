@@ -13,6 +13,7 @@ import {
 import PropertyType from '../property-type'
 import { RecordJSON, ResourceJSON } from '../../interfaces'
 import { useTranslation } from '../../hooks'
+import allowOverride from '../../hoc/allow-override'
 
 export type FilterProps = {
   resource: ResourceJSON;
@@ -36,7 +37,7 @@ const parseQuery = (location): any => {
   return filter
 }
 
-export const FilterDrawer: React.FC<FilterProps> = (props) => {
+const FilterDrawer: React.FC<FilterProps> = (props) => {
   const { resource, isVisible, toggleFilter } = props
   const properties = resource.filterProperties
 
@@ -136,4 +137,9 @@ export const FilterDrawer: React.FC<FilterProps> = (props) => {
   )
 }
 
-export default FilterDrawer
+const OverridableFilterDrawer = allowOverride(FilterDrawer, 'FilterDrawer')
+
+export {
+  OverridableFilterDrawer as default,
+  OverridableFilterDrawer as FilterDrawer,
+}

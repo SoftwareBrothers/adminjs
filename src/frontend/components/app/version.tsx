@@ -4,6 +4,7 @@ import { cssClass, Text, Box } from '@adminjs/design-system'
 
 import { VersionProps } from '../../../adminjs-options.interface'
 import { useTranslation } from '../../hooks'
+import allowOverride from '../../hoc/allow-override'
 
 export type Props = {
   versions: VersionProps;
@@ -18,7 +19,7 @@ VersionItem.defaultProps = {
   color: 'grey100',
 }
 
-export const Version: React.FC<Props> = (props) => {
+const Version: React.FC<Props> = (props) => {
   const { versions } = props
   const { admin, app } = versions
 
@@ -40,4 +41,9 @@ export const Version: React.FC<Props> = (props) => {
   )
 }
 
-export default Version
+const OverridableVersion = allowOverride(Version, 'Version')
+
+export {
+  OverridableVersion as default,
+  OverridableVersion as Version,
+}

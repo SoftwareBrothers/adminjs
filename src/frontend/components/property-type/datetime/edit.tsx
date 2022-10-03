@@ -4,6 +4,7 @@ import { DatePicker, FormGroup, FormMessage } from '@adminjs/design-system'
 import { EditPropertyProps } from '../base-property-props'
 import { recordPropertyIsEqual } from '../record-property-is-equal'
 import { PropertyLabel } from '../utils/property-label'
+import allowOverride from '../../../hoc/allow-override'
 
 const Edit: React.FC<EditPropertyProps> = (props) => {
   const { property, onChange, record } = props
@@ -25,4 +26,4 @@ const Edit: React.FC<EditPropertyProps> = (props) => {
   )
 }
 
-export default memo(Edit, recordPropertyIsEqual)
+export default allowOverride(memo(Edit, recordPropertyIsEqual), 'DefaultDatetimeEditProperty')

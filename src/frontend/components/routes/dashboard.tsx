@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import DefaultDashboard from '../app/default-dashboard'
 import ErrorBoundary from '../app/error-boundary'
 import { ReduxState } from '../../store/store'
+import allowOverride from '../../hoc/allow-override'
 
 declare const AdminJS: {
   UserComponents: Record<string, FunctionComponent>;
@@ -55,4 +56,4 @@ const mapStateToProps = (state: ReduxState): PropsFromState => ({
   dashboard: state.dashboard,
 })
 
-export default connect(mapStateToProps)(Dashboard)
+export default allowOverride(connect(mapStateToProps)(Dashboard), 'DashboardRoute')

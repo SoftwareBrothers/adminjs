@@ -3,6 +3,7 @@ import { TableCell } from '@adminjs/design-system'
 
 import { BasePropertyJSON } from '../../../interfaces'
 import SortLink from '../sort-link'
+import allowOverride from '../../../hoc/allow-override'
 
 export type PropertyHeaderProps = {
   property: BasePropertyJSON;
@@ -22,7 +23,7 @@ export type PropertyHeaderProps = {
   display?: string | Array<string>;
 }
 
-export const PropertyHeader: React.FC<PropertyHeaderProps> = (props) => {
+const PropertyHeader: React.FC<PropertyHeaderProps> = (props) => {
   const { property, titleProperty, display } = props
 
   const isMain = property.propertyPath === titleProperty.propertyPath
@@ -37,4 +38,9 @@ export const PropertyHeader: React.FC<PropertyHeaderProps> = (props) => {
   )
 }
 
-export default PropertyHeader
+const OverridablePropertyHeader = allowOverride(PropertyHeader, 'PropertyHeader')
+
+export {
+  OverridablePropertyHeader as default,
+  OverridablePropertyHeader as PropertyHeader,
+}

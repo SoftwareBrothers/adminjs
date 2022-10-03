@@ -7,6 +7,7 @@ import { RecordJSON } from '../../../interfaces'
 import { PropertyLabel } from '../utils/property-label'
 import { flat } from '../../../../utils/flat'
 import { recordPropertyIsEqual } from '../record-property-is-equal'
+import allowOverride from '../../../hoc/allow-override'
 
 type CombinedProps = EditPropertyProps
 type SelectRecordEnhanced = SelectRecord & {
@@ -95,4 +96,4 @@ const Edit: FC<CombinedProps> = (props) => {
   )
 }
 
-export default memo(Edit, recordPropertyIsEqual)
+export default allowOverride(memo(Edit, recordPropertyIsEqual), 'DefaultReferenceEditProperty')

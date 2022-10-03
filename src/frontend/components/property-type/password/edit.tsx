@@ -5,6 +5,7 @@ import { Input, FormGroup, InputGroup, FormMessage, Button, Icon } from '@adminj
 import { EditPropertyProps } from '../base-property-props'
 import { recordPropertyIsEqual } from '../record-property-is-equal'
 import { PropertyLabel } from '../utils/property-label'
+import allowOverride from '../../../hoc/allow-override'
 
 const Edit: React.FC<EditPropertyProps> = (props) => {
   const { property, record, onChange } = props
@@ -49,4 +50,4 @@ const Edit: React.FC<EditPropertyProps> = (props) => {
   )
 }
 
-export default memo(Edit, recordPropertyIsEqual)
+export default allowOverride(memo(Edit, recordPropertyIsEqual), 'DefaultPasswordEditProperty')

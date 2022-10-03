@@ -5,6 +5,7 @@ import { Input, FormMessage, FormGroup, Select } from '@adminjs/design-system'
 import { EditPropertyProps } from '../base-property-props'
 import { recordPropertyIsEqual } from '../record-property-is-equal'
 import { PropertyLabel } from '../utils/property-label'
+import allowOverride from '../../../hoc/allow-override'
 
 type CombinedProps = EditPropertyProps
 
@@ -67,4 +68,4 @@ const TextEdit: FC<CombinedProps> = (props) => {
   )
 }
 
-export default memo(Edit, recordPropertyIsEqual)
+export default allowOverride(memo(Edit, recordPropertyIsEqual), 'DefaultEditProperty')

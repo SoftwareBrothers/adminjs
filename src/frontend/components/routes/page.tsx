@@ -5,13 +5,10 @@ import { useParams } from 'react-router'
 import ErrorBoundary from '../app/error-boundary'
 import { ReduxState } from '../../store/store'
 import ErrorMessageBox from '../app/error-message'
+import allowOverride from '../../hoc/allow-override'
 
 declare const AdminJS: {
   UserComponents: Record<string, FunctionComponent>;
-}
-
-type State = {
-  isClient: boolean;
 }
 
 type PageRouteProps = {
@@ -59,4 +56,4 @@ const Page: React.FC = () => {
   )
 }
 
-export default Page
+export default allowOverride(Page, 'PageRoute')

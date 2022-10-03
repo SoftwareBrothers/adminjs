@@ -3,15 +3,15 @@ import React, { useEffect, useState } from 'react'
 import { Routes, Route } from 'react-router-dom'
 import { createGlobalStyle } from 'styled-components'
 import { Box, Overlay, Reset } from '@adminjs/design-system'
-
 import { useLocation } from 'react-router'
+
 import ViewHelpers from '../../backend/utils/view-helpers/view-helpers'
 import Sidebar from './app/sidebar/sidebar'
 import TopBar from './app/top-bar'
 import Notice from './app/notice'
-
+import allowOverride from '../hoc/allow-override'
 import {
-  Dashboard, ResourceAction, RecordAction, Page, BulkAction, Resource,
+  DashboardRoute, ResourceActionRoute, RecordActionRoute, PageRoute, BulkActionRoute, ResourceRoute,
 } from './routes'
 import useHistoryListen from '../hooks/use-history-listen'
 
@@ -82,14 +82,14 @@ const App: React.FC = () => {
             <Notice />
           </Box>
           <Routes>
-            <Route path={`${resourceUrl}/*`} element={<Resource />} />
-            <Route path={pageUrl} element={<Page />} />
-            <Route path={dashboardUrl} element={<Dashboard />} />
+            <Route path={`${resourceUrl}/*`} element={<ResourceRoute />} />
+            <Route path={pageUrl} element={<PageRoute />} />
+            <Route path={dashboardUrl} element={<DashboardRoute />} />
           </Routes>
           <Routes>
-            <Route path={`${resourceActionUrl}/*`} element={<ResourceAction />} />
-            <Route path={`${bulkActionUrl}/*`} element={<BulkAction />} />
-            <Route path={`${recordActionUrl}/*`} element={<RecordAction />} />
+            <Route path={`${resourceActionUrl}/*`} element={<ResourceActionRoute />} />
+            <Route path={`${bulkActionUrl}/*`} element={<BulkActionRoute />} />
+            <Route path={`${recordActionUrl}/*`} element={<RecordActionRoute />} />
           </Routes>
         </Box>
       </Box>
@@ -98,4 +98,4 @@ const App: React.FC = () => {
   )
 }
 
-export default App
+export default allowOverride(App, 'Application')

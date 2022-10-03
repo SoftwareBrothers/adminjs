@@ -6,13 +6,14 @@ import { ActionJSON, buildActionClickHandler, RecordJSON, ResourceJSON } from '.
 import getBulkActionsFromRecords from './utils/get-bulk-actions-from-records'
 import { useActionResponseHandler, useTranslation } from '../../../hooks'
 import { actionsToButtonGroup } from '../action-header/actions-to-button-group'
+import allowOverride from '../../../hoc/allow-override'
 
 type SelectedRecordsProps = {
   resource: ResourceJSON;
   selectedRecords?: Array<RecordJSON>;
 }
 
-export const SelectedRecords: React.FC<SelectedRecordsProps> = (props) => {
+const SelectedRecords: React.FC<SelectedRecordsProps> = (props) => {
   const { resource, selectedRecords } = props
   const { translateLabel } = useTranslation()
   const navigate = useNavigate()
@@ -54,4 +55,9 @@ export const SelectedRecords: React.FC<SelectedRecordsProps> = (props) => {
   )
 }
 
-export default SelectedRecords
+const OverridableSelectedRecords = allowOverride(SelectedRecords, 'SelectedRecords')
+
+export {
+  OverridableSelectedRecords as default,
+  OverridableSelectedRecords as SelectedRecords,
+}

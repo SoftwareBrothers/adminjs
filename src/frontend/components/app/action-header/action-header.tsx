@@ -10,6 +10,7 @@ import { StyledBackButton } from './styled-back-button'
 
 import { useActionResponseHandler, useTranslation } from '../../../hooks'
 import { ActionJSON, buildActionClickHandler } from '../../../interfaces/action'
+import allowOverride from '../../../hoc/allow-override'
 
 /**
  * Header of an action. It renders Action name with buttons for all the actions.
@@ -23,7 +24,7 @@ import { ActionJSON, buildActionClickHandler } from '../../../interfaces/action'
  * @component
  * @subcategory Application
  */
-export const ActionHeader: React.FC<ActionHeaderProps> = (props) => {
+const ActionHeader: React.FC<ActionHeaderProps> = (props) => {
   const {
     resource, toggleFilter, actionPerformed, record, action, tag, omitActions,
   } = props
@@ -114,4 +115,9 @@ export const ActionHeader: React.FC<ActionHeaderProps> = (props) => {
   )
 }
 
-export default ActionHeader
+const OverridableActionHeader = allowOverride(ActionHeader, 'ActionHeader')
+
+export {
+  OverridableActionHeader as default,
+  OverridableActionHeader as ActionHeader,
+}

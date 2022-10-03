@@ -33,4 +33,7 @@ const useHistoryListen = (): void => {
   }, [from])
 }
 
-export default useHistoryListen
+export {
+  useHistoryListen,
+  useHistoryListen as default,
+}

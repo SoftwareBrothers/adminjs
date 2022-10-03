@@ -4,18 +4,16 @@ import { Link } from 'react-router-dom'
 import { ButtonCSS } from '@adminjs/design-system'
 
 import ViewHelpers from '../../../../backend/utils/view-helpers/view-helpers'
-import { RecordJSON, PropertyJSON } from '../../../interfaces'
-
-interface Props {
-  property: PropertyJSON;
-  record: RecordJSON;
-}
+import allowOverride from '../../../hoc/allow-override'
+import { ShowPropertyProps } from '../base-property-props'
 
 const StyledLink = styled<any>(Link)`
   ${ButtonCSS};
   padding-left: ${({ theme }): string => theme.space.xs};
   padding-right: ${({ theme }): string => theme.space.xs};
 `
+
+type Props = Pick<ShowPropertyProps, 'property' | 'record'>
 
 const ReferenceValue: React.FC<Props> = (props) => {
   const { property, record } = props
@@ -42,4 +40,4 @@ const ReferenceValue: React.FC<Props> = (props) => {
   )
 }
 
-export default ReferenceValue
+export default allowOverride(ReferenceValue, 'DefaultReferenceValue')

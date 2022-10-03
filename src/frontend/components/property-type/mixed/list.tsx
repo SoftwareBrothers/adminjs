@@ -5,10 +5,11 @@ import { Label } from '@adminjs/design-system'
 import ViewHelpers from '../../../../backend/utils/view-helpers/view-helpers'
 import { EditPropertyProps, BasePropertyProps } from '../base-property-props'
 import { convertToSubProperty } from './convert-to-sub-property'
+import allowOverride from '../../../hoc/allow-override'
 
 type ItemComponentProps = BasePropertyProps;
 
-interface Props {
+interface Props extends Record<string, unknown> {
   ItemComponent: React.FC<ItemComponentProps>;
 }
 
@@ -47,4 +48,4 @@ const List: React.FC<Props & EditPropertyProps> = (props) => {
   return renderItems()
 }
 
-export default List
+export default allowOverride(List, 'DefaultMixedListProperty')

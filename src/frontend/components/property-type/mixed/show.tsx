@@ -3,8 +3,9 @@ import { Section, ValueGroup } from '@adminjs/design-system'
 
 import { BasePropertyProps } from '../base-property-props'
 import { convertToSubProperty } from './convert-to-sub-property'
+import allowOverride from '../../../hoc/allow-override'
 
-interface Props {
+interface Props extends Record<string, unknown> {
   ItemComponent: typeof React.Component;
 }
 
@@ -28,4 +29,4 @@ const Show: React.FC<Props & BasePropertyProps> = (props) => {
   )
 }
 
-export default Show
+export default allowOverride(Show, 'DefaultMixedShowProperty')
