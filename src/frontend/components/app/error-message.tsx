@@ -53,7 +53,7 @@ const NoResourceError: React.FC<{resourceId: string}> = (props) => {
   )
 }
 
-const NoActionError: React.FC<{resourceId: string; actionName: string}> = (props) => {
+const NoActionError: React.FC<{ resourceId: string; actionName: string }> = (props) => {
   const { resourceId, actionName } = props
   const { translateMessage } = useTranslation()
   return (

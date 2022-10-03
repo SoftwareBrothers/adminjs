@@ -4,7 +4,6 @@ import { AdminJSOptions, Assets, BrandingOptions } from '../../../adminjs-option
 import { CurrentAdmin } from '../../../current-admin.interface'
 import ViewHelpers from '../view-helpers/view-helpers'
 
-
 const defaultBranding: AdminJSOptions['branding'] = {
   companyName: 'Company',
   withMadeWithLove: true,

@@ -53,7 +53,6 @@ const run = async () => {
       react: 'React',
       redux: 'Redux',
       axios: 'axios',
-      recharts: 'Recharts',
       punycode: 'punycode',
       uuid: 'uuid',
       'styled-components': 'styled',

@@ -9,6 +9,7 @@ import BaseRecord from './base-record'
 import BaseResource from '../resource/base-resource'
 import BaseProperty from '../property/base-property'
 import ValidationError, { PropertyErrors } from '../../utils/errors/validation-error'
+import RecordError from '../../utils/errors/record-error'
 import { ActionDecorator, ResourceDecorator } from '../../decorators'
 
 chai.use(chaiAsPromised)
@@ -99,6 +100,25 @@ describe('Record', function () {
     })
 
     it('stores validation error when they happen', async function () {
+      const baseError: RecordError = {
+        message: 'test base error',
+      }
+      const propertyErrors: PropertyErrors = {
+        param2: {
+          type: 'required',
+          message: 'Field is required',
+        },
+      }
+      resource.create = sinon.stub().rejects(new ValidationError(propertyErrors, baseError))
+      record = new BaseRecord(newParams, resource)
+
+      await record.save()
+
+      expect(record.error('param2')).to.deep.equal(propertyErrors.param2)
+      expect(record.baseError).to.deep.equal(baseError)
+    })
+
+    it('stores validation error when they happen (even when there is no baseError specified)', async function () {
       const propertyErrors: PropertyErrors = {
         param2: {
           type: 'required',
@@ -111,6 +131,7 @@ describe('Record', function () {
       await record.save()
 
       expect(record.error('param2')).to.deep.equal(propertyErrors.param2)
+      expect(record.baseError).to.be.null
     })
   })
 
@@ -137,7 +158,11 @@ describe('Record', function () {
         expect(record.get('param2')).to.equal(newParams.param2)
       })
 
-      it('resets the errors when there are no', function () {
+      it('resets the baseError when there is none', function () {
+        expect((record as any).baseError).to.deep.equal(null)
+      })
+
+      it('resets the errors when there are none', function () {
         expect((record as any).errors).to.deep.equal({})
       })
 
@@ -147,6 +172,9 @@ describe('Record', function () {
     })
 
     context('resource throws validation error', function () {
+      const baseError: RecordError = {
+        message: 'test base error',
+      }
       const propertyErrors: PropertyErrors = {
         param2: {
           type: 'required',
@@ -158,12 +186,16 @@ describe('Record', function () {
         resource = sinon.createStubInstance(BaseResource, {
           properties: sinon.stub<[], BaseProperty[]>().returns(properties),
           update: sinon.stub<[string, Record<string, any>], Promise<ParamsType>>()
-            .rejects(new ValidationError(propertyErrors)),
+            .rejects(new ValidationError(propertyErrors, baseError)),
         })
 
         record = new BaseRecord(params, resource)
 
         this.returnedValue = await record.update(newParams)
+      })
+
+      it('stores validation baseError', function () {
+        expect(record.baseError).to.deep.equal(baseError)
       })
 
       it('stores validation errors', function () {

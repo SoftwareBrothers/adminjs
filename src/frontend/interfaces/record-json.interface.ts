@@ -1,4 +1,5 @@
-import { ParamsType } from '../../backend'
+import { ErrorTypeEnum } from '../../utils/error-type.enum'
+import { ParamsType, RecordError } from '../../backend'
 import { ActionJSON } from './action/action-json.interface'
 
 /**
@@ -8,6 +9,8 @@ import { ActionJSON } from './action/action-json.interface'
 export type ErrorMessage = {
   /** Human readable message */
   message: string;
+  /** Error type */
+  type?: ErrorTypeEnum | string;
 }
 
 /**
@@ -23,6 +26,10 @@ export interface RecordJSON {
    * If the record has properties which are references - here there will be populated records
    */
   populated: Record<string, RecordJSON | null | undefined>;
+  /**
+   * Any base/overall validation error for the record
+   */
+  baseError: RecordError | null;
   /**
    * List of all validation errors
    */

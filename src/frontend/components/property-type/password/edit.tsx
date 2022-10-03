@@ -28,9 +28,9 @@ const Edit: React.FC<EditPropertyProps> = (props) => {
           className="input"
           id={property.path}
           name={property.path}
-          onChange={event => setValue(event.target.value)}
+          onChange={(event) => setValue(event.target.value)}
           onBlur={() => onChange(property.path, value)}
-          onKeyDown={e => e.keyCode === 13 && onChange(property.path, value)}
+          onKeyDown={(e) => e.keyCode === 13 && onChange(property.path, value)}
           value={value ?? ''}
           disabled={property.isDisabled}
           {...property.props}

@@ -24,7 +24,7 @@ export const LayoutElementRenderer: React.FC<Props> = (props) => {
 
   const { children, ...other } = layoutProps
 
-  const properties = propertyNames.map(name => resource.properties[name])
+  const properties = propertyNames.map((name) => resource.properties[name])
 
   const Component = DesignSystem[component]
   if (!Component) {
@@ -46,7 +46,7 @@ export const LayoutElementRenderer: React.FC<Props> = (props) => {
 
   return (
     <Component {...other as any}>
-      {properties.map(property => (
+      {properties.map((property) => (
         <DesignSystem.Box flexGrow={1} key={property.propertyPath}>
           <PropertyType
             key={property.propertyPath}
@@ -70,6 +70,5 @@ export const LayoutElementRenderer: React.FC<Props> = (props) => {
     </Component>
   )
 }
-
 
 export default LayoutElementRenderer

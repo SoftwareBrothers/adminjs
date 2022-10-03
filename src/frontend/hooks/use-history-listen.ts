@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useLocation } from 'react-router'
 import { useLocalStorage } from '../hooks/use-local-storage'
@@ -8,7 +8,7 @@ import { changeRoute, initializeRoute } from '../store/actions/route-changed'
 const useHistoryListen = (): void => {
   const location = useLocation()
   const [storedPath, setStoredPath] = useLocalStorage<Partial<typeof location>>('prevPage', {})
-  const { to = {}, from = {} } = useSelector<ReduxState, RouterProps>(state => state.router)
+  const { to = {}, from = {} } = useSelector<ReduxState, RouterProps>((state) => state.router)
   const dispatch = useDispatch()
 
   useEffect(() => {

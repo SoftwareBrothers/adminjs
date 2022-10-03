@@ -13,12 +13,14 @@ describe('ActionDecorator', function () {
   let admin: AdminJS
   let resource: BaseResource
   let context: ActionContext
+  let action: ActionDecorator
   let handler: sinon.SinonStub<any, Promise<ActionResponse>>
 
   beforeEach(function () {
     admin = sinon.createStubInstance(AdminJS)
     resource = sinon.createStubInstance(BaseResource)
-    context = { resource, _admin: admin } as ActionContext
+    action = { name: 'myAction' } as ActionDecorator
+    context = { resource, _admin: admin, action } as ActionContext
     handler = sinon.stub()
   })
 
@@ -32,11 +34,11 @@ describe('ActionDecorator', function () {
       // and finally one async adding response3
       const before = [
         () => ({ response1: true }),
-        response => ({
+        (response) => ({
           ...response,
           response2: true,
         }),
-        async response => ({ ...response, response3: true }),
+        async (response) => ({ ...response, response3: true }),
       ] as unknown as Array<Before>
       const decorator = new ActionDecorator({
         action: { before, handler, name: 'myAction', actionType: 'resource' },
@@ -59,11 +61,11 @@ describe('ActionDecorator', function () {
       // 2 hooks one adding response1 key and the other adding response2 key
       const after = [
         () => ({ response1: true }),
-        response => ({
+        (response) => ({
           ...response,
           response2: true,
         }),
-        async response => ({ ...response, response3: true }),
+        async (response) => ({ ...response, response3: true }),
       ] as unknown as Array<After<ActionResponse>>
       const decorator = new ActionDecorator({
         action: { after, handler, name: 'myAction', actionType: 'resource' },
@@ -135,11 +137,10 @@ describe('ActionDecorator', function () {
       const ret = await decorator.handler(request, 'res', context)
 
       expect(before).to.have.been.calledWith(request)
-      expect(ret).to.deep.equal({
-        notice: {
-          message: errorMessage,
-          type: 'error',
-        },
+      expect(ret).to.have.property('notice')
+      expect(ret.notice).to.deep.equal({
+        message: errorMessage,
+        type: 'error',
       })
       expect(handler).not.to.have.been.called
     })
@@ -163,18 +164,14 @@ describe('ActionDecorator', function () {
       const ret = await decorator.handler(request, 'res', context)
 
       expect(before).to.have.been.calledWith(request)
-      expect(ret).to.deep.equal({
-        notice: {
-          message: notice.message,
-          type: 'error',
-        },
-        record: {
-          errors,
-          params: {},
-          populated: {},
-        },
-        records: [],
+      expect(ret).to.have.property('notice')
+      expect(ret.notice).to.deep.equal({
+        message: notice.message,
+        type: 'error',
       })
+      expect(ret).to.have.property('record')
+      expect(ret.record).to.have.property('errors')
+      expect(ret.record.errors).to.deep.equal(errors)
       expect(handler).not.to.have.been.called
     })
   })

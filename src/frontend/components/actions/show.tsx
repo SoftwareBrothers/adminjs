@@ -28,7 +28,7 @@ const Show: React.FC<ActionProps> = (props) => {
           {...props}
           where="show"
         />
-      )) : properties.map(property => (
+      )) : properties.map((property) => (
         <PropertyType
           key={property.propertyPath}
           where="show"

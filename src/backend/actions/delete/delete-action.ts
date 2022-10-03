@@ -38,11 +38,13 @@ export const DeleteAction: Action<RecordActionResponse> = {
     try {
       await resource.delete(request.params.recordId)
     } catch (error) {
-      if (error instanceof ValidationError && error.baseError) {
+      if (error instanceof ValidationError) {
+        const baseMessage = error.baseError?.message
+          || translateMessage('thereWereValidationErrors', resource.id())
         return {
           record: record.toJSON(currentAdmin),
           notice: {
-            message: error.baseError.message,
+            message: baseMessage,
             type: 'error',
           },
         }

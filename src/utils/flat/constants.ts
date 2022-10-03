@@ -1,4 +1,3 @@
 const DELIMITER = '.'
 
-
 export { DELIMITER }

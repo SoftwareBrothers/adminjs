@@ -1,4 +1,6 @@
+import { ErrorTypeEnum } from '../../../utils/error-type.enum'
 import * as CONSTANTS from '../../../constants'
+import RecordError from './record-error'
 
 const buildUrl = (page: string): string => (
   `${CONSTANTS.DOCS}/${page}`
@@ -11,6 +13,21 @@ const buildUrl = (page: string): string => (
  */
 export class NotFoundError extends Error {
   /**
+   * HTTP Status code: 404
+   */
+  public statusCode: number
+
+  /**
+   * Base error message and type which is stored in the record
+   */
+  public baseError: RecordError
+
+  /**
+   * Any custom message which should be seen in the UI
+   */
+  public baseMessage?: string
+
+  /**
    * @param   {string}  fnName  name of the function, base on which error will
    * print on the output link to the method documentation.
    * @param {string} message
@@ -21,8 +38,14 @@ export class NotFoundError extends Error {
     More information can be found at: ${buildUrl(fnName)}
     `
     super(msg)
+    this.statusCode = 404
+    this.baseMessage = message
+    this.baseError = {
+      message,
+      type: ErrorTypeEnum.NotFound,
+    }
     this.message = msg
-    this.name = 'ConfigurationError'
+    this.name = ErrorTypeEnum.NotFound
   }
 }
 

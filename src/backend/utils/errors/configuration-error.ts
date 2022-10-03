@@ -1,3 +1,4 @@
+import { ErrorTypeEnum } from '../../../utils/error-type.enum'
 import * as CONSTANTS from '../../../constants'
 
 const buildUrl = (page: string): string => (
@@ -22,7 +23,7 @@ export class ConfigurationError extends Error {
     `
     super(msg)
     this.message = msg
-    this.name = 'ConfigurationError'
+    this.name = ErrorTypeEnum.Configuration
   }
 }
 

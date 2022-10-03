@@ -9,7 +9,7 @@ describe('Router', function () {
   })
 
   it('returns development bundle by default', function () {
-    const asset = Router.assets.find(a => a.path === '/frontend/assets/app.bundle.js')
+    const asset = Router.assets.find((a) => a.path === '/frontend/assets/app.bundle.js')
 
     expect(asset && asset.src).to.contain('scripts/app-bundle.development.js')
   })

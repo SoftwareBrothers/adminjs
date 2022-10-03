@@ -5,7 +5,6 @@ export type UseLocalStorageResult<T> = [
   React.Dispatch<React.SetStateAction<T>>
 ];
 
-
 /**
  * Result of the {@link useLocalStorage}.
  * It is a tuple containing value and the setter

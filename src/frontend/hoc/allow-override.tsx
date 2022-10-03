@@ -1,3 +1,4 @@
+/* eslint-disable react/function-component-definition */
 import React, { ComponentType } from 'react'
 import { OverridableComponent } from '../utils/overridable-component'
 

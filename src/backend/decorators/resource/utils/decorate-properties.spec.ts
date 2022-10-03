@@ -7,7 +7,6 @@ import { PropertyOptions } from '../../property'
 
 import { DecoratedProperties, decorateProperties } from './decorate-properties'
 
-
 describe('decorateProperties', () => {
   const path = 'propertyPath'
 
@@ -111,7 +110,6 @@ describe('decorateProperties', () => {
       property = new BaseProperty({ path: nestedPath.split('.')[0], type: 'mixed' })
       subPropertyLevel1 = new BaseProperty({ path: nestedPath.split('.')[1], type: 'mixed' })
       subPropertyLevel2 = new BaseProperty({ path: nestedPath.split('.')[2], type: 'mixed' })
-
 
       sinon.stub(property, 'subProperties').returns([subPropertyLevel1])
       sinon.stub(subPropertyLevel1, 'subProperties').returns([subPropertyLevel2])

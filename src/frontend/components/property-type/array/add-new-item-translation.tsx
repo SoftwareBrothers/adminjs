@@ -14,7 +14,8 @@ const AddNewItemButton: React.FC<AddNewItemButtonProps> = (props) => {
   const { translateProperty, translateButton } = useTranslation()
   const label = translateProperty(
     `${property.path}.addNewItem`,
-    resource.id, {
+    resource.id,
+    {
       defaultValue: translateButton('addNewItem', resource.id),
     },
   )

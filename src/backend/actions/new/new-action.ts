@@ -40,7 +40,6 @@ export const NewAction: Action<RecordActionResponse> = {
       // eslint-disable-next-line no-param-reassign
       context.record = populatedRecord
 
-
       if (record.isValid()) {
         return {
           redirectUrl: h.resourceUrl({ resourceId: resource._decorated?.id() || resource.id() }),
@@ -51,10 +50,12 @@ export const NewAction: Action<RecordActionResponse> = {
           record: record.toJSON(currentAdmin),
         }
       }
+      const baseMessage = populatedRecord.baseError?.message
+        || translateMessage('thereWereValidationErrors', resource.id())
       return {
         record: record.toJSON(currentAdmin),
         notice: {
-          message: translateMessage('thereWereValidationErrors', resource.id()),
+          message: baseMessage,
           type: 'error',
         },
       }

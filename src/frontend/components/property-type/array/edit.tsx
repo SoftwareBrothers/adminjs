@@ -1,6 +1,6 @@
 import React, { MouseEvent, useCallback } from 'react'
 import { Button, Section, FormGroup, FormMessage, Icon, Box } from '@adminjs/design-system'
-import { DragDropContext, Droppable, Draggable, DropResult } from 'react-beautiful-dnd'
+import { DragDropContext, Droppable, Draggable, DropResult } from '@hello-pangea/dnd'
 
 import AddNewItemButton from './add-new-item-translation'
 import { flat } from '../../../../utils'
@@ -85,6 +85,7 @@ const InputsInSection: React.FC<EditProps> = (props) => {
 
   const handleOnDragEnd = useCallback((result: DropResult): void => {
     const { source, destination } = result
+
     if (!source || !destination || destination.index === source.index) return
 
     const itemsCopy = Array.from(items)
@@ -105,7 +106,7 @@ const InputsInSection: React.FC<EditProps> = (props) => {
             className={property.path}
           >
             {items.map((item, i) => {
-              const itemProperty = convertToSubProperty(props.property, i)
+              const itemProperty = convertToSubProperty(property, i)
               return (
                 <ItemRenderer
                   {...props}

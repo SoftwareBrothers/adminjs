@@ -59,7 +59,7 @@ export const SearchAction: Action<SearchActionResponse> = {
     })
 
     return {
-      records: records.map(record => record.toJSON(currentAdmin)),
+      records: records.map((record) => record.toJSON(currentAdmin)),
     }
   },
 }

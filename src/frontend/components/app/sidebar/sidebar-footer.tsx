@@ -6,7 +6,7 @@ import allowOverride from '../../../hoc/allow-override'
 import { ReduxState } from '../../../store'
 
 const SidebarFooter: React.FC = () => {
-  const branding = useSelector<ReduxState, BrandingOptions>(state => state.branding)
+  const branding = useSelector<ReduxState, BrandingOptions>((state) => state.branding)
 
   return (
     <Box mt="lg" mb="md">

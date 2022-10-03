@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from 'react'
 import { Box, Badge, H3, H2, ButtonGroup, cssClass } from '@adminjs/design-system'
-import { useHistory } from 'react-router'
+import { useNavigate } from 'react-router'
 
 import Breadcrumbs from '../breadcrumbs'
 import { ActionHeaderProps } from './action-header-props'
@@ -29,7 +29,7 @@ export const ActionHeader: React.FC<ActionHeaderProps> = (props) => {
   } = props
 
   const { translateButton } = useTranslation()
-  const history = useHistory()
+  const navigate = useNavigate()
   const actionResponseHandler = useActionResponseHandler(actionPerformed)
 
   if (action.hideActionHeader) {
@@ -44,15 +44,15 @@ export const ActionHeader: React.FC<ActionHeaderProps> = (props) => {
       action: sourceAction,
       params,
       actionResponseHandler,
-      push: history.push,
+      navigate,
     })(event)
   )
 
   const actionButtons = actionsToButtonGroup({
     actions: record
-      ? record.recordActions.filter(ra => !action || action.name !== ra.name)
+      ? record.recordActions.filter((ra) => !action || action.name !== ra.name)
       // only new action should be seen in regular "Big" actions place
-      : resource.resourceActions.filter(ra => ra.name === 'new' && (!action || action.name !== ra.name)),
+      : resource.resourceActions.filter((ra) => ra.name === 'new' && (!action || action.name !== ra.name)),
     params,
     handleClick: handleActionClick,
   })
@@ -68,7 +68,7 @@ export const ActionHeader: React.FC<ActionHeaderProps> = (props) => {
   // list and new actions are special and are are always
   const customResourceButtons = actionsToButtonGroup({
     actions: action.showResourceActions
-      ? resource.resourceActions.filter(ra => !['list', 'new'].includes(ra.name))
+      ? resource.resourceActions.filter((ra) => !['list', 'new'].includes(ra.name))
       : [],
     params: { resourceId },
     handleClick: handleActionClick,
@@ -76,7 +76,7 @@ export const ActionHeader: React.FC<ActionHeaderProps> = (props) => {
 
   const title = action ? action.label : resource.name
   const isList = action && action.name === 'list'
-  const listAction = resource.resourceActions.find(ra => ra.name === 'list')
+  const listAction = resource.resourceActions.find((ra) => ra.name === 'list')
 
   // styled which differs if action header is in the drawer or not
   const cssIsRootFlex = !action.showInDrawer

@@ -19,6 +19,7 @@ describe('updateRecord', function () {
         id: 'someId',
       } as RecordJSON,
     },
+    baseError: null,
     errors: {},
     params: {
       email: 'john@doe.pl',
@@ -48,6 +49,7 @@ describe('updateRecord', function () {
       id,
       title: 'Adolf',
       populated: {},
+      baseError: null,
       errors: {},
       params: {
         name: 'Adolf',
@@ -108,7 +110,7 @@ describe('updateRecord', function () {
     const update = updateRecord(propertyName, value)
     const updatedRecord = update(previousRecord)
 
-    expect(Object.keys(updatedRecord.params).find(key => key === propertyName)).to.be.undefined
+    expect(Object.keys(updatedRecord.params).find((key) => key === propertyName)).to.be.undefined
   })
 
   it('properly sets nulls', function () {

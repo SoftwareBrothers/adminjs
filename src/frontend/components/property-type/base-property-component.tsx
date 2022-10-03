@@ -41,6 +41,7 @@ const types: Record<PropertyType, any> = {
   string: defaultType,
   number: defaultType,
   float: defaultType,
+  uuid: defaultType,
   mixed: null,
   currency,
   phone,

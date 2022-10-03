@@ -14,7 +14,7 @@ const NoRecordsOriginal: React.FC<NoRecordsProps> = (props) => {
   const { resource } = props
   const { translateButton, translateMessage } = useTranslation()
 
-  const canCreate = resource.resourceActions.find(a => a.name === 'new')
+  const canCreate = resource.resourceActions.find((a) => a.name === 'new')
 
   return (
     <InfoBox title={translateMessage('noRecords', resource.id)}>

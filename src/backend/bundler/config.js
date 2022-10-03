@@ -7,7 +7,6 @@ const replace = require('@rollup/plugin-replace')
 const json = require('@rollup/plugin-json')
 const { terser } = require('rollup-plugin-terser')
 
-
 const external = [
   'lodash',
   'react',
@@ -26,7 +25,6 @@ const external = [
   'adminjs/types',
   'adminjs/style',
   'axios',
-  'recharts',
   '@carbon/icons-react',
   'i18next',
   'react-i18next',
@@ -40,7 +38,6 @@ const globals = {
   redux: 'Redux',
   axios: 'axios',
   flat: 'flat',
-  recharts: 'Recharts',
   '@carbon/icons-react': 'CarbonIcons',
   'react-datepicker': 'ReactDatepicker',
   'styled-components': 'styled',

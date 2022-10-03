@@ -1,7 +1,6 @@
 import { Action, BulkActionResponse } from '../action.interface'
 import NotFoundError from '../../utils/errors/not-found-error'
 
-
 /**
  * @implements Action
  * @category Actions
@@ -34,15 +33,15 @@ export const BulkDeleteAction: Action<BulkActionResponse> = {
       throw new NotFoundError('no records were selected.', 'Action#handler')
     }
     if (request.method === 'get') {
-      const recordsInJSON = records.map(record => record.toJSON(context.currentAdmin))
+      const recordsInJSON = records.map((record) => record.toJSON(context.currentAdmin))
       return {
         records: recordsInJSON,
       }
     }
     if (request.method === 'post') {
-      await Promise.all(records.map(record => resource.delete(record.id())))
+      await Promise.all(records.map((record) => resource.delete(record.id())))
       return {
-        records: records.map(record => record.toJSON(context.currentAdmin)),
+        records: records.map((record) => record.toJSON(context.currentAdmin)),
         notice: {
           message: translateMessage('successfullyBulkDeleted', resource.id(), {
             count: records.length,

@@ -17,7 +17,6 @@ import {
   getPropertyByKey,
 } from './utils'
 
-
 /**
  * Default maximum number of items which should be present in a list.
  *
@@ -161,17 +160,17 @@ class ResourceDecorator {
               `resource: "${this._resource.id()}"`].join(' '))
           }
           return property
-        }).filter(property => property)
+        }).filter((property) => property)
     }
 
     const properties = Object.keys(this.properties)
-      .filter(key => !where || this.properties[key].isVisible(where))
+      .filter((key) => !where || this.properties[key].isVisible(where))
       .sort((key1, key2) => (
         this.properties[key1].position() > this.properties[key2].position()
           ? 1
           : -1
       ))
-      .map(key => this.properties[key])
+      .map((key) => this.properties[key])
 
     if (max) {
       return properties.slice(0, max)
@@ -204,7 +203,7 @@ class ResourceDecorator {
    */
   resourceActions(currentAdmin?: CurrentAdmin): Array<ActionDecorator> {
     return Object.values(this.actions)
-      .filter(action => (
+      .filter((action) => (
         action.isResourceType()
         && action.isVisible(currentAdmin)
         && action.isAccessible(currentAdmin)
@@ -220,7 +219,7 @@ class ResourceDecorator {
    */
   bulkActions(record: BaseRecord, currentAdmin?: CurrentAdmin): Array<ActionDecorator> {
     return Object.values(this.actions)
-      .filter(action => (
+      .filter((action) => (
         action.isBulkType()
         && action.isVisible(currentAdmin, record)
         && action.isAccessible(currentAdmin, record)
@@ -236,7 +235,7 @@ class ResourceDecorator {
    */
   recordActions(record: BaseRecord, currentAdmin?: CurrentAdmin): Array<ActionDecorator> {
     return Object.values(this.actions)
-      .filter(action => (
+      .filter((action) => (
         action.isRecordType()
         && action.isVisible(currentAdmin, record)
         && action.isAccessible(currentAdmin, record)
@@ -250,7 +249,7 @@ class ResourceDecorator {
    */
   titleProperty(): PropertyDecorator {
     const properties = Object.values(this.properties)
-    const titleProperty = properties.find(p => p.isTitle())
+    const titleProperty = properties.find((p) => p.isTitle())
     return titleProperty || properties[0]
   }
 
@@ -280,7 +279,7 @@ class ResourceDecorator {
       }
       return href
     }
-    if (this.resourceActions(currentAdmin).find(action => action.name === 'list')) {
+    if (this.resourceActions(currentAdmin).find((action) => action.name === 'list')) {
       return this.h.resourceUrl({ resourceId: this.id() })
     }
     return null
@@ -305,21 +304,21 @@ class ResourceDecorator {
       navigation: this.getNavigation(),
       href: this.getHref(currentAdmin),
       titleProperty: this.titleProperty().toJSON(),
-      resourceActions: this.resourceActions(currentAdmin).map(ra => ra.toJSON(currentAdmin)),
-      actions: Object.values(this.actions).map(action => action.toJSON(currentAdmin)),
+      resourceActions: this.resourceActions(currentAdmin).map((ra) => ra.toJSON(currentAdmin)),
+      actions: Object.values(this.actions).map((action) => action.toJSON(currentAdmin)),
       properties: flattenPropertiesJSON,
       listProperties: this.getProperties({
         where: 'list', max: DEFAULT_MAX_COLUMNS_IN_LIST,
-      }).map(property => property.toJSON('list')),
+      }).map((property) => property.toJSON('list')),
       editProperties: this.getProperties({
         where: 'edit',
-      }).map(property => property.toJSON('edit')),
+      }).map((property) => property.toJSON('edit')),
       showProperties: this.getProperties({
         where: 'show',
-      }).map(property => property.toJSON('show')),
+      }).map((property) => property.toJSON('show')),
       filterProperties: this.getProperties({
         where: 'filter',
-      }).map(property => property.toJSON('filter')),
+      }).map((property) => property.toJSON('filter')),
     }
   }
 }

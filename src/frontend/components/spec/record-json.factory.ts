@@ -8,13 +8,13 @@ factory.define<RecordJSON>('RecordJSON', Object, {
     'nested.param': 'value2',
   },
   populated: {},
+  baseError: null,
   errors: {},
-  id: factory.sequence('JSONRecord.id', n => `someId${n}`),
-  title: factory.sequence('JSONRecord.id', n => `someTitle${n}`),
+  id: factory.sequence('JSONRecord.id', (n) => `someId${n}`),
+  title: factory.sequence('JSONRecord.id', (n) => `someTitle${n}`),
   recordActions: [],
   bulkActions: [],
 })
-
 
 factory.extend<RecordJSON>('RecordJSON', 'RecordJSON.total', {
   // params set for properties from ResourceJSON.total factory's properties

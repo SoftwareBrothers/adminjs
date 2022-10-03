@@ -30,9 +30,9 @@ const html = async (
   const { branding, assets } = reduxState
 
   const scripts = ((assets && assets.scripts) || [])
-    .map(s => `<script src="${s}"></script>`)
+    .map((s) => `<script src="${s}"></script>`)
   const styles = ((assets && assets.styles) || [])
-    .map(l => `<link rel="stylesheet" type="text/css" href="${l}">`)
+    .map((l) => `<link rel="stylesheet" type="text/css" href="${l}">`)
   const theme = combineStyles((branding.theme) || {})
   const faviconTag = getFaviconFromBranding(branding)
 

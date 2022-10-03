@@ -12,10 +12,10 @@ Inspired by: [django admin](https://docs.djangoproject.com), [rails admin](https
 
 Check out the example application with mongodb and postgres models here:
 
-- login: `test@example.com`
+- login: `admin@example.com`
 - password: `password`
 
-https://admin-bro-example-app-staging.herokuapp.com/admin/login
+https://adminjs-demo.herokuapp.com
 
 ## Getting started
 
@@ -24,7 +24,7 @@ https://admin-bro-example-app-staging.herokuapp.com/admin/login
 
 ## OpenSource SoftwareBrothers community
 
-- [Join the community](https://join.slack.com/t/AdminBro/shared_invite/zt-djsqxxpz-_YCS8UMtQ9Ade6DPuLR7Zw) to get help and be inspired.
+- [Join the community](https://join.slack.com/t/adminbro/shared_invite/zt-1c7z4k0v9-kBNAivB8lX3OWLWu6TLE7A) to get help and be inspired.
 - subscribe to our [newsletter](http://opensource.softwarebrothers.co)
 
 # What kind of problems it solves

@@ -18,7 +18,6 @@ export type MergedActionParams = RecordActionParams & BulkActionParams & Resourc
 export type ActionCallCallback = (action: ActionResponse) => any;
 export type UseActionResultCallApi<K extends ActionResponse> = () => Promise<AxiosResponse<K>>;
 
-
 /**
  * Result of the {@link useAction}.
 

@@ -18,12 +18,12 @@ class Filter extends React.PureComponent<FilterPropertyProps> {
 
   render(): ReactNode {
     const { property, filter = {} } = this.props
-    const value = typeof filter[property.path] === 'undefined' ? '' : filter[property.path]
+    const value = typeof filter[property.path] === 'undefined' ? '' : Boolean(filter[property.path])
     const options = [
       { value: true, label: mapValue(true) },
       { value: false, label: mapValue(false) },
     ]
-    const selected = options.find(o => o.value === value)
+    const selected = options.find((o) => o.value === value)
     return (
       <FormGroup>
         <Label>{property.label}</Label>

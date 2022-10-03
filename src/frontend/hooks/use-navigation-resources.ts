@@ -1,4 +1,4 @@
-import { useHistory, useLocation } from 'react-router'
+import { useNavigate, useLocation } from 'react-router'
 /* eslint-disable no-param-reassign */
 import {
   NavigationProps,
@@ -17,10 +17,8 @@ const isSelected = (href, location): boolean => {
 export function useNavigationResources(
   resources: Array<ResourceJSON>,
 ): NavigationProps['elements'] {
-  const [openElements, setOpenElements] = useLocalStorage<Record<string, boolean>>(
-    'sidebarElements', {},
-  )
-  const history = useHistory()
+  const [openElements, setOpenElements] = useLocalStorage<Record<string, boolean>>('sidebarElements', {})
+  const navigate = useNavigate()
   const location = useLocation()
 
   const enrichResource = useMemo(() => (
@@ -35,15 +33,15 @@ export function useNavigationResources(
     onClick: (event): void => {
       if (resource.href) {
         event.preventDefault()
-        history.push(resource.href)
+        navigate(resource.href)
       }
     },
-  }), [location, history])
+  }), [location, navigate])
 
   // grouping resources into parents
   const map = resources
     // first filter out resources which are not visible
-    .filter(res => res.href && res.navigation?.show !== false)
+    .filter((res) => res.href && res.navigation?.show !== false)
     .reduce((memo, resource) => {
       // in case resource has the same name as parent we namespace it wit "resource-""
       const key = resource.navigation?.name || ['resource', resource.name].join('-')

@@ -1,7 +1,8 @@
 import { flat, GetOptions } from '../../../utils/flat'
 import { ParamsType } from './params.type'
 import BaseResource from '../resource/base-resource'
-import ValidationError, { RecordError, PropertyErrors } from '../../utils/errors/validation-error'
+import ValidationError, { PropertyErrors } from '../../utils/errors/validation-error'
+import RecordError from '../../utils/errors/record-error'
 import { RecordJSON } from '../../../frontend/interfaces'
 import { CurrentAdmin } from '../../../current-admin.interface'
 
@@ -23,7 +24,13 @@ class BaseRecord {
   public params: ParamsType
 
   /**
-   * Object containing all validation errors: this.errors[path] = 'errorMessage'
+   * Object containing any base/overall validation error messages:
+   * this.baseError = { message: 'errorMessage' }
+   */
+  public baseError: RecordError | null
+
+  /**
+   * Object containing all validation errors: this.errors[path] = { message: 'errorMessage' }
    */
   public errors: PropertyErrors
 
@@ -39,6 +46,7 @@ class BaseRecord {
   constructor(params: ParamsType, resource: BaseResource) {
     this.resource = resource
     this.params = params ? flat.flatten(params) : {}
+    this.baseError = null
     this.errors = {}
     this.populated = {}
   }
@@ -132,11 +140,13 @@ class BaseRecord {
       this.storeParams(returnedParams)
     } catch (e) {
       if (e instanceof ValidationError) {
+        this.baseError = e.baseError
         this.errors = e.propertyErrors
         return this
       }
       throw e
     }
+    this.baseError = null
     this.errors = {}
     return this
   }
@@ -163,11 +173,13 @@ class BaseRecord {
       this.storeParams(returnedParams)
     } catch (e) {
       if (e instanceof ValidationError) {
+        this.baseError = e.baseError
         this.errors = e.propertyErrors
         return this
       }
       throw e
     }
+    this.baseError = null
     this.errors = {}
     return this
   }
@@ -188,11 +200,13 @@ class BaseRecord {
       this.storeParams(returnedParams)
     } catch (e) {
       if (e instanceof ValidationError) {
+        this.baseError = e.baseError
         this.errors = e.propertyErrors
         return this
       }
       throw e
     }
+    this.baseError = null
     this.errors = {}
     return this
   }
@@ -202,7 +216,7 @@ class BaseRecord {
    * @return {string | number} id of the Record
    */
   id(): string {
-    const idProperty = this.resource.properties().find(p => p.isId())
+    const idProperty = this.resource.properties().find((p) => p.isId())
     if (!idProperty) {
       throw new Error(`Resource: "${this.resource.id()}" does not have an id property`)
     }
@@ -218,7 +232,7 @@ class BaseRecord {
    * @return {string} title of the record
    */
   title(): string {
-    const nameProperty = this.resource.properties().find(p => p.isTitle())
+    const nameProperty = this.resource.properties().find((p) => p.isTitle())
     return nameProperty ? this.param(nameProperty.name()) : this.id()
   }
 
@@ -276,15 +290,14 @@ class BaseRecord {
     return {
       params: this.params,
       populated,
+      baseError: this.baseError,
       errors: this.errors,
       id: this.id(),
       title: this.resource.decorate().titleOf(this),
-      recordActions: this.resource.decorate().recordActions(
-        this, currentAdmin,
-      ).map(recordAction => recordAction.toJSON(currentAdmin)),
-      bulkActions: this.resource.decorate().bulkActions(
-        this, currentAdmin,
-      ).map(recordAction => recordAction.toJSON(currentAdmin)),
+      recordActions: this.resource.decorate().recordActions(this, currentAdmin)
+        .map((recordAction) => recordAction.toJSON(currentAdmin)),
+      bulkActions: this.resource.decorate().bulkActions(this, currentAdmin)
+        .map((recordAction) => recordAction.toJSON(currentAdmin)),
     }
   }
 

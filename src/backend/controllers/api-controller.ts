@@ -7,8 +7,11 @@ import AdminJS from '../../adminjs'
 import { ActionContext, ActionRequest, RecordActionResponse, ActionResponse, BulkActionResponse } from '../actions/action.interface'
 import ConfigurationError from '../utils/errors/configuration-error'
 import NotFoundError from '../utils/errors/not-found-error'
+import ForbiddenError from '../utils/errors/forbidden-error'
 import { requestParser } from '../utils/request-parser'
 import { SearchActionResponse } from '../actions/search/search-action'
+import actionErrorHandler from '../services/action-error-handler/action-error-handler'
+import { validateParam } from '../../utils/param-converter/validate-param'
 
 /**
  * Controller responsible for the auto-generated API: `/admin_root/api/...`, where
@@ -140,13 +143,32 @@ class ApiController {
       ].join('\n'), 'Action#handler')
     }
 
+    const idProperty = Object.values(actionContext.resource.decorate().properties ?? {})
+      .find((p) => p.isId())
+    if (!idProperty || !validateParam(recordId, idProperty)) {
+      const invalidRecordError = actionErrorHandler(
+        new ForbiddenError([
+          'You have to pass a valid recordId to the recordAction',
+        ].join('\n')),
+        actionContext,
+      )
+
+      return invalidRecordError as RecordActionResponse
+    }
+
     let record = await actionContext.resource.findOne(recordId)
 
     if (!record) {
-      throw new NotFoundError([
-        `record with given id: "${recordId}" cannot be found in resource "${resourceId}"`,
-      ].join('\n'), 'Action#handler')
+      const missingRecordError = actionErrorHandler(
+        new NotFoundError([
+          `Record with given id: "${recordId}" cannot be found in resource "${resourceId}"`,
+        ].join('\n'), 'Action#handler'),
+        actionContext,
+      )
+
+      return missingRecordError as RecordActionResponse
     }
+
     [record] = await populator([record])
 
     actionContext.record = record

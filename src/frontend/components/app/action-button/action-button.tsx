@@ -8,7 +8,6 @@ import { ActionResponse } from '../../../../backend/actions/action.interface'
 import { ActionJSON, buildActionTestId } from '../../../interfaces'
 import { useAction } from '../../../hooks'
 
-
 /**
  * @alias ActionButtonProps
  * @memberof ActionButton
@@ -64,7 +63,6 @@ export const ActionButton: React.FC<ActionButtonProps> = (props) => {
     'data-testid': buildActionTestId(action),
     href,
   })
-
 
   return WrappedElement
 }
