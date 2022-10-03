@@ -1,5 +1,7 @@
 import React from 'react'
 import { Badge } from '@adminjs/design-system'
+
+import allowOverride from '../../../hoc/allow-override'
 import { ShowPropertyProps } from '../base-property-props'
 
 const DefaultPropertyValue: React.FC<ShowPropertyProps> = (props) => {
@@ -26,4 +28,4 @@ const DefaultPropertyValue: React.FC<ShowPropertyProps> = (props) => {
   return rawValue
 }
 
-export default DefaultPropertyValue
+export default allowOverride(DefaultPropertyValue, 'DefaultPropertyValue')

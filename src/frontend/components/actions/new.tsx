@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router'
 import { DrawerContent, Box, DrawerFooter, Button, Icon } from '@adminjs/design-system'
 
 import PropertyType from '../property-type'
-
 import { ActionProps } from './action.props'
 import ActionHeader from '../app/action-header/action-header'
 import { RecordJSON } from '../../interfaces'
@@ -11,6 +10,7 @@ import useRecord from '../../hooks/use-record/use-record'
 import { appendForceRefresh } from './utils/append-force-refresh'
 import { useTranslation } from '../../hooks/use-translation'
 import LayoutElementRenderer from './utils/layout-element-renderer'
+import allowOverride from '../../hoc/allow-override'
 
 const New: FC<ActionProps> = (props) => {
   const { record: initialRecord, resource, action } = props
@@ -85,7 +85,9 @@ const New: FC<ActionProps> = (props) => {
   )
 }
 
+const OverridableNew = allowOverride(New, 'DefaultNewAction')
+
 export {
-  New as default,
-  New,
+  OverridableNew as default,
+  OverridableNew as New,
 }

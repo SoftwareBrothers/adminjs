@@ -5,6 +5,7 @@ import { useNavigate, useLocation } from 'react-router'
 import ViewHelpers from '../../../../backend/utils/view-helpers/view-helpers'
 import { useTranslation } from '../../../hooks/use-translation'
 import { ReduxState } from '../../../store/store'
+import allowOverride from '../../../hoc/allow-override'
 
 type Props = {
   pages?: ReduxState['pages'];
@@ -49,4 +50,4 @@ const SidebarPages: React.FC<Props> = (props) => {
   )
 }
 
-export default SidebarPages
+export default allowOverride(SidebarPages, 'SidebarPages')

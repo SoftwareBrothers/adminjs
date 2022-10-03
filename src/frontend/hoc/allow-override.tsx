@@ -31,11 +31,19 @@ function allowOverride<P extends Record<string, unknown>>(
 
     let Component = OriginalComponent
 
-    if (globalAny.AdminJS
-      && globalAny.AdminJS.UserComponents
-      && globalAny.AdminJS.UserComponents[name]
-    ) {
+    if (globalAny.AdminJS?.UserComponents?.[name]) {
       Component = globalAny.AdminJS.UserComponents[name]
+      return <Component {...props} OriginalComponent={OriginalComponent} />
+    }
+
+    /**
+     * @new in version 6.3
+     *
+     * This adds support for future theme-specific components via their "theme.bundle.js"
+     *
+     */
+    if (globalAny?.THEME?.Components?.[name]) {
+      Component = globalAny.THEME.Components[name]
       return <Component {...props} OriginalComponent={OriginalComponent} />
     }
 

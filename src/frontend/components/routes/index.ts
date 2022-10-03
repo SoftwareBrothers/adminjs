@@ -1,15 +1,6 @@
-import Dashboard from './dashboard'
-import RecordAction from './record-action'
-import ResourceAction from './resource-action'
-import BulkAction from './bulk-action'
-import Page from './page'
-import Resource from './resource'
-
-export {
-  Dashboard,
-  RecordAction,
-  ResourceAction,
-  BulkAction,
-  Page,
-  Resource,
-}
+export { default as DashboardRoute } from './dashboard'
+export { default as RecordActionRoute } from './record-action'
+export { default as ResourceActionRoute } from './resource-action'
+export { default as BulkActionRoute } from './bulk-action'
+export { default as PageRoute } from './page'
+export { default as ResourceRoute } from './resource'

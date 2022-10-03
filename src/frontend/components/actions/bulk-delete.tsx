@@ -3,16 +3,16 @@ import {
   Table, TableBody, TableRow, TableCell, Text,
   DrawerContent, DrawerFooter, Button, MessageBox, Icon,
 } from '@adminjs/design-system'
-
 import { useNavigate } from 'react-router'
+
 import PropertyType from '../property-type'
 import { ActionProps } from './action.props'
 import ApiClient from '../../utils/api-client'
 import withNotice, { AddNoticeProps } from '../../hoc/with-notice'
 import { appendForceRefresh } from './utils/append-force-refresh'
-
 import ActionHeader from '../app/action-header/action-header'
 import { useTranslation } from '../../hooks'
+import allowOverride from '../../hoc/allow-override'
 
 /**
  * @name BulkDeleteAction
@@ -103,8 +103,9 @@ const BulkDelete: React.FC<ActionProps & AddNoticeProps> = (props) => {
 }
 
 const FormattedBulkDelete = withNotice(BulkDelete)
+const OverridableFormattedBulkDelete = allowOverride(FormattedBulkDelete, 'DefaultBulkDeleteAction')
 
 export {
-  FormattedBulkDelete as default,
-  FormattedBulkDelete as BulkDelete,
+  OverridableFormattedBulkDelete as default,
+  OverridableFormattedBulkDelete as BulkDelete,
 }

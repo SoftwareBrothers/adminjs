@@ -9,6 +9,7 @@ import { PropertyLabel } from '../utils/property-label'
 import { convertToSubProperty } from './convert-to-sub-property'
 import { PropertyJSON } from '../../../interfaces'
 import { removeSubProperty } from './remove-sub-property'
+import allowOverride from '../../../hoc/allow-override'
 
 type EditProps = Required<EditPropertyPropsInArray>
 
@@ -142,7 +143,9 @@ const Edit: React.FC<EditProps> = (props) => {
   )
 }
 
+const OverridableEdit = allowOverride(Edit, 'DefaultArrayEditProperty')
+
 export {
-  Edit as default,
-  Edit,
+  OverridableEdit as default,
+  OverridableEdit as Edit,
 }

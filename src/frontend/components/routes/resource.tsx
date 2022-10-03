@@ -10,6 +10,7 @@ import { NoResourceError, NoActionError } from '../app/error-message'
 import ViewHelpers, { ResourceActionParams } from '../../../backend/utils/view-helpers/view-helpers'
 import { ActionHeader } from '../app'
 import { ActionJSON, ResourceJSON } from '../../interfaces'
+import allowOverride from '../../hoc/allow-override'
 
 type PropsFromState = {
   resources: Array<ResourceJSON>;
@@ -103,4 +104,4 @@ const mapStateToProps = (state: ReduxState): PropsFromState => ({
   resources: state.resources,
 })
 
-export default connect(mapStateToProps)(ResourceAction)
+export default allowOverride(connect(mapStateToProps)(ResourceAction), 'ResourceRoute')

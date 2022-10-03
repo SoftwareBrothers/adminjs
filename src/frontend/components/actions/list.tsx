@@ -7,6 +7,7 @@ import { ActionProps } from './action.props'
 import useRecords from '../../hooks/use-records/use-records'
 import useSelectedRecords from '../../hooks/use-selected-records/use-selected-records'
 import { REFRESH_KEY } from './utils/append-force-refresh'
+import allowOverride from '../../hoc/allow-override'
 
 const List: React.FC<ActionProps> = ({ resource, setTag }) => {
   const {
@@ -78,7 +79,9 @@ const List: React.FC<ActionProps> = ({ resource, setTag }) => {
   )
 }
 
+const OverridableList = allowOverride(List, 'DefaultListAction')
+
 export {
-  List as default,
-  List,
+  OverridableList as default,
+  OverridableList as List,
 }

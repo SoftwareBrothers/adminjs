@@ -3,6 +3,7 @@ import { ValueGroup } from '@adminjs/design-system'
 
 import { ShowPropertyProps } from '../base-property-props'
 import DefaultPropertyValue from '../default-type/default-property-value'
+import allowOverride from '../../../hoc/allow-override'
 
 const Show: FC<ShowPropertyProps> = (props) => {
   const { property } = props
@@ -13,4 +14,4 @@ const Show: FC<ShowPropertyProps> = (props) => {
   )
 }
 
-export default Show
+export default allowOverride(Show, 'DefaultPhoneShowProperty')
