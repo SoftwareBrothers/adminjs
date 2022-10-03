@@ -1,6 +1,8 @@
 import truncate from 'lodash/truncate'
 import React, { FC } from 'react'
+
 import { ShowPropertyProps } from '../base-property-props'
+import allowOverride from '../../../hoc/allow-override'
 
 const stripHtml = (html: string): string => {
   const el = window.document.createElement('DIV')
@@ -18,4 +20,4 @@ const List: FC<ShowPropertyProps> = (props) => {
   return <>{truncate(textValue, { length: maxLength, separator: ' ' })}</>
 }
 
-export default List
+export default allowOverride(List, 'DefaultReferenceListProperty')

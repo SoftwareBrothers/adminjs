@@ -2,14 +2,8 @@ import React from 'react'
 
 import { useTranslation } from '../../../hooks/use-translation'
 import { flat } from '../../../../utils'
-import { RecordJSON, ResourceJSON, PropertyJSON } from '../../../interfaces'
 import { ShowPropertyProps } from '../base-property-props'
-
-interface Props {
-  property: PropertyJSON;
-  record: RecordJSON;
-  resource: ResourceJSON;
-}
+import allowOverride from '../../../hoc/allow-override'
 
 const List: React.FC<ShowPropertyProps> = (props) => {
   const { property, record } = props
@@ -21,4 +15,4 @@ const List: React.FC<ShowPropertyProps> = (props) => {
   )
 }
 
-export default List
+export default allowOverride(List, 'DefaultArrayListProperty')

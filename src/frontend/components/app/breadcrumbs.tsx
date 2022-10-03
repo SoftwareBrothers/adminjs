@@ -6,6 +6,7 @@ import { Box, Text, cssClass } from '@adminjs/design-system'
 import { RecordJSON, ResourceJSON } from '../../interfaces'
 import ViewHelpers from '../../../backend/utils/view-helpers/view-helpers'
 import { useTranslation } from '../../hooks/use-translation'
+import allowOverride from '../../hoc/allow-override'
 
 export const BreadcrumbLink = styled(Link)`
   color: ${({ theme }): string => theme.colors.grey40};
@@ -73,7 +74,7 @@ export type BreadcrumbProps = {
  * @component
  * @private
  */
-export const Breadcrumbs: React.FC<BreadcrumbProps> = (props) => {
+const Breadcrumbs: React.FC<BreadcrumbProps> = (props) => {
   const { resource, record, actionName } = props
 
   const listAction = resource.resourceActions.find(({ name }) => name === 'list')
@@ -101,4 +102,9 @@ export const Breadcrumbs: React.FC<BreadcrumbProps> = (props) => {
   )
 }
 
-export default Breadcrumbs
+const OverridableBreadcrumbs = allowOverride(Breadcrumbs, 'Breadcrumbs')
+
+export {
+  OverridableBreadcrumbs as default,
+  OverridableBreadcrumbs as Breadcrumbs,
+}

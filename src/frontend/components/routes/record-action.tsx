@@ -14,6 +14,7 @@ import { useNotice, useResource, useTranslation } from '../../hooks'
 import DrawerPortal from '../app/drawer-portal'
 import { ActionResponse, RecordActionResponse } from '../../../backend/actions/action.interface'
 import mergeRecordResponse from '../../hooks/use-record/merge-record-response'
+import allowOverride from '../../hoc/allow-override'
 
 const api = new ApiClient()
 
@@ -124,4 +125,4 @@ const RecordAction: React.FC = () => {
   )
 }
 
-export default RecordAction
+export default allowOverride(RecordAction, 'RecordActionRoute')

@@ -1,6 +1,8 @@
 import { Box, Icon, Tooltip } from '@adminjs/design-system'
 import React from 'react'
+
 import { PropertyJSON } from '../../../../interfaces'
+import allowOverride from '../../../../hoc/allow-override'
 
 export type PropertyDescriptionProps = {
   property: PropertyJSON;
@@ -23,7 +25,9 @@ const PropertyDescription: React.FC<PropertyDescriptionProps> = (props) => {
   )
 }
 
+const OverridablePropertyDescription = allowOverride(PropertyDescription, 'PropertyDescription')
+
 export {
-  PropertyDescription as default,
-  PropertyDescription,
+  OverridablePropertyDescription as default,
+  OverridablePropertyDescription as PropertyDescription,
 }

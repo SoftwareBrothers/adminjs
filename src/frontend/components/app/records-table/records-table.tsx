@@ -4,10 +4,10 @@ import { Table, TableBody, Loader } from '@adminjs/design-system'
 import RecordInList from './record-in-list'
 import RecordsTableHeader from './records-table-header'
 import NoRecords from './no-records'
-
 import { RecordJSON, ResourceJSON } from '../../../interfaces'
 import SelectedRecords from './selected-records'
 import { ActionResponse } from '../../../../backend/actions/action.interface'
+import allowOverride from '../../../hoc/allow-override'
 
 /**
  * @alias RecordsTableProps
@@ -55,7 +55,7 @@ export type RecordsTableProps = {
  * @hideconstructor
  * @subcategory Application
  */
-export const RecordsTable: React.FC<RecordsTableProps> = (props) => {
+const RecordsTable: React.FC<RecordsTableProps> = (props) => {
   const {
     resource, records,
     actionPerformed, sortBy,
@@ -109,4 +109,9 @@ export const RecordsTable: React.FC<RecordsTableProps> = (props) => {
   )
 }
 
-export default RecordsTable
+const OverridableRecordsTable = allowOverride(RecordsTable, 'RecordsTable')
+
+export {
+  OverridableRecordsTable as default,
+  OverridableRecordsTable as RecordsTable,
+}

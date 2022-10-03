@@ -10,6 +10,7 @@ import { RecordJSON } from '../../interfaces'
 import { appendForceRefresh } from './utils/append-force-refresh'
 import { useTranslation } from '../../hooks/use-translation'
 import LayoutElementRenderer from './utils/layout-element-renderer'
+import allowOverride from '../../hoc/allow-override'
 
 const Edit: FC<ActionProps> = (props) => {
   const { record: initialRecord, resource, action } = props
@@ -81,7 +82,9 @@ const Edit: FC<ActionProps> = (props) => {
   )
 }
 
+const OverridableEdit = allowOverride(Edit, 'DefaultEditAction')
+
 export {
-  Edit as default,
-  Edit,
+  OverridableEdit as default,
+  OverridableEdit as Edit,
 }

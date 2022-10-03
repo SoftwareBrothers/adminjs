@@ -5,6 +5,7 @@ import PropertyType from '../property-type'
 import { ActionProps } from './action.props'
 import ActionHeader from '../app/action-header/action-header'
 import LayoutElementRenderer from './utils/layout-element-renderer'
+import allowOverride from '../../hoc/allow-override'
 
 /**
  * @name ShowAction
@@ -42,7 +43,9 @@ const Show: React.FC<ActionProps> = (props) => {
   )
 }
 
+const OverridableShow = allowOverride(Show, 'DefaultShowAction')
+
 export {
-  Show as default,
-  Show,
+  OverridableShow as default,
+  OverridableShow as Show,
 }

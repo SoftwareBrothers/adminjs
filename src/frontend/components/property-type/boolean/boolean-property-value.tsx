@@ -4,6 +4,7 @@ import { Badge } from '@adminjs/design-system'
 import { ShowPropertyProps } from '../base-property-props'
 import { useTranslation } from '../../../hooks'
 import mapValue from './map-value'
+import allowOverride from '../../../hoc/allow-override'
 
 const BooleanPropertyValue: React.FC<ShowPropertyProps> = (props) => {
   const { record, property, resource } = props
@@ -25,4 +26,4 @@ const BooleanPropertyValue: React.FC<ShowPropertyProps> = (props) => {
   )
 }
 
-export default BooleanPropertyValue
+export default allowOverride(BooleanPropertyValue, 'BooleanPropertyValue')

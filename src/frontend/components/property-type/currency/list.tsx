@@ -1,18 +1,14 @@
-import React, { PureComponent, ReactChild } from 'react'
+import React from 'react'
 
 import formatValue from './format-value'
-import { RecordJSON, PropertyJSON } from '../../../interfaces'
+import allowOverride from '../../../hoc/allow-override'
+import { ShowPropertyProps } from '../base-property-props'
 
-interface Props {
-  property: PropertyJSON;
-  record: RecordJSON;
+const List: React.FC<ShowPropertyProps> = (props) => {
+  const { property, record } = props
+  const value = formatValue(record.params[property.path], property.props)
+
+  return <span>{value}</span>
 }
 
-export default class List extends PureComponent<Props> {
-  render(): ReactChild {
-    const { property, record } = this.props
-    const value = formatValue(record.params[property.path], property.props)
-
-    return <span>{value}</span>
-  }
-}
+export default allowOverride(List, 'DefaultCurrencyListProperty')

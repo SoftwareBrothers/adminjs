@@ -1,22 +1,16 @@
 import React from 'react'
 
 import mapValue from './map-value'
-import { ResourceJSON, RecordJSON, PropertyJSON } from '../../../interfaces'
+import allowOverride from '../../../hoc/allow-override'
+import { ShowPropertyProps } from '../base-property-props'
 
-interface Props {
-  property: PropertyJSON;
-  record: RecordJSON;
-  // eslint-disable-next-line react/no-unused-prop-types
-  resource: ResourceJSON;
+const List: React.FC<ShowPropertyProps> = (props) => {
+  const { property, record } = props
+  const value = mapValue(record.params[property.path], property.type)
+
+  return (
+    <span>{value}</span>
+  )
 }
 
-export default class List extends React.PureComponent<Props> {
-  render(): React.ReactChild {
-    const { property, record } = this.props
-    const value = mapValue(record.params[property.path], property.type)
-
-    return (
-      <span>{value}</span>
-    )
-  }
-}
+export default allowOverride(List, 'DefaultDatetimeListProperty')

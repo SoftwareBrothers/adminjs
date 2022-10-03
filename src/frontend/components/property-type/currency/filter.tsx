@@ -1,11 +1,11 @@
 import { CurrencyInput, CurrencyInputProps, FormGroup } from '@adminjs/design-system'
 import React, { FC } from 'react'
+
 import { EditPropertyProps } from '../base-property-props'
 import { PropertyLabel } from '../utils/property-label'
+import allowOverride from '../../../hoc/allow-override'
 
-type CurrencyEditPropertyProps = EditPropertyProps & CurrencyInputProps
-
-const Filter: FC<CurrencyEditPropertyProps> = (props) => {
+const Filter: FC<EditPropertyProps> = (props) => {
   const { onChange, property, filter } = props
 
   const handleChange = (value) => {
@@ -20,10 +20,10 @@ const Filter: FC<CurrencyEditPropertyProps> = (props) => {
         name={`filter-${property.path}`}
         onValueChange={handleChange}
         value={filter[property.path]}
-        {...property.props}
+        {...property.props as CurrencyInputProps}
       />
     </FormGroup>
   )
 }
 
-export default Filter
+export default allowOverride(Filter, 'DefaultCurrencyFilterProperty')

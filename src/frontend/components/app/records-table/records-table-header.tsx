@@ -4,6 +4,7 @@ import { CheckBox, TableHead, TableRow, TableCell } from '@adminjs/design-system
 import PropertyHeader from './property-header'
 import { BasePropertyJSON } from '../../../interfaces'
 import { display } from './utils/display'
+import allowOverride from '../../../hoc/allow-override'
 
 /**
  * @memberof RecordsTableHeader
@@ -80,7 +81,7 @@ export type RecordsTableHeaderProps = {
  * </Box>
  * )
  */
-export const RecordsTableHeader: React.FC<RecordsTableHeaderProps> = (props) => {
+const RecordsTableHeader: React.FC<RecordsTableHeaderProps> = (props) => {
   const {
     titleProperty, properties,
     sortBy, direction,
@@ -113,4 +114,9 @@ export const RecordsTableHeader: React.FC<RecordsTableHeaderProps> = (props) => 
   )
 }
 
-export default RecordsTableHeader
+const OverridableRecordsTableHeader = allowOverride(RecordsTableHeader, 'RecordsTableHeader')
+
+export {
+  OverridableRecordsTableHeader as default,
+  OverridableRecordsTableHeader as RecordsTableHeader,
+}

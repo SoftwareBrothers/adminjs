@@ -1,17 +1,17 @@
-import React, { ReactNode } from 'react'
+import React from 'react'
 import { ValueGroup } from '@adminjs/design-system'
 
 import BooleanPropertyValue from './boolean-property-value'
-import { EditPropertyProps } from '../base-property-props'
+import { ShowPropertyProps } from '../base-property-props'
+import allowOverride from '../../../hoc/allow-override'
 
-export default class Show extends React.PureComponent<EditPropertyProps> {
-  render(): ReactNode {
-    const { property } = this.props
-
-    return (
-      <ValueGroup label={property.label}>
-        <BooleanPropertyValue {...this.props} />
-      </ValueGroup>
-    )
-  }
+const Show: React.FC<ShowPropertyProps> = (props) => {
+  const { property } = props
+  return (
+    <ValueGroup label={property.label}>
+      <BooleanPropertyValue {...props} />
+    </ValueGroup>
+  )
 }
+
+export default allowOverride(Show, 'DefaultBooleanShowProperty')
