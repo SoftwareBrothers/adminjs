@@ -4,6 +4,7 @@ import { FormGroup, Label, DatePicker } from '@adminjs/design-system'
 import * as BackendFilter from '../../../../backend/utils/filter/filter'
 import { useTranslation } from '../../../hooks/use-translation'
 import { FilterPropertyProps } from '../base-property-props'
+import allowOverride from '../../../hoc/allow-override'
 
 const { PARAM_SEPARATOR } = BackendFilter
 
@@ -35,4 +36,4 @@ const Filter: React.FC<FilterPropertyProps> = (props) => {
   )
 }
 
-export default Filter
+export default allowOverride(Filter, 'DefaultDatetimeFilterProperty')

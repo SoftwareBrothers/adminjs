@@ -1,20 +1,21 @@
-import React, { ReactNode } from 'react'
+import React from 'react'
 import { ValueGroup } from '@adminjs/design-system'
 
 import ReferenceValue from './reference-value'
-import { EditPropertyProps } from '../base-property-props'
+import { ShowPropertyProps } from '../base-property-props'
+import allowOverride from '../../../hoc/allow-override'
 
-export default class Show extends React.PureComponent<EditPropertyProps> {
-  render(): ReactNode {
-    const { property, record } = this.props
+const Show: React.FC<ShowPropertyProps> = (props) => {
+  const { property, record } = props
 
-    return (
-      <ValueGroup label={property.label}>
-        <ReferenceValue
-          property={property}
-          record={record}
-        />
-      </ValueGroup>
-    )
-  }
+  return (
+    <ValueGroup label={property.label}>
+      <ReferenceValue
+        property={property}
+        record={record}
+      />
+    </ValueGroup>
+  )
 }
+
+export default allowOverride(Show, 'DefaultReferenceShowProperty')

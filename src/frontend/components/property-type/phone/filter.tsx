@@ -1,11 +1,11 @@
 import { PhoneInput, PhoneInputProps, FormGroup } from '@adminjs/design-system'
 import React, { FC, useCallback } from 'react'
-import { EditPropertyProps } from '../base-property-props'
+
+import { FilterPropertyProps } from '../base-property-props'
 import { PropertyLabel } from '../utils/property-label'
+import allowOverride from '../../../hoc/allow-override'
 
-type PhoneEditPropertyProps = EditPropertyProps & PhoneInputProps
-
-const Filter: FC<PhoneEditPropertyProps> = (props) => {
+const Filter: FC<FilterPropertyProps> = (props) => {
   const { onChange, property, filter } = props
 
   const handleChange = useCallback((value) => {
@@ -22,10 +22,10 @@ const Filter: FC<PhoneEditPropertyProps> = (props) => {
         }}
         onChange={handleChange}
         value={filter[property.path]}
-        {...property.props}
+        {...property.props as PhoneInputProps}
       />
     </FormGroup>
   )
 }
 
-export default Filter
+export default allowOverride(Filter, 'DefaultPhoneFilterProperty')

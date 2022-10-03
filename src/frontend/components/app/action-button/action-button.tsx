@@ -7,6 +7,7 @@ import { ActionResponse } from '../../../../backend/actions/action.interface'
 
 import { ActionJSON, buildActionTestId } from '../../../interfaces'
 import { useAction } from '../../../hooks'
+import allowOverride from '../../../hoc/allow-override'
 
 /**
  * @alias ActionButtonProps
@@ -38,7 +39,7 @@ export type ActionButtonProps = {
  * @component
  * @subcategory Application
  */
-export const ActionButton: React.FC<ActionButtonProps> = (props) => {
+const ActionButton: React.FC<ActionButtonProps> = (props) => {
   const { children, action, actionPerformed, resourceId, recordId, recordIds } = props
 
   const { href, handleClick } = useAction(action, {
@@ -67,5 +68,9 @@ export const ActionButton: React.FC<ActionButtonProps> = (props) => {
   return WrappedElement
 }
 
-// TODO - remove this hack
-export default ActionButton
+const OverridableActionButton = allowOverride(ActionButton, 'ActionButton')
+
+export {
+  OverridableActionButton as default,
+  OverridableActionButton as ActionButton,
+}

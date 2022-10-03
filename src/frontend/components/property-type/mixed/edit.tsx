@@ -4,6 +4,7 @@ import { Section, FormGroup, FormMessage } from '@adminjs/design-system'
 import { EditPropertyProps } from '../base-property-props'
 import { PropertyLabel } from '../utils/property-label'
 import { convertToSubProperty } from './convert-to-sub-property'
+import allowOverride from '../../../hoc/allow-override'
 
 type Props = {
   ItemComponent: typeof React.Component;
@@ -32,4 +33,4 @@ const Edit: React.FC<Props & EditPropertyProps> = (props) => {
   )
 }
 
-export default Edit
+export default allowOverride(Edit, 'DefaultMixedEditProperty')

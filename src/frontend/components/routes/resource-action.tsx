@@ -11,6 +11,7 @@ import { ActionHeader } from '../app'
 import Wrapper from './utils/wrapper'
 import DrawerPortal from '../app/drawer-portal'
 import FilterDrawer from '../app/filter-drawer'
+import allowOverride from '../../hoc/allow-override'
 
 type PropsFromState = {
   resources: Array<ResourceJSON>;
@@ -78,4 +79,4 @@ const mapStateToProps = (state: ReduxState): PropsFromState => ({
   resources: state.resources,
 })
 
-export default connect(mapStateToProps)(ResourceAction)
+export default allowOverride(connect(mapStateToProps)(ResourceAction), 'ResourceActionRoute')

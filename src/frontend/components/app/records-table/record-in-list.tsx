@@ -11,6 +11,7 @@ import { ActionResponse, RecordActionResponse } from '../../../../backend/action
 import mergeRecordResponse from '../../../hooks/use-record/merge-record-response'
 import { useActionResponseHandler } from '../../../hooks'
 import { actionsToButtonGroup } from '../action-header/actions-to-button-group'
+import allowOverride from '../../../hoc/allow-override'
 
 export type RecordInListProps = {
   resource: ResourceJSON;
@@ -21,7 +22,7 @@ export type RecordInListProps = {
   isSelected?: boolean;
 }
 
-export const RecordInList: React.FC<RecordInListProps> = (props) => {
+const RecordInList: React.FC<RecordInListProps> = (props) => {
   const {
     resource, record: recordFromProps, actionPerformed,
     isLoading, onSelect, isSelected,
@@ -127,4 +128,9 @@ export const RecordInList: React.FC<RecordInListProps> = (props) => {
   )
 }
 
-export default RecordInList
+const OverridableRecordInList = allowOverride(RecordInList, 'RecordInList')
+
+export {
+  OverridableRecordInList as default,
+  OverridableRecordInList as RecordInList,
+}

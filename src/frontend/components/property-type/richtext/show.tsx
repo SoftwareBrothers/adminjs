@@ -3,6 +3,7 @@ import React, { FC } from 'react'
 import xss from 'xss'
 
 import { EditPropertyProps } from '../base-property-props'
+import allowOverride from '../../../hoc/allow-override'
 
 type InnerHtmlProp = {
   __html: string;
@@ -24,4 +25,4 @@ const Show: FC<EditPropertyProps> = (props) => {
   )
 }
 
-export default Show
+export default allowOverride(Show, 'DefaultRichtextShowProperty')

@@ -1,18 +1,11 @@
 import React from 'react'
 
-import { RecordJSON, PropertyJSON, ResourceJSON } from '../../../interfaces'
 import BooleanPropertyValue from './boolean-property-value'
+import { ShowPropertyProps } from '../base-property-props'
+import allowOverride from '../../../hoc/allow-override'
 
-interface Props {
-  property: PropertyJSON;
-  record: RecordJSON;
-  resource: ResourceJSON;
-}
+const List: React.FC<ShowPropertyProps> = (props) => (
+  <BooleanPropertyValue {...props} />
+)
 
-export default class List extends React.PureComponent<Props> {
-  render(): React.ReactChild {
-    return (
-      <BooleanPropertyValue {...this.props} />
-    )
-  }
-}
+export default allowOverride(List, 'DefaultBooleanListProperty')

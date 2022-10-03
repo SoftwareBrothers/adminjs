@@ -1,16 +1,11 @@
-import React, { ReactNode } from 'react'
+import React from 'react'
 
 import ReferenceValue from './reference-value'
-import { EditPropertyProps } from '../base-property-props'
+import { ShowPropertyProps } from '../base-property-props'
+import allowOverride from '../../../hoc/allow-override'
 
-export default class List extends React.PureComponent<EditPropertyProps> {
-  render(): ReactNode {
-    const { property, record } = this.props
-    return (
-      <ReferenceValue
-        property={property}
-        record={record}
-      />
-    )
-  }
-}
+const List: React.FC<ShowPropertyProps> = (props) => (
+  <ReferenceValue {...props} />
+)
+
+export default allowOverride(List, 'DefaultReferenceListProperty')

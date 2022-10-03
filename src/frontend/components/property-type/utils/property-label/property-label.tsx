@@ -1,7 +1,9 @@
 import { Label, LabelProps } from '@adminjs/design-system'
 import React from 'react'
+
 import { PropertyJSON } from '../../../../interfaces'
 import { PropertyDescription } from '../property-description'
+import allowOverride from '../../../../hoc/allow-override'
 
 export type PropertyLabelProps = {
   property: PropertyJSON;
@@ -25,7 +27,9 @@ const PropertyLabel: React.FC<PropertyLabelProps> = (props) => {
   )
 }
 
+const OverridablePropertyLabel = allowOverride(PropertyLabel, 'PropertyLabel')
+
 export {
-  PropertyLabel as default,
-  PropertyLabel,
+  OverridablePropertyLabel as default,
+  OverridablePropertyLabel as PropertyLabel,
 }

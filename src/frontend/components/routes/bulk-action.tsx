@@ -6,7 +6,7 @@ import { BulkActionParams } from '../../../backend/utils/view-helpers/view-helpe
 
 import ApiClient from '../../utils/api-client'
 import getBulkActionsFromRecords from '../app/records-table/utils/get-bulk-actions-from-records'
-import { ActionJSON, RecordJSON, ResourceJSON } from '../../interfaces'
+import { ActionJSON, RecordJSON } from '../../interfaces'
 import Wrapper from './utils/wrapper'
 import {
   ActionHeader,
@@ -17,10 +17,7 @@ import {
   NoActionError,
 } from '../app'
 import { useTranslation, useNotice, useResource } from '../../hooks'
-
-type PropsFromState = {
-  resources: Array<ResourceJSON>;
-}
+import allowOverride from '../../hoc/allow-override'
 
 type MatchParams = Pick<BulkActionParams, 'actionName' | 'resourceId'>
 
@@ -115,4 +112,4 @@ const BulkAction: React.FC = () => {
   )
 }
 
-export default BulkAction
+export default allowOverride(BulkAction, 'BulkActionRoute')

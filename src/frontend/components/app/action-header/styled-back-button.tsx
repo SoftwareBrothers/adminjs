@@ -10,6 +10,7 @@ import {
 import { useSelector } from 'react-redux'
 import ViewHelpers from '../../../../backend/utils/view-helpers/view-helpers'
 import { ReduxState, RouterProps } from '../../../store'
+import allowOverride from '../../../hoc/allow-override'
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const StyledLink = styled(({ rounded, ...rest }) => <RouterLink {...rest} />)<ButtonProps>`${ButtonCSS}`
@@ -20,7 +21,7 @@ export type StyledBackButtonProps = {
   showInDrawer: boolean;
 }
 
-export const StyledBackButton: React.FC<StyledBackButtonProps> = (props) => {
+const StyledBackButton: React.FC<StyledBackButtonProps> = (props) => {
   const { resourceId, showInDrawer } = props
   const cssCloseIcon = showInDrawer ? 'ChevronRight' : 'ChevronLeft'
 
@@ -42,4 +43,11 @@ export const StyledBackButton: React.FC<StyledBackButtonProps> = (props) => {
       <Icon icon={cssCloseIcon} />
     </StyledLink>
   )
+}
+
+const OverridableStyledBackButton = allowOverride(StyledBackButton, 'StyledBackButton')
+
+export {
+  OverridableStyledBackButton as default,
+  OverridableStyledBackButton as StyledBackButton,
 }

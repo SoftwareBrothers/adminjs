@@ -1,8 +1,10 @@
 import { FormGroup, FormMessage, RichTextEditor } from '@adminjs/design-system'
 import React, { FC, memo, useCallback } from 'react'
+
 import { EditPropertyProps } from '../base-property-props'
 import { recordPropertyIsEqual } from '../record-property-is-equal'
 import { PropertyLabel } from '../utils/property-label'
+import allowOverride from '../../../hoc/allow-override'
 
 const Edit: FC<EditPropertyProps> = (props) => {
   const { property, record, onChange } = props
@@ -22,4 +24,4 @@ const Edit: FC<EditPropertyProps> = (props) => {
   )
 }
 
-export default memo(Edit, recordPropertyIsEqual)
+export default allowOverride(memo(Edit, recordPropertyIsEqual), 'DefaultRichtextEditProperty')
