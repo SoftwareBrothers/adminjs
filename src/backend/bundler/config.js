@@ -9,6 +9,7 @@ const json = require('@rollup/plugin-json')
 const { terser } = require('rollup-plugin-terser')
 
 const external = [
+  'prop-types',
   'react',
   'react-dom',
   'redux',
@@ -26,6 +27,7 @@ const globals = {
   redux: 'Redux',
   '@carbon/icons-react': 'CarbonIcons',
   'styled-components': 'styled',
+  'prop-types': 'PropTypes',
   'react-dom': 'ReactDOM',
   'react-redux': 'ReactRedux',
   'react-router': 'ReactRouter',
