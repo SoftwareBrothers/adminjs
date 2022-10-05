@@ -33,7 +33,7 @@ const DrawerWrapper: React.FC<DrawerWrapperProps> = ({ onMount }) => {
   }, [])
   return (
     <ThemeProvider theme={(window as any).THEME}>
-      <Drawer id={DRAWER_PORTAL_ID} className="hidden" />
+      <Drawer id={DRAWER_PORTAL_ID} className="hidden" data-css="drawer" />
     </ThemeProvider>
   )
 }
@@ -95,6 +95,7 @@ export const DrawerPortal: React.FC<DrawerPortalProps> = ({ children, width }) =
       return (): void => {
         drawerElement.style.width = DEFAULT_DRAWER_WIDTH
         drawerElement.classList.add('hidden')
+        drawerElement.setAttribute('data-css', 'drawer-element')
       }
     }
     return () => undefined

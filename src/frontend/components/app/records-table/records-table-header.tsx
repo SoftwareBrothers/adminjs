@@ -86,10 +86,13 @@ const RecordsTableHeader: React.FC<RecordsTableHeaderProps> = (props) => {
     titleProperty, properties,
     sortBy, direction,
     onSelectAll, selectedAll } = props
+  const contentTag = `${titleProperty.resourceId}-table-head`
+  const rowTag = `${titleProperty.resourceId}-table-head-row`
+  const checkboxCss = `${titleProperty.resourceId}-checkbox-table-cell`
   return (
-    <TableHead>
-      <TableRow>
-        <TableCell>
+    <TableHead data-css={contentTag}>
+      <TableRow data-css={rowTag}>
+        <TableCell data-css={checkboxCss}>
           {onSelectAll ? (
             <CheckBox
               style={{ marginLeft: 5 }}

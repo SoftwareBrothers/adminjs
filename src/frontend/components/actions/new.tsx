@@ -1,16 +1,17 @@
+import { Box, Button, DrawerContent, DrawerFooter, Icon } from '@adminjs/design-system'
 import React, { FC, useEffect } from 'react'
 import { useNavigate } from 'react-router'
-import { DrawerContent, Box, DrawerFooter, Button, Icon } from '@adminjs/design-system'
 
+import allowOverride from '../../hoc/allow-override'
+import useRecord from '../../hooks/use-record/use-record'
+import { useTranslation } from '../../hooks/use-translation'
+import { RecordJSON } from '../../interfaces'
+import { getActionElementCss } from '../../utils'
+import ActionHeader from '../app/action-header/action-header'
 import PropertyType from '../property-type'
 import { ActionProps } from './action.props'
-import ActionHeader from '../app/action-header/action-header'
-import { RecordJSON } from '../../interfaces'
-import useRecord from '../../hooks/use-record/use-record'
 import { appendForceRefresh } from './utils/append-force-refresh'
-import { useTranslation } from '../../hooks/use-translation'
 import LayoutElementRenderer from './utils/layout-element-renderer'
-import allowOverride from '../../hoc/allow-override'
 
 const New: FC<ActionProps> = (props) => {
   const { record: initialRecord, resource, action } = props
@@ -44,6 +45,11 @@ const New: FC<ActionProps> = (props) => {
     return false
   }
 
+  const contentTag = getActionElementCss(resource, action, 'drawer-content')
+  const formTag = getActionElementCss(resource, action, 'form')
+  const footerTag = getActionElementCss(resource, action, 'drawer-footer')
+  const buttonTag = getActionElementCss(resource, action, 'drawer-submit')
+
   return (
     <Box
       as="form"
@@ -51,8 +57,9 @@ const New: FC<ActionProps> = (props) => {
       flex
       flexGrow={1}
       flexDirection="column"
+      data-css={formTag}
     >
-      <DrawerContent>
+      <DrawerContent data-css={contentTag}>
         {action?.showInDrawer ? <ActionHeader {...props} /> : null}
         {action.layout ? action.layout.map((layoutElement, i) => (
           <LayoutElementRenderer
@@ -75,8 +82,8 @@ const New: FC<ActionProps> = (props) => {
           />
         ))}
       </DrawerContent>
-      <DrawerFooter>
-        <Button variant="primary" size="lg" type="submit" data-testid="button-save" disabled={loading}>
+      <DrawerFooter data-css={footerTag}>
+        <Button variant="primary" size="lg" type="submit" data-css={buttonTag} data-testid="button-save" disabled={loading}>
           {loading ? (<Icon icon="Fade" spin />) : null}
           {translateButton('save', resource.id)}
         </Button>

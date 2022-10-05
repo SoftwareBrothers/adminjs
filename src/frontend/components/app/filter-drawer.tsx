@@ -97,9 +97,15 @@ const FilterDrawer: React.FC<FilterProps> = (props) => {
     })
   }
 
+  const contentTag = `${params.resourceId}-filter-drawer`
+  const cssContent = `${params.resourceId}-filter-drawer-content`
+  const cssFooter = `${params.resourceId}-filter-drawer-footer`
+  const cssButtonApply = `${params.resourceId}-filter-drawer-button-apply`
+  const cssButtonReset = `${params.resourceId}-filter-drawer-button-reset`
+
   return (
-    <Drawer variant="filter" isHidden={!isVisible} as="form" onSubmit={handleSubmit}>
-      <DrawerContent>
+    <Drawer variant="filter" isHidden={!isVisible} as="form" onSubmit={handleSubmit} data-css={contentTag}>
+      <DrawerContent data-css={cssContent}>
         <H3>
           <Button
             type="button"
@@ -125,11 +131,11 @@ const FilterDrawer: React.FC<FilterProps> = (props) => {
           ))}
         </Box>
       </DrawerContent>
-      <DrawerFooter>
-        <Button variant="primary" size="lg">
+      <DrawerFooter data-css={cssFooter}>
+        <Button variant="primary" size="lg" data-css={cssButtonApply}>
           {translateButton('applyChanges', resource.id)}
         </Button>
-        <Button variant="text" size="lg" onClick={resetFilter} type="button" color="white">
+        <Button variant="text" size="lg" onClick={resetFilter} type="button" color="white" data-css={cssButtonReset}>
           {translateButton('resetFilter', resource.id)}
         </Button>
       </DrawerFooter>

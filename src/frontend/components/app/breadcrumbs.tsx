@@ -81,9 +81,9 @@ const Breadcrumbs: React.FC<BreadcrumbProps> = (props) => {
   const action = resource.actions.find((a) => a.name === actionName)
   const h = new ViewHelpers()
   const { translateLabel: tl } = useTranslation()
-
+  const contentTag = `${resource.id}-${actionName}-breadcrumbs`
   return (
-    <Box flexGrow={1} className={cssClass('Breadcrumbs')}>
+    <Box flexGrow={1} className={cssClass('Breadcrumbs')} data-css={contentTag}>
       <BreadcrumbLink to={h.dashboardUrl()}>{tl('dashboard')}</BreadcrumbLink>
       {listAction ? (
         <BreadcrumbLink

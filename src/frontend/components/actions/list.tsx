@@ -1,13 +1,14 @@
-import React, { useEffect } from 'react'
 import { Box, Pagination, Text } from '@adminjs/design-system'
-import { useNavigate, useLocation } from 'react-router'
+import React, { useEffect } from 'react'
+import { useLocation, useNavigate } from 'react-router'
 
-import RecordsTable from '../app/records-table/records-table'
-import { ActionProps } from './action.props'
+import allowOverride from '../../hoc/allow-override'
 import useRecords from '../../hooks/use-records/use-records'
 import useSelectedRecords from '../../hooks/use-selected-records/use-selected-records'
+import { getResourceElementCss } from '../../utils'
+import RecordsTable from '../app/records-table/records-table'
+import { ActionProps } from './action.props'
 import { REFRESH_KEY } from './utils/append-force-refresh'
-import allowOverride from '../../hoc/allow-override'
 
 const List: React.FC<ActionProps> = ({ resource, setTag }) => {
   const {
@@ -54,8 +55,10 @@ const List: React.FC<ActionProps> = ({ resource, setTag }) => {
     navigate({ search: search.toString() })
   }
 
+  const contentTag = getResourceElementCss(resource, 'list-content')
+
   return (
-    <Box variant="white">
+    <Box variant="white" data-css={contentTag}>
       <RecordsTable
         resource={resource}
         records={records}

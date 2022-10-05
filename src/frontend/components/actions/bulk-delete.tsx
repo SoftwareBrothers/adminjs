@@ -1,18 +1,16 @@
+import { Button, DrawerContent, DrawerFooter, Icon, MessageBox, Table, TableBody, TableCell, TableRow, Text } from '@adminjs/design-system'
 import React, { useState } from 'react'
-import {
-  Table, TableBody, TableRow, TableCell, Text,
-  DrawerContent, DrawerFooter, Button, MessageBox, Icon,
-} from '@adminjs/design-system'
 import { useNavigate } from 'react-router'
 
+import allowOverride from '../../hoc/allow-override'
+import withNotice, { AddNoticeProps } from '../../hoc/with-notice'
+import { useTranslation } from '../../hooks'
+import { getActionElementCss } from '../../utils'
+import ApiClient from '../../utils/api-client'
+import ActionHeader from '../app/action-header/action-header'
 import PropertyType from '../property-type'
 import { ActionProps } from './action.props'
-import ApiClient from '../../utils/api-client'
-import withNotice, { AddNoticeProps } from '../../hoc/with-notice'
 import { appendForceRefresh } from './utils/append-force-refresh'
-import ActionHeader from '../app/action-header/action-header'
-import { useTranslation } from '../../hooks'
-import allowOverride from '../../hoc/allow-override'
 
 /**
  * @name BulkDeleteAction
@@ -66,16 +64,20 @@ const BulkDelete: React.FC<ActionProps & AddNoticeProps> = (props) => {
     })
   }
 
+  const contentTag = getActionElementCss(resource, action, 'drawer-content')
+  const tableTag = getActionElementCss(resource, action, 'table')
+  const footerTag = getActionElementCss(resource, action, 'drawer-footer')
+
   return (
     <>
-      <DrawerContent>
+      <DrawerContent data-css={contentTag}>
         {action?.showInDrawer ? <ActionHeader omitActions {...props} /> : null}
         <MessageBox
           mb="xxl"
           variant="danger"
           message={translateMessage('theseRecordsWillBeRemoved', resource.id, { count: records.length })}
         />
-        <Table>
+        <Table data-css={tableTag}>
           <TableBody>
             {records.map((record) => (
               <TableRow key={record.id}>
@@ -92,7 +94,7 @@ const BulkDelete: React.FC<ActionProps & AddNoticeProps> = (props) => {
           </TableBody>
         </Table>
       </DrawerContent>
-      <DrawerFooter>
+      <DrawerFooter data-css={footerTag}>
         <Button variant="primary" size="lg" onClick={handleClick} disabled={loading}>
           {loading ? (<Icon icon="Fade" spin />) : null}
           {translateButton('confirmRemovalMany', resource.id, { count: records.length })}

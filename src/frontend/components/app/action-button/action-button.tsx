@@ -59,9 +59,12 @@ const ActionButton: React.FC<ActionButtonProps> = (props) => {
     throw new Error('ActionButton has to have one child')
   }
 
+  const contentTag = `${resourceId}-${action.name}-button`
+
   const WrappedElement = React.cloneElement(firstChild as ReactElement<any>, {
     onClick: handleClick,
     'data-testid': buildActionTestId(action),
+    'data-css': contentTag,
     href,
   })
 

@@ -8,6 +8,7 @@ import { RecordJSON, ResourceJSON } from '../../../interfaces'
 import SelectedRecords from './selected-records'
 import { ActionResponse } from '../../../../backend/actions/action.interface'
 import allowOverride from '../../../hoc/allow-override'
+import { getResourceElementCss } from '../../../utils'
 
 /**
  * @alias RecordsTableProps
@@ -76,11 +77,16 @@ const RecordsTable: React.FC<RecordsTableProps> = (props) => {
 
   const recordsHaveBulkAction = !!records.find((record) => record.bulkActions.length)
 
+  const contentTag = getResourceElementCss(resource, 'table')
+  const selectedTag = getResourceElementCss(resource, 'table-selected-records')
+  const bodyTag = getResourceElementCss(resource, 'table-body')
+
   return (
-    <Table>
+    <Table data-css={contentTag}>
       <SelectedRecords
         resource={resource}
         selectedRecords={selectedRecords}
+        data-css={selectedTag}
       />
       <RecordsTableHeader
         properties={resource.listProperties}
@@ -90,7 +96,7 @@ const RecordsTable: React.FC<RecordsTableProps> = (props) => {
         onSelectAll={recordsHaveBulkAction ? onSelectAll : undefined}
         selectedAll={selectedAll}
       />
-      <TableBody>
+      <TableBody data-css={bodyTag}>
         {records.map((record) => (
           <RecordInList
             record={record}

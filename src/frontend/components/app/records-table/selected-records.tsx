@@ -7,6 +7,7 @@ import getBulkActionsFromRecords from './utils/get-bulk-actions-from-records'
 import { useActionResponseHandler, useTranslation } from '../../../hooks'
 import { actionsToButtonGroup } from '../action-header/actions-to-button-group'
 import allowOverride from '../../../hoc/allow-override'
+import { getResourceElementCss } from '../../../utils'
 
 type SelectedRecordsProps = {
   resource: ResourceJSON;
@@ -42,9 +43,9 @@ const SelectedRecords: React.FC<SelectedRecordsProps> = (props) => {
     params,
     handleClick: handleActionClick,
   })
-
+  const contentTag = getResourceElementCss(resource, 'table-caption')
   return (
-    <TableCaption>
+    <TableCaption data-css={contentTag}>
       <Box flex py="sm" alignItems="center">
         <Title mr="lg">
           {translateLabel('selectedRecords', resource.id, { selected: selectedRecords.length })}

@@ -67,6 +67,7 @@ const BasePropertyComponent: React.FC<BasePropertyComponentProps> = (props) => {
   }), [baseProperty])
 
   const testId = `property-${where}-${property.path}`
+  const contentTag = `${resource.id}-${where}-${property.path}`
 
   let Component: ReactComponentLike = (types[property.type] && types[property.type][where])
   || defaultType[where]
@@ -79,7 +80,7 @@ const BasePropertyComponent: React.FC<BasePropertyComponentProps> = (props) => {
     Component = globalAny.AdminJS.UserComponents[component]
     return (
       <ErrorBoundary>
-        <Box data-testid={testId}>
+        <Box data-css={contentTag} data-testid={testId}>
           <Component
             property={property}
             resource={resource}
@@ -122,7 +123,7 @@ const BasePropertyComponent: React.FC<BasePropertyComponentProps> = (props) => {
 
   return (
     <ErrorBoundary>
-      <Box data-testid={testId}>
+      <Box data-css={contentTag} data-testid={testId}>
         <Component
           property={property}
           resource={resource}

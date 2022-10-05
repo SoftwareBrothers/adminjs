@@ -26,6 +26,7 @@ export const actionsToButtonGroup = (
       onClick: href ? handleClick : undefined,
       'data-testid': buildActionTestId(action),
       buttons: [],
+      'data-css': `${action.resourceId}-${action.name}-button`,
     }
   })
 

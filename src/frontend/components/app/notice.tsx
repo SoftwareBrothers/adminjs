@@ -87,7 +87,7 @@ const NoticeBox: React.FC<NoticeBoxPropsFromState & NoticeBoxDispatchFromState> 
   const notice = notices.length ? notices[notices.length - 1] : null
   if (notice) {
     return (
-      <div data-testid="notice-wrapper">
+      <div data-testid="notice-wrapper" data-css="notice-wrapper">
         <NoticeElement
           key={notice.id}
           notice={notice}
