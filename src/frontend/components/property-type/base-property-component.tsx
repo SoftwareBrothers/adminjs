@@ -1,25 +1,26 @@
-import React, { useMemo } from 'react'
-import { ReactComponentLike } from 'prop-types'
 import { Box } from '@adminjs/design-system'
+import { ReactComponentLike } from 'prop-types'
+import React, { useMemo } from 'react'
 
 import ErrorBoundary from '../app/error-boundary'
 
 import * as ArrayType from './array'
-import * as MixedType from './mixed'
 import * as KeyValueType from './key-value'
+import * as MixedType from './mixed'
 
-import * as defaultType from './default-type'
-import * as boolean from './boolean'
-import * as datetime from './datetime'
-import * as richtext from './richtext'
-import * as reference from './reference'
-import * as textarea from './textarea'
-import * as password from './password'
-import * as currency from './currency'
-import * as phone from './phone'
-import { BasePropertyComponentProps } from './base-property-props'
 import { PropertyType } from '../../../backend/adapters/property/base-property'
 import { PropertyJSON } from '../../interfaces'
+import { getActionElementCss } from '../../utils'
+import { BasePropertyComponentProps } from './base-property-props'
+import * as boolean from './boolean'
+import * as currency from './currency'
+import * as datetime from './datetime'
+import * as defaultType from './default-type'
+import * as password from './password'
+import * as phone from './phone'
+import * as reference from './reference'
+import * as richtext from './richtext'
+import * as textarea from './textarea'
 
 let globalAny: any = {}
 
@@ -69,9 +70,10 @@ const BasePropertyComponent: React.FC<BasePropertyComponentProps> = (props) => {
   }), [baseProperty])
 
   const testId = `property-${where}-${property.path}`
+  const contentTag = getActionElementCss(resource.id, where, property.path)
 
   let Component: ReactComponentLike = (types[property.type] && types[property.type][where])
-  || defaultType[where]
+    || defaultType[where]
 
   if (property.components && property.components[where]) {
     const component = property.components[where]
@@ -81,7 +83,7 @@ const BasePropertyComponent: React.FC<BasePropertyComponentProps> = (props) => {
     Component = globalAny.AdminJS.UserComponents[component]
     return (
       <ErrorBoundary>
-        <Box data-testid={testId}>
+        <Box data-css={contentTag} data-testid={testId}>
           <Component
             property={property}
             resource={resource}
@@ -136,7 +138,7 @@ const BasePropertyComponent: React.FC<BasePropertyComponentProps> = (props) => {
 
   return (
     <ErrorBoundary>
-      <Box data-testid={testId}>
+      <Box data-css={contentTag} data-testid={testId}>
         <Component
           property={property}
           resource={resource}

@@ -1,11 +1,12 @@
-import React from 'react'
 import { DrawerContent } from '@adminjs/design-system'
+import React from 'react'
 
+import allowOverride from '../../hoc/allow-override'
+import { getActionElementCss } from '../../utils'
+import ActionHeader from '../app/action-header/action-header'
 import PropertyType from '../property-type'
 import { ActionProps } from './action.props'
-import ActionHeader from '../app/action-header/action-header'
 import LayoutElementRenderer from './utils/layout-element-renderer'
-import allowOverride from '../../hoc/allow-override'
 
 /**
  * @name ShowAction
@@ -18,8 +19,10 @@ const Show: React.FC<ActionProps> = (props) => {
   const { resource, record, action } = props
   const properties = resource.showProperties
 
+  const contentTag = getActionElementCss(resource.id, action.name, 'drawer-content')
+
   return (
-    <DrawerContent>
+    <DrawerContent data-css={contentTag}>
       {action?.showInDrawer ? <ActionHeader {...props} /> : null}
       {action.layout ? action.layout.map((layoutElement, i) => (
         <LayoutElementRenderer

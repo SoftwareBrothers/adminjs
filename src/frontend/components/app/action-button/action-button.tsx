@@ -5,9 +5,10 @@
 import React, { ReactElement } from 'react'
 import { ActionResponse } from '../../../../backend/actions/action.interface'
 
-import { ActionJSON, buildActionTestId } from '../../../interfaces'
-import { useAction } from '../../../hooks'
 import allowOverride from '../../../hoc/allow-override'
+import { useAction } from '../../../hooks'
+import { ActionJSON, buildActionTestId } from '../../../interfaces'
+import { getActionElementCss } from '../../../utils'
 
 /**
  * @alias ActionButtonProps
@@ -59,9 +60,12 @@ const ActionButton: React.FC<ActionButtonProps> = (props) => {
     throw new Error('ActionButton has to have one child')
   }
 
+  const contentTag = getActionElementCss(resourceId, action.name, 'button')
+
   const WrappedElement = React.cloneElement(firstChild as ReactElement<any>, {
     onClick: handleClick,
     'data-testid': buildActionTestId(action),
+    'data-css': contentTag,
     href,
   })
 

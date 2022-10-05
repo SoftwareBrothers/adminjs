@@ -26,7 +26,7 @@ const Version: React.FC<Props> = (props) => {
   const { translateLabel } = useTranslation()
 
   return (
-    <Box flex flexGrow={1} py="default" px="xxl" className={cssClass('Version')}>
+    <Box flex flexGrow={1} py="default" px="xxl" className={cssClass('Version')} data-css="version">
       {admin && (
         <VersionItem>
           {translateLabel('adminVersion', { version: admin })}

@@ -69,16 +69,16 @@ const App: React.FC = () => {
     <>
       <Reset />
       <GlobalStyle />
-      <Box height="100%" flex>
+      <Box height="100%" flex data-css="app">
         {sidebarVisible ? (
           <Overlay
             onClick={(): void => toggleSidebar(!sidebarVisible)}
           />
         ) : null}
-        <Sidebar isVisible={sidebarVisible} />
-        <Box flex flexGrow={1} flexDirection="column" overflowY="auto" bg="bg">
+        <Sidebar isVisible={sidebarVisible} data-css="sidebar" />
+        <Box flex flexGrow={1} flexDirection="column" overflowY="auto" bg="bg" data-css="app-content">
           <TopBar toggleSidebar={() => toggleSidebar(!sidebarVisible)} />
-          <Box position="absolute" top={0} zIndex={2000}>
+          <Box position="absolute" top={0} zIndex={2000} data-css="notice">
             <Notice />
           </Box>
           <Routes>

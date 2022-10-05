@@ -55,9 +55,9 @@ const SidebarOriginal: React.FC<Props> = (props) => {
   ])
 
   return (
-    <StyledSidebar className={isVisible ? 'visible' : 'hidden'}>
+    <StyledSidebar className={isVisible ? 'visible' : 'hidden'} data-css="sidebar">
       <SidebarBranding branding={branding} />
-      <Box flexGrow={1} className={cssClass('Resources')}>
+      <Box flexGrow={1} className={cssClass('Resources')} data-css="sidebar-resources">
         <SidebarResourceSection resources={resources} />
       </Box>
       <SidebarPages pages={pages} />

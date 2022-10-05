@@ -41,7 +41,7 @@ const Wrapper: React.FC<WrapperProps> = (props) => {
 
   const Component = showFilter ? StyledWrapperWithFilter : StyledWrapper
   return (
-    <Component {...rest} variant="grey" mx="auto">
+    <Component {...rest} variant="grey" mx="auto" data-css="styled-wrapper">
       {children}
     </Component>
   )

@@ -1,19 +1,16 @@
-import React, { MouseEvent, SyntheticEvent, useState, useEffect, useRef } from 'react'
-import { useNavigate, useLocation, useParams } from 'react-router-dom'
 import {
-  Box,
-  H3,
-  Button,
-  Icon,
-  Drawer,
+  Box, Button, Drawer,
   DrawerContent,
-  DrawerFooter,
+  DrawerFooter, H3, Icon,
 } from '@adminjs/design-system'
+import React, { MouseEvent, SyntheticEvent, useEffect, useRef, useState } from 'react'
+import { useLocation, useNavigate, useParams } from 'react-router-dom'
 
-import PropertyType from '../property-type'
-import { RecordJSON, ResourceJSON } from '../../interfaces'
-import { useTranslation } from '../../hooks'
 import allowOverride from '../../hoc/allow-override'
+import { useTranslation } from '../../hooks'
+import { RecordJSON, ResourceJSON } from '../../interfaces'
+import { getResourceElementCss } from '../../utils'
+import PropertyType from '../property-type'
 
 export type FilterProps = {
   resource: ResourceJSON;
@@ -97,9 +94,15 @@ const FilterDrawer: React.FC<FilterProps> = (props) => {
     })
   }
 
+  const contentTag = getResourceElementCss(params.resourceId!, 'filter-drawer')
+  const cssContent = getResourceElementCss(params.resourceId!, 'filter-drawer-content')
+  const cssFooter = getResourceElementCss(params.resourceId!, 'filter-drawer-footer')
+  const cssButtonApply = getResourceElementCss(params.resourceId!, 'filter-drawer-button-apply')
+  const cssButtonReset = getResourceElementCss(params.resourceId!, 'filter-drawer-button-reset')
+
   return (
-    <Drawer variant="filter" isHidden={!isVisible} as="form" onSubmit={handleSubmit}>
-      <DrawerContent>
+    <Drawer variant="filter" isHidden={!isVisible} as="form" onSubmit={handleSubmit} data-css={contentTag}>
+      <DrawerContent data-css={cssContent}>
         <H3>
           <Button
             type="button"
@@ -125,11 +128,11 @@ const FilterDrawer: React.FC<FilterProps> = (props) => {
           ))}
         </Box>
       </DrawerContent>
-      <DrawerFooter>
-        <Button variant="primary" size="lg">
+      <DrawerFooter data-css={cssFooter}>
+        <Button variant="primary" size="lg" data-css={cssButtonApply}>
           {translateButton('applyChanges', resource.id)}
         </Button>
-        <Button variant="text" size="lg" onClick={resetFilter} type="button" color="white">
+        <Button variant="text" size="lg" onClick={resetFilter} type="button" color="white" data-css={cssButtonReset}>
           {translateButton('resetFilter', resource.id)}
         </Button>
       </DrawerFooter>
