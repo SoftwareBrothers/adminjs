@@ -84,6 +84,11 @@ const translations = {
     needMoreSolutions_title: 'Need more advanced solutions?',
     needMoreSolutions_subtitle: 'We are here to provide you a beautiful UX/UI design and tailor made software based (not only) on AdminJS',
     invalidCredentials: 'Wrong email and/or password',
+    keyPlaceholder: 'KEY',
+    valuePlaceholder: 'VALUE',
+    initialKey: 'Key-{{number}}',
+    keyInUse: 'Object keys must be unique.',
+    keyValuePropertyDefaultDescription: 'All values are stored as text. Keys must be unique, duplicate keys will not be saved.',
   },
 }
 
