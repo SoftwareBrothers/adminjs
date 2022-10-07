@@ -6,6 +6,7 @@ import ErrorBoundary from '../app/error-boundary'
 
 import * as ArrayType from './array'
 import * as MixedType from './mixed'
+import * as KeyValueType from './key-value'
 
 import * as defaultType from './default-type'
 import * as boolean from './boolean'
@@ -43,6 +44,7 @@ const types: Record<PropertyType, any> = {
   float: defaultType,
   uuid: defaultType,
   mixed: null,
+  'key-value': null,
   currency,
   phone,
 }
@@ -96,6 +98,7 @@ const BasePropertyComponent: React.FC<BasePropertyComponentProps> = (props) => {
 
   const Array = ArrayType[where]
   const Mixed = MixedType[where]
+  const KeyValue = KeyValueType[where]
 
   if (baseProperty.isArray) {
     if (!Array) { return (<div />) }
@@ -104,6 +107,17 @@ const BasePropertyComponent: React.FC<BasePropertyComponentProps> = (props) => {
         {...props}
         property={property}
         ItemComponent={BasePropertyComponent}
+        testId={testId}
+      />
+    )
+  }
+
+  if (baseProperty.type === 'key-value') {
+    if (!KeyValue) { return (<div />) }
+    return (
+      <KeyValue
+        {...props}
+        property={property}
         testId={testId}
       />
     )

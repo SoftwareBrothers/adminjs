@@ -23,7 +23,7 @@ const TITLE_COLUMN_NAMES = ['title', 'name', 'subject', 'email']
 
 export type PropertyType =
   'string' | 'float' | 'number' | 'boolean' |
-  'date' | 'datetime' | 'mixed' | 'reference' |
+  'date' | 'datetime' | 'mixed' | 'reference' | 'key-value' |
   'richtext' | 'textarea' | 'password' | 'currency' | 'phone' | 'uuid';
 
 // description
