@@ -9,7 +9,7 @@ const SidebarFooter: React.FC = () => {
   const branding = useSelector<ReduxState, BrandingOptions>((state) => state.branding)
 
   return (
-    <Box mt="lg" mb="md">
+    <Box mt="lg" mb="md" data-css="sidebar-footer">
       {branding.withMadeWithLove && <MadeWithLove />}
     </Box>
   )

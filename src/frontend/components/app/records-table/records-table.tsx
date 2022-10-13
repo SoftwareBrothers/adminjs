@@ -1,13 +1,14 @@
+import { Loader, Table, TableBody } from '@adminjs/design-system'
 import React from 'react'
-import { Table, TableBody, Loader } from '@adminjs/design-system'
 
-import RecordInList from './record-in-list'
-import RecordsTableHeader from './records-table-header'
-import NoRecords from './no-records'
-import { RecordJSON, ResourceJSON } from '../../../interfaces'
-import SelectedRecords from './selected-records'
 import { ActionResponse } from '../../../../backend/actions/action.interface'
 import allowOverride from '../../../hoc/allow-override'
+import { RecordJSON, ResourceJSON } from '../../../interfaces'
+import { getResourceElementCss } from '../../../utils'
+import NoRecords from './no-records'
+import RecordInList from './record-in-list'
+import RecordsTableHeader from './records-table-header'
+import SelectedRecords from './selected-records'
 
 /**
  * @alias RecordsTableProps
@@ -76,11 +77,16 @@ const RecordsTable: React.FC<RecordsTableProps> = (props) => {
 
   const recordsHaveBulkAction = !!records.find((record) => record.bulkActions.length)
 
+  const contentTag = getResourceElementCss(resource.id, 'table')
+  const selectedTag = getResourceElementCss(resource.id, 'table-selected-records')
+  const bodyTag = getResourceElementCss(resource.id, 'table-body')
+
   return (
-    <Table>
+    <Table data-css={contentTag}>
       <SelectedRecords
         resource={resource}
         selectedRecords={selectedRecords}
+        data-css={selectedTag}
       />
       <RecordsTableHeader
         properties={resource.listProperties}
@@ -90,7 +96,7 @@ const RecordsTable: React.FC<RecordsTableProps> = (props) => {
         onSelectAll={recordsHaveBulkAction ? onSelectAll : undefined}
         selectedAll={selectedAll}
       />
-      <TableBody>
+      <TableBody data-css={bodyTag}>
         {records.map((record) => (
           <RecordInList
             record={record}

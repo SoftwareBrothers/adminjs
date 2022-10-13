@@ -1,10 +1,11 @@
+import { CheckBox, TableCell, TableHead, TableRow } from '@adminjs/design-system'
 import React from 'react'
-import { CheckBox, TableHead, TableRow, TableCell } from '@adminjs/design-system'
 
-import PropertyHeader from './property-header'
-import { BasePropertyJSON } from '../../../interfaces'
-import { display } from './utils/display'
 import allowOverride from '../../../hoc/allow-override'
+import { BasePropertyJSON } from '../../../interfaces'
+import { getResourceElementCss } from '../../../utils'
+import PropertyHeader from './property-header'
+import { display } from './utils/display'
 
 /**
  * @memberof RecordsTableHeader
@@ -86,10 +87,15 @@ const RecordsTableHeader: React.FC<RecordsTableHeaderProps> = (props) => {
     titleProperty, properties,
     sortBy, direction,
     onSelectAll, selectedAll } = props
+
+  const contentTag = getResourceElementCss(titleProperty.resourceId, 'table-head')
+
+  const rowTag = `${titleProperty.resourceId}-table-head-row`
+  const checkboxCss = `${titleProperty.resourceId}-checkbox-table-cell`
   return (
-    <TableHead>
-      <TableRow>
-        <TableCell>
+    <TableHead data-css={contentTag}>
+      <TableRow data-css={rowTag}>
+        <TableCell data-css={checkboxCss}>
           {onSelectAll ? (
             <CheckBox
               style={{ marginLeft: 5 }}

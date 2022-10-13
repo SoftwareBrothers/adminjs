@@ -12,6 +12,7 @@ import mergeRecordResponse from '../../../hooks/use-record/merge-record-response
 import { useActionResponseHandler } from '../../../hooks'
 import { actionsToButtonGroup } from '../action-header/actions-to-button-group'
 import allowOverride from '../../../hoc/allow-override'
+import { getResourceElementCss } from '../../../utils'
 
 export type RecordInListProps = {
   resource: ResourceJSON;
@@ -88,9 +89,9 @@ const RecordInList: React.FC<RecordInListProps> = (props) => {
       handleClick: handleActionClick,
     }),
   }]
-
+  const contentTag = getResourceElementCss(resource.id, 'table-row')
   return (
-    <TableRow onClick={handleClick} data-id={record.id}>
+    <TableRow onClick={handleClick} data-id={record.id} data-css={contentTag}>
       <TableCell className={isSelected ? 'selected' : 'not-selected'}>
         {onSelect && record.bulkActions.length ? (
           <CheckBox
@@ -99,26 +100,30 @@ const RecordInList: React.FC<RecordInListProps> = (props) => {
           />
         ) : null}
       </TableCell>
-      {resource.listProperties.map((property) => (
-        <TableCell
-          style={{ cursor: 'pointer' }}
-          key={property.propertyPath}
-          data-property-name={property.propertyPath}
-          display={display(property.isTitle)}
-        >
-          {isLoading ? (
-            <Placeholder style={{ height: 14 }} />
-          ) : (
-            <PropertyType
-              key={property.propertyPath}
-              where="list"
-              property={property}
-              resource={resource}
-              record={record}
-            />
-          )}
-        </TableCell>
-      ))}
+      {resource.listProperties.map((property) => {
+        const cellTag = `${resource.id}-${property.name}-table-cell`
+        return (
+          <TableCell
+            style={{ cursor: 'pointer' }}
+            key={property.propertyPath}
+            data-property-name={property.propertyPath}
+            display={display(property.isTitle)}
+            data-css={cellTag}
+          >
+            {isLoading ? (
+              <Placeholder style={{ height: 14 }} />
+            ) : (
+              <PropertyType
+                key={property.propertyPath}
+                where="list"
+                property={property}
+                resource={resource}
+                record={record}
+              />
+            )}
+          </TableCell>
+        )
+      })}
       <TableCell key="options">
         {recordActions.length ? (
           <ButtonGroup buttons={buttons} />

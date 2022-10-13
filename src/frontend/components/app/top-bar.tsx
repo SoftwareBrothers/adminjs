@@ -38,7 +38,7 @@ const TopBar: React.FC<Props> = (props) => {
   )
 
   return (
-    <NavBar>
+    <NavBar data-css="topbar">
       <Box
         py="lg"
         px={['default', 'lg']}

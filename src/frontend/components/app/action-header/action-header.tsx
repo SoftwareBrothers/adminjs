@@ -1,16 +1,15 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
+import { Badge, Box, ButtonGroup, cssClass, H2, H3 } from '@adminjs/design-system'
 import React from 'react'
-import { Box, Badge, H3, H2, ButtonGroup, cssClass } from '@adminjs/design-system'
 import { useNavigate } from 'react-router'
-
+import allowOverride from '../../../hoc/allow-override'
+import { useActionResponseHandler, useTranslation } from '../../../hooks'
+import { ActionJSON, buildActionClickHandler } from '../../../interfaces/action'
+import { getActionElementCss, getResourceElementCss } from '../../../utils'
 import Breadcrumbs from '../breadcrumbs'
 import { ActionHeaderProps } from './action-header-props'
 import { actionsToButtonGroup } from './actions-to-button-group'
 import { StyledBackButton } from './styled-back-button'
-
-import { useActionResponseHandler, useTranslation } from '../../../hooks'
-import { ActionJSON, buildActionClickHandler } from '../../../interfaces/action'
-import allowOverride from '../../../hoc/allow-override'
 
 /**
  * Header of an action. It renders Action name with buttons for all the actions.
@@ -63,6 +62,7 @@ const ActionHeader: React.FC<ActionHeaderProps> = (props) => {
       label: translateButton('filter', resource.id),
       onClick: toggleFilter,
       icon: 'SettingsAdjust',
+      'data-css': getResourceElementCss(resource.id, 'filter-button'),
     })
   }
 
@@ -84,9 +84,9 @@ const ActionHeader: React.FC<ActionHeaderProps> = (props) => {
   const cssHeaderMT = action.showInDrawer ? '' : 'lg'
   const cssActionsMB = action.showInDrawer ? 'xl' : 'default'
   const CssHComponent = action.showInDrawer ? H3 : H2
-
+  const contentTag = getActionElementCss(resourceId, action.name, 'action-header')
   return (
-    <Box className={cssClass('ActionHeader')}>
+    <Box className={cssClass('ActionHeader')} data-css={contentTag}>
       {action.showInDrawer ? '' : (
         <Box flex flexDirection="row" px={['default', 0]}>
           <Breadcrumbs resource={resource} actionName={action.name} record={record} />
