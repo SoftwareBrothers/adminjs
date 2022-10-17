@@ -1,16 +1,17 @@
+import { Box } from '@adminjs/design-system'
 import React, { useState } from 'react'
 import { connect } from 'react-redux'
 import { useMatch, useParams } from 'react-router'
-import { Box } from '@adminjs/design-system'
 
-import BaseAction from '../app/base-action-component'
-import FilterDrawer from '../app/filter-drawer'
-import { ReduxState } from '../../store/store'
-import { NoResourceError, NoActionError } from '../app/error-message'
 import ViewHelpers, { ResourceActionParams } from '../../../backend/utils/view-helpers/view-helpers'
-import { ActionHeader } from '../app'
-import { ActionJSON, ResourceJSON } from '../../interfaces'
 import allowOverride from '../../hoc/allow-override'
+import { ActionJSON, ResourceJSON } from '../../interfaces'
+import { ReduxState } from '../../store/store'
+import { getResourceElementCss } from '../../utils'
+import { ActionHeader } from '../app'
+import BaseAction from '../app/base-action-component'
+import { NoActionError, NoResourceError } from '../app/error-message'
+import FilterDrawer from '../app/filter-drawer'
 
 type PropsFromState = {
   resources: Array<ResourceJSON>;
@@ -79,8 +80,10 @@ const ResourceAction: React.FC<Props> = (props) => {
     ? ((): void => setFilterVisible(!filterVisible))
     : undefined
 
+  const contentTag = getResourceElementCss(resource.id, 'list')
+
   return (
-    <Box variant="grey" width={listAction.containerWidth} mx="auto">
+    <Box variant="grey" width={listAction.containerWidth} mx="auto" data-css={contentTag}>
       <ActionHeader
         resource={resource}
         action={listAction}

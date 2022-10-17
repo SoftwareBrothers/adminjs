@@ -1,12 +1,13 @@
+import { Box, cssClass, Text } from '@adminjs/design-system'
 import React from 'react'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
-import { Box, Text, cssClass } from '@adminjs/design-system'
 
-import { RecordJSON, ResourceJSON } from '../../interfaces'
 import ViewHelpers from '../../../backend/utils/view-helpers/view-helpers'
-import { useTranslation } from '../../hooks/use-translation'
 import allowOverride from '../../hoc/allow-override'
+import { useTranslation } from '../../hooks/use-translation'
+import { RecordJSON, ResourceJSON } from '../../interfaces'
+import { getActionElementCss } from '../../utils'
 
 export const BreadcrumbLink = styled(Link)`
   color: ${({ theme }): string => theme.colors.grey40};
@@ -59,15 +60,15 @@ export type BreadcrumbProps = {
   /**
    * Resource
    */
-  resource: ResourceJSON;
+  resource: ResourceJSON
   /**
    * record
    */
-  record?: RecordJSON | null;
+  record?: RecordJSON | null
   /**
    * Name of an action
    */
-  actionName: string;
+  actionName: string
 }
 
 /**
@@ -81,30 +82,22 @@ const Breadcrumbs: React.FC<BreadcrumbProps> = (props) => {
   const action = resource.actions.find((a) => a.name === actionName)
   const h = new ViewHelpers()
   const { translateLabel: tl } = useTranslation()
-
+  const contentTag = getActionElementCss(resource.id, actionName, 'breadcrumbs')
   return (
-    <Box flexGrow={1} className={cssClass('Breadcrumbs')}>
+    <Box flexGrow={1} className={cssClass('Breadcrumbs')} data-css={contentTag}>
       <BreadcrumbLink to={h.dashboardUrl()}>{tl('dashboard')}</BreadcrumbLink>
       {listAction ? (
-        <BreadcrumbLink
-          to={resource.href ? resource.href : '/'}
-          className={record ? 'is-active' : ''}
-        >
+        <BreadcrumbLink to={resource.href ? resource.href : '/'} className={record ? 'is-active' : ''}>
           {resource.name}
         </BreadcrumbLink>
       ) : (
         <BreadcrumbText>{resource.name}</BreadcrumbText>
       )}
-      {action && action.name !== 'list' && (
-        <BreadcrumbLink to="#">{action.label}</BreadcrumbLink>
-      )}
+      {action && action.name !== 'list' && <BreadcrumbLink to="#">{action.label}</BreadcrumbLink>}
     </Box>
   )
 }
 
 const OverridableBreadcrumbs = allowOverride(Breadcrumbs, 'Breadcrumbs')
 
-export {
-  OverridableBreadcrumbs as default,
-  OverridableBreadcrumbs as Breadcrumbs,
-}
+export { OverridableBreadcrumbs as default, OverridableBreadcrumbs as Breadcrumbs }

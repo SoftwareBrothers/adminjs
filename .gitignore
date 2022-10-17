@@ -1,6 +1,7 @@
 .nyc_output
 .DS_store
 .vscode
+.nova
 .idea
 .cache
 lib
@@ -26,3 +27,4 @@ src/frontend/assets/scripts
 .env
 firebase.env.json
 yarn-error.log
+

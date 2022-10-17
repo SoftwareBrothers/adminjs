@@ -20,7 +20,7 @@ const pageHeaderPaddingX = 250
 export const DashboardHeader: React.FC = () => {
   const { translateMessage } = useTranslation()
   return (
-    <Box position="relative" overflow="hidden">
+    <Box position="relative" overflow="hidden" data-css="default-dashboard">
       <Box
         position="absolute"
         top={50}
