@@ -6,7 +6,6 @@ import { BasePropertyJSON } from '../../../interfaces'
 import { getResourceElementCss } from '../../../utils'
 import PropertyHeader from './property-header'
 import { display } from './utils/display'
-import allowOverride from '../../../hoc/allow-override'
 
 /**
  * @memberof RecordsTableHeader

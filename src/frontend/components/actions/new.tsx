@@ -12,7 +12,6 @@ import PropertyType from '../property-type'
 import { ActionProps } from './action.props'
 import { appendForceRefresh } from './utils/append-force-refresh'
 import LayoutElementRenderer from './utils/layout-element-renderer'
-import allowOverride from '../../hoc/allow-override'
 
 const New: FC<ActionProps> = (props) => {
   const { record: initialRecord, resource, action } = props

@@ -7,7 +7,6 @@ import ActionHeader from '../app/action-header/action-header'
 import PropertyType from '../property-type'
 import { ActionProps } from './action.props'
 import LayoutElementRenderer from './utils/layout-element-renderer'
-import allowOverride from '../../hoc/allow-override'
 
 /**
  * @name ShowAction

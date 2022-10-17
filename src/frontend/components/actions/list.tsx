@@ -9,7 +9,6 @@ import { getActionElementCss } from '../../utils'
 import RecordsTable from '../app/records-table/records-table'
 import { ActionProps } from './action.props'
 import { REFRESH_KEY } from './utils/append-force-refresh'
-import allowOverride from '../../hoc/allow-override'
 
 const List: React.FC<ActionProps> = ({ resource, setTag }) => {
   const {
