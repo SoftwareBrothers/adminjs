@@ -8,6 +8,7 @@ import { ResourceOptions } from './backend/decorators/resource/resource-options.
 import { Locale } from './locale/config'
 import { CurrentAdmin } from './current-admin.interface'
 import { CoreScripts } from './core-scripts.interface'
+import ComponentLoader from './utils/component-loader'
 
 /**
  * AdminJSOptions
@@ -69,6 +70,8 @@ export interface AdminJSOptions {
    */
   databases?: Array<any>;
 
+  componentLoader?: ComponentLoader;
+
   /**
    * List of custom pages which will be visible below all resources
    * @example
@@ -80,11 +83,11 @@ export interface AdminJSOptions {
    *         text: 'I am fetched from the backend',
    *       }
    *     },
-   *     component: AdminJS.bundle('./components/some-stats'),
+   *     component: 'SomeStats',
    *   },
    *   anotherPage: {
    *     label: "TypeScript page",
-   *     component: AdminJS.bundle('./components/test-component'),
+   *     component: 'TestComponent',
    *   },
    * },
    */
@@ -381,7 +384,7 @@ export type AdminPage = {
    */
   handler?: PageHandler;
   /**
-   * Component defined by using {@link AdminJS.bundle}
+   * Component defined by using {@link ComponentLoader}
    */
   component: string;
 

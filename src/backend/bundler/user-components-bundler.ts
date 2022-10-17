@@ -5,11 +5,12 @@ import bundler from './bundler'
 import generateEntry from './generate-user-component-entry'
 import { ADMIN_JS_TMP_DIR } from '../../constants'
 import env from './bundler-env'
+import AdminJS from '../..'
 
 const entryPath = path.join(ADMIN_JS_TMP_DIR, '.entry.js')
 const outPath = path.join(ADMIN_JS_TMP_DIR, 'bundle.js')
 
-async function build(admin, { write = false, watch = false } = {}): Promise<string> {
+async function build(admin: AdminJS, { write = false, watch = false } = {}): Promise<string> {
   const { options: { bundler: bundlerOptions } } = admin
   const entryFile = generateEntry(admin, ADMIN_JS_TMP_DIR)
 

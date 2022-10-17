@@ -1,4 +1,5 @@
 const { default: AdminJS } = require('adminjs')
+const ComponentLoader = require('adminjs/utils/component-loader')
 const AdminJSMongoose = require('@adminjs/mongoose')
 const AdminJSSequelize = require('@adminjs/sequelize')
 
@@ -13,6 +14,12 @@ const AdminProfession = require('./professions/profession.admin')
 const AdminTool = require('./tools/tool.admin')
 const AdminPage = require('./pages/page.admin')
 const AdminNested = require('./nested/nested.admin')
+
+const loader = new ComponentLoader()
+const Components = {
+  ExamplePage: loader.add('ExamplePage', './components/example-page'),
+}
+loader.bundleAll()
 
 /** @type {import('adminjs').AdminJSOptions} */
 const options = {
@@ -36,7 +43,7 @@ const options = {
   pages: {
     aboutUs: {
       handler: async () => { console.log('clicked') },
-      component: AdminJS.bundle('./components/example-page'),
+      component: Components.ExamplePage,
       icon: 'Add',
     },
   },

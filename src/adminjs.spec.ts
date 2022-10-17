@@ -5,7 +5,7 @@ import AdminJS from './adminjs'
 
 import BaseDatabase from './backend/adapters/database/base-database'
 import BaseResource from './backend/adapters/resource/base-resource'
-import { OverridableComponent } from './frontend/utils/overridable-component'
+import ComponentLoader from './utils/component-loader'
 
 describe('AdminJS', function () {
   beforeEach(function () {
@@ -84,12 +84,15 @@ describe('AdminJS', function () {
   })
 
   describe('.bundle', function () {
+    const loader = new ComponentLoader()
     afterEach(function () {
       global.UserComponents = {}
+      loader.clear()
     })
     context('file exists', function () {
       beforeEach(function () {
-        this.result = AdminJS.bundle('../spec/fixtures/example-component')
+        this.result = loader.add('ExampleComponent', '../spec/fixtures/example-component')
+        loader.bundleAll()
       })
 
       it('adds given file to a UserComponents object', function () {
@@ -109,24 +112,17 @@ describe('AdminJS', function () {
     })
 
     context('component name given', function () {
-      const componentName = 'Dashboard'
-      let result: string
-
-      beforeEach(function () {
-        result = AdminJS.bundle(
-          '../spec/fixtures/example-component',
-          componentName as OverridableComponent,
-        )
-      })
-
       it('returns the same component name as which was given', function () {
-        expect(result).to.eq(componentName)
+        const name = loader.add('Dashboard', '../spec/fixtures/example-component')
+        loader.bundleAll()
+        expect(name).to.eq('Dashboard')
       })
     })
 
     it('throws an error when component doesn\'t exist', function () {
       expect(() => {
-        AdminJS.bundle('./fixtures/example-components')
+        loader.add('ExampleComponent', './fixtures/example-components')
+        loader.bundleAll()
       }).to.throw().property('name', 'ConfigurationError')
     })
   })
