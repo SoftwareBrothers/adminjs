@@ -268,7 +268,7 @@ export type BuildInActions =
  *   icon: 'View',
  *   isVisible: true,
  *   handler: async () => {...},
- *   component: AdminJS.bundle('./my-action-component'),
+ *   component: 'MyAction',
  * }
  * ```
  *
@@ -455,7 +455,7 @@ export interface Action <T extends ActionResponse> {
   guard?: string;
   /**
    * Component which will be used to render the action. To pass the component
-   * use {@link AdminJS.bundle} method.
+   * use {@link ComponentLoader.add} or {@link ComponentLoader.override} method.
    *
    * Action components accepts {@link ActionProps} and are rendered by the
    * {@link BaseActionComponent}

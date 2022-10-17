@@ -8,7 +8,7 @@ export interface PageJSON {
    */
   name: string;
   /**
-   * Page component. Bundled with {@link AdminJS.bundle}
+   * Page component. Bundled with {@link ComponentLoader}
    */
   component: string;
 

@@ -8,7 +8,7 @@ Let say you have a record action defined like this:
 actions: {
   comment: {
     actionType: 'record',
-    component: AdminJS.bundle('./comment-component.tsx'),
+    component: 'CommentComponent',
   }
 },
 properties: {
@@ -85,7 +85,7 @@ Next, in `BasePropertyComponent` we use `handleChange` callback which usually ta
 In our case, `BasePropertyComponent` invokes it with arguments 'comment' and whatever is in the
 `textarea`. Base on that `useRecord` updates `record` which was returned in the invocation.
 
-> To see more information about the possible way of invoking `handleChange` callback see 
+> To see more information about the possible way of invoking `handleChange` callback see
 > {@link OnPropertyChange}
 
 Finally, this initial state has to be send to the Backend via the API to update the record in DB.

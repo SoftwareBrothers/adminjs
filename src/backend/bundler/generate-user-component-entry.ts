@@ -1,12 +1,13 @@
 import * as path from 'path'
 import slash from 'slash'
+import AdminJS from '../..'
 
 /**
  * Generates entry file for all UsersComponents.
  * Entry consists of 3 parts:
  * 1. setup AdminJS.UserComponents map.
  * 2. List of all environmental variables passed to AdminJS in configuration option.
- * 3. Import of UserComponents defined by AdminJS.bundle(src)
+ * 3. Import of UserComponents defined by ComponentLoader.
  *
  * @param {AdminJS}    admin
  * @param {String}      entryPath  path to folder where entry file is located
@@ -14,8 +15,9 @@ import slash from 'slash'
  *
  * @private
  */
-const generateUserComponentEntry = (admin, entryPath: string): string => {
+const generateUserComponentEntry = (admin: AdminJS, entryPath: string): string => {
   const { env = {} } = admin.options
+  admin.componentLoader.bundleAll()
   const { UserComponents } = global as any
 
   const absoluteEntryPath = path.resolve(entryPath)

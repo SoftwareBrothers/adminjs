@@ -60,15 +60,15 @@ export type BreadcrumbProps = {
   /**
    * Resource
    */
-  resource: ResourceJSON;
+  resource: ResourceJSON
   /**
    * record
    */
-  record?: RecordJSON | null;
+  record?: RecordJSON | null
   /**
    * Name of an action
    */
-  actionName: string;
+  actionName: string
 }
 
 /**
@@ -87,25 +87,17 @@ const Breadcrumbs: React.FC<BreadcrumbProps> = (props) => {
     <Box flexGrow={1} className={cssClass('Breadcrumbs')} data-css={contentTag}>
       <BreadcrumbLink to={h.dashboardUrl()}>{tl('dashboard')}</BreadcrumbLink>
       {listAction ? (
-        <BreadcrumbLink
-          to={resource.href ? resource.href : '/'}
-          className={record ? 'is-active' : ''}
-        >
+        <BreadcrumbLink to={resource.href ? resource.href : '/'} className={record ? 'is-active' : ''}>
           {resource.name}
         </BreadcrumbLink>
       ) : (
         <BreadcrumbText>{resource.name}</BreadcrumbText>
       )}
-      {action && action.name !== 'list' && (
-        <BreadcrumbLink to="#">{action.label}</BreadcrumbLink>
-      )}
+      {action && action.name !== 'list' && <BreadcrumbLink to="#">{action.label}</BreadcrumbLink>}
     </Box>
   )
 }
 
 const OverridableBreadcrumbs = allowOverride(Breadcrumbs, 'Breadcrumbs')
 
-export {
-  OverridableBreadcrumbs as default,
-  OverridableBreadcrumbs as Breadcrumbs,
-}
+export { OverridableBreadcrumbs as default, OverridableBreadcrumbs as Breadcrumbs }
