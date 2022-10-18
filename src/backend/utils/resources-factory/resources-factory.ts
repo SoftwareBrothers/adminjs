@@ -115,7 +115,7 @@ export class ResourcesFactory {
       const { features = [], options = {} } = resourceObject
 
       const optionsFromFeatures = features.reduce((opts, feature) => (
-        feature(opts)
+        feature(this.admin, opts)
       ), {})
 
       resource.assignDecorator(

@@ -1,6 +1,7 @@
 /* eslint-disable no-nested-ternary */
 import uniq from 'lodash/uniq'
 import merge from 'lodash/merge'
+import AdminJS from '../../..'
 import { FeatureType } from '../../../adminjs-options.interface'
 import { ResourceOptions } from '../../decorators/resource/resource-options.interface'
 import { Action, ActionResponse } from '../../actions/action.interface'
@@ -126,8 +127,13 @@ const mergeResourceOptions = (
  *   // resource options goes here.
  * })
  */
-const buildFeature = (options: ResourceOptions = {}): FeatureType => (
-  (prevOptions: ResourceOptions = {}): ResourceOptions => mergeResourceOptions(prevOptions, options)
+const buildFeature = (
+  options: ResourceOptions | ((admin: AdminJS) => ResourceOptions) = {},
+): FeatureType => (
+  (admin, prevOptions: ResourceOptions = {}): ResourceOptions => mergeResourceOptions(
+    prevOptions,
+    typeof options === 'function' ? options(admin) : options,
+  )
 )
 
 export { mergeResourceOptions, buildFeature }

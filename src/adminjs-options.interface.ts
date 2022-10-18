@@ -1,6 +1,7 @@
 import { ThemeOverride } from '@adminjs/design-system'
 import { TransformOptions as BabelConfig } from 'babel-core'
 
+import AdminJS from '.'
 import BaseResource from './backend/adapters/resource/base-resource'
 import BaseDatabase from './backend/adapters/database/base-database'
 import { PageContext } from './backend/actions/action.interface'
@@ -422,6 +423,10 @@ export type ResourceWithOptions = {
  * @memberof AdminJSOptions
  */
 export type FeatureType = (
+  /**
+   * AdminJS instance
+   */
+  admin: AdminJS,
   /**
    * Options returned by the feature added before
    */
