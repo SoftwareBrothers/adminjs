@@ -22,6 +22,7 @@ import { TranslateFunctions, createFunctions } from './utils/translate-functions
 import { relativeFilePathResolver } from './utils/file-resolver'
 import { getComponentHtml } from './backend/utils'
 import ComponentLoader from './utils/component-loader'
+import { OverridableComponent } from './frontend'
 
 const pkg = JSON.parse(fs.readFileSync(path.join(__dirname, '../package.json'), 'utf-8'))
 export const VERSION = pkg.version
@@ -320,6 +321,43 @@ class AdminJS {
     }
     this.options.bundler.babelConfig = config
   }
+
+  /**
+   * Requires given `.jsx/.tsx` file, that it can be bundled to the frontend.
+   * It will be available under AdminJS.UserComponents[componentId].
+   *
+   * @param   {String}  src  Path to a file containing react component.
+   *
+   * @param  {OverridableComponent}  [componentName] - name of the component which you want
+   *                                  to override
+   * @returns {String}                componentId - uniq id of a component
+   *
+   * @example <caption>Passing custom components in AdminJS options</caption>
+   * const adminJsOptions = {
+   *   dashboard: {
+   *     component: AdminJS.bundle('./path/to/component'),
+   *   }
+   * }
+   * @example <caption>Overriding AdminJS core components</caption>
+   * // somewhere in the code
+   * AdminJS.bundle('./path/to/new-sidebar/component', 'SidebarFooter')
+   *
+   * @deprecated since version 6.5.0, use {@link ComponentLoader} instead
+   */
+  public static bundle(src: string, componentName?: OverridableComponent): string {
+    // eslint-disable-next-line no-plusplus
+    const name = componentName ?? `Component${this.__unsafe_componentIndex++}`
+    if (componentName) {
+      this.__unsafe_staticComponentLoader.override(name, src, 'bundle')
+    } else {
+      this.__unsafe_staticComponentLoader.add(name, src, 'bundle')
+    }
+    return name
+  }
+
+  private static __unsafe_componentIndex = 0
+
+  public static __unsafe_staticComponentLoader = new ComponentLoader()
 }
 
 AdminJS.VERSION = VERSION
