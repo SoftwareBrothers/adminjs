@@ -5,7 +5,7 @@ import AdminJS from './adminjs'
 
 import BaseDatabase from './backend/adapters/database/base-database'
 import BaseResource from './backend/adapters/resource/base-resource'
-import ComponentLoader from './utils/component-loader'
+import { ComponentLoader } from './backend/utils/component-loader'
 
 describe('AdminJS', function () {
   beforeEach(function () {

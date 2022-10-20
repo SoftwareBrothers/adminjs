@@ -21,7 +21,7 @@ import { locales } from './locale'
 import { TranslateFunctions, createFunctions } from './utils/translate-functions.factory'
 import { relativeFilePathResolver } from './utils/file-resolver'
 import { getComponentHtml } from './backend/utils'
-import ComponentLoader from './utils/component-loader'
+import { ComponentLoader } from './backend/utils/component-loader'
 import { OverridableComponent } from './frontend'
 
 const pkg = JSON.parse(fs.readFileSync(path.join(__dirname, '../package.json'), 'utf-8'))

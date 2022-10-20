@@ -1,21 +1,20 @@
 import * as path from 'path'
 import * as fs from 'fs'
-import { OverridableComponent } from '../frontend/utils/overridable-component'
-import { relativeFilePathResolver } from './file-resolver'
-import { ConfigurationError } from '../backend'
+import { ConfigurationError } from '.'
+import { relativeFilePathResolver } from '../../utils/file-resolver'
 
 export interface ComponentDetails {
   overrides: boolean
   filePath: string
 }
 
-export default class ComponentLoader {
+export class ComponentLoader {
   protected components: Record<string, ComponentDetails> = {}
 
   public add(name: string, filePath: string, caller = 'add') {
     const resolvedFilePath = ComponentLoader.resolveFilePath(filePath, caller)
     if ((this.components[name] && this.components[name].filePath !== resolvedFilePath)
-      || ComponentLoader.defaultComponents.includes(name as OverridableComponent)
+      || ComponentLoader.defaultComponents.includes(name)
     ) {
       throw new Error(`Component '${name}' is already defined, use .override() instead`)
     }
@@ -29,7 +28,7 @@ export default class ComponentLoader {
   public override(name: string, filePath: string, caller = 'override') {
     const resolvedFilePath = ComponentLoader.resolveFilePath(filePath, caller)
     if (!this.components[name]
-      && !ComponentLoader.defaultComponents.includes(name as OverridableComponent)
+      && !ComponentLoader.defaultComponents.includes(name)
     ) {
       throw new Error(`Component '${name}' is not defined, use .add() instead`)
     }
@@ -82,7 +81,7 @@ export default class ComponentLoader {
     throw new ConfigurationError(`Trying to bundle file '${src}' but it doesn't exist`, 'AdminJS.html')
   }
 
-  protected static defaultComponents: OverridableComponent[] = [
+  protected static defaultComponents = [
     'LoggedIn',
     'NoRecords',
     'SidebarResourceSection',

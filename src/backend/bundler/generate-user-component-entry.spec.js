@@ -1,6 +1,6 @@
 import path from 'path'
 import AdminJS from '../../adminjs'
-import ComponentLoader from '../../utils/component-loader'
+import { ComponentLoader } from '../utils'
 import generateUserComponentEntry from './generate-user-component-entry'
 
 const exampleComponent = '../../../spec/fixtures/example-component'
