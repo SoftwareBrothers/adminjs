@@ -80,7 +80,9 @@ const BasePropertyComponent: React.FC<BasePropertyComponentProps> = (props) => {
     if (!component) {
       throw new Error(`there is no "${property.path}.components.${where}"`)
     }
-    Component = globalAny.AdminJS.UserComponents[component]
+    Component = globalAny.AdminJS.UserComponents[component] ?? (() => {
+      throw new Error(`Component "${component}" has not been bundled, ensure it was added to your ComponentLoader instance (the one included in AdminJS options).`)
+    })
     return (
       <ErrorBoundary>
         <Box data-css={contentTag} data-testid={testId}>
