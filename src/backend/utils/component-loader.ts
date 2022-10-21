@@ -1,91 +1,87 @@
 import * as path from 'path'
 import * as fs from 'fs'
-import { OverridableComponent } from '../frontend/utils/overridable-component'
-import { relativeFilePathResolver } from './file-resolver'
-import { ConfigurationError } from '../backend'
+import { ConfigurationError } from '.'
+import { relativeFilePathResolver } from '../../utils/file-resolver'
 
 export interface ComponentDetails {
   overrides: boolean
   filePath: string
 }
 
-export default class ComponentLoader {
-  protected components: Record<string, ComponentDetails>
+export class ComponentLoader {
+  protected components: Record<string, ComponentDetails> = {}
 
-  public constructor(protected readonly themeId?: string) {
-    this.components = {}
-  }
-
-  public add(name: string, filePath: string) {
-    if (this.components[name]
-      || ComponentLoader.defaultComponents.includes(name as OverridableComponent)
+  public add(name: string, filePath: string, caller = 'add') {
+    const resolvedFilePath = ComponentLoader.resolveFilePath(filePath, caller)
+    if ((this.components[name] && this.components[name].filePath !== resolvedFilePath)
+      || ComponentLoader.defaultComponents.includes(name)
     ) {
       throw new Error(`Component '${name}' is already defined, use .override() instead`)
     }
     this.components[name] = {
       overrides: false,
-      filePath,
+      filePath: resolvedFilePath,
     }
     return name
   }
 
-  public override(name: string, filePath: string) {
+  public override(name: string, filePath: string, caller = 'override') {
+    const resolvedFilePath = ComponentLoader.resolveFilePath(filePath, caller)
     if (!this.components[name]
-      && !ComponentLoader.defaultComponents.includes(name as OverridableComponent)
+      && !ComponentLoader.defaultComponents.includes(name)
     ) {
       throw new Error(`Component '${name}' is not defined, use .add() instead`)
     }
     this.components[name] = {
       overrides: true,
-      filePath,
+      filePath: resolvedFilePath,
     }
     return name
   }
 
   public clear() {
     this.components = {}
-    global.UserComponents = {}
   }
 
-  public bundleAll() {
-    if (this.themeId) {
-      global.THEME = global.THEME ?? { Components: {} }
-      global.THEME.Components = {}
-    } else {
-      global.UserComponents = {}
+  public getComponents() {
+    return Object
+      .entries(this.components)
+      .reduce(
+        (result, [key, component]) => {
+          result[key] = component.filePath
+          return result
+        },
+        {} as Record<string, string>,
+      )
+  }
+
+  public __unsafe_merge(componentLoader: ComponentLoader): void {
+    this.components = {
+      ...componentLoader.components,
+      ...this.components,
     }
-    Object.entries(this.components).forEach(([id, { filePath }]) => {
-      const extensions = ['.jsx', '.js', '.ts', '.tsx']
-      const src = path.isAbsolute(filePath)
-        ? filePath
-        : relativeFilePathResolver(filePath, /.*.{1}bundleAll/)
-
-      const { ext: originalFileExtension } = path.parse(src)
-      for (const extension of extensions) {
-        const forcedExt = extensions.includes(originalFileExtension) ? '' : extension
-        const { root, dir, name, ext } = path.parse(src + forcedExt)
-        const fileName = path.format({ root, dir, name, ext })
-        if (fs.existsSync(fileName)) {
-          if (this.themeId) {
-            if (!global.THEME?.Components) {
-              throw new Error('something is wrong here')
-            }
-            global.THEME.Components[id] = path.format({ root, dir, name })
-          } else {
-            if (!global.UserComponents) {
-              throw new Error('something is wrong here')
-            }
-            global.UserComponents[id] = path.format({ root, dir, name })
-          }
-          return
-        }
-      }
-
-      throw new ConfigurationError(`Trying to bundle file '${src}' but it doesn't exist`, 'AdminJS.html')
-    })
   }
 
-  protected static defaultComponents: OverridableComponent[] = [
+  public static resolveFilePath(filePath: string, caller: string): string {
+    const extensions = ['.jsx', '.js', '.ts', '.tsx']
+    const src = path.isAbsolute(filePath)
+      ? filePath
+      : relativeFilePathResolver(filePath, new RegExp(`.*.{1}${caller}`))
+
+    const { ext: originalFileExtension } = path.parse(src)
+    for (const extension of extensions) {
+      const forcedExt = extensions.includes(originalFileExtension) ? '' : extension
+      const { root, dir, name, ext } = path.parse(src + forcedExt)
+      const fileName = path.format({ root, dir, name, ext })
+      if (fs.existsSync(fileName)) {
+        return path.format({ root, dir, name })
+      }
+    }
+
+    throw new ConfigurationError(`Trying to bundle file '${src}' but it doesn't exist`, 'AdminJS.html')
+  }
+
+  protected static defaultComponents = [
     'LoggedIn',
     'NoRecords',
     'SidebarResourceSection',

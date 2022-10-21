@@ -9,7 +9,7 @@ import { ResourceOptions } from './backend/decorators/resource/resource-options.
 import { Locale } from './locale/config'
 import { CurrentAdmin } from './current-admin.interface'
 import { CoreScripts } from './core-scripts.interface'
-import ComponentLoader from './utils/component-loader'
+import { ComponentLoader } from './backend/utils/component-loader'
 
 /**
  * AdminJSOptions
