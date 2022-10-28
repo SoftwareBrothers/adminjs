@@ -31,7 +31,7 @@ export const SearchAction: Action<SearchActionResponse> = {
     const { query } = request
 
     const decorated = resource.decorate()
-    const titlePropertyName = decorated.titleProperty().name()
+    const titlePropertyName = request.query?.searchProperty ?? decorated.titleProperty().name()
 
     const {
       sortBy = decorated.options?.sort?.sortBy || titlePropertyName,

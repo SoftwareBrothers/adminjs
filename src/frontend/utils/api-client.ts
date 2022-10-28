@@ -135,18 +135,25 @@ class ApiClient {
    * Search by query string for records in a given resource.
    *
    * @param   {Object}  options
-   * @param   {String}  options.resourceId  id of a {@link ResourceJSON}
-   * @param   {String}  options.query       query string
+   * @param   {String}  options.resourceId     id of a {@link ResourceJSON}
+   * @param   {String}  options.query          query string
+   * @param   {String}  options.searchProperty optional property name
    *
    * @return  {Promise<SearchResponse>}
    */
-  async searchRecords({ resourceId, query }: {
+  async searchRecords({ resourceId, query, searchProperty }: {
     resourceId: string;
     query: string;
+    searchProperty?: string;
   }): Promise<Array<RecordJSON>> {
     if (globalAny.isOnServer) { return [] }
     const actionName = 'search'
-    const response = await this.resourceAction({ resourceId, actionName, query })
+    const response = await this.resourceAction({
+      resourceId,
+      actionName,
+      query,
+      ...(searchProperty ? { params: { searchProperty } } : undefined),
+    })
     checkResponse(response)
     return response.data.records
   }
