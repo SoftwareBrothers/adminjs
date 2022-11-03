@@ -5,7 +5,7 @@ import AdminJS from './adminjs'
 
 import BaseDatabase from './backend/adapters/database/base-database'
 import BaseResource from './backend/adapters/resource/base-resource'
-import { OverridableComponent } from './frontend/utils/overridable-component'
+import { ComponentLoader } from './backend/utils/component-loader'
 
 describe('AdminJS', function () {
   beforeEach(function () {
@@ -84,49 +84,41 @@ describe('AdminJS', function () {
   })
 
   describe('.bundle', function () {
+    const loader = new ComponentLoader()
     afterEach(function () {
-      global.UserComponents = {}
+      loader.clear()
     })
     context('file exists', function () {
       beforeEach(function () {
-        this.result = AdminJS.bundle('../spec/fixtures/example-component')
+        this.result = loader.add('ExampleComponent', '../spec/fixtures/example-component')
       })
 
       it('adds given file to a UserComponents object', function () {
-        expect(Object.keys(global.UserComponents || {})).to.have.lengthOf(1)
+        expect(Object.keys(loader.getComponents())).to.have.lengthOf(1)
       })
 
-      it('returns uniq id', function () {
-        expect(global.UserComponents && global.UserComponents[this.result]).not.to.be.undefined
+      it('returns uniqe id', function () {
+        expect(loader.getComponents()[this.result]).not.to.be.undefined
         expect(this.result).to.be.a('string')
       })
 
       it('converts relative path to absolute path', function () {
         expect(
-          global.UserComponents && global.UserComponents[this.result],
+          loader.getComponents()[this.result],
         ).to.equal(path.join(__dirname, '../spec/fixtures/example-component'))
       })
     })
 
     context('component name given', function () {
-      const componentName = 'Dashboard'
-      let result: string
-
-      beforeEach(function () {
-        result = AdminJS.bundle(
-          '../spec/fixtures/example-component',
-          componentName as OverridableComponent,
-        )
-      })
-
       it('returns the same component name as which was given', function () {
-        expect(result).to.eq(componentName)
+        const name = loader.add('Dashboard', '../spec/fixtures/example-component')
+        expect(name).to.eq('Dashboard')
       })
     })
 
     it('throws an error when component doesn\'t exist', function () {
       expect(() => {
-        AdminJS.bundle('./fixtures/example-components')
+        loader.add('ExampleComponent', './fixtures/example-components')
       }).to.throw().property('name', 'ConfigurationError')
     })
   })

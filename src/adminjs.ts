@@ -20,8 +20,9 @@ import { combineTranslations, Locale } from './locale/config'
 import { locales } from './locale'
 import { TranslateFunctions, createFunctions } from './utils/translate-functions.factory'
 import { relativeFilePathResolver } from './utils/file-resolver'
-import { OverridableComponent } from './frontend/utils/overridable-component'
 import { getComponentHtml } from './backend/utils'
+import { ComponentLoader } from './backend/utils/component-loader'
+import { OverridableComponent } from './frontend'
 
 const pkg = JSON.parse(fs.readFileSync(path.join(__dirname, '../package.json'), 'utf-8'))
 export const VERSION = pkg.version
@@ -75,6 +76,8 @@ class AdminJS {
 
   public translateFunctions!: TranslateFunctions
 
+  public componentLoader: ComponentLoader
+
   /**
    * List of all default actions. If you want to change the behavior for all actions like:
    * _list_, _edit_, _show_, _delete_ and _bulkDelete_ you can do this here.
@@ -119,6 +122,8 @@ class AdminJS {
     const { databases, resources } = this.options
     const resourcesFactory = new ResourcesFactory(this, global.RegisteredAdapters || [])
     this.resources = resourcesFactory.buildResources({ databases, resources })
+
+    this.componentLoader = options.componentLoader ?? new ComponentLoader()
   }
 
   initI18n(): void {
@@ -195,7 +200,7 @@ class AdminJS {
   }
 
   /**
-   * Watches for local changes in files imported via {@link AdminJS.bundle}.
+   * Watches for local changes in files imported via {@link ComponentLoader}.
    * It doesn't work on production environment.
    *
    * @return  {Promise<never>}
@@ -336,40 +341,23 @@ class AdminJS {
    * @example <caption>Overriding AdminJS core components</caption>
    * // somewhere in the code
    * AdminJS.bundle('./path/to/new-sidebar/component', 'SidebarFooter')
+   *
+   * @deprecated since version 6.5.0, use {@link ComponentLoader} instead
    */
   public static bundle(src: string, componentName?: OverridableComponent): string {
-    const nextId = Object.keys(global.UserComponents || {}).length + 1
-    const extensions = ['.jsx', '.js', '.ts', '.tsx']
-    let filePath = ''
-    const componentId = componentName || `Component${nextId}`
-    if (path.isAbsolute(src)) {
-      filePath = src
+    // eslint-disable-next-line no-plusplus
+    const name = componentName ?? `Component${this.__unsafe_componentIndex++}`
+    if (componentName) {
+      this.__unsafe_staticComponentLoader.override(name, src, 'bundle')
     } else {
-      filePath = relativeFilePathResolver(src, /.*\.{1}bundle/)
+      this.__unsafe_staticComponentLoader.add(name, src, 'bundle')
     }
-
-    const { ext: originalFileExtension } = path.parse(filePath)
-    for (const extension of extensions) {
-      const forcedExt = extensions.includes(originalFileExtension) ? '' : extension
-      const { root, dir, name, ext } = path.parse(filePath + forcedExt)
-      const fileName = path.format({ root, dir, name, ext })
-      if (fs.existsSync(fileName)) {
-        // We have to put this to the global scope because of the NPM resolution. If we put this to
-        // let say `AdminJS.UserComponents` (static member) it wont work in a case where user uses
-        // AdminJS.bundle from a different packages (i.e. from the extension) because there, there
-        // is an another AdminJS version (npm installs different versions for each package). Also
-        // putting admin to peerDependencies wont solve this issue, because in the development mode
-        // we have to install adminjs it as a devDependency, because we want to run test or have
-        // proper types.
-        global.UserComponents = global.UserComponents || {}
-        global.UserComponents[componentId] = path.format({ root, dir, name })
-
-        return componentId
-      }
-    }
-
-    throw new ConfigurationError(`Given file "${src}", doesn't exist.`, 'AdminJS.html')
+    return name
   }
+
+  private static __unsafe_componentIndex = 0
+
+  public static __unsafe_staticComponentLoader = new ComponentLoader()
 }
 
 AdminJS.VERSION = VERSION
@@ -379,6 +367,5 @@ AdminJS.ACTIONS = ACTIONS
 interface AdminJS extends TranslateFunctions {}
 
 export const { registerAdapter } = AdminJS
-export const { bundle } = AdminJS
 
 export default AdminJS

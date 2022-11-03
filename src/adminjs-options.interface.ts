@@ -1,6 +1,7 @@
 import { ThemeOverride } from '@adminjs/design-system'
 import { TransformOptions as BabelConfig } from 'babel-core'
 
+import AdminJS from '.'
 import BaseResource from './backend/adapters/resource/base-resource'
 import BaseDatabase from './backend/adapters/database/base-database'
 import { PageContext } from './backend/actions/action.interface'
@@ -8,6 +9,7 @@ import { ResourceOptions } from './backend/decorators/resource/resource-options.
 import { Locale } from './locale/config'
 import { CurrentAdmin } from './current-admin.interface'
 import { CoreScripts } from './core-scripts.interface'
+import { ComponentLoader } from './backend/utils/component-loader'
 
 /**
  * AdminJSOptions
@@ -69,6 +71,8 @@ export interface AdminJSOptions {
    */
   databases?: Array<any>;
 
+  componentLoader?: ComponentLoader;
+
   /**
    * List of custom pages which will be visible below all resources
    * @example
@@ -80,11 +84,11 @@ export interface AdminJSOptions {
    *         text: 'I am fetched from the backend',
    *       }
    *     },
-   *     component: AdminJS.bundle('./components/some-stats'),
+   *     component: 'SomeStats',
    *   },
    *   anotherPage: {
    *     label: "TypeScript page",
-   *     component: AdminJS.bundle('./components/test-component'),
+   *     component: 'TestComponent',
    *   },
    * },
    */
@@ -381,7 +385,7 @@ export type AdminPage = {
    */
   handler?: PageHandler;
   /**
-   * Component defined by using {@link AdminJS.bundle}
+   * Component defined by using {@link ComponentLoader}
    */
   component: string;
 
@@ -419,6 +423,10 @@ export type ResourceWithOptions = {
  * @memberof AdminJSOptions
  */
 export type FeatureType = (
+  /**
+   * AdminJS instance
+   */
+  admin: AdminJS,
   /**
    * Options returned by the feature added before
    */

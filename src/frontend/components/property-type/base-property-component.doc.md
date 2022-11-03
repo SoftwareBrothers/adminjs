@@ -28,7 +28,7 @@ const AdminJSOptions = {
       properties: {
         name: {
           components: {
-            show: AdminJS.bundle('./my-react-component'),
+            show: 'MyReactComponent',
           },
         },
       },

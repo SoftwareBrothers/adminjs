@@ -79,16 +79,7 @@ export type OverridableComponent =
   | 'PropertyLabel'
 
 /**
- * Name of the components which can be overridden by AdminJS.bundle. Currently following
- * components can be overriden:
- *
- * - LoggedIn
- * - NoRecords
- * - Sidebar
- * - SidebarResourceSection
- * - SidebarFooter
- * - SidebarBranding
- * - TopBar
+ * Name of the components which can be overridden by ComponentLoader.
  * @memberof AdminJS
  * @alias OverridableComponent
  * @typedef {Union} OverridableComponent

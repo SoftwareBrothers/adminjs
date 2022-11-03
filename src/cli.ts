@@ -15,7 +15,7 @@ program.version(pkg.version)
 program
   .command('bundle <configFile>')
   .description([
-    'Bundle all custom components addde by using AdminJS.bundle(filePath).',
+    'Bundle all custom components added by using ComponentsLoader',
     'method. <configFile> argument is the path to your js file where you',
     'export AdminJSOptions configuration object',
   ].join('\n                     '))
