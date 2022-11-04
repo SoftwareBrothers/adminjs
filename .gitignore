@@ -3,9 +3,9 @@
 .vscode
 .idea
 .cache
-lib
-built
-types
+#lib
+#built
+#types
 
 coverage
 
