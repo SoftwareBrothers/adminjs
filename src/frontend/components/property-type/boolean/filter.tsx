@@ -5,9 +5,16 @@ import mapValue from './map-value'
 import { FilterPropertyProps } from '../base-property-props'
 import allowOverride from '../../../hoc/allow-override'
 
+const boolValue = (s: string): boolean => {
+  if (/true/i.test(s)) {
+    return true
+  }
+  return false
+}
+
 const Filter: React.FC<FilterPropertyProps> = (props) => {
   const { property, filter = {}, onChange } = props
-  const value = typeof filter[property.path] === 'undefined' ? '' : Boolean(filter[property.path])
+  const value = typeof filter[property.path] === 'undefined' ? '' : boolValue(filter[property.path])
   const options = [
     { value: true, label: mapValue(true) },
     { value: false, label: mapValue(false) },
