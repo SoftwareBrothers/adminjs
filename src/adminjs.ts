@@ -347,11 +347,7 @@ class AdminJS {
   public static bundle(src: string, componentName?: OverridableComponent): string {
     // eslint-disable-next-line no-plusplus
     const name = componentName ?? `Component${this.__unsafe_componentIndex++}`
-    if (componentName) {
-      this.__unsafe_staticComponentLoader.override(name, src, 'bundle')
-    } else {
-      this.__unsafe_staticComponentLoader.add(name, src, 'bundle')
-    }
+    this.__unsafe_staticComponentLoader.__unsafe_addWithoutChecks(name, src, 'bundle')
     return name
   }
 
