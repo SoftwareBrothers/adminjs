@@ -39,6 +39,15 @@ export class ComponentLoader {
     return name
   }
 
+  public __unsafe_addWithoutChecks(name: string, filePath: string, caller = '__unsafe_addWithoutChecks') {
+    const resolvedFilePath = ComponentLoader.resolveFilePath(filePath, caller)
+    this.components[name] = {
+      overrides: false,
+      filePath: resolvedFilePath,
+    }
+    return name
+  }
+
   public clear() {
     this.components = {}
   }
