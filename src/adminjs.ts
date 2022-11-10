@@ -120,10 +120,11 @@ class AdminJS {
     this.initI18n()
 
     const { databases, resources } = this.options
-    const resourcesFactory = new ResourcesFactory(this, global.RegisteredAdapters || [])
-    this.resources = resourcesFactory.buildResources({ databases, resources })
 
     this.componentLoader = options.componentLoader ?? new ComponentLoader()
+
+    const resourcesFactory = new ResourcesFactory(this, global.RegisteredAdapters || [])
+    this.resources = resourcesFactory.buildResources({ databases, resources })
   }
 
   initI18n(): void {
