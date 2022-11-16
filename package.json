@@ -1,6 +1,6 @@
 {
   "name": "adminjs",
-  "version": "6.6.4",
+  "version": "6.6.5",
   "description": "Admin panel for apps written in node.js",
   "main": "index.js",
   "types": "index.d.ts",
