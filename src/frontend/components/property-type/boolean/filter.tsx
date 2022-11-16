@@ -20,9 +20,8 @@ const Filter: React.FC<FilterPropertyProps> = (props) => {
     { value: false, label: mapValue(false) },
   ]
   const selected = options.find((o) => o.value === value)
-
   const handleChange = (s) => {
-    const newValue = s ? s.value : ''
+    const newValue = s ? s.value : undefined
     onChange(property.path, newValue)
   }
 
