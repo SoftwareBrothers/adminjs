@@ -43,7 +43,7 @@ export const BulkDeleteAction: Action<BulkActionResponse> = {
       return {
         records: records.map((record) => record.toJSON(context.currentAdmin)),
         notice: {
-          message: translateMessage('successfullyBulkDeleted', resource.id(), {
+          message: translateMessage(records.length > 1 ? 'successfullyBulkDeleted_plural' : 'successfullyBulkDeleted', resource.id(), {
             count: records.length,
           }),
           type: 'success',
