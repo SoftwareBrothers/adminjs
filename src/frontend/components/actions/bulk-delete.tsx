@@ -75,7 +75,7 @@ const BulkDelete: React.FC<ActionProps & AddNoticeProps> = (props) => {
         <MessageBox
           mb="xxl"
           variant="danger"
-          message={translateMessage('theseRecordsWillBeRemoved', resource.id, { count: records.length })}
+          message={translateMessage(records.length > 1 ? 'theseRecordsWillBeRemoved_plural' : 'theseRecordsWillBeRemoved', resource.id, { count: records.length })}
         />
         <Table data-css={tableTag}>
           <TableBody>
@@ -97,7 +97,7 @@ const BulkDelete: React.FC<ActionProps & AddNoticeProps> = (props) => {
       <DrawerFooter data-css={footerTag}>
         <Button variant="primary" size="lg" onClick={handleClick} disabled={loading}>
           {loading ? (<Icon icon="Fade" spin />) : null}
-          {translateButton('confirmRemovalMany', resource.id, { count: records.length })}
+          {translateButton(records.length > 1 ? 'confirmRemovalMany_plural' : 'confirmRemovalMany', resource.id, { count: records.length })}
         </Button>
       </DrawerFooter>
     </>
