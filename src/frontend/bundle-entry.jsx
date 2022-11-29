@@ -6,7 +6,7 @@ import { initReactI18next } from 'react-i18next'
 import i18n from 'i18next'
 
 import App from './components/application'
-import BasePropertyComponent from './components/property-type'
+import BasePropertyComponent, { CleanPropertyComponent } from './components/property-type'
 import createStore from './store/store'
 import ViewHelpers from '../backend/utils/view-helpers/view-helpers'
 import * as AppComponents from './components/app'
@@ -23,17 +23,15 @@ const store = createStore(window.REDUX_STATE)
 const theme = window.THEME
 const { locale } = window.REDUX_STATE
 
-i18n
-  .use(initReactI18next)
-  .init({
-    resources: {
-      [locale.language]: {
-        translation: locale.translations,
-      },
+i18n.use(initReactI18next).init({
+  resources: {
+    [locale.language]: {
+      translation: locale.translations,
     },
-    lng: locale.language,
-    interpolation: { escapeValue: false },
-  })
+  },
+  lng: locale.language,
+  interpolation: { escapeValue: false },
+})
 
 const Application = (
   <Provider store={store}>
@@ -55,6 +53,7 @@ export default {
   UserComponents: {},
   ApiClient,
   BasePropertyComponent,
+  CleanPropertyComponent,
   env,
   ...AppComponents,
   ...Hooks,
