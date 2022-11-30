@@ -31,7 +31,8 @@ function camelizePropertyType<T>(type: { [key: string]: T }): { [key: string]: T
   }
 }
 
-const BasePropertyComponentExtended: BasePropertyComponentType = Object.assign(BasePropertyComponent, {
+const BasePropertyComponentExtended: BasePropertyComponentType = Object.assign(
+  BasePropertyComponent, {
   DefaultType: camelizePropertyType(defaultType),
   Boolean: camelizePropertyType(boolean),
   DateTime: camelizePropertyType(datetime),
