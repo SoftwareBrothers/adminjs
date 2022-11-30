@@ -89,13 +89,15 @@ We're also installing `react-dom` and `styled-components` because these two libr
 2. Navigate to installed `react`, `react-dom` and `styled-components` and register them under yarn linked packages:
 ```bash
 $ cd node_modules/react && yarn link
-$ cd ../node_modules/react-dom && yarn link
-$ cd ../node_modules/styled-components && yarn link
+$ cd ../../node_modules/react-dom && yarn link
+$ cd ../../node_modules/react-i18next && yarn link
+$ cd ../../node_modules/styled-components && yarn link
 ```
 3. Now link those packages in your local `adminjs` and `adminjs-design-system` projects:
 ```bash
 $ yarn link "react"
 $ yarn link "react-dom"
+$ yarn link "react-i18next"
 $ yarn link "styled-components"
 ```
 4. Your test application should now be working.

@@ -99,7 +99,7 @@ const ActionHeader: React.FC<ActionHeaderProps> = (props) => {
         <Box mt={cssHeaderMT} flexGrow={1} px={['default', 0]}>
           <CssHComponent mb="lg">
             {!isList && listAction ? (
-              <StyledBackButton resourceId={resourceId} showInDrawer={action.showInDrawer} />
+              <StyledBackButton showInDrawer={action.showInDrawer} />
             ) : ''}
             {title}
             {tag ? (<Badge variant="primary" ml="default">{tag}</Badge>) : ''}
