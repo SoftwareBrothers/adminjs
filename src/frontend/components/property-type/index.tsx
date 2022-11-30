@@ -1,4 +1,6 @@
 import BasePropertyComponent from './base-property-component'
+import CleanPropertyComponent from './clean-property-component'
+
 import * as defaultType from './default-type'
 import * as boolean from './boolean'
 import * as datetime from './datetime'
@@ -11,16 +13,16 @@ import * as phone from './phone'
 import { BasePropertyComponentProps } from './base-property-props'
 
 type BasePropertyComponentType = React.FC<BasePropertyComponentProps> & {
-  DefaultType: any;
-  Boolean: any;
-  DateTime: any;
-  RichText: any;
-  Reference: any;
-  TextArea: any;
-  Password: any;
+  DefaultType: any
+  Boolean: any
+  DateTime: any
+  RichText: any
+  Reference: any
+  TextArea: any
+  Password: any
 }
 
-function camelizePropertyType<T>(type: {[key: string]: T}): {[key: string]: T} {
+function camelizePropertyType<T>(type: { [key: string]: T }): { [key: string]: T } {
   return {
     Edit: type.edit,
     Show: type.show,
@@ -47,6 +49,7 @@ const BasePropertyComponentExtended: BasePropertyComponentType = Object.assign(
 export {
   BasePropertyComponentExtended as default,
   BasePropertyComponentExtended as BasePropertyComponent,
+  CleanPropertyComponent,
 }
 
 export * from './base-property-props'
