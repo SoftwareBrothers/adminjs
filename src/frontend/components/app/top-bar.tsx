@@ -9,6 +9,7 @@ import Version from './version'
 import { ReduxState, Paths } from '../../store/store'
 import { CurrentAdmin } from '../../../current-admin.interface'
 import { VersionProps } from '../../../adminjs-options.interface'
+import LanguageSelect from './language-select/language-select'
 
 const NavBar = styled(Box)`
   height: ${({ theme }): string => theme.sizes.navbarHeight};
@@ -49,6 +50,7 @@ const TopBar: React.FC<Props> = (props) => {
         <Icon icon="Menu" size={32} color="grey100" />
       </Box>
       <Version versions={versions} />
+      <LanguageSelect />
       {session && session.email ? <LoggedIn session={session} paths={paths} /> : ''}
     </NavBar>
   )

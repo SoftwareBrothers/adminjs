@@ -14,6 +14,10 @@ export type Locale = {
    * All the translations.
    */
   translations: Partial<LocaleTranslations>;
+  /**
+  * Available languages (array of ISO strings)
+  */
+  availableLanguages: string[];
 }
 
 export type LocaleTranslationsBlock = {
