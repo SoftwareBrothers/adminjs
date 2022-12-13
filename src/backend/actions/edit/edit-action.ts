@@ -30,7 +30,7 @@ export const EditAction: Action<RecordActionResponse> = {
    * @memberof module:EditAction
    */
   handler: async (request, response, context) => {
-    const { record, resource, currentAdmin, h, translateMessage } = context
+    const { record, resource, currentAdmin, h } = context
     if (!record) {
       throw new NotFoundError([
         `Record of given id ("${request.params.recordId}") could not be found`,
@@ -51,14 +51,14 @@ export const EditAction: Action<RecordActionResponse> = {
       return {
         redirectUrl: h.resourceUrl({ resourceId: resource._decorated?.id() || resource.id() }),
         notice: {
-          message: translateMessage('successfullyUpdated', resource.id()),
+          message: 'successfullyUpdated',
           type: 'success',
         },
         record: populatedRecord.toJSON(currentAdmin),
       }
     }
     const baseMessage = populatedRecord.baseError?.message
-      || translateMessage('thereWereValidationErrors', resource.id())
+      || 'thereWereValidationErrors'
     return {
       record: populatedRecord.toJSON(currentAdmin),
       notice: {
