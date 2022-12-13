@@ -123,7 +123,8 @@ class PropertyDecorator {
    * @return  {string}
    */
   label(): string {
-    return this._admin.translateProperty(this.propertyPath, this._resource.id())
+    // return this._admin.translateProperty(this.propertyPath, this._resource.id())
+    return this.propertyPath
   }
 
   /**
@@ -144,7 +145,7 @@ class PropertyDecorator {
    *
    * @returns {Array<{value: string, label: string}>}
    */
-  availableValues(): null | Array<{value: string | number; label: string}> {
+  availableValues(): null | Array<{ value: string | number; label: string }> {
     if (this.options.availableValues) {
       return this.options.availableValues
     }
@@ -152,11 +153,12 @@ class PropertyDecorator {
     if (values) {
       return values.map((val) => ({
         value: val,
-        label: this._admin.translateProperty(
-          `${this.propertyPath}.${val}`,
-          this._resource.id(),
-          { defaultValue: val },
-        ),
+        label: `${this.propertyPath}.${val}`,
+        // label: this._admin.translateProperty(
+        //   `${this.propertyPath}.${val}`,
+        //   this._resource.id(),
+        //   { defaultValue: val },
+        // ),
       }))
     }
     return null
