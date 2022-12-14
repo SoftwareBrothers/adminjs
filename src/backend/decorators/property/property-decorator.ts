@@ -154,11 +154,6 @@ class PropertyDecorator {
       return values.map((val) => ({
         value: val,
         label: `${this.propertyPath}.${val}`,
-        // label: this._admin.translateProperty(
-        //   `${this.propertyPath}.${val}`,
-        //   this._resource.id(),
-        //   { defaultValue: val },
-        // ),
       }))
     }
     return null

@@ -3,14 +3,16 @@ import React, { FC } from 'react'
 import { useSelector } from 'react-redux'
 import { locales } from '../../../../locale'
 import { ReduxState } from '../../../store/store'
+import { useLocalStorage } from '../../../hooks'
 
 const LanguageButtons: FC = () => {
   const { locale } = useSelector((state: ReduxState) => state)
+  const [loc, setLocale] = useLocalStorage('locale', locale)
   const { availableLanguages } = locale
   const handleButton = (lng: string): void => {
-    const _locale = { ...locales[lng] }
-    _locale.availableLanguages = availableLanguages
-    window.localStorage.setItem('locale', JSON.stringify(_locale))
+    const selectedLocale = { ...locales[lng] }
+    selectedLocale.availableLanguages = availableLanguages
+    setLocale(selectedLocale)
     window.location.reload()
   }
   if (!availableLanguages.length) {

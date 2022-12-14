@@ -28,7 +28,7 @@ const ActionHeader: React.FC<ActionHeaderProps> = (props) => {
     resource, toggleFilter, actionPerformed, record, action, tag, omitActions,
   } = props
 
-  const { translateButton } = useTranslation()
+  const { translateButton, translateAction } = useTranslation()
   const navigate = useNavigate()
   const actionResponseHandler = useActionResponseHandler(actionPerformed)
 
@@ -75,7 +75,7 @@ const ActionHeader: React.FC<ActionHeaderProps> = (props) => {
     handleClick: handleActionClick,
   })
 
-  const title = action ? action.label : resource.name
+  const title = action ? translateAction(action.label, resourceId) : resource.name
 
   // styled which differs if action header is in the drawer or not
   const cssIsRootFlex = !action.showInDrawer

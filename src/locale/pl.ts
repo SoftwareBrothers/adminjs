@@ -12,7 +12,7 @@ const translations = {
   buttons: {
     save: 'Zapisz',
     addNewItem: 'Nowy',
-    filter: 'Filter',
+    filter: 'Filtr',
     applyChanges: 'Zastosuj zmiany',
     resetFilter: 'Wyczyść',
     confirmRemovalMany: 'Potwierdź usunięcie {{count}} pozycji',
