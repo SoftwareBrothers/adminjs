@@ -7,12 +7,14 @@ import { actionHasComponent } from './action-has-component'
 import { actionHref } from './action-href'
 import { ActionJSON } from './action-json.interface'
 import { buildActionCallApiTrigger } from './build-action-api-call-trigger'
+import { TranslateFunctions } from '../../../utils'
 
 export type BuildActionClickOptions = {
   action: ActionJSON;
   params: DifferentActionParams;
   actionResponseHandler: ReturnType<typeof useActionResponseHandler>;
   navigate: NavigateFunction;
+  translateFunctions: TranslateFunctions;
 }
 
 export type BuildActionClickReturn = (event: any) => any | Promise<any>
@@ -20,7 +22,8 @@ export type BuildActionClickReturn = (event: any) => any | Promise<any>
 export const buildActionClickHandler = (
   options: BuildActionClickOptions,
 ): BuildActionClickReturn => {
-  const { action, params, actionResponseHandler, navigate } = options
+  const { action, params, actionResponseHandler, navigate, translateFunctions } = options
+  const { translateMessage } = translateFunctions
 
   const handleActionClick = (event: React.MouseEvent<HTMLElement>): Promise<any> | any => {
     event.preventDefault()
@@ -32,7 +35,7 @@ export const buildActionClickHandler = (
       params, action, actionResponseHandler,
     })
 
-    if (action.guard && !confirm(action.guard)) {
+    if (action.guard && !confirm(translateMessage(action.guard))) {
       return
     }
 

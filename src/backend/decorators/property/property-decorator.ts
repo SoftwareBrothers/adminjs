@@ -276,10 +276,7 @@ class PropertyDecorator {
       isVirtual: this.isVirtual,
       props: this.options.props || {},
       description: this.options.description
-        ? this._admin.translateMessage(
-          this.options.description,
-          this._resource.id(),
-        ) : undefined,
+        ? this.options.description : undefined,
     }
   }
 

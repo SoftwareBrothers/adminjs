@@ -15,5 +15,7 @@ export const addNotice = (data: NoticeMessage = { message: '' }): AddNoticeRespo
     id: Math.random().toString(36).substr(2, 9),
     type: data.type || 'success',
     progress: 0,
+    options: data.options,
+    resourceId: data.resourceId,
   },
 })

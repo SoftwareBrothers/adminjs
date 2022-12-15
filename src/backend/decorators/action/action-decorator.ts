@@ -281,10 +281,7 @@ class ActionDecorator {
       return true
     }
 
-    throw new ForbiddenError(this._admin.translateMessage('forbiddenError', resource.id(), {
-      actionName: this.name,
-      resourceId: resource.id(),
-    }))
+    throw new ForbiddenError('forbiddenError')
   }
 
   containerWidth(): ActionJSON['containerWidth'] {

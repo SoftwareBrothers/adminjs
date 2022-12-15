@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
 import { MessageBox } from '@adminjs/design-system'
+import { TOptions } from 'i18next'
 
 import { NoticeMessageInState, ReduxState } from '../../store/store'
 import { dropNotice } from '../../store/actions/drop-notice'
@@ -47,7 +48,7 @@ const NoticeElement: React.FC<NoticeElementProps> = (props) => {
   return (
     <MessageBox
       style={{ minWidth: '480px' }}
-      message={translateMessage(notice.message)}
+      message={translateMessage(notice.message, notice.resourceId, notice.options)}
       variant={notice.type === 'success' ? 'success' : 'danger'}
       onCloseClick={drop}
     />

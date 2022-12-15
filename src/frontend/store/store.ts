@@ -3,6 +3,7 @@
 // because AdminJS will switch to Eventrix from v7 onwards anyway
 import { combineReducers, legacy_createStore as createStore } from 'redux'
 import type { useLocation } from 'react-router'
+import { TOptions } from 'i18next'
 import {
   VERSIONS_INITIALIZE,
   SESSION_INITIALIZE,
@@ -17,7 +18,8 @@ import {
   DROP_NOTICE,
   ADD_NOTICE,
   ROUTE_CHANGED,
-  INITIAL_ROUTE } from './actions'
+  INITIAL_ROUTE,
+} from './actions'
 
 import { Assets, BrandingOptions, VersionProps } from '../../adminjs-options.interface'
 import { PageJSON, ResourceJSON } from '../interfaces'
@@ -35,6 +37,8 @@ export type NoticeMessageInState = NoticeMessage & {
   id: string;
   type: NoticeMessage['type'];
   progress: number;
+  options?: TOptions;
+  resourceId?: string;
 }
 
 export type Paths = {
@@ -52,9 +56,9 @@ const resourcesReducer = (
   },
 ) => {
   switch (action.type) {
-  case RESOURCES_INITIALIZE:
-    return action.data
-  default: return state
+    case RESOURCES_INITIALIZE:
+      return action.data
+    default: return state
   }
 }
 
@@ -66,9 +70,9 @@ const pagesReducer = (
   },
 ) => {
   switch (action.type) {
-  case PAGES_INITIALIZE:
-    return action.data
-  default: return state
+    case PAGES_INITIALIZE:
+      return action.data
+    default: return state
   }
 }
 
@@ -80,9 +84,9 @@ const localesReducer = (
   },
 ) => {
   switch (action.type) {
-  case LOCALE_INITIALIZE:
-    return action.data
-  default: return state
+    case LOCALE_INITIALIZE:
+      return action.data
+    default: return state
   }
 }
 
@@ -91,9 +95,9 @@ const brandingReducer = (state = {}, action: {
   data: BrandingOptions;
 }) => {
   switch (action.type) {
-  case BRANDING_INITIALIZE:
-    return action.data
-  default: return state
+    case BRANDING_INITIALIZE:
+      return action.data
+    default: return state
   }
 }
 
@@ -102,20 +106,20 @@ const assetsReducer = (state = {}, action: {
   data: Assets;
 }) => {
   switch (action.type) {
-  case ASSETS_INITIALIZE:
-    return action.data
-  default: return state
+    case ASSETS_INITIALIZE:
+      return action.data
+    default: return state
   }
 }
 
 const pathsReducer = (
   state: Paths = DEFAULT_PATHS,
-  action: {type: string; data: Paths},
+  action: { type: string; data: Paths },
 ): Paths => {
   switch (action.type) {
-  case PATHS_INITIALIZE:
-    return action.data
-  default: return state
+    case PATHS_INITIALIZE:
+      return action.data
+    default: return state
   }
 }
 
@@ -124,9 +128,9 @@ const dashboardReducer = (state = {}, action: {
   data: DashboardInState;
 }): DashboardInState => {
   switch (action.type) {
-  case DASHBOARD_INITIALIZE:
-    return action.data
-  default: return state
+    case DASHBOARD_INITIALIZE:
+      return action.data
+    default: return state
   }
 }
 
@@ -138,9 +142,9 @@ const sessionReducer = (
   },
 ) => {
   switch (action.type) {
-  case SESSION_INITIALIZE:
-    return action.data
-  default: return state
+    case SESSION_INITIALIZE:
+      return action.data
+    default: return state
   }
 }
 
@@ -149,12 +153,12 @@ const versionsReducer = (state = {}, action: {
   data: VersionProps;
 }) => {
   switch (action.type) {
-  case VERSIONS_INITIALIZE:
-    return {
-      admin: action.data.admin,
-      app: action.data.app,
-    }
-  default: return state
+    case VERSIONS_INITIALIZE:
+      return {
+        admin: action.data.admin,
+        app: action.data.app,
+      }
+    default: return state
   }
 }
 
@@ -168,17 +172,17 @@ const routerReducer = (state: RouterProps = { from: {}, to: {} }, action: {
   data: any;
 }) => {
   switch (action.type) {
-  case INITIAL_ROUTE:
-    return {
-      ...state,
-      from: { ...action.data },
-    }
-  case ROUTE_CHANGED:
-    return {
-      from: { ...state.to },
-      to: { ...action.data },
-    }
-  default: return state
+    case INITIAL_ROUTE:
+      return {
+        ...state,
+        from: { ...action.data },
+      }
+    case ROUTE_CHANGED:
+      return {
+        from: { ...state.to },
+        to: { ...action.data },
+      }
+    default: return state
   }
 }
 
@@ -189,22 +193,22 @@ const noticesReducer = (state: Array<NoticeMessageInState> = [], action: {
   data: NoticeMessageInState | NoticeArgs;
 }): Array<NoticeMessageInState> => {
   switch (action.type) {
-  case ADD_NOTICE: {
-    const notices = [action.data as NoticeMessageInState]
-    return notices
-  }
-  case DROP_NOTICE: {
-    return state.filter((notice) => notice.id !== (action.data as NoticeArgs).noticeId)
-  }
-  case SET_NOTICE_PROGRESS: {
-    return state.map((notice) => ({
-      ...notice,
-      progress: notice.id === (action.data as NoticeArgs).noticeId
-        ? action.data.progress
-        : notice.progress,
-    }))
-  }
-  default: return state
+    case ADD_NOTICE: {
+      const notices = [action.data as NoticeMessageInState]
+      return notices
+    }
+    case DROP_NOTICE: {
+      return state.filter((notice) => notice.id !== (action.data as NoticeArgs).noticeId)
+    }
+    case SET_NOTICE_PROGRESS: {
+      return state.map((notice) => ({
+        ...notice,
+        progress: notice.id === (action.data as NoticeArgs).noticeId
+          ? action.data.progress
+          : notice.progress,
+      }))
+    }
+    default: return state
   }
 }
 
