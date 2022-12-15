@@ -76,8 +76,6 @@ const ActionHeader: React.FC<ActionHeaderProps> = (props) => {
   })
 
   const title = action ? action.label : resource.name
-  const isList = action && action.name === 'list'
-  const listAction = resource.resourceActions.find((ra) => ra.name === 'list')
 
   // styled which differs if action header is in the drawer or not
   const cssIsRootFlex = !action.showInDrawer
@@ -98,7 +96,7 @@ const ActionHeader: React.FC<ActionHeaderProps> = (props) => {
       <Box display={['block', cssIsRootFlex ? 'flex' : 'block']}>
         <Box mt={cssHeaderMT} flexGrow={1} px={['default', 0]}>
           <CssHComponent mb="lg">
-            {!isList && listAction ? (
+            {action.showInDrawer ? (
               <StyledBackButton showInDrawer={action.showInDrawer} />
             ) : ''}
             {title}

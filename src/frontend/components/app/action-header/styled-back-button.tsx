@@ -1,18 +1,16 @@
 import React from 'react'
 import styled from 'styled-components'
-import { useNavigation, Link as RouterLink, useNavigate } from 'react-router-dom'
+import { Link as RouterLink, useNavigate } from 'react-router-dom'
 import {
   ButtonCSS,
   ButtonProps,
   Icon,
 } from '@adminjs/design-system'
 
-import ViewHelpers from '../../../../backend/utils/view-helpers/view-helpers'
 import allowOverride from '../../../hoc/allow-override'
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const StyledLink = styled(({ rounded, ...rest }) => <RouterLink {...rest} />)<ButtonProps>`${ButtonCSS}`
-const h = new ViewHelpers()
 
 export type StyledBackButtonProps = {
   showInDrawer: boolean;
