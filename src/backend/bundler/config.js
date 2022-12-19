@@ -19,13 +19,13 @@ const external = [
   'styled-components',
   'adminjs',
   '@adminjs/design-system',
-  '@carbon/icons-react',
+  'react-feather',
 ]
 
 const globals = {
   react: 'React',
   redux: 'Redux',
-  '@carbon/icons-react': 'CarbonIcons',
+  'react-feather': 'FeatherIcons',
   'styled-components': 'styled',
   'prop-types': 'PropTypes',
   'react-dom': 'ReactDOM',

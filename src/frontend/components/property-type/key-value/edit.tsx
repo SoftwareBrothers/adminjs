@@ -69,7 +69,7 @@ const EditKeyValuePair: React.FC<EditKeyValuePairProps> = (props) => {
         flexGrow={0}
         flexShrink={1}
       >
-        <Icon icon="TrashCan" />
+        <Icon icon="Trash2" />
       </Button>
     </Box>
   )

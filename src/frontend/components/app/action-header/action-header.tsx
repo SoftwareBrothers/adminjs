@@ -61,7 +61,7 @@ const ActionHeader: React.FC<ActionHeaderProps> = (props) => {
     actionButtons.push({
       label: translateButton('filter', resource.id),
       onClick: toggleFilter,
-      icon: 'SettingsAdjust',
+      icon: 'Sliders',
       'data-css': getResourceElementCss(resource.id, 'filter-button'),
     })
   }

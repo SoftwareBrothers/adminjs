@@ -7,22 +7,22 @@ export type DatabaseData = {
   databaseType: BaseResource['databaseType'];
 }
 
-export const DEFAULT_ICON = 'Archive'
+export const DEFAULT_ICON = 'Database'
 
 type IconMapType = {[key in SupportedDatabasesType]: string}
 
 export const getIcon = (icon?: SupportedDatabasesType | string): string => {
   const IconMap: IconMapType = {
-    MariaDB: 'Sql',
-    MySQL: 'Sql',
-    Postgres: 'Sql',
-    CockroachDB: 'Sql',
-    SQLite: 'Sql',
-    MicrosoftSQLServer: 'Sql',
-    Oracle: 'Sql',
-    SAPHana: 'CloudApp',
-    MongoDB: 'Archive',
-    other: 'Archive',
+    MariaDB: 'Database',
+    MySQL: 'Database',
+    Postgres: 'Database',
+    CockroachDB: 'Database',
+    SQLite: 'Database',
+    MicrosoftSQLServer: 'Database',
+    Oracle: 'Database',
+    SAPHana: 'Cloud',
+    MongoDB: 'FileText',
+    other: 'Database',
   }
   return (icon && IconMap[icon]) ? IconMap[icon] : DEFAULT_ICON
 }

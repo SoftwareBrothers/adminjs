@@ -27,7 +27,7 @@ declare const AdminJS: {
  *        actions: {
  *           myNewAction: {
  *             label: 'amazing action',
- *             icon: 'Add',
+ *             icon: 'Plus',
  *             inVisible: (resource, record) => record.param('email') !== '',
  *             actionType: 'record',
  *             component: 'MyNewAction',

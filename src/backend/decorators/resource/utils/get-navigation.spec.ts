@@ -58,7 +58,7 @@ describe('.getNavigation', () => {
   })
 
   it('returns empty parent with an icon when this was set in options', () => {
-    const icon = 'Car'
+    const icon = 'Activity'
     resourceOptions.navigation = { icon, name: null }
 
     expect(getNavigation(resourceOptions, defaultDatabase)).to.deep.eq({
@@ -69,7 +69,7 @@ describe('.getNavigation', () => {
   })
 
   it('works the same with old parent option', () => {
-    const icon = 'Car'
+    const icon = 'Activity'
     resourceOptions.parent = { icon, name: null }
 
     expect(getNavigation(resourceOptions, defaultDatabase)).to.deep.eq({

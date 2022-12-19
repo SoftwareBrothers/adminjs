@@ -265,7 +265,7 @@ export type BuildInActions =
  * ```
  * const action = {
  *   actionType: 'record',
- *   icon: 'View',
+ *   icon: 'Eye',
  *   isVisible: true,
  *   handler: async () => {...},
  *   component: 'MyAction',
@@ -300,7 +300,7 @@ export type BuildInActions =
  *         // example of overriding existing 'new' action for
  *         // User resource.
  *         new: {
- *           icon: 'Add'
+ *           icon: 'Plus'
  *         },
  *         // Example of creating a new 'myNewAction' which will be
  *         // a resource action available for User model
@@ -429,7 +429,7 @@ export interface Action <T extends ActionResponse> {
    * ```javascript
    * new AdminJS({ resources: [{
    *   resource: Car,
-   *   options: { actions: { edit: { icon: 'Add' } } },
+   *   options: { actions: { edit: { icon: 'Plus' } } },
    * }]})
    * ```
    */
