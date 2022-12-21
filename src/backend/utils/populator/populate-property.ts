@@ -25,6 +25,7 @@ export async function populateProperty(
   }
 
   const referencedResource = property.reference()
+  const referencedProperty = property;
 
   if (!referencedResource) {
     throw new Error([
@@ -71,7 +72,7 @@ export async function populateProperty(
   }
 
   // now find all referenced records: all users
-  const referenceRecords = await referencedResource.findMany(uniqueExternalIds)
+  const referenceRecords = await referencedResource.findMany(uniqueExternalIds, referencedProperty);
 
   // even if record has value for this reference - it might not have the referenced record itself
   // this happens quite often in mongodb where there are no constrains on the database
