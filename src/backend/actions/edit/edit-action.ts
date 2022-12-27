@@ -41,7 +41,7 @@ export const EditAction: Action<RecordActionResponse> = {
     }
 
     const params = paramConverter.prepareParams(request.payload ?? {}, resource)
-    const newRecord = await record.update(params)
+    const newRecord = await record.update(params, currentAdmin)
     const [populatedRecord] = await populator([newRecord])
 
     // eslint-disable-next-line no-param-reassign

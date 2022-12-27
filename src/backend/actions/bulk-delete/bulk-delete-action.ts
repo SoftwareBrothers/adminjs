@@ -27,7 +27,7 @@ export const BulkDeleteAction: Action<BulkActionResponse> = {
    * @memberof module:BulkDeleteAction
    */
   handler: async (request, response, context) => {
-    const { records, resource, h, translateMessage } = context
+    const { records, resource, currentAdmin, h, translateMessage } = context
 
     if (!records || !records.length) {
       throw new NotFoundError('no records were selected.', 'Action#handler')
@@ -39,7 +39,7 @@ export const BulkDeleteAction: Action<BulkActionResponse> = {
       }
     }
     if (request.method === 'post') {
-      await Promise.all(records.map((record) => resource.delete(record.id())))
+      await Promise.all(records.map((record) => resource.delete(record.id(), currentAdmin)))
       return {
         records: records.map((record) => record.toJSON(context.currentAdmin)),
         notice: {

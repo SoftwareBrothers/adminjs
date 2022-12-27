@@ -36,7 +36,7 @@ export const DeleteAction: Action<RecordActionResponse> = {
       ].join('\n'), 'Action#handler')
     }
     try {
-      await resource.delete(request.params.recordId)
+      await resource.delete(request.params.recordId, currentAdmin)
     } catch (error) {
       if (error instanceof ValidationError) {
         const baseMessage = error.baseError?.message

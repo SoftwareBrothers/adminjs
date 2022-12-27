@@ -56,7 +56,7 @@ export const SearchAction: Action<SearchActionResponse> = {
         sortBy,
         direction,
       },
-    })
+    }, currentAdmin)
 
     return {
       records: records.map((record) => record.toJSON(currentAdmin)),

@@ -133,10 +133,10 @@ class BaseRecord {
    * @param  {object} params all field with values which has to be updated
    * @return {Promise<BaseRecord>}        given record (this)
    */
-  async update(params): Promise<BaseRecord> {
+  async update(params, currentAdmin?: CurrentAdmin): Promise<BaseRecord> {
     try {
       this.storeParams(params)
-      const returnedParams = await this.resource.update(this.id(), params)
+      const returnedParams = await this.resource.update(this.id(), params, currentAdmin)
       this.storeParams(returnedParams)
     } catch (e) {
       if (e instanceof ValidationError) {
@@ -192,11 +192,13 @@ class BaseRecord {
    *
    * When validation error occurs it stores that to {@link BaseResource#errors}
    *
+   * @param  {CurrentAdmin?}           currentAdmin
+   *
    * @return {Promise<BaseRecord>}        given record (this)
    */
-  async create(): Promise<BaseRecord> {
+  async create(currentAdmin?:CurrentAdmin): Promise<BaseRecord> {
     try {
-      const returnedParams = await this.resource.create(this.params)
+      const returnedParams = await this.resource.create(this.params, currentAdmin)
       this.storeParams(returnedParams)
     } catch (e) {
       if (e instanceof ValidationError) {

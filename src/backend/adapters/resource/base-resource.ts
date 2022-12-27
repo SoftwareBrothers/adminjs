@@ -7,6 +7,7 @@ import { BaseProperty, BaseRecord, ParamsType } from '..'
 import { NotImplementedError, Filter } from '../../utils'
 import { ResourceOptions, ResourceDecorator } from '../../decorators'
 import AdminJS from '../../../adminjs'
+import { CurrentAdmin } from '../../../current-admin.interface'
 
 /**
  * Representation of a ORM Resource in AdminJS. Visually resource is a list item in the sidebar.
@@ -116,23 +117,25 @@ class BaseResource {
   /**
    * Returns number of elements for given resource by including filters
    * @param  {Filter} filter        represents what data should be included
+   * @param  {CurrentAdmin}           currentAdmin
    * @return {Promise<Number>}
    * @abstract
    */
-  async count(filter: Filter): Promise<number> {
+  async count(filter: Filter, currentAdmin?: CurrentAdmin): Promise<number> {
     throw new NotImplementedError('BaseResource#count')
   }
 
   /**
    * Returns actual records for given resource
    *
-   * @param  {Filter} filters                        what data should be included
+   * @param  {Filter} filter                        what data should be included
    * @param  {Object} options
    * @param  {Number} [options.limit]                  how many records should be taken
    * @param  {Number} [options.offset]                 offset
    * @param  {Object} [options.sort]                   sort
    * @param  {Number} [options.sort.sortBy]            sortable field
    * @param  {Number} [options.sort.direction]         either asc or desc
+   * @param  {CurrentAdmin}           currentAdmin
    * @return {Promise<BaseRecord[]>}                          list of records
    * @abstract
    * @example
@@ -149,7 +152,7 @@ class BaseResource {
       sortBy?: string;
       direction?: 'asc' | 'desc';
     };
-  }): Promise<Array<BaseRecord>> {
+  }, currentAdmin?: CurrentAdmin): Promise<Array<BaseRecord>> {
     throw new NotImplementedError('BaseResource#find')
   }
 
@@ -157,21 +160,24 @@ class BaseResource {
    * Finds one Record in the Resource by its id
    *
    * @param  {String} id      uniq id of the Resource Record
+   * @param  {CurrentAdmin?}           currentAdmin
    * @return {Promise<BaseRecord> | null}   record
    * @abstract
    */
-  async findOne(id: string): Promise<BaseRecord | null> {
+  async findOne(id: string, currentAdmin?: CurrentAdmin): Promise<BaseRecord | null> {
     throw new NotImplementedError('BaseResource#findOne')
   }
 
   /**
    * Finds many records based on the resource ids
    *
-   * @param   {Array<string>}              list of ids to find
+   * @param   {Array<string>}          ids list of ids to find
+   * @param  {CurrentAdmin?}           currentAdmin
    *
    * @return  {Promise<Array<BaseRecord>>} records
    */
-  async findMany(ids: Array<string | number>): Promise<Array<BaseRecord>> {
+  async findMany(ids: Array<string | number>, currentAdmin?: CurrentAdmin):
+    Promise<Array<BaseRecord>> {
     throw new NotImplementedError('BaseResource#findMany')
   }
 
@@ -194,26 +200,29 @@ class BaseResource {
    * Creates new record
    *
    * @param  {Record<string, any>}     params
+   * @param  {CurrentAdmin?}           currentAdmin
    * @return {Promise<Object>}         created record converted to raw Object which
    *                                   can be used to initiate new {@link BaseRecord} instance
    * @throws {ValidationError}         If there are validation errors it should be thrown
    * @abstract
    */
-  async create(params: Record<string, any>): Promise<ParamsType> {
+  async create(params: Record<string, any>, currentAdmin?: CurrentAdmin): Promise<ParamsType> {
     throw new NotImplementedError('BaseResource#create')
   }
 
   /**
-   * Updates an the record.
+   * Updates the record.
    *
    * @param  {String} id               uniq id of the Resource Record
    * @param  {Record<string, any>}     params
+   * @param  {CurrentAdmin}           currentAdmin
    * @return {Promise<Object>}         created record converted to raw Object which
    *                                   can be used to initiate new {@link BaseRecord} instance
    * @throws {ValidationError}         If there are validation errors it should be thrown
    * @abstract
    */
-  async update(id: string, params: Record<string, any>): Promise<ParamsType> {
+  async update(id: string, params: Record<string, any>, currentAdmin?: CurrentAdmin)
+  : Promise<ParamsType> {
     throw new NotImplementedError('BaseResource#update')
   }
 
@@ -221,10 +230,11 @@ class BaseResource {
    * Delete given record by id
    *
    * @param  {String | Number}           id id of the Record
+   * @param  {CurrentAdmin}           currentAdmin
    * @throws {ValidationError}           If there are validation errors it should be thrown
    * @abstract
    */
-  async delete(id: string): Promise<void> {
+  async delete(id: string, currentAdmin?: CurrentAdmin): Promise<void> {
     throw new NotImplementedError('BaseResource#delete')
   }
 
