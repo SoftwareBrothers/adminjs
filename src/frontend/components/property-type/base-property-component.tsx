@@ -1,6 +1,6 @@
-import { Box } from '@adminjs/design-system'
+import { Box, Icon, Tooltip } from '@adminjs/design-system'
 import { ReactComponentLike } from 'prop-types'
-import React, { useMemo } from 'react'
+import React, { useMemo, useState } from 'react'
 
 import ErrorBoundary from '../app/error-boundary'
 
@@ -68,6 +68,8 @@ const BasePropertyComponent: React.FC<BasePropertyComponentProps> = (props) => {
     // path either index (for array) or subProperty name.
     path: (baseProperty as PropertyJSON).path || baseProperty.propertyPath,
   }), [baseProperty])
+  const propValue = record?.params?.[property.path]
+  const [originalValue] = useState(propValue)
 
   const testId = `property-${where}-${property.path}`
   const contentTag = getActionElementCss(resource.id, where, property.path)
@@ -141,6 +143,32 @@ const BasePropertyComponent: React.FC<BasePropertyComponentProps> = (props) => {
   return (
     <ErrorBoundary>
       <Box data-css={contentTag} data-testid={testId}>
+        {where === 'edit' && (
+          <Box mt="sm" display="inline-flex">
+            <Tooltip direction="right" title="Reset back to original value" size="lg">
+              <Box>
+                <Icon
+                  icon="Reset"
+                  color={propValue === originalValue ? 'grey40' : 'grey100'}
+                  onClick={() => {
+                    onChange!(property.path, originalValue)
+                  }}
+                />
+              </Box>
+            </Tooltip>
+            <Tooltip direction="right" title="Set value to null" size="lg">
+              <Box>
+                <Icon
+                  icon="SubtractAlt"
+                  color={propValue === null ? 'grey40' : 'grey100'}
+                  onClick={() => {
+                    onChange!(property.path, null)
+                  }}
+                />
+              </Box>
+            </Tooltip>
+          </Box>
+        )}
         <Component
           property={property}
           resource={resource}
