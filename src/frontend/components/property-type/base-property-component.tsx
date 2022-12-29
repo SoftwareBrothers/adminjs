@@ -1,4 +1,4 @@
-import { Box, Label } from '@adminjs/design-system'
+import { Box, Icon, Tooltip } from '@adminjs/design-system'
 import { ReactComponentLike } from 'prop-types'
 import React, { useMemo, useState } from 'react'
 
@@ -143,6 +143,32 @@ const BasePropertyComponent: React.FC<BasePropertyComponentProps> = (props) => {
   return (
     <ErrorBoundary>
       <Box data-css={contentTag} data-testid={testId}>
+        {where === 'edit' && (
+          <Box mt="sm" display="inline-flex">
+            <Tooltip direction="right" title="Reset back to original value" size="lg">
+              <Box>
+                <Icon
+                  icon="Reset"
+                  color={propValue === originalValue ? 'grey40' : 'grey100'}
+                  onClick={() => {
+                    onChange!(property.path, originalValue)
+                  }}
+                />
+              </Box>
+            </Tooltip>
+            <Tooltip direction="right" title="Set value to null" size="lg">
+              <Box>
+                <Icon
+                  icon="SubtractAlt"
+                  color={propValue === null ? 'grey40' : 'grey100'}
+                  onClick={() => {
+                    onChange!(property.path, null)
+                  }}
+                />
+              </Box>
+            </Tooltip>
+          </Box>
+        )}
         <Component
           property={property}
           resource={resource}
@@ -151,17 +177,6 @@ const BasePropertyComponent: React.FC<BasePropertyComponentProps> = (props) => {
           onChange={onChange}
           where={where}
         />
-        {propValue !== originalValue && (
-          <Label
-            variant="light"
-            inline
-            onClick={() => {
-              onChange!(property.path, originalValue)
-            }}
-          >
-            Reset
-          </Label>
-        )}
       </Box>
     </ErrorBoundary>
   )
