@@ -95,7 +95,7 @@
     "axios": "^0.27.2",
     "babel-plugin-styled-components": "^1.11.1",
     "commander": "^5.1.0",
-    "flat": "^4.1.0",
+    "flat": "^5.0.1",
     "i18next": "^21.9.2",
     "lodash": "^4.17.21",
     "ora": "^5.4.1",
