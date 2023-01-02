@@ -144,7 +144,7 @@ export const Dashboard: React.FC = () => {
           </Box>
         ))}
         <Box width={[1, 1, 1 / 2]} p="lg">
-          <Card as="a" flex href="https://join.slack.com/t/adminbro/shared_invite/zt-djsqxxpz-_YCS8UMtQ9Ade6DPuLR7Zw" target="_blank">
+          <Card as="a" flex href="https://adminjs.page.link/slack" target="_blank">
             <Box flexShrink={0}><Illustration variant="SlackLogo" /></Box>
             <Box ml="xl">
               <H4>{translateMessage('community_title')}</H4>
