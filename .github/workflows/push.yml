@@ -1,20 +1,30 @@
 name: CI/CD
 on: [push, pull_request]
-
 jobs:
   setup:
     name: setup
     runs-on: ubuntu-latest
     steps:
+      - name: Dump GitHub context
+        env:
+          GITHUB_CONTEXT: ${{ toJson(github) }}
+        run: echo "$GITHUB_CONTEXT"
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v2
       - name: Setup
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v1
         with:
-          node-version: '14'
-          cache: 'yarn'
+          node-version: "14.x"
+      - uses: actions/cache@v1
+        id: yarn-cache
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-node_modules-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-node_modules-
       - name: Install
-        run: yarn install --frozen-lockfile
+        if: steps.yarn-cache.outputs.cache-hit != 'true'
+        run: yarn install
 
   build:
     name: build
@@ -22,20 +32,27 @@ jobs:
     needs: setup
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v2
       - name: Setup
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v1
         with:
-          node-version: '14'
-          cache: 'yarn'
+          node-version: "14.x"
+      - uses: actions/cache@v1
+        id: yarn-cache
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-node_modules-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-node_modules-
       - name: Install
+        if: steps.yarn-cache.outputs.cache-hit != 'true'
         run: yarn install
-      - name: Assets cache
-        uses: actions/cache@v3
+
+      - uses: actions/cache@v1
         id: assets-cache
         with:
           path: src/frontend/assets/scripts
-          key: assets-${{ hashFiles('**/src/frontend/global-entry.js') }}-${{ hashFiles('**/yarn.lock') }}-${{ hashFiles('**/bin/bundle-globals.js') }}
+          key: assets-${{ hashFiles('**/src/frontend/global-entry.js') }}-${{ hashFiles('**/yarn.lock') }}-{{ hashFiles('**/bin/bundle-globals.js') }}
           restore-keys: |
             assets-
       - name: bundle globals production
@@ -60,7 +77,7 @@ jobs:
           || contains(github.ref, 'refs/heads/next-major')
           || contains(github.ref, 'refs/heads/beta')
           || contains(github.ref, 'refs/heads/dev')
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v1
         with:
           name: lib
           path: lib
@@ -71,7 +88,7 @@ jobs:
           || contains(github.ref, 'refs/heads/next-major')
           || contains(github.ref, 'refs/heads/beta')
           || contains(github.ref, 'refs/heads/dev')
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v1
         with:
           name: types
           path: types
@@ -82,7 +99,7 @@ jobs:
           || contains(github.ref, 'refs/heads/next-major')
           || contains(github.ref, 'refs/heads/beta')
           || contains(github.ref, 'refs/heads/dev')
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v1
         with:
           name: bundle
           path: src/frontend/assets/scripts
@@ -93,13 +110,20 @@ jobs:
     needs: setup
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v2
       - name: Setup
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v1
         with:
-          node-version: '14'
-          cache: 'yarn'
+          node-version: "14.x"
+      - uses: actions/cache@v1
+        id: yarn-cache
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-node_modules-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-node_modules-
       - name: Install
+        if: steps.yarn-cache.outputs.cache-hit != 'true'
         run: yarn install
       - name: Lint
         run: yarn lint
@@ -228,24 +252,31 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v2
       - name: Setup
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v1
         with:
-          node-version: '14'
-          cache: 'yarn'
+          node-version: "14.x"
+      - uses: actions/cache@v1
+        id: yarn-cache
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-node_modules-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-node_modules-
       - name: Install
+        if: steps.yarn-cache.outputs.cache-hit != 'true'
         run: yarn install
       - name: Download Build
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v1
         with:
           name: lib
       - name: Download Types
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v1
         with:
           name: types
       - name: Download Bundle
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v1
         with:
           name: bundle
       - name: Release
