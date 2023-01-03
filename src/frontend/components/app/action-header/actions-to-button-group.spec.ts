@@ -3,8 +3,10 @@ import { expect } from 'chai'
 import factory from 'factory-girl'
 import { ActionJSON } from '../../../interfaces'
 import { actionsToButtonGroup } from './actions-to-button-group'
-
+// import { useTranslation } from '../../../hooks'
 import '../../spec/action-json.factory'
+
+// const translateFunctions = useTranslation()
 
 describe('actionsToButtonGroup', () => {
   let actions: Array<ActionJSON>
@@ -28,6 +30,7 @@ describe('actionsToButtonGroup', () => {
         actions,
         params,
         handleClick,
+        translateFunctions,
       })
     })
 
@@ -68,6 +71,7 @@ describe('actionsToButtonGroup', () => {
         ],
         params,
         handleClick,
+        translateFunctions,
       })
     })
 
@@ -99,6 +103,7 @@ describe('actionsToButtonGroup', () => {
         actions,
         params,
         handleClick,
+        translateFunctions,
       })
     })
 
