@@ -1,12 +1,14 @@
 import { ButtonGroupProps } from '@adminjs/design-system'
 import { expect } from 'chai'
+import i18n from 'i18next'
 import factory from 'factory-girl'
 import { ActionJSON } from '../../../interfaces'
 import { actionsToButtonGroup } from './actions-to-button-group'
 // import { useTranslation } from '../../../hooks'
+import { createFunctions } from '../../../../utils/translate-functions.factory'
 import '../../spec/action-json.factory'
 
-// const translateFunctions = useTranslation()
+const translateFunctions = createFunctions(i18n)
 
 describe('actionsToButtonGroup', () => {
   let actions: Array<ActionJSON>
