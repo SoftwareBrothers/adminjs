@@ -54,7 +54,7 @@ export const ListAction: Action<ListActionResponse> = {
       )
     }
 
-    const filter = await new Filter(filters, resource).populate()
+    const filter = await new Filter(filters, resource).populate(context)
 
     const { currentAdmin } = context
     const records = await resource.find(filter, {
@@ -62,7 +62,7 @@ export const ListAction: Action<ListActionResponse> = {
       offset: (page - 1) * perPage,
       sort,
     }, context)
-    const populatedRecords = await populator(records)
+    const populatedRecords = await populator(records, context)
 
     // eslint-disable-next-line no-param-reassign
     context.records = populatedRecords

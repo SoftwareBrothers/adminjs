@@ -121,7 +121,7 @@ class BaseResource {
    * @return {Promise<Number>}
    * @abstract
    */
-  async count(filter: Filter, context?: ActionContext): Promise<number> {
+  async count(filter: Filter, context: ActionContext): Promise<number> {
     throw new NotImplementedError('BaseResource#count')
   }
 
@@ -152,7 +152,7 @@ class BaseResource {
       sortBy?: string;
       direction?: 'asc' | 'desc';
     };
-  }, context?: ActionContext): Promise<Array<BaseRecord>> {
+  }, context: ActionContext): Promise<Array<BaseRecord>> {
     throw new NotImplementedError('BaseResource#find')
   }
 
@@ -160,11 +160,11 @@ class BaseResource {
    * Finds one Record in the Resource by its id
    *
    * @param  {String} id      uniq id of the Resource Record
-   * @param  {ActionContext?}           context
+   * @param  {ActionContext}           context
    * @return {Promise<BaseRecord> | null}   record
    * @abstract
    */
-  async findOne(id: string, context?: ActionContext): Promise<BaseRecord | null> {
+  async findOne(id: string, context: ActionContext): Promise<BaseRecord | null> {
     throw new NotImplementedError('BaseResource#findOne')
   }
 
@@ -172,11 +172,11 @@ class BaseResource {
    * Finds many records based on the resource ids
    *
    * @param   {Array<string>}          ids list of ids to find
-   * @param  {ActionContext?}           context
+   * @param  {ActionContext}           context
    *
    * @return  {Promise<Array<BaseRecord>>} records
    */
-  async findMany(ids: Array<string | number>, context?: ActionContext):
+  async findMany(ids: Array<string | number>, context: ActionContext):
     Promise<Array<BaseRecord>> {
     throw new NotImplementedError('BaseResource#findMany')
   }
@@ -200,13 +200,13 @@ class BaseResource {
    * Creates new record
    *
    * @param  {Record<string, any>}     params
-   * @param  {ActionContext?}           context
+   * @param  {ActionContext}           context
    * @return {Promise<Object>}         created record converted to raw Object which
    *                                   can be used to initiate new {@link BaseRecord} instance
    * @throws {ValidationError}         If there are validation errors it should be thrown
    * @abstract
    */
-  async create(params: Record<string, any>, context?: ActionContext): Promise<ParamsType> {
+  async create(params: Record<string, any>, context: ActionContext): Promise<ParamsType> {
     throw new NotImplementedError('BaseResource#create')
   }
 
@@ -221,7 +221,7 @@ class BaseResource {
    * @throws {ValidationError}         If there are validation errors it should be thrown
    * @abstract
    */
-  async update(id: string, params: Record<string, any>, context?: ActionContext)
+  async update(id: string, params: Record<string, any>, context: ActionContext)
   : Promise<ParamsType> {
     throw new NotImplementedError('BaseResource#update')
   }
@@ -234,7 +234,7 @@ class BaseResource {
    * @throws {ValidationError}           If there are validation errors it should be thrown
    * @abstract
    */
-  async delete(id: string, context?: ActionContext): Promise<void> {
+  async delete(id: string, context: ActionContext): Promise<void> {
     throw new NotImplementedError('BaseResource#delete')
   }
 

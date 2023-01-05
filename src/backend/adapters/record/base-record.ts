@@ -135,7 +135,7 @@ class BaseRecord {
    * @param  {ActionContext}           context
    * @return {Promise<BaseRecord>}        given record (this)
    */
-  async update(params, context?: ActionContext): Promise<BaseRecord> {
+  async update(params, context: ActionContext): Promise<BaseRecord> {
     try {
       this.storeParams(params)
       const returnedParams = await this.resource.update(this.id(), params, context)
@@ -161,16 +161,16 @@ class BaseRecord {
    * {@link BaseResource#create} or {@link BaseResource#update} methods.
    *
    * When validation error occurs it stores that to {@link BaseResource#errors}
-   *
+   * @param  {ActionContext}           context
    * @return {Promise<BaseRecord>}        given record (this)
    */
-  async save(): Promise<BaseRecord> {
+  async save(context: ActionContext): Promise<BaseRecord> {
     try {
       let returnedParams
       if (this.id()) {
-        returnedParams = await this.resource.update(this.id(), this.params)
+        returnedParams = await this.resource.update(this.id(), this.params, context)
       } else {
-        returnedParams = await this.resource.create(this.params)
+        returnedParams = await this.resource.create(this.params, context)
       }
       this.storeParams(returnedParams)
     } catch (e) {
@@ -198,7 +198,7 @@ class BaseRecord {
    * @return {Promise<BaseRecord>}        given record (this)
    * @param  {ActionContext}           context
    */
-  async create(context?: ActionContext): Promise<BaseRecord> {
+  async create(context: ActionContext): Promise<BaseRecord> {
     try {
       const returnedParams = await this.resource.create(this.params, context)
       this.storeParams(returnedParams)
