@@ -61,13 +61,13 @@ export const ListAction: Action<ListActionResponse> = {
       limit: perPage,
       offset: (page - 1) * perPage,
       sort,
-    }, currentAdmin)
+    }, context)
     const populatedRecords = await populator(records)
 
     // eslint-disable-next-line no-param-reassign
     context.records = populatedRecords
 
-    const total = await resource.count(filter, currentAdmin)
+    const total = await resource.count(filter, context)
     return {
       meta: {
         total,

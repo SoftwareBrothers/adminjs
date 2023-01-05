@@ -5,6 +5,7 @@ import ValidationError, { PropertyErrors } from '../../utils/errors/validation-e
 import RecordError from '../../utils/errors/record-error'
 import { RecordJSON } from '../../../frontend/interfaces'
 import { CurrentAdmin } from '../../../current-admin.interface'
+import { ActionContext } from '../../actions'
 
 /**
  * Representation of an particular ORM/ODM Record in given Resource in AdminJS
@@ -131,12 +132,13 @@ class BaseRecord {
    * When validation error occurs it stores that to {@link BaseResource.errors}
    *
    * @param  {object} params all field with values which has to be updated
+   * @param  {ActionContext}           context
    * @return {Promise<BaseRecord>}        given record (this)
    */
-  async update(params, currentAdmin?: CurrentAdmin): Promise<BaseRecord> {
+  async update(params, context?: ActionContext): Promise<BaseRecord> {
     try {
       this.storeParams(params)
-      const returnedParams = await this.resource.update(this.id(), params, currentAdmin)
+      const returnedParams = await this.resource.update(this.id(), params, context)
       this.storeParams(returnedParams)
     } catch (e) {
       if (e instanceof ValidationError) {
@@ -192,13 +194,13 @@ class BaseRecord {
    *
    * When validation error occurs it stores that to {@link BaseResource#errors}
    *
-   * @param  {CurrentAdmin?}           currentAdmin
    *
    * @return {Promise<BaseRecord>}        given record (this)
+   * @param  {ActionContext}           context
    */
-  async create(currentAdmin?:CurrentAdmin): Promise<BaseRecord> {
+  async create(context?: ActionContext): Promise<BaseRecord> {
     try {
-      const returnedParams = await this.resource.create(this.params, currentAdmin)
+      const returnedParams = await this.resource.create(this.params, context)
       this.storeParams(returnedParams)
     } catch (e) {
       if (e instanceof ValidationError) {
