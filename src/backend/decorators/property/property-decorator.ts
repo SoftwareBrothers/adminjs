@@ -123,7 +123,6 @@ class PropertyDecorator {
    * @return  {string}
    */
   label(): string {
-    // return this._admin.translateProperty(this.propertyPath, this._resource.id())
     return this.propertyPath
   }
 
