@@ -3,6 +3,8 @@ import { render, RenderResult } from '@testing-library/react'
 import sinon from 'sinon'
 import { expect } from 'chai'
 import factory from 'factory-girl'
+import { I18nextProvider } from 'react-i18next'
+import i18n from 'i18next'
 
 import { Provider } from 'react-redux'
 import { RecordsTable, RecordsTableProps } from './records-table'
@@ -25,13 +27,15 @@ const renderSubject = (props: Omit<RecordsTableProps, 'onSelect' | 'onSelectAll'
 
   const renderResult = render(
     <TestContextProvider>
-      <Provider store={createStore({})}>
-        <RecordsTable
-          {...props}
-          onSelect={onSelect}
-          onSelectAll={onSelectAll}
-        />
-      </Provider>
+      <I18nextProvider i18n={i18n}>
+        <Provider store={createStore({})}>
+          <RecordsTable
+            {...props}
+            onSelect={onSelect}
+            onSelectAll={onSelectAll}
+          />
+        </Provider>
+      </I18nextProvider>
     </TestContextProvider>,
   )
 
