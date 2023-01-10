@@ -9,7 +9,7 @@ const LanguageButtons: FC = () => {
   const { locale } = useSelector((state: ReduxState) => state)
   const [loc, setLocale] = useLocalStorage('locale', locale)
   const { availableLanguages } = locale
-  const handleButton = (lng: string): void => {
+  const handleButton = (lng: string) => {
     const selectedLocale = { ...locales[lng] }
     selectedLocale.availableLanguages = availableLanguages
     setLocale(selectedLocale)

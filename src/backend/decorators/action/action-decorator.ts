@@ -267,7 +267,7 @@ class ActionDecorator {
    * @throws  {ForbiddenError}          when user cannot perform given action
    */
   canInvokeAction(context: ActionContext): boolean {
-    const { record, records, currentAdmin, resource } = context
+    const { record, records, currentAdmin } = context
 
     if (record && this.isAccessible(currentAdmin, record)) {
       return true

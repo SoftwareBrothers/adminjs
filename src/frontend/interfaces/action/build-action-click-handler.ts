@@ -35,7 +35,7 @@ export const buildActionClickHandler = (
       params, action, actionResponseHandler,
     })
 
-    if (action.guard && !confirm(translateMessage(action.guard))) {
+    if (action.guard && !confirm(translateMessage(action.guard, params.resourceId))) {
       return
     }
 

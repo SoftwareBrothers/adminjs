@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 import { connect } from 'react-redux'
-import { TOptions } from 'i18next'
 import { addNotice } from '../store/actions/add-notice'
 
 /**
@@ -11,7 +10,7 @@ import { addNotice } from '../store/actions/add-notice'
 export type NoticeMessage = {
   message: string;
   type?: 'success' | 'error';
-  options?: TOptions;
+  options?: Record<string, any>;
   resourceId?: string;
 }
 

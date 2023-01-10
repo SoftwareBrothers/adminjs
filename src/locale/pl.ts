@@ -32,7 +32,7 @@ const translations = {
     loginWelcome: 'Witaj',
   },
   properties: {
-    length: 'Dłogość',
+    length: 'Długość',
     from: 'Od',
     to: 'Do',
   },

@@ -13,11 +13,10 @@ import { ActionDecorator } from '../../decorators'
 describe('ActionErrorHandler', function () {
   let resource: BaseResource
   let record: BaseRecord
-  let translateMessage
   let context: ActionContext
   let action: ActionDecorator
   const notice = {
-    message: 'stubbed translation message',
+    message: 'thereWereValidationErrors',
     type: 'error',
   }
   const currentAdmin = {} as CurrentAdmin
@@ -25,9 +24,9 @@ describe('ActionErrorHandler', function () {
   beforeEach(function () {
     resource = sinon.createStubInstance(BaseResource)
     record = sinon.createStubInstance(BaseRecord) as unknown as BaseRecord
-    translateMessage = sinon.stub().returns(notice.message)
+    // translateMessage = sinon.stub().returns(notice.message)
     action = { name: 'myAction' } as ActionDecorator
-    context = { resource, record, currentAdmin, translateMessage, action } as ActionContext
+    context = { resource, record, currentAdmin, action } as ActionContext
   })
 
   afterEach(function () {
@@ -38,7 +37,8 @@ describe('ActionErrorHandler', function () {
     const errors = {
       fieldWithError: {
         type: 'required', message: 'Field is required',
-      } }
+      },
+    }
     const error = new ValidationError(errors)
 
     expect(ActionErrorHandler(error, context)).to.deep.equal({
@@ -58,7 +58,8 @@ describe('ActionErrorHandler', function () {
     const errors = {
       fieldWithError: {
         type: 'required', message: 'Field is required',
-      } }
+      },
+    }
     const error = new ValidationError(errors)
     action.name = 'list'
 
