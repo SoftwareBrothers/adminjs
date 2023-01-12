@@ -19,7 +19,7 @@ const isValueSearchable = (value: any): value is string | number => (
 export async function populateProperty(
   records: Array<BaseRecord> | null,
   property: PropertyDecorator,
-  context: ActionContext,
+  context?: ActionContext,
 ): Promise<Array<BaseRecord> | null> {
   const decoratedResource = property.resource()
 

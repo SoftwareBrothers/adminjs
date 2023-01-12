@@ -135,7 +135,7 @@ class BaseRecord {
    * @param  {ActionContext}           context
    * @return {Promise<BaseRecord>}        given record (this)
    */
-  async update(params, context: ActionContext): Promise<BaseRecord> {
+  async update(params, context?: ActionContext): Promise<BaseRecord> {
     try {
       this.storeParams(params)
       const returnedParams = await this.resource.update(this.id(), params, context)
@@ -164,7 +164,7 @@ class BaseRecord {
    * @param  {ActionContext}           context
    * @return {Promise<BaseRecord>}        given record (this)
    */
-  async save(context: ActionContext): Promise<BaseRecord> {
+  async save(context?: ActionContext): Promise<BaseRecord> {
     try {
       let returnedParams
       if (this.id()) {
@@ -198,7 +198,7 @@ class BaseRecord {
    * @return {Promise<BaseRecord>}        given record (this)
    * @param  {ActionContext}           context
    */
-  async create(context: ActionContext): Promise<BaseRecord> {
+  async create(context?: ActionContext): Promise<BaseRecord> {
     try {
       const returnedParams = await this.resource.create(this.params, context)
       this.storeParams(returnedParams)

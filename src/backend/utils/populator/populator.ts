@@ -10,7 +10,7 @@ import { ActionContext } from '../../actions'
  */
 export async function populator(
   records: Array<BaseRecord>,
-  context:ActionContext,
+  context?:ActionContext,
 ): Promise<Array<BaseRecord>> {
   if (!records || !records.length) {
     return records
