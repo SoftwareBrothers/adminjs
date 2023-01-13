@@ -132,7 +132,7 @@ class BaseRecord {
    * When validation error occurs it stores that to {@link BaseResource.errors}
    *
    * @param  {object} params all field with values which has to be updated
-   * @param  {ActionContext}           context
+   * @param  {ActionContext}           [context]
    * @return {Promise<BaseRecord>}        given record (this)
    */
   async update(params, context?: ActionContext): Promise<BaseRecord> {
@@ -161,7 +161,7 @@ class BaseRecord {
    * {@link BaseResource#create} or {@link BaseResource#update} methods.
    *
    * When validation error occurs it stores that to {@link BaseResource#errors}
-   * @param  {ActionContext}           context
+   * @param  {ActionContext}           [context]
    * @return {Promise<BaseRecord>}        given record (this)
    */
   async save(context?: ActionContext): Promise<BaseRecord> {
@@ -196,7 +196,7 @@ class BaseRecord {
    *
    *
    * @return {Promise<BaseRecord>}        given record (this)
-   * @param  {ActionContext}           context
+   * @param  {ActionContext}           [context]
    */
   async create(context?: ActionContext): Promise<BaseRecord> {
     try {

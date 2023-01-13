@@ -117,7 +117,7 @@ class BaseResource {
   /**
    * Returns number of elements for given resource by including filters
    * @param  {Filter} filter        represents what data should be included
-   * @param  {ActionContext}           context
+   * @param  {ActionContext}           [context]
    * @return {Promise<Number>}
    * @abstract
    */
@@ -135,7 +135,7 @@ class BaseResource {
    * @param  {Object} [options.sort]                   sort
    * @param  {Number} [options.sort.sortBy]            sortable field
    * @param  {Number} [options.sort.direction]         either asc or desc
-   * @param  {ActionContext}           context
+   * @param  {ActionContext}           [context]
    * @return {Promise<BaseRecord[]>}                          list of records
    * @abstract
    * @example
@@ -160,7 +160,7 @@ class BaseResource {
    * Finds one Record in the Resource by its id
    *
    * @param  {String} id      uniq id of the Resource Record
-   * @param  {ActionContext}           context
+   * @param  {ActionContext}           [context]
    * @return {Promise<BaseRecord> | null}   record
    * @abstract
    */
@@ -172,7 +172,7 @@ class BaseResource {
    * Finds many records based on the resource ids
    *
    * @param   {Array<string>}          ids list of ids to find
-   * @param  {ActionContext}           context
+   * @param  {ActionContext}           [context]
    *
    * @return  {Promise<Array<BaseRecord>>} records
    */
@@ -200,7 +200,7 @@ class BaseResource {
    * Creates new record
    *
    * @param  {Record<string, any>}     params
-   * @param  {ActionContext}           context
+   * @param  {ActionContext}           [context]
    * @return {Promise<Object>}         created record converted to raw Object which
    *                                   can be used to initiate new {@link BaseRecord} instance
    * @throws {ValidationError}         If there are validation errors it should be thrown
@@ -215,7 +215,7 @@ class BaseResource {
    *
    * @param  {String} id               uniq id of the Resource Record
    * @param  {Record<string, any>}     params
-   * @param  {ActionContext}           context
+   * @param  {ActionContext}           [context]
    * @return {Promise<Object>}         created record converted to raw Object which
    *                                   can be used to initiate new {@link BaseRecord} instance
    * @throws {ValidationError}         If there are validation errors it should be thrown
@@ -230,7 +230,7 @@ class BaseResource {
    * Delete given record by id
    *
    * @param  {String | Number}           id id of the Record
-   * @param  {ActionContext}           context
+   * @param  {ActionContext}           [context]
    * @throws {ValidationError}           If there are validation errors it should be thrown
    * @abstract
    */
