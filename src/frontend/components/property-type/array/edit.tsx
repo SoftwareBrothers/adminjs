@@ -20,14 +20,12 @@ type ItemRendererProps = {
 }
 
 const ItemRenderer: React.FC<EditProps & ItemRendererProps> = (props) => {
-  const { ItemComponent, property, onDelete, index, record, isDraggable } = props
-  const uniqueDraggableId = window.btoa(unescape(encodeURIComponent(`${JSON.stringify(flat.get(record.params, property.path))}-${property.path}`)))
+  const { ItemComponent, property, onDelete, index, isDraggable } = props
 
   return (
     <Draggable
-      draggableId={uniqueDraggableId}
+      draggableId={property.path}
       index={index}
-      key={uniqueDraggableId}
       isDragDisabled={!isDraggable}
     >
       {(provided): JSX.Element => (
