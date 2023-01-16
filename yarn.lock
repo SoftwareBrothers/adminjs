@@ -2,10 +2,10 @@
 # yarn lockfile v1
 
 
-"@adminjs/design-system@^3.1.5":
-  version "3.1.5"
-  resolved "https://registry.yarnpkg.com/@adminjs/design-system/-/design-system-3.1.5.tgz#69958a623d065e9232931236e370e3aeb7cdc108"
-  integrity sha512-fd3WMuPUZngW83/VJHPQpTUJBtjwewJxtjqZ2YWuHfU4WqsE3H3Yfv65kIxePgGKHgIFAMPcwaQgWBPExB8L9g==
+"@adminjs/design-system@^3.1.6":
+  version "3.1.6"
+  resolved "https://registry.yarnpkg.com/@adminjs/design-system/-/design-system-3.1.6.tgz#1291f77b95d8cd04b942e9f1010e609267885bdb"
+  integrity sha512-taGTADhAkwoHSeXiuvxkyiJSWgXULkpsvQKhQiE6452pBHRjRC10FbG3lEHpd2ggGPFVHcwzq9CrZ8ugz7/xZg==
   dependencies:
     "@carbon/icons-react" "^11.8.0"
     "@hypnosphi/create-react-context" "^0.3.1"
@@ -2502,10 +2502,10 @@
   resolved "https://registry.yarnpkg.com/@types/estree/-/estree-0.0.39.tgz#e177e699ee1b8c22d23174caaa7422644389509f"
   integrity sha512-EYNwp3bU+98cpU4lAWYYL7Zz+2gryWH1qbdDTidVd6hkiR6weksdbMadyXKXNPEkQFhXM+hVO9ZygomHXp+AIw==
 
-"@types/flat@^0.0.28":
-  version "0.0.28"
-  resolved "https://registry.yarnpkg.com/@types/flat/-/flat-0.0.28.tgz#5c788149d85a6cf8ff5f5f000acdd912cdea4274"
-  integrity sha512-2M3R9T8Wd9yGjE24I6/pxEeNR9CtU2oErPNfZbK9K+btKpoQVPsWayMx9VGv+jIuxa9yHiQ+T3nhFfW7IS2A3Q==
+"@types/flat@5.0.1":
+  version "5.0.1"
+  resolved "https://registry.yarnpkg.com/@types/flat/-/flat-5.0.1.tgz#9d703bbfb59ad9ec9ce376bdeb93a0f85da27059"
+  integrity sha512-ykRODHi9G9exJdTZvQggsqCUtB7jqiwLHcXCjNMb7zgWx6Lc2bydIUYBG1+It6VXZVFaeROv6HqPjDCAsoPG3w==
 
 "@types/hoist-non-react-statics@*", "@types/hoist-non-react-statics@^3.3.1":
   version "3.3.1"
@@ -5166,12 +5166,10 @@ flat-cache@^3.0.4:
     flatted "^3.1.0"
     rimraf "^3.0.2"
 
-flat@^4.1.0:
-  version "4.1.1"
-  resolved "https://registry.yarnpkg.com/flat/-/flat-4.1.1.tgz#a392059cc382881ff98642f5da4dde0a959f309b"
-  integrity sha512-FmTtBsHskrU6FJ2VxCnsDb84wu9zhmO3cUX2kGFb5tuwhfXxGciiT0oRY+cck35QmG+NmGh5eLz6lLCpWTqwpA==
-  dependencies:
-    is-buffer "~2.0.3"
+flat@5.0.1:
+  version "5.0.1"
+  resolved "https://registry.yarnpkg.com/flat/-/flat-5.0.1.tgz#ed5f357d6c9e754d1fdc392b1d570426f8e013c2"
+  integrity sha512-DUYDWLlMhV9qvhjbgmhDQ3ZycXmoOKzrj4KN0+5BEat5SqTlXcXzxNgwiSN1UQHA5Z0BsgYYPelhQHVhpfqaVA==
 
 flat@^5.0.2:
   version "5.0.2"
@@ -5956,11 +5954,6 @@ is-buffer@^1.1.4:
   version "1.1.6"
   resolved "https://registry.yarnpkg.com/is-buffer/-/is-buffer-1.1.6.tgz#efaa2ea9daa0d7ab2ea13a97b2b8ad51fefbe8be"
   integrity sha512-NcdALwpXkTm5Zvvbk7owOUSvVvBKDgKP5/ewfXEznmQFfs4ZRmanOeKBTjRVjka3QFoN6XJ+9F3USqfHqTaU5w==
-
-is-buffer@~2.0.3:
-  version "2.0.5"
-  resolved "https://registry.yarnpkg.com/is-buffer/-/is-buffer-2.0.5.tgz#ebc252e400d22ff8d77fa09888821a24a658c191"
-  integrity sha512-i2R6zNFDwgEHJyQUtJEk0XFi1i0dPFn/oqjK3/vPCcDeJvW5NQ83V8QbicfF1SupOaB0h8ntgBC2YiE7dfyctQ==
 
 is-builtin-module@^3.1.0:
   version "3.2.0"

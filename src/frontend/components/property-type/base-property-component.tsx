@@ -1,6 +1,6 @@
 import { Box } from '@adminjs/design-system'
 import { ReactComponentLike } from 'prop-types'
-import React, { useMemo, useState } from 'react'
+import React, { useMemo } from 'react'
 
 import ErrorBoundary from '../app/error-boundary'
 
@@ -68,8 +68,6 @@ const BasePropertyComponent: React.FC<BasePropertyComponentProps> = (props) => {
     // path either index (for array) or subProperty name.
     path: (baseProperty as PropertyJSON).path || baseProperty.propertyPath,
   }), [baseProperty])
-  const propValue = record?.params?.[property.path]
-  const [originalValue] = useState(propValue)
 
   const testId = `property-${where}-${property.path}`
   const contentTag = getActionElementCss(resource.id, where, property.path)
