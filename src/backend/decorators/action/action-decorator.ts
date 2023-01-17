@@ -267,7 +267,7 @@ class ActionDecorator {
    * @throws  {ForbiddenError}          when user cannot perform given action
    */
   canInvokeAction(context: ActionContext): boolean {
-    const { record, records, currentAdmin, resource } = context
+    const { record, records, currentAdmin } = context
 
     if (record && this.isAccessible(currentAdmin, record)) {
       return true
@@ -281,10 +281,7 @@ class ActionDecorator {
       return true
     }
 
-    throw new ForbiddenError(this._admin.translateMessage('forbiddenError', resource.id(), {
-      actionName: this.name,
-      resourceId: resource.id(),
-    }))
+    throw new ForbiddenError('forbiddenError')
   }
 
   containerWidth(): ActionJSON['containerWidth'] {
@@ -344,9 +341,9 @@ class ActionDecorator {
       name: this.action.name,
       actionType: this.action.actionType,
       icon: this.action.icon,
-      label: this._admin.translateAction(this.action.name, resourceId),
+      label: this.action.name,
       resourceId,
-      guard: this.action.guard ? this._admin.translateMessage(this.action.guard, resourceId) : '',
+      guard: this.action.guard ? this.action.guard : '',
       showFilter: !!this.action.showFilter,
       showResourceActions: this.showResourceActions(),
       component: this.action.component,

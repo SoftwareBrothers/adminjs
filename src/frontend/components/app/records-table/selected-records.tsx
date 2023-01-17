@@ -16,7 +16,8 @@ type SelectedRecordsProps = {
 
 const SelectedRecords: React.FC<SelectedRecordsProps> = (props) => {
   const { resource, selectedRecords } = props
-  const { translateLabel } = useTranslation()
+  const translateFunctions = useTranslation()
+  const { translateLabel } = translateFunctions
   const navigate = useNavigate()
   const actionResponseHandler = useActionResponseHandler()
 
@@ -35,6 +36,7 @@ const SelectedRecords: React.FC<SelectedRecordsProps> = (props) => {
       params,
       actionResponseHandler,
       navigate,
+      translateFunctions,
     })(event)
   )
 
@@ -42,6 +44,7 @@ const SelectedRecords: React.FC<SelectedRecordsProps> = (props) => {
     actions: getBulkActionsFromRecords(selectedRecords),
     params,
     handleClick: handleActionClick,
+    translateFunctions,
   })
   const contentTag = getResourceElementCss(resource.id, 'table-caption')
   return (

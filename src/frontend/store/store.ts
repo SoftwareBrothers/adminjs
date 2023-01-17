@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 // Note: We are using legacy "createStore"
-// because AdminJS will switch to Eventrix from v7 onwards anyway
 import { combineReducers, legacy_createStore as createStore } from 'redux'
 import type { useLocation } from 'react-router'
+import { TOptions } from 'i18next'
 import {
   VERSIONS_INITIALIZE,
   SESSION_INITIALIZE,
@@ -17,7 +17,8 @@ import {
   DROP_NOTICE,
   ADD_NOTICE,
   ROUTE_CHANGED,
-  INITIAL_ROUTE } from './actions'
+  INITIAL_ROUTE,
+} from './actions'
 
 import { Assets, BrandingOptions, VersionProps } from '../../adminjs-options.interface'
 import { PageJSON, ResourceJSON } from '../interfaces'
@@ -35,6 +36,8 @@ export type NoticeMessageInState = NoticeMessage & {
   id: string;
   type: NoticeMessage['type'];
   progress: number;
+  options?: TOptions;
+  resourceId?: string;
 }
 
 export type Paths = {
@@ -110,7 +113,7 @@ const assetsReducer = (state = {}, action: {
 
 const pathsReducer = (
   state: Paths = DEFAULT_PATHS,
-  action: {type: string; data: Paths},
+  action: { type: string; data: Paths },
 ): Paths => {
   switch (action.type) {
   case PATHS_INITIALIZE:

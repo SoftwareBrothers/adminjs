@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react'
+import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
 import { MessageBox } from '@adminjs/design-system'
 
@@ -6,6 +6,7 @@ import { NoticeMessageInState, ReduxState } from '../../store/store'
 import { dropNotice } from '../../store/actions/drop-notice'
 import { setNoticeProgress } from '../../store/actions/set-notice-progress'
 import allowOverride from '../../hoc/allow-override'
+import { useTranslation } from '../../hooks'
 
 const TIME_TO_DISAPPEAR = 3
 
@@ -23,54 +24,34 @@ export type NoticeElementState = {
   progress: number;
 }
 
-export class NoticeElement extends React.Component<NoticeElementProps, NoticeElementState> {
-  private timer: NodeJS.Timeout | null
+const NoticeElement: React.FC<NoticeElementProps> = (props) => {
+  const { drop, notice, notifyProgress } = props
+  const [progress, setProgress] = useState(0)
+  const { translateMessage } = useTranslation()
 
-  constructor(props) {
-    super(props)
-    const { notice } = props
-    this.timer = null
-    this.state = {
-      progress: notice.progress || 0,
-    }
-  }
-
-  componentDidMount(): void {
-    const { drop, notice, notifyProgress } = this.props
-
-    this.timer = setInterval(() => {
-      this.setState((state) => {
-        const progress = state.progress + 100 / TIME_TO_DISAPPEAR
-        notifyProgress({ noticeId: notice.id, progress })
-        return { progress }
-      })
+  useEffect(() => {
+    const timer = setInterval(() => {
+      const _progress = progress + 100 / TIME_TO_DISAPPEAR
+      notifyProgress({ noticeId: notice.id, progress })
+      setProgress(_progress)
+      return _progress
     }, 1000)
-
     setTimeout(() => {
-      if (this.timer) {
-        clearInterval(this.timer)
+      if (timer) {
+        clearInterval(timer)
       }
       drop()
     }, 1000 * (TIME_TO_DISAPPEAR + 1))
-  }
+  }, [notice])
 
-  componentWillUnmount(): void {
-    if (this.timer) {
-      clearInterval(this.timer)
-    }
-  }
-
-  render(): ReactNode {
-    const { notice, drop } = this.props
-    return (
-      <MessageBox
-        style={{ minWidth: '480px' }}
-        message={notice.message}
-        variant={notice.type === 'success' ? 'success' : 'danger'}
-        onCloseClick={drop}
-      />
-    )
-  }
+  return (
+    <MessageBox
+      style={{ minWidth: '480px' }}
+      message={translateMessage(notice.message, notice.resourceId, notice.options)}
+      variant={notice.type === 'success' ? 'success' : 'danger'}
+      onCloseClick={drop}
+    />
+  )
 }
 
 type NoticeBoxPropsFromState = {

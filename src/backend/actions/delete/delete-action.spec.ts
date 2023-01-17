@@ -32,7 +32,6 @@ describe('DeleteAction', function () {
     beforeEach(async function () {
       data = {
         _admin: sinon.createStubInstance(AdminJS),
-        translateMessage: sinon.stub<any, string>().returns('translatedMessage'),
         h: sinon.createStubInstance(ViewHelpers),
         resource: sinon.createStubInstance(BaseResource),
         action: sinon.createStubInstance(ActionDecorator) as unknown as ActionDecorator,
@@ -99,7 +98,7 @@ describe('DeleteAction', function () {
 
           expect(actionResponse).to.have.property('notice')
           expect(actionResponse.notice).to.deep.equal({
-            message: 'translatedMessage',
+            message: 'thereWereValidationErrors',
             type: 'error',
           })
           expect(actionResponse).to.have.property('record')

@@ -130,9 +130,11 @@ class AdminJS {
   initI18n(): void {
     const language = this.options.locale?.language || locales.en.language
     const defaultTranslations = locales[language]?.translations || locales.en.translations
+    const availableLanguages = this.options.locale?.availableLanguages || [language]
     this.locale = {
       translations: combineTranslations(defaultTranslations, this.options.locale?.translations),
       language,
+      availableLanguages,
     }
     if (i18n.isInitialized) {
       i18n.addResourceBundle(this.locale.language, 'translation', this.locale.translations)
@@ -193,7 +195,7 @@ class AdminJS {
    */
   async initialize(): Promise<void> {
     if (process.env.NODE_ENV === 'production'
-        && !(process.env.ADMIN_JS_SKIP_BUNDLE === 'true')) {
+      && !(process.env.ADMIN_JS_SKIP_BUNDLE === 'true')) {
       // eslint-disable-next-line no-console
       console.log('AdminJS: bundling user components...')
       await userComponentsBundler(this, { write: true })
@@ -361,7 +363,7 @@ AdminJS.VERSION = VERSION
 AdminJS.ACTIONS = ACTIONS
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
-interface AdminJS extends TranslateFunctions {}
+interface AdminJS extends TranslateFunctions { }
 
 export const { registerAdapter } = AdminJS
 

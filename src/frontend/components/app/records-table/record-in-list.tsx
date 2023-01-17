@@ -9,7 +9,7 @@ import { ActionJSON, buildActionClickHandler, RecordJSON, ResourceJSON } from '.
 import { display } from './utils/display'
 import { ActionResponse, RecordActionResponse } from '../../../../backend/actions/action.interface'
 import mergeRecordResponse from '../../../hooks/use-record/merge-record-response'
-import { useActionResponseHandler } from '../../../hooks'
+import { useActionResponseHandler, useTranslation } from '../../../hooks'
 import { actionsToButtonGroup } from '../action-header/actions-to-button-group'
 import allowOverride from '../../../hoc/allow-override'
 import { getResourceElementCss } from '../../../utils'
@@ -30,6 +30,7 @@ const RecordInList: React.FC<RecordInListProps> = (props) => {
   } = props
   const [record, setRecord] = useState<RecordJSON>(recordFromProps)
   const navigate = useNavigate()
+  const translateFunctions = useTranslation()
 
   const handleActionCallback = useCallback((actionResponse: ActionResponse) => {
     if (actionResponse.record && !actionResponse.redirectUrl) {
@@ -63,6 +64,7 @@ const RecordInList: React.FC<RecordInListProps> = (props) => {
         params: { resourceId: resource.id, recordId: record.id },
         actionResponseHandler,
         navigate,
+        translateFunctions,
       })(event)
     }
   }
@@ -75,6 +77,7 @@ const RecordInList: React.FC<RecordInListProps> = (props) => {
       params: actionParams,
       actionResponseHandler,
       navigate,
+      translateFunctions,
     })(event)
   )
 
@@ -87,6 +90,7 @@ const RecordInList: React.FC<RecordInListProps> = (props) => {
       actions: recordActions,
       params: actionParams,
       handleClick: handleActionClick,
+      translateFunctions,
     }),
   }]
   const contentTag = getResourceElementCss(resource.id, 'table-row')

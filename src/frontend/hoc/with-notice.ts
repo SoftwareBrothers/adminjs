@@ -10,6 +10,8 @@ import { addNotice } from '../store/actions/add-notice'
 export type NoticeMessage = {
   message: string;
   type?: 'success' | 'error';
+  options?: Record<string, any>;
+  resourceId?: string;
 }
 
 /**

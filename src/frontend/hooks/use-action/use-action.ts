@@ -5,6 +5,7 @@ import { ActionJSON, buildActionCallApiTrigger, buildActionClickHandler } from '
 import { DifferentActionParams, ActionCallCallback, UseActionResult } from './use-action.types'
 import { actionHref } from '../../interfaces/action/action-href'
 import { useActionResponseHandler } from './use-action-response-handler'
+import { useTranslation } from '../use-translation'
 
 /**
  * @load ./use-action.doc.md
@@ -23,6 +24,7 @@ export function useAction<K extends ActionResponse>(
   onActionCall?: ActionCallCallback,
 ): UseActionResult<K> {
   const navigate = useNavigate()
+  const translateFunctions = useTranslation()
 
   const actionResponseHandler = useActionResponseHandler(onActionCall)
 
@@ -39,6 +41,7 @@ export function useAction<K extends ActionResponse>(
     params,
     actionResponseHandler,
     navigate,
+    translateFunctions,
   })
 
   return {
