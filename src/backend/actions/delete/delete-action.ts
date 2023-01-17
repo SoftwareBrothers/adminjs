@@ -28,15 +28,15 @@ export const DeleteAction: Action<RecordActionResponse> = {
    * @implements ActionHandler
    * @memberof module:DeleteAction
    */
-  handler: async (request, response, data) => {
-    const { record, resource, currentAdmin, h, translateMessage } = data
+  handler: async (request, response, context) => {
+    const { record, resource, currentAdmin, h, translateMessage } = context
     if (!request.params.recordId || !record) {
       throw new NotFoundError([
         'You have to pass "recordId" to Delete Action',
       ].join('\n'), 'Action#handler')
     }
     try {
-      await resource.delete(request.params.recordId)
+      await resource.delete(request.params.recordId, context)
     } catch (error) {
       if (error instanceof ValidationError) {
         const baseMessage = error.baseError?.message

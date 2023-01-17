@@ -1,5 +1,6 @@
 import { BaseRecord } from '../../adapters'
 import PropertyDecorator from '../../decorators/property/property-decorator'
+import { ActionContext } from '../../actions'
 
 const isValueSearchable = (value: any): value is string | number => (
   ['string', 'bigint', 'number'].includes(typeof value)
@@ -11,12 +12,14 @@ const isValueSearchable = (value: any): value is string | number => (
  *
  * @param {Array<BaseRecord>} records   array of records to populate
  * @param {PropertyDecorator} property  Decorator for the reference property to populate
+ * @param context
  * @private
  * @hide
  */
 export async function populateProperty(
   records: Array<BaseRecord> | null,
   property: PropertyDecorator,
+  context?: ActionContext,
 ): Promise<Array<BaseRecord> | null> {
   const decoratedResource = property.resource()
 
@@ -71,7 +74,7 @@ export async function populateProperty(
   }
 
   // now find all referenced records: all users
-  const referenceRecords = await referencedResource.findMany(uniqueExternalIds)
+  const referenceRecords = await referencedResource.findMany(uniqueExternalIds, context)
 
   // even if record has value for this reference - it might not have the referenced record itself
   // this happens quite often in mongodb where there are no constrains on the database

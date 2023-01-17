@@ -26,8 +26,8 @@ export const SearchAction: Action<SearchActionResponse> = {
    * @return  {Promise<SearchResponse>}  populated record
    * @implements ActionHandler
    */
-  handler: async (request, response, data) => {
-    const { currentAdmin, resource } = data
+  handler: async (request, response, context) => {
+    const { currentAdmin, resource } = context
     const { query } = request
 
     const decorated = resource.decorate()
@@ -56,7 +56,7 @@ export const SearchAction: Action<SearchActionResponse> = {
         sortBy,
         direction,
       },
-    })
+    }, context)
 
     return {
       records: records.map((record) => record.toJSON(currentAdmin)),

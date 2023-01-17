@@ -2,6 +2,7 @@ import { flat } from '../../../utils/flat'
 import BaseProperty from '../../adapters/property/base-property'
 import BaseResource from '../../adapters/resource/base-resource'
 import BaseRecord from '../../adapters/record/base-record'
+import { ActionContext } from '../../actions'
 
 export const PARAM_SEPARATOR = '~~'
 
@@ -83,15 +84,14 @@ export class Filter {
   /**
    * Populates all filtered properties which refers to other resources
    */
-  async populate(): Promise<Filter> {
+  async populate(context: ActionContext): Promise<Filter> {
     const keys = Object.keys(this.filters)
     for (let index = 0; index < keys.length; index += 1) {
       const key = keys[index]
       const referenceResource = this.resource.decorate().getPropertyByKey(key)?.reference()
       if (referenceResource) {
-        this.filters[key].populated = await referenceResource.findOne(
-          this.filters[key].value as string,
-        )
+        const value = this.filters[key].value as string
+        this.filters[key].populated = await referenceResource.findOne(value, context)
       }
     }
     return this

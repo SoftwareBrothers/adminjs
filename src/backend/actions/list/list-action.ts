@@ -1,5 +1,5 @@
 import { flat } from '../../../utils/flat'
-import { Action, ActionResponse, ActionQueryParameters } from '../action.interface'
+import { Action, ActionQueryParameters, ActionResponse } from '../action.interface'
 import sortSetter from '../../services/sort-setter/sort-setter'
 import Filter from '../../utils/filter/filter'
 import populator from '../../utils/populator/populator'
@@ -54,19 +54,20 @@ export const ListAction: Action<ListActionResponse> = {
       )
     }
 
-    const filter = await new Filter(filters, resource).populate()
+    const filter = await new Filter(filters, resource).populate(context)
 
+    const { currentAdmin } = context
     const records = await resource.find(filter, {
       limit: perPage,
       offset: (page - 1) * perPage,
       sort,
-    })
-    const populatedRecords = await populator(records)
+    }, context)
+    const populatedRecords = await populator(records, context)
 
     // eslint-disable-next-line no-param-reassign
     context.records = populatedRecords
 
-    const total = await resource.count(filter)
+    const total = await resource.count(filter, context)
     return {
       meta: {
         total,
@@ -75,7 +76,7 @@ export const ListAction: Action<ListActionResponse> = {
         direction: sort?.direction,
         sortBy: sort?.sortBy,
       },
-      records: populatedRecords.map((r) => r.toJSON(context.currentAdmin)),
+      records: populatedRecords.map((r) => r.toJSON(currentAdmin)),
     }
   },
 }

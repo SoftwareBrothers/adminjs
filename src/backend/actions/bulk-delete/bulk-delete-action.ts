@@ -39,7 +39,7 @@ export const BulkDeleteAction: Action<BulkActionResponse> = {
       }
     }
     if (request.method === 'post') {
-      await Promise.all(records.map((record) => resource.delete(record.id())))
+      await Promise.all(records.map((record) => resource.delete(record.id(), context)))
       return {
         records: records.map((record) => record.toJSON(context.currentAdmin)),
         notice: {
