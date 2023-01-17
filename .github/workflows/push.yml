@@ -76,6 +76,7 @@ jobs:
           || contains(github.ref, 'refs/heads/master')
           || contains(github.ref, 'refs/heads/next-major')
           || contains(github.ref, 'refs/heads/beta')
+          || contains(github.ref, 'refs/heads/alpha')
           || contains(github.ref, 'refs/heads/dev')
         uses: actions/upload-artifact@v1
         with:
@@ -87,6 +88,7 @@ jobs:
           || contains(github.ref, 'refs/heads/master')
           || contains(github.ref, 'refs/heads/next-major')
           || contains(github.ref, 'refs/heads/beta')
+          || contains(github.ref, 'refs/heads/alpha')
           || contains(github.ref, 'refs/heads/dev')
         uses: actions/upload-artifact@v1
         with:
@@ -98,6 +100,7 @@ jobs:
           || contains(github.ref, 'refs/heads/master')
           || contains(github.ref, 'refs/heads/next-major')
           || contains(github.ref, 'refs/heads/beta')
+          || contains(github.ref, 'refs/heads/alpha')
           || contains(github.ref, 'refs/heads/dev')
         uses: actions/upload-artifact@v1
         with:
@@ -239,6 +242,7 @@ jobs:
         || contains(github.ref, 'refs/heads/master')
         || contains(github.ref, 'refs/heads/next-major')
         || contains(github.ref, 'refs/heads/beta')
+        || contains(github.ref, 'refs/heads/alpha')
         || contains(github.ref, 'refs/heads/dev')
       )
     needs:

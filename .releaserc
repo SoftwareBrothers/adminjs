@@ -11,6 +11,10 @@
     {
       "name": "dev",
       "prerelease": true
+    },
+    {
+      "name": "alpha",
+      "prerelease": true
     }
   ],
   "plugins": [
