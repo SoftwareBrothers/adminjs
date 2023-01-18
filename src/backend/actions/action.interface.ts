@@ -244,7 +244,7 @@ export type After<T> = (
    * Invocation context
    */
   context: ActionContext,
-) => Promise<T>
+) => T | Promise<T>
 
 export type BuildInActions =
   'show' |
