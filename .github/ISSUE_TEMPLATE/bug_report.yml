@@ -34,6 +34,14 @@ body:
       placeholder: "Example: Whenever I visit the personal account page (1-2 times a week)"
     validations:
       required: true
+  - type: input
+    id: version
+    attributes:
+      label: AdminJS version
+      description: "on which version you encounter this bug?"
+      placeholder: "copy exact version that u are currently using"
+    validations:
+      required: true
   - type: dropdown
     id: browsers
     attributes:
