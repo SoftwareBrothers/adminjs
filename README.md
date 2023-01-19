@@ -49,7 +49,7 @@ And all these cases can be solved by AdminJS. By adding couple of lines of code 
 
 ## Contribute
 
-If you would like work on an AdminJS and develop new features please see our [Contribution Guide](https://github.com/SoftwareBrothers/adminjs/blob/master/CONTRIBUTING.md)
+If you would like work on an AdminJS and develop new features please check out our [Contribution Guide](https://github.com/SoftwareBrothers/adminjs/blob/master/CONTRIBUTING.md)
 
 There you can find instructions on how to run AdminJS locally for development.
 
