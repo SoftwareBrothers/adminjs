@@ -1,6 +1,6 @@
 # AdminJS
 
-[AdminJS](https://softwarebrothers.github.io/adminjs-dev/) is an automatic admin interface that can be plugged into your application. You, as a developer, provide database models (like posts, comments, stores, products or whatever else your application uses), and AdminJS generates UI which allows you (or other trusted users) to manage content.
+[AdminJS](https://adminjs.co/) is an automatic admin interface that can be plugged into your application. You, as a developer, provide database models (like posts, comments, stores, products or whatever else your application uses), and AdminJS generates UI which allows you (or other trusted users) to manage content.
 
 Inspired by: [django admin](https://docs.djangoproject.com), [rails admin](https://github.com/sferik/rails_admin) and [active admin](https://activeadmin.info/).
 
@@ -12,27 +12,26 @@ Inspired by: [django admin](https://docs.djangoproject.com), [rails admin](https
 
 Check out the example application with mongodb and postgres models here:
 
-- login: `admin@example.com`
-- password: `password`
+- Login: `admin@example.com`
+- Password: `password`
 
 https://adminjs-demo.herokuapp.com
 
 ## Getting started
 
-- Check out the [documentation](https://adminjs.co)
-- Try the [live demo](https://admin-bro-example-app-staging.herokuapp.com/admin/login) as mentioned above
+- Check out the [documentation](https://docs.adminjs.co)
+- Try the [live demo](https://demo.adminjs.co) as mentioned above
 
-## OpenSource SoftwareBrothers community
+## Our open source community on Slack
 
 - [Join the community](https://adminjs.page.link/slack) to get help and be inspired.
-- subscribe to our [newsletter](http://opensource.softwarebrothers.co)
 
 # What kind of problems it solves
 
 So you have a working service built in Node.js. It uses (for example) [Hapi.js](https://hapijs.com/) for rendering a couple of REST routes and [mongoose](https://mongoosejs.com/) as the _connector_ to the database.
 
 Everything works fine, but now you would like to:
-* see all the data in the app,
+* view all the data in the app,
 * perform custom _business_ actions on objects in the database,
 * bootstrap the tables with the _initial_ data,
 * build custom report pages,
@@ -50,19 +49,19 @@ And all these cases can be solved by AdminJS. By adding couple of lines of code 
 
 ## Contribute
 
-If you would like work on an adminjs and develop new features - take a look at our dev repository: https://github.com/SoftwareBrothers/adminjs-dev
+If you would like work on an AdminJS and develop new features please see our [Contribution Guide](https://github.com/SoftwareBrothers/adminjs/blob/master/CONTRIBUTING.md)
 
-You can find there instructions on how to run adminjs for development.
+There you can find instructions on how to run AdminJS locally for development.
 
 ## License
 
-AdminJS is Copyright © 2021 SoftwareBrothers.co. It is free software, and may be redistributed under the terms specified in the [LICENSE](LICENSE.md) file.
+AdminJS is Copyright © 2023 rst.software. It is a free software, and may be redistributed under the terms specified in the [LICENSE](LICENSE.md) file.
 
-## About SoftwareBrothers.co
+## About rst.software
 
-<img src="https://softwarebrothers.co/assets/images/software-brothers-logo-full.svg" width=240>
+<img src="https://pbs.twimg.com/profile_images/1367119173604810752/dKVlj1YY_400x400.jpg" width=150>
 
 We’re an open, friendly team that helps clients from all over the world to transform their businesses and create astonishing products.
 
-* We are available for [hire](https://softwarebrothers.co/contact).
-* If you want to work for us - check out the [career page](https://softwarebrothers.co/career).
+* We are available for [hire](https://www.rst.software/estimate-your-project).
+* If you want to work for us - check out the [career page](https://www.rst.software/join-us).
