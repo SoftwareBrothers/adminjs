@@ -55,7 +55,7 @@ There you can find instructions on how to run AdminJS locally for development.
 
 ## License
 
-AdminJS is Copyright © 2023 rst.software. It is a free software, and may be redistributed under the terms specified in the [LICENSE](LICENSE.md) file.
+AdminJS is copyrighted © 2023 rst.software. It is a free software, and may be redistributed under the terms specified in the [LICENSE](LICENSE.md) file.
 
 ## About rst.software
 
