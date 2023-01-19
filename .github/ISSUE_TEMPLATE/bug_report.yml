@@ -45,7 +45,7 @@ body:
   - type: dropdown
     id: browsers
     attributes:
-      label: What browsers do you see the problem occured?
+      label: What browsers do you see the problem on?
       multiple: true
       options:
         - Firefox
