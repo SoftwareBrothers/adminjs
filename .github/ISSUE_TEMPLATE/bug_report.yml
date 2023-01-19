@@ -1,0 +1,66 @@
+name: Bug Report
+description: File a bug report
+title: "[Bug]: "
+labels: ["bug", "triage"]
+assignees:
+  - octocat
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to fill out this bug report!
+  - type: input
+    id: contact
+    attributes:
+      label: Contact Details
+      description: How can we get in touch with you if we need more info?
+      placeholder: Please visit our slack channel [slack](https://adminjs.page.link/slack) or leave your email.
+    validations:
+      required: false
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened?
+      description: Also tell us, what did you expect to happen?
+      placeholder: Tell us what you see!
+      value: "List what you are trying to do?"
+    validations:
+      required: true
+  - type: input
+    id: prevalence
+    attributes:
+      label: Bug prevalence
+      description: "How often do you or others encounter this bug?"
+      placeholder: "Example: Whenever I visit the personal account page (1-2 times a week)"
+    validations:
+      required: true
+  - type: textarea
+    id: versions
+    attributes:
+      label: AdminJS dependencies version
+      description: "Provide to us a list of dependencies from package.json "
+      placeholder: "Copy exact versions of plugins that you are currently using"
+    validations:
+      required: true
+  - type: dropdown
+    id: browsers
+    attributes:
+      label: What browsers do you see the problem on?
+      multiple: true
+      options:
+        - Firefox
+        - Chrome
+        - Safari
+        - Microsoft Edge
+  - type: textarea
+    id: logs
+    attributes:
+      label: Relevant log output
+      description: Please copy and paste any relevant log output or drag&drop screenshot of code. This will be automatically formatted into code, so no need for backticks.
+      render: bash
+  - type: textarea
+    id: code
+    attributes:
+      label: Relevant code that's giving you issues
+      description: Please copy and paste any relevant code or drag&drop screenshot of code. This will be automatically formatted into code, so no need for backticks.
+      render: TypeScript
