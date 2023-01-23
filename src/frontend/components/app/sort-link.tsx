@@ -19,7 +19,7 @@ const SortLink: React.FC<SortLinkProps> = (props) => {
 
   const query = new URLSearchParams(location.search)
   const oppositeDirection = (isActive && direction === 'asc') ? 'desc' : 'asc'
-  const sortedByIcon = `Caret${direction === 'asc' ? 'Up' : 'Down'}`
+  const sortedByIcon = `Arrow${direction === 'asc' ? 'Up' : 'Down'}`
 
   query.set('direction', oppositeDirection)
   query.set('sortBy', property.propertyPath)

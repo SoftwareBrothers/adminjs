@@ -18,7 +18,7 @@ const PropertyDescription: React.FC<PropertyDescriptionProps> = (props) => {
     <Box mx="sm" display="inline-flex">
       <Tooltip direction={direction} title={property.description} size="lg">
         <Box>
-          <Icon icon="Help" color="info" />
+          <Icon icon="HelpCircle" color="info" />
         </Box>
       </Tooltip>
     </Box>

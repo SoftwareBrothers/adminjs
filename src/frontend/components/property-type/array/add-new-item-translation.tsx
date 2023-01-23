@@ -22,7 +22,7 @@ const AddNewItemButton: React.FC<AddNewItemButtonProps> = (props) => {
 
   return (
     <Box>
-      <Icon icon="Add" />
+      <Icon icon="Plus" />
       {label}
     </Box>
   )

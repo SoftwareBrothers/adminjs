@@ -79,7 +79,7 @@ const RecordInList: React.FC<RecordInListProps> = (props) => {
   )
 
   const buttons = [{
-    icon: 'OverflowMenuHorizontal',
+    icon: 'MoreHorizontal',
     variant: 'light' as const,
     label: undefined,
     'data-testid': 'actions-dropdown',

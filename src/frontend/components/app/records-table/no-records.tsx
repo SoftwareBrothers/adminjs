@@ -24,7 +24,7 @@ const NoRecordsOriginal: React.FC<NoRecordsProps> = (props) => {
       {canCreate ? (
         <ActionButton action={canCreate} resourceId={resource.id}>
           <Button variant="primary">
-            <Icon icon="Add" />
+            <Icon icon="Plus" />
             {translateButton('createFirstRecord', resource.id)}
           </Button>
         </ActionButton>

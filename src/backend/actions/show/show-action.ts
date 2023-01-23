@@ -14,7 +14,7 @@ export const ShowAction: Action<RecordActionResponse> = {
   name: 'show',
   isVisible: true,
   actionType: 'record',
-  icon: 'Screen',
+  icon: 'Monitor',
   showInDrawer: false,
   /**
    * Responsible for returning data for given record.

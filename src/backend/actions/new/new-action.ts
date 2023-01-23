@@ -15,7 +15,7 @@ export const NewAction: Action<RecordActionResponse> = {
   name: 'new',
   isVisible: true,
   actionType: 'resource',
-  icon: 'Add',
+  icon: 'Plus',
   showInDrawer: false,
   variant: 'primary',
   /**
