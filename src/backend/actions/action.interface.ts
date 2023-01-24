@@ -197,13 +197,13 @@ export type BulkActionResponse = ActionResponse & {
  * @alias ActionHandler
  * @async
  * @memberof Action
- * @returns {Promise<T>}
+ * @returns {T | Promise<T>}
  */
 export type ActionHandler<T> = (
   request: ActionRequest,
   response: any,
   context: ActionContext
-) => Promise<T>
+) => T | Promise<T>
 
 /**
  * Before action hook. When it is given - it is performed before the {@link ActionHandler}
