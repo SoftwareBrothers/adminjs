@@ -103,18 +103,18 @@ const FilterDrawer: React.FC<FilterProps> = (props) => {
   return (
     <Drawer variant="filter" isHidden={!isVisible} as="form" onSubmit={handleSubmit} data-css={contentTag}>
       <DrawerContent data-css={cssContent}>
-        <H3>
+        <Box flex justifyContent="flex-end">
           <Button
+            variant="light"
             type="button"
             size="icon"
             rounded
             mr="lg"
             onClick={(): void => toggleFilter()}
           >
-            <Icon icon="ChevronRight" color="white" />
+            <Icon icon="X" color="grey80" />
           </Button>
-          {translateLabel('filters', resource.id)}
-        </H3>
+        </Box>
         <Box my="x3">
           {properties.map((property) => (
             <PropertyType

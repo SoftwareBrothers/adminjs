@@ -42,7 +42,7 @@ const Edit: React.FC<EditPropertyProps> = (props) => {
           size="icon"
           onClick={() => setIsInput(!isInput)}
         >
-          <Icon icon="Eye" />
+          <Icon icon="Eye" color="primary100" />
         </Button>
       </InputGroup>
       <FormMessage>{error && error.message}</FormMessage>
