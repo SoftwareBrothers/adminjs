@@ -165,7 +165,7 @@ jobs:
       - name: Check directories exists
         uses: andstor/file-existence-action@v2
         with:
-          files: "bundle/, libs/, types/"
+          files: "bundle/, lib/, types/"
           fail: true
       - name: Release
         env:
