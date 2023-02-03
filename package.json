@@ -156,7 +156,7 @@
     "require.all": "^2.0.4",
     "rollup-plugin-node-builtins": "^2.1.2",
     "rollup-plugin-node-globals": "^1.4.0",
-    "semantic-release": "^17.0.7",
+    "semantic-release": "^19.0.3",
     "semantic-release-jira-releases-sb": "^0.7.2",
     "semantic-release-slack-bot": "^1.6.2",
     "sinon": "^9.0.3",
