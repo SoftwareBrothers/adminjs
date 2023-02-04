@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { combineStyles } from '@adminjs/design-system'
+import merge from 'lodash/merge'
 
 import ViewHelpers from '../backend/utils/view-helpers/view-helpers.js'
 import { initializeStore } from './store/index.js'
@@ -23,11 +24,11 @@ const html = async (admin: AdminJS, currentAdmin?: CurrentAdmin, location = '/')
   const store = await initializeStore(admin, currentAdmin)
   const reduxState = store.getState()
 
-  const { branding, assets, locale } = reduxState
+  const { branding, assets, locale, theme: selectedTheme } = reduxState
 
   const scripts = ((assets?.scripts) || []).map((s) => `<script src="${s}"></script>`)
   const styles = ((assets?.styles) || []).map((l) => `<link rel="stylesheet" type="text/css" href="${l}">`)
-  const theme = combineStyles(branding.theme || {})
+  const theme = combineStyles(merge({}, selectedTheme?.data, branding.theme))
   const faviconTag = getFaviconFromBranding(branding)
 
   return `
@@ -50,7 +51,6 @@ const html = async (admin: AdminJS, currentAdmin?: CurrentAdmin, location = '/')
       <script src="${h.assetPath('design-system.bundle.js', assets)}"></script>
       <script src="${h.assetPath('app.bundle.js', assets)}"></script>
       <script src="${h.assetPath('components.bundle.js', assets)}"></script>
-      ${styles.join('\n')}
       <style>
       /* http://meyerweb.com/eric/tools/css/reset/
       v4.0 | 20180602
@@ -114,6 +114,9 @@ const html = async (admin: AdminJS, currentAdmin?: CurrentAdmin, location = '/')
         isolation: isolate;
       }
       </style>
+      ${selectedTheme ? `<script src="${h.assetPath(`themes/${selectedTheme.id}/theme.bundle.js`, assets)}"></script>` : ''}
+      ${styles.join('\n')}
+      ${selectedTheme ? `<link rel="stylesheet" type="text/css" href="${h.assetPath(`themes/${selectedTheme.id}/style.css`, assets)}">` : ''}
     </head>
     <body>
       <div id="app" />

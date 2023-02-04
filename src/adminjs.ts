@@ -19,6 +19,7 @@ import { ListActionResponse } from './backend/actions/list/list-action.js'
 import { defaultLocale, Locale } from './locale/index.js'
 import { TranslateFunctions } from './utils/translate-functions.factory.js'
 import { relativeFilePathResolver } from './utils/file-resolver.js'
+import { Router } from './backend/utils/index.js'
 import { ComponentLoader } from './backend/utils/component-loader.js'
 import { OverridableComponent } from './frontend/index.js'
 
@@ -123,6 +124,8 @@ class AdminJS {
 
     const resourcesFactory = new ResourcesFactory(this, global.RegisteredAdapters || [])
     this.resources = resourcesFactory.buildResources({ databases, resources })
+
+    this.addThemeAssets()
   }
 
   /**
@@ -297,6 +300,19 @@ class AdminJS {
     const name = componentName ?? `Component${this.__unsafe_componentIndex++}`
     this.__unsafe_staticComponentLoader.__unsafe_addWithoutChecks(name, src, 'bundle')
     return name
+  }
+
+  addThemeAssets() {
+    this.options.availableThemes?.forEach((theme) => {
+      Router.assets.push({
+        path: `/frontend/assets/themes/${theme.id}/theme.bundle.js`,
+        src: theme.bundlePath,
+      })
+      Router.assets.push({
+        path: `/frontend/assets/themes/${theme.id}/style.css`,
+        src: theme.stylePath,
+      })
+    })
   }
 
   private static __unsafe_componentIndex = 0

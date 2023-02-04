@@ -22,7 +22,7 @@ import {
   DRAWER_PREROUTE_SET,
   SetDrawerPreRouteResponse,
 } from './actions/index.js'
-import { Assets, BrandingOptions, VersionProps } from '../../adminjs-options.interface.js'
+import { Assets, BrandingOptions, ThemeConfig, VersionProps } from '../../adminjs-options.interface.js'
 import { PageJSON, ResourceJSON } from '../interfaces/index.js'
 import { DEFAULT_PATHS } from '../../constants.js'
 import { CurrentAdmin } from '../../current-admin.interface.js'
@@ -109,6 +109,17 @@ const assetsReducer = (state = {}, action: {
 }) => {
   switch (action.type) {
   case ASSETS_INITIALIZE:
+    return action.data
+  default: return state
+  }
+}
+
+const themeReducer = (state: ThemeConfig | null = null, action: {
+  type: string;
+  data: ThemeConfig | null;
+}) => {
+  switch (action.type) {
+  case 'THEME_INITIALIZE':
     return action.data
   default: return state
   }
@@ -237,6 +248,7 @@ export type ReduxState = {
   resources: Array<ResourceJSON>;
   branding: BrandingOptions;
   assets: Assets;
+  theme: ThemeConfig | null;
   paths: Paths;
   session: CurrentAdmin | null;
   dashboard: DashboardInState;
@@ -253,6 +265,7 @@ const reducer = combineReducers<ReduxState>({
   resources: resourcesReducer,
   branding: brandingReducer,
   assets: assetsReducer,
+  theme: themeReducer,
   paths: pathsReducer,
   session: sessionReducer,
   dashboard: dashboardReducer,

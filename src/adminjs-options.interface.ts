@@ -251,6 +251,25 @@ export interface AdminJSOptions {
    * Additional settings.
    */
   settings?: Partial<AdminJSSettings>;
+
+  /**
+   * List of available themes, for example exports of the `@adminjs/themes` npm package.
+   */
+  availableThemes?: ThemeConfig[];
+
+  /**
+   * ID of the default theme. If not provided, the first theme from the `availableThemes`
+   * list will be used.
+   */
+  defaultTheme?: string;
+}
+
+export type ThemeConfig = {
+  id: string,
+  name: string,
+  data: Partial<ThemeOverride>;
+  bundlePath: string;
+  stylePath: string;
 }
 
 export type AdminJSSettings = {
