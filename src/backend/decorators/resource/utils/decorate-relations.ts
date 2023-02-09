@@ -1,12 +1,13 @@
 import mergeWith from 'lodash/mergeWith'
 
-import { ResourceDecorator } from '..'
+import { RelationOptions, ResourceDecorator } from '..'
 import AdminJS from '../../../../adminjs'
-import { Action, ActionResponse, ACTIONS } from '../../../actions'
-import { BaseResource } from '../../../adapters'
-import { ActionDecorator } from '../../action'
 
-export type DecoratedActions = {[key: string]: ActionDecorator}
+import { BaseResource } from '../../../adapters'
+
+export type DecoratedRelations = {
+  [key: string]: RelationOptions;
+}
 
 function mergeCustomizer<T>(destValue: T | Array<T>, sourceValue: T | Array<T>): void {
   if (Array.isArray(destValue)) {
@@ -22,32 +23,25 @@ function mergeCustomizer<T>(destValue: T | Array<T>, sourceValue: T | Array<T>):
  * @returns {Record<string, ActionDecorator>}
  * @private
  */
-export function decorateActions(
+export function decorateRelations(
   resource: BaseResource,
   admin: AdminJS,
   decorator: ResourceDecorator,
-): DecoratedActions {
+): DecoratedRelations {
   const { options } = decorator
   // in the end we merge actions defined by the user with the default actions.
   // since _.merge is a deep merge it also overrides defaults with the parameters
   // specified by the user.
-  const actions = mergeWith({}, ACTIONS, options.actions || {}, mergeCustomizer)
-  const returnActions = {}
-  // setting default values for actions
-  Object.keys(actions).forEach((key: string) => {
-    const action: Action<ActionResponse> = {
-      name: actions[key].name || key,
-      label: actions[key].label || key,
-      actionType: actions[key].actionType || ['resource'],
-      ...actions[key],
-    }
+  const relations = mergeWith({}, options.relations || {}, mergeCustomizer)
 
-    returnActions[key] = new ActionDecorator({
-      action,
-      admin,
-      resource,
-    })
-  })
-
-  return returnActions
+  return Object.entries(relations)
+    .reduce((memo: DecoratedRelations, [name, info]) => ({
+      ...memo,
+      [name]: {
+        relationName: name,
+        relationType: info.relationType,
+        target: info.target,
+        junction: info.junction,
+      },
+    }), {})
 }

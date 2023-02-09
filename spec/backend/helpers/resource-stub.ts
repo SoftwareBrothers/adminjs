@@ -67,6 +67,7 @@ export default (): BaseResource => ({
   create: sinon.stub(),
   update: sinon.stub(),
   delete: sinon.stub(),
+  findRelations: sinon.stub(),
   assignDecorator: sinon.stub(),
   decorate: sinon.stub(),
 })

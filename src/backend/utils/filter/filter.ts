@@ -49,8 +49,21 @@ export class Filter {
    *
    * @return  {Object}
    */
-  static normalizeKeys(filters): Map<string, any> {
-    return flat.unflatten(flat.flatten(filters), { delimiter: PARAM_SEPARATOR })
+  static normalizeKeys(filters: Record<string, any>): Map<string, any> {
+    const nonArrayFilters = Object.keys(filters).reduce((memo, key) => {
+      if (Array.isArray(filters[key])) return memo
+      memo[key] = filters[key]
+      return memo
+    }, {})
+    const arrayFilters = Object.keys(filters).reduce((memo, key) => {
+      if (!Array.isArray(filters[key])) return memo
+      memo[key] = filters[key]
+      return memo
+    }, {})
+    return {
+      ...flat.unflatten(flat.flatten(nonArrayFilters), { delimiter: PARAM_SEPARATOR }),
+      ...arrayFilters,
+    }
   }
 
   /**
@@ -60,7 +73,11 @@ export class Filter {
   constructor(filters = {}, resource) {
     this.resource = resource
     const normalized = Filter.normalizeKeys(filters)
+    console.log('all filters', filters)
+    console.log('normalized filters', normalized)
     this.filters = Object.keys(normalized).reduce((memo, path) => {
+      console.log(this.resource.property(path))
+
       memo[path] = {
         path,
         property: this.resource.property(path),

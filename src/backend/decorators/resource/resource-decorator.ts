@@ -5,7 +5,7 @@ import { PropertyDecorator, ActionDecorator } from '..'
 import ViewHelpers from '../../utils/view-helpers/view-helpers'
 import AdminJS from '../../../adminjs'
 
-import { ResourceOptions } from './resource-options.interface'
+import { ResourceOptions, RelationOptions } from './resource-options.interface'
 import { CurrentAdmin } from '../../../current-admin.interface'
 import { ResourceJSON, PropertyPlace } from '../../../frontend/interfaces'
 import {
@@ -15,6 +15,8 @@ import {
   flatSubProperties,
   DecoratedProperties,
   getPropertyByKey,
+  decorateRelations,
+  DecoratedRelations,
 } from './utils'
 
 /**
@@ -53,6 +55,8 @@ class ResourceDecorator {
   public options: ResourceOptions
 
   public actions: DecoratedActions
+
+  public relations: DecoratedRelations
 
   private _resource: BaseResource
 
@@ -95,6 +99,9 @@ class ResourceDecorator {
      * @type {Object<String, ActionDecorator>}
      */
     this.actions = decorateActions(resource, admin, this)
+
+    this.options.relations = options.relations ?? {}
+    this.relations = decorateRelations(resource, admin, this)
   }
 
   /**

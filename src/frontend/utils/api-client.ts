@@ -181,6 +181,21 @@ class ApiClient {
     return response
   }
 
+  async relations(
+    options: Omit<RecordActionAPIParams, 'actionName'> & { relationName: string },
+  ): Promise<AxiosResponse<ActionResponse>> {
+    const { resourceId, recordId, relationName, data, ...axiosParams } = options
+    const url = `/api/resources/${resourceId}/records/${recordId}/relations/${encodeURIComponent(relationName)}`
+    const response = await this.client.request({
+      url,
+      method: 'GET',
+      ...axiosParams,
+      data,
+    })
+    checkResponse(response)
+    return response
+  }
+
   /**
    * Invokes given record {@link Action} on the backend.
    *

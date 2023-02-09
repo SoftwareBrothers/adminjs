@@ -6,6 +6,24 @@ import BaseResource from '../../adapters/resource/base-resource'
 import ViewHelpers from '../../utils/view-helpers/view-helpers'
 import { SearchActionResponse } from '../../actions/search/search-action'
 
+export type RelationJunctionOptions = {
+  resourceId: string;
+  joinKey: string;
+  inverseJoinKey: string;
+};
+
+export type RelationTargetOptions = {
+  resourceId: string;
+  joinKey?: string;
+}
+
+export type RelationOptions = {
+  relationType: 'one-to-many' | 'many-to-many';
+  relationName: string;
+  target: RelationTargetOptions;
+  junction?: RelationJunctionOptions;
+}
+
 /**
  * @alias HrefContext
  * @memberof ResourceOptions
@@ -122,5 +140,9 @@ export interface ResourceOptions {
     search?: Partial<Action<SearchActionResponse>>;
   } | {
     [key: string]: Partial<Action<ActionResponse>>;
+  };
+
+  relations?: {
+    [relationName: string]: Omit<RelationOptions, 'relationName'>;
   };
 }

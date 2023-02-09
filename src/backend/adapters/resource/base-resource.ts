@@ -5,7 +5,7 @@
 import { SupportedDatabasesType } from './supported-databases.type'
 import { BaseProperty, BaseRecord, ParamsType } from '..'
 import { NotImplementedError, Filter } from '../../utils'
-import { ResourceOptions, ResourceDecorator } from '../../decorators'
+import { ResourceOptions, ResourceDecorator, RelationOptions } from '../../decorators'
 import AdminJS from '../../../adminjs'
 import { ActionContext } from '../../actions'
 
@@ -36,6 +36,8 @@ import { ActionContext } from '../../actions'
  * @hideconstructor
  */
 class BaseResource {
+  protected _admin?: AdminJS | null
+
   public _decorated: ResourceDecorator | null
 
   /**
@@ -60,6 +62,7 @@ class BaseResource {
    */
   constructor(resource?: any) {
     this._decorated = null
+    this._admin = null
   }
 
   /**
@@ -181,6 +184,69 @@ class BaseResource {
     throw new NotImplementedError('BaseResource#findMany')
   }
 
+  async findRelations(
+    recordId: string,
+    relation: RelationOptions,
+    filter: Filter,
+    options: {
+      limit?: number;
+      offset?: number;
+      sort?: {
+        sortBy?: string;
+        direction?: 'asc' | 'desc';
+      },
+    },
+    context?: ActionContext,
+  ): Promise<Record<string, any>[]> {
+    const {
+      relationType,
+      junction,
+      target,
+    } = relation
+
+    if (!this._admin) {
+      return []
+    }
+
+    const targetResource = this._admin.findResource(target.resourceId)
+    if (relationType === 'one-to-many') {
+      const records = await targetResource.find(filter, options, context)
+
+      return records.map((r) => r.params)
+    }
+
+    if (relationType === 'many-to-many') {
+      if (!junction) {
+        throw new Error('"junction" must be defined for many-to-many relation')
+      }
+
+      const junctionResource = this._admin.findResource(junction?.resourceId)
+
+      const junctionFilter = new Filter({
+        [junction.joinKey]: recordId,
+      }, junctionResource)
+
+      const junctionRecords = await junctionResource.find(junctionFilter, {
+        limit: 9999,
+        offset: 0,
+        sort: {
+          sortBy: junction.joinKey,
+          direction: 'asc',
+        },
+      }, context)
+
+      const ids = junctionRecords.map((r) => r.params[junction.inverseJoinKey])
+      const idColumn = targetResource.properties().find((p) => p.isId())
+      // const records = await targetResource.findMany(ids)
+      const f = new Filter({ [idColumn?.path() ?? 'id']: ids }, targetResource)
+      const records = await targetResource.find(f, options, context)
+
+      return records.map((r) => r.params)
+    }
+
+    throw new Error('Unknown relation type')
+  }
+
   /**
    * Builds new Record of given Resource.
    *
@@ -248,6 +314,7 @@ class BaseResource {
    * @private
    */
   assignDecorator(admin: AdminJS, options: ResourceOptions = {}): void {
+    this._admin = admin
     this._decorated = new ResourceDecorator({ resource: this, admin, options })
   }
 

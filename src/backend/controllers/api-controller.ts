@@ -102,6 +102,24 @@ class ApiController {
     return this.resourceAction(request, response) as Promise<SearchActionResponse>
   }
 
+  async relations(originalRequest: ActionRequest, response): Promise<RecordActionResponse> {
+    originalRequest.params.action = 'relations'
+
+    const { recordId } = originalRequest.params
+    const actionContext = await this.getActionContext(originalRequest)
+    const request = requestParser(originalRequest, actionContext.resource)
+
+    if (!recordId) {
+      throw new NotFoundError([
+        'You have to pass recordId to the relations',
+      ].join('\n'), 'Action#handler')
+    }
+
+    const result = await actionContext.action.handler(request, response, actionContext)
+
+    return result
+  }
+
   /**
    * Performs a customized {@link Action resource action}.
    * To call it use {@link ApiClient#resourceAction} method.

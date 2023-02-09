@@ -253,7 +253,8 @@ export type BuildInActions =
   'delete' |
   'bulkDelete' |
   'new' |
-  'search'
+  'search' |
+  'relations'
 
 /**
  * @classdesc

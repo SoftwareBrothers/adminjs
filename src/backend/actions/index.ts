@@ -5,6 +5,7 @@ import { EditAction } from './edit/edit-action'
 import { SearchAction } from './search/search-action'
 import { ListAction } from './list/list-action'
 import { BulkDeleteAction } from './bulk-delete/bulk-delete-action'
+import { RelationsAction } from './relations/relations-action'
 import { BuildInActions } from './action.interface'
 
 export * from './delete/delete-action'
@@ -24,4 +25,5 @@ export const ACTIONS: {[key in BuildInActions]: any} = {
   delete: DeleteAction,
   bulkDelete: BulkDeleteAction,
   search: SearchAction,
+  relations: RelationsAction,
 }

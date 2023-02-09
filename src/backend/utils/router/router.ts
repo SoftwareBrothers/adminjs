@@ -117,6 +117,11 @@ export const Router: RouterType = {
     action: 'recordAction',
   }, {
     method: 'GET',
+    path: '/api/resources/{resourceId}/records/{recordId}/relations/{relationName}',
+    Controller: ApiController,
+    action: 'relations',
+  }, {
+    method: 'GET',
     path: '/resources/{resourceId}/bulk/{action}',
     Controller: AppController,
     action: 'bulkAction',
