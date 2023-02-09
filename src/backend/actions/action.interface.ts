@@ -1,4 +1,4 @@
-import { VariantType } from '@adminjs/design-system'
+import { IconProps, VariantType } from '@adminjs/design-system'
 import AdminJS from '../../adminjs'
 import { CurrentAdmin } from '../../current-admin.interface'
 import ViewHelpers from '../utils/view-helpers/view-helpers'
@@ -433,7 +433,7 @@ export interface Action <T extends ActionResponse> {
    * }]})
    * ```
    */
-  icon?: string;
+  icon?: IconProps['icon'];
   /**
    * guard message - user will have to confirm it before executing an action.
    *

@@ -9,8 +9,8 @@ import { ShowPropertyProps } from '../base-property-props'
 
 const StyledLink = styled<any>(Link)`
   ${ButtonCSS};
-  padding-left: ${({ theme }): string => theme.space.xs};
-  padding-right: ${({ theme }): string => theme.space.xs};
+  padding-left: ${({ theme }) => theme.space.xs};
+  padding-right: ${({ theme }) => theme.space.xs};
 `
 
 type Props = Pick<ShowPropertyProps, 'property' | 'record'>

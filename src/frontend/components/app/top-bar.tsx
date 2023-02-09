@@ -11,9 +11,9 @@ import { CurrentAdmin } from '../../../current-admin.interface'
 import { VersionProps } from '../../../adminjs-options.interface'
 
 const NavBar = styled(Box)`
-  height: ${({ theme }): string => theme.sizes.navbarHeight};
+  height: ${({ theme }) => theme.sizes.navbarHeight};
   border-bottom: ${themeGet('borders', 'default')};
-  background: ${({ theme }): string => theme.colors.white};
+  background: ${({ theme }) => theme.colors.white};
   display: flex;
   flex-direction: row;
   flex-shrink: 0;

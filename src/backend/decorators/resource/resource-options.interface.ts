@@ -1,3 +1,4 @@
+import type { IconProps } from '@adminjs/design-system'
 import { Action, ActionResponse, RecordActionResponse, BulkActionResponse } from '../../actions/action.interface'
 import PropertyOptions from '../property/property-options.interface'
 import { ListActionResponse } from '../../actions/list/list-action'
@@ -88,7 +89,7 @@ export interface ResourceOptions {
    */
   navigation?: {
     name?: string | null;
-    icon?: string;
+    icon?: IconProps['icon'];
   } | string | boolean | null;
 
   /**
@@ -96,7 +97,7 @@ export interface ResourceOptions {
    */
   parent?: {
     name?: string | null;
-    icon?: string;
+    icon?: IconProps['icon'];
   } | string | null;
   /**
    * Default sort property and direction.

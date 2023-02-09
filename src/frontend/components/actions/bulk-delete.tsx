@@ -95,7 +95,7 @@ const BulkDelete: React.FC<ActionProps & AddNoticeProps> = (props) => {
         </Table>
       </DrawerContent>
       <DrawerFooter data-css={footerTag}>
-        <Button variant="primary" size="lg" onClick={handleClick} disabled={loading}>
+        <Button variant="contained" size="lg" onClick={handleClick} disabled={loading}>
           {loading ? (<Icon icon="Loader" spin />) : null}
           {translateButton(records.length > 1 ? 'confirmRemovalMany_plural' : 'confirmRemovalMany', resource.id, { count: records.length })}
         </Button>

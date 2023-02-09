@@ -65,7 +65,8 @@ const EditKeyValuePair: React.FC<EditKeyValuePairProps> = (props) => {
         type="button"
         size="icon"
         onClick={() => onRemoveItem(currentKey)}
-        variant="danger"
+        variant="contained"
+        color="danger"
         flexGrow={0}
         flexShrink={1}
       >
@@ -166,7 +167,7 @@ const Edit: React.FC<EditPropertyProps> = (props) => {
             error={record.errors[`${property.path}${flat.DELIMITER}${key}`]}
           />
         ))}
-        <Button mt="lg" variant="primary" onClick={addNewKeyValuePair}>
+        <Button mt="lg" onClick={addNewKeyValuePair}>
           {tb('addNewItem', resource.id)}
         </Button>
       </Section>

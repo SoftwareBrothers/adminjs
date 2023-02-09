@@ -50,7 +50,7 @@ const html = async (
       <title>${branding.companyName}</title>
       ${faviconTag}
 
-      <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,700" type="text/css">
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" type="text/css">
 
       <script src="${h.assetPath('global.bundle.js', assets)}"></script>
       <script src="${h.assetPath('design-system.bundle.js', assets)}"></script>

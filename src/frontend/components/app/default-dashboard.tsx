@@ -97,12 +97,12 @@ const boxes = ({ translateMessage }): Array<BoxType> => [{
 
 const Card = styled(Box)`
   display: ${({ flex }): string => (flex ? 'flex' : 'block')};
-  color: ${({ theme }): string => theme.colors.grey100};
+  color: ${({ theme }) => theme.colors.grey100};
   text-decoration: none;
   border: 1px solid transparent;
   &:hover {
-    border: 1px solid ${({ theme }): string => theme.colors.primary100};
-    box-shadow: ${({ theme }): string => theme.shadows.cardHover};
+    border: 1px solid ${({ theme }) => theme.colors.primary100};
+    box-shadow: ${({ theme }) => theme.shadows.cardHover};
   }
 `
 
@@ -169,7 +169,7 @@ export const Dashboard: React.FC = () => {
             <Text mt="xxl">
               <Button
                 as="a"
-                variant="primary"
+                variant="contained"
                 href="https://share.hsforms.com/1IedvmEz6RH2orhcL6g2UHA8oc5a"
                 target="_blank"
               >

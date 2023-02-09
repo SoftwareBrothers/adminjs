@@ -1,3 +1,5 @@
+import type { IconProps } from "@adminjs/design-system";
+
 /**
  * Representing the page in the sidebar
  * @subcategory Frontend
@@ -15,5 +17,5 @@ export interface PageJSON {
   /**
    * Page icon
    */
-  icon?: string;
+  icon?: IconProps['icon'];
 }

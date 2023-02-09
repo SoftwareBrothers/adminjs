@@ -130,11 +130,11 @@ const FilterDrawer: React.FC<FilterProps> = (props) => {
       </DrawerContent>
       <DrawerFooter data-css={cssFooter}>
 
-        <Button variant="default" size="lg" onClick={resetFilter} type="button" data-css={cssButtonReset}>
+        <Button size="lg" variant="light" onClick={resetFilter} type="button" data-css={cssButtonReset}>
           {translateButton('resetFilter', resource.id)}
         </Button>
 
-        <Button variant="primary" size="lg" data-css={cssButtonApply}>
+        <Button variant="contained" size="lg" data-css={cssButtonApply}>
           {translateButton('applyChanges', resource.id)}
         </Button>
       </DrawerFooter>

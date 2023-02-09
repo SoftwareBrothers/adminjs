@@ -79,7 +79,7 @@ const Edit: FC<ActionProps> = (props) => {
         ))}
       </DrawerContent>
       <DrawerFooter data-css={footerTag}>
-        <Button variant="primary" size="lg" type="submit" data-css={buttonTag} data-testid="button-save" disabled={loading}>
+        <Button variant="contained" size="lg" type="submit" data-css={buttonTag} data-testid="button-save" disabled={loading}>
           {loading ? (<Icon icon="Loader" spin />) : null}
           {translateButton('save', resource.id)}
         </Button>

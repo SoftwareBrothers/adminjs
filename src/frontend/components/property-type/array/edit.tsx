@@ -52,7 +52,8 @@ const ItemRenderer: React.FC<EditProps & ItemRendererProps> = (props) => {
               type="button"
               size="icon"
               onClick={(event): boolean => onDelete(event, property)}
-              variant="danger"
+              variant="contained"
+              color="danger"
             >
               <Icon icon="Trash2" />
             </Button>
