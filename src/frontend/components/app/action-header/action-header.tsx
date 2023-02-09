@@ -3,7 +3,7 @@ import { Badge, Box, ButtonGroup, cssClass, H2, H3 } from '@adminjs/design-syste
 import React from 'react'
 import { useNavigate } from 'react-router'
 import allowOverride from '../../../hoc/allow-override'
-import { useActionResponseHandler, useTranslation } from '../../../hooks'
+import { useActionResponseHandler, useTranslation, useConfirmModal } from '../../../hooks'
 import { ActionJSON, buildActionClickHandler } from '../../../interfaces/action'
 import { getActionElementCss, getResourceElementCss } from '../../../utils'
 import Breadcrumbs from '../breadcrumbs'
@@ -31,6 +31,7 @@ const ActionHeader: React.FC<ActionHeaderProps> = (props) => {
   const { translateButton, translateAction } = translateFunctions
   const navigate = useNavigate()
   const actionResponseHandler = useActionResponseHandler(actionPerformed)
+  const modalFunctions = useConfirmModal()
 
   if (action.hideActionHeader) {
     return null
@@ -38,7 +39,6 @@ const ActionHeader: React.FC<ActionHeaderProps> = (props) => {
 
   const resourceId = resource.id
   const params = { resourceId, recordId: record?.id }
-
   const handleActionClick = (event, sourceAction: ActionJSON): any | Promise<any> => (
     buildActionClickHandler({
       action: sourceAction,
@@ -46,6 +46,7 @@ const ActionHeader: React.FC<ActionHeaderProps> = (props) => {
       actionResponseHandler,
       navigate,
       translateFunctions,
+      modalFunctions,
     })(event)
   )
 
@@ -57,6 +58,7 @@ const ActionHeader: React.FC<ActionHeaderProps> = (props) => {
     params,
     handleClick: handleActionClick,
     translateFunctions,
+    modalFunctions,
   })
 
   if (toggleFilter) {
@@ -76,6 +78,7 @@ const ActionHeader: React.FC<ActionHeaderProps> = (props) => {
     params: { resourceId },
     handleClick: handleActionClick,
     translateFunctions,
+    modalFunctions,
   })
 
   const title = action ? translateAction(action.label, resourceId) : resource.name

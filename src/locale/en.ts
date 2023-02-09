@@ -21,6 +21,8 @@ const translations = {
     login: 'Log in',
     seeTheDocumentation: 'See: <1>the documentation</1>',
     createFirstRecord: 'Create First Record',
+    cancel: 'Cancel',
+    confirm: 'Confirm',
   },
   labels: {
     navigation: 'Navigation',

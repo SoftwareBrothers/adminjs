@@ -10,6 +10,7 @@ import Sidebar from './app/sidebar/sidebar'
 import TopBar from './app/top-bar'
 import Notice from './app/notice'
 import allowOverride from '../hoc/allow-override'
+import ConfirmModal from './app/confirm-modal'
 import {
   DashboardRoute, ResourceActionRoute, RecordActionRoute, PageRoute, BulkActionRoute, ResourceRoute,
 } from './routes'
@@ -21,7 +22,8 @@ const GlobalStyle = createGlobalStyle`
     padding: 0;
     width: 100%;
     height: 100%;
-    color: ${({ theme }): string => theme.colors.grey100}
+    color: ${({ theme }): string => theme.colors.grey100};
+    isolation: isolate;
   }
 `
 
@@ -92,6 +94,7 @@ const App: React.FC = () => {
             <Route path={`${recordActionUrl}/*`} element={<RecordActionRoute />} />
           </Routes>
         </Box>
+        <ConfirmModal />
       </Box>
     </>
 
