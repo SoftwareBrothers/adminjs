@@ -23,7 +23,7 @@ const GlobalStyle = createGlobalStyle`
     height: 100%;
     color: ${({ theme }) => theme.colors.text}
   }
-  body {
+  #app {
     isolation: isolate;
   }
 `
