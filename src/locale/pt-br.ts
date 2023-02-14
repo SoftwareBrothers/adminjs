@@ -22,6 +22,15 @@ const translations = {
     seeTheDocumentation: 'Ver: <1>a documentação</1>',
     createFirstRecord: 'Criar Primeiro Registro',
   },
+  components: {
+    DropZone: {
+      placeholder: 'Solte seu arquivo aqui ou clique para navegar',
+      acceptedSize: 'Tamanho máximo: {{maxSize}}',
+      acceptedType: 'Suporta: {{mimeTypes}}',
+      unsupportedSize: 'O arquivo {{fileName}} é muito grande',
+      unsupportedType: 'O arquivo {{fileName}} tem um tipo não compatível: {{fileType}}',
+    },
+  },
   labels: {
     navigation: 'Navegação',
     pages: 'Páginas',
