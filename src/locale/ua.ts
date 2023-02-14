@@ -23,6 +23,15 @@ const translations = {
     createFirstRecord: 'Створити перший запис',
     contactUs: 'Зв\'язатися з нами',
   },
+  components: {
+    DropZone: {
+      placeholder: 'Перетягніть свій файл сюди або натисніть, щоб переглянути',
+      acceptedSize: 'Максимальний розмір: {{maxSize}}',
+      acceptedType: 'Підтримує: {{mimeTypes}}',
+      unsupportedSize: 'Файл {{fileName}} завеликий',
+      unsupportedType: 'Тип файлу {{fileName}} не підтримується: {{fileType}}',
+    },
+  },
   labels: {
     navigation: 'Навігація',
     pages: 'Сторінки',

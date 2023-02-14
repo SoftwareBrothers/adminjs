@@ -30,6 +30,9 @@ export type LocaleTranslationsBlock = {
   labels: {
     [key: string]: string;
   };
+  components: {
+    [key: string]: string;
+  };
   messages: {
     [key: string]: string;
   };
@@ -80,6 +83,7 @@ export type LocaleTranslations = Partial<LocaleTranslationsBlock> & {
  * @property {Record<string, string>} [properties]      translated resource properties
  * @property {Record<string, string>} [messages]        translated messages
  * @property {Record<string, string>} [buttons]         translated button labels
+ * @property {Record<string, string>} [components]      translated components
  * @property {Record<string, string>} [labels]          translated labels
  * @property {Record<string, object>} [resources]       optional resources sub-translations
  * @property {Record<string, object>} resources.resourceId  Id of a resource from the database. i.e.
