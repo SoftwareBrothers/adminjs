@@ -28,10 +28,10 @@ export type LocaleTranslationsBlock = {
     [key: string]: string;
   };
   labels: {
-    [key: string]: string;
+    [key: string]: Record<string, string>
   };
   components: {
-    [key: string]: string;
+    [key: string]: Record<string, string>
   };
   messages: {
     [key: string]: string;
