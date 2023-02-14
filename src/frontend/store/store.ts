@@ -3,6 +3,7 @@
 // because AdminJS will switch to Eventrix from v7 onwards anyway
 import { combineReducers, legacy_createStore as createStore } from 'redux'
 import type { useLocation } from 'react-router'
+import { DRAWER_PREROUTE_SET, SetDrawerPreRouteResponse } from './actions/set-drawer-preroute'
 import {
   VERSIONS_INITIALIZE,
   SESSION_INITIALIZE,
@@ -182,6 +183,25 @@ const routerReducer = (state: RouterProps = { from: {}, to: {} }, action: {
   }
 }
 
+export type DrawerProps = SetDrawerPreRouteResponse['data']
+
+const drawerReducer = (state: DrawerProps = { previousRoute: null }, action: {
+  type: string;
+  data: DrawerProps;
+}) => {
+  switch (action.type) {
+  case DRAWER_PREROUTE_SET: {
+    return {
+      ...state,
+      ...action.data,
+    }
+  }
+  default: {
+    return state
+  }
+  }
+}
+
 type NoticeArgs = { noticeId: string; progress: number }
 
 const noticesReducer = (state: Array<NoticeMessageInState> = [], action: {
@@ -220,6 +240,7 @@ export type ReduxState = {
   pages: Array<PageJSON>;
   locale: Locale;
   router: RouterProps;
+  drawer: DrawerProps;
 }
 
 const reducer = combineReducers<ReduxState>({
@@ -234,6 +255,7 @@ const reducer = combineReducers<ReduxState>({
   pages: pagesReducer,
   locale: localesReducer,
   router: routerReducer,
+  drawer: drawerReducer,
 })
 
 export default (initialState = {}) => createStore(reducer, initialState)
