@@ -1,4 +1,4 @@
-import type { IconProps } from "@adminjs/design-system";
+import type { IconProps } from '@adminjs/design-system'
 
 /**
  * Representing the page in the sidebar
@@ -8,14 +8,14 @@ export interface PageJSON {
   /**
    * Page name
    */
-  name: string;
+  name: string
   /**
    * Page component. Bundled with {@link ComponentLoader}
    */
-  component: string;
+  component: string
 
   /**
    * Page icon
    */
-  icon?: IconProps['icon'];
+  icon?: IconProps['icon']
 }

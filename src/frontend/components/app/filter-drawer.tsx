@@ -1,7 +1,7 @@
 import {
   Box, Button, Drawer,
   DrawerContent,
-  DrawerFooter, H3, Icon,
+  DrawerFooter, Icon,
 } from '@adminjs/design-system'
 import React, { MouseEvent, SyntheticEvent, useEffect, useRef, useState } from 'react'
 import { useLocation, useNavigate, useParams } from 'react-router-dom'
@@ -42,7 +42,7 @@ const FilterDrawer: React.FC<FilterProps> = (props) => {
   const [filter, setFilter] = useState(parseQuery(location))
   const params = useParams<MatchProps>()
   const navigate = useNavigate()
-  const { translateLabel, translateButton } = useTranslation()
+  const { translateButton } = useTranslation()
   const initialLoad = useRef(true)
 
   useEffect(() => {

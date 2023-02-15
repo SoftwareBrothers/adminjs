@@ -21,7 +21,7 @@ const GlobalStyle = createGlobalStyle`
     padding: 0;
     width: 100%;
     height: 100%;
-    color: ${({ theme }) => theme.colors.text}
+    color: ${({ theme }) => theme.colors.grey100}
   }
   #app {
     isolation: isolate;
