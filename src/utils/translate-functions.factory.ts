@@ -112,6 +112,18 @@ export interface TranslateFunctions {
    * Finally, when that also fails, it returns startCase of the given message name.
    */
   translateMessage: TranslateFunction;
+  /**
+   * Shortcut for {@link TranslateFunctions#translateComponent}
+   */
+  tc: TranslateFunction;
+  /**
+   * Translates component's labels in the application.
+   * By default, it looks for a [translation key]{@link LocaleTranslations} in
+   * `resource.{resourceId}.components.{label}`, when it doesn't find
+   * that, the lookup is moved to `components.{label}`.
+   * Finally, when that also fails, it returns startCase of the given label.
+   */
+  translateComponent: TranslateFunction;
 }
 
 export const formatName = (name: string): string => name.split('.').join('&#46;')
@@ -156,6 +168,10 @@ export const createFunctions = (i18n: I18n): TranslateFunctions => {
     translate(i18n, 'messages', messageName, resourceId, options)
   )
 
+  const translateComponent: TranslateFunction = (messageName, resourceId, options) => (
+    translate(i18n, 'components', messageName, resourceId, options)
+  )
+
   return {
     translateAction,
     ta: translateAction,
@@ -167,6 +183,8 @@ export const createFunctions = (i18n: I18n): TranslateFunctions => {
     tp: translateProperty,
     translateMessage,
     tm: translateMessage,
+    translateComponent,
+    tc: translateComponent,
     t: i18n.t,
     translate: i18n.t,
   }
