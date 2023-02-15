@@ -19,7 +19,7 @@ const SortLink: React.FC<SortLinkProps> = (props) => {
 
   const query = new URLSearchParams(location.search)
   const oppositeDirection = (isActive && direction === 'asc') ? 'desc' : 'asc'
-  const sortedByIcon = `Caret${direction === 'asc' ? 'Up' : 'Down'}`
+  const sortedByIcon = direction === 'asc' ? 'ChevronUp' : 'ChevronDown'
 
   query.set('direction', oppositeDirection)
   query.set('sortBy', property.propertyPath)
@@ -27,7 +27,7 @@ const SortLink: React.FC<SortLinkProps> = (props) => {
   return (
     <NavLink to={{ search: query.toString() }} className={cssClass('SortLink')}>
       {property.label}
-      {isActive ? (<Icon icon={sortedByIcon} color="primary100" ml="default" />) : ''}
+      {isActive && (<Icon icon={sortedByIcon} color="grey40" ml="lg" />)}
     </NavLink>
   )
 }

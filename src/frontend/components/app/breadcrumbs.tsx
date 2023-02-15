@@ -10,7 +10,7 @@ import { RecordJSON, ResourceJSON } from '../../interfaces'
 import { getActionElementCss } from '../../utils'
 
 export const BreadcrumbLink = styled(Link)`
-  color: ${({ theme }): string => theme.colors.grey40};
+  color: ${({ theme }): string => theme.colors.grey100};
   font-family: ${({ theme }): string => theme.font};
   line-height: ${({ theme }): string => theme.lineHeights.default};
   font-size: ${({ theme }): string => theme.fontSizes.default};
@@ -33,7 +33,7 @@ export const BreadcrumbLink = styled(Link)`
 `
 
 export const BreadcrumbText = styled(Text)`
-  color: ${({ theme }): string => theme.colors.grey40};
+  color: ${({ theme }): string => theme.colors.grey100};
   font-family: ${({ theme }): string => theme.font};
   font-weight: ${({ theme }): string => theme.fontWeights.normal.toString()};
   line-height: ${({ theme }): string => theme.lineHeights.default};

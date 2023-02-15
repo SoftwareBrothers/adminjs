@@ -1,9 +1,10 @@
 import { useNavigate, useLocation } from 'react-router'
 /* eslint-disable no-param-reassign */
-import {
+import type {
   NavigationProps,
   NavigationElementProps,
   NavigationElementWithChildrenProps,
+  IconProps,
 } from '@adminjs/design-system'
 import { useMemo } from 'react'
 import { ResourceJSON } from '../interfaces'
@@ -23,7 +24,7 @@ export function useNavigationResources(
 
   const enrichResource = useMemo(() => (
     resource: ResourceJSON,
-    icon?: string,
+    icon?: IconProps['icon'],
   ): NavigationElementWithChildrenProps => ({
     href: resource.href || undefined,
     icon,

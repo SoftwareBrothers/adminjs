@@ -63,7 +63,7 @@ const ActionHeader: React.FC<ActionHeaderProps> = (props) => {
     actionButtons.push({
       label: translateButton('filter', resource.id),
       onClick: toggleFilter,
-      icon: 'SettingsAdjust',
+      icon: 'Filter',
       'data-css': getResourceElementCss(resource.id, 'filter-button'),
     })
   }
@@ -100,10 +100,10 @@ const ActionHeader: React.FC<ActionHeaderProps> = (props) => {
         <Box mt={cssHeaderMT} flexGrow={1} px={['default', 0]}>
           <CssHComponent mb="lg">
             {action.showInDrawer ? (
-              <StyledBackButton showInDrawer={action.showInDrawer} />
+              <StyledBackButton />
             ) : ''}
             {title}
-            {tag ? (<Badge variant="primary" ml="default">{tag}</Badge>) : ''}
+            {tag ? (<Badge variant="default" outline ml="default">{tag}</Badge>) : ''}
           </CssHComponent>
         </Box>
         {omitActions ? '' : (

@@ -10,16 +10,9 @@ import {
 import allowOverride from '../../../hoc/allow-override'
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-const StyledLink = styled(({ rounded, ...rest }) => <RouterLink {...rest} />)<ButtonProps>`${ButtonCSS}`
+const StyledLink = styled(({ rounded, ...rest }) => <RouterLink {...rest} />) <ButtonProps>`${ButtonCSS}`
 
-export type StyledBackButtonProps = {
-  showInDrawer: boolean;
-}
-
-const StyledBackButton: React.FC<StyledBackButtonProps> = (props) => {
-  const { showInDrawer } = props
-  const cssCloseIcon = showInDrawer ? 'ChevronRight' : 'ChevronLeft'
-
+const StyledBackButton: React.FC = () => {
   const navigate = useNavigate()
 
   return (
@@ -30,7 +23,7 @@ const StyledBackButton: React.FC<StyledBackButtonProps> = (props) => {
       mr="lg"
       type="button"
     >
-      <Icon icon={cssCloseIcon} />
+      <Icon icon="X" />
     </StyledLink>
   )
 }

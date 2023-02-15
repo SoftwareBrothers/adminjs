@@ -22,7 +22,7 @@ const LoggedIn: React.FC<LoggedInProps> = (props) => {
       event.preventDefault()
       window.location.href = paths.logoutPath
     },
-    icon: 'Logout',
+    icon: 'LogOut',
   }]
   return (
     <Box flexShrink={0} data-css="logged-in">

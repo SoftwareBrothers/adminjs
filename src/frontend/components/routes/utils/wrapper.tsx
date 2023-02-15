@@ -6,27 +6,27 @@ import allowOverride from '../../../hoc/allow-override'
 
 const StyledWrapperWithFilter = styled(Box)`
   & > ${DrawerContent} {
-    background: ${({ theme }): string => theme.colors.white};
-    padding: ${({ theme }): string => theme.space.xxl};
+    background: ${({ theme }) => theme.colors.white};
+    padding: ${({ theme }) => theme.space.xxl};
     overflow: visible;
   }
 
   & > ${DrawerFooter} {
-    background: ${({ theme }): string => theme.colors.white};
-    padding: 0 ${({ theme }): string => theme.space.xxl} ${({ theme }): string => theme.space.xxl};
+    background: ${({ theme }) => theme.colors.white};
+    padding: 0 ${({ theme }) => theme.space.xxl} ${({ theme }) => theme.space.xxl};
   }
 `
 
 const StyledWrapper = styled(Box)`
   & ${DrawerContent} {
-    background: ${({ theme }): string => theme.colors.white};
-    padding: ${({ theme }): string => theme.space.xxl};
+    background: ${({ theme }) => theme.colors.white};
+    padding: ${({ theme }) => theme.space.xxl};
     overflow: visible;
   }
 
   & ${DrawerFooter} {
-    background: ${({ theme }): string => theme.colors.white};
-    padding: 0 ${({ theme }): string => theme.space.xxl} ${({ theme }): string => theme.space.xxl};
+    background: ${({ theme }) => theme.colors.white};
+    padding: 0 ${({ theme }) => theme.space.xxl} ${({ theme }) => theme.space.xxl};
   }
 `
 
