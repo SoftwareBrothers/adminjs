@@ -28,7 +28,7 @@ export type LocaleTranslationsBlock = {
     [key: string]: string;
   };
   labels: {
-    [key: string]: Record<string, string>
+    [key: string]: string
   };
   components: {
     [key: string]: Record<string, string>
