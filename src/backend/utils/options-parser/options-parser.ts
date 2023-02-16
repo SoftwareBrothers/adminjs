@@ -1,8 +1,9 @@
 import merge from 'lodash/merge'
-import AdminJS from '../../../adminjs'
-import { AdminJSOptions, Assets, BrandingOptions } from '../../../adminjs-options.interface'
-import { CurrentAdmin } from '../../../current-admin.interface'
-import ViewHelpers from '../view-helpers/view-helpers'
+
+import AdminJS from '../../../adminjs.js'
+import { AdminJSOptions, Assets, BrandingOptions } from '../../../adminjs-options.interface.js'
+import { CurrentAdmin } from '../../../current-admin.interface.js'
+import ViewHelpers from '../view-helpers/view-helpers.js'
 
 const defaultBranding: AdminJSOptions['branding'] = {
   companyName: 'Company',

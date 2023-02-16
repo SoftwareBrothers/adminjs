@@ -1,5 +1,5 @@
-import { ErrorTypeEnum } from '../../../utils/error-type.enum'
-import * as CONSTANTS from '../../../constants'
+import { ErrorTypeEnum } from '../../../utils/error-type.enum.js'
+import * as CONSTANTS from '../../../constants.js'
 
 const buildUrl = (page: string): string => (
   `${CONSTANTS.DOCS}/${page}`

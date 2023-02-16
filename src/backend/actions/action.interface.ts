@@ -1,14 +1,15 @@
 import { IconProps, VariantType } from '@adminjs/design-system'
-import AdminJS from '../../adminjs'
-import { CurrentAdmin } from '../../current-admin.interface'
-import ViewHelpers from '../utils/view-helpers/view-helpers'
-import BaseRecord from '../adapters/record/base-record'
-import BaseResource from '../adapters/resource/base-resource'
-import ActionDecorator from '../decorators/action/action-decorator'
-import { LayoutElement, LayoutElementFunction } from '../utils/layout-element-parser'
-import { RecordJSON } from '../../frontend/interfaces'
-import { NoticeMessage } from '../../frontend/hoc/with-notice'
-import { TranslateFunctions } from '../../utils/translate-functions.factory'
+
+import AdminJS from '../../adminjs.js'
+import { CurrentAdmin } from '../../current-admin.interface.js'
+import ViewHelpers from '../utils/view-helpers/view-helpers.js'
+import BaseRecord from '../adapters/record/base-record.js'
+import BaseResource from '../adapters/resource/base-resource.js'
+import ActionDecorator from '../decorators/action/action-decorator.js'
+import { LayoutElement, LayoutElementFunction } from '../utils/layout-element-parser/index.js'
+import { RecordJSON } from '../../frontend/interfaces/index.js'
+import { NoticeMessage } from '../../frontend/hoc/with-notice.js'
+import { TranslateFunctions } from '../../utils/translate-functions.factory.js'
 
 export type ActionQueryParameters = {
   sortBy?: string

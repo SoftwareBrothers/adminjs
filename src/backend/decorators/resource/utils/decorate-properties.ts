@@ -1,9 +1,9 @@
-import { ResourceDecorator } from '..'
-import AdminJS from '../../../../adminjs'
-import { BaseProperty, BaseResource } from '../../../adapters'
-import { PropertyDecorator } from '../../property'
-import { getPropertyByKey } from './get-property-by-key'
-import { pathToParts } from '../../../../utils/flat/path-to-parts'
+import ResourceDecorator from '../resource-decorator.js'
+import AdminJS from '../../../../adminjs.js'
+import { BaseProperty, BaseResource } from '../../../adapters/index.js'
+import { PropertyDecorator } from '../../property/index.js'
+import { getPropertyByKey } from './get-property-by-key.js'
+import { pathToParts } from '../../../../utils/flat/path-to-parts.js'
 
 export type DecoratedProperties = {[key: string]: PropertyDecorator}
 

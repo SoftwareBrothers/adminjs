@@ -1,6 +1,6 @@
-import { populator } from '../../utils'
-import { Action, RecordActionResponse } from '../action.interface'
-import { paramConverter } from '../../../utils/param-converter'
+import { populator } from '../../utils/populator/index.js'
+import { paramConverter } from '../../../utils/param-converter/index.js'
+import { Action, RecordActionResponse } from '../action.interface.js'
 
 /**
  * @implements Action

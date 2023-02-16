@@ -1,5 +1,5 @@
-import ConfigurationError from '../../utils/errors/configuration-error'
-import { ResourceOptions } from '../../decorators/resource/resource-options.interface'
+import ConfigurationError from '../../utils/errors/configuration-error.js'
+import { ResourceOptions } from '../../decorators/resource/resource-options.interface.js'
 
 const DEFAULT_DIRECTION = 'asc'
 

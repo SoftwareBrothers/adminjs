@@ -1,16 +1,16 @@
-import { New } from './new'
-import { Edit } from './edit'
-import { Show } from './show'
-import { List } from './list'
-import { BulkDelete } from './bulk-delete'
+import { New } from './new.js'
+import { Edit } from './edit.js'
+import { Show } from './show.js'
+import { List } from './list.js'
+import { BulkDelete } from './bulk-delete.js'
 
-export * from './new'
-export * from './action.props'
-export * from './edit'
-export * from './show'
-export * from './list'
-export * from './bulk-delete'
-export * from './utils'
+export * from './new.js'
+export * from './action.props.js'
+export * from './edit.js'
+export * from './show.js'
+export * from './list.js'
+export * from './bulk-delete.js'
+export * from './utils/index.js'
 
 export const actions = {
   new: New,

@@ -3,13 +3,13 @@ import { useSelector } from 'react-redux'
 import styled from 'styled-components'
 import { cssClass, Box, Icon, themeGet } from '@adminjs/design-system'
 
-import allowOverride from '../../hoc/allow-override'
-import LoggedIn from './logged-in'
-import Version from './version'
-import { ReduxState, Paths } from '../../store/store'
-import { CurrentAdmin } from '../../../current-admin.interface'
-import { VersionProps } from '../../../adminjs-options.interface'
-import LanguageSelect from './language-select/language-select'
+import allowOverride from '../../hoc/allow-override.js'
+import LoggedIn from './logged-in.js'
+import Version from './version.js'
+import { ReduxState, Paths } from '../../store/store.js'
+import { CurrentAdmin } from '../../../current-admin.interface.js'
+import { VersionProps } from '../../../adminjs-options.interface.js'
+import LanguageSelect from './language-select/language-select.js'
 
 const NavBar = styled(Box)`
   height: ${({ theme }) => theme.sizes.navbarHeight};

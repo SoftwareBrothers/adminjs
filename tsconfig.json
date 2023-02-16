@@ -12,7 +12,8 @@
       "strictFunctionTypes": true,
       "strictBindCallApply": true,
       "noImplicitThis": true,
-      "moduleResolution": "node",
+      "moduleResolution": "nodenext",
+      "module": "nodenext",
       "baseUrl": ".",
       "types": [
           "react",

@@ -1,8 +1,8 @@
 import React from 'react'
 import { Icon, Box } from '@adminjs/design-system'
 
-import { useTranslation } from '../../../hooks'
-import { ResourceJSON, PropertyJSON } from '../../../interfaces'
+import { useTranslation } from '../../../hooks/index.js'
+import { ResourceJSON, PropertyJSON } from '../../../interfaces/index.js'
 
 type AddNewItemButtonProps = {
   resource: ResourceJSON;

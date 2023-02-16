@@ -1,10 +1,10 @@
 import { ValueGroup } from '@adminjs/design-system'
 import React, { FC } from 'react'
 
-import { EditPropertyProps } from '../base-property-props'
-import formatValue from './format-value'
-import allowOverride from '../../../hoc/allow-override'
-import { useTranslation } from '../../../hooks'
+import { EditPropertyProps } from '../base-property-props.js'
+import formatValue from './format-value.js'
+import allowOverride from '../../../hoc/allow-override.js'
+import { useTranslation } from '../../../hooks/index.js'
 
 const Show: FC<EditPropertyProps> = (props) => {
   const { property, record } = props

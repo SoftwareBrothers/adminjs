@@ -2,14 +2,14 @@ import React, { MouseEvent, useCallback } from 'react'
 import { Button, Section, FormGroup, FormMessage, Icon, Box } from '@adminjs/design-system'
 import { DragDropContext, Droppable, Draggable, DropResult } from '@hello-pangea/dnd'
 
-import AddNewItemButton from './add-new-item-translation'
-import { flat } from '../../../../utils'
-import { EditPropertyPropsInArray } from '../base-property-props'
-import { PropertyLabel } from '../utils/property-label'
-import { convertToSubProperty } from './convert-to-sub-property'
-import { PropertyJSON } from '../../../interfaces'
-import { removeSubProperty } from './remove-sub-property'
-import allowOverride from '../../../hoc/allow-override'
+import AddNewItemButton from './add-new-item-translation.js'
+import { flat } from '../../../../utils/index.js'
+import { EditPropertyPropsInArray } from '../base-property-props.js'
+import { PropertyLabel } from '../utils/property-label/index.js'
+import { convertToSubProperty } from './convert-to-sub-property.js'
+import { PropertyJSON } from '../../../interfaces/index.js'
+import { removeSubProperty } from './remove-sub-property.js'
+import allowOverride from '../../../hoc/allow-override.js'
 
 type EditProps = Required<EditPropertyPropsInArray>
 

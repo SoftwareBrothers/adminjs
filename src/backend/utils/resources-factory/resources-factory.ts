@@ -1,7 +1,7 @@
-import BaseResource from '../../adapters/resource/base-resource'
-import AdminJS, { Adapter } from '../../../adminjs'
-import { ResourceWithOptions } from '../../../adminjs-options.interface'
-import { mergeResourceOptions } from '../build-feature'
+import BaseResource from '../../adapters/resource/base-resource.js'
+import AdminJS, { Adapter } from '../../../adminjs.js'
+import { ResourceWithOptions } from '../../../adminjs-options.interface.js'
+import { mergeResourceOptions } from '../build-feature/index.js'
 
 export class NoDatabaseAdapterError extends Error {
   private database: string

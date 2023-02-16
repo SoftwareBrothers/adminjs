@@ -1,13 +1,13 @@
 import sinon from 'sinon'
 import { expect } from 'chai'
 
-import ResourceDecorator from './resource-decorator'
-import PropertyDecorator from '../property/property-decorator'
-import AdminJS, { defaultOptions } from '../../../adminjs'
-import resourceStub, { expectedResult } from '../../../../spec/backend/helpers/resource-stub'
-import BaseResource from '../../adapters/resource/base-resource'
-import BaseRecord from '../../adapters/record/base-record'
-import BaseProperty from '../../adapters/property/base-property'
+import ResourceDecorator from './resource-decorator.js'
+import PropertyDecorator from '../property/property-decorator.js'
+import AdminJS, { defaultOptions } from '../../../adminjs.js'
+import resourceStub, { expectedResult } from '../../../../spec/backend/helpers/resource-stub.js'
+import BaseResource from '../../adapters/resource/base-resource.js'
+import BaseRecord from '../../adapters/record/base-record.js'
+import BaseProperty from '../../adapters/property/base-property.js'
 
 const someID = 'someID'
 const currentAdmin = {

@@ -1,6 +1,6 @@
 import { expect } from 'chai'
 
-import Router from './router'
+import Router from './router.js'
 
 describe('Router', function () {
   it('has both assets and routes', function () {

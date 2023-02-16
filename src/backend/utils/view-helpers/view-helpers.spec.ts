@@ -1,5 +1,6 @@
 import { expect } from 'chai'
-import ViewHelpers from './view-helpers'
+
+import ViewHelpers from './view-helpers.js'
 
 describe('ViewHelpers', function () {
   describe('#urlBuilder', function () {

@@ -3,9 +3,9 @@ import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import { cssClass, themeGet } from '@adminjs/design-system'
 
-import ViewHelpers from '../../../../backend/utils/view-helpers/view-helpers'
-import { BrandingOptions } from '../../../../adminjs-options.interface'
-import allowOverride from '../../../hoc/allow-override'
+import ViewHelpers from '../../../../backend/utils/view-helpers/view-helpers.js'
+import { BrandingOptions } from '../../../../adminjs-options.interface.js'
+import allowOverride from '../../../hoc/allow-override.js'
 
 type Props = {
   branding: BrandingOptions;

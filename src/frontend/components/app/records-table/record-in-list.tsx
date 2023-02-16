@@ -4,15 +4,15 @@ import {
   Placeholder, TableRow, TableCell, CheckBox, ButtonGroup,
 } from '@adminjs/design-system'
 
-import PropertyType from '../../property-type'
-import { ActionJSON, buildActionClickHandler, RecordJSON, ResourceJSON } from '../../../interfaces'
-import { display } from './utils/display'
-import { ActionResponse, RecordActionResponse } from '../../../../backend/actions/action.interface'
-import mergeRecordResponse from '../../../hooks/use-record/merge-record-response'
-import { useActionResponseHandler, useTranslation, useModal } from '../../../hooks'
-import { actionsToButtonGroup } from '../action-header/actions-to-button-group'
-import allowOverride from '../../../hoc/allow-override'
-import { getResourceElementCss } from '../../../utils'
+import BasePropertyComponent from '../../property-type/index.js'
+import { ActionJSON, buildActionClickHandler, RecordJSON, ResourceJSON } from '../../../interfaces/index.js'
+import { display } from './utils/display.js'
+import { ActionResponse, RecordActionResponse } from '../../../../backend/actions/action.interface.js'
+import mergeRecordResponse from '../../../hooks/use-record/merge-record-response.js'
+import { useActionResponseHandler, useTranslation, useModal } from '../../../hooks/index.js'
+import { actionsToButtonGroup } from '../action-header/actions-to-button-group.js'
+import allowOverride from '../../../hoc/allow-override.js'
+import { getResourceElementCss } from '../../../utils/index.js'
 
 export type RecordInListProps = {
   resource: ResourceJSON;
@@ -121,7 +121,7 @@ const RecordInList: React.FC<RecordInListProps> = (props) => {
             {isLoading ? (
               <Placeholder style={{ height: 14 }} />
             ) : (
-              <PropertyType
+              <BasePropertyComponent
                 key={property.propertyPath}
                 where="list"
                 property={property}

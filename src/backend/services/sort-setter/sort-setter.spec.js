@@ -1,4 +1,4 @@
-import sortSetter from './sort-setter'
+import sortSetter from './sort-setter.js'
 
 describe('sortSetter', function () {
   const defaultFieldName = 'someFieldName'

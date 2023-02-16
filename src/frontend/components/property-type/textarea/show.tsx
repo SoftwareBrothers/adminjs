@@ -1,9 +1,9 @@
 import React from 'react'
 import { ValueGroup } from '@adminjs/design-system'
 
-import allowOverride from '../../../hoc/allow-override'
-import { ShowPropertyProps } from '../base-property-props'
-import { useTranslation } from '../../../hooks'
+import allowOverride from '../../../hoc/allow-override.js'
+import { ShowPropertyProps } from '../base-property-props.js'
+import { useTranslation } from '../../../hooks/index.js'
 
 const Show: React.FC<ShowPropertyProps> = (props) => {
   const { property, record } = props

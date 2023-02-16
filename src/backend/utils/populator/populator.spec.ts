@@ -1,6 +1,6 @@
 import { expect } from 'chai'
 
-import populator from './populator'
+import populator from './populator.js'
 
 describe('populator', () => {
   context('empty array given as params', () => {

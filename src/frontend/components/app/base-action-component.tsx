@@ -2,11 +2,11 @@ import React from 'react'
 import { Trans } from 'react-i18next'
 import { MessageBox, Link } from '@adminjs/design-system'
 
-import ErrorBoundary from './error-boundary'
-import { actions } from '../actions'
-import { DOCS } from '../../../constants'
-import { ActionProps } from '../actions/action.props'
-import { useTranslation } from '../../hooks'
+import ErrorBoundary from './error-boundary.js'
+import { actions } from '../actions/index.js'
+import { DOCS } from '../../../constants.js'
+import { ActionProps } from '../actions/action.props.js'
+import { useTranslation } from '../../hooks/index.js'
 
 declare const AdminJS: {
   UserComponents: Array<string>;
@@ -44,7 +44,7 @@ declare const AdminJS: {
  * ```
  *
  * ```
- * // ./my-new-action.jsx
+ * // ./my-new-action.js
  * import { Box } from 'adminjs'
  *
  * const MyNewAction = (props) => {

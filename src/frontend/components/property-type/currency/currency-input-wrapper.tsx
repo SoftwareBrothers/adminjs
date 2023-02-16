@@ -1,7 +1,7 @@
 import { CurrencyInput, CurrencyInputProps } from '@adminjs/design-system'
 import React, { FC, useState } from 'react'
 
-import allowOverride from '../../../hoc/allow-override'
+import allowOverride from '../../../hoc/allow-override.js'
 
 export type CurrencyInputWrapperProps = {
   id: string;

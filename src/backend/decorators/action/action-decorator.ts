@@ -1,8 +1,9 @@
 import { DEFAULT_DRAWER_WIDTH, VariantType } from '@adminjs/design-system'
-import ConfigurationError from '../../utils/errors/configuration-error'
-import ViewHelpers from '../../utils/view-helpers/view-helpers'
-import AdminJS from '../../../adminjs'
-import BaseResource from '../../adapters/resource/base-resource'
+
+import ConfigurationError from '../../utils/errors/configuration-error.js'
+import ViewHelpers from '../../utils/view-helpers/view-helpers.js'
+import AdminJS from '../../../adminjs.js'
+import BaseResource from '../../adapters/resource/base-resource.js'
 import {
   Action,
   IsFunction,
@@ -12,17 +13,17 @@ import {
   After,
   Before,
   ActionHandler,
-} from '../../actions/action.interface'
-import { CurrentAdmin } from '../../../current-admin.interface'
-import { ActionJSON } from '../../../frontend/interfaces/action/action-json.interface'
-import BaseRecord from '../../adapters/record/base-record'
-import actionErrorHandler from '../../services/action-error-handler/action-error-handler'
-import ForbiddenError from '../../utils/errors/forbidden-error'
+} from '../../actions/action.interface.js'
+import { CurrentAdmin } from '../../../current-admin.interface.js'
+import { ActionJSON } from '../../../frontend/interfaces/action/action-json.interface.js'
+import BaseRecord from '../../adapters/record/base-record.js'
+import actionErrorHandler from '../../services/action-error-handler/action-error-handler.js'
+import ForbiddenError from '../../utils/errors/forbidden-error.js'
 import {
   ParsedLayoutElement,
   LayoutElement,
   layoutElementParser,
-} from '../../utils/layout-element-parser'
+} from '../../utils/layout-element-parser/index.js'
 
 const DEFAULT_VARIANT: VariantType = 'default'
 

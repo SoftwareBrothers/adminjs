@@ -1,5 +1,5 @@
-import PropertyDecorator from '../../property/property-decorator'
-import { PathParts } from '../../../../utils/flat/path-parts.type'
+import PropertyDecorator from '../../property/property-decorator.js'
+import { PathParts } from '../../../../utils/flat/path-parts.type.js'
 
 /**
  * @private

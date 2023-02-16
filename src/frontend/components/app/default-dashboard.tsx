@@ -11,7 +11,7 @@ import {
   Button,
 } from '@adminjs/design-system'
 
-import { useTranslation } from '../../hooks'
+import { useTranslation } from '../../hooks/index.js'
 
 const pageHeaderHeight = 284
 const pageHeaderPaddingY = 74

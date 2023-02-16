@@ -2,8 +2,9 @@ import { Box, Button, DropDown, DropDownItem, DropDownMenu, DropDownTrigger, Ico
 import React, { FC, useCallback } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useSelector } from 'react-redux'
-import { useLocalStorage } from '../../../hooks'
-import { ReduxState } from '../../../store/store'
+
+import { ReduxState } from '../../../store/store.js'
+import { useLocalStorage } from '../../../hooks/index.js'
 
 const LanguageSelect: FC = () => {
   const locale = useSelector((state: ReduxState) => state.locale)

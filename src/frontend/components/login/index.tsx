@@ -1,6 +1,5 @@
 import React from 'react'
 import styled, { createGlobalStyle } from 'styled-components'
-
 import { useSelector } from 'react-redux'
 import {
   Box,
@@ -16,8 +15,9 @@ import {
   MadeWithLove,
   themeGet,
 } from '@adminjs/design-system'
-import { useTranslation } from '../../hooks'
-import { ReduxState } from '../../store/store'
+
+import { useTranslation } from '../../hooks/index.js'
+import { ReduxState } from '../../store/store.js'
 
 const GlobalStyle = createGlobalStyle`
   html, body, #app {

@@ -1,10 +1,10 @@
 /* eslint-disable no-unused-vars */
-import ViewHelpers from '../utils/view-helpers/view-helpers'
-import componentsBundler from '../bundler/user-components-bundler'
-import layoutTemplate from '../../frontend/layout-template'
-import { ActionRequest } from '../actions/action.interface'
-import AdminJS from '../../adminjs'
-import { CurrentAdmin } from '../../current-admin.interface'
+import ViewHelpers from '../utils/view-helpers/view-helpers.js'
+import componentsBundler from '../bundler/user-components-bundler.js'
+import layoutTemplate from '../../frontend/layout-template.js'
+import { ActionRequest } from '../actions/action.interface.js'
+import AdminJS from '../../adminjs.js'
+import { CurrentAdmin } from '../../current-admin.interface.js'
 
 export default class AppController {
   private _admin: AdminJS

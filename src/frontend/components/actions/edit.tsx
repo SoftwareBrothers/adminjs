@@ -2,16 +2,16 @@ import { Box, Button, DrawerContent, DrawerFooter, Icon } from '@adminjs/design-
 import React, { FC, useEffect } from 'react'
 import { useNavigate } from 'react-router'
 
-import allowOverride from '../../hoc/allow-override'
-import useRecord from '../../hooks/use-record/use-record'
-import { useTranslation } from '../../hooks/use-translation'
-import { RecordJSON } from '../../interfaces'
-import { getActionElementCss } from '../../utils'
-import ActionHeader from '../app/action-header/action-header'
-import PropertyType from '../property-type'
-import { ActionProps } from './action.props'
-import { appendForceRefresh } from './utils/append-force-refresh'
-import LayoutElementRenderer from './utils/layout-element-renderer'
+import allowOverride from '../../hoc/allow-override.js'
+import useRecord from '../../hooks/use-record/use-record.js'
+import { useTranslation } from '../../hooks/use-translation.js'
+import { RecordJSON } from '../../interfaces/index.js'
+import { getActionElementCss } from '../../utils/index.js'
+import ActionHeader from '../app/action-header/action-header.js'
+import BasePropertyComponent from '../property-type/index.js'
+import { ActionProps } from './action.props.js'
+import { appendForceRefresh } from './utils/append-force-refresh.js'
+import LayoutElementRenderer from './utils/layout-element-renderer.js'
 
 const Edit: FC<ActionProps> = (props) => {
   const { record: initialRecord, resource, action } = props
@@ -68,7 +68,7 @@ const Edit: FC<ActionProps> = (props) => {
             record={record as RecordJSON}
           />
         )) : resource.editProperties.map((property) => (
-          <PropertyType
+          <BasePropertyComponent
             key={property.propertyPath}
             where="edit"
             onChange={handleChange}

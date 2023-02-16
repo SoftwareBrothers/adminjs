@@ -1,6 +1,7 @@
 import React, { ReactNode } from 'react'
 import { MessageBox, Text } from '@adminjs/design-system'
-import { useTranslation } from '../../hooks'
+
+import { useTranslation } from '../../hooks/index.js'
 
 /**
  * @memberof ErrorMessageBox

@@ -7,15 +7,15 @@ import { combineStyles } from '@adminjs/design-system'
 import i18n from 'i18next'
 import { Store } from 'redux'
 
-import { getAssets, getBranding, getFaviconFromBranding } from '../../../backend/utils/options-parser/options-parser'
-import ViewHelpers from '../../../backend/utils/view-helpers/view-helpers'
-import { initializeAssets } from '../../../frontend/store/actions/initialize-assets'
-import { initializeBranding } from '../../../frontend/store/actions/initialize-branding'
-import { initializeLocale } from '../../../frontend/store/actions/initialize-locale'
+import { getAssets, getBranding, getFaviconFromBranding } from '../../../backend/utils/options-parser/options-parser.js'
+import ViewHelpers from '../../../backend/utils/view-helpers/view-helpers.js'
+import { initializeAssets } from '../../../frontend/store/actions/initialize-assets.js'
+import { initializeBranding } from '../../../frontend/store/actions/initialize-branding.js'
+import { initializeLocale } from '../../../frontend/store/actions/initialize-locale.js'
 import createStore, {
   ReduxState,
-} from '../../../frontend/store/store'
-import AdminJS from '../../../adminjs'
+} from '../../../frontend/store/store.js'
+import AdminJS from '../../../adminjs.js'
 
 export async function getComponentHtml<T extends Record<string, unknown>>(
   Component: React.FC<T>,

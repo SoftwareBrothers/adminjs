@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
 import { FormGroup, Label, SelectAsync } from '@adminjs/design-system'
 
-import ApiClient from '../../../utils/api-client'
-import { FilterPropertyProps, SelectRecord } from '../base-property-props'
-import allowOverride from '../../../hoc/allow-override'
+import ApiClient from '../../../utils/api-client.js'
+import { FilterPropertyProps, SelectRecord } from '../base-property-props.js'
+import allowOverride from '../../../hoc/allow-override.js'
 
 type SelectOptions = Array<{value: string | number; label: string }>
 

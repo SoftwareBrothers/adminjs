@@ -1,5 +1,5 @@
-import Show from './show'
-import Edit from './edit'
+import Show from './show.js'
+import Edit from './edit.js'
 
 export {
   Show as show,

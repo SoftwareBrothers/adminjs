@@ -2,12 +2,13 @@ import { render, RenderResult } from '@testing-library/react'
 import { expect } from 'chai'
 import factory from 'factory-girl'
 import React from 'react'
-import TestContextProvider from '../../spec/test-context-provider'
-import PropertyHeader from './property-header'
 
-import { PropertyJSON } from '../../../interfaces'
-import '../../spec/initialize-translations'
-import '../../spec/property-json.factory'
+import TestContextProvider from '../../spec/test-context-provider.js'
+import PropertyHeader from './property-header.js'
+import { PropertyJSON } from '../../../interfaces/index.js'
+
+import '../../spec/initialize-translations.js'
+import '../../spec/property-json.factory.js'
 
 const renderSubject = (
   property: PropertyJSON,

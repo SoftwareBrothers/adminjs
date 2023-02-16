@@ -1,9 +1,10 @@
 import { expect } from 'chai'
 import sinon, { SinonStubbedInstance } from 'sinon'
-import { ResourceDecorator } from '..'
-import AdminJS from '../../../../adminjs'
-import { BaseProperty, BaseResource } from '../../../adapters'
-import { PropertyOptions } from '../../property'
+
+import ResourceDecorator from '../resource-decorator.js'
+import AdminJS from '../../../../adminjs.js'
+import { BaseProperty, BaseResource } from '../../../adapters/index.js'
+import { PropertyOptions } from '../../property/index.js'
 
 import { DecoratedProperties, decorateProperties } from './decorate-properties'
 

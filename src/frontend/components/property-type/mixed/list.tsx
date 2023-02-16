@@ -2,10 +2,10 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { Label } from '@adminjs/design-system'
 
-import ViewHelpers from '../../../../backend/utils/view-helpers/view-helpers'
-import { EditPropertyProps, BasePropertyProps } from '../base-property-props'
-import { convertToSubProperty } from './convert-to-sub-property'
-import allowOverride from '../../../hoc/allow-override'
+import ViewHelpers from '../../../../backend/utils/view-helpers/view-helpers.js'
+import { EditPropertyProps, BasePropertyProps } from '../base-property-props.js'
+import { convertToSubProperty } from './convert-to-sub-property.js'
+import allowOverride from '../../../hoc/allow-override.js'
 
 type ItemComponentProps = BasePropertyProps;
 

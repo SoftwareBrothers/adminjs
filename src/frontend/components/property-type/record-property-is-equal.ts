@@ -1,5 +1,5 @@
 /* eslint-disable import/prefer-default-export */
-import { EditPropertyProps, ShowPropertyProps } from './base-property-props'
+import { EditPropertyProps, ShowPropertyProps } from './base-property-props.js'
 
 /**
  * Function used in React memo to compare if previous property value and next

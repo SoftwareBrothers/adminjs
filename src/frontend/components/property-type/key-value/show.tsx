@@ -1,9 +1,9 @@
 import React from 'react'
 import { Section, FormGroup, Input, Box, ValueGroup } from '@adminjs/design-system'
 
-import { ShowPropertyProps } from '../base-property-props'
-import { flat } from '../../../../utils/flat'
-import { useTranslation } from '../../../hooks/use-translation'
+import { ShowPropertyProps } from '../base-property-props.js'
+import { flat } from '../../../../utils/flat/index.js'
+import { useTranslation } from '../../../hooks/use-translation.js'
 
 export type ShowKeyValuePairProps = {
   objectValue: string

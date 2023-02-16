@@ -1,5 +1,5 @@
-import { Action, BulkActionResponse } from '../action.interface'
-import NotFoundError from '../../utils/errors/not-found-error'
+import { Action, BulkActionResponse } from '../action.interface.js'
+import NotFoundError from '../../utils/errors/not-found-error.js'
 
 /**
  * @implements Action

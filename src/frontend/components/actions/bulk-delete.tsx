@@ -2,15 +2,15 @@ import { Button, DrawerContent, DrawerFooter, Icon, MessageBox, Table, TableBody
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router'
 
-import allowOverride from '../../hoc/allow-override'
-import withNotice, { AddNoticeProps } from '../../hoc/with-notice'
-import { useTranslation } from '../../hooks'
-import { getActionElementCss } from '../../utils'
-import ApiClient from '../../utils/api-client'
-import ActionHeader from '../app/action-header/action-header'
-import PropertyType from '../property-type'
-import { ActionProps } from './action.props'
-import { appendForceRefresh } from './utils/append-force-refresh'
+import allowOverride from '../../hoc/allow-override.js'
+import withNotice, { AddNoticeProps } from '../../hoc/with-notice.js'
+import { useTranslation } from '../../hooks/index.js'
+import { getActionElementCss } from '../../utils/index.js'
+import ApiClient from '../../utils/api-client.js'
+import ActionHeader from '../app/action-header/action-header.js'
+import BasePropertyComponent from '../property-type/index.js'
+import { ActionProps } from './action.props.js'
+import { appendForceRefresh } from './utils/append-force-refresh.js'
 
 /**
  * @name BulkDeleteAction
@@ -82,7 +82,7 @@ const BulkDelete: React.FC<ActionProps & AddNoticeProps> = (props) => {
             {records.map((record) => (
               <TableRow key={record.id}>
                 <TableCell>
-                  <PropertyType
+                  <BasePropertyComponent
                     where="list"
                     property={resource.titleProperty}
                     resource={resource}

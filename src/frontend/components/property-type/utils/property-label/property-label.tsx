@@ -1,10 +1,10 @@
 import { Label, LabelProps } from '@adminjs/design-system'
 import React from 'react'
 
-import { PropertyJSON } from '../../../../interfaces'
-import { PropertyDescription } from '../property-description'
-import allowOverride from '../../../../hoc/allow-override'
-import { useTranslation } from '../../../../hooks'
+import { PropertyJSON } from '../../../../interfaces/index.js'
+import { PropertyDescription } from '../property-description/index.js'
+import allowOverride from '../../../../hoc/allow-override.js'
+import { useTranslation } from '../../../../hooks/index.js'
 
 export type PropertyLabelProps = {
   property: PropertyJSON;

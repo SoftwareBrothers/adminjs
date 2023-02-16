@@ -1,6 +1,6 @@
-import { BaseRecord } from '../../adapters'
-import PropertyDecorator from '../../decorators/property/property-decorator'
-import { ActionContext } from '../../actions'
+import { BaseRecord } from '../../adapters/index.js'
+import PropertyDecorator from '../../decorators/property/property-decorator.js'
+import { ActionContext } from '../../actions/index.js'
 
 const isValueSearchable = (value: any): value is string | number => (
   ['string', 'bigint', 'number'].includes(typeof value)

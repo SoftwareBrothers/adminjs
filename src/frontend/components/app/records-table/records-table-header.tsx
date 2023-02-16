@@ -1,11 +1,11 @@
 import { CheckBox, TableCell, TableHead, TableRow } from '@adminjs/design-system'
 import React from 'react'
 
-import allowOverride from '../../../hoc/allow-override'
-import { BasePropertyJSON } from '../../../interfaces'
-import { getResourceElementCss } from '../../../utils'
-import PropertyHeader from './property-header'
-import { display } from './utils/display'
+import allowOverride from '../../../hoc/allow-override.js'
+import { BasePropertyJSON } from '../../../interfaces/index.js'
+import { getResourceElementCss } from '../../../utils/index.js'
+import PropertyHeader from './property-header.js'
+import { display } from './utils/display.js'
 
 /**
  * @memberof RecordsTableHeader

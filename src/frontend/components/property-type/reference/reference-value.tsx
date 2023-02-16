@@ -3,9 +3,9 @@ import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 import { ButtonCSS } from '@adminjs/design-system'
 
-import ViewHelpers from '../../../../backend/utils/view-helpers/view-helpers'
-import allowOverride from '../../../hoc/allow-override'
-import { ShowPropertyProps } from '../base-property-props'
+import ViewHelpers from '../../../../backend/utils/view-helpers/view-helpers.js'
+import allowOverride from '../../../hoc/allow-override.js'
+import { ShowPropertyProps } from '../base-property-props.js'
 
 const StyledLink = styled<any>(Link)`
   ${ButtonCSS};

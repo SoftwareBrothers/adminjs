@@ -1,10 +1,11 @@
 /* eslint-disable no-nested-ternary */
 import uniq from 'lodash/uniq'
 import merge from 'lodash/merge'
-import AdminJS from '../../..'
-import { FeatureType } from '../../../adminjs-options.interface'
-import { ResourceOptions } from '../../decorators/resource/resource-options.interface'
-import { Action, ActionResponse } from '../../actions/action.interface'
+
+import AdminJS from '../../../adminjs.js'
+import { FeatureType } from '../../../adminjs-options.interface.js'
+import { ResourceOptions } from '../../decorators/resource/resource-options.interface.js'
+import { Action, ActionResponse } from '../../actions/action.interface.js'
 
 function mergeActionHooks<T>(
   key: string,

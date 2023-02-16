@@ -1,5 +1,5 @@
-import { Action, RecordActionResponse } from '../action.interface'
-import NotFoundError from '../../utils/errors/not-found-error'
+import { Action, RecordActionResponse } from '../action.interface.js'
+import NotFoundError from '../../utils/errors/not-found-error.js'
 
 /**
  * @implements Action

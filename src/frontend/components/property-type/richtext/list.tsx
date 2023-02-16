@@ -1,8 +1,8 @@
 import truncate from 'lodash/truncate'
 import React, { FC } from 'react'
 
-import { ShowPropertyProps } from '../base-property-props'
-import allowOverride from '../../../hoc/allow-override'
+import { ShowPropertyProps } from '../base-property-props.js'
+import allowOverride from '../../../hoc/allow-override.js'
 
 const stripHtml = (html: string): string => {
   const el = window.document.createElement('DIV')

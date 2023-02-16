@@ -1,4 +1,4 @@
-import { ErrorTypeEnum } from '../../../utils/error-type.enum'
+import { ErrorTypeEnum } from '../../../utils/error-type.enum.js'
 
 /**
  * Record Error

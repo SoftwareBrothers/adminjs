@@ -1,10 +1,10 @@
 import React from 'react'
 import { FormGroup, Label, DatePicker } from '@adminjs/design-system'
 
-import * as BackendFilter from '../../../../backend/utils/filter/filter'
-import { useTranslation } from '../../../hooks/use-translation'
-import { FilterPropertyProps } from '../base-property-props'
-import allowOverride from '../../../hoc/allow-override'
+import * as BackendFilter from '../../../../backend/utils/filter/filter.js'
+import { useTranslation } from '../../../hooks/use-translation.js'
+import { FilterPropertyProps } from '../base-property-props.js'
+import allowOverride from '../../../hoc/allow-override.js'
 
 const { PARAM_SEPARATOR } = BackendFilter
 

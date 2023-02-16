@@ -8,11 +8,11 @@ import {
 } from '@adminjs/design-system'
 import { useSelector } from 'react-redux'
 
-import allowOverride from '../../../hoc/allow-override'
-import { DrawerProps, ReduxState, RouterProps } from '../../../store'
+import allowOverride from '../../../hoc/allow-override.js'
+import { DrawerProps, ReduxState, RouterProps } from '../../../store/index.js'
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-const StyledLink = styled(({ rounded, ...rest }) => <RouterLink {...rest} />)<ButtonProps>`${ButtonCSS}`
+const StyledLink = styled(({ rounded, to, ...rest }) => <RouterLink to={to} {...rest} />)<ButtonProps>`${ButtonCSS}`
 
 export type StyledBackButtonProps = {
   showInDrawer: boolean;

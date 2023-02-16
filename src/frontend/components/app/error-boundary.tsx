@@ -1,7 +1,7 @@
 import React, { ReactNode } from 'react'
 import { Text, MessageBox } from '@adminjs/design-system'
 
-import { useTranslation } from '../../hooks'
+import { useTranslation } from '../../hooks/index.js'
 
 type State = {
   error: any;

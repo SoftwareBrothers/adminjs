@@ -1,5 +1,5 @@
-import { AdminJSOptions, Assets } from '../../../adminjs-options.interface'
-import { Paths } from '../../../frontend/store/store'
+import { AdminJSOptions, Assets } from '../../../adminjs-options.interface.js'
+import { Paths } from '../../../frontend/store/store.js'
 
 let globalAny: any = {}
 

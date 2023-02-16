@@ -1,9 +1,9 @@
-import { flat } from '../../../utils/flat'
-import { Action, ActionQueryParameters, ActionResponse } from '../action.interface'
-import sortSetter from '../../services/sort-setter/sort-setter'
-import Filter from '../../utils/filter/filter'
-import populator from '../../utils/populator/populator'
-import { RecordJSON } from '../../../frontend/interfaces'
+import { flat } from '../../../utils/flat/index.js'
+import { Action, ActionQueryParameters, ActionResponse } from '../action.interface.js'
+import sortSetter from '../../services/sort-setter/sort-setter.js'
+import Filter from '../../utils/filter/filter.js'
+import populator from '../../utils/populator/populator.js'
+import { RecordJSON } from '../../../frontend/interfaces/index.js'
 
 const PER_PAGE_LIMIT = 500
 
