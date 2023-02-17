@@ -122,7 +122,7 @@ const Wrapper = () => {
        {params}
      </Box>
      <Box my="lg">
-       <Button variant="primary" onClick={submit}>Submit</Button>
+       <Button variant="contained" onClick={submit}>Submit</Button>
        <Text variant="sm">
          This will throw an error because there is no AdminJS instance running
        </Text>

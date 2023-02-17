@@ -37,12 +37,11 @@ const Edit: React.FC<EditPropertyProps> = (props) => {
           {...property.props}
         />
         <Button
-          variant={isInput ? 'primary' : 'text'}
           type="button"
           size="icon"
           onClick={() => setIsInput(!isInput)}
         >
-          <Icon icon="View" />
+          <Icon icon="Eye" />
         </Button>
       </InputGroup>
       <FormMessage>{error && error.message}</FormMessage>

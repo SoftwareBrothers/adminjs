@@ -1,7 +1,7 @@
 import {
   Box, Button, Drawer,
   DrawerContent,
-  DrawerFooter, H3, Icon,
+  DrawerFooter, Icon,
 } from '@adminjs/design-system'
 import React, { MouseEvent, SyntheticEvent, useEffect, useRef, useState } from 'react'
 import { useLocation, useNavigate, useParams } from 'react-router-dom'
@@ -42,7 +42,7 @@ const FilterDrawer: React.FC<FilterProps> = (props) => {
   const [filter, setFilter] = useState(parseQuery(location))
   const params = useParams<MatchProps>()
   const navigate = useNavigate()
-  const { translateLabel, translateButton } = useTranslation()
+  const { translateButton } = useTranslation()
   const initialLoad = useRef(true)
 
   useEffect(() => {
@@ -103,18 +103,18 @@ const FilterDrawer: React.FC<FilterProps> = (props) => {
   return (
     <Drawer variant="filter" isHidden={!isVisible} as="form" onSubmit={handleSubmit} data-css={contentTag}>
       <DrawerContent data-css={cssContent}>
-        <H3>
+        <Box flex justifyContent="flex-end">
           <Button
+            variant="light"
             type="button"
             size="icon"
             rounded
             mr="lg"
             onClick={(): void => toggleFilter()}
           >
-            <Icon icon="ChevronRight" color="white" />
+            <Icon icon="X" color="grey80" />
           </Button>
-          {translateLabel('filters', resource.id)}
-        </H3>
+        </Box>
         <Box my="x3">
           {properties.map((property) => (
             <PropertyType
@@ -129,11 +129,13 @@ const FilterDrawer: React.FC<FilterProps> = (props) => {
         </Box>
       </DrawerContent>
       <DrawerFooter data-css={cssFooter}>
-        <Button variant="primary" size="lg" data-css={cssButtonApply}>
-          {translateButton('applyChanges', resource.id)}
-        </Button>
-        <Button variant="text" size="lg" onClick={resetFilter} type="button" color="white" data-css={cssButtonReset}>
+
+        <Button size="lg" variant="light" onClick={resetFilter} type="button" data-css={cssButtonReset}>
           {translateButton('resetFilter', resource.id)}
+        </Button>
+
+        <Button variant="contained" size="lg" data-css={cssButtonApply}>
+          {translateButton('applyChanges', resource.id)}
         </Button>
       </DrawerFooter>
     </Drawer>

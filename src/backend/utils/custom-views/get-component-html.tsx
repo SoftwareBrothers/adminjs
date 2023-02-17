@@ -79,7 +79,7 @@ export async function getComponentHtml<T extends Record<string, unknown>>(
       <title>${branding.companyName}</title>
       ${style}
       ${faviconTag}
-      <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,700" type="text/css">
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" type="text/css">
       ${styles.join('\n')}
 
       <script src="${h.assetPath('global.bundle.js', assets)}"></script>

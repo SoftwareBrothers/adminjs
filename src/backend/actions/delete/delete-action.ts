@@ -15,7 +15,7 @@ export const DeleteAction: Action<RecordActionResponse> = {
   name: 'delete',
   isVisible: true,
   actionType: 'record',
-  icon: 'TrashCan',
+  icon: 'Trash2',
   guard: 'confirmDelete',
   component: false,
   variant: 'danger',

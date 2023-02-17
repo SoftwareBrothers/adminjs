@@ -17,7 +17,7 @@ import { TranslateFunctions, createFunctions } from '../../utils/translate-funct
  *
  *   return (
  *     <Box>
- *       <Button variant="primary" onClick={...}>{translateButton('save')}<Button>
+ *       <Button variant="contained" onClick={...}>{translateButton('save')}<Button>
  *     </Box>
  *   )
  * }

@@ -25,6 +25,15 @@ const translations = {
     cancel: 'Cкасувати',
     confirm: 'Підтвердити',
   },
+  components: {
+    DropZone: {
+      placeholder: 'Перетягніть свій файл сюди або натисніть, щоб переглянути',
+      acceptedSize: 'Максимальний розмір: {{maxSize}}',
+      acceptedType: 'Підтримує: {{mimeTypes}}',
+      unsupportedSize: 'Файл {{fileName}} завеликий',
+      unsupportedType: 'Тип файлу {{fileName}} не підтримується: {{fileType}}',
+    },
+  },
   labels: {
     navigation: 'Навігація',
     pages: 'Сторінки',

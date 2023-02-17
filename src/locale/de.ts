@@ -24,6 +24,15 @@ const translations = {
     cancel: 'Abbestellen',
     confirm: 'Bestätigen',
   },
+  components: {
+    DropZone: {
+      placeholder: 'Legen Sie Ihre Datei hier ab oder klicken Sie zum Durchsuchen',
+      acceptedSize: 'Maximale Dateigröße: {{maxSize}}',
+      acceptedType: 'Unterstützen: {{mimeTypes}}',
+      unsupportedSize: 'Datei {{fileName}} ist zu groß',
+      unsupportedType: 'Datei {{fileName}} hat einen nicht unterstützten Typ: {{fileType}}',
+    },
+  },
   labels: {
     navigation: 'Navigation',
     pages: 'Seiten',

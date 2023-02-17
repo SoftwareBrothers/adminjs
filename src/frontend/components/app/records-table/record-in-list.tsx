@@ -85,7 +85,7 @@ const RecordInList: React.FC<RecordInListProps> = (props) => {
   )
 
   const buttons = [{
-    icon: 'OverflowMenuHorizontal',
+    icon: 'MoreHorizontal',
     variant: 'light' as const,
     label: undefined,
     'data-testid': 'actions-dropdown',
@@ -99,8 +99,8 @@ const RecordInList: React.FC<RecordInListProps> = (props) => {
   }]
   const contentTag = getResourceElementCss(resource.id, 'table-row')
   return (
-    <TableRow onClick={handleClick} data-id={record.id} data-css={contentTag}>
-      <TableCell className={isSelected ? 'selected' : 'not-selected'}>
+    <TableRow className={isSelected ? 'selected' : 'not-selected'} onClick={handleClick} data-id={record.id} data-css={contentTag}>
+      <TableCell width={0}>
         {onSelect && record.bulkActions.length ? (
           <CheckBox
             onChange={() => onSelect(record)}
@@ -132,10 +132,10 @@ const RecordInList: React.FC<RecordInListProps> = (props) => {
           </TableCell>
         )
       })}
-      <TableCell key="options">
+      <TableCell key="options" className="options">
         {recordActions.length ? (
           <ButtonGroup buttons={buttons} />
-        ) : ''}
+        ) : null}
       </TableCell>
     </TableRow>
   )

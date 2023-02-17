@@ -13,7 +13,7 @@ export const BulkDeleteAction: Action<BulkActionResponse> = {
   name: 'bulkDelete',
   isVisible: true,
   actionType: 'bulk',
-  icon: 'Delete',
+  icon: 'Trash2',
   showInDrawer: true,
   variant: 'danger',
   /**
