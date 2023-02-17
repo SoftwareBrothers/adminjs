@@ -26,6 +26,7 @@ import { DEFAULT_PATHS } from '../../constants'
 import { CurrentAdmin } from '../../current-admin.interface'
 import { Locale } from '../../locale/config'
 import { NoticeMessage } from '../hoc/with-notice'
+import { confirmModalReducer, ConfirmModalInState } from './reducers/modal'
 
 export type DashboardInState = {
   component?: string;
@@ -223,6 +224,7 @@ export type ReduxState = {
   pages: Array<PageJSON>;
   locale: Locale;
   router: RouterProps;
+  confirmModal: ConfirmModalInState;
 }
 
 const reducer = combineReducers<ReduxState>({
@@ -237,6 +239,10 @@ const reducer = combineReducers<ReduxState>({
   pages: pagesReducer,
   locale: localesReducer,
   router: routerReducer,
+  confirmModal: confirmModalReducer,
 })
 
-export default (initialState = {}) => createStore(reducer, initialState)
+export default (initialState = {}) => createStore(
+  reducer,
+  initialState,
+)

@@ -21,6 +21,8 @@ const translations = {
     login: 'Zaloguj',
     seeTheDocumentation: 'Zajrzyj: <1>do dokumentacji</1>',
     createFirstRecord: 'Utwórz pierwszy rekord',
+    cancel: 'Anuluj',
+    confirm: 'Potwierdź',
   },
   labels: {
     navigation: 'Nawigacja',
@@ -68,7 +70,7 @@ const translations = {
     noActionComponent: 'Musisz zaiplementować komponent dla twojej akcji.',
     noRecordsInResource: 'Ten zasób nie posiada rekordów.',
     noRecords: 'Brak danych.',
-    confirmDelete: 'Czy potwierdzasz usynięcie tej pozycji?',
+    confirmDelete: 'Czy potwierdzasz usunięcie tej pozycji?',
     welcomeOnBoard_title: 'Witamy na pokładzie!',
     welcomeOnBoard_subtitle:
       'Od teraz jesteś jednym z nas! Przygotowaliśmy dla Ciebie kilka wskazówek:',

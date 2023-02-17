@@ -8,6 +8,7 @@ import { actionHref } from './action-href'
 import { ActionJSON } from './action-json.interface'
 import { buildActionCallApiTrigger } from './build-action-api-call-trigger'
 import { TranslateFunctions } from '../../../utils'
+import { ConfirmModalData, ConfirmModalFunctions } from '../confirm-modal.interface'
 
 export type BuildActionClickOptions = {
   action: ActionJSON;
@@ -15,6 +16,7 @@ export type BuildActionClickOptions = {
   actionResponseHandler: ReturnType<typeof useActionResponseHandler>;
   navigate: NavigateFunction;
   translateFunctions: TranslateFunctions;
+  modalFunctions: ConfirmModalFunctions
 }
 
 export type BuildActionClickReturn = (event: any) => any | Promise<any>
@@ -22,8 +24,9 @@ export type BuildActionClickReturn = (event: any) => any | Promise<any>
 export const buildActionClickHandler = (
   options: BuildActionClickOptions,
 ): BuildActionClickReturn => {
-  const { action, params, actionResponseHandler, navigate, translateFunctions } = options
-  const { translateMessage } = translateFunctions
+  const { action, params, actionResponseHandler, navigate,
+    modalFunctions } = options
+  const { openModal } = modalFunctions
 
   const handleActionClick = (event: React.MouseEvent<HTMLElement>): Promise<any> | any => {
     event.preventDefault()
@@ -35,13 +38,18 @@ export const buildActionClickHandler = (
       params, action, actionResponseHandler,
     })
 
-    if (action.guard && !confirm(translateMessage(action.guard, params.resourceId))) {
+    if (action.guard && actionHasComponent(action)) {
+      const modalData: ConfirmModalData = {
+        modalProps: {
+          label: 'confirm',
+          title: action.guard,
+        },
+        type: 'confirm',
+        resourceId: params.resourceId,
+        confirmAction: callApi,
+      }
+      openModal(modalData)
       return
-    }
-
-    if (actionHasComponent(action)) {
-      // eslint-disable-next-line consistent-return
-      return callApi()
     }
 
     if (href) {

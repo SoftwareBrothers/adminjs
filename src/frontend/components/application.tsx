@@ -10,6 +10,7 @@ import Sidebar from './app/sidebar/sidebar'
 import TopBar from './app/top-bar'
 import Notice from './app/notice'
 import allowOverride from '../hoc/allow-override'
+import ConfirmModal from './app/confirm-modal'
 import {
   DashboardRoute, ResourceActionRoute, RecordActionRoute, PageRoute, BulkActionRoute, ResourceRoute,
 } from './routes'
@@ -95,6 +96,7 @@ const App: React.FC = () => {
             <Route path={`${recordActionUrl}/*`} element={<RecordActionRoute />} />
           </Routes>
         </Box>
+        <ConfirmModal />
       </Box>
     </>
 

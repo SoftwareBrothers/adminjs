@@ -9,6 +9,11 @@ import '../../spec/action-json.factory'
 
 const translateFunctions = createFunctions(i18n)
 
+const modalFunctions = {
+  closeModal: () => { /* noop */ },
+  openModal: (data) => { /* noop */ },
+}
+
 describe('actionsToButtonGroup', () => {
   let actions: Array<ActionJSON>
   const actionsCount = 5
@@ -32,6 +37,7 @@ describe('actionsToButtonGroup', () => {
         params,
         handleClick,
         translateFunctions,
+        modalFunctions,
       })
     })
 
@@ -73,6 +79,7 @@ describe('actionsToButtonGroup', () => {
         params,
         handleClick,
         translateFunctions,
+        modalFunctions,
       })
     })
 
@@ -105,6 +112,7 @@ describe('actionsToButtonGroup', () => {
         params,
         handleClick,
         translateFunctions,
+        modalFunctions,
       })
     })
 

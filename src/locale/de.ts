@@ -21,6 +21,8 @@ const translations = {
     login: 'Anmelden',
     seeTheDocumentation: 'Siehe: <1>die Dokumentation</1>',
     createFirstRecord: 'Ersten Eintrag erstellen',
+    cancel: 'Abbestellen',
+    confirm: 'Bestätigen',
   },
   components: {
     DropZone: {

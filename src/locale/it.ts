@@ -21,6 +21,8 @@ const translations = {
     login: 'Accedi',
     seeTheDocumentation: 'Vedi: <1>La documentazione</1>',
     createFirstRecord: 'Crea il primo elemento',
+    cancel: 'Annulla',
+    confirm: 'Confermare',
   },
   components: {
     DropZone: {

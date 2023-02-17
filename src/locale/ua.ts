@@ -22,6 +22,8 @@ const translations = {
     seeTheDocumentation: 'Дивіться: <1>документація</1>',
     createFirstRecord: 'Створити перший запис',
     contactUs: 'Зв\'язатися з нами',
+    cancel: 'Cкасувати',
+    confirm: 'Підтвердити',
   },
   components: {
     DropZone: {
