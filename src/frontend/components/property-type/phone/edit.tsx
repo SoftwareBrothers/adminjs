@@ -5,9 +5,13 @@ import { EditPropertyProps } from '../base-property-props'
 import { recordPropertyIsEqual } from '../record-property-is-equal'
 import { PropertyLabel } from '../utils/property-label'
 import allowOverride from '../../../hoc/allow-override'
+import { useTranslation } from '../../../hooks'
 
 const Edit: FC<EditPropertyProps> = (props) => {
-  const { onChange, property, record } = props
+  const { onChange, property, record, resource } = props
+
+  const { translateLabel, translateMessage } = useTranslation()
+
   const propValue = record.params?.[property.path] ?? ''
   const [value, setValue] = useState(propValue)
   const error = record.errors?.[property.path]
@@ -27,6 +31,8 @@ const Edit: FC<EditPropertyProps> = (props) => {
           name: property.path,
           required: property.isRequired,
         }}
+        searchPlaceholder={translateLabel('search', resource.id)}
+        searchNotFound={translateMessage('noCountryFound', resource.id)}
         onChange={setValue}
         onBlur={(): void => onChange(property.path, value)}
         value={value}
