@@ -1,30 +1,20 @@
 name: CI/CD
 on: [push, pull_request]
+
 jobs:
   setup:
     name: setup
     runs-on: ubuntu-latest
     steps:
-      - name: Dump GitHub context
-        env:
-          GITHUB_CONTEXT: ${{ toJson(github) }}
-        run: echo "$GITHUB_CONTEXT"
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - name: Setup
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v3
         with:
-          node-version: "14.x"
-      - uses: actions/cache@v1
-        id: yarn-cache
-        with:
-          path: node_modules
-          key: ${{ runner.os }}-node_modules-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-node_modules-
+          node-version: '14'
+          cache: 'yarn'
       - name: Install
-        if: steps.yarn-cache.outputs.cache-hit != 'true'
-        run: yarn install
+        run: yarn install --frozen-lockfile
 
   build:
     name: build
@@ -32,27 +22,20 @@ jobs:
     needs: setup
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - name: Setup
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v3
         with:
-          node-version: "14.x"
-      - uses: actions/cache@v1
-        id: yarn-cache
-        with:
-          path: node_modules
-          key: ${{ runner.os }}-node_modules-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-node_modules-
+          node-version: '14'
+          cache: 'yarn'
       - name: Install
-        if: steps.yarn-cache.outputs.cache-hit != 'true'
         run: yarn install
-
-      - uses: actions/cache@v1
+      - name: Assets cache
+        uses: actions/cache@v3
         id: assets-cache
         with:
           path: src/frontend/assets/scripts
-          key: assets-${{ hashFiles('**/src/frontend/global-entry.js') }}-${{ hashFiles('**/yarn.lock') }}-{{ hashFiles('**/bin/bundle-globals.js') }}
+          key: assets-${{ hashFiles('**/src/frontend/global-entry.js') }}-${{ hashFiles('**/yarn.lock') }}-${{ hashFiles('**/bin/bundle-globals.js') }}
           restore-keys: |
             assets-
       - name: bundle globals production
@@ -78,7 +61,7 @@ jobs:
           || contains(github.ref, 'refs/heads/beta')
           || contains(github.ref, 'refs/heads/alpha')
           || contains(github.ref, 'refs/heads/dev')
-        uses: actions/upload-artifact@v1
+        uses: actions/upload-artifact@v3
         with:
           name: lib
           path: lib
@@ -90,7 +73,7 @@ jobs:
           || contains(github.ref, 'refs/heads/beta')
           || contains(github.ref, 'refs/heads/alpha')
           || contains(github.ref, 'refs/heads/dev')
-        uses: actions/upload-artifact@v1
+        uses: actions/upload-artifact@v3
         with:
           name: types
           path: types
@@ -102,7 +85,7 @@ jobs:
           || contains(github.ref, 'refs/heads/beta')
           || contains(github.ref, 'refs/heads/alpha')
           || contains(github.ref, 'refs/heads/dev')
-        uses: actions/upload-artifact@v1
+        uses: actions/upload-artifact@v3
         with:
           name: bundle
           path: src/frontend/assets/scripts
@@ -113,20 +96,13 @@ jobs:
     needs: setup
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - name: Setup
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v3
         with:
-          node-version: "14.x"
-      - uses: actions/cache@v1
-        id: yarn-cache
-        with:
-          path: node_modules
-          key: ${{ runner.os }}-node_modules-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-node_modules-
+          node-version: '14'
+          cache: 'yarn'
       - name: Install
-        if: steps.yarn-cache.outputs.cache-hit != 'true'
         run: yarn install
       - name: Lint
         run: yarn lint
@@ -143,95 +119,6 @@ jobs:
       - name: test
         if: "!contains(github.ref, 'refs/heads/master')"
         run: yarn test
-
-  cypress:
-    name: Cypress
-    needs: build
-    if: |
-      contains(github.ref, 'refs/heads/next')
-    services:
-      mongo:
-        image: mongo:3.4.23
-        ports:
-          - 27017:27017
-      postgres:
-        image: postgres:10.8
-        env:
-          POSTGRES_USER: postgres
-          POSTGRES_PASSWORD: postgres
-          POSTGRES_DB: postgres
-        ports:
-          - 5432:5432
-        # needed because the postgres container does not provide a healthcheck
-        options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-      - name: Setup
-        uses: actions/setup-node@v1
-        with:
-          node-version: "14.x"
-      - uses: actions/cache@v1
-        id: yarn-cache
-        with:
-          path: node_modules
-          key: ${{ runner.os }}-node_modules-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-node_modules-
-      - name: Install
-        if: steps.yarn-cache.outputs.cache-hit != 'true'
-        run: yarn install
-      - name: Download Build
-        uses: actions/download-artifact@v1
-        with:
-          name: lib
-      - name: Download Types
-        uses: actions/download-artifact@v1
-        with:
-          name: types
-      - name: Download Bundle
-        uses: actions/download-artifact@v1
-        with:
-          name: bundle
-      - run: yarn link
-      - name: Install dependencies
-        uses: cypress-io/github-action@v2
-        with:
-          # just perform install
-          runTests: false
-          working-directory: packages/adminjs-e2e
-      - run: yarn link adminjs
-        working-directory: packages/adminjs-e2e
-      - run: yarn run sequelize db:create
-        working-directory: packages/adminjs-e2e
-        env:
-          POSTGRES_PASSWORD: postgres
-          POSTGRES_USER: postgres
-          POSTGRES_DATABASE: adminjs_e2e_development
-      - run: yarn run sequelize db:migrate
-        working-directory: packages/adminjs-e2e
-        env:
-          POSTGRES_PASSWORD: postgres
-          POSTGRES_USER: postgres
-          POSTGRES_DATABASE: adminjs_e2e_development
-      - run: node bin/setup-db.js
-        working-directory: packages/adminjs-e2e
-      - uses: cypress-io/github-action@v2
-        with:
-          install: false
-          working-directory: packages/adminjs-e2e
-          start: yarn start
-      - uses: actions/upload-artifact@v1
-        if: failure()
-        with:
-          name: cypress-screenshots
-          path: packages/adminjs-e2e/cypress/screenshots
-      - uses: actions/upload-artifact@v1
-        if: always()
-        with:
-          name: cypress-videos
-          path: packages/adminjs-e2e/cypress/videos
 
   publish:
     name: Publish
@@ -256,33 +143,34 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - name: Setup
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v3
         with:
-          node-version: "14.x"
-      - uses: actions/cache@v1
-        id: yarn-cache
-        with:
-          path: node_modules
-          key: ${{ runner.os }}-node_modules-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-node_modules-
+          node-version: '14'
+          cache: 'yarn'
       - name: Install
-        if: steps.yarn-cache.outputs.cache-hit != 'true'
         run: yarn install
       - name: Download Build
-        uses: actions/download-artifact@v1
+        uses: actions/download-artifact@v3
         with:
           name: lib
+          path: lib
       - name: Download Types
-        uses: actions/download-artifact@v1
+        uses: actions/download-artifact@v3
         with:
           name: types
+          path: types
       - name: Download Bundle
-        uses: actions/download-artifact@v1
+        uses: actions/download-artifact@v3
         with:
           name: bundle
+          path: bundle
+      - name: Check directories exists
+        uses: andstor/file-existence-action@v2
+        with:
+          files: "bundle/, lib/, types/"
+          fail: true
       - name: Release
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}

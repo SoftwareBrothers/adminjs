@@ -1,8 +1,12 @@
 import React, { useEffect, ReactNode, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { createPortal } from 'react-dom'
 import { createRoot } from 'react-dom/client'
 import { Drawer, DEFAULT_DRAWER_WIDTH } from '@adminjs/design-system'
 import { ThemeProvider } from 'styled-components'
+
+import { ReduxState, RouterProps } from '../../store'
+import { setDrawerPreRoute } from '../../store/actions/set-drawer-preroute'
 
 /**
  * @alias DrawerPortalProps
@@ -22,15 +26,18 @@ export type DrawerPortalProps = {
 
 export type DrawerWrapperProps = {
   onMount: () => void;
+  onUnmount: () => void;
 }
 
 const DRAWER_PORTAL_ID = 'drawerPortal'
 const DRAWER_PORTAL_WRAPPER_ID = 'drawerPortalWrapper'
 
-const DrawerWrapper: React.FC<DrawerWrapperProps> = ({ onMount }) => {
+const DrawerWrapper: React.FC<DrawerWrapperProps> = ({ onMount, onUnmount }) => {
   useEffect(() => {
     onMount()
+    return onUnmount
   }, [])
+
   return (
     <ThemeProvider theme={(window as any).THEME}>
       <Drawer id={DRAWER_PORTAL_ID} className="hidden" data-css="drawer" />
@@ -66,16 +73,26 @@ const getOrCreatePortalContainer = (id: string) => {
  */
 export const DrawerPortal: React.FC<DrawerPortalProps> = ({ children, width }) => {
   const [drawerElement, setDrawerElement] = useState(document.getElementById(DRAWER_PORTAL_ID))
+  const { to = null } = useSelector<ReduxState, RouterProps>((state) => state.router)
+  const dispatch = useDispatch()
 
   const handleDrawerMount = () => {
+    dispatch(setDrawerPreRoute({ previousRoute: to }))
     setDrawerElement(document.getElementById(DRAWER_PORTAL_ID))
+  }
+
+  const handleDrawerUnmount = () => {
+    dispatch(setDrawerPreRoute({ previousRoute: null }))
   }
 
   useEffect(() => {
     const innerWrapperElement = getOrCreatePortalContainer(DRAWER_PORTAL_WRAPPER_ID)
     if (!drawerElement && window) {
       const drawerRoot = createRoot(innerWrapperElement)
-      drawerRoot.render(<DrawerWrapper onMount={handleDrawerMount} />)
+      drawerRoot.render(<DrawerWrapper
+        onMount={handleDrawerMount}
+        onUnmount={handleDrawerUnmount}
+      />)
     }
 
     return () => {

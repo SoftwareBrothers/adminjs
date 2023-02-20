@@ -14,7 +14,11 @@ const optionsKeys: (keyof FormatCurrencyOptions)[] = [
 
 const pickFormatOptions = (props: Record<string, string>): FormatCurrencyOptions => {
   const pickedProps = Object.keys(props).reduce((acc, curr) => {
-    if (optionsKeys.includes(curr as any)) acc[curr] = props[curr]
+    if (optionsKeys.includes(curr as any)) {
+      if (props[curr] !== null && props[curr] !== undefined) {
+        acc[curr] = props[curr].toString()
+      }
+    }
     return acc
   }, {} as FormatCurrencyOptions)
   return pickedProps
