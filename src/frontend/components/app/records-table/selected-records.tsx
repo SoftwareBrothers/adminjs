@@ -4,7 +4,7 @@ import { TableCaption, Title, ButtonGroup, Box } from '@adminjs/design-system'
 import { useNavigate } from 'react-router'
 import { ActionJSON, buildActionClickHandler, RecordJSON, ResourceJSON } from '../../../interfaces'
 import getBulkActionsFromRecords from './utils/get-bulk-actions-from-records'
-import { useActionResponseHandler, useTranslation, useConfirmModal } from '../../../hooks'
+import { useActionResponseHandler, useTranslation, useModal } from '../../../hooks'
 import { actionsToButtonGroup } from '../action-header/actions-to-button-group'
 import allowOverride from '../../../hoc/allow-override'
 import { getResourceElementCss } from '../../../utils'
@@ -20,7 +20,7 @@ const SelectedRecords: React.FC<SelectedRecordsProps> = (props) => {
   const { translateLabel } = translateFunctions
   const navigate = useNavigate()
   const actionResponseHandler = useActionResponseHandler()
-  const modalFunctions = useConfirmModal()
+  const modalFunctions = useModal()
 
   if (!selectedRecords || !selectedRecords.length) {
     return null

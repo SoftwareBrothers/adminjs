@@ -3,7 +3,7 @@ import { Badge, Box, ButtonGroup, cssClass, H2, H3 } from '@adminjs/design-syste
 import React from 'react'
 import { useNavigate } from 'react-router'
 import allowOverride from '../../../hoc/allow-override'
-import { useActionResponseHandler, useTranslation, useConfirmModal } from '../../../hooks'
+import { useActionResponseHandler, useTranslation, useModal } from '../../../hooks'
 import { ActionJSON, buildActionClickHandler } from '../../../interfaces/action'
 import { getActionElementCss, getResourceElementCss } from '../../../utils'
 import Breadcrumbs from '../breadcrumbs'
@@ -31,7 +31,7 @@ const ActionHeader: React.FC<ActionHeaderProps> = (props) => {
   const { translateButton, translateAction } = translateFunctions
   const navigate = useNavigate()
   const actionResponseHandler = useActionResponseHandler(actionPerformed)
-  const modalFunctions = useConfirmModal()
+  const modalFunctions = useModal()
 
   if (action.hideActionHeader) {
     return null

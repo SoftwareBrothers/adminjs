@@ -1,6 +1,6 @@
 import { ButtonGroupProps, ButtonInGroupProps } from '@adminjs/design-system'
 
-import { actionHref, ActionJSON, buildActionTestId, ConfirmModalFunctions } from '../../../interfaces'
+import { actionHref, ActionJSON, buildActionTestId, ModalFunctions } from '../../../interfaces'
 import { DifferentActionParams } from '../../../hooks'
 import { TranslateFunctions } from '../../../../utils'
 
@@ -9,7 +9,7 @@ export type actionsToButtonGroupOptions = {
   params: DifferentActionParams;
   handleClick: ButtonInGroupProps['onClick'];
   translateFunctions: TranslateFunctions;
-  modalFunctions: ConfirmModalFunctions,
+  modalFunctions: ModalFunctions,
 }
 
 export const actionsToButtonGroup = (

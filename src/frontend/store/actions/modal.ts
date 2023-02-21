@@ -1,18 +1,18 @@
-import { ConfirmModalData, ShowConfirmModalResponse, HideConfirmModalResponse } from '../../interfaces'
+import { ModalData, ShowModalResponse, HideModalResponse } from '../../interfaces'
 
-export const SHOW_CONFIRM_MODAL = 'SHOW_CONFIRM_MODAL'
+export const SHOW_MODAL = 'SHOW_MODAL'
 
-export const HIDE_CONFIRM_MODAL = 'HIDE_CONFIRM_MODAL'
+export const HIDE_MODAL = 'HIDE_MODAL'
 
-export const showConfirmModal = (data: ConfirmModalData): ShowConfirmModalResponse => (
+export const showModal = (data: ModalData): ShowModalResponse => (
   {
-    type: SHOW_CONFIRM_MODAL,
+    type: SHOW_MODAL,
     data,
   }
 )
 
-export const hideConfirmModal = (): HideConfirmModalResponse => (
+export const hideModal = (): HideModalResponse => (
   {
-    type: HIDE_CONFIRM_MODAL,
+    type: HIDE_MODAL,
   }
 )
