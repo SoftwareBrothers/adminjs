@@ -124,4 +124,16 @@ export interface ResourceOptions {
   } | {
     [key: string]: Partial<Action<ActionResponse>>;
   };
+  relations?: {
+    [resourceId: string]: {
+      junction: {
+        joinKey: string,
+        inverseJoinKey: string,
+        throughResourceId: string,
+      },
+      target: {
+        resourceId: string,
+      },
+    },
+  },
 }

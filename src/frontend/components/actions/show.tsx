@@ -4,6 +4,7 @@ import React from 'react'
 import allowOverride from '../../hoc/allow-override'
 import { getActionElementCss } from '../../utils'
 import ActionHeader from '../app/action-header/action-header'
+import { RecordRelations } from '../app/record-relations/record-relations'
 import PropertyType from '../property-type'
 import { ActionProps } from './action.props'
 import LayoutElementRenderer from './utils/layout-element-renderer'
@@ -24,31 +25,31 @@ const Show: React.FC<ActionProps> = (props) => {
   return (
     <DrawerContent data-css={contentTag}>
       {action?.showInDrawer ? <ActionHeader {...props} /> : null}
-      {action.layout ? action.layout.map((layoutElement, i) => (
-        <LayoutElementRenderer
-          // eslint-disable-next-line react/no-array-index-key
-          key={i}
-          layoutElement={layoutElement}
-          {...props}
-          where="show"
-        />
-      )) : properties.map((property) => (
-        <PropertyType
-          key={property.propertyPath}
-          where="show"
-          property={property}
-          resource={resource}
-          record={record}
-        />
-      ))}
+      {action.layout
+        ? action.layout.map((layoutElement, i) => (
+          <LayoutElementRenderer
+            // eslint-disable-next-line react/no-array-index-key
+            key={i}
+            layoutElement={layoutElement}
+            {...props}
+            where="show"
+          />
+        ))
+        : properties.map((property) => (
+          <PropertyType
+            key={property.propertyPath}
+            where="show"
+            property={property}
+            resource={resource}
+            record={record}
+          />
+        ))}
 
+      <RecordRelations resource={resource} record={record} />
     </DrawerContent>
   )
 }
 
 const OverridableShow = allowOverride(Show, 'DefaultShowAction')
 
-export {
-  OverridableShow as default,
-  OverridableShow as Show,
-}
+export { OverridableShow as default, OverridableShow as Show }
