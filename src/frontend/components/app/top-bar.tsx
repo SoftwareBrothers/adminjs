@@ -16,6 +16,7 @@ const NavBar = styled(Box)`
   border-bottom: ${themeGet('borders', 'default')};
   background: ${({ theme }) => theme.colors.white};
   display: flex;
+  align-items: center;
   flex-direction: row;
   flex-shrink: 0;
 `
@@ -47,7 +48,7 @@ const TopBar: React.FC<Props> = (props) => {
         display={['block', 'block', 'block', 'block', 'none']}
         style={{ cursor: 'pointer' }}
       >
-        <Icon icon="Menu" size={32} color="grey100" />
+        <Icon icon="Menu" size={24} color="grey100" />
       </Box>
       <Version versions={versions} />
       <LanguageSelect />

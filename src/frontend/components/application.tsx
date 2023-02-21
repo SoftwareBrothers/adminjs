@@ -76,6 +76,7 @@ const App: React.FC = () => {
       <Box height="100%" flex data-css="app">
         {sidebarVisible ? (
           <Overlay
+            zIndex={49}
             onClick={(): void => toggleSidebar(!sidebarVisible)}
           />
         ) : null}
