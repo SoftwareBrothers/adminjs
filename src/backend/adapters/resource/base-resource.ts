@@ -2,7 +2,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint class-methods-use-this: 0 no-unused-vars: 0 */
 /* eslint no-useless-constructor: 0 */
-import { SupportedDatabasesType } from './supported-databases.type'
+import { SupportedDatabasesType } from './supported-databases.type.js'
 import { BaseProperty, BaseRecord, ParamsType } from '../index.js'
 import { NotImplementedError, Filter } from '../../utils/index.js'
 import { ResourceOptions, ResourceDecorator } from '../../decorators/index.js'

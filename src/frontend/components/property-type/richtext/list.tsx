@@ -1,4 +1,4 @@
-import truncate from 'lodash/truncate'
+import truncate from 'lodash/truncate.js'
 import React, { FC } from 'react'
 
 import { ShowPropertyProps } from '../base-property-props.js'

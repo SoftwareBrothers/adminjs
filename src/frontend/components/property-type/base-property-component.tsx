@@ -2,7 +2,7 @@ import { Box } from '@adminjs/design-system'
 import { ReactComponentLike } from 'prop-types'
 import React, { useMemo } from 'react'
 
-import ErrorBoundary from '../app/error-boundary'
+import ErrorBoundary from '../app/error-boundary.jsx'
 import * as ArrayType from './array/index.js'
 import * as KeyValueType from './key-value/index.js'
 import * as MixedType from './mixed/index.js'

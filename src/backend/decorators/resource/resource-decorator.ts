@@ -1,10 +1,8 @@
-import { DecoratedActions } from './utils/decorate-actions'
-
+import { DecoratedActions } from './utils/decorate-actions.js'
 import { BaseResource, BaseRecord } from '../../adapters/index.js'
 import { PropertyDecorator, ActionDecorator } from '../index.js'
 import ViewHelpers from '../../utils/view-helpers/view-helpers.js'
 import AdminJS from '../../../adminjs.js'
-
 import { ResourceOptions } from './resource-options.interface.js'
 import { CurrentAdmin } from '../../../current-admin.interface.js'
 import { ResourceJSON, PropertyPlace } from '../../../frontend/interfaces/index.js'

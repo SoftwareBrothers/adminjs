@@ -1,6 +1,6 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
-import styled from 'styled-components'
+import styled from 'styled-components/dist/styled-components.esm.js'
 import { cssClass, Box, Icon, themeGet } from '@adminjs/design-system'
 
 import allowOverride from '../../hoc/allow-override.js'

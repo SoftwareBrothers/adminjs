@@ -1,6 +1,6 @@
-import { ParamsTypeValue } from '../../backend/adapters/record/params.type'
-import { BaseProperty } from '../../backend/adapters/property'
-import PropertyDecorator from '../../backend/decorators/property/property-decorator'
+import { ParamsTypeValue } from '../../backend/adapters/record/params.type.js'
+import { BaseProperty } from '../../backend/adapters/property/index.js'
+import PropertyDecorator from '../../backend/decorators/property/property-decorator.js'
 
 const isNumeric = (value: ParamsTypeValue) => !Number.isNaN(value)
 const isUuid = (value: ParamsTypeValue) => {

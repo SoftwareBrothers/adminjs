@@ -1,11 +1,11 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { combineStyles } from '@adminjs/design-system'
 
-import ViewHelpers from '../backend/utils/view-helpers/view-helpers'
-import { initializeStore } from './store'
-import AdminJS from '../adminjs'
-import { CurrentAdmin } from '../current-admin.interface'
-import { getFaviconFromBranding } from '../backend/utils/options-parser/options-parser'
+import ViewHelpers from '../backend/utils/view-helpers/view-helpers.js'
+import { initializeStore } from './store/index.js'
+import AdminJS from '../adminjs.js'
+import { CurrentAdmin } from '../current-admin.interface.js'
+import { getFaviconFromBranding } from '../backend/utils/options-parser/options-parser.js'
 
 /**
  * Renders (SSR) html for given location

@@ -5,16 +5,16 @@ import { createGlobalStyle } from 'styled-components'
 import { Box, Overlay, Reset } from '@adminjs/design-system'
 import { useLocation } from 'react-router'
 
-import ViewHelpers from '../../backend/utils/view-helpers/view-helpers'
-import Sidebar from './app/sidebar/sidebar'
-import TopBar from './app/top-bar'
-import Notice from './app/notice'
-import allowOverride from '../hoc/allow-override'
-import { AdminModal as Modal } from './app/admin-modal'
+import ViewHelpers from '../../backend/utils/view-helpers/view-helpers.js'
+import Sidebar from './app/sidebar/sidebar.js'
+import TopBar from './app/top-bar.js'
+import Notice from './app/notice.js'
+import allowOverride from '../hoc/allow-override.js'
+import { AdminModal as Modal } from './app/admin-modal.js'
 import {
   DashboardRoute, ResourceActionRoute, RecordActionRoute, PageRoute, BulkActionRoute, ResourceRoute,
-} from './routes'
-import useHistoryListen from '../hooks/use-history-listen'
+} from './routes/index.js'
+import useHistoryListen from '../hooks/use-history-listen.js'
 
 const GlobalStyle = createGlobalStyle`
   html, body, #app {

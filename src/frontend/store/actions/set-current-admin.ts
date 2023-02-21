@@ -1,4 +1,4 @@
-import { CurrentAdmin } from '../../../current-admin.interface'
+import { CurrentAdmin } from '../../../current-admin.interface.js'
 
 export const SESSION_INITIALIZE = 'SESSION_INITIALIZE'
 

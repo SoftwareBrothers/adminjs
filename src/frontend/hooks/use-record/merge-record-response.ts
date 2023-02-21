@@ -1,5 +1,5 @@
-import { RecordJSON } from '../../interfaces'
-import { RecordActionResponse } from '../../../backend/actions/action.interface'
+import { RecordJSON } from '../../interfaces/index.js'
+import { RecordActionResponse } from '../../../backend/actions/action.interface.js'
 
 /**
  * Handlers of all [Actions]{@link Action} of type `record` returns record.

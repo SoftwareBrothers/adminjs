@@ -1,8 +1,9 @@
 import { AxiosResponse } from 'axios'
-import { ActionResponse } from '../../../backend'
-import { DifferentActionParams } from '../../hooks'
-import { ApiClient } from '../../utils'
-import { ActionJSON } from './action-json.interface'
+
+import { ActionResponse } from '../../../backend/index.js'
+import { DifferentActionParams } from '../../hooks/index.js'
+import { ApiClient } from '../../utils/index.js'
+import { ActionJSON } from './action-json.interface.js'
 
 const api = new ApiClient()
 

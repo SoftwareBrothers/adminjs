@@ -2,10 +2,10 @@ import React, { FunctionComponent, useState, useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import { useParams } from 'react-router'
 
-import ErrorBoundary from '../app/error-boundary'
-import { ReduxState } from '../../store/store'
-import ErrorMessageBox from '../app/error-message'
-import allowOverride from '../../hoc/allow-override'
+import ErrorBoundary from '../app/error-boundary.jsx'
+import { ReduxState } from '../../store/store.js'
+import ErrorMessageBox from '../app/error-message.jsx'
+import allowOverride from '../../hoc/allow-override.jsx'
 
 declare const AdminJS: {
   UserComponents: Record<string, FunctionComponent>;

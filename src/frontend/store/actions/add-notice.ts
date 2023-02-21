@@ -1,5 +1,5 @@
-import { NoticeMessageInState } from '../store'
-import { NoticeMessage } from '../../hoc/with-notice'
+import { NoticeMessageInState } from '../store.js'
+import { NoticeMessage } from '../../hoc/with-notice.js'
 
 export const ADD_NOTICE = 'ADD_NOTICE'
 

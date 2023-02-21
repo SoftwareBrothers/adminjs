@@ -2,13 +2,14 @@
 /* eslint-disable no-undef */
 /* eslint-disable no-alert */
 import { NavigateFunction } from 'react-router'
-import { DifferentActionParams, useActionResponseHandler } from '../../hooks'
-import { actionHasComponent } from './action-has-component'
-import { actionHref } from './action-href'
-import { ActionJSON } from './action-json.interface'
-import { buildActionCallApiTrigger } from './build-action-api-call-trigger'
-import { TranslateFunctions } from '../../../utils'
-import { ModalData, ModalFunctions } from '../modal.interface'
+
+import { DifferentActionParams, useActionResponseHandler } from '../../hooks/index.js'
+import { actionHasComponent } from './action-has-component.js'
+import { actionHref } from './action-href.js'
+import { ActionJSON } from './action-json.interface.js'
+import { buildActionCallApiTrigger } from './build-action-api-call-trigger.js'
+import { TranslateFunctions } from '../../../utils/index.js'
+import { ModalData, ModalFunctions } from '../modal.interface.js'
 
 export type BuildActionClickOptions = {
   action: ActionJSON;

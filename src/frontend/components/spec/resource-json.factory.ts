@@ -1,6 +1,7 @@
 import factory from 'factory-girl'
-import './property-json.factory'
-import { PropertyJSON, ResourceJSON } from '../../interfaces'
+
+import './property-json.factory.js'
+import { PropertyJSON, ResourceJSON } from '../../interfaces/index.js'
 
 factory.define<ResourceJSON>('ResourceJSON', Object, {
   id: factory.sequence('ResourceJSON.id', (i) => `resource${i}`),

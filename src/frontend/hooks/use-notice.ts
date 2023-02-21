@@ -1,6 +1,7 @@
 import { useDispatch } from 'react-redux'
-import { addNotice } from '../store/actions/add-notice'
-import { NoticeMessage } from '../hoc/with-notice'
+
+import { addNotice } from '../store/actions/add-notice.js'
+import { NoticeMessage } from '../hoc/with-notice.js'
 
 /**
  * @memberof useNotice

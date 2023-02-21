@@ -1,29 +1,30 @@
-import merge from 'lodash/merge'
+import merge from 'lodash/merge.js'
 import * as path from 'path'
 import * as fs from 'fs'
 import i18n, { i18n as I18n } from 'i18next'
 import { FC } from 'react'
+import * as url from 'url'
 
-import { AdminJSOptionsWithDefault, AdminJSOptions } from './adminjs-options.interface'
-import BaseResource from './backend/adapters/resource/base-resource'
-import BaseDatabase from './backend/adapters/database/base-database'
-import ConfigurationError from './backend/utils/errors/configuration-error'
-import ResourcesFactory from './backend/utils/resources-factory/resources-factory'
-import userComponentsBundler from './backend/bundler/user-components-bundler'
-import { RecordActionResponse, Action, BulkActionResponse } from './backend/actions/action.interface'
-import { DEFAULT_PATHS } from './constants'
-import { ACTIONS } from './backend/actions'
+import { AdminJSOptionsWithDefault, AdminJSOptions } from './adminjs-options.interface.js'
+import BaseResource from './backend/adapters/resource/base-resource.js'
+import BaseDatabase from './backend/adapters/database/base-database.js'
+import ConfigurationError from './backend/utils/errors/configuration-error.js'
+import ResourcesFactory from './backend/utils/resources-factory/resources-factory.js'
+import userComponentsBundler from './backend/bundler/user-components-bundler.js'
+import { RecordActionResponse, Action, BulkActionResponse } from './backend/actions/action.interface.js'
+import { DEFAULT_PATHS } from './constants.js'
+import { ACTIONS } from './backend/actions/index.js'
+import loginTemplate from './frontend/login-template.jsx'
+import { ListActionResponse } from './backend/actions/list/list-action.js'
+import { combineTranslations, Locale } from './locale/config.js'
+import { locales } from './locale/index.js'
+import { TranslateFunctions, createFunctions } from './utils/translate-functions.factory.js'
+import { relativeFilePathResolver } from './utils/file-resolver.js'
+import { getComponentHtml } from './backend/utils/index.js'
+import { ComponentLoader } from './backend/utils/component-loader.js'
+import { OverridableComponent } from './frontend/index.js'
 
-import loginTemplate from './frontend/login-template'
-import { ListActionResponse } from './backend/actions/list/list-action'
-import { combineTranslations, Locale } from './locale/config'
-import { locales } from './locale'
-import { TranslateFunctions, createFunctions } from './utils/translate-functions.factory'
-import { relativeFilePathResolver } from './utils/file-resolver'
-import { getComponentHtml } from './backend/utils'
-import { ComponentLoader } from './backend/utils/component-loader'
-import { OverridableComponent } from './frontend'
-
+const __dirname = url.fileURLToPath(new URL('.', import.meta.url))
 const pkg = JSON.parse(fs.readFileSync(path.join(__dirname, '../package.json'), 'utf-8'))
 export const VERSION = pkg.version
 
@@ -136,8 +137,8 @@ class AdminJS {
       language,
       availableLanguages,
     }
-    if (i18n.isInitialized) {
-      i18n.addResourceBundle(this.locale.language, 'translation', this.locale.translations)
+    if ((i18n as any).isInitialized) {
+      (i18n as any).addResourceBundle(this.locale.language, 'translation', this.locale.translations)
     } else {
       i18n.init({
         lng: this.locale.language,
@@ -152,7 +153,7 @@ class AdminJS {
 
     // mixin translate functions to AdminJS instance so users will be able to
     // call AdminJS.translateMessage(...)
-    this.translateFunctions = createFunctions(i18n)
+    this.translateFunctions = createFunctions(i18n as any)
     Object.getOwnPropertyNames(this.translateFunctions).forEach((translateFunctionName) => {
       this[translateFunctionName] = this.translateFunctions[translateFunctionName]
     })

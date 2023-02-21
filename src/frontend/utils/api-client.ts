@@ -1,14 +1,13 @@
 import axios, { AxiosResponse, AxiosInstance, AxiosRequestConfig } from 'axios'
+
 import {
   ResourceActionParams,
   BulkActionParams,
   RecordActionParams,
   ActionParams,
-} from '../../backend/utils/view-helpers/view-helpers'
-
-/* eslint-disable no-alert */
-import { RecordJSON } from '../interfaces'
-import { RecordActionResponse, ActionResponse, BulkActionResponse } from '../../backend/actions/action.interface'
+} from '../../backend/utils/view-helpers/view-helpers.js'
+import { RecordJSON } from '../interfaces/index.js'
+import { RecordActionResponse, ActionResponse, BulkActionResponse } from '../../backend/actions/action.interface.js'
 
 let globalAny: any = {}
 

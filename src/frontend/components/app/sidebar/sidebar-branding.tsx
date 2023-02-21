@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import styled from 'styled-components'
+import styled from 'styled-components/dist/styled-components.esm.js'
 import { cssClass, themeGet } from '@adminjs/design-system'
 
 import ViewHelpers from '../../../../backend/utils/view-helpers/view-helpers.js'

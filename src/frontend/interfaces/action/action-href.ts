@@ -1,6 +1,6 @@
-import { RecordActionParams, ViewHelpers } from '../../../backend/utils/view-helpers'
-import { DifferentActionParams } from '../../hooks'
-import { ActionJSON } from './action-json.interface'
+import { RecordActionParams, ViewHelpers } from '../../../backend/utils/view-helpers/index.js'
+import { DifferentActionParams } from '../../hooks/index.js'
+import { ActionJSON } from './action-json.interface.js'
 
 const h = new ViewHelpers()
 

@@ -1,10 +1,12 @@
-import * as path from 'path'
-import { outPath as COMPONENT_BUNDLE_PATH } from '../../bundler/user-components-bundler.js'
+import path from 'path'
+import * as url from 'url'
 
+import { outPath as COMPONENT_BUNDLE_PATH } from '../../bundler/user-components-bundler.js'
 import AppController from '../../controllers/app-controller.js'
 import ApiController from '../../controllers/api-controller.js'
 import env from '../../bundler/bundler-env.js'
 
+const __dirname = url.fileURLToPath(new URL('.', import.meta.url))
 const ASSETS_ROOT = `${__dirname}/../../../frontend/assets/`
 
 /**

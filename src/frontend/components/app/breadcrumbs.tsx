@@ -1,7 +1,7 @@
 import { Box, cssClass, Text } from '@adminjs/design-system'
 import React from 'react'
 import { Link } from 'react-router-dom'
-import styled from 'styled-components'
+import styled from 'styled-components/dist/styled-components.esm.js'
 
 import ViewHelpers from '../../../backend/utils/view-helpers/view-helpers.js'
 import allowOverride from '../../hoc/allow-override.js'

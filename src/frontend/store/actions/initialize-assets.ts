@@ -1,4 +1,4 @@
-import { Assets } from '../../../adminjs-options.interface'
+import { Assets } from '../../../adminjs-options.interface.js'
 
 export const ASSETS_INITIALIZE = 'ASSETS_INITIALIZE'
 

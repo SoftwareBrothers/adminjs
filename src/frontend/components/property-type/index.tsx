@@ -51,5 +51,5 @@ export {
   CleanPropertyComponent,
 }
 
-export * from './base-property-props'
-export * from './utils'
+export * from './base-property-props.js'
+export * from './utils/index.js'

@@ -1,6 +1,6 @@
-import { ErrorTypeEnum } from '../../utils/error-type.enum'
-import { ParamsType, RecordError } from '../../backend'
-import { ActionJSON } from './action/action-json.interface'
+import { ErrorTypeEnum } from '../../utils/error-type.enum.js'
+import { ParamsType, RecordError } from '../../backend/index.js'
+import { ActionJSON } from './action/action-json.interface.js'
 
 /**
  * @memberof {RecordJSON}

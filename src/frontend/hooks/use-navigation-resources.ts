@@ -7,8 +7,9 @@ import type {
   IconProps,
 } from '@adminjs/design-system'
 import { useMemo } from 'react'
-import { ResourceJSON } from '../interfaces'
-import useLocalStorage from './use-local-storage/use-local-storage'
+
+import { ResourceJSON } from '../interfaces/index.js'
+import useLocalStorage from './use-local-storage/use-local-storage.js'
 
 const isSelected = (href, location): boolean => {
   const regExp = new RegExp(`${href}($|/)`)

@@ -1,7 +1,7 @@
 import { expect } from 'chai'
 
-import { FlattenParams } from './flat.types'
-import { set } from './set'
+import { FlattenParams } from './flat.types.js'
+import { set } from './set.js'
 
 describe('module:flat.set', () => {
   let params: FlattenParams

@@ -1,15 +1,15 @@
 import { ThemeOverride } from '@adminjs/design-system'
-import { TransformOptions as BabelConfig } from 'babel-core'
+import type { TransformOptions as BabelConfig } from 'babel-core'
 
-import AdminJS from '.'
-import BaseResource from './backend/adapters/resource/base-resource'
-import BaseDatabase from './backend/adapters/database/base-database'
-import { PageContext } from './backend/actions/action.interface'
-import { ResourceOptions } from './backend/decorators/resource/resource-options.interface'
-import { Locale } from './locale/config'
-import { CurrentAdmin } from './current-admin.interface'
-import { CoreScripts } from './core-scripts.interface'
-import { ComponentLoader } from './backend/utils/component-loader'
+import AdminJS from './adminjs.js'
+import BaseResource from './backend/adapters/resource/base-resource.js'
+import BaseDatabase from './backend/adapters/database/base-database.js'
+import { PageContext } from './backend/actions/action.interface.js'
+import { ResourceOptions } from './backend/decorators/resource/resource-options.interface.js'
+import { Locale } from './locale/config.js'
+import { CurrentAdmin } from './current-admin.interface.js'
+import { CoreScripts } from './core-scripts.interface.js'
+import { ComponentLoader } from './backend/utils/component-loader.js'
 
 /**
  * AdminJSOptions

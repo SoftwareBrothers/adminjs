@@ -1,5 +1,5 @@
 import React from 'react'
-// spacer
+
 export type UseLocalStorageResult<T> = [
   T,
   React.Dispatch<React.SetStateAction<T>>

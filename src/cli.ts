@@ -5,9 +5,12 @@
 
 import fs from 'fs'
 import path from 'path'
-import program from 'commander'
-import AdminJS from './adminjs'
+import program from 'commander/esm.mjs'
+import * as url from 'url'
 
+import AdminJS from './adminjs.js'
+
+const __dirname = url.fileURLToPath(new URL('.', import.meta.url))
 const pkg = JSON.parse(fs.readFileSync(path.join(__dirname, '../package.json'), 'utf-8'))
 
 program.version(pkg.version)
@@ -30,7 +33,7 @@ program
       ].join('\n'))
       return
     }
-    const bundler = require('../lib/backend/bundler/user-components-bundler').default
+    const bundler = require('../lib/backend/bundler/user-components-bundler.js').default
     bundler(new AdminJS(config), { watch: false, write: true })
   })
 

@@ -1,5 +1,5 @@
 import React from 'react'
-import styled, { createGlobalStyle } from 'styled-components'
+import styled, { createGlobalStyle } from 'styled-components/dist/styled-components.esm.js'
 import { useSelector } from 'react-redux'
 import {
   Box,

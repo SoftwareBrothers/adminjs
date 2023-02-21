@@ -1,12 +1,12 @@
-import deLocale from './de'
-import enLocale from './en'
-import itLocale from './it'
-import ptBrLocale from './pt-br'
-import uaLocale from './ua'
-import zhCNLocale from './zh-cn'
-import plLocale from './pl'
+import deLocale from './de.js'
+import enLocale from './en.js'
+import itLocale from './it.js'
+import ptBrLocale from './pt-br.js'
+import uaLocale from './ua.js'
+import zhCNLocale from './zh-cn.js'
+import plLocale from './pl.js'
 
-export * from './config'
+export * from './config.js'
 
 export const locales = {
   de: deLocale,

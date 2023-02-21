@@ -3,7 +3,7 @@
 import { combineReducers, legacy_createStore as createStore } from 'redux'
 import type { useLocation } from 'react-router'
 import { TOptions } from 'i18next'
-import { DRAWER_PREROUTE_SET, SetDrawerPreRouteResponse } from './actions/set-drawer-preroute'
+
 import {
   VERSIONS_INITIALIZE,
   SESSION_INITIALIZE,
@@ -19,15 +19,16 @@ import {
   ADD_NOTICE,
   ROUTE_CHANGED,
   INITIAL_ROUTE,
-} from './actions'
-
-import { Assets, BrandingOptions, VersionProps } from '../../adminjs-options.interface'
-import { PageJSON, ResourceJSON } from '../interfaces'
-import { DEFAULT_PATHS } from '../../constants'
-import { CurrentAdmin } from '../../current-admin.interface'
-import { Locale } from '../../locale/config'
-import { NoticeMessage } from '../hoc/with-notice'
-import { modalReducer, ModalInState } from './reducers/modal'
+  DRAWER_PREROUTE_SET,
+  SetDrawerPreRouteResponse,
+} from './actions/index.js'
+import { Assets, BrandingOptions, VersionProps } from '../../adminjs-options.interface.js'
+import { PageJSON, ResourceJSON } from '../interfaces/index.js'
+import { DEFAULT_PATHS } from '../../constants.js'
+import { CurrentAdmin } from '../../current-admin.interface.js'
+import { Locale } from '../../locale/config.js'
+import { NoticeMessage } from '../hoc/with-notice.js'
+import { modalReducer, ModalInState } from './reducers/modal.js'
 
 export type DashboardInState = {
   component?: string;

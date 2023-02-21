@@ -1,9 +1,10 @@
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useLocation } from 'react-router'
-import { useLocalStorage } from '../hooks/use-local-storage'
-import { ReduxState, RouterProps } from '../store'
-import { changeRoute, initializeRoute } from '../store/actions/route-changed'
+
+import { useLocalStorage } from '../hooks/use-local-storage/index.js'
+import { ReduxState, RouterProps } from '../store/index.js'
+import { changeRoute, initializeRoute } from '../store/actions/route-changed.js'
 
 const useHistoryListen = (): void => {
   const location = useLocation()

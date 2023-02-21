@@ -1,3 +1,4 @@
+/* eslint-disable import/no-commonjs */
 module.exports = {
   parser: '@typescript-eslint/parser',
   plugins: ['@typescript-eslint', 'mocha'],
@@ -6,7 +7,7 @@ module.exports = {
     node: true,
     mocha: true,
   },
-  extends: ['airbnb', 'plugin:@typescript-eslint/recommended', 'plugin:mocha/recommended'],
+  extends: ['airbnb', 'plugin:@typescript-eslint/recommended', 'plugin:mocha/recommended', 'plugin:import/typescript'],
   parserOptions: {
     ecmaVersion: 2018,
     sourceType: 'module',
@@ -29,7 +30,7 @@ module.exports = {
     'no-restricted-syntax': 'off',
     'no-await-in-loop': 'off',
     'object-curly-newline': 'off',
-    'import/extensions': 'off',
+    'import/extensions': [2, 'ignorePackages'],
     'mocha/no-hooks-for-single-case': 'off',
     'no-param-reassign': 'off',
     'default-param-last': 'off',
@@ -41,6 +42,7 @@ module.exports = {
     'max-classes-per-file': 'off',
     '@typescript-eslint/ban-ts-comment': 'off',
     'import/no-import-module-exports': 'off',
+    'import/no-commonjs': 2,
   },
   ignorePatterns: [
     '*/build/**/*',
@@ -87,6 +89,13 @@ module.exports = {
       },
     },
   ],
+  settings: {
+    'import/resolver': {
+      node: {
+        extensions: ['.js', '.jsx', '.ts', '.tsx'],
+      },
+    },
+  },
   globals: {
     expect: true,
     factory: true,

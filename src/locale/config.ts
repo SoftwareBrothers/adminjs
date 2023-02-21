@@ -1,5 +1,6 @@
-import merge from 'lodash/merge'
-import { formatName } from '../utils/translate-functions.factory'
+import merge from 'lodash/merge.js'
+
+import { formatName } from '../utils/translate-functions.factory.js'
 
 /**
  * Locale object passed to {@link AdminJSOptions} and stored in the application

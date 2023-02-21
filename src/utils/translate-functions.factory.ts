@@ -1,5 +1,5 @@
 import { i18n as I18n, TFunction, TOptions } from 'i18next'
-import startCase from 'lodash/startCase'
+import startCase from 'lodash/startCase.js'
 
 /**
  * @memberof TranslateFunctions

@@ -8,7 +8,7 @@ import { actionsToButtonGroup } from './actions-to-button-group.js'
 import { createFunctions } from '../../../../utils/translate-functions.factory.js'
 import '../../spec/action-json.factory.js'
 
-const translateFunctions = createFunctions(i18n)
+const translateFunctions = createFunctions(i18n as any)
 
 const modalFunctions = {
   closeModal: () => { /* noop */ },

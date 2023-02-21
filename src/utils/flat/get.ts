@@ -1,9 +1,9 @@
 import { unflatten } from 'flat'
-import { DELIMITER } from './constants'
-import { selectParams } from './select-params'
-import { FlattenParams } from '../flat'
-import { propertyKeyRegex } from './property-key-regex'
-import { GetOptions } from './flat.types'
+
+import { DELIMITER } from './constants.js'
+import { selectParams } from './select-params.js'
+import { FlattenParams, GetOptions } from './flat.types.js'
+import { propertyKeyRegex } from './property-key-regex.js'
 
 const TEMP_HOLDING_KEY = 'TEMP_HOLDING_KEY'
 

@@ -1,4 +1,4 @@
-import { RecordJSON } from '../../interfaces'
+import { RecordJSON } from '../../interfaces/index.js'
 
 /**
  * Result of the {@link useSelectedRecords} hook.

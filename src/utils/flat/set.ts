@@ -1,8 +1,9 @@
 import { flatten } from 'flat'
-import { DELIMITER } from './constants'
-import { FlattenParams } from '../flat'
-import { propertyKeyRegex } from './property-key-regex'
-import { pathToParts } from './path-to-parts'
+
+import { DELIMITER } from './constants.js'
+import { FlattenParams } from './flat.types.js'
+import { propertyKeyRegex } from './property-key-regex.js'
+import { pathToParts } from './path-to-parts.js'
 
 const isObject = (value: any): boolean => {
   // Node environment

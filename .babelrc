@@ -4,9 +4,15 @@
     ["@babel/preset-env", {
       "targets": {
         "node": "18"
-      }
+      },
+      "loose": true,
+      "modules": false
     }],
-    "@babel/preset-typescript"
+    ["@babel/preset-typescript", {
+      "isTSX": true,
+      "allExtensions": true,
+      "jsxPragma": "preserve"
+    }]
   ],
   "plugins": ["babel-plugin-styled-components"],
   "only": ["src/", "spec/"],

@@ -1,4 +1,4 @@
-import mergeWith from 'lodash/mergeWith'
+import mergeWith from 'lodash/mergeWith.js'
 
 import ResourceDecorator from '../resource-decorator.js'
 import AdminJS from '../../../../adminjs.js'

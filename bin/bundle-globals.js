@@ -1,29 +1,24 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 /* eslint-disable import/no-extraneous-dependencies */
-/**
- * @private
- * @fileoverview
- * This script runs process, which bundles all globals like React or ReactDOM
- * to the  `global-bundle.js`.
- */
+import { rollup } from 'rollup'
+import { nodeResolve as resolve } from '@rollup/plugin-node-resolve'
+import commonjs from '@rollup/plugin-commonjs'
+import replace from '@rollup/plugin-replace'
+import json from '@rollup/plugin-json'
+import polyfills from 'rollup-plugin-polyfill-node'
+import terser from '@rollup/plugin-terser'
+import * as url from 'url'
 
-const { rollup } = require('rollup')
-const { nodeResolve: resolve } = require('@rollup/plugin-node-resolve')
-const commonjs = require('@rollup/plugin-commonjs')
-const replace = require('@rollup/plugin-replace')
-const json = require('@rollup/plugin-json')
-const builtins = require('rollup-plugin-node-builtins')
-const globals = require('rollup-plugin-node-globals')
-const { terser } = require('rollup-plugin-terser')
+import env from '../src/backend/bundler/bundler-env.js'
 
-const env = require('../src/backend/bundler/bundler-env')
+const __dirname = url.fileURLToPath(new URL('.', import.meta.url))
 
 const run = async () => {
   const inputOptions = {
     input: `${__dirname}/../src/frontend/global-entry.js`,
     plugins: [
       resolve({
-        extensions: ['.mjs', '.js', '.jsx', '.json', '.scss'],
+        extensions: ['.mjs', '.js', '.cjs', '.mjs', '.jsx', '.json', '.scss'],
         mainFields: ['browser'],
         preferBuiltins: false,
         browser: true,
@@ -40,8 +35,7 @@ const run = async () => {
         include: ['node_modules/**', env === 'development' ? '../../node_modules/**' : ''],
         ignoreGlobal: true,
       }),
-      globals(),
-      builtins(),
+      polyfills(),
       ...(env === 'production' ? [terser()] : []),
     ],
   }

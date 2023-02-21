@@ -1,6 +1,6 @@
 /* eslint-disable no-nested-ternary */
-import uniq from 'lodash/uniq'
-import merge from 'lodash/merge'
+import uniq from 'lodash/uniq.js'
+import merge from 'lodash/merge.js'
 
 import AdminJS from '../../../adminjs.js'
 import { FeatureType } from '../../../adminjs-options.interface.js'

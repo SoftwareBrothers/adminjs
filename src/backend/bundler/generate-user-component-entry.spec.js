@@ -1,8 +1,11 @@
 import path from 'path'
+import * as url from 'url'
 
 import AdminJS from '../../adminjs.js'
 import { ComponentLoader } from '../utils/index.js'
 import generateUserComponentEntry from './generate-user-component-entry.js'
+
+const __dirname = url.fileURLToPath(new URL('.', import.meta.url))
 
 const exampleComponent = '../../../spec/fixtures/example-component.js'
 const entryPath = './'

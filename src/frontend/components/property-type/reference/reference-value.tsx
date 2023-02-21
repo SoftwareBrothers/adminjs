@@ -1,5 +1,5 @@
 import React from 'react'
-import styled from 'styled-components'
+import styled from 'styled-components/dist/styled-components.esm.js'
 import { Link } from 'react-router-dom'
 import { ButtonCSS } from '@adminjs/design-system'
 

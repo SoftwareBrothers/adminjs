@@ -1,11 +1,13 @@
 import path from 'path'
 import { expect } from 'chai'
+import * as url from 'url'
 
-import AdminJS from './adminjs'
+import AdminJS from './adminjs.js'
+import BaseDatabase from './backend/adapters/database/base-database.js'
+import BaseResource from './backend/adapters/resource/base-resource.js'
+import { ComponentLoader } from './backend/utils/component-loader.js'
 
-import BaseDatabase from './backend/adapters/database/base-database'
-import BaseResource from './backend/adapters/resource/base-resource'
-import { ComponentLoader } from './backend/utils/component-loader'
+const __dirname = url.fileURLToPath(new URL('.', import.meta.url))
 
 describe('AdminJS', function () {
   beforeEach(function () {

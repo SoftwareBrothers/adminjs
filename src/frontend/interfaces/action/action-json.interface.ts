@@ -1,5 +1,6 @@
 import type { ButtonProps, IconProps, VariantType } from '@adminjs/design-system'
-import { ParsedLayoutElement } from '../../../backend/utils/layout-element-parser'
+
+import { ParsedLayoutElement } from '../../../backend/utils/layout-element-parser/index.js'
 
 /**
  * JSON representation of an {@link Action}

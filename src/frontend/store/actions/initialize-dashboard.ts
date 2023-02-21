@@ -1,4 +1,4 @@
-import { DashboardInState } from '../store'
+import { DashboardInState } from '../store.js'
 
 export const DASHBOARD_INITIALIZE = 'DASHBOARD_INITIALIZE'
 

@@ -1,21 +1,20 @@
 import React from 'react'
 import sinon from 'sinon'
 import { expect } from 'chai'
-import merge from 'lodash/merge'
+import merge from 'lodash/merge.js'
 import i18n from 'i18next'
 import { render, RenderResult } from '@testing-library/react'
 import { Provider } from 'react-redux'
 import { Route, Routes } from 'react-router'
 import { AxiosResponse } from 'axios'
 
-import createStore, { ReduxState } from '../../store/store'
-import RecordAction from './record-action'
-import ApiClient from '../../utils/api-client'
-import { RecordJSON } from '../../interfaces'
-
-import TestContextProvider from '../spec/test-context-provider'
-import factory from '../spec/factory'
-import * as TranslateFunctionsFactory from '../../../utils/translate-functions.factory'
+import createStore, { ReduxState } from '../../store/store.js'
+import RecordAction from './record-action.jsx'
+import ApiClient from '../../utils/api-client.js'
+import { RecordJSON } from '../../interfaces/index.js'
+import TestContextProvider from '../spec/test-context-provider.jsx'
+import factory from '../spec/factory.js'
+import * as TranslateFunctionsFactory from '../../../utils/translate-functions.factory.js'
 
 const defaultStore = {
   paths: {},

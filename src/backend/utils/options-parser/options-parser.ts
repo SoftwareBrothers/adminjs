@@ -1,4 +1,4 @@
-import merge from 'lodash/merge'
+import merge from 'lodash/merge.js'
 
 import AdminJS from '../../../adminjs.js'
 import { AdminJSOptions, Assets, BrandingOptions } from '../../../adminjs-options.interface.js'

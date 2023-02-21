@@ -1,13 +1,13 @@
 import { flatten, unflatten } from 'flat'
 
-import { DELIMITER } from './constants'
-import { selectParams } from './select-params'
-import { filterOutParams } from './filter-out-params'
-import { set } from './set'
-import { get } from './get'
-import { merge } from './merge'
-import { pathToParts } from './path-to-parts'
-import { removePath } from './remove-path'
+import { DELIMITER } from './constants.js'
+import { selectParams } from './select-params.js'
+import { filterOutParams } from './filter-out-params.js'
+import { set } from './set.js'
+import { get } from './get.js'
+import { merge } from './merge.js'
+import { pathToParts } from './path-to-parts.js'
+import { removePath } from './remove-path.js'
 
 export type FlatModuleType = {
   flatten: typeof flatten;
