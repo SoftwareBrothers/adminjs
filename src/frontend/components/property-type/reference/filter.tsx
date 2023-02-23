@@ -5,7 +5,7 @@ import ApiClient from '../../../utils/api-client.js'
 import { FilterPropertyProps, SelectRecord } from '../base-property-props.js'
 import allowOverride from '../../../hoc/allow-override.js'
 
-type SelectOptions = Array<{value: string | number; label: string }>
+type SelectOptions = Array<{ value: string | number; label: string }>
 
 const Filter: React.FC<FilterPropertyProps> = (props) => {
   const { property, filter, onChange } = props

@@ -4,14 +4,14 @@ import { connect } from 'react-redux'
 import { useMatch, useParams } from 'react-router'
 
 import ViewHelpers, { ResourceActionParams } from '../../../backend/utils/view-helpers/view-helpers.js'
-import allowOverride from '../../hoc/allow-override.jsx'
+import allowOverride from '../../hoc/allow-override.js'
 import { ActionJSON, ResourceJSON } from '../../interfaces/index.js'
 import { ReduxState } from '../../store/store.js'
 import { getResourceElementCss } from '../../utils/index.js'
 import { ActionHeader } from '../app/index.js'
-import BaseAction from '../app/base-action-component.jsx'
-import { NoActionError, NoResourceError } from '../app/error-message.jsx'
-import FilterDrawer from '../app/filter-drawer.jsx'
+import BaseAction from '../app/base-action-component.js'
+import { NoActionError, NoResourceError } from '../app/error-message.js'
+import FilterDrawer from '../app/filter-drawer.js'
 
 type PropsFromState = {
   resources: Array<ResourceJSON>;

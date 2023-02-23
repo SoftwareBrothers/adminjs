@@ -1,10 +1,10 @@
 import React, { ReactNode, FunctionComponent } from 'react'
 import { connect } from 'react-redux'
 
-import DefaultDashboard from '../app/default-dashboard.jsx'
-import ErrorBoundary from '../app/error-boundary.jsx'
+import DefaultDashboard from '../app/default-dashboard.js'
+import ErrorBoundary from '../app/error-boundary.js'
 import { ReduxState } from '../../store/store.js'
-import allowOverride from '../../hoc/allow-override.jsx'
+import allowOverride from '../../hoc/allow-override.js'
 
 declare const AdminJS: {
   UserComponents: Record<string, FunctionComponent>;

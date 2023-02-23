@@ -6,7 +6,7 @@ import { BulkActionParams } from '../../../backend/utils/view-helpers/view-helpe
 import ApiClient from '../../utils/api-client.js'
 import getBulkActionsFromRecords from '../app/records-table/utils/get-bulk-actions-from-records.js'
 import { ActionJSON, RecordJSON } from '../../interfaces/index.js'
-import Wrapper from './utils/wrapper.jsx'
+import Wrapper from './utils/wrapper.js'
 import {
   ActionHeader,
   DrawerPortal,
@@ -16,7 +16,7 @@ import {
   NoActionError,
 } from '../app/index.js'
 import { useTranslation, useNotice, useResource } from '../../hooks/index.js'
-import allowOverride from '../../hoc/allow-override.jsx'
+import allowOverride from '../../hoc/allow-override.js'
 
 type MatchParams = Pick<BulkActionParams, 'actionName' | 'resourceId'>
 

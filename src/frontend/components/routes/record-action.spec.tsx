@@ -9,10 +9,10 @@ import { Route, Routes } from 'react-router'
 import { AxiosResponse } from 'axios'
 
 import createStore, { ReduxState } from '../../store/store.js'
-import RecordAction from './record-action.jsx'
+import RecordAction from './record-action.js'
 import ApiClient from '../../utils/api-client.js'
 import { RecordJSON } from '../../interfaces/index.js'
-import TestContextProvider from '../spec/test-context-provider.jsx'
+import TestContextProvider from '../spec/test-context-provider.js'
 import factory from '../spec/factory.js'
 import * as TranslateFunctionsFactory from '../../../utils/translate-functions.factory.js'
 

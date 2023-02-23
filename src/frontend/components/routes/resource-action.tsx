@@ -2,16 +2,16 @@ import React, { useState } from 'react'
 import { connect } from 'react-redux'
 import { useParams } from 'react-router'
 
-import BaseActionComponent from '../app/base-action-component.jsx'
+import BaseActionComponent from '../app/base-action-component.js'
 import { ResourceJSON } from '../../interfaces/index.js'
 import { ReduxState } from '../../store/store.js'
-import { NoResourceError, NoActionError } from '../app/error-message.jsx'
+import { NoResourceError, NoActionError } from '../app/error-message.js'
 import { ResourceActionParams } from '../../../backend/utils/view-helpers/view-helpers.js'
 import { ActionHeader } from '../app/index.js'
-import Wrapper from './utils/wrapper.jsx'
-import DrawerPortal from '../app/drawer-portal.jsx'
-import FilterDrawer from '../app/filter-drawer.jsx'
-import allowOverride from '../../hoc/allow-override.jsx'
+import Wrapper from './utils/wrapper.js'
+import DrawerPortal from '../app/drawer-portal.js'
+import FilterDrawer from '../app/filter-drawer.js'
+import allowOverride from '../../hoc/allow-override.js'
 
 type PropsFromState = {
   resources: Array<ResourceJSON>;

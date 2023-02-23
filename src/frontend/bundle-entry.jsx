@@ -6,7 +6,7 @@ import { initReactI18next } from 'react-i18next'
 import i18n from 'i18next'
 import merge from 'lodash/merge'
 
-import App from './components/application.jsx'
+import App from './components/application.js'
 import BasePropertyComponent, { CleanPropertyComponent } from './components/property-type/index.js'
 import createStore from './store/store.js'
 import ViewHelpers from '../backend/utils/view-helpers/view-helpers.js'

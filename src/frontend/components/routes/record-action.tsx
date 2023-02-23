@@ -3,18 +3,18 @@ import { useParams } from 'react-router'
 import { Loader } from '@adminjs/design-system'
 
 import { ErrorTypeEnum } from '../../../utils/error-type.enum.js'
-import BaseActionComponent from '../app/base-action-component.jsx'
+import BaseActionComponent from '../app/base-action-component.js'
 import ApiClient from '../../utils/api-client.js'
 import { RecordActionParams } from '../../../backend/utils/view-helpers/view-helpers.js'
 import { ActionJSON, RecordJSON } from '../../interfaces/index.js'
-import { NoResourceError, NoActionError, NoRecordError } from '../app/error-message.jsx'
-import Wrapper from './utils/wrapper.jsx'
+import { NoResourceError, NoActionError, NoRecordError } from '../app/error-message.js'
+import Wrapper from './utils/wrapper.js'
 import { ActionHeader } from '../app/index.js'
 import { useNotice, useResource, useTranslation } from '../../hooks/index.js'
-import DrawerPortal from '../app/drawer-portal.jsx'
+import DrawerPortal from '../app/drawer-portal.js'
 import { ActionResponse, RecordActionResponse } from '../../../backend/actions/action.interface.js'
 import mergeRecordResponse from '../../hooks/use-record/merge-record-response.js'
-import allowOverride from '../../hoc/allow-override.jsx'
+import allowOverride from '../../hoc/allow-override.js'
 
 const api = new ApiClient()
 

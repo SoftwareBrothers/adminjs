@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components/dist/styled-components.esm.js'
 import { Box, BoxProps, DrawerContent, DrawerFooter } from '@adminjs/design-system'
 
-import allowOverride from '../../../hoc/allow-override.jsx'
+import allowOverride from '../../../hoc/allow-override.js'
 
 const StyledWrapperWithFilter = styled(Box)`
   & > ${DrawerContent} {
