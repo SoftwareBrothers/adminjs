@@ -11,7 +11,7 @@ import { overrideFromOptions } from './utils/override-from-options.js'
  *
  * @category Decorators
  */
-class PropertyDecorator {
+export class PropertyDecorator {
   public property: BaseProperty
 
   /**

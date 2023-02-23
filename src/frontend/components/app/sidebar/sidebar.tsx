@@ -1,5 +1,4 @@
 import React from 'react'
-import styled from 'styled-components/dist/styled-components.esm.js'
 import { useSelector } from 'react-redux'
 import { Box, cssClass, themeGet } from '@adminjs/design-system'
 
@@ -11,6 +10,7 @@ import { ReduxState } from '../../../store/store.js'
 import SidebarFooter from './sidebar-footer.js'
 import SidebarResourceSection from './sidebar-resource-section.js'
 import allowOverride from '../../../hoc/allow-override.js'
+import styled from '../../../utils/styled-components.js'
 
 type Props = {
   isVisible: boolean;

@@ -5,6 +5,7 @@
 .idea
 .cache
 lib
+cjs
 built
 types
 

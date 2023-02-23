@@ -1,5 +1,4 @@
 import React from 'react'
-import styled from 'styled-components/dist/styled-components.esm.js'
 import {
   Box,
   H2,
@@ -12,6 +11,7 @@ import {
 } from '@adminjs/design-system'
 
 import { useTranslation } from '../../hooks/index.js'
+import styled from '../../utils/styled-components.js'
 
 const pageHeaderHeight = 284
 const pageHeaderPaddingY = 74

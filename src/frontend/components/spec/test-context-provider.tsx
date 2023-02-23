@@ -1,7 +1,8 @@
 import React, { ReactNode } from 'react'
 import { StaticRouter } from 'react-router-dom/server.js'
-import { ThemeProvider } from 'styled-components'
 import { combineStyles } from '@adminjs/design-system'
+
+import { ThemeProvider } from '../../utils/styled-components.js'
 
 const theme = combineStyles({})
 

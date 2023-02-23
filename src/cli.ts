@@ -5,7 +5,7 @@
 
 import fs from 'fs'
 import path from 'path'
-import program from 'commander/esm.mjs'
+import { program } from 'commander'
 import * as url from 'url'
 
 import AdminJS from './adminjs.js'
@@ -33,7 +33,7 @@ program
       ].join('\n'))
       return
     }
-    const bundler = require('../lib/backend/bundler/user-components-bundler.js').default
+    const bundler = require('../cjs/backend/bundler/user-components-bundler.js').default
     bundler(new AdminJS(config), { watch: false, write: true })
   })
 

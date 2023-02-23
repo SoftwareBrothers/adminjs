@@ -9,10 +9,10 @@ import ReactRedux from 'react-redux'
 import ReactRouter from 'react-router'
 import ReactRouterDOM from 'react-router-dom'
 import PropTypes from 'prop-types'
-import * as styled from 'styled-components'
 import ReactSelectAsync from 'react-select/async'
 import ReactSelectCreatable from 'react-select/creatable'
 import * as ReactSelect from 'react-select'
+import styled from 'styled-components'
 
 window.React = React
 window.ReactDOM = ReactDOM

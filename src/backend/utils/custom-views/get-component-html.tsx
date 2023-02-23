@@ -1,6 +1,5 @@
 import React from 'react'
 import { renderToString } from 'react-dom/server'
-import { ServerStyleSheet, StyleSheetManager, ThemeProvider } from 'styled-components'
 import { Provider } from 'react-redux'
 import { I18nextProvider, I18nextProviderProps } from 'react-i18next'
 import { combineStyles } from '@adminjs/design-system'
@@ -16,6 +15,7 @@ import createStore, {
   ReduxState,
 } from '../../../frontend/store/store.js'
 import AdminJS from '../../../adminjs.js'
+import { ServerStyleSheet, StyleSheetManager, ThemeProvider } from '../../../frontend/utils/styled-components.js'
 
 export async function getComponentHtml<T extends Record<string, unknown>>(
   Component: React.FC<T>,

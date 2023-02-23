@@ -1,5 +1,4 @@
 import React from 'react'
-import styled, { createGlobalStyle } from 'styled-components/dist/styled-components.esm.js'
 import { useSelector } from 'react-redux'
 import {
   Box,
@@ -18,6 +17,7 @@ import {
 
 import { useTranslation } from '../../hooks/index.js'
 import { ReduxState } from '../../store/store.js'
+import styled, { createGlobalStyle } from '../../utils/styled-components.js'
 
 const GlobalStyle = createGlobalStyle`
   html, body, #app {

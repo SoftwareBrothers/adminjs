@@ -1,4 +1,4 @@
-import { flatten, unflatten } from 'flat'
+import * as flatModule from 'flat'
 
 import { DELIMITER } from './constants.js'
 import { selectParams } from './select-params.js'
@@ -10,8 +10,8 @@ import { pathToParts } from './path-to-parts.js'
 import { removePath } from './remove-path.js'
 
 export type FlatModuleType = {
-  flatten: typeof flatten;
-  unflatten: typeof unflatten;
+  flatten: typeof flatModule.flatten;
+  unflatten: typeof flatModule.unflatten;
   set: typeof set;
   get: typeof get;
   selectParams: typeof selectParams;
@@ -33,12 +33,12 @@ export const flat: FlatModuleType = {
    * Raw `flatten` function exported from original {@link https://www.npmjs.com/package/flat flat}
    * package.
    */
-  flatten,
+  flatten: flatModule.flatten,
   /**
    * Raw `unflatten` function exported from original {@link https://www.npmjs.com/package/flat flat}
    * package.
    */
-  unflatten,
+  unflatten: flatModule.unflatten,
 
   set,
   get,

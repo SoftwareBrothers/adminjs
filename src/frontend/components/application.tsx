@@ -1,7 +1,6 @@
 /* eslint-disable react/no-children-prop */
 import React, { useEffect, useState } from 'react'
 import { Routes, Route } from 'react-router-dom'
-import { createGlobalStyle } from 'styled-components'
 import { Box, Overlay, Reset } from '@adminjs/design-system'
 import { useLocation } from 'react-router'
 
@@ -15,6 +14,7 @@ import {
   DashboardRoute, ResourceActionRoute, RecordActionRoute, PageRoute, BulkActionRoute, ResourceRoute,
 } from './routes/index.js'
 import useHistoryListen from '../hooks/use-history-listen.js'
+import { createGlobalStyle } from '../utils/styled-components.js'
 
 const GlobalStyle = createGlobalStyle`
   html, body, #app {

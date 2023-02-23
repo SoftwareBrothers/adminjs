@@ -2,10 +2,10 @@ import React from 'react'
 import { BrowserRouter } from 'react-router-dom'
 import { createStore } from 'redux'
 import { Provider } from 'react-redux'
-import { ThemeProvider, StyleSheetManager } from 'styled-components'
 
-import * as theme from '../../adminjs-design-system/src/theme'
-import { Box, PortalUtils } from '../../adminjs-design-system/src'
+import * as theme from '../../adminjs-design-system/src/theme.js'
+import { Box, PortalUtils } from '../../adminjs-design-system/src/index.js'
+import { ThemeProvider, StyleSheetManager } from '../frontend/utils/styled-components.js'
 
 const store = createStore(() => ({}), {})
 

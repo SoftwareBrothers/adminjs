@@ -1,5 +1,6 @@
 import path from 'path'
 import * as url from 'url'
+import buildResolver from 'esm-resolve'
 
 import { outPath as COMPONENT_BUNDLE_PATH } from '../../bundler/user-components-bundler.js'
 import AppController from '../../controllers/app-controller.js'
@@ -7,7 +8,9 @@ import ApiController from '../../controllers/api-controller.js'
 import env from '../../bundler/bundler-env.js'
 
 const __dirname = url.fileURLToPath(new URL('.', import.meta.url))
+const __filename = url.fileURLToPath(import.meta.url)
 const ASSETS_ROOT = `${__dirname}/../../../frontend/assets/`
+const resolve = buildResolver(__filename)
 
 /**
  * Type representing the AdminJS.Router
@@ -57,7 +60,7 @@ export const Router: RouterType = {
   }, {
     path: '/frontend/assets/design-system.bundle.js',
     src: path.join(
-      path.parse(require.resolve('@adminjs/design-system')).dir,
+      path.parse(resolve('@adminjs/design-system')!).dir,
       `../bundle.${env}.js`,
     ),
   }, {

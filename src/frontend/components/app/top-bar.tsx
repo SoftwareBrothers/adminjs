@@ -1,6 +1,5 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
-import styled from 'styled-components/dist/styled-components.esm.js'
 import { cssClass, Box, Icon, themeGet } from '@adminjs/design-system'
 
 import allowOverride from '../../hoc/allow-override.js'
@@ -10,6 +9,7 @@ import { ReduxState, Paths } from '../../store/store.js'
 import { CurrentAdmin } from '../../../current-admin.interface.js'
 import { VersionProps } from '../../../adminjs-options.interface.js'
 import LanguageSelect from './language-select/language-select.js'
+import styled from '../../utils/styled-components.js'
 
 const NavBar = styled(Box)`
   height: ${({ theme }) => theme.sizes.navbarHeight};

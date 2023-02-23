@@ -1,10 +1,10 @@
 import React from 'react'
 import { Provider } from 'react-redux'
 import { BrowserRouter } from 'react-router-dom'
-import { ThemeProvider } from 'styled-components'
 import { initReactI18next } from 'react-i18next'
 import i18n from 'i18next'
 import merge from 'lodash/merge'
+import { ThemeProvider } from 'styled-components'
 
 import App from './components/application.js'
 import BasePropertyComponent, { CleanPropertyComponent } from './components/property-type/index.js'

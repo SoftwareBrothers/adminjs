@@ -1,10 +1,10 @@
 import React from 'react'
-import styled from 'styled-components/dist/styled-components.esm.js'
 import { cssClass, Text, Box } from '@adminjs/design-system'
 
 import { VersionProps } from '../../../adminjs-options.interface.js'
 import { useTranslation } from '../../hooks/index.js'
 import allowOverride from '../../hoc/allow-override.js'
+import styled from '../../utils/styled-components.js'
 
 export type Props = {
   versions: VersionProps;

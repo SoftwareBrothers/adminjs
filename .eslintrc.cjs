@@ -9,7 +9,7 @@ module.exports = {
   },
   extends: ['airbnb', 'plugin:@typescript-eslint/recommended', 'plugin:mocha/recommended', 'plugin:import/typescript'],
   parserOptions: {
-    ecmaVersion: 2018,
+    ecmaVersion: 2020,
     sourceType: 'module',
   },
   rules: {
