@@ -1,4 +1,4 @@
-import { ModalProps } from '@adminjs/design-system'
+import type { ModalProps } from '@adminjs/design-system'
 import { SHOW_MODAL, HIDE_MODAL } from '../store'
 
 export interface ModalData {
