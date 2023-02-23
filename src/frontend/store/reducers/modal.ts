@@ -1,20 +1,20 @@
-import { SHOW_CONFIRM_MODAL, HIDE_CONFIRM_MODAL } from '../actions'
-import { ConfirmModalData } from '../../interfaces'
+import { SHOW_MODAL, HIDE_MODAL } from '../actions'
+import { ModalData } from '../../interfaces'
 
-export type ConfirmModalInState = (ConfirmModalData & { show: true }) | { show: false }
+export type ModalInState = (ModalData & { show: true }) | { show: false }
 
-export const confirmModalReducer = (state: ConfirmModalInState = { show: false }, action: {
+export const modalReducer = (state: ModalInState = { show: false }, action: {
   type: string;
-  data: ConfirmModalData;
-}): ConfirmModalInState => {
+  data: ModalData;
+}): ModalInState => {
   switch (action.type) {
-  case SHOW_CONFIRM_MODAL: {
+  case SHOW_MODAL: {
     return {
       ...action.data,
       show: true,
     }
   }
-  case HIDE_CONFIRM_MODAL: {
+  case HIDE_MODAL: {
     return {
       show: false,
     }

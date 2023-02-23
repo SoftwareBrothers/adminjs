@@ -6,7 +6,7 @@ import { DifferentActionParams, ActionCallCallback, UseActionResult } from './us
 import { actionHref } from '../../interfaces/action/action-href'
 import { useActionResponseHandler } from './use-action-response-handler'
 import { useTranslation } from '../use-translation'
-import { useConfirmModal } from '../use-confirm-modal'
+import { useModal } from '../use-modal'
 /**
  * @load ./use-action.doc.md
  * @subcategory Hooks
@@ -25,7 +25,7 @@ export function useAction<K extends ActionResponse>(
 ): UseActionResult<K> {
   const navigate = useNavigate()
   const translateFunctions = useTranslation()
-  const modalFunctions = useConfirmModal()
+  const modalFunctions = useModal()
   const actionResponseHandler = useActionResponseHandler(onActionCall)
 
   const href = actionHref(action, params)

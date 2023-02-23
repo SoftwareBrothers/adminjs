@@ -8,7 +8,7 @@ import { actionHref } from './action-href'
 import { ActionJSON } from './action-json.interface'
 import { buildActionCallApiTrigger } from './build-action-api-call-trigger'
 import { TranslateFunctions } from '../../../utils'
-import { ConfirmModalData, ConfirmModalFunctions } from '../confirm-modal.interface'
+import { ModalData, ModalFunctions } from '../modal.interface'
 
 export type BuildActionClickOptions = {
   action: ActionJSON;
@@ -16,7 +16,7 @@ export type BuildActionClickOptions = {
   actionResponseHandler: ReturnType<typeof useActionResponseHandler>;
   navigate: NavigateFunction;
   translateFunctions: TranslateFunctions;
-  modalFunctions: ConfirmModalFunctions
+  modalFunctions: ModalFunctions
 }
 
 export type BuildActionClickReturn = (event: any) => any | Promise<any>
@@ -39,8 +39,9 @@ export const buildActionClickHandler = (
     })
 
     if (action.guard && actionHasComponent(action)) {
-      const modalData: ConfirmModalData = {
+      const modalData: ModalData = {
         modalProps: {
+          variant: 'danger',
           label: 'confirm',
           title: action.guard,
         },

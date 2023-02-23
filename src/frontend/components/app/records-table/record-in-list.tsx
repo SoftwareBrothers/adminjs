@@ -9,7 +9,7 @@ import { ActionJSON, buildActionClickHandler, RecordJSON, ResourceJSON } from '.
 import { display } from './utils/display'
 import { ActionResponse, RecordActionResponse } from '../../../../backend/actions/action.interface'
 import mergeRecordResponse from '../../../hooks/use-record/merge-record-response'
-import { useActionResponseHandler, useTranslation, useConfirmModal } from '../../../hooks'
+import { useActionResponseHandler, useTranslation, useModal } from '../../../hooks'
 import { actionsToButtonGroup } from '../action-header/actions-to-button-group'
 import allowOverride from '../../../hoc/allow-override'
 import { getResourceElementCss } from '../../../utils'
@@ -31,7 +31,7 @@ const RecordInList: React.FC<RecordInListProps> = (props) => {
   const [record, setRecord] = useState<RecordJSON>(recordFromProps)
   const navigate = useNavigate()
   const translateFunctions = useTranslation()
-  const modalFunctions = useConfirmModal()
+  const modalFunctions = useModal()
 
   const handleActionCallback = useCallback((actionResponse: ActionResponse) => {
     if (actionResponse.record && !actionResponse.redirectUrl) {
