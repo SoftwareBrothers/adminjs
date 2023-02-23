@@ -21,8 +21,14 @@ const env = {
 
 const store = createStore(window.REDUX_STATE)
 const theme = window.THEME
+const adminLocale = window.REDUX_STATE.locale
 const currentLocale = JSON.parse(window.localStorage.getItem('locale'))
-const locale = currentLocale || window.REDUX_STATE.locale
+let locale = null
+if (currentLocale) {
+  locale = (adminLocale.language === currentLocale.language) ? adminLocale : currentLocale
+} else {
+  locale = adminLocale
+}
 
 i18n.use(initReactI18next).init({
   resources: {
