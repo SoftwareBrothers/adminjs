@@ -103,7 +103,7 @@ const ActionHeader: React.FC<ActionHeaderProps> = (props) => {
         <Box mt={cssHeaderMT} flexGrow={1} px={['default', 0]}>
           <CssHComponent mb="lg">
             {action.showInDrawer ? (
-              <StyledBackButton />
+              <StyledBackButton showInDrawer={action.showInDrawer} />
             ) : ''}
             {title}
             {tag ? (<Badge variant="default" outline ml="default">{tag}</Badge>) : ''}

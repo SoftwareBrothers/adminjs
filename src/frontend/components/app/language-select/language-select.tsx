@@ -1,19 +1,20 @@
 import { Box, Button, DropDown, DropDownItem, DropDownMenu, DropDownTrigger, Icon } from '@adminjs/design-system'
 import React, { FC, useCallback } from 'react'
+import { useTranslation } from 'react-i18next'
 import { useSelector } from 'react-redux'
-import { Locale, locales } from '../../../../locale'
-import { ReduxState } from '../../../store/store'
 import { useLocalStorage } from '../../../hooks'
+import { ReduxState } from '../../../store/store'
 
 const LanguageSelect: FC = () => {
-  const { locale } = useSelector((state: ReduxState) => state)
-  const [storedLocale, setStoredLocale] = useLocalStorage('locale', locale)
+  const locale = useSelector((state: ReduxState) => state.locale)
+  const [storedLocale, setStoredLocale] = useLocalStorage('locale', locale.language)
   const { availableLanguages } = locale
 
-  const handleButton = useCallback((lng: string) => {
-    const selectedLocale: Locale = { ...locales[lng], availableLanguages }
-    setStoredLocale(selectedLocale)
-    window.location.reload()
+  const { i18n } = useTranslation()
+
+  const handleButtonClick = useCallback((lng: string) => {
+    i18n.changeLanguage(lng)
+    setStoredLocale(lng)
   }, [])
 
   if (!availableLanguages.length) {
@@ -26,12 +27,12 @@ const LanguageSelect: FC = () => {
         <DropDownTrigger>
           <Button>
             <Icon icon="Globe" />
-            {storedLocale.language}
+            {storedLocale}
           </Button>
         </DropDownTrigger>
         <DropDownMenu>
           {availableLanguages.map((lang) => (
-            <DropDownItem key={lang} onClick={() => handleButton(lang)}>
+            <DropDownItem key={lang} onClick={() => handleButtonClick(lang)}>
               {lang}
             </DropDownItem>
           ))}

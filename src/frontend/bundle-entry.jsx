@@ -4,6 +4,7 @@ import { BrowserRouter } from 'react-router-dom'
 import { ThemeProvider } from 'styled-components'
 import { initReactI18next } from 'react-i18next'
 import i18n from 'i18next'
+import merge from 'lodash/merge'
 
 import App from './components/application'
 import BasePropertyComponent, { CleanPropertyComponent } from './components/property-type'
@@ -14,6 +15,7 @@ import * as Hooks from './hooks'
 import ApiClient from './utils/api-client'
 import withNotice from './hoc/with-notice'
 import { flat } from '../utils/flat'
+import { locales } from '../locale'
 
 const env = {
   NODE_ENV: process.env.NODE_ENV || 'development',
@@ -21,16 +23,23 @@ const env = {
 
 const store = createStore(window.REDUX_STATE)
 const theme = window.THEME
-const currentLocale = JSON.parse(window.localStorage.getItem('locale'))
-const locale = currentLocale || window.REDUX_STATE.locale
+const defaultLocale = window.REDUX_STATE.locale
+const currentLocale = JSON.parse(window.localStorage.getItem('locale')) || defaultLocale.language
 
 i18n.use(initReactI18next).init({
-  resources: {
-    [locale.language]: {
-      translation: locale.translations,
-    },
-  },
-  lng: locale.language,
+  resources: Object.keys(locales).reduce(
+    (memo, locale) => ({
+      ...memo,
+      [locale]: {
+        translation: merge(
+          locales[locale].translations,
+          locale === defaultLocale.language ? defaultLocale.translations : {},
+        ),
+      },
+    }),
+    {},
+  ),
+  lng: currentLocale,
   interpolation: { escapeValue: false },
 })
 
