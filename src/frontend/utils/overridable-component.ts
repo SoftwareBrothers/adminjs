@@ -75,6 +75,7 @@ export type OverridableComponent =
   | 'DefaultRichtextShowProperty'
   | 'DefaultTextareaEditProperty'
   | 'DefaultTextareaShowProperty'
+  | 'DefaultRelationsShowProperty'
   | 'PropertyDescription'
   | 'PropertyLabel'
 

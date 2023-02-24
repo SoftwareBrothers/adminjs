@@ -37,7 +37,7 @@ const listOptions = [
 type BasicOption = typeof basicOptions[number]
 type ListOption = typeof listOptions[number]
 
-type MissingKeys = Required<Omit<ResourceOptions, BasicOption | ListOption | 'actions' | 'properties'>>
+type MissingKeys = Required<Omit<ResourceOptions, BasicOption | ListOption | 'actions' | 'properties' | 'relations'>>
 
 // The following check is done in typescript to ensure that the `basicOptions` and `listOptions`
 // contains all the keys from ResourceOptions (+ actions and properties) which are copied

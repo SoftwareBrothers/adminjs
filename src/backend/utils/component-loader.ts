@@ -164,6 +164,7 @@ export class ComponentLoader {
     'DefaultRichtextShowProperty',
     'DefaultTextareaEditProperty',
     'DefaultTextareaShowProperty',
+    'DefaultRelationsShowProperty',
     'PropertyDescription',
     'PropertyLabel',
   ]

@@ -4,7 +4,6 @@ import React from 'react'
 import allowOverride from '../../hoc/allow-override'
 import { getActionElementCss } from '../../utils'
 import ActionHeader from '../app/action-header/action-header'
-import { RecordRelations } from '../app/record-relations/record-relations'
 import PropertyType from '../property-type'
 import { ActionProps } from './action.props'
 import LayoutElementRenderer from './utils/layout-element-renderer'
@@ -44,8 +43,6 @@ const Show: React.FC<ActionProps> = (props) => {
             record={record}
           />
         ))}
-
-      <RecordRelations resource={resource} record={record} />
     </DrawerContent>
   )
 }

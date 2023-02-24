@@ -1,101 +1,85 @@
 import { Box, Tab, Tabs } from '@adminjs/design-system'
-import React, { useEffect, useMemo, useState } from 'react'
+import React, { FC, useEffect, useMemo, useState } from 'react'
 import { useSelector } from 'react-redux'
+import { allowOverride } from '../../../hoc'
 import { useTranslation } from '../../../hooks'
-import { ReduxState } from '../../../store'
-import { ApiClient } from '../../../utils/api-client'
-import { RecordsTable } from '../records-table'
+import type { ReduxState } from '../../../store'
+import { ApiClient } from '../../../utils'
+import { RecordsTable } from '../../app/records-table'
+import type { BasePropertyProps } from '../../property-type'
 
 const api = new ApiClient()
 
-const options = {
-  relations: {
-    articles: {
-      junction: {
-        joinKey: 'blogId',
-        inverseJoinKey: 'articleId',
-        throughResourceId: 'BlogArticle',
-      },
-      target: {
-        resourceId: 'Article',
-      },
-    },
-    comments: {
-      junction: {
-        joinKey: 'blogId',
-        inverseJoinKey: 'articleId',
-        throughResourceId: 'BlogArticle',
-      },
-      target: {
-        resourceId: 'Comment',
-      },
-    },
-    complicated: {
-      junction: {
-        joinKey: 'blogId',
-        inverseJoinKey: 'articleId',
-        throughResourceId: 'BlogArticle',
-      },
-      target: {
-        resourceId: 'Complicated',
-      },
-    },
-  },
-}
-
-const RecordRelations = (props) => {
+const RelationsTabs: FC<BasePropertyProps> = (props) => {
   const { resource, record } = props
+  const { id: resourceId, properties } = resource
 
-  const relations = Object.keys(options.relations)
-  const [selectedTab, setSelectedTab] = useState(relations[0])
+  const { relationsTargets } = properties.relations.props
+  const relationsKeys = Object.keys(relationsTargets)
+  const [selectedTab, setSelectedTab] = useState<string>(relationsKeys[0])
   const { translateLabel } = useTranslation()
+
+  if (!relationsKeys.length) return null
 
   return (
     <Tabs currentTab={selectedTab} onChange={setSelectedTab}>
-      {relations.map((relation) => {
-        const { resourceId } = options.relations[relation].target
-        return (
-          <Tab key={relation} id={relation} label={translateLabel(relation, resourceId)}>
-            <RelationTab id={relation} activeTab={selectedTab} resourceId={resourceId} />
-          </Tab>
-        )
-      })}
+      {relationsKeys.map((relation) => (
+        <Tab key={relation} id={relation} label={translateLabel(relation, resourceId)}>
+          <RelationTab
+            targetResourceId={relationsTargets[relation]}
+            record={record}
+            resource={resource}
+            relation={relation}
+            activeTab={selectedTab}
+          />
+        </Tab>
+      ))}
     </Tabs>
   )
 }
 
-const RelationTab = ({ id, resourceId, activeTab }) => {
+type RelationTabProps = Pick<BasePropertyProps, 'record' | 'resource'> & {
+  relation: string
+  activeTab: string
+  targetResourceId: string
+}
+
+const RelationTab: FC<RelationTabProps> = (props) => {
+  const { relation, targetResourceId, resource, record, activeTab } = props
   const [records, setRecords] = useState([])
   const [isLoading, setIsLoading] = useState(false)
   const resources = useSelector((state: ReduxState) => state.resources)
-  const target = useMemo(() => resources.find((r) => r.id === resourceId), [])
+  const targetResource = resources.find((r) => r.id === targetResourceId)
 
   useEffect(() => {
-    function fetchRecords() {
-      setIsLoading(true)
-      api
-        .resourceAction({ resourceId, actionName: 'list' })
-        .then(({ data: { records: relatedRecords } }) => {
-          setIsLoading(false)
-          setRecords(relatedRecords)
-        })
-        .finally(() => {
-          setIsLoading(false)
-        })
-    }
-    if (activeTab === id) {
-      fetchRecords()
-    }
-  }, [activeTab])
+    if (activeTab !== relation || !record) return
+
+    setIsLoading(true)
+    api
+      .recordAction({
+        actionName: 'findRelation',
+        recordId: record.id,
+        resourceId: targetResourceId,
+        params: { relation },
+      })
+      .then(({ data: { records: relatedRecords } }) => {
+        setIsLoading(false)
+        setRecords(relatedRecords)
+      })
+      .finally(() => {
+        setIsLoading(false)
+      })
+  }, [activeTab, relation, record, resource.id, targetResourceId])
+
+  if (activeTab !== relation || !targetResource) return null
 
   return (
-    activeTab === id && (
-      <Box py="xl">
-        <RecordsTable resource={target} records={records} isLoading={isLoading} />
-      </Box>
-    )
+    <Box py="xl">
+      <RecordsTable resource={targetResource} records={records} isLoading={isLoading} />
+    </Box>
   )
 }
 
-export { RecordRelations }
-export default RecordRelations
+export { RelationsTabs }
+
+export default allowOverride(RelationsTabs, 'DefaultRelationsShowProperty')
