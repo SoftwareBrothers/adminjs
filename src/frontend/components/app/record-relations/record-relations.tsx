@@ -1,5 +1,5 @@
 import { Box, Tab, Tabs } from '@adminjs/design-system'
-import React, { FC, useEffect, useMemo, useState } from 'react'
+import React, { FC, useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { allowOverride } from '../../../hoc'
 import { useTranslation } from '../../../hooks'
@@ -10,7 +10,7 @@ import type { BasePropertyProps } from '../../property-type'
 
 const api = new ApiClient()
 
-const RelationsTabs: FC<BasePropertyProps> = (props) => {
+const RecordRelations: FC<BasePropertyProps> = (props) => {
   const { resource, record } = props
   const { id: resourceId, properties } = resource
 
@@ -80,6 +80,6 @@ const RelationTab: FC<RelationTabProps> = (props) => {
   )
 }
 
-export { RelationsTabs }
+export { RecordRelations }
 
-export default allowOverride(RelationsTabs, 'DefaultRelationsShowProperty')
+export default allowOverride(RecordRelations, 'DefaultRelationsShowProperty')
