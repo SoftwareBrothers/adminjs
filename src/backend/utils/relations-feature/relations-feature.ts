@@ -5,7 +5,7 @@ import { buildFeature } from '../build-feature'
 
 export type RelationsActionResponse = ActionResponse & {
   /**
-   * List of records
+   * List of relation records
    */
   records: Array<RecordJSON>
 }
@@ -27,10 +27,41 @@ export type RelationsFeatureOptions = {
 
 // TODO handle resource relations
 const relationsHandler: ActionHandler<RelationsActionResponse> = (req, res, ctx) => ({
-  resource: ctx.resource,
   records: [],
 })
 
+/**
+ * @exaple
+ * ```
+ * export const userResource = {
+ *  resource: UserModel,
+ *  features: [
+ *    relationsFeature({
+ *      relations: {
+ *        articles: {
+ *          junction: {
+ *            joinKey: "authorId",
+ *            inverseJoinKey: "articleId",
+ *            throughResourceId: "UserArticle",
+ *          },
+ *          target: {
+ *            resourceId: "Article",
+ *          },
+ *        },
+ *      },
+ *    }),
+ *  ],
+ *  options: {
+ *    ...
+ *    actions: {
+ *      findRelation: {
+ *        isAccessible: (...) => boolean,
+ *      },
+ *    },
+ *  },
+ *};
+ *```
+ */
 export const relationsFeature = ({ relations }: RelationsFeatureOptions) => {
   const properties: ResourceOptions['properties'] = Object.keys(relations).reduce(
     (memo, current) => ({
