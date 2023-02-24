@@ -6,6 +6,7 @@ import * as boolean from './boolean'
 import * as datetime from './datetime'
 import * as richtext from './richtext'
 import * as reference from './reference'
+import * as relations from './relations'
 import * as textarea from './textarea'
 import * as password from './password'
 import * as currency from './currency'
@@ -20,6 +21,7 @@ type BasePropertyComponentType = React.FC<BasePropertyComponentProps> & {
   Reference: any
   TextArea: any
   Password: any
+  Relations: any
 }
 
 function camelizePropertyType<T>(type: { [key: string]: T }): { [key: string]: T } {
@@ -39,6 +41,7 @@ const BasePropertyComponentExtended: BasePropertyComponentType = Object.assign(
     DateTime: camelizePropertyType(datetime),
     RichText: camelizePropertyType(richtext),
     Reference: camelizePropertyType(reference),
+    Relations: camelizePropertyType(relations),
     TextArea: camelizePropertyType(textarea),
     Password: camelizePropertyType(password),
     Currency: camelizePropertyType(currency),

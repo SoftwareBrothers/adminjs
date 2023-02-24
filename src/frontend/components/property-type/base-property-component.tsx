@@ -19,6 +19,7 @@ import * as defaultType from './default-type'
 import * as password from './password'
 import * as phone from './phone'
 import * as reference from './reference'
+import * as relations from './relations'
 import * as richtext from './richtext'
 import * as textarea from './textarea'
 
@@ -48,6 +49,7 @@ const types: Record<PropertyType, any> = {
   'key-value': null,
   currency,
   phone,
+  relations,
 }
 
 /**
