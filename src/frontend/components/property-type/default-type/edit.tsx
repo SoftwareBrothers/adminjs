@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
-import React, { FC, useState, memo, useEffect } from 'react'
+import React, { FC, memo } from 'react'
 import { Input, FormMessage, FormGroup, Select } from '@adminjs/design-system'
 
 import { EditPropertyProps } from '../base-property-props'
@@ -43,26 +43,19 @@ const SelectEdit: FC<CombinedProps> = (props) => {
 
 const TextEdit: FC<CombinedProps> = (props) => {
   const { property, record, onChange } = props
-  const propValue = record.params?.[property.path] ?? ''
-  const [value, setValue] = useState(propValue)
-
-  useEffect(() => {
-    if (value !== propValue) {
-      setValue(propValue)
-    }
-  }, [propValue])
+  const propValue = record.params[property.path]
 
   return (
     <Input
       id={property.path}
       name={property.path}
       required={property.isRequired}
-      onChange={(e) => setValue(e.target.value)}
-      onBlur={() => onChange(property.path, value)}
-      // handle clicking ENTER
-      onKeyDown={(e) => e.keyCode === 13 && onChange(property.path, value)}
-      value={value}
+      onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+        onChange(property.path, e.target.value)
+      }}
+      value={propValue ?? ''}
       disabled={property.isDisabled}
+      placeholder={propValue === null ? '<null>' : undefined}
       {...property.props}
     />
   )
