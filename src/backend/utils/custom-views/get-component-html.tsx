@@ -5,6 +5,7 @@ import { I18nextProvider, I18nextProviderProps } from 'react-i18next'
 import { combineStyles } from '@adminjs/design-system'
 import i18n from 'i18next'
 import { Store } from 'redux'
+import { ServerStyleSheet, StyleSheetManager, ThemeProvider } from 'styled-components'
 
 import { getAssets, getBranding, getFaviconFromBranding } from '../../../backend/utils/options-parser/options-parser.js'
 import ViewHelpers from '../../../backend/utils/view-helpers/view-helpers.js'
@@ -15,7 +16,6 @@ import createStore, {
   ReduxState,
 } from '../../../frontend/store/store.js'
 import AdminJS from '../../../adminjs.js'
-import { ServerStyleSheet, StyleSheetManager, ThemeProvider } from '../../../frontend/utils/styled-components.js'
 
 export async function getComponentHtml<T extends Record<string, unknown>>(
   Component: React.FC<T>,

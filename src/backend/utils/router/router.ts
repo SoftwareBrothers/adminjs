@@ -1,6 +1,6 @@
 import path from 'path'
 import * as url from 'url'
-import buildResolver from 'esm-resolve'
+import { createRequire } from 'node:module'
 
 import { outPath as COMPONENT_BUNDLE_PATH } from '../../bundler/user-components-bundler.js'
 import AppController from '../../controllers/app-controller.js'
@@ -8,9 +8,21 @@ import ApiController from '../../controllers/api-controller.js'
 import env from '../../bundler/bundler-env.js'
 
 const __dirname = url.fileURLToPath(new URL('.', import.meta.url))
-const __filename = url.fileURLToPath(import.meta.url)
-const ASSETS_ROOT = `${__dirname}/../../../frontend/assets/`
-const resolve = buildResolver(__filename)
+const ASSETS_ROOT = `${__dirname}/../lib/../../../frontend/assets/`
+
+/**
+ * A function which resolves the path to AdminJS design system bundle.
+ *
+ * @returns {string}  resolved path to AdminJS design system bundle
+ */
+const resolveDesignSystemBundle = (): string => {
+  const require = createRequire(import.meta.url)
+
+  return path.join(
+    path.parse(require.resolve('@adminjs/design-system')).dir,
+    `../bundle.${env}.js`,
+  )
+}
 
 /**
  * Type representing the AdminJS.Router
@@ -59,10 +71,7 @@ export const Router: RouterType = {
     src: path.join(ASSETS_ROOT, `scripts/global-bundle.${env}.js`),
   }, {
     path: '/frontend/assets/design-system.bundle.js',
-    src: path.join(
-      path.parse(resolve('@adminjs/design-system')!).dir,
-      `../bundle.${env}.js`,
-    ),
+    src: resolveDesignSystemBundle(),
   }, {
     path: '/frontend/assets/logo.svg',
     src: path.join(ASSETS_ROOT, 'images/logo.svg'),

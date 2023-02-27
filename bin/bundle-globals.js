@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 /* eslint-disable import/no-extraneous-dependencies */
+import path from 'path'
 import { rollup } from 'rollup'
 import { nodeResolve as resolve } from '@rollup/plugin-node-resolve'
 import commonjs from '@rollup/plugin-commonjs'
@@ -9,13 +10,13 @@ import polyfills from 'rollup-plugin-polyfill-node'
 import terser from '@rollup/plugin-terser'
 import * as url from 'url'
 
-import env from '../src/backend/bundler/bundler-env.js'
+import env from '../lib/backend/bundler/bundler-env.js'
 
 const __dirname = url.fileURLToPath(new URL('.', import.meta.url))
 
 const run = async () => {
   const inputOptions = {
-    input: `${__dirname}/../src/frontend/global-entry.js`,
+    input: path.join(__dirname, '../lib/frontend/global-entry.js'),
     plugins: [
       resolve({
         extensions: ['.mjs', '.js', '.cjs', '.mjs', '.jsx', '.json', '.scss'],
@@ -43,6 +44,7 @@ const run = async () => {
 
   return bundle.write({
     format: 'iife',
+    interop: 'auto',
     name: 'globals',
     globals: {
       react: 'React',
@@ -57,7 +59,7 @@ const run = async () => {
       'react-router': 'ReactRouter',
       'react-router-dom': 'ReactRouterDOM',
     },
-    file: `${__dirname}/../src/frontend/assets/scripts/global-bundle.${env}.js`,
+    file: path.join(__dirname, `../lib/frontend/assets/scripts/global-bundle.${env}.js`),
   })
 }
 

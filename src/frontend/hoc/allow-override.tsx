@@ -29,7 +29,7 @@ function allowOverride<P extends Record<string, unknown>>(
      *
      */
     if (typeof window !== 'undefined') {
-      Component = window.AdminJS?.UserComponents?.[name]
+      Component = (window as any).AdminJS?.UserComponents?.[name]
         ?? (window as any).THEME?.Components?.[name]
         ?? OriginalComponent
     }

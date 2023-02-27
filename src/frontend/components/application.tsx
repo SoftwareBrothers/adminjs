@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { Routes, Route } from 'react-router-dom'
 import { Box, Overlay, Reset } from '@adminjs/design-system'
 import { useLocation } from 'react-router'
+import { createGlobalStyle } from 'styled-components'
 
 import ViewHelpers from '../../backend/utils/view-helpers/view-helpers.js'
 import Sidebar from './app/sidebar/sidebar.js'
@@ -14,7 +15,6 @@ import {
   DashboardRoute, ResourceActionRoute, RecordActionRoute, PageRoute, BulkActionRoute, ResourceRoute,
 } from './routes/index.js'
 import useHistoryListen from '../hooks/use-history-listen.js'
-import { createGlobalStyle } from '../utils/styled-components.js'
 
 const GlobalStyle = createGlobalStyle`
   html, body, #app {

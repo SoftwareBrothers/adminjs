@@ -65,7 +65,13 @@ export const plugins = async ({ babelConfig = {}, commonJSConfig = {}, minify = 
       babelHelpers: 'bundled',
       exclude: 'node_modules/**/*.js',
       presets: [
-        presetEnv,
+        [presetEnv, {
+          targets: {
+            node: '18',
+          },
+          loose: true,
+          modules: false,
+        }],
         presetReact,
         presetTs,
       ],

@@ -3,7 +3,7 @@ import { Provider } from 'react-redux'
 import { BrowserRouter } from 'react-router-dom'
 import { initReactI18next } from 'react-i18next'
 import i18n from 'i18next'
-import merge from 'lodash/merge'
+import merge from 'lodash/merge.js'
 import { ThemeProvider } from 'styled-components'
 
 import App from './components/application.js'

@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React from 'react'
 import { useSelector } from 'react-redux'
 import {
@@ -5,7 +6,7 @@ import {
   H5,
   H2,
   Label,
-  Illustration,
+  Illustration as RawIllustration,
   Input,
   FormGroup,
   Button,
@@ -14,10 +15,10 @@ import {
   MadeWithLove,
   themeGet,
 } from '@adminjs/design-system'
+import { styled, createGlobalStyle } from 'styled-components'
 
 import { useTranslation } from '../../hooks/index.js'
 import { ReduxState } from '../../store/store.js'
-import styled, { createGlobalStyle } from '../../utils/styled-components.js'
 
 const GlobalStyle = createGlobalStyle`
   html, body, #app {
@@ -50,6 +51,7 @@ export const Login: React.FC<LoginProps> = (props) => {
   const { translateLabel, translateButton, translateProperty, translateMessage } = useTranslation()
   const branding = useSelector((state: ReduxState) => state.branding)
 
+  const Illustration = RawIllustration as any
   return (
     <>
       <GlobalStyle />

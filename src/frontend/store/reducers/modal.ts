@@ -1,5 +1,5 @@
-import { SHOW_MODAL, HIDE_MODAL } from '../actions'
-import { ModalData } from '../../interfaces'
+import { SHOW_MODAL, HIDE_MODAL } from '../actions/index.js'
+import { ModalData } from '../../interfaces/index.js'
 
 export type ModalInState = (ModalData & { show: true }) | { show: false }
 

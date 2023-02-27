@@ -1,8 +1,8 @@
-import React from 'react'
+import React, { ComponentType, PropsWithChildren } from 'react'
 import { Box, BoxProps, DrawerContent, DrawerFooter } from '@adminjs/design-system'
+import { styled } from 'styled-components'
 
 import allowOverride from '../../../hoc/allow-override.js'
-import styled from '../../../utils/styled-components.js'
 
 const StyledWrapperWithFilter = styled(Box)`
   & > ${DrawerContent} {
@@ -39,7 +39,10 @@ const Wrapper: React.FC<WrapperProps> = (props) => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { children, variant, color, showFilter = false, ...rest } = props
 
-  const Component = showFilter ? StyledWrapperWithFilter : StyledWrapper
+  const Component: ComponentType<PropsWithChildren<any>> = showFilter
+    ? StyledWrapperWithFilter
+    : StyledWrapper
+
   return (
     <Component {...rest} variant="grey" mx="auto" data-css="styled-wrapper">
       {children}

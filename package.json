@@ -7,18 +7,14 @@
     ".": {
       "types": "./index.d.ts",
       "import": "./index.js",
-      "require": "./index.cjs"
+      "require": "./index.js"
     }
   },
-  "module": "./index.js",
-  "main": "./index.cjs",
-  "types": "./index.d.ts",
   "scripts": {
     "test": "mocha ./spec/index.js",
     "types": "tsc",
     "clean": "rm -rf lib && mkdir lib && rm -fr types && mkdir types",
-    "build": "BABEL_ENV=esm babel src --out-dir lib --copy-files --extensions '.ts,.js,.jsx,.tsx'",
-    "build:cjs": "BABEL_ENV=cjs babel src --out-dir cjs --copy-files --extensions '.ts,.js,.jsx,.tsx'",
+    "build": "babel src --out-dir lib --copy-files --extensions '.ts,.js,.jsx,.tsx'",
     "lint": "eslint './spec/**/*' './src/**/*' './cy/**/*' './*'",
     "cover": "NODE_ENV=test nyc --reporter=lcov --reporter=text-lcov npm test",
     "codecov": "NODE_ENV=test nyc --reporter=text-lcov npm test | codecov --pipe",
@@ -74,7 +70,7 @@
     "admin-panel"
   ],
   "browserslist": [
-    "last 10 Chrome versions"
+    "last 5 Chrome versions"
   ],
   "husky": {
     "hooks": {
@@ -126,7 +122,7 @@
     "rollup": "^3.15.0",
     "rollup-plugin-polyfill-node": "^0.12.0",
     "slash": "^5.0.0",
-    "styled-components": "^5.3.6",
+    "styled-components": "6.0.0-beta.11",
     "uuid": "^9.0.0",
     "xss": "^1.0.14"
   },
@@ -144,10 +140,8 @@
     "@types/react-dom": "^18.0.11",
     "@types/sinon": "^10.0.13",
     "@types/sinon-chai": "^3.2.9",
-    "@types/styled-components": "^5.1.26",
     "@typescript-eslint/eslint-plugin": "^5.52.0",
     "@typescript-eslint/parser": "^5.52.0",
-    "babel-plugin-module-extension-resolver": "^1.0.0",
     "chai": "^4.3.7",
     "chai-as-promised": "^7.1.1",
     "chai-change": "^2.1.2",
@@ -174,5 +168,10 @@
     "sinon": "^15.0.1",
     "sinon-chai": "^3.7.0",
     "typescript": "^4.9.5"
+  },
+  "resolutions": {
+    "styled-components": "6.0.0-beta.11",
+    "react-redux": "8.0.5",
+    "redux": "4.2.1"
   }
 }

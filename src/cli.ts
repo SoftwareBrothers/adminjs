@@ -22,7 +22,7 @@ program
     'method. <configFile> argument is the path to your js file where you',
     'export AdminJSOptions configuration object',
   ].join('\n                     '))
-  .action((configFile) => {
+  .action(async (configFile) => {
     const config = require(path.join(process.cwd(), configFile))
     if (!config.databases && !config.resources) {
       // eslint-disable-next-line no-console
@@ -33,7 +33,7 @@ program
       ].join('\n'))
       return
     }
-    const bundler = require('../cjs/backend/bundler/user-components-bundler.js').default
+    const bundler = await import('../lib/backend/bundler/user-components-bundler.js')
     bundler(new AdminJS(config), { watch: false, write: true })
   })
 

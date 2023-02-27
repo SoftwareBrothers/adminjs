@@ -21,8 +21,7 @@
           "node"
         ],
       "paths": {
-        "react": ["node_modules/@types/react"],
-        "styled-components": ["node_modules/@types/styled-components"]
+        "react": ["node_modules/@types/react"]
       },
       "skipLibCheck": true
   },

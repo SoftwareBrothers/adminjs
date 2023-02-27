@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { Box, Button, DropDown, DropDownItem, DropDownMenu, DropDownTrigger, Icon } from '@adminjs/design-system'
 import React, { FC, useCallback } from 'react'
 import { useTranslation } from 'react-i18next'

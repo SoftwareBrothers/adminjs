@@ -1,4 +1,4 @@
-import { ModalData, ShowModalResponse, HideModalResponse } from '../../interfaces'
+import { ModalData, ShowModalResponse, HideModalResponse } from '../../interfaces/index.js'
 
 export const SHOW_MODAL = 'SHOW_MODAL'
 

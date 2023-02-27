@@ -1,6 +1,8 @@
+// @ts-nocheck
 import React from 'react'
 import { useSelector } from 'react-redux'
 import { Box, cssClass, themeGet } from '@adminjs/design-system'
+import { styled } from 'styled-components'
 
 import { BrandingOptions } from '../../../../adminjs-options.interface.js'
 import { ResourceJSON, PageJSON } from '../../../interfaces/index.js'
@@ -10,7 +12,6 @@ import { ReduxState } from '../../../store/store.js'
 import SidebarFooter from './sidebar-footer.js'
 import SidebarResourceSection from './sidebar-resource-section.js'
 import allowOverride from '../../../hoc/allow-override.js'
-import styled from '../../../utils/styled-components.js'
 
 type Props = {
   isVisible: boolean;

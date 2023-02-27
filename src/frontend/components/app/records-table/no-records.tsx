@@ -1,5 +1,5 @@
 import React from 'react'
-import { Text, Button, Icon, InfoBox, Illustration, H4 } from '@adminjs/design-system'
+import { Text, Button, Icon, InfoBox, Illustration as RawIllustration, H4 } from '@adminjs/design-system'
 
 import { ResourceJSON } from '../../../interfaces/index.js'
 import { useTranslation } from '../../../hooks/index.js'
@@ -16,6 +16,7 @@ const NoRecordsOriginal: React.FC<NoRecordsProps> = (props) => {
 
   const canCreate = resource.resourceActions.find((a) => a.name === 'new')
 
+  const Illustration = RawIllustration as any
   return (
     <InfoBox title="" variant="transparent">
       <Illustration variant="IdentityCard" />

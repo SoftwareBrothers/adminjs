@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React from 'react'
 import {
   Box,
@@ -5,13 +6,13 @@ import {
   H5,
   H4,
   Text,
-  Illustration,
+  Illustration as RawIllustration,
   IllustrationProps,
   Button,
 } from '@adminjs/design-system'
+import { styled } from 'styled-components'
 
 import { useTranslation } from '../../hooks/index.js'
-import styled from '../../utils/styled-components.js'
 
 const pageHeaderHeight = 284
 const pageHeaderPaddingY = 74
@@ -19,6 +20,7 @@ const pageHeaderPaddingX = 250
 
 export const DashboardHeader: React.FC = () => {
   const { translateMessage } = useTranslation()
+  const Illustration = RawIllustration as any
   return (
     <Box position="relative" overflow="hidden" data-css="default-dashboard">
       <Box
@@ -113,6 +115,8 @@ Card.defaultProps = {
 
 export const Dashboard: React.FC = () => {
   const { translateMessage, translateButton } = useTranslation()
+
+  const Illustration = RawIllustration as any
   return (
     <Box>
       <DashboardHeader />
