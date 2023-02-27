@@ -136,10 +136,9 @@ const translate = (
   options?: TOptions,
 ): string => {
   const realOptions: TOptions = (typeof resourceId === 'string' ? options : resourceId) || {}
-  const formattedName = formatName(name)
-  let keys = [`${key}.${formattedName}`]
+  let keys = [`${key}.${name}`]
   if (resourceId) {
-    keys = [`resources.${resourceId}.${key}.${formattedName}`, ...keys]
+    keys = [`resources.${resourceId}.${key}.${name}`, ...keys]
   }
   if (i18n.exists(keys)) {
     return i18n.t(keys, realOptions)
