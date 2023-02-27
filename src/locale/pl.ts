@@ -24,6 +24,7 @@ const translations = {
     cancel: 'Anuluj',
     confirm: 'Potwierdź',
   },
+
   labels: {
     navigation: 'Nawigacja',
     pages: 'Strony',
@@ -37,6 +38,15 @@ const translations = {
     length: 'Długość',
     from: 'Od',
     to: 'Do',
+  },
+  components: {
+    DropZone: {
+      placeholder: 'Przeciągnij plik tutaj lub kliknij aby wybrać',
+      acceptedSize: 'Maks. rozmiar: {{maxSize}}',
+      acceptedType: 'Dozwolone pliki: {{mimeTypes}}',
+      unsupportedSize: 'Plik {{fileName}} jest zbyt duży',
+      unsupportedType: 'Plik {{fileName}} jest niedozwolonego typu: {{fileType}}',
+    },
   },
   resources: {},
   messages: {
