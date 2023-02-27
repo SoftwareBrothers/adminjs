@@ -11,6 +11,7 @@ const translateFunctions = createFunctions(i18n)
 
 const modalFunctions = {
   closeModal: () => { /* noop */ },
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   openModal: (data) => { /* noop */ },
 }
 

@@ -24,29 +24,31 @@ const Show: React.FC<ActionProps> = (props) => {
   return (
     <DrawerContent data-css={contentTag}>
       {action?.showInDrawer ? <ActionHeader {...props} /> : null}
-      {action.layout
-        ? action.layout.map((layoutElement, i) => (
-          <LayoutElementRenderer
-            // eslint-disable-next-line react/no-array-index-key
-            key={i}
-            layoutElement={layoutElement}
-            {...props}
-            where="show"
-          />
-        ))
-        : properties.map((property) => (
-          <PropertyType
-            key={property.propertyPath}
-            where="show"
-            property={property}
-            resource={resource}
-            record={record}
-          />
-        ))}
+      {action.layout ? action.layout.map((layoutElement, i) => (
+        <LayoutElementRenderer
+          // eslint-disable-next-line react/no-array-index-key
+          key={i}
+          layoutElement={layoutElement}
+          {...props}
+          where="show"
+        />
+      )) : properties.map((property) => (
+        <PropertyType
+          key={property.propertyPath}
+          where="show"
+          property={property}
+          resource={resource}
+          record={record}
+        />
+      ))}
+
     </DrawerContent>
   )
 }
 
 const OverridableShow = allowOverride(Show, 'DefaultShowAction')
 
-export { OverridableShow as default, OverridableShow as Show }
+export {
+  OverridableShow as default,
+  OverridableShow as Show,
+}
