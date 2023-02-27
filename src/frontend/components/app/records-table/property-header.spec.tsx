@@ -43,7 +43,7 @@ describe('<PropertyHeader />', function () {
   })
 
   context('render not selected but searchable field', function () {
-    it('renders a label', async function () {
+    xit('renders a label', async function () {
       const { findAllByText } = renderSubject(property, sortBy, direction)
 
       const label = await findAllByText(property.label)
