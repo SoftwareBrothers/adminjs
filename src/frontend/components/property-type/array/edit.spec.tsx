@@ -4,7 +4,8 @@ import { render, RenderResult, fireEvent, cleanup, waitFor } from '@testing-libr
 import factory from 'factory-girl'
 import sinon from 'sinon'
 import 'sinon-chai'
-
+import { I18nextProvider } from 'react-i18next'
+import i18n from 'i18next'
 import Edit from './edit'
 import TestContextProvider from '../../spec/test-context-provider'
 import '../../spec/property-json.factory'
@@ -24,16 +25,18 @@ describe('<PropertyType.Array.Edit />', function () {
 
   const renderTestSubject = (prop: PropertyJSON, rec: RecordJSON): RenderResult => render(
     <TestContextProvider>
-      <Edit
-        where="edit"
-        property={prop}
-        record={rec}
-        ItemComponent={ItemComponent as unknown as typeof React.Component}
-        onChange={onChange}
-        testId="some-test-id"
-        filter={{}}
-        resource={{} as ResourceJSON}
-      />
+      <I18nextProvider i18n={i18n}>
+        <Edit
+          where="edit"
+          property={prop}
+          record={rec}
+          ItemComponent={ItemComponent as unknown as typeof React.Component}
+          onChange={onChange}
+          testId="some-test-id"
+          filter={{}}
+          resource={{} as ResourceJSON}
+        />
+      </I18nextProvider>
     </TestContextProvider>,
   )
 
@@ -89,10 +92,12 @@ describe('<PropertyType.Array.Edit />', function () {
       const values = ['element1', 'element2']
 
       xit('2 <input> tags already filed with values', async function () {
-        record = await factory.build<RecordJSON>('RecordJSON', { params: {
-          [`${property.path}.0`]: values[0],
-          [`${property.path}.1`]: values[1],
-        } })
+        record = await factory.build<RecordJSON>('RecordJSON', {
+          params: {
+            [`${property.path}.0`]: values[0],
+            [`${property.path}.1`]: values[1],
+          },
+        })
 
         const { findByDisplayValue } = renderTestSubject(property, record)
 

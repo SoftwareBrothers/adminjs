@@ -2,7 +2,8 @@ import React from 'react'
 import { render, RenderResult } from '@testing-library/react'
 import factory from 'factory-girl'
 import { expect } from 'chai'
-
+import { I18nextProvider } from 'react-i18next'
+import i18n from 'i18next'
 import TestContextProvider from '../../spec/test-context-provider'
 import PropertyHeader from './property-header'
 
@@ -15,18 +16,20 @@ const renderSubject = (
   sortDirection: 'desc' | 'asc',
 ): RenderResult => render(
   <TestContextProvider>
-    <table>
-      <tbody>
-        <tr>
-          <PropertyHeader
-            property={property}
-            titleProperty={property}
-            sortBy={sortBy}
-            direction={sortDirection}
-          />
-        </tr>
-      </tbody>
-    </table>
+    <I18nextProvider i18n={i18n}>
+      <table>
+        <tbody>
+          <tr>
+            <PropertyHeader
+              property={property}
+              titleProperty={property}
+              sortBy={sortBy}
+              direction={sortDirection}
+            />
+          </tr>
+        </tbody>
+      </table>
+    </I18nextProvider>
   </TestContextProvider>,
 )
 
