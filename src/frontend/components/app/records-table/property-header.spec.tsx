@@ -1,14 +1,13 @@
-import React from 'react'
 import { render, RenderResult } from '@testing-library/react'
-import factory from 'factory-girl'
 import { expect } from 'chai'
-import { I18nextProvider } from 'react-i18next'
-import i18n from 'i18next'
+import factory from 'factory-girl'
+import React from 'react'
 import TestContextProvider from '../../spec/test-context-provider'
 import PropertyHeader from './property-header'
 
-import '../../spec/property-json.factory'
 import { PropertyJSON } from '../../../interfaces'
+import '../../spec/initialize-translations'
+import '../../spec/property-json.factory'
 
 const renderSubject = (
   property: PropertyJSON,
@@ -16,20 +15,18 @@ const renderSubject = (
   sortDirection: 'desc' | 'asc',
 ): RenderResult => render(
   <TestContextProvider>
-    <I18nextProvider i18n={i18n}>
-      <table>
-        <tbody>
-          <tr>
-            <PropertyHeader
-              property={property}
-              titleProperty={property}
-              sortBy={sortBy}
-              direction={sortDirection}
-            />
-          </tr>
-        </tbody>
-      </table>
-    </I18nextProvider>
+    <table>
+      <tbody>
+        <tr>
+          <PropertyHeader
+            property={property}
+            titleProperty={property}
+            sortBy={sortBy}
+            direction={sortDirection}
+          />
+        </tr>
+      </tbody>
+    </table>
   </TestContextProvider>,
 )
 
@@ -48,7 +45,7 @@ describe('<PropertyHeader />', function () {
 
       const label = await findAllByText(property.label)
 
-      expect(label).to.have.lengthOf(1)
+      expect(label).to.equal(property.label)
     })
 
     it('wraps it within a link with an opposite direction', function () {
