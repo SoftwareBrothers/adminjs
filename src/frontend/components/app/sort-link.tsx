@@ -4,6 +4,7 @@ import { useLocation, NavLink } from 'react-router-dom'
 import { Icon, cssClass } from '@adminjs/design-system'
 
 import { BasePropertyJSON } from '../../interfaces'
+import { useTranslation } from '../../hooks'
 
 export type SortLinkProps = {
   property: BasePropertyJSON;
@@ -14,6 +15,7 @@ export type SortLinkProps = {
 const SortLink: React.FC<SortLinkProps> = (props) => {
   const { sortBy, property, direction } = props
   const location = useLocation()
+  const { translateProperty } = useTranslation()
 
   const isActive = useMemo(() => sortBy === property.propertyPath, [sortBy, property])
 
@@ -26,7 +28,7 @@ const SortLink: React.FC<SortLinkProps> = (props) => {
 
   return (
     <NavLink to={{ search: query.toString() }} className={cssClass('SortLink')}>
-      {property.label}
+      {translateProperty(property.label, property.resourceId)}
       {isActive && (<Icon icon={sortedByIcon} color="grey40" ml="lg" />)}
     </NavLink>
   )

@@ -1,17 +1,17 @@
-import React from 'react'
+import { cleanup, fireEvent, render, RenderResult, waitFor } from '@testing-library/react'
 import { expect } from 'chai'
-import { render, RenderResult, fireEvent, cleanup, waitFor } from '@testing-library/react'
 import factory from 'factory-girl'
+import React from 'react'
 import sinon from 'sinon'
 import 'sinon-chai'
-
-import Edit from './edit'
-import TestContextProvider from '../../spec/test-context-provider'
+import * as TranslateFunctionsFactory from '../../../../utils/translate-functions.factory'
+import { PropertyJSON, RecordJSON, ResourceJSON } from '../../../interfaces'
+import '../../spec/initialize-translations'
 import '../../spec/property-json.factory'
 import '../../spec/record-json.factory'
-import { RecordJSON, PropertyJSON, ResourceJSON } from '../../../interfaces'
+import TestContextProvider from '../../spec/test-context-provider'
 import ItemComponent from '../default-type/edit'
-import * as TranslateFunctionsFactory from '../../../../utils/translate-functions.factory'
+import Edit from './edit'
 
 const AddNewItemText = 'Add new item'
 
@@ -64,7 +64,7 @@ describe('<PropertyType.Array.Edit />', function () {
         })
       })
 
-      xit('renders label and addItem button', async function () {
+      it('renders label and addItem button', async function () {
         const { findByText } = renderTestSubject(property, record)
 
         const label = findByText(property.label)
@@ -88,11 +88,13 @@ describe('<PropertyType.Array.Edit />', function () {
     context('2 items inside', function () {
       const values = ['element1', 'element2']
 
-      xit('2 <input> tags already filed with values', async function () {
-        record = await factory.build<RecordJSON>('RecordJSON', { params: {
-          [`${property.path}.0`]: values[0],
-          [`${property.path}.1`]: values[1],
-        } })
+      it('2 <input> tags already filed with values', async function () {
+        record = await factory.build<RecordJSON>('RecordJSON', {
+          params: {
+            [`${property.path}.0`]: values[0],
+            [`${property.path}.1`]: values[1],
+          },
+        })
 
         const { findByDisplayValue } = renderTestSubject(property, record)
 

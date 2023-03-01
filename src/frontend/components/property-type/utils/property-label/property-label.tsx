@@ -4,6 +4,7 @@ import React from 'react'
 import { PropertyJSON } from '../../../../interfaces'
 import { PropertyDescription } from '../property-description'
 import allowOverride from '../../../../hoc/allow-override'
+import { useTranslation } from '../../../../hooks'
 
 export type PropertyLabelProps = {
   property: PropertyJSON;
@@ -12,6 +13,7 @@ export type PropertyLabelProps = {
 
 const PropertyLabel: React.FC<PropertyLabelProps> = (props) => {
   const { property, props: labelProps } = props
+  const { translateProperty } = useTranslation()
 
   if (property.hideLabel) { return null }
 
@@ -21,7 +23,7 @@ const PropertyLabel: React.FC<PropertyLabelProps> = (props) => {
       required={property.isRequired}
       {...labelProps}
     >
-      {property.label}
+      {translateProperty(property.label, property.resourceId)}
       {property.description && <PropertyDescription property={property} />}
     </Label>
   )
