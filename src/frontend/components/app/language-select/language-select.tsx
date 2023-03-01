@@ -17,7 +17,7 @@ const LanguageSelect: FC = () => {
     setStoredLocale(lng)
   }, [])
 
-  if (!availableLanguages.length) {
+  if (!availableLanguages.length || availableLanguages.length === 1) {
     return null
   }
 
@@ -25,7 +25,7 @@ const LanguageSelect: FC = () => {
     <Box flex alignItems="center">
       <DropDown>
         <DropDownTrigger>
-          <Button>
+          <Button color="text">
             <Icon icon="Globe" />
             {storedLocale}
           </Button>
