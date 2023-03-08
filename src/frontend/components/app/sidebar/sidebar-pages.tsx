@@ -16,7 +16,7 @@ const h = new ViewHelpers()
 const SidebarPages: React.FC<Props> = (props) => {
   const { pages } = props
 
-  const { translateLabel } = useTranslation()
+  const { translateLabel, translatePage } = useTranslation()
   const location = useLocation()
   const navigate = useNavigate()
 
@@ -30,10 +30,10 @@ const SidebarPages: React.FC<Props> = (props) => {
 
   const elements: Array<NavigationElementProps> = pages.map((page) => ({
     id: page.name,
-    label: page.name,
+    label: translatePage(page.name),
     isSelected: isActive(page),
     icon: page.icon,
-    href: h.pageUrl(page.name),
+    href: h.pageUrl(translatePage(page.name)),
     onClick: (event, element): void => {
       event.preventDefault()
       if (element.href) {
