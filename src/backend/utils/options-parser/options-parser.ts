@@ -45,6 +45,16 @@ export const getBranding = async (
   return merged
 }
 
+export const getLocales = async (
+  admin: AdminJS,
+  currentAdmin?: CurrentAdmin,
+): Promise<any> => {
+  const { locale } = admin.options
+  // const themeId = currentAdmin?.theme ?? defaultTheme ?? availableThemes?.[0].id
+  // const theme = availableThemes?.find((t) => t.id === themeId)
+  return locale
+}
+
 export const getFaviconFromBranding = (branding: BrandingOptions): string => {
   if (branding.favicon) {
     const { favicon } = branding

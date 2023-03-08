@@ -17,28 +17,22 @@ import { getFaviconFromBranding } from '../backend/utils/options-parser/options-
  *
  * @private
  */
-const html = async (
-  admin: AdminJS,
-  currentAdmin?: CurrentAdmin,
-  location = '/',
-): Promise<string> => {
+const html = async (admin: AdminJS, currentAdmin?: CurrentAdmin, location = '/'): Promise<string> => {
   const h = new ViewHelpers({ options: admin.options })
 
   const store = await initializeStore(admin, currentAdmin)
   const reduxState = store.getState()
 
-  const { branding, assets } = reduxState
+  const { branding, assets, locale } = reduxState
 
-  const scripts = ((assets && assets.scripts) || [])
-    .map((s) => `<script src="${s}"></script>`)
-  const styles = ((assets && assets.styles) || [])
-    .map((l) => `<link rel="stylesheet" type="text/css" href="${l}">`)
-  const theme = combineStyles((branding.theme) || {})
+  const scripts = ((assets?.scripts) || []).map((s) => `<script src="${s}"></script>`)
+  const styles = ((assets?.styles) || []).map((l) => `<link rel="stylesheet" type="text/css" href="${l}">`)
+  const theme = combineStyles(branding.theme || {})
   const faviconTag = getFaviconFromBranding(branding)
 
   return `
     <!DOCTYPE html>
-    <html>
+    <html lang=${locale.language}>
     <head>
       <script>
         window.REDUX_STATE = ${JSON.stringify(reduxState)};

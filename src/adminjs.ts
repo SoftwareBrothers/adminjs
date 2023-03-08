@@ -1,7 +1,7 @@
 import merge from 'lodash/merge'
 import * as path from 'path'
 import * as fs from 'fs'
-import i18n, { i18n as I18n } from 'i18next'
+import i18n from 'i18next'
 import { FC } from 'react'
 
 import { AdminJSOptionsWithDefault, AdminJSOptions } from './adminjs-options.interface'
@@ -72,7 +72,7 @@ class AdminJS {
 
   public locale!: Locale
 
-  public i18n!: I18n
+  public i18n!: typeof i18n
 
   public translateFunctions!: TranslateFunctions
 
@@ -117,7 +117,13 @@ class AdminJS {
 
     this.resolveBabelConfigPath()
 
-    this.initI18n()
+    this.locale = this.options.locale || {
+      language: 'en',
+      translations: {},
+      availableLanguages: ['en', 'de'],
+    }
+
+    // this.initI18n()
 
     const { databases, resources } = this.options
 
@@ -128,8 +134,8 @@ class AdminJS {
   }
 
   initI18n(): void {
-    const language = this.options.locale?.language || locales.en.language
-    const defaultTranslations = locales[language]?.translations || locales.en.translations
+    const language = this.options.locale?.language || 'en'
+    const defaultTranslations = locales[language]?.translations || locales.en
     const availableLanguages = this.options.locale?.availableLanguages || [language]
     this.locale = {
       translations: combineTranslations(defaultTranslations, this.options.locale?.translations),
