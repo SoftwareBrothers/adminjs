@@ -1,4 +1,4 @@
-import * as flat from 'flat'
+import flat from 'flat'
 
 import { DELIMITER } from './constants.js'
 import { FlattenParams } from './flat.types.js'

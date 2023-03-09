@@ -1,4 +1,4 @@
-import * as flatModule from 'flat'
+import flatModule from 'flat'
 
 import { DELIMITER } from './constants.js'
 import { selectParams } from './select-params.js'
