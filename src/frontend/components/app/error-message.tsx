@@ -1,5 +1,5 @@
 import React, { ReactNode } from 'react'
-import { MessageBox, Text } from '@adminjs/design-system'
+import { InfoBox, MessageBox, Text } from '@adminjs/design-system'
 import { useTranslation } from '../../hooks'
 
 /**
@@ -36,20 +36,19 @@ const ErrorMessageBox: React.FC<ErrorMessageBoxProps> = (props) => {
   )
 }
 
-const NoResourceError: React.FC<{resourceId: string}> = (props) => {
+const NoResourceError: React.FC<{ resourceId: string }> = (props) => {
   const { resourceId } = props
   const { translateMessage } = useTranslation()
   return (
-    <MessageBox
-      message="404 - PAGE NOT FOUND"
+    <InfoBox
+      title={translateMessage('pageNotFound', resourceId, { resourceId })}
+      illustration="NotFound"
       data-testid="NoResourceError"
-      variant="info"
-      m="xxl"
     >
       <Text>
         {translateMessage('error404Resource', resourceId, { resourceId })}
       </Text>
-    </MessageBox>
+    </InfoBox>
   )
 }
 
@@ -57,16 +56,15 @@ const NoActionError: React.FC<{ resourceId: string; actionName: string }> = (pro
   const { resourceId, actionName } = props
   const { translateMessage } = useTranslation()
   return (
-    <MessageBox
-      message="404 - PAGE NOT FOUND"
+    <InfoBox
+      title={translateMessage('pageNotFound', resourceId, { resourceId })}
+      illustration="NotFound"
       data-testid="NoActionError"
-      variant="info"
-      m="xxl"
     >
       <Text>
         {translateMessage('error404Action', resourceId, { resourceId, actionName })}
       </Text>
-    </MessageBox>
+    </InfoBox>
   )
 }
 
@@ -77,16 +75,15 @@ const NoRecordError: React.FC<{
   const { resourceId, recordId } = props
   const { translateMessage } = useTranslation()
   return (
-    <MessageBox
-      message="404 - PAGE NOT FOUND"
+    <InfoBox
+      title={translateMessage('pageNotFound', resourceId, { resourceId })}
+      illustration="NotFound"
       data-testid="NoRecordError"
-      variant="info"
-      m="xxl"
     >
       <Text>
         {translateMessage('error404Record', resourceId, { resourceId, recordId })}
       </Text>
-    </MessageBox>
+    </InfoBox>
   )
 }
 

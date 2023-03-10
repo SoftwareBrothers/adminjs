@@ -28,13 +28,11 @@ const Page: FC = () => {
 
   if (!currentPage) {
     return (
-      <Box flex alignItems="center" justifyContent="center" height="100%">
-        <InfoBox title={tm('pageNotFound_title')} illustration="NotFound">
-          <Text mb="xxl">
-            <Trans i18nKey="messages.pageNotFound_subtitle" values={{ pageName }} components={{ strong: <strong /> }} />
-          </Text>
-        </InfoBox>
-      </Box>
+      <InfoBox title={tm('pageNotFound_title')} illustration="NotFound">
+        <Text mb="xxl">
+          <Trans i18nKey="messages.pageNotFound_subtitle" values={{ pageName }} components={{ strong: <strong /> }} />
+        </Text>
+      </InfoBox>
     )
   }
 
@@ -42,13 +40,11 @@ const Page: FC = () => {
 
   if (!Component) {
     return (
-      <Box flex alignItems="center" justifyContent="center" height="100%">
-        <InfoBox title={tm('componentNotFound_title')} illustration="Beware">
-          <Text mb="xxl">
-            <Trans i18nKey="messages.componentNotFound_subtitle" />
-          </Text>
-        </InfoBox>
-      </Box>
+      <InfoBox title={tm('componentNotFound_title')} illustration="Beware">
+        <Text mb="xxl">
+          <Trans i18nKey="messages.componentNotFound_subtitle" />
+        </Text>
+      </InfoBox>
     )
   }
 
