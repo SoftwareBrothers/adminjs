@@ -1,39 +1,40 @@
 {
   "compilerOptions": {
-      "outDir": "./built",
-      "target": "ESNext",
-      "esModuleInterop": true,
-      "jsx": "react",
-      "declaration": true,
-      "declarationDir": "./types",
-      "emitDeclarationOnly": true,
-      "strictNullChecks": true,
-      "strictPropertyInitialization": true,
-      "strictFunctionTypes": true,
-      "strictBindCallApply": true,
-      "noImplicitThis": true,
-      "moduleResolution": "nodenext",
-      "module": "nodenext",
-      "baseUrl": ".",
-      "types": [
-          "react",
-          "mocha",
-          "node"
-        ],
-      "paths": {
-        "react": ["node_modules/@types/react"]
-      },
-      "skipLibCheck": true
+    "outDir": "./built",
+    "target": "ESNext",
+    "esModuleInterop": true,
+    "jsx": "react",
+    "declaration": true,
+    "declarationDir": "./types",
+    "emitDeclarationOnly": true,
+    "strictNullChecks": true,
+    "strictPropertyInitialization": true,
+    "strictFunctionTypes": true,
+    "strictBindCallApply": true,
+    "noImplicitThis": true,
+    "moduleResolution": "nodenext",
+    "module": "nodenext",
+    "baseUrl": ".",
+    "types": [
+      "react",
+      "mocha",
+      "node"
+    ],
+    "typeRoots": ["./vendor-types"],
+    "paths": {
+      "react": ["node_modules/@types/react"]
+    },
+    "skipLibCheck": true
   },
   "include": [
-      "./vendor-types/**/*",
-      "./src/**/*",
-      "./spec/**/*"
+    "./vendor-types/**/*",
+    "./src/**/*",
+    "./spec/**/*"
   ],
   "exclude": [
-      "./example-app/**/*",
-      "./node-modules",
-      "./src/frontend/assets/**/*",
-      "./src/frontend/components/**/*stories.tsx",
+    "./example-app/**/*",
+    "./node-modules",
+    "./src/frontend/assets/**/*",
+    "./src/frontend/components/**/*stories.tsx",
   ]
 }

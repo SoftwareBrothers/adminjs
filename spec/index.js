@@ -1,25 +1,29 @@
+/* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable import/first */
 /* eslint-disable @typescript-eslint/no-var-requires */
 
 /* eslint-disable func-names */
-import 'core-js/stable'
 import * as url from 'url'
+import path from 'path'
 import register from '@babel/register'
-import requireAll from 'require.all'
-import buildResolver from 'esm-resolve'
+import { importAll } from 'node-esm-import-all'
+import presetReact from '@babel/preset-react'
+import presetEnv from '@babel/preset-env'
+import presetTs from '@babel/preset-typescript'
 
-const __filename = url.fileURLToPath(import.meta.url)
-const resolve = buildResolver(__filename)
+const __dirname = url.fileURLToPath(new URL('.', import.meta.url))
 
 register({
   presets: [
-    resolve('@babel/preset-react'),
-    [resolve('@babel/preset-env'), {
+    presetReact,
+    [presetEnv, {
       targets: {
-        node: '8',
+        node: '18',
       },
+      modules: false,
+      loose: true,
     }],
-    resolve('@babel/preset-typescript'),
+    presetTs,
   ],
   extensions: ['.jsx', '.js', '.ts', '.tsx'],
   only: ['src/', 'spec/'],
@@ -27,9 +31,8 @@ register({
 
 import './setup.js'
 
-requireAll({
-  dir: '../src/',
-  match: /spec\.(js|ts|tsx)$/i,
-  require: /\.(js|ts|tsx)$/,
+await importAll({
+  dirname: path.join(__dirname, '/../src'),
+  filter: /spec\.(js|ts|tsx)$/i,
   recursive: true,
 })

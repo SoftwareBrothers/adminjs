@@ -3045,6 +3045,11 @@
   resolved "https://registry.yarnpkg.com/@types/estree/-/estree-1.0.0.tgz#5fb2e536c1ae9bf35366eed879e827fa59ca41c2"
   integrity sha512-WulqXMDUTYAXCjZnk6JtIHPigp55cVtDgDrO2gHRwhyJto21+1zbVCtOYB2L1F9w4qCQ0rOGWBnBe0FNTiEJIQ==
 
+"@types/factory-girl@^5.0.8":
+  version "5.0.8"
+  resolved "https://registry.yarnpkg.com/@types/factory-girl/-/factory-girl-5.0.8.tgz#7ab853c17c07eaef584beaa998dc95f694da99d1"
+  integrity sha512-e2QLjQxuGBN/zl/e8yLOmqZ7JaU+UzTC7knFkzVbM+7J4DpWa3PQ1UDKU65ocYrhBZqRRJZ/jVILY0jahReH1A==
+
 "@types/flat@^5.0.2":
   version "5.0.2"
   resolved "https://registry.yarnpkg.com/@types/flat/-/flat-5.0.2.tgz#642a51a037d1f52fda082312b0e4566dc09a9f8f"
@@ -5189,11 +5194,6 @@ eslint@^8.34.0:
     strip-ansi "^6.0.1"
     strip-json-comments "^3.1.0"
     text-table "^0.2.0"
-
-esm-resolve@^1.0.8:
-  version "1.0.8"
-  resolved "https://registry.yarnpkg.com/esm-resolve/-/esm-resolve-1.0.8.tgz#1a8121a85a914863463cf05883492e0a55b872d4"
-  integrity sha512-pzYHY8bf7uLpDuefGsI6JtHVS1J3N1uOkIEC36ejvvWhiiMr/xKBX4PrxCtsxeISJbCEMBLkPZvRwZNHgdwn5A==
 
 espree@^9.4.0:
   version "9.4.0"
@@ -7639,6 +7639,11 @@ node-emoji@^1.11.0:
   dependencies:
     lodash "^4.17.21"
 
+node-esm-import-all@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/node-esm-import-all/-/node-esm-import-all-1.0.0.tgz#3336f65456061944a9bac27a1014c27a89217244"
+  integrity sha512-6GN939MCMeQPhWZq+AjxGn/xDTaySXDQvMG/bY7gZdcLsESNFv9cDjtuaZiwCKm0yU0fquBdsmMTeHinRy0e4A==
+
 node-fetch@^2.3.0, node-fetch@^2.6.7:
   version "2.6.7"
   resolved "https://registry.yarnpkg.com/node-fetch/-/node-fetch-2.6.7.tgz#24de9fba827e3b4ae44dc8b20256a379160052ad"
@@ -9246,11 +9251,6 @@ require-main-filename@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/require-main-filename/-/require-main-filename-2.0.0.tgz#d0b329ecc7cc0f61649f62215be69af54aa8989b"
   integrity sha512-NKN5kMDylKuldxYLSUfrbo5Tuzh4hd+2E8NPPX02mZtn1VuREQToYe/ZdlJy+J3uCpfaiGF05e7B8W0iXbQHmg==
-
-require.all@^2.0.5:
-  version "2.0.5"
-  resolved "https://registry.yarnpkg.com/require.all/-/require.all-2.0.5.tgz#383e658d0af5ddad3d8ab40eae0258c54ecfecdc"
-  integrity sha512-ZJLRSF/WFmg0kIIYb/ub+/6R/XcfU6cDxtULo+wvh5kVj0JXICT3cXHdxFFC71yx8mwPlSYykZ9L5LBR+r6Ipw==
 
 requires-port@^1.0.0:
   version "1.0.0"

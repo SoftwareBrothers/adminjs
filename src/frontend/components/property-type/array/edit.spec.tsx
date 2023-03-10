@@ -1,6 +1,6 @@
 import { cleanup, fireEvent, render, RenderResult, waitFor } from '@testing-library/react'
 import { expect } from 'chai'
-import factory from 'factory-girl'
+import { factory } from 'factory-girl'
 import React from 'react'
 import sinon from 'sinon'
 import 'sinon-chai'
@@ -12,7 +12,7 @@ import '../../spec/property-json.factory.js'
 import '../../spec/record-json.factory.js'
 import { RecordJSON, PropertyJSON, ResourceJSON } from '../../../interfaces/index.js'
 import ItemComponent from '../default-type/edit.js'
-import * as TranslateFunctionsFactory from '../../../../utils/translate-functions.factory.js'
+import { TranslateFunctions, __testExports } from '../../../../utils/translate-functions.factory.js'
 
 const AddNewItemText = 'Add new item'
 
@@ -39,10 +39,10 @@ describe('<PropertyType.Array.Edit />', function () {
   )
 
   beforeEach(function () {
-    sinon.stub(TranslateFunctionsFactory, 'createFunctions').returns({
+    sinon.stub(__testExports, 'createFunctions').returns({
       translateProperty: sinon.stub().returns(AddNewItemText),
       translateButton: sinon.stub().returns('someButton'),
-    } as unknown as TranslateFunctionsFactory.TranslateFunctions)
+    } as unknown as TranslateFunctions)
   })
 
   afterEach(function () {

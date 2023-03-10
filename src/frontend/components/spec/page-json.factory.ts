@@ -1,4 +1,4 @@
-import factory from 'factory-girl'
+import { factory } from 'factory-girl'
 
 import { PageJSON } from '../../interfaces/index.js'
 

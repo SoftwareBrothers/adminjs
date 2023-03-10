@@ -42,7 +42,7 @@ describe('generateUserComponentEntry', function () {
     const entryFile = generateUserComponentEntry(adminJs, entryPath)
 
     expect(entryFile).to.have.string([
-      `import ${componentId} from '${filePath}'`,
+      `import ${componentId} from '${filePath.replace('.js', '')}'`,
       `AdminJS.UserComponents.${componentId} = ${componentId}`,
     ].join('\n'))
 

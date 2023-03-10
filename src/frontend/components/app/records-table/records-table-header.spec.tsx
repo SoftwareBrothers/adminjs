@@ -1,6 +1,6 @@
 import { render } from '@testing-library/react'
 import { expect } from 'chai'
-import factory from 'factory-girl'
+import { factory } from 'factory-girl'
 import React from 'react'
 
 import TestContextProvider from '../../spec/test-context-provider.js'

@@ -1,4 +1,3 @@
-/* eslint-disable import/no-commonjs */
 module.exports = {
   parser: '@typescript-eslint/parser',
   plugins: ['@typescript-eslint', 'mocha'],
@@ -42,7 +41,6 @@ module.exports = {
     'max-classes-per-file': 'off',
     '@typescript-eslint/ban-ts-comment': 'off',
     'import/no-import-module-exports': 'off',
-    'import/no-commonjs': 2,
   },
   ignorePatterns: [
     '*/build/**/*',
@@ -72,6 +70,12 @@ module.exports = {
       files: ['*.jsx', '*.js'],
       rules: {
         '@typescript-eslint/explicit-function-return-type': 'off',
+      },
+    },
+    {
+      files: ['*.cjs'],
+      rules: {
+        'import/no-commonjs': 'off',
       },
     },
     {

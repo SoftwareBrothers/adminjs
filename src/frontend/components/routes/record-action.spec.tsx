@@ -14,7 +14,7 @@ import ApiClient from '../../utils/api-client.js'
 import { RecordJSON } from '../../interfaces/index.js'
 import TestContextProvider from '../spec/test-context-provider.js'
 import factory from '../spec/factory.js'
-import * as TranslateFunctionsFactory from '../../../utils/translate-functions.factory.js'
+import { TranslateFunctions, __testExports } from '../../../utils/translate-functions.factory.js'
 
 const defaultStore = {
   paths: {},
@@ -42,9 +42,9 @@ describe('<RecordAction />', function () {
 
   beforeEach(async function () {
     record = await factory.build<RecordJSON>('RecordJSON.total')
-    sinon.stub(TranslateFunctionsFactory, 'createFunctions').returns({
+    sinon.stub(__testExports, 'createFunctions').returns({
       translateMessage: sinon.stub().returns('someMessage'),
-    } as unknown as TranslateFunctionsFactory.TranslateFunctions)
+    } as unknown as TranslateFunctions)
     sinon.stub(ApiClient, 'getBaseUrl').returns('/admin')
     sinon.stub(i18n, 'exists').returns(false)
     sinon.stub(ApiClient.prototype, 'recordAction').resolves({ data: { record } } as AxiosResponse)

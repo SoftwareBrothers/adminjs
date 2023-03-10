@@ -52,7 +52,7 @@ describe('AdminJS', function () {
 
   describe('resolveBabelConfigPath', function () {
     it('load .babelrc file', function () {
-      const adminJS = new AdminJS({ bundler: { babelConfig: '../.babelrc' } })
+      const adminJS = new AdminJS({ bundler: { babelConfig: '../.babelrc.json' } })
       expect(adminJS.options.bundler.babelConfig).not.to.undefined
     })
 
@@ -62,8 +62,10 @@ describe('AdminJS', function () {
           '@babel/preset-react',
           ['@babel/preset-env', {
             targets: {
-              node: '8',
+              node: '18',
             },
+            modules: false,
+            loose: true,
           }],
           '@babel/preset-typescript',
         ],
@@ -79,8 +81,8 @@ describe('AdminJS', function () {
       expect(adminJS.options.bundler.babelConfig).not.to.undefined
     })
 
-    it('load babel.config.js file', function () {
-      const adminJS = new AdminJS({ bundler: { babelConfig: './babel.test.config.js' } })
+    it('load babel.config.cjs file', function () {
+      const adminJS = new AdminJS({ bundler: { babelConfig: './babel.test.config.json' } })
       expect(adminJS.options.bundler.babelConfig).not.to.undefined
     })
   })

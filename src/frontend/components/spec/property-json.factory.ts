@@ -1,4 +1,4 @@
-import factory from 'factory-girl'
+import { factory } from 'factory-girl'
 
 import { PropertyJSON } from '../../interfaces/index.js'
 

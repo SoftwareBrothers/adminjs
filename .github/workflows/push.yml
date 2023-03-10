@@ -11,7 +11,7 @@ jobs:
       - name: Setup
         uses: actions/setup-node@v3
         with:
-          node-version: '14'
+          node-version: '18'
           cache: 'yarn'
       - name: Install
         run: yarn install --frozen-lockfile
@@ -26,7 +26,7 @@ jobs:
       - name: Setup
         uses: actions/setup-node@v3
         with:
-          node-version: '14'
+          node-version: '18'
           cache: 'yarn'
       - name: Install
         run: yarn install
@@ -55,36 +55,27 @@ jobs:
         run: yarn types
       - name: Upload Build
         if: |
-          contains(github.ref, 'refs/heads/next')
-          || contains(github.ref, 'refs/heads/master')
+          contains(github.ref, 'refs/heads/master')
           || contains(github.ref, 'refs/heads/next-major')
           || contains(github.ref, 'refs/heads/beta')
-          || contains(github.ref, 'refs/heads/alpha')
-          || contains(github.ref, 'refs/heads/dev')
         uses: actions/upload-artifact@v3
         with:
           name: lib
           path: lib
       - name: Upload Types
         if: |
-          contains(github.ref, 'refs/heads/next')
-          || contains(github.ref, 'refs/heads/master')
+          contains(github.ref, 'refs/heads/master')
           || contains(github.ref, 'refs/heads/next-major')
           || contains(github.ref, 'refs/heads/beta')
-          || contains(github.ref, 'refs/heads/alpha')
-          || contains(github.ref, 'refs/heads/dev')
         uses: actions/upload-artifact@v3
         with:
           name: types
           path: types
       - name: Upload Bundle
         if: |
-          contains(github.ref, 'refs/heads/next')
-          || contains(github.ref, 'refs/heads/master')
+          contains(github.ref, 'refs/heads/master')
           || contains(github.ref, 'refs/heads/next-major')
           || contains(github.ref, 'refs/heads/beta')
-          || contains(github.ref, 'refs/heads/alpha')
-          || contains(github.ref, 'refs/heads/dev')
         uses: actions/upload-artifact@v3
         with:
           name: bundle
@@ -100,7 +91,7 @@ jobs:
       - name: Setup
         uses: actions/setup-node@v3
         with:
-          node-version: '14'
+          node-version: '18'
           cache: 'yarn'
       - name: Install
         run: yarn install
@@ -125,12 +116,9 @@ jobs:
     if: |
       github.event_name == 'push'
       && (
-        contains(github.ref, 'refs/heads/next')
-        || contains(github.ref, 'refs/heads/master')
+        contains(github.ref, 'refs/heads/master')
         || contains(github.ref, 'refs/heads/next-major')
         || contains(github.ref, 'refs/heads/beta')
-        || contains(github.ref, 'refs/heads/alpha')
-        || contains(github.ref, 'refs/heads/dev')
       )
     needs:
       - test
@@ -147,7 +135,7 @@ jobs:
       - name: Setup
         uses: actions/setup-node@v3
         with:
-          node-version: '14'
+          node-version: '18'
           cache: 'yarn'
       - name: Install
         run: yarn install

@@ -188,3 +188,14 @@ export const createFunctions = (i18n: I18n): TranslateFunctions => {
     translate: i18n.t,
   }
 }
+
+/**
+ * ES Modules exports are immutable thus Sinon cannot create stubs for e.g. createFunctions
+ * Wrapping the exports in an object allows Sinon to modify it's properties.
+ *
+ * This prevents Sinon error from appearing:
+ * "TypeError: ES Modules cannot be stubbed"
+ */
+export const __testExports = {
+  createFunctions,
+}

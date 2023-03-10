@@ -1,5 +1,5 @@
 import { expect } from 'chai'
-import factory from 'factory-girl'
+import { factory } from 'factory-girl'
 
 import '../../../spec/record-json.factory.js'
 import '../../../spec/action-json.factory.js'

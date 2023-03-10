@@ -1,5 +1,5 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
-import factory from 'factory-girl'
+import { factory } from 'factory-girl'
 
 import './action-json.factory.js'
 import './page-json.factory.js'

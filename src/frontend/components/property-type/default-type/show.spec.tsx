@@ -1,6 +1,6 @@
 import { expect } from 'chai'
 import { RenderResult, render } from '@testing-library/react'
-import factory from 'factory-girl'
+import { factory } from 'factory-girl'
 import React from 'react'
 
 import Show from './show.js'

@@ -1,4 +1,4 @@
-import factory from 'factory-girl'
+import { factory } from 'factory-girl'
 import { expect } from 'chai'
 
 import recordToFormData, { FORM_VALUE_EMPTY_OBJECT, FORM_VALUE_NULL, FORM_VALUE_EMPTY_ARRAY } from './params-to-form-data.js'
