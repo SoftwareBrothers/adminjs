@@ -17,7 +17,7 @@ const NoRecordsOriginal: React.FC<NoRecordsProps> = (props) => {
   const canCreate = resource.resourceActions.find((a) => a.name === 'new')
 
   return (
-    <InfoBox title={translateMessage('noRecords', resource.id)} illustration="IdentityCard">
+    <InfoBox title={translateMessage('noRecords', resource.id)} illustration="Docs">
       <Text mb="xxl">
         {translateMessage('noRecordsInResource', resource.id)}
       </Text>
