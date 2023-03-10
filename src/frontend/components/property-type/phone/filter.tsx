@@ -14,12 +14,10 @@ const Filter: FC<FilterPropertyProps> = (props) => {
 
   return (
     <FormGroup variant="filter">
-      <PropertyLabel property={property} />
+      <PropertyLabel property={property} filter />
       <PhoneInput
         id={property.path}
-        inputProps={{
-          name: `filter-${property.path}`,
-        }}
+        inputProps={{ name: `filter-${property.path}` }}
         onChange={handleChange}
         value={filter[property.path]}
         {...property.props as PhoneInputProps}

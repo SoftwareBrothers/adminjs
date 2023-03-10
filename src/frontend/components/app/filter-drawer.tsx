@@ -1,7 +1,7 @@
 import {
   Box, Button, Drawer,
   DrawerContent,
-  DrawerFooter, Icon,
+  DrawerFooter, H3, Icon,
 } from '@adminjs/design-system'
 import React, { MouseEvent, SyntheticEvent, useEffect, useRef, useState } from 'react'
 import { useLocation, useNavigate, useParams } from 'react-router-dom'
@@ -42,7 +42,7 @@ const FilterDrawer: React.FC<FilterProps> = (props) => {
   const [filter, setFilter] = useState(parseQuery(location))
   const params = useParams<MatchProps>()
   const navigate = useNavigate()
-  const { translateButton } = useTranslation()
+  const { translateButton, translateLabel } = useTranslation()
   const initialLoad = useRef(true)
 
   useEffect(() => {
@@ -103,16 +103,17 @@ const FilterDrawer: React.FC<FilterProps> = (props) => {
   return (
     <Drawer variant="filter" isHidden={!isVisible} as="form" onSubmit={handleSubmit} data-css={contentTag}>
       <DrawerContent data-css={cssContent}>
-        <Box flex justifyContent="flex-end">
+        <Box flex justifyContent="space-between">
+          <H3>{translateLabel('filters', resource.id)}</H3>
           <Button
-            variant="light"
             type="button"
+            variant="light"
             size="icon"
             rounded
-            mr="lg"
+            color="text"
             onClick={(): void => toggleFilter()}
           >
-            <Icon icon="X" color="grey80" />
+            <Icon icon="X" />
           </Button>
         </Box>
         <Box my="x3">
@@ -129,12 +130,10 @@ const FilterDrawer: React.FC<FilterProps> = (props) => {
         </Box>
       </DrawerContent>
       <DrawerFooter data-css={cssFooter}>
-
-        <Button size="lg" variant="light" onClick={resetFilter} type="button" data-css={cssButtonReset}>
+        <Button type="button" size="lg" variant="light" onClick={resetFilter} data-css={cssButtonReset}>
           {translateButton('resetFilter', resource.id)}
         </Button>
-
-        <Button variant="contained" size="lg" data-css={cssButtonApply}>
+        <Button type="submit" variant="contained" size="lg" data-css={cssButtonApply}>
           {translateButton('applyChanges', resource.id)}
         </Button>
       </DrawerFooter>

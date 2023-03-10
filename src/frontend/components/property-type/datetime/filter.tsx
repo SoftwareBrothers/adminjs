@@ -5,6 +5,7 @@ import * as BackendFilter from '../../../../backend/utils/filter/filter'
 import { useTranslation } from '../../../hooks/use-translation'
 import { FilterPropertyProps } from '../base-property-props'
 import allowOverride from '../../../hoc/allow-override'
+import PropertyLabel from '../utils/property-label/property-label'
 
 const { PARAM_SEPARATOR } = BackendFilter
 
@@ -19,7 +20,7 @@ const Filter: React.FC<FilterPropertyProps> = (props) => {
 
   return (
     <FormGroup variant="filter">
-      <Label>{property.label}</Label>
+      <PropertyLabel property={property} filter />
       <Label>{`- ${translateProperty('from')}: `}</Label>
       <DatePicker
         value={fromValue}

@@ -1,9 +1,10 @@
 import React from 'react'
-import { FormGroup, Label, Select } from '@adminjs/design-system'
+import { FormGroup, Select } from '@adminjs/design-system'
 
 import mapValue from './map-value'
 import { FilterPropertyProps } from '../base-property-props'
 import allowOverride from '../../../hoc/allow-override'
+import PropertyLabel from '../utils/property-label/property-label'
 
 const boolValue = (s: string): boolean => {
   if (/true/i.test(s)) {
@@ -27,7 +28,7 @@ const Filter: React.FC<FilterPropertyProps> = (props) => {
 
   return (
     <FormGroup>
-      <Label>{property.label}</Label>
+      <PropertyLabel property={property} filter />
       <Select
         variant="filter"
         value={typeof selected === 'undefined' ? '' : selected}
