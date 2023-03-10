@@ -1,8 +1,7 @@
 import merge from 'lodash/merge'
 import * as path from 'path'
 import * as fs from 'fs'
-import i18n from 'i18next'
-import { FC } from 'react'
+import type { FC } from 'react'
 
 import { AdminJSOptionsWithDefault, AdminJSOptions } from './adminjs-options.interface'
 import BaseResource from './backend/adapters/resource/base-resource'
@@ -16,9 +15,8 @@ import { ACTIONS } from './backend/actions'
 
 import loginTemplate from './frontend/login-template'
 import { ListActionResponse } from './backend/actions/list/list-action'
-import { combineTranslations, Locale } from './locale/config'
-import { locales } from './locale'
-import { TranslateFunctions, createFunctions } from './utils/translate-functions.factory'
+import { Locale } from './locale/config'
+import { TranslateFunctions } from './utils/translate-functions.factory'
 import { relativeFilePathResolver } from './utils/file-resolver'
 import { getComponentHtml } from './backend/utils'
 import { ComponentLoader } from './backend/utils/component-loader'
@@ -72,8 +70,6 @@ class AdminJS {
 
   public locale!: Locale
 
-  public i18n!: typeof i18n
-
   public translateFunctions!: TranslateFunctions
 
   public componentLoader: ComponentLoader
@@ -117,13 +113,12 @@ class AdminJS {
 
     this.resolveBabelConfigPath()
 
+    // To be removed when Login page will be renedered on client side
     this.locale = this.options.locale || {
       language: 'en',
       translations: {},
-      availableLanguages: ['en', 'de'],
+      availableLanguages: ['en'],
     }
-
-    // this.initI18n()
 
     const { databases, resources } = this.options
 
@@ -131,37 +126,6 @@ class AdminJS {
 
     const resourcesFactory = new ResourcesFactory(this, global.RegisteredAdapters || [])
     this.resources = resourcesFactory.buildResources({ databases, resources })
-  }
-
-  initI18n(): void {
-    const language = this.options.locale?.language || 'en'
-    const defaultTranslations = locales[language]?.translations || locales.en
-    const availableLanguages = this.options.locale?.availableLanguages || [language]
-    this.locale = {
-      translations: combineTranslations(defaultTranslations, this.options.locale?.translations),
-      language,
-      availableLanguages,
-    }
-    if (i18n.isInitialized) {
-      i18n.addResourceBundle(this.locale.language, 'translation', this.locale.translations)
-    } else {
-      i18n.init({
-        lng: this.locale.language,
-        initImmediate: false, // loads translations immediately
-        resources: {
-          [this.locale.language]: {
-            translation: this.locale.translations,
-          },
-        },
-      })
-    }
-
-    // mixin translate functions to AdminJS instance so users will be able to
-    // call AdminJS.translateMessage(...)
-    this.translateFunctions = createFunctions(i18n)
-    Object.getOwnPropertyNames(this.translateFunctions).forEach((translateFunctionName) => {
-      this[translateFunctionName] = this.translateFunctions[translateFunctionName]
-    })
   }
 
   /**
