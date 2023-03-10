@@ -1,6 +1,4 @@
 import type { InitOptions, ResourceKey, ResourceLanguage } from 'i18next'
-import merge from 'lodash/merge'
-import { formatName } from '../utils/translate-functions.factory'
 
 export type AdminJSLocalesConfig = InitOptions & {
   /**

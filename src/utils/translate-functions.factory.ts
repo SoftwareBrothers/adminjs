@@ -134,8 +134,6 @@ export interface TranslateFunctions {
   translatePage: TranslateFunction;
 }
 
-export const formatName = (name: string): string => name.split('.').join('&#46;')
-
 const translate = (
   i18n: I18n,
   key: string,
@@ -143,6 +141,7 @@ const translate = (
   resourceId?: string | TOptions,
   options?: TOptions,
 ): string => {
+  // cspell:disable-next-line
   if (i18n.language === 'cimode') return [key, name].join('.')
 
   const realOptions: TOptions = (typeof resourceId === 'string' ? options : resourceId) || {}
