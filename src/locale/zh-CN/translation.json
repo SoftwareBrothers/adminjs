@@ -95,6 +95,11 @@
     "foundBug_subtitle": "在 GitHub 仓库提交 issue",
     "needMoreSolutions_title": "需要更多高级解决方案?",
     "needMoreSolutions_subtitle": "我们已经准备好为您提供优美的 UX/UI 设计, 并量身定制基于 AdminJS 等的软件",
-    "invalidCredentials": "错误的电子邮箱或密码"
+    "invalidCredentials": "错误的电子邮箱或密码",
+
+    "pageNotFound_title": "找不到网页",
+    "pageNotFound_subtitle": "页 <strong>“{{pageName}}“</strong> 不存在",
+    "componentNotFound_title": "未指定组件",
+    "componentNotFound_subtitle": "您必须指定将呈现此元素的组件"
   }
 }

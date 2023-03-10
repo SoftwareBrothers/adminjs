@@ -109,6 +109,11 @@
     "valuePlaceholder": "VALUE",
     "initialKey": "Key-{{number}}",
     "keyInUse": "Object keys must be unique.",
-    "keyValuePropertyDefaultDescription": "All values are stored as text. Keys must be unique, duplicate keys will not be saved."
+    "keyValuePropertyDefaultDescription": "All values are stored as text. Keys must be unique, duplicate keys will not be saved.",
+
+    "pageNotFound_title": "Page not found",
+    "pageNotFound_subtitle": "Page <strong>\"{{pageName}}\"</strong> does not exist",
+    "componentNotFound_title": "No component specified",
+    "componentNotFound_subtitle": "You have to specify component which will render this element"
   }
 }

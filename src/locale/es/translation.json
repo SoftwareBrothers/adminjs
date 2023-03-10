@@ -35,10 +35,10 @@
         "de": "Alemán",
         "en": "Inglés",
         "es": "Español",
-        "it": "italiano",
+        "it": "Italiano",
         "pl": "Polaco",
         "pt-BR": "Portugués (Brasil)",
-        "ua": "ucranio",
+        "ua": "Ucranio",
         "zh-CN": "Chino"
       }
     }
@@ -109,6 +109,11 @@
     "valuePlaceholder": "VALOR",
     "initialKey": "Llave-{{number}}",
     "keyInUse": "Las claves de objeto deben ser únicas.",
-    "keyValuePropertyDefaultDescription": "Todos los valores se almacenan como texto. "
+    "keyValuePropertyDefaultDescription": "Todos los valores se almacenan como texto. ",
+
+    "pageNotFound_title": "Página no encontrada",
+    "pageNotFound_subtitle": "Página <strong>\"{{pageName}}\"</strong> no existe",
+    "componentNotFound_title": "Ningún componente especificado",
+    "componentNotFound_subtitle": "Tienes que especificar el componente que representará este elemento."
   }
 }

@@ -104,6 +104,11 @@
     "foundBug_subtitle": "Apri una segnalazione sul nostro GitHub",
     "needMoreSolutions_title": "Ti servono soluzioni più avanzate?",
     "needMoreSolutions_subtitle": "Siamo qui per fortnirti una bella UI/UX e un software personalizzato (non solo) su AdminJS",
-    "invalidCredentials": "E-mail o password errati"
+    "invalidCredentials": "E-mail o password errati",
+
+    "pageNotFound_title": "pagina non trovata",
+    "pageNotFound_subtitle": "Pagina <strong>\"{{pageName}}\"</strong> non esiste",
+    "componentNotFound_title": "Nessun componente specificato",
+    "componentNotFound_subtitle": "Devi specificare il componente che renderà questo elemento"
   }
 }

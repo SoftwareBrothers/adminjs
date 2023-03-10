@@ -7,7 +7,7 @@ import startCase from 'lodash/startCase'
  */
 export type TranslateFunction = (
   /**
-   * kwy which should be translated in a given namespace
+   * Translation key which should be translated in a given namespace
    */
   key: string,
   /**

@@ -104,6 +104,11 @@
     "foundBug_subtitle": "Zgłoś problem w repozytoriun GitHub.",
     "needMoreSolutions_title": "Szukasz innych rozwiązań?",
     "needMoreSolutions_subtitle": "Jesteśmy tutaj, aby dostarczyć Ci wpaniały projekt UX/UI i dostosować do Twoich potrzeb panel AdminJS",
-    "invalidCredentials": "Błędny email i/lub hasło"
+    "invalidCredentials": "Błędny email i/lub hasło",
+
+    "pageNotFound_title": "Strona nie znaleziona",
+    "pageNotFound_subtitle": "Strona <strong>\"{{pageName}}\"</strong> nie istnieje",
+    "componentNotFound_title": "Nie określono komponentu",
+    "componentNotFound_subtitle": "Musisz określić komponent, który wyrenderuje ten element"
   }
 }

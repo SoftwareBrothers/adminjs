@@ -33,11 +33,11 @@
         "de": "Alemão",
         "en": "Inglês",
         "es": "Espanhol",
-        "it": "italiano",
-        "pl": "polonês",
+        "it": "Italiano",
+        "pl": "Polonês",
         "pt-BR": "Português (Brasil)",
-        "ua": "ucraniano",
-        "zh-CN": "chinês"
+        "ua": "Ucraniano",
+        "zh-CN": "Chinês"
       }
     }
   },
@@ -102,6 +102,11 @@
     "foundBug_subtitle": "Levante um issue em nosso repositório no GitHub",
     "needMoreSolutions_title": "Precisa de mais soluções avançadas?",
     "needMoreSolutions_subtitle": "Estamos aqui para te entregar um belo desenho de UX/UI e software feito sob medida baseado (não apenas) no AdminJS",
-    "invalidCredentials": "Nome de usuário e/ou senha incorretos"
+    "invalidCredentials": "Nome de usuário e/ou senha incorretos",
+
+    "pageNotFound_title": "Página não encontrada",
+    "pageNotFound_subtitle": "Página <strong>\"{{pageName}}\"</strong> não existe",
+    "componentNotFound_title": "Nenhum componente especificado",
+    "componentNotFound_subtitle": "Você tem que especificar o componente que renderizará este elemento"
   }
 }

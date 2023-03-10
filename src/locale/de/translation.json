@@ -104,6 +104,11 @@
     "foundBug_subtitle": "Erstellen Sie ein Ticket in unserem GitHub Repo",
     "needMoreSolutions_title": "Benötigen Sie fortschrittlichere Lösungen?",
     "needMoreSolutions_subtitle": "Wir sind hier, um Ihnen ein schönes UX/UI-Design und eine maßgeschneiderte Software zu bieten, die (nicht nur) auf AdminJS basiert.",
-    "invalidCredentials": "Falsche E-Mail und/oder falsches Passwort"
+    "invalidCredentials": "Falsche E-Mail und/oder falsches Passwort",
+
+    "pageNotFound_title": "Seite nicht gefunden",
+    "pageNotFound_subtitle": "Buchseite <strong>\"{{pageName}}\"</strong> ist nicht vorhanden",
+    "componentNotFound_title": "Keine Komponente angegeben",
+    "componentNotFound_subtitle": "Sie müssen die Komponente angeben, die dieses Element rendert"
   }
 }

@@ -33,7 +33,7 @@ const SidebarPages: React.FC<Props> = (props) => {
     label: translatePage(page.name),
     isSelected: isActive(page),
     icon: page.icon,
-    href: h.pageUrl(translatePage(page.name)),
+    href: h.pageUrl(page.name),
     onClick: (event, element): void => {
       event.preventDefault()
       if (element.href) {

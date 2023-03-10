@@ -107,6 +107,11 @@
     "foundBug_subtitle": "Опишіть проблему у нашому репозиторії GitHub",
     "needMoreSolutions_title": "Потрібні більш просунуті рішення?",
     "needMoreSolutions_subtitle": "Ми тут, щоб допомогти Вам з UX/UI дизайном та розробленням програмного забезпечення на основі (та не тільки) AdminJS",
-    "invalidCredentials": "Неправильна адреса електронної пошти та/або пароль"
+    "invalidCredentials": "Неправильна адреса електронної пошти та/або пароль",
+
+    "pageNotFound_title": "Сторінку не знайдено",
+    "pageNotFound_subtitle": "Сторінка <strong>\"{{pageName}}\"</strong> не існує",
+    "componentNotFound_title": "Компонент не вказано",
+    "componentNotFound_subtitle": "Ви повинні вказати компонент, який буде рендерити цей елемент"
   }
 }

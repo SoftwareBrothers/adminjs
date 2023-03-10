@@ -101,26 +101,3 @@ export type LocaleTranslations = Partial<LocaleTranslationsBlock> & {
  * @property {Record<string, string>} [resources.resourceId.labels]
  *
  */
-
-// Escaping all keys with . (changing to '&#46;')
-const renameKeys = (object: Partial<LocaleTranslations>): Partial<LocaleTranslations> =>
-  Object.entries(object).reduce((memo, [k, v]) => {
-    if (typeof v === 'object') {
-      return {
-        ...memo,
-        [formatName(k)]: renameKeys(v),
-      }
-    }
-    return {
-      ...memo,
-      [formatName(k)]: v,
-    }
-  }, {})
-
-export const combineTranslations = (
-  originalTranslations: LocaleTranslations,
-  adminTranslations: Partial<LocaleTranslations> = {},
-): LocaleTranslations => {
-  const formattedTranslations = renameKeys(adminTranslations)
-  return merge(originalTranslations, formattedTranslations)
-}
