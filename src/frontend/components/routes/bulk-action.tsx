@@ -49,7 +49,7 @@ const BulkAction: React.FC = () => {
     }).catch((error) => {
       setLoading(false)
       addNotice({
-        message: 'errorFetchingRecord',
+        message: 'errorFetchingRecords',
         type: 'error',
         resourceId,
       })

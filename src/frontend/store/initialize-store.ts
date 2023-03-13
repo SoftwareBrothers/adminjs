@@ -16,6 +16,7 @@ import AdminJS from '../../adminjs'
 import { CurrentAdmin } from '../../current-admin.interface'
 import pagesToStore from './pages-to-store'
 import { getBranding, getAssets, getLocales } from '../../backend/utils/options-parser/options-parser'
+import { defaultLocale } from '../../locale'
 
 export const initializeStore = async (
   admin: AdminJS,
@@ -42,7 +43,7 @@ export const initializeStore = async (
   const locales = await getLocales(admin, currentAdmin)
 
   store.dispatch(initializeBranding(branding || {}))
-  store.dispatch(initializeLocale(locales || admin.locale))
+  store.dispatch(initializeLocale(locales || defaultLocale))
   store.dispatch(initializeAssets(assets || {}))
 
   const {

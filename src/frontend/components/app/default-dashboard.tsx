@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import { Box, H2, H5, H4, Text, Illustration, IllustrationProps, Button } from '@adminjs/design-system'
+import { Box, Button, H2, H5, Illustration, IllustrationProps, Text } from '@adminjs/design-system'
 
 import { useTranslation } from '../../hooks'
 
