@@ -1,7 +1,14 @@
 import type { InitOptions } from 'i18next'
+import type { Locale } from './config'
 
 const DEFAULT_LOAD = 'currentOnly'
 export const DEFAULT_NS = 'translation'
+
+export const defaultLocale: Locale = {
+  language: 'en',
+  translations: {},
+  availableLanguages: ['en'],
+}
 
 export const defaultConfig: InitOptions = {
   debug: process.env.NODE_ENV === 'development',

@@ -2,6 +2,7 @@ import merge from 'lodash/merge'
 import AdminJS from '../../../adminjs'
 import { AdminJSOptions, Assets, BrandingOptions } from '../../../adminjs-options.interface'
 import { CurrentAdmin } from '../../../current-admin.interface'
+import { defaultLocale } from '../../../locale'
 import ViewHelpers from '../view-helpers/view-helpers'
 
 const defaultBranding: AdminJSOptions['branding'] = {
@@ -49,10 +50,12 @@ export const getLocales = async (
   admin: AdminJS,
   currentAdmin?: CurrentAdmin,
 ): Promise<any> => {
-  const { locale } = admin.options
-  // const themeId = currentAdmin?.theme ?? defaultTheme ?? availableThemes?.[0].id
-  // const theme = availableThemes?.find((t) => t.id === themeId)
-  return locale
+  const { locale } = admin.options || {}
+  const computed = typeof locale === 'function'
+    ? await locale(currentAdmin)
+    : locale
+
+  return merge({}, defaultLocale, computed)
 }
 
 export const getFaviconFromBranding = (branding: BrandingOptions): string => {

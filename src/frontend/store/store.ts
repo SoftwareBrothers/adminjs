@@ -25,6 +25,7 @@ import { Assets, BrandingOptions, VersionProps } from '../../adminjs-options.int
 import { PageJSON, ResourceJSON } from '../interfaces'
 import { DEFAULT_PATHS } from '../../constants'
 import { CurrentAdmin } from '../../current-admin.interface'
+import { defaultLocale } from '../../locale'
 import { Locale } from '../../locale/config'
 import { NoticeMessage } from '../hoc/with-notice'
 import { modalReducer, ModalInState } from './reducers/modal'
@@ -78,7 +79,7 @@ const pagesReducer = (
 }
 
 const localesReducer = (
-  state: Locale = { language: 'en', translations: {} } as Locale,
+  state: Locale = defaultLocale,
   action: {
     type: string;
     data: Locale;

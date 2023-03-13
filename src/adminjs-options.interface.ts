@@ -240,7 +240,7 @@ export interface AdminJSOptions {
    * Check out the [i18n tutorial]{@tutorial i18n} to see how
    * internationalization in AdminJS works.
    */
-  locale?: Locale;// | (({ currentAdmin }: { currentAdmin: CurrentAdmin }) => Locale);
+  locale?: Locale | ((admin?: CurrentAdmin) => Locale | Promise<Locale>);
 
   /**
    * rollup bundle options;

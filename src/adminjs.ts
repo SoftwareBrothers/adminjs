@@ -15,6 +15,7 @@ import { ACTIONS } from './backend/actions'
 
 import loginTemplate from './frontend/login-template'
 import { ListActionResponse } from './backend/actions/list/list-action'
+import { defaultLocale } from './locale'
 import { Locale } from './locale/config'
 import { TranslateFunctions } from './utils/translate-functions.factory'
 import { relativeFilePathResolver } from './utils/file-resolver'
@@ -114,11 +115,7 @@ class AdminJS {
     this.resolveBabelConfigPath()
 
     // To be removed when Login page will be renedered on client side
-    this.locale = this.options.locale || {
-      language: 'en',
-      translations: {},
-      availableLanguages: ['en'],
-    }
+    this.locale = defaultLocale
 
     const { databases, resources } = this.options
 
