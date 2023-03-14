@@ -1,5 +1,5 @@
 import React from 'react'
-import { Text, Button, Icon, InfoBox, Illustration, H4 } from '@adminjs/design-system'
+import { Text, Button, Icon, InfoBox } from '@adminjs/design-system'
 
 import { ResourceJSON } from '../../../interfaces'
 import { useTranslation } from '../../../hooks'
@@ -17,20 +17,18 @@ const NoRecordsOriginal: React.FC<NoRecordsProps> = (props) => {
   const canCreate = resource.resourceActions.find((a) => a.name === 'new')
 
   return (
-    <InfoBox title="" variant="transparent">
-      <Illustration variant="IdentityCard" />
-      <H4 mb="lg">{translateMessage('noRecords', resource.id)}</H4>
+    <InfoBox title={translateMessage('noRecords', resource.id)} illustration="Docs">
       <Text mb="xxl">
         {translateMessage('noRecordsInResource', resource.id)}
       </Text>
-      {canCreate ? (
+      {canCreate && (
         <ActionButton action={canCreate} resourceId={resource.id}>
           <Button variant="contained">
             <Icon icon="Plus" />
             {translateButton('createFirstRecord', resource.id)}
           </Button>
         </ActionButton>
-      ) : ''}
+      )}
     </InfoBox>
   )
 }

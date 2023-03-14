@@ -1,39 +1,32 @@
 {
   "compilerOptions": {
-      "outDir": "./built",
-      "target": "ESNext",
-      "esModuleInterop": true,
-      "jsx": "react",
-      "declaration": true,
-      "declarationDir": "./types",
-      "emitDeclarationOnly": true,
-      "strictNullChecks": true,
-      "strictPropertyInitialization": true,
-      "strictFunctionTypes": true,
-      "strictBindCallApply": true,
-      "noImplicitThis": true,
-      "moduleResolution": "node",
-      "baseUrl": ".",
-      "types": [
-          "react",
-          "mocha",
-          "node"
-        ],
-      "paths": {
-        "react": ["node_modules/@types/react"],
-        "styled-components": ["node_modules/@types/styled-components"]
-      },
-      "skipLibCheck": true
+    "outDir": "./built",
+    "target": "esnext",
+    "esModuleInterop": true,
+    "jsx": "react",
+    "declaration": true,
+    "declarationDir": "./types",
+    "emitDeclarationOnly": true,
+    "strictNullChecks": true,
+    "strictPropertyInitialization": true,
+    "strictFunctionTypes": true,
+    "strictBindCallApply": true,
+    "noImplicitThis": true,
+    "moduleResolution": "node",
+    "baseUrl": ".",
+    "types": ["react", "mocha", "node"],
+    "paths": {
+      "react": ["node_modules/@types/react"],
+      "styled-components": ["node_modules/@types/styled-components"]
+    },
+    "skipLibCheck": true,
+    "resolveJsonModule": true
   },
-  "include": [
-      "./vendor-types/**/*",
-      "./src/**/*",
-      "./spec/**/*"
-  ],
+  "include": ["./vendor-types/**/*", "./src/**/*", "./spec/**/*"],
   "exclude": [
-      "./example-app/**/*",
-      "./node-modules",
-      "./src/frontend/assets/**/*",
-      "./src/frontend/components/**/*stories.tsx",
+    "./example-app/**/*",
+    "./node-modules",
+    "./src/frontend/assets/**/*",
+    "./src/frontend/components/**/*stories.tsx"
   ]
 }

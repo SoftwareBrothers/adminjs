@@ -10,7 +10,7 @@ import { ActionJSON, RecordJSON } from '../../interfaces'
 import { NoResourceError, NoActionError, NoRecordError } from '../app/error-message'
 import Wrapper from './utils/wrapper'
 import { ActionHeader } from '../app'
-import { useNotice, useResource, useTranslation } from '../../hooks'
+import { useNotice, useResource } from '../../hooks'
 import DrawerPortal from '../app/drawer-portal'
 import { ActionResponse, RecordActionResponse } from '../../../backend/actions/action.interface'
 import mergeRecordResponse from '../../hooks/use-record/merge-record-response'
@@ -23,7 +23,6 @@ const RecordAction: React.FC = () => {
   const [loading, setLoading] = useState(true)
   const params = useParams<RecordActionParams>()
   const addNotice = useNotice()
-  const { translateMessage } = useTranslation()
 
   const { actionName, recordId, resourceId } = params
   const resource = useResource(resourceId!)
@@ -48,8 +47,9 @@ const RecordAction: React.FC = () => {
       }
     }).catch((error) => {
       addNotice({
-        message: translateMessage('errorFetchingRecord', resourceId),
+        message: 'errorFetchingRecord',
         type: 'error',
+        resourceId,
       })
       throw error
     }).finally(() => {
