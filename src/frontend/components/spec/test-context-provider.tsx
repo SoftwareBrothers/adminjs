@@ -4,7 +4,7 @@ import { ThemeProvider } from 'styled-components'
 import { combineStyles } from '@adminjs/design-system'
 import { I18nextProvider } from 'react-i18next'
 import { defaultLocale } from '../../../locale'
-import initTranslations from '../../utils/adminJS.i18n'
+import initTranslations from '../../utils/adminjs.i18n'
 
 const theme = combineStyles({})
 

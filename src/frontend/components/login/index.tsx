@@ -8,7 +8,7 @@ import { useSelector } from 'react-redux'
 import styled, { createGlobalStyle } from 'styled-components'
 import { useTranslation } from '../../hooks'
 import { ReduxState } from '../../store/store'
-import initTranslations from '../../utils/adminJS.i18n'
+import initTranslations from '../../utils/adminjs.i18n'
 
 const GlobalStyle = createGlobalStyle`
   html, body, #app {

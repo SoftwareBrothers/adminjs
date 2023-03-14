@@ -20,12 +20,12 @@ const LanguageSelect: FC = () => {
     translateComponent,
   } = useTranslation()
 
-  const availableLanguages = useMemo(
-    () => supportedLngs && supportedLngs.filter((lang) => lang !== 'cimode'),
+  const availableLanguages: readonly string[] = useMemo(
+    () => (supportedLngs ? supportedLngs.filter((lang) => lang !== 'cimode') : []),
     [supportedLngs],
   )
 
-  if (!availableLanguages || !availableLanguages.length || availableLanguages.length === 1) {
+  if (availableLanguages.length <= 1) {
     return null
   }
 

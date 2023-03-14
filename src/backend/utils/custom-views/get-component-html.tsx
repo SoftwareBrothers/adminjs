@@ -15,7 +15,7 @@ import createStore, {
   ReduxState,
 } from '../../../frontend/store/store'
 import AdminJS from '../../../adminjs'
-import initTranslations from '../../../frontend/utils/adminJS.i18n'
+import initTranslations from '../../../frontend/utils/adminjs.i18n'
 
 export async function getComponentHtml<T extends Record<string, unknown>>(
   Component: React.FC<T>,
