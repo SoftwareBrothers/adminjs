@@ -43,7 +43,7 @@ const NoResourceError: React.FC<{ resourceId: string }> = (props) => {
     <InfoBox
       title={translateMessage('pageNotFound', resourceId, { resourceId })}
       illustration="NotFound"
-      data-testid="NoResourceError"
+      testId="NoResourceError"
     >
       <Text>
         {translateMessage('error404Resource', resourceId, { resourceId })}
@@ -59,7 +59,7 @@ const NoActionError: React.FC<{ resourceId: string; actionName: string }> = (pro
     <InfoBox
       title={translateMessage('pageNotFound', resourceId, { resourceId })}
       illustration="NotFound"
-      data-testid="NoActionError"
+      testId="NoActionError"
     >
       <Text>
         {translateMessage('error404Action', resourceId, { resourceId, actionName })}
@@ -78,7 +78,7 @@ const NoRecordError: React.FC<{
     <InfoBox
       title={translateMessage('pageNotFound', resourceId, { resourceId })}
       illustration="NotFound"
-      data-testid="NoRecordError"
+      testId="NoRecordError"
     >
       <Text>
         {translateMessage('error404Record', resourceId, { resourceId, recordId })}
