@@ -13,7 +13,7 @@ import withNotice from './hoc/with-notice'
 import * as Hooks from './hooks'
 import createStore from './store/store'
 import ApiClient from './utils/api-client'
-import initTranslations from './utils/adminJS.i18n'
+import initTranslations from './utils/adminjs.i18n'
 
 const env = {
   NODE_ENV: process.env.NODE_ENV || 'development',
