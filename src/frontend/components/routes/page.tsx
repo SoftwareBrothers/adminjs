@@ -1,4 +1,4 @@
-import { Box, InfoBox, Text } from '@adminjs/design-system'
+import { InfoBox, Text } from '@adminjs/design-system'
 import React, { FC, useMemo } from 'react'
 import { Trans } from 'react-i18next'
 import { useSelector } from 'react-redux'

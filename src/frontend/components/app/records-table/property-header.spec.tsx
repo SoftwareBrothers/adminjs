@@ -40,12 +40,13 @@ describe('<PropertyHeader />', function () {
   })
 
   context('render not selected but searchable field', function () {
-    xit('renders a label', async function () {
-      const { findAllByText } = renderSubject(property, sortBy, direction)
+    it('renders a client side translated label', async function () {
+      const { findByText } = renderSubject(property, sortBy, direction)
+      const translatedLabel = 'Some Property 1'
 
-      const label = await findAllByText(property.label)
+      const label = await findByText(translatedLabel)
 
-      expect(label).to.equal(property.label)
+      expect(label).to.exist
     })
 
     it('wraps it within a link with an opposite direction', function () {
