@@ -1,25 +1,31 @@
-// @ts-nocheck
-import { Box, Button, DropDown, DropDownItem, DropDownMenu, DropDownTrigger, Icon } from '@adminjs/design-system'
-import React, { FC, useCallback } from 'react'
-import { useTranslation } from 'react-i18next'
-import { useSelector } from 'react-redux'
-
-import { ReduxState } from '../../../store/store.js'
-import { useLocalStorage } from '../../../hooks/index.js'
+import {
+  Box,
+  Button,
+  DropDown,
+  DropDownItem,
+  DropDownMenu,
+  DropDownTrigger,
+  Icon,
+} from '@adminjs/design-system'
+import React, { FC, useMemo } from 'react'
+import { useTranslation } from '../../../hooks/index.js'
 
 const LanguageSelect: FC = () => {
-  const locale = useSelector((state: ReduxState) => state.locale)
-  const [storedLocale, setStoredLocale] = useLocalStorage('locale', locale.language)
-  const { availableLanguages } = locale
+  const {
+    i18n: {
+      language,
+      options: { supportedLngs },
+      changeLanguage,
+    },
+    translateComponent,
+  } = useTranslation()
 
-  const { i18n } = useTranslation()
+  const availableLanguages: readonly string[] = useMemo(
+    () => (supportedLngs ? supportedLngs.filter((lang) => lang !== 'cimode') : []),
+    [supportedLngs],
+  )
 
-  const handleButtonClick = useCallback((lng: string) => {
-    i18n.changeLanguage(lng)
-    setStoredLocale(lng)
-  }, [])
-
-  if (!availableLanguages.length || availableLanguages.length === 1) {
+  if (availableLanguages.length <= 1) {
     return null
   }
 
@@ -29,13 +35,18 @@ const LanguageSelect: FC = () => {
         <DropDownTrigger>
           <Button color="text">
             <Icon icon="Globe" />
-            {storedLocale}
+            {translateComponent(`LanguageSelector.availableLanguages.${language}`, { defaultValue: language })}
           </Button>
         </DropDownTrigger>
         <DropDownMenu>
           {availableLanguages.map((lang) => (
-            <DropDownItem key={lang} onClick={() => handleButtonClick(lang)}>
-              {lang}
+            <DropDownItem
+              key={lang}
+              onClick={() => {
+                changeLanguage(lang)
+              }}
+            >
+              {translateComponent(`LanguageSelector.availableLanguages.${lang}`, { defaultValue: lang })}
             </DropDownItem>
           ))}
         </DropDownMenu>

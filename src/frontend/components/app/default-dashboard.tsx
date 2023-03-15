@@ -1,16 +1,7 @@
 // @ts-nocheck
 import React from 'react'
-import {
-  Box,
-  H2,
-  H5,
-  H4,
-  Text,
-  Illustration as RawIllustration,
-  IllustrationProps,
-  Button,
-} from '@adminjs/design-system'
 import { styled } from 'styled-components'
+import { Box, Button, H2, H5, Illustration, IllustrationProps, Text } from '@adminjs/design-system'
 
 import { useTranslation } from '../../hooks/index.js'
 
@@ -20,7 +11,6 @@ const pageHeaderPaddingX = 250
 
 export const DashboardHeader: React.FC = () => {
   const { translateMessage } = useTranslation()
-  const Illustration = RawIllustration as any
   return (
     <Box position="relative" overflow="hidden" data-css="default-dashboard">
       <Box
@@ -100,8 +90,11 @@ const boxes = ({ translateMessage }): Array<BoxType> => [{
 const Card = styled(Box)`
   display: ${({ flex }): string => (flex ? 'flex' : 'block')};
   color: ${({ theme }) => theme.colors.grey100};
+  height: 100%;
   text-decoration: none;
   border: 1px solid transparent;
+  border-radius: ${({ theme }) => theme.space.md};
+  transition: all 0.1s ease-in;
   &:hover {
     border: 1px solid ${({ theme }) => theme.colors.primary100};
     box-shadow: ${({ theme }) => theme.shadows.cardHover};
@@ -116,7 +109,6 @@ Card.defaultProps = {
 export const Dashboard: React.FC = () => {
   const { translateMessage, translateButton } = useTranslation()
 
-  const Illustration = RawIllustration as any
   return (
     <Box>
       <DashboardHeader />
@@ -151,7 +143,7 @@ export const Dashboard: React.FC = () => {
           <Card as="a" flex href="https://adminjs.page.link/slack" target="_blank">
             <Box flexShrink={0}><Illustration variant="SlackLogo" /></Box>
             <Box ml="xl">
-              <H4>{translateMessage('community_title')}</H4>
+              <H5>{translateMessage('community_title')}</H5>
               <Text>{translateMessage('community_subtitle')}</Text>
             </Box>
           </Card>
@@ -160,15 +152,15 @@ export const Dashboard: React.FC = () => {
           <Card as="a" flex href="https://github.com/SoftwareBrothers/adminjs/issues" target="_blank">
             <Box flexShrink={0}><Illustration variant="GithubLogo" /></Box>
             <Box ml="xl">
-              <H4>{translateMessage('foundBug_title')}</H4>
+              <H5>{translateMessage('foundBug_title')}</H5>
               <Text>{translateMessage('foundBug_subtitle')}</Text>
             </Box>
           </Card>
         </Box>
-        <Box variant="white" boxShadow="card" width={1} m="lg">
+        <Card width={1} m="lg">
           <Text textAlign="center">
             <Illustration variant="AdminJSLogo" />
-            <H4>{translateMessage('needMoreSolutions_title')}</H4>
+            <H5>{translateMessage('needMoreSolutions_title')}</H5>
             <Text>{translateMessage('needMoreSolutions_subtitle')}</Text>
             <Text mt="xxl">
               <Button
@@ -181,7 +173,7 @@ export const Dashboard: React.FC = () => {
               </Button>
             </Text>
           </Text>
-        </Box>
+        </Card>
       </Box>
     </Box>
   )

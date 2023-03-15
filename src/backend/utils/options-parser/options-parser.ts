@@ -4,6 +4,7 @@ import AdminJS from '../../../adminjs.js'
 import { AdminJSOptions, Assets, BrandingOptions } from '../../../adminjs-options.interface.js'
 import { CurrentAdmin } from '../../../current-admin.interface.js'
 import ViewHelpers from '../view-helpers/view-helpers.js'
+import { defaultLocale, Locale } from '../../../locale/index.js'
 
 const defaultBranding: AdminJSOptions['branding'] = {
   companyName: 'Company',
@@ -44,6 +45,18 @@ export const getBranding = async (
   merged.logo = merged.logo !== undefined ? merged.logo : defaultLogo
 
   return merged
+}
+
+export const getLocales = async (
+  admin: AdminJS,
+  currentAdmin?: CurrentAdmin,
+): Promise<Locale> => {
+  const { locale } = admin.options || {}
+  const computed = typeof locale === 'function'
+    ? await locale(currentAdmin)
+    : locale
+
+  return merge({}, defaultLocale, computed)
 }
 
 export const getFaviconFromBranding = (branding: BrandingOptions): string => {

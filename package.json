@@ -107,6 +107,8 @@
     "commander": "^10.0.0",
     "flat": "^5.0.2",
     "i18next": "^22.4.9",
+    "i18next-browser-languagedetector": "^7.0.1",
+    "i18next-http-backend": "^2.1.1",
     "lodash": "^4.17.21",
     "ora": "^6.1.2",
     "prop-types": "^15.8.1",

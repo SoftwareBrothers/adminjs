@@ -1,24 +1,14 @@
-// @ts-nocheck
-import React from 'react'
-import { useSelector } from 'react-redux'
 import {
-  Box,
-  H5,
-  H2,
-  Label,
-  Illustration as RawIllustration,
-  Input,
-  FormGroup,
-  Button,
-  Text,
-  MessageBox,
-  MadeWithLove,
-  themeGet,
+  Box, Button, FormGroup, H2, H5, Illustration,
+  Input, Label, MadeWithLove, MessageBox, Text,
 } from '@adminjs/design-system'
+import React from 'react'
+import { I18nextProvider } from 'react-i18next'
+import { useSelector } from 'react-redux'
 import { styled, createGlobalStyle } from 'styled-components'
-
 import { useTranslation } from '../../hooks/index.js'
 import { ReduxState } from '../../store/store.js'
+import initTranslations from '../../utils/adminjs.i18n.js'
 
 const GlobalStyle = createGlobalStyle`
   html, body, #app {
@@ -38,7 +28,7 @@ const Wrapper = styled(Box)`
 
 const StyledLogo = styled.img`
   max-width: 200px;
-  margin: ${themeGet('space', 'md')} 0;
+  margin: ${({ theme }) => theme.space.md} 0;
 `
 
 export type LoginProps = {
@@ -50,10 +40,11 @@ export const Login: React.FC<LoginProps> = (props) => {
   const { action, message } = props
   const { translateLabel, translateButton, translateProperty, translateMessage } = useTranslation()
   const branding = useSelector((state: ReduxState) => state.branding)
+  const locale = useSelector((state: ReduxState) => state.locale)
+  const { i18n } = initTranslations(locale)
 
-  const Illustration = RawIllustration as any
   return (
-    <>
+    <I18nextProvider i18n={i18n}>
       <GlobalStyle />
       <Wrapper flex variant="grey">
         <Box bg="white" height="440px" flex boxShadow="login" width={[1, 2 / 3, 'auto']}>
@@ -127,7 +118,7 @@ export const Login: React.FC<LoginProps> = (props) => {
         </Box>
         {branding.withMadeWithLove ? (<Box mt="xxl"><MadeWithLove /></Box>) : null}
       </Wrapper>
-    </>
+    </I18nextProvider>
   )
 }
 

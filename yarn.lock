@@ -1214,14 +1214,14 @@
   dependencies:
     regenerator-runtime "^0.13.4"
 
-"@babel/runtime@^7.13.10":
+"@babel/runtime@^7.13.10", "@babel/runtime@^7.19.4":
   version "7.21.0"
   resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.21.0.tgz#5b55c9d394e5fcf304909a8b00c07dc217b56673"
   integrity sha512-xwII0//EObnq89Ji5AKYQaRYiW/nZ3llSv29d49IuxPhKbtJoLP+9QUUZ4nVragQVtaVGeZrpB+ZtG/Pdy/POw==
   dependencies:
     regenerator-runtime "^0.13.11"
 
-"@babel/runtime@^7.19.4", "@babel/runtime@^7.20.6", "@babel/runtime@^7.20.7":
+"@babel/runtime@^7.20.6", "@babel/runtime@^7.20.7":
   version "7.20.13"
   resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.20.13.tgz#7055ab8a7cff2b8f6058bf6ae45ff84ad2aded4b"
   integrity sha512-gt3PKXs0DBoL9xCvOIIZ2NEqAGZqHjAnmVbfQtB620V0uReIQutpel14KcneZuer7UioY8ALKZ7iocavvzTNFA==
@@ -4353,6 +4353,13 @@ crelt@^1.0.0:
   resolved "https://registry.yarnpkg.com/crelt/-/crelt-1.0.5.tgz#57c0d52af8c859e354bace1883eb2e1eb182bb94"
   integrity sha512-+BO9wPPi+DWTDcNYhr/W90myha8ptzftZT+LwcmUbbok0rcP/fequmFYCw8NMoH7pkAZQzU78b3kYrlua5a9eA==
 
+cross-fetch@3.1.5:
+  version "3.1.5"
+  resolved "https://registry.yarnpkg.com/cross-fetch/-/cross-fetch-3.1.5.tgz#e1389f44d9e7ba767907f7af8454787952ab534f"
+  integrity sha512-lvb1SBsI0Z7GDwmuid+mU3kWVBwTVUbe7S0H52yaaAdQOXq2YktTCZdlAcNKFzE6QtRz0snpw9bNiPeOIkkQvw==
+  dependencies:
+    node-fetch "2.6.7"
+
 cross-spawn@^6.0.5:
   version "6.0.5"
   resolved "https://registry.yarnpkg.com/cross-spawn/-/cross-spawn-6.0.5.tgz#4a5ec7c64dfae22c3a14124dbacdee846d80cbc4"
@@ -5956,6 +5963,20 @@ husky@^8.0.3:
   version "8.0.3"
   resolved "https://registry.yarnpkg.com/husky/-/husky-8.0.3.tgz#4936d7212e46d1dea28fef29bb3a108872cd9184"
   integrity sha512-+dQSyqPh4x1hlO1swXBiNb2HzTDN1I2IGLQx1GrBuiqFJfoMrnZWwVmatvSiO+Iz8fBUnf+lekwNo4c2LlXItg==
+
+i18next-browser-languagedetector@^7.0.1:
+  version "7.0.1"
+  resolved "https://registry.yarnpkg.com/i18next-browser-languagedetector/-/i18next-browser-languagedetector-7.0.1.tgz#ead34592edc96c6c3a618a51cb57ad027c5b5d87"
+  integrity sha512-Pa5kFwaczXJAeHE56CHG2aWzFBMJNUNghf0Pm4SwSrEMps/PTKqW90EYWlIvhuYStf3Sn1K0vw+gH3+TLdkH1g==
+  dependencies:
+    "@babel/runtime" "^7.19.4"
+
+i18next-http-backend@^2.1.1:
+  version "2.1.1"
+  resolved "https://registry.yarnpkg.com/i18next-http-backend/-/i18next-http-backend-2.1.1.tgz#72a21d61c2e96eea9ad45ba1b9dd0090e119709a"
+  integrity sha512-jByfUCDVgQ8+/Wens7queQhYYvMcGTW/lR4IJJNEDDXnmqjLrwi8ubXKpmp76/JIWEZHffNdWqnxFJcTVGeaOw==
+  dependencies:
+    cross-fetch "3.1.5"
 
 i18next@^22.4.9:
   version "22.4.9"
@@ -7644,7 +7665,7 @@ node-esm-import-all@^1.0.0:
   resolved "https://registry.yarnpkg.com/node-esm-import-all/-/node-esm-import-all-1.0.0.tgz#3336f65456061944a9bac27a1014c27a89217244"
   integrity sha512-6GN939MCMeQPhWZq+AjxGn/xDTaySXDQvMG/bY7gZdcLsESNFv9cDjtuaZiwCKm0yU0fquBdsmMTeHinRy0e4A==
 
-node-fetch@^2.3.0, node-fetch@^2.6.7:
+node-fetch@2.6.7, node-fetch@^2.3.0, node-fetch@^2.6.7:
   version "2.6.7"
   resolved "https://registry.yarnpkg.com/node-fetch/-/node-fetch-2.6.7.tgz#24de9fba827e3b4ae44dc8b20256a379160052ad"
   integrity sha512-ZjMPFEfVx5j+y2yF35Kzx5sF7kDzxuDj6ziH4FFbOp87zKDZNx8yExJIb05OGF4Nlt9IHFIMBkRl41VdvcNdbQ==

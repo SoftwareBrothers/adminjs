@@ -9,18 +9,19 @@ import { useTranslation } from '../../../../hooks/index.js'
 export type PropertyLabelProps = {
   property: PropertyJSON;
   props?: LabelProps;
+  filter?: boolean;
 }
 
 const PropertyLabel: React.FC<PropertyLabelProps> = (props) => {
-  const { property, props: labelProps } = props
+  const { property, props: labelProps, filter = false } = props
   const { translateProperty } = useTranslation()
 
   if (property.hideLabel) { return null }
 
   return (
     <Label
-      htmlFor={property.path}
-      required={property.isRequired}
+      htmlFor={filter ? ['filter', property.path].join('-') : property.path}
+      required={!filter && property.isRequired}
       {...labelProps}
     >
       {translateProperty(property.label, property.resourceId)}

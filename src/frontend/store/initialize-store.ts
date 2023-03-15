@@ -12,10 +12,12 @@ import {
   setCurrentAdmin,
   initializeVersions,
 } from './actions/index.js'
+
 import AdminJS from '../../adminjs.js'
 import { CurrentAdmin } from '../../current-admin.interface.js'
 import pagesToStore from './pages-to-store.js'
-import { getBranding, getAssets } from '../../backend/utils/options-parser/options-parser.js'
+import { getBranding, getAssets, getLocales } from '../../backend/utils/options-parser/options-parser.js'
+import { defaultLocale } from '../../locale/index.js'
 
 export const initializeStore = async (
   admin: AdminJS,
@@ -24,8 +26,6 @@ export const initializeStore = async (
   const store: Store<ReduxState> = createStore()
   const AdminClass: typeof AdminJS = admin.constructor as typeof AdminJS
   const adminVersion = AdminClass.VERSION
-
-  store.dispatch(initializeLocale(admin.locale))
 
   store.dispatch(initializeResources(
     admin.resources.map((resource) => {
@@ -41,8 +41,10 @@ export const initializeStore = async (
 
   const branding = await getBranding(admin, currentAdmin)
   const assets = await getAssets(admin, currentAdmin)
+  const locales = await getLocales(admin, currentAdmin)
 
   store.dispatch(initializeBranding(branding || {}))
+  store.dispatch(initializeLocale(locales || defaultLocale))
   store.dispatch(initializeAssets(assets || {}))
 
   const {

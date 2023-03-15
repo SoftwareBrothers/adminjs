@@ -1,12 +1,10 @@
 import { useState, useEffect } from 'react'
 import { AxiosResponse } from 'axios'
 import { useLocation, useNavigate } from 'react-router'
-
 import { RecordJSON } from '../../interfaces/index.js'
 import useNotice from '../use-notice.js'
 import ApiClient from '../../utils/api-client.js'
 import { ListActionResponse } from '../../../backend/actions/list/list-action.js'
-import { useTranslation } from '../use-translation.js'
 import { hasForceRefresh, removeForceRefresh } from '../../components/actions/utils/append-force-refresh.js'
 import { UseRecordsResult } from './use-records-result.type.js'
 
@@ -34,7 +32,6 @@ function useRecords(resourceId: string): UseRecordsResult {
   const location = useLocation()
   const navigate = useNavigate()
   const addNotice = useNotice()
-  const { translateMessage } = useTranslation()
   const onNotice = useNotice()
 
   const fetchData = (): Promise<AxiosResponse<ListActionResponse>> => {
@@ -64,8 +61,9 @@ function useRecords(resourceId: string): UseRecordsResult {
       setLoading(false)
     }).catch(() => {
       addNotice({
-        message: translateMessage('errorFetchingRecords', resourceId),
+        message: 'errorFetchingRecords',
         type: 'error',
+        resourceId,
       })
     })
     return promise

@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "outDir": "./built",
-    "target": "ESNext",
+    "target": "esnext",
     "esModuleInterop": true,
     "jsx": "react",
     "declaration": true,
@@ -24,7 +24,8 @@
     "paths": {
       "react": ["node_modules/@types/react"]
     },
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "resolveJsonModule": true
   },
   "include": [
     "./vendor-types/**/*",

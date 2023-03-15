@@ -10,7 +10,7 @@ import { RecordJSON, ResourceJSON } from '../../interfaces/index.js'
 import { getActionElementCss } from '../../utils/index.js'
 
 export const BreadcrumbLink = styled(Link)`
-  color: ${({ theme }): string => theme.colors.grey100};
+  color: ${({ theme }): string => theme.colors.grey60};
   font-family: ${({ theme }): string => theme.font};
   line-height: ${({ theme }): string => theme.lineHeights.default};
   font-size: ${({ theme }): string => theme.fontSizes.default};
@@ -26,13 +26,14 @@ export const BreadcrumbLink = styled(Link)`
   }
 
   &:last-child {
+    color: ${({ theme }): string => theme.colors.text};
     &:after {
       content: '';
     }
   }
 `
 
-export const BreadcrumbText: any = styled(Text)`
+export const BreadcrumbText = styled<any>(Text)`
   color: ${({ theme }): string => theme.colors.grey100};
   font-family: ${({ theme }): string => theme.font};
   font-weight: ${({ theme }): string => theme.fontWeights.normal.toString()};
@@ -81,8 +82,9 @@ const Breadcrumbs: React.FC<BreadcrumbProps> = (props) => {
   const listAction = resource.resourceActions.find(({ name }) => name === 'list')
   const action = resource.actions.find((a) => a.name === actionName)
   const h = new ViewHelpers()
-  const { translateLabel: tl } = useTranslation()
+  const { tl, ta } = useTranslation()
   const contentTag = getActionElementCss(resource.id, actionName, 'breadcrumbs')
+
   return (
     <Box flexGrow={1} className={cssClass('Breadcrumbs')} data-css={contentTag}>
       <BreadcrumbLink to={h.dashboardUrl()}>{tl('dashboard')}</BreadcrumbLink>
@@ -93,7 +95,7 @@ const Breadcrumbs: React.FC<BreadcrumbProps> = (props) => {
       ) : (
         <BreadcrumbText>{resource.name}</BreadcrumbText>
       )}
-      {action && action.name !== 'list' && <BreadcrumbLink to="#">{action.label}</BreadcrumbLink>}
+      {action && action.name !== 'list' && <BreadcrumbLink to="#">{ta(action.label)}</BreadcrumbLink>}
     </Box>
   )
 }

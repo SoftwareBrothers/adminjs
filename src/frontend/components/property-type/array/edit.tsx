@@ -39,26 +39,25 @@ const ItemRenderer: React.FC<EditProps & ItemRendererProps> = (props) => {
           backgroundColor="white"
           flex
           flexDirection="row"
-          alignItems="center"
+          alignItems="start"
           data-testid={property.path}
         >
-          <Box flexGrow={1}>
+          <Box as="div" flexGrow={1}>
             <ItemComponent {...props} />
           </Box>
-          <Box flexShrink={0} ml="lg">
-            <Button
-              rounded
-              ml="default"
-              data-testid="delete-item"
-              type="button"
-              size="icon"
-              onClick={(event): boolean => onDelete(event, property)}
-              variant="contained"
-              color="danger"
-            >
-              <Icon icon="Trash2" />
-            </Button>
-          </Box>
+          <Button
+            rounded
+            mt="xl"
+            ml="default"
+            data-testid="delete-item"
+            type="button"
+            size="icon"
+            onClick={(event): boolean => onDelete(event, property)}
+            variant="text"
+            color="danger"
+          >
+            <Icon icon="Trash2" />
+          </Button>
         </Box>
       )}
     </Draggable>
@@ -122,9 +121,7 @@ const InputsInSection: React.FC<EditProps> = (props) => {
               )
             })}
             {provided.placeholder}
-            <Button onClick={addNew} type="button" rounded>
-              <AddNewItemButton resource={resource} property={property} />
-            </Button>
+            <AddNewItemButton resource={resource} property={property} onClick={addNew} data-testid={`${property.path}-add`} />
           </Section>
         )}
       </Droppable>

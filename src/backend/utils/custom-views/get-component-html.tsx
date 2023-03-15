@@ -1,9 +1,8 @@
 import React from 'react'
 import { renderToString } from 'react-dom/server'
 import { Provider } from 'react-redux'
-import { I18nextProvider, I18nextProviderProps } from 'react-i18next'
+import { I18nextProvider } from 'react-i18next'
 import { combineStyles } from '@adminjs/design-system'
-import i18n from 'i18next'
 import { Store } from 'redux'
 import { ServerStyleSheet, StyleSheetManager, ThemeProvider } from 'styled-components'
 
@@ -16,6 +15,7 @@ import createStore, {
   ReduxState,
 } from '../../../frontend/store/store.js'
 import AdminJS from '../../../adminjs.js'
+import initTranslations from '../../../frontend/utils/adminjs.i18n.js'
 
 export async function getComponentHtml<T extends Record<string, unknown>>(
   Component: React.FC<T>,
@@ -41,27 +41,18 @@ export async function getComponentHtml<T extends Record<string, unknown>>(
 
   const theme = combineStyles((branding && branding.theme) || {})
   const { locale } = store.getState()
-  i18n
-    .init({
-      resources: {
-        [locale.language]: {
-          translation: locale.translations,
-        },
-      },
-      lng: locale.language,
-      interpolation: { escapeValue: false },
-    })
+  const { i18n } = initTranslations(locale)
 
   const sheet = new ServerStyleSheet()
 
   const component = renderToString(
     <StyleSheetManager sheet={sheet.instance}>
       <Provider store={store}>
-        <I18nextProvider i18n={i18n as unknown as I18nextProviderProps['i18n']}>
-          <ThemeProvider theme={theme}>
+        <ThemeProvider theme={theme}>
+          <I18nextProvider i18n={i18n}>
             <Component {...props} />
-          </ThemeProvider>
-        </I18nextProvider>
+          </I18nextProvider>
+        </ThemeProvider>
       </Provider>
     </StyleSheetManager>,
   )

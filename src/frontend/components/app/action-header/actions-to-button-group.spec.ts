@@ -3,16 +3,16 @@ import { expect } from 'chai'
 import i18n from 'i18next'
 import { factory } from 'factory-girl'
 
-import { ActionJSON } from '../../../interfaces/index.js'
+import { ActionJSON, ModalFunctions } from '../../../interfaces/index.js'
 import { actionsToButtonGroup } from './actions-to-button-group.js'
 import { createFunctions } from '../../../../utils/translate-functions.factory.js'
 import '../../spec/action-json.factory.js'
 
 const translateFunctions = createFunctions(i18n as any)
 
-const modalFunctions = {
+const modalFunctions: ModalFunctions = {
   closeModal: () => { /* noop */ },
-  openModal: (data) => { /* noop */ },
+  openModal: () => { /* noop */ },
 }
 
 describe('actionsToButtonGroup', () => {

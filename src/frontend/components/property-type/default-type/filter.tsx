@@ -1,8 +1,9 @@
 import React from 'react'
-import { FormGroup, Label, Input, Select } from '@adminjs/design-system'
+import { FormGroup, Input, Select } from '@adminjs/design-system'
 
 import allowOverride from '../../../hoc/allow-override.js'
 import { FilterPropertyProps } from '../base-property-props.js'
+import PropertyLabel from '../utils/property-label/property-label.js'
 
 const Filter: React.FC<FilterPropertyProps> = (props) => {
   const { property, onChange, filter } = props
@@ -42,7 +43,7 @@ const Filter: React.FC<FilterPropertyProps> = (props) => {
 
   return (
     <FormGroup variant="filter">
-      <Label>{property.label}</Label>
+      <PropertyLabel property={property} filter />
       {renderInput()}
     </FormGroup>
   )

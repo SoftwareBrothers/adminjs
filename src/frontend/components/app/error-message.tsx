@@ -1,5 +1,5 @@
 import React, { ReactNode } from 'react'
-import { MessageBox, Text } from '@adminjs/design-system'
+import { InfoBox, MessageBox, Text } from '@adminjs/design-system'
 
 import { useTranslation } from '../../hooks/index.js'
 
@@ -37,20 +37,19 @@ const ErrorMessageBox: React.FC<ErrorMessageBoxProps> = (props) => {
   )
 }
 
-const NoResourceError: React.FC<{resourceId: string}> = (props) => {
+const NoResourceError: React.FC<{ resourceId: string }> = (props) => {
   const { resourceId } = props
   const { translateMessage } = useTranslation()
   return (
-    <MessageBox
-      message="404 - PAGE NOT FOUND"
-      data-testid="NoResourceError"
-      variant="info"
-      m="xxl"
+    <InfoBox
+      title={translateMessage('pageNotFound', resourceId, { resourceId })}
+      illustration="NotFound"
+      testId="NoResourceError"
     >
       <Text>
         {translateMessage('error404Resource', resourceId, { resourceId })}
       </Text>
-    </MessageBox>
+    </InfoBox>
   )
 }
 
@@ -58,16 +57,15 @@ const NoActionError: React.FC<{ resourceId: string; actionName: string }> = (pro
   const { resourceId, actionName } = props
   const { translateMessage } = useTranslation()
   return (
-    <MessageBox
-      message="404 - PAGE NOT FOUND"
-      data-testid="NoActionError"
-      variant="info"
-      m="xxl"
+    <InfoBox
+      title={translateMessage('pageNotFound', resourceId, { resourceId })}
+      illustration="NotFound"
+      testId="NoActionError"
     >
       <Text>
         {translateMessage('error404Action', resourceId, { resourceId, actionName })}
       </Text>
-    </MessageBox>
+    </InfoBox>
   )
 }
 
@@ -78,16 +76,15 @@ const NoRecordError: React.FC<{
   const { resourceId, recordId } = props
   const { translateMessage } = useTranslation()
   return (
-    <MessageBox
-      message="404 - PAGE NOT FOUND"
-      data-testid="NoRecordError"
-      variant="info"
-      m="xxl"
+    <InfoBox
+      title={translateMessage('pageNotFound', resourceId, { resourceId })}
+      illustration="NotFound"
+      testId="NoRecordError"
     >
       <Text>
         {translateMessage('error404Record', resourceId, { resourceId, recordId })}
       </Text>
-    </MessageBox>
+    </InfoBox>
   )
 }
 

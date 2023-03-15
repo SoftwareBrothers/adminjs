@@ -7,7 +7,7 @@ import startCase from 'lodash/startCase.js'
  */
 export type TranslateFunction = (
   /**
-   * kwy which should be translated in a given namespace
+   * Translation key which should be translated in a given namespace
    */
   key: string,
   /**
@@ -124,9 +124,15 @@ export interface TranslateFunctions {
    * Finally, when that also fails, it returns startCase of the given label.
    */
   translateComponent: TranslateFunction;
+  /**
+   * Translates page's labels in the application.
+   * By default, it looks for a [translation key]{@link LocaleTranslations} in
+   * `resource.{resourceId}.pages.{label}`, when it doesn't find
+   * that, the lookup is moved to `pages.{label}`.
+   * Finally, when that also fails, it returns startCase of the given label.
+   */
+  translatePage: TranslateFunction;
 }
-
-export const formatName = (name: string): string => name.split('.').join('&#46;')
 
 const translate = (
   i18n: I18n,
@@ -135,6 +141,9 @@ const translate = (
   resourceId?: string | TOptions,
   options?: TOptions,
 ): string => {
+  // cspell:disable-next-line
+  if (i18n.language === 'cimode') return [key, name].join('.')
+
   const realOptions: TOptions = (typeof resourceId === 'string' ? options : resourceId) || {}
   let keys = [`${key}.${name}`]
   if (resourceId) {
@@ -171,6 +180,10 @@ export const createFunctions = (i18n: I18n): TranslateFunctions => {
     translate(i18n, 'components', messageName, resourceId, options)
   )
 
+  const translatePage: TranslateFunction = (messageName, resourceId, options) => (
+    translate(i18n, 'pages', messageName, resourceId, options)
+  )
+
   return {
     translateAction,
     ta: translateAction,
@@ -184,6 +197,7 @@ export const createFunctions = (i18n: I18n): TranslateFunctions => {
     tm: translateMessage,
     translateComponent,
     tc: translateComponent,
+    translatePage,
     t: i18n.t,
     translate: i18n.t,
   }

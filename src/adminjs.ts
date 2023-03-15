@@ -1,8 +1,7 @@
 import merge from 'lodash/merge.js'
 import * as path from 'path'
 import * as fs from 'fs'
-import i18n, { i18n as I18n } from 'i18next'
-import { FC } from 'react'
+import type { FC } from 'react'
 import * as url from 'url'
 
 import { AdminJSOptionsWithDefault, AdminJSOptions } from './adminjs-options.interface.js'
@@ -14,11 +13,11 @@ import userComponentsBundler from './backend/bundler/user-components-bundler.js'
 import { RecordActionResponse, Action, BulkActionResponse } from './backend/actions/action.interface.js'
 import { DEFAULT_PATHS } from './constants.js'
 import { ACTIONS } from './backend/actions/index.js'
+
 import loginTemplate from './frontend/login-template.js'
 import { ListActionResponse } from './backend/actions/list/list-action.js'
-import { combineTranslations, Locale } from './locale/config.js'
-import { locales } from './locale/index.js'
-import { TranslateFunctions, createFunctions } from './utils/translate-functions.factory.js'
+import { defaultLocale, Locale } from './locale/index.js'
+import { TranslateFunctions } from './utils/translate-functions.factory.js'
 import { relativeFilePathResolver } from './utils/file-resolver.js'
 import { getComponentHtml } from './backend/utils/index.js'
 import { ComponentLoader } from './backend/utils/component-loader.js'
@@ -73,8 +72,6 @@ class AdminJS {
 
   public locale!: Locale
 
-  public i18n!: I18n
-
   public translateFunctions!: TranslateFunctions
 
   public componentLoader: ComponentLoader
@@ -118,7 +115,8 @@ class AdminJS {
 
     this.resolveBabelConfigPath()
 
-    this.initI18n()
+    // To be removed when Login page will be renedered on client side
+    this.locale = defaultLocale
 
     const { databases, resources } = this.options
 
@@ -126,37 +124,6 @@ class AdminJS {
 
     const resourcesFactory = new ResourcesFactory(this, global.RegisteredAdapters || [])
     this.resources = resourcesFactory.buildResources({ databases, resources })
-  }
-
-  initI18n(): void {
-    const language = this.options.locale?.language || locales.en.language
-    const defaultTranslations = locales[language]?.translations || locales.en.translations
-    const availableLanguages = this.options.locale?.availableLanguages || [language]
-    this.locale = {
-      translations: combineTranslations(defaultTranslations, this.options.locale?.translations),
-      language,
-      availableLanguages,
-    }
-    if ((i18n as any).isInitialized) {
-      (i18n as any).addResourceBundle(this.locale.language, 'translation', this.locale.translations)
-    } else {
-      i18n.init({
-        lng: this.locale.language,
-        initImmediate: false, // loads translations immediately
-        resources: {
-          [this.locale.language]: {
-            translation: this.locale.translations,
-          },
-        },
-      })
-    }
-
-    // mixin translate functions to AdminJS instance so users will be able to
-    // call AdminJS.translateMessage(...)
-    this.translateFunctions = createFunctions(i18n as any)
-    Object.getOwnPropertyNames(this.translateFunctions).forEach((translateFunctionName) => {
-      this[translateFunctionName] = this.translateFunctions[translateFunctionName]
-    })
   }
 
   /**

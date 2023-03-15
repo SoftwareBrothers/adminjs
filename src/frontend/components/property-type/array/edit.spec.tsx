@@ -77,10 +77,10 @@ describe('<PropertyType.Array.Edit />', function () {
         })
       })
 
-      xit('renders new empty input field after clicking "add"', function () {
-        const { getByText } = renderTestSubject(property, record)
+      it('renders new empty input field after clicking "add"', function () {
+        const { getByTestId } = renderTestSubject(property, record)
 
-        fireEvent.click(getByText(AddNewItemText))
+        fireEvent.click(getByTestId(`${property.path}-add`))
 
         expect(onChange).to.has.been.calledWith(property.path, [''])
       })
