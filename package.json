@@ -132,6 +132,7 @@
     "@babel/cli": "^7.20.7",
     "@commitlint/cli": "^17.4.3",
     "@commitlint/config-conventional": "^17.4.3",
+    "@emotion/is-prop-valid": "^1.2.0",
     "@semantic-release/git": "^10.0.1",
     "@testing-library/react": "^13.4.0",
     "@types/chai": "^4.3.4",
