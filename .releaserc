@@ -7,8 +7,7 @@
       "prerelease": true
     },
     {
-      "name": "next-major",
-      "channel": "next-major",
+      "name": "beta-v7",
       "prerelease": true
     }
   ],

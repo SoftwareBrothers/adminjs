@@ -38,25 +38,24 @@ jobs:
           key: assets-${{ hashFiles('**/src/frontend/global-entry.js') }}-${{ hashFiles('**/yarn.lock') }}-${{ hashFiles('**/bin/bundle-globals.js') }}
           restore-keys: |
             assets-
+      - name: build
+        run: yarn build
+      - name: types
+        run: yarn types
       - name: bundle globals production
         if: steps.assets-cache.outputs.cache-hit != 'true'
         run: NODE_ENV=production yarn bundle:globals
       - name: bundle globals dev
         if: steps.assets-cache.outputs.cache-hit != 'true'
         run: NODE_ENV=dev yarn bundle:globals
-
       - name: bundle production
         run: NODE_ENV=production ONCE=true yarn bundle
       - name: bundle dev
         run: ONCE=true yarn bundle
-      - name: build
-        run: yarn build
-      - name: types
-        run: yarn types
       - name: Upload Build
         if: |
           contains(github.ref, 'refs/heads/master')
-          || contains(github.ref, 'refs/heads/next-major')
+          || contains(github.ref, 'refs/heads/beta-v7')
           || contains(github.ref, 'refs/heads/beta')
         uses: actions/upload-artifact@v3
         with:
@@ -65,7 +64,7 @@ jobs:
       - name: Upload Types
         if: |
           contains(github.ref, 'refs/heads/master')
-          || contains(github.ref, 'refs/heads/next-major')
+          || contains(github.ref, 'refs/heads/beta-v7')
           || contains(github.ref, 'refs/heads/beta')
         uses: actions/upload-artifact@v3
         with:
@@ -74,7 +73,7 @@ jobs:
       - name: Upload Bundle
         if: |
           contains(github.ref, 'refs/heads/master')
-          || contains(github.ref, 'refs/heads/next-major')
+          || contains(github.ref, 'refs/heads/beta-v7')
           || contains(github.ref, 'refs/heads/beta')
         uses: actions/upload-artifact@v3
         with:
@@ -117,7 +116,7 @@ jobs:
       github.event_name == 'push'
       && (
         contains(github.ref, 'refs/heads/master')
-        || contains(github.ref, 'refs/heads/next-major')
+        || contains(github.ref, 'refs/heads/beta-v7')
         || contains(github.ref, 'refs/heads/beta')
       )
     needs:
