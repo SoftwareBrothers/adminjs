@@ -1,2 +1,2 @@
-export * from './allow-override'
-export * from './with-notice'
+export * from './allow-override.js'
+export * from './with-notice.js'

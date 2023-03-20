@@ -12,21 +12,30 @@
     "strictFunctionTypes": true,
     "strictBindCallApply": true,
     "noImplicitThis": true,
-    "moduleResolution": "node",
+    "moduleResolution": "nodenext",
+    "module": "nodenext",
     "baseUrl": ".",
-    "types": ["react", "mocha", "node"],
+    "types": [
+      "react",
+      "mocha",
+      "node"
+    ],
+    "typeRoots": ["./vendor-types"],
     "paths": {
-      "react": ["node_modules/@types/react"],
-      "styled-components": ["node_modules/@types/styled-components"]
+      "react": ["node_modules/@types/react"]
     },
     "skipLibCheck": true,
     "resolveJsonModule": true
   },
-  "include": ["./vendor-types/**/*", "./src/**/*", "./spec/**/*"],
+  "include": [
+    "./vendor-types/**/*",
+    "./src/**/*",
+    "./spec/**/*"
+  ],
   "exclude": [
     "./example-app/**/*",
     "./node-modules",
     "./src/frontend/assets/**/*",
-    "./src/frontend/components/**/*stories.tsx"
+    "./src/frontend/components/**/*stories.tsx",
   ]
 }

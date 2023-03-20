@@ -5,10 +5,10 @@ import {
 import React from 'react'
 import { I18nextProvider } from 'react-i18next'
 import { useSelector } from 'react-redux'
-import styled, { createGlobalStyle } from 'styled-components'
-import { useTranslation } from '../../hooks'
-import { ReduxState } from '../../store/store'
-import initTranslations from '../../utils/adminjs.i18n'
+import { styled, createGlobalStyle } from 'styled-components'
+import { useTranslation } from '../../hooks/index.js'
+import { ReduxState } from '../../store/store.js'
+import initTranslations from '../../utils/adminjs.i18n.js'
 
 const GlobalStyle = createGlobalStyle`
   html, body, #app {

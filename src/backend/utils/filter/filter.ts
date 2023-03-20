@@ -1,8 +1,8 @@
-import { flat } from '../../../utils/flat'
-import BaseProperty from '../../adapters/property/base-property'
-import BaseResource from '../../adapters/resource/base-resource'
-import BaseRecord from '../../adapters/record/base-record'
-import { ActionContext } from '../../actions'
+import { flat } from '../../../utils/flat/index.js'
+import BaseProperty from '../../adapters/property/base-property.js'
+import BaseResource from '../../adapters/resource/base-resource.js'
+import BaseRecord from '../../adapters/record/base-record.js'
+import { ActionContext } from '../../actions/index.js'
 
 export const PARAM_SEPARATOR = '~~'
 

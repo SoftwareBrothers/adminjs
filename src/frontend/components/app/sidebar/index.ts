@@ -1,4 +1,4 @@
-import Sidebar from './sidebar'
+import Sidebar from './sidebar.js'
 
-export * from './sidebar-resource-section'
+export * from './sidebar-resource-section.js'
 export { Sidebar }

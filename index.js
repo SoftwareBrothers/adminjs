@@ -1,11 +1,9 @@
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const moduleExports = require('./lib')
+import AdminJS from './lib/index.js'
 
-const AdminJS = moduleExports.default
+export * from './lib/index.js'
 
-Object.keys(moduleExports).forEach((key) => {
-  if (key === '__esModule') return
-  AdminJS[key] = moduleExports[key]
-})
+export {
+  AdminJS,
+}
 
-module.exports = AdminJS
+export default AdminJS

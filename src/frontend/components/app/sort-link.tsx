@@ -1,10 +1,9 @@
 import React, { memo, useMemo } from 'react'
 import { useLocation, NavLink } from 'react-router-dom'
-
 import { Icon, cssClass } from '@adminjs/design-system'
 
-import { BasePropertyJSON } from '../../interfaces'
-import { useTranslation } from '../../hooks'
+import { BasePropertyJSON } from '../../interfaces/index.js'
+import { useTranslation } from '../../hooks/index.js'
 
 export type SortLinkProps = {
   property: BasePropertyJSON;

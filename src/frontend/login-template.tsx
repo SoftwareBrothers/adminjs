@@ -1,6 +1,6 @@
-import { getComponentHtml } from '../backend/utils'
-import AdminJS from '../adminjs'
-import LoginComponent from './components/login'
+import { getComponentHtml } from '../backend/utils/index.js'
+import AdminJS from '../adminjs.js'
+import LoginComponent from './components/login/index.js'
 
 type LoginTemplateAttributes = {
   /**

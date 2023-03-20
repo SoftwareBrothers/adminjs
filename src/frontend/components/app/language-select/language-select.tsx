@@ -8,7 +8,7 @@ import {
   Icon,
 } from '@adminjs/design-system'
 import React, { FC, useMemo } from 'react'
-import { useTranslation } from '../../../hooks'
+import { useTranslation } from '../../../hooks/index.js'
 
 const LanguageSelect: FC = () => {
   const {

@@ -1,21 +1,21 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
-const rollup = require('rollup')
-const ora = require('ora')
-const util = require('util')
-const { external, globals, plugins } = require('./config')
+import { rollup, watch as rollupWatch } from 'rollup'
+import ora from 'ora'
+import util from 'util'
+import { external, globals, plugins } from './config.js'
 
 async function build({
   name, input, babelConfig = {}, commonJSConfig = {}, file, watch = false, minify,
 }) {
   const inputOptions = {
     input,
-    plugins: plugins({ babelConfig, minify, commonJSConfig }),
+    plugins: await plugins({ babelConfig, minify, commonJSConfig }),
     external,
   }
 
   const outputOptions = {
-    format: 'iife', name, globals,
+    format: 'iife', interop: 'auto', name, globals,
   }
 
   if (file) {
@@ -27,13 +27,13 @@ async function build({
   }
 
   if (watch) {
-    const bundle = await rollup.rollup(inputOptions)
+    const bundle = await rollup(inputOptions)
     if (process.env.DEBUG_BUNDLER) {
       // eslint-disable-next-line no-console
       console.log(util.inspect(bundle.watchFiles, { maxArrayLength: null }))
     }
     const spinner = ora(`Bundling files in watchmode: ${JSON.stringify(inputOptions)}`)
-    const watcher = rollup.watch({
+    const watcher = rollupWatch({
       ...inputOptions,
       output: outputOptions,
     })
@@ -54,7 +54,7 @@ async function build({
     return watcher
   }
 
-  const bundle = await rollup.rollup(inputOptions)
+  const bundle = await rollup(inputOptions)
 
   if (file) {
     return bundle.write(outputOptions)
@@ -63,4 +63,4 @@ async function build({
   return bundled.output[0]
 }
 
-module.exports = build
+export default build

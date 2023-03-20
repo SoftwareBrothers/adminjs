@@ -1,4 +1,4 @@
-import { RecordJSON } from '../../interfaces'
+import { RecordJSON } from '../../interfaces/index.js'
 
 const isEntireRecordGiven = (
   propertyOrRecord: RecordJSON | string,

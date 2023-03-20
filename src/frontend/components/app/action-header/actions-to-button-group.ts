@@ -1,8 +1,8 @@
 import { ButtonGroupProps, ButtonInGroupProps } from '@adminjs/design-system'
 
-import { actionHref, ActionJSON, buildActionTestId, ModalFunctions } from '../../../interfaces'
-import { DifferentActionParams } from '../../../hooks'
-import { TranslateFunctions } from '../../../../utils'
+import { actionHref, ActionJSON, buildActionTestId, ModalFunctions } from '../../../interfaces/index.js'
+import { DifferentActionParams } from '../../../hooks/index.js'
+import { TranslateFunctions } from '../../../../utils/index.js'
 
 export type actionsToButtonGroupOptions = {
   actions: Array<ActionJSON>;

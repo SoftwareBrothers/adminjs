@@ -1,4 +1,4 @@
-import { DOCS } from '../../../constants'
+import { DOCS } from '../../../constants.js'
 
 const buildUrl = (fnName: string): string => {
   if (fnName) {

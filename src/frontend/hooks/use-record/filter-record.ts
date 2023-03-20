@@ -1,6 +1,6 @@
-import { flat } from '../../../utils'
-import { RecordJSON } from '../../interfaces'
-import { UseRecordOptions } from './use-record.type'
+import { flat } from '../../../utils/flat/index.js'
+import { RecordJSON } from '../../interfaces/index.js'
+import { UseRecordOptions } from './use-record.type.js'
 
 export const filterRecordParams = function<T extends RecordJSON> (
   record: T,

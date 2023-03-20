@@ -1,13 +1,13 @@
 import { Box, cssClass, Text } from '@adminjs/design-system'
 import React from 'react'
 import { Link } from 'react-router-dom'
-import styled from 'styled-components'
+import { styled } from 'styled-components'
 
-import ViewHelpers from '../../../backend/utils/view-helpers/view-helpers'
-import allowOverride from '../../hoc/allow-override'
-import { useTranslation } from '../../hooks/use-translation'
-import { RecordJSON, ResourceJSON } from '../../interfaces'
-import { getActionElementCss } from '../../utils'
+import ViewHelpers from '../../../backend/utils/view-helpers/view-helpers.js'
+import allowOverride from '../../hoc/allow-override.js'
+import { useTranslation } from '../../hooks/use-translation.js'
+import { RecordJSON, ResourceJSON } from '../../interfaces/index.js'
+import { getActionElementCss } from '../../utils/index.js'
 
 export const BreadcrumbLink = styled(Link)`
   color: ${({ theme }): string => theme.colors.grey60};

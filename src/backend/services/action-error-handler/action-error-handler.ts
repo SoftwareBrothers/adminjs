@@ -1,9 +1,9 @@
-import { ActionContext, RecordActionResponse, BulkActionResponse } from '../../actions/action.interface'
-import ValidationError, { PropertyErrors } from '../../utils/errors/validation-error'
-import ForbiddenError from '../../utils/errors/forbidden-error'
-import NotFoundError from '../../utils/errors/not-found-error'
-import AppError from '../../utils/errors/app-error'
-import RecordError from '../../utils/errors/record-error'
+import { ActionContext, RecordActionResponse, BulkActionResponse } from '../../actions/action.interface.js'
+import ValidationError, { PropertyErrors } from '../../utils/errors/validation-error.js'
+import ForbiddenError from '../../utils/errors/forbidden-error.js'
+import NotFoundError from '../../utils/errors/not-found-error.js'
+import AppError from '../../utils/errors/app-error.js'
+import RecordError from '../../utils/errors/record-error.js'
 
 /**
  * @private

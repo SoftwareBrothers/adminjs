@@ -1,5 +1,5 @@
 import { i18n as I18n, TFunction, TOptions } from 'i18next'
-import startCase from 'lodash/startCase'
+import startCase from 'lodash/startCase.js'
 
 /**
  * @memberof TranslateFunctions
@@ -201,4 +201,15 @@ export const createFunctions = (i18n: I18n): TranslateFunctions => {
     t: i18n.t,
     translate: i18n.t,
   }
+}
+
+/**
+ * ES Modules exports are immutable thus Sinon cannot create stubs for e.g. createFunctions
+ * Wrapping the exports in an object allows Sinon to modify it's properties.
+ *
+ * This prevents Sinon error from appearing:
+ * "TypeError: ES Modules cannot be stubbed"
+ */
+export const __testExports = {
+  createFunctions,
 }

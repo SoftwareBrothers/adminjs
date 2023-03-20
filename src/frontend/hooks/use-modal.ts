@@ -1,9 +1,10 @@
 import type { ModalProps } from '@adminjs/design-system'
 import { useCallback } from 'react'
 import { useDispatch } from 'react-redux'
-import { ModalData, ModalFunctions } from '../interfaces'
-import { hideModal, showModal } from '../store/actions'
-import useTranslation from './use-translation'
+
+import { ModalData, ModalFunctions } from '../interfaces/index.js'
+import { hideModal, showModal } from '../store/actions/index.js'
+import useTranslation from './use-translation.js'
 
 export const useModal = (): ModalFunctions => {
   const dispatch = useDispatch()

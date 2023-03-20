@@ -2,9 +2,9 @@ import { Box, Text, ValueGroup } from '@adminjs/design-system'
 import React, { FC } from 'react'
 import xss from 'xss'
 
-import { EditPropertyProps } from '../base-property-props'
-import allowOverride from '../../../hoc/allow-override'
-import { useTranslation } from '../../../hooks'
+import { EditPropertyProps } from '../base-property-props.js'
+import allowOverride from '../../../hoc/allow-override.js'
+import { useTranslation } from '../../../hooks/index.js'
 
 type InnerHtmlProp = {
   __html: string;

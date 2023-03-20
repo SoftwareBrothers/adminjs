@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react'
-import styled from 'styled-components'
+import { styled } from 'styled-components'
 import { Link as RouterLink } from 'react-router-dom'
 import {
   ButtonCSS,
@@ -8,11 +8,11 @@ import {
 } from '@adminjs/design-system'
 import { useSelector } from 'react-redux'
 
-import allowOverride from '../../../hoc/allow-override'
-import { DrawerProps, ReduxState, RouterProps } from '../../../store'
+import allowOverride from '../../../hoc/allow-override.js'
+import { DrawerProps, ReduxState, RouterProps } from '../../../store/store.js'
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-const StyledLink = styled(({ rounded, ...rest }) => <RouterLink {...rest} />)<ButtonProps>`${ButtonCSS}`
+const StyledLink = styled(({ rounded, to, ...rest }) => <RouterLink to={to} {...rest} />)<ButtonProps>`${ButtonCSS}`
 
 export type StyledBackButtonProps = {
   showInDrawer: boolean;

@@ -2,11 +2,11 @@ import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
 import { MessageBox } from '@adminjs/design-system'
 
-import { NoticeMessageInState, ReduxState } from '../../store/store'
-import { dropNotice } from '../../store/actions/drop-notice'
-import { setNoticeProgress } from '../../store/actions/set-notice-progress'
-import allowOverride from '../../hoc/allow-override'
-import { useTranslation } from '../../hooks'
+import { NoticeMessageInState, ReduxState } from '../../store/store.js'
+import { dropNotice } from '../../store/actions/drop-notice.js'
+import { setNoticeProgress } from '../../store/actions/set-notice-progress.js'
+import allowOverride from '../../hoc/allow-override.js'
+import { useTranslation } from '../../hooks/index.js'
 
 const TIME_TO_DISAPPEAR = 3
 

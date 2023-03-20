@@ -1,14 +1,19 @@
 {
   "presets": [
     "@babel/preset-react",
-    ["@babel/preset-env", {
-      "targets": {
-        "node": "16"
+    [
+      "@babel/preset-env",
+      {
+        "targets": {
+          "node": "18"
+        },
+        "loose": true,
+        "modules": false
       }
-    }],
+    ],
     "@babel/preset-typescript"
   ],
-  "plugins": ["babel-plugin-styled-components"],
+  "plugins": ["babel-plugin-styled-components", "@babel/plugin-syntax-import-assertions"],
   "only": ["src/", "spec/"],
   "ignore": [
     "src/frontend/assets/scripts/app-bundle.development.js",

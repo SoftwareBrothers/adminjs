@@ -1,1 +1,1 @@
-export * from './view-helpers'
+export * from './view-helpers.js'

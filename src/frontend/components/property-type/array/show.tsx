@@ -1,11 +1,11 @@
 import React from 'react'
 import { Section, ValueGroup } from '@adminjs/design-system'
 
-import { flat } from '../../../../utils'
-import { convertToSubProperty } from './convert-to-sub-property'
-import allowOverride from '../../../hoc/allow-override'
-import { ShowPropertyProps } from '../base-property-props'
-import { useTranslation } from '../../../hooks'
+import { flat } from '../../../../utils/index.js'
+import { convertToSubProperty } from './convert-to-sub-property.js'
+import allowOverride from '../../../hoc/allow-override.js'
+import { ShowPropertyProps } from '../base-property-props.js'
+import { useTranslation } from '../../../hooks/index.js'
 
 type Props = ShowPropertyProps & {
   ItemComponent: typeof React.Component;

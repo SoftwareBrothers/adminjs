@@ -1,34 +1,31 @@
-/**
- * @private
- * @fileoverview
- * This script runs process, which bundles all frontend files to `app.bundle.js`.
- * It reruns whenever user changes something.
- */
+import * as url from 'url'
+import runtime from '@babel/plugin-transform-runtime'
+import styled from 'babel-plugin-styled-components'
+import importAssertions from '@babel/plugin-syntax-import-assertions'
 
-const { default: runtime } = require('@babel/plugin-transform-runtime')
-const { default: styled } = require('babel-plugin-styled-components')
-const bundler = require('../src/backend/bundler/bundler')
-const env = require('../src/backend/bundler/bundler-env')
+import bundler from '../src/backend/bundler/bundler.js'
+import env from '../src/backend/bundler/bundler-env.js'
 
 const once = !!process.env.ONCE
+const __dirname = url.fileURLToPath(new URL('.', import.meta.url))
 
 async function build() {
   return bundler({
     name: 'AdminJS',
-    input: `${__dirname}/../src/frontend/bundle-entry.jsx`,
-    file: `${__dirname}/../src/frontend/assets/scripts/app-bundle.${env}.js`,
+    input: `${__dirname}/../lib/frontend/bundle-entry.js`,
+    file: `${__dirname}/../lib/frontend/assets/scripts/app-bundle.${env}.js`,
     minify: env === 'production',
     watch: !once,
     babelConfig: {
-      plugins: [runtime, styled],
+      plugins: [runtime, importAssertions, styled],
       babelHelpers: 'runtime',
       include: [
-        'src/frontend/**',
-        'src/locale/*',
-        'src/utils/**',
-        'src/backend/utils/view-helpers/view-helpers.ts',
-        'src/backend/utils/filter/filter.ts',
-        'src/backend/decorators/**',
+        'lib/frontend/**',
+        'lib/locale/*',
+        'lib/utils/**',
+        'lib/backend/utils/view-helpers/view-helpers.js',
+        'lib/backend/utils/filter/filter.js',
+        'lib/backend/decorators/**',
       ],
     },
   })

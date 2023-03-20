@@ -1,11 +1,11 @@
 import { expect } from 'chai'
 import sinon, { SinonStubbedInstance } from 'sinon'
 
-import PropertyDecorator from './property-decorator'
-import BaseProperty from '../../adapters/property/base-property'
-import AdminJS from '../../../adminjs'
-import ResourceDecorator from '../resource/resource-decorator'
-import { BaseResource } from '../../adapters'
+import PropertyDecorator from './property-decorator.js'
+import BaseProperty from '../../adapters/property/base-property.js'
+import AdminJS from '../../../adminjs.js'
+import ResourceDecorator from '../resource/resource-decorator.js'
+import { BaseResource } from '../../adapters/resource/index.js'
 
 describe('PropertyDecorator', () => {
   const normalName = 'normalName'

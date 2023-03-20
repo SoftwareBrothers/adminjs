@@ -1,8 +1,8 @@
 import React from 'react'
 import { Badge } from '@adminjs/design-system'
 
-import allowOverride from '../../../hoc/allow-override'
-import { ShowPropertyProps } from '../base-property-props'
+import allowOverride from '../../../hoc/allow-override.js'
+import { ShowPropertyProps } from '../base-property-props.js'
 
 const DefaultPropertyValue: React.FC<ShowPropertyProps> = (props) => {
   const { property, record } = props

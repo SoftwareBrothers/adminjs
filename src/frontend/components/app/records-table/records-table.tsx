@@ -1,14 +1,14 @@
 import { Loader, Table, TableBody } from '@adminjs/design-system'
 import React from 'react'
 
-import { ActionResponse } from '../../../../backend/actions/action.interface'
-import allowOverride from '../../../hoc/allow-override'
-import { RecordJSON, ResourceJSON } from '../../../interfaces'
-import { getResourceElementCss } from '../../../utils'
-import NoRecords from './no-records'
-import RecordInList from './record-in-list'
-import RecordsTableHeader from './records-table-header'
-import SelectedRecords from './selected-records'
+import { ActionResponse } from '../../../../backend/actions/action.interface.js'
+import allowOverride from '../../../hoc/allow-override.js'
+import { RecordJSON, ResourceJSON } from '../../../interfaces/index.js'
+import { getResourceElementCss } from '../../../utils/index.js'
+import NoRecords from './no-records.js'
+import RecordInList from './record-in-list.js'
+import RecordsTableHeader from './records-table-header.js'
+import SelectedRecords from './selected-records.js'
 
 /**
  * @alias RecordsTableProps

@@ -1,6 +1,7 @@
-import { flatten } from 'flat'
-import { FlattenParams } from './flat.types'
-import { set } from './set'
+import flat from 'flat'
+
+import { FlattenParams } from './flat.types.js'
+import { set } from './set.js'
 
 /**
  * Merges params together and returns flatten result
@@ -11,7 +12,7 @@ import { set } from './set'
  * @memberof module:flat
  */
 const merge = (params: any = {}, ...mergeParams: Array<any>): FlattenParams => {
-  const flattenParams = flatten(params)
+  const flattenParams = flat.flatten(params)
 
   // reverse because we merge from right
   return mergeParams.reverse().reduce((globalMemo, mergeParam) => (

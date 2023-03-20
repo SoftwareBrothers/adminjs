@@ -1,3 +1,3 @@
-export * from './api-client'
-export * from './overridable-component'
-export * from './data-css-name'
+export * from './api-client.js'
+export * from './overridable-component.js'
+export * from './data-css-name.js'

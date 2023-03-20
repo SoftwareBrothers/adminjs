@@ -1,15 +1,17 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
+// @ts-nocheck
 import { Badge, Box, ButtonGroup, cssClass, H2, H3 } from '@adminjs/design-system'
 import React from 'react'
 import { useNavigate } from 'react-router'
-import allowOverride from '../../../hoc/allow-override'
-import { useActionResponseHandler, useTranslation, useModal } from '../../../hooks'
-import { ActionJSON, buildActionClickHandler } from '../../../interfaces/action'
-import { getActionElementCss, getResourceElementCss } from '../../../utils'
-import Breadcrumbs from '../breadcrumbs'
-import { ActionHeaderProps } from './action-header-props'
-import { actionsToButtonGroup } from './actions-to-button-group'
-import { StyledBackButton } from './styled-back-button'
+
+import allowOverride from '../../../hoc/allow-override.js'
+import { useActionResponseHandler, useTranslation, useModal } from '../../../hooks/index.js'
+import { ActionJSON, buildActionClickHandler } from '../../../interfaces/action/index.js'
+import { getActionElementCss, getResourceElementCss } from '../../../utils/index.js'
+import Breadcrumbs from '../breadcrumbs.js'
+import { ActionHeaderProps } from './action-header-props.js'
+import { actionsToButtonGroup } from './actions-to-button-group.js'
+import { StyledBackButton } from './styled-back-button.js'
 
 /**
  * Header of an action. It renders Action name with buttons for all the actions.

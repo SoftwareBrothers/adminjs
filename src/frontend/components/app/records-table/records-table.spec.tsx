@@ -2,17 +2,17 @@ import React from 'react'
 import { render, RenderResult } from '@testing-library/react'
 import sinon from 'sinon'
 import { expect } from 'chai'
-import factory from 'factory-girl'
-
+import { factory } from 'factory-girl'
 import { Provider } from 'react-redux'
-import { RecordsTable, RecordsTableProps } from './records-table'
-import TestContextProvider from '../../spec/test-context-provider'
-import { ActionJSON, ResourceJSON, RecordJSON, PropertyJSON } from '../../../interfaces'
-import createStore from '../../../store/store'
 
-import '../../spec/resource-json.factory'
-import '../../spec/record-json.factory'
-import '../../spec/property-json.factory'
+import { RecordsTable, RecordsTableProps } from './records-table.js'
+import TestContextProvider from '../../spec/test-context-provider.js'
+import { ActionJSON, ResourceJSON, RecordJSON, PropertyJSON } from '../../../interfaces/index.js'
+import createStore from '../../../store/store.js'
+
+import '../../spec/resource-json.factory.js'
+import '../../spec/record-json.factory.js'
+import '../../spec/property-json.factory.js'
 
 type StubsType = {
   onSelect: sinon.SinonStub<any[], any>;

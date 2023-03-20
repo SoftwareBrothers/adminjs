@@ -1,1 +1,1 @@
-export * from './property-description'
+export * from './property-description.js'

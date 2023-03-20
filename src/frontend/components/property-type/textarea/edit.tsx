@@ -2,10 +2,10 @@
 import React, { memo, useState, FC, useEffect } from 'react'
 import { Input, FormGroup, FormMessage } from '@adminjs/design-system'
 
-import { EditPropertyProps } from '../base-property-props'
-import { recordPropertyIsEqual } from '../record-property-is-equal'
-import { PropertyLabel } from '../utils/property-label'
-import allowOverride from '../../../hoc/allow-override'
+import { EditPropertyProps } from '../base-property-props.js'
+import { recordPropertyIsEqual } from '../record-property-is-equal.js'
+import { PropertyLabel } from '../utils/property-label/index.js'
+import allowOverride from '../../../hoc/allow-override.js'
 
 const Edit: FC<EditPropertyProps> = (props) => {
   const { onChange, property, record } = props

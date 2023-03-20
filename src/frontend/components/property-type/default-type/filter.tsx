@@ -1,9 +1,9 @@
 import React from 'react'
 import { FormGroup, Input, Select } from '@adminjs/design-system'
 
-import allowOverride from '../../../hoc/allow-override'
-import { FilterPropertyProps } from '../base-property-props'
-import PropertyLabel from '../utils/property-label/property-label'
+import allowOverride from '../../../hoc/allow-override.js'
+import { FilterPropertyProps } from '../base-property-props.js'
+import PropertyLabel from '../utils/property-label/property-label.js'
 
 const Filter: React.FC<FilterPropertyProps> = (props) => {
   const { property, onChange, filter } = props

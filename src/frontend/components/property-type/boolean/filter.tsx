@@ -1,10 +1,10 @@
 import React from 'react'
 import { FormGroup, Select } from '@adminjs/design-system'
 
-import mapValue from './map-value'
-import { FilterPropertyProps } from '../base-property-props'
-import allowOverride from '../../../hoc/allow-override'
-import PropertyLabel from '../utils/property-label/property-label'
+import mapValue from './map-value.js'
+import { FilterPropertyProps } from '../base-property-props.js'
+import allowOverride from '../../../hoc/allow-override.js'
+import PropertyLabel from '../utils/property-label/property-label.js'
 
 const boolValue = (s: string): boolean => {
   if (/true/i.test(s)) {

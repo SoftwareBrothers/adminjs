@@ -1,10 +1,10 @@
 import React from 'react'
 import { Text, Button, Icon, InfoBox } from '@adminjs/design-system'
 
-import { ResourceJSON } from '../../../interfaces'
-import { useTranslation } from '../../../hooks'
-import allowOverride from '../../../hoc/allow-override'
-import ActionButton from '../action-button/action-button'
+import { ResourceJSON } from '../../../interfaces/index.js'
+import { useTranslation } from '../../../hooks/index.js'
+import allowOverride from '../../../hoc/allow-override.js'
+import ActionButton from '../action-button/action-button.js'
 
 export type NoRecordsProps = {
   resource: ResourceJSON;

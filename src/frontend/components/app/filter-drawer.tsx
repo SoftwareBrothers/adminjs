@@ -6,11 +6,11 @@ import {
 import React, { MouseEvent, SyntheticEvent, useEffect, useRef, useState } from 'react'
 import { useLocation, useNavigate, useParams } from 'react-router-dom'
 
-import allowOverride from '../../hoc/allow-override'
-import { useTranslation } from '../../hooks'
-import { RecordJSON, ResourceJSON } from '../../interfaces'
-import { getResourceElementCss } from '../../utils'
-import PropertyType from '../property-type'
+import allowOverride from '../../hoc/allow-override.js'
+import { useTranslation } from '../../hooks/index.js'
+import { RecordJSON, ResourceJSON } from '../../interfaces/index.js'
+import { getResourceElementCss } from '../../utils/index.js'
+import BasePropertyComponent from '../property-type/index.js'
 
 export type FilterProps = {
   resource: ResourceJSON;
@@ -118,7 +118,7 @@ const FilterDrawer: React.FC<FilterProps> = (props) => {
         </Box>
         <Box my="x3">
           {properties.map((property) => (
-            <PropertyType
+            <BasePropertyComponent
               key={property.propertyPath}
               where="filter"
               onChange={handleChange}

@@ -1,8 +1,8 @@
 import { expect } from 'chai'
-import { flat } from '../../../utils/flat'
 
-import updateRecord from './update-record'
-import { RecordJSON } from '../../interfaces'
+import { flat } from '../../../utils/flat/index.js'
+import updateRecord from './update-record.js'
+import { RecordJSON } from '../../interfaces/index.js'
 
 describe('updateRecord', function () {
   const newPropertyName = 'newProperty'

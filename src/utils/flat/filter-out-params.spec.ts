@@ -1,5 +1,6 @@
 import { expect } from 'chai'
-import { filterOutParams } from './filter-out-params'
+
+import { filterOutParams } from './filter-out-params.js'
 
 describe('filterOutParams', () => {
   const params = {

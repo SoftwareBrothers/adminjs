@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 import { connect } from 'react-redux'
-import { addNotice } from '../store/actions/add-notice'
+
+import { addNotice } from '../store/actions/add-notice.js'
 
 /**
  * NoticeMessage which can be presented as a "Toast" message.

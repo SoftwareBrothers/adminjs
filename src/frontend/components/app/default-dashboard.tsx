@@ -1,8 +1,9 @@
+// @ts-nocheck
 import React from 'react'
-import styled from 'styled-components'
+import { styled } from 'styled-components'
 import { Box, Button, H2, H5, Illustration, IllustrationProps, Text } from '@adminjs/design-system'
 
-import { useTranslation } from '../../hooks'
+import { useTranslation } from '../../hooks/index.js'
 
 const pageHeaderHeight = 284
 const pageHeaderPaddingY = 74
@@ -107,6 +108,7 @@ Card.defaultProps = {
 
 export const Dashboard: React.FC = () => {
   const { translateMessage, translateButton } = useTranslation()
+
   return (
     <Box>
       <DashboardHeader />

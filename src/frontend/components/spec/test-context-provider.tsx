@@ -1,10 +1,11 @@
 import React, { ReactNode } from 'react'
-import { StaticRouter } from 'react-router-dom/server'
-import { ThemeProvider } from 'styled-components'
+import { StaticRouter } from 'react-router-dom/server.js'
 import { combineStyles } from '@adminjs/design-system'
+import { ThemeProvider } from 'styled-components'
 import { I18nextProvider } from 'react-i18next'
-import { defaultLocale } from '../../../locale'
-import initTranslations from '../../utils/adminjs.i18n'
+
+import { defaultLocale } from '../../../locale/index.js'
+import initTranslations from '../../utils/adminjs.i18n.js'
 
 const theme = combineStyles({})
 

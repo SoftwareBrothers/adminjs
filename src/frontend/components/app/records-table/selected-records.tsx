@@ -1,13 +1,13 @@
 import React from 'react'
 import { TableCaption, Title, ButtonGroup, Box } from '@adminjs/design-system'
-
 import { useNavigate } from 'react-router'
-import { ActionJSON, buildActionClickHandler, RecordJSON, ResourceJSON } from '../../../interfaces'
-import getBulkActionsFromRecords from './utils/get-bulk-actions-from-records'
-import { useActionResponseHandler, useTranslation, useModal } from '../../../hooks'
-import { actionsToButtonGroup } from '../action-header/actions-to-button-group'
-import allowOverride from '../../../hoc/allow-override'
-import { getResourceElementCss } from '../../../utils'
+
+import { ActionJSON, buildActionClickHandler, RecordJSON, ResourceJSON } from '../../../interfaces/index.js'
+import getBulkActionsFromRecords from './utils/get-bulk-actions-from-records.js'
+import { useActionResponseHandler, useTranslation, useModal } from '../../../hooks/index.js'
+import { actionsToButtonGroup } from '../action-header/actions-to-button-group.js'
+import allowOverride from '../../../hoc/allow-override.js'
+import { getResourceElementCss } from '../../../utils/index.js'
 
 type SelectedRecordsProps = {
   resource: ResourceJSON;

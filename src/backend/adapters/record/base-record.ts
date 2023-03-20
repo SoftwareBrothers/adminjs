@@ -1,11 +1,11 @@
-import { flat, GetOptions } from '../../../utils/flat'
-import { ParamsType } from './params.type'
-import BaseResource from '../resource/base-resource'
-import ValidationError, { PropertyErrors } from '../../utils/errors/validation-error'
-import RecordError from '../../utils/errors/record-error'
-import { RecordJSON } from '../../../frontend/interfaces'
-import { CurrentAdmin } from '../../../current-admin.interface'
-import { ActionContext } from '../../actions'
+import { flat, GetOptions } from '../../../utils/flat/index.js'
+import { ParamsType } from './params.type.js'
+import BaseResource from '../resource/base-resource.js'
+import ValidationError, { PropertyErrors } from '../../utils/errors/validation-error.js'
+import RecordError from '../../utils/errors/record-error.js'
+import { RecordJSON } from '../../../frontend/interfaces/index.js'
+import { CurrentAdmin } from '../../../current-admin.interface.js'
+import { ActionContext } from '../../actions/index.js'
 
 /**
  * Representation of an particular ORM/ODM Record in given Resource in AdminJS

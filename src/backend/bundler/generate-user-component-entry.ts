@@ -1,6 +1,7 @@
 import * as path from 'path'
 import slash from 'slash'
-import AdminJS from '../../adminjs'
+
+import AdminJS from '../../adminjs.js'
 
 /**
  * Generates entry file for all UsersComponents.

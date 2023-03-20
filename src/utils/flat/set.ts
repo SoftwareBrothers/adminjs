@@ -1,8 +1,9 @@
-import { flatten } from 'flat'
-import { DELIMITER } from './constants'
-import { FlattenParams } from '../flat'
-import { propertyKeyRegex } from './property-key-regex'
-import { pathToParts } from './path-to-parts'
+import flat from 'flat'
+
+import { DELIMITER } from './constants.js'
+import { FlattenParams } from './flat.types.js'
+import { propertyKeyRegex } from './property-key-regex.js'
+import { pathToParts } from './path-to-parts.js'
 
 const isObject = (value: any): boolean => {
   // Node environment
@@ -35,7 +36,7 @@ const set = (params: FlattenParams = {}, propertyPath: string, value?: any): Fla
 
   if (typeof value !== 'undefined') {
     if (isObject(value) && !(value instanceof Date)) {
-      const flattened = flatten(value) as any
+      const flattened = flat.flatten(value) as any
 
       if (Object.keys(flattened).length) {
         Object.keys(flattened).forEach((key) => {

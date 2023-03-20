@@ -1,4 +1,4 @@
-import { Paths } from '../store'
+import { Paths } from '../store.js'
 
 export const PATHS_INITIALIZE = 'PATHS_INITIALIZE'
 

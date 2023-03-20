@@ -1,12 +1,13 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 import { expect } from 'chai'
 import sinon from 'sinon'
-import ActionDecorator from './action-decorator'
-import AdminJS from '../../../adminjs'
-import BaseResource from '../../adapters/resource/base-resource'
-import { ActionRequest, ActionContext, ActionResponse, Before, After } from '../../actions/action.interface'
-import ForbiddenError from '../../utils/errors/forbidden-error'
-import ValidationError from '../../utils/errors/validation-error'
+
+import ActionDecorator from './action-decorator.js'
+import AdminJS from '../../../adminjs.js'
+import BaseResource from '../../adapters/resource/base-resource.js'
+import { ActionRequest, ActionContext, ActionResponse, Before, After } from '../../actions/action.interface.js'
+import ForbiddenError from '../../utils/errors/forbidden-error.js'
+import ValidationError from '../../utils/errors/validation-error.js'
 
 describe('ActionDecorator', function () {
   const request = { response: true } as unknown as ActionRequest

@@ -1,10 +1,10 @@
-import mergeWith from 'lodash/mergeWith'
-import { ResourceDecorator } from '..'
-import AdminJS from '../../../../adminjs'
-import { Action, ActionResponse, ACTIONS } from '../../../actions'
+import mergeWith from 'lodash/mergeWith.js'
 
-import { BaseResource } from '../../../adapters'
-import { ActionDecorator } from '../../action'
+import ResourceDecorator from '../resource-decorator.js'
+import AdminJS from '../../../../adminjs.js'
+import { Action, ActionResponse, ACTIONS } from '../../../actions/index.js'
+import { BaseResource } from '../../../adapters/index.js'
+import { ActionDecorator } from '../../action/index.js'
 
 export type DecoratedActions = {[key: string]: ActionDecorator}
 

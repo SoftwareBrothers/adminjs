@@ -1,1 +1,1 @@
-export * from './build-feature'
+export * from './build-feature.js'

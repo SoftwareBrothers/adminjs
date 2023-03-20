@@ -1,9 +1,13 @@
 import path from 'path'
-import AdminJS from '../../adminjs'
-import { ComponentLoader } from '../utils'
-import generateUserComponentEntry from './generate-user-component-entry'
+import * as url from 'url'
 
-const exampleComponent = '../../../spec/fixtures/example-component'
+import AdminJS from '../../adminjs.js'
+import { ComponentLoader } from '../utils/index.js'
+import generateUserComponentEntry from './generate-user-component-entry.js'
+
+const __dirname = url.fileURLToPath(new URL('.', import.meta.url))
+
+const exampleComponent = '../../../spec/fixtures/example-component.js'
 const entryPath = './'
 
 describe('generateUserComponentEntry', function () {
@@ -38,7 +42,7 @@ describe('generateUserComponentEntry', function () {
     const entryFile = generateUserComponentEntry(adminJs, entryPath)
 
     expect(entryFile).to.have.string([
-      `import ${componentId} from '${filePath}'`,
+      `import ${componentId} from '${filePath.replace('.js', '')}'`,
       `AdminJS.UserComponents.${componentId} = ${componentId}`,
     ].join('\n'))
 

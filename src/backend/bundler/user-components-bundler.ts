@@ -1,11 +1,12 @@
 import * as fs from 'fs'
 import * as path from 'path'
 import * as util from 'util'
-import bundler from './bundler'
-import generateEntry from './generate-user-component-entry'
-import { ADMIN_JS_TMP_DIR } from '../../constants'
-import env from './bundler-env'
-import AdminJS from '../..'
+
+import bundler from './bundler.js'
+import generateEntry from './generate-user-component-entry.js'
+import { ADMIN_JS_TMP_DIR } from '../../constants.js'
+import env from './bundler-env.js'
+import AdminJS from '../../adminjs.js'
 
 const entryPath = path.join(ADMIN_JS_TMP_DIR, '.entry.js')
 const outPath = path.join(ADMIN_JS_TMP_DIR, 'bundle.js')

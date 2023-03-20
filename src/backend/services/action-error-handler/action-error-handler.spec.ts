@@ -1,14 +1,14 @@
 import sinon from 'sinon'
 import { expect } from 'chai'
 
-import { ActionContext } from '../../actions/action.interface'
-import BaseResource from '../../adapters/resource/base-resource'
-import { CurrentAdmin } from '../../../current-admin.interface'
-import BaseRecord from '../../adapters/record/base-record'
-import ValidationError from '../../utils/errors/validation-error'
-import ActionErrorHandler from './action-error-handler'
-import ForbiddenError from '../../utils/errors/forbidden-error'
-import { ActionDecorator } from '../../decorators'
+import { ActionContext } from '../../actions/action.interface.js'
+import BaseResource from '../../adapters/resource/base-resource.js'
+import { CurrentAdmin } from '../../../current-admin.interface.js'
+import BaseRecord from '../../adapters/record/base-record.js'
+import ValidationError from '../../utils/errors/validation-error.js'
+import ActionErrorHandler from './action-error-handler.js'
+import ForbiddenError from '../../utils/errors/forbidden-error.js'
+import { ActionDecorator } from '../../decorators/index.js'
 
 describe('ActionErrorHandler', function () {
   let resource: BaseResource

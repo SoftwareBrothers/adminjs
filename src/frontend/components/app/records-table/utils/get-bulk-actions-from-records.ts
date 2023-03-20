@@ -1,4 +1,4 @@
-import { ActionJSON, RecordJSON } from '../../../../interfaces'
+import { ActionJSON, RecordJSON } from '../../../../interfaces/index.js'
 
 const getBulkActionsFromRecords = (records: Array<RecordJSON>): Array<ActionJSON> => {
   const actions = Object.values(records.reduce((memo, record) => ({

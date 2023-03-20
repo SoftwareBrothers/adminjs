@@ -1,7 +1,7 @@
-import { Action, RecordActionResponse } from '../action.interface'
-import NotFoundError from '../../utils/errors/not-found-error'
-import populator from '../../utils/populator/populator'
-import { paramConverter } from '../../../utils/param-converter'
+import { Action, RecordActionResponse } from '../action.interface.js'
+import NotFoundError from '../../utils/errors/not-found-error.js'
+import populator from '../../utils/populator/populator.js'
+import { paramConverter } from '../../../utils/param-converter/index.js'
 
 /**
  * @implements Action

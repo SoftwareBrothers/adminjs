@@ -3,14 +3,14 @@ import chaiChange from 'chai-change'
 import sinon from 'sinon'
 import sinonChai from 'sinon-chai'
 import chaiAsPromised from 'chai-as-promised'
-import { ParamsType } from './params.type'
 
-import BaseRecord from './base-record'
-import BaseResource from '../resource/base-resource'
-import BaseProperty from '../property/base-property'
-import ValidationError, { PropertyErrors } from '../../utils/errors/validation-error'
-import RecordError from '../../utils/errors/record-error'
-import { ActionDecorator, ResourceDecorator } from '../../decorators'
+import { ParamsType } from './params.type.js'
+import BaseRecord from './base-record.js'
+import BaseResource from '../resource/base-resource.js'
+import BaseProperty from '../property/base-property.js'
+import ValidationError, { PropertyErrors } from '../../utils/errors/validation-error.js'
+import RecordError from '../../utils/errors/record-error.js'
+import { ActionDecorator, ResourceDecorator } from '../../decorators/index.js'
 
 chai.use(chaiAsPromised)
 chai.use(chaiChange)

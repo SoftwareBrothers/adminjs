@@ -2,17 +2,17 @@
 window.global = {}
 
 import React from 'react'
-import Redux from 'redux'
+import * as Redux from 'redux'
 import ReactDOM from 'react-dom'
 import { createRoot } from 'react-dom/client'
-import ReactRedux from 'react-redux'
+import * as ReactRedux from 'react-redux'
 import ReactRouter from 'react-router'
 import ReactRouterDOM from 'react-router-dom'
 import PropTypes from 'prop-types'
-import * as styled from 'styled-components'
 import ReactSelectAsync from 'react-select/async'
 import ReactSelectCreatable from 'react-select/creatable'
 import * as ReactSelect from 'react-select'
+import * as styled from 'styled-components'
 
 window.React = React
 window.ReactDOM = ReactDOM
@@ -30,5 +30,7 @@ window.ReactSelectCreatable = ReactSelectCreatable
 export {
   React,
   ReactDOM,
+  Redux,
   ReactRedux,
+  styled,
 }

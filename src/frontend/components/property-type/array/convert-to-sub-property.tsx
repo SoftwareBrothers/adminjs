@@ -1,5 +1,5 @@
-import { DELIMITER } from '../../../../utils/flat/constants'
-import { PropertyJSON } from '../../../interfaces'
+import { DELIMITER } from '../../../../utils/flat/constants.js'
+import { PropertyJSON } from '../../../interfaces/index.js'
 
 export const getSubpropertyPath = (path: string, index: number) => [path, index].join(DELIMITER)
 export const getIndexFromSubpropertyPath = (subpropertyPath: string) => {

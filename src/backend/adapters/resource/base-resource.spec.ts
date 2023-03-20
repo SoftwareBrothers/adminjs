@@ -2,12 +2,12 @@ import chai, { expect } from 'chai'
 import sinon from 'sinon'
 import chaiAsPromised from 'chai-as-promised'
 
-import BaseResource from './base-resource'
-import NotImplementedError from '../../utils/errors/not-implemented-error'
-import Filter from '../../utils/filter/filter'
-import BaseRecord from '../record/base-record'
-import AdminJS from '../../../adminjs'
-import ResourceDecorator from '../../decorators/resource/resource-decorator'
+import BaseResource from './base-resource.js'
+import NotImplementedError from '../../utils/errors/not-implemented-error.js'
+import Filter from '../../utils/filter/filter.js'
+import BaseRecord from '../record/base-record.js'
+import AdminJS from '../../../adminjs.js'
+import ResourceDecorator from '../../decorators/resource/resource-decorator.js'
 
 chai.use(chaiAsPromised)
 

@@ -1,10 +1,10 @@
 import React from 'react'
 import { Section, ValueGroup } from '@adminjs/design-system'
 
-import { BasePropertyProps } from '../base-property-props'
-import { convertToSubProperty } from './convert-to-sub-property'
-import allowOverride from '../../../hoc/allow-override'
-import { useTranslation } from '../../../hooks'
+import { BasePropertyProps } from '../base-property-props.js'
+import { convertToSubProperty } from './convert-to-sub-property.js'
+import allowOverride from '../../../hoc/allow-override.js'
+import { useTranslation } from '../../../hooks/index.js'
 
 interface Props extends Record<string, unknown> {
   ItemComponent: typeof React.Component;

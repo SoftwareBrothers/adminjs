@@ -1,13 +1,14 @@
 import { ButtonGroupProps } from '@adminjs/design-system'
 import { expect } from 'chai'
 import i18n from 'i18next'
-import factory from 'factory-girl'
-import { ActionJSON, ModalFunctions } from '../../../interfaces'
-import { actionsToButtonGroup } from './actions-to-button-group'
-import { createFunctions } from '../../../../utils/translate-functions.factory'
-import '../../spec/action-json.factory'
+import { factory } from 'factory-girl'
 
-const translateFunctions = createFunctions(i18n)
+import { ActionJSON, ModalFunctions } from '../../../interfaces/index.js'
+import { actionsToButtonGroup } from './actions-to-button-group.js'
+import { createFunctions } from '../../../../utils/translate-functions.factory.js'
+import '../../spec/action-json.factory.js'
+
+const translateFunctions = createFunctions(i18n as any)
 
 const modalFunctions: ModalFunctions = {
   closeModal: () => { /* noop */ },

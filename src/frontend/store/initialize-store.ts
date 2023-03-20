@@ -1,5 +1,6 @@
 import { Store } from 'redux'
-import createStore, { ReduxState } from './store'
+
+import createStore, { ReduxState } from './store.js'
 import {
   initializeLocale,
   initializeResources,
@@ -10,13 +11,13 @@ import {
   initializePages,
   setCurrentAdmin,
   initializeVersions,
-} from './actions'
+} from './actions/index.js'
 
-import AdminJS from '../../adminjs'
-import { CurrentAdmin } from '../../current-admin.interface'
-import pagesToStore from './pages-to-store'
-import { getBranding, getAssets, getLocales } from '../../backend/utils/options-parser/options-parser'
-import { defaultLocale } from '../../locale'
+import AdminJS from '../../adminjs.js'
+import { CurrentAdmin } from '../../current-admin.interface.js'
+import pagesToStore from './pages-to-store.js'
+import { getBranding, getAssets, getLocales } from '../../backend/utils/options-parser/options-parser.js'
+import { defaultLocale } from '../../locale/index.js'
 
 export const initializeStore = async (
   admin: AdminJS,

@@ -1,2 +1,2 @@
-export * from './populator'
-export * from './populate-property'
+export * from './populator.js'
+export * from './populate-property.js'

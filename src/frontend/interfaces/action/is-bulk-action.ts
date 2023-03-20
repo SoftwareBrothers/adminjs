@@ -1,6 +1,6 @@
-import { BulkActionParams } from '../../../backend/utils/view-helpers/view-helpers'
-import { ActionJSON } from '..'
-import { DifferentActionParams } from '../../hooks/use-action/use-action.types'
+import { BulkActionParams } from '../../../backend/utils/view-helpers/view-helpers.js'
+import { ActionJSON } from '../action/index.js'
+import { DifferentActionParams } from '../../hooks/use-action/use-action.types.js'
 
 export const isBulkAction = (
   params: DifferentActionParams,

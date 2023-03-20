@@ -1,1 +1,2 @@
-export { default as BaseProperty, PropertyType } from './base-property'
+export { default as BaseProperty } from './base-property.js'
+export type { PropertyType } from './base-property.js'

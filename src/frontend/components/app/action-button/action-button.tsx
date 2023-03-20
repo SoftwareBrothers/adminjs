@@ -3,12 +3,12 @@
 /* eslint-disable no-restricted-globals */
 
 import React, { ReactElement } from 'react'
-import { ActionResponse } from '../../../../backend/actions/action.interface'
 
-import allowOverride from '../../../hoc/allow-override'
-import { useAction } from '../../../hooks'
-import { ActionJSON, buildActionTestId } from '../../../interfaces'
-import { getActionElementCss } from '../../../utils'
+import { ActionResponse } from '../../../../backend/actions/action.interface.js'
+import allowOverride from '../../../hoc/allow-override.js'
+import { useAction } from '../../../hooks/index.js'
+import { ActionJSON, buildActionTestId } from '../../../interfaces/index.js'
+import { getActionElementCss } from '../../../utils/index.js'
 
 /**
  * @alias ActionButtonProps

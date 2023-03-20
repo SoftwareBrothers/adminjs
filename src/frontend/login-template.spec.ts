@@ -1,7 +1,7 @@
 import { expect } from 'chai'
 
-import loginTemplate from './login-template'
-import AdminJS from '../adminjs'
+import loginTemplate from './login-template.js'
+import AdminJS from '../adminjs.js'
 
 describe('login-template', function () {
   const action = '/login'

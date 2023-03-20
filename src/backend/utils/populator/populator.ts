@@ -1,6 +1,6 @@
-import BaseRecord from '../../adapters/record/base-record'
-import { populateProperty } from './populate-property'
-import { ActionContext } from '../../actions'
+import BaseRecord from '../../adapters/record/base-record.js'
+import { populateProperty } from './populate-property.js'
+import { ActionContext } from '../../actions/index.js'
 
 /**
  * @load ./populator.doc.md

@@ -6,9 +6,9 @@ module.exports = {
     node: true,
     mocha: true,
   },
-  extends: ['airbnb', 'plugin:@typescript-eslint/recommended', 'plugin:mocha/recommended'],
+  extends: ['airbnb', 'plugin:@typescript-eslint/recommended', 'plugin:mocha/recommended', 'plugin:import/typescript'],
   parserOptions: {
-    ecmaVersion: 2018,
+    ecmaVersion: 2020,
     sourceType: 'module',
   },
   rules: {
@@ -29,7 +29,7 @@ module.exports = {
     'no-restricted-syntax': 'off',
     'no-await-in-loop': 'off',
     'object-curly-newline': 'off',
-    'import/extensions': 'off',
+    'import/extensions': [2, 'ignorePackages'],
     'mocha/no-hooks-for-single-case': 'off',
     'no-param-reassign': 'off',
     'default-param-last': 'off',
@@ -73,6 +73,12 @@ module.exports = {
       },
     },
     {
+      files: ['*.cjs'],
+      rules: {
+        'import/no-commonjs': 'off',
+      },
+    },
+    {
       files: ['*.tsx'],
       rules: {
         'react/prop-types': 'off',
@@ -87,6 +93,13 @@ module.exports = {
       },
     },
   ],
+  settings: {
+    'import/resolver': {
+      node: {
+        extensions: ['.js', '.jsx', '.ts', '.tsx'],
+      },
+    },
+  },
   globals: {
     expect: true,
     factory: true,

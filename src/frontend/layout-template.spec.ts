@@ -1,7 +1,8 @@
 import { expect } from 'chai'
-import layoutTemplate from './layout-template'
-import AdminJS from '../adminjs'
-import { BrandingOptions } from '../adminjs-options.interface'
+
+import layoutTemplate from './layout-template.js'
+import AdminJS from '../adminjs.js'
+import { BrandingOptions } from '../adminjs-options.interface.js'
 
 describe('layoutTemplate', function () {
   context('AdminJS with branding options set as a function', function () {

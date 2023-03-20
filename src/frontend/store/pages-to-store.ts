@@ -1,6 +1,5 @@
-import { AdminJSOptions } from '../../adminjs-options.interface'
-
-import { PageJSON } from '../interfaces'
+import { AdminJSOptions } from '../../adminjs-options.interface.js'
+import { PageJSON } from '../interfaces/index.js'
 
 const pagesToStore = (pages: AdminJSOptions['pages'] = {}): Array<PageJSON> => Object.entries(pages)
   .map(([key, adminPage]) => ({

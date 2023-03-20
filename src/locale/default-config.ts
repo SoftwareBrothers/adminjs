@@ -1,5 +1,6 @@
 import type { InitOptions } from 'i18next'
-import type { Locale } from './config'
+
+import type { Locale } from './config.js'
 
 const DEFAULT_LOAD = 'currentOnly'
 export const DEFAULT_NS = 'translation'

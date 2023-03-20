@@ -1,6 +1,7 @@
 /* eslint-disable no-console */
 import React, { useState } from 'react'
-import { UseLocalStorageResult } from './use-local-storage-result.type'
+
+import { UseLocalStorageResult } from './use-local-storage-result.type.js'
 
 /**
  * @load ./use-local-storage.doc.md

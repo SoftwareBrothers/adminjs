@@ -1,13 +1,14 @@
 import { render, RenderResult } from '@testing-library/react'
 import { expect } from 'chai'
-import factory from 'factory-girl'
+import { factory } from 'factory-girl'
 import React from 'react'
-import TestContextProvider from '../../spec/test-context-provider'
-import PropertyHeader from './property-header'
 
-import { PropertyJSON } from '../../../interfaces'
-import '../../spec/initialize-translations'
-import '../../spec/property-json.factory'
+import TestContextProvider from '../../spec/test-context-provider.js'
+import PropertyHeader from './property-header.js'
+import { PropertyJSON } from '../../../interfaces/index.js'
+
+import '../../spec/initialize-translations.js'
+import '../../spec/property-json.factory.js'
 
 const renderSubject = (
   property: PropertyJSON,
@@ -42,7 +43,7 @@ describe('<PropertyHeader />', function () {
   context('render not selected but searchable field', function () {
     it('renders a client side translated label', async function () {
       const { findByText } = renderSubject(property, sortBy, direction)
-      const translatedLabel = 'Some Property 1'
+      const translatedLabel = 'Some Property 2'
 
       const label = await findByText(translatedLabel)
 

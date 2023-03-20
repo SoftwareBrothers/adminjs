@@ -10,7 +10,8 @@ import {
   IconProps,
 } from '@adminjs/design-system'
 import { PropsWithChildren } from 'react'
-import { CurrentAdmin } from '../../../current-admin.interface'
+
+import { CurrentAdmin } from '../../../current-admin.interface.js'
 
 export type LayoutElement =
   string |

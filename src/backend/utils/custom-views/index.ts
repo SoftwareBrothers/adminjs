@@ -1,1 +1,1 @@
-export * from './get-component-html'
+export * from './get-component-html.js'

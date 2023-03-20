@@ -4,11 +4,11 @@ import { Trans } from 'react-i18next'
 import { useSelector } from 'react-redux'
 import { useParams } from 'react-router'
 
-import allowOverride from '../../hoc/allow-override'
-import withNoSSR from '../../hoc/with-no-ssr'
-import { useTranslation } from '../../hooks'
-import { ReduxState } from '../../store/store'
-import ErrorBoundary from '../app/error-boundary'
+import allowOverride from '../../hoc/allow-override.js'
+import withNoSSR from '../../hoc/with-no-ssr.js'
+import { useTranslation } from '../../hooks/index.js'
+import { ReduxState } from '../../store/store.js'
+import ErrorBoundary from '../app/error-boundary.js'
 
 declare const AdminJS: {
   UserComponents: Record<string, FC>;

@@ -1,17 +1,17 @@
-import AdminJS from '../../../adminjs'
-import PropertyOptions from './property-options.interface'
-import BaseResource from '../../adapters/resource/base-resource'
-import BaseProperty, { PropertyType } from '../../adapters/property/base-property'
-import ResourceDecorator from '../resource/resource-decorator'
-import { PropertyPlace, BasePropertyJSON } from '../../../frontend/interfaces'
-import { overrideFromOptions } from './utils'
+import AdminJS from '../../../adminjs.js'
+import PropertyOptions from './property-options.interface.js'
+import BaseResource from '../../adapters/resource/base-resource.js'
+import BaseProperty, { PropertyType } from '../../adapters/property/base-property.js'
+import ResourceDecorator from '../resource/resource-decorator.js'
+import { PropertyPlace, BasePropertyJSON } from '../../../frontend/interfaces/index.js'
+import { overrideFromOptions } from './utils/override-from-options.js'
 
 /**
  * Decorates property
  *
  * @category Decorators
  */
-class PropertyDecorator {
+export class PropertyDecorator {
   public property: BaseProperty
 
   /**
@@ -178,7 +178,7 @@ class PropertyDecorator {
    * @param {'list' | 'edit' | 'show' | 'filter'} where
    */
   isVisible(where: PropertyPlace): boolean {
-    if (typeof this.options.isVisible === 'object' && this.options.isVisible !== 'null') {
+    if (typeof this.options.isVisible === 'object' && this.options.isVisible !== null) {
       return !!this.options.isVisible[where]
     }
     if (typeof this.options.isVisible === 'boolean') {
