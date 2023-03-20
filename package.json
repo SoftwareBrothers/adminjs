@@ -87,6 +87,7 @@
     "@adminjs/design-system": "^4.0.0-beta-v4.1",
     "@babel/core": "^7.20.12",
     "@babel/parser": "^7.20.15",
+    "@babel/plugin-syntax-import-assertions": "^7.20.0",
     "@babel/plugin-transform-runtime": "^7.19.6",
     "@babel/preset-env": "^7.20.2",
     "@babel/preset-react": "^7.18.6",

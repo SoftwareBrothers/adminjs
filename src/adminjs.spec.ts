@@ -69,7 +69,7 @@ describe('AdminJS', function () {
           }],
           '@babel/preset-typescript',
         ],
-        plugins: ['babel-plugin-styled-components'],
+        plugins: ['babel-plugin-styled-components', '@babel/plugin-syntax-import-assertions'],
         only: ['src/', 'spec/'],
         ignore: [
           'src/frontend/assets/scripts/app-bundle.development.js',

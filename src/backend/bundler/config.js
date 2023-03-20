@@ -41,7 +41,9 @@ export const globals = {
 
 export const extensions = ['.mjs', '.cjs', '.js', '.jsx', '.json', '.ts', '.tsx', '.scss']
 
-export const plugins = async ({ babelConfig = {}, commonJSConfig = {}, minify = false } = {}) => {
+export const plugins = async ({ babelConfig = {
+  plugins: ['@babel/plugin-syntax-import-assertions'],
+}, commonJSConfig = {}, minify = false } = {}) => {
   const pluginStack = [
     resolve({
       extensions,
