@@ -6,6 +6,7 @@ import { EditPropertyProps } from '../base-property-props.js'
 import { recordPropertyIsEqual } from '../record-property-is-equal.js'
 import { PropertyLabel } from '../utils/property-label/index.js'
 import allowOverride from '../../../hoc/allow-override.js'
+import { useTranslation } from '../../../index.js'
 
 type CombinedProps = EditPropertyProps
 
@@ -24,16 +25,19 @@ const Edit: FC<CombinedProps> = (props) => {
 
 const SelectEdit: FC<CombinedProps> = (props) => {
   const { record, property, onChange } = props
+  const { translateProperty } = useTranslation()
   if (!property.availableValues) {
     return null
   }
   const propValue = record.params?.[property.path] ?? ''
-  const selected = property.availableValues.find((av) => av.value === propValue)
+  // eslint-disable-next-line max-len
+  const availableValues = property.availableValues.map((v) => ({ ...v, label: translateProperty(v.label) }))
+  const selected = availableValues.find((av) => av.value === propValue)
 
   return (
     <Select
       value={selected}
-      options={property.availableValues}
+      options={availableValues}
       onChange={(s) => onChange(property.path, s?.value ?? '')}
       isDisabled={property.isDisabled}
       {...property.props}

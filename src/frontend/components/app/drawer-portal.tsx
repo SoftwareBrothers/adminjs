@@ -39,7 +39,7 @@ const DrawerWrapper: React.FC<DrawerWrapperProps> = ({ onMount, onUnmount }) => 
   }, [])
 
   return (
-    <ThemeProvider theme={(window as any).THEME}>
+    <ThemeProvider theme={window.THEME}>
       <Drawer id={DRAWER_PORTAL_ID} className="hidden" data-css="drawer" />
     </ThemeProvider>
   )

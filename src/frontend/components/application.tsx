@@ -39,6 +39,10 @@ const App: React.FC = () => {
   const resourceUrl = h.resourceUrl({ resourceId })
   const pageUrl = h.pageUrl(pageName)
 
+  useEffect(() => {
+    console.log(window.THEME)
+  }, [])
+
   /**
    * When defining AdminJS routes, we use Routes component twice.
    * This results in warnings appearing in console, for example about not being able to locate

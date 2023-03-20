@@ -58,7 +58,7 @@ const List: React.FC<ActionProps> = ({ resource, setTag }) => {
   const contentTag = getActionElementCss(resource.id, 'list', 'table-wrapper')
 
   return (
-    <Box variant="white" data-css={contentTag}>
+    <Box variant="container" data-css={contentTag}>
       <RecordsTable
         resource={resource}
         records={records}
