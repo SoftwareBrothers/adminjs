@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { combineStyles } from '@adminjs/design-system'
-import merge from 'lodash/merge'
+import merge from 'lodash/merge.js'
 
 import ViewHelpers from '../backend/utils/view-helpers/view-helpers.js'
 import { initializeStore } from './store/index.js'
