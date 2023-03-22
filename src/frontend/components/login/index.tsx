@@ -1,14 +1,24 @@
 import {
-  Box, Button, FormGroup, H2, H5, Illustration,
-  Input, Label, MadeWithLove, MessageBox, Text, BoxProps,
+  Box,
+  BoxProps,
+  Button,
+  FormGroup,
+  H2,
+  H5,
+  Illustration,
+  Input,
+  Label,
+  MadeWithLove,
+  MessageBox,
+  Text,
 } from '@adminjs/design-system'
 import { styled } from '@adminjs/design-system/styled-components'
 
 import React from 'react'
 import { useSelector } from 'react-redux'
+import { allowOverride } from '../../hoc/allow-override.js'
 import { useTranslation } from '../../hooks/index.js'
 import { ReduxState } from '../../store/store.js'
-import { allowOverride } from '../../hoc/allow-override.js'
 
 const Wrapper = styled(Box)<BoxProps>`
   align-items: center;
@@ -23,8 +33,8 @@ const StyledLogo = styled.img`
 `
 
 export type LoginProps = {
-  message?: string;
-  action: string;
+  message?: string
+  action: string
 }
 
 export const Login: React.FC<LoginProps> = (props) => {
@@ -70,11 +80,10 @@ export const Login: React.FC<LoginProps> = (props) => {
         >
           <H5 marginBottom="xxl">
             {branding.logo ? (
-              <StyledLogo
-                src={branding.logo}
-                alt={branding.companyName}
-              />
-            ) : branding.companyName}
+              <StyledLogo src={branding.logo} alt={branding.companyName} />
+            ) : (
+              branding.companyName
+            )}
           </H5>
           {message && (
             <MessageBox
@@ -97,13 +106,15 @@ export const Login: React.FC<LoginProps> = (props) => {
             />
           </FormGroup>
           <Text mt="xl" textAlign="center">
-            <Button variant="contained">
-              {translateComponent('Login.loginButton')}
-            </Button>
+            <Button variant="contained">{translateComponent('Login.loginButton')}</Button>
           </Text>
         </Box>
       </Box>
-      {branding.withMadeWithLove ? (<Box mt="xxl"><MadeWithLove /></Box>) : null}
+      {branding.withMadeWithLove ? (
+        <Box mt="xxl">
+          <MadeWithLove />
+        </Box>
+      ) : null}
     </Wrapper>
   )
 }

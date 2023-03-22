@@ -9,6 +9,7 @@ declare global {
     REDUX_STATE: ReduxState
     THEME: Theme
     AdminJS: typeof AdminJS
+    THEME_COMPONENTS: Record<string, FC>
   }
 }
 

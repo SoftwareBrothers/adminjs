@@ -6,7 +6,7 @@ import { EditPropertyProps } from '../base-property-props.js'
 import { recordPropertyIsEqual } from '../record-property-is-equal.js'
 import { PropertyLabel } from '../utils/property-label/index.js'
 import allowOverride from '../../../hoc/allow-override.js'
-import { useTranslation } from '../../../index.js'
+import { useTranslation } from '../../../hooks/index.js'
 
 type CombinedProps = EditPropertyProps
 
