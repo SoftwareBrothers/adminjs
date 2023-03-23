@@ -1,6 +1,6 @@
 import {
   Box, Button, FormGroup, H2, H5, Illustration,
-  Input, Label, MadeWithLove, MessageBox, Text,
+  Input, Label, MadeWithLove, MessageBox, Text, BoxProps,
 } from '@adminjs/design-system'
 import React from 'react'
 import { I18nextProvider } from 'react-i18next'
@@ -19,7 +19,7 @@ const GlobalStyle = createGlobalStyle`
   }
 `
 
-const Wrapper = styled(Box)`
+const Wrapper = styled(Box)<BoxProps>`
   align-items: center;
   justify-content: center;
   flex-direction: column;
