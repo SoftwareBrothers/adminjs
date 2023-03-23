@@ -8,6 +8,7 @@ declare global {
   interface Window {
     REDUX_STATE: ReduxState
     THEME: Theme
+    AdminJS: typeof AdminJS
   }
 }
 
