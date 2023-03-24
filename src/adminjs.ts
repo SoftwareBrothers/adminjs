@@ -22,6 +22,7 @@ import { relativeFilePathResolver } from './utils/file-resolver.js'
 import { Router } from './backend/utils/index.js'
 import { ComponentLoader } from './backend/utils/component-loader.js'
 import { OverridableComponent } from './frontend/index.js'
+import { bundlePath, stylePath } from './utils/theme-bundler.js'
 
 const __dirname = url.fileURLToPath(new URL('.', import.meta.url))
 const pkg = JSON.parse(fs.readFileSync(path.join(__dirname, '../package.json'), 'utf-8'))
@@ -306,11 +307,11 @@ class AdminJS {
     this.options.availableThemes?.forEach((theme) => {
       Router.assets.push({
         path: `/frontend/assets/themes/${theme.id}/theme.bundle.js`,
-        src: theme.bundlePath,
+        src: theme.bundlePath ?? bundlePath(theme.id),
       })
       Router.assets.push({
         path: `/frontend/assets/themes/${theme.id}/style.css`,
-        src: theme.stylePath,
+        src: theme.stylePath ?? stylePath(theme.id),
       })
     })
   }
