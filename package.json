@@ -24,7 +24,7 @@
     "check:all": "yarn types && yarn cspell && yarn lint && yarn test && ONCE=true yarn bundle && ONCE=true NODE_ENV=production yarn bundle",
     "dev": "npm-run-all --parallel \"build --watch\" \"bundle\" \"types --watch\"",
     "release": "semantic-release",
-    "postinstall": "patch-package"
+    "prepare": "patch-package"
   },
   "bin": {
     "admin": "./cli.js"
@@ -85,7 +85,7 @@
   },
   "homepage": "https://github.com/SoftwareBrothers/adminjs#readme",
   "dependencies": {
-    "@adminjs/design-system": "^4.0.0-beta-v4.3",
+    "@adminjs/design-system": "^4.0.0-beta-v4.4",
     "@babel/core": "^7.21.0",
     "@babel/parser": "^7.21.0",
     "@babel/plugin-syntax-import-assertions": "^7.20.0",
