@@ -1,0 +1,25 @@
+diff --git a/node_modules/@tiptap/react/dist/packages/react/src/index.d.ts b/node_modules/@tiptap/react/dist/packages/react/src/index.d.ts
+index c5109e2..5742d3c 100644
+--- a/node_modules/@tiptap/react/dist/packages/react/src/index.d.ts
++++ b/node_modules/@tiptap/react/dist/packages/react/src/index.d.ts
+@@ -1,10 +1,10 @@
+-export * from './BubbleMenu';
+-export { Editor } from './Editor';
+-export * from './EditorContent';
+-export * from './FloatingMenu';
+-export * from './NodeViewContent';
+-export * from './NodeViewWrapper';
+-export * from './ReactNodeViewRenderer';
+-export * from './ReactRenderer';
+-export * from './useEditor';
+-export * from '@tiptap/core';
++export * from './BubbleMenu.js'
++export { Editor } from './Editor.js'
++export * from './EditorContent.js'
++export * from './FloatingMenu.js'
++export * from './NodeViewContent.js'
++export * from './NodeViewWrapper.js'
++export * from './ReactNodeViewRenderer.js'
++export * from './ReactRenderer.js'
++export * from './useEditor.js'
++export * from '@tiptap/core'

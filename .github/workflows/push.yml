@@ -13,8 +13,6 @@ jobs:
         with:
           node-version: '18'
           cache: 'yarn'
-      - name: Install global dependencies
-        run: npm i -g patch-package@^5.0.0
       - name: Install
         run: yarn install --frozen-lockfile
 
@@ -30,8 +28,6 @@ jobs:
         with:
           node-version: '18'
           cache: 'yarn'
-      - name: Install global dependencies
-        run: npm i -g patch-package@^5.0.0
       - name: Install
         run: yarn install
       - name: Assets cache
@@ -96,8 +92,6 @@ jobs:
         with:
           node-version: '18'
           cache: 'yarn'
-      - name: Install global dependencies
-        run: npm i -g patch-package@^5.0.0
       - name: Install
         run: yarn install
       - name: Lint
@@ -142,8 +136,6 @@ jobs:
         with:
           node-version: '18'
           cache: 'yarn'
-      - name: Install global dependencies
-        run: npm i -g patch-package@^5.0.0
       - name: Install
         run: yarn install
       - name: Download Build
