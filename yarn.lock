@@ -2,10 +2,10 @@
 # yarn lockfile v1
 
 
-"@adminjs/design-system@^4.0.0-beta-v4.1":
-  version "4.0.0-beta-v4.1"
-  resolved "https://registry.yarnpkg.com/@adminjs/design-system/-/design-system-4.0.0-beta-v4.1.tgz#3bd9df085193680d1a9431a291860379063646b7"
-  integrity sha512-iUnu3XIloH2YuTe2Zjcc7Dm7Ms5bspLaeCNkO67nvBPO9Q9DWYcoRZhKP8ftX86/4pugCr7gCm3d1Vj4+HrRKg==
+"@adminjs/design-system@^4.0.0-beta-v4.3":
+  version "4.0.0-beta-v4.3"
+  resolved "https://registry.yarnpkg.com/@adminjs/design-system/-/design-system-4.0.0-beta-v4.3.tgz#3c697cfb47c3b36a1ee85f177062028f8de6fa07"
+  integrity sha512-NfHR1i1t3liSLkSo0Gt98Rq8iZSa1uEKLKyVcYqdi2E+0FUxQABggOO9SxRRUgy1O1u95KYwnewgcDa+EtQryg==
   dependencies:
     "@hypnosphi/create-react-context" "^0.3.1"
     "@tiptap/core" "2.0.0-beta.220"
@@ -35,7 +35,7 @@
     react-datepicker "^4.10.0"
     react-feather "^2.0.10"
     react-phone-input-2 "^2.15.1"
-    react-select "^5.7.0"
+    react-select "^5.7.2"
     react-text-mask "^5.5.0"
     styled-system "^5.1.5"
     text-mask-addons "^3.8.0"
@@ -8977,10 +8977,10 @@ react-router@6.9.0, react-router@^6.9.0:
   dependencies:
     "@remix-run/router" "1.4.0"
 
-react-select@^5.7.0:
-  version "5.7.0"
-  resolved "https://registry.yarnpkg.com/react-select/-/react-select-5.7.0.tgz#82921b38f1fcf1471a0b62304da01f2896cd8ce6"
-  integrity sha512-lJGiMxCa3cqnUr2Jjtg9YHsaytiZqeNOKeibv6WF5zbK/fPegZ1hg3y/9P1RZVLhqBTs0PfqQLKuAACednYGhQ==
+react-select@^5.7.2:
+  version "5.7.2"
+  resolved "https://registry.yarnpkg.com/react-select/-/react-select-5.7.2.tgz#ccd40071b9429277983bf15526e7a5773a060e09"
+  integrity sha512-cTlJkQ8YjV6T/js8wW0owTzht0hHGABh29vjLscY4HfZGkv7hc3FFTmRp9NzY/Ib1uQ36GieAKEjxpHdpCFpcA==
   dependencies:
     "@babel/runtime" "^7.12.0"
     "@emotion/cache" "^11.4.0"
