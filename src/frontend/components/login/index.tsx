@@ -3,12 +3,11 @@ import {
   Input, Label, MadeWithLove, MessageBox, Text, BoxProps,
 } from '@adminjs/design-system'
 import React from 'react'
-import { I18nextProvider } from 'react-i18next'
 import { useSelector } from 'react-redux'
 import { styled, createGlobalStyle } from 'styled-components'
 import { useTranslation } from '../../hooks/index.js'
 import { ReduxState } from '../../store/store.js'
-import initTranslations from '../../utils/adminjs.i18n.js'
+import { allowOverride } from '../../hoc/allow-override.js'
 
 const GlobalStyle = createGlobalStyle`
   html, body, #app {
@@ -40,11 +39,9 @@ export const Login: React.FC<LoginProps> = (props) => {
   const { action, message } = props
   const { translateLabel, translateButton, translateProperty, translateMessage } = useTranslation()
   const branding = useSelector((state: ReduxState) => state.branding)
-  const locale = useSelector((state: ReduxState) => state.locale)
-  const { i18n } = initTranslations(locale)
 
   return (
-    <I18nextProvider i18n={i18n}>
+    <>
       <GlobalStyle />
       <Wrapper flex variant="grey">
         <Box bg="white" height="440px" flex boxShadow="login" width={[1, 2 / 3, 'auto']}>
@@ -118,8 +115,8 @@ export const Login: React.FC<LoginProps> = (props) => {
         </Box>
         {branding.withMadeWithLove ? (<Box mt="xxl"><MadeWithLove /></Box>) : null}
       </Wrapper>
-    </I18nextProvider>
+    </>
   )
 }
 
-export default Login
+export default allowOverride(Login, 'Login')

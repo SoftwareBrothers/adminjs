@@ -1,6 +1,14 @@
-import { getComponentHtml } from '../backend/utils/index.js'
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import { combineStyles } from '@adminjs/design-system'
+import { Store } from 'redux'
+
+import createStore, {
+  ReduxState,
+} from './store/store.js'
+import ViewHelpers from '../backend/utils/view-helpers/view-helpers.js'
+import { initializeAssets, initializeBranding, initializeLocale } from './store/index.js'
 import AdminJS from '../adminjs.js'
-import LoginComponent from './components/login/index.js'
+import { getAssets, getBranding, getFaviconFromBranding } from '../backend/utils/options-parser/options-parser.js'
 
 type LoginTemplateAttributes = {
   /**
@@ -15,7 +23,71 @@ type LoginTemplateAttributes = {
 
 const html = async (
   admin: AdminJS,
-  { action, errorMessage }: LoginTemplateAttributes,
-): Promise<string> => getComponentHtml(LoginComponent, { action, message: errorMessage }, admin)
+  attributes: LoginTemplateAttributes,
+): Promise<string> => {
+  const h = new ViewHelpers({ options: admin.options })
 
+  const store: Store<ReduxState> = createStore()
+
+  const branding = await getBranding(admin)
+  const assets = await getAssets(admin)
+  const faviconTag = getFaviconFromBranding(branding)
+
+  const scripts = ((assets && assets.scripts) || [])
+    .map((s) => `<script src="${s}"></script>`)
+  const styles = ((assets && assets.styles) || [])
+    .map((l) => `<link rel="stylesheet" type="text/css" href="${l}">`)
+
+  store.dispatch(initializeBranding(branding))
+  store.dispatch(initializeAssets(assets))
+  store.dispatch(initializeLocale(admin.locale))
+
+  const theme = combineStyles(branding.theme || {})
+  const reduxState = store.getState()
+  const { locale } = reduxState
+  const stringifiedAttributes = JSON.stringify(attributes ?? {})
+
+  return `<!DOCTYPE html>
+    <html lang=${locale.language}>
+    <head>
+      <script>
+        window.REDUX_STATE = ${JSON.stringify(reduxState)};
+        window.THEME = ${JSON.stringify(theme)};
+        window.AdminJS = { Components: {} };
+      </script>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+      <title>${branding.companyName}</title>
+      ${faviconTag}
+
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" type="text/css">
+
+      <script src="${h.assetPath('global.bundle.js', assets)}"></script>
+      <script src="${h.assetPath('design-system.bundle.js', assets)}"></script>
+      <script src="${h.assetPath('app.bundle.js', assets)}"></script>
+      <script src="${h.assetPath('components.bundle.js', assets)}"></script>
+      <script>
+        try {
+          window.__APP_STATE__ = JSON.parse('${stringifiedAttributes}');
+        } catch (e) {
+          console.log(e)
+          window.__APP_STATE__ = {};
+        }
+      </script>
+      ${styles.join('\n')}
+    </head>
+    <body>
+      <div id="app" />
+      <script>
+        var app = document.getElementById('app');
+        var root = createRoot(app);
+        const CustomLoginApplication = AdminJS.UserComponents && AdminJS.UserComponents.LoginApplication;
+        const LoginApplication = AdminJS.LoginApplication;
+        root.render(LoginApplication);
+      </script>
+      ${scripts.join('\n')}
+    </body>
+    </html>
+  `
+}
 export default html
