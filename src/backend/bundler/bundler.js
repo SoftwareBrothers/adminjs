@@ -15,7 +15,7 @@ async function build({
   }
 
   const outputOptions = {
-    format: 'iife', interop: 'auto', name, globals,
+    format: 'iife', interop: 'auto', name, globals, inlineDynamicImports: true,
   }
 
   if (file) {

@@ -22,7 +22,7 @@
     "bundle:globals": "node bin/bundle-globals.js",
     "cspell": "cspell src/**/*.ts src/**/*.js src/**/*.tsx src/**/*.jsx",
     "check:all": "yarn types && yarn cspell && yarn lint && yarn test && ONCE=true yarn bundle && ONCE=true NODE_ENV=production yarn bundle",
-    "dev": "npm-run-all --parallel \"build --watch\" \"bundle\" \"types --watch\"",
+    "dev": "yarn build && yarn types && yarn bundle:globals && ONCE=true yarn bundle",
     "release": "semantic-release"
   },
   "bin": {

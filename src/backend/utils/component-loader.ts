@@ -167,5 +167,6 @@ export class ComponentLoader {
     'DefaultTextareaShowProperty',
     'PropertyDescription',
     'PropertyLabel',
+    'Login',
   ]
 }

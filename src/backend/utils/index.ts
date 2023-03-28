@@ -1,5 +1,4 @@
 export * from './build-feature/index.js'
-export * from './custom-views/index.js'
 export * from './errors/index.js'
 export * from './filter/index.js'
 export * from './layout-element-parser/index.js'
