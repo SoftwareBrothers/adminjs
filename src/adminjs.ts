@@ -19,7 +19,6 @@ import { ListActionResponse } from './backend/actions/list/list-action.js'
 import { defaultLocale, Locale } from './locale/index.js'
 import { TranslateFunctions } from './utils/translate-functions.factory.js'
 import { relativeFilePathResolver } from './utils/file-resolver.js'
-import { getComponentHtml } from './backend/utils/index.js'
 import { ComponentLoader } from './backend/utils/component-loader.js'
 import { OverridableComponent } from './frontend/index.js'
 
@@ -184,19 +183,6 @@ class AdminJS {
   }
 
   /**
-   * Allows you to override the default login view by providing your React components
-   * and custom props.
-   *
-   * @param  {Object} options
-   * @param  {String} options.component       Custom React component
-   * @param  {String} [options.props]         Props to be passed to React component
-   * @return {Promise<void>}
-   */
-  overrideLogin({ component, props }: LoginOverride): void {
-    this.loginOverride = { component, props: props ?? {} }
-  }
-
-  /**
    * Renders an entire login page with email and password fields
    * using {@link Renderer}.
    *
@@ -211,15 +197,6 @@ class AdminJS {
    * @return {Promise<string>}                HTML of the rendered page
    */
   async renderLogin({ action, errorMessage }): Promise<string> {
-    if (this.loginOverride) {
-      const { component, props = {} } = this.loginOverride
-      const mergedProps = {
-        action,
-        message: errorMessage,
-        ...props,
-      }
-      return getComponentHtml(component, mergedProps, this)
-    }
     return loginTemplate(this, { action, errorMessage })
   }
 

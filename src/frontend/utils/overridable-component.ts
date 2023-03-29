@@ -77,6 +77,7 @@ export type OverridableComponent =
   | 'DefaultTextareaShowProperty'
   | 'PropertyDescription'
   | 'PropertyLabel'
+  | 'Login'
 
 /**
  * Name of the components which can be overridden by ComponentLoader.

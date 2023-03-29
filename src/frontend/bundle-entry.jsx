@@ -9,6 +9,7 @@ import { flat } from '../utils/flat/index.js'
 import * as AppComponents from './components/app/index.js'
 import App from './components/application.js'
 import BasePropertyComponent, { CleanPropertyComponent } from './components/property-type/index.js'
+import Login from './components/login/index.js'
 import withNotice from './hoc/with-notice.js'
 import * as Hooks from './hooks/index.js'
 import createStore from './store/store.js'
@@ -38,12 +39,28 @@ const Application = (
   </Suspense>
 )
 
+const loginAppProps = window.__APP_STATE__ ?? {}
+const LoginApplication = (
+  <Suspense fallback="...is loading">
+    <Provider store={store}>
+      <ThemeProvider theme={theme}>
+        <I18nextProvider i18n={i18n}>
+          <BrowserRouter>
+            <Login {...loginAppProps} />
+          </BrowserRouter>
+        </I18nextProvider>
+      </ThemeProvider>
+    </Provider>
+  </Suspense>
+)
+
 // eslint-disable-next-line no-undef
 window.regeneratorRuntime = regeneratorRuntime
 
 export default {
   withNotice,
   Application,
+  LoginApplication,
   ViewHelpers,
   UserComponents: {},
   ApiClient,
