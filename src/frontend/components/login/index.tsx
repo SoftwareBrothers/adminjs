@@ -37,7 +37,7 @@ export type LoginProps = {
 
 export const Login: React.FC<LoginProps> = (props) => {
   const { action, message } = props
-  const { translateLabel, translateButton, translateProperty, translateMessage } = useTranslation()
+  const { translateComponent, translateMessage } = useTranslation()
   const branding = useSelector((state: ReduxState) => state.branding)
 
   return (
@@ -54,9 +54,9 @@ export const Login: React.FC<LoginProps> = (props) => {
             display={['none', 'none', 'block']}
             position="relative"
           >
-            <H2 fontWeight="lighter">{translateLabel('loginWelcome')}</H2>
+            <H2 fontWeight="lighter">{translateComponent('Login.welcomeHeader')}</H2>
             <Text fontWeight="lighter" mt="default">
-              {translateMessage('loginWelcome')}
+              {translateComponent('Login.welcomeMessage')}
             </Text>
             <Text textAlign="center" p="xxl">
               <Box display="inline" mr="default">
@@ -94,21 +94,21 @@ export const Login: React.FC<LoginProps> = (props) => {
               />
             )}
             <FormGroup>
-              <Label required>{translateProperty('email')}</Label>
-              <Input name="email" placeholder={translateProperty('email')} />
+              <Label required>{translateComponent('Login.properties.email')}</Label>
+              <Input name="email" placeholder={translateComponent('Login.properties.email')} />
             </FormGroup>
             <FormGroup>
-              <Label required>{translateProperty('password')}</Label>
+              <Label required>{translateComponent('Login.properties.password')}</Label>
               <Input
                 type="password"
                 name="password"
-                placeholder={translateProperty('password')}
+                placeholder={translateComponent('Login.properties.password')}
                 autoComplete="new-password"
               />
             </FormGroup>
             <Text mt="xl" textAlign="center">
               <Button variant="contained">
-                {translateButton('login')}
+                {translateComponent('Login.loginButton')}
               </Button>
             </Text>
           </Box>

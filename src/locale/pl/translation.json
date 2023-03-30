@@ -29,8 +29,7 @@
     "selectedRecords": "Wybrano ({{selected}})",
     "filters": "Filtry",
     "adminVersion": "Admin: {{version}}",
-    "appVersion": "Aplikacja: {{version}}",
-    "loginWelcome": "Witaj"
+    "appVersion": "Aplikacja: {{version}}"
   },
   "properties": {
     "length": "Długość",
@@ -56,6 +55,15 @@
         "ua": "Ukraiński",
         "zh-CN": "chiński"
       }
+    },
+    "Login": {
+      "welcomeHeader": "Witaj",
+      "welcomeMessage": "AdminJS - najlepszy admin framework dla aplikacji Node.js, oparty na React.",
+      "properties": {
+        "email": "Email",
+        "password": "Hasło"
+      },
+      "loginButton": "Zaloguj"
     }
   },
   "resources": {},
@@ -85,7 +93,6 @@
     "confirmDelete": "Czy potwierdzasz usunięcie tej pozycji?",
     "welcomeOnBoard_title": "Witamy na pokładzie!",
     "welcomeOnBoard_subtitle": "Od teraz jesteś jednym z nas! Przygotowaliśmy dla Ciebie kilka wskazówek:",
-    "loginWelcome": "AdminJS - najlepszy admin framework dla aplikacji Node.js , oparty na React.",
     "addingResources_title": "Dodawanie zasobów",
     "addingResources_subtitle": "Jak dodać nowe zasoby do menu bocznego",
     "customizeResources_title": "Indywidualne zasoby",
@@ -105,7 +112,6 @@
     "needMoreSolutions_title": "Szukasz innych rozwiązań?",
     "needMoreSolutions_subtitle": "Jesteśmy tutaj, aby dostarczyć Ci wpaniały projekt UX/UI i dostosować do Twoich potrzeb panel AdminJS",
     "invalidCredentials": "Błędny email i/lub hasło",
-
     "pageNotFound_title": "Strona nie znaleziona",
     "pageNotFound_subtitle": "Strona <strong>\"{{pageName}}\"</strong> nie istnieje",
     "componentNotFound_title": "Nie określono komponentu",

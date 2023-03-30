@@ -42,6 +42,15 @@
         "ua": "українська",
         "zh-CN": "китайський"
       }
+    },
+    "Login": {
+      "welcomeHeader": "Ласкаво просимо",
+      "welcomeMessage": "до AdminJS - провідної адміністраційної панелі з відкритим кодом для програм Node.js, яка дозволяє керувати всіма своїми даними в одному місці",
+      "properties": {
+        "email": "Електронна пошта",
+        "password": "Пароль"
+      },
+      "loginButton": "Увійдіть в систему"
     }
   },
   "labels": {
@@ -51,7 +60,6 @@
     "filters": "Фільтри",
     "adminVersion": "Версія AdminJS: {{version}}",
     "appVersion": "Версія додатку: {{version}}",
-    "loginWelcome": "Ласкаво просимо",
     "dashboard": "Панель приладів"
   },
   "properties": {
@@ -88,7 +96,6 @@
     "confirmDelete": "Ви дійсно хочете видалити цей елемент?",
     "welcomeOnBoard_title": "Ласкаво просимо на борт!",
     "welcomeOnBoard_subtitle": "Тепер Ви один із нас! Ми підготували для Вас кілька порад для початку:",
-    "loginWelcome": "до AdminJS - провідної адміністраційної панелі з відкритим кодом для програм Node.js, яка дозволяє керувати всіма своїми даними в одному місці",
     "addingResources_title": "Додавання ресурсів",
     "addingResources_subtitle": "Як додати нові ресурси до бічної панелі",
     "customizeResources_title": "Налаштування ресурсів",
@@ -108,7 +115,6 @@
     "needMoreSolutions_title": "Потрібні більш просунуті рішення?",
     "needMoreSolutions_subtitle": "Ми тут, щоб допомогти Вам з UX/UI дизайном та розробленням програмного забезпечення на основі (та не тільки) AdminJS",
     "invalidCredentials": "Неправильна адреса електронної пошти та/або пароль",
-
     "pageNotFound_title": "Сторінку не знайдено",
     "pageNotFound_subtitle": "Сторінка <strong>\"{{pageName}}\"</strong> не існує",
     "componentNotFound_title": "Компонент не вказано",

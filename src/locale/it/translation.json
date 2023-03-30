@@ -41,6 +41,15 @@
         "ua": "ucraino",
         "zh-CN": "Cinese"
       }
+    },
+    "Login": {
+      "welcomeHeader": "Benvenuto",
+      "welcomeMessage": "a Adminjs – il principale pannello di amministrazione open-source per la tua applicazione Node.js che ti consente di gestire tutti i tuoi dati in un unico luogo",
+      "properties": {
+        "email": "Email",
+        "password": "Password"
+      },
+      "loginButton": "Accedi"
     }
   },
   "labels": {
@@ -50,7 +59,6 @@
     "filters": "Filtri",
     "adminVersion": "Admin: {{version}}",
     "appVersion": "App: {{version}}",
-    "loginWelcome": "Benvenuto",
     "dashboard": "Dashboard"
   },
   "properties": {
@@ -85,7 +93,6 @@
     "confirmDelete": "Sicuro di voler eleminare questo elemento?",
     "welcomeOnBoard_title": "Benvenuto a bordo!",
     "welcomeOnBoard_subtitle": "Sei ora uno di noi! Preparati per alcuni consigli per iniziare:",
-    "loginWelcome": "a Adminjs – il principale pannello di amministrazione open-source per la tua applicazione Node.js che ti consente di gestire tutti i tuoi dati in un unico luogo",
     "addingResources_title": "Aggiungendo elementi",
     "addingResources_subtitle": "Come aggiungere nuove risorse nella colonna laterale",
     "customizeResources_title": "Personalizzare le risorse",
@@ -105,7 +112,6 @@
     "needMoreSolutions_title": "Ti servono soluzioni più avanzate?",
     "needMoreSolutions_subtitle": "Siamo qui per fortnirti una bella UI/UX e un software personalizzato (non solo) su AdminJS",
     "invalidCredentials": "E-mail o password errati",
-
     "pageNotFound_title": "pagina non trovata",
     "pageNotFound_subtitle": "Pagina <strong>\"{{pageName}}\"</strong> non esiste",
     "componentNotFound_title": "Nessun componente specificato",

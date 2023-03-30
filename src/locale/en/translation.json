@@ -41,6 +41,15 @@
         "ua": "Ukrainian",
         "zh-CN": "Chinese"
       }
+    },
+    "Login": {
+      "welcomeHeader": "Welcome",
+      "welcomeMessage": "to AdminJS - the world's leading open-source auto-generated admin panel for your Node.js application that allows you to manage all your data in one place",
+      "properties": {
+        "email": "Email",
+        "password": "Password"
+      },
+      "loginButton": "Login"
     }
   },
   "labels": {
@@ -50,7 +59,6 @@
     "filters": "Filters",
     "adminVersion": "Admin: {{version}}",
     "appVersion": "App: {{version}}",
-    "loginWelcome": "Welcome",
     "dashboard": "Dashboard"
   },
   "properties": {
@@ -85,7 +93,6 @@
     "confirmDelete": "Do you really want to remove this item?",
     "welcomeOnBoard_title": "Welcome on Board!",
     "welcomeOnBoard_subtitle": "Now you are one of us! We prepared a few tips for you to start:",
-    "loginWelcome": "to AdminJS - the world's leading open-source auto-generated admin panel for your Node.js application that allows you to manage all your data in one place",
     "addingResources_title": "Adding Resources",
     "addingResources_subtitle": "How to add new resources to the sidebar",
     "customizeResources_title": "Customize Resources",

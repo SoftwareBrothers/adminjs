@@ -39,6 +39,15 @@
         "ua": "Ucraniano",
         "zh-CN": "Chinês"
       }
+    },
+    "Login": {
+      "welcomeHeader": "Bem-vindo",
+      "welcomeMessage": "Ao AdminJS - o melhor framework admin para aplicações Node.js, baseado em React.",
+      "properties": {
+        "email": "Email",
+        "password": "Senha"
+      },
+      "loginButton": "Login"
     }
   },
   "labels": {
@@ -48,7 +57,6 @@
     "filters": "Filtros",
     "adminVersion": "Admin: {{version}}",
     "appVersion": "App: {{version}}",
-    "loginWelcome": "Bem-vindo",
     "dashboard": "Dashboard"
   },
   "properties": {
@@ -83,7 +91,6 @@
     "confirmDelete": "Você tem certeza que deseja remover este item? Essa ação é irreversível",
     "welcomeOnBoard_title": "Bem-vindo à bordo!",
     "welcomeOnBoard_subtitle": "Agora você é um de nós! Preparamos algumas dicas para você começar:",
-    "loginWelcome": "Ao AdminJS - o melhor framework admin para aplicações Node.js, baseado em React.",
     "addingResources_title": "Adicionando Recursos",
     "addingResources_subtitle": "Como adicionar novos recursos à barra lateral",
     "customizeResources_title": "Personalizar Recursos",
@@ -103,7 +110,6 @@
     "needMoreSolutions_title": "Precisa de mais soluções avançadas?",
     "needMoreSolutions_subtitle": "Estamos aqui para te entregar um belo desenho de UX/UI e software feito sob medida baseado (não apenas) no AdminJS",
     "invalidCredentials": "Nome de usuário e/ou senha incorretos",
-
     "pageNotFound_title": "Página não encontrada",
     "pageNotFound_subtitle": "Página <strong>\"{{pageName}}\"</strong> não existe",
     "componentNotFound_title": "Nenhum componente especificado",
