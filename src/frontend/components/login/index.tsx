@@ -32,6 +32,19 @@ const StyledLogo = styled.img`
   margin: ${({ theme }) => theme.space.md} 0;
 `
 
+const IllustrationsWrapper = styled(Box)<BoxProps>`
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  & svg [stroke='#3B3552'] {
+    stroke: rgba(255, 255, 255, 0.5);
+  }
+  & svg [fill='#3040D6'] {
+    fill: rgba(255, 255, 255, 1);
+  }
+`
+
 export type LoginProps = {
   message?: string
   action: string
