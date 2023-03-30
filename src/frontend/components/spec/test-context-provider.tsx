@@ -2,6 +2,7 @@ import React, { ReactNode } from 'react'
 import { StaticRouter } from 'react-router-dom/server.js'
 import { combineStyles } from '@adminjs/design-system'
 import { ThemeProvider } from 'styled-components'
+import { ThemeProvider as EmotionThemeProvider } from '@emotion/react'
 import { I18nextProvider } from 'react-i18next'
 
 import { defaultLocale } from '../../../locale/index.js'
@@ -20,11 +21,13 @@ const TestContextProvider: React.FC<Props> = (props) => {
 
   return (
     <ThemeProvider theme={theme}>
-      <I18nextProvider i18n={i18n}>
-        <StaticRouter location={location || '/'}>
-          {children}
-        </StaticRouter>
-      </I18nextProvider>
+      <EmotionThemeProvider theme={theme}>
+        <I18nextProvider i18n={i18n}>
+          <StaticRouter location={location || '/'}>
+            {children}
+          </StaticRouter>
+        </I18nextProvider>
+      </EmotionThemeProvider>
     </ThemeProvider>
   )
 }

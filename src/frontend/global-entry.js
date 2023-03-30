@@ -13,6 +13,8 @@ import ReactSelectAsync from 'react-select/async'
 import ReactSelectCreatable from 'react-select/creatable'
 import * as ReactSelect from 'react-select'
 import * as styled from 'styled-components'
+import * as emotionStyled from '@emotion/styled'
+import * as emotionReact from '@emotion/react'
 
 window.React = React
 window.ReactDOM = ReactDOM
@@ -23,6 +25,8 @@ window.ReactRouter = ReactRouter
 window.ReactRouterDOM = ReactRouterDOM
 window.PropTypes = PropTypes
 window.styled = styled
+window.emotionStyled = emotionStyled
+window.emotionReact = emotionReact
 window.ReactSelect = ReactSelect
 window.ReactSelectAsync = ReactSelectAsync
 window.ReactSelectCreatable = ReactSelectCreatable

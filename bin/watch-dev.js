@@ -1,6 +1,7 @@
 import * as url from 'url'
 import runtime from '@babel/plugin-transform-runtime'
 import styled from 'babel-plugin-styled-components'
+import pluginEmotion from '@emotion/babel-plugin'
 import importAssertions from '@babel/plugin-syntax-import-assertions'
 
 import bundler from '../src/backend/bundler/bundler.js'
@@ -17,7 +18,7 @@ async function build() {
     minify: env === 'production',
     watch: !once,
     babelConfig: {
-      plugins: [runtime, importAssertions, styled],
+      plugins: [runtime, importAssertions, styled, pluginEmotion],
       babelHelpers: 'runtime',
       include: [
         'lib/frontend/**',

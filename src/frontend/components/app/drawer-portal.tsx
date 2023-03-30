@@ -4,6 +4,7 @@ import { createPortal } from 'react-dom'
 import { createRoot } from 'react-dom/client'
 import { Drawer, DEFAULT_DRAWER_WIDTH } from '@adminjs/design-system'
 import { ThemeProvider } from 'styled-components'
+import { ThemeProvider as EmotionThemeProvider } from '@emotion/react'
 
 import { ReduxState, RouterProps } from '../../store/index.js'
 import { setDrawerPreRoute } from '../../store/actions/set-drawer-preroute.js'
@@ -40,7 +41,9 @@ const DrawerWrapper: React.FC<DrawerWrapperProps> = ({ onMount, onUnmount }) => 
 
   return (
     <ThemeProvider theme={(window as any).THEME}>
-      <Drawer id={DRAWER_PORTAL_ID} className="hidden" data-css="drawer" />
+      <EmotionThemeProvider theme={(window as any).THEME}>
+        <Drawer id={DRAWER_PORTAL_ID} className="hidden" data-css="drawer" />
+      </EmotionThemeProvider>
     </ThemeProvider>
   )
 }

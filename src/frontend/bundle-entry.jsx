@@ -3,6 +3,7 @@ import { I18nextProvider } from 'react-i18next'
 import { Provider } from 'react-redux'
 import { BrowserRouter } from 'react-router-dom'
 import { ThemeProvider } from 'styled-components'
+import { ThemeProvider as EmotionThemeProvider } from '@emotion/react'
 
 import ViewHelpers from '../backend/utils/view-helpers/view-helpers.js'
 import { flat } from '../utils/flat/index.js'
@@ -29,11 +30,13 @@ const Application = (
   <Suspense fallback="...is loading">
     <Provider store={store}>
       <ThemeProvider theme={theme}>
-        <I18nextProvider i18n={i18n}>
-          <BrowserRouter>
-            <App />
-          </BrowserRouter>
-        </I18nextProvider>
+        <EmotionThemeProvider theme={theme}>
+          <I18nextProvider i18n={i18n}>
+            <BrowserRouter>
+              <App />
+            </BrowserRouter>
+          </I18nextProvider>
+        </EmotionThemeProvider>
       </ThemeProvider>
     </Provider>
   </Suspense>

@@ -53,6 +53,8 @@ const run = async () => {
       punycode: 'punycode',
       uuid: 'uuid',
       'styled-components': 'styled',
+      '@emotion/styled': 'emotionStyled',
+      '@emotion/react': 'emotionReact',
       'react-dom': 'ReactDOM',
       'prop-types': 'PropTypes',
       'react-redux': 'ReactRedux',

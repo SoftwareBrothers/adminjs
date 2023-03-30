@@ -1,16 +1,23 @@
 {
   "presets": [
     "@babel/preset-react",
-    ["@babel/preset-env", {
-      "targets": {
-        "node": "18"
-      },
-      "loose": true,
-      "modules": false
-    }],
+    [
+      "@babel/preset-env",
+      {
+        "targets": {
+          "node": "18"
+        },
+        "loose": true,
+        "modules": false
+      }
+    ],
     ["@babel/preset-typescript"]
   ],
-  "plugins": ["babel-plugin-styled-components", "@babel/plugin-syntax-import-assertions"],
+  "plugins": [
+    "babel-plugin-styled-components",
+    "@babel/plugin-syntax-import-assertions",
+    "@emotion"
+  ],
   "only": ["src/", "spec/"],
   "ignore": [
     "src/frontend/assets/scripts/app-bundle.development.js",
