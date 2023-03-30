@@ -41,6 +41,15 @@
         "ua": "Ucranio",
         "zh-CN": "Chino"
       }
+    },
+    "Login": {
+      "welcomeHeader": "Bienvenido",
+      "welcomeMessage": "a AdminJS: el panel de administración generado automáticamente de código abierto líder en el mundo para su aplicación Node.js que le permite administrar todos sus datos en un solo lugar",
+      "properties": {
+        "email": "Correo electrónico",
+        "password": "Contraseña"
+      },
+      "loginButton": "Conectarse"
     }
   },
   "labels": {
@@ -50,7 +59,6 @@
     "filters": "filtros",
     "adminVersion": "Administración: {{version}}",
     "appVersion": "aplicación: {{version}}",
-    "loginWelcome": "Bienvenido",
     "dashboard": "Panel"
   },
   "properties": {
@@ -85,7 +93,6 @@
     "confirmDelete": "¿Realmente desea eliminar este elemento?",
     "welcomeOnBoard_title": "¡La bienvenida a bordo!",
     "welcomeOnBoard_subtitle": "¡Ahora eres uno de nosotros! ",
-    "loginWelcome": "a AdminJS: el panel de administración generado automáticamente de código abierto líder en el mundo para su aplicación Node.js que le permite administrar todos sus datos en un solo lugar",
     "addingResources_title": "Adición de recursos",
     "addingResources_subtitle": "Cómo agregar nuevos recursos a la barra lateral",
     "customizeResources_title": "Personalizar recursos",
@@ -110,7 +117,6 @@
     "initialKey": "Llave-{{number}}",
     "keyInUse": "Las claves de objeto deben ser únicas.",
     "keyValuePropertyDefaultDescription": "Todos los valores se almacenan como texto. ",
-
     "pageNotFound_title": "Página no encontrada",
     "pageNotFound_subtitle": "Página <strong>\"{{pageName}}\"</strong> no existe",
     "componentNotFound_title": "Ningún componente especificado",

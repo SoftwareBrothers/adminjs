@@ -41,6 +41,15 @@
         "ua": "Ukrainisch",
         "zh-CN": "Chinesisch"
       }
+    },
+    "Login": {
+      "welcomeHeader": "Wilkommen",
+      "welcomeMessage": "zu AdminJS - dem weltweit führenden, automatisch generierten Open-Source-Admin-Panel für Ihre Node.js-Anwendung, mit dem Sie alle Ihre Daten an einem Ort verwalten können",
+      "properties": {
+        "email": "Email",
+        "password": "Passwort"
+      },
+      "loginButton": "Einloggen"
     }
   },
   "labels": {
@@ -50,7 +59,6 @@
     "filters": "Filter",
     "adminVersion": "Admin: {{version}}",
     "appVersion": "App: {{version}}",
-    "loginWelcome": "Wilkommen",
     "dashboard": "Dashboard"
   },
   "properties": {
@@ -85,7 +93,6 @@
     "confirmDelete": "Wollen Sie wirklich diesen Eintrag löschen?",
     "welcomeOnBoard_title": "Willkommen an Bord!",
     "welcomeOnBoard_subtitle": "Jetzt gehören Sie zu uns! Wir haben ein paar Tipps für Sie vorbereitet, damit Sie loslegen können:",
-    "loginWelcome": "zu AdminJS - dem weltweit führenden, automatisch generierten Open-Source-Admin-Panel für Ihre Node.js-Anwendung, mit dem Sie alle Ihre Daten an einem Ort verwalten können",
     "addingResources_title": "Ressourcen Hinzufügen",
     "addingResources_subtitle": "So fügen Sie neue Ressourcen zur Seitenleiste hinzu",
     "customizeResources_title": "Ressourcen anpassen",
@@ -105,7 +112,6 @@
     "needMoreSolutions_title": "Benötigen Sie fortschrittlichere Lösungen?",
     "needMoreSolutions_subtitle": "Wir sind hier, um Ihnen ein schönes UX/UI-Design und eine maßgeschneiderte Software zu bieten, die (nicht nur) auf AdminJS basiert.",
     "invalidCredentials": "Falsche E-Mail und/oder falsches Passwort",
-
     "pageNotFound_title": "Seite nicht gefunden",
     "pageNotFound_subtitle": "Buchseite <strong>\"{{pageName}}\"</strong> ist nicht vorhanden",
     "componentNotFound_title": "Keine Komponente angegeben",
