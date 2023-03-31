@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { combineStyles } from '@adminjs/design-system'
+import { theme as AdminJSTheme } from '@adminjs/design-system'
 import merge from 'lodash/merge.js'
 
 import ViewHelpers from '../backend/utils/view-helpers/view-helpers.js'
@@ -28,7 +28,7 @@ const html = async (admin: AdminJS, currentAdmin?: CurrentAdmin, location = '/')
 
   const scripts = ((assets?.scripts) || []).map((s) => `<script src="${s}"></script>`)
   const styles = ((assets?.styles) || []).map((l) => `<link rel="stylesheet" type="text/css" href="${l}">`)
-  const theme = combineStyles(merge({}, selectedTheme?.data, branding.theme))
+  const theme = merge(AdminJSTheme, branding.theme, selectedTheme?.data)
   const faviconTag = getFaviconFromBranding(branding)
 
   return `
@@ -38,6 +38,7 @@ const html = async (admin: AdminJS, currentAdmin?: CurrentAdmin, location = '/')
       <script>
         window.REDUX_STATE = ${JSON.stringify(reduxState)};
         window.THEME = ${JSON.stringify(theme)};
+        window.THEME_COMPONENTS = {};
         window.AdminJS = { Components: {} };
       </script>
       <meta charset="utf-8">
