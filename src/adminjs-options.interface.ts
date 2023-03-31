@@ -251,7 +251,7 @@ export interface AdminJSOptions {
 export type ThemeConfig = {
   id: string,
   name: string,
-  data: Partial<ThemeOverride>;
+  overrides: Partial<ThemeOverride>;
   bundlePath?: string;
   stylePath?: string;
   availableThemes?: Pick<ThemeConfig, 'id' | 'name'>[]
