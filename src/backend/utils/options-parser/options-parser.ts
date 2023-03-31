@@ -57,7 +57,10 @@ export const getTheme = async (
   currentAdmin?: CurrentAdmin,
 ): Promise<ThemeConfig | null> => {
   const { availableThemes, defaultTheme } = admin.options
-  const themeId = currentAdmin?.theme ?? defaultTheme ?? availableThemes?.[0].id
+  let themeId = defaultTheme ?? availableThemes?.[0].id
+  if (currentAdmin?.theme?.length) {
+    themeId = currentAdmin?.theme
+  }
   const theme = availableThemes?.find(({ id }) => id === themeId)
   return theme
     ? { ...theme, availableThemes: availableThemes?.map(({ id, name }) => ({ id, name })) }
