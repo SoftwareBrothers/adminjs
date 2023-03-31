@@ -28,7 +28,7 @@ const html = async (admin: AdminJS, currentAdmin?: CurrentAdmin, location = '/')
 
   const scripts = ((assets?.scripts) || []).map((s) => `<script src="${s}"></script>`)
   const styles = ((assets?.styles) || []).map((l) => `<link rel="stylesheet" type="text/css" href="${l}">`)
-  const theme = merge(AdminJSTheme, branding.theme, selectedTheme?.data)
+  const theme = merge(AdminJSTheme, branding.theme, selectedTheme?.overrides)
   const faviconTag = getFaviconFromBranding(branding)
 
   return `
