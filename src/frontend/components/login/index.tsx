@@ -71,7 +71,7 @@ export const Login: React.FC<LoginProps> = (props) => {
           <Text fontWeight="lighter" mt="default">
             {translateComponent('Login.welcomeMessage')}
           </Text>
-          <Text textAlign="center" p="xxl">
+          <IllustrationsWrapper p="xxl">
             <Box display="inline" mr="default">
               <Illustration variant="Planet" width={82} height={91} />
             </Box>
@@ -81,7 +81,7 @@ export const Login: React.FC<LoginProps> = (props) => {
             <Box display="inline" position="relative" top="-20px">
               <Illustration variant="FlagInCog" width={82} height={91} />
             </Box>
-          </Text>
+          </IllustrationsWrapper>
         </Box>
         <Box
           as="form"
