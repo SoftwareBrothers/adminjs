@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { ButtonCSS } from '@adminjs/design-system'
-import { styled } from 'styled-components'
+import { styled } from '@adminjs/design-system/styled-components'
 
 import ViewHelpers from '../../../../backend/utils/view-helpers/view-helpers.js'
 import allowOverride from '../../../hoc/allow-override.js'
