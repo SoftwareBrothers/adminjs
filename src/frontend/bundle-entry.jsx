@@ -26,7 +26,7 @@ const { locale } = store.getState()
 const { i18n } = initTranslations(locale)
 
 const Application = (
-  <Suspense fallback="...is loading">
+  <Suspense fallback="AdminJS is loading">
     <Provider store={store}>
       <ThemeProvider theme={theme}>
         <I18nextProvider i18n={i18n}>
@@ -41,7 +41,7 @@ const Application = (
 
 const loginAppProps = window.__APP_STATE__ ?? {}
 const LoginApplication = (
-  <Suspense fallback="...is loading">
+  <Suspense fallback="AdminJS is loading">
     <Provider store={store}>
       <ThemeProvider theme={theme}>
         <I18nextProvider i18n={i18n}>

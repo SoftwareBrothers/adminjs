@@ -1,4 +1,4 @@
-import { ThemeConfig } from '../../../adminjs-options.interface'
+import { ThemeConfig } from '../../../adminjs-options.interface.js'
 
 export const THEME_INITIALIZE = 'THEME_INITIALIZE'
 

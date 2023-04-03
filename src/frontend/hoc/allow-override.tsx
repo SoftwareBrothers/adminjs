@@ -30,7 +30,7 @@ function allowOverride<P extends Record<string, unknown>>(
      */
     if (typeof window !== 'undefined') {
       Component = window.AdminJS?.UserComponents?.[name]
-        ?? (window as any).THEME_COMPONENTS?.[name]
+        ?? window.THEME_COMPONENTS?.[name]
         ?? OriginalComponent
     }
 

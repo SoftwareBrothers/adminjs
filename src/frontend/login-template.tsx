@@ -42,7 +42,7 @@ const html = async (
   store.dispatch(initializeAssets(assets))
   store.dispatch(initializeLocale(admin.locale))
 
-  const theme = combineStyles(branding.theme || {})
+  const theme = combineStyles(branding.theme)
   const reduxState = store.getState()
   const { locale } = reduxState
   const stringifiedAttributes = JSON.stringify(attributes ?? {})
@@ -136,6 +136,9 @@ const html = async (
       }
       #app {
         isolation: isolate;
+      }
+      :root {
+        color-scheme: light;
       }
       </style>
     </head>

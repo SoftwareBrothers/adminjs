@@ -2,21 +2,21 @@ import { Store } from 'redux'
 
 import createStore, { ReduxState } from './store.js'
 import {
-  initializeLocale,
-  initializeResources,
+  initializeAssets,
   initializeBranding,
   initializeDashboard,
-  initializeAssets,
-  initializePaths,
+  initializeLocale,
   initializePages,
-  setCurrentAdmin,
+  initializePaths,
+  initializeResources,
   initializeVersions,
+  setCurrentAdmin,
 } from './actions/index.js'
 
 import AdminJS from '../../adminjs.js'
+import { getAssets, getBranding, getLocales, getTheme } from '../../backend/utils/options-parser/options-parser.js'
 import { CurrentAdmin } from '../../current-admin.interface.js'
 import pagesToStore from './pages-to-store.js'
-import { getBranding, getAssets, getLocales, getTheme } from '../../backend/utils/options-parser/options-parser.js'
 import { defaultLocale } from '../../locale/index.js'
 import { initializeTheme } from './actions/initialize-theme.js'
 

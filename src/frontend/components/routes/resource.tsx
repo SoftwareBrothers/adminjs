@@ -83,7 +83,7 @@ const ResourceAction: React.FC<Props> = (props) => {
   const contentTag = getResourceElementCss(resource.id, 'list')
 
   return (
-    <Box variant="grey" width={listAction.containerWidth} mx="auto" data-css={contentTag}>
+    <Box variant="transparent" width={listAction.containerWidth} mx="auto" data-css={contentTag}>
       <ActionHeader
         resource={resource}
         action={listAction}
