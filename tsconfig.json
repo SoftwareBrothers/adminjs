@@ -20,7 +20,7 @@
       "mocha",
       "node"
     ],
-    "typeRoots": ["./vendor-types"],
+    "typeRoots": ["./vendor-types", "@adminjs/design-system/vendor-types"],
     "paths": {
       "react": ["node_modules/@types/react"]
     },

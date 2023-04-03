@@ -1,11 +1,11 @@
 import React, { useMemo } from 'react'
-import { styled } from 'styled-components'
 import { Link as RouterLink } from 'react-router-dom'
 import {
   ButtonCSS,
   ButtonProps,
   Icon,
 } from '@adminjs/design-system'
+import { styled } from '@adminjs/design-system/styled-components'
 import { useSelector } from 'react-redux'
 
 import allowOverride from '../../../hoc/allow-override.js'

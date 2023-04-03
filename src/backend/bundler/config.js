@@ -19,17 +19,17 @@ export const external = [
   'react-redux',
   'react-router',
   'react-router-dom',
-  'styled-components',
+  '@adminjs/design-system/styled-components',
   'adminjs',
   '@adminjs/design-system',
-  '@carbon/icons-react',
+  'react-feather',
 ]
 
 export const globals = {
   react: 'React',
   redux: 'Redux',
-  '@carbon/icons-react': 'CarbonIcons',
-  'styled-components': 'styled',
+  'react-feather': 'FeatherIcons',
+  '@adminjs/design-system/styled-components': 'styled',
   'prop-types': 'PropTypes',
   'react-dom': 'ReactDOM',
   'react-redux': 'ReactRedux',

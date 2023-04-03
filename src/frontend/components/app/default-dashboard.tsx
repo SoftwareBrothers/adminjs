@@ -1,7 +1,6 @@
-// @ts-nocheck
 import React from 'react'
-import { styled } from 'styled-components'
 import { Box, Button, H2, H5, Illustration, IllustrationProps, Text } from '@adminjs/design-system'
+import { styled } from '@adminjs/design-system/styled-components'
 
 import { useTranslation } from '../../hooks/index.js'
 

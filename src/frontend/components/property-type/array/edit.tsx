@@ -1,4 +1,3 @@
-// @ts-nocheck
 import React, { MouseEvent, useCallback } from 'react'
 import { Button, Section, FormGroup, FormMessage, Icon, Box } from '@adminjs/design-system'
 import { DragDropContext, Droppable, Draggable, DropResult } from '@hello-pangea/dnd'

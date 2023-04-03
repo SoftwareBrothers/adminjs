@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { cssClass, themeGet } from '@adminjs/design-system'
-import { styled } from 'styled-components'
+import { styled } from '@adminjs/design-system/styled-components'
 
 import ViewHelpers from '../../../../backend/utils/view-helpers/view-helpers.js'
 import { BrandingOptions } from '../../../../adminjs-options.interface.js'
@@ -11,7 +11,7 @@ type Props = {
   branding: BrandingOptions;
 }
 
-export const StyledLogo = styled(Link)`
+export const StyledLogo: any = styled(Link)`
   text-align: center;
   display: flex;
   align-content: center;

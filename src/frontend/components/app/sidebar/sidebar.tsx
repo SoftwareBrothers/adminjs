@@ -1,8 +1,7 @@
-// @ts-nocheck
 import React from 'react'
 import { useSelector } from 'react-redux'
 import { Box, cssClass, themeGet } from '@adminjs/design-system'
-import { styled } from 'styled-components'
+import { styled } from '@adminjs/design-system/styled-components'
 
 import { BrandingOptions } from '../../../../adminjs-options.interface.js'
 import { ResourceJSON, PageJSON } from '../../../interfaces/index.js'

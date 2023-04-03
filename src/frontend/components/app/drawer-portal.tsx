@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { createPortal } from 'react-dom'
 import { createRoot } from 'react-dom/client'
 import { Drawer, DEFAULT_DRAWER_WIDTH } from '@adminjs/design-system'
-import { ThemeProvider } from 'styled-components'
+import { ThemeProvider } from '@adminjs/design-system/styled-components'
 
 import { ReduxState, RouterProps } from '../../store/index.js'
 import { setDrawerPreRoute } from '../../store/actions/set-drawer-preroute.js'
