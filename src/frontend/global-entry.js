@@ -12,7 +12,7 @@ import PropTypes from 'prop-types'
 import ReactSelectAsync from 'react-select/async'
 import ReactSelectCreatable from 'react-select/creatable'
 import * as ReactSelect from 'react-select'
-import * as styled from 'styled-components'
+import * as FeatherIcons from 'react-feather'
 
 window.React = React
 window.ReactDOM = ReactDOM
@@ -22,15 +22,14 @@ window.ReactRedux = ReactRedux
 window.ReactRouter = ReactRouter
 window.ReactRouterDOM = ReactRouterDOM
 window.PropTypes = PropTypes
-window.styled = styled
 window.ReactSelect = ReactSelect
 window.ReactSelectAsync = ReactSelectAsync
 window.ReactSelectCreatable = ReactSelectCreatable
+window.FeatherIcons = FeatherIcons
 
 export {
   React,
   ReactDOM,
   Redux,
   ReactRedux,
-  styled,
 }

@@ -1,8 +1,7 @@
-// @ts-nocheck
 import React from 'react'
 import { useSelector } from 'react-redux'
 import { cssClass, Box, Icon, themeGet } from '@adminjs/design-system'
-import { styled } from 'styled-components'
+import { styled } from '@adminjs/design-system/styled-components'
 
 import allowOverride from '../../hoc/allow-override.js'
 import LoggedIn from './logged-in.js'

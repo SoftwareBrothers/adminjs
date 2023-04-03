@@ -1,7 +1,7 @@
 import { Box, cssClass, Text } from '@adminjs/design-system'
+import { styled } from '@adminjs/design-system/styled-components'
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { styled } from 'styled-components'
 
 import ViewHelpers from '../../../backend/utils/view-helpers/view-helpers.js'
 import allowOverride from '../../hoc/allow-override.js'
@@ -9,7 +9,7 @@ import { useTranslation } from '../../hooks/use-translation.js'
 import { RecordJSON, ResourceJSON } from '../../interfaces/index.js'
 import { getActionElementCss } from '../../utils/index.js'
 
-export const BreadcrumbLink = styled(Link)`
+export const BreadcrumbLink: any = styled(Link)`
   color: ${({ theme }): string => theme.colors.grey60};
   font-family: ${({ theme }): string => theme.font};
   line-height: ${({ theme }): string => theme.lineHeights.default};
@@ -33,7 +33,7 @@ export const BreadcrumbLink = styled(Link)`
   }
 `
 
-export const BreadcrumbText = styled<any>(Text)`
+export const BreadcrumbText: any = styled<any>(Text)`
   color: ${({ theme }): string => theme.colors.grey100};
   font-family: ${({ theme }): string => theme.font};
   font-weight: ${({ theme }): string => theme.fontWeights.normal.toString()};
