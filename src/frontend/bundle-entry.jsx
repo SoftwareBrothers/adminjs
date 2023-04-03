@@ -26,20 +26,22 @@ const { locale } = store.getState()
 const { i18n } = initTranslations(locale)
 
 const Application = (
-  <Provider store={store}>
-    <ThemeProvider theme={theme}>
-      <I18nextProvider i18n={i18n}>
-        <BrowserRouter>
-          <App />
-        </BrowserRouter>
-      </I18nextProvider>
-    </ThemeProvider>
-  </Provider>
+  <Suspense fallback="AdminJS is loading">
+    <Provider store={store}>
+      <ThemeProvider theme={theme}>
+        <I18nextProvider i18n={i18n}>
+          <BrowserRouter>
+            <App />
+          </BrowserRouter>
+        </I18nextProvider>
+      </ThemeProvider>
+    </Provider>
+  </Suspense>
 )
 
 const loginAppProps = window.__APP_STATE__ ?? {}
 const LoginApplication = (
-  <Suspense fallback="...is loading">
+  <Suspense fallback="AdminJS is loading">
     <Provider store={store}>
       <ThemeProvider theme={theme}>
         <I18nextProvider i18n={i18n}>

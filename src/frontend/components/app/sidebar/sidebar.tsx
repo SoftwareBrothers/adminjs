@@ -29,12 +29,9 @@ const StyledSidebar = styled(Box)<BoxProps>`
 
   &.hidden {
     left: -${({ theme }) => theme.sizes.sidebarWidth};
-    // transform: translateX(-100%);
-    // transition: transform 300ms ease-out;
   }
   &.visible {
     left: 0;
-    // transform: translateX(0);
   }
 `
 
