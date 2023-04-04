@@ -1,7 +1,7 @@
 import type { ThemeConfig } from '../../../adminjs-options.interface.js'
 import { THEME_INITIALIZE } from '../actions/initialize-theme.js'
 
-export type ThemeInState = ThemeConfig | null
+export type ThemeInState = (ThemeConfig & { availableThemes?: ThemeConfig[] }) | null
 
 export const themeReducer = (
   state: ThemeInState = null,

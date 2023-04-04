@@ -1,15 +1,11 @@
 import merge from 'lodash/merge.js'
 
+import { AdminJSOptions, Assets, BrandingOptions } from '../../../adminjs-options.interface.js'
 import AdminJS from '../../../adminjs.js'
-import {
-  AdminJSOptions,
-  Assets,
-  BrandingOptions,
-  ThemeConfig,
-} from '../../../adminjs-options.interface.js'
 import { CurrentAdmin } from '../../../current-admin.interface.js'
+import { ThemeInState } from '../../../index.js'
+import { Locale, defaultLocale } from '../../../locale/index.js'
 import ViewHelpers from '../view-helpers/view-helpers.js'
-import { defaultLocale, Locale } from '../../../locale/index.js'
 
 const defaultBranding: AdminJSOptions['branding'] = {
   companyName: 'Company',
@@ -55,16 +51,14 @@ export const getLocales = async (admin: AdminJS, currentAdmin?: CurrentAdmin): P
 export const getTheme = async (
   admin: AdminJS,
   currentAdmin?: CurrentAdmin,
-): Promise<ThemeConfig | null> => {
+): Promise<ThemeInState> => {
   const { availableThemes, defaultTheme } = admin.options
   let themeId = defaultTheme ?? availableThemes?.[0].id
   if (currentAdmin?.theme?.length) {
     themeId = currentAdmin?.theme
   }
   const theme = availableThemes?.find(({ id }) => id === themeId)
-  return theme
-    ? { ...theme, availableThemes: availableThemes?.map(({ id, name }) => ({ id, name })) }
-    : null
+  return theme ? { ...theme, availableThemes } : null
 }
 
 export const getFaviconFromBranding = (branding: BrandingOptions): string => {

@@ -254,7 +254,6 @@ export type ThemeConfig = {
   overrides: Partial<ThemeOverride>;
   bundlePath?: string;
   stylePath?: string;
-  availableThemes?: Pick<ThemeConfig, 'id' | 'name'>[]
 }
 
 export type AdminJSSettings = {
