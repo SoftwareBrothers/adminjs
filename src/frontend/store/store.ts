@@ -1,5 +1,6 @@
 // Note: We are using legacy "createStore"
 import { combineReducers, legacy_createStore as createStore } from 'redux'
+import { composeWithDevToolsDevelopmentOnly } from '@redux-devtools/extension'
 
 import type { Assets, BrandingOptions, VersionProps } from '../../adminjs-options.interface.js'
 import {
@@ -64,4 +65,8 @@ const reducer = combineReducers<ReduxState>({
   versions: versionsReducer,
 })
 
-export default (initialState = {}) => createStore(reducer, initialState)
+export default (initialState = {}) => createStore(
+  reducer,
+  initialState,
+  composeWithDevToolsDevelopmentOnly(),
+)
