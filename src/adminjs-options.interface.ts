@@ -184,57 +184,41 @@ export interface AdminJSOptions {
    */
   env?: Record<string, string>;
 
-  /* cspell: disable */
-
   /**
-   * Translation file. Change it in order to:
+   * Translations
+   *
+   * Change it in order to:
    * - localize admin panel
    * - change any arbitrary text in the UI
    *
    * This is the example for changing name of a couple of resources along with some
-   * properties to Polish
+   * properties to Polish. You can also use this technic to change any text even in english.
+   * So to change button label of a "new action" from default "Create new" to "Create new Comment"
+   * only for Comment resource, place it in action section.
    *
    * ```javascript
    * {
-   *   ...
-   *   locale: {
-   *     language: 'pl',
-   *     translations: {
-   *       labels: {
-   *         Comments: 'Komentarze',
-   *       }
-   *       resources: {
-   *         Comments: {
-   *           properties: {
-   *             name: 'Nazwa Komentarza',
-   *             content: 'Zawartość',
+   *  locale: {
+   *    translations: {
+   *      pl: {
+   *        labels: {
+   *          Comments: "Komentarze",
+   *        },
+   *        resources: {
+   *          Comments: {
+   *            properties: {
+   *              name: "Nazwa Komentarza",
+   *              content: "Zawartość",
+   *            },
+   *            actions: {
+   *             new: 'Create new Comment'
    *           }
-   *         }
-   *       }
-   *     }
-   *   }
-   * }
-   * ```
-   *
-   * As I mentioned you can use this technic to change any text even in english.
-   * So to change button label for a "new action" from default "Create new" to "Create new Comment"
-   * only for Comment resource you can do:
-   *
-   * ```javascript
-   * {
-   *   ...
-   *   locale: {
-   *     translations: {
-   *       resources: {
-   *         Comments: {
-   *           actions: {
-   *             new: 'Create new Comment',
-   *           }
-   *         }
-   *       }
-   *     }
-   *   }
-   * }
+   *          }
+   *        }
+   *      }
+   *    }
+   *  }
+   *}
    * ```
    *
    * Check out the [i18n tutorial]{@tutorial i18n} to see how
@@ -251,6 +235,25 @@ export interface AdminJSOptions {
    * Additional settings.
    */
   settings?: Partial<AdminJSSettings>;
+
+  /**
+   * List of available themes, for example exports of the `@adminjs/themes` npm package.
+   */
+  availableThemes?: ThemeConfig[];
+
+  /**
+   * ID of the default theme. If not provided, the first theme from the `availableThemes`
+   * list will be used.
+   */
+  defaultTheme?: string;
+}
+
+export type ThemeConfig = {
+  id: string,
+  name: string,
+  overrides: Partial<ThemeOverride>;
+  bundlePath?: string;
+  stylePath?: string;
 }
 
 export type AdminJSSettings = {
@@ -282,7 +285,7 @@ export type Assets = {
    *  Mapping of core scripts in case you want to version your assets
    */
   coreScripts?: CoreScripts;
-}
+};
 
 /**
  * @alias AssetsFunction
@@ -292,7 +295,7 @@ export type Assets = {
  * @description
  * Function returning {@link Assets}
  */
-export type AssetsFunction = (admin?: CurrentAdmin) => Assets | Promise<Assets>
+export type AssetsFunction = (admin?: CurrentAdmin) => Assets | Promise<Assets>;
 
 /**
  * Version Props
@@ -309,12 +312,12 @@ export type VersionSettings = {
    * You can pass here your current API version.
    */
   app?: string;
-}
+};
 
 export type VersionProps = {
   admin?: string;
   app?: string;
-}
+};
 
 /**
  * Branding Options
@@ -358,7 +361,7 @@ export type BrandingOptions = {
    * URL to a favicon
    */
   favicon?: string;
-}
+};
 
 /**
  * Branding Options Function
@@ -370,8 +373,8 @@ export type BrandingOptions = {
  * @returns {BrandingOptions | Promise<BrandingOptions>}
  */
 export type BrandingOptionsFunction = (
-  admin?: CurrentAdmin
-) => BrandingOptions | Promise<BrandingOptions>
+  admin?: CurrentAdmin,
+) => BrandingOptions | Promise<BrandingOptions>;
 
 /**
  * Object describing regular page in AdminJS
@@ -393,7 +396,7 @@ export type AdminPage = {
    * Page icon
    */
   icon?: string;
-}
+};
 
 /**
  * Object describing map of regular pages in AdminJS
@@ -401,7 +404,7 @@ export type AdminPage = {
  * @alias AdminPages
  * @memberof AdminJSOptions
  */
-export type AdminPages = Record<string, AdminPage>
+export type AdminPages = Record<string, AdminPage>;
 
 /**
  * Default way of passing Options with a Resource
@@ -412,7 +415,7 @@ export type ResourceWithOptions = {
   resource: any;
   options: ResourceOptions;
   features?: Array<FeatureType>;
-}
+};
 
 /**
  * Function taking {@link ResourceOptions} and merging it with all other options
@@ -430,8 +433,8 @@ export type FeatureType = (
   /**
    * Options returned by the feature added before
    */
-  options: ResourceOptions
-) => ResourceOptions
+  options: ResourceOptions,
+) => ResourceOptions;
 
 /**
  * Function which is invoked when user enters given AdminPage
@@ -439,11 +442,7 @@ export type FeatureType = (
  * @alias PageHandler
  * @memberof AdminJSOptions
  */
-export type PageHandler = (
-  request: any,
-  response: any,
-  context: PageContext,
-) => Promise<any>
+export type PageHandler = (request: any, response: any, context: PageContext) => Promise<any>;
 
 /**
  * Bundle options
@@ -462,17 +461,20 @@ export type BundlerOptions = {
    * The file path to babel config file or json object of babel config.
    */
   babelConfig?: BabelConfig | string;
-}
+};
 
 export interface AdminJSOptionsWithDefault extends AdminJSOptions {
   rootPath: string;
   logoutPath: string;
   loginPath: string;
   databases?: Array<BaseDatabase>;
-  resources?: Array<BaseResource | {
-    resource: BaseResource;
-    options: ResourceOptions;
-  }>;
+  resources?: Array<
+    | BaseResource
+    | {
+        resource: BaseResource;
+        options: ResourceOptions;
+      }
+  >;
   dashboard: {
     handler?: PageHandler;
     component?: string;

@@ -9,6 +9,12 @@ import { initReactI18next } from 'react-i18next'
 import { defaultConfig, DEFAULT_NS, Locale, locales } from '../../locale/index.js'
 import { flat } from '../../utils/flat/index.js'
 
+/**
+  Initializes i18n translations based on provided configuration.
+  @function
+  @param {Locale} config - The configuration object for initializing i18n
+  @returns {{i18n: i18next}} - An object containing an i18n instance.
+*/
 const initTranslations = (config: Locale) => {
   const {
     language = 'en',

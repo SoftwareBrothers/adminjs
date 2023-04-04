@@ -6,26 +6,26 @@ import allowOverride from '../../../hoc/allow-override.js'
 
 const StyledWrapperWithFilter = styled(Box)`
   & > ${DrawerContent} {
-    background: ${({ theme }) => theme.colors.white};
+    background: ${({ theme }) => theme.colors.container};
     padding: ${({ theme }) => theme.space.xxl};
     overflow: visible;
   }
 
   & > ${DrawerFooter} {
-    background: ${({ theme }) => theme.colors.white};
+    background: ${({ theme }) => theme.colors.container};
     padding: 0 ${({ theme }) => theme.space.xxl} ${({ theme }) => theme.space.xxl};
   }
 `
 
 const StyledWrapper = styled(Box)`
   & ${DrawerContent} {
-    background: ${({ theme }) => theme.colors.white};
+    background: ${({ theme }) => theme.colors.container};
     padding: ${({ theme }) => theme.space.xxl};
     overflow: visible;
   }
 
   & ${DrawerFooter} {
-    background: ${({ theme }) => theme.colors.white};
+    background: ${({ theme }) => theme.colors.container};
     padding: 0 ${({ theme }) => theme.space.xxl} ${({ theme }) => theme.space.xxl};
   }
 `
