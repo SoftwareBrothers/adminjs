@@ -1,28 +1,24 @@
 import merge from 'lodash/merge.js'
 
-import AdminJS from '../../../adminjs.js'
 import { AdminJSOptions, Assets, BrandingOptions } from '../../../adminjs-options.interface.js'
+import AdminJS from '../../../adminjs.js'
 import { CurrentAdmin } from '../../../current-admin.interface.js'
+import { ThemeInState } from '../../../index.js'
+import { Locale, defaultLocale } from '../../../locale/index.js'
 import ViewHelpers from '../view-helpers/view-helpers.js'
-import { defaultLocale, Locale } from '../../../locale/index.js'
 
 const defaultBranding: AdminJSOptions['branding'] = {
   companyName: 'Company',
   withMadeWithLove: true,
 }
-const defaultAssets = {
+const defaultAssets: Assets = {
   styles: [],
   scripts: [],
 }
 
-export const getAssets = async (
-  admin: AdminJS,
-  currentAdmin?: CurrentAdmin,
-): Promise<Assets> => {
+export const getAssets = async (admin: AdminJS, currentAdmin?: CurrentAdmin): Promise<Assets> => {
   const { assets } = admin.options || {}
-  const computed = typeof assets === 'function'
-    ? await assets(currentAdmin)
-    : assets
+  const computed = typeof assets === 'function' ? await assets(currentAdmin) : assets
 
   return merge({}, defaultAssets, computed)
 }
@@ -36,9 +32,7 @@ export const getBranding = async (
   const h = new ViewHelpers(admin)
   const defaultLogo = h.assetPath('logo.svg')
 
-  const computed = typeof branding === 'function'
-    ? await branding(currentAdmin)
-    : branding
+  const computed = typeof branding === 'function' ? await branding(currentAdmin) : branding
   const merged = merge({}, defaultBranding, computed)
 
   // checking for undefined because logo can also be `false` or `null`
@@ -47,16 +41,24 @@ export const getBranding = async (
   return merged
 }
 
-export const getLocales = async (
-  admin: AdminJS,
-  currentAdmin?: CurrentAdmin,
-): Promise<Locale> => {
+export const getLocales = async (admin: AdminJS, currentAdmin?: CurrentAdmin): Promise<Locale> => {
   const { locale } = admin.options || {}
-  const computed = typeof locale === 'function'
-    ? await locale(currentAdmin)
-    : locale
+  const computed = typeof locale === 'function' ? await locale(currentAdmin) : locale
 
   return merge({}, defaultLocale, computed)
+}
+
+export const getTheme = async (
+  admin: AdminJS,
+  currentAdmin?: CurrentAdmin,
+): Promise<ThemeInState> => {
+  const { availableThemes, defaultTheme } = admin.options
+  let themeId = defaultTheme ?? availableThemes?.[0].id
+  if (currentAdmin?.theme?.length) {
+    themeId = currentAdmin?.theme
+  }
+  const theme = availableThemes?.find(({ id }) => id === themeId)
+  return theme ? { ...theme, availableThemes } : null
 }
 
 export const getFaviconFromBranding = (branding: BrandingOptions): string => {

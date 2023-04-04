@@ -101,7 +101,7 @@ const Card = styled(Box)`
 `
 
 Card.defaultProps = {
-  variant: 'white',
+  variant: 'container',
   boxShadow: 'card',
 }
 

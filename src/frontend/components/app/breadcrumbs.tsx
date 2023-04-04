@@ -18,6 +18,9 @@ export const BreadcrumbLink: any = styled(Link)`
 
   &:hover {
     color: ${({ theme }): string => theme.colors.primary100};
+    &:after {
+      color: ${({ theme }): string => theme.colors.grey60};
+    }
   }
 
   &:after {

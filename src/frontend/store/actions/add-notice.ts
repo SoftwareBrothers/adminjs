@@ -1,11 +1,11 @@
-import { NoticeMessageInState } from '../store.js'
-import { NoticeMessage } from '../../hoc/with-notice.js'
+import type { NoticeMessage } from '../../hoc/with-notice.js'
+import type { NoticeMessageInState } from '../reducers/noticesReducer.js'
 
 export const ADD_NOTICE = 'ADD_NOTICE'
 
 export type AddNoticeResponse = {
-  type: typeof ADD_NOTICE;
-  data: NoticeMessageInState;
+  type: typeof ADD_NOTICE
+  data: NoticeMessageInState
 }
 
 export const addNotice = (data: NoticeMessage = { message: '' }): AddNoticeResponse => ({

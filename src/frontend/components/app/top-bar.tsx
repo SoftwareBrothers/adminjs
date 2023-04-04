@@ -1,20 +1,18 @@
+import { Box, BoxProps, Icon, cssClass, themeGet } from '@adminjs/design-system'
+import { styled } from '@adminjs/design-system/styled-components'
 import React from 'react'
 import { useSelector } from 'react-redux'
-import { cssClass, Box, Icon, themeGet } from '@adminjs/design-system'
-import { styled } from '@adminjs/design-system/styled-components'
 
 import allowOverride from '../../hoc/allow-override.js'
+import { ReduxState } from '../../store/store.js'
+import LanguageSelect from './language-select/language-select.js'
 import LoggedIn from './logged-in.js'
 import Version from './version.js'
-import { ReduxState, Paths } from '../../store/store.js'
-import { CurrentAdmin } from '../../../current-admin.interface.js'
-import { VersionProps } from '../../../adminjs-options.interface.js'
-import LanguageSelect from './language-select/language-select.js'
 
-const NavBar = styled(Box)`
+const NavBar = styled(Box)<BoxProps>`
   height: ${({ theme }) => theme.sizes.navbarHeight};
   border-bottom: ${themeGet('borders', 'default')};
-  background: ${({ theme }) => theme.colors.white};
+  background: ${({ theme }) => theme.colors.container};
   display: flex;
   flex-direction: row;
   flex-shrink: 0;
@@ -30,13 +28,9 @@ type Props = {
 
 const TopBar: React.FC<Props> = (props) => {
   const { toggleSidebar } = props
-  const [session, paths, versions] = useSelector(
-    (state: ReduxState): [CurrentAdmin | null, Paths, VersionProps] => [
-      state.session,
-      state.paths,
-      state.versions,
-    ],
-  )
+  const session = useSelector((state: ReduxState) => state.session)
+  const paths = useSelector((state: ReduxState) => state.paths)
+  const versions = useSelector((state: ReduxState) => state.versions)
 
   return (
     <NavBar data-css="topbar">
@@ -58,4 +52,4 @@ const TopBar: React.FC<Props> = (props) => {
 
 const OverridableTopbar = allowOverride<Props>(TopBar, 'TopBar')
 
-export { OverridableTopbar as default, OverridableTopbar as TopBar }
+export { OverridableTopbar as TopBar, OverridableTopbar as default }

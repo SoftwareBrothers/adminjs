@@ -1,14 +1,24 @@
 import {
-  Box, Button, FormGroup, H2, H5, Illustration,
-  Input, Label, MadeWithLove, MessageBox, Text, BoxProps,
+  Box,
+  BoxProps,
+  Button,
+  FormGroup,
+  H2,
+  H5,
+  Illustration,
+  Input,
+  Label,
+  MadeWithLove,
+  MessageBox,
+  Text,
 } from '@adminjs/design-system'
 import { styled } from '@adminjs/design-system/styled-components'
 
 import React from 'react'
 import { useSelector } from 'react-redux'
+import { allowOverride } from '../../hoc/allow-override.js'
 import { useTranslation } from '../../hooks/index.js'
 import { ReduxState } from '../../store/store.js'
-import { allowOverride } from '../../hoc/allow-override.js'
 
 const Wrapper = styled(Box)<BoxProps>`
   align-items: center;
@@ -22,9 +32,22 @@ const StyledLogo = styled.img`
   margin: ${({ theme }) => theme.space.md} 0;
 `
 
+const IllustrationsWrapper = styled(Box)<BoxProps>`
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  & svg [stroke='#3B3552'] {
+    stroke: rgba(255, 255, 255, 0.5);
+  }
+  & svg [fill='#3040D6'] {
+    fill: rgba(255, 255, 255, 1);
+  }
+`
+
 export type LoginProps = {
-  message?: string;
-  action: string;
+  message?: string
+  action: string
 }
 
 export const Login: React.FC<LoginProps> = (props) => {
@@ -48,7 +71,7 @@ export const Login: React.FC<LoginProps> = (props) => {
           <Text fontWeight="lighter" mt="default">
             {translateComponent('Login.welcomeMessage')}
           </Text>
-          <Text textAlign="center" p="xxl">
+          <IllustrationsWrapper p="xxl">
             <Box display="inline" mr="default">
               <Illustration variant="Planet" width={82} height={91} />
             </Box>
@@ -58,7 +81,7 @@ export const Login: React.FC<LoginProps> = (props) => {
             <Box display="inline" position="relative" top="-20px">
               <Illustration variant="FlagInCog" width={82} height={91} />
             </Box>
-          </Text>
+          </IllustrationsWrapper>
         </Box>
         <Box
           as="form"
@@ -70,11 +93,10 @@ export const Login: React.FC<LoginProps> = (props) => {
         >
           <H5 marginBottom="xxl">
             {branding.logo ? (
-              <StyledLogo
-                src={branding.logo}
-                alt={branding.companyName}
-              />
-            ) : branding.companyName}
+              <StyledLogo src={branding.logo} alt={branding.companyName} />
+            ) : (
+              branding.companyName
+            )}
           </H5>
           {message && (
             <MessageBox
@@ -97,13 +119,15 @@ export const Login: React.FC<LoginProps> = (props) => {
             />
           </FormGroup>
           <Text mt="xl" textAlign="center">
-            <Button variant="contained">
-              {translateComponent('Login.loginButton')}
-            </Button>
+            <Button variant="contained">{translateComponent('Login.loginButton')}</Button>
           </Text>
         </Box>
       </Box>
-      {branding.withMadeWithLove ? (<Box mt="xxl"><MadeWithLove /></Box>) : null}
+      {branding.withMadeWithLove ? (
+        <Box mt="xxl">
+          <MadeWithLove />
+        </Box>
+      ) : null}
     </Wrapper>
   )
 }
