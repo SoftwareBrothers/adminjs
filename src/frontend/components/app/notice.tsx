@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
 import { MessageBox } from '@adminjs/design-system'
 
-import { NoticeMessageInState, ReduxState } from '../../store/store.js'
+import { NoticeMessageInState, ReduxState } from '../../store/index.js'
 import { dropNotice } from '../../store/actions/drop-notice.js'
 import { setNoticeProgress } from '../../store/actions/set-notice-progress.js'
 import allowOverride from '../../hoc/allow-override.js'
