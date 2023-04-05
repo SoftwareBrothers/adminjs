@@ -41,6 +41,10 @@ describe('<PropertyHeader />', function () {
     factory.resetSequence('property.label')
   })
 
+  afterEach(function () {
+    factory.resetSequence('property.label')
+  })
+
   context('render not selected but searchable field', function () {
     it('renders a client side translated label', async function () {
       const { findByText } = renderSubject(property, sortBy, direction)
