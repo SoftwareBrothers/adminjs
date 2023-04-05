@@ -44,7 +44,7 @@ describe('<PropertyHeader />', function () {
   context('render not selected but searchable field', function () {
     it('renders a client side translated label', async function () {
       const { findByText } = renderSubject(property, sortBy, direction)
-      const translatedLabel = 'Some Property 3'
+      const translatedLabel = 'Some Property 2'
 
       const label = await findByText(translatedLabel)
       expect(label).to.exist
