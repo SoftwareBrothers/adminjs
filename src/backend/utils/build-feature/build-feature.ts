@@ -29,7 +29,7 @@ function mergeActionHooks<T>(
   return hooks.length ? { [key]: hooks } : {}
 }
 
-const basicOptions = ['id', 'href', 'parent', 'sort', 'navigation'] as const
+const basicOptions = ['id', 'href', 'parent', 'sort', 'navigation', 'searchProperty'] as const
 const listOptions = [
   'listProperties', 'showProperties', 'editProperties', 'filterProperties',
 ] as const

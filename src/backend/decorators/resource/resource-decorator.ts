@@ -267,6 +267,17 @@ class ResourceDecorator {
     return record.get(this.titleProperty().name()) as string
   }
 
+  /**
+   * Returns PropertyDecorator of a property which should be used to search.
+   * If searchProperty not set, use titleProperty as fallback
+   *
+   * @return  {PropertyDecorator} PropertyDecorator of search property
+   */
+  searchProperty(): PropertyDecorator {
+    return (this.options.searchProperty && this.getPropertyByKey(this.options.searchProperty))
+      || this.titleProperty()
+  }
+
   getHref(currentAdmin?: CurrentAdmin): string | null {
     const { href } = this.options
     if (href) {
