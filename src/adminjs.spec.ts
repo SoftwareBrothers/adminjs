@@ -87,7 +87,7 @@ describe('AdminJS', function () {
     })
   })
 
-  describe('.bundle', function () {
+  describe('ComponentLoader', function () {
     const loader = new ComponentLoader()
     afterEach(function () {
       loader.clear()
