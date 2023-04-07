@@ -44,7 +44,7 @@ const Wrapper: React.FC<WrapperProps> = (props) => {
     : StyledWrapper
 
   return (
-    <Component {...rest} variant="grey" mx="auto" data-css="styled-wrapper">
+    <Component {...rest} variant="transparent" mx="auto" data-css="styled-wrapper">
       {children}
     </Component>
   )

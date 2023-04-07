@@ -27,7 +27,7 @@ export type Locale = AdminJSLocalesConfig & {
   /**
    * All the translations.
    */
-  translations: Record<string, LocaleTranslations>
+  translations?: Record<string, LocaleTranslations>
   /**
    * Available languages (array of ISO strings)
    */

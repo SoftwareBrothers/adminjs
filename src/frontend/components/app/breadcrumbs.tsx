@@ -93,10 +93,10 @@ const Breadcrumbs: React.FC<BreadcrumbProps> = (props) => {
       <BreadcrumbLink to={h.dashboardUrl()}>{tl('dashboard')}</BreadcrumbLink>
       {listAction ? (
         <BreadcrumbLink to={resource.href ? resource.href : '/'} className={record ? 'is-active' : ''}>
-          {resource.name}
+          {tl(resource.name, resource.id)}
         </BreadcrumbLink>
       ) : (
-        <BreadcrumbText>{resource.name}</BreadcrumbText>
+        <BreadcrumbText>{tl(resource.name, resource.id)}</BreadcrumbText>
       )}
       {action && action.name !== 'list' && <BreadcrumbLink to="#">{ta(action.label)}</BreadcrumbLink>}
     </Box>

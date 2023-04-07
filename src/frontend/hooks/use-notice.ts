@@ -1,13 +1,13 @@
 import { useDispatch } from 'react-redux'
 
-import { addNotice } from '../store/actions/add-notice.js'
-import { NoticeMessage } from '../hoc/with-notice.js'
+import { type NoticeMessage } from '../interfaces/noticeMessage.interface.js'
+import { addNotice, type AddNoticeResponse } from '../store/actions/add-notice.js'
 
 /**
  * @memberof useNotice
  * @alias AddNotice
  */
-export type AddNotice = (notice: NoticeMessage) => any;
+export type AddNotice = (notice: NoticeMessage) => AddNoticeResponse
 
 /**
  * @classdesc
@@ -18,7 +18,7 @@ export type AddNotice = (notice: NoticeMessage) => any;
  *
  * const myComponent = () => {
  *   const sendNotice = useNotice()
- *   render (
+ *   return (
  *     <Button onClick={() => sendNotice({ message: 'I am awesome' })}>I am awesome</Button>
  *   )
  * }
@@ -31,7 +31,7 @@ export type AddNotice = (notice: NoticeMessage) => any;
  */
 export const useNotice = (): AddNotice => {
   const dispatch = useDispatch()
-  return (notice): any => dispatch(addNotice(notice))
+  return (notice) => dispatch(addNotice(notice))
 }
 
 export default useNotice

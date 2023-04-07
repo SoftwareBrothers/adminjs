@@ -1,9 +1,10 @@
-import { ActionContext, RecordActionResponse, BulkActionResponse } from '../../actions/action.interface.js'
-import ValidationError, { PropertyErrors } from '../../utils/errors/validation-error.js'
+import { NoticeMessage } from '../../../index.js'
+import { ActionContext, BulkActionResponse, RecordActionResponse } from '../../actions/action.interface.js'
+import AppError from '../../utils/errors/app-error.js'
 import ForbiddenError from '../../utils/errors/forbidden-error.js'
 import NotFoundError from '../../utils/errors/not-found-error.js'
-import AppError from '../../utils/errors/app-error.js'
 import RecordError from '../../utils/errors/record-error.js'
+import ValidationError, { PropertyErrors } from '../../utils/errors/validation-error.js'
 
 /**
  * @private
@@ -26,6 +27,7 @@ const actionErrorHandler = (
     let baseMessage = ''
     let errors: PropertyErrors = {}
     let meta: any
+    let notice: NoticeMessage
     if (error instanceof ValidationError) {
       baseMessage = error.baseError?.message
         || 'thereWereValidationErrors'
@@ -49,6 +51,18 @@ const actionErrorHandler = (
 
     const recordJson = record?.toJSON?.(currentAdmin)
 
+    notice = {
+      message: baseMessage,
+      type: 'error',
+    }
+
+    if (error instanceof AppError && error.notice) {
+      notice = {
+        ...notice,
+        ...error.notice,
+      }
+    }
+
     return {
       record: {
         ...recordJson,
@@ -58,10 +72,7 @@ const actionErrorHandler = (
         errors,
       },
       records: [],
-      notice: {
-        message: baseMessage,
-        type: 'error',
-      },
+      notice,
       meta,
     }
   }

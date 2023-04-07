@@ -1,10 +1,10 @@
 export const DROP_NOTICE = 'DROP_NOTICE'
 
 export type DropNoticeResponse = {
-  type: typeof DROP_NOTICE;
+  type: typeof DROP_NOTICE
   data: {
-    noticeId: string;
-  };
+    noticeId: string
+  }
 }
 
 export const dropNotice = (noticeId: string): DropNoticeResponse => ({
