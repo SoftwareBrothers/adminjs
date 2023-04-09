@@ -190,7 +190,7 @@ class ApiClient {
   async recordAction(options: RecordActionAPIParams): Promise<AxiosResponse<RecordActionResponse>> {
     const { resourceId, recordId, actionName, data, ...axiosParams } = options
     const response = await this.client.request({
-      url: `/api/resources/${resourceId}/records/${recordId}/${actionName}`,
+      url: `/api/resources/${resourceId}/records/${encodeURIComponent(recordId)}/${actionName}`,
       method: data ? 'POST' : 'GET',
       ...axiosParams,
       data,

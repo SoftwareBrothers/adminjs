@@ -30,7 +30,7 @@ const getAction = (resource: ResourceJSON): ActionJSON | undefined => {
   const actionName = ':actionName'
   const recordId = ':recordId'
 
-  const recordActionUrl = h.recordActionUrl({ resourceId, recordId, actionName })
+  const recordActionUrl = h.recordActionUrl({ resourceId, recordId, actionName, noURIEncode: true })
   const resourceActionUrl = h.resourceActionUrl({ resourceId, actionName })
   const bulkActionUrl = h.bulkActionUrl({ resourceId, actionName })
 
