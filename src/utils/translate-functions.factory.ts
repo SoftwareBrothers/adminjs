@@ -17,8 +17,8 @@ export type TranslateFunction = (
   /**
    * [Translate options]{@link https://www.i18next.com/overview/configuration-options}
    */
-  options?: TOptions
-) => string
+  options?: TOptions,
+) => string;
 
 /**
  * Translate Functions are the helper functions which you can use to translate
@@ -139,20 +139,21 @@ const translate = (
   key: string,
   name: string,
   resourceId?: string | TOptions,
-  options?: TOptions,
+  options: TOptions = {},
 ): string => {
   // cspell:disable-next-line
   if (i18n.language === 'cimode') return [key, name].join('.')
 
-  const realOptions: TOptions = (typeof resourceId === 'string' ? options : resourceId) || {}
+  let realOptions: TOptions = { ...options, defaultValue: options.defaultValue || startCase(name) }
   let keys = [`${key}.${name}`]
-  if (resourceId) {
+
+  if (resourceId && typeof resourceId !== 'string') {
+    realOptions = resourceId
+  } else if (resourceId) {
     keys = [`resources.${resourceId}.${key}.${name}`, ...keys]
   }
-  if (i18n.exists(keys)) {
-    return i18n.t(keys, realOptions)
-  }
-  return realOptions.defaultValue ?? startCase(name)
+
+  return i18n.t(keys, realOptions)
 }
 
 export const createFunctions = (i18n: I18n): TranslateFunctions => {

@@ -21,7 +21,6 @@ import { TranslateFunctions } from './utils/translate-functions.factory.js'
 import { relativeFilePathResolver } from './utils/file-resolver.js'
 import { Router } from './backend/utils/index.js'
 import { ComponentLoader } from './backend/utils/component-loader.js'
-import { OverridableComponent } from './frontend/index.js'
 import { bundlePath, stylePath } from './utils/theme-bundler.js'
 
 const __dirname = url.fileURLToPath(new URL('.', import.meta.url))
@@ -272,35 +271,6 @@ class AdminJS {
       }
     }
     this.options.bundler.babelConfig = config
-  }
-
-  /**
-   * Requires given `.jsx/.tsx` file, that it can be bundled to the frontend.
-   * It will be available under AdminJS.UserComponents[componentId].
-   *
-   * @param   {String}  src  Path to a file containing react component.
-   *
-   * @param  {OverridableComponent}  [componentName] - name of the component which you want
-   *                                  to override
-   * @returns {String}                componentId - uniq id of a component
-   *
-   * @example <caption>Passing custom components in AdminJS options</caption>
-   * const adminJsOptions = {
-   *   dashboard: {
-   *     component: AdminJS.bundle('./path/to/component'),
-   *   }
-   * }
-   * @example <caption>Overriding AdminJS core components</caption>
-   * // somewhere in the code
-   * AdminJS.bundle('./path/to/new-sidebar/component', 'SidebarFooter')
-   *
-   * @deprecated since version 6.5.0, use {@link ComponentLoader} instead
-   */
-  public static bundle(src: string, componentName?: OverridableComponent): string {
-    // eslint-disable-next-line no-plusplus
-    const name = componentName ?? `Component${this.__unsafe_componentIndex++}`
-    this.__unsafe_staticComponentLoader.__unsafe_addWithoutChecks(name, src, 'bundle')
-    return name
   }
 
   addThemeAssets() {

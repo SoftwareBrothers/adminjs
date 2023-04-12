@@ -38,6 +38,11 @@ describe('<PropertyHeader />', function () {
 
   beforeEach(async function () {
     property = await factory.build<PropertyJSON>('PropertyJSON', { isSortable: true })
+    factory.resetSequence('property.label')
+  })
+
+  afterEach(function () {
+    factory.resetSequence('property.label')
   })
 
   context('render not selected but searchable field', function () {
@@ -46,7 +51,6 @@ describe('<PropertyHeader />', function () {
       const translatedLabel = 'Some Property 2'
 
       const label = await findByText(translatedLabel)
-
       expect(label).to.exist
     })
 

@@ -117,7 +117,7 @@ describe('PropertyDecorator', () => {
       sinon.stub(BaseProperty.prototype, 'availableValues').returns(['val'])
       expect(new PropertyDecorator(args).availableValues()).to.deep.equal([{
         value: 'val',
-        label: 'name.val',
+        label: 'val',
       }])
     })
   })

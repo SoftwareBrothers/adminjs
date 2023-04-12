@@ -1,5 +1,5 @@
-import type { NoticeMessage } from '../../hoc/with-notice.js'
-import type { NoticeMessageInState } from '../reducers/noticesReducer.js'
+import { type NoticeMessage } from '../../interfaces/noticeMessage.interface.js'
+import { type NoticeMessageInState } from '../reducers/noticesReducer.js'
 
 export const ADD_NOTICE = 'ADD_NOTICE'
 
@@ -8,14 +8,11 @@ export type AddNoticeResponse = {
   data: NoticeMessageInState
 }
 
-export const addNotice = (data: NoticeMessage = { message: '' }): AddNoticeResponse => ({
+export const addNotice = (data: NoticeMessage): AddNoticeResponse => ({
   type: ADD_NOTICE,
   data: {
-    message: data.message,
-    id: Math.random().toString(36).substr(2, 9),
-    type: data.type || 'success',
+    id: `notice-${Date.now() + Math.random()}`,
     progress: 0,
-    options: data.options,
-    resourceId: data.resourceId,
+    ...data,
   },
 })

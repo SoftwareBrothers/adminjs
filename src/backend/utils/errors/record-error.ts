@@ -9,11 +9,11 @@ export type RecordError = {
   /**
    * error type (i.e. required)
    */
-  type?: ErrorTypeEnum | string;
+  type?: ErrorTypeEnum | string
   /**
-   * human readable message
+   * Code of message
    */
-  message: string;
+  message: string
 }
 
 export default RecordError

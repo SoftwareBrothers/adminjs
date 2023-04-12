@@ -1,4 +1,5 @@
 import type { InitOptions } from 'i18next'
+import startCase from 'lodash/startCase.js'
 
 import type { Locale } from './config.js'
 
@@ -25,6 +26,7 @@ export const defaultConfig: InitOptions = {
     useSuspense: false,
   },
   resources: {},
+  parseMissingKeyHandler: (key, defaultValue) => defaultValue ?? startCase(key),
   get initImmediate(): boolean {
     return typeof window !== 'undefined'
   },

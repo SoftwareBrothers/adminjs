@@ -8,7 +8,7 @@ import BaseResource from '../adapters/resource/base-resource.js'
 import ActionDecorator from '../decorators/action/action-decorator.js'
 import { LayoutElement, LayoutElementFunction } from '../utils/layout-element-parser/index.js'
 import { RecordJSON } from '../../frontend/interfaces/index.js'
-import { NoticeMessage } from '../../frontend/hoc/with-notice.js'
+import { type NoticeMessage } from '../../frontend/interfaces/noticeMessage.interface.js'
 import { TranslateFunctions } from '../../utils/translate-functions.factory.js'
 
 export type ActionQueryParameters = {
