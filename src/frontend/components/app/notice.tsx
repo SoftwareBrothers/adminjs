@@ -61,7 +61,9 @@ const NoticeElement: React.FC<NoticeElementProps> = (props) => {
       message={message}
       variant={variant}
       onCloseClick={drop}
-    />
+    >
+      {notice.body}
+    </MessageBox>
   )
 }
 
