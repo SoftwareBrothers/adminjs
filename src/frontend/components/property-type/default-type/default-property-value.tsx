@@ -1,27 +1,31 @@
-import React from 'react'
 import { Badge } from '@adminjs/design-system'
+import React, { type FC } from 'react'
 
+import startCase from 'lodash/startCase.js'
 import allowOverride from '../../../hoc/allow-override.js'
-import { ShowPropertyProps } from '../base-property-props.js'
+import { useTranslation } from '../../../hooks/use-translation.js'
+import { type ShowPropertyProps } from '../base-property-props.js'
 
-const DefaultPropertyValue: React.FC<ShowPropertyProps> = (props) => {
-  const { property, record } = props
+const DefaultPropertyValue: FC<ShowPropertyProps> = ({
+  property: { propertyPath, availableValues, path },
+  record,
+  resource: { id: resourceId },
+}) => {
+  const rawValue = record?.params[path]
+  const { translateProperty } = useTranslation()
 
-  const rawValue = record?.params[property.path]
+  if (typeof rawValue === 'undefined') return null
 
-  if (typeof rawValue === 'undefined') {
-    return null
-  }
+  const option = availableValues?.find((opt) => opt.value === rawValue)
 
-  if (property.availableValues) {
-    const option = property.availableValues.find((opt) => opt.value === rawValue)
-
-    if (!option) {
-      return rawValue
-    }
-
+  if (option) {
+    const label = option.label || rawValue
     return (
-      <Badge>{option?.label || rawValue}</Badge>
+      <Badge>
+        {translateProperty(`${propertyPath}.${label}`, resourceId, {
+          defaultValue: startCase(label),
+        })}
+      </Badge>
     )
   }
 

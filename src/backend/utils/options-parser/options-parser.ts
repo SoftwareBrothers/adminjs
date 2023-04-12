@@ -3,8 +3,10 @@ import merge from 'lodash/merge.js'
 import { AdminJSOptions, Assets, BrandingOptions } from '../../../adminjs-options.interface.js'
 import AdminJS from '../../../adminjs.js'
 import { CurrentAdmin } from '../../../current-admin.interface.js'
-import { ThemeInState } from '../../../index.js'
+
+import { ThemeInState } from '../../../frontend/store/index.js'
 import { Locale, defaultLocale } from '../../../locale/index.js'
+import { flat } from '../../../utils/flat/index.js'
 import ViewHelpers from '../view-helpers/view-helpers.js'
 
 const defaultBranding: AdminJSOptions['branding'] = {
@@ -42,10 +44,10 @@ export const getBranding = async (
 }
 
 export const getLocales = async (admin: AdminJS, currentAdmin?: CurrentAdmin): Promise<Locale> => {
-  const { locale } = admin.options || {}
+  const { locale = {} } = admin.options || {}
   const computed = typeof locale === 'function' ? await locale(currentAdmin) : locale
 
-  return merge({}, defaultLocale, computed)
+  return flat.unflatten(merge({}, flat.flatten(defaultLocale), flat.flatten(computed)))
 }
 
 export const getTheme = async (

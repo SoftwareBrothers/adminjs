@@ -1,9 +1,9 @@
 import AdminJS from '../../../adminjs.js'
-import PropertyOptions from './property-options.interface.js'
-import BaseResource from '../../adapters/resource/base-resource.js'
+import { BasePropertyJSON, PropertyPlace } from '../../../frontend/interfaces/index.js'
 import BaseProperty, { PropertyType } from '../../adapters/property/base-property.js'
+import BaseResource from '../../adapters/resource/base-resource.js'
 import ResourceDecorator from '../resource/resource-decorator.js'
-import { PropertyPlace, BasePropertyJSON } from '../../../frontend/interfaces/index.js'
+import PropertyOptions from './property-options.interface.js'
 import { overrideFromOptions } from './utils/override-from-options.js'
 
 /**
@@ -150,10 +150,7 @@ export class PropertyDecorator {
     }
     const values = this.property.availableValues()
     if (values) {
-      return values.map((val) => ({
-        value: val,
-        label: `${this.propertyPath}.${val}`,
-      }))
+      return values.map((value) => ({ value, label: value }))
     }
     return null
   }

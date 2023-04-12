@@ -1,13 +1,14 @@
-import { useNavigate, useLocation } from 'react-router'
+import { useLocation, useNavigate } from 'react-router'
 /* eslint-disable no-param-reassign */
 import type {
-  NavigationProps,
+  IconProps,
   NavigationElementProps,
   NavigationElementWithChildrenProps,
-  IconProps,
+  NavigationProps,
 } from '@adminjs/design-system'
 import { useMemo } from 'react'
 
+import { useTranslation } from '../hooks/use-translation.js'
 import { ResourceJSON } from '../interfaces/index.js'
 import useLocalStorage from './use-local-storage/use-local-storage.js'
 
@@ -22,6 +23,7 @@ export function useNavigationResources(
   const [openElements, setOpenElements] = useLocalStorage<Record<string, boolean>>('sidebarElements', {})
   const navigate = useNavigate()
   const location = useLocation()
+  const { translateLabel } = useTranslation()
 
   const enrichResource = useMemo(() => (
     resource: ResourceJSON,
@@ -30,7 +32,7 @@ export function useNavigationResources(
     href: resource.href || undefined,
     icon,
     isSelected: isSelected(resource.href, location),
-    label: resource.name,
+    label: translateLabel(resource.name, resource.id),
     id: resource.id,
     onClick: (event): void => {
       if (resource.href) {
