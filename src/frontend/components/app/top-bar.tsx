@@ -1,4 +1,4 @@
-import { Box, BoxProps, Icon, cssClass, themeGet } from '@adminjs/design-system'
+import { Box, BoxProps, Icon, cssClass } from '@adminjs/design-system'
 import { styled } from '@adminjs/design-system/styled-components'
 import React from 'react'
 import { useSelector } from 'react-redux'
@@ -11,11 +11,12 @@ import Version from './version.js'
 
 const NavBar = styled(Box)<BoxProps>`
   height: ${({ theme }) => theme.sizes.navbarHeight};
-  border-bottom: ${themeGet('borders', 'default')};
+  border-bottom: ${({ theme }) => theme.borders.default};
   background: ${({ theme }) => theme.colors.container};
   display: flex;
   flex-direction: row;
   flex-shrink: 0;
+  align-items: center;
 `
 
 NavBar.defaultProps = {
@@ -41,7 +42,7 @@ const TopBar: React.FC<Props> = (props) => {
         display={['block', 'block', 'block', 'block', 'none']}
         style={{ cursor: 'pointer' }}
       >
-        <Icon icon="Menu" size={32} color="grey100" />
+        <Icon icon="Menu" size={24} />
       </Box>
       <Version versions={versions} />
       <LanguageSelect />

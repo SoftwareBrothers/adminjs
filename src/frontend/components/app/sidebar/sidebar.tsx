@@ -10,6 +10,8 @@ import SidebarFooter from './sidebar-footer.js'
 import SidebarPages from './sidebar-pages.js'
 import SidebarResourceSection from './sidebar-resource-section.js'
 
+export const SIDEBAR_Z_INDEX = 50
+
 type Props = {
   isVisible: boolean
 }
@@ -17,15 +19,16 @@ type Props = {
 const StyledSidebar = styled(Box)<BoxProps>`
   top: 0;
   bottom: 0;
-  flex-shrink: 0;
   overflow-y: auto;
   width: ${({ theme }) => theme.sizes.sidebarWidth};
   border-right: ${({ theme }) => theme.borders.default};
   display: flex;
   flex-direction: column;
-  z-index: 50;
+  flex-shrink: 0;
+  z-index: ${SIDEBAR_Z_INDEX};
   background: ${({ theme }) => theme.colors.sidebar};
-  transition: left 300ms ease-in;
+
+  transition: left 0.25s ease-in-out;
 
   &.hidden {
     left: -${({ theme }) => theme.sizes.sidebarWidth};

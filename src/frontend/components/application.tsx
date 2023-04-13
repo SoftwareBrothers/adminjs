@@ -5,7 +5,7 @@ import { Box, Overlay } from '@adminjs/design-system'
 import { useLocation } from 'react-router'
 
 import ViewHelpers from '../../backend/utils/view-helpers/view-helpers.js'
-import Sidebar from './app/sidebar/sidebar.js'
+import Sidebar, { SIDEBAR_Z_INDEX } from './app/sidebar/sidebar.js'
 import TopBar from './app/top-bar.js'
 import Notice from './app/notice.js'
 import allowOverride from '../hoc/allow-override.js'
@@ -60,6 +60,7 @@ const App: React.FC = () => {
       {sidebarVisible ? (
         <Overlay
           onClick={(): void => toggleSidebar(!sidebarVisible)}
+          zIndex={SIDEBAR_Z_INDEX - 1}
         />
       ) : null}
       <Sidebar isVisible={sidebarVisible} data-css="sidebar" />
