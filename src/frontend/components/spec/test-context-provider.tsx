@@ -1,6 +1,7 @@
 import React, { ReactNode } from 'react'
 import { StaticRouter } from 'react-router-dom/server.js'
 import { combineStyles } from '@adminjs/design-system'
+// @ts-ignore Note: Ignore while @adminjs/design-system/styled-components doesn't export types
 import { ThemeProvider } from '@adminjs/design-system/styled-components'
 import { I18nextProvider } from 'react-i18next'
 
