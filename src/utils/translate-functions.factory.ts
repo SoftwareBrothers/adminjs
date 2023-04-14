@@ -144,7 +144,7 @@ const translate = (
   // cspell:disable-next-line
   if (i18n.language === 'cimode') return [key, name].join('.')
 
-  let realOptions: TOptions = { ...options, defaultValue: options.defaultValue || startCase(name) }
+  let realOptions: TOptions = { ...options, defaultValue: options.defaultValue ?? startCase(name) }
   let keys = [`${key}.${name}`]
 
   if (resourceId && typeof resourceId !== 'string') {
@@ -174,7 +174,7 @@ export const createFunctions = (i18n: I18n): TranslateFunctions => {
   )
 
   const translateMessage: TranslateFunction = (messageName, resourceId, options) => (
-    translate(i18n, 'messages', messageName, resourceId, options)
+    translate(i18n, 'messages', messageName, resourceId, { ...options, defaultValue: options?.defaultValue ?? messageName })
   )
 
   const translateComponent: TranslateFunction = (messageName, resourceId, options) => (
