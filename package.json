@@ -87,7 +87,7 @@
   },
   "homepage": "https://github.com/SoftwareBrothers/adminjs#readme",
   "dependencies": {
-    "@adminjs/design-system": "^4.0.0-beta-v4.14",
+    "@adminjs/design-system": "^4.0.0-beta-v4.16",
     "@babel/core": "^7.21.0",
     "@babel/parser": "^7.21.0",
     "@babel/plugin-syntax-import-assertions": "^7.20.0",
