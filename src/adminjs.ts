@@ -295,7 +295,7 @@ AdminJS.VERSION = VERSION
 AdminJS.ACTIONS = ACTIONS
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
-interface AdminJS extends TranslateFunctions { }
+interface AdminJS extends TranslateFunctions {}
 
 export const { registerAdapter } = AdminJS
 

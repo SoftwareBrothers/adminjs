@@ -79,7 +79,6 @@ class ApiController {
       h,
       currentAdmin: this.currentAdmin,
       _admin: this._admin,
-      ...this._admin.translateFunctions,
     }
   }
 
