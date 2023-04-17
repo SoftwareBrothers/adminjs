@@ -8,7 +8,8 @@ import createStore, {
 import ViewHelpers from '../backend/utils/view-helpers/view-helpers.js'
 import { initializeAssets, initializeBranding, initializeLocale } from './store/index.js'
 import AdminJS from '../adminjs.js'
-import { getAssets, getBranding, getFaviconFromBranding } from '../backend/utils/options-parser/options-parser.js'
+import { getAssets, getBranding, getFaviconFromBranding, getLocales } from '../backend/utils/options-parser/options-parser.js'
+import { defaultLocale } from '../locale/index.js'
 
 type LoginTemplateAttributes = {
   /**
@@ -32,6 +33,7 @@ const html = async (
   const branding = await getBranding(admin)
   const assets = await getAssets(admin)
   const faviconTag = getFaviconFromBranding(branding)
+  const locales = await getLocales(admin || defaultLocale)
 
   const scripts = ((assets && assets.scripts) || [])
     .map((s) => `<script src="${s}"></script>`)
@@ -40,7 +42,7 @@ const html = async (
 
   store.dispatch(initializeBranding(branding))
   store.dispatch(initializeAssets(assets))
-  store.dispatch(initializeLocale(admin.locale))
+  store.dispatch(initializeLocale(locales))
 
   const theme = combineStyles(branding.theme)
   const reduxState = store.getState()
