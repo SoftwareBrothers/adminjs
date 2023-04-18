@@ -2,10 +2,10 @@
 # yarn lockfile v1
 
 
-"@adminjs/design-system@^4.0.0-beta-v4.18":
-  version "4.0.0-beta-v4.18"
-  resolved "https://registry.yarnpkg.com/@adminjs/design-system/-/design-system-4.0.0-beta-v4.18.tgz#239a2afea9727a8429c4302ff867e057573a96bb"
-  integrity sha512-PvUPI4GKCtZclepc1+5G6DgnB9FzftUYHYZbGmjhSLGlte7GvpMWuRBizbq8L/czVUr8sX4cEs/ENrSppxhI1w==
+"@adminjs/design-system@^4.0.0":
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/@adminjs/design-system/-/design-system-4.0.0.tgz#a1dbb1ec05b816b61d939698504bbb2af5228504"
+  integrity sha512-+Y9C1KBWidBOK3MFlNdLn+yOZxOXIFOxafRBLzmYCKTx7A28rKnsxpAoOxo/p/1mloOduBfyoOFXXKXWUaU1vQ==
   dependencies:
     "@hypnosphi/create-react-context" "^0.3.1"
     "@tiptap/core" "2.0.1"
