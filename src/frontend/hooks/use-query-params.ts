@@ -6,29 +6,38 @@ import { useCallback, useMemo } from 'react'
 import { useSearchParams } from 'react-router-dom'
 
 // eslint-disable-next-line no-shadow
+export enum QueryParams {
+  Tab = 'tab',
+  Redirect = 'redirectUrl',
+  Refresh = 'refresh',
+}
+
+// eslint-disable-next-line no-shadow
 export enum QueryListParams {
   Page = 'page',
   SortBy = 'sortBy',
   Direction = 'direction',
   Filters = 'filters',
-  Tab = 'tab',
   Query = 'query',
-  Redirect = 'redirectUrl',
-  Refresh = 'refresh',
 }
 
-type ListParamsQuery = Record<QueryListParams, string> & {
+type Params<FiltersT = Record<string, unknown>> = {
+  sortBy: string
+  page: string
+  tab: string
+  redirectUrl: string
   direction: 'asc' | 'desc'
+  filters: FiltersT
 }
 
-export function useQueryListParams<FiltersT = Record<string, unknown>>() {
+export function useQueryParams<FiltersT = Record<string, unknown>>() {
   const [searchParams, setSearchParams] = useSearchParams()
 
   const parsedQuery = useMemo(
-    () => parse(searchParams.toString()) as ListParamsQuery,
+    () => parse(searchParams.toString()) as Params<FiltersT>,
     [searchParams],
   )
-  const { sortBy, direction, page, tab, filters, query, redirectUrl } = parsedQuery
+  const { sortBy, direction, page, tab, filters, redirectUrl } = parsedQuery
   const showFilters = !isEmpty(filters)
   const listParams = useMemo(
     () => pick(parsedQuery, [
@@ -41,9 +50,9 @@ export function useQueryListParams<FiltersT = Record<string, unknown>>() {
     [parsedQuery],
   )
 
-  const storeParams = useCallback((params: Partial<ListParamsQuery>) => {
-    const newQuery = { tab, filters, sortBy, direction, page, query, ...params }
-    return setSearchParams(stringify(newQuery, { skipNulls: true }))
+  const storeParams = useCallback((params: Partial<Params>) => {
+    const newQuery = { sortBy, direction, page, tab, filters, redirectUrl, ...params }
+    return setSearchParams(stringify(newQuery, { skipNulls: true, allowDots: true }))
   }, [])
 
   return {

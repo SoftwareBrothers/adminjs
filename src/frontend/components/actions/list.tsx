@@ -3,7 +3,7 @@ import React, { useEffect } from 'react'
 import { useLocation } from 'react-router'
 
 import allowOverride from '../../hoc/allow-override.js'
-import { useQueryListParams } from '../../hooks/use-query-list-params.js'
+import { useQueryParams } from '../../hooks/use-query-params.js'
 import useRecords from '../../hooks/use-records/use-records.js'
 import useSelectedRecords from '../../hooks/use-selected-records/use-selected-records.js'
 import { getActionElementCss } from '../../utils/index.js'
@@ -29,7 +29,7 @@ const List: React.FC<ActionProps> = ({ resource, setTag }) => {
     setSelectedRecords,
   } = useSelectedRecords(records)
   const location = useLocation()
-  const { storeParams } = useQueryListParams()
+  const { storeParams } = useQueryParams()
 
   useEffect(() => {
     if (setTag) {
