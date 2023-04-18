@@ -1,6 +1,6 @@
 // Note: We are using legacy "createStore"
-import { combineReducers, legacy_createStore as createStore } from 'redux'
 import { composeWithDevToolsDevelopmentOnly } from '@redux-devtools/extension'
+import { combineReducers, legacy_createStore as createStore } from 'redux'
 
 import type { Assets, BrandingOptions, VersionProps } from '../../adminjs-options.interface.js'
 import {
@@ -8,6 +8,7 @@ import {
   brandingReducer,
   dashboardReducer,
   drawerReducer,
+  filterDrawerReducer,
   localesReducer,
   modalReducer,
   noticesReducer,
@@ -20,6 +21,7 @@ import {
   versionsReducer,
   type DashboardInState,
   type DrawerInState,
+  type FilterDrawerInState,
   type LolcaleInState,
   type ModalInState,
   type NoticesInState,
@@ -36,6 +38,7 @@ export type ReduxState = {
   branding: BrandingOptions
   dashboard: DashboardInState
   drawer: DrawerInState
+  filterDrawer: FilterDrawerInState
   locale: LolcaleInState
   modal: ModalInState
   notices: NoticesInState
@@ -53,6 +56,7 @@ const reducer = combineReducers<ReduxState>({
   branding: brandingReducer,
   dashboard: dashboardReducer,
   drawer: drawerReducer,
+  filterDrawer: filterDrawerReducer,
   locale: localesReducer,
   modal: modalReducer,
   notices: noticesReducer,
