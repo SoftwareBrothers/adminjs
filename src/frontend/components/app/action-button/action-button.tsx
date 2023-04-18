@@ -1,9 +1,6 @@
-/* eslint-disable no-undef */
-/* eslint-disable no-alert */
-/* eslint-disable no-restricted-globals */
-
 import React, { ReactElement } from 'react'
 
+import { stringify } from 'qs'
 import { ActionResponse } from '../../../../backend/actions/action.interface.js'
 import allowOverride from '../../../hoc/allow-override.js'
 import { useAction } from '../../../hooks/index.js'
@@ -16,16 +13,18 @@ import { getActionElementCss } from '../../../utils/index.js'
  */
 export type ActionButtonProps = {
   /** Action to which button should redirect */
-  action: ActionJSON;
+  action: ActionJSON
   /** Id of a resource of an action */
-  resourceId: string;
+  resourceId: string
   /** Optional recordId for _record_ action */
-  recordId?: string;
+  recordId?: string
   /** Optional recordIds for _bulk_ action */
-  recordIds?: Array<string>;
+  recordIds?: Array<string>
   /** optional callback function which will be triggered when action is performed */
-  actionPerformed?: (action: ActionResponse) => any;
-  children?: React.ReactNode;
+  actionPerformed?: (action: ActionResponse) => any
+  children?: React.ReactNode
+  search?: string
+  queryParams?: Record<string, unknown>
 }
 
 /**
@@ -41,11 +40,27 @@ export type ActionButtonProps = {
  * @subcategory Application
  */
 const ActionButton: React.FC<ActionButtonProps> = (props) => {
-  const { children, action, actionPerformed, resourceId, recordId, recordIds } = props
+  const {
+    children,
+    action,
+    actionPerformed,
+    resourceId,
+    recordId,
+    recordIds,
+    search,
+    queryParams,
+  } = props
 
-  const { href, handleClick } = useAction(action, {
-    resourceId, recordId, recordIds,
-  }, actionPerformed)
+  const { href, handleClick } = useAction(
+    action,
+    {
+      resourceId,
+      recordId,
+      recordIds,
+      search: stringify(queryParams, { addQueryPrefix: true }) || search,
+    },
+    actionPerformed,
+  )
 
   if (!action) {
     return null
@@ -53,10 +68,12 @@ const ActionButton: React.FC<ActionButtonProps> = (props) => {
 
   const firstChild = React.Children.toArray(children)[0]
 
-  if (!firstChild
+  if (
+    !firstChild
     || typeof firstChild === 'string'
     || typeof firstChild === 'number'
-    || typeof firstChild === 'boolean') {
+    || typeof firstChild === 'boolean'
+  ) {
     throw new Error('ActionButton has to have one child')
   }
 
@@ -74,7 +91,4 @@ const ActionButton: React.FC<ActionButtonProps> = (props) => {
 
 const OverridableActionButton = allowOverride(ActionButton, 'ActionButton')
 
-export {
-  OverridableActionButton as default,
-  OverridableActionButton as ActionButton,
-}
+export { OverridableActionButton as ActionButton, OverridableActionButton as default }

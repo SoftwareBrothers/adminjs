@@ -22,6 +22,7 @@ export const actionHref = (
     resource: (): string => h.resourceActionUrl({
       resourceId: params.resourceId,
       actionName,
+      search: params.search,
     }),
     bulk: (): string => h.bulkActionUrl({
       ...params,
