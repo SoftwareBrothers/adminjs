@@ -1,17 +1,18 @@
 /* eslint-disable max-len */
 /* eslint no-unused-vars: 0 */
-import populator from '../utils/populator/populator'
-import ViewHelpers from '../utils/view-helpers/view-helpers'
-import { CurrentAdmin } from '../../current-admin.interface'
-import AdminJS from '../../adminjs'
-import { ActionContext, ActionRequest, RecordActionResponse, ActionResponse, BulkActionResponse } from '../actions/action.interface'
-import ConfigurationError from '../utils/errors/configuration-error'
-import NotFoundError from '../utils/errors/not-found-error'
-import ForbiddenError from '../utils/errors/forbidden-error'
-import { requestParser } from '../utils/request-parser'
-import { SearchActionResponse } from '../actions/search/search-action'
-import actionErrorHandler from '../services/action-error-handler/action-error-handler'
-import { validateParam } from '../../utils/param-converter/validate-param'
+import populator from '../utils/populator/populator.js'
+import ViewHelpers from '../utils/view-helpers/view-helpers.js'
+import { CurrentAdmin } from '../../current-admin.interface.js'
+import AdminJS from '../../adminjs.js'
+import { ActionContext, ActionRequest, RecordActionResponse, ActionResponse, BulkActionResponse } from '../actions/action.interface.js'
+import ConfigurationError from '../utils/errors/configuration-error.js'
+import NotFoundError from '../utils/errors/not-found-error.js'
+import ForbiddenError from '../utils/errors/forbidden-error.js'
+import { requestParser } from '../utils/request-parser/index.js'
+import { SearchActionResponse } from '../actions/search/search-action.js'
+import actionErrorHandler from '../services/action-error-handler/action-error-handler.js'
+import { validateParam } from '../../utils/param-converter/validate-param.js'
+import { DecoratedProperties } from '../decorators/resource/utils/decorate-properties.js'
 
 /**
  * Controller responsible for the auto-generated API: `/admin_root/api/...`, where
@@ -78,7 +79,6 @@ class ApiController {
       h,
       currentAdmin: this.currentAdmin,
       _admin: this._admin,
-      ...this._admin.translateFunctions,
     }
   }
 
@@ -143,7 +143,7 @@ class ApiController {
       ].join('\n'), 'Action#handler')
     }
 
-    const idProperty = Object.values(actionContext.resource.decorate().properties ?? {})
+    const idProperty = Object.values(actionContext.resource.decorate()?.properties as DecoratedProperties)
       .find((p) => p.isId())
     if (!idProperty || !validateParam(recordId, idProperty)) {
       const invalidRecordError = actionErrorHandler(

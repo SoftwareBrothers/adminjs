@@ -1,9 +1,10 @@
 import React from 'react'
 import { TableCell } from '@adminjs/design-system'
 
-import { BasePropertyJSON } from '../../../interfaces'
-import SortLink from '../sort-link'
-import allowOverride from '../../../hoc/allow-override'
+import { BasePropertyJSON } from '../../../interfaces/index.js'
+import SortLink from '../sort-link.js'
+import allowOverride from '../../../hoc/allow-override.js'
+import { useTranslation } from '../../../hooks/index.js'
 
 export type PropertyHeaderProps = {
   property: BasePropertyJSON;
@@ -25,6 +26,7 @@ export type PropertyHeaderProps = {
 
 const PropertyHeader: React.FC<PropertyHeaderProps> = (props) => {
   const { property, titleProperty, display } = props
+  const { translateProperty } = useTranslation()
 
   const isMain = property.propertyPath === titleProperty.propertyPath
 
@@ -33,7 +35,8 @@ const PropertyHeader: React.FC<PropertyHeaderProps> = (props) => {
       className={isMain ? 'main' : undefined}
       display={display}
     >
-      {property.isSortable ? <SortLink {...props} /> : property.label}
+      {property.isSortable ? <SortLink {...props} />
+        : translateProperty(property.label, property.resourceId)}
     </TableCell>
   )
 }

@@ -28,6 +28,10 @@ export type CurrentAdmin = {
    */
   id?: string;
   /**
+   * Optional ID of theme to use
+   */
+  theme?: string;
+  /**
    * Also you can put as many other fields to it as you like.
    */
   [key: string]: any;

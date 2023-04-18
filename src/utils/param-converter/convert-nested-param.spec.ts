@@ -1,5 +1,6 @@
 import { expect } from 'chai'
-import { convertNestedParam } from './convert-nested-param'
+
+import { convertNestedParam } from './convert-nested-param.js'
 
 const jsonField = {
   number: '123',

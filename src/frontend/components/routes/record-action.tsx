@@ -2,19 +2,19 @@ import React, { useState, useEffect, useCallback } from 'react'
 import { useParams } from 'react-router'
 import { Loader } from '@adminjs/design-system'
 
-import { ErrorTypeEnum } from '../../../utils/error-type.enum'
-import BaseActionComponent from '../app/base-action-component'
-import ApiClient from '../../utils/api-client'
-import { RecordActionParams } from '../../../backend/utils/view-helpers/view-helpers'
-import { ActionJSON, RecordJSON } from '../../interfaces'
-import { NoResourceError, NoActionError, NoRecordError } from '../app/error-message'
-import Wrapper from './utils/wrapper'
-import { ActionHeader } from '../app'
-import { useNotice, useResource, useTranslation } from '../../hooks'
-import DrawerPortal from '../app/drawer-portal'
-import { ActionResponse, RecordActionResponse } from '../../../backend/actions/action.interface'
-import mergeRecordResponse from '../../hooks/use-record/merge-record-response'
-import allowOverride from '../../hoc/allow-override'
+import { ErrorTypeEnum } from '../../../utils/error-type.enum.js'
+import BaseActionComponent from '../app/base-action-component.js'
+import ApiClient from '../../utils/api-client.js'
+import { RecordActionParams } from '../../../backend/utils/view-helpers/view-helpers.js'
+import { ActionJSON, RecordJSON } from '../../interfaces/index.js'
+import { NoResourceError, NoActionError, NoRecordError } from '../app/error-message.js'
+import Wrapper from './utils/wrapper.js'
+import { ActionHeader } from '../app/index.js'
+import { useNotice, useResource } from '../../hooks/index.js'
+import DrawerPortal from '../app/drawer-portal.js'
+import { ActionResponse, RecordActionResponse } from '../../../backend/actions/action.interface.js'
+import mergeRecordResponse from '../../hooks/use-record/merge-record-response.js'
+import allowOverride from '../../hoc/allow-override.js'
 
 const api = new ApiClient()
 
@@ -23,7 +23,6 @@ const RecordAction: React.FC = () => {
   const [loading, setLoading] = useState(true)
   const params = useParams<RecordActionParams>()
   const addNotice = useNotice()
-  const { translateMessage } = useTranslation()
 
   const { actionName, recordId, resourceId } = params
   const resource = useResource(resourceId!)
@@ -48,8 +47,9 @@ const RecordAction: React.FC = () => {
       }
     }).catch((error) => {
       addNotice({
-        message: translateMessage('errorFetchingRecord', resourceId),
+        message: 'errorFetchingRecord',
         type: 'error',
+        resourceId,
       })
       throw error
     }).finally(() => {

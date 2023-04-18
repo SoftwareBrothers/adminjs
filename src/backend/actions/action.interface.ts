@@ -1,14 +1,14 @@
-import { VariantType } from '@adminjs/design-system'
-import AdminJS from '../../adminjs'
-import { CurrentAdmin } from '../../current-admin.interface'
-import ViewHelpers from '../utils/view-helpers/view-helpers'
-import BaseRecord from '../adapters/record/base-record'
-import BaseResource from '../adapters/resource/base-resource'
-import ActionDecorator from '../decorators/action/action-decorator'
-import { LayoutElement, LayoutElementFunction } from '../utils/layout-element-parser'
-import { RecordJSON } from '../../frontend/interfaces'
-import { NoticeMessage } from '../../frontend/hoc/with-notice'
-import { TranslateFunctions } from '../../utils/translate-functions.factory'
+import { IconProps, VariantType } from '@adminjs/design-system'
+
+import AdminJS from '../../adminjs.js'
+import { CurrentAdmin } from '../../current-admin.interface.js'
+import ViewHelpers from '../utils/view-helpers/view-helpers.js'
+import BaseRecord from '../adapters/record/base-record.js'
+import BaseResource from '../adapters/resource/base-resource.js'
+import ActionDecorator from '../decorators/action/action-decorator.js'
+import { LayoutElement, LayoutElementFunction } from '../utils/layout-element-parser/index.js'
+import { RecordJSON } from '../../frontend/interfaces/index.js'
+import { type NoticeMessage } from '../../frontend/interfaces/noticeMessage.interface.js'
 
 export type ActionQueryParameters = {
   sortBy?: string
@@ -24,16 +24,10 @@ export type ActionType = 'resource' | 'record' | 'bulk'
  * Execution context for an action. It is passed to the {@link Action#handler},
  * {@link Action#before} and {@link Action#after} functions.
  *
- * Apart from the properties defined below it also extends {@link TranslateFunctions}.
- * So you can use i.e. context.translateMessage(...) and others...
- *
- * @property {TranslateFunction} {...}      all functions from {@link TranslateFunctions}
- *                                          interface.
- *
  * @memberof Action
  * @alias ActionContext
  */
-export type ActionContext = TranslateFunctions & {
+export type ActionContext = {
   /**
    * current instance of AdminJS. You may use it to fetch other Resources by their names:
    */
@@ -433,7 +427,7 @@ export interface Action <T extends ActionResponse> {
    * }]})
    * ```
    */
-  icon?: string;
+  icon?: IconProps['icon'];
   /**
    * guard message - user will have to confirm it before executing an action.
    *
@@ -448,7 +442,7 @@ export interface Action <T extends ActionResponse> {
    * }]})
    * ```
    *
-   * What you enter there goes to {@link TranslateFunctions#translateMessage} function,
+   * What you enter there goes to a translate function,
    * so in order to define the actual message you will have to specify its
    * translation in {@link AdminJSOptions.Locale}
    */

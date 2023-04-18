@@ -1,18 +1,18 @@
 import React, { useMemo } from 'react'
-import styled from 'styled-components'
 import { Link as RouterLink } from 'react-router-dom'
 import {
   ButtonCSS,
   ButtonProps,
   Icon,
 } from '@adminjs/design-system'
+import { styled } from '@adminjs/design-system/styled-components'
 import { useSelector } from 'react-redux'
 
-import allowOverride from '../../../hoc/allow-override'
-import { DrawerProps, ReduxState, RouterProps } from '../../../store'
+import allowOverride from '../../../hoc/allow-override.js'
+import type { DrawerInState, ReduxState, RouterInState } from '../../../store/index.js'
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-const StyledLink = styled(({ rounded, ...rest }) => <RouterLink {...rest} />)<ButtonProps>`${ButtonCSS}`
+const StyledLink = styled(({ rounded, to, ...rest }) => <RouterLink to={to} {...rest} />)<ButtonProps>`${ButtonCSS}`
 
 export type StyledBackButtonProps = {
   showInDrawer: boolean;
@@ -20,8 +20,8 @@ export type StyledBackButtonProps = {
 
 const StyledBackButton: React.FC<StyledBackButtonProps> = (props) => {
   const { showInDrawer } = props
-  const { previousRoute } = useSelector<ReduxState, DrawerProps>((state) => state.drawer)
-  const { from = {} } = useSelector<ReduxState, RouterProps>((state) => state.router)
+  const { previousRoute } = useSelector<ReduxState, DrawerInState>((state) => state.drawer)
+  const { from = {} } = useSelector<ReduxState, RouterInState>((state) => state.router)
   const cssCloseIcon = showInDrawer ? 'ChevronRight' : 'ChevronLeft'
 
   const backLink = useMemo(() => {

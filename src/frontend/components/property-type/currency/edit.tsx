@@ -1,10 +1,11 @@
 import { CurrencyInputProps, FormGroup, FormMessage } from '@adminjs/design-system'
 import React, { FC, memo } from 'react'
-import { EditPropertyProps } from '../base-property-props'
-import { recordPropertyIsEqual } from '../record-property-is-equal'
-import { PropertyLabel } from '../utils/property-label'
-import allowOverride from '../../../hoc/allow-override'
-import { CurrencyInputWrapper } from './currency-input-wrapper'
+
+import { EditPropertyProps } from '../base-property-props.js'
+import { recordPropertyIsEqual } from '../record-property-is-equal.js'
+import { PropertyLabel } from '../utils/property-label/index.js'
+import allowOverride from '../../../hoc/allow-override.js'
+import { CurrencyInputWrapper } from './currency-input-wrapper.js'
 
 const Edit: FC<EditPropertyProps> = (props) => {
   const { onChange, property, record } = props

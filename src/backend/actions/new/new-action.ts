@@ -1,6 +1,6 @@
-import { populator } from '../../utils'
-import { Action, RecordActionResponse } from '../action.interface'
-import { paramConverter } from '../../../utils/param-converter'
+import { populator } from '../../utils/populator/index.js'
+import { paramConverter } from '../../../utils/param-converter/index.js'
+import { Action, RecordActionResponse } from '../action.interface.js'
 
 /**
  * @implements Action
@@ -15,7 +15,7 @@ export const NewAction: Action<RecordActionResponse> = {
   name: 'new',
   isVisible: true,
   actionType: 'resource',
-  icon: 'Add',
+  icon: 'Plus',
   showInDrawer: false,
   variant: 'primary',
   /**
@@ -28,7 +28,7 @@ export const NewAction: Action<RecordActionResponse> = {
    * @return {Promise<RecordActionResponse>} populated records
    */
   handler: async (request, response, context) => {
-    const { resource, h, currentAdmin, translateMessage } = context
+    const { resource, h, currentAdmin } = context
     if (request.method === 'post') {
       const params = paramConverter.prepareParams(request.payload ?? {}, resource)
 
@@ -44,14 +44,14 @@ export const NewAction: Action<RecordActionResponse> = {
         return {
           redirectUrl: h.resourceUrl({ resourceId: resource._decorated?.id() || resource.id() }),
           notice: {
-            message: translateMessage('successfullyCreated', resource.id()),
+            message: 'successfullyCreated',
             type: 'success',
           },
           record: record.toJSON(currentAdmin),
         }
       }
       const baseMessage = populatedRecord.baseError?.message
-        || translateMessage('thereWereValidationErrors', resource.id())
+        || 'thereWereValidationErrors'
       return {
         record: record.toJSON(currentAdmin),
         notice: {

@@ -1,8 +1,8 @@
 import { Box, Icon, Tooltip } from '@adminjs/design-system'
 import React from 'react'
 
-import { PropertyJSON } from '../../../../interfaces'
-import allowOverride from '../../../../hoc/allow-override'
+import { PropertyJSON } from '../../../../interfaces/index.js'
+import allowOverride from '../../../../hoc/allow-override.js'
 
 export type PropertyDescriptionProps = {
   property: PropertyJSON;
@@ -18,7 +18,7 @@ const PropertyDescription: React.FC<PropertyDescriptionProps> = (props) => {
     <Box mx="sm" display="inline-flex">
       <Tooltip direction={direction} title={property.description} size="lg">
         <Box>
-          <Icon icon="Help" color="info" />
+          <Icon icon="HelpCircle" color="info" />
         </Box>
       </Tooltip>
     </Box>

@@ -1,14 +1,14 @@
 import { expect } from 'chai'
 import sinon, { SinonStubbedInstance } from 'sinon'
 
-import PropertyDecorator from './property-decorator'
-import BaseProperty from '../../adapters/property/base-property'
-import AdminJS from '../../../adminjs'
-import ResourceDecorator from '../resource/resource-decorator'
-import { BaseResource } from '../../adapters'
+import PropertyDecorator from './property-decorator.js'
+import BaseProperty from '../../adapters/property/base-property.js'
+import AdminJS from '../../../adminjs.js'
+import ResourceDecorator from '../resource/resource-decorator.js'
+import { BaseResource } from '../../adapters/resource/index.js'
 
 describe('PropertyDecorator', () => {
-  const translatedProperty = 'translated property'
+  const normalName = 'normalName'
   let stubbedAdmin: SinonStubbedInstance<AdminJS> & AdminJS
   let property: BaseProperty
   let args: {
@@ -20,7 +20,7 @@ describe('PropertyDecorator', () => {
   beforeEach(() => {
     property = new BaseProperty({ path: 'name', type: 'string' })
     stubbedAdmin = sinon.createStubInstance(AdminJS)
-    stubbedAdmin.translateProperty = sinon.stub().returns(translatedProperty) as any
+    // stubbedAdmin.translateProperty = sinon.stub().returns(normalName) as any
     args = { property, admin: stubbedAdmin, resource: { id: () => 'someId' } as ResourceDecorator }
   })
 
@@ -52,7 +52,7 @@ describe('PropertyDecorator', () => {
   describe('#label', () => {
     it('returns translated label', () => {
       sinon.stub(BaseProperty.prototype, 'name').returns('normalName')
-      expect(new PropertyDecorator(args).label()).to.equal(translatedProperty)
+      expect(new PropertyDecorator(args).label()).to.equal(normalName)
     })
   })
 
@@ -99,7 +99,8 @@ describe('PropertyDecorator', () => {
         property,
         options: {
           reference: 'SomeReference',
-        } })
+        },
+      })
 
       expect(decorator.type()).to.equal('reference')
     })
@@ -116,7 +117,7 @@ describe('PropertyDecorator', () => {
       sinon.stub(BaseProperty.prototype, 'availableValues').returns(['val'])
       expect(new PropertyDecorator(args).availableValues()).to.deep.equal([{
         value: 'val',
-        label: translatedProperty,
+        label: 'val',
       }])
     })
   })
@@ -156,9 +157,12 @@ describe('PropertyDecorator', () => {
         property,
         resource: {
           id: () => 'resourceId',
-          options: { properties: {
-            [`${propertyName}.${subPropertyName}`]: { label: subPropertyLabel },
-          } } } as unknown as ResourceDecorator,
+          options: {
+            properties: {
+              [`${propertyName}.${subPropertyName}`]: { label: subPropertyLabel },
+            },
+          },
+        } as unknown as ResourceDecorator,
       })
     })
 
@@ -170,7 +174,7 @@ describe('PropertyDecorator', () => {
     it('changes label of the nested property to what was given in PropertyOptions', () => {
       const subProperty = propertyDecorator.subProperties()[0]
 
-      expect(subProperty.label()).to.eq(translatedProperty)
+      expect(subProperty.label()).to.eq(`${propertyName}.${subPropertyName}`)
     })
   })
 

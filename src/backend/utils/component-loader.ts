@@ -1,7 +1,8 @@
 import * as path from 'path'
 import * as fs from 'fs'
-import { ConfigurationError } from '.'
-import { relativeFilePathResolver } from '../../utils/file-resolver'
+
+import { ConfigurationError } from './errors/index.js'
+import { relativeFilePathResolver } from '../../utils/file-resolver.js'
 
 export interface ComponentDetails {
   overrides: boolean
@@ -166,5 +167,6 @@ export class ComponentLoader {
     'DefaultTextareaShowProperty',
     'PropertyDescription',
     'PropertyLabel',
+    'Login',
   ]
 }

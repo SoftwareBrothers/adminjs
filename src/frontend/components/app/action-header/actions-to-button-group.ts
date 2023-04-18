@@ -1,23 +1,28 @@
 import { ButtonGroupProps, ButtonInGroupProps } from '@adminjs/design-system'
 
-import { actionHref, ActionJSON, buildActionTestId } from '../../../interfaces'
-import { DifferentActionParams } from '../../../hooks'
+import { actionHref, ActionJSON, buildActionTestId, ModalFunctions } from '../../../interfaces/index.js'
+import { DifferentActionParams } from '../../../hooks/index.js'
+import { TranslateFunctions } from '../../../../utils/index.js'
 
 export type actionsToButtonGroupOptions = {
   actions: Array<ActionJSON>;
   params: DifferentActionParams;
   handleClick: ButtonInGroupProps['onClick'];
+  translateFunctions: TranslateFunctions;
+  modalFunctions: ModalFunctions,
 }
 
 export const actionsToButtonGroup = (
   options: actionsToButtonGroupOptions,
 ): ButtonGroupProps['buttons'] => {
-  const { actions, params, handleClick } = options
+  const { actions, params, handleClick, translateFunctions } = options
+  const { translateAction } = translateFunctions
+  const { resourceId } = params
   const buttons = actions.map((action) => {
     const href = actionHref(action, params)
     return {
       icon: action.icon,
-      label: action.label,
+      label: translateAction(action.label, resourceId),
       variant: action.variant,
       source: action,
       href: href || undefined,
@@ -36,9 +41,7 @@ export const actionsToButtonGroup = (
     if (action.parent) {
       const parent: ButtonInGroupProps = memo[action.parent]
         || buttons.find((btn) => btn.source.name === action.parent)
-        || {
-          label: action.parent,
-        }
+        || { label: action.parent }
 
       parent.buttons = parent.buttons || []
       parent.buttons.push(button)

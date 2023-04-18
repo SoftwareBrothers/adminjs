@@ -1,1 +1,1 @@
-export * from './override-from-options'
+export * from './override-from-options.js'

@@ -1,0 +1,126 @@
+{
+  "actions": {
+    "new": "Create new",
+    "edit": "Edit",
+    "show": "Show",
+    "delete": "Delete",
+    "bulkDelete": "Delete all",
+    "list": "List"
+  },
+  "buttons": {
+    "save": "Save",
+    "addNewItem": "Add new item",
+    "filter": "Filter",
+    "applyChanges": "Apply changes",
+    "resetFilter": "Reset",
+    "confirmRemovalMany": "Confirm the removal of {{count}} record",
+    "confirmRemovalMany_plural": "Confirm the removal of {{count}} records",
+    "logout": "Log out",
+    "login": "Log in",
+    "seeTheDocumentation": "See: <1>the documentation</1>",
+    "createFirstRecord": "Create first record",
+    "cancel": "Cancel",
+    "confirm": "Confirm"
+  },
+  "components": {
+    "DropZone": {
+      "placeholder": "Drop your file here, or click to browse",
+      "acceptedSize": "Max size: {{maxSize}}",
+      "acceptedType": "Supports: {{mimeTypes}}",
+      "unsupportedSize": "File {{fileName}} is too big",
+      "unsupportedType": "File {{fileName}} has unsupported type: {{fileType}}"
+    },
+    "LanguageSelector": {
+      "availableLanguages": {
+        "de": "German",
+        "en": "English",
+        "es": "Spanish",
+        "it": "Italian",
+        "pl": "Polish",
+        "pt-BR": "Portuguese (Brazil)",
+        "ua": "Ukrainian",
+        "zh-CN": "Chinese"
+      }
+    },
+    "Login": {
+      "welcomeHeader": "Welcome",
+      "welcomeMessage": "to AdminJS - the world's leading open-source auto-generated admin panel for your Node.js application that allows you to manage all your data in one place",
+      "properties": {
+        "email": "Email",
+        "password": "Password"
+      },
+      "loginButton": "Login"
+    }
+  },
+  "labels": {
+    "navigation": "Navigation",
+    "pages": "Pages",
+    "selectedRecords": "Selected ({{selected}})",
+    "filters": "Filters",
+    "adminVersion": "Admin: {{version}}",
+    "appVersion": "App: {{version}}",
+    "dashboard": "Dashboard"
+  },
+  "properties": {
+    "length": "Length",
+    "from": "From",
+    "to": "To"
+  },
+  "resources": {},
+  "messages": {
+    "successfullyBulkDeleted": "Successfully removed {{count}} record",
+    "successfullyBulkDeleted_plural": "Successfully removed {{count}} records",
+    "successfullyDeleted": "Successfully deleted given record",
+    "successfullyUpdated": "Successfully updated given record",
+    "thereWereValidationErrors": "There are validation errors - check them out below",
+    "forbiddenError": "You cannot perform action {{actionName}} on {{resourceId}}",
+    "anyForbiddenError": "You cannot perform given action",
+    "successfullyCreated": "Successfully created a new record",
+    "bulkDeleteError": "There was an error deleting records. Check out console to see more information",
+    "errorFetchingRecords": "There was an error fetching records. Check out console to see more information",
+    "errorFetchingRecord": "There was an error fetching record. Check out console to see more information",
+    "noRecordsSelected": "You have not selected any records",
+    "theseRecordsWillBeRemoved": "Following record will be removed",
+    "theseRecordsWillBeRemoved_plural": "Following records will be removed",
+    "pickSomeFirstToRemove": "In order to remove records, you have to pick them first",
+    "error404Resource": "Resource of given id: {{resourceId}} cannot be found",
+    "error404Action": "Resource of given id: {{resourceId}} does not have an action with name: {{actionName}} or you are not authorized to use it!",
+    "error404Record": "Resource of given id: {{resourceId}} does not have a record with id: {{recordId}} or you are not authorized to use it!",
+    "seeConsoleForMore": "See development console for more details...",
+    "noActionComponent": "You have to implement action component for your Action",
+    "noRecordsInResource": "There are no records in this resource",
+    "noRecords": "No records",
+    "confirmDelete": "Do you really want to remove this item?",
+    "welcomeOnBoard_title": "Welcome on Board!",
+    "welcomeOnBoard_subtitle": "Now you are one of us! We prepared a few tips for you to start:",
+    "addingResources_title": "Adding Resources",
+    "addingResources_subtitle": "How to add new resources to the sidebar",
+    "customizeResources_title": "Customize Resources",
+    "customizeResources_subtitle": "Defining behavior, adding properties and more...",
+    "customizeActions_title": "Customize Actions",
+    "customizeActions_subtitle": "Modifying existing actions and adding new",
+    "writeOwnComponents_title": "Write Components",
+    "writeOwnComponents_subtitle": "How to modify the Look and Feel of AdminJS",
+    "customDashboard_title": "Custom Dashboard",
+    "customDashboard_subtitle": "How to modify this view and add new Pages on the sidebar",
+    "roleBasedAccess_title": "Role-Based Access Control",
+    "roleBasedAccess_subtitle": "Create user roles and permissions in AdminJS",
+    "community_title": "Join the slack community",
+    "community_subtitle": "Talk with the creators of AdminJS and other AdminJS users",
+    "foundBug_title": "Found a Bug? need improvement?",
+    "foundBug_subtitle": "Raise an issue on our GitHub repo",
+    "needMoreSolutions_title": "Need more advanced solutions?",
+    "needMoreSolutions_subtitle": "We are here to provide you a beautiful UX/UI design and tailor made software based (not only) on AdminJS",
+    "invalidCredentials": "Wrong email and/or password",
+    "keyPlaceholder": "KEY",
+    "valuePlaceholder": "VALUE",
+    "initialKey": "Key-{{number}}",
+    "keyInUse": "Object keys must be unique",
+    "keyValuePropertyDefaultDescription": "All values are stored as text. Keys must be unique, duplicate keys will not be saved.",
+
+    "pageNotFound_title": "Page not found",
+    "pageNotFound_subtitle": "Page <strong>\"{{pageName}}\"</strong> does not exist",
+    "componentNotFound_title": "No component specified",
+    "componentNotFound_subtitle": "You have to specify component which will render this element"
+  }
+}

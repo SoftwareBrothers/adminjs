@@ -1,16 +1,16 @@
 import React from 'react'
-import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 import { ButtonCSS } from '@adminjs/design-system'
+import { styled } from '@adminjs/design-system/styled-components'
 
-import ViewHelpers from '../../../../backend/utils/view-helpers/view-helpers'
-import allowOverride from '../../../hoc/allow-override'
-import { ShowPropertyProps } from '../base-property-props'
+import ViewHelpers from '../../../../backend/utils/view-helpers/view-helpers.js'
+import allowOverride from '../../../hoc/allow-override.js'
+import { ShowPropertyProps } from '../base-property-props.js'
 
 const StyledLink = styled<any>(Link)`
   ${ButtonCSS};
-  padding-left: ${({ theme }): string => theme.space.xs};
-  padding-right: ${({ theme }): string => theme.space.xs};
+  padding-left: ${({ theme }) => theme.space.xs};
+  padding-right: ${({ theme }) => theme.space.xs};
 `
 
 type Props = Pick<ShowPropertyProps, 'property' | 'record'>

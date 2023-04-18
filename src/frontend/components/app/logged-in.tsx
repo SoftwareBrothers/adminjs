@@ -1,9 +1,9 @@
 import React from 'react'
 import { CurrentUserNav, Box, CurrentUserNavProps } from '@adminjs/design-system'
 
-import { CurrentAdmin } from '../../../current-admin.interface'
-import { useTranslation } from '../../hooks'
-import allowOverride from '../../hoc/allow-override'
+import { CurrentAdmin } from '../../../current-admin.interface.js'
+import { useTranslation } from '../../hooks/index.js'
+import allowOverride from '../../hoc/allow-override.js'
 
 export type LoggedInProps = {
   session: CurrentAdmin;
@@ -22,7 +22,7 @@ const LoggedIn: React.FC<LoggedInProps> = (props) => {
       event.preventDefault()
       window.location.href = paths.logoutPath
     },
-    icon: 'Logout',
+    icon: 'LogOut',
   }]
   return (
     <Box flexShrink={0} data-css="logged-in">

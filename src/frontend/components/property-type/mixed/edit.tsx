@@ -1,10 +1,10 @@
 import React from 'react'
 import { Section, FormGroup, FormMessage } from '@adminjs/design-system'
 
-import { EditPropertyProps } from '../base-property-props'
-import { PropertyLabel } from '../utils/property-label'
-import { convertToSubProperty } from './convert-to-sub-property'
-import allowOverride from '../../../hoc/allow-override'
+import { EditPropertyProps } from '../base-property-props.js'
+import { PropertyLabel } from '../utils/property-label/index.js'
+import { convertToSubProperty } from './convert-to-sub-property.js'
+import allowOverride from '../../../hoc/allow-override.js'
 
 type Props = {
   ItemComponent: typeof React.Component;

@@ -2,17 +2,17 @@ import chai, { expect } from 'chai'
 import chaiAsPromised from 'chai-as-promised'
 import sinon from 'sinon'
 
-import DeleteAction from './delete-action'
-import { ActionContext, ActionRequest, ActionHandler, RecordActionResponse } from '../action.interface'
-import BaseRecord from '../../adapters/record/base-record'
-import AdminJS from '../../../adminjs'
-import ViewHelpers from '../../utils/view-helpers/view-helpers'
-import BaseResource from '../../adapters/resource/base-resource'
-import ActionDecorator from '../../decorators/action/action-decorator'
-import NotFoundError from '../../utils/errors/not-found-error'
-import { ValidationError } from '../../utils/errors/validation-error'
-import { RecordJSON } from '../../../frontend/interfaces'
-import { CurrentAdmin } from '../../../current-admin.interface'
+import DeleteAction from './delete-action.js'
+import { ActionContext, ActionRequest, ActionHandler, RecordActionResponse } from '../action.interface.js'
+import BaseRecord from '../../adapters/record/base-record.js'
+import AdminJS from '../../../adminjs.js'
+import ViewHelpers from '../../utils/view-helpers/view-helpers.js'
+import BaseResource from '../../adapters/resource/base-resource.js'
+import ActionDecorator from '../../decorators/action/action-decorator.js'
+import NotFoundError from '../../utils/errors/not-found-error.js'
+import { ValidationError } from '../../utils/errors/validation-error.js'
+import { RecordJSON } from '../../../frontend/interfaces/index.js'
+import { CurrentAdmin } from '../../../current-admin.interface.js'
 
 chai.use(chaiAsPromised)
 
@@ -32,7 +32,6 @@ describe('DeleteAction', function () {
     beforeEach(async function () {
       data = {
         _admin: sinon.createStubInstance(AdminJS),
-        translateMessage: sinon.stub<any, string>().returns('translatedMessage'),
         h: sinon.createStubInstance(ViewHelpers),
         resource: sinon.createStubInstance(BaseResource),
         action: sinon.createStubInstance(ActionDecorator) as unknown as ActionDecorator,
@@ -99,7 +98,7 @@ describe('DeleteAction', function () {
 
           expect(actionResponse).to.have.property('notice')
           expect(actionResponse.notice).to.deep.equal({
-            message: 'translatedMessage',
+            message: 'thereWereValidationErrors',
             type: 'error',
           })
           expect(actionResponse).to.have.property('record')

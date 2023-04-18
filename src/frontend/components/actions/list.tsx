@@ -2,13 +2,13 @@ import { Box, Pagination, Text } from '@adminjs/design-system'
 import React, { useEffect } from 'react'
 import { useLocation, useNavigate } from 'react-router'
 
-import allowOverride from '../../hoc/allow-override'
-import useRecords from '../../hooks/use-records/use-records'
-import useSelectedRecords from '../../hooks/use-selected-records/use-selected-records'
-import { getActionElementCss } from '../../utils'
-import RecordsTable from '../app/records-table/records-table'
-import { ActionProps } from './action.props'
-import { REFRESH_KEY } from './utils/append-force-refresh'
+import allowOverride from '../../hoc/allow-override.js'
+import useRecords from '../../hooks/use-records/use-records.js'
+import useSelectedRecords from '../../hooks/use-selected-records/use-selected-records.js'
+import { getActionElementCss } from '../../utils/index.js'
+import RecordsTable from '../app/records-table/records-table.js'
+import { ActionProps } from './action.props.js'
+import { REFRESH_KEY } from './utils/append-force-refresh.js'
 
 const List: React.FC<ActionProps> = ({ resource, setTag }) => {
   const {
@@ -58,7 +58,7 @@ const List: React.FC<ActionProps> = ({ resource, setTag }) => {
   const contentTag = getActionElementCss(resource.id, 'list', 'table-wrapper')
 
   return (
-    <Box variant="white" data-css={contentTag}>
+    <Box variant="container" data-css={contentTag}>
       <RecordsTable
         resource={resource}
         records={records}

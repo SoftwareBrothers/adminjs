@@ -1,7 +1,7 @@
-import { flat } from '../../../utils/flat'
-import { Action, ActionResponse, ActionQueryParameters } from '../action.interface'
-import { RecordJSON } from '../../../frontend/interfaces'
-import Filter from '../../utils/filter/filter'
+import { flat } from '../../../utils/flat/index.js'
+import { Action, ActionResponse, ActionQueryParameters } from '../action.interface.js'
+import { RecordJSON } from '../../../frontend/interfaces/index.js'
+import Filter from '../../utils/filter/filter.js'
 
 /**
  * @implements Action

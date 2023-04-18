@@ -1,13 +1,13 @@
 import React, { FC, useState, useEffect, useMemo, memo } from 'react'
 import { FormGroup, FormMessage, SelectAsync } from '@adminjs/design-system'
 
-import ApiClient from '../../../utils/api-client'
-import { EditPropertyProps, SelectRecord } from '../base-property-props'
-import { RecordJSON } from '../../../interfaces'
-import { PropertyLabel } from '../utils/property-label'
-import { flat } from '../../../../utils/flat'
-import { recordPropertyIsEqual } from '../record-property-is-equal'
-import allowOverride from '../../../hoc/allow-override'
+import ApiClient from '../../../utils/api-client.js'
+import { EditPropertyProps, SelectRecord } from '../base-property-props.js'
+import { RecordJSON } from '../../../interfaces/index.js'
+import { PropertyLabel } from '../utils/property-label/index.js'
+import { flat } from '../../../../utils/flat/index.js'
+import { recordPropertyIsEqual } from '../record-property-is-equal.js'
+import allowOverride from '../../../hoc/allow-override.js'
 
 type CombinedProps = EditPropertyProps
 type SelectRecordEnhanced = SelectRecord & {

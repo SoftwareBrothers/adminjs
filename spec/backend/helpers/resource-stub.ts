@@ -1,8 +1,8 @@
 import sinon from 'sinon'
 
-import BaseProperty from '../../../src/backend/adapters/property/base-property'
-import BaseResource from '../../../src/backend/adapters/resource/base-resource'
-import ResourceDecorator from '../../../src/backend/decorators/resource/resource-decorator'
+import BaseProperty from '../../../src/backend/adapters/property/base-property.js'
+import BaseResource from '../../../src/backend/adapters/resource/base-resource.js'
+import ResourceDecorator from '../../../src/backend/decorators/resource/resource-decorator.js'
 
 /**
  * returns properties with following absolute paths:

@@ -1,5 +1,5 @@
-import { Action, RecordActionResponse } from '../action.interface'
-import NotFoundError from '../../utils/errors/not-found-error'
+import { Action, RecordActionResponse } from '../action.interface.js'
+import NotFoundError from '../../utils/errors/not-found-error.js'
 
 /**
  * @implements Action
@@ -14,7 +14,7 @@ export const ShowAction: Action<RecordActionResponse> = {
   name: 'show',
   isVisible: true,
   actionType: 'record',
-  icon: 'Screen',
+  icon: 'Monitor',
   showInDrawer: false,
   /**
    * Responsible for returning data for given record.

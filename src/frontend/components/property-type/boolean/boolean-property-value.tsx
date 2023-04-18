@@ -1,10 +1,10 @@
 import React from 'react'
 import { Badge } from '@adminjs/design-system'
 
-import { ShowPropertyProps } from '../base-property-props'
-import { useTranslation } from '../../../hooks'
-import mapValue from './map-value'
-import allowOverride from '../../../hoc/allow-override'
+import { ShowPropertyProps } from '../base-property-props.js'
+import { useTranslation } from '../../../hooks/index.js'
+import mapValue from './map-value.js'
+import allowOverride from '../../../hoc/allow-override.js'
 
 const BooleanPropertyValue: React.FC<ShowPropertyProps> = (props) => {
   const { record, property, resource } = props

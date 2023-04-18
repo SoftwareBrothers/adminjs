@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 import { expect } from 'chai'
 
-import ApiController from './api-controller'
-import { Filter } from '../utils/filter'
+import ApiController from './api-controller.js'
+import { Filter } from '../utils/filter/index.js'
 
 describe('ApiController', function () {
   beforeEach(function () {

@@ -1,5 +1,5 @@
-import { DELIMITER } from './constants'
-import { GetOptions } from './flat.types'
+import { DELIMITER } from './constants.js'
+import { GetOptions } from './flat.types.js'
 // this is the regex used to find all existing properties starting with a key
 
 export const propertyKeyRegex = (propertyPath: string, options?: GetOptions): RegExp => {

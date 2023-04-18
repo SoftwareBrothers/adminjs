@@ -1,9 +1,9 @@
 import React from 'react'
 
-import { useTranslation } from '../../../hooks/use-translation'
-import { flat } from '../../../../utils'
-import { ShowPropertyProps } from '../base-property-props'
-import allowOverride from '../../../hoc/allow-override'
+import { useTranslation } from '../../../hooks/use-translation.js'
+import { flat } from '../../../../utils/index.js'
+import { ShowPropertyProps } from '../base-property-props.js'
+import allowOverride from '../../../hoc/allow-override.js'
 
 const List: React.FC<ShowPropertyProps> = (props) => {
   const { property, record } = props

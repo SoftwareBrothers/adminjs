@@ -1,1 +1,1 @@
-export * from './param-converter-module'
+export * from './param-converter-module.js'

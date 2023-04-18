@@ -3,8 +3,8 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
 /* eslint class-methods-use-this: 0 no-unused-vars: 0 */
 
-import BaseResource from '../resource/base-resource'
-import NotImplementedError from '../../utils/errors/not-implemented-error'
+import BaseResource from '../resource/base-resource.js'
+import NotImplementedError from '../../utils/errors/not-implemented-error.js'
 
 /**
  * Representation of an ORM database in AdminJS

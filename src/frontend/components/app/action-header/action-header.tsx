@@ -2,14 +2,15 @@
 import { Badge, Box, ButtonGroup, cssClass, H2, H3 } from '@adminjs/design-system'
 import React from 'react'
 import { useNavigate } from 'react-router'
-import allowOverride from '../../../hoc/allow-override'
-import { useActionResponseHandler, useTranslation } from '../../../hooks'
-import { ActionJSON, buildActionClickHandler } from '../../../interfaces/action'
-import { getActionElementCss, getResourceElementCss } from '../../../utils'
-import Breadcrumbs from '../breadcrumbs'
-import { ActionHeaderProps } from './action-header-props'
-import { actionsToButtonGroup } from './actions-to-button-group'
-import { StyledBackButton } from './styled-back-button'
+
+import allowOverride from '../../../hoc/allow-override.js'
+import { useActionResponseHandler, useTranslation, useModal } from '../../../hooks/index.js'
+import { ActionJSON, buildActionClickHandler } from '../../../interfaces/action/index.js'
+import { getActionElementCss, getResourceElementCss } from '../../../utils/index.js'
+import Breadcrumbs from '../breadcrumbs.js'
+import { ActionHeaderProps } from './action-header-props.js'
+import { actionsToButtonGroup } from './actions-to-button-group.js'
+import { StyledBackButton } from './styled-back-button.js'
 
 /**
  * Header of an action. It renders Action name with buttons for all the actions.
@@ -27,10 +28,11 @@ const ActionHeader: React.FC<ActionHeaderProps> = (props) => {
   const {
     resource, toggleFilter, actionPerformed, record, action, tag, omitActions,
   } = props
-
-  const { translateButton } = useTranslation()
+  const translateFunctions = useTranslation()
+  const { translateButton, translateAction } = translateFunctions
   const navigate = useNavigate()
   const actionResponseHandler = useActionResponseHandler(actionPerformed)
+  const modalFunctions = useModal()
 
   if (action.hideActionHeader) {
     return null
@@ -38,13 +40,14 @@ const ActionHeader: React.FC<ActionHeaderProps> = (props) => {
 
   const resourceId = resource.id
   const params = { resourceId, recordId: record?.id }
-
   const handleActionClick = (event, sourceAction: ActionJSON): any | Promise<any> => (
     buildActionClickHandler({
       action: sourceAction,
       params,
       actionResponseHandler,
       navigate,
+      translateFunctions,
+      modalFunctions,
     })(event)
   )
 
@@ -55,13 +58,15 @@ const ActionHeader: React.FC<ActionHeaderProps> = (props) => {
       : resource.resourceActions.filter((ra) => ra.name === 'new' && (!action || action.name !== ra.name)),
     params,
     handleClick: handleActionClick,
+    translateFunctions,
+    modalFunctions,
   })
 
   if (toggleFilter) {
     actionButtons.push({
       label: translateButton('filter', resource.id),
       onClick: toggleFilter,
-      icon: 'SettingsAdjust',
+      icon: 'Filter',
       'data-css': getResourceElementCss(resource.id, 'filter-button'),
     })
   }
@@ -73,9 +78,11 @@ const ActionHeader: React.FC<ActionHeaderProps> = (props) => {
       : [],
     params: { resourceId },
     handleClick: handleActionClick,
+    translateFunctions,
+    modalFunctions,
   })
 
-  const title = action ? action.label : resource.name
+  const title = action ? translateAction(action.label, resourceId) : resource.name
 
   // styled which differs if action header is in the drawer or not
   const cssIsRootFlex = !action.showInDrawer
@@ -100,7 +107,7 @@ const ActionHeader: React.FC<ActionHeaderProps> = (props) => {
               <StyledBackButton showInDrawer={action.showInDrawer} />
             ) : ''}
             {title}
-            {tag ? (<Badge variant="primary" ml="default">{tag}</Badge>) : ''}
+            {tag ? (<Badge variant="default" outline ml="default">{tag}</Badge>) : ''}
           </CssHComponent>
         </Box>
         {omitActions ? '' : (

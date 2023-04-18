@@ -1,16 +1,15 @@
-import BasePropertyComponent from './base-property-component'
-import CleanPropertyComponent from './clean-property-component'
-
-import * as defaultType from './default-type'
-import * as boolean from './boolean'
-import * as datetime from './datetime'
-import * as richtext from './richtext'
-import * as reference from './reference'
-import * as textarea from './textarea'
-import * as password from './password'
-import * as currency from './currency'
-import * as phone from './phone'
-import { BasePropertyComponentProps } from './base-property-props'
+import BasePropertyComponent from './base-property-component.js'
+import CleanPropertyComponent from './clean-property-component.js'
+import * as defaultType from './default-type/index.js'
+import * as boolean from './boolean/index.js'
+import * as datetime from './datetime/index.js'
+import * as richtext from './richtext/index.js'
+import * as reference from './reference/index.js'
+import * as textarea from './textarea/index.js'
+import * as password from './password/index.js'
+import * as currency from './currency/index.js'
+import * as phone from './phone/index.js'
+import { BasePropertyComponentProps } from './base-property-props.js'
 
 type BasePropertyComponentType = React.FC<BasePropertyComponentProps> & {
   DefaultType: any
@@ -52,5 +51,5 @@ export {
   CleanPropertyComponent,
 }
 
-export * from './base-property-props'
-export * from './utils'
+export * from './base-property-props.js'
+export * from './utils/index.js'

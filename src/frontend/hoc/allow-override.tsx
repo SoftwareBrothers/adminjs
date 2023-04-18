@@ -1,6 +1,7 @@
 /* eslint-disable react/function-component-definition */
 import React, { ComponentType } from 'react'
-import { OverridableComponent } from '../utils/overridable-component'
+
+import { OverridableComponent } from '../utils/overridable-component.js'
 
 /**
  * @private
@@ -28,8 +29,8 @@ function allowOverride<P extends Record<string, unknown>>(
      *
      */
     if (typeof window !== 'undefined') {
-      Component = window.AdminJS?.UserComponents?.[name]
-        ?? (window as any).THEME?.Components?.[name]
+      Component = (window as any).AdminJS?.UserComponents?.[name]
+        ?? (window as any).THEME_COMPONENTS?.[name]
         ?? OriginalComponent
     }
 

@@ -1,19 +1,21 @@
-import React from 'react'
+import { ThemeProvider } from '@adminjs/design-system/styled-components'
+import React, { Suspense } from 'react'
+import { I18nextProvider } from 'react-i18next'
 import { Provider } from 'react-redux'
 import { BrowserRouter } from 'react-router-dom'
-import { ThemeProvider } from 'styled-components'
-import { initReactI18next } from 'react-i18next'
-import i18n from 'i18next'
 
-import App from './components/application'
-import BasePropertyComponent, { CleanPropertyComponent } from './components/property-type'
-import createStore from './store/store'
-import ViewHelpers from '../backend/utils/view-helpers/view-helpers'
-import * as AppComponents from './components/app'
-import * as Hooks from './hooks'
-import ApiClient from './utils/api-client'
-import withNotice from './hoc/with-notice'
-import { flat } from '../utils/flat'
+import ViewHelpers from '../backend/utils/view-helpers/view-helpers.js'
+import { flat } from '../utils/flat/index.js'
+import * as AppComponents from './components/app/index.js'
+import App from './components/application.js'
+import { AppLoader } from './components/index.js'
+import Login from './components/login/index.js'
+import BasePropertyComponent, { CleanPropertyComponent } from './components/property-type/index.js'
+import withNotice from './hoc/with-notice.js'
+import * as Hooks from './hooks/index.js'
+import createStore from './store/store.js'
+import initTranslations from './utils/adminjs.i18n.js'
+import ApiClient from './utils/api-client.js'
 
 const env = {
   NODE_ENV: process.env.NODE_ENV || 'development',
@@ -21,24 +23,34 @@ const env = {
 
 const store = createStore(window.REDUX_STATE)
 const theme = window.THEME
-const { locale } = window.REDUX_STATE
-
-i18n.use(initReactI18next).init({
-  resources: {
-    [locale.language]: {
-      translation: locale.translations,
-    },
-  },
-  lng: locale.language,
-  interpolation: { escapeValue: false },
-})
+const { locale } = store.getState()
+const { i18n } = initTranslations(locale)
 
 const Application = (
   <Provider store={store}>
     <ThemeProvider theme={theme}>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
+      <I18nextProvider i18n={i18n}>
+        <BrowserRouter>
+          <Suspense fallback={<AppLoader />}>
+            <App />
+          </Suspense>
+        </BrowserRouter>
+      </I18nextProvider>
+    </ThemeProvider>
+  </Provider>
+)
+
+const loginAppProps = window.__APP_STATE__ ?? {}
+const LoginApplication = (
+  <Provider store={store}>
+    <ThemeProvider theme={theme}>
+      <I18nextProvider i18n={i18n}>
+        <BrowserRouter>
+          <Suspense fallback={<AppLoader />}>
+            <Login {...loginAppProps} />
+          </Suspense>
+        </BrowserRouter>
+      </I18nextProvider>
     </ThemeProvider>
   </Provider>
 )
@@ -49,6 +61,7 @@ window.regeneratorRuntime = regeneratorRuntime
 export default {
   withNotice,
   Application,
+  LoginApplication,
   ViewHelpers,
   UserComponents: {},
   ApiClient,

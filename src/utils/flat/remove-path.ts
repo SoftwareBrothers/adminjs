@@ -1,9 +1,9 @@
-import { filterOutParams } from './filter-out-params'
-import { FlattenParams } from './flat.types'
-import { get } from './get'
-import { set } from './set'
-import { pathToParts } from './path-to-parts'
-import { DELIMITER } from './constants'
+import { filterOutParams } from './filter-out-params.js'
+import { FlattenParams } from './flat.types.js'
+import { get } from './get.js'
+import { set } from './set.js'
+import { pathToParts } from './path-to-parts.js'
+import { DELIMITER } from './constants.js'
 
 /**
  * @load ./remove-path.doc.md

@@ -1,4 +1,4 @@
-import { PropertyType } from '../../adapters/property/base-property'
+import { PropertyType } from '../../adapters/property/base-property.js'
 
 /**
  * Options passed to a given property

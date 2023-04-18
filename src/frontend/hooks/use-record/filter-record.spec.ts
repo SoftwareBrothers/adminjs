@@ -1,5 +1,6 @@
 import { expect } from 'chai'
-import { isPropertyPermitted } from './filter-record'
+
+import { isPropertyPermitted } from './filter-record.js'
 
 describe('isPropertyPermitted', () => {
   it('permit property when options are not set ', () => {

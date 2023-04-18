@@ -1,5 +1,6 @@
-import { ErrorTypeEnum } from '../../../utils/error-type.enum'
-import RecordError from './record-error'
+import { NoticeMessage } from '../../../index.js'
+import { ErrorTypeEnum } from '../../../utils/error-type.enum.js'
+import RecordError from './record-error.js'
 
 /**
  * Error which can be thrown by developer in custom actions/hooks/components
@@ -28,10 +29,15 @@ export class AppError extends Error {
   public data?: Record<string, unknown>
 
   /**
+   * Any additional notice configuration to show in UI
+   */
+  public notice?: Partial<NoticeMessage>
+
+  /**
    * @param {string} message    a message to be shared with the client
    * @param {string} data       additional data to be shared with the client
    */
-  constructor(message: string, data?: Record<string, unknown>) {
+  constructor(message: string, data?: Record<string, unknown>, notice?: Partial<NoticeMessage>) {
     super(message)
     this.statusCode = 400
     this.baseMessage = message
@@ -40,6 +46,7 @@ export class AppError extends Error {
       type: ErrorTypeEnum.App,
     }
     this.data = data
+    this.notice = notice
     this.name = ErrorTypeEnum.App
   }
 }

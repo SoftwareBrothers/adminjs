@@ -1,2 +1,2 @@
-export * from './use-records'
-export * from './use-records-result.type'
+export * from './use-records.js'
+export * from './use-records-result.type.js'

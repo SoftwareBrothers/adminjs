@@ -1,7 +1,8 @@
 import sinon from 'sinon'
-import ViewHelpers from '../../../src/backend/utils/view-helpers/view-helpers'
 
-const expectedResult = {
+import ViewHelpers from '../../../src/backend/utils/view-helpers/view-helpers.js'
+
+export const expectedResult = {
   recordActionUrl: '#recordActionUrl',
   resourceActionUrl: '#resourceActionUrl',
   bulkActionUrl: '#bulkActionUrl',
@@ -45,5 +46,3 @@ export default (): ViewHelpers => (
     bulkDeleteUrl: sinon.stub().returns(expectedResult.bulkDeleteUrl),
   }
 )
-
-module.exports.expectedResult = expectedResult

@@ -1,9 +1,10 @@
 import React, { FC } from 'react'
 import { Navigation } from '@adminjs/design-system'
-import { useTranslation } from '../../../hooks/use-translation'
-import { ResourceJSON } from '../../../interfaces'
-import allowOverride from '../../../hoc/allow-override'
-import { useNavigationResources } from '../../../hooks'
+
+import { useTranslation } from '../../../hooks/use-translation.js'
+import { ResourceJSON } from '../../../interfaces/index.js'
+import allowOverride from '../../../hoc/allow-override.js'
+import { useNavigationResources } from '../../../hooks/index.js'
 
 /**
  * @alias SidebarResourceSectionProps

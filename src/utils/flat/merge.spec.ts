@@ -1,5 +1,6 @@
 import { expect } from 'chai'
-import { merge } from './merge'
+
+import { merge } from './merge.js'
 
 describe('merge', () => {
   it('removes nulled arrays when nested items were found', () => {

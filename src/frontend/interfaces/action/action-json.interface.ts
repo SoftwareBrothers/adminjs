@@ -1,5 +1,6 @@
-import { VariantType } from '@adminjs/design-system'
-import { ParsedLayoutElement } from '../../../backend/utils/layout-element-parser'
+import type { ButtonProps, IconProps, VariantType } from '@adminjs/design-system'
+
+import { ParsedLayoutElement } from '../../../backend/utils/layout-element-parser/index.js'
 
 /**
  * JSON representation of an {@link Action}
@@ -18,7 +19,7 @@ export interface ActionJSON {
   /**
    * Action icon
    */
-  icon?: string;
+  icon?: IconProps['icon'];
   /**
    * Action label - visible on the frontend
    */
@@ -68,6 +69,11 @@ export interface ActionJSON {
    * Action variant
    */
   variant: VariantType;
+
+  /**
+   * Action color
+   */
+  color?: ButtonProps['color'];
 
   /**
    * If action is nested

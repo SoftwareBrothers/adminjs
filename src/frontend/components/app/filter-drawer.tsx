@@ -6,11 +6,11 @@ import {
 import React, { MouseEvent, SyntheticEvent, useEffect, useRef, useState } from 'react'
 import { useLocation, useNavigate, useParams } from 'react-router-dom'
 
-import allowOverride from '../../hoc/allow-override'
-import { useTranslation } from '../../hooks'
-import { RecordJSON, ResourceJSON } from '../../interfaces'
-import { getResourceElementCss } from '../../utils'
-import PropertyType from '../property-type'
+import allowOverride from '../../hoc/allow-override.js'
+import { useTranslation } from '../../hooks/index.js'
+import { RecordJSON, ResourceJSON } from '../../interfaces/index.js'
+import { getResourceElementCss } from '../../utils/index.js'
+import BasePropertyComponent from '../property-type/index.js'
 
 export type FilterProps = {
   resource: ResourceJSON;
@@ -42,7 +42,7 @@ const FilterDrawer: React.FC<FilterProps> = (props) => {
   const [filter, setFilter] = useState(parseQuery(location))
   const params = useParams<MatchProps>()
   const navigate = useNavigate()
-  const { translateLabel, translateButton } = useTranslation()
+  const { translateButton, translateLabel } = useTranslation()
   const initialLoad = useRef(true)
 
   useEffect(() => {
@@ -103,21 +103,22 @@ const FilterDrawer: React.FC<FilterProps> = (props) => {
   return (
     <Drawer variant="filter" isHidden={!isVisible} as="form" onSubmit={handleSubmit} data-css={contentTag}>
       <DrawerContent data-css={cssContent}>
-        <H3>
+        <Box flex justifyContent="space-between">
+          <H3>{translateLabel('filters', resource.id)}</H3>
           <Button
             type="button"
+            variant="light"
             size="icon"
             rounded
-            mr="lg"
+            color="text"
             onClick={(): void => toggleFilter()}
           >
-            <Icon icon="ChevronRight" color="white" />
+            <Icon icon="X" />
           </Button>
-          {translateLabel('filters', resource.id)}
-        </H3>
+        </Box>
         <Box my="x3">
           {properties.map((property) => (
-            <PropertyType
+            <BasePropertyComponent
               key={property.propertyPath}
               where="filter"
               onChange={handleChange}
@@ -129,11 +130,11 @@ const FilterDrawer: React.FC<FilterProps> = (props) => {
         </Box>
       </DrawerContent>
       <DrawerFooter data-css={cssFooter}>
-        <Button variant="primary" size="lg" data-css={cssButtonApply}>
-          {translateButton('applyChanges', resource.id)}
-        </Button>
-        <Button variant="text" size="lg" onClick={resetFilter} type="button" color="white" data-css={cssButtonReset}>
+        <Button type="button" size="lg" variant="light" onClick={resetFilter} data-css={cssButtonReset}>
           {translateButton('resetFilter', resource.id)}
+        </Button>
+        <Button type="submit" variant="contained" size="lg" data-css={cssButtonApply}>
+          {translateButton('applyChanges', resource.id)}
         </Button>
       </DrawerFooter>
     </Drawer>

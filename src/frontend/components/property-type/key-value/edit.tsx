@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import { Section, FormGroup, FormMessage, Button, Input, Box, Icon } from '@adminjs/design-system'
 
-import { PropertyJSON } from '../../../interfaces/property-json'
-import { EditPropertyProps } from '../base-property-props'
-import { PropertyLabel } from '../utils/property-label'
-import { flat } from '../../../../utils/flat'
-import { useTranslation } from '../../../hooks/use-translation'
-import { RecordError } from '../../../../backend/utils/errors'
+import { PropertyJSON } from '../../../interfaces/property-json/index.js'
+import { EditPropertyProps } from '../base-property-props.js'
+import { PropertyLabel } from '../utils/property-label/index.js'
+import { flat } from '../../../../utils/flat/index.js'
+import { useTranslation } from '../../../hooks/use-translation.js'
+import { RecordError } from '../../../../backend/utils/errors/index.js'
 
 export type EditKeyValuePairProps = {
   onKeyChange: (key: string, newKey: string) => void
@@ -65,11 +65,12 @@ const EditKeyValuePair: React.FC<EditKeyValuePairProps> = (props) => {
         type="button"
         size="icon"
         onClick={() => onRemoveItem(currentKey)}
-        variant="danger"
+        variant="contained"
+        color="danger"
         flexGrow={0}
         flexShrink={1}
       >
-        <Icon icon="TrashCan" />
+        <Icon icon="Trash2" />
       </Button>
     </Box>
   )
@@ -166,7 +167,7 @@ const Edit: React.FC<EditPropertyProps> = (props) => {
             error={record.errors[`${property.path}${flat.DELIMITER}${key}`]}
           />
         ))}
-        <Button mt="lg" variant="primary" onClick={addNewKeyValuePair}>
+        <Button mt="lg" onClick={addNewKeyValuePair}>
           {tb('addNewItem', resource.id)}
         </Button>
       </Section>

@@ -3,10 +3,11 @@ import { useDispatch, useSelector } from 'react-redux'
 import { createPortal } from 'react-dom'
 import { createRoot } from 'react-dom/client'
 import { Drawer, DEFAULT_DRAWER_WIDTH } from '@adminjs/design-system'
-import { ThemeProvider } from 'styled-components'
+// @ts-ignore Note: Ignore while @adminjs/design-system/styled-components doesn't export types
+import { ThemeProvider } from '@adminjs/design-system/styled-components'
 
-import { ReduxState, RouterProps } from '../../store'
-import { setDrawerPreRoute } from '../../store/actions/set-drawer-preroute'
+import { ReduxState, RouterInState } from '../../store/index.js'
+import { setDrawerPreRoute } from '../../store/actions/set-drawer-preroute.js'
 
 /**
  * @alias DrawerPortalProps
@@ -73,7 +74,7 @@ const getOrCreatePortalContainer = (id: string) => {
  */
 export const DrawerPortal: React.FC<DrawerPortalProps> = ({ children, width }) => {
   const [drawerElement, setDrawerElement] = useState(document.getElementById(DRAWER_PORTAL_ID))
-  const { to = null } = useSelector<ReduxState, RouterProps>((state) => state.router)
+  const { to = null } = useSelector<ReduxState, RouterInState>((state) => state.router)
   const dispatch = useDispatch()
 
   const handleDrawerMount = () => {

@@ -16,5 +16,5 @@ export const relativeFilePathResolver = (filePath: string, syntax: RegExp): stri
     throw new Error('STACK does not have a file url. Check out if the node version >= 8')
   }
   const executionPath = (pathNode8 && pathNode8[1]) || (pathNode10 && pathNode10[1])
-  return path.join(path.dirname(executionPath as string), filePath)
+  return path.join(path.dirname(executionPath as string), filePath).replace(/^file:/gi, '')
 }

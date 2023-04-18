@@ -1,10 +1,10 @@
-import { ActionRequest } from '../../actions'
-import { BaseResource } from '../../adapters'
+import { ActionRequest } from '../../actions/index.js'
+import { BaseResource } from '../../adapters/index.js'
 import {
   FORM_VALUE_NULL,
   FORM_VALUE_EMPTY_OBJECT,
   FORM_VALUE_EMPTY_ARRAY,
-} from '../../../frontend/hooks/use-record/params-to-form-data'
+} from '../../../frontend/hooks/use-record/params-to-form-data.js'
 
 /**
  * Takes the original ActionRequest and convert string values to a corresponding

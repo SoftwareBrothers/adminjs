@@ -1,9 +1,9 @@
 import { CurrencyInput, CurrencyInputProps, FormGroup } from '@adminjs/design-system'
 import React, { FC } from 'react'
 
-import { EditPropertyProps } from '../base-property-props'
-import { PropertyLabel } from '../utils/property-label'
-import allowOverride from '../../../hoc/allow-override'
+import { EditPropertyProps } from '../base-property-props.js'
+import { PropertyLabel } from '../utils/property-label/index.js'
+import allowOverride from '../../../hoc/allow-override.js'
 
 const Filter: FC<EditPropertyProps> = (props) => {
   const { onChange, property, filter } = props
@@ -14,7 +14,7 @@ const Filter: FC<EditPropertyProps> = (props) => {
 
   return (
     <FormGroup variant="filter">
-      <PropertyLabel property={property} />
+      <PropertyLabel property={property} filter />
       <CurrencyInput
         id={property.path}
         name={`filter-${property.path}`}

@@ -1,4 +1,4 @@
-import { ErrorTypeEnum } from '../../../utils/error-type.enum'
+import { ErrorTypeEnum } from '../../../utils/error-type.enum.js'
 
 /**
  * Record Error
@@ -9,11 +9,11 @@ export type RecordError = {
   /**
    * error type (i.e. required)
    */
-  type?: ErrorTypeEnum | string;
+  type?: ErrorTypeEnum | string
   /**
-   * human readable message
+   * Code of message
    */
-  message: string;
+  message: string
 }
 
 export default RecordError

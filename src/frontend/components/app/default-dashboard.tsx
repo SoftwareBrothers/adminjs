@@ -1,17 +1,8 @@
 import React from 'react'
-import styled from 'styled-components'
-import {
-  Box,
-  H2,
-  H5,
-  H4,
-  Text,
-  Illustration,
-  IllustrationProps,
-  Button,
-} from '@adminjs/design-system'
+import { Box, Button, H2, H5, Illustration, IllustrationProps, Text } from '@adminjs/design-system'
+import { styled } from '@adminjs/design-system/styled-components'
 
-import { useTranslation } from '../../hooks'
+import { useTranslation } from '../../hooks/index.js'
 
 const pageHeaderHeight = 284
 const pageHeaderPaddingY = 74
@@ -97,22 +88,26 @@ const boxes = ({ translateMessage }): Array<BoxType> => [{
 
 const Card = styled(Box)`
   display: ${({ flex }): string => (flex ? 'flex' : 'block')};
-  color: ${({ theme }): string => theme.colors.grey100};
+  color: ${({ theme }) => theme.colors.grey100};
+  height: 100%;
   text-decoration: none;
   border: 1px solid transparent;
+  border-radius: ${({ theme }) => theme.space.md};
+  transition: all 0.1s ease-in;
   &:hover {
-    border: 1px solid ${({ theme }): string => theme.colors.primary100};
-    box-shadow: ${({ theme }): string => theme.shadows.cardHover};
+    border: 1px solid ${({ theme }) => theme.colors.primary100};
+    box-shadow: ${({ theme }) => theme.shadows.cardHover};
   }
 `
 
 Card.defaultProps = {
-  variant: 'white',
+  variant: 'container',
   boxShadow: 'card',
 }
 
 export const Dashboard: React.FC = () => {
   const { translateMessage, translateButton } = useTranslation()
+
   return (
     <Box>
       <DashboardHeader />
@@ -147,7 +142,7 @@ export const Dashboard: React.FC = () => {
           <Card as="a" flex href="https://adminjs.page.link/slack" target="_blank">
             <Box flexShrink={0}><Illustration variant="SlackLogo" /></Box>
             <Box ml="xl">
-              <H4>{translateMessage('community_title')}</H4>
+              <H5>{translateMessage('community_title')}</H5>
               <Text>{translateMessage('community_subtitle')}</Text>
             </Box>
           </Card>
@@ -156,20 +151,20 @@ export const Dashboard: React.FC = () => {
           <Card as="a" flex href="https://github.com/SoftwareBrothers/adminjs/issues" target="_blank">
             <Box flexShrink={0}><Illustration variant="GithubLogo" /></Box>
             <Box ml="xl">
-              <H4>{translateMessage('foundBug_title')}</H4>
+              <H5>{translateMessage('foundBug_title')}</H5>
               <Text>{translateMessage('foundBug_subtitle')}</Text>
             </Box>
           </Card>
         </Box>
-        <Box variant="white" boxShadow="card" width={1} m="lg">
+        <Card width={1} m="lg">
           <Text textAlign="center">
             <Illustration variant="AdminJSLogo" />
-            <H4>{translateMessage('needMoreSolutions_title')}</H4>
+            <H5>{translateMessage('needMoreSolutions_title')}</H5>
             <Text>{translateMessage('needMoreSolutions_subtitle')}</Text>
             <Text mt="xxl">
               <Button
                 as="a"
-                variant="primary"
+                variant="contained"
                 href="https://share.hsforms.com/1IedvmEz6RH2orhcL6g2UHA8oc5a"
                 target="_blank"
               >
@@ -177,7 +172,7 @@ export const Dashboard: React.FC = () => {
               </Button>
             </Text>
           </Text>
-        </Box>
+        </Card>
       </Box>
     </Box>
   )

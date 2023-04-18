@@ -2,10 +2,10 @@
 import React, { useState, memo, useEffect } from 'react'
 import { Input, FormGroup, InputGroup, FormMessage, Button, Icon } from '@adminjs/design-system'
 
-import { EditPropertyProps } from '../base-property-props'
-import { recordPropertyIsEqual } from '../record-property-is-equal'
-import { PropertyLabel } from '../utils/property-label'
-import allowOverride from '../../../hoc/allow-override'
+import { EditPropertyProps } from '../base-property-props.js'
+import { recordPropertyIsEqual } from '../record-property-is-equal.js'
+import { PropertyLabel } from '../utils/property-label/index.js'
+import allowOverride from '../../../hoc/allow-override.js'
 
 const Edit: React.FC<EditPropertyProps> = (props) => {
   const { property, record, onChange } = props
@@ -37,12 +37,11 @@ const Edit: React.FC<EditPropertyProps> = (props) => {
           {...property.props}
         />
         <Button
-          variant={isInput ? 'primary' : 'text'}
           type="button"
           size="icon"
           onClick={() => setIsInput(!isInput)}
         >
-          <Icon icon="View" />
+          <Icon icon="Eye" />
         </Button>
       </InputGroup>
       <FormMessage>{error && error.message}</FormMessage>

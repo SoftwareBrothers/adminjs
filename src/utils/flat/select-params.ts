@@ -1,5 +1,5 @@
-import { propertyKeyRegex } from './property-key-regex'
-import { FlattenParams, GetOptions } from './flat.types'
+import { propertyKeyRegex } from './property-key-regex.js'
+import { FlattenParams, GetOptions } from './flat.types.js'
 
 /**
  * @load ./select-params.doc.md

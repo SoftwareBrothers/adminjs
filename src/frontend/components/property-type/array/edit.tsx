@@ -2,14 +2,14 @@ import React, { MouseEvent, useCallback } from 'react'
 import { Button, Section, FormGroup, FormMessage, Icon, Box } from '@adminjs/design-system'
 import { DragDropContext, Droppable, Draggable, DropResult } from '@hello-pangea/dnd'
 
-import AddNewItemButton from './add-new-item-translation'
-import { flat } from '../../../../utils'
-import { EditPropertyPropsInArray } from '../base-property-props'
-import { PropertyLabel } from '../utils/property-label'
-import { convertToSubProperty } from './convert-to-sub-property'
-import { PropertyJSON } from '../../../interfaces'
-import { removeSubProperty } from './remove-sub-property'
-import allowOverride from '../../../hoc/allow-override'
+import AddNewItemButton from './add-new-item-translation.js'
+import { flat } from '../../../../utils/index.js'
+import { EditPropertyPropsInArray } from '../base-property-props.js'
+import { PropertyLabel } from '../utils/property-label/index.js'
+import { convertToSubProperty } from './convert-to-sub-property.js'
+import { PropertyJSON } from '../../../interfaces/index.js'
+import { removeSubProperty } from './remove-sub-property.js'
+import allowOverride from '../../../hoc/allow-override.js'
 
 type EditProps = Required<EditPropertyPropsInArray>
 
@@ -38,25 +38,25 @@ const ItemRenderer: React.FC<EditProps & ItemRendererProps> = (props) => {
           backgroundColor="white"
           flex
           flexDirection="row"
-          alignItems="center"
+          alignItems="start"
           data-testid={property.path}
         >
-          <Box flexGrow={1}>
+          <Box as="div" flexGrow={1}>
             <ItemComponent {...props} />
           </Box>
-          <Box flexShrink={0} ml="lg">
-            <Button
-              rounded
-              ml="default"
-              data-testid="delete-item"
-              type="button"
-              size="icon"
-              onClick={(event): boolean => onDelete(event, property)}
-              variant="danger"
-            >
-              <Icon icon="TrashCan" />
-            </Button>
-          </Box>
+          <Button
+            rounded
+            mt="xl"
+            ml="default"
+            data-testid="delete-item"
+            type="button"
+            size="icon"
+            onClick={(event): boolean => onDelete(event, property)}
+            variant="text"
+            color="danger"
+          >
+            <Icon icon="Trash2" />
+          </Button>
         </Box>
       )}
     </Draggable>
@@ -120,9 +120,7 @@ const InputsInSection: React.FC<EditProps> = (props) => {
               )
             })}
             {provided.placeholder}
-            <Button onClick={addNew} type="button" rounded>
-              <AddNewItemButton resource={resource} property={property} />
-            </Button>
+            <AddNewItemButton resource={resource} property={property} onClick={addNew} data-testid={`${property.path}-add`} />
           </Section>
         )}
       </Droppable>

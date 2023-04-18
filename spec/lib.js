@@ -1,9 +1,11 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 /* eslint-disable func-names */
-require('./setup')
+import { importAll } from 'node-esm-import-all'
 
-require('require.all')({
-  dir: '../lib/',
-  match: /spec\.js$/i,
+import './setup.js'
+
+await importAll({
+  dirname: '../lib/',
+  filter: /spec\.js$/i,
   recursive: true,
 })

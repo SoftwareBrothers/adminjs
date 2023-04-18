@@ -1,9 +1,9 @@
-import factory from 'factory-girl'
+import { factory } from 'factory-girl'
 import { expect } from 'chai'
 
-import recordToFormData, { FORM_VALUE_EMPTY_OBJECT, FORM_VALUE_NULL, FORM_VALUE_EMPTY_ARRAY } from './params-to-form-data'
-import '../../components/spec/record-json.factory'
-import { RecordJSON } from '../../interfaces'
+import recordToFormData, { FORM_VALUE_EMPTY_OBJECT, FORM_VALUE_NULL, FORM_VALUE_EMPTY_ARRAY } from './params-to-form-data.js'
+import '../../components/spec/record-json.factory.js'
+import { RecordJSON } from '../../interfaces/index.js'
 
 describe('recordToFormData', function () {
   const propertyKey = 'someProperty'

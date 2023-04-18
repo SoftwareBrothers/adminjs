@@ -1,13 +1,11 @@
-import { DecoratedActions } from './utils/decorate-actions'
-
-import { BaseResource, BaseRecord } from '../../adapters'
-import { PropertyDecorator, ActionDecorator } from '..'
-import ViewHelpers from '../../utils/view-helpers/view-helpers'
-import AdminJS from '../../../adminjs'
-
-import { ResourceOptions } from './resource-options.interface'
-import { CurrentAdmin } from '../../../current-admin.interface'
-import { ResourceJSON, PropertyPlace } from '../../../frontend/interfaces'
+import { DecoratedActions } from './utils/decorate-actions.js'
+import { BaseResource, BaseRecord } from '../../adapters/index.js'
+import { PropertyDecorator, ActionDecorator } from '../index.js'
+import ViewHelpers from '../../utils/view-helpers/view-helpers.js'
+import AdminJS from '../../../adminjs.js'
+import { ResourceOptions } from './resource-options.interface.js'
+import { CurrentAdmin } from '../../../current-admin.interface.js'
+import { ResourceJSON, PropertyPlace } from '../../../frontend/interfaces/index.js'
 import {
   decorateActions,
   decorateProperties,
@@ -15,7 +13,7 @@ import {
   flatSubProperties,
   DecoratedProperties,
   getPropertyByKey,
-} from './utils'
+} from './utils/index.js'
 
 /**
  * Default maximum number of items which should be present in a list.
@@ -102,7 +100,7 @@ class ResourceDecorator {
    * @return {string} resource name
    */
   getResourceName(): string {
-    return this._admin.translateLabel(this.id(), this.id())
+    return this.id()
   }
 
   /**

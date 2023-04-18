@@ -3,7 +3,7 @@ import {
 } from 'react-i18next'
 import { TFunction, i18n } from 'i18next'
 
-import { TranslateFunctions, createFunctions } from '../../utils/translate-functions.factory'
+import { TranslateFunctions, createFunctions } from '../../utils/translate-functions.factory.js'
 
 /**
  * Extends {@link TranslateFunctions}. Apart from that it also returns all the properties
@@ -17,7 +17,7 @@ import { TranslateFunctions, createFunctions } from '../../utils/translate-funct
  *
  *   return (
  *     <Box>
- *       <Button variant="primary" onClick={...}>{translateButton('save')}<Button>
+ *       <Button variant="contained" onClick={...}>{translateButton('save')}<Button>
  *     </Box>
  *   )
  * }

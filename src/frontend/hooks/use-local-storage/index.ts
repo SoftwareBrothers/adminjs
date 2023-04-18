@@ -1,2 +1,2 @@
-export * from './use-local-storage'
-export * from './use-local-storage-result.type'
+export * from './use-local-storage.js'
+export * from './use-local-storage-result.type.js'

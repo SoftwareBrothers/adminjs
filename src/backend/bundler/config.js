@@ -1,14 +1,17 @@
 /* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable @typescript-eslint/no-var-requires */
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
-const { babel } = require('@rollup/plugin-babel')
-const commonjs = require('@rollup/plugin-commonjs')
-const { nodeResolve: resolve } = require('@rollup/plugin-node-resolve')
-const replace = require('@rollup/plugin-replace')
-const json = require('@rollup/plugin-json')
-const { terser } = require('rollup-plugin-terser')
+import { babel } from '@rollup/plugin-babel'
+import commonjs from '@rollup/plugin-commonjs'
+import { nodeResolve as resolve } from '@rollup/plugin-node-resolve'
+import replace from '@rollup/plugin-replace'
+import json from '@rollup/plugin-json'
+import terser from '@rollup/plugin-terser'
+import presetEnv from '@babel/preset-env'
+import presetReact from '@babel/preset-react'
+import presetTs from '@babel/preset-typescript'
 
-const external = [
+export const external = [
   'prop-types',
   'react',
   'react-dom',
@@ -16,17 +19,17 @@ const external = [
   'react-redux',
   'react-router',
   'react-router-dom',
-  'styled-components',
+  '@adminjs/design-system/styled-components',
   'adminjs',
   '@adminjs/design-system',
-  '@carbon/icons-react',
+  'react-feather',
 ]
 
-const globals = {
+export const globals = {
   react: 'React',
   redux: 'Redux',
-  '@carbon/icons-react': 'CarbonIcons',
-  'styled-components': 'styled',
+  'react-feather': 'FeatherIcons',
+  '@adminjs/design-system/styled-components': 'styled',
   'prop-types': 'PropTypes',
   'react-dom': 'ReactDOM',
   'react-redux': 'ReactRedux',
@@ -36,9 +39,11 @@ const globals = {
   '@adminjs/design-system': 'AdminJSDesignSystem',
 }
 
-const extensions = ['.mjs', '.js', '.jsx', '.json', '.ts', '.tsx', '.scss']
+export const extensions = ['.mjs', '.cjs', '.js', '.jsx', '.json', '.ts', '.tsx', '.scss']
 
-const plugins = ({ babelConfig = {}, commonJSConfig = {}, minify = false } = {}) => {
+export const plugins = async ({ babelConfig = {
+  plugins: ['@babel/plugin-syntax-import-assertions'],
+}, commonJSConfig = {}, minify = false } = {}) => {
   const pluginStack = [
     resolve({
       extensions,
@@ -62,12 +67,15 @@ const plugins = ({ babelConfig = {}, commonJSConfig = {}, minify = false } = {})
       babelHelpers: 'bundled',
       exclude: 'node_modules/**/*.js',
       presets: [
-        require.resolve('@babel/preset-env', {
-          corejs: 3,
-          useBuiltIns: 'usage',
-        }),
-        require.resolve('@babel/preset-react'),
-        require.resolve('@babel/preset-typescript'),
+        [presetEnv, {
+          targets: {
+            node: '18',
+          },
+          loose: true,
+          modules: false,
+        }],
+        presetReact,
+        presetTs,
       ],
       ...babelConfig,
     }),
@@ -76,10 +84,4 @@ const plugins = ({ babelConfig = {}, commonJSConfig = {}, minify = false } = {})
     pluginStack.push(terser())
   }
   return pluginStack
-}
-
-module.exports = {
-  external,
-  globals,
-  plugins,
 }

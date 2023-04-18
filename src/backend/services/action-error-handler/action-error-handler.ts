@@ -1,9 +1,10 @@
-import { ActionContext, RecordActionResponse, BulkActionResponse } from '../../actions/action.interface'
-import ValidationError, { PropertyErrors } from '../../utils/errors/validation-error'
-import ForbiddenError from '../../utils/errors/forbidden-error'
-import NotFoundError from '../../utils/errors/not-found-error'
-import AppError from '../../utils/errors/app-error'
-import RecordError from '../../utils/errors/record-error'
+import { NoticeMessage } from '../../../index.js'
+import { ActionContext, BulkActionResponse, RecordActionResponse } from '../../actions/action.interface.js'
+import AppError from '../../utils/errors/app-error.js'
+import ForbiddenError from '../../utils/errors/forbidden-error.js'
+import NotFoundError from '../../utils/errors/not-found-error.js'
+import RecordError from '../../utils/errors/record-error.js'
+import ValidationError, { PropertyErrors } from '../../utils/errors/validation-error.js'
 
 /**
  * @private
@@ -20,21 +21,21 @@ const actionErrorHandler = (
     || error instanceof NotFoundError
     || error instanceof AppError
   ) {
-    const { record, resource, currentAdmin, action } = context
+    const { record, currentAdmin, action } = context
 
     const baseError: RecordError | null = error.baseError ?? null
     let baseMessage = ''
     let errors: PropertyErrors = {}
     let meta: any
-
+    let notice: NoticeMessage
     if (error instanceof ValidationError) {
       baseMessage = error.baseError?.message
-        || context.translateMessage('thereWereValidationErrors', resource.id())
+        || 'thereWereValidationErrors'
       errors = error.propertyErrors
     } else {
       // ForbiddenError, NotFoundError, AppError
       baseMessage = error.baseMessage
-        || context.translateMessage('anyForbiddenError', resource.id())
+        || 'anyForbiddenError'
     }
 
     // Add required meta data for the list action
@@ -50,6 +51,18 @@ const actionErrorHandler = (
 
     const recordJson = record?.toJSON?.(currentAdmin)
 
+    notice = {
+      message: baseMessage,
+      type: 'error',
+    }
+
+    if (error instanceof AppError && error.notice) {
+      notice = {
+        ...notice,
+        ...error.notice,
+      }
+    }
+
     return {
       record: {
         ...recordJson,
@@ -59,10 +72,7 @@ const actionErrorHandler = (
         errors,
       },
       records: [],
-      notice: {
-        message: baseMessage,
-        type: 'error',
-      },
+      notice,
       meta,
     }
   }

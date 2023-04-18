@@ -1,16 +1,17 @@
 import { useState, useCallback, Dispatch, SetStateAction } from 'react'
 import { AxiosResponse } from 'axios'
-import ApiClient, { RecordActionAPIParams } from '../../utils/api-client'
-import { RecordJSON } from '../../interfaces'
-import { paramsToFormData } from './params-to-form-data'
-import useNotice from '../use-notice'
-import { RecordActionResponse } from '../../../backend/actions/action.interface'
-import mergeRecordResponse from './merge-record-response'
-import updateRecord from './update-record'
-import { UseRecordOptions, UseRecordResult, UseRecordSubmitFunction } from './use-record.type'
-import isEntireRecordGiven from './is-entire-record-given'
-import { filterRecordParams, isPropertyPermitted } from './filter-record'
-import { flat } from '../../../utils'
+
+import ApiClient, { RecordActionAPIParams } from '../../utils/api-client.js'
+import { RecordJSON } from '../../interfaces/index.js'
+import { paramsToFormData } from './params-to-form-data.js'
+import useNotice from '../use-notice.js'
+import { RecordActionResponse } from '../../../backend/actions/action.interface.js'
+import mergeRecordResponse from './merge-record-response.js'
+import updateRecord from './update-record.js'
+import { UseRecordOptions, UseRecordResult, UseRecordSubmitFunction } from './use-record.type.js'
+import isEntireRecordGiven from './is-entire-record-given.js'
+import { filterRecordParams, isPropertyPermitted } from './filter-record.js'
+import { flat } from '../../../utils/flat/index.js'
 
 const api = new ApiClient()
 
@@ -82,7 +83,7 @@ export const useRecord = (
 
     const params: Omit<RecordActionAPIParams, 'actionName' | 'recordId'> = {
       resourceId,
-      onUploadProgress: (e): void => setProgress(Math.round((e.loaded * 100) / e.total)),
+      onUploadProgress: (e): void => setProgress(Math.round((e.loaded * 100) / (e.total ?? 1))),
       data: formData,
       headers: { 'Content-Type': 'multipart/form-data' },
     }

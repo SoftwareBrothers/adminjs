@@ -1,17 +1,17 @@
-import AdminJS from '../../../adminjs'
-import PropertyOptions from './property-options.interface'
-import BaseResource from '../../adapters/resource/base-resource'
-import BaseProperty, { PropertyType } from '../../adapters/property/base-property'
-import ResourceDecorator from '../resource/resource-decorator'
-import { PropertyPlace, BasePropertyJSON } from '../../../frontend/interfaces'
-import { overrideFromOptions } from './utils'
+import AdminJS from '../../../adminjs.js'
+import { BasePropertyJSON, PropertyPlace } from '../../../frontend/interfaces/index.js'
+import BaseProperty, { PropertyType } from '../../adapters/property/base-property.js'
+import BaseResource from '../../adapters/resource/base-resource.js'
+import ResourceDecorator from '../resource/resource-decorator.js'
+import PropertyOptions from './property-options.interface.js'
+import { overrideFromOptions } from './utils/override-from-options.js'
 
 /**
  * Decorates property
  *
  * @category Decorators
  */
-class PropertyDecorator {
+export class PropertyDecorator {
   public property: BaseProperty
 
   /**
@@ -123,7 +123,7 @@ class PropertyDecorator {
    * @return  {string}
    */
   label(): string {
-    return this._admin.translateProperty(this.propertyPath, this._resource.id())
+    return this.propertyPath
   }
 
   /**
@@ -144,20 +144,13 @@ class PropertyDecorator {
    *
    * @returns {Array<{value: string, label: string}>}
    */
-  availableValues(): null | Array<{value: string | number; label: string}> {
+  availableValues(): null | Array<{ value: string | number; label: string }> {
     if (this.options.availableValues) {
       return this.options.availableValues
     }
     const values = this.property.availableValues()
     if (values) {
-      return values.map((val) => ({
-        value: val,
-        label: this._admin.translateProperty(
-          `${this.propertyPath}.${val}`,
-          this._resource.id(),
-          { defaultValue: val },
-        ),
-      }))
+      return values.map((value) => ({ value, label: value }))
     }
     return null
   }
@@ -182,7 +175,7 @@ class PropertyDecorator {
    * @param {'list' | 'edit' | 'show' | 'filter'} where
    */
   isVisible(where: PropertyPlace): boolean {
-    if (typeof this.options.isVisible === 'object' && this.options.isVisible !== 'null') {
+    if (typeof this.options.isVisible === 'object' && this.options.isVisible !== null) {
       return !!this.options.isVisible[where]
     }
     if (typeof this.options.isVisible === 'boolean') {
@@ -279,10 +272,7 @@ class PropertyDecorator {
       isVirtual: this.isVirtual,
       props: this.options.props || {},
       description: this.options.description
-        ? this._admin.translateMessage(
-          this.options.description,
-          this._resource.id(),
-        ) : undefined,
+        ? this.options.description : undefined,
     }
   }
 

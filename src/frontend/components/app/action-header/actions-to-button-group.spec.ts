@@ -1,10 +1,19 @@
 import { ButtonGroupProps } from '@adminjs/design-system'
 import { expect } from 'chai'
-import factory from 'factory-girl'
-import { ActionJSON } from '../../../interfaces'
-import { actionsToButtonGroup } from './actions-to-button-group'
+import i18n from 'i18next'
+import { factory } from 'factory-girl'
 
-import '../../spec/action-json.factory'
+import { ActionJSON, ModalFunctions } from '../../../interfaces/index.js'
+import { actionsToButtonGroup } from './actions-to-button-group.js'
+import { createFunctions } from '../../../../utils/translate-functions.factory.js'
+import '../../spec/action-json.factory.js'
+
+const translateFunctions = createFunctions(i18n as any)
+
+const modalFunctions: ModalFunctions = {
+  closeModal: () => { /* noop */ },
+  openModal: () => { /* noop */ },
+}
 
 describe('actionsToButtonGroup', () => {
   let actions: Array<ActionJSON>
@@ -28,6 +37,8 @@ describe('actionsToButtonGroup', () => {
         actions,
         params,
         handleClick,
+        translateFunctions,
+        modalFunctions,
       })
     })
 
@@ -68,6 +79,8 @@ describe('actionsToButtonGroup', () => {
         ],
         params,
         handleClick,
+        translateFunctions,
+        modalFunctions,
       })
     })
 
@@ -99,6 +112,8 @@ describe('actionsToButtonGroup', () => {
         actions,
         params,
         handleClick,
+        translateFunctions,
+        modalFunctions,
       })
     })
 

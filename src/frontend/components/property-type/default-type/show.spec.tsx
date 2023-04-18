@@ -1,14 +1,14 @@
-import React from 'react'
-import factory from 'factory-girl'
 import { expect } from 'chai'
-
 import { RenderResult, render } from '@testing-library/react'
-import Show from './show'
-import TestContextProvider from '../../spec/test-context-provider'
-import '../../spec/resource-json.factory'
-import '../../spec/record-json.factory'
+import { factory } from 'factory-girl'
+import React from 'react'
 
-import { RecordJSON, PropertyJSON, ResourceJSON } from '../../../interfaces'
+import Show from './show.js'
+import TestContextProvider from '../../spec/test-context-provider.js'
+import '../../spec/initialize-translations.js'
+import '../../spec/resource-json.factory.js'
+import '../../spec/record-json.factory.js'
+import { RecordJSON, PropertyJSON, ResourceJSON } from '../../../interfaces/index.js'
 
 const renderTestSubject = (property, record, resource): RenderResult => render(
   <TestContextProvider>

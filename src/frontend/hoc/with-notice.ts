@@ -1,16 +1,8 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 import { connect } from 'react-redux'
-import { addNotice } from '../store/actions/add-notice'
 
-/**
- * NoticeMessage which can be presented as a "Toast" message.
- * @alias NoticeMessage
- * @memberof withNotice
- */
-export type NoticeMessage = {
-  message: string;
-  type?: 'success' | 'error';
-}
+import { NoticeMessage } from '../interfaces/noticeMessage.interface.js'
+import { addNotice } from '../store/actions/add-notice.js'
 
 /**
  * Additional props which are passed to your component
@@ -19,7 +11,7 @@ export type NoticeMessage = {
  */
 export type AddNoticeProps = {
   // Function triggering notice messages
-  addNotice: (notice: NoticeMessage) => void;
+  addNotice: (notice: NoticeMessage) => void
 }
 
 const mapDispatchToProps = (dispatch): AddNoticeProps => ({
@@ -51,7 +43,4 @@ const mapDispatchToProps = (dispatch): AddNoticeProps => ({
  */
 const withNotice = (Component) => connect(null, mapDispatchToProps)(Component)
 
-export {
-  withNotice as default,
-  withNotice,
-}
+export { withNotice as default, withNotice }

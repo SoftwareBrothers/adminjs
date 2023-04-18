@@ -1,8 +1,8 @@
 import React from 'react'
 
-import ReferenceValue from './reference-value'
-import { ShowPropertyProps } from '../base-property-props'
-import allowOverride from '../../../hoc/allow-override'
+import ReferenceValue from './reference-value.js'
+import { ShowPropertyProps } from '../base-property-props.js'
+import allowOverride from '../../../hoc/allow-override.js'
 
 const List: React.FC<ShowPropertyProps> = (props) => (
   <ReferenceValue {...props} />

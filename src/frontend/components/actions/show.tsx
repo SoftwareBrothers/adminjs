@@ -1,12 +1,12 @@
 import { DrawerContent } from '@adminjs/design-system'
 import React from 'react'
 
-import allowOverride from '../../hoc/allow-override'
-import { getActionElementCss } from '../../utils'
-import ActionHeader from '../app/action-header/action-header'
-import PropertyType from '../property-type'
-import { ActionProps } from './action.props'
-import LayoutElementRenderer from './utils/layout-element-renderer'
+import allowOverride from '../../hoc/allow-override.js'
+import { getActionElementCss } from '../../utils/index.js'
+import ActionHeader from '../app/action-header/action-header.js'
+import BasePropertyComponent from '../property-type/index.js'
+import { ActionProps } from './action.props.js'
+import LayoutElementRenderer from './utils/layout-element-renderer.js'
 
 /**
  * @name ShowAction
@@ -33,7 +33,7 @@ const Show: React.FC<ActionProps> = (props) => {
           where="show"
         />
       )) : properties.map((property) => (
-        <PropertyType
+        <BasePropertyComponent
           key={property.propertyPath}
           where="show"
           property={property}

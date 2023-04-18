@@ -1,15 +1,15 @@
 import sinon from 'sinon'
 import { expect } from 'chai'
 
-import ResourceDecorator from './resource-decorator'
-import PropertyDecorator from '../property/property-decorator'
-import AdminJS, { defaultOptions } from '../../../adminjs'
-import resourceStub, { expectedResult } from '../../../../spec/backend/helpers/resource-stub'
-import BaseResource from '../../adapters/resource/base-resource'
-import BaseRecord from '../../adapters/record/base-record'
-import BaseProperty from '../../adapters/property/base-property'
+import ResourceDecorator from './resource-decorator.js'
+import PropertyDecorator from '../property/property-decorator.js'
+import AdminJS, { defaultOptions } from '../../../adminjs.js'
+import resourceStub, { expectedResult } from '../../../../spec/backend/helpers/resource-stub.js'
+import BaseResource from '../../adapters/resource/base-resource.js'
+import BaseRecord from '../../adapters/record/base-record.js'
+import BaseProperty from '../../adapters/property/base-property.js'
 
-const translatedLabel = 'translated label'
+const someID = 'someID'
 const currentAdmin = {
   email: 'some@email.com',
   name: 'someName',
@@ -19,7 +19,6 @@ const currentAdmin = {
 const stubAdminJS = (): AdminJS => {
   const stubbedAdmin = sinon.createStubInstance(AdminJS)
   return Object.assign(stubbedAdmin, {
-    translateLabel: sinon.stub<any, string>().returns(translatedLabel),
     translateProperty: sinon.stub<any, string>().returns('translated property'),
     translateAction: sinon.stub<any, string>().returns('translated action'),
     translateMessage: sinon.stub<any, string>().returns('translate message'),
@@ -53,7 +52,7 @@ describe('ResourceDecorator', function () {
     it('returns resource when name is not specified in options', function () {
       expect(
         new ResourceDecorator({ ...args, options: {} }).getResourceName(),
-      ).to.equal(translatedLabel)
+      ).to.equal(someID)
     })
   })
 
@@ -93,10 +92,12 @@ describe('ResourceDecorator', function () {
 
       it('returns only showProperties from options if they were given', function () {
         const path = expectedResult.properties[0].path()
-        const decorator = new ResourceDecorator({ ...args,
+        const decorator = new ResourceDecorator({
+          ...args,
           options: {
             showProperties: [path],
-          } })
+          },
+        })
 
         expect(
           decorator.getProperties({ where: 'show' }),
@@ -229,14 +230,20 @@ describe('ResourceDecorator', function () {
 
     it('passes properties to isVisible when it is a function', function () {
       const someRecord = { params: { param: 'someRecord' } } as unknown as BaseRecord
-      const options = { actions: { show: { isVisible: (data) => {
-        // it passes current admin to the isVisible function
-        expect(data.currentAdmin).to.deep.equal(currentAdmin)
-        expect(data.resource.id).to.equal(stubbedResource.id)
-        expect(data.action.name).to.equal('show')
-        expect(data.record).to.equal(someRecord)
-        return false
-      } } } }
+      const options = {
+        actions: {
+          show: {
+            isVisible: (data) => {
+              // it passes current admin to the isVisible function
+              expect(data.currentAdmin).to.deep.equal(currentAdmin)
+              expect(data.resource.id).to.equal(stubbedResource.id)
+              expect(data.action.name).to.equal('show')
+              expect(data.record).to.equal(someRecord)
+              return false
+            },
+          },
+        },
+      }
       const actions = new ResourceDecorator({
         ...args, options,
       }).recordActions(someRecord, currentAdmin)

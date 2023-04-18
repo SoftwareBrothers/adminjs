@@ -1,6 +1,7 @@
-import factory from 'factory-girl'
-import './action-json.factory'
-import { ActionJSON, RecordJSON } from '../../interfaces'
+import { factory } from 'factory-girl'
+
+import './action-json.factory.js'
+import { ActionJSON, RecordJSON } from '../../interfaces/index.js'
 
 factory.define<RecordJSON>('RecordJSON', Object, {
   params: {
@@ -16,7 +17,7 @@ factory.define<RecordJSON>('RecordJSON', Object, {
   bulkActions: [],
 })
 
-factory.extend<RecordJSON>('RecordJSON', 'RecordJSON.total', {
+factory.extend('RecordJSON', 'RecordJSON.total', {
   // params set for properties from ResourceJSON.total factory's properties
   params: {
     name: 'John',

@@ -1,17 +1,18 @@
-import React from 'react'
+import { cleanup, fireEvent, render, RenderResult, waitFor } from '@testing-library/react'
 import { expect } from 'chai'
-import { render, RenderResult, fireEvent, cleanup, waitFor } from '@testing-library/react'
-import factory from 'factory-girl'
+import { factory } from 'factory-girl'
+import React from 'react'
 import sinon from 'sinon'
 import 'sinon-chai'
 
-import Edit from './edit'
-import TestContextProvider from '../../spec/test-context-provider'
-import '../../spec/property-json.factory'
-import '../../spec/record-json.factory'
-import { RecordJSON, PropertyJSON, ResourceJSON } from '../../../interfaces'
-import ItemComponent from '../default-type/edit'
-import * as TranslateFunctionsFactory from '../../../../utils/translate-functions.factory'
+import Edit from './edit.js'
+import TestContextProvider from '../../spec/test-context-provider.js'
+import '../../spec/initialize-translations.js'
+import '../../spec/property-json.factory.js'
+import '../../spec/record-json.factory.js'
+import { RecordJSON, PropertyJSON, ResourceJSON } from '../../../interfaces/index.js'
+import ItemComponent from '../default-type/edit.js'
+import { TranslateFunctions, __testExports } from '../../../../utils/translate-functions.factory.js'
 
 const AddNewItemText = 'Add new item'
 
@@ -38,10 +39,10 @@ describe('<PropertyType.Array.Edit />', function () {
   )
 
   beforeEach(function () {
-    sinon.stub(TranslateFunctionsFactory, 'createFunctions').returns({
+    sinon.stub(__testExports, 'createFunctions').returns({
       translateProperty: sinon.stub().returns(AddNewItemText),
       translateButton: sinon.stub().returns('someButton'),
-    } as unknown as TranslateFunctionsFactory.TranslateFunctions)
+    } as unknown as TranslateFunctions)
   })
 
   afterEach(function () {
@@ -64,7 +65,7 @@ describe('<PropertyType.Array.Edit />', function () {
         })
       })
 
-      xit('renders label and addItem button', async function () {
+      it('renders label and addItem button', async function () {
         const { findByText } = renderTestSubject(property, record)
 
         const label = findByText(property.label)
@@ -76,10 +77,10 @@ describe('<PropertyType.Array.Edit />', function () {
         })
       })
 
-      xit('renders new empty input field after clicking "add"', function () {
-        const { getByText } = renderTestSubject(property, record)
+      it('renders new empty input field after clicking "add"', function () {
+        const { getByTestId } = renderTestSubject(property, record)
 
-        fireEvent.click(getByText(AddNewItemText))
+        fireEvent.click(getByTestId(`${property.path}-add`))
 
         expect(onChange).to.has.been.calledWith(property.path, [''])
       })
@@ -88,11 +89,13 @@ describe('<PropertyType.Array.Edit />', function () {
     context('2 items inside', function () {
       const values = ['element1', 'element2']
 
-      xit('2 <input> tags already filed with values', async function () {
-        record = await factory.build<RecordJSON>('RecordJSON', { params: {
-          [`${property.path}.0`]: values[0],
-          [`${property.path}.1`]: values[1],
-        } })
+      it('2 <input> tags already filed with values', async function () {
+        record = await factory.build<RecordJSON>('RecordJSON', {
+          params: {
+            [`${property.path}.0`]: values[0],
+            [`${property.path}.1`]: values[1],
+          },
+        })
 
         const { findByDisplayValue } = renderTestSubject(property, record)
 

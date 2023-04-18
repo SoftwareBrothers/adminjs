@@ -1,29 +1,19 @@
 /* eslint-disable react/no-children-prop */
 import React, { useEffect, useState } from 'react'
 import { Routes, Route } from 'react-router-dom'
-import { createGlobalStyle } from 'styled-components'
-import { Box, Overlay, Reset } from '@adminjs/design-system'
+import { Box, Overlay } from '@adminjs/design-system'
 import { useLocation } from 'react-router'
 
-import ViewHelpers from '../../backend/utils/view-helpers/view-helpers'
-import Sidebar from './app/sidebar/sidebar'
-import TopBar from './app/top-bar'
-import Notice from './app/notice'
-import allowOverride from '../hoc/allow-override'
+import ViewHelpers from '../../backend/utils/view-helpers/view-helpers.js'
+import Sidebar, { SIDEBAR_Z_INDEX } from './app/sidebar/sidebar.js'
+import TopBar from './app/top-bar.js'
+import Notice from './app/notice.js'
+import allowOverride from '../hoc/allow-override.js'
+import { AdminModal as Modal } from './app/admin-modal.js'
 import {
   DashboardRoute, ResourceActionRoute, RecordActionRoute, PageRoute, BulkActionRoute, ResourceRoute,
-} from './routes'
-import useHistoryListen from '../hooks/use-history-listen'
-
-const GlobalStyle = createGlobalStyle`
-  html, body, #app {
-    margin: 0;
-    padding: 0;
-    width: 100%;
-    height: 100%;
-    color: ${({ theme }): string => theme.colors.grey100}
-  }
-`
+} from './routes/index.js'
+import useHistoryListen from '../hooks/use-history-listen.js'
 
 const h = new ViewHelpers()
 
@@ -66,35 +56,32 @@ const App: React.FC = () => {
    * on a separate page.
    */
   return (
-    <>
-      <Reset />
-      <GlobalStyle />
-      <Box height="100%" flex data-css="app">
-        {sidebarVisible ? (
-          <Overlay
-            onClick={(): void => toggleSidebar(!sidebarVisible)}
-          />
-        ) : null}
-        <Sidebar isVisible={sidebarVisible} data-css="sidebar" />
-        <Box flex flexGrow={1} flexDirection="column" overflowY="auto" bg="bg" data-css="app-content">
-          <TopBar toggleSidebar={() => toggleSidebar(!sidebarVisible)} />
-          <Box position="absolute" top={0} zIndex={2000} data-css="notice">
-            <Notice />
-          </Box>
-          <Routes>
-            <Route path={`${resourceUrl}/*`} element={<ResourceRoute />} />
-            <Route path={pageUrl} element={<PageRoute />} />
-            <Route path={dashboardUrl} element={<DashboardRoute />} />
-          </Routes>
-          <Routes>
-            <Route path={`${resourceActionUrl}/*`} element={<ResourceActionRoute />} />
-            <Route path={`${bulkActionUrl}/*`} element={<BulkActionRoute />} />
-            <Route path={`${recordActionUrl}/*`} element={<RecordActionRoute />} />
-          </Routes>
+    <Box height="100%" flex data-css="app">
+      {sidebarVisible ? (
+        <Overlay
+          onClick={(): void => toggleSidebar(!sidebarVisible)}
+          zIndex={SIDEBAR_Z_INDEX - 1}
+        />
+      ) : null}
+      <Sidebar isVisible={sidebarVisible} data-css="sidebar" />
+      <Box flex flexGrow={1} flexDirection="column" overflowY="auto" bg="bg" data-css="app-content">
+        <TopBar toggleSidebar={() => toggleSidebar(!sidebarVisible)} />
+        <Box position="absolute" top={0} zIndex={2000} data-css="notice">
+          <Notice />
         </Box>
+        <Routes>
+          <Route path={`${resourceUrl}/*`} element={<ResourceRoute />} />
+          <Route path={pageUrl} element={<PageRoute />} />
+          <Route path={dashboardUrl} element={<DashboardRoute />} />
+        </Routes>
+        <Routes>
+          <Route path={`${resourceActionUrl}/*`} element={<ResourceActionRoute />} />
+          <Route path={`${bulkActionUrl}/*`} element={<BulkActionRoute />} />
+          <Route path={`${recordActionUrl}/*`} element={<RecordActionRoute />} />
+        </Routes>
       </Box>
-    </>
-
+      <Modal />
+    </Box>
   )
 }
 

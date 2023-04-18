@@ -1,9 +1,9 @@
-import { unflatten } from 'flat'
-import { DELIMITER } from './constants'
-import { selectParams } from './select-params'
-import { FlattenParams } from '../flat'
-import { propertyKeyRegex } from './property-key-regex'
-import { GetOptions } from './flat.types'
+import flat from 'flat'
+
+import { DELIMITER } from './constants.js'
+import { selectParams } from './select-params.js'
+import { FlattenParams, GetOptions } from './flat.types.js'
+import { propertyKeyRegex } from './property-key-regex.js'
 
 const TEMP_HOLDING_KEY = 'TEMP_HOLDING_KEY'
 
@@ -19,7 +19,7 @@ const TEMP_HOLDING_KEY = 'TEMP_HOLDING_KEY'
  */
 const get = (params: FlattenParams = {}, propertyPath?: string, options?: GetOptions): any => {
   if (!propertyPath) {
-    return unflatten(params)
+    return flat.unflatten(params)
   }
 
   // when object has this key - simply return it
@@ -62,7 +62,7 @@ const get = (params: FlattenParams = {}, propertyPath?: string, options?: GetOpt
   }, {} as FlattenParams)
 
   if (Object.keys(nestedProperties).length) {
-    return (unflatten(nestedProperties) as Record<string, unknown>)[TEMP_HOLDING_KEY]
+    return (flat.unflatten(nestedProperties) as Record<string, unknown>)[TEMP_HOLDING_KEY]
   }
   return undefined
 }

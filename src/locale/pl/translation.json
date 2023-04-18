@@ -1,0 +1,120 @@
+{
+  "actions": {
+    "new": "Nowy",
+    "edit": "Edycja",
+    "show": "Podgląd",
+    "delete": "Usuń",
+    "bulkDelete": "Usuń wszystko",
+    "list": "Lista"
+  },
+  "buttons": {
+    "save": "Zapisz",
+    "addNewItem": "Nowy",
+    "filter": "Filtr",
+    "applyChanges": "Zastosuj zmiany",
+    "resetFilter": "Wyczyść",
+    "confirmRemovalMany": "Potwierdź usunięcie {{count}} pozycji",
+    "confirmRemovalMany_plural": "Potwierdź usunięcie {{count}} pozycji",
+    "logout": "Wyloguj",
+    "login": "Zaloguj",
+    "seeTheDocumentation": "Zajrzyj: <1>do dokumentacji</1>",
+    "createFirstRecord": "Utwórz pierwszy rekord",
+    "cancel": "Anuluj",
+    "confirm": "Potwierdź"
+  },
+
+  "labels": {
+    "navigation": "Nawigacja",
+    "pages": "Strony",
+    "selectedRecords": "Wybrano ({{selected}})",
+    "filters": "Filtry",
+    "adminVersion": "Admin: {{version}}",
+    "appVersion": "Aplikacja: {{version}}"
+  },
+  "properties": {
+    "length": "Długość",
+    "from": "Od",
+    "to": "Do"
+  },
+  "components": {
+    "DropZone": {
+      "placeholder": "Przeciągnij plik tutaj lub kliknij aby wybrać",
+      "acceptedSize": "Maks. rozmiar: {{maxSize}}",
+      "acceptedType": "Dozwolone pliki: {{mimeTypes}}",
+      "unsupportedSize": "Plik {{fileName}} jest zbyt duży",
+      "unsupportedType": "Plik {{fileName}} jest niedozwolonego typu: {{fileType}}"
+    },
+    "LanguageSelector": {
+      "availableLanguages": {
+        "de": "Niemiecki",
+        "en": "Angielski",
+        "es": "Hiszpański",
+        "it": "Włoski",
+        "pl": "Polski",
+        "pt-BR": "Portugalski (Brazylia)",
+        "ua": "Ukraiński",
+        "zh-CN": "chiński"
+      }
+    },
+    "Login": {
+      "welcomeHeader": "Witaj",
+      "welcomeMessage": "AdminJS - najlepszy admin framework dla aplikacji Node.js, oparty na React.",
+      "properties": {
+        "email": "Email",
+        "password": "Hasło"
+      },
+      "loginButton": "Zaloguj"
+    }
+  },
+  "resources": {},
+  "messages": {
+    "successfullyBulkDeleted": "Poprawnie usunięto {{count}} rekordów",
+    "successfullyBulkDeleted_plural": "Poprawnie usunięto {{count}} rekordów",
+    "successfullyDeleted": "Poprawnie usunięto wybrany rekord",
+    "successfullyUpdated": "Poprawnie zaktualizowano wybrany rekord",
+    "thereWereValidationErrors": "Błędy walidacji - sprawdź poniżej",
+    "forbiddenError": "Nie masz uprawnień do akcji {{actionName}} na {{resourceId}}",
+    "anyForbiddenError": "Nie masz uprawnień tej akcji.",
+    "successfullyCreated": "Poprawnie utworzono nowy rekord",
+    "bulkDeleteError": "Wystąpiły błędy podczas usuwania rekordów. Przejrzyj wpisy w konsoli aby zobaczyć szczegóły.",
+    "errorFetchingRecords": "Wystąpiły błędy podczas pobierania danych. Przejrzyj wpisy w konsoli aby zobaczyć szczegóły.",
+    "errorFetchingRecord": "Wystąpiły błędy podczas pobierania rekordu. Przejrzyj wpisy w konsoli aby zobaczyć szczegóły.",
+    "noRecordsSelected": "NIe zostały wybrane żadne rekordy.",
+    "theseRecordsWillBeRemoved": "Wybrany rekord zostanie usunięty.",
+    "theseRecordsWillBeRemoved_plural": "Wybrane rekordy zostanią usunięte.",
+    "pickSomeFirstToRemove": "Aby usunąć rekordy należy je najpierw wybrać",
+    "error404Resource": "Nie można znaleźć zasobu o id: {{resourceId}}",
+    "error404Action": "Do zasobu o id: {{resourceId}} nie została przypisana akcja {{actionName}} lub nie masz uprawnień do jej użycia.",
+    "error404Record": "Zasób o id: {{resourceId}} nie zaiera rekordu o id: {{recordId}} lub nie masz do niego dostępu.",
+    "seeConsoleForMore": "Przejrzyj zapisy w konsoli aby zobaczyć więcej szczególów ...",
+    "noActionComponent": "Musisz zaiplementować komponent dla twojej akcji.",
+    "noRecordsInResource": "Ten zasób nie posiada rekordów.",
+    "noRecords": "Brak danych.",
+    "confirmDelete": "Czy potwierdzasz usunięcie tej pozycji?",
+    "welcomeOnBoard_title": "Witamy na pokładzie!",
+    "welcomeOnBoard_subtitle": "Od teraz jesteś jednym z nas! Przygotowaliśmy dla Ciebie kilka wskazówek:",
+    "addingResources_title": "Dodawanie zasobów",
+    "addingResources_subtitle": "Jak dodać nowe zasoby do menu bocznego",
+    "customizeResources_title": "Indywidualne zasoby",
+    "customizeResources_subtitle": "Definiowanie sposobu zachowania, dodawanie właściwości i więcej...",
+    "customizeActions_title": "Indywidualne akcje",
+    "customizeActions_subtitle": "Modyfikowanie istniejących akcji i tworzenie nowych",
+    "writeOwnComponents_title": "Tworzenie nowych komponentów",
+    "writeOwnComponents_subtitle": "Jak zmodyfikować wygląd i zachowanie AdminJS?",
+    "customDashboard_title": "Indywidualny panel sterowania",
+    "customDashboard_subtitle": "Jak zmodyfikować widok i dodać nowe strony do panelu bocznego",
+    "roleBasedAccess_title": "Kontrola dostępu oparta o role",
+    "roleBasedAccess_subtitle": "Tworzenie roli użytkownika i uprawnień w AdminJS",
+    "community_title": "Dołącz do zespołu na Slack.",
+    "community_subtitle": "Wymieniaj informacje z twórcami AdminJS i innymi użytkownikami.",
+    "foundBug_title": "Znalazłeś błąd? Potrzebujesz nowych funkcji?",
+    "foundBug_subtitle": "Zgłoś problem w repozytoriun GitHub.",
+    "needMoreSolutions_title": "Szukasz innych rozwiązań?",
+    "needMoreSolutions_subtitle": "Jesteśmy tutaj, aby dostarczyć Ci wpaniały projekt UX/UI i dostosować do Twoich potrzeb panel AdminJS",
+    "invalidCredentials": "Błędny email i/lub hasło",
+    "pageNotFound_title": "Strona nie znaleziona",
+    "pageNotFound_subtitle": "Strona <strong>\"{{pageName}}\"</strong> nie istnieje",
+    "componentNotFound_title": "Nie określono komponentu",
+    "componentNotFound_subtitle": "Musisz określić komponent, który wyrenderuje ten element"
+  }
+}
