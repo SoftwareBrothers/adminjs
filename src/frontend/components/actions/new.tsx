@@ -1,15 +1,13 @@
 import { Box, Button, DrawerContent, DrawerFooter, Icon } from '@adminjs/design-system'
-import identity from 'lodash/identity.js'
-import pickBy from 'lodash/pickBy.js'
+import pick from 'lodash/pick.js'
 import React, { FC, useEffect } from 'react'
 import { useNavigate } from 'react-router'
 
 import allowOverride from '../../hoc/allow-override.js'
-import { useQueryListParams } from '../../hooks/use-query-list-params.js'
+import { useQueryParams } from '../../hooks/use-query-params.js'
 import useRecord from '../../hooks/use-record/use-record.js'
 import { useTranslation } from '../../hooks/use-translation.js'
 import { RecordJSON } from '../../interfaces/index.js'
-import { BasePropertyJSON } from '../../interfaces/property-json/index.js'
 import { getActionElementCss } from '../../utils/index.js'
 import ActionHeader from '../app/action-header/action-header.js'
 import BasePropertyComponent from '../property-type/index.js'
@@ -22,38 +20,27 @@ const New: FC<ActionProps> = (props) => {
   const { record, handleChange, submit, loading, setRecord } = useRecord(initialRecord, resource.id)
   const { translateButton } = useTranslation()
   const navigate = useNavigate()
-  const { parsedQuery } = useQueryListParams()
-
-  const preFillProperty = (property: any) => ({
-    ...property,
-    ...(Object.keys(parsedQuery).includes(property.propertyPath)
-      ? { props: { ...property.props, value: parsedQuery[property.propertyPath] } }
-      : {}),
-  })
+  const { parsedQuery } = useQueryParams()
 
   useEffect(() => {
-    if (initialRecord && parsedQuery) {
+    if (initialRecord) {
       setRecord(initialRecord)
     }
   }, [initialRecord, parsedQuery])
 
   useEffect(() => {
-    console.log(record)
-  }, [record])
+    if (parsedQuery) {
+      const resourceProperties = pick(parsedQuery, Object.keys(resource.properties))
+      if (Object.keys(resourceProperties).length) {
+        setRecord({ ...record, params: { ...record.params, ...resourceProperties } })
+      }
+    }
+  }, [parsedQuery])
 
   const handleSubmit = (event): boolean => {
     event.preventDefault()
     if (!event.currentTarget) return false
-    const formData = new FormData(event.target)
-    const formValue = pickBy(
-      Array.from(formData.entries()).reduce(
-        (memo, [key, value]) => ({ ...memo, [key]: value }),
-        parsedQuery,
-      ),
-      identity,
-    )
-
-    submit(formValue).then((response) => {
+    submit().then((response) => {
       if (response.data.redirectUrl) {
         navigate(appendForceRefresh(response.data.redirectUrl))
       }

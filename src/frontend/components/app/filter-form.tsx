@@ -3,7 +3,7 @@ import React, { FC, useEffect, useState } from 'react'
 import { useTranslation } from '../../hooks/use-translation.js'
 import { RecordJSON, ResourceJSON } from '../../interfaces/index.js'
 import BasePropertyComponent from '../property-type/index.js'
-import { useQueryListParams } from '../../hooks/use-query-list-params.js'
+import { useQueryParams } from '../../hooks/use-query-params.js'
 import { useFilterDrawer } from '../../hooks/use-filter-drawer.js'
 
 export type FilterForm = {
@@ -15,7 +15,7 @@ export const FilterForm: FC<FilterForm> = (props) => {
   const [filter, setFilter] = useState<any>({})
   const properties = resource.filterProperties
   const { tb, tl } = useTranslation()
-  const { storeParams, filters, showFilters } = useQueryListParams()
+  const { storeParams, filters, showFilters } = useQueryParams()
   const { toggleFilter } = useFilterDrawer()
 
   const handleSubmit = (event: SubmitEvent) => {

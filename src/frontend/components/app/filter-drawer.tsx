@@ -1,11 +1,13 @@
 import { Box, Button, Drawer, DrawerContent, DrawerFooter, H3, Icon } from '@adminjs/design-system'
+import identity from 'lodash/identity.js'
+import pickBy from 'lodash/pickBy.js'
 import React, { useEffect, useRef, useState } from 'react'
 import { useParams } from 'react-router-dom'
 
 import allowOverride from '../../hoc/allow-override.js'
 import { useTranslation } from '../../hooks/index.js'
 import { useFilterDrawer } from '../../hooks/use-filter-drawer.js'
-import { useQueryListParams } from '../../hooks/use-query-list-params.js'
+import { useQueryParams } from '../../hooks/use-query-params.js'
 import { RecordJSON, ResourceJSON } from '../../interfaces/index.js'
 import { getResourceElementCss } from '../../utils/index.js'
 import BasePropertyComponent from '../property-type/index.js'
@@ -22,12 +24,12 @@ const FilterDrawer: React.FC<FilterProps> = (props) => {
   const { resource } = props
   const properties = resource.filterProperties
 
-  const [filter, setFilter] = useState<any>({})
+  const [filter, setFilter] = useState<Record<string, unknown>>({})
   const params = useParams<MatchProps>()
   const { translateButton, translateLabel } = useTranslation()
   const initialLoad = useRef(true)
   const { isVisible, toggleFilter } = useFilterDrawer()
-  const { storeParams, filters } = useQueryListParams()
+  const { storeParams, filters } = useQueryParams()
 
   useEffect(() => {
     if (initialLoad.current) {
@@ -39,7 +41,7 @@ const FilterDrawer: React.FC<FilterProps> = (props) => {
 
   const handleSubmit = (event: SubmitEvent) => {
     event.preventDefault()
-    storeParams({ filters: filter })
+    storeParams({ filters: pickBy(filter, identity) })
   }
 
   const handleReset = (event: SubmitEvent) => {
