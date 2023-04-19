@@ -20,7 +20,7 @@ const New: FC<ActionProps> = (props) => {
   const { record, handleChange, submit, loading, setRecord } = useRecord(initialRecord, resource.id)
   const { translateButton } = useTranslation()
   const navigate = useNavigate()
-  const { parsedQuery } = useQueryParams()
+  const { parsedQuery, redirectUrl } = useQueryParams()
 
   useEffect(() => {
     if (initialRecord) {
@@ -52,10 +52,17 @@ const New: FC<ActionProps> = (props) => {
     return false
   }
 
+  const handleCancel = () => {
+    if (redirectUrl) {
+      window.location.href = redirectUrl
+    }
+  }
+
   const contentTag = getActionElementCss(resource.id, action.name, 'drawer-content')
   const formTag = getActionElementCss(resource.id, action.name, 'form')
   const footerTag = getActionElementCss(resource.id, action.name, 'drawer-footer')
   const buttonTag = getActionElementCss(resource.id, action.name, 'drawer-submit')
+  const cancelButtonTag = getActionElementCss(resource.id, action.name, 'drawer-cancel')
 
   return (
     <Box
@@ -93,6 +100,17 @@ const New: FC<ActionProps> = (props) => {
       </DrawerContent>
       <DrawerFooter data-css={footerTag}>
         <Box flex style={{ gap: 16 }}>
+          {redirectUrl && (
+            <Button
+              variant="light"
+              type="button"
+              onClick={handleCancel}
+              data-css={cancelButtonTag}
+              data-testid="button-cancel"
+            >
+              {translateButton('cancel', resource.id)}
+            </Button>
+          )}
           <Button
             variant="contained"
             type="submit"

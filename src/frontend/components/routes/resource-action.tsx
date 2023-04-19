@@ -25,7 +25,6 @@ const ResourceAction: React.FC<Props> = (props) => {
   const params = useParams<ResourceActionParams>()
   const { resources } = props
   const { resourceId, actionName } = params
-  const { toggleFilter } = useFilterDrawer()
   const [tag, setTag] = useState('')
 
   const resource = resources.find((r) => r.id === resourceId)
@@ -48,7 +47,12 @@ const ResourceAction: React.FC<Props> = (props) => {
   return (
     <Wrapper width={action.containerWidth} showFilter={action.showFilter}>
       <Box flex flexDirection="column">
-        <ActionHeader resource={resource} action={action} toggleFilter={toggleFilter} tag={tag} />
+        <ActionHeader
+          resource={resource}
+          action={action}
+          toggleFilter={action.showFilter}
+          tag={tag}
+        />
         <BaseActionComponent action={action} resource={resource} setTag={setTag} />
       </Box>
       {action.showFilter ? <FilterDrawer resource={resource} /> : ''}
