@@ -12,6 +12,7 @@ import { UseRecordOptions, UseRecordResult, UseRecordSubmitFunction } from './us
 import isEntireRecordGiven from './is-entire-record-given.js'
 import { filterRecordParams, isPropertyPermitted } from './filter-record.js'
 import { flat } from '../../../utils/flat/index.js'
+import { useQueryParams } from '../use-query-params.js'
 
 const api = new ApiClient()
 
@@ -35,6 +36,7 @@ export const useRecord = (
   const [loading, setLoading] = useState(false)
   const [isSynced, setIsSynced] = useState(true)
   const [progress, setProgress] = useState(0)
+  const { parsedQuery } = useQueryParams()
 
   const filteredRecord = initialRecord ? filterRecordParams(initialRecord, options) : null
 
@@ -81,21 +83,22 @@ export const useRecord = (
     const mergedParams = flat.merge(record.params, customParams)
     const formData = paramsToFormData(mergedParams)
 
-    const params: Omit<RecordActionAPIParams, 'actionName' | 'recordId'> = {
+    const actionParams: Omit<RecordActionAPIParams, 'actionName' | 'recordId'> = {
       resourceId,
       onUploadProgress: (e): void => setProgress(Math.round((e.loaded * 100) / (e.total ?? 1))),
       data: formData,
+      params: parsedQuery,
       headers: { 'Content-Type': 'multipart/form-data' },
     }
 
     const promise = initialRecord?.id
       ? api.recordAction({
-        ...params,
+        ...actionParams,
         actionName: 'edit',
         recordId: record.id,
       })
       : api.resourceAction({
-        ...params,
+        ...actionParams,
         actionName: 'new',
       }) as Promise<AxiosResponse<RecordActionResponse>>
 
