@@ -1,10 +1,16 @@
 import React, { ComponentType, PropsWithChildren } from 'react'
-import { Box, BoxProps, DrawerContent, DrawerFooter } from '@adminjs/design-system'
+import { Box, BoxProps, Drawer, DrawerContent, DrawerFooter } from '@adminjs/design-system'
 import { styled } from '@adminjs/design-system/styled-components'
 
 import allowOverride from '../../../hoc/allow-override.js'
 
 const StyledWrapperWithFilter = styled(Box)`
+  & > ${Drawer} {
+    position: relative;
+    box-shadow: none;
+    border-radius: ${({ theme }) => theme.space.sm};
+  }
+
   & > ${DrawerContent} {
     background: ${({ theme }) => theme.colors.container};
     padding: ${({ theme }) => theme.space.xxl};
