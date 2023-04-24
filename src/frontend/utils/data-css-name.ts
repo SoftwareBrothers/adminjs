@@ -1,3 +1,6 @@
-export const getResourceElementCss = (resourceId: string, suffix: string) => `${resourceId}-${suffix}`
+/* eslint-disable max-len */
+export const getDataCss = (...args: (string | number)[]) => args.join('-')
 
-export const getActionElementCss = (resourceId: string, actionName: string, suffix: string) => `${resourceId}-${actionName}-${suffix}`
+export const getResourceElementCss = (resourceId: string, suffix: string) => getDataCss(resourceId, suffix)
+
+export const getActionElementCss = (resourceId: string, actionName: string, suffix: string) => getDataCss(resourceId, actionName, suffix)

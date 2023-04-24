@@ -1,49 +1,35 @@
-import {
-  Box, Button, Drawer,
-  DrawerContent,
-  DrawerFooter, H3, Icon,
-} from '@adminjs/design-system'
-import React, { MouseEvent, SyntheticEvent, useEffect, useRef, useState } from 'react'
-import { useLocation, useNavigate, useParams } from 'react-router-dom'
+import { Box, Button, Drawer, DrawerContent, DrawerFooter, H3, Icon } from '@adminjs/design-system'
+import identity from 'lodash/identity.js'
+import pickBy from 'lodash/pickBy.js'
+import React, { useEffect, useRef, useState } from 'react'
+import { useParams } from 'react-router-dom'
 
 import allowOverride from '../../hoc/allow-override.js'
 import { useTranslation } from '../../hooks/index.js'
+import { useFilterDrawer } from '../../hooks/use-filter-drawer.js'
+import { useQueryParams } from '../../hooks/use-query-params.js'
 import { RecordJSON, ResourceJSON } from '../../interfaces/index.js'
 import { getResourceElementCss } from '../../utils/index.js'
 import BasePropertyComponent from '../property-type/index.js'
 
 export type FilterProps = {
-  resource: ResourceJSON;
-  toggleFilter: () => void;
-  isVisible: boolean;
+  resource: ResourceJSON
 }
 
 type MatchProps = {
-  resourceId: string;
-}
-
-const parseQuery = (location): any => {
-  const filter: Record<string, string> = {}
-  const query = new URLSearchParams(location.search)
-  for (const entry of query.entries()) {
-    const [key, value] = entry
-    if (key.match('filters.')) {
-      filter[key.replace('filters.', '')] = value
-    }
-  }
-  return filter
+  resourceId: string
 }
 
 const FilterDrawer: React.FC<FilterProps> = (props) => {
-  const { resource, isVisible, toggleFilter } = props
+  const { resource } = props
   const properties = resource.filterProperties
 
-  const location = useLocation()
-  const [filter, setFilter] = useState(parseQuery(location))
+  const [filter, setFilter] = useState<Record<string, unknown>>({})
   const params = useParams<MatchProps>()
-  const navigate = useNavigate()
   const { translateButton, translateLabel } = useTranslation()
   const initialLoad = useRef(true)
+  const { isVisible, toggleFilter } = useFilterDrawer()
+  const { storeParams, filters } = useQueryParams()
 
   useEffect(() => {
     if (initialLoad.current) {
@@ -53,55 +39,45 @@ const FilterDrawer: React.FC<FilterProps> = (props) => {
     }
   }, [params.resourceId])
 
-  const handleSubmit = (event: SyntheticEvent): false => {
+  const handleSubmit = (event: SubmitEvent) => {
     event.preventDefault()
-    const search = new URLSearchParams(window.location.search)
-    Object.keys(filter).forEach((key) => {
-      if (filter[key] !== '') {
-        search.set(`filters.${key}`, filter[key])
-      } else {
-        search.delete(`filters.${key}`)
-      }
-    })
-    toggleFilter()
-    search.set('page', '1')
-    navigate(`${location.pathname}?${search.toString()}`)
-    return false
+    storeParams({ filters: pickBy(filter, identity) })
   }
 
-  const resetFilter = (event: MouseEvent): void => {
+  const handleReset = (event: SubmitEvent) => {
     event.preventDefault()
-    const filteredSearch = new URLSearchParams()
-    const search = new URLSearchParams(window.location.search)
-    for (const key of search.keys()) {
-      if (!key.match('filters.')) {
-        filteredSearch.set(key, search.get(key) as string)
-      }
-    }
-    const query = filteredSearch.toString() === '' ? `?${filteredSearch.toString()}` : ''
-    toggleFilter()
-    navigate(location.pathname + query)
+    storeParams({ filters: undefined })
     setFilter({})
   }
+
+  useEffect(() => {
+    if (filters) {
+      setFilter(filters)
+    }
+  }, [filters])
 
   const handleChange = (propertyName: string | RecordJSON, value: any): void => {
     if ((propertyName as RecordJSON).params) {
       throw new Error('you can not pass RecordJSON to filters')
     }
-    setFilter({
-      ...filter,
-      [propertyName as string]: value,
-    })
+    setFilter({ ...filter, [propertyName as string]: value })
   }
 
-  const contentTag = getResourceElementCss(params.resourceId!, 'filter-drawer')
-  const cssContent = getResourceElementCss(params.resourceId!, 'filter-drawer-content')
-  const cssFooter = getResourceElementCss(params.resourceId!, 'filter-drawer-footer')
-  const cssButtonApply = getResourceElementCss(params.resourceId!, 'filter-drawer-button-apply')
-  const cssButtonReset = getResourceElementCss(params.resourceId!, 'filter-drawer-button-reset')
+  const contentTag = getResourceElementCss(resource.id, 'filter-drawer')
+  const cssContent = getResourceElementCss(resource.id, 'filter-drawer-content')
+  const cssFooter = getResourceElementCss(resource.id, 'filter-drawer-footer')
+  const cssButtonApply = getResourceElementCss(resource.id, 'filter-drawer-button-apply')
+  const cssButtonReset = getResourceElementCss(resource.id, 'filter-drawer-button-reset')
 
   return (
-    <Drawer variant="filter" isHidden={!isVisible} as="form" onSubmit={handleSubmit} data-css={contentTag}>
+    <Drawer
+      variant="filter"
+      isHidden={!isVisible}
+      as="form"
+      onSubmit={handleSubmit}
+      onReset={handleReset}
+      data-css={contentTag}
+    >
       <DrawerContent data-css={cssContent}>
         <Box flex justifyContent="space-between">
           <H3>{translateLabel('filters', resource.id)}</H3>
@@ -111,7 +87,7 @@ const FilterDrawer: React.FC<FilterProps> = (props) => {
             size="icon"
             rounded
             color="text"
-            onClick={(): void => toggleFilter()}
+            onClick={toggleFilter}
           >
             <Icon icon="X" />
           </Button>
@@ -130,10 +106,10 @@ const FilterDrawer: React.FC<FilterProps> = (props) => {
         </Box>
       </DrawerContent>
       <DrawerFooter data-css={cssFooter}>
-        <Button type="button" size="lg" variant="light" onClick={resetFilter} data-css={cssButtonReset}>
+        <Button type="button" variant="light" onClick={handleReset} data-css={cssButtonReset}>
           {translateButton('resetFilter', resource.id)}
         </Button>
-        <Button type="submit" variant="contained" size="lg" data-css={cssButtonApply}>
+        <Button type="submit" variant="contained" data-css={cssButtonApply}>
           {translateButton('applyChanges', resource.id)}
         </Button>
       </DrawerFooter>
@@ -143,7 +119,4 @@ const FilterDrawer: React.FC<FilterProps> = (props) => {
 
 const OverridableFilterDrawer = allowOverride(FilterDrawer, 'FilterDrawer')
 
-export {
-  OverridableFilterDrawer as default,
-  OverridableFilterDrawer as FilterDrawer,
-}
+export { OverridableFilterDrawer as FilterDrawer, OverridableFilterDrawer as default }
