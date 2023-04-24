@@ -8,19 +8,19 @@ import allowOverride from '../../hoc/allow-override.js'
 import { ActionJSON, ResourceJSON } from '../../interfaces/index.js'
 import { ReduxState } from '../../store/store.js'
 import { getResourceElementCss } from '../../utils/index.js'
-import { ActionHeader } from '../app/index.js'
 import BaseAction from '../app/base-action-component.js'
 import { NoActionError, NoResourceError } from '../app/error-message.js'
 import FilterDrawer from '../app/filter-drawer.js'
+import { ActionHeader } from '../app/index.js'
 
 type PropsFromState = {
-  resources: Array<ResourceJSON>;
+  resources: Array<ResourceJSON>
 }
 
 type Props = PropsFromState
 
 type StringifiedBulk<T> = Omit<T, 'recordsId'> & {
-  recordsIds?: string;
+  recordsIds?: string
 }
 
 const getAction = (resource: ResourceJSON): ActionJSON | undefined => {
@@ -34,9 +34,7 @@ const getAction = (resource: ResourceJSON): ActionJSON | undefined => {
   const resourceActionUrl = h.resourceActionUrl({ resourceId, actionName })
   const bulkActionUrl = h.bulkActionUrl({ resourceId, actionName })
 
-  const resourceActionMatch = useMatch(
-    resourceActionUrl,
-  )
+  const resourceActionMatch = useMatch(resourceActionUrl)
   const recordActionMatch = useMatch(recordActionUrl)
   const bulkActionMatch = useMatch(bulkActionUrl)
 
@@ -51,8 +49,6 @@ const ResourceAction: React.FC<Props> = (props) => {
   const params = useParams<StringifiedBulk<ResourceActionParams>>()
   const { resources } = props
   const { resourceId } = params
-
-  const [filterVisible, setFilterVisible] = useState(false)
   const [tag, setTag] = useState('')
 
   if (!resourceId) {
@@ -61,7 +57,7 @@ const ResourceAction: React.FC<Props> = (props) => {
 
   const resource = resources.find((r) => r.id === resourceId)
   if (!resource) {
-    return (<NoResourceError resourceId={resourceId} />)
+    return <NoResourceError resourceId={resourceId} />
   }
 
   const realEndAction = getAction(resource)
@@ -73,32 +69,32 @@ const ResourceAction: React.FC<Props> = (props) => {
   const listAction = resource.resourceActions.find((r) => r.name === listActionName)
 
   if (!listAction) {
-    return (<NoActionError resourceId={resourceId} actionName={listActionName} />)
+    return <NoActionError resourceId={resourceId} actionName={listActionName} />
   }
-
-  const toggleFilter = listAction.showFilter
-    ? ((): void => setFilterVisible(!filterVisible))
-    : undefined
 
   const contentTag = getResourceElementCss(resource.id, 'list')
 
   return (
-    <Box variant="transparent" width={listAction.containerWidth} mx="auto" data-css={contentTag}>
-      <ActionHeader
-        resource={resource}
-        action={listAction}
-        tag={tag}
-        toggleFilter={toggleFilter}
-      />
-      <BaseAction action={listAction} resource={resource} setTag={setTag} />
-      {listAction.showFilter ? (
-        <FilterDrawer
-          key={filterVisible.toString()}
+    <Box
+      flex
+      variant="transparent"
+      alignItems="start"
+      width={listAction.containerWidth}
+      mx="auto"
+      style={{ gap: 16 }}
+      height="100%"
+      data-css={contentTag}
+    >
+      <Box flex flexDirection="column" flexGrow={1}>
+        <ActionHeader
           resource={resource}
-          isVisible={filterVisible}
-          toggleFilter={(): void => { setFilterVisible(!filterVisible) }}
+          action={listAction}
+          tag={tag}
+          toggleFilter={listAction.showFilter}
         />
-      ) : ''}
+        <BaseAction action={listAction} resource={resource} setTag={setTag} />
+      </Box>
+      {listAction.showFilter && <FilterDrawer resource={resource} />}
     </Box>
   )
 }

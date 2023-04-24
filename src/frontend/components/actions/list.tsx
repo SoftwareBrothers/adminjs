@@ -1,8 +1,9 @@
 import { Box, Pagination, Text } from '@adminjs/design-system'
 import React, { useEffect } from 'react'
-import { useLocation, useNavigate } from 'react-router'
+import { useLocation } from 'react-router'
 
 import allowOverride from '../../hoc/allow-override.js'
+import { useQueryParams } from '../../hooks/use-query-params.js'
 import useRecords from '../../hooks/use-records/use-records.js'
 import useSelectedRecords from '../../hooks/use-selected-records/use-selected-records.js'
 import { getActionElementCss } from '../../utils/index.js'
@@ -28,7 +29,7 @@ const List: React.FC<ActionProps> = ({ resource, setTag }) => {
     setSelectedRecords,
   } = useSelectedRecords(records)
   const location = useLocation()
-  const navigate = useNavigate()
+  const { storeParams } = useQueryParams()
 
   useEffect(() => {
     if (setTag) {
@@ -50,9 +51,7 @@ const List: React.FC<ActionProps> = ({ resource, setTag }) => {
   const handleActionPerformed = (): any => fetchData()
 
   const handlePaginationChange = (pageNumber: number): void => {
-    const search = new URLSearchParams(location.search)
-    search.set('page', pageNumber.toString())
-    navigate({ search: search.toString() })
+    storeParams({ page: pageNumber.toString() })
   }
 
   const contentTag = getActionElementCss(resource.id, 'list', 'table-wrapper')

@@ -29,7 +29,8 @@ const SelectEdit: FC<CombinedProps> = (props) => {
   if (!property.availableValues) {
     return null
   }
-  const propValue = record.params?.[property.path] ?? ''
+
+  const propValue = record.params?.[property.path] ?? property.props.value ?? ''
   // eslint-disable-next-line max-len
   const availableValues = property.availableValues.map((v) => ({
     ...v,
@@ -51,7 +52,7 @@ const SelectEdit: FC<CombinedProps> = (props) => {
 
 const TextEdit: FC<CombinedProps> = (props) => {
   const { property, record, onChange } = props
-  const propValue = record.params?.[property.path] ?? ''
+  const propValue = record.params?.[property.path] ?? property.props.value ?? ''
   const [value, setValue] = useState(propValue)
 
   useEffect(() => {

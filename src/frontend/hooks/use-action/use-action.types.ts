@@ -12,6 +12,7 @@ export type DifferentActionParams = {
   resourceId: ActionParams['resourceId'];
   recordId?: RecordActionParams['recordId'];
   recordIds?: BulkActionParams['recordIds'];
+  search?: string;
 }
 
 export type MergedActionParams = RecordActionParams & BulkActionParams & ResourceActionParams;
