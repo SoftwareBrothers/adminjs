@@ -28,6 +28,7 @@ type Params<FiltersT = Record<string, unknown>> = {
   redirectUrl: string
   direction: 'asc' | 'desc'
   filters: FiltersT
+  [name: string]: unknown
 }
 
 export function useQueryParams<FiltersT = Record<string, unknown>>() {

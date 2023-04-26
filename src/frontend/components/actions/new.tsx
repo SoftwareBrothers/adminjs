@@ -42,7 +42,7 @@ const New: FC<ActionProps> = (props) => {
     if (!event.currentTarget) return false
     submit().then((response) => {
       if (response.data.redirectUrl) {
-        navigate(appendForceRefresh(response.data.redirectUrl))
+        navigate(appendForceRefresh(response.data.redirectUrl, ''))
       }
       // if record has id === has been created
       if (response.data.record.id && !Object.keys(response.data.record.errors).length) {
