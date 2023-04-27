@@ -37,7 +37,7 @@ const checkResponse = (response: AxiosResponse): void => {
   if (response.request.responseURL
       && response.request.responseURL.match(loginUrl)
   ) {
-    // eslint-disable-next-line no-undef
+    // eslint-disable-next-line no-undef, no-alert
     alert('Your session expired. You will be redirected to login screen')
     globalAny.location.assign(loginUrl)
   }
