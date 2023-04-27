@@ -1,5 +1,5 @@
 import { Box, Button, Drawer, DrawerContent, DrawerFooter, H3, Icon } from '@adminjs/design-system'
-import identity from 'lodash/identity.js'
+import isNil from 'lodash/isNil.js'
 import pickBy from 'lodash/pickBy.js'
 import React, { useEffect, useRef, useState } from 'react'
 import { useParams } from 'react-router-dom'
@@ -29,7 +29,7 @@ const FilterDrawer: React.FC<FilterProps> = (props) => {
   const { translateButton, translateLabel } = useTranslation()
   const initialLoad = useRef(true)
   const { isVisible, toggleFilter } = useFilterDrawer()
-  const { storeParams, filters } = useQueryParams()
+  const { storeParams, clearParams, filters } = useQueryParams()
 
   useEffect(() => {
     if (initialLoad.current) {
@@ -41,12 +41,12 @@ const FilterDrawer: React.FC<FilterProps> = (props) => {
 
   const handleSubmit = (event: SubmitEvent) => {
     event.preventDefault()
-    storeParams({ filters: pickBy(filter, identity) })
+    storeParams({ filters: pickBy(filter, (v) => !isNil(v)) })
   }
 
   const handleReset = (event: SubmitEvent) => {
     event.preventDefault()
-    storeParams({ filters: undefined })
+    clearParams('filters')
     setFilter({})
   }
 
@@ -60,7 +60,10 @@ const FilterDrawer: React.FC<FilterProps> = (props) => {
     if ((propertyName as RecordJSON).params) {
       throw new Error('you can not pass RecordJSON to filters')
     }
-    setFilter({ ...filter, [propertyName as string]: value })
+    setFilter({
+      ...filter,
+      [propertyName as string]: typeof value === 'string' && !value.length ? undefined : value,
+    })
   }
 
   const contentTag = getResourceElementCss(resource.id, 'filter-drawer')
