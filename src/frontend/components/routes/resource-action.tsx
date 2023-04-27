@@ -5,7 +5,6 @@ import { useParams } from 'react-router'
 
 import { ResourceActionParams } from '../../../backend/utils/view-helpers/view-helpers.js'
 import allowOverride from '../../hoc/allow-override.js'
-import { useFilterDrawer } from '../../hooks/use-filter-drawer.js'
 import { ResourceJSON } from '../../interfaces/index.js'
 import { ReduxState } from '../../store/store.js'
 import BaseActionComponent from '../app/base-action-component.js'
