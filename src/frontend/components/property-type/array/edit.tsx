@@ -32,6 +32,7 @@ const ItemRenderer: React.FC<EditProps & ItemRendererProps> = (props) => {
     >
       {(provided): JSX.Element => (
         <Box
+          as="div"
           ref={provided.innerRef}
           {...provided.draggableProps}
           {...provided.dragHandleProps}
@@ -39,6 +40,7 @@ const ItemRenderer: React.FC<EditProps & ItemRendererProps> = (props) => {
           flex
           flexDirection="row"
           alignItems="start"
+          variant="transparent"
           data-testid={property.path}
         >
           <Box as="div" flexGrow={1}>
