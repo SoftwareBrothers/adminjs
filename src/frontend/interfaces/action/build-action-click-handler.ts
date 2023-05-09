@@ -54,8 +54,8 @@ export const buildActionClickHandler = (
         openModal(modalData)
         return
       }
-      
-      return callApi()
+
+      callApi()
     }
 
     if (href) {
