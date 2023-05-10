@@ -39,19 +39,23 @@ export const buildActionClickHandler = (
       params, action, actionResponseHandler,
     })
 
-    if (action.guard && actionHasComponent(action)) {
-      const modalData: ModalData = {
-        modalProps: {
-          variant: 'danger',
-          label: 'confirm',
-          title: action.guard,
-        },
-        type: 'confirm',
-        resourceId: params.resourceId,
-        confirmAction: callApi,
+    if (actionHasComponent(action)) {
+      if (action.guard) {
+        const modalData: ModalData = {
+          modalProps: {
+            variant: 'danger',
+            label: 'confirm',
+            title: action.guard,
+          },
+          type: 'confirm',
+          resourceId: params.resourceId,
+          confirmAction: callApi,
+        }
+        openModal(modalData)
+        return
       }
-      openModal(modalData)
-      return
+
+      callApi()
     }
 
     if (href) {
