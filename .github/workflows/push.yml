@@ -78,7 +78,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: bundle
-          path: src/frontend/assets/scripts
+          path: lib/frontend/assets/scripts
 
   test:
     name: Test
