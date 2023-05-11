@@ -5,6 +5,7 @@ import {
 } from '@adminjs/design-system'
 import React, { MouseEvent, SyntheticEvent, useEffect, useRef, useState } from 'react'
 import { useLocation, useNavigate, useParams } from 'react-router-dom'
+import omit from 'lodash/omit.js'
 
 import allowOverride from '../../hoc/allow-override.js'
 import { useTranslation } from '../../hooks/index.js'
@@ -22,7 +23,7 @@ type MatchProps = {
   resourceId: string;
 }
 
-const parseQuery = (location): any => {
+const parseQuery = (location): Record<string, string> => {
   const filter: Record<string, string> = {}
   const query = new URLSearchParams(location.search)
   for (const entry of query.entries()) {
@@ -56,13 +57,15 @@ const FilterDrawer: React.FC<FilterProps> = (props) => {
   const handleSubmit = (event: SyntheticEvent): false => {
     event.preventDefault()
     const search = new URLSearchParams(window.location.search)
+
     Object.keys(filter).forEach((key) => {
-      if (filter[key] !== '') {
-        search.set(`filters.${key}`, filter[key])
-      } else {
+      if (filter[key] === undefined || filter[key] === '') {
         search.delete(`filters.${key}`)
+      } else {
+        search.set(`filters.${key}`, filter[key])
       }
     })
+
     toggleFilter()
     search.set('page', '1')
     navigate(`${location.pathname}?${search.toString()}`)
