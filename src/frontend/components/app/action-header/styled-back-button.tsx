@@ -30,7 +30,7 @@ const StyledBackButton: React.FC<StyledBackButtonProps> = (props) => {
     }
 
     if (previousRoute?.pathname) {
-      return previousRoute?.pathname
+      return `${previousRoute?.pathname}${previousRoute?.search}`
     }
 
     return from?.pathname
