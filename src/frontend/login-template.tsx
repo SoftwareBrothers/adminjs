@@ -11,7 +11,7 @@ import AdminJS from '../adminjs.js'
 import { getAssets, getBranding, getFaviconFromBranding, getLocales } from '../backend/utils/options-parser/options-parser.js'
 import { defaultLocale } from '../locale/index.js'
 
-type LoginTemplateAttributes = {
+export type LoginTemplateAttributes = {
   /**
    * action which should be called when user clicks submit button
    */
