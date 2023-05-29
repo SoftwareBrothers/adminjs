@@ -31,8 +31,12 @@ const SelectEdit: FC<CombinedProps> = (props) => {
   }
   const propValue = record.params?.[property.path] ?? ''
   // eslint-disable-next-line max-len
-  const availableValues = property.availableValues.map((v) => ({ ...v, label: translateProperty(v.label) }))
-  const selected = availableValues.find((av) => av.value === propValue)
+  const availableValues = property.availableValues.map((v) => ({
+    ...v,
+    label: translateProperty(v.label),
+  }))
+  // eslint-disable-next-line eqeqeq
+  const selected = availableValues.find((av) => av.value == propValue)
 
   return (
     <Select
