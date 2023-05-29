@@ -16,7 +16,8 @@ const DefaultPropertyValue: FC<ShowPropertyProps> = ({
 
   if (typeof rawValue === 'undefined') return null
 
-  const option = availableValues?.find((opt) => opt.value === rawValue)
+  // eslint-disable-next-line eqeqeq
+  const option = availableValues?.find((opt) => opt.value == rawValue)
 
   if (option) {
     const label = option.label || rawValue
