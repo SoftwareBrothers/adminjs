@@ -7,6 +7,7 @@ import { BrowserRouter } from 'react-router-dom'
 import ViewHelpers from '../backend/utils/view-helpers/view-helpers.js'
 import { flat } from '../utils/flat/index.js'
 import * as AppComponents from './components/app/index.js'
+import * as ActionComponents from './components/actions/index.js'
 import App from './components/application.js'
 import { AppLoader } from './components/index.js'
 import Login from './components/login/index.js'
@@ -69,6 +70,7 @@ export default {
   CleanPropertyComponent,
   env,
   ...AppComponents,
+  ...ActionComponents,
   ...Hooks,
   flat,
 }
