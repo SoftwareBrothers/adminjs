@@ -114,4 +114,8 @@ const mapDispatchToProps = (dispatch): NoticeBoxDispatchFromState => ({
 const ConnectedNoticeBox = connect(mapStateToProps, mapDispatchToProps)(NoticeBox)
 const OverridableConnectedNoticeBox = allowOverride(ConnectedNoticeBox, 'NoticeBox')
 
-export { OverridableConnectedNoticeBox as NoticeBox, OverridableConnectedNoticeBox as default }
+export {
+  OverridableConnectedNoticeBox as NoticeBox,
+  OverridableConnectedNoticeBox as default,
+  ConnectedNoticeBox as OriginalNoticeBox,
+}

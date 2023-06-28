@@ -87,4 +87,5 @@ const OverridableList = allowOverride(List, 'DefaultListAction')
 export {
   OverridableList as default,
   OverridableList as List,
+  List as OriginalList,
 }

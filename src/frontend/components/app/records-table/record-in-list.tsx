@@ -146,4 +146,5 @@ const OverridableRecordInList = allowOverride(RecordInList, 'RecordInList')
 export {
   OverridableRecordInList as default,
   OverridableRecordInList as RecordInList,
+  RecordInList as OriginalRecordInList,
 }

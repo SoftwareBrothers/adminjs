@@ -93,4 +93,5 @@ const OverridableEdit = allowOverride(Edit, 'DefaultEditAction')
 export {
   OverridableEdit as default,
   OverridableEdit as Edit,
+  Edit as OriginalEdit,
 }

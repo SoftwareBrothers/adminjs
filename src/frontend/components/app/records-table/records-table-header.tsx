@@ -125,4 +125,5 @@ const OverridableRecordsTableHeader = allowOverride(RecordsTableHeader, 'Records
 export {
   OverridableRecordsTableHeader as default,
   OverridableRecordsTableHeader as RecordsTableHeader,
+  RecordsTableHeader as OriginalRecordsTableHeader,
 }

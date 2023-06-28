@@ -62,5 +62,5 @@ const SidebarOriginal: React.FC<Props> = (props) => {
 
 const Sidebar = allowOverride(SidebarOriginal, 'Sidebar')
 
-export { Sidebar }
+export { Sidebar, SidebarOriginal as OriginalSidebar }
 export default Sidebar

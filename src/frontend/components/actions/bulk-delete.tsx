@@ -110,4 +110,5 @@ const OverridableFormattedBulkDelete = allowOverride(FormattedBulkDelete, 'Defau
 export {
   OverridableFormattedBulkDelete as default,
   OverridableFormattedBulkDelete as BulkDelete,
+  FormattedBulkDelete as OriginalBulkDelete,
 }

@@ -53,4 +53,4 @@ const TopBar: React.FC<Props> = (props) => {
 
 const OverridableTopbar = allowOverride<Props>(TopBar, 'TopBar')
 
-export { OverridableTopbar as TopBar, OverridableTopbar as default }
+export { OverridableTopbar as TopBar, OverridableTopbar as default, TopBar as OriginalTopBar }

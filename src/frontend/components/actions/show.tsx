@@ -51,4 +51,5 @@ const OverridableShow = allowOverride(Show, 'DefaultShowAction')
 export {
   OverridableShow as default,
   OverridableShow as Show,
+  Show as OriginalShow,
 }

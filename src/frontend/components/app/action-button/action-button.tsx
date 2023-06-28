@@ -77,4 +77,5 @@ const OverridableActionButton = allowOverride(ActionButton, 'ActionButton')
 export {
   OverridableActionButton as default,
   OverridableActionButton as ActionButton,
+  ActionButton as OriginalActionButton,
 }

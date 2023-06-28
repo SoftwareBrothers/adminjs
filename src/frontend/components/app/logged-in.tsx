@@ -41,4 +41,5 @@ const OverridableLoggedIn = allowOverride(LoggedIn, 'LoggedIn')
 export {
   OverridableLoggedIn as default,
   OverridableLoggedIn as LoggedIn,
+  LoggedIn as OriginalLoggedIn,
 }

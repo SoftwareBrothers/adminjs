@@ -125,4 +125,5 @@ const OverridableActionHeader = allowOverride(ActionHeader, 'ActionHeader')
 export {
   OverridableActionHeader as default,
   OverridableActionHeader as ActionHeader,
+  ActionHeader as OriginalActionHeader,
 }

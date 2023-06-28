@@ -67,4 +67,5 @@ const OverridableSelectedRecords = allowOverride(SelectedRecords, 'SelectedRecor
 export {
   OverridableSelectedRecords as default,
   OverridableSelectedRecords as SelectedRecords,
+  SelectedRecords as OriginalSelectedRecords,
 }
