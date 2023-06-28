@@ -51,3 +51,4 @@ const SidebarPages: React.FC<Props> = (props) => {
 }
 
 export default allowOverride(SidebarPages, 'SidebarPages')
+export { SidebarPages as OriginalSidebarPages, SidebarPages }

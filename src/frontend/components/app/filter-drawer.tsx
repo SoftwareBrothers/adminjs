@@ -149,4 +149,5 @@ const OverridableFilterDrawer = allowOverride(FilterDrawer, 'FilterDrawer')
 export {
   OverridableFilterDrawer as default,
   OverridableFilterDrawer as FilterDrawer,
+  FilterDrawer as OriginalFilterDrawer,
 }

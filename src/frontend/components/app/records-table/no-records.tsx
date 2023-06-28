@@ -36,5 +36,5 @@ const NoRecordsOriginal: React.FC<NoRecordsProps> = (props) => {
 // This hack prevents rollup from throwing an error
 const NoRecords = allowOverride(NoRecordsOriginal, 'NoRecords')
 
-export { NoRecords }
+export { NoRecords, NoRecordsOriginal as OriginalNoRecords }
 export default NoRecords

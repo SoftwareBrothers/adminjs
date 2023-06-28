@@ -17,3 +17,4 @@ const SidebarFooter: React.FC = () => {
 }
 
 export default allowOverride(SidebarFooter, 'SidebarFooter')
+export { SidebarFooter as OriginalSidebarFooter, SidebarFooter }

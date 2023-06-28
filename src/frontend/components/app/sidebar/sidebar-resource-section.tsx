@@ -45,5 +45,5 @@ const SidebarResourceSectionOriginal: FC<SidebarResourceSectionProps> = ({ resou
 // exporting default and named SidebarResourceSection
 const SidebarResourceSection = allowOverride(SidebarResourceSectionOriginal, 'SidebarResourceSection')
 
-export { SidebarResourceSection }
+export { SidebarResourceSection, SidebarResourceSectionOriginal as OriginalSidebarResourceSection }
 export default SidebarResourceSection

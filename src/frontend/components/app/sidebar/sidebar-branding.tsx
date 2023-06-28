@@ -60,3 +60,4 @@ const SidebarBranding: React.FC<Props> = (props) => {
 }
 
 export default allowOverride(SidebarBranding, 'SidebarBranding')
+export { SidebarBranding as OriginalSidebarBranding, SidebarBranding }

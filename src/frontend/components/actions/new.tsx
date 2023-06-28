@@ -97,4 +97,5 @@ const OverridableNew = allowOverride(New, 'DefaultNewAction')
 export {
   OverridableNew as default,
   OverridableNew as New,
+  New as OriginalNew,
 }

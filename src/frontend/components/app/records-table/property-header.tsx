@@ -46,4 +46,5 @@ const OverridablePropertyHeader = allowOverride(PropertyHeader, 'PropertyHeader'
 export {
   OverridablePropertyHeader as default,
   OverridablePropertyHeader as PropertyHeader,
+  PropertyHeader as OriginalPropertyHeader,
 }

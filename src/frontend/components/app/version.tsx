@@ -46,4 +46,5 @@ const OverridableVersion = allowOverride(Version, 'Version')
 export {
   OverridableVersion as default,
   OverridableVersion as Version,
+  Version as OriginalVersion,
 }

@@ -120,4 +120,5 @@ const OverridableRecordsTable = allowOverride(RecordsTable, 'RecordsTable')
 export {
   OverridableRecordsTable as default,
   OverridableRecordsTable as RecordsTable,
+  RecordsTable as OriginalRecordsTable,
 }

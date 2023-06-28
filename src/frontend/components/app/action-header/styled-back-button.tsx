@@ -54,4 +54,5 @@ const OverridableStyledBackButton = allowOverride(StyledBackButton, 'StyledBackB
 export {
   OverridableStyledBackButton as default,
   OverridableStyledBackButton as StyledBackButton,
+  StyledBackButton as OriginalStyledBackButton,
 }
