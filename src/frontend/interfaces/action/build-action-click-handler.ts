@@ -4,7 +4,7 @@
 import { NavigateFunction } from 'react-router'
 
 import { DifferentActionParams, useActionResponseHandler } from '../../hooks/index.js'
-import { actionHasComponent } from './action-has-component.js'
+import { actionHasDisabledComponent } from './action-has-component.js'
 import { actionHref } from './action-href.js'
 import { ActionJSON } from './action-json.interface.js'
 import { buildActionCallApiTrigger } from './build-action-api-call-trigger.js'
@@ -39,7 +39,8 @@ export const buildActionClickHandler = (
       params, action, actionResponseHandler,
     })
 
-    if (actionHasComponent(action)) {
+    // Action has "component" option set to "false" explicitly in it's configuration
+    if (actionHasDisabledComponent(action)) {
       if (action.guard) {
         const modalData: ModalData = {
           modalProps: {
@@ -51,13 +52,18 @@ export const buildActionClickHandler = (
           resourceId: params.resourceId,
           confirmAction: callApi,
         }
+
+        // If confirmation is required, action trigger should be handled in modal
         openModal(modalData)
         return
       }
 
+      // If no confirmation is required, call API
       callApi()
+      return
     }
 
+    // Default behaviour - you're navigated to action URL and logic is performed on it's route
     if (href) {
       navigate(href)
     }
