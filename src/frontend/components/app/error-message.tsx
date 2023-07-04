@@ -42,7 +42,7 @@ const NoResourceError: React.FC<{ resourceId: string }> = (props) => {
   const { translateMessage } = useTranslation()
   return (
     <InfoBox
-      title={translateMessage('pageNotFound', resourceId, { resourceId })}
+      title={translateMessage('pageNotFound_title', resourceId, { resourceId })}
       illustration="NotFound"
       testId="NoResourceError"
     >
@@ -58,7 +58,7 @@ const NoActionError: React.FC<{ resourceId: string; actionName: string }> = (pro
   const { translateMessage } = useTranslation()
   return (
     <InfoBox
-      title={translateMessage('pageNotFound', resourceId, { resourceId })}
+      title={translateMessage('pageNotFound_title', resourceId, { resourceId })}
       illustration="NotFound"
       testId="NoActionError"
     >
@@ -77,7 +77,7 @@ const NoRecordError: React.FC<{
   const { translateMessage } = useTranslation()
   return (
     <InfoBox
-      title={translateMessage('pageNotFound', resourceId, { resourceId })}
+      title={translateMessage('pageNotFound_title', resourceId, { resourceId })}
       illustration="NotFound"
       testId="NoRecordError"
     >

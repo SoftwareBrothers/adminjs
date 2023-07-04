@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { useParams } from 'react-router'
 
 import BaseActionComponent from '../app/base-action-component.js'
-import { ResourceJSON } from '../../interfaces/index.js'
+import { ResourceJSON, actionHasDisabledComponent } from '../../interfaces/index.js'
 import { ReduxState } from '../../store/store.js'
 import { NoResourceError, NoActionError } from '../app/error-message.js'
 import { ResourceActionParams } from '../../../backend/utils/view-helpers/view-helpers.js'
@@ -31,7 +31,7 @@ const ResourceAction: React.FC<Props> = (props) => {
     return (<NoResourceError resourceId={resourceId!} />)
   }
   const action = resource.resourceActions.find((r) => r.name === actionName)
-  if (!action) {
+  if (!action || actionHasDisabledComponent(action)) {
     return (<NoActionError resourceId={resourceId!} actionName={actionName!} />)
   }
 

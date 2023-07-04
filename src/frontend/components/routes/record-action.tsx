@@ -6,7 +6,7 @@ import { ErrorTypeEnum } from '../../../utils/error-type.enum.js'
 import BaseActionComponent from '../app/base-action-component.js'
 import ApiClient from '../../utils/api-client.js'
 import { RecordActionParams } from '../../../backend/utils/view-helpers/view-helpers.js'
-import { ActionJSON, RecordJSON } from '../../interfaces/index.js'
+import { ActionJSON, RecordJSON, actionHasDisabledComponent } from '../../interfaces/index.js'
 import { NoResourceError, NoActionError, NoRecordError } from '../app/error-message.js'
 import Wrapper from './utils/wrapper.js'
 import { ActionHeader } from '../app/index.js'
@@ -28,8 +28,15 @@ const RecordAction: React.FC = () => {
   const resource = useResource(resourceId!)
 
   const action = record && record.recordActions.find((r) => r.name === actionName)
+  const actionFromResource = resource?.actions.find((a) => a.name === actionName)
 
   const fetchRecord = (): void => {
+    // Do not call API on route enter if the action doesn't have a component
+    if (actionFromResource && actionHasDisabledComponent(actionFromResource)) {
+      setLoading(false)
+      return
+    }
+
     setLoading(true)
     api.recordAction(params as RecordActionParams).then((response) => {
       if (response.data.notice && response.data.notice.type === 'error') {
@@ -82,11 +89,10 @@ const RecordAction: React.FC = () => {
   const hasDifferentRecord = record && record.id && record.id.toString() !== recordId
 
   if (loading || hasDifferentRecord) {
-    const actionFromResource = resource.actions.find((r) => r.name === actionName)
     return actionFromResource?.showInDrawer ? (<DrawerPortal><Loader /></DrawerPortal>) : <Loader />
   }
 
-  if (!action) {
+  if (!action || (actionFromResource && actionHasDisabledComponent(actionFromResource))) {
     return (<NoActionError resourceId={resourceId!} actionName={actionName!} />)
   }
 
