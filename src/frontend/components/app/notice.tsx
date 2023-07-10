@@ -57,7 +57,7 @@ const NoticeElement: React.FC<NoticeElementProps> = (props) => {
 
   return (
     <MessageBox
-      style={{ minWidth: '480px' }}
+      style={{ maxWidth: '100%' }}
       message={message}
       variant={variant}
       onCloseClick={drop}
