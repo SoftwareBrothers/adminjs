@@ -4,18 +4,18 @@
 
 Inspired by: [django admin](https://docs.djangoproject.com), [rails admin](https://github.com/sferik/rails_admin) and [active admin](https://activeadmin.info/).
 
-## How it looks
-
-<img src='./docs/anim.gif'>
-
 ## Example application
 
-Check out the example application with mongodb and postgres models here:
+Check out our demo application:
 
 - Login: `admin@example.com`
 - Password: `password`
 
-https://adminjs-demo.herokuapp.com
+https://demo.adminjs.co
+
+You can also have a look at our customized AdminJS dashboard which shows various library statistics:
+
+https://stats.adminjs.co
 
 ## Getting started
 
@@ -52,6 +52,10 @@ And all these cases can be solved by AdminJS. By adding couple of lines of code 
 If you would like work on an AdminJS and develop new features please check out our [Contribution Guide](https://github.com/SoftwareBrothers/adminjs/blob/master/CONTRIBUTING.md)
 
 There you can find instructions on how to run AdminJS locally for development.
+
+If you're searching for tasks you can contribute to, we currently accept contributions to issues in our [Kanban Board](https://github.com/orgs/SoftwareBrothers/projects/5/views/1).
+
+Any small or large contribution or any input into discussion is welcome!
 
 ## License
 
