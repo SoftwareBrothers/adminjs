@@ -31,10 +31,12 @@ export const SearchAction: Action<SearchActionResponse> = {
     const { query } = request
 
     const decorated = resource.decorate()
-    const titlePropertyName = request.query?.searchProperty ?? decorated.titleProperty().name()
+    const titlePropertyName = query?.searchProperty ?? decorated.searchProperty().name()
 
     const {
-      sortBy = decorated.options?.sort?.sortBy || titlePropertyName,
+      sortBy = decorated.options?.sort?.sortBy
+        || query?.searchProperty
+        || decorated.titleProperty().name(),
       direction = 'asc',
       filters: customFilters = {},
       perPage = 50,

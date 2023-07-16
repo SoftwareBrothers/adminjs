@@ -108,6 +108,10 @@ export interface ResourceOptions {
     sortBy: string;
   };
   /**
+   * Property which should be used to search
+   */
+  searchProperty?: string;
+  /**
    * List of properties along with their options
    */
   properties?: Record<string, PropertyOptions>;
