@@ -70,6 +70,10 @@ export interface ResourceOptions {
    */
   filterProperties?: Array<string>;
   /**
+   * Name of title property
+   */
+  titleProperty?: string;
+  /**
    * Where resource link in sidebar should redirect. Default to the list action.
    */
   href?: HrefFunction | string;

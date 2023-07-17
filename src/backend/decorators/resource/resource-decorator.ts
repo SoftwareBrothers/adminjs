@@ -246,8 +246,15 @@ class ResourceDecorator {
    * @return  {PropertyDecorator} PropertyDecorator of title property
    */
   titleProperty(): PropertyDecorator {
+    let titleProperty
+
     const properties = Object.values(this.properties)
-    const titleProperty = properties.find((p) => p.isTitle())
+    if (this.options.titleProperty) {
+      titleProperty = properties.find((p) => p.propertyPath === this.options.titleProperty)
+    } else {
+      titleProperty = properties.find((p) => p.isTitle())
+    }
+
     return titleProperty || properties[0]
   }
 

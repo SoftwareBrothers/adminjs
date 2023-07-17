@@ -31,9 +31,12 @@ export default interface PropertyOptions {
    * Indicates if property should be treated as an ID
    */
   isId?: boolean;
+
   /**
    * One of given property should be treated as an "title property". Title property is "clickable"
    * when user sees the record in a list or show views.
+   *
+   * @deprecated Use ResourceOptions#titleProperty
    */
   isTitle?: boolean;
 
