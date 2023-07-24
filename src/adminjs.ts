@@ -115,9 +115,6 @@ class AdminJS {
 
     this.resolveBabelConfigPath()
 
-    // To be removed when Login page will be renedered on client side
-    this.locale = defaultLocale
-
     const { databases, resources } = this.options
 
     this.componentLoader = options.componentLoader ?? new ComponentLoader()
