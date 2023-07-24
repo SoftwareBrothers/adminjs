@@ -47,7 +47,41 @@ export const getLocales = async (admin: AdminJS, currentAdmin?: CurrentAdmin): P
   const { locale = {} } = admin.options || {}
   const computed = typeof locale === 'function' ? await locale(currentAdmin) : locale
 
-  return flat.unflatten(merge({}, flat.flatten(defaultLocale), flat.flatten(computed)))
+  let baseLocale: Locale = merge(
+    {} as Partial<Locale>,
+    flat.flatten(defaultLocale) as Locale,
+    flat.flatten(computed) as Locale,
+  )
+
+  if (!baseLocale.translations) {
+    baseLocale.translations = {}
+  }
+
+  // Merging translations defined in resource options
+  admin.resources.forEach((baseResource) => {
+    const decorated = baseResource._decorated ?? baseResource.decorate()
+
+    const { translations: resourceTranslations } = decorated.options
+
+    if (resourceTranslations) {
+      // Assure that translations object structure is consistent so we can use lodash#merge
+      const resourceLocale: Omit<Locale, 'language'> = {
+        translations: {},
+      }
+
+      Object.keys(resourceTranslations).forEach((language) => {
+        resourceLocale.translations![language] = {
+          resources: {
+            [decorated.id()]: resourceTranslations[language],
+          },
+        }
+      })
+
+      baseLocale = merge(baseLocale, resourceLocale)
+    }
+  })
+
+  return flat.unflatten(baseLocale)
 }
 
 export const getTheme = async (

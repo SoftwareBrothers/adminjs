@@ -7,6 +7,7 @@ import { CurrentAdmin } from '../../../current-admin.interface.js'
 import BaseResource from '../../adapters/resource/base-resource.js'
 import ViewHelpers from '../../utils/view-helpers/view-helpers.js'
 import { SearchActionResponse } from '../../actions/search/search-action.js'
+import { LocaleTranslationsBlock } from '../../../index.js'
 
 /**
  * @alias HrefContext
@@ -129,4 +130,10 @@ export interface ResourceOptions {
   } | {
     [key: string]: Partial<Action<ActionResponse>>;
   };
+  /**
+   * Resource-specific translations
+   */
+  translations?: {
+    [language: string]: LocaleTranslationsBlock;
+  }
 }
