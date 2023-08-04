@@ -33,7 +33,7 @@ const App: React.FC = () => {
   const pageName = ':pageName'
 
   const dashboardUrl = h.dashboardUrl()
-  const recordActionUrl = h.recordActionUrl({ resourceId, recordId, actionName })
+  const recordActionUrl = h.recordActionUrl({ resourceId, recordId, actionName, noURIEncode: true })
   const resourceActionUrl = h.resourceActionUrl({ resourceId, actionName })
   const bulkActionUrl = h.bulkActionUrl({ resourceId, actionName })
   const resourceUrl = h.resourceUrl({ resourceId })

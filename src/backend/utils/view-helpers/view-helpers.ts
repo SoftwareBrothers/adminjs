@@ -237,8 +237,10 @@ export class ViewHelpers {
    *
    * @return  {string}
    */
-  recordActionUrl({ resourceId, recordId, actionName, search }: RecordActionParams): string {
-    return this.urlBuilder(['resources', resourceId, 'records', recordId, actionName], search)
+  recordActionUrl({ resourceId, recordId, actionName, search, noURIEncode }: RecordActionParams & {
+    noURIEncode?: boolean;
+  }): string {
+    return this.urlBuilder(['resources', resourceId, 'records', noURIEncode ? recordId : encodeURIComponent(recordId), actionName], search)
   }
 
   /**
