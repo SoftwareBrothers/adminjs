@@ -74,11 +74,11 @@ const getOrCreatePortalContainer = (id: string) => {
  */
 export const DrawerPortal: React.FC<DrawerPortalProps> = ({ children, width }) => {
   const [drawerElement, setDrawerElement] = useState(document.getElementById(DRAWER_PORTAL_ID))
-  const { from = null } = useSelector<ReduxState, RouterInState>((state) => state.router)
+  const { to = null } = useSelector<ReduxState, RouterInState>((state) => state.router)
   const dispatch = useDispatch()
 
   const handleDrawerMount = () => {
-    dispatch(setDrawerPreRoute({ previousRoute: from }))
+    dispatch(setDrawerPreRoute({ previousRoute: to }))
     setDrawerElement(document.getElementById(DRAWER_PORTAL_ID))
   }
 
