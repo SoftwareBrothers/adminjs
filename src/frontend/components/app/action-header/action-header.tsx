@@ -90,6 +90,7 @@ const ActionHeader: React.FC<ActionHeaderProps> = (props) => {
   const cssActionsMB = action.showInDrawer ? 'xl' : 'default'
   const CssHComponent = action.showInDrawer ? H3 : H2
   const contentTag = getActionElementCss(resourceId, action.name, 'action-header')
+
   return (
     <Box className={cssClass('ActionHeader')} data-css={contentTag}>
       {action.showInDrawer ? '' : (
