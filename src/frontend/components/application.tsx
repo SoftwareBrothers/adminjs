@@ -39,19 +39,17 @@ const App: React.FC = () => {
   const recordId = ':recordId'
   const pageName = ':pageName'
 
-  // TODO: Refactor .replace(...) mess
+  // Note: replaces are required so that record/resource/bulk actions urls
+  // are relative to their parent route
   const dashboardUrl = h.dashboardUrl()
   const resourceUrl = h.resourceUrl({ resourceId })
   const recordActionUrl = h
     .recordActionUrl({ resourceId, recordId, actionName })
-    .replace(dashboardUrl, '')
-    .replace(resourceUrl.replace(dashboardUrl, ''), '').substring(1)
+    .replace(resourceUrl, '').substring(1)
   const resourceActionUrl = h.resourceActionUrl({ resourceId, actionName })
-    .replace(dashboardUrl, '')
-    .replace(resourceUrl.replace(dashboardUrl, ''), '').substring(1)
+    .replace(resourceUrl, '').substring(1)
   const bulkActionUrl = h.bulkActionUrl({ resourceId, actionName })
-    .replace(dashboardUrl, '')
-    .replace(resourceUrl.replace(dashboardUrl, ''), '').substring(1)
+    .replace(resourceUrl, '').substring(1)
   const pageUrl = h.pageUrl(pageName)
 
   return (
