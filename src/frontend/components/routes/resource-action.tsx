@@ -30,6 +30,7 @@ const ResourceAction: React.FC<Props> = (props) => {
   if (!resource) {
     return (<NoResourceError resourceId={resourceId!} />)
   }
+
   const action = resource.resourceActions.find((r) => r.name === actionName)
   if (!action || actionHasDisabledComponent(action)) {
     return (<NoActionError resourceId={resourceId!} actionName={actionName!} />)
