@@ -1,6 +1,6 @@
 /* eslint-disable react/no-children-prop */
 import React, { useEffect, useState } from 'react'
-import { Routes, Route, Outlet } from 'react-router-dom'
+import { Routes, Route } from 'react-router-dom'
 import { Box, Overlay } from '@adminjs/design-system'
 import { useLocation } from 'react-router'
 
@@ -74,9 +74,9 @@ const App: React.FC = () => {
           </Route>
           <Route path={resourceUrl}>
             <Route index element={<ResourceRoute />} />
-            <Route path={recordActionUrl} element={<RecordActionRoute />} />
             <Route path={bulkActionUrl} element={<BulkActionRoute />} />
             <Route path={resourceActionUrl} element={<ResourceActionRoute />} />
+            <Route path={recordActionUrl} element={<RecordActionRoute />} />
           </Route>
           <Route path={pageUrl}>
             <Route index element={<PageRoute />} />

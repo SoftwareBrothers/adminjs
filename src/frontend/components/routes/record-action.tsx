@@ -21,6 +21,8 @@ const api = new ApiClient()
 const RecordAction: React.FC = () => {
   const [record, setRecord] = useState<RecordJSON>()
   const [loading, setLoading] = useState(true)
+  const [tag, setTag] = useState('')
+  const [filterVisible, setFilterVisible] = useState(false)
   const params = useParams<RecordActionParams>()
   const addNotice = useNotice()
 
@@ -30,6 +32,9 @@ const RecordAction: React.FC = () => {
   const action = record && record.recordActions.find((r) => r.name === actionName)
   const actionFromResource = resource?.actions.find((a) => a.name === actionName)
 
+  const listActionName = 'list'
+  const listAction = resource?.resourceActions.find((r) => r.name === listActionName)
+
   const fetchRecord = (): void => {
     // Do not call API on route enter if the action doesn't have a component
     if (actionFromResource && actionHasDisabledComponent(actionFromResource)) {
@@ -38,46 +43,51 @@ const RecordAction: React.FC = () => {
     }
 
     setLoading(true)
-    api.recordAction(params as RecordActionParams).then((response) => {
-      if (response.data.notice && response.data.notice.type === 'error') {
-        addNotice(response.data.notice)
-      }
-      if (
-        !response.data.record?.baseError?.type
-        || ![
-          ErrorTypeEnum.App,
-          ErrorTypeEnum.NotFound,
-          ErrorTypeEnum.Forbidden,
-        ].includes(response.data.record?.baseError?.type as ErrorTypeEnum)
-      ) {
-        setRecord(response.data.record)
-      }
-    }).catch((error) => {
-      addNotice({
-        message: 'errorFetchingRecord',
-        type: 'error',
-        resourceId,
+    api
+      .recordAction(params as RecordActionParams)
+      .then((response) => {
+        if (response.data.notice && response.data.notice.type === 'error') {
+          addNotice(response.data.notice)
+        }
+        if (
+          !response.data.record?.baseError?.type
+          || ![ErrorTypeEnum.App, ErrorTypeEnum.NotFound, ErrorTypeEnum.Forbidden].includes(
+            response.data.record?.baseError?.type as ErrorTypeEnum,
+          )
+        ) {
+          setRecord(response.data.record)
+        }
       })
-      throw error
-    }).finally(() => {
-      setLoading(false)
-    })
+      .catch((error) => {
+        addNotice({
+          message: 'errorFetchingRecord',
+          type: 'error',
+          resourceId,
+        })
+        throw error
+      })
+      .finally(() => {
+        setLoading(false)
+      })
   }
 
   useEffect(() => {
     fetchRecord()
   }, [actionName, recordId, resourceId])
 
-  const handleActionPerformed = useCallback((oldRecord: RecordJSON, response: ActionResponse) => {
-    if (response.record) {
-      setRecord(mergeRecordResponse(oldRecord, response as RecordActionResponse))
-    } else {
-      fetchRecord()
-    }
-  }, [fetchRecord])
+  const handleActionPerformed = useCallback(
+    (oldRecord: RecordJSON, response: ActionResponse) => {
+      if (response.record) {
+        setRecord(mergeRecordResponse(oldRecord, response as RecordActionResponse))
+      } else {
+        fetchRecord()
+      }
+    },
+    [fetchRecord],
+  )
 
   if (!resource) {
-    return (<NoResourceError resourceId={resourceId!} />)
+    return <NoResourceError resourceId={resourceId!} />
   }
 
   // When the user visits this route (record action) from a different, than the current one, record.
@@ -89,26 +99,51 @@ const RecordAction: React.FC = () => {
   const hasDifferentRecord = record && record.id && record.id.toString() !== recordId
 
   if (loading || hasDifferentRecord) {
-    return actionFromResource?.showInDrawer ? (<DrawerPortal><Loader /></DrawerPortal>) : <Loader />
+    return actionFromResource?.showInDrawer ? (
+      <DrawerPortal>
+        <Loader />
+      </DrawerPortal>
+    ) : (
+      <Loader />
+    )
   }
 
   if (!action || (actionFromResource && actionHasDisabledComponent(actionFromResource))) {
-    return (<NoActionError resourceId={resourceId!} actionName={actionName!} />)
+    return <NoActionError resourceId={resourceId!} actionName={actionName!} />
   }
 
   if (!record) {
-    return (<NoRecordError resourceId={resourceId!} recordId={recordId!} />)
+    return <NoRecordError resourceId={resourceId!} recordId={recordId!} />
   }
 
   if (action.showInDrawer) {
+    if (!listAction) {
+      return (
+        <DrawerPortal width={action.containerWidth}>
+          <BaseActionComponent action={action as ActionJSON} resource={resource} record={record} />
+        </DrawerPortal>
+      )
+    }
+
+    const toggleFilter = listAction.showFilter
+      ? (): void => setFilterVisible(!filterVisible)
+      : undefined
+
     return (
-      <DrawerPortal width={action.containerWidth}>
-        <BaseActionComponent
-          action={action as ActionJSON}
-          resource={resource}
-          record={record}
-        />
-      </DrawerPortal>
+      <>
+        <DrawerPortal width={action.containerWidth}>
+          <BaseActionComponent action={action as ActionJSON} resource={resource} record={record} />
+        </DrawerPortal>
+        <Wrapper width={listAction.containerWidth}>
+          <ActionHeader
+            resource={resource}
+            action={listAction}
+            tag={tag}
+            toggleFilter={toggleFilter}
+          />
+          <BaseActionComponent action={listAction} resource={resource} setTag={setTag} />
+        </Wrapper>
+      </>
     )
   }
 
@@ -118,15 +153,9 @@ const RecordAction: React.FC = () => {
         resource={resource}
         action={action}
         record={record}
-        actionPerformed={(response: ActionResponse): void => (
-          handleActionPerformed(record, response)
-        )}
+        actionPerformed={(response: ActionResponse):void => handleActionPerformed(record, response)}
       />
-      <BaseActionComponent
-        action={action}
-        resource={resource}
-        record={record}
-      />
+      <BaseActionComponent action={action} resource={resource} record={record} />
     </Wrapper>
   )
 }
