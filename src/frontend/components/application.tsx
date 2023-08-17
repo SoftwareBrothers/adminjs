@@ -1,6 +1,6 @@
 /* eslint-disable react/no-children-prop */
 import React, { useEffect, useState } from 'react'
-import { Routes, Route } from 'react-router-dom'
+import { Routes, Route, Outlet } from 'react-router-dom'
 import { Box, Overlay } from '@adminjs/design-system'
 import { useLocation } from 'react-router'
 
@@ -11,7 +11,12 @@ import Notice from './app/notice.js'
 import allowOverride from '../hoc/allow-override.js'
 import { AdminModal as Modal } from './app/admin-modal.js'
 import {
-  DashboardRoute, ResourceActionRoute, RecordActionRoute, PageRoute, BulkActionRoute, ResourceRoute,
+  DashboardRoute,
+  ResourceActionRoute,
+  RecordActionRoute,
+  PageRoute,
+  BulkActionRoute,
+  ResourceRoute,
 } from './routes/index.js'
 import useHistoryListen from '../hooks/use-history-listen.js'
 
@@ -24,7 +29,9 @@ const App: React.FC = () => {
   useHistoryListen()
 
   useEffect(() => {
-    if (sidebarVisible) { toggleSidebar(false) }
+    if (sidebarVisible) {
+      toggleSidebar(false)
+    }
   }, [location])
 
   const resourceId = ':resourceId'
@@ -32,29 +39,21 @@ const App: React.FC = () => {
   const recordId = ':recordId'
   const pageName = ':pageName'
 
+  // TODO: Refactor .replace(...) mess
   const dashboardUrl = h.dashboardUrl()
-  const recordActionUrl = h.recordActionUrl({ resourceId, recordId, actionName })
-  const resourceActionUrl = h.resourceActionUrl({ resourceId, actionName })
-  const bulkActionUrl = h.bulkActionUrl({ resourceId, actionName })
   const resourceUrl = h.resourceUrl({ resourceId })
+  const recordActionUrl = h
+    .recordActionUrl({ resourceId, recordId, actionName })
+    .replace(dashboardUrl, '')
+    .replace(resourceUrl.replace(dashboardUrl, ''), '').substring(1)
+  const resourceActionUrl = h.resourceActionUrl({ resourceId, actionName })
+    .replace(dashboardUrl, '')
+    .replace(resourceUrl.replace(dashboardUrl, ''), '').substring(1)
+  const bulkActionUrl = h.bulkActionUrl({ resourceId, actionName })
+    .replace(dashboardUrl, '')
+    .replace(resourceUrl.replace(dashboardUrl, ''), '').substring(1)
   const pageUrl = h.pageUrl(pageName)
 
-  /**
-   * When defining AdminJS routes, we use Routes component twice.
-   * This results in warnings appearing in console, for example about not being able to locate
-   * "/admin" route. They can be safely ignored though and should appear only
-   * in development environment. The warnings originate from the difference between
-   * "Switch" component that AdminJS had used in "react-router" v5 which was later replaced
-   * with "Routes" in "react-router" v6. "Switch" would use the first "Route" component
-   * that matched the provided path, while "Routes" searches for the best matching pattern.
-   * In AdminJS we use "DrawerPortal" to display actions in a drawer when
-   * "showInDrawer" option is set to true. The drawer should appear above the currently viewed
-   * page, but "Routes" broke this behavior because it instead showed a record action route with
-   * an empty background.
-   * The current flow is that first "Routes" component includes "Resource" route component
-   * for drawer-placed actions and the second "Routes" is entered for record actions
-   * on a separate page.
-   */
   return (
     <Box height="100%" flex data-css="app">
       {sidebarVisible ? (
@@ -70,14 +69,19 @@ const App: React.FC = () => {
           <Notice />
         </Box>
         <Routes>
-          <Route path={`${resourceUrl}/*`} element={<ResourceRoute />} />
-          <Route path={pageUrl} element={<PageRoute />} />
-          <Route path={dashboardUrl} element={<DashboardRoute />} />
-        </Routes>
-        <Routes>
-          <Route path={`${resourceActionUrl}/*`} element={<ResourceActionRoute />} />
-          <Route path={`${bulkActionUrl}/*`} element={<BulkActionRoute />} />
-          <Route path={`${recordActionUrl}/*`} element={<RecordActionRoute />} />
+          <Route path={dashboardUrl}>
+            <Route index element={<DashboardRoute />} />
+          </Route>
+          <Route path={resourceUrl}>
+            <Route index element={<ResourceRoute />} />
+            <Route path={recordActionUrl} element={<RecordActionRoute />} />
+            <Route path={bulkActionUrl} element={<BulkActionRoute />} />
+            <Route path={resourceActionUrl} element={<ResourceActionRoute />} />
+          </Route>
+          <Route path={pageUrl}>
+            <Route index element={<PageRoute />} />
+          </Route>
+          <Route path="*" element={<DashboardRoute />} />
         </Routes>
       </Box>
       <Modal />
