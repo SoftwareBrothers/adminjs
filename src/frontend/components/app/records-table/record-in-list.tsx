@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react'
-import { useNavigate } from 'react-router'
+import { useNavigate, useLocation } from 'react-router'
 import {
   Placeholder, TableRow, TableCell, CheckBox, ButtonGroup,
 } from '@adminjs/design-system'
@@ -30,6 +30,7 @@ const RecordInList: React.FC<RecordInListProps> = (props) => {
   } = props
   const [record, setRecord] = useState<RecordJSON>(recordFromProps)
   const navigate = useNavigate()
+  const location = useLocation()
   const translateFunctions = useTranslation()
   const modalFunctions = useModal()
 
@@ -65,6 +66,7 @@ const RecordInList: React.FC<RecordInListProps> = (props) => {
         params: { resourceId: resource.id, recordId: record.id },
         actionResponseHandler,
         navigate,
+        location,
         translateFunctions,
         modalFunctions,
       })(event)
@@ -79,6 +81,7 @@ const RecordInList: React.FC<RecordInListProps> = (props) => {
       params: actionParams,
       actionResponseHandler,
       navigate,
+      location,
       translateFunctions,
       modalFunctions,
     })(event)

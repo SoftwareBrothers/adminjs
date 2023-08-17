@@ -1,4 +1,4 @@
-import { useNavigate } from 'react-router'
+import { useNavigate, useLocation } from 'react-router'
 
 import { ActionResponse } from '../../../backend/actions/action.interface.js'
 import { ActionJSON, buildActionCallApiTrigger, buildActionClickHandler } from '../../interfaces/index.js'
@@ -25,6 +25,7 @@ export function useAction<K extends ActionResponse>(
   onActionCall?: ActionCallCallback,
 ): UseActionResult<K> {
   const navigate = useNavigate()
+  const location = useLocation()
   const translateFunctions = useTranslation()
   const modalFunctions = useModal()
   const actionResponseHandler = useActionResponseHandler(onActionCall)
@@ -44,6 +45,7 @@ export function useAction<K extends ActionResponse>(
     navigate,
     translateFunctions,
     modalFunctions,
+    location,
   })
 
   return {
