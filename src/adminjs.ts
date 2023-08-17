@@ -16,7 +16,7 @@ import { ACTIONS } from './backend/actions/index.js'
 
 import loginTemplate from './frontend/login-template.js'
 import { ListActionResponse } from './backend/actions/list/list-action.js'
-import { defaultLocale, Locale } from './locale/index.js'
+import { Locale } from './locale/index.js'
 import { TranslateFunctions } from './utils/translate-functions.factory.js'
 import { relativeFilePathResolver } from './utils/file-resolver.js'
 import { Router } from './backend/utils/index.js'

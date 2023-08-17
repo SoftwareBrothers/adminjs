@@ -24,7 +24,7 @@ const StyledBackButton: React.FC<StyledBackButtonProps> = (props) => {
     <StyledLink
       size="icon"
       to=".."
-      relative="path"
+      relative="route"
       rounded
       mr="lg"
       type="button"
