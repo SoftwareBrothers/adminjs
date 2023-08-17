@@ -26,34 +26,42 @@ const BulkAction: React.FC = () => {
   const params = useParams<MatchParams>()
   const [records, setRecords] = useState<Array<RecordJSON>>([])
   const [loading, setLoading] = useState(false)
+  const [tag, setTag] = useState('')
+  const [filterVisible, setFilterVisible] = useState(false)
   const { translateMessage } = useTranslation()
   const addNotice = useNotice()
   const location = useLocation()
 
   const { resourceId, actionName } = params
+
   const resource = useResource(resourceId!)
+  const listActionName = 'list'
+  const listAction = resource?.resourceActions.find((r) => r.name === listActionName)
 
   const fetchRecords = (): Promise<void> => {
     const recordIdsString = new URLSearchParams(location.search).get('recordIds')
     const recordIds = recordIdsString ? recordIdsString.split(',') : []
     setLoading(true)
 
-    return api.bulkAction({
-      resourceId: resourceId!,
-      recordIds,
-      actionName: actionName!,
-    }).then((response) => {
-      setLoading(false)
-      setRecords(response.data.records)
-    }).catch((error) => {
-      setLoading(false)
-      addNotice({
-        message: 'errorFetchingRecords',
-        type: 'error',
-        resourceId,
+    return api
+      .bulkAction({
+        resourceId: resourceId!,
+        recordIds,
+        actionName: actionName!,
       })
-      throw error
-    })
+      .then((response) => {
+        setLoading(false)
+        setRecords(response.data.records)
+      })
+      .catch((error) => {
+        setLoading(false)
+        addNotice({
+          message: 'errorFetchingRecords',
+          type: 'error',
+          resourceId,
+        })
+        throw error
+      })
   }
 
   useEffect(() => {
@@ -61,7 +69,7 @@ const BulkAction: React.FC = () => {
   }, [params.resourceId, params.actionName])
 
   if (!resource) {
-    return (<NoResourceError resourceId={resourceId!} />)
+    return <NoResourceError resourceId={resourceId!} />
   }
 
   if (!records && !loading) {
@@ -76,38 +84,62 @@ const BulkAction: React.FC = () => {
 
   if (loading) {
     const actionFromResource = resource.actions.find((r) => r.name === actionName)
-    return actionFromResource?.showInDrawer ? (<DrawerPortal><Loader /></DrawerPortal>) : <Loader />
+    return actionFromResource?.showInDrawer ? (
+      <DrawerPortal>
+        <Loader />
+      </DrawerPortal>
+    ) : (
+      <Loader />
+    )
   }
 
   if (!action) {
-    return (<NoActionError resourceId={resourceId!} actionName={actionName!} />)
+    return <NoActionError resourceId={resourceId!} actionName={actionName!} />
   }
 
   if (action.showInDrawer) {
+    if (!listAction) {
+      return (
+        <DrawerPortal width={action.containerWidth}>
+          <BaseActionComponent
+            action={action as ActionJSON}
+            resource={resource}
+            records={records}
+          />
+        </DrawerPortal>
+      )
+    }
+
+    const toggleFilter = listAction.showFilter
+      ? (): void => setFilterVisible(!filterVisible)
+      : undefined
+
     return (
-      <DrawerPortal width={action.containerWidth}>
-        <BaseActionComponent
-          action={action as ActionJSON}
-          resource={resource}
-          records={records}
-        />
-      </DrawerPortal>
+      <>
+        <DrawerPortal width={action.containerWidth}>
+          <BaseActionComponent
+            action={action as ActionJSON}
+            resource={resource}
+            records={records}
+          />
+        </DrawerPortal>
+        <Wrapper width={listAction.containerWidth}>
+          <ActionHeader
+            resource={resource}
+            action={listAction}
+            tag={tag}
+            toggleFilter={toggleFilter}
+          />
+          <BaseActionComponent action={listAction} resource={resource} setTag={setTag} />
+        </Wrapper>
+      </>
     )
   }
 
   return (
     <Wrapper width={action.containerWidth}>
-      {!action?.showInDrawer ? (
-        <ActionHeader
-          resource={resource}
-          action={action}
-        />
-      ) : ''}
-      <BaseActionComponent
-        action={action as ActionJSON}
-        resource={resource}
-        records={records}
-      />
+      {!action?.showInDrawer ? <ActionHeader resource={resource} action={action} /> : ''}
+      <BaseActionComponent action={action as ActionJSON} resource={resource} records={records} />
     </Wrapper>
   )
 }
