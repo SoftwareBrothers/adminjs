@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import { Badge, Box, ButtonGroup, cssClass, H2, H3 } from '@adminjs/design-system'
 import React from 'react'
-import { useNavigate } from 'react-router'
+import { useNavigate, useLocation } from 'react-router'
 
 import allowOverride from '../../../hoc/allow-override.js'
 import { useActionResponseHandler, useTranslation, useModal } from '../../../hooks/index.js'
@@ -31,6 +31,7 @@ const ActionHeader: React.FC<ActionHeaderProps> = (props) => {
   const translateFunctions = useTranslation()
   const { translateButton, translateAction } = translateFunctions
   const navigate = useNavigate()
+  const location = useLocation()
   const actionResponseHandler = useActionResponseHandler(actionPerformed)
   const modalFunctions = useModal()
 
@@ -46,6 +47,7 @@ const ActionHeader: React.FC<ActionHeaderProps> = (props) => {
       params,
       actionResponseHandler,
       navigate,
+      location,
       translateFunctions,
       modalFunctions,
     })(event)

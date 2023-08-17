@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link as RouterLink } from 'react-router-dom'
+import { useLocation } from 'react-router'
 import {
   ButtonCSS,
   ButtonProps,
@@ -17,13 +18,17 @@ export type StyledBackButtonProps = {
 }
 
 const StyledBackButton: React.FC<StyledBackButtonProps> = (props) => {
+  const location = useLocation()
   const { showInDrawer } = props
   const cssCloseIcon = showInDrawer ? 'ChevronRight' : 'ChevronLeft'
 
   return (
     <StyledLink
       size="icon"
-      to=".."
+      to={{
+        pathname: '..',
+        search: location.search,
+      }}
       relative="route"
       rounded
       mr="lg"

@@ -1,6 +1,6 @@
 import React from 'react'
 import { TableCaption, Title, ButtonGroup, Box } from '@adminjs/design-system'
-import { useNavigate } from 'react-router'
+import { useNavigate, useLocation } from 'react-router'
 
 import { ActionJSON, buildActionClickHandler, RecordJSON, ResourceJSON } from '../../../interfaces/index.js'
 import getBulkActionsFromRecords from './utils/get-bulk-actions-from-records.js'
@@ -19,6 +19,7 @@ const SelectedRecords: React.FC<SelectedRecordsProps> = (props) => {
   const translateFunctions = useTranslation()
   const { translateLabel } = translateFunctions
   const navigate = useNavigate()
+  const location = useLocation()
   const actionResponseHandler = useActionResponseHandler()
   const modalFunctions = useModal()
 
@@ -37,6 +38,7 @@ const SelectedRecords: React.FC<SelectedRecordsProps> = (props) => {
       params,
       actionResponseHandler,
       navigate,
+      location,
       translateFunctions,
       modalFunctions,
     })(event)
