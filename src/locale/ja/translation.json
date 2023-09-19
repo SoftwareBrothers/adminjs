@@ -1,0 +1,126 @@
+{
+  "actions": {
+    "new": "新規作成",
+    "edit": "編集",
+    "show": "表示",
+    "delete": "削除",
+    "bulkDelete": "すべて削除",
+    "list": "一覧"
+  },
+  "buttons": {
+    "save": "保存",
+    "addNewItem": "新しいアイテムを追加",
+    "filter": "フィルタ",
+    "applyChanges": "変更を適用",
+    "resetFilter": "リセット",
+    "confirmRemovalMany": "{{count}} 件のレコードを削除しますか",
+    "confirmRemovalMany_plural": "{{count}} 件のレコードを削除しますか",
+    "logout": "ログアウト",
+    "login": "ログイン",
+    "seeTheDocumentation": "参照: <1>ドキュメンテーション</1>",
+    "createFirstRecord": "最初のレコードを作成",
+    "cancel": "キャンセル",
+    "confirm": "確認"
+  },
+  "components": {
+    "DropZone": {
+      "placeholder": "ファイルをここにドロップするか、クリックしてブラウズ",
+      "acceptedSize": "最大サイズ: {{maxSize}}",
+      "acceptedType": "サポート: {{mimeTypes}}",
+      "unsupportedSize": "ファイル {{fileName}} は大きすぎます",
+      "unsupportedType": "ファイル {{fileName}} の種類はサポートされていません: {{fileType}}"
+    },
+    "LanguageSelector": {
+      "availableLanguages": {
+        "de": "ドイツ語",
+        "en": "英語",
+        "es": "スペイン語",
+        "it": "イタリア語",
+        "ja": "日本語",
+        "pl": "ポーランド語",
+        "pt-BR": "ポルトガル語（ブラジル）",
+        "ua": "ウクライナ語",
+        "zh-CN": "中国語"
+      }
+    },
+    "Login": {
+      "welcomeHeader": "ようこそ",
+      "welcomeMessage": "AdminJSへようこそ。これは、Node.jsアプリケーションのための世界トップクラスのオープンソースの自動生成管理パネルで、すべてのデータを1つの場所で管理できます。",
+      "properties": {
+        "email": "メールアドレス",
+        "password": "パスワード"
+      },
+      "loginButton": "ログイン"
+    }
+  },
+  "labels": {
+    "navigation": "ナビゲーション",
+    "pages": "ページ",
+    "selectedRecords": "選択済み（{{selected}}）",
+    "filters": "フィルタ",
+    "adminVersion": "管理者: {{version}}",
+    "appVersion": "アプリ: {{version}}",
+    "dashboard": "ダッシュボード"
+  },
+  "properties": {
+    "length": "長さ",
+    "from": "から",
+    "to": "まで"
+  },
+  "resources": {},
+  "messages": {
+    "successfullyBulkDeleted": "{{count}} 件のレコードを正常に削除しました",
+    "successfullyBulkDeleted_plural": "{{count}} 件のレコードを正常に削除しました",
+    "successfullyDeleted": "指定されたレコードを正常に削除しました",
+    "successfullyUpdated": "指定されたレコードを正常に更新しました",
+    "thereWereValidationErrors": "検証エラーがあります - 以下を確認してください",
+    "forbiddenError": "{{actionName}} アクションを {{resourceId}} で実行することはできません",
+    "anyForbiddenError": "指定されたアクションは実行できません",
+    "successfullyCreated": "新しいレコードを正常に作成しました",
+    "bulkDeleteError": "レコードの削除中にエラーが発生しました。詳細についてはコンソールを確認してください",
+    "errorFetchingRecords": "レコードの取得中にエラーが発生しました。詳細についてはコンソールを確認してください",
+    "errorFetchingRecord": "レコードの取得中にエラーが発生しました。詳細についてはコンソールを確認してください",
+    "noRecordsSelected": "レコードが選択されていません",
+    "theseRecordsWillBeRemoved": "以下のレコードが削除されます",
+    "theseRecordsWillBeRemoved_plural": "以下のレコードが削除されます",
+    "pickSomeFirstToRemove": "レコードを削除するには、まずそれらを選択する必要があります",
+    "error404Resource": "指定されたIDのリソースは見つかりません: {{resourceId}}",
+    "error404Action": "指定されたIDのリソースには {{actionName}} という名前のアクションが存在しないか、使用する権限がありません！",
+    "error404Record": "指定されたIDのリソースには {{recordId}} というIDのレコードが存在しないか、使用する権限がありません！",
+    "seeConsoleForMore": "詳細情報は開発コンソールを参照してください...",
+    "noActionComponent": "アクションに対するアクションコンポーネントを実装する必要があります",
+    "noRecordsInResource": "このリソースにはレコードがありません",
+    "noRecords": "レコードがありません",
+    "confirmDelete": "本当にこのアイテムを削除しますか？",
+    "welcomeOnBoard_title": "ようこそ！",
+    "welcomeOnBoard_subtitle": "これで私たちの一員です！始めるためのいくつかのヒントを用意しました：",
+    "addingResources_title": "リソースの追加",
+    "addingResources_subtitle": "サイドバーに新しいリソースを追加する方法",
+    "customizeResources_title": "リソースのカスタマイズ",
+    "customizeResources_subtitle": "動作の定義、プロパティの追加など...",
+    "customizeActions_title": "アクションのカスタマイズ",
+    "customizeActions_subtitle": "既存のアクションの変更と新規追加",
+    "writeOwnComponents_title": "コンポーネントの作成",
+    "writeOwnComponents_subtitle": "AdminJSの外観と操作性を変更する方法",
+    "customDashboard_title": "カスタムダッシュボード",
+    "customDashboard_subtitle": "このビューの変更とサイドバーに新しいページを追加する方法",
+    "roleBasedAccess_title": "ロールベースのアクセス制御",
+    "roleBasedAccess_subtitle": "AdminJSでユーザーロールとアクセス権を作成する方法",
+    "community_title": "Slackコミュニティに参加",
+    "community_subtitle": "AdminJSのクリエーターおよび他のAdminJSユーザーとの会話",
+    "foundBug_title": "バグを見つけましたか？改善が必要ですか？",
+    "foundBug_subtitle": "GitHubリポジトリで問題を提起してください",
+    "needMoreSolutions_title": "より高度なソリューションが必要ですか？",
+    "needMoreSolutions_subtitle": "美しいUX/UIデザインと、AdminJSをベースにした（だけでない）ソフトウェアを提供します",
+    "invalidCredentials": "間違ったメールアドレスと/またはパスワード",
+    "keyPlaceholder": "キー",
+    "valuePlaceholder": "値",
+    "initialKey": "キー-{{number}}",
+    "keyInUse": "オブジェクトキーは一意でなければなりません",
+    "keyValuePropertyDefaultDescription": "すべての値はテキストとして保存されます。キーは一意でなければならず、重複するキーは保存されません。",
+    "pageNotFound_title": "ページが見つかりません",
+    "pageNotFound_subtitle": "ページ <strong>\"{{pageName}}\"</strong> は存在しません",
+    "componentNotFound_title": "指定されたコンポーネントがありません",
+    "componentNotFound_subtitle": "この要素をレンダリングするコンポーネントを指定する必要があります"
+  }
+}
