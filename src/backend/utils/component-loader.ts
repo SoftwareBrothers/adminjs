@@ -73,7 +73,7 @@ export class ComponentLoader {
   }
 
   public static resolveFilePath(filePath: string, caller: string): string {
-    const extensions = ['.jsx', '.js', '.ts', '.tsx']
+    const extensions = ['.jsx', '.js', '.ts', '.tsx', '.mts', '.mjs']
     const src = path.isAbsolute(filePath)
       ? filePath
       : relativeFilePathResolver(filePath, new RegExp(`.*.{1}${caller}`))
