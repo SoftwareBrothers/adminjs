@@ -1,7 +1,6 @@
 import merge from 'lodash/merge.js'
 import * as path from 'path'
 import * as fs from 'fs'
-import type { FC } from 'react'
 import * as url from 'url'
 
 import { AdminJSOptionsWithDefault, AdminJSOptions } from './adminjs-options.interface.js'
@@ -14,7 +13,7 @@ import { RecordActionResponse, Action, BulkActionResponse } from './backend/acti
 import { DEFAULT_PATHS } from './constants.js'
 import { ACTIONS } from './backend/actions/index.js'
 
-import loginTemplate from './frontend/login-template.js'
+import loginTemplate, { LoginTemplateAttributes } from './frontend/login-template.js'
 import { ListActionResponse } from './backend/actions/list/list-action.js'
 import { Locale } from './locale/index.js'
 import { TranslateFunctions } from './utils/translate-functions.factory.js'
@@ -31,6 +30,7 @@ export const defaultOptions: AdminJSOptionsWithDefault = {
   rootPath: DEFAULT_PATHS.rootPath,
   logoutPath: DEFAULT_PATHS.logoutPath,
   loginPath: DEFAULT_PATHS.loginPath,
+  refreshTokenPath: DEFAULT_PATHS.refreshTokenPath,
   databases: [],
   resources: [],
   dashboard: {},
@@ -45,11 +45,6 @@ type ActionsMap = {
   bulkDelete: Action<BulkActionResponse>;
   new: Action<RecordActionResponse>;
   list: Action<ListActionResponse>;
-}
-
-export type LoginOverride<T = Record<string, unknown>> = {
-  component: FC<T>;
-  props?: T;
 }
 
 export type Adapter = { Database: typeof BaseDatabase; Resource: typeof BaseResource }
@@ -90,11 +85,6 @@ class AdminJS {
    * AdminJS version
    */
   public static VERSION: string
-
-  /**
-   * Login override
-   */
-  private loginOverride?: LoginOverride
 
   /**
    * @param   {AdminJSOptions} options      Options passed to AdminJS
@@ -196,8 +186,8 @@ class AdminJS {
    *                                          the form
    * @return {Promise<string>}                HTML of the rendered page
    */
-  async renderLogin({ action, errorMessage }): Promise<string> {
-    return loginTemplate(this, { action, errorMessage })
+  async renderLogin(props: LoginTemplateAttributes): Promise<string> {
+    return loginTemplate(this, props)
   }
 
   /**

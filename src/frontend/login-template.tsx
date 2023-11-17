@@ -12,14 +12,9 @@ import { getAssets, getBranding, getFaviconFromBranding, getLocales } from '../b
 import { defaultLocale } from '../locale/index.js'
 
 export type LoginTemplateAttributes = {
-  /**
-   * action which should be called when user clicks submit button
-   */
-  action: string;
-  /**
-   * Error message to present in the form
-   */
-  errorMessage?: string;
+  errorMessage?: string | null;
+  action?: string;
+  [name: string]: any;
 }
 
 const html = async (
