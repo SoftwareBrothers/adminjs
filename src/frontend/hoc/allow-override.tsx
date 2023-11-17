@@ -7,8 +7,7 @@ import { OverridableComponent } from '../utils/overridable-component.js'
  * @private
  *
  * @classdesc
- * Overrides one of the component form AdminJS core when user pass its name to
- * {@link ComponentLoader.add} or {@link ComponentLoader.override} method.
+ * Overrides one of the AdminJS core components when user passes it's name to ComponentLoader
  *
  * If case of being overridden, component receives additional prop: `OriginalComponent`
  *

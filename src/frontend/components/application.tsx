@@ -19,6 +19,7 @@ import {
   ResourceRoute,
 } from './routes/index.js'
 import useHistoryListen from '../hooks/use-history-listen.js'
+import { AuthenticationBackgroundComponent } from './app/auth-background-component.js'
 
 const h = new ViewHelpers()
 
@@ -83,8 +84,15 @@ const App: React.FC = () => {
         </Routes>
       </Box>
       <Modal />
+      <AuthenticationBackgroundComponent />
     </Box>
   )
 }
 
-export default allowOverride(App, 'Application')
+const OverridableApp = allowOverride(App, 'Application')
+
+export {
+  OverridableApp as default,
+  OverridableApp as App,
+  App as OriginalApp,
+}

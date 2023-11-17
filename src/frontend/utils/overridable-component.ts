@@ -78,6 +78,7 @@ export type OverridableComponent =
   | 'PropertyDescription'
   | 'PropertyLabel'
   | 'Login'
+  | 'AuthenticationBackgroundComponent'
 
 /**
  * Name of the components which can be overridden by ComponentLoader.

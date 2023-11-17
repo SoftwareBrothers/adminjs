@@ -467,6 +467,7 @@ export interface AdminJSOptionsWithDefault extends AdminJSOptions {
   rootPath: string;
   logoutPath: string;
   loginPath: string;
+  refreshTokenPath: string;
   databases?: Array<BaseDatabase>;
   resources?: Array<
     | BaseResource

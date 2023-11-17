@@ -250,6 +250,17 @@ class ApiClient {
     checkResponse(response)
     return response
   }
+
+  async refreshToken(data: Record<string, any>) {
+    const response = await this.client.request({
+      url: '/refresh-token',
+      method: 'POST',
+      data,
+    })
+    checkResponse(response)
+
+    return response
+  }
 }
 
 export {

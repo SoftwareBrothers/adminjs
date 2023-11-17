@@ -1,3 +1,4 @@
+export * from './auth/index.js'
 export * from './build-feature/index.js'
 export * from './errors/index.js'
 export * from './filter/index.js'

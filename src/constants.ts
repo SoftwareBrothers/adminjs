@@ -4,6 +4,7 @@ export const DEFAULT_PATHS = {
   rootPath: '/admin',
   logoutPath: '/admin/logout',
   loginPath: '/admin/login',
+  refreshTokenPath: '/admin/refresh-token',
 }
 
 const DEFAULT_TMP_DIR = '.adminjs'
