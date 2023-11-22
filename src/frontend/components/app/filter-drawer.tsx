@@ -41,7 +41,7 @@ const FilterDrawer: React.FC<FilterProps> = (props) => {
 
   const handleSubmit = (event: SubmitEvent) => {
     event.preventDefault()
-    storeParams({ filters: pickBy(filter, (v) => !isNil(v)) })
+    storeParams({ filters: pickBy(filter, (v) => !isNil(v)), page: '1' })
   }
 
   const handleReset = (event: SubmitEvent) => {
