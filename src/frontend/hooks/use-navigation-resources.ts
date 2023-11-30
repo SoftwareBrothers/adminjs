@@ -2,7 +2,6 @@ import { useLocation, useNavigate } from 'react-router'
 /* eslint-disable no-param-reassign */
 import type {
   IconProps,
-  NavigationElementProps,
   NavigationElementWithChildrenProps,
   NavigationProps,
 } from '@adminjs/design-system'
@@ -53,11 +52,12 @@ export function useNavigationResources(
       if (!resource.navigation || resource.navigation.name === null) {
         memo[key] = enrichResource(resource, resource.navigation?.icon)
       } else if (memo[key] && memo[key].elements && resource.navigation?.name) {
-        (memo[key].elements as Array<NavigationElementProps>).push(enrichResource(resource))
+        memo[key].label = translateLabel(resource.navigation?.name)
+        memo[key].elements.push(enrichResource(resource))
       } else {
         memo[key] = {
           elements: [enrichResource(resource)],
-          label: resource.navigation?.name,
+          label: translateLabel(resource.navigation?.name),
           icon: resource.navigation?.icon,
           onClick: (): void => setOpenElements({
             ...openElements,
