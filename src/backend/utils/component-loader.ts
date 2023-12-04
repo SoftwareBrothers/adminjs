@@ -169,5 +169,6 @@ export class ComponentLoader {
     'PropertyLabel',
     'Login',
     'AuthenticationBackgroundComponent',
+    'Footer',
   ]
 }
