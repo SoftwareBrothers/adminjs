@@ -20,6 +20,7 @@ import {
 } from './routes/index.js'
 import useHistoryListen from '../hooks/use-history-listen.js'
 import { AuthenticationBackgroundComponent } from './app/auth-background-component.js'
+import { Footer } from './app/footer.js'
 
 const h = new ViewHelpers()
 
@@ -82,6 +83,7 @@ const App: React.FC = () => {
           </Route>
           <Route path="*" element={<DashboardRoute />} />
         </Routes>
+        <Footer />
       </Box>
       <Modal />
       <AuthenticationBackgroundComponent />
