@@ -1,4 +1,8 @@
 const convertParam = (value: any, propertyType: string): any => {
+  if (value === null || typeof value === 'undefined') {
+    return value
+  }
+
   if (propertyType === 'number') {
     return Number(value)
   }
@@ -7,7 +11,7 @@ const convertParam = (value: any, propertyType: string): any => {
     return Boolean(value)
   }
 
-  if (['datetime', 'date'].includes(propertyType) && value !== null) {
+  if (['datetime', 'date'].includes(propertyType)) {
     return new Date(value)
   }
 
