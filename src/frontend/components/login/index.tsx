@@ -58,7 +58,7 @@ export const Login: React.FC = () => {
   const branding = useSelector((state: ReduxState) => state.branding)
 
   return (
-    <Wrapper flex variant="grey">
+    <Wrapper flex variant="grey" className="login__Wrapper">
       <Box bg="white" height="440px" flex boxShadow="login" width={[1, 2 / 3, 'auto']}>
         <Box
           bg="primary100"
