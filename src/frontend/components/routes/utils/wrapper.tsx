@@ -1,27 +1,27 @@
-import React, { ComponentType, PropsWithChildren } from 'react'
-import { Box, BoxProps, Drawer, DrawerContent, DrawerFooter } from '@adminjs/design-system'
+import { Box, BoxProps, DrawerContent, DrawerFooter } from '@adminjs/design-system'
 import { styled } from '@adminjs/design-system/styled-components'
+import React from 'react'
 
 import allowOverride from '../../../hoc/allow-override.js'
 
-const StyledWrapperWithFilter = styled(Box)`
-  & > ${Drawer} {
-    position: relative;
-    box-shadow: none;
-    border-radius: ${({ theme }) => theme.space.sm};
-  }
+// const StyledWrapperWithFilter = styled(Box)`
+//   & > ${Drawer} {
+//     position: relative;
+//     box-shadow: none;
+//     border-radius: ${({ theme }) => theme.space.sm};
+//   }
 
-  & > ${DrawerContent} {
-    background: ${({ theme }) => theme.colors.container};
-    padding: ${({ theme }) => theme.space.xxl};
-    overflow: visible;
-  }
+//   & > ${DrawerContent} {
+//     background: ${({ theme }) => theme.colors.container};
+//     padding: ${({ theme }) => theme.space.xxl};
+//     overflow: visible;
+//   }
 
-  & > ${DrawerFooter} {
-    background: ${({ theme }) => theme.colors.container};
-    padding: 0 ${({ theme }) => theme.space.xxl} ${({ theme }) => theme.space.xxl};
-  }
-`
+//   & > ${DrawerFooter} {
+//     background: ${({ theme }) => theme.colors.container};
+//     padding: 0 ${({ theme }) => theme.space.xxl} ${({ theme }) => theme.space.xxl};
+//   }
+// `
 
 const StyledWrapper = styled(Box)`
   & ${DrawerContent} {
@@ -37,22 +37,22 @@ const StyledWrapper = styled(Box)`
 `
 
 type WrapperProps = BoxProps & {
-  showFilter?: boolean;
-  children?: React.ReactNode;
+  showFilter?: boolean
+  children?: React.ReactNode
 }
 
 const Wrapper: React.FC<WrapperProps> = (props) => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { children, variant, color, showFilter = false, ...rest } = props
 
-  const Component: ComponentType<PropsWithChildren<any>> = showFilter
-    ? StyledWrapperWithFilter
-    : StyledWrapper
+  // const Component: ComponentType<PropsWithChildren<any>> = showFilter
+  //   ? StyledWrapperWithFilter
+  //   : StyledWrapper
 
   return (
-    <Component {...rest} variant="transparent" mx="auto" data-css="styled-wrapper">
+    <StyledWrapper {...rest} variant="transparent" mx="auto" data-css="styled-wrapper">
       {children}
-    </Component>
+    </StyledWrapper>
   )
 }
 

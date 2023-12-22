@@ -28,8 +28,12 @@ const FilterDrawer: React.FC<FilterProps> = (props) => {
   const params = useParams<MatchProps>()
   const { translateButton, translateLabel } = useTranslation()
   const initialLoad = useRef(true)
-  const { isVisible, toggleFilter } = useFilterDrawer()
+  const { isVisible, toggleFilter, close } = useFilterDrawer()
   const { storeParams, clearParams, filters } = useQueryParams()
+
+  useEffect(() => {
+    close()
+  }, [])
 
   useEffect(() => {
     if (initialLoad.current) {
