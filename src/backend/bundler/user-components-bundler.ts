@@ -13,13 +13,6 @@ const outPath = path.join(ADMIN_JS_TMP_DIR, 'bundle.js')
 
 async function build(admin: AdminJS, { write = false, watch = false } = {}): Promise<string> {
   const { options: { bundler: bundlerOptions } } = admin
-  const entryFile = generateEntry(admin, ADMIN_JS_TMP_DIR)
-
-  try {
-    await util.promisify(fs.mkdir)(ADMIN_JS_TMP_DIR, { recursive: true })
-  } catch (error) {
-    if (error.code !== 'EEXIST') { throw error }
-  }
 
   // if components bundle was requested and there are already bundled - return
   // that instead of bundling them again
@@ -32,6 +25,13 @@ async function build(admin: AdminJS, { write = false, watch = false } = {}): Pro
     }
   }
 
+  try {
+    await util.promisify(fs.mkdir)(ADMIN_JS_TMP_DIR, { recursive: true })
+  } catch (error) {
+    if (error.code !== 'EEXIST') { throw error }
+  }
+
+  const entryFile = generateEntry(admin, ADMIN_JS_TMP_DIR)
   await util.promisify(fs.writeFile)(entryPath, entryFile)
 
   const output = await bundler({
