@@ -8,8 +8,8 @@
     "list": "Lista"
   },
   "buttons": {
-    "save": "Ahorrar",
-    "addNewItem": "Agregar ítem nuevo",
+    "save": "Guardar",
+    "addNewItem": "Agregar nuevo elemento",
     "filter": "Filtrar",
     "applyChanges": "Aplicar cambios",
     "resetFilter": "Reiniciar",
