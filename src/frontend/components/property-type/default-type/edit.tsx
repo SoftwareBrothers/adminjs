@@ -25,7 +25,7 @@ const Edit: FC<CombinedProps> = (props) => {
 
 const SelectEdit: FC<CombinedProps> = (props) => {
   const { record, property, onChange } = props
-  const { translateProperty } = useTranslation()
+  const { tp } = useTranslation()
   if (!property.availableValues) {
     return null
   }
@@ -34,7 +34,7 @@ const SelectEdit: FC<CombinedProps> = (props) => {
   // eslint-disable-next-line max-len
   const availableValues = property.availableValues.map((v) => ({
     ...v,
-    label: translateProperty(v.label),
+    label: tp(`${property.path}.${v.value}`, property.resourceId, { defaultValue: v.label ?? v.value }),
   }))
   // eslint-disable-next-line eqeqeq
   const selected = availableValues.find((av) => av.value == propValue)

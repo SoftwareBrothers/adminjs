@@ -66,7 +66,7 @@ export default interface PropertyOptions {
    */
   availableValues?: Array<{
     value: string | number;
-    label: string;
+    label?: string;
   }>;
 
   /**
