@@ -11,6 +11,7 @@
     "save": "Save",
     "addNewItem": "Add new item",
     "filter": "Filter",
+    "filterActive": "Filter ({{count}})",
     "applyChanges": "Apply changes",
     "resetFilter": "Reset",
     "confirmRemovalMany": "Confirm the removal of {{count}} record",
@@ -118,7 +119,6 @@
     "initialKey": "Key-{{number}}",
     "keyInUse": "Object keys must be unique",
     "keyValuePropertyDefaultDescription": "All values are stored as text. Keys must be unique, duplicate keys will not be saved.",
-
     "pageNotFound_title": "Page not found",
     "pageNotFound_subtitle": "Page <strong>\"{{pageName}}\"</strong> does not exist",
     "componentNotFound_title": "No component specified",

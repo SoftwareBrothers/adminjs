@@ -11,6 +11,7 @@
     "save": "Зберегти",
     "addNewItem": "Додати новий елемент",
     "filter": "Фільтр",
+    "filterActive": "Фільтр ({{count}})",
     "applyChanges": "Застосувати зміни",
     "resetFilter": "Очистити фільтри",
     "confirmRemovalMany": "Підтвердити видалення {{count}} запису",

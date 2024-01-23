@@ -11,6 +11,7 @@
     "save": "Speichern",
     "addNewItem": "Neuen Eintrag hinzufügen",
     "filter": "Filter",
+    "filterActive": "Filter ({{count}})",
     "applyChanges": "Änderungen übernehmen",
     "resetFilter": "Zurücksetzen",
     "confirmRemovalMany": "Bestätigen Sie das Löschen des Eintrag",

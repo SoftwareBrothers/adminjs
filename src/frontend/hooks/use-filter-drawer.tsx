@@ -6,7 +6,7 @@ import { useQueryParams } from './use-query-params.js'
 
 export const useFilterDrawer = () => {
   const [filtersCount, setFiltersCount] = useState(0)
-  const dispach = useDispatch()
+  const dispatch = useDispatch()
   const isVisible = useSelector((state: ReduxState) => state.filterDrawer.isVisible)
 
   const { showFilters, filters = {} } = useQueryParams()
@@ -17,20 +17,20 @@ export const useFilterDrawer = () => {
 
   useEffect(() => {
     if (showFilters) {
-      dispach(showFilterDrawer())
+      dispatch(showFilterDrawer())
     }
   }, [showFilters])
 
   const toggleFilter = () => {
-    dispach(isVisible ? hideFilterDrawer() : showFilterDrawer())
+    dispatch(isVisible ? hideFilterDrawer() : showFilterDrawer())
   }
 
   const open = () => {
-    dispach(showFilterDrawer())
+    dispatch(showFilterDrawer())
   }
 
   const close = () => {
-    dispach(hideFilterDrawer())
+    dispatch(hideFilterDrawer())
   }
 
   return {

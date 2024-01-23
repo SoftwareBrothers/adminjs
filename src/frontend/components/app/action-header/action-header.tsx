@@ -41,7 +41,7 @@ const ActionHeader: React.FC<ActionHeaderProps> = (props) => {
   const location = useLocation()
   const actionResponseHandler = useActionResponseHandler(actionPerformed)
   const modalFunctions = useModal()
-  const { toggleFilter } = useFilterDrawer()
+  const { toggleFilter, filtersCount } = useFilterDrawer()
 
   if (action.hideActionHeader) {
     return null
@@ -74,8 +74,10 @@ const ActionHeader: React.FC<ActionHeaderProps> = (props) => {
   })
 
   if (typeof isFilterButtonVisible === 'function' || isFilterButtonVisible) {
+    const filterTranslationKey = filtersCount > 0 ? 'filterActive' : 'filter'
+
     actionButtons.push({
-      label: translateButton('filter', resource.id),
+      label: translateButton(filterTranslationKey, resource.id, { count: filtersCount }),
       onClick: toggleFilter,
       icon: 'Filter',
       'data-css': getResourceElementCss(resource.id, 'filter-button'),
