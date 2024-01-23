@@ -9,7 +9,7 @@ import allowOverride from '../../../hoc/allow-override.js'
 const BooleanPropertyValue: React.FC<ShowPropertyProps> = (props) => {
   const { record, property, resource } = props
 
-  const { translateProperty } = useTranslation()
+  const { tl } = useTranslation()
 
   const rawValue = record?.params[property.path]
 
@@ -17,7 +17,7 @@ const BooleanPropertyValue: React.FC<ShowPropertyProps> = (props) => {
     return null
   }
   const base = mapValue(rawValue)
-  const translation = translateProperty(`${property.path}.${rawValue}`, resource.id, {
+  const translation = tl(`${property.path}.${rawValue}`, resource.id, {
     defaultValue: base,
   })
 

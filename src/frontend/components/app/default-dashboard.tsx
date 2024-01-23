@@ -165,7 +165,7 @@ export const Dashboard: React.FC = () => {
               <Button
                 as="a"
                 variant="contained"
-                href="https://share.hsforms.com/1IedvmEz6RH2orhcL6g2UHA8oc5a"
+                href="https://forms.adminjs.co/"
                 target="_blank"
               >
                 {translateButton('contactUs')}

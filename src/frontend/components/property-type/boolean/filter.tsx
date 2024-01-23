@@ -16,11 +16,11 @@ const boolValue = (s: string): boolean => {
 
 const Filter: React.FC<FilterPropertyProps> = (props) => {
   const { property, filter = {}, onChange } = props
-  const { tp } = useTranslation()
+  const { tl } = useTranslation()
   const value = typeof filter[property.path] === 'undefined' ? '' : boolValue(filter[property.path])
   const options = [
-    { value: true, label: tp(`${property.path}.true`, property.resourceId, { defaultValue: mapValue(true) }) },
-    { value: false, label: tp(`${property.path}.false`, property.resourceId, { defaultValue: mapValue(false) }) },
+    { value: true, label: tl(`${property.path}.true`, property.resourceId, { defaultValue: mapValue(true) }) },
+    { value: false, label: tl(`${property.path}.false`, property.resourceId, { defaultValue: mapValue(false) }) },
   ]
   const selected = options.find((o) => o.value === value)
   const handleChange = (s) => {

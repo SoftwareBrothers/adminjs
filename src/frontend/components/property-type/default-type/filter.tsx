@@ -8,7 +8,7 @@ import { useTranslation } from '../../../hooks/use-translation.js'
 
 const Filter: React.FC<FilterPropertyProps> = (props) => {
   const { property, onChange, filter } = props
-  const { tp } = useTranslation()
+  const { tl } = useTranslation()
 
   const handleInputChange = (event) => {
     onChange(property.path, event.target.value)
@@ -25,7 +25,7 @@ const Filter: React.FC<FilterPropertyProps> = (props) => {
     if (property.availableValues) {
       const availableValues = property.availableValues.map((v) => ({
         ...v,
-        label: tp(`${property.path}.${v.value}`, property.resourceId, { defaultValue: v.label ?? v.value }),
+        label: tl(`${property.path}.${v.value}`, property.resourceId, { defaultValue: v.label ?? v.value }),
       }))
       const selected = property.availableValues.find((av) => av.value === value)
       return (
