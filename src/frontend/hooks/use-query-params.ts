@@ -1,5 +1,4 @@
 /* eslint-disable no-unused-vars */
-import isEmpty from 'lodash/isEmpty.js'
 import pick from 'lodash/pick.js'
 import { parse, stringify } from 'qs'
 import { useMemo } from 'react'
@@ -45,7 +44,6 @@ export function useQueryParams<
     [searchParams, pathname],
   )
   const { sortBy, direction, page, tab, filters, redirectUrl } = parsedQuery
-  const showFilters = !isEmpty(filters)
   const listParams = useMemo(
     () => pick(parsedQuery, [
       QueryListParams.SortBy,
@@ -86,7 +84,6 @@ export function useQueryParams<
   }
 
   return {
-    showFilters,
     parsedQuery,
     listParams,
     filters: filters as unknown as FiltersT,
