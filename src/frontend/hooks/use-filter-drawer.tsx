@@ -9,17 +9,11 @@ export const useFilterDrawer = () => {
   const dispatch = useDispatch()
   const isVisible = useSelector((state: ReduxState) => state.filterDrawer.isVisible)
 
-  const { showFilters, filters = {} } = useQueryParams()
+  const { filters = {} } = useQueryParams()
 
   useEffect(() => {
     setFiltersCount(Object.keys(filters).length)
   }, [filters])
-
-  useEffect(() => {
-    if (showFilters) {
-      dispatch(showFilterDrawer())
-    }
-  }, [showFilters])
 
   const toggleFilter = () => {
     dispatch(isVisible ? hideFilterDrawer() : showFilterDrawer())
