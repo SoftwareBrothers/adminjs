@@ -11,6 +11,7 @@
     "save": "Guardar",
     "addNewItem": "Agregar nuevo elemento",
     "filter": "Filtrar",
+    "filterActive": "Filtrar ({{count}})",
     "applyChanges": "Aplicar cambios",
     "resetFilter": "Reiniciar",
     "confirmRemovalMany": "Confirmar la eliminación de {{count}} registro",

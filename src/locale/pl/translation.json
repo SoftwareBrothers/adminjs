@@ -10,7 +10,8 @@
   "buttons": {
     "save": "Zapisz",
     "addNewItem": "Nowy",
-    "filter": "Filtr",
+    "filter": "Filtry",
+    "filterActive": "Filtry ({{count}})",
     "applyChanges": "Zastosuj zmiany",
     "resetFilter": "Wyczyść",
     "confirmRemovalMany": "Potwierdź usunięcie {{count}} pozycji",

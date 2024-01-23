@@ -11,6 +11,7 @@
     "save": "保存",
     "addNewItem": "新しいアイテムを追加",
     "filter": "フィルタ",
+    "filterActive": "フィルタ ({{count}})",
     "applyChanges": "変更を適用",
     "resetFilter": "リセット",
     "confirmRemovalMany": "{{count}} 件のレコードを削除しますか",
