@@ -27,7 +27,9 @@ const Filter: React.FC<FilterPropertyProps> = (props) => {
         ...v,
         label: tl(`${property.path}.${v.value}`, property.resourceId, { defaultValue: v.label ?? v.value }),
       }))
-      const selected = property.availableValues.find((av) => av.value === value)
+
+      const selected = availableValues.find((av) => av.value === value)
+
       return (
         <Select
           variant="filter"
