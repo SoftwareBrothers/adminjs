@@ -10,6 +10,7 @@ import { ActionJSON } from './action-json.interface.js'
 import { buildActionCallApiTrigger } from './build-action-api-call-trigger.js'
 import { TranslateFunctions } from '../../../utils/index.js'
 import { ModalData, ModalFunctions } from '../modal.interface.js'
+import { REFRESH_KEY } from '../../components/actions/utils/append-force-refresh.js'
 
 export type BuildActionClickOptions = {
   action: ActionJSON
@@ -71,8 +72,12 @@ export const buildActionClickHandler = (
       const hrefParams = new URLSearchParams(url.search)
       const currentParams = new URLSearchParams(action.showInDrawer ? location?.search ?? '' : '')
       Object.entries(Object.fromEntries(currentParams.entries())).forEach(([key, value]) => {
-        hrefParams.append(key, value)
+        if (!hrefParams.has(key)) hrefParams.set(key, value)
       })
+
+      if (location?.pathname === url.pathname) {
+        hrefParams.set(REFRESH_KEY, 'true')
+      }
 
       navigate({
         pathname: url.pathname,

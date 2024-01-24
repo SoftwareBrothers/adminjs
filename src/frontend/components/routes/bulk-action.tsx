@@ -66,7 +66,7 @@ const BulkAction: React.FC = () => {
 
   useEffect(() => {
     fetchRecords()
-  }, [params.resourceId, params.actionName])
+  }, [params.resourceId, params.actionName, location.search])
 
   if (!resource) {
     return <NoResourceError resourceId={resourceId!} />
@@ -121,6 +121,7 @@ const BulkAction: React.FC = () => {
             action={action as ActionJSON}
             resource={resource}
             records={records}
+            setTag={setTag}
           />
         </DrawerPortal>
         <Wrapper width={listAction.containerWidth}>
@@ -138,8 +139,13 @@ const BulkAction: React.FC = () => {
 
   return (
     <Wrapper width={action.containerWidth}>
-      {!action?.showInDrawer ? <ActionHeader resource={resource} action={action} /> : ''}
-      <BaseActionComponent action={action as ActionJSON} resource={resource} records={records} />
+      {!action?.showInDrawer ? <ActionHeader resource={resource} action={action} tag={tag} /> : ''}
+      <BaseActionComponent
+        action={action as ActionJSON}
+        resource={resource}
+        records={records}
+        setTag={setTag}
+      />
     </Wrapper>
   )
 }

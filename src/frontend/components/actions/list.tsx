@@ -45,8 +45,13 @@ const List: React.FC<ActionProps> = ({ resource, setTag }) => {
     const search = new URLSearchParams(location.search)
     if (search.get(REFRESH_KEY)) {
       setSelectedRecords([])
+    } else {
+      const recordIds = search.get('recordIds')?.split?.(',') ?? []
+      setSelectedRecords(
+        records.filter((r) => recordIds.includes(r.id.toString())),
+      )
     }
-  }, [location.search])
+  }, [location.search, records])
 
   const handleActionPerformed = (): any => fetchData()
 

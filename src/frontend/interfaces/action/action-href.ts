@@ -14,6 +14,10 @@ export const actionHref = (
     return null
   }
 
+  if (params.recordIds?.length) {
+    params.recordIds = [...new Set(params.recordIds)]
+  }
+
   const hrefMap = {
     record: (): string => h.recordActionUrl({
       ...params as RecordActionParams,
