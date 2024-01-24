@@ -6,8 +6,6 @@ import allowOverride from '../../../hoc/allow-override.js'
 
 const StyledWrapperWithFilter = styled(Box)`
   & > ${Drawer} {
-    position: relative;
-    box-shadow: none;
     border-radius: ${({ theme }) => theme.space.sm};
   }
 
