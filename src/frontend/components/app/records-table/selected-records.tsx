@@ -51,7 +51,9 @@ const SelectedRecords: React.FC<SelectedRecordsProps> = (props) => {
     translateFunctions,
     modalFunctions,
   })
+
   const contentTag = getResourceElementCss(resource.id, 'table-caption')
+
   return (
     <TableCaption data-css={contentTag}>
       <Box flex py="sm" alignItems="center">
