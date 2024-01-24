@@ -13,6 +13,7 @@ import { NoActionError, NoResourceError } from '../app/error-message.js'
 import FilterDrawer from '../app/filter-drawer.js'
 import { ActionHeader } from '../app/index.js'
 import Wrapper from './utils/wrapper.js'
+import { getResourceElementCss } from '../../utils/data-css-name.js'
 
 type PropsFromState = {
   resources: Array<ResourceJSON>
@@ -36,6 +37,8 @@ const ResourceAction: React.FC<Props> = (props) => {
     return <NoActionError resourceId={resourceId!} actionName={actionName!} />
   }
 
+  const contentTag = getResourceElementCss(resource.id, action.name)
+
   if (action.showInDrawer) {
     return (
       <DrawerPortal width={action.containerWidth}>
@@ -45,8 +48,8 @@ const ResourceAction: React.FC<Props> = (props) => {
   }
 
   return (
-    <Wrapper width={action.containerWidth} showFilter={action.showFilter}>
-      <Box flex flexDirection="column">
+    <Wrapper width={action.containerWidth} showFilter={action.showFilter} data-css={contentTag}>
+      <Box flex flexDirection="column" flexGrow={1}>
         <ActionHeader
           resource={resource}
           action={action}
@@ -55,7 +58,7 @@ const ResourceAction: React.FC<Props> = (props) => {
         />
         <BaseActionComponent action={action} resource={resource} setTag={setTag} />
       </Box>
-      {action.showFilter ? <FilterDrawer resource={resource} /> : ''}
+      {action.showFilter && <FilterDrawer resource={resource} />}
     </Wrapper>
   )
 }
