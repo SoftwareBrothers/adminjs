@@ -8,7 +8,7 @@ let globalAny: any = {}
 try {
   globalAny = window
 } catch (error) {
-  if (error.message !== 'window is not defined') {
+  if (!(error instanceof ReferenceError)) {
     throw error
   }
 }
