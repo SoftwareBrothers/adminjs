@@ -26,6 +26,7 @@ const ResourceAction: React.FC<Props> = (props) => {
   const { resources } = props
   const { resourceId, actionName } = params
   const [tag, setTag] = useState('')
+  const [filterVisible, setFilterVisible] = useState(false)
 
   const resource = resources.find((r) => r.id === resourceId)
   if (!resource) {
@@ -37,13 +38,43 @@ const ResourceAction: React.FC<Props> = (props) => {
     return <NoActionError resourceId={resourceId!} actionName={actionName!} />
   }
 
+  const listActionName = 'list'
+  const listAction = resource.resourceActions.find((r) => r.name === listActionName)
+
   const contentTag = getResourceElementCss(resource.id, action.name)
 
   if (action.showInDrawer) {
+    if (!listAction) {
+      return (
+        <DrawerPortal width={action.containerWidth}>
+          <BaseActionComponent action={action} resource={resource} />
+        </DrawerPortal>
+      )
+    }
+
+    const toggleFilter = listAction.showFilter
+      ? (): void => setFilterVisible(!filterVisible)
+      : undefined
+
     return (
-      <DrawerPortal width={action.containerWidth}>
-        <BaseActionComponent action={action} resource={resource} />
-      </DrawerPortal>
+      <>
+        <DrawerPortal width={action.containerWidth}>
+          <BaseActionComponent
+            action={action}
+            resource={resource}
+            setTag={setTag}
+          />
+        </DrawerPortal>
+        <Wrapper width={listAction.containerWidth}>
+          <ActionHeader
+            resource={resource}
+            action={listAction}
+            tag={tag}
+            toggleFilter={toggleFilter}
+          />
+          <BaseActionComponent action={listAction} resource={resource} setTag={setTag} />
+        </Wrapper>
+      </>
     )
   }
 

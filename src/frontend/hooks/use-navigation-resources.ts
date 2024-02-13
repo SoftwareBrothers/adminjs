@@ -53,7 +53,7 @@ export function useNavigationResources(
         memo[key] = enrichResource(resource, resource.navigation?.icon)
       } else if (memo[key] && memo[key].elements && resource.navigation?.name) {
         memo[key].label = translateLabel(resource.navigation?.name)
-        memo[key].elements.push(enrichResource(resource))
+        memo[key].elements?.push?.(enrichResource(resource))
       } else {
         memo[key] = {
           elements: [enrichResource(resource)],
