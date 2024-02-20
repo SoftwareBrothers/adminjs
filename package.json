@@ -12,7 +12,7 @@
     "./bundler": "./lib/backend/bundler/index.js"
   },
   "scripts": {
-    "test": "mocha --loader=ts-node/esm ./spec/index.js",
+    "test": "mocha --import=tsx/esm ./spec/index.js",
     "types": "tsc",
     "clean": "rm -rf lib && mkdir lib && rm -fr types && mkdir types",
     "build": "babel src --out-dir lib --copy-files --extensions '.ts,.js,.jsx,.tsx'",
@@ -175,6 +175,7 @@
     "sinon": "^15.0.2",
     "sinon-chai": "^3.7.0",
     "ts-node": "^10.9.2",
+    "tsx": "^4.7.1",
     "typescript": "^5.3.3"
   },
   "resolutions": {
