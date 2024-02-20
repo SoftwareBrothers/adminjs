@@ -15,6 +15,11 @@
     "moduleResolution": "nodenext",
     "module": "nodenext",
     "baseUrl": ".",
+    "types": [
+      "node",
+      "mocha",
+      "react"
+    ],
     "typeRoots": ["node_modules/@types", "./vendor-types", "@adminjs/design-system/vendor-types"],
     "paths": {
       "react": ["node_modules/@types/react"]
