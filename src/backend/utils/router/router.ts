@@ -4,8 +4,7 @@ import { createRequire } from 'node:module'
 
 import AppController from '../../controllers/app-controller.js'
 import ApiController from '../../controllers/api-controller.js'
-import env from '../../bundler/bundler-env.js'
-import { COMPONENTS_OUTPUT_PATH } from '../../bundler/utils/constants.js'
+import { COMPONENTS_OUTPUT_PATH, NODE_ENV } from '../../bundler/utils/constants.js'
 
 const __dirname = url.fileURLToPath(new URL('.', import.meta.url))
 const ASSETS_ROOT = `${__dirname}/../lib/../../../frontend/assets/`
@@ -20,7 +19,7 @@ const resolveDesignSystemBundle = (): string => {
 
   return path.join(
     path.parse(require.resolve('@adminjs/design-system')).dir,
-    `../bundle.${env}.js`,
+    `../bundle.${NODE_ENV}.js`,
   )
 }
 
@@ -65,10 +64,10 @@ export const Router: RouterType = {
     src: path.join(ASSETS_ROOT, 'fonts/icomoon.woff'),
   }, {
     path: '/frontend/assets/app.bundle.js',
-    src: path.join(ASSETS_ROOT, `scripts/app-bundle.${env}.js`),
+    src: path.join(ASSETS_ROOT, `scripts/app-bundle.${NODE_ENV}.js`),
   }, {
     path: '/frontend/assets/global.bundle.js',
-    src: path.join(ASSETS_ROOT, `scripts/global-bundle.${env}.js`),
+    src: path.join(ASSETS_ROOT, `scripts/global-bundle.${NODE_ENV}.js`),
   }, {
     path: '/frontend/assets/design-system.bundle.js',
     src: resolveDesignSystemBundle(),
