@@ -88,7 +88,7 @@
     "@adminjs/design-system": "^4.0.3",
     "@babel/core": "^7.23.9",
     "@babel/parser": "^7.23.9",
-    "@babel/plugin-syntax-import-attributes": "^7.23.3",
+    "@babel/plugin-syntax-import-assertions": "^7.23.3",
     "@babel/plugin-transform-runtime": "^7.23.9",
     "@babel/preset-env": "^7.23.9",
     "@babel/preset-react": "^7.23.3",
@@ -174,7 +174,7 @@
     "semantic-release-slack-bot": "^4.0.0",
     "sinon": "^15.0.2",
     "sinon-chai": "^3.7.0",
-    "ts-node": "^10.9.2",
+    "ts-node": "10.8.1",
     "typescript": "^5.3.3"
   },
   "resolutions": {

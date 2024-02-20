@@ -46,7 +46,7 @@ const input: InputOptions = {
         presetReact,
         presetTs,
       ],
-      plugins: ['@babel/plugin-syntax-import-attributes'],
+      plugins: ['@babel/plugin-syntax-import-assertions'],
     }),
     ...(NODE_ENV === 'production' ? [minify()] : []),
   ],

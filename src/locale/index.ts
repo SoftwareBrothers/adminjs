@@ -1,14 +1,14 @@
 import type { LocaleTranslations } from './config.js'
 
-import deLocale from './de/translation.json' with { type: 'json' }
-import enLocale from './en/translation.json' with { type: 'json' }
-import esLocale from './es/translation.json' with { type: 'json' }
-import itLocale from './it/translation.json' with { type: 'json' }
-import jaLocale from './ja/translation.json' with { type: 'json' }
-import plLocale from './pl/translation.json' with { type: 'json' }
-import ptBrLocale from './pt-BR/translation.json' with { type: 'json' }
-import uaLocale from './ua/translation.json' with { type: 'json' }
-import zhCNLocale from './zh-CN/translation.json' with { type: 'json' }
+import deLocale from './de/translation.json' assert { type: 'json' }
+import enLocale from './en/translation.json' assert { type: 'json' }
+import esLocale from './es/translation.json' assert { type: 'json' }
+import itLocale from './it/translation.json' assert { type: 'json' }
+import jaLocale from './ja/translation.json' assert { type: 'json' }
+import plLocale from './pl/translation.json' assert { type: 'json' }
+import ptBrLocale from './pt-BR/translation.json' assert { type: 'json' }
+import uaLocale from './ua/translation.json' assert { type: 'json' }
+import zhCNLocale from './zh-CN/translation.json' assert { type: 'json' }
 
 export * from './config.js'
 export * from './default-config.js'
