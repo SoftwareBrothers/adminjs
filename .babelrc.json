@@ -11,7 +11,7 @@
     ["@babel/preset-typescript"]
   ],
   "plugins": [
-    "@babel/plugin-syntax-import-assertions"
+    "@babel/plugin-syntax-import-attributes"
   ],
   "only": ["src/", "spec/"],
   "ignore": [

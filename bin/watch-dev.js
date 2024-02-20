@@ -1,6 +1,6 @@
 import * as url from 'url'
 import runtime from '@babel/plugin-transform-runtime'
-import importAssertions from '@babel/plugin-syntax-import-assertions'
+import importAttributes from '@babel/plugin-syntax-import-attributes'
 
 import bundler from '../src/backend/bundler/bundler.js'
 import env from '../src/backend/bundler/bundler-env.js'
@@ -16,7 +16,7 @@ async function build() {
     minify: env === 'production',
     watch: !once,
     babelConfig: {
-      plugins: [runtime, importAssertions],
+      plugins: [runtime, importAttributes],
       babelHelpers: 'runtime',
       include: [
         'lib/frontend/**',

@@ -1,6 +1,8 @@
 /* eslint-disable import/first, import/no-extraneous-dependencies */
 window.global = {}
 
+import 'core-js/stable'
+import 'regenerator-runtime/runtime'
 import React from 'react'
 import * as Redux from 'redux'
 import ReactDOM from 'react-dom'
