@@ -8,8 +8,12 @@ import BaseResource from './backend/adapters/resource/base-resource.js'
 import BaseDatabase from './backend/adapters/database/base-database.js'
 import ConfigurationError from './backend/utils/errors/configuration-error.js'
 import ResourcesFactory from './backend/utils/resources-factory/resources-factory.js'
-import userComponentsBundler from './backend/bundler/user-components-bundler.js'
-import { RecordActionResponse, Action, BulkActionResponse } from './backend/actions/action.interface.js'
+import componentsBundler from './backend/bundler/components.bundler.js'
+import {
+  RecordActionResponse,
+  Action,
+  BulkActionResponse,
+} from './backend/actions/action.interface.js'
 import { DEFAULT_PATHS } from './constants.js'
 import { ACTIONS } from './backend/actions/index.js'
 
@@ -21,6 +25,8 @@ import { relativeFilePathResolver } from './utils/file-resolver.js'
 import { Router } from './backend/utils/index.js'
 import { ComponentLoader } from './backend/utils/component-loader.js'
 import { bundlePath, stylePath } from './utils/theme-bundler.js'
+import generateEntry from './backend/bundler/generate-user-component-entry.js'
+import { ADMIN_JS_TMP_DIR } from './backend/bundler/utils/constants.js'
 
 const __dirname = url.fileURLToPath(new URL('.', import.meta.url))
 const pkg = JSON.parse(fs.readFileSync(path.join(__dirname, '../package.json'), 'utf-8'))
@@ -39,12 +45,12 @@ export const defaultOptions: AdminJSOptionsWithDefault = {
 }
 
 type ActionsMap = {
-  show: Action<RecordActionResponse>;
-  edit: Action<RecordActionResponse>;
-  delete: Action<RecordActionResponse>;
-  bulkDelete: Action<BulkActionResponse>;
-  new: Action<RecordActionResponse>;
-  list: Action<ListActionResponse>;
+  show: Action<RecordActionResponse>
+  edit: Action<RecordActionResponse>
+  delete: Action<RecordActionResponse>
+  bulkDelete: Action<BulkActionResponse>
+  new: Action<RecordActionResponse>
+  list: Action<ListActionResponse>
 }
 
 export type Adapter = { Database: typeof BaseDatabase; Resource: typeof BaseResource }
@@ -127,9 +133,12 @@ class AdminJS {
    * @param  {typeof BaseDatabase} options.Database subclass of {@link BaseDatabase}
    * @param  {typeof BaseResource} options.Resource subclass of {@link BaseResource}
    */
-  static registerAdapter({ Database, Resource }: {
-    Database: typeof BaseDatabase;
-    Resource: typeof BaseResource;
+  static registerAdapter({
+    Database,
+    Resource,
+  }: {
+    Database: typeof BaseDatabase
+    Resource: typeof BaseResource
   }): void {
     if (!Database || !Resource) {
       throw new Error('Adapter has to have both Database and Resource')
@@ -142,7 +151,9 @@ class AdminJS {
       global.RegisteredAdapters = global.RegisteredAdapters || []
       global.RegisteredAdapters.push({ Database, Resource })
     } else {
-      throw new Error('Adapter elements have to be a subclass of AdminJS.BaseResource and AdminJS.BaseDatabase')
+      throw new Error(
+        'Adapter elements have to be a subclass of AdminJS.BaseResource and AdminJS.BaseDatabase',
+      )
     }
   }
 
@@ -151,11 +162,13 @@ class AdminJS {
    * all external plugins.
    */
   async initialize(): Promise<void> {
-    if (process.env.NODE_ENV === 'production'
-      && !(process.env.ADMIN_JS_SKIP_BUNDLE === 'true')) {
+    if (process.env.NODE_ENV === 'production' && !(process.env.ADMIN_JS_SKIP_BUNDLE === 'true')) {
       // eslint-disable-next-line no-console
       console.log('AdminJS: bundling user components...')
-      await userComponentsBundler(this, { write: true })
+      await componentsBundler.createEntry({
+        content: generateEntry(this, ADMIN_JS_TMP_DIR),
+      })
+      await componentsBundler.build()
     }
   }
 
@@ -167,7 +180,10 @@ class AdminJS {
    */
   async watch(): Promise<string | undefined> {
     if (process.env.NODE_ENV !== 'production') {
-      return userComponentsBundler(this, { write: true, watch: true })
+      await componentsBundler.createEntry({
+        content: generateEntry(this, ADMIN_JS_TMP_DIR),
+      })
+      await componentsBundler.watch()
     }
     return undefined
   }
@@ -204,11 +220,13 @@ class AdminJS {
   findResource(resourceId): BaseResource {
     const resource = this.resources.find((m) => m._decorated?.id() === resourceId)
     if (!resource) {
-      throw new Error([
-        `There are no resources with given id: "${resourceId}"`,
-        'This is the list of all registered resources you can use:',
-        this.resources.map((r) => r._decorated?.id() || r.id()).join(', '),
-      ].join('\n'))
+      throw new Error(
+        [
+          `There are no resources with given id: "${resourceId}"`,
+          'This is the list of all registered resources you can use:',
+          this.resources.map((r) => r._decorated?.id() || r.id()).join(', '),
+        ].join('\n'),
+      )
     }
     return resource
   }
@@ -230,18 +248,18 @@ class AdminJS {
     }
 
     if (!fs.existsSync(filePath)) {
-      throw new ConfigurationError(`Given babel config "${filePath}", doesn't exist.`, 'AdminJS.html')
+      throw new ConfigurationError(
+        `Given babel config "${filePath}", doesn't exist.`,
+        'AdminJS.html',
+      )
     }
     if (path.extname(filePath) === '.js') {
       // eslint-disable-next-line
       const configModule = require(filePath)
-      config = configModule && configModule.__esModule
-        ? configModule.default || undefined
-        : configModule
+      // eslint-disable-next-line max-len
+      config = configModule && configModule.__esModule ? configModule.default || undefined : configModule
       if (!config || typeof config !== 'object' || Array.isArray(config)) {
-        throw new Error(
-          `${filePath}: Configuration should be an exported JavaScript object.`,
-        )
+        throw new Error(`${filePath}: Configuration should be an exported JavaScript object.`)
       }
     } else {
       try {

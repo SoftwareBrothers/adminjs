@@ -1,4 +1,7 @@
 {
+  "ts-node": {
+    "files": true
+  },
   "compilerOptions": {
     "outDir": "./built",
     "target": "esnext",
@@ -16,11 +19,11 @@
     "module": "nodenext",
     "baseUrl": ".",
     "types": [
-      "react",
+      "node",
       "mocha",
-      "node"
+      "react"
     ],
-    "typeRoots": ["./vendor-types", "@adminjs/design-system/vendor-types"],
+    "typeRoots": ["node_modules/@types", "./vendor-types", "@adminjs/design-system/vendor-types"],
     "paths": {
       "react": ["node_modules/@types/react"]
     },
