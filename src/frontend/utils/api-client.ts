@@ -19,6 +19,10 @@ try {
   } else {
     globalAny = { isOnServer: true }
   }
+} finally {
+  if (!globalAny) {
+    globalAny = { isOnServer: true }
+  }
 }
 
 /**
