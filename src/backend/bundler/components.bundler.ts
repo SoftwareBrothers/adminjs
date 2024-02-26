@@ -55,6 +55,7 @@ const input: InputOptions = {
 const output: OutputOptions = {
   name: 'AdminJSCustom',
   file: COMPONENTS_OUTPUT_PATH,
+  inlineDynamicImports: true,
   globals: AssetBundler.DEFAULT_GLOBALS,
 }
 
