@@ -31,10 +31,7 @@ const input: InputOptions = {
       'process.browser': true,
     }),
     (json as any).default(),
-    (commonjs as any).default({
-      include: ['node_modules/**', NODE_ENV === 'development' ? '../../node_modules/**' : ''],
-      ignoreGlobal: true,
-    }),
+    (commonjs as any).default(),
     (polyfills as any).default(),
     ...(NODE_ENV === 'production' ? [minify()] : []),
   ],
@@ -42,6 +39,7 @@ const input: InputOptions = {
 
 const output: OutputOptions = {
   name: 'globals',
+  inlineDynamicImports: true,
   file: path.join(__dirname, `../../frontend/assets/scripts/global-bundle.${NODE_ENV}.js`),
   globals: {
     react: 'React',
