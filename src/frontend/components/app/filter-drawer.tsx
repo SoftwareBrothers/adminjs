@@ -1,7 +1,7 @@
 import { Box, Button, Drawer, DrawerContent, DrawerFooter, H3, Icon } from '@adminjs/design-system'
 import isNil from 'lodash/isNil.js'
 import pickBy from 'lodash/pickBy.js'
-import React, { useEffect, useRef, useState } from 'react'
+import React, { FormEventHandler, useEffect, useRef, useState } from 'react'
 import { useParams } from 'react-router-dom'
 
 import allowOverride from '../../hoc/allow-override.js'
@@ -39,12 +39,12 @@ const FilterDrawer: React.FC<FilterProps> = (props) => {
     }
   }, [params.resourceId])
 
-  const handleSubmit = (event: SubmitEvent) => {
+  const handleSubmit: FormEventHandler<HTMLElement> = (event) => {
     event.preventDefault()
     storeParams({ filters: pickBy(filter, (v) => !isNil(v)), page: '1' })
   }
 
-  const handleReset = (event: SubmitEvent) => {
+  const handleReset: FormEventHandler<HTMLElement> = (event) => {
     event.preventDefault()
     clearParams('filters')
     setFilter({})
