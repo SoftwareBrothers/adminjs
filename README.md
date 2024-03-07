@@ -22,9 +22,9 @@ https://stats.adminjs.co
 - Check out the [documentation](https://docs.adminjs.co)
 - Try the [live demo](https://demo.adminjs.co) as mentioned above
 
-## Our open source community on Slack
+## Our open source community on Discord
 
-- [Join the community](https://adminjs.page.link/slack) to get help and be inspired.
+- [Join the community](https://adminjs.page.link/discord) to get help and be inspired.
 
 # What kind of problems it solves
 
