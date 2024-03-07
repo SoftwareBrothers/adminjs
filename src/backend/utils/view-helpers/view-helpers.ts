@@ -11,6 +11,10 @@ try {
   if (error.message !== 'window is not defined') {
     throw error
   }
+} finally {
+  if (!globalAny) {
+    globalAny = {}
+  }
 }
 
 /**
