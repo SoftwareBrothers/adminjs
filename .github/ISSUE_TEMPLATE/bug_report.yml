@@ -14,7 +14,7 @@ body:
     attributes:
       label: Contact Details
       description: How can we get in touch with you if we need more info?
-      placeholder: Please visit our slack channel [slack](https://adminjs.page.link/slack) or leave your email.
+      placeholder: Please visit our Discord channel [Discord](https://adminjs.page.link/discord) or leave your email.
     validations:
       required: false
   - type: textarea
