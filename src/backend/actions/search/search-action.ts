@@ -35,7 +35,7 @@ export const SearchAction: Action<SearchActionResponse> = {
 
     const {
       sortBy = decorated.options?.sort?.sortBy || titlePropertyName,
-      direction = 'asc',
+      direction = decorated.options?.sort?.direction || 'asc',
       filters: customFilters = {},
       perPage = 50,
       page = 1,
