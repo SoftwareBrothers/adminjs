@@ -12,6 +12,7 @@ import App, { OriginalApp } from './components/application.js'
 import { AppLoader } from './components/index.js'
 import Login from './components/login/index.js'
 import BasePropertyComponent, { CleanPropertyComponent } from './components/property-type/index.js'
+import * as PropertyComponentUtils from './components/property-type/utils/index.js'
 import withNotice from './hoc/with-notice.js'
 import * as Hooks from './hooks/index.js'
 import createStore from './store/store.js'
@@ -70,6 +71,7 @@ export default {
   BasePropertyComponent,
   CleanPropertyComponent,
   env,
+  ...PropertyComponentUtils,
   ...AppComponents,
   ...ActionComponents,
   ...Hooks,
