@@ -250,7 +250,7 @@ class ResourceDecorator {
 
     const properties = Object.values(this.properties)
     if (this.options.titleProperty) {
-      titleProperty = properties.find((p) => p.propertyPath === this.options.titleProperty)
+      titleProperty = this.getPropertyByKey(this.options.titleProperty)
     } else {
       titleProperty = properties.find((p) => p.isTitle())
     }
