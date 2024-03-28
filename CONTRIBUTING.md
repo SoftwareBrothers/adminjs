@@ -39,6 +39,12 @@ When a pull request contains a lot of commits without proper messages, we usuall
 When creating an issue please try to describe your problem with as many details as possible. If your issue is a complex one and would require us to reproduce this to respond, a test repository or a code sample which would allow us to reproduce your problem would be ideal.
 If possible, try to create issues by using our issues templates.
 
+### Translations
+
+You can contribute translations via the [fink localization editor](https://fink.inlang.com/github.com/SoftwareBrothers/adminjs).
+
+[![inlang status badge](https://badge.inlang.com/?url=github.com/SoftwareBrothers/adminjs)](https://fink.inlang.com/github.com/SoftwareBrothers/adminjs?ref=badge)
+
 ## Developing locally
 
 ### Basic example
