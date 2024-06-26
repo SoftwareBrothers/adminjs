@@ -39,6 +39,7 @@ const types: Record<PropertyType, any> = {
   date: datetime,
   richtext,
   string: defaultType,
+  'exact-string': defaultType,
   number: defaultType,
   float: defaultType,
   uuid: defaultType,
@@ -59,28 +60,35 @@ const types: Record<PropertyType, any> = {
 const BasePropertyComponent: React.FC<BasePropertyComponentProps> = (props) => {
   const { property: baseProperty, resource, record, filter, where, onChange } = props
 
-  const property: PropertyJSON = useMemo(() => ({
-    ...baseProperty,
-    // we fill the path if it is not there. That is why all the actual Component Renderers are
-    // called with the path set to this root path. Next mixed and array components adds to this
-    // path either index (for array) or subProperty name.
-    path: (baseProperty as PropertyJSON).path || baseProperty.propertyPath,
-  }), [baseProperty])
+  const property: PropertyJSON = useMemo(
+    () => ({
+      ...baseProperty,
+      // we fill the path if it is not there. That is why all the actual Component Renderers are
+      // called with the path set to this root path. Next mixed and array components adds to this
+      // path either index (for array) or subProperty name.
+      path: (baseProperty as PropertyJSON).path || baseProperty.propertyPath,
+    }),
+    [baseProperty],
+  )
 
   const testId = `property-${where}-${property.path}`
   const contentTag = getActionElementCss(resource.id, where, property.path)
 
-  let Component: ReactComponentLike = (types[property.type] && types[property.type][where])
-    || defaultType[where]
+  let Component: ReactComponentLike =
+    (types[property.type] && types[property.type][where]) || defaultType[where]
 
   if (property.components && property.components[where]) {
     const component = property.components[where]
     if (!component) {
       throw new Error(`there is no "${property.path}.components.${where}"`)
     }
-    Component = globalAny.AdminJS.UserComponents[component] ?? (() => {
-      throw new Error(`Component "${component}" has not been bundled, ensure it was added to your ComponentLoader instance (the one included in AdminJS options).`)
-    })
+    Component =
+      globalAny.AdminJS.UserComponents[component] ??
+      (() => {
+        throw new Error(
+          `Component "${component}" has not been bundled, ensure it was added to your ComponentLoader instance (the one included in AdminJS options).`,
+        )
+      })
     return (
       <ErrorBoundary>
         <Box data-css={contentTag} data-testid={testId}>
@@ -102,37 +110,27 @@ const BasePropertyComponent: React.FC<BasePropertyComponentProps> = (props) => {
   const KeyValue = KeyValueType[where]
 
   if (baseProperty.isArray) {
-    if (!Array) { return (<div />) }
+    if (!Array) {
+      return <div />
+    }
     return (
-      <Array
-        {...props}
-        property={property}
-        ItemComponent={BasePropertyComponent}
-        testId={testId}
-      />
+      <Array {...props} property={property} ItemComponent={BasePropertyComponent} testId={testId} />
     )
   }
 
   if (baseProperty.type === 'key-value') {
-    if (!KeyValue) { return (<div />) }
-    return (
-      <KeyValue
-        {...props}
-        property={property}
-        testId={testId}
-      />
-    )
+    if (!KeyValue) {
+      return <div />
+    }
+    return <KeyValue {...props} property={property} testId={testId} />
   }
 
   if (baseProperty.type === 'mixed') {
-    if (!Mixed) { return (<div />) }
+    if (!Mixed) {
+      return <div />
+    }
     return (
-      <Mixed
-        {...props}
-        property={property}
-        ItemComponent={BasePropertyComponent}
-        testId={testId}
-      />
+      <Mixed {...props} property={property} ItemComponent={BasePropertyComponent} testId={testId} />
     )
   }
 
@@ -151,7 +149,4 @@ const BasePropertyComponent: React.FC<BasePropertyComponentProps> = (props) => {
     </ErrorBoundary>
   )
 }
-export {
-  BasePropertyComponent as default,
-  BasePropertyComponent,
-}
+export { BasePropertyComponent as default, BasePropertyComponent }
