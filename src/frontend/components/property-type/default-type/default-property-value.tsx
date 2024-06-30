@@ -12,7 +12,7 @@ const DefaultPropertyValue: FC<ShowPropertyProps> = ({
   resource: { id: resourceId },
 }) => {
   const rawValue = record?.params[path]
-  const { translateProperty } = useTranslation()
+  const { tl } = useTranslation()
 
   if (typeof rawValue === 'undefined') return null
 
@@ -23,7 +23,7 @@ const DefaultPropertyValue: FC<ShowPropertyProps> = ({
     const label = option.label || rawValue
     return (
       <Badge>
-        {translateProperty(`${propertyPath}.${label}`, resourceId, {
+        {tl(`${propertyPath}.${label}`, resourceId, {
           defaultValue: startCase(label),
         })}
       </Badge>
