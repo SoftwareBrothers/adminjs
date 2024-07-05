@@ -6,6 +6,7 @@ import { EditPropertyProps } from '../base-property-props.js'
 import { recordPropertyIsEqual } from '../record-property-is-equal.js'
 import { PropertyLabel } from '../utils/property-label/index.js'
 import allowOverride from '../../../hoc/allow-override.js'
+import { useTranslation } from '../../../hooks/index.js'
 
 const Edit: React.FC<EditPropertyProps> = (props) => {
   const { property, record, onChange } = props
@@ -13,6 +14,7 @@ const Edit: React.FC<EditPropertyProps> = (props) => {
   const [value, setValue] = useState(propValue)
   const error = record.errors && record.errors[property.path]
   const [isInput, setIsInput] = useState(false)
+  const { tm } = useTranslation()
 
   useEffect(() => {
     if (value !== propValue) {
@@ -44,7 +46,7 @@ const Edit: React.FC<EditPropertyProps> = (props) => {
           <Icon icon="Eye" />
         </Button>
       </InputGroup>
-      <FormMessage>{error && error.message}</FormMessage>
+      <FormMessage>{error && tm(error.message, property.resourceId)}</FormMessage>
     </FormGroup>
   )
 }

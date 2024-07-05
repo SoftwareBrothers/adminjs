@@ -13,12 +13,13 @@ type CombinedProps = EditPropertyProps
 const Edit: FC<CombinedProps> = (props) => {
   const { property, record } = props
   const error = record.errors?.[property.path]
+  const { tm } = useTranslation()
 
   return (
     <FormGroup error={Boolean(error)}>
       <PropertyLabel property={property} />
       {property.availableValues ? <SelectEdit {...props} /> : <TextEdit {...props} />}
-      <FormMessage>{error && error.message}</FormMessage>
+      <FormMessage>{error && tm(error.message, property.resourceId)}</FormMessage>
     </FormGroup>
   )
 }

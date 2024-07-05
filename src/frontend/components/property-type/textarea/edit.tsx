@@ -6,12 +6,14 @@ import { EditPropertyProps } from '../base-property-props.js'
 import { recordPropertyIsEqual } from '../record-property-is-equal.js'
 import { PropertyLabel } from '../utils/property-label/index.js'
 import allowOverride from '../../../hoc/allow-override.js'
+import { useTranslation } from '../../../hooks/index.js'
 
 const Edit: FC<EditPropertyProps> = (props) => {
   const { onChange, property, record } = props
   const propValue = record.params?.[property.path] ?? ''
   const [value, setValue] = useState(propValue)
   const error = record.errors?.[property.path]
+  const { tm } = useTranslation()
 
   useEffect(() => {
     if (value !== propValue) {
@@ -33,7 +35,7 @@ const Edit: FC<EditPropertyProps> = (props) => {
         disabled={property.isDisabled}
         {...property.props}
       />
-      <FormMessage>{error && error.message}</FormMessage>
+      <FormMessage>{error && tm(error.message, property.resourceId)}</FormMessage>
     </FormGroup>
   )
 }

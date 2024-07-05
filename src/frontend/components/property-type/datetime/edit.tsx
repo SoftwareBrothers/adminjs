@@ -5,11 +5,13 @@ import { EditPropertyProps } from '../base-property-props.js'
 import { recordPropertyIsEqual } from '../record-property-is-equal.js'
 import { PropertyLabel } from '../utils/property-label/index.js'
 import allowOverride from '../../../hoc/allow-override.js'
+import { useTranslation } from '../../../hooks/index.js'
 
 const Edit: React.FC<EditPropertyProps> = (props) => {
   const { property, onChange, record } = props
   const value = (record.params && record.params[property.path]) || ''
   const error = record.errors && record.errors[property.path]
+  const { tm } = useTranslation()
 
   return (
     <FormGroup error={!!error}>
@@ -21,7 +23,7 @@ const Edit: React.FC<EditPropertyProps> = (props) => {
         propertyType={property.type}
         {...property.props}
       />
-      <FormMessage>{error && error.message}</FormMessage>
+      <FormMessage>{error && tm(error.message, property.resourceId)}</FormMessage>
     </FormGroup>
   )
 }

@@ -44,7 +44,7 @@ const EditKeyValuePair: React.FC<EditKeyValuePairProps> = (props) => {
             value={currentKey}
             {...(property.props?.keyInputProps ?? {})}
           />
-          {error && <FormMessage>{error.message}</FormMessage>}
+          {error && <FormMessage>{tm(error.message, property.resourceId)}</FormMessage>}
         </FormGroup>
         <FormGroup mb="0px">
           <Input
@@ -171,7 +171,7 @@ const Edit: React.FC<EditPropertyProps> = (props) => {
           {tb('addNewItem', resource.id)}
         </Button>
       </Section>
-      <FormMessage>{error && error.message}</FormMessage>
+      <FormMessage>{error && tm(error.message, property.resourceId)}</FormMessage>
     </FormGroup>
   )
 }
