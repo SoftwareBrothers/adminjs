@@ -5,6 +5,7 @@ import { EditPropertyProps } from '../base-property-props.js'
 import { recordPropertyIsEqual } from '../record-property-is-equal.js'
 import { PropertyLabel } from '../utils/property-label/index.js'
 import allowOverride from '../../../hoc/allow-override.js'
+import { useTranslation } from '../../../hooks/index.js'
 
 const parseValue = (value): boolean => !(!value || value === 'false')
 
@@ -12,6 +13,7 @@ const Edit: React.FC<EditPropertyProps> = (props) => {
   const { property, onChange, record } = props
   const value = parseValue(record.params && record.params[property.path])
   const error = record.errors && record.errors[property.path]
+  const { tm } = useTranslation()
 
   const handleChange = (): void => {
     if (!property.isDisabled) {
@@ -30,7 +32,7 @@ const Edit: React.FC<EditPropertyProps> = (props) => {
         {...property.props}
       />
       <PropertyLabel property={property} props={{ inline: true }} />
-      <FormMessage>{error && error.message}</FormMessage>
+      <FormMessage>{error && tm(error.message, property.resourceId)}</FormMessage>
     </FormGroup>
   )
 }
