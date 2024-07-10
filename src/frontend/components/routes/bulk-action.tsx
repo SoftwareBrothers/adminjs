@@ -17,6 +17,7 @@ import {
 } from '../app/index.js'
 import { useTranslation, useNotice, useResource } from '../../hooks/index.js'
 import allowOverride from '../../hoc/allow-override.js'
+import { getDataCss } from '../../index.js'
 
 type MatchParams = Pick<BulkActionParams, 'actionName' | 'resourceId'>
 
@@ -97,10 +98,13 @@ const BulkAction: React.FC = () => {
     return <NoActionError resourceId={resourceId!} actionName={actionName!} />
   }
 
+  const routeWrapperCss = getDataCss(resource.id, action.actionType, action.name, 'route-wrapper')
+  const routeActionCss = getDataCss(resource.id, action.actionType, action.name, 'route')
+
   if (action.showInDrawer) {
     if (!listAction) {
       return (
-        <DrawerPortal width={action.containerWidth}>
+        <DrawerPortal width={action.containerWidth} data-css={routeActionCss}>
           <BaseActionComponent
             action={action as ActionJSON}
             resource={resource}
@@ -116,7 +120,7 @@ const BulkAction: React.FC = () => {
 
     return (
       <>
-        <DrawerPortal width={action.containerWidth}>
+        <DrawerPortal width={action.containerWidth} data-css={routeActionCss}>
           <BaseActionComponent
             action={action as ActionJSON}
             resource={resource}
@@ -124,7 +128,7 @@ const BulkAction: React.FC = () => {
             setTag={setTag}
           />
         </DrawerPortal>
-        <Wrapper width={listAction.containerWidth}>
+        <Wrapper width={listAction.containerWidth} data-css={routeWrapperCss}>
           <ActionHeader
             resource={resource}
             action={listAction}
@@ -138,7 +142,7 @@ const BulkAction: React.FC = () => {
   }
 
   return (
-    <Wrapper width={action.containerWidth}>
+    <Wrapper width={action.containerWidth} data-css={routeWrapperCss}>
       {!action?.showInDrawer ? <ActionHeader resource={resource} action={action} tag={tag} /> : ''}
       <BaseActionComponent
         action={action as ActionJSON}

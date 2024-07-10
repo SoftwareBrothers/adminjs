@@ -13,7 +13,7 @@ import { NoActionError, NoResourceError } from '../app/error-message.js'
 import FilterDrawer from '../app/filter-drawer.js'
 import { ActionHeader } from '../app/index.js'
 import Wrapper from './utils/wrapper.js'
-import { getResourceElementCss } from '../../utils/data-css-name.js'
+import { getDataCss, getResourceElementCss } from '../../utils/data-css-name.js'
 
 type PropsFromState = {
   resources: Array<ResourceJSON>
@@ -42,11 +42,12 @@ const ResourceAction: React.FC<Props> = (props) => {
   const listAction = resource.resourceActions.find((r) => r.name === listActionName)
 
   const contentTag = getResourceElementCss(resource.id, action.name)
+  const routeActionCss = getDataCss(resource.id, action.actionType, action.name, 'route')
 
   if (action.showInDrawer) {
     if (!listAction) {
       return (
-        <DrawerPortal width={action.containerWidth}>
+        <DrawerPortal width={action.containerWidth} data-css={routeActionCss}>
           <BaseActionComponent action={action} resource={resource} />
         </DrawerPortal>
       )
@@ -58,14 +59,14 @@ const ResourceAction: React.FC<Props> = (props) => {
 
     return (
       <>
-        <DrawerPortal width={action.containerWidth}>
+        <DrawerPortal width={action.containerWidth} data-css={routeActionCss}>
           <BaseActionComponent
             action={action}
             resource={resource}
             setTag={setTag}
           />
         </DrawerPortal>
-        <Wrapper width={listAction.containerWidth}>
+        <Wrapper width={listAction.containerWidth} data-css={contentTag}>
           <ActionHeader
             resource={resource}
             action={listAction}

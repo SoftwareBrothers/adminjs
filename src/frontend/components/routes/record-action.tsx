@@ -15,6 +15,7 @@ import DrawerPortal from '../app/drawer-portal.js'
 import { ActionResponse, RecordActionResponse } from '../../../backend/actions/action.interface.js'
 import mergeRecordResponse from '../../hooks/use-record/merge-record-response.js'
 import allowOverride from '../../hoc/allow-override.js'
+import { getDataCss } from '../../index.js'
 
 const api = new ApiClient()
 
@@ -116,10 +117,13 @@ const RecordAction: React.FC = () => {
     return <NoRecordError resourceId={resourceId!} recordId={recordId!} />
   }
 
+  const routeWrapperCss = getDataCss(resource.id, action.actionType, action.name, 'route-wrapper')
+  const routeActionCss = getDataCss(resource.id, action.actionType, action.name, 'route')
+
   if (action.showInDrawer) {
     if (!listAction) {
       return (
-        <DrawerPortal width={action.containerWidth}>
+        <DrawerPortal width={action.containerWidth} data-css={routeActionCss}>
           <BaseActionComponent action={action as ActionJSON} resource={resource} record={record} />
         </DrawerPortal>
       )
@@ -131,10 +135,10 @@ const RecordAction: React.FC = () => {
 
     return (
       <>
-        <DrawerPortal width={action.containerWidth}>
+        <DrawerPortal width={action.containerWidth} data-css={routeActionCss}>
           <BaseActionComponent action={action as ActionJSON} resource={resource} record={record} />
         </DrawerPortal>
-        <Wrapper width={listAction.containerWidth}>
+        <Wrapper width={listAction.containerWidth} data-css={routeWrapperCss}>
           <ActionHeader
             resource={resource}
             action={listAction}
@@ -148,7 +152,7 @@ const RecordAction: React.FC = () => {
   }
 
   return (
-    <Wrapper width={action.containerWidth}>
+    <Wrapper width={action.containerWidth} data-css={routeWrapperCss}>
       <ActionHeader
         resource={resource}
         action={action}
