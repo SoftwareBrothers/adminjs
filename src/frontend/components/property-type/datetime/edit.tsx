@@ -23,7 +23,7 @@ const Edit: React.FC<EditPropertyProps> = (props) => {
         value={value}
         disabled={property.isDisabled}
         onChange={(date) => {
-          onChange(property.path, date?.substring(0, 10) ?? date)
+          onChange(property.path, property.type === 'date' ? date?.substring(0, 10) ?? date : date)
         }}
         propertyType={property.type}
         {...property.props}
