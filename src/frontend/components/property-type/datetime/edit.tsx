@@ -8,7 +8,10 @@ import allowOverride from '../../../hoc/allow-override.js'
 import { useTranslation } from '../../../hooks/index.js'
 import { PropertyType } from '../../../../backend/index.js'
 
-const formatDate = (val:any, propertyType: PropertyType) => (propertyType === 'date' ? `${val}T00:00:00` : val)
+const formatDate = (val:string|null, propertyType: PropertyType) => {
+  if (val) return (propertyType === 'date' ? `${val}T00:00:00` : val)
+  return ''
+}
 
 const Edit: React.FC<EditPropertyProps> = (props) => {
   const { property, onChange, record } = props
