@@ -6,10 +6,16 @@ import { recordPropertyIsEqual } from '../record-property-is-equal.js'
 import { PropertyLabel } from '../utils/property-label/index.js'
 import allowOverride from '../../../hoc/allow-override.js'
 import { useTranslation } from '../../../hooks/index.js'
+import { PropertyType } from '../../../../backend/index.js'
+
+const formatDate = (val:string|null, propertyType: PropertyType) => {
+  if (val) return (propertyType === 'date' ? `${val}T00:00:00` : val)
+  return ''
+}
 
 const Edit: React.FC<EditPropertyProps> = (props) => {
   const { property, onChange, record } = props
-  const value = (record.params && record.params[property.path]) || ''
+  const value = record.params ? formatDate(record.params[property.path], property.type) : ''
   const error = record.errors && record.errors[property.path]
   const { tm } = useTranslation()
 
@@ -19,7 +25,9 @@ const Edit: React.FC<EditPropertyProps> = (props) => {
       <DatePicker
         value={value}
         disabled={property.isDisabled}
-        onChange={(date) => onChange(property.path, date)}
+        onChange={(date) => {
+          onChange(property.path, property.type === 'date' ? date?.substring(0, 10) ?? date : date)
+        }}
         propertyType={property.type}
         {...property.props}
       />
