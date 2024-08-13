@@ -7,10 +7,14 @@ import { PropertyLabel } from '../utils/property-label/index.js'
 import allowOverride from '../../../hoc/allow-override.js'
 import { useTranslation } from '../../../hooks/index.js'
 import { PropertyType } from '../../../../backend/index.js'
+import { stripTimeFromISO } from './strip-time-from-iso.js'
 
-const formatDate = (val:string|null, propertyType: PropertyType) => {
-  if (val) return (propertyType === 'date' ? `${val}T00:00:00` : val)
-  return ''
+const formatDate = (date: string | Date | null, propertyType: PropertyType) => {
+  if (!date) return ''
+
+  if (propertyType !== 'date') return date
+
+  return `${stripTimeFromISO(date)}T00:00:00`
 }
 
 const Edit: React.FC<EditPropertyProps> = (props) => {
@@ -26,7 +30,10 @@ const Edit: React.FC<EditPropertyProps> = (props) => {
         value={value}
         disabled={property.isDisabled}
         onChange={(date) => {
-          onChange(property.path, property.type === 'date' ? date?.substring(0, 10) ?? date : date)
+          onChange(
+            property.path,
+            property.type === 'date' ? stripTimeFromISO(date) ?? date : date,
+          )
         }}
         propertyType={property.type}
         {...property.props}
