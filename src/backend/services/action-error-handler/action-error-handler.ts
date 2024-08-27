@@ -51,6 +51,12 @@ const actionErrorHandler = (
 
     const recordJson = record?.toJSON?.(currentAdmin)
 
+    if (error instanceof ForbiddenError && recordJson) {
+      recordJson.params = {}
+      recordJson.title = ''
+      recordJson.populated = {}
+    }
+
     notice = {
       message: baseMessage,
       type: 'error',
