@@ -2,7 +2,7 @@
   "actions": {
     "new": "Crear nuevo",
     "edit": "Editar",
-    "show": "Espectáculo",
+    "show": "Mostrar",
     "delete": "Borrar",
     "bulkDelete": "Eliminar todos",
     "list": "Lista"
@@ -21,7 +21,8 @@
     "seeTheDocumentation": "Ver: <1>la documentación</1>",
     "createFirstRecord": "Crear primer registro",
     "cancel": "Cancelar",
-    "confirm": "Confirmar"
+    "confirm": "Confirmar",
+    "contactUs": "Contáctanos"
   },
   "components": {
     "DropZone": {
@@ -51,27 +52,28 @@
         "email": "Correo electrónico",
         "password": "Contraseña"
       },
-      "loginButton": "Conectarse"
+      "loginButton": "Ingresar"
     }
   },
   "labels": {
     "navigation": "Navegación",
-    "pages": "Paginas",
+    "pages": "Páginas",
     "selectedRecords": "Seleccionado ({{selected}})",
-    "filters": "filtros",
+    "filters": "Filtros",
     "adminVersion": "Administración: {{version}}",
-    "appVersion": "aplicación: {{version}}",
+    "appVersion": "Aplicación: {{version}}",
     "dashboard": "Panel"
   },
   "properties": {
     "length": "Longitud",
     "from": "De",
-    "to": "A"
+    "to": "A",
+    "email": "Correo Electrónico",
+    "password": "Contraseña"
   },
-  "resources": {},
   "messages": {
-    "successfullyBulkDeleted": "eliminado con éxito {{count}} registro",
-    "successfullyBulkDeleted_plural": "eliminado con éxito {{count}} registros",
+    "successfullyBulkDeleted": "Eliminado con éxito {{count}} registro(s)",
+    "successfullyBulkDeleted_plural": "Eliminado con éxito {{count}} registro(s)",
     "successfullyDeleted": "Registro dado eliminado con éxito",
     "successfullyUpdated": "Registro dado actualizado con éxito",
     "thereWereValidationErrors": "Hay errores de validación. Compruébelos a continuación.",

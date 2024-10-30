@@ -20,9 +20,9 @@
     "login": "Увійти",
     "seeTheDocumentation": "Дивіться: <1>документація</1>",
     "createFirstRecord": "Створити перший запис",
-    "contactUs": "Зв'язатися з нами",
     "cancel": "Cкасувати",
-    "confirm": "Підтвердити"
+    "confirm": "Підтвердити",
+    "contactUs": "Зв'язатися з нами"
   },
   "components": {
     "DropZone": {
@@ -71,7 +71,6 @@
     "email": "Електронна пошта",
     "password": "Пароль"
   },
-  "resources": {},
   "messages": {
     "successfullyBulkDeleted": "Успішно видалено {{count}} запис",
     "successfullyBulkDeleted_plural": "Успішно видалено {{count}} записів",

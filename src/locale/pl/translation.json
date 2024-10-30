@@ -23,20 +23,6 @@
     "cancel": "Anuluj",
     "confirm": "Potwierdź"
   },
-
-  "labels": {
-    "navigation": "Nawigacja",
-    "pages": "Strony",
-    "selectedRecords": "Wybrano ({{selected}})",
-    "filters": "Filtry",
-    "adminVersion": "Admin: {{version}}",
-    "appVersion": "Aplikacja: {{version}}"
-  },
-  "properties": {
-    "length": "Długość",
-    "from": "Od",
-    "to": "Do"
-  },
   "components": {
     "DropZone": {
       "placeholder": "Przeciągnij plik tutaj lub kliknij aby wybrać",
@@ -68,7 +54,19 @@
       "loginButton": "Zaloguj"
     }
   },
-  "resources": {},
+  "labels": {
+    "navigation": "Nawigacja",
+    "pages": "Strony",
+    "selectedRecords": "Wybrano ({{selected}})",
+    "filters": "Filtry",
+    "adminVersion": "Admin: {{version}}",
+    "appVersion": "Aplikacja: {{version}}"
+  },
+  "properties": {
+    "length": "Długość",
+    "from": "Od",
+    "to": "Do"
+  },
   "messages": {
     "successfullyBulkDeleted": "Poprawnie usunięto {{count}} rekordów",
     "successfullyBulkDeleted_plural": "Poprawnie usunięto {{count}} rekordów",
