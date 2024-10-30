@@ -21,6 +21,15 @@
     "seeTheDocumentation": "参见: <1>文档</1>",
     "createFirstRecord": "创建第一个记录"
   },
+  "labels": {
+    "navigation": "导航",
+    "pages": "页面",
+    "selectedRecords": "已选中 ({{selected}})",
+    "filters": "筛选器",
+    "adminVersion": "Admin: {{version}}",
+    "appVersion": "App: {{version}}",
+    "dashboard": "仪表板"
+  },
   "components": {
     "LanguageSelector": {
       "availableLanguages": {
@@ -45,20 +54,12 @@
       "loginButton": "登录"
     }
   },
-  "labels": {
-    "navigation": "导航",
-    "pages": "页面",
-    "selectedRecords": "已选中 ({{selected}})",
-    "filters": "筛选器",
-    "adminVersion": "Admin: {{version}}",
-    "appVersion": "App: {{version}}",
-    "dashboard": "仪表板"
-  },
   "properties": {
     "length": "长度",
     "from": "从",
     "to": "到"
   },
+  "resources": {},
   "messages": {
     "successfullyBulkDeleted": "成功移除了 {{count}} 条记录",
     "successfullyBulkDeleted_plural": "成功移除了 {{count}} 条记录",

@@ -67,10 +67,9 @@
   "properties": {
     "length": "Length",
     "from": "From",
-    "to": "To",
-    "email": "Email",
-    "password": "Password"
+    "to": "To"
   },
+  "resources": {},
   "messages": {
     "successfullyBulkDeleted": "Successfully removed {{count}} record",
     "successfullyBulkDeleted_plural": "Successfully removed {{count}} records",

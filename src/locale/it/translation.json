@@ -68,6 +68,7 @@
     "from": "Da",
     "to": "A"
   },
+  "resources": {},
   "messages": {
     "successfullyBulkDeleted": "Rimossi con successo {{count}} Elementi",
     "successfullyBulkDeleted_plural": "Rimossi con successo {{count}} Elementi",

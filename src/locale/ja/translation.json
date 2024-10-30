@@ -68,6 +68,7 @@
     "from": "から",
     "to": "まで"
   },
+  "resources": {},
   "messages": {
     "successfullyBulkDeleted": "{{count}} 件のレコードを正常に削除しました",
     "successfullyBulkDeleted_plural": "{{count}} 件のレコードを正常に削除しました",

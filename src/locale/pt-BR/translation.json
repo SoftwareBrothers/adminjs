@@ -66,6 +66,7 @@
     "from": "De",
     "to": "Até"
   },
+  "resources": {},
   "messages": {
     "successfullyBulkDeleted": "{{count}} registro removido com sucesso",
     "successfullyBulkDeleted_plural": "{{count}} registros removidos com sucesso",
