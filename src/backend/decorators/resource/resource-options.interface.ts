@@ -67,6 +67,10 @@ export interface ResourceOptions {
    */
   editProperties?: Array<string>;
   /**
+   * List of properties which should be visible on new view
+   */
+  newProperties?: Array<string>;
+  /**
    * List of properties which should be visible on the filter
    */
   filterProperties?: Array<string>;

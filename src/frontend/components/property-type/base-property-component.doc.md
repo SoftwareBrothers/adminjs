@@ -84,6 +84,7 @@ const resource = {
   resourceActions: [],
   listProperties: [booleanProperty, stringProperty],
   editProperties: [booleanProperty, stringProperty],
+  newProperties: [booleanProperty, stringProperty],
   showProperties: [booleanProperty, stringProperty],
   filterProperties: [booleanProperty, stringProperty],
 }
