@@ -71,7 +71,7 @@ export type BasePropertyProps = {
    */
   filter?: any;
   /**
-   * Where given property should be rendered. Either of 'show' | 'list' | 'edit' | 'filter'.
+   * Where given property should be rendered. Either of 'show' | 'list' | 'edit' | 'new' | 'filter'.
    */
   where: PropertyPlace;
 }
