@@ -1,6 +1,6 @@
 {
   "name": "adminjs",
-  "version": "7.8.14",
+  "version": "7.8.15",
   "description": "Admin panel for apps written in node.js",
   "type": "module",
   "exports": {
