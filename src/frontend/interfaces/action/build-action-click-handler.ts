@@ -50,6 +50,7 @@ export const buildActionClickHandler = (
             variant: 'danger',
             label: 'confirm',
             title: action.guard,
+            subTitle: '',
           },
           type: 'confirm',
           resourceId: params.resourceId,
