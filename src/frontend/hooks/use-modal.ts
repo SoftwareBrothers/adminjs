@@ -52,9 +52,9 @@ export const useModal = (): ModalFunctions => {
     const data: ModalData = {
       modalProps: {
         ...modalProps,
-        label: translateLabel(modalProps.label || getDefaultTranslationKey('label'), resourceId),
-        title: translateMessage(modalProps.title || getDefaultTranslationKey('title'), resourceId),
-        subTitle: translateMessage(modalProps.subTitle || getDefaultTranslationKey('subTitle'), resourceId),
+        label: translateLabel(modalProps.label ?? getDefaultTranslationKey('label'), resourceId),
+        title: translateMessage(modalProps.title ?? getDefaultTranslationKey('title'), resourceId),
+        subTitle: translateMessage(modalProps.subTitle ?? getDefaultTranslationKey('subTitle'), resourceId),
         variant: modalProps.variant,
         buttons,
         onClose: modalProps.onClose || closeModal,
