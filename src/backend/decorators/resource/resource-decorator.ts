@@ -135,7 +135,7 @@ class ResourceDecorator {
    * Returns list of all properties which will be visible in given place (where)
    *
    * @param   {Object}  options
-   * @param   {String}  options.where   one of: 'list', 'show', 'edit', 'filter'
+   * @param   {String}  options.where   one of: 'list', 'show', 'edit', 'new', 'filter'
    * @param   {String}  [options.max]   maximum number of properties returned where there are
    *                                    no overrides in the options
    *
@@ -318,6 +318,9 @@ class ResourceDecorator {
       editProperties: this.getProperties({
         where: 'edit',
       }).map((property) => property.toJSON('edit')),
+      newProperties: this.getProperties({
+        where: 'new',
+      }).map((property) => property.toJSON('new')),
       showProperties: this.getProperties({
         where: 'show',
       }).map((property) => property.toJSON('show')),
