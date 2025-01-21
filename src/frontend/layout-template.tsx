@@ -123,7 +123,7 @@ const html = async (admin: AdminJS, currentAdmin?: CurrentAdmin, location = '/')
       ${selectedTheme ? `<link rel="stylesheet" type="text/css" href="${h.assetPath(`themes/${selectedTheme.id}/style.css`, assets)}">` : ''}
     </head>
     <body>
-      <div id="app" />
+      <div id="app"></div>
       <script>
         var app = document.getElementById('app');
         var root = createRoot(app)
