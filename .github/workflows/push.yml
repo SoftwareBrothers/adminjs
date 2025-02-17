@@ -57,7 +57,7 @@ jobs:
           contains(github.ref, 'refs/heads/master')
           || contains(github.ref, 'refs/heads/beta-v7')
           || contains(github.ref, 'refs/heads/beta')
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: lib
           path: lib
@@ -66,7 +66,7 @@ jobs:
           contains(github.ref, 'refs/heads/master')
           || contains(github.ref, 'refs/heads/beta-v7')
           || contains(github.ref, 'refs/heads/beta')
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: types
           path: types
@@ -75,7 +75,7 @@ jobs:
           contains(github.ref, 'refs/heads/master')
           || contains(github.ref, 'refs/heads/beta-v7')
           || contains(github.ref, 'refs/heads/beta')
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: bundle
           path: lib/frontend/assets/scripts
@@ -139,17 +139,17 @@ jobs:
       - name: Install
         run: yarn install
       - name: Download Build
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: lib
           path: lib
       - name: Download Types
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: types
           path: types
       - name: Download Bundle
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: bundle
           path: bundle
