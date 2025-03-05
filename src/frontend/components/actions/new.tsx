@@ -90,7 +90,7 @@ const New: FC<ActionProps> = (props) => {
           : resource.newProperties.map((property) => (
             <BasePropertyComponent
               key={property.propertyPath}
-              where="edit"
+              where="new"
               onChange={handleChange}
               property={property}
               resource={resource}
