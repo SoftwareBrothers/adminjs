@@ -15,6 +15,13 @@ const Filter: React.FC<FilterPropertyProps> = (props) => {
   const [input, setInput] = useState('')
   const { tl } = useTranslation()
 
+  const possibleKeys = [
+    property.path,
+    `${property.path}${PARAM_SEPARATOR}equal`,
+    `${property.path}${PARAM_SEPARATOR}startsWith`,
+    `${property.path}${PARAM_SEPARATOR}endsWith`,
+  ]
+
   const handleInputInComboChange = (event) => {
     if(operator.value === 'contains') {
       onChange(property.path, event.target.value)  
@@ -31,18 +38,20 @@ const Filter: React.FC<FilterPropertyProps> = (props) => {
   }
 
   const handleSelectInComboChange = (selected) => {
-    if(selected.value === 'contains') {
-      onChange(property.path, input)  
-    } else {
-      const key = `${property.path}${PARAM_SEPARATOR}${selected.value}`
-      onChange(key, input)  
-    }
+    const currentKey = (selected.value !== 'contains') ? `${property.path}${PARAM_SEPARATOR}${selected.value}` : property.path
+    onChange(currentKey, input)
+
     setOperator(selected)
   }
 
   const renderInput = () => {
     const operatorValue = operator.value
     const valueKey = operatorValue === 'contains'?property.path:`${property.path}${PARAM_SEPARATOR}${operatorValue}`
+    possibleKeys.forEach((key) => {
+      if (key !== valueKey) {
+        delete filter[key]
+      }
+    })
     const filterKey = `filter-${valueKey}`
     const value = filter[valueKey] || ''
     if (property.availableValues) {
