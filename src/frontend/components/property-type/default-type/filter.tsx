@@ -12,6 +12,7 @@ const { PARAM_SEPARATOR } = BackendFilter
 const Filter: React.FC<FilterPropertyProps> = (props) => {
   const { property, onChange, filter } = props
   const [operator, setOperator] = useState({label: 'contains', value: 'contains'})
+  const [input, setInput] = useState('')
   const { tl } = useTranslation()
 
   const handleInputInComboChange = (event) => {
@@ -21,6 +22,7 @@ const Filter: React.FC<FilterPropertyProps> = (props) => {
       const key = `${property.path}${PARAM_SEPARATOR}${operator.value}`
       onChange(key, event.target.value)  
     }
+    setInput(event.target.value)
   }
 
   const handleSelectChange = (selected) => {
@@ -29,6 +31,12 @@ const Filter: React.FC<FilterPropertyProps> = (props) => {
   }
 
   const handleSelectInComboChange = (selected) => {
+    if(selected.value === 'contains') {
+      onChange(property.path, input)  
+    } else {
+      const key = `${property.path}${PARAM_SEPARATOR}${selected.value}`
+      onChange(key, input)  
+    }
     setOperator(selected)
   }
 
@@ -62,7 +70,7 @@ const Filter: React.FC<FilterPropertyProps> = (props) => {
       <Input
           name={filterKey}
           onChange={handleInputInComboChange}
-          value={value}
+          value={input}
         />
       </Box>
       <Box flexShrink={0}>
