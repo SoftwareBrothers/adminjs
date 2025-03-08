@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { Box, FormGroup, Input, Select } from '@adminjs/design-system'
 
 import allowOverride from '../../../hoc/allow-override.js'
@@ -11,25 +11,28 @@ const { PARAM_SEPARATOR } = BackendFilter
 
 const Filter: React.FC<FilterPropertyProps> = (props) => {
   const { property, onChange, filter } = props
-  const [operator, setOperator] = useState({label: 'contains', value: 'contains'})
-  const [input, setInput] = useState('')
-  const { tl } = useTranslation()
 
   const possibleKeys = [
     property.path,
-    `${property.path}${PARAM_SEPARATOR}equal`,
+    `${property.path}${PARAM_SEPARATOR}equals`,
     `${property.path}${PARAM_SEPARATOR}startsWith`,
     `${property.path}${PARAM_SEPARATOR}endsWith`,
   ]
 
+  const [currentKey, currentInput] = Object.entries(filter).find(
+    ([key]) => possibleKeys.includes(key),
+  ) || []
+  const currentOperator = (currentKey ? currentKey.split(PARAM_SEPARATOR)[1] : 'contains') || 'contains'
+
+  const { tl } = useTranslation()
+
   const handleInputInComboChange = (event) => {
-    if(operator.value === 'contains') {
-      onChange(property.path, event.target.value)  
+    if (currentOperator === 'contains') {
+      onChange(property.path, event.target.value)
     } else {
-      const key = `${property.path}${PARAM_SEPARATOR}${operator.value}`
-      onChange(key, event.target.value)  
+      const key = `${property.path}${PARAM_SEPARATOR}${currentOperator}`
+      onChange(key, event.target.value)
     }
-    setInput(event.target.value)
   }
 
   const handleSelectChange = (selected) => {
@@ -38,20 +41,19 @@ const Filter: React.FC<FilterPropertyProps> = (props) => {
   }
 
   const handleSelectInComboChange = (selected) => {
-    const currentKey = (selected.value !== 'contains') ? `${property.path}${PARAM_SEPARATOR}${selected.value}` : property.path
-    onChange(currentKey, input)
+    const changedKey = ((selected?.value || 'contains') !== 'contains') ? `${property.path}${PARAM_SEPARATOR}${selected.value}` : property.path
 
-    setOperator(selected)
-  }
-
-  const renderInput = () => {
-    const operatorValue = operator.value
-    const valueKey = operatorValue === 'contains'?property.path:`${property.path}${PARAM_SEPARATOR}${operatorValue}`
     possibleKeys.forEach((key) => {
-      if (key !== valueKey) {
+      if (key !== changedKey) {
         delete filter[key]
       }
     })
+    onChange(changedKey, currentInput || '')
+  }
+
+  const renderInput = () => {
+    const valueKey = currentOperator === 'contains' ? property.path : `${property.path}${PARAM_SEPARATOR}${currentOperator}`
+
     const filterKey = `filter-${valueKey}`
     const value = filter[valueKey] || ''
     if (property.availableValues) {
@@ -73,40 +75,41 @@ const Filter: React.FC<FilterPropertyProps> = (props) => {
       )
     }
 
+    const operator = { label: currentOperator, value: currentOperator }
     return (
       <Box variant="white" flex flexDirection="row">
-      <Box flexShrink={0}>
-      <Input
-          name={filterKey}
-          onChange={handleInputInComboChange}
-          value={input}
-        />
+        <Box flexShrink={0}>
+          <Input
+            name={filterKey}
+            onChange={handleInputInComboChange}
+            value={filter[currentKey || property.path] || ''}
+          />
+        </Box>
+        <Box flexShrink={0}>
+          <Select
+            value={operator}
+            options={[
+              {
+                label: 'contains',
+                value: 'contains',
+              },
+              {
+                label: 'equals',
+                value: 'equals',
+              },
+              {
+                label: 'startsWith',
+                value: 'startsWith',
+              },
+              {
+                label: 'endsWith',
+                value: 'endsWith',
+              },
+            ]}
+            onChange={handleSelectInComboChange}
+          />
+        </Box>
       </Box>
-      <Box flexShrink={0}>
-      <Select
-          value={operator}
-          options={[
-            {
-              label: 'contains',
-              value: 'contains'
-            },
-            {
-              label: 'equal',
-              value: 'equal'
-            },
-            {
-              label: 'startsWith',
-              value: 'startsWith'
-            },
-            {
-              label: 'endsWith',
-              value: 'endsWith'
-            }
-          ]}
-          onChange={handleSelectInComboChange}
-        />
-      </Box>
-    </Box>
     )
   }
 
