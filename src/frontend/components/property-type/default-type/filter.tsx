@@ -77,15 +77,15 @@ const Filter: React.FC<FilterPropertyProps> = (props) => {
 
     const operator = { label: currentOperator, value: currentOperator }
     return (
-      <Box variant="white" flex flexDirection="row">
-        <Box flexShrink={0}>
+      <Box flex flexDirection="row">
+        <Box flexGrow={0}>
           <Input
             name={filterKey}
             onChange={handleInputInComboChange}
             value={filter[currentKey || property.path] || ''}
           />
         </Box>
-        <Box flexShrink={0}>
+        <Box flexGrow={1}>
           <Select
             value={operator}
             options={[
