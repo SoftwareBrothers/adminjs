@@ -26,6 +26,10 @@ const Filter: React.FC<FilterPropertyProps> = (props) => {
 
   const { tl } = useTranslation()
 
+  const handleInputChange = (event) => {
+    onChange(property.path, event.target.value)
+  }
+
   const handleInputInComboChange = (event) => {
     if (currentOperator === 'contains') {
       onChange(property.path, event.target.value)
@@ -75,41 +79,51 @@ const Filter: React.FC<FilterPropertyProps> = (props) => {
       )
     }
 
-    const operator = { label: currentOperator, value: currentOperator }
+    if (property.type === 'string') {
+      const operator = { label: currentOperator, value: currentOperator }
+      return (
+        <Box flex flexDirection="row">
+          <Box flexGrow={0}>
+            <Input
+              name={filterKey}
+              onChange={handleInputInComboChange}
+              value={filter[currentKey || property.path] || ''}
+            />
+          </Box>
+          <Box flexGrow={1}>
+            <Select
+              value={operator}
+              options={[
+                {
+                  label: 'contains',
+                  value: 'contains',
+                },
+                {
+                  label: 'equals',
+                  value: 'equals',
+                },
+                {
+                  label: 'startsWith',
+                  value: 'startsWith',
+                },
+                {
+                  label: 'endsWith',
+                  value: 'endsWith',
+                },
+              ]}
+              onChange={handleSelectInComboChange}
+            />
+          </Box>
+        </Box>
+      )
+    }
+
     return (
-      <Box flex flexDirection="row">
-        <Box flexGrow={0}>
-          <Input
-            name={filterKey}
-            onChange={handleInputInComboChange}
-            value={filter[currentKey || property.path] || ''}
-          />
-        </Box>
-        <Box flexGrow={1}>
-          <Select
-            value={operator}
-            options={[
-              {
-                label: 'contains',
-                value: 'contains',
-              },
-              {
-                label: 'equals',
-                value: 'equals',
-              },
-              {
-                label: 'startsWith',
-                value: 'startsWith',
-              },
-              {
-                label: 'endsWith',
-                value: 'endsWith',
-              },
-            ]}
-            onChange={handleSelectInComboChange}
-          />
-        </Box>
-      </Box>
+      <Input
+        name={filterKey}
+        onChange={handleInputChange}
+        value={value}
+      />
     )
   }
 
