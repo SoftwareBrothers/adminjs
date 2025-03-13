@@ -87,7 +87,7 @@ const New: FC<ActionProps> = (props) => {
               record={record as RecordJSON}
             />
           ))
-          : resource.editProperties.map((property) => (
+          : resource.newProperties.map((property) => (
             <BasePropertyComponent
               key={property.propertyPath}
               where="edit"

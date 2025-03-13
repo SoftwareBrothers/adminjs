@@ -32,7 +32,7 @@ function mergeActionHooks<T>(
 
 const basicOptions = ['id', 'href', 'parent', 'sort', 'navigation', 'titleProperty', 'translations'] as const
 const listOptions = [
-  'listProperties', 'showProperties', 'editProperties', 'filterProperties',
+  'listProperties', 'showProperties', 'editProperties', 'newProperties', 'filterProperties',
 ] as const
 
 type BasicOption = typeof basicOptions[number]
@@ -54,7 +54,7 @@ const hasMissingKeys: MissingKeys = {} as const
  * Merges 2 ResourceOptions together. Used by features
  *
  * - 'id', 'href', 'parent', 'sort' from `newOptions` override `oldOptions`
- * - 'listProperties', 'showProperties', 'editProperties', 'filterProperties'
+ * - 'listProperties', 'showProperties', 'editProperties', 'newProperties', 'filterProperties'
  *   are joined and made unique
  * - all 'properties' from `newOptions` override properties from `oldOptions`
  * - all 'actions' with their parameters from `newOptions` override `oldOptions`

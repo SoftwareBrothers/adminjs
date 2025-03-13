@@ -264,6 +264,7 @@ describe('ResourceDecorator', function () {
         'titleProperty',
         'resourceActions',
         'listProperties',
+        'newProperties',
         'editProperties',
         'showProperties',
         'filterProperties',

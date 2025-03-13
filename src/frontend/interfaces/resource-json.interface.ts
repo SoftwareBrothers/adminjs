@@ -58,6 +58,10 @@ export interface ResourceJSON {
    */
   editProperties: Array<BasePropertyJSON>;
   /**
+   * Properties which should be visible on the edit new
+   */
+  newProperties: Array<BasePropertyJSON>;
+  /**
    * Properties which should be visible on the show view
    */
   showProperties: Array<BasePropertyJSON>;
