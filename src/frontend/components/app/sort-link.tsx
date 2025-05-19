@@ -38,6 +38,7 @@ const checkSortProps = (
   nextProps: Readonly<SortLinkProps>,
 ) => (prevProps.direction === nextProps.direction
   && prevProps.property.propertyPath === nextProps.property.propertyPath
-  && prevProps.sortBy === nextProps.sortBy)
+  && prevProps.sortBy === nextProps.sortBy
+  && prevProps.property.resourceId === nextProps.property.resourceId)
 
 export default memo(SortLink, checkSortProps)
