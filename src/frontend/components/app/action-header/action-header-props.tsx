@@ -16,7 +16,7 @@ export type ActionHeaderProps = {
    * It indicates if action without a component was performed.
    */
   actionPerformed?: (action: ActionResponse) => any;
-  /** An action objet */
+  /** An action object */
   action: ActionJSON;
   /** Optional tag which will be rendered as a {@link Badge} */
   tag?: string;
