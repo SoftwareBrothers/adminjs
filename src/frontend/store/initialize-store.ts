@@ -57,10 +57,24 @@ export const initializeStore = async (
   store.dispatch(initializeAssets(assets || {}))
   if (theme) store.dispatch(initializeTheme(theme))
 
-  const { loginPath, logoutPath, rootPath, dashboard, pages, assetsCDN } = admin.options
+  const {
+    loginPath,
+    logoutPath,
+    refreshTokenPath,
+    rootPath,
+    dashboard,
+    pages,
+    assetsCDN
+  } = admin.options
 
   store.dispatch(initializePages(pagesToStore(pages)))
-  store.dispatch(initializePaths({ loginPath, logoutPath, rootPath, assetsCDN }))
+  store.dispatch(initializePaths({
+    loginPath,
+    logoutPath,
+    refreshTokenPath,
+    rootPath,
+    assetsCDN
+  }))
   store.dispatch(setCurrentAdmin(currentAdmin))
   store.dispatch(initializeDashboard(dashboard))
   store.dispatch(
