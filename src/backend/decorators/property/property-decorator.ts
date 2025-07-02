@@ -172,7 +172,7 @@ export class PropertyDecorator {
   /**
    * Indicates if given property should be visible
    *
-   * @param {'list' | 'edit' | 'show' | 'filter'} where
+   * @param {'list' | 'edit' | 'new' | 'show' | 'filter'} where
    */
   isVisible(where: PropertyPlace): boolean {
     if (typeof this.options.isVisible === 'object' && this.options.isVisible !== null) {
