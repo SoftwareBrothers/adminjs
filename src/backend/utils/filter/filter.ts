@@ -6,6 +6,21 @@ import { ActionContext } from '../../actions/index.js'
 
 export const PARAM_SEPARATOR = '~~'
 
+export const OPERATOR_SEPARATOR = '~'
+
+export const MATCHING_PATTERNS = {
+  EQ: 'equals',
+  NE: 'notEquals',
+  CO: 'contains',
+  EW: 'endsWith',
+  SW: 'startsWith',
+}
+
+export const OPERATORS = {
+  AND: 'and',
+  OR: 'or',
+}
+
 export type FilterElement = {
   path: string;
   property: BaseProperty;
