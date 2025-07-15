@@ -8,7 +8,7 @@ Inspired by: [django admin](https://docs.djangoproject.com), [rails admin](https
 
 Check out our demo application:
 
-- Login: `example@adminjs.co`
+- Login: `admin@example.com`
 - Password: `password`
 
 https://demo.adminjs.co
