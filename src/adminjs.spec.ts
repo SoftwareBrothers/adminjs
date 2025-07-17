@@ -101,7 +101,7 @@ describe('AdminJS', function () {
         expect(Object.keys(loader.getComponents())).to.have.lengthOf(1)
       })
 
-      it('returns uniqe id', function () {
+      it('returns unique id', function () {
         expect(loader.getComponents()[this.result]).not.to.be.undefined
         expect(this.result).to.be.a('string')
       })

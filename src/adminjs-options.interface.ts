@@ -192,7 +192,7 @@ export interface AdminJSOptions {
    * - change any arbitrary text in the UI
    *
    * This is the example for changing name of a couple of resources along with some
-   * properties to Polish. You can also use this technic to change any text even in english.
+   * properties to Polish. You can also use this technique to change any text even in english.
    * So to change button label of a "new action" from default "Create new" to "Create new Comment"
    * only for Comment resource, place it in action section.
    *

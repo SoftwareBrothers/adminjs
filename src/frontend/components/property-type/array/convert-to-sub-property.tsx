@@ -9,7 +9,7 @@ export const getIndexFromSubpropertyPath = (subpropertyPath: string) => {
 
 /**
  * Converts property: PropertyJSON from an array to a sub-property for an actual item in the array
- * It change path that it has index inside along with the label. Futhermore flat isArray is removed
+ * It change path that it has index inside along with the label. Furthermore flat isArray is removed
  * ,because it was already handled, so that itemRenderer can render property as a regular one
  *
  * @param {PropertyJSON}  arrayProperty property with path set to an root Array type property,
