@@ -22,6 +22,7 @@ factory.define<ResourceJSON>('ResourceJSON', Object, {
   showProperties: [],
   filterProperties: [],
   editProperties: [],
+  newProperties: [],
 })
 
 factory.extend('ResourceJSON', 'ResourceJSON.full', {}, {
@@ -44,6 +45,7 @@ factory.extend('ResourceJSON', 'ResourceJSON.full', {}, {
       listProperties: properties,
       showProperties: properties,
       editProperties: properties,
+      newProperties: properties,
       filterProperties: properties,
     }
   },

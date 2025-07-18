@@ -1,6 +1,6 @@
 import { PropertyType } from '../../../backend/adapters/property/base-property.js'
 
-export type PropertyPlace = 'show' | 'list' | 'edit' | 'filter';
+export type PropertyPlace = 'show' | 'list' | 'edit' | 'new' | 'filter';
 
 /**
  * JSON representation of a Property.
@@ -108,6 +108,7 @@ export interface PropertyJSON {
   components?: {
     show?: string;
     edit?: string;
+    new?: string;
     filter?: string;
     list?: string;
   };

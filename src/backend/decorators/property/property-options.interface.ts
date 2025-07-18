@@ -12,6 +12,7 @@ export default interface PropertyOptions {
     show?: boolean;
     list?: boolean;
     edit?: boolean;
+    new?: boolean;
     filter?: boolean;
   };
   /**
