@@ -67,6 +67,10 @@ export interface AdminJSOptions {
    */
   loginPath?: string;
   /**
+   * url to refresh the token, default to `/admin/refresh-token`
+   */
+  refreshTokenPath?: string;
+  /**
    * Array of all Databases which are supported by AdminJS via adapters
    */
   databases?: Array<any>;

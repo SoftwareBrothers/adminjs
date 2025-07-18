@@ -257,7 +257,7 @@ class ApiClient {
 
   async refreshToken(data: Record<string, any>) {
     const response = await this.client.request({
-      url: '/refresh-token',
+      url: globalAny.REDUX_STATE.paths.refreshTokenPath,
       method: 'POST',
       data,
     })
