@@ -7,9 +7,6 @@ A custom React hook for managing themes in AdminJS applications.
 ```typescript
 import { useTheme } from 'adminjs'
 
-function YourComponent() {
-  const { theme, setTheme, availableThemes } = useTheme()
-
 function ThemeToggle() {
   const { theme, setTheme, isThemeActive } = useTheme()
 
