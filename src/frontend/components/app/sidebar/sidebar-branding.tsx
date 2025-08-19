@@ -43,7 +43,7 @@ const h = new ViewHelpers()
 const SidebarBranding: React.FC<Props> = (props) => {
   const { branding } = props
   const { logo, companyName } = branding
-  return (
+  return <>
     <StyledLogo
       className={cssClass('Logo')}
       to={h.dashboardUrl()}
@@ -56,7 +56,10 @@ const SidebarBranding: React.FC<Props> = (props) => {
         />
       ) : <h1>{companyName}</h1>}
     </StyledLogo>
-  )
+    { branding.additionalText &&
+      <span>{branding.additionalText}</span>
+    }
+    </>;
 }
 
 export default allowOverride(SidebarBranding, 'SidebarBranding')
