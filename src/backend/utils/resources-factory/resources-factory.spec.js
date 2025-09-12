@@ -57,6 +57,8 @@ describe('ResourcesFactory', function () {
       })
     })
 
+    // Random change
+    
     context('there is one adapter', function () {
       beforeEach(function () {
         class Database extends BaseDatabase {}
