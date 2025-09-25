@@ -23,7 +23,11 @@ const convertNestedParam = (
       }
     }
   } else {
-    value = convertParam(value, subProperty.type)
+    if (subProperty.isArray && Array.isArray(value)) {
+      value = value.map((v) => convertParam(v, type))
+    } else {
+      value = convertParam(value, subProperty.type)
+    }
   }
 
   return {
