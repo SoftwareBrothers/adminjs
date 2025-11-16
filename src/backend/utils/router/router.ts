@@ -1,25 +1,29 @@
 import path from 'path'
-import * as url from 'url'
-import { createRequire } from 'node:module'
-
 import AppController from '../../controllers/app-controller.js'
 import ApiController from '../../controllers/api-controller.js'
 import { COMPONENTS_OUTPUT_PATH, NODE_ENV } from '../../bundler/utils/constants.js'
 
-const __dirname = url.fileURLToPath(new URL('.', import.meta.url))
-const ASSETS_ROOT = `${__dirname}/../lib/../../../frontend/assets/`
+const ASSETS_ROOT = path.join(
+  process.cwd(),
+  'node_modules',
+  'adminjs',
+  'lib',
+  'frontend',
+  'assets',
+)
 
 /**
  * A function which resolves the path to AdminJS design system bundle.
  *
  * @returns {string}  resolved path to AdminJS design system bundle
  */
-const resolveDesignSystemBundle = (): string => {
-  const require = createRequire(import.meta.url)
-
+const resolveDesignSystemBundle = () => {
   return path.join(
-    path.parse(require.resolve('@adminjs/design-system')).dir,
-    `../bundle.${NODE_ENV}.js`,
+    process.cwd(),
+    'node_modules',
+    '@adminjs',
+    'design-system',
+    `bundle.${NODE_ENV}.js`,
   )
 }
 
