@@ -48,7 +48,7 @@ const List: React.FC<ActionProps> = ({ resource, setTag }) => {
     } else {
       const recordIds = search.get('recordIds')?.split?.(',') ?? []
       setSelectedRecords(
-        records.filter((r) => recordIds.includes(r.id.toString())),
+        records.filter((r) => r.id != null && recordIds.includes(String(r.id))),
       )
     }
   }, [location.search, records])
